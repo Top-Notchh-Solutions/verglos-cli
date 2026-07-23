@@ -1,0 +1,60 @@
+name: Self-scan
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+# This job runs the current Verglos code against the Verglos repo
+# itself and fails the PR when the score drops below 95.
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Verglos scans Verglos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # need full git history for D8-002 secret-in-history + provenance signals
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Run Verglos on itself
+        # The CI command exits non-zero on any critical finding OR when
+        # the score falls below --threshold.
+        #
+        # We deliberately do NOT pass --strict here. --strict is a
+        # per-user opt-in that re-promotes test-file findings to their
+        # original severity — useful when a user is scanning their own
+        # app and wants tests included in the score. For Verglos-scans-
+        # Verglos it doesn't work: our own test files (context.test.ts,
+        # secrets.test.ts) contain hand-written vuln-shaped strings as
+        # classifier test inputs. Under --strict those score as real
+        # criticals and permanently fail CI.
+        #
+        # Deliberately-vulnerable inputs under packages/scanner/fixtures/**
+        # are also excluded via .verglos.config.js.
+        run: node packages/cli/dist/index.js ci --threshold 95

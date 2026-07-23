@@ -1,0 +1,88 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write # OIDC — Trusted Publisher + npm provenance
+
+jobs:
+  publish:
+    name: Publish npm packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      # ── npm provenance ──────────────────────────────────────────
+      # Every `npm publish` call below uses --provenance so npm
+      # attests the tarball's origin (repo + commit + workflow run).
+      # Verified badges appear on each package page under "Provenance".
+      #
+      # HARD REQUIREMENT: this repo must be PUBLIC before provenance
+      # can succeed. If the repo is still private when a tag pushes,
+      # publish returns "provenance requires a public repository."
+      # Flip via https://github.com/Top-Notchh-Solutions/verglos/settings →
+      # Danger Zone → Change repository visibility → Public.
+
+      - name: Publish shared package
+        run: |
+          mkdir -p /tmp/verglos-publish/shared
+          pnpm -C packages/shared pack --pack-destination /tmp/verglos-publish/shared
+          npm publish /tmp/verglos-publish/shared/*.tgz --access public --provenance
+
+      - name: Publish scanner package
+        run: |
+          mkdir -p /tmp/verglos-publish/scanner
+          pnpm -C packages/scanner pack --pack-destination /tmp/verglos-publish/scanner
+          npm publish /tmp/verglos-publish/scanner/*.tgz --access public --provenance
+
+      - name: Publish reporter package
+        run: |
+          mkdir -p /tmp/verglos-publish/reporter
+          pnpm -C packages/reporter pack --pack-destination /tmp/verglos-publish/reporter
+          npm publish /tmp/verglos-publish/reporter/*.tgz --access public --provenance
+
+      - name: Publish mcp package
+        run: |
+          mkdir -p /tmp/verglos-publish/mcp
+          pnpm -C packages/mcp pack --pack-destination /tmp/verglos-publish/mcp
+          npm publish /tmp/verglos-publish/mcp/*.tgz --access public --provenance
+
+      - name: Publish entitlement package
+        run: |
+          mkdir -p /tmp/verglos-publish/entitlement
+          pnpm -C packages/entitlement pack --pack-destination /tmp/verglos-publish/entitlement
+          npm publish /tmp/verglos-publish/entitlement/*.tgz --access public --provenance
+
+      - name: Publish CLI package
+        run: |
+          mkdir -p /tmp/verglos-publish/cli
+          pnpm -C packages/cli pack --pack-destination /tmp/verglos-publish/cli
+          npm publish /tmp/verglos-publish/cli/*.tgz --access public --provenance
