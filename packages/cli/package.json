@@ -1,6 +1,6 @@
 {
   "name": "verglos",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Security scanner built for AI-generated code. Score any JS/TS repo in 40s, catch hallucinated packages, and stop coding agents from shipping vulnerabilities. Free forever.",
   "type": "module",
   "bin": {

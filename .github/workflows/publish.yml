@@ -45,11 +45,10 @@ jobs:
       # attests the tarball's origin (repo + commit + workflow run).
       # Verified badges appear on each package page under "Provenance".
       #
-      # HARD REQUIREMENT: this repo must be PUBLIC before provenance
-      # can succeed. If the repo is still private when a tag pushes,
-      # publish returns "provenance requires a public repository."
-      # Flip via https://github.com/Top-Notchh-Solutions/verglos/settings →
-      # Danger Zone → Change repository visibility → Public.
+      # HARD REQUIREMENT: this repo must stay PUBLIC for provenance.
+      # If it's flipped private, publish returns "provenance requires
+      # a public repository." Visibility toggle:
+      # https://github.com/Top-Notchh-Solutions/verglos-cli/settings.
 
       - name: Publish shared package
         run: |
