@@ -63,6 +63,10 @@ program
     "--verify-secrets",
     "Hit GitHub / Stripe APIs to prove matched keys are live (opt-in — makes network calls)",
   )
+  .option(
+    "--no-telemetry",
+    "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
+  )
   .action(
     async (opts: {
       watch?: boolean;
@@ -71,15 +75,18 @@ program
       strict?: boolean;
       provenance?: boolean;
       verifySecrets?: boolean;
+      telemetry?: boolean;
     }) => {
       // Commander sets opts.provenance = false when --no-provenance is passed.
       const noProvenance = opts.provenance === false;
+      const noTelemetry = opts.telemetry === false;
       const scanOptions = {
         quiet: opts.quiet,
         all: opts.all,
         strict: opts.strict,
         noProvenance,
         verifySecrets: opts.verifySecrets,
+        noTelemetry,
       };
       if (opts.watch) {
         console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
@@ -133,11 +140,16 @@ program
   .option("-t, --threshold <score>", "Minimum score threshold", "60")
   .option("-q, --quiet", "Suppress output")
   .option("--strict", "Include test file findings in score")
-  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean }) => {
+  .option(
+    "--no-telemetry",
+    "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
+  )
+  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; telemetry?: boolean }) => {
     const code = await executeCi({
       threshold: parseInt(opts.threshold, 10),
       quiet: opts.quiet,
       strict: opts.strict,
+      noTelemetry: opts.telemetry === false,
     });
     process.exit(code);
   });

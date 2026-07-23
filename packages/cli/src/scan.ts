@@ -1,3 +1,4 @@
+import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import { runScan } from "@verglos/scanner";
 import {
@@ -10,6 +11,16 @@ import type { DetectorId } from "@verglos/shared";
 import ora from "ora";
 import { loadLastScore, saveLastScore } from "./credentials.js";
 import { ensureConfig } from "./config.js";
+import {
+  isTelemetryDisabled,
+  printFirstRunDisclosureIfNeeded,
+  sendScanEvent,
+} from "./telemetry.js";
+
+const require = createRequire(import.meta.url);
+const { version: CLI_VERSION } = require("../package.json") as {
+  version: string;
+};
 
 export interface ScanCommandOptions {
   cwd?: string;
@@ -20,6 +31,7 @@ export interface ScanCommandOptions {
   strict?: boolean;
   noProvenance?: boolean;
   verifySecrets?: boolean;
+  noTelemetry?: boolean;
 }
 
 export async function executeScan(
@@ -31,6 +43,7 @@ export async function executeScan(
   const spinner = options.quiet ? null : ora("Scanning project...").start();
 
   const previous = await loadLastScore(projectRoot);
+  const startedAt = Date.now();
 
   const result = await runScan({
     projectRoot,
@@ -43,6 +56,7 @@ export async function executeScan(
     verifySecrets: options.verifySecrets,
   });
 
+  const durationMs = Date.now() - startedAt;
   spinner?.stop();
   await writeReports(result, projectRoot);
 
@@ -60,6 +74,19 @@ export async function executeScan(
     result.score.value,
     result.score.counts.critical,
   );
+
+  if (!isTelemetryDisabled(options.noTelemetry)) {
+    if (!options.quiet) await printFirstRunDisclosureIfNeeded();
+    // Fire-and-forget. Awaited so the CLI stays around long enough to
+    // send in short-lived processes (npx one-shots), but errors are
+    // swallowed inside sendScanEvent. 2s timeout inside.
+    await sendScanEvent(result, {
+      cliVersion: CLI_VERSION,
+      durationMs,
+      detectorsRun: options.detectors,
+      verifySecrets: options.verifySecrets,
+    });
+  }
 
   return result.score.value;
 }
@@ -81,8 +108,10 @@ export async function executeCi(options: {
   threshold?: number;
   quiet?: boolean;
   strict?: boolean;
+  noTelemetry?: boolean;
 }): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
+  const startedAt = Date.now();
 
   const result = await runScan({
     projectRoot,
@@ -90,8 +119,16 @@ export async function executeCi(options: {
     strict: options.strict,
   });
 
+  const durationMs = Date.now() - startedAt;
   if (!options.quiet) {
     printTerminalSummary(result);
+  }
+
+  if (!isTelemetryDisabled(options.noTelemetry)) {
+    await sendScanEvent(result, {
+      cliVersion: CLI_VERSION,
+      durationMs,
+    });
   }
 
   if (result.score.counts.critical > 0) {
