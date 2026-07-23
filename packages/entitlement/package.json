@@ -1,0 +1,52 @@
+{
+  "name": "@verglos/entitlement",
+  "version": "1.1.0",
+  "description": "Entitlement + license flow for Verglos: Ed25519-signed JWTs, 24h TTL, 7-day offline grace.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "types": "./dist/client.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server.js",
+      "types": "./dist/server.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@verglos/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Top-Notchh-Solutions/verglos.git",
+    "directory": "packages/entitlement"
+  },
+  "bugs": {
+    "url": "https://github.com/Top-Notchh-Solutions/verglos/issues"
+  },
+  "homepage": "https://verglos.com",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  }
+}
