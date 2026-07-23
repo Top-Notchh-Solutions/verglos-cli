@@ -1,6 +1,6 @@
 {
   "name": "@verglos/mcp",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Model Context Protocol server for Verglos \u2014 lets AI agents scan and get security verdicts before writing code.",
   "type": "module",
   "main": "./dist/index.js",
@@ -36,11 +36,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Top-Notchh-Solutions/verglos.git",
+    "url": "git+https://github.com/Top-Notchh-Solutions/verglos-cli.git",
     "directory": "packages/mcp"
   },
   "bugs": {
-    "url": "https://github.com/Top-Notchh-Solutions/verglos/issues"
+    "url": "https://github.com/Top-Notchh-Solutions/verglos-cli/issues"
   },
   "homepage": "https://verglos.com",
   "license": "Apache-2.0",

@@ -1,6 +1,6 @@
 {
   "name": "@verglos/scanner",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -35,12 +35,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Top-Notchh-Solutions/verglos.git",
+    "url": "git+https://github.com/Top-Notchh-Solutions/verglos-cli.git",
     "directory": "packages/scanner"
   },
   "homepage": "https://verglos.com",
   "bugs": {
-    "url": "https://github.com/Top-Notchh-Solutions/verglos/issues"
+    "url": "https://github.com/Top-Notchh-Solutions/verglos-cli/issues"
   },
   "license": "Apache-2.0"
 }
