@@ -1,0 +1,4 @@
+export const AWS_ACCESS_KEY = "AKIAIOSFODNN7REALKEYX";
+export const AWS_EXAMPLE_KEY = "AKIAIOSFODNN7EXAMPLE";
+export const ANTHROPIC_API_KEY =
+  "sk-ant-api03-aBcDeFgHiJkLmNoPqRsTuVwZaBcDeFgHiJkLmNoPqRs";
