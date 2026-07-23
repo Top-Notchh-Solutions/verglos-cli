@@ -1,0 +1,50 @@
+{
+  "name": "@verglos/mcp",
+  "version": "1.1.0",
+  "description": "Model Context Protocol server for Verglos \u2014 lets AI agents scan and get security verdicts before writing code.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server.js",
+      "types": "./dist/server.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "@verglos/scanner": "workspace:*",
+    "@verglos/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Top-Notchh-Solutions/verglos.git",
+    "directory": "packages/mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/Top-Notchh-Solutions/verglos/issues"
+  },
+  "homepage": "https://verglos.com",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  }
+}
