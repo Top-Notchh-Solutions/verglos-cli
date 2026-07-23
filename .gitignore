@@ -1,0 +1,21 @@
+node_modules
+dist
+.turbo
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+coverage
+verglos-report.html
+verglos-report.json
+verglos-report.*.json
+*.tgz
+.vercel
+.playwright-mcp/
+dogfood-reports/
+scan-campaign-workspace/
+scan-campaign-reports/
+
+# Fixture .env samples must remain checked-in (scanner uses them)
+!packages/scanner/fixtures/**/.env.example
