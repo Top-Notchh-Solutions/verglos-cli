@@ -17,6 +17,8 @@ import { executeInit } from "./init.js";
 import { executeExplain } from "./explain.js";
 import { executePrecommit } from "./precommit.js";
 import { executeMonitorRegister } from "./monitor.js";
+import { executeWhoami } from "./whoami.js";
+import { validateLicense } from "./license-api.js";
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
 
@@ -189,13 +191,79 @@ program
 
 program
   .command("activate <licenseKey>")
-  .description("Activate with a license key")
-  .action(async (licenseKey: string) => {
+  .description("Activate with a license key (validates against the server first)")
+  .option(
+    "--ci",
+    "CI-friendly output: skip prompts, exit non-zero on failure",
+  )
+  .action(async (licenseKey: string, opts: { ci?: boolean }) => {
+    const creds = await loadCredentials();
+    const result = await validateLicense(licenseKey, creds.apiUrl);
+
+    if (!result.valid) {
+      if (result.reason === "network") {
+        console.error(
+          chalk.red(
+            "error: could not reach verglos.com to validate the key. Check your connection and try again.",
+          ),
+        );
+      } else if (result.reason === "not_found" || result.reason === "bad_request") {
+        console.error(
+          chalk.red(
+            "error: license key not recognised (contact support@verglos.com)",
+          ),
+        );
+      } else if (result.reason === "expired") {
+        const when = result.expiresAt
+          ? new Date(result.expiresAt).toLocaleDateString(undefined, {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })
+          : "recently";
+        console.error(
+          chalk.red(
+            `error: this license expired on ${when}. Renew at verglos.com/account.`,
+          ),
+        );
+      } else {
+        console.error(chalk.red(`error: license inactive (${result.reason})`));
+      }
+      process.exit(opts.ci ? 2 : 1);
+    }
+
     await saveCredentials({
-      ...(await loadCredentials()),
+      ...creds,
       licenseKey,
+      plan: result.plan,
+      planExpiresAt: result.expiresAt ?? undefined,
     });
-    console.log(chalk.green("License key saved. Pro features are active."));
+
+    const renewal = result.expiresAt
+      ? ` · renews ${new Date(result.expiresAt).toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}`
+      : result.plan === "founder"
+        ? " · unlimited"
+        : "";
+    console.log(
+      chalk.green(
+        `✓ ${result.plan.toUpperCase()} activated${renewal}`,
+      ),
+    );
+    if (!opts.ci) {
+      console.log(chalk.gray("  Run `verglos whoami` to double-check."));
+    }
+  });
+
+program
+  .command("whoami")
+  .description("Show current sign-in, plan, renewal, and machine")
+  .action(async () => {
+    const code = await executeWhoami();
+    if (code !== 0) process.exit(code);
   });
 
 program
