@@ -8,6 +8,13 @@ export interface Credentials {
   unlockToken?: string;
   unlockTokenExpires?: string;
   apiUrl: string;
+  // Cached from the most recent /api/v1/license/validate or
+  // /api/v1/license/status call. Used by `verglos whoami` to render
+  // an accurate view offline. Never trusted for gating — that check
+  // still hits the server.
+  plan?: string;
+  planExpiresAt?: string;
+  email?: string;
 }
 
 const CREDENTIALS_DIR = join(homedir(), ".verglos");
