@@ -2,22 +2,18 @@
 import { createRequire } from "node:module";
 import { Command } from "commander";
 import chalk from "chalk";
-import open from "open";
 import chokidar from "chokidar";
 import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
 import { applyHeaderFixes } from "./fix.js";
-import {
-  DEFAULT_API_URL,
-  loadCredentials,
-  saveCredentials,
-} from "./credentials.js";
+import { loadCredentials, saveCredentials } from "./credentials.js";
 import { ensureConfig, installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
 import { executeExplain } from "./explain.js";
 import { executePrecommit } from "./precommit.js";
 import { executeMonitorRegister } from "./monitor.js";
 import { executeWhoami } from "./whoami.js";
+import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
@@ -171,22 +167,10 @@ program
 
 program
   .command("login")
-  .description("Authenticate and activate license")
+  .description("Authenticate via a browser device-code flow")
   .action(async () => {
-    const creds = await loadCredentials();
-    const url = `${creds.apiUrl}/login?cli=true`;
-    console.log(chalk.gray("Opening browser for authentication..."));
-    await open(url);
-    console.log(
-      chalk.gray(
-        "After signing in, your CLI will be activated automatically.",
-      ),
-    );
-    console.log(
-      chalk.gray(
-        "Or paste your license key: verglos activate <key>",
-      ),
-    );
+    const code = await executeLogin();
+    if (code !== 0) process.exit(code);
   });
 
 program
