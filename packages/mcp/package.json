@@ -1,6 +1,6 @@
 {
   "name": "@verglos/mcp",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Model Context Protocol server for Verglos \u2014 lets AI agents scan and get security verdicts before writing code.",
   "type": "module",
   "main": "./dist/index.js",
