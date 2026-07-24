@@ -15,6 +15,10 @@ import { executeMonitorRegister } from "./monitor.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
+import {
+  currentPlan,
+  requireCapability,
+} from "./entitlement.js";
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
 
@@ -33,9 +37,17 @@ program
   .description("Security scanner for every app you ship")
   .version(version, "-v, --version", "Print installed CLI version")
   .option("--update", "Update Verglos CLI to the latest npm version")
+  .option(
+    "--as-plan <plan>",
+    "[founder only] Simulate a plan (free|pro|studio) for this invocation",
+  )
   .showHelpAfterError(chalk.gray("\nRun `verglos --help` for available commands."))
-  .hook("preAction", async (_thisCommand, actionCommand) => {
+  .hook("preAction", async (thisCommand, actionCommand) => {
     if (actionCommand.name() === "update") return;
+    // Program-level --as-plan propagates via env so every downstream
+    // entitlement fetch picks it up without option-threading.
+    const asPlan = thisCommand.opts().asPlan as string | undefined;
+    if (asPlan) process.env.VERGLOS_AS_PLAN = asPlan;
     await enforceLatestVersion(version);
   });
 
@@ -143,19 +155,41 @@ program
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
   )
   .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; telemetry?: boolean }) => {
+    const asPlan = process.env.VERGLOS_AS_PLAN;
+    const plan = await currentPlan({ asPlan });
+    const hasThreshold = plan.plan !== "free";
     const code = await executeCi({
-      threshold: parseInt(opts.threshold, 10),
+      threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
       quiet: opts.quiet,
       strict: opts.strict,
       noTelemetry: opts.telemetry === false,
     });
+    if (!hasThreshold && !opts.quiet) {
+      console.log("");
+      console.log(
+        chalk.gray(
+          "  Free tier: threshold enforcement is Pro — this run only blocks on criticals.",
+        ),
+      );
+      console.log(
+        chalk.gray("  Upgrade at https://verglos.com/checkout"),
+      );
+    }
     process.exit(code);
   });
 
 program
   .command("fix")
-  .description("Auto-fix safe security issues (currently: header injection)")
+  .description("Auto-fix safe security issues [Pro] (currently: header injection)")
   .action(async () => {
+    const asPlan = process.env.VERGLOS_AS_PLAN;
+    const ok = await requireCapability("fix", "`verglos fix`", {
+      asPlan,
+      extraLine:
+        "Your findings are still in verglos-report.html — auto-fix just needs Pro.",
+    });
+    if (!ok) process.exit(1);
+
     console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
     console.log("");
     const fixed = await applyHeaderFixes(process.cwd());
@@ -279,12 +313,23 @@ const monitor = program
 
 monitor
   .command("register")
-  .description("Register this project's dep tree for hourly OSV monitoring")
+  .description("Register this project's dep tree for hourly OSV monitoring [Pro]")
   .option("--email <address>", "Email to send critical/high alerts to")
   .option("--slack <url>", "Slack incoming webhook (https://hooks.slack.com/services/...)")
   .option("--webhook <url>", "Generic webhook URL to POST alert JSON to")
   .option("--label <name>", "Human-friendly project label (defaults to git repo)")
   .action(async (opts: { email?: string; slack?: string; webhook?: string; label?: string }) => {
+    const asPlan = process.env.VERGLOS_AS_PLAN;
+    const ok = await requireCapability(
+      "monitor_register",
+      "Continuous CVE monitoring",
+      {
+        asPlan,
+        extraLine:
+          "Nothing was registered. Pro alerts you on new CVEs affecting your deps.",
+      },
+    );
+    if (!ok) process.exit(1);
     const code = await executeMonitorRegister(opts, version);
     if (code !== 0) process.exit(code);
   });

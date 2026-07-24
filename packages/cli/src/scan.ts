@@ -138,10 +138,17 @@ export async function executeCi(options: {
     return 1;
   }
 
-  const threshold = options.threshold ?? 60;
-  if (result.score.value < threshold) {
+  // Undefined threshold = free-tier CI (skip threshold enforcement).
+  // Caller upstream in index.ts prints the upgrade hint. Free still
+  // fails on criticals above, so `verglos ci` is genuinely useful on
+  // Free — it just doesn't gate on the composite score.
+  if (options.threshold === undefined) return 0;
+
+  if (result.score.value < options.threshold) {
     if (!options.quiet) {
-      console.error(`CI failed: score ${result.score.value} below threshold ${threshold}.`);
+      console.error(
+        `CI failed: score ${result.score.value} below threshold ${options.threshold}.`,
+      );
     }
     return 1;
   }
