@@ -28,6 +28,7 @@
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
   <a href="#what-verglos-catches">What it catches</a> ·
+  <a href="#why-the-findings-are-actually-actionable">Why findings are actionable</a> ·
   <a href="#commands">Commands</a> ·
   <a href="#ci-usage">CI usage</a> ·
   <a href="#plans">Plans</a> ·
@@ -112,6 +113,29 @@ Open the HTML to drill into every finding, or ship the JSON to CI.
     </tr>
   </tbody>
 </table>
+
+---
+
+## Why the findings are actually actionable
+
+Pattern-matching scanners cry wolf. A password-shaped string in `docs/setup.md` isn't a leaked secret — it's a code sample. A `Bearer <token>` in `openapi.yml` isn't a credential — it's an API-spec example. `eval()` in `workers/Evaluation/formEval.ts` isn't a vulnerability — it's the entire point of a low-code platform. Reporting those as "critical" is what makes security tools uninstalled after 90 seconds.
+
+Verglos runs a post-detection **context-tag pass** that downgrades findings whose file path tells you they can't be a production threat. Each downgrade is stamped with a tag so you know *why*:
+
+| Tag | Where it fires |
+|---|---|
+| `docs` | Markdown, `docs/`, README, CONTRIBUTING, CHANGELOG |
+| `dev-fixture` | `.env.example`, `docker-compose*.yml`, `docker/`, Dockerfile |
+| `ci-workflow` | `.github/workflows/`, `.gitlab-ci.yml`, `.circleci/`, `.depot/`, `.buildkite/` |
+| `test-fixture` | `test/`, `__tests__/`, `cypress/`, `playwright/`, `*.test.*`, `testUtils/` |
+| `vendored-bundle` | `public/libraries/`, `vendor/`, `*.min.js`, `.yarn/releases/` |
+| `build-config` | `webpack.config.*`, `rspack.config.*`, `vite.config.*` |
+| `generated` | `generated/`, `__generated__/`, `.generated.*` |
+| `api-spec-example` | `openapi.yml`, `swagger.yml`, `api/v*/*.yml` |
+
+The finding stays visible with severity `info` and the original severity preserved on `originalSeverity`, so nothing is silently dropped — the reader can always ask "why is this info?" and the tag answers.
+
+**Bottom line:** the numbers you see for `critical` and `high` are ones a human security reviewer would care about. The rest is context-tagged, not hidden.
 
 ---
 
