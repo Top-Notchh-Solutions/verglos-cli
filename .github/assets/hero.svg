@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" role="img" aria-label="Verglos — security scanning for AI-generated code">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a0b"/>
+      <stop offset="100%" stop-color="#0d0d10"/>
+    </linearGradient>
+    <linearGradient id="accentFade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e85d4c" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#e85d4c" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#18181b" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="360" fill="url(#bgGrad)"/>
+  <rect width="1280" height="360" fill="url(#grid)" opacity="0.55"/>
+
+  <!-- Accent underline -->
+  <rect x="80" y="270" width="480" height="2" fill="url(#accentFade)"/>
+
+  <!-- Shield logo (left) -->
+  <g transform="translate(80, 100) scale(2.4)">
+    <path d="M16 14h32l-4 30-12 6-12-6-4-30z"
+          fill="none"
+          stroke="#e85d4c"
+          stroke-width="4"
+          stroke-linejoin="round"/>
+    <path d="M24 30l6 6 12-14"
+          fill="none"
+          stroke="#f8fafc"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="270" y="200"
+        font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+        font-size="88"
+        font-weight="700"
+        letter-spacing="-2"
+        fill="#e4e4e7">
+    verglos
+  </text>
+
+  <!-- Tagline -->
+  <text x="272" y="252"
+        font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+        font-size="20"
+        font-weight="500"
+        letter-spacing="1.5"
+        fill="#a1a1aa">
+    SECURITY SCANNING BUILT FOR AI-GENERATED CODE
+  </text>
+
+  <!-- Terminal preview (right) -->
+  <g transform="translate(760, 60)">
+    <rect x="0" y="0" width="440" height="240" rx="14" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+    <!-- Traffic light dots -->
+    <circle cx="24" cy="24" r="6" fill="#27272a"/>
+    <circle cx="46" cy="24" r="6" fill="#27272a"/>
+    <circle cx="68" cy="24" r="6" fill="#27272a"/>
+    <!-- Prompt lines -->
+    <text x="24" y="70"
+          font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+          font-size="15"
+          fill="#a1a1aa">
+      <tspan fill="#22c55e">$</tspan> npx verglos
+    </text>
+    <text x="24" y="104"
+          font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+          font-size="13"
+          fill="#e4e4e7">Scanned 1,247 files in 42s</text>
+    <text x="24" y="128"
+          font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+          font-size="13"
+          fill="#a1a1aa">
+      <tspan fill="#e85d4c">2 critical</tspan> · 5 high · 12 medium
+    </text>
+    <!-- Score badge -->
+    <rect x="24" y="150" width="392" height="64" rx="10" fill="#0a0a0b" stroke="#27272a" stroke-width="1"/>
+    <text x="42" y="188"
+          font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+          font-size="12"
+          fill="#a1a1aa"
+          letter-spacing="1.5">SECURITY SCORE</text>
+    <text x="360" y="196"
+          font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+          font-size="34"
+          font-weight="700"
+          fill="#e85d4c"
+          text-anchor="end">62</text>
+    <text x="386" y="196"
+          font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+          font-size="18"
+          fill="#a1a1aa"
+          text-anchor="start">/100</text>
+  </g>
+</svg>
