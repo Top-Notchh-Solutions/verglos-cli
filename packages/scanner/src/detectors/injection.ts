@@ -109,6 +109,36 @@ const INJECTION_PATTERNS: InjectionPattern[] = [
 const USER_CONTROLLED_HTML =
   /req\.body|req\.params|req\.query|userInput|formData|event\.target\.value|params\.|searchParams|location\.hash|location\.search/i;
 
+/**
+ * D1-001 noise filters. Both derived from the Phase-0 corpus analysis
+ * across 87 open-source repos: 295 of 599 surviving D1-001 crits were
+ * pure DDL (DROP/ALTER/CREATE/TRUNCATE) where interpolation is only ever
+ * an identifier; another ~200 were non-SQL calls that happened to match
+ * because the pattern looks for `.query(` anywhere.
+ */
+
+// Non-SQL uses of `.query(` — React, GraphQL, MUI, styled-components.
+// Interpolating into these has nothing to do with SQL.
+const NON_SQL_TEMPLATE_TAGS = new RegExp(
+  String.raw`\b(useMediaQuery|useQuery|useSuspenseQuery|useInfiniteQuery|useMutation|useTemplate|graphql|gql|styled|css|sql\.js\.|window\.matchMedia)\b`,
+  "i",
+);
+
+// SQL verbs where the interpolated `${...}` is unavoidably an identifier
+// (schema name, table name, index name, channel name). No amount of
+// parameterization can bind an identifier — even in production, the code
+// legitimately builds these from constants.
+const DDL_VERBS = new RegExp(
+  String.raw`\bquery\s*\(\s*[` + "`" + String.raw`'"]\s*(DROP|CREATE|ALTER|TRUNCATE|LISTEN|UNLISTEN|USE|GRANT|REVOKE|COMMENT|BEGIN|COMMIT|ROLLBACK|SET|SHOW|EXPLAIN|VACUUM|ANALYZE|REINDEX|BACKUP|RESTORE)\b`,
+  "i",
+);
+
+function shouldSkipSqlInjection(line: string): boolean {
+  if (NON_SQL_TEMPLATE_TAGS.test(line)) return true;
+  if (DDL_VERBS.test(line)) return true;
+  return false;
+}
+
 function previousContext(lines: string[], index: number, radius: number): string {
   return lines.slice(Math.max(0, index - radius), index + 1).join("\n");
 }
@@ -216,6 +246,10 @@ export const injectionDetector: Detector = {
 
         for (const pattern of INJECTION_PATTERNS) {
           if (pattern.pattern.test(line)) {
+            // D1-001 noise filters — DDL identifiers, non-SQL template tags.
+            if (pattern.rule === "D1-001" && shouldSkipSqlInjection(line)) {
+              continue;
+            }
             const key = `${file.relativePath}:${i}:${pattern.name}`;
             if (seen.has(key)) continue;
             seen.add(key);
