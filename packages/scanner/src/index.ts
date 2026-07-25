@@ -16,6 +16,7 @@ import { injectionDetector } from "./detectors/injection.js";
 import { misconfigDetector } from "./detectors/misconfig.js";
 import { secretsDetector } from "./detectors/secrets.js";
 import { slopsquatDetector } from "./detectors/slopsquat.js";
+import { vendoredCvesDetector } from "./detectors/vendored-cves.js";
 import type { Detector } from "./detectors/types.js";
 import { detectProjectType } from "./project.js";
 import { walkProject } from "./walker.js";
@@ -31,6 +32,7 @@ const ALL_DETECTORS: Detector[] = [
   gitHistoryDetector,
   aiPatternsDetector,
   slopsquatDetector,
+  vendoredCvesDetector,
 ];
 
 async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
@@ -76,6 +78,7 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     "injection",
     "ai-patterns",
     "slopsquat",
+    "vendored-cves",
   ];
 
   if (options.includeGitHistory) {
