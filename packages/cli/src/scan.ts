@@ -45,16 +45,37 @@ export async function executeScan(
   const previous = await loadLastScore(projectRoot);
   const startedAt = Date.now();
 
-  const result = await runScan({
-    projectRoot,
-    detectors: options.detectors,
-    unlocked: true,
-    includeGitHistory: true,
-    minConfidence: options.all ? 0 : undefined,
-    strict: options.strict,
-    noProvenance: options.noProvenance,
-    verifySecrets: options.verifySecrets,
-  });
+  // Tick the spinner text with elapsed seconds so the user can see
+  // progress on big repos (a frozen "Scanning project..." message
+  // reads as a hang after 60 seconds).
+  const tickTimer = spinner
+    ? setInterval(() => {
+        const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+        const mm = Math.floor(elapsed / 60);
+        const ss = String(elapsed % 60).padStart(2, "0");
+        const label = mm > 0 ? `${mm}m ${ss}s` : `${elapsed}s`;
+        spinner.text = `Scanning project... (${label})`;
+        if (elapsed === 90) {
+          spinner.text = `Scanning project... (${label}) — large repos may take a few minutes. --no-provenance skips the slowest step.`;
+        }
+      }, 1000)
+    : null;
+
+  let result;
+  try {
+    result = await runScan({
+      projectRoot,
+      detectors: options.detectors,
+      unlocked: true,
+      includeGitHistory: true,
+      minConfidence: options.all ? 0 : undefined,
+      strict: options.strict,
+      noProvenance: options.noProvenance,
+      verifySecrets: options.verifySecrets,
+    });
+  } finally {
+    if (tickTimer) clearInterval(tickTimer);
+  }
 
   const durationMs = Date.now() - startedAt;
   spinner?.stop();

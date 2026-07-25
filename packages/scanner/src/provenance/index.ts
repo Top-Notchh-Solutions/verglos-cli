@@ -54,6 +54,41 @@ const MIXED_THRESHOLD = 0.4;
 /** Ratio guardrail that prevents unstable density ratios. */
 const RATIO_MIN_LOC_PER_BUCKET = 200;
 
+/**
+ * Hard cap on per-file provenance analysis. Each file costs up to
+ * ~20 git subprocess spawns (git-trailer source walks per-file
+ * commit bodies). Uncapped, a 5000-file repo takes ~30 minutes.
+ * Bounded to this size, a big repo completes in ~1 minute. Sampling
+ * keeps the aiAuthoredPercent statistically representative for
+ * outreach reporting; when the cap fires, `method` calls it out.
+ * Env override: VERGLOS_PROVENANCE_FILE_CAP=<n>.
+ */
+const PROVENANCE_FILE_CAP_DEFAULT = 300;
+
+function getProvenanceFileCap(): number {
+  const raw = process.env.VERGLOS_PROVENANCE_FILE_CAP;
+  if (!raw) return PROVENANCE_FILE_CAP_DEFAULT;
+  const parsed = Number.parseInt(raw, 10);
+  if (!Number.isFinite(parsed) || parsed < 1) return PROVENANCE_FILE_CAP_DEFAULT;
+  return parsed;
+}
+
+function sampleFiles<T>(items: T[], cap: number): T[] {
+  if (items.length <= cap) return items;
+  // Deterministic stride sampling — keeps a representative slice
+  // without needing a seeded RNG. Bias toward evenly-spaced picks
+  // from the walker's output so the sample isn't dominated by one
+  // directory tree.
+  const stride = items.length / cap;
+  const out: T[] = [];
+  for (let i = 0; i < cap; i++) {
+    const idx = Math.floor(i * stride);
+    const item = items[idx];
+    if (item !== undefined) out.push(item);
+  }
+  return out;
+}
+
 async function fileLineCount(
   projectRoot: string,
   file: string,
@@ -167,7 +202,10 @@ export async function computeProvenance(
   projectRoot: string,
   findings: Finding[],
 ): Promise<RepoProvenance> {
-  const candidates = files.filter((f) => SUPPORTED_EXT.test(f.relativePath));
+  const allCandidates = files.filter((f) => SUPPORTED_EXT.test(f.relativePath));
+  const cap = getProvenanceFileCap();
+  const capped = allCandidates.length > cap;
+  const candidates = capped ? sampleFiles(allCandidates, cap) : allCandidates;
   if (candidates.length === 0) {
     return {
       aiAuthoredPercent: 0,
@@ -271,10 +309,13 @@ export async function computeProvenance(
       if (name) firedFileSources.add(name);
     }
   }
-  const method =
+  const baseMethod =
     firedRepoSignals.length + firedFileSources.size === 0
       ? "no signals fired"
       : [...firedRepoSignals, ...firedFileSources].join(", ");
+  const method = capped
+    ? `${baseMethod} (sampled ${candidates.length}/${allCandidates.length} files for speed)`
+    : baseMethod;
 
   return {
     aiAuthoredPercent,
