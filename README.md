@@ -103,6 +103,10 @@ Open the HTML to drill into every finding, or ship the JSON to CI.
       <td><code>eval</code>, <code>dangerouslySetInnerHTML</code>, unsafe <code>child_process</code>, insecure prompt-injected code paths</td>
     </tr>
     <tr>
+      <td><b>Vendored library CVEs</b></td>
+      <td>Parses <code>name@version</code> from vendored files under <code>public/libraries/</code>, <code>vendor/</code>, <code>third_party/</code> and cross-references OSV. Catches CVEs in libraries other scanners skip because they aren't in your lockfile — but they <i>are</i> served to every browser that loads your app.</td>
+    </tr>
+    <tr>
       <td><b>AI provenance</b></td>
       <td>Per-file signal aggregation → repo-level <code>aiAuthoredPercent</code>. Signals: git trailers (Co-Authored-By), commit shape (fast + large + multi-file), code shape (uniform docstrings, zero TODOs), agent artifacts (<code>.cursor/</code>, <code>.claude/</code>, <code>CLAUDE.md</code>)</td>
     </tr>
