@@ -145,6 +145,84 @@ async function checkBatch(
   return results;
 }
 
+/**
+ * Read the monorepo workspace globs from package.json (`workspaces`)
+ * and pnpm-workspace.yaml, then walk every matching sub-package.json
+ * and collect the internal package name field. Anything in this set
+ * is a workspace-internal package — not published to npm — and must
+ * not be flagged as slopsquat.
+ *
+ * Corpus evidence: HeyPuter/puter, appsmith, gitbutler, n8n,
+ * Reactive-Resume all triggered false slopsquat because they
+ * publish nothing under their `@scope/*` prefix.
+ */
+async function collectWorkspacePackageNames(
+  projectRoot: string,
+): Promise<Set<string>> {
+  const { globby } = await import("fast-glob").then((m) => ({
+    globby: m.default,
+  }));
+  const names = new Set<string>();
+
+  // 1. package.json `workspaces` array or object with `packages` field.
+  let globs: string[] = [];
+  try {
+    const raw = await readFile(join(projectRoot, "package.json"), "utf8");
+    const pkg = JSON.parse(raw) as {
+      workspaces?: string[] | { packages?: string[] };
+    };
+    if (Array.isArray(pkg.workspaces)) globs.push(...pkg.workspaces);
+    else if (pkg.workspaces?.packages) globs.push(...pkg.workspaces.packages);
+  } catch {
+    // no root package.json — nothing to add from here
+  }
+
+  // 2. pnpm-workspace.yaml (minimal YAML parse — we only care about
+  //    the `packages:` array).
+  try {
+    const raw = await readFile(join(projectRoot, "pnpm-workspace.yaml"), "utf8");
+    const inSection = raw.match(/^packages:\s*\n((?:\s*-\s+[^\n]+\n?)+)/m);
+    if (inSection?.[1]) {
+      for (const line of inSection[1].split("\n")) {
+        const m = line.match(/^\s*-\s*['"]?([^'"\s]+)['"]?/);
+        if (m?.[1]) globs.push(m[1]);
+      }
+    }
+  } catch {
+    // no pnpm workspace file
+  }
+
+  if (globs.length === 0) return names;
+
+  // Walk each glob root looking for package.json files.
+  const packageJsonGlobs = globs.map((g) =>
+    g.endsWith("/") ? `${g}package.json` : `${g}/package.json`,
+  );
+  let found: string[] = [];
+  try {
+    found = await globby(packageJsonGlobs, {
+      cwd: projectRoot,
+      absolute: true,
+      ignore: ["**/node_modules/**"],
+      suppressErrors: true,
+    });
+  } catch {
+    return names;
+  }
+
+  for (const pjPath of found) {
+    try {
+      const raw = await readFile(pjPath, "utf8");
+      const pkg = JSON.parse(raw) as { name?: string };
+      if (pkg.name) names.add(pkg.name);
+    } catch {
+      // skip unreadable / malformed
+    }
+  }
+
+  return names;
+}
+
 async function parsePackageJsonDeps(
   projectRoot: string,
 ): Promise<Set<string>> {
@@ -259,8 +337,13 @@ async function collectDepNames(
 export const slopsquatDetector: Detector = {
   id: "slopsquat",
   async run(_files: ScannedFile[], projectRoot: string): Promise<Finding[]> {
-    const names = await collectDepNames(projectRoot);
-    if (names.length === 0) return [];
+    const allNames = await collectDepNames(projectRoot);
+    if (allNames.length === 0) return [];
+
+    // Drop anything that's actually a workspace-internal package. See
+    // collectWorkspacePackageNames above for the corpus rationale.
+    const workspaceNames = await collectWorkspacePackageNames(projectRoot);
+    const names = allNames.filter((n) => !workspaceNames.has(n));
 
     const cache = await loadCache();
     const findings: Finding[] = [];
