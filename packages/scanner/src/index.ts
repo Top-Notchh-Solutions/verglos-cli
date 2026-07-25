@@ -20,6 +20,7 @@ import type { Detector } from "./detectors/types.js";
 import { detectProjectType } from "./project.js";
 import { walkProject } from "./walker.js";
 import { classifyFindings } from "./context.js";
+import { applyContextTags } from "./context-tags.js";
 import { computeProvenance } from "./provenance/index.js";
 
 const ALL_DETECTORS: Detector[] = [
@@ -99,7 +100,12 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   const filteredFindings = rawFindings.filter(
     (f) => toConfidenceNumeric(f.confidence) >= minConfidence,
   );
-  const allFindings = classifyFindings(filteredFindings, options.strict ?? false);
+  const classifiedFindings = classifyFindings(filteredFindings, options.strict ?? false);
+  // Post-classify pass: downgrade findings in non-production contexts
+  // (docs, dev-fixture, ci-workflow, vendored-bundle, test-fixture,
+  // etc.). Preserves the raw severity on originalSeverity so reports
+  // can show *why* a downgrade happened. See context-tags.ts.
+  const allFindings = applyContextTags(classifiedFindings);
   const score = calculateScore(allFindings, options.strict ?? false);
   const unlocked = options.unlocked ?? false;
 
