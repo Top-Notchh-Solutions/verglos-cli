@@ -127,15 +127,43 @@ const NON_SQL_TEMPLATE_TAGS = new RegExp(
 // SQL verbs where the interpolated `${...}` is unavoidably an identifier
 // (schema name, table name, index name, channel name). No amount of
 // parameterization can bind an identifier — even in production, the code
-// legitimately builds these from constants.
-const DDL_VERBS = new RegExp(
-  String.raw`\bquery\s*\(\s*[` + "`" + String.raw`'"]\s*(DROP|CREATE|ALTER|TRUNCATE|LISTEN|UNLISTEN|USE|GRANT|REVOKE|COMMENT|BEGIN|COMMIT|ROLLBACK|SET|SHOW|EXPLAIN|VACUUM|ANALYZE|REINDEX|BACKUP|RESTORE)\b`,
-  "i",
-);
+// legitimately builds these from constants. Also covers transaction-
+// control (SAVEPOINT/RELEASE) and SQLite PRAGMA/ATTACH which take
+// identifiers or filenames, not user data.
+const IDENTIFIER_ONLY_VERBS = new Set([
+  "DROP", "CREATE", "ALTER", "TRUNCATE", "LISTEN", "UNLISTEN", "USE",
+  "GRANT", "REVOKE", "COMMENT", "BEGIN", "COMMIT", "ROLLBACK",
+  "SET", "SHOW", "EXPLAIN", "VACUUM", "ANALYZE", "REINDEX",
+  "BACKUP", "RESTORE", "SAVEPOINT", "RELEASE", "PRAGMA",
+  "ATTACH", "DETACH",
+]);
+
+// Pull the first uppercase-word after `query(` or `execute(` and its
+// opening quote. Returns null when the shape doesn't match a real call.
+function firstSqlKeyword(line: string): string | null {
+  const match = line.match(
+    /(?:query|execute)\s*\(\s*[`'"]\s*([A-Za-z_]+)\b/i,
+  );
+  return match?.[1] ? match[1].toUpperCase() : null;
+}
+
+// Real SQL calls look like `client.query(`, `db.execute(`, `await
+// queryRunner.query(`, `pool.query(` — always a MEMBER call. Bare
+// `QUERY("${name}")` in a spreadsheet formula or a label field is not
+// a SQL call, even though our loose regex thinks it is.
+const IS_MEMBER_SQL_CALL = /(?:\.|\bawait\s+)\s*(?:query|execute)\s*\(/i;
 
 function shouldSkipSqlInjection(line: string): boolean {
   if (NON_SQL_TEMPLATE_TAGS.test(line)) return true;
-  if (DDL_VERBS.test(line)) return true;
+
+  const keyword = firstSqlKeyword(line);
+  if (keyword && IDENTIFIER_ONLY_VERBS.has(keyword)) return true;
+
+  // Non-member-call: `label: \`QUERY("${queryName}")\`` and similar
+  // formula strings. The regex only fires because the letters
+  // q-u-e-r-y appear followed by an open-paren — that isn't a db call.
+  if (!IS_MEMBER_SQL_CALL.test(line)) return true;
+
   return false;
 }
 
