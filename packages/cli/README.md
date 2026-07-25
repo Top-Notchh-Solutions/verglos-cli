@@ -28,6 +28,7 @@
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
   <a href="#what-verglos-catches">What it catches</a> ·
+  <a href="#why-the-findings-are-actually-actionable">Why findings are actionable</a> ·
   <a href="#commands">Commands</a> ·
   <a href="#ci-usage">CI usage</a> ·
   <a href="#plans">Plans</a> ·
