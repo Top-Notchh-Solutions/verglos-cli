@@ -73,6 +73,26 @@ export interface RepoProvenance {
   method: string; // which signals fired — always disclosed
 }
 
+/**
+ * Context tags produced by the post-detection tagging pass. When set,
+ * the finding's `severity` has been downgraded (usually to `info`) and
+ * `originalSeverity` holds what the detector originally said. The tag
+ * itself tells the operator *why* — a Private-Key-PEM in `docs/` is
+ * a doc example, not a leaked secret.
+ *
+ * Derived from Phase-0 corpus analysis of 87 open-source repos.
+ */
+export type ContextTag =
+  | "docs"              // .md/.rst/CONTRIBUTING/README — example creds and code samples
+  | "dev-fixture"       // .env.example, docker-compose.yml, docker/ — local dev creds
+  | "ci-workflow"       // .github/workflows/, .depot/, .buildkite/ — service-container creds
+  | "test-fixture"      // test/, __tests__/, cypress/, playwright/, *.test.*
+  | "vendored-bundle"   // public/libraries/, vendor/, *.min.js, .yarn/releases/
+  | "build-config"      // webpack.config.*, rspack.config.*, vite.config.* — dev-server CORS etc.
+  | "generated"         // generated/, __generated__/, .generated.*, internal/types/generated/
+  | "workspace-package" // slopsquat firing on a monorepo-internal @scope/pkg
+  | "api-spec-example"; // openapi.yml / swagger.yml example bodies
+
 export type ProjectType =
   | "nextjs"
   | "express"
@@ -118,6 +138,16 @@ export interface Finding {
   category: string;
   /** Populated by the provenance engine (follow-up). Optional forever — user may opt out. */
   provenance?: FindingProvenance;
+  /**
+   * Set when the post-detection context-tag pass downgraded this
+   * finding. The report shows the tag so operators know *why*.
+   */
+  contextTag?: ContextTag;
+  /**
+   * Preserved raw severity from the detector, before the context-tag
+   * pass downgraded it. Only set when contextTag is set.
+   */
+  originalSeverity?: Severity;
 }
 
 /**
