@@ -195,14 +195,31 @@ const TAG_RULES: TagRule[] = [
 const DOWNGRADED: Severity = "info";
 
 /**
+ * Detector rules that MUST NOT be downgraded by the context-tag
+ * pass. These are already context-aware — the vendored-cves
+ * detector (D6-002) specifically looks at files under
+ * public/libraries/ / vendor/ and reports only when the vendored
+ * name@version has a known CVE. Downgrading those to `info` because
+ * the file lives in a vendored path would defeat the whole point.
+ */
+const CONTEXT_AWARE_RULES = new Set<string>([
+  "D6-002", // vendored-cves — differentiator, already precision-tuned
+]);
+
+/**
  * Walks findings and tags each one where the file path matches a
  * non-production context. Tagged findings have their severity set
  * to `info` and preserve the raw severity on `originalSeverity`.
+ *
+ * Rules in CONTEXT_AWARE_RULES are exempt — their detectors already
+ * run per-finding context checks and the coarse path heuristic here
+ * would otherwise silence the differentiator.
  *
  * Never mutates input; returns new finding objects.
  */
 export function applyContextTags(findings: Finding[]): Finding[] {
   return findings.map((finding) => {
+    if (finding.rule && CONTEXT_AWARE_RULES.has(finding.rule)) return finding;
     for (const rule of TAG_RULES) {
       if (!rule.matches(finding)) continue;
       return {
