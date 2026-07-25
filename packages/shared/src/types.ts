@@ -7,7 +7,8 @@ export type DetectorId =
   | "injection"
   | "git-history"
   | "ai-patterns"
-  | "slopsquat";
+  | "slopsquat"
+  | "vendored-cves";
 
 /**
  * The ten security domains, plus D11 (agent surface).
