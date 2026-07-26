@@ -300,6 +300,24 @@ async function verifyLive(value: string): Promise<LiveKeyResult | null> {
   return null;
 }
 
+/**
+ * A line whose non-whitespace content starts with a comment marker
+ * is by definition not a live credential — it's documentation.
+ * Common markers across the languages we scan: YAML/shell/Python (#),
+ * JS/TS (//, /*, *, /*!), HTML/XML (<!--), SQL/Haskell/Ada (--), and
+ * INI/lisp (;). Some strict positions to skip:
+ *
+ *   ##       ----BEGIN RSA PRIVATE KEY-----     (helm values.yaml)
+ *   // const apiKey = "sk_live_..."             (JS commented sample)
+ *   * expected: "ghp_abcdef..."                 (JSDoc example)
+ *   -- DATABASE_URL = postgres://...            (SQL comment)
+ */
+const COMMENT_LINE = /^\s*(?:#(?![!/])|\/\/|\/\*|\*(?!\/)|<!--|--\s|;;?\s)/;
+
+function isCommentLine(line: string): boolean {
+  return COMMENT_LINE.test(line);
+}
+
 export const secretsDetector: Detector = {
   id: "secrets",
   async run(
@@ -327,6 +345,11 @@ export const secretsDetector: Detector = {
 
       for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
         const line = lines[lineIdx] ?? "";
+
+        // Skip fully-commented lines — never a live secret. See
+        // isCommentLine above for the concrete false-positive
+        // examples this fixes.
+        if (isCommentLine(line)) continue;
 
         for (const { name, pattern, severity, requiresContext } of SECRET_PATTERNS) {
           if (requiresContext && !requiresContext.test(line)) continue;
