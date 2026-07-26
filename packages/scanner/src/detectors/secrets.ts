@@ -233,6 +233,22 @@ function similarity(a: string, b: string): number {
   return 1 - distance / Math.max(left.length, right.length);
 }
 
+/**
+ * A connection string pointing at localhost / 127.0.0.1 / 0.0.0.0
+ * is a dev-fixture credential by definition — the "leak" is a URL
+ * that only works from the developer's own machine. Common shape:
+ *   postgres://user:pass@localhost:5432/db
+ *   redis://:secret@127.0.0.1:6379
+ *   mongodb://root:root@localhost:27017/x
+ * Fires regardless of file path (we saw these in .yaml files that
+ * didn't match dev-fixture path heuristics — PostHog hogli.yaml).
+ */
+const LOCAL_DEV_ENDPOINT = /(?:@|:\/\/)(?:localhost|127\.0\.0\.1|0\.0\.0\.0|::1|host\.docker\.internal)(?::\d+)?/i;
+
+function isLocalDevEndpoint(line: string, matched: string): boolean {
+  return LOCAL_DEV_ENDPOINT.test(matched) || LOCAL_DEV_ENDPOINT.test(line);
+}
+
 function classifiedSecretFinding(input: {
   name: string;
   severity: Finding["severity"];
@@ -253,6 +269,17 @@ function classifiedSecretFinding(input: {
   const assertionLine =
     input.name === "Bearer Token" &&
     /\b(?:toBe|toEqual|assertEqual|expect)\s*\(/.test(input.line);
+  const localDev = isLocalDevEndpoint(input.line, input.matched);
+
+  if (localDev) {
+    return {
+      severity: "info",
+      title: `[Local dev endpoint] Exposed secret: ${input.name}`,
+      description:
+        "The connection string points at localhost / 127.0.0.1 / 0.0.0.0 / host.docker.internal — a developer-machine or dev-container credential. Only a threat if you didn't mean to publish this file.",
+      context: "placeholder",
+    };
+  }
 
   if (valueIsPlaceholder || nameIsPlaceholder || bearerIsFixture || assertionLine) {
     return {
@@ -300,6 +327,24 @@ async function verifyLive(value: string): Promise<LiveKeyResult | null> {
   return null;
 }
 
+/**
+ * A line whose non-whitespace content starts with a comment marker
+ * is by definition not a live credential — it's documentation.
+ * Common markers across the languages we scan: YAML/shell/Python (#),
+ * JS/TS (//, /*, *, /*!), HTML/XML (<!--), SQL/Haskell/Ada (--), and
+ * INI/lisp (;). Some strict positions to skip:
+ *
+ *   ##       ----BEGIN RSA PRIVATE KEY-----     (helm values.yaml)
+ *   // const apiKey = "sk_live_..."             (JS commented sample)
+ *   * expected: "ghp_abcdef..."                 (JSDoc example)
+ *   -- DATABASE_URL = postgres://...            (SQL comment)
+ */
+const COMMENT_LINE = /^\s*(?:#(?![!/])|\/\/|\/\*|\*(?!\/)|<!--|--\s|;;?\s)/;
+
+function isCommentLine(line: string): boolean {
+  return COMMENT_LINE.test(line);
+}
+
 export const secretsDetector: Detector = {
   id: "secrets",
   async run(
@@ -327,6 +372,11 @@ export const secretsDetector: Detector = {
 
       for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
         const line = lines[lineIdx] ?? "";
+
+        // Skip fully-commented lines — never a live secret. See
+        // isCommentLine above for the concrete false-positive
+        // examples this fixes.
+        if (isCommentLine(line)) continue;
 
         for (const { name, pattern, severity, requiresContext } of SECRET_PATTERNS) {
           if (requiresContext && !requiresContext.test(line)) continue;

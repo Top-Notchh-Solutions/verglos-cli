@@ -153,6 +153,31 @@ function firstSqlKeyword(line: string): string | null {
 // a SQL call, even though our loose regex thinks it is.
 const IS_MEMBER_SQL_CALL = /(?:\.|\bawait\s+)\s*(?:query|execute)\s*\(/i;
 
+/**
+ * D1-003 noise filter — distinguish RegExp.prototype.exec from
+ * child_process.exec. The command-injection pattern matches any
+ * `.exec(...)` call whose argument reads user input, but a regex's
+ * .exec has the same shape and running a regex over user input is
+ * safe by definition.
+ *
+ * Returns true when the receiver of `.exec(` is clearly a regex.
+ * Signals: regex literal directly before `.exec(`, ALL_CAPS_CONST
+ * receiver (typical for pre-compiled regex constants), or mixed-
+ * case name ending in Regex / Pattern / Match / Re / _RE / _REGEX
+ * / _PATTERN.
+ */
+const REGEX_LITERAL_EXEC = /\/[^/\n]+\/[gimsuy]*\.exec\s*\(/;
+const CAPS_CONST_EXEC = /(?:^|[^A-Za-z0-9_$])([A-Z][A-Z0-9_]{2,})\.exec\s*\(/;
+const REGEX_NAMED_EXEC =
+  /(?:^|[^A-Za-z0-9_$])[A-Za-z_$][A-Za-z0-9_$]*(?:Regex|RegExp|Pattern|Match|Re)\.exec\s*\(|(?:^|[^A-Za-z0-9_$])\w+_(?:RE|REGEX|PATTERN)\.exec\s*\(/;
+
+function looksLikeRegexExec(line: string): boolean {
+  if (REGEX_LITERAL_EXEC.test(line)) return true;
+  if (CAPS_CONST_EXEC.test(line)) return true;
+  if (REGEX_NAMED_EXEC.test(line)) return true;
+  return false;
+}
+
 function shouldSkipSqlInjection(line: string): boolean {
   if (NON_SQL_TEMPLATE_TAGS.test(line)) return true;
 
@@ -274,8 +299,21 @@ export const injectionDetector: Detector = {
 
         for (const pattern of INJECTION_PATTERNS) {
           if (pattern.pattern.test(line)) {
-            // D1-001 noise filters — DDL identifiers, non-SQL template tags.
-            if (pattern.rule === "D1-001" && shouldSkipSqlInjection(line)) {
+            // D1-001 / D1-002 noise filters — DDL identifiers, non-SQL
+            // template tags, and calls that aren't member-access shaped.
+            // Concrete false positive killed by adding D1-002 to this:
+            // English strings containing the word "query" followed by
+            // "(" and a "+" (string concat operator) — e.g. PostHog
+            // frontend/src/scenes/web-analytics/WebAnalyticsFilters.tsx.
+            if (
+              (pattern.rule === "D1-001" || pattern.rule === "D1-002") &&
+              shouldSkipSqlInjection(line)
+            ) {
+              continue;
+            }
+            // D1-003 noise filter — regex.exec masquerading as
+            // child_process.exec. See looksLikeRegexExec above.
+            if (pattern.rule === "D1-003" && looksLikeRegexExec(line)) {
               continue;
             }
             const key = `${file.relativePath}:${i}:${pattern.name}`;
