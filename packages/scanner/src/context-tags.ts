@@ -74,7 +74,19 @@ function isDevFixture(file: string): boolean {
     /docker-compose.*\.ya?ml$/i.test(file) ||
     /(^|\/)docker\//i.test(file) ||
     /(^|\/)\.devcontainer\//i.test(file) ||
-    /(^|\/)Dockerfile(\.[^/]+)?$/.test(file)
+    /(^|\/)Dockerfile(\.[^/]+)?$/.test(file) ||
+    // Deployment templates. Helm values.yaml and Kubernetes/OpenShift
+    // manifests carry placeholder secrets that the operator fills in
+    // per environment. The template file itself is documentation.
+    /(^|\/)deploy(ment)?s?\//i.test(file) ||
+    /(^|\/)helm\//i.test(file) ||
+    /(^|\/)charts?\//i.test(file) ||
+    /(^|\/)k8s\//i.test(file) ||
+    /(^|\/)kubernetes\//i.test(file) ||
+    /(^|\/)manifests?\//i.test(file) ||
+    /values(?:\.[a-z-]+)?\.ya?ml$/i.test(file) ||
+    /(^|\/)terraform\//i.test(file) ||
+    /(^|\/)ansible\//i.test(file)
   );
 }
 
