@@ -73,6 +73,10 @@ function isDevFixture(file: string): boolean {
     /\.env\.test$/i.test(file) ||
     /docker-compose.*\.ya?ml$/i.test(file) ||
     /(^|\/)docker\//i.test(file) ||
+    // docker-compose/ as a directory (files inside it, not just the
+    // yml at root). lobe-chat has `docker-compose/production/grafana/
+    // init_data.json` — same dev-only stack, different filename.
+    /(^|\/)docker-compose\//i.test(file) ||
     /(^|\/)\.devcontainer\//i.test(file) ||
     /(^|\/)Dockerfile(\.[^/]+)?$/.test(file) ||
     // Deployment templates. Helm values.yaml and Kubernetes/OpenShift
@@ -177,7 +181,19 @@ function isTestFixture(file: string): boolean {
     /\.(test|spec)\.[jt]sx?$/.test(file) ||
     /(^|\/)testUtils?(\.|\/)/i.test(file) ||
     /(^|\/)__mocks__\//.test(file) ||
-    /(^|\/)fixtures?\//i.test(file)
+    /(^|\/)fixtures?\//i.test(file) ||
+    // Mock data — hasura frontend/.../mock/index.ts, n8n
+    // benchmark/scripts/mock-api/mappings/mockApiData.json, etc.
+    // Any mock/ segment plus common mock-flavoured names.
+    /(^|\/)mocks?\//i.test(file) ||
+    /(^|\/)mock[_-](?:api|server|data)\//i.test(file) ||
+    /(^|\/)mockData\//i.test(file) ||
+    /(^|\/)__fixtures__\//i.test(file) ||
+    // Benchmark scripts — same shape as tests, throwaway data.
+    /(^|\/)benchmarks?\//i.test(file) ||
+    // Sample/example directories.
+    /(^|\/)examples?\//i.test(file) ||
+    /(^|\/)samples?\//i.test(file)
   );
 }
 
