@@ -286,6 +286,11 @@ export const injectionDetector: Detector = {
             ) {
               continue;
             }
+            // D1-003 noise filter — regex.exec masquerading as
+            // child_process.exec. See looksLikeRegexExec above.
+            if (pattern.rule === "D1-003" && looksLikeRegexExec(line)) {
+              continue;
+            }
             const key = `${file.relativePath}:${i}:${pattern.name}`;
             if (seen.has(key)) continue;
             seen.add(key);
