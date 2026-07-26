@@ -183,11 +183,39 @@ const SUPPORTED_EXT = /\.(?:m?[jt]sx?|mts|cts)$/;
  * positive where an unrelated `const secret` several lines above a
  * random tracking id gets flagged as an OTP leak.
  */
+/**
+ * Date.now() used AS a time source — default param, comparison, or
+ * assigned to a clock/deadline/timestamp variable — is not producing
+ * a secret. Skip these to keep AI-002 precise.
+ *
+ * Concrete ICP-300 false positives fixed by this:
+ *   verifyTotpCode(secret, code, now = Date.now())
+ *     `now` param default is time-of-check, not the secret.
+ *   const token: DeadlineToken = { expiresAt: Date.now() + timeoutMs }
+ *     `expiresAt` is a deadline timestamp, not an auth token.
+ */
+const TIME_PARAM_NAMES =
+  /\b(now|time|when|ts|timestamp|deadline|clock|since|until|expires?(?:At)?|createdAt|updatedAt)\s*=/i;
+
+function isTimeSourceContext(line: string): boolean {
+  // Default parameter shape: `foo = Date.now()`
+  if (TIME_PARAM_NAMES.test(line) && /Date\.now\s*\(\s*\)/.test(line)) return true;
+  // Deadline shape: `expiresAt: Date.now() + N` — the value is a moment,
+  // not a secret, even if the surrounding variable name matches a sink.
+  if (/(?:expires?At|deadline|timeout|ttl|maxAge|validUntil)\s*[:=]\s*Date\.now\s*\(\s*\)/i.test(line)) return true;
+  // Comparison shape: `Date.now() < token.expiry` — Date.now() being
+  // compared to something else is checking time, not producing a secret.
+  if (/Date\.now\s*\(\s*\)\s*[<>]=?/.test(line)) return true;
+  if (/[<>]=?\s*Date\.now\s*\(\s*\)/.test(line)) return true;
+  return false;
+}
+
 function classifyAi002(
   lines: string[],
   index: number,
 ): { sinkName: string } | undefined {
   const line = lines[index] ?? "";
+  if (isTimeSourceContext(line)) return undefined;
   const match = line.match(AI_002_INLINE_SINK);
   if (match) {
     return { sinkName: match[1]!.toLowerCase() };
