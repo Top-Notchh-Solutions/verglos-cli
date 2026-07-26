@@ -274,8 +274,16 @@ export const injectionDetector: Detector = {
 
         for (const pattern of INJECTION_PATTERNS) {
           if (pattern.pattern.test(line)) {
-            // D1-001 noise filters — DDL identifiers, non-SQL template tags.
-            if (pattern.rule === "D1-001" && shouldSkipSqlInjection(line)) {
+            // D1-001 / D1-002 noise filters — DDL identifiers, non-SQL
+            // template tags, and calls that aren't member-access shaped.
+            // Concrete false positive killed by adding D1-002 to this:
+            // English strings containing the word "query" followed by
+            // "(" and a "+" (string concat operator) — e.g. PostHog
+            // frontend/src/scenes/web-analytics/WebAnalyticsFilters.tsx.
+            if (
+              (pattern.rule === "D1-001" || pattern.rule === "D1-002") &&
+              shouldSkipSqlInjection(line)
+            ) {
               continue;
             }
             const key = `${file.relativePath}:${i}:${pattern.name}`;
