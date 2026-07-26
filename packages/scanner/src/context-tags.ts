@@ -41,7 +41,16 @@ function isVendoredBundle(file: string): boolean {
     /(^|\/)node_modules\//.test(file) ||
     /\.min\.(js|css)$/i.test(file) ||
     /\.bundle\.(js|css)$/i.test(file) ||
-    /(^|\/)\.pnp\.[a-z]+$/.test(file)
+    /(^|\/)\.pnp\.[a-z]+$/.test(file) ||
+    // Framework-bundled assets under public/. Almost every Laravel /
+    // Filament / Django / Rails project ships JS bundles here — these
+    // are webpack / vite / esbuild output, not app code the maintainer
+    // wrote line-by-line. Concrete ICP-300 false positives this catches:
+    //   public/js/vendor.js         Bottelet DaybydayCRM (bundled jQuery)
+    //   public/js/app.js            Ctrlpanel (webpack app bundle)
+    //   public/js/filament/**       Paymenter (Filament admin JS)
+    //   public/plugins/jquery/*     Ctrlpanel (Laravel jQuery vendor)
+    /(^|\/)public\/(js|css|assets|dist|build|plugins|themes)\//i.test(file)
   );
 }
 
