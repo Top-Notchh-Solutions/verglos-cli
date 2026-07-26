@@ -210,6 +210,25 @@ function isTimeSourceContext(line: string): boolean {
   return false;
 }
 
+/**
+ * `nonce` is the tricky sink — cryptographic nonces are critical,
+ * but React/redux/mobx state also uses `nonce` as a cache-buster or
+ * change-token. Downgrade only when the surrounding same-line context
+ * clearly indicates UI/render/state semantics.
+ *
+ * Kept STRICT to preserve real crypto nonces at critical.
+ * Concrete ICP-300 false positives fixed:
+ *   TesslateAI OpenSail: setMarketplaceFocus({ nonce: Date.now(), ... })
+ *   Bottelet DaybydayCRM: var nonce = { guid: Date.now() } — jQuery internal
+ */
+const UI_STATE_NONCE_CONTEXT =
+  /\b(setState|dispatch|useState|useReducer|createSlice|reducer|action|redux|zustand|mobx|render|animation|focus|reveal|request|refresh|invalidate|cacheBust|cache-bust|guid|payload)\b/i;
+
+function isUiStateNonce(line: string, sinkName: string): boolean {
+  if (sinkName !== "nonce") return false;
+  return UI_STATE_NONCE_CONTEXT.test(line);
+}
+
 function classifyAi002(
   lines: string[],
   index: number,
@@ -217,10 +236,10 @@ function classifyAi002(
   const line = lines[index] ?? "";
   if (isTimeSourceContext(line)) return undefined;
   const match = line.match(AI_002_INLINE_SINK);
-  if (match) {
-    return { sinkName: match[1]!.toLowerCase() };
-  }
-  return undefined;
+  if (!match) return undefined;
+  const sinkName = match[1]!.toLowerCase();
+  if (isUiStateNonce(line, sinkName)) return undefined;
+  return { sinkName };
 }
 
 export const aiPatternsDetector: Detector = {
