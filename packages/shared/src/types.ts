@@ -194,11 +194,22 @@ export interface SeverityCounts {
 
 export interface ScanScore {
   value: number;
-  riskLevel: "critical" | "high" | "medium" | "low";
+  riskLevel: "critical" | "high" | "medium" | "low" | "unsupported";
   counts: SeverityCounts;
   testFileFindings: {
     total: number;
     note: string;
+  };
+  /**
+   * Set when the scanner detected an unsupported-language repo
+   * (few or no JS/TS files walked, no findings emitted). Consumers
+   * should render "N/A — unsupported language" instead of a numeric
+   * score to avoid falsely reporting `100/100` for Python/Ruby/Go
+   * repos we don't have detectors for.
+   */
+  unsupportedLanguage?: {
+    reason: string;
+    jsTsFileCount: number;
   };
 }
 
@@ -371,6 +382,7 @@ export function riskLevelLabel(level: ScanScore["riskLevel"]): string {
     high: "HIGH RISK",
     medium: "MEDIUM RISK",
     low: "LOW RISK",
+    unsupported: "UNSUPPORTED LANGUAGE",
   };
   return labels[level];
 }

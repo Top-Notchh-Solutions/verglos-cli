@@ -109,7 +109,28 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   // etc.). Preserves the raw severity on originalSeverity so reports
   // can show *why* a downgrade happened. See context-tags.ts.
   const allFindings = applyContextTags(classifiedFindings);
-  const score = calculateScore(allFindings, options.strict ?? false);
+  const rawScore = calculateScore(allFindings, options.strict ?? false);
+  // Detect unsupported-language repos so we stop reporting 100/100
+  // for Python/Ruby/Go/Elixir/PHP where the scanner produced almost
+  // nothing. Threshold: fewer than 5 JS/TS files walked AND no
+  // findings emitted at all. In that case the "100" is a lie —
+  // there was nothing to scan.
+  const jsTsFileCount = files.filter((f) =>
+    /\.(m?[jt]sx?|mts|cts)$/.test(f.relativePath),
+  ).length;
+  const isUnsupported =
+    jsTsFileCount < 5 && allFindings.length === 0 && rawScore.value === 100;
+  const score = isUnsupported
+    ? {
+        ...rawScore,
+        riskLevel: "unsupported" as const,
+        unsupportedLanguage: {
+          reason:
+            "This repo has fewer than 5 JS/TS files and produced no findings. Verglos scans JavaScript/TypeScript; a 100/100 score here would be misleading. Full multi-language support ships in v2.",
+          jsTsFileCount,
+        },
+      }
+    : rawScore;
   const unlocked = options.unlocked ?? false;
 
   const provenance = options.noProvenance
