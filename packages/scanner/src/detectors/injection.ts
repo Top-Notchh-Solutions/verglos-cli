@@ -178,6 +178,27 @@ function looksLikeRegexExec(line: string): boolean {
   return false;
 }
 
+// `.execute(` on a receiver whose name is a sandbox / shell / vm /
+// child_process / cmd object is running a shell command, not SQL.
+// The command-injection detector (D1-003) handles shell exec safely;
+// firing D1-001 for it double-flags and confuses reports.
+const SHELL_EXECUTE_RECEIVER =
+  /\b(sandbox|shell|vm|child|childProcess|process|proc|cmd|command|worker|runner|executor|newSandbox)\.execute\s*\(/i;
+
+// If the interpolated content is a shellQuote() / sqlIdentifier() /
+// escapeIdentifier() call, the developer is explicitly escaping. Not
+// user-controlled injection.
+const EXPLICITLY_ESCAPED =
+  /\$\{\s*(?:shellQuote|escapeShellArg|shellescape|escapeIdentifier|sqlIdentifier|escape|escapeSql|sanitize)\s*\(/i;
+
+// If the SET/VALUES/WHERE clause uses ? or $N placeholders in the
+// same template, the query IS parameterized — the interpolated
+// portion is a column/table identifier from controlled state, not
+// user data. `db.query(\`UPDATE t SET ${cols} WHERE id = ?\`)` is
+// safe when `?` is bound by the caller.
+const PARAMETERIZED_PLACEHOLDER =
+  /=\s*\?|\bVALUES\s*\(\s*\?|\?\s*[,)]|=\s*\$\d+|VALUES\s*\(\s*\$\d+/i;
+
 function shouldSkipSqlInjection(line: string): boolean {
   if (NON_SQL_TEMPLATE_TAGS.test(line)) return true;
 
@@ -188,6 +209,16 @@ function shouldSkipSqlInjection(line: string): boolean {
   // formula strings. The regex only fires because the letters
   // q-u-e-r-y appear followed by an open-paren — that isn't a db call.
   if (!IS_MEMBER_SQL_CALL.test(line)) return true;
+
+  // sandbox.execute(...) / shell.execute(...) — shell command, not SQL.
+  if (SHELL_EXECUTE_RECEIVER.test(line)) return true;
+
+  // Interpolation is already escaped by shellQuote/escapeIdentifier/etc.
+  if (EXPLICITLY_ESCAPED.test(line)) return true;
+
+  // Parameterized: has ? or $N placeholders alongside the ${} — the
+  // interpolated bit is safe (column/table name); the value is bound.
+  if (PARAMETERIZED_PLACEHOLDER.test(line)) return true;
 
   return false;
 }
