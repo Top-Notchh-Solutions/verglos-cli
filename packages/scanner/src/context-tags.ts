@@ -179,6 +179,11 @@ function isTestFixture(file: string): boolean {
     /(^|\/)playwright\//.test(file) ||
     /(^|\/)e2e[_-]tests?\//.test(file) ||
     /\.(test|spec)\.[jt]sx?$/.test(file) ||
+    // Compound-suffix test files: e2e-spec.ts, integration.test.ts,
+    // unit.test.ts, controller.e2e-spec.ts, foo.it.ts. Cal.com uses
+    // `.e2e-spec.ts`; nest projects commonly use `.integration.ts`.
+    /[.-](?:e2e[.-]?(?:test|spec)|integration[.-](?:test|spec)|unit[.-](?:test|spec)|it)\.[jt]sx?$/.test(file) ||
+    /\.e2e[.-]spec\.[jt]sx?$/.test(file) ||
     /(^|\/)testUtils?(\.|\/)/i.test(file) ||
     /(^|\/)__mocks__\//.test(file) ||
     /(^|\/)fixtures?\//i.test(file) ||
