@@ -73,8 +73,24 @@ function isDevFixture(file: string): boolean {
     /\.env\.test$/i.test(file) ||
     /docker-compose.*\.ya?ml$/i.test(file) ||
     /(^|\/)docker\//i.test(file) ||
+    // docker-compose/ as a directory (files inside it, not just the
+    // yml at root). lobe-chat has `docker-compose/production/grafana/
+    // init_data.json` — same dev-only stack, different filename.
+    /(^|\/)docker-compose\//i.test(file) ||
     /(^|\/)\.devcontainer\//i.test(file) ||
-    /(^|\/)Dockerfile(\.[^/]+)?$/.test(file)
+    /(^|\/)Dockerfile(\.[^/]+)?$/.test(file) ||
+    // Deployment templates. Helm values.yaml and Kubernetes/OpenShift
+    // manifests carry placeholder secrets that the operator fills in
+    // per environment. The template file itself is documentation.
+    /(^|\/)deploy(ment)?s?\//i.test(file) ||
+    /(^|\/)helm\//i.test(file) ||
+    /(^|\/)charts?\//i.test(file) ||
+    /(^|\/)k8s\//i.test(file) ||
+    /(^|\/)kubernetes\//i.test(file) ||
+    /(^|\/)manifests?\//i.test(file) ||
+    /values(?:\.[a-z-]+)?\.ya?ml$/i.test(file) ||
+    /(^|\/)terraform\//i.test(file) ||
+    /(^|\/)ansible\//i.test(file)
   );
 }
 
@@ -163,9 +179,26 @@ function isTestFixture(file: string): boolean {
     /(^|\/)playwright\//.test(file) ||
     /(^|\/)e2e[_-]tests?\//.test(file) ||
     /\.(test|spec)\.[jt]sx?$/.test(file) ||
+    // Compound-suffix test files: e2e-spec.ts, integration.test.ts,
+    // unit.test.ts, controller.e2e-spec.ts, foo.it.ts. Cal.com uses
+    // `.e2e-spec.ts`; nest projects commonly use `.integration.ts`.
+    /[.-](?:e2e[.-]?(?:test|spec)|integration[.-](?:test|spec)|unit[.-](?:test|spec)|it)\.[jt]sx?$/.test(file) ||
+    /\.e2e[.-]spec\.[jt]sx?$/.test(file) ||
     /(^|\/)testUtils?(\.|\/)/i.test(file) ||
     /(^|\/)__mocks__\//.test(file) ||
-    /(^|\/)fixtures?\//i.test(file)
+    /(^|\/)fixtures?\//i.test(file) ||
+    // Mock data — hasura frontend/.../mock/index.ts, n8n
+    // benchmark/scripts/mock-api/mappings/mockApiData.json, etc.
+    // Any mock/ segment plus common mock-flavoured names.
+    /(^|\/)mocks?\//i.test(file) ||
+    /(^|\/)mock[_-](?:api|server|data)\//i.test(file) ||
+    /(^|\/)mockData\//i.test(file) ||
+    /(^|\/)__fixtures__\//i.test(file) ||
+    // Benchmark scripts — same shape as tests, throwaway data.
+    /(^|\/)benchmarks?\//i.test(file) ||
+    // Sample/example directories.
+    /(^|\/)examples?\//i.test(file) ||
+    /(^|\/)samples?\//i.test(file)
   );
 }
 
