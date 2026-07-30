@@ -381,6 +381,7 @@ export const slopsquatDetector: Detector = {
           description: `The dependency \`${name}\` is declared in package.json / package-lock.json but has no entry on the public npm registry.`,
           why:
             "This is the AI-hallucinated-package failure mode. ~20% of package names LLMs recommend don't exist. Either the install silently failed (you're missing a dependency in production) or — much worse — an attacker has registered the exact hallucinated name in the meantime and is now shipping malware to anyone who runs `npm install` on this repo.",
+          file: "package.json",
           package: name,
           refs: [
             `${NPM_REGISTRY}/${encodeURIComponent(name)}`,
@@ -408,6 +409,7 @@ export const slopsquatDetector: Detector = {
           title: `Possible typosquat: \`${name}\` is one keystroke off \`${nearest.top}\``,
           description: `The installed dependency \`${name}\` is Levenshtein distance ${nearest.distance} from the well-known package \`${nearest.top}\`. This is the attacker's playbook against AI-suggested names.`,
           why: "Models mis-remember popular package names in predictable ways. Squatters register the mis-remembered spelling and wait for an LLM to suggest it. This package exists on npm, but the fact that it's one or two letters off a top-N name is the exact shape of a supply-chain attack.",
+          file: "package.json",
           package: name,
           refs: [
             `${NPM_REGISTRY}/${encodeURIComponent(name)}`,
