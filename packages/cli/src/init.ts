@@ -11,13 +11,14 @@ import { installPreCommitHook } from "./config.js";
  * Two concerns, both explicit — no silent side effects (design §1:
  * "Free tier requires no account and no key" + "Never a hard-lock").
  *
- *   1. Write `verglos.config.js` at the project root (asks before
- *      overwriting an existing config).
+ *   1. Write `.verglos.config.js` at the project root (asks before
+ *      overwriting an existing config). The dotfile name is what
+ *      the scanner's loadConfig() actually reads.
  *   2. Ask whether to install the pre-commit hook. Never installs
  *      without a confirmed y.
  */
 
-const CONFIG_FILENAME = "verglos.config.js";
+const CONFIG_FILENAME = ".verglos.config.js";
 
 const CONFIG_TEMPLATE = `/**
  * Verglos scanner configuration.

@@ -7,7 +7,7 @@ import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
 import { applyHeaderFixes } from "./fix.js";
 import { loadCredentials, saveCredentials } from "./credentials.js";
-import { ensureConfig, installPreCommitHook } from "./config.js";
+import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
 import { executeExplain } from "./explain.js";
 import { executePrecommit } from "./precommit.js";

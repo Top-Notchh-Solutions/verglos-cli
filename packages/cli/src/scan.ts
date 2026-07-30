@@ -10,7 +10,6 @@ import {
 import type { DetectorId } from "@verglos/shared";
 import ora from "ora";
 import { loadLastScore, saveLastScore } from "./credentials.js";
-import { ensureConfig } from "./config.js";
 import {
   isTelemetryDisabled,
   printFirstRunDisclosureIfNeeded,
@@ -38,7 +37,6 @@ export async function executeScan(
   options: ScanCommandOptions = {},
 ): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
-  await ensureConfig(projectRoot);
 
   const spinner = options.quiet ? null : ora("Scanning project...").start();
 
