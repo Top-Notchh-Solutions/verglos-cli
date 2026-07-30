@@ -137,9 +137,12 @@ export function printTerminalSummary(result: ScanResult): void {
   printTop3(findings);
 
   if (score.testFileFindings.total > 0) {
+    const suffix = score.testFileFindings.included
+      ? "included in the score (--strict)."
+      : "excluded from the score.";
     console.log(
       chalk.gray(
-        `  Test file findings (review only): ${score.testFileFindings.total} excluded from the score.`,
+        `  Test file findings (review only): ${score.testFileFindings.total} ${suffix}`,
       ),
     );
     console.log("");

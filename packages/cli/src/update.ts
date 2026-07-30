@@ -58,6 +58,12 @@ export function isNewerVersion(latest: string, current: string): boolean {
 }
 
 export async function enforceLatestVersion(currentVersion: string): Promise<void> {
+  // Dev bypass. Set VERGLOS_DEV_SKIP_UPDATE_CHECK=1 when running a local
+  // build during development so the gate doesn't block iteration whenever
+  // npm is one release ahead. Never document this to end users — it exists
+  // purely for the maintainers running an unpublished `packages/cli/dist`.
+  if (process.env.VERGLOS_DEV_SKIP_UPDATE_CHECK === "1") return;
+
   const latestVersion = await fetchLatestVersion();
 
   if (!latestVersion || !isNewerVersion(latestVersion, currentVersion)) {

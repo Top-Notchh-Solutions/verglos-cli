@@ -10,7 +10,6 @@ import {
 import type { DetectorId } from "@verglos/shared";
 import ora from "ora";
 import { loadLastScore, saveLastScore } from "./credentials.js";
-import { ensureConfig } from "./config.js";
 import {
   isTelemetryDisabled,
   printFirstRunDisclosureIfNeeded,
@@ -32,13 +31,25 @@ export interface ScanCommandOptions {
   noProvenance?: boolean;
   verifySecrets?: boolean;
   noTelemetry?: boolean;
+  /**
+   * Domain-focused scan (`verglos secrets`, `verglos deps`). Suppresses
+   * baseline persistence and momentum output, and forces provenance off
+   * — the composite score from a single detector is not comparable to a
+   * full-scan baseline, so printing a delta would lie.
+   */
+  focused?: boolean;
+  /**
+   * Whether to include the git-history detector. Defaults to true. Set
+   * false for `verglos deps`, where combing commits for leaked secrets
+   * is unrelated to a dependency audit.
+   */
+  includeGitHistory?: boolean;
 }
 
 export async function executeScan(
   options: ScanCommandOptions = {},
 ): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
-  await ensureConfig(projectRoot);
 
   const spinner = options.quiet ? null : ora("Scanning project...").start();
 
@@ -67,10 +78,10 @@ export async function executeScan(
       projectRoot,
       detectors: options.detectors,
       unlocked: true,
-      includeGitHistory: true,
+      includeGitHistory: options.includeGitHistory ?? true,
       minConfidence: options.all ? 0 : undefined,
       strict: options.strict,
-      noProvenance: options.noProvenance,
+      noProvenance: options.focused ? true : options.noProvenance,
       verifySecrets: options.verifySecrets,
     });
   } finally {
@@ -83,18 +94,26 @@ export async function executeScan(
 
   if (!options.quiet) {
     printTerminalSummary(result);
-    printMomentum(
-      previous?.score,
+    // A single-detector score is not comparable to a full-scan
+    // baseline, so no momentum for focused runs.
+    if (!options.focused) {
+      printMomentum(
+        previous?.score,
+        result.score.value,
+        result.score.counts.critical,
+      );
+    }
+  }
+
+  // Also skip persisting a focused-scan score as the new baseline —
+  // it would poison the next full-scan's momentum.
+  if (!options.focused) {
+    await saveLastScore(
+      projectRoot,
       result.score.value,
       result.score.counts.critical,
     );
   }
-
-  await saveLastScore(
-    projectRoot,
-    result.score.value,
-    result.score.counts.critical,
-  );
 
   if (!isTelemetryDisabled(options.noTelemetry)) {
     if (!options.quiet) await printFirstRunDisclosureIfNeeded();
