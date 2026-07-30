@@ -257,9 +257,20 @@ const CONTEXT_AWARE_RULES = new Set<string>([
  * run per-finding context checks and the coarse path heuristic here
  * would otherwise silence the differentiator.
  *
+ * `strict` (v1.6): in --strict mode we still STAMP the contextTag
+ * and originalSeverity so the reporter can explain the tag, but we
+ * do NOT downgrade severity to info. Strict callers want every
+ * finding counted at full severity, matching the strict behavior of
+ * context.ts's classifyFindings for the `test` context. Before this,
+ * strict + a test-fixture path resulted in severity=info anyway,
+ * silently defeating --strict.
+ *
  * Never mutates input; returns new finding objects.
  */
-export function applyContextTags(findings: Finding[]): Finding[] {
+export function applyContextTags(
+  findings: Finding[],
+  strict = false,
+): Finding[] {
   return findings.map((finding) => {
     if (finding.rule && CONTEXT_AWARE_RULES.has(finding.rule)) return finding;
     for (const rule of TAG_RULES) {
@@ -268,7 +279,7 @@ export function applyContextTags(findings: Finding[]): Finding[] {
         ...finding,
         contextTag: rule.tag,
         originalSeverity: finding.severity,
-        severity: DOWNGRADED,
+        severity: strict ? finding.severity : DOWNGRADED,
       };
     }
     return finding;

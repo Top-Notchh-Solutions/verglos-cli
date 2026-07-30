@@ -108,7 +108,7 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   // (docs, dev-fixture, ci-workflow, vendored-bundle, test-fixture,
   // etc.). Preserves the raw severity on originalSeverity so reports
   // can show *why* a downgrade happened. See context-tags.ts.
-  const allFindings = applyContextTags(classifiedFindings);
+  const allFindings = applyContextTags(classifiedFindings, options.strict ?? false);
   const rawScore = calculateScore(allFindings, options.strict ?? false);
   // Detect unsupported-language repos so we stop reporting 100/100
   // for Python/Ruby/Go/Elixir/PHP where the scanner produced almost
