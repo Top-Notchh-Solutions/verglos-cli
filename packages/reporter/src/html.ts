@@ -432,7 +432,7 @@ export function renderHtmlReport(result: ScanResult): string {
         <div class="count"><div class="count-num" style="color:#6B7280">${score.counts.low}</div><div class="count-label">Low</div></div>
         <div class="count"><div class="count-num" style="color:#9CA3AF">${score.counts.info}</div><div class="count-label">Info</div></div>
       </div>
-      ${score.testFileFindings.total > 0 ? `<p class="meta">Test file findings (review only): ${score.testFileFindings.total}. Excluded from the default score.</p>` : ""}
+      ${score.testFileFindings.total > 0 ? `<p class="meta">Test file findings (review only): ${score.testFileFindings.total}. ${score.testFileFindings.included ? "Included in the score under --strict." : "Excluded from the default score."}</p>` : ""}
       <p class="meta">Scanned ${result.scannedAt} · ${result.durationMs}ms · ${result.projectType}</p>
     </header>
 

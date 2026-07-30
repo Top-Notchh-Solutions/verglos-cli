@@ -198,6 +198,12 @@ export interface ScanScore {
   counts: SeverityCounts;
   testFileFindings: {
     total: number;
+    /**
+     * True when --strict was on for this run and these findings did
+     * contribute to the score. Consumers should render the message
+     * accordingly ("included" vs "excluded"). Defaults to false.
+     */
+    included: boolean;
     note: string;
   };
   /**
@@ -394,7 +400,10 @@ export function calculateScore(findings: Finding[], strict = false): ScanScore {
     counts,
     testFileFindings: {
       total: testFindings.length,
-      note: "These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures.",
+      included: strict,
+      note: strict
+        ? "These findings are in test files and were included in the score under --strict."
+        : "These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures.",
     },
   };
 }
