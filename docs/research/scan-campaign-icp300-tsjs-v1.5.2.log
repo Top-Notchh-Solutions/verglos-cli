@@ -1,0 +1,947 @@
+verglos scan-campaign — 300 targets
+  Workspace: /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos/scan-campaign-workspace
+  Reports:   /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos/scan-campaign-reports-icp300-tsjs-v1.5.2
+  CLI:       npx --yes verglos@1.5.2
+
+  → n8n-io-n8n: clone
+  → n8n-io-n8n: scan
+    done: score 0 (crit 37, high 47)
+  → affaan-m-ECC: clone
+  → affaan-m-ECC: scan
+    done: score 61 (crit 0, high 8)
+  → langgenius-dify: clone
+  → langgenius-dify: scan
+    scan failed (1): npm error code EBADDEVENGINES
+npm error EBADDEVENGINES The developer of this package has specified the following through devEngines
+npm error EBADDEVENGINES Invalid devEngines.runtime
+npm error EBADDE
+  → nexu-io-open-design: clone
+  → nexu-io-open-design: scan
+    done: score 0 (crit 12, high 124)
+  → asgeirtj-system_prompts_leaks: clone
+  → asgeirtj-system_prompts_leaks: scan
+    done: score 100 (crit 0, high 0)
+  → FlowiseAI-Flowise: clone
+  → FlowiseAI-Flowise: scan
+    done: score 48 (crit 10, high 1)
+  → danny-avila-LibreChat: clone
+  → danny-avila-LibreChat: scan
+    done: score 0 (crit 1, high 99)
+  → appsmithorg-appsmith: clone
+  → appsmithorg-appsmith: scan
+    done: score 50 (crit 0, high 6)
+  → ToolJet-ToolJet: clone
+    clone failed (124): Cloning into '/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos/scan-campaign-workspace/ToolJet-ToolJet'...
+  → ItzCrazyKns-Vane: clone
+  → ItzCrazyKns-Vane: scan
+    done: score 92 (crit 0, high 1)
+  → sahat-hackathon-starter: clone
+  → sahat-hackathon-starter: scan
+    done: score 86 (crit 0, high 2)
+  → diegosouzapw-OmniRoute: clone
+  → diegosouzapw-OmniRoute: scan
+    done: score 0 (crit 18, high 102)
+  → Mintplex-Labs-anything-llm: clone
+  → Mintplex-Labs-anything-llm: scan
+    done: score 8 (crit 4, high 9)
+  → JCodesMore-ai-website-cloner-template: clone
+  → JCodesMore-ai-website-cloner-template: scan
+    done: score 98 (crit 0, high 0)
+  → ruvnet-ruflo: clone
+  → ruvnet-ruflo: scan
+    done: score 0 (crit 29, high 38)
+  → SigNoz-signoz: clone
+  → SigNoz-signoz: scan
+verglos scan-campaign — 300 targets
+  Workspace: /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos/scan-campaign-workspace
+  Reports:   /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos/scan-campaign-reports-icp300-tsjs-v1.5.2
+  CLI:       npx --yes verglos@1.5.2
+
+  ↺ n8n-io-n8n: --resume, keeping existing report
+  ↺ affaan-m-ECC: --resume, keeping existing report
+  → langgenius-dify: clone
+  → langgenius-dify: scan
+    scan failed (1): npm error code EBADDEVENGINES
+npm error EBADDEVENGINES The developer of this package has specified the following through devEngines
+npm error EBADDEVENGINES Invalid devEngines.runtime
+npm error EBADDE
+  ↺ nexu-io-open-design: --resume, keeping existing report
+  ↺ asgeirtj-system_prompts_leaks: --resume, keeping existing report
+  ↺ FlowiseAI-Flowise: --resume, keeping existing report
+  ↺ danny-avila-LibreChat: --resume, keeping existing report
+  ↺ appsmithorg-appsmith: --resume, keeping existing report
+  → ToolJet-ToolJet: clone
+    clone failed (124): Cloning into '/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos/scan-campaign-workspace/ToolJet-ToolJet'...
+  ↺ ItzCrazyKns-Vane: --resume, keeping existing report
+  ↺ sahat-hackathon-starter: --resume, keeping existing report
+  ↺ diegosouzapw-OmniRoute: --resume, keeping existing report
+  ↺ Mintplex-Labs-anything-llm: --resume, keeping existing report
+  ↺ JCodesMore-ai-website-cloner-template: --resume, keeping existing report
+  ↺ ruvnet-ruflo: --resume, keeping existing report
+  → SigNoz-signoz: clone
+  → SigNoz-signoz: scan
+    done: score 96 (crit 0, high 0)
+  → simstudioai-sim: clone
+  → simstudioai-sim: scan
+    done: score 0 (crit 2, high 31)
+  → labring-FastGPT: clone
+  → labring-FastGPT: scan
+    done: score 36 (crit 1, high 6)
+  → Budibase-budibase: clone
+  → Budibase-budibase: scan
+    done: score 15 (crit 2, high 14)
+  → yamadashy-repomix: clone
+  → yamadashy-repomix: scan
+    scan failed (1): npm error code ETARGET
+npm error notarget No matching version found for verglos@1.5.2 with a date before 7/23/2026, 3:09:42 AM.
+npm error notarget In most cases you or one of your dependencies are req
+  → mastra-ai-mastra: clone
+  → mastra-ai-mastra: scan
+    done: score 0 (crit 59, high 41)
+  → decolua-9router: clone
+  → decolua-9router: scan
+    done: score 14 (crit 66, high 6)
+  → kriasoft-react-starter-kit: clone
+  → kriasoft-react-starter-kit: scan
+    done: score 100 (crit 0, high 0)
+  → nocobase-nocobase: clone
+  → nocobase-nocobase: scan
+    done: score 19 (crit 49, high 5)
+  → coze-dev-coze-studio: clone
+  → coze-dev-coze-studio: scan
+    done: score 75 (crit 0, high 6)
+  → activepieces-activepieces: clone
+  → activepieces-activepieces: scan
+    done: score 0 (crit 18, high 83)
+  → refinedev-refine: clone
+  → refinedev-refine: scan
+    done: score 88 (crit 0, high 1)
+  → medusajs-medusa: clone
+  → medusajs-medusa: scan
+    done: score 21 (crit 6, high 1)
+  → wasp-lang-open-saas: clone
+  → wasp-lang-open-saas: scan
+    scan failed (1): npm error code ETARGET
+npm error notarget No matching version found for verglos@1.5.2 with a date before 7/23/2026, 3:14:07 AM.
+npm error notarget In most cases you or one of your dependencies are req
+  → NanmiCoder-cc-haha: clone
+  → NanmiCoder-cc-haha: scan
+    done: score 26 (crit 3, high 3)
+  → mksglu-context-mode: clone
+  → mksglu-context-mode: scan
+    done: score 55 (crit 12, high 0)
+  → ixartz-Next-js-Boilerplate: clone
+  → ixartz-Next-js-Boilerplate: scan
+    done: score 89 (crit 0, high 1)
+  → illacloud-illa-builder: clone
+  → illacloud-illa-builder: scan
+    done: score 100 (crit 0, high 0)
+  → can1357-oh-my-pi: clone
+  → can1357-oh-my-pi: scan
+    done: score 8 (crit 17, high 3)
+  → zilliztech-claude-context: clone
+  → zilliztech-claude-context: scan
+    done: score 70 (crit 1, high 0)
+  → MemTensor-MemOS: clone
+  → MemTensor-MemOS: scan
+    done: score 66 (crit 0, high 3)
+  → VoltAgent-voltagent: clone
+  → VoltAgent-voltagent: scan
+    done: score 0 (crit 6, high 22)
+  → cobusgreyling-loop-engineering: clone
+  → cobusgreyling-loop-engineering: scan
+    done: score 98 (crit 0, high 0)
+  → superset-sh-superset: clone
+  → superset-sh-superset: scan
+    done: score 8 (crit 3, high 16)
+  → idurar-idurar-erp-crm: clone
+  → idurar-idurar-erp-crm: scan
+    done: score 78 (crit 1, high 1)
+  → apitable-apitable: clone
+  → apitable-apitable: scan
+    done: score 50 (crit 1, high 3)
+  → coaidev-coai: clone
+  → coaidev-coai: scan
+    done: score 98 (crit 0, high 0)
+  → ComposioHQ-composio: clone
+  → ComposioHQ-composio: scan
+    done: score 43 (crit 4, high 0)
+  → webiny-webiny-js: clone
+  → webiny-webiny-js: scan
+    done: score 21 (crit 1, high 14)
+  → idosal-git-mcp: clone
+  → idosal-git-mcp: scan
+    done: score 86 (crit 0, high 2)
+  → ixartz-SaaS-Boilerplate: clone
+  → ixartz-SaaS-Boilerplate: scan
+    done: score 98 (crit 0, high 0)
+  → Blazity-next-enterprise: clone
+  → Blazity-next-enterprise: scan
+    done: score 98 (crit 0, high 0)
+  → vercel-next-forge: clone
+  → vercel-next-forge: scan
+    done: score 92 (crit 0, high 0)
+  → Kiranism-next-shadcn-dashboard-starter: clone
+  → Kiranism-next-shadcn-dashboard-starter: scan
+    done: score 94 (crit 0, high 0)
+  → hexclave-hexclave: clone
+  → hexclave-hexclave: scan
+    done: score 0 (crit 4, high 22)
+  → grab-cursor-talk-to-figma-mcp: clone
+  → grab-cursor-talk-to-figma-mcp: scan
+    done: score 81 (crit 0, high 3)
+  → jnMetaCode-superpowers-zh: clone
+  → jnMetaCode-superpowers-zh: scan
+    done: score 100 (crit 0, high 0)
+  → open-multi-agent-open-multi-agent: clone
+  → open-multi-agent-open-multi-agent: scan
+    done: score 85 (crit 0, high 0)
+  → lobehub-lobehub: clone
+  → lobehub-lobehub: scan
+    done: score 0 (crit 14, high 19)
+  → thecodingmachine-react-native-boilerplate: clone
+  → thecodingmachine-react-native-boilerplate: scan
+    done: score 94 (crit 0, high 1)
+  → e2b-dev-fragments: clone
+  → e2b-dev-fragments: scan
+    done: score 95 (crit 0, high 0)
+  → netease-youdao-LobsterAI: clone
+  → netease-youdao-LobsterAI: scan
+    done: score 55 (crit 1, high 2)
+  → dtyq-magic: clone
+  → dtyq-magic: scan
+    done: score 26 (crit 4, high 2)
+  → 53AI-53AIHub: clone
+  → 53AI-53AIHub: scan
+    done: score 0 (crit 4, high 37)
+  → boxyhq-saas-starter-kit: clone
+  → boxyhq-saas-starter-kit: scan
+    done: score 89 (crit 0, high 1)
+  → obytes-react-native-template-obytes: clone
+  → obytes-react-native-template-obytes: scan
+    done: score 100 (crit 0, high 0)
+  → composio-community-open-claude-cowork: clone
+  → composio-community-open-claude-cowork: scan
+    done: score 87 (crit 0, high 2)
+  → Agenta-AI-agenta: clone
+  → Agenta-AI-agenta: scan
+    done: score 41 (crit 6, high 0)
+  → code-yeongyu-oh-my-openagent: clone
+  → code-yeongyu-oh-my-openagent: scan
+    done: score 28 (crit 1, high 7)
+  → archestra-ai-archestra: clone
+  → archestra-ai-archestra: scan
+    done: score 0 (crit 5, high 69)
+  → vercel-ai: clone
+  → vercel-ai: scan
+    done: score 68 (crit 2, high 0)
+  → DietrichGebert-ponytail: clone
+  → DietrichGebert-ponytail: scan
+    done: score 100 (crit 0, high 0)
+  → oomol-lab-open-connector: clone
+  → oomol-lab-open-connector: scan
+    done: score 98 (crit 0, high 0)
+  → Egonex-AI-Understand-Anything: clone
+  → Egonex-AI-Understand-Anything: scan
+    done: score 100 (crit 0, high 0)
+  → lowdefy-lowdefy: clone
+  → lowdefy-lowdefy: scan
+    done: score 87 (crit 0, high 0)
+  → NateBJones-Projects-OB1: clone
+  → NateBJones-Projects-OB1: scan
+    done: score 46 (crit 0, high 14)
+  → AprilNEA-AChat: clone
+  → AprilNEA-AChat: scan
+    done: score 100 (crit 0, high 0)
+  → codexu-note-gen: clone
+  → codexu-note-gen: scan
+    done: score 68 (crit 0, high 7)
+  → jsynowiec-node-typescript-boilerplate: clone
+  → jsynowiec-node-typescript-boilerplate: scan
+    done: score 100 (crit 0, high 0)
+  → juicycleff-ultimate-backend: clone
+  → juicycleff-ultimate-backend: scan
+    done: score 100 (crit 0, high 0)
+  → didi-xiaoju-survey: clone
+  → didi-xiaoju-survey: scan
+    done: score 100 (crit 0, high 0)
+  → kite-org-kite: clone
+  → kite-org-kite: scan
+    done: score 100 (crit 0, high 0)
+  → triggerdotdev-trigger.dev: clone
+  → triggerdotdev-trigger.dev: scan
+    done: score 35 (crit 1, high 5)
+  → builderz-labs-mission-control: clone
+  → builderz-labs-mission-control: scan
+    done: score 95 (crit 0, high 0)
+  → payloadcms-payload: clone
+  → payloadcms-payload: scan
+    done: score 42 (crit 1, high 3)
+  → directus-directus: clone
+  → directus-directus: scan
+    done: score 89 (crit 0, high 1)
+  → zce-caz: clone
+  → zce-caz: scan
+    done: score 100 (crit 0, high 0)
+  → TailAdmin-free-nextjs-admin-dashboard: clone
+  → TailAdmin-free-nextjs-admin-dashboard: scan
+    done: score 98 (crit 0, high 0)
+  → ant-design-ant-design-pro: clone
+  → ant-design-ant-design-pro: scan
+    done: score 100 (crit 0, high 0)
+  → stablyai-orca: clone
+  → stablyai-orca: scan
+    done: score 0 (crit 8, high 16)
+  → reactioncommerce-reaction: clone
+  → reactioncommerce-reaction: scan
+    done: score 94 (crit 0, high 1)
+  → aimeos-aimeos: clone
+  → aimeos-aimeos: scan
+    done: score 100 (crit 0, high 0)
+  → getmaxun-maxun: clone
+  → getmaxun-maxun: scan
+    done: score 0 (crit 6, high 29)
+  → CaviraOSS-OpenMemory: clone
+  → CaviraOSS-OpenMemory: scan
+    done: score 38 (crit 1, high 21)
+  → bytebase-dbhub: clone
+  → bytebase-dbhub: scan
+    done: score 70 (crit 2, high 0)
+  → promptfoo-promptfoo: clone
+  → promptfoo-promptfoo: scan
+    done: score 0 (crit 10, high 30)
+  → themeselection-materio-mui-nextjs-admin-template-free: clone
+  → themeselection-materio-mui-nextjs-admin-template-free: scan
+    done: score 96 (crit 0, high 0)
+  → superglue-ai-superglue: clone
+  → superglue-ai-superglue: scan
+    done: score 0 (crit 10, high 9)
+  → tractorjuice-arc-kit: clone
+  → tractorjuice-arc-kit: scan
+    done: score 99 (crit 0, high 0)
+  → jnMetaCode-agency-orchestrator: clone
+  → jnMetaCode-agency-orchestrator: scan
+    done: score 58 (crit 0, high 6)
+  → appwrite-appwrite: clone
+  → appwrite-appwrite: scan
+    done: score 100 (crit 0, high 0)
+  → graphile-starter: clone
+  → graphile-starter: scan
+    done: score 66 (crit 2, high 0)
+  → BearStudio-start-ui-web: clone
+  → BearStudio-start-ui-web: scan
+    done: score 100 (crit 0, high 0)
+  → Blazity-next-saas-starter: clone
+  → Blazity-next-saas-starter: scan
+    done: score 98 (crit 0, high 0)
+  → michaelshimeles-nextjs-starter-kit: clone
+  → michaelshimeles-nextjs-starter-kit: scan
+    done: score 98 (crit 0, high 0)
+  → ArnasDon-wacrm: clone
+  → ArnasDon-wacrm: scan
+    done: score 100 (crit 0, high 0)
+  → mui-toolpad: clone
+  → mui-toolpad: scan
+    done: score 81 (crit 1, high 0)
+  → liyupi-ai-guide: clone
+  → liyupi-ai-guide: scan
+    done: score 98 (crit 0, high 0)
+  → mcp-use-mcp-use: clone
+  → mcp-use-mcp-use: scan
+    done: score 25 (crit 1, high 16)
+  → 777genius-agent-teams-ai: clone
+  → 777genius-agent-teams-ai: scan
+    done: score 56 (crit 12, high 0)
+  → stripe-ai: clone
+  → stripe-ai: scan
+    done: score 100 (crit 0, high 0)
+  → InsForge-InsForge: clone
+  → InsForge-InsForge: scan
+    done: score 25 (crit 2, high 9)
+  → saas-js-saas-ui: clone
+  → saas-js-saas-ui: scan
+    done: score 84 (crit 0, high 1)
+  → steedos-steedos-platform: clone
+  → steedos-steedos-platform: scan
+    done: score 0 (crit 0, high 93)
+  → zeon-studio-hugoplate: clone
+  → zeon-studio-hugoplate: scan
+    done: score 100 (crit 0, high 0)
+  → open-mercato-open-mercato: clone
+  → open-mercato-open-mercato: scan
+    done: score 11 (crit 3, high 32)
+  → teableio-teable: clone
+  → teableio-teable: scan
+    done: score 50 (crit 1, high 91)
+  → codeaholicguy-ai-devkit: clone
+  → codeaholicguy-ai-devkit: scan
+    done: score 98 (crit 0, high 0)
+  → nextify-limited-saasfly: clone
+  → nextify-limited-saasfly: scan
+    done: score 95 (crit 0, high 0)
+  → rowboatlabs-rowboat: clone
+  → rowboatlabs-rowboat: scan
+    done: score 47 (crit 0, high 5)
+  → thedotmack-claude-mem: clone
+  → thedotmack-claude-mem: scan
+    done: score 0 (crit 5, high 16)
+  → automatisch-automatisch: clone
+  → automatisch-automatisch: scan
+    done: score 82 (crit 0, high 3)
+  → lissy93-domain-locker: clone
+  → lissy93-domain-locker: scan
+    done: score 94 (crit 0, high 1)
+  → alan345-AI-Fullstack-SaaS-Boilerplate: clone
+  → alan345-AI-Fullstack-SaaS-Boilerplate: scan
+    done: score 100 (crit 0, high 0)
+  → nextacular-nextacular: clone
+  → nextacular-nextacular: scan
+    done: score 73 (crit 0, high 5)
+  → chibat-chrome-extension-typescript-starter: clone
+  → chibat-chrome-extension-typescript-starter: scan
+    done: score 100 (crit 0, high 0)
+  → EtienneLescot-n8n-as-code: clone
+  → EtienneLescot-n8n-as-code: scan
+    done: score 39 (crit 9, high 1)
+  → inkeep-agents: clone
+  → inkeep-agents: scan
+    done: score 13 (crit 2, high 8)
+  → Prismer-AI-PrismerCloud: clone
+  → Prismer-AI-PrismerCloud: scan
+    done: score 0 (crit 6, high 15)
+  → langfuse-langfuse: clone
+  → langfuse-langfuse: scan
+    done: score 55 (crit 0, high 6)
+  → mugnavo-tanstarter: clone
+  → mugnavo-tanstarter: scan
+    done: score 100 (crit 0, high 0)
+  → ixartz-Next-JS-Landing-Page-Starter-Template: clone
+  → ixartz-Next-JS-Landing-Page-Starter-Template: scan
+    done: score 69 (crit 0, high 6)
+  → ReactJSResources-react-webpack-babel: clone
+  → ReactJSResources-react-webpack-babel: scan
+    done: score 100 (crit 0, high 0)
+  → onlook-dev-onlook: clone
+  → onlook-dev-onlook: scan
+    done: score 58 (crit 0, high 4)
+  → TanStack-ai: clone
+  → TanStack-ai: scan
+    done: score 66 (crit 0, high 8)
+  → caliber-ai-org-ai-setup: clone
+  → caliber-ai-org-ai-setup: scan
+    done: score 86 (crit 0, high 0)
+  → skalesapp-skales: clone
+  → skalesapp-skales: scan
+    done: score 6 (crit 2, high 15)
+  → tegojs-tego: clone
+  → tegojs-tego: scan
+    done: score 54 (crit 3, high 1)
+  → keinsaasforever-better-chatbot: clone
+  → keinsaasforever-better-chatbot: scan
+    done: score 63 (crit 1, high 2)
+  → TencentCloudBase-CloudBase-AI-Toolkit: clone
+  → TencentCloudBase-CloudBase-AI-Toolkit: scan
+    done: score 36 (crit 4, high 4)
+  → ThinkInAIXYZ-deepchat: clone
+  → ThinkInAIXYZ-deepchat: scan
+    done: score 8 (crit 4, high 5)
+  → lmnr-ai-lmnr: clone
+  → lmnr-ai-lmnr: scan
+    done: score 86 (crit 0, high 2)
+  → hexabot-ai-Hexabot: clone
+  → hexabot-ai-Hexabot: scan
+    done: score 33 (crit 2, high 7)
+  → Team-Commonly-commonly: clone
+  → Team-Commonly-commonly: scan
+    done: score 0 (crit 1, high 86)
+  → koala73-worldmonitor: clone
+  → koala73-worldmonitor: scan
+    done: score 0 (crit 19, high 28)
+  → CopilotKit-CopilotKit: clone
+  → CopilotKit-CopilotKit: scan
+    done: score 55 (crit 0, high 31)
+  → nanobrowser-nanobrowser: clone
+  → nanobrowser-nanobrowser: scan
+    done: score 99 (crit 0, high 0)
+  → devtodollars-mvp-boilerplate: clone
+  → devtodollars-mvp-boilerplate: scan
+    done: score 92 (crit 0, high 1)
+  → shadcnstore-shadcn-dashboard-landing-template: clone
+  → shadcnstore-shadcn-dashboard-landing-template: scan
+    done: score 98 (crit 0, high 0)
+  → openops-cloud-openops: clone
+  → openops-cloud-openops: scan
+    done: score 45 (crit 1, high 17)
+  → rohitg00-agentmemory: clone
+  → rohitg00-agentmemory: scan
+    done: score 81 (crit 1, high 0)
+  → agentset-ai-agentset: clone
+  → agentset-ai-agentset: scan
+    done: score 90 (crit 0, high 0)
+  → withkynam-vibecode-pro-max-kit: clone
+  → withkynam-vibecode-pro-max-kit: scan
+    done: score 82 (crit 0, high 3)
+  → logto-io-logto: clone
+  → logto-io-logto: scan
+    done: score 22 (crit 4, high 5)
+  → creativetimofficial-ui: clone
+  → creativetimofficial-ui: scan
+    done: score 57 (crit 1, high 9)
+  → NextJSTemplates-startup-nextjs: clone
+  → NextJSTemplates-startup-nextjs: scan
+    done: score 98 (crit 0, high 0)
+  → saasforge-open-source-saas-boilerpate: clone
+  → saasforge-open-source-saas-boilerpate: scan
+    done: score 98 (crit 0, high 0)
+  → GreatStackDev-gocart: clone
+  → GreatStackDev-gocart: scan
+    done: score 98 (crit 0, high 0)
+  → Deodat-Lawson-LaunchStack: clone
+  → Deodat-Lawson-LaunchStack: scan
+    done: score 95 (crit 0, high 0)
+  → apify-apify-mcp-server: clone
+  → apify-apify-mcp-server: scan
+    scan failed (1): npm error code EBADDEVENGINES
+npm error EBADDEVENGINES The developer of this package has specified the following through devEngines
+npm error EBADDEVENGINES Invalid devEngines.packageManager
+npm error
+  → guanyang-open-agent-hub: clone
+  → guanyang-open-agent-hub: scan
+    done: score 76 (crit 0, high 4)
+  → atlassian-atlassian-mcp-server: clone
+  → atlassian-atlassian-mcp-server: scan
+    done: score 100 (crit 0, high 0)
+  → nuwax-ai-nuwax: clone
+  → nuwax-ai-nuwax: scan
+    done: score 73 (crit 1, high 0)
+  → alibaba-page-agent: clone
+  → alibaba-page-agent: scan
+    done: score 90 (crit 0, high 1)
+  → apptension-saas-boilerplate: clone
+  → apptension-saas-boilerplate: scan
+    done: score 50 (crit 3, high 0)
+  → agustinusnathaniel-nextarter-chakra: clone
+  → agustinusnathaniel-nextarter-chakra: scan
+    scan failed (1): npm warn Unknown project config "enable-pre-post-scripts". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+npm error code EBADDEVENGINES
+npm
+  → imbhargav5-nextbase-nextjs-supabase-starter: clone
+  → imbhargav5-nextbase-nextjs-supabase-starter: scan
+    done: score 98 (crit 0, high 0)
+  → guasam-electron-react-app: clone
+  → guasam-electron-react-app: scan
+    done: score 73 (crit 0, high 8)
+  → ecronix-react-most-wanted: clone
+  → ecronix-react-most-wanted: scan
+    done: score 1 (crit 4, high 12)
+  → KolbySisk-next-supabase-stripe-starter: clone
+  → KolbySisk-next-supabase-stripe-starter: scan
+    done: score 98 (crit 0, high 0)
+  → weijunext-nextjs-starter: clone
+  → weijunext-nextjs-starter: scan
+    done: score 98 (crit 0, high 0)
+  → PawanOsman-OpenCursor: clone
+  → PawanOsman-OpenCursor: scan
+    done: score 99 (crit 0, high 0)
+  → chatboxai-chatbox: clone
+  → chatboxai-chatbox: scan
+    done: score 41 (crit 1, high 10)
+  → revokslab-ShipFree: clone
+  → revokslab-ShipFree: scan
+    done: score 96 (crit 0, high 0)
+  → Marve10s-Better-Fullstack: clone
+  → Marve10s-Better-Fullstack: scan
+    done: score 17 (crit 4, high 12)
+  → Blazity-enterprise-commerce: clone
+  → Blazity-enterprise-commerce: scan
+    done: score 94 (crit 0, high 0)
+  → arhamkhnz-next-shadcn-admin-dashboard: clone
+  → arhamkhnz-next-shadcn-admin-dashboard: scan
+    done: score 98 (crit 0, high 0)
+  → moinulmoin-chadnext: clone
+  → moinulmoin-chadnext: scan
+    done: score 98 (crit 0, high 0)
+  → buildship-ai-rowy: clone
+  → buildship-ai-rowy: scan
+    done: score 94 (crit 0, high 1)
+  → nextjs-saas-starter: clone
+  → nextjs-saas-starter: scan
+    done: score 96 (crit 0, high 0)
+  → andrechristikan-ack-nestjs-boilerplate: clone
+  → andrechristikan-ack-nestjs-boilerplate: scan
+    done: score 92 (crit 0, high 0)
+  → firecrawl-open-scouts: clone
+  → firecrawl-open-scouts: scan
+    done: score 49 (crit 2, high 0)
+  → stravu-crystal: clone
+  → stravu-crystal: scan
+    done: score 52 (crit 1, high 4)
+  → apify-mcpc: clone
+  → apify-mcpc: scan
+    done: score 100 (crit 0, high 0)
+  → nexu-io-codex-slides: clone
+  → nexu-io-codex-slides: scan
+    done: score 58 (crit 3, high 0)
+  → google-gemini-gemini-cli: clone
+  → google-gemini-gemini-cli: scan
+    done: score 80 (crit 0, high 0)
+  → NextJSTemplates-play-nextjs: clone
+  → NextJSTemplates-play-nextjs: scan
+    done: score 65 (crit 1, high 2)
+  → belastrittmatter-Framely: clone
+  → belastrittmatter-Framely: scan
+    done: score 98 (crit 0, high 0)
+  → EKKOLearnAI-hermes-studio: clone
+  → EKKOLearnAI-hermes-studio: scan
+    done: score 39 (crit 4, high 3)
+  → holaboss-ai-holaOS: clone
+  → holaboss-ai-holaOS: scan
+    done: score 30 (crit 2, high 4)
+  → Kaelio-ktx: clone
+  → Kaelio-ktx: scan
+    done: score 68 (crit 2, high 0)
+  → bgauryy-octocode: clone
+  → bgauryy-octocode: scan
+    done: score 49 (crit 2, high 1)
+  → ihor-sokoliuk-mcp-searxng: clone
+  → ihor-sokoliuk-mcp-searxng: scan
+    done: score 100 (crit 0, high 0)
+  → SixHq-Overture: clone
+  → SixHq-Overture: scan
+    done: score 69 (crit 0, high 3)
+  → addyosmani-agent-skills: clone
+  → addyosmani-agent-skills: scan
+    done: score 100 (crit 0, high 0)
+  → botpress-botpress: clone
+  → botpress-botpress: scan
+    done: score 26 (crit 6, high 5)
+  → velobase-velobase-harness: clone
+  → velobase-velobase-harness: scan
+    done: score 78 (crit 0, high 1)
+  → akd-io-create-next-stack: clone
+  → akd-io-create-next-stack: scan
+    done: score 98 (crit 0, high 0)
+  → dappros-ethora: clone
+  → dappros-ethora: scan
+    done: score 100 (crit 0, high 0)
+  → makafeli-n8n-workflow-builder: clone
+  → makafeli-n8n-workflow-builder: scan
+    done: score 100 (crit 0, high 0)
+  → giselles-ai-giselle: clone
+  → giselles-ai-giselle: scan
+    done: score 94 (crit 0, high 0)
+  → breaking-brake-cc-wf-studio: clone
+  → breaking-brake-cc-wf-studio: scan
+    done: score 45 (crit 2, high 3)
+  → kaitranntt-ccs: clone
+  → kaitranntt-ccs: scan
+    done: score 0 (crit 3, high 14)
+  → GLips-Figma-Context-MCP: clone
+  → GLips-Figma-Context-MCP: scan
+    done: score 88 (crit 0, high 1)
+  → nexu-io-nexu: clone
+  → nexu-io-nexu: scan
+    done: score 83 (crit 1, high 0)
+  → GreenSheep01201-claw-empire: clone
+  → GreenSheep01201-claw-empire: scan
+    done: score 20 (crit 1, high 33)
+  → firecrawl-firecrawl-mcp-server: clone
+  → firecrawl-firecrawl-mcp-server: scan
+    done: score 100 (crit 0, high 0)
+  → strapi-strapi: clone
+  → strapi-strapi: scan
+    done: score 72 (crit 0, high 4)
+  → roninoss-create-expo-stack: clone
+  → roninoss-create-expo-stack: scan
+    done: score 100 (crit 0, high 0)
+  → ixartz-Astro-boilerplate: clone
+  → ixartz-Astro-boilerplate: scan
+    done: score 96 (crit 0, high 0)
+  → wataru-maeda-react-native-boilerplate: clone
+  → wataru-maeda-react-native-boilerplate: scan
+    done: score 85 (crit 1, high 0)
+  → zeon-studio-nextplate: clone
+  → zeon-studio-nextplate: scan
+    done: score 98 (crit 0, high 0)
+  → steven-tey-precedent: clone
+  → steven-tey-precedent: scan
+    done: score 98 (crit 0, high 0)
+  → NextAdminHQ-nextjs-admin-dashboard: clone
+  → NextAdminHQ-nextjs-admin-dashboard: scan
+    done: score 96 (crit 0, high 0)
+  → nellavio-nellavio: clone
+  → nellavio-nellavio: scan
+    done: score 99 (crit 0, high 0)
+  → devias-io-material-kit-react: clone
+  → devias-io-material-kit-react: scan
+    done: score 98 (crit 0, high 0)
+  → lannodev-angular-tailwind: clone
+  → lannodev-angular-tailwind: scan
+    done: score 100 (crit 0, high 0)
+  → Davronov-Alimardon-canva-clone: clone
+  → Davronov-Alimardon-canva-clone: scan
+    done: score 71 (crit 1, high 1)
+  → ATH-MaaS-ComfyUI-Copilot: clone
+  → ATH-MaaS-ComfyUI-Copilot: scan
+    done: score 45 (crit 2, high 4)
+  → winfunc-opcode: clone
+  → winfunc-opcode: scan
+    done: score 91 (crit 0, high 1)
+  → strukto-ai-mirage: clone
+  → strukto-ai-mirage: scan
+    done: score 25 (crit 16, high 3)
+  → MicrosoftDocs-mcp: clone
+  → MicrosoftDocs-mcp: scan
+    done: score 100 (crit 0, high 0)
+  → FellouAI-eko: clone
+  → FellouAI-eko: scan
+    done: score 100 (crit 0, high 0)
+  → async-labs-saas: clone
+  → async-labs-saas: scan
+    done: score 45 (crit 0, high 15)
+  → marcoaapfortes-Mantic.sh: clone
+  → marcoaapfortes-Mantic.sh: scan
+    done: score 74 (crit 0, high 3)
+  → kriasoft-graphql-starter-kit: clone
+  → kriasoft-graphql-starter-kit: scan
+    done: score 100 (crit 0, high 0)
+  → suren-atoyan-react-pwa: clone
+  → suren-atoyan-react-pwa: scan
+    done: score 98 (crit 0, high 0)
+  → ixartz-Next-js-Blog-Boilerplate: clone
+  → ixartz-Next-js-Blog-Boilerplate: scan
+    done: score 94 (crit 0, high 0)
+  → proma-ai-Proma: clone
+  → proma-ai-Proma: scan
+    done: score 95 (crit 0, high 0)
+  → alpic-ai-skybridge: clone
+  → alpic-ai-skybridge: scan
+    done: score 80 (crit 0, high 3)
+  → xynehq-xyne: clone
+  → xynehq-xyne: scan
+    done: score 30 (crit 3, high 2)
+  → Javis603-token-monitor: clone
+  → Javis603-token-monitor: scan
+    done: score 72 (crit 0, high 4)
+  → alifarooq9-launchmvpfast: clone
+  → alifarooq9-launchmvpfast: scan
+    done: score 75 (crit 0, high 0)
+  → SmythOS-sre: clone
+  → SmythOS-sre: scan
+    done: score 55 (crit 0, high 5)
+  → TabularisDB-tabularis: clone
+  → TabularisDB-tabularis: scan
+    done: score 97 (crit 0, high 0)
+  → OpenHands-OpenHands: clone
+  → OpenHands-OpenHands: scan
+    done: score 94 (crit 0, high 0)
+  → darkroomengineering-satus: clone
+  → darkroomengineering-satus: scan
+    done: score 83 (crit 1, high 0)
+  → expo-starter-expo-local-first-template: clone
+  → expo-starter-expo-local-first-template: scan
+    done: score 85 (crit 1, high 0)
+  → flaviuse-mern-authentication: clone
+  → flaviuse-mern-authentication: scan
+    done: score 100 (crit 0, high 0)
+  → mickasmt-next-saas-stripe-starter: clone
+  → mickasmt-next-saas-stripe-starter: scan
+    done: score 98 (crit 0, high 0)
+  → 2aronS-Duel-Agents: clone
+  → 2aronS-Duel-Agents: scan
+    done: score 94 (crit 0, high 0)
+  → hoangsonww-Claude-Code-Agent-Monitor: clone
+  → hoangsonww-Claude-Code-Agent-Monitor: scan
+    done: score 16 (crit 0, high 59)
+  → SethGammon-Citadel: clone
+  → SethGammon-Citadel: scan
+    done: score 92 (crit 0, high 0)
+  → Portkey-AI-gateway: clone
+  → Portkey-AI-gateway: scan
+    done: score 80 (crit 1, high 0)
+  → brocoders-nestjs-boilerplate: clone
+  → brocoders-nestjs-boilerplate: scan
+    done: score 100 (crit 0, high 0)
+  → agmmnn-tauri-ui: clone
+  → agmmnn-tauri-ui: scan
+    done: score 100 (crit 0, high 0)
+  → notrab-headless-dropshipping-starter: clone
+  → notrab-headless-dropshipping-starter: scan
+    done: score 86 (crit 0, high 1)
+  → reliverse-relivator: clone
+  → reliverse-relivator: scan
+    done: score 92 (crit 0, high 0)
+  → themefisher-bigspring-light-nextjs: clone
+  → themefisher-bigspring-light-nextjs: scan
+    done: score 98 (crit 0, high 0)
+  → Taskosaur-Taskosaur: clone
+  → Taskosaur-Taskosaur: scan
+    done: score 63 (crit 2, high 0)
+  → mnfst-manifest: clone
+  → mnfst-manifest: scan
+    done: score 73 (crit 1, high 2)
+  → BlockRunAI-ClawRouter: clone
+  → BlockRunAI-ClawRouter: scan
+    done: score 70 (crit 0, high 3)
+  → cyberagiinc-DevDocs: clone
+  → cyberagiinc-DevDocs: scan
+    done: score 94 (crit 0, high 0)
+  → PaperDebugger-paperdebugger: clone
+  → PaperDebugger-paperdebugger: scan
+    done: score 100 (crit 0, high 0)
+  → theopenco-llmgateway: clone
+  → theopenco-llmgateway: scan
+    done: score 32 (crit 2, high 3)
+  → makerkit-nextjs-saas-starter-kit-lite: clone
+  → makerkit-nextjs-saas-starter-kit-lite: scan
+    done: score 96 (crit 0, high 0)
+  → adminmart-Modernize-Nextjs-Free: clone
+  → adminmart-Modernize-Nextjs-Free: scan
+    done: score 98 (crit 0, high 0)
+  → pdovhomilja-nextcrm-app: clone
+  → pdovhomilja-nextcrm-app: scan
+    done: score 60 (crit 2, high 0)
+  → langwatch-langwatch: clone
+  → langwatch-langwatch: scan
+    done: score 0 (crit 1, high 42)
+  → StreetLamb-tribe: clone
+  → StreetLamb-tribe: scan
+    done: score 100 (crit 0, high 0)
+  → wrtnlabs-agentica: clone
+  → wrtnlabs-agentica: scan
+    done: score 98 (crit 0, high 0)
+  → Orkas-AI-Orkas: clone
+  → Orkas-AI-Orkas: scan
+    done: score 62 (crit 0, high 4)
+  → iOfficeAI-AionUi: clone
+    clone failed (124): Cloning into '/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos/scan-campaign-workspace/iOfficeAI-AionUi'...
+  → waooAI-waoowaoo: clone
+  → waooAI-waoowaoo: scan
+    done: score 64 (crit 0, high 3)
+  → nocode-js-nocode-platform-boilerplate: clone
+  → nocode-js-nocode-platform-boilerplate: scan
+    done: score 98 (crit 0, high 0)
+  → hadrysm-nextjs-boilerplate: clone
+  → hadrysm-nextjs-boilerplate: scan
+    done: score 98 (crit 0, high 0)
+  → UfoMiao-zcf: clone
+  → UfoMiao-zcf: scan
+    done: score 85 (crit 0, high 0)
+  → giancarloerra-SocratiCode: clone
+  → giancarloerra-SocratiCode: scan
+    done: score 100 (crit 0, high 0)
+  → tech-leads-club-agent-skills: clone
+  → tech-leads-club-agent-skills: scan
+    done: score 84 (crit 0, high 1)
+  → zenstackhq-zenstack: clone
+  → zenstackhq-zenstack: scan
+    done: score 81 (crit 1, high 0)
+  → abhijithvijayan-web-extension-starter: clone
+  → abhijithvijayan-web-extension-starter: scan
+    done: score 100 (crit 0, high 0)
+  → ConduitPlatform-Conduit: clone
+  → ConduitPlatform-Conduit: scan
+    done: score 48 (crit 1, high 28)
+  → MCPJam-inspector: clone
+  → MCPJam-inspector: scan
+    done: score 13 (crit 3, high 22)
+  → dwgx-WindsurfAPI: clone
+  → dwgx-WindsurfAPI: scan
+    done: score 39 (crit 1, high 9)
+  → thesongzhu-Friday: clone
+  → thesongzhu-Friday: scan
+    done: score 76 (crit 0, high 1)
+  → sahibzada-allahyar-YC-Killer: clone
+  → sahibzada-allahyar-YC-Killer: scan
+    done: score 86 (crit 0, high 2)
+  → arabold-docs-mcp-server: clone
+  → arabold-docs-mcp-server: scan
+    done: score 88 (crit 0, high 2)
+  → AI-QL-tuui: clone
+  → AI-QL-tuui: scan
+    done: score 92 (crit 0, high 0)
+  → coreyhaines31-marketingskills: clone
+  → coreyhaines31-marketingskills: scan
+    done: score 100 (crit 0, high 0)
+  → developit-preact-boilerplate: clone
+  → developit-preact-boilerplate: scan
+    done: score 100 (crit 0, high 0)
+  → dashpresshq-dashpress: clone
+  → dashpresshq-dashpress: scan
+    done: score 90 (crit 0, high 1)
+  → brightdata-brightdata-mcp: clone
+  → brightdata-brightdata-mcp: scan
+    done: score 47 (crit 0, high 16)
+  → mattzcarey-shippie: clone
+  → mattzcarey-shippie: scan
+    done: score 88 (crit 0, high 2)
+  → hesamsheikh-octogent: clone
+  → hesamsheikh-octogent: scan
+    done: score 98 (crit 0, high 0)
+  → ntegrals-10x: clone
+  → ntegrals-10x: scan
+    done: score 98 (crit 0, high 0)
+  → davepoon-buildwithclaude: clone
+  → davepoon-buildwithclaude: scan
+    done: score 96 (crit 0, high 0)
+  → swarmclawai-swarmvault: clone
+  → swarmclawai-swarmvault: scan
+    done: score 42 (crit 3, high 3)
+  → Yeachan-Heo-oh-my-claudecode: clone
+  → Yeachan-Heo-oh-my-claudecode: scan
+    done: score 37 (crit 10, high 3)
+  → guocaoyi-create-chrome-ext: clone
+  → guocaoyi-create-chrome-ext: scan
+    done: score 100 (crit 0, high 0)
+  → pdsuwwz-nextjs-nextra-starter: clone
+  → pdsuwwz-nextjs-nextra-starter: scan
+    done: score 98 (crit 0, high 0)
+  → 1186258278-OpenClawChineseTranslation: clone
+  → 1186258278-OpenClawChineseTranslation: scan
+    done: score 95 (crit 0, high 0)
+  → cloudflare-agents-starter: clone
+  → cloudflare-agents-starter: scan
+    done: score 100 (crit 0, high 0)
+  → enricoros-big-AGI: clone
+  → enricoros-big-AGI: scan
+    done: score 64 (crit 0, high 3)
+  → ghostwright-phantom: clone
+  → ghostwright-phantom: scan
+    done: score 16 (crit 3, high 4)
+  → Houseofmvps-codesight: clone
+  → Houseofmvps-codesight: scan
+    done: score 98 (crit 0, high 0)
+  → AtomicBot-ai-Atomic-Chat: clone
+  → AtomicBot-ai-Atomic-Chat: scan
+    done: score 67 (crit 1, high 2)
+  → heygen-com-hyperframes: clone
+  → heygen-com-hyperframes: scan
+    done: score 31 (crit 0, high 9)
+  → adrianhajdin-ecommerce: clone
+  → adrianhajdin-ecommerce: scan
+    done: score 98 (crit 0, high 0)
+  → baidu-amis: clone
+  → baidu-amis: scan
+    done: score 85 (crit 0, high 2)
+  → vas3k-TaxHacker: clone
+  → vas3k-TaxHacker: scan
+    done: score 83 (crit 1, high 0)
+  → Helicone-helicone: clone
+  → Helicone-helicone: scan
+    done: score 39 (crit 1, high 11)
+  → MoizIbnYousaf-Ai-Agent-Skills: clone
+  → MoizIbnYousaf-Ai-Agent-Skills: scan
+    done: score 84 (crit 0, high 2)
+  → ZhangJinHaHaHa-AgentLens: clone
+  → ZhangJinHaHaHa-AgentLens: scan
+    done: score 100 (crit 0, high 0)
+  → lmsqueezy-nextjs-billing: clone
+  → lmsqueezy-nextjs-billing: scan
+    done: score 98 (crit 0, high 0)
+  → xu-xiang-everything-claude-code-zh: clone
+  → xu-xiang-everything-claude-code-zh: scan
+    done: score 30 (crit 1, high 6)
+
+Done in 78.9 min.
+  CSV: /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos/scan-campaign-reports-icp300-tsjs-v1.5.2/_summary.csv
+  MD:  /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos/scan-campaign-reports-icp300-tsjs-v1.5.2/_summary.md
