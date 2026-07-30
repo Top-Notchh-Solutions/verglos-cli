@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verglos Security Report — Score 50</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0b; color: #e4e4e7; line-height: 1.6; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; padding: 2rem 0; border-bottom: 1px solid #27272a; margin-bottom: 2rem; }
+    .logo { font-family: monospace; font-size: 0.75rem; letter-spacing: 0.2em; color: #E85D4C; text-transform: uppercase; }
+    h1 { font-size: 1.5rem; margin: 1rem 0 0.5rem; }
+    .risk { color: #9CA3AF; font-size: 0.875rem; }
+    .gauge { margin: 1.5rem 0; }
+    .counts { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
+    .count { text-align: center; }
+    .count-num { font-size: 1.5rem; font-weight: bold; font-family: monospace; }
+    .count-label { font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; }
+    .paywall { background: #18181b; border: 1px solid #E85D4C33; border-radius: 8px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+    .paywall h2 { color: #E85D4C; margin-bottom: 0.5rem; }
+    .paywall p { color: #9CA3AF; font-size: 0.875rem; }
+    .paywall code { background: #27272a; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    section { margin: 2rem 0; }
+    section h2 { font-size: 1.125rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #27272a; }
+    .section-kicker { color: #9CA3AF; font-size: 0.875rem; max-width: 680px; margin-top: -0.5rem; margin-bottom: 1rem; }
+    .domains-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin: 1rem 0 2rem; }
+    .domain-pill { display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.75rem; align-items: start; min-height: 4.25rem; padding: 0.875rem; border: 1px solid #27272a; border-radius: 8px; background: #111113; color: #e4e4e7; text-decoration: none; }
+    .domain-pill.active { border-color: #E85D4C55; background: #18181b; }
+    .domain-pill.clean { color: #a1a1aa; }
+    .domain-number { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 999px; background: #0a0a0b; border: 1px solid #27272a; color: #9CA3AF; font-family: monospace; font-size: 0.75rem; }
+    .domain-pill.active .domain-number { border-color: #E85D4C66; color: #E85D4C; }
+    .domain-pill strong { display: block; font-size: 0.875rem; line-height: 1.25rem; }
+    .domain-pill small { display: block; margin-top: 0.25rem; color: #71717a; font-size: 0.75rem; }
+    .domain-section { border: 1px solid #27272a; border-radius: 8px; background: #111113; padding: 1rem; }
+    .domain-section + .domain-section { margin-top: 1rem; }
+    .domain-header { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .domain-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .domain-heading h3 { font-size: 1.125rem; line-height: 1.35; }
+    .domain-summary { color: #9CA3AF; font-size: 0.875rem; margin-top: 0.25rem; }
+    .severity-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .severity-stack span { border: 1px solid; border-radius: 999px; padding: 0.125rem 0.5rem; font-size: 0.6875rem; font-family: monospace; text-transform: uppercase; }
+    .finding { background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .domain-section .finding:last-child { margin-bottom: 0; }
+    .finding-header { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .badge { font-size: 0.625rem; padding: 0.125rem 0.5rem; border-radius: 4px; color: white; font-weight: bold; letter-spacing: 0.05em; }
+    .detector { font-size: 0.625rem; padding: 0.125rem 0.5rem; border: 1px solid #3f3f46; border-radius: 4px; color: #a1a1aa; font-family: monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+    .title { font-weight: 600; }
+    .location { font-family: monospace; font-size: 0.75rem; color: #9CA3AF; }
+    .locked { font-size: 0.75rem; color: #E85D4C; }
+    .description { font-size: 0.875rem; color: #a1a1aa; }
+    .snippet { background: #0a0a0b; border: 1px solid #27272a; border-radius: 4px; padding: 0.75rem; margin: 0.5rem 0; font-family: monospace; font-size: 0.75rem; overflow-x: auto; }
+    .fix { background: #052e1620; border-left: 3px solid #22C55E; padding: 0.5rem 0.75rem; margin-top: 0.5rem; font-size: 0.875rem; }
+    .upgrade-hint { font-size: 0.75rem; color: #6B7280; margin-top: 0.5rem; font-style: italic; }
+    footer { text-align: center; padding: 2rem 0; color: #52525b; font-size: 0.75rem; border-top: 1px solid #27272a; margin-top: 2rem; }
+    .meta { font-size: 0.75rem; color: #52525b; margin-top: 0.5rem; }
+    .prov { padding: 1.25rem; border: 1px solid #E85D4C40; border-radius: 8px; background: linear-gradient(180deg, #18181b 0%, #111113 100%); }
+    .prov h2 { border-bottom: 0; padding-bottom: 0; }
+    .prov code { background: #27272a; padding: 0.125rem 0.375rem; border-radius: 4px; font-family: monospace; font-size: 0.75rem; }
+    .prov-bar { display: flex; width: 100%; height: 2.5rem; border-radius: 6px; overflow: hidden; border: 1px solid #27272a; margin: 1rem 0 0.75rem; background: #0a0a0b; }
+    .prov-bar-ai { background: #E85D4C; color: white; display: flex; align-items: center; justify-content: flex-start; padding: 0 0.75rem; min-width: 0; overflow: hidden; }
+    .prov-bar-human { background: #3B82F6; color: white; display: flex; align-items: center; justify-content: flex-end; padding: 0 0.75rem; min-width: 0; overflow: hidden; }
+    .prov-bar-label { font-family: monospace; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+    .prov-ratio { color: #fef2f2; font-size: 0.9375rem; margin-top: 0.75rem; }
+    .prov-ratio strong { color: #E85D4C; font-family: monospace; font-size: 1.125rem; padding: 0 0.125rem; }
+    .prov-ratio-muted { color: #71717a; font-style: italic; font-size: 0.8125rem; }
+    .prov-line { color: #d4d4d8; font-size: 0.875rem; margin-top: 0.25rem; }
+    .prov-num { color: #E85D4C; font-family: monospace; font-weight: 600; }
+    @media (max-width: 760px) {
+      .container { padding: 1rem; }
+      .counts { gap: 0.75rem; flex-wrap: wrap; }
+      .domains-grid { grid-template-columns: 1fr; }
+      .domain-header { grid-template-columns: 1fr; gap: 0.75rem; }
+      .domain-heading { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Verglos</div>
+      <h1>Security Report</h1>
+      <p class="risk">HIGH RISK</p>
+      <div class="gauge">
+    <svg width="200" height="200" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#1f1f23" stroke-width="12"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#F59E0B" stroke-width="12"
+        stroke-dasharray="502.6548245743669" stroke-dashoffset="251.32741228718345"
+        stroke-linecap="round" transform="rotate(-90 100 100)"/>
+      <text x="100" y="95" text-anchor="middle" fill="#F59E0B" font-size="36" font-weight="bold" font-family="monospace">50</text>
+      <text x="100" y="120" text-anchor="middle" fill="#9CA3AF" font-size="12" font-family="monospace">/ 100</text>
+    </svg>
+  </div>
+      <div class="counts">
+        <div class="count"><div class="count-num" style="color:#E85D4C">0</div><div class="count-label">Critical</div></div>
+        <div class="count"><div class="count-num" style="color:#F59E0B">6</div><div class="count-label">High</div></div>
+        <div class="count"><div class="count-num" style="color:#3B82F6">7</div><div class="count-label">Medium</div></div>
+        <div class="count"><div class="count-num" style="color:#6B7280">1</div><div class="count-label">Low</div></div>
+        <div class="count"><div class="count-num" style="color:#9CA3AF">70</div><div class="count-label">Info</div></div>
+      </div>
+      <p class="meta">Test file findings (review only): 21. Excluded from the default score.</p>
+      <p class="meta">Scanned 2026-07-29T21:27:56.074Z · 14042ms · unknown</p>
+    </header>
+
+    
+    <section class="prov">
+      <h2>AI-authorship</h2>
+      <p class="section-kicker">Verglos infers who wrote each file — the developer or an AI agent — and shows whether findings cluster on one side. Signals fired: agent-artifacts, agent-artifacts, code-shape (sampled 300/6630 files for speed). Confidence: <strong>low</strong>. Opt out with <code>verglos scan --no-provenance</code>.</p>
+      <div class="prov-bar">
+        <div class="prov-bar-ai" style="width:10.1%" title="AI-authored: 10.1%">
+          <span class="prov-bar-label">10.1% AI</span>
+        </div>
+        <div class="prov-bar-human" style="width:89.9%" title="Human-authored: 89.9%">
+          <span class="prov-bar-label">89.9% human</span>
+        </div>
+      </div>
+      <p class="prov-ratio prov-ratio-muted">Density ratio hidden — not enough LOC per bucket to print a defensible number (guardrail).</p>
+      
+    </section>
+  
+
+    <section>
+      <h2>10 Security Domains</h2>
+      <p class="section-kicker">Each finding below is grouped by the security domain it belongs to, so you can see whether the risk is about input handling, secrets, dependencies, configuration, or another part of the attack surface.</p>
+      <div class="domains-grid">
+        
+    <a class="domain-pill active" href="#domain-1">
+      <span class="domain-number">01</span>
+      <span>
+        <strong>Input Validation and Injection</strong>
+        <small>2 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-2">
+      <span class="domain-number">02</span>
+      <span>
+        <strong>Authentication and Session</strong>
+        <small>2 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-3">
+      <span class="domain-number">03</span>
+      <span>
+        <strong>Authorization and Access Control</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-4">
+      <span class="domain-number">04</span>
+      <span>
+        <strong>Cryptography</strong>
+        <small>10 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-5">
+      <span class="domain-number">05</span>
+      <span>
+        <strong>Security Misconfiguration</strong>
+        <small>8 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-6">
+      <span class="domain-number">06</span>
+      <span>
+        <strong>Dependency and Supply Chain</strong>
+        <small>7 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-7">
+      <span class="domain-number">07</span>
+      <span>
+        <strong>API Security</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-8">
+      <span class="domain-number">08</span>
+      <span>
+        <strong>Data Exposure and Privacy</strong>
+        <small>34 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-9">
+      <span class="domain-number">09</span>
+      <span>
+        <strong>Infrastructure and Runtime</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-10">
+      <span class="domain-number">10</span>
+      <span>
+        <strong>Monitoring and Incident Response</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+      </div>
+    </section>
+
+    <section>
+      <h2>Findings by Domain</h2>
+      
+                  <div class="domain-section" id="domain-1">
+                    <div class="domain-header">
+                      <span class="domain-number">01</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Input Validation and Injection</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#6B728033;color:#6B7280">
+              1 Low
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              1 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">SQL, command, XSS, traversal, and unsafe user-controlled input.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">app/client/public/libraries/echarts@5.4.3.js:45</span>
+      </div>
+      <p class="description">innerHTML is assigned from user-controlled input, which can lead to XSS.</p>
+      <pre class="snippet">var Vr={},Br={};var Fr=function(){function t(t,e,n){var i=this;this._sleepAfterStill=10,this._stillFrameAccum=0,this._ne</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="low">
+      <div class="finding-header">
+        <span class="badge" style="background:#6B7280">LOW</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">app/client/src/widgets/ExternalWidget/component/script.js:149</span>
+      </div>
+      <p class="description">innerHTML is assigned from a template literal without obvious user-controlled input. Review interpolated values, but this is lower risk when values are imported constants, icons, or static strings.</p>
+      <pre class="snippet">cssTokens.innerHTML = `:root {${cssTokensContent}}`;</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-2">
+                    <div class="domain-header">
+                      <span class="domain-number">02</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Authentication and Session</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              2 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Passwords, tokens, JWTs, cookies, OAuth, MFA, and logout.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">app/client/.yarn/releases/yarn-3.5.1.cjs:191</span>
+      </div>
+      <p class="description">Math.random() is not cryptographically secure and is being used near authentication, token, password, OTP, session, or CSRF context.</p>
+      <pre class="snippet">Please report this to https://github.com/szmarczak/http2-wrapper/`);p(C)}return}i[0].resolve(h);retu</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">app/client/.yarn/releases/yarn-3.5.1.cjs:401</span>
+      </div>
+      <p class="description">Math.random() is not cryptographically secure and is being used near authentication, token, password, OTP, session, or CSRF context.</p>
+      <pre class="snippet">`),D.end()}),D});break;case&quot;&lt;&amp;&quot;:p(()=&gt;pV(Number(r[v]),1,t));break;case&quot;&gt;&quot;:case&quot;&gt;&gt;&quot;:{let D=x.resolve(</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-4">
+                    <div class="domain-header">
+                      <span class="domain-number">04</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Cryptography</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              10 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Secrets, randomness, keys, hashing, encryption, and TLS.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">app/client/.yarn/releases/yarn-3.5.1.cjs:314</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">`}function Vl(r,e){return e.replace(/\r?\n/g,Yge(r))}var bg=J(&quot;fs&quot;),IS=J(&quot;stream&quot;),hU=J(&quot;util&quot;),yS=P</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">app/client/public/libraries/echarts@5.4.3.js:35</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">***************************************************************************** */var e=function(t,n){</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">app/client/src/pages/Editor/FirstTimeUserOnboarding/testUtils.ts:131</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">state.ui.applications.currentApplication.lastDeployedAt = Math.random();</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">app/client/test/factories/PageFactory.ts:8</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">id += hexChars[Math.floor(Math.random() * 16)];</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">app/client/src/components/editorComponents/PartialImportExport/PartialExportModal/unitTestUtils.ts:200</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">&quot;mong****+srv://mo****dmin:****@mockdb.kce5o.mongodb.net/****vies?w=ma****rity&amp;retr</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">app/client/src/components/editorComponents/PartialImportExport/PartialExportModal/unitTestUtils.ts:2453</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">&quot;mong****+srv://mo****dmin:****@mockdb.kce5o.mongodb.net/****vies?w=ma****rity&amp;retr</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">app/client/src/components/editorComponents/PartialImportExport/PartialExportModal/unitTestUtils.ts:8043</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">&quot;mong****+srv://&lt;user****name&gt;:&lt;pass****word&gt;@test-db.swrsq.mongodb.net/****base&quot;,</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">app/client/src/pages/Editor/SaaSEditor/__data__/FinalState.json:145</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">&quot;plac****Text&quot;: &quot;mong****+srv://&lt;user****name&gt;:&lt;pass****word&gt;@test-db.swrsq.mongodb.ne</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">app/client/src/pages/Editor/SaaSEditor/__data__/InitialState.json:144</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">&quot;plac****Text&quot;: &quot;mong****+srv://&lt;user****name&gt;:&lt;pass****word&gt;@test-db.swrsq.mongodb.ne</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">app/server/appsmith-plugins/mongoPlugin/src/main/resources/form.json:38</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">&quot;plac****Text&quot;: &quot;mong****+srv://&lt;user****name&gt;:&lt;pass****word&gt;@test-db.swrsq.mongodb.ne</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-5">
+                    <div class="domain-header">
+                      <span class="domain-number">05</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Security Misconfiguration</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#F59E0B33;color:#F59E0B">
+              4 High
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              4 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">CORS, headers, debug behavior, unsafe defaults, and verbose errors.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/.yarn/releases/yarn-3.5.1.cjs:390</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">`)}};cd.paths=[[&quot;-v&quot;],[&quot;--version&quot;]];var z={};ut(z,{Array:()=&gt;TH,Boolean:()=&gt;OH,Counter:()=&gt;MH,Proxy</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/.yarn/releases/yarn-3.5.1.cjs:45</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">`,!1),xp=&quot;\r&quot;,Pp=ar(&quot;\r&quot;,!1),G=0,yt=0,IA=[{line:1,column:1}],Wi=0,Ml=[],Xe=0,ha;if(&quot;startRule&quot;in e){</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Wildcard CORS configuration</span>
+        <span class="location">app/client/config/webpackDevServer.config.js:40</span>
+      </div>
+      <p class="description">Access-Control-Allow-Origin is set to * which allows any origin.</p>
+      <pre class="snippet">&quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;,</pre>
+      <div class="fix"><strong>Fix:</strong> Restrict CORS to specific trusted origins instead of *.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/public/libraries/jsonwebtoken@8.5.1.js:19946</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">return eval(this.code);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/src/workers/Evaluation/evaluate.ts:253</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">* - For `eval(&quot;Table1.tableData&quot;)` code to work as expected, we define Table1.tableData in worker gl</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/src/workers/Evaluation/formEval.ts:299</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">evaluatedValue = eval(value);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/src/workers/Evaluation/formEval.ts:329</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">const evaluatedVal = eval(expression);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/src/workers/Evaluation/formEval.ts:355</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">const output = eval(conditionBlock[conditionType]);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-6">
+                    <div class="domain-header">
+                      <span class="domain-number">06</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Dependency and Supply Chain</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#F59E0B33;color:#F59E0B">
+              2 High
+            </span>
+          
+            <span style="border-color:#3B82F633;color:#3B82F6">
+              5 Medium
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Known CVEs, vulnerable packages, lockfiles, and package risk.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: jsonwebtoken@8.5.1</span>
+        <span class="location">app/client/public/libraries/jsonwebtoken@8.5.1.js</span>
+      </div>
+      <p class="description">jsonwebtoken unrestricted key type could lead to legacy keys usage </p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `jsonwebtoken` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: lodash@4.17.21</span>
+        <span class="location">app/client/public/libraries/lodash@4.17.21.js</span>
+      </div>
+      <p class="description">lodash vulnerable to Code Injection via `_.template` imports key names</p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `lodash` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: echarts@5.4.3</span>
+        <span class="location">app/client/public/libraries/echarts@5.4.3.js</span>
+      </div>
+      <p class="description">Apache ECharts has a cross-site scripting (XSS) vulnerability</p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `echarts` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: jsonwebtoken@8.5.1</span>
+        <span class="location">app/client/public/libraries/jsonwebtoken@8.5.1.js</span>
+      </div>
+      <p class="description">jsonwebtoken's insecure implementation of key retrieval function could lead to Forgeable Public/Private Tokens from RSA to HMAC</p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `jsonwebtoken` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: jsonwebtoken@8.5.1</span>
+        <span class="location">app/client/public/libraries/jsonwebtoken@8.5.1.js</span>
+      </div>
+      <p class="description">jsonwebtoken vulnerable to signature validation bypass due to insecure default algorithm in jwt.verify()</p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `jsonwebtoken` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: lodash@4.17.21</span>
+        <span class="location">app/client/public/libraries/lodash@4.17.21.js</span>
+      </div>
+      <p class="description">lodash vulnerable to Prototype Pollution via array path bypass in `_.unset` and `_.omit`</p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `lodash` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: lodash@4.17.21</span>
+        <span class="location">app/client/public/libraries/lodash@4.17.21.js</span>
+      </div>
+      <p class="description">Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions</p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `lodash` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-8">
+                    <div class="domain-header">
+                      <span class="domain-number">08</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Data Exposure and Privacy</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#3B82F633;color:#3B82F6">
+              2 Medium
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              32 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Sensitive logs, leaked data, git history, and privacy boundaries.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/.yarn/releases/yarn-3.5.1.cjs:601</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">`);let g=await ye.find(i,this.context.plugins),{project:f,workspace:h}=await je.find(g,i);if(h===nul</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/.yarn/releases/yarn-3.5.1.cjs:610</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">`}}let D=x.join(this.context.cwd,&quot;.editorconfig&quot;);M.existsSync(D)||await M.writeFilePromise(D,v),M.e</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/.yarn/releases/yarn-3.5.1.cjs:96</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">`+n)}var s=this.tokenizeInternal(e,t);return s},r.prototype.tokenizeInternal=function(e,t){var i=thi</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/cypress/support/commands.js:80</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(&quot;Key added successfully&quot;);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/cypress/support/commands.js:87</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(&quot;Error adding key:&quot;, event.target.error);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/packages/rts/src/ctl/restore.ts:93</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(&quot;Invalid password. Please try again:&quot;);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/application.json:11029</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).catch(() =&gt;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/application.json:21720</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).cat</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/application.json:21736</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).catch(() =&gt;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/application.json:21763</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).cat</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/application.json:22161</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  randomUserGenerator.run().then(res =&gt; {\n    let values = [storeValue('pic</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/application.json:22177</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;async () =&gt; {\n  randomUserGenerator.run().then(res =&gt; {\n    let values = [storeValue('pic', res.r</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/application.json:22204</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  randomUserGenerator.run().then(res =&gt; {\n    let values = [storeValue('pic</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/application.json:26265</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;export default {\n// consecutive store value actions using Promise.all() and .then/.catch\n</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/application.json:26276</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;export default {\n// consecutive store value actions using Promise.all() and .then/.catch\n</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/autocommit/application.json:11029</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).catch(() =&gt;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/autocommit/application.json:21720</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).cat</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/autocommit/application.json:21736</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).catch(() =&gt;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/autocommit/application.json:21763</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).cat</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/autocommit/application.json:22161</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  randomUserGenerator.run().then(res =&gt; {\n    let values = [storeValue('pic</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/autocommit/application.json:22177</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;async () =&gt; {\n  randomUserGenerator.run().then(res =&gt; {\n    let values = [storeValue('pic', res.r</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/autocommit/application.json:22204</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  randomUserGenerator.run().then(res =&gt; {\n    let values = [storeValue('pic</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/autocommit/application.json:26265</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;export default {\n// consecutive store value actions using Promise.all() and .then/.catch\n</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/autocommit/application.json:26276</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;export default {\n// consecutive store value actions using Promise.all() and .then/.catch\n</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/ce-automation-test.json:11029</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).catch(() =&gt;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/ce-automation-test.json:21720</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).cat</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/ce-automation-test.json:21736</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).catch(() =&gt;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/ce-automation-test.json:21763</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  failingQuery.run().then(() =&gt; showAlert(\&quot;Query run was successful\&quot;)).cat</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/ce-automation-test.json:22161</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  randomUserGenerator.run().then(res =&gt; {\n    let values = [storeValue('pic</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/ce-automation-test.json:22177</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;async () =&gt; {\n  randomUserGenerator.run().then(res =&gt; {\n    let values = [storeValue('pic', res.r</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/ce-automation-test.json:22204</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;async () =&gt; {\n  randomUserGenerator.run().then(res =&gt; {\n    let values = [storeValue('pic</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/ce-automation-test.json:26265</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;export default {\n// consecutive store value actions using Promise.all() and .then/.catch\n</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/appsmith-server/src/test/resources/com/appsmith/server/git/ce-automation-test.json:26276</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">&quot;body&quot;: &quot;export default {\n// consecutive store value actions using Promise.all() and .then/.catch\n</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/server/scripts/check-field-constants.mjs:61</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(&quot;\tkey is&quot;, key);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+                  </div>
+                
+    </section>
+
+    
+    <section>
+      <h2>Test file findings (review only)</h2>
+      <p class="section-kicker">These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures.</p>
+      
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/cypress/e2e/Regression/ClientSide/AdminSettings/Email_settings_Spec.ts:218</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">console.log(&quot;Reset Password data:&quot;, resetPasswordLinkMatch);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/cypress/e2e/Regression/ClientSide/AdminSettings/Email_settings_Spec.ts:225</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">console.log(&quot;Reset Password Link:&quot;, resetPasswordLink);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">app/client/cypress/fixtures/customWidget.json:29</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">&quot;js&quot;: &quot;import * as React from 'https://esm.sh/react@18';import * as reactDom from 'https://esm.sh/re</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">app/client/cypress/fixtures/customWidget.json:67</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">&quot;js&quot;: &quot;import * as React from 'https://esm.sh/react@18';import * as reactDom from 'https://esm.sh/re</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/cypress/fixtures/OldApp_DSTesting1.9.24_Latest_29August2024_withuiforframeowrk.json:1</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">{&quot;artifactJsonType&quot;:&quot;APPLICATION&quot;,&quot;clientSchemaVersion&quot;:1.0,&quot;serverSchemaVersion&quot;:9.0,&quot;exportedAppli</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/cypress/fixtures/setIntervalApp.json:1</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">{&quot;artifactJsonType&quot;:&quot;APPLICATION&quot;,&quot;clientSchemaVersion&quot;:1.0,&quot;serverSchemaVersion&quot;:11.0,&quot;exportedAppl</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/cypress/fixtures/TryToCoverMore.json:1</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">{&quot;artifactJsonType&quot;:&quot;APPLICATION&quot;,&quot;clientSchemaVersion&quot;:1.0,&quot;serverSchemaVersion&quot;:9.0,&quot;exportedAppli</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Local dev endpoint] Exposed secret: Database URL</span>
+        <span class="location">app/client/packages/rts/src/ctl/backup/backup.test.ts:106</span>
+      </div>
+      <p class="description">The connection string points at localhost / 127.0.0.1 / 0.0.0.0 / host.docker.internal — a developer-machine or dev-container credential. Only a threat if you didn't mean to publish this file. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">remo****Data(`APPS****edis://:secret@127.0.0.1:6379\nAPPSM</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Local dev endpoint] Exposed secret: Database URL</span>
+        <span class="location">app/client/packages/rts/src/ctl/backup/backup.test.ts:113</span>
+      </div>
+      <p class="description">The connection string points at localhost / 127.0.0.1 / 0.0.0.0 / host.docker.internal — a developer-machine or dev-container credential. Only a threat if you didn't mean to publish this file. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">remo****Data(`APPS****edis://:secret@127.0.0.1:6379\nAPPSM</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">app/client/packages/rts/src/ctl/backup/backup.test.ts:253</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">&quot;mong****+srv://admin:pass****word@test.cluster.mongodb.net/****name?retr****s=tr</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">app/client/packages/rts/src/ctl/backup/backup.test.ts:262</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">&quot;mong****+srv://admin:pass****word@test.cluster.mongodb.net/****t123?retr****true&amp;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">app/client/packages/rts/src/ctl/backup/backup.test.ts:271</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">&quot;mong****+srv://admin:pass****word@test.cluster.mongodb.net/****t123&quot;;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Local dev endpoint] Exposed secret: Database URL</span>
+        <span class="location">app/client/packages/rts/src/ctl/backup/backup.test.ts:279</span>
+      </div>
+      <p class="description">The connection string points at localhost / 127.0.0.1 / 0.0.0.0 / host.docker.internal — a developer-machine or dev-container credential. Only a threat if you didn't mean to publish this file. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">const mong****_uri = &quot;mongodb://ap****mith:pAss****W0rd!@loca****host:2701****mith&quot;;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">app/client/packages/rts/src/ctl/backup/backup.test.ts:60</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">const apps****oURI = &quot;mongodb://us****name:pass****word@host****mith&quot;;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">app/client/packages/rts/src/ctl/backup/backup.test.ts:62</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">&quot;mong****dump --ur****godb://us****name:pass****word@host****mith --ar****ongo</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/src/plugins/Linting/tests/getLintingErrors.test.ts:337</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">&quot;{{ for (var key in obj) { console.log(key); } }}&quot;;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">app/client/src/plugins/Linting/tests/getLintingErrors.test.ts:338</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">const script = &quot;for (var key in obj) { console.log(key); }&quot;;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/src/plugins/Linting/tests/getLintingErrors.test.ts:487</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">const originalBinding = &quot;{{ eval('var a = 1;') }}&quot;;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/src/plugins/Linting/tests/getLintingErrors.test.ts:488</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">const script = &quot;eval('var a = 1;');&quot;;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/src/workers/Evaluation/JSObject/__test__/mutation.test.ts:100</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">eval(`</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">app/client/test/__mocks__/RealmExecutorMock.ts:10</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">return { result: eval(finalSource), triggers: [] };</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    </section>
+    
+
+    <footer>
+      Generated by <strong>Verglos</strong> · <a href="https://verglos.dev" style="color:#E85D4C">verglos.dev</a>
+    </footer>
+  </div>
+</body>
+</html>

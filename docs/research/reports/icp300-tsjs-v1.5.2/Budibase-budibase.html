@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verglos Security Report — Score 15</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0b; color: #e4e4e7; line-height: 1.6; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; padding: 2rem 0; border-bottom: 1px solid #27272a; margin-bottom: 2rem; }
+    .logo { font-family: monospace; font-size: 0.75rem; letter-spacing: 0.2em; color: #E85D4C; text-transform: uppercase; }
+    h1 { font-size: 1.5rem; margin: 1rem 0 0.5rem; }
+    .risk { color: #9CA3AF; font-size: 0.875rem; }
+    .gauge { margin: 1.5rem 0; }
+    .counts { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
+    .count { text-align: center; }
+    .count-num { font-size: 1.5rem; font-weight: bold; font-family: monospace; }
+    .count-label { font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; }
+    .paywall { background: #18181b; border: 1px solid #E85D4C33; border-radius: 8px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+    .paywall h2 { color: #E85D4C; margin-bottom: 0.5rem; }
+    .paywall p { color: #9CA3AF; font-size: 0.875rem; }
+    .paywall code { background: #27272a; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    section { margin: 2rem 0; }
+    section h2 { font-size: 1.125rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #27272a; }
+    .section-kicker { color: #9CA3AF; font-size: 0.875rem; max-width: 680px; margin-top: -0.5rem; margin-bottom: 1rem; }
+    .domains-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin: 1rem 0 2rem; }
+    .domain-pill { display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.75rem; align-items: start; min-height: 4.25rem; padding: 0.875rem; border: 1px solid #27272a; border-radius: 8px; background: #111113; color: #e4e4e7; text-decoration: none; }
+    .domain-pill.active { border-color: #E85D4C55; background: #18181b; }
+    .domain-pill.clean { color: #a1a1aa; }
+    .domain-number { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 999px; background: #0a0a0b; border: 1px solid #27272a; color: #9CA3AF; font-family: monospace; font-size: 0.75rem; }
+    .domain-pill.active .domain-number { border-color: #E85D4C66; color: #E85D4C; }
+    .domain-pill strong { display: block; font-size: 0.875rem; line-height: 1.25rem; }
+    .domain-pill small { display: block; margin-top: 0.25rem; color: #71717a; font-size: 0.75rem; }
+    .domain-section { border: 1px solid #27272a; border-radius: 8px; background: #111113; padding: 1rem; }
+    .domain-section + .domain-section { margin-top: 1rem; }
+    .domain-header { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .domain-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .domain-heading h3 { font-size: 1.125rem; line-height: 1.35; }
+    .domain-summary { color: #9CA3AF; font-size: 0.875rem; margin-top: 0.25rem; }
+    .severity-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .severity-stack span { border: 1px solid; border-radius: 999px; padding: 0.125rem 0.5rem; font-size: 0.6875rem; font-family: monospace; text-transform: uppercase; }
+    .finding { background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .domain-section .finding:last-child { margin-bottom: 0; }
+    .finding-header { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .badge { font-size: 0.625rem; padding: 0.125rem 0.5rem; border-radius: 4px; color: white; font-weight: bold; letter-spacing: 0.05em; }
+    .detector { font-size: 0.625rem; padding: 0.125rem 0.5rem; border: 1px solid #3f3f46; border-radius: 4px; color: #a1a1aa; font-family: monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+    .title { font-weight: 600; }
+    .location { font-family: monospace; font-size: 0.75rem; color: #9CA3AF; }
+    .locked { font-size: 0.75rem; color: #E85D4C; }
+    .description { font-size: 0.875rem; color: #a1a1aa; }
+    .snippet { background: #0a0a0b; border: 1px solid #27272a; border-radius: 4px; padding: 0.75rem; margin: 0.5rem 0; font-family: monospace; font-size: 0.75rem; overflow-x: auto; }
+    .fix { background: #052e1620; border-left: 3px solid #22C55E; padding: 0.5rem 0.75rem; margin-top: 0.5rem; font-size: 0.875rem; }
+    .upgrade-hint { font-size: 0.75rem; color: #6B7280; margin-top: 0.5rem; font-style: italic; }
+    footer { text-align: center; padding: 2rem 0; color: #52525b; font-size: 0.75rem; border-top: 1px solid #27272a; margin-top: 2rem; }
+    .meta { font-size: 0.75rem; color: #52525b; margin-top: 0.5rem; }
+    .prov { padding: 1.25rem; border: 1px solid #E85D4C40; border-radius: 8px; background: linear-gradient(180deg, #18181b 0%, #111113 100%); }
+    .prov h2 { border-bottom: 0; padding-bottom: 0; }
+    .prov code { background: #27272a; padding: 0.125rem 0.375rem; border-radius: 4px; font-family: monospace; font-size: 0.75rem; }
+    .prov-bar { display: flex; width: 100%; height: 2.5rem; border-radius: 6px; overflow: hidden; border: 1px solid #27272a; margin: 1rem 0 0.75rem; background: #0a0a0b; }
+    .prov-bar-ai { background: #E85D4C; color: white; display: flex; align-items: center; justify-content: flex-start; padding: 0 0.75rem; min-width: 0; overflow: hidden; }
+    .prov-bar-human { background: #3B82F6; color: white; display: flex; align-items: center; justify-content: flex-end; padding: 0 0.75rem; min-width: 0; overflow: hidden; }
+    .prov-bar-label { font-family: monospace; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+    .prov-ratio { color: #fef2f2; font-size: 0.9375rem; margin-top: 0.75rem; }
+    .prov-ratio strong { color: #E85D4C; font-family: monospace; font-size: 1.125rem; padding: 0 0.125rem; }
+    .prov-ratio-muted { color: #71717a; font-style: italic; font-size: 0.8125rem; }
+    .prov-line { color: #d4d4d8; font-size: 0.875rem; margin-top: 0.25rem; }
+    .prov-num { color: #E85D4C; font-family: monospace; font-weight: 600; }
+    @media (max-width: 760px) {
+      .container { padding: 1rem; }
+      .counts { gap: 0.75rem; flex-wrap: wrap; }
+      .domains-grid { grid-template-columns: 1fr; }
+      .domain-header { grid-template-columns: 1fr; gap: 0.75rem; }
+      .domain-heading { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Verglos</div>
+      <h1>Security Report</h1>
+      <p class="risk">CRITICAL RISK</p>
+      <div class="gauge">
+    <svg width="200" height="200" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#1f1f23" stroke-width="12"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#E85D4C" stroke-width="12"
+        stroke-dasharray="502.6548245743669" stroke-dashoffset="427.2566008882119"
+        stroke-linecap="round" transform="rotate(-90 100 100)"/>
+      <text x="100" y="95" text-anchor="middle" fill="#E85D4C" font-size="36" font-weight="bold" font-family="monospace">15</text>
+      <text x="100" y="120" text-anchor="middle" fill="#9CA3AF" font-size="12" font-family="monospace">/ 100</text>
+    </svg>
+  </div>
+      <div class="counts">
+        <div class="count"><div class="count-num" style="color:#E85D4C">2</div><div class="count-label">Critical</div></div>
+        <div class="count"><div class="count-num" style="color:#F59E0B">14</div><div class="count-label">High</div></div>
+        <div class="count"><div class="count-num" style="color:#3B82F6">2</div><div class="count-label">Medium</div></div>
+        <div class="count"><div class="count-num" style="color:#6B7280">5</div><div class="count-label">Low</div></div>
+        <div class="count"><div class="count-num" style="color:#9CA3AF">20</div><div class="count-label">Info</div></div>
+      </div>
+      <p class="meta">Test file findings (review only): 8. Excluded from the default score.</p>
+      <p class="meta">Scanned 2026-07-29T21:39:39.139Z · 8538ms · node</p>
+    </header>
+
+    
+    <section class="prov">
+      <h2>AI-authorship</h2>
+      <p class="section-kicker">Verglos infers who wrote each file — the developer or an AI agent — and shows whether findings cluster on one side. Signals fired: agent-artifacts, agent-artifacts, code-shape (sampled 300/2711 files for speed). Confidence: <strong>low</strong>. Opt out with <code>verglos scan --no-provenance</code>.</p>
+      <div class="prov-bar">
+        <div class="prov-bar-ai" style="width:10.1%" title="AI-authored: 10.1%">
+          <span class="prov-bar-label">10.1% AI</span>
+        </div>
+        <div class="prov-bar-human" style="width:89.9%" title="Human-authored: 89.9%">
+          <span class="prov-bar-label">89.9% human</span>
+        </div>
+      </div>
+      <p class="prov-ratio prov-ratio-muted">Density ratio hidden — not enough LOC per bucket to print a defensible number (guardrail).</p>
+      <p class="prov-line"><span class="prov-num">0</span> of <span class="prov-num">2</span> criticals live in AI-authored files.</p>
+    </section>
+  
+
+    <section>
+      <h2>10 Security Domains</h2>
+      <p class="section-kicker">Each finding below is grouped by the security domain it belongs to, so you can see whether the risk is about input handling, secrets, dependencies, configuration, or another part of the attack surface.</p>
+      <div class="domains-grid">
+        
+    <a class="domain-pill active" href="#domain-1">
+      <span class="domain-number">01</span>
+      <span>
+        <strong>Input Validation and Injection</strong>
+        <small>3 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-2">
+      <span class="domain-number">02</span>
+      <span>
+        <strong>Authentication and Session</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-3">
+      <span class="domain-number">03</span>
+      <span>
+        <strong>Authorization and Access Control</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-4">
+      <span class="domain-number">04</span>
+      <span>
+        <strong>Cryptography</strong>
+        <small>15 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-5">
+      <span class="domain-number">05</span>
+      <span>
+        <strong>Security Misconfiguration</strong>
+        <small>14 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-6">
+      <span class="domain-number">06</span>
+      <span>
+        <strong>Dependency and Supply Chain</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-7">
+      <span class="domain-number">07</span>
+      <span>
+        <strong>API Security</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-8">
+      <span class="domain-number">08</span>
+      <span>
+        <strong>Data Exposure and Privacy</strong>
+        <small>3 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-9">
+      <span class="domain-number">09</span>
+      <span>
+        <strong>Infrastructure and Runtime</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-10">
+      <span class="domain-number">10</span>
+      <span>
+        <strong>Monitoring and Incident Response</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+      </div>
+    </section>
+
+    <section>
+      <h2>Findings by Domain</h2>
+      
+                  <div class="domain-section" id="domain-1">
+                    <div class="domain-header">
+                      <span class="domain-number">01</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Input Validation and Injection</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#E85D4C33;color:#E85D4C">
+              1 Critical
+            </span>
+          
+            <span style="border-color:#6B728033;color:#6B7280">
+              2 Low
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">SQL, command, XSS, traversal, and unsafe user-controlled input.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">injection</span>
+        <span class="title">SQL injection (string concat)</span>
+        <span class="location">packages/server/src/sdk/workspace/rows/search/internal/internal.ts:205</span>
+      </div>
+      <p class="description">SQL query built with string interpolation may allow SQL injection.</p>
+      <pre class="snippet">response = await db.query(`database/${viewName}`, {</pre>
+      <div class="fix"><strong>Fix:</strong> Use parameterized queries or an ORM with prepared statements.</div>
+    </div>
+  
+    <div class="finding" data-severity="low">
+      <div class="finding-header">
+        <span class="badge" style="background:#6B7280">LOW</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">packages/builder/src/components/common/CodeEditor/index.ts:259</span>
+      </div>
+      <p class="description">innerHTML is assigned from a template literal without obvious user-controlled input. Review interpolated values, but this is lower risk when values are imported constants, icons, or static strings.</p>
+      <pre class="snippet">ele.innerHTML = `&lt;div class=&quot;binding__example&quot;&gt;${binding.valueHTML}&lt;/div&gt;`</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="low">
+      <div class="finding-header">
+        <span class="badge" style="background:#6B7280">LOW</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">packages/builder/src/components/common/CodeEditor/index.ts:76</span>
+      </div>
+      <p class="description">innerHTML is assigned from a template literal without obvious user-controlled input. Review interpolated values, but this is lower risk when values are imported constants, icons, or static strings.</p>
+      <pre class="snippet">ele.innerHTML = `${toSpectrumIcon(icon)}&lt;span&gt;${sectionName}&lt;/span&gt;`</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-4">
+                    <div class="domain-header">
+                      <span class="domain-number">04</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Cryptography</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#E85D4C33;color:#E85D4C">
+              1 Critical
+            </span>
+          
+            <span style="border-color:#6B728033;color:#6B7280">
+              3 Low
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              11 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Secrets, randomness, keys, hashing, encryption, and TLS.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/backend-core/src/security/secrets.ts:4</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">if (str.incl****udes(&quot;----****EGIN PRIVATE KEY-****----&quot;)) {</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/backend-core/tests/extra/testEnv.ts:50</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">&quot;----****EGIN RSA PRIVATE KEY-****----\n&quot; +</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="low">
+      <div class="finding-header">
+        <span class="badge" style="background:#6B7280">LOW</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/bbui/src/Actions/clickOutside.ts:147</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">const id = Math.random()</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="low">
+      <div class="finding-header">
+        <span class="badge" style="background:#6B7280">LOW</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/builder/src/stores/builder/history.ts:116</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">operation.id = Math.random()</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="low">
+      <div class="finding-header">
+        <span class="badge" style="background:#6B7280">LOW</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/client/src/stores/events.js:11</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">const id = Math.random()</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/server/src/jsRunner/bundles/bson.ivm.bundle.js:1</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">&quot;use strict&quot;;var bson=(()=&gt;{var At=Object.defineProperty;var on=Object.getOwnPropertyDescriptor;var </pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/server/src/jsRunner/bundles/bson.ivm.bundle.js:5</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">`:&quot;&quot;})`}};function We(e){return e!=null&amp;&amp;typeof e==&quot;object&quot;&amp;&amp;&quot;$id&quot;in e&amp;&amp;e.$id!=null&amp;&amp;&quot;$ref&quot;in e&amp;&amp;typ</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: JWT Secret</span>
+        <span class="location">packages/backend-core/tests/jestEnv.ts:10</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">process.env.JWT_****CRET = &quot;test****cret&quot;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: JWT Secret</span>
+        <span class="location">packages/pro/tests/jestEnv.ts:2</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">process.env.JWT_****CRET = &quot;test****cret&quot;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">packages/server/scripts/integrations/mongo/docker-compose.yaml:24</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">ME_C****_URL: mongodb://root:example@mongo:27017/</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Local dev endpoint] Exposed secret: Database URL</span>
+        <span class="location">packages/server/src/integrations/tests/utils/mongodb.ts:36</span>
+      </div>
+      <p class="description">The connection string points at localhost / 127.0.0.1 / 0.0.0.0 / host.docker.internal — a developer-machine or dev-container credential. Only a threat if you didn't mean to publish this file.</p>
+      <pre class="snippet">conn****ring: `mongodb://mongo:pass****word@127.0.0.1:${port.host}`,</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/server/src/tests/jestEnv.ts:24</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential.</p>
+      <pre class="snippet">process.env.JWT_****CRET = &quot;jwts****cret&quot;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/shared-core/src/constants/api.ts:6</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential.</p>
+      <pre class="snippet">API_KEY = &quot;x-bu****-key&quot;,</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: JWT Secret</span>
+        <span class="location">packages/worker/src/tests/jestEnv.ts:3</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">process.env.JWT_****CRET = &quot;test****cret&quot;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: JWT Secret</span>
+        <span class="location">scripts/dev/manage.js:11</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">JWT_****CRET: &quot;test****cret&quot;,</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-5">
+                    <div class="domain-header">
+                      <span class="domain-number">05</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Security Misconfiguration</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#F59E0B33;color:#F59E0B">
+              14 High
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">CORS, headers, debug behavior, unsafe defaults, and verbose errors.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/backend-core/src/redis/redis.ts:327</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">await this.client.eval(luaScript, 1, this.prefixed(key), value)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/builder/src/components/backend/Datasources/ConfigEditor/stores/validatedConfig.ts:184</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">!eval(processStringSync(properties.hidden, $configStore))</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/src/api/controllers/automation.ts:146</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">ctx.body = await sdk.automations.get(ctx.params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/src/api/controllers/automation.ts:150</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const automationId = ctx.params.id</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/src/api/controllers/automation.ts:152</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const automation = await sdk.automations.get(ctx.params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/src/api/controllers/oauth2.ts:77</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">if (ctx.params.id !== body._id) {</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/src/api/controllers/project.ts:59</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">if (ctx.params.id !== body._id) {</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/src/api/controllers/user.ts:59</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const dbUser = await sdk.users.get(ctx.params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/src/api/controllers/workspaceApp.ts:104</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">if (ctx.params.id !== body._id) {</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/server/src/db/inMemoryView.ts:38</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">eval(</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/string-templates/src/helpers/javascript.ts:115</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">snippetCache[name] = eval(iifeWrapper(snippetMap[name]))</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/worker/src/api/controllers/global/scim/users.ts:81</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const user = await scimUsers.find(ctx.params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/worker/src/api/controllers/global/templates.ts:103</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">await db.remove(ctx.params.id, ctx.params.rev)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/worker/src/api/controllers/global/templates.ts:96</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">ctx.body = await getTemplateByID(ctx.params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-8">
+                    <div class="domain-header">
+                      <span class="domain-number">08</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Data Exposure and Privacy</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#3B82F633;color:#3B82F6">
+              2 Medium
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              1 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Sensitive logs, leaked data, git history, and privacy boundaries.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">examples/microfrontend/bff.server.mjs:424</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(`Budibase auth target: ${budibaseTarget}`)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/cli/src/plugins/index.ts:201</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(success(&quot;Password: &quot;) + info(password))</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/server/src/sdk/workspace/backups/imports.ts:209</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(&quot;Removed LiteLLM key config from imported data&quot;, {</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+                  </div>
+                
+    </section>
+
+    
+    <section>
+      <h2>Test file findings (review only)</h2>
+      <p class="section-kicker">These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures.</p>
+      
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Wildcard CORS configuration</span>
+        <span class="location">packages/server/src/api/routes/public/tests/cors.spec.ts:17</span>
+      </div>
+      <p class="description">Access-Control-Allow-Origin is set to * which allows any origin. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">&quot;access-control-allow-origin&quot;: &quot;*&quot;,</pre>
+      <div class="fix"><strong>Fix:</strong> Restrict CORS to specific trusted origins instead of *.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Slack Token</span>
+        <span class="location">packages/server/src/api/routes/tests/ai/agentSlack.spec.ts:236</span>
+      </div>
+      <p class="description">A Slack Token was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">botT****oken: &quot;xoxb****amid&quot;,</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Generic API Key</span>
+        <span class="location">packages/server/src/api/routes/tests/ai/aiConfig.spec.ts:380</span>
+      </div>
+      <p class="description">A Generic API Key was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">api_key: &quot;dev-****-key&quot;,</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Generic API Key</span>
+        <span class="location">packages/server/src/api/routes/tests/ai/aiConfig.spec.ts:389</span>
+      </div>
+      <p class="description">A Generic API Key was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">api_key: &quot;dev-****-key&quot;,</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Generic API Key</span>
+        <span class="location">packages/server/src/api/routes/tests/ai/aiConfig.spec.ts:767</span>
+      </div>
+      <p class="description">A Generic API Key was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">const webS****iKey = &quot;exa-****2345&quot;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">packages/server/src/api/routes/tests/datasource.spec.ts:134</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">&quot;mongodb://le****user:Supe****w123@prod-db.inte****rnal:2701****ents&quot;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/server/src/api/routes/tests/datasource.spec.ts:180</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables. Private keys in test files are typically generated test fixtures for cryptographic unit tests. Confirm this key is not reused in any production environment.</p>
+      <pre class="snippet">&quot;----****EGIN PRIVATE KEY-****----\nMII****RIAL\n---****-END PRIVATE KEY-****----&quot;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/server/src/api/routes/tests/datasource.spec.ts:520</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables. Private keys in test files are typically generated test fixtures for cryptographic unit tests. Confirm this key is not reused in any production environment.</p>
+      <pre class="snippet">&quot;----****EGIN PRIVATE KEY-****----&quot;,</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    </section>
+    
+
+    <footer>
+      Generated by <strong>Verglos</strong> · <a href="https://verglos.dev" style="color:#E85D4C">verglos.dev</a>
+    </footer>
+  </div>
+</body>
+</html>

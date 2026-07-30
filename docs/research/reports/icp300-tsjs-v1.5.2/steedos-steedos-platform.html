@@ -1,0 +1,2140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verglos Security Report — Score 0</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0b; color: #e4e4e7; line-height: 1.6; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; padding: 2rem 0; border-bottom: 1px solid #27272a; margin-bottom: 2rem; }
+    .logo { font-family: monospace; font-size: 0.75rem; letter-spacing: 0.2em; color: #E85D4C; text-transform: uppercase; }
+    h1 { font-size: 1.5rem; margin: 1rem 0 0.5rem; }
+    .risk { color: #9CA3AF; font-size: 0.875rem; }
+    .gauge { margin: 1.5rem 0; }
+    .counts { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
+    .count { text-align: center; }
+    .count-num { font-size: 1.5rem; font-weight: bold; font-family: monospace; }
+    .count-label { font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; }
+    .paywall { background: #18181b; border: 1px solid #E85D4C33; border-radius: 8px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+    .paywall h2 { color: #E85D4C; margin-bottom: 0.5rem; }
+    .paywall p { color: #9CA3AF; font-size: 0.875rem; }
+    .paywall code { background: #27272a; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    section { margin: 2rem 0; }
+    section h2 { font-size: 1.125rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #27272a; }
+    .section-kicker { color: #9CA3AF; font-size: 0.875rem; max-width: 680px; margin-top: -0.5rem; margin-bottom: 1rem; }
+    .domains-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin: 1rem 0 2rem; }
+    .domain-pill { display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.75rem; align-items: start; min-height: 4.25rem; padding: 0.875rem; border: 1px solid #27272a; border-radius: 8px; background: #111113; color: #e4e4e7; text-decoration: none; }
+    .domain-pill.active { border-color: #E85D4C55; background: #18181b; }
+    .domain-pill.clean { color: #a1a1aa; }
+    .domain-number { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 999px; background: #0a0a0b; border: 1px solid #27272a; color: #9CA3AF; font-family: monospace; font-size: 0.75rem; }
+    .domain-pill.active .domain-number { border-color: #E85D4C66; color: #E85D4C; }
+    .domain-pill strong { display: block; font-size: 0.875rem; line-height: 1.25rem; }
+    .domain-pill small { display: block; margin-top: 0.25rem; color: #71717a; font-size: 0.75rem; }
+    .domain-section { border: 1px solid #27272a; border-radius: 8px; background: #111113; padding: 1rem; }
+    .domain-section + .domain-section { margin-top: 1rem; }
+    .domain-header { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .domain-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .domain-heading h3 { font-size: 1.125rem; line-height: 1.35; }
+    .domain-summary { color: #9CA3AF; font-size: 0.875rem; margin-top: 0.25rem; }
+    .severity-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .severity-stack span { border: 1px solid; border-radius: 999px; padding: 0.125rem 0.5rem; font-size: 0.6875rem; font-family: monospace; text-transform: uppercase; }
+    .finding { background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .domain-section .finding:last-child { margin-bottom: 0; }
+    .finding-header { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .badge { font-size: 0.625rem; padding: 0.125rem 0.5rem; border-radius: 4px; color: white; font-weight: bold; letter-spacing: 0.05em; }
+    .detector { font-size: 0.625rem; padding: 0.125rem 0.5rem; border: 1px solid #3f3f46; border-radius: 4px; color: #a1a1aa; font-family: monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+    .title { font-weight: 600; }
+    .location { font-family: monospace; font-size: 0.75rem; color: #9CA3AF; }
+    .locked { font-size: 0.75rem; color: #E85D4C; }
+    .description { font-size: 0.875rem; color: #a1a1aa; }
+    .snippet { background: #0a0a0b; border: 1px solid #27272a; border-radius: 4px; padding: 0.75rem; margin: 0.5rem 0; font-family: monospace; font-size: 0.75rem; overflow-x: auto; }
+    .fix { background: #052e1620; border-left: 3px solid #22C55E; padding: 0.5rem 0.75rem; margin-top: 0.5rem; font-size: 0.875rem; }
+    .upgrade-hint { font-size: 0.75rem; color: #6B7280; margin-top: 0.5rem; font-style: italic; }
+    footer { text-align: center; padding: 2rem 0; color: #52525b; font-size: 0.75rem; border-top: 1px solid #27272a; margin-top: 2rem; }
+    .meta { font-size: 0.75rem; color: #52525b; margin-top: 0.5rem; }
+    .prov { padding: 1.25rem; border: 1px solid #E85D4C40; border-radius: 8px; background: linear-gradient(180deg, #18181b 0%, #111113 100%); }
+    .prov h2 { border-bottom: 0; padding-bottom: 0; }
+    .prov code { background: #27272a; padding: 0.125rem 0.375rem; border-radius: 4px; font-family: monospace; font-size: 0.75rem; }
+    .prov-bar { display: flex; width: 100%; height: 2.5rem; border-radius: 6px; overflow: hidden; border: 1px solid #27272a; margin: 1rem 0 0.75rem; background: #0a0a0b; }
+    .prov-bar-ai { background: #E85D4C; color: white; display: flex; align-items: center; justify-content: flex-start; padding: 0 0.75rem; min-width: 0; overflow: hidden; }
+    .prov-bar-human { background: #3B82F6; color: white; display: flex; align-items: center; justify-content: flex-end; padding: 0 0.75rem; min-width: 0; overflow: hidden; }
+    .prov-bar-label { font-family: monospace; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+    .prov-ratio { color: #fef2f2; font-size: 0.9375rem; margin-top: 0.75rem; }
+    .prov-ratio strong { color: #E85D4C; font-family: monospace; font-size: 1.125rem; padding: 0 0.125rem; }
+    .prov-ratio-muted { color: #71717a; font-style: italic; font-size: 0.8125rem; }
+    .prov-line { color: #d4d4d8; font-size: 0.875rem; margin-top: 0.25rem; }
+    .prov-num { color: #E85D4C; font-family: monospace; font-weight: 600; }
+    @media (max-width: 760px) {
+      .container { padding: 1rem; }
+      .counts { gap: 0.75rem; flex-wrap: wrap; }
+      .domains-grid { grid-template-columns: 1fr; }
+      .domain-header { grid-template-columns: 1fr; gap: 0.75rem; }
+      .domain-heading { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Verglos</div>
+      <h1>Security Report</h1>
+      <p class="risk">CRITICAL RISK</p>
+      <div class="gauge">
+    <svg width="200" height="200" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#1f1f23" stroke-width="12"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#E85D4C" stroke-width="12"
+        stroke-dasharray="502.6548245743669" stroke-dashoffset="502.6548245743669"
+        stroke-linecap="round" transform="rotate(-90 100 100)"/>
+      <text x="100" y="95" text-anchor="middle" fill="#E85D4C" font-size="36" font-weight="bold" font-family="monospace">0</text>
+      <text x="100" y="120" text-anchor="middle" fill="#9CA3AF" font-size="12" font-family="monospace">/ 100</text>
+    </svg>
+  </div>
+      <div class="counts">
+        <div class="count"><div class="count-num" style="color:#E85D4C">0</div><div class="count-label">Critical</div></div>
+        <div class="count"><div class="count-num" style="color:#F59E0B">93</div><div class="count-label">High</div></div>
+        <div class="count"><div class="count-num" style="color:#3B82F6">13</div><div class="count-label">Medium</div></div>
+        <div class="count"><div class="count-num" style="color:#6B7280">2</div><div class="count-label">Low</div></div>
+        <div class="count"><div class="count-num" style="color:#9CA3AF">38</div><div class="count-label">Info</div></div>
+      </div>
+      <p class="meta">Test file findings (review only): 4. Excluded from the default score.</p>
+      <p class="meta">Scanned 2026-07-29T22:10:26.083Z · 6308ms · node</p>
+    </header>
+
+    
+    <section class="prov">
+      <h2>AI-authorship</h2>
+      <p class="section-kicker">Verglos infers who wrote each file — the developer or an AI agent — and shows whether findings cluster on one side. Signals fired: agent-artifacts, agent-artifacts, code-shape (sampled 300/1353 files for speed). Confidence: <strong>low</strong>. Opt out with <code>verglos scan --no-provenance</code>.</p>
+      <div class="prov-bar">
+        <div class="prov-bar-ai" style="width:20.2%" title="AI-authored: 20.2%">
+          <span class="prov-bar-label">20.2% AI</span>
+        </div>
+        <div class="prov-bar-human" style="width:79.8%" title="Human-authored: 79.8%">
+          <span class="prov-bar-label">79.8% human</span>
+        </div>
+      </div>
+      <p class="prov-ratio prov-ratio-muted">Density ratio hidden — not enough LOC per bucket to print a defensible number (guardrail).</p>
+      
+    </section>
+  
+
+    <section>
+      <h2>10 Security Domains</h2>
+      <p class="section-kicker">Each finding below is grouped by the security domain it belongs to, so you can see whether the risk is about input handling, secrets, dependencies, configuration, or another part of the attack surface.</p>
+      <div class="domains-grid">
+        
+    <a class="domain-pill active" href="#domain-1">
+      <span class="domain-number">01</span>
+      <span>
+        <strong>Input Validation and Injection</strong>
+        <small>8 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-2">
+      <span class="domain-number">02</span>
+      <span>
+        <strong>Authentication and Session</strong>
+        <small>6 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-3">
+      <span class="domain-number">03</span>
+      <span>
+        <strong>Authorization and Access Control</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-4">
+      <span class="domain-number">04</span>
+      <span>
+        <strong>Cryptography</strong>
+        <small>15 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-5">
+      <span class="domain-number">05</span>
+      <span>
+        <strong>Security Misconfiguration</strong>
+        <small>34 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-6">
+      <span class="domain-number">06</span>
+      <span>
+        <strong>Dependency and Supply Chain</strong>
+        <small>3 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-7">
+      <span class="domain-number">07</span>
+      <span>
+        <strong>API Security</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-8">
+      <span class="domain-number">08</span>
+      <span>
+        <strong>Data Exposure and Privacy</strong>
+        <small>76 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-9">
+      <span class="domain-number">09</span>
+      <span>
+        <strong>Infrastructure and Runtime</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-10">
+      <span class="domain-number">10</span>
+      <span>
+        <strong>Monitoring and Incident Response</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+      </div>
+    </section>
+
+    <section>
+      <h2>Findings by Domain</h2>
+      
+                  <div class="domain-section" id="domain-1">
+                    <div class="domain-header">
+                      <span class="domain-number">01</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Input Validation and Injection</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#F59E0B33;color:#F59E0B">
+              1 High
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              7 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">SQL, command, XSS, traversal, and unsafe user-controlled input.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">builder6/webapp/public/lib/jquery/jquery-1.11.2.min.js:2</span>
+      </div>
+      <p class="description">innerHTML is assigned from user-controlled input, which can lead to XSS.</p>
+      <pre class="snippet">!function(a,b){&quot;object&quot;==typeof module&amp;&amp;&quot;object&quot;==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">builder6/webapp/public/lib/jquery/jquery-1.11.2.min.js:3</span>
+      </div>
+      <p class="description">innerHTML is assigned from user-controlled input, which can lead to XSS.</p>
+      <pre class="snippet">return!0}function Q(a,b,d,e){if(m.acceptData(a)){var f,g,h=m.expando,i=a.nodeType,j=i?m.cache:a,k=i?a[h]:a[h]&amp;&amp;h;if(k&amp;&amp;j</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">builder6/webapp/public/lib/jquery/jquery-1.11.2.min.js:4</span>
+      </div>
+      <p class="description">innerHTML is assigned from user-controlled input, which can lead to XSS.</p>
+      <pre class="snippet">}m.Tween=Zb,Zb.prototype={constructor:Zb,init:function(a,b,c,d,e,f){this.elem=a,this.prop=c,this.easing=e||&quot;swing&quot;,this.</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:99</span>
+      </div>
+      <p class="description">innerHTML is assigned from user-controlled input, which can lead to XSS.</p>
+      <pre class="snippet">*/var r=&quot;function&quot;==typeof Symbol&amp;&amp;Symbol.for,o=r?Symbol.for(&quot;react.element&quot;):60103,i=r?Symbol.for(&quot;react.portal&quot;):60106</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">services/service-rest/doc/assets/main.bundle.js:52</span>
+      </div>
+      <p class="description">innerHTML is assigned from user-controlled input, which can lead to XSS.</p>
+      <pre class="snippet">`):l)),p},n.parseXML}.apply(g,c),r!==void 0&amp;&amp;(w.exports=r)},4017:(w,g,s)=&gt;{var c,r;c=[s(7373),s(9781),s(3244),s(5761)],r</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">services/service-rest/doc/assets/main.bundle.js:92</span>
+      </div>
+      <p class="description">innerHTML is assigned from user-controlled input, which can lead to XSS.</p>
+      <pre class="snippet">`;switch(mt){case St.DIFF_INSERT:It[q]=dt.replace(/^(.)/gm,&quot;+ $1&quot;)+vt;break;case St.DIFF_DELETE:It[q]=dt.replace(/^(.)/g</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">services/service-ui/public/jquery.min.js:4</span>
+      </div>
+      <p class="description">innerHTML is assigned from user-controlled input, which can lead to XSS.</p>
+      <pre class="snippet">(function(e,undefined){var t,n,r=typeof undefined,i=e.location,o=e.document,s=o.documentElement,a=e.jQuery,u=e.$,l={},c=</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">services/service-ui/public/jquery.min.js:5</span>
+      </div>
+      <p class="description">innerHTML is assigned from user-controlled input, which can lead to XSS.</p>
+      <pre class="snippet">};&quot;inprogress&quot;===i&amp;&amp;(i=n.shift(),r--),i&amp;&amp;(&quot;fx&quot;===t&amp;&amp;n.unshift(&quot;inprogress&quot;),delete o.stop,i.call(e,s,o)),!r&amp;&amp;o&amp;&amp;o.empty.</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-2">
+                    <div class="domain-header">
+                      <span class="domain-number">02</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Authentication and Session</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#F59E0B33;color:#F59E0B">
+              2 High
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              4 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Passwords, tokens, JWTs, cookies, OAuth, MFA, and logout.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">.yarn/releases/yarn-3.8.7.cjs:191</span>
+      </div>
+      <p class="description">Math.random() is not cryptographically secure and is being used near authentication, token, password, OTP, session, or CSRF context.</p>
+      <pre class="snippet">Please report this to https://github.com/szmarczak/http2-wrapper/`);d(m)}return}i[0].resolve(p);retu</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">.yarn/releases/yarn-3.8.7.cjs:402</span>
+      </div>
+      <p class="description">Math.random() is not cryptographically secure and is being used near authentication, token, password, OTP, session, or CSRF context.</p>
+      <pre class="snippet">`),P.end()}),P});break;case&quot;&lt;&amp;&quot;:d(()=&gt;y9(Number(r[S]),1,t));break;case&quot;&gt;&quot;:case&quot;&gt;&gt;&quot;:{let P=v.resolve(</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">builder6/webapp/public/lib/jquery/jquery-1.11.2.min.js:2</span>
+      </div>
+      <p class="description">Math.random() is not cryptographically secure and is being used near authentication, token, password, OTP, session, or CSRF context.</p>
+      <pre class="snippet">!function(a,b){&quot;object&quot;==typeof module&amp;&amp;&quot;object&quot;==typeof module.exports?module.exports=a.document?b(</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:108</span>
+      </div>
+      <p class="description">Math.random() is not cryptographically secure and is being used near authentication, token, password, OTP, session, or CSRF context.</p>
+      <pre class="snippet">*/function o(t,e){if(t===e)return 0;for(var n=t.length,r=e.length,o=0,i=Math.min(n,r);o&lt;i;++o)if(t[o</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:83</span>
+      </div>
+      <p class="description">Math.random() is not cryptographically secure and is being used near authentication, token, password, OTP, session, or CSRF context.</p>
+      <pre class="snippet">*/var r=n(0),o=n(149),i=n(560);function a(t){for(var e=&quot;https://reactjs.org/docs/error-decoder.html?</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">services/service-ui/public/jquery.min.js:4</span>
+      </div>
+      <p class="description">Math.random() is not cryptographically secure and is being used near authentication, token, password, OTP, session, or CSRF context.</p>
+      <pre class="snippet">(function(e,undefined){var t,n,r=typeof undefined,i=e.location,o=e.document,s=o.documentElement,a=e.</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-4">
+                    <div class="domain-header">
+                      <span class="domain-number">04</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Cryptography</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#3B82F633;color:#3B82F6">
+              1 Medium
+            </span>
+          
+            <span style="border-color:#6B728033;color:#6B7280">
+              2 Low
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              12 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Secrets, randomness, keys, hashing, encryption, and TLS.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">deploy/cluster/docker-compose.yml:22</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">- MONG****godb://root:${MONG****WORD}@mong****mary,mong****seco</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">deploy/cluster/docker-compose.yml:23</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">- MONG****godb://root:${MONG****WORD}@mong****mary:27017/</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">deploy/cluster/docker-compose.yml:41</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">- MONG****godb://root:${MONG****WORD}@mong****mary,mong****seco</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">deploy/cluster/docker-compose.yml:42</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">- MONG****godb://root:${MONG****WORD}@mong****mary:27017/</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">deploy/enterprise/docker-compose-minio.yml:16</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">- MONG****godb://root:${MONG****WORD:-ste****edos}@${MONG****_HOS</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">deploy/enterprise/docker-compose-minio.yml:17</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">- MONG****godb://root:${MONG****WORD:-ste****edos}@${MONG****RTIS</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:20</span>
+      </div>
+      <p class="description">Math.random() appears to be used for an identifier in an authentication-adjacent context.</p>
+      <pre class="snippet">***************************************************************************** */n.r(e),n.d(e,&quot;__exte</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">.yarn/releases/yarn-3.8.7.cjs:314</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">`}function Zl(r,e){return e.replace(/\r?\n/g,$ge(r))}var bg=J(&quot;fs&quot;),IS=J(&quot;stream&quot;),CK=J(&quot;util&quot;),yS=v</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="low">
+      <div class="finding-header">
+        <span class="badge" style="background:#6B7280">LOW</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:6</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">*/!function(){&quot;use strict&quot;;var n={}.hasOwnProperty;function o(){for(var t=[],e=0;e&lt;arguments.length;</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="low">
+      <div class="finding-header">
+        <span class="badge" style="background:#6B7280">LOW</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:75</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">*/var r=n(149),o=&quot;function&quot;==typeof Symbol&amp;&amp;Symbol.for,i=o?Symbol.for(&quot;react.element&quot;):60103,a=o?Sym</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">services/service-rest/doc/assets/main.bundle.js:1</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">(()=&gt;{var qa={3138:()=&gt;{+function(w){&quot;use strict&quot;;var g=&quot;.dropdown-backdrop&quot;,s='[data-toggle=&quot;dropdo</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Math.random() used for security-sensitive value</span>
+        <span class="location">services/service-rest/doc/assets/main.bundle.js:30</span>
+      </div>
+      <p class="description">Math.random() appears to be used for non-security tracking, UI, correlation, delay, animation, or logging identifiers.</p>
+      <pre class="snippet">*/(function(g,s){w.exports=s()})(this,function(){return function(g){function s(r){if(c[r])return c[r</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() or crypto.getRandomValues() instead.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Database URL</span>
+        <span class="location">skills/steedos-configuration/SKILL.md:218</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">MONG****godb://user:pass****word@mongo.example.com:2701****edos?auth****=adm</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: AWS Access Key</span>
+        <span class="location">skills/steedos-configuration/SKILL.md:222</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">AWS_****MPLE</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: AWS Secret Key</span>
+        <span class="location">skills/steedos-configuration/SKILL.md:223</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">AWS_****EKEY</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-5">
+                    <div class="domain-header">
+                      <span class="domain-number">05</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Security Misconfiguration</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#F59E0B33;color:#F59E0B">
+              29 High
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              5 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">CORS, headers, debug behavior, unsafe defaults, and verbose errors.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">.yarn/releases/yarn-3.8.7.cjs:391</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">`)}};ud.paths=[[&quot;-v&quot;],[&quot;--version&quot;]];var z={};ct(z,{Array:()=&gt;HH,Boolean:()=&gt;jH,Counter:()=&gt;GH,Proxy</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">.yarn/releases/yarn-3.8.7.cjs:45</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">`,!1),xp=&quot;\r&quot;,Pp=sr(&quot;\r&quot;,!1),j=0,Et=0,yA=[{line:1,column:1}],zi=0,Ol=[],ze=0,fa;if(&quot;startRule&quot;in e){</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">builder6/server/src/config/steedos.config.ts:121</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">eval(`calcFun = function(args){return \`${rev}\`}`);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">builder6/webapp/public/steedos-init.js:90</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">field.reference_to = eval(`(${field._reference_to})`)();</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">builder6/webapp/src/client/password.ts:42</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">window.eval(`var fun = ${policyFunction}`);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">builder6/webapp/src/pages/app/index.tsx:6</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">eval(evalFunString);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">builder6/webapp/src/utils/steedos/index.ts:105</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">window.eval(&quot;var fun = &quot; + policyFunction);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/filters/src/formula.js:20</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">return eval(formula);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/metadata-registrar/src/config-register/trigger.ts:245</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">if (_.isRegExp(eval(listenTo))) {</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/metadata-registrar/src/config-register/trigger.ts:284</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">_.isRegExp(eval(objectName)) &amp;&amp;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/metadata-registrar/src/config-register/trigger.ts:285</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">eval(objectName).test(objectApiName)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/metadata-registrar/src/utils/convert.ts:5</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">return eval(funStr)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/moleculer-apollo-server/examples/full/users.service.js:100</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">return _.cloneDeep(this.findByID(ctx.params.id));</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/moleculer-apollo-server/examples/full/users.service.js:97</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">if (Array.isArray(ctx.params.id)) {</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/moleculer-apollo-server/examples/full/users.service.js:98</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">return _.cloneDeep(ctx.params.id.map(id =&gt; this.findByID(id)));</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/objectql/src/types/object.ts:693</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">_.isRegExp(eval(metadata.listenTo)) &amp;&amp;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/objectql/src/types/object.ts:694</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">eval(metadata.listenTo).test(this.name)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/objectql/src/types/object.ts:793</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">_.isRegExp(eval(metadata.listenTo)) &amp;&amp;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/objectql/src/types/object.ts:794</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">eval(metadata.listenTo).test(this.name)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/objectql/src/util/convert.ts:5</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">return eval(funStr)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/objectql/src/util/index.ts:117</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">eval(`calcFun = function(args){return \`${rev}\`}`);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Wildcard CORS configuration</span>
+        <span class="location">services/service-api/index.js:37</span>
+      </div>
+      <p class="description">Access-Control-Allow-Origin is set to * which allows any origin.</p>
+      <pre class="snippet">// cors: true, //会导致response返回 access-control-allow-origin: *, 并进一步导致客户端请求时withCredentials: true参数带来</pre>
+      <div class="fix"><strong>Fix:</strong> Restrict CORS to specific trusted origins instead of *.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">services/service-core-objects/main/default/routes/amis_listview_design.router.js:33</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const retUrl = process.env.ROOT_URL + `/app/admin/object_listviews/view/${req.query.id}`</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">services/service-core-objects/main/default/routes/amis_listview_design.router.js:36</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const record = await objectql.getObject('object_listviews').findOne(req.query.id);</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">services/service-metadata-database/src/handles/triggers.ts:101</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">if (_.isRegExp(eval(listenTo))) {</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">services/service-metadata-triggers/src/actionsHandler.ts:57</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">if(_.isRegExp(eval(listenTo))){</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">services/service-metadata-triggers/src/actionsHandler.ts:90</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">if(_.isRegExp(eval(metadata.listenTo)) &amp;&amp; eval(metadata.listenTo).test(objectApiName)){</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">services/service-package-loader/src/loader/triggerYmlLoader.ts:24</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">if(_.isRegExp(eval(listenTo))){</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">services/service-plugin-amis/main/default/services/utils/fields/lookup.js:194</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">payload.data.options = eval(${field._optionsFunction})(api.data);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">services/service-plugin-amis/main/default/services/utils/object-record.js:19</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">scriptStr = scriptStr + `var ${field.name}Options = eval(${field.optionsFunction.toString()})(api.da</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">services/service-plugin-amis/main/default/services/utils/object-record.js:34</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">//         scriptStr = scriptStr + `var ${field.name}Options = eval(${field.optionsFunction.toString</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">services/standard-object-database/main/default/routes/amis_listview_design.router.js:32</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const retUrl = process.env.ROOT_URL + `/app/admin/object_listviews/view/${req.query.id}`</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">services/standard-object-database/main/default/routes/amis_listview_design.router.js:35</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const record = await objectql.getObject('object_listviews').findOne(req.query.id);</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">services/standard-object-database/main/default/services/database-objects.service.js:24</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">if(_.isRegExp(eval(listenTo))){</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-6">
+                    <div class="domain-header">
+                      <span class="domain-number">06</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Dependency and Supply Chain</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#3B82F633;color:#3B82F6">
+              3 Medium
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Known CVEs, vulnerable packages, lockfiles, and package risk.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: jquery@1.11.2.min</span>
+        <span class="location">builder6/webapp/public/lib/jquery/jquery-1.11.2.min.js</span>
+      </div>
+      <p class="description">XSS in jQuery as used in Drupal, Backdrop CMS, and other products</p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `jquery` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: jquery@1.11.2.min</span>
+        <span class="location">builder6/webapp/public/lib/jquery/jquery-1.11.2.min.js</span>
+      </div>
+      <p class="description">Potential XSS vulnerability in jQuery</p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `jquery` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">vendored cves</span>
+        <span class="title">Vendored library with known CVE: jquery@1.11.2.min</span>
+        <span class="location">builder6/webapp/public/lib/jquery/jquery-1.11.2.min.js</span>
+      </div>
+      <p class="description">Cross-Site Scripting (XSS) in jquery</p>
+      
+      <div class="fix"><strong>Fix:</strong> Update the vendored copy of `jquery` to the patched version, or delete the file and install via npm so `npm audit` catches future issues.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-8">
+                    <div class="domain-header">
+                      <span class="domain-number">08</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Data Exposure and Privacy</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#F59E0B33;color:#F59E0B">
+              61 High
+            </span>
+          
+            <span style="border-color:#3B82F633;color:#3B82F6">
+              9 Medium
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              6 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Sensitive logs, leaked data, git history, and privacy boundaries.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/accounts/src/rest-express/endpoints/initServer.ts:8</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send(error.message)</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/auth/src/endpoints/jwt.ts:109</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message)</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/metadata_sources.router.ts:46</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/metadata/retrieve/retrieve.router.ts:70</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ status: 'error', message: err.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/metadata/retrieve/retrieve.router.ts:75</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send({ status: 'error', message: err.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/packages/installing_from_store_file.router.ts:63</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send({error: error.message});</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/packages/installing_from_store_info.router.ts:30</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send({error: error.message});</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/packages/upload_to_store.router.ts:85</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send({error: error.message});</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/packages/upload_to_store.router.ts:92</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send({error: error.message});</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/sobject/create.router.ts:41</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send({ status: 'error', message: err.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/sobject/retrieve.router.ts:46</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send({ status: 'error', message: err.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/metadata-api/src/sobject/retrieve.router.ts:81</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send({ status: 'error', message: err.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/moleculer-apollo-server/src/moleculerApollo.js:53</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.end(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">packages/odata-v4-typeorm/src/odataQueryMiddleware.ts:12</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).json({message: 'Internal server error.', error: {message: e.message}});</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-api/index.js:256</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.end(JSON.stringify({ error: err.message, detail: err }));</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-api/index.js:259</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.end(JSON.stringify({ error: err.message }));</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-core-objects/main/default/routes/amis_button_design.router.js:59</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-core-objects/main/default/routes/amis_listview_design.router.js:58</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-core-objects/main/default/routes/api_key.router.js:35</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ status: 'error', message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-core-objects/main/default/routes/importRecords.router.js:54</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send({ status: &quot;failed&quot;, error: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-core-objects/main/default/routes/importRecords.router.js:81</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ error: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-core-objects/main/default/routes/object_fields_design.router.js:60</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-identity-jwt/main/default/routes/apps.router.js:17</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send(err.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-identity-jwt/main/default/routes/external_app.router.js:34</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ success: false, message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-identity-jwt/src/routes/apps.router.ts:23</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">return res.status(500).send(err.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-identity-jwt/src/routes/external_app.router.ts:52</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ success: false, message: error.message })</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:105</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:132</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">// res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:156</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:176</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:193</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:209</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:226</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:246</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:267</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:36</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:61</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-package-registry/main/default/routes/nodes.router.js:83</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-pages/main/default/routes/page_design.router.js:60</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-pages/main/default/routes/page_render.router.js:78</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-pages/main/default/routes/page_schema.router.js:36</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-pages/main/default/routes/page_view.router.js:138</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-pages/main/default/routes/page_view.router.js:77</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/main/default/routes/apps.router.js:15</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/main/default/routes/objects.router.js:105</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/main/default/routes/objects.router.js:31</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/main/default/routes/objects.router.js:42</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/main/default/routes/objects.router.js:56</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/main/default/routes/objects.router.js:72</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/main/default/routes/objects.router.js:83</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/main/default/routes/objects.router.js:94</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/src/routes/apps.router.ts:20</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/src/routes/objects.router.ts:117</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/src/routes/objects.router.ts:136</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/src/routes/objects.router.ts:155</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/src/routes/objects.router.ts:174</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/src/routes/objects.router.ts:49</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/src/routes/objects.router.ts:68</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/service-ui/src/routes/objects.router.ts:90</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send(error.message);</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/standard-object-database/main/default/routes/amis_listview_design.router.js:57</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Stack trace / error message leaked in HTTP response</span>
+        <span class="location">services/standard-ui/main/default/routers/amis_app_nav_schema_design.router.js:53</span>
+      </div>
+      <p class="description">An error's stack or message is being sent back to the client. Stack traces disclose file paths, package versions, and internal function names; error messages often include ids and database internals.</p>
+      <pre class="snippet">res.status(500).send({ message: error.message });</pre>
+      <div class="fix"><strong>Fix:</strong> Log the error server-side (pino/winston/sentry). Return a generic message: `res.status(500).json({ error: 'Internal server error' })`.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">.yarn/releases/yarn-3.8.7.cjs:602</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">`);let g=await Ee.find(i,this.context.plugins),{project:h,workspace:p}=await Ge.find(g,i);if(p===nul</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">.yarn/releases/yarn-3.8.7.cjs:611</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">`}}let P=v.join(this.context.cwd,&quot;.editorconfig&quot;);M.existsSync(P)||await M.writeFilePromise(P,S),M.e</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">.yarn/releases/yarn-3.8.7.cjs:96</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">`+n)}var s=this.tokenizeInternal(e,t);return s},r.prototype.tokenizeInternal=function(e,t){var i=thi</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">deploy/enterprise/app/steedosctl/bin/restore.js:75</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log('Restoring docker environment file with existing encryption password &amp; salt');</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/cli/src/commands/source/config.ts:42</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(&quot;METADATA_APIKEY=&quot; + apikey);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:108</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">*/function o(t,e){if(t===e)return 0;for(var n=t.length,r=e.length,o=0,i=Math.min(n,r);o&lt;i;++o)if(t[o</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:20</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">***************************************************************************** */n.r(e),n.d(e,&quot;__exte</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:6</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">*/!function(){&quot;use strict&quot;;var n={}.hasOwnProperty;function o(){for(var t=[],e=0;e&lt;arguments.length;</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/steedos-plugin-schema-builder/public/schema-builder/app.js:67</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">*/var r=Object.getOwnPropertySymbols,o=Object.prototype.hasOwnProperty,i=Object.prototype.propertyIs</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/steedos-plugin-schema-builder/webapp/src/g6/model/model-node.tsx:286</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">// console.log(cfg.data.key)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">services/service-metadata-objects/src/formula/formulaActionHandler.ts:335</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">// console.log('key', key);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">services/service-pages/main/default/client/page.render.client.js:50</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">// console.log('=====getDisplay===setItem=&gt;', key, display)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">services/service-rest/doc/assets/main.bundle.js:92</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">`;switch(mt){case St.DIFF_INSERT:It[q]=dt.replace(/^(.)/gm,&quot;+ $1&quot;)+vt;break;case St.DIFF_DELETE:It[q</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">services/service-ui/main/default/client/mobile_bridge.client.js:102</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log('[MobileBridge] Push token:', token.value);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">test/k6/runner.js:31</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(`${com} -e ROOT_URL=${ROOT_URL} -e API_KEY=${API_KEY} -e VUS=${K6_VUS} -e DURATION=${K6_</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+                  </div>
+                
+    </section>
+
+    
+    <section>
+      <h2>Test file findings (review only)</h2>
+      <p class="section-kicker">These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures.</p>
+      
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">deploy/enterprise/app/steedosctl/bin/backup.test.js:50</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">var apps****oURI = 'mongodb://us****name:pass****word@host****edos'</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Database URL</span>
+        <span class="location">deploy/enterprise/app/steedosctl/bin/backup.test.js:51</span>
+      </div>
+      <p class="description">A Database URL was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">var cmd = 'mong****dump --ur****godb://us****name:pass****word@host****edos --ar****e=/d</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Local dev endpoint] Exposed secret: Database URL</span>
+        <span class="location">deploy/enterprise/app/steedosctl/bin/backup.test.js:91</span>
+      </div>
+      <p class="description">The connection string points at localhost / 127.0.0.1 / 0.0.0.0 / host.docker.internal — a developer-machine or dev-container credential. Only a threat if you didn't mean to publish this file. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">expect(backup.remo****Data(`STEE****edis://127.0.0.1:6379\n</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Local dev endpoint] Exposed secret: Database URL</span>
+        <span class="location">deploy/enterprise/app/steedosctl/bin/backup.test.js:96</span>
+      </div>
+      <p class="description">The connection string points at localhost / 127.0.0.1 / 0.0.0.0 / host.docker.internal — a developer-machine or dev-container credential. Only a threat if you didn't mean to publish this file. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">expect(backup.remo****Data(`STEE****edis://127.0.0.1:6379\n</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    </section>
+    
+
+    <footer>
+      Generated by <strong>Verglos</strong> · <a href="https://verglos.dev" style="color:#E85D4C">verglos.dev</a>
+    </footer>
+  </div>
+</body>
+</html>
