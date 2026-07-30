@@ -116,6 +116,7 @@ export const dependenciesDetector: Detector = {
             vuln.summary ??
             `Known vulnerability ${vuln.id} affects ${pkg.name}@${pkg.version}.`,
           why: "A known-vulnerable dependency is a public roadmap for an attacker — the CVE describes the payload. Upgrades usually take minutes; breaches take weeks to notice.",
+          file: "package-lock.json",
           package: pkg.name,
           cve: vuln.id,
           refs: [vuln.id],

@@ -464,15 +464,22 @@ export const aiPatternsDetector: Detector = {
                 detector: "ai-patterns",
                 rule: "AI-003",
                 domain: "D3",
-                severity: "high",
+                // v1.6: reported at medium, not high. The pattern-match is
+                // high confidence (this shape IS in the code), but Verglos
+                // can't see upstream middleware that may already enforce
+                // ownership. Marking every hit "high" reads as more
+                // certain than the scanner actually is. See
+                // docs/plan/v1.6-noise-reduction.md — precision study
+                // planned for v1.7 to justify promoting or refining.
+                severity: "medium",
                 title: "IDOR — record looked up by user-supplied id without ownership check",
                 description:
-                  "A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.",
-                why: "Models can infer 'who are you' (auth is well-documented in tutorials) but not 'may you' (authorization depends on the app's data model). The result is the classic IDOR: /api/invoice/1234 → /api/invoice/1235 returns someone else's record. Every one of these is the same shape.",
+                  "A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. If no upstream middleware scopes the query to the current user, any authenticated user can pass another user's id. Verify: does an auth middleware, tenant-scoping helper, or repository layer above this route already enforce ownership? If not, this is a real IDOR.",
+                why: "Models can infer 'who are you' (auth is well-documented in tutorials) but not 'may you' (authorization depends on the app's data model). The result is the classic IDOR: /api/invoice/1234 → /api/invoice/1235 returns someone else's record. Every one of these has the same shape, but only some are exploitable — the ones where ownership isn't enforced elsewhere.",
                 file: file.relativePath,
                 line: i + 1,
                 snippet: line.trim().slice(0, 120),
-                fix: "Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.",
+                fix: "Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Or confirm the auth middleware / repository layer scopes queries to the current user. Never trust that authentication alone implies authorization.",
                 refs: ["CWE-639", "CWE-284", "OWASP: A01 Broken Access Control"],
                 confidence: "high",
                 category: "Authorization",
