@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verglos Security Report — Score 0</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0b; color: #e4e4e7; line-height: 1.6; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; padding: 2rem 0; border-bottom: 1px solid #27272a; margin-bottom: 2rem; }
+    .logo { font-family: monospace; font-size: 0.75rem; letter-spacing: 0.2em; color: #E85D4C; text-transform: uppercase; }
+    h1 { font-size: 1.5rem; margin: 1rem 0 0.5rem; }
+    .risk { color: #9CA3AF; font-size: 0.875rem; }
+    .gauge { margin: 1.5rem 0; }
+    .counts { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
+    .count { text-align: center; }
+    .count-num { font-size: 1.5rem; font-weight: bold; font-family: monospace; }
+    .count-label { font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; }
+    .paywall { background: #18181b; border: 1px solid #E85D4C33; border-radius: 8px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+    .paywall h2 { color: #E85D4C; margin-bottom: 0.5rem; }
+    .paywall p { color: #9CA3AF; font-size: 0.875rem; }
+    .paywall code { background: #27272a; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    section { margin: 2rem 0; }
+    section h2 { font-size: 1.125rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #27272a; }
+    .section-kicker { color: #9CA3AF; font-size: 0.875rem; max-width: 680px; margin-top: -0.5rem; margin-bottom: 1rem; }
+    .domains-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin: 1rem 0 2rem; }
+    .domain-pill { display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.75rem; align-items: start; min-height: 4.25rem; padding: 0.875rem; border: 1px solid #27272a; border-radius: 8px; background: #111113; color: #e4e4e7; text-decoration: none; }
+    .domain-pill.active { border-color: #E85D4C55; background: #18181b; }
+    .domain-pill.clean { color: #a1a1aa; }
+    .domain-number { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 999px; background: #0a0a0b; border: 1px solid #27272a; color: #9CA3AF; font-family: monospace; font-size: 0.75rem; }
+    .domain-pill.active .domain-number { border-color: #E85D4C66; color: #E85D4C; }
+    .domain-pill strong { display: block; font-size: 0.875rem; line-height: 1.25rem; }
+    .domain-pill small { display: block; margin-top: 0.25rem; color: #71717a; font-size: 0.75rem; }
+    .domain-section { border: 1px solid #27272a; border-radius: 8px; background: #111113; padding: 1rem; }
+    .domain-section + .domain-section { margin-top: 1rem; }
+    .domain-header { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .domain-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .domain-heading h3 { font-size: 1.125rem; line-height: 1.35; }
+    .domain-summary { color: #9CA3AF; font-size: 0.875rem; margin-top: 0.25rem; }
+    .severity-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .severity-stack span { border: 1px solid; border-radius: 999px; padding: 0.125rem 0.5rem; font-size: 0.6875rem; font-family: monospace; text-transform: uppercase; }
+    .finding { background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .domain-section .finding:last-child { margin-bottom: 0; }
+    .finding-header { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .badge { font-size: 0.625rem; padding: 0.125rem 0.5rem; border-radius: 4px; color: white; font-weight: bold; letter-spacing: 0.05em; }
+    .detector { font-size: 0.625rem; padding: 0.125rem 0.5rem; border: 1px solid #3f3f46; border-radius: 4px; color: #a1a1aa; font-family: monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+    .title { font-weight: 600; }
+    .location { font-family: monospace; font-size: 0.75rem; color: #9CA3AF; }
+    .locked { font-size: 0.75rem; color: #E85D4C; }
+    .description { font-size: 0.875rem; color: #a1a1aa; }
+    .snippet { background: #0a0a0b; border: 1px solid #27272a; border-radius: 4px; padding: 0.75rem; margin: 0.5rem 0; font-family: monospace; font-size: 0.75rem; overflow-x: auto; }
+    .fix { background: #052e1620; border-left: 3px solid #22C55E; padding: 0.5rem 0.75rem; margin-top: 0.5rem; font-size: 0.875rem; }
+    .upgrade-hint { font-size: 0.75rem; color: #6B7280; margin-top: 0.5rem; font-style: italic; }
+    footer { text-align: center; padding: 2rem 0; color: #52525b; font-size: 0.75rem; border-top: 1px solid #27272a; margin-top: 2rem; }
+    .meta { font-size: 0.75rem; color: #52525b; margin-top: 0.5rem; }
+    .prov { padding: 1.25rem; border: 1px solid #E85D4C40; border-radius: 8px; background: linear-gradient(180deg, #18181b 0%, #111113 100%); }
+    .prov h2 { border-bottom: 0; padding-bottom: 0; }
+    .prov code { background: #27272a; padding: 0.125rem 0.375rem; border-radius: 4px; font-family: monospace; font-size: 0.75rem; }
+    .prov-bar { display: flex; width: 100%; height: 2.5rem; border-radius: 6px; overflow: hidden; border: 1px solid #27272a; margin: 1rem 0 0.75rem; background: #0a0a0b; }
+    .prov-bar-ai { background: #E85D4C; color: white; display: flex; align-items: center; justify-content: flex-start; padding: 0 0.75rem; min-width: 0; overflow: hidden; }
+    .prov-bar-human { background: #3B82F6; color: white; display: flex; align-items: center; justify-content: flex-end; padding: 0 0.75rem; min-width: 0; overflow: hidden; }
+    .prov-bar-label { font-family: monospace; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+    .prov-ratio { color: #fef2f2; font-size: 0.9375rem; margin-top: 0.75rem; }
+    .prov-ratio strong { color: #E85D4C; font-family: monospace; font-size: 1.125rem; padding: 0 0.125rem; }
+    .prov-ratio-muted { color: #71717a; font-style: italic; font-size: 0.8125rem; }
+    .prov-line { color: #d4d4d8; font-size: 0.875rem; margin-top: 0.25rem; }
+    .prov-num { color: #E85D4C; font-family: monospace; font-weight: 600; }
+    @media (max-width: 760px) {
+      .container { padding: 1rem; }
+      .counts { gap: 0.75rem; flex-wrap: wrap; }
+      .domains-grid { grid-template-columns: 1fr; }
+      .domain-header { grid-template-columns: 1fr; gap: 0.75rem; }
+      .domain-heading { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Verglos</div>
+      <h1>Security Report</h1>
+      <p class="risk">CRITICAL RISK</p>
+      <div class="gauge">
+    <svg width="200" height="200" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#1f1f23" stroke-width="12"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#E85D4C" stroke-width="12"
+        stroke-dasharray="502.6548245743669" stroke-dashoffset="502.6548245743669"
+        stroke-linecap="round" transform="rotate(-90 100 100)"/>
+      <text x="100" y="95" text-anchor="middle" fill="#E85D4C" font-size="36" font-weight="bold" font-family="monospace">0</text>
+      <text x="100" y="120" text-anchor="middle" fill="#9CA3AF" font-size="12" font-family="monospace">/ 100</text>
+    </svg>
+  </div>
+      <div class="counts">
+        <div class="count"><div class="count-num" style="color:#E85D4C">18</div><div class="count-label">Critical</div></div>
+        <div class="count"><div class="count-num" style="color:#F59E0B">83</div><div class="count-label">High</div></div>
+        <div class="count"><div class="count-num" style="color:#3B82F6">9</div><div class="count-label">Medium</div></div>
+        <div class="count"><div class="count-num" style="color:#6B7280">0</div><div class="count-label">Low</div></div>
+        <div class="count"><div class="count-num" style="color:#9CA3AF">19</div><div class="count-label">Info</div></div>
+      </div>
+      <p class="meta">Test file findings (review only): 8. Excluded from the default score.</p>
+      <p class="meta">Scanned 2026-07-29T21:42:30.742Z · 18428ms · node</p>
+    </header>
+
+    
+    <section class="prov">
+      <h2>AI-authorship</h2>
+      <p class="section-kicker">Verglos infers who wrote each file — the developer or an AI agent — and shows whether findings cluster on one side. Signals fired: agent-artifacts, agent-artifacts (sampled 300/12376 files for speed). Confidence: <strong>low</strong>. Opt out with <code>verglos scan --no-provenance</code>.</p>
+      <div class="prov-bar">
+        <div class="prov-bar-ai" style="width:30%" title="AI-authored: 30%">
+          <span class="prov-bar-label">30% AI</span>
+        </div>
+        <div class="prov-bar-human" style="width:70%" title="Human-authored: 70.0%">
+          <span class="prov-bar-label">70.0% human</span>
+        </div>
+      </div>
+      <p class="prov-ratio prov-ratio-muted">Density ratio hidden — not enough LOC per bucket to print a defensible number (guardrail).</p>
+      <p class="prov-line"><span class="prov-num">0</span> of <span class="prov-num">18</span> criticals live in AI-authored files.</p>
+    </section>
+  
+
+    <section>
+      <h2>10 Security Domains</h2>
+      <p class="section-kicker">Each finding below is grouped by the security domain it belongs to, so you can see whether the risk is about input handling, secrets, dependencies, configuration, or another part of the attack surface.</p>
+      <div class="domains-grid">
+        
+    <a class="domain-pill active" href="#domain-1">
+      <span class="domain-number">01</span>
+      <span>
+        <strong>Input Validation and Injection</strong>
+        <small>7 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-2">
+      <span class="domain-number">02</span>
+      <span>
+        <strong>Authentication and Session</strong>
+        <small>4 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-3">
+      <span class="domain-number">03</span>
+      <span>
+        <strong>Authorization and Access Control</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-4">
+      <span class="domain-number">04</span>
+      <span>
+        <strong>Cryptography</strong>
+        <small>16 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-5">
+      <span class="domain-number">05</span>
+      <span>
+        <strong>Security Misconfiguration</strong>
+        <small>84 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-6">
+      <span class="domain-number">06</span>
+      <span>
+        <strong>Dependency and Supply Chain</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-7">
+      <span class="domain-number">07</span>
+      <span>
+        <strong>API Security</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill active" href="#domain-8">
+      <span class="domain-number">08</span>
+      <span>
+        <strong>Data Exposure and Privacy</strong>
+        <small>10 findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-9">
+      <span class="domain-number">09</span>
+      <span>
+        <strong>Infrastructure and Runtime</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+    <a class="domain-pill clean" href="#domain-10">
+      <span class="domain-number">10</span>
+      <span>
+        <strong>Monitoring and Incident Response</strong>
+        <small>No findings</small>
+      </span>
+    </a>
+  
+      </div>
+    </section>
+
+    <section>
+      <h2>Findings by Domain</h2>
+      
+                  <div class="domain-section" id="domain-1">
+                    <div class="domain-header">
+                      <span class="domain-number">01</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Input Validation and Injection</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#E85D4C33;color:#E85D4C">
+              7 Critical
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">SQL, command, XSS, traversal, and unsafe user-controlled input.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">injection</span>
+        <span class="title">SQL injection (string concat)</span>
+        <span class="location">packages/server/api/src/app/database/migration/postgres/1709052740378-AddPlatformToPostgres.ts:107</span>
+      </div>
+      <p class="description">SQL query built with string interpolation may allow SQL injection.</p>
+      <pre class="snippet">await queryRunner.query(`update &quot;project&quot; set &quot;platformId&quot; = '${platformId}' where &quot;id&quot; = '${project.id}'`)</pre>
+      <div class="fix"><strong>Fix:</strong> Use parameterized queries or an ORM with prepared statements.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">injection</span>
+        <span class="title">SQL injection (string concat)</span>
+        <span class="location">packages/server/api/src/app/database/migration/postgres/1709052740378-AddPlatformToPostgres.ts:108</span>
+      </div>
+      <p class="description">SQL query built with string interpolation may allow SQL injection.</p>
+      <pre class="snippet">await queryRunner.query(`update &quot;user&quot; set &quot;platformId&quot; = '${platformId}' where &quot;id&quot; = '${ownerId}'`)</pre>
+      <div class="fix"><strong>Fix:</strong> Use parameterized queries or an ORM with prepared statements.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">injection</span>
+        <span class="title">SQL injection (string concat)</span>
+        <span class="location">packages/server/api/src/app/database/migration/postgres/1717961669938-ModifyProjectMembers.ts:46</span>
+      </div>
+      <p class="description">SQL query built with string interpolation may allow SQL injection.</p>
+      <pre class="snippet">const user = await queryRunner.query(`SELECT * FROM &quot;user&quot; WHERE email = '${projectMember.email}' AND &quot;platformId&quot; = '${</pre>
+      <div class="fix"><strong>Fix:</strong> Use parameterized queries or an ORM with prepared statements.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">injection</span>
+        <span class="title">SQL injection (string concat)</span>
+        <span class="location">packages/server/api/src/app/database/migration/postgres/1717961669938-ModifyProjectMembers.ts:93</span>
+      </div>
+      <p class="description">SQL query built with string interpolation may allow SQL injection.</p>
+      <pre class="snippet">const user = await queryRunner.query(`SELECT * FROM &quot;user&quot; WHERE id = '${projectMember.userId}'`)</pre>
+      <div class="fix"><strong>Fix:</strong> Use parameterized queries or an ORM with prepared statements.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">injection</span>
+        <span class="title">SQL injection (string concat)</span>
+        <span class="location">packages/server/api/src/app/database/migration/postgres/1765308234291-MigrateSqliteToPglite.ts:136</span>
+      </div>
+      <p class="description">SQL query built with string interpolation may allow SQL injection.</p>
+      <pre class="snippet">rows = await sqliteDataSource.query(`SELECT * FROM &quot;${tableName}&quot;`)</pre>
+      <div class="fix"><strong>Fix:</strong> Use parameterized queries or an ORM with prepared statements.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">injection</span>
+        <span class="title">SQL injection (string concat)</span>
+        <span class="location">packages/server/api/src/app/database/migration/sqlite/1709051625110-CreateDefaultPlaformSqlite.ts:844</span>
+      </div>
+      <p class="description">SQL query built with string interpolation may allow SQL injection.</p>
+      <pre class="snippet">await queryRunner.query(`update &quot;project&quot; set &quot;platformId&quot; = '${platformId}' where &quot;id&quot; = '${project.id}'`)</pre>
+      <div class="fix"><strong>Fix:</strong> Use parameterized queries or an ORM with prepared statements.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">injection</span>
+        <span class="title">SQL injection (string concat)</span>
+        <span class="location">packages/server/api/src/app/database/migration/sqlite/1709051625110-CreateDefaultPlaformSqlite.ts:845</span>
+      </div>
+      <p class="description">SQL query built with string interpolation may allow SQL injection.</p>
+      <pre class="snippet">await queryRunner.query(`update &quot;user&quot; set &quot;platformId&quot; = '${platformId}' where &quot;id&quot; = '${ownerId}'`)</pre>
+      <div class="fix"><strong>Fix:</strong> Use parameterized queries or an ORM with prepared statements.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-2">
+                    <div class="domain-header">
+                      <span class="domain-number">02</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Authentication and Session</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#E85D4C33;color:#E85D4C">
+              4 Critical
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Passwords, tokens, JWTs, cookies, OAuth, MFA, and logout.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Wildcard CORS on an app with authentication</span>
+        <span class="location">packages/server/api/src/app/server.ts:203</span>
+      </div>
+      <p class="description">Access-Control-Allow-Origin: * lets any web page in a browser call this API. On an app with logged-in users this is catastrophic — combined with cookie or Authorization-header handling it enables full session hijack from any origin.</p>
+      <pre class="snippet">origin: '*',</pre>
+      <div class="fix"><strong>Fix:</strong> Restrict origin to an explicit allowlist of trusted domains. Never combine `Access-Control-Allow-Origin: *` with credentials.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Wildcard CORS on an app with authentication</span>
+        <span class="location">packages/server/api/src/app/server.ts:55</span>
+      </div>
+      <p class="description">Access-Control-Allow-Origin: * lets any web page in a browser call this API. On an app with logged-in users this is catastrophic — combined with cookie or Authorization-header handling it enables full session hijack from any origin.</p>
+      <pre class="snippet">cors: { origin: '*' },</pre>
+      <div class="fix"><strong>Fix:</strong> Restrict origin to an explicit allowlist of trusted domains. Never combine `Access-Control-Allow-Origin: *` with credentials.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Date.now() feeding a token — predictable secret</span>
+        <span class="location">packages/server/api/src/app/workers/job-queue/job-broker.ts:84</span>
+      </div>
+      <p class="description">A non-cryptographic random source (Date.now()) is being used to produce token. Predictable across processes and observable within minutes to a determined attacker.</p>
+      <pre class="snippet">const token = `token-${Date.now()}-${Math.random().toString(36).slice(2)}`</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() / crypto.randomInt() (Node) or crypto.getRandomValues() (browser). For OTPs: crypto.randomInt(100000, 1000000). For tokens: crypto.randomBytes(32).toString('base64url').</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Wildcard CORS on an app with authentication</span>
+        <span class="location">packages/server/sandbox/src/lib/sandbox/sandbox.ts:99</span>
+      </div>
+      <p class="description">Access-Control-Allow-Origin: * lets any web page in a browser call this API. On an app with logged-in users this is catastrophic — combined with cookie or Authorization-header handling it enables full session hijack from any origin.</p>
+      <pre class="snippet">cors: { origin: '*' },</pre>
+      <div class="fix"><strong>Fix:</strong> Restrict origin to an explicit allowlist of trusted domains. Never combine `Access-Control-Allow-Origin: *` with credentials.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-4">
+                    <div class="domain-header">
+                      <span class="domain-number">04</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Cryptography</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#E85D4C33;color:#E85D4C">
+              7 Critical
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              9 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Secrets, randomness, keys, hashing, encryption, and TLS.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: AWS Access Key</span>
+        <span class="location">packages/pieces/community/shippo/src/lib/triggers/new-shipping-label.ts:76</span>
+      </div>
+      <p class="description">A AWS Access Key was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">'https://sh****very.s3.amaz****naws.com/****45e0.pdf?S</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: AWS Access Key</span>
+        <span class="location">packages/pieces/community/shippo/src/lib/triggers/new-shipping-label.ts:86</span>
+      </div>
+      <p class="description">A AWS Access Key was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">'https://sh****very.s3.amaz****naws.com/****code.pdf?Sign****WAGw</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/pieces/community/snowflake/src/lib/auth.ts:15</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">.replace('----****EGIN PRIVATE KEY-****----', '')</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/pieces/community/snowflake/src/lib/auth.ts:20</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">'----****EGIN PRIVATE KEY-****----',</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/pieces/community/snowflake/src/lib/auth.ts:203</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">'RSA private key in PEM format *(Option B)*. Paste the full cont****ents of your `.p</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/pieces/community/snowflake/src/lib/common/index.ts:40</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">.replace('----****EGIN PRIVATE KEY-****----', '')</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="critical">
+      <div class="finding-header">
+        <span class="badge" style="background:#E85D4C">CRITICAL</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/pieces/community/snowflake/src/lib/common/index.ts:46</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables.</p>
+      <pre class="snippet">'----****EGIN PRIVATE KEY-****----',</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/server/api/src/app/helper/system/system-props.ts:10</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential.</p>
+      <pre class="snippet">TEMP****_KEY = 'TEMP****_KEY',</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/server/api/src/app/helper/system/system-props.ts:107</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential.</p>
+      <pre class="snippet">SECR****_KEY = 'SECR****_KEY',</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/server/api/src/app/helper/system/system-props.ts:11</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential.</p>
+      <pre class="snippet">TEMP****_KEY = 'TEMP****_KEY',</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/server/api/src/app/helper/system/system-props.ts:118</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential.</p>
+      <pre class="snippet">STRI****_KEY = 'STRI****_KEY',</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/server/api/src/app/helper/system/system-props.ts:137</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential.</p>
+      <pre class="snippet">CONS****_KEY = 'CONS****_KEY',</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/server/api/src/app/helper/system/system-props.ts:38</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential.</p>
+      <pre class="snippet">FEAT****_KEY = 'FEAT****_KEY',</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/server/api/src/app/helper/system/system-props.ts:48</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential.</p>
+      <pre class="snippet">JWT_****CRET = 'JWT_****CRET',</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Private Key PEM</span>
+        <span class="location">packages/server/api/test/helpers/auth.ts:38</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">const MOCK****_KEY = `----****EGIN RSA PRIVATE KEY-****----</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Placeholder] Exposed secret: Private Key PEM</span>
+        <span class="location">packages/web/src/features/project-releases/components/connect-git-dialog.tsx:167</span>
+      </div>
+      <p class="description">The matched value or key name looks like a placeholder, sample, fixture, mock, or expected assertion value. Verify it is not a real credential.</p>
+      <pre class="snippet">plac****der=&quot;----****EGIN OPENSSH PRIVATE KEY-****----&quot;</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-5">
+                    <div class="domain-header">
+                      <span class="domain-number">05</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Security Misconfiguration</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#F59E0B33;color:#F59E0B">
+              83 High
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              1 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">CORS, headers, debug behavior, unsafe defaults, and verbose errors.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ai/ai-provider-controller.ts:28</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">return aiProviderService(app.log).update(platformId, request.params.id, request.body)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ai/ai-provider-controller.ts:32</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">await aiProviderService(app.log).delete(platformId, request.params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ai/ai-tool-config-controller.ts:19</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">return aiToolConfigService(app.log).update(platformId, request.params.id, request.body)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ai/ai-tool-config-controller.ts:23</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">await aiToolConfigService(app.log).delete(platformId, request.params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/app-connection/app-connection.controller.ts:109</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/app-connection/app-connection.controller.ts:144</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/authentication/user-identity/user-identity-service.ts:78</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const userIdentity = await userIdentityRepository().findOneByOrFail({ id: params.id })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/authentication/user-identity/user-identity-service.ts:94</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">await userIdentityRepository().update(params.id, {</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/server/api/src/app/database/redis/distributed-store-factory.ts:110</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">await redisClient.eval(lua, 1, key, field, serializedValue)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/chat/chat-controller.ts:187</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const conversationId = request.params.id</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/chat/chat-controller.ts:209</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const conversationId = request.params.id</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/chat/chat-controller.ts:43</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/chat/chat-controller.ts:51</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/chat/chat-controller.ts:60</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/server/api/src/app/ee/chat/chat-helpers.ts:142</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">const count = await redis.eval(</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/global-connections/global-connection-module.ts:92</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/pieces/piece-set/piece-set.controller.ts:30</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">return service.getOne({ id: req.params.id, platformId: req.principal.platform.id })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/pieces/piece-set/piece-set.controller.ts:35</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/pieces/piece-set/piece-set.controller.ts:42</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">await service.delete({ id: req.params.id, platformId: req.principal.platform.id })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/pieces/piece-set/piece-set.controller.ts:47</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const clone = await service.duplicate({ id: req.params.id, platformId: req.principal.platform.id, name: req.body.name })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/pieces/piece-set/piece-set.controller.ts:53</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">pieceSetId: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/platform-webhooks/platform-webhooks.controller.ts:16</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/platform/admin/templates/admin-platform-templates-cloud.controller.ts:63</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const template = await templateService(app.log).getOneOrThrow({ id: request.params.id })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/platform/admin/templates/admin-platform-templates-cloud.controller.ts:75</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const template = await templateService(app.log).getOneOrThrow({ id: request.params.id })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/platform/admin/templates/admin-platform-templates-cloud.controller.ts:84</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">return templateService(app.log).delete({ id: request.params.id })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/projects/project-members/project-member.controller.ts:38</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/projects/project-members/project-member.service.ts:148</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/projects/project-members/project-member.service.ts:158</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">params: { entityType: 'project_member', entityId: params.id, message: 'Project member not found' },</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/projects/project-members/project-member.service.ts:163</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/projects/project-release/git-sync/git-sync.module.ts:40</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/projects/project-role/project-role.controller.ts:18</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/projects/project-role/project-role.controller.ts:24</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">projectRoleId: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/projects/project-role/project-role.controller.ts:53</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/scim/scim-group-controller.ts:31</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">projectId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/scim/scim-group-controller.ts:49</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">projectId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/scim/scim-group-controller.ts:59</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">projectId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/scim/scim-user-controller.ts:30</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">userId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/scim/scim-user-controller.ts:48</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">userId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/scim/scim-user-controller.ts:58</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">userId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/secret-managers/secret-managers.controller.ts:26</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/signing-key/signing-key-controller.ts:40</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/ee/signing-key/signing-key-controller.ts:46</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">message: `SigningKey with id ${req.params.id} not found`,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/flows/flow/flow.controller.ts:157</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">flowId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/flows/flow/flow.controller.ts:166</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/flows/flow/flow.controller.ts:174</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/flows/flow/flow.controller.ts:84</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/flows/folder/folder.module.ts:42</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">folderId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/flows/folder/folder.module.ts:65</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">folderId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/flows/folder/folder.module.ts:88</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">folderId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/knowledge-base/knowledge-base.controller.ts:107</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">knowledgeBaseFileId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/knowledge-base/knowledge-base.controller.ts:115</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">knowledgeBaseFileId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/knowledge-base/knowledge-base.controller.ts:91</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/knowledge-base/knowledge-base.controller.ts:99</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">knowledgeBaseFileId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/knowledge-base/knowledge-base.service.ts:149</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/platform/platform.controller.ts:115</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">fileId: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/platform/platform.controller.ts:134</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const isCloudNonEnterprisePlan = await platformPlanService(req.log).isCloudNonEnterprisePlan(req.params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/platform/platform.controller.ts:143</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const platformPlan = await platformPlanService(req.log).getOrCreateForPlatform(req.params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/platform/platform.controller.ts:148</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const platformId = req.params.id</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/platform/platform.controller.ts:47</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">if (req.principal.platform.id !== req.params.id) {</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/platform/platform.controller.ts:89</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">if (req.principal.platform.id !== req.params.id) {</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/platform/platform.service.ts:139</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">? await this.getOneWithFederatedAuthOrThrow(params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/platform/platform.service.ts:140</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">: await this.getOneOrThrow(params.id)</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/field/field.controller.ts:30</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/field/field.controller.ts:38</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/record/record.controller.ts:37</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/table/table.controller.ts:101</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/table/table.controller.ts:29</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/table/table.controller.ts:50</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">tableId: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/table/table.controller.ts:60</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/table/table.controller.ts:72</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/table/table.controller.ts:87</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/tables/table/table.controller.ts:94</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/template/template.controller.ts:111</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const result = await templateService(app.log).update({ id: request.params.id, params: request.body })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/template/template.controller.ts:116</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const template = await templateService(app.log).getOneOrThrow({ id: request.params.id })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/template/template.controller.ts:92</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">const template = await templateService(app.log).getOneOrThrow({ id: request.params.id })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/user-invitations/user-invitation.module.ts:79</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/user/platform/platform-user-controller.ts:29</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/user/platform/platform-user-controller.ts:44</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: req.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/variable/variable.controller.ts:66</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/variable/variable.controller.ts:71</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">id: request.params.id,</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">IDOR — record looked up by user-supplied id without ownership check</span>
+        <span class="location">packages/server/api/src/app/variable/variable.service.ts:134</span>
+      </div>
+      <p class="description">A route reads an id from the request and queries the database by that id, with no ownership predicate in the handler body. Any authenticated user can pass another user's id.</p>
+      <pre class="snippet">await variableRepo().delete({ id: params.id, projectId: params.projectId, platformId: params.platformId })</pre>
+      <div class="fix"><strong>Fix:</strong> Add an ownership predicate to the query: `where: { id, userId: req.user.id }`. Never trust that authentication alone implies authorization.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/server/api/src/app/workers/job-queue/interceptors/rate-limiter-interceptor.ts:101</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">const result = await redisConnection.eval(</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="high">
+      <div class="finding-header">
+        <span class="badge" style="background:#F59E0B">HIGH</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/server/api/src/app/workers/job-queue/interceptors/rate-limiter-interceptor.ts:143</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">await redisConnection.eval(</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Use of eval()</span>
+        <span class="location">packages/server/worker/test/lib/chat-eval/core/runner.ts:183</span>
+      </div>
+      <p class="description">eval() executes arbitrary code and is a security risk.</p>
+      <pre class="snippet">body: JSON.stringify({ name: 'activepieces-chat-eval (ephemeral)', limit: 5 }),</pre>
+      <div class="fix"><strong>Fix:</strong> Remove eval() and use safer alternatives.</div>
+    </div>
+  
+                  </div>
+                
+                  <div class="domain-section" id="domain-8">
+                    <div class="domain-header">
+                      <span class="domain-number">08</span>
+                      <div>
+                        <div class="domain-heading">
+                          <h3>Data Exposure and Privacy</h3>
+                          
+    <div class="severity-stack">
+      
+            <span style="border-color:#3B82F633;color:#3B82F6">
+              9 Medium
+            </span>
+          
+            <span style="border-color:#9CA3AF33;color:#9CA3AF">
+              1 Info
+            </span>
+          
+    </div>
+  
+                        </div>
+                        <p class="domain-summary">Sensitive logs, leaked data, git history, and privacy boundaries.</p>
+                      </div>
+                    </div>
+                    
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/cli/src/lib/commands/generate-worker-token.ts:43</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(chalk.green('\nGenerated Worker Token, Please use it in AP_WORKER_TOKEN environment vari</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/cli/src/lib/commands/generate-worker-token.ts:44</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(chalk.yellow(token));</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/pieces/community/moonclerk/src/lib/common/auth.ts:11</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(auth)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/pieces/community/oncehub/src/lib/common/auth.ts:11</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log('auth', auth);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/pieces/community/simpliroute/src/lib/auth.ts:10</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log('Auth validation - received auth:', typeof auth, auth);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/pieces/community/simpliroute/src/lib/auth.ts:12</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log('Auth validation - extracted token:', token);</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/pieces/community/zoho-bookings/src/lib/actions/reschedule-appointment.ts:172</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(auth.access_token)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/server/worker/test/lib/chat-eval/live/run.ts:76</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(`    bad-arg / auth:   ${scorecard.totalBadArgRejections} / ${scorecard.totalAuthBlocked</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/web/scripts/generate-usecase-images.mjs:116</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log('✓ fal.ai key resolved')</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+    <div class="finding" data-severity="medium">
+      <div class="finding-header">
+        <span class="badge" style="background:#3B82F6">MEDIUM</span>
+        <span class="detector">misconfig</span>
+        <span class="title">Sensitive data logged to console</span>
+        <span class="location">packages/web/scripts/generate-usecase-images.mjs:272</span>
+      </div>
+      <p class="description">Logging sensitive fields can expose secrets in log files.</p>
+      <pre class="snippet">console.log(`✓ decrypted fal key using ${source}`)</pre>
+      <div class="fix"><strong>Fix:</strong> Remove logging of sensitive fields or redact them.</div>
+    </div>
+  
+                  </div>
+                
+    </section>
+
+    
+    <section>
+      <h2>Test file findings (review only)</h2>
+      <p class="section-kicker">These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures.</p>
+      
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">packages/ee/embed-sdk/test/index.test.ts:11</span>
+      </div>
+      <p class="description">innerHTML is assigned from a template literal without obvious user-controlled input. Review interpolated values, but this is lower risk when values are imported constants, icons, or static strings. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">document.body.innerHTML = `&lt;div id=&quot;${CONTAINER_ID}&quot;&gt;&lt;/div&gt;`;</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">injection</span>
+        <span class="title">XSS (innerHTML)</span>
+        <span class="location">packages/ee/embed-sdk/test/index.test.ts:120</span>
+      </div>
+      <p class="description">innerHTML is assigned from a template literal without obvious user-controlled input. Review interpolated values, but this is lower risk when values are imported constants, icons, or static strings. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">document.body.innerHTML = `&lt;div id=&quot;${CONTAINER_ID}&quot;&gt;&lt;/div&gt;`;</pre>
+      <div class="fix"><strong>Fix:</strong> Use textContent for plain text, or sanitize trusted HTML with DOMPurify.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Generic API Key</span>
+        <span class="location">packages/pieces/core/crypto/test/hmac-signature.test.ts:59</span>
+      </div>
+      <p class="description">A Generic API Key was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">secr****tKey: '6d79****6574', // &quot;myse****cret&quot; in hex</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">[Enum/Constant] Not a real secret — this appears to be a constant name, not a credential value.</span>
+        <span class="location">packages/server/api/test/integration/cloud/core/authentication-v2.test.ts:44</span>
+      </div>
+      <p class="description">The detected value mirrors the variable or enum key name, which usually means this is a constant label rather than a credential. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">const inva****iKey = 'sk-i****-key'</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Generic API Key</span>
+        <span class="location">packages/server/api/test/integration/ee/ai-tools/ai-tool-config.test.ts:147</span>
+      </div>
+      <p class="description">A Generic API Key was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">auth: { apiKey: 'othe****-key' },</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Generic API Key</span>
+        <span class="location">packages/server/api/test/integration/ee/ai-tools/ai-tool-config.test.ts:29</span>
+      </div>
+      <p class="description">A Generic API Key was found in source code. Rotate immediately and move to environment variables. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">auth: { apiKey: 'supe****-key' },</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">secrets</span>
+        <span class="title">Exposed secret: Private Key PEM</span>
+        <span class="location">packages/server/api/test/unit/app/core/security/oidc/oidc-key-manager.test.ts:78</span>
+      </div>
+      <p class="description">A Private Key PEM was found in source code. Rotate immediately and move to environment variables. Private keys in test files are typically generated test fixtures for cryptographic unit tests. Confirm this key is not reused in any production environment.</p>
+      <pre class="snippet">expect(result).toCo****tain('----****EGIN PRIVATE KEY-****----')</pre>
+      <div class="fix"><strong>Fix:</strong> Move this value to a .env file (and ensure .env is in .gitignore). Rotate the compromised credential.</div>
+    </div>
+  
+    <div class="finding" data-severity="info">
+      <div class="finding-header">
+        <span class="badge" style="background:#9CA3AF">INFO</span>
+        <span class="detector">ai patterns</span>
+        <span class="title">Date.now() feeding a token — predictable secret</span>
+        <span class="location">packages/server/api/test/unit/app/workers/job-queue/active-invariant.test.ts:62</span>
+      </div>
+      <p class="description">A non-cryptographic random source (Date.now()) is being used to produce token. Predictable across processes and observable within minutes to a determined attacker. Found in test file — likely intentional test fixture. Verify this is not a real credential.</p>
+      <pre class="snippet">const token = `token-${Date.now()}-${Math.random().toString(36).slice(2)}`</pre>
+      <div class="fix"><strong>Fix:</strong> Use crypto.randomBytes() / crypto.randomInt() (Node) or crypto.getRandomValues() (browser). For OTPs: crypto.randomInt(100000, 1000000). For tokens: crypto.randomBytes(32).toString('base64url').</div>
+    </div>
+  
+    </section>
+    
+
+    <footer>
+      Generated by <strong>Verglos</strong> · <a href="https://verglos.dev" style="color:#E85D4C">verglos.dev</a>
+    </footer>
+  </div>
+</body>
+</html>
