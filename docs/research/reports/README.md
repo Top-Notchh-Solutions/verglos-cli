@@ -27,10 +27,9 @@ Selected repo reports cited in the articles:
 - [`FlowiseAI-Flowise.html`](./icp300-tsjs-v1.5.2/FlowiseAI-Flowise.html) / [`json`](./icp300-tsjs-v1.5.2/FlowiseAI-Flowise.json)
 - [`appsmithorg-appsmith.html`](./icp300-tsjs-v1.5.2/appsmithorg-appsmith.html) / [`json`](./icp300-tsjs-v1.5.2/appsmithorg-appsmith.json)
 
-## Hoppscotch Disclosure Report
+## Active Credential Disclosure
 
-Campaign path: `docs/research/reports/v1.5.0/`
+One credential disclosure is active. Target-specific report artifacts are
+withheld until the maintainer or credential owner confirms rotation.
 
-- [`hoppscotch-hoppscotch.html`](./v1.5.0/hoppscotch-hoppscotch.html)
-- [`hoppscotch-hoppscotch.json`](./v1.5.0/hoppscotch-hoppscotch.json)
-
+- [`active-credential-disclosure-withheld.md`](../active-credential-disclosure-withheld.md)
