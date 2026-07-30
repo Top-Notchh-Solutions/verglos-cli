@@ -316,6 +316,16 @@ export function calculateScore(findings: Finding[], strict = false): ScanScore {
   const scoreableFindings = findings.filter((f) => {
     if (f.context === "placeholder" || f.context === "enum") return false;
     if (!strict && f.context === "test") return false;
+    // v1.6: findings tagged by the post-detection context-tag pass
+    // (vendored bundles, generated code, docs, CI configs, dev-server
+    // build configs, api-spec examples) don't count toward the score
+    // in non-strict mode. The Finding is still visible in the report —
+    // just info-tier — so posture doesn't tank over code the developer
+    // didn't author. Strict mode counts them (same policy as the
+    // existing `context: "test"` behavior). See
+    // docs/plan/v1.6-noise-reduction.md and the Phase-0 ContextTag
+    // corpus analysis for the rule set.
+    if (!strict && f.contextTag) return false;
     return true;
   });
 
@@ -353,6 +363,19 @@ export function calculateScore(findings: Finding[], strict = false): ScanScore {
       const cap = DOMAIN_CAPS[severity as Exclude<Severity, "info">];
       penalty += Math.min(rawPenalty, cap);
     }
+  }
+
+  // v1.6 score floor: reserve the 0 score for genuinely critical-heavy
+  // codebases. If there are zero criticals in scope, cap total penalty
+  // at 90 (score floor of 10). Motivated by the ICP top 300 measurement
+  // where 24 of 293 repos scored 0, including cases like
+  // Team-Commonly-commonly (1 crit + 86 high → 0) and
+  // hoangsonww-Claude-Code-Agent-Monitor (0 crit + 59 high → 16). The
+  // second case is calibrated too aggressively and reads as
+  // "catastrophic" when it isn't. See docs/plan/v1.6-noise-reduction.md.
+  const NO_CRIT_PENALTY_CAP = 90;
+  if (scoreableCounts.critical === 0) {
+    penalty = Math.min(penalty, NO_CRIT_PENALTY_CAP);
   }
 
   const value = Math.max(0, Math.min(100, Math.round(100 - penalty)));
