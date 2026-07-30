@@ -134,14 +134,18 @@ program
   .command("secrets")
   .description("Scan for secrets only")
   .action(async () => {
-    await executeScan({ detectors: ["secrets"] });
+    await executeScan({ detectors: ["secrets"], focused: true });
   });
 
 program
   .command("deps")
   .description("Dependency vulnerability audit only")
   .action(async () => {
-    await executeScan({ detectors: ["dependencies"] });
+    await executeScan({
+      detectors: ["dependencies"],
+      focused: true,
+      includeGitHistory: false,
+    });
   });
 
 program
