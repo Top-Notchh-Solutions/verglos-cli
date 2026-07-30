@@ -1,3 +1,4 @@
+import { createRequire } from "node:module";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
@@ -13,6 +14,11 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
+
+const require = createRequire(import.meta.url);
+const { version: MCP_VERSION } = require("../package.json") as {
+  version: string;
+};
 
 /**
  * MCP server for Verglos.
@@ -186,7 +192,7 @@ export function createVerglosMcpServer(): Server {
   const server = new Server(
     {
       name: "verglos",
-      version: "0.6.0",
+      version: MCP_VERSION,
     },
     {
       capabilities: {

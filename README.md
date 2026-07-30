@@ -207,7 +207,7 @@ verglos monitor register --webhook https://your.app/verglos-alerts
 
 ### `verglos mcp` — MCP server for AI agents
 
-Exposes Verglos as MCP tools (`scan`, `check_package`, `check_before_write`, `explain_finding`) to Cursor, Claude Code, Windsurf, and Cline.
+Exposes Verglos as MCP tools (`verglos_scan`, `verglos_check_package`, `verglos_check_before_write`, `verglos_explain_finding`) to Cursor, Claude Code, Windsurf, and Cline.
 
 ```bash
 verglos mcp                    # start stdio server (agents call this)
@@ -227,7 +227,7 @@ verglos precommit --timeout 2000   # what the hook runs (2s budget by default)
 verglos init                   # interactive project config
 verglos init -y                # non-interactive
 verglos explain                # list every rule
-verglos explain D2-001         # explain one rule
+verglos explain D5-003         # explain one rule (here: use of eval)
 verglos badge                  # print README badge markdown
 verglos update                 # self-upgrade to the latest npm version
 ```

@@ -7,7 +7,7 @@ import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
 import { applyHeaderFixes } from "./fix.js";
 import { loadCredentials, saveCredentials } from "./credentials.js";
-import { ensureConfig, installPreCommitHook } from "./config.js";
+import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
 import { executeExplain } from "./explain.js";
 import { executePrecommit } from "./precommit.js";
@@ -134,14 +134,18 @@ program
   .command("secrets")
   .description("Scan for secrets only")
   .action(async () => {
-    await executeScan({ detectors: ["secrets"] });
+    await executeScan({ detectors: ["secrets"], focused: true });
   });
 
 program
   .command("deps")
   .description("Dependency vulnerability audit only")
   .action(async () => {
-    await executeScan({ detectors: ["dependencies"] });
+    await executeScan({
+      detectors: ["dependencies"],
+      focused: true,
+      includeGitHistory: false,
+    });
   });
 
 program
