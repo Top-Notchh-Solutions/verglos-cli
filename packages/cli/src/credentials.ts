@@ -15,6 +15,13 @@ export interface Credentials {
   plan?: string;
   planExpiresAt?: string;
   email?: string;
+  /**
+   * Ed25519-signed entitlement JWT issued by the server at activation.
+   * Verified locally via @verglos/entitlement so paid gates can pass
+   * offline. Absence is not fatal — the REST capabilities path keeps
+   * working. See docs/architecture/entitlement.md for the flow.
+   */
+  entitlementToken?: string;
 }
 
 const CREDENTIALS_DIR = join(homedir(), ".verglos");
