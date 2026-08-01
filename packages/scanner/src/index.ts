@@ -9,6 +9,7 @@ import {
   type ScanResult,
   type VerglosConfig,
 } from "@verglos/shared";
+import { agentSurfaceDetector } from "./detectors/agent-surface.js";
 import { aiPatternsDetector } from "./detectors/ai-patterns.js";
 import { dependenciesDetector } from "./detectors/dependencies.js";
 import { gitHistoryDetector } from "./detectors/git-history.js";
@@ -33,6 +34,10 @@ const ALL_DETECTORS: Detector[] = [
   aiPatternsDetector,
   slopsquatDetector,
   vendoredCvesDetector,
+  // Pro-gated (`rule_pack_agent_surface`). Included in the detector
+  // pipeline unconditionally; the CLI layer decides whether to pass
+  // "agent-surface" in ScanOptions.detectors based on entitlement.
+  agentSurfaceDetector,
 ];
 
 async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
