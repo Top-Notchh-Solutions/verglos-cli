@@ -259,6 +259,11 @@ program
       licenseKey,
       plan: result.plan,
       planExpiresAt: result.expiresAt ?? undefined,
+      // Persist the signed entitlement JWT when the server issues one.
+      // Older server builds return undefined; we keep any prior token
+      // rather than clobbering it, which preserves offline access
+      // across an activation from a partial server response.
+      entitlementToken: result.entitlementToken ?? creds.entitlementToken,
     });
 
     const renewal = result.expiresAt
