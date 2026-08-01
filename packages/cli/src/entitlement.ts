@@ -2,7 +2,9 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import chalk from "chalk";
+import { verifyEntitlement } from "@verglos/entitlement";
 import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
+import { defaultCapabilitiesFor, normalizeTier, type Tier } from "./tier-defaults.js";
 
 /**
  * Client-side entitlement checker.
@@ -188,12 +190,116 @@ export function _absoluteMaxStaleMs(): number {
   return ABSOLUTE_MAX_STALE_MS;
 }
 
+/**
+ * Result of verifying the stored entitlement JWT. The CLI trusts this
+ * for LICENSE VALIDITY (tier + expiry) but not for the CAPABILITY
+ * LIST — that still comes from REST when we can reach the server, so
+ * the fence can move server-side without a CLI release.
+ */
+export interface VerifiedLicense {
+  tier: Tier;
+  expiresAt: number;
+  inOfflineGrace: boolean;
+}
+
+/**
+ * Verify the JWT the server issued at activation (if any). Returns
+ * null when no token is stored, the signature does not verify, or
+ * the token is past its 7-day offline-grace window.
+ *
+ * Never hits the network. Callers can use this before or instead of
+ * loadCapabilities() when they want offline-safe license truth.
+ */
+export async function getVerifiedLicense(): Promise<VerifiedLicense | null> {
+  const creds = await loadCredentials();
+  if (!creds.entitlementToken) return null;
+  const result = await verifyEntitlement(creds.entitlementToken);
+  if (!result.valid || !result.claims) return null;
+  return {
+    tier: normalizeTier(result.claims.tier),
+    expiresAt: result.claims.exp * 1000,
+    inOfflineGrace: result.inOfflineGrace === true,
+  };
+}
+
+/**
+ * Composite entitlement resolution: JWT for license truth, REST for
+ * capability list, with fallbacks in this precedence:
+ *
+ *   1. REST fresh → capabilities = REST response
+ *   2. REST cached within 7d → capabilities = cache (marked stale)
+ *   3. JWT valid + REST unreachable + no cache → capabilities =
+ *      baked-in defaults for JWT tier (paid users are never silently
+ *      downgraded to Free while their license is valid)
+ *   4. Nothing valid → Free
+ *
+ * The tier the caller sees is always taken from the JWT when it is
+ * valid, otherwise from the REST response. That way a JWT that says
+ * "expired" downgrades the tier even if the REST cache still says Pro.
+ */
+export interface ResolvedEntitlement {
+  plan: string;
+  capabilities: string[];
+  source: "rest" | "cache" | "baked-in" | "free";
+  stale: boolean;
+  simulated: boolean;
+  realPlan?: string;
+  license?: VerifiedLicense;
+}
+
+export async function resolveEntitlement(
+  opts: LoadCapabilitiesOptions = {},
+): Promise<ResolvedEntitlement> {
+  const [caps, license] = await Promise.all([
+    loadCapabilities(opts),
+    getVerifiedLicense(),
+  ]);
+
+  const restIsAuthoritative =
+    caps !== FREE_FALLBACK && caps.stale !== true;
+
+  // Case 1 + 2 — REST responded (fresh or stale-within-grace).
+  if (restIsAuthoritative || caps.stale === true) {
+    return {
+      plan: license?.tier ?? caps.plan,
+      capabilities: caps.capabilities,
+      source: caps.stale === true ? "cache" : "rest",
+      stale: caps.stale === true,
+      simulated: caps.simulated,
+      realPlan: caps.real_plan,
+      license: license ?? undefined,
+    };
+  }
+
+  // Case 3 — REST unreachable AND no cache AND JWT says paid.
+  if (license && license.tier !== "free") {
+    return {
+      plan: license.tier,
+      capabilities: defaultCapabilitiesFor(license.tier),
+      source: "baked-in",
+      stale: true,
+      simulated: false,
+      license,
+    };
+  }
+
+  // Case 4 — nothing valid.
+  return {
+    plan: "free",
+    capabilities: [...FREE_FALLBACK.capabilities],
+    source: "free",
+    stale: false,
+    simulated: false,
+    license: license ?? undefined,
+  };
+}
+
 export async function has(
   capability: string,
   opts: LoadCapabilitiesOptions = {},
 ): Promise<boolean> {
-  const caps = await loadCapabilities(opts);
-  return caps.capabilities.includes(capability);
+  const resolved = await resolveEntitlement(opts);
+  return resolved.capabilities.includes(capability);
 }
 
 export async function currentPlan(
@@ -203,13 +309,15 @@ export async function currentPlan(
   simulated: boolean;
   realPlan?: string;
   stale: boolean;
+  source: ResolvedEntitlement["source"];
 }> {
-  const caps = await loadCapabilities(opts);
+  const resolved = await resolveEntitlement(opts);
   return {
-    plan: caps.plan,
-    simulated: caps.simulated,
-    realPlan: caps.real_plan,
-    stale: caps.stale === true,
+    plan: resolved.plan,
+    simulated: resolved.simulated,
+    realPlan: resolved.realPlan,
+    stale: resolved.stale,
+    source: resolved.source,
   };
 }
 
@@ -264,9 +372,9 @@ export async function requireCapability(
   featureLabel: string,
   opts: LoadCapabilitiesOptions & { extraLine?: string } = {},
 ): Promise<boolean> {
-  const caps = await loadCapabilities(opts);
-  warnIfStale(caps);
-  const ok = caps.capabilities.includes(capability);
+  const resolved = await resolveEntitlement(opts);
+  warnIfStale({ stale: resolved.stale, plan: resolved.plan });
+  const ok = resolved.capabilities.includes(capability);
   if (!ok) {
     printUpgradeCta(featureLabel, opts.extraLine);
   }
