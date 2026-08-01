@@ -108,7 +108,13 @@ export async function verifyEntitlement(
 
   const signingInput = Buffer.from(`${headerB64}.${claimsB64}`, "utf8");
   const signature = base64UrlDecode(sigB64);
-  const pinned = options.pinnedKeys ?? PINNED_PUBLIC_KEYS_B64URL;
+  // Precedence: explicit options > VERGLOS_TEST_PUBKEY_B64URL env
+  // override (test-only) > compiled-in pin. The env override exists
+  // so downstream packages can test the full sign→verify pipeline
+  // without threading VerifyOptions through every call site.
+  const envKey = process.env.VERGLOS_TEST_PUBKEY_B64URL;
+  const pinned =
+    options.pinnedKeys ?? (envKey ? [envKey] : PINNED_PUBLIC_KEYS_B64URL);
   const sigOk = pinned.some((keyB64) => {
     try {
       const key = publicKeyFromBase64Url(keyB64);
