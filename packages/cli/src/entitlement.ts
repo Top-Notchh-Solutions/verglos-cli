@@ -22,6 +22,15 @@ const CACHE_DIR = join(homedir(), ".verglos");
 const CACHE_FILE = join(CACHE_DIR, "capabilities.json");
 const REQUEST_TIMEOUT_MS = 5000;
 
+/**
+ * Hard cap on how long a stale cache can survive without a server
+ * round-trip. Past this, we drop to Free with an explicit warning
+ * instead of silently letting a cancelled or revoked license keep
+ * Pro forever offline. Seven days matches the JWT offline-grace
+ * window in @verglos/entitlement.
+ */
+const ABSOLUTE_MAX_STALE_MS = 7 * 24 * 60 * 60 * 1000;
+
 interface CapabilitiesResponse {
   plan: string;
   real_plan?: string;
@@ -36,6 +45,11 @@ interface CachedCapabilities extends CapabilitiesResponse {
   fetchedAt: string;
   expiresAt: string;
   simulatedAsPlan?: string;
+  /**
+   * True when this response came from cache after the server was
+   * unreachable. Callers can surface a renewal warning.
+   */
+  stale?: boolean;
 }
 
 const FREE_FALLBACK: CachedCapabilities = {
@@ -139,8 +153,19 @@ export async function loadCapabilities(
   );
 
   if (!server) {
-    // Offline. Return stale cache if we have it; else free fallback.
-    return cached ?? FREE_FALLBACK;
+    // Offline. If we have a cache within the 7-day absolute-stale
+    // window, honour it (bounded offline grace — same window as the
+    // JWT-based flow in @verglos/entitlement). If the cache is older,
+    // fail closed to Free and let the caller warn — better than
+    // silently letting a cancelled license keep Pro forever.
+    if (cached) {
+      const cachedFetchedAt = new Date(cached.fetchedAt).getTime();
+      const ageMs = now - cachedFetchedAt;
+      if (ageMs < ABSOLUTE_MAX_STALE_MS) {
+        return { ...cached, stale: true };
+      }
+    }
+    return FREE_FALLBACK;
   }
 
   const ttlMs = Math.max(60, server.cache_ttl_seconds) * 1000;
@@ -149,9 +174,18 @@ export async function loadCapabilities(
     fetchedAt: new Date(now).toISOString(),
     expiresAt: new Date(now + ttlMs).toISOString(),
     simulatedAsPlan: opts.asPlan,
+    stale: false,
   };
   await writeCache(entry);
   return entry;
+}
+
+/**
+ * Exposed for tests only. Returns the hard cap on how long a stale
+ * cache can be honoured without a fresh server round-trip.
+ */
+export function _absoluteMaxStaleMs(): number {
+  return ABSOLUTE_MAX_STALE_MS;
 }
 
 export async function has(
@@ -164,13 +198,44 @@ export async function has(
 
 export async function currentPlan(
   opts: LoadCapabilitiesOptions = {},
-): Promise<{ plan: string; simulated: boolean; realPlan?: string }> {
+): Promise<{
+  plan: string;
+  simulated: boolean;
+  realPlan?: string;
+  stale: boolean;
+}> {
   const caps = await loadCapabilities(opts);
   return {
     plan: caps.plan,
     simulated: caps.simulated,
     realPlan: caps.real_plan,
+    stale: caps.stale === true,
   };
+}
+
+/**
+ * Print a one-line renewal warning to stderr when the caller is
+ * running on a stale-but-honoured cache (server unreachable, cache
+ * within the 7-day grace window). Idempotent within a process — safe
+ * to call from every gate.
+ */
+let stalePrinted = false;
+export function warnIfStale(caps: {
+  stale?: boolean;
+  plan?: string;
+}): void {
+  if (!caps.stale || stalePrinted || caps.plan === "free") return;
+  stalePrinted = true;
+  console.error("");
+  console.error(
+    `  ${chalk.yellow("!")} Using cached ${caps.plan?.toUpperCase() ?? "PAID"} entitlement (server unreachable).`,
+  );
+  console.error(
+    chalk.gray(
+      "    Re-check with `verglos whoami` when you are back online.",
+    ),
+  );
+  console.error("");
 }
 
 export function printUpgradeCta(
@@ -199,7 +264,9 @@ export async function requireCapability(
   featureLabel: string,
   opts: LoadCapabilitiesOptions & { extraLine?: string } = {},
 ): Promise<boolean> {
-  const ok = await has(capability, opts);
+  const caps = await loadCapabilities(opts);
+  warnIfStale(caps);
+  const ok = caps.capabilities.includes(capability);
   if (!ok) {
     printUpgradeCta(featureLabel, opts.extraLine);
   }
