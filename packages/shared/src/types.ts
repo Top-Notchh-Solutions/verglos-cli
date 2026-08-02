@@ -9,7 +9,8 @@ export type DetectorId =
   | "ai-patterns"
   | "slopsquat"
   | "vendored-cves"
-  | "agent-surface";
+  | "agent-surface"
+  | "api-hardening";
 
 /**
  * The ten security domains, plus D11 (agent surface).

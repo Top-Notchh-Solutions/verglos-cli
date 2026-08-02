@@ -11,6 +11,7 @@ import {
 } from "@verglos/shared";
 import { agentSurfaceDetector } from "./detectors/agent-surface.js";
 import { aiPatternsDetector } from "./detectors/ai-patterns.js";
+import { apiHardeningDetector } from "./detectors/api-hardening.js";
 import { dependenciesDetector } from "./detectors/dependencies.js";
 import { gitHistoryDetector } from "./detectors/git-history.js";
 import { injectionDetector } from "./detectors/injection.js";
@@ -38,6 +39,9 @@ const ALL_DETECTORS: Detector[] = [
   // pipeline unconditionally; the CLI layer decides whether to pass
   // "agent-surface" in ScanOptions.detectors based on entitlement.
   agentSurfaceDetector,
+  // Pro-gated (`rule_pack_api_hardening`). Same wiring — the CLI
+  // decides whether to include "api-hardening" in ScanOptions.detectors.
+  apiHardeningDetector,
 ];
 
 async function loadIgnoreFile(projectRoot: string): Promise<string[]> {

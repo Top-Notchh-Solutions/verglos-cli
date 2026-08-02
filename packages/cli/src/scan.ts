@@ -42,6 +42,7 @@ const PRO_DETECTOR_CAPABILITIES: Array<{
   capability: string;
 }> = [
   { detector: "agent-surface", capability: "rule_pack_agent_surface" },
+  { detector: "api-hardening", capability: "rule_pack_api_hardening" },
 ];
 
 const require = createRequire(import.meta.url);
