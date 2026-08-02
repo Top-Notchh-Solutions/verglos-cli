@@ -44,8 +44,11 @@ import type {
  * and paste the output here.
  */
 export const PINNED_PUBLIC_KEYS_B64URL: readonly [string, string] = [
-  // current — server signs with the matching private key
-  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  // current (v1, minted 2026-08-02) — server signs with the matching
+  // private key stored in Vercel env as VERGLOS_ENTITLEMENT_PRIVATE_KEY.
+  // Rotate by moving a new key into slot 0 and demoting the old one
+  // to slot 1 (successor) for a release cycle.
+  "YFa-Ut1bGFrv--OKfyP56Dg8riD4NJ8kR0oAclidtbE",
   // successor — reserved for the next rotation, safe to leave as
   // the placeholder until the first rotation happens
   "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
