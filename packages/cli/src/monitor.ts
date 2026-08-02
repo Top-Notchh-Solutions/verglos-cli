@@ -179,3 +179,221 @@ export async function executeMonitorRegister(
   console.log(chalk.gray(`  Channels: ${channelSummary}`));
   return 0;
 }
+
+// ─────────────────────────────────────────────────────────────────────────
+//
+//  `verglos monitor status` / `unregister` / `test-alert`
+//
+//  Phase 6 CLI ergonomics. Every command below POSTs / GETs / DELETEs
+//  a stable contract that Phase 7 (verglos-web repo) is responsible
+//  for implementing. Until that ships, the CLI degrades gracefully:
+//  a 404 or a 501 is reported as "server does not implement this yet
+//  — coming soon" rather than a crash.
+//
+// ─────────────────────────────────────────────────────────────────────────
+
+interface AuthorizedFetchResult {
+  ok: boolean;
+  status: number;
+  json: unknown;
+  reason?: "no_license" | "unauthorized" | "not_implemented" | "not_found" | "network" | "other";
+}
+
+async function authorizedFetch(
+  path: string,
+  init: { method: string; body?: unknown } = { method: "GET" },
+): Promise<AuthorizedFetchResult> {
+  const creds = await loadCredentials();
+  if (!creds.licenseKey) {
+    return {
+      ok: false,
+      status: 0,
+      json: null,
+      reason: "no_license",
+    };
+  }
+  const url = `${creds.apiUrl ?? DEFAULT_API_URL}${path}`;
+  try {
+    const res = await fetch(url, {
+      method: init.method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${creds.licenseKey}`,
+      },
+      body: init.body === undefined ? undefined : JSON.stringify(init.body),
+    });
+    const json = await res.json().catch(() => null);
+    if (res.status === 401 || res.status === 402) {
+      return { ok: false, status: res.status, json, reason: "unauthorized" };
+    }
+    if (res.status === 404) {
+      return { ok: false, status: 404, json, reason: "not_found" };
+    }
+    if (res.status === 501) {
+      return { ok: false, status: 501, json, reason: "not_implemented" };
+    }
+    if (!res.ok) {
+      return { ok: false, status: res.status, json, reason: "other" };
+    }
+    return { ok: true, status: res.status, json };
+  } catch {
+    return { ok: false, status: 0, json: null, reason: "network" };
+  }
+}
+
+function explainFetchFailure(op: string, reason: AuthorizedFetchResult["reason"], status: number): void {
+  switch (reason) {
+    case "no_license":
+      console.error(chalk.red(`verglos monitor ${op}: no license key.`));
+      console.error(chalk.gray("  Run `verglos login` or `verglos activate <key>` first."));
+      break;
+    case "unauthorized":
+      console.error(chalk.red(`verglos monitor ${op}: license required (HTTP ${status}).`));
+      console.error(chalk.gray("  Continuous monitoring is a Pro feature. Upgrade at verglos.com/checkout."));
+      break;
+    case "not_implemented":
+      console.error(chalk.yellow(`verglos monitor ${op}: the server has not shipped this endpoint yet.`));
+      console.error(chalk.gray("  Track progress at github.com/Top-Notchh-Solutions/verglos-cli."));
+      break;
+    case "not_found":
+      console.error(chalk.red(`verglos monitor ${op}: not found (HTTP 404).`));
+      break;
+    case "network":
+      console.error(chalk.red(`verglos monitor ${op}: could not reach the server. Check your connection.`));
+      break;
+    default:
+      console.error(chalk.red(`verglos monitor ${op}: request failed (HTTP ${status}).`));
+  }
+}
+
+// ── verglos monitor status ────────────────────────────────────────────────
+
+interface MonitorStatusEntry {
+  projectFingerprint: string;
+  projectLabel: string;
+  cliVersion?: string;
+  snapshotAt?: string;
+  dependencyCount?: number;
+  channels?: {
+    email?: boolean | string;
+    slack?: boolean;
+    webhook?: boolean;
+  };
+  lastCheckedAt?: string | null;
+  alertsFiredLast7d?: number;
+}
+
+export async function executeMonitorStatus(): Promise<number> {
+  const result = await authorizedFetch("/api/v1/monitor/registrations", { method: "GET" });
+  if (!result.ok) {
+    explainFetchFailure("status", result.reason, result.status);
+    return result.reason === "not_implemented" ? 0 : 1;
+  }
+  const body = result.json as { registrations?: MonitorStatusEntry[] };
+  const entries = body.registrations ?? [];
+  if (entries.length === 0) {
+    console.log(chalk.gray("No projects registered for continuous monitoring."));
+    console.log(chalk.gray("  Run `verglos monitor register --email you@example.com` from a project directory."));
+    return 0;
+  }
+  console.log(chalk.bold(`Registered projects (${entries.length}):`));
+  for (const entry of entries) {
+    console.log("");
+    console.log(`  ${chalk.bold(entry.projectLabel)}   ${chalk.gray(entry.projectFingerprint.slice(0, 12))}`);
+    if (entry.dependencyCount !== undefined) {
+      console.log(chalk.gray(`    ${entry.dependencyCount} deps · registered ${entry.snapshotAt ?? "unknown"}`));
+    }
+    const chanBits = [
+      entry.channels?.email ? "email" : "",
+      entry.channels?.slack ? "slack" : "",
+      entry.channels?.webhook ? "webhook" : "",
+    ].filter(Boolean);
+    if (chanBits.length > 0) {
+      console.log(chalk.gray(`    channels: ${chanBits.join(", ")}`));
+    }
+    if (entry.lastCheckedAt) {
+      console.log(chalk.gray(`    last check: ${entry.lastCheckedAt}`));
+    }
+    if (entry.alertsFiredLast7d !== undefined && entry.alertsFiredLast7d > 0) {
+      console.log(chalk.yellow(`    ${entry.alertsFiredLast7d} alerts fired in the last 7 days`));
+    }
+  }
+  return 0;
+}
+
+// ── verglos monitor unregister ────────────────────────────────────────────
+
+export interface MonitorUnregisterOptions {
+  cwd?: string;
+  projectFingerprint?: string;
+}
+
+export async function executeMonitorUnregister(
+  options: MonitorUnregisterOptions,
+): Promise<number> {
+  let fingerprint = options.projectFingerprint;
+  if (!fingerprint) {
+    const projectRoot = resolve(options.cwd ?? process.cwd());
+    const fp = await computeProjectFingerprint(projectRoot);
+    if (!fp.fingerprint) {
+      console.error(chalk.red("verglos monitor unregister: cannot compute a project fingerprint here."));
+      console.error(chalk.gray("  cd into a project directory or pass --project-fingerprint <fp>."));
+      return 1;
+    }
+    fingerprint = fp.fingerprint;
+  }
+  const result = await authorizedFetch(
+    `/api/v1/monitor/registration/${encodeURIComponent(fingerprint)}`,
+    { method: "DELETE" },
+  );
+  if (!result.ok) {
+    explainFetchFailure("unregister", result.reason, result.status);
+    return result.reason === "not_implemented" || result.reason === "not_found" ? 0 : 1;
+  }
+  console.log(chalk.green(`✓ Unregistered ${fingerprint.slice(0, 12)} — no further alerts for this project.`));
+  return 0;
+}
+
+// ── verglos monitor test-alert ────────────────────────────────────────────
+
+export interface MonitorTestAlertOptions {
+  cwd?: string;
+  projectFingerprint?: string;
+}
+
+export async function executeMonitorTestAlert(
+  options: MonitorTestAlertOptions,
+): Promise<number> {
+  let fingerprint = options.projectFingerprint;
+  if (!fingerprint) {
+    const projectRoot = resolve(options.cwd ?? process.cwd());
+    const fp = await computeProjectFingerprint(projectRoot);
+    if (!fp.fingerprint) {
+      console.error(chalk.red("verglos monitor test-alert: cannot compute a project fingerprint here."));
+      console.error(chalk.gray("  cd into a registered project or pass --project-fingerprint <fp>."));
+      return 1;
+    }
+    fingerprint = fp.fingerprint;
+  }
+  const result = await authorizedFetch("/api/v1/monitor/test-alert", {
+    method: "POST",
+    body: { projectFingerprint: fingerprint },
+  });
+  if (!result.ok) {
+    explainFetchFailure("test-alert", result.reason, result.status);
+    return result.reason === "not_implemented" ? 0 : 1;
+  }
+  const body = result.json as { sent?: { email?: boolean; slack?: boolean; webhook?: boolean } };
+  const sent = body.sent ?? {};
+  console.log(chalk.green("✓ Test alert dispatched."));
+  const details = [
+    sent.email ? "email delivered" : "",
+    sent.slack ? "slack delivered" : "",
+    sent.webhook ? "webhook delivered" : "",
+  ].filter(Boolean);
+  if (details.length > 0) {
+    console.log(chalk.gray(`  ${details.join(", ")}`));
+  }
+  console.log(chalk.gray("  If a channel is missing above, re-run `verglos monitor register` with the flag you want."));
+  return 0;
+}
