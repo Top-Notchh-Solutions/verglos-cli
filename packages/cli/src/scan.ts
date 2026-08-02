@@ -10,11 +10,41 @@ import {
 import type { DetectorId } from "@verglos/shared";
 import ora from "ora";
 import { loadLastScore, saveLastScore } from "./credentials.js";
+import { has as hasCapability } from "./entitlement.js";
 import {
   isTelemetryDisabled,
   printFirstRunDisclosureIfNeeded,
   sendScanEvent,
 } from "./telemetry.js";
+
+/**
+ * Default detector set for a full `verglos scan`. Free-tier detectors
+ * only. Pro rule packs are appended after an entitlement check.
+ */
+const FREE_DETECTORS: DetectorId[] = [
+  "secrets",
+  "dependencies",
+  "misconfig",
+  "injection",
+  "ai-patterns",
+  "slopsquat",
+  "vendored-cves",
+];
+
+/**
+ * Map of Pro detector ID → the capability string that gates it. When
+ * a full scan runs, we check each capability and append the detector
+ * only when the user is entitled. Free users see nothing changes;
+ * paid users get the extra detector without needing a new flag.
+ */
+const PRO_DETECTOR_CAPABILITIES: Array<{
+  detector: DetectorId;
+  capability: string;
+}> = [
+  { detector: "agent-surface", capability: "rule_pack_agent_surface" },
+  { detector: "api-hardening", capability: "rule_pack_api_hardening" },
+  { detector: "deep-auth", capability: "rule_pack_deep_auth" },
+];
 
 const require = createRequire(import.meta.url);
 const { version: CLI_VERSION } = require("../package.json") as {
@@ -72,11 +102,26 @@ export async function executeScan(
       }, 1000)
     : null;
 
+  // Resolve the detector list. Explicit --detectors (from `verglos
+  // secrets` / `verglos deps`) wins. Otherwise, take the Free set and
+  // append any Pro detectors the caller is entitled to. This is where
+  // Pro rule packs (currently: agent-surface) light up automatically
+  // for entitled users without changing the command signature.
+  let detectors = options.detectors;
+  if (!detectors) {
+    detectors = [...FREE_DETECTORS];
+    for (const { detector, capability } of PRO_DETECTOR_CAPABILITIES) {
+      if (await hasCapability(capability)) {
+        detectors.push(detector);
+      }
+    }
+  }
+
   let result;
   try {
     result = await runScan({
       projectRoot,
-      detectors: options.detectors,
+      detectors,
       unlocked: true,
       includeGitHistory: options.includeGitHistory ?? true,
       minConfidence: options.all ? 0 : undefined,

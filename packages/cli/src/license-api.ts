@@ -12,6 +12,14 @@ export type ValidateResult =
       plan: string;
       expiresAt: string | null;
       active: true;
+      /**
+       * Ed25519-signed entitlement JWT issued by the server. When
+       * present, the CLI stores it in Credentials.entitlementToken so
+       * paid gates can pass offline via @verglos/entitlement's local
+       * verify path. Older server builds may not return this; the CLI
+       * degrades gracefully to REST-only when it is absent.
+       */
+      entitlementToken?: string;
     }
   | {
       valid: false;
@@ -79,6 +87,7 @@ export async function validateLicense(
         : string;
       plan?: string;
       expires_at?: string | null;
+      entitlement_token?: string;
     };
 
     if (body.valid === true && body.plan) {
@@ -87,6 +96,7 @@ export async function validateLicense(
         plan: body.plan,
         expiresAt: body.expires_at ?? null,
         active: true,
+        entitlementToken: body.entitlement_token,
       };
     }
 

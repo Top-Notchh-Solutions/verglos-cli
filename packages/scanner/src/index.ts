@@ -9,7 +9,10 @@ import {
   type ScanResult,
   type VerglosConfig,
 } from "@verglos/shared";
+import { agentSurfaceDetector } from "./detectors/agent-surface.js";
 import { aiPatternsDetector } from "./detectors/ai-patterns.js";
+import { apiHardeningDetector } from "./detectors/api-hardening.js";
+import { deepAuthDetector } from "./detectors/deep-auth.js";
 import { dependenciesDetector } from "./detectors/dependencies.js";
 import { gitHistoryDetector } from "./detectors/git-history.js";
 import { injectionDetector } from "./detectors/injection.js";
@@ -33,6 +36,15 @@ const ALL_DETECTORS: Detector[] = [
   aiPatternsDetector,
   slopsquatDetector,
   vendoredCvesDetector,
+  // Pro-gated (`rule_pack_agent_surface`). Included in the detector
+  // pipeline unconditionally; the CLI layer decides whether to pass
+  // "agent-surface" in ScanOptions.detectors based on entitlement.
+  agentSurfaceDetector,
+  // Pro-gated (`rule_pack_api_hardening`). Same wiring — the CLI
+  // decides whether to include "api-hardening" in ScanOptions.detectors.
+  apiHardeningDetector,
+  // Pro-gated (`rule_pack_deep_auth`). Same wiring.
+  deepAuthDetector,
 ];
 
 async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
