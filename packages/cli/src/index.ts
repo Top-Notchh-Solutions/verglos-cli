@@ -11,7 +11,12 @@ import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
 import { executeExplain } from "./explain.js";
 import { executePrecommit } from "./precommit.js";
-import { executeMonitorRegister } from "./monitor.js";
+import {
+  executeMonitorRegister,
+  executeMonitorStatus,
+  executeMonitorTestAlert,
+  executeMonitorUnregister,
+} from "./monitor.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -259,6 +264,11 @@ program
       licenseKey,
       plan: result.plan,
       planExpiresAt: result.expiresAt ?? undefined,
+      // Persist the signed entitlement JWT when the server issues one.
+      // Older server builds return undefined; we keep any prior token
+      // rather than clobbering it, which preserves offline access
+      // across an activation from a partial server response.
+      entitlementToken: result.entitlementToken ?? creds.entitlementToken,
     });
 
     const renewal = result.expiresAt
@@ -335,6 +345,60 @@ monitor
     );
     if (!ok) process.exit(1);
     const code = await executeMonitorRegister(opts, version);
+    if (code !== 0) process.exit(code);
+  });
+
+monitor
+  .command("status")
+  .description("List projects registered for continuous CVE monitoring [Pro]")
+  .action(async () => {
+    const asPlan = process.env.VERGLOS_AS_PLAN;
+    const ok = await requireCapability(
+      "monitor_register",
+      "Continuous CVE monitoring",
+    );
+    if (!ok) process.exit(1);
+    const code = await executeMonitorStatus();
+    if (code !== 0) process.exit(code);
+  });
+
+monitor
+  .command("unregister")
+  .description("Stop monitoring a project — no more alerts [Pro]")
+  .option(
+    "--project-fingerprint <fp>",
+    "Fingerprint from `verglos monitor status` (defaults to the current project)",
+  )
+  .action(async (opts: { projectFingerprint?: string }) => {
+    const asPlan = process.env.VERGLOS_AS_PLAN;
+    const ok = await requireCapability(
+      "monitor_register",
+      "Continuous CVE monitoring",
+    );
+    if (!ok) process.exit(1);
+    const code = await executeMonitorUnregister({
+      projectFingerprint: opts.projectFingerprint,
+    });
+    if (code !== 0) process.exit(code);
+  });
+
+monitor
+  .command("test-alert")
+  .description("Fire a canary alert through the registered channels to verify wiring [Pro]")
+  .option(
+    "--project-fingerprint <fp>",
+    "Fingerprint from `verglos monitor status` (defaults to the current project)",
+  )
+  .action(async (opts: { projectFingerprint?: string }) => {
+    const asPlan = process.env.VERGLOS_AS_PLAN;
+    const ok = await requireCapability(
+      "monitor_register",
+      "Continuous CVE monitoring",
+    );
+    if (!ok) process.exit(1);
+    const code = await executeMonitorTestAlert({
+      projectFingerprint: opts.projectFingerprint,
+    });
     if (code !== 0) process.exit(code);
   });
 

@@ -23,21 +23,36 @@ import type {
  */
 
 /**
- * PINNED PUBLIC KEY — replace when rotating.
+ * PINNED PUBLIC KEYS — two slots, current + successor.
  *
- * This is the base64url-encoded 32-byte raw Ed25519 public key.
- * Compiled into the CLI binary; ships with every download. The
- * private counterpart lives in KMS (arch §8).
+ * Base64url-encoded 32-byte raw Ed25519 public keys. Both are compiled
+ * into the CLI binary and ship with every download. The private
+ * counterparts live in KMS (arch §8).
  *
- * The zero placeholder below matches an all-zero Ed25519 pubkey
- * (which no real signature will ever pass) and will fail every
- * verify() call until the first real key is generated and pinned.
- * Regenerate with:
+ * Rotation is a soft release:
+ *   1. Generate a new keypair for the SUCCESSOR slot (index 1).
+ *      Server keeps signing with the CURRENT key (index 0).
+ *   2. Ship a CLI release that pins both keys.
+ *   3. After enough CLIs upgrade, flip signing to the successor:
+ *      move it into slot 0, add a new successor into slot 1.
+ *   4. Ship again.
+ *
+ * The zero placeholders below match an all-zero Ed25519 pubkey (which
+ * no real signature will ever pass) and will fail every verify() call
+ * until the first real keys are generated and pinned. Generate with:
  *   node -e "const {generateEntitlementKeyPair}=require('@verglos/entitlement');console.log(generateEntitlementKeyPair().publicKeyBase64Url)"
  * and paste the output here.
  */
-export const PINNED_PUBLIC_KEY_B64URL =
-  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+export const PINNED_PUBLIC_KEYS_B64URL: readonly [string, string] = [
+  // current (v1, minted 2026-08-02) — server signs with the matching
+  // private key stored in Vercel env as VERGLOS_ENTITLEMENT_PRIVATE_KEY.
+  // Rotate by moving a new key into slot 0 and demoting the old one
+  // to slot 1 (successor) for a release cycle.
+  "YFa-Ut1bGFrv--OKfyP56Dg8riD4NJ8kR0oAclidtbE",
+  // successor — reserved for the next rotation, safe to leave as
+  // the placeholder until the first rotation happens
+  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+];
 
 const OFFLINE_GRACE_MS = 7 * 24 * 60 * 60 * 1000;
 const CACHE_FILE = join(homedir(), ".verglos", "entitlement.json");
@@ -52,6 +67,14 @@ interface EntitlementCache {
   lastVerifiedAt: string;
 }
 
+export interface VerifyOptions {
+  /**
+   * Override the pinned public keys. Test-only — callers in production
+   * should let this default to {@link PINNED_PUBLIC_KEYS_B64URL}.
+   */
+  pinnedKeys?: readonly string[];
+}
+
 /**
  * Verify a signed entitlement token. Returns a VerifyResult that
  * distinguishes:
@@ -59,10 +82,15 @@ interface EntitlementCache {
  *   - inOfflineGrace (signature ok, exp past, within 7d) → treat
  *     as valid AND surface a renewal nudge to the user
  *   - invalid → free-tier caps apply
+ *
+ * Signature is checked against every pinned key in order. This is what
+ * makes the two-slot rotation policy work: the server can flip signing
+ * keys and a CLI that ships both pinned keys keeps verifying.
  */
 export async function verifyEntitlement(
   token: SignedEntitlement,
   now: number = Date.now(),
+  options: VerifyOptions = {},
 ): Promise<VerifyResult> {
   const parts = token.split(".");
   if (parts.length !== 3) {
@@ -83,8 +111,23 @@ export async function verifyEntitlement(
 
   const signingInput = Buffer.from(`${headerB64}.${claimsB64}`, "utf8");
   const signature = base64UrlDecode(sigB64);
-  const publicKey = publicKeyFromBase64Url(PINNED_PUBLIC_KEY_B64URL);
-  const sigOk = ed25519Verify(null, signingInput, publicKey, signature);
+  // Precedence: explicit options > VERGLOS_TEST_PUBKEY_B64URL env
+  // override (test-only) > compiled-in pin. The env override exists
+  // so downstream packages can test the full sign→verify pipeline
+  // without threading VerifyOptions through every call site.
+  const envKey = process.env.VERGLOS_TEST_PUBKEY_B64URL;
+  const pinned =
+    options.pinnedKeys ?? (envKey ? [envKey] : PINNED_PUBLIC_KEYS_B64URL);
+  const sigOk = pinned.some((keyB64) => {
+    try {
+      const key = publicKeyFromBase64Url(keyB64);
+      return ed25519Verify(null, signingInput, key, signature);
+    } catch {
+      // Malformed key slot — skip it, but never let one bad slot poison
+      // verification against the other.
+      return false;
+    }
+  });
   if (!sigOk) {
     return { valid: false, reason: "signature failed to verify" };
   }

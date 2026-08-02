@@ -8,7 +8,10 @@ export type DetectorId =
   | "git-history"
   | "ai-patterns"
   | "slopsquat"
-  | "vendored-cves";
+  | "vendored-cves"
+  | "agent-surface"
+  | "api-hardening"
+  | "deep-auth";
 
 /**
  * The ten security domains, plus D11 (agent surface).
