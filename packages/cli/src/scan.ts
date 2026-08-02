@@ -43,6 +43,7 @@ const PRO_DETECTOR_CAPABILITIES: Array<{
 }> = [
   { detector: "agent-surface", capability: "rule_pack_agent_surface" },
   { detector: "api-hardening", capability: "rule_pack_api_hardening" },
+  { detector: "deep-auth", capability: "rule_pack_deep_auth" },
 ];
 
 const require = createRequire(import.meta.url);

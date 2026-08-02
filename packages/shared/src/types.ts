@@ -10,7 +10,8 @@ export type DetectorId =
   | "slopsquat"
   | "vendored-cves"
   | "agent-surface"
-  | "api-hardening";
+  | "api-hardening"
+  | "deep-auth";
 
 /**
  * The ten security domains, plus D11 (agent surface).
