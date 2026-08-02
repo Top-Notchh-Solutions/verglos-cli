@@ -4,7 +4,8 @@ import { homedir, platform } from "node:os";
 import { join } from "node:path";
 import chalk from "chalk";
 import type { ScanResult } from "@verglos/shared";
-import { DEFAULT_API_URL } from "./credentials.js";
+import { computeProjectFingerprint } from "@verglos/shared";
+import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
 
 // Anonymous scan telemetry. One event per `verglos scan`. Users can opt
 // out with `VERGLOS_TELEMETRY=0`. What we send is documented in the
@@ -69,8 +70,20 @@ export async function sendScanEvent(
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
+  // Fingerprint the project so the server can group score-history
+  // rows per repo without ever seeing a path. Cheap — hashes the
+  // git remote + package.json name + resolved root.
+  let fingerprint: string | undefined;
+  try {
+    const fp = await computeProjectFingerprint(result.projectRoot);
+    fingerprint = fp.fingerprint ?? undefined;
+  } catch {
+    // Fingerprint failure is non-fatal — anonymous rows still land.
+  }
+
   const payload = {
     event_id: randomUUID(),
+    fingerprint,
     cli_version: opts.cliVersion,
     node_version: process.version,
     platform: platform(),
@@ -87,10 +100,20 @@ export async function sendScanEvent(
     detectors: opts.detectorsRun,
   };
 
+  // Attach the license key when we have one, so the server can also
+  // write a score_history row keyed on the license for the Pro
+  // dashboard's 30/365/1095-day trend. Free users never send this
+  // header — telemetry stays anonymous.
+  const creds = await loadCredentials().catch(() => null);
+  const headers: Record<string, string> = { "content-type": "application/json" };
+  if (creds?.licenseKey) {
+    headers.authorization = `Bearer ${creds.licenseKey}`;
+  }
+
   try {
     await fetch(`${DEFAULT_API_URL}/api/v1/telemetry/scan`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers,
       body: JSON.stringify(payload),
       signal: controller.signal,
       // No keep-alive; one-shot request.
