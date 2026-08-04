@@ -19,3 +19,10 @@ scan-campaign-reports/
 
 # Fixture .env samples must remain checked-in (scanner uses them)
 !packages/scanner/fixtures/**/.env.example
+
+# Sales / CRM — founder-local. Contains lead names, contact emails,
+# buying signals, and personalization hooks. Public-repo leak would
+# burn the outreach list to competitors, spammers, and the leads
+# themselves. Keep this folder off git entirely; move to a private
+# repo when the sales motion is stable.
+docs/sales/
