@@ -22,7 +22,7 @@
 
 <p align="center">
   <strong>Verglos scans your repo, spots the security issues AI coding agents commonly introduce, and shows you the fix.</strong><br>
-  <sub>Runs 100% locally. Your source never leaves the machine. Free tier is fully unlocked, permanently.</sub>
+  <sub>SAST + SCA in one CLI. Runs 100% locally. Your source never leaves the machine. Free tier is fully unlocked, permanently.</sub>
 </p>
 
 <p align="center">
@@ -70,25 +70,21 @@ Open the HTML to drill into every finding, or ship the JSON to CI.
 
 ## What Verglos catches
 
+Verglos ships **SAST** (static application security testing — code-side detectors) and **SCA** (software composition analysis — dependency + supply-chain) in one CLI. AI-provenance is layered on top; DAST (runtime testing) is deliberately out of scope.
+
 <table>
   <thead>
     <tr>
+      <th align="left">Category</th>
       <th align="left">Domain</th>
       <th align="left">Detectors</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td rowspan="4"><b>SAST</b><br><sub>code-side</sub></td>
       <td><b>Secrets</b></td>
       <td>AWS access keys, Stripe live/test keys, GitHub tokens, RSA/EC/OpenSSH private keys — in-file and across the last 50 commits of git history</td>
-    </tr>
-    <tr>
-      <td><b>Dependencies</b></td>
-      <td>OSV / CVE lookups on <code>package-lock.json</code>, top 50 packages, with severity mapping</td>
-    </tr>
-    <tr>
-      <td><b>Supply chain</b></td>
-      <td>Slopsquat (AI-hallucinated packages that don't exist on npm) + typosquat (Levenshtein-close to a top-200 package name)</td>
     </tr>
     <tr>
       <td><b>Injection</b></td>
@@ -103,7 +99,21 @@ Open the HTML to drill into every finding, or ship the JSON to CI.
       <td><code>eval</code>, <code>dangerouslySetInnerHTML</code>, unsafe <code>child_process</code>, insecure prompt-injected code paths</td>
     </tr>
     <tr>
+      <td rowspan="3"><b>SCA</b><br><sub>supply-chain</sub></td>
+      <td><b>Dependencies</b></td>
+      <td>OSV / CVE lookups on <code>package-lock.json</code>, top 50 packages, with severity mapping</td>
+    </tr>
+    <tr>
+      <td><b>Vendored libs</b></td>
+      <td>Cross-references <code>public/libraries/</code>, <code>vendor/</code>, and <code>*.min.js</code> filenames against OSV — the CVEs <code>npm audit</code> can't see because the code is checked in, not installed</td>
+    </tr>
+    <tr>
+      <td><b>Supply chain</b></td>
+      <td>Slopsquat (AI-hallucinated packages that don't exist on npm) + typosquat (Levenshtein-close to a top-200 package name)</td>
+    </tr>
+    <tr>
       <td><b>AI provenance</b></td>
+      <td>—</td>
       <td>Per-file signal aggregation → repo-level <code>aiAuthoredPercent</code>. Signals: git trailers (Co-Authored-By), commit shape (fast + large + multi-file), code shape (uniform docstrings, zero TODOs), agent artifacts (<code>.cursor/</code>, <code>.claude/</code>, <code>CLAUDE.md</code>)</td>
     </tr>
   </tbody>
