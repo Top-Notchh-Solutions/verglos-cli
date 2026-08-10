@@ -95,7 +95,8 @@ export type ContextTag =
   | "build-config"      // webpack.config.*, rspack.config.*, vite.config.* — dev-server CORS etc.
   | "generated"         // generated/, __generated__/, .generated.*, internal/types/generated/
   | "workspace-package" // slopsquat firing on a monorepo-internal @scope/pkg
-  | "api-spec-example"; // openapi.yml / swagger.yml example bodies
+  | "api-spec-example"  // openapi.yml / swagger.yml example bodies
+  | "data-content";     // {public,src,content,static,assets}/data/*.json — prose/catalog blobs, not code
 
 export type ProjectType =
   | "nextjs"

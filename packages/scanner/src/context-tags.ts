@@ -50,7 +50,26 @@ function isVendoredBundle(file: string): boolean {
     //   public/js/app.js            Ctrlpanel (webpack app bundle)
     //   public/js/filament/**       Paymenter (Filament admin JS)
     //   public/plugins/jquery/*     Ctrlpanel (Laravel jQuery vendor)
-    /(^|\/)public\/(js|css|assets|dist|build|plugins|themes)\//i.test(file)
+    /(^|\/)public\/(js|css|assets|dist|build|plugins|themes)\//i.test(file) ||
+    // Distribution binaries dropped into `binaries/` or `bin/` inside a
+    // package. Yarn Berry ships as a single yarn-<ver>.cjs blob that
+    // trips the secrets and misconfig detectors on eval / long entropy
+    // strings — the .yarn/releases/ rule catches it when it lives under
+    // .yarn/, but repos that vendor a copy inside `packages/*/binaries/`
+    // (webiny) or `bin/` need the same treatment.
+    //
+    // Concrete ICP-300 false positive fixed by this:
+    //   webiny-webiny-js:
+    //     packages/create-webiny-project/src/services/SetupYarn/binaries/yarn-4.17.1.cjs
+    //     — 6 D4-001 / D5-003 crits + highs on a vendored yarn CLI.
+    /(^|\/)(?:binaries|bin)\/[^/]+\.(?:cjs|mjs|js)$/i.test(file) ||
+    // Versioned distribution filenames anywhere in the tree —
+    // `something-1.2.3.js` / `something@1.2.3.min.js`. If the filename
+    // encodes a name@version, it's a vendored copy of a library. The
+    // vendored-cves detector (D6-002) already parses this shape to
+    // cross-reference OSV; mirroring that here means the file's other
+    // detectors get the same context treatment.
+    /(?:^|\/)[a-z0-9][a-z0-9._-]*[-@]\d+(?:\.\d+){1,3}(?:[-.][a-z0-9]+)*(?:\.min|\.bundle)?\.(?:c?js|mjs)$/i.test(file)
   );
 }
 
@@ -207,7 +226,51 @@ function isTestFixture(file: string): boolean {
     /(^|\/)benchmarks?\//i.test(file) ||
     // Sample/example directories.
     /(^|\/)examples?\//i.test(file) ||
-    /(^|\/)samples?\//i.test(file)
+    /(^|\/)samples?\//i.test(file) ||
+    // Tutorial / book / lesson content — same shape as examples,
+    // full chapter-numbered directories of demo code. Concrete
+    // ICP-300 false positives fixed by this:
+    //   async-labs-saas: book/10-begin/api/server/api/index.ts
+    //   book/{4,5,6,7,8,9,10}-{begin,end,end-functional}/**  (~15 dup FPs)
+    /(^|\/)book\//i.test(file) ||
+    /(^|\/)tutorials?\//i.test(file) ||
+    /(^|\/)chapters?\//i.test(file) ||
+    /(^|\/)lessons?\//i.test(file) ||
+    /(^|\/)walkthroughs?\//i.test(file) ||
+    /(^|\/)workshops?\//i.test(file)
+  );
+}
+
+/**
+ * Big data / content JSON blobs. Skills catalogs, i18n dictionaries,
+ * pre-rendered content packs. Detectors that look for code-shape
+ * patterns (Math.random, eval, console.log with sensitive terms, SQL
+ * interpolation) fire on prose inside JSON string values — every
+ * mention of "console.log('api key:', k)" inside a code-example
+ * markdown-in-JSON blob becomes an emitted finding.
+ *
+ * Concrete ICP-300 false positives fixed by this:
+ *   jeremylongshore/claude-code-plugins-plus-skills:
+ *     marketplace/public/data/skills-catalog.json  →  1050 FPs
+ *     marketplace/src/data/skills-catalog.json     →  1050 FPs
+ *   (D8-001 medium: 1922, D4-001 info: 214 — the outlier repo of the
+ *   300-repo campaign, ~4000 findings from one FP source.)
+ *
+ * Kept strict:
+ *   1. Must live under a data-flavoured directory
+ *      (public/data/, src/data/, content/data/, static/data/,
+ *      assets/data/, or a bare data/ segment).
+ *   2. Must be .json / .jsonl / .ndjson (not .env, not config files
+ *      that happen to be JSON like tsconfig.json).
+ * A real secret inside a small config .json is still caught.
+ */
+function isDataContent(file: string): boolean {
+  if (!/\.(?:json|jsonl|ndjson)$/i.test(file)) return false;
+  return (
+    /(^|\/)(?:public|src|content|static|assets|marketplace)\/data\//i.test(file) ||
+    /(^|\/)data\/(?:catalogs?|content|manifests?|generated|dumps?|exports?|snapshots?|packs?)\//i.test(file) ||
+    /(?:^|\/)(?:content|catalog|manifest|dump|export|snapshot|pack)-catalog\.(?:json|jsonl|ndjson)$/i.test(file) ||
+    /(?:^|\/)skills?[-_]catalog\.(?:json|jsonl|ndjson)$/i.test(file)
   );
 }
 
@@ -221,6 +284,12 @@ const TAG_RULES: TagRule[] = [
   {
     tag: "vendored-bundle",
     matches: (f) => !!f.file && isVendoredBundle(f.file),
+  },
+  {
+    // Data / content JSON blobs. Placed early so a skills-catalog.json
+    // under public/data/ is tagged as data-content, not docs.
+    tag: "data-content",
+    matches: (f) => !!f.file && isDataContent(f.file),
   },
   { tag: "generated", matches: (f) => !!f.file && isGenerated(f.file) },
   { tag: "test-fixture", matches: (f) => !!f.file && isTestFixture(f.file) },
