@@ -36,8 +36,50 @@ const RANDOM_LOW_CONTEXT =
 const LINE_HAS_CODE_SHAPE =
   /[={};]|=>|\breturn\b|\b(?:const|let|var)\b|\bfunction\b|\bawait\b|\bnew\b|\.[a-zA-Z_$][\w$]*\s*\(|\$\{/;
 
-const SENSITIVE_LOG_CONTEXT =
-  /\b(?:password|secret|token|key|credential|auth|private|ssn|dob|creditcard|credit_card|apiKey|api_key)\b/i;
+/**
+ * D8-001 sensitive-log matcher. Historical shape allowed BARE words
+ * like `key`, `token`, `auth`, `private` — which fired on
+ * `console.log('Updating key:', key)` (webiny prepublishOnly script),
+ * `console.log('token count:', n)`, and any dep-name iteration log.
+ *
+ * The rule stays: log calls that clearly touch credential-shaped
+ * values are a real data-exposure risk. But bare `key` / `token`
+ * without an adjective is almost never a secret — it's a dict key,
+ * an iteration variable, a UI label. Require a compound form
+ * (apiKey / reset_token / private_key) or a word that is intrinsically
+ * secret (password, secret, credential, SSN, credit card).
+ *
+ * Positive tests still fire:
+ *   console.log('resetToken:', t)       (auth flow)
+ *   console.log('api_key=', k)          (credential leak)
+ *   console.log('user password:', p)    (real leak)
+ *   console.log('private_key:', k)      (real leak)
+ *
+ * Suppressed:
+ *   console.log('Updating key:', key)   (dict iteration)
+ *   console.log('token count:', n)      (integer counter)
+ *   console.log('auth middleware')      (log line)
+ */
+const SENSITIVE_LOG_CONTEXT = new RegExp(
+  "\\b(?:" +
+    [
+      // Intrinsic — always secret regardless of adjective.
+      "password", "passwd", "pwd",
+      "secret",
+      "ssn", "dob", "creditcard", "credit_card", "credit-card",
+      "credentials?",
+      // Compound tokens — must carry a modifier.
+      "(?:reset|refresh|access|session|auth|csrf|xsrf|bearer|jwt|api|id)[._-]?tokens?",
+      // Compound keys — must carry a modifier.
+      "(?:api|secret|private|encryption|signing|access|session|auth|master|root)[._-]?keys?",
+      // Compound API terms.
+      "api[._-]?(?:secret|hash|salt)",
+      // Private-* variants.
+      "private[._-]?(?:key|token|data|info)",
+    ].join("|") +
+    ")\\b",
+  "i",
+);
 
 function nearbyContext(lines: string[], index: number, radius: number): string {
   const start = Math.max(0, index - radius);
@@ -139,6 +181,21 @@ export const misconfigDetector: Detector = {
 
     for (const file of files) {
       if (/\.(md|mdx|markdown|txt|rst)$/i.test(file.relativePath)) continue;
+      // Data-shape files. Math.random / eval / CORS wildcard / console.log
+      // are code patterns — matching them inside JSON string values, SVG
+      // attributes, HTML fragments, or CSV rows is chasing prose, not
+      // executable code. Configs that Verglos should still check (yaml,
+      // toml, ini for k8s/helm/CI secrets) are deliberately not in the
+      // skip list; those DO carry real misconfig.
+      //
+      // Concrete ICP-300 false positives fixed by this:
+      //   jeremylongshore/claude-code-plugins-plus-skills:
+      //     marketplace/{public,src}/data/skills-catalog.json — 1922
+      //     D8-001 medium findings on prose containing the word "key" /
+      //     "token" inside code-example blocks embedded in JSON strings.
+      if (/\.(?:json|jsonl|ndjson|xml|svg|html?|csv|tsv|har|ipynb)$/i.test(file.relativePath)) {
+        continue;
+      }
 
       let content: string;
       try {
