@@ -49,39 +49,87 @@ jobs:
       # If it's flipped private, publish returns "provenance requires
       # a public repository." Visibility toggle:
       # https://github.com/Top-Notchh-Solutions/verglos-cli/settings.
+      #
+      # Each publish step is idempotent: if the exact package@version
+      # is already on npm, the step logs a notice and exits 0. This
+      # protects against re-runs after a tag move / re-push and
+      # against partial-failure recovery (e.g. shared already
+      # published, scanner still needed).
 
       - name: Publish shared package
         run: |
+          PKG_DIR=packages/shared
+          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
+          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
+          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
+            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
+            exit 0
+          fi
           mkdir -p /tmp/verglos-publish/shared
-          pnpm -C packages/shared pack --pack-destination /tmp/verglos-publish/shared
+          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/shared
           npm publish /tmp/verglos-publish/shared/*.tgz --access public --provenance
 
       - name: Publish scanner package
         run: |
+          PKG_DIR=packages/scanner
+          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
+          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
+          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
+            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
+            exit 0
+          fi
           mkdir -p /tmp/verglos-publish/scanner
-          pnpm -C packages/scanner pack --pack-destination /tmp/verglos-publish/scanner
+          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/scanner
           npm publish /tmp/verglos-publish/scanner/*.tgz --access public --provenance
 
       - name: Publish reporter package
         run: |
+          PKG_DIR=packages/reporter
+          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
+          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
+          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
+            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
+            exit 0
+          fi
           mkdir -p /tmp/verglos-publish/reporter
-          pnpm -C packages/reporter pack --pack-destination /tmp/verglos-publish/reporter
+          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/reporter
           npm publish /tmp/verglos-publish/reporter/*.tgz --access public --provenance
 
       - name: Publish mcp package
         run: |
+          PKG_DIR=packages/mcp
+          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
+          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
+          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
+            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
+            exit 0
+          fi
           mkdir -p /tmp/verglos-publish/mcp
-          pnpm -C packages/mcp pack --pack-destination /tmp/verglos-publish/mcp
+          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/mcp
           npm publish /tmp/verglos-publish/mcp/*.tgz --access public --provenance
 
       - name: Publish entitlement package
         run: |
+          PKG_DIR=packages/entitlement
+          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
+          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
+          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
+            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
+            exit 0
+          fi
           mkdir -p /tmp/verglos-publish/entitlement
-          pnpm -C packages/entitlement pack --pack-destination /tmp/verglos-publish/entitlement
+          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/entitlement
           npm publish /tmp/verglos-publish/entitlement/*.tgz --access public --provenance
 
       - name: Publish CLI package
         run: |
+          PKG_DIR=packages/cli
+          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
+          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
+          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
+            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
+            exit 0
+          fi
           mkdir -p /tmp/verglos-publish/cli
-          pnpm -C packages/cli pack --pack-destination /tmp/verglos-publish/cli
+          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/cli
           npm publish /tmp/verglos-publish/cli/*.tgz --access public --provenance
