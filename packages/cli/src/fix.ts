@@ -74,10 +74,10 @@ async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
     ];
   },`;
 
-    if (/const\s+nextConfig\s*=\s*\{/.test(content)) {
+    if (NEXT_CONFIG_DECL.test(content)) {
       const updated = content.replace(
-        /const\s+nextConfig\s*=\s*\{/,
-        `const nextConfig = {${headersBlock}`,
+        NEXT_CONFIG_DECL,
+        (match) => `${match}${headersBlock}`,
       );
       await writeFile(path, updated, "utf8");
       return { file: name, action: "patched" };
@@ -85,6 +85,31 @@ async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
   }
   return null;
 }
+
+/**
+ * Matches every real-world shape of the Next.js config declaration we
+ * expect to encounter. Kept exported for unit testing.
+ *
+ * Accepts:
+ *   const nextConfig = {
+ *   let nextConfig = {
+ *   const nextConfig: NextConfig = {                      ← Next 14/15 default
+ *   const nextConfig: NextConfig<Options> = {             ← generic type arg
+ *   const nextConfig satisfies NextConfig = {             ← satisfies clause
+ *
+ * Rejects deliberately:
+ *   const nextConfig: NextConfig<{ inline: object }> = {  ← inline object
+ *     types are exotic in real configs and would require a real parser
+ *     to disambiguate the closing `>` from the declaration `= {`. When
+ *     hit, `verglos fix` falls through to the middleware-style path
+ *     (writes src/verglos-security-headers.ts) which is safe.
+ *
+ * The identifier-name-first alternation and the tight character class
+ * inside the generic argument prevent this from matching arbitrary
+ * `= {` on unrelated lines.
+ */
+export const NEXT_CONFIG_DECL =
+  /(?:const|let)\s+nextConfig(?:\s*:\s*[A-Za-z_$][\w$]*(?:\s*<\s*[\w$,\s]+\s*>)?|\s+satisfies\s+[A-Za-z_$][\w$]*(?:\s*<\s*[\w$,\s]+\s*>)?)?\s*=\s*\{/;
 
 // ── Middleware-style frameworks (Express / Hono / Fastify / Nest) ─────────
 
