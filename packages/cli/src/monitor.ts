@@ -9,6 +9,10 @@ import {
   type MonitorDependency,
 } from "@verglos/entitlement";
 import { loadCredentials, DEFAULT_API_URL } from "./credentials.js";
+import {
+  authorizedFetch,
+  type AuthorizedFetchResult,
+} from "./authorized-fetch.js";
 
 /**
  * `verglos monitor register` — Pro-only.
@@ -191,55 +195,6 @@ export async function executeMonitorRegister(
 //  — coming soon" rather than a crash.
 //
 // ─────────────────────────────────────────────────────────────────────────
-
-interface AuthorizedFetchResult {
-  ok: boolean;
-  status: number;
-  json: unknown;
-  reason?: "no_license" | "unauthorized" | "not_implemented" | "not_found" | "network" | "other";
-}
-
-async function authorizedFetch(
-  path: string,
-  init: { method: string; body?: unknown } = { method: "GET" },
-): Promise<AuthorizedFetchResult> {
-  const creds = await loadCredentials();
-  if (!creds.licenseKey) {
-    return {
-      ok: false,
-      status: 0,
-      json: null,
-      reason: "no_license",
-    };
-  }
-  const url = `${creds.apiUrl ?? DEFAULT_API_URL}${path}`;
-  try {
-    const res = await fetch(url, {
-      method: init.method,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${creds.licenseKey}`,
-      },
-      body: init.body === undefined ? undefined : JSON.stringify(init.body),
-    });
-    const json = await res.json().catch(() => null);
-    if (res.status === 401 || res.status === 402) {
-      return { ok: false, status: res.status, json, reason: "unauthorized" };
-    }
-    if (res.status === 404) {
-      return { ok: false, status: 404, json, reason: "not_found" };
-    }
-    if (res.status === 501) {
-      return { ok: false, status: 501, json, reason: "not_implemented" };
-    }
-    if (!res.ok) {
-      return { ok: false, status: res.status, json, reason: "other" };
-    }
-    return { ok: true, status: res.status, json };
-  } catch {
-    return { ok: false, status: 0, json: null, reason: "network" };
-  }
-}
 
 function explainFetchFailure(op: string, reason: AuthorizedFetchResult["reason"], status: number): void {
   switch (reason) {
