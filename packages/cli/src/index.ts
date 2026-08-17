@@ -17,6 +17,7 @@ import {
   executeMonitorTestAlert,
   executeMonitorUnregister,
 } from "./monitor.js";
+import { executeAttest } from "./attest.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -443,6 +444,25 @@ program
   .action(async (opts: { timeout: string }) => {
     const code = await executePrecommit({
       timeoutMs: parseInt(opts.timeout, 10),
+    });
+    process.exit(code);
+  });
+
+// `verglos attest` — Studio-tier. Runs a scan, POSTs the summary to
+// /api/v1/attest, and prints a public verify URL the customer pastes
+// into a client handoff, PR review, or due-diligence questionnaire.
+// See packages/cli/src/attest.ts for the full contract.
+program
+  .command("attest")
+  .description("Publish a public attestation for this project [Studio]")
+  .option("--label <name>", "Override the project name shown on the verify page")
+  .option("--quiet", "Print only the verify URL (no chrome) for shell pipelines")
+  .action(async (opts: { label?: string; quiet?: boolean }) => {
+    const code = await executeAttest({
+      cwd: process.cwd(),
+      cliVersion: version,
+      label: opts.label,
+      quiet: opts.quiet,
     });
     process.exit(code);
   });
