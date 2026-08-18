@@ -213,6 +213,18 @@ verglos hook                       # install the pre-commit git hook once
 verglos precommit --timeout 2000   # what the hook runs (2s budget by default)
 ```
 
+### `verglos attest` — publish a public verify URL `Studio`
+
+Runs a full scan, POSTs the summary (score + finding counts), and prints back a `verglos.com/verify/<hash>` URL. Paste it into a client handoff, a PR review, or a due-diligence questionnaire — any third party can open it without an account to see the same summary.
+
+```bash
+verglos attest                       # scan + publish, prints the verify URL
+verglos attest --label "acme-web"    # override the display name
+verglos attest --quiet               # URL only, for shell pipelines
+```
+
+Findings text stays private — only score + severity counts are published. See the public ledger at [verglos.com/verify](https://verglos.com/verify).
+
 ### Utilities
 
 ```bash
