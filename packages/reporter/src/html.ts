@@ -246,9 +246,10 @@ function renderFinding(f: Finding): string {
     : "";
 
   return `
-    <div class="finding" data-severity="${f.severity}">
+    <div class="finding ${f.verified === "false" ? "finding-false-positive" : ""}" data-severity="${f.severity}">
       <div class="finding-header">
         <span class="badge" style="background:${severityColor(f.severity)}">${f.severity.toUpperCase()}</span>
+        ${renderVerifiedPill(f.verified ?? null)}
         <span class="detector">${escapeHtml(f.detector.replace("-", " "))}</span>
         <span class="title">${escapeHtml(f.title)}</span>
         ${location}
@@ -258,6 +259,20 @@ function renderFinding(f: Finding): string {
       ${fix}
     </div>
   `;
+}
+
+function renderVerifiedPill(verified: Finding["verified"]): string {
+  switch (verified) {
+    case "true":
+      return `<span class="verified verified-true">verified exploitable</span>`;
+    case "false":
+      return `<span class="verified verified-false">false positive</span>`;
+    case "not_attemptable":
+      return `<span class="verified verified-not-attemptable">not attemptable</span>`;
+    case null:
+    case undefined:
+      return `<span class="verified verified-null">not attempted</span>`;
+  }
 }
 
 function escapeHtml(str: string): string {
@@ -384,9 +399,16 @@ export function renderHtmlReport(result: ScanResult): string {
     .severity-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .severity-stack span { border: 1px solid; border-radius: 999px; padding: 0.125rem 0.5rem; font-size: 0.6875rem; font-family: monospace; text-transform: uppercase; }
     .finding { background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+    .finding-false-positive .title,
+    .finding-false-positive .description { color: #71717a; text-decoration: line-through; text-decoration-thickness: 1px; }
     .domain-section .finding:last-child { margin-bottom: 0; }
     .finding-header { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
     .badge { font-size: 0.625rem; padding: 0.125rem 0.5rem; border-radius: 4px; color: white; font-weight: bold; letter-spacing: 0.05em; }
+    .verified { font-size: 0.625rem; padding: 0.125rem 0.5rem; border-radius: 4px; border: 1px solid; font-family: monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+    .verified-null { color: #a1a1aa; border-color: #3f3f46; background: #27272a66; }
+    .verified-true { color: #22C55E; border-color: #22C55E55; background: #052e1620; }
+    .verified-false { color: #a1a1aa; border-color: #3f3f46; background: #27272a66; text-decoration: line-through; }
+    .verified-not-attemptable { color: #F59E0B; border-color: #F59E0B55; background: #42200633; }
     .detector { font-size: 0.625rem; padding: 0.125rem 0.5rem; border: 1px solid #3f3f46; border-radius: 4px; color: #a1a1aa; font-family: monospace; text-transform: uppercase; letter-spacing: 0.04em; }
     .title { font-weight: 600; }
     .location { font-family: monospace; font-size: 0.75rem; color: #9CA3AF; }

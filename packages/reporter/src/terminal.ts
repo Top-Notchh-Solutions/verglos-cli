@@ -42,6 +42,13 @@ function formatDuration(ms: number): string {
   return `${(ms / 1000).toFixed(1)}s`;
 }
 
+function verifiedSummary(findings: Finding[]): string {
+  const eligible = findings.filter((f) => f.severity !== "info");
+  const verified = eligible.filter((f) => f.verified === "true").length;
+  const total = eligible.length;
+  return `  Verified   ${verified}/${total}   run ${chalk.cyan("`verglos hunt`")} to verify (Pro — v2.0.0-beta)`;
+}
+
 /** Renders the AI-provenance block. Silent when there's nothing to say. */
 function printProvenance(p: RepoProvenance | undefined): void {
   if (!p) return;
@@ -131,6 +138,7 @@ export function printTerminalSummary(result: ScanResult): void {
       `${chalk.blue(`Medium  ${score.counts.medium}`)}    ` +
       `${chalk.gray(`Low  ${score.counts.low}`)}`,
   );
+  console.log(chalk.gray(verifiedSummary(findings)));
   console.log("");
 
   printProvenance(provenance);

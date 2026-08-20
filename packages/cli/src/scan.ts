@@ -61,6 +61,7 @@ export interface ScanCommandOptions {
   noProvenance?: boolean;
   verifySecrets?: boolean;
   noTelemetry?: boolean;
+  hunt?: boolean;
   /**
    * Domain-focused scan (`verglos secrets`, `verglos deps`). Suppresses
    * baseline persistence and momentum output, and forces provenance off
@@ -139,6 +140,10 @@ export async function executeScan(
 
   if (!options.quiet) {
     printTerminalSummary(result);
+    if (options.hunt) {
+      console.log("  Hunt integration shipping in v2.0.0-beta");
+      console.log("");
+    }
     // A single-detector score is not comparable to a full-scan
     // baseline, so no momentum for focused runs.
     if (!options.focused) {
@@ -194,6 +199,7 @@ export async function executeCi(options: {
   quiet?: boolean;
   strict?: boolean;
   noTelemetry?: boolean;
+  hunt?: boolean;
 }): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
   const startedAt = Date.now();
@@ -207,6 +213,11 @@ export async function executeCi(options: {
   const durationMs = Date.now() - startedAt;
   if (!options.quiet) {
     printTerminalSummary(result);
+    if (options.hunt) {
+      console.log("Verified-only CI gating shipping in v2.0.0-beta");
+      console.log("Falling back to standard CI gating for this alpha run.");
+      console.log("");
+    }
   }
 
   if (!isTelemetryDisabled(options.noTelemetry)) {
