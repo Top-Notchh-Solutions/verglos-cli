@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-  <strong>Verglos hunts the vulnerabilities other AI agents left in your code, fires each one in a local sandbox to prove it's real, and signs the surviving evidence so you can hand it to a client.</strong><br>
-  <sub>The evidence agent for AI-generated code. Free scanner forever. Pro adds the hunt loop. Studio adds signed attestation.</sub>
+  <strong>Verglos scans AI-assisted JavaScript and TypeScript locally today, with v2 hunt verification and signed evidence moving through the alpha and beta track.</strong><br>
+  <sub>The evidence agent for AI-generated code. Free scanner forever. Hunt and attest are v2 alpha shells until beta functionality lands.</sub>
 </p>
 
 <p align="center">
@@ -70,7 +70,7 @@ Open the HTML to drill into every finding, or ship the JSON to CI.
 
 ## What Verglos catches
 
-Verglos is a three-command CLI: `scan` finds deterministic SAST/SCA issues locally, `hunt` verifies exploitability in a local sandbox, and `attest` signs the surviving evidence for client handoff.
+Verglos is a three-command CLI: `scan` finds deterministic SAST/SCA issues locally today. `hunt` and `attest` are the v2 track: alpha shells now, with functional local verification and signed evidence landing in beta.
 
 - **`verglos scan`** — fast, deterministic, local, and free.
 - **`verglos hunt`** — Pro shell in v2.0.0-alpha; functional local sandbox verification lands in v2.0.0-beta.
@@ -317,21 +317,21 @@ jobs:
 | `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes |
 | Pre-commit hook | Yes | Yes | Yes | Yes |
 | `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes |
-| **`verglos hunt` on Critical + High** | — | Yes | Yes | Yes |
-| **`verglos hunt` on Medium** | — | — | Yes | Yes |
-| **MCP hunt tools** | — | Yes | Yes | Yes |
+| **`verglos hunt` on Critical + High** | — | Alpha shell | Beta | Beta |
+| **`verglos hunt` on Medium** | — | — | Beta | Beta |
+| **MCP hunt tools** | — | Alpha shell | Beta | Beta |
 | **`verglos fix`** | — | Yes | Yes | Yes |
-| **`verglos ci --hunt`** | — | Yes | Yes | Yes |
+| **`verglos ci --hunt`** | — | Alpha path | Beta | Beta |
 | **CI score threshold** | — | Yes | Yes | Yes |
 | **Continuous CVE monitoring** | — | Yes | Yes | Yes |
-| **`verglos attest`** | — | — | Yes | Yes |
-| **Public verify URL** | — | — | Yes | Yes |
-| **White-label report** | — | — | Yes | Yes |
-| **Firecracker sandbox adapter** | — | — | Yes | Yes |
-| **Agency dashboard** | — | — | Yes | Yes |
+| **`verglos attest`** | — | — | Alpha shell | Beta |
+| **Public verify URL** | — | — | Beta | Beta |
+| **White-label report** | — | — | Beta | Beta |
+| **Firecracker sandbox adapter** | — | — | Beta | Beta |
+| **Agency dashboard** | — | — | Beta | Beta |
 | **SSO / SCIM · self-hosted verify chain · audit log · custom detector packs** | — | — | — | Yes |
 
-Upgrade Pro at **[verglos.com/checkout](https://verglos.com/checkout)**. Studio checkout is staged at **[verglos.com/studio-checkout](https://verglos.com/studio-checkout)**. Enterprise starts at **[support@verglos.com](mailto:support@verglos.com?subject=Enterprise)**.
+Upgrade Pro at **[verglos.com/checkout](https://verglos.com/checkout)**. Studio starts at **[topnotchh.solutions@gmail.com](mailto:topnotchh.solutions@gmail.com?subject=Verglos%20Studio)**. Enterprise starts at **[support@verglos.com](mailto:support@verglos.com?subject=Enterprise)**.
 
 ---
 
