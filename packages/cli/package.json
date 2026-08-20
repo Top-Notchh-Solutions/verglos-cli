@@ -1,7 +1,7 @@
 {
   "name": "verglos",
-  "version": "1.8.3",
-  "description": "Security scanner built for AI-generated code. Score any JS/TS repo in 40s, catch hallucinated packages, and stop coding agents from shipping vulnerabilities. Free forever.",
+  "version": "2.0.0-alpha.1",
+  "description": "Verglos hunts what AI agents shipped, verifies each finding locally, and signs the evidence.",
   "type": "module",
   "bin": {
     "verglos": "./dist/index.js"
@@ -48,18 +48,23 @@
   "bugs": {
     "url": "https://github.com/Top-Notchh-Solutions/verglos-cli/issues"
   },
+  "author": "Top Notchh Team",
   "keywords": [
     "security",
     "security-scanner",
     "ai-security",
     "sast",
-    "secrets-detection",
+    "sca",
+    "hunt",
+    "attest",
+    "evidence",
+    "provenance",
     "slopsquat",
-    "hallucinated-packages",
+    "local-sandbox",
+    "ai-generated-code",
     "mcp",
-    "mcp-server",
-    "cursor",
     "claude-code",
+    "cursor",
     "cli",
     "nextjs",
     "typescript"

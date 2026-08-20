@@ -18,6 +18,7 @@ import {
   executeMonitorUnregister,
 } from "./monitor.js";
 import { executeAttest } from "./attest.js";
+import { executeHunt } from "./hunt.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -40,7 +41,7 @@ if (args.includes("--update")) {
 
 program
   .name("verglos")
-  .description("Security scanner for every app you ship")
+  .description("The evidence agent for AI-generated code")
   .version(version, "-v, --version", "Print installed CLI version")
   .option("--update", "Update Verglos CLI to the latest npm version")
   .option(
@@ -48,6 +49,18 @@ program
     "[founder only] Simulate a plan (free|pro|studio) for this invocation",
   )
   .showHelpAfterError(chalk.gray("\nRun `verglos --help` for available commands."))
+  .addHelpText(
+    "afterAll",
+    `
+Command groups:
+  Scan       scan, secrets, deps, score
+  Hunt       hunt — verify findings in a local sandbox (shell — v2.0.0-beta)
+  Attest     attest — sign an evidence bundle for client handoff (shell — v2.0.0-beta)
+  Fix & CI   fix, ci, hook, precommit
+  Session    login, whoami, activate
+  Utilities  init, explain, badge, mcp, monitor, update
+`,
+  )
   .hook("preAction", async (thisCommand, actionCommand) => {
     if (actionCommand.name() === "update") return;
     // Program-level --as-plan propagates via env so every downstream
@@ -79,6 +92,7 @@ program
     "--verify-secrets",
     "Hit GitHub / Stripe APIs to prove matched keys are live (opt-in — makes network calls)",
   )
+  .option("--hunt", "After scanning, hand eligible findings to hunt (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
@@ -91,6 +105,7 @@ program
       strict?: boolean;
       provenance?: boolean;
       verifySecrets?: boolean;
+      hunt?: boolean;
       telemetry?: boolean;
     }) => {
       // Commander sets opts.provenance = false when --no-provenance is passed.
@@ -102,6 +117,7 @@ program
         strict: opts.strict,
         noProvenance,
         verifySecrets: opts.verifySecrets,
+        hunt: opts.hunt,
         noTelemetry,
       };
       if (opts.watch) {
@@ -160,18 +176,28 @@ program
   .option("-t, --threshold <score>", "Minimum score threshold", "60")
   .option("-q, --quiet", "Suppress output")
   .option("--strict", "Include test file findings in score")
+  .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
   )
-  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; telemetry?: boolean }) => {
+  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const plan = await currentPlan({ asPlan });
     const hasThreshold = plan.plan !== "free";
+    if (opts.hunt) {
+      const ok = await requireCapability("ci.hunt_gate", "`verglos ci --hunt`", {
+        asPlan,
+        extraLine:
+          "Verified-only CI gating ships in v2.0.0-beta. This alpha can still run standard CI.",
+      });
+      if (!ok) process.exit(1);
+    }
     const code = await executeCi({
       threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
       quiet: opts.quiet,
       strict: opts.strict,
+      hunt: opts.hunt,
       noTelemetry: opts.telemetry === false,
     });
     if (!hasThreshold && !opts.quiet) {
@@ -208,6 +234,28 @@ program
       console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
     }
   });
+
+program
+  .command("hunt")
+  .description("Verify findings in a local sandbox [Pro] (shell — v2.0.0-beta)")
+  .option("--severity <level>", "Severity filter to hunt (default: critical,high)")
+  .option("--sandbox <adapter>", "Sandbox adapter: auto, node-vm, docker, firecracker")
+  .option("--dry-run", "Parse options without running sandbox verification")
+  .option("--finding <id>", "Verify one finding ID from a Verglos report")
+  .action(
+    async (opts: {
+      severity?: string;
+      sandbox?: string;
+      dryRun?: boolean;
+      finding?: string;
+    }) => {
+      const code = await executeHunt({
+        ...opts,
+        asPlan: process.env.VERGLOS_AS_PLAN,
+      });
+      process.exit(code);
+    },
+  );
 
 program
   .command("login")
@@ -432,6 +480,17 @@ program
       console.log(chalk.gray("  Claude Code  → ~/.claude/mcp.json"));
       console.log(chalk.gray("  Windsurf     → ~/.codeium/windsurf/mcp_config.json"));
       console.log(chalk.gray("  Cline        → .vscode/settings.json (cline.mcpServers)"));
+      console.log("");
+      console.log(chalk.bold("Verglos MCP tools"));
+      console.log(chalk.gray("  verglos_scan                    Free — full local scan"));
+      console.log(chalk.gray("  verglos_check_before_write      Free — legacy pre-write check"));
+      console.log(chalk.gray("  verglos_check_package           Free — slopsquat / typo / CVE check"));
+      console.log(chalk.gray("  verglos_explain_finding         Free — rule explanation"));
+      console.log(chalk.gray("  verglos_hunt_finding            Pro — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_hunt_report             Pro — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_hunt_before_write       Pro — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_hunt_explain_verdict    Pro — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_attest                  Studio — shell, v2.0.0-beta"));
       return;
     }
     await startStdioServer();
@@ -448,21 +507,16 @@ program
     process.exit(code);
   });
 
-// `verglos attest` — Studio-tier. Runs a scan, POSTs the summary to
-// /api/v1/attest, and prints a public verify URL the customer pastes
-// into a client handoff, PR review, or due-diligence questionnaire.
-// See packages/cli/src/attest.ts for the full contract.
 program
   .command("attest")
-  .description("Publish a public attestation for this project [Studio]")
-  .option("--label <name>", "Override the project name shown on the verify page")
-  .option("--quiet", "Print only the verify URL (no chrome) for shell pipelines")
-  .action(async (opts: { label?: string; quiet?: boolean }) => {
+  .description("Sign an evidence bundle for client handoff [Studio] (shell — v2.0.0-beta)")
+  .option("--report <path>", "Path to the Verglos JSON report to attest")
+  .option("--sign", "Request Ed25519 bundle signing")
+  .option("--verify-url <url>", "Verify URL base to embed in the bundle")
+  .action(async (opts: { report?: string; sign?: boolean; verifyUrl?: string }) => {
     const code = await executeAttest({
-      cwd: process.cwd(),
-      cliVersion: version,
-      label: opts.label,
-      quiet: opts.quiet,
+      ...opts,
+      asPlan: process.env.VERGLOS_AS_PLAN,
     });
     process.exit(code);
   });

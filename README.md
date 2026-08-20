@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-  <strong>Verglos scans your repo, spots the security issues AI coding agents commonly introduce, and shows you the fix.</strong><br>
-  <sub>SAST + SCA in one CLI. Runs 100% locally. Your source never leaves the machine. Free tier is fully unlocked, permanently.</sub>
+  <strong>Verglos hunts the vulnerabilities other AI agents left in your code, fires each one in a local sandbox to prove it's real, and signs the surviving evidence so you can hand it to a client.</strong><br>
+  <sub>The evidence agent for AI-generated code. Free scanner forever. Pro adds the hunt loop. Studio adds signed attestation.</sub>
 </p>
 
 <p align="center">
@@ -70,7 +70,18 @@ Open the HTML to drill into every finding, or ship the JSON to CI.
 
 ## What Verglos catches
 
-Verglos ships **SAST** (static application security testing — code-side detectors) and **SCA** (software composition analysis — dependency + supply-chain) in one CLI. AI-provenance is layered on top; DAST (runtime testing) is deliberately out of scope.
+Verglos is a three-command CLI: `scan` finds deterministic SAST/SCA issues locally, `hunt` verifies exploitability in a local sandbox, and `attest` signs the surviving evidence for client handoff.
+
+- **`verglos scan`** — fast, deterministic, local, and free.
+- **`verglos hunt`** — Pro shell in v2.0.0-alpha; functional local sandbox verification lands in v2.0.0-beta.
+- **`verglos attest`** — Studio shell in v2.0.0-alpha; functional Ed25519 signing lands in v2.0.0-beta.
+
+Verglos ships **SAST** (static application security testing — code-side detectors) and **SCA** (software composition analysis — dependency + supply-chain) in one CLI. AI-provenance is layered on top; production DAST remains out of scope.
+
+## Related repos
+
+- Hosted web/docs/account surface: `../verglos-web`
+- Parent company site and Journal: `../topcotchhsolutions-company-website`
 
 <table>
   <thead>
@@ -166,10 +177,32 @@ Useful for shell pipelines: `if [ "$(verglos score)" -lt 70 ]; then …`
 ```bash
 verglos ci                     # blocks on any critical (Free)
 verglos ci --threshold 80      # blocks if score < 80 (Pro)
+verglos ci --hunt              # shell: verified-only gating ships in v2.0.0-beta
 verglos ci --quiet             # suppress output
 ```
 
 Free tier still fails on criticals — Verglos is genuinely useful in CI at $0. Threshold enforcement is Pro.
+
+### `verglos hunt` — local sandbox verification `Pro`
+
+```bash
+verglos hunt
+verglos hunt --severity critical,high
+verglos hunt --sandbox docker
+verglos hunt --finding D4-004-1
+verglos hunt --dry-run
+```
+
+In v2.0.0-alpha this is a shell and exits `78` for Pro/Studio users. Functional per-detector proof synthesis and sandbox execution ship in v2.0.0-beta.
+
+### `verglos attest` — signed evidence bundle `Studio`
+
+```bash
+verglos attest --report verglos-report.json --sign
+verglos attest --verify-url https://verglos.com/verify
+```
+
+In v2.0.0-alpha this is a shell and exits `78` for Studio users. Functional Ed25519 signing, portable JSON+HTML bundles, and public verify URLs ship in v2.0.0-beta.
 
 ### `verglos fix` — auto-remediation `Pro`
 
@@ -275,23 +308,49 @@ jobs:
 
 ## Plans
 
-| | Free | Pro |
-|---|---|---|
-| Full scan (every detector) | Yes | Yes |
-| AI-provenance layer | Yes | Yes |
-| Slopsquat / typosquat | Yes | Yes |
-| MCP server | Yes | Yes |
-| Pre-commit hook | Yes | Yes |
-| Local HTML + JSON report | Yes | Yes |
-| CI mode (block on criticals) | Yes | Yes |
-| **CI mode with score threshold** | — | Yes |
-| **`verglos fix` — auto-remediation** | — | Yes |
-| **Continuous CVE monitoring** (email / Slack / webhook) | — | Yes |
-| **Price** | $0 forever | $29 / month |
+| Capability | Free | Pro $29/mo | Studio $199/mo | Enterprise |
+|---|---|---|---|---|
+| `verglos scan` (all detectors) | Yes | Yes | Yes | Yes |
+| Provenance layer + slopsquat + typosquat | Yes | Yes | Yes | Yes |
+| Local HTML + JSON report | Yes | Yes | Yes | Yes |
+| MCP `verglos_scan` tool | Yes | Yes | Yes | Yes |
+| `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes |
+| Pre-commit hook | Yes | Yes | Yes | Yes |
+| `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes |
+| **`verglos hunt` on Critical + High** | — | Yes | Yes | Yes |
+| **`verglos hunt` on Medium** | — | — | Yes | Yes |
+| **MCP hunt tools** | — | Yes | Yes | Yes |
+| **`verglos fix`** | — | Yes | Yes | Yes |
+| **`verglos ci --hunt`** | — | Yes | Yes | Yes |
+| **CI score threshold** | — | Yes | Yes | Yes |
+| **Continuous CVE monitoring** | — | Yes | Yes | Yes |
+| **`verglos attest`** | — | — | Yes | Yes |
+| **Public verify URL** | — | — | Yes | Yes |
+| **White-label report** | — | — | Yes | Yes |
+| **Firecracker sandbox adapter** | — | — | Yes | Yes |
+| **Agency dashboard** | — | — | Yes | Yes |
+| **SSO / SCIM · self-hosted verify chain · audit log · custom detector packs** | — | — | — | Yes |
 
-Upgrade at **[verglos.com/checkout](https://verglos.com/checkout)**. One-time UPI payment, month-to-month, no lock-in.
+Upgrade Pro at **[verglos.com/checkout](https://verglos.com/checkout)**. Studio checkout is staged at **[verglos.com/studio-checkout](https://verglos.com/studio-checkout)**. Enterprise starts at **[support@verglos.com](mailto:support@verglos.com?subject=Enterprise)**.
 
-_Studio ($199/mo — signed attestations, SBOM export, `verglos rotate`) is on the roadmap for v1.5. Sign up for early access at [verglos.com](https://verglos.com)._
+---
+
+## What's new in 2.0.0
+
+- Added `verglos hunt` shell (Pro+, exit `78` in alpha).
+- Added `verglos attest` shell (Studio, exit `78` in alpha).
+- Added `packages/hunt` and `packages/attest` scaffolds with stable interfaces.
+- Added `verified` on every finding (`null` until hunt runs).
+- Added verified-state rendering in HTML, terminal, and JSON reports.
+- Added five MCP stubs: `verglos_hunt_finding`, `verglos_hunt_report`, `verglos_hunt_before_write`, `verglos_hunt_explain_verdict`, and `verglos_attest`.
+- Rebalanced the plan matrix around Free scan, Pro hunt, Studio attest, and Enterprise controls.
+
+## Roadmap to 2.0.0-beta
+
+- Per-detector POC synthesis rules.
+- Local sandbox runtime with node-vm, Docker, and Firecracker adapters.
+- ICP-300 v2 methodology and scan campaign.
+- Functional Ed25519 attestation and public verify chain.
 
 ---
 
@@ -326,7 +385,7 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 | `VERGLOS_TELEMETRY=0` | Disable anonymous scan telemetry |
 | `VERGLOS_PROVENANCE_FILE_CAP` | Override the 300-file cap on provenance analysis (raise for exhaustive scans, lower for speed) |
 | `VERGLOS_LICENSE_KEY` | Consumed by `verglos activate --ci` in GitHub Actions |
-| `VERGLOS_AS_PLAN` | _Founder only._ Simulate a plan (`free` / `pro`) for testing |
+| `VERGLOS_AS_PLAN` | _Founder only._ Simulate a plan (`free` / `pro` / `studio` / `enterprise`) for testing |
 
 ---
 
@@ -342,7 +401,7 @@ Full disclosure: **[verglos.com/account/docs#privacy](https://verglos.com/accoun
 
 ## Repo layout
 
-This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Six packages, all published under the `@verglos` scope plus the `verglos` bin:
+This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages are published under the `@verglos` scope plus the `verglos` bin; `hunt` and `attest` are alpha interface scaffolds in this repo and move behind the private-registry split when they become functional.
 
 | Package | What it does |
 |---|---|
@@ -352,6 +411,8 @@ This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Six packages, all
 | **`packages/shared`** | Types, config schema, fingerprint, plan matrix |
 | **`packages/entitlement`** | License verification client, capability caching |
 | **`packages/mcp`** | Model Context Protocol server for AI coding agents |
+| **`packages/hunt`** | Local sandbox verification interfaces; implementation ships in v2.0.0-beta |
+| **`packages/attest`** | Signed evidence bundle interfaces; implementation ships in v2.0.0-beta |
 
 The web app + billing lives in a separate repo (`verglos-web`). Docs and planning notes live in `Top-Notchh-Solutions/verglos-archive` (private).
 
@@ -367,7 +428,7 @@ pnpm typecheck
 
 Built bin: `packages/cli/dist/index.js` (invoke with `node <path>` or symlink into `$PATH`).
 
-Releases are cut via a `chore(release): X.Y.Z` PR that bumps every `package.json`, then a tag pushed from `main` triggers `.github/workflows/publish.yml` (publishes all six packages with npm provenance).
+Releases are cut via a `chore(release): X.Y.Z` PR that bumps every `package.json`, then a tag pushed from `main` triggers `.github/workflows/publish.yml`.
 
 ---
 

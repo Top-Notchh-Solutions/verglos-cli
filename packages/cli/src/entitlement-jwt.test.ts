@@ -91,8 +91,10 @@ test("resolveEntitlement: valid Pro JWT + REST unreachable + no cache → baked-
   assert.equal(result.plan, "pro");
   assert.equal(result.source, "baked-in");
   assert.ok(result.capabilities.includes("fix"));
-  assert.ok(result.capabilities.includes("rule_pack_agent_surface"));
+  assert.ok(result.capabilities.includes("fix.auto"));
+  assert.ok(result.capabilities.includes("hunt.critical"));
   assert.ok(result.capabilities.includes("monitor_register"));
+  assert.ok(result.capabilities.includes("monitor.cve"));
   assert.equal(result.license?.tier, "pro");
 });
 

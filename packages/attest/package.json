@@ -1,6 +1,7 @@
 {
-  "name": "@verglos/reporter",
+  "name": "@verglos/attest",
   "version": "2.0.0-alpha.1",
+  "private": true,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -18,27 +19,14 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@verglos/shared": "workspace:*",
-    "chalk": "^5.4.1"
+    "@verglos/shared": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.15.29",
     "typescript": "^5.8.3"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "engines": {
     "node": ">=20"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Top-Notchh-Solutions/verglos-cli.git",
-    "directory": "packages/reporter"
-  },
-  "homepage": "https://verglos.com",
-  "bugs": {
-    "url": "https://github.com/Top-Notchh-Solutions/verglos-cli/issues"
   },
   "license": "Apache-2.0"
 }

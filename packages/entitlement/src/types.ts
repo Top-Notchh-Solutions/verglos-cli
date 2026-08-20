@@ -11,13 +11,16 @@
  *     verifies the signature and the exp claim
  */
 
-export type Tier = "free" | "pro" | "studio" | "compliance";
+import type { CapabilityKey, PlanId } from "./plans.js";
+
+export type Tier = PlanId;
 
 /**
  * Feature flag names that the CLI checks. Additive — new flags
  * ship as string literals here; old ones stay for backward compat.
  */
 export type FeatureFlag =
+  | CapabilityKey
   | "fix"
   | "ci"
   | "monitor"
@@ -34,7 +37,7 @@ export interface EntitlementClaims {
   tier: Tier;
   /** Project fingerprints this token is valid for. */
   projects: string[];
-  /** Seat count. Studio/Compliance may exceed with $15/seat overage. */
+  /** Seat count. Studio/Enterprise may exceed with contract-specific overage. */
   seats: number;
   /** Feature flags active for this tier. */
   features: FeatureFlag[];

@@ -10,12 +10,12 @@ test("TIER_CAPABILITIES: each higher tier is a strict superset of the one below"
   const free = new Set(TIER_CAPABILITIES.free);
   const pro = new Set(TIER_CAPABILITIES.pro);
   const studio = new Set(TIER_CAPABILITIES.studio);
-  const compliance = new Set(TIER_CAPABILITIES.compliance);
+  const enterprise = new Set(TIER_CAPABILITIES.enterprise);
 
   for (const cap of free) assert.ok(pro.has(cap), `pro missing free cap: ${cap}`);
   for (const cap of pro) assert.ok(studio.has(cap), `studio missing pro cap: ${cap}`);
   for (const cap of studio) {
-    assert.ok(compliance.has(cap), `compliance missing studio cap: ${cap}`);
+    assert.ok(enterprise.has(cap), `enterprise missing studio cap: ${cap}`);
   }
 });
 
@@ -27,23 +27,27 @@ test("TIER_CAPABILITIES: mirrors the pricing-page fence exactly (regression guar
     (c) => !TIER_CAPABILITIES.free.includes(c),
   );
   const expectedProAdds = [
+    "hunt.critical",
+    "hunt.high",
+    "hunt.mcp_finding",
+    "hunt.mcp_report",
+    "hunt.mcp_before_write",
+    "hunt.mcp_explain",
+    "fix.auto",
+    "ci.threshold",
+    "ci.hunt_gate",
+    "monitor.cve",
     "fix",
     "ci_threshold",
     "monitor_register",
-    "monitor_daily",
-    "channel_email",
-    "channel_slack",
-    "channel_webhook",
-    "rule_pack_agent_surface",
-    "rule_pack_api_hardening",
-    "rule_pack_deep_auth",
-    "score_history_30d",
+    "audit_trail",
   ];
   assert.deepEqual([...proAdds].sort(), [...expectedProAdds].sort());
 });
 
 test("normalizeTier: coerces unknown strings to free", () => {
   assert.equal(normalizeTier("PRO"), "pro");
+  assert.equal(normalizeTier("compliance"), "enterprise");
   assert.equal(normalizeTier("bogus"), "free");
   assert.equal(normalizeTier(undefined), "free");
   assert.equal(normalizeTier(null), "free");
