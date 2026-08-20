@@ -18,6 +18,7 @@ import {
   executeMonitorUnregister,
 } from "./monitor.js";
 import { executeAttest } from "./attest.js";
+import { executeHunt } from "./hunt.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -208,6 +209,28 @@ program
       console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
     }
   });
+
+program
+  .command("hunt")
+  .description("Verify findings in a local sandbox [Pro] (shell — v2.0.0-beta)")
+  .option("--severity <level>", "Severity filter to hunt (default: critical,high)")
+  .option("--sandbox <adapter>", "Sandbox adapter: auto, node-vm, docker, firecracker")
+  .option("--dry-run", "Parse options without running sandbox verification")
+  .option("--finding <id>", "Verify one finding ID from a Verglos report")
+  .action(
+    async (opts: {
+      severity?: string;
+      sandbox?: string;
+      dryRun?: boolean;
+      finding?: string;
+    }) => {
+      const code = await executeHunt({
+        ...opts,
+        asPlan: process.env.VERGLOS_AS_PLAN,
+      });
+      process.exit(code);
+    },
+  );
 
 program
   .command("login")
