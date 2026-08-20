@@ -13,9 +13,52 @@
  * same commit or the offline-Pro path drifts from the online one.
  */
 
-export type Tier = "free" | "pro" | "studio" | "compliance" | "founder";
+export type Tier = "free" | "pro" | "studio" | "enterprise" | "founder";
 
 const FREE_CAPS = [
+  "scan.core",
+  "scan.mcp",
+  "scan.provenance",
+  "scan.slopsquat",
+  "scan.secrets",
+  "scan.deps",
+  "scan.git_history",
+  "report.local",
+  "ci.critical",
+  "hook.pre_commit",
+] as const;
+
+const PRO_ADDS = [
+  "hunt.critical",
+  "hunt.high",
+  "hunt.mcp_finding",
+  "hunt.mcp_report",
+  "hunt.mcp_before_write",
+  "hunt.mcp_explain",
+  "fix.auto",
+  "ci.threshold",
+  "ci.hunt_gate",
+  "monitor.cve",
+] as const;
+
+const STUDIO_ADDS = [
+  "hunt.medium",
+  "attest.sign",
+  "attest.verify_url",
+  "attest.white_label",
+  "sandbox.firecracker",
+  "dashboard.agency",
+  "mcp.attest",
+] as const;
+
+const ENTERPRISE_ADDS = [
+  "sso",
+  "verify.self_hosted",
+  "audit_log",
+  "custom_detectors",
+] as const;
+
+const LEGACY_CLI_ALIASES = [
   "scan",
   "scan_ai_provenance",
   "scan_slopsquat",
@@ -25,53 +68,29 @@ const FREE_CAPS = [
   "mcp_server",
   "pre_commit_hook",
   "html_json_report",
-] as const;
-
-const PRO_ADDS = [
   "fix",
   "ci_threshold",
   "monitor_register",
-  "monitor_daily",
-  "channel_email",
-  "channel_slack",
-  "channel_webhook",
-  "rule_pack_agent_surface",
-  "rule_pack_api_hardening",
-  "rule_pack_deep_auth",
-  "score_history_30d",
-] as const;
-
-const STUDIO_ADDS = [
-  "attest",
-  "verify_url",
-  "white_label_report",
-  "sbom_export",
-  "license_risk",
-  "rotate",
-  "score_history_365d",
-] as const;
-
-const COMPLIANCE_ADDS = [
-  "soc2_report",
-  "gdpr_map",
-  "posture_pdf",
-  "evidence_archive",
   "audit_trail",
-  "ai_triage_credits",
-  "threat_intel",
-  "score_history_1095d",
 ] as const;
 
 export const TIER_CAPABILITIES: Record<Tier, readonly string[]> = {
-  free: FREE_CAPS,
-  pro: [...FREE_CAPS, ...PRO_ADDS],
-  studio: [...FREE_CAPS, ...PRO_ADDS, ...STUDIO_ADDS],
-  compliance: [...FREE_CAPS, ...PRO_ADDS, ...STUDIO_ADDS, ...COMPLIANCE_ADDS],
+  free: [...FREE_CAPS, ...LEGACY_CLI_ALIASES.slice(0, 9)],
+  pro: [...FREE_CAPS, ...PRO_ADDS, ...LEGACY_CLI_ALIASES],
+  studio: [...FREE_CAPS, ...PRO_ADDS, ...STUDIO_ADDS, ...LEGACY_CLI_ALIASES],
+  enterprise: [
+    ...FREE_CAPS,
+    ...PRO_ADDS,
+    ...STUDIO_ADDS,
+    ...ENTERPRISE_ADDS,
+    ...LEGACY_CLI_ALIASES,
+  ],
   founder: [
     ...FREE_CAPS,
     ...PRO_ADDS,
     ...STUDIO_ADDS,
-    ...COMPLIANCE_ADDS,
+    ...ENTERPRISE_ADDS,
+    ...LEGACY_CLI_ALIASES,
   ],
 };
 
@@ -83,11 +102,12 @@ const KNOWN_TIERS: ReadonlySet<Tier> = new Set([
   "free",
   "pro",
   "studio",
-  "compliance",
+  "enterprise",
   "founder",
 ]);
 
 export function normalizeTier(input: string | null | undefined): Tier {
   const s = (input ?? "free").toLowerCase();
+  if (s === "compliance") return "enterprise";
   return KNOWN_TIERS.has(s as Tier) ? (s as Tier) : "free";
 }

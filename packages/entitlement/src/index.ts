@@ -17,6 +17,7 @@
  * The server (sign + activation endpoint) lands.
  */
 export * from "./types.js";
+export * from "./plans.js";
 export * from "./keys.js";
 export * from "./client.js";
 export * from "./server.js";
