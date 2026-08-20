@@ -45,3 +45,10 @@ Private v2.0.0-beta packages: `hunt`, `hunt-rules`, `attest`, `sandbox-adapters`
 - Do not invent customers, revenue, maturity, published metrics, or traction.
 - Do not implement hunt proof synthesis, sandbox runtime, signing logic, or the ICP-300 v2 scan campaign in alpha.
 - `hunt` and `attest` shells exit `78` for entitled users and point to v2.0.0-beta.
+
+## GitHub UI settings
+
+If repository settings are updated through the GitHub UI, keep the public
+description aligned to "Security evidence agent for AI-generated code" and keep
+the homepage URL set to `https://verglos.com`. Do not describe hunt or attest as
+fully functional until the beta implementation ships.
