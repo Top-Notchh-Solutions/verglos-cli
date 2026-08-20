@@ -11,13 +11,16 @@
  *     verifies the signature and the exp claim
  */
 
-export type Tier = "free" | "pro" | "studio" | "compliance";
+import type { CapabilityKey, PlanId } from "./plans.js";
+
+export type Tier = PlanId;
 
 /**
  * Feature flag names that the CLI checks. Additive — new flags
  * ship as string literals here; old ones stay for backward compat.
  */
 export type FeatureFlag =
+  | CapabilityKey
   | "fix"
   | "ci"
   | "monitor"
