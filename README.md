@@ -78,6 +78,11 @@ Verglos is a three-command CLI: `scan` finds deterministic SAST/SCA issues local
 
 Verglos ships **SAST** (static application security testing — code-side detectors) and **SCA** (software composition analysis — dependency + supply-chain) in one CLI. AI-provenance is layered on top; production DAST remains out of scope.
 
+## Related repos
+
+- Hosted web/docs/account surface: `../verglos-web`
+- Parent company site and Journal: `../topcotchhsolutions-company-website`
+
 <table>
   <thead>
     <tr>
