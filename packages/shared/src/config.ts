@@ -27,6 +27,25 @@ export const VerglosConfigSchema = z.object({
   secretScanDepth: z.number().min(0).max(500).default(100),
   reportFormat: z.enum(["html", "json", "both"]).default("both"),
   preCommitHook: z.boolean().default(true),
+  hunt: z
+    .object({
+      sandbox: z.enum(["auto", "node-vm", "docker", "firecracker"]).optional(),
+      maxDurationMs: z.number().int().positive().optional(),
+      skip: z.array(z.string()).optional(),
+    })
+    .optional(),
+  attest: z
+    .object({
+      signingKeyPath: z.string().optional(),
+      verifyUrlBase: z.string().url().default("https://verglos.com/verify").optional(),
+      whiteLabel: z
+        .object({
+          logoPath: z.string().optional(),
+          footer: z.string().optional(),
+        })
+        .optional(),
+    })
+    .optional(),
 });
 
 export type VerglosConfig = z.infer<typeof VerglosConfigSchema>;
