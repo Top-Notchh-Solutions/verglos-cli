@@ -29,7 +29,7 @@ export const PLAN_MATRIX: Record<PlanId, PlanMatrixEntry> = {
     id: "studio",
     label: "Studio",
     price: "$199/mo",
-    paymentUrl: "https://verglos.com/studio-checkout",
+    paymentUrl: "mailto:topnotchh.solutions@gmail.com?subject=Verglos%20Studio",
   },
   enterprise: {
     id: "enterprise",

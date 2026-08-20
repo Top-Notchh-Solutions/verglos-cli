@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-  <strong>Verglos scans your repo, spots the security issues AI coding agents commonly introduce, and shows you the fix.</strong><br>
-  <sub>Runs 100% locally. Your source never leaves the machine. Free tier is fully unlocked, permanently.</sub>
+  <strong>Verglos scans AI-assisted JavaScript and TypeScript locally today, with v2 hunt verification and signed evidence moving through the alpha and beta track.</strong><br>
+  <sub>Free scanner forever. Hunt and attest are v2 alpha shells until beta functionality lands.</sub>
 </p>
 
 <p align="center">
@@ -31,7 +31,7 @@
   <a href="#commands">Commands</a> ·
   <a href="#ci-usage">CI usage</a> ·
   <a href="#plans">Plans</a> ·
-  <a href="https://verglos.com/account/docs">Full docs →</a>
+  <a href="https://verglos.com/docs">Full docs →</a>
 </p>
 
 ---
@@ -213,17 +213,14 @@ verglos hook                       # install the pre-commit git hook once
 verglos precommit --timeout 2000   # what the hook runs (2s budget by default)
 ```
 
-### `verglos attest` — publish a public verify URL `Studio`
-
-Runs a full scan, POSTs the summary (score + finding counts), and prints back a `verglos.com/verify/<hash>` URL. Paste it into a client handoff, a PR review, or a due-diligence questionnaire — any third party can open it without an account to see the same summary.
+### `verglos attest` — signed evidence bundle `Studio`
 
 ```bash
-verglos attest                       # scan + publish, prints the verify URL
-verglos attest --label "acme-web"    # override the display name
-verglos attest --quiet               # URL only, for shell pipelines
+verglos attest --report verglos-report.json --sign
+verglos attest --verify-url https://verglos.com/verify
 ```
 
-Findings text stays private — only score + severity counts are published. See the public ledger at [verglos.com/verify](https://verglos.com/verify).
+In v2.0.0-alpha this is a shell and exits `78` for Studio users. Functional Ed25519 signing, portable JSON+HTML bundles, and public verify URLs ship in v2.0.0-beta.
 
 ### Utilities
 
@@ -268,23 +265,30 @@ jobs:
 
 ## Plans
 
-| | Free | Pro |
-|---|---|---|
-| Full scan (every detector) | Yes | Yes |
-| AI-provenance layer | Yes | Yes |
-| Slopsquat / typosquat | Yes | Yes |
-| MCP server | Yes | Yes |
-| Pre-commit hook | Yes | Yes |
-| Local HTML + JSON report | Yes | Yes |
-| CI mode (block on criticals) | Yes | Yes |
-| **CI mode with score threshold** | — | Yes |
-| **`verglos fix` — auto-remediation** | — | Yes |
-| **Continuous CVE monitoring** (email / Slack / webhook) | — | Yes |
-| **Price** | $0 forever | $29 / month |
+| Capability | Free | Pro $29/mo | Studio $199/mo | Enterprise |
+|---|---|---|---|---|
+| `verglos scan` (all detectors) | Yes | Yes | Yes | Yes |
+| Provenance layer + slopsquat + typosquat | Yes | Yes | Yes | Yes |
+| Local HTML + JSON report | Yes | Yes | Yes | Yes |
+| MCP `verglos_scan` tool | Yes | Yes | Yes | Yes |
+| `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes |
+| Pre-commit hook | Yes | Yes | Yes | Yes |
+| `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes |
+| **`verglos hunt` on Critical + High** | No | Alpha shell | Beta | Beta |
+| **`verglos hunt` on Medium** | No | No | Beta | Beta |
+| **MCP hunt tools** | No | Alpha shell | Beta | Beta |
+| **`verglos fix`** | No | Yes | Yes | Yes |
+| **`verglos ci --hunt`** | No | Alpha path | Beta | Beta |
+| **CI score threshold** | No | Yes | Yes | Yes |
+| **Continuous CVE monitoring** | No | Yes | Yes | Yes |
+| **`verglos attest`** | No | No | Alpha shell | Beta |
+| **Public verify URL** | No | No | Beta | Beta |
+| **White-label report** | No | No | Beta | Beta |
+| **Firecracker sandbox adapter** | No | No | Beta | Beta |
+| **Agency dashboard** | No | No | Beta | Beta |
+| **SSO / SCIM · self-hosted verify chain · audit log · custom detector packs** | No | No | No | Contact sales |
 
-Upgrade at **[verglos.com/checkout](https://verglos.com/checkout)**. One-time UPI payment, month-to-month, no lock-in.
-
-_Studio ($199/mo — signed attestations, SBOM export, `verglos rotate`) is on the roadmap for v1.5._
+Upgrade Pro at **[verglos.com/checkout](https://verglos.com/checkout)**. Studio starts at **[topnotchh.solutions@gmail.com](mailto:topnotchh.solutions@gmail.com?subject=Verglos%20Studio)**. Enterprise starts at **[support@verglos.com](mailto:support@verglos.com?subject=Enterprise)**.
 
 ---
 
