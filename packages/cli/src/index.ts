@@ -41,7 +41,7 @@ if (args.includes("--update")) {
 
 program
   .name("verglos")
-  .description("Security scanner for every app you ship")
+  .description("The evidence agent for AI-generated code")
   .version(version, "-v, --version", "Print installed CLI version")
   .option("--update", "Update Verglos CLI to the latest npm version")
   .option(
@@ -49,6 +49,18 @@ program
     "[founder only] Simulate a plan (free|pro|studio) for this invocation",
   )
   .showHelpAfterError(chalk.gray("\nRun `verglos --help` for available commands."))
+  .addHelpText(
+    "afterAll",
+    `
+Command groups:
+  Scan       scan, secrets, deps, score
+  Hunt       hunt — verify findings in a local sandbox (shell — v2.0.0-beta)
+  Attest     attest — sign an evidence bundle for client handoff (shell — v2.0.0-beta)
+  Fix & CI   fix, ci, hook, precommit
+  Session    login, whoami, activate
+  Utilities  init, explain, badge, mcp, monitor, update
+`,
+  )
   .hook("preAction", async (thisCommand, actionCommand) => {
     if (actionCommand.name() === "update") return;
     // Program-level --as-plan propagates via env so every downstream
