@@ -92,6 +92,7 @@ program
     "--verify-secrets",
     "Hit GitHub / Stripe APIs to prove matched keys are live (opt-in — makes network calls)",
   )
+  .option("--hunt", "After scanning, hand eligible findings to hunt (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
@@ -104,6 +105,7 @@ program
       strict?: boolean;
       provenance?: boolean;
       verifySecrets?: boolean;
+      hunt?: boolean;
       telemetry?: boolean;
     }) => {
       // Commander sets opts.provenance = false when --no-provenance is passed.
@@ -115,6 +117,7 @@ program
         strict: opts.strict,
         noProvenance,
         verifySecrets: opts.verifySecrets,
+        hunt: opts.hunt,
         noTelemetry,
       };
       if (opts.watch) {
@@ -173,18 +176,28 @@ program
   .option("-t, --threshold <score>", "Minimum score threshold", "60")
   .option("-q, --quiet", "Suppress output")
   .option("--strict", "Include test file findings in score")
+  .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
   )
-  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; telemetry?: boolean }) => {
+  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const plan = await currentPlan({ asPlan });
     const hasThreshold = plan.plan !== "free";
+    if (opts.hunt) {
+      const ok = await requireCapability("ci.hunt_gate", "`verglos ci --hunt`", {
+        asPlan,
+        extraLine:
+          "Verified-only CI gating ships in v2.0.0-beta. This alpha can still run standard CI.",
+      });
+      if (!ok) process.exit(1);
+    }
     const code = await executeCi({
       threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
       quiet: opts.quiet,
       strict: opts.strict,
+      hunt: opts.hunt,
       noTelemetry: opts.telemetry === false,
     });
     if (!hasThreshold && !opts.quiet) {
