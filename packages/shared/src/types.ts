@@ -109,6 +109,7 @@ export type ProjectType =
 export interface Finding {
   id: string;
   detector: DetectorId;
+  verified?: "true" | "false" | "not_attemptable" | null;
   /**
    * Stable rule ID like "D4-005" or "AI-002". Optional during the follow-up → follow-up
    * migration; will become required once every detector emits it.
