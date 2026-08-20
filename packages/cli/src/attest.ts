@@ -18,7 +18,7 @@ export async function executeAttest(opts: AttestOptions = {}): Promise<number> {
     console.error("");
     console.error(chalk.bold("attest is a Studio capability."));
     console.error("");
-    console.error(`  Upgrade at  ->  ${chalk.cyan("https://verglos.com/studio-checkout")}`);
+    console.error(`  Upgrade at  ->  ${chalk.cyan("mailto:topnotchh.solutions@gmail.com?subject=Verglos%20Studio")}`);
     console.error(`  Or activate ->  ${chalk.cyan("verglos login")}`);
     console.error("");
     return 3;
