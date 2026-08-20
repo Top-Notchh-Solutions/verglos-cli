@@ -116,6 +116,78 @@ const TOOLS = [
       required: ["rule"],
     },
   },
+  {
+    name: "verglos_hunt_finding",
+    description:
+      "Pro. Verify one finding from a Verglos report by firing a synthesized proof in a local sandbox. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        reportPath: { type: "string", description: "Path to verglos-report.json." },
+        findingId: { type: "string", description: "Finding id to verify." },
+      },
+      required: ["reportPath", "findingId"],
+    },
+  },
+  {
+    name: "verglos_hunt_report",
+    description:
+      "Pro. Verify eligible Critical and High findings from a Verglos report in a local sandbox. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        reportPath: { type: "string", description: "Path to verglos-report.json." },
+      },
+      required: ["reportPath"],
+    },
+  },
+  {
+    name: "verglos_hunt_before_write",
+    description:
+      "Pro. In-loop verifier for coding agents: submit a code block before write, then receive a sandbox-backed verdict. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        code: { type: "string", description: "Code block the agent is about to write." },
+        filePath: { type: "string", description: "Target file path." },
+        language: { type: "string", description: "Language hint such as ts, tsx, js, jsx." },
+      },
+      required: ["code", "filePath", "language"],
+    },
+  },
+  {
+    name: "verglos_hunt_explain_verdict",
+    description:
+      "Pro. Explain a hunt verdict for a finding: verified exploitable, false positive, or not attemptable. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        findingId: { type: "string", description: "Finding id." },
+        verdict: {
+          type: "string",
+          enum: ["true", "false", "not_attemptable"],
+          description: "Hunt verdict to explain.",
+        },
+      },
+      required: ["findingId", "verdict"],
+    },
+  },
+  {
+    name: "verglos_attest",
+    description:
+      "Studio. Sign a verified report into a portable evidence bundle with a public verify URL. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        reportPath: { type: "string", description: "Path to verglos-report.json." },
+        signingConfig: {
+          type: "object",
+          description: "Signing key and verify URL configuration.",
+        },
+      },
+      required: ["reportPath"],
+    },
+  },
 ] as const;
 
 // ─── Handler dispatch ─────────────────────────────────────────────────────
@@ -136,6 +208,27 @@ function jsonResponse(payload: unknown): {
 } {
   return {
     content: [{ type: "text", text: JSON.stringify(payload, null, 2) }],
+  };
+}
+
+function alphaStub(name: string, tier: "pro" | "studio"): {
+  ok: false;
+  error: "not_implemented_in_alpha" | "studio_only";
+  tool: string;
+  tier: "pro" | "studio";
+  message: string;
+  docsUrl: string;
+} {
+  return {
+    ok: false,
+    error: tier === "studio" ? "studio_only" : "not_implemented_in_alpha",
+    tool: name,
+    tier,
+    message:
+      tier === "studio"
+        ? "verglos_attest is a Studio capability and ships functionally in v2.0.0-beta."
+        : `${name} is registered in v2.0.0-alpha and ships functionally in v2.0.0-beta.`,
+    docsUrl: tier === "studio" ? "https://verglos.com/attest" : "https://verglos.com/hunt",
   };
 }
 
@@ -181,6 +274,13 @@ async function dispatchTool(
       const result = explainFinding({ rule: String(input.rule ?? "") });
       return jsonResponse(result);
     }
+    case "verglos_hunt_finding":
+    case "verglos_hunt_report":
+    case "verglos_hunt_before_write":
+    case "verglos_hunt_explain_verdict":
+      return jsonResponse(alphaStub(name, "pro"));
+    case "verglos_attest":
+      return jsonResponse(alphaStub(name, "studio"));
     default:
       return stubResponse(name);
   }

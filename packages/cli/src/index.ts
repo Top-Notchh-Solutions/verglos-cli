@@ -467,6 +467,17 @@ program
       console.log(chalk.gray("  Claude Code  → ~/.claude/mcp.json"));
       console.log(chalk.gray("  Windsurf     → ~/.codeium/windsurf/mcp_config.json"));
       console.log(chalk.gray("  Cline        → .vscode/settings.json (cline.mcpServers)"));
+      console.log("");
+      console.log(chalk.bold("Verglos MCP tools"));
+      console.log(chalk.gray("  verglos_scan                    Free — full local scan"));
+      console.log(chalk.gray("  verglos_check_before_write      Free — legacy pre-write check"));
+      console.log(chalk.gray("  verglos_check_package           Free — slopsquat / typo / CVE check"));
+      console.log(chalk.gray("  verglos_explain_finding         Free — rule explanation"));
+      console.log(chalk.gray("  verglos_hunt_finding            Pro — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_hunt_report             Pro — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_hunt_before_write       Pro — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_hunt_explain_verdict    Pro — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_attest                  Studio — shell, v2.0.0-beta"));
       return;
     }
     await startStdioServer();
