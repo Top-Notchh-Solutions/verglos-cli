@@ -471,21 +471,16 @@ program
     process.exit(code);
   });
 
-// `verglos attest` — Studio-tier. Runs a scan, POSTs the summary to
-// /api/v1/attest, and prints a public verify URL the customer pastes
-// into a client handoff, PR review, or due-diligence questionnaire.
-// See packages/cli/src/attest.ts for the full contract.
 program
   .command("attest")
-  .description("Publish a public attestation for this project [Studio]")
-  .option("--label <name>", "Override the project name shown on the verify page")
-  .option("--quiet", "Print only the verify URL (no chrome) for shell pipelines")
-  .action(async (opts: { label?: string; quiet?: boolean }) => {
+  .description("Sign an evidence bundle for client handoff [Studio] (shell — v2.0.0-beta)")
+  .option("--report <path>", "Path to the Verglos JSON report to attest")
+  .option("--sign", "Request Ed25519 bundle signing")
+  .option("--verify-url <url>", "Verify URL base to embed in the bundle")
+  .action(async (opts: { report?: string; sign?: boolean; verifyUrl?: string }) => {
     const code = await executeAttest({
-      cwd: process.cwd(),
-      cliVersion: version,
-      label: opts.label,
-      quiet: opts.quiet,
+      ...opts,
+      asPlan: process.env.VERGLOS_AS_PLAN,
     });
     process.exit(code);
   });
