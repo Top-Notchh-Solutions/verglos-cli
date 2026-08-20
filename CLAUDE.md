@@ -2,7 +2,7 @@
 
 Canonical positioning:
 
-> Verglos hunts the vulnerabilities other AI agents left in your code, fires each one in a local sandbox to prove it's real, and signs the surviving evidence so you can hand it to a client.
+> Verglos scans AI-assisted JavaScript and TypeScript locally today, with v2 hunt verification and signed evidence moving through the alpha and beta track.
 
 Short form: The evidence agent for AI-generated code.
 
