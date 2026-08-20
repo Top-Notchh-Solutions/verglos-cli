@@ -37,7 +37,7 @@ export interface EntitlementClaims {
   tier: Tier;
   /** Project fingerprints this token is valid for. */
   projects: string[];
-  /** Seat count. Studio/Compliance may exceed with $15/seat overage. */
+  /** Seat count. Studio/Enterprise may exceed with contract-specific overage. */
   seats: number;
   /** Feature flags active for this tier. */
   features: FeatureFlag[];
