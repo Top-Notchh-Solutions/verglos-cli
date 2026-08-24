@@ -67,7 +67,7 @@ jobs:
           fi
           mkdir -p /tmp/verglos-publish/shared
           pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/shared
-          npm publish /tmp/verglos-publish/shared/*.tgz --access public --provenance
+          npm publish /tmp/verglos-publish/shared/*.tgz --access public --provenance --tag alpha
 
       - name: Publish scanner package
         run: |
@@ -80,7 +80,7 @@ jobs:
           fi
           mkdir -p /tmp/verglos-publish/scanner
           pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/scanner
-          npm publish /tmp/verglos-publish/scanner/*.tgz --access public --provenance
+          npm publish /tmp/verglos-publish/scanner/*.tgz --access public --provenance --tag alpha
 
       - name: Publish reporter package
         run: |
@@ -93,7 +93,7 @@ jobs:
           fi
           mkdir -p /tmp/verglos-publish/reporter
           pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/reporter
-          npm publish /tmp/verglos-publish/reporter/*.tgz --access public --provenance
+          npm publish /tmp/verglos-publish/reporter/*.tgz --access public --provenance --tag alpha
 
       - name: Publish mcp package
         run: |
@@ -106,7 +106,7 @@ jobs:
           fi
           mkdir -p /tmp/verglos-publish/mcp
           pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/mcp
-          npm publish /tmp/verglos-publish/mcp/*.tgz --access public --provenance
+          npm publish /tmp/verglos-publish/mcp/*.tgz --access public --provenance --tag alpha
 
       - name: Publish entitlement package
         run: |
@@ -119,7 +119,7 @@ jobs:
           fi
           mkdir -p /tmp/verglos-publish/entitlement
           pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/entitlement
-          npm publish /tmp/verglos-publish/entitlement/*.tgz --access public --provenance
+          npm publish /tmp/verglos-publish/entitlement/*.tgz --access public --provenance --tag alpha
 
       - name: Publish CLI package
         run: |
@@ -132,4 +132,4 @@ jobs:
           fi
           mkdir -p /tmp/verglos-publish/cli
           pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/cli
-          npm publish /tmp/verglos-publish/cli/*.tgz --access public --provenance
+          npm publish /tmp/verglos-publish/cli/*.tgz --access public --provenance --tag alpha
