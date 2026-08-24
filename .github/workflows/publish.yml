@@ -39,7 +39,14 @@ jobs:
 
       - name: Promote package versions to npm latest
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.promote_latest }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
+            echo "::error::NPM_TOKEN repository secret is required to move npm dist-tags."
+            exit 1
+          fi
+
           for PKG_DIR in \
             packages/shared \
             packages/scanner \
