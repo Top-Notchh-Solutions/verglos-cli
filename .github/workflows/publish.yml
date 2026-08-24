@@ -2,6 +2,12 @@ name: Publish
 
 on:
   workflow_dispatch:
+    inputs:
+      promote_latest:
+        description: "Move npm latest dist-tags to the package.json versions"
+        required: false
+        default: false
+        type: boolean
   push:
     tags:
       - "v*"
@@ -31,13 +37,32 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: pnpm
 
+      - name: Promote package versions to npm latest
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.promote_latest }}
+        run: |
+          for PKG_DIR in \
+            packages/shared \
+            packages/scanner \
+            packages/reporter \
+            packages/mcp \
+            packages/entitlement \
+            packages/cli
+          do
+            PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
+            PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
+            npm dist-tag add "${PKG_NAME}@${PKG_VER}" latest
+          done
+
       - name: Install dependencies
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm install --frozen-lockfile
 
       - name: Build
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm build
 
       - name: Typecheck
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm typecheck
 
       # ── npm provenance ──────────────────────────────────────────
@@ -57,6 +82,7 @@ jobs:
       # published, scanner still needed).
 
       - name: Publish shared package
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/shared
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -70,6 +96,7 @@ jobs:
           npm publish /tmp/verglos-publish/shared/*.tgz --access public --provenance --tag alpha
 
       - name: Publish scanner package
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/scanner
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -83,6 +110,7 @@ jobs:
           npm publish /tmp/verglos-publish/scanner/*.tgz --access public --provenance --tag alpha
 
       - name: Publish reporter package
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/reporter
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -96,6 +124,7 @@ jobs:
           npm publish /tmp/verglos-publish/reporter/*.tgz --access public --provenance --tag alpha
 
       - name: Publish mcp package
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/mcp
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -109,6 +138,7 @@ jobs:
           npm publish /tmp/verglos-publish/mcp/*.tgz --access public --provenance --tag alpha
 
       - name: Publish entitlement package
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/entitlement
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -122,6 +152,7 @@ jobs:
           npm publish /tmp/verglos-publish/entitlement/*.tgz --access public --provenance --tag alpha
 
       - name: Publish CLI package
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/cli
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
