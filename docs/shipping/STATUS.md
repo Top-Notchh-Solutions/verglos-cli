@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-004` are complete. CLI/hosted baselines, bounded capability wording, and the reversible canonical plan/catalog migration are now decided without changing runtime behavior.
+Execution started. `TRUTH-001` through `TRUTH-005` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, and the open-core/commercial/content/identity boundary are now decided without changing runtime behavior.
 
 ## Last verified checks
 
@@ -32,6 +32,7 @@ Execution started. `TRUTH-001` through `TRUTH-004` are complete. CLI/hosted base
 - `verglos-web`: `TRUTH-002` inventory counts reconcile to 20 API route files, 21 HTTP handlers, 22 page routes, 12 database tables, and 0 application tests.
 - `verglos-cli`: `TRUTH-003` registry names owner, evidence, review date, state, and permitted wording for current and planned command/capability families.
 - `verglos-cli`: `TRUTH-004` reconciles plan IDs, aliases, pricing hypotheses, allowances, capability drift, enforcement, and migration preconditions.
+- `verglos-cli`: `TRUTH-005` assigns all eight packages and each current/target feed one primary ownership class, with unresolved license, attribution, trademark, and signing controls held as explicit gates.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -39,7 +40,7 @@ Execution started. `TRUTH-001` through `TRUTH-004` are complete. CLI/hosted base
 
 ## Next task
 
-`TRUTH-005`: classify the Apache core, commercial hosted operations, maintained rules/recipes, and protected brand/signing boundaries.
+`TRUTH-006`: inventory direct and transitive dependencies, existing licenses/notices, external engines, standards libraries, fixture licenses, and modification obligations.
 
 ## Scope hold
 
