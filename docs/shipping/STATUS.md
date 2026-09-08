@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-008` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, and hosted usage/cost units are now recorded without changing runtime behavior.
+Execution started. `TRUTH-001` through `TRUTH-009` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, and additive hosted-data migration are now recorded without changing runtime behavior.
 
 ## Last verified checks
 
@@ -41,6 +41,9 @@ Execution started. `TRUTH-001` through `TRUTH-008` are complete. CLI/hosted base
 - Hosted allowance semantics now distinguish concurrent seat/application/client-workspace gauges, idempotent monthly record ingestion, and separately measured storage, verification, delivery, advisory, managed-execution, and support work.
 - The target 2/5/10 seat, 5/25/100 monitored-app, 100/500/2,000 monthly-record, and 90-day/12-month/3-year retention values map to stable units; all unapproved numeric allowances remain `unset`, not unlimited.
 - Current hosted schema has no catalog version, immutable usage event, quota reservation, aggregate, provider-cost entry, or overage authorization; per-plan COGS remains unknown pending dated provider evidence and representative measurement.
+- All 12 current hosted tables and their account/API/cron/public consumers now map to explicit target entity families with idempotent legacy IDs/digests, quarantine rules, and no invented subject, decision, observation, signature, record, or verification facts.
+- The web repo has five handwritten SQL files but no checked-in Drizzle journal/snapshots and no migration creating `users`, `licenses`, `activations`, `reports`, or `heartbeats`; repository evidence cannot reproduce a clean production schema yet.
+- Hosted migration is frozen as expand → bounded backfill → dual write → shadow read → per-surface cutover → later contract, with tenant-negative, count/digest, old-client, restore, and rollback gates before authority changes.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -48,7 +51,7 @@ Execution started. `TRUTH-001` through `TRUTH-008` are complete. CLI/hosted base
 
 ## Next task
 
-`TRUTH-009`: map current hosted tables and API consumers to the target tenant/project/subject/evidence model, including reversible dual-read/write and rollback needs.
+`TRUTH-010`: freeze current CLI command, flag, output, and exit behavior and list compatibility fixtures for every existing public command.
 
 ## Scope hold
 
