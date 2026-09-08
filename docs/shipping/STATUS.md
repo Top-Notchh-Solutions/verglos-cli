@@ -1,6 +1,6 @@
 # Verglos V1 shipping status
 
-Updated: 2026-09-08
+Updated: 2026-09-09
 
 ## Current phase
 
@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete. `CONTRACT-001/002` now establish version/canonicalization primitives and content-bound subjects for repository trees, packages, filesystem snapshots, SBOM documents, artifacts, OCI manifests, and OCI indexes/platforms. Tool-run and engine-health contracts are next; no target resolver or new public command is claimed yet.
+Epic 00 is complete. `CONTRACT-001` through `CONTRACT-003` now establish version/canonicalization primitives, content-bound subjects, and explicit producer component/trust/capability/freshness plus run/coverage state. Canonical observations are next; no target resolver, engine execution, or new public command is claimed yet.
 
 ## Last verified checks
 
@@ -60,11 +60,13 @@ Epic 00 is complete. `CONTRACT-001/002` now establish version/canonicalization p
 - The `2.0.0` JSON reporter still emits its frozen top-level shape without adding `schemaId`; the shared reader assigns `urn:verglos:schema:scan-report` only when a caller explicitly enables that legacy mapping.
 - `verglos-cli@1bc2b1b`: the same cache-bypassed graph passed 20/20 tasks and 122/122 tests. Thirteen subject tests cover seven kinds, canonical ID recomputation, dirty Git state, mandatory content digests, OCI tag/mirror/platform rules, registry/path bounds, malformed IDs, schema upgrades, and strict unknown fields.
 - Subject IDs bind immutable content/context only. Registry/tag/path/size labels cannot replace digests, and subject possession grants no tenant ownership, provenance, coverage, policy result, signature validity, or publication authority.
+- `verglos-cli@a71fba7`: the cache-bypassed graph passed 20/20 tasks and 135/135 tests. Thirteen engine/run tests cover healthy and non-healthy state, missing/incompatible/stale reasons, component trust/freshness linkage, process/outcome consistency, timeout/capability/time bounds, successful-but-incomplete coverage, prohibited target execution, and future schema upgrades.
+- Engine process success and evidence completeness are distinct. Any non-successful run or non-healthy engine is structurally unable to report complete coverage, while successful partial work remains explicitly incomplete rather than empty success.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-003`: add versioned tool-run and engine-health contracts for producer identity, installed artifacts/config/databases/checks, capabilities, bounded execution timing, health, freshness, failure, and incomplete reasons.
+`CONTRACT-004`: add the canonical observation contract for native/imported/adapter coverage, stable IDs, subject/run binding, locations/layers, package identifiers, original and normalized severity, confidence, remediation, redacted evidence, references, and namespaced extensions.
 
 ## Scope hold
 
