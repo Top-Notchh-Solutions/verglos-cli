@@ -32,7 +32,7 @@ AI agents are callers, not owners. MCP, CLI, dashboard, and CI must share the sa
 
 ## Hunt recipe contract
 
-Recipes are signed, versioned, reviewed, target-bound, time/resource limited, redaction-aware, and explicit about isolation (`none`, restricted process, container, gVisor, microVM). Network is denied by default. Verdicts are `verified`, `false`, `not_attemptable`, or `inconclusive`, with stdout/stderr redacted and limits recorded.
+Recipes are signed, versioned, reviewed, target-bound, time/resource limited, redaction-aware, and explicit about isolation (`none`, restricted process, container, gVisor, microVM). Network is denied by default. V1 outcomes are `confirmed`, `not_reproduced`, `inconclusive`, `not_supported`, `environment_error`, or `policy_denied`, with stdout/stderr redacted and limits recorded. The old `verified`/`false`/`not_attemptable` labels are legacy compatibility inputs, not V1 output truth.
 
 ## Agent UX
 

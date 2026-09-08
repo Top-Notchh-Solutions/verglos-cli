@@ -33,6 +33,8 @@ const HttpsUrlSchema = z
   .url()
   .refine((value) => value.startsWith("https://"), "reference URL must use HTTPS");
 
+export const ObservationIdSchema = z.string().regex(UUID_URN);
+
 const SourceLocationSchema = z
   .object({
     kind: z.literal("source"),
@@ -177,7 +179,7 @@ const ObservationDocumentBaseSchema = z
   .object({
     schemaId: z.literal(OBSERVATION_SCHEMA.id),
     schemaVersion: z.string().refine((value) => parseSchemaVersion(value) !== null),
-    observationId: z.string().regex(UUID_URN),
+    observationId: ObservationIdSchema,
     subjectId: SubjectIdSchema,
     origin: OriginSchema,
     coverageClass: z.enum(["native", "external", "imported"]),
