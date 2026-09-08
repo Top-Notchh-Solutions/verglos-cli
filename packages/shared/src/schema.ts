@@ -15,6 +15,7 @@ export const VERGLOS_SCHEMA_IDS = {
   exceptionApproval: "urn:verglos:schema:exception-approval",
   policyEvaluation: "urn:verglos:schema:policy-evaluation",
   releaseDecision: "urn:verglos:schema:release-decision",
+  releaseRecordManifest: "urn:verglos:schema:release-record-manifest",
 } as const;
 
 export interface SchemaDescriptor {
