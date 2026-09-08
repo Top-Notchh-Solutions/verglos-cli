@@ -4,7 +4,7 @@ Updated: 2026-09-08
 
 ## Current phase
 
-Phase 0 — product, evidence, truth, and delivery contracts.
+Phase 1 — versioned evidence contract primitives.
 
 ## Founder sequencing
 
@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-012` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, additive hosted-data migration, current CLI compatibility, the V1 architecture set, and accountable risk controls are now recorded without changing runtime behavior.
+Epic 00 is complete: `TRUTH-001` through `TRUTH-013` establish CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, additive hosted-data migration, current CLI compatibility, the V1 architecture set, accountable risk controls, and a fresh regression baseline. Contract implementation begins next.
 
 ## Last verified checks
 
@@ -53,14 +53,14 @@ Execution started. `TRUTH-001` through `TRUTH-012` are complete. CLI/hosted base
 - The governing register now tracks 39 risks with stable IDs, accountable owners, severity, explicit triggers, prevention/detection evidence, containment/rollback, blocking gates, status, and residual risk.
 - Seven current blocker groups are explicit: report authorization, webhook SSRF, credentials/telemetry privacy, package notices, schema reproducibility, monitoring/delivery correctness, and catalog-bound payment amounts.
 - Hunt, canonical signing, tenant migration, new public verification, managed execution, and inactive plans remain blocked from activation until their critical/high controls produce executable evidence.
-- `verglos-cli`: documentation diff check passed after the execution-state update.
-- `verglos-web`: `pnpm typecheck` passed.
-- `verglos-web`: `pnpm build` passed.
+- `verglos-cli@bd1d394`: cache-bypassed `pnpm exec turbo run test typecheck build --force` passed 19/19 tasks and 100/100 tests under Node 26.4.0, which satisfies the CLI's Node `>=20` range.
+- `verglos-web@5044e77`: `pnpm typecheck` and `pnpm build` passed under the declared Node 22 engine using Node 22.23.2; Next 15.5.21 compiled in 2.2 seconds and completed 34 static generation work units.
+- Verification left both tracked worktrees clean; the eight pre-existing user-owned CLI documents/assets remained untracked and untouched. The web repo exposes no test script or application test files, which remains a coverage gap.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`TRUTH-013`: run and record the exact CLI and web baseline verification, separating pre-existing failures from new regressions without modifying unrelated files.
+`CONTRACT-001`: implement semantic schema/version primitives, compatibility rules, canonical serialization, bounded parsing errors, and old-report readability fixtures in `packages/shared`.
 
 ## Scope hold
 
