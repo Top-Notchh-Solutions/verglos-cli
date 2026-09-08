@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete. `CONTRACT-001` through `CONTRACT-004` now establish version/canonicalization primitives, immutable subjects, producer/run health, and canonical observations with preserved origin, raw lineage, normalized mappings, redaction, and extension boundaries. AI-change context is next; no target resolver, engine execution, or new public command is claimed yet.
+Epic 00 is complete. `CONTRACT-001` through `CONTRACT-005` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, and separately typed heuristic/declaration/cryptographic AI-change context. Verification-attempt contracts are next; no target resolver, engine execution, Hunt implementation, or new public command is claimed yet.
 
 ## Last verified checks
 
@@ -62,12 +62,13 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-004` now establish version
 - Subject IDs bind immutable content/context only. Registry/tag/path/size labels cannot replace digests, and subject possession grants no tenant ownership, provenance, coverage, policy result, signature validity, or publication authority.
 - `verglos-cli@a71fba7`: the cache-bypassed graph passed 20/20 tasks and 135/135 tests. Thirteen engine/run tests cover healthy and non-healthy state, missing/incompatible/stale reasons, component trust/freshness linkage, process/outcome consistency, timeout/capability/time bounds, successful-but-incomplete coverage, prohibited target execution, and future schema upgrades.
 - Engine process success and evidence completeness are distinct. Any non-successful run or non-healthy engine is structurally unable to report complete coverage, while successful partial work remains explicitly incomplete rather than empty success.
-- `verglos-cli@65ea279`: 45/45 focused shared tests pass, including ten observation tests for origin/raw lineage, locations, redaction, namespaced extension bounds, safe references, unknown mappings, and future versions. A fresh full graph remains the next verification step.
+- `verglos-cli@65ea279`: the follow-up cache-bypassed graph passed 20/20 tasks and 145/145 tests, closing the observation contract's full-repository verification.
+- `verglos-cli@f6be31e`: the cache-bypassed graph passed 20/20 tasks and 153/153 tests. Eight AI-change tests enforce estimate-only heuristics, required limitations, unverified declarations, signature evidence, build-provenance non-inference, subject/range binding, and version upgrades.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-005`: add the AI-change context contract separating heuristic, declared, and cryptographic provenance with exact subject binding, method, confidence, signals, and limitations.
+`CONTRACT-006`: add verification-attempt outcomes for confirmed, not reproduced, inconclusive, unsupported, environment error, and policy denied, with recipe/sandbox/input/output/resource limits.
 
 ## Scope hold
 

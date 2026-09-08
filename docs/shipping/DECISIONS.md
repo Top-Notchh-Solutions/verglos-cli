@@ -111,3 +111,9 @@ Mutable OCI tags, registry mirrors, paths, media labels, and reported sizes rema
 Engine health records producer identity, digested binary/runtime, configuration, databases and checks, their source/trust, capabilities, and dated freshness independently from a run's process exit. Healthy state cannot contain incomplete reasons or stale components; every degraded, unavailable, incompatible, or stale state requires typed scope and recovery action.
 
 Tool-run success is only a process outcome. Complete coverage additionally requires a healthy engine and no incomplete reasons. Failed, timed-out, cancelled, or not-run work and any non-healthy snapshot are structurally incomplete; a process may exit successfully while unsupported or partial coverage remains incomplete. Evidence producers cannot report target-code execution—bounded Hunt execution remains a separate verification contract. See `VERGLOS_ENGINE_RUN_AND_HEALTH_CONTRACT.md`.
+
+## 2026-09-09 — AI-change evidence classes remain separate
+
+Heuristic AI-change context is always an estimate with reproducible method/config/input digests, named signals, confidence, and visible limitations. Tool metadata, user statements, commit messages, and Git trailers remain declarations unless independently signed and verified. They are not silently promoted to cryptographic evidence.
+
+A valid signature proves only that an identified signer signed exact statement bytes under the recorded trust policy. It does not independently prove line-level authorship. Signed build or artifact provenance cannot assert AI-change classification unless the signed claim itself is specifically an AI-change claim. See `VERGLOS_AI_CHANGE_CONTEXT_CONTRACT.md`.
