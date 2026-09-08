@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`CONTRACT-012`: freeze valid/invalid/backward-compatible contract fixtures and validators usable by CLI, imports, viewer, web API, and independent verifier.
+`TARGET-003`: package/build metadata resolver, following completed CONTRACT-012, TARGET-001, and TARGET-002.
 
 ## Scope hold
 
@@ -90,7 +90,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Blockers
 
-- None for local documentation work.
+- None for local implementation work.
 - The next npm publication is blocked until each tarball carries the Apache license and required third-party notices.
 - Redistribution of reviewed web binaries/data, copied CLI-origin web files, external engines, standards schemas, and public fixtures is blocked until the applicable notice, source, provenance, modification, and legal-review gates pass.
 - External POC and campaign remain intentionally blocked until release-candidate gates pass.

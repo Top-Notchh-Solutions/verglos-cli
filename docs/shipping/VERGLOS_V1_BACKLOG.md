@@ -100,14 +100,14 @@ Evidence/problem: current `ScanResult`/`Finding` are file-centric, use transitio
 - [x] **CONTRACT-009** · release-decision contract · deps: CONTRACT-008 · Bind policy, evaluation, approvals, exact subjects, generated time, decision identity, and limitations. Tests: subject mismatch and incomplete propagation. Commit(s): `03533ab`
 - [x] **CONTRACT-010** · Release Record manifest contract · deps: CONTRACT-002-009 · Define member media type, digest, size, redaction, bundle/schema version, and extension rules without fixing archive transport prematurely. Commit(s): `c1fa719`
 - [x] **CONTRACT-011** · typed error/failure taxonomy · deps: CONTRACT-001/003/006/008 · Separate usage, unsupported, incomplete, policy block, infrastructure, authorization, quota, integrity, and internal failures. Commit(s): `a1e8f1f`
-- [ ] **CONTRACT-012** · frozen contract fixtures and validators · deps: CONTRACT-002-011 · Add valid/invalid/backward-compatibility fixtures plus deterministic serialization tests. Acceptance: fixtures usable by CLI, imports, viewer, web API, and independent verifier. Commit(s): —
+- [x] **CONTRACT-012** · frozen contract fixtures and validators · deps: CONTRACT-002-011 · Add valid/invalid/backward-compatibility fixtures plus deterministic serialization tests. Acceptance: fixtures usable by CLI, imports, viewer, web API, and independent verifier. Commit(s): `d4b1296`
 
 ## Epic 02 — Target resolution and immutable subject identity
 
 Evidence/problem: the current scanner accepts a project path and fingerprint but cannot prove which commit, artifact, or image was evaluated.
 
-- [ ] **TARGET-001** · target resolver package boundary · deps: CONTRACT-002/011 · Add resolver interface, capability discovery, explicit target syntax, and no-execution invariant. Commit(s): —
-- [ ] **TARGET-002** · repository/worktree resolver · deps: TARGET-001 · Resolve root, HEAD commit/tree, dirty state, submodule status, shallow state, and safe relative paths. Tests: detached HEAD, no Git, dirty tree, symlink escape. Commit(s): —
+- [x] **TARGET-001** · target resolver package boundary · deps: CONTRACT-002/011 · Add resolver interface, capability discovery, explicit target syntax, and no-execution invariant. Commit(s): `3b1877e`
+- [x] **TARGET-002** · repository/worktree resolver · deps: TARGET-001 · Resolve root, HEAD commit/tree, dirty state, submodule status, shallow state, and safe relative paths. Tests: detached HEAD, no Git, dirty tree, symlink escape. Commit(s): `1ec9ba8`
 - [ ] **TARGET-003** · package/build metadata resolver · deps: TARGET-001/002 · Resolve package manager, lockfile digest, package identity/version, build config inputs, and workspace membership without executing scripts. Commit(s): —
 - [ ] **TARGET-004** · filesystem subject resolver · deps: TARGET-001 · Produce deterministic tree/content digest with ignore policy and explicit unreadable/skipped coverage. Tests: ordering, permission failure, symlink cycles, path traversal. Commit(s): —
 - [ ] **TARGET-005** · generic artifact resolver · deps: TARGET-001 · Hash regular files/directories, record media type/size, reject special devices, and stream within size limits. Commit(s): —
