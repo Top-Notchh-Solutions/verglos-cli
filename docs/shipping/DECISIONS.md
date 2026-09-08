@@ -123,3 +123,9 @@ A valid signature proves only that an identified signer signed exact statement b
 V1 verification attempts use exactly six outcomes: `confirmed`, `not_reproduced`, `inconclusive`, `not_supported`, `environment_error`, and `policy_denied`. Confirmation and non-reproduction require executed evidence. Unsupported and policy-denied attempts cannot execute. Environment failure remains separate from non-reproduction, and a bounded non-reproduction never becomes a universal false-positive statement.
 
 Execution binds an immutable subject and observation, verified recipe and trust policy, exact input/parameter digests, approval, sandbox/runtime, network policy, limits, measured usage, cleanup, and redacted-output digests. The document validates these recorded claims but does not itself prove enforcement. The old `verified`, `false`, and `not_attemptable` labels remain legacy compatibility inputs requiring explicit migration; they are not V1 output truth. See `VERGLOS_VERIFICATION_ATTEMPT_CONTRACT.md`.
+
+## 2026-09-09 — Exceptions are exact requests, not mutable bypasses
+
+A V1 policy exception names one immutable subject and an explicit bounded set of observation IDs. Wildcards, future observations, permanent validity, and free-text scope expansion are invalid. The request records owner, requester, reason, evidence-backed compensating controls, reversal triggers, effective time, expiry, and limitations.
+
+Human approval is a separate immutable record bound to the exception ID and SHA-256 digest of the complete canonical request. Editing the request invalidates the approval target. Applicability is evaluated against decision, time, approval validity, exact subject, and exact observation; parsing or retaining an expired record grants nothing. Server-side approver authority, revocation/event history, and control-health verification remain downstream requirements. See `VERGLOS_EXCEPTION_AND_APPROVAL_CONTRACT.md`.

@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete. `CONTRACT-001` through `CONTRACT-006` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed heuristic/declaration/cryptographic AI-change context, and bounded verification attempts with six non-boolean outcomes. Exception and approval contracts are next; no target resolver, engine execution, Hunt implementation, or new public command is claimed yet.
+Epic 00 is complete. `CONTRACT-001` through `CONTRACT-007` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed AI-change context, bounded verification attempts, and digest-bound exact-scope policy exceptions with human approvals. Policy-evaluation contracts are next; no target resolver, engine execution, Hunt implementation, or new public command is claimed yet.
 
 ## Last verified checks
 
@@ -66,11 +66,13 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-006` now establish version
 - `verglos-cli@f6be31e`: the cache-bypassed graph passed 20/20 tasks and 153/153 tests. Eight AI-change tests enforce estimate-only heuristics, required limitations, unverified declarations, signature evidence, build-provenance non-inference, subject/range binding, and version upgrades.
 - `verglos-cli@fc4d8d2`: the cache-bypassed graph passed 20/20 tasks and 164/164 tests. Eleven verification-attempt tests enforce the six-outcome vocabulary, execution/evidence rules, verified recipe and approval gates, non-root isolated runtime requirements, safe network-origin declarations, resource limits, non-execution invariants, timing, and version upgrades.
 - A verification-attempt document records and validates producer claims about approval, sandboxing, limits, usage, redaction, and evidence. It is not proof that isolation, cleanup, egress control, or redaction enforcement occurred; those claims remain gated on implementation-level evidence.
+- `verglos-cli@2dd8ea3`: the cache-bypassed graph passed 20/20 tasks and 175/175 tests. Eleven exception/approval tests enforce exact subject/observation scope, finite validity, controls, reversal triggers, human authority, canonical request binding, denial/expiry/timing behavior, scope mismatch, and version upgrades.
+- Exception parsing preserves historical records but grants no policy effect. Applicability requires the separately recorded approval to match the exact request digest, validity window, subject, observation, and evaluation time; hosted RBAC and audit-store integrity remain downstream gates.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-007`: add exception and approval contracts with bounded subject/observation scope, owner, reason, expiry, compensating control, approver identity, and audit reference.
+`CONTRACT-008`: define deterministic PASS/REVIEW/BLOCK/INCOMPLETE policy evaluation with required evidence, freshness, identity matching, reasons, and exit mapping.
 
 ## Scope hold
 
