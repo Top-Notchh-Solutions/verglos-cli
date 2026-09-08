@@ -99,7 +99,7 @@ Evidence/problem: current `ScanResult`/`Finding` are file-centric, use transitio
 - [x] **CONTRACT-008** · policy evaluation contract · deps: CONTRACT-003/004/007 · Define PASS/REVIEW/BLOCK/INCOMPLETE reasons, evidence freshness, required checks, identity match, and deterministic exit mapping. Commit(s): `dc9e0b4`
 - [x] **CONTRACT-009** · release-decision contract · deps: CONTRACT-008 · Bind policy, evaluation, approvals, exact subjects, generated time, decision identity, and limitations. Tests: subject mismatch and incomplete propagation. Commit(s): `03533ab`
 - [x] **CONTRACT-010** · Release Record manifest contract · deps: CONTRACT-002-009 · Define member media type, digest, size, redaction, bundle/schema version, and extension rules without fixing archive transport prematurely. Commit(s): `c1fa719`
-- [ ] **CONTRACT-011** · typed error/failure taxonomy · deps: CONTRACT-001/003/006/008 · Separate usage, unsupported, incomplete, policy block, infrastructure, authorization, quota, integrity, and internal failures. Commit(s): —
+- [x] **CONTRACT-011** · typed error/failure taxonomy · deps: CONTRACT-001/003/006/008 · Separate usage, unsupported, incomplete, policy block, infrastructure, authorization, quota, integrity, and internal failures. Commit(s): `a1e8f1f`
 - [ ] **CONTRACT-012** · frozen contract fixtures and validators · deps: CONTRACT-002-011 · Add valid/invalid/backward-compatibility fixtures plus deterministic serialization tests. Acceptance: fixtures usable by CLI, imports, viewer, web API, and independent verifier. Commit(s): —
 
 ## Epic 02 — Target resolution and immutable subject identity

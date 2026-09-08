@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete. `CONTRACT-001` through `CONTRACT-010` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed AI-change context, bounded verification attempts, exact-scope exceptions/approvals, deterministic policy evaluation, digest-bound release decisions, and transport-neutral Release Record manifests. Typed error/failure taxonomy is next; no target resolver, engine execution, Hunt implementation, record archive transport, signing, or new public command is claimed yet.
+Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed AI-change context, bounded verification attempts, exact-scope exceptions/approvals, deterministic policy evaluation, digest-bound release decisions, transport-neutral Release Record manifests, and typed operational failures. Frozen contract fixtures and validators are next; no target resolver, engine execution, Hunt implementation, record archive transport, signing, or new public command is claimed yet.
 
 ## Last verified checks
 
@@ -74,11 +74,13 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-010` now establish version
 - A release decision preserves the policy-evaluation result and references its canonical digest; it cannot upgrade `INCOMPLETE`. It records issuer/approval claims but is not a signature, deployment authorization, or proof of hosted RBAC.
 - `verglos-cli@c1fa719`: the cache-bypassed graph passed 20/20 tasks and 199/199 tests. Six record-manifest tests enforce deterministic member/extension ordering, required release-decision membership, duplicate/path controls, explicit redaction state, omitted-size bounds, namespaced extensions, and schema/version references.
 - A manifest indexes bounded payload claims without selecting archive transport or proving member bytes. Transport readers must independently verify digest, size, traversal/symlink/bomb safety, and access/redaction policy.
+- `verglos-cli@a1e8f1f`: the cache-bypassed graph passed 20/20 tasks and 203/203 tests. Four failure-taxonomy tests enforce all nine categories, stable exit mappings, namespaced codes, retry restrictions, strict fields, and future-version handling.
+- Failure categories remain separate from policy outcomes, verification outcomes, and evidence absence. Exit codes are compatibility projections; machine callers must consume the typed category and action.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-011`: define the typed error/failure taxonomy separating usage, unsupported, incomplete, policy block, infrastructure, authorization, quota, integrity, and internal failures.
+`CONTRACT-012`: freeze valid/invalid/backward-compatible contract fixtures and validators usable by CLI, imports, viewer, web API, and independent verifier.
 
 ## Scope hold
 

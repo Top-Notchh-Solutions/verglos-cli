@@ -147,3 +147,9 @@ The release result must equal the evaluation result, so `INCOMPLETE` cannot be u
 The Release Record manifest is a deterministic index, not an archive format. Each member binds safe relative path, fixed kind, media type, content digest, size, required state, redaction state, and optional schema identity. Exactly one required release-decision member anchors the record; complete redaction state requires a non-omitted redaction manifest. Namespaced extensions follow the same bounded rules and sorted layout.
 
 Manifest validation does not verify payload bytes or authorize custody/publication. Archive readers must independently enforce digest/size verification, traversal/symlink/bomb rejection, redaction policy, access controls, and signing. See `VERGLOS_RECORD_MANIFEST_CONTRACT.md`.
+
+## 2026-09-09 — Operational failures cannot become evidence claims
+
+V1 failures use nine categories with stable exits: usage (2), unsupported (78), incomplete (3), policy block (1), infrastructure/authorization/quota (4), and integrity/internal (70). The category is the truth; exit code is only a compatibility projection. Failure records carry safe bounded messages, limitations, recovery action, retry posture, operation, and time.
+
+Missing/stale evidence remains `incomplete`; a process error cannot be rendered as zero findings, `PASS`, `confirmed`, or `not_reproduced`. Blind-safe retry is disallowed for usage, policy, authorization, and integrity failures. Stack traces, secrets, credentials, raw provider payloads, and source snippets are outside this portable taxonomy. See `VERGLOS_FAILURE_TAXONOMY_CONTRACT.md`.
