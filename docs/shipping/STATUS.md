@@ -24,11 +24,12 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` is complete at `9877482`: the current CLI capability inventory now covers all commands, flags, packages, detectors, reports, outbound requests, telemetry fields, entitlement vocabularies, and runnable tests without changing runtime behavior.
+Execution started. `TRUTH-001` and `TRUTH-002` are complete. The current CLI and hosted capability inventories now establish code-linked baseline truth without changing runtime behavior.
 
 ## Last verified checks
 
 - `verglos-cli`: `TRUTH-001` inventory counts reconcile to 19 top-level commands, 11 detectors, 9 MCP tools, 8 packages, and 100 package-discovered tests.
+- `verglos-web`: `TRUTH-002` inventory counts reconcile to 20 API route files, 21 HTTP handlers, 22 page routes, 12 database tables, and 0 application tests.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -36,7 +37,7 @@ Execution started. `TRUTH-001` is complete at `9877482`: the current CLI capabil
 
 ## Next task
 
-`TRUTH-002`: inventory current hosted routes, libraries, schema, auth, licenses, reports, telemetry, monitoring, alerts, attest summaries, account routes, and production dependencies.
+`TRUTH-003`: expand the truth registry to command- and capability-level states with owner, reviewed date, evidence, and bounded public wording.
 
 ## Scope hold
 
