@@ -18,6 +18,7 @@
 | Hosted usage and cost | immutable usage/reservation/cost ledger | TRUTH-008, HOSTED-009, PLAN-WEB-001/005-010, OPS-013 | Replay/reconciliation; concurrency/idempotency; 80/100 thresholds; overage consent; provider-invoice and privacy tests | planned; design: `VERGLOS_HOSTED_COST_AND_USAGE_LEDGER.md`; current COGS unknown |
 | Hosted data migration | tenant/application/subject/evidence migration map | TRUTH-009, HOSTED-001-013 | Clean schema; idempotent backfill; shadow parity; tenant negatives; old-client matrix; restore/rollback | planned; baseline: `VERGLOS_DATA_AND_SCHEMA_MIGRATION_INVENTORY.md`; no destructive migration authorized |
 | CLI compatibility | current command/process contract | TRUTH-010, CONTRACT/AGENT/HUNT/RECORD/PLAN-CLI/DIST | One isolated process fixture per current command plus root/watch/MCP; artifact/config readers; old CLI/server matrix | partial; baseline: `VERGLOS_COMMAND_COMPATIBILITY_INVENTORY.md`; direct process coverage absent |
+| V1 architecture | modular monolith/workers + producer/data/signing boundaries | TRUTH-011, all implementation epics | Engine exit; tenant negatives; migration/restore; queue/object failure; usage concurrency; signing trust separation | decided; governing set: `VERGLOS_ARCHITECTURE_DECISION_SET.md`; provider selections deferred |
 | Pro/Team/Studio/Enterprise UI | dashboard contract | dashboard epics | authorization and role journeys | planned |
 | Final acceptance | acceptance contract | POST-RC | frozen corpus and authorized POC | not-started |
 

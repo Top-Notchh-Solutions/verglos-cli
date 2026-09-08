@@ -73,3 +73,11 @@ The current 19-command CLI is frozen as an observed compatibility baseline, incl
 Known defects and alpha-shell behavior are recorded without making them permanent ideals. Fixes to fail-open/incomplete states, hook overwrite/false success, unvalidated values, telemetry consent, or inconsistent exits must be intentional and tested. Hunt/Attest replace exit 78 only after their gates pass, and old report/config readers remain available through a versioned migration.
 
 The target common flags and command groups are additive planned contracts, not descriptions of the current binary. See `VERGLOS_COMMAND_COMPATIBILITY_INVENTORY.md`.
+
+## 2026-09-08 — V1 architecture set
+
+V1 uses an Apache local evidence core behind one signed `verglos` npm front door and a tenant-aware hosted modular monolith with separately scalable durable workers. Evidence producers remain replaceable behind versioned subject, observation, coverage, policy, record, and error contracts. Those contracts are language-neutral; current native deep SAST remains explicitly JS/TS.
+
+Postgres owns transactional metadata/authorization; content-addressed object storage owns bounded evidence payloads; a transactional outbox and durable at-least-once queue own asynchronous work. Queue and object providers remain deferred until measured contract, security, privacy, recovery, exit, and actual-cost gates pass.
+
+Customer local, organization, and Verglos official signing authorities are separate. Verglos official keys sign Verglos-controlled releases/content/receipts, never customer evidence as a Verglos-authored security fact. No universal customer signing key is held. See `VERGLOS_ARCHITECTURE_DECISION_SET.md`.
