@@ -19,6 +19,7 @@
 | Git repository resolver | `VERGLOS_REPOSITORY_RESOLVER.md` | TARGET-002 | 2 shared tests: typed non-repository/invalid-target handling and Git metadata boundary | implemented at `1ec9ba8`; platform/path and deeper dirty/submodule qualification remain open |
 | Package metadata resolver | `VERGLOS_PACKAGE_RESOLVER.md` | TARGET-003 | 2 shared tests: metadata-only package identity and missing/malformed metadata | implemented at `ee5b4b9`; lockfile/build/workspace enrichment remains open |
 | Filesystem subject resolver | `VERGLOS_FILESYSTEM_RESOLVER.md` | TARGET-004 | 2 shared tests: deterministic tree hashing, symlink non-following, non-directory rejection | implemented at `a3de37a`; permission/special-file corpus remains open |
+| Generic artifact resolver | `VERGLOS_ARTIFACT_RESOLVER.md` | TARGET-005 | 2 shared tests: deterministic file/directory hashing and missing-target rejection | implemented at `0fb7f21`; adversarial archive/special-file corpus remains open |
 | Native JS/TS scan | command + observation | TRUTH-001, CONTRACT-001 | Current: 58 scanner tests in `packages/scanner/src/**/*.test.ts`; required: frozen detector fixtures and determinism | shipped; evidence: `VERGLOS_CLI_CAPABILITY_INVENTORY.md` |
 | External evidence import | observation + adapter | IMPORT-001/002, ENGINES | SARIF/SBOM/VEX malformed and attribution fixtures | planned |
 | Source-to-artifact identity | subject + lineage | TARGET-001, GRAPH-001 | digest mismatch/incomplete tests | planned |

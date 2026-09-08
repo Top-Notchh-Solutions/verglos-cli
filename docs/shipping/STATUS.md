@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`TARGET-005`: generic artifact resolver, following completed TARGET-004.
+`TARGET-006`: SBOM subject resolver, following completed TARGET-005.
 
 ## Scope hold
 
