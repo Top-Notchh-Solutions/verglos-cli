@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete. `CONTRACT-001` through `CONTRACT-008` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed AI-change context, bounded verification attempts, exact-scope exceptions/approvals, and deterministic policy-evaluation results. Release-decision contracts are next; no target resolver, engine execution, Hunt implementation, or new public command is claimed yet.
+Epic 00 is complete. `CONTRACT-001` through `CONTRACT-009` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed AI-change context, bounded verification attempts, exact-scope exceptions/approvals, deterministic policy evaluation, and digest-bound release decisions. The Release Record manifest contract is next; no target resolver, engine execution, Hunt implementation, record archive, signing, or new public command is claimed yet.
 
 ## Last verified checks
 
@@ -70,11 +70,13 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-008` now establish version
 - Exception parsing preserves historical records but grants no policy effect. Applicability requires the separately recorded approval to match the exact request digest, validity window, subject, observation, and evaluation time; hosted RBAC and audit-store integrity remain downstream gates.
 - `verglos-cli@dc9e0b4`: the cache-bypassed graph passed 20/20 tasks and 186/186 tests. Eleven policy-evaluation tests enforce all four decisions, fixed exits, incomplete precedence, required-evidence failure states, exact identity, freshness/evidence consistency, advisory limits, stable ordering, derived-field tamper rejection, and version upgrades.
 - Policy evaluation derives `PASS=0`, `BLOCK=1`, `REVIEW=2`, and `INCOMPLETE=3` from the recorded facts. Required missing/stale/unsupported/error evidence and mismatched/unresolved identity force `INCOMPLETE`, which outranks simultaneous blockers and can never render green.
+- `verglos-cli@03533ab`: the cache-bypassed graph passed 20/20 tasks and 193/193 tests. Seven release-decision tests enforce canonical evaluation binding, incomplete propagation, exactly one matching primary subject, unique subject/approval references, policy cross-binding, ordered times, strict fields, and version upgrades.
+- A release decision preserves the policy-evaluation result and references its canonical digest; it cannot upgrade `INCOMPLETE`. It records issuer/approval claims but is not a signature, deployment authorization, or proof of hosted RBAC.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-009`: bind a release decision to the exact policy evaluation, approvals, immutable subjects, generation time, decision identity, and limitations.
+`CONTRACT-010`: define the Release Record manifest member media type, digest, size, redaction, bundle/schema version, and extension rules without prematurely fixing archive transport.
 
 ## Scope hold
 

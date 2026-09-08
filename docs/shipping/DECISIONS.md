@@ -135,3 +135,9 @@ Human approval is a separate immutable record bound to the exception ID and SHA-
 Policy evaluation derives four results from exact identity and recorded check facts: `PASS=0`, `BLOCK=1`, `REVIEW=2`, and `INCOMPLETE=3`. A missing, stale, unsupported, or erroneous required check and any mismatched or unresolved subject identity force `INCOMPLETE`, even when another check would block. This preserves both facts without presenting a definitive complete decision from partial evidence.
 
 Satisfied and failed checks require current evidence. Stale state requires an elapsed validity boundary; missing and unsupported state cannot claim evidence. Advisory gaps yield review and advisory checks cannot directly block. Decisions, exit codes, and code-unit-ordered reasons are derived fields and readers reject contradictions. See `VERGLOS_POLICY_EVALUATION_CONTRACT.md`.
+
+## 2026-09-09 — Release decisions preserve evaluation truth
+
+A release decision is a bounded immutable projection of one exact policy evaluation, not a second place to choose an outcome. It records exactly one primary subject matching the evaluation subject, optional unique supporting subjects, the policy, canonical evaluation digest/reference, approval references, issuer identity/authority, generation time, and limitations.
+
+The release result must equal the evaluation result, so `INCOMPLETE` cannot be upgraded during packaging. Policy is repeated in the evaluation reference and cross-checked against the top-level binding. Referenced approvals must predate generation and remain valid at that time. These are portable claims, not proof of hosted RBAC, signature validity, deployment, or publication authority. See `VERGLOS_RELEASE_DECISION_CONTRACT.md`.
