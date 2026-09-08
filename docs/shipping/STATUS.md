@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete. `CONTRACT-001` now establishes stable semantic schema URNs, strict stable versions, explicit compatibility classification, Verglos canonical JSON v1, bounded JSON admission, typed actionable reader failures, and an explicit compatibility bridge for the unchanged legacy scan-report `2.0.0` envelope. Domain schemas begin with the subject contract next.
+Epic 00 is complete. `CONTRACT-001/002` now establish version/canonicalization primitives and content-bound subjects for repository trees, packages, filesystem snapshots, SBOM documents, artifacts, OCI manifests, and OCI indexes/platforms. Tool-run and engine-health contracts are next; no target resolver or new public command is claimed yet.
 
 ## Last verified checks
 
@@ -58,11 +58,13 @@ Epic 00 is complete. `CONTRACT-001` now establishes stable semantic schema URNs,
 - Verification left both tracked worktrees clean; the eight pre-existing user-owned CLI documents/assets remained untracked and untouched. The web repo exposes no test script or application test files, which remains a coverage gap.
 - `verglos-cli@84d3921`: cache-bypassed `pnpm exec turbo run test typecheck build --force` passed 20/20 tasks and 109/109 tests; the new shared suite contributes nine schema/version, canonicalization, bounded-reader, and legacy-fixture tests.
 - The `2.0.0` JSON reporter still emits its frozen top-level shape without adding `schemaId`; the shared reader assigns `urn:verglos:schema:scan-report` only when a caller explicitly enables that legacy mapping.
+- `verglos-cli@1bc2b1b`: the same cache-bypassed graph passed 20/20 tasks and 122/122 tests. Thirteen subject tests cover seven kinds, canonical ID recomputation, dirty Git state, mandatory content digests, OCI tag/mirror/platform rules, registry/path bounds, malformed IDs, schema upgrades, and strict unknown fields.
+- Subject IDs bind immutable content/context only. Registry/tag/path/size labels cannot replace digests, and subject possession grants no tenant ownership, provenance, coverage, policy result, signature validity, or publication authority.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-002`: add versioned repository/tree, package, filesystem, SBOM, generic artifact, OCI manifest, and OCI index/platform subject contracts with malformed identity, digest, path, and mutable-reference tests.
+`CONTRACT-003`: add versioned tool-run and engine-health contracts for producer identity, installed artifacts/config/databases/checks, capabilities, bounded execution timing, health, freshness, failure, and incomplete reasons.
 
 ## Scope hold
 

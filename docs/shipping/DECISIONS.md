@@ -99,3 +99,9 @@ Verglos schema meaning uses a stable `urn:verglos:schema:*` identifier and a sep
 The legacy scan report remains exactly `schemaVersion: 2.0.0` without a newly injected identity. A reader may map it to `urn:verglos:schema:scan-report` only through an explicit legacy option, so missing identity is never guessed for arbitrary JSON.
 
 Verglos canonical JSON v1 accepts only the JSON data model, rejects coercion and ambiguous runtime values, sorts object names by UTF-16 code units, preserves array order, and emits compact UTF-8. Bounded readers reject input/structure limits with typed actionable errors and do not echo invalid source content. Raw signed-envelope readers must additionally detect duplicate property names before cryptographic verification. See `VERGLOS_SCHEMA_VERSION_AND_CANONICAL_JSON.md`.
+
+## 2026-09-08 — Content-bound subject identity
+
+A subject names immutable evaluated content, not a tenant, application, mutable lookup, local absolute path, or authorization. Its ID is a SHA-256 digest of a kind-specific canonical identity projection and is recomputed on read. Repository trees bind Git commit/tree and dirty worktree content; packages and generic artifacts require content digests; filesystem snapshots bind both tree and ignore policy; SBOMs bind complete document bytes; OCI manifests bind digest plus explicit platform; OCI indexes bind their own digest and retain explicit unique child platforms.
+
+Mutable OCI tags, registry mirrors, paths, media labels, and reported sizes remain non-identity context and cannot substitute for a digest. A tag-only image is invalid. The same manifest bytes and platform retain one subject ID across mirrors/tags, while tenant/application ownership and source provenance remain separate authorization and lineage relationships. See `VERGLOS_SUBJECT_CONTRACT.md`.
