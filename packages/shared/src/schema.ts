@@ -5,6 +5,7 @@
  */
 export const VERGLOS_SCHEMA_IDS = {
   scanReport: "urn:verglos:schema:scan-report",
+  subject: "urn:verglos:schema:subject",
 } as const;
 
 export interface SchemaDescriptor {
