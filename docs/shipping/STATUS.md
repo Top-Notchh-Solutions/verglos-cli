@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-009` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, and additive hosted-data migration are now recorded without changing runtime behavior.
+Execution started. `TRUTH-001` through `TRUTH-010` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, additive hosted-data migration, and current CLI compatibility are now recorded without changing runtime behavior.
 
 ## Last verified checks
 
@@ -44,6 +44,9 @@ Execution started. `TRUTH-001` through `TRUTH-009` are complete. CLI/hosted base
 - All 12 current hosted tables and their account/API/cron/public consumers now map to explicit target entity families with idempotent legacy IDs/digests, quarantine rules, and no invented subject, decision, observation, signature, record, or verification facts.
 - The web repo has five handwritten SQL files but no checked-in Drizzle journal/snapshots and no migration creating `users`, `licenses`, `activations`, `reports`, or `heartbeats`; repository evidence cannot reproduce a clean production schema yet.
 - Hosted migration is frozen as expand → bounded backfill → dual write → shadow read → per-surface cutover → later contract, with tenant-negative, count/digest, old-client, restore, and rollback gates before authority changes.
+- Root help execution confirms 19 top-level commands and four monitor subcommands. The current binary has no universal JSON/quiet/config/policy flags and `scan` remains current-working-directory only.
+- Current command defaults, report/config/credential/hook artifacts, network effects, stdout/stderr, and command-specific exits map to 24 required isolated process fixtures, including root and watch behavior.
+- Known compatibility risks include mandatory update gating, divergent scan-wrapper coverage, malformed threshold/timeout acceptance, hook overwrite/false success, incomplete monitor states returning zero, mixed JSON/prose MCP config output, and Hunt/Attest entitlement-denied 3 versus shell 78 exits.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -51,7 +54,7 @@ Execution started. `TRUTH-001` through `TRUTH-009` are complete. CLI/hosted base
 
 ## Next task
 
-`TRUTH-010`: freeze current CLI command, flag, output, and exit behavior and list compatibility fixtures for every existing public command.
+`TRUTH-011`: record the material architecture decisions and unresolved provider/signing gates now that plan, cost, privacy, and migration inputs are complete.
 
 ## Scope hold
 
