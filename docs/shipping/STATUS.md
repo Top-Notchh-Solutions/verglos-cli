@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete. `CONTRACT-001` through `CONTRACT-007` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed AI-change context, bounded verification attempts, and digest-bound exact-scope policy exceptions with human approvals. Policy-evaluation contracts are next; no target resolver, engine execution, Hunt implementation, or new public command is claimed yet.
+Epic 00 is complete. `CONTRACT-001` through `CONTRACT-008` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed AI-change context, bounded verification attempts, exact-scope exceptions/approvals, and deterministic policy-evaluation results. Release-decision contracts are next; no target resolver, engine execution, Hunt implementation, or new public command is claimed yet.
 
 ## Last verified checks
 
@@ -68,11 +68,13 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-007` now establish version
 - A verification-attempt document records and validates producer claims about approval, sandboxing, limits, usage, redaction, and evidence. It is not proof that isolation, cleanup, egress control, or redaction enforcement occurred; those claims remain gated on implementation-level evidence.
 - `verglos-cli@2dd8ea3`: the cache-bypassed graph passed 20/20 tasks and 175/175 tests. Eleven exception/approval tests enforce exact subject/observation scope, finite validity, controls, reversal triggers, human authority, canonical request binding, denial/expiry/timing behavior, scope mismatch, and version upgrades.
 - Exception parsing preserves historical records but grants no policy effect. Applicability requires the separately recorded approval to match the exact request digest, validity window, subject, observation, and evaluation time; hosted RBAC and audit-store integrity remain downstream gates.
+- `verglos-cli@dc9e0b4`: the cache-bypassed graph passed 20/20 tasks and 186/186 tests. Eleven policy-evaluation tests enforce all four decisions, fixed exits, incomplete precedence, required-evidence failure states, exact identity, freshness/evidence consistency, advisory limits, stable ordering, derived-field tamper rejection, and version upgrades.
+- Policy evaluation derives `PASS=0`, `BLOCK=1`, `REVIEW=2`, and `INCOMPLETE=3` from the recorded facts. Required missing/stale/unsupported/error evidence and mismatched/unresolved identity force `INCOMPLETE`, which outranks simultaneous blockers and can never render green.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-008`: define deterministic PASS/REVIEW/BLOCK/INCOMPLETE policy evaluation with required evidence, freshness, identity matching, reasons, and exit mapping.
+`CONTRACT-009`: bind a release decision to the exact policy evaluation, approvals, immutable subjects, generation time, decision identity, and limitations.
 
 ## Scope hold
 

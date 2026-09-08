@@ -129,3 +129,9 @@ Execution binds an immutable subject and observation, verified recipe and trust 
 A V1 policy exception names one immutable subject and an explicit bounded set of observation IDs. Wildcards, future observations, permanent validity, and free-text scope expansion are invalid. The request records owner, requester, reason, evidence-backed compensating controls, reversal triggers, effective time, expiry, and limitations.
 
 Human approval is a separate immutable record bound to the exception ID and SHA-256 digest of the complete canonical request. Editing the request invalidates the approval target. Applicability is evaluated against decision, time, approval validity, exact subject, and exact observation; parsing or retaining an expired record grants nothing. Server-side approver authority, revocation/event history, and control-health verification remain downstream requirements. See `VERGLOS_EXCEPTION_AND_APPROVAL_CONTRACT.md`.
+
+## 2026-09-09 — Incomplete evidence outranks policy violations
+
+Policy evaluation derives four results from exact identity and recorded check facts: `PASS=0`, `BLOCK=1`, `REVIEW=2`, and `INCOMPLETE=3`. A missing, stale, unsupported, or erroneous required check and any mismatched or unresolved subject identity force `INCOMPLETE`, even when another check would block. This preserves both facts without presenting a definitive complete decision from partial evidence.
+
+Satisfied and failed checks require current evidence. Stale state requires an elapsed validity boundary; missing and unsupported state cannot claim evidence. Advisory gaps yield review and advisory checks cannot directly block. Decisions, exit codes, and code-unit-ordered reasons are derived fields and readers reject contradictions. See `VERGLOS_POLICY_EVALUATION_CONTRACT.md`.
