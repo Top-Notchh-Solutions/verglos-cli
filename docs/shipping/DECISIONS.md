@@ -141,3 +141,9 @@ Satisfied and failed checks require current evidence. Stale state requires an el
 A release decision is a bounded immutable projection of one exact policy evaluation, not a second place to choose an outcome. It records exactly one primary subject matching the evaluation subject, optional unique supporting subjects, the policy, canonical evaluation digest/reference, approval references, issuer identity/authority, generation time, and limitations.
 
 The release result must equal the evaluation result, so `INCOMPLETE` cannot be upgraded during packaging. Policy is repeated in the evaluation reference and cross-checked against the top-level binding. Referenced approvals must predate generation and remain valid at that time. These are portable claims, not proof of hosted RBAC, signature validity, deployment, or publication authority. See `VERGLOS_RELEASE_DECISION_CONTRACT.md`.
+
+## 2026-09-09 — Release Record manifests stay transport-neutral
+
+The Release Record manifest is a deterministic index, not an archive format. Each member binds safe relative path, fixed kind, media type, content digest, size, required state, redaction state, and optional schema identity. Exactly one required release-decision member anchors the record; complete redaction state requires a non-omitted redaction manifest. Namespaced extensions follow the same bounded rules and sorted layout.
+
+Manifest validation does not verify payload bytes or authorize custody/publication. Archive readers must independently enforce digest/size verification, traversal/symlink/bomb rejection, redaction policy, access controls, and signing. See `VERGLOS_RECORD_MANIFEST_CONTRACT.md`.

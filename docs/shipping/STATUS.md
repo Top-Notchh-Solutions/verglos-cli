@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete. `CONTRACT-001` through `CONTRACT-009` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed AI-change context, bounded verification attempts, exact-scope exceptions/approvals, deterministic policy evaluation, and digest-bound release decisions. The Release Record manifest contract is next; no target resolver, engine execution, Hunt implementation, record archive, signing, or new public command is claimed yet.
+Epic 00 is complete. `CONTRACT-001` through `CONTRACT-010` now establish version/canonicalization primitives, immutable subjects, producer/run health, canonical observations, separately typed AI-change context, bounded verification attempts, exact-scope exceptions/approvals, deterministic policy evaluation, digest-bound release decisions, and transport-neutral Release Record manifests. Typed error/failure taxonomy is next; no target resolver, engine execution, Hunt implementation, record archive transport, signing, or new public command is claimed yet.
 
 ## Last verified checks
 
@@ -72,11 +72,13 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-009` now establish version
 - Policy evaluation derives `PASS=0`, `BLOCK=1`, `REVIEW=2`, and `INCOMPLETE=3` from the recorded facts. Required missing/stale/unsupported/error evidence and mismatched/unresolved identity force `INCOMPLETE`, which outranks simultaneous blockers and can never render green.
 - `verglos-cli@03533ab`: the cache-bypassed graph passed 20/20 tasks and 193/193 tests. Seven release-decision tests enforce canonical evaluation binding, incomplete propagation, exactly one matching primary subject, unique subject/approval references, policy cross-binding, ordered times, strict fields, and version upgrades.
 - A release decision preserves the policy-evaluation result and references its canonical digest; it cannot upgrade `INCOMPLETE`. It records issuer/approval claims but is not a signature, deployment authorization, or proof of hosted RBAC.
+- `verglos-cli@c1fa719`: the cache-bypassed graph passed 20/20 tasks and 199/199 tests. Six record-manifest tests enforce deterministic member/extension ordering, required release-decision membership, duplicate/path controls, explicit redaction state, omitted-size bounds, namespaced extensions, and schema/version references.
+- A manifest indexes bounded payload claims without selecting archive transport or proving member bytes. Transport readers must independently verify digest, size, traversal/symlink/bomb safety, and access/redaction policy.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-010`: define the Release Record manifest member media type, digest, size, redaction, bundle/schema version, and extension rules without prematurely fixing archive transport.
+`CONTRACT-011`: define the typed error/failure taxonomy separating usage, unsupported, incomplete, policy block, infrastructure, authorization, quota, integrity, and internal failures.
 
 ## Scope hold
 
