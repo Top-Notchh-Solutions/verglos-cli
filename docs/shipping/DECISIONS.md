@@ -117,3 +117,9 @@ Tool-run success is only a process outcome. Complete coverage additionally requi
 Heuristic AI-change context is always an estimate with reproducible method/config/input digests, named signals, confidence, and visible limitations. Tool metadata, user statements, commit messages, and Git trailers remain declarations unless independently signed and verified. They are not silently promoted to cryptographic evidence.
 
 A valid signature proves only that an identified signer signed exact statement bytes under the recorded trust policy. It does not independently prove line-level authorship. Signed build or artifact provenance cannot assert AI-change classification unless the signed claim itself is specifically an AI-change claim. See `VERGLOS_AI_CHANGE_CONTEXT_CONTRACT.md`.
+
+## 2026-09-09 — Verification outcomes are bounded and non-boolean
+
+V1 verification attempts use exactly six outcomes: `confirmed`, `not_reproduced`, `inconclusive`, `not_supported`, `environment_error`, and `policy_denied`. Confirmation and non-reproduction require executed evidence. Unsupported and policy-denied attempts cannot execute. Environment failure remains separate from non-reproduction, and a bounded non-reproduction never becomes a universal false-positive statement.
+
+Execution binds an immutable subject and observation, verified recipe and trust policy, exact input/parameter digests, approval, sandbox/runtime, network policy, limits, measured usage, cleanup, and redacted-output digests. The document validates these recorded claims but does not itself prove enforcement. The old `verified`, `false`, and `not_attemptable` labels remain legacy compatibility inputs requiring explicit migration; they are not V1 output truth. See `VERGLOS_VERIFICATION_ATTEMPT_CONTRACT.md`.
