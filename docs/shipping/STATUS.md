@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-011` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, additive hosted-data migration, current CLI compatibility, and the V1 architecture set are now recorded without changing runtime behavior.
+Execution started. `TRUTH-001` through `TRUTH-012` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, additive hosted-data migration, current CLI compatibility, the V1 architecture set, and accountable risk controls are now recorded without changing runtime behavior.
 
 ## Last verified checks
 
@@ -50,6 +50,9 @@ Execution started. `TRUTH-001` through `TRUTH-011` are complete. CLI/hosted base
 - Twelve architecture decisions now freeze the Apache local core, one signed npm front door, producer-independent language-neutral contracts, JS/TS native coverage label, hosted modular monolith/durable workers, Postgres/object split, transactional outbox/queue, server catalog/usage authority, and separated signing identities.
 - Queue and object-storage providers remain intentionally deferred until contract, security, privacy, recovery, exit, representative-load, and actual-cost gates pass; the current sequential cron and relational JSON are not accepted substitutes.
 - Material current contradictions are mapped to owners, including default scan networking, file/scanner-shaped contracts, user/license-centric hosted data, absent durable operations/object custody/usage authority, unsigned summaries, and incomplete schema migration control.
+- The governing register now tracks 39 risks with stable IDs, accountable owners, severity, explicit triggers, prevention/detection evidence, containment/rollback, blocking gates, status, and residual risk.
+- Seven current blocker groups are explicit: report authorization, webhook SSRF, credentials/telemetry privacy, package notices, schema reproducibility, monitoring/delivery correctness, and catalog-bound payment amounts.
+- Hunt, canonical signing, tenant migration, new public verification, managed execution, and inactive plans remain blocked from activation until their critical/high controls produce executable evidence.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -57,7 +60,7 @@ Execution started. `TRUTH-001` through `TRUTH-011` are complete. CLI/hosted base
 
 ## Next task
 
-`TRUTH-012`: expand the risk register with accountable owners, severity, triggers, mitigations, rollback, and release gates for licensing, migration, tenancy, SSRF, Hunt, signatures, quotas, cost, and privacy.
+`TRUTH-013`: run and record the exact CLI and web baseline verification, separating pre-existing failures from new regressions without modifying unrelated files.
 
 ## Scope hold
 
