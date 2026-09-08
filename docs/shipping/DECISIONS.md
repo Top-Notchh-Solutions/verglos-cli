@@ -65,3 +65,11 @@ Hosted data migrates by expand, idempotent backfill, dual write, shadow read, pe
 Each current user receives at most a provisional personal tenant and owner membership; an email domain never creates an organization. License/fingerprint rows may seed provisional applications within that license only. Legacy score history remains a score projection, reports remain quarantined until ownership/schema/privacy validation, and random-hash attest summaries remain legacy public summaries. Migration never invents an exact subject, release decision, observation lineage, signature, record digest, or verification.
 
 No target resource becomes authoritative before tenant-scoped data access, negative authorization, count/digest reconciliation, old-client compatibility, and tested backup/restore pass. Old tables remain available through the rollback and retention windows. See `VERGLOS_DATA_AND_SCHEMA_MIGRATION_INVENTORY.md`.
+
+## 2026-09-08 — Command compatibility is process-observable behavior
+
+The current 19-command CLI is frozen as an observed compatibility baseline, including syntax, aliases, current working-directory defaults, report filenames/schema, filesystem and network effects, stdout/stderr, and command-specific exits. Internal function tests are insufficient; every command requires an isolated process fixture.
+
+Known defects and alpha-shell behavior are recorded without making them permanent ideals. Fixes to fail-open/incomplete states, hook overwrite/false success, unvalidated values, telemetry consent, or inconsistent exits must be intentional and tested. Hunt/Attest replace exit 78 only after their gates pass, and old report/config readers remain available through a versioned migration.
+
+The target common flags and command groups are additive planned contracts, not descriptions of the current binary. See `VERGLOS_COMMAND_COMPATIBILITY_INVENTORY.md`.
