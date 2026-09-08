@@ -23,7 +23,8 @@ const STABLE_ID = /^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/;
 const UUID_URN = /^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const CONTROL_CHARACTERS = /[\u0000-\u001f\u007f]/;
 
-const StableIdSchema = z.string().min(1).max(128).regex(STABLE_ID);
+export const StableContractIdSchema = z.string().min(1).max(128).regex(STABLE_ID);
+export const RunIdSchema = z.string().regex(UUID_URN);
 const BoundedTextSchema = z
   .string()
   .min(1)
@@ -36,7 +37,7 @@ const EnvelopeVersionSchema = z.string().refine((value) => parseSchemaVersion(va
 
 export const ProducerIdentitySchema = z
   .object({
-    id: StableIdSchema,
+    id: StableContractIdSchema,
     kind: z.enum(["native", "external", "importer", "fixture"]),
     name: z.string().min(1).max(128).refine(noControls, "name contains a control character"),
     version: z.string().min(1).max(128).refine(noControls, "version contains a control character"),
@@ -47,7 +48,7 @@ export type ProducerIdentity = z.infer<typeof ProducerIdentitySchema>;
 
 export const EngineComponentSchema = z
   .object({
-    id: StableIdSchema,
+    id: StableContractIdSchema,
     kind: z.enum(["binary", "configuration", "database", "checks"]),
     name: z.string().min(1).max(128).refine(noControls, "name contains a control character"),
     version: z.string().min(1).max(128).refine(noControls, "version contains a control character").optional(),
@@ -61,7 +62,7 @@ export type EngineComponent = z.infer<typeof EngineComponentSchema>;
 
 export const EngineCapabilitySchema = z
   .object({
-    id: StableIdSchema,
+    id: StableContractIdSchema,
     subjectKinds: z
       .array(
         z.enum([
@@ -84,7 +85,7 @@ export type EngineCapability = z.infer<typeof EngineCapabilitySchema>;
 
 export const FreshnessSchema = z
   .object({
-    componentId: StableIdSchema,
+    componentId: StableContractIdSchema,
     status: z.enum(["current", "stale", "unknown", "not-applicable"]),
     sourceUpdatedAt: TimestampSchema.optional(),
     checkedAt: TimestampSchema,
@@ -123,7 +124,7 @@ export const IncompleteReasonSchema = z
       "offline-data-missing",
       "cancelled",
     ]),
-    scope: StableIdSchema,
+    scope: StableContractIdSchema,
     message: BoundedTextSchema,
     action: BoundedTextSchema,
   })
@@ -169,11 +170,11 @@ const ToolRunDocumentBaseSchema = z
   .object({
     schemaId: z.literal(TOOL_RUN_SCHEMA.id),
     schemaVersion: EnvelopeVersionSchema,
-    runId: z.string().regex(UUID_URN),
+    runId: RunIdSchema,
     subjectId: SubjectIdSchema,
     engine: EngineHealthSnapshotSchema,
-    requestedCapabilities: z.array(StableIdSchema).min(1).max(256),
-    executedCapabilities: z.array(StableIdSchema).max(256),
+    requestedCapabilities: z.array(StableContractIdSchema).min(1).max(256),
+    executedCapabilities: z.array(StableContractIdSchema).max(256),
     executionClass: z.enum(["in-process", "local-process", "container", "microvm", "import"]),
     networkAccess: z.enum(["none", "restricted", "unrestricted"]),
     targetCodeExecuted: z.literal(false),
