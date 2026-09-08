@@ -87,3 +87,7 @@ Customer local, organization, and Verglos official signing authorities are separ
 Every V1 risk has a stable ID, accountable owner, severity, trigger, prevention/detection evidence, rollback or containment action, blocking release gate, status, and residual-risk statement. Documentation alone cannot close a risk. Critical risks block the affected feature/release; high-risk exceptions require bounded founder and owner acceptance with evidence, expiry, and reversal trigger.
 
 Current report authorization, generic-webhook SSRF, raw credential/project-linked telemetry, package notice omissions, unreproducible foundational schema, false-clean monitoring/delivery, and unbound payment amount/catalog behavior are active release blockers. See `RISKS.md`.
+
+## 2026-09-08 — Fresh supported-runtime baseline
+
+Regression evidence uses exact repository commits, a cache-bypassed CLI task graph, and the web repository's declared Node 22 engine. A passing build is not integration, security, privacy, migration, distribution, or product acceptance evidence. Unsupported-runtime passes are supplemental only, and a repository with no tests records a coverage gap rather than a passing zero-test suite. See `VERGLOS_BASELINE_VERIFICATION.md`.
