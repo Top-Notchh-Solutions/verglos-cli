@@ -11,6 +11,8 @@ export const VERGLOS_SCHEMA_IDS = {
   observation: "urn:verglos:schema:observation",
   aiChangeContext: "urn:verglos:schema:ai-change-context",
   verificationAttempt: "urn:verglos:schema:verification-attempt",
+  policyException: "urn:verglos:schema:policy-exception",
+  exceptionApproval: "urn:verglos:schema:exception-approval",
 } as const;
 
 export interface SchemaDescriptor {
