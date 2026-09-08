@@ -9,3 +9,4 @@ export * from "./subject.js";
 export * from "./engine.js";
 export * from "./observation.js";
 export * from "./ai-change-context.js";
+export * from "./verification.js";

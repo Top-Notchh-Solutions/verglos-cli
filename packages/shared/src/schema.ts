@@ -10,6 +10,7 @@ export const VERGLOS_SCHEMA_IDS = {
   toolRun: "urn:verglos:schema:tool-run",
   observation: "urn:verglos:schema:observation",
   aiChangeContext: "urn:verglos:schema:ai-change-context",
+  verificationAttempt: "urn:verglos:schema:verification-attempt",
 } as const;
 
 export interface SchemaDescriptor {
