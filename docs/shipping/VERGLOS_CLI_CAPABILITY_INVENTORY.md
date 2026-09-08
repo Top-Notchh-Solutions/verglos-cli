@@ -1,8 +1,11 @@
 # Verglos CLI capability inventory
 
-Status: current implementation evidence for `TRUTH-001`  
-Reviewed: 2026-09-08  
-Behavior baseline: `caa2a56`  
+Status: current implementation evidence for `TRUTH-001`
+
+Reviewed: 2026-09-08
+
+Behavior baseline: `caa2a56`
+
 Scope: `verglos-cli` only; hosted-route behavior is audited by `TRUTH-002`
 
 This inventory records what the repository does now. It is not a promise that a named command, plan, or interface is complete. States use the shipping registry vocabulary:

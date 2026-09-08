@@ -24,17 +24,19 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Planning complete. The 260-item dependency-ordered execution tracker is in `VERGLOS_V1_BACKLOG.md`. Waiting for the founder's explicit command before starting implementation.
+Execution started. `TRUTH-001` is complete at `9877482`: the current CLI capability inventory now covers all commands, flags, packages, detectors, reports, outbound requests, telemetry fields, entitlement vocabularies, and runnable tests without changing runtime behavior.
 
 ## Last verified checks
 
+- `verglos-cli`: `TRUTH-001` inventory counts reconcile to 19 top-level commands, 11 detectors, 9 MCP tools, 8 packages, and 100 package-discovered tests.
+- `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`TRUTH-001`: inventory current CLI/web behavior and populate the truth registry with evidence links before changing contracts or public copy.
+`TRUTH-002`: inventory current hosted routes, libraries, schema, auth, licenses, reports, telemetry, monitoring, alerts, attest summaries, account routes, and production dependencies.
 
 ## Scope hold
 
