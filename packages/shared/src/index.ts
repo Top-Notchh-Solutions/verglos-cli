@@ -16,3 +16,4 @@ export * from "./release-decision.js";
 export * from "./record-manifest.js";
 export * from "./failure.js";
 export * from "./fixture-validator.js";
+export * from "./target-resolver.js";
