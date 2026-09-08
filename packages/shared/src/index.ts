@@ -19,3 +19,4 @@ export * from "./fixture-validator.js";
 export * from "./target-resolver.js";
 export * from "./repository-resolver.js";
 export * from "./package-resolver.js";
+export * from "./filesystem-resolver.js";
