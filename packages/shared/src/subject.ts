@@ -63,6 +63,8 @@ export const RelativeSubjectPathSchema = z
 
 export type RelativeSubjectPath = z.infer<typeof RelativeSubjectPathSchema>;
 
+export const SubjectIdSchema = z.string().max(180).regex(SUBJECT_ID);
+
 export const OciPlatformSchema = z
   .object({
     os: z.string().regex(PLATFORM_TOKEN),
@@ -80,7 +82,7 @@ const commonSubjectFields = {
   schemaVersion: z.string().refine((value) => parseSchemaVersion(value) !== null, {
     message: "schemaVersion must be MAJOR.MINOR.PATCH",
   }),
-  subjectId: z.string().max(180).regex(SUBJECT_ID),
+  subjectId: SubjectIdSchema,
 };
 
 const repositoryTreeFields = {
