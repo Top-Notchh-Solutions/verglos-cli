@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Create and review the command, UI/UX, agent-safety, truth, and release-gate contracts in this directory before implementation begins.
+Planning complete. The 260-item dependency-ordered execution tracker is in `VERGLOS_V1_BACKLOG.md`. Waiting for the founder's explicit command before starting implementation.
 
 ## Last verified checks
 
@@ -35,6 +35,12 @@ Create and review the command, UI/UX, agent-safety, truth, and release-gate cont
 ## Next task
 
 `TRUTH-001`: inventory current CLI/web behavior and populate the truth registry with evidence links before changing contracts or public copy.
+
+## Scope hold
+
+- Core product work forecasts 252 commits: 162 in `verglos-cli`, 90 in `verglos-web`.
+- The final landing/marketing pass forecasts 8 additional `verglos-web` commits and remains on hold until a later founder command after GA truth lock.
+- Blog work is excluded; no blog or landing-page element may be changed during core execution.
 
 ## Blockers
 
