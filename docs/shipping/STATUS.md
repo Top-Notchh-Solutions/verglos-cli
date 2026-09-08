@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`TARGET-006`: SBOM subject resolver, following completed TARGET-005.
+`TARGET-007`: OCI reference parser and registry boundary, following completed TARGET-006.
 
 ## Scope hold
 
