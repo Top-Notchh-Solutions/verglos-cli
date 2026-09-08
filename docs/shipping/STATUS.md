@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete: `TRUTH-001` through `TRUTH-013` establish CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, additive hosted-data migration, current CLI compatibility, the V1 architecture set, accountable risk controls, and a fresh regression baseline. Contract implementation begins next.
+Epic 00 is complete. `CONTRACT-001` now establishes stable semantic schema URNs, strict stable versions, explicit compatibility classification, Verglos canonical JSON v1, bounded JSON admission, typed actionable reader failures, and an explicit compatibility bridge for the unchanged legacy scan-report `2.0.0` envelope. Domain schemas begin with the subject contract next.
 
 ## Last verified checks
 
@@ -56,11 +56,13 @@ Epic 00 is complete: `TRUTH-001` through `TRUTH-013` establish CLI/hosted baseli
 - `verglos-cli@bd1d394`: cache-bypassed `pnpm exec turbo run test typecheck build --force` passed 19/19 tasks and 100/100 tests under Node 26.4.0, which satisfies the CLI's Node `>=20` range.
 - `verglos-web@5044e77`: `pnpm typecheck` and `pnpm build` passed under the declared Node 22 engine using Node 22.23.2; Next 15.5.21 compiled in 2.2 seconds and completed 34 static generation work units.
 - Verification left both tracked worktrees clean; the eight pre-existing user-owned CLI documents/assets remained untracked and untouched. The web repo exposes no test script or application test files, which remains a coverage gap.
+- `verglos-cli@84d3921`: cache-bypassed `pnpm exec turbo run test typecheck build --force` passed 20/20 tasks and 109/109 tests; the new shared suite contributes nine schema/version, canonicalization, bounded-reader, and legacy-fixture tests.
+- The `2.0.0` JSON reporter still emits its frozen top-level shape without adding `schemaId`; the shared reader assigns `urn:verglos:schema:scan-report` only when a caller explicitly enables that legacy mapping.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-001`: implement semantic schema/version primitives, compatibility rules, canonical serialization, bounded parsing errors, and old-report readability fixtures in `packages/shared`.
+`CONTRACT-002`: add versioned repository/tree, package, filesystem, SBOM, generic artifact, OCI manifest, and OCI index/platform subject contracts with malformed identity, digest, path, and mutable-reference tests.
 
 ## Scope hold
 

@@ -91,3 +91,11 @@ Current report authorization, generic-webhook SSRF, raw credential/project-linke
 ## 2026-09-08 — Fresh supported-runtime baseline
 
 Regression evidence uses exact repository commits, a cache-bypassed CLI task graph, and the web repository's declared Node 22 engine. A passing build is not integration, security, privacy, migration, distribution, or product acceptance evidence. Unsupported-runtime passes are supplemental only, and a repository with no tests records a coverage gap rather than a passing zero-test suite. See `VERGLOS_BASELINE_VERIFICATION.md`.
+
+## 2026-09-08 — Schema identity and canonical JSON foundation
+
+Verglos schema meaning uses a stable `urn:verglos:schema:*` identifier and a separate strict `MAJOR.MINOR.PATCH` representation version. Patch versions cannot change shape; readers accept known older minors within a major, require an upgrade for newer documents, and require an explicit migration for an older major. Compatibility never replaces schema validation.
+
+The legacy scan report remains exactly `schemaVersion: 2.0.0` without a newly injected identity. A reader may map it to `urn:verglos:schema:scan-report` only through an explicit legacy option, so missing identity is never guessed for arbitrary JSON.
+
+Verglos canonical JSON v1 accepts only the JSON data model, rejects coercion and ambiguous runtime values, sorts object names by UTF-16 code units, preserves array order, and emits compact UTF-8. Bounded readers reject input/structure limits with typed actionable errors and do not echo invalid source content. Raw signed-envelope readers must additionally detect duplicate property names before cryptographic verification. See `VERGLOS_SCHEMA_VERSION_AND_CANONICAL_JSON.md`.

@@ -89,7 +89,7 @@ Ready after this epic: CONTRACT-001, PLAN-WEB-001, LIC-001.
 
 Evidence/problem: current `ScanResult`/`Finding` are file-centric, use transitional optional fields, and cannot represent artifacts, engine health, imported lineage, incomplete coverage, policy decisions, or durable records.
 
-- [ ] **CONTRACT-001** · `packages/shared` schema/version primitives · deps: TRUTH-003/010 · Define semantic schema IDs, compatibility policy, canonical serialization rules, and bounded parsing errors. Acceptance: old report fixtures remain readable or fail with an actionable version error. Commit(s): —
+- [x] **CONTRACT-001** · `packages/shared` schema/version primitives · deps: TRUTH-003/010 · Define semantic schema IDs, compatibility policy, canonical serialization rules, and bounded parsing errors. Acceptance: old report fixtures remain readable or fail with an actionable version error. Commit(s): `84d3921`
 - [ ] **CONTRACT-002** · subject contract · deps: CONTRACT-001 · Add versioned subject types for repository/tree, package, filesystem, SBOM, generic artifact, OCI manifest, and OCI index/platform. Tests: malformed IDs, mutable-only tags, missing digests, path bounds. Commit(s): —
 - [ ] **CONTRACT-003** · tool-run and engine-health contracts · deps: CONTRACT-001 · Model producer, binary/config/database/check digests, capabilities, timing, health, freshness, and incomplete reasons. Tests: absence/staleness/incompatibility. Commit(s): —
 - [ ] **CONTRACT-004** · canonical observation contract · deps: CONTRACT-002/003 · Model native/imported/adapter coverage, IDs, locations/layers, PURL/CPE, original/normalized severity, confidence, fix, references, redacted evidence, and namespaced extensions. Commit(s): —
