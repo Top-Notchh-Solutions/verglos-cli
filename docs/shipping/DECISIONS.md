@@ -35,3 +35,9 @@ All eight current CLI packages are Apache-2.0 core, including private npm packag
 Commercial value is the server-authorized operation of authentication, tenants, billing, monitoring, retention, delivery, collaboration, approvals, client workspaces, managed runners, SLA, and support. New premium rule/policy packs and signed Hunt recipes may be separately licensed only when their content license, provenance, digest, update, entitlement, notice, and revocation contracts are approved. Third-party and customer data retain their own ownership class.
 
 Verglos brand and official signing authority are protected identities, not permissions granted by access to source. Public verification roots may be distributed; private keys and official release authority remain controlled and revocable. See `VERGLOS_OPEN_CORE_AND_COMMERCIAL_BOUNDARY.md`.
+
+## 2026-09-08 — Unknown third-party rights fail redistribution
+
+Unknown or unreviewed license, notice, provenance, modification, trademark, source-offer, or service-term status blocks bundling and redistribution of that asset, not local architecture work. A user-supplied external engine may be invoked through an open adapter before Verglos is authorized to redistribute the engine.
+
+Release compliance is measured from actual artifacts, not only manifests: npm tarballs, platform packages, deployed/downloadable web output, engine caches, standards schemas, recipe feeds, and offline bundles each require generated notices and an SBOM where applicable. See `VERGLOS_THIRD_PARTY_INVENTORY.md`.
