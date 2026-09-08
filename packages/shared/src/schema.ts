@@ -13,6 +13,7 @@ export const VERGLOS_SCHEMA_IDS = {
   verificationAttempt: "urn:verglos:schema:verification-attempt",
   policyException: "urn:verglos:schema:policy-exception",
   exceptionApproval: "urn:verglos:schema:exception-approval",
+  policyEvaluation: "urn:verglos:schema:policy-evaluation",
 } as const;
 
 export interface SchemaDescriptor {
