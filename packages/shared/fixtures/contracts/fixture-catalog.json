@@ -1,0 +1,8 @@
+{
+  "catalogVersion": "1.0.0",
+  "fixtures": [
+    { "id": "failure-valid", "class": "valid", "path": "failure-valid.json", "schemaId": "urn:verglos:schema:failure" },
+    { "id": "failure-invalid-exit", "class": "invalid", "path": "failure-invalid-exit.json", "schemaId": "urn:verglos:schema:failure" },
+    { "id": "failure-backward-compatible", "class": "backward-compatible", "path": "failure-backward-compatible.json", "schemaId": "urn:verglos:schema:failure" }
+  ]
+}

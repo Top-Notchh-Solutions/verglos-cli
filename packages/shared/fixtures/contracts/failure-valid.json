@@ -1,0 +1,14 @@
+{
+  "schemaId": "urn:verglos:schema:failure",
+  "schemaVersion": "1.0.0",
+  "failureId": "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+  "category": "usage",
+  "code": "verglos.failure.usage.invalid-input",
+  "exitCode": 2,
+  "retry": "after-action",
+  "operation": "fixture-validation",
+  "message": "Input did not satisfy the contract.",
+  "limitation": "The document cannot be accepted as supplied.",
+  "action": "Correct the input and retry.",
+  "occurredAt": "2026-01-01T00:00:00Z"
+}
