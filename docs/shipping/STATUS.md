@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-005` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, and the open-core/commercial/content/identity boundary are now decided without changing runtime behavior.
+Execution started. `TRUTH-001` through `TRUTH-006` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, and third-party redistribution gates are now recorded without changing runtime behavior.
 
 ## Last verified checks
 
@@ -33,6 +33,8 @@ Execution started. `TRUTH-001` through `TRUTH-005` are complete. CLI/hosted base
 - `verglos-cli`: `TRUTH-003` registry names owner, evidence, review date, state, and permitted wording for current and planned command/capability families.
 - `verglos-cli`: `TRUTH-004` reconciles plan IDs, aliases, pricing hypotheses, allowances, capability drift, enforcement, and migration preconditions.
 - `verglos-cli`: `TRUTH-005` assigns all eight packages and each current/target feed one primary ownership class, with unresolved license, attribution, trademark, and signing controls held as explicit gates.
+- Both lockfiles and installed metadata reconcile to 180 CLI lock rows/181 discovered records and 233 web lock rows/246 discovered records, with bundled extras identified and zero missing declared-license fields.
+- All six prospective publishable npm tarballs omit `LICENSE`/`NOTICE`; web transitive assets include MPL-2.0, LGPL-3.0-or-later, and CC-BY-4.0 obligations; one copied web file is identical and four are modified without in-place provenance.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -40,7 +42,7 @@ Execution started. `TRUTH-001` through `TRUTH-005` are complete. CLI/hosted base
 
 ## Next task
 
-`TRUTH-006`: inventory direct and transitive dependencies, existing licenses/notices, external engines, standards libraries, fixture licenses, and modification obligations.
+`TRUTH-007`: inventory every outbound request, payload field, opt-in/out path, retention assumption, credential/log surface, and upload-consent boundary.
 
 ## Scope hold
 
@@ -51,4 +53,6 @@ Execution started. `TRUTH-001` through `TRUTH-005` are complete. CLI/hosted base
 ## Blockers
 
 - None for local documentation work.
+- The next npm publication is blocked until each tarball carries the Apache license and required third-party notices.
+- Redistribution of reviewed web binaries/data, copied CLI-origin web files, external engines, standards schemas, and public fixtures is blocked until the applicable notice, source, provenance, modification, and legal-review gates pass.
 - External POC and campaign remain intentionally blocked until release-candidate gates pass.
