@@ -49,3 +49,11 @@ Free local scanning remains useful without signup, source upload, or scan meteri
 Analytics is affirmative, revocable, coarse, and separate from authenticated product synchronization. Stable project fingerprints, project names, license/account/machine identifiers, IP-derived digests, and destination URLs are identifying or pseudonymous data and must not be described as anonymous. CI, quiet, non-interactive, and agent execution default to no analytics.
 
 No telemetry dataset ships without a named owner, enforced retention, deletion path, access policy, and tests preventing source, absolute paths, finding text/snippets, matched secrets, signing material, raw credentials, and customer identifiers from entering analytics, logs, public verification, or support artifacts. Upload and public publication require separate exact-field previews and explicit approval. See `VERGLOS_TELEMETRY_AND_PRIVACY_INVENTORY.md`.
+
+## 2026-09-08 — Immutable hosted usage and evidence-backed cost
+
+Verglos keeps customer allowance accounting separate from internal provider cost. Seats, monitored applications, and client workspaces are current-state gauges; canonical hosted records are idempotent monthly ingestion counters; storage, public verification, alert delivery, advisory work, managed execution, and support have stable measurable units even when no sellable allowance is approved.
+
+Usage is append-only, versioned, tenant-scoped, and reservation-backed. Corrections compensate rather than rewrite. At 80% the owner is warned once per dimension/window; the included amount remains usable through 100%, and only the next new hosted increment is denied unless an explicit pre-authorized overage exists. Existing hosted records and all local operation remain available.
+
+Unknown allowance or provider-cost values remain `unset`/unknown, never unlimited or zero. Cost claims require dated invoice/export evidence or a clearly labeled measured estimate with an allocation rule and unattributed remainder. See `VERGLOS_HOSTED_COST_AND_USAGE_LEDGER.md`.

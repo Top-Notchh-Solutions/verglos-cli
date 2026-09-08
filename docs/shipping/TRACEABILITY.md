@@ -15,6 +15,7 @@
 | Open-core boundary | ownership + license class | TRUTH-005, LIC | Package/feed inventory, modified-CLI server enforcement, license/notice classifier, signing-identity rotation | decided; inventory: `VERGLOS_OPEN_CORE_AND_COMMERCIAL_BOUNDARY.md` |
 | Third-party compliance | dependency/asset inventory | TRUTH-006, LIC/DIST | Clean-store classifier, artifact notices/SBOM, copied-file provenance, external engine/schema/fixture records | partial; baseline: `VERGLOS_THIRD_PARTY_INVENTORY.md`; redistribution blockers open |
 | Telemetry and privacy | consent + data-field registry | TRUTH-007, OPS-012, hosted/agent/record/security epics | Outbound-request inventory; canary leakage tests; consent/revoke; retention/deletion; SSRF/egress; credential/log redaction | partial; baseline: `VERGLOS_TELEMETRY_AND_PRIVACY_INVENTORY.md`; runtime gates open |
+| Hosted usage and cost | immutable usage/reservation/cost ledger | TRUTH-008, HOSTED-009, PLAN-WEB-001/005-010, OPS-013 | Replay/reconciliation; concurrency/idempotency; 80/100 thresholds; overage consent; provider-invoice and privacy tests | planned; design: `VERGLOS_HOSTED_COST_AND_USAGE_LEDGER.md`; current COGS unknown |
 | Pro/Team/Studio/Enterprise UI | dashboard contract | dashboard epics | authorization and role journeys | planned |
 | Final acceptance | acceptance contract | POST-RC | frozen corpus and authorized POC | not-started |
 
