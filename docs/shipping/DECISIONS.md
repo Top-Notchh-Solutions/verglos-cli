@@ -57,3 +57,11 @@ Verglos keeps customer allowance accounting separate from internal provider cost
 Usage is append-only, versioned, tenant-scoped, and reservation-backed. Corrections compensate rather than rewrite. At 80% the owner is warned once per dimension/window; the included amount remains usable through 100%, and only the next new hosted increment is denied unless an explicit pre-authorized overage exists. Existing hosted records and all local operation remain available.
 
 Unknown allowance or provider-cost values remain `unset`/unknown, never unlimited or zero. Cost claims require dated invoice/export evidence or a clearly labeled measured estimate with an allocation rule and unattributed remainder. See `VERGLOS_HOSTED_COST_AND_USAGE_LEDGER.md`.
+
+## 2026-09-08 — Additive tenant/evidence migration with honest legacy types
+
+Hosted data migrates by expand, idempotent backfill, dual write, shadow read, per-surface cutover, and only later contract. Target rows retain a unique legacy mapping and source digest; ambiguous or unsafe data is quarantined. Rollback uses compatible schemas and feature-controlled reads/writes or a forward fix, not destructive down migrations after new data exists.
+
+Each current user receives at most a provisional personal tenant and owner membership; an email domain never creates an organization. License/fingerprint rows may seed provisional applications within that license only. Legacy score history remains a score projection, reports remain quarantined until ownership/schema/privacy validation, and random-hash attest summaries remain legacy public summaries. Migration never invents an exact subject, release decision, observation lineage, signature, record digest, or verification.
+
+No target resource becomes authoritative before tenant-scoped data access, negative authorization, count/digest reconciliation, old-client compatibility, and tested backup/restore pass. Old tables remain available through the rollback and retention windows. See `VERGLOS_DATA_AND_SCHEMA_MIGRATION_INVENTORY.md`.
