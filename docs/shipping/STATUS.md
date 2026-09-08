@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`TARGET-004`: filesystem subject resolver, following completed CONTRACT-012 and TARGET-001-003.
+`TARGET-005`: generic artifact resolver, following completed TARGET-004.
 
 ## Scope hold
 
