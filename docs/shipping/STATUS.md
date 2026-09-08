@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Epic 00 is complete. `CONTRACT-001` through `CONTRACT-003` now establish version/canonicalization primitives, content-bound subjects, and explicit producer component/trust/capability/freshness plus run/coverage state. Canonical observations are next; no target resolver, engine execution, or new public command is claimed yet.
+Epic 00 is complete. `CONTRACT-001` through `CONTRACT-004` now establish version/canonicalization primitives, immutable subjects, producer/run health, and canonical observations with preserved origin, raw lineage, normalized mappings, redaction, and extension boundaries. AI-change context is next; no target resolver, engine execution, or new public command is claimed yet.
 
 ## Last verified checks
 
@@ -62,11 +62,12 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-003` now establish version
 - Subject IDs bind immutable content/context only. Registry/tag/path/size labels cannot replace digests, and subject possession grants no tenant ownership, provenance, coverage, policy result, signature validity, or publication authority.
 - `verglos-cli@a71fba7`: the cache-bypassed graph passed 20/20 tasks and 135/135 tests. Thirteen engine/run tests cover healthy and non-healthy state, missing/incompatible/stale reasons, component trust/freshness linkage, process/outcome consistency, timeout/capability/time bounds, successful-but-incomplete coverage, prohibited target execution, and future schema upgrades.
 - Engine process success and evidence completeness are distinct. Any non-successful run or non-healthy engine is structurally unable to report complete coverage, while successful partial work remains explicitly incomplete rather than empty success.
+- `verglos-cli@65ea279`: 45/45 focused shared tests pass, including ten observation tests for origin/raw lineage, locations, redaction, namespaced extension bounds, safe references, unknown mappings, and future versions. A fresh full graph remains the next verification step.
 - No final V1 implementation claim is authorized by those checks.
 
 ## Next task
 
-`CONTRACT-004`: add the canonical observation contract for native/imported/adapter coverage, stable IDs, subject/run binding, locations/layers, package identifiers, original and normalized severity, confidence, remediation, redacted evidence, references, and namespaced extensions.
+`CONTRACT-005`: add the AI-change context contract separating heuristic, declared, and cryptographic provenance with exact subject binding, method, confidence, signals, and limitations.
 
 ## Scope hold
 
