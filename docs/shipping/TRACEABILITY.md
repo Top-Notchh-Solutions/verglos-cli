@@ -11,7 +11,7 @@
 | Hunt | agent safety + verification | AGENT/HUNT epic | Current: none; required: isolation, network, resource, verdict tests | partial shell; evidence: `packages/cli/src/hunt.ts`, `packages/hunt/src/index.ts` |
 | Signed `.vgl` record | prove contract | PROVE epic | Current: none; hosted random-hash summary is not evidence; required: offline verification, tamper, redaction | planned; evidence: `VERGLOS_WEB_CAPABILITY_INVENTORY.md` |
 | Monitoring | hosted data/ops | HOSTED/OPERATIONS | Current: 7 CLI management tests, 0 hosted tests; required: registration, idempotency, retry, advisory update, delivery | partial integration; evidence: both capability inventories |
-| Plan enforcement | commercial contract | COMM/BILLING | Current: 25 CLI entitlement/JWT tests, 0 hosted tests; required: concurrency, modified CLI, overage | partial; evidence: both capability inventories |
+| Plan enforcement | commercial contract | TRUTH-004, COMM/BILLING | Current: 25 CLI entitlement/JWT tests, 0 hosted tests; required: catalog, migration, concurrency, modified CLI, overage | partial; authority/migration: `VERGLOS_PLAN_AND_CAPABILITY_RECONCILIATION.md` |
 | Pro/Team/Studio/Enterprise UI | dashboard contract | dashboard epics | authorization and role journeys | planned |
 | Final acceptance | acceptance contract | POST-RC | frozen corpus and authorized POC | not-started |
 
