@@ -41,3 +41,11 @@ Verglos brand and official signing authority are protected identities, not permi
 Unknown or unreviewed license, notice, provenance, modification, trademark, source-offer, or service-term status blocks bundling and redistribution of that asset, not local architecture work. A user-supplied external engine may be invoked through an open adapter before Verglos is authorized to redistribute the engine.
 
 Release compliance is measured from actual artifacts, not only manifests: npm tarballs, platform packages, deployed/downloadable web output, engine caches, standards schemas, recipe feeds, and offline bundles each require generated notices and an SBOM where applicable. See `VERGLOS_THIRD_PARTY_INVENTORY.md`.
+
+## 2026-09-08 — Local-first privacy and purpose-separated consent
+
+Free local scanning remains useful without signup, source upload, or scan metering. `Local` does not mean zero network: any registry, advisory, provider-verification, account, analytics, upload, publication, or delivery request must name its recipient and fields and expose the applicable control before execution.
+
+Analytics is affirmative, revocable, coarse, and separate from authenticated product synchronization. Stable project fingerprints, project names, license/account/machine identifiers, IP-derived digests, and destination URLs are identifying or pseudonymous data and must not be described as anonymous. CI, quiet, non-interactive, and agent execution default to no analytics.
+
+No telemetry dataset ships without a named owner, enforced retention, deletion path, access policy, and tests preventing source, absolute paths, finding text/snippets, matched secrets, signing material, raw credentials, and customer identifiers from entering analytics, logs, public verification, or support artifacts. Upload and public publication require separate exact-field previews and explicit approval. See `VERGLOS_TELEMETRY_AND_PRIVACY_INVENTORY.md`.

@@ -14,6 +14,7 @@
 | Plan enforcement | commercial contract | TRUTH-004, COMM/BILLING | Current: 25 CLI entitlement/JWT tests, 0 hosted tests; required: catalog, migration, concurrency, modified CLI, overage | partial; authority/migration: `VERGLOS_PLAN_AND_CAPABILITY_RECONCILIATION.md` |
 | Open-core boundary | ownership + license class | TRUTH-005, LIC | Package/feed inventory, modified-CLI server enforcement, license/notice classifier, signing-identity rotation | decided; inventory: `VERGLOS_OPEN_CORE_AND_COMMERCIAL_BOUNDARY.md` |
 | Third-party compliance | dependency/asset inventory | TRUTH-006, LIC/DIST | Clean-store classifier, artifact notices/SBOM, copied-file provenance, external engine/schema/fixture records | partial; baseline: `VERGLOS_THIRD_PARTY_INVENTORY.md`; redistribution blockers open |
+| Telemetry and privacy | consent + data-field registry | TRUTH-007, OPS-012, hosted/agent/record/security epics | Outbound-request inventory; canary leakage tests; consent/revoke; retention/deletion; SSRF/egress; credential/log redaction | partial; baseline: `VERGLOS_TELEMETRY_AND_PRIVACY_INVENTORY.md`; runtime gates open |
 | Pro/Team/Studio/Enterprise UI | dashboard contract | dashboard epics | authorization and role journeys | planned |
 | Final acceptance | acceptance contract | POST-RC | frozen corpus and authorized POC | not-started |
 
