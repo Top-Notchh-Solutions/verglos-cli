@@ -17,6 +17,7 @@
 | Frozen fixtures and validators | `VERGLOS_CONTRACT_FIXTURE_HARNESS.md` | CONTRACT-012 | 2 shared tests: valid/invalid/legacy fixture classes, deterministic canonical output, bounded malformed/unsupported handling | implemented at `d4b1296`; downstream consumers use the shared dispatch boundary |
 | Target resolver boundary | `VERGLOS_TARGET_RESOLVER_CONTRACT.md` | TARGET-001 | 2 shared tests: explicit target syntax, capability mapping, no-project-execution context | implemented at `3b1877e`; concrete target resolvers remain TARGET-002-010 |
 | Git repository resolver | `VERGLOS_REPOSITORY_RESOLVER.md` | TARGET-002 | 2 shared tests: typed non-repository/invalid-target handling and Git metadata boundary | implemented at `1ec9ba8`; platform/path and deeper dirty/submodule qualification remain open |
+| Package metadata resolver | `VERGLOS_PACKAGE_RESOLVER.md` | TARGET-003 | 2 shared tests: metadata-only package identity and missing/malformed metadata | implemented at `ee5b4b9`; lockfile/build/workspace enrichment remains open |
 | Native JS/TS scan | command + observation | TRUTH-001, CONTRACT-001 | Current: 58 scanner tests in `packages/scanner/src/**/*.test.ts`; required: frozen detector fixtures and determinism | shipped; evidence: `VERGLOS_CLI_CAPABILITY_INVENTORY.md` |
 | External evidence import | observation + adapter | IMPORT-001/002, ENGINES | SARIF/SBOM/VEX malformed and attribution fixtures | planned |
 | Source-to-artifact identity | subject + lineage | TARGET-001, GRAPH-001 | digest mismatch/incomplete tests | planned |

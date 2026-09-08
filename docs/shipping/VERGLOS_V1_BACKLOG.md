@@ -108,7 +108,7 @@ Evidence/problem: the current scanner accepts a project path and fingerprint but
 
 - [x] **TARGET-001** · target resolver package boundary · deps: CONTRACT-002/011 · Add resolver interface, capability discovery, explicit target syntax, and no-execution invariant. Commit(s): `3b1877e`
 - [x] **TARGET-002** · repository/worktree resolver · deps: TARGET-001 · Resolve root, HEAD commit/tree, dirty state, submodule status, shallow state, and safe relative paths. Tests: detached HEAD, no Git, dirty tree, symlink escape. Commit(s): `1ec9ba8`
-- [ ] **TARGET-003** · package/build metadata resolver · deps: TARGET-001/002 · Resolve package manager, lockfile digest, package identity/version, build config inputs, and workspace membership without executing scripts. Commit(s): —
+- [x] **TARGET-003** · package/build metadata resolver · deps: TARGET-001/002 · Resolve package manager, lockfile digest, package identity/version, build config inputs, and workspace membership without executing scripts. Commit(s): `ee5b4b9`
 - [ ] **TARGET-004** · filesystem subject resolver · deps: TARGET-001 · Produce deterministic tree/content digest with ignore policy and explicit unreadable/skipped coverage. Tests: ordering, permission failure, symlink cycles, path traversal. Commit(s): —
 - [ ] **TARGET-005** · generic artifact resolver · deps: TARGET-001 · Hash regular files/directories, record media type/size, reject special devices, and stream within size limits. Commit(s): —
 - [ ] **TARGET-006** · SBOM subject resolver · deps: TARGET-001 · Bind imported CycloneDX/SPDX documents to their declared subject and document digest; mismatch is incomplete. Commit(s): —

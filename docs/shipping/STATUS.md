@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`TARGET-003`: package/build metadata resolver, following completed CONTRACT-012, TARGET-001, and TARGET-002.
+`TARGET-004`: filesystem subject resolver, following completed CONTRACT-012 and TARGET-001-003.
 
 ## Scope hold
 
