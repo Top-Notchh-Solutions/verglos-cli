@@ -27,3 +27,11 @@ Migration is dual-read and reversible. Existing licenses retain access; Sentinel
 ## 2026-09-08 — Language truth
 
 V1 is language-neutral at artifact, policy, record, and import layers, but native deep SAST remains JS/TS. Imported or external coverage must be labeled separately.
+
+## 2026-09-08 — Open-core and protected-value boundary
+
+All eight current CLI packages are Apache-2.0 core, including private npm package shells. Existing detector and explanation source cannot be silently converted into premium content. Local evidence contracts, import/export, record creation, and independent verification remain open and useful without hosted signup.
+
+Commercial value is the server-authorized operation of authentication, tenants, billing, monitoring, retention, delivery, collaboration, approvals, client workspaces, managed runners, SLA, and support. New premium rule/policy packs and signed Hunt recipes may be separately licensed only when their content license, provenance, digest, update, entitlement, notice, and revocation contracts are approved. Third-party and customer data retain their own ownership class.
+
+Verglos brand and official signing authority are protected identities, not permissions granted by access to source. Public verification roots may be distributed; private keys and official release authority remain controlled and revocable. See `VERGLOS_OPEN_CORE_AND_COMMERCIAL_BOUNDARY.md`.
