@@ -10,3 +10,4 @@ export * from "./engine.js";
 export * from "./observation.js";
 export * from "./ai-change-context.js";
 export * from "./verification.js";
+export * from "./exception.js";
