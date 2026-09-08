@@ -9,6 +9,7 @@ export const VERGLOS_SCHEMA_IDS = {
   engineHealth: "urn:verglos:schema:engine-health",
   toolRun: "urn:verglos:schema:tool-run",
   observation: "urn:verglos:schema:observation",
+  aiChangeContext: "urn:verglos:schema:ai-change-context",
 } as const;
 
 export interface SchemaDescriptor {
