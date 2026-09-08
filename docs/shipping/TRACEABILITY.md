@@ -19,6 +19,7 @@
 | Hosted data migration | tenant/application/subject/evidence migration map | TRUTH-009, HOSTED-001-013 | Clean schema; idempotent backfill; shadow parity; tenant negatives; old-client matrix; restore/rollback | planned; baseline: `VERGLOS_DATA_AND_SCHEMA_MIGRATION_INVENTORY.md`; no destructive migration authorized |
 | CLI compatibility | current command/process contract | TRUTH-010, CONTRACT/AGENT/HUNT/RECORD/PLAN-CLI/DIST | One isolated process fixture per current command plus root/watch/MCP; artifact/config readers; old CLI/server matrix | partial; baseline: `VERGLOS_COMMAND_COMPATIBILITY_INVENTORY.md`; direct process coverage absent |
 | V1 architecture | modular monolith/workers + producer/data/signing boundaries | TRUTH-011, all implementation epics | Engine exit; tenant negatives; migration/restore; queue/object failure; usage concurrency; signing trust separation | decided; governing set: `VERGLOS_ARCHITECTURE_DECISION_SET.md`; provider selections deferred |
+| Risk governance | owned trigger/mitigation/rollback/gate register | TRUTH-012, all implementation/release gates | Risk-specific executable evidence; blocker review; residual acceptance expiry/reversal | active; 39 risks in `RISKS.md`; seven immediate release blockers |
 | Pro/Team/Studio/Enterprise UI | dashboard contract | dashboard epics | authorization and role journeys | planned |
 | Final acceptance | acceptance contract | POST-RC | frozen corpus and authorized POC | not-started |
 

@@ -81,3 +81,9 @@ V1 uses an Apache local evidence core behind one signed `verglos` npm front door
 Postgres owns transactional metadata/authorization; content-addressed object storage owns bounded evidence payloads; a transactional outbox and durable at-least-once queue own asynchronous work. Queue and object providers remain deferred until measured contract, security, privacy, recovery, exit, and actual-cost gates pass.
 
 Customer local, organization, and Verglos official signing authorities are separate. Verglos official keys sign Verglos-controlled releases/content/receipts, never customer evidence as a Verglos-authored security fact. No universal customer signing key is held. See `VERGLOS_ARCHITECTURE_DECISION_SET.md`.
+
+## 2026-09-08 — Risk closure requires executable evidence
+
+Every V1 risk has a stable ID, accountable owner, severity, trigger, prevention/detection evidence, rollback or containment action, blocking release gate, status, and residual-risk statement. Documentation alone cannot close a risk. Critical risks block the affected feature/release; high-risk exceptions require bounded founder and owner acceptance with evidence, expiry, and reversal trigger.
+
+Current report authorization, generic-webhook SSRF, raw credential/project-linked telemetry, package notice omissions, unreproducible foundational schema, false-clean monitoring/delivery, and unbound payment amount/catalog behavior are active release blockers. See `RISKS.md`.
