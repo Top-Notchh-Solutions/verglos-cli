@@ -8,3 +8,4 @@ export * from "./schema.js";
 export * from "./subject.js";
 export * from "./engine.js";
 export * from "./observation.js";
+export * from "./ai-change-context.js";
