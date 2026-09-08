@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-010` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, additive hosted-data migration, and current CLI compatibility are now recorded without changing runtime behavior.
+Execution started. `TRUTH-001` through `TRUTH-011` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, hosted usage/cost units, additive hosted-data migration, current CLI compatibility, and the V1 architecture set are now recorded without changing runtime behavior.
 
 ## Last verified checks
 
@@ -47,6 +47,9 @@ Execution started. `TRUTH-001` through `TRUTH-010` are complete. CLI/hosted base
 - Root help execution confirms 19 top-level commands and four monitor subcommands. The current binary has no universal JSON/quiet/config/policy flags and `scan` remains current-working-directory only.
 - Current command defaults, report/config/credential/hook artifacts, network effects, stdout/stderr, and command-specific exits map to 24 required isolated process fixtures, including root and watch behavior.
 - Known compatibility risks include mandatory update gating, divergent scan-wrapper coverage, malformed threshold/timeout acceptance, hook overwrite/false success, incomplete monitor states returning zero, mixed JSON/prose MCP config output, and Hunt/Attest entitlement-denied 3 versus shell 78 exits.
+- Twelve architecture decisions now freeze the Apache local core, one signed npm front door, producer-independent language-neutral contracts, JS/TS native coverage label, hosted modular monolith/durable workers, Postgres/object split, transactional outbox/queue, server catalog/usage authority, and separated signing identities.
+- Queue and object-storage providers remain intentionally deferred until contract, security, privacy, recovery, exit, representative-load, and actual-cost gates pass; the current sequential cron and relational JSON are not accepted substitutes.
+- Material current contradictions are mapped to owners, including default scan networking, file/scanner-shaped contracts, user/license-centric hosted data, absent durable operations/object custody/usage authority, unsigned summaries, and incomplete schema migration control.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -54,7 +57,7 @@ Execution started. `TRUTH-001` through `TRUTH-010` are complete. CLI/hosted base
 
 ## Next task
 
-`TRUTH-011`: record the material architecture decisions and unresolved provider/signing gates now that plan, cost, privacy, and migration inputs are complete.
+`TRUTH-012`: expand the risk register with accountable owners, severity, triggers, mitigations, rollback, and release gates for licensing, migration, tenancy, SSRF, Hunt, signatures, quotas, cost, and privacy.
 
 ## Scope hold
 
