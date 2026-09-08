@@ -10,6 +10,7 @@ This is the classification source for implementation docs, dashboard labels, pri
 
 - CLI: [`VERGLOS_CLI_CAPABILITY_INVENTORY.md`](./VERGLOS_CLI_CAPABILITY_INVENTORY.md), reviewed at CLI commit `caa2a56`.
 - Hosted: [`VERGLOS_WEB_CAPABILITY_INVENTORY.md`](./VERGLOS_WEB_CAPABILITY_INVENTORY.md), reviewed at web commit `5044e77`.
+- Commercial migration: [`VERGLOS_PLAN_AND_CAPABILITY_RECONCILIATION.md`](./VERGLOS_PLAN_AND_CAPABILITY_RECONCILIATION.md), decided at `f8515dc`.
 - Target: `docs/VERGLOS_PRODUCT_ARCHITECTURE_BLUEPRINT.md` and `docs/VERGLOS_COMPANY_USAGE_AND_FEATURE_MAP.md`.
 - Interfaces: `VERGLOS_COMMAND_AND_UI_CONTRACT.md` and `VERGLOS_AGENT_AND_MCP_CONTRACT.md`.
 - Acceptance: `VERGLOS_FINAL_ACCEPTANCE_AND_POC.md` and `RELEASE_GATES.md`.

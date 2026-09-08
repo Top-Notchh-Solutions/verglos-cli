@@ -24,13 +24,14 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-003` are complete. CLI and hosted inventories establish the baseline, and the command/capability truth registry now locks bounded public wording without changing runtime behavior.
+Execution started. `TRUTH-001` through `TRUTH-004` are complete. CLI/hosted baselines, bounded capability wording, and the reversible canonical plan/catalog migration are now decided without changing runtime behavior.
 
 ## Last verified checks
 
 - `verglos-cli`: `TRUTH-001` inventory counts reconcile to 19 top-level commands, 11 detectors, 9 MCP tools, 8 packages, and 100 package-discovered tests.
 - `verglos-web`: `TRUTH-002` inventory counts reconcile to 20 API route files, 21 HTTP handlers, 22 page routes, 12 database tables, and 0 application tests.
 - `verglos-cli`: `TRUTH-003` registry names owner, evidence, review date, state, and permitted wording for current and planned command/capability families.
+- `verglos-cli`: `TRUTH-004` reconciles plan IDs, aliases, pricing hypotheses, allowances, capability drift, enforcement, and migration preconditions.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -38,7 +39,7 @@ Execution started. `TRUTH-001` through `TRUTH-003` are complete. CLI and hosted 
 
 ## Next task
 
-`TRUTH-004`: reconcile every current CLI/web plan, capability, database, checkout, and account mismatch before changing commercial behavior.
+`TRUTH-005`: classify the Apache core, commercial hosted operations, maintained rules/recipes, and protected brand/signing boundaries.
 
 ## Scope hold
 
