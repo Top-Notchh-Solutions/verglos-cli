@@ -8,6 +8,7 @@ export const VERGLOS_SCHEMA_IDS = {
   subject: "urn:verglos:schema:subject",
   engineHealth: "urn:verglos:schema:engine-health",
   toolRun: "urn:verglos:schema:tool-run",
+  observation: "urn:verglos:schema:observation",
 } as const;
 
 export interface SchemaDescriptor {
