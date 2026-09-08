@@ -5,7 +5,7 @@ This is the single classification source for implementation, docs, dashboard lab
 Detailed current-state evidence:
 
 - CLI: [`VERGLOS_CLI_CAPABILITY_INVENTORY.md`](./VERGLOS_CLI_CAPABILITY_INVENTORY.md), reviewed 2026-09-08 at behavior baseline `caa2a56`.
-- Hosted web: pending `TRUTH-002`; do not promote a CLI-to-hosted integration into an end-to-end shipped claim before that audit.
+- Hosted web: [`VERGLOS_WEB_CAPABILITY_INVENTORY.md`](./VERGLOS_WEB_CAPABILITY_INVENTORY.md), reviewed 2026-09-08 at web behavior baseline `5044e77`.
 
 ## Shipped
 
@@ -24,7 +24,10 @@ Detailed current-state evidence:
 - Login, activation, license status, entitlement, and telemetry clients exist; server behavior remains an end-to-end claim pending the hosted audit.
 - `verglos ci --hunt` and `verglos scan --hunt` do not run Hunt verification.
 - Plan/config/capability vocabularies conflict and the current CLI has no Team tier.
-- Hosted dashboard, billing, and entitlement surfaces exist in the current web repository but are not the final V1 control plane.
+- Hosted auth, Pro QR payment, licensing, telemetry, monitoring, score history, and account surfaces have implementations but no application tests and are not the final V1 control plane.
+- Hosted monitoring has no durable queue/retry/dead-letter path; failed attempts are currently written into the dedup ledger.
+- Hosted attestation stores an unsigned caller-supplied summary. Its random URL hash is an identifier, not a report digest or signature, and the current CLI shell does not publish it.
+- The legacy hosted report viewer has an authorization edge case when the signed-in Clerk user has no database user row.
 
 ## Planned V1
 
@@ -55,3 +58,5 @@ Detailed current-state evidence:
 5. No customer, revenue, benchmark, exploitability, or compliance claim is public without a source and date.
 6. “Local” means source and reports remain local unless a user explicitly uploads them; it does not imply zero network. Current scans can query npm/OSV, entitlement, updates, and telemetry.
 7. Current telemetry may contain a derived repository/package name and an authorization bearer; do not claim “no identity” without the field-level qualification in the CLI inventory.
+8. “Verify” is reserved for cryptographic or explicitly scoped evidence verification. A random-hash database lookup cannot be described as independent attestation verification.
+9. Route/table/UI presence is not proof of configured production operation, delivery reliability, authorization safety, or release readiness.
