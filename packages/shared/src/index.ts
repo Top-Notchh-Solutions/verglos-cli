@@ -13,3 +13,4 @@ export * from "./verification.js";
 export * from "./exception.js";
 export * from "./policy-evaluation.js";
 export * from "./release-decision.js";
+export * from "./record-manifest.js";
