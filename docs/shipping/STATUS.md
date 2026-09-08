@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-007` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, and telemetry/privacy boundaries are now recorded without changing runtime behavior.
+Execution started. `TRUTH-001` through `TRUTH-008` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, telemetry/privacy boundaries, and hosted usage/cost units are now recorded without changing runtime behavior.
 
 ## Last verified checks
 
@@ -38,6 +38,9 @@ Execution started. `TRUTH-001` through `TRUTH-007` are complete. CLI/hosted base
 - The current CLI/scanner/MCP raw-`fetch` inventory contains 13 source files; default scans can perform update, npm/OSV, and analytics requests, while no current CLI path uploads source or generated reports.
 - Current scan telemetry is default-on, can include a stable project fingerprint and project name, and attaches a raw paid-license bearer; it is pseudonymous/account-linked product data rather than anonymous analytics.
 - All 12 hosted tables have been classified for sensitive fields and retention/deletion truth; no complete privacy export/deletion workflow or code-enforced table-retention program exists, and generic monitor delivery has an open SSRF gate.
+- Hosted allowance semantics now distinguish concurrent seat/application/client-workspace gauges, idempotent monthly record ingestion, and separately measured storage, verification, delivery, advisory, managed-execution, and support work.
+- The target 2/5/10 seat, 5/25/100 monitored-app, 100/500/2,000 monthly-record, and 90-day/12-month/3-year retention values map to stable units; all unapproved numeric allowances remain `unset`, not unlimited.
+- Current hosted schema has no catalog version, immutable usage event, quota reservation, aggregate, provider-cost entry, or overage authorization; per-plan COGS remains unknown pending dated provider evidence and representative measurement.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -45,7 +48,7 @@ Execution started. `TRUTH-001` through `TRUTH-007` are complete. CLI/hosted base
 
 ## Next task
 
-`TRUTH-008`: define the hosted cost/usage ledger units and map them to plan allowances without inventing provider costs.
+`TRUTH-009`: map current hosted tables and API consumers to the target tenant/project/subject/evidence model, including reversible dual-read/write and rollback needs.
 
 ## Scope hold
 
