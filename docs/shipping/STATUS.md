@@ -24,7 +24,7 @@ Build and qualify the complete V1 before external POC, Reddit validation, public
 
 ## Active task
 
-Execution started. `TRUTH-001` through `TRUTH-006` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, and third-party redistribution gates are now recorded without changing runtime behavior.
+Execution started. `TRUTH-001` through `TRUTH-007` are complete. CLI/hosted baselines, bounded capability wording, reversible plan migration, open-core ownership, third-party redistribution gates, and telemetry/privacy boundaries are now recorded without changing runtime behavior.
 
 ## Last verified checks
 
@@ -35,6 +35,9 @@ Execution started. `TRUTH-001` through `TRUTH-006` are complete. CLI/hosted base
 - `verglos-cli`: `TRUTH-005` assigns all eight packages and each current/target feed one primary ownership class, with unresolved license, attribution, trademark, and signing controls held as explicit gates.
 - Both lockfiles and installed metadata reconcile to 180 CLI lock rows/181 discovered records and 233 web lock rows/246 discovered records, with bundled extras identified and zero missing declared-license fields.
 - All six prospective publishable npm tarballs omit `LICENSE`/`NOTICE`; web transitive assets include MPL-2.0, LGPL-3.0-or-later, and CC-BY-4.0 obligations; one copied web file is identical and four are modified without in-place provenance.
+- The current CLI/scanner/MCP raw-`fetch` inventory contains 13 source files; default scans can perform update, npm/OSV, and analytics requests, while no current CLI path uploads source or generated reports.
+- Current scan telemetry is default-on, can include a stable project fingerprint and project name, and attaches a raw paid-license bearer; it is pseudonymous/account-linked product data rather than anonymous analytics.
+- All 12 hosted tables have been classified for sensitive fields and retention/deletion truth; no complete privacy export/deletion workflow or code-enforced table-retention program exists, and generic monitor delivery has an open SSRF gate.
 - `verglos-cli`: documentation diff check passed after the execution-state update.
 - `verglos-web`: `pnpm typecheck` passed.
 - `verglos-web`: `pnpm build` passed.
@@ -42,7 +45,7 @@ Execution started. `TRUTH-001` through `TRUTH-006` are complete. CLI/hosted base
 
 ## Next task
 
-`TRUTH-007`: inventory every outbound request, payload field, opt-in/out path, retention assumption, credential/log surface, and upload-consent boundary.
+`TRUTH-008`: define the hosted cost/usage ledger units and map them to plan allowances without inventing provider costs.
 
 ## Scope hold
 
