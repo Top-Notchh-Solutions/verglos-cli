@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`TARGET-011`: `verglos target inspect` command, following completed TARGET-010.
+`ENGINE-001`: EngineAdapter contract implementation, following completed TARGET-011.
 
 ## Scope hold
 
