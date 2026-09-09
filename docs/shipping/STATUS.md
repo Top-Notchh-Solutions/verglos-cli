@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`AGENT-003`: MCP read-only input validation added preparatorily; check-before-write and explain-finding reject type coercion and enforce existing bounds. Other tools and authority enforcement remain open.
+`AGENT-004`: MCP capability discovery now reconciles the server tool list against shared capability truth and fails closed on drift. Entitlement and runtime side-effect enforcement remain open.
 
 ## Scope hold
 
