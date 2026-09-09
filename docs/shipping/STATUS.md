@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`AGENT-004`: MCP capability discovery now reconciles the server tool list against shared capability truth and fails closed on drift. Entitlement and runtime side-effect enforcement remain open.
+`AGENT-005`: MCP read-only validators now cover check-before-write, explain-finding, and check-package type/boundary inputs. Network lookup safety and full tool contract remain open.
 
 ## Scope hold
 
