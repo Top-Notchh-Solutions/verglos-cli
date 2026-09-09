@@ -33,6 +33,7 @@ export * from "./trivy-run-metadata.js";
 export * from "./trivy-compatibility.js";
 export * from "./trivy-failure-policy.js";
 export * from "./trivy-evidence.js";
+export * from "./fixture-engine.js";
 export * from "./engine-manifest.js";
 export * from "./engine-cache.js";
 export * from "./archive-safety.js";
