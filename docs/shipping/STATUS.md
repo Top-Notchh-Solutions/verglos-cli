@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`TARGET-007`: OCI reference parser and registry boundary, following completed TARGET-006.
+`TARGET-008`: OCI manifest/index resolver, following completed TARGET-007.
 
 ## Scope hold
 
