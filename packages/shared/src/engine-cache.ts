@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, rm, writeFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 
 export class EngineCacheError extends Error {
@@ -19,3 +19,13 @@ export async function installEngineArtifact(cacheRoot: string, engineId: string,
 }
 
 export async function readCachedEngine(cacheRoot: string, engineId: string, version: string): Promise<Buffer> { return readFile(join(cacheRoot, engineId, version, "engine.bin")); }
+
+export async function listCachedEngines(cacheRoot: string): Promise<readonly { readonly engineId: string; readonly version: string; readonly digest: string }[]> {
+  const result: { engineId: string; version: string; digest: string }[] = [];
+  for (const engineId of (await readdir(cacheRoot, { withFileTypes: true }).catch(() => [])).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort()) {
+    for (const version of (await readdir(join(cacheRoot, engineId), { withFileTypes: true }).catch(() => [])).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort()) {
+      try { const bytes = await readCachedEngine(cacheRoot, engineId, version); result.push({ engineId, version, digest: `sha256:${createHash("sha256").update(bytes).digest("hex")}` }); } catch { /* incomplete cache entry is omitted from trusted status */ }
+    }
+  }
+  return Object.freeze(result);
+}
