@@ -26,3 +26,4 @@ export * from "./oci-reference.js";
 export * from "./oci-resolver.js";
 export * from "./oci-layout-resolver.js";
 export * from "./source-artifact-linkage.js";
+export * from "./engine-adapter.js";
