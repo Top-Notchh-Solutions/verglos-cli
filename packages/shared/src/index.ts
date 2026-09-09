@@ -55,3 +55,4 @@ export * from "./policy-document.js";
 export * from "./policy-loader.js";
 export * from "./policy-profiles.js";
 export * from "./baseline.js";
+export * from "./baseline-store.js";
