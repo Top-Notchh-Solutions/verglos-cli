@@ -9,7 +9,10 @@ export interface DedupProjection {
   }[];
 }
 
+export class DeduplicationLimitError extends Error { override readonly name = "DeduplicationLimitError"; }
+
 export function deduplicateObservations(items: readonly CorrelationInput[]): DedupProjection {
+  if (items.length > 10_000) throw new DeduplicationLimitError("Deduplication input exceeds the bounded 10000-item limit.");
   const exact = correlateObservations(items);
   const fuzzyReview: { left: string; right: string; reason: string }[] = [];
 
@@ -27,5 +30,6 @@ export function deduplicateObservations(items: readonly CorrelationInput[]): Ded
     }
   }
 
-  return { exact, fuzzyReview: Object.freeze(fuzzyReview) };
+  const unique = new Map(fuzzyReview.map((candidate) => [`${candidate.left}\0${candidate.right}\0${candidate.reason}`, candidate]));
+  return { exact, fuzzyReview: Object.freeze([...unique.values()].sort((a, b) => a.left.localeCompare(b.left) || a.right.localeCompare(b.right) || a.reason.localeCompare(b.reason))) };
 }
