@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`ENGINE-004`: safe archive downloader/extractor; system-engine inspection is complete, but archive decoding remains open.
+`IMPORT-002`: SARIF structural hardening; nested validation is implemented preparatorily, while standards-complete preservation and canonical observation mapping remain open.
 
 ## Scope hold
 
