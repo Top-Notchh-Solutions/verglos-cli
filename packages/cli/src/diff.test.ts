@@ -10,6 +10,6 @@ test("diff command rejects malformed snapshots with usage exit", async () => {
   try {
     await writeFile(join(root, "base.json"), "{}", "utf8");
     await writeFile(join(root, "head.json"), "{}", "utf8");
-    assert.equal(await executeDiff(join(root, "base.json"), join(root, "head.json"), true), 78);
+    assert.equal(await executeDiff(join(root, "base.json"), join(root, "head.json"), true), 2);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

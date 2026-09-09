@@ -17,6 +17,6 @@ export async function executePolicyCheck(path: string, json = false, quiet = fal
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to evaluate policy document.";
     if (json) console.log(JSON.stringify({ status: "error", message })); else console.error(message);
-    return 78;
+    return 2;
   }
 }
