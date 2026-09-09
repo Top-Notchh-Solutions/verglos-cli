@@ -22,6 +22,7 @@
 | Generic artifact resolver | `VERGLOS_ARTIFACT_RESOLVER.md` | TARGET-005 | 2 shared tests: deterministic file/directory hashing and missing-target rejection | implemented at `0fb7f21`; adversarial archive/special-file corpus remains open |
 | SBOM subject resolver | `VERGLOS_SBOM_RESOLVER.md` | TARGET-006 | 2 shared tests: CycloneDX byte binding and unsupported-format rejection | implemented at `b72e2b6`; full CycloneDX/SPDX validation corpus remains open |
 | OCI reference parser | `VERGLOS_OCI_REFERENCE_CONTRACT.md` | TARGET-007 | 2 shared tests: digest/tag/platform parsing and unsafe-reference rejection | implemented at `69a5eaa`; registry resolution remains TARGET-008 |
+| OCI manifest resolver | `VERGLOS_OCI_RESOLVER.md` | TARGET-008 | 2 shared tests: index child/platform preservation and tag/invalid-document rejection | implemented at `14888ba`; network fetch/platform selection remain downstream |
 | Native JS/TS scan | command + observation | TRUTH-001, CONTRACT-001 | Current: 58 scanner tests in `packages/scanner/src/**/*.test.ts`; required: frozen detector fixtures and determinism | shipped; evidence: `VERGLOS_CLI_CAPABILITY_INVENTORY.md` |
 | External evidence import | observation + adapter | IMPORT-001/002, ENGINES | SARIF/SBOM/VEX malformed and attribution fixtures | planned |
 | Source-to-artifact identity | subject + lineage | TARGET-001, GRAPH-001 | digest mismatch/incomplete tests | planned |

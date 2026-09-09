@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`TARGET-008`: OCI manifest/index resolver, following completed TARGET-007.
+`TARGET-009`: local OCI layout/tar resolver, following completed TARGET-008.
 
 ## Scope hold
 
