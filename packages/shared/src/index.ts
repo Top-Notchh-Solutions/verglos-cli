@@ -61,3 +61,4 @@ export * from "./policy-explanation.js";
 export * from "./action-authority.js";
 export * from "./approval-receipt.js";
 export * from "./mcp-authority.js";
+export * from "./mcp-capabilities.js";
