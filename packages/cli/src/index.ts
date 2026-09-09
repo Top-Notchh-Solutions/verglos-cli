@@ -156,6 +156,7 @@ program
       quiet?: boolean;
       all?: boolean;
       strict?: boolean;
+      policyEvaluation?: string;
       provenance?: boolean;
       verifySecrets?: boolean;
       hunt?: boolean;
@@ -171,8 +172,11 @@ program
         noProvenance,
         verifySecrets: opts.verifySecrets,
         hunt: opts.hunt,
-        noTelemetry,
+      noTelemetry,
       };
+      if (opts.policyEvaluation) {
+        process.exit(await executePolicyCheck(opts.policyEvaluation, false, opts.quiet));
+      }
       if (opts.watch) {
         console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
         await executeScan(scanOptions);
