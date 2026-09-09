@@ -167,7 +167,7 @@ Evidence/problem: existing finding IDs and score views are scanner-run oriented.
 - [ ] **GRAPH-006** · source-to-artifact lineage graph · deps: TARGET-010, IMPORT-006/007, GRAPH-004 · Connect commit/tree/build/SBOM/image/artifact evidence with explicit gaps and mismatches. Commit(s): `pending (preparatory)`
 - [ ] **GRAPH-007** · release snapshot format · deps: GRAPH-002-006 · Freeze subject, coverage, normalized observations, lineage, and policy inputs for deterministic comparison. Commit(s): `pending (preparatory)`
 - [ ] **GRAPH-008** · release diff engine · deps: GRAPH-007 · Classify new/fixed/worsened/unchanged observations plus coverage/identity/policy changes. Tests: detector upgrade, moved file, changed artifact, stale evidence. Commit(s): `pending (preparatory)`
-- [ ] **GRAPH-009** · `verglos diff` command · deps: GRAPH-008 · Render decision-first terminal/JSON diff with base/head identity and no hosted requirement; history lookup remains Pro hosted. Commit(s): pending (preparatory)
+- [ ] **GRAPH-009** · `verglos diff` command · deps: GRAPH-008 · Render decision-first terminal/JSON diff with base/head identity and no hosted requirement; history lookup remains Pro hosted. Commit(s): `pending (preparatory)`
 
 ## Epic 06 — Policy evaluation, baselines, exceptions, approvals, and CI semantics
 

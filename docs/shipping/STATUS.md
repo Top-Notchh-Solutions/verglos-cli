@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`GRAPH-007`: release snapshot hardening; bounded deterministic snapshot validation is implemented preparatorily, while policy/release authorization and signed records remain open.
+`GRAPH-009`: offline diff reader hardening; bounded structural snapshot checks are implemented preparatorily, while hosted history and full snapshot semantics remain open.
 
 ## Scope hold
 
