@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-001`: read-only command option contract; a source-level test preserves existing JSON/quiet behavior and confirms config/policy flags remain unadvertised until their loaders exist. Shared registration and config/policy loading remain open.
+`LOCAL-002`: pure config migration inspection; clean, obsolete/deferred, and malformed inputs now produce deterministic preparatory diagnostics without file writes or runtime application. Command loading, rewriting, and runtime migration remain open.
 
 ## Scope hold
 
