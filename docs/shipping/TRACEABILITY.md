@@ -26,6 +26,7 @@
 | Local OCI layout resolver | `VERGLOS_OCI_LAYOUT_RESOLVER.md` | TARGET-009 | 2 shared tests: content-addressed blob verification and missing-blob rejection | implemented at `bc2259f`; tar/archive hardening remains open |
 | Source-to-artifact linkage | `VERGLOS_SOURCE_ARTIFACT_LINKAGE.md` | TARGET-010 | 2 shared tests: matched/unavailable and mismatch classification | implemented at `b6b3811`; build provenance correlation remains open |
 | Target inspect command | `VERGLOS_TARGET_INSPECT_COMMAND.md` | TARGET-011 | CLI typecheck plus target-inspect process test; deterministic JSON/human output and exit mapping | implemented at `230c4a7`; OCI/network target modes remain gated |
+| EngineAdapter contract | `VERGLOS_ENGINE_ADAPTER_CONTRACT.md` | ENGINE-001 | 1 shared test: bounded timeout and explicit network declaration invariants | implemented at `f1a86dd`; concrete Trivy adapter remains ENGINE-002+ |
 | Native JS/TS scan | command + observation | TRUTH-001, CONTRACT-001 | Current: 58 scanner tests in `packages/scanner/src/**/*.test.ts`; required: frozen detector fixtures and determinism | shipped; evidence: `VERGLOS_CLI_CAPABILITY_INVENTORY.md` |
 | External evidence import | observation + adapter | IMPORT-001/002, ENGINES | SARIF/SBOM/VEX malformed and attribution fixtures | planned |
 | Source-to-artifact identity | subject + lineage | TARGET-001, GRAPH-001 | digest mismatch/incomplete tests | planned |

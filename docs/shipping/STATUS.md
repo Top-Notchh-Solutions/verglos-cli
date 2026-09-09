@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`ENGINE-001`: EngineAdapter contract implementation, following completed TARGET-011.
+`ENGINE-002`: managed Trivy adapter, following completed ENGINE-001.
 
 ## Scope hold
 

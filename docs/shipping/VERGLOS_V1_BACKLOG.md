@@ -122,7 +122,7 @@ Evidence/problem: the current scanner accepts a project path and fingerprint but
 
 Evidence/problem: no engine-adapter contract or verified engine lifecycle exists. External tools must remain attributed and replaceable.
 
-- [ ] **ENGINE-001** · `EngineAdapter` contract implementation · deps: CONTRACT-003/004, TARGET-001 · Define capability, requirements, health, execute, normalize, raw-output, and update metadata boundaries. Commit(s): —
+- [x] **ENGINE-001** · `EngineAdapter` contract implementation · deps: CONTRACT-003/004, TARGET-001 · Define capability, requirements, health, execute, normalize, raw-output, and update metadata boundaries. Commit(s): `f1a86dd`
 - [ ] **ENGINE-002** · engine manifest format · deps: ENGINE-001 · Add signed compatibility manifest schema for platform artifacts, checksums, source, license, version range, and rollback metadata. Commit(s): —
 - [ ] **ENGINE-003** · engine cache layout and atomic install transaction · deps: ENGINE-002 · Use user-controlled cache path, staging, fsync/rename strategy, lock, cleanup, and explicit rollback. Tests: concurrent/partial install. Commit(s): —
 - [ ] **ENGINE-004** · safe archive downloader/extractor · deps: ENGINE-003 · Stream with limits; reject checksum/signature mismatch, traversal, symlink/hardlink escape, unexpected members, and partial output. Commit(s): —
