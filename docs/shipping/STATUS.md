@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`AGENT-002`: pure agent authorization gate added preparatorily; receipt-free read actions and exact approved side-effect actions return stable reasons with epoch-time bounds. MCP/CLI enforcement and durable audit remain open.
+`AGENT-003`: MCP read-only input validation added preparatorily; check-before-write and explain-finding reject type coercion and enforce existing bounds. Other tools and authority enforcement remain open.
 
 ## Scope hold
 
