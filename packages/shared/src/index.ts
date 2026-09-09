@@ -39,3 +39,4 @@ export * from "./importer-registry.js";
 export * from "./sarif-importer.js";
 export * from "./cyclonedx-importer.js";
 export * from "./spdx-importer.js";
+export * from "./cyclonedx-vex-importer.js";
