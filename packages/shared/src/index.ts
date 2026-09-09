@@ -75,3 +75,4 @@ export * from "./record-store.js";
 export * from "./record-assembly.js";
 export * from "./record-digest.js";
 export * from "./record-reader.js";
+export * from "./public-record-projection.js";
