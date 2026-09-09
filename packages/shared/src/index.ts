@@ -5,6 +5,7 @@ export * from "./release-header.js";
 export * from "./change-actions.js";
 export * from "./evidence-projection.js";
 export * from "./exception-export.js";
+export * from "./agent-authorization.js";
 export * from "./fingerprint.js";
 export * from "./paywall.js";
 export * from "./explain-bank.js";

@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`AGENT-001`: shared action-authority lookup hardened preparatorily; all declared actions now validate at runtime and return frozen authority metadata. Approval receipts and MCP enforcement remain open.
+`AGENT-002`: pure agent authorization gate added preparatorily; receipt-free read actions and exact approved side-effect actions return stable reasons with epoch-time bounds. MCP/CLI enforcement and durable audit remain open.
 
 ## Scope hold
 
