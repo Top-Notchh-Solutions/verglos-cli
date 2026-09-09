@@ -12,6 +12,7 @@
 
 const NPM_REGISTRY = "https://registry.npmjs.org";
 const OSV_URL = "https://api.osv.dev/v1/query";
+import { validateAgentInputBounds } from "@verglos/shared";
 const HTTP_TIMEOUT_MS = 4000;
 
 /**
@@ -167,6 +168,7 @@ async function resolveLatest(name: string): Promise<string | null> {
 export async function checkPackage(
   input: CheckPackageInput,
 ): Promise<CheckPackageResult> {
+  validateAgentInputBounds(input);
   const packageName = input.packageName.trim();
 
   const exists = await packageExists(packageName);

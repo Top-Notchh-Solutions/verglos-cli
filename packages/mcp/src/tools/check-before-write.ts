@@ -8,6 +8,7 @@ import {
   type ScannedFile,
 } from "@verglos/scanner";
 import type { Finding } from "@verglos/shared";
+import { validateAgentInputBounds } from "@verglos/shared";
 
 /**
  * check_before_write — the killer MCP tool.
@@ -130,6 +131,7 @@ function buildReasoning(
 export async function checkBeforeWrite(
   input: CheckBeforeWriteInput,
 ): Promise<CheckBeforeWriteResult> {
+  validateAgentInputBounds(input);
   const tmpRoot = await mkdtemp(join(tmpdir(), "verglos-cbw-"));
   try {
     // Preserve extension so language-aware detectors (AI-* code-shape
