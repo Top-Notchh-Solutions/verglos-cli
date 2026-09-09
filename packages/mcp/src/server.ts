@@ -5,7 +5,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import type { Finding } from "@verglos/shared";
+import { mcpToolAuthority, type Finding } from "@verglos/shared";
 import { checkBeforeWrite } from "./tools/check-before-write.js";
 import type {
   CheckBeforeWriteInput as ToolInput,
@@ -306,6 +306,14 @@ export function createVerglosMcpServer(): Server {
       name: t.name,
       description: t.description,
       inputSchema: t.inputSchema,
+      annotations: (() => {
+        const authority = mcpToolAuthority(t.name);
+        return authority ? {
+          readOnlyHint: !authority.approvalRequired,
+          destructiveHint: authority.sideEffect === "filesystem" || authority.sideEffect === "identity",
+          openWorldHint: authority.sideEffect === "network" || authority.sideEffect === "hosted",
+        } : undefined;
+      })(),
     })),
   }));
 
