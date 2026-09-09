@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-003`: pure inspect-plan boundary; producer selection is validated and deterministically ordered with explicit no-execution/no-network declarations and bounds. Scan orchestration and snapshot production remain open.
+`LOCAL-004`: legacy JSON report compatibility; a reporter fixture freezes top-level key order/types and confirms no default `schemaId` injection. HTML/process/path compatibility remains open.
 
 ## Scope hold
 
