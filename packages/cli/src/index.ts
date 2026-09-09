@@ -28,6 +28,7 @@ import {
 } from "./entitlement.js";
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
+import { executeTargetInspect } from "./target-inspect.js";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
@@ -75,6 +76,17 @@ program
   .description("Update Verglos CLI to the latest npm version")
   .action(async () => {
     await updateCli(version);
+  });
+
+program
+  .command("target")
+  .description("Inspect an immutable target subject")
+  .command("inspect <kind> <value>")
+  .description("Resolve target metadata without executing project code")
+  .option("--json", "Emit machine-readable JSON")
+  .action(async (kind: string, value: string, opts: { json?: boolean }) => {
+    if (!["repository", "package", "filesystem", "artifact", "sbom"].includes(kind)) process.exit(78);
+    process.exit(await executeTargetInspect(kind as "repository" | "package" | "filesystem" | "artifact" | "sbom", value, opts.json));
   });
 
 program
