@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-010`: explanation projection hardening; immutable nested output and reason codes are verified preparatorily, while evaluator wiring remains open.
+`POLICY-011`: policy-check input boundary hardening; bounded JSON input, explicit record/snapshot rejection, stable machine errors, and no-mutation behavior are verified preparatorily. Record/snapshot support and evaluator production wiring remain open.
 
 ## Scope hold
 
