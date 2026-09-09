@@ -52,3 +52,4 @@ export * from "./lineage-graph.js";
 export * from "./release-snapshot.js";
 export * from "./release-diff.js";
 export * from "./policy-document.js";
+export * from "./policy-loader.js";
