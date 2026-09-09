@@ -55,6 +55,7 @@ export * from "./standards-exporter.js";
 export * from "./detect-secrets-importer.js";
 export * from "./detect-secrets-runner.js";
 export * from "./finding-adapter.js";
+export * from "./native-observation-adapter.js";
 export * from "./fingerprint-v1.js";
 export * from "./normalization.js";
 export * from "./correlation.js";
