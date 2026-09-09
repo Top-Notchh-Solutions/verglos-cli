@@ -184,7 +184,7 @@ Evidence/problem: current score and critical-threshold gates cannot express requ
 - [ ] **POLICY-009** · deterministic evaluator · deps: POLICY-003/004/006/008, ENGINE-013, GRAPH-006 · Emit PASS/REVIEW/BLOCK/INCOMPLETE with ordered reasons and never downgrade incomplete through score. Commit(s): —
 - [ ] **POLICY-010** · policy explanation renderer · deps: POLICY-009 · Explain exact subject, policy digest/version, evidence gaps, blockers, owner, and next action without severity-color dependence. Commit(s): pending (preparatory)
 - [ ] **POLICY-011** · `verglos policy check` command · deps: POLICY-009/010 · Support record/snapshot input, common flags, JSON/quiet, exit 0/1/2/3 semantics, and no mutation by default. Commit(s): pending (preparatory)
-- [ ] **POLICY-012** · CI command migration · deps: POLICY-011, TRUTH-010 · Route existing `verglos ci`/`scan --ci` through the same evaluator while preserving documented compatibility and machine output. Commit(s): —
+- [ ] **POLICY-012** · CI command migration · deps: POLICY-011, TRUTH-010 · Route existing `verglos ci`/`scan --ci` through the same evaluator while preserving documented compatibility and machine output. Commit(s): pending (preparatory)
 - [ ] **POLICY-013** · policy adversarial matrix · deps: POLICY-009-012 · Test every PASS/REVIEW/BLOCK/INCOMPLETE combination, stale/missing engines, identity mismatch, expired exceptions, unknown rules, and deterministic ordering. Commit(s): —
 
 ## Epic 07 — Local command product, configuration, report projections, and viewer

@@ -136,6 +136,7 @@ program
   .option("-q, --quiet", "Suppress terminal output")
   .option("--all", "Include low-confidence findings (default hides <0.7)")
   .option("--strict", "Include test file findings in score")
+  .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option(
     "--no-provenance",
     "Skip the AI-authorship analysis (no headline provenance line)",
@@ -233,7 +234,10 @@ program
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
   )
-  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean }) => {
+  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policyEvaluation?: string }) => {
+    if (opts.policyEvaluation) {
+      process.exit(await executePolicyCheck(opts.policyEvaluation, false, opts.quiet));
+    }
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const plan = await currentPlan({ asPlan });
     const hasThreshold = plan.plan !== "free";
