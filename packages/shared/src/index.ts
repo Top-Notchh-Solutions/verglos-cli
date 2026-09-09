@@ -72,3 +72,4 @@ export * from "./hunt-execution-gate.js";
 export * from "./hunt-verdict.js";
 export * from "./hunt-redaction.js";
 export * from "./record-store.js";
+export * from "./record-assembly.js";
