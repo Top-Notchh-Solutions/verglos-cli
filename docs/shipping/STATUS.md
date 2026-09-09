@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-008`: exception audit projection; read-only digest-bound history is implemented preparatorily, while expiry enforcement and hosted audit remain open.
+`POLICY-009`: evaluator coverage boundary; missing configured checks are rejected before evaluation, while full effective-policy wiring remains open.
 
 ## Scope hold
 
