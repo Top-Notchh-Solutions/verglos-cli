@@ -38,6 +38,7 @@
 | CLI engine install | `VERGLOS_ENGINES_INSTALL_COMMAND.md` | ENGINE-008 (preparatory) | CLI typecheck plus incorrect-digest rejection test | implemented at `eb84587`; manifest verification/update/rollback remain open |
 | Offline/mirror source policy | `VERGLOS_ENGINE_SOURCE_POLICY.md` | ENGINE-007 (preparatory) | 2 shared tests: cache precedence/HTTPS mirror and offline/unsafe-source denial | implemented at `9e6b230`; signed fetch integration remains open |
 | Engine trust verification | `VERGLOS_ENGINE_TRUST.md` | ENGINE-005 | 1 shared test: Ed25519 verification over canonical unsigned manifest bytes | implemented at `b5f00fa`; trust-root rotation and downloader integration remain open |
+| Engine source origin pinning | `VERGLOS_ENGINE_TRUST.md` | ENGINE-005 (preparatory) | 1 shared test: exact HTTPS origin allowlist | implemented at `7b1e418`; artifact downloader integration remains open |
 | System engine inspection | `VERGLOS_SYSTEM_ENGINE.md` | ENGINE-006 | 1 shared test: explicit absolute path and unavailable probe handling | implemented at `34ea338`; capability negotiation remains open |
 | Native JS/TS scan | command + observation | TRUTH-001, CONTRACT-001 | Current: 58 scanner tests in `packages/scanner/src/**/*.test.ts`; required: frozen detector fixtures and determinism | shipped; evidence: `VERGLOS_CLI_CAPABILITY_INVENTORY.md` |
 | External evidence import | observation + adapter | IMPORT-001/002, ENGINES | SARIF/SBOM/VEX malformed and attribution fixtures | planned |
