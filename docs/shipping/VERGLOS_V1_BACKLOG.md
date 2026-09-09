@@ -152,7 +152,7 @@ Evidence/problem: mature teams already produce SARIF, SBOM, VEX, and provenance.
 - [ ] **IMPORT-008** · detect-secrets baseline importer/exporter · deps: IMPORT-001 · Preserve reviewed status and baseline metadata; no Python install or mandatory invocation. Commit(s): `pending (preparatory)`
 - [ ] **IMPORT-009** · optional explicit detect-secrets runner · deps: IMPORT-008, ENGINE-006 · Invoke only configured local installation, attribute it, bound it, and classify absence as unsupported/incomplete per policy. Commit(s): `pending (preparatory)`
 - [ ] **IMPORT-010** · SARIF exporter · deps: CONTRACT-004/008 · Emit validated SARIF with Verglos rule/source/subject/decision properties and no private evidence leakage. Commit(s): `pending (preparatory)`
-- [ ] **IMPORT-011** · CycloneDX/SPDX/VEX exporters · deps: IMPORT-003-005, GRAPH later · Emit standards-valid documents preserving original components, lineage, and decision/analysis state. Commit(s): —
+- [ ] **IMPORT-011** · CycloneDX/SPDX/VEX exporters · deps: IMPORT-003-005, GRAPH later · Emit standards-valid documents preserving original components, lineage, and decision/analysis state. Commit(s): `pending (preparatory)`
 - [ ] **IMPORT-012** · `verglos evidence import/export` commands · deps: IMPORT-002-011 · Add file/stdin/output behavior, summary, JSON, quiet, explicit attribution, and exit taxonomy. Commit(s): —
 
 ## Epic 05 — Normalization, stable identity, correlation, lineage, and release diff
