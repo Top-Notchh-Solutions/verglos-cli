@@ -1,0 +1,9 @@
+import type { ReleaseHeader } from "@verglos/shared";
+import type { ChangeActionProjection } from "@verglos/shared";
+
+const escape = (value: string) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&#39;");
+
+export function renderLocalViewer(header: ReleaseHeader, changes?: ChangeActionProjection): string {
+  const actions = changes?.nextActions ?? ["No change summary was supplied."];
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Verglos release decision</title><style>:root{font:16px system-ui,sans-serif;color:#17202a;background:#fff}body{max-width:60rem;margin:2rem auto;padding:0 1rem}main{display:grid;gap:1rem}section{border:1px solid #9aa4ad;border-radius:.5rem;padding:1rem}h1,h2{margin-top:0}.status{font-weight:700}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}</style></head><body><main><h1>Release decision</h1><section aria-labelledby="decision"><h2 id="decision">Decision</h2><p class="status">${escape(header.decision)}</p><p>Signer status: ${escape(header.signerStatus)}</p></section><section aria-labelledby="identity"><h2 id="identity">Identity and policy</h2><p>Subject: <code>${escape(header.subjectId)}</code></p><p>Policy: <code>${escape(header.policy.id)}@${escape(header.policy.version)}</code> (${escape(header.policy.digest)})</p><p>Generated: <time>${escape(header.generatedAt)}</time></p></section><section aria-labelledby="limitations"><h2 id="limitations">Limitations and next action</h2><ul>${header.limitations.map((item) => `<li>${escape(item)}</li>`).join("")}</ul><p>${escape(header.nextAction)}</p></section><section aria-labelledby="changes"><h2 id="changes">Change summary</h2><ul>${actions.map((item) => `<li>${escape(item)}</li>`).join("")}</ul></section></main></body></html>`;
+}
