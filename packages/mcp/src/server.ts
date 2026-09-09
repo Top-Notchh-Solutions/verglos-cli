@@ -14,6 +14,7 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
+import { parseCheckBeforeWriteArgs, parseExplainFindingArgs } from "./input-validation.js";
 
 const require = createRequire(import.meta.url);
 const { version: MCP_VERSION } = require("../package.json") as {
@@ -237,16 +238,10 @@ async function dispatchTool(
   args: Record<string, unknown> | undefined,
 ): Promise<{ content: { type: "text"; text: string }[] }> {
   const input = args ?? {};
+  const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
   switch (name) {
     case "verglos_check_before_write": {
-      const parsed: CheckBeforeWriteInput = {
-        code: String(input.code ?? ""),
-        targetPath: String(input.targetPath ?? "input.ts"),
-        language:
-          typeof input.language === "string" ? input.language : undefined,
-        context:
-          typeof input.context === "string" ? input.context : undefined,
-      };
+      let parsed: CheckBeforeWriteInput; try { parsed = parseCheckBeforeWriteArgs(input); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
       const result = await checkBeforeWrite(parsed);
       return jsonResponse(result);
     }
@@ -271,7 +266,8 @@ async function dispatchTool(
       return jsonResponse(result);
     }
     case "verglos_explain_finding": {
-      const result = explainFinding({ rule: String(input.rule ?? "") });
+      let parsed; try { parsed = parseExplainFindingArgs(input); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      const result = explainFinding(parsed);
       return jsonResponse(result);
     }
     case "verglos_hunt_finding":
