@@ -161,7 +161,7 @@ Evidence/problem: existing finding IDs and score views are scanner-run oriented.
 
 - [ ] **GRAPH-001** · native finding-to-observation adapter · deps: CONTRACT-004/005, TRUTH-010 · Convert current JS/TS findings without breaking legacy reports; preserve native rule, context, confidence, provenance, and remediation. Commit(s): `pending (preparatory)`
 - [ ] **GRAPH-002** · canonical stable fingerprint v1 · deps: GRAPH-001, TARGET-002-009 · Derive from subject/location/package/advisory/rule/evidence class, never engine order or presentation text. Tests: repeatability, file moves, version changes, collisions. Commit(s): —
-- [ ] **GRAPH-003** · severity/confidence normalization · deps: GRAPH-001, IMPORT-002-005, ENGINE-010 · Preserve originals, version mapping policy, and expose uncertain/unmapped values. Commit(s): —
+- [ ] **GRAPH-003** · severity/confidence normalization · deps: GRAPH-001, IMPORT-002-005, ENGINE-010 · Preserve originals, version mapping policy, and expose uncertain/unmapped values. Commit(s): `pending (preparatory)`
 - [ ] **GRAPH-004** · correlation graph · deps: GRAPH-002/003 · Link overlapping native/Trivy/imported observations while retaining every producer and raw reference. Acceptance: correlation never silently erases disagreement. Commit(s): —
 - [ ] **GRAPH-005** · deduplication projection · deps: GRAPH-004 · Produce one review item with lineage for exact duplicates and bounded fuzzy candidates requiring review. Tests: three-tool duplicate and near-match. Commit(s): `8f23f27` (preparatory)
 - [ ] **GRAPH-006** · source-to-artifact lineage graph · deps: TARGET-010, IMPORT-006/007, GRAPH-004 · Connect commit/tree/build/SBOM/image/artifact evidence with explicit gaps and mismatches. Commit(s): `ff64690` (preparatory)
