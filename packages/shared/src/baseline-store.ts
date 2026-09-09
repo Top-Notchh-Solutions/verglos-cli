@@ -10,6 +10,7 @@ export async function saveBaseline(root: string, baseline: BaselineDocument): Pr
   const parsed = parseBaseline(baseline);
   await mkdir(root, { recursive: true, mode: 0o700 });
   const destination = join(root, fileName(parsed));
+  try { await readFile(destination); return destination; } catch { /* publish below */ }
   const temporary = `${destination}.${process.pid}.${Date.now()}.tmp`;
   await writeFile(temporary, `${JSON.stringify(parsed)}\n`, { encoding: "utf8", mode: 0o600 });
   await rename(temporary, destination);

@@ -18,12 +18,14 @@ export const BaselineDocumentSchema = z.object({
   expiresAt: Timestamp.optional(),
 }).strict().superRefine((value, ctx) => {
   if (new Set(value.acceptedFingerprints).size !== value.acceptedFingerprints.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["acceptedFingerprints"], message: "baseline fingerprints must be unique" });
-  if (value.expiresAt && value.expiresAt <= value.createdAt) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["expiresAt"], message: "baseline expiry must follow creation" });
+  if (value.expiresAt && Date.parse(value.expiresAt) <= Date.parse(value.createdAt)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["expiresAt"], message: "baseline expiry must follow creation" });
 });
 export type BaselineDocument = z.infer<typeof BaselineDocumentSchema>;
+export class BaselineValidationError extends Error { override readonly name = "BaselineValidationError"; constructor(readonly issues: readonly { readonly path: string; readonly code: string; readonly message: string }[]) { super("Baseline validation failed."); } }
 export function parseBaseline(value: unknown): BaselineDocument {
+  try { if (Buffer.byteLength(canonicalizeJson(value), "utf8") > 4 * 1024 * 1024) throw new BaselineValidationError([{ path: "", code: "too_large", message: "baseline exceeds 4 MiB" }]); } catch (error) { if (error instanceof BaselineValidationError) throw error; }
   const parsed = BaselineDocumentSchema.safeParse(value);
-  if (!parsed.success) throw new Error(`Invalid baseline: ${parsed.error.issues.map((issue) => issue.message).join("; ")}`);
+  if (!parsed.success) throw new BaselineValidationError(parsed.error.issues.map((issue) => ({ path: issue.path.join("."), code: issue.code, message: issue.message })));
   return parsed.data;
 }
 export function baselineDigest(baseline: BaselineDocument): string {
@@ -33,5 +35,5 @@ export function baselineDigest(baseline: BaselineDocument): string {
 export function classifyBaseline(baseline: BaselineDocument, subjectId: string, policyDigest: string, at: string): "matched" | "mismatched" | "stale" {
   const parsed = parseBaseline(baseline);
   if (parsed.subjectId !== SubjectIdSchema.parse(subjectId) || parsed.policyDigest !== Fingerprint.parse(policyDigest)) return "mismatched";
-  return parsed.expiresAt && at >= parsed.expiresAt ? "stale" : "matched";
+  return parsed.expiresAt && Date.parse(at) >= Date.parse(parsed.expiresAt) ? "stale" : "matched";
 }
