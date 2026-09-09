@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-002`: policy layer loader hardening; typed bounded precedence and per-check validation are implemented preparatorily, while evaluation and hosted enforcement remain open.
+`POLICY-003`: Free policy profile fixture hardening; explicit deterministic defaults are verified preparatorily, while evaluation and hosted enforcement remain open.
 
 ## Scope hold
 
