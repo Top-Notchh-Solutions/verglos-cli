@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-003`: Free policy profile fixture hardening; explicit deterministic defaults are verified preparatorily, while evaluation and hosted enforcement remain open.
+`POLICY-004`: Pro profile option bounds; finite configurable confidence is verified preparatorily, while entitlement and evaluator integration remain open.
 
 ## Scope hold
 
