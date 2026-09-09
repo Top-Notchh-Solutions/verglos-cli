@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-004`: Pro profile option bounds; finite configurable confidence is verified preparatorily, while entitlement and evaluator integration remain open.
+`POLICY-005`: baseline contract/store hardening; typed bounded local persistence is verified preparatorily, while policy bypass and hosted synchronization remain open.
 
 ## Scope hold
 
