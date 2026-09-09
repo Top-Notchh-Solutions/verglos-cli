@@ -63,3 +63,4 @@ export * from "./approval-receipt.js";
 export * from "./mcp-authority.js";
 export * from "./mcp-capabilities.js";
 export * from "./agent-input-bounds.js";
+export * from "./remediation-proposal.js";
