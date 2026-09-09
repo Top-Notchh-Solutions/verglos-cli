@@ -50,6 +50,7 @@ export * from "./spdx-importer.js";
 export * from "./cyclonedx-vex-importer.js";
 export * from "./provenance-importer.js";
 export * from "./provenance-provider.js";
+export * from "./sarif-exporter.js";
 export * from "./detect-secrets-importer.js";
 export * from "./detect-secrets-runner.js";
 export * from "./finding-adapter.js";
