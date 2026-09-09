@@ -26,6 +26,6 @@ export async function executeDiff(basePath: string, headPath: string, json = fal
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to diff release snapshots.";
     if (json) console.log(JSON.stringify({ status: "error", message })); else console.error(message);
-    return 78;
+    return 2;
   }
 }
