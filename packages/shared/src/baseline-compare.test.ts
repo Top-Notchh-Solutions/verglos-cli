@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { parseBaseline } from "./baseline.js";
-import { compareToBaseline } from "./baseline-compare.js";
+import { BaselineComparisonError, compareToBaseline } from "./baseline-compare.js";
 
 const subjectId = "urn:verglos:subject:artifact:sha256:" + "a".repeat(64);
 const policyDigest = "sha256:" + "b".repeat(64);
@@ -14,3 +14,4 @@ test("baseline comparison separates accepted debt from new observations", () => 
   assert.deepEqual(result.acceptedFingerprints, [accepted]);
   assert.deepEqual(result.newFingerprints, ["sha256:" + "d".repeat(64)]);
 });
+test("baseline comparison rejects malformed or oversized current evidence", () => { assert.throws(() => compareToBaseline({ baseline: fresh, currentFingerprints: ["sha256:bad"], subjectId, policyDigest, evaluatedAt: "2026-09-01T00:00:00Z" }), BaselineComparisonError); assert.throws(() => compareToBaseline({ baseline: fresh, currentFingerprints: [], subjectId, policyDigest, evaluatedAt: "not-a-date" }), BaselineComparisonError); });
