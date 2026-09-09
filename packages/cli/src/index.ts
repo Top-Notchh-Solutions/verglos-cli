@@ -33,6 +33,7 @@ import { listCachedEngines } from "@verglos/shared";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
+import { executeDiff } from "./diff.js";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
@@ -80,6 +81,14 @@ program
   .description("Update Verglos CLI to the latest npm version")
   .action(async () => {
     await updateCli(version);
+  });
+
+program
+  .command("diff <base> <head>")
+  .description("Compare two local Verglos release snapshots")
+  .option("--json", "Emit machine-readable JSON")
+  .action(async (base: string, head: string, opts: { json?: boolean }) => {
+    process.exit(await executeDiff(base, head, opts.json));
   });
 
 program
