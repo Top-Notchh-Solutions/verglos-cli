@@ -47,3 +47,4 @@ export * from "./finding-adapter.js";
 export * from "./fingerprint-v1.js";
 export * from "./normalization.js";
 export * from "./correlation.js";
+export * from "./deduplication.js";
