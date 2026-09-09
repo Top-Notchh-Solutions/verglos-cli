@@ -1,4 +1,11 @@
 import { importBoundedJson, type ImportedDocument } from "./importer-registry.js";
+import { canonicalizeJson } from "./schema.js";
 export interface ImportedDetectSecrets { readonly format: "detect-secrets"; readonly version: string; readonly sourceDigest: ImportedDocument["sourceDigest"]; readonly generatedAt?: string; readonly plugins: readonly Record<string, unknown>[]; readonly results: Readonly<Record<string, readonly Record<string, unknown>[]>>; readonly document: Record<string, unknown>; }
 export class DetectSecretsImportError extends Error { override readonly name = "DetectSecretsImportError"; constructor(readonly code: "INVALID_BASELINE", message: string) { super(message); } }
 export function importDetectSecretsBaseline(bytes: Uint8Array): ImportedDetectSecrets { let imported: ImportedDocument; try { imported = importBoundedJson(bytes); } catch { throw new DetectSecretsImportError("INVALID_BASELINE", "Detect-secrets baseline is not bounded JSON."); } const document = imported.document as Record<string, unknown>; if (typeof document.version !== "string" || typeof document.results !== "object" || document.results === null || Array.isArray(document.results)) throw new DetectSecretsImportError("INVALID_BASELINE", "Baseline requires version and results map."); const plugins = document.plugins_used ?? []; if (!Array.isArray(plugins) || plugins.some((entry) => typeof entry !== "object" || entry === null)) throw new DetectSecretsImportError("INVALID_BASELINE", "Baseline plugins_used must be objects."); return { format: "detect-secrets", version: document.version, sourceDigest: imported.sourceDigest, ...(typeof document.generated_at === "string" ? { generatedAt: document.generated_at } : {}), plugins: plugins as Record<string, unknown>[], results: document.results as Readonly<Record<string, readonly Record<string, unknown>[]>>, document }; }
+
+export function exportDetectSecretsBaseline(baseline: ImportedDetectSecrets): string {
+  const serialized = canonicalizeJson(baseline.document);
+  if (/"(?:secret|plaintext|secret_value|secretValue)"\s*:/i.test(serialized)) throw new DetectSecretsImportError("INVALID_BASELINE", "Baseline export refuses raw secret fields.");
+  return serialized;
+}
