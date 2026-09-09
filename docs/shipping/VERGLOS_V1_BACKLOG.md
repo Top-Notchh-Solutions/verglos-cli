@@ -210,7 +210,7 @@ Evidence/problem: current MCP tools are a separate thin surface and Hunt is a sh
 
 - [ ] **AGENT-001** · shared action/authority contract · deps: CONTRACT-011, LOCAL-001 · Define inspect/propose/mutate/install/execute/network/except/sign/publish/upload/policy/billing actions and approval requirements. Commit(s): pending (preparatory)
 - [ ] **AGENT-002** · auditable approval request/receipt · deps: AGENT-001 · Record actor, requested action, exact target, files/network, policy effect, decision, timestamp, and expiry; reject replay or widened scope. Commit(s): pending (preparatory)
-- [ ] **AGENT-003** · MCP server contract migration · deps: AGENT-001, LOCAL-003, POLICY-009 · Route tools through the same scanner/policy/error/entitlement contracts; preserve legacy names during deprecation. Commit(s): —
+- [ ] **AGENT-003** · MCP server contract migration · deps: AGENT-001, LOCAL-003, POLICY-009 · Route tools through the same scanner/policy/error/entitlement contracts; preserve legacy names during deprecation. Commit(s): pending (preparatory)
 - [ ] **AGENT-004** · MCP discovery/capability truth · deps: AGENT-003, TRUTH-003 · Advertise only shipped/partial capabilities with plan, permission, inputs, outputs, side effects, and maturity. Commit(s): —
 - [ ] **AGENT-005** · safe scan/package/pre-write tools · deps: AGENT-003 · Keep read-only actions approval-light, bound input sizes/paths, preserve attribution, and return decision/coverage rather than a second finding model. Commit(s): —
 - [ ] **AGENT-006** · explanation/remediation proposal tools · deps: AGENT-003, POLICY-010 · Propose bounded changes without writing; include tests, policy effect, uncertainty, and no hidden network. Commit(s): —
