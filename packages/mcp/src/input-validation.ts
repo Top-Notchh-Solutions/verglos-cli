@@ -1,4 +1,5 @@
 import { validateAgentInputBounds } from "@verglos/shared";
+import { isAbsolute } from "node:path";
 import type { CheckBeforeWriteInput } from "./tools/check-before-write.js";
 
 export function parseCheckBeforeWriteArgs(value: unknown): CheckBeforeWriteInput {
@@ -22,4 +23,16 @@ export function parseCheckPackageArgs(value: unknown): { packageName: string; ve
   if (typeof input.packageName !== "string" || (input.version !== undefined && typeof input.version !== "string")) throw new Error("check_package requires a string packageName");
   const parsed = { packageName: input.packageName, version: input.version as string | undefined };
   validateAgentInputBounds(parsed); return parsed;
+}
+
+export function parseScanArgs(value: unknown): { projectRoot?: string; limit?: number; noProvenance?: boolean } {
+  if (value === undefined) return {};
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("scan arguments must be an object");
+  const input = value as Record<string, unknown>;
+  for (const key of Object.keys(input)) if (!["projectRoot", "limit", "noProvenance"].includes(key)) throw new Error(`unknown scan argument: ${key}`);
+  if (input.projectRoot !== undefined && (typeof input.projectRoot !== "string" || !isAbsolute(input.projectRoot))) throw new Error("scan projectRoot must be an absolute path");
+  if (input.projectRoot !== undefined) validateAgentInputBounds({ targetPath: input.projectRoot });
+  if (input.limit !== undefined && (typeof input.limit !== "number" || !Number.isInteger(input.limit) || !Number.isFinite(input.limit) || input.limit < 0 || input.limit > 1000)) throw new Error("scan limit must be an integer from 0 to 1000");
+  if (input.noProvenance !== undefined && typeof input.noProvenance !== "boolean") throw new Error("scan noProvenance must be boolean");
+  return { projectRoot: input.projectRoot as string | undefined, limit: input.limit as number | undefined, noProvenance: input.noProvenance as boolean | undefined };
 }

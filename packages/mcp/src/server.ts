@@ -14,7 +14,7 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
-import { parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs } from "./input-validation.js";
+import { parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseScanArgs } from "./input-validation.js";
 
 const require = createRequire(import.meta.url);
 const { version: MCP_VERSION } = require("../package.json") as {
@@ -251,15 +251,8 @@ async function dispatchTool(
       return jsonResponse(result);
     }
     case "verglos_scan": {
-      const result = await scanProject({
-        projectRoot:
-          typeof input.projectRoot === "string" ? input.projectRoot : undefined,
-        limit: typeof input.limit === "number" ? input.limit : undefined,
-        noProvenance:
-          typeof input.noProvenance === "boolean"
-            ? input.noProvenance
-            : undefined,
-      });
+      let parsed; try { parsed = parseScanArgs(input); } catch (error) { return invalid("MCP_SCAN_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      const result = await scanProject(parsed);
       return jsonResponse(result);
     }
     case "verglos_explain_finding": {
