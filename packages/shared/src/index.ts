@@ -31,6 +31,7 @@ export * from "./trivy-adapter.js";
 export * from "./engine-manifest.js";
 export * from "./engine-cache.js";
 export * from "./archive-safety.js";
+export * from "./archive-extractor.js";
 export * from "./tar-extractor.js";
 export * from "./engine-trust.js";
 export * from "./system-engine.js";
