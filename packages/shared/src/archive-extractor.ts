@@ -1,4 +1,5 @@
 import { mkdir, rm, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { dirname, resolve } from "node:path";
 import { validateArchiveMembers, ArchiveSafetyError, type ArchiveMember } from "./archive-safety.js";
 
@@ -49,4 +50,10 @@ export async function downloadArchive(url: string, options: { fetchImpl?: typeof
   } finally { reader.releaseLock(); }
   const output = new Uint8Array(total); let offset = 0; for (const chunk of chunks) { output.set(chunk, offset); offset += chunk.byteLength; }
   return output;
+}
+
+export function verifyArchiveDigest(bytes: Uint8Array, expectedSha256: string): void {
+  if (!/^[a-f0-9]{64}$/.test(expectedSha256)) throw new Error("Expected archive digest must be a lowercase SHA-256 value.");
+  const actual = createHash("sha256").update(bytes).digest("hex");
+  if (actual !== expectedSha256) throw new Error("Archive checksum does not match the pinned digest.");
 }
