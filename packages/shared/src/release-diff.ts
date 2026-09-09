@@ -1,4 +1,5 @@
 import type { ReleaseSnapshot } from "./release-snapshot.js";
+import { canonicalizeJson } from "./schema.js";
 
 export interface ReleaseDiff {
   readonly added: readonly string[];
@@ -19,8 +20,8 @@ export function diffReleaseSnapshots(base: ReleaseSnapshot, head: ReleaseSnapsho
     added,
     fixed,
     unchanged,
-    identityChanged: base.primarySubjectId !== head.primarySubjectId || base.subjectIds.join("\n") !== head.subjectIds.join("\n"),
-    coverageChanged: JSON.stringify(base.lineage) !== JSON.stringify(head.lineage),
+    identityChanged: base.primarySubjectId !== head.primarySubjectId || canonicalizeJson([...base.subjectIds].sort()) !== canonicalizeJson([...head.subjectIds].sort()),
+    coverageChanged: canonicalizeJson(base.lineage) !== canonicalizeJson(head.lineage),
     policyChanged: base.policyInputDigest !== head.policyInputDigest,
   };
 }
