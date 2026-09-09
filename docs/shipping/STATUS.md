@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-006`: baseline comparison hardening; bounded typed comparison inputs are verified preparatorily, while evaluator effect and hosted synchronization remain open.
+`POLICY-007`: exception applicability input hardening; bounded identity/timestamp validation is verified preparatorily, while exception effects and RBAC remain open.
 
 ## Scope hold
 
