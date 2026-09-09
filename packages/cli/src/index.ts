@@ -229,6 +229,7 @@ program
   .option("-t, --threshold <score>", "Minimum score threshold", "60")
   .option("-q, --quiet", "Suppress output")
   .option("--strict", "Include test file findings in score")
+  .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
