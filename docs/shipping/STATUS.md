@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`ENGINE-002`: signed engine manifest format, following the completed adapter boundary groundwork.
+`ENGINE-003`: engine cache layout and atomic install transaction, following completed ENGINE-002.
 
 ## Scope hold
 
