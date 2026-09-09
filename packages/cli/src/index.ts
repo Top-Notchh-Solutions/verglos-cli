@@ -29,6 +29,9 @@ import {
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
 import { executeTargetInspect } from "./target-inspect.js";
+import { listCachedEngines } from "@verglos/shared";
+import { homedir } from "node:os";
+import { join } from "node:path";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
@@ -76,6 +79,20 @@ program
   .description("Update Verglos CLI to the latest npm version")
   .action(async () => {
     await updateCli(version);
+  });
+
+program
+  .command("engines")
+  .description("Inspect managed engine state")
+  .command("status")
+  .description("List cached engine versions without changing state")
+  .option("--json", "Emit machine-readable JSON")
+  .action(async (opts: { json?: boolean }) => {
+    const cacheRoot = process.env.VERGLOS_ENGINE_CACHE ?? join(homedir(), ".cache", "verglos", "engines");
+    const engines = await listCachedEngines(cacheRoot);
+    if (opts.json) console.log(JSON.stringify({ cacheRoot, engines }));
+    else if (engines.length === 0) console.log("No cached engines found.");
+    else for (const engine of engines) console.log(`${engine.engineId}@${engine.version} ${engine.digest}`);
   });
 
 program
