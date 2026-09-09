@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, rename, writeFile, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import type { ReleaseRecordManifestDocument } from "./record-manifest.js";
 
 function digest(bytes: Uint8Array): string { return `sha256:${createHash("sha256").update(bytes).digest("hex")}`; }
 function assertSafePath(path: string): void { if (!path || path.startsWith("/") || path.includes("\\") || path.split("/").some((segment) => !segment || segment === "." || segment === "..")) throw new Error("record member path must be relative and traversal-free"); }
@@ -11,3 +12,4 @@ export async function putRecordMember(root: string, path: string, bytes: Uint8Ar
   return { digest: value, path, size: bytes.byteLength };
 }
 export async function readRecordMember(root: string, memberDigest: string): Promise<Uint8Array> { if (!/^sha256:[a-f0-9]{64}$/.test(memberDigest)) throw new Error("record member digest is invalid"); const bytes = await readFile(join(root, memberDigest.replace(":", "-"))); if (digest(bytes) !== memberDigest) throw new Error("record member digest mismatch"); return bytes; }
+export function describeRecordMember(input: { readonly path: string; readonly kind: ReleaseRecordManifestDocument["members"][number]["kind"]; readonly mediaType: string; readonly bytes: Uint8Array; readonly required: boolean; readonly redaction?: "none" | "applied" | "omitted" }): ReleaseRecordManifestDocument["members"][number] { assertSafePath(input.path); return { path: input.path, kind: input.kind, mediaType: input.mediaType, digest: { algorithm: "sha256", value: digest(input.bytes).slice(7) }, size: input.redaction === "omitted" ? 0 : input.bytes.byteLength, required: input.required, redaction: input.redaction ?? "none" }; }
