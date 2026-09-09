@@ -173,7 +173,7 @@ Evidence/problem: existing finding IDs and score views are scanner-run oriented.
 
 Evidence/problem: current score and critical-threshold gates cannot express required evidence, freshness, identity mismatch, accountable exceptions, or `INCOMPLETE`.
 
-- [ ] **POLICY-001** · policy document schema/versioning · deps: CONTRACT-008/011 · Define required checks, thresholds, confidence, freshness, coverage, artifact match, Hunt requirements, exceptions, approvals, and extension rules. Commit(s): —
+- [ ] **POLICY-001** · policy document schema/versioning · deps: CONTRACT-008/011 · Define required checks, thresholds, confidence, freshness, coverage, artifact match, Hunt requirements, exceptions, approvals, and extension rules. Commit(s): pending (preparatory)
 - [ ] **POLICY-002** · policy loader/merge precedence · deps: POLICY-001 · Resolve defaults/config/CLI/organization policy deterministically, reject unknown unsafe fields, and record effective digest. Commit(s): —
 - [ ] **POLICY-003** · basic Free policy profile · deps: POLICY-002, GRAPH-007 · Preserve critical gate while adding explicit coverage and incomplete behavior without signup. Commit(s): —
 - [ ] **POLICY-004** · configurable Pro policy profile · deps: POLICY-002 · Add score/severity/confidence/freshness/Hunt settings while keeping local execution unmetered. Commit(s): —
