@@ -2,11 +2,16 @@ import { readFile } from "node:fs/promises";
 import { diffReleaseSnapshots, type ReleaseSnapshot } from "@verglos/shared";
 
 function parseSnapshot(value: string): ReleaseSnapshot {
+  if (Buffer.byteLength(value, "utf8") > 32 * 1024 * 1024) throw new Error("snapshot exceeds the 32 MiB limit");
   const parsed: unknown = JSON.parse(value);
   if (!parsed || typeof parsed !== "object" || (parsed as { schemaVersion?: unknown }).schemaVersion !== "1.0.0") {
     throw new Error("snapshot must be a Verglos release snapshot with schemaVersion 1.0.0");
   }
-  return parsed as ReleaseSnapshot;
+  const snapshot = parsed as Record<string, unknown>;
+  if (typeof snapshot.primarySubjectId !== "string" || !Array.isArray(snapshot.subjectIds) || !Array.isArray(snapshot.observations) || !snapshot.lineage || typeof snapshot.lineage !== "object" || typeof snapshot.policyInputDigest !== "string" || !/^sha256:[a-f0-9]{64}$/.test(snapshot.policyInputDigest)) throw new Error("snapshot structure is invalid");
+  if (snapshot.observations.some((entry) => !entry || typeof entry !== "object" || !/^sha256:[a-f0-9]{64}$/.test(String((entry as Record<string, unknown>).fingerprint)))) throw new Error("snapshot observations are invalid");
+  const lineage = snapshot.lineage as Record<string, unknown>; if (!Array.isArray(lineage.edges) || !Array.isArray(lineage.gaps)) throw new Error("snapshot lineage is invalid");
+  return snapshot as unknown as ReleaseSnapshot;
 }
 
 export async function executeDiff(basePath: string, headPath: string, json = false): Promise<number> {
