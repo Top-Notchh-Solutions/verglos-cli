@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-005`: baseline contract/store hardening; typed bounded local persistence is verified preparatorily, while policy bypass and hosted synchronization remain open.
+`POLICY-006`: baseline comparison hardening; bounded typed comparison inputs are verified preparatorily, while evaluator effect and hosted synchronization remain open.
 
 ## Scope hold
 
