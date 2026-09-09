@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-009`: loopback viewer session boundary; an in-memory payload is served only on an unpredictable exact route with restrictive CSP and clean shutdown. UI, browser launch, report validation, and hosted viewing remain open.
+`LOCAL-010`: minimal static local viewer renderer; decision, identity/policy, limitations, and change actions use semantic script-free escaped HTML with reduced-motion-safe CSS. Accessibility audit, browser launch, and report wiring remain open.
 
 ## Scope hold
 
