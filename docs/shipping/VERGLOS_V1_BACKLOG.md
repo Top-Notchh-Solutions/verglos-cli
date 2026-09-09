@@ -175,7 +175,7 @@ Evidence/problem: current score and critical-threshold gates cannot express requ
 
 - [ ] **POLICY-001** · policy document schema/versioning · deps: CONTRACT-008/011 · Define required checks, thresholds, confidence, freshness, coverage, artifact match, Hunt requirements, exceptions, approvals, and extension rules. Commit(s): pending (preparatory)
 - [ ] **POLICY-002** · policy loader/merge precedence · deps: POLICY-001 · Resolve defaults/config/CLI/organization policy deterministically, reject unknown unsafe fields, and record effective digest. Commit(s): pending (preparatory)
-- [ ] **POLICY-003** · basic Free policy profile · deps: POLICY-002, GRAPH-007 · Preserve critical gate while adding explicit coverage and incomplete behavior without signup. Commit(s): —
+- [ ] **POLICY-003** · basic Free policy profile · deps: POLICY-002, GRAPH-007 · Preserve critical gate while adding explicit coverage and incomplete behavior without signup. Commit(s): pending (preparatory)
 - [ ] **POLICY-004** · configurable Pro policy profile · deps: POLICY-002 · Add score/severity/confidence/freshness/Hunt settings while keeping local execution unmetered. Commit(s): —
 - [ ] **POLICY-005** · baseline contract and local store · deps: GRAPH-002/007 · Review and persist accepted existing observations with subject/policy metadata and safe concurrent writes. Commit(s): —
 - [ ] **POLICY-006** · baseline comparison · deps: POLICY-005, GRAPH-008 · Distinguish new debt from accepted existing debt and expose stale/mismatched baseline as review/incomplete. Commit(s): —
