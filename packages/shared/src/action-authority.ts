@@ -1,4 +1,4 @@
-export const AGENT_ACTIONS = ["inspect", "propose", "mutate", "install", "execute", "network", "except", "sign", "publish", "upload", "policy", "billing"] as const;
+export const AGENT_ACTIONS = Object.freeze(["inspect", "propose", "mutate", "install", "execute", "network", "except", "sign", "publish", "upload", "policy", "billing"] as const);
 export type AgentAction = (typeof AGENT_ACTIONS)[number];
 
 export interface ActionAuthority {
@@ -21,5 +21,8 @@ const MATRIX: Record<AgentAction, ActionAuthority> = {
   policy: { action: "policy", approvalRequired: true, sideEffect: "identity" },
   billing: { action: "billing", approvalRequired: true, sideEffect: "hosted" },
 };
+for (const action of AGENT_ACTIONS) Object.freeze(MATRIX[action]);
 
-export function actionAuthority(action: AgentAction): ActionAuthority { return MATRIX[action]; }
+export class AgentActionValidationError extends Error { override readonly name = "AgentActionValidationError"; }
+export function parseAgentAction(value: unknown): AgentAction { if (typeof value !== "string" || !(AGENT_ACTIONS as readonly string[]).includes(value)) throw new AgentActionValidationError("unknown agent action"); return value as AgentAction; }
+export function actionAuthority(action: AgentAction | unknown): ActionAuthority { return MATRIX[parseAgentAction(action)]; }
