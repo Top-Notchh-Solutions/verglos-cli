@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createFreePolicyProfile, createProPolicyProfile } from "./policy-profiles.js";
+import { policyDocumentDigest } from "./policy-document.js";
 
 test("Free policy blocks critical findings but allows incomplete coverage", () => {
   const policy = createFreePolicyProfile();
@@ -8,6 +9,9 @@ test("Free policy blocks critical findings but allows incomplete coverage", () =
   assert.equal(policy.checks[0]?.onFailure, "BLOCK");
   assert.equal(policy.checks[0]?.coverage, "allow-incomplete");
   assert.equal(policy.approvals.required, false);
+  assert.deepEqual(policy.checks[0]?.severities, ["critical"]);
+  assert.equal(policy.checks[0]?.freshness, "current"); assert.equal(policy.checks[0]?.artifactMatch, "not-required"); assert.equal(policy.checks[0]?.hunt, "not-required");
+  assert.equal(policy.exceptions.enabled, false); assert.equal(policyDocumentDigest(policy), policyDocumentDigest(createFreePolicyProfile()));
 });
 
 test("Pro policy exposes configurable confidence, freshness, coverage, and Hunt", () => {
