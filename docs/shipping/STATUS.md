@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-006`: pure change/action projection; recorded added/fixed/unchanged observations and identity/coverage/policy deltas produce bounded deterministic next actions. Worsening, owner, remediation, and Hunt integrations remain open.
+`LOCAL-007`: bounded evidence/lineage projection boundary added preparatorily; output is sorted and immutable, with explicit limits and no fabricated engine health. Populated fixtures and reporter/UI integration remain open.
 
 ## Scope hold
 
