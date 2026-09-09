@@ -159,7 +159,7 @@ Evidence/problem: mature teams already produce SARIF, SBOM, VEX, and provenance.
 
 Evidence/problem: existing finding IDs and score views are scanner-run oriented. Multiple sources need a stable graph without deleting lineage or double-counting risk.
 
-- [ ] **GRAPH-001** · native finding-to-observation adapter · deps: CONTRACT-004/005, TRUTH-010 · Convert current JS/TS findings without breaking legacy reports; preserve native rule, context, confidence, provenance, and remediation. Commit(s): —
+- [ ] **GRAPH-001** · native finding-to-observation adapter · deps: CONTRACT-004/005, TRUTH-010 · Convert current JS/TS findings without breaking legacy reports; preserve native rule, context, confidence, provenance, and remediation. Commit(s): `pending (preparatory)`
 - [ ] **GRAPH-002** · canonical stable fingerprint v1 · deps: GRAPH-001, TARGET-002-009 · Derive from subject/location/package/advisory/rule/evidence class, never engine order or presentation text. Tests: repeatability, file moves, version changes, collisions. Commit(s): —
 - [ ] **GRAPH-003** · severity/confidence normalization · deps: GRAPH-001, IMPORT-002-005, ENGINE-010 · Preserve originals, version mapping policy, and expose uncertain/unmapped values. Commit(s): —
 - [ ] **GRAPH-004** · correlation graph · deps: GRAPH-002/003 · Link overlapping native/Trivy/imported observations while retaining every producer and raw reference. Acceptance: correlation never silently erases disagreement. Commit(s): —

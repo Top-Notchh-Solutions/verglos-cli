@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`IMPORT-002`: SARIF structural hardening; nested validation is implemented preparatorily, while standards-complete preservation and canonical observation mapping remain open.
+`GRAPH-001`: native finding-to-observation adapter; deterministic subject-bound projection is implemented preparatorily, while scanner integration and full graph correlation remain open.
 
 ## Scope hold
 
