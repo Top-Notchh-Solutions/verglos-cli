@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-005`: pure release-header projection; decision, primary subject, policy digest, limitations, and explicit signer state are projected without severity inference. Reporter/UI/signing integration remains open.
+`LOCAL-006`: pure change/action projection; recorded added/fixed/unchanged observations and identity/coverage/policy deltas produce bounded deterministic next actions. Worsening, owner, remediation, and Hunt integrations remain open.
 
 ## Scope hold
 
