@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-008`: read-only exception/export projection; exact scope, approval state, digests, expiry, and implemented export allowlist are projected without claiming `.vgl`/HTML/PDF/signing support. Command and viewer integration remain open.
+`LOCAL-009`: loopback viewer session boundary; an in-memory payload is served only on an unpredictable exact route with restrictive CSP and clean shutdown. UI, browser launch, report validation, and hosted viewing remain open.
 
 ## Scope hold
 
