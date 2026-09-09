@@ -34,6 +34,7 @@
 | Atomic tar extraction | `VERGLOS_ARCHIVE_SAFETY.md` | ENGINE-004 (preparatory) | 1 shared test: staged validated file extraction | implemented at `4e0709e`; compressed tar/zip parsing and downloader remain open |
 | Bounded gzip tar extraction | `VERGLOS_ARCHIVE_SAFETY.md` | ENGINE-004 (preparatory) | 1 shared test: gzip decompression through atomic extractor | implemented at `16b649e`; zip parsing and downloader remain open |
 | Engine cache status | `VERGLOS_ENGINE_CACHE.md` | ENGINE-008 (preparatory) | 1 shared test: read-only listing of digestable installed entries | implemented at `412be88`; lifecycle commands and rollback remain open |
+| CLI engine status | `VERGLOS_ENGINES_STATUS_COMMAND.md` | ENGINE-008 (preparatory) | CLI typecheck plus cache-status process test | implemented at `b1e1431`; install/update/rollback commands remain open |
 | Engine trust verification | `VERGLOS_ENGINE_TRUST.md` | ENGINE-005 | 1 shared test: Ed25519 verification over canonical unsigned manifest bytes | implemented at `b5f00fa`; trust-root rotation and downloader integration remain open |
 | System engine inspection | `VERGLOS_SYSTEM_ENGINE.md` | ENGINE-006 | 1 shared test: explicit absolute path and unavailable probe handling | implemented at `34ea338`; capability negotiation remains open |
 | Native JS/TS scan | command + observation | TRUTH-001, CONTRACT-001 | Current: 58 scanner tests in `packages/scanner/src/**/*.test.ts`; required: frozen detector fixtures and determinism | shipped; evidence: `VERGLOS_CLI_CAPABILITY_INVENTORY.md` |
