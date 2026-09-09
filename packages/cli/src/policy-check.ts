@@ -1,10 +1,12 @@
 import { readFile } from "node:fs/promises";
+import { basename } from "node:path";
 import { explainPolicyEvaluation, parsePolicyEvaluationJson, policyDecisionExitCode } from "@verglos/shared";
 
 export async function executePolicyCheck(path: string, json = false, quiet = false): Promise<number> {
   try {
     const bytes = await readFile(path); if (bytes.byteLength > 8 * 1024 * 1024) throw new Error("policy evaluation exceeds the 8 MiB limit");
-    if (path.endsWith(".vgl") || path.includes("snapshot")) throw new Error("record and snapshot inputs are not supported by policy check");
+    const name = basename(path).toLowerCase();
+    if (name.endsWith(".vgl") || name.endsWith(".snapshot") || name.endsWith(".snapshot.json")) throw new Error("record and snapshot inputs are not supported by policy check");
     const evaluation = parsePolicyEvaluationJson(bytes);
     const explanation = explainPolicyEvaluation(evaluation);
     if (json) console.log(JSON.stringify(explanation));
