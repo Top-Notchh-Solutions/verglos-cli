@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`ENGINE-003`: engine cache layout and atomic install transaction, following completed ENGINE-002.
+`ENGINE-004`: safe archive downloader/extractor, following completed ENGINE-003.
 
 ## Scope hold
 

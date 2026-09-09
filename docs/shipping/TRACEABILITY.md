@@ -29,6 +29,7 @@
 | EngineAdapter contract | `VERGLOS_ENGINE_ADAPTER_CONTRACT.md` | ENGINE-001 | 1 shared test: bounded timeout and explicit network declaration invariants | implemented at `f1a86dd`; concrete Trivy adapter remains ENGINE-002+ |
 | Trivy adapter health boundary | `VERGLOS_TRIVY_ADAPTER.md` | ENGINE-001 (preparatory) | 1 shared test: explicit healthy/unavailable health probe | implemented at `609a7b1`; signed engine manifest and managed execution remain ENGINE-002+ |
 | Engine manifest contract | `VERGLOS_ENGINE_MANIFEST.md` | ENGINE-002 | 2 shared tests: signed artifact metadata/canonicalization and mutable-digest rejection | implemented at `e95a7b6`; signature verification and install lifecycle remain ENGINE-003+ |
+| Engine cache transaction | `VERGLOS_ENGINE_CACHE.md` | ENGINE-003 | 2 shared tests: digest-verified atomic install and mismatch rejection | implemented at `d54cb00`; fsync/concurrency qualification remains open |
 | Native JS/TS scan | command + observation | TRUTH-001, CONTRACT-001 | Current: 58 scanner tests in `packages/scanner/src/**/*.test.ts`; required: frozen detector fixtures and determinism | shipped; evidence: `VERGLOS_CLI_CAPABILITY_INVENTORY.md` |
 | External evidence import | observation + adapter | IMPORT-001/002, ENGINES | SARIF/SBOM/VEX malformed and attribution fixtures | planned |
 | Source-to-artifact identity | subject + lineage | TARGET-001, GRAPH-001 | digest mismatch/incomplete tests | planned |

@@ -124,7 +124,7 @@ Evidence/problem: no engine-adapter contract or verified engine lifecycle exists
 
 - [x] **ENGINE-001** · `EngineAdapter` contract implementation · deps: CONTRACT-003/004, TARGET-001 · Define capability, requirements, health, execute, normalize, raw-output, and update metadata boundaries. Commit(s): `f1a86dd`
 - [x] **ENGINE-002** · engine manifest format · deps: ENGINE-001 · Add signed compatibility manifest schema for platform artifacts, checksums, source, license, version range, and rollback metadata. Commit(s): `e95a7b6`
-- [ ] **ENGINE-003** · engine cache layout and atomic install transaction · deps: ENGINE-002 · Use user-controlled cache path, staging, fsync/rename strategy, lock, cleanup, and explicit rollback. Tests: concurrent/partial install. Commit(s): —
+- [x] **ENGINE-003** · engine cache layout and atomic install transaction · deps: ENGINE-002 · Use user-controlled cache path, staging, fsync/rename strategy, lock, cleanup, and explicit rollback. Tests: concurrent/partial install. Commit(s): `d54cb00`
 - [ ] **ENGINE-004** · safe archive downloader/extractor · deps: ENGINE-003 · Stream with limits; reject checksum/signature mismatch, traversal, symlink/hardlink escape, unexpected members, and partial output. Commit(s): —
 - [ ] **ENGINE-005** · trusted source and signature verification · deps: ENGINE-002/004 · Pin allowed origins/identities and verify artifact before activation. Acceptance: no trust from filename, URL text, or `PATH`. Commit(s): —
 - [ ] **ENGINE-006** · system-engine mode · deps: ENGINE-001 · Require explicit path, verify version/capabilities/digest, display trust status, and never silently use same-named binaries. Commit(s): —
