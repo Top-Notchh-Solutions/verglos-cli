@@ -16,3 +16,7 @@ test("release diff classifies observations and explicit state changes", () => {
   assert.equal(result.identityChanged, false);
   assert.equal(result.coverageChanged, false);
 });
+test("release diff compares identity and coverage canonically", () => {
+  const base = snapshot([]); const head = { ...base, subjectIds: [...base.subjectIds].reverse(), lineage: { edges: [...base.lineage.edges].reverse(), gaps: [...base.lineage.gaps].reverse() } } as typeof base;
+  const result = diffReleaseSnapshots(base, head); assert.equal(result.identityChanged, false); assert.equal(result.coverageChanged, false);
+});
