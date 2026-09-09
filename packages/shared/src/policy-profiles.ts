@@ -30,6 +30,7 @@ export function createProPolicyProfile(options: {
   readonly requireCompleteCoverage?: boolean;
   readonly requireHunt?: boolean;
 } = {}): PolicyDocument {
+  if (options.minimumConfidence !== undefined && (!Number.isFinite(options.minimumConfidence) || options.minimumConfidence < 0 || options.minimumConfidence > 1)) throw new Error("Pro policy minimumConfidence must be finite and between 0 and 1.");
   return parsePolicyDocument({
     schemaId: "urn:verglos:schema:policy-document",
     schemaVersion: "1.0.0",

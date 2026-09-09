@@ -24,3 +24,4 @@ test("Pro policy exposes configurable confidence, freshness, coverage, and Hunt"
   assert.equal(check.hunt, "required");
   assert.equal(policy.exceptions.requireApproval, true);
 });
+test("Pro policy rejects invalid confidence bounds", () => { assert.throws(() => createProPolicyProfile({ minimumConfidence: 2 }), /between 0 and 1/); assert.throws(() => createProPolicyProfile({ minimumConfidence: Number.NaN }), /finite/); });
