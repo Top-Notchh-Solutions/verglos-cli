@@ -34,15 +34,20 @@ export interface LineageGraph {
   readonly edges: readonly LineageEdge[];
   readonly gaps: readonly string[];
 }
+export class LineageValidationError extends Error { override readonly name = "LineageValidationError"; }
 
 export function buildLineageGraph(
   subjects: readonly Subject[],
   declarations: readonly LineageDeclaration[],
 ): LineageGraph {
+  if (subjects.length > 10_000 || declarations.length > 20_000) throw new LineageValidationError("Lineage graph exceeds bounded subject or declaration limits.");
   const nodes = subjects.map((subject) => SubjectDocumentSchema.parse(subject));
   const nodeIds = new Set(nodes.map((subject) => subject.subjectId));
   const gaps: string[] = [];
   const edges = declarations.map((declaration) => {
+    if (!(LINEAGE_RELATIONS as readonly string[]).includes(declaration.relation)) throw new LineageValidationError("Lineage relation is unsupported.");
+    if (declaration.status !== undefined && !(LINEAGE_STATUSES as readonly string[]).includes(declaration.status)) throw new LineageValidationError("Lineage status is unsupported.");
+    if (declaration.evidenceRef !== undefined && (!/^sha256:[a-f0-9]{64}$/.test(declaration.evidenceRef) || declaration.evidenceRef.length > 256)) throw new LineageValidationError("Lineage evidence reference is invalid.");
     const fromSubjectId = SubjectIdSchema.parse(declaration.fromSubjectId);
     const toSubjectId = SubjectIdSchema.parse(declaration.toSubjectId);
     if (!nodeIds.has(fromSubjectId) || !nodeIds.has(toSubjectId)) {
@@ -60,6 +65,6 @@ export function buildLineageGraph(
     };
   });
   const sortedNodes = [...nodes].sort((a, b) => a.subjectId.localeCompare(b.subjectId));
-  const sortedEdges = [...edges].sort((a, b) => `${a.fromSubjectId}:${a.toSubjectId}:${a.relation}`.localeCompare(`${b.fromSubjectId}:${b.toSubjectId}:${b.relation}`));
+  const sortedEdges = [...new Map(edges.map((edge) => [`${edge.fromSubjectId}:${edge.toSubjectId}:${edge.relation}:${edge.status}:${edge.evidenceRef ?? ""}`, edge])).values()].sort((a, b) => `${a.fromSubjectId}:${a.toSubjectId}:${a.relation}:${a.status}`.localeCompare(`${b.fromSubjectId}:${b.toSubjectId}:${b.relation}:${b.status}`));
   return { nodes: Object.freeze(sortedNodes), edges: Object.freeze(sortedEdges), gaps: Object.freeze([...new Set(gaps)].sort()) };
 }

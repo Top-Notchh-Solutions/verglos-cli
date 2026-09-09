@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`GRAPH-001`: native finding-to-observation adapter; deterministic subject-bound projection is implemented preparatorily, while scanner integration and full graph correlation remain open.
+`GRAPH-006`: lineage graph hardening; bounded deterministic graph validation is implemented preparatorily, while provenance verification and complete producer integration remain open.
 
 ## Scope hold
 
