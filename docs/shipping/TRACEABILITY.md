@@ -114,3 +114,4 @@
 | Final acceptance | acceptance contract | POST-RC | frozen corpus and authorized POC | not-started |
 
 Update this table with file paths, test names, and commit IDs as tasks ship.
+- ENGINE-004 safe archive transport/extraction (preparatory) | `archive-extractor.ts` | bounded streamed download, duplicate/traversal/link rejection, partial-output cleanup | implemented locally; checksum/signature and format adapters remain downstream
