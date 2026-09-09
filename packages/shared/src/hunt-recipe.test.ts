@@ -1,0 +1,9 @@
+import assert from "node:assert/strict";
+import { test } from "node:test";
+import { parseHuntRecipe } from "./hunt-recipe.js";
+
+test("Hunt recipes are declarative, bounded, and deny arbitrary network by default", () => {
+  const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-sql", ruleId: "d1-1", targetSubjectId: "urn:verglos:subject:artifact:sha256:" + "a".repeat(64), imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["node", "check.js"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, memoryMb: 256, outputBytes: 10000 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "local reproduction" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } });
+  assert.equal(recipe.network.mode, "denied");
+  assert.throws(() => parseHuntRecipe({ ...recipe, network: { ...recipe.network, destinations: ["https://example.com"] } }));
+});
