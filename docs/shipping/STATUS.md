@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`TARGET-009`: local OCI layout/tar resolver, following completed TARGET-008.
+`TARGET-010`: source-to-artifact linkage, following completed TARGET-009.
 
 ## Scope hold
 
