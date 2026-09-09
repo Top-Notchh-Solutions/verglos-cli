@@ -13,3 +13,9 @@ const CAPABILITIES: readonly Omit<McpCapability, "approvalRequired">[] = [
   { tool: "verglos_attest", plan: "studio", maturity: "partial" },
 ];
 export function listMcpCapabilities(): readonly McpCapability[] { return Object.freeze(CAPABILITIES.map((capability) => ({ ...capability, approvalRequired: mcpToolAuthority(capability.tool)?.approvalRequired ?? true }))); }
+
+export function reconcileMcpCapabilities(registeredTools: readonly string[]): readonly McpCapability[] {
+  const capabilities = listMcpCapabilities(); const expected = new Set(capabilities.map((item) => item.tool)); const actual = new Set(registeredTools);
+  if (actual.size !== registeredTools.length || actual.size !== expected.size || [...expected].some((tool) => !actual.has(tool))) throw new Error("MCP tool and capability registries are out of sync");
+  return capabilities;
+}

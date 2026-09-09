@@ -5,7 +5,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { mcpToolAuthority, type Finding } from "@verglos/shared";
+import { mcpToolAuthority, reconcileMcpCapabilities, type Finding } from "@verglos/shared";
 import { checkBeforeWrite } from "./tools/check-before-write.js";
 import type {
   CheckBeforeWriteInput as ToolInput,
@@ -298,7 +298,8 @@ export function createVerglosMcpServer(): Server {
   );
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({
-    tools: TOOLS.map((t) => ({
+    // Fail closed if the hand-authored MCP tool list drifts from shared capability truth.
+    tools: reconcileMcpCapabilities(TOOLS.map((tool) => tool.name)) && TOOLS.map((t) => ({
       name: t.name,
       description: t.description,
       inputSchema: t.inputSchema,
