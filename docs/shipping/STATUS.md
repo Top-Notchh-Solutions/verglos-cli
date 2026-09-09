@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-007`: bounded evidence/lineage projection boundary added preparatorily; output is sorted and immutable, with explicit limits and no fabricated engine health. Populated fixtures and reporter/UI integration remain open.
+`LOCAL-008`: read-only exception/export projection; exact scope, approval state, digests, expiry, and implemented export allowlist are projected without claiming `.vgl`/HTML/PDF/signing support. Command and viewer integration remain open.
 
 ## Scope hold
 
