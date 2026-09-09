@@ -57,3 +57,4 @@ export * from "./policy-profiles.js";
 export * from "./baseline.js";
 export * from "./baseline-store.js";
 export * from "./baseline-compare.js";
+export * from "./policy-explanation.js";
