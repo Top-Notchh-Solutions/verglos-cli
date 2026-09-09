@@ -32,6 +32,7 @@ import { executeTargetInspect } from "./target-inspect.js";
 import { listCachedEngines } from "@verglos/shared";
 import { homedir } from "node:os";
 import { join } from "node:path";
+import { executeEngineInstall } from "./engines-install.js";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
@@ -94,6 +95,13 @@ program
     else if (engines.length === 0) console.log("No cached engines found.");
     else for (const engine of engines) console.log(`${engine.engineId}@${engine.version} ${engine.digest}`);
   });
+
+program
+  .command("engines")
+  .command("install <engineId> <version> <artifactPath>")
+  .description("Install a local digest-pinned engine artifact")
+  .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
+  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest)); });
 
 program
   .command("target")
