@@ -18,7 +18,7 @@ const ApprovalRequestBaseSchema = z.object({
 }).strict();
 export const ApprovalRequestSchema = ApprovalRequestBaseSchema.superRefine((value, ctx) => { if (value.expiresAt <= value.requestedAt) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["expiresAt"], message: "approval expiry must follow request time" }); });
 export type ApprovalRequest = z.infer<typeof ApprovalRequestSchema>;
-export const ApprovalReceiptSchema = ApprovalRequestBaseSchema.extend({ decision: z.enum(["approved", "denied"]), decidedBy: Id, decidedAt: Time, requestDigest: z.string().regex(/^sha256:[a-f0-9]{64}$/) }).strict();
+export const ApprovalReceiptSchema = ApprovalRequestBaseSchema.extend({ decision: z.enum(["approved", "denied"]), decidedBy: Id, decidedAt: Time, requestDigest: z.string().regex(/^sha256:[a-f0-9]{64}$/) }).strict().superRefine((value, ctx) => { if (value.decidedAt < value.requestedAt || value.decidedAt >= value.expiresAt) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["decidedAt"], message: "approval decision must fall within the request validity window" }); });
 export type ApprovalReceipt = z.infer<typeof ApprovalReceiptSchema>;
 export function approvalRequestDigest(request: ApprovalRequest): string { return `sha256:${createHash("sha256").update(canonicalizeJson(ApprovalRequestSchema.parse(request)), "utf8").digest("hex")}`; }
 export function createApprovalReceipt(request: ApprovalRequest, input: { decision: "approved" | "denied"; decidedBy: string; decidedAt: string }): ApprovalReceipt { const parsed = ApprovalRequestSchema.parse(request); const receipt = { ...parsed, ...input, requestDigest: approvalRequestDigest(parsed) }; return ApprovalReceiptSchema.parse(receipt); }
