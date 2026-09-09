@@ -1,5 +1,6 @@
 import { mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { gunzipSync } from "node:zlib";
 import { validateArchiveMembers, type ArchiveMember } from "./archive-safety.js";
 
 export async function extractTarArchive(bytes: Uint8Array, destination: string): Promise<void> {
@@ -17,4 +18,11 @@ export async function extractTarArchive(bytes: Uint8Array, destination: string):
   const parent = await mkdtemp(`${destination}.staging-`);
   try { for (const member of members) { const path = join(parent, member.path); if (member.kind === "directory") await mkdir(path, { recursive: true }); else { await mkdir(join(path, ".."), { recursive: true }); await writeFile(path, member.data); } } await rename(parent, destination); }
   catch (error) { await rm(parent, { recursive: true, force: true }); throw error; }
+}
+
+export async function extractTarGzipArchive(bytes: Uint8Array, destination: string, maxDecompressedBytes = 1_073_741_824): Promise<void> {
+  let decompressed: Buffer;
+  try { decompressed = gunzipSync(bytes, { maxOutputLength: maxDecompressedBytes }); }
+  catch { throw new Error("Gzip archive could not be safely decompressed within the configured limit."); }
+  await extractTarArchive(decompressed, destination);
 }
