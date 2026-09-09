@@ -50,3 +50,4 @@ export * from "./correlation.js";
 export * from "./deduplication.js";
 export * from "./lineage-graph.js";
 export * from "./release-snapshot.js";
+export * from "./release-diff.js";
