@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`GRAPH-006`: lineage graph hardening; bounded deterministic graph validation is implemented preparatorily, while provenance verification and complete producer integration remain open.
+`GRAPH-007`: release snapshot hardening; bounded deterministic snapshot validation is implemented preparatorily, while policy/release authorization and signed records remain open.
 
 ## Scope hold
 

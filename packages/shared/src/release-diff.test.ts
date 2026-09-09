@@ -8,10 +8,10 @@ const subject = createSubject({ kind: "artifact", digest: { algorithm: "sha256",
 const snapshot = (fingerprints: string[], policyInputs = { mode: "free" }) => createReleaseSnapshot({ primarySubject: subject, subjects: [subject], observations: fingerprints.map((fingerprint) => ({ fingerprint, producerIds: ["native"], payloads: [], disagreement: false })), lineage: { edges: [], gaps: [] }, policyInputs });
 
 test("release diff classifies observations and explicit state changes", () => {
-  const result = diffReleaseSnapshots(snapshot(["sha256:a", "sha256:b"]), snapshot(["sha256:b", "sha256:c"], { mode: "team" }));
-  assert.deepEqual(result.added, ["sha256:c"]);
-  assert.deepEqual(result.fixed, ["sha256:a"]);
-  assert.deepEqual(result.unchanged, ["sha256:b"]);
+  const result = diffReleaseSnapshots(snapshot([`sha256:${"a".repeat(64)}`, `sha256:${"b".repeat(64)}`]), snapshot([`sha256:${"b".repeat(64)}`, `sha256:${"c".repeat(64)}`], { mode: "team" }));
+  assert.deepEqual(result.added, [`sha256:${"c".repeat(64)}`]);
+  assert.deepEqual(result.fixed, [`sha256:${"a".repeat(64)}`]);
+  assert.deepEqual(result.unchanged, [`sha256:${"b".repeat(64)}`]);
   assert.equal(result.policyChanged, true);
   assert.equal(result.identityChanged, false);
   assert.equal(result.coverageChanged, false);
