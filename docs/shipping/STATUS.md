@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-007`: exception applicability input hardening; bounded identity/timestamp validation is verified preparatorily, while exception effects and RBAC remain open.
+`POLICY-008`: exception audit projection; read-only digest-bound history is implemented preparatorily, while expiry enforcement and hosted audit remain open.
 
 ## Scope hold
 
