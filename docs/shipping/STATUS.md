@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-011`: report-view validation boundary; only supported JSON release-header projections render through the escaped viewer, while HTML/records/malformed inputs are rejected. Browser/session wiring and full report formats remain open.
+`LOCAL-012`: CLI subprocess fixture harness; captures exit/stdout/stderr and unexpected-file baselines for future no-account journey tests. Journey execution, network/process hooks, and OS matrix remain open.
 
 ## Scope hold
 
