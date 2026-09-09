@@ -28,6 +28,7 @@ export * from "./oci-layout-resolver.js";
 export * from "./source-artifact-linkage.js";
 export * from "./engine-adapter.js";
 export * from "./trivy-adapter.js";
+export * from "./trivy-parser.js";
 export * from "./engine-manifest.js";
 export * from "./engine-cache.js";
 export * from "./archive-safety.js";
