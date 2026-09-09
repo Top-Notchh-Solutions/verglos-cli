@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-012`: CLI fixture harness plus a static boundary journey test covering release diff → header → viewer composition. Real command entrypoints, network/process hooks, and OS matrix remain open.
+`AGENT-001`: shared action-authority lookup hardened preparatorily; all declared actions now validate at runtime and return frozen authority metadata. Approval receipts and MCP enforcement remain open.
 
 ## Scope hold
 
