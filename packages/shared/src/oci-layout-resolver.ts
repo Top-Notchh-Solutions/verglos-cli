@@ -1,0 +1,26 @@
+import { createHash } from "node:crypto";
+import { lstat, readFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
+import { resolveOciDocument } from "./oci-resolver.js";
+import type { OciIndexSubject, OciManifestSubject } from "./subject.js";
+
+export class OciLayoutResolutionError extends Error {
+  override readonly name = "OciLayoutResolutionError";
+  constructor(readonly code: "INVALID_LAYOUT" | "MISSING_BLOB" | "DIGEST_MISMATCH" | "AMBIGUOUS_INDEX", message: string) { super(message); }
+}
+
+export async function resolveOciLayout(rootInput: string, platform?: string): Promise<OciManifestSubject | OciIndexSubject> {
+  const root = resolve(rootInput);
+  try { if (!(await lstat(join(root, "oci-layout.json"))).isFile() || !(await lstat(join(root, "index.json"))).isFile()) throw new Error(); } catch { throw new OciLayoutResolutionError("INVALID_LAYOUT", "OCI layout requires oci-layout.json and index.json."); }
+  let index: { manifests?: Array<{ digest?: string; annotations?: Record<string, string>; platform?: { os: string; architecture: string; variant?: string } }> };
+  try { index = JSON.parse((await readFile(join(root, "index.json"))).toString("utf8")); } catch { throw new OciLayoutResolutionError("INVALID_LAYOUT", "OCI layout index is invalid JSON."); }
+  if (!Array.isArray(index.manifests) || index.manifests.length !== 1 || typeof index.manifests[0]?.digest !== "string") throw new OciLayoutResolutionError("AMBIGUOUS_INDEX", "OCI layout must contain exactly one manifest descriptor.");
+  const descriptor = index.manifests[0];
+  const descriptorDigest = descriptor.digest as string;
+  if (!descriptorDigest.startsWith("sha256:") || !/^sha256:[a-f0-9]{64}$/.test(descriptorDigest)) throw new OciLayoutResolutionError("INVALID_LAYOUT", "OCI layout descriptor must use a SHA-256 digest.");
+  const bytes = await readFile(join(root, "blobs", "sha256", descriptorDigest.slice(7))).catch(() => { throw new OciLayoutResolutionError("MISSING_BLOB", "OCI layout manifest blob is missing."); });
+  const actual = createHash("sha256").update(bytes).digest("hex");
+  if (actual !== descriptorDigest.slice(7)) throw new OciLayoutResolutionError("DIGEST_MISMATCH", "OCI layout manifest blob digest does not match its descriptor.");
+  const ref = `localhost/layout@${descriptorDigest}`;
+  return resolveOciDocument(ref, bytes);
+}

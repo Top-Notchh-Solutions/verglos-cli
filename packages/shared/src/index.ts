@@ -24,3 +24,4 @@ export * from "./artifact-resolver.js";
 export * from "./sbom-resolver.js";
 export * from "./oci-reference.js";
 export * from "./oci-resolver.js";
+export * from "./oci-layout-resolver.js";
