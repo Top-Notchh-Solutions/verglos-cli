@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`ENGINE-004`: safe archive downloader/extractor, following completed ENGINE-003.
+`ENGINE-004`: safe archive downloader/extractor; trust verification groundwork is complete, but archive decoding remains open.
 
 ## Scope hold
 

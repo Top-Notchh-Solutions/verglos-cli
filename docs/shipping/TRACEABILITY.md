@@ -31,6 +31,7 @@
 | Engine manifest contract | `VERGLOS_ENGINE_MANIFEST.md` | ENGINE-002 | 2 shared tests: signed artifact metadata/canonicalization and mutable-digest rejection | implemented at `e95a7b6`; signature verification and install lifecycle remain ENGINE-003+ |
 | Engine cache transaction | `VERGLOS_ENGINE_CACHE.md` | ENGINE-003 | 2 shared tests: digest-verified atomic install and mismatch rejection | implemented at `d54cb00`; fsync/concurrency qualification remains open |
 | Archive safety gate | `VERGLOS_ARCHIVE_SAFETY.md` | ENGINE-004 (preparatory) | 2 shared tests: traversal/link/duplicate/size rejection | implemented at `7bcd472`; tar/zip decoding and downloader remain unshipped |
+| Engine trust verification | `VERGLOS_ENGINE_TRUST.md` | ENGINE-005 | 1 shared test: Ed25519 verification over canonical unsigned manifest bytes | implemented at `b5f00fa`; trust-root rotation and downloader integration remain open |
 | Native JS/TS scan | command + observation | TRUTH-001, CONTRACT-001 | Current: 58 scanner tests in `packages/scanner/src/**/*.test.ts`; required: frozen detector fixtures and determinism | shipped; evidence: `VERGLOS_CLI_CAPABILITY_INVENTORY.md` |
 | External evidence import | observation + adapter | IMPORT-001/002, ENGINES | SARIF/SBOM/VEX malformed and attribution fixtures | planned |
 | Source-to-artifact identity | subject + lineage | TARGET-001, GRAPH-001 | digest mismatch/incomplete tests | planned |
