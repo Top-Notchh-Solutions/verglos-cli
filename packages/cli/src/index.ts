@@ -34,6 +34,7 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
 import { executeDiff } from "./diff.js";
+import { executePolicyCheck } from "./policy-check.js";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
@@ -90,6 +91,11 @@ program
   .action(async (base: string, head: string, opts: { json?: boolean }) => {
     process.exit(await executeDiff(base, head, opts.json));
   });
+
+const policy = program.command("policy").description("Inspect local policy evaluation artifacts");
+policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { json?: boolean; quiet?: boolean }) => {
+  process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet));
+});
 
 program
   .command("engines")
