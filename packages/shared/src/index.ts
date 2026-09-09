@@ -42,3 +42,4 @@ export * from "./spdx-importer.js";
 export * from "./cyclonedx-vex-importer.js";
 export * from "./provenance-importer.js";
 export * from "./detect-secrets-importer.js";
+export * from "./detect-secrets-runner.js";
