@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-012`: CI policy-evaluation compatibility; the existing evaluator route is now reachable through the registered `scan/ci --policy-evaluation <path>` flags, preparatorily. Full CI migration, `scan --ci`, and evaluator production wiring remain open.
+`POLICY-013`: policy adversarial decision matrix; a table-driven shared test verifies exact PASS/BLOCK/REVIEW/INCOMPLETE decisions and exit codes preparatorily. Exception, baseline, unknown-rule, and end-to-end integrations remain open.
 
 ## Scope hold
 

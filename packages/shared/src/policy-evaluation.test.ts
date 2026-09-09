@@ -79,6 +79,21 @@ test("failed checks produce BLOCK or REVIEW according to policy", () => {
   );
 });
 
+test("adversarial decision matrix preserves exact outcome exits", () => {
+  const base = input();
+  const cases = [
+    ["required failed", { ...base.checks[0]!, status: "failed" as const }, "BLOCK", 1],
+    ["advisory failed", { ...base.checks[0]!, requirement: "advisory" as const, onFailure: "REVIEW" as const, status: "failed" as const }, "REVIEW", 2],
+    ["advisory missing", { ...base.checks[0]!, requirement: "advisory" as const, onFailure: "REVIEW" as const, status: "missing" as const, evidenceDigests: [], freshness: { status: "unknown" as const, checkedAt: base.evaluatedAt } }, "REVIEW", 2],
+    ["required stale", { ...base.checks[0]!, status: "stale" as const, freshness: { status: "stale" as const, checkedAt: base.evaluatedAt, validUntil: base.evaluatedAt } }, "INCOMPLETE", 3],
+  ] as const;
+  for (const [, check, decision, exitCode] of cases) {
+    const evaluation = createPolicyEvaluation({ ...base, checks: [check] });
+    assert.equal(evaluation.decision, decision);
+    assert.equal(evaluation.exitCode, exitCode);
+  }
+});
+
 test("every unavailable required-evidence state produces INCOMPLETE", () => {
   const base = input();
   for (const status of ["missing", "unsupported", "error"] as const) {
