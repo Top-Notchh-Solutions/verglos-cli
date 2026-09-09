@@ -144,7 +144,7 @@ Evidence/problem: mature teams already produce SARIF, SBOM, VEX, and provenance.
 
 - [ ] **IMPORT-001** · importer registry and bounded reader · deps: CONTRACT-003/004/011 · Detect format/version, stream or cap input, preserve source digest, and reject ambiguous/oversized content. Commit(s): `pending (preparatory)`
 - [ ] **IMPORT-002** · SARIF 2.1.0 importer · deps: IMPORT-001 · Preserve tool/driver/rule/run/location/fingerprint/automation details and reject malformed paths/URIs. Commit(s): `pending (preparatory)`
-- [ ] **IMPORT-003** · CycloneDX SBOM importer · deps: IMPORT-001, TARGET-006 · Preserve BOM serial/version, components/PURLs/hashes/dependencies/licenses and subject relationship. Commit(s): —
+- [ ] **IMPORT-003** · CycloneDX SBOM importer · deps: IMPORT-001, TARGET-006 · Preserve BOM serial/version, components/PURLs/hashes/dependencies/licenses and subject relationship. Commit(s): `pending (preparatory)`
 - [ ] **IMPORT-004** · SPDX SBOM importer · deps: IMPORT-001, TARGET-006 · Preserve document namespace, packages/files/checksums/licenses/relationships and subject identity. Commit(s): —
 - [ ] **IMPORT-005** · CycloneDX VEX importer · deps: IMPORT-003 · Preserve vulnerability analysis state, justification, response, detail, timestamps, and component link; never convert assertion into native verification. Commit(s): —
 - [ ] **IMPORT-006** · in-toto/SLSA provenance importer · deps: IMPORT-001, TARGET-010 · Validate envelope/statement shape, subjects, builder/run details, and mark unverified signatures separately. Commit(s): —
