@@ -4,6 +4,7 @@ import { test } from "node:test";
 import { parseEngineManifest } from "./engine-manifest.js";
 import { canonicalizeJson } from "./schema.js";
 import { verifyEngineManifestSignature } from "./engine-trust.js";
+import { isTrustedEngineSource } from "./engine-trust.js";
 
 test("engine manifest signatures verify canonical unsigned bytes", () => {
   const { privateKey, publicKey } = generateKeyPairSync("ed25519");
@@ -12,3 +13,4 @@ test("engine manifest signatures verify canonical unsigned bytes", () => {
   const value = sign(null, Buffer.from(canonicalizeJson(unsigned), "utf8"), privateKey).toString("base64");
   assert.deepEqual(verifyEngineManifestSignature({ ...base, signature: { ...base.signature, value } }, publicKey.export({ type: "spki", format: "pem" }).toString()), { trusted: true, keyId: "k1" });
 });
+test("engine sources require exact pinned HTTPS origins", () => { assert.equal(isTrustedEngineSource("https://mirror.example/engines/trivy", ["https://mirror.example"]), true); assert.equal(isTrustedEngineSource("http://mirror.example/trivy", ["https://mirror.example"]), false); assert.equal(isTrustedEngineSource("https://mirror.example.evil/trivy", ["https://mirror.example"]), false); });
