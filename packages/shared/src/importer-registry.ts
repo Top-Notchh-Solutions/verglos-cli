@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 
-export type ImportFormat = "sarif" | "cyclonedx" | "spdx" | "in-toto";
+export type ImportFormat = "sarif" | "cyclonedx" | "spdx" | "in-toto" | "detect-secrets";
 export interface ImportedDocument { readonly format: ImportFormat; readonly version: string; readonly sourceDigest: { readonly algorithm: "sha256"; readonly value: string }; readonly document: unknown; }
 export class ImporterError extends Error { override readonly name = "ImporterError"; constructor(readonly code: "TOO_LARGE" | "INVALID_JSON" | "UNKNOWN_FORMAT" | "AMBIGUOUS_FORMAT", message: string) { super(message); } }
 
@@ -13,6 +13,7 @@ export function importBoundedJson(bytes: Uint8Array, maxBytes = 64 * 1024 * 1024
   if (doc.bomFormat === "CycloneDX" && typeof doc.specVersion === "string") matches.push({ format: "cyclonedx", version: doc.specVersion });
   if (typeof doc.spdxVersion === "string") matches.push({ format: "spdx", version: doc.spdxVersion });
   if (Array.isArray(doc.subject) && (typeof doc._type === "string" || typeof doc.predicateType === "string")) matches.push({ format: "in-toto", version: "statement" });
+  if (typeof doc.version === "string" && doc.results !== undefined && !Array.isArray(doc.results) && doc.plugins_used !== undefined) matches.push({ format: "detect-secrets", version: doc.version });
   if (matches.length === 0) throw new ImporterError("UNKNOWN_FORMAT", "Imported evidence format is unsupported.");
   if (matches.length > 1) throw new ImporterError("AMBIGUOUS_FORMAT", "Imported evidence matches multiple formats.");
   const match = matches[0]!;
