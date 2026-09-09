@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-002`: pure config migration inspection; clean, obsolete/deferred, and malformed inputs now produce deterministic preparatory diagnostics without file writes or runtime application. Command loading, rewriting, and runtime migration remain open.
+`LOCAL-003`: pure inspect-plan boundary; producer selection is validated and deterministically ordered with explicit no-execution/no-network declarations and bounds. Scan orchestration and snapshot production remain open.
 
 ## Scope hold
 
