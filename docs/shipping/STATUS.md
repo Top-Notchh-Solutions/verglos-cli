@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`TARGET-010`: source-to-artifact linkage, following completed TARGET-009.
+`TARGET-011`: `verglos target inspect` command, following completed TARGET-010.
 
 ## Scope hold
 

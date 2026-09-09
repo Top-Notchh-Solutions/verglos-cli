@@ -24,6 +24,7 @@
 | OCI reference parser | `VERGLOS_OCI_REFERENCE_CONTRACT.md` | TARGET-007 | 2 shared tests: digest/tag/platform parsing and unsafe-reference rejection | implemented at `69a5eaa`; registry resolution remains TARGET-008 |
 | OCI manifest resolver | `VERGLOS_OCI_RESOLVER.md` | TARGET-008 | 2 shared tests: index child/platform preservation and tag/invalid-document rejection | implemented at `14888ba`; network fetch/platform selection remain downstream |
 | Local OCI layout resolver | `VERGLOS_OCI_LAYOUT_RESOLVER.md` | TARGET-009 | 2 shared tests: content-addressed blob verification and missing-blob rejection | implemented at `bc2259f`; tar/archive hardening remains open |
+| Source-to-artifact linkage | `VERGLOS_SOURCE_ARTIFACT_LINKAGE.md` | TARGET-010 | 2 shared tests: matched/unavailable and mismatch classification | implemented at `b6b3811`; build provenance correlation remains open |
 | Native JS/TS scan | command + observation | TRUTH-001, CONTRACT-001 | Current: 58 scanner tests in `packages/scanner/src/**/*.test.ts`; required: frozen detector fixtures and determinism | shipped; evidence: `VERGLOS_CLI_CAPABILITY_INVENTORY.md` |
 | External evidence import | observation + adapter | IMPORT-001/002, ENGINES | SARIF/SBOM/VEX malformed and attribution fixtures | planned |
 | Source-to-artifact identity | subject + lineage | TARGET-001, GRAPH-001 | digest mismatch/incomplete tests | planned |

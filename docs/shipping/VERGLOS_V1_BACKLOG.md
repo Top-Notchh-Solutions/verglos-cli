@@ -115,7 +115,7 @@ Evidence/problem: the current scanner accepts a project path and fingerprint but
 - [x] **TARGET-007** · OCI reference parser and registry boundary · deps: TARGET-001 · Parse registry/repository/tag/digest/platform safely; threat tests cover credential leakage and malformed references. Commit(s): `69a5eaa`
 - [x] **TARGET-008** · OCI manifest/index resolver · deps: TARGET-007 · Resolve mutable tags once to immutable digest, select/record platform, preserve index and child digests, and never silently choose a platform. Commit(s): `14888ba`
 - [x] **TARGET-009** · local OCI layout/tar resolver · deps: TARGET-005/007 · Read OCI/Docker archives with size, member, traversal, symlink, and decompression protections. Commit(s): `bc2259f`
-- [ ] **TARGET-010** · source-to-artifact linkage · deps: TARGET-002/003/005/008 · Correlate declared provenance/build metadata; distinguish matched, mismatched, unavailable, and unverifiable. Acceptance: mismatch cannot PASS. Commit(s): —
+- [x] **TARGET-010** · source-to-artifact linkage · deps: TARGET-002/003/005/008 · Correlate declared provenance/build metadata; distinguish matched, mismatched, unavailable, and unverifiable. Acceptance: mismatch cannot PASS. Commit(s): `b6b3811`
 - [ ] **TARGET-011** · `verglos target inspect` command · deps: TARGET-002-010 · Emit human/JSON subject manifest with deterministic exit codes and explicit incomplete coverage. Tests: repo, artifact, OCI index, offline error. Commit(s): —
 
 ## Epic 03 — Versioned engine manager, verified Trivy adapter, and engine exit
