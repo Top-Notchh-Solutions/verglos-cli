@@ -5,6 +5,14 @@ export function importCycloneDx(bytes: Uint8Array): ImportedCycloneDx {
   const imported = importBoundedJson(bytes); if (imported.format !== "cyclonedx") throw new CycloneDxImportError("MALFORMED_COMPONENT", "Document is not CycloneDX.");
   const version = imported.version; const document = imported.document as Record<string, unknown>; const components = document.components ?? []; const dependencies = document.dependencies ?? [];
   if (!Array.isArray(components) || components.some((entry) => typeof entry !== "object" || entry === null)) throw new CycloneDxImportError("MALFORMED_COMPONENT", "CycloneDX components must be objects.");
-  for (const component of components as Record<string, unknown>[]) { if (typeof component.type !== "string" || (typeof component.name !== "string" && typeof component["bom-ref"] !== "string")) throw new CycloneDxImportError("MALFORMED_COMPONENT", "CycloneDX components require type and name or bom-ref."); if (component.hashes !== undefined && (!Array.isArray(component.hashes) || (component.hashes as unknown[]).some((hash) => typeof hash !== "object" || hash === null))) throw new CycloneDxImportError("MALFORMED_COMPONENT", "CycloneDX hashes must be objects."); }
-  if (!Array.isArray(dependencies) || dependencies.some((entry) => typeof entry !== "object" || entry === null)) throw new CycloneDxImportError("MALFORMED_COMPONENT", "CycloneDX dependencies must be objects."); return { format: "cyclonedx", version, ...(typeof document.serialNumber === "string" ? { serialNumber: document.serialNumber } : {}), sourceDigest: imported.sourceDigest, components: components as Record<string, unknown>[], dependencies: dependencies as Record<string, unknown>[], document };
+  for (const component of components as Record<string, unknown>[]) {
+    if (typeof component.type !== "string" || (typeof component.name !== "string" && typeof component["bom-ref"] !== "string")) throw new CycloneDxImportError("MALFORMED_COMPONENT", "CycloneDX components require type and name or bom-ref.");
+    if (component.hashes !== undefined && (!Array.isArray(component.hashes) || (component.hashes as unknown[]).some((hash) => !hash || typeof hash !== "object" || typeof (hash as Record<string, unknown>).alg !== "string" || typeof (hash as Record<string, unknown>).content !== "string"))) throw new CycloneDxImportError("MALFORMED_COMPONENT", "CycloneDX hashes require algorithm and content strings.");
+  }
+  if (!Array.isArray(dependencies) || dependencies.some((entry) => {
+    if (!entry || typeof entry !== "object" || typeof (entry as Record<string, unknown>).ref !== "string") return true;
+    const dependsOn = (entry as Record<string, unknown>).dependsOn;
+    return dependsOn !== undefined && (!Array.isArray(dependsOn) || dependsOn.some((ref: unknown) => typeof ref !== "string"));
+  })) throw new CycloneDxImportError("MALFORMED_COMPONENT", "CycloneDX dependencies require string refs.");
+  return { format: "cyclonedx", version, ...(typeof document.serialNumber === "string" ? { serialNumber: document.serialNumber } : {}), sourceDigest: imported.sourceDigest, components: components as Record<string, unknown>[], dependencies: dependencies as Record<string, unknown>[], document };
 }
