@@ -136,7 +136,7 @@ Evidence/problem: no engine-adapter contract or verified engine lifecycle exists
 - [ ] **ENGINE-012** · Trivy golden compatibility fixtures · deps: ENGINE-010/011 · Freeze supported version outputs and reject unknown major/schema drift as incomplete. Commit(s): `pending (preparatory)`
 - [ ] **ENGINE-013** · engine freshness and failure policy · deps: ENGINE-011/012, CONTRACT-008 · Map missing/stale/incompatible/database errors to affected incomplete coverage; never create empty success. Commit(s): `pending (preparatory)`
 - [ ] **ENGINE-014** · raw evidence retention/replay · deps: ENGINE-010-013 · Content-address raw output and metadata locally; replay normalization without rescanning; test tamper detection. Commit(s): `pending (preparatory)`
-- [ ] **ENGINE-015** · engine-exit fixture adapter and drill · deps: ENGINE-001/014, GRAPH/POLICY/RECORD later · Implement fixture/alternate adapter now; final drill is gated after downstream epics. Acceptance: no Trivy types escape adapter tests. Commit(s): —
+- [ ] **ENGINE-015** · engine-exit fixture adapter and drill · deps: ENGINE-001/014, GRAPH/POLICY/RECORD later · Implement fixture/alternate adapter now; final drill is gated after downstream epics. Acceptance: no Trivy types escape adapter tests. Commit(s): `pending (preparatory)`
 
 ## Epic 04 — Standard evidence import/export
 
