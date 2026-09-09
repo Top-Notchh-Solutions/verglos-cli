@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-004`: legacy JSON report compatibility; a reporter fixture freezes top-level key order/types and confirms no default `schemaId` injection. HTML/process/path compatibility remains open.
+`LOCAL-005`: pure release-header projection; decision, primary subject, policy digest, limitations, and explicit signer state are projected without severity inference. Reporter/UI/signing integration remains open.
 
 ## Scope hold
 
