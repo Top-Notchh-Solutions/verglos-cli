@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-013`: policy adversarial decision matrix; a table-driven shared test verifies exact PASS/BLOCK/REVIEW/INCOMPLETE decisions and exit codes preparatorily. Exception, baseline, unknown-rule, and end-to-end integrations remain open.
+`LOCAL-001`: read-only command option contract; a source-level test preserves existing JSON/quiet behavior and confirms config/policy flags remain unadvertised until their loaders exist. Shared registration and config/policy loading remain open.
 
 ## Scope hold
 
