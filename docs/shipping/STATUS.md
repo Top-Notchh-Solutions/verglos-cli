@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`GRAPH-009`: offline diff reader hardening; bounded structural snapshot checks are implemented preparatorily, while hosted history and full snapshot semantics remain open.
+`POLICY-001`: policy document validation hardening; typed bounded schema checks are implemented preparatorily, while evaluation and hosted enforcement remain open.
 
 ## Scope hold
 
