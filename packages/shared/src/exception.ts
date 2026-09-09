@@ -244,7 +244,7 @@ export function evaluatePolicyException(
 ): PolicyExceptionApplicability {
   const exception = parsePolicyException(exceptionValue);
   const approval = parseExceptionApproval(approvalValue);
-  const at = TimestampSchema.parse(input.at);
+  let at: string; try { SubjectIdSchema.parse(input.subjectId); ObservationIdSchema.parse(input.observationId); at = TimestampSchema.parse(input.at); } catch { throw new PolicyExceptionValidationError([{ path: "input", code: "invalid", message: "exception applicability input is invalid" }]); }
   const requestDigest = digestPolicyException(exception);
 
   if (
