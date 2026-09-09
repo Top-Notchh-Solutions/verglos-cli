@@ -49,3 +49,4 @@ export * from "./normalization.js";
 export * from "./correlation.js";
 export * from "./deduplication.js";
 export * from "./lineage-graph.js";
+export * from "./release-snapshot.js";
