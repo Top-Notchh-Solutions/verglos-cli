@@ -45,3 +45,4 @@ export * from "./detect-secrets-importer.js";
 export * from "./detect-secrets-runner.js";
 export * from "./finding-adapter.js";
 export * from "./fingerprint-v1.js";
+export * from "./normalization.js";
