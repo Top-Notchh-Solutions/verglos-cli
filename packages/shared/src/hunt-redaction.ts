@@ -1,4 +1,4 @@
-const SECRET_PATTERNS = [/(?:sk|pk)_(?:live|test)_[A-Za-z0-9]{12,}/g, /(?:token|secret|password|api[_-]?key)\s*[:=]\s*[^\s,;]+/gi, /Bearer\s+[A-Za-z0-9._-]{16,}/gi];
+const SECRET_PATTERNS = [/(?:sk|pk)_(?:live|test)_[A-Za-z0-9]{12,}/g, /(?:token|secret|password|api[_-]?key)\s*[:=]\s*[^\s,;]+/gi, /(?:export\s+)?[A-Z][A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|KEY)\s*=\s*[^\s]+/g, /Bearer\s+[A-Za-z0-9._-]{16,}/gi];
 export interface RedactedHuntOutput { readonly stdout: string; readonly stderr: string; readonly truncated: boolean; }
 export function redactHuntOutput(stdout: string, stderr: string, maxBytes = 1_000_000): RedactedHuntOutput {
   const redact = (value: string) => SECRET_PATTERNS.reduce((result, pattern) => result.replace(pattern, "[REDACTED]"), value);
