@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-010`: minimal static local viewer renderer; decision, identity/policy, limitations, and change actions use semantic script-free escaped HTML with reduced-motion-safe CSS. Accessibility audit, browser launch, and report wiring remain open.
+`LOCAL-011`: report-view validation boundary; only supported JSON release-header projections render through the escaped viewer, while HTML/records/malformed inputs are rejected. Browser/session wiring and full report formats remain open.
 
 ## Scope hold
 

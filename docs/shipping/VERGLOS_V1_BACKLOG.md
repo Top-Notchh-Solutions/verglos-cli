@@ -201,7 +201,7 @@ Evidence/problem: current commands do not share the promised common flags, and H
 - [ ] **LOCAL-008** · exception/export projection · deps: LOCAL-005, POLICY-008, IMPORT-010/011 · Show exception scope/expiry/control plus `.vgl`, JSON, SARIF, CycloneDX, SPDX, VEX, HTML/PDF choices. Commit(s): pending (preparatory; read-only exception projection and implemented export allowlist only)
 - [ ] **LOCAL-009** · packaged loopback-only viewer server · deps: LOCAL-005-008 · Bind safely to loopback, use unpredictable session path, no external assets, CSP, path controls, and clean shutdown. Commit(s): pending (preparatory; session boundary only)
 - [ ] **LOCAL-010** · viewer accessible UI · deps: LOCAL-009 · Implement developer/lead/client projections, keyboard navigation, semantic structure, AA contrast, reduced motion, print/machine alternatives, and empty/error states. Commit(s): pending (preparatory; static escaped renderer only)
-- [ ] **LOCAL-011** · `verglos report view` command · deps: LOCAL-009/010 · Open or print URL explicitly, support no-browser mode, validate record/report input, and reveal no unexpected local files. Commit(s): —
+- [ ] **LOCAL-011** · `verglos report view` command · deps: LOCAL-009/010 · Open or print URL explicitly, support no-browser mode, validate record/report input, and reveal no unexpected local files. Commit(s): pending (preparatory; JSON projection validation/render only)
 - [ ] **LOCAL-012** · local end-to-end fixtures · deps: LOCAL-003-011 · Prove no-account scan -> inspect -> policy -> diff -> viewer -> export journey on macOS/Linux/Windows path conventions. Commit(s): —
 
 ## Epic 08 — Agent/MCP authority, remediation safety, and supported local Hunt
