@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-009`: evaluator coverage boundary; missing configured checks are rejected before evaluation, while full effective-policy wiring remains open.
+`POLICY-010`: explanation projection hardening; immutable nested output and reason codes are verified preparatorily, while evaluator wiring remains open.
 
 ## Scope hold
 
