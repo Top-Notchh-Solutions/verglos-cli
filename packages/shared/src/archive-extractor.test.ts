@@ -3,7 +3,7 @@ import { mkdtemp, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { ArchiveExtractionError, downloadArchive, extractArchiveMembers } from "./archive-extractor.js";
+import { ArchiveExtractionError, downloadArchive, extractArchiveMembers, verifyArchiveDigest } from "./archive-extractor.js";
 
 test("safe extraction writes bounded payloads and removes partial output", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-archive-"));
@@ -23,4 +23,11 @@ test("archive download enforces declared and streamed size limits", async () => 
   const bytes = await downloadArchive("https://mirror.invalid/tool.tar", { fetchImpl: async () => response(new Uint8Array([1, 2, 3])) });
   assert.deepEqual([...bytes], [1, 2, 3]);
   await assert.rejects(() => downloadArchive("https://mirror.invalid/tool.tar", { maxBytes: 2, fetchImpl: async () => response(new Uint8Array([1, 2, 3])) }), /size limit/);
+});
+
+test("archive digest verification is pinned and fail-closed", () => {
+  const bytes = new TextEncoder().encode("archive");
+  verifyArchiveDigest(bytes, "0eb3e36bfb24dcd9bb1d1bece1531216b59539a8fde17ee80224af0653c92aa3");
+  assert.throws(() => verifyArchiveDigest(bytes, "0".repeat(64)), /checksum/);
+  assert.throws(() => verifyArchiveDigest(bytes, "not-a-digest"), /SHA-256/);
 });
