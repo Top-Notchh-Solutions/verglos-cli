@@ -37,3 +37,4 @@ export * from "./system-engine.js";
 export * from "./engine-source.js";
 export * from "./importer-registry.js";
 export * from "./sarif-importer.js";
+export * from "./cyclonedx-importer.js";
