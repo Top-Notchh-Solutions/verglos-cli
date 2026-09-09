@@ -59,3 +59,4 @@ export * from "./baseline-store.js";
 export * from "./baseline-compare.js";
 export * from "./policy-explanation.js";
 export * from "./action-authority.js";
+export * from "./approval-receipt.js";
