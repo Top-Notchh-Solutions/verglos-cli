@@ -157,21 +157,23 @@ engines.command("install <engineId> <version> <artifactPath>")
   .description("Install a local digest-pinned engine artifact")
   .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
   .option("--manifest <path>", "Validate a bounded engine compatibility manifest")
+  .option("--manifest-key <path>", "Verify the manifest with an Ed25519 public key")
   .option("--approve", "Approve the local engine mutation")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress output")
-  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; approve?: boolean; json?: boolean; quiet?: boolean }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, manifestPath: opts.manifest })); });
+  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; json?: boolean; quiet?: boolean }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey })); });
 
 for (const action of ["update", "rollback"] as const) {
   engines.command(`${action} <engineId> <version> <artifactPath>`)
     .description(`${action === "update" ? "Update" : "Rollback"} a managed engine from a local digest-pinned artifact`)
     .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
     .option("--manifest <path>", "Validate a bounded engine compatibility manifest")
+    .option("--manifest-key <path>", "Verify the manifest with an Ed25519 public key")
     .option("--approve", "Approve the local engine mutation")
     .option("--json", "Emit machine-readable JSON")
     .option("--quiet", "Suppress output")
-    .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; approve?: boolean; json?: boolean; quiet?: boolean }) => {
-      process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, manifestPath: opts.manifest, action }));
+    .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; json?: boolean; quiet?: boolean }) => {
+      process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey, action }));
     });
 }
 

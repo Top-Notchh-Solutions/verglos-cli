@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
+import { createHash, generateKeyPairSync } from "node:crypto";
 import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -81,6 +81,17 @@ test("engine install validates a matching compatibility manifest", async () => {
     if (previousCache === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previousCache;
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test("engine install fails closed when a supplied manifest signature is invalid", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-engine-bad-signature-"));
+  const artifact = join(root, "engine"); const manifestPath = join(root, "manifest.json"); const keyPath = join(root, "key.pem");
+  await writeFile(artifact, "bytes");
+  const digest = `sha256:${createHash("sha256").update("bytes").digest("hex")}`;
+  await writeFile(manifestPath, JSON.stringify({ schemaId: "urn:verglos:schema:engine-manifest", schemaVersion: "1.0.0", engineId: "trivy", version: "1.0.0", artifacts: [{ platform: "darwin/arm64", digest, size: 5, source: "https://mirror.example.test/trivy", license: "Apache-2.0" }], compatibleCli: ">=2.0.0", signature: { algorithm: "ed25519", keyId: "test", value: Buffer.from("bad").toString("base64") } }));
+  const { publicKey } = generateKeyPairSync("ed25519"); await writeFile(keyPath, publicKey.export({ type: "spki", format: "pem" }));
+  try { assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, digest, { manifestPath, manifestPublicKeyPath: keyPath, approve: true, quiet: true }), 78); }
+  finally { await rm(root, { recursive: true, force: true }); }
 });
 
 test("engine install rejects symlink artifacts before reading", async () => {
