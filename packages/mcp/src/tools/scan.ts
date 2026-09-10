@@ -1,5 +1,6 @@
 import { runScan } from "@verglos/scanner";
 import type { Finding, RepoProvenance, ScanScore } from "@verglos/shared";
+import { isAbsolute } from "node:path";
 
 /**
  * verglos_scan MCP tool — full project scan wrapped for agent use.
@@ -78,8 +79,18 @@ function buildHeadline(
 export async function scanProject(
   input: ScanInput,
 ): Promise<ScanResultSummary> {
+  if (!input || typeof input !== "object") throw new Error("scan input must be an object");
   const projectRoot = input.projectRoot ?? process.cwd();
   const limit = input.limit ?? 20;
+  if (typeof projectRoot !== "string" || !isAbsolute(projectRoot)) {
+    throw new Error("scan projectRoot must be an absolute path");
+  }
+  if (!Number.isInteger(limit) || limit < 0 || limit > 1000) {
+    throw new Error("scan limit must be an integer from 0 to 1000");
+  }
+  if (input.noProvenance !== undefined && typeof input.noProvenance !== "boolean") {
+    throw new Error("scan noProvenance must be boolean");
+  }
   const result = await runScan({
     projectRoot,
     unlocked: true,
