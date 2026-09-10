@@ -195,6 +195,7 @@ program
   .description("Run a full security scan")
   .option("-w, --watch", "Re-scan on file changes")
   .option("-q, --quiet", "Suppress terminal output")
+  .option("--json", "Emit machine-readable JSON")
   .option("--all", "Include low-confidence findings (default hides <0.7)")
   .option("--strict", "Include test file findings in score")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
@@ -217,6 +218,7 @@ program
     async (opts: {
       watch?: boolean;
       quiet?: boolean;
+      json?: boolean;
       all?: boolean;
       strict?: boolean;
       config?: string;
@@ -232,6 +234,7 @@ program
       const noTelemetry = opts.telemetry === false;
       const scanOptions = {
         quiet: opts.quiet,
+        json: opts.json,
         all: opts.all,
         strict: opts.strict,
         configPath: opts.config,
@@ -273,31 +276,35 @@ program
   .description("Print security score only")
   .option("--strict", "Include test file findings in score")
   .option("-q, --quiet", "Suppress terminal output")
+  .option("--json", "Emit machine-readable JSON")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
-  .action(async (opts: { strict?: boolean; quiet?: boolean; config?: string }) => {
-    await executeScore(undefined, opts.strict, opts.quiet, opts.config);
+  .action(async (opts: { strict?: boolean; quiet?: boolean; json?: boolean; config?: string }) => {
+    await executeScore(undefined, opts.strict, opts.quiet, opts.config, opts.json);
   });
 
 program
   .command("secrets")
   .description("Scan for secrets only")
   .option("-q, --quiet", "Suppress terminal output")
+  .option("--json", "Emit machine-readable JSON")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
-  .action(async (opts: { quiet?: boolean; config?: string }) => {
-    await executeScan({ detectors: ["secrets"], focused: true, quiet: opts.quiet, configPath: opts.config });
+  .action(async (opts: { quiet?: boolean; json?: boolean; config?: string }) => {
+    await executeScan({ detectors: ["secrets"], focused: true, quiet: opts.quiet, json: opts.json, configPath: opts.config });
   });
 
 program
   .command("deps")
   .description("Dependency vulnerability audit only")
   .option("-q, --quiet", "Suppress terminal output")
+  .option("--json", "Emit machine-readable JSON")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
-  .action(async (opts: { quiet?: boolean; config?: string }) => {
+  .action(async (opts: { quiet?: boolean; json?: boolean; config?: string }) => {
     await executeScan({
       detectors: ["dependencies"],
       focused: true,
       includeGitHistory: false,
       quiet: opts.quiet,
+      json: opts.json,
       configPath: opts.config,
     });
   });
@@ -307,6 +314,7 @@ program
   .description("CI mode — exit non-zero on critical issues")
   .option("-t, --threshold <score>", "Minimum score threshold", "60")
   .option("-q, --quiet", "Suppress output")
+  .option("--json", "Emit machine-readable JSON")
   .option("--strict", "Include test file findings in score")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
   .option("--policy <path>", "Use a local policy-evaluation artifact for the CI decision")
@@ -316,7 +324,7 @@ program
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
   )
-  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policy?: string; policyEvaluation?: string; config?: string }) => {
+  .action(async (opts: { threshold: string; quiet?: boolean; json?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policy?: string; policyEvaluation?: string; config?: string }) => {
     const policyPath = opts.policyEvaluation ?? opts.policy;
     if (policyPath) {
       process.exit(await executePolicyCheck(policyPath, false, opts.quiet));
@@ -335,6 +343,7 @@ program
     const code = await executeCi({
       threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
       quiet: opts.quiet,
+      json: opts.json,
       strict: opts.strict,
       configPath: opts.config,
       hunt: opts.hunt,

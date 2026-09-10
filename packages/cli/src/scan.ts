@@ -54,6 +54,7 @@ const { version: CLI_VERSION } = require("../package.json") as {
 export interface ScanCommandOptions {
   cwd?: string;
   configPath?: string;
+  json?: boolean;
   detectors?: DetectorId[];
   quiet?: boolean;
   watch?: boolean;
@@ -83,7 +84,7 @@ export async function executeScan(
 ): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
 
-  const spinner = options.quiet ? null : ora("Scanning project...").start();
+  const spinner = options.quiet || options.json ? null : ora("Scanning project...").start();
 
   const previous = await loadLastScore(projectRoot);
   const startedAt = Date.now();
@@ -140,7 +141,9 @@ export async function executeScan(
   spinner?.stop();
   await writeReports(result, projectRoot);
 
-  if (!options.quiet) {
+  if (options.json) {
+    console.log(JSON.stringify(result));
+  } else if (!options.quiet) {
     printTerminalSummary(result);
     if (options.hunt) {
       console.log("  Hunt integration shipping in v2.0.0-beta");
@@ -183,7 +186,7 @@ export async function executeScan(
   return result.score.value;
 }
 
-export async function executeScore(cwd?: string, strict = false, quiet = false, configPath?: string): Promise<void> {
+export async function executeScore(cwd?: string, strict = false, quiet = false, configPath?: string, json = false): Promise<void> {
   const projectRoot = resolve(cwd ?? process.cwd());
 
   const result = await runScan({
@@ -193,7 +196,8 @@ export async function executeScore(cwd?: string, strict = false, quiet = false, 
     strict,
   });
 
-  if (!quiet) printScoreOnly(result);
+  if (json) console.log(JSON.stringify(result.score));
+  else if (!quiet) printScoreOnly(result);
 }
 
 export async function executeCi(options: {
@@ -204,6 +208,7 @@ export async function executeCi(options: {
   noTelemetry?: boolean;
   hunt?: boolean;
   configPath?: string;
+  json?: boolean;
 }): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
   const startedAt = Date.now();
@@ -216,7 +221,8 @@ export async function executeCi(options: {
   });
 
   const durationMs = Date.now() - startedAt;
-  if (!options.quiet) {
+  if (options.json) console.log(JSON.stringify({ score: result.score, findings: result.findings }));
+  else if (!options.quiet) {
     printTerminalSummary(result);
     if (options.hunt) {
       console.log("Verified-only CI gating shipping in v2.0.0-beta");
