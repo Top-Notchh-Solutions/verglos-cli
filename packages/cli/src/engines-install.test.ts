@@ -31,6 +31,28 @@ test("engine install requires approval and emits bounded JSON after approval", a
   }
 });
 
+test("engine update and rollback label approved JSON mutations", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-engine-actions-"));
+  const artifact = join(root, "engine");
+  await writeFile(artifact, "bytes");
+  const digest = `sha256:${createHash("sha256").update("bytes").digest("hex")}`;
+  const previousCache = process.env.VERGLOS_ENGINE_CACHE;
+  const previousLog = console.log;
+  const lines: string[] = [];
+  process.env.VERGLOS_ENGINE_CACHE = join(root, "cache");
+  console.log = (line?: unknown) => lines.push(String(line));
+  try {
+    assert.equal(await executeEngineInstall("trivy", "2.0.0", artifact, digest, { action: "update", approve: true, json: true }), 0);
+    assert.equal(JSON.parse(lines[0]!).action, "update");
+    assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, digest, { action: "rollback", approve: true, json: true }), 0);
+    assert.equal(JSON.parse(lines[1]!).action, "rollback");
+  } finally {
+    console.log = previousLog;
+    if (previousCache === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previousCache;
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test("engine install rejects symlink artifacts before reading", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-install-link-"));
   const target = join(root, "engine.bin");

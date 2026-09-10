@@ -149,6 +149,18 @@ engines.command("install <engineId> <version> <artifactPath>")
   .option("--quiet", "Suppress output")
   .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; approve?: boolean; json?: boolean; quiet?: boolean }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, opts)); });
 
+for (const action of ["update", "rollback"] as const) {
+  engines.command(`${action} <engineId> <version> <artifactPath>`)
+    .description(`${action === "update" ? "Update" : "Rollback"} a managed engine from a local digest-pinned artifact`)
+    .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
+    .option("--approve", "Approve the local engine mutation")
+    .option("--json", "Emit machine-readable JSON")
+    .option("--quiet", "Suppress output")
+    .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; approve?: boolean; json?: boolean; quiet?: boolean }) => {
+      process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, action }));
+    });
+}
+
 program
   .command("target")
   .description("Inspect an immutable target subject")
