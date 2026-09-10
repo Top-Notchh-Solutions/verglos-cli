@@ -146,16 +146,28 @@ export async function executeMonitorRegister(
   const apiUrl = creds.apiUrl ?? DEFAULT_API_URL;
   const url = `${apiUrl}/api/v1/monitor/register`;
 
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(creds.licenseKey
-        ? { Authorization: `Bearer ${creds.licenseKey}` }
-        : {}),
-    },
-    body: JSON.stringify(registration),
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8_000);
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(creds.licenseKey
+          ? { Authorization: `Bearer ${creds.licenseKey}` }
+          : {}),
+      },
+      body: JSON.stringify(registration),
+      signal: controller.signal,
+    });
+  } catch {
+    console.error(chalk.red("verglos monitor: could not reach the server. Check your connection."));
+    return 1;
+  } finally {
+    clearTimeout(timer);
+  }
+  if (res.body) await res.body.cancel();
 
   if (res.status === 401 || res.status === 402) {
     console.error(
