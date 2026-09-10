@@ -1,4 +1,4 @@
-import { mkdir, readFile, rename, writeFile, stat } from "node:fs/promises";
+import { mkdir, readFile, rename, writeFile, stat, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { baselineDigest, parseBaseline, type BaselineDocument } from "./baseline.js";
 
@@ -12,8 +12,13 @@ export async function saveBaseline(root: string, baseline: BaselineDocument): Pr
   const destination = join(root, fileName(parsed));
   try { await readFile(destination); return destination; } catch { /* publish below */ }
   const temporary = `${destination}.${process.pid}.${Date.now()}.tmp`;
-  await writeFile(temporary, `${JSON.stringify(parsed)}\n`, { encoding: "utf8", mode: 0o600 });
-  await rename(temporary, destination);
+  try {
+    await writeFile(temporary, `${JSON.stringify(parsed)}\n`, { encoding: "utf8", mode: 0o600 });
+    await rename(temporary, destination);
+  } catch (error) {
+    await rm(temporary, { force: true });
+    throw error;
+  }
   return destination;
 }
 
