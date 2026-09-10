@@ -80,6 +80,11 @@ export async function scanProject(
   input: ScanInput,
 ): Promise<ScanResultSummary> {
   if (!input || typeof input !== "object") throw new Error("scan input must be an object");
+  for (const key of Object.keys(input)) {
+    if (!["projectRoot", "limit", "noProvenance"].includes(key)) {
+      throw new Error("unknown scan argument: " + key);
+    }
+  }
   const projectRoot = input.projectRoot ?? process.cwd();
   const limit = input.limit ?? 20;
   if (typeof projectRoot !== "string" || !isAbsolute(projectRoot)) {
