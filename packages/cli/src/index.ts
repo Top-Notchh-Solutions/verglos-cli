@@ -41,6 +41,7 @@ import { executePolicyCheck } from "./policy-check.js";
 import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordCreate } from "./record-create.js";
+import { executeRecordProject } from "./record-project.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -131,6 +132,13 @@ record.command("verify <storeRoot> <manifestPath>")
   .option("--quiet", "Suppress human output")
   .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
     process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet));
+  });
+record.command("project <storeRoot> <manifestPath>")
+  .description("Project a verified record into safe public fields without uploading")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordProject(storeRoot, manifestPath, opts.json, opts.quiet));
   });
 
 evidence.command("import <input>")
