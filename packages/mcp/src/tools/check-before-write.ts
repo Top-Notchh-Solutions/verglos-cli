@@ -131,6 +131,15 @@ function buildReasoning(
 export async function checkBeforeWrite(
   input: CheckBeforeWriteInput,
 ): Promise<CheckBeforeWriteResult> {
+  if (!input || typeof input !== "object" || typeof input.code !== "string" || typeof input.targetPath !== "string") {
+    throw new Error("check_before_write requires string code and targetPath");
+  }
+  if (input.language !== undefined && typeof input.language !== "string") {
+    throw new Error("check_before_write language must be a string");
+  }
+  if (input.context !== undefined && typeof input.context !== "string") {
+    throw new Error("check_before_write context must be a string");
+  }
   validateAgentInputBounds(input);
   const tmpRoot = await mkdtemp(join(tmpdir(), "verglos-cbw-"));
   try {
