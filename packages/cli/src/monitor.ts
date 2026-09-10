@@ -42,6 +42,8 @@ interface LockPackage {
   version: string;
 }
 
+const MAX_MONITOR_DEPENDENCIES = 5_000;
+
 async function readProjectJson(path: string, maxBytes: number): Promise<string> {
   const entry = await lstat(path);
   if (!entry.isFile() || entry.size > maxBytes) throw new Error("project metadata is not a bounded regular file");
@@ -92,6 +94,9 @@ async function collectDeps(projectRoot: string): Promise<MonitorDependency[]> {
       // no package.json
     }
   }
+  if (seen.size > MAX_MONITOR_DEPENDENCIES) {
+    throw new Error(`monitor registration supports at most ${MAX_MONITOR_DEPENDENCIES} dependencies`);
+  }
   return [...seen.entries()].map(([name, version]) => ({ name, version }));
 }
 
@@ -126,7 +131,13 @@ export async function executeMonitorRegister(
     return 1;
   }
 
-  const dependencies = await collectDeps(projectRoot);
+  let dependencies: MonitorDependency[];
+  try {
+    dependencies = await collectDeps(projectRoot);
+  } catch (error) {
+    console.error(chalk.red(`verglos monitor: ${error instanceof Error ? error.message : "could not read project dependencies."}`));
+    return 1;
+  }
   if (dependencies.length === 0) {
     console.error(chalk.red("verglos monitor: no dependencies found."));
     return 1;
