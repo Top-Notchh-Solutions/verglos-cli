@@ -35,6 +35,7 @@ export async function extractArchiveMembers(root: string, members: readonly Arch
 
 export async function downloadArchive(url: string, options: { fetchImpl?: typeof fetch; maxBytes?: number; signal?: AbortSignal } = {}): Promise<Uint8Array> {
   const maxBytes = options.maxBytes ?? 256 * 1024 * 1024;
+  if (!Number.isSafeInteger(maxBytes) || maxBytes <= 0) throw new Error("Archive download size limit must be a positive safe integer.");
   const response = await (options.fetchImpl ?? fetch)(url, { signal: options.signal });
   if (!response.ok) throw new Error(`Archive download failed with HTTP ${response.status}.`);
   const declared = Number(response.headers.get("content-length") ?? 0);
