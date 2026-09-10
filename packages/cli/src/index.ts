@@ -333,7 +333,8 @@ program
   .description("Auto-fix safe security issues [Pro] (currently: header injection)")
   .option("--approve", "Approve the filesystem mutation")
   .option("--dry-run", "Show the planned file changes without mutating")
-  .action(async (opts: { approve?: boolean; dryRun?: boolean }) => {
+  .option("--rescan", "Run a local scan after applying the approved change")
+  .action(async (opts: { approve?: boolean; dryRun?: boolean; rescan?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability("fix", "`verglos fix`", {
       asPlan,
@@ -362,6 +363,10 @@ program
     console.log("");
     if (fixed > 0) {
       console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
+      if (opts.rescan) {
+        console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
+        await executeScan({ noTelemetry: true });
+      }
     }
   });
 
