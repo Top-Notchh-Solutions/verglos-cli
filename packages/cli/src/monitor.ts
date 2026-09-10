@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { lstat, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import chalk from "chalk";
 import { computeProjectFingerprint } from "@verglos/shared";
@@ -42,11 +42,17 @@ interface LockPackage {
   version: string;
 }
 
+async function readProjectJson(path: string, maxBytes: number): Promise<string> {
+  const entry = await lstat(path);
+  if (!entry.isFile() || entry.size > maxBytes) throw new Error("project metadata is not a bounded regular file");
+  return readFile(path, "utf8");
+}
+
 async function collectDeps(projectRoot: string): Promise<MonitorDependency[]> {
   const seen = new Map<string, string>();
   try {
     const lock = JSON.parse(
-      await readFile(`${projectRoot}/package-lock.json`, "utf8"),
+      await readProjectJson(`${projectRoot}/package-lock.json`, 8 * 1024 * 1024),
     ) as {
       packages?: Record<string, { version?: string }>;
       dependencies?: Record<string, { version?: string }>;
@@ -69,7 +75,7 @@ async function collectDeps(projectRoot: string): Promise<MonitorDependency[]> {
   if (seen.size === 0) {
     try {
       const pkg = JSON.parse(
-        await readFile(`${projectRoot}/package.json`, "utf8"),
+        await readProjectJson(`${projectRoot}/package.json`, 1 * 1024 * 1024),
       ) as {
         dependencies?: Record<string, string>;
         devDependencies?: Record<string, string>;
