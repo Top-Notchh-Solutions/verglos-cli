@@ -15,7 +15,7 @@ test("record verify checks content-addressed members and emits JSON", async () =
   try {
     const stored = await putRecordMember(store, "decision.json", bytes);
     const member = describeRecordMember({ path: "decision.json", kind: "release-decision", mediaType: "application/json", bytes, required: true });
-    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos.record-builder", version: "1.0.0" }, members: [{ ...member, digest: { algorithm: "sha256", value: stored.digest.slice(7) }, schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } }], redaction: { status: "not-required" }, limitations: ["fixture"] });
+    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:02Z", generator: { id: "verglos.record-builder", version: "1.0.0" }, members: [{ ...member, digest: { algorithm: "sha256", value: stored.digest.slice(7) }, schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } }], redaction: { status: "not-required" }, limitations: ["fixture"] });
     await writeFile(manifestPath, JSON.stringify(manifest));
     const lines: string[] = []; const previous = console.log; console.log = (line?: unknown) => lines.push(String(line));
     try { assert.equal(await executeRecordVerify(store, manifestPath, true, true), 0); } finally { console.log = previous; }
