@@ -10,7 +10,7 @@ test("scanner loads an explicit bounded JSON config without executing code", asy
   try {
     const path = join(root, "config.json");
     await writeFile(path, JSON.stringify({ failThreshold: 42, ignorePaths: ["**/generated/**"] }), "utf8");
-    const config = await loadConfig(root, path);
+    const config = await loadConfig(root, "config.json");
     assert.equal(config.failThreshold, 42);
     assert.deepEqual(config.ignorePaths, ["**/generated/**"]);
   } finally { await rm(root, { recursive: true, force: true }); }

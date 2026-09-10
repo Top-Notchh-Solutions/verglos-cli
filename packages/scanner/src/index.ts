@@ -10,6 +10,7 @@ import {
   type VerglosConfig,
 } from "@verglos/shared";
 import { lstat, readFile } from "node:fs/promises";
+import { isAbsolute, resolve } from "node:path";
 import { agentSurfaceDetector } from "./detectors/agent-surface.js";
 import { aiPatternsDetector } from "./detectors/ai-patterns.js";
 import { apiHardeningDetector } from "./detectors/api-hardening.js";
@@ -66,9 +67,10 @@ async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
 export async function loadConfig(projectRoot: string, explicitConfigPath?: string): Promise<VerglosConfig> {
   let base: VerglosConfig;
   if (explicitConfigPath) {
-    const entry = await lstat(explicitConfigPath);
+    const configPath = isAbsolute(explicitConfigPath) ? explicitConfigPath : resolve(projectRoot, explicitConfigPath);
+    const entry = await lstat(configPath);
     if (!entry.isFile() || entry.size > MAX_CONFIG_BYTES) throw new Error("Verglos config must be a bounded regular file.");
-    const bytes = await readFile(explicitConfigPath);
+    const bytes = await readFile(configPath);
     if (bytes.byteLength > MAX_CONFIG_BYTES) throw new Error("Verglos config must be a bounded regular file.");
     let parsed: unknown;
     try { parsed = JSON.parse(bytes.toString("utf8")); } catch { throw new Error("Verglos config must be valid JSON."); }
