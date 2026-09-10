@@ -37,6 +37,7 @@ import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
 import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
+import { executeRecordVerify } from "./record-verify.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -110,6 +111,15 @@ evidence.command("export <input> <output>")
       console.error(error instanceof Error ? error.message : "Evidence export failed.");
       process.exit(78);
     }
+});
+
+const record = program.command("record").description("Verify local content-addressed Verglos records");
+record.command("verify <storeRoot> <manifestPath>")
+  .description("Verify every stored record member against its manifest")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet));
   });
 
 evidence.command("import <input>")
