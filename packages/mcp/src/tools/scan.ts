@@ -87,9 +87,7 @@ export async function scanProject(
     noProvenance: input.noProvenance,
   });
 
-  const sorted = [...result.findings].sort(
-    (a, b) => severityRank(b.severity) - severityRank(a.severity),
-  );
+  const sorted = sortFindings(result.findings);
   const capped = limit === 0 ? sorted : sorted.slice(0, limit);
 
   return {
@@ -103,4 +101,16 @@ export async function scanProject(
     truncated: capped.length < result.findings.length,
     headline: buildHeadline(result.score, result.provenance),
   };
+}
+
+export function sortFindings(findings: Finding[]): Finding[] {
+  return [...findings].sort((a, b) => {
+    const severity = severityRank(b.severity) - severityRank(a.severity);
+    if (severity !== 0) return severity;
+    const rule = (a.rule ?? "").localeCompare(b.rule ?? "");
+    if (rule !== 0) return rule;
+    const file = (a.file ?? "").localeCompare(b.file ?? "");
+    if (file !== 0) return file;
+    return (a.line ?? 0) - (b.line ?? 0);
+  });
 }
