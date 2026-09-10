@@ -79,7 +79,6 @@ Command groups:
     await enforceLatestVersion(version);
   });
 
-program.parse();
 
 
 
@@ -630,3 +629,5 @@ program.command("evidence").description("Import and export standards evidence")
     try { const result = await inspectEvidence(input); if (!opts.quiet) { if (opts.json) console.log(JSON.stringify(result)); else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)"); } }
     catch (error) { console.error(error instanceof Error ? error.message : "Evidence import failed."); process.exit(78); }
   });
+
+program.parse();
