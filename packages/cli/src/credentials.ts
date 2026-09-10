@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { homedir, hostname, userInfo } from "node:os";
 import { join } from "node:path";
-import { mkdir, readFile, writeFile, access } from "node:fs/promises";
+import { lstat, mkdir, readFile, writeFile, access } from "node:fs/promises";
 
 export interface Credentials {
   licenseKey?: string;
@@ -28,12 +28,18 @@ const CREDENTIALS_DIR = join(homedir(), ".verglos");
 const CREDENTIALS_FILE = join(CREDENTIALS_DIR, "credentials.json");
 const SCORE_CACHE_FILE = join(CREDENTIALS_DIR, "last-score.json");
 
+async function readLocalJson(path: string, maxBytes: number): Promise<string> {
+  const entry = await lstat(path);
+  if (!entry.isFile() || entry.size > maxBytes) throw new Error("local cache is not a bounded regular file");
+  return readFile(path, "utf8");
+}
+
 export const DEFAULT_API_URL =
   process.env.VERGLOS_API_URL ?? "https://verglos.com";
 
 export async function loadCredentials(): Promise<Credentials> {
   try {
-    const raw = await readFile(CREDENTIALS_FILE, "utf8");
+    const raw = await readLocalJson(CREDENTIALS_FILE, 1 * 1024 * 1024);
     return { apiUrl: DEFAULT_API_URL, ...JSON.parse(raw) };
   } catch {
     return { apiUrl: DEFAULT_API_URL };
@@ -124,7 +130,7 @@ export async function saveLastScore(
     const key = projectRoot.replace(/\//g, "_");
     let cache: Record<string, { score: number; criticals: number }> = {};
     try {
-      const raw = await readFile(SCORE_CACHE_FILE, "utf8");
+      const raw = await readLocalJson(SCORE_CACHE_FILE, 2 * 1024 * 1024);
       cache = JSON.parse(raw) as typeof cache;
     } catch {
       // fresh
@@ -140,7 +146,7 @@ export async function loadLastScore(
   projectRoot: string,
 ): Promise<{ score: number; criticals: number } | undefined> {
   try {
-    const raw = await readFile(SCORE_CACHE_FILE, "utf8");
+    const raw = await readLocalJson(SCORE_CACHE_FILE, 2 * 1024 * 1024);
     const cache = JSON.parse(raw) as Record<
       string,
       { score: number; criticals: number }
