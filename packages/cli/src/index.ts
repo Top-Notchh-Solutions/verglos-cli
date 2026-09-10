@@ -79,6 +79,8 @@ Command groups:
     await enforceLatestVersion(version);
   });
 
+program.parse();
+
 program
   .command("update")
   .description("Update Verglos CLI to the latest npm version")
@@ -617,12 +619,12 @@ program
     if (code !== 0) process.exit(code);
   });
 
-program.parse();
 program.command("evidence").description("Import and export standards evidence")
   .command("import <input>")
   .description("Validate bounded evidence JSON and report its detected format")
   .option("--json", "Emit machine-readable JSON")
-  .action(async (input: string, opts: { json?: boolean }) => {
-    try { const result = await inspectEvidence(input); if (opts.json) console.log(JSON.stringify(result)); else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)"); }
+  .option("--quiet", "Suppress output")
+  .action(async (input: string, opts: { json?: boolean; quiet?: boolean }) => {
+    try { const result = await inspectEvidence(input); if (!opts.quiet) { if (opts.json) console.log(JSON.stringify(result)); else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)"); } }
     catch (error) { console.error(error instanceof Error ? error.message : "Evidence import failed."); process.exit(78); }
   });
