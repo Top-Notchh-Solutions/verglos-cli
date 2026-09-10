@@ -12,7 +12,9 @@ async function readCompatibilityManifest(path: string, engineId: string, version
   if (!entry.isFile()) throw new Error("Engine compatibility manifest must be a regular file.");
   if (entry.size > MAX_MANIFEST_BYTES) throw new Error("Engine compatibility manifest exceeds the 1 MiB limit.");
   let manifest: EngineManifest;
-  try { manifest = parseEngineManifest(JSON.parse(await readFile(path, "utf8"))); }
+  const bytes = await readFile(path);
+  if (bytes.byteLength > MAX_MANIFEST_BYTES) throw new Error("Engine compatibility manifest exceeds the 1 MiB limit.");
+  try { manifest = parseEngineManifest(JSON.parse(bytes.toString("utf8"))); }
   catch { throw new Error("Engine compatibility manifest is invalid JSON or schema."); }
   if (manifest.engineId !== engineId || manifest.version !== version) throw new Error("Engine compatibility manifest does not match the requested engine and version.");
   if (!manifest.artifacts.some((artifact) => artifact.digest === digest)) throw new Error("Engine compatibility manifest does not contain the requested artifact digest.");
@@ -35,6 +37,7 @@ export async function executeEngineInstall(engineId: string, version: string, ar
     if (!entry.isFile()) throw new Error("Engine artifact must be a regular file.");
     if (entry.size > MAX_ENGINE_ARTIFACT_BYTES) throw new Error("Engine artifact exceeds the 256 MiB limit.");
     const bytes = await readFile(artifactPath);
+    if (bytes.byteLength > MAX_ENGINE_ARTIFACT_BYTES) throw new Error("Engine artifact exceeds the 256 MiB limit.");
     const compatibility = options.manifestPath ? await readCompatibilityManifest(options.manifestPath, engineId, version, digest, options.manifestPublicKeyPath) : undefined;
     const manifest = compatibility?.manifest;
     const cacheRoot = process.env.VERGLOS_ENGINE_CACHE ?? join(homedir(), ".cache", "verglos", "engines");

@@ -94,6 +94,15 @@ test("engine install fails closed when a supplied manifest signature is invalid"
   finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("engine install rejects a manifest key without a manifest", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-engine-key-without-manifest-"));
+  const artifact = join(root, "engine"); const keyPath = join(root, "key.pem");
+  await writeFile(artifact, "bytes"); await writeFile(keyPath, "not-a-key");
+  const digest = `sha256:${createHash("sha256").update("bytes").digest("hex")}`;
+  try { assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, digest, { manifestPublicKeyPath: keyPath, approve: true, quiet: true }), 78); }
+  finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("engine install rejects symlink artifacts before reading", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-install-link-"));
   const target = join(root, "engine.bin");
