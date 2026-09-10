@@ -1,6 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { NEXT_CONFIG_DECL } from "./fix.js";
+import { NEXT_CONFIG_DECL, planHeaderFixes } from "./fix.js";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
 /**
  * Regression guard for the Next.js config detection in
@@ -133,4 +136,15 @@ export default nextConfig;
     patched.indexOf("async headers()") < patched.indexOf("reactStrictMode"),
     "headers block must appear BEFORE the existing config keys, right after the `{`",
   );
+});
+
+test("fix planning identifies a bounded Next.js patch without mutating", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-plan-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
+    const original = "const nextConfig = {}; module.exports = nextConfig;\n";
+    await writeFile(join(root, "next.config.js"), original);
+    assert.deepEqual(await planHeaderFixes(root), [{ file: "next.config.js", action: "patch" }]);
+    assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

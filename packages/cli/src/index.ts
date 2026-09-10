@@ -5,7 +5,7 @@ import chalk from "chalk";
 import chokidar from "chokidar";
 import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
-import { applyHeaderFixes } from "./fix.js";
+import { applyHeaderFixes, planHeaderFixes } from "./fix.js";
 import { loadCredentials, saveCredentials } from "./credentials.js";
 import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
@@ -332,7 +332,8 @@ program
   .command("fix")
   .description("Auto-fix safe security issues [Pro] (currently: header injection)")
   .option("--approve", "Approve the filesystem mutation")
-  .action(async (opts: { approve?: boolean }) => {
+  .option("--dry-run", "Show the planned file changes without mutating")
+  .action(async (opts: { approve?: boolean; dryRun?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability("fix", "`verglos fix`", {
       asPlan,
@@ -341,6 +342,12 @@ program
     });
     if (!ok) process.exit(1);
 
+    const plan = await planHeaderFixes(process.cwd());
+    if (opts.dryRun || !opts.approve) {
+      if (plan.length === 0) console.log("No supported header change is planned.");
+      else for (const item of plan) console.log(`${item.action}: ${item.file}`);
+    }
+    if (opts.dryRun) return;
     if (!opts.approve) {
       console.error("verglos fix requires explicit approval (--approve) before changing files.");
       process.exit(78);

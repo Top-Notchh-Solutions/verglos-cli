@@ -26,6 +26,11 @@ interface FixResult {
   instructions?: string;
 }
 
+export interface HeaderFixPlan {
+  readonly file: string;
+  readonly action: "create" | "patch" | "skip";
+}
+
 async function fileExists(path: string): Promise<boolean> {
   try {
     await access(path);
@@ -38,6 +43,29 @@ async function fileExists(path: string): Promise<boolean> {
 async function pickSrcDir(projectRoot: string): Promise<string> {
   if (await fileExists(join(projectRoot, "src"))) return "src";
   return ".";
+}
+
+/** Plans header changes without reading beyond bounded config/helper files or mutating the project. */
+export async function planHeaderFixes(projectRoot: string): Promise<readonly HeaderFixPlan[]> {
+  const { type } = await detectProjectType(projectRoot);
+  if (type === "nextjs") {
+    for (const name of ["next.config.js", "next.config.mjs", "next.config.ts"]) {
+      const path = join(projectRoot, name);
+      try {
+        const entry = await lstat(path);
+        if (!entry.isFile() || entry.size > 1 * 1024 * 1024) continue;
+        const content = await readFile(path, "utf8");
+        if (content.includes("Content-Security-Policy") || content.includes("X-Frame-Options")) return [{ file: name, action: "skip" }];
+        if (NEXT_CONFIG_DECL.test(content)) return [{ file: name, action: "patch" }];
+      } catch { /* unavailable config is not a mutation target */ }
+    }
+    return [];
+  }
+  if (type === "express" || type === "fastify" || type === "node" || type === "react") {
+    const file = join(await pickSrcDir(projectRoot), "verglos-security-headers.ts");
+    return [{ file, action: await fileExists(join(projectRoot, file)) ? "skip" : "create" }];
+  }
+  return [];
 }
 
 // ── Next.js ────────────────────────────────────────────────────────────────
