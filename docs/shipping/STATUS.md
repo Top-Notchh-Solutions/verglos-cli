@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`LOCAL-001`: policy foundations, CI routing, adversarial coverage, local diff, and evidence commands are implemented and tested. Next is full record/snapshot policy-check support and local command integration; engine orchestration remains open.
+`LOCAL-001`: policy foundations, CI routing, adversarial coverage, local diff, evidence commands, and viewer/fixture foundations are implemented and tested. Next is full record/snapshot policy-check support and command framework standardization; engine orchestration remains open.
 
 ## Scope hold
 
