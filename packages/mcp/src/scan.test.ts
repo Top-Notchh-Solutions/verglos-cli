@@ -15,4 +15,5 @@ test("scanProject enforces absolute root and bounded options before execution", 
   await assert.rejects(() => scanProject({ projectRoot: "relative" }), /absolute path/);
   await assert.rejects(() => scanProject({ projectRoot: process.cwd(), limit: 1001 }), /0 to 1000/);
   await assert.rejects(() => scanProject({ projectRoot: process.cwd(), noProvenance: "yes" as any }), /boolean/);
+  await assert.rejects(() => scanProject({ projectRoot: process.cwd(), extra: true } as any), /unknown/);
 });
