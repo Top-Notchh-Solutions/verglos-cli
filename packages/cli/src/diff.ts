@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { lstat, readFile } from "node:fs/promises";
 import { diffReleaseSnapshots, type ReleaseSnapshot } from "@verglos/shared";
 
 function parseSnapshot(value: string): ReleaseSnapshot {
@@ -15,9 +15,16 @@ function parseSnapshot(value: string): ReleaseSnapshot {
   return snapshot as unknown as ReleaseSnapshot;
 }
 
+async function readSnapshot(path: string): Promise<string> {
+  const entry = await lstat(path);
+  if (!entry.isFile()) throw new Error("snapshot input must be a regular file");
+  if (entry.size > 32 * 1024 * 1024) throw new Error("snapshot exceeds the 32 MiB limit");
+  return readFile(path, "utf8");
+}
+
 export async function executeDiff(basePath: string, headPath: string, json = false): Promise<number> {
   try {
-    const [baseRaw, headRaw] = await Promise.all([readFile(basePath, "utf8"), readFile(headPath, "utf8")]);
+    const [baseRaw, headRaw] = await Promise.all([readSnapshot(basePath), readSnapshot(headPath)]);
     const result = diffReleaseSnapshots(parseSnapshot(baseRaw), parseSnapshot(headRaw));
     if (json) console.log(JSON.stringify(result));
     else {

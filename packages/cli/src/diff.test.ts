@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -22,5 +22,15 @@ test("diff command rejects snapshots with excessive observation collections", as
     await writeFile(join(root, "base.json"), JSON.stringify(snapshot), "utf8");
     await writeFile(join(root, "head.json"), JSON.stringify(snapshot), "utf8");
     assert.equal(await executeDiff(join(root, "base.json"), join(root, "head.json"), true), 2);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("diff command rejects symlink snapshot inputs before parsing", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-diff-link-"));
+  try {
+    await writeFile(join(root, "base.json"), "{}", "utf8");
+    await writeFile(join(root, "head.json"), "{}", "utf8");
+    await symlink(join(root, "base.json"), join(root, "base-link.json"));
+    assert.equal(await executeDiff(join(root, "base-link.json"), join(root, "head.json"), true), 2);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
