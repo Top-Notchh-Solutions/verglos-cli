@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-002`: policy document schema foundation (POLICY-001) is reconciled as implemented and tested. Next is policy loader precedence; public diff/evidence commands and engine orchestration remain open.
+`POLICY-003`: policy schema and deterministic loader precedence (POLICY-001/002) are reconciled as implemented and tested. Next is Free/Pro policy profile wiring; public diff/evidence commands and engine orchestration remain open.
 
 ## Scope hold
 
