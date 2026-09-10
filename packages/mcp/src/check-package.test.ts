@@ -51,4 +51,5 @@ test("check_package reports registry and latest-version gaps", async () => {
 test("check_package rejects malformed direct calls", async () => {
   await assert.rejects(() => checkPackage({} as any), /packageName/);
   await assert.rejects(() => checkPackage({ packageName: "x", version: 1 } as any), /version/);
+  await assert.rejects(() => checkPackage({ packageName: "x", extra: true } as any), /unknown/);
 });

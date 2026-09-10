@@ -189,6 +189,11 @@ export async function checkPackage(
   if (input.version !== undefined && typeof input.version !== "string") {
     throw new Error("check_package version must be a string");
   }
+  for (const key of Object.keys(input)) {
+    if (!["packageName", "version"].includes(key)) {
+      throw new Error("unknown check_package argument: " + key);
+    }
+  }
   validateAgentInputBounds(input);
   const packageName = input.packageName.trim();
 

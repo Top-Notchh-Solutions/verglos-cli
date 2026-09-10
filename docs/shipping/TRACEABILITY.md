@@ -3,6 +3,7 @@
  AGENT-005 package evidence availability | `packages/mcp/src/tools/check-package.ts` | 5 focused tests: clean complete lookup, OSV outage warning, blocking high CVE, registry/latest-version gaps, malformed direct calls | implemented locally; incomplete npm/OSV/latest evidence is explicit; runtime/network safety remains downstream
  AGENT-005 check-before-write direct boundary | `packages/mcp/src/tools/check-before-write.ts` | 1 focused test: malformed code/path/language/context inputs rejected before filesystem work | implemented locally; detector/runtime safety remains downstream
  AGENT-005 explain-finding direct boundary | `packages/mcp/src/tools/explain-finding.ts` | 2 focused tests: malformed/bounded rule rejection and unknown-rule response preservation | implemented locally; rule-bank completeness remains downstream
+ AGENT-005 strict direct tool shapes | `packages/mcp/src/tools/check-before-write.ts`, `check-package.ts` | 6 focused tests include unknown-field rejection for both tools | implemented locally; runtime/detector safety remains downstream
  AGENT-005 deterministic scan projection | `packages/mcp/src/tools/scan.ts` | 2 focused tests: severity/rule/file/line ordering and direct input-boundary rejection | implemented locally; scanner execution/network safety remains downstream
 | Capability | Contract | Backlog IDs | Tests required | Public state |
 |---|---|---|---|---|

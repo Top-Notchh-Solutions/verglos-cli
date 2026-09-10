@@ -134,6 +134,11 @@ export async function checkBeforeWrite(
   if (!input || typeof input !== "object" || typeof input.code !== "string" || typeof input.targetPath !== "string") {
     throw new Error("check_before_write requires string code and targetPath");
   }
+  for (const key of Object.keys(input)) {
+    if (!["code", "targetPath", "language", "context"].includes(key)) {
+      throw new Error("unknown check_before_write argument: " + key);
+    }
+  }
   if (input.language !== undefined && typeof input.language !== "string") {
     throw new Error("check_before_write language must be a string");
   }
