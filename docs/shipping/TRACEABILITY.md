@@ -1,5 +1,6 @@
 # Verglos V1 traceability
 
+ ENGINE-004 safe archive downloader/extractor | `packages/shared/src/archive-extractor.ts`, `tar-extractor.ts` | archive safety/extractor tests cover bounded downloads, checksum, traversal, links, duplicates, and partial-output cleanup | implemented and verified locally; trusted source/signature verification remains ENGINE-005
  AGENT-005 package evidence availability | `packages/mcp/src/tools/check-package.ts` | 5 focused tests: clean complete lookup, OSV outage warning, blocking high CVE, registry/latest-version gaps, malformed direct calls | implemented locally; incomplete npm/OSV/latest evidence is explicit; runtime/network safety remains downstream
  AGENT-005 check-before-write direct boundary | `packages/mcp/src/tools/check-before-write.ts` | 1 focused test: malformed code/path/language/context inputs rejected before filesystem work | implemented locally; detector/runtime safety remains downstream
  AGENT-005 explain-finding direct boundary | `packages/mcp/src/tools/explain-finding.ts` | 2 focused tests: malformed/bounded rule rejection and unknown-rule response preservation | implemented locally; rule-bank completeness remains downstream
