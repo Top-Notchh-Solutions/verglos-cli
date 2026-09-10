@@ -6,7 +6,7 @@ import { test } from "node:test";
 import { executePolicyCheck } from "./policy-check.js";
 import { createPolicyEvaluation, createSubject, POLICY_EVALUATION_SCHEMA } from "@verglos/shared";
 
-function validEvaluation() {
+function validEvaluation(status: "satisfied" | "failed" | "stale" = "satisfied") {
   const digest = (value: string) => ({ algorithm: "sha256" as const, value: value.repeat(64) });
   const subject = createSubject({ kind: "filesystem", treeDigest: digest("a"), ignorePolicyDigest: digest("b"), entryCount: 1 });
   return createPolicyEvaluation({
@@ -15,7 +15,7 @@ function validEvaluation() {
     policy: { id: "verglos.policy.local-default", version: "1.0.0", digest: digest("c") },
     subjectId: subject.subjectId, subjectMatch: { status: "matched", observedSubjectId: subject.subjectId },
     evaluatedAt: "2026-09-09T02:00:00.000Z",
-    checks: [{ id: "verglos.check.native-sast", requirement: "required", onFailure: "BLOCK", status: "satisfied", evidenceDigests: [digest("d")], observationIds: [], freshness: { status: "current", checkedAt: "2026-09-09T01:00:00.000Z", validUntil: "2026-09-10T02:00:00.000Z" }, owner: "security", reason: "Evidence is current.", nextAction: "Preserve the evidence." }],
+    checks: [{ id: "verglos.check.native-sast", requirement: "required", onFailure: "BLOCK", status, evidenceDigests: [digest("d")], observationIds: [], freshness: { status: status === "stale" ? "stale" : "current", checkedAt: "2026-09-09T01:00:00.000Z", validUntil: status === "stale" ? "2026-09-09T02:00:00.000Z" : "2026-09-10T02:00:00.000Z" }, owner: "security", reason: "Evidence is current.", nextAction: "Preserve the evidence." }],
     limitations: ["Preparatory fixture."],
   });
 }
@@ -86,6 +86,18 @@ test("policy check quiet mode emits no human output on success", async () => {
     console.log = original;
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test("policy check preserves BLOCK and INCOMPLETE exit codes", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-policy-exits-"));
+  try {
+    const blocked = join(root, "blocked.json");
+    const incomplete = join(root, "incomplete.json");
+    await writeFile(blocked, JSON.stringify(validEvaluation("failed")), "utf8");
+    await writeFile(incomplete, JSON.stringify(validEvaluation("stale")), "utf8");
+    assert.equal(await executePolicyCheck(blocked, true, true), 1);
+    assert.equal(await executePolicyCheck(incomplete, true, true), 3);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });
 
 test("policy check rejects directory inputs before parsing", async () => {
