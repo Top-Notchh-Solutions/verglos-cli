@@ -10,11 +10,15 @@ export function parseCheckBeforeWriteArgs(value: unknown): CheckBeforeWriteInput
   validateAgentInputBounds(parsed); return parsed;
 }
 
-export function parseExplainFindingArgs(value: unknown): { rule: string } {
+export function parseExplainFindingArgs(value: unknown): { rule: string; targetSubjectId?: string; files?: string[] } {
   if (!value || typeof value !== "object" || Array.isArray(value) || typeof (value as Record<string, unknown>).rule !== "string") throw new Error("explain_finding requires a string rule");
-  const rule = (value as Record<string, unknown>).rule as string;
+  const input = value as Record<string, unknown>;
+  const rule = input.rule as string;
   if (rule.length === 0 || rule.length > 256) throw new Error("explain_finding rule exceeds bounds");
-  return { rule };
+  if (input.targetSubjectId !== undefined && typeof input.targetSubjectId !== "string") throw new Error("explain_finding targetSubjectId must be a string");
+  if (input.files !== undefined && (!Array.isArray(input.files) || input.files.some((file) => typeof file !== "string"))) throw new Error("explain_finding files must be strings");
+  for (const key of Object.keys(input)) if (!["rule", "targetSubjectId", "files"].includes(key)) throw new Error(`unknown explain_finding argument: ${key}`);
+  return { rule, targetSubjectId: input.targetSubjectId as string | undefined, files: input.files as string[] | undefined };
 }
 
 export function parseCheckPackageArgs(value: unknown): { packageName: string; version?: string } {
@@ -34,5 +38,9 @@ export function parseScanArgs(value: unknown): { projectRoot?: string; limit?: n
   if (input.projectRoot !== undefined) validateAgentInputBounds({ targetPath: input.projectRoot });
   if (input.limit !== undefined && (typeof input.limit !== "number" || !Number.isInteger(input.limit) || !Number.isFinite(input.limit) || input.limit < 0 || input.limit > 1000)) throw new Error("scan limit must be an integer from 0 to 1000");
   if (input.noProvenance !== undefined && typeof input.noProvenance !== "boolean") throw new Error("scan noProvenance must be boolean");
-  return { projectRoot: input.projectRoot as string | undefined, limit: input.limit as number | undefined, noProvenance: input.noProvenance as boolean | undefined };
+  return {
+    ...(input.projectRoot !== undefined ? { projectRoot: input.projectRoot as string } : {}),
+    ...(input.limit !== undefined ? { limit: input.limit as number } : {}),
+    ...(input.noProvenance !== undefined ? { noProvenance: input.noProvenance as boolean } : {}),
+  };
 }

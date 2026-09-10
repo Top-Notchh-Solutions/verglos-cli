@@ -113,6 +113,8 @@ const TOOLS = [
           type: "string",
           description: "Rule id: 'AI-002', 'D4-001', etc.",
         },
+        targetSubjectId: { type: "string", description: "Optional exact immutable subject identity for a non-mutating remediation proposal." },
+        files: { type: "array", items: { type: "string" }, description: "Optional bounded relative file scope for the proposal; no files are written." },
       },
       required: ["rule"],
     },
@@ -254,7 +256,8 @@ async function dispatchTool(
     }
     case "verglos_explain_finding": {
       let parsed; try { parsed = parseExplainFindingArgs(input); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      const result = explainFinding(parsed);
+      let result: ReturnType<typeof explainFinding>;
+      try { result = explainFinding(parsed); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_FAILED", error instanceof Error ? error.message : "tool failed"); }
       return jsonResponse(result);
     }
     case "verglos_hunt_finding":
