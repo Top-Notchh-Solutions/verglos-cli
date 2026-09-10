@@ -112,6 +112,16 @@ test("policy check accepts an evaluator named with snapshot text", async () => {
   }
 });
 
+test("policy check returns INCOMPLETE for a snapshot without an evaluated decision", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-policy-snapshot-"));
+  try {
+    const path = join(root, "release.snapshot.json");
+    const subject = createSubject({ kind: "filesystem", treeDigest: { algorithm: "sha256", value: "a".repeat(64) }, ignorePolicyDigest: { algorithm: "sha256", value: "b".repeat(64) }, entryCount: 1 });
+    await writeFile(path, JSON.stringify({ schemaVersion: "1.0.0", primarySubjectId: subject.subjectId, subjectIds: [subject.subjectId], observations: [], lineage: { edges: [], gaps: [] }, policyInputDigest: `sha256:${"c".repeat(64)}`, snapshotDigest: `sha256:${"d".repeat(64)}` }), "utf8");
+    assert.equal(await executePolicyCheck(path, true, true), 3);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("policy check quiet mode emits no human output on success", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-policy-"));
   const original = console.log;
