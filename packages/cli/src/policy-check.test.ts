@@ -88,6 +88,14 @@ test("policy check quiet mode emits no human output on success", async () => {
   }
 });
 
+test("policy check quiet mode suppresses input errors", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-policy-quiet-error-"));
+  const original = console.error; const lines: string[] = [];
+  console.error = (line?: unknown) => lines.push(String(line));
+  try { const path = join(root, "invalid.json"); await writeFile(path, "{}", "utf8"); assert.equal(await executePolicyCheck(path, false, true), 2); assert.deepEqual(lines, []); }
+  finally { console.error = original; await rm(root, { recursive: true, force: true }); }
+});
+
 test("policy check preserves BLOCK and INCOMPLETE exit codes", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-policy-exits-"));
   try {
