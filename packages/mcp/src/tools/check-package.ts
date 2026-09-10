@@ -183,6 +183,12 @@ export async function checkPackage(
   input: CheckPackageInput,
   lookups: CheckPackageLookups = {},
 ): Promise<CheckPackageResult> {
+  if (!input || typeof input !== "object" || typeof input.packageName !== "string") {
+    throw new Error("check_package requires a string packageName");
+  }
+  if (input.version !== undefined && typeof input.version !== "string") {
+    throw new Error("check_package version must be a string");
+  }
   validateAgentInputBounds(input);
   const packageName = input.packageName.trim();
 
