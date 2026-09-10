@@ -198,6 +198,7 @@ program
   .option("--all", "Include low-confidence findings (default hides <0.7)")
   .option("--strict", "Include test file findings in score")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .option("--policy <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option(
     "--no-provenance",
@@ -219,6 +220,7 @@ program
       all?: boolean;
       strict?: boolean;
       config?: string;
+      policy?: string;
       policyEvaluation?: string;
       provenance?: boolean;
       verifySecrets?: boolean;
@@ -238,8 +240,9 @@ program
         hunt: opts.hunt,
       noTelemetry,
       };
-      if (opts.policyEvaluation) {
-        process.exit(await executePolicyCheck(opts.policyEvaluation, false, opts.quiet));
+      const policyPath = opts.policyEvaluation ?? opts.policy;
+      if (policyPath) {
+        process.exit(await executePolicyCheck(policyPath, false, opts.quiet));
       }
       if (opts.watch) {
         console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
@@ -306,15 +309,17 @@ program
   .option("-q, --quiet", "Suppress output")
   .option("--strict", "Include test file findings in score")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .option("--policy <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
   )
-  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policyEvaluation?: string; config?: string }) => {
-    if (opts.policyEvaluation) {
-      process.exit(await executePolicyCheck(opts.policyEvaluation, false, opts.quiet));
+  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policy?: string; policyEvaluation?: string; config?: string }) => {
+    const policyPath = opts.policyEvaluation ?? opts.policy;
+    if (policyPath) {
+      process.exit(await executePolicyCheck(policyPath, false, opts.quiet));
     }
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const plan = await currentPlan({ asPlan });
