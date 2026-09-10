@@ -1,4 +1,4 @@
-import { readFile, writeFile, access, mkdir } from "node:fs/promises";
+import { lstat, readFile, writeFile, access, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import chalk from "chalk";
 import { detectProjectType } from "@verglos/scanner";
@@ -48,8 +48,12 @@ async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
     const path = join(projectRoot, name);
     let content: string;
     try {
+      const entry = await lstat(path);
+      if (!entry.isFile()) continue;
+      if (entry.size > 1 * 1024 * 1024) throw new Error("Next.js config exceeds the 1 MiB limit.");
       content = await readFile(path, "utf8");
-    } catch {
+    } catch (error) {
+      if (error instanceof Error && error.message === "Next.js config exceeds the 1 MiB limit.") throw error;
       continue;
     }
 
