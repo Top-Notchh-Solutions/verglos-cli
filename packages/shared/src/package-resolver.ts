@@ -5,6 +5,7 @@ import { createSubject, type PackageSubject } from "./subject.js";
 import { assertNoExecutionContext, type TargetResolution, type TargetResolver, type TargetResolverContext, type TargetSpec } from "./target-resolver.js";
 
 const LOCKFILES = ["package-lock.json", "npm-shrinkwrap.json", "pnpm-lock.yaml", "yarn.lock"] as const;
+const MAX_PACKAGE_JSON_BYTES = 1 * 1024 * 1024;
 
 export class PackageResolutionError extends Error {
   override readonly name = "PackageResolutionError";
@@ -23,8 +24,10 @@ export async function resolvePackageTarget(target: TargetSpec, context: TargetRe
   try {
     const stat = await lstat(join(packageRoot, "package.json"));
     if (!stat.isFile()) throw new Error("not a file");
+    if (stat.size > MAX_PACKAGE_JSON_BYTES) throw new PackageResolutionError("INVALID_METADATA", "Package metadata exceeds the 1 MiB limit.");
     packageBytes = await readFile(join(packageRoot, "package.json"));
-  } catch {
+  } catch (error) {
+    if (error instanceof PackageResolutionError) throw error;
     throw new PackageResolutionError("MISSING_METADATA", "Package target has no readable package.json.");
   }
   let metadata: unknown;
