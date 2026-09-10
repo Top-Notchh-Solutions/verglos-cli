@@ -33,6 +33,12 @@ function inside(root: string, candidate: string): boolean {
   return rel === "" || (!rel.startsWith("..") && !isAbsolute(rel));
 }
 
+export function classifySubmoduleState(output: string): "none" | "resolved" | "incomplete" {
+  const lines = output.trim();
+  if (lines === "") return "none";
+  return lines.split("\n").some((line) => line.startsWith("-") || line.startsWith("+") || line.startsWith("U")) ? "incomplete" : "resolved";
+}
+
 async function dirtyDigest(root: string, status: string, diff: string): Promise<{ algorithm: "sha256"; value: string }> {
   const hash = createHash("sha256");
   hash.update("status\0", "utf8").update(status, "utf8").update("\0diff\0", "utf8").update(diff, "utf8");
@@ -58,7 +64,7 @@ export async function resolveRepositoryTarget(target: TargetSpec, context: Targe
   const dirty = status.length > 0;
   const shallow = (await git(root, ["rev-parse", "--is-shallow-repository"])) === "true";
   const submoduleOutput = await git(root, ["submodule", "status", "--recursive"]);
-  const submoduleState: "none" | "resolved" | "incomplete" = submoduleOutput.trim() === "" ? "none" : (submoduleOutput.split("\n").some((line) => line.startsWith("-") || line.startsWith("+") || line.startsWith("U")) ? "incomplete" : "resolved");
+  const submoduleState = classifySubmoduleState(submoduleOutput);
   const subject = createSubject({
     kind: "repository-tree",
     vcs: "git",
@@ -69,7 +75,11 @@ export async function resolveRepositoryTarget(target: TargetSpec, context: Targe
     submoduleState,
     shallow,
   });
-  return { target, subject, coverage: shallow || submoduleState === "incomplete" ? "incomplete" : "complete", limitations: shallow ? ["repository is shallow"] : [] };
+  const limitations = [
+    ...(shallow ? ["repository is shallow"] : []),
+    ...(submoduleState === "incomplete" ? ["repository has unresolved submodules"] : []),
+  ];
+  return { target, subject, coverage: limitations.length > 0 ? "incomplete" : "complete", limitations };
 }
 
 export const repositoryResolver: TargetResolver = {
