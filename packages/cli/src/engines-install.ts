@@ -21,7 +21,9 @@ async function readCompatibilityManifest(path: string, engineId: string, version
   if (!publicKeyPath) return { manifest, signature: "not-verified" };
   const keyEntry = await lstat(publicKeyPath);
   if (!keyEntry.isFile() || keyEntry.size > 16 * 1024) throw new Error("Engine manifest public key must be a bounded regular file.");
-  const trust = verifyEngineManifestSignature(manifest, await readFile(publicKeyPath, "utf8"));
+  const publicKey = await readFile(publicKeyPath, "utf8");
+  if (Buffer.byteLength(publicKey, "utf8") > 16 * 1024) throw new Error("Engine manifest public key must be a bounded regular file.");
+  const trust = verifyEngineManifestSignature(manifest, publicKey);
   if (!trust.trusted) throw new Error(`Engine compatibility manifest signature is invalid (${trust.reason}).`);
   return { manifest, signature: "verified" };
 }

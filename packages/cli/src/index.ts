@@ -368,7 +368,9 @@ program
       try {
         const entry = await lstat(path);
         if (!entry.isFile() || entry.size > 1 * 1024 * 1024) throw new Error("fix rollback snapshot target is not a bounded regular file");
-        return { path, existed: true, bytes: await readFile(path) };
+        const bytes = await readFile(path);
+        if (bytes.byteLength > 1 * 1024 * 1024) throw new Error("fix rollback snapshot target is not a bounded regular file");
+        return { path, existed: true, bytes };
       } catch (error) {
         if (error instanceof Error && error.message.includes("rollback snapshot target")) throw error;
         return { path, existed: false, bytes: undefined };

@@ -77,6 +77,7 @@ export async function planHeaderFixes(projectRoot: string): Promise<readonly Hea
         const entry = await lstat(path);
         if (!entry.isFile() || entry.size > 1 * 1024 * 1024) continue;
         const content = await readFile(path, "utf8");
+        if (Buffer.byteLength(content, "utf8") > 1 * 1024 * 1024) continue;
         if (content.includes("Content-Security-Policy") || content.includes("X-Frame-Options")) return [{ file: name, action: "skip" }];
         if (NEXT_CONFIG_DECL.test(content)) return [{ file: name, action: "patch", preview: previewLines(NEXT_HEADERS_BLOCK) }];
       } catch { /* unavailable config is not a mutation target */ }
@@ -102,6 +103,7 @@ async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
       if (!entry.isFile()) continue;
       if (entry.size > 1 * 1024 * 1024) throw new Error("Next.js config exceeds the 1 MiB limit.");
       content = await readFile(path, "utf8");
+      if (Buffer.byteLength(content, "utf8") > 1 * 1024 * 1024) throw new Error("Next.js config exceeds the 1 MiB limit.");
     } catch (error) {
       if (error instanceof Error && error.message === "Next.js config exceeds the 1 MiB limit.") throw error;
       continue;
