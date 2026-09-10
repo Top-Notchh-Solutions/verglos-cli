@@ -167,7 +167,7 @@ Evidence/problem: existing finding IDs and score views are scanner-run oriented.
 - [x] **GRAPH-006** · source-to-artifact lineage graph · deps: TARGET-010, IMPORT-006/007, GRAPH-004 · Commit(s): `lineage-graph.ts`, `lineage-graph.test.ts` (bounded nodes/edges, explicit gaps and mismatch states)
 - [x] **GRAPH-007** · release snapshot format · deps: GRAPH-002-006 · Commit(s): `release-snapshot.ts`, `release-snapshot.test.ts` (subject, coverage, observations, lineage, policy freeze)
 - [x] **GRAPH-008** · release diff engine · deps: GRAPH-007 · Commit(s): `release-diff.ts`, `release-diff.test.ts` (new/fixed/unchanged and identity/coverage/policy deltas; full hosted history remains downstream)
-- [ ] **GRAPH-009** · `verglos diff` command · deps: GRAPH-008 · Render decision-first terminal/JSON diff with base/head identity and no hosted requirement; history lookup remains Pro hosted. Commit(s): `pending (preparatory)`
+- [x] **GRAPH-009** · `verglos diff` command · deps: GRAPH-008 · Render decision-first terminal/JSON diff with base/head identity and no hosted requirement; history lookup remains Pro hosted. Commit(s): `packages/cli/src/diff.ts`, `diff.test.ts` (implemented and tested; hosted history remains downstream)
 
 ## Epic 06 — Policy evaluation, baselines, exceptions, approvals, and CI semantics
 

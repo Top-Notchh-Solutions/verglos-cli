@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`POLICY-005`: policy schema, loader, and Free/Pro profiles (POLICY-001-004) are reconciled as implemented and tested. Next is baseline contract/store; public diff/evidence commands and engine orchestration remain open.
+`POLICY-005`: policy schema, loader, Free/Pro profiles, and local diff command are implemented and tested. Next is baseline contract/store; public evidence commands and engine orchestration remain open.
 
 ## Scope hold
 

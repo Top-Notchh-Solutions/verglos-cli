@@ -1,5 +1,6 @@
 # Verglos V1 traceability
 
+ GRAPH-009 local diff command | `packages/cli/src/diff.ts` | diff test covers malformed snapshot rejection and deterministic local exit behavior; reader caps bytes and collection sizes | implemented locally; hosted history remains downstream
  POLICY-003/004 policy profiles | `packages/shared/src/policy-profiles.ts` | policy profile tests cover critical-only Free defaults and bounded configurable Pro confidence/severity/freshness/Hunt settings | implemented locally; entitlement/evaluator wiring remains downstream
  POLICY-001/002 policy schema and loader | `packages/shared/src/policy-document.ts`, `policy-loader.ts` | policy tests cover required evidence fields, strict unknown-field rejection, deterministic precedence, bounded layers, and effective digest | implemented locally; hosted policy authority remains downstream
  GRAPH-001-008 graph/release foundations | `packages/shared/src/native-observation-adapter.ts`, `fingerprint-v1.ts`, `normalization.ts`, `correlation.ts`, `deduplication.ts`, `lineage-graph.ts`, `release-snapshot.ts`, `release-diff.ts` | focused tests cover subject-bound observations, stable fingerprints, normalization, disagreement retention, deduplication, lineage gaps, snapshots, and diffs | implemented locally; public diff command remains GRAPH-009
