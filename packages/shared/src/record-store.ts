@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdir, rename, writeFile, readFile } from "node:fs/promises";
+import { lstat, mkdir, rename, writeFile, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import type { ReleaseRecordManifestDocument } from "./record-manifest.js";
 
@@ -11,5 +11,13 @@ export async function putRecordMember(root: string, path: string, bytes: Uint8Ar
   const temporary = `${destination}.${process.pid}.${Date.now()}.tmp`; await writeFile(temporary, bytes, { mode: 0o600 }); await rename(temporary, destination);
   return { digest: value, path, size: bytes.byteLength };
 }
-export async function readRecordMember(root: string, memberDigest: string): Promise<Uint8Array> { if (!/^sha256:[a-f0-9]{64}$/.test(memberDigest)) throw new Error("record member digest is invalid"); const bytes = await readFile(join(root, memberDigest.replace(":", "-"))); if (digest(bytes) !== memberDigest) throw new Error("record member digest mismatch"); return bytes; }
+export async function readRecordMember(root: string, memberDigest: string): Promise<Uint8Array> {
+  if (!/^sha256:[a-f0-9]{64}$/.test(memberDigest)) throw new Error("record member digest is invalid");
+  const path = join(root, memberDigest.replace(":", "-"));
+  const entry = await lstat(path);
+  if (!entry.isFile() || entry.size > 50_000_000) throw new Error("record member is not a bounded regular file");
+  const bytes = await readFile(path);
+  if (digest(bytes) !== memberDigest) throw new Error("record member digest mismatch");
+  return bytes;
+}
 export function describeRecordMember(input: { readonly path: string; readonly kind: ReleaseRecordManifestDocument["members"][number]["kind"]; readonly mediaType: string; readonly bytes: Uint8Array; readonly required: boolean; readonly redaction?: "none" | "applied" | "omitted" }): ReleaseRecordManifestDocument["members"][number] { assertSafePath(input.path); return { path: input.path, kind: input.kind, mediaType: input.mediaType, digest: { algorithm: "sha256", value: digest(input.bytes).slice(7) }, size: input.redaction === "omitted" ? 0 : input.bytes.byteLength, required: input.required, redaction: input.redaction ?? "none" }; }
