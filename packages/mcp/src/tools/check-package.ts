@@ -77,18 +77,20 @@ export interface CheckPackageLookups {
   resolveLatest?: (name: string) => Promise<string | null>;
 }
 
-async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T | null> {
-  return Promise.race([
-    p,
-    new Promise<null>((resolve) => setTimeout(() => resolve(null), ms)),
-  ]);
+async function fetchWithTimeout(url: string, init: RequestInit = {}): Promise<Response | null> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), HTTP_TIMEOUT_MS);
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function packageExists(name: string): Promise<boolean | null> {
-  const res = await withTimeout(
-    fetch(`${NPM_REGISTRY}/${encodeURIComponent(name)}`, { method: "HEAD" }),
-    HTTP_TIMEOUT_MS,
-  );
+  const res = await fetchWithTimeout(`${NPM_REGISTRY}/${encodeURIComponent(name)}`, { method: "HEAD" });
   if (!res) return null;
   if (res.status === 200) return true;
   if (res.status === 404) return false;
@@ -145,17 +147,14 @@ async function queryOsv(
   version: string,
 ): Promise<OsvLookup> {
   try {
-    const res = await withTimeout(
-      fetch(OSV_URL, {
+    const res = await fetchWithTimeout(OSV_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           package: { name, ecosystem: "npm" },
           version,
         }),
-      }),
-      HTTP_TIMEOUT_MS,
-    );
+      });
     if (!res || !res.ok) return { vulns: [], available: false };
     const data = (await res.json()) as { vulns?: OsvVuln[] };
     if (!Array.isArray(data.vulns)) return { vulns: [], available: false };
@@ -166,10 +165,7 @@ async function queryOsv(
 }
 
 async function resolveLatest(name: string): Promise<string | null> {
-  const res = await withTimeout(
-    fetch(`${NPM_REGISTRY}/${encodeURIComponent(name)}/latest`),
-    HTTP_TIMEOUT_MS,
-  );
+  const res = await fetchWithTimeout(`${NPM_REGISTRY}/${encodeURIComponent(name)}/latest`);
   if (!res || !res.ok) return null;
   try {
     const data = (await res.json()) as { version?: string };
