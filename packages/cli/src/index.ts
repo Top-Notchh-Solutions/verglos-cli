@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { createRequire } from "node:module";
+import { lstat, readFile, unlink, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { Command } from "commander";
 import chalk from "chalk";
 import chokidar from "chokidar";
@@ -357,6 +359,18 @@ program
       process.exit(78);
     }
 
+    const snapshots = opts.rescan ? await Promise.all(plan.filter((item) => item.action !== "skip").map(async (item) => {
+      const path = resolve(process.cwd(), item.file);
+      try {
+        const entry = await lstat(path);
+        if (!entry.isFile() || entry.size > 1 * 1024 * 1024) throw new Error("fix rollback snapshot target is not a bounded regular file");
+        return { path, existed: true, bytes: await readFile(path) };
+      } catch (error) {
+        if (error instanceof Error && error.message.includes("rollback snapshot target")) throw error;
+        return { path, existed: false, bytes: undefined };
+      }
+    })) : [];
+
     console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
     console.log("");
     const fixed = await applyHeaderFixes(process.cwd());
@@ -365,7 +379,16 @@ program
       console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
       if (opts.rescan) {
         console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
-        await executeScan({ noTelemetry: true });
+        try {
+          await executeScan({ noTelemetry: true });
+        } catch (error) {
+          for (const snapshot of snapshots) {
+            if (snapshot.existed && snapshot.bytes) await writeFile(snapshot.path, snapshot.bytes, { mode: 0o600 });
+            else await unlink(snapshot.path).catch(() => undefined);
+          }
+          console.error("Post-fix rescan failed; the approved mutation was rolled back.");
+          throw error;
+        }
       }
     }
   });
