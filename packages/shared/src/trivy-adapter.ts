@@ -5,13 +5,14 @@ import { parseEngineHealth, type EngineHealthDocument } from "./engine.js";
 import type { EngineAdapter, EngineExecutionRequest, EngineExecutionResult, EngineRawOutput } from "./engine-adapter.js";
 import { assertEngineRequestBound } from "./engine-adapter.js";
 
-export type TrivyTargetKind = "repository-tree" | "filesystem" | "artifact" | "oci-manifest" | "oci-index";
-export interface TrivyExecutionProfile { readonly targetKind: TrivyTargetKind; readonly command: "fs" | "image" | "repo"; readonly args: readonly string[]; readonly executesTargetCode: false; }
+export type TrivyTargetKind = "repository-tree" | "filesystem" | "artifact" | "iac" | "sbom" | "oci-manifest" | "oci-index";
+export interface TrivyExecutionProfile { readonly targetKind: TrivyTargetKind; readonly command: "fs" | "image" | "repo" | "config" | "sbom"; readonly args: readonly string[]; readonly executesTargetCode: false; }
 
 export function trivyExecutionProfile(targetKind: TrivyTargetKind, subjectId: string): TrivyExecutionProfile {
-  if (!subjectId || subjectId.length > 256) throw new Error("Trivy subject identity is required and bounded.");
-  const command = targetKind === "oci-manifest" || targetKind === "oci-index" ? "image" : targetKind === "repository-tree" ? "repo" : "fs";
-  return Object.freeze({ targetKind, command, args: Object.freeze([command, "--format", "json", "--scanners", "vuln,misconfig,secret", "--input", subjectId]), executesTargetCode: false as const });
+  if (!subjectId || subjectId.length > 256 || /[\u0000\r\n]/u.test(subjectId)) throw new Error("Trivy subject identity is required and bounded.");
+  const command = targetKind === "oci-manifest" || targetKind === "oci-index" ? "image" : targetKind === "repository-tree" ? "repo" : targetKind === "iac" ? "config" : targetKind === "sbom" ? "sbom" : "fs";
+  const scanners = targetKind === "iac" ? "misconfig,secret" : targetKind === "sbom" ? "vuln" : "vuln,misconfig,secret";
+  return Object.freeze({ targetKind, command, args: Object.freeze([command, "--format", "json", "--scanners", scanners, "--input", subjectId]), executesTargetCode: false as const });
 }
 
 const execFileAsync = promisify(execFile);
