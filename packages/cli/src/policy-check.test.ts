@@ -72,3 +72,18 @@ test("policy check accepts an evaluator named with snapshot text", async () => {
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("policy check quiet mode emits no human output on success", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-policy-"));
+  const original = console.log;
+  const lines: string[] = [];
+  console.log = (line?: unknown) => lines.push(String(line));
+  try {
+    await writeFile(join(root, "evaluation.json"), JSON.stringify(validEvaluation()), "utf8");
+    assert.equal(await executePolicyCheck(join(root, "evaluation.json"), false, true), 0);
+    assert.deepEqual(lines, []);
+  } finally {
+    console.log = original;
+    await rm(root, { recursive: true, force: true });
+  }
+});
