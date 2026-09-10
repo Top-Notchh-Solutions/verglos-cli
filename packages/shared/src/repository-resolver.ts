@@ -57,7 +57,8 @@ export async function resolveRepositoryTarget(target: TargetSpec, context: Targe
   const status = await git(root, ["status", "--porcelain=v1"]);
   const dirty = status.length > 0;
   const shallow = (await git(root, ["rev-parse", "--is-shallow-repository"])) === "true";
-  const submoduleState = (await git(root, ["submodule", "status", "--recursive"])).trim() === "" ? "none" : "resolved";
+  const submoduleOutput = await git(root, ["submodule", "status", "--recursive"]);
+  const submoduleState: "none" | "resolved" | "incomplete" = submoduleOutput.trim() === "" ? "none" : (submoduleOutput.split("\n").some((line) => line.startsWith("-") || line.startsWith("+") || line.startsWith("U")) ? "incomplete" : "resolved");
   const subject = createSubject({
     kind: "repository-tree",
     vcs: "git",
@@ -65,7 +66,7 @@ export async function resolveRepositoryTarget(target: TargetSpec, context: Targe
     tree: { algorithm: tree.length === 64 ? "sha256" : "sha1", value: tree },
     dirty,
     ...(dirty ? { worktreeDigest: await dirtyDigest(root, status, await git(root, ["diff", "--binary", "HEAD"])) } : {}),
-    submoduleState: submoduleState as "none" | "resolved" | "incomplete",
+    submoduleState,
     shallow,
   });
   return { target, subject, coverage: shallow || submoduleState === "incomplete" ? "incomplete" : "complete", limitations: shallow ? ["repository is shallow"] : [] };
