@@ -96,4 +96,5 @@ export * from "./record-assembly.js";
 export * from "./record-digest.js";
 export * from "./record-reader.js";
 export * from "./public-record-projection.js";
+export * from "./record-signing.js";
 export * from "./record-provenance.js";
