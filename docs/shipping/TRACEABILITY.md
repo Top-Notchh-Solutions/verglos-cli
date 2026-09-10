@@ -4,6 +4,7 @@
  AGENT-005 check-before-write direct boundary | `packages/mcp/src/tools/check-before-write.ts` | 1 focused test: malformed code/path/language/context inputs rejected before filesystem work | implemented locally; detector/runtime safety remains downstream
  AGENT-005 explain-finding direct boundary | `packages/mcp/src/tools/explain-finding.ts` | 2 focused tests: malformed/bounded rule rejection and unknown-rule response preservation | implemented locally; rule-bank completeness remains downstream
  AGENT-005 strict direct tool shapes | `packages/mcp/src/tools/check-before-write.ts`, `check-package.ts` | 6 focused tests include unknown-field rejection for both tools | implemented locally; runtime/detector safety remains downstream
+ AGENT-005 MCP dispatch failure projection | `packages/mcp/src/server.ts` | build verification: executable tool failures return stable namespaced error payloads rather than escaping handler dispatch | implemented locally; full transport/error taxonomy remains downstream
  AGENT-005 deterministic scan projection | `packages/mcp/src/tools/scan.ts` | 2 focused tests: severity/rule/file/line ordering and direct input-boundary rejection, including unknown fields | implemented locally; scanner execution/network safety remains downstream
 | Capability | Contract | Backlog IDs | Tests required | Public state |
 |---|---|---|---|---|
