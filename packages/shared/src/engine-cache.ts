@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, rename, rm, writeFile, readdir } from "node:fs/promises";
+import { lstat, mkdir, readFile, rename, rm, writeFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 
 export class EngineCacheError extends Error {
@@ -26,7 +26,16 @@ export async function installEngineArtifact(cacheRoot: string, engineId: string,
   finally { await rm(lock, { recursive: true, force: true }); }
 }
 
-export async function readCachedEngine(cacheRoot: string, engineId: string, version: string): Promise<Buffer> { assertSafeSegment(engineId, "engine id"); assertSafeSegment(version, "engine version"); return readFile(join(cacheRoot, engineId, version, "engine.bin")); }
+const MAX_CACHED_ENGINE_BYTES = 256 * 1024 * 1024;
+
+export async function readCachedEngine(cacheRoot: string, engineId: string, version: string): Promise<Buffer> {
+  assertSafeSegment(engineId, "engine id"); assertSafeSegment(version, "engine version");
+  const path = join(cacheRoot, engineId, version, "engine.bin");
+  const entry = await lstat(path);
+  if (!entry.isFile()) throw new EngineCacheError("INSTALL_FAILED", "Cached engine must be a regular file.");
+  if (entry.size > MAX_CACHED_ENGINE_BYTES) throw new EngineCacheError("INSTALL_FAILED", "Cached engine exceeds the 256 MiB limit.");
+  return readFile(path);
+}
 
 export async function listCachedEngines(cacheRoot: string): Promise<readonly { readonly engineId: string; readonly version: string; readonly digest: string }[]> {
   const result: { engineId: string; version: string; digest: string }[] = [];
