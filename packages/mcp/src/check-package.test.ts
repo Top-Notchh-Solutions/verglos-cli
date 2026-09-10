@@ -47,3 +47,8 @@ test("check_package reports registry and latest-version gaps", async () => {
   assert.equal(latest.version, "latest");
   assert.deepEqual(latest.limitations, ["latest-version-unavailable"]);
 });
+
+test("check_package rejects malformed direct calls", async () => {
+  await assert.rejects(() => checkPackage({} as any), /packageName/);
+  await assert.rejects(() => checkPackage({ packageName: "x", version: 1 } as any), /version/);
+});

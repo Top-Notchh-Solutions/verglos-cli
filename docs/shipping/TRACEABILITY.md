@@ -1,6 +1,6 @@
 # Verglos V1 traceability
 
- AGENT-005 package evidence availability | `packages/mcp/src/tools/check-package.ts` | 4 focused tests: clean complete lookup, OSV outage warning, blocking high CVE, registry/latest-version gaps | implemented locally; incomplete npm/OSV/latest evidence is explicit; runtime/network safety remains downstream
+ AGENT-005 package evidence availability | `packages/mcp/src/tools/check-package.ts` | 5 focused tests: clean complete lookup, OSV outage warning, blocking high CVE, registry/latest-version gaps, malformed direct calls | implemented locally; incomplete npm/OSV/latest evidence is explicit; runtime/network safety remains downstream
  AGENT-005 deterministic scan projection | `packages/mcp/src/tools/scan.ts` | 2 focused tests: severity/rule/file/line ordering and direct input-boundary rejection | implemented locally; scanner execution/network safety remains downstream
 | Capability | Contract | Backlog IDs | Tests required | Public state |
 |---|---|---|---|---|
