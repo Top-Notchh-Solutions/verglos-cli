@@ -40,6 +40,7 @@ import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
 import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
 import { executeRecordVerify } from "./record-verify.js";
+import { executeRecordCreate } from "./record-create.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -117,6 +118,13 @@ evidence.command("export <input> <output>")
 });
 
 const record = program.command("record").description("Verify local content-addressed Verglos records");
+record.command("create <membersRoot> <manifestPath> <outputRoot>")
+  .description("Materialize a validated manifest and its payloads into a local record store")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (membersRoot: string, manifestPath: string, outputRoot: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordCreate(membersRoot, manifestPath, outputRoot, opts.json, opts.quiet));
+  });
 record.command("verify <storeRoot> <manifestPath>")
   .description("Verify every stored record member against its manifest")
   .option("--json", "Emit machine-readable JSON")
