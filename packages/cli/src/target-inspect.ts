@@ -1,5 +1,6 @@
 import {
   resolveArtifactTarget, resolveFilesystemTarget, resolvePackageTarget, resolveRepositoryTarget, resolveSbomTarget,
+  resolveOciLayout,
   type TargetKind,
 } from "@verglos/shared";
 
@@ -7,6 +8,13 @@ export async function executeTargetInspect(kind: TargetKind, value: string, json
   const target = { kind, value } as const;
   const context = { cwd: process.cwd(), allowNetwork: false, executeProjectCode: false as const };
   try {
+    if (kind === "oci") {
+      const subject = await resolveOciLayout(value);
+      const output = { target, subject, coverage: "complete" as const, limitations: [] as readonly string[] };
+      if (json) console.log(JSON.stringify(output));
+      else { console.log(`Target: ${kind} ${value}`); console.log(`Coverage: ${output.coverage}`); console.log(`Subject: ${subject.subjectId}`); }
+      return 0;
+    }
     const result = kind === "repository" ? await resolveRepositoryTarget(target, context)
       : kind === "package" ? await resolvePackageTarget(target, context)
       : kind === "filesystem" ? await resolveFilesystemTarget(target, context)
