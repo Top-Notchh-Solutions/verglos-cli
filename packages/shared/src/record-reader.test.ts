@@ -27,3 +27,24 @@ test("safe record reader rejects duplicate member digests", async () => {
     await assert.rejects(() => readAndVerifyRecord(root, manifest), /digest is duplicated/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("safe record reader rejects malformed required JSON and unknown required media", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-reader-media-"));
+  try {
+    const malformed = new TextEncoder().encode("not-json"); const malformedStored = await putRecordMember(root, "decision.json", malformed);
+    const malformedManifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos", version: "2.0.0" }, members: [{ path: "decision.json", kind: "release-decision", mediaType: "application/json", digest: { algorithm: "sha256", value: malformedStored.digest.slice(7) }, size: malformed.byteLength, required: true, redaction: "none", schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } }], redaction: { status: "not-required" }, limitations: ["fixture"] });
+    await assert.rejects(() => readAndVerifyRecord(root, malformedManifest), /JSON is malformed/);
+    const bytes = new TextEncoder().encode("{}"); const stored = await putRecordMember(root, "decision.json", bytes);
+    const unknownManifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos", version: "2.0.0" }, members: [{ path: "decision.json", kind: "release-decision", mediaType: "application/x-custom", digest: { algorithm: "sha256", value: stored.digest.slice(7) }, size: bytes.byteLength, required: true, redaction: "none", schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } }], redaction: { status: "not-required" }, limitations: ["fixture"] });
+    await assert.rejects(() => readAndVerifyRecord(root, unknownManifest), /unsupported required record member media type/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("safe record reader rejects unsupported member schema versions", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-reader-schema-"));
+  try {
+    const bytes = new TextEncoder().encode("{}"); const stored = await putRecordMember(root, "decision.json", bytes);
+    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos", version: "2.0.0" }, members: [{ path: "decision.json", kind: "release-decision", mediaType: "application/json", digest: { algorithm: "sha256", value: stored.digest.slice(7) }, size: bytes.byteLength, required: true, redaction: "none", schema: { id: "urn:verglos:schema:release-decision", version: "2.0.0" } }], redaction: { status: "not-required" }, limitations: ["fixture"] });
+    await assert.rejects(() => readAndVerifyRecord(root, manifest), /unsupported record member schema version/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
