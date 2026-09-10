@@ -24,6 +24,7 @@ const CACHE_DIR = join(homedir(), ".verglos");
 const CACHE_FILE = join(CACHE_DIR, "capabilities.json");
 const REQUEST_TIMEOUT_MS = 5000;
 const MAX_CAPABILITIES_CACHE_BYTES = 1 * 1024 * 1024;
+const MAX_CAPABILITIES_RESPONSE_BYTES = 1 * 1024 * 1024;
 
 /**
  * Hard cap on how long a stale cache can survive without a server
@@ -124,7 +125,11 @@ async function fetchFromServer(
         : {},
     });
     if (!res.ok) return null;
-    return (await res.json()) as CapabilitiesResponse;
+    const length = Number(res.headers.get("content-length") ?? "0");
+    if (Number.isFinite(length) && length > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
+    const bytes = await res.arrayBuffer();
+    if (bytes.byteLength > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
+    return JSON.parse(new TextDecoder().decode(bytes)) as CapabilitiesResponse;
   } catch {
     return null;
   }
