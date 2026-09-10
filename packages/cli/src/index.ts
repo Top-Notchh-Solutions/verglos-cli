@@ -679,9 +679,11 @@ program
   .command("precommit")
   .description("Fast secrets + criticals scan for the pre-commit hook (<2s budget)")
   .option("--timeout <ms>", "Timeout budget in ms", "2000")
-  .action(async (opts: { timeout: string }) => {
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .action(async (opts: { timeout: string; config?: string }) => {
     const code = await executePrecommit({
       timeoutMs: parseInt(opts.timeout, 10),
+      configPath: opts.config,
     });
     process.exit(code);
   });

@@ -18,6 +18,7 @@ const CRITICAL_CONFIDENCE: readonly ConfidenceLevel[] = ["certain", "high"];
 
 export interface PrecommitOptions {
   cwd?: string;
+  configPath?: string;
   timeoutMs?: number;
 }
 
@@ -47,6 +48,7 @@ export async function executePrecommit(
 
   const scanPromise = runScan({
     projectRoot,
+    configPath: options.configPath,
     // Fast subset: no OSV network calls, no git-history sweep, no
     // provenance engine. Secret patterns + AI-* rules + high-conf
     // injection patterns cover the "committing a leaked key / OTP
