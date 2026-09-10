@@ -3,9 +3,15 @@ import { mkdtemp, mkdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { repositoryResolver, resolveRepositoryTarget, RepositoryResolutionError } from "./repository-resolver.js";
+import { classifySubmoduleState, repositoryResolver, resolveRepositoryTarget, RepositoryResolutionError } from "./repository-resolver.js";
 
 const context = (cwd: string) => ({ cwd, allowNetwork: false, executeProjectCode: false as const });
+
+test("repository submodule coverage classifies empty, resolved, and incomplete states", () => {
+  assert.equal(classifySubmoduleState(""), "none");
+  assert.equal(classifySubmoduleState(" abc123 path/to/module"), "resolved");
+  assert.equal(classifySubmoduleState("-abc123 path/to/module\n+def456 path/to/other"), "incomplete");
+});
 
 test("repository resolver records immutable Git identity and dirty evidence", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-repository-"));
