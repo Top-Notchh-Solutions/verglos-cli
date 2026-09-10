@@ -32,6 +32,12 @@ export async function executeRecordCreate(
     const manifest = parseReleaseRecordManifestJson(manifestBytes);
     const sourceRoot = resolve(membersRoot);
     const destination = resolve(outputRoot);
+    try {
+      const existing = await lstat(destination);
+      if (!existing.isDirectory()) throw new Error("record output root must be a regular directory");
+    } catch (error) {
+      if (!(error instanceof Error) || (error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+    }
     await mkdir(destination, { recursive: true, mode: 0o700 });
     const stored: string[] = [];
     for (const member of manifest.members) {
@@ -54,4 +60,3 @@ export async function executeRecordCreate(
     return 78;
   }
 }
-
