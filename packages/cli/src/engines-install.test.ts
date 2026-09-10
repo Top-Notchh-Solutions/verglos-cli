@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
-import { createHash, generateKeyPairSync } from "node:crypto";
+import { createHash, generateKeyPairSync, sign } from "node:crypto";
 import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
+import { canonicalizeJson } from "@verglos/shared";
 import { executeEngineInstall } from "./engines-install.js";
 
 test("engine install rejects malformed arguments before reading artifacts", async () => {
@@ -92,6 +93,28 @@ test("engine install fails closed when a supplied manifest signature is invalid"
   const { publicKey } = generateKeyPairSync("ed25519"); await writeFile(keyPath, publicKey.export({ type: "spki", format: "pem" }));
   try { assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, digest, { manifestPath, manifestPublicKeyPath: keyPath, approve: true, quiet: true }), 78); }
   finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("engine install reports verified for a valid Ed25519 manifest", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-engine-valid-signature-"));
+  const artifact = join(root, "engine"); const manifestPath = join(root, "manifest.json"); const keyPath = join(root, "key.pem");
+  await writeFile(artifact, "bytes");
+  const digest = `sha256:${createHash("sha256").update("bytes").digest("hex")}`;
+  const unsigned = { schemaId: "urn:verglos:schema:engine-manifest", schemaVersion: "1.0.0", engineId: "trivy", version: "1.0.0", artifacts: [{ platform: "darwin/arm64", digest, size: 5, source: "https://mirror.example.test/trivy", license: "Apache-2.0" }], compatibleCli: ">=2.0.0" };
+  const { privateKey, publicKey } = generateKeyPairSync("ed25519");
+  const value = sign(null, Buffer.from(canonicalizeJson(unsigned), "utf8"), privateKey).toString("base64");
+  await writeFile(manifestPath, JSON.stringify({ ...unsigned, signature: { algorithm: "ed25519", keyId: "test", value } }));
+  await writeFile(keyPath, publicKey.export({ type: "spki", format: "pem" }));
+  const previousCache = process.env.VERGLOS_ENGINE_CACHE; const previousLog = console.log; const lines: string[] = [];
+  process.env.VERGLOS_ENGINE_CACHE = join(root, "cache"); console.log = (line?: unknown) => lines.push(String(line));
+  try {
+    assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, digest, { manifestPath, manifestPublicKeyPath: keyPath, approve: true, json: true }), 0);
+    assert.equal(JSON.parse(lines[0]!).compatibility.signature, "verified");
+  } finally {
+    console.log = previousLog;
+    if (previousCache === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previousCache;
+    await rm(root, { recursive: true, force: true });
+  }
 });
 
 test("engine install rejects a manifest key without a manifest", async () => {
