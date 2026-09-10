@@ -10,4 +10,5 @@ test("engine status formatting is deterministic for human and JSON output", () =
   assert.equal(formatEngineStatus("/cache", engines), "trivy@1.0.0 sha256:abc");
   assert.equal(formatEngineStatus("/cache", [], false), "No cached engines found.");
   assert.equal(formatEngineStatus("/cache", engines, true), JSON.stringify({ cacheRoot: "/cache", engines }));
+  assert.equal(formatEngineStatus("/cache", engines, false, true), "");
 });
