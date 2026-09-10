@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`IMPORT-012`: importer/exporter foundations (IMPORT-001-011) are implemented and tested. Next is public evidence import/export command wiring; ENGINE-008 update/rollback and MCP scanner runtime safety remain open.
+`GRAPH-009`: graph and release-diff foundations (GRAPH-001-008) are implemented and tested. Next is the public diff command and evidence import/export wiring; ENGINE-008 update/rollback and MCP scanner runtime safety remain open.
 
 ## Scope hold
 

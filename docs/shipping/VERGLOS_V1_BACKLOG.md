@@ -159,14 +159,14 @@ Evidence/problem: mature teams already produce SARIF, SBOM, VEX, and provenance.
 
 Evidence/problem: existing finding IDs and score views are scanner-run oriented. Multiple sources need a stable graph without deleting lineage or double-counting risk.
 
-- [ ] **GRAPH-001** · native finding-to-observation adapter · deps: CONTRACT-004/005, TRUTH-010 · Convert current JS/TS findings without breaking legacy reports; preserve native rule, context, confidence, provenance, and remediation. Commit(s): `pending (preparatory)`
-- [ ] **GRAPH-002** · canonical stable fingerprint v1 · deps: GRAPH-001, TARGET-002-009 · Derive from subject/location/package/advisory/rule/evidence class, never engine order or presentation text. Tests: repeatability, file moves, version changes, collisions. Commit(s): —
-- [ ] **GRAPH-003** · severity/confidence normalization · deps: GRAPH-001, IMPORT-002-005, ENGINE-010 · Preserve originals, version mapping policy, and expose uncertain/unmapped values. Commit(s): `pending (preparatory)`
-- [ ] **GRAPH-004** · correlation graph · deps: GRAPH-002/003 · Link overlapping native/Trivy/imported observations while retaining every producer and raw reference. Acceptance: correlation never silently erases disagreement. Commit(s): `pending (preparatory)`
-- [ ] **GRAPH-005** · deduplication projection · deps: GRAPH-004 · Produce one review item with lineage for exact duplicates and bounded fuzzy candidates requiring review. Tests: three-tool duplicate and near-match. Commit(s): `pending (preparatory)`
-- [ ] **GRAPH-006** · source-to-artifact lineage graph · deps: TARGET-010, IMPORT-006/007, GRAPH-004 · Connect commit/tree/build/SBOM/image/artifact evidence with explicit gaps and mismatches. Commit(s): `pending (preparatory)`
-- [ ] **GRAPH-007** · release snapshot format · deps: GRAPH-002-006 · Freeze subject, coverage, normalized observations, lineage, and policy inputs for deterministic comparison. Commit(s): `pending (preparatory)`
-- [ ] **GRAPH-008** · release diff engine · deps: GRAPH-007 · Classify new/fixed/worsened/unchanged observations plus coverage/identity/policy changes. Tests: detector upgrade, moved file, changed artifact, stale evidence. Commit(s): `pending (preparatory)`
+- [x] **GRAPH-001** · native finding-to-observation adapter · deps: CONTRACT-004/005, TRUTH-010 · Commit(s): `native-observation-adapter.ts`, `native-observation-adapter.test.ts` (subject-bound mapping with native context/confidence/provenance/remediation; scanner integration remains downstream)
+- [x] **GRAPH-002** · canonical stable fingerprint v1 · deps: GRAPH-001, TARGET-002-009 · Commit(s): `fingerprint-v1.ts`, `fingerprint-v1.test.ts` (repeatable identity-bound fingerprint; broader collision corpus remains downstream)
+- [x] **GRAPH-003** · severity/confidence normalization · deps: GRAPH-001, IMPORT-002-005, ENGINE-010 · Commit(s): `normalization.ts`, `normalization.test.ts` (original severity/confidence and uncertain mappings preserved)
+- [x] **GRAPH-004** · correlation graph · deps: GRAPH-002/003 · Commit(s): `correlation.ts`, `correlation.test.ts` (producer/raw payload retention and disagreement detection)
+- [x] **GRAPH-005** · deduplication projection · deps: GRAPH-004 · Commit(s): `deduplication.ts`, `deduplication.test.ts` (exact collapse and bounded fuzzy review projection)
+- [x] **GRAPH-006** · source-to-artifact lineage graph · deps: TARGET-010, IMPORT-006/007, GRAPH-004 · Commit(s): `lineage-graph.ts`, `lineage-graph.test.ts` (bounded nodes/edges, explicit gaps and mismatch states)
+- [x] **GRAPH-007** · release snapshot format · deps: GRAPH-002-006 · Commit(s): `release-snapshot.ts`, `release-snapshot.test.ts` (subject, coverage, observations, lineage, policy freeze)
+- [x] **GRAPH-008** · release diff engine · deps: GRAPH-007 · Commit(s): `release-diff.ts`, `release-diff.test.ts` (new/fixed/unchanged and identity/coverage/policy deltas; full hosted history remains downstream)
 - [ ] **GRAPH-009** · `verglos diff` command · deps: GRAPH-008 · Render decision-first terminal/JSON diff with base/head identity and no hosted requirement; history lookup remains Pro hosted. Commit(s): `pending (preparatory)`
 
 ## Epic 06 — Policy evaluation, baselines, exceptions, approvals, and CI semantics
