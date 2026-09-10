@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`AGENT-005`: MCP read-only validators now cover check-before-write, explain-finding, check-package, and scan argument boundaries. All three executable read-only tools now recheck malformed direct calls; package evidence gaps and deterministic scan ordering remain explicit. Scanner network/runtime safety and full tool contract remain open.
+`AGENT-005`: MCP read-only validators now cover check-before-write, explain-finding, check-package, and scan argument boundaries. All three executable read-only tools now recheck malformed direct calls, including bounded rule explanations; package evidence gaps and deterministic scan ordering remain explicit. Scanner network/runtime safety and full tool contract remain open.
 
 ## Scope hold
 

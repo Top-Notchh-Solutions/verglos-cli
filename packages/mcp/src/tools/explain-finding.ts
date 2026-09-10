@@ -19,6 +19,12 @@ export interface ExplainFindingResult {
 }
 
 export function explainFinding(input: ExplainFindingInput): ExplainFindingResult {
+  if (!input || typeof input !== "object" || typeof input.rule !== "string") {
+    throw new Error("explain_finding requires a string rule");
+  }
+  if (input.rule.length === 0 || input.rule.length > 256) {
+    throw new Error("explain_finding rule exceeds bounds");
+  }
   const entry = lookupRule(input.rule);
   if (!entry) {
     return {
