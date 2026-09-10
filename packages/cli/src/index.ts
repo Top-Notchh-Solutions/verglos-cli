@@ -42,6 +42,7 @@ import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordCreate } from "./record-create.js";
 import { executeRecordProject } from "./record-project.js";
+import { executeRecordSign } from "./record-sign.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -129,9 +130,22 @@ record.command("create <membersRoot> <manifestPath> <outputRoot>")
 record.command("verify <storeRoot> <manifestPath>")
   .description("Verify every stored record member against its manifest")
   .option("--json", "Emit machine-readable JSON")
+  .option("--signature <path>", "Verify an offline record signature envelope")
+  .option("--public-key <path>", "Verify with a user-supplied Ed25519 public key")
   .option("--quiet", "Suppress human output")
-  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
-    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet));
+  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string }) => {
+    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey));
+  });
+record.command("sign <manifestPath> <signaturePath>")
+  .description("Sign a validated record manifest with a user-supplied offline key")
+  .requiredOption("--key <path>", "Private Ed25519 key path")
+  .requiredOption("--signer <id>", "Signer identity label")
+  .requiredOption("--issuer <issuer>", "Signer issuer label")
+  .option("--approve", "Approve the signing identity operation")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (manifestPath: string, signaturePath: string, opts: { key: string; signer: string; issuer: string; approve?: boolean; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordSign(manifestPath, signaturePath, opts.key, opts.signer, opts.issuer, opts.approve, opts.json, opts.quiet));
   });
 record.command("project <storeRoot> <manifestPath>")
   .description("Project a verified record into safe public fields without uploading")

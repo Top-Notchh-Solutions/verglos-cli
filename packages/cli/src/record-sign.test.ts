@@ -1,0 +1,25 @@
+import assert from "node:assert/strict";
+import { generateKeyPairSync } from "node:crypto";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { test } from "node:test";
+import { assembleReleaseRecord } from "@verglos/shared";
+import { executeRecordSign } from "./record-sign.js";
+
+test("record sign requires explicit approval before reading the key", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-sign-"));
+  try { assert.equal(await executeRecordSign(join(root, "manifest.json"), join(root, "sig.json"), join(root, "key.pem"), "signer", "issuer", false, true, true), 78); }
+  finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("record sign writes a bounded envelope", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-sign-valid-"));
+  try {
+    const { privateKey } = generateKeyPairSync("ed25519");
+    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos.record-builder", version: "1.0.0" }, members: [{ path: "decision.json", kind: "release-decision", mediaType: "application/json", digest: { algorithm: "sha256", value: "a".repeat(64) }, size: 2, required: true, redaction: "none", schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } }], redaction: { status: "not-required" }, limitations: ["fixture"] });
+    await writeFile(join(root, "manifest.json"), JSON.stringify(manifest)); await writeFile(join(root, "key.pem"), privateKey.export({ format: "pem", type: "pkcs8" }));
+    assert.equal(await executeRecordSign(join(root, "manifest.json"), join(root, "sig.json"), join(root, "key.pem"), "signer", "issuer", true, true, true), 0);
+    assert.match(await readFile(join(root, "sig.json"), "utf8"), /record-signature|manifestDigest/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
