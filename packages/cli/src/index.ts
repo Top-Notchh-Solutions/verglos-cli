@@ -272,18 +272,21 @@ program
 program
   .command("secrets")
   .description("Scan for secrets only")
-  .action(async () => {
-    await executeScan({ detectors: ["secrets"], focused: true });
+  .option("-q, --quiet", "Suppress terminal output")
+  .action(async (opts: { quiet?: boolean }) => {
+    await executeScan({ detectors: ["secrets"], focused: true, quiet: opts.quiet });
   });
 
 program
   .command("deps")
   .description("Dependency vulnerability audit only")
-  .action(async () => {
+  .option("-q, --quiet", "Suppress terminal output")
+  .action(async (opts: { quiet?: boolean }) => {
     await executeScan({
       detectors: ["dependencies"],
       focused: true,
       includeGitHistory: false,
+      quiet: opts.quiet,
     });
   });
 
