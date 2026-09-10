@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { lstat, mkdir, readFile, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import chalk from "chalk";
@@ -23,6 +23,7 @@ import { defaultCapabilitiesFor, normalizeTier, type Tier } from "./tier-default
 const CACHE_DIR = join(homedir(), ".verglos");
 const CACHE_FILE = join(CACHE_DIR, "capabilities.json");
 const REQUEST_TIMEOUT_MS = 5000;
+const MAX_CAPABILITIES_CACHE_BYTES = 1 * 1024 * 1024;
 
 /**
  * Hard cap on how long a stale cache can survive without a server
@@ -76,6 +77,8 @@ const FREE_FALLBACK: CachedCapabilities = {
 
 async function readCache(): Promise<CachedCapabilities | null> {
   try {
+    const entry = await lstat(CACHE_FILE);
+    if (!entry.isFile() || entry.size > MAX_CAPABILITIES_CACHE_BYTES) return null;
     const raw = await readFile(CACHE_FILE, "utf8");
     return JSON.parse(raw) as CachedCapabilities;
   } catch {
