@@ -1,9 +1,13 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { lstat, readFile, writeFile } from "node:fs/promises";
 import { importBoundedJson } from "@verglos/shared";
 import { exportCycloneDx, exportSpdx } from "@verglos/shared";
 
 async function readEvidenceInput(inputPath: string): Promise<Buffer> {
-  return inputPath === "-" ? readFile(0 as any) : readFile(inputPath);
+  if (inputPath === "-") return readFile(0 as any);
+  const entry = await lstat(inputPath);
+  if (!entry.isFile()) throw new Error("evidence input must be a regular file");
+  if (entry.size > 8 * 1024 * 1024) throw new Error("evidence input exceeds the 8 MiB limit");
+  return readFile(inputPath);
 }
 
 export async function transferEvidence(inputPath: string, outputPath: string): Promise<{ readonly format: string; readonly bytes: number }> {
