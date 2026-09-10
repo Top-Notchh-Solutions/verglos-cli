@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { executePolicyCheck } from "./policy-check.js";
-import { createPolicyEvaluation, createSubject, POLICY_EVALUATION_SCHEMA } from "@verglos/shared";
+import { assembleReleaseRecord, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, POLICY_EVALUATION_SCHEMA, putRecordMember, RELEASE_DECISION_SCHEMA } from "@verglos/shared";
 
 function validEvaluation(status: "satisfied" | "failed" | "stale" = "satisfied") {
   const digest = (value: string) => ({ algorithm: "sha256" as const, value: value.repeat(64) });
@@ -43,10 +43,49 @@ test("policy check rejects record and snapshot inputs with a stable JSON error",
     assert.deepEqual(JSON.parse(lines[0]!), {
       status: "error",
       code: "POLICY_CHECK_INPUT",
-      message: "record and snapshot inputs are not supported by policy check",
+      message: "record and snapshot inputs require --record-store or an embedded policy evaluation",
     });
   } finally {
     console.log = original;
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("policy check verifies a record store and evaluates its policy member", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-policy-record-"));
+  try {
+    const store = join(root, "store");
+    const evaluation = validEvaluation();
+    const decision = createReleaseDecision({
+      decisionId: "urn:uuid:82345678-1234-4123-8123-123456789abc",
+      evaluation,
+      subjects: [{ subjectId: evaluation.subjectId, role: "primary" }],
+      issuedBy: { kind: "service", id: "verglos-test", authority: "test" },
+      generatedAt: "2026-09-09T03:00:00.000Z",
+      limitations: ["test fixture"],
+    });
+    const policyBytes = Buffer.from(JSON.stringify(evaluation));
+    const decisionBytes = Buffer.from(JSON.stringify(decision));
+    const policyStored = await putRecordMember(store, "policy-evaluation.json", policyBytes);
+    const decisionStored = await putRecordMember(store, "decision.json", decisionBytes);
+    const manifest = assembleReleaseRecord({
+      schemaId: "urn:verglos:schema:release-record-manifest",
+      schemaVersion: "1.0.0",
+      bundleVersion: "1.0.0",
+      manifestId: "urn:uuid:92345678-1234-4123-8123-123456789abc",
+      generatedAt: "2026-09-09T03:00:00.000Z",
+      generator: { id: "verglos-test", version: "1.0.0" },
+      members: [
+        { ...describeRecordMember({ path: "policy-evaluation.json", kind: "policy-evaluation", mediaType: "application/json", bytes: policyBytes, required: true }), digest: { algorithm: "sha256", value: policyStored.digest.slice(7) }, schema: { id: POLICY_EVALUATION_SCHEMA.id, version: POLICY_EVALUATION_SCHEMA.version } },
+        { ...describeRecordMember({ path: "decision.json", kind: "release-decision", mediaType: "application/json", bytes: decisionBytes, required: true }), digest: { algorithm: "sha256", value: decisionStored.digest.slice(7) }, schema: { id: RELEASE_DECISION_SCHEMA.id, version: RELEASE_DECISION_SCHEMA.version } },
+      ],
+      redaction: { status: "not-required" },
+      limitations: ["test fixture"],
+    });
+    const manifestPath = join(root, "manifest.json");
+    await writeFile(manifestPath, JSON.stringify(manifest), "utf8");
+    assert.equal(await executePolicyCheck(manifestPath, true, true, { recordStore: store }), 0);
+  } finally {
     await rm(root, { recursive: true, force: true });
   }
 });

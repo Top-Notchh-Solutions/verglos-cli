@@ -97,8 +97,8 @@ program
   });
 
 const policy = program.command("policy").description("Inspect local policy evaluation artifacts");
-policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { json?: boolean; quiet?: boolean }) => {
-  process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet));
+policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--record-store <path>", "Verify a record manifest against its content-addressed member store").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { recordStore?: string; json?: boolean; quiet?: boolean }) => {
+  process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet, { recordStore: opts.recordStore }));
 });
 
 const evidence = program.command("evidence").description("Import and export standards evidence");

@@ -1,6 +1,12 @@
 import { readFile, lstat } from "node:fs/promises";
 import { basename } from "node:path";
-import { explainPolicyEvaluation, parsePolicyEvaluationJson, policyDecisionExitCode } from "@verglos/shared";
+import {
+  explainPolicyEvaluation,
+  parsePolicyEvaluationJson,
+  parseReleaseRecordManifestJson,
+  policyDecisionExitCode,
+  readAndVerifyRecord,
+} from "@verglos/shared";
 
 const MAX_POLICY_BYTES = 8 * 1024 * 1024;
 
@@ -16,7 +22,11 @@ async function readBoundedStdin(): Promise<Buffer> {
   return Buffer.concat(chunks, total);
 }
 
-export async function executePolicyCheck(path: string, json = false, quiet = false): Promise<number> {
+export interface PolicyCheckOptions {
+  readonly recordStore?: string;
+}
+
+export async function executePolicyCheck(path: string, json = false, quiet = false, options: PolicyCheckOptions = {}): Promise<number> {
   try {
     if (path !== "-") {
       const entry = await lstat(path);
@@ -25,8 +35,7 @@ export async function executePolicyCheck(path: string, json = false, quiet = fal
     const bytes = path === "-" ? await readBoundedStdin() : await readFile(path);
     if (bytes.byteLength > MAX_POLICY_BYTES) throw new Error("policy evaluation exceeds the 8 MiB limit");
     const name = basename(path).toLowerCase();
-    if (name.endsWith(".vgl") || name.endsWith(".snapshot") || name.endsWith(".snapshot.json")) throw new Error("record and snapshot inputs are not supported by policy check");
-    const evaluation = parsePolicyEvaluationJson(bytes);
+    const evaluation = await parseEvaluationInput(path, bytes, name, options);
     const explanation = explainPolicyEvaluation(evaluation);
     if (json) console.log(JSON.stringify(explanation));
     else if (!quiet) {
@@ -42,4 +51,29 @@ export async function executePolicyCheck(path: string, json = false, quiet = fal
     if (json) console.log(JSON.stringify({ status: "error", code: "POLICY_CHECK_INPUT", message })); else if (!quiet) console.error(`[POLICY_CHECK_INPUT] ${message}`);
     return 2;
   }
+}
+
+async function parseEvaluationInput(path: string, bytes: Uint8Array, name: string, options: PolicyCheckOptions) {
+  if (options.recordStore) {
+    const manifest = parseReleaseRecordManifestJson(bytes);
+    const members = await readAndVerifyRecord(options.recordStore, manifest);
+    const evaluation = manifest.members.find((member) => member.kind === "policy-evaluation");
+    if (!evaluation) throw new Error("record does not contain a policy-evaluation member");
+    const payload = members.get(evaluation.path);
+    if (!payload) throw new Error("record policy-evaluation member is unavailable");
+    return parsePolicyEvaluationJson(payload);
+  }
+  if (name.endsWith(".vgl") || name.endsWith(".snapshot") || name.endsWith(".snapshot.json")) {
+    let parsed: unknown;
+    try { parsed = JSON.parse(Buffer.from(bytes).toString("utf8")); } catch { throw new Error("record and snapshot inputs require --record-store or an embedded policy evaluation"); }
+    if (parsed && typeof parsed === "object" && "policyEvaluation" in parsed) {
+      return parsePolicyEvaluationJson(JSON.stringify((parsed as { policyEvaluation: unknown }).policyEvaluation));
+    }
+    throw new Error("record and snapshot inputs require --record-store or an embedded policy evaluation");
+  }
+  const parsed: unknown = JSON.parse(Buffer.from(bytes).toString("utf8"));
+  if (parsed && typeof parsed === "object" && "policyEvaluation" in parsed) {
+    return parsePolicyEvaluationJson(JSON.stringify((parsed as { policyEvaluation: unknown }).policyEvaluation));
+  }
+  return parsePolicyEvaluationJson(bytes);
 }
