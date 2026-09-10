@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`ENGINE-007`: safe archive extraction, cache paths, and trusted source/signature verification are implemented and tested. Next is mirror/offline source mode; MCP scanner runtime safety remains open.
+`ENGINE-008`: archive safety, cache paths, trusted source/signature verification, and mirror/offline source selection are implemented and tested. Next is engines command orchestration; MCP scanner runtime safety remains open.
 
 ## Scope hold
 
