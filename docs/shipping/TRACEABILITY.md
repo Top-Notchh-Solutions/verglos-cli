@@ -6,6 +6,7 @@
  AGENT-005 strict direct tool shapes | `packages/mcp/src/tools/check-before-write.ts`, `check-package.ts` | 6 focused tests include unknown-field rejection for both tools | implemented locally; runtime/detector safety remains downstream
  AGENT-005 MCP dispatch failure projection | `packages/mcp/src/server.ts` | build verification: executable tool failures return stable namespaced error payloads rather than escaping handler dispatch | implemented locally; full transport/error taxonomy remains downstream
  AGENT-005 bounded network lookup lifecycle | `packages/mcp/src/tools/check-package.ts` | 5 package tests pass after replacing uncancelled timeout races with AbortController cancellation | implemented locally; network policy/proxy controls remain downstream
+ ENGINE-002 cache path safety | `packages/shared/src/engine-cache.ts` | 4 engine-cache tests include traversal rejection for install/read paths | implemented locally; engine provenance/update/rollback remain downstream
  AGENT-005 deterministic scan projection | `packages/mcp/src/tools/scan.ts` | 2 focused tests: severity/rule/file/line ordering and direct input-boundary rejection, including unknown fields | implemented locally; scanner execution/network safety remains downstream
 | Capability | Contract | Backlog IDs | Tests required | Public state |
 |---|---|---|---|---|
