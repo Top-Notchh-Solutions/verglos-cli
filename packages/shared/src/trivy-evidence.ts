@@ -21,6 +21,7 @@ export async function replayTrivyEvidence(root: string, ref: TrivyEvidenceRef): 
     const entry = await lstat(path);
     if (!entry.isFile() || entry.size > MAX_TRIVY_EVIDENCE_BYTES) throw new Error("invalid");
     bytes = await readFile(path);
+    if (bytes.byteLength > MAX_TRIVY_EVIDENCE_BYTES) throw new Error("oversized");
   } catch { throw new TrivyEvidenceError("MISSING", "Retained Trivy evidence is unavailable."); }
   const actual = `sha256:${createHash("sha256").update(bytes).digest("hex")}`;
   if (actual !== ref.digest || bytes.byteLength !== ref.size) throw new TrivyEvidenceError("DIGEST_MISMATCH", "Retained Trivy evidence failed integrity verification.");

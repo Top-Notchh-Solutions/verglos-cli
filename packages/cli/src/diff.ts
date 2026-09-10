@@ -19,7 +19,9 @@ async function readSnapshot(path: string): Promise<string> {
   const entry = await lstat(path);
   if (!entry.isFile()) throw new Error("snapshot input must be a regular file");
   if (entry.size > 32 * 1024 * 1024) throw new Error("snapshot exceeds the 32 MiB limit");
-  return readFile(path, "utf8");
+  const raw = await readFile(path, "utf8");
+  if (Buffer.byteLength(raw, "utf8") > 32 * 1024 * 1024) throw new Error("snapshot exceeds the 32 MiB limit");
+  return raw;
 }
 
 export async function executeDiff(basePath: string, headPath: string, json = false): Promise<number> {

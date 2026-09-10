@@ -8,7 +8,9 @@ export async function executeRecordVerify(root: string, manifestPath: string, js
     const entry = await lstat(manifestPath);
     if (!entry.isFile()) throw new Error("record manifest must be a regular file");
     if (entry.size > MAX_MANIFEST_BYTES) throw new Error("record manifest exceeds the 8 MiB limit");
-    const manifest = parseReleaseRecordManifestJson(await readFile(manifestPath));
+    const bytes = await readFile(manifestPath);
+    if (bytes.byteLength > MAX_MANIFEST_BYTES) throw new Error("record manifest exceeds the 8 MiB limit");
+    const manifest = parseReleaseRecordManifestJson(bytes);
     const members = await readAndVerifyRecord(root, manifest);
     const result = { verified: true, manifestDigest: releaseRecordManifestDigest(manifest), members: members.size, paths: [...members.keys()].sort() };
     if (json) console.log(JSON.stringify(result));
