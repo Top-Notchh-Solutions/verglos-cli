@@ -6,6 +6,7 @@ import {
   loadCredentials,
   saveCredentials,
 } from "./credentials.js";
+import { readJsonResponse } from "./http-response.js";
 
 /**
  * `verglos login` — device-code flow.
@@ -70,7 +71,9 @@ async function startDeviceFlow(apiUrl: string): Promise<StartResponse> {
       `Could not start device-code flow (HTTP ${res.status}). Try again in a moment.`,
     );
   }
-  return (await res.json()) as StartResponse;
+  const body = await readJsonResponse(res);
+  if (!body || typeof body !== "object") throw new Error("Device-code response was invalid.");
+  return body as StartResponse;
 }
 
 async function pollOnce(
@@ -84,7 +87,8 @@ async function pollOnce(
       REQUEST_TIMEOUT_MS,
     );
     if (!res.ok) return null;
-    return (await res.json()) as StatusResponse;
+    const body = await readJsonResponse(res);
+    return body && typeof body === "object" ? body as StatusResponse : null;
   } catch {
     return null;
   }

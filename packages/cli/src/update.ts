@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
 import chalk from "chalk";
+import { readJsonResponse } from "./http-response.js";
 
 const REGISTRY_LATEST_URL = "https://registry.npmjs.org/verglos/latest";
 
@@ -23,8 +24,8 @@ export async function fetchLatestVersion(): Promise<string | null> {
       return null;
     }
 
-    const metadata = (await response.json()) as LatestPackageMetadata;
-    return metadata.version ?? null;
+    const metadata = (await readJsonResponse(response)) as LatestPackageMetadata | null;
+    return metadata?.version ?? null;
   } catch {
     return null;
   } finally {

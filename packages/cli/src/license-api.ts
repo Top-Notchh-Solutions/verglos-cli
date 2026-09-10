@@ -1,4 +1,5 @@
 import { DEFAULT_API_URL } from "./credentials.js";
+import { readJsonResponse } from "./http-response.js";
 
 /**
  * Thin fetch wrappers for the v1 license endpoints. Kept separate
@@ -80,7 +81,7 @@ export async function validateLicense(
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ license_key: licenseKey }),
     });
-    const body = (await res.json().catch(() => ({}))) as {
+    const body = ((await readJsonResponse(res)) ?? {}) as {
       valid?: boolean;
       reason?: ValidateResult extends { valid: false }
         ? ValidateResult["reason"]
@@ -136,7 +137,7 @@ export async function fetchLicenseStatus(
       headers: { authorization: `Bearer ${licenseKey}` },
     });
     if (!res.ok) {
-      const body = (await res.json().catch(() => ({}))) as {
+      const body = ((await readJsonResponse(res)) ?? {}) as {
         reason?: StatusError["reason"];
       };
       return {
@@ -145,7 +146,7 @@ export async function fetchLicenseStatus(
         httpStatus: res.status,
       };
     }
-    const body = (await res.json()) as {
+    const body = (await readJsonResponse(res)) as {
       ok: boolean;
       email?: string | null;
       plan?: string;
@@ -159,6 +160,7 @@ export async function fetchLicenseStatus(
         last_seen_at: string;
       }[];
     };
+    if (!body || typeof body !== "object") return { ok: false, reason: "unknown", httpStatus: res.status };
     return {
       ok: true,
       email: body.email ?? null,
