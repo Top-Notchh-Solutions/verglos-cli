@@ -75,7 +75,11 @@ export async function resolveRepositoryTarget(target: TargetSpec, context: Targe
     submoduleState,
     shallow,
   });
-  return { target, subject, coverage: shallow || submoduleState === "incomplete" ? "incomplete" : "complete", limitations: shallow ? ["repository is shallow"] : [] };
+  const limitations = [
+    ...(shallow ? ["repository is shallow"] : []),
+    ...(submoduleState === "incomplete" ? ["repository has unresolved submodules"] : []),
+  ];
+  return { target, subject, coverage: limitations.length > 0 ? "incomplete" : "complete", limitations };
 }
 
 export const repositoryResolver: TargetResolver = {
