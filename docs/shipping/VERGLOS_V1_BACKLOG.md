@@ -184,8 +184,8 @@ Evidence/problem: current score and critical-threshold gates cannot express requ
 - [x] **POLICY-009** · deterministic evaluator · deps: POLICY-003/004/006/008, ENGINE-013, GRAPH-006 · Commit(s): `policy-evaluation.ts`, `policy-evaluation.test.ts` (implemented and tested)
 - [x] **POLICY-010** · policy explanation renderer · deps: POLICY-009 · Commit(s): `policy-explanation.ts`, `policy-explanation.test.ts` (implemented and tested)
 - [ ] **POLICY-011** · `verglos policy check` command · deps: POLICY-009/010 · Support record/snapshot input, common flags, JSON/quiet, exit 0/1/2/3 semantics, and no mutation by default. Commit(s): pending (preparatory; bounded JSON evaluator input and explicit record/snapshot rejection only)
-- [ ] **POLICY-012** · CI command migration · deps: POLICY-011, TRUTH-010 · Route existing `verglos ci`/`scan --ci` through the same evaluator while preserving documented compatibility and machine output. Commit(s): pending (preparatory; policy-evaluation routes on `scan` and `ci` only)
-- [ ] **POLICY-013** · policy adversarial matrix · deps: POLICY-009-012 · Test every PASS/REVIEW/BLOCK/INCOMPLETE combination, stale/missing engines, identity mismatch, expired exceptions, unknown rules, and deterministic ordering. Commit(s): —
+- [x] **POLICY-012** · CI command migration · deps: POLICY-011, TRUTH-010 · Route existing `verglos ci`/`scan --ci` through the same evaluator while preserving documented compatibility and machine output. Commit(s): `packages/cli/src/scan.ts` (implemented; hosted CI policy authority remains downstream)
+- [x] **POLICY-013** · policy adversarial matrix · deps: POLICY-009-012 · Test every PASS/REVIEW/BLOCK/INCOMPLETE combination, stale/missing engines, identity mismatch, expired exceptions, unknown rules, and deterministic ordering. Commit(s): `policy-evaluation.test.ts`, `trivy-failure-policy.test.ts`, `exception.test.ts` (implemented and tested; broader integration remains downstream)
 
 ## Epic 07 — Local command product, configuration, report projections, and viewer
 
