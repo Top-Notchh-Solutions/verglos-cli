@@ -24,6 +24,7 @@ test("archive download enforces declared and streamed size limits", async () => 
   assert.deepEqual([...bytes], [1, 2, 3]);
   await assert.rejects(() => downloadArchive("https://mirror.invalid/tool.tar", { maxBytes: 2, fetchImpl: async () => response(new Uint8Array([1, 2, 3])) }), /size limit/);
   await assert.rejects(() => downloadArchive("https://mirror.invalid/tool.tar", { maxBytes: 0, fetchImpl: async () => response(new Uint8Array()) }), /positive safe integer/);
+  await assert.rejects(() => downloadArchive("http://mirror.invalid/tool.tar"), /HTTPS URL/);
 });
 
 test("archive digest verification is pinned and fail-closed", () => {

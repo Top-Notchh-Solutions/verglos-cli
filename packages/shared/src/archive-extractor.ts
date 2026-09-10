@@ -34,6 +34,15 @@ export async function extractArchiveMembers(root: string, members: readonly Arch
 }
 
 export async function downloadArchive(url: string, options: { fetchImpl?: typeof fetch; maxBytes?: number; signal?: AbortSignal } = {}): Promise<Uint8Array> {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" || parsed.username || parsed.password || parsed.hash) {
+      throw new Error("Archive URL must be an HTTPS URL without credentials or fragments.");
+    }
+  } catch (error) {
+    if (error instanceof Error && error.message.startsWith("Archive URL")) throw error;
+    throw new Error("Archive URL must be a valid HTTPS URL.");
+  }
   const maxBytes = options.maxBytes ?? 256 * 1024 * 1024;
   if (!Number.isSafeInteger(maxBytes) || maxBytes <= 0) throw new Error("Archive download size limit must be a positive safe integer.");
   const response = await (options.fetchImpl ?? fetch)(url, { signal: options.signal });
