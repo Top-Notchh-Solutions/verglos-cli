@@ -19,6 +19,7 @@ const CRITICAL_CONFIDENCE: readonly ConfidenceLevel[] = ["certain", "high"];
 export interface PrecommitOptions {
   cwd?: string;
   configPath?: string;
+  json?: boolean;
   timeoutMs?: number;
 }
 
@@ -69,6 +70,10 @@ export async function executePrecommit(
   ]);
 
   if (raced.timedOut) {
+    if (options.json) {
+      console.log(JSON.stringify({ status: "INCOMPLETE", timedOut: true, timeoutMs }));
+      return 0;
+    }
     console.error(
       chalk.yellow(
         `verglos: pre-commit budget of ${timeoutMs}ms exceeded — skipping check.`,
@@ -84,11 +89,20 @@ export async function executePrecommit(
   const elapsed = Date.now() - start;
 
   if (blocking.length === 0) {
+    if (options.json) {
+      console.log(JSON.stringify({ status: "PASS", blocking: 0, elapsedMs: elapsed }));
+      return 0;
+    }
     console.log(
       chalk.green(`verglos: pre-commit passed`) +
         chalk.gray(` · ${elapsed}ms`),
     );
     return 0;
+  }
+
+  if (options.json) {
+    console.log(JSON.stringify({ status: "BLOCK", blocking: blocking.length, elapsedMs: elapsed }));
+    return 1;
   }
 
   console.error("");

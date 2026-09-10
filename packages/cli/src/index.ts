@@ -349,7 +349,7 @@ program
       hunt: opts.hunt,
       noTelemetry: opts.telemetry === false,
     });
-    if (!hasThreshold && !opts.quiet) {
+    if (!hasThreshold && !opts.quiet && !opts.json) {
       console.log("");
       console.log(
         chalk.gray(
@@ -694,10 +694,12 @@ program
   .description("Fast secrets + criticals scan for the pre-commit hook (<2s budget)")
   .option("--timeout <ms>", "Timeout budget in ms", "2000")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
-  .action(async (opts: { timeout: string; config?: string }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .action(async (opts: { timeout: string; config?: string; json?: boolean }) => {
     const code = await executePrecommit({
       timeoutMs: parseInt(opts.timeout, 10),
       configPath: opts.config,
+      json: opts.json,
     });
     process.exit(code);
   });
