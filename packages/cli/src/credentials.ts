@@ -27,6 +27,15 @@ export interface Credentials {
 const CREDENTIALS_DIR = join(homedir(), ".verglos");
 const CREDENTIALS_FILE = join(CREDENTIALS_DIR, "credentials.json");
 const SCORE_CACHE_FILE = join(CREDENTIALS_DIR, "last-score.json");
+const MAX_UNLOCK_RESPONSE_BYTES = 256 * 1024;
+
+async function readBoundedJson(response: Response): Promise<unknown> {
+  const length = Number(response.headers.get("content-length") ?? "0");
+  if (Number.isFinite(length) && length > MAX_UNLOCK_RESPONSE_BYTES) return null;
+  const bytes = await response.arrayBuffer();
+  if (bytes.byteLength > MAX_UNLOCK_RESPONSE_BYTES) return null;
+  try { return JSON.parse(new TextDecoder().decode(bytes)); } catch { return null; }
+}
 
 async function readLocalJson(path: string, maxBytes: number): Promise<string> {
   const entry = await lstat(path);
@@ -98,10 +107,12 @@ export async function refreshUnlockToken(
 
     if (!res.ok) return false;
 
-    const data = (await res.json()) as {
+    const data = (await readBoundedJson(res)) as {
       token: string;
       expiresAt: string;
     };
+
+    if (!data || typeof data.token !== "string" || typeof data.expiresAt !== "string") return false;
 
     await saveCredentials({
       ...creds,
