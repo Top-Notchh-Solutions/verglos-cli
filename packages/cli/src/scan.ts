@@ -181,7 +181,7 @@ export async function executeScan(
   return result.score.value;
 }
 
-export async function executeScore(cwd?: string, strict = false): Promise<void> {
+export async function executeScore(cwd?: string, strict = false, quiet = false): Promise<void> {
   const projectRoot = resolve(cwd ?? process.cwd());
 
   const result = await runScan({
@@ -190,7 +190,7 @@ export async function executeScore(cwd?: string, strict = false): Promise<void> 
     strict,
   });
 
-  printScoreOnly(result);
+  if (!quiet) printScoreOnly(result);
 }
 
 export async function executeCi(options: {

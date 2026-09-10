@@ -262,11 +262,12 @@ program
   );
 
 program
-  .command("score")
+.command("score")
   .description("Print security score only")
   .option("--strict", "Include test file findings in score")
-  .action(async (opts: { strict?: boolean }) => {
-    await executeScore(undefined, opts.strict);
+  .option("-q, --quiet", "Suppress terminal output")
+  .action(async (opts: { strict?: boolean; quiet?: boolean }) => {
+    await executeScore(undefined, opts.strict, opts.quiet);
   });
 
 program
