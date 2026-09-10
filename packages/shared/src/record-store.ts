@@ -5,14 +5,20 @@ import type { ReleaseRecordManifestDocument } from "./record-manifest.js";
 
 function digest(bytes: Uint8Array): string { return `sha256:${createHash("sha256").update(bytes).digest("hex")}`; }
 function assertSafePath(path: string): void { if (!path || path.startsWith("/") || path.includes("\\") || path.split("/").some((segment) => !segment || segment === "." || segment === "..")) throw new Error("record member path must be relative and traversal-free"); }
+async function assertStoreRoot(root: string, create = false): Promise<void> {
+  if (create) await mkdir(root, { recursive: true, mode: 0o700 });
+  const entry = await lstat(root);
+  if (!entry.isDirectory()) throw new Error("record store root must be a regular directory");
+}
 export async function putRecordMember(root: string, path: string, bytes: Uint8Array): Promise<{ readonly digest: string; readonly path: string; readonly size: number }> {
   assertSafePath(path); if (bytes.byteLength > 50_000_000) throw new Error("record member exceeds 50 MB");
-  const value = digest(bytes); const destination = join(root, value.replace(":", "-")); await mkdir(root, { recursive: true, mode: 0o700 });
+  const value = digest(bytes); const destination = join(root, value.replace(":", "-")); await assertStoreRoot(root, true);
   const temporary = `${destination}.${process.pid}.${Date.now()}.tmp`; await writeFile(temporary, bytes, { mode: 0o600 }); await rename(temporary, destination);
   return { digest: value, path, size: bytes.byteLength };
 }
 export async function readRecordMember(root: string, memberDigest: string): Promise<Uint8Array> {
   if (!/^sha256:[a-f0-9]{64}$/.test(memberDigest)) throw new Error("record member digest is invalid");
+  await assertStoreRoot(root);
   const path = join(root, memberDigest.replace(":", "-"));
   const entry = await lstat(path);
   if (!entry.isFile() || entry.size > 50_000_000) throw new Error("record member is not a bounded regular file");

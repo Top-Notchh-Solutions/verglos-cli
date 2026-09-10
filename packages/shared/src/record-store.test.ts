@@ -16,3 +16,14 @@ test("record store rejects symlinked members before reading", async () => {
     await assert.rejects(() => readRecordMember(root, digest), /bounded regular file/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("record store rejects a symlinked store root", async () => {
+  const parent = await mkdtemp(join(tmpdir(), "verglos-record-root-"));
+  const target = await mkdtemp(join(tmpdir(), "verglos-record-target-"));
+  try {
+    const link = join(parent, "store");
+    await symlink(target, link);
+    await assert.rejects(() => putRecordMember(link, "report.json", new Uint8Array()), /regular directory/);
+    await assert.rejects(() => readRecordMember(link, "sha256:" + "a".repeat(64)), /regular directory/);
+  } finally { await rm(parent, { recursive: true, force: true }); await rm(target, { recursive: true, force: true }); }
+});
