@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdtemp, writeFile } from "node:fs/promises";
+import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -28,5 +28,18 @@ test("engine install requires approval and emits bounded JSON after approval", a
   } finally {
     console.log = previousLog;
     if (previousCache === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previousCache;
+  }
+});
+
+test("engine install rejects symlink artifacts before reading", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-install-link-"));
+  const target = join(root, "engine.bin");
+  const link = join(root, "engine-link.bin");
+  await writeFile(target, "bytes");
+  await symlink(target, link);
+  try {
+    assert.equal(await executeEngineInstall("trivy", "1.0.0", link, `sha256:${"a".repeat(64)}`, { approve: true }), 78);
+  } finally {
+    await rm(root, { recursive: true, force: true });
   }
 });
