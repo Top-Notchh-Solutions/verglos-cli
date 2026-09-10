@@ -81,6 +81,8 @@ Command groups:
 
 program.parse();
 
+
+
 program
   .command("update")
   .description("Update Verglos CLI to the latest npm version")
