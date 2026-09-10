@@ -5,7 +5,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import type { Finding } from "@verglos/shared";
+import { mcpToolAuthority, reconcileMcpCapabilities, type Finding } from "@verglos/shared";
 import { checkBeforeWrite } from "./tools/check-before-write.js";
 import type {
   CheckBeforeWriteInput as ToolInput,
@@ -14,6 +14,7 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
+import { parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseScanArgs } from "./input-validation.js";
 
 const require = createRequire(import.meta.url);
 const { version: MCP_VERSION } = require("../package.json") as {
@@ -237,41 +238,23 @@ async function dispatchTool(
   args: Record<string, unknown> | undefined,
 ): Promise<{ content: { type: "text"; text: string }[] }> {
   const input = args ?? {};
+  const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
   switch (name) {
     case "verglos_check_before_write": {
-      const parsed: CheckBeforeWriteInput = {
-        code: String(input.code ?? ""),
-        targetPath: String(input.targetPath ?? "input.ts"),
-        language:
-          typeof input.language === "string" ? input.language : undefined,
-        context:
-          typeof input.context === "string" ? input.context : undefined,
-      };
-      const result = await checkBeforeWrite(parsed);
-      return jsonResponse(result);
+      let parsed: CheckBeforeWriteInput; try { parsed = parseCheckBeforeWriteArgs(input); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { return jsonResponse(await checkBeforeWrite(parsed)); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_FAILED", error instanceof Error ? error.message : "tool failed"); }
     }
     case "verglos_check_package": {
-      const result = await checkPackage({
-        packageName: String(input.packageName ?? ""),
-        version:
-          typeof input.version === "string" ? input.version : undefined,
-      });
-      return jsonResponse(result);
+      let parsed; try { parsed = parseCheckPackageArgs(input); } catch (error) { return invalid("MCP_CHECK_PACKAGE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { return jsonResponse(await checkPackage(parsed)); } catch (error) { return invalid("MCP_CHECK_PACKAGE_FAILED", error instanceof Error ? error.message : "tool failed"); }
     }
     case "verglos_scan": {
-      const result = await scanProject({
-        projectRoot:
-          typeof input.projectRoot === "string" ? input.projectRoot : undefined,
-        limit: typeof input.limit === "number" ? input.limit : undefined,
-        noProvenance:
-          typeof input.noProvenance === "boolean"
-            ? input.noProvenance
-            : undefined,
-      });
-      return jsonResponse(result);
+      let parsed; try { parsed = parseScanArgs(input); } catch (error) { return invalid("MCP_SCAN_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { return jsonResponse(await scanProject(parsed)); } catch (error) { return invalid("MCP_SCAN_FAILED", error instanceof Error ? error.message : "tool failed"); }
     }
     case "verglos_explain_finding": {
-      const result = explainFinding({ rule: String(input.rule ?? "") });
+      let parsed; try { parsed = parseExplainFindingArgs(input); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      const result = explainFinding(parsed);
       return jsonResponse(result);
     }
     case "verglos_hunt_finding":
@@ -302,10 +285,19 @@ export function createVerglosMcpServer(): Server {
   );
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({
-    tools: TOOLS.map((t) => ({
+    // Fail closed if the hand-authored MCP tool list drifts from shared capability truth.
+    tools: reconcileMcpCapabilities(TOOLS.map((tool) => tool.name)) && TOOLS.map((t) => ({
       name: t.name,
       description: t.description,
       inputSchema: t.inputSchema,
+      annotations: (() => {
+        const authority = mcpToolAuthority(t.name);
+        return authority ? {
+          readOnlyHint: !authority.approvalRequired,
+          destructiveHint: authority.sideEffect === "filesystem" || authority.sideEffect === "identity",
+          openWorldHint: authority.sideEffect === "network" || authority.sideEffect === "hosted",
+        } : undefined;
+      })(),
     })),
   }));
 

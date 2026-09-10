@@ -1,0 +1,32 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { mkdtemp, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { test } from "node:test";
+import { executeEngineInstall } from "./engines-install.js";
+
+test("engine install rejects malformed arguments before reading artifacts", async () => {
+  assert.equal(await executeEngineInstall("", "1.0.0", "/does/not/exist", "bad"), 78);
+});
+
+test("engine install rejects an incorrect digest", async () => { const root = await mkdtemp(join(tmpdir(), "verglos-install-")); const artifact = join(root, "engine"); await writeFile(artifact, "bytes"); const previous = process.env.VERGLOS_ENGINE_CACHE; process.env.VERGLOS_ENGINE_CACHE = join(root, "cache"); try { assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, `sha256:${"a".repeat(64)}`), 78); } finally { if (previous === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previous; } void createHash; });
+
+test("engine install requires approval and emits bounded JSON after approval", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-install-approved-"));
+  const artifact = join(root, "engine");
+  await writeFile(artifact, "bytes");
+  const digest = `sha256:${createHash("sha256").update("bytes").digest("hex")}`;
+  const previousCache = process.env.VERGLOS_ENGINE_CACHE;
+  const previousLog = console.log;
+  const lines: string[] = [];
+  process.env.VERGLOS_ENGINE_CACHE = join(root, "cache");
+  console.log = (line?: unknown) => lines.push(String(line));
+  try {
+    assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, digest, { approve: true, json: true }), 0);
+    assert.deepEqual(JSON.parse(lines[0]!), { engineId: "trivy", version: "1.0.0", path: join(root, "cache", "trivy", "1.0.0", "engine.bin"), digest });
+  } finally {
+    console.log = previousLog;
+    if (previousCache === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previousCache;
+  }
+});
