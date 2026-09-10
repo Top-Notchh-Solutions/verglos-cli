@@ -120,10 +120,12 @@ program
   .command("status")
   .description("List cached engine versions without changing state")
   .option("--json", "Emit machine-readable JSON")
-  .action(async (opts: { json?: boolean }) => {
+  .option("--quiet", "Suppress output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
     const cacheRoot = process.env.VERGLOS_ENGINE_CACHE ?? join(homedir(), ".cache", "verglos", "engines");
     const engines = await listCachedEngines(cacheRoot);
-    console.log(formatEngineStatus(cacheRoot, engines, opts.json));
+    const output = formatEngineStatus(cacheRoot, engines, opts.json, opts.quiet);
+    if (output) console.log(output);
   });
 
 program
