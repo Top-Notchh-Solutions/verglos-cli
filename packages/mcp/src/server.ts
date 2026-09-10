@@ -21,6 +21,8 @@ const { version: MCP_VERSION } = require("../package.json") as {
   version: string;
 };
 
+const MAX_TOOL_ARGUMENT_BYTES = 256 * 1024;
+
 /**
  * MCP server for Verglos.
  *
@@ -235,10 +237,16 @@ function alphaStub(name: string, tier: "pro" | "studio"): {
   };
 }
 
-async function dispatchTool(
+export async function dispatchTool(
   name: string,
   args: Record<string, unknown> | undefined,
 ): Promise<{ content: { type: "text"; text: string }[] }> {
+  if (args !== undefined && (!args || typeof args !== "object" || Array.isArray(args))) {
+    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be an object" }) }] };
+  }
+  if (args !== undefined && Buffer.byteLength(JSON.stringify(args), "utf8") > MAX_TOOL_ARGUMENT_BYTES) {
+    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments exceed the 256 KiB limit" }) }] };
+  }
   const input = args ?? {};
   const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
   switch (name) {
