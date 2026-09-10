@@ -23,3 +23,16 @@ test("record sign writes a bounded envelope", async () => {
     assert.match(await readFile(join(root, "sig.json"), "utf8"), /record-signature|manifestDigest/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("record sign rejects invalid keys and refuses to overwrite an envelope", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-sign-negative-"));
+  try {
+    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos.record-builder", version: "1.0.0" }, members: [{ path: "decision.json", kind: "release-decision", mediaType: "application/json", digest: { algorithm: "sha256", value: "a".repeat(64) }, size: 2, required: true, redaction: "none", schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } }], redaction: { status: "not-required" }, limitations: ["fixture"] });
+    const manifestPath = join(root, "manifest.json"); const keyPath = join(root, "key.pem"); const signaturePath = join(root, "sig.json");
+    await writeFile(manifestPath, JSON.stringify(manifest)); await writeFile(keyPath, "not-a-private-key");
+    assert.equal(await executeRecordSign(manifestPath, signaturePath, keyPath, "signer", "issuer", true, true, true), 78);
+    const { privateKey } = generateKeyPairSync("ed25519"); await writeFile(keyPath, privateKey.export({ format: "pem", type: "pkcs8" }));
+    assert.equal(await executeRecordSign(manifestPath, signaturePath, keyPath, "signer", "issuer", true, true, true), 0);
+    assert.equal(await executeRecordSign(manifestPath, signaturePath, keyPath, "signer", "issuer", true, true, true), 78);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
