@@ -242,6 +242,8 @@ export interface ScanResult {
 
 export interface ScanOptions {
   projectRoot: string;
+  /** Explicit bounded JSON config path; legacy project config remains the fallback. */
+  configPath?: string;
   detectors?: DetectorId[];
   unlocked?: boolean;
   includeGitHistory?: boolean;

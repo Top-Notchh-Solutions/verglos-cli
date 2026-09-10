@@ -197,6 +197,7 @@ program
   .option("-q, --quiet", "Suppress terminal output")
   .option("--all", "Include low-confidence findings (default hides <0.7)")
   .option("--strict", "Include test file findings in score")
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
   .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option(
     "--no-provenance",
@@ -217,6 +218,7 @@ program
       quiet?: boolean;
       all?: boolean;
       strict?: boolean;
+      config?: string;
       policyEvaluation?: string;
       provenance?: boolean;
       verifySecrets?: boolean;
@@ -230,6 +232,7 @@ program
         quiet: opts.quiet,
         all: opts.all,
         strict: opts.strict,
+        configPath: opts.config,
         noProvenance,
         verifySecrets: opts.verifySecrets,
         hunt: opts.hunt,
@@ -267,28 +270,32 @@ program
   .description("Print security score only")
   .option("--strict", "Include test file findings in score")
   .option("-q, --quiet", "Suppress terminal output")
-  .action(async (opts: { strict?: boolean; quiet?: boolean }) => {
-    await executeScore(undefined, opts.strict, opts.quiet);
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .action(async (opts: { strict?: boolean; quiet?: boolean; config?: string }) => {
+    await executeScore(undefined, opts.strict, opts.quiet, opts.config);
   });
 
 program
   .command("secrets")
   .description("Scan for secrets only")
   .option("-q, --quiet", "Suppress terminal output")
-  .action(async (opts: { quiet?: boolean }) => {
-    await executeScan({ detectors: ["secrets"], focused: true, quiet: opts.quiet });
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .action(async (opts: { quiet?: boolean; config?: string }) => {
+    await executeScan({ detectors: ["secrets"], focused: true, quiet: opts.quiet, configPath: opts.config });
   });
 
 program
   .command("deps")
   .description("Dependency vulnerability audit only")
   .option("-q, --quiet", "Suppress terminal output")
-  .action(async (opts: { quiet?: boolean }) => {
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .action(async (opts: { quiet?: boolean; config?: string }) => {
     await executeScan({
       detectors: ["dependencies"],
       focused: true,
       includeGitHistory: false,
       quiet: opts.quiet,
+      configPath: opts.config,
     });
   });
 
@@ -298,13 +305,14 @@ program
   .option("-t, --threshold <score>", "Minimum score threshold", "60")
   .option("-q, --quiet", "Suppress output")
   .option("--strict", "Include test file findings in score")
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
   .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
   )
-  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policyEvaluation?: string }) => {
+  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policyEvaluation?: string; config?: string }) => {
     if (opts.policyEvaluation) {
       process.exit(await executePolicyCheck(opts.policyEvaluation, false, opts.quiet));
     }
@@ -323,6 +331,7 @@ program
       threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
       quiet: opts.quiet,
       strict: opts.strict,
+      configPath: opts.config,
       hunt: opts.hunt,
       noTelemetry: opts.telemetry === false,
     });

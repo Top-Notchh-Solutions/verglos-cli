@@ -9,6 +9,7 @@ import {
   type ScanResult,
   type VerglosConfig,
 } from "@verglos/shared";
+import { lstat, readFile } from "node:fs/promises";
 import { agentSurfaceDetector } from "./detectors/agent-surface.js";
 import { aiPatternsDetector } from "./detectors/ai-patterns.js";
 import { apiHardeningDetector } from "./detectors/api-hardening.js";
@@ -47,6 +48,8 @@ const ALL_DETECTORS: Detector[] = [
   deepAuthDetector,
 ];
 
+const MAX_CONFIG_BYTES = 1 * 1024 * 1024;
+
 async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
   try {
     const { readFile } = await import("node:fs/promises");
@@ -60,9 +63,17 @@ async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
   }
 }
 
-export async function loadConfig(projectRoot: string): Promise<VerglosConfig> {
+export async function loadConfig(projectRoot: string, explicitConfigPath?: string): Promise<VerglosConfig> {
   let base: VerglosConfig;
-  try {
+  if (explicitConfigPath) {
+    const entry = await lstat(explicitConfigPath);
+    if (!entry.isFile() || entry.size > MAX_CONFIG_BYTES) throw new Error("Verglos config must be a bounded regular file.");
+    const bytes = await readFile(explicitConfigPath);
+    if (bytes.byteLength > MAX_CONFIG_BYTES) throw new Error("Verglos config must be a bounded regular file.");
+    let parsed: unknown;
+    try { parsed = JSON.parse(bytes.toString("utf8")); } catch { throw new Error("Verglos config must be valid JSON."); }
+    base = mergeConfig(parsed as Partial<VerglosConfig>);
+  } else try {
     const { createRequire } = await import("node:module");
     const require = createRequire(import.meta.url);
     const configPath = `${projectRoot}/.verglos.config.js`;
@@ -79,7 +90,7 @@ export async function loadConfig(projectRoot: string): Promise<VerglosConfig> {
 
 export async function runScan(options: ScanOptions): Promise<ScanResult> {
   const start = Date.now();
-  const config = await loadConfig(options.projectRoot);
+  const config = await loadConfig(options.projectRoot, options.configPath);
   const { type: projectType } = await detectProjectType(options.projectRoot);
   const files = await walkProject(options.projectRoot, config);
 

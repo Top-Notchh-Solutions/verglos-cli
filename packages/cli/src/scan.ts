@@ -53,6 +53,7 @@ const { version: CLI_VERSION } = require("../package.json") as {
 
 export interface ScanCommandOptions {
   cwd?: string;
+  configPath?: string;
   detectors?: DetectorId[];
   quiet?: boolean;
   watch?: boolean;
@@ -122,6 +123,7 @@ export async function executeScan(
   try {
     result = await runScan({
       projectRoot,
+      configPath: options.configPath,
       detectors,
       unlocked: true,
       includeGitHistory: options.includeGitHistory ?? true,
@@ -181,11 +183,12 @@ export async function executeScan(
   return result.score.value;
 }
 
-export async function executeScore(cwd?: string, strict = false, quiet = false): Promise<void> {
+export async function executeScore(cwd?: string, strict = false, quiet = false, configPath?: string): Promise<void> {
   const projectRoot = resolve(cwd ?? process.cwd());
 
   const result = await runScan({
     projectRoot,
+    configPath,
     unlocked: true,
     strict,
   });
@@ -200,12 +203,14 @@ export async function executeCi(options: {
   strict?: boolean;
   noTelemetry?: boolean;
   hunt?: boolean;
+  configPath?: string;
 }): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
   const startedAt = Date.now();
 
   const result = await runScan({
     projectRoot,
+    configPath: options.configPath,
     unlocked: true,
     strict: options.strict,
   });
