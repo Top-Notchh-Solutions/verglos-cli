@@ -1,9 +1,13 @@
-import { readFile } from "node:fs/promises";
+import { readFile, lstat } from "node:fs/promises";
 import { basename } from "node:path";
 import { explainPolicyEvaluation, parsePolicyEvaluationJson, policyDecisionExitCode } from "@verglos/shared";
 
 export async function executePolicyCheck(path: string, json = false, quiet = false): Promise<number> {
   try {
+    if (path !== "-") {
+      const entry = await lstat(path);
+      if (!entry.isFile()) throw new Error("policy evaluation path must be a regular file");
+    }
     const bytes = await readFile(path === "-" ? 0 as any : path); if (bytes.byteLength > 8 * 1024 * 1024) throw new Error("policy evaluation exceeds the 8 MiB limit");
     const name = basename(path).toLowerCase();
     if (name.endsWith(".vgl") || name.endsWith(".snapshot") || name.endsWith(".snapshot.json")) throw new Error("record and snapshot inputs are not supported by policy check");
