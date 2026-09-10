@@ -207,6 +207,7 @@ program
   .option("--all", "Include low-confidence findings (default hides <0.7)")
   .option("--strict", "Include test file findings in score")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .option("--output <dir>", "Write HTML/JSON reports to a bounded output directory")
   .option("--policy <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option(
@@ -230,6 +231,7 @@ program
       all?: boolean;
       strict?: boolean;
       config?: string;
+      output?: string;
       policy?: string;
       policyEvaluation?: string;
       provenance?: boolean;
@@ -246,6 +248,7 @@ program
         all: opts.all,
         strict: opts.strict,
         configPath: opts.config,
+        outputDir: opts.output,
         noProvenance,
         verifySecrets: opts.verifySecrets,
         hunt: opts.hunt,
@@ -296,8 +299,9 @@ program
   .option("-q, --quiet", "Suppress terminal output")
   .option("--json", "Emit machine-readable JSON")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
-  .action(async (opts: { quiet?: boolean; json?: boolean; config?: string }) => {
-    await executeScan({ detectors: ["secrets"], focused: true, quiet: opts.quiet, json: opts.json, configPath: opts.config });
+  .option("--output <dir>", "Write HTML/JSON reports to a bounded output directory")
+  .action(async (opts: { quiet?: boolean; json?: boolean; config?: string; output?: string }) => {
+    await executeScan({ detectors: ["secrets"], focused: true, quiet: opts.quiet, json: opts.json, configPath: opts.config, outputDir: opts.output });
   });
 
 program
@@ -306,7 +310,8 @@ program
   .option("-q, --quiet", "Suppress terminal output")
   .option("--json", "Emit machine-readable JSON")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
-  .action(async (opts: { quiet?: boolean; json?: boolean; config?: string }) => {
+  .option("--output <dir>", "Write HTML/JSON reports to a bounded output directory")
+  .action(async (opts: { quiet?: boolean; json?: boolean; config?: string; output?: string }) => {
     await executeScan({
       detectors: ["dependencies"],
       focused: true,
@@ -314,6 +319,7 @@ program
       quiet: opts.quiet,
       json: opts.json,
       configPath: opts.config,
+      outputDir: opts.output,
     });
   });
 

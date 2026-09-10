@@ -54,6 +54,7 @@ const { version: CLI_VERSION } = require("../package.json") as {
 export interface ScanCommandOptions {
   cwd?: string;
   configPath?: string;
+  outputDir?: string;
   json?: boolean;
   detectors?: DetectorId[];
   quiet?: boolean;
@@ -139,7 +140,7 @@ export async function executeScan(
 
   const durationMs = Date.now() - startedAt;
   spinner?.stop();
-  await writeReports(result, projectRoot);
+  await writeReports(result, projectRoot, options.outputDir ? resolve(projectRoot, options.outputDir) : projectRoot);
 
   if (options.json) {
     console.log(JSON.stringify(result));

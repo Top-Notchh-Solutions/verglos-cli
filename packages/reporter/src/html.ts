@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { lstat, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
   riskLevelLabel,
@@ -518,8 +518,16 @@ export function renderHtmlReport(result: ScanResult): string {
 export async function writeHtmlReport(
   result: ScanResult,
   projectRoot: string,
+  outputDir = projectRoot,
 ): Promise<string> {
-  const path = join(projectRoot, "verglos-report.html");
+  try {
+    const entry = await lstat(outputDir);
+    if (!entry.isDirectory()) throw new Error("report output path must be a regular directory");
+  } catch (error) {
+    if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error;
+    await mkdir(outputDir, { recursive: true, mode: 0o700 });
+  }
+  const path = join(outputDir, "verglos-report.html");
   await writeFile(path, renderHtmlReport(result), "utf8");
   return path;
 }

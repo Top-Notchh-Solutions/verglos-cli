@@ -17,6 +17,7 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /\.command\("diff <base> <head>"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   for (const command of ["scan", "score", "secrets", "deps", "ci", "precommit"]) assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--config <path>`));
   for (const command of ["scan", "score", "secrets", "deps", "ci", "precommit"]) assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--json`));
+  for (const command of ["scan", "secrets", "deps"]) assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--output <dir>`));
   for (const command of ["scan", "ci"]) assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--policy <path>`));
   assert.equal(source.includes('.option("--policy"'), false);
 });
