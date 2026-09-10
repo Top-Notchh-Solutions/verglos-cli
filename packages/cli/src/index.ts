@@ -144,7 +144,10 @@ engines.command("status")
 engines.command("install <engineId> <version> <artifactPath>")
   .description("Install a local digest-pinned engine artifact")
   .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
-  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest)); });
+  .option("--approve", "Approve the local engine mutation")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; approve?: boolean; json?: boolean; quiet?: boolean }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, opts)); });
 
 program
   .command("target")
