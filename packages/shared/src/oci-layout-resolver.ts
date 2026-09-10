@@ -19,7 +19,9 @@ export async function resolveOciLayout(rootInput: string, platform?: string): Pr
   try {
     const indexPath = join(root, "index.json");
     if ((await lstat(indexPath)).size > MAX_OCI_INDEX_BYTES) throw new Error("oversized");
-    index = JSON.parse((await readFile(indexPath)).toString("utf8"));
+    const indexBytes = await readFile(indexPath);
+    if (indexBytes.byteLength > MAX_OCI_INDEX_BYTES) throw new Error("oversized");
+    index = JSON.parse(indexBytes.toString("utf8"));
   } catch { throw new OciLayoutResolutionError("INVALID_LAYOUT", "OCI layout index is invalid JSON."); }
   if (!Array.isArray(index.manifests) || index.manifests.length !== 1 || typeof index.manifests[0]?.digest !== "string") throw new OciLayoutResolutionError("AMBIGUOUS_INDEX", "OCI layout must contain exactly one manifest descriptor.");
   const descriptor = index.manifests[0];
@@ -31,6 +33,7 @@ export async function resolveOciLayout(rootInput: string, platform?: string): Pr
   if (!blobEntry.isFile()) throw new OciLayoutResolutionError("MISSING_BLOB", "OCI layout manifest blob is missing.");
   if (blobEntry.size > MAX_OCI_MANIFEST_BYTES) throw new OciLayoutResolutionError("INVALID_LAYOUT", "OCI layout manifest exceeds the 50 MiB limit.");
   const bytes = await readFile(blobPath).catch(() => { throw new OciLayoutResolutionError("MISSING_BLOB", "OCI layout manifest blob is missing."); });
+  if (bytes.byteLength > MAX_OCI_MANIFEST_BYTES) throw new OciLayoutResolutionError("INVALID_LAYOUT", "OCI layout manifest exceeds the 50 MiB limit.");
   const actual = createHash("sha256").update(bytes).digest("hex");
   if (actual !== descriptorDigest.slice(7)) throw new OciLayoutResolutionError("DIGEST_MISMATCH", "OCI layout manifest blob digest does not match its descriptor.");
   const ref = `localhost/layout@${descriptorDigest}`;

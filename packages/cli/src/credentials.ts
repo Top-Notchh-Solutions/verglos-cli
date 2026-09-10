@@ -31,7 +31,9 @@ const SCORE_CACHE_FILE = join(CREDENTIALS_DIR, "last-score.json");
 async function readLocalJson(path: string, maxBytes: number): Promise<string> {
   const entry = await lstat(path);
   if (!entry.isFile() || entry.size > maxBytes) throw new Error("local cache is not a bounded regular file");
-  return readFile(path, "utf8");
+  const raw = await readFile(path, "utf8");
+  if (Buffer.byteLength(raw, "utf8") > maxBytes) throw new Error("local cache is not a bounded regular file");
+  return raw;
 }
 
 export const DEFAULT_API_URL =

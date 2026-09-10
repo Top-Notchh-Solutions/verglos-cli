@@ -45,7 +45,9 @@ interface LockPackage {
 async function readProjectJson(path: string, maxBytes: number): Promise<string> {
   const entry = await lstat(path);
   if (!entry.isFile() || entry.size > maxBytes) throw new Error("project metadata is not a bounded regular file");
-  return readFile(path, "utf8");
+  const raw = await readFile(path, "utf8");
+  if (Buffer.byteLength(raw, "utf8") > maxBytes) throw new Error("project metadata is not a bounded regular file");
+  return raw;
 }
 
 async function collectDeps(projectRoot: string): Promise<MonitorDependency[]> {

@@ -21,6 +21,7 @@ export async function resolveSbomTarget(target: TargetSpec, context: TargetResol
     if (!entry.isFile()) throw new Error();
     if (entry.size > MAX_SBOM_BYTES) throw new SbomResolutionError("INVALID_DOCUMENT", "SBOM document exceeds the 8 MiB limit.");
     bytes = await readFile(path);
+    if (bytes.byteLength > MAX_SBOM_BYTES) throw new SbomResolutionError("INVALID_DOCUMENT", "SBOM document exceeds the 8 MiB limit.");
   } catch (error) {
     if (error instanceof SbomResolutionError) throw error;
     throw new SbomResolutionError("MISSING_PATH", "SBOM target is not a readable file.");

@@ -23,6 +23,7 @@ export async function readRecordMember(root: string, memberDigest: string): Prom
   const entry = await lstat(path);
   if (!entry.isFile() || entry.size > 50_000_000) throw new Error("record member is not a bounded regular file");
   const bytes = await readFile(path);
+  if (bytes.byteLength > 50_000_000) throw new Error("record member is not a bounded regular file");
   if (digest(bytes) !== memberDigest) throw new Error("record member digest mismatch");
   return bytes;
 }

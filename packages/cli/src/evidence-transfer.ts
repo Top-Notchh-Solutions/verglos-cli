@@ -21,7 +21,9 @@ async function readEvidenceInput(inputPath: string): Promise<Buffer> {
   const entry = await lstat(inputPath);
   if (!entry.isFile()) throw new Error("evidence input must be a regular file");
   if (entry.size > MAX_EVIDENCE_BYTES) throw new Error("evidence input exceeds the 8 MiB limit");
-  return readFile(inputPath);
+  const bytes = await readFile(inputPath);
+  if (bytes.byteLength > MAX_EVIDENCE_BYTES) throw new Error("evidence input exceeds the 8 MiB limit");
+  return bytes;
 }
 
 export async function transferEvidence(inputPath: string, outputPath: string): Promise<{ readonly format: string; readonly bytes: number }> {
