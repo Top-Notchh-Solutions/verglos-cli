@@ -331,7 +331,8 @@ program
 program
   .command("fix")
   .description("Auto-fix safe security issues [Pro] (currently: header injection)")
-  .action(async () => {
+  .option("--approve", "Approve the filesystem mutation")
+  .action(async (opts: { approve?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability("fix", "`verglos fix`", {
       asPlan,
@@ -339,6 +340,11 @@ program
         "Your findings are still in verglos-report.html — auto-fix just needs Pro.",
     });
     if (!ok) process.exit(1);
+
+    if (!opts.approve) {
+      console.error("verglos fix requires explicit approval (--approve) before changing files.");
+      process.exit(78);
+    }
 
     console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
     console.log("");
