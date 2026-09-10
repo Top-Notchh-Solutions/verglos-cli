@@ -183,9 +183,10 @@ program
   .command("inspect <kind> <value>")
   .description("Resolve target metadata without executing project code")
   .option("--json", "Emit machine-readable JSON")
-  .action(async (kind: string, value: string, opts: { json?: boolean }) => {
+  .option("--quiet", "Suppress human output")
+  .action(async (kind: string, value: string, opts: { json?: boolean; quiet?: boolean }) => {
     if (!["repository", "package", "filesystem", "artifact", "sbom", "oci"].includes(kind)) process.exit(78);
-    process.exit(await executeTargetInspect(kind as "repository" | "package" | "filesystem" | "artifact" | "sbom" | "oci", value, opts.json));
+    process.exit(await executeTargetInspect(kind as "repository" | "package" | "filesystem" | "artifact" | "sbom" | "oci", value, opts.json, opts.quiet));
   });
 
 program

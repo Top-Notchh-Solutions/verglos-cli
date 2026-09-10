@@ -11,6 +11,13 @@ test("target inspect returns typed incomplete for an unqualified package", async
   assert.ok([0, 3, 78].includes(code));
 });
 
+test("target inspect quiet mode suppresses human output", async () => {
+  const previousLog = console.log; const previousError = console.error; const lines: string[] = [];
+  console.log = (line?: unknown) => lines.push(String(line)); console.error = (line?: unknown) => lines.push(String(line));
+  try { await executeTargetInspect("package", ".", false, true); assert.deepEqual(lines, []); }
+  finally { console.log = previousLog; console.error = previousError; }
+});
+
 test("target inspect resolves a local OCI layout without network access", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-target-oci-"));
   const previousLog = console.log; const lines: string[] = []; console.log = (line?: unknown) => lines.push(String(line));
