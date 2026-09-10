@@ -24,11 +24,19 @@ test("engine install requires approval and emits bounded JSON after approval", a
   console.log = (line?: unknown) => lines.push(String(line));
   try {
     assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, digest, { approve: true, json: true }), 0);
-    assert.deepEqual(JSON.parse(lines[0]!), { engineId: "trivy", version: "1.0.0", path: join(root, "cache", "trivy", "1.0.0", "engine.bin"), digest });
+    assert.deepEqual(JSON.parse(lines[0]!), { engineId: "trivy", version: "1.0.0", path: join(root, "cache", "trivy", "1.0.0", "engine.bin"), digest, compatibility: { status: "not-evaluated", reason: "signed engine manifest was not provided" } });
   } finally {
     console.log = previousLog;
     if (previousCache === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previousCache;
   }
+});
+
+test("quiet engine failures do not write diagnostics", async () => {
+  const previousError = console.error;
+  const lines: string[] = [];
+  console.error = (line?: unknown) => lines.push(String(line));
+  try { assert.equal(await executeEngineInstall("trivy", "1.0.0", "/does/not/exist", "bad", { quiet: true }), 78); assert.deepEqual(lines, []); }
+  finally { console.error = previousError; }
 });
 
 test("engine update and rollback label approved JSON mutations", async () => {

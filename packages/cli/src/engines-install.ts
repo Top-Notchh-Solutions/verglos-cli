@@ -19,12 +19,13 @@ export async function executeEngineInstall(engineId: string, version: string, ar
     const installed = await installEngineArtifact(cacheRoot, engineId, version, bytes, digest);
     const action = options.action ?? "install";
     if (!options.quiet) {
-      if (options.json) console.log(JSON.stringify({ ...(action === "install" ? {} : { action }), engineId, version, path: installed, digest }));
+      if (options.json) console.log(JSON.stringify({ ...(action === "install" ? {} : { action }), engineId, version, path: installed, digest, compatibility: { status: "not-evaluated", reason: "signed engine manifest was not provided" } }));
       else {
         const verb = action === "rollback" ? "Rolled back" : action === "update" ? "Updated" : "Installed";
         console.log(`${verb} ${engineId}@${version} at ${installed}`);
+        console.log("Compatibility: not evaluated (signed engine manifest not provided)");
       }
     }
     return 0;
-  } catch (error) { console.error(error instanceof Error ? error.message : "Engine installation failed."); return 78; }
+  } catch (error) { if (!options.quiet) console.error(error instanceof Error ? error.message : "Engine installation failed."); return 78; }
 }
