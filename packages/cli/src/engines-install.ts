@@ -5,6 +5,9 @@ import { join } from "node:path";
 
 export async function executeEngineInstall(engineId: string, version: string, artifactPath: string, digest: string): Promise<number> {
   try {
+    if (typeof engineId !== "string" || !engineId || typeof version !== "string" || !version || typeof artifactPath !== "string" || !artifactPath || typeof digest !== "string") {
+      throw new Error("Engine install requires engine id, version, artifact path, and digest.");
+    }
     const bytes = await readFile(artifactPath);
     const cacheRoot = process.env.VERGLOS_ENGINE_CACHE ?? join(homedir(), ".cache", "verglos", "engines");
     const installed = await installEngineArtifact(cacheRoot, engineId, version, bytes, digest);
