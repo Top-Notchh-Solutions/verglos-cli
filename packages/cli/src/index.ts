@@ -36,6 +36,7 @@ import { executeEngineInstall } from "./engines-install.js";
 import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
+import { transferEvidence } from "./evidence-transfer.js";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
@@ -97,6 +98,19 @@ const policy = program.command("policy").description("Inspect local policy evalu
 policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { json?: boolean; quiet?: boolean }) => {
   process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet));
 });
+
+program.command("evidence").description("Import and export standards evidence")
+  .command("export <input> <output>")
+  .description("Validate bounded evidence JSON and export a supported standards document")
+  .action(async (input: string, output: string) => {
+    try {
+      const result = await transferEvidence(input, output);
+      console.log("Exported " + result.format + " evidence (" + result.bytes + " bytes).");
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : "Evidence export failed.");
+      process.exit(78);
+    }
+  });
 
 program
   .command("engines")
