@@ -1,5 +1,6 @@
 import { runScan } from "@verglos/scanner";
 import type { Finding, RepoProvenance, ScanScore } from "@verglos/shared";
+import { isAbsolute } from "node:path";
 
 /**
  * verglos_scan MCP tool — full project scan wrapped for agent use.
@@ -78,8 +79,23 @@ function buildHeadline(
 export async function scanProject(
   input: ScanInput,
 ): Promise<ScanResultSummary> {
+  if (!input || typeof input !== "object") throw new Error("scan input must be an object");
+  for (const key of Object.keys(input)) {
+    if (!["projectRoot", "limit", "noProvenance"].includes(key)) {
+      throw new Error("unknown scan argument: " + key);
+    }
+  }
   const projectRoot = input.projectRoot ?? process.cwd();
   const limit = input.limit ?? 20;
+  if (typeof projectRoot !== "string" || !isAbsolute(projectRoot)) {
+    throw new Error("scan projectRoot must be an absolute path");
+  }
+  if (!Number.isInteger(limit) || limit < 0 || limit > 1000) {
+    throw new Error("scan limit must be an integer from 0 to 1000");
+  }
+  if (input.noProvenance !== undefined && typeof input.noProvenance !== "boolean") {
+    throw new Error("scan noProvenance must be boolean");
+  }
   const result = await runScan({
     projectRoot,
     unlocked: true,
@@ -87,9 +103,7 @@ export async function scanProject(
     noProvenance: input.noProvenance,
   });
 
-  const sorted = [...result.findings].sort(
-    (a, b) => severityRank(b.severity) - severityRank(a.severity),
-  );
+  const sorted = sortFindings(result.findings);
   const capped = limit === 0 ? sorted : sorted.slice(0, limit);
 
   return {
@@ -103,4 +117,16 @@ export async function scanProject(
     truncated: capped.length < result.findings.length,
     headline: buildHeadline(result.score, result.provenance),
   };
+}
+
+export function sortFindings(findings: Finding[]): Finding[] {
+  return [...findings].sort((a, b) => {
+    const severity = severityRank(b.severity) - severityRank(a.severity);
+    if (severity !== 0) return severity;
+    const rule = (a.rule ?? "").localeCompare(b.rule ?? "");
+    if (rule !== 0) return rule;
+    const file = (a.file ?? "").localeCompare(b.file ?? "");
+    if (file !== 0) return file;
+    return (a.line ?? 0) - (b.line ?? 0);
+  });
 }

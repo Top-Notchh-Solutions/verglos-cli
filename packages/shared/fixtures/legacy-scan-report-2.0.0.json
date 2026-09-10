@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2.0.0",
+  "projectRoot": "/fixture/project",
+  "projectType": "nextjs",
+  "scannedAt": "2026-01-01T00:00:00.000Z",
+  "durationMs": 42,
+  "findings": [],
+  "score": {
+    "value": 100,
+    "riskLevel": "low",
+    "counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "testFileFindings": {
+      "total": 0,
+      "included": false,
+      "note": "Fixture contains no test findings."
+    }
+  },
+  "unlocked": false
+}

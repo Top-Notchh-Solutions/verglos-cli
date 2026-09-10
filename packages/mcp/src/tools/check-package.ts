@@ -12,6 +12,7 @@
 
 const NPM_REGISTRY = "https://registry.npmjs.org";
 const OSV_URL = "https://api.osv.dev/v1/query";
+import { validateAgentInputBounds } from "@verglos/shared";
 const HTTP_TIMEOUT_MS = 4000;
 
 /**
@@ -65,21 +66,31 @@ export interface CheckPackageResult {
   exists: boolean;
   typosquat?: { top: string; distance: number };
   cves: { id: string; severity: string; summary?: string }[];
+  coverage: "complete" | "incomplete";
+  limitations: string[];
   reasoning: string;
 }
 
-async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T | null> {
-  return Promise.race([
-    p,
-    new Promise<null>((resolve) => setTimeout(() => resolve(null), ms)),
-  ]);
+export interface CheckPackageLookups {
+  packageExists?: (name: string) => Promise<boolean | null>;
+  queryOsv?: (name: string, version: string) => Promise<OsvLookup>;
+  resolveLatest?: (name: string) => Promise<string | null>;
+}
+
+async function fetchWithTimeout(url: string, init: RequestInit = {}): Promise<Response | null> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), HTTP_TIMEOUT_MS);
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function packageExists(name: string): Promise<boolean | null> {
-  const res = await withTimeout(
-    fetch(`${NPM_REGISTRY}/${encodeURIComponent(name)}`, { method: "HEAD" }),
-    HTTP_TIMEOUT_MS,
-  );
+  const res = await fetchWithTimeout(`${NPM_REGISTRY}/${encodeURIComponent(name)}`, { method: "HEAD" });
   if (!res) return null;
   if (res.status === 200) return true;
   if (res.status === 404) return false;
@@ -120,41 +131,41 @@ function findTyposquat(name: string): { top: string; distance: number } | null {
   return best;
 }
 
-interface OsvVuln {
+export interface OsvVuln {
   id: string;
   summary?: string;
   database_specific?: { severity?: string };
 }
 
+export interface OsvLookup {
+  vulns: OsvVuln[];
+  available: boolean;
+}
+
 async function queryOsv(
   name: string,
   version: string,
-): Promise<OsvVuln[]> {
+): Promise<OsvLookup> {
   try {
-    const res = await withTimeout(
-      fetch(OSV_URL, {
+    const res = await fetchWithTimeout(OSV_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           package: { name, ecosystem: "npm" },
           version,
         }),
-      }),
-      HTTP_TIMEOUT_MS,
-    );
-    if (!res || !res.ok) return [];
+      });
+    if (!res || !res.ok) return { vulns: [], available: false };
     const data = (await res.json()) as { vulns?: OsvVuln[] };
-    return data.vulns ?? [];
+    if (!Array.isArray(data.vulns)) return { vulns: [], available: false };
+    return { vulns: data.vulns.slice(0, 100), available: true };
   } catch {
-    return [];
+    return { vulns: [], available: false };
   }
 }
 
 async function resolveLatest(name: string): Promise<string | null> {
-  const res = await withTimeout(
-    fetch(`${NPM_REGISTRY}/${encodeURIComponent(name)}/latest`),
-    HTTP_TIMEOUT_MS,
-  );
+  const res = await fetchWithTimeout(`${NPM_REGISTRY}/${encodeURIComponent(name)}/latest`);
   if (!res || !res.ok) return null;
   try {
     const data = (await res.json()) as { version?: string };
@@ -166,10 +177,23 @@ async function resolveLatest(name: string): Promise<string | null> {
 
 export async function checkPackage(
   input: CheckPackageInput,
+  lookups: CheckPackageLookups = {},
 ): Promise<CheckPackageResult> {
+  if (!input || typeof input !== "object" || typeof input.packageName !== "string") {
+    throw new Error("check_package requires a string packageName");
+  }
+  if (input.version !== undefined && typeof input.version !== "string") {
+    throw new Error("check_package version must be a string");
+  }
+  for (const key of Object.keys(input)) {
+    if (!["packageName", "version"].includes(key)) {
+      throw new Error("unknown check_package argument: " + key);
+    }
+  }
+  validateAgentInputBounds(input);
   const packageName = input.packageName.trim();
 
-  const exists = await packageExists(packageName);
+  const exists = await (lookups.packageExists ?? packageExists)(packageName);
   if (exists === false) {
     // AI-005 — package doesn't exist. Block.
     return {
@@ -178,6 +202,8 @@ export async function checkPackage(
       version: input.version ?? "unknown",
       exists: false,
       cves: [],
+      coverage: "complete",
+      limitations: [],
       reasoning: `\`${packageName}\` does not exist on the public npm registry. This is the AI-005 slopsquat failure mode — either the install will fail, or worse, an attacker has registered the exact hallucinated name and is now shipping malware to anyone who runs \`npm install\`. Do not install.`,
     };
   }
@@ -189,18 +215,29 @@ export async function checkPackage(
       version: input.version ?? "unknown",
       exists: false,
       cves: [],
+      coverage: "incomplete",
+      limitations: ["npm-registry-unavailable"],
       reasoning: `Could not reach registry.npmjs.org to verify \`${packageName}\`. Retry later, or check manually before installing.`,
     };
   }
 
   // Resolve version if not given (we need it for OSV).
+  const latestLookup = input.version && input.version !== "latest"
+    ? input.version
+    : await (lookups.resolveLatest ?? resolveLatest)(packageName);
   const version =
     input.version && input.version !== "latest"
       ? input.version
-      : ((await resolveLatest(packageName)) ?? "latest");
+      : (latestLookup ?? "latest");
 
   const typosquat = findTyposquat(packageName);
-  const cves = await queryOsv(packageName, version);
+  const osv = await (lookups.queryOsv ?? queryOsv)(packageName, version);
+  const cves = osv.vulns;
+  const limitations: string[] = [];
+  if (!osv.available) limitations.push("osv-unavailable");
+  if ((input.version === undefined || input.version === "latest") && !latestLookup) {
+    limitations.push("latest-version-unavailable");
+  }
 
   const cvesFmt = cves.map((v) => ({
     id: v.id,
@@ -230,6 +267,11 @@ export async function checkPackage(
     );
   }
 
+  if (limitations.length > 0 && verdict === "safe") {
+    verdict = "warn";
+    notes.push("Evidence coverage is incomplete (" + limitations.join(", ") + "); do not interpret this result as a clean vulnerability lookup.");
+  }
+
   if (typosquat) {
     // Typosquat elevates from safe → warn; if a CVE already put us at
     // block or warn, we compound but don't downgrade.
@@ -252,6 +294,8 @@ export async function checkPackage(
     exists: true,
     typosquat: typosquat ?? undefined,
     cves: cvesFmt,
+    coverage: limitations.length === 0 ? "complete" : "incomplete",
+    limitations,
     reasoning: notes.join("\n\n"),
   };
 }

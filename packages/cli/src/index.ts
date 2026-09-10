@@ -28,7 +28,15 @@ import {
 } from "./entitlement.js";
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
-
+import { executeTargetInspect } from "./target-inspect.js";
+import { listCachedEngines } from "@verglos/shared";
+import { homedir } from "node:os";
+import { join } from "node:path";
+import { executeEngineInstall } from "./engines-install.js";
+import { formatEngineStatus } from "./engines-status.js";
+import { executeDiff } from "./diff.js";
+import { executePolicyCheck } from "./policy-check.js";
+import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -69,12 +77,87 @@ Command groups:
     if (asPlan) process.env.VERGLOS_AS_PLAN = asPlan;
     await enforceLatestVersion(version);
   });
-
 program
   .command("update")
   .description("Update Verglos CLI to the latest npm version")
   .action(async () => {
     await updateCli(version);
+  });
+
+program
+  .command("diff <base> <head>")
+  .description("Compare two local Verglos release snapshots")
+  .option("--json", "Emit machine-readable JSON")
+  .action(async (base: string, head: string, opts: { json?: boolean }) => {
+    process.exit(await executeDiff(base, head, opts.json));
+  });
+
+const policy = program.command("policy").description("Inspect local policy evaluation artifacts");
+policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { json?: boolean; quiet?: boolean }) => {
+  process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet));
+});
+
+const evidence = program.command("evidence").description("Import and export standards evidence");
+evidence.command("export <input> <output>")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .description("Validate bounded evidence JSON and export a supported standards document")
+  .action(async (input: string, output: string, opts: { json?: boolean; quiet?: boolean }) => {
+    try {
+      const result = await transferEvidence(input, output);
+      if (!opts.quiet) console.log(opts.json ? JSON.stringify(result) : "Exported " + result.format + " evidence (" + result.bytes + " bytes).");
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : "Evidence export failed.");
+      process.exit(78);
+    }
+  });
+
+evidence.command("import <input>")
+  .description("Validate bounded evidence JSON and report its detected format")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (input: string, opts: { json?: boolean; quiet?: boolean }) => {
+    try {
+      const result = await inspectEvidence(input);
+      if (!opts.quiet) {
+        if (opts.json) console.log(JSON.stringify(result));
+        else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)");
+      }
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : "Evidence import failed.");
+      process.exit(78);
+    }
+  });
+
+const engines = program.command("engines").description("Inspect managed engine state");
+engines.command("status")
+  .description("List cached engine versions without changing state")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
+    const cacheRoot = process.env.VERGLOS_ENGINE_CACHE ?? join(homedir(), ".cache", "verglos", "engines");
+    const engines = await listCachedEngines(cacheRoot);
+    const output = formatEngineStatus(cacheRoot, engines, opts.json, opts.quiet);
+    if (output) console.log(output);
+  });
+
+engines.command("install <engineId> <version> <artifactPath>")
+  .description("Install a local digest-pinned engine artifact")
+  .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
+  .option("--approve", "Approve the local engine mutation")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; approve?: boolean; json?: boolean; quiet?: boolean }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, opts)); });
+
+program
+  .command("target")
+  .description("Inspect an immutable target subject")
+  .command("inspect <kind> <value>")
+  .description("Resolve target metadata without executing project code")
+  .option("--json", "Emit machine-readable JSON")
+  .action(async (kind: string, value: string, opts: { json?: boolean }) => {
+    if (!["repository", "package", "filesystem", "artifact", "sbom"].includes(kind)) process.exit(78);
+    process.exit(await executeTargetInspect(kind as "repository" | "package" | "filesystem" | "artifact" | "sbom", value, opts.json));
   });
 
 program
@@ -84,6 +167,7 @@ program
   .option("-q, --quiet", "Suppress terminal output")
   .option("--all", "Include low-confidence findings (default hides <0.7)")
   .option("--strict", "Include test file findings in score")
+  .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option(
     "--no-provenance",
     "Skip the AI-authorship analysis (no headline provenance line)",
@@ -103,6 +187,7 @@ program
       quiet?: boolean;
       all?: boolean;
       strict?: boolean;
+      policyEvaluation?: string;
       provenance?: boolean;
       verifySecrets?: boolean;
       hunt?: boolean;
@@ -118,8 +203,11 @@ program
         noProvenance,
         verifySecrets: opts.verifySecrets,
         hunt: opts.hunt,
-        noTelemetry,
+      noTelemetry,
       };
+      if (opts.policyEvaluation) {
+        process.exit(await executePolicyCheck(opts.policyEvaluation, false, opts.quiet));
+      }
       if (opts.watch) {
         console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
         await executeScan(scanOptions);
@@ -176,12 +264,16 @@ program
   .option("-t, --threshold <score>", "Minimum score threshold", "60")
   .option("-q, --quiet", "Suppress output")
   .option("--strict", "Include test file findings in score")
+  .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
   )
-  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean }) => {
+  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policyEvaluation?: string }) => {
+    if (opts.policyEvaluation) {
+      process.exit(await executePolicyCheck(opts.policyEvaluation, false, opts.quiet));
+    }
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const plan = await currentPlan({ asPlan });
     const hasThreshold = plan.plan !== "free";

@@ -1,12 +1,15 @@
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import type { ScanResult } from "@verglos/shared";
+import {
+  LEGACY_SCAN_REPORT_SCHEMA,
+  type ScanResult,
+} from "@verglos/shared";
 
 export function serializeJsonReport(result: ScanResult): ScanResult & {
   schemaVersion: "2.0.0";
 } {
   return {
-    schemaVersion: "2.0.0",
+    schemaVersion: LEGACY_SCAN_REPORT_SCHEMA.version,
     ...result,
     findings: result.findings.map((finding) => ({
       ...finding,
