@@ -118,6 +118,8 @@ async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
         NEXT_CONFIG_DECL,
         (match) => `${match}${NEXT_HEADERS_BLOCK}`,
       );
+      const beforeWrite = await lstat(path);
+      if (!beforeWrite.isFile() || beforeWrite.size > 1 * 1024 * 1024) throw new Error("Next.js config changed before mutation.");
       await writeFile(path, updated, "utf8");
       return { file: name, action: "patched" };
     }
@@ -221,7 +223,12 @@ async function fixWithHelperFile(
 
   await mkdir(dirname(helperPath), { recursive: true });
   const extras = HEADERS_HELPER_EXTRAS[projectType] ?? "";
-  await writeFile(helperPath, HEADERS_HELPER_TS + extras, "utf8");
+  try {
+    await writeFile(helperPath, HEADERS_HELPER_TS + extras, { encoding: "utf8", flag: "wx" });
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "EEXIST") return { file: helperPath, action: "skipped" };
+    throw error;
+  }
 
   const wire = WIRE_INSTRUCTIONS[projectType] ??
     "Import VERGLOS_SECURITY_HEADERS and set each key on your outgoing responses.";
