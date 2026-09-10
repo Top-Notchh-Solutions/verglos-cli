@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -92,6 +92,19 @@ test("policy check rejects directory inputs before parsing", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-policy-dir-"));
   try {
     assert.equal(await executePolicyCheck(root, true, true), 2);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("policy check rejects symlink inputs before parsing", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-policy-link-"));
+  try {
+    const target = join(root, "evaluation.json");
+    const link = join(root, "evaluation-link.json");
+    await writeFile(target, JSON.stringify(validEvaluation()), "utf8");
+    await symlink(target, link);
+    assert.equal(await executePolicyCheck(link, true, true), 2);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
