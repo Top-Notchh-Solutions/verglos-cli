@@ -37,7 +37,6 @@ import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
 import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
-
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -78,10 +77,6 @@ Command groups:
     if (asPlan) process.env.VERGLOS_AS_PLAN = asPlan;
     await enforceLatestVersion(version);
   });
-
-
-
-
 program
   .command("update")
   .description("Update Verglos CLI to the latest npm version")
@@ -102,8 +97,8 @@ policy.command("check <evaluation>").description("Render a policy evaluation and
   process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet));
 });
 
-program.command("evidence").description("Import and export standards evidence")
-  .command("export <input> <output>")
+const evidence = program.command("evidence").description("Import and export standards evidence");
+evidence.command("export <input> <output>")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
   .description("Validate bounded evidence JSON and export a supported standards document")
@@ -117,10 +112,25 @@ program.command("evidence").description("Import and export standards evidence")
     }
   });
 
-program
-  .command("engines")
-  .description("Inspect managed engine state")
-  .command("status")
+evidence.command("import <input>")
+  .description("Validate bounded evidence JSON and report its detected format")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (input: string, opts: { json?: boolean; quiet?: boolean }) => {
+    try {
+      const result = await inspectEvidence(input);
+      if (!opts.quiet) {
+        if (opts.json) console.log(JSON.stringify(result));
+        else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)");
+      }
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : "Evidence import failed.");
+      process.exit(78);
+    }
+  });
+
+const engines = program.command("engines").description("Inspect managed engine state");
+engines.command("status")
   .description("List cached engine versions without changing state")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress output")
@@ -131,9 +141,7 @@ program
     if (output) console.log(output);
   });
 
-program
-  .command("engines")
-  .command("install <engineId> <version> <artifactPath>")
+engines.command("install <engineId> <version> <artifactPath>")
   .description("Install a local digest-pinned engine artifact")
   .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
   .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest)); });
@@ -618,16 +626,6 @@ program
   .action((rule: string | undefined, opts: { list?: boolean }) => {
     const code = executeExplain({ rule, list: opts.list });
     if (code !== 0) process.exit(code);
-  });
-
-program.command("evidence").description("Import and export standards evidence")
-  .command("import <input>")
-  .description("Validate bounded evidence JSON and report its detected format")
-  .option("--json", "Emit machine-readable JSON")
-  .option("--quiet", "Suppress output")
-  .action(async (input: string, opts: { json?: boolean; quiet?: boolean }) => {
-    try { const result = await inspectEvidence(input); if (!opts.quiet) { if (opts.json) console.log(JSON.stringify(result)); else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)"); } }
-    catch (error) { console.error(error instanceof Error ? error.message : "Evidence import failed."); process.exit(78); }
   });
 
 program.parse();
