@@ -33,6 +33,7 @@ import { listCachedEngines } from "@verglos/shared";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
+import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
 
@@ -106,9 +107,7 @@ program
   .action(async (opts: { json?: boolean }) => {
     const cacheRoot = process.env.VERGLOS_ENGINE_CACHE ?? join(homedir(), ".cache", "verglos", "engines");
     const engines = await listCachedEngines(cacheRoot);
-    if (opts.json) console.log(JSON.stringify({ cacheRoot, engines }));
-    else if (engines.length === 0) console.log("No cached engines found.");
-    else for (const engine of engines) console.log(`${engine.engineId}@${engine.version} ${engine.digest}`);
+    console.log(formatEngineStatus(cacheRoot, engines, opts.json));
   });
 
 program
