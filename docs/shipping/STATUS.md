@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`AGENT-005`: MCP read-only validators now cover check-before-write, explain-finding, check-package, and scan argument boundaries. Package checks now expose incomplete npm/OSV/latest-version evidence instead of claiming clean coverage; scan findings now sort deterministically by severity, rule, file, and line. Scanner network/runtime safety and full tool contract remain open.
+`AGENT-005`: MCP read-only validators now cover check-before-write, explain-finding, check-package, and scan argument boundaries. Package checks now expose incomplete npm/OSV/latest-version evidence instead of claiming clean coverage; scan execution now rechecks absolute-root, option bounds, and boolean contracts and sorts findings deterministically. Scanner network/runtime safety and full tool contract remain open.
 
 ## Scope hold
 
