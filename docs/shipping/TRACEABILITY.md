@@ -1,5 +1,6 @@
 # Verglos V1 traceability
 
+ IMPORT-001-011 evidence import/export foundations | `packages/shared/src/*importer.ts`, `provenance-*`, `detect-secrets-*`, `*exporter.ts` | focused tests cover bounded readers, structural validation, provenance matching, secret refusal, runner limits, and deterministic standards output | implemented locally; public command wiring remains IMPORT-012
  ENGINE-010-015 Trivy evidence foundations | `packages/shared/src/trivy-*.ts`, `fixture-engine.ts` | parser, metadata, compatibility, failure policy, evidence replay, and fixture tests pass | implemented locally; adapter execution/graph integration remains downstream
  ENGINE-004 safe archive downloader/extractor | `packages/shared/src/archive-extractor.ts`, `tar-extractor.ts` | archive safety/extractor tests cover bounded downloads, checksum, traversal, links, duplicates, and partial-output cleanup | implemented and verified locally; trusted source/signature verification remains ENGINE-005
  ENGINE-005 trusted engine source/artifact verification | `packages/shared/src/engine-trust.ts` | engine-trust tests cover exact HTTPS origins, canonical Ed25519 signatures, source/size/digest binding, and fail-closed mismatch | implemented locally; mirror/update orchestration remains ENGINE-007/008

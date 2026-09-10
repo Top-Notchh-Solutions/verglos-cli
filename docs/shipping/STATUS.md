@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`ENGINE-008`: archive safety, cache paths, trusted source/signature verification, mirror/offline selection, and Trivy evidence foundations (ENGINE-010-015) are implemented and tested. Next is engines command orchestration; MCP scanner runtime safety remains open.
+`IMPORT-012`: importer/exporter foundations (IMPORT-001-011) are implemented and tested. Next is public evidence import/export command wiring; ENGINE-008 update/rollback and MCP scanner runtime safety remain open.
 
 ## Scope hold
 
