@@ -91,8 +91,9 @@ program
   .command("diff <base> <head>")
   .description("Compare two local Verglos release snapshots")
   .option("--json", "Emit machine-readable JSON")
-  .action(async (base: string, head: string, opts: { json?: boolean }) => {
-    process.exit(await executeDiff(base, head, opts.json));
+  .option("--quiet", "Suppress human output")
+  .action(async (base: string, head: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeDiff(base, head, opts.json, opts.quiet));
   });
 
 const policy = program.command("policy").description("Inspect local policy evaluation artifacts");

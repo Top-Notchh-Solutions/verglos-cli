@@ -24,12 +24,12 @@ async function readSnapshot(path: string): Promise<string> {
   return raw;
 }
 
-export async function executeDiff(basePath: string, headPath: string, json = false): Promise<number> {
+export async function executeDiff(basePath: string, headPath: string, json = false, quiet = false): Promise<number> {
   try {
     const [baseRaw, headRaw] = await Promise.all([readSnapshot(basePath), readSnapshot(headPath)]);
     const result = diffReleaseSnapshots(parseSnapshot(baseRaw), parseSnapshot(headRaw));
     if (json) console.log(JSON.stringify(result));
-    else {
+    else if (!quiet) {
       console.log(`Added: ${result.added.length}`);
       console.log(`Fixed: ${result.fixed.length}`);
       console.log(`Unchanged: ${result.unchanged.length}`);
@@ -40,7 +40,7 @@ export async function executeDiff(basePath: string, headPath: string, json = fal
     return result.identityChanged || result.coverageChanged ? 3 : result.added.length || result.fixed.length ? 1 : 0;
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to diff release snapshots.";
-    if (json) console.log(JSON.stringify({ status: "error", message })); else console.error(message);
+    if (json) console.log(JSON.stringify({ status: "error", message })); else if (!quiet) console.error(message);
     return 2;
   }
 }
