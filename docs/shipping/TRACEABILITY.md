@@ -1,5 +1,6 @@
 # Verglos V1 traceability
 
+ IMPORT-012 evidence commands | `packages/cli/src/evidence-transfer.ts`, `packages/cli/src/index.ts` | command surface supports bounded file/stdin input, file/stdout output, JSON/quiet modes, source format/digest summary, and deterministic failure exit | implemented locally; deeper standards conformance remains downstream
  GRAPH-009 local diff command | `packages/cli/src/diff.ts` | diff test covers malformed snapshot rejection and deterministic local exit behavior; reader caps bytes and collection sizes | implemented locally; hosted history remains downstream
  POLICY-003/004 policy profiles | `packages/shared/src/policy-profiles.ts` | policy profile tests cover critical-only Free defaults and bounded configurable Pro confidence/severity/freshness/Hunt settings | implemented locally; entitlement/evaluator wiring remains downstream
  POLICY-001/002 policy schema and loader | `packages/shared/src/policy-document.ts`, `policy-loader.ts` | policy tests cover required evidence fields, strict unknown-field rejection, deterministic precedence, bounded layers, and effective digest | implemented locally; hosted policy authority remains downstream

@@ -153,7 +153,7 @@ Evidence/problem: mature teams already produce SARIF, SBOM, VEX, and provenance.
 - [x] **IMPORT-009** · optional explicit detect-secrets runner · deps: IMPORT-008, ENGINE-006 · Commit(s): `detect-secrets-runner.ts`, `detect-secrets-runner.test.ts` (absolute path, timeout/output bounds, no-install behavior verified; command wiring remains IMPORT-012)
 - [x] **IMPORT-010** · SARIF exporter · deps: CONTRACT-004/008 · Commit(s): `sarif-exporter.ts`, `sarif-exporter.test.ts` (bounded canonical SARIF output and public decision properties verified; command wiring remains IMPORT-012)
 - [x] **IMPORT-011** · CycloneDX/SPDX/VEX exporters · deps: IMPORT-003-005, GRAPH later · Commit(s): `standards-exporter.ts`, `standards-exporter.test.ts` (deterministic validated standards round-trip helpers verified; command wiring remains IMPORT-012)
-- [ ] **IMPORT-012** · `verglos evidence import/export` commands · deps: IMPORT-002-011 · Add file/stdin/output behavior, summary, JSON, quiet, explicit attribution, and exit taxonomy. Commit(s): `pending (preparatory)`
+- [x] **IMPORT-012** · `verglos evidence import/export` commands · deps: IMPORT-002-011 · Add file/stdin/output behavior, summary, JSON, quiet, explicit attribution, and exit taxonomy. Commit(s): `packages/cli/src/evidence-transfer.ts`, `packages/cli/src/index.ts` (implemented; standards conformance remains in underlying exporters)
 
 ## Epic 05 — Normalization, stable identity, correlation, lineage, and release diff
 
