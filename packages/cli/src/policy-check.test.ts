@@ -87,3 +87,12 @@ test("policy check quiet mode emits no human output on success", async () => {
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("policy check rejects directory inputs before parsing", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-policy-dir-"));
+  try {
+    assert.equal(await executePolicyCheck(root, true, true), 2);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
