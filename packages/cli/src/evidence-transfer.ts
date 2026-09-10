@@ -9,3 +9,9 @@ export async function transferEvidence(inputPath: string, outputPath: string): P
   else throw new Error(`Evidence export for ${imported.format} is not enabled in this preparatory command helper.`);
   await writeFile(outputPath, output, { flag: "wx" }); return { format: imported.format, bytes: Buffer.byteLength(output) };
 }
+
+export async function inspectEvidence(inputPath: string): Promise<{ readonly format: string; readonly version: string; readonly bytes: number; readonly sourceDigest: string }> {
+  const bytes = await readFile(inputPath);
+  const imported = importBoundedJson(bytes);
+  return { format: imported.format, version: imported.version, bytes: bytes.byteLength, sourceDigest: imported.sourceDigest.algorithm + ":" + imported.sourceDigest.value };
+}

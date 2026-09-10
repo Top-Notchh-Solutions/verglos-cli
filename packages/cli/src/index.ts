@@ -36,7 +36,7 @@ import { executeEngineInstall } from "./engines-install.js";
 import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
-import { transferEvidence } from "./evidence-transfer.js";
+import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
@@ -614,3 +614,11 @@ program
   });
 
 program.parse();
+program.command("evidence").description("Import and export standards evidence")
+  .command("import <input>")
+  .description("Validate bounded evidence JSON and report its detected format")
+  .option("--json", "Emit machine-readable JSON")
+  .action(async (input: string, opts: { json?: boolean }) => {
+    try { const result = await inspectEvidence(input); if (opts.json) console.log(JSON.stringify(result)); else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)"); }
+    catch (error) { console.error(error instanceof Error ? error.message : "Evidence import failed."); process.exit(78); }
+  });
