@@ -25,3 +25,9 @@ test("baseline store rejects oversized files before parsing", async () => {
     await assert.rejects(() => loadBaseline(path), /4 MiB/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("baseline store rejects non-file paths", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-baseline-dir-"));
+  try { await assert.rejects(() => loadBaseline(root), /regular file/); }
+  finally { await rm(root, { recursive: true, force: true }); }
+});
