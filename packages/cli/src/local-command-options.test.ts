@@ -12,6 +12,8 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /\.command\("secrets"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /\.command\("deps"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /\.command\("score"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
+  assert.match(source, /evidence\.command\("export <input> <output>"\)[\s\S]*?if \(!opts\.quiet\) console\.error/);
+  assert.match(source, /evidence\.command\("import <input>"\)[\s\S]*?if \(!opts\.quiet\) console\.error/);
   assert.equal(source.includes('.option("--config"'), false);
   assert.equal(source.includes('.option("--policy"'), false);
 });

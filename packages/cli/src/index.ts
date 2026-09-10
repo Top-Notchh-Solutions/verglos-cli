@@ -110,7 +110,7 @@ evidence.command("export <input> <output>")
       const result = await transferEvidence(input, output);
       if (!opts.quiet) console.log(opts.json ? JSON.stringify(result) : "Exported " + result.format + " evidence (" + result.bytes + " bytes).");
     } catch (error) {
-      console.error(error instanceof Error ? error.message : "Evidence export failed.");
+      if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence export failed.");
       process.exit(78);
     }
 });
@@ -136,7 +136,7 @@ evidence.command("import <input>")
         else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)");
       }
     } catch (error) {
-      console.error(error instanceof Error ? error.message : "Evidence import failed.");
+      if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence import failed.");
       process.exit(78);
     }
   });
