@@ -1,4 +1,4 @@
-import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, writeFile, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { baselineDigest, parseBaseline, type BaselineDocument } from "./baseline.js";
 
@@ -18,5 +18,7 @@ export async function saveBaseline(root: string, baseline: BaselineDocument): Pr
 }
 
 export async function loadBaseline(path: string): Promise<BaselineDocument> {
+  const info = await stat(path);
+  if (info.size > 4 * 1024 * 1024) throw new Error("Baseline exceeds the 4 MiB size limit.");
   return parseBaseline(JSON.parse(await readFile(path, "utf8")));
 }

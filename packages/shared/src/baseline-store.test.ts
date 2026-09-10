@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readdir, rm } from "node:fs/promises";
+import { mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -14,5 +14,14 @@ test("baseline store publishes atomically and validates read-back", async () => 
     const path = await saveBaseline(root, baseline);
     assert.equal((await readdir(root)).length, 1);
     assert.deepEqual(await loadBaseline(path), baseline);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("baseline store rejects oversized files before parsing", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-baseline-large-"));
+  const path = join(root, "large.json");
+  try {
+    await writeFile(path, Buffer.alloc(4 * 1024 * 1024 + 1));
+    await assert.rejects(() => loadBaseline(path), /4 MiB/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
