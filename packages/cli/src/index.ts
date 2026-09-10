@@ -345,7 +345,10 @@ program
     const plan = await planHeaderFixes(process.cwd());
     if (opts.dryRun || !opts.approve) {
       if (plan.length === 0) console.log("No supported header change is planned.");
-      else for (const item of plan) console.log(`${item.action}: ${item.file}`);
+      else for (const item of plan) {
+        console.log(`${item.action}: ${item.file}`);
+        for (const line of item.preview ?? []) console.log(line);
+      }
     }
     if (opts.dryRun) return;
     if (!opts.approve) {

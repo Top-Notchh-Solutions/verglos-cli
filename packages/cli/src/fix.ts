@@ -29,6 +29,7 @@ interface FixResult {
 export interface HeaderFixPlan {
   readonly file: string;
   readonly action: "create" | "patch" | "skip";
+  readonly preview?: readonly string[];
 }
 
 async function fileExists(path: string): Promise<boolean> {
@@ -45,6 +46,27 @@ async function pickSrcDir(projectRoot: string): Promise<string> {
   return ".";
 }
 
+const NEXT_HEADERS_BLOCK = `
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'Content-Security-Policy', value: "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none';" },
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
+      },
+    ];
+  },`;
+
+function previewLines(value: string): readonly string[] {
+  return value.trim().split("\n").map((line) => `+${line}`);
+}
+
 /** Plans header changes without reading beyond bounded config/helper files or mutating the project. */
 export async function planHeaderFixes(projectRoot: string): Promise<readonly HeaderFixPlan[]> {
   const { type } = await detectProjectType(projectRoot);
@@ -56,14 +78,14 @@ export async function planHeaderFixes(projectRoot: string): Promise<readonly Hea
         if (!entry.isFile() || entry.size > 1 * 1024 * 1024) continue;
         const content = await readFile(path, "utf8");
         if (content.includes("Content-Security-Policy") || content.includes("X-Frame-Options")) return [{ file: name, action: "skip" }];
-        if (NEXT_CONFIG_DECL.test(content)) return [{ file: name, action: "patch" }];
+        if (NEXT_CONFIG_DECL.test(content)) return [{ file: name, action: "patch", preview: previewLines(NEXT_HEADERS_BLOCK) }];
       } catch { /* unavailable config is not a mutation target */ }
     }
     return [];
   }
   if (type === "express" || type === "fastify" || type === "node" || type === "react") {
     const file = join(await pickSrcDir(projectRoot), "verglos-security-headers.ts");
-    return [{ file, action: await fileExists(join(projectRoot, file)) ? "skip" : "create" }];
+    return [{ file, action: await fileExists(join(projectRoot, file)) ? "skip" : "create", ...(await fileExists(join(projectRoot, file)) ? {} : { preview: previewLines(HEADERS_HELPER_TS) }) }];
   }
   return [];
 }
@@ -89,27 +111,10 @@ async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
       return { file: name, action: "skipped" };
     }
 
-    const headersBlock = `
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          { key: 'Content-Security-Policy', value: "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none';" },
-          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
-        ],
-      },
-    ];
-  },`;
-
     if (NEXT_CONFIG_DECL.test(content)) {
       const updated = content.replace(
         NEXT_CONFIG_DECL,
-        (match) => `${match}${headersBlock}`,
+        (match) => `${match}${NEXT_HEADERS_BLOCK}`,
       );
       await writeFile(path, updated, "utf8");
       return { file: name, action: "patched" };

@@ -144,7 +144,9 @@ test("fix planning identifies a bounded Next.js patch without mutating", async (
     await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
     const original = "const nextConfig = {}; module.exports = nextConfig;\n";
     await writeFile(join(root, "next.config.js"), original);
-    assert.deepEqual(await planHeaderFixes(root), [{ file: "next.config.js", action: "patch" }]);
+    const plan = await planHeaderFixes(root);
+    assert.equal(plan[0]?.action, "patch");
+    assert.ok(plan[0]?.preview?.some((line) => line.includes("Content-Security-Policy")));
     assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
