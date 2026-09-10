@@ -10,3 +10,12 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.equal(source.includes('.option("--config"'), false);
   assert.equal(source.includes('.option("--policy"'), false);
 });
+
+test("nested command groups are fully registered before Commander parses", async () => {
+  const source = await readFile(fileURLToPath(new URL("./index.ts", import.meta.url)), "utf8");
+  const parseAt = source.lastIndexOf("program.parse();");
+  assert.ok(parseAt > source.indexOf('evidence.command("import <input>")'));
+  assert.ok(parseAt > source.indexOf('engines.command("install <engineId> <version> <artifactPath>")'));
+  assert.equal((source.match(/program\.command\("engines"\)/g) ?? []).length, 1);
+  assert.equal((source.match(/program\.command\("evidence"\)/g) ?? []).length, 1);
+});
