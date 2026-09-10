@@ -101,11 +101,13 @@ policy.command("check <evaluation>").description("Render a policy evaluation and
 
 program.command("evidence").description("Import and export standards evidence")
   .command("export <input> <output>")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
   .description("Validate bounded evidence JSON and export a supported standards document")
-  .action(async (input: string, output: string) => {
+  .action(async (input: string, output: string, opts: { json?: boolean; quiet?: boolean }) => {
     try {
       const result = await transferEvidence(input, output);
-      console.log("Exported " + result.format + " evidence (" + result.bytes + " bytes).");
+      if (!opts.quiet) console.log(opts.json ? JSON.stringify(result) : "Exported " + result.format + " evidence (" + result.bytes + " bytes).");
     } catch (error) {
       console.error(error instanceof Error ? error.message : "Evidence export failed.");
       process.exit(78);
