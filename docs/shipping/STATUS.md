@@ -80,7 +80,7 @@ Epic 00 is complete. `CONTRACT-001` through `CONTRACT-011` now establish version
 
 ## Next task
 
-`GRAPH-009`: graph and release-diff foundations (GRAPH-001-008) are implemented and tested. Next is the public diff command and evidence import/export wiring; ENGINE-008 update/rollback and MCP scanner runtime safety remain open.
+`POLICY-002`: policy document schema foundation (POLICY-001) is reconciled as implemented and tested. Next is policy loader precedence; public diff/evidence commands and engine orchestration remain open.
 
 ## Scope hold
 
