@@ -61,6 +61,28 @@ test("engine update and rollback label approved JSON mutations", async () => {
   }
 });
 
+test("engine install validates a matching compatibility manifest", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-engine-manifest-"));
+  const artifact = join(root, "engine");
+  const manifestPath = join(root, "manifest.json");
+  await writeFile(artifact, "bytes");
+  const digest = `sha256:${createHash("sha256").update("bytes").digest("hex")}`;
+  await writeFile(manifestPath, JSON.stringify({ schemaId: "urn:verglos:schema:engine-manifest", schemaVersion: "1.0.0", engineId: "trivy", version: "1.0.0", artifacts: [{ platform: "darwin/arm64", digest, size: 5, source: "https://mirror.example.test/trivy", license: "Apache-2.0" }], compatibleCli: ">=2.0.0", signature: { algorithm: "ed25519", keyId: "test", value: "unsigned-fixture" } }));
+  const previousCache = process.env.VERGLOS_ENGINE_CACHE;
+  const previousLog = console.log;
+  const lines: string[] = [];
+  process.env.VERGLOS_ENGINE_CACHE = join(root, "cache");
+  console.log = (line?: unknown) => lines.push(String(line));
+  try {
+    assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, digest, { manifestPath, approve: true, json: true }), 0);
+    assert.equal(JSON.parse(lines[0]!).compatibility.signature, "not-verified");
+  } finally {
+    console.log = previousLog;
+    if (previousCache === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previousCache;
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test("engine install rejects symlink artifacts before reading", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-install-link-"));
   const target = join(root, "engine.bin");
