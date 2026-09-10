@@ -5,6 +5,7 @@ import type { CheckBeforeWriteInput } from "./tools/check-before-write.js";
 export function parseCheckBeforeWriteArgs(value: unknown): CheckBeforeWriteInput {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("check_before_write arguments must be an object");
   const input = value as Record<string, unknown>;
+  for (const key of Object.keys(input)) if (!["code", "targetPath", "language", "context"].includes(key)) throw new Error(`unknown check_before_write argument: ${key}`);
   if (typeof input.code !== "string" || typeof input.targetPath !== "string" || (input.language !== undefined && typeof input.language !== "string") || (input.context !== undefined && typeof input.context !== "string")) throw new Error("check_before_write requires string code and targetPath");
   const parsed = { code: input.code, targetPath: input.targetPath, language: input.language as string | undefined, context: input.context as string | undefined };
   validateAgentInputBounds(parsed); return parsed;
@@ -24,6 +25,7 @@ export function parseExplainFindingArgs(value: unknown): { rule: string; targetS
 export function parseCheckPackageArgs(value: unknown): { packageName: string; version?: string } {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("check_package arguments must be an object");
   const input = value as Record<string, unknown>;
+  for (const key of Object.keys(input)) if (!["packageName", "version"].includes(key)) throw new Error(`unknown check_package argument: ${key}`);
   if (typeof input.packageName !== "string" || (input.version !== undefined && typeof input.version !== "string")) throw new Error("check_package requires a string packageName");
   const parsed = { packageName: input.packageName, version: input.version as string | undefined };
   validateAgentInputBounds(parsed); return parsed;
