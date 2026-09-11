@@ -65,10 +65,17 @@ export async function executePrecommit(
     setTimeout(() => resolveTimeout({ timedOut: true }), timeoutMs);
   });
 
-  const raced = await Promise.race([
-    scanPromise.then((r) => ({ timedOut: false as const, result: r })),
-    timeoutPromise,
-  ]);
+  let raced: { readonly timedOut: true } | { readonly timedOut: false; readonly result: Awaited<typeof scanPromise> };
+  try {
+    raced = await Promise.race([
+      scanPromise.then((r) => ({ timedOut: false as const, result: r })),
+      timeoutPromise,
+    ]);
+  } catch {
+    if (options.json) console.log(JSON.stringify({ status: "error", code: "PRECOMMIT_INPUT", message: "pre-commit scan failed" }));
+    else if (!options.quiet) console.error(chalk.red("verglos: pre-commit scan failed; run `verglos scan` for details."));
+    return 2;
+  }
 
   if (raced.timedOut) {
     if (options.json) {

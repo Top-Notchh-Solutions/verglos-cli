@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, realpath, rm } from "node:fs/promises";
+import { mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -154,6 +154,17 @@ test("CI JSON mode emits one bounded decision document", async () => {
     const payload = JSON.parse(result.stdout) as { score?: { value?: number }; findings?: unknown };
     assert.equal(payload.score?.value, 100);
     assert.ok(Array.isArray(payload.findings));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("precommit configuration failure is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-precommit-error-"));
+  try {
+    await writeFile(join(root, "invalid-config.json"), "{\"failThreshold\":101}");
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "precommit", "--config", "invalid-config.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "PRECOMMIT_INPUT", message: "pre-commit scan failed" });
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
