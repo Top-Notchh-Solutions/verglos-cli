@@ -28,4 +28,24 @@ for (const name of archives) {
   const digest = createHash("sha256").update(await readFile(join(root, name))).digest("hex");
   if (digest !== expected.get(name)) throw new Error(`checksum mismatch: ${basename(name)}`);
 }
+for (const name of ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json"]) {
+  const path = join(root, name);
+  try {
+    if (!(await lstat(path)).isFile()) throw new Error(`${name} must be a regular file`);
+    const content = await readFile(path, "utf8");
+    if (content.length === 0) throw new Error(`${name} must not be empty`);
+    if (name === "THIRD_PARTY_NOTICES" && !content.startsWith("THIRD-PARTY NOTICES\n")) throw new Error("THIRD_PARTY_NOTICES has an invalid header");
+    if (name === "SBOM.cdx.json") {
+      const bom = JSON.parse(content);
+      if (bom.bomFormat !== "CycloneDX" || !Array.isArray(bom.components) || bom.components.length === 0) throw new Error("SBOM.cdx.json has an invalid CycloneDX shape");
+    }
+    if (name === "SBOM.spdx.json") {
+      const doc = JSON.parse(content);
+      if (doc.spdxVersion !== "SPDX-2.3" || !Array.isArray(doc.packages) || doc.packages.length === 0) throw new Error("SBOM.spdx.json has an invalid SPDX shape");
+    }
+  } catch (error) {
+    if (error instanceof SyntaxError) throw new Error(`${name} is not valid JSON`);
+    if (error instanceof Error && /must be|invalid|not be empty/.test(error.message)) throw error;
+  }
+}
 console.log(`verified ${archives.length} release artifact checksums`);
