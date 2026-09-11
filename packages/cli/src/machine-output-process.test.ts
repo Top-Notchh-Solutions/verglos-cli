@@ -156,3 +156,15 @@ test("CI JSON mode emits one bounded decision document", async () => {
     assert.ok(Array.isArray(payload.findings));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("Scan JSON mode emits one parseable scan document", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-scan-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--json", "--quiet", "--no-telemetry"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown };
+    assert.equal(payload.projectRoot, await realpath(root));
+    assert.ok(Array.isArray(payload.findings));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
