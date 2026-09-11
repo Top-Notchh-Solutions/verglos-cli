@@ -16,6 +16,21 @@ export async function putRecordMember(root: string, path: string, bytes: Uint8Ar
   const temporary = `${destination}.${process.pid}.${Date.now()}.tmp`; await writeFile(temporary, bytes, { mode: 0o600 }); await rename(temporary, destination);
   return { digest: value, path, size: bytes.byteLength };
 }
+
+/** Publish a complete bounded member set, rejecting duplicate logical paths before any write. */
+export async function putRecordMembers(root: string, members: readonly { readonly path: string; readonly bytes: Uint8Array }[], maxMembers = 4096): Promise<readonly { readonly digest: string; readonly path: string; readonly size: number }[]> {
+  if (!Number.isInteger(maxMembers) || maxMembers < 1 || maxMembers > 4096) throw new Error("record member count limit is invalid");
+  if (members.length > maxMembers) throw new Error("record member count exceeds limit");
+  const paths = new Set<string>();
+  for (const member of members) {
+    assertSafePath(member.path);
+    if (paths.has(member.path)) throw new Error(`record member path is duplicated: ${member.path}`);
+    paths.add(member.path);
+  }
+  const results = [];
+  for (const member of [...members].sort((left, right) => left.path.localeCompare(right.path))) results.push(await putRecordMember(root, member.path, member.bytes));
+  return Object.freeze(results);
+}
 export async function readRecordMember(root: string, memberDigest: string): Promise<Uint8Array> {
   if (!/^sha256:[a-f0-9]{64}$/.test(memberDigest)) throw new Error("record member digest is invalid");
   await assertStoreRoot(root);

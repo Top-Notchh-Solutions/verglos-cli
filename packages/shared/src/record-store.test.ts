@@ -3,7 +3,7 @@ import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { putRecordMember, readRecordMember } from "./record-store.js";
+import { putRecordMember, putRecordMembers, readRecordMember } from "./record-store.js";
 
 test("record store publishes content-addressed members and rejects traversal", async () => { const root = await mkdtemp(join(tmpdir(), "verglos-record-")); try { const member = await putRecordMember(root, "report.json", new TextEncoder().encode("{}")); assert.equal(Buffer.from(await readRecordMember(root, member.digest)).toString(), "{}"); await assert.rejects(() => putRecordMember(root, "../escape", new Uint8Array())); } finally { await rm(root, { recursive: true, force: true }); } });
 
@@ -26,4 +26,15 @@ test("record store rejects a symlinked store root", async () => {
     await assert.rejects(() => putRecordMember(link, "report.json", new Uint8Array()), /regular directory/);
     await assert.rejects(() => readRecordMember(link, "sha256:" + "a".repeat(64)), /regular directory/);
   } finally { await rm(parent, { recursive: true, force: true }); await rm(target, { recursive: true, force: true }); }
+});
+
+test("record store batch publishing rejects duplicate paths and enforces count bounds", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-batch-"));
+  try {
+    const bytes = new TextEncoder().encode("{}");
+    await assert.rejects(() => putRecordMembers(root, [{ path: "a.json", bytes }, { path: "a.json", bytes }]), /path is duplicated/);
+    await assert.rejects(() => putRecordMembers(root, [{ path: "a.json", bytes }], 0), /count limit is invalid/);
+    const result = await putRecordMembers(root, [{ path: "b.json", bytes }, { path: "a.json", bytes }]);
+    assert.deepEqual(result.map((entry) => entry.path), ["a.json", "b.json"]);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });
