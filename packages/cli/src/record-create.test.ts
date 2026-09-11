@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { mkdtemp, mkdir, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { executeRecordCreate } from "./record-create.js";
@@ -96,7 +96,7 @@ test("record create JSON success is process-safe", async () => {
     assert.equal(result.stderr, "");
     const parsed = JSON.parse(result.stdout) as { members: number; manifestPath: string };
     assert.equal(parsed.members, 1);
-    assert.equal(parsed.manifestPath.endsWith("/manifest.json"), true);
+    assert.equal(basename(parsed.manifestPath), "manifest.json");
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
