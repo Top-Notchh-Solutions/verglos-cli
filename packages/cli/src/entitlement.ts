@@ -142,11 +142,12 @@ async function fetchFromServer(
 function parseCapabilitiesResponse(value: unknown): CapabilitiesResponse | null {
   if (!value || typeof value !== "object") return null;
   const raw = value as Record<string, unknown>;
-  if (typeof raw.plan !== "string" || raw.plan.length > 64 || !Array.isArray(raw.capabilities) || raw.capabilities.length > 4096 || raw.capabilities.some((item) => typeof item !== "string" || item.length === 0 || item.length > 256)) return null;
+  const plan = typeof raw.plan === "string" ? raw.plan.toLowerCase() : "";
+  if (!["free", "pro", "team", "studio", "enterprise", "compliance", "founder"].includes(plan) || !Array.isArray(raw.capabilities) || raw.capabilities.length > 4096 || raw.capabilities.some((item) => typeof item !== "string" || item.length === 0 || item.length > 256)) return null;
   if (typeof raw.cache_ttl_seconds !== "number" || !Number.isFinite(raw.cache_ttl_seconds) || raw.cache_ttl_seconds < 0 || raw.cache_ttl_seconds > 90 * 24 * 60 * 60) return null;
   if (typeof raw.simulated !== "boolean" || typeof raw.active !== "boolean") return null;
   if (raw.real_plan !== undefined && (typeof raw.real_plan !== "string" || raw.real_plan.length > 64)) return null;
-  return { plan: raw.plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(raw.real_plan === undefined ? {} : { real_plan: raw.real_plan }) };
+  return { plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(raw.real_plan === undefined ? {} : { real_plan: raw.real_plan }) };
 }
 
 export interface LoadCapabilitiesOptions {
