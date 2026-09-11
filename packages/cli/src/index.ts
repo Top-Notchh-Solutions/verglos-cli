@@ -796,8 +796,10 @@ program
   .command("explain [rule]")
   .description("Explain a Verglos rule (why it exists, how to fix)")
   .option("-l, --list", "List every rule Verglos knows about")
-  .action((rule: string | undefined, opts: { list?: boolean }) => {
-    const code = executeExplain({ rule, list: opts.list });
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action((rule: string | undefined, opts: { list?: boolean; json?: boolean; quiet?: boolean }) => {
+    const code = executeExplain({ rule, list: opts.list, json: opts.json, quiet: opts.quiet });
     if (code !== 0) process.exit(code);
   });
 
