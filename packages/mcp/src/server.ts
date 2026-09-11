@@ -281,8 +281,18 @@ export async function dispatchTool(
   if (args !== undefined && (!args || typeof args !== "object" || Array.isArray(args))) {
     return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be an object" }) }] };
   }
-  if (args !== undefined && Buffer.byteLength(JSON.stringify(args), "utf8") > MAX_TOOL_ARGUMENT_BYTES) {
-    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments exceed the 256 KiB limit" }) }] };
+  if (args !== undefined) {
+    let encodedArgs: string;
+    try {
+      const encoded = JSON.stringify(args);
+      if (typeof encoded !== "string") throw new Error("arguments are not serializable");
+      encodedArgs = encoded;
+    } catch {
+      return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be serializable JSON" }) }] };
+    }
+    if (Buffer.byteLength(encodedArgs, "utf8") > MAX_TOOL_ARGUMENT_BYTES) {
+      return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments exceed the 256 KiB limit" }) }] };
+    }
   }
   const input = args ?? {};
   const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });

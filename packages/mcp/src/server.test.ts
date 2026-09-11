@@ -74,6 +74,14 @@ test("MCP dispatch rejects unknown runtime entitlement plans", async () => {
   assert.deepEqual(responseText(await dispatchTool("verglos_scan", {}, { plan: 1 as never })), { ok: false, error: "usage", code: "MCP_ENTITLEMENT_INVALID", message: "invalid entitlement plan" });
 });
 
+test("MCP dispatch fails closed for non-serializable arguments", async () => {
+  const cyclic: Record<string, unknown> = {};
+  cyclic.self = cyclic;
+  assert.deepEqual(responseText(await dispatchTool("verglos_scan", cyclic)), { ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be serializable JSON" });
+  const undefinedJson = { toJSON: () => undefined } as unknown as Record<string, unknown>;
+  assert.deepEqual(responseText(await dispatchTool("verglos_scan", undefinedJson)), { ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be serializable JSON" });
+});
+
 test("MCP SDK interoperability preserves discovery and entitlement errors", async () => {
   const server = createVerglosMcpServer({ plan: "free" });
   const client = new Client({ name: "verglos-test-client", version: "1.0.0" }, { capabilities: {} });
