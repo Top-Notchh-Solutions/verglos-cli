@@ -136,7 +136,8 @@ export async function executeScan(
       onProgress: (event) => {
         if (!spinner) return;
         const label = event.detector ? `${event.phase} ${event.detector}` : event.phase;
-        spinner.text = `${event.status === "started" ? "Scanning" : "Completed"} ${label}...`;
+        const verb = event.status === "started" ? "Scanning" : event.status === "skipped" ? "Skipped" : "Completed";
+        spinner.text = `${verb} ${label}...`;
       },
     });
   } finally {

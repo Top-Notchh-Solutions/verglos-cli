@@ -34,6 +34,6 @@ test("scan progress reports bounded lifecycle events without content", async () 
     { phase: "target", status: "started" }, { phase: "target", status: "completed" },
     { phase: "walk", status: "started" }, { phase: "walk", status: "completed" },
     { phase: "detector", status: "started", detector: "secrets" }, { phase: "detector", status: "completed", detector: "secrets" },
-    { phase: "provenance", status: "started" }, { phase: "provenance", status: "completed" },
+    { phase: "provenance", status: "skipped" },
   ]);
 });

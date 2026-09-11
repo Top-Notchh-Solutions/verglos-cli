@@ -201,11 +201,12 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     : rawScore;
   const unlocked = options.unlocked ?? false;
 
-  options.onProgress?.({ phase: "provenance", status: "started" });
+  if (options.noProvenance) options.onProgress?.({ phase: "provenance", status: "skipped" });
+  else options.onProgress?.({ phase: "provenance", status: "started" });
   const provenance = options.noProvenance
     ? undefined
     : await computeProvenance(files, options.projectRoot, allFindings);
-  options.onProgress?.({ phase: "provenance", status: "completed" });
+  if (!options.noProvenance) options.onProgress?.({ phase: "provenance", status: "completed" });
   if (options.signal?.aborted) throw new Error("scan cancelled");
 
   return {

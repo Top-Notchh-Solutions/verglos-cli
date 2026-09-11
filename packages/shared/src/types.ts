@@ -252,7 +252,7 @@ export interface ScanCoverageManifest {
 
 export interface ScanProgressEvent {
   readonly phase: "config" | "target" | "walk" | "detector" | "provenance";
-  readonly status: "started" | "completed";
+  readonly status: "started" | "completed" | "skipped";
   readonly detector?: DetectorId;
 }
 
