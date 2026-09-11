@@ -99,3 +99,14 @@ test("Hunt rejects an adapter result that widens the finding identity", async ()
   assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
   assert.match(result.outcomes[0]?.reason ?? "", /mismatched finding/);
 });
+
+test("Hunt preserves the report finding instead of adapter-supplied mutable evidence", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { return { findingId: "critical-1", verdict: "false" as const, finding: { ...(report.findings[0] as unknown as Record<string, unknown>), title: "tampered", id: "critical-1" } as never, reason: "fixture", durationMs: 1 }; },
+    async cleanup() {},
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.finding?.title, "critical");
+});
