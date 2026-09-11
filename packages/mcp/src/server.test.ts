@@ -58,6 +58,8 @@ test("MCP dispatch enforces the explicitly supplied entitlement plan", async () 
   assert.deepEqual(denied, { ok: false, error: "usage", code: "MCP_ENTITLEMENT_REQUIRED", message: "MCP tool requires the pro plan" });
   const allowed = responseText(await dispatchTool("verglos_hunt_report", {}, { plan: "pro" }));
   assert.equal(allowed.code, "MCP_APPROVAL_REQUIRED");
+  const enterprise = responseText(await dispatchTool("verglos_attest", {}, { plan: "enterprise" }));
+  assert.equal(enterprise.code, "MCP_APPROVAL_REQUIRED");
 });
 
 test("MCP read-only tools keep strict unknown-field validation", async () => {
