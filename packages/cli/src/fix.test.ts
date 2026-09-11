@@ -191,3 +191,24 @@ test("fix CLI JSON dry-run is process-safe and does not mutate the project", asy
     assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
   } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
 });
+
+test("fix CLI approved JSON mutation uses the exact receipt and reports the write", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-approved-process-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-fix-approved-home-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
+    await writeFile(join(root, "next.config.js"), "const nextConfig = {}; module.exports = nextConfig;\n");
+    await mkdir(join(home, ".verglos"), { recursive: true });
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174099", action: "mutate", actor: "human", target: "workspace:fixture", files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const receiptPath = join(root, "approval.json");
+    await writeFile(receiptPath, JSON.stringify(receipt));
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", receiptPath], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
+    assert.equal(result.exitCode, 0, `${result.stdout}\n${result.stderr}`);
+    const output = JSON.parse(result.stdout) as { fixed: number; planned: readonly { action: string }[] };
+    assert.equal(output.fixed, 1);
+    assert.equal(output.planned[0]?.action, "patch");
+    assert.equal(result.stderr, "");
+    assert.match(await readFile(join(root, "next.config.js"), "utf8"), /Content-Security-Policy/);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});

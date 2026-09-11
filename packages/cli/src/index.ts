@@ -520,9 +520,9 @@ program
     if (!opts.quiet && !opts.json) console.log("");
     if (opts.json) console.log(JSON.stringify({ planned: plan, fixed, rescanned: Boolean(opts.rescan) }));
     if (fixed > 0) {
-      console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
+      if (!opts.quiet && !opts.json) console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
       if (opts.rescan) {
-        console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
+        if (!opts.quiet && !opts.json) console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
         try {
           await executeScan({ noTelemetry: true });
         } catch (error) {
