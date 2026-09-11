@@ -20,6 +20,11 @@ export const HuntExecutionBindingSchema = z.object({
   subjectId: SubjectIdSchema,
   observationId: ObservationIdSchema,
   imageDigest: ContentDigestSchema,
+  command: z.array(z.string().min(1).max(4096)).min(1).max(32),
+  isolation: z.enum(["none", "restricted-process", "container", "gvisor", "microvm"]),
+  limits: z.object({ timeoutMs: z.number().int().positive().max(600_000), memoryMb: z.number().int().positive().max(16_384), outputBytes: z.number().int().positive().max(10_000_000) }).strict(),
+  cleanup: z.enum(["always", "on-success", "none"]),
+  redaction: z.enum(["required", "best-effort"]),
   network: z.object({ mode: z.enum(["denied", "allowlist"]), destinations: z.array(z.string().url().max(2048)).max(32) }).strict(),
 }).strict();
 
@@ -51,6 +56,11 @@ export function bindHuntExecution(input: {
     subjectId: input.subjectId,
     observationId: input.observationId,
     imageDigest: recipe.imageDigest,
+    command: [...recipe.command],
+    isolation: recipe.isolation,
+    limits: { ...recipe.limits },
+    cleanup: recipe.cleanup,
+    redaction: recipe.redaction,
     network: { mode: recipe.network.mode, destinations: [...recipe.network.destinations] },
   });
   return Object.freeze({ ...binding, imageDigest: Object.freeze({ ...binding.imageDigest }), network: Object.freeze({ ...binding.network, destinations: Object.freeze([...binding.network.destinations]) }) }) as HuntExecutionBinding;

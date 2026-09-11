@@ -32,16 +32,16 @@ export class DockerSandboxAdapter implements SandboxAdapter {
       projectRoot: input.projectRoot,
       image: this.options.image,
       imageDigest: this.options.imageDigest,
-      command: ["/probe", input.finding.id],
-      timeoutMs: input.timeoutMs,
-      memoryMb: this.options.memoryMb ?? 256,
+      command: input.binding.command,
+      timeoutMs: Math.min(input.timeoutMs, input.binding.limits.timeoutMs),
+      memoryMb: Math.min(this.options.memoryMb ?? input.binding.limits.memoryMb, input.binding.limits.memoryMb),
       maxProcesses: this.options.maxProcesses ?? 64,
       cpus: this.options.cpus,
       diskMb: this.options.diskMb,
     } satisfies DockerInvocationInput);
     const result = await runDockerInvocation(invocation, {
       timeoutMs: input.timeoutMs,
-      maxOutputBytes: this.options.maxOutputBytes ?? 1_000_000,
+      maxOutputBytes: Math.min(this.options.maxOutputBytes ?? input.binding.limits.outputBytes, input.binding.limits.outputBytes),
       sensitivePaths: [input.projectRoot],
       run: this.options.run,
     });

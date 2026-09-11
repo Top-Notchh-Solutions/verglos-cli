@@ -26,6 +26,7 @@ test("Docker sandbox adapter uses the bound digest and returns honest status", a
     assert.match(result.reason, /assertion evaluation/);
     assert.ok(argv.includes("--network"));
     assert.ok(argv.includes("none"));
+    assert.ok(argv.includes("/probe"));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
