@@ -27,6 +27,7 @@ export class DockerSandboxAdapter implements SandboxAdapter {
     await validateDockerProjectRoot(input.projectRoot);
     const boundImageDigest = `${input.binding.imageDigest.algorithm}:${input.binding.imageDigest.value}`;
     if (boundImageDigest !== this.options.imageDigest) throw new Error("Docker adapter image digest does not match execution binding");
+    if (input.binding.isolation !== "container") throw new Error("Docker adapter requires a recipe declaring container isolation");
     if (input.binding.network.mode !== "denied") throw new Error("Docker adapter does not support allowlisted network execution");
     const invocation = buildDockerInvocation({
       projectRoot: input.projectRoot,

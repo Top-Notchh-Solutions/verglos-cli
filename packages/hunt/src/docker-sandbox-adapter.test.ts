@@ -37,3 +37,12 @@ test("Docker sandbox adapter rejects digest or network drift", async () => {
     await assert.rejects(() => adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: binding() }), /digest/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("Docker sandbox adapter rejects a declared isolation mismatch", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-docker-adapter-"));
+  try {
+    const adapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async () => ({ stdout: "", stderr: "" }) });
+    const bound = binding();
+    await assert.rejects(() => adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: { ...bound, isolation: "restricted-process" } }), /container isolation/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
