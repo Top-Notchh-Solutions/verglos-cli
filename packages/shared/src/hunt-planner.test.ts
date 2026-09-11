@@ -13,6 +13,9 @@ test("Hunt planner is exact-match, immutable, and execution-free", () => {
   assert.equal(plan.executes, false);
   assert.equal(plan.ruleId, recipe.ruleId);
   assert.equal(plan.targetSubjectId, recipe.targetSubjectId);
+  assert.match(plan.recipeDigest, /^sha256:[a-f0-9]{64}$/);
+  assert.deepEqual(plan.imageDigest, recipe.imageDigest);
+  assert.ok(Object.isFrozen(plan.imageDigest));
   assert.deepEqual(plan.command, ["node", "check.js"]);
   assert.deepEqual(plan.inputs, { fixture: "safe" });
   assert.equal(plan.cleanup, "always");

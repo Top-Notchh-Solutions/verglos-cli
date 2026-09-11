@@ -1,13 +1,15 @@
 import { parseHuntRecipe, type HuntRecipe } from "./hunt-recipe.js";
-import { isTrustedHuntRecipe, type HuntRecipeTrustPolicy } from "./hunt-recipe-trust.js";
+import { huntRecipeDigest, isTrustedHuntRecipe, type HuntRecipeTrustPolicy } from "./hunt-recipe-trust.js";
 
 export interface HuntPlan {
   readonly supported: boolean;
   readonly trusted: boolean | undefined;
   readonly reason: string;
   readonly recipeId: string;
+  readonly recipeDigest: string;
   readonly ruleId: string;
   readonly targetSubjectId: string;
+  readonly imageDigest: HuntRecipe["imageDigest"];
   readonly command: readonly string[];
   readonly inputs: Readonly<Record<string, string>>;
   readonly isolation: HuntRecipe["isolation"];
@@ -32,8 +34,10 @@ export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; r
     reason: !matches ? "recipe does not match the exact rule and subject" : trusted === false ? "recipe is not trusted by the supplied trust policy" : "recipe matches exact rule and subject",
     trusted,
     recipeId: parsed.recipeId,
+    recipeDigest: huntRecipeDigest(parsed),
     ruleId: parsed.ruleId,
     targetSubjectId: parsed.targetSubjectId,
+    imageDigest: Object.freeze({ ...parsed.imageDigest }),
     command: Object.freeze([...parsed.command]),
     inputs: Object.freeze({ ...(parsed.inputs ?? {}) }),
     isolation: parsed.isolation,
