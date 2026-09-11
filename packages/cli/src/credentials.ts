@@ -24,9 +24,12 @@ export interface Credentials {
   entitlementToken?: string;
 }
 
-const CREDENTIALS_DIR = join(homedir(), ".verglos");
-const CREDENTIALS_FILE = join(CREDENTIALS_DIR, "credentials.json");
-const SCORE_CACHE_FILE = join(CREDENTIALS_DIR, "last-score.json");
+// Resolve the active home at operation time. CI, embedded callers, and
+// isolated profiles may set HOME/USERPROFILE after this module is loaded.
+const configuredHome = () => process.env.HOME || process.env.USERPROFILE || homedir();
+const credentialsDir = () => join(configuredHome(), ".verglos");
+const credentialsFile = () => join(credentialsDir(), "credentials.json");
+const scoreCacheFile = () => join(credentialsDir(), "last-score.json");
 const MAX_UNLOCK_RESPONSE_BYTES = 256 * 1024;
 
 async function readBoundedJson(response: Response): Promise<unknown> {
@@ -50,7 +53,7 @@ export const DEFAULT_API_URL =
 
 export async function loadCredentials(): Promise<Credentials> {
   try {
-    const raw = await readLocalJson(CREDENTIALS_FILE, 1 * 1024 * 1024);
+    const raw = await readLocalJson(credentialsFile(), 1 * 1024 * 1024);
     return { apiUrl: DEFAULT_API_URL, ...JSON.parse(raw) };
   } catch {
     return { apiUrl: DEFAULT_API_URL };
@@ -59,8 +62,8 @@ export async function loadCredentials(): Promise<Credentials> {
 
 export async function saveCredentials(creds: Credentials): Promise<void> {
   try {
-    await mkdir(CREDENTIALS_DIR, { recursive: true });
-    await writeFile(CREDENTIALS_FILE, JSON.stringify(creds, null, 2), "utf8");
+    await mkdir(credentialsDir(), { recursive: true });
+    await writeFile(credentialsFile(), JSON.stringify(creds, null, 2), "utf8");
   } catch {
     // Non-fatal if home dir is not writable
   }
@@ -139,17 +142,17 @@ export async function saveLastScore(
   criticals: number,
 ): Promise<void> {
   try {
-    await mkdir(CREDENTIALS_DIR, { recursive: true });
+    await mkdir(credentialsDir(), { recursive: true });
     const key = projectRoot.replace(/\//g, "_");
     let cache: Record<string, { score: number; criticals: number }> = {};
     try {
-      const raw = await readLocalJson(SCORE_CACHE_FILE, 2 * 1024 * 1024);
+      const raw = await readLocalJson(scoreCacheFile(), 2 * 1024 * 1024);
       cache = JSON.parse(raw) as typeof cache;
     } catch {
       // fresh
     }
     cache[key] = { score, criticals };
-    await writeFile(SCORE_CACHE_FILE, JSON.stringify(cache, null, 2), "utf8");
+    await writeFile(scoreCacheFile(), JSON.stringify(cache, null, 2), "utf8");
   } catch {
     // Non-fatal
   }
@@ -159,7 +162,7 @@ export async function loadLastScore(
   projectRoot: string,
 ): Promise<{ score: number; criticals: number } | undefined> {
   try {
-    const raw = await readLocalJson(SCORE_CACHE_FILE, 2 * 1024 * 1024);
+    const raw = await readLocalJson(scoreCacheFile(), 2 * 1024 * 1024);
     const cache = JSON.parse(raw) as Record<
       string,
       { score: number; criticals: number }
@@ -172,7 +175,7 @@ export async function loadLastScore(
 
 export async function credentialsExist(): Promise<boolean> {
   try {
-    await access(CREDENTIALS_FILE);
+    await access(credentialsFile());
     return true;
   } catch {
     return false;
