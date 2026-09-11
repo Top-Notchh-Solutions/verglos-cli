@@ -107,6 +107,10 @@ jobs:
           done
           (cd "$RELEASE_DIR" && sha256sum ./*.tgz > SHA256SUMS)
 
+      - name: Verify release checksums
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR"
+
       - name: Upload release artifacts
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         uses: actions/upload-artifact@v4
