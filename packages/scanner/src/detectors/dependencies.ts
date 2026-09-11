@@ -26,6 +26,7 @@ const OSV_URL = "https://api.osv.dev/v1/query";
 async function queryOsv(
   name: string,
   version: string,
+  onLimitation?: (limitation: string) => void,
 ): Promise<OsvVuln[]> {
   try {
     const res = await fetch(OSV_URL, {
@@ -33,10 +34,11 @@ async function queryOsv(
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ package: { name, ecosystem: "npm" }, version }),
     });
-    if (!res.ok) return [];
+    if (!res.ok) { onLimitation?.("OSV advisory lookup was unavailable"); return []; }
     const data = (await res.json()) as OsvResponse;
     return data.vulns ?? [];
   } catch {
+    onLimitation?.("OSV advisory lookup was unavailable");
     return [];
   }
 }
@@ -78,7 +80,7 @@ function mapOsvSeverity(vuln: OsvVuln): Finding["severity"] {
 
 export const dependenciesDetector: Detector = {
   id: "dependencies",
-  async run(_files: ScannedFile[], projectRoot: string): Promise<Finding[]> {
+  async run(_files: ScannedFile[], projectRoot: string, context): Promise<Finding[]> {
     const findings: Finding[] = [];
     const lockPath = join(projectRoot, "package-lock.json");
 
@@ -98,7 +100,7 @@ export const dependenciesDetector: Detector = {
     const batch = [...unique.values()].slice(0, 50);
     const results = await Promise.all(
       batch.map(async (pkg) => {
-        const vulns = await queryOsv(pkg.name, pkg.version);
+        const vulns = await queryOsv(pkg.name, pkg.version, context?.onLimitation);
         return { pkg, vulns };
       }),
     );

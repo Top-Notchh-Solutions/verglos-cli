@@ -112,7 +112,7 @@ function isFresh(entry: CacheEntry): boolean {
   return age < CACHE_TTL_MS;
 }
 
-async function checkNpmExistence(name: string): Promise<boolean | null> {
+async function checkNpmExistence(name: string, onLimitation?: (limitation: string) => void): Promise<boolean | null> {
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), HTTP_TIMEOUT_MS);
@@ -127,19 +127,22 @@ async function checkNpmExistence(name: string): Promise<boolean | null> {
     if (res.status === 200) return true;
     if (res.status === 404) return false;
     // 429 / 5xx: don't cache — treat as unknown so we retry next scan
+    onLimitation?.("npm registry lookup was unavailable");
     return null;
   } catch {
+    onLimitation?.("npm registry lookup was unavailable");
     return null;
   }
 }
 
 async function checkBatch(
   names: string[],
+  onLimitation?: (limitation: string) => void,
 ): Promise<Map<string, boolean | null>> {
   const results = new Map<string, boolean | null>();
   await Promise.all(
     names.map(async (name) => {
-      results.set(name, await checkNpmExistence(name));
+      results.set(name, await checkNpmExistence(name, onLimitation));
     }),
   );
   return results;
@@ -336,7 +339,7 @@ async function collectDepNames(
 
 export const slopsquatDetector: Detector = {
   id: "slopsquat",
-  async run(_files: ScannedFile[], projectRoot: string): Promise<Finding[]> {
+  async run(_files: ScannedFile[], projectRoot: string, context): Promise<Finding[]> {
     const allNames = await collectDepNames(projectRoot);
     if (allNames.length === 0) return [];
 
@@ -358,7 +361,7 @@ export const slopsquatDetector: Detector = {
     const limited = toCheck.slice(0, MAX_PACKAGES_PER_SCAN);
     for (let i = 0; i < limited.length; i += BATCH_SIZE) {
       const batch = limited.slice(i, i + BATCH_SIZE);
-      const results = await checkBatch(batch);
+      const results = await checkBatch(batch, context?.onLimitation);
       for (const [name, exists] of results.entries()) {
         if (exists === null) continue; // network hiccup — don't cache
         cache[name] = { exists, checkedAt: new Date().toISOString() };

@@ -64,3 +64,20 @@ test("scans without package evidence do not make outbound fetch requests", async
     globalThis.fetch = originalFetch;
   }
 });
+
+test("advisory outages downgrade scan coverage instead of looking complete", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-advisory-outage-"));
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async () => new Response("unavailable", { status: 503 })) as typeof fetch;
+  try {
+    await writeFile(join(root, "package-lock.json"), JSON.stringify({ lockfileVersion: 3, packages: { "": {}, "node_modules/example": { version: "1.0.0" } } }));
+    await writeFile(join(root, "app.ts"), "export const safe = true;\n");
+    const result = await runScan({ projectRoot: root, detectors: ["dependencies"], noProvenance: true });
+    assert.equal(result.coverage?.status, "incomplete");
+    assert.ok(result.coverage?.limitations.includes("OSV advisory lookup was unavailable"));
+    assert.ok(result.coverage?.limitations.includes("provenance was explicitly skipped"));
+  } finally {
+    globalThis.fetch = originalFetch;
+    await rm(root, { recursive: true, force: true });
+  }
+});

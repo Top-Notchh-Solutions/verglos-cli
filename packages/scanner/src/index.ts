@@ -162,8 +162,12 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     detectorIds.includes(d.id as DetectorId),
   );
 
+  const limitations: string[] = [];
   const detectorContext = {
     verifySecrets: options.verifySecrets,
+    onLimitation: (limitation: string) => {
+      if (!limitations.includes(limitation) && limitations.length < 8) limitations.push(limitation);
+    },
   };
   const rawFindings = await runDetectorsBounded(activeDetectors, detectorConcurrency, (detector) => detector.run(files, options.projectRoot, detectorContext), options.signal, options.onProgress);
   if (options.signal?.aborted) throw new Error("scan cancelled");
@@ -219,7 +223,6 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     unlocked,
     provenance,
     coverage: (() => {
-      const limitations: string[] = [];
       if (options.noProvenance) limitations.push("provenance was explicitly skipped");
       if (score.unsupportedLanguage) limitations.push("repository language is outside the supported JS/TS detector corpus");
       const manifest: ScanCoverageManifest = {

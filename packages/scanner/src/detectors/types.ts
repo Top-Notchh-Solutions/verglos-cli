@@ -8,6 +8,8 @@ import type { ScannedFile } from "../walker.js";
 export interface DetectorContext {
   /** True when `verglos scan --verify-secrets` is set. */
   verifySecrets?: boolean;
+  /** Record bounded coverage limitations without exposing source content. */
+  onLimitation?: (limitation: string) => void;
 }
 
 export interface Detector {
