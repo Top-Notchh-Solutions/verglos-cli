@@ -3,5 +3,14 @@ import { isTrustedHuntRecipe, type HuntRecipeTrustPolicy } from "./hunt-recipe-t
 import type { HuntRecipe } from "./hunt-recipe.js";
 
 export function canExecuteHunt(recipe: HuntRecipe, input: { readonly ruleId: string; readonly subjectId: string; readonly at: string; readonly approval: ApprovalReceipt }, trust: HuntRecipeTrustPolicy): boolean {
-  return recipe.ruleId === input.ruleId && recipe.targetSubjectId === input.subjectId && isTrustedHuntRecipe(recipe, trust) && input.approval.action === "execute" && input.approval.target === input.subjectId && isApprovalUsable(input.approval, input.at);
+  const networkMatches = input.approval.network.length === recipe.network.destinations.length
+    && recipe.network.destinations.every((destination) => input.approval.network.includes(destination));
+  return recipe.ruleId === input.ruleId
+    && recipe.targetSubjectId === input.subjectId
+    && isTrustedHuntRecipe(recipe, trust)
+    && input.approval.action === "execute"
+    && input.approval.policyEffect === "hunt"
+    && input.approval.target === input.subjectId
+    && networkMatches
+    && isApprovalUsable(input.approval, input.at);
 }
