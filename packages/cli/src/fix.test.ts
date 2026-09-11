@@ -31,6 +31,17 @@ test("header fix persists its approved receipt when an audit store is configured
     assert.equal((await readApprovalReceipt(join(root, "approvals"), receipt.requestDigest)).requestId, receipt.requestId);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("approved Next.js header patch writes through a regular-file handle", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-next-fix-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
+    await writeFile(join(root, "next.config.js"), "const nextConfig = {}; module.exports = nextConfig;\n");
+    const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174055", action: "mutate", actor: "human", target: "workspace:fixture", files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    assert.equal(await applyHeaderFixes(root, { approvalReceipt: receipt, now: "2026-01-01T00:02:00Z", quiet: true }), 1);
+    assert.match(await readFile(join(root, "next.config.js"), "utf8"), /Content-Security-Policy/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
 /**
  * Regression guard for the Next.js config detection in
  * `verglos fix`. The v1.8.1 regex only matched the bare JavaScript

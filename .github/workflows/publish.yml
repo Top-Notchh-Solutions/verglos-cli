@@ -116,6 +116,12 @@ jobs:
           node scripts/generate-spdx.mjs > "$RELEASE_DIR/SBOM.spdx.json"
           (cd "$RELEASE_DIR" && sha256sum ./*.tgz > SHA256SUMS)
 
+      - name: Verify clean consumer install
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: |
+          node --test scripts/verify-clean-consumer.test.mjs
+          node scripts/verify-clean-consumer.mjs "$RELEASE_DIR" > "$RELEASE_DIR/clean-consumer-verification.txt"
+
       - name: Verify release checksums
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR"
@@ -131,6 +137,7 @@ jobs:
             ${{ env.RELEASE_DIR }}/THIRD_PARTY_NOTICES
             ${{ env.RELEASE_DIR }}/SBOM.cdx.json
             ${{ env.RELEASE_DIR }}/SBOM.spdx.json
+            ${{ env.RELEASE_DIR }}/clean-consumer-verification.txt
             ${{ env.RELEASE_DIR }}/dependency-license-inventory.json
           if-no-files-found: error
           retention-days: 14

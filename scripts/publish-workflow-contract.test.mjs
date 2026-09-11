@@ -12,6 +12,8 @@ test("publish workflow verifies the same public artifact boundaries as release c
   assert.match(workflow, /check-package-contents\.mjs/u);
   assert.match(workflow, /check-packed-manifests\.mjs/u);
   assert.match(workflow, /verify-release-artifacts\.mjs/u);
+  assert.match(workflow, /verify-clean-consumer\.mjs/u);
+  assert.ok(workflow.indexOf("verify-clean-consumer.mjs") < workflow.indexOf("npm publish"), "clean consumer install must pass before any package publish");
   assert.match(workflow, /sha256sum \.\/\*\.tgz > SHA256SUMS/u);
   assert.match(workflow, /generate-third-party-notices\.mjs/u);
   assert.match(workflow, /generate-sbom\.mjs/u);
