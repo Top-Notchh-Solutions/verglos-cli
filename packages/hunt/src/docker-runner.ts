@@ -1,0 +1,61 @@
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
+
+export interface DockerRunOptions {
+  readonly timeoutMs: number;
+  readonly maxOutputBytes: number;
+  readonly run?: (args: readonly string[], options: { readonly timeout: number; readonly maxBuffer: number }) => Promise<{ readonly stdout: Buffer | string; readonly stderr: Buffer | string }>;
+}
+
+export interface DockerRunResult {
+  readonly status: "completed" | "timed-out" | "failed";
+  readonly stdout: string;
+  readonly stderr: string;
+  readonly outputBytes: number;
+  readonly truncated: boolean;
+  readonly durationMs: number;
+}
+
+/** Execute a previously validated Docker argv with bounded host supervision. */
+export async function runDockerInvocation(args: readonly string[], options: DockerRunOptions): Promise<DockerRunResult> {
+  if (!Array.isArray(args) || args.length === 0) throw new Error("Docker Hunt invocation must not be empty");
+  if (!Number.isInteger(options.timeoutMs) || options.timeoutMs <= 0 || options.timeoutMs > 600_000) throw new Error("Docker Hunt timeout is out of bounds");
+  if (!Number.isInteger(options.maxOutputBytes) || options.maxOutputBytes <= 0 || options.maxOutputBytes > 10_000_000) throw new Error("Docker Hunt output limit is out of bounds");
+  const run = options.run ?? (async (argv, runOptions) => {
+    const result = await execFileAsync("docker", [...argv], { encoding: "buffer", timeout: runOptions.timeout, maxBuffer: runOptions.maxBuffer });
+    return { stdout: result.stdout, stderr: result.stderr };
+  });
+  const started = Date.now();
+  try {
+    const result = await run(args, { timeout: options.timeoutMs, maxBuffer: options.maxOutputBytes });
+    return finish("completed", result.stdout, result.stderr, started, options.maxOutputBytes);
+  } catch (error) {
+    const failure = error as NodeJS.ErrnoException & { readonly killed?: boolean; readonly signal?: string; readonly stdout?: Buffer | string; readonly stderr?: Buffer | string };
+    const timedOut = failure.killed === true || failure.code === "ETIMEDOUT" || failure.signal === "SIGTERM";
+    return finish(timedOut ? "timed-out" : "failed", failure.stdout ?? "", failure.stderr ?? "", started, options.maxOutputBytes);
+  }
+}
+
+function finish(status: DockerRunResult["status"], stdout: Buffer | string, stderr: Buffer | string, started: number, maxOutputBytes: number): DockerRunResult {
+  const stdoutText = toBoundedText(stdout, maxOutputBytes);
+  const remaining = Math.max(0, maxOutputBytes - stdoutText.bytes);
+  const stderrText = toBoundedText(stderr, remaining);
+  return {
+    status,
+    stdout: stdoutText.text,
+    stderr: stderrText.text,
+    outputBytes: stdoutText.bytes + stderrText.bytes,
+    truncated: stdoutText.truncated || stderrText.truncated || byteLength(stdout) + byteLength(stderr) > maxOutputBytes,
+    durationMs: Math.max(0, Date.now() - started),
+  };
+}
+
+function toBoundedText(value: Buffer | string, maxBytes: number): { readonly text: string; readonly bytes: number; readonly truncated: boolean } {
+  const bytes = Buffer.isBuffer(value) ? value : Buffer.from(value, "utf8");
+  const clipped = bytes.byteLength > maxBytes ? bytes.subarray(0, maxBytes) : bytes;
+  return { text: clipped.toString("utf8"), bytes: clipped.byteLength, truncated: bytes.byteLength > maxBytes };
+}
+
+function byteLength(value: Buffer | string): number { return Buffer.isBuffer(value) ? value.byteLength : Buffer.byteLength(value, "utf8"); }

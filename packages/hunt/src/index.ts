@@ -3,6 +3,7 @@ import type { HuntOptions, HuntResult } from "./types.js";
 
 export * from "./types.js";
 export * from "./docker-adapter.js";
+export * from "./docker-runner.js";
 
 export async function runHunt(
   report: ScanResult,
