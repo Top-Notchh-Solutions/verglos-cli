@@ -561,7 +561,7 @@ program
   .command("hunt")
   .description("Verify findings in a local sandbox [Pro] (shell — v2.0.0-beta)")
   .option("--severity <level>", "Severity filter to hunt (default: critical,high)")
-  .option("--sandbox <adapter>", "Sandbox adapter: auto, node-vm, docker, firecracker")
+  .option("--sandbox <adapter>", "Sandbox adapter: auto, docker")
   .option("--dry-run", "Parse options without running sandbox verification")
   .option("--finding <id>", "Verify one finding ID from a Verglos report")
   .option("--json", "Emit machine-readable JSON")
