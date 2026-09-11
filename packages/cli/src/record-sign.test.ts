@@ -13,6 +13,12 @@ test("record sign requires explicit approval before reading the key", async () =
   finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("record sign requires a scoped receipt before reading the manifest", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-sign-receipt-"));
+  try { assert.equal(await executeRecordSign(join(root, "missing.json"), join(root, "sig.json"), join(root, "key.pem"), "signer", "issuer", true, true, true), 78); }
+  finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("record sign writes a bounded envelope", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-record-sign-valid-"));
   try {
