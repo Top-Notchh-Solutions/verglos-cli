@@ -43,6 +43,7 @@ import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordCreate } from "./record-create.js";
 import { executeRecordProject } from "./record-project.js";
 import { executeRecordSign } from "./record-sign.js";
+import { executeConfigInspect } from "./config-inspect.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -88,6 +89,15 @@ program
   .description("Update Verglos CLI to the latest npm version")
   .action(async () => {
     await updateCli(version);
+  });
+
+const config = program.command("config").description("Inspect local Verglos configuration");
+config.command("inspect <path>")
+  .description("Report version-migration warnings without applying configuration")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (path: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeConfigInspect(path, opts.json, opts.quiet));
   });
 
 program
