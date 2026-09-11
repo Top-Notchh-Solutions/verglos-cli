@@ -54,7 +54,7 @@ test("ordinary scans never execute target package scripts", async () => {
   }
 });
 
-test("ordinary scans do not make outbound fetch requests", async () => {
+test("scans without package evidence do not make outbound fetch requests", async () => {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = (async () => { throw new Error("unexpected outbound request"); }) as typeof fetch;
   try {
