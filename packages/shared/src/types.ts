@@ -238,6 +238,16 @@ export interface ScanResult {
    * undefined here without breaking downstream consumers.
    */
   provenance?: RepoProvenance;
+  /** Deterministic account of what this scan actually evaluated. */
+  coverage?: ScanCoverageManifest;
+}
+
+export interface ScanCoverageManifest {
+  readonly status: "complete" | "incomplete";
+  readonly filesWalked: number;
+  readonly requestedDetectors: readonly DetectorId[];
+  readonly executedDetectors: readonly DetectorId[];
+  readonly limitations: readonly string[];
 }
 
 export interface ScanOptions {

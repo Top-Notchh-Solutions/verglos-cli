@@ -7,6 +7,7 @@ import {
   type DetectorId,
   type ScanOptions,
   type ScanResult,
+  type ScanCoverageManifest,
   type VerglosConfig,
 } from "@verglos/shared";
 import { lstat, readFile } from "node:fs/promises";
@@ -204,6 +205,19 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     score,
     unlocked,
     provenance,
+    coverage: (() => {
+      const limitations: string[] = [];
+      if (options.noProvenance) limitations.push("provenance was explicitly skipped");
+      if (score.unsupportedLanguage) limitations.push("repository language is outside the supported JS/TS detector corpus");
+      const manifest: ScanCoverageManifest = {
+        status: limitations.length === 0 ? "complete" : "incomplete",
+        filesWalked: files.length,
+        requestedDetectors: Object.freeze([...detectorIds]),
+        executedDetectors: Object.freeze(activeDetectors.map((detector) => detector.id)),
+        limitations: Object.freeze(limitations),
+      };
+      return Object.freeze(manifest);
+    })(),
   };
 }
 
