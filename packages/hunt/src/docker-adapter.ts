@@ -1,5 +1,5 @@
-import { isAbsolute } from "node:path";
-import { lstat } from "node:fs/promises";
+import { isAbsolute, join, relative } from "node:path";
+import { lstat, readdir, realpath } from "node:fs/promises";
 
 export interface DockerInvocationInput {
   readonly projectRoot: string;
@@ -13,7 +13,7 @@ export interface DockerInvocationInput {
   readonly diskMb?: number;
 }
 
-/** Reject symlinked or non-directory roots before a source bind mount. */
+/** Reject unsafe roots and symlink escapes before a source bind mount. */
 export async function validateDockerProjectRoot(projectRoot: string): Promise<void> {
   if (!isAbsolute(projectRoot) || /[\u0000-\u001f\u007f,]/.test(projectRoot) || projectRoot.length > 4096) {
     throw new Error("Docker Hunt project root must be an absolute bounded path");
@@ -21,6 +21,26 @@ export async function validateDockerProjectRoot(projectRoot: string): Promise<vo
   const entry = await lstat(projectRoot);
   if (entry.isSymbolicLink()) throw new Error("Docker Hunt project root must not be a symlink");
   if (!entry.isDirectory()) throw new Error("Docker Hunt project root must be a regular directory");
+  const root = await realpath(projectRoot);
+  const pending = [projectRoot];
+  let inspected = 0;
+  while (pending.length) {
+    const current = pending.pop()!;
+    for (const child of await readdir(current)) {
+      if (++inspected > 100_000) throw new Error("Docker Hunt project root contains too many entries");
+      const absolute = join(current, child);
+      const childEntry = await lstat(absolute);
+      if (childEntry.isSymbolicLink()) {
+        let destination: string;
+        try { destination = await realpath(absolute); } catch { throw new Error("Docker Hunt project root contains a broken symlink"); }
+        const escape = relative(root, destination);
+        if (escape === "" || (!escape.startsWith(".." + "/") && escape !== ".." && !isAbsolute(escape))) continue;
+        throw new Error("Docker Hunt project root contains a symlink escape");
+      }
+      if (childEntry.isDirectory()) pending.push(absolute);
+      else if (!childEntry.isFile()) throw new Error("Docker Hunt project root contains a non-regular entry");
+    }
+  }
 }
 
 /**

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, mkdir, symlink } from "node:fs/promises";
+import { mkdtemp, mkdir, symlink, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -54,4 +54,17 @@ test("Docker project-root validation rejects symlinks and non-directories", asyn
   await validateDockerProjectRoot(target);
   await assert.rejects(() => validateDockerProjectRoot(link), /symlink/);
   await assert.rejects(() => validateDockerProjectRoot(join(root, "missing")), /ENOENT/);
+  await rm(root, { recursive: true, force: true });
+});
+
+test("Docker project-root validation rejects nested symlink escapes but permits in-root links", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-root-"));
+  try {
+    await writeFile(join(root, "target.txt"), "fixture");
+    await symlink("target.txt", join(root, "safe-link"));
+    await validateDockerProjectRoot(root);
+    await rm(join(root, "safe-link"));
+    await symlink("/etc/passwd", join(root, "escape-link"));
+    await assert.rejects(() => validateDockerProjectRoot(root), /symlink escape/);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });
