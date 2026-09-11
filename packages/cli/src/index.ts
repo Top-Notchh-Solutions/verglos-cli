@@ -302,7 +302,7 @@ program
         process.exit(await executePolicyCheck(policyPath, opts.json, opts.quiet));
       }
       if (opts.watch) {
-        console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
+        if (!opts.quiet && !opts.json) console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
         await executeScan(scanOptions);
         const watcher = chokidar.watch(".", {
           ignored: [
@@ -316,7 +316,7 @@ program
           ignoreInitial: true,
         });
         watcher.on("change", async () => {
-          console.log(chalk.gray("\nFile changed, re-scanning..."));
+          if (!opts.quiet && !opts.json) console.log(chalk.gray("\nFile changed, re-scanning..."));
           await executeScan(scanOptions);
         });
         return;
