@@ -5,7 +5,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { authorizeAgentAction, mcpToolAuthority, putApprovalReceipt, reconcileMcpCapabilities, type ApprovalReceipt, type Finding } from "@verglos/shared";
+import { authorizeAgentAction, listMcpCapabilities, mcpToolAuthority, putApprovalReceipt, reconcileMcpCapabilities, type ApprovalReceipt, type Finding } from "@verglos/shared";
 import { checkBeforeWrite } from "./tools/check-before-write.js";
 import type {
   CheckBeforeWriteInput as ToolInput,
@@ -358,12 +358,17 @@ export function createVerglosMcpServer(): Server {
     },
   );
 
-  server.setRequestHandler(ListToolsRequestSchema, async () => ({
+  server.setRequestHandler(ListToolsRequestSchema, async () => {
     // Fail closed if the hand-authored MCP tool list drifts from shared capability truth.
-    tools: reconcileMcpCapabilities(TOOLS.map((tool) => tool.name)) && TOOLS.map((t) => ({
+    const capabilities = reconcileMcpCapabilities(TOOLS.map((tool) => tool.name));
+    return { tools: TOOLS.map((t) => {
+      const capability = capabilities.find((item) => item.tool === t.name);
+      if (!capability) throw new Error("MCP capability metadata is missing");
+      return {
       name: t.name,
       description: t.description,
       inputSchema: t.inputSchema,
+      _meta: { "verglos/capability": capability },
       annotations: (() => {
         const authority = mcpToolAuthority(t.name);
         return authority ? {
@@ -372,8 +377,9 @@ export function createVerglosMcpServer(): Server {
           openWorldHint: authority.sideEffect === "network" || authority.sideEffect === "hosted",
         } : undefined;
       })(),
-    })),
-  }));
+      };
+    }) };
+  });
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const name = request.params.name;
