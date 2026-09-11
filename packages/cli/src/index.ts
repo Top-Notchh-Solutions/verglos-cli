@@ -568,8 +568,10 @@ program
 program
   .command("login")
   .description("Authenticate via a browser device-code flow")
-  .action(async () => {
-    const code = await executeLogin();
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
+    const code = await executeLogin(opts);
     if (code !== 0) process.exit(code);
   });
 

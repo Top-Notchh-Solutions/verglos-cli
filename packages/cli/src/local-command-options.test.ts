@@ -33,6 +33,8 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /command\("explain \[rule\]"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
   assert.match(source, /command\("explain \[rule\]"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   assert.match(source, /command\("activate <licenseKey>"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("login"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("login"\)[\s\S]*?\.option\("--quiet", "Suppress output"\)/);
   assert.match(source, /command\("whoami"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
   assert.match(source, /command\("badge"\)[\s\S]*?\.option\("--quiet", "Suppress output"\)/);
   assert.match(source, /command\("hook"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
