@@ -99,6 +99,7 @@ jobs:
               exit 1
             fi
           done < <(find "$AUDIT_DIR" -type f -name '*.tgz' -print)
+          node scripts/check-packed-manifests.mjs "$AUDIT_DIR"
 
       - name: Prepare release checksums
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
