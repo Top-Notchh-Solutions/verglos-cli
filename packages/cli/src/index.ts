@@ -492,12 +492,16 @@ program
   .option("--sandbox <adapter>", "Sandbox adapter: auto, node-vm, docker, firecracker")
   .option("--dry-run", "Parse options without running sandbox verification")
   .option("--finding <id>", "Verify one finding ID from a Verglos report")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
   .action(
     async (opts: {
       severity?: string;
       sandbox?: string;
       dryRun?: boolean;
       finding?: string;
+      json?: boolean;
+      quiet?: boolean;
     }) => {
       const code = await executeHunt({
         ...opts,
