@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import { mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { test } from "node:test";
 import { runScan } from "./index.js";
 
@@ -36,4 +39,17 @@ test("scan progress reports bounded lifecycle events without content", async () 
     { phase: "detector", status: "started", detector: "secrets" }, { phase: "detector", status: "completed", detector: "secrets" },
     { phase: "provenance", status: "skipped" },
   ]);
+});
+
+test("ordinary scans never execute target package scripts", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-no-exec-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ name: "fixture", scripts: { prepare: "node write-marker.js" } }));
+    await writeFile(join(root, "write-marker.js"), `require("node:fs").writeFileSync(${JSON.stringify(join(root, "executed.txt"))}, "executed")`);
+    await writeFile(join(root, "app.ts"), "export const safe = true;\n");
+    await runScan({ projectRoot: root, detectors: ["secrets"], noProvenance: true });
+    assert.deepEqual(await readdir(root), ["app.ts", "package.json", "write-marker.js"]);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
 });
