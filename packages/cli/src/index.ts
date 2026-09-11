@@ -650,8 +650,10 @@ program
 program
   .command("whoami")
   .description("Show current sign-in, plan, renewal, and machine")
-  .action(async () => {
-    const code = await executeWhoami();
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
+    const code = await executeWhoami(opts);
     if (code !== 0) process.exit(code);
   });
 

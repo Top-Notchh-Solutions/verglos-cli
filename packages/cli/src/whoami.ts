@@ -46,10 +46,20 @@ function formatDate(iso: string | null): string {
   });
 }
 
-export async function executeWhoami(): Promise<number> {
+export interface WhoamiOptions {
+  json?: boolean;
+  quiet?: boolean;
+}
+
+export async function executeWhoami(options: WhoamiOptions = {}): Promise<number> {
   const creds = await loadCredentials();
 
   if (!creds.licenseKey) {
+    if (options.json) {
+      console.log(JSON.stringify({ status: "ok", signedIn: false, plan: "free" }));
+      return 0;
+    }
+    if (options.quiet) return 0;
     console.log(`  ${chalk.bold("You:")}      not signed in`);
     console.log(`  ${chalk.bold("Plan:")}     ${chalk.gray("FREE")}`);
     console.log("");
@@ -64,10 +74,23 @@ export async function executeWhoami(): Promise<number> {
 
   if (!status.ok) {
     // Offline / server error / bad key. Fall back to cached values.
+    const cachedPlan = normalizeTier(creds.plan);
+    if (options.json) {
+      console.log(JSON.stringify({
+        status: status.reason === "network" ? "offline" : "error",
+        signedIn: true,
+        plan: cachedPlan,
+        license: maskKey(creds.licenseKey),
+        ...(creds.email ? { email: creds.email } : {}),
+        ...(creds.planExpiresAt ? { expiresAt: creds.planExpiresAt } : {}),
+        reason: status.reason,
+      }));
+      return status.reason === "invalid_token" || status.reason === "license_not_found" ? 1 : 0;
+    }
+    if (options.quiet) return status.reason === "invalid_token" || status.reason === "license_not_found" ? 1 : 0;
     console.log(
       `  ${chalk.bold("You:")}      ${creds.email ?? chalk.gray("(unknown — server unreachable)")}`,
     );
-    const cachedPlan = normalizeTier(creds.plan);
     console.log(`  ${chalk.bold("Plan:")}     ${chalk.gray(cachedPlan.toUpperCase())} ${chalk.gray("(cached)")}`);
     console.log(`  ${chalk.bold("License:")}  ${maskKey(creds.licenseKey)}`);
     if (creds.planExpiresAt) {
@@ -117,6 +140,21 @@ export async function executeWhoami(): Promise<number> {
         : chalk.gray(planTag);
 
   const days = daysUntil(status.expiresAt);
+
+  if (options.json) {
+    console.log(JSON.stringify({
+      status: status.active ? "ok" : "inactive",
+      signedIn: true,
+      email: status.email,
+      plan: canonicalPlan,
+      license: maskKey(status.licenseKey),
+      expiresAt: status.expiresAt,
+      machine: thisMachine,
+      machines: status.machines,
+    }));
+    return status.active ? 0 : 1;
+  }
+  if (options.quiet) return status.active ? 0 : 1;
 
   console.log(`  ${chalk.bold("You:")}      ${status.email ?? "(no email on file)"}`);
   console.log(
