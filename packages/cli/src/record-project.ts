@@ -18,7 +18,7 @@ export async function executeRecordProject(storeRoot: string, manifestPath: stri
     return 0;
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to project record.";
-    if (json) console.log(JSON.stringify({ status: "error", code: "RECORD_PROJECT_INPUT", message }));
+    if (json) console.log(JSON.stringify({ status: "error", code: "RECORD_PROJECT_INPUT", message: "record projection failed" }));
     else if (!quiet) console.error(`[RECORD_PROJECT_INPUT] ${message}`);
     return 78;
   }

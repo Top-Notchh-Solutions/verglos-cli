@@ -28,7 +28,7 @@ export async function executeRecordHeader(storeRoot: string, manifestPath: strin
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to project record header";
     if (!quiet) {
-      if (json) console.log(JSON.stringify({ status: "error", code: "RECORD_HEADER_INPUT", message }));
+      if (json) console.log(JSON.stringify({ status: "error", code: "RECORD_HEADER_INPUT", message: "record header projection failed" }));
       else console.error(`[RECORD_HEADER_INPUT] ${message}`);
     }
     return 78;

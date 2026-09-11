@@ -44,7 +44,7 @@ export async function executeRecordVerify(root: string, manifestPath: string, js
     return 0;
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to verify record.";
-    if (json) console.log(JSON.stringify({ status: "error", code: "RECORD_VERIFY_INPUT", message })); else console.error(`[RECORD_VERIFY_INPUT] ${message}`);
+    if (json) console.log(JSON.stringify({ status: "error", code: "RECORD_VERIFY_INPUT", message: "record verification failed" })); else console.error(`[RECORD_VERIFY_INPUT] ${message}`);
     return 78;
   }
 }
