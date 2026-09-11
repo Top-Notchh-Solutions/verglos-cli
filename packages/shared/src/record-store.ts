@@ -58,6 +58,12 @@ export async function putRecordMembers(root: string, members: readonly { readonl
     if (paths.has(member.path)) throw new Error(`record member path is duplicated: ${member.path}`);
     paths.add(member.path);
   }
+  const digests = new Set<string>();
+  for (const member of members) {
+    const memberDigest = digest(member.bytes);
+    if (digests.has(memberDigest)) throw new Error(`record member digest is duplicated: ${member.path}`);
+    digests.add(memberDigest);
+  }
   const results = [];
   for (const member of [...members].sort((left, right) => left.path.localeCompare(right.path))) results.push(await putRecordMember(root, member.path, member.bytes));
   return Object.freeze(results);

@@ -33,8 +33,9 @@ test("record store batch publishing rejects duplicate paths and enforces count b
   try {
     const bytes = new TextEncoder().encode("{}");
     await assert.rejects(() => putRecordMembers(root, [{ path: "a.json", bytes }, { path: "a.json", bytes }]), /path is duplicated/);
+    await assert.rejects(() => putRecordMembers(root, [{ path: "a.json", bytes }, { path: "b.json", bytes }]), /digest is duplicated/);
     await assert.rejects(() => putRecordMembers(root, [{ path: "a.json", bytes }], 0), /count limit is invalid/);
-    const result = await putRecordMembers(root, [{ path: "b.json", bytes }, { path: "a.json", bytes }]);
+    const result = await putRecordMembers(root, [{ path: "b.json", bytes: new TextEncoder().encode("{\"b\":true}") }, { path: "a.json", bytes }]);
     assert.deepEqual(result.map((entry) => entry.path), ["a.json", "b.json"]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
