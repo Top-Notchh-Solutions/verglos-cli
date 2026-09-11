@@ -40,7 +40,7 @@ export function buildDockerInvocation(input: DockerInvocationInput): readonly st
   if (!Number.isFinite(cpus) || cpus <= 0 || cpus > 16) throw new Error("Docker Hunt CPU quota is out of bounds");
   if (input.command.length === 0 || input.command.length > 32 || input.command.some((part) => !part || part.length > 4096 || /[\u0000-\u001f\u007f]/.test(part))) throw new Error("Docker Hunt command is invalid");
   return Object.freeze([
-    "run", "--rm", "--init", "--stop-timeout", "1", "--network", "none", "--read-only",
+    "run", "--rm", "--init", "--stop-timeout", "1", "--network", "none", "--pid", "private", "--ipc", "private", "--uts", "private", "--read-only",
     "--tmpfs", "/tmp:rw,noexec,nosuid,nodev",
     "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
     "--user", "65532:65532", "--workdir", "/workspace",
