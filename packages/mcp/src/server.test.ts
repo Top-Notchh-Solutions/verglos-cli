@@ -2,6 +2,9 @@ import assert from "node:assert/strict";
 import { mkdtemp, rm } from "node:fs/promises";
 import { test } from "node:test";
 import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
+import { createVerglosMcpServer } from "./server.js";
 import { dispatchTool, jsonResponse, listAdvertisedTools } from "./server.js";
 
 function responseText(result: Awaited<ReturnType<typeof dispatchTool>>): Record<string, unknown> {
@@ -62,6 +65,24 @@ test("MCP dispatch enforces the explicitly supplied entitlement plan", async () 
   assert.equal(team.code, "MCP_APPROVAL_REQUIRED");
   const enterprise = responseText(await dispatchTool("verglos_attest", {}, { plan: "enterprise" }));
   assert.equal(enterprise.code, "MCP_APPROVAL_REQUIRED");
+});
+
+test("MCP SDK interoperability preserves discovery and entitlement errors", async () => {
+  const server = createVerglosMcpServer({ plan: "free" });
+  const client = new Client({ name: "verglos-test-client", version: "1.0.0" }, { capabilities: {} });
+  const [clientTransport, serverTransport] = await InMemoryTransport.createLinkedPair();
+  await Promise.all([server.connect(serverTransport), client.connect(clientTransport)]);
+  try {
+    const discovered = await client.listTools();
+    assert.equal(discovered.tools.length, 9);
+    assert.ok(discovered.tools.every((tool) => tool.name.startsWith("verglos_")));
+    const denied = await client.callTool({ name: "verglos_hunt_report", arguments: {} }) as { content?: Array<{ type?: string; text?: string }> };
+    const payload = JSON.parse(String(denied.content?.[0]?.type === "text" ? denied.content[0].text : "{}")) as { code?: string };
+    assert.equal(payload.code, "MCP_ENTITLEMENT_REQUIRED");
+  } finally {
+    await client.close();
+    await server.close();
+  }
 });
 
 test("MCP read-only tools keep strict unknown-field validation", async () => {
