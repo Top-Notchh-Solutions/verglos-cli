@@ -110,6 +110,10 @@ jobs:
           RELEASE_DIR=$(mktemp -d)
           echo "RELEASE_DIR=$RELEASE_DIR" >> "$GITHUB_ENV"
           node scripts/pack-public-packages.mjs "$RELEASE_DIR"
+          node scripts/license-inventory.mjs --check > "$RELEASE_DIR/dependency-license-inventory.json"
+          node scripts/generate-third-party-notices.mjs > "$RELEASE_DIR/THIRD_PARTY_NOTICES"
+          node scripts/generate-sbom.mjs > "$RELEASE_DIR/SBOM.cdx.json"
+          node scripts/generate-spdx.mjs > "$RELEASE_DIR/SBOM.spdx.json"
           (cd "$RELEASE_DIR" && sha256sum ./*.tgz > SHA256SUMS)
 
       - name: Verify release checksums
@@ -124,6 +128,10 @@ jobs:
           path: |
             ${{ env.RELEASE_DIR }}/*.tgz
             ${{ env.RELEASE_DIR }}/SHA256SUMS
+            ${{ env.RELEASE_DIR }}/THIRD_PARTY_NOTICES
+            ${{ env.RELEASE_DIR }}/SBOM.cdx.json
+            ${{ env.RELEASE_DIR }}/SBOM.spdx.json
+            ${{ env.RELEASE_DIR }}/dependency-license-inventory.json
           if-no-files-found: error
           retention-days: 14
 
