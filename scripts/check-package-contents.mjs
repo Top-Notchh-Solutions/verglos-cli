@@ -1,5 +1,5 @@
 import { lstat, readFile, readdir } from "node:fs/promises";
-import { join, relative } from "node:path";
+import { isAbsolute, join, relative, resolve, sep } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname;
 const packageDirs = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"].map((name) => join(root, "packages", name));
@@ -28,7 +28,15 @@ for (const packageDir of packageDirs) {
   }
   for (const hook of ["preinstall", "install", "postinstall"]) if (packageJson.scripts?.[hook]) failures.push(`${packageJson.name}: install-time hook '${hook}' is not allowed in public packages`);
   for (const included of files) {
-    const includedPath = join(packageDir, included);
+    if (typeof included !== "string" || included.length === 0 || isAbsolute(included)) {
+      failures.push(`${packageJson.name}: package path must be a non-empty relative string: ${String(included)}`);
+      continue;
+    }
+    const includedPath = resolve(packageDir, included);
+    if (includedPath !== packageDir && !includedPath.startsWith(`${resolve(packageDir)}${sep}`)) {
+      failures.push(`${packageJson.name}: package path escapes package root: ${included}`);
+      continue;
+    }
     try {
       const entry = await lstat(includedPath);
       if (entry.isSymbolicLink()) throw new Error(`symlink packaged path ${included}`);
