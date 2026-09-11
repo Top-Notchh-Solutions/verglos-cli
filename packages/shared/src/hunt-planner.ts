@@ -1,5 +1,5 @@
 import { parseHuntRecipe, type HuntRecipe } from "./hunt-recipe.js";
-import { isTrustedHuntRecipe } from "./hunt-recipe-trust.js";
+import { isTrustedHuntRecipe, type HuntRecipeTrustPolicy } from "./hunt-recipe-trust.js";
 
 export interface HuntPlan {
   readonly supported: boolean;
@@ -13,12 +13,16 @@ export interface HuntPlan {
   readonly isolation: HuntRecipe["isolation"];
   readonly limits: HuntRecipe["limits"];
   readonly cleanup: HuntRecipe["cleanup"];
-  readonly network: HuntRecipe["network"];
+  readonly network: Readonly<{
+    readonly mode: HuntRecipe["network"]["mode"];
+    readonly destinations: readonly string[];
+    readonly reason: string;
+  }>;
   readonly redaction: HuntRecipe["redaction"];
   readonly signature: HuntRecipe["signature"];
   readonly executes: false;
 }
-export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; readonly subjectId: string }, options: { readonly trust?: { readonly signers: readonly string[]; readonly revokedRecipeIds?: readonly string[] } } = {}): HuntPlan {
+export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; readonly subjectId: string }, options: { readonly trust?: HuntRecipeTrustPolicy } = {}): HuntPlan {
   const parsed = parseHuntRecipe(recipe);
   const matches = parsed.ruleId === input.ruleId && parsed.targetSubjectId === input.subjectId;
   const trusted = options.trust ? isTrustedHuntRecipe(parsed, options.trust) : undefined;
