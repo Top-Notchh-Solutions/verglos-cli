@@ -373,7 +373,12 @@ program
   .option("--json", "Emit machine-readable JSON")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
   .action(async (opts: { strict?: boolean; quiet?: boolean; json?: boolean; config?: string }) => {
-    await executeScore(undefined, opts.strict, opts.quiet, opts.config, opts.json);
+    try {
+      await executeScore(undefined, opts.strict, opts.quiet, opts.config, opts.json);
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "SCORE_INPUT", error instanceof Error ? error.message : "score generation failed", "score generation failed");
+      process.exit(2);
+    }
   });
 
 program
