@@ -1,5 +1,5 @@
 import { lstat, readFile, writeFile } from "node:fs/promises";
-import { authorizeAgentAction, canonicalizeJson, parseReleaseRecordManifestJson, signReleaseRecordManifest, type ApprovalReceipt } from "@verglos/shared";
+import { authorizeAgentAction, canonicalizeJson, parseReleaseRecordManifestJson, putApprovalReceipt, signReleaseRecordManifest, type ApprovalReceipt } from "@verglos/shared";
 
 const MAX_BYTES = 8 * 1024 * 1024;
 const MAX_KEY_BYTES = 16 * 1024;
@@ -20,6 +20,7 @@ export async function executeRecordSign(
   quiet = false,
   approvalReceipt?: ApprovalReceipt,
   now = new Date().toISOString(),
+  approvalStoreRoot?: string,
 ): Promise<number> {
   try {
     if (!approve) throw new Error("record signing requires explicit approval (--approve)");
@@ -29,6 +30,7 @@ export async function executeRecordSign(
     if (approvalReceipt.target !== `manifest:${manifestPath}`) throw new Error("approval receipt scope does not match the signing manifest");
     if (!approvalReceipt.files.includes(manifestPath)) throw new Error("approval receipt does not cover the signing manifest");
     if (approvalReceipt.network.length > 0) throw new Error("record signing approval must not declare network scope");
+    if (approvalStoreRoot) await putApprovalReceipt(approvalStoreRoot, approvalReceipt);
     const manifest = parseReleaseRecordManifestJson(await boundedFile(manifestPath, MAX_BYTES, "record manifest"));
     const privateKey = (await boundedFile(keyPath, MAX_KEY_BYTES, "record signing key")).toString("utf8");
     const envelope = signReleaseRecordManifest(manifest, privateKey, { id: signerId, issuer }, new Date().toISOString());

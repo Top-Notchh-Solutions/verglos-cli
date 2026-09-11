@@ -187,7 +187,7 @@ record.command("sign <manifestPath> <signaturePath>")
         process.exit(78);
       }
     }
-    process.exit(await executeRecordSign(manifestPath, signaturePath, opts.key, opts.signer, opts.issuer, opts.approve, opts.json, opts.quiet, approvalReceipt));
+    process.exit(await executeRecordSign(manifestPath, signaturePath, opts.key, opts.signer, opts.issuer, opts.approve, opts.json, opts.quiet, approvalReceipt, new Date().toISOString(), process.env.VERGLOS_APPROVAL_STORE));
   });
 record.command("project <storeRoot> <manifestPath>")
   .description("Project a verified record into safe public fields without uploading")
