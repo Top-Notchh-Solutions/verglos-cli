@@ -20,7 +20,11 @@ import { defaultCapabilitiesFor, normalizeTier, type Tier } from "./tier-default
  *     server, which ignores it unless the caller is on founder.
  */
 
-const CACHE_DIR = join(homedir(), ".verglos");
+// Respect an explicitly configured home on every platform. Node's
+// homedir() does not consistently follow HOME on Windows, while CI and
+// callers use HOME to isolate credentials and entitlement caches.
+const configuredHome = () => process.env.HOME || process.env.USERPROFILE || homedir();
+const CACHE_DIR = join(configuredHome(), ".verglos");
 const CACHE_FILE = join(CACHE_DIR, "capabilities.json");
 const REQUEST_TIMEOUT_MS = 5000;
 const MAX_CAPABILITIES_CACHE_BYTES = 1 * 1024 * 1024;
