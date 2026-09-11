@@ -7,4 +7,9 @@ test("Hunt verdict classifier preserves infrastructure and policy outcomes", () 
   assert.equal(classifyHuntOutcome({ policyAllowed: true, supported: false }), "not-supported");
   assert.equal(classifyHuntOutcome({ policyAllowed: true, supported: true, environmentError: true }), "environment-error");
   assert.equal(classifyHuntOutcome({ policyAllowed: true, supported: true, assertionMatched: false }), "not-reproduced");
+  assert.equal(classifyHuntOutcome({ policyAllowed: true, supported: true, assertionMatched: true }), "confirmed");
+  assert.equal(classifyHuntOutcome({ policyAllowed: true, supported: true }), "inconclusive");
+  assert.equal(classifyHuntOutcome({ policyAllowed: true, supported: true, timedOut: true, assertionMatched: true }), "inconclusive");
+  assert.equal(classifyHuntOutcome({ policyAllowed: true, supported: true, environmentError: true, timedOut: true }), "environment-error");
+  assert.equal(classifyHuntOutcome({ policyAllowed: false, supported: true, environmentError: true }), "policy-denied");
 });
