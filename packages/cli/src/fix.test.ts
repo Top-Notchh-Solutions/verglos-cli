@@ -205,9 +205,9 @@ test("fix CLI approved JSON mutation uses the exact receipt and reports the writ
     await writeFile(receiptPath, JSON.stringify(receipt));
     const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", receiptPath, "--rescan"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
     assert.equal(result.exitCode, 0, `${result.stdout}\n${result.stderr}`);
-    const output = JSON.parse(result.stdout) as { fixed: number; planned: readonly { action: string }[] };
+    const output = JSON.parse(result.stdout) as { fixed: number; rescanned: boolean; planned: readonly { action: string }[] };
     assert.equal(output.fixed, 1);
-    assert.equal((output as { rescanned: boolean }).rescanned, true);
+    assert.equal(output.rescanned, true);
     assert.equal(output.planned[0]?.action, "patch");
     assert.equal(result.stderr, "");
     assert.match(await readFile(join(root, "next.config.js"), "utf8"), /Content-Security-Policy/);
