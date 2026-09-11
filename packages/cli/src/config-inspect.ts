@@ -12,7 +12,7 @@ export async function executeConfigInspect(path: string, json = false, quiet = f
     let value: unknown;
     try { value = JSON.parse(bytes.toString("utf8")); } catch { throw new Error("Verglos config must be valid JSON"); }
     const inspection = inspectConfigMigration(value);
-    if (json) { if (!quiet) console.log(JSON.stringify(inspection)); }
+    if (json) console.log(JSON.stringify(inspection));
     else if (!quiet) {
       console.log(`Config status: ${inspection.status}`);
       for (const warning of inspection.warnings) console.log(`- ${warning.id}: ${warning.message}`);

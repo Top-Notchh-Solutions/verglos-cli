@@ -15,7 +15,7 @@ export async function executeRecordHeader(storeRoot: string, manifestPath: strin
     if (!decisionBytes) throw new Error("record header is missing the verified release-decision member");
     const signerStatus = manifest.members.some((member) => member.kind === "signature" && member.redaction !== "omitted") ? "unknown" : "unsigned";
     const header = projectReleaseHeader(parseReleaseDecisionJson(decisionBytes), signerStatus);
-    if (json) { if (!quiet) console.log(JSON.stringify(header)); }
+    if (json) console.log(JSON.stringify(header));
     else if (!quiet) {
       console.log(`${header.decision} ${header.subjectId}`);
       console.log(`Policy: ${header.policy.id}@${header.policy.version} (${header.policy.digest})`);
