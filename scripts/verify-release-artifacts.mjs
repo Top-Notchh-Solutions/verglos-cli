@@ -1,11 +1,13 @@
 import { createHash } from "node:crypto";
-import { readFile, readdir } from "node:fs/promises";
+import { lstat, readFile, readdir } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
 
 const root = resolve(process.argv[2] ?? "");
 if (!process.argv[2]) throw new Error("release artifact directory is required");
 
 const checksumsPath = join(root, "SHA256SUMS");
+if (!(await lstat(root)).isDirectory()) throw new Error("release artifact root must be a directory");
+if (!(await lstat(checksumsPath)).isFile()) throw new Error("SHA256SUMS must be a regular file");
 const checksums = await readFile(checksumsPath, "utf8");
 const expected = new Map();
 for (const line of checksums.split(/\r?\n/).filter(Boolean)) {
@@ -15,6 +17,9 @@ for (const line of checksums.split(/\r?\n/).filter(Boolean)) {
 }
 const archives = (await readdir(root)).filter((name) => name.endsWith(".tgz")).sort();
 if (archives.length === 0) throw new Error("release artifact directory contains no npm archives");
+for (const name of archives) {
+  if (!(await lstat(join(root, name))).isFile()) throw new Error(`release artifact is not a regular file: ${name}`);
+}
 if (expected.size !== archives.length || archives.some((name) => !expected.has(name))) {
   throw new Error("SHA256SUMS does not describe exactly the archived release artifacts");
 }
