@@ -10,7 +10,8 @@
     "licenses:inventory": "node scripts/license-inventory.mjs --check",
     "licenses:notices": "node scripts/generate-third-party-notices.mjs --write",
     "sbom:cyclonedx": "node scripts/generate-sbom.mjs --write",
-    "sbom:spdx": "node scripts/generate-spdx.mjs --write"
+    "sbom:spdx": "node scripts/generate-spdx.mjs --write",
+    "pack:public": "node scripts/pack-public-packages.mjs .artifacts/public-packages"
   },
   "devDependencies": {
     "turbo": "^2.5.4",
