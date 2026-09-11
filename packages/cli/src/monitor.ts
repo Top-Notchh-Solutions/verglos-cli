@@ -269,14 +269,25 @@ interface MonitorStatusEntry {
   alertsFiredLast7d?: number;
 }
 
-export async function executeMonitorStatus(): Promise<number> {
+export interface MonitorStatusOptions {
+  json?: boolean;
+  quiet?: boolean;
+}
+
+export async function executeMonitorStatus(options: MonitorStatusOptions = {}): Promise<number> {
   const result = await authorizedFetch("/api/v1/monitor/registrations", { method: "GET" });
   if (!result.ok) {
-    explainFetchFailure("status", result.reason, result.status);
+    if (options.json) console.log(JSON.stringify({ status: "error", reason: result.reason, ...(result.status === undefined ? {} : { httpStatus: result.status }) }));
+    else if (!options.quiet) explainFetchFailure("status", result.reason, result.status);
     return result.reason === "not_implemented" ? 0 : 1;
   }
   const body = result.json as { registrations?: MonitorStatusEntry[] };
   const entries = body.registrations ?? [];
+  if (options.json) {
+    console.log(JSON.stringify({ status: "ok", registrations: entries }));
+    return 0;
+  }
+  if (options.quiet) return 0;
   if (entries.length === 0) {
     console.log(chalk.gray("No projects registered for continuous monitoring."));
     console.log(chalk.gray("  Run `verglos monitor register --email you@example.com` from a project directory."));

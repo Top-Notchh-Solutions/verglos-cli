@@ -708,14 +708,16 @@ monitor
 monitor
   .command("status")
   .description("List projects registered for continuous CVE monitoring [Pro]")
-  .action(async () => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability(
       "monitor_register",
       "Continuous CVE monitoring",
     );
     if (!ok) process.exit(1);
-    const code = await executeMonitorStatus();
+    const code = await executeMonitorStatus(opts);
     if (code !== 0) process.exit(code);
   });
 

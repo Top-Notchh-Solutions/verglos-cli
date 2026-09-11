@@ -128,6 +128,19 @@ test("monitor status: reports 'not yet shipped' on server 501 without failing th
   }
 });
 
+test("monitor status: emits bounded JSON without human prose", async () => {
+  seedCredentials("vg_test_key");
+  mockFetch(() => new Response(JSON.stringify({ registrations: [{ projectFingerprint: "a".repeat(64), projectLabel: "api" }] }), { status: 200 }));
+  const logs: string[] = [];
+  const origLog = console.log;
+  console.log = (msg?: unknown) => { logs.push(String(msg)); };
+  try {
+    const code = await mod.executeMonitorStatus({ json: true });
+    assert.equal(code, 0);
+    assert.deepEqual(JSON.parse(logs[0]!), { status: "ok", registrations: [{ projectFingerprint: "a".repeat(64), projectLabel: "api" }] });
+  } finally { console.log = origLog; }
+});
+
 // ── unregister ────────────────────────────────────────────────────────────
 
 test("monitor unregister: sends DELETE to /api/v1/monitor/registration/:fp", async () => {
