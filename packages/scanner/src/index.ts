@@ -50,6 +50,22 @@ const ALL_DETECTORS: Detector[] = [
 ];
 
 const MAX_CONFIG_BYTES = 1 * 1024 * 1024;
+const DEFAULT_DETECTOR_CONCURRENCY = 2;
+
+async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: number, run: (detector: Detector) => Promise<readonly T[]>, signal?: AbortSignal): Promise<T[]> {
+  const results: T[][] = Array.from({ length: items.length }, () => []);
+  let next = 0;
+  const worker = async () => {
+    while (true) {
+      if (signal?.aborted) throw new Error("scan cancelled");
+      const index = next++;
+      if (index >= items.length) return;
+      results[index] = [...await run(items[index]!)];
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, () => worker()));
+  return results.flat();
+}
 
 async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
   try {
@@ -91,6 +107,7 @@ export async function loadConfig(projectRoot: string, explicitConfigPath?: strin
 }
 
 export async function runScan(options: ScanOptions): Promise<ScanResult> {
+  if (options.signal?.aborted) throw new Error("scan cancelled");
   const start = Date.now();
   const config = await loadConfig(options.projectRoot, options.configPath);
   const { type: projectType } = await detectProjectType(options.projectRoot);
@@ -117,13 +134,10 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   const detectorContext = {
     verifySecrets: options.verifySecrets,
   };
-  const results = await Promise.all(
-    activeDetectors.map((d) =>
-      d.run(files, options.projectRoot, detectorContext),
-    ),
-  );
-
-  const rawFindings = results.flat();
+  const detectorConcurrency = options.detectorConcurrency ?? DEFAULT_DETECTOR_CONCURRENCY;
+  if (!Number.isInteger(detectorConcurrency) || detectorConcurrency < 1 || detectorConcurrency > 8) throw new Error("detector concurrency must be between 1 and 8");
+  const rawFindings = await runDetectorsBounded(activeDetectors, detectorConcurrency, (detector) => detector.run(files, options.projectRoot, detectorContext), options.signal);
+  if (options.signal?.aborted) throw new Error("scan cancelled");
   const minConfidence = options.minConfidence ?? DEFAULT_MIN_CONFIDENCE;
   const filteredFindings = rawFindings.filter(
     (f) => toConfidenceNumeric(f.confidence) >= minConfidence,
@@ -161,6 +175,7 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   const provenance = options.noProvenance
     ? undefined
     : await computeProvenance(files, options.projectRoot, allFindings);
+  if (options.signal?.aborted) throw new Error("scan cancelled");
 
   return {
     projectRoot: options.projectRoot,

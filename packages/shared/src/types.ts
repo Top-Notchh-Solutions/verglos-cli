@@ -259,6 +259,10 @@ export interface ScanOptions {
    * scanning must never touch the network on the free path.
    */
   verifySecrets?: boolean;
+  /** Abort an in-progress scan between bounded detector/provenance stages. */
+  signal?: AbortSignal;
+  /** Maximum concurrent detector executions (defaults to a bounded value). */
+  detectorConcurrency?: number;
 }
 
 export const DEFAULT_MIN_CONFIDENCE = 0.7;
