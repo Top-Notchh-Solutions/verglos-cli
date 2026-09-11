@@ -12,32 +12,6 @@
   "components": [
     {
       "type": "library",
-      "bom-ref": "pkg:npm/@esbuild/darwin-arm64@0.28.1",
-      "name": "@esbuild/darwin-arm64",
-      "version": "0.28.1",
-      "scope": "optional",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "externalReferences": [
-        {
-          "type": "distribution",
-          "url": "https://github.com/evanw/esbuild#readme"
-        }
-      ],
-      "properties": [
-        {
-          "name": "verglos:redistribution-class",
-          "value": "permissive"
-        }
-      ]
-    },
-    {
-      "type": "library",
       "bom-ref": "pkg:npm/@hono/node-server@1.19.14",
       "name": "@hono/node-server",
       "version": "1.19.14",
@@ -157,32 +131,6 @@
         {
           "type": "distribution",
           "url": "https://github.com/nodelib/nodelib/tree/master#readme"
-        }
-      ],
-      "properties": [
-        {
-          "name": "verglos:redistribution-class",
-          "value": "permissive"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "bom-ref": "pkg:npm/@turbo/darwin-arm64@2.10.6",
-      "name": "@turbo/darwin-arm64",
-      "version": "2.10.6",
-      "scope": "optional",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "externalReferences": [
-        {
-          "type": "distribution",
-          "url": "https://turborepo.dev"
         }
       ],
       "properties": [
@@ -1483,32 +1431,6 @@
         {
           "type": "distribution",
           "url": "https://github.com/jshttp/fresh#readme"
-        }
-      ],
-      "properties": [
-        {
-          "name": "verglos:redistribution-class",
-          "value": "permissive"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "bom-ref": "pkg:npm/fsevents@2.3.3",
-      "name": "fsevents",
-      "version": "2.3.3",
-      "scope": "optional",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "externalReferences": [
-        {
-          "type": "distribution",
-          "url": "https://github.com/fsevents/fsevents"
         }
       ],
       "properties": [

@@ -14,6 +14,14 @@ for (const [license, packages] of Object.entries(grouped ?? {})) {
     if (!item || typeof item !== "object" || typeof item.name !== "string") continue;
     const versions = Array.isArray(item.versions) ? item.versions.filter((v) => typeof v === "string").sort() : [];
     const packagePath = typeof item.paths?.[0] === "string" ? item.paths[0] : undefined;
+    if (packagePath) {
+      try {
+        const manifest = JSON.parse(await readFile(join(packagePath, "package.json"), "utf8"));
+        if (Array.isArray(manifest.os) || Array.isArray(manifest.cpu)) continue;
+      } catch {
+        // Missing package metadata remains visible through the license entry.
+      }
+    }
     let text = "";
     if (packagePath) {
       for (const candidate of ["LICENSE", "LICENSE.md", "LICENSE.txt", "NOTICE", "NOTICE.txt"]) {
