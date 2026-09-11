@@ -24,7 +24,9 @@ export interface DockerRunResult {
 
 /** Execute a previously validated Docker argv with bounded host supervision. */
 export async function runDockerInvocation(args: readonly string[], options: DockerRunOptions): Promise<DockerRunResult> {
-  if (!Array.isArray(args) || args.length === 0) throw new Error("Docker Hunt invocation must not be empty");
+  if (!Array.isArray(args) || args.length === 0 || args.length > 128 || args.some((arg) => typeof arg !== "string" || arg.length === 0 || arg.length > 4096 || /[\u0000-\u001f\u007f]/.test(arg))) {
+    throw new Error("Docker Hunt invocation arguments are invalid");
+  }
   if (!Number.isInteger(options.timeoutMs) || options.timeoutMs <= 0 || options.timeoutMs > 600_000) throw new Error("Docker Hunt timeout is out of bounds");
   if (!Number.isInteger(options.maxOutputBytes) || options.maxOutputBytes <= 0 || options.maxOutputBytes > 10_000_000) throw new Error("Docker Hunt output limit is out of bounds");
   const run = options.run ?? (async (argv, runOptions) => {

@@ -35,6 +35,11 @@ test("Docker runner rejects unsafe bounds before invoking the process", async ()
   await assert.rejects(() => runDockerInvocation(["run"], { timeoutMs: 1, maxOutputBytes: 10_000_001 }), /output/);
 });
 
+test("Docker runner rejects malformed argv before invoking the process", async () => {
+  await assert.rejects(() => runDockerInvocation(["run", "x\u0000y"], { timeoutMs: 1000, maxOutputBytes: 1000 }), /arguments/);
+  await assert.rejects(() => runDockerInvocation(["run", undefined as never], { timeoutMs: 1000, maxOutputBytes: 1000 }), /arguments/);
+});
+
 test("Docker runner keeps returned UTF-8 output within the byte cap", async () => {
   const result = await runDockerInvocation(["run"], {
     timeoutMs: 1000,
