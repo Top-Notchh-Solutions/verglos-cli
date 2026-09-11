@@ -1,6 +1,6 @@
 import type { ScanResult } from "@verglos/shared";
 import { bindHuntExecution } from "@verglos/shared";
-import type { HuntOptions, HuntResult } from "./types.js";
+import type { HuntFindingOutcome, HuntOptions, HuntResult } from "./types.js";
 
 export * from "./types.js";
 export * from "./docker-adapter.js";
@@ -49,10 +49,11 @@ export async function runHunt(
         const before = Date.now();
         try {
           const outcome = await opts.adapter.execute({ finding, projectRoot, timeoutMs: remaining, binding });
-          if (outcome.findingId !== finding.id) {
+          const validated = validateAdapterOutcome(outcome);
+          if (!validated || validated.findingId !== finding.id) {
             outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: "Hunt adapter returned a mismatched finding identity", durationMs: Math.max(0, Date.now() - before) });
           } else {
-            outcomes.push({ ...outcome, finding, durationMs: Math.max(0, Date.now() - before) });
+            outcomes.push({ ...validated, finding, durationMs: Math.max(0, Date.now() - before) });
           }
         } catch (error) {
           outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: `Hunt adapter failed: ${error instanceof Error ? error.message : "unknown error"}`, durationMs: Math.max(0, Date.now() - before) });
@@ -80,4 +81,21 @@ export async function runHunt(
     completedAt: new Date().toISOString(),
     sandbox: opts.sandbox ?? "none",
   };
+}
+
+function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const outcome = value as Record<string, unknown>;
+  if (typeof outcome.findingId !== "string" || outcome.findingId.length === 0 || outcome.findingId.length > 512 || /[\u0000-\u001f\u007f]/.test(outcome.findingId)) return undefined;
+  if (outcome.verdict !== "true" && outcome.verdict !== "false" && outcome.verdict !== "not_attemptable") return undefined;
+  if (typeof outcome.reason !== "string" || outcome.reason.length === 0 || outcome.reason.length > 4096 || /[\u0000-\u001f\u007f]/.test(outcome.reason)) return undefined;
+  if (typeof outcome.durationMs !== "number" || !Number.isSafeInteger(outcome.durationMs) || outcome.durationMs < 0 || outcome.durationMs > 600_000) return undefined;
+  if (outcome.evidencePath !== undefined && (typeof outcome.evidencePath !== "string" || outcome.evidencePath.length > 4096 || /[\u0000-\u001f\u007f]/.test(outcome.evidencePath))) return undefined;
+  return {
+    findingId: outcome.findingId,
+    verdict: outcome.verdict,
+    reason: outcome.reason,
+    durationMs: outcome.durationMs,
+    ...(outcome.evidencePath === undefined ? {} : { evidencePath: outcome.evidencePath }),
+  } as HuntFindingOutcome;
 }

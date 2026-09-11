@@ -110,3 +110,26 @@ test("Hunt preserves the report finding instead of adapter-supplied mutable evid
   const result = await runHunt(report, { adapter, execution });
   assert.equal(result.outcomes[0]?.finding?.title, "critical");
 });
+
+test("Hunt rejects malformed adapter outcome fields", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { return { findingId: "critical-1", verdict: "unexpected", reason: "fixture", durationMs: 1 } as never; },
+    async cleanup() {},
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
+  assert.match(result.outcomes[0]?.reason ?? "", /mismatched finding/);
+});
+
+test("Hunt rejects unbounded adapter reasons and durations", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { return { findingId: "critical-1", verdict: "false" as const, reason: "x".repeat(4097), durationMs: -1 }; },
+    async cleanup() {},
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
+});
