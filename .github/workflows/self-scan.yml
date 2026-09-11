@@ -75,6 +75,20 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Qualify clean public package archives
+        run: |
+          node --test scripts/pack-public-packages.test.mjs
+          node scripts/pack-public-packages.mjs .artifacts/public-packages
+
+      - name: Upload public package evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-package-archives-${{ github.sha }}
+          path: .artifacts/public-packages/*.tgz
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Test
         run: pnpm test
 
