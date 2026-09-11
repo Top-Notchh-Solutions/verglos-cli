@@ -139,3 +139,14 @@ test("verifyEntitlement: expired token past 7-day grace fails", async () => {
   assert.equal(result.valid, false);
   assert.match(result.reason ?? "", /expired/);
 });
+
+test("verifyEntitlement: rejects structurally invalid claims after signature verification", async () => {
+  const kp = generateEntitlementKeyPair();
+  const token = signEntitlement({
+    claims: { ...makeClaims(), seats: -1 },
+    privateKey: privateKeyFromPem(kp.privateKeyPem),
+  });
+  const result = await verifyEntitlement(token, Date.now(), { pinnedKeys: [kp.publicKeyBase64Url] });
+  assert.equal(result.valid, false);
+  assert.match(result.reason ?? "", /invalid seats/);
+});
