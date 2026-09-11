@@ -14,9 +14,9 @@ function integrationTest(name: string, fn: () => Promise<void>): void {
   test(name, { skip: !enabled || !image || !imageDigest ? "set VERGLOS_HUNT_DOCKER_INTEGRATION=1 with a pinned test image and digest" : false }, fn);
 }
 
-async function runFixture(root: string, command: readonly string[]) {
-  const args = buildDockerInvocation({ projectRoot: root, image: image!, imageDigest: imageDigest!, command, timeoutMs: 10_000, memoryMb: 256, maxProcesses: 16, cpus: 1, diskMb: 128 });
-  return runDockerInvocation(args, { timeoutMs: 10_000, maxOutputBytes: 4_096, sensitivePaths: [root] });
+async function runFixture(root: string, command: readonly string[], timeoutMs = 10_000) {
+  const args = buildDockerInvocation({ projectRoot: root, image: image!, imageDigest: imageDigest!, command, timeoutMs, memoryMb: 256, maxProcesses: 16, cpus: 1, diskMb: 128 });
+  return runDockerInvocation(args, { timeoutMs, maxOutputBytes: 4_096, sensitivePaths: [root] });
 }
 
 integrationTest("Docker runtime keeps the probe non-root", async () => {
@@ -92,5 +92,14 @@ integrationTest("Docker runtime bounds captured output", async () => {
     assert.ok(result.status === "completed" || result.status === "failed");
     assert.ok(result.outputBytes <= 4_096);
     assert.ok(Buffer.byteLength(result.stdout, "utf8") + Buffer.byteLength(result.stderr, "utf8") <= 4_096);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+integrationTest("Docker runtime turns an over-time probe into an explicit timeout", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "sleep 30"], 500);
+    assert.equal(result.status, "timed-out");
+    assert.ok(result.exitCode === undefined || (result.exitCode >= 0 && result.exitCode <= 255));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
