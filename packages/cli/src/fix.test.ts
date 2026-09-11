@@ -1,6 +1,14 @@
 import { test } from "node:test";
+import { createApprovalReceipt } from "@verglos/shared";
 import assert from "node:assert/strict";
-import { NEXT_CONFIG_DECL, planHeaderFixes } from "./fix.js";
+import { NEXT_CONFIG_DECL, authorizeHeaderFix, planHeaderFixes } from "./fix.js";
+
+test("fix approval requires mutate authority and exact planned file scope", () => {
+  const request = { requestId: "523e4567-e89b-12d3-a456-426614174000", action: "mutate" as const, actor: "agent", target: "workspace:app", files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" };
+  const receipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  assert.equal(authorizeHeaderFix(receipt, ["next.config.js"], "2026-01-02T00:00:00Z").allowed, true);
+  assert.equal(authorizeHeaderFix(receipt, ["src/other.ts"], "2026-01-02T00:00:00Z").reason, "file-scope-mismatch");
+});
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";

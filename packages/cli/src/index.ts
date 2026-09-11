@@ -7,7 +7,7 @@ import chalk from "chalk";
 import chokidar from "chokidar";
 import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
-import { applyHeaderFixes, planHeaderFixes } from "./fix.js";
+import { applyHeaderFixes, authorizeHeaderFix, planHeaderFixes } from "./fix.js";
 import { loadCredentials, saveCredentials } from "./credentials.js";
 import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
@@ -466,14 +466,10 @@ program
     let receipt: ApprovalReceipt;
     try { receipt = await readApprovalReceiptFile(opts.approvalReceipt); }
     catch (error) { console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); }
-    const authorization = authorizeAgentAction("mutate", receipt!, new Date().toISOString());
+    const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
+    const authorization = authorizeHeaderFix(receipt!, plannedFiles, new Date().toISOString());
     if (!authorization.allowed) {
       console.error(`verglos fix approval denied: ${authorization.reason}`);
-      process.exit(78);
-    }
-    const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
-    if (plannedFiles.some((file) => !receipt!.files.includes(file))) {
-      console.error("verglos fix approval does not cover every planned file");
       process.exit(78);
     }
 

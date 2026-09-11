@@ -2,7 +2,7 @@ import { lstat, readFile, writeFile, access, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import chalk from "chalk";
 import { detectProjectType } from "@verglos/scanner";
-import type { ProjectType } from "@verglos/shared";
+import { authorizeAgentAction, type ApprovalReceipt, type ProjectType } from "@verglos/shared";
 
 /**
  * Framework-aware security header injection for `verglos fix`.
@@ -30,6 +30,13 @@ export interface HeaderFixPlan {
   readonly file: string;
   readonly action: "create" | "patch" | "skip";
   readonly preview?: readonly string[];
+}
+
+export function authorizeHeaderFix(receipt: ApprovalReceipt, plannedFiles: readonly string[], at: string): { readonly allowed: boolean; readonly reason?: string } {
+  const authorization = authorizeAgentAction("mutate", receipt, at);
+  if (!authorization.allowed) return { allowed: false, reason: authorization.reason };
+  if (plannedFiles.some((file) => !receipt.files.includes(file))) return { allowed: false, reason: "file-scope-mismatch" };
+  return { allowed: true };
 }
 
 async function fileExists(path: string): Promise<boolean> {
