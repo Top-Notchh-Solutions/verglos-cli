@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { createRequire } from "node:module";
-import { lstat, readFile, unlink, writeFile } from "node:fs/promises";
+import { lstat, readFile, unlink, writeFile, open } from "node:fs/promises";
+import { constants } from "node:fs";
 import { resolve } from "node:path";
 import { Command } from "commander";
 import chalk from "chalk";
@@ -37,6 +38,33 @@ import { ApprovalReceiptSchema, authorizeAgentAction, listCachedEngines, type Ap
 function reportPreflightError(json: boolean | undefined, quiet: boolean | undefined, code: string, humanMessage: string, machineMessage: string): void {
   if (json) console.log(JSON.stringify({ status: "error", code, message: machineMessage }));
   else if (!quiet) console.error(humanMessage);
+}
+
+const MAX_FIX_SNAPSHOT_BYTES = 1 * 1024 * 1024;
+
+async function readFixSnapshot(path: string): Promise<Buffer> {
+  const handle = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW);
+  try {
+    const stat = await handle.stat();
+    if (!stat.isFile() || stat.size > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+    const bytes = await handle.readFile();
+    if (bytes.byteLength > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+    return bytes;
+  } finally {
+    await handle.close();
+  }
+}
+
+async function restoreFixSnapshot(path: string, bytes: Buffer): Promise<void> {
+  if (bytes.byteLength > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+  const handle = await open(path, constants.O_WRONLY | constants.O_CREAT | constants.O_TRUNC | constants.O_NOFOLLOW, 0o600);
+  try {
+    const stat = await handle.stat();
+    if (!stat.isFile()) throw new Error("fix rollback snapshot target is not a bounded regular file");
+    await handle.writeFile(bytes);
+  } finally {
+    await handle.close();
+  }
 }
 import { homedir } from "node:os";
 import { join } from "node:path";
@@ -524,9 +552,8 @@ program
       const path = resolve(process.cwd(), item.file);
       try {
         const entry = await lstat(path);
-        if (!entry.isFile() || entry.size > 1 * 1024 * 1024) throw new Error("fix rollback snapshot target is not a bounded regular file");
-        const bytes = await readFile(path);
-        if (bytes.byteLength > 1 * 1024 * 1024) throw new Error("fix rollback snapshot target is not a bounded regular file");
+        if (!entry.isFile() || entry.size > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+        const bytes = await readFixSnapshot(path);
         return { path, existed: true, bytes };
       } catch (error) {
         if (error instanceof Error && error.message.includes("rollback snapshot target")) throw error;
@@ -557,7 +584,7 @@ program
           await executeScan({ noTelemetry: true, quiet: true });
         } catch (error) {
           for (const snapshot of snapshots) {
-            if (snapshot.existed && snapshot.bytes) await writeFile(snapshot.path, snapshot.bytes, { mode: 0o600 });
+            if (snapshot.existed && snapshot.bytes) await restoreFixSnapshot(snapshot.path, snapshot.bytes);
             else await unlink(snapshot.path).catch(() => undefined);
           }
           reportPreflightError(opts.json, opts.quiet, "FIX_RESCAN_FAILED", "Post-fix rescan failed; the approved mutation was rolled back.", "post-fix rescan failed; mutation rolled back");
