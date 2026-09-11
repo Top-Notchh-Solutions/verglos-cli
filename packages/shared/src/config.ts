@@ -6,7 +6,7 @@ export const VerglosConfigSchema = z.object({
     .default("free"),
   failOnCritical: z.boolean().default(true),
   failThreshold: z.number().min(0).max(100).default(60),
-  ignorePaths: z.array(z.string()).default([
+  ignorePaths: z.array(z.string().max(512)).max(256).default([
     "**/node_modules/**",
     "**/dist/**",
     "**/.next/**",
@@ -30,18 +30,18 @@ export const VerglosConfigSchema = z.object({
   hunt: z
     .object({
       sandbox: z.enum(["auto", "node-vm", "docker", "firecracker"]).optional(),
-      maxDurationMs: z.number().int().positive().optional(),
-      skip: z.array(z.string()).optional(),
+      maxDurationMs: z.number().int().min(1).max(10 * 60 * 1000).optional(),
+      skip: z.array(z.string().max(512)).max(256).optional(),
     })
     .optional(),
   attest: z
     .object({
-      signingKeyPath: z.string().optional(),
+      signingKeyPath: z.string().max(4096).optional(),
       verifyUrlBase: z.string().url().default("https://verglos.com/verify").optional(),
       whiteLabel: z
         .object({
-          logoPath: z.string().optional(),
-          footer: z.string().optional(),
+          logoPath: z.string().max(4096).optional(),
+          footer: z.string().max(4096).optional(),
         })
         .optional(),
     })
