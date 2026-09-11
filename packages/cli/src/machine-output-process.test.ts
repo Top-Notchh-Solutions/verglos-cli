@@ -247,6 +247,31 @@ test("Whoami JSON mode emits the offline Free contract", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("activate network failure is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-activate-error-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-process-activate-home-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "activate", "vg_invalid_key", "--ci", "--json", "--quiet"], root, { env: { HOME: home, VERGLOS_API_URL: "http://127.0.0.1:1", VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { status?: string; reason?: string; httpStatus?: unknown };
+    assert.equal(payload.status, "error");
+    assert.equal(payload.reason, "network");
+    assert.equal(payload.httpStatus, undefined);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
+test("monitor status without credentials is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-monitor-status-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-process-monitor-home-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "monitor", "status", "--json", "--quiet"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 1);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "CAPABILITY_REQUIRED", capability: "monitor_register", message: "Continuous CVE monitoring requires a paid capability" });
+  } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
 test("CLI version is deterministic and side-effect free", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-version-"));
   try {
