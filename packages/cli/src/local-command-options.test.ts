@@ -32,6 +32,15 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /command\("attest"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   assert.match(source, /command\("explain \[rule\]"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
   assert.match(source, /command\("explain \[rule\]"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
+  assert.match(source, /command\("activate <licenseKey>"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("whoami"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("badge"\)[\s\S]*?\.option\("--quiet", "Suppress output"\)/);
+  assert.match(source, /command\("hook"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("init"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON \(requires --yes\)"\)/);
+  for (const command of ["register", "status", "unregister", "test-alert"]) {
+    assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--json`));
+  }
+  assert.match(source, /command\("mcp"\)[\s\S]*?\.option\("--json", "Emit only the machine-readable MCP config \(with --print-config\)"\)/);
   assert.equal(source.includes('.option("--policy"'), false);
 });
 
