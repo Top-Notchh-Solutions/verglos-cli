@@ -55,3 +55,21 @@ test("MCP dispatch accepts an exact approved receipt and preserves the alpha stu
   assert.equal(result.error, "not_implemented_in_alpha");
   assert.equal(result.tool, "verglos_hunt_report");
 });
+
+test("MCP dispatch rejects a valid receipt widened to another target", async () => {
+  const request = {
+    requestId: "223e4567-e89b-12d3-a456-426614174000",
+    action: "execute" as const,
+    actor: "agent",
+    target: "report:/tmp/approved.json",
+    files: ["/tmp/approved.json"],
+    network: [],
+    policyEffect: "hunt report",
+    requestedAt: "2026-01-01T00:00:00Z",
+    expiresAt: "2099-01-01T00:00:00Z",
+  };
+  const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/other.json", approvalReceipt }));
+  assert.equal(result.code, "MCP_APPROVAL_SCOPE");
+  assert.equal(result.error, "usage");
+});

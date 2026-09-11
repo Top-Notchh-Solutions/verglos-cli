@@ -257,6 +257,16 @@ function alphaStub(name: string, tier: "pro" | "studio"): {
   };
 }
 
+function approvalTarget(name: string, input: Record<string, unknown>): string | undefined {
+  if (name === "verglos_hunt_report" || name === "verglos_attest") return typeof input.reportPath === "string" ? `report:${input.reportPath}` : undefined;
+  if (name === "verglos_hunt_finding") {
+    return typeof input.reportPath === "string" && typeof input.findingId === "string" ? `report:${input.reportPath}#finding:${input.findingId}` : undefined;
+  }
+  if (name === "verglos_hunt_before_write") return typeof input.filePath === "string" ? `file:${input.filePath}` : undefined;
+  if (name === "verglos_hunt_explain_verdict") return typeof input.findingId === "string" ? `finding:${input.findingId}` : undefined;
+  return undefined;
+}
+
 export async function dispatchTool(
   name: string,
   args: Record<string, unknown> | undefined,
@@ -273,6 +283,8 @@ export async function dispatchTool(
   if (authority?.approvalRequired) {
     const approval = authorizeAgentAction(authority.action, input.approvalReceipt as any, new Date().toISOString());
     if (!approval.allowed) return invalid("MCP_APPROVAL_REQUIRED", `MCP tool authority denied: ${approval.reason}`);
+    const target = approvalTarget(name, input);
+    if (target && (input.approvalReceipt as { target?: unknown } | undefined)?.target !== target) return invalid("MCP_APPROVAL_SCOPE", "approval receipt target does not match the requested tool target");
   }
   const toolInput = authority?.approvalRequired ? { ...input } : input;
   if (authority?.approvalRequired) delete toolInput.approvalReceipt;
