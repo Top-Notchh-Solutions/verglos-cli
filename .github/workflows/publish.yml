@@ -72,6 +72,65 @@ jobs:
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm typecheck
 
+      - name: Test
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: pnpm test
+
+      - name: Test release artifact verifier
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: node --test scripts/verify-release-artifacts.test.mjs
+
+      - name: Audit package contents
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: node scripts/check-package-contents.mjs
+
+      - name: Audit public boundary
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: node scripts/check-public-boundary.mjs
+
+      - name: Pack smoke test
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: |
+          set -euo pipefail
+          AUDIT_DIR=$(mktemp -d)
+          trap 'rm -rf "$AUDIT_DIR"' EXIT
+          for PKG_DIR in packages/shared packages/scanner packages/reporter packages/mcp packages/entitlement packages/cli; do
+            pnpm -C "$PKG_DIR" pack --pack-destination "$AUDIT_DIR" >/dev/null
+          done
+          while IFS= read -r archive; do
+            if tar -tzf "$archive" | grep -Eiq '(^|/)(docs/shipping|.*\.(pem|key|p12|pfx)|\.env($|\.)|id_rsa|id_ed25519)'; then
+              echo "::error::forbidden private/internal path found in $archive"
+              exit 1
+            fi
+          done < <(find "$AUDIT_DIR" -type f -name '*.tgz' -print)
+          node scripts/check-packed-manifests.mjs "$AUDIT_DIR"
+
+      - name: Prepare release checksums
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: |
+          set -euo pipefail
+          RELEASE_DIR=$(mktemp -d)
+          echo "RELEASE_DIR=$RELEASE_DIR" >> "$GITHUB_ENV"
+          for PKG_DIR in packages/shared packages/scanner packages/reporter packages/mcp packages/entitlement packages/cli; do
+            pnpm -C "$PKG_DIR" pack --pack-destination "$RELEASE_DIR" >/dev/null
+          done
+          (cd "$RELEASE_DIR" && sha256sum ./*.tgz > SHA256SUMS)
+
+      - name: Verify release checksums
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR"
+
+      - name: Upload release artifacts
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: verglos-npm-artifacts-${{ github.sha }}
+          path: |
+            ${{ env.RELEASE_DIR }}/*.tgz
+            ${{ env.RELEASE_DIR }}/SHA256SUMS
+          if-no-files-found: error
+          retention-days: 14
+
       # ── npm provenance ──────────────────────────────────────────
       # Every `npm publish` call below uses --provenance so npm
       # attests the tarball's origin (repo + commit + workflow run).

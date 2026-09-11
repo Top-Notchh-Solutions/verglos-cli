@@ -14,3 +14,9 @@ test("agent authorization distinguishes receipt-free, missing, mismatched, denie
   assert.deepEqual(authorizeAgentAction("mutate", approved, "2026-02-01T05:30:00+05:30"), { allowed: false, reason: "expired" });
   assert.deepEqual(authorizeAgentAction("mutate", approved, "2026-01-02T00:00:00+05:30"), { allowed: true, reason: "usable" });
 });
+
+test("agent authorization rejects a receipt whose request scope was altered", () => {
+  const approved = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  const altered = { ...approved, files: ["src/other.ts"] };
+  assert.deepEqual(authorizeAgentAction("mutate", altered, "2026-01-02T00:00:00Z"), { allowed: false, reason: "receipt-invalid" });
+});

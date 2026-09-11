@@ -1,8 +1,8 @@
-import { readFile, writeFile, access, mkdir } from "node:fs/promises";
+import { lstat, readFile, writeFile, access, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import chalk from "chalk";
 import { detectProjectType } from "@verglos/scanner";
-import type { ProjectType } from "@verglos/shared";
+import { authorizeAgentAction, putApprovalReceipt, type ApprovalReceipt, type ProjectType } from "@verglos/shared";
 
 /**
  * Framework-aware security header injection for `verglos fix`.
@@ -26,6 +26,19 @@ interface FixResult {
   instructions?: string;
 }
 
+export interface HeaderFixPlan {
+  readonly file: string;
+  readonly action: "create" | "patch" | "skip";
+  readonly preview?: readonly string[];
+}
+
+export function authorizeHeaderFix(receipt: ApprovalReceipt, plannedFiles: readonly string[], at: string): { readonly allowed: boolean; readonly reason?: string } {
+  const authorization = authorizeAgentAction("mutate", receipt, at);
+  if (!authorization.allowed) return { allowed: false, reason: authorization.reason };
+  if (plannedFiles.some((file) => !receipt.files.includes(file))) return { allowed: false, reason: "file-scope-mismatch" };
+  return { allowed: true };
+}
+
 async function fileExists(path: string): Promise<boolean> {
   try {
     await access(path);
@@ -40,24 +53,7 @@ async function pickSrcDir(projectRoot: string): Promise<string> {
   return ".";
 }
 
-// ── Next.js ────────────────────────────────────────────────────────────────
-
-async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
-  const candidates = ["next.config.js", "next.config.mjs", "next.config.ts"];
-  for (const name of candidates) {
-    const path = join(projectRoot, name);
-    let content: string;
-    try {
-      content = await readFile(path, "utf8");
-    } catch {
-      continue;
-    }
-
-    if (content.includes("Content-Security-Policy") || content.includes("X-Frame-Options")) {
-      return { file: name, action: "skipped" };
-    }
-
-    const headersBlock = `
+const NEXT_HEADERS_BLOCK = `
   async headers() {
     return [
       {
@@ -74,11 +70,63 @@ async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
     ];
   },`;
 
+function previewLines(value: string): readonly string[] {
+  return value.trim().split("\n").map((line) => `+${line}`);
+}
+
+/** Plans header changes without reading beyond bounded config/helper files or mutating the project. */
+export async function planHeaderFixes(projectRoot: string): Promise<readonly HeaderFixPlan[]> {
+  const { type } = await detectProjectType(projectRoot);
+  if (type === "nextjs") {
+    for (const name of ["next.config.js", "next.config.mjs", "next.config.ts"]) {
+      const path = join(projectRoot, name);
+      try {
+        const entry = await lstat(path);
+        if (!entry.isFile() || entry.size > 1 * 1024 * 1024) continue;
+        const content = await readFile(path, "utf8");
+        if (Buffer.byteLength(content, "utf8") > 1 * 1024 * 1024) continue;
+        if (content.includes("Content-Security-Policy") || content.includes("X-Frame-Options")) return [{ file: name, action: "skip" }];
+        if (NEXT_CONFIG_DECL.test(content)) return [{ file: name, action: "patch", preview: previewLines(NEXT_HEADERS_BLOCK) }];
+      } catch { /* unavailable config is not a mutation target */ }
+    }
+    return [];
+  }
+  if (type === "express" || type === "fastify" || type === "node" || type === "react") {
+    const file = join(await pickSrcDir(projectRoot), "verglos-security-headers.ts");
+    return [{ file, action: await fileExists(join(projectRoot, file)) ? "skip" : "create", ...(await fileExists(join(projectRoot, file)) ? {} : { preview: previewLines(HEADERS_HELPER_TS) }) }];
+  }
+  return [];
+}
+
+// ── Next.js ────────────────────────────────────────────────────────────────
+
+async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
+  const candidates = ["next.config.js", "next.config.mjs", "next.config.ts"];
+  for (const name of candidates) {
+    const path = join(projectRoot, name);
+    let content: string;
+    try {
+      const entry = await lstat(path);
+      if (!entry.isFile()) continue;
+      if (entry.size > 1 * 1024 * 1024) throw new Error("Next.js config exceeds the 1 MiB limit.");
+      content = await readFile(path, "utf8");
+      if (Buffer.byteLength(content, "utf8") > 1 * 1024 * 1024) throw new Error("Next.js config exceeds the 1 MiB limit.");
+    } catch (error) {
+      if (error instanceof Error && error.message === "Next.js config exceeds the 1 MiB limit.") throw error;
+      continue;
+    }
+
+    if (content.includes("Content-Security-Policy") || content.includes("X-Frame-Options")) {
+      return { file: name, action: "skipped" };
+    }
+
     if (NEXT_CONFIG_DECL.test(content)) {
       const updated = content.replace(
         NEXT_CONFIG_DECL,
-        (match) => `${match}${headersBlock}`,
+        (match) => `${match}${NEXT_HEADERS_BLOCK}`,
       );
+      const beforeWrite = await lstat(path);
+      if (!beforeWrite.isFile() || beforeWrite.size > 1 * 1024 * 1024) throw new Error("Next.js config changed before mutation.");
       await writeFile(path, updated, "utf8");
       return { file: name, action: "patched" };
     }
@@ -182,7 +230,12 @@ async function fixWithHelperFile(
 
   await mkdir(dirname(helperPath), { recursive: true });
   const extras = HEADERS_HELPER_EXTRAS[projectType] ?? "";
-  await writeFile(helperPath, HEADERS_HELPER_TS + extras, "utf8");
+  try {
+    await writeFile(helperPath, HEADERS_HELPER_TS + extras, { encoding: "utf8", flag: "wx" });
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "EEXIST") return { file: helperPath, action: "skipped" };
+    throw error;
+  }
 
   const wire = WIRE_INSTRUCTIONS[projectType] ??
     "Import VERGLOS_SECURITY_HEADERS and set each key on your outgoing responses.";
@@ -199,7 +252,15 @@ async function fixWithHelperFile(
  * Returns the number of files created or patched. Prints per-file
  * status to stdout; instructions when a helper file was created.
  */
-export async function applyHeaderFixes(projectRoot: string): Promise<number> {
+export async function applyHeaderFixes(projectRoot: string, options: { readonly approvalReceipt?: ApprovalReceipt; readonly now?: string; readonly approvalStoreRoot?: string } = {}): Promise<number> {
+  const plan = await planHeaderFixes(projectRoot);
+  const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
+  if (plannedFiles.length > 0) {
+    if (!options.approvalReceipt) throw new Error("header fix requires an approval receipt before changing files");
+    const authorization = authorizeHeaderFix(options.approvalReceipt, plannedFiles, options.now ?? new Date().toISOString());
+    if (!authorization.allowed) throw new Error(`header fix approval denied: ${authorization.reason}`);
+    if (options.approvalStoreRoot) await putApprovalReceipt(options.approvalStoreRoot, options.approvalReceipt);
+  }
   const { type } = await detectProjectType(projectRoot);
   let changed = 0;
 

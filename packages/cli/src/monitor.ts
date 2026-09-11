@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { lstat, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import chalk from "chalk";
 import { computeProjectFingerprint } from "@verglos/shared";
@@ -42,11 +42,21 @@ interface LockPackage {
   version: string;
 }
 
+const MAX_MONITOR_DEPENDENCIES = 5_000;
+
+async function readProjectJson(path: string, maxBytes: number): Promise<string> {
+  const entry = await lstat(path);
+  if (!entry.isFile() || entry.size > maxBytes) throw new Error("project metadata is not a bounded regular file");
+  const raw = await readFile(path, "utf8");
+  if (Buffer.byteLength(raw, "utf8") > maxBytes) throw new Error("project metadata is not a bounded regular file");
+  return raw;
+}
+
 async function collectDeps(projectRoot: string): Promise<MonitorDependency[]> {
   const seen = new Map<string, string>();
   try {
     const lock = JSON.parse(
-      await readFile(`${projectRoot}/package-lock.json`, "utf8"),
+      await readProjectJson(`${projectRoot}/package-lock.json`, 8 * 1024 * 1024),
     ) as {
       packages?: Record<string, { version?: string }>;
       dependencies?: Record<string, { version?: string }>;
@@ -69,7 +79,7 @@ async function collectDeps(projectRoot: string): Promise<MonitorDependency[]> {
   if (seen.size === 0) {
     try {
       const pkg = JSON.parse(
-        await readFile(`${projectRoot}/package.json`, "utf8"),
+        await readProjectJson(`${projectRoot}/package.json`, 1 * 1024 * 1024),
       ) as {
         dependencies?: Record<string, string>;
         devDependencies?: Record<string, string>;
@@ -83,6 +93,9 @@ async function collectDeps(projectRoot: string): Promise<MonitorDependency[]> {
     } catch {
       // no package.json
     }
+  }
+  if (seen.size > MAX_MONITOR_DEPENDENCIES) {
+    throw new Error(`monitor registration supports at most ${MAX_MONITOR_DEPENDENCIES} dependencies`);
   }
   return [...seen.entries()].map(([name, version]) => ({ name, version }));
 }
@@ -118,7 +131,13 @@ export async function executeMonitorRegister(
     return 1;
   }
 
-  const dependencies = await collectDeps(projectRoot);
+  let dependencies: MonitorDependency[];
+  try {
+    dependencies = await collectDeps(projectRoot);
+  } catch (error) {
+    console.error(chalk.red(`verglos monitor: ${error instanceof Error ? error.message : "could not read project dependencies."}`));
+    return 1;
+  }
   if (dependencies.length === 0) {
     console.error(chalk.red("verglos monitor: no dependencies found."));
     return 1;
@@ -138,16 +157,28 @@ export async function executeMonitorRegister(
   const apiUrl = creds.apiUrl ?? DEFAULT_API_URL;
   const url = `${apiUrl}/api/v1/monitor/register`;
 
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(creds.licenseKey
-        ? { Authorization: `Bearer ${creds.licenseKey}` }
-        : {}),
-    },
-    body: JSON.stringify(registration),
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8_000);
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(creds.licenseKey
+          ? { Authorization: `Bearer ${creds.licenseKey}` }
+          : {}),
+      },
+      body: JSON.stringify(registration),
+      signal: controller.signal,
+    });
+  } catch {
+    console.error(chalk.red("verglos monitor: could not reach the server. Check your connection."));
+    return 1;
+  } finally {
+    clearTimeout(timer);
+  }
+  if (res.body) await res.body.cancel();
 
   if (res.status === 401 || res.status === 402) {
     console.error(

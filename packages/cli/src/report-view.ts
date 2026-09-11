@@ -1,9 +1,12 @@
-import { readFile } from "node:fs/promises";
+import { lstat, readFile } from "node:fs/promises";
 import { renderLocalViewer } from "./viewer-renderer.js";
 
 export async function prepareReportView(path: string): Promise<string> {
   const lower = path.toLowerCase();
   if (lower.endsWith(".html") || lower.endsWith(".vgl")) throw new Error("report view accepts only validated JSON projections");
+  const entry = await lstat(path);
+  if (!entry.isFile()) throw new Error("report view input must be a regular file");
+  if (entry.size > 8 * 1024 * 1024) throw new Error("report view input exceeds the 8 MiB limit");
   const bytes = await readFile(path);
   if (bytes.byteLength > 8 * 1024 * 1024) throw new Error("report view input exceeds the 8 MiB limit");
   let value: any;

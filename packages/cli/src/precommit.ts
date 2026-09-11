@@ -18,6 +18,9 @@ const CRITICAL_CONFIDENCE: readonly ConfidenceLevel[] = ["certain", "high"];
 
 export interface PrecommitOptions {
   cwd?: string;
+  configPath?: string;
+  json?: boolean;
+  quiet?: boolean;
   timeoutMs?: number;
 }
 
@@ -47,6 +50,7 @@ export async function executePrecommit(
 
   const scanPromise = runScan({
     projectRoot,
+    configPath: options.configPath,
     // Fast subset: no OSV network calls, no git-history sweep, no
     // provenance engine. Secret patterns + AI-* rules + high-conf
     // injection patterns cover the "committing a leaked key / OTP
@@ -67,14 +71,14 @@ export async function executePrecommit(
   ]);
 
   if (raced.timedOut) {
-    console.error(
-      chalk.yellow(
-        `verglos: pre-commit budget of ${timeoutMs}ms exceeded — skipping check.`,
-      ),
-    );
-    console.error(
-      chalk.gray("  Run `verglos scan` manually before pushing."),
-    );
+    if (options.json) {
+      console.log(JSON.stringify({ status: "INCOMPLETE", timedOut: true, timeoutMs }));
+      return 0;
+    }
+    if (!options.quiet) {
+      console.error(chalk.yellow(`verglos: pre-commit budget of ${timeoutMs}ms exceeded — skipping check.`));
+      console.error(chalk.gray("  Run `verglos scan` manually before pushing."));
+    }
     return 0; // don't block on slow scans — the full scan runs in CI
   }
 
@@ -82,19 +86,22 @@ export async function executePrecommit(
   const elapsed = Date.now() - start;
 
   if (blocking.length === 0) {
-    console.log(
-      chalk.green(`verglos: pre-commit passed`) +
-        chalk.gray(` · ${elapsed}ms`),
-    );
+    if (options.json) {
+      console.log(JSON.stringify({ status: "PASS", blocking: 0, elapsedMs: elapsed }));
+      return 0;
+    }
+    if (!options.quiet) console.log(chalk.green(`verglos: pre-commit passed`) + chalk.gray(` · ${elapsed}ms`));
     return 0;
   }
 
+  if (options.json) {
+    console.log(JSON.stringify({ status: "BLOCK", blocking: blocking.length, elapsedMs: elapsed }));
+    return 1;
+  }
+
+  if (options.quiet) return 1;
   console.error("");
-  console.error(
-    chalk.red.bold(
-      `verglos: commit blocked — ${blocking.length} critical / high finding${blocking.length === 1 ? "" : "s"}`,
-    ),
-  );
+  console.error(chalk.red.bold(`verglos: commit blocked — ${blocking.length} critical / high finding${blocking.length === 1 ? "" : "s"}`));
   console.error(chalk.gray(`  Scanned in ${elapsed}ms.`));
   console.error("");
 

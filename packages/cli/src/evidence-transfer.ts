@@ -1,9 +1,29 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { lstat, readFile, writeFile } from "node:fs/promises";
 import { importBoundedJson } from "@verglos/shared";
 import { exportCycloneDx, exportSpdx } from "@verglos/shared";
 
+const MAX_EVIDENCE_BYTES = 8 * 1024 * 1024;
+
+async function readBoundedStdin(): Promise<Buffer> {
+  const chunks: Buffer[] = [];
+  let total = 0;
+  for await (const chunk of process.stdin) {
+    const bytes = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as string);
+    total += bytes.byteLength;
+    if (total > MAX_EVIDENCE_BYTES) throw new Error("evidence input exceeds the 8 MiB limit");
+    chunks.push(bytes);
+  }
+  return Buffer.concat(chunks, total);
+}
+
 async function readEvidenceInput(inputPath: string): Promise<Buffer> {
-  return inputPath === "-" ? readFile(0 as any) : readFile(inputPath);
+  if (inputPath === "-") return readBoundedStdin();
+  const entry = await lstat(inputPath);
+  if (!entry.isFile()) throw new Error("evidence input must be a regular file");
+  if (entry.size > MAX_EVIDENCE_BYTES) throw new Error("evidence input exceeds the 8 MiB limit");
+  const bytes = await readFile(inputPath);
+  if (bytes.byteLength > MAX_EVIDENCE_BYTES) throw new Error("evidence input exceeds the 8 MiB limit");
+  return bytes;
 }
 
 export async function transferEvidence(inputPath: string, outputPath: string): Promise<{ readonly format: string; readonly bytes: number }> {

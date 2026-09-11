@@ -1,7 +1,31 @@
 import { test } from "node:test";
+import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
 import assert from "node:assert/strict";
-import { NEXT_CONFIG_DECL } from "./fix.js";
+import { NEXT_CONFIG_DECL, authorizeHeaderFix, planHeaderFixes } from "./fix.js";
+import { applyHeaderFixes } from "./fix.js";
+import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
+test("fix approval requires mutate authority and exact planned file scope", () => {
+  const request = { requestId: "523e4567-e89b-12d3-a456-426614174000", action: "mutate" as const, actor: "agent", target: "workspace:app", files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" };
+  const receipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  assert.equal(authorizeHeaderFix(receipt, ["next.config.js"], "2026-01-02T00:00:00Z").allowed, true);
+  assert.equal(authorizeHeaderFix(receipt, ["src/other.ts"], "2026-01-02T00:00:00Z").reason, "file-scope-mismatch");
+});
+
+test("header fix persists its approved receipt when an audit store is configured", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-audit-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ name: "fixture", dependencies: { express: "1.0.0" } }));
+    await mkdir(join(root, "src"));
+    const planned = "src/verglos-security-headers.ts";
+    const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174001", action: "mutate", actor: "agent", target: "workspace:app", files: [planned], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    assert.equal(await applyHeaderFixes(root, { approvalReceipt: receipt, approvalStoreRoot: join(root, "approvals"), now: "2026-01-01T00:02:00Z" }), 1);
+    assert.match(await readFile(join(root, planned), "utf8"), /VERGLOS_SECURITY_HEADERS/);
+    assert.equal((await readApprovalReceipt(join(root, "approvals"), receipt.requestDigest)).requestId, receipt.requestId);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
 /**
  * Regression guard for the Next.js config detection in
  * `verglos fix`. The v1.8.1 regex only matched the bare JavaScript
@@ -133,4 +157,17 @@ export default nextConfig;
     patched.indexOf("async headers()") < patched.indexOf("reactStrictMode"),
     "headers block must appear BEFORE the existing config keys, right after the `{`",
   );
+});
+
+test("fix planning identifies a bounded Next.js patch without mutating", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-plan-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
+    const original = "const nextConfig = {}; module.exports = nextConfig;\n";
+    await writeFile(join(root, "next.config.js"), original);
+    const plan = await planHeaderFixes(root);
+    assert.equal(plan[0]?.action, "patch");
+    assert.ok(plan[0]?.preview?.some((line) => line.includes("Content-Security-Policy")));
+    assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

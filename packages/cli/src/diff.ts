@@ -1,5 +1,5 @@
-import { readFile } from "node:fs/promises";
-import { diffReleaseSnapshots, type ReleaseSnapshot } from "@verglos/shared";
+import { lstat, readFile } from "node:fs/promises";
+import { diffReleaseSnapshots, projectChangeActions, type ReleaseSnapshot } from "@verglos/shared";
 
 function parseSnapshot(value: string): ReleaseSnapshot {
   if (Buffer.byteLength(value, "utf8") > 32 * 1024 * 1024) throw new Error("snapshot exceeds the 32 MiB limit");
@@ -15,23 +15,34 @@ function parseSnapshot(value: string): ReleaseSnapshot {
   return snapshot as unknown as ReleaseSnapshot;
 }
 
-export async function executeDiff(basePath: string, headPath: string, json = false): Promise<number> {
+async function readSnapshot(path: string): Promise<string> {
+  const entry = await lstat(path);
+  if (!entry.isFile()) throw new Error("snapshot input must be a regular file");
+  if (entry.size > 32 * 1024 * 1024) throw new Error("snapshot exceeds the 32 MiB limit");
+  const raw = await readFile(path, "utf8");
+  if (Buffer.byteLength(raw, "utf8") > 32 * 1024 * 1024) throw new Error("snapshot exceeds the 32 MiB limit");
+  return raw;
+}
+
+export async function executeDiff(basePath: string, headPath: string, json = false, quiet = false): Promise<number> {
   try {
-    const [baseRaw, headRaw] = await Promise.all([readFile(basePath, "utf8"), readFile(headPath, "utf8")]);
+    const [baseRaw, headRaw] = await Promise.all([readSnapshot(basePath), readSnapshot(headPath)]);
     const result = diffReleaseSnapshots(parseSnapshot(baseRaw), parseSnapshot(headRaw));
-    if (json) console.log(JSON.stringify(result));
-    else {
+    const actions = projectChangeActions(result);
+    if (json) console.log(JSON.stringify({ ...result, actions }));
+    else if (!quiet) {
       console.log(`Added: ${result.added.length}`);
       console.log(`Fixed: ${result.fixed.length}`);
       console.log(`Unchanged: ${result.unchanged.length}`);
       if (result.identityChanged) console.log("Identity: changed");
       if (result.coverageChanged) console.log("Coverage: changed");
       if (result.policyChanged) console.log("Policy inputs: changed");
+      for (const nextAction of actions.nextActions) console.log(`Next: ${nextAction}`);
     }
     return result.identityChanged || result.coverageChanged ? 3 : result.added.length || result.fixed.length ? 1 : 0;
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to diff release snapshots.";
-    if (json) console.log(JSON.stringify({ status: "error", message })); else console.error(message);
+    if (json) console.log(JSON.stringify({ status: "error", message })); else if (!quiet) console.error(message);
     return 2;
   }
 }

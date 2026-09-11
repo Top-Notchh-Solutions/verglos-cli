@@ -238,10 +238,28 @@ export interface ScanResult {
    * undefined here without breaking downstream consumers.
    */
   provenance?: RepoProvenance;
+  /** Deterministic account of what this scan actually evaluated. */
+  coverage?: ScanCoverageManifest;
+}
+
+export interface ScanCoverageManifest {
+  readonly status: "complete" | "incomplete";
+  readonly filesWalked: number;
+  readonly requestedDetectors: readonly DetectorId[];
+  readonly executedDetectors: readonly DetectorId[];
+  readonly limitations: readonly string[];
+}
+
+export interface ScanProgressEvent {
+  readonly phase: "config" | "target" | "walk" | "detector" | "provenance";
+  readonly status: "started" | "completed" | "skipped";
+  readonly detector?: DetectorId;
 }
 
 export interface ScanOptions {
   projectRoot: string;
+  /** Explicit bounded JSON config path; legacy project config remains the fallback. */
+  configPath?: string;
   detectors?: DetectorId[];
   unlocked?: boolean;
   includeGitHistory?: boolean;
@@ -257,6 +275,12 @@ export interface ScanOptions {
    * scanning must never touch the network on the free path.
    */
   verifySecrets?: boolean;
+  /** Abort an in-progress scan between bounded detector/provenance stages. */
+  signal?: AbortSignal;
+  /** Maximum concurrent detector executions (defaults to a bounded value). */
+  detectorConcurrency?: number;
+  /** Optional bounded progress callback; never carries source content. */
+  onProgress?: (event: ScanProgressEvent) => void;
 }
 
 export const DEFAULT_MIN_CONFIDENCE = 0.7;

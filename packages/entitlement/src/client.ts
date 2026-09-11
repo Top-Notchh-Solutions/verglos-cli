@@ -133,6 +133,9 @@ export async function verifyEntitlement(
   }
 
   const nowSec = Math.floor(now / 1000);
+  const claimError = validateClaims(claims, nowSec);
+  if (claimError) return { valid: false, reason: claimError };
+
   if (typeof claims.exp !== "number") {
     return { valid: false, reason: "claims are missing exp" };
   }
@@ -163,6 +166,22 @@ export async function verifyEntitlement(
     claims,
     reason: "token expired past the 7-day offline grace window",
   };
+}
+
+function validateClaims(value: unknown, nowSec: number): string | undefined {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return "claims must be an object";
+  const claims = value as Record<string, unknown>;
+  if (typeof claims.keyHash !== "string" || claims.keyHash.length === 0 || claims.keyHash.length > 256) return "claims have an invalid keyHash";
+  if (!new Set(["free", "pro", "studio", "enterprise", "compliance", "founder"]).has(claims.tier as string)) return "claims have an invalid tier";
+  if (!Array.isArray(claims.projects) || claims.projects.some((project) => typeof project !== "string" || project.length > 4096)) return "claims have invalid projects";
+  if (!Number.isInteger(claims.seats) || (claims.seats as number) < 0 || (claims.seats as number) > 100_000) return "claims have invalid seats";
+  if (!Array.isArray(claims.features) || claims.features.some((feature) => typeof feature !== "string" || feature.length === 0 || feature.length > 256)) return "claims have invalid features";
+  if (!Number.isInteger(claims.iat) || !Number.isInteger(claims.exp) || (claims.exp as number) <= (claims.iat as number)) return "claims have invalid timestamps";
+  if ((claims.iat as number) > nowSec + 5 * 60) return "claims issued-at is too far in the future";
+  if ((claims.exp as number) - nowSec > 90 * 24 * 60 * 60) return "claims expiry is too far in the future";
+  if (claims.mid !== undefined && (typeof claims.mid !== "string" || claims.mid.length > 256)) return "claims have an invalid machine id";
+  if (claims.ver !== undefined && (typeof claims.ver !== "string" || claims.ver.length > 128)) return "claims have an invalid client version";
+  return undefined;
 }
 
 /** Ships as a helper so the CLI can inspect the cache for `verglos status`. */

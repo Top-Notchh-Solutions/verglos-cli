@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -20,6 +20,22 @@ test("evidence transfer reports bounded metadata and refuses overwrite", async (
     assert.equal(transferred.format, "cyclonedx");
     assert.equal(JSON.parse(await readFile(output, "utf8")).bomFormat, "CycloneDX");
     await assert.rejects(() => transferEvidence(input, output), /already exists/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("evidence transfer rejects symlinks and oversized files before parsing", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-evidence-boundary-"));
+  try {
+    const target = join(root, "input.json");
+    const link = join(root, "input-link.json");
+    await writeFile(target, JSON.stringify(document), "utf8");
+    await symlink(target, link);
+    await assert.rejects(() => inspectEvidence(link), /regular file/);
+    const oversized = join(root, "oversized.json");
+    await writeFile(oversized, Buffer.alloc(8 * 1024 * 1024 + 1));
+    await assert.rejects(() => inspectEvidence(oversized), /8 MiB limit/);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

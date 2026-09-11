@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 import { createRequire } from "node:module";
+import { lstat, readFile, unlink, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { Command } from "commander";
 import chalk from "chalk";
 import chokidar from "chokidar";
 import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
-import { applyHeaderFixes } from "./fix.js";
+import { applyHeaderFixes, authorizeHeaderFix, planHeaderFixes } from "./fix.js";
 import { loadCredentials, saveCredentials } from "./credentials.js";
 import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
@@ -29,7 +31,7 @@ import {
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
 import { executeTargetInspect } from "./target-inspect.js";
-import { listCachedEngines } from "@verglos/shared";
+import { ApprovalReceiptSchema, authorizeAgentAction, listCachedEngines, type ApprovalReceipt } from "@verglos/shared";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
@@ -37,10 +39,26 @@ import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
 import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
+import { executeRecordVerify } from "./record-verify.js";
+import { executeRecordCreate } from "./record-create.js";
+import { executeRecordProject } from "./record-project.js";
+import { executeRecordSign } from "./record-sign.js";
+import { executeConfigInspect } from "./config-inspect.js";
+import { executeRecordHeader } from "./record-header.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
 const args = process.argv.slice(2);
+
+async function readApprovalReceiptFile(path: string): Promise<ApprovalReceipt> {
+  const entry = await lstat(path);
+  if (!entry.isFile() || entry.size > 256 * 1024) throw new Error("approval receipt must be a bounded regular file");
+  const bytes = await readFile(path);
+  if (bytes.byteLength > 256 * 1024) throw new Error("approval receipt must be a bounded regular file");
+  let value: unknown;
+  try { value = JSON.parse(bytes.toString("utf8")); } catch { throw new Error("approval receipt must be valid JSON"); }
+  return ApprovalReceiptSchema.parse(value);
+}
 
 if (args.includes("--update")) {
   await updateCli(version);
@@ -84,17 +102,27 @@ program
     await updateCli(version);
   });
 
+const config = program.command("config").description("Inspect local Verglos configuration");
+config.command("inspect <path>")
+  .description("Report version-migration warnings without applying configuration")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (path: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeConfigInspect(path, opts.json, opts.quiet));
+  });
+
 program
   .command("diff <base> <head>")
   .description("Compare two local Verglos release snapshots")
   .option("--json", "Emit machine-readable JSON")
-  .action(async (base: string, head: string, opts: { json?: boolean }) => {
-    process.exit(await executeDiff(base, head, opts.json));
+  .option("--quiet", "Suppress human output")
+  .action(async (base: string, head: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeDiff(base, head, opts.json, opts.quiet));
   });
 
 const policy = program.command("policy").description("Inspect local policy evaluation artifacts");
-policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { json?: boolean; quiet?: boolean }) => {
-  process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet));
+policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--record-store <path>", "Verify a record manifest against its content-addressed member store").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { recordStore?: string; json?: boolean; quiet?: boolean }) => {
+  process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet, { recordStore: opts.recordStore }));
 });
 
 const evidence = program.command("evidence").description("Import and export standards evidence");
@@ -105,11 +133,75 @@ evidence.command("export <input> <output>")
   .action(async (input: string, output: string, opts: { json?: boolean; quiet?: boolean }) => {
     try {
       const result = await transferEvidence(input, output);
-      if (!opts.quiet) console.log(opts.json ? JSON.stringify(result) : "Exported " + result.format + " evidence (" + result.bytes + " bytes).");
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log("Exported " + result.format + " evidence (" + result.bytes + " bytes).");
     } catch (error) {
-      console.error(error instanceof Error ? error.message : "Evidence export failed.");
+      if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence export failed.");
       process.exit(78);
     }
+});
+
+const record = program.command("record").description("Verify local content-addressed Verglos records");
+record.command("create <membersRoot> <manifestPath> <outputRoot>")
+  .description("Materialize a validated manifest and its payloads into a local record store")
+  .option("--complete", "Require subject, policy-evaluation, and release-decision graph members")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (membersRoot: string, manifestPath: string, outputRoot: string, opts: { json?: boolean; quiet?: boolean; complete?: boolean }) => {
+    process.exit(await executeRecordCreate(membersRoot, manifestPath, outputRoot, opts.json, opts.quiet, opts.complete));
+  });
+record.command("verify <storeRoot> <manifestPath>")
+  .description("Verify every stored record member against its manifest")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--signature <path>", "Verify an offline record signature envelope")
+  .option("--public-key <path>", "Verify with a user-supplied Ed25519 public key")
+  .option("--trusted-issuer <issuer>", "Require this exact signature issuer")
+  .option("--trusted-signer <id>", "Require this exact signature identity")
+  .option("--complete", "Require the complete Release Record graph")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; complete?: boolean }) => {
+    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, opts.complete));
+  });
+record.command("sign <manifestPath> <signaturePath>")
+  .description("Sign a validated record manifest with a user-supplied offline key")
+  .requiredOption("--key <path>", "Private Ed25519 key path")
+  .requiredOption("--signer <id>", "Signer identity label")
+  .requiredOption("--issuer <issuer>", "Signer issuer label")
+  .option("--approve", "Approve the signing identity operation")
+  .option("--approval-receipt <path>", "Path to an exact, time-bounded signing approval receipt")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (manifestPath: string, signaturePath: string, opts: { key: string; signer: string; issuer: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => {
+    let approvalReceipt: ApprovalReceipt | undefined;
+    if (opts.approve && !opts.approvalReceipt) {
+      if (!opts.quiet) console.error("record signing requires an approval receipt (--approval-receipt) before reading the key");
+      process.exit(78);
+    }
+    if (opts.approve && opts.approvalReceipt) {
+      try {
+        approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt);
+        const authorization = authorizeAgentAction("sign", approvalReceipt, new Date().toISOString());
+        if (!authorization.allowed || approvalReceipt.target !== `manifest:${manifestPath}` || !approvalReceipt.files.includes(manifestPath) || approvalReceipt.network.length > 0) throw new Error(authorization.allowed ? "approval receipt scope does not match the signing manifest" : authorization.reason);
+      } catch (error) {
+        if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid");
+        process.exit(78);
+      }
+    }
+    process.exit(await executeRecordSign(manifestPath, signaturePath, opts.key, opts.signer, opts.issuer, opts.approve, opts.json, opts.quiet, approvalReceipt, new Date().toISOString(), process.env.VERGLOS_APPROVAL_STORE));
+  });
+record.command("project <storeRoot> <manifestPath>")
+  .description("Project a verified record into safe public fields without uploading")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordProject(storeRoot, manifestPath, opts.json, opts.quiet));
+  });
+record.command("header <storeRoot> <manifestPath>")
+  .description("Show the verified decision-first Release Record header")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordHeader(storeRoot, manifestPath, opts.json, opts.quiet));
   });
 
 evidence.command("import <input>")
@@ -119,12 +211,10 @@ evidence.command("import <input>")
   .action(async (input: string, opts: { json?: boolean; quiet?: boolean }) => {
     try {
       const result = await inspectEvidence(input);
-      if (!opts.quiet) {
-        if (opts.json) console.log(JSON.stringify(result));
-        else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)");
-      }
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)");
     } catch (error) {
-      console.error(error instanceof Error ? error.message : "Evidence import failed.");
+      if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence import failed.");
       process.exit(78);
     }
   });
@@ -144,10 +234,29 @@ engines.command("status")
 engines.command("install <engineId> <version> <artifactPath>")
   .description("Install a local digest-pinned engine artifact")
   .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
-  .option("--approve", "Approve the local engine mutation")
+  .option("--manifest <path>", "Validate a bounded engine compatibility manifest")
+.option("--manifest-key <path>", "Verify the manifest with an Ed25519 public key")
+.option("--approve", "Approve the local engine mutation")
+.option("--approval-receipt <path>", "Path to an exact, time-bounded engine approval receipt")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress output")
-  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; approve?: boolean; json?: boolean; quiet?: boolean }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, opts)); });
+  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => { let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); } } process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey })); });
+
+for (const action of ["update", "rollback"] as const) {
+  engines.command(`${action} <engineId> <version> <artifactPath>`)
+    .description(`${action === "update" ? "Update" : "Rollback"} a managed engine from a local digest-pinned artifact`)
+    .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
+    .option("--manifest <path>", "Validate a bounded engine compatibility manifest")
+    .option("--manifest-key <path>", "Verify the manifest with an Ed25519 public key")
+    .option("--approve", "Approve the local engine mutation")
+    .option("--approval-receipt <path>", "Path to an exact, time-bounded engine approval receipt")
+    .option("--json", "Emit machine-readable JSON")
+    .option("--quiet", "Suppress output")
+    .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => {
+      let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); } }
+      process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey, action }));
+    });
+}
 
 program
   .command("target")
@@ -155,9 +264,10 @@ program
   .command("inspect <kind> <value>")
   .description("Resolve target metadata without executing project code")
   .option("--json", "Emit machine-readable JSON")
-  .action(async (kind: string, value: string, opts: { json?: boolean }) => {
-    if (!["repository", "package", "filesystem", "artifact", "sbom"].includes(kind)) process.exit(78);
-    process.exit(await executeTargetInspect(kind as "repository" | "package" | "filesystem" | "artifact" | "sbom", value, opts.json));
+  .option("--quiet", "Suppress human output")
+  .action(async (kind: string, value: string, opts: { json?: boolean; quiet?: boolean }) => {
+    if (!["repository", "package", "filesystem", "artifact", "sbom", "oci"].includes(kind)) process.exit(78);
+    process.exit(await executeTargetInspect(kind as "repository" | "package" | "filesystem" | "artifact" | "sbom" | "oci", value, opts.json, opts.quiet));
   });
 
 program
@@ -165,8 +275,12 @@ program
   .description("Run a full security scan")
   .option("-w, --watch", "Re-scan on file changes")
   .option("-q, --quiet", "Suppress terminal output")
+  .option("--json", "Emit machine-readable JSON")
   .option("--all", "Include low-confidence findings (default hides <0.7)")
   .option("--strict", "Include test file findings in score")
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .option("--output <dir>", "Write HTML/JSON reports to a bounded output directory")
+  .option("--policy <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option(
     "--no-provenance",
@@ -185,8 +299,12 @@ program
     async (opts: {
       watch?: boolean;
       quiet?: boolean;
+      json?: boolean;
       all?: boolean;
       strict?: boolean;
+      config?: string;
+      output?: string;
+      policy?: string;
       policyEvaluation?: string;
       provenance?: boolean;
       verifySecrets?: boolean;
@@ -198,18 +316,22 @@ program
       const noTelemetry = opts.telemetry === false;
       const scanOptions = {
         quiet: opts.quiet,
+        json: opts.json,
         all: opts.all,
         strict: opts.strict,
+        configPath: opts.config,
+        outputDir: opts.output,
         noProvenance,
         verifySecrets: opts.verifySecrets,
         hunt: opts.hunt,
       noTelemetry,
       };
-      if (opts.policyEvaluation) {
-        process.exit(await executePolicyCheck(opts.policyEvaluation, false, opts.quiet));
+      const policyPath = opts.policyEvaluation ?? opts.policy;
+      if (policyPath) {
+        process.exit(await executePolicyCheck(policyPath, opts.json, opts.quiet));
       }
       if (opts.watch) {
-        console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
+        if (!opts.quiet && !opts.json) console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
         await executeScan(scanOptions);
         const watcher = chokidar.watch(".", {
           ignored: [
@@ -223,7 +345,7 @@ program
           ignoreInitial: true,
         });
         watcher.on("change", async () => {
-          console.log(chalk.gray("\nFile changed, re-scanning..."));
+          if (!opts.quiet && !opts.json) console.log(chalk.gray("\nFile changed, re-scanning..."));
           await executeScan(scanOptions);
         });
         return;
@@ -233,28 +355,43 @@ program
   );
 
 program
-  .command("score")
+.command("score")
   .description("Print security score only")
   .option("--strict", "Include test file findings in score")
-  .action(async (opts: { strict?: boolean }) => {
-    await executeScore(undefined, opts.strict);
+  .option("-q, --quiet", "Suppress terminal output")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .action(async (opts: { strict?: boolean; quiet?: boolean; json?: boolean; config?: string }) => {
+    await executeScore(undefined, opts.strict, opts.quiet, opts.config, opts.json);
   });
 
 program
   .command("secrets")
   .description("Scan for secrets only")
-  .action(async () => {
-    await executeScan({ detectors: ["secrets"], focused: true });
+  .option("-q, --quiet", "Suppress terminal output")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .option("--output <dir>", "Write HTML/JSON reports to a bounded output directory")
+  .action(async (opts: { quiet?: boolean; json?: boolean; config?: string; output?: string }) => {
+    await executeScan({ detectors: ["secrets"], focused: true, quiet: opts.quiet, json: opts.json, configPath: opts.config, outputDir: opts.output });
   });
 
 program
   .command("deps")
   .description("Dependency vulnerability audit only")
-  .action(async () => {
+  .option("-q, --quiet", "Suppress terminal output")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .option("--output <dir>", "Write HTML/JSON reports to a bounded output directory")
+  .action(async (opts: { quiet?: boolean; json?: boolean; config?: string; output?: string }) => {
     await executeScan({
       detectors: ["dependencies"],
       focused: true,
       includeGitHistory: false,
+      quiet: opts.quiet,
+      json: opts.json,
+      configPath: opts.config,
+      outputDir: opts.output,
     });
   });
 
@@ -263,16 +400,20 @@ program
   .description("CI mode — exit non-zero on critical issues")
   .option("-t, --threshold <score>", "Minimum score threshold", "60")
   .option("-q, --quiet", "Suppress output")
+  .option("--json", "Emit machine-readable JSON")
   .option("--strict", "Include test file findings in score")
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .option("--policy <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
     "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
   )
-  .action(async (opts: { threshold: string; quiet?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policyEvaluation?: string }) => {
-    if (opts.policyEvaluation) {
-      process.exit(await executePolicyCheck(opts.policyEvaluation, false, opts.quiet));
+  .action(async (opts: { threshold: string; quiet?: boolean; json?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policy?: string; policyEvaluation?: string; config?: string }) => {
+    const policyPath = opts.policyEvaluation ?? opts.policy;
+    if (policyPath) {
+      process.exit(await executePolicyCheck(policyPath, opts.json, opts.quiet));
     }
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const plan = await currentPlan({ asPlan });
@@ -288,11 +429,13 @@ program
     const code = await executeCi({
       threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
       quiet: opts.quiet,
+      json: opts.json,
       strict: opts.strict,
+      configPath: opts.config,
       hunt: opts.hunt,
       noTelemetry: opts.telemetry === false,
     });
-    if (!hasThreshold && !opts.quiet) {
+    if (!hasThreshold && !opts.quiet && !opts.json) {
       console.log("");
       console.log(
         chalk.gray(
@@ -309,7 +452,11 @@ program
 program
   .command("fix")
   .description("Auto-fix safe security issues [Pro] (currently: header injection)")
-  .action(async () => {
+  .option("--approve", "Approve the filesystem mutation")
+  .option("--approval-receipt <path>", "Path to an exact, time-bounded mutate approval receipt")
+  .option("--dry-run", "Show the planned file changes without mutating")
+  .option("--rescan", "Run a local scan after applying the approved change")
+  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; rescan?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability("fix", "`verglos fix`", {
       asPlan,
@@ -318,12 +465,66 @@ program
     });
     if (!ok) process.exit(1);
 
+    const plan = await planHeaderFixes(process.cwd());
+    if (opts.dryRun || !opts.approve) {
+      if (plan.length === 0) console.log("No supported header change is planned.");
+      else for (const item of plan) {
+        console.log(`${item.action}: ${item.file}`);
+        for (const line of item.preview ?? []) console.log(line);
+      }
+    }
+    if (opts.dryRun) return;
+    if (!opts.approve) {
+      console.error("verglos fix requires explicit approval (--approve) before changing files.");
+      process.exit(78);
+    }
+    if (!opts.approvalReceipt) {
+      console.error("verglos fix requires an approval receipt (--approval-receipt) before changing files.");
+      process.exit(78);
+    }
+    let receipt: ApprovalReceipt;
+    try { receipt = await readApprovalReceiptFile(opts.approvalReceipt); }
+    catch (error) { console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); }
+    const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
+    const authorization = authorizeHeaderFix(receipt!, plannedFiles, new Date().toISOString());
+    if (!authorization.allowed) {
+      console.error(`verglos fix approval denied: ${authorization.reason}`);
+      process.exit(78);
+    }
+
+    const snapshots = opts.rescan ? await Promise.all(plan.filter((item) => item.action !== "skip").map(async (item) => {
+      const path = resolve(process.cwd(), item.file);
+      try {
+        const entry = await lstat(path);
+        if (!entry.isFile() || entry.size > 1 * 1024 * 1024) throw new Error("fix rollback snapshot target is not a bounded regular file");
+        const bytes = await readFile(path);
+        if (bytes.byteLength > 1 * 1024 * 1024) throw new Error("fix rollback snapshot target is not a bounded regular file");
+        return { path, existed: true, bytes };
+      } catch (error) {
+        if (error instanceof Error && error.message.includes("rollback snapshot target")) throw error;
+        return { path, existed: false, bytes: undefined };
+      }
+    })) : [];
+
     console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
     console.log("");
-    const fixed = await applyHeaderFixes(process.cwd());
+    const fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString(), approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE });
     console.log("");
     if (fixed > 0) {
       console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
+      if (opts.rescan) {
+        console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
+        try {
+          await executeScan({ noTelemetry: true });
+        } catch (error) {
+          for (const snapshot of snapshots) {
+            if (snapshot.existed && snapshot.bytes) await writeFile(snapshot.path, snapshot.bytes, { mode: 0o600 });
+            else await unlink(snapshot.path).catch(() => undefined);
+          }
+          console.error("Post-fix rescan failed; the approved mutation was rolled back.");
+          throw error;
+        }
+      }
     }
   });
 
@@ -334,12 +535,16 @@ program
   .option("--sandbox <adapter>", "Sandbox adapter: auto, node-vm, docker, firecracker")
   .option("--dry-run", "Parse options without running sandbox verification")
   .option("--finding <id>", "Verify one finding ID from a Verglos report")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
   .action(
     async (opts: {
       severity?: string;
       sandbox?: string;
       dryRun?: boolean;
       finding?: string;
+      json?: boolean;
+      quiet?: boolean;
     }) => {
       const code = await executeHunt({
         ...opts,
@@ -592,9 +797,15 @@ program
   .command("precommit")
   .description("Fast secrets + criticals scan for the pre-commit hook (<2s budget)")
   .option("--timeout <ms>", "Timeout budget in ms", "2000")
-  .action(async (opts: { timeout: string }) => {
+  .option("--config <path>", "Use a bounded JSON Verglos config file")
+  .option("--json", "Emit machine-readable JSON")
+  .option("-q, --quiet", "Suppress terminal output")
+  .action(async (opts: { timeout: string; config?: string; json?: boolean; quiet?: boolean }) => {
     const code = await executePrecommit({
       timeoutMs: parseInt(opts.timeout, 10),
+      configPath: opts.config,
+      json: opts.json,
+      quiet: opts.quiet,
     });
     process.exit(code);
   });
@@ -605,7 +816,9 @@ program
   .option("--report <path>", "Path to the Verglos JSON report to attest")
   .option("--sign", "Request Ed25519 bundle signing")
   .option("--verify-url <url>", "Verify URL base to embed in the bundle")
-  .action(async (opts: { report?: string; sign?: boolean; verifyUrl?: string }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { report?: string; sign?: boolean; verifyUrl?: string; json?: boolean; quiet?: boolean }) => {
     const code = await executeAttest({
       ...opts,
       asPlan: process.env.VERGLOS_AS_PLAN,
@@ -626,8 +839,10 @@ program
   .command("explain [rule]")
   .description("Explain a Verglos rule (why it exists, how to fix)")
   .option("-l, --list", "List every rule Verglos knows about")
-  .action((rule: string | undefined, opts: { list?: boolean }) => {
-    const code = executeExplain({ rule, list: opts.list });
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action((rule: string | undefined, opts: { list?: boolean; json?: boolean; quiet?: boolean }) => {
+    const code = executeExplain({ rule, list: opts.list, json: opts.json, quiet: opts.quiet });
     if (code !== 0) process.exit(code);
   });
 

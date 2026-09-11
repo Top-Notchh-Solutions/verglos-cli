@@ -7,8 +7,12 @@ import {
   type DetectorId,
   type ScanOptions,
   type ScanResult,
+  type ScanCoverageManifest,
+  type ScanProgressEvent,
   type VerglosConfig,
 } from "@verglos/shared";
+import { lstat, readFile } from "node:fs/promises";
+import { isAbsolute, resolve } from "node:path";
 import { agentSurfaceDetector } from "./detectors/agent-surface.js";
 import { aiPatternsDetector } from "./detectors/ai-patterns.js";
 import { apiHardeningDetector } from "./detectors/api-hardening.js";
@@ -47,12 +51,43 @@ const ALL_DETECTORS: Detector[] = [
   deepAuthDetector,
 ];
 
+const MAX_CONFIG_BYTES = 1 * 1024 * 1024;
+const MAX_IGNORE_BYTES = 256 * 1024;
+const MAX_IGNORE_LINES = 4096;
+const MAX_IGNORE_LINE_BYTES = 512;
+const MAX_TOTAL_IGNORE_PATHS = 256;
+const DEFAULT_DETECTOR_CONCURRENCY = 2;
+
+async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: number, run: (detector: Detector) => Promise<readonly T[]>, signal?: AbortSignal, onProgress?: (event: ScanProgressEvent) => void): Promise<T[]> {
+  const results: T[][] = Array.from({ length: items.length }, () => []);
+  let next = 0;
+  const worker = async () => {
+    while (true) {
+      if (signal?.aborted) throw new Error("scan cancelled");
+      const index = next++;
+      if (index >= items.length) return;
+      const detector = items[index]!;
+      onProgress?.({ phase: "detector", status: "started", detector: detector.id });
+      results[index] = [...await run(detector)];
+      onProgress?.({ phase: "detector", status: "completed", detector: detector.id });
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, () => worker()));
+  return results.flat();
+}
+
 async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
   try {
+    const ignorePath = `${projectRoot}/.verglosignore`;
+    const entry = await lstat(ignorePath);
+    if (!entry.isFile() || entry.size > MAX_IGNORE_BYTES) return [];
     const { readFile } = await import("node:fs/promises");
-    const raw = await readFile(`${projectRoot}/.verglosignore`, "utf8");
-    return raw
-      .split("\n")
+    const bytes = await readFile(ignorePath);
+    if (bytes.byteLength > MAX_IGNORE_BYTES) return [];
+    const raw = bytes.toString("utf8");
+    const lines = raw.split("\n");
+    if (lines.length > MAX_IGNORE_LINES || lines.some((line) => Buffer.byteLength(line, "utf8") > MAX_IGNORE_LINE_BYTES)) return [];
+    return lines
       .map((l) => l.trim())
       .filter((l) => l.length > 0 && !l.startsWith("#"));
   } catch {
@@ -60,12 +95,23 @@ async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
   }
 }
 
-export async function loadConfig(projectRoot: string): Promise<VerglosConfig> {
+export async function loadConfig(projectRoot: string, explicitConfigPath?: string): Promise<VerglosConfig> {
   let base: VerglosConfig;
-  try {
+  if (explicitConfigPath) {
+    const configPath = isAbsolute(explicitConfigPath) ? explicitConfigPath : resolve(projectRoot, explicitConfigPath);
+    const entry = await lstat(configPath);
+    if (!entry.isFile() || entry.size > MAX_CONFIG_BYTES) throw new Error("Verglos config must be a bounded regular file.");
+    const bytes = await readFile(configPath);
+    if (bytes.byteLength > MAX_CONFIG_BYTES) throw new Error("Verglos config must be a bounded regular file.");
+    let parsed: unknown;
+    try { parsed = JSON.parse(bytes.toString("utf8")); } catch { throw new Error("Verglos config must be valid JSON."); }
+    base = mergeConfig(parsed as Partial<VerglosConfig>);
+  } else try {
     const { createRequire } = await import("node:module");
     const require = createRequire(import.meta.url);
     const configPath = `${projectRoot}/.verglos.config.js`;
+    const entry = await lstat(configPath);
+    if (!entry.isFile() || entry.size > MAX_CONFIG_BYTES) throw new Error("implicit config is not a bounded regular file");
     const mod = require(configPath);
     base = mergeConfig(mod.default ?? mod);
   } catch {
@@ -74,16 +120,26 @@ export async function loadConfig(projectRoot: string): Promise<VerglosConfig> {
 
   const extraIgnores = await loadIgnoreFile(projectRoot);
   if (extraIgnores.length === 0) return base;
+  if (base.ignorePaths.length + extraIgnores.length > MAX_TOTAL_IGNORE_PATHS) return base;
   return { ...base, ignorePaths: [...base.ignorePaths, ...extraIgnores] };
 }
 
 export async function runScan(options: ScanOptions): Promise<ScanResult> {
+  if (options.signal?.aborted) throw new Error("scan cancelled");
+  const detectorConcurrency = options.detectorConcurrency ?? DEFAULT_DETECTOR_CONCURRENCY;
+  if (!Number.isInteger(detectorConcurrency) || detectorConcurrency < 1 || detectorConcurrency > 8) throw new Error("detector concurrency must be between 1 and 8");
   const start = Date.now();
-  const config = await loadConfig(options.projectRoot);
+  options.onProgress?.({ phase: "config", status: "started" });
+  const config = await loadConfig(options.projectRoot, options.configPath);
+  options.onProgress?.({ phase: "config", status: "completed" });
+  options.onProgress?.({ phase: "target", status: "started" });
   const { type: projectType } = await detectProjectType(options.projectRoot);
+  options.onProgress?.({ phase: "target", status: "completed" });
+  options.onProgress?.({ phase: "walk", status: "started" });
   const files = await walkProject(options.projectRoot, config);
+  options.onProgress?.({ phase: "walk", status: "completed" });
 
-  const detectorIds = options.detectors ?? [
+  const detectorIds = [...(options.detectors ?? [
     "secrets",
     "dependencies",
     "misconfig",
@@ -91,9 +147,14 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     "ai-patterns",
     "slopsquat",
     "vendored-cves",
-  ];
+  ])];
 
-  if (options.includeGitHistory) {
+  if (detectorIds.length > ALL_DETECTORS.length) throw new Error("scan detector selection exceeds the supported bound");
+  if (new Set(detectorIds).size !== detectorIds.length) throw new Error("scan detector selection cannot repeat detectors");
+  const knownDetectorIds = new Set(ALL_DETECTORS.map((detector) => detector.id));
+  if (detectorIds.some((id) => !knownDetectorIds.has(id))) throw new Error("scan detector selection contains an unsupported detector");
+
+  if (options.includeGitHistory && !detectorIds.includes("git-history")) {
     detectorIds.push("git-history");
   }
 
@@ -101,16 +162,15 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     detectorIds.includes(d.id as DetectorId),
   );
 
+  const limitations: string[] = [];
   const detectorContext = {
     verifySecrets: options.verifySecrets,
+    onLimitation: (limitation: string) => {
+      if (!limitations.includes(limitation) && limitations.length < 8) limitations.push(limitation);
+    },
   };
-  const results = await Promise.all(
-    activeDetectors.map((d) =>
-      d.run(files, options.projectRoot, detectorContext),
-    ),
-  );
-
-  const rawFindings = results.flat();
+  const rawFindings = await runDetectorsBounded(activeDetectors, detectorConcurrency, (detector) => detector.run(files, options.projectRoot, detectorContext), options.signal, options.onProgress);
+  if (options.signal?.aborted) throw new Error("scan cancelled");
   const minConfidence = options.minConfidence ?? DEFAULT_MIN_CONFIDENCE;
   const filteredFindings = rawFindings.filter(
     (f) => toConfidenceNumeric(f.confidence) >= minConfidence,
@@ -145,9 +205,13 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     : rawScore;
   const unlocked = options.unlocked ?? false;
 
+  if (options.noProvenance) options.onProgress?.({ phase: "provenance", status: "skipped" });
+  else options.onProgress?.({ phase: "provenance", status: "started" });
   const provenance = options.noProvenance
     ? undefined
     : await computeProvenance(files, options.projectRoot, allFindings);
+  if (!options.noProvenance) options.onProgress?.({ phase: "provenance", status: "completed" });
+  if (options.signal?.aborted) throw new Error("scan cancelled");
 
   return {
     projectRoot: options.projectRoot,
@@ -158,6 +222,18 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     score,
     unlocked,
     provenance,
+    coverage: (() => {
+      if (options.noProvenance) limitations.push("provenance was explicitly skipped");
+      if (score.unsupportedLanguage) limitations.push("repository language is outside the supported JS/TS detector corpus");
+      const manifest: ScanCoverageManifest = {
+        status: limitations.length === 0 ? "complete" : "incomplete",
+        filesWalked: files.length,
+        requestedDetectors: Object.freeze([...detectorIds]),
+        executedDetectors: Object.freeze(activeDetectors.map((detector) => detector.id)),
+        limitations: Object.freeze(limitations),
+      };
+      return Object.freeze(manifest);
+    })(),
   };
 }
 

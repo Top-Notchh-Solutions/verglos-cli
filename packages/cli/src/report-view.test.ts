@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -24,5 +24,16 @@ test("report view preparation handles host-native spaces and Unicode paths", asy
     assert.match(await prepareReportView(path), /Release decision/);
     await assert.rejects(() => prepareReportView(join(root, "missing.json")));
     await assert.rejects(() => prepareReportView(join(root, "bad\0name.json")));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("report view preparation rejects symlink inputs before parsing", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-view-link-"));
+  try {
+    const target = join(root, "header.json");
+    const link = join(root, "header-link.json");
+    await writeFile(target, JSON.stringify({ decision: "INCOMPLETE", subjectId: "subject", policy: { id: "p", version: "1.0.0", digest: "sha256:a" }, generatedAt: "2026-09-09T00:00:00Z", signerStatus: "unknown", limitations: [], nextAction: "review" }));
+    await symlink(target, link);
+    await assert.rejects(() => prepareReportView(link), /regular file/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

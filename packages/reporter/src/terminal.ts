@@ -42,6 +42,18 @@ function formatDuration(ms: number): string {
   return `${(ms / 1000).toFixed(1)}s`;
 }
 
+function printCoverage(result: ScanResult): void {
+  const coverage = result.coverage;
+  if (!coverage) return;
+  const status = coverage.status === "complete" ? "complete" : "incomplete";
+  console.log(chalk.gray(`  Coverage  ${status} · ${coverage.filesWalked} files · ${coverage.executedDetectors.length}/${coverage.requestedDetectors.length} detectors`));
+  for (const limitation of coverage.limitations.slice(0, 8)) {
+    const safe = limitation.replace(/[\u0000-\u001f\u007f]/g, " ").slice(0, 512);
+    console.log(chalk.gray(`    Limitation · ${safe}`));
+  }
+  console.log("");
+}
+
 function verifiedSummary(findings: Finding[]): string {
   const eligible = findings.filter((f) => f.severity !== "info");
   const verified = eligible.filter((f) => f.verified === "true").length;
@@ -141,6 +153,7 @@ export function printTerminalSummary(result: ScanResult): void {
   console.log(chalk.gray(verifiedSummary(findings)));
   console.log("");
 
+  printCoverage(result);
   printProvenance(provenance);
   printTop3(findings);
 

@@ -9,12 +9,23 @@ export class SbomResolutionError extends Error {
   constructor(readonly code: "INVALID_TARGET" | "MISSING_PATH" | "UNSUPPORTED_FORMAT" | "INVALID_DOCUMENT", message: string) { super(message); }
 }
 
+const MAX_SBOM_BYTES = 8 * 1024 * 1024;
+
 export async function resolveSbomTarget(target: TargetSpec, context: TargetResolverContext): Promise<TargetResolution> {
   assertNoExecutionContext(context);
   if (target.kind !== "sbom") throw new SbomResolutionError("INVALID_TARGET", "SBOM resolver requires an SBOM target.");
   const path = resolve(context.cwd, target.value);
   let bytes: Buffer;
-  try { if (!(await lstat(path)).isFile()) throw new Error(); bytes = await readFile(path); } catch { throw new SbomResolutionError("MISSING_PATH", "SBOM target is not a readable file."); }
+  try {
+    const entry = await lstat(path);
+    if (!entry.isFile()) throw new Error();
+    if (entry.size > MAX_SBOM_BYTES) throw new SbomResolutionError("INVALID_DOCUMENT", "SBOM document exceeds the 8 MiB limit.");
+    bytes = await readFile(path);
+    if (bytes.byteLength > MAX_SBOM_BYTES) throw new SbomResolutionError("INVALID_DOCUMENT", "SBOM document exceeds the 8 MiB limit.");
+  } catch (error) {
+    if (error instanceof SbomResolutionError) throw error;
+    throw new SbomResolutionError("MISSING_PATH", "SBOM target is not a readable file.");
+  }
   let document: Record<string, unknown>;
   try { const parsed: unknown = JSON.parse(bytes.toString("utf8")); if (typeof parsed !== "object" || parsed === null) throw new Error(); document = parsed as Record<string, unknown>; } catch { throw new SbomResolutionError("INVALID_DOCUMENT", "SBOM document is not valid JSON."); }
   const format = document.bomFormat === "CycloneDX" ? "cyclonedx-json" : typeof document.spdxVersion === "string" ? "spdx-json" : undefined;

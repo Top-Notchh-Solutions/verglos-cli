@@ -100,7 +100,7 @@ function mapOsvSeverity(vuln: OsvVuln): Finding["severity"] {
   return "high";
 }
 
-async function queryOsv(name: string, version: string): Promise<OsvVuln[]> {
+async function queryOsv(name: string, version: string, onLimitation?: (limitation: string) => void): Promise<OsvVuln[]> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), OSV_TIMEOUT_MS);
   try {
@@ -110,10 +110,11 @@ async function queryOsv(name: string, version: string): Promise<OsvVuln[]> {
       body: JSON.stringify({ package: { name, ecosystem: "npm" }, version }),
       signal: controller.signal,
     });
-    if (!res.ok) return [];
+    if (!res.ok) { onLimitation?.("OSV advisory lookup was unavailable"); return []; }
     const data = (await res.json()) as OsvResponse;
     return data.vulns ?? [];
   } catch {
+    onLimitation?.("OSV advisory lookup was unavailable");
     return [];
   } finally {
     clearTimeout(timer);
@@ -140,7 +141,7 @@ async function inParallel<T, R>(
 
 export const vendoredCvesDetector: Detector = {
   id: "vendored-cves",
-  async run(files: ScannedFile[]): Promise<Finding[]> {
+  async run(files: ScannedFile[], _projectRoot: string, context): Promise<Finding[]> {
     // First pass: collect vendored files with parseable filenames.
     const candidates: Array<{ file: ScannedFile; parsed: VendoredParse }> = [];
     for (const file of files) {
@@ -167,7 +168,7 @@ export const vendoredCvesDetector: Detector = {
     const results = await inParallel(
       capped,
       async ({ file, parsed }) => {
-        const vulns = await queryOsv(parsed.name, parsed.version);
+        const vulns = await queryOsv(parsed.name, parsed.version, context?.onLimitation);
         return { file, parsed, vulns };
       },
       CONCURRENCY,

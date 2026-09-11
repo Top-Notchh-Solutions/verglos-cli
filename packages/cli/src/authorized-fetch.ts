@@ -1,5 +1,15 @@
 import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
 
+const MAX_RESPONSE_BYTES = 1 * 1024 * 1024;
+
+async function readBoundedJson(response: Response): Promise<unknown> {
+  const length = Number(response.headers.get("content-length") ?? "0");
+  if (Number.isFinite(length) && length > MAX_RESPONSE_BYTES) return null;
+  const bytes = await response.arrayBuffer();
+  if (bytes.byteLength > MAX_RESPONSE_BYTES) return null;
+  try { return JSON.parse(new TextDecoder().decode(bytes)); } catch { return null; }
+}
+
 /**
  * Shared license-authenticated fetch used by every CLI command that
  * hits a paid endpoint (`monitor`, `attest`, and any future rotate/
@@ -51,7 +61,7 @@ export async function authorizedFetch(
       },
       body: init.body === undefined ? undefined : JSON.stringify(init.body),
     });
-    const json = await res.json().catch(() => null);
+    const json = await readBoundedJson(res);
     if (res.status === 401 || res.status === 402) {
       return { ok: false, status: res.status, json, reason: "unauthorized" };
     }

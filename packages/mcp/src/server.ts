@@ -5,7 +5,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { mcpToolAuthority, reconcileMcpCapabilities, type Finding } from "@verglos/shared";
+import { authorizeAgentAction, mcpToolAuthority, putApprovalReceipt, reconcileMcpCapabilities, type ApprovalReceipt, type Finding } from "@verglos/shared";
 import { checkBeforeWrite } from "./tools/check-before-write.js";
 import type {
   CheckBeforeWriteInput as ToolInput,
@@ -14,12 +14,38 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
-import { parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseScanArgs } from "./input-validation.js";
+import { parseAttestArgs, parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseHuntBeforeWriteArgs, parseHuntExplainVerdictArgs, parseHuntFindingArgs, parseHuntReportArgs, parseScanArgs } from "./input-validation.js";
 
 const require = createRequire(import.meta.url);
 const { version: MCP_VERSION } = require("../package.json") as {
   version: string;
 };
+
+const MAX_TOOL_ARGUMENT_BYTES = 256 * 1024;
+const MAX_TOOL_RESPONSE_BYTES = 512 * 1024;
+const APPROVAL_RECEIPT_PROPERTY = {
+  approvalReceipt: {
+    type: "object",
+    description: "Exact, time-bounded approval receipt for this side-effect-capable action.",
+    properties: {
+      requestId: { type: "string", format: "uuid" },
+      action: { type: "string" },
+      actor: { type: "string" },
+      target: { type: "string" },
+      files: { type: "array", items: { type: "string" }, maxItems: 256 },
+      network: { type: "array", items: { type: "string", format: "uri" }, maxItems: 64 },
+      policyEffect: { type: "string" },
+      requestedAt: { type: "string", format: "date-time" },
+      expiresAt: { type: "string", format: "date-time" },
+      decision: { type: "string", enum: ["approved", "denied"] },
+      decidedBy: { type: "string" },
+      decidedAt: { type: "string", format: "date-time" },
+      requestDigest: { type: "string", pattern: "^sha256:[a-f0-9]{64}$" },
+    },
+    required: ["requestId", "action", "actor", "target", "files", "network", "policyEffect", "requestedAt", "expiresAt", "decision", "decidedBy", "decidedAt", "requestDigest"],
+    additionalProperties: false,
+  },
+} as const;
 
 /**
  * MCP server for Verglos.
@@ -113,6 +139,8 @@ const TOOLS = [
           type: "string",
           description: "Rule id: 'AI-002', 'D4-001', etc.",
         },
+        targetSubjectId: { type: "string", description: "Optional exact immutable subject identity for a non-mutating remediation proposal." },
+        files: { type: "array", items: { type: "string" }, description: "Optional bounded relative file scope for the proposal; no files are written." },
       },
       required: ["rule"],
     },
@@ -126,6 +154,7 @@ const TOOLS = [
       properties: {
         reportPath: { type: "string", description: "Path to verglos-report.json." },
         findingId: { type: "string", description: "Finding id to verify." },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath", "findingId"],
     },
@@ -138,6 +167,7 @@ const TOOLS = [
       type: "object",
       properties: {
         reportPath: { type: "string", description: "Path to verglos-report.json." },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath"],
     },
@@ -152,6 +182,7 @@ const TOOLS = [
         code: { type: "string", description: "Code block the agent is about to write." },
         filePath: { type: "string", description: "Target file path." },
         language: { type: "string", description: "Language hint such as ts, tsx, js, jsx." },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["code", "filePath", "language"],
     },
@@ -169,6 +200,7 @@ const TOOLS = [
           enum: ["true", "false", "not_attemptable"],
           description: "Hunt verdict to explain.",
         },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["findingId", "verdict"],
     },
@@ -185,6 +217,7 @@ const TOOLS = [
           type: "object",
           description: "Signing key and verify URL configuration.",
         },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath"],
     },
@@ -193,23 +226,14 @@ const TOOLS = [
 
 // ─── Handler dispatch ─────────────────────────────────────────────────────
 
-async function stubResponse(name: string): Promise<{ content: { type: "text"; text: string }[] }> {
-  return {
-    content: [
-      {
-        type: "text",
-        text: `verglos:mcp: ${name} is registered but the handler ships in a later commit. Try again after the next release.`,
-      },
-    ],
-  };
-}
-
-function jsonResponse(payload: unknown): {
+export function jsonResponse(payload: unknown): {
   content: { type: "text"; text: string }[];
 } {
-  return {
-    content: [{ type: "text", text: JSON.stringify(payload, null, 2) }],
-  };
+  const text = JSON.stringify(payload, null, 2);
+  if (Buffer.byteLength(text, "utf8") > MAX_TOOL_RESPONSE_BYTES) {
+    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "output", code: "MCP_OUTPUT_LIMIT", message: "tool response exceeds the 512 KiB limit" }) }] };
+  }
+  return { content: [{ type: "text", text }] };
 }
 
 function alphaStub(name: string, tier: "pro" | "studio"): {
@@ -233,39 +257,89 @@ function alphaStub(name: string, tier: "pro" | "studio"): {
   };
 }
 
-async function dispatchTool(
+function approvalTarget(name: string, input: Record<string, unknown>): string | undefined {
+  if (name === "verglos_hunt_report" || name === "verglos_attest") return typeof input.reportPath === "string" ? `report:${input.reportPath}` : undefined;
+  if (name === "verglos_hunt_finding") {
+    return typeof input.reportPath === "string" && typeof input.findingId === "string" ? `report:${input.reportPath}#finding:${input.findingId}` : undefined;
+  }
+  if (name === "verglos_hunt_before_write") return typeof input.filePath === "string" ? `file:${input.filePath}` : undefined;
+  if (name === "verglos_hunt_explain_verdict") return typeof input.findingId === "string" ? `finding:${input.findingId}` : undefined;
+  return undefined;
+}
+
+function approvalFile(name: string, input: Record<string, unknown>): string | undefined {
+  if (name === "verglos_hunt_report" || name === "verglos_hunt_finding" || name === "verglos_attest") return typeof input.reportPath === "string" ? input.reportPath : undefined;
+  if (name === "verglos_hunt_before_write") return typeof input.filePath === "string" ? input.filePath : undefined;
+  return undefined;
+}
+
+export async function dispatchTool(
   name: string,
   args: Record<string, unknown> | undefined,
+  options: { readonly approvalStoreRoot?: string; readonly now?: string } = {},
 ): Promise<{ content: { type: "text"; text: string }[] }> {
+  if (args !== undefined && (!args || typeof args !== "object" || Array.isArray(args))) {
+    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be an object" }) }] };
+  }
+  if (args !== undefined && Buffer.byteLength(JSON.stringify(args), "utf8") > MAX_TOOL_ARGUMENT_BYTES) {
+    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments exceed the 256 KiB limit" }) }] };
+  }
   const input = args ?? {};
   const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
+  const authority = mcpToolAuthority(name);
+  if (authority?.approvalRequired) {
+    const approvalReceipt = input.approvalReceipt as ApprovalReceipt | undefined;
+    const approval = authorizeAgentAction(authority.action, approvalReceipt, options.now ?? new Date().toISOString());
+    if (!approval.allowed) return invalid("MCP_APPROVAL_REQUIRED", `MCP tool authority denied: ${approval.reason}`);
+    const target = approvalTarget(name, input);
+    if (target && (input.approvalReceipt as { target?: unknown } | undefined)?.target !== target) return invalid("MCP_APPROVAL_SCOPE", "approval receipt target does not match the requested tool target");
+    const receipt = input.approvalReceipt as { files?: unknown; network?: unknown } | undefined;
+    const file = approvalFile(name, input);
+    if (file && (!Array.isArray(receipt?.files) || !receipt.files.includes(file))) return invalid("MCP_APPROVAL_SCOPE", "approval receipt does not cover the requested file scope");
+    if (Array.isArray(receipt?.network) && receipt.network.length > 0) return invalid("MCP_APPROVAL_SCOPE", "approval receipt declares network scope for a network-free tool");
+    if (options.approvalStoreRoot) {
+      try { await putApprovalReceipt(options.approvalStoreRoot, approvalReceipt!); }
+      catch (error) { return invalid("MCP_APPROVAL_AUDIT", error instanceof Error ? error.message : "approval receipt could not be persisted"); }
+    }
+  }
+  const toolInput = authority?.approvalRequired ? { ...input } : input;
+  if (authority?.approvalRequired) delete toolInput.approvalReceipt;
   switch (name) {
     case "verglos_check_before_write": {
-      let parsed: CheckBeforeWriteInput; try { parsed = parseCheckBeforeWriteArgs(input); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      let parsed: CheckBeforeWriteInput; try { parsed = parseCheckBeforeWriteArgs(toolInput); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
       try { return jsonResponse(await checkBeforeWrite(parsed)); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_FAILED", error instanceof Error ? error.message : "tool failed"); }
     }
     case "verglos_check_package": {
-      let parsed; try { parsed = parseCheckPackageArgs(input); } catch (error) { return invalid("MCP_CHECK_PACKAGE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      let parsed; try { parsed = parseCheckPackageArgs(toolInput); } catch (error) { return invalid("MCP_CHECK_PACKAGE_INPUT", error instanceof Error ? error.message : "invalid input"); }
       try { return jsonResponse(await checkPackage(parsed)); } catch (error) { return invalid("MCP_CHECK_PACKAGE_FAILED", error instanceof Error ? error.message : "tool failed"); }
     }
     case "verglos_scan": {
-      let parsed; try { parsed = parseScanArgs(input); } catch (error) { return invalid("MCP_SCAN_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      let parsed; try { parsed = parseScanArgs(toolInput); } catch (error) { return invalid("MCP_SCAN_INPUT", error instanceof Error ? error.message : "invalid input"); }
       try { return jsonResponse(await scanProject(parsed)); } catch (error) { return invalid("MCP_SCAN_FAILED", error instanceof Error ? error.message : "tool failed"); }
     }
     case "verglos_explain_finding": {
-      let parsed; try { parsed = parseExplainFindingArgs(input); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      const result = explainFinding(parsed);
+      let parsed; try { parsed = parseExplainFindingArgs(toolInput); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      let result: ReturnType<typeof explainFinding>;
+      try { result = explainFinding(parsed); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_FAILED", error instanceof Error ? error.message : "tool failed"); }
       return jsonResponse(result);
     }
     case "verglos_hunt_finding":
+      try { parseHuntFindingArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_report":
+      try { parseHuntReportArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_REPORT_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_before_write":
+      try { parseHuntBeforeWriteArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_explain_verdict":
+      try { parseHuntExplainVerdictArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_EXPLAIN_VERDICT_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "pro"));
     case "verglos_attest":
+      try { parseAttestArgs(toolInput); } catch (error) { return invalid("MCP_ATTEST_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "studio"));
     default:
-      return stubResponse(name);
+      return invalid("MCP_UNKNOWN_TOOL", "unknown MCP tool");
   }
 }
 
@@ -306,7 +380,7 @@ export function createVerglosMcpServer(): Server {
     const args = request.params.arguments as
       | Record<string, unknown>
       | undefined;
-    return dispatchTool(name, args);
+    return dispatchTool(name, args, { approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE });
   });
 
   return server;

@@ -15,17 +15,22 @@ const SEVERITY_COLOR = {
   info: chalk.gray,
 } as const;
 
-function printEntry(rule: string): number {
+function printEntry(rule: string, json = false, quiet = false): number {
   const entry = lookupRule(rule);
   if (!entry) {
-    console.error(chalk.red(`Unknown rule: ${rule}`));
-    console.error(
-      chalk.gray(
-        `Run \`verglos explain --list\` to see every rule Verglos knows about.`,
-      ),
-    );
+    if (json) console.log(JSON.stringify({ status: "error", code: "UNKNOWN_RULE", rule }));
+    else if (!quiet) {
+      console.error(chalk.red(`Unknown rule: ${rule}`));
+      console.error(chalk.gray(`Run \`verglos explain --list\` to see every rule Verglos knows about.`));
+    }
     return 1;
   }
+
+  if (json) {
+    console.log(JSON.stringify({ status: "ok", entry }));
+    return 0;
+  }
+  if (quiet) return 0;
 
   const sevColor =
     SEVERITY_COLOR[entry.severity as keyof typeof SEVERITY_COLOR] ??
@@ -61,8 +66,13 @@ function printEntry(rule: string): number {
   return 0;
 }
 
-function printList(): number {
+function printList(json = false, quiet = false): number {
   const rules = listRules();
+  if (json) {
+    console.log(JSON.stringify({ status: "ok", rules: rules.map((id) => EXPLAIN_BANK[id]!) }));
+    return 0;
+  }
+  if (quiet) return 0;
   console.log("");
   console.log(chalk.bold(`${rules.length} rules`));
   console.log("");
@@ -88,9 +98,11 @@ function printList(): number {
 export interface ExplainOptions {
   rule?: string;
   list?: boolean;
+  json?: boolean;
+  quiet?: boolean;
 }
 
 export function executeExplain(options: ExplainOptions): number {
-  if (options.list || !options.rule) return printList();
-  return printEntry(options.rule);
+  if (options.list || !options.rule) return printList(options.json, options.quiet);
+  return printEntry(options.rule, options.json, options.quiet);
 }

@@ -53,6 +53,9 @@ const { version: CLI_VERSION } = require("../package.json") as {
 
 export interface ScanCommandOptions {
   cwd?: string;
+  configPath?: string;
+  outputDir?: string;
+  json?: boolean;
   detectors?: DetectorId[];
   quiet?: boolean;
   watch?: boolean;
@@ -82,7 +85,7 @@ export async function executeScan(
 ): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
 
-  const spinner = options.quiet ? null : ora("Scanning project...").start();
+  const spinner = options.quiet || options.json ? null : ora("Scanning project...").start();
 
   const previous = await loadLastScore(projectRoot);
   const startedAt = Date.now();
@@ -122,6 +125,7 @@ export async function executeScan(
   try {
     result = await runScan({
       projectRoot,
+      configPath: options.configPath,
       detectors,
       unlocked: true,
       includeGitHistory: options.includeGitHistory ?? true,
@@ -129,6 +133,12 @@ export async function executeScan(
       strict: options.strict,
       noProvenance: options.focused ? true : options.noProvenance,
       verifySecrets: options.verifySecrets,
+      onProgress: (event) => {
+        if (!spinner) return;
+        const label = event.detector ? `${event.phase} ${event.detector}` : event.phase;
+        const verb = event.status === "started" ? "Scanning" : event.status === "skipped" ? "Skipped" : "Completed";
+        spinner.text = `${verb} ${label}...`;
+      },
     });
   } finally {
     if (tickTimer) clearInterval(tickTimer);
@@ -136,9 +146,11 @@ export async function executeScan(
 
   const durationMs = Date.now() - startedAt;
   spinner?.stop();
-  await writeReports(result, projectRoot);
+  await writeReports(result, projectRoot, options.outputDir ? resolve(projectRoot, options.outputDir) : projectRoot);
 
-  if (!options.quiet) {
+  if (options.json) {
+    console.log(JSON.stringify(result));
+  } else if (!options.quiet) {
     printTerminalSummary(result);
     if (options.hunt) {
       console.log("  Hunt integration shipping in v2.0.0-beta");
@@ -173,7 +185,7 @@ export async function executeScan(
     await sendScanEvent(result, {
       cliVersion: CLI_VERSION,
       durationMs,
-      detectorsRun: options.detectors,
+      detectorsRun: detectors,
       verifySecrets: options.verifySecrets,
     });
   }
@@ -181,16 +193,18 @@ export async function executeScan(
   return result.score.value;
 }
 
-export async function executeScore(cwd?: string, strict = false): Promise<void> {
+export async function executeScore(cwd?: string, strict = false, quiet = false, configPath?: string, json = false): Promise<void> {
   const projectRoot = resolve(cwd ?? process.cwd());
 
   const result = await runScan({
     projectRoot,
+    configPath,
     unlocked: true,
     strict,
   });
 
-  printScoreOnly(result);
+  if (json) console.log(JSON.stringify(result.score));
+  else if (!quiet) printScoreOnly(result);
 }
 
 export async function executeCi(options: {
@@ -200,18 +214,22 @@ export async function executeCi(options: {
   strict?: boolean;
   noTelemetry?: boolean;
   hunt?: boolean;
+  configPath?: string;
+  json?: boolean;
 }): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
   const startedAt = Date.now();
 
   const result = await runScan({
     projectRoot,
+    configPath: options.configPath,
     unlocked: true,
     strict: options.strict,
   });
 
   const durationMs = Date.now() - startedAt;
-  if (!options.quiet) {
+  if (options.json) console.log(JSON.stringify({ score: result.score, findings: result.findings }));
+  else if (!options.quiet) {
     printTerminalSummary(result);
     if (options.hunt) {
       console.log("Verified-only CI gating shipping in v2.0.0-beta");

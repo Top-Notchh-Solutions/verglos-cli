@@ -42,6 +42,21 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Test
+        run: pnpm test
+
+      - name: Test release artifact verifier
+        run: node --test scripts/verify-release-artifacts.test.mjs
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Audit package contents
+        run: node scripts/check-package-contents.mjs
+
+      - name: Audit public boundary
+        run: node scripts/check-public-boundary.mjs
+
       - name: Run Verglos on itself
         # The CI command exits non-zero on any critical finding OR when
         # the score falls below --threshold.

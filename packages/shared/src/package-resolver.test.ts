@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, writeFile } from "node:fs/promises";
+import { mkdtemp, truncate, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -20,5 +20,12 @@ test("package resolver reports missing or malformed metadata", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-package-"));
   await assert.rejects(() => resolvePackageTarget({ kind: "package", value: root }, context(root)), (error: unknown) => error instanceof PackageResolutionError && error.code === "MISSING_METADATA");
   await writeFile(join(root, "package.json"), "not-json");
+  await assert.rejects(() => resolvePackageTarget({ kind: "package", value: root }, context(root)), (error: unknown) => error instanceof PackageResolutionError && error.code === "INVALID_METADATA");
+});
+
+test("package resolver rejects oversized package metadata before parsing", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-package-large-"));
+  await writeFile(join(root, "package.json"), "{}");
+  await truncate(join(root, "package.json"), 1 * 1024 * 1024 + 1);
   await assert.rejects(() => resolvePackageTarget({ kind: "package", value: root }, context(root)), (error: unknown) => error instanceof PackageResolutionError && error.code === "INVALID_METADATA");
 });

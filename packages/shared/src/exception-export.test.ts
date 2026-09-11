@@ -7,7 +7,12 @@ test("exception export projection preserves scope and only lists implemented for
   const approval = { schemaId: "urn:verglos:schema:exception-approval", schemaVersion: "1.0.0", approvalId: "urn:uuid:32345678-1234-4123-8123-123456789abc", target: { exceptionId: exception.exceptionId, requestDigest: { algorithm: "sha256", value: "c".repeat(64) } }, decision: "denied", approver: { kind: "person", id: "approver", authority: "release" }, rationale: "insufficient evidence", decidedAt: "2026-09-02T00:00:00.000Z", auditReference: { system: "local", recordId: "audit-1", digest: { algorithm: "sha256", value: "d".repeat(64) } } } as const;
   const projection = projectExceptionExport(exception as any, approval as any, "2026-09-03T00:00:00.000Z");
   assert.deepEqual(projection.scope.observationIds, ["urn:uuid:22345678-1234-4123-8123-123456789abc"]);
+  assert.equal(projection.controls[0]?.description, "monitor");
+  assert.deepEqual(projection.reversalTriggers, ["fix shipped"]);
+  assert.equal(projection.effectiveFrom, "2026-09-01T00:00:00.000Z");
   assert.deepEqual(projection.availableExports, ["SARIF", "CycloneDX", "CycloneDX VEX", "SPDX"]);
   assert.equal(projection.approval.expired, false);
   assert.equal(Object.isFrozen(projection), true);
+  assert.equal(Object.isFrozen(projection.controls[0]), true);
+  assert.equal(Object.isFrozen(projection.controls[0]?.evidence), true);
 });

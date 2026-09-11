@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { lstat, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
   riskLevelLabel,
@@ -331,6 +331,16 @@ function renderProvenance(p: RepoProvenance | undefined): string {
   `;
 }
 
+function renderCoverage(result: ScanResult): string {
+  const coverage = result.coverage;
+  if (!coverage) return "";
+  const status = coverage.status === "complete" ? "Complete" : "Incomplete";
+  const limitations = coverage.limitations.length > 0
+    ? `<ul>${coverage.limitations.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+    : "<p class=\"meta\">No recorded limitations.</p>";
+  return `<section class="coverage"><h2>Scan coverage</h2><p class="section-kicker"><strong>${status}</strong> · ${coverage.filesWalked} files walked · ${coverage.executedDetectors.length} of ${coverage.requestedDetectors.length} requested detectors executed.</p><p class="meta">Detectors: ${coverage.executedDetectors.map((detector) => escapeHtml(detector)).join(", ") || "none"}</p>${coverage.limitations.length > 0 ? `<p class="meta">Limitations</p>${limitations}` : limitations}</section>`;
+}
+
 function scoreArc(score: number): string {
   const radius = 80;
   const circumference = 2 * Math.PI * radius;
@@ -431,6 +441,8 @@ export function renderHtmlReport(result: ScanResult): string {
     .prov-ratio-muted { color: #71717a; font-style: italic; font-size: 0.8125rem; }
     .prov-line { color: #d4d4d8; font-size: 0.875rem; margin-top: 0.25rem; }
     .prov-num { color: #E85D4C; font-family: monospace; font-weight: 600; }
+    .coverage { padding: 1.25rem; border: 1px solid #27272a; border-radius: 8px; background: #111113; }
+    .coverage ul { margin: 0.5rem 0 0 1.25rem; color: #F59E0B; font-size: 0.8125rem; }
     @media (max-width: 760px) {
       .container { padding: 1rem; }
       .counts { gap: 0.75rem; flex-wrap: wrap; }
@@ -459,6 +471,7 @@ export function renderHtmlReport(result: ScanResult): string {
     </header>
 
     ${renderProvenance(result.provenance)}
+    ${renderCoverage(result)}
 
     <section>
       <h2>10 Security Domains</h2>
@@ -518,8 +531,16 @@ export function renderHtmlReport(result: ScanResult): string {
 export async function writeHtmlReport(
   result: ScanResult,
   projectRoot: string,
+  outputDir = projectRoot,
 ): Promise<string> {
-  const path = join(projectRoot, "verglos-report.html");
+  try {
+    const entry = await lstat(outputDir);
+    if (!entry.isDirectory()) throw new Error("report output path must be a regular directory");
+  } catch (error) {
+    if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error;
+    await mkdir(outputDir, { recursive: true, mode: 0o700 });
+  }
+  const path = join(outputDir, "verglos-report.html");
   await writeFile(path, renderHtmlReport(result), "utf8");
   return path;
 }
