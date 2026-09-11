@@ -21,4 +21,5 @@ test("Hunt execution requires trusted exact recipe and execute approval", () => 
   assert.equal(canExecuteHunt(allowlistedRecipe, { ruleId: "d1-1", subjectId, at: "2026-01-02T00:00:00Z", approval: allowlistedApproval }, { signers: ["verglos-release"], recipeDigests: [huntRecipeDigest(allowlistedRecipe)] }), true);
   const widenedApproval = createApprovalReceipt({ requestId: "123e4567-e89b-12d3-a456-426614174003", action: "execute", actor: "agent", target: subjectId, files: [], network: ["https://example.com", "https://other.example"], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2026-02-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
   assert.equal(canExecuteHunt(allowlistedRecipe, { ruleId: "d1-1", subjectId, at: "2026-01-02T00:00:00Z", approval: widenedApproval }, { signers: ["verglos-release"] }), false);
+  assert.equal(canExecuteHunt(recipe, { ruleId: "d1-1", subjectId, at: "2026-01-02T00:00:00Z", approval: { network: null } as never }, trust), false);
 });

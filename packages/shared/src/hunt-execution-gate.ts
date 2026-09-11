@@ -3,9 +3,9 @@ import { isExecutableHuntRecipe, type HuntRecipeTrustPolicy } from "./hunt-recip
 import type { HuntRecipe } from "./hunt-recipe.js";
 
 export function canExecuteHunt(recipe: HuntRecipe, input: { readonly ruleId: string; readonly subjectId: string; readonly at: string; readonly approval: ApprovalReceipt }, trust: HuntRecipeTrustPolicy): boolean {
-  const networkMatches = input.approval.network.length === recipe.network.destinations.length
-    && recipe.network.destinations.every((destination) => input.approval.network.includes(destination));
   try {
+    const networkMatches = input.approval.network.length === recipe.network.destinations.length
+      && recipe.network.destinations.every((destination) => input.approval.network.includes(destination));
     return recipe.ruleId === input.ruleId
       && recipe.targetSubjectId === input.subjectId
       && isExecutableHuntRecipe(recipe, trust)
