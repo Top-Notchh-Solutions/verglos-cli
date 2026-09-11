@@ -26,7 +26,7 @@ export function buildDockerInvocation(input: DockerInvocationInput): readonly st
   if (!Number.isInteger(input.maxProcesses) || input.maxProcesses <= 0 || input.maxProcesses > 4096) throw new Error("Docker Hunt process limit is out of bounds");
   if (input.command.length === 0 || input.command.length > 32 || input.command.some((part) => !part || part.length > 4096 || /[\u0000-\u001f\u007f]/.test(part))) throw new Error("Docker Hunt command is invalid");
   return Object.freeze([
-    "run", "--rm", "--network", "none", "--read-only",
+    "run", "--rm", "--init", "--stop-timeout", "1", "--network", "none", "--read-only",
     "--tmpfs", "/tmp:rw,noexec,nosuid,nodev",
     "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
     "--user", "65532:65532", "--workdir", "/workspace",
