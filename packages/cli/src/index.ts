@@ -33,6 +33,11 @@ import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
 import { executeTargetInspect } from "./target-inspect.js";
 import { ApprovalReceiptSchema, authorizeAgentAction, listCachedEngines, type ApprovalReceipt } from "@verglos/shared";
+
+function reportPreflightError(json: boolean | undefined, quiet: boolean | undefined, code: string, humanMessage: string, machineMessage: string): void {
+  if (json) console.log(JSON.stringify({ status: "error", code, message: machineMessage }));
+  else if (!quiet) console.error(humanMessage);
+}
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
@@ -176,7 +181,7 @@ record.command("sign <manifestPath> <signaturePath>")
   .action(async (manifestPath: string, signaturePath: string, opts: { key: string; signer: string; issuer: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => {
     let approvalReceipt: ApprovalReceipt | undefined;
     if (opts.approve && !opts.approvalReceipt) {
-      if (!opts.quiet) console.error("record signing requires an approval receipt (--approval-receipt) before reading the key");
+      reportPreflightError(opts.json, opts.quiet, "RECORD_SIGN_INPUT", "record signing requires an approval receipt (--approval-receipt) before reading the key", "record signing failed");
       process.exit(78);
     }
     if (opts.approve && opts.approvalReceipt) {
@@ -185,7 +190,7 @@ record.command("sign <manifestPath> <signaturePath>")
         const authorization = authorizeAgentAction("sign", approvalReceipt, new Date().toISOString());
         if (!authorization.allowed || approvalReceipt.target !== `manifest:${manifestPath}` || !approvalReceipt.files.includes(manifestPath) || approvalReceipt.network.length > 0) throw new Error(authorization.allowed ? "approval receipt scope does not match the signing manifest" : authorization.reason);
       } catch (error) {
-        if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid");
+        reportPreflightError(opts.json, opts.quiet, "RECORD_SIGN_INPUT", error instanceof Error ? error.message : "approval receipt is invalid", "record signing failed");
         process.exit(78);
       }
     }
@@ -243,7 +248,7 @@ engines.command("install <engineId> <version> <artifactPath>")
 .option("--approval-receipt <path>", "Path to an exact, time-bounded engine approval receipt")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress output")
-  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => { let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); } } process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey })); });
+  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => { let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { reportPreflightError(opts.json, opts.quiet, "ENGINE_INSTALL_INPUT", error instanceof Error ? error.message : "approval receipt is invalid", "engine installation failed"); process.exit(78); } } process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey })); });
 
 for (const action of ["update", "rollback"] as const) {
   engines.command(`${action} <engineId> <version> <artifactPath>`)
@@ -256,7 +261,7 @@ for (const action of ["update", "rollback"] as const) {
     .option("--json", "Emit machine-readable JSON")
     .option("--quiet", "Suppress output")
     .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => {
-      let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); } }
+      let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { reportPreflightError(opts.json, opts.quiet, "ENGINE_INSTALL_INPUT", error instanceof Error ? error.message : "approval receipt is invalid", "engine installation failed"); process.exit(78); } }
       process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey, action }));
     });
 }
