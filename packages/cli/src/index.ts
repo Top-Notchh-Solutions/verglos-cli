@@ -686,14 +686,21 @@ program
 program
   .command("hook")
   .description("Install pre-commit git hook")
-  .action(async () => {
-    await installPreCommitHook(process.cwd());
-    console.log(chalk.green("Pre-commit hook installed."));
-    console.log(
-      chalk.gray(
-        "  Bypass with `git commit --no-verify` if you need to override.",
-      ),
-    );
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
+    try {
+      await installPreCommitHook(process.cwd());
+      if (opts.json) console.log(JSON.stringify({ status: "ok", installed: true }));
+      else if (!opts.quiet) {
+        console.log(chalk.green("Pre-commit hook installed."));
+        console.log(chalk.gray("  Bypass with `git commit --no-verify` if you need to override."));
+      }
+    } catch (error) {
+      if (opts.json) console.log(JSON.stringify({ status: "error", reason: error instanceof Error ? error.message : "hook installation failed" }));
+      else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Pre-commit hook installation failed.");
+      process.exit(1);
+    }
   });
 
 const monitor = program
