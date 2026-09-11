@@ -73,3 +73,20 @@ test("MCP dispatch rejects a valid receipt widened to another target", async () 
   assert.equal(result.code, "MCP_APPROVAL_SCOPE");
   assert.equal(result.error, "usage");
 });
+
+test("MCP dispatch rejects an approval receipt that omits the requested file scope", async () => {
+  const request = {
+    requestId: "323e4567-e89b-12d3-a456-426614174000",
+    action: "execute" as const,
+    actor: "agent",
+    target: "report:/tmp/report.json",
+    files: ["/tmp/other.json"],
+    network: [],
+    policyEffect: "hunt report",
+    requestedAt: "2026-01-01T00:00:00Z",
+    expiresAt: "2099-01-01T00:00:00Z",
+  };
+  const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/report.json", approvalReceipt }));
+  assert.equal(result.code, "MCP_APPROVAL_SCOPE");
+});

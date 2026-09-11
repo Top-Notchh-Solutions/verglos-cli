@@ -267,6 +267,12 @@ function approvalTarget(name: string, input: Record<string, unknown>): string | 
   return undefined;
 }
 
+function approvalFile(name: string, input: Record<string, unknown>): string | undefined {
+  if (name === "verglos_hunt_report" || name === "verglos_hunt_finding" || name === "verglos_attest") return typeof input.reportPath === "string" ? input.reportPath : undefined;
+  if (name === "verglos_hunt_before_write") return typeof input.filePath === "string" ? input.filePath : undefined;
+  return undefined;
+}
+
 export async function dispatchTool(
   name: string,
   args: Record<string, unknown> | undefined,
@@ -285,6 +291,10 @@ export async function dispatchTool(
     if (!approval.allowed) return invalid("MCP_APPROVAL_REQUIRED", `MCP tool authority denied: ${approval.reason}`);
     const target = approvalTarget(name, input);
     if (target && (input.approvalReceipt as { target?: unknown } | undefined)?.target !== target) return invalid("MCP_APPROVAL_SCOPE", "approval receipt target does not match the requested tool target");
+    const receipt = input.approvalReceipt as { files?: unknown; network?: unknown } | undefined;
+    const file = approvalFile(name, input);
+    if (file && (!Array.isArray(receipt?.files) || !receipt.files.includes(file))) return invalid("MCP_APPROVAL_SCOPE", "approval receipt does not cover the requested file scope");
+    if (Array.isArray(receipt?.network) && receipt.network.length > 0) return invalid("MCP_APPROVAL_SCOPE", "approval receipt declares network scope for a network-free tool");
   }
   const toolInput = authority?.approvalRequired ? { ...input } : input;
   if (authority?.approvalRequired) delete toolInput.approvalReceipt;
