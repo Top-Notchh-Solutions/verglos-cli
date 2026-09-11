@@ -21,7 +21,7 @@ export async function executeConfigInspect(path: string, json = false, quiet = f
   } catch (error) {
     if (!quiet) {
       const message = error instanceof Error ? error.message : "Unable to inspect Verglos config";
-      if (json) console.log(JSON.stringify({ status: "invalid", warnings: [{ id: "invalid-config", message }] }));
+      if (json) console.log(JSON.stringify({ status: "invalid", warnings: [{ id: "invalid-config", message: "config inspection failed" }] }));
       else console.error(`[CONFIG_INSPECT_INPUT] ${message}`);
     }
     return 78;

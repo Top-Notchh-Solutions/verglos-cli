@@ -43,7 +43,7 @@ test("policy check rejects record and snapshot inputs with a stable JSON error",
     assert.deepEqual(JSON.parse(lines[0]!), {
       status: "error",
       code: "POLICY_CHECK_INPUT",
-      message: "record and snapshot inputs require --record-store or an embedded policy evaluation",
+      message: "policy check failed",
     });
   } finally {
     console.log = original;
