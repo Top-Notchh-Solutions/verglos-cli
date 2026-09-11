@@ -23,6 +23,12 @@ const { version: MCP_VERSION } = require("../package.json") as {
 
 const MAX_TOOL_ARGUMENT_BYTES = 256 * 1024;
 const MAX_TOOL_RESPONSE_BYTES = 512 * 1024;
+const APPROVAL_RECEIPT_PROPERTY = {
+  approvalReceipt: {
+    type: "object",
+    description: "Exact, time-bounded approval receipt for this side-effect-capable action.",
+  },
+} as const;
 
 /**
  * MCP server for Verglos.
@@ -131,6 +137,7 @@ const TOOLS = [
       properties: {
         reportPath: { type: "string", description: "Path to verglos-report.json." },
         findingId: { type: "string", description: "Finding id to verify." },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath", "findingId"],
     },
@@ -143,6 +150,7 @@ const TOOLS = [
       type: "object",
       properties: {
         reportPath: { type: "string", description: "Path to verglos-report.json." },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath"],
     },
@@ -157,6 +165,7 @@ const TOOLS = [
         code: { type: "string", description: "Code block the agent is about to write." },
         filePath: { type: "string", description: "Target file path." },
         language: { type: "string", description: "Language hint such as ts, tsx, js, jsx." },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["code", "filePath", "language"],
     },
@@ -174,6 +183,7 @@ const TOOLS = [
           enum: ["true", "false", "not_attemptable"],
           description: "Hunt verdict to explain.",
         },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["findingId", "verdict"],
     },
@@ -190,6 +200,7 @@ const TOOLS = [
           type: "object",
           description: "Signing key and verify URL configuration.",
         },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath"],
     },
