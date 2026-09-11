@@ -18,5 +18,5 @@ export function mcpToolAuthority(toolName: string): ActionAuthority | undefined 
 }
 
 export function listMcpToolAuthority(): readonly { readonly tool: string; readonly action: AgentAction; readonly approvalRequired: boolean }[] {
-  return Object.freeze(Object.entries(TOOL_ACTIONS).sort(([a], [b]) => a.localeCompare(b)).map(([tool, action]) => ({ tool, action, approvalRequired: actionAuthority(action).approvalRequired })));
+  return Object.freeze(Object.entries(TOOL_ACTIONS).sort(([a], [b]) => a.localeCompare(b)).map(([tool, action]) => Object.freeze({ tool, action, approvalRequired: actionAuthority(action).approvalRequired })));
 }
