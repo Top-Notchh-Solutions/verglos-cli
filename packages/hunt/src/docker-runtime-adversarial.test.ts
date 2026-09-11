@@ -112,3 +112,37 @@ integrationTest("Docker runtime turns an over-time probe into an explicit timeou
     assert.ok(result.exitCode === undefined || (result.exitCode >= 0 && result.exitCode <= 255));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+integrationTest("Docker runtime bounds CPU-burning probes", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "while :; do :; done"], 500);
+    assert.equal(result.status, "timed-out");
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+integrationTest("Docker runtime bounds process-tree growth", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "i=0; while [ $i -lt 256 ]; do (sleep 30) & i=$((i+1)); done; wait"], 1_000);
+    assert.ok(result.status === "completed" || result.status === "failed" || result.status === "timed-out");
+    assert.ok(result.outputBytes <= 4_096);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+integrationTest("Docker runtime bounds writable tmpfs capacity", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "! dd if=/dev/zero of=/tmp/fill bs=1M count=256 2>/dev/null"], 5_000);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+integrationTest("Docker runtime records signal termination as a failed attempt", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "kill -TERM $$"], 5_000);
+    assert.equal(result.status, "failed");
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
