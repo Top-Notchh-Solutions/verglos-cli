@@ -5,9 +5,10 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { fileURLToPath } from "node:url";
 
 const run = promisify(execFile);
-const script = new URL("./verify-release-artifacts.mjs", import.meta.url).pathname;
+const script = fileURLToPath(new URL("./verify-release-artifacts.mjs", import.meta.url));
 
 async function withFixture(fn) {
   const root = await mkdtemp(join(tmpdir(), "verglos-release-check-"));

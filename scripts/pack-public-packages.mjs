@@ -2,9 +2,10 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const run = promisify(execFile);
-const root = resolve(new URL("..", import.meta.url).pathname);
+const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const packageNames = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"];
 const manifests = new Map();
 for (const name of packageNames) manifests.set(name, JSON.parse(await readFile(join(root, "packages", name, "package.json"), "utf8")));

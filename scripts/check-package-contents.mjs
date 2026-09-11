@@ -1,7 +1,8 @@
 import { lstat, readFile, readdir } from "node:fs/promises";
 import { isAbsolute, join, relative, resolve, sep } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = new URL("..", import.meta.url).pathname;
+const root = fileURLToPath(new URL("..", import.meta.url));
 const packageDirs = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"].map((name) => join(root, "packages", name));
 const forbidden = /(?:^|\/)(?:docs\/shipping|\.env(?:\.|$)|.*\.(?:pem|key|p12|pfx)|(?:id_rsa|id_ed25519))(?:$|\/)/i;
 
