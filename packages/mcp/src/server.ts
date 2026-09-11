@@ -345,6 +345,27 @@ export async function dispatchTool(
 
 // ─── Server factory ───────────────────────────────────────────────────────
 
+/** Build the deterministic tools/list payload from shared capability truth. */
+export function listAdvertisedTools() {
+  const capabilities = reconcileMcpCapabilities(TOOLS.map((tool) => tool.name));
+  return TOOLS.map((t) => {
+    const capability = capabilities.find((item) => item.tool === t.name);
+    if (!capability) throw new Error("MCP capability metadata is missing");
+    const authority = mcpToolAuthority(t.name);
+    return {
+      name: t.name,
+      description: t.description,
+      inputSchema: t.inputSchema,
+      _meta: { "verglos/capability": capability },
+      annotations: authority ? {
+        readOnlyHint: !authority.approvalRequired,
+        destructiveHint: authority.sideEffect === "filesystem" || authority.sideEffect === "identity",
+        openWorldHint: authority.sideEffect === "network" || authority.sideEffect === "hosted",
+      } : undefined,
+    };
+  });
+}
+
 export function createVerglosMcpServer(): Server {
   const server = new Server(
     {
@@ -359,26 +380,7 @@ export function createVerglosMcpServer(): Server {
   );
 
   server.setRequestHandler(ListToolsRequestSchema, async () => {
-    // Fail closed if the hand-authored MCP tool list drifts from shared capability truth.
-    const capabilities = reconcileMcpCapabilities(TOOLS.map((tool) => tool.name));
-    return { tools: TOOLS.map((t) => {
-      const capability = capabilities.find((item) => item.tool === t.name);
-      if (!capability) throw new Error("MCP capability metadata is missing");
-      return {
-      name: t.name,
-      description: t.description,
-      inputSchema: t.inputSchema,
-      _meta: { "verglos/capability": capability },
-      annotations: (() => {
-        const authority = mcpToolAuthority(t.name);
-        return authority ? {
-          readOnlyHint: !authority.approvalRequired,
-          destructiveHint: authority.sideEffect === "filesystem" || authority.sideEffect === "identity",
-          openWorldHint: authority.sideEffect === "network" || authority.sideEffect === "hosted",
-        } : undefined;
-      })(),
-      };
-    }) };
+    return { tools: listAdvertisedTools() };
   });
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
