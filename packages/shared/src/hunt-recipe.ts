@@ -15,7 +15,7 @@ export const HuntRecipeSchema = z.object({
   assertions: z.array(z.string().min(1).max(4096).refine(noControls, "assertion contains control characters")).min(1).max(64),
   inputs: z.record(z.string().min(1).max(128).refine(noControls, "input name contains control characters"), z.string().max(4096).refine(noControls, "input contains control characters")).optional(),
   isolation: z.enum(["none", "restricted-process", "container", "gvisor", "microvm"]),
-  limits: z.object({ timeoutMs: z.number().int().positive().max(600_000), memoryMb: z.number().int().positive().max(16_384), outputBytes: z.number().int().positive().max(10_000_000) }).strict(),
+  limits: z.object({ timeoutMs: z.number().int().positive().max(600_000), memoryMb: z.number().int().positive().max(16_384), outputBytes: z.number().int().positive().max(10_000_000), processes: z.number().int().positive().max(4_096) }).strict(),
   cleanup: z.enum(["always", "on-success", "none"]),
   network: z.object({ mode: z.enum(["denied", "allowlist"]), destinations: z.array(z.string().url().max(2048)).max(32), reason: z.string().min(1).max(1024).refine(noControls, "network reason contains control characters") }).strict(),
   redaction: z.enum(["required", "best-effort"]),

@@ -36,7 +36,7 @@ export class DockerSandboxAdapter implements SandboxAdapter {
       command: input.binding.command,
       timeoutMs: Math.min(input.timeoutMs, input.binding.limits.timeoutMs),
       memoryMb: Math.min(this.options.memoryMb ?? input.binding.limits.memoryMb, input.binding.limits.memoryMb),
-      maxProcesses: this.options.maxProcesses ?? 64,
+      maxProcesses: Math.min(this.options.maxProcesses ?? input.binding.limits.processes, input.binding.limits.processes),
       cpus: this.options.cpus,
       diskMb: this.options.diskMb,
     } satisfies DockerInvocationInput);
