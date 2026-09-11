@@ -5,7 +5,9 @@ import { listMcpCapabilities, reconcileMcpCapabilities } from "./mcp-capabilitie
 test("MCP capability truth labels plan and maturity", () => {
   const capabilities = listMcpCapabilities();
   assert.equal(capabilities.find((item) => item.tool === "verglos_scan")?.maturity, "shipped");
+  assert.deepEqual(capabilities.find((item) => item.tool === "verglos_scan"), { tool: "verglos_scan", action: "inspect", plan: "free", maturity: "shipped", approvalRequired: false, sideEffect: "none" });
   assert.equal(capabilities.find((item) => item.tool === "verglos_hunt_report")?.approvalRequired, true);
+  assert.equal(capabilities.find((item) => item.tool === "verglos_hunt_report")?.sideEffect, "process");
   assert.equal(new Set(capabilities.map((item) => item.tool)).size, capabilities.length);
   assert.equal(Object.isFrozen(capabilities[0]), true);
   assert.throws(() => (capabilities[0] as { plan: string }).plan = "enterprise", TypeError);

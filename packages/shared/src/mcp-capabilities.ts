@@ -1,7 +1,7 @@
 import { mcpToolAuthority } from "./mcp-authority.js";
 
-export interface McpCapability { readonly tool: string; readonly plan: "free" | "pro" | "studio"; readonly maturity: "shipped" | "partial"; readonly approvalRequired: boolean; }
-const CAPABILITIES: readonly Omit<McpCapability, "approvalRequired">[] = [
+export interface McpCapability { readonly tool: string; readonly action: NonNullable<ReturnType<typeof mcpToolAuthority>>["action"]; readonly plan: "free" | "pro" | "studio"; readonly maturity: "shipped" | "partial"; readonly approvalRequired: boolean; readonly sideEffect: NonNullable<ReturnType<typeof mcpToolAuthority>>["sideEffect"]; }
+const CAPABILITIES: readonly Omit<McpCapability, "action" | "approvalRequired" | "sideEffect">[] = [
   { tool: "verglos_check_before_write", plan: "free", maturity: "shipped" },
   { tool: "verglos_check_package", plan: "free", maturity: "shipped" },
   { tool: "verglos_scan", plan: "free", maturity: "shipped" },
@@ -15,7 +15,9 @@ const CAPABILITIES: readonly Omit<McpCapability, "approvalRequired">[] = [
 export function listMcpCapabilities(): readonly McpCapability[] {
   return Object.freeze(CAPABILITIES.map((capability) => Object.freeze({
     ...capability,
+    action: mcpToolAuthority(capability.tool)?.action ?? "inspect",
     approvalRequired: mcpToolAuthority(capability.tool)?.approvalRequired ?? true,
+    sideEffect: mcpToolAuthority(capability.tool)?.sideEffect ?? "hosted",
   })));
 }
 
