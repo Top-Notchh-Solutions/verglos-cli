@@ -32,14 +32,9 @@ for (const [declaredKey, packages] of Object.entries(grouped)) {
   if (!Array.isArray(packages)) throw new Error(`pnpm license output group '${declaredKey}' is not an array`);
   for (const item of packages) {
     if (!item || typeof item !== "object" || typeof item.name !== "string" || typeof item.license !== "string") continue;
-    if (typeof item.paths?.[0] === "string") {
-      try {
-        const manifest = JSON.parse(await readFile(join(item.paths[0], "package.json"), "utf8"));
-        if (Array.isArray(manifest.os) || Array.isArray(manifest.cpu)) continue;
-      } catch {
-        // Missing package metadata remains visible for review rather than silently dropping it.
-      }
-    }
+    // Keep OS/CPU-specific packages in the inventory. They are part of the
+    // supported installation matrix even when a host does not select them.
+    // Native matrix jobs still qualify variants unavailable on this host.
     const license = item.license.trim();
     const redistributionClass = permissive.test(license) ? "permissive" : copyleft.test(license) ? "copyleft" : "unknown";
     entries.push({
