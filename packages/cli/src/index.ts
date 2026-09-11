@@ -274,7 +274,10 @@ program
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
   .action(async (kind: string, value: string, opts: { json?: boolean; quiet?: boolean }) => {
-    if (!["repository", "package", "filesystem", "artifact", "sbom", "oci"].includes(kind)) process.exit(78);
+    if (!["repository", "package", "filesystem", "artifact", "sbom", "oci"].includes(kind)) {
+      reportPreflightError(opts.json, opts.quiet, "TARGET_INSPECT_INPUT", `unsupported target kind: ${kind}`, "target inspection failed");
+      process.exit(78);
+    }
     process.exit(await executeTargetInspect(kind as "repository" | "package" | "filesystem" | "artifact" | "sbom" | "oci", value, opts.json, opts.quiet));
   });
 

@@ -38,3 +38,13 @@ test("evidence import failure is one bounded JSON response", async () => {
     assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "EVIDENCE_IMPORT_INPUT", message: "evidence import failed" });
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("target inspect preflight is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-target-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "target", "inspect", "unsupported", "value", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 78);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "TARGET_INSPECT_INPUT", message: "target inspection failed" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
