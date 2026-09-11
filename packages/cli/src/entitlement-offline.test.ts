@@ -57,6 +57,14 @@ test("loadCapabilities: honours a paid cache within 7-day grace when server is u
   assert.ok(caps.capabilities.includes("fix"));
 });
 
+test("resolveEntitlement: normalizes a legacy compliance cache to enterprise", async () => {
+  const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
+  seedCache(threeDaysAgo, "compliance", ["scan", "audit_trail"]);
+  const resolved = await withOfflineFetch(() => mod.resolveEntitlement({ forceRefresh: true }));
+  assert.equal(resolved.plan, "enterprise");
+  assert.equal(resolved.source, "cache");
+});
+
 test("loadCapabilities: drops to Free when cache is past the 7-day absolute-stale window", async () => {
   const tenDaysAgo = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
   seedCache(tenDaysAgo, "pro", ["scan", "fix", "monitor_register"]);

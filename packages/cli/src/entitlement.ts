@@ -269,7 +269,7 @@ export async function resolveEntitlement(
   // Case 1 + 2 — REST responded (fresh or stale-within-grace).
   if (restIsAuthoritative || caps.stale === true) {
     return {
-      plan: license?.tier ?? caps.plan,
+      plan: license?.tier ?? normalizeTier(caps.plan),
       capabilities: caps.capabilities,
       source: caps.stale === true ? "cache" : "rest",
       stale: caps.stale === true,
