@@ -316,20 +316,20 @@ export async function dispatchTool(
   switch (name) {
     case "verglos_check_before_write": {
       let parsed: CheckBeforeWriteInput; try { parsed = parseCheckBeforeWriteArgs(toolInput); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      try { return jsonResponse(await checkBeforeWrite(parsed)); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_FAILED", error instanceof Error ? error.message : "tool failed"); }
+      try { return jsonResponse(await checkBeforeWrite(parsed)); } catch { return invalid("MCP_CHECK_BEFORE_WRITE_FAILED", "check_before_write failed"); }
     }
     case "verglos_check_package": {
       let parsed; try { parsed = parseCheckPackageArgs(toolInput); } catch (error) { return invalid("MCP_CHECK_PACKAGE_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      try { return jsonResponse(await checkPackage(parsed)); } catch (error) { return invalid("MCP_CHECK_PACKAGE_FAILED", error instanceof Error ? error.message : "tool failed"); }
+      try { return jsonResponse(await checkPackage(parsed)); } catch { return invalid("MCP_CHECK_PACKAGE_FAILED", "check_package failed"); }
     }
     case "verglos_scan": {
       let parsed; try { parsed = parseScanArgs(toolInput); } catch (error) { return invalid("MCP_SCAN_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      try { return jsonResponse(await scanProject(parsed)); } catch (error) { return invalid("MCP_SCAN_FAILED", error instanceof Error ? error.message : "tool failed"); }
+      try { return jsonResponse(await scanProject(parsed)); } catch { return invalid("MCP_SCAN_FAILED", "scan failed"); }
     }
     case "verglos_explain_finding": {
       let parsed; try { parsed = parseExplainFindingArgs(toolInput); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
       let result: ReturnType<typeof explainFinding>;
-      try { result = explainFinding(parsed); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_FAILED", error instanceof Error ? error.message : "tool failed"); }
+      try { result = explainFinding(parsed); } catch { return invalid("MCP_EXPLAIN_FINDING_FAILED", "explain_finding failed"); }
       return jsonResponse(result);
     }
     case "verglos_hunt_finding":
