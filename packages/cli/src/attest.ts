@@ -11,6 +11,7 @@ export interface AttestOptions {
 const STUDIO_PLANS = new Set(["studio", "compliance", "founder"]);
 
 export async function executeAttest(opts: AttestOptions = {}): Promise<number> {
+  console.error(chalk.yellow("attest is a legacy compatibility shell; it does not create or sign a Verglos Release Record."));
   const entitlement = await resolveEntitlement({ asPlan: opts.asPlan });
   warnIfStale({ stale: entitlement.stale, plan: entitlement.plan });
 
@@ -24,7 +25,8 @@ export async function executeAttest(opts: AttestOptions = {}): Promise<number> {
     return 3;
   }
 
-  console.log(chalk.bold("verglos attest") + chalk.gray(" — signed evidence bundle for client handoff"));
+  console.log(chalk.bold("verglos attest") + chalk.gray(" — legacy compatibility shell"));
+  console.log(chalk.gray("Use `verglos record create`, `record sign`, and `record verify` for the canonical offline workflow."));
   console.log(chalk.gray("Studio tier. Shipping in v2.0.0-beta. Track: verglos.com/attest"));
   console.log("");
   console.log(chalk.gray("Parsed options"));
