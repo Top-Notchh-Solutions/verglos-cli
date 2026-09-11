@@ -8,6 +8,11 @@ test("Hunt output redaction removes JWT and private-key-shaped credentials", () 
   assert.doesNotMatch(output.stdout, /eyJheader|payload-value/);
   assert.doesNotMatch(output.stderr, /PRIVATE KEY|secret/);
 });
+test("Hunt output redaction removes explicitly scoped paths", () => {
+  const output = redactHuntOutput("opened /private/project/src/app.ts", "failed at /private/project", 1_000_000, ["/private/project"]);
+  assert.doesNotMatch(output.stdout, /\/private\/project/);
+  assert.doesNotMatch(output.stderr, /\/private\/project/);
+});
 test("Hunt synthetic input replaces secret-shaped values", () => { const input = synthesizeHuntInput("token=real-value password:another"); assert.equal(input, "token=[synthetic-secret] password=[synthetic-secret]"); });
 test("Hunt synthetic input removes JWT and private-key-shaped credentials", () => {
   const input = synthesizeHuntInput("eyJheader-value.payload-value.signature-value -----BEGIN PRIVATE KEY-----secret-----END PRIVATE KEY-----");

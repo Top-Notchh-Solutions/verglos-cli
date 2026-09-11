@@ -15,9 +15,12 @@ export function synthesizeHuntInput(value: string): string {
     .reduce((result, pattern) => result.replace(pattern, "[synthetic-secret]"), assigned);
 }
 export function huntEvidenceDigest(output: RedactedHuntOutput): string { return `sha256:${createHash("sha256").update(`${output.stdout}\n${output.stderr}`, "utf8").digest("hex")}`; }
-export function redactHuntOutput(stdout: string, stderr: string, maxBytes = 1_000_000): RedactedHuntOutput {
+export function redactHuntOutput(stdout: string, stderr: string, maxBytes = 1_000_000, sensitivePaths: readonly string[] = []): RedactedHuntOutput {
   if (!Number.isInteger(maxBytes) || maxBytes < 1 || maxBytes > 10_000_000) throw new HuntOutputLimitError("Hunt output limit must be an integer between 1 and 10000000 bytes");
-  const redact = (value: string) => SECRET_PATTERNS.reduce((result, pattern) => result.replace(pattern, "[REDACTED]"), value);
+  if (sensitivePaths.length > 64 || sensitivePaths.some((path) => !path || path.length > 4096 || /[\u0000-\u001f\u007f]/.test(path))) throw new HuntOutputLimitError("Hunt sensitive paths are bounded and must not contain control characters");
+  const redact = (value: string) => sensitivePaths
+    .slice().sort((left, right) => right.length - left.length)
+    .reduce((result, path) => result.split(path).join("[REDACTED_PATH]"), SECRET_PATTERNS.reduce((result, pattern) => result.replace(pattern, "[REDACTED]"), value));
   const truncate = (value: string) => {
     const bytes = Buffer.from(value, "utf8");
     if (bytes.byteLength <= maxBytes) return { value, truncated: false };
