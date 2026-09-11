@@ -21,7 +21,11 @@ for (const packageDir of packageDirs) {
   const packageJson = JSON.parse(await readFile(join(packageDir, "package.json"), "utf8"));
   const files = Array.isArray(packageJson.files) ? packageJson.files : [];
   if (!files.includes("dist")) failures.push(`${packageJson.name}: package files must include dist`);
-  if (packageJson.name === "verglos" && packageJson.bin?.verglos !== "./dist/index.js") failures.push("verglos: bin.verglos must point to ./dist/index.js");
+  if (packageJson.name === "verglos") {
+    if (packageJson.bin?.verglos !== "./dist/index.js") failures.push("verglos: bin.verglos must point to ./dist/index.js");
+    if (!packageJson.bin || Object.keys(packageJson.bin).length !== 1) failures.push("verglos: exactly one CLI bin must be published");
+  }
+  for (const hook of ["preinstall", "install", "postinstall"]) if (packageJson.scripts?.[hook]) failures.push(`${packageJson.name}: install-time hook '${hook}' is not allowed in public packages`);
   for (const included of files) {
     const includedPath = join(packageDir, included);
     try {
