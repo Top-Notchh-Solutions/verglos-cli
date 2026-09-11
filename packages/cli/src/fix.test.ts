@@ -3,9 +3,11 @@ import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
 import assert from "node:assert/strict";
 import { NEXT_CONFIG_DECL, authorizeHeaderFix, planHeaderFixes } from "./fix.js";
 import { applyHeaderFixes } from "./fix.js";
+import { runCliFixture } from "./cli-fixture.js";
 import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 test("fix approval requires mutate authority and exact planned file scope", () => {
   const request = { requestId: "523e4567-e89b-12d3-a456-426614174000", action: "mutate" as const, actor: "agent", target: "workspace:app", files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" };
@@ -170,4 +172,22 @@ test("fix planning identifies a bounded Next.js patch without mutating", async (
     assert.ok(plan[0]?.preview?.some((line) => line.includes("Content-Security-Policy")));
     assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("fix CLI JSON dry-run is process-safe and does not mutate the project", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-process-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-fix-home-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
+    const original = "const nextConfig = {}; module.exports = nextConfig;\n";
+    await writeFile(join(root, "next.config.js"), original);
+    await mkdir(join(home, ".verglos"), { recursive: true });
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--dry-run"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
+    assert.equal(result.exitCode, 0, `${result.stdout}\n${result.stderr}`);
+    assert.equal(JSON.parse(result.stdout).planned[0].action, "patch");
+    assert.equal(result.stderr, "");
+    assert.deepEqual(result.files, []);
+    assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
 });
