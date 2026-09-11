@@ -84,6 +84,10 @@ jobs:
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/check-package-contents.mjs
 
+      - name: Audit public boundary
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: node scripts/check-public-boundary.mjs
+
       - name: Pack smoke test
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
