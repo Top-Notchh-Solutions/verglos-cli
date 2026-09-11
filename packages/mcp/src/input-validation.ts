@@ -17,7 +17,7 @@ export function parseExplainFindingArgs(value: unknown): { rule: string; targetS
   const rule = input.rule as string;
   if (rule.length === 0 || rule.length > 256) throw new Error("explain_finding rule exceeds bounds");
   if (input.targetSubjectId !== undefined && typeof input.targetSubjectId !== "string") throw new Error("explain_finding targetSubjectId must be a string");
-  if (input.files !== undefined && (!Array.isArray(input.files) || input.files.some((file) => typeof file !== "string"))) throw new Error("explain_finding files must be strings");
+  if (input.files !== undefined && (!Array.isArray(input.files) || input.files.length > 256 || input.files.some((file) => typeof file !== "string" || file.length === 0 || Buffer.byteLength(file, "utf8") > 4096))) throw new Error("explain_finding files must be bounded strings");
   for (const key of Object.keys(input)) if (!["rule", "targetSubjectId", "files"].includes(key)) throw new Error(`unknown explain_finding argument: ${key}`);
   return { rule, targetSubjectId: input.targetSubjectId as string | undefined, files: input.files as string[] | undefined };
 }

@@ -9,6 +9,8 @@ test("MCP read-only input validators reject coercion and preserve bounds", () =>
   assert.throws(() => parseCheckBeforeWriteArgs({ code: "x", targetPath: "x.ts", extra: true }), /unknown/);
   assert.throws(() => parseExplainFindingArgs({ rule: 42 }), /requires a string/);
   assert.throws(() => parseExplainFindingArgs({ rule: "x".repeat(257) }), /exceeds bounds/);
+  assert.throws(() => parseExplainFindingArgs({ rule: "AI-002", files: [""] }), /bounded strings/);
+  assert.throws(() => parseExplainFindingArgs({ rule: "AI-002", files: Array.from({ length: 257 }, () => "src/a.ts") }), /bounded strings/);
   assert.deepEqual(parseCheckPackageArgs({ packageName: "react", version: "latest" }), { packageName: "react", version: "latest" });
   assert.throws(() => parseCheckPackageArgs({ packageName: 42 }), /requires a string/);
   assert.throws(() => parseCheckPackageArgs({ packageName: "react", extra: true }), /unknown/);
