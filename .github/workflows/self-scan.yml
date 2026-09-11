@@ -42,6 +42,12 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Test
+        run: pnpm test
+
+      - name: Typecheck
+        run: pnpm typecheck
+
       - name: Run Verglos on itself
         # The CI command exits non-zero on any critical finding OR when
         # the score falls below --threshold.
