@@ -773,7 +773,9 @@ program
   .option("--report <path>", "Path to the Verglos JSON report to attest")
   .option("--sign", "Request Ed25519 bundle signing")
   .option("--verify-url <url>", "Verify URL base to embed in the bundle")
-  .action(async (opts: { report?: string; sign?: boolean; verifyUrl?: string }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { report?: string; sign?: boolean; verifyUrl?: string; json?: boolean; quiet?: boolean }) => {
     const code = await executeAttest({
       ...opts,
       asPlan: process.env.VERGLOS_AS_PLAN,

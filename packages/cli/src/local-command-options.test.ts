@@ -24,6 +24,8 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /command\("precommit"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /command\("hunt"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
   assert.match(source, /command\("hunt"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
+  assert.match(source, /command\("attest"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("attest"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   assert.equal(source.includes('.option("--policy"'), false);
 });
 
