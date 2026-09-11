@@ -39,6 +39,11 @@ test("config accepts the canonical Team tier as legacy metadata", () => {
   assert.equal(inspectConfigMigration({ plan: "team" }).status, "legacy");
 });
 
+test("config accepts the canonical contracted Enterprise tier", () => {
+  const parsed = VerglosConfigSchema.parse({ plan: "enterprise" });
+  assert.equal(parsed.plan, "enterprise");
+});
+
 test("bounded config fields remain compatible with migration inspection", () => {
   const inspection = inspectConfigMigration({ hunt: { sandbox: "firecracker", maxDurationMs: 30_000 } });
   assert.equal(inspection.status, "legacy");
