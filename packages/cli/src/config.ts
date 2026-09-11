@@ -1,4 +1,5 @@
-import { chmod, copyFile, lstat, readFile, writeFile } from "node:fs/promises";
+import { chmod, copyFile, lstat, readFile, open } from "node:fs/promises";
+import { constants } from "node:fs";
 import { join } from "node:path";
 
 export async function installPreCommitHook(
@@ -18,7 +19,10 @@ export async function installPreCommitHook(
     const current = await readFile(hookPath, "utf8");
     if (current.includes("# Verglos pre-commit hook")) return true;
     // Preserve the user's hook exactly; never overwrite an existing backup.
-    try { await lstat(originalPath); } catch { await copyFile(hookPath, originalPath); await chmod(originalPath, 0o755); }
+    try { await lstat(originalPath); } catch {
+      try { await copyFile(hookPath, originalPath, constants.COPYFILE_EXCL); await chmod(originalPath, 0o755); }
+      catch (error) { if (!(error instanceof Error && "code" in error && error.code === "EEXIST")) throw error; }
+    }
   }
   const hook = `#!/bin/sh
 # Verglos pre-commit hook — secrets + criticals only, <2s budget
@@ -30,7 +34,9 @@ fi
 npx verglos precommit
 `;
   try {
-    await writeFile(hookPath, hook, { mode: 0o755 });
+    const handle = await open(hookPath, constants.O_WRONLY | constants.O_CREAT | constants.O_TRUNC | constants.O_NOFOLLOW, 0o755);
+    try { await handle.writeFile(hook, "utf8"); }
+    finally { await handle.close(); }
     return true;
   } catch {
     // no git repo — report the no-op so callers do not claim a false success
