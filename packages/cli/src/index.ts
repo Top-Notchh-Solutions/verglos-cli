@@ -580,11 +580,18 @@ program
     "--ci",
     "CI-friendly output: skip prompts, exit non-zero on failure",
   )
-  .action(async (licenseKey: string, opts: { ci?: boolean }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (licenseKey: string, opts: { ci?: boolean; json?: boolean; quiet?: boolean }) => {
     const creds = await loadCredentials();
     const result = await validateLicense(licenseKey, creds.apiUrl);
 
     if (!result.valid) {
+      if (opts.json) {
+        console.log(JSON.stringify({ status: "error", reason: result.reason, ...(result.httpStatus === undefined ? {} : { httpStatus: result.httpStatus }) }));
+        process.exit(opts.ci ? 2 : 1);
+      }
+      if (opts.quiet) process.exit(opts.ci ? 2 : 1);
       if (result.reason === "network") {
         console.error(
           chalk.red(
@@ -637,6 +644,11 @@ program
       : result.plan === "founder"
         ? " · unlimited"
         : "";
+    if (opts.json) {
+      console.log(JSON.stringify({ status: "ok", plan: result.plan, expiresAt: result.expiresAt, active: result.active }));
+      return;
+    }
+    if (opts.quiet) return;
     console.log(
       chalk.green(
         `✓ ${result.plan.toUpperCase()} activated${renewal}`,
