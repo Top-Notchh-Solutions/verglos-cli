@@ -9,4 +9,5 @@ test("Hunt recipes are declarative, bounded, and deny arbitrary network by defau
   assert.throws(() => parseHuntRecipe({ ...recipe, imageDigest: { algorithm: "sha512", value: "b".repeat(128) } }));
   assert.throws(() => parseHuntRecipe({ ...recipe, isolation: "none", network: { mode: "allowlist", destinations: ["https://example.com"], reason: "explicit fixture" } }));
   assert.throws(() => parseHuntRecipe({ ...recipe, isolation: "container", network: { mode: "allowlist", destinations: ["http://example.com"], reason: "explicit fixture" } }));
+  assert.throws(() => parseHuntRecipe({ ...recipe, isolation: "container", network: { mode: "allowlist", destinations: ["https://agent:secret@example.com"], reason: "explicit fixture" } }));
 });

@@ -23,6 +23,7 @@ export const HuntRecipeSchema = z.object({
   if (value.network.mode === "denied" && value.network.destinations.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network", "destinations"], message: "denied network cannot list destinations" });
   if (value.network.mode === "allowlist" && value.isolation === "none") ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["isolation"], message: "allowlisted network requires an isolated execution adapter" });
   if (value.network.mode === "allowlist" && value.network.destinations.some((destination) => !destination.startsWith("https://"))) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network", "destinations"], message: "allowlisted network destinations must use HTTPS" });
+  if (value.network.destinations.some((destination) => { const url = new URL(destination); return url.username.length > 0 || url.password.length > 0; })) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network", "destinations"], message: "network destinations must not embed credentials" });
   if (value.signature.status === "verified" && !value.signature.signer) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["signature", "signer"], message: "verified recipe requires signer" });
 });
 export type HuntRecipe = z.infer<typeof HuntRecipeSchema>;
