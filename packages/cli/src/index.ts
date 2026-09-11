@@ -431,26 +431,33 @@ program
     if (policyPath) {
       process.exit(await executePolicyCheck(policyPath, opts.json, opts.quiet));
     }
-    const asPlan = process.env.VERGLOS_AS_PLAN;
-    const plan = await currentPlan({ asPlan });
-    const hasThreshold = plan.plan !== "free";
-    if (opts.hunt) {
-      const ok = await requireCapability("ci.hunt_gate", "`verglos ci --hunt`", {
-        asPlan,
-        extraLine:
-          "Verified-only CI gating ships in v2.0.0-beta. This alpha can still run standard CI.",
+    let code: number;
+    let hasThreshold: boolean;
+    try {
+      const asPlan = process.env.VERGLOS_AS_PLAN;
+      const plan = await currentPlan({ asPlan });
+      hasThreshold = plan.plan !== "free";
+      if (opts.hunt) {
+        const ok = await requireCapability("ci.hunt_gate", "`verglos ci --hunt`", {
+          asPlan,
+          extraLine:
+            "Verified-only CI gating ships in v2.0.0-beta. This alpha can still run standard CI.",
+        });
+        if (!ok) process.exit(1);
+      }
+      code = await executeCi({
+        threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
+        quiet: opts.quiet,
+        json: opts.json,
+        strict: opts.strict,
+        configPath: opts.config,
+        hunt: opts.hunt,
+        noTelemetry: opts.telemetry === false,
       });
-      if (!ok) process.exit(1);
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "CI_INPUT", error instanceof Error ? error.message : "CI scan failed", "CI scan failed");
+      process.exit(2);
     }
-    const code = await executeCi({
-      threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
-      quiet: opts.quiet,
-      json: opts.json,
-      strict: opts.strict,
-      configPath: opts.config,
-      hunt: opts.hunt,
-      noTelemetry: opts.telemetry === false,
-    });
     if (!hasThreshold && !opts.quiet && !opts.json) {
       console.log("");
       console.log(
