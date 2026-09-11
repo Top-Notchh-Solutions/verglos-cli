@@ -19,7 +19,7 @@ export const HuntRecipeSchema = z.object({
   cleanup: z.enum(["always", "on-success", "none"]),
   network: z.object({ mode: z.enum(["denied", "allowlist"]), destinations: z.array(z.string().url().max(2048)).max(32), reason: z.string().min(1).max(1024).refine(noControls, "network reason contains control characters") }).strict(),
   redaction: z.enum(["required", "best-effort"]),
-  signature: z.object({ status: z.enum(["verified", "unverified", "invalid"]), signer: z.string().min(1).max(512).optional() }).strict(),
+  signature: z.object({ status: z.enum(["verified", "unverified", "invalid"]), signer: z.string().min(1).max(512).optional(), expiresAt: z.string().datetime({ offset: true }).optional() }).strict(),
 }).strict().superRefine((value, ctx) => {
   if (value.imageDigest.algorithm !== "sha256") ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["imageDigest", "algorithm"], message: "Hunt image digests must use sha256" });
   if (value.network.mode === "denied" && value.network.destinations.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network", "destinations"], message: "denied network cannot list destinations" });

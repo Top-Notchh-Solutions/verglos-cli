@@ -26,3 +26,9 @@ test("Hunt trust policy digest is canonical and stable", () => {
   assert.equal(huntRecipeTrustPolicyDigest(first), huntRecipeTrustPolicyDigest(second));
   assert.match(huntRecipeTrustPolicyDigest(first), /^sha256:[a-f0-9]{64}$/);
 });
+
+test("Hunt trust rejects recipes after their signed expiry", () => {
+  const expiring = parseHuntRecipe({ ...recipe, signature: { status: "verified", signer: "verglos-release", expiresAt: "2026-01-01T00:00:00Z" } });
+  assert.equal(isTrustedHuntRecipe(expiring, { signers: ["verglos-release"], at: "2026-01-02T00:00:00Z" }), false);
+  assert.equal(isTrustedHuntRecipe(expiring, { signers: ["verglos-release"], at: "2025-12-31T00:00:00Z" }), true);
+});
