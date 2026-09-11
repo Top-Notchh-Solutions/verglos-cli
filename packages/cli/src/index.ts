@@ -123,7 +123,8 @@ evidence.command("export <input> <output>")
   .action(async (input: string, output: string, opts: { json?: boolean; quiet?: boolean }) => {
     try {
       const result = await transferEvidence(input, output);
-      if (!opts.quiet) console.log(opts.json ? JSON.stringify(result) : "Exported " + result.format + " evidence (" + result.bytes + " bytes).");
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log("Exported " + result.format + " evidence (" + result.bytes + " bytes).");
     } catch (error) {
       if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence export failed.");
       process.exit(78);
@@ -184,10 +185,8 @@ evidence.command("import <input>")
   .action(async (input: string, opts: { json?: boolean; quiet?: boolean }) => {
     try {
       const result = await inspectEvidence(input);
-      if (!opts.quiet) {
-        if (opts.json) console.log(JSON.stringify(result));
-        else console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)");
-      }
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)");
     } catch (error) {
       if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence import failed.");
       process.exit(78);
