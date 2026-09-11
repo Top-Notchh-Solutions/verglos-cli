@@ -9,6 +9,10 @@ test("Hunt output redaction removes JWT and private-key-shaped credentials", () 
   assert.doesNotMatch(output.stderr, /PRIVATE KEY|secret/);
 });
 test("Hunt synthetic input replaces secret-shaped values", () => { const input = synthesizeHuntInput("token=real-value password:another"); assert.equal(input, "token=[synthetic-secret] password=[synthetic-secret]"); });
+test("Hunt synthetic input removes JWT and private-key-shaped credentials", () => {
+  const input = synthesizeHuntInput("eyJheader-value.payload-value.signature-value -----BEGIN PRIVATE KEY-----secret-----END PRIVATE KEY-----");
+  assert.equal(input, "[synthetic-secret] [synthetic-secret]");
+});
 test("Hunt evidence digest binds redacted output without storing raw content", () => { assert.match(huntEvidenceDigest({ stdout: "safe", stderr: "", truncated: false }), /^sha256:[a-f0-9]{64}$/); });
 test("Hunt output redaction rejects unsafe limits and preserves UTF-8 byte bounds", () => {
   assert.throws(() => redactHuntOutput("x", "", 0), HuntOutputLimitError);

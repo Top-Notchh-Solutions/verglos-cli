@@ -10,7 +10,9 @@ const SECRET_PATTERNS = [
 export interface RedactedHuntOutput { readonly stdout: string; readonly stderr: string; readonly truncated: boolean; }
 export class HuntOutputLimitError extends Error { override readonly name = "HuntOutputLimitError"; }
 export function synthesizeHuntInput(value: string): string {
-  return value.replace(/(?:secret|token|password|api[_-]?key)\s*[:=]\s*[^\s,;]+/gi, (match) => `${match.split(/[:=]/, 1)[0]}=[synthetic-secret]`);
+  const assigned = value.replace(/(?:secret|token|password|api[_-]?key)\s*[:=]\s*[^\s,;]+/gi, (match) => `${match.split(/[:=]/, 1)[0]}=[synthetic-secret]`);
+  return SECRET_PATTERNS.filter((_, index) => [0, 3, 4, 5].includes(index))
+    .reduce((result, pattern) => result.replace(pattern, "[synthetic-secret]"), assigned);
 }
 export function huntEvidenceDigest(output: RedactedHuntOutput): string { return `sha256:${createHash("sha256").update(`${output.stdout}\n${output.stderr}`, "utf8").digest("hex")}`; }
 export function redactHuntOutput(stdout: string, stderr: string, maxBytes = 1_000_000): RedactedHuntOutput {
