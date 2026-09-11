@@ -168,3 +168,16 @@ test("Scan JSON mode emits one parseable scan document", async () => {
     assert.ok(Array.isArray(payload.findings));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("Badge JSON mode emits one bounded document", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-badge-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "badge", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { status?: string; score?: number; markdown?: string };
+    assert.equal(payload.status, "ok");
+    assert.equal(payload.score, 100);
+    assert.match(payload.markdown ?? "", /img\.shields\.io/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
