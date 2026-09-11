@@ -181,3 +181,13 @@ test("Badge JSON mode emits one bounded document", async () => {
     assert.match(payload.markdown ?? "", /img\.shields\.io/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("Whoami JSON mode emits the offline Free contract", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-whoami-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "whoami", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: root } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "ok", signedIn: false, plan: "free" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
