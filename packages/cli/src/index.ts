@@ -44,6 +44,7 @@ import { executeRecordCreate } from "./record-create.js";
 import { executeRecordProject } from "./record-project.js";
 import { executeRecordSign } from "./record-sign.js";
 import { executeConfigInspect } from "./config-inspect.js";
+import { executeRecordHeader } from "./record-header.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -167,6 +168,13 @@ record.command("project <storeRoot> <manifestPath>")
   .option("--quiet", "Suppress human output")
   .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
     process.exit(await executeRecordProject(storeRoot, manifestPath, opts.json, opts.quiet));
+  });
+record.command("header <storeRoot> <manifestPath>")
+  .description("Show the verified decision-first Release Record header")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordHeader(storeRoot, manifestPath, opts.json, opts.quiet));
   });
 
 evidence.command("import <input>")
