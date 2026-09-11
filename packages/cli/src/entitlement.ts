@@ -81,7 +81,11 @@ async function readCache(): Promise<CachedCapabilities | null> {
     const entry = await lstat(CACHE_FILE);
     if (!entry.isFile() || entry.size > MAX_CAPABILITIES_CACHE_BYTES) return null;
     const raw = await readFile(CACHE_FILE, "utf8");
-    return JSON.parse(raw) as CachedCapabilities;
+    const parsed = parseCapabilitiesResponse(JSON.parse(raw));
+    if (!parsed) return null;
+    const value = JSON.parse(raw) as Record<string, unknown>;
+    if (typeof value.fetchedAt !== "string" || typeof value.expiresAt !== "string" || !Number.isFinite(new Date(value.fetchedAt).getTime()) || !Number.isFinite(new Date(value.expiresAt).getTime())) return null;
+    return { ...parsed, fetchedAt: value.fetchedAt, expiresAt: value.expiresAt, ...(typeof value.simulatedAsPlan === "string" ? { simulatedAsPlan: value.simulatedAsPlan } : {}), ...(value.stale === true ? { stale: true } : {}) };
   } catch {
     return null;
   }
@@ -129,10 +133,20 @@ async function fetchFromServer(
     if (Number.isFinite(length) && length > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
     const bytes = await res.arrayBuffer();
     if (bytes.byteLength > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
-    return JSON.parse(new TextDecoder().decode(bytes)) as CapabilitiesResponse;
+    return parseCapabilitiesResponse(JSON.parse(new TextDecoder().decode(bytes)));
   } catch {
     return null;
   }
+}
+
+function parseCapabilitiesResponse(value: unknown): CapabilitiesResponse | null {
+  if (!value || typeof value !== "object") return null;
+  const raw = value as Record<string, unknown>;
+  if (typeof raw.plan !== "string" || raw.plan.length > 64 || !Array.isArray(raw.capabilities) || raw.capabilities.length > 4096 || raw.capabilities.some((item) => typeof item !== "string" || item.length === 0 || item.length > 256)) return null;
+  if (typeof raw.cache_ttl_seconds !== "number" || !Number.isFinite(raw.cache_ttl_seconds) || raw.cache_ttl_seconds < 0 || raw.cache_ttl_seconds > 90 * 24 * 60 * 60) return null;
+  if (typeof raw.simulated !== "boolean" || typeof raw.active !== "boolean") return null;
+  if (raw.real_plan !== undefined && (typeof raw.real_plan !== "string" || raw.real_plan.length > 64)) return null;
+  return { plan: raw.plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(raw.real_plan === undefined ? {} : { real_plan: raw.real_plan }) };
 }
 
 export interface LoadCapabilitiesOptions {

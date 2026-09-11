@@ -66,6 +66,15 @@ test("resolveEntitlement: normalizes a legacy compliance cache to enterprise", a
   assert.equal(resolved.source, "cache");
 });
 
+test("loadCapabilities: rejects malformed cached capability shapes", async () => {
+  const dir = join(tempHome, ".verglos");
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix", 42], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+  const caps = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true }));
+  assert.equal(caps.plan, "free");
+  assert.equal(caps.capabilities.includes("fix"), false);
+});
+
 test("loadCapabilities: drops to Free when cache is past the 7-day absolute-stale window", async () => {
   const tenDaysAgo = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
   seedCache(tenDaysAgo, "pro", ["scan", "fix", "monitor_register"]);
