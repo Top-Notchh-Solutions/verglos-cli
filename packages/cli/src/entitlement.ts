@@ -143,7 +143,7 @@ function parseCapabilitiesResponse(value: unknown): CapabilitiesResponse | null 
   if (!value || typeof value !== "object") return null;
   const raw = value as Record<string, unknown>;
   const plan = typeof raw.plan === "string" ? raw.plan.toLowerCase() : "";
-  if (!["free", "pro", "team", "studio", "enterprise", "compliance", "founder"].includes(plan) || !Array.isArray(raw.capabilities) || raw.capabilities.length > 4096 || raw.capabilities.some((item) => typeof item !== "string" || item.length === 0 || item.length > 256)) return null;
+  if (!["free", "pro", "team", "studio", "enterprise", "compliance", "founder"].includes(plan) || !Array.isArray(raw.capabilities) || raw.capabilities.length > 4096 || raw.capabilities.some((item) => typeof item !== "string" || item.length === 0 || item.length > 256 || /[\u0000-\u001f\u007f]/.test(item))) return null;
   if (typeof raw.cache_ttl_seconds !== "number" || !Number.isFinite(raw.cache_ttl_seconds) || raw.cache_ttl_seconds < 0 || raw.cache_ttl_seconds > 90 * 24 * 60 * 60) return null;
   if (typeof raw.simulated !== "boolean" || typeof raw.active !== "boolean") return null;
   const realPlan = typeof raw.real_plan === "string" ? raw.real_plan.toLowerCase() : raw.real_plan;
