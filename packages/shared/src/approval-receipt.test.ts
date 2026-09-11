@@ -10,3 +10,6 @@ test("approval usability compares instants rather than timestamp spelling", () =
   assert.equal(isApprovalUsable(receipt, "2026-01-01T03:00:00+02:00"), true);
   assert.equal(isApprovalUsable(receipt, "not-a-time"), false);
 });
+test("approval network scope rejects duplicate destinations", () => {
+  assert.throws(() => createApprovalReceipt({ ...request, network: ["https://example.com", "https://example.com"] }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" }));
+});
