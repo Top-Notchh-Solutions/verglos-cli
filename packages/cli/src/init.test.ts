@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { runCliFixture } from "./cli-fixture.js";
 
 const mod = await import("./init.js");
 
@@ -61,6 +63,24 @@ test("init quiet with yes writes config without output", async () => {
     await readFile(join(root, ".verglos.config.js"));
   } finally {
     console.log = origLog;
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("init quiet process mode has no stdout, stderr, or prompt", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-init-process-"));
+  try {
+    const result = await runCliFixture(
+      process.execPath,
+      ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "init", "--quiet"],
+      root,
+      { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } },
+    );
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stdout, "");
+    assert.equal(result.stderr, "");
+    assert.deepEqual(result.files, []);
+  } finally {
     await rm(root, { recursive: true, force: true });
   }
 });
