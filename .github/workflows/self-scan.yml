@@ -47,6 +47,11 @@ jobs:
           node scripts/generate-third-party-notices.mjs > generated-third-party-notices
           cmp --silent THIRD_PARTY_NOTICES generated-third-party-notices
 
+      - name: Check CycloneDX SBOM drift
+        run: |
+          node scripts/generate-sbom.mjs > generated-sbom.json
+          cmp --silent SBOM.cdx.json generated-sbom.json
+
       - name: Build
         run: pnpm build
 
