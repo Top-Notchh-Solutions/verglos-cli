@@ -276,7 +276,7 @@ function approvalFile(name: string, input: Record<string, unknown>): string | un
 export async function dispatchTool(
   name: string,
   args: Record<string, unknown> | undefined,
-  options: { readonly approvalStoreRoot?: string; readonly now?: string } = {},
+  options: { readonly approvalStoreRoot?: string; readonly now?: string; readonly plan?: "free" | "pro" | "studio" } = {},
 ): Promise<{ content: { type: "text"; text: string }[] }> {
   if (args !== undefined && (!args || typeof args !== "object" || Array.isArray(args))) {
     return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be an object" }) }] };
@@ -287,6 +287,12 @@ export async function dispatchTool(
   const input = args ?? {};
   const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
   const authority = mcpToolAuthority(name);
+  if (options.plan) {
+    const capability = listAdvertisedTools().find((tool) => tool.name === name)?._meta?.["verglos/capability"] as { plan?: "free" | "pro" | "studio" } | undefined;
+    const required = capability?.plan;
+    const rank = { free: 0, pro: 1, studio: 2 } as const;
+    if (required && rank[options.plan] < rank[required]) return invalid("MCP_ENTITLEMENT_REQUIRED", `MCP tool requires the ${required} plan`);
+  }
   if (authority?.approvalRequired) {
     const approvalReceipt = input.approvalReceipt as ApprovalReceipt | undefined;
     const approval = authorizeAgentAction(authority.action, approvalReceipt, options.now ?? new Date().toISOString());
