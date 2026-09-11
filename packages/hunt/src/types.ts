@@ -13,7 +13,7 @@ export interface HuntFindingOutcome {
 
 export interface HuntResult {
   report: ScanResult;
-  outcomes: HuntFindingOutcome[];
+  outcomes: readonly HuntFindingOutcome[];
   startedAt: string;
   completedAt: string;
   sandbox: string;

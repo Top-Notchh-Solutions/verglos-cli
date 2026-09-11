@@ -133,3 +133,13 @@ test("Hunt rejects unbounded adapter reasons and durations", async () => {
   const result = await runHunt(report, { adapter, execution });
   assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
 });
+
+test("Hunt freezes projected outcomes before returning them", async () => {
+  const dryRun = await runHunt(report, { dryRun: true });
+  assert.ok(Object.isFrozen(dryRun.outcomes));
+  assert.ok(Object.isFrozen(dryRun.outcomes[0]));
+  const adapter = { id: "test-probe", async prepare() {}, async execute() { return { findingId: "critical-1", verdict: "false" as const, reason: "fixture", durationMs: 1 }; }, async cleanup() {} };
+  const executed = await runHunt(report, { adapter, execution });
+  assert.ok(Object.isFrozen(executed.outcomes));
+  assert.ok(Object.isFrozen(executed.outcomes[0]));
+});

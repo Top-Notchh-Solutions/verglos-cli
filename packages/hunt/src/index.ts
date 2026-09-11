@@ -34,7 +34,7 @@ export async function runHunt(
   if (opts.adapter) {
     if (!opts.execution) throw new Error("Hunt adapter execution requires a recipe, trust policy, approval, and observation binding");
     const binding = bindHuntExecution(opts.execution);
-    const outcomes: HuntResult["outcomes"] = [];
+    const outcomes: HuntFindingOutcome[] = [];
     let prepareAttempted = false;
     try {
       prepareAttempted = true;
@@ -62,7 +62,7 @@ export async function runHunt(
     } finally {
       if (prepareAttempted) await opts.adapter.cleanup();
     }
-    return { report, outcomes, startedAt, completedAt: new Date().toISOString(), sandbox: opts.adapter.id };
+    return { report, outcomes: freezeOutcomes(outcomes), startedAt, completedAt: new Date().toISOString(), sandbox: opts.adapter.id };
   }
   const reason = opts.dryRun
     ? "dry run: no probe or target code executed"
@@ -76,11 +76,15 @@ export async function runHunt(
   }));
   return {
     report,
-    outcomes,
+    outcomes: freezeOutcomes(outcomes),
     startedAt,
     completedAt: new Date().toISOString(),
     sandbox: opts.sandbox ?? "none",
   };
+}
+
+function freezeOutcomes(outcomes: readonly HuntFindingOutcome[]): readonly HuntFindingOutcome[] {
+  return Object.freeze(outcomes.map((outcome) => Object.freeze({ ...outcome })));
 }
 
 function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined {
