@@ -62,6 +62,7 @@ test("resolveEntitlement: normalizes a legacy compliance cache to enterprise", a
   seedCache(threeDaysAgo, "compliance", ["scan", "audit_trail"]);
   const resolved = await withOfflineFetch(() => mod.resolveEntitlement({ forceRefresh: true }));
   assert.equal(resolved.plan, "enterprise");
+  assert.equal(resolved.realPlan, "enterprise");
   assert.equal(resolved.source, "cache");
 });
 

@@ -274,7 +274,7 @@ export async function resolveEntitlement(
       source: caps.stale === true ? "cache" : "rest",
       stale: caps.stale === true,
       simulated: caps.simulated,
-      realPlan: caps.real_plan,
+      realPlan: caps.real_plan === undefined ? undefined : normalizeTier(caps.real_plan),
       license: license ?? undefined,
     };
   }
