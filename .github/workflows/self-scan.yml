@@ -95,7 +95,7 @@ jobs:
         if: ${{ success() }}
         uses: actions/upload-artifact@v4
         with:
-            name: public-package-archives-${{ github.sha }}
+          name: public-package-archives-${{ github.sha }}
           path: |
             .artifacts/public-packages/*.tgz
             .artifacts/public-packages/clean-consumer-verification.txt
