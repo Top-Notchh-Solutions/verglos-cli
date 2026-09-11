@@ -527,7 +527,10 @@ program
     if (!ok) process.exit(1);
 
     const plan = await planHeaderFixes(process.cwd());
-    if (opts.dryRun || !opts.approve) {
+    // A machine-readable non-approved invocation must emit only the stable
+    // approval error below. The plan is emitted only for an explicit dry run
+    // (or human-readable preflight), never as a second JSON document.
+    if (opts.dryRun || (!opts.approve && !opts.json)) {
       if (opts.json) console.log(JSON.stringify({ planned: plan }));
       else if (!opts.quiet) {
         if (plan.length === 0) console.log("No supported header change is planned.");

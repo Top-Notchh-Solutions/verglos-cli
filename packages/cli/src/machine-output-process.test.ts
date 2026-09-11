@@ -17,6 +17,14 @@ async function assertSameDirectory(actualPath: string | undefined, expectedPath:
   assert.equal(actual.ino, expected.ino);
 }
 
+async function assertSameFile(actualPath: string | undefined, expectedPath: string): Promise<void> {
+  assert.equal(typeof actualPath, "string");
+  const [actual, expected] = await Promise.all([stat(actualPath!), stat(expectedPath)]);
+  assert.equal(actual.isFile(), true);
+  assert.equal(actual.dev, expected.dev);
+  assert.equal(actual.ino, expected.ino);
+}
+
 test("record sign approval preflight is one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-sign-"));
   try {
@@ -321,6 +329,32 @@ test("CLI help is deterministic and side-effect free", async () => {
     assert.equal(result.stderr, "");
     assert.match(result.stdout, /Usage: verglos/);
     assert.match(result.stdout, /Command groups:/);
+    assert.deepEqual(result.files, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("init JSON mode writes only the bounded project config", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-init-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "init", "--yes", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { status?: string; configPath?: string; configWritten?: boolean; hookInstalled?: boolean };
+    assert.equal(payload.status, "ok");
+    assert.equal(payload.configWritten, true);
+    assert.equal(payload.hookInstalled, false);
+    await assertSameFile(payload.configPath, join(root, ".verglos.config.js"));
+    assert.deepEqual(result.files, [".verglos.config.js"]);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("fix JSON mode refuses mutation without explicit approval", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-fix-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "pro", "fix", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 78);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "FIX_APPROVAL_REQUIRED", message: "fix requires explicit approval (--approve)" });
     assert.deepEqual(result.files, []);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
