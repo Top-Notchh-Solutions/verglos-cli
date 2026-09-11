@@ -1,4 +1,5 @@
 import { isAbsolute } from "node:path";
+import { lstat } from "node:fs/promises";
 
 export interface DockerInvocationInput {
   readonly projectRoot: string;
@@ -8,6 +9,16 @@ export interface DockerInvocationInput {
   readonly timeoutMs: number;
   readonly memoryMb: number;
   readonly maxProcesses: number;
+}
+
+/** Reject symlinked or non-directory roots before a source bind mount. */
+export async function validateDockerProjectRoot(projectRoot: string): Promise<void> {
+  if (!isAbsolute(projectRoot) || /[\u0000-\u001f\u007f,]/.test(projectRoot) || projectRoot.length > 4096) {
+    throw new Error("Docker Hunt project root must be an absolute bounded path");
+  }
+  const entry = await lstat(projectRoot);
+  if (entry.isSymbolicLink()) throw new Error("Docker Hunt project root must not be a symlink");
+  if (!entry.isDirectory()) throw new Error("Docker Hunt project root must be a regular directory");
 }
 
 /**

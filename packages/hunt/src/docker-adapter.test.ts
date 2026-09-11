@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
+import { mkdtemp, mkdir, symlink } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { test } from "node:test";
-import { buildDockerInvocation } from "./docker-adapter.js";
+import { buildDockerInvocation, validateDockerProjectRoot } from "./docker-adapter.js";
 
 const input = {
   projectRoot: "/tmp/project",
@@ -27,4 +30,15 @@ test("Docker invocation rejects mutable images and unsafe command inputs", () =>
   assert.throws(() => buildDockerInvocation({ ...input, image: "ghcr.io/probe@latest" }), /safe reference/);
   assert.throws(() => buildDockerInvocation({ ...input, command: ["/probe", "x\u0000y"] }), /command/);
   assert.throws(() => buildDockerInvocation({ ...input, projectRoot: "relative" }), /absolute/);
+});
+
+test("Docker project-root validation rejects symlinks and non-directories", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-root-"));
+  const target = join(root, "target");
+  const link = join(root, "link");
+  await mkdir(target);
+  await symlink(target, link);
+  await validateDockerProjectRoot(target);
+  await assert.rejects(() => validateDockerProjectRoot(link), /symlink/);
+  await assert.rejects(() => validateDockerProjectRoot(join(root, "missing")), /ENOENT/);
 });
