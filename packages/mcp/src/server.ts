@@ -372,7 +372,12 @@ export function listAdvertisedTools() {
   });
 }
 
-export function createVerglosMcpServer(): Server {
+export interface VerglosMcpServerOptions {
+  /** Verified entitlement supplied by the host; omitted preserves alpha compatibility. */
+  readonly plan?: "free" | "pro" | "studio";
+}
+
+export function createVerglosMcpServer(options: VerglosMcpServerOptions = {}): Server {
   const server = new Server(
     {
       name: "verglos",
@@ -394,7 +399,7 @@ export function createVerglosMcpServer(): Server {
     const args = request.params.arguments as
       | Record<string, unknown>
       | undefined;
-    return dispatchTool(name, args, { approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE });
+    return dispatchTool(name, args, { approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, plan: options.plan });
   });
 
   return server;
@@ -404,8 +409,8 @@ export function createVerglosMcpServer(): Server {
  * Start an MCP server over stdio. Prints a startup banner to stderr
  * so stdout stays clean for the MCP transport.
  */
-export async function startStdioServer(): Promise<void> {
-  const server = createVerglosMcpServer();
+export async function startStdioServer(options: VerglosMcpServerOptions = {}): Promise<void> {
+  const server = createVerglosMcpServer(options);
   const transport = new StdioServerTransport();
   process.stderr.write("verglos:mcp: server started on stdio\n");
   await server.connect(transport);
