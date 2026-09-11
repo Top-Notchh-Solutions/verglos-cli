@@ -39,6 +39,12 @@ test("Docker invocation rejects mutable images and unsafe command inputs", () =>
   assert.throws(() => buildDockerInvocation({ ...input, diskMb: 0 }), /disk/);
 });
 
+test("Docker invocation fails closed for malformed runtime input shapes", () => {
+  assert.throws(() => buildDockerInvocation({ ...input, image: undefined as never }), /safe reference/);
+  assert.throws(() => buildDockerInvocation({ ...input, imageDigest: undefined as never }), /pinned sha256/);
+  assert.throws(() => buildDockerInvocation({ ...input, command: undefined as never }), /command/);
+});
+
 test("Docker project-root validation rejects symlinks and non-directories", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-root-"));
   const target = join(root, "target");
