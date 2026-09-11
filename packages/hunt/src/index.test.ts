@@ -60,3 +60,15 @@ test("Hunt refuses an adapter during dry run or when sandbox identity mismatches
   await assert.rejects(() => runHunt(report, { adapter, dryRun: true }), /dry run/);
   await assert.rejects(() => runHunt(report, { adapter, sandbox: "docker" }), /does not match/);
 });
+
+test("Hunt cleans up when adapter preparation fails", async () => {
+  let cleaned = false;
+  const adapter = {
+    id: "test-probe",
+    async prepare() { throw new Error("fixture preparation failure"); },
+    async execute() { throw new Error("must not execute"); },
+    async cleanup() { cleaned = true; },
+  };
+  await assert.rejects(() => runHunt(report, { adapter }), /fixture preparation failure/);
+  assert.equal(cleaned, true);
+});

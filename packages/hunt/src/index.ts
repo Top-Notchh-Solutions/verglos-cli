@@ -32,10 +32,10 @@ export async function runHunt(
   }
   if (opts.adapter) {
     const outcomes: HuntResult["outcomes"] = [];
-    let prepared = false;
+    let prepareAttempted = false;
     try {
+      prepareAttempted = true;
       await opts.adapter.prepare();
-      prepared = true;
       for (const finding of findings) {
         const elapsed = Date.now() - started;
         const remaining = maxDurationMs - elapsed;
@@ -52,7 +52,7 @@ export async function runHunt(
         }
       }
     } finally {
-      if (prepared) await opts.adapter.cleanup();
+      if (prepareAttempted) await opts.adapter.cleanup();
     }
     return { report, outcomes, startedAt, completedAt: new Date().toISOString(), sandbox: opts.adapter.id };
   }
