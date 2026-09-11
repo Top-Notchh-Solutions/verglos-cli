@@ -252,7 +252,7 @@ async function fixWithHelperFile(
  * Returns the number of files created or patched. Prints per-file
  * status to stdout; instructions when a helper file was created.
  */
-export async function applyHeaderFixes(projectRoot: string, options: { readonly approvalReceipt?: ApprovalReceipt; readonly now?: string; readonly approvalStoreRoot?: string } = {}): Promise<number> {
+export async function applyHeaderFixes(projectRoot: string, options: { readonly approvalReceipt?: ApprovalReceipt; readonly now?: string; readonly approvalStoreRoot?: string; readonly quiet?: boolean } = {}): Promise<number> {
   const plan = await planHeaderFixes(projectRoot);
   const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
   if (plannedFiles.length > 0) {
@@ -267,12 +267,12 @@ export async function applyHeaderFixes(projectRoot: string, options: { readonly 
   if (type === "nextjs") {
     const result = await fixNextjs(projectRoot);
     if (result?.action === "patched") {
-      console.log(chalk.green(`  ✓ Patched ${result.file} with security headers`));
+      if (!options.quiet) console.log(chalk.green(`  ✓ Patched ${result.file} with security headers`));
       changed++;
     } else if (result?.action === "skipped") {
-      console.log(chalk.gray(`  · ${result.file} already declares security headers`));
+      if (!options.quiet) console.log(chalk.gray(`  · ${result.file} already declares security headers`));
     } else {
-      console.log(
+      if (!options.quiet) console.log(
         chalk.gray(
           "  · No next.config.* with a `const nextConfig = { … }` block — skipping.",
         ),
@@ -284,21 +284,23 @@ export async function applyHeaderFixes(projectRoot: string, options: { readonly 
   if (type === "express" || type === "fastify" || type === "node" || type === "react") {
     const result = await fixWithHelperFile(projectRoot, type);
     if (result.action === "created") {
-      console.log(chalk.green(`  ✓ Created ${result.file}`));
+      if (!options.quiet) console.log(chalk.green(`  ✓ Created ${result.file}`));
       if (result.instructions) {
-        console.log("");
-        for (const line of result.instructions.split("\n")) {
-          console.log(chalk.gray("    " + line));
+        if (!options.quiet) {
+          console.log("");
+          for (const line of result.instructions.split("\n")) {
+            console.log(chalk.gray("    " + line));
+          }
         }
       }
       changed++;
     } else {
-      console.log(chalk.gray(`  · ${result.file} already exists — skipping.`));
+      if (!options.quiet) console.log(chalk.gray(`  · ${result.file} already exists — skipping.`));
     }
     return changed;
   }
 
-  console.log(
+  if (!options.quiet) console.log(
     chalk.gray(
       `  · Detected project type "${type}" — no header template available yet.`,
     ),

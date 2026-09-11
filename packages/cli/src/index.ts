@@ -457,7 +457,9 @@ program
   .option("--approval-receipt <path>", "Path to an exact, time-bounded mutate approval receipt")
   .option("--dry-run", "Show the planned file changes without mutating")
   .option("--rescan", "Run a local scan after applying the approved change")
-  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; rescan?: boolean }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; rescan?: boolean; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability("fix", "`verglos fix`", {
       asPlan,
@@ -468,10 +470,13 @@ program
 
     const plan = await planHeaderFixes(process.cwd());
     if (opts.dryRun || !opts.approve) {
-      if (plan.length === 0) console.log("No supported header change is planned.");
-      else for (const item of plan) {
-        console.log(`${item.action}: ${item.file}`);
-        for (const line of item.preview ?? []) console.log(line);
+      if (opts.json) console.log(JSON.stringify({ planned: plan }));
+      else if (!opts.quiet) {
+        if (plan.length === 0) console.log("No supported header change is planned.");
+        else for (const item of plan) {
+          console.log(`${item.action}: ${item.file}`);
+          for (const line of item.preview ?? []) console.log(line);
+        }
       }
     }
     if (opts.dryRun) return;
@@ -507,10 +512,13 @@ program
       }
     })) : [];
 
-    console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
-    console.log("");
-    const fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString(), approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE });
-    console.log("");
+    if (!opts.quiet && !opts.json) {
+      console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
+      console.log("");
+    }
+    const fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString(), approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, quiet: opts.quiet || opts.json });
+    if (!opts.quiet && !opts.json) console.log("");
+    if (opts.json) console.log(JSON.stringify({ planned: plan, fixed, rescanned: Boolean(opts.rescan) }));
     if (fixed > 0) {
       console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
       if (opts.rescan) {
