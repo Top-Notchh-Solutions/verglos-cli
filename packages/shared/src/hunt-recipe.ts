@@ -15,17 +15,18 @@ export const HuntRecipeSchema = z.object({
   assertions: z.array(z.string().min(1).max(4096).refine(noControls, "assertion contains control characters")).min(1).max(64),
   inputs: z.record(z.string().min(1).max(128).refine(noControls, "input name contains control characters"), z.string().max(4096).refine(noControls, "input contains control characters")).optional(),
   isolation: z.enum(["none", "restricted-process", "container", "gvisor", "microvm"]),
-  limits: z.object({ timeoutMs: z.number().int().positive().max(600_000), memoryMb: z.number().int().positive().max(16_384), outputBytes: z.number().int().positive().max(10_000_000) }).strict(),
+  limits: z.object({ timeoutMs: z.number().int().positive().max(600_000), memoryMb: z.number().int().positive().max(16_384), outputBytes: z.number().int().positive().max(10_000_000), processes: z.number().int().positive().max(4_096) }).strict(),
   cleanup: z.enum(["always", "on-success", "none"]),
   network: z.object({ mode: z.enum(["denied", "allowlist"]), destinations: z.array(z.string().url().max(2048)).max(32), reason: z.string().min(1).max(1024).refine(noControls, "network reason contains control characters") }).strict(),
   redaction: z.enum(["required", "best-effort"]),
-  signature: z.object({ status: z.enum(["verified", "unverified", "invalid"]), signer: z.string().min(1).max(512).optional() }).strict(),
+  signature: z.object({ status: z.enum(["verified", "unverified", "invalid"]), signer: z.string().min(1).max(512).optional(), expiresAt: z.string().datetime({ offset: true }).optional() }).strict(),
 }).strict().superRefine((value, ctx) => {
   if (value.imageDigest.algorithm !== "sha256") ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["imageDigest", "algorithm"], message: "Hunt image digests must use sha256" });
   if (value.network.mode === "denied" && value.network.destinations.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network", "destinations"], message: "denied network cannot list destinations" });
   if (value.network.mode === "allowlist" && value.isolation === "none") ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["isolation"], message: "allowlisted network requires an isolated execution adapter" });
   if (value.network.mode === "allowlist" && value.network.destinations.some((destination) => !destination.startsWith("https://"))) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network", "destinations"], message: "allowlisted network destinations must use HTTPS" });
   if (value.network.destinations.some((destination) => { const url = new URL(destination); return url.username.length > 0 || url.password.length > 0; })) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network", "destinations"], message: "network destinations must not embed credentials" });
+  if (value.network.destinations.some((destination) => { const url = new URL(destination); return url.pathname !== "/" || url.search.length > 0 || url.hash.length > 0; })) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network", "destinations"], message: "network destinations must be HTTPS origins without path, query, or fragment" });
   if (value.signature.status === "verified" && !value.signature.signer) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["signature", "signer"], message: "verified recipe requires signer" });
 });
 export type HuntRecipe = z.infer<typeof HuntRecipeSchema>;

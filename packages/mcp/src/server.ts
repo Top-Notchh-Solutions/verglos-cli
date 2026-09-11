@@ -345,6 +345,27 @@ export async function dispatchTool(
 
 // ─── Server factory ───────────────────────────────────────────────────────
 
+/** Build the deterministic tools/list payload from shared capability truth. */
+export function listAdvertisedTools() {
+  const capabilities = reconcileMcpCapabilities(TOOLS.map((tool) => tool.name));
+  return TOOLS.map((t) => {
+    const capability = capabilities.find((item) => item.tool === t.name);
+    if (!capability) throw new Error("MCP capability metadata is missing");
+    const authority = mcpToolAuthority(t.name);
+    return {
+      name: t.name,
+      description: t.description,
+      inputSchema: t.inputSchema,
+      _meta: { "verglos/capability": capability },
+      annotations: authority ? {
+        readOnlyHint: !authority.approvalRequired,
+        destructiveHint: authority.sideEffect === "filesystem" || authority.sideEffect === "identity",
+        openWorldHint: authority.sideEffect === "network" || authority.sideEffect === "hosted",
+      } : undefined,
+    };
+  });
+}
+
 export function createVerglosMcpServer(): Server {
   const server = new Server(
     {
@@ -358,22 +379,9 @@ export function createVerglosMcpServer(): Server {
     },
   );
 
-  server.setRequestHandler(ListToolsRequestSchema, async () => ({
-    // Fail closed if the hand-authored MCP tool list drifts from shared capability truth.
-    tools: reconcileMcpCapabilities(TOOLS.map((tool) => tool.name)) && TOOLS.map((t) => ({
-      name: t.name,
-      description: t.description,
-      inputSchema: t.inputSchema,
-      annotations: (() => {
-        const authority = mcpToolAuthority(t.name);
-        return authority ? {
-          readOnlyHint: !authority.approvalRequired,
-          destructiveHint: authority.sideEffect === "filesystem" || authority.sideEffect === "identity",
-          openWorldHint: authority.sideEffect === "network" || authority.sideEffect === "hosted",
-        } : undefined;
-      })(),
-    })),
-  }));
+  server.setRequestHandler(ListToolsRequestSchema, async () => {
+    return { tools: listAdvertisedTools() };
+  });
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const name = request.params.name;

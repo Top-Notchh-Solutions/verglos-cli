@@ -2,11 +2,20 @@ import assert from "node:assert/strict";
 import { mkdtemp, rm } from "node:fs/promises";
 import { test } from "node:test";
 import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
-import { dispatchTool, jsonResponse } from "./server.js";
+import { dispatchTool, jsonResponse, listAdvertisedTools } from "./server.js";
 
 function responseText(result: Awaited<ReturnType<typeof dispatchTool>>): Record<string, unknown> {
   return JSON.parse(result.content[0]!.text) as Record<string, unknown>;
 }
+
+test("MCP tools/list publishes shared capability metadata for every tool", () => {
+  const tools = listAdvertisedTools();
+  assert.equal(tools.length, 9);
+  const scan = tools.find((tool) => tool.name === "verglos_scan");
+  assert.deepEqual(scan?._meta, { "verglos/capability": { tool: "verglos_scan", action: "inspect", plan: "free", maturity: "shipped", approvalRequired: false, sideEffect: "none", inputFields: ["projectRoot", "limit", "noProvenance"], outputFields: ["projectRoot", "scannedAt", "durationMs", "score", "provenance", "findingCount", "findings", "truncated", "headline"] } });
+  const hunt = tools.find((tool) => tool.name === "verglos_hunt_report");
+  assert.equal((hunt?._meta["verglos/capability"] as { sideEffect: string }).sideEffect, "process");
+});
 
 test("MCP dispatch rejects non-object tool arguments", async () => {
   const result = await dispatchTool("verglos_scan", [] as unknown as Record<string, unknown>);
