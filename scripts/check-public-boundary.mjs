@@ -7,9 +7,11 @@ const forbidden = [
   /^docs\/VERGLOS_(?:COMPANY_USAGE_AND_FEATURE_MAP|FINAL_DATA_FLOW_MAP|FINAL_VISUAL_SYSTEM|PRODUCT_ARCHITECTURE_BLUEPRINT)\.(?:md|html|pdf)$/,
   /^docs\/verglos-(?:hero-explainer|scan-loop)\.gif$/,
 ];
-const { stdout } = await run("git", ["ls-files", "-z"]);
-const tracked = stdout.split("\0").filter(Boolean);
-const violations = tracked.filter((path) => forbidden.some((pattern) => pattern.test(path)));
+const { stdout: trackedOutput } = await run("git", ["ls-files", "-z"]);
+const { stdout: historyOutput } = await run("git", ["rev-list", "--objects", "HEAD"]);
+const tracked = trackedOutput.split("\0").filter(Boolean);
+const historical = historyOutput.split("\n").filter(Boolean).map((entry) => entry.slice(entry.indexOf(" ") + 1));
+const violations = [...new Set([...tracked, ...historical])].filter((path) => forbidden.some((pattern) => pattern.test(path)));
 if (violations.length) {
   for (const path of violations) console.error(`::error::private/internal path is tracked: ${path}`);
   process.exit(1);
