@@ -21,10 +21,14 @@ export function assembleReleaseRecordBundle(input: Omit<ReleaseRecordManifestDoc
   const { payloads: payloadInputs, ...manifestInput } = input;
   if (payloadInputs.filter((payload) => payload.kind === "release-decision").length !== 1) throw new Error("Release Record assembly requires exactly one release-decision payload");
   const payloads = new Map<string, Uint8Array>();
+  const digests = new Set<string>();
   const members = payloadInputs.map((payload) => {
     if (payloads.has(payload.path)) throw new Error(`Release Record payload path is duplicated: ${payload.path}`);
     payloads.set(payload.path, payload.bytes);
     const member = describeRecordMember(payload);
+    const memberDigest = `${member.digest.algorithm}:${member.digest.value}`;
+    if (digests.has(memberDigest)) throw new Error(`Release Record payload digest is duplicated: ${payload.path}`);
+    digests.add(memberDigest);
     return payload.schema ? { ...member, schema: payload.schema } : member;
   });
   return { manifest: createReleaseRecordManifest({ ...manifestInput, members }), payloads };
