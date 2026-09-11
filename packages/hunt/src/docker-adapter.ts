@@ -45,7 +45,7 @@ export function buildDockerInvocation(input: DockerInvocationInput): readonly st
   return Object.freeze([
     "run", "--rm", "--init", "--stop-timeout", "1", "--network", "none", "--pid", "private", "--ipc", "private", "--uts", "private", "--read-only",
     "--tmpfs", `/tmp:rw,noexec,nosuid,nodev,size=${diskMb}m`,
-    "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
+    "--cap-drop", "ALL", "--security-opt", "no-new-privileges", "--security-opt", "seccomp=default",
     "--user", "65532:65532", "--workdir", "/workspace",
     "--pids-limit", String(input.maxProcesses), "--memory", `${input.memoryMb}m`, "--cpus", String(cpus),
     "--ulimit", "nofile=1024:1024", "--ulimit", "core=0",
