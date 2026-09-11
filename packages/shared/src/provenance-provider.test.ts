@@ -8,3 +8,9 @@ test("provider provenance matching preserves exact subject state", () => {
   assert.equal(matchProviderProvenance({ provider: "npm", subjects: [{ digest: { sha256: "other" } }], expectedDigest: "abc" }).state, "mismatched");
   assert.equal(matchProviderProvenance({ provider: "buildkit", expectedDigest: "abc" }).state, "unavailable");
 });
+
+test("provider provenance matching considers every declared subject digest", () => {
+  const result = matchProviderProvenance({ provider: "github", subjects: [{ digest: { sha256: "wrong" } }, { digest: { sha256: "expected" } }], expectedDigest: "expected" });
+  assert.equal(result.state, "matched");
+  assert.equal(result.subjectDigest, "expected");
+});
