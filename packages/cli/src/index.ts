@@ -26,6 +26,7 @@ import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
 import {
   currentPlan,
+  getVerifiedLicense,
   requireCapability,
 } from "./entitlement.js";
 import { startStdioServer } from "@verglos/mcp";
@@ -790,7 +791,13 @@ program
       console.log(chalk.gray("  verglos_attest                  Studio — shell, v2.0.0-beta"));
       return;
     }
-    await startStdioServer();
+    // The MCP host receives only locally verified entitlement context. This
+    // avoids a network call on the stdio hot path while enforcing plan gates.
+    const verifiedLicense = await getVerifiedLicense();
+    const mcpPlan = verifiedLicense?.tier === "founder"
+      ? "enterprise"
+      : verifiedLicense?.tier;
+    await startStdioServer({ plan: mcpPlan });
   });
 
 program
