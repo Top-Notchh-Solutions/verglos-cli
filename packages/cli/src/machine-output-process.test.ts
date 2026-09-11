@@ -110,3 +110,13 @@ test("Explain JSON mode emits one parseable document", async () => {
     assert.equal(payload.entry?.rule, "AI-001");
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("Score configuration failure emits one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-score-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "score", "--config", "missing.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "SCORE_INPUT", message: "score generation failed" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
