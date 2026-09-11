@@ -109,7 +109,7 @@ export async function executeInit(options: InitOptions = {}): Promise<number> {
       console.log(JSON.stringify({ status: "ok", configPath, configWritten: !configExists, hookInstalled: false }));
       return 0;
     } catch (error) {
-      console.log(JSON.stringify({ status: "error", message: error instanceof Error ? error.message : "init failed" }));
+      console.log(JSON.stringify({ status: "error", message: "init failed" }));
       return 1;
     }
   }

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -34,6 +34,23 @@ test("init JSON with yes writes config and never installs a hook", async () => {
     assert.equal(code, 0);
     assert.deepEqual(JSON.parse(logs[0]!), { status: "ok", configPath: join(root, ".verglos.config.js"), configWritten: true, hookInstalled: false });
     await readFile(join(root, ".verglos.config.js"));
+  } finally {
+    console.log = origLog;
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("init JSON bounds filesystem failures", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-init-json-failure-"));
+  const fileRoot = join(root, "not-a-directory");
+  await writeFile(fileRoot, "fixture");
+  const logs: string[] = [];
+  const origLog = console.log;
+  console.log = (msg?: unknown) => { logs.push(String(msg)); };
+  try {
+    const code = await mod.executeInit({ cwd: fileRoot, json: true, yes: true });
+    assert.equal(code, 1);
+    assert.deepEqual(JSON.parse(logs[0]!), { status: "error", message: "init failed" });
   } finally {
     console.log = origLog;
     await rm(root, { recursive: true, force: true });

@@ -699,7 +699,7 @@ program
         console.log(chalk.gray("  Bypass with `git commit --no-verify` if you need to override."));
       }
     } catch (error) {
-      if (opts.json) console.log(JSON.stringify({ status: "error", reason: error instanceof Error ? error.message : "hook installation failed" }));
+      if (opts.json) console.log(JSON.stringify({ status: "error", reason: "hook installation failed" }));
       else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Pre-commit hook installation failed.");
       process.exit(1);
     }
