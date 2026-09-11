@@ -20,7 +20,7 @@ for (const packageDir of await readdir(workspaceRoot, { withFileTypes: true })) 
   }
 }
 
-const { stdout } = await run("pnpm", ["licenses", "list", "--json"], { cwd: root, maxBuffer: 16 * 1024 * 1024 });
+const { stdout } = await run("pnpm", ["licenses", "list", "--json"], { cwd: root, maxBuffer: 16 * 1024 * 1024, timeout: 120_000, killSignal: "SIGKILL" });
 const grouped = JSON.parse(stdout);
 if (!grouped || typeof grouped !== "object" || Array.isArray(grouped)) throw new Error("pnpm license output is not an object");
 

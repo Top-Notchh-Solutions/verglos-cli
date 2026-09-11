@@ -5,7 +5,7 @@ import { join } from "node:path";
 
 const run = promisify(execFile);
 const root = new URL("..", import.meta.url).pathname;
-const { stdout } = await run("pnpm", ["licenses", "list", "--json"], { cwd: root, maxBuffer: 16 * 1024 * 1024 });
+const { stdout } = await run("pnpm", ["licenses", "list", "--json"], { cwd: root, maxBuffer: 16 * 1024 * 1024, timeout: 120_000, killSignal: "SIGKILL" });
 const grouped = JSON.parse(stdout);
 const entries = [];
 for (const [license, packages] of Object.entries(grouped ?? {})) {
