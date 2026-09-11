@@ -53,6 +53,7 @@ const MAX_CONFIG_BYTES = 1 * 1024 * 1024;
 const MAX_IGNORE_BYTES = 256 * 1024;
 const MAX_IGNORE_LINES = 4096;
 const MAX_IGNORE_LINE_BYTES = 512;
+const MAX_TOTAL_IGNORE_PATHS = 256;
 const DEFAULT_DETECTOR_CONCURRENCY = 2;
 
 async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: number, run: (detector: Detector) => Promise<readonly T[]>, signal?: AbortSignal): Promise<T[]> {
@@ -114,6 +115,7 @@ export async function loadConfig(projectRoot: string, explicitConfigPath?: strin
 
   const extraIgnores = await loadIgnoreFile(projectRoot);
   if (extraIgnores.length === 0) return base;
+  if (base.ignorePaths.length + extraIgnores.length > MAX_TOTAL_IGNORE_PATHS) return base;
   return { ...base, ignorePaths: [...base.ignorePaths, ...extraIgnores] };
 }
 
