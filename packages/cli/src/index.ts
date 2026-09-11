@@ -137,7 +137,8 @@ evidence.command("export <input> <output>")
       if (opts.json) console.log(JSON.stringify(result));
       else if (!opts.quiet) console.log("Exported " + result.format + " evidence (" + result.bytes + " bytes).");
     } catch (error) {
-      if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence export failed.");
+      if (opts.json) console.log(JSON.stringify({ status: "error", code: "EVIDENCE_EXPORT_INPUT", message: "evidence export failed" }));
+      else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence export failed.");
       process.exit(78);
     }
 });
@@ -215,7 +216,8 @@ evidence.command("import <input>")
       if (opts.json) console.log(JSON.stringify(result));
       else if (!opts.quiet) console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)");
     } catch (error) {
-      if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence import failed.");
+      if (opts.json) console.log(JSON.stringify({ status: "error", code: "EVIDENCE_IMPORT_INPUT", message: "evidence import failed" }));
+      else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence import failed.");
       process.exit(78);
     }
   });

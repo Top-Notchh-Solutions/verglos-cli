@@ -18,6 +18,8 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /\.command\("score"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /evidence\.command\("export <input> <output>"\)[\s\S]*?if \(!opts\.quiet\) console\.error/);
   assert.match(source, /evidence\.command\("import <input>"\)[\s\S]*?if \(!opts\.quiet\) console\.error/);
+  assert.match(source, /EVIDENCE_EXPORT_INPUT/);
+  assert.match(source, /EVIDENCE_IMPORT_INPUT/);
   assert.match(source, /\.command\("diff <base> <head>"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   for (const command of ["scan", "score", "secrets", "deps", "ci", "precommit"]) assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--config <path>`));
   for (const command of ["scan", "score", "secrets", "deps", "ci", "precommit"]) assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--json`));
