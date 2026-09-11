@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { test } from "node:test";
 import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
@@ -166,7 +168,7 @@ test("MCP dispatch rejects an approval receipt that omits the requested file sco
 });
 
 test("MCP dispatch persists an approved receipt when an audit store is configured", async () => {
-  const root = await mkdtemp("/tmp/verglos-mcp-audit-");
+  const root = await mkdtemp(join(tmpdir(), "verglos-mcp-audit-"));
   try {
     const request = { requestId: "423e4567-e89b-12d3-a456-426614174000", action: "execute" as const, actor: "agent", target: "report:/tmp/audit.json", files: ["/tmp/audit.json"], network: [], policyEffect: "hunt report", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" };
     const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
@@ -177,7 +179,7 @@ test("MCP dispatch persists an approved receipt when an audit store is configure
 });
 
 test("MCP approval audit failures are bounded", async () => {
-  const root = await mkdtemp("/tmp/verglos-mcp-audit-failure-");
+  const root = await mkdtemp(join(tmpdir(), "verglos-mcp-audit-failure-"));
   const auditPath = `${root}/not-a-directory`;
   await writeFile(auditPath, "fixture");
   try {
