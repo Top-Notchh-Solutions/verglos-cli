@@ -86,7 +86,21 @@ export async function runHunt(
 }
 
 function freezeOutcomes(outcomes: readonly HuntFindingOutcome[]): readonly HuntFindingOutcome[] {
-  return Object.freeze(outcomes.map((outcome) => Object.freeze({ ...outcome })));
+  return Object.freeze(outcomes.map((outcome) => {
+    const finding = outcome.finding === undefined ? undefined : cloneAndFreeze(outcome.finding);
+    return Object.freeze({ ...outcome, ...(finding === undefined ? {} : { finding }) });
+  }));
+}
+
+function cloneAndFreeze<T>(value: T): T {
+  const clone = structuredClone(value);
+  const visit = (current: unknown): void => {
+    if (!current || typeof current !== "object" || Object.isFrozen(current)) return;
+    for (const child of Object.values(current as Record<string, unknown>)) visit(child);
+    Object.freeze(current);
+  };
+  visit(clone);
+  return clone;
 }
 
 function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined {

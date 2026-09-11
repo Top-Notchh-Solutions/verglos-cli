@@ -179,3 +179,13 @@ test("Hunt freezes projected outcomes before returning them", async () => {
   assert.ok(Object.isFrozen(executed.outcomes));
   assert.ok(Object.isFrozen(executed.outcomes[0]));
 });
+
+test("Hunt outcome findings are cloned and immutable", async () => {
+  const adapter = { id: "test-probe", async prepare() {}, async execute() { return { findingId: "critical-1", verdict: "false" as const, reason: "fixture", durationMs: 1 }; }, async cleanup() {} };
+  const result = await runHunt(report, { adapter, execution });
+  assert.notEqual(result.outcomes[0]?.finding, report.findings[0]);
+  assert.ok(Object.isFrozen(result.outcomes[0]?.finding));
+  assert.equal(result.outcomes[0]?.finding?.title, "critical");
+  (report.findings[0] as { title: string }).title = "changed after run";
+  assert.equal(result.outcomes[0]?.finding?.title, "critical");
+});
