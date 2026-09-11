@@ -2,6 +2,7 @@ import type { ScanResult } from "@verglos/shared";
 import type { HuntOptions, HuntResult } from "./types.js";
 
 export * from "./types.js";
+export * from "./docker-adapter.js";
 
 export async function runHunt(
   report: ScanResult,

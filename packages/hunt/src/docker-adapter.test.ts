@@ -1,0 +1,29 @@
+import assert from "node:assert/strict";
+import { test } from "node:test";
+import { buildDockerInvocation } from "./docker-adapter.js";
+
+const input = {
+  projectRoot: "/tmp/project",
+  image: "ghcr.io/verglos/probe",
+  imageDigest: `sha256:${"a".repeat(64)}`,
+  command: ["/probe", "--safe"],
+  timeoutMs: 10_000,
+  memoryMb: 256,
+  maxProcesses: 32,
+} as const;
+
+test("Docker invocation is pinned and deny-by-default", () => {
+  const args = buildDockerInvocation(input);
+  assert.deepEqual(args.slice(0, 11), ["run", "--rm", "--network", "none", "--read-only", "--tmpfs", "/tmp:rw,noexec,nosuid,nodev", "--cap-drop", "ALL", "--security-opt", "no-new-privileges"]);
+  assert.ok(args.includes("--pids-limit"));
+  assert.ok(args.includes("--mount"));
+  assert.ok(args.includes(`${input.image}@${input.imageDigest}`));
+  assert.ok(Object.isFrozen(args));
+});
+
+test("Docker invocation rejects mutable images and unsafe command inputs", () => {
+  assert.throws(() => buildDockerInvocation({ ...input, imageDigest: "latest" }), /pinned sha256/);
+  assert.throws(() => buildDockerInvocation({ ...input, image: "ghcr.io/probe@latest" }), /safe reference/);
+  assert.throws(() => buildDockerInvocation({ ...input, command: ["/probe", "x\u0000y"] }), /command/);
+  assert.throws(() => buildDockerInvocation({ ...input, projectRoot: "relative" }), /absolute/);
+});
