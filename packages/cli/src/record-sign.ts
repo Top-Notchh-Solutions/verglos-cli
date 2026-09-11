@@ -1,5 +1,5 @@
 import { lstat, readFile, writeFile } from "node:fs/promises";
-import { canonicalizeJson, parseReleaseRecordManifestJson, signReleaseRecordManifest } from "@verglos/shared";
+import { authorizeAgentAction, canonicalizeJson, parseReleaseRecordManifestJson, signReleaseRecordManifest, type ApprovalReceipt } from "@verglos/shared";
 
 const MAX_BYTES = 8 * 1024 * 1024;
 const MAX_KEY_BYTES = 16 * 1024;
@@ -9,9 +9,26 @@ async function boundedFile(path: string, max: number, label: string): Promise<Bu
   const bytes = await readFile(path); if (bytes.byteLength > max) throw new Error(`${label} exceeds its size limit`); return bytes;
 }
 
-export async function executeRecordSign(manifestPath: string, signaturePath: string, keyPath: string, signerId: string, issuer: string, approve = false, json = false, quiet = false): Promise<number> {
+export async function executeRecordSign(
+  manifestPath: string,
+  signaturePath: string,
+  keyPath: string,
+  signerId: string,
+  issuer: string,
+  approve = false,
+  json = false,
+  quiet = false,
+  approvalReceipt?: ApprovalReceipt,
+  now = new Date().toISOString(),
+): Promise<number> {
   try {
     if (!approve) throw new Error("record signing requires explicit approval (--approve)");
+    if (!approvalReceipt) throw new Error("record signing requires an approval receipt (--approval-receipt)");
+    const authorization = authorizeAgentAction("sign", approvalReceipt, now);
+    if (!authorization.allowed) throw new Error(`record signing approval denied: ${authorization.reason}`);
+    if (approvalReceipt.target !== `manifest:${manifestPath}`) throw new Error("approval receipt scope does not match the signing manifest");
+    if (!approvalReceipt.files.includes(manifestPath)) throw new Error("approval receipt does not cover the signing manifest");
+    if (approvalReceipt.network.length > 0) throw new Error("record signing approval must not declare network scope");
     const manifest = parseReleaseRecordManifestJson(await boundedFile(manifestPath, MAX_BYTES, "record manifest"));
     const privateKey = (await boundedFile(keyPath, MAX_KEY_BYTES, "record signing key")).toString("utf8");
     const envelope = signReleaseRecordManifest(manifest, privateKey, { id: signerId, issuer }, new Date().toISOString());
