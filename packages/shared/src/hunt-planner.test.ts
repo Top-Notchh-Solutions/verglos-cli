@@ -9,6 +9,7 @@ test("Hunt planner is exact-match, immutable, and execution-free", () => {
   const withInputs = parseHuntRecipe({ ...recipe, inputs: { fixture: "safe" } });
   const plan = planHunt(withInputs, { ruleId: "d1-1", subjectId: recipe.targetSubjectId });
   assert.equal(plan.supported, true);
+  assert.equal(plan.trusted, undefined);
   assert.equal(plan.executes, false);
   assert.equal(plan.ruleId, recipe.ruleId);
   assert.equal(plan.targetSubjectId, recipe.targetSubjectId);
@@ -22,4 +23,6 @@ test("Hunt planner is exact-match, immutable, and execution-free", () => {
   assert.ok(Object.isFrozen(plan.network.destinations));
   assert.ok(Object.isFrozen(plan.signature));
   assert.equal(planHunt(recipe, { ruleId: "other", subjectId: recipe.targetSubjectId }).supported, false);
+  assert.equal(planHunt(recipe, { ruleId: "d1-1", subjectId: recipe.targetSubjectId }, { trust: { signers: ["other"] } }).supported, false);
+  assert.equal(planHunt(recipe, { ruleId: "d1-1", subjectId: recipe.targetSubjectId }, { trust: { signers: ["verglos-release"] } }).trusted, true);
 });

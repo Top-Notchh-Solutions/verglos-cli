@@ -1,7 +1,9 @@
 import { parseHuntRecipe, type HuntRecipe } from "./hunt-recipe.js";
+import { isTrustedHuntRecipe } from "./hunt-recipe-trust.js";
 
 export interface HuntPlan {
   readonly supported: boolean;
+  readonly trusted: boolean | undefined;
   readonly reason: string;
   readonly recipeId: string;
   readonly ruleId: string;
@@ -16,12 +18,15 @@ export interface HuntPlan {
   readonly signature: HuntRecipe["signature"];
   readonly executes: false;
 }
-export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; readonly subjectId: string }): HuntPlan {
+export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; readonly subjectId: string }, options: { readonly trust?: { readonly signers: readonly string[]; readonly revokedRecipeIds?: readonly string[] } } = {}): HuntPlan {
   const parsed = parseHuntRecipe(recipe);
-  const supported = parsed.ruleId === input.ruleId && parsed.targetSubjectId === input.subjectId;
+  const matches = parsed.ruleId === input.ruleId && parsed.targetSubjectId === input.subjectId;
+  const trusted = options.trust ? isTrustedHuntRecipe(parsed, options.trust) : undefined;
+  const supported = matches && trusted !== false;
   return {
     supported,
-    reason: supported ? "recipe matches exact rule and subject" : "recipe does not match the exact rule and subject",
+    reason: !matches ? "recipe does not match the exact rule and subject" : trusted === false ? "recipe is not trusted by the supplied trust policy" : "recipe matches exact rule and subject",
+    trusted,
     recipeId: parsed.recipeId,
     ruleId: parsed.ruleId,
     targetSubjectId: parsed.targetSubjectId,
