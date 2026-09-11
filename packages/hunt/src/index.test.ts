@@ -123,6 +123,18 @@ test("Hunt rejects malformed adapter outcome fields", async () => {
   assert.match(result.outcomes[0]?.reason ?? "", /mismatched finding/);
 });
 
+test("Hunt rejects contradictory canonical verdicts", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { return { findingId: "critical-1", verdict: "true" as const, canonicalVerdict: "policy-denied" as const, reason: "fixture", durationMs: 1 }; },
+    async cleanup() {},
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
+  assert.match(result.outcomes[0]?.reason ?? "", /mismatched finding/);
+});
+
 test("Hunt rejects unbounded adapter reasons and durations", async () => {
   const adapter = {
     id: "test-probe",

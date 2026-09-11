@@ -103,6 +103,15 @@ function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined 
   if (outcome.redacted !== undefined && outcome.redacted !== true) return undefined;
   if (outcome.executionStatus !== undefined && outcome.executionStatus !== "completed" && outcome.executionStatus !== "timed-out" && outcome.executionStatus !== "failed") return undefined;
   if (outcome.canonicalVerdict !== undefined && (typeof outcome.canonicalVerdict !== "string" || !["confirmed", "not-reproduced", "inconclusive", "not-supported", "environment-error", "policy-denied"].includes(outcome.canonicalVerdict))) return undefined;
+  if (outcome.canonicalVerdict !== undefined) {
+    const canonical = outcome.canonicalVerdict as string;
+    const compatible = outcome.verdict === "true"
+      ? canonical === "confirmed"
+      : outcome.verdict === "false"
+        ? canonical === "not-reproduced"
+        : ["inconclusive", "not-supported", "environment-error", "policy-denied"].includes(canonical);
+    if (!compatible) return undefined;
+  }
   return {
     findingId: outcome.findingId,
     verdict: outcome.verdict,
