@@ -49,3 +49,17 @@ test("bounded config fields remain compatible with migration inspection", () => 
   assert.equal(inspection.status, "legacy");
   assert.deepEqual(inspection.warnings.map((warning) => warning.id), ["obsolete-sandbox"]);
 });
+
+test("undeclared engine, record, and telemetry sections remain migration warnings", () => {
+  const inspection = inspectConfigMigration({
+    engine: { id: "trivy" },
+    record: { output: ".vgl" },
+    telemetry: { enabled: true },
+  });
+  assert.equal(inspection.status, "legacy");
+  assert.deepEqual(inspection.warnings.map((warning) => warning.message), [
+    "unknown config field 'engine' is ignored until a versioned migration defines it.",
+    "unknown config field 'record' is ignored until a versioned migration defines it.",
+    "unknown config field 'telemetry' is ignored until a versioned migration defines it.",
+  ]);
+});
