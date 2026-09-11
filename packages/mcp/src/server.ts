@@ -14,7 +14,7 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
-import { parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseScanArgs } from "./input-validation.js";
+import { parseAttestArgs, parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseHuntBeforeWriteArgs, parseHuntExplainVerdictArgs, parseHuntFindingArgs, parseHuntReportArgs, parseScanArgs } from "./input-validation.js";
 
 const require = createRequire(import.meta.url);
 const { version: MCP_VERSION } = require("../package.json") as {
@@ -269,11 +269,19 @@ export async function dispatchTool(
       return jsonResponse(result);
     }
     case "verglos_hunt_finding":
+      try { parseHuntFindingArgs(input); } catch (error) { return invalid("MCP_HUNT_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_report":
+      try { parseHuntReportArgs(input); } catch (error) { return invalid("MCP_HUNT_REPORT_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_before_write":
+      try { parseHuntBeforeWriteArgs(input); } catch (error) { return invalid("MCP_HUNT_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_explain_verdict":
+      try { parseHuntExplainVerdictArgs(input); } catch (error) { return invalid("MCP_HUNT_EXPLAIN_VERDICT_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "pro"));
     case "verglos_attest":
+      try { parseAttestArgs(input); } catch (error) { return invalid("MCP_ATTEST_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "studio"));
     default:
       return stubResponse(name);

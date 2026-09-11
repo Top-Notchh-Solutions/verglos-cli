@@ -46,3 +46,51 @@ export function parseScanArgs(value: unknown): { projectRoot?: string; limit?: n
     ...(input.noProvenance !== undefined ? { noProvenance: input.noProvenance as boolean } : {}),
   };
 }
+
+function objectArgs(value: unknown, tool: string): Record<string, unknown> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error(`${tool} arguments must be an object`);
+  return value as Record<string, unknown>;
+}
+
+function boundedString(input: Record<string, unknown>, key: string, required: boolean, max = 4096): string | undefined {
+  const value = input[key];
+  if (value === undefined && !required) return undefined;
+  if (typeof value !== "string" || value.length === 0 || Buffer.byteLength(value, "utf8") > max) throw new Error(`${key} must be a non-empty bounded string`);
+  return value;
+}
+
+function rejectUnknown(input: Record<string, unknown>, allowed: readonly string[], tool: string): void {
+  for (const key of Object.keys(input)) if (!allowed.includes(key)) throw new Error(`unknown ${tool} argument: ${key}`);
+}
+
+export function parseHuntFindingArgs(value: unknown): { reportPath: string; findingId: string } {
+  const input = objectArgs(value, "hunt_finding"); rejectUnknown(input, ["reportPath", "findingId"], "hunt_finding");
+  return { reportPath: boundedString(input, "reportPath", true)!, findingId: boundedString(input, "findingId", true, 512)! };
+}
+
+export function parseHuntReportArgs(value: unknown): { reportPath: string } {
+  const input = objectArgs(value, "hunt_report"); rejectUnknown(input, ["reportPath"], "hunt_report");
+  return { reportPath: boundedString(input, "reportPath", true)! };
+}
+
+export function parseHuntBeforeWriteArgs(value: unknown): { code: string; filePath: string; language: string } {
+  const input = objectArgs(value, "hunt_before_write"); rejectUnknown(input, ["code", "filePath", "language"], "hunt_before_write");
+  const code = boundedString(input, "code", true, 1_000_000)!;
+  const filePath = boundedString(input, "filePath", true)!;
+  const language = boundedString(input, "language", true, 128)!;
+  return { code, filePath, language };
+}
+
+export function parseHuntExplainVerdictArgs(value: unknown): { findingId: string; verdict: "true" | "false" | "not_attemptable" } {
+  const input = objectArgs(value, "hunt_explain_verdict"); rejectUnknown(input, ["findingId", "verdict"], "hunt_explain_verdict");
+  const findingId = boundedString(input, "findingId", true, 512)!;
+  if (input.verdict !== "true" && input.verdict !== "false" && input.verdict !== "not_attemptable") throw new Error("verdict must be true, false, or not_attemptable");
+  return { findingId, verdict: input.verdict };
+}
+
+export function parseAttestArgs(value: unknown): { reportPath: string; signingConfig?: Record<string, unknown> } {
+  const input = objectArgs(value, "attest"); rejectUnknown(input, ["reportPath", "signingConfig"], "attest");
+  const reportPath = boundedString(input, "reportPath", true)!;
+  if (input.signingConfig !== undefined && (!input.signingConfig || typeof input.signingConfig !== "object" || Array.isArray(input.signingConfig))) throw new Error("signingConfig must be an object");
+  return { reportPath, signingConfig: input.signingConfig as Record<string, unknown> | undefined };
+}
