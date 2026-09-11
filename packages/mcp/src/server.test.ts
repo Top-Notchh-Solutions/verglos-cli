@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { createApprovalReceipt } from "@verglos/shared";
 import { dispatchTool, jsonResponse } from "./server.js";
 
 function responseText(result: Awaited<ReturnType<typeof dispatchTool>>): Record<string, unknown> {
@@ -35,4 +36,22 @@ test("MCP read-only tools keep strict unknown-field validation", async () => {
   const result = responseText(await dispatchTool("verglos_scan", { approvalReceipt: {} }));
   assert.equal(result.code, "MCP_SCAN_INPUT");
   assert.equal(result.error, "usage");
+});
+
+test("MCP dispatch accepts an exact approved receipt and preserves the alpha stub state", async () => {
+  const request = {
+    requestId: "123e4567-e89b-12d3-a456-426614174000",
+    action: "execute" as const,
+    actor: "agent",
+    target: "report:/tmp/report.json",
+    files: ["/tmp/report.json"],
+    network: [],
+    policyEffect: "hunt finding",
+    requestedAt: "2026-01-01T00:00:00Z",
+    expiresAt: "2099-01-01T00:00:00Z",
+  };
+  const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/report.json", approvalReceipt }));
+  assert.equal(result.error, "not_implemented_in_alpha");
+  assert.equal(result.tool, "verglos_hunt_report");
 });

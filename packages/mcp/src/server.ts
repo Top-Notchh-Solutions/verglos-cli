@@ -27,6 +27,23 @@ const APPROVAL_RECEIPT_PROPERTY = {
   approvalReceipt: {
     type: "object",
     description: "Exact, time-bounded approval receipt for this side-effect-capable action.",
+    properties: {
+      requestId: { type: "string", format: "uuid" },
+      action: { type: "string" },
+      actor: { type: "string" },
+      target: { type: "string" },
+      files: { type: "array", items: { type: "string" }, maxItems: 256 },
+      network: { type: "array", items: { type: "string", format: "uri" }, maxItems: 64 },
+      policyEffect: { type: "string" },
+      requestedAt: { type: "string", format: "date-time" },
+      expiresAt: { type: "string", format: "date-time" },
+      decision: { type: "string", enum: ["approved", "denied"] },
+      decidedBy: { type: "string" },
+      decidedAt: { type: "string", format: "date-time" },
+      requestDigest: { type: "string", pattern: "^sha256:[a-f0-9]{64}$" },
+    },
+    required: ["requestId", "action", "actor", "target", "files", "network", "policyEffect", "requestedAt", "expiresAt", "decision", "decidedBy", "decidedAt", "requestDigest"],
+    additionalProperties: false,
   },
 } as const;
 
