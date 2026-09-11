@@ -288,7 +288,7 @@ export async function dispatchTool(
   const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
   const authority = mcpToolAuthority(name);
   if (options.plan) {
-    const capability = listAdvertisedTools().find((tool) => tool.name === name)?._meta?.["verglos/capability"] as { plan?: "free" | "pro" | "studio" } | undefined;
+    const capability = listAdvertisedTools().find((tool) => tool.name === name)?._meta?.["verglos/capability"] as { plan?: "free" | "pro" | "team" | "studio" | "enterprise" } | undefined;
     const required = capability?.plan;
     const rank = { free: 0, pro: 1, team: 2, studio: 3, enterprise: 4 } as const;
     if (required && rank[options.plan] < rank[required]) return invalid("MCP_ENTITLEMENT_REQUIRED", `MCP tool requires the ${required} plan`);
