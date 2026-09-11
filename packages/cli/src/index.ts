@@ -524,7 +524,9 @@ program
       if (opts.rescan) {
         if (!opts.quiet && !opts.json) console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
         try {
-          await executeScan({ noTelemetry: true });
+          // A machine-readable fix response must remain one JSON document;
+          // keep the post-mutation verification scan quiet and offline.
+          await executeScan({ noTelemetry: true, quiet: true });
         } catch (error) {
           for (const snapshot of snapshots) {
             if (snapshot.existed && snapshot.bytes) await writeFile(snapshot.path, snapshot.bytes, { mode: 0o600 });

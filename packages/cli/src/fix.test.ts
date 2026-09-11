@@ -203,10 +203,11 @@ test("fix CLI approved JSON mutation uses the exact receipt and reports the writ
     const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174099", action: "mutate", actor: "human", target: "workspace:fixture", files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
     const receiptPath = join(root, "approval.json");
     await writeFile(receiptPath, JSON.stringify(receipt));
-    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", receiptPath], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", receiptPath, "--rescan"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
     assert.equal(result.exitCode, 0, `${result.stdout}\n${result.stderr}`);
     const output = JSON.parse(result.stdout) as { fixed: number; planned: readonly { action: string }[] };
     assert.equal(output.fixed, 1);
+    assert.equal((output as { rescanned: boolean }).rescanned, true);
     assert.equal(output.planned[0]?.action, "patch");
     assert.equal(result.stderr, "");
     assert.match(await readFile(join(root, "next.config.js"), "utf8"), /Content-Security-Policy/);
