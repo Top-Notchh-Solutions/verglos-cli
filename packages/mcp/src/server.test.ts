@@ -70,6 +70,8 @@ test("MCP dispatch enforces the explicitly supplied entitlement plan", async () 
 test("MCP dispatch rejects unknown runtime entitlement plans", async () => {
   const result = responseText(await dispatchTool("verglos_scan", {}, { plan: "gold" as never }));
   assert.deepEqual(result, { ok: false, error: "usage", code: "MCP_ENTITLEMENT_INVALID", message: "invalid entitlement plan" });
+  assert.deepEqual(responseText(await dispatchTool("verglos_scan", {}, { plan: "" as never })), { ok: false, error: "usage", code: "MCP_ENTITLEMENT_INVALID", message: "invalid entitlement plan" });
+  assert.deepEqual(responseText(await dispatchTool("verglos_scan", {}, { plan: 1 as never })), { ok: false, error: "usage", code: "MCP_ENTITLEMENT_INVALID", message: "invalid entitlement plan" });
 });
 
 test("MCP SDK interoperability preserves discovery and entitlement errors", async () => {
