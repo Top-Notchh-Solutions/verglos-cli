@@ -80,6 +80,7 @@ export * from "./baseline-compare.js";
 export * from "./policy-explanation.js";
 export * from "./action-authority.js";
 export * from "./approval-receipt.js";
+export * from "./approval-store.js";
 export * from "./mcp-authority.js";
 export * from "./mcp-capabilities.js";
 export * from "./agent-input-bounds.js";
