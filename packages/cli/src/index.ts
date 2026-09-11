@@ -135,9 +135,10 @@ record.command("verify <storeRoot> <manifestPath>")
   .option("--public-key <path>", "Verify with a user-supplied Ed25519 public key")
   .option("--trusted-issuer <issuer>", "Require this exact signature issuer")
   .option("--trusted-signer <id>", "Require this exact signature identity")
+  .option("--complete", "Require the complete Release Record graph")
   .option("--quiet", "Suppress human output")
-  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string }) => {
-    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner));
+  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; complete?: boolean }) => {
+    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, opts.complete));
   });
 record.command("sign <manifestPath> <signaturePath>")
   .description("Sign a validated record manifest with a user-supplied offline key")

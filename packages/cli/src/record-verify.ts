@@ -1,16 +1,17 @@
 import { lstat, readFile } from "node:fs/promises";
-import { parseReleaseDecisionJson, parseReleaseRecordManifestJson, readAndVerifyRecord, releaseRecordManifestDigest, verifyReleaseRecordSignature } from "@verglos/shared";
+import { assertCompleteReleaseRecord, parseReleaseDecisionJson, parseReleaseRecordManifestJson, readAndVerifyRecord, releaseRecordManifestDigest, verifyReleaseRecordSignature } from "@verglos/shared";
 
 const MAX_MANIFEST_BYTES = 8 * 1024 * 1024;
 
-export async function executeRecordVerify(root: string, manifestPath: string, json = false, quiet = false, signaturePath?: string, publicKeyPath?: string, trustedIssuer?: string, trustedSigner?: string): Promise<number> {
+export async function executeRecordVerify(root: string, manifestPath: string, json = false, quiet = false, signaturePath?: string, publicKeyPath?: string, trustedIssuer?: string, trustedSigner?: string, complete = false): Promise<number> {
   try {
     const entry = await lstat(manifestPath);
     if (!entry.isFile()) throw new Error("record manifest must be a regular file");
     if (entry.size > MAX_MANIFEST_BYTES) throw new Error("record manifest exceeds the 8 MiB limit");
     const bytes = await readFile(manifestPath);
     if (bytes.byteLength > MAX_MANIFEST_BYTES) throw new Error("record manifest exceeds the 8 MiB limit");
-    const manifest = parseReleaseRecordManifestJson(bytes);
+    const parsedManifest = parseReleaseRecordManifestJson(bytes);
+    const manifest = complete ? assertCompleteReleaseRecord(parsedManifest) : parsedManifest;
     const members = await readAndVerifyRecord(root, manifest);
     const decisionMember = manifest.members.find((member) => member.kind === "release-decision");
     if (!decisionMember) throw new Error("record manifest is missing its release-decision member");

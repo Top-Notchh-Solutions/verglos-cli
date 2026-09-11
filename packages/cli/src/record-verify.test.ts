@@ -19,6 +19,7 @@ test("record verify checks content-addressed members and emits JSON", async () =
     await writeFile(manifestPath, JSON.stringify(manifest));
     const lines: string[] = []; const previous = console.log; console.log = (line?: unknown) => lines.push(String(line));
     try { assert.equal(await executeRecordVerify(store, manifestPath, true, true), 0); } finally { console.log = previous; }
+    assert.equal(await executeRecordVerify(store, manifestPath, true, true, undefined, undefined, undefined, undefined, true), 78);
     const result = JSON.parse(lines[0]!); assert.equal(result.verified, true); assert.equal(result.decision, "PASS"); assert.deepEqual(result.paths, ["decision.json"]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
