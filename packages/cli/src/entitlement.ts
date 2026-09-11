@@ -394,13 +394,14 @@ export function printUpgradeCta(
 export async function requireCapability(
   capability: string,
   featureLabel: string,
-  opts: LoadCapabilitiesOptions & { extraLine?: string } = {},
+  opts: LoadCapabilitiesOptions & { extraLine?: string; output?: "json" | "quiet" } = {},
 ): Promise<boolean> {
   const resolved = await resolveEntitlement(opts);
   warnIfStale({ stale: resolved.stale, plan: resolved.plan });
   const ok = resolved.capabilities.includes(capability);
   if (!ok) {
-    printUpgradeCta(featureLabel, opts.extraLine);
+    if (opts.output === "json") console.log(JSON.stringify({ status: "error", code: "CAPABILITY_REQUIRED", capability, message: `${featureLabel} requires a paid capability` }));
+    else if (opts.output !== "quiet") printUpgradeCta(featureLabel, opts.extraLine);
   }
   return ok;
 }

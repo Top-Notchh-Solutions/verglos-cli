@@ -723,6 +723,7 @@ monitor
       "Continuous CVE monitoring",
       {
         asPlan,
+        output: opts.json ? "json" : opts.quiet ? "quiet" : undefined,
         extraLine:
           "Nothing was registered. Pro alerts you on new CVEs affecting your deps.",
       },
@@ -742,6 +743,7 @@ monitor
     const ok = await requireCapability(
       "monitor_register",
       "Continuous CVE monitoring",
+      { output: opts.json ? "json" : opts.quiet ? "quiet" : undefined },
     );
     if (!ok) process.exit(1);
     const code = await executeMonitorStatus(opts);
@@ -762,6 +764,7 @@ monitor
     const ok = await requireCapability(
       "monitor_register",
       "Continuous CVE monitoring",
+      { output: opts.json ? "json" : opts.quiet ? "quiet" : undefined },
     );
     if (!ok) process.exit(1);
     const code = await executeMonitorUnregister({
@@ -786,6 +789,7 @@ monitor
     const ok = await requireCapability(
       "monitor_register",
       "Continuous CVE monitoring",
+      { output: opts.json ? "json" : opts.quiet ? "quiet" : undefined },
     );
     if (!ok) process.exit(1);
     const code = await executeMonitorTestAlert({
