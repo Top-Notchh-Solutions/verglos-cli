@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { createReadStream } from "node:fs";
 import { lstat, mkdir, rename, writeFile, readFile, open, unlink } from "node:fs/promises";
 import { join } from "node:path";
@@ -14,7 +14,8 @@ async function assertStoreRoot(root: string, create = false): Promise<void> {
 export async function putRecordMember(root: string, path: string, bytes: Uint8Array): Promise<{ readonly digest: string; readonly path: string; readonly size: number }> {
   assertSafePath(path); if (bytes.byteLength > 50_000_000) throw new Error("record member exceeds 50 MB");
   const value = digest(bytes); const destination = join(root, value.replace(":", "-")); await assertStoreRoot(root, true);
-  const temporary = `${destination}.${process.pid}.${Date.now()}.tmp`; await writeFile(temporary, bytes, { mode: 0o600 }); await rename(temporary, destination);
+  const temporary = `${destination}.${process.pid}.${randomUUID()}.tmp`; await writeFile(temporary, bytes, { mode: 0o600, flag: "wx" });
+  try { await rename(temporary, destination); } catch (error) { await unlink(temporary).catch(() => undefined); throw error; }
   return { digest: value, path, size: bytes.byteLength };
 }
 

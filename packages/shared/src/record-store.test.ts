@@ -51,3 +51,15 @@ test("record store streams regular files into the content-addressed layout", asy
     await assert.rejects(() => putRecordMemberFromFile(join(root, "store"), "link.bin", link), /regular file/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("record store uses collision-resistant temporary names for concurrent writes", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-concurrent-"));
+  try {
+    const bytes = new TextEncoder().encode("concurrent");
+    const results = await Promise.all([
+      putRecordMember(root, "a.json", bytes),
+      putRecordMember(root, "b.json", bytes),
+    ]);
+    assert.deepEqual(results.map((entry) => entry.digest), [results[0]!.digest, results[0]!.digest]);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
