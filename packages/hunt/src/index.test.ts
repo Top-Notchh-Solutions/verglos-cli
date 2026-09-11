@@ -35,3 +35,28 @@ test("Hunt rejects unbounded duration and project-root inputs", async () => {
   await assert.rejects(() => runHunt(report, { maxDurationMs: 0 }), /max duration/);
   await assert.rejects(() => runHunt(report, { projectRoot: "x".repeat(4097) }), /project root/);
 });
+
+test("Hunt executes only through an explicitly injected adapter and always cleans up", async () => {
+  const calls: string[] = [];
+  const adapter = {
+    id: "test-probe",
+    async prepare() { calls.push("prepare"); },
+    async execute(input: { finding: typeof report.findings[number]; projectRoot: string; timeoutMs: number }) {
+      calls.push(`execute:${input.finding.id}`);
+      assert.equal(input.projectRoot, report.projectRoot);
+      assert.ok(input.timeoutMs > 0);
+      return { findingId: input.finding.id, verdict: "false" as const, reason: "fixture probe completed", durationMs: 1 };
+    },
+    async cleanup() { calls.push("cleanup"); },
+  };
+  const result = await runHunt(report, { adapter, sandbox: "test-probe" });
+  assert.deepEqual(calls, ["prepare", "execute:critical-1", "cleanup"]);
+  assert.equal(result.outcomes[0]?.verdict, "false");
+  assert.equal(result.sandbox, "test-probe");
+});
+
+test("Hunt refuses an adapter during dry run or when sandbox identity mismatches", async () => {
+  const adapter = { id: "test-probe", async prepare() {}, async execute() { return { findingId: "critical-1", verdict: "false" as const, reason: "fixture", durationMs: 1 }; }, async cleanup() {} };
+  await assert.rejects(() => runHunt(report, { adapter, dryRun: true }), /dry run/);
+  await assert.rejects(() => runHunt(report, { adapter, sandbox: "docker" }), /does not match/);
+});

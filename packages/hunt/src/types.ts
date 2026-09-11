@@ -35,6 +35,8 @@ export interface HuntOptions {
   severity?: Array<Finding["severity"]>;
   findingId?: string;
   sandbox?: SandboxAdapter["id"];
+  /** A locally selected, policy-approved adapter. Never populated from model text. */
+  adapter?: SandboxAdapter;
   dryRun?: boolean;
   maxDurationMs?: number;
 }

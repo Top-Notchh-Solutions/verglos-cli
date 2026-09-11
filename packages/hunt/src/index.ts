@@ -24,6 +24,38 @@ export async function runHunt(
   const findings = report.findings.filter((finding) =>
     allowed.has(finding.severity) && (!opts.findingId || finding.id === opts.findingId),
   );
+  if (opts.adapter && opts.dryRun) {
+    throw new Error("Hunt dry run cannot execute a sandbox adapter");
+  }
+  if (opts.adapter && opts.sandbox && opts.sandbox !== "auto" && opts.sandbox !== opts.adapter.id) {
+    throw new Error("Hunt sandbox selection does not match the configured adapter");
+  }
+  if (opts.adapter) {
+    const outcomes: HuntResult["outcomes"] = [];
+    let prepared = false;
+    try {
+      await opts.adapter.prepare();
+      prepared = true;
+      for (const finding of findings) {
+        const elapsed = Date.now() - started;
+        const remaining = maxDurationMs - elapsed;
+        if (remaining <= 0) {
+          outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: "Hunt total duration expired before adapter execution", durationMs: 0 });
+          continue;
+        }
+        const before = Date.now();
+        try {
+          const outcome = await opts.adapter.execute({ finding, projectRoot, timeoutMs: remaining });
+          outcomes.push({ ...outcome, finding: outcome.finding ?? finding, durationMs: Math.max(0, Date.now() - before) });
+        } catch (error) {
+          outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: `Hunt adapter failed: ${error instanceof Error ? error.message : "unknown error"}`, durationMs: Math.max(0, Date.now() - before) });
+        }
+      }
+    } finally {
+      if (prepared) await opts.adapter.cleanup();
+    }
+    return { report, outcomes, startedAt, completedAt: new Date().toISOString(), sandbox: opts.adapter.id };
+  }
   const reason = opts.dryRun
     ? "dry run: no probe or target code executed"
     : "no approved Hunt sandbox adapter is configured; execution was not attempted";
