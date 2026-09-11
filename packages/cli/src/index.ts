@@ -689,7 +689,9 @@ monitor
   .option("--slack <url>", "Slack incoming webhook (https://hooks.slack.com/services/...)")
   .option("--webhook <url>", "Generic webhook URL to POST alert JSON to")
   .option("--label <name>", "Human-friendly project label (defaults to git repo)")
-  .action(async (opts: { email?: string; slack?: string; webhook?: string; label?: string }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { email?: string; slack?: string; webhook?: string; label?: string; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability(
       "monitor_register",
@@ -728,7 +730,9 @@ monitor
     "--project-fingerprint <fp>",
     "Fingerprint from `verglos monitor status` (defaults to the current project)",
   )
-  .action(async (opts: { projectFingerprint?: string }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { projectFingerprint?: string; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability(
       "monitor_register",
@@ -737,6 +741,8 @@ monitor
     if (!ok) process.exit(1);
     const code = await executeMonitorUnregister({
       projectFingerprint: opts.projectFingerprint,
+      json: opts.json,
+      quiet: opts.quiet,
     });
     if (code !== 0) process.exit(code);
   });
@@ -748,7 +754,9 @@ monitor
     "--project-fingerprint <fp>",
     "Fingerprint from `verglos monitor status` (defaults to the current project)",
   )
-  .action(async (opts: { projectFingerprint?: string }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { projectFingerprint?: string; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability(
       "monitor_register",
@@ -757,6 +765,8 @@ monitor
     if (!ok) process.exit(1);
     const code = await executeMonitorTestAlert({
       projectFingerprint: opts.projectFingerprint,
+      json: opts.json,
+      quiet: opts.quiet,
     });
     if (code !== 0) process.exit(code);
   });
