@@ -508,7 +508,7 @@ program
 
     console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
     console.log("");
-    const fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString() });
+    const fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString(), approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE });
     console.log("");
     if (fixed > 0) {
       console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
