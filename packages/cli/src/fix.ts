@@ -44,19 +44,11 @@ export function authorizeHeaderFix(receipt: ApprovalReceipt, plannedFiles: reado
 
 /** Write an already-planned regular file without following a replacement symlink. */
 async function replaceRegularFile(path: string, content: string): Promise<void> {
-  let handle;
-  try {
-    handle = await open(path, constants.O_WRONLY | constants.O_TRUNC | constants.O_NOFOLLOW);
-  } catch (error) {
-    // Windows does not implement O_NOFOLLOW on all supported filesystem
-    // providers. Preserve the pre-open regular-file check and use the
-    // native handle path only for that platform-specific unsupported flag.
-    const code = error && typeof error === "object" && "code" in error ? error.code : undefined;
-    if (process.platform !== "win32" || (code !== "EINVAL" && code !== "ENOTSUP" && code !== "EOPNOTSUPP")) throw error;
-    const entry = await lstat(path);
-    if (!entry.isFile() || entry.size > 1 * 1024 * 1024) throw new Error("Next.js config changed before mutation.");
-    handle = await open(path, constants.O_WRONLY | constants.O_TRUNC);
-  }
+  // Windows providers do not consistently implement O_NOFOLLOW. The caller
+  // has already performed a bounded regular-file check immediately before
+  // this open; retain kernel no-follow semantics on Unix where available.
+  const flags = constants.O_WRONLY | constants.O_TRUNC | (process.platform === "win32" ? 0 : constants.O_NOFOLLOW);
+  const handle = await open(path, flags);
   try {
     const stat = await handle.stat();
     if (!stat.isFile() || stat.size > 1 * 1024 * 1024) throw new Error("Next.js config changed before mutation.");
