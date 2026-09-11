@@ -24,6 +24,7 @@ export function assembleReleaseRecordBundle(input: Omit<ReleaseRecordManifestDoc
   const digests = new Set<string>();
   const members = payloadInputs.map((payload) => {
     if (payloads.has(payload.path)) throw new Error(`Release Record payload path is duplicated: ${payload.path}`);
+    if (payload.redaction === "omitted" && payload.bytes.byteLength !== 0) throw new Error(`omitted Release Record payload must be empty: ${payload.path}`);
     payloads.set(payload.path, payload.bytes);
     const member = describeRecordMember(payload);
     const memberDigest = `${member.digest.algorithm}:${member.digest.value}`;
