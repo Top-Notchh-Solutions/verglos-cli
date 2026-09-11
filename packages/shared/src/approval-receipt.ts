@@ -22,4 +22,17 @@ export const ApprovalReceiptSchema = ApprovalRequestBaseSchema.extend({ decision
 export type ApprovalReceipt = z.infer<typeof ApprovalReceiptSchema>;
 export function approvalRequestDigest(request: ApprovalRequest): string { return `sha256:${createHash("sha256").update(canonicalizeJson(ApprovalRequestSchema.parse(request)), "utf8").digest("hex")}`; }
 export function createApprovalReceipt(request: ApprovalRequest, input: { decision: "approved" | "denied"; decidedBy: string; decidedAt: string }): ApprovalReceipt { const parsed = ApprovalRequestSchema.parse(request); const receipt = { ...parsed, ...input, requestDigest: approvalRequestDigest(parsed) }; return ApprovalReceiptSchema.parse(receipt); }
-export function isApprovalUsable(receipt: ApprovalReceipt, at: string): boolean { const parsed = ApprovalReceiptSchema.parse(receipt); const { decision: _decision, decidedBy: _decidedBy, decidedAt: _decidedAt, requestDigest: _requestDigest, ...request } = parsed; return parsed.decision === "approved" && parsed.requestDigest === approvalRequestDigest(request) && at >= parsed.requestedAt && at < parsed.expiresAt && at >= parsed.decidedAt; }
+export function isApprovalUsable(receipt: ApprovalReceipt, at: string): boolean {
+  const parsed = ApprovalReceiptSchema.parse(receipt);
+  const { decision: _decision, decidedBy: _decidedBy, decidedAt: _decidedAt, requestDigest: _requestDigest, ...request } = parsed;
+  const atMs = Date.parse(at);
+  const requestedMs = Date.parse(parsed.requestedAt);
+  const decidedMs = Date.parse(parsed.decidedAt);
+  const expiresMs = Date.parse(parsed.expiresAt);
+  return parsed.decision === "approved"
+    && parsed.requestDigest === approvalRequestDigest(request)
+    && Number.isFinite(atMs)
+    && atMs >= requestedMs
+    && atMs < expiresMs
+    && atMs >= decidedMs;
+}
