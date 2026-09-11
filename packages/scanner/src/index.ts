@@ -79,10 +79,9 @@ async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
     const bytes = await readFile(ignorePath);
     if (bytes.byteLength > MAX_IGNORE_BYTES) return [];
     const raw = bytes.toString("utf8");
-    return raw
-      .split("\n")
-      .slice(0, MAX_IGNORE_LINES + 1)
-      .filter((line) => Buffer.byteLength(line, "utf8") <= MAX_IGNORE_LINE_BYTES)
+    const lines = raw.split("\n");
+    if (lines.length > MAX_IGNORE_LINES || lines.some((line) => Buffer.byteLength(line, "utf8") > MAX_IGNORE_LINE_BYTES)) return [];
+    return lines
       .map((l) => l.trim())
       .filter((l) => l.length > 0 && !l.startsWith("#"));
   } catch {

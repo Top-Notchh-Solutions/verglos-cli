@@ -52,5 +52,11 @@ test("scanner ignores symlinked or oversized ignore files", async () => {
     await writeFile(join(root, ".verglosignore"), "x".repeat(256 * 1024 + 1), "utf8");
     const oversized = await loadConfig(root);
     assert.equal(oversized.ignorePaths.length, linked.ignorePaths.length);
+    await writeFile(join(root, ".verglosignore"), `${"x\n".repeat(4096)}x`, "utf8");
+    const tooManyLines = await loadConfig(root);
+    assert.equal(tooManyLines.ignorePaths.length, linked.ignorePaths.length);
+    await writeFile(join(root, ".verglosignore"), `${"x".repeat(513)}\n`, "utf8");
+    const tooLongLine = await loadConfig(root);
+    assert.equal(tooLongLine.ignorePaths.length, linked.ignorePaths.length);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
