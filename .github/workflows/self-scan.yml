@@ -39,6 +39,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check dependency license inventory
+        run: node scripts/license-inventory.mjs --check > dependency-license-inventory.json
+
+      - name: Check third-party notices drift
+        run: |
+          node scripts/generate-third-party-notices.mjs > generated-third-party-notices
+          cmp --silent THIRD_PARTY_NOTICES generated-third-party-notices
+
       - name: Build
         run: pnpm build
 
