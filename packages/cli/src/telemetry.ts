@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { randomInt, randomUUID } from "node:crypto";
 import { mkdir, access, writeFile } from "node:fs/promises";
 import { homedir, platform } from "node:os";
 import { join } from "node:path";
@@ -210,7 +210,7 @@ export async function sendScanEvent(
   // Retry once with a small delay + jitter. `event_id` deduplicates on
   // the server via `onConflictDoNothing`, so a retry after a partial
   // success is safe — it will not double-count.
-  await new Promise((r) => setTimeout(r, RETRY_DELAY_MS + Math.random() * 250));
+  await new Promise((r) => setTimeout(r, RETRY_DELAY_MS + randomInt(0, 250)));
   const second = await fetchOnce(url, init, TIMEOUT_MS);
   debug("attempt 2 →", second ? `HTTP ${second.status}` : "no response");
 
