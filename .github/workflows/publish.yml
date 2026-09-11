@@ -94,9 +94,7 @@ jobs:
           set -euo pipefail
           AUDIT_DIR=$(mktemp -d)
           trap 'rm -rf "$AUDIT_DIR"' EXIT
-          for PKG_DIR in packages/shared packages/scanner packages/reporter packages/mcp packages/entitlement packages/cli; do
-            pnpm -C "$PKG_DIR" pack --pack-destination "$AUDIT_DIR" >/dev/null
-          done
+          node scripts/pack-public-packages.mjs "$AUDIT_DIR"
           while IFS= read -r archive; do
             if tar -tzf "$archive" | grep -Eiq '(^|/)(docs/shipping|.*\.(pem|key|p12|pfx)|\.env($|\.)|id_rsa|id_ed25519)'; then
               echo "::error::forbidden private/internal path found in $archive"
@@ -111,9 +109,7 @@ jobs:
           set -euo pipefail
           RELEASE_DIR=$(mktemp -d)
           echo "RELEASE_DIR=$RELEASE_DIR" >> "$GITHUB_ENV"
-          for PKG_DIR in packages/shared packages/scanner packages/reporter packages/mcp packages/entitlement packages/cli; do
-            pnpm -C "$PKG_DIR" pack --pack-destination "$RELEASE_DIR" >/dev/null
-          done
+          node scripts/pack-public-packages.mjs "$RELEASE_DIR"
           (cd "$RELEASE_DIR" && sha256sum ./*.tgz > SHA256SUMS)
 
       - name: Verify release checksums
@@ -157,9 +153,7 @@ jobs:
             echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
             exit 0
           fi
-          mkdir -p /tmp/verglos-publish/shared
-          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/shared
-          npm publish /tmp/verglos-publish/shared/*.tgz --access public --provenance --tag alpha
+          npm publish "${RELEASE_DIR}/verglos-shared-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish scanner package
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
@@ -171,9 +165,7 @@ jobs:
             echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
             exit 0
           fi
-          mkdir -p /tmp/verglos-publish/scanner
-          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/scanner
-          npm publish /tmp/verglos-publish/scanner/*.tgz --access public --provenance --tag alpha
+          npm publish "${RELEASE_DIR}/verglos-scanner-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish reporter package
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
@@ -185,9 +177,7 @@ jobs:
             echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
             exit 0
           fi
-          mkdir -p /tmp/verglos-publish/reporter
-          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/reporter
-          npm publish /tmp/verglos-publish/reporter/*.tgz --access public --provenance --tag alpha
+          npm publish "${RELEASE_DIR}/verglos-reporter-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish mcp package
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
@@ -199,9 +189,7 @@ jobs:
             echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
             exit 0
           fi
-          mkdir -p /tmp/verglos-publish/mcp
-          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/mcp
-          npm publish /tmp/verglos-publish/mcp/*.tgz --access public --provenance --tag alpha
+          npm publish "${RELEASE_DIR}/verglos-mcp-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish entitlement package
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
@@ -213,9 +201,7 @@ jobs:
             echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
             exit 0
           fi
-          mkdir -p /tmp/verglos-publish/entitlement
-          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/entitlement
-          npm publish /tmp/verglos-publish/entitlement/*.tgz --access public --provenance --tag alpha
+          npm publish "${RELEASE_DIR}/verglos-entitlement-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish CLI package
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
@@ -227,6 +213,4 @@ jobs:
             echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
             exit 0
           fi
-          mkdir -p /tmp/verglos-publish/cli
-          pnpm -C "${PKG_DIR}" pack --pack-destination /tmp/verglos-publish/cli
-          npm publish /tmp/verglos-publish/cli/*.tgz --access public --provenance --tag alpha
+          npm publish "${RELEASE_DIR}/verglos-${PKG_VER}.tgz" --access public --provenance --tag alpha
