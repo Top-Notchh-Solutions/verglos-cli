@@ -125,7 +125,12 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     "vendored-cves",
   ])];
 
-  if (options.includeGitHistory) {
+  if (detectorIds.length > ALL_DETECTORS.length) throw new Error("scan detector selection exceeds the supported bound");
+  if (new Set(detectorIds).size !== detectorIds.length) throw new Error("scan detector selection cannot repeat detectors");
+  const knownDetectorIds = new Set(ALL_DETECTORS.map((detector) => detector.id));
+  if (detectorIds.some((id) => !knownDetectorIds.has(id))) throw new Error("scan detector selection contains an unsupported detector");
+
+  if (options.includeGitHistory && !detectorIds.includes("git-history")) {
     detectorIds.push("git-history");
   }
 

@@ -11,3 +11,8 @@ test("scan honours an already-aborted signal without walking the target", async 
   controller.abort();
   await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", signal: controller.signal }), /scan cancelled/);
 });
+
+test("scan rejects unknown and repeated detector selections", async () => {
+  await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", detectors: ["unknown-detector" as never] }), /unsupported detector/);
+  await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", detectors: ["secrets", "secrets"] }), /cannot repeat/);
+});
