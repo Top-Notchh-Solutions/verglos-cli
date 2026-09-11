@@ -65,6 +65,15 @@ integrationTest("Docker runtime does not expose kernel device nodes", async () =
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+integrationTest("Docker runtime enables no-new-privileges", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "grep -Eq '^NoNewPrivs:[[:space:]]+1$' /proc/self/status"]);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 integrationTest("Docker runtime keeps the root filesystem read-only", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
   try {
