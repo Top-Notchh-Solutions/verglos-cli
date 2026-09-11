@@ -130,6 +130,9 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   if (options.signal?.aborted) throw new Error("scan cancelled");
   const detectorConcurrency = options.detectorConcurrency ?? DEFAULT_DETECTOR_CONCURRENCY;
   if (!Number.isInteger(detectorConcurrency) || detectorConcurrency < 1 || detectorConcurrency > 8) throw new Error("detector concurrency must be between 1 and 8");
+  if (!isAbsolute(options.projectRoot)) throw new Error("project root must be an absolute directory");
+  const projectEntry = await lstat(options.projectRoot).catch(() => undefined);
+  if (!projectEntry?.isDirectory()) throw new Error("project root must be an absolute directory");
   const start = Date.now();
   options.onProgress?.({ phase: "config", status: "started" });
   const config = await loadConfig(options.projectRoot, options.configPath);

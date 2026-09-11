@@ -9,6 +9,18 @@ test("scan rejects invalid detector concurrency before execution", async () => {
   await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", detectorConcurrency: 0 }), /detector concurrency/);
 });
 
+test("scan rejects relative and non-directory project roots", async () => {
+  await assert.rejects(() => runScan({ projectRoot: "relative/project" }), /absolute directory/);
+  const root = await mkdtemp(join(tmpdir(), "verglos-root-file-"));
+  try {
+    const file = join(root, "target.ts");
+    await writeFile(file, "export const value = true;\n");
+    await assert.rejects(() => runScan({ projectRoot: file }), /absolute directory/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test("scan honours an already-aborted signal without walking the target", async () => {
   const controller = new AbortController();
   controller.abort();
@@ -32,8 +44,9 @@ test("scan exposes cancellation at each orchestration stage", async () => {
 });
 
 test("scan rejects unknown and repeated detector selections", async () => {
-  await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", detectors: ["unknown-detector" as never] }), /unsupported detector/);
-  await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", detectors: ["secrets", "secrets"] }), /cannot repeat/);
+  const projectRoot = new URL("../fixtures/insecure-app", import.meta.url).pathname;
+  await assert.rejects(() => runScan({ projectRoot, detectors: ["unknown-detector" as never] }), /unsupported detector/);
+  await assert.rejects(() => runScan({ projectRoot, detectors: ["secrets", "secrets"] }), /cannot repeat/);
 });
 
 test("scan exposes a deterministic coverage manifest", async () => {
