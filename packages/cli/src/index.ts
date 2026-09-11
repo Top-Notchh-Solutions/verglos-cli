@@ -122,10 +122,11 @@ evidence.command("export <input> <output>")
 const record = program.command("record").description("Verify local content-addressed Verglos records");
 record.command("create <membersRoot> <manifestPath> <outputRoot>")
   .description("Materialize a validated manifest and its payloads into a local record store")
+  .option("--complete", "Require subject, policy-evaluation, and release-decision graph members")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
-  .action(async (membersRoot: string, manifestPath: string, outputRoot: string, opts: { json?: boolean; quiet?: boolean }) => {
-    process.exit(await executeRecordCreate(membersRoot, manifestPath, outputRoot, opts.json, opts.quiet));
+  .action(async (membersRoot: string, manifestPath: string, outputRoot: string, opts: { json?: boolean; quiet?: boolean; complete?: boolean }) => {
+    process.exit(await executeRecordCreate(membersRoot, manifestPath, outputRoot, opts.json, opts.quiet, opts.complete));
   });
 record.command("verify <storeRoot> <manifestPath>")
   .description("Verify every stored record member against its manifest")

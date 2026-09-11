@@ -4,6 +4,7 @@ import { isAbsolute, join, resolve } from "node:path";
 import {
   canonicalizeJson,
   parseReleaseRecordManifestJson,
+  assertCompleteReleaseRecord,
   putRecordMembers,
   type ReleaseRecordManifestDocument,
 } from "@verglos/shared";
@@ -27,10 +28,12 @@ export async function executeRecordCreate(
   outputRoot: string,
   json = false,
   quiet = false,
+  complete = false,
 ): Promise<number> {
   try {
     const manifestBytes = await readRegular(manifestPath, MAX_MANIFEST_BYTES, "record manifest");
-    const manifest = parseReleaseRecordManifestJson(manifestBytes);
+    const parsedManifest = parseReleaseRecordManifestJson(manifestBytes);
+    const manifest = complete ? assertCompleteReleaseRecord(parsedManifest) : parsedManifest;
     const sourceRoot = resolve(membersRoot);
     const destination = resolve(outputRoot);
     try {
