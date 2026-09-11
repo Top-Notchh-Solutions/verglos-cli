@@ -47,9 +47,17 @@ async function readFixSnapshot(path: string): Promise<Buffer> {
   try {
     const stat = await handle.stat();
     if (!stat.isFile() || stat.size > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
-    const bytes = await handle.readFile();
-    if (bytes.byteLength > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
-    return bytes;
+    const chunks: Buffer[] = [];
+    let total = 0;
+    while (true) {
+      const buffer = Buffer.alloc(Math.min(64 * 1024, MAX_FIX_SNAPSHOT_BYTES + 1 - total));
+      const result = await handle.read(buffer, 0, buffer.byteLength, total);
+      if (result.bytesRead === 0) break;
+      total += result.bytesRead;
+      if (total > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+      chunks.push(buffer.subarray(0, result.bytesRead));
+    }
+    return Buffer.concat(chunks, total);
   } finally {
     await handle.close();
   }
