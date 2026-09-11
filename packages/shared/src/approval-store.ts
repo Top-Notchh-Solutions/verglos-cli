@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import { lstat, mkdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
+import { lstat, mkdir, readdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ApprovalReceiptSchema, approvalRequestDigest, type ApprovalReceipt } from "./approval-receipt.js";
 import { canonicalizeJson } from "./schema.js";
@@ -30,6 +30,18 @@ export async function putApprovalReceipt(root: string, receipt: ApprovalReceipt)
   const requestDigest = parsed.requestDigest;
   const destination = receiptPath(root, requestDigest);
   await assertRoot(root, true);
+  // A request ID is a one-time authority handle. Reject a second digest for the
+  // same ID so an agent cannot replay it with widened target/file/network scope.
+  for (const name of await readdir(root)) {
+    if (!name.endsWith(".json")) continue;
+    const candidatePath = join(root, name);
+    const candidateEntry = await lstat(candidatePath);
+    if (!candidateEntry.isFile() || candidateEntry.size > MAX_RECEIPT_BYTES) throw new Error("approval receipt store contains an unsafe entry");
+    let candidateValue: unknown;
+    try { candidateValue = JSON.parse((await readFile(candidatePath)).toString("utf8")); } catch { throw new Error("approval receipt store contains invalid JSON"); }
+    const candidate = validateReceipt(ApprovalReceiptSchema.parse(candidateValue));
+    if (candidate.requestId === parsed.requestId && candidate.requestDigest !== requestDigest) throw new Error("approval request ID has already been used with different content");
+  }
   const bytes = Buffer.from(`${canonicalizeJson(parsed)}\n`, "utf8");
   if (bytes.byteLength > MAX_RECEIPT_BYTES) throw new Error("approval receipt exceeds its size limit");
   const temporary = join(root, `.receipt.${process.pid}.${randomUUID()}.tmp`);
