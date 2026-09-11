@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const VerglosConfigSchema = z.object({
   plan: z
-    .enum(["free", "pro", "studio", "compliance"])
+    .enum(["free", "pro", "team", "studio", "compliance"])
     .default("free"),
   failOnCritical: z.boolean().default(true),
   failThreshold: z.number().min(0).max(100).default(60),

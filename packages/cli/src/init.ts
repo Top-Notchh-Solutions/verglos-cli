@@ -26,7 +26,7 @@ const CONFIG_TEMPLATE = `/**
  * @type {import('@verglos/shared').VerglosConfig}
  */
 module.exports = {
-  // "free" | "pro" | "studio" | "compliance"
+  // "free" | "pro" | "team" | "studio" | "compliance" (legacy metadata only)
   plan: "free",
 
   // Exit CI when a critical is found.

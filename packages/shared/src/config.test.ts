@@ -33,6 +33,12 @@ test("config bounds ignore and Hunt collections before scan use", () => {
   assert.equal(VerglosConfigSchema.safeParse({ hunt: { maxDurationMs: 10 * 60 * 1000 + 1 } }).success, false);
 });
 
+test("config accepts the canonical Team tier as legacy metadata", () => {
+  const parsed = VerglosConfigSchema.parse({ plan: "team" });
+  assert.equal(parsed.plan, "team");
+  assert.equal(inspectConfigMigration({ plan: "team" }).status, "legacy");
+});
+
 test("bounded config fields remain compatible with migration inspection", () => {
   const inspection = inspectConfigMigration({ hunt: { sandbox: "firecracker", maxDurationMs: 30_000 } });
   assert.equal(inspection.status, "legacy");
