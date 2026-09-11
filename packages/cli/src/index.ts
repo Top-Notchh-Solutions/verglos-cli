@@ -660,11 +660,15 @@ program
 program
   .command("badge")
   .description("Generate README badge markdown")
-  .action(async () => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
     const projectRoot = process.cwd();
     const { runScan } = await import("@verglos/scanner");
     const result = await runScan({ projectRoot, unlocked: true });
-    console.log(generateBadgeMarkdown(result.score.value));
+    const markdown = generateBadgeMarkdown(result.score.value);
+    if (opts.json) console.log(JSON.stringify({ status: "ok", score: result.score.value, markdown }));
+    else if (!opts.quiet) console.log(markdown);
   });
 
 program
