@@ -22,6 +22,10 @@ export function parseHuntRecipeTrustPolicy(value: unknown): HuntRecipeTrustPolic
   return parsed.data;
 }
 
+export function huntRecipeTrustPolicyDigest(policy: HuntRecipeTrustPolicy): string {
+  return `sha256:${createHash("sha256").update(canonicalizeJson(parseHuntRecipeTrustPolicy(policy)), "utf8").digest("hex")}`;
+}
+
 export function isTrustedHuntRecipe(recipe: HuntRecipe, trust: HuntRecipeTrustPolicy): boolean {
   const policy = parseHuntRecipeTrustPolicy(trust);
   const parsed = parseHuntRecipe(recipe);
