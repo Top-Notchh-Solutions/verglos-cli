@@ -66,8 +66,16 @@ function toText(value: Buffer | string): string { return Buffer.isBuffer(value) 
 
 function toBoundedText(value: Buffer | string, maxBytes: number): { readonly text: string; readonly bytes: number; readonly truncated: boolean } {
   const bytes = Buffer.isBuffer(value) ? value : Buffer.from(value, "utf8");
-  const clipped = bytes.byteLength > maxBytes ? bytes.subarray(0, maxBytes) : bytes;
-  return { text: clipped.toString("utf8"), bytes: clipped.byteLength, truncated: bytes.byteLength > maxBytes };
+  if (bytes.byteLength <= maxBytes) return { text: bytes.toString("utf8"), bytes: bytes.byteLength, truncated: false };
+  let end = maxBytes;
+  let text = bytes.subarray(0, end).toString("utf8");
+  // A byte cut can create U+FFFD, which re-encodes to three bytes. Trim until
+  // the returned UTF-8 text itself satisfies the advertised byte bound.
+  while (end > 0 && Buffer.byteLength(text, "utf8") > maxBytes) {
+    end -= 1;
+    text = bytes.subarray(0, end).toString("utf8");
+  }
+  return { text, bytes: Buffer.byteLength(text, "utf8"), truncated: true };
 }
 
 function byteLength(value: Buffer | string): number { return Buffer.isBuffer(value) ? value.byteLength : Buffer.byteLength(value, "utf8"); }
