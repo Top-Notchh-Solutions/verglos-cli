@@ -50,7 +50,7 @@ test("record create prevalidates all members before publishing", async () => {
     const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos", version: "2.0.0" }, members: [member], redaction: { status: "not-required" }, limitations: ["fixture"] });
     const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify({ ...manifest, members: [{ ...member, size: member.size + 1 }] }));
     assert.equal(await executeRecordCreate(source, manifestPath, output, true, true), 78);
-    assert.deepEqual(await readdir(output), []);
+    await assert.rejects(() => readdir(output));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

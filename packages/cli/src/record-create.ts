@@ -58,7 +58,6 @@ export async function executeRecordCreate(
     } catch (error) {
       if (!(error instanceof Error) || (error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
     }
-    await mkdir(destination, { recursive: true, mode: 0o700 });
     const writtenManifest = join(destination, "manifest.json");
     try {
       await lstat(writtenManifest);
@@ -78,6 +77,9 @@ export async function executeRecordCreate(
       digests.add(inspected.digest);
       inputs.push({ path: member.path, sourcePath: memberPath, size: inspected.size, digest: inspected.digest });
     }
+    // Do not create the destination until every input has passed validation.
+    // A failed preflight must leave no empty record store behind.
+    await mkdir(destination, { recursive: true, mode: 0o700 });
     const stored = [];
     for (const input of [...inputs].sort((left, right) => left.path.localeCompare(right.path))) {
       const published = await putRecordMemberFromFile(destination, input.path, input.sourcePath);
