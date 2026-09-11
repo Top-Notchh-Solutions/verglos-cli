@@ -752,11 +752,13 @@ program
   .option("--timeout <ms>", "Timeout budget in ms", "2000")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
   .option("--json", "Emit machine-readable JSON")
-  .action(async (opts: { timeout: string; config?: string; json?: boolean }) => {
+  .option("-q, --quiet", "Suppress terminal output")
+  .action(async (opts: { timeout: string; config?: string; json?: boolean; quiet?: boolean }) => {
     const code = await executePrecommit({
       timeoutMs: parseInt(opts.timeout, 10),
       configPath: opts.config,
       json: opts.json,
+      quiet: opts.quiet,
     });
     process.exit(code);
   });

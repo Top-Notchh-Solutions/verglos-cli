@@ -21,6 +21,7 @@ test("read-only commands expose their implemented output flags", async () => {
   for (const command of ["scan", "ci"]) assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--policy <path>`));
   assert.match(source, /executePolicyCheck\(policyPath, opts\.json, opts\.quiet\)/g);
   assert.match(source, /if \(!opts\.quiet && !opts\.json\) console\.log\(chalk\.gray\("Watching for changes/);
+  assert.match(source, /command\("precommit"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.equal(source.includes('.option("--policy"'), false);
 });
 
