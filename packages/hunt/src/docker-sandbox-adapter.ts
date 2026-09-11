@@ -51,7 +51,7 @@ export class DockerSandboxAdapter implements SandboxAdapter {
       : result.status === "timed-out"
         ? "Docker probe timed out before a supported verdict could be evaluated"
         : "Docker probe failed before a supported verdict could be evaluated";
-    return { findingId: input.finding.id, verdict: "not_attemptable", reason, durationMs: result.durationMs };
+    return { findingId: input.finding.id, verdict: "not_attemptable", reason, durationMs: result.durationMs, evidenceDigest: result.evidenceDigest, outputBytes: result.outputBytes, truncated: result.truncated, redacted: true, executionStatus: result.status };
   }
 
   async cleanup(): Promise<void> {}

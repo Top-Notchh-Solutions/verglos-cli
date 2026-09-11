@@ -96,11 +96,21 @@ function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined 
   if (typeof outcome.reason !== "string" || outcome.reason.length === 0 || outcome.reason.length > 4096 || /[\u0000-\u001f\u007f]/.test(outcome.reason)) return undefined;
   if (typeof outcome.durationMs !== "number" || !Number.isSafeInteger(outcome.durationMs) || outcome.durationMs < 0 || outcome.durationMs > 600_000) return undefined;
   if (outcome.evidencePath !== undefined && (typeof outcome.evidencePath !== "string" || outcome.evidencePath.length > 4096 || /[\u0000-\u001f\u007f]/.test(outcome.evidencePath))) return undefined;
+  if (outcome.evidenceDigest !== undefined && (typeof outcome.evidenceDigest !== "string" || !/^sha256:[a-f0-9]{64}$/.test(outcome.evidenceDigest))) return undefined;
+  if (outcome.outputBytes !== undefined && (typeof outcome.outputBytes !== "number" || !Number.isSafeInteger(outcome.outputBytes) || outcome.outputBytes < 0 || outcome.outputBytes > 10_000_000)) return undefined;
+  if (outcome.truncated !== undefined && typeof outcome.truncated !== "boolean") return undefined;
+  if (outcome.redacted !== undefined && outcome.redacted !== true) return undefined;
+  if (outcome.executionStatus !== undefined && outcome.executionStatus !== "completed" && outcome.executionStatus !== "timed-out" && outcome.executionStatus !== "failed") return undefined;
   return {
     findingId: outcome.findingId,
     verdict: outcome.verdict,
     reason: outcome.reason,
     durationMs: outcome.durationMs,
     ...(outcome.evidencePath === undefined ? {} : { evidencePath: outcome.evidencePath }),
+    ...(outcome.evidenceDigest === undefined ? {} : { evidenceDigest: outcome.evidenceDigest }),
+    ...(outcome.outputBytes === undefined ? {} : { outputBytes: outcome.outputBytes }),
+    ...(outcome.truncated === undefined ? {} : { truncated: outcome.truncated }),
+    ...(outcome.redacted === undefined ? {} : { redacted: true as const }),
+    ...(outcome.executionStatus === undefined ? {} : { executionStatus: outcome.executionStatus }),
   } as HuntFindingOutcome;
 }

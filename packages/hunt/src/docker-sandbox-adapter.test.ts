@@ -24,6 +24,9 @@ test("Docker sandbox adapter uses the bound digest and returns honest status", a
     const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: binding() });
     assert.equal(result.verdict, "not_attemptable");
     assert.match(result.reason, /assertion evaluation/);
+    assert.match(result.evidenceDigest ?? "", /^sha256:/);
+    assert.equal(result.redacted, true);
+    assert.equal(result.executionStatus, "completed");
     assert.ok(argv.includes("--network"));
     assert.ok(argv.includes("none"));
     assert.ok(argv.includes("/probe"));

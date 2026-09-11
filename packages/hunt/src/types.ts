@@ -9,6 +9,11 @@ export interface HuntFindingOutcome {
   reason: string;
   evidencePath?: string;
   durationMs: number;
+  evidenceDigest?: string;
+  outputBytes?: number;
+  truncated?: boolean;
+  redacted?: true;
+  executionStatus?: "completed" | "timed-out" | "failed";
 }
 
 export interface HuntResult {
