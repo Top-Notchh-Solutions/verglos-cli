@@ -24,3 +24,15 @@ test("MCP response encoder fails closed on oversized payloads", () => {
 test("MCP dispatch rejects unknown tools with a stable structured error", async () => {
   assert.deepEqual(responseText(await dispatchTool("verglos_unknown", {})), { ok: false, error: "usage", code: "MCP_UNKNOWN_TOOL", message: "unknown MCP tool" });
 });
+
+test("MCP dispatch denies approval-required tools before their handler or stub", async () => {
+  const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/report.json" }));
+  assert.equal(result.code, "MCP_APPROVAL_REQUIRED");
+  assert.equal(result.error, "usage");
+});
+
+test("MCP read-only tools keep strict unknown-field validation", async () => {
+  const result = responseText(await dispatchTool("verglos_scan", { approvalReceipt: {} }));
+  assert.equal(result.code, "MCP_SCAN_INPUT");
+  assert.equal(result.error, "usage");
+});

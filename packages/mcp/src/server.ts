@@ -5,7 +5,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { mcpToolAuthority, reconcileMcpCapabilities, type Finding } from "@verglos/shared";
+import { authorizeAgentAction, mcpToolAuthority, reconcileMcpCapabilities, type Finding } from "@verglos/shared";
 import { checkBeforeWrite } from "./tools/check-before-write.js";
 import type {
   CheckBeforeWriteInput as ToolInput,
@@ -241,39 +241,46 @@ export async function dispatchTool(
   }
   const input = args ?? {};
   const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
+  const authority = mcpToolAuthority(name);
+  if (authority?.approvalRequired) {
+    const approval = authorizeAgentAction(authority.action, input.approvalReceipt as any, new Date().toISOString());
+    if (!approval.allowed) return invalid("MCP_APPROVAL_REQUIRED", `MCP tool authority denied: ${approval.reason}`);
+  }
+  const toolInput = authority?.approvalRequired ? { ...input } : input;
+  if (authority?.approvalRequired) delete toolInput.approvalReceipt;
   switch (name) {
     case "verglos_check_before_write": {
-      let parsed: CheckBeforeWriteInput; try { parsed = parseCheckBeforeWriteArgs(input); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      let parsed: CheckBeforeWriteInput; try { parsed = parseCheckBeforeWriteArgs(toolInput); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
       try { return jsonResponse(await checkBeforeWrite(parsed)); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_FAILED", error instanceof Error ? error.message : "tool failed"); }
     }
     case "verglos_check_package": {
-      let parsed; try { parsed = parseCheckPackageArgs(input); } catch (error) { return invalid("MCP_CHECK_PACKAGE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      let parsed; try { parsed = parseCheckPackageArgs(toolInput); } catch (error) { return invalid("MCP_CHECK_PACKAGE_INPUT", error instanceof Error ? error.message : "invalid input"); }
       try { return jsonResponse(await checkPackage(parsed)); } catch (error) { return invalid("MCP_CHECK_PACKAGE_FAILED", error instanceof Error ? error.message : "tool failed"); }
     }
     case "verglos_scan": {
-      let parsed; try { parsed = parseScanArgs(input); } catch (error) { return invalid("MCP_SCAN_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      let parsed; try { parsed = parseScanArgs(toolInput); } catch (error) { return invalid("MCP_SCAN_INPUT", error instanceof Error ? error.message : "invalid input"); }
       try { return jsonResponse(await scanProject(parsed)); } catch (error) { return invalid("MCP_SCAN_FAILED", error instanceof Error ? error.message : "tool failed"); }
     }
     case "verglos_explain_finding": {
-      let parsed; try { parsed = parseExplainFindingArgs(input); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      let parsed; try { parsed = parseExplainFindingArgs(toolInput); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
       let result: ReturnType<typeof explainFinding>;
       try { result = explainFinding(parsed); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_FAILED", error instanceof Error ? error.message : "tool failed"); }
       return jsonResponse(result);
     }
     case "verglos_hunt_finding":
-      try { parseHuntFindingArgs(input); } catch (error) { return invalid("MCP_HUNT_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { parseHuntFindingArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_report":
-      try { parseHuntReportArgs(input); } catch (error) { return invalid("MCP_HUNT_REPORT_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { parseHuntReportArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_REPORT_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_before_write":
-      try { parseHuntBeforeWriteArgs(input); } catch (error) { return invalid("MCP_HUNT_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { parseHuntBeforeWriteArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_explain_verdict":
-      try { parseHuntExplainVerdictArgs(input); } catch (error) { return invalid("MCP_HUNT_EXPLAIN_VERDICT_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { parseHuntExplainVerdictArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_EXPLAIN_VERDICT_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "pro"));
     case "verglos_attest":
-      try { parseAttestArgs(input); } catch (error) { return invalid("MCP_ATTEST_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { parseAttestArgs(toolInput); } catch (error) { return invalid("MCP_ATTEST_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "studio"));
     default:
       return invalid("MCP_UNKNOWN_TOOL", "unknown MCP tool");
