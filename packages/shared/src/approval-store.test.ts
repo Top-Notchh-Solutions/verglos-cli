@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
+import { lstat, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -38,4 +38,13 @@ test("approval store rejects symlink receipt entries", async () => {
     await symlink("target.json", join(root, `${digest.slice(7)}.json`));
     await assert.rejects(() => readApprovalReceipt(root, digest), /regular file/);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("approval store reads do not create a missing root", async () => {
+  const parent = await mkdtemp(join(tmpdir(), "verglos-approvals-read-"));
+  const root = join(parent, "missing");
+  try {
+    await assert.rejects(() => readApprovalReceipt(root, `sha256:${"a".repeat(64)}`));
+    await assert.rejects(() => lstat(root), { code: "ENOENT" });
+  } finally { await rm(parent, { recursive: true, force: true }); }
 });

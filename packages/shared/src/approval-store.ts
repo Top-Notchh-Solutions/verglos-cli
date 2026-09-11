@@ -11,8 +11,8 @@ function receiptPath(root: string, digest: string): string {
   return join(root, `${digest.slice(7)}.json`);
 }
 
-async function assertRoot(root: string): Promise<void> {
-  await mkdir(root, { recursive: true, mode: 0o700 });
+async function assertRoot(root: string, create = false): Promise<void> {
+  if (create) await mkdir(root, { recursive: true, mode: 0o700 });
   const entry = await lstat(root);
   if (!entry.isDirectory()) throw new Error("approval store root must be a regular directory");
 }
@@ -29,7 +29,7 @@ export async function putApprovalReceipt(root: string, receipt: ApprovalReceipt)
   const parsed = validateReceipt(receipt);
   const requestDigest = parsed.requestDigest;
   const destination = receiptPath(root, requestDigest);
-  await assertRoot(root);
+  await assertRoot(root, true);
   const bytes = Buffer.from(`${canonicalizeJson(parsed)}\n`, "utf8");
   if (bytes.byteLength > MAX_RECEIPT_BYTES) throw new Error("approval receipt exceeds its size limit");
   const temporary = join(root, `.receipt.${process.pid}.${randomUUID()}.tmp`);
