@@ -45,6 +45,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Test release artifact verifier
+        run: node --test scripts/verify-release-artifacts.test.mjs
+
       - name: Typecheck
         run: pnpm typecheck
 
