@@ -57,7 +57,7 @@ export async function runHunt(
             outcomes.push({ ...validated, finding, durationMs: Math.max(0, Date.now() - before) });
           }
         } catch (error) {
-          outcomes.push({ findingId: finding.id, verdict: "not_attemptable", canonicalVerdict: classifyHuntOutcome({ policyAllowed: true, supported: true, environmentError: true }), finding, reason: `Hunt adapter failed: ${error instanceof Error ? error.message : "unknown error"}`, durationMs: Math.max(0, Date.now() - before) });
+          outcomes.push({ findingId: finding.id, verdict: "not_attemptable", canonicalVerdict: classifyHuntOutcome({ policyAllowed: true, supported: true, environmentError: true }), finding, reason: "Hunt adapter failed before a supported verdict could be evaluated", durationMs: Math.max(0, Date.now() - before) });
         }
       }
     } finally {

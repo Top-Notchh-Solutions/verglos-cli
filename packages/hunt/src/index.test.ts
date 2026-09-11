@@ -82,6 +82,19 @@ test("Hunt cleans up when adapter preparation fails", async () => {
   assert.equal(cleaned, true);
 });
 
+test("Hunt adapter execution failures do not echo runtime error details", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { throw new Error("secret host path /private/customer"); },
+    async cleanup() {},
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.canonicalVerdict, "environment-error");
+  assert.equal(result.outcomes[0]?.reason, "Hunt adapter failed before a supported verdict could be evaluated");
+  assert.doesNotMatch(result.outcomes[0]?.reason ?? "", /customer|private/);
+});
+
 test("Hunt refuses adapter execution without an exact trust and approval binding", async () => {
   const adapter = { id: "test-probe", async prepare() {}, async execute() { throw new Error("must not execute"); }, async cleanup() {} };
   await assert.rejects(() => runHunt(report, { adapter }), /execution requires/);
