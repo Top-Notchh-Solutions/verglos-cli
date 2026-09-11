@@ -142,10 +142,12 @@ export async function executeScan(
     });
   } finally {
     if (tickTimer) clearInterval(tickTimer);
+    spinner?.stop();
   }
 
   const durationMs = Date.now() - startedAt;
-  spinner?.stop();
+  // The spinner is stopped in the lifecycle finally block above so both
+  // successful and failed scans leave the terminal in a clean state.
   await writeReports(result, projectRoot, options.outputDir ? resolve(projectRoot, options.outputDir) : projectRoot);
 
   if (options.json) {
