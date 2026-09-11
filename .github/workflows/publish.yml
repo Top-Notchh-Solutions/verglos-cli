@@ -80,6 +80,22 @@ jobs:
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/check-package-contents.mjs
 
+      - name: Pack smoke test
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: |
+          set -euo pipefail
+          AUDIT_DIR=$(mktemp -d)
+          trap 'rm -rf "$AUDIT_DIR"' EXIT
+          for PKG_DIR in packages/shared packages/scanner packages/reporter packages/mcp packages/entitlement packages/cli; do
+            pnpm -C "$PKG_DIR" pack --pack-destination "$AUDIT_DIR" >/dev/null
+          done
+          while IFS= read -r archive; do
+            if tar -tzf "$archive" | grep -Eiq '(^|/)(docs/shipping|.*\.(pem|key|p12|pfx)|\.env($|\.)|id_rsa|id_ed25519)'; then
+              echo "::error::forbidden private/internal path found in $archive"
+              exit 1
+            fi
+          done < <(find "$AUDIT_DIR" -type f -name '*.tgz' -print)
+
       # ── npm provenance ──────────────────────────────────────────
       # Every `npm publish` call below uses --provenance so npm
       # attests the tarball's origin (repo + commit + workflow run).
