@@ -47,6 +47,7 @@ test("read-only commands expose their implemented output flags", async () => {
     assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--json`));
   }
   assert.match(source, /command\("mcp"\)[\s\S]*?\.option\("--json", "Emit only the machine-readable MCP config \(with --print-config\)"\)/);
+  assert.match(source, /command\("mcp"\)[\s\S]*?\.option\("--quiet", "Suppress setup guidance \(with --print-config\)"\)/);
   assert.equal(source.includes('.option("--policy"'), false);
 });
 

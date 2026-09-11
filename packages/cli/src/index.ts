@@ -820,7 +820,8 @@ program
     "Print the JSON snippet you paste into your agent's MCP config, then exit",
   )
   .option("--json", "Emit only the machine-readable MCP config (with --print-config)")
-  .action(async (opts: { printConfig?: boolean; json?: boolean }) => {
+  .option("--quiet", "Suppress setup guidance (with --print-config)")
+  .action(async (opts: { printConfig?: boolean; json?: boolean; quiet?: boolean }) => {
     if (opts.printConfig) {
       const config = {
         mcpServers: {
@@ -831,7 +832,7 @@ program
         },
       };
       console.log(JSON.stringify(config, null, opts.json ? 0 : 2));
-      if (opts.json) return;
+      if (opts.json || opts.quiet) return;
       console.log("");
       console.log(chalk.gray("Paste this into:"));
       console.log(chalk.gray("  Cursor       → ~/.cursor/mcp.json"));
