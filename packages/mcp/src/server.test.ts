@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
+import { mkdtemp, rm } from "node:fs/promises";
 import { test } from "node:test";
-import { createApprovalReceipt } from "@verglos/shared";
+import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
 import { dispatchTool, jsonResponse } from "./server.js";
 
 function responseText(result: Awaited<ReturnType<typeof dispatchTool>>): Record<string, unknown> {
@@ -89,4 +90,15 @@ test("MCP dispatch rejects an approval receipt that omits the requested file sco
   const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
   const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/report.json", approvalReceipt }));
   assert.equal(result.code, "MCP_APPROVAL_SCOPE");
+});
+
+test("MCP dispatch persists an approved receipt when an audit store is configured", async () => {
+  const root = await mkdtemp("/tmp/verglos-mcp-audit-");
+  try {
+    const request = { requestId: "423e4567-e89b-12d3-a456-426614174000", action: "execute" as const, actor: "agent", target: "report:/tmp/audit.json", files: ["/tmp/audit.json"], network: [], policyEffect: "hunt report", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" };
+    const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/audit.json", approvalReceipt }, { approvalStoreRoot: root }));
+    assert.equal(result.error, "not_implemented_in_alpha");
+    assert.equal((await readApprovalReceipt(root, approvalReceipt.requestDigest)).requestId, request.requestId);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

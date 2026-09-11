@@ -5,7 +5,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { authorizeAgentAction, mcpToolAuthority, reconcileMcpCapabilities, type Finding } from "@verglos/shared";
+import { authorizeAgentAction, mcpToolAuthority, putApprovalReceipt, reconcileMcpCapabilities, type ApprovalReceipt, type Finding } from "@verglos/shared";
 import { checkBeforeWrite } from "./tools/check-before-write.js";
 import type {
   CheckBeforeWriteInput as ToolInput,
@@ -276,6 +276,7 @@ function approvalFile(name: string, input: Record<string, unknown>): string | un
 export async function dispatchTool(
   name: string,
   args: Record<string, unknown> | undefined,
+  options: { readonly approvalStoreRoot?: string; readonly now?: string } = {},
 ): Promise<{ content: { type: "text"; text: string }[] }> {
   if (args !== undefined && (!args || typeof args !== "object" || Array.isArray(args))) {
     return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be an object" }) }] };
@@ -287,7 +288,8 @@ export async function dispatchTool(
   const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
   const authority = mcpToolAuthority(name);
   if (authority?.approvalRequired) {
-    const approval = authorizeAgentAction(authority.action, input.approvalReceipt as any, new Date().toISOString());
+    const approvalReceipt = input.approvalReceipt as ApprovalReceipt | undefined;
+    const approval = authorizeAgentAction(authority.action, approvalReceipt, options.now ?? new Date().toISOString());
     if (!approval.allowed) return invalid("MCP_APPROVAL_REQUIRED", `MCP tool authority denied: ${approval.reason}`);
     const target = approvalTarget(name, input);
     if (target && (input.approvalReceipt as { target?: unknown } | undefined)?.target !== target) return invalid("MCP_APPROVAL_SCOPE", "approval receipt target does not match the requested tool target");
@@ -295,6 +297,10 @@ export async function dispatchTool(
     const file = approvalFile(name, input);
     if (file && (!Array.isArray(receipt?.files) || !receipt.files.includes(file))) return invalid("MCP_APPROVAL_SCOPE", "approval receipt does not cover the requested file scope");
     if (Array.isArray(receipt?.network) && receipt.network.length > 0) return invalid("MCP_APPROVAL_SCOPE", "approval receipt declares network scope for a network-free tool");
+    if (options.approvalStoreRoot) {
+      try { await putApprovalReceipt(options.approvalStoreRoot, approvalReceipt!); }
+      catch (error) { return invalid("MCP_APPROVAL_AUDIT", error instanceof Error ? error.message : "approval receipt could not be persisted"); }
+    }
   }
   const toolInput = authority?.approvalRequired ? { ...input } : input;
   if (authority?.approvalRequired) delete toolInput.approvalReceipt;
@@ -374,7 +380,7 @@ export function createVerglosMcpServer(): Server {
     const args = request.params.arguments as
       | Record<string, unknown>
       | undefined;
-    return dispatchTool(name, args);
+    return dispatchTool(name, args, { approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE });
   });
 
   return server;
