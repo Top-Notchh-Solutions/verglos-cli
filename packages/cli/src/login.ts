@@ -199,7 +199,7 @@ export async function executeLogin(opts: LoginOptions = {}): Promise<number> {
   } catch (err) {
     spinner?.stop();
     const message = `Login failed: ${err instanceof Error ? err.message : "unknown error"}`;
-    if (opts.json) console.log(JSON.stringify({ status: "error", code: "LOGIN_FAILED", message }));
+    if (opts.json) console.log(JSON.stringify({ status: "error", code: "LOGIN_FAILED", message: "login failed" }));
     else if (!opts.quiet) console.error(chalk.red(message));
     return 1;
   }
