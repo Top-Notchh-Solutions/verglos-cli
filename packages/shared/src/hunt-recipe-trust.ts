@@ -6,8 +6,9 @@ import { z } from "zod";
 
 export function huntRecipeDigest(recipe: HuntRecipe): string { return `sha256:${createHash("sha256").update(canonicalizeJson(parseHuntRecipe(recipe)), "utf8").digest("hex")}`; }
 const DigestSchema = z.string().regex(/^sha256:[a-f0-9]{64}$/);
+const SignerSchema = z.string().min(1).max(512).refine((value) => !/[\u0000-\u001f\u007f]/.test(value), "signer contains control characters");
 export const HuntRecipeTrustPolicySchema = z.object({
-  signers: z.array(z.string().min(1).max(512)).min(1).max(128),
+  signers: z.array(SignerSchema).min(1).max(128),
   revokedRecipeIds: z.array(StableContractIdSchema).max(4096).optional(),
   recipeDigests: z.array(DigestSchema).max(4096).optional(),
   at: z.string().datetime({ offset: true }).optional(),
