@@ -46,3 +46,51 @@ integrationTest("Docker runtime denies network access", async () => {
     assert.equal(result.exitCode, 0);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+integrationTest("Docker runtime does not expose the host Docker socket", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "test ! -S /var/run/docker.sock"]);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+integrationTest("Docker runtime does not expose kernel device nodes", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "test ! -e /dev/kmsg"]);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+integrationTest("Docker runtime keeps the root filesystem read-only", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "! touch /verglos-rootfs-write"]);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+integrationTest("Docker runtime redacts secret-shaped output before evidence", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "printf 'API_TOKEN=runtime-secret-value\\n'"]);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+    assert.doesNotMatch(result.stdout, /runtime-secret-value/);
+    assert.doesNotMatch(result.stdout, /API_TOKEN=/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+integrationTest("Docker runtime bounds captured output", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "i=0; while [ $i -lt 10000 ]; do printf x; i=$((i+1)); done"]);
+    assert.ok(result.status === "completed" || result.status === "failed");
+    assert.ok(result.outputBytes <= 4_096);
+    assert.ok(Buffer.byteLength(result.stdout, "utf8") + Buffer.byteLength(result.stderr, "utf8") <= 4_096);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
