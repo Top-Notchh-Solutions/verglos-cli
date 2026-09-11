@@ -21,6 +21,7 @@ test("Hunt execution trust rejects signer-allowlisted but unknown recipes", () =
 
 test("Hunt trust policy rejects malformed, unknown, and duplicate entries", () => {
   assert.throws(() => parseHuntRecipeTrustPolicy({ signers: [] }));
+  assert.throws(() => parseHuntRecipeTrustPolicy({ signers: ["verglos-release"], recipeDigests: [] }));
   assert.throws(() => parseHuntRecipeTrustPolicy({ signers: ["verglos\u0000release"] }));
   assert.throws(() => parseHuntRecipeTrustPolicy({ signers: ["verglos-release", "verglos-release"] }));
   assert.throws(() => parseHuntRecipeTrustPolicy({ signers: ["verglos-release"], recipeDigests: ["sha512:" + "0".repeat(128)] }));

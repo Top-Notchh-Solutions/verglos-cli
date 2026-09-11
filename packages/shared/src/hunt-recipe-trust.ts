@@ -10,7 +10,7 @@ const SignerSchema = z.string().min(1).max(512).refine((value) => !/[\u0000-\u00
 export const HuntRecipeTrustPolicySchema = z.object({
   signers: z.array(SignerSchema).min(1).max(128),
   revokedRecipeIds: z.array(StableContractIdSchema).max(4096).optional(),
-  recipeDigests: z.array(DigestSchema).max(4096).optional(),
+  recipeDigests: z.array(DigestSchema).min(1).max(4096).optional(),
   at: z.string().datetime({ offset: true }).optional(),
 }).strict().superRefine((value, ctx) => {
   for (const [name, values] of [["signers", value.signers], ["revokedRecipeIds", value.revokedRecipeIds ?? []], ["recipeDigests", value.recipeDigests ?? []]] as const) {
