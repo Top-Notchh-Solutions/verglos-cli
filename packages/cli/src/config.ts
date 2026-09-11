@@ -3,7 +3,7 @@ import { join } from "node:path";
 
 export async function installPreCommitHook(
   projectRoot: string,
-): Promise<void> {
+): Promise<boolean> {
   const hookPath = join(projectRoot, ".git", "hooks", "pre-commit");
   const originalPath = join(projectRoot, ".git", "hooks", "pre-commit.verglos-original");
   // Uses `verglos precommit` — the fast path that skips CVE/OSV
@@ -16,7 +16,7 @@ export async function installPreCommitHook(
   if (existing && !existing.isFile()) throw new Error("existing Git pre-commit hook is not a regular file");
   if (existing) {
     const current = await readFile(hookPath, "utf8");
-    if (current.includes("# Verglos pre-commit hook")) return;
+    if (current.includes("# Verglos pre-commit hook")) return true;
     // Preserve the user's hook exactly; never overwrite an existing backup.
     try { await lstat(originalPath); } catch { await copyFile(hookPath, originalPath); await chmod(originalPath, 0o755); }
   }
@@ -31,7 +31,9 @@ npx verglos precommit
 `;
   try {
     await writeFile(hookPath, hook, { mode: 0o755 });
+    return true;
   } catch {
-    // no git repo — installPreCommitHook is a no-op
+    // no git repo — report the no-op so callers do not claim a false success
+    return false;
   }
 }

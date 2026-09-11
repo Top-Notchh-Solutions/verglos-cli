@@ -272,6 +272,16 @@ test("monitor status without credentials is one bounded JSON response", async ()
   } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
 });
 
+test("hook outside Git reports a bounded skipped result", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-hook-no-git-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "hook", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "skipped", installed: false, reason: "not_a_git_repository" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("CLI version is deterministic and side-effect free", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-version-"));
   try {

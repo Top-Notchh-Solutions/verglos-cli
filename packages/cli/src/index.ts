@@ -763,11 +763,15 @@ program
   .option("--quiet", "Suppress human output")
   .action(async (opts: { json?: boolean; quiet?: boolean }) => {
     try {
-      await installPreCommitHook(process.cwd());
-      if (opts.json) console.log(JSON.stringify({ status: "ok", installed: true }));
+      const installed = await installPreCommitHook(process.cwd());
+      if (opts.json) console.log(JSON.stringify(installed ? { status: "ok", installed: true } : { status: "skipped", installed: false, reason: "not_a_git_repository" }));
       else if (!opts.quiet) {
-        console.log(chalk.green("Pre-commit hook installed."));
-        console.log(chalk.gray("  Bypass with `git commit --no-verify` if you need to override."));
+        if (installed) {
+          console.log(chalk.green("Pre-commit hook installed."));
+          console.log(chalk.gray("  Bypass with `git commit --no-verify` if you need to override."));
+        } else {
+          console.log(chalk.gray("No Git repository found; pre-commit hook was not installed."));
+        }
       }
     } catch (error) {
       if (opts.json) console.log(JSON.stringify({ status: "error", reason: "hook installation failed" }));
