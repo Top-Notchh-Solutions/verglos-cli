@@ -49,7 +49,11 @@ export async function runHunt(
         const before = Date.now();
         try {
           const outcome = await opts.adapter.execute({ finding, projectRoot, timeoutMs: remaining, binding });
-          outcomes.push({ ...outcome, finding: outcome.finding ?? finding, durationMs: Math.max(0, Date.now() - before) });
+          if (outcome.findingId !== finding.id) {
+            outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: "Hunt adapter returned a mismatched finding identity", durationMs: Math.max(0, Date.now() - before) });
+          } else {
+            outcomes.push({ ...outcome, finding: outcome.finding?.id === finding.id ? outcome.finding : finding, durationMs: Math.max(0, Date.now() - before) });
+          }
         } catch (error) {
           outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: `Hunt adapter failed: ${error instanceof Error ? error.message : "unknown error"}`, durationMs: Math.max(0, Date.now() - before) });
         }

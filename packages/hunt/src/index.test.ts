@@ -86,3 +86,16 @@ test("Hunt refuses adapter execution without an exact trust and approval binding
   const adapter = { id: "test-probe", async prepare() {}, async execute() { throw new Error("must not execute"); }, async cleanup() {} };
   await assert.rejects(() => runHunt(report, { adapter }), /execution requires/);
 });
+
+test("Hunt rejects an adapter result that widens the finding identity", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { return { findingId: "different-finding", verdict: "false" as const, reason: "fixture", durationMs: 1 }; },
+    async cleanup() {},
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.findingId, "critical-1");
+  assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
+  assert.match(result.outcomes[0]?.reason ?? "", /mismatched finding/);
+});
