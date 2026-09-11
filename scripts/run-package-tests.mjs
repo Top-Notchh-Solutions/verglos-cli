@@ -17,7 +17,7 @@ async function collect(path) {
 const files = await collect(directory);
 if (files.length === 0) throw new Error(`no test files found under ${directory}`);
 const usesTypeScript = files.some((file) => file.endsWith(".ts"));
-const child = spawn(process.execPath, [...(usesTypeScript ? ["--import", "tsx"] : []), "--test", ...files], { cwd: process.cwd(), stdio: "inherit", windowsHide: false });
+const child = spawn(process.execPath, [...(usesTypeScript ? ["--import", "tsx"] : []), "--test", "--test-concurrency=1", ...files], { cwd: process.cwd(), stdio: "inherit", windowsHide: false });
 const result = await new Promise((resolveResult, reject) => {
   child.once("error", reject);
   child.once("close", (code, signal) => resolveResult({ code, signal }));
