@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readlink, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -12,6 +12,10 @@ const imageDigest = process.env.VERGLOS_HUNT_TEST_DIGEST;
 
 function integrationTest(name: string, fn: () => Promise<void>): void {
   test(name, { skip: !enabled || !image || !imageDigest ? "set VERGLOS_HUNT_DOCKER_INTEGRATION=1 with a pinned test image and digest" : false }, fn);
+}
+
+function namespaceIntegrationTest(name: string, fn: () => Promise<void>): void {
+  test(name, { skip: process.platform !== "linux" || !enabled || !image || !imageDigest ? "requires Linux host namespace identifiers and a pinned test image" : false }, fn);
 }
 
 async function runFixture(root: string, command: readonly string[], timeoutMs = 10_000) {
@@ -143,6 +147,18 @@ integrationTest("Docker runtime exposes the approved memory ceiling", async () =
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
   try {
     const result = await runFixture(root, ["/bin/sh", "-c", "test \"$(cat /sys/fs/cgroup/memory.max)\" -le 268435456"], 5_000);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+namespaceIntegrationTest("Docker runtime keeps PID and IPC namespaces private", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const hostPidNamespace = await readlink("/proc/self/ns/pid");
+    const hostIpcNamespace = await readlink("/proc/self/ns/ipc");
+    const script = `test "$(readlink /proc/self/ns/pid)" != "${hostPidNamespace}" && test "$(readlink /proc/self/ns/ipc)" != "${hostIpcNamespace}"`;
+    const result = await runFixture(root, ["/bin/sh", "-c", script], 5_000);
     assert.equal(result.status, "completed");
     assert.equal(result.exitCode, 0);
   } finally { await rm(root, { recursive: true, force: true }); }
