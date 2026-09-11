@@ -53,3 +53,14 @@ test("ordinary scans never execute target package scripts", async () => {
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("ordinary scans do not make outbound fetch requests", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async () => { throw new Error("unexpected outbound request"); }) as typeof fetch;
+  try {
+    const result = await runScan({ projectRoot: new URL("../fixtures/insecure-app", import.meta.url).pathname, detectors: ["secrets"], noProvenance: true });
+    assert.equal(result.coverage?.status, "incomplete");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
