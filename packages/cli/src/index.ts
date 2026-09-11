@@ -31,7 +31,7 @@ import {
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
 import { executeTargetInspect } from "./target-inspect.js";
-import { listCachedEngines } from "@verglos/shared";
+import { ApprovalReceiptSchema, authorizeAgentAction, listCachedEngines, type ApprovalReceipt } from "@verglos/shared";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
@@ -49,6 +49,16 @@ const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
 const args = process.argv.slice(2);
+
+async function readApprovalReceiptFile(path: string): Promise<ApprovalReceipt> {
+  const entry = await lstat(path);
+  if (!entry.isFile() || entry.size > 256 * 1024) throw new Error("approval receipt must be a bounded regular file");
+  const bytes = await readFile(path);
+  if (bytes.byteLength > 256 * 1024) throw new Error("approval receipt must be a bounded regular file");
+  let value: unknown;
+  try { value = JSON.parse(bytes.toString("utf8")); } catch { throw new Error("approval receipt must be valid JSON"); }
+  return ApprovalReceiptSchema.parse(value);
+}
 
 if (args.includes("--update")) {
   await updateCli(version);
@@ -424,9 +434,10 @@ program
   .command("fix")
   .description("Auto-fix safe security issues [Pro] (currently: header injection)")
   .option("--approve", "Approve the filesystem mutation")
+  .option("--approval-receipt <path>", "Path to an exact, time-bounded mutate approval receipt")
   .option("--dry-run", "Show the planned file changes without mutating")
   .option("--rescan", "Run a local scan after applying the approved change")
-  .action(async (opts: { approve?: boolean; dryRun?: boolean; rescan?: boolean }) => {
+  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; rescan?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability("fix", "`verglos fix`", {
       asPlan,
@@ -446,6 +457,23 @@ program
     if (opts.dryRun) return;
     if (!opts.approve) {
       console.error("verglos fix requires explicit approval (--approve) before changing files.");
+      process.exit(78);
+    }
+    if (!opts.approvalReceipt) {
+      console.error("verglos fix requires an approval receipt (--approval-receipt) before changing files.");
+      process.exit(78);
+    }
+    let receipt: ApprovalReceipt;
+    try { receipt = await readApprovalReceiptFile(opts.approvalReceipt); }
+    catch (error) { console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); }
+    const authorization = authorizeAgentAction("mutate", receipt!, new Date().toISOString());
+    if (!authorization.allowed) {
+      console.error(`verglos fix approval denied: ${authorization.reason}`);
+      process.exit(78);
+    }
+    const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
+    if (plannedFiles.some((file) => !receipt!.files.includes(file))) {
+      console.error("verglos fix approval does not cover every planned file");
       process.exit(78);
     }
 
