@@ -177,7 +177,9 @@ export async function executeScan(
     );
   }
 
-  if (!isTelemetryDisabled(options.noTelemetry)) {
+  // Machine/non-interactive output must not silently attach project or paid
+  // identity telemetry; interactive scans retain the documented opt-out model.
+  if (!isTelemetryDisabled(options.noTelemetry, Boolean(options.quiet || options.json))) {
     if (!options.quiet) await printFirstRunDisclosureIfNeeded();
     // Fire-and-forget. Awaited so the CLI stays around long enough to
     // send in short-lived processes (npx one-shots), but errors are
@@ -238,7 +240,9 @@ export async function executeCi(options: {
     }
   }
 
-  if (!isTelemetryDisabled(options.noTelemetry)) {
+  // CI is non-interactive: telemetry is opt-in via an explicit standalone
+  // telemetry integration, never an implicit bearer-associated scan write.
+  if (!isTelemetryDisabled(options.noTelemetry, true)) {
     await sendScanEvent(result, {
       cliVersion: CLI_VERSION,
       durationMs,

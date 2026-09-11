@@ -42,11 +42,15 @@ function debug(...args: unknown[]): void {
   console.error(chalk.gray("[verglos:debug]"), ...args);
 }
 
-export function isTelemetryDisabled(explicitFlag?: boolean): boolean {
+export function isTelemetryDisabled(explicitFlag?: boolean, nonInteractive = false): boolean {
   if (explicitFlag === true) return true;
   const raw = process.env.VERGLOS_TELEMETRY;
+  // Non-interactive runs are opt-in only. This prevents quiet/JSON/CI/agent
+  // invocations from silently attaching project or paid identity metadata.
+  if (nonInteractive && raw == null) return true;
   if (raw == null) return false;
   const v = raw.trim().toLowerCase();
+  if (nonInteractive && !["1", "true", "on", "yes"].includes(v)) return true;
   return v === "0" || v === "false" || v === "off" || v === "no";
 }
 
