@@ -48,6 +48,9 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Audit package contents
+        run: node scripts/check-package-contents.mjs
+
       - name: Run Verglos on itself
         # The CI command exits non-zero on any critical finding OR when
         # the score falls below --threshold.
