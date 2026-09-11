@@ -168,6 +168,50 @@ test("precommit configuration failure is one bounded JSON response", async () =>
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("diff input failure is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-diff-error-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "diff", "missing-base.json", "missing-head.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", message: "snapshot diff failed" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("policy check input failure is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-error-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "policy", "check", "missing.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "POLICY_CHECK_INPUT", message: "policy check failed" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("engine status JSON is one bounded document", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-engine-status-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "engines", "status", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: root } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { engines?: unknown };
+    assert.ok(Array.isArray(payload.engines));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("precommit success is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-precommit-ok-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "precommit", "--json", "--quiet", "--timeout", "5000"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { status?: string; blocking?: number; elapsedMs?: number; timedOut?: boolean };
+    assert.ok(payload.status === "PASS" || payload.status === "INCOMPLETE");
+    if (payload.status === "PASS") assert.equal(payload.blocking, 0);
+    assert.equal(typeof payload.elapsedMs === "number" || payload.timedOut === true, true);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("Scan JSON mode emits one parseable scan document", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-scan-"));
   try {
