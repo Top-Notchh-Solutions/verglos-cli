@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
 import { readdir } from "node:fs/promises";
+import { pathToFileURL } from "node:url";
 
 export interface CliFixtureOptions {
   readonly timeoutMs?: number;
@@ -21,7 +22,11 @@ export async function runCliFixture(
       const previous = args[index - 1];
       const isLoader = previous === "--import";
       const isCliEntry = /[\\/]src[\\/]index\.ts$/.test(arg);
-      return (isLoader || isCliEntry) && /^[A-Za-z]:[\\/]/.test(arg) ? arg.replaceAll("\\", "/") : arg;
+      if (!/^[A-Za-z]:[\\/]/.test(arg)) return arg;
+      // Node requires an URL for --import on Windows. The CLI entry is
+      // consumed by tsx itself, which accepts a normalized drive path.
+      if (isLoader) return pathToFileURL(arg).href;
+      return isCliEntry ? arg.replaceAll("\\", "/") : arg;
     })
     : [...args];
   const result = await new Promise<{ exitCode: number; stdout: string; stderr: string; timedOut: boolean }>((resolve, reject) => {

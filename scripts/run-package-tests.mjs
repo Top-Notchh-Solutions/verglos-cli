@@ -16,11 +16,16 @@ async function collect(path) {
 
 const files = await collect(directory);
 if (files.length === 0) throw new Error(`no test files found under ${directory}`);
-const usesTypeScript = files.some((file) => file.endsWith(".ts"));
-const child = spawn(process.execPath, [...(usesTypeScript ? ["--import", "tsx"] : []), "--test", "--test-concurrency=1", ...files], { cwd: process.cwd(), stdio: "inherit", windowsHide: false });
-const result = await new Promise((resolveResult, reject) => {
-  child.once("error", reject);
-  child.once("close", (code, signal) => resolveResult({ code, signal }));
-});
-if (result.signal) throw new Error(`test runner terminated by ${result.signal}`);
-if (result.code !== 0) process.exit(result.code ?? 1);
+// Run each file in its own process. Test modules intentionally exercise
+// HOME/cache and network globals; a shared Node test process lets top-level
+// setup leak between files even when test concurrency is one.
+for (const file of files) {
+  const usesTypeScript = file.endsWith(".test.ts");
+  const child = spawn(process.execPath, [...(usesTypeScript ? ["--import", "tsx"] : []), "--test", "--test-concurrency=1", file], { cwd: process.cwd(), stdio: "inherit", windowsHide: false });
+  const result = await new Promise((resolveResult, reject) => {
+    child.once("error", reject);
+    child.once("close", (code, signal) => resolveResult({ code, signal }));
+  });
+  if (result.signal) throw new Error(`test runner terminated by ${result.signal}`);
+  if (result.code !== 0) process.exit(result.code ?? 1);
+}
