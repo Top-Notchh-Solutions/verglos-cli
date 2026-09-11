@@ -76,6 +76,10 @@ jobs:
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm test
 
+      - name: Audit package contents
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: node scripts/check-package-contents.mjs
+
       # ── npm provenance ──────────────────────────────────────────
       # Every `npm publish` call below uses --provenance so npm
       # attests the tarball's origin (repo + commit + workflow run).
