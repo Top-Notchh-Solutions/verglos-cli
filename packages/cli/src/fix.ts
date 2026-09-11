@@ -89,6 +89,12 @@ function previewLines(value: string): readonly string[] {
   return value.trim().split("\n").map((line) => `+${line}`);
 }
 
+function samePlannedFiles(left: readonly string[], right: readonly string[]): boolean {
+  const a = [...new Set(left)].sort();
+  const b = [...new Set(right)].sort();
+  return a.length === b.length && a.every((file, index) => file === b[index]);
+}
+
 /** Plans header changes without reading beyond bounded config/helper files or mutating the project. */
 export async function planHeaderFixes(projectRoot: string): Promise<readonly HeaderFixPlan[]> {
   const { type } = await detectProjectType(projectRoot);
@@ -276,6 +282,12 @@ export async function applyHeaderFixes(projectRoot: string, options: { readonly 
     if (!authorization.allowed) throw new Error(`header fix approval denied: ${authorization.reason}`);
     if (options.approvalStoreRoot) await putApprovalReceipt(options.approvalStoreRoot, options.approvalReceipt);
   }
+  // Re-plan immediately before selecting the writer. A project can change
+  // between the approval preview and this call; never let that turn an
+  // approved file set into an unapproved helper-file mutation.
+  const currentPlan = await planHeaderFixes(projectRoot);
+  const currentFiles = currentPlan.filter((item) => item.action !== "skip").map((item) => item.file);
+  if (!samePlannedFiles(plannedFiles, currentFiles)) throw new Error("header fix plan changed before mutation");
   const { type } = await detectProjectType(projectRoot);
   let changed = 0;
 
