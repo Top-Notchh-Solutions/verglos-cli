@@ -12,8 +12,30 @@ export interface HuntOptions {
 }
 
 const PAID_PLANS = new Set(["pro", "team", "studio", "enterprise", "compliance", "founder"]);
+const SEVERITIES = new Set(["critical", "high", "medium", "low"]);
+const SANDBOXES = new Set(["auto", "docker"]);
+
+function validateOption(value: string | undefined, max: number, label: string): string | undefined {
+  if (value === undefined) return undefined;
+  if (value.length === 0 || value.length > max || /[\u0000-\u001f\u007f]/u.test(value)) throw new Error(`hunt ${label} is invalid`);
+  return value;
+}
 
 export async function executeHunt(opts: HuntOptions = {}): Promise<number> {
+  let severity: string | undefined;
+  let sandbox: string | undefined;
+  let finding: string | undefined;
+  try {
+    severity = validateOption(opts.severity, 128, "severity");
+    sandbox = validateOption(opts.sandbox, 32, "sandbox");
+    finding = validateOption(opts.finding, 512, "finding");
+    if (severity && severity.split(",").some((item) => !SEVERITIES.has(item.trim()))) throw new Error("hunt severity is invalid");
+    if (sandbox && !SANDBOXES.has(sandbox)) throw new Error("hunt sandbox is invalid");
+  } catch (error) {
+    if (opts.json) console.log(JSON.stringify({ status: "error", code: "HUNT_INPUT", message: "hunt options are invalid" }));
+    else if (!opts.quiet) console.error(error instanceof Error ? error.message : "hunt options are invalid");
+    return 2;
+  }
   const entitlement = await resolveEntitlement({ asPlan: opts.asPlan });
   warnIfStale({ stale: entitlement.stale, plan: entitlement.plan });
 
@@ -33,10 +55,10 @@ export async function executeHunt(opts: HuntOptions = {}): Promise<number> {
   const parsed = {
     status: "unavailable",
     reason: "beta_shell",
-    severity: opts.severity ?? "critical,high",
-    sandbox: opts.sandbox ?? "auto",
+    severity: severity ?? "critical,high",
+    sandbox: sandbox ?? "auto",
     dryRun: Boolean(opts.dryRun),
-    finding: opts.finding ?? "all eligible findings",
+    finding: finding ?? "all eligible findings",
   } as const;
   if (opts.json) console.log(JSON.stringify(parsed));
   else if (!opts.quiet) {
