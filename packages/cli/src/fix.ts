@@ -47,11 +47,17 @@ async function replaceRegularFile(path: string, content: string): Promise<void> 
   // Windows providers do not consistently implement O_NOFOLLOW. The caller
   // has already performed a bounded regular-file check immediately before
   // this open; retain kernel no-follow semantics on Unix where available.
-  const flags = constants.O_WRONLY | constants.O_TRUNC | (process.platform === "win32" ? 0 : constants.O_NOFOLLOW);
+  // Opening with O_TRUNC is rejected with EINVAL by the Windows runners for
+  // this existing-file mutation. `r+` works on Windows (including hidden
+  // files); truncate only after the opened handle itself is confirmed regular.
+  const flags = process.platform === "win32"
+    ? "r+"
+    : constants.O_WRONLY | constants.O_TRUNC | constants.O_NOFOLLOW;
   const handle = await open(path, flags);
   try {
     const stat = await handle.stat();
     if (!stat.isFile() || stat.size > 1 * 1024 * 1024) throw new Error("Next.js config changed before mutation.");
+    if (process.platform === "win32") await handle.truncate(0);
     await handle.writeFile(content, "utf8");
   } finally {
     await handle.close();
