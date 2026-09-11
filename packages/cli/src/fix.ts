@@ -95,6 +95,13 @@ function samePlannedFiles(left: readonly string[], right: readonly string[]): bo
   return a.length === b.length && a.every((file, index) => file === b[index]);
 }
 
+// Approval receipts use stable POSIX-relative paths across hosts. Keep the
+// filesystem writer native, but never let Windows separators alter the
+// mutation scope that was shown to and approved by the caller.
+function contractPath(path: string): string {
+  return path.replaceAll("\\", "/");
+}
+
 /** Plans header changes without reading beyond bounded config/helper files or mutating the project. */
 export async function planHeaderFixes(projectRoot: string): Promise<readonly HeaderFixPlan[]> {
   const { type } = await detectProjectType(projectRoot);
@@ -113,8 +120,9 @@ export async function planHeaderFixes(projectRoot: string): Promise<readonly Hea
     return [];
   }
   if (type === "express" || type === "fastify" || type === "node" || type === "react") {
-    const file = join(await pickSrcDir(projectRoot), "verglos-security-headers.ts");
-    return [{ file, action: await fileExists(join(projectRoot, file)) ? "skip" : "create", ...(await fileExists(join(projectRoot, file)) ? {} : { preview: previewLines(HEADERS_HELPER_TS) }) }];
+    const file = contractPath(join(await pickSrcDir(projectRoot), "verglos-security-headers.ts"));
+    const filesystemFile = join(projectRoot, ...file.split("/"));
+    return [{ file, action: await fileExists(filesystemFile) ? "skip" : "create", ...(await fileExists(filesystemFile) ? {} : { preview: previewLines(HEADERS_HELPER_TS) }) }];
   }
   return [];
 }
