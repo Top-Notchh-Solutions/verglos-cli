@@ -150,3 +150,15 @@ test("verifyEntitlement: rejects structurally invalid claims after signature ver
   assert.equal(result.valid, false);
   assert.match(result.reason ?? "", /invalid seats/);
 });
+
+test("verifyEntitlement: rejects future-issued tokens outside clock skew", async () => {
+  const kp = generateEntitlementKeyPair();
+  const nowSec = now();
+  const token = signEntitlement({
+    claims: { ...makeClaims(), iat: nowSec + 10 * 60, exp: nowSec + 11 * 60 },
+    privateKey: privateKeyFromPem(kp.privateKeyPem),
+  });
+  const result = await verifyEntitlement(token, Date.now(), { pinnedKeys: [kp.publicKeyBase64Url] });
+  assert.equal(result.valid, false);
+  assert.match(result.reason ?? "", /future/);
+});

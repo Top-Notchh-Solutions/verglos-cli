@@ -132,10 +132,10 @@ export async function verifyEntitlement(
     return { valid: false, reason: "signature failed to verify" };
   }
 
-  const claimError = validateClaims(claims);
+  const nowSec = Math.floor(now / 1000);
+  const claimError = validateClaims(claims, nowSec);
   if (claimError) return { valid: false, reason: claimError };
 
-  const nowSec = Math.floor(now / 1000);
   if (typeof claims.exp !== "number") {
     return { valid: false, reason: "claims are missing exp" };
   }
@@ -168,7 +168,7 @@ export async function verifyEntitlement(
   };
 }
 
-function validateClaims(value: unknown): string | undefined {
+function validateClaims(value: unknown, nowSec: number): string | undefined {
   if (!value || typeof value !== "object" || Array.isArray(value)) return "claims must be an object";
   const claims = value as Record<string, unknown>;
   if (typeof claims.keyHash !== "string" || claims.keyHash.length === 0 || claims.keyHash.length > 256) return "claims have an invalid keyHash";
@@ -177,6 +177,8 @@ function validateClaims(value: unknown): string | undefined {
   if (!Number.isInteger(claims.seats) || (claims.seats as number) < 0 || (claims.seats as number) > 100_000) return "claims have invalid seats";
   if (!Array.isArray(claims.features) || claims.features.some((feature) => typeof feature !== "string" || feature.length === 0 || feature.length > 256)) return "claims have invalid features";
   if (!Number.isInteger(claims.iat) || !Number.isInteger(claims.exp) || (claims.exp as number) <= (claims.iat as number)) return "claims have invalid timestamps";
+  if ((claims.iat as number) > nowSec + 5 * 60) return "claims issued-at is too far in the future";
+  if ((claims.exp as number) - nowSec > 90 * 24 * 60 * 60) return "claims expiry is too far in the future";
   if (claims.mid !== undefined && (typeof claims.mid !== "string" || claims.mid.length > 256)) return "claims have an invalid machine id";
   if (claims.ver !== undefined && (typeof claims.ver !== "string" || claims.ver.length > 128)) return "claims have an invalid client version";
   return undefined;
