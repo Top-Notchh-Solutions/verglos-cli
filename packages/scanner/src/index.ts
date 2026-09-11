@@ -132,12 +132,15 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   options.onProgress?.({ phase: "config", status: "started" });
   const config = await loadConfig(options.projectRoot, options.configPath);
   options.onProgress?.({ phase: "config", status: "completed" });
+  if (options.signal?.aborted) throw new Error("scan cancelled");
   options.onProgress?.({ phase: "target", status: "started" });
   const { type: projectType } = await detectProjectType(options.projectRoot);
   options.onProgress?.({ phase: "target", status: "completed" });
+  if (options.signal?.aborted) throw new Error("scan cancelled");
   options.onProgress?.({ phase: "walk", status: "started" });
   const files = await walkProject(options.projectRoot, config);
   options.onProgress?.({ phase: "walk", status: "completed" });
+  if (options.signal?.aborted) throw new Error("scan cancelled");
 
   const detectorIds = [...(options.detectors ?? [
     "secrets",

@@ -15,6 +15,22 @@ test("scan honours an already-aborted signal without walking the target", async 
   await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", signal: controller.signal }), /scan cancelled/);
 });
 
+test("scan exposes cancellation at each orchestration stage", async () => {
+  const controller = new AbortController();
+  const events: string[] = [];
+  await assert.rejects(() => runScan({
+    projectRoot: new URL("../fixtures/insecure-app", import.meta.url).pathname,
+    detectors: ["secrets"],
+    noProvenance: true,
+    signal: controller.signal,
+    onProgress: (event) => {
+      events.push(`${event.phase}:${event.status}`);
+      if (event.phase === "config" && event.status === "completed") controller.abort();
+    },
+  }), /scan cancelled/);
+  assert.deepEqual(events, ["config:started", "config:completed"]);
+});
+
 test("scan rejects unknown and repeated detector selections", async () => {
   await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", detectors: ["unknown-detector" as never] }), /unsupported detector/);
   await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", detectors: ["secrets", "secrets"] }), /cannot repeat/);
