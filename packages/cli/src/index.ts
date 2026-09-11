@@ -299,7 +299,7 @@ program
       };
       const policyPath = opts.policyEvaluation ?? opts.policy;
       if (policyPath) {
-        process.exit(await executePolicyCheck(policyPath, false, opts.quiet));
+        process.exit(await executePolicyCheck(policyPath, opts.json, opts.quiet));
       }
       if (opts.watch) {
         console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
@@ -384,7 +384,7 @@ program
   .action(async (opts: { threshold: string; quiet?: boolean; json?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policy?: string; policyEvaluation?: string; config?: string }) => {
     const policyPath = opts.policyEvaluation ?? opts.policy;
     if (policyPath) {
-      process.exit(await executePolicyCheck(policyPath, false, opts.quiet));
+      process.exit(await executePolicyCheck(policyPath, opts.json, opts.quiet));
     }
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const plan = await currentPlan({ asPlan });
