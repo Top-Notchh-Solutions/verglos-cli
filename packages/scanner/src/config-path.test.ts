@@ -39,3 +39,18 @@ test("scanner ignores symlinked implicit JavaScript config", async () => {
     assert.equal(config.failThreshold, 60);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("scanner ignores symlinked or oversized ignore files", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-ignore-boundary-"));
+  try {
+    const target = join(root, "outside.ignore");
+    await writeFile(target, "**/private/**\n", "utf8");
+    await symlink(target, join(root, ".verglosignore"));
+    const linked = await loadConfig(root);
+    assert.deepEqual(linked.ignorePaths, ["**/node_modules/**", "**/dist/**", "**/.next/**", "**/coverage/**", "**/build/**", "**/.git/**", "**/.turbo/**", "**/.vercel/**", "**/.pnpm-store/**", "**/.claude/**", "**/.clerk/**", "**/.cursor/**", "**/.playwright-mcp/**", "**/verglos-report*.html", "**/verglos-report*.json", "**/*.tgz"]);
+    await rm(join(root, ".verglosignore"));
+    await writeFile(join(root, ".verglosignore"), "x".repeat(256 * 1024 + 1), "utf8");
+    const oversized = await loadConfig(root);
+    assert.equal(oversized.ignorePaths.length, linked.ignorePaths.length);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

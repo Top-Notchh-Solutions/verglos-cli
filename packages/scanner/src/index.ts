@@ -50,6 +50,9 @@ const ALL_DETECTORS: Detector[] = [
 ];
 
 const MAX_CONFIG_BYTES = 1 * 1024 * 1024;
+const MAX_IGNORE_BYTES = 256 * 1024;
+const MAX_IGNORE_LINES = 4096;
+const MAX_IGNORE_LINE_BYTES = 512;
 const DEFAULT_DETECTOR_CONCURRENCY = 2;
 
 async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: number, run: (detector: Detector) => Promise<readonly T[]>, signal?: AbortSignal): Promise<T[]> {
@@ -69,10 +72,17 @@ async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: n
 
 async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
   try {
+    const ignorePath = `${projectRoot}/.verglosignore`;
+    const entry = await lstat(ignorePath);
+    if (!entry.isFile() || entry.size > MAX_IGNORE_BYTES) return [];
     const { readFile } = await import("node:fs/promises");
-    const raw = await readFile(`${projectRoot}/.verglosignore`, "utf8");
+    const bytes = await readFile(ignorePath);
+    if (bytes.byteLength > MAX_IGNORE_BYTES) return [];
+    const raw = bytes.toString("utf8");
     return raw
       .split("\n")
+      .slice(0, MAX_IGNORE_LINES + 1)
+      .filter((line) => Buffer.byteLength(line, "utf8") <= MAX_IGNORE_LINE_BYTES)
       .map((l) => l.trim())
       .filter((l) => l.length > 0 && !l.startsWith("#"));
   } catch {
