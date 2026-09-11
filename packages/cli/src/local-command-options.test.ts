@@ -10,6 +10,8 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /command\("fix"\)[\s\S]*?\.option\("--approval-receipt <path>"/);
   assert.match(source, /command\("sign <manifestPath> <signaturePath>"\)[\s\S]*?\.option\("--approval-receipt <path>"/);
   assert.ok(source.includes('.option("--rescan", "Run a local scan after applying the approved change")'));
+  assert.match(source, /command\("fix"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("fix"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   assert.match(source, /policy\.command\("check <evaluation>"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   assert.match(source, /\.command\("secrets"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /\.command\("deps"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
