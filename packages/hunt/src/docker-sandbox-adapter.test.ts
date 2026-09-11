@@ -23,6 +23,7 @@ test("Docker sandbox adapter uses the bound digest and evaluates bounded exit as
     const adapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async (args) => { argv = args; return { stdout: "fixture", stderr: "" }; } });
     const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: binding() });
     assert.equal(result.verdict, "true");
+    assert.equal(result.canonicalVerdict, "confirmed");
     assert.match(result.reason, /satisfied/);
     assert.match(result.evidenceDigest ?? "", /^sha256:/);
     assert.equal(result.redacted, true);
@@ -57,6 +58,7 @@ test("Docker sandbox adapter classifies a supported non-zero exit assertion as f
     const adapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async () => ({ stdout: "", stderr: "", exitCode: 7 }) });
     const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: binding() });
     assert.equal(result.verdict, "false");
+    assert.equal(result.canonicalVerdict, "not-reproduced");
     assert.match(result.reason, /exit code 7/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -68,6 +70,19 @@ test("Docker sandbox adapter leaves unsupported assertion syntax not-attemptable
     const unsupported = HuntExecutionBindingSchema.parse({ ...binding(), assertions: ["stdout contains fixture"] });
     const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: unsupported });
     assert.equal(result.verdict, "not_attemptable");
+    assert.equal(result.canonicalVerdict, "not-supported");
     assert.match(result.reason, /unsupported/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Docker sandbox adapter distinguishes timeout and environment failure canonically", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-docker-adapter-"));
+  try {
+    const timeoutAdapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async () => { const error = new Error("timeout") as Error & { killed?: boolean }; error.killed = true; throw error; } });
+    const timedOut = await timeoutAdapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: binding() });
+    assert.equal(timedOut.canonicalVerdict, "inconclusive");
+    const failedAdapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async () => { throw new Error("daemon unavailable"); } });
+    const failed = await failedAdapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: binding() });
+    assert.equal(failed.canonicalVerdict, "environment-error");
   } finally { await rm(root, { recursive: true, force: true }); }
 });

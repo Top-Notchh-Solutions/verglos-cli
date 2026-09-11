@@ -1,4 +1,4 @@
-import type { ApprovalReceipt, Finding, HuntExecutionBinding, HuntRecipe, HuntRecipeTrustPolicy, ScanResult } from "@verglos/shared";
+import type { ApprovalReceipt, Finding, HuntExecutionBinding, HuntRecipe, HuntRecipeTrustPolicy, ScanResult, HuntVerdict as CanonicalHuntVerdict } from "@verglos/shared";
 
 export type HuntVerdict = "true" | "false" | "not_attemptable";
 
@@ -14,6 +14,8 @@ export interface HuntFindingOutcome {
   truncated?: boolean;
   redacted?: true;
   executionStatus?: "completed" | "timed-out" | "failed";
+  /** Canonical V1 truth state; legacy verdict remains for alpha compatibility. */
+  canonicalVerdict?: CanonicalHuntVerdict;
 }
 
 export interface HuntResult {

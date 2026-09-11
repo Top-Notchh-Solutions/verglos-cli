@@ -1,4 +1,4 @@
-import type { Finding, HuntExecutionBinding } from "@verglos/shared";
+import { classifyHuntOutcome, type Finding, type HuntExecutionBinding } from "@verglos/shared";
 import { buildDockerInvocation, validateDockerProjectRoot, type DockerInvocationInput } from "./docker-adapter.js";
 import { runDockerInvocation, type DockerRunOptions } from "./docker-runner.js";
 import type { HuntFindingOutcome, SandboxAdapter } from "./types.js";
@@ -52,7 +52,15 @@ export class DockerSandboxAdapter implements SandboxAdapter {
         ? "Docker probe timed out before a supported verdict could be evaluated"
         : "Docker probe failed before a supported verdict could be evaluated";
     const assertionVerdict = result.status === "completed" ? evaluateExitCodeAssertions(input.binding.assertions, result.exitCode) : undefined;
-    return { findingId: input.finding.id, verdict: assertionVerdict?.verdict ?? "not_attemptable", reason: assertionVerdict?.reason ?? reason, durationMs: result.durationMs, evidenceDigest: result.evidenceDigest, outputBytes: result.outputBytes, truncated: result.truncated, redacted: true, executionStatus: result.status };
+    const assertionsSupported = input.binding.assertions.length > 0 && input.binding.assertions.every((assertion) => /^exit code is (-?\d+)$/.test(assertion.trim()));
+    const canonicalVerdict = classifyHuntOutcome({
+      policyAllowed: true,
+      supported: assertionsSupported,
+      assertionMatched: assertionVerdict?.verdict === "true" ? true : assertionVerdict?.verdict === "false" ? false : undefined,
+      environmentError: result.status === "failed",
+      timedOut: result.status === "timed-out",
+    });
+    return { findingId: input.finding.id, verdict: assertionVerdict?.verdict ?? "not_attemptable", canonicalVerdict, reason: assertionVerdict?.reason ?? reason, durationMs: result.durationMs, evidenceDigest: result.evidenceDigest, outputBytes: result.outputBytes, truncated: result.truncated, redacted: true, executionStatus: result.status };
   }
 
   async cleanup(): Promise<void> {}
