@@ -29,3 +29,14 @@ export function assembleReleaseRecordBundle(input: Omit<ReleaseRecordManifestDoc
   });
   return { manifest: createReleaseRecordManifest({ ...manifestInput, members }), payloads };
 }
+
+/** Apply the minimum complete Release Record graph gate before publication. */
+export function assertCompleteReleaseRecord(manifest: ReleaseRecordManifestDocument): ReleaseRecordManifestDocument {
+  const parsed = createReleaseRecordManifest(manifest);
+  const kinds = new Set(parsed.members.map((member) => member.kind));
+  for (const required of ["subject", "policy-evaluation", "release-decision"] as const) {
+    if (!kinds.has(required)) throw new Error(`complete Release Record requires a ${required} member`);
+  }
+  if (["complete", "partial"].includes(parsed.redaction.status) && !kinds.has("redaction-manifest")) throw new Error("complete Release Record requires a redaction-manifest member");
+  return parsed;
+}
