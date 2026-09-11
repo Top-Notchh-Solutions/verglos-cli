@@ -351,7 +351,13 @@ test("init JSON mode writes only the bounded project config", async () => {
 test("fix JSON mode refuses mutation without explicit approval", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-fix-"));
   try {
-    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "fix", "--json", "--quiet"], root, { env: { VERGLOS_AS_PLAN: "pro", VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    await mkdir(join(root, ".verglos"), { recursive: true });
+    const now = Date.now();
+    await writeFile(join(root, ".verglos", "capabilities.json"), JSON.stringify({
+      plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 3600, simulated: false, active: true,
+      fetchedAt: new Date(now).toISOString(), expiresAt: new Date(now + 3600_000).toISOString(),
+    }));
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "fix", "--json", "--quiet"], root, { env: { HOME: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
     assert.equal(result.exitCode, 78);
     assert.equal(result.stderr, "");
     assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "FIX_APPROVAL_REQUIRED", message: "fix requires explicit approval (--approve)" });
