@@ -14,6 +14,9 @@ test("fix approval requires mutate authority and exact planned file scope", () =
   const receipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
   assert.equal(authorizeHeaderFix(receipt, ["next.config.js"], "2026-01-02T00:00:00Z").allowed, true);
   assert.equal(authorizeHeaderFix(receipt, ["src/other.ts"], "2026-01-02T00:00:00Z").reason, "file-scope-mismatch");
+  assert.equal(authorizeHeaderFix(receipt, [], "2026-01-02T00:00:00Z").reason, "file-scope-mismatch");
+  const widened = createApprovalReceipt({ ...request, files: ["next.config.js", "src/other.ts"] }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  assert.equal(authorizeHeaderFix(widened, ["next.config.js"], "2026-01-02T00:00:00Z").reason, "file-scope-mismatch");
 });
 
 test("header fix persists its approved receipt when an audit store is configured", async () => {

@@ -1,4 +1,5 @@
-import { lstat, readFile, writeFile, access, mkdir } from "node:fs/promises";
+import { lstat, readFile, writeFile, access, mkdir, open } from "node:fs/promises";
+import { constants } from "node:fs";
 import { dirname, join } from "node:path";
 import chalk from "chalk";
 import { detectProjectType } from "@verglos/scanner";
@@ -35,8 +36,22 @@ export interface HeaderFixPlan {
 export function authorizeHeaderFix(receipt: ApprovalReceipt, plannedFiles: readonly string[], at: string): { readonly allowed: boolean; readonly reason?: string } {
   const authorization = authorizeAgentAction("mutate", receipt, at);
   if (!authorization.allowed) return { allowed: false, reason: authorization.reason };
-  if (plannedFiles.some((file) => !receipt.files.includes(file))) return { allowed: false, reason: "file-scope-mismatch" };
+  const planned = [...new Set(plannedFiles)].sort();
+  const approved = [...new Set(receipt.files)].sort();
+  if (planned.length !== approved.length || planned.some((file, index) => file !== approved[index])) return { allowed: false, reason: "file-scope-mismatch" };
   return { allowed: true };
+}
+
+/** Write an already-planned regular file without following a replacement symlink. */
+async function replaceRegularFile(path: string, content: string): Promise<void> {
+  const handle = await open(path, constants.O_WRONLY | constants.O_TRUNC | constants.O_NOFOLLOW);
+  try {
+    const stat = await handle.stat();
+    if (!stat.isFile() || stat.size > 1 * 1024 * 1024) throw new Error("Next.js config changed before mutation.");
+    await handle.writeFile(content, "utf8");
+  } finally {
+    await handle.close();
+  }
 }
 
 async function fileExists(path: string): Promise<boolean> {
@@ -127,7 +142,7 @@ async function fixNextjs(projectRoot: string): Promise<FixResult | null> {
       );
       const beforeWrite = await lstat(path);
       if (!beforeWrite.isFile() || beforeWrite.size > 1 * 1024 * 1024) throw new Error("Next.js config changed before mutation.");
-      await writeFile(path, updated, "utf8");
+      await replaceRegularFile(path, updated);
       return { file: name, action: "patched" };
     }
   }
