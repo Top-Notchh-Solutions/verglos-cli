@@ -139,6 +139,15 @@ integrationTest("Docker runtime bounds writable tmpfs capacity", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+integrationTest("Docker runtime exposes the approved memory ceiling", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "test \"$(cat /sys/fs/cgroup/memory.max)\" -le 268435456"], 5_000);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 integrationTest("Docker runtime records signal termination as a failed attempt", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
   try {
