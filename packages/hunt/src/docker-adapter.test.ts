@@ -14,12 +14,14 @@ const input = {
   memoryMb: 256,
   maxProcesses: 32,
   cpus: 2,
+  diskMb: 128,
 } as const;
 
 test("Docker invocation is pinned and deny-by-default", () => {
   const args = buildDockerInvocation(input);
-  assert.deepEqual(args.slice(0, 19), ["run", "--rm", "--init", "--stop-timeout", "1", "--network", "none", "--pid", "private", "--ipc", "private", "--uts", "private", "--read-only", "--tmpfs", "/tmp:rw,noexec,nosuid,nodev", "--cap-drop", "ALL", "--security-opt"]);
+  assert.deepEqual(args.slice(0, 19), ["run", "--rm", "--init", "--stop-timeout", "1", "--network", "none", "--pid", "private", "--ipc", "private", "--uts", "private", "--read-only", "--tmpfs", "/tmp:rw,noexec,nosuid,nodev,size=128m", "--cap-drop", "ALL", "--security-opt"]);
   assert.ok(args.includes("no-new-privileges"));
+  assert.deepEqual(args.slice(args.indexOf("--ulimit"), args.indexOf("--ulimit") + 4), ["--ulimit", "nofile=1024:1024", "--ulimit", "core=0"]);
   assert.ok(args.includes("--pids-limit"));
   assert.deepEqual(args.slice(args.indexOf("--cpus"), args.indexOf("--cpus") + 2), ["--cpus", "2"]);
   assert.deepEqual(args.slice(args.indexOf("--user"), args.indexOf("--user") + 4), ["--user", "65532:65532", "--workdir", "/workspace"]);
@@ -34,6 +36,7 @@ test("Docker invocation rejects mutable images and unsafe command inputs", () =>
   assert.throws(() => buildDockerInvocation({ ...input, command: ["/probe", "x\u0000y"] }), /command/);
   assert.throws(() => buildDockerInvocation({ ...input, projectRoot: "relative" }), /absolute/);
   assert.throws(() => buildDockerInvocation({ ...input, cpus: 0 }), /CPU/);
+  assert.throws(() => buildDockerInvocation({ ...input, diskMb: 0 }), /disk/);
 });
 
 test("Docker project-root validation rejects symlinks and non-directories", async () => {

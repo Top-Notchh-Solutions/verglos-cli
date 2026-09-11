@@ -10,6 +10,7 @@ export interface DockerInvocationInput {
   readonly memoryMb: number;
   readonly maxProcesses: number;
   readonly cpus?: number;
+  readonly diskMb?: number;
 }
 
 /** Reject symlinked or non-directory roots before a source bind mount. */
@@ -38,13 +39,16 @@ export function buildDockerInvocation(input: DockerInvocationInput): readonly st
   if (!Number.isInteger(input.maxProcesses) || input.maxProcesses <= 0 || input.maxProcesses > 4096) throw new Error("Docker Hunt process limit is out of bounds");
   const cpus = input.cpus ?? 1;
   if (!Number.isFinite(cpus) || cpus <= 0 || cpus > 16) throw new Error("Docker Hunt CPU quota is out of bounds");
+  const diskMb = input.diskMb ?? 512;
+  if (!Number.isInteger(diskMb) || diskMb <= 0 || diskMb > 16_384) throw new Error("Docker Hunt disk quota is out of bounds");
   if (input.command.length === 0 || input.command.length > 32 || input.command.some((part) => !part || part.length > 4096 || /[\u0000-\u001f\u007f]/.test(part))) throw new Error("Docker Hunt command is invalid");
   return Object.freeze([
     "run", "--rm", "--init", "--stop-timeout", "1", "--network", "none", "--pid", "private", "--ipc", "private", "--uts", "private", "--read-only",
-    "--tmpfs", "/tmp:rw,noexec,nosuid,nodev",
+    "--tmpfs", `/tmp:rw,noexec,nosuid,nodev,size=${diskMb}m`,
     "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
     "--user", "65532:65532", "--workdir", "/workspace",
     "--pids-limit", String(input.maxProcesses), "--memory", `${input.memoryMb}m`, "--cpus", String(cpus),
+    "--ulimit", "nofile=1024:1024", "--ulimit", "core=0",
     "--mount", `type=bind,src=${input.projectRoot},dst=/workspace,readonly`,
     `${input.image}@${input.imageDigest}`,
     ...input.command,
