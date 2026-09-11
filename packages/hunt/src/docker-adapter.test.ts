@@ -16,6 +16,7 @@ test("Docker invocation is pinned and deny-by-default", () => {
   const args = buildDockerInvocation(input);
   assert.deepEqual(args.slice(0, 11), ["run", "--rm", "--network", "none", "--read-only", "--tmpfs", "/tmp:rw,noexec,nosuid,nodev", "--cap-drop", "ALL", "--security-opt", "no-new-privileges"]);
   assert.ok(args.includes("--pids-limit"));
+  assert.deepEqual(args.slice(args.indexOf("--user"), args.indexOf("--user") + 4), ["--user", "65532:65532", "--workdir", "/workspace"]);
   assert.ok(args.includes("--mount"));
   assert.ok(args.includes(`${input.image}@${input.imageDigest}`));
   assert.ok(Object.isFrozen(args));

@@ -29,6 +29,7 @@ export function buildDockerInvocation(input: DockerInvocationInput): readonly st
     "run", "--rm", "--network", "none", "--read-only",
     "--tmpfs", "/tmp:rw,noexec,nosuid,nodev",
     "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
+    "--user", "65532:65532", "--workdir", "/workspace",
     "--pids-limit", String(input.maxProcesses), "--memory", `${input.memoryMb}m`,
     "--mount", `type=bind,src=${input.projectRoot},dst=/workspace,readonly`,
     `${input.image}@${input.imageDigest}`,
