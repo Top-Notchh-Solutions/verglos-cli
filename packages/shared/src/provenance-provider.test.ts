@@ -15,6 +15,12 @@ test("provider provenance matching considers every declared subject digest", () 
   assert.equal(result.subjectDigest, "expected");
 });
 
+test("provider provenance mismatch exposes a deterministic observed digest", () => {
+  const result = matchProviderProvenance({ provider: "npm", subjects: [{ digest: { sha256: "z" } }, { digest: { sha256: "a" } }], expectedDigest: "missing" });
+  assert.equal(result.state, "mismatched");
+  assert.equal(result.subjectDigest, "a");
+});
+
 test("provider provenance record member is canonical and keeps mismatch limitations", () => {
   const member = createProviderProvenanceRecordMember({ path: "provenance.json", provider: "npm", subjects: [{ digest: { sha256: "wrong" } }], expectedDigest: "expected" });
   assert.equal(member.kind, "provenance");

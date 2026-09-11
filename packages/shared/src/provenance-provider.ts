@@ -18,8 +18,9 @@ export function matchProviderProvenance(input: { readonly provider: ProvenancePr
     return Object.values(entry.digest as Record<string, unknown>).filter((value): value is string => typeof value === "string" && value.length > 0);
   });
   const uniqueDigests = [...new Set(subjectDigests)].sort();
-  const subjectDigest = uniqueDigests[0] ?? "";
-  const state = uniqueDigests.length === 0 ? "unavailable" : uniqueDigests.includes(input.expectedDigest) ? "matched" : "mismatched";
+  const matched = uniqueDigests.includes(input.expectedDigest);
+  const subjectDigest = matched ? input.expectedDigest : uniqueDigests[0] ?? "";
+  const state = uniqueDigests.length === 0 ? "unavailable" : matched ? "matched" : "mismatched";
   return { provider: input.provider, subjectDigest, expectedDigest: input.expectedDigest, state, signatureStatus: "unverified" };
 }
 
