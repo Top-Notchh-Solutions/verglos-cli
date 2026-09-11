@@ -78,3 +78,35 @@ test("MCP print-config quiet mode emits JSON without setup prose", async () => {
     assert.deepEqual(JSON.parse(result.stdout), { mcpServers: { verglos: { command: "npx", args: ["-y", "verglos", "mcp"] } } });
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("Hunt denied plan emits one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-hunt-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "hunt", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 3);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "denied", reason: "plan_required", requiredPlan: "pro" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Attest denied plan emits one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-attest-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "attest", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 3);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "denied", reason: "plan_required", requiredPlan: "studio" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Explain JSON mode emits one parseable document", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-explain-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "explain", "AI-001", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { status?: string; entry?: { rule?: string } };
+    assert.equal(payload.status, "ok");
+    assert.equal(payload.entry?.rule, "AI-001");
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
