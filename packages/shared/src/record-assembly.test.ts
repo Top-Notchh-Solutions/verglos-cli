@@ -23,4 +23,5 @@ test("complete record gate requires subject, policy evaluation, and decision mem
   const manifest = assembleReleaseRecord({ ...base, members: [member("decision.json", "release-decision"), member("policy.json", "policy-evaluation"), member("subject.json", "subject")] });
   assert.equal(assertCompleteReleaseRecord(manifest).members.length, 3);
   assert.throws(() => assertCompleteReleaseRecord(assembleReleaseRecord({ ...base, members: [member("decision.json", "release-decision")] })), /subject member/);
+  assert.throws(() => assertCompleteReleaseRecord(assembleReleaseRecord({ ...base, members: [member("decision.json", "release-decision"), member("policy-a.json", "policy-evaluation"), member("policy-b.json", "policy-evaluation"), member("subject.json", "subject")] })), /only one policy-evaluation/);
 });

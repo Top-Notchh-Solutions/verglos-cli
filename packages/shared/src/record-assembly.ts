@@ -38,5 +38,8 @@ export function assertCompleteReleaseRecord(manifest: ReleaseRecordManifestDocum
     if (!kinds.has(required)) throw new Error(`complete Release Record requires a ${required} member`);
   }
   if (["complete", "partial"].includes(parsed.redaction.status) && !kinds.has("redaction-manifest")) throw new Error("complete Release Record requires a redaction-manifest member");
+  for (const singleton of ["policy-evaluation", "redaction-manifest"] as const) {
+    if (parsed.members.filter((member) => member.kind === singleton).length > 1) throw new Error(`complete Release Record permits only one ${singleton} member`);
+  }
   return parsed;
 }
