@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, mkdtemp, realpath, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,6 +8,14 @@ import { runCliFixture } from "./cli-fixture.js";
 
 const cliEntry = join(process.cwd(), "src", "index.ts");
 const tsx = fileURLToPath(import.meta.resolve("tsx"));
+
+async function assertSameDirectory(actualPath: string | undefined, expectedPath: string): Promise<void> {
+  assert.equal(typeof actualPath, "string");
+  const [actual, expected] = await Promise.all([stat(actualPath!), stat(expectedPath)]);
+  assert.equal(actual.isDirectory(), true);
+  assert.equal(actual.dev, expected.dev);
+  assert.equal(actual.ino, expected.ino);
+}
 
 test("record sign approval preflight is one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-sign-"));
@@ -128,7 +136,7 @@ test("Secrets JSON mode emits one parseable scan document", async () => {
     assert.equal(result.exitCode, 0);
     assert.equal(result.stderr, "");
     const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown };
-    assert.equal(payload.projectRoot, await realpath(root));
+    await assertSameDirectory(payload.projectRoot, await realpath(root));
     assert.ok(Array.isArray(payload.findings));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -140,7 +148,7 @@ test("Dependency JSON mode emits one parseable scan document", async () => {
     assert.equal(result.exitCode, 0);
     assert.equal(result.stderr, "");
     const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown };
-    assert.equal(payload.projectRoot, await realpath(root));
+    await assertSameDirectory(payload.projectRoot, await realpath(root));
     assert.ok(Array.isArray(payload.findings));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -219,7 +227,7 @@ test("Scan JSON mode emits one parseable scan document", async () => {
     assert.equal(result.exitCode, 0);
     assert.equal(result.stderr, "");
     const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown };
-    assert.equal(payload.projectRoot, await realpath(root));
+    await assertSameDirectory(payload.projectRoot, await realpath(root));
     assert.ok(Array.isArray(payload.findings));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
