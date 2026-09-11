@@ -2,8 +2,11 @@ import assert from "node:assert/strict";
 import { mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import { runScan } from "./index.js";
+
+const fixtureRoot = fileURLToPath(new URL("../fixtures/insecure-app", import.meta.url));
 
 test("scan rejects invalid detector concurrency before execution", async () => {
   await assert.rejects(() => runScan({ projectRoot: "/path/that/must/not/be-read", detectorConcurrency: 0 }), /detector concurrency/);
@@ -31,7 +34,7 @@ test("scan exposes cancellation at each orchestration stage", async () => {
   const controller = new AbortController();
   const events: string[] = [];
   await assert.rejects(() => runScan({
-    projectRoot: new URL("../fixtures/insecure-app", import.meta.url).pathname,
+    projectRoot: fixtureRoot,
     detectors: ["secrets"],
     noProvenance: true,
     signal: controller.signal,
@@ -44,13 +47,13 @@ test("scan exposes cancellation at each orchestration stage", async () => {
 });
 
 test("scan rejects unknown and repeated detector selections", async () => {
-  const projectRoot = new URL("../fixtures/insecure-app", import.meta.url).pathname;
+  const projectRoot = fixtureRoot;
   await assert.rejects(() => runScan({ projectRoot, detectors: ["unknown-detector" as never] }), /unsupported detector/);
   await assert.rejects(() => runScan({ projectRoot, detectors: ["secrets", "secrets"] }), /cannot repeat/);
 });
 
 test("scan exposes a deterministic coverage manifest", async () => {
-  const result = await runScan({ projectRoot: new URL("../fixtures/insecure-app", import.meta.url).pathname, detectors: ["secrets"], noProvenance: true });
+  const result = await runScan({ projectRoot: fixtureRoot, detectors: ["secrets"], noProvenance: true });
   assert.equal(result.coverage?.status, "incomplete");
   assert.deepEqual(result.coverage?.requestedDetectors, ["secrets"]);
   assert.deepEqual(result.coverage?.executedDetectors, ["secrets"]);
@@ -60,7 +63,7 @@ test("scan exposes a deterministic coverage manifest", async () => {
 
 test("scan progress reports bounded lifecycle events without content", async () => {
   const events: Array<{ phase: string; status: string; detector?: string }> = [];
-  await runScan({ projectRoot: new URL("../fixtures/insecure-app", import.meta.url).pathname, detectors: ["secrets"], noProvenance: true, onProgress: (event) => events.push(event) });
+  await runScan({ projectRoot: fixtureRoot, detectors: ["secrets"], noProvenance: true, onProgress: (event) => events.push(event) });
   assert.deepEqual(events.map(({ phase, status, detector }) => ({ phase, status, ...(detector ? { detector } : {}) })), [
     { phase: "config", status: "started" }, { phase: "config", status: "completed" },
     { phase: "target", status: "started" }, { phase: "target", status: "completed" },
@@ -87,7 +90,7 @@ test("scans without package evidence do not make outbound fetch requests", async
   const originalFetch = globalThis.fetch;
   globalThis.fetch = (async () => { throw new Error("unexpected outbound request"); }) as typeof fetch;
   try {
-    const result = await runScan({ projectRoot: new URL("../fixtures/insecure-app", import.meta.url).pathname, detectors: ["secrets"], noProvenance: true });
+    const result = await runScan({ projectRoot: fixtureRoot, detectors: ["secrets"], noProvenance: true });
     assert.equal(result.coverage?.status, "incomplete");
   } finally {
     globalThis.fetch = originalFetch;

@@ -24,8 +24,8 @@ import { defaultCapabilitiesFor, normalizeTier, type Tier } from "./tier-default
 // homedir() does not consistently follow HOME on Windows, while CI and
 // callers use HOME to isolate credentials and entitlement caches.
 const configuredHome = () => process.env.HOME || process.env.USERPROFILE || homedir();
-const CACHE_DIR = join(configuredHome(), ".verglos");
-const CACHE_FILE = join(CACHE_DIR, "capabilities.json");
+const cacheDir = () => join(configuredHome(), ".verglos");
+const cacheFile = () => join(cacheDir(), "capabilities.json");
 const REQUEST_TIMEOUT_MS = 5000;
 const MAX_CAPABILITIES_CACHE_BYTES = 1 * 1024 * 1024;
 const MAX_CAPABILITIES_RESPONSE_BYTES = 1 * 1024 * 1024;
@@ -82,9 +82,9 @@ const FREE_FALLBACK: CachedCapabilities = {
 
 async function readCache(): Promise<CachedCapabilities | null> {
   try {
-    const entry = await lstat(CACHE_FILE);
+    const entry = await lstat(cacheFile());
     if (!entry.isFile() || entry.size > MAX_CAPABILITIES_CACHE_BYTES) return null;
-    const raw = await readFile(CACHE_FILE, "utf8");
+    const raw = await readFile(cacheFile(), "utf8");
     const parsed = parseCapabilitiesResponse(JSON.parse(raw));
     if (!parsed) return null;
     const value = JSON.parse(raw) as Record<string, unknown>;
@@ -97,8 +97,8 @@ async function readCache(): Promise<CachedCapabilities | null> {
 
 async function writeCache(entry: CachedCapabilities): Promise<void> {
   try {
-    await mkdir(CACHE_DIR, { recursive: true });
-    await writeFile(CACHE_FILE, JSON.stringify(entry, null, 2), "utf8");
+    await mkdir(cacheDir(), { recursive: true });
+    await writeFile(cacheFile(), JSON.stringify(entry, null, 2), "utf8");
   } catch {
     // non-fatal — next call will just re-fetch.
   }
@@ -412,7 +412,7 @@ export async function requireCapability(
 
 export async function clearCache(): Promise<void> {
   try {
-    await writeFile(CACHE_FILE, "{}", "utf8");
+    await writeFile(cacheFile(), "{}", "utf8");
   } catch {
     // ignore
   }
