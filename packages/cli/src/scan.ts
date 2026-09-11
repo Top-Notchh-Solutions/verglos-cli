@@ -133,6 +133,11 @@ export async function executeScan(
       strict: options.strict,
       noProvenance: options.focused ? true : options.noProvenance,
       verifySecrets: options.verifySecrets,
+      onProgress: (event) => {
+        if (!spinner) return;
+        const label = event.detector ? `${event.phase} ${event.detector}` : event.phase;
+        spinner.text = `${event.status === "started" ? "Scanning" : "Completed"} ${label}...`;
+      },
     });
   } finally {
     if (tickTimer) clearInterval(tickTimer);

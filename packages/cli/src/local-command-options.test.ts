@@ -39,3 +39,9 @@ test("nested command groups are fully registered before Commander parses", async
   assert.equal((source.match(/program\.command\("engines"\)/g) ?? []).length, 1);
   assert.equal((source.match(/program\.command\("evidence"\)/g) ?? []).length, 1);
 });
+
+test("scan routes progress only to the interactive spinner", async () => {
+  const source = await readFile(fileURLToPath(new URL("./scan.ts", import.meta.url)), "utf8");
+  assert.match(source, /onProgress:\s*\(event\)/);
+  assert.match(source, /if \(!spinner\) return/);
+});
