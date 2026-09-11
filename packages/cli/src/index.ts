@@ -526,7 +526,14 @@ program
       console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
       console.log("");
     }
-    const fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString(), approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, quiet: opts.quiet || opts.json });
+    let fixed: number;
+    try {
+      fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString(), approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, quiet: opts.quiet || opts.json });
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "FIX_APPLY_FAILED", error instanceof Error ? error.message : "header fix failed", "header fix failed");
+      if (opts.json || opts.quiet) process.exit(78);
+      throw error;
+    }
     if (!opts.quiet && !opts.json) console.log("");
     if (fixed > 0) {
       if (!opts.quiet && !opts.json) console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));

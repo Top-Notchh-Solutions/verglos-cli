@@ -16,6 +16,7 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /FIX_RECEIPT_REQUIRED/);
   assert.match(source, /FIX_RECEIPT_INVALID/);
   assert.match(source, /FIX_APPROVAL_DENIED/);
+  assert.match(source, /FIX_APPLY_FAILED/);
   assert.match(source, /policy\.command\("check <evaluation>"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   assert.match(source, /\.command\("secrets"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /\.command\("deps"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
