@@ -45,3 +45,8 @@ test("scan routes progress only to the interactive spinner", async () => {
   assert.match(source, /onProgress:\s*\(event\)/);
   assert.match(source, /if \(!spinner\) return/);
 });
+
+test("scan telemetry receives the resolved detector set", async () => {
+  const source = await readFile(fileURLToPath(new URL("./scan.ts", import.meta.url)), "utf8");
+  assert.match(source, /detectorsRun: detectors,/);
+});

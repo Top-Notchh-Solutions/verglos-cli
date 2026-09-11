@@ -185,7 +185,7 @@ export async function executeScan(
     await sendScanEvent(result, {
       cliVersion: CLI_VERSION,
       durationMs,
-      detectorsRun: options.detectors,
+      detectorsRun: detectors,
       verifySecrets: options.verifySecrets,
     });
   }
