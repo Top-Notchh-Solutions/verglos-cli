@@ -1,4 +1,4 @@
-import { createHash, createHmac, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { execSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -162,9 +162,7 @@ export function generateLicenseKey(secret: string): string {
   if (!secret) {
     throw new Error("generateLicenseKey requires LICENSE_HMAC_SECRET");
   }
-  const bytes = createHash("sha256")
-    .update(`${Date.now()}-${Math.random()}`)
-    .digest("hex");
+  const bytes = randomBytes(16).toString("hex");
   const body = `vg_${bytes.slice(0, 8)}_${bytes.slice(8, 16)}`;
   const checksum = createHmac("sha256", secret)
     .update(body)
