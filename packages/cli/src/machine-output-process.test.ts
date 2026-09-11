@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, realpath, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -118,5 +118,29 @@ test("Score configuration failure emits one bounded JSON response", async () => 
     assert.equal(result.exitCode, 2);
     assert.equal(result.stderr, "");
     assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "SCORE_INPUT", message: "score generation failed" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Secrets JSON mode emits one parseable scan document", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-secrets-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "secrets", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown };
+    assert.equal(payload.projectRoot, await realpath(root));
+    assert.ok(Array.isArray(payload.findings));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Dependency JSON mode emits one parseable scan document", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-deps-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "deps", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown };
+    assert.equal(payload.projectRoot, await realpath(root));
+    assert.ok(Array.isArray(payload.findings));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
