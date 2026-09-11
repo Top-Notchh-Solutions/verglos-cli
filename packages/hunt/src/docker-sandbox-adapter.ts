@@ -47,12 +47,23 @@ export class DockerSandboxAdapter implements SandboxAdapter {
       run: this.options.run,
     });
     const reason = result.status === "completed"
-      ? "Docker probe completed, but recipe assertion evaluation is not implemented"
+      ? "Docker probe completed, but recipe assertions are unsupported"
       : result.status === "timed-out"
         ? "Docker probe timed out before a supported verdict could be evaluated"
         : "Docker probe failed before a supported verdict could be evaluated";
-    return { findingId: input.finding.id, verdict: "not_attemptable", reason, durationMs: result.durationMs, evidenceDigest: result.evidenceDigest, outputBytes: result.outputBytes, truncated: result.truncated, redacted: true, executionStatus: result.status };
+    const assertionVerdict = result.status === "completed" ? evaluateExitCodeAssertions(input.binding.assertions, result.exitCode) : undefined;
+    return { findingId: input.finding.id, verdict: assertionVerdict?.verdict ?? "not_attemptable", reason: assertionVerdict?.reason ?? reason, durationMs: result.durationMs, evidenceDigest: result.evidenceDigest, outputBytes: result.outputBytes, truncated: result.truncated, redacted: true, executionStatus: result.status };
   }
 
   async cleanup(): Promise<void> {}
+}
+
+function evaluateExitCodeAssertions(assertions: readonly string[], exitCode: number | undefined): { readonly verdict: "true" | "false"; readonly reason: string } | undefined {
+  if (exitCode === undefined || assertions.length === 0) return undefined;
+  const expected = assertions.map((assertion) => /^exit code is (-?\d+)$/.exec(assertion.trim()));
+  if (expected.some((match) => !match)) return undefined;
+  const codes = expected.map((match) => Number(match![1]));
+  if (codes.some((code) => !Number.isSafeInteger(code))) return undefined;
+  const passed = codes.every((code) => code === exitCode);
+  return { verdict: passed ? "true" : "false", reason: passed ? "Docker probe satisfied all supported exit-code assertions" : `Docker probe exit code ${exitCode} did not satisfy the recipe assertion` };
 }

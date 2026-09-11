@@ -8,11 +8,12 @@ export interface DockerRunOptions {
   readonly timeoutMs: number;
   readonly maxOutputBytes: number;
   readonly sensitivePaths?: readonly string[];
-  readonly run?: (args: readonly string[], options: { readonly timeout: number; readonly maxBuffer: number }) => Promise<{ readonly stdout: Buffer | string; readonly stderr: Buffer | string }>;
+  readonly run?: (args: readonly string[], options: { readonly timeout: number; readonly maxBuffer: number }) => Promise<{ readonly stdout: Buffer | string; readonly stderr: Buffer | string; readonly exitCode?: number }>;
 }
 
 export interface DockerRunResult {
   readonly status: "completed" | "timed-out" | "failed";
+  readonly exitCode?: number;
   readonly stdout: string;
   readonly stderr: string;
   readonly outputBytes: number;
@@ -36,15 +37,16 @@ export async function runDockerInvocation(args: readonly string[], options: Dock
   const started = Date.now();
   try {
     const result = await run(args, { timeout: options.timeoutMs, maxBuffer: options.maxOutputBytes });
-    return finish("completed", result.stdout, result.stderr, started, options.maxOutputBytes, options.sensitivePaths);
+    return finish("completed", result.stdout, result.stderr, started, options.maxOutputBytes, options.sensitivePaths, 0);
   } catch (error) {
     const failure = error as NodeJS.ErrnoException & { readonly killed?: boolean; readonly signal?: string; readonly stdout?: Buffer | string; readonly stderr?: Buffer | string };
     const timedOut = failure.killed === true || failure.code === "ETIMEDOUT" || failure.signal === "SIGTERM";
-    return finish(timedOut ? "timed-out" : "failed", failure.stdout ?? "", failure.stderr ?? "", started, options.maxOutputBytes, options.sensitivePaths);
+    const exitCode = typeof failure.code === "number" ? failure.code : undefined;
+    return finish(timedOut ? "timed-out" : "failed", failure.stdout ?? "", failure.stderr ?? "", started, options.maxOutputBytes, options.sensitivePaths, exitCode);
   }
 }
 
-function finish(status: DockerRunResult["status"], stdout: Buffer | string, stderr: Buffer | string, started: number, maxOutputBytes: number, sensitivePaths: readonly string[] = []): DockerRunResult {
+function finish(status: DockerRunResult["status"], stdout: Buffer | string, stderr: Buffer | string, started: number, maxOutputBytes: number, sensitivePaths: readonly string[] = [], exitCode?: number): DockerRunResult {
   const rawStdoutBytes = byteLength(stdout);
   const rawStderrBytes = byteLength(stderr);
   const redacted = redactHuntOutput(toText(stdout), toText(stderr), maxOutputBytes, sensitivePaths);
@@ -54,6 +56,7 @@ function finish(status: DockerRunResult["status"], stdout: Buffer | string, stde
   const evidence = { stdout: stdoutText.text, stderr: stderrText.text, truncated: redacted.truncated || stdoutText.truncated || stderrText.truncated };
   return {
     status,
+    ...(exitCode === undefined ? {} : { exitCode }),
     stdout: stdoutText.text,
     stderr: stderrText.text,
     outputBytes: stdoutText.bytes + stderrText.bytes,

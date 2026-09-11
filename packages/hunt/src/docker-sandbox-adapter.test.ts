@@ -16,14 +16,14 @@ function binding() {
   return bindHuntExecution({ recipe, trust: { signers: ["verglos-release"] }, approval, ruleId: "d1-1", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", at: "2026-01-01T00:02:00Z" });
 }
 
-test("Docker sandbox adapter uses the bound digest and returns honest status", async () => {
+test("Docker sandbox adapter uses the bound digest and evaluates bounded exit assertions", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-docker-adapter-"));
   try {
     let argv: readonly string[] = [];
     const adapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async (args) => { argv = args; return { stdout: "fixture", stderr: "" }; } });
     const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: binding() });
-    assert.equal(result.verdict, "not_attemptable");
-    assert.match(result.reason, /assertion evaluation/);
+    assert.equal(result.verdict, "true");
+    assert.match(result.reason, /satisfied/);
     assert.match(result.evidenceDigest ?? "", /^sha256:/);
     assert.equal(result.redacted, true);
     assert.equal(result.executionStatus, "completed");
