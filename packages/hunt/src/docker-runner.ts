@@ -37,7 +37,9 @@ export async function runDockerInvocation(args: readonly string[], options: Dock
   const started = Date.now();
   try {
     const result = await run(args, { timeout: options.timeoutMs, maxBuffer: options.maxOutputBytes });
-    const exitCode = "exitCode" in result && typeof result.exitCode === "number" ? result.exitCode : 0;
+    const rawExitCode = "exitCode" in result ? result.exitCode : undefined;
+    if (rawExitCode !== undefined && (!Number.isSafeInteger(rawExitCode) || rawExitCode < 0 || rawExitCode > 255)) throw new Error("Docker Hunt exit code is out of bounds");
+    const exitCode = rawExitCode ?? 0;
     return finish("completed", result.stdout, result.stderr, started, options.maxOutputBytes, options.sensitivePaths, exitCode);
   } catch (error) {
     const failure = error as NodeJS.ErrnoException & { readonly killed?: boolean; readonly signal?: string; readonly stdout?: Buffer | string; readonly stderr?: Buffer | string };

@@ -34,6 +34,12 @@ test("Docker runner preserves a successful exit code for assertion evaluation", 
   assert.equal(result.exitCode, 0);
 });
 
+test("Docker runner fails closed for malformed exit codes", async () => {
+  const result = await runDockerInvocation(["run"], { timeoutMs: 500, maxOutputBytes: 128, run: async () => ({ stdout: "", stderr: "", exitCode: 999 }) });
+  assert.equal(result.status, "failed");
+  assert.equal(result.exitCode, undefined);
+});
+
 test("Docker runner rejects unsafe bounds before invoking the process", async () => {
   await assert.rejects(() => runDockerInvocation([], { timeoutMs: 1, maxOutputBytes: 1 }), /invocation/);
   await assert.rejects(() => runDockerInvocation(["run"], { timeoutMs: 0, maxOutputBytes: 1 }), /timeout/);
