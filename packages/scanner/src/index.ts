@@ -108,12 +108,14 @@ export async function loadConfig(projectRoot: string, explicitConfigPath?: strin
 
 export async function runScan(options: ScanOptions): Promise<ScanResult> {
   if (options.signal?.aborted) throw new Error("scan cancelled");
+  const detectorConcurrency = options.detectorConcurrency ?? DEFAULT_DETECTOR_CONCURRENCY;
+  if (!Number.isInteger(detectorConcurrency) || detectorConcurrency < 1 || detectorConcurrency > 8) throw new Error("detector concurrency must be between 1 and 8");
   const start = Date.now();
   const config = await loadConfig(options.projectRoot, options.configPath);
   const { type: projectType } = await detectProjectType(options.projectRoot);
   const files = await walkProject(options.projectRoot, config);
 
-  const detectorIds = options.detectors ?? [
+  const detectorIds = [...(options.detectors ?? [
     "secrets",
     "dependencies",
     "misconfig",
@@ -121,7 +123,7 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     "ai-patterns",
     "slopsquat",
     "vendored-cves",
-  ];
+  ])];
 
   if (options.includeGitHistory) {
     detectorIds.push("git-history");
@@ -134,8 +136,6 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   const detectorContext = {
     verifySecrets: options.verifySecrets,
   };
-  const detectorConcurrency = options.detectorConcurrency ?? DEFAULT_DETECTOR_CONCURRENCY;
-  if (!Number.isInteger(detectorConcurrency) || detectorConcurrency < 1 || detectorConcurrency > 8) throw new Error("detector concurrency must be between 1 and 8");
   const rawFindings = await runDetectorsBounded(activeDetectors, detectorConcurrency, (detector) => detector.run(files, options.projectRoot, detectorContext), options.signal);
   if (options.signal?.aborted) throw new Error("scan cancelled");
   const minConfidence = options.minConfidence ?? DEFAULT_MIN_CONFIDENCE;
