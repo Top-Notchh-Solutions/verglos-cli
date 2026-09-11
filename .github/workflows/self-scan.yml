@@ -79,6 +79,7 @@ jobs:
         run: |
           node --test scripts/pack-public-packages.test.mjs
           node scripts/pack-public-packages.mjs .artifacts/public-packages
+          node scripts/check-packed-manifests.mjs .artifacts/public-packages
 
       - name: Upload public package evidence
         if: ${{ success() }}
