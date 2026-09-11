@@ -7,12 +7,15 @@ test("Docker runner applies timeout and output bounds to the injected process", 
   const result = await runDockerInvocation(["run", "--rm"], {
     timeoutMs: 500,
     maxOutputBytes: 8,
-    run: async (_args, options) => { received = options; return { stdout: "123456789", stderr: "err" }; },
+    run: async (_args, options) => { received = options; return { stdout: "token=123456789", stderr: "err" }; },
   });
   assert.deepEqual(received, { timeout: 500, maxBuffer: 8 });
   assert.equal(result.status, "completed");
   assert.equal(result.outputBytes, 8);
   assert.equal(result.truncated, true);
+  assert.equal(result.redacted, true);
+  assert.match(result.evidenceDigest, /^sha256:[a-f0-9]{64}$/);
+  assert.doesNotMatch(result.stdout, /123456789/);
 });
 
 test("Docker runner turns timeout and process failures into explicit non-success states", async () => {

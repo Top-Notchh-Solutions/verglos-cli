@@ -1,5 +1,6 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { huntEvidenceDigest, redactHuntOutput } from "@verglos/shared";
 
 const execFileAsync = promisify(execFile);
 
@@ -15,6 +16,8 @@ export interface DockerRunResult {
   readonly stderr: string;
   readonly outputBytes: number;
   readonly truncated: boolean;
+  readonly evidenceDigest: string;
+  readonly redacted: true;
   readonly durationMs: number;
 }
 
@@ -39,18 +42,26 @@ export async function runDockerInvocation(args: readonly string[], options: Dock
 }
 
 function finish(status: DockerRunResult["status"], stdout: Buffer | string, stderr: Buffer | string, started: number, maxOutputBytes: number): DockerRunResult {
-  const stdoutText = toBoundedText(stdout, maxOutputBytes);
+  const rawStdoutBytes = byteLength(stdout);
+  const rawStderrBytes = byteLength(stderr);
+  const redacted = redactHuntOutput(toText(stdout), toText(stderr), maxOutputBytes);
+  const stdoutText = toBoundedText(redacted.stdout, maxOutputBytes);
   const remaining = Math.max(0, maxOutputBytes - stdoutText.bytes);
-  const stderrText = toBoundedText(stderr, remaining);
+  const stderrText = toBoundedText(redacted.stderr, remaining);
+  const evidence = { stdout: stdoutText.text, stderr: stderrText.text, truncated: redacted.truncated || stdoutText.truncated || stderrText.truncated };
   return {
     status,
     stdout: stdoutText.text,
     stderr: stderrText.text,
     outputBytes: stdoutText.bytes + stderrText.bytes,
-    truncated: stdoutText.truncated || stderrText.truncated || byteLength(stdout) + byteLength(stderr) > maxOutputBytes,
+    truncated: evidence.truncated || rawStdoutBytes + rawStderrBytes > maxOutputBytes,
+    evidenceDigest: huntEvidenceDigest(evidence),
+    redacted: true,
     durationMs: Math.max(0, Date.now() - started),
   };
 }
+
+function toText(value: Buffer | string): string { return Buffer.isBuffer(value) ? value.toString("utf8") : value; }
 
 function toBoundedText(value: Buffer | string, maxBytes: number): { readonly text: string; readonly bytes: number; readonly truncated: boolean } {
   const bytes = Buffer.isBuffer(value) ? value : Buffer.from(value, "utf8");
