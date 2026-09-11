@@ -95,6 +95,19 @@ test("Hunt adapter execution failures do not echo runtime error details", async 
   assert.doesNotMatch(result.outcomes[0]?.reason ?? "", /customer|private/);
 });
 
+test("Hunt converts cleanup failure into an environment-error outcome", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { return { findingId: "critical-1", verdict: "true" as const, canonicalVerdict: "confirmed" as const, reason: "fixture", durationMs: 1 }; },
+    async cleanup() { throw new Error("secret cleanup path"); },
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
+  assert.equal(result.outcomes[0]?.canonicalVerdict, "environment-error");
+  assert.equal(result.outcomes[0]?.reason, "Hunt sandbox cleanup failed; verdict was not retained");
+});
+
 test("Hunt refuses adapter execution without an exact trust and approval binding", async () => {
   const adapter = { id: "test-probe", async prepare() {}, async execute() { throw new Error("must not execute"); }, async cleanup() {} };
   await assert.rejects(() => runHunt(report, { adapter }), /execution requires/);

@@ -37,6 +37,7 @@ export async function runHunt(
     const binding = bindHuntExecution(opts.execution);
     const outcomes: HuntFindingOutcome[] = [];
     let prepareAttempted = false;
+    let cleanupFailed = false;
     try {
       prepareAttempted = true;
       await opts.adapter.prepare();
@@ -61,7 +62,29 @@ export async function runHunt(
         }
       }
     } finally {
-      if (prepareAttempted) await opts.adapter.cleanup();
+      if (prepareAttempted) {
+        try {
+          await opts.adapter.cleanup();
+        } catch {
+          // Cleanup failure is intentionally opaque and must never mask a
+          // structured result or leave a verdict looking trustworthy.
+          cleanupFailed = true;
+        }
+      }
+    }
+    if (cleanupFailed) {
+      for (let index = 0; index < outcomes.length; index += 1) {
+        const outcome = outcomes[index];
+        if (!outcome) continue;
+        outcomes[index] = {
+          findingId: outcome.findingId,
+          verdict: "not_attemptable",
+          canonicalVerdict: classifyHuntOutcome({ policyAllowed: true, supported: true, environmentError: true }),
+          finding: outcome.finding,
+          reason: "Hunt sandbox cleanup failed; verdict was not retained",
+          durationMs: outcome.durationMs,
+        };
+      }
     }
     return { report, outcomes: freezeOutcomes(outcomes), startedAt, completedAt: new Date().toISOString(), sandbox: opts.adapter.id };
   }
