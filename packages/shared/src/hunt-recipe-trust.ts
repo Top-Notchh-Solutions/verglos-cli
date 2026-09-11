@@ -38,3 +38,14 @@ export function isTrustedHuntRecipe(recipe: HuntRecipe, trust: HuntRecipeTrustPo
     && (!parsed.signature.expiresAt || Date.parse(parsed.signature.expiresAt) > Date.parse(policy.at ?? new Date().toISOString()))
     && (!policy.recipeDigests || policy.recipeDigests.includes(digest));
 }
+
+/** Execution requires an explicit content-digest allowlist; signer trust alone
+ * is sufficient for planning metadata but must not authorize an unknown recipe. */
+export function isExecutableHuntRecipe(recipe: HuntRecipe, trust: HuntRecipeTrustPolicy): boolean {
+  const policy = parseHuntRecipeTrustPolicy(trust);
+  const parsed = parseHuntRecipe(recipe);
+  const digest = huntRecipeDigest(parsed);
+  return isTrustedHuntRecipe(parsed, policy)
+    && Array.isArray(policy.recipeDigests)
+    && policy.recipeDigests.includes(digest);
+}

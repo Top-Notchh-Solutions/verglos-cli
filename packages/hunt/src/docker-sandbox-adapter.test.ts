@@ -3,7 +3,7 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { bindHuntExecution, createApprovalReceipt, HuntExecutionBindingSchema, parseHuntRecipe } from "@verglos/shared";
+import { bindHuntExecution, createApprovalReceipt, HuntExecutionBindingSchema, huntRecipeDigest, parseHuntRecipe } from "@verglos/shared";
 import { DockerSandboxAdapter } from "./docker-sandbox-adapter.js";
 
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
@@ -13,7 +13,7 @@ const finding = { id: "critical-1", severity: "critical", title: "critical", des
 function binding() {
   const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "docker-adapter", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, memoryMb: 256, outputBytes: 10000, processes: 32 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } });
   const approval = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: subjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
-  return bindHuntExecution({ recipe, trust: { signers: ["verglos-release"] }, approval, ruleId: "d1-1", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", at: "2026-01-01T00:02:00Z" });
+  return bindHuntExecution({ recipe, trust: { signers: ["verglos-release"], recipeDigests: [huntRecipeDigest(recipe)] }, approval, ruleId: "d1-1", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", at: "2026-01-01T00:02:00Z" });
 }
 
 test("Docker sandbox adapter uses the bound digest and evaluates bounded exit assertions", async () => {

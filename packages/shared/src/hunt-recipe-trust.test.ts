@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { isTrustedHuntRecipe, huntRecipeDigest, huntRecipeTrustPolicyDigest, parseHuntRecipeTrustPolicy } from "./hunt-recipe-trust.js";
+import { isExecutableHuntRecipe, isTrustedHuntRecipe, huntRecipeDigest, huntRecipeTrustPolicyDigest, parseHuntRecipeTrustPolicy } from "./hunt-recipe-trust.js";
 import { parseHuntRecipe } from "./hunt-recipe.js";
 
 const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-sql", ruleId: "d1-1", targetSubjectId: "urn:verglos:subject:artifact:sha256:" + "a".repeat(64), imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["node", "check.js"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, memoryMb: 256, outputBytes: 10000, processes: 32 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "local reproduction" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } });
@@ -11,6 +11,12 @@ test("Hunt trust can pin an exact recipe content digest", () => {
   const digest = huntRecipeDigest(recipe);
   assert.equal(isTrustedHuntRecipe(recipe, { signers: ["verglos-release"], recipeDigests: [digest] }), true);
   assert.equal(isTrustedHuntRecipe(recipe, { signers: ["verglos-release"], recipeDigests: ["sha256:" + "0".repeat(64)] }), false);
+});
+
+test("Hunt execution trust rejects signer-allowlisted but unknown recipes", () => {
+  const digest = huntRecipeDigest(recipe);
+  assert.equal(isExecutableHuntRecipe(recipe, { signers: ["verglos-release"] }), false);
+  assert.equal(isExecutableHuntRecipe(recipe, { signers: ["verglos-release"], recipeDigests: [digest] }), true);
 });
 
 test("Hunt trust policy rejects malformed, unknown, and duplicate entries", () => {
