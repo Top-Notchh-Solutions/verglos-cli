@@ -528,7 +528,6 @@ program
     }
     const fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString(), approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, quiet: opts.quiet || opts.json });
     if (!opts.quiet && !opts.json) console.log("");
-    if (opts.json) console.log(JSON.stringify({ planned: plan, fixed, rescanned: Boolean(opts.rescan) }));
     if (fixed > 0) {
       if (!opts.quiet && !opts.json) console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
       if (opts.rescan) {
@@ -542,11 +541,13 @@ program
             if (snapshot.existed && snapshot.bytes) await writeFile(snapshot.path, snapshot.bytes, { mode: 0o600 });
             else await unlink(snapshot.path).catch(() => undefined);
           }
-          console.error("Post-fix rescan failed; the approved mutation was rolled back.");
+          reportPreflightError(opts.json, opts.quiet, "FIX_RESCAN_FAILED", "Post-fix rescan failed; the approved mutation was rolled back.", "post-fix rescan failed; mutation rolled back");
+          if (opts.json || opts.quiet) process.exit(78);
           throw error;
         }
       }
     }
+    if (opts.json) console.log(JSON.stringify({ planned: plan, fixed, rescanned: Boolean(opts.rescan) }));
   });
 
 program
