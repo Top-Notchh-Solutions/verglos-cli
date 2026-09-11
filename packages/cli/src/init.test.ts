@@ -37,3 +37,30 @@ test("init JSON with yes writes config and never installs a hook", async () => {
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("init quiet refuses interactive mode without mutation", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-init-quiet-"));
+  try {
+    const code = await mod.executeInit({ cwd: root, quiet: true });
+    assert.equal(code, 2);
+    await assert.rejects(() => readFile(join(root, ".verglos.config.js")));
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("init quiet with yes writes config without output", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-init-quiet-"));
+  const logs: string[] = [];
+  const origLog = console.log;
+  console.log = (msg?: unknown) => { logs.push(String(msg)); };
+  try {
+    const code = await mod.executeInit({ cwd: root, quiet: true, yes: true });
+    assert.equal(code, 0);
+    assert.deepEqual(logs, []);
+    await readFile(join(root, ".verglos.config.js"));
+  } finally {
+    console.log = origLog;
+    await rm(root, { recursive: true, force: true });
+  }
+});

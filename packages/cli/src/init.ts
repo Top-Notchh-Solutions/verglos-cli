@@ -86,11 +86,15 @@ export interface InitOptions {
   cwd?: string;
   yes?: boolean; // non-interactive: accept defaults, still no hook install
   json?: boolean;
+  quiet?: boolean;
 }
 
 export async function executeInit(options: InitOptions = {}): Promise<number> {
   const projectRoot = options.cwd ?? process.cwd();
   const configPath = join(projectRoot, CONFIG_FILENAME);
+
+  // Quiet mode must be deterministic and must never open an interactive prompt.
+  if (options.quiet && !options.yes) return 2;
 
   // Machine output must never be interleaved with an interactive prompt.
   // Require --yes so JSON mode is deterministic and never installs a hook.
@@ -109,11 +113,13 @@ export async function executeInit(options: InitOptions = {}): Promise<number> {
       return 1;
     }
   }
-  console.log(
-    chalk.bold("verglos init") +
-      chalk.gray(` · project: ${projectRoot}`),
-  );
-  console.log("");
+  if (!options.quiet) {
+    console.log(
+      chalk.bold("verglos init") +
+        chalk.gray(` · project: ${projectRoot}`),
+    );
+    console.log("");
+  }
 
   const configExists = await fileExists(configPath);
 
@@ -121,9 +127,9 @@ export async function executeInit(options: InitOptions = {}): Promise<number> {
   if (configExists) {
     if (options.yes) {
       writeConfig = false;
-      console.log(
-        chalk.gray(`  ${CONFIG_FILENAME} already exists — leaving untouched.`),
-      );
+      if (!options.quiet) console.log(
+          chalk.gray(`  ${CONFIG_FILENAME} already exists — leaving untouched.`),
+        );
     } else {
       writeConfig = await confirm(
         `${CONFIG_FILENAME} already exists. Overwrite with a fresh default?`,
@@ -134,18 +140,18 @@ export async function executeInit(options: InitOptions = {}): Promise<number> {
 
   if (writeConfig) {
     await writeFile(configPath, CONFIG_TEMPLATE, "utf8");
-    console.log(
-      chalk.green(`  ✓ Wrote ${CONFIG_FILENAME}`),
-    );
+    if (!options.quiet) console.log(
+        chalk.green(`  ✓ Wrote ${CONFIG_FILENAME}`),
+      );
   }
 
   const gitHooksExists = await fileExists(join(projectRoot, ".git", "hooks"));
   if (!gitHooksExists) {
-    console.log(
-      chalk.gray(
-        "  Skipping pre-commit hook — no .git/hooks directory (not a git repo?).",
-      ),
-    );
+    if (!options.quiet) console.log(
+        chalk.gray(
+          "  Skipping pre-commit hook — no .git/hooks directory (not a git repo?).",
+        ),
+      );
   } else {
     const installHook = options.yes
       ? false // never install silently, even under --yes
@@ -156,13 +162,15 @@ export async function executeInit(options: InitOptions = {}): Promise<number> {
 
     if (installHook) {
       await installPreCommitHook(projectRoot);
-      console.log(chalk.green("  ✓ Installed .git/hooks/pre-commit"));
-      console.log(
-        chalk.gray(
-          "    Bypass with `git commit --no-verify` (fighting the user loses).",
-        ),
-      );
-    } else if (!options.yes) {
+      if (!options.quiet) {
+        console.log(chalk.green("  ✓ Installed .git/hooks/pre-commit"));
+        console.log(
+          chalk.gray(
+            "    Bypass with `git commit --no-verify` (fighting the user loses).",
+          ),
+        );
+      }
+    } else if (!options.yes && !options.quiet) {
       console.log(
         chalk.gray(
           "  Skipped pre-commit hook. Run `verglos hook` later if you change your mind.",
@@ -171,12 +179,14 @@ export async function executeInit(options: InitOptions = {}): Promise<number> {
     }
   }
 
-  console.log("");
-  console.log(chalk.bold("Next:"));
-  console.log(chalk.gray("  $ ") + "verglos scan");
-  console.log(
-    chalk.gray("  $ ") + "verglos scan --no-provenance   " + chalk.gray("# skip AI-authorship inference"),
-  );
-  console.log("");
+  if (!options.quiet) {
+    console.log("");
+    console.log(chalk.bold("Next:"));
+    console.log(chalk.gray("  $ ") + "verglos scan");
+    console.log(
+      chalk.gray("  $ ") + "verglos scan --no-provenance   " + chalk.gray("# skip AI-authorship inference"),
+    );
+    console.log("");
+  }
   return 0;
 }
