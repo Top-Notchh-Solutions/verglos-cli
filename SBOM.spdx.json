@@ -1,0 +1,2513 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "1970-01-01T00:00:00Z",
+    "creators": [
+      "Tool: verglos-license-tools"
+    ]
+  },
+  "name": "verglos-monorepo",
+  "documentNamespace": "https://verglos.com/spdx/verglos-monorepo-2.0.0-alpha.1",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-aG9ub0A0LjEyLjMx",
+      "name": "hono",
+      "versionInfo": "4.12.31",
+      "downloadLocation": "https://hono.dev",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/hono@4.12.31"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aGFzb3duQDIuMC40",
+      "name": "hasown",
+      "versionInfo": "2.0.4",
+      "downloadLocation": "https://github.com/inspect-js/hasOwn#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/hasown@2.0.4"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aGFzLXN5bWJvbHNAMS4xLjA",
+      "name": "has-symbols",
+      "versionInfo": "1.1.0",
+      "downloadLocation": "https://github.com/ljharb/has-symbols#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/has-symbols@1.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aHR0cC1lcnJvcnNAMi4wLjE",
+      "name": "http-errors",
+      "versionInfo": "2.0.1",
+      "downloadLocation": "https://github.com/jshttp/http-errors#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/http-errors@2.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-am9zZUA2LjIuNA",
+      "name": "jose",
+      "versionInfo": "6.2.4",
+      "downloadLocation": "https://github.com/panva/jose",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/jose@6.2.4"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-anNvbi1zY2hlbWEtdHJhdmVyc2VAMS4wLjA",
+      "name": "json-schema-traverse",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://github.com/epoberezkin/json-schema-traverse#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/json-schema-traverse@1.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-anNvbi1zY2hlbWEtdHlwZWRAOC4wLjI",
+      "name": "json-schema-typed",
+      "versionInfo": "8.0.2",
+      "downloadLocation": "https://github.com/RemyRylan/json-schema-typed/tree/main/dist/node",
+      "licenseConcluded": "BSD-2-Clause",
+      "licenseDeclared": "BSD-2-Clause",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/json-schema-typed@8.0.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aW5oZXJpdHNAMi4wLjQ",
+      "name": "inherits",
+      "versionInfo": "2.0.4",
+      "downloadLocation": "https://github.com/isaacs/inherits#readme",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/inherits@2.0.4"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aWNvbnYtbGl0ZUAwLjcuMw",
+      "name": "iconv-lite",
+      "versionInfo": "0.7.3",
+      "downloadLocation": "https://github.com/pillarjs/iconv-lite",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/iconv-lite@0.7.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXAtYWRkcmVzc0AxMC4yLjA",
+      "name": "ip-address",
+      "versionInfo": "10.2.0",
+      "downloadLocation": "https://github.com/beaugunderson/ip-address#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/ip-address@10.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXBhZGRyLmpzQDEuOS4x",
+      "name": "ipaddr.js",
+      "versionInfo": "1.9.1",
+      "downloadLocation": "https://github.com/whitequark/ipaddr.js#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/ipaddr.js@1.9.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtaW50ZXJhY3RpdmVAMi4wLjA",
+      "name": "is-interactive",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "https://github.com/sindresorhus/is-interactive#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-interactive@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtaW5zaWRlLWNvbnRhaW5lckAxLjAuMA",
+      "name": "is-inside-container",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://github.com/sindresorhus/is-inside-container#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-inside-container@1.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtbnVtYmVyQDcuMC4w",
+      "name": "is-number",
+      "versionInfo": "7.0.0",
+      "downloadLocation": "https://github.com/jonschlinkert/is-number",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-number@7.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtcHJvbWlzZUA0LjAuMA",
+      "name": "is-promise",
+      "versionInfo": "4.0.0",
+      "downloadLocation": "https://github.com/then/is-promise#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-promise@4.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtd3NsQDMuMS4x",
+      "name": "is-wsl",
+      "versionInfo": "3.1.1",
+      "downloadLocation": "https://github.com/sindresorhus/is-wsl#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-wsl@3.1.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtdW5pY29kZS1zdXBwb3J0ZWRAMi4xLjA",
+      "name": "is-unicode-supported",
+      "versionInfo": "2.1.0",
+      "downloadLocation": "https://github.com/sindresorhus/is-unicode-supported#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-unicode-supported@2.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtdW5pY29kZS1zdXBwb3J0ZWRAMS4zLjA",
+      "name": "is-unicode-supported",
+      "versionInfo": "1.3.0",
+      "downloadLocation": "https://github.com/sindresorhus/is-unicode-supported#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-unicode-supported@1.3.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtZ2xvYkA0LjAuMw",
+      "name": "is-glob",
+      "versionInfo": "4.0.3",
+      "downloadLocation": "https://github.com/micromatch/is-glob",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-glob@4.0.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtZG9ja2VyQDMuMC4w",
+      "name": "is-docker",
+      "versionInfo": "3.0.0",
+      "downloadLocation": "https://github.com/sindresorhus/is-docker#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-docker@3.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXMtZXh0Z2xvYkAyLjEuMQ",
+      "name": "is-extglob",
+      "versionInfo": "2.1.1",
+      "downloadLocation": "https://github.com/jonschlinkert/is-extglob",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-extglob@2.1.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-aXNleGVAMi4wLjA",
+      "name": "isexe",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "https://github.com/isaacs/isexe#readme",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/isexe@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b24tZmluaXNoZWRAMi40LjE",
+      "name": "on-finished",
+      "versionInfo": "2.4.1",
+      "downloadLocation": "https://github.com/jshttp/on-finished#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/on-finished@2.4.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b25jZUAxLjQuMA",
+      "name": "once",
+      "versionInfo": "1.4.0",
+      "downloadLocation": "https://github.com/isaacs/once#readme",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/once@1.4.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b25ldGltZUA3LjAuMA",
+      "name": "onetime",
+      "versionInfo": "7.0.0",
+      "downloadLocation": "https://github.com/sindresorhus/onetime#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/onetime@7.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b2JqZWN0LWFzc2lnbkA0LjEuMQ",
+      "name": "object-assign",
+      "versionInfo": "4.1.1",
+      "downloadLocation": "https://github.com/sindresorhus/object-assign#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/object-assign@4.1.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b2JqZWN0LWluc3BlY3RAMS4xMy40",
+      "name": "object-inspect",
+      "versionInfo": "1.13.4",
+      "downloadLocation": "https://github.com/inspect-js/object-inspect",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/object-inspect@1.13.4"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b3BlbkAxMC4yLjA",
+      "name": "open",
+      "versionInfo": "10.2.0",
+      "downloadLocation": "https://github.com/sindresorhus/open#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/open@10.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b3JhQDguMi4w",
+      "name": "ora",
+      "versionInfo": "8.2.0",
+      "downloadLocation": "https://github.com/sindresorhus/ora#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/ora@8.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bG9nLXN5bWJvbHNANi4wLjA",
+      "name": "log-symbols",
+      "versionInfo": "6.0.0",
+      "downloadLocation": "https://github.com/sindresorhus/log-symbols#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/log-symbols@6.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bmVnb3RpYXRvckAxLjAuMA",
+      "name": "negotiator",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://github.com/jshttp/negotiator#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/negotiator@1.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bWF0aC1pbnRyaW5zaWNzQDEuMS4w",
+      "name": "math-intrinsics",
+      "versionInfo": "1.1.0",
+      "downloadLocation": "https://github.com/es-shims/math-intrinsics#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/math-intrinsics@1.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bWljcm9tYXRjaEA0LjAuOA",
+      "name": "micromatch",
+      "versionInfo": "4.0.8",
+      "downloadLocation": "https://github.com/micromatch/micromatch",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/micromatch@4.0.8"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bWltaWMtZnVuY3Rpb25ANS4wLjE",
+      "name": "mimic-function",
+      "versionInfo": "5.0.1",
+      "downloadLocation": "https://github.com/sindresorhus/mimic-function#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/mimic-function@5.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bWltZS10eXBlc0AzLjAuMg",
+      "name": "mime-types",
+      "versionInfo": "3.0.2",
+      "downloadLocation": "https://github.com/jshttp/mime-types#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/mime-types@3.0.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bWltZS1kYkAxLjU0LjA",
+      "name": "mime-db",
+      "versionInfo": "1.54.0",
+      "downloadLocation": "https://github.com/jshttp/mime-db#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/mime-db@1.54.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bWVkaWEtdHlwZXJAMS4xLjA",
+      "name": "media-typer",
+      "versionInfo": "1.1.0",
+      "downloadLocation": "https://github.com/jshttp/media-typer#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/media-typer@1.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bWVyZ2UtZGVzY3JpcHRvcnNAMi4wLjA",
+      "name": "merge-descriptors",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "https://github.com/sindresorhus/merge-descriptors#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/merge-descriptors@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bWVyZ2UyQDEuNC4x",
+      "name": "merge2",
+      "versionInfo": "1.4.1",
+      "downloadLocation": "https://github.com/teambition/merge2",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/merge2@1.4.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bXNAMi4xLjM",
+      "name": "ms",
+      "versionInfo": "2.1.3",
+      "downloadLocation": "https://github.com/vercel/ms#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/ms@2.1.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2FmZXItYnVmZmVyQDIuMS4y",
+      "name": "safer-buffer",
+      "versionInfo": "2.1.2",
+      "downloadLocation": "https://github.com/ChALkeR/safer-buffer#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/safer-buffer@2.1.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2hlYmFuZy1jb21tYW5kQDIuMC4w",
+      "name": "shebang-command",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "https://github.com/kevva/shebang-command#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/shebang-command@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2hlYmFuZy1yZWdleEAzLjAuMA",
+      "name": "shebang-regex",
+      "versionInfo": "3.0.0",
+      "downloadLocation": "https://github.com/sindresorhus/shebang-regex#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/shebang-regex@3.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2lkZS1jaGFubmVsLW1hcEAxLjAuMQ",
+      "name": "side-channel-map",
+      "versionInfo": "1.0.1",
+      "downloadLocation": "https://github.com/ljharb/side-channel-map#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/side-channel-map@1.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2lkZS1jaGFubmVsLWxpc3RAMS4wLjE",
+      "name": "side-channel-list",
+      "versionInfo": "1.0.1",
+      "downloadLocation": "https://github.com/ljharb/side-channel-list#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/side-channel-list@1.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2lkZS1jaGFubmVsLXdlYWttYXBAMS4wLjI",
+      "name": "side-channel-weakmap",
+      "versionInfo": "1.0.2",
+      "downloadLocation": "https://github.com/ljharb/side-channel-weakmap#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/side-channel-weakmap@1.0.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2lkZS1jaGFubmVsQDEuMS4x",
+      "name": "side-channel",
+      "versionInfo": "1.1.1",
+      "downloadLocation": "https://github.com/ljharb/side-channel#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/side-channel@1.1.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2lnbmFsLWV4aXRANC4xLjA",
+      "name": "signal-exit",
+      "versionInfo": "4.1.0",
+      "downloadLocation": "https://github.com/tapjs/signal-exit#readme",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/signal-exit@4.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2V0cHJvdG90eXBlb2ZAMS4yLjA",
+      "name": "setprototypeof",
+      "versionInfo": "1.2.0",
+      "downloadLocation": "https://github.com/wesleytodd/setprototypeof",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/setprototypeof@1.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2VuZEAxLjIuMQ",
+      "name": "send",
+      "versionInfo": "1.2.1",
+      "downloadLocation": "https://github.com/pillarjs/send#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/send@1.2.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c2VydmUtc3RhdGljQDIuMi4x",
+      "name": "serve-static",
+      "versionInfo": "2.2.1",
+      "downloadLocation": "https://github.com/expressjs/serve-static#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/serve-static@2.2.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c3RhdHVzZXNAMi4wLjI",
+      "name": "statuses",
+      "versionInfo": "2.0.2",
+      "downloadLocation": "https://github.com/jshttp/statuses#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/statuses@2.0.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c3RkaW4tZGlzY2FyZGVyQDAuMi4y",
+      "name": "stdin-discarder",
+      "versionInfo": "0.2.2",
+      "downloadLocation": "https://github.com/sindresorhus/stdin-discarder#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/stdin-discarder@0.2.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c3RyaW5nLXdpZHRoQDcuMi4w",
+      "name": "string-width",
+      "versionInfo": "7.2.0",
+      "downloadLocation": "https://github.com/sindresorhus/string-width#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/string-width@7.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c3RyaXAtYW5zaUA3LjIuMA",
+      "name": "strip-ansi",
+      "versionInfo": "7.2.0",
+      "downloadLocation": "https://github.com/chalk/strip-ansi#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/strip-ansi@7.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cGF0aC10by1yZWdleHBAOC40LjI",
+      "name": "path-to-regexp",
+      "versionInfo": "8.4.2",
+      "downloadLocation": "https://github.com/pillarjs/path-to-regexp#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/path-to-regexp@8.4.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cGF0aC1rZXlAMy4xLjE",
+      "name": "path-key",
+      "versionInfo": "3.1.1",
+      "downloadLocation": "https://github.com/sindresorhus/path-key#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/path-key@3.1.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cGFyc2V1cmxAMS4zLjM",
+      "name": "parseurl",
+      "versionInfo": "1.3.3",
+      "downloadLocation": "https://github.com/pillarjs/parseurl#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/parseurl@1.3.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cGljb21hdGNoQDIuMy4y",
+      "name": "picomatch",
+      "versionInfo": "2.3.2",
+      "downloadLocation": "https://github.com/micromatch/picomatch",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/picomatch@2.3.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cGtjZS1jaGFsbGVuZ2VANS4wLjE",
+      "name": "pkce-challenge",
+      "versionInfo": "5.0.1",
+      "downloadLocation": "https://github.com/crouchcd/pkce-challenge#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/pkce-challenge@5.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cHJveHktYWRkckAyLjAuNw",
+      "name": "proxy-addr",
+      "versionInfo": "2.0.7",
+      "downloadLocation": "https://github.com/jshttp/proxy-addr#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/proxy-addr@2.0.7"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cm91dGVyQDIuMi4w",
+      "name": "router",
+      "versionInfo": "2.2.0",
+      "downloadLocation": "https://github.com/pillarjs/router#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/router@2.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cmF3LWJvZHlAMy4wLjI",
+      "name": "raw-body",
+      "versionInfo": "3.0.2",
+      "downloadLocation": "https://github.com/stream-utils/raw-body#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/raw-body@3.0.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cmFuZ2UtcGFyc2VyQDEuMy4w",
+      "name": "range-parser",
+      "versionInfo": "1.3.0",
+      "downloadLocation": "https://github.com/jshttp/range-parser#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/range-parser@1.3.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cmV1c2lmeUAxLjEuMA",
+      "name": "reusify",
+      "versionInfo": "1.1.0",
+      "downloadLocation": "https://github.com/mcollina/reusify#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/reusify@1.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cmVhZGRpcnBANC4xLjI",
+      "name": "readdirp",
+      "versionInfo": "4.1.2",
+      "downloadLocation": "https://github.com/paulmillr/readdirp",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/readdirp@4.1.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cmVxdWlyZS1mcm9tLXN0cmluZ0AyLjAuMg",
+      "name": "require-from-string",
+      "versionInfo": "2.0.2",
+      "downloadLocation": "https://github.com/floatdrop/require-from-string#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/require-from-string@2.0.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cmVzdG9yZS1jdXJzb3JANS4xLjA",
+      "name": "restore-cursor",
+      "versionInfo": "5.1.0",
+      "downloadLocation": "https://github.com/sindresorhus/restore-cursor#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/restore-cursor@5.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cnVuLWFwcGxlc2NyaXB0QDcuMS4w",
+      "name": "run-applescript",
+      "versionInfo": "7.1.0",
+      "downloadLocation": "https://github.com/sindresorhus/run-applescript#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/run-applescript@7.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cnVuLXBhcmFsbGVsQDEuMi4w",
+      "name": "run-parallel",
+      "versionInfo": "1.2.0",
+      "downloadLocation": "https://github.com/feross/run-parallel",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/run-parallel@1.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cXNANi4xNS4z",
+      "name": "qs",
+      "versionInfo": "6.15.3",
+      "downloadLocation": "https://github.com/ljharb/qs",
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/qs@6.15.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cXVldWUtbWljcm90YXNrQDEuMi4z",
+      "name": "queue-microtask",
+      "versionInfo": "1.2.3",
+      "downloadLocation": "https://github.com/feross/queue-microtask",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/queue-microtask@1.2.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-d2hpY2hAMi4wLjI",
+      "name": "which",
+      "versionInfo": "2.0.2",
+      "downloadLocation": "https://github.com/isaacs/node-which#readme",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/which@2.0.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-d3JhcHB5QDEuMC4y",
+      "name": "wrappy",
+      "versionInfo": "1.0.2",
+      "downloadLocation": "https://github.com/npm/wrappy",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/wrappy@1.0.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-d3NsLXV0aWxzQDAuMS4w",
+      "name": "wsl-utils",
+      "versionInfo": "0.1.0",
+      "downloadLocation": "https://github.com/sindresorhus/wsl-utils#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/wsl-utils@0.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-dG8tcmVnZXgtcmFuZ2VANS4wLjE",
+      "name": "to-regex-range",
+      "versionInfo": "5.0.1",
+      "downloadLocation": "https://github.com/micromatch/to-regex-range",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/to-regex-range@5.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-dG9pZGVudGlmaWVyQDEuMC4x",
+      "name": "toidentifier",
+      "versionInfo": "1.0.1",
+      "downloadLocation": "https://github.com/component/toidentifier#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/toidentifier@1.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-dHlwZS1pc0AyLjEuMA",
+      "name": "type-is",
+      "versionInfo": "2.1.0",
+      "downloadLocation": "https://github.com/jshttp/type-is#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/type-is@2.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-dHlwZXNjcmlwdEA1LjkuMw",
+      "name": "typescript",
+      "versionInfo": "5.9.3",
+      "downloadLocation": "https://www.typescriptlang.org/",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/typescript@5.9.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-dHN4QDQuMjMuMQ",
+      "name": "tsx",
+      "versionInfo": "4.23.1",
+      "downloadLocation": "https://tsx.hirok.io",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/tsx@4.23.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-dHVyYm9AMi4xMC42",
+      "name": "turbo",
+      "versionInfo": "2.10.6",
+      "downloadLocation": "https://turborepo.dev",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/turbo@2.10.6"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-dmFyeUAxLjEuMg",
+      "name": "vary",
+      "versionInfo": "1.1.2",
+      "downloadLocation": "https://github.com/jshttp/vary#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/vary@1.1.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-dW5kaWNpLXR5cGVzQDYuMjEuMA",
+      "name": "undici-types",
+      "versionInfo": "6.21.0",
+      "downloadLocation": "https://undici.nodejs.org",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/undici-types@6.21.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-dW5waXBlQDEuMC4w",
+      "name": "unpipe",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://github.com/stream-utils/unpipe#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/unpipe@1.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-em9kLXRvLWpzb24tc2NoZW1hQDMuMjUuMg",
+      "name": "zod-to-json-schema",
+      "versionInfo": "3.25.2",
+      "downloadLocation": "https://github.com/StefanTerdell/zod-to-json-schema#readme",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/zod-to-json-schema@3.25.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-em9kQDMuMjUuNzY",
+      "name": "zod",
+      "versionInfo": "3.25.76",
+      "downloadLocation": "https://zod.dev",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/zod@3.25.76"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-QG1vZGVsY29udGV4dHByb3RvY29sL3Nka0AxLjI5LjA",
+      "name": "@modelcontextprotocol/sdk",
+      "versionInfo": "1.29.0",
+      "downloadLocation": "https://modelcontextprotocol.io",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/@modelcontextprotocol/sdk@1.29.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-QG5vZGVsaWIvZnMuc2NhbmRpckAyLjEuNQ",
+      "name": "@nodelib/fs.scandir",
+      "versionInfo": "2.1.5",
+      "downloadLocation": "https://github.com/nodelib/nodelib/tree/master#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/@nodelib/fs.scandir@2.1.5"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-QG5vZGVsaWIvZnMuc3RhdEAyLjAuNQ",
+      "name": "@nodelib/fs.stat",
+      "versionInfo": "2.0.5",
+      "downloadLocation": "https://github.com/nodelib/nodelib/tree/master#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/@nodelib/fs.stat@2.0.5"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-QG5vZGVsaWIvZnMud2Fsa0AxLjIuOA",
+      "name": "@nodelib/fs.walk",
+      "versionInfo": "1.2.8",
+      "downloadLocation": "https://github.com/nodelib/nodelib/tree/master#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/@nodelib/fs.walk@1.2.8"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-QGhvbm8vbm9kZS1zZXJ2ZXJAMS4xOS4xNA",
+      "name": "@hono/node-server",
+      "versionInfo": "1.19.14",
+      "downloadLocation": "https://github.com/honojs/node-server",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/@hono/node-server@1.19.14"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-QHR5cGVzL25vZGVAMjIuMjAuMQ",
+      "name": "@types/node",
+      "versionInfo": "22.20.1",
+      "downloadLocation": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/@types/node@22.20.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y29tbWFuZGVyQDE0LjAuMw",
+      "name": "commander",
+      "versionInfo": "14.0.3",
+      "downloadLocation": "https://github.com/tj/commander.js#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/commander@14.0.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y29udGVudC10eXBlQDEuMC41",
+      "name": "content-type",
+      "versionInfo": "1.0.5",
+      "downloadLocation": "https://github.com/jshttp/content-type#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/content-type@1.0.5"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y29udGVudC10eXBlQDIuMC4w",
+      "name": "content-type",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "https://github.com/jshttp/content-type#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/content-type@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y29udGVudC1kaXNwb3NpdGlvbkAxLjEuMA",
+      "name": "content-disposition",
+      "versionInfo": "1.1.0",
+      "downloadLocation": "https://github.com/jshttp/content-disposition#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/content-disposition@1.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y29va2llLXNpZ25hdHVyZUAxLjIuMg",
+      "name": "cookie-signature",
+      "versionInfo": "1.2.2",
+      "downloadLocation": "https://github.com/visionmedia/node-cookie-signature#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/cookie-signature@1.2.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y29va2llQDAuNy4y",
+      "name": "cookie",
+      "versionInfo": "0.7.2",
+      "downloadLocation": "https://github.com/jshttp/cookie#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/cookie@0.7.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y29yc0AyLjguNg",
+      "name": "cors",
+      "versionInfo": "2.8.6",
+      "downloadLocation": "https://github.com/expressjs/cors#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/cors@2.8.6"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y2FsbC1iaW5kLWFwcGx5LWhlbHBlcnNAMS4wLjI",
+      "name": "call-bind-apply-helpers",
+      "versionInfo": "1.0.2",
+      "downloadLocation": "https://github.com/ljharb/call-bind-apply-helpers#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/call-bind-apply-helpers@1.0.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y2FsbC1ib3VuZEAxLjAuNA",
+      "name": "call-bound",
+      "versionInfo": "1.0.4",
+      "downloadLocation": "https://github.com/ljharb/call-bound#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/call-bound@1.0.4"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y2hhbGtANS42LjI",
+      "name": "chalk",
+      "versionInfo": "5.6.2",
+      "downloadLocation": "https://github.com/chalk/chalk#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/chalk@5.6.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y2hva2lkYXJANC4wLjM",
+      "name": "chokidar",
+      "versionInfo": "4.0.3",
+      "downloadLocation": "https://github.com/paulmillr/chokidar",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/chokidar@4.0.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y2xpLWN1cnNvckA1LjAuMA",
+      "name": "cli-cursor",
+      "versionInfo": "5.0.0",
+      "downloadLocation": "https://github.com/sindresorhus/cli-cursor#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/cli-cursor@5.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y2xpLXNwaW5uZXJzQDIuOS4y",
+      "name": "cli-spinners",
+      "versionInfo": "2.9.2",
+      "downloadLocation": "https://github.com/sindresorhus/cli-spinners#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/cli-spinners@2.9.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Y3Jvc3Mtc3Bhd25ANy4wLjY",
+      "name": "cross-spawn",
+      "versionInfo": "7.0.6",
+      "downloadLocation": "https://github.com/moxystudio/node-cross-spawn",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/cross-spawn@7.0.6"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Ym9keS1wYXJzZXJAMi4zLjA",
+      "name": "body-parser",
+      "versionInfo": "2.3.0",
+      "downloadLocation": "https://github.com/expressjs/body-parser#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/body-parser@2.3.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-YnJhY2VzQDMuMC4z",
+      "name": "braces",
+      "versionInfo": "3.0.3",
+      "downloadLocation": "https://github.com/micromatch/braces",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/braces@3.0.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Ynl0ZXNAMy4xLjI",
+      "name": "bytes",
+      "versionInfo": "3.1.2",
+      "downloadLocation": "https://github.com/visionmedia/bytes.js#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/bytes@3.1.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-YnVuZGxlLW5hbWVANC4xLjA",
+      "name": "bundle-name",
+      "versionInfo": "4.1.0",
+      "downloadLocation": "https://github.com/sindresorhus/bundle-name#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/bundle-name@4.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-YW5zaS1yZWdleEA2LjIuMg",
+      "name": "ansi-regex",
+      "versionInfo": "6.2.2",
+      "downloadLocation": "https://github.com/chalk/ansi-regex#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/ansi-regex@6.2.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-YWNjZXB0c0AyLjAuMA",
+      "name": "accepts",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "https://github.com/jshttp/accepts#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/accepts@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-YWp2LWZvcm1hdHNAMy4wLjE",
+      "name": "ajv-formats",
+      "versionInfo": "3.0.1",
+      "downloadLocation": "https://github.com/ajv-validator/ajv-formats#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/ajv-formats@3.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-YWp2QDguMjAuMA",
+      "name": "ajv",
+      "versionInfo": "8.20.0",
+      "downloadLocation": "https://ajv.js.org",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/ajv@8.20.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Z29wZEAxLjIuMA",
+      "name": "gopd",
+      "versionInfo": "1.2.0",
+      "downloadLocation": "https://github.com/ljharb/gopd#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/gopd@1.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Z2V0LWludHJpbnNpY0AxLjMuMA",
+      "name": "get-intrinsic",
+      "versionInfo": "1.3.0",
+      "downloadLocation": "https://github.com/ljharb/get-intrinsic#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/get-intrinsic@1.3.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Z2V0LWVhc3QtYXNpYW4td2lkdGhAMS42LjA",
+      "name": "get-east-asian-width",
+      "versionInfo": "1.6.0",
+      "downloadLocation": "https://github.com/sindresorhus/get-east-asian-width#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/get-east-asian-width@1.6.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Z2V0LXByb3RvQDEuMC4x",
+      "name": "get-proto",
+      "versionInfo": "1.0.1",
+      "downloadLocation": "https://github.com/ljharb/get-proto#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/get-proto@1.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Z2xvYi1wYXJlbnRANS4xLjI",
+      "name": "glob-parent",
+      "versionInfo": "5.1.2",
+      "downloadLocation": "https://github.com/gulpjs/glob-parent#readme",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/glob-parent@5.1.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZGVidWdANC40LjM",
+      "name": "debug",
+      "versionInfo": "4.4.3",
+      "downloadLocation": "https://github.com/debug-js/debug#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/debug@4.4.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZGVmaW5lLWxhenktcHJvcEAzLjAuMA",
+      "name": "define-lazy-prop",
+      "versionInfo": "3.0.0",
+      "downloadLocation": "https://github.com/sindresorhus/define-lazy-prop#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/define-lazy-prop@3.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZGVmYXVsdC1icm93c2VyLWlkQDUuMC4x",
+      "name": "default-browser-id",
+      "versionInfo": "5.0.1",
+      "downloadLocation": "https://github.com/sindresorhus/default-browser-id#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/default-browser-id@5.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZGVmYXVsdC1icm93c2VyQDUuNS4w",
+      "name": "default-browser",
+      "versionInfo": "5.5.0",
+      "downloadLocation": "https://github.com/sindresorhus/default-browser#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/default-browser@5.5.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZGVwZEAyLjAuMA",
+      "name": "depd",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "https://github.com/dougwilson/nodejs-depd#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/depd@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZHVuZGVyLXByb3RvQDEuMC4x",
+      "name": "dunder-proto",
+      "versionInfo": "1.0.1",
+      "downloadLocation": "https://github.com/es-shims/dunder-proto#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/dunder-proto@1.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Zm9yd2FyZGVkQDAuMi4w",
+      "name": "forwarded",
+      "versionInfo": "0.2.0",
+      "downloadLocation": "https://github.com/jshttp/forwarded#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/forwarded@0.2.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZmFzdC11cmlAMy4xLjQ",
+      "name": "fast-uri",
+      "versionInfo": "3.1.4",
+      "downloadLocation": "https://github.com/fastify/fast-uri",
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/fast-uri@3.1.4"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZmFzdC1kZWVwLWVxdWFsQDMuMS4z",
+      "name": "fast-deep-equal",
+      "versionInfo": "3.1.3",
+      "downloadLocation": "https://github.com/epoberezkin/fast-deep-equal#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/fast-deep-equal@3.1.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZmFzdC1nbG9iQDMuMy4z",
+      "name": "fast-glob",
+      "versionInfo": "3.3.3",
+      "downloadLocation": "https://github.com/mrmlnc/fast-glob#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/fast-glob@3.3.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZmFzdHFAMS4yMC4x",
+      "name": "fastq",
+      "versionInfo": "1.20.1",
+      "downloadLocation": "https://github.com/mcollina/fastq#readme",
+      "licenseConcluded": "ISC",
+      "licenseDeclared": "ISC",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/fastq@1.20.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZmlsbC1yYW5nZUA3LjEuMQ",
+      "name": "fill-range",
+      "versionInfo": "7.1.1",
+      "downloadLocation": "https://github.com/jonschlinkert/fill-range",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/fill-range@7.1.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZmluYWxoYW5kbGVyQDIuMS4x",
+      "name": "finalhandler",
+      "versionInfo": "2.1.1",
+      "downloadLocation": "https://github.com/pillarjs/finalhandler#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/finalhandler@2.1.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZnJlc2hAMi4wLjA",
+      "name": "fresh",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "https://github.com/jshttp/fresh#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/fresh@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZnVuY3Rpb24tYmluZEAxLjEuMg",
+      "name": "function-bind",
+      "versionInfo": "1.1.2",
+      "downloadLocation": "https://github.com/Raynos/function-bind",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/function-bind@1.1.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZW1vamktcmVnZXhAMTAuNi4w",
+      "name": "emoji-regex",
+      "versionInfo": "10.6.0",
+      "downloadLocation": "https://mths.be/emoji-regex",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/emoji-regex@10.6.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZW5jb2RldXJsQDIuMC4w",
+      "name": "encodeurl",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "https://github.com/pillarjs/encodeurl#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/encodeurl@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZWUtZmlyc3RAMS4xLjE",
+      "name": "ee-first",
+      "versionInfo": "1.1.1",
+      "downloadLocation": "https://github.com/jonathanong/ee-first#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/ee-first@1.1.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXhwcmVzc0A1LjIuMQ",
+      "name": "express",
+      "versionInfo": "5.2.1",
+      "downloadLocation": "https://expressjs.com/",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/express@5.2.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXhwcmVzcy1yYXRlLWxpbWl0QDguNi4w",
+      "name": "express-rate-limit",
+      "versionInfo": "8.6.0",
+      "downloadLocation": "https://github.com/express-rate-limit/express-rate-limit",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/express-rate-limit@8.6.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXMtb2JqZWN0LWF0b21zQDEuMS4y",
+      "name": "es-object-atoms",
+      "versionInfo": "1.1.2",
+      "downloadLocation": "https://github.com/ljharb/es-object-atoms#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/es-object-atoms@1.1.2"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXMtZGVmaW5lLXByb3BlcnR5QDEuMC4x",
+      "name": "es-define-property",
+      "versionInfo": "1.0.1",
+      "downloadLocation": "https://github.com/ljharb/es-define-property#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/es-define-property@1.0.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXMtZXJyb3JzQDEuMy4w",
+      "name": "es-errors",
+      "versionInfo": "1.3.0",
+      "downloadLocation": "https://github.com/ljharb/es-errors#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/es-errors@1.3.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXNidWlsZEAwLjI4LjE",
+      "name": "esbuild",
+      "versionInfo": "0.28.1",
+      "downloadLocation": "https://github.com/evanw/esbuild#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/esbuild@0.28.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXNjYXBlLWh0bWxAMS4wLjM",
+      "name": "escape-html",
+      "versionInfo": "1.0.3",
+      "downloadLocation": "https://github.com/component/escape-html#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/escape-html@1.0.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXRhZ0AxLjguMQ",
+      "name": "etag",
+      "versionInfo": "1.8.1",
+      "downloadLocation": "https://github.com/jshttp/etag#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/etag@1.8.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXZlbnRzb3VyY2UtcGFyc2VyQDMuMS4w",
+      "name": "eventsource-parser",
+      "versionInfo": "3.1.0",
+      "downloadLocation": "https://github.com/rexxars/eventsource-parser#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/eventsource-parser@3.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ZXZlbnRzb3VyY2VAMy4wLjc",
+      "name": "eventsource",
+      "versionInfo": "3.0.7",
+      "downloadLocation": "https://github.com/EventSource/eventsource#readme",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "filesAnalyzed": false,
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/eventsource@3.0.7"
+        }
+      ]
+    }
+  ]
+}
