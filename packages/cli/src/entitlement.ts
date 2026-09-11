@@ -146,8 +146,9 @@ function parseCapabilitiesResponse(value: unknown): CapabilitiesResponse | null 
   if (!["free", "pro", "team", "studio", "enterprise", "compliance", "founder"].includes(plan) || !Array.isArray(raw.capabilities) || raw.capabilities.length > 4096 || raw.capabilities.some((item) => typeof item !== "string" || item.length === 0 || item.length > 256)) return null;
   if (typeof raw.cache_ttl_seconds !== "number" || !Number.isFinite(raw.cache_ttl_seconds) || raw.cache_ttl_seconds < 0 || raw.cache_ttl_seconds > 90 * 24 * 60 * 60) return null;
   if (typeof raw.simulated !== "boolean" || typeof raw.active !== "boolean") return null;
-  if (raw.real_plan !== undefined && (typeof raw.real_plan !== "string" || raw.real_plan.length > 64)) return null;
-  return { plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(raw.real_plan === undefined ? {} : { real_plan: raw.real_plan }) };
+  const realPlan = typeof raw.real_plan === "string" ? raw.real_plan.toLowerCase() : raw.real_plan;
+  if (realPlan !== undefined && (typeof realPlan !== "string" || realPlan.length > 64 || !["free", "pro", "team", "studio", "enterprise", "compliance", "founder"].includes(realPlan))) return null;
+  return { plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(realPlan === undefined ? {} : { real_plan: realPlan }) };
 }
 
 export interface LoadCapabilitiesOptions {
