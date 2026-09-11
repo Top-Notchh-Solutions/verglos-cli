@@ -59,7 +59,7 @@ const APPROVAL_RECEIPT_PROPERTY = {
  *   - Speaks JSON-RPC over stdio
  *   - Startup banner goes to stderr; stdout is reserved for MCP transport
  *   - Zero extra install (bundled in the CLI)
- *   - Free-tier only: no license check, no network on the hot path
+ *   - Host-supplied entitlement is optional; no network lookup occurs on the hot path
  */
 
 // ─── Tool schemas ─────────────────────────────────────────────────────────
