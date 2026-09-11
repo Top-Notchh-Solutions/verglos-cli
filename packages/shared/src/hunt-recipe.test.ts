@@ -10,4 +10,6 @@ test("Hunt recipes are declarative, bounded, and deny arbitrary network by defau
   assert.throws(() => parseHuntRecipe({ ...recipe, isolation: "none", network: { mode: "allowlist", destinations: ["https://example.com"], reason: "explicit fixture" } }));
   assert.throws(() => parseHuntRecipe({ ...recipe, isolation: "container", network: { mode: "allowlist", destinations: ["http://example.com"], reason: "explicit fixture" } }));
   assert.throws(() => parseHuntRecipe({ ...recipe, isolation: "container", network: { mode: "allowlist", destinations: ["https://agent:secret@example.com"], reason: "explicit fixture" } }));
+  assert.throws(() => parseHuntRecipe({ ...recipe, command: ["node\u0000probe.js"] }));
+  assert.throws(() => parseHuntRecipe({ ...recipe, network: { ...recipe.network, reason: "reason\u001b" } }));
 });
