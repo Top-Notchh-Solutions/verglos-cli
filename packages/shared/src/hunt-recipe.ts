@@ -19,7 +19,9 @@ export const HuntRecipeSchema = z.object({
   redaction: z.enum(["required", "best-effort"]),
   signature: z.object({ status: z.enum(["verified", "unverified", "invalid"]), signer: z.string().min(1).max(512).optional() }).strict(),
 }).strict().superRefine((value, ctx) => {
+  if (value.imageDigest.algorithm !== "sha256") ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["imageDigest", "algorithm"], message: "Hunt image digests must use sha256" });
   if (value.network.mode === "denied" && value.network.destinations.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network", "destinations"], message: "denied network cannot list destinations" });
+  if (value.network.mode === "allowlist" && value.isolation === "none") ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["isolation"], message: "allowlisted network requires an isolated execution adapter" });
   if (value.signature.status === "verified" && !value.signature.signer) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["signature", "signer"], message: "verified recipe requires signer" });
 });
 export type HuntRecipe = z.infer<typeof HuntRecipeSchema>;
