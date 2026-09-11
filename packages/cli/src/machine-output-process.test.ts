@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -279,6 +279,18 @@ test("hook outside Git reports a bounded skipped result", async () => {
     assert.equal(result.exitCode, 0);
     assert.equal(result.stderr, "");
     assert.deepEqual(JSON.parse(result.stdout), { status: "skipped", installed: false, reason: "not_a_git_repository" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("hook inside Git reports an installed bounded result", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-hook-git-"));
+  try {
+    await mkdir(join(root, ".git", "hooks"), { recursive: true });
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "hook", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "ok", installed: true });
+    await access(join(root, ".git", "hooks", "pre-commit"));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
