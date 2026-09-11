@@ -99,3 +99,17 @@ test("record create JSON success is process-safe", async () => {
     assert.equal(parsed.manifestPath.endsWith("/manifest.json"), true);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("record create JSON failures are process-safe", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-create-json-error-"));
+  const logs: string[] = [];
+  const original = console.log;
+  console.log = (line?: unknown) => logs.push(String(line));
+  try {
+    assert.equal(await executeRecordCreate(root, join(root, "missing.json"), join(root, "output"), true, true), 78);
+    assert.deepEqual(JSON.parse(logs[0]!), { status: "error", code: "RECORD_CREATE_INPUT", message: "record creation failed" });
+  } finally {
+    console.log = original;
+    await rm(root, { recursive: true, force: true });
+  }
+});

@@ -92,7 +92,8 @@ export async function executeRecordCreate(
     else if (!quiet) console.log(`Created record store ${destination} (${result.members} members).`);
     return 0;
   } catch (error) {
-    if (!quiet) console.error(error instanceof Error ? error.message : "record create failed");
+    if (json) console.log(JSON.stringify({ status: "error", code: "RECORD_CREATE_INPUT", message: "record creation failed" }));
+    else if (!quiet) console.error(error instanceof Error ? error.message : "record create failed");
     return 78;
   }
 }
