@@ -168,9 +168,24 @@ record.command("sign <manifestPath> <signaturePath>")
   .requiredOption("--signer <id>", "Signer identity label")
   .requiredOption("--issuer <issuer>", "Signer issuer label")
   .option("--approve", "Approve the signing identity operation")
+  .option("--approval-receipt <path>", "Path to an exact, time-bounded signing approval receipt")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
-  .action(async (manifestPath: string, signaturePath: string, opts: { key: string; signer: string; issuer: string; approve?: boolean; json?: boolean; quiet?: boolean }) => {
+  .action(async (manifestPath: string, signaturePath: string, opts: { key: string; signer: string; issuer: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => {
+    if (opts.approve && !opts.approvalReceipt) {
+      if (!opts.quiet) console.error("record signing requires an approval receipt (--approval-receipt) before reading the key");
+      process.exit(78);
+    }
+    if (opts.approve && opts.approvalReceipt) {
+      try {
+        const receipt = await readApprovalReceiptFile(opts.approvalReceipt);
+        const authorization = authorizeAgentAction("sign", receipt, new Date().toISOString());
+        if (!authorization.allowed || receipt.target !== `manifest:${manifestPath}` || !receipt.files.includes(manifestPath) || receipt.network.length > 0) throw new Error(authorization.allowed ? "approval receipt scope does not match the signing manifest" : authorization.reason);
+      } catch (error) {
+        if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid");
+        process.exit(78);
+      }
+    }
     process.exit(await executeRecordSign(manifestPath, signaturePath, opts.key, opts.signer, opts.issuer, opts.approve, opts.json, opts.quiet));
   });
 record.command("project <storeRoot> <manifestPath>")
