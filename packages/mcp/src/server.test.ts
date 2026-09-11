@@ -11,6 +11,17 @@ function responseText(result: Awaited<ReturnType<typeof dispatchTool>>): Record<
 test("MCP tools/list publishes shared capability metadata for every tool", () => {
   const tools = listAdvertisedTools();
   assert.equal(tools.length, 9);
+  assert.equal(new Set(tools.map((tool) => tool.name)).size, tools.length);
+  for (const tool of tools) {
+    const capability = tool._meta?.["verglos/capability"] as unknown as Record<string, unknown> | undefined;
+    assert.ok(capability, `${tool.name} must publish capability metadata`);
+    assert.equal(typeof capability.action, "string");
+    assert.equal(typeof capability.plan, "string");
+    assert.equal(typeof capability.maturity, "string");
+    assert.equal(typeof capability.approvalRequired, "boolean");
+    assert.ok(Array.isArray(capability.inputFields));
+    assert.ok(Array.isArray(capability.outputFields));
+  }
   const scan = tools.find((tool) => tool.name === "verglos_scan");
   assert.deepEqual(scan?._meta, { "verglos/capability": { tool: "verglos_scan", action: "inspect", plan: "free", maturity: "shipped", approvalRequired: false, sideEffect: "none", inputFields: ["projectRoot", "limit", "noProvenance"], outputFields: ["projectRoot", "scannedAt", "durationMs", "score", "provenance", "findingCount", "findings", "truncated", "headline"] } });
   const hunt = tools.find((tool) => tool.name === "verglos_hunt_report");
