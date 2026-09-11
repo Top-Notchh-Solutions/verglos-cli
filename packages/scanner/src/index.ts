@@ -95,6 +95,8 @@ export async function loadConfig(projectRoot: string, explicitConfigPath?: strin
     const { createRequire } = await import("node:module");
     const require = createRequire(import.meta.url);
     const configPath = `${projectRoot}/.verglos.config.js`;
+    const entry = await lstat(configPath);
+    if (!entry.isFile() || entry.size > MAX_CONFIG_BYTES) throw new Error("implicit config is not a bounded regular file");
     const mod = require(configPath);
     base = mergeConfig(mod.default ?? mod);
   } catch {

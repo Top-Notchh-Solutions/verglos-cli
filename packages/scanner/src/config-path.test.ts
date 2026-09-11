@@ -28,3 +28,14 @@ test("scanner rejects symlink and malformed explicit configs", async () => {
     await assert.rejects(() => loadConfig(root, target), /valid JSON/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("scanner ignores symlinked implicit JavaScript config", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-config-implicit-link-"));
+  try {
+    const target = join(root, "outside.js");
+    await writeFile(target, "module.exports = { failThreshold: 1 };", "utf8");
+    await symlink(target, join(root, ".verglos.config.js"));
+    const config = await loadConfig(root);
+    assert.equal(config.failThreshold, 60);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
