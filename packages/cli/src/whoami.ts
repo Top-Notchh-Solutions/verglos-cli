@@ -3,6 +3,7 @@ import { hostname, userInfo } from "node:os";
 import chalk from "chalk";
 import { loadCredentials, saveCredentials } from "./credentials.js";
 import { fetchLicenseStatus } from "./license-api.js";
+import { normalizeTier } from "./tier-defaults.js";
 
 /**
  * `verglos whoami` — one-command truth telling.
@@ -66,9 +67,8 @@ export async function executeWhoami(): Promise<number> {
     console.log(
       `  ${chalk.bold("You:")}      ${creds.email ?? chalk.gray("(unknown — server unreachable)")}`,
     );
-    console.log(
-      `  ${chalk.bold("Plan:")}     ${chalk.gray((creds.plan ?? "unknown").toUpperCase())} ${chalk.gray("(cached)")}`,
-    );
+    const cachedPlan = normalizeTier(creds.plan);
+    console.log(`  ${chalk.bold("Plan:")}     ${chalk.gray(cachedPlan.toUpperCase())} ${chalk.gray("(cached)")}`);
     console.log(`  ${chalk.bold("License:")}  ${maskKey(creds.licenseKey)}`);
     if (creds.planExpiresAt) {
       console.log(
@@ -100,18 +100,19 @@ export async function executeWhoami(): Promise<number> {
   }
 
   // Live data — refresh the cache too.
+  const canonicalPlan = normalizeTier(status.plan);
   await saveCredentials({
     ...creds,
     email: status.email ?? creds.email,
-    plan: status.plan,
+    plan: canonicalPlan,
     planExpiresAt: status.expiresAt ?? undefined,
   });
 
-  const planTag = status.plan.toUpperCase();
+  const planTag = canonicalPlan.toUpperCase();
   const planStyle =
-    status.plan === "founder"
+    canonicalPlan === "founder"
       ? chalk.yellow(planTag)
-      : status.plan === "pro" || status.plan === "studio"
+      : canonicalPlan === "pro" || canonicalPlan === "team" || canonicalPlan === "studio" || canonicalPlan === "enterprise"
         ? chalk.green(planTag)
         : chalk.gray(planTag);
 
@@ -128,7 +129,7 @@ export async function executeWhoami(): Promise<number> {
     console.log(
       `  ${chalk.bold("Renewal:")}  ${formatDate(status.expiresAt)}${dayLabel}`,
     );
-  } else if (status.plan === "founder") {
+  } else if (canonicalPlan === "founder") {
     console.log(`  ${chalk.bold("Renewal:")}  ${chalk.gray("never (founder)")}`);
   }
   console.log(
