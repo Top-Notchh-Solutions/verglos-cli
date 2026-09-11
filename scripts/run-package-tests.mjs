@@ -1,9 +1,6 @@
-import { execFile } from "node:child_process";
 import { readdir } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { promisify } from "node:util";
-
-const run = promisify(execFile);
+import { spawn } from "node:child_process";
 const directory = resolve(process.cwd(), process.argv[2] ?? "src");
 
 async function collect(path) {
@@ -20,4 +17,10 @@ async function collect(path) {
 const files = await collect(directory);
 if (files.length === 0) throw new Error(`no test files found under ${directory}`);
 const usesTypeScript = files.some((file) => file.endsWith(".ts"));
-await run(process.execPath, [...(usesTypeScript ? ["--import", "tsx"] : []), "--test", ...files], { cwd: process.cwd(), stdio: "inherit" });
+const child = spawn(process.execPath, [...(usesTypeScript ? ["--import", "tsx"] : []), "--test", ...files], { cwd: process.cwd(), stdio: "inherit", windowsHide: false });
+const result = await new Promise((resolveResult, reject) => {
+  child.once("error", reject);
+  child.once("close", (code, signal) => resolveResult({ code, signal }));
+});
+if (result.signal) throw new Error(`test runner terminated by ${result.signal}`);
+if (result.code !== 0) process.exit(result.code ?? 1);
