@@ -13,3 +13,10 @@ test("Hunt recipes are declarative, bounded, and deny arbitrary network by defau
   assert.throws(() => parseHuntRecipe({ ...recipe, command: ["node\u0000probe.js"] }));
   assert.throws(() => parseHuntRecipe({ ...recipe, network: { ...recipe.network, reason: "reason\u001b" } }));
 });
+
+test("Hunt allowlist destinations are origins only", () => {
+  const base = { ...parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-origin", ruleId: "d1-1", targetSubjectId: "urn:verglos:subject:artifact:sha256:" + "a".repeat(64), imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["node"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, memoryMb: 256, outputBytes: 10000 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "local reproduction" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } }) } as const;
+  for (const destination of ["https://example.com/path", "https://example.com?query=1", "https://example.com#fragment"]) {
+    assert.throws(() => parseHuntRecipe({ ...base, network: { mode: "allowlist", destinations: [destination], reason: "fixture" } }));
+  }
+});
