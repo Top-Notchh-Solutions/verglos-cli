@@ -68,7 +68,9 @@ async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: n
       if (index >= items.length) return;
       const detector = items[index]!;
       onProgress?.({ phase: "detector", status: "started", detector: detector.id });
-      results[index] = [...await run(detector)];
+      const detectorResults = await run(detector);
+      if (signal?.aborted) throw new Error("scan cancelled");
+      results[index] = [...detectorResults];
       onProgress?.({ phase: "detector", status: "completed", detector: detector.id });
     }
   };
