@@ -3,16 +3,40 @@ import type { HuntOptions, HuntResult } from "./types.js";
 
 export * from "./types.js";
 
-export class NotImplementedError extends Error {
-  constructor(message = "verglos hunt ships in v2.0.0-beta: https://verglos.com/hunt") {
-    super(message);
-    this.name = "NotImplementedError";
-  }
-}
-
 export async function runHunt(
-  _report: ScanResult,
-  _opts: HuntOptions = {},
+  report: ScanResult,
+  opts: HuntOptions = {},
 ): Promise<HuntResult> {
-  throw new NotImplementedError();
+  const started = Date.now();
+  const startedAt = new Date(started).toISOString();
+  const projectRoot = opts.projectRoot ?? report.projectRoot;
+  if (typeof projectRoot !== "string" || projectRoot.length === 0 || projectRoot.length > 4096) {
+    throw new Error("Hunt project root must be a non-empty bounded path");
+  }
+  const maxDurationMs = opts.maxDurationMs ?? 30_000;
+  if (!Number.isInteger(maxDurationMs) || maxDurationMs <= 0 || maxDurationMs > 600_000) {
+    throw new Error("Hunt max duration must be between 1 and 600000 ms");
+  }
+  const severities = opts.severity ?? ["critical", "high"];
+  const allowed = new Set(severities);
+  const findings = report.findings.filter((finding) =>
+    allowed.has(finding.severity) && (!opts.findingId || finding.id === opts.findingId),
+  );
+  const reason = opts.dryRun
+    ? "dry run: no probe or target code executed"
+    : "no approved Hunt sandbox adapter is configured; execution was not attempted";
+  const outcomes = findings.map((finding) => ({
+    findingId: finding.id,
+    verdict: "not_attemptable" as const,
+    finding,
+    reason,
+    durationMs: 0,
+  }));
+  return {
+    report,
+    outcomes,
+    startedAt,
+    completedAt: new Date().toISOString(),
+    sandbox: opts.sandbox ?? "none",
+  };
 }
