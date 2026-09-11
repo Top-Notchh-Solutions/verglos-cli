@@ -1,4 +1,5 @@
 import type { ScanResult } from "@verglos/shared";
+import { bindHuntExecution } from "@verglos/shared";
 import type { HuntOptions, HuntResult } from "./types.js";
 
 export * from "./types.js";
@@ -31,6 +32,8 @@ export async function runHunt(
     throw new Error("Hunt sandbox selection does not match the configured adapter");
   }
   if (opts.adapter) {
+    if (!opts.execution) throw new Error("Hunt adapter execution requires a recipe, trust policy, approval, and observation binding");
+    const binding = bindHuntExecution(opts.execution);
     const outcomes: HuntResult["outcomes"] = [];
     let prepareAttempted = false;
     try {
@@ -45,7 +48,7 @@ export async function runHunt(
         }
         const before = Date.now();
         try {
-          const outcome = await opts.adapter.execute({ finding, projectRoot, timeoutMs: remaining });
+          const outcome = await opts.adapter.execute({ finding, projectRoot, timeoutMs: remaining, binding });
           outcomes.push({ ...outcome, finding: outcome.finding ?? finding, durationMs: Math.max(0, Date.now() - before) });
         } catch (error) {
           outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: `Hunt adapter failed: ${error instanceof Error ? error.message : "unknown error"}`, durationMs: Math.max(0, Date.now() - before) });

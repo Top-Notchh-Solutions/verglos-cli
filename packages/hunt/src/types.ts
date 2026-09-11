@@ -1,4 +1,4 @@
-import type { Finding, ScanResult } from "@verglos/shared";
+import type { ApprovalReceipt, Finding, HuntExecutionBinding, HuntRecipe, HuntRecipeTrustPolicy, ScanResult } from "@verglos/shared";
 
 export type HuntVerdict = "true" | "false" | "not_attemptable";
 
@@ -26,8 +26,19 @@ export interface SandboxAdapter {
     finding: Finding;
     projectRoot: string;
     timeoutMs: number;
+    binding: HuntExecutionBinding;
   }): Promise<HuntFindingOutcome>;
   cleanup(): Promise<void>;
+}
+
+export interface HuntExecutionContext {
+  readonly recipe: HuntRecipe;
+  readonly trust: HuntRecipeTrustPolicy;
+  readonly approval: ApprovalReceipt;
+  readonly ruleId: string;
+  readonly subjectId: string;
+  readonly observationId: string;
+  readonly at: string;
 }
 
 export interface HuntOptions {
@@ -37,6 +48,7 @@ export interface HuntOptions {
   sandbox?: SandboxAdapter["id"];
   /** A locally selected, policy-approved adapter. Never populated from model text. */
   adapter?: SandboxAdapter;
+  execution?: HuntExecutionContext;
   dryRun?: boolean;
   maxDurationMs?: number;
 }

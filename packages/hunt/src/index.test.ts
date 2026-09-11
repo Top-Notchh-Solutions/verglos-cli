@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { runHunt } from "./index.js";
-import type { ScanResult } from "@verglos/shared";
+import { createApprovalReceipt, parseHuntRecipe, type ScanResult } from "@verglos/shared";
 
 const report = {
   projectRoot: "/tmp/project",
@@ -15,6 +15,14 @@ const report = {
   score: { value: 10, riskLevel: "critical", counts: { critical: 1, high: 0, medium: 1, low: 0, info: 0 }, testFileFindings: { total: 0, included: false, note: "none" } },
   unlocked: true,
 } as unknown as ScanResult;
+
+const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
+const execution = {
+  recipe: parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-runner", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, memoryMb: 256, outputBytes: 10000 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } }),
+  trust: { signers: ["verglos-release"] },
+  approval: createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: subjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" }),
+  ruleId: "d1-1", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", at: "2026-01-01T00:02:00Z",
+};
 
 test("Hunt dry run filters eligible severities and never executes", async () => {
   const result = await runHunt(report, { dryRun: true });
@@ -41,15 +49,16 @@ test("Hunt executes only through an explicitly injected adapter and always clean
   const adapter = {
     id: "test-probe",
     async prepare() { calls.push("prepare"); },
-    async execute(input: { finding: typeof report.findings[number]; projectRoot: string; timeoutMs: number }) {
+    async execute(input: { finding: typeof report.findings[number]; projectRoot: string; timeoutMs: number; binding: unknown }) {
       calls.push(`execute:${input.finding.id}`);
       assert.equal(input.projectRoot, report.projectRoot);
       assert.ok(input.timeoutMs > 0);
+      assert.ok(input.binding);
       return { findingId: input.finding.id, verdict: "false" as const, reason: "fixture probe completed", durationMs: 1 };
     },
     async cleanup() { calls.push("cleanup"); },
   };
-  const result = await runHunt(report, { adapter, sandbox: "test-probe" });
+  const result = await runHunt(report, { adapter, sandbox: "test-probe", execution });
   assert.deepEqual(calls, ["prepare", "execute:critical-1", "cleanup"]);
   assert.equal(result.outcomes[0]?.verdict, "false");
   assert.equal(result.sandbox, "test-probe");
@@ -69,6 +78,11 @@ test("Hunt cleans up when adapter preparation fails", async () => {
     async execute() { throw new Error("must not execute"); },
     async cleanup() { cleaned = true; },
   };
-  await assert.rejects(() => runHunt(report, { adapter }), /fixture preparation failure/);
+  await assert.rejects(() => runHunt(report, { adapter, execution }), /fixture preparation failure/);
   assert.equal(cleaned, true);
+});
+
+test("Hunt refuses adapter execution without an exact trust and approval binding", async () => {
+  const adapter = { id: "test-probe", async prepare() {}, async execute() { throw new Error("must not execute"); }, async cleanup() {} };
+  await assert.rejects(() => runHunt(report, { adapter }), /execution requires/);
 });
