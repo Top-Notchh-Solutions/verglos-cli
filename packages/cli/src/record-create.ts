@@ -1,9 +1,10 @@
+import { createHash } from "node:crypto";
 import { lstat, mkdir, readFile, writeFile } from "node:fs/promises";
 import { isAbsolute, join, resolve } from "node:path";
 import {
   canonicalizeJson,
   parseReleaseRecordManifestJson,
-  putRecordMember,
+  putRecordMembers,
   type ReleaseRecordManifestDocument,
 } from "@verglos/shared";
 
@@ -39,19 +40,20 @@ export async function executeRecordCreate(
       if (!(error instanceof Error) || (error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
     }
     await mkdir(destination, { recursive: true, mode: 0o700 });
-    const stored: string[] = [];
+    const inputs: { readonly path: string; readonly bytes: Uint8Array }[] = [];
     for (const member of manifest.members) {
       if (member.redaction === "omitted") continue;
       const memberPath = isAbsolute(member.path) ? member.path : join(sourceRoot, member.path);
       const bytes = await readRegular(memberPath, MAX_MEMBER_BYTES, `record member ${member.path}`);
-      const result = await putRecordMember(destination, member.path, bytes);
       const expected = `${member.digest.algorithm}:${member.digest.value}`;
-      if (result.digest !== expected || result.size !== member.size) throw new Error(`record member ${member.path} does not match manifest digest or size`);
-      stored.push(member.path);
+      const actual = `sha256:${createHash("sha256").update(bytes).digest("hex")}`;
+      if (actual !== expected || bytes.byteLength !== member.size) throw new Error(`record member ${member.path} does not match manifest digest or size`);
+      inputs.push({ path: member.path, bytes });
     }
+    const stored = await putRecordMembers(destination, inputs);
     const writtenManifest = join(destination, "manifest.json");
     await writeFile(writtenManifest, `${canonicalizeJson(manifest)}\n`, { flag: "wx", mode: 0o600 });
-    const result = { outputRoot: destination, manifestPath: writtenManifest, members: stored.length, paths: stored.sort() };
+    const result = { outputRoot: destination, manifestPath: writtenManifest, members: stored.length, paths: stored.map((member) => member.path).sort() };
     if (json) console.log(JSON.stringify(result));
     else if (!quiet) console.log(`Created record store ${destination} (${result.members} members).`);
     return 0;
