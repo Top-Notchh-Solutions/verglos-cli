@@ -229,7 +229,14 @@ const TOOLS = [
 export function jsonResponse(payload: unknown): {
   content: { type: "text"; text: string }[];
 } {
-  const text = JSON.stringify(payload, null, 2);
+  let text: string;
+  try {
+    const encoded = JSON.stringify(payload, null, 2);
+    if (typeof encoded !== "string") throw new Error("response is not serializable");
+    text = encoded;
+  } catch {
+    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "output", code: "MCP_OUTPUT_INVALID", message: "tool response is not serializable JSON" }) }] };
+  }
   if (Buffer.byteLength(text, "utf8") > MAX_TOOL_RESPONSE_BYTES) {
     return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "output", code: "MCP_OUTPUT_LIMIT", message: "tool response exceeds the 512 KiB limit" }) }] };
   }

@@ -82,6 +82,12 @@ test("MCP dispatch fails closed for non-serializable arguments", async () => {
   assert.deepEqual(responseText(await dispatchTool("verglos_scan", undefinedJson)), { ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be serializable JSON" });
 });
 
+test("MCP response encoder fails closed for non-serializable payloads", () => {
+  const cyclic: Record<string, unknown> = {};
+  cyclic.self = cyclic;
+  assert.deepEqual(responseText(jsonResponse(cyclic)), { ok: false, error: "output", code: "MCP_OUTPUT_INVALID", message: "tool response is not serializable JSON" });
+});
+
 test("MCP SDK interoperability preserves discovery and entitlement errors", async () => {
   const server = createVerglosMcpServer({ plan: "free" });
   const client = new Client({ name: "verglos-test-client", version: "1.0.0" }, { capabilities: {} });
