@@ -3,7 +3,9 @@ import { mkdtemp, mkdir, readFile, readdir, rm, symlink, writeFile } from "node:
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 import { executeRecordCreate } from "./record-create.js";
+import { runCliFixture } from "./cli-fixture.js";
 import { assembleReleaseRecord, describeRecordMember } from "@verglos/shared";
 
 test("record create materializes verified members and a canonical manifest", async () => {
@@ -78,5 +80,22 @@ test("record create complete mode enforces the graph gate", async () => {
     const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(manifest));
     assert.equal(await executeRecordCreate(source, manifestPath, output, true, true, true), 78);
     await assert.rejects(() => readdir(output));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("record create JSON success is process-safe", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-create-process-"));
+  try {
+    const source = join(root, "source"); const output = join(root, "output"); await mkdir(source);
+    const bytes = new TextEncoder().encode("decision"); await writeFile(join(source, "decision.json"), bytes);
+    const member = { ...describeRecordMember({ path: "decision.json", kind: "release-decision", mediaType: "application/json", bytes, required: true }), schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } };
+    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos", version: "2.0.0" }, members: [member], redaction: { status: "not-required" }, limitations: ["fixture"] });
+    const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(manifest));
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "create", source, manifestPath, output, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0, `${result.stdout}\n${result.stderr}`);
+    assert.equal(result.stderr, "");
+    const parsed = JSON.parse(result.stdout) as { members: number; manifestPath: string };
+    assert.equal(parsed.members, 1);
+    assert.equal(parsed.manifestPath.endsWith("/manifest.json"), true);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
