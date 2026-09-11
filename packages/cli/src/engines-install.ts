@@ -1,5 +1,5 @@
 import { lstat, readFile } from "node:fs/promises";
-import { authorizeAgentAction, installEngineArtifact, parseEngineManifest, verifyEngineManifestSignature, type ApprovalReceipt, type EngineManifest } from "@verglos/shared";
+import { authorizeAgentAction, installEngineArtifact, parseEngineManifest, putApprovalReceipt, verifyEngineManifestSignature, type ApprovalReceipt, type EngineManifest } from "@verglos/shared";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
@@ -28,7 +28,7 @@ async function readCompatibilityManifest(path: string, engineId: string, version
   return { manifest, signature: "verified" };
 }
 
-export async function executeEngineInstall(engineId: string, version: string, artifactPath: string, digest: string, options: { action?: "install" | "update" | "rollback"; approve?: boolean; approvalReceipt?: ApprovalReceipt; now?: string; json?: boolean; quiet?: boolean; manifestPath?: string; manifestPublicKeyPath?: string } = {}): Promise<number> {
+export async function executeEngineInstall(engineId: string, version: string, artifactPath: string, digest: string, options: { action?: "install" | "update" | "rollback"; approve?: boolean; approvalReceipt?: ApprovalReceipt; approvalStoreRoot?: string; now?: string; json?: boolean; quiet?: boolean; manifestPath?: string; manifestPublicKeyPath?: string } = {}): Promise<number> {
   try {
     if (typeof engineId !== "string" || !engineId || typeof version !== "string" || !version || typeof artifactPath !== "string" || !artifactPath || typeof digest !== "string") {
       throw new Error("Engine install requires engine id, version, artifact path, and digest.");
@@ -42,6 +42,7 @@ export async function executeEngineInstall(engineId: string, version: string, ar
     if (!options.approvalReceipt.files.includes(artifactPath)) throw new Error("approval receipt does not cover the engine artifact");
     if (options.manifestPath && !options.approvalReceipt.files.includes(options.manifestPath)) throw new Error("approval receipt does not cover the compatibility manifest");
     if (options.approvalReceipt.network.length > 0) throw new Error("engine installation approval must not declare network scope");
+    if (options.approvalStoreRoot) await putApprovalReceipt(options.approvalStoreRoot, options.approvalReceipt);
     if (options.manifestPublicKeyPath && !options.manifestPath) throw new Error("Engine manifest public key requires --manifest.");
     const entry = await lstat(artifactPath);
     if (!entry.isFile()) throw new Error("Engine artifact must be a regular file.");

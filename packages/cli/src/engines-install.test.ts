@@ -4,7 +4,7 @@ import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { canonicalizeJson, createApprovalReceipt } from "@verglos/shared";
+import { canonicalizeJson, createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
 import { executeEngineInstall } from "./engines-install.js";
 
 function approvalFor(engineId: string, version: string, files: string[]) {
@@ -17,6 +17,20 @@ test("engine install rejects malformed arguments before reading artifacts", asyn
 
 test("engine install requires a receipt before reading the artifact", async () => {
   assert.equal(await executeEngineInstall("trivy", "1.0.0", "/does/not/exist", "sha256:" + "a".repeat(64), { approve: true, quiet: true }), 78);
+});
+
+test("engine install persists the approved receipt when an audit store is configured", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-install-audit-"));
+  const artifact = join(root, "engine");
+  await writeFile(artifact, "bytes");
+  const digest = `sha256:${createHash("sha256").update("bytes").digest("hex")}`;
+  const receipt = approvalFor("trivy", "1.0.0", [artifact]);
+  const previousCache = process.env.VERGLOS_ENGINE_CACHE;
+  process.env.VERGLOS_ENGINE_CACHE = join(root, "cache");
+  try {
+    assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, digest, { approve: true, approvalReceipt: receipt, approvalStoreRoot: join(root, "approvals"), now: "2026-01-01T00:02:00Z" }), 0);
+    assert.equal((await readApprovalReceipt(join(root, "approvals"), receipt.requestDigest)).requestId, receipt.requestId);
+  } finally { if (previousCache === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previousCache; await rm(root, { recursive: true, force: true }); }
 });
 
 test("engine install rejects an incorrect digest", async () => { const root = await mkdtemp(join(tmpdir(), "verglos-install-")); const artifact = join(root, "engine"); await writeFile(artifact, "bytes"); const previous = process.env.VERGLOS_ENGINE_CACHE; process.env.VERGLOS_ENGINE_CACHE = join(root, "cache"); try { assert.equal(await executeEngineInstall("trivy", "1.0.0", artifact, `sha256:${"a".repeat(64)}`), 78); } finally { if (previous === undefined) delete process.env.VERGLOS_ENGINE_CACHE; else process.env.VERGLOS_ENGINE_CACHE = previous; } void createHash; });
