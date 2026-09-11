@@ -68,3 +68,13 @@ test("record header failure is one bounded JSON response", async () => {
     assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "RECORD_HEADER_INPUT", message: "record header projection failed" });
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("MCP print-config quiet mode emits JSON without setup prose", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-mcp-config-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "mcp", "--print-config", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { mcpServers: { verglos: { command: "npx", args: ["-y", "verglos", "mcp"] } } });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
