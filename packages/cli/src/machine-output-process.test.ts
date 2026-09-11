@@ -191,3 +191,26 @@ test("Whoami JSON mode emits the offline Free contract", async () => {
     assert.deepEqual(JSON.parse(result.stdout), { status: "ok", signedIn: false, plan: "free" });
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("CLI version is deterministic and side-effect free", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-version-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--version"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    assert.match(result.stdout.trim(), /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
+    assert.deepEqual(result.files, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("CLI help is deterministic and side-effect free", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-help-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--help"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    assert.match(result.stdout, /Usage: verglos/);
+    assert.match(result.stdout, /Command groups:/);
+    assert.deepEqual(result.files, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
