@@ -491,20 +491,20 @@ program
     }
     if (opts.dryRun) return;
     if (!opts.approve) {
-      console.error("verglos fix requires explicit approval (--approve) before changing files.");
+      reportPreflightError(opts.json, opts.quiet, "FIX_APPROVAL_REQUIRED", "verglos fix requires explicit approval (--approve) before changing files.", "fix requires explicit approval (--approve)");
       process.exit(78);
     }
     if (!opts.approvalReceipt) {
-      console.error("verglos fix requires an approval receipt (--approval-receipt) before changing files.");
+      reportPreflightError(opts.json, opts.quiet, "FIX_RECEIPT_REQUIRED", "verglos fix requires an approval receipt (--approval-receipt) before changing files.", "fix requires an approval receipt (--approval-receipt)");
       process.exit(78);
     }
     let receipt: ApprovalReceipt;
     try { receipt = await readApprovalReceiptFile(opts.approvalReceipt); }
-    catch (error) { console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); }
+    catch (error) { reportPreflightError(opts.json, opts.quiet, "FIX_RECEIPT_INVALID", error instanceof Error ? error.message : "approval receipt is invalid", "approval receipt is invalid"); process.exit(78); }
     const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
     const authorization = authorizeHeaderFix(receipt!, plannedFiles, new Date().toISOString());
     if (!authorization.allowed) {
-      console.error(`verglos fix approval denied: ${authorization.reason}`);
+      reportPreflightError(opts.json, opts.quiet, "FIX_APPROVAL_DENIED", `verglos fix approval denied: ${authorization.reason}`, "fix approval denied");
       process.exit(78);
     }
 
