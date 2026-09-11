@@ -104,5 +104,10 @@ export interface ExplainOptions {
 
 export function executeExplain(options: ExplainOptions): number {
   if (options.list || !options.rule) return printList(options.json, options.quiet);
+  if (options.rule.length === 0 || options.rule.length > 256 || /[\u0000-\u001f\u007f]/u.test(options.rule)) {
+    if (options.json) console.log(JSON.stringify({ status: "error", code: "EXPLAIN_INPUT", message: "explain rule is invalid" }));
+    else if (!options.quiet) console.error("explain rule is invalid");
+    return 2;
+  }
   return printEntry(options.rule, options.json, options.quiet);
 }
