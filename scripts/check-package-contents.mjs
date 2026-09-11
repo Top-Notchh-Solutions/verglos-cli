@@ -1,4 +1,4 @@
-import { readFile, readdir, stat } from "node:fs/promises";
+import { lstat, readFile, readdir } from "node:fs/promises";
 import { join, relative } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname;
@@ -10,6 +10,7 @@ async function walk(path) {
   const files = [];
   for (const entry of entries) {
     const child = join(path, entry.name);
+    if (entry.isSymbolicLink()) throw new Error(`symlink packaged path ${relative(root, child).replaceAll("\\", "/")}`);
     if (entry.isDirectory()) files.push(...await walk(child));
     else if (entry.isFile()) files.push(child);
   }
@@ -29,14 +30,16 @@ for (const packageDir of packageDirs) {
   for (const included of files) {
     const includedPath = join(packageDir, included);
     try {
-      if ((await stat(includedPath)).isDirectory()) {
+      const entry = await lstat(includedPath);
+      if (entry.isSymbolicLink()) throw new Error(`symlink packaged path ${included}`);
+      if (entry.isDirectory()) {
         for (const file of await walk(includedPath)) {
           const packagePath = relative(packageDir, file).replaceAll("\\", "/");
           if (forbidden.test(packagePath)) failures.push(`${packageJson.name}: forbidden packaged path ${packagePath}`);
         }
       } else if (forbidden.test(included)) failures.push(`${packageJson.name}: forbidden packaged path ${included}`);
-    } catch {
-      failures.push(`${packageJson.name}: declared package path is missing: ${included}`);
+    } catch (error) {
+      failures.push(`${packageJson.name}: ${error instanceof Error ? error.message : `declared package path is missing: ${included}`}`);
     }
   }
 }
