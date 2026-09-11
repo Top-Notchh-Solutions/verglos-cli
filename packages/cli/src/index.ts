@@ -884,8 +884,9 @@ program
   .command("init")
   .description("Configure Verglos in the current project (interactive)")
   .option("-y, --yes", "Non-interactive: keep existing config, skip hook install")
-  .action(async (opts: { yes?: boolean }) => {
-    const code = await executeInit({ yes: opts.yes });
+  .option("--json", "Emit machine-readable JSON (requires --yes)")
+  .action(async (opts: { yes?: boolean; json?: boolean }) => {
+    const code = await executeInit({ yes: opts.yes, json: opts.json });
     if (code !== 0) process.exit(code);
   });
 

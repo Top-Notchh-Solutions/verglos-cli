@@ -85,12 +85,30 @@ async function confirm(
 export interface InitOptions {
   cwd?: string;
   yes?: boolean; // non-interactive: accept defaults, still no hook install
+  json?: boolean;
 }
 
 export async function executeInit(options: InitOptions = {}): Promise<number> {
   const projectRoot = options.cwd ?? process.cwd();
   const configPath = join(projectRoot, CONFIG_FILENAME);
 
+  // Machine output must never be interleaved with an interactive prompt.
+  // Require --yes so JSON mode is deterministic and never installs a hook.
+  if (options.json) {
+    if (!options.yes) {
+      console.log(JSON.stringify({ status: "error", code: "INIT_REQUIRES_YES", message: "init --json requires --yes to avoid interactive prompts" }));
+      return 2;
+    }
+    try {
+      const configExists = await fileExists(configPath);
+      if (!configExists) await writeFile(configPath, CONFIG_TEMPLATE, "utf8");
+      console.log(JSON.stringify({ status: "ok", configPath, configWritten: !configExists, hookInstalled: false }));
+      return 0;
+    } catch (error) {
+      console.log(JSON.stringify({ status: "error", message: error instanceof Error ? error.message : "init failed" }));
+      return 1;
+    }
+  }
   console.log(
     chalk.bold("verglos init") +
       chalk.gray(` · project: ${projectRoot}`),
