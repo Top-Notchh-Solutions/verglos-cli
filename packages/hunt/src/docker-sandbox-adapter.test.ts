@@ -3,7 +3,7 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { bindHuntExecution, createApprovalReceipt, parseHuntRecipe } from "@verglos/shared";
+import { bindHuntExecution, createApprovalReceipt, HuntExecutionBindingSchema, parseHuntRecipe } from "@verglos/shared";
 import { DockerSandboxAdapter } from "./docker-sandbox-adapter.js";
 
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
@@ -48,5 +48,26 @@ test("Docker sandbox adapter rejects a declared isolation mismatch", async () =>
     const adapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async () => ({ stdout: "", stderr: "" }) });
     const bound = binding();
     await assert.rejects(() => adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: { ...bound, isolation: "restricted-process" } }), /container isolation/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Docker sandbox adapter classifies a supported non-zero exit assertion as false", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-docker-adapter-"));
+  try {
+    const adapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async () => ({ stdout: "", stderr: "", exitCode: 7 }) });
+    const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: binding() });
+    assert.equal(result.verdict, "false");
+    assert.match(result.reason, /exit code 7/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Docker sandbox adapter leaves unsupported assertion syntax not-attemptable", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-docker-adapter-"));
+  try {
+    const adapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async () => ({ stdout: "fixture", stderr: "" }) });
+    const unsupported = HuntExecutionBindingSchema.parse({ ...binding(), assertions: ["stdout contains fixture"] });
+    const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: unsupported });
+    assert.equal(result.verdict, "not_attemptable");
+    assert.match(result.reason, /unsupported/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
