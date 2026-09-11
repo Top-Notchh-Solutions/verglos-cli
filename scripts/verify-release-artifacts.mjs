@@ -13,6 +13,7 @@ const expected = new Map();
 for (const line of checksums.split(/\r?\n/).filter(Boolean)) {
   const match = /^(?<digest>[a-f0-9]{64})  \*?(?:\.\/)?(?<name>[A-Za-z0-9._-]+)$/.exec(line);
   if (!match) throw new Error(`invalid checksum entry: ${line}`);
+  if (expected.has(match.groups.name)) throw new Error(`duplicate checksum entry: ${match.groups.name}`);
   expected.set(match.groups.name, match.groups.digest);
 }
 const archives = (await readdir(root)).filter((name) => name.endsWith(".tgz")).sort();
