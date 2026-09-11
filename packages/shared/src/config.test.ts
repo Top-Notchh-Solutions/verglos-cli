@@ -15,3 +15,13 @@ test("config migration inspection reports obsolete and deferred fields determini
 test("config migration inspection does not accept malformed values", () => {
   assert.deepEqual(inspectConfigMigration({ failThreshold: 101 }), { status: "invalid", warnings: [] });
 });
+
+test("config migration inspection reports unknown nested fields without applying them", () => {
+  const result = inspectConfigMigration({ hunt: { maxDurationMs: 1000, unsafe: true }, attest: { whiteLabel: { footer: "x", palette: "dark" } } });
+  assert.equal(result.status, "legacy");
+  assert.deepEqual(result.warnings.map((warning) => warning.message), [
+    "attest hosted verification and white-label fields are deferred; they are not activated by local config.",
+    "unknown config field 'hunt.unsafe' is ignored until a versioned migration defines it.",
+    "unknown config field 'attest.whiteLabel.palette' is ignored until a versioned migration defines it.",
+  ]);
+});

@@ -77,6 +77,13 @@ export function inspectConfigMigration(value: unknown): ConfigMigrationInspectio
   if (Object.hasOwn(raw, "plan")) warnings.push({ id: "legacy-plan", message: "plan is legacy metadata and is not an entitlement authority; use verified license state." });
   const attest = raw.attest && typeof raw.attest === "object" ? raw.attest as Record<string, unknown> : {};
   if (Object.hasOwn(attest, "verifyUrlBase") || Object.hasOwn(attest, "whiteLabel")) warnings.push({ id: "legacy-attest", message: "attest hosted verification and white-label fields are deferred; they are not activated by local config." });
+  const nestedUnknown = (scope: string, object: Record<string, unknown>, known: readonly string[]) => {
+    for (const key of Object.keys(object).sort()) if (!known.includes(key)) warnings.push({ id: "unknown-field", message: `unknown config field '${scope}.${key}' is ignored until a versioned migration defines it.` });
+  };
+  nestedUnknown("hunt", hunt, ["sandbox", "maxDurationMs", "skip"]);
+  nestedUnknown("attest", attest, ["signingKeyPath", "verifyUrlBase", "whiteLabel"]);
+  const whiteLabel = attest.whiteLabel && typeof attest.whiteLabel === "object" ? attest.whiteLabel as Record<string, unknown> : {};
+  nestedUnknown("attest.whiteLabel", whiteLabel, ["logoPath", "footer"]);
   const knownFields = new Set(["plan", "failOnCritical", "failThreshold", "ignorePaths", "secretScanDepth", "reportFormat", "preCommitHook", "hunt", "attest"]);
   for (const key of Object.keys(raw).sort()) if (!knownFields.has(key)) warnings.push({ id: "unknown-field", message: `unknown config field '${key}' is ignored until a versioned migration defines it.` });
   return { status: warnings.length ? "legacy" : "current", warnings };
