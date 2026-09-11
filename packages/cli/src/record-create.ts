@@ -43,6 +43,13 @@ export async function executeRecordCreate(
       if (!(error instanceof Error) || (error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
     }
     await mkdir(destination, { recursive: true, mode: 0o700 });
+    const writtenManifest = join(destination, "manifest.json");
+    try {
+      await lstat(writtenManifest);
+      throw new Error("record output already contains manifest.json");
+    } catch (error) {
+      if (!(error instanceof Error) || (error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+    }
     const inputs: { readonly path: string; readonly bytes: Uint8Array }[] = [];
     for (const member of manifest.members) {
       if (member.redaction === "omitted") continue;
@@ -54,7 +61,6 @@ export async function executeRecordCreate(
       inputs.push({ path: member.path, bytes });
     }
     const stored = await putRecordMembers(destination, inputs);
-    const writtenManifest = join(destination, "manifest.json");
     await writeFile(writtenManifest, `${canonicalizeJson(manifest)}\n`, { flag: "wx", mode: 0o600 });
     const result = { outputRoot: destination, manifestPath: writtenManifest, members: stored.length, paths: stored.map((member) => member.path).sort() };
     if (json) console.log(JSON.stringify(result));
