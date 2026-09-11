@@ -1,4 +1,5 @@
-export type PlanId = "free" | "pro" | "studio" | "enterprise";
+/** Commercial tiers are Free, Pro, Team, and Studio; Enterprise is contracted compatibility. */
+export type PlanId = "free" | "pro" | "team" | "studio" | "enterprise";
 
 export type CapabilityKey =
   | "scan.core"
@@ -79,6 +80,7 @@ const ENTERPRISE_ADDS: CapabilityKey[] = [
 export const PLAN_CAPABILITIES: Record<PlanId, readonly CapabilityKey[]> = {
   free: FREE_CAPS,
   pro: [...FREE_CAPS, ...PRO_ADDS],
+  team: [...FREE_CAPS, ...PRO_ADDS],
   studio: [...FREE_CAPS, ...PRO_ADDS, ...STUDIO_ADDS],
   enterprise: [...FREE_CAPS, ...PRO_ADDS, ...STUDIO_ADDS, ...ENTERPRISE_ADDS],
 };

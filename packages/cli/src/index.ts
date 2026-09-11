@@ -72,7 +72,7 @@ program
   .option("--update", "Update Verglos CLI to the latest npm version")
   .option(
     "--as-plan <plan>",
-    "[founder only] Simulate a plan (free|pro|studio) for this invocation",
+    "[founder only] Simulate a plan (free|pro|team|studio) for this invocation",
   )
   .showHelpAfterError(chalk.gray("\nRun `verglos --help` for available commands."))
   .addHelpText(

@@ -11,7 +11,7 @@ export interface HuntOptions {
   quiet?: boolean;
 }
 
-const PAID_PLANS = new Set(["pro", "studio", "compliance", "founder"]);
+const PAID_PLANS = new Set(["pro", "team", "studio", "enterprise", "compliance", "founder"]);
 
 export async function executeHunt(opts: HuntOptions = {}): Promise<number> {
   const entitlement = await resolveEntitlement({ asPlan: opts.asPlan });

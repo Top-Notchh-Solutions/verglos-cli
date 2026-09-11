@@ -172,7 +172,7 @@ function validateClaims(value: unknown, nowSec: number): string | undefined {
   if (!value || typeof value !== "object" || Array.isArray(value)) return "claims must be an object";
   const claims = value as Record<string, unknown>;
   if (typeof claims.keyHash !== "string" || claims.keyHash.length === 0 || claims.keyHash.length > 256) return "claims have an invalid keyHash";
-  if (!new Set(["free", "pro", "studio", "enterprise", "compliance", "founder"]).has(claims.tier as string)) return "claims have an invalid tier";
+  if (!new Set(["free", "pro", "team", "studio", "enterprise", "compliance", "founder"]).has(claims.tier as string)) return "claims have an invalid tier";
   if (!Array.isArray(claims.projects) || claims.projects.some((project) => typeof project !== "string" || project.length > 4096)) return "claims have invalid projects";
   if (!Number.isInteger(claims.seats) || (claims.seats as number) < 0 || (claims.seats as number) > 100_000) return "claims have invalid seats";
   if (!Array.isArray(claims.features) || claims.features.some((feature) => typeof feature !== "string" || feature.length === 0 || feature.length > 256)) return "claims have invalid features";
