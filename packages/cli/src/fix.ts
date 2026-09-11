@@ -252,7 +252,14 @@ async function fixWithHelperFile(
  * Returns the number of files created or patched. Prints per-file
  * status to stdout; instructions when a helper file was created.
  */
-export async function applyHeaderFixes(projectRoot: string): Promise<number> {
+export async function applyHeaderFixes(projectRoot: string, options: { readonly approvalReceipt?: ApprovalReceipt; readonly now?: string } = {}): Promise<number> {
+  const plan = await planHeaderFixes(projectRoot);
+  const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
+  if (plannedFiles.length > 0) {
+    if (!options.approvalReceipt) throw new Error("header fix requires an approval receipt before changing files");
+    const authorization = authorizeHeaderFix(options.approvalReceipt, plannedFiles, options.now ?? new Date().toISOString());
+    if (!authorization.allowed) throw new Error(`header fix approval denied: ${authorization.reason}`);
+  }
   const { type } = await detectProjectType(projectRoot);
   let changed = 0;
 
