@@ -265,30 +265,30 @@ jobs:
 
 ## Plans
 
-| Capability | Free | Pro $29/mo | Studio $199/mo | Enterprise |
-|---|---|---|---|---|
-| `verglos scan` (all detectors) | Yes | Yes | Yes | Yes |
-| Provenance layer + slopsquat + typosquat | Yes | Yes | Yes | Yes |
-| Local HTML + JSON report | Yes | Yes | Yes | Yes |
-| MCP `verglos_scan` tool | Yes | Yes | Yes | Yes |
-| `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes |
-| Pre-commit hook | Yes | Yes | Yes | Yes |
-| `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes |
-| **`verglos hunt` on Critical + High** | No | Alpha shell | Beta | Beta |
-| **`verglos hunt` on Medium** | No | No | Beta | Beta |
-| **MCP hunt tools** | No | Alpha shell | Beta | Beta |
-| **`verglos fix`** | No | Yes | Yes | Yes |
-| **`verglos ci --hunt`** | No | Alpha path | Beta | Beta |
-| **CI score threshold** | No | Yes | Yes | Yes |
-| **Continuous CVE monitoring** | No | Yes | Yes | Yes |
-| **`verglos attest`** | No | No | Alpha shell | Beta |
-| **Public verify URL** | No | No | Beta | Beta |
-| **White-label report** | No | No | Beta | Beta |
-| **Firecracker sandbox adapter** | No | No | Beta | Beta |
-| **Agency dashboard** | No | No | Beta | Beta |
-| **SSO / SCIM · self-hosted verify chain · audit log · custom detector packs** | No | No | No | Contact sales |
+| Capability | Free | Pro $29/mo | Team $99/mo | Studio $249/mo | Enterprise |
+|---|---|---|---|---|---|
+| `verglos scan` (all detectors) | Yes | Yes | Yes | Yes | Yes |
+| Provenance layer + slopsquat + typosquat | Yes | Yes | Yes | Yes | Yes |
+| Local HTML + JSON report | Yes | Yes | Yes | Yes | Yes |
+| MCP `verglos_scan` tool | Yes | Yes | Yes | Yes | Yes |
+| `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes | Yes |
+| Pre-commit hook | Yes | Yes | Yes | Yes | Yes |
+| `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes | Yes |
+| **`verglos hunt` on Critical + High** | No | Alpha shell | Alpha shell | Beta | Beta |
+| **`verglos hunt` on Medium** | No | No | No | Beta | Beta |
+| **MCP hunt tools** | No | Alpha shell | Alpha shell | Beta | Beta |
+| **`verglos fix`** | No | Yes | Yes | Yes | Yes |
+| **`verglos ci --hunt`** | No | Alpha path | Alpha path | Beta | Beta |
+| **CI score threshold** | No | Yes | Yes | Yes | Yes |
+| **Continuous CVE monitoring** | No | Yes | Yes | Yes | Yes |
+| **`verglos attest`** | No | No | No | Alpha shell | Beta |
+| **Public verify URL** | No | No | No | Beta | Beta |
+| **White-label report** | No | No | No | Beta | Beta |
+| **Firecracker sandbox adapter** | No | No | No | Beta | Beta |
+| **Agency dashboard** | No | No | No | Beta | Beta |
+| **SSO / SCIM · self-hosted verify chain · audit log · custom detector packs** | No | No | No | No | Contact sales |
 
-Upgrade Pro at **[verglos.com/checkout](https://verglos.com/checkout)**. Studio starts at **[topnotchh.solutions@gmail.com](mailto:topnotchh.solutions@gmail.com?subject=Verglos%20Studio)**. Enterprise starts at **[support@verglos.com](mailto:support@verglos.com?subject=Enterprise)**.
+Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**. Studio starts at **[topnotchh.solutions@gmail.com](mailto:topnotchh.solutions@gmail.com?subject=Verglos%20Studio)**. Enterprise starts at **[support@verglos.com](mailto:support@verglos.com?subject=Enterprise)**.
 
 ---
 
