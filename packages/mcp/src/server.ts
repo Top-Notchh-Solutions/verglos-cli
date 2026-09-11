@@ -22,6 +22,7 @@ const { version: MCP_VERSION } = require("../package.json") as {
 };
 
 const MAX_TOOL_ARGUMENT_BYTES = 256 * 1024;
+const MAX_TOOL_RESPONSE_BYTES = 512 * 1024;
 
 /**
  * MCP server for Verglos.
@@ -208,12 +209,14 @@ async function stubResponse(name: string): Promise<{ content: { type: "text"; te
   };
 }
 
-function jsonResponse(payload: unknown): {
+export function jsonResponse(payload: unknown): {
   content: { type: "text"; text: string }[];
 } {
-  return {
-    content: [{ type: "text", text: JSON.stringify(payload, null, 2) }],
-  };
+  const text = JSON.stringify(payload, null, 2);
+  if (Buffer.byteLength(text, "utf8") > MAX_TOOL_RESPONSE_BYTES) {
+    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "output", code: "MCP_OUTPUT_LIMIT", message: "tool response exceeds the 512 KiB limit" }) }] };
+  }
+  return { content: [{ type: "text", text }] };
 }
 
 function alphaStub(name: string, tier: "pro" | "studio"): {
