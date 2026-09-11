@@ -37,6 +37,7 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /command\("badge"\)[\s\S]*?\.option\("--quiet", "Suppress output"\)/);
   assert.match(source, /command\("hook"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
   assert.match(source, /command\("init"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON \(requires --yes\)"\)/);
+  assert.match(source, /command\("init"\)[\s\S]*?\.option\("--quiet", "Suppress output \(requires --yes\)"\)/);
   for (const command of ["register", "status", "unregister", "test-alert"]) {
     assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--json`));
   }
