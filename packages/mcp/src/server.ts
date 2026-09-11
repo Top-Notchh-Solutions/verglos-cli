@@ -308,7 +308,7 @@ export async function dispatchTool(
     if (Array.isArray(receipt?.network) && receipt.network.length > 0) return invalid("MCP_APPROVAL_SCOPE", "approval receipt declares network scope for a network-free tool");
     if (options.approvalStoreRoot) {
       try { await putApprovalReceipt(options.approvalStoreRoot, approvalReceipt!); }
-      catch (error) { return invalid("MCP_APPROVAL_AUDIT", error instanceof Error ? error.message : "approval receipt could not be persisted"); }
+      catch { return invalid("MCP_APPROVAL_AUDIT", "approval receipt could not be persisted"); }
     }
   }
   const toolInput = authority?.approvalRequired ? { ...input } : input;

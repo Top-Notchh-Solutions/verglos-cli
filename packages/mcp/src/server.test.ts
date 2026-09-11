@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { test } from "node:test";
 import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
@@ -152,5 +152,17 @@ test("MCP dispatch persists an approved receipt when an audit store is configure
     const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/audit.json", approvalReceipt }, { approvalStoreRoot: root }));
     assert.equal(result.error, "not_implemented_in_alpha");
     assert.equal((await readApprovalReceipt(root, approvalReceipt.requestDigest)).requestId, request.requestId);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("MCP approval audit failures are bounded", async () => {
+  const root = await mkdtemp("/tmp/verglos-mcp-audit-failure-");
+  const auditPath = `${root}/not-a-directory`;
+  await writeFile(auditPath, "fixture");
+  try {
+    const request = { requestId: "523e4567-e89b-12d3-a456-426614174000", action: "execute" as const, actor: "agent", target: "report:/tmp/audit.json", files: ["/tmp/audit.json"], network: [], policyEffect: "hunt report", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" };
+    const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/audit.json", approvalReceipt }, { approvalStoreRoot: auditPath }));
+    assert.deepEqual(result, { ok: false, error: "usage", code: "MCP_APPROVAL_AUDIT", message: "approval receipt could not be persisted" });
   } finally { await rm(root, { recursive: true, force: true }); }
 });
