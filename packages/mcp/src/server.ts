@@ -287,6 +287,9 @@ export async function dispatchTool(
   const input = args ?? {};
   const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
   const authority = mcpToolAuthority(name);
+  const registered = TOOLS.some((tool) => tool.name === name);
+  if (!registered) return invalid("MCP_UNKNOWN_TOOL", "unknown MCP tool");
+  if (!authority) return invalid("MCP_AUTHORITY_MISSING", "registered MCP tool has no shared authority metadata");
   if (options.plan) {
     const capability = listAdvertisedTools().find((tool) => tool.name === name)?._meta?.["verglos/capability"] as { plan?: "free" | "pro" | "team" | "studio" | "enterprise" } | undefined;
     const required = capability?.plan;
@@ -358,6 +361,7 @@ export function listAdvertisedTools() {
     const capability = capabilities.find((item) => item.tool === t.name);
     if (!capability) throw new Error("MCP capability metadata is missing");
     const authority = mcpToolAuthority(t.name);
+    if (!authority) throw new Error("MCP authority metadata is missing");
     return {
       name: t.name,
       description: t.description,
