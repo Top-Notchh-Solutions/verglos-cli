@@ -45,6 +45,13 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Run pinned Hunt Docker adversarial suite
+        env:
+          VERGLOS_HUNT_DOCKER_INTEGRATION: "1"
+          VERGLOS_HUNT_TEST_IMAGE: postgres
+          VERGLOS_HUNT_TEST_DIGEST: sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a
+        run: pnpm --filter @verglos/hunt test
+
       - name: Test release artifact verifier
         run: node --test scripts/verify-release-artifacts.test.mjs
 
