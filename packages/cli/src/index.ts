@@ -235,11 +235,12 @@ engines.command("install <engineId> <version> <artifactPath>")
   .description("Install a local digest-pinned engine artifact")
   .requiredOption("--digest <sha256>", "Expected sha256:<hex> digest")
   .option("--manifest <path>", "Validate a bounded engine compatibility manifest")
-  .option("--manifest-key <path>", "Verify the manifest with an Ed25519 public key")
-  .option("--approve", "Approve the local engine mutation")
+.option("--manifest-key <path>", "Verify the manifest with an Ed25519 public key")
+.option("--approve", "Approve the local engine mutation")
+.option("--approval-receipt <path>", "Path to an exact, time-bounded engine approval receipt")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress output")
-  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; json?: boolean; quiet?: boolean }) => { process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey })); });
+  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => { let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); } } process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey })); });
 
 for (const action of ["update", "rollback"] as const) {
   engines.command(`${action} <engineId> <version> <artifactPath>`)
@@ -248,10 +249,12 @@ for (const action of ["update", "rollback"] as const) {
     .option("--manifest <path>", "Validate a bounded engine compatibility manifest")
     .option("--manifest-key <path>", "Verify the manifest with an Ed25519 public key")
     .option("--approve", "Approve the local engine mutation")
+    .option("--approval-receipt <path>", "Path to an exact, time-bounded engine approval receipt")
     .option("--json", "Emit machine-readable JSON")
     .option("--quiet", "Suppress output")
-    .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; json?: boolean; quiet?: boolean }) => {
-      process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey, action }));
+    .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => {
+      let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); } }
+      process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey, action }));
     });
 }
 

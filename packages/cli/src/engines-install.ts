@@ -1,5 +1,5 @@
 import { lstat, readFile } from "node:fs/promises";
-import { installEngineArtifact, parseEngineManifest, verifyEngineManifestSignature, type EngineManifest } from "@verglos/shared";
+import { authorizeAgentAction, installEngineArtifact, parseEngineManifest, verifyEngineManifestSignature, type ApprovalReceipt, type EngineManifest } from "@verglos/shared";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
@@ -28,12 +28,20 @@ async function readCompatibilityManifest(path: string, engineId: string, version
   return { manifest, signature: "verified" };
 }
 
-export async function executeEngineInstall(engineId: string, version: string, artifactPath: string, digest: string, options: { action?: "install" | "update" | "rollback"; approve?: boolean; json?: boolean; quiet?: boolean; manifestPath?: string; manifestPublicKeyPath?: string } = {}): Promise<number> {
+export async function executeEngineInstall(engineId: string, version: string, artifactPath: string, digest: string, options: { action?: "install" | "update" | "rollback"; approve?: boolean; approvalReceipt?: ApprovalReceipt; now?: string; json?: boolean; quiet?: boolean; manifestPath?: string; manifestPublicKeyPath?: string } = {}): Promise<number> {
   try {
     if (typeof engineId !== "string" || !engineId || typeof version !== "string" || !version || typeof artifactPath !== "string" || !artifactPath || typeof digest !== "string") {
       throw new Error("Engine install requires engine id, version, artifact path, and digest.");
     }
     if (!options.approve) throw new Error("Engine installation requires explicit approval (--approve).");
+    if (!options.approvalReceipt) throw new Error("Engine installation requires an approval receipt (--approval-receipt).");
+    const authorization = authorizeAgentAction("install", options.approvalReceipt, options.now ?? new Date().toISOString());
+    if (!authorization.allowed) throw new Error(`Engine installation approval denied: ${authorization.reason}`);
+    const target = `engine:${engineId}@${version}`;
+    if (options.approvalReceipt.target !== target) throw new Error("approval receipt scope does not match the requested engine");
+    if (!options.approvalReceipt.files.includes(artifactPath)) throw new Error("approval receipt does not cover the engine artifact");
+    if (options.manifestPath && !options.approvalReceipt.files.includes(options.manifestPath)) throw new Error("approval receipt does not cover the compatibility manifest");
+    if (options.approvalReceipt.network.length > 0) throw new Error("engine installation approval must not declare network scope");
     if (options.manifestPublicKeyPath && !options.manifestPath) throw new Error("Engine manifest public key requires --manifest.");
     const entry = await lstat(artifactPath);
     if (!entry.isFile()) throw new Error("Engine artifact must be a regular file.");
