@@ -20,3 +20,7 @@ test("MCP response encoder fails closed on oversized payloads", () => {
   const result = jsonResponse({ evidence: "x".repeat(512 * 1024) });
   assert.deepEqual(responseText(result), { ok: false, error: "output", code: "MCP_OUTPUT_LIMIT", message: "tool response exceeds the 512 KiB limit" });
 });
+
+test("MCP dispatch rejects unknown tools with a stable structured error", async () => {
+  assert.deepEqual(responseText(await dispatchTool("verglos_unknown", {})), { ok: false, error: "usage", code: "MCP_UNKNOWN_TOOL", message: "unknown MCP tool" });
+});

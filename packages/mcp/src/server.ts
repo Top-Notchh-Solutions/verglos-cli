@@ -198,17 +198,6 @@ const TOOLS = [
 
 // ─── Handler dispatch ─────────────────────────────────────────────────────
 
-async function stubResponse(name: string): Promise<{ content: { type: "text"; text: string }[] }> {
-  return {
-    content: [
-      {
-        type: "text",
-        text: `verglos:mcp: ${name} is registered but the handler ships in a later commit. Try again after the next release.`,
-      },
-    ],
-  };
-}
-
 export function jsonResponse(payload: unknown): {
   content: { type: "text"; text: string }[];
 } {
@@ -287,7 +276,7 @@ export async function dispatchTool(
       try { parseAttestArgs(input); } catch (error) { return invalid("MCP_ATTEST_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "studio"));
     default:
-      return stubResponse(name);
+      return invalid("MCP_UNKNOWN_TOOL", "unknown MCP tool");
   }
 }
 
