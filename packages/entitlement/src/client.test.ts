@@ -85,6 +85,15 @@ test("verifyEntitlement: successor slot also verifies (rotation path)", async ()
   assert.equal(result.claims?.tier, "studio");
 });
 
+test("verifyEntitlement: legacy compliance tier is exposed canonically as enterprise", async () => {
+  const kp = generateEntitlementKeyPair();
+  const legacy = signEntitlement({
+    claims: makeClaims({ tier: "compliance" as EntitlementClaims["tier"] }),
+    privateKey: privateKeyFromPem(kp.privateKeyPem),
+  });
+  assert.equal((await verifyEntitlement(legacy, Date.now(), { pinnedKeys: [kp.publicKeyBase64Url] })).claims?.tier, "enterprise");
+});
+
 test("verifyEntitlement: rejects token signed by an unpinned key", async () => {
   const signer = generateEntitlementKeyPair();
   const unrelated = generateEntitlementKeyPair();

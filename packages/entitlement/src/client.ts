@@ -135,6 +135,12 @@ export async function verifyEntitlement(
   const nowSec = Math.floor(now / 1000);
   const claimError = validateClaims(claims, nowSec);
   if (claimError) return { valid: false, reason: claimError };
+  // `compliance` was an older wire value. Preserve signature validation
+  // against the original bytes, but expose only the canonical Enterprise
+  // tier to callers so legacy tokens cannot drift into a separate plan.
+  const canonicalClaims: EntitlementClaims = (claims as { tier: string }).tier === "compliance"
+    ? { ...claims, tier: "enterprise" }
+    : claims;
 
   if (typeof claims.exp !== "number") {
     return { valid: false, reason: "claims are missing exp" };
@@ -146,7 +152,7 @@ export async function verifyEntitlement(
       token,
       lastVerifiedAt: new Date(now).toISOString(),
     });
-    return { valid: true, claims };
+    return { valid: true, claims: canonicalClaims };
   }
 
   // Token is past exp. Check the offline-grace window using the
@@ -158,12 +164,12 @@ export async function verifyEntitlement(
     cache.token === token &&
     now - new Date(cache.lastVerifiedAt).getTime() < OFFLINE_GRACE_MS
   ) {
-    return { valid: true, claims, inOfflineGrace: true };
+    return { valid: true, claims: canonicalClaims, inOfflineGrace: true };
   }
 
   return {
     valid: false,
-    claims,
+    claims: canonicalClaims,
     reason: "token expired past the 7-day offline grace window",
   };
 }
