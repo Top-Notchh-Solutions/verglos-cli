@@ -18,7 +18,12 @@ export async function runCliFixture(
   // when the tsx loader is injected. Convert only the repository CLI entry;
   // user-supplied fixture paths must remain ordinary filesystem arguments.
   const normalizedArgs = process.platform === "win32"
-    ? args.map((arg) => /[\\/]src[\\/]index\.ts$/.test(arg) && /^[A-Za-z]:[\\/]/.test(arg) ? pathToFileURL(arg).href : arg)
+    ? args.map((arg, index) => {
+      const previous = args[index - 1];
+      const isLoader = previous === "--import";
+      const isCliEntry = /[\\/]src[\\/]index\.ts$/.test(arg);
+      return (isLoader || isCliEntry) && /^[A-Za-z]:[\\/]/.test(arg) ? pathToFileURL(arg).href : arg;
+    })
     : [...args];
   const result = await new Promise<{ exitCode: number; stdout: string; stderr: string; timedOut: boolean }>((resolve, reject) => {
     const child = spawn(command, normalizedArgs, { cwd, env: options.env ? { ...process.env, ...options.env } : process.env, stdio: ["ignore", "pipe", "pipe"] }); let stdout = ""; let stderr = ""; let timedOut = false;
