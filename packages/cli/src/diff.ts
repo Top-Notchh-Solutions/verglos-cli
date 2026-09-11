@@ -1,5 +1,5 @@
 import { lstat, readFile } from "node:fs/promises";
-import { diffReleaseSnapshots, type ReleaseSnapshot } from "@verglos/shared";
+import { diffReleaseSnapshots, projectChangeActions, type ReleaseSnapshot } from "@verglos/shared";
 
 function parseSnapshot(value: string): ReleaseSnapshot {
   if (Buffer.byteLength(value, "utf8") > 32 * 1024 * 1024) throw new Error("snapshot exceeds the 32 MiB limit");
@@ -28,7 +28,8 @@ export async function executeDiff(basePath: string, headPath: string, json = fal
   try {
     const [baseRaw, headRaw] = await Promise.all([readSnapshot(basePath), readSnapshot(headPath)]);
     const result = diffReleaseSnapshots(parseSnapshot(baseRaw), parseSnapshot(headRaw));
-    if (json) console.log(JSON.stringify(result));
+    const actions = projectChangeActions(result);
+    if (json) console.log(JSON.stringify({ ...result, actions }));
     else if (!quiet) {
       console.log(`Added: ${result.added.length}`);
       console.log(`Fixed: ${result.fixed.length}`);
@@ -36,6 +37,7 @@ export async function executeDiff(basePath: string, headPath: string, json = fal
       if (result.identityChanged) console.log("Identity: changed");
       if (result.coverageChanged) console.log("Coverage: changed");
       if (result.policyChanged) console.log("Policy inputs: changed");
+      for (const nextAction of actions.nextActions) console.log(`Next: ${nextAction}`);
     }
     return result.identityChanged || result.coverageChanged ? 3 : result.added.length || result.fixed.length ? 1 : 0;
   } catch (error) {
