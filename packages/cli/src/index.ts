@@ -695,12 +695,18 @@ program
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress output")
   .action(async (opts: { json?: boolean; quiet?: boolean }) => {
-    const projectRoot = process.cwd();
-    const { runScan } = await import("@verglos/scanner");
-    const result = await runScan({ projectRoot, unlocked: true });
-    const markdown = generateBadgeMarkdown(result.score.value);
-    if (opts.json) console.log(JSON.stringify({ status: "ok", score: result.score.value, markdown }));
-    else if (!opts.quiet) console.log(markdown);
+    try {
+      const projectRoot = process.cwd();
+      const { runScan } = await import("@verglos/scanner");
+      const result = await runScan({ projectRoot, unlocked: true });
+      const markdown = generateBadgeMarkdown(result.score.value);
+      if (opts.json) console.log(JSON.stringify({ status: "ok", score: result.score.value, markdown }));
+      else if (!opts.quiet) console.log(markdown);
+    } catch (error) {
+      if (opts.json) console.log(JSON.stringify({ status: "error", code: "BADGE_INPUT", message: "badge generation failed" }));
+      else if (!opts.quiet) console.error(error instanceof Error ? error.message : "badge generation failed");
+      process.exit(2);
+    }
   });
 
 program

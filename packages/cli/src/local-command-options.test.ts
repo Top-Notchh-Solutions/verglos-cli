@@ -44,6 +44,7 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /command\("login"\)[\s\S]*?\.option\("--quiet", "Suppress output"\)/);
   assert.match(source, /command\("whoami"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
   assert.match(source, /command\("badge"\)[\s\S]*?\.option\("--quiet", "Suppress output"\)/);
+  assert.match(source, /BADGE_INPUT/);
   assert.match(source, /command\("hook"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
   assert.match(source, /if \(opts\.json\) console\.log\(JSON\.stringify\(\{ status: "error", reason: "hook installation failed" \}\)\)/);
   assert.match(source, /command\("init"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON \(requires --yes\)"\)/);
