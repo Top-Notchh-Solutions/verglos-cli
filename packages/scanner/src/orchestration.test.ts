@@ -25,3 +25,15 @@ test("scan exposes a deterministic coverage manifest", async () => {
   assert.deepEqual(result.coverage?.limitations, ["provenance was explicitly skipped"]);
   assert.ok((result.coverage?.filesWalked ?? 0) > 0);
 });
+
+test("scan progress reports bounded lifecycle events without content", async () => {
+  const events: Array<{ phase: string; status: string; detector?: string }> = [];
+  await runScan({ projectRoot: new URL("../fixtures/insecure-app", import.meta.url).pathname, detectors: ["secrets"], noProvenance: true, onProgress: (event) => events.push(event) });
+  assert.deepEqual(events.map(({ phase, status, detector }) => ({ phase, status, ...(detector ? { detector } : {}) })), [
+    { phase: "config", status: "started" }, { phase: "config", status: "completed" },
+    { phase: "target", status: "started" }, { phase: "target", status: "completed" },
+    { phase: "walk", status: "started" }, { phase: "walk", status: "completed" },
+    { phase: "detector", status: "started", detector: "secrets" }, { phase: "detector", status: "completed", detector: "secrets" },
+    { phase: "provenance", status: "started" }, { phase: "provenance", status: "completed" },
+  ]);
+});

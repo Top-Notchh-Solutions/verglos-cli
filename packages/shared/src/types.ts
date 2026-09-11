@@ -250,6 +250,12 @@ export interface ScanCoverageManifest {
   readonly limitations: readonly string[];
 }
 
+export interface ScanProgressEvent {
+  readonly phase: "config" | "target" | "walk" | "detector" | "provenance";
+  readonly status: "started" | "completed";
+  readonly detector?: DetectorId;
+}
+
 export interface ScanOptions {
   projectRoot: string;
   /** Explicit bounded JSON config path; legacy project config remains the fallback. */
@@ -273,6 +279,8 @@ export interface ScanOptions {
   signal?: AbortSignal;
   /** Maximum concurrent detector executions (defaults to a bounded value). */
   detectorConcurrency?: number;
+  /** Optional bounded progress callback; never carries source content. */
+  onProgress?: (event: ScanProgressEvent) => void;
 }
 
 export const DEFAULT_MIN_CONFIDENCE = 0.7;

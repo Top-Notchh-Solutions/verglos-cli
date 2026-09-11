@@ -8,6 +8,7 @@ import {
   type ScanOptions,
   type ScanResult,
   type ScanCoverageManifest,
+  type ScanProgressEvent,
   type VerglosConfig,
 } from "@verglos/shared";
 import { lstat, readFile } from "node:fs/promises";
@@ -57,7 +58,7 @@ const MAX_IGNORE_LINE_BYTES = 512;
 const MAX_TOTAL_IGNORE_PATHS = 256;
 const DEFAULT_DETECTOR_CONCURRENCY = 2;
 
-async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: number, run: (detector: Detector) => Promise<readonly T[]>, signal?: AbortSignal): Promise<T[]> {
+async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: number, run: (detector: Detector) => Promise<readonly T[]>, signal?: AbortSignal, onProgress?: (event: ScanProgressEvent) => void): Promise<T[]> {
   const results: T[][] = Array.from({ length: items.length }, () => []);
   let next = 0;
   const worker = async () => {
@@ -65,7 +66,10 @@ async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: n
       if (signal?.aborted) throw new Error("scan cancelled");
       const index = next++;
       if (index >= items.length) return;
-      results[index] = [...await run(items[index]!)];
+      const detector = items[index]!;
+      onProgress?.({ phase: "detector", status: "started", detector: detector.id });
+      results[index] = [...await run(detector)];
+      onProgress?.({ phase: "detector", status: "completed", detector: detector.id });
     }
   };
   await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, () => worker()));
@@ -125,9 +129,15 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   const detectorConcurrency = options.detectorConcurrency ?? DEFAULT_DETECTOR_CONCURRENCY;
   if (!Number.isInteger(detectorConcurrency) || detectorConcurrency < 1 || detectorConcurrency > 8) throw new Error("detector concurrency must be between 1 and 8");
   const start = Date.now();
+  options.onProgress?.({ phase: "config", status: "started" });
   const config = await loadConfig(options.projectRoot, options.configPath);
+  options.onProgress?.({ phase: "config", status: "completed" });
+  options.onProgress?.({ phase: "target", status: "started" });
   const { type: projectType } = await detectProjectType(options.projectRoot);
+  options.onProgress?.({ phase: "target", status: "completed" });
+  options.onProgress?.({ phase: "walk", status: "started" });
   const files = await walkProject(options.projectRoot, config);
+  options.onProgress?.({ phase: "walk", status: "completed" });
 
   const detectorIds = [...(options.detectors ?? [
     "secrets",
@@ -155,7 +165,7 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   const detectorContext = {
     verifySecrets: options.verifySecrets,
   };
-  const rawFindings = await runDetectorsBounded(activeDetectors, detectorConcurrency, (detector) => detector.run(files, options.projectRoot, detectorContext), options.signal);
+  const rawFindings = await runDetectorsBounded(activeDetectors, detectorConcurrency, (detector) => detector.run(files, options.projectRoot, detectorContext), options.signal, options.onProgress);
   if (options.signal?.aborted) throw new Error("scan cancelled");
   const minConfidence = options.minConfidence ?? DEFAULT_MIN_CONFIDENCE;
   const filteredFindings = rawFindings.filter(
@@ -191,9 +201,11 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
     : rawScore;
   const unlocked = options.unlocked ?? false;
 
+  options.onProgress?.({ phase: "provenance", status: "started" });
   const provenance = options.noProvenance
     ? undefined
     : await computeProvenance(files, options.projectRoot, allFindings);
+  options.onProgress?.({ phase: "provenance", status: "completed" });
   if (options.signal?.aborted) throw new Error("scan cancelled");
 
   return {
