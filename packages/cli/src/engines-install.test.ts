@@ -62,6 +62,16 @@ test("quiet engine failures do not write diagnostics", async () => {
   finally { console.error = previousError; }
 });
 
+test("JSON engine failures are bounded and process-safe", async () => {
+  const lines: string[] = [];
+  const original = console.log;
+  console.log = (line?: unknown) => lines.push(String(line));
+  try {
+    assert.equal(await executeEngineInstall("trivy", "1.0.0", "/does/not/exist", "bad", { quiet: true, json: true }), 78);
+    assert.deepEqual(JSON.parse(lines[0]!), { status: "error", code: "ENGINE_INSTALL_INPUT", message: "engine installation failed" });
+  } finally { console.log = original; }
+});
+
 test("engine update and rollback label approved JSON mutations", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-engine-actions-"));
   const artifact = join(root, "engine");
