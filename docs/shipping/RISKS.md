@@ -36,7 +36,7 @@ Release-gate references are the numbered gates in `RELEASE_GATES.md`.
 
 ## Tenant, runtime, credential, and signing security
 
-Web checkpoint correction (2026-09-12): PR #32 head `1db0fea` passes hosted run `34673639366`, GitGuardian, and Vercel. It routes all organization API authorization failures through one tested bounded response contract; static coverage asserts all ten organization API route modules use it. Local suite is 79/79 with PostgreSQL active and exact-head build/type/schema/migration checks pass. This is denial-surface hardening only; R-007 remains open under HOSTED-012 for actual route-level actor/role/resource and existence-hiding fixtures and operator/provider controls.
+Web checkpoint correction (2026-09-12): PR #32 head `3544561` passes hosted Node 22 run `34675067531`, GitGuardian, and Vercel. It retains the tested bounded denial contract and static organization-route guard audit; `26fc04f` extracts and PostgreSQL-tests the actual membership/project resolver. An experimental route-handler mock failed on supported Node 22 and was removed in `3544561`; this is resolver/denial-surface evidence, not complete route-boundary evidence. Local suite is 79/79 with PostgreSQL active and exact-head build/type/schema/migration checks pass. R-007 remains open under HOSTED-012 for reliable route-level actor/role/resource and existence-hiding fixtures and operator/provider controls.
 
 | ID | Risk / current evidence / trigger | Severity / owner | Prevention and detection evidence | Rollback or containment | Blocking gate / status / residual risk |
 |---|---|---|---|---|---|
