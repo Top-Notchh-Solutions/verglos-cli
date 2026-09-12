@@ -1,6 +1,8 @@
 # Verglos V1 master execution backlog
 
-Updated: 2026-09-08
+Updated: 2026-09-12
+
+Progress checkpoint (2026-09-12): 158 unchecked / 111 checked (269 total). The latest CLI licensing and release-hardening commits add implementation and CI evidence, but do not satisfy a backlog item's full acceptance criteria; no checkbox was changed.
 
 This is the dependency-ordered execution tracker for the final Verglos V1 described by `SHIP_VERGLOS_FINAL.md`, `VERGLOS_PRODUCT_ARCHITECTURE_BLUEPRINT.md`, and `VERGLOS_COMPANY_USAGE_AND_FEATURE_MAP.md`.
 
