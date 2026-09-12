@@ -1,65 +1,56 @@
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createLicenseInventory, parsePnpmLockPackageIds } from "./license-inventory-core.mjs";
 
-const run = promisify(execFile);
 const root = fileURLToPath(new URL("..", import.meta.url));
+const storeRoot = join(root, "node_modules", ".pnpm");
 const workspaceRoot = join(root, "packages");
 
-const direct = new Set();
-for (const packageDir of await readdir(workspaceRoot, { withFileTypes: true })) {
-  if (!packageDir.isDirectory()) continue;
-  try {
-    const manifest = JSON.parse(await readFile(join(workspaceRoot, packageDir.name, "package.json"), "utf8"));
-    for (const field of ["dependencies", "optionalDependencies", "devDependencies"]) {
-      for (const name of Object.keys(manifest[field] ?? {})) direct.add(name);
-    }
-  } catch {
-    // Non-package directories are ignored; package manifests are validated elsewhere.
-  }
-}
-
-const { stdout } = await run("pnpm", ["licenses", "list", "--json"], { cwd: root, maxBuffer: 16 * 1024 * 1024, timeout: 120_000, killSignal: "SIGKILL" });
-const grouped = JSON.parse(stdout);
-if (!grouped || typeof grouped !== "object" || Array.isArray(grouped)) throw new Error("pnpm license output is not an object");
-
-const permissive = /^(?:MIT|Apache-2\.0|BSD(?:-\d-Clause)?|ISC|0BSD|Unlicense|CC0-1\.0)$/i;
-const copyleft = /(?:GPL|AGPL|LGPL|MPL|EPL|CDDL|CPL|OSL)/i;
-const entries = [];
-for (const [declaredKey, packages] of Object.entries(grouped)) {
-  if (!Array.isArray(packages)) throw new Error(`pnpm license output group '${declaredKey}' is not an array`);
-  for (const item of packages) {
-    if (!item || typeof item !== "object" || typeof item.name !== "string" || typeof item.license !== "string") continue;
-    // Keep OS/CPU-specific packages in the inventory. They are part of the
-    // supported installation matrix even when a host does not select them.
-    // Native matrix jobs still qualify variants unavailable on this host.
-    const license = item.license.trim();
-    const redistributionClass = permissive.test(license) ? "permissive" : copyleft.test(license) ? "copyleft" : "unknown";
-    entries.push({
-      name: item.name,
-      versions: Array.isArray(item.versions) ? [...item.versions].filter((v) => typeof v === "string").sort() : [],
-      scope: direct.has(item.name) ? "direct" : "transitive",
-      declaredLicense: license,
-      detectedLicense: typeof declaredKey === "string" && declaredKey !== license ? declaredKey : license,
-      source: typeof item.homepage === "string" ? item.homepage : undefined,
-      redistributionClass,
-      noticeObligation: redistributionClass === "permissive" ? "retain-license-and-notice" : "review-required",
-      reviewBlocker: redistributionClass !== "permissive",
+async function collectVirtualStoreManifests() {
+  const manifests = [];
+  const stores = await readdir(storeRoot, { withFileTypes: true });
+  for (const store of stores) {
+    if (!store.isDirectory()) continue;
+    const moduleRoot = join(storeRoot, store.name, "node_modules");
+    const children = await readdir(moduleRoot, { withFileTypes: true }).catch((error) => {
+      if (error?.code === "ENOENT") return [];
+      throw error;
     });
+    for (const child of children) {
+      if (child.name.startsWith(".")) continue;
+      const packageRoots = child.name.startsWith("@")
+        ? (await readdir(join(moduleRoot, child.name))).map((name) => join(moduleRoot, child.name, name))
+        : [join(moduleRoot, child.name)];
+      for (const packageRoot of packageRoots) {
+        try {
+          const manifest = JSON.parse(await readFile(join(packageRoot, "package.json"), "utf8"));
+          if (typeof manifest.name === "string" && typeof manifest.version === "string") manifests.push(manifest);
+        } catch (error) {
+          if (error?.code !== "ENOENT") throw new Error(`Cannot read dependency manifest at '${packageRoot}': ${error.message}`);
+        }
+      }
+    }
+  }
+  return manifests;
+}
+
+const directDependencies = new Set();
+const workspacePackageDirs = await readdir(workspaceRoot, { withFileTypes: true });
+const workspaceManifests = [join(root, "package.json"), ...workspacePackageDirs.filter((entry) => entry.isDirectory()).map((entry) => join(workspaceRoot, entry.name, "package.json"))];
+for (const manifestPath of workspaceManifests) {
+  const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+  for (const field of ["dependencies", "optionalDependencies", "devDependencies"]) {
+    for (const name of Object.keys(manifest[field] ?? {})) directDependencies.add(name);
   }
 }
-entries.sort((a, b) => a.name.localeCompare(b.name) || a.versions.join(",").localeCompare(b.versions.join(",")));
-const result = {
-  schemaId: "urn:verglos:artifact:dependency-license-inventory",
-  schemaVersion: "1.0.0",
-  generatedBy: "verglos-cli",
-  packages: entries,
-  reviewBlockers: entries.filter((entry) => entry.reviewBlocker).map((entry) => ({ name: entry.name, license: entry.declaredLicense })),
-};
+
+const lockfile = await readFile(join(root, "pnpm-lock.yaml"), "utf8");
+const lockedPackages = parsePnpmLockPackageIds(lockfile);
+const manifests = await collectVirtualStoreManifests();
+const result = createLicenseInventory({ lockedPackages, manifests, directDependencies });
 if (process.argv.includes("--check") && result.reviewBlockers.length > 0) {
-  console.error(`dependency license review required for ${result.reviewBlockers.length} package(s)`);
+  console.error(`dependency license review required for ${result.reviewBlockers.length} package version(s)`);
   process.exitCode = 2;
 }
 process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);

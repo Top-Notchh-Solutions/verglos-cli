@@ -47,6 +47,9 @@ jobs:
       - name: Check dependency license inventory
         run: node scripts/license-inventory.mjs --check > dependency-license-inventory.json
 
+      - name: Test dependency license inventory and SBOM coverage
+        run: node --test scripts/license-inventory.test.mjs
+
       - name: Check third-party notices drift
         run: |
           node scripts/generate-third-party-notices.mjs > generated-third-party-notices
