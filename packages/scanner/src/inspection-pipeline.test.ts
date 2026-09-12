@@ -248,3 +248,37 @@ test("inspection cancellation stops before target resolution and output creation
   await assert.rejects(() => runInspectionPipeline({ target, cwd: "/tmp", resolveTarget: async (selected) => { resolved = true; return resolution(selected); }, producers: ["trivy"], policyInputs: {}, signal: controller.signal }), /inspection cancelled/);
   assert.equal(resolved, false);
 });
+
+test("inspection propagates cancellation to an active adapter and rejects the snapshot", async () => {
+  const controller = new AbortController();
+  let markStarted!: () => void;
+  const started = new Promise<void>((resolve) => { markStarted = resolve; });
+  const health = healthyEngine();
+  const adapter: EngineAdapter = {
+    id: "trivy",
+    version: "1.0.0",
+    capabilities: [{ id: "trivy.scan", description: "Fixture scan", requiresNetwork: false }],
+    requirements: { runtime: "test", executable: "fixture" },
+    health: async () => health,
+    execute: async (request) => new Promise((_resolve, reject) => {
+      const signal = request.signal!;
+      signal.addEventListener("abort", () => reject(new Error("adapter cancelled")), { once: true });
+      markStarted();
+      if (signal.aborted) reject(new Error("adapter cancelled"));
+    }),
+    normalize: () => [],
+    updateMetadata: () => ({ channel: "pinned" }),
+  };
+  const execution = runInspectionPipeline({
+    target,
+    cwd: "/tmp",
+    resolveTarget: async (selected) => resolution(selected),
+    producers: ["trivy"],
+    engines: [{ producer: "trivy", adapter, request: { capabilities: ["trivy.scan"], timeoutMs: 10_000, network: "denied" } }],
+    policyInputs: {},
+    signal: controller.signal,
+  });
+  await started;
+  controller.abort();
+  await assert.rejects(execution, /inspection cancelled/);
+});
