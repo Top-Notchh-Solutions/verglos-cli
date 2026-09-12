@@ -41,6 +41,10 @@ jobs:
           node-version: 24
           cache: pnpm
 
+      # Install all platform-specific lock entries for license evidence; this does not declare them as supported product targets.
+      - name: Configure cross-platform license evidence
+        run: node -e 'const fs=require("node:fs"); const p=JSON.parse(fs.readFileSync("package.json","utf8")); p.pnpm={...(p.pnpm||{}),supportedArchitectures:{os:["current","aix","android","darwin","freebsd","linux","netbsd","openbsd","openharmony","sunos","win32"],cpu:["current","arm","arm64","ia32","loong64","mips64el","ppc64","riscv64","s390x","x64"]}}; fs.writeFileSync("package.json",JSON.stringify(p,null,2)+"\n");'
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
