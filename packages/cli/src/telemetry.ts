@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { randomInt, randomUUID } from "node:crypto";
 import { mkdir, access, writeFile } from "node:fs/promises";
 import { homedir, platform } from "node:os";
 import { join } from "node:path";
@@ -42,11 +42,15 @@ function debug(...args: unknown[]): void {
   console.error(chalk.gray("[verglos:debug]"), ...args);
 }
 
-export function isTelemetryDisabled(explicitFlag?: boolean): boolean {
+export function isTelemetryDisabled(explicitFlag?: boolean, nonInteractive = false): boolean {
   if (explicitFlag === true) return true;
   const raw = process.env.VERGLOS_TELEMETRY;
+  // Non-interactive runs are opt-in only. This prevents quiet/JSON/CI/agent
+  // invocations from silently attaching project or paid identity metadata.
+  if (nonInteractive && raw == null) return true;
   if (raw == null) return false;
   const v = raw.trim().toLowerCase();
+  if (nonInteractive && !["1", "true", "on", "yes"].includes(v)) return true;
   return v === "0" || v === "false" || v === "off" || v === "no";
 }
 
@@ -210,7 +214,7 @@ export async function sendScanEvent(
   // Retry once with a small delay + jitter. `event_id` deduplicates on
   // the server via `onConflictDoNothing`, so a retry after a partial
   // success is safe — it will not double-count.
-  await new Promise((r) => setTimeout(r, RETRY_DELAY_MS + Math.random() * 250));
+  await new Promise((r) => setTimeout(r, RETRY_DELAY_MS + randomInt(0, 250)));
   const second = await fetchOnce(url, init, TIMEOUT_MS);
   debug("attempt 2 →", second ? `HTTP ${second.status}` : "no response");
 

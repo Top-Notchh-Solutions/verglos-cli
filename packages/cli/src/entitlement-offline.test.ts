@@ -57,6 +57,51 @@ test("loadCapabilities: honours a paid cache within 7-day grace when server is u
   assert.ok(caps.capabilities.includes("fix"));
 });
 
+test("resolveEntitlement: normalizes a legacy compliance cache to enterprise", async () => {
+  const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
+  seedCache(threeDaysAgo, "compliance", ["scan", "audit_trail"]);
+  const resolved = await withOfflineFetch(() => mod.resolveEntitlement({ forceRefresh: true }));
+  assert.equal(resolved.plan, "enterprise");
+  assert.equal(resolved.realPlan, "enterprise");
+  assert.equal(resolved.source, "cache");
+});
+
+test("loadCapabilities: rejects malformed cached capability shapes", async () => {
+  const dir = join(tempHome, ".verglos");
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix", 42], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+  const caps = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true }));
+  assert.equal(caps.plan, "free");
+  assert.equal(caps.capabilities.includes("fix"), false);
+});
+
+test("loadCapabilities: rejects unknown plans before accepting capabilities", async () => {
+  const dir = join(tempHome, ".verglos");
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ plan: "future-paid", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+  const caps = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true }));
+  assert.equal(caps.plan, "free");
+  assert.equal(caps.capabilities.includes("fix"), false);
+});
+
+test("loadCapabilities: rejects unknown real_plan metadata before accepting capabilities", async () => {
+  const dir = join(tempHome, ".verglos");
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ plan: "pro", real_plan: "future-paid", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: true, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+  const caps = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true }));
+  assert.equal(caps.plan, "free");
+  assert.equal(caps.capabilities.includes("fix"), false);
+});
+
+test("loadCapabilities: rejects control characters in capability names", async () => {
+  const dir = join(tempHome, ".verglos");
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix\nESCAPE"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+  const caps = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true }));
+  assert.equal(caps.plan, "free");
+  assert.equal(caps.capabilities.includes("fix\nESCAPE"), false);
+});
+
 test("loadCapabilities: drops to Free when cache is past the 7-day absolute-stale window", async () => {
   const tenDaysAgo = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
   seedCache(tenDaysAgo, "pro", ["scan", "fix", "monitor_register"]);

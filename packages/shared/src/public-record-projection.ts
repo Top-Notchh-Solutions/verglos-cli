@@ -7,7 +7,8 @@ export interface PublicRecordProjection { readonly manifestId: string; readonly 
 export function projectPublicRecord(manifest: ReleaseRecordManifestDocument): PublicRecordProjection {
   const parsed = parseReleaseRecordManifest(manifest); const decision = parsed.members.find((member) => member.kind === "release-decision");
   if (!decision) throw new Error("public projection requires a release-decision member");
-  return { manifestId: parsed.manifestId, manifestDigest: releaseRecordManifestDigest(parsed), generatedAt: parsed.generatedAt, decisionMemberDigest: `${decision.digest.algorithm}:${decision.digest.value}`, redaction: parsed.redaction, limitations: Object.freeze([...parsed.limitations]) };
+  const redaction = Object.freeze({ ...parsed.redaction, ...(parsed.redaction.manifestDigest ? { manifestDigest: Object.freeze({ ...parsed.redaction.manifestDigest }) } : {}) });
+  return { manifestId: parsed.manifestId, manifestDigest: releaseRecordManifestDigest(parsed), generatedAt: parsed.generatedAt, decisionMemberDigest: `${decision.digest.algorithm}:${decision.digest.value}`, redaction, limitations: Object.freeze([...parsed.limitations]) };
 }
 
 export interface VerifiedPublicRecordProjection extends PublicRecordProjection {

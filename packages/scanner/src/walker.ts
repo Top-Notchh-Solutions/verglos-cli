@@ -1,4 +1,5 @@
 import fg from "fast-glob";
+import { relative } from "node:path";
 import type { VerglosConfig } from "@verglos/shared";
 
 const DEFAULT_EXTENSIONS = [
@@ -62,7 +63,9 @@ export async function walkProject(
   for (const path of [...files, ...alwaysScan]) {
     unique.set(path, {
       path,
-      relativePath: path.replace(projectRoot, "").replace(/^\//, ""),
+      // Reports and context rules use a stable POSIX relative path on every
+      // host; Windows separators must never alter detector classification.
+      relativePath: relative(projectRoot, path).replaceAll("\\", "/"),
     });
   }
 

@@ -1,4 +1,5 @@
-export type PlanId = "free" | "pro" | "studio" | "enterprise";
+/** Public tiers are Free, Pro, Team, and Studio; Enterprise is contracted compatibility. */
+export type PlanId = "free" | "pro" | "team" | "studio" | "enterprise";
 
 export interface PlanCapability {
   label: string;
@@ -8,7 +9,7 @@ export interface PlanCapability {
 export interface PlanMatrixEntry {
   id: PlanId;
   label: string;
-  price: "$0" | "$29/mo" | "$199/mo" | "contact sales";
+  price: "$0" | "$29/mo" | "$99/mo" | "$249/mo" | "contact sales";
   paymentUrl: string | null;
 }
 
@@ -25,10 +26,16 @@ export const PLAN_MATRIX: Record<PlanId, PlanMatrixEntry> = {
     price: "$29/mo",
     paymentUrl: "https://verglos.com/checkout",
   },
+  team: {
+    id: "team",
+    label: "Team",
+    price: "$99/mo",
+    paymentUrl: "https://verglos.com/checkout",
+  },
   studio: {
     id: "studio",
     label: "Studio",
-    price: "$199/mo",
+    price: "$249/mo",
     paymentUrl: "mailto:topnotchh.solutions@gmail.com?subject=Verglos%20Studio",
   },
   enterprise: {
@@ -81,7 +88,8 @@ export interface PlanLimits {
 export const PLAN_LIMITS: Record<PlanId, PlanLimits> = {
   free: limits("free", "Free", 0, 0, 1, 1, null, null, "live"),
   pro: limits("pro", "Pro", 29, 290, 5, 2, null, 30, "live"),
-  studio: limits("studio", "Studio", 199, 1990, null, 10, 15, 365, "roadmap"),
+  team: limits("team", "Team", 99, 990, 25, 5, 20, 365, "roadmap"),
+  studio: limits("studio", "Studio", 249, 2490, null, 10, 15, 365, "roadmap"),
   enterprise: limits("enterprise", "Enterprise", null, null, null, null, null, null, "roadmap"),
 };
 
@@ -97,10 +105,11 @@ function row(
   pro: string | boolean,
   studio: string | boolean,
   enterprise: string | boolean,
+  team: string | boolean = pro,
 ): PlanCapability {
   return {
     label,
-    tiers: { free, pro, studio, enterprise },
+    tiers: { free, pro, team, studio, enterprise },
   };
 }
 

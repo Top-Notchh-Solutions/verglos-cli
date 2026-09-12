@@ -43,7 +43,10 @@ export async function runDockerInvocation(args: readonly string[], options: Dock
     return finish("completed", result.stdout, result.stderr, started, options.maxOutputBytes, options.sensitivePaths, exitCode);
   } catch (error) {
     const failure = error as NodeJS.ErrnoException & { readonly killed?: boolean; readonly signal?: string; readonly stdout?: Buffer | string; readonly stderr?: Buffer | string };
-    const timedOut = failure.killed === true || failure.code === "ETIMEDOUT" || failure.signal === "SIGTERM";
+    // A SIGTERM alone is not proof that the host timeout fired: a probe can
+    // intentionally terminate itself. Node marks timeout-driven execFile
+    // failures with `killed`/`ETIMEDOUT`; preserve other signals as failures.
+    const timedOut = failure.killed === true || failure.code === "ETIMEDOUT";
     const exitCode = typeof failure.code === "number" ? failure.code : undefined;
     return finish(timedOut ? "timed-out" : "failed", failure.stdout ?? "", failure.stderr ?? "", started, options.maxOutputBytes, options.sensitivePaths, exitCode);
   }

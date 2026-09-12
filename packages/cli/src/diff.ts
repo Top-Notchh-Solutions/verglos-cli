@@ -42,7 +42,7 @@ export async function executeDiff(basePath: string, headPath: string, json = fal
     return result.identityChanged || result.coverageChanged ? 3 : result.added.length || result.fixed.length ? 1 : 0;
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to diff release snapshots.";
-    if (json) console.log(JSON.stringify({ status: "error", message })); else if (!quiet) console.error(message);
+    if (json) console.log(JSON.stringify({ status: "error", message: "snapshot diff failed" })); else if (!quiet) console.error(message);
     return 2;
   }
 }

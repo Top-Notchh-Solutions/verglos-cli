@@ -91,7 +91,7 @@ function readVscodeMcpServers(
 }
 
 function agentConfigLocations(projectRoot: string): AgentConfigLocation[] {
-  const home = homedir();
+  const home = configuredHome();
   return [
     { agent: "Cursor", path: join(home, ".cursor", "mcp.json"), reader: readMcpServers },
     { agent: "Cursor (project)", path: join(projectRoot, ".cursor", "mcp.json"), reader: readMcpServers },
@@ -100,6 +100,10 @@ function agentConfigLocations(projectRoot: string): AgentConfigLocation[] {
     { agent: "Windsurf", path: join(home, ".codeium", "windsurf", "mcp_config.json"), reader: readMcpServers },
     { agent: "Cline", path: join(projectRoot, ".vscode", "settings.json"), reader: readVscodeMcpServers },
   ];
+}
+
+function configuredHome(): string {
+  return process.env.HOME || process.env.USERPROFILE || homedir();
 }
 
 async function fileExists(path: string): Promise<boolean> {
@@ -199,7 +203,7 @@ function checkOverscopedFilesystem(entry: McpServerEntry): boolean {
   const roots = args.filter(
     (a) => !a.startsWith("-") && !a.includes("modelcontextprotocol"),
   );
-  const home = homedir();
+  const home = configuredHome();
   return roots.some((r) => r === "/" || r === home || r === "~" || r === "$HOME");
 }
 

@@ -68,7 +68,9 @@ async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: n
       if (index >= items.length) return;
       const detector = items[index]!;
       onProgress?.({ phase: "detector", status: "started", detector: detector.id });
-      results[index] = [...await run(detector)];
+      const detectorResults = await run(detector);
+      if (signal?.aborted) throw new Error("scan cancelled");
+      results[index] = [...detectorResults];
       onProgress?.({ phase: "detector", status: "completed", detector: detector.id });
     }
   };
@@ -128,16 +130,22 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   if (options.signal?.aborted) throw new Error("scan cancelled");
   const detectorConcurrency = options.detectorConcurrency ?? DEFAULT_DETECTOR_CONCURRENCY;
   if (!Number.isInteger(detectorConcurrency) || detectorConcurrency < 1 || detectorConcurrency > 8) throw new Error("detector concurrency must be between 1 and 8");
+  if (!isAbsolute(options.projectRoot)) throw new Error("project root must be an absolute directory");
+  const projectEntry = await lstat(options.projectRoot).catch(() => undefined);
+  if (!projectEntry?.isDirectory()) throw new Error("project root must be an absolute directory");
   const start = Date.now();
   options.onProgress?.({ phase: "config", status: "started" });
   const config = await loadConfig(options.projectRoot, options.configPath);
   options.onProgress?.({ phase: "config", status: "completed" });
+  if (options.signal?.aborted) throw new Error("scan cancelled");
   options.onProgress?.({ phase: "target", status: "started" });
   const { type: projectType } = await detectProjectType(options.projectRoot);
   options.onProgress?.({ phase: "target", status: "completed" });
+  if (options.signal?.aborted) throw new Error("scan cancelled");
   options.onProgress?.({ phase: "walk", status: "started" });
   const files = await walkProject(options.projectRoot, config);
   options.onProgress?.({ phase: "walk", status: "completed" });
+  if (options.signal?.aborted) throw new Error("scan cancelled");
 
   const detectorIds = [...(options.detectors ?? [
     "secrets",

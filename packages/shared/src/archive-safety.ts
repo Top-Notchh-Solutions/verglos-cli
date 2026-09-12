@@ -1,4 +1,4 @@
-import { normalize, posix } from "node:path";
+import { posix } from "node:path";
 
 export interface ArchiveMember { readonly path: string; readonly kind: "file" | "directory" | "symlink" | "hardlink"; readonly size: number; readonly linkTarget?: string; }
 export class ArchiveSafetyError extends Error { override readonly name = "ArchiveSafetyError"; constructor(readonly code: "TRAVERSAL" | "LINK_ESCAPE" | "DUPLICATE" | "LIMIT", message: string) { super(message); } }
@@ -9,7 +9,7 @@ export function validateArchiveMembers(members: readonly ArchiveMember[], limits
   const seen = new Set<string>(); let total = 0;
   for (const member of members) {
     const path = member.path.replaceAll("\\", "/");
-    if (!path || path.startsWith("/") || /^[A-Za-z]:\//.test(path) || normalize(path) !== path || path.split("/").includes("..")) throw new ArchiveSafetyError("TRAVERSAL", "Archive member path escapes the extraction root.");
+    if (!path || path.startsWith("/") || /^[A-Za-z]:\//.test(path) || posix.normalize(path) !== path || path.split("/").includes("..")) throw new ArchiveSafetyError("TRAVERSAL", "Archive member path escapes the extraction root.");
     if (seen.has(path)) throw new ArchiveSafetyError("DUPLICATE", "Archive contains duplicate member paths."); seen.add(path);
     if (!Number.isSafeInteger(member.size) || member.size < 0) throw new ArchiveSafetyError("LIMIT", "Archive member size is invalid."); total += member.size;
     if (total > maxBytes) throw new ArchiveSafetyError("LIMIT", "Archive exceeds the aggregate size limit.");

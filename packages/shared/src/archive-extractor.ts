@@ -1,6 +1,6 @@
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { dirname, resolve } from "node:path";
+import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import { validateArchiveMembers, ArchiveSafetyError, type ArchiveMember } from "./archive-safety.js";
 
 export interface ArchivePayload extends ArchiveMember { readonly data?: Uint8Array; }
@@ -19,7 +19,8 @@ export async function extractArchiveMembers(root: string, members: readonly Arch
   try {
     for (const member of members) {
       const target = resolve(destination, member.path);
-      if (target !== destination && !target.startsWith(`${destination}/`)) throw new ArchiveSafetyError("TRAVERSAL", "Archive member path escapes the extraction root.");
+      const relativeTarget = relative(destination, target);
+      if (target !== destination && (isAbsolute(relativeTarget) || relativeTarget === ".." || relativeTarget.startsWith(`..${sep}`))) throw new ArchiveSafetyError("TRAVERSAL", "Archive member path escapes the extraction root.");
       if (member.kind === "directory") { await mkdir(target, { recursive: true }); continue; }
       if (member.kind === "symlink" || member.kind === "hardlink") throw new ArchiveExtractionError("UNSUPPORTED_LINK", "Archive links are not materialized during safe extraction.");
       if (!member.data) throw new ArchiveExtractionError("MISSING_DATA", `Archive member ${member.path} has no payload.`);

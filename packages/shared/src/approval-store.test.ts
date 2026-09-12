@@ -29,6 +29,16 @@ test("approval store rejects altered receipts and tampered files", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("approval store rejects request ID replay with widened scope", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-approvals-replay-"));
+  try {
+    const receipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    await putApprovalReceipt(root, receipt);
+    const widened = createApprovalReceipt({ ...request, files: ["src/a.ts", "src/secret.ts"] }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    await assert.rejects(() => putApprovalReceipt(root, widened), /request ID has already been used/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("approval store rejects symlink receipt entries", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-approvals-link-"));
   try {

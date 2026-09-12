@@ -100,6 +100,8 @@ function sleep(ms: number): Promise<void> {
 
 export interface LoginOptions {
   timeoutMs?: number;
+  json?: boolean;
+  quiet?: boolean;
 }
 
 export async function executeLogin(opts: LoginOptions = {}): Promise<number> {
@@ -110,31 +112,40 @@ export async function executeLogin(opts: LoginOptions = {}): Promise<number> {
   try {
     start = await startDeviceFlow(apiUrl);
   } catch (err) {
-    console.error(
-      chalk.red(err instanceof Error ? err.message : "Could not start login."),
-    );
+    const message = err instanceof Error ? err.message : "Could not start login.";
+    if (opts.json) console.log(JSON.stringify({ status: "error", code: "LOGIN_START", message }));
+    else if (!opts.quiet) console.error(chalk.red(message));
     return 1;
   }
 
-  console.log(chalk.bold("Verglos sign-in"));
-  console.log("");
-  console.log("  Visit:");
-  console.log(`    ${chalk.cyan(start.verify_url_short)}`);
-  console.log("");
-  console.log("  And enter the code:");
-  console.log(`    ${chalk.bold(start.user_code)}`);
-  console.log("");
-  console.log(chalk.gray("  Or open this URL directly:"));
-  console.log(chalk.gray(`    ${start.verify_url}`));
-  console.log("");
+  if (opts.json) {
+    console.log(JSON.stringify({
+      status: "pending",
+      verifyUrl: start.verify_url,
+      verifyUrlShort: start.verify_url_short,
+      userCode: start.user_code,
+      expiresAt: start.expires_at,
+    }));
+  } else if (!opts.quiet) {
+    console.log(chalk.bold("Verglos sign-in"));
+    console.log("");
+    console.log("  Visit:");
+    console.log(`    ${chalk.cyan(start.verify_url_short)}`);
+    console.log("");
+    console.log("  And enter the code:");
+    console.log(`    ${chalk.bold(start.user_code)}`);
+    console.log("");
+    console.log(chalk.gray("  Or open this URL directly:"));
+    console.log(chalk.gray(`    ${start.verify_url}`));
+    console.log("");
+  }
 
   // Best-effort open — swallow errors, don't block the user.
   open(start.verify_url).catch(() => {});
 
-  const spinner = ora({
-    text: "Waiting for confirmation in your browser...",
-    color: "gray",
-  }).start();
+  const spinner = opts.json || opts.quiet
+    ? undefined
+    : ora({ text: "Waiting for confirmation in your browser...", color: "gray" }).start();
 
   const pollIntervalMs = Math.max(
     1000,
@@ -149,7 +160,7 @@ export async function executeLogin(opts: LoginOptions = {}): Promise<number> {
       if (!status) continue;
 
       if (status.status === "authorized") {
-        spinner.stop();
+        spinner?.stop();
         await saveCredentials({
           ...creds,
           licenseKey: status.license_key,
@@ -164,39 +175,32 @@ export async function executeLogin(opts: LoginOptions = {}): Promise<number> {
           : status.plan === "founder"
             ? " · unlimited"
             : "";
-        console.log(
-          chalk.green(`✓ ${status.plan.toUpperCase()} activated${renewal}`),
-        );
-        console.log(chalk.gray("  Run `verglos whoami` to double-check."));
+        if (opts.json) console.log(JSON.stringify({ status: "ok", plan: status.plan, expiresAt: status.expires_at }));
+        else if (!opts.quiet) {
+          console.log(chalk.green(`✓ ${status.plan.toUpperCase()} activated${renewal}`));
+          console.log(chalk.gray("  Run `verglos whoami` to double-check."));
+        }
         return 0;
       }
 
       if (status.status === "expired") {
-        spinner.stop();
-        console.error(
-          chalk.red(
-            "Login code expired before you confirmed. Run `verglos login` again.",
-          ),
-        );
+        spinner?.stop();
+        if (opts.json) console.log(JSON.stringify({ status: "error", code: "LOGIN_EXPIRED", message: "Login code expired before confirmation." }));
+        else if (!opts.quiet) console.error(chalk.red("Login code expired before you confirmed. Run `verglos login` again."));
         return 1;
       }
       // status === "pending" → keep spinning.
     }
 
-    spinner.stop();
-    console.error(
-      chalk.red(
-        "Timed out waiting for browser confirmation (15 minutes). Run `verglos login` again when you're ready.",
-      ),
-    );
+    spinner?.stop();
+    if (opts.json) console.log(JSON.stringify({ status: "error", code: "LOGIN_TIMEOUT", message: "Timed out waiting for browser confirmation." }));
+    else if (!opts.quiet) console.error(chalk.red("Timed out waiting for browser confirmation (15 minutes). Run `verglos login` again when you're ready."));
     return 1;
   } catch (err) {
-    spinner.stop();
-    console.error(
-      chalk.red(
-        `Login failed: ${err instanceof Error ? err.message : "unknown error"}`,
-      ),
-    );
+    spinner?.stop();
+    const message = `Login failed: ${err instanceof Error ? err.message : "unknown error"}`;
+    if (opts.json) console.log(JSON.stringify({ status: "error", code: "LOGIN_FAILED", message: "login failed" }));
+    else if (!opts.quiet) console.error(chalk.red(message));
     return 1;
   }
 }

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { runHunt } from "./index.js";
-import { createApprovalReceipt, parseHuntRecipe, type ScanResult } from "@verglos/shared";
+import { createApprovalReceipt, huntRecipeDigest, parseHuntRecipe, type ScanResult } from "@verglos/shared";
 
 const report = {
   projectRoot: "/tmp/project",
@@ -19,7 +19,7 @@ const report = {
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
 const execution = {
   recipe: parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-runner", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, memoryMb: 256, outputBytes: 10000, processes: 32 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } }),
-  trust: { signers: ["verglos-release"] },
+  trust: { signers: ["verglos-release"], recipeDigests: [huntRecipeDigest(parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-runner", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, memoryMb: 256, outputBytes: 10000, processes: 32 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } }))] },
   approval: createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: subjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" }),
   ruleId: "d1-1", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", at: "2026-01-01T00:02:00Z",
 };
@@ -82,6 +82,32 @@ test("Hunt cleans up when adapter preparation fails", async () => {
   assert.equal(cleaned, true);
 });
 
+test("Hunt adapter execution failures do not echo runtime error details", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { throw new Error("secret host path /private/customer"); },
+    async cleanup() {},
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.canonicalVerdict, "environment-error");
+  assert.equal(result.outcomes[0]?.reason, "Hunt adapter failed before a supported verdict could be evaluated");
+  assert.doesNotMatch(result.outcomes[0]?.reason ?? "", /customer|private/);
+});
+
+test("Hunt converts cleanup failure into an environment-error outcome", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { return { findingId: "critical-1", verdict: "true" as const, canonicalVerdict: "confirmed" as const, reason: "fixture", durationMs: 1 }; },
+    async cleanup() { throw new Error("secret cleanup path"); },
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
+  assert.equal(result.outcomes[0]?.canonicalVerdict, "environment-error");
+  assert.equal(result.outcomes[0]?.reason, "Hunt sandbox cleanup failed; verdict was not retained");
+});
+
 test("Hunt refuses adapter execution without an exact trust and approval binding", async () => {
   const adapter = { id: "test-probe", async prepare() {}, async execute() { throw new Error("must not execute"); }, async cleanup() {} };
   await assert.rejects(() => runHunt(report, { adapter }), /execution requires/);
@@ -123,6 +149,18 @@ test("Hunt rejects malformed adapter outcome fields", async () => {
   assert.match(result.outcomes[0]?.reason ?? "", /mismatched finding/);
 });
 
+test("Hunt rejects contradictory canonical verdicts", async () => {
+  const adapter = {
+    id: "test-probe",
+    async prepare() {},
+    async execute() { return { findingId: "critical-1", verdict: "true" as const, canonicalVerdict: "policy-denied" as const, reason: "fixture", durationMs: 1 }; },
+    async cleanup() {},
+  };
+  const result = await runHunt(report, { adapter, execution });
+  assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
+  assert.match(result.outcomes[0]?.reason ?? "", /mismatched finding/);
+});
+
 test("Hunt rejects unbounded adapter reasons and durations", async () => {
   const adapter = {
     id: "test-probe",
@@ -153,4 +191,14 @@ test("Hunt freezes projected outcomes before returning them", async () => {
   const executed = await runHunt(report, { adapter, execution });
   assert.ok(Object.isFrozen(executed.outcomes));
   assert.ok(Object.isFrozen(executed.outcomes[0]));
+});
+
+test("Hunt outcome findings are cloned and immutable", async () => {
+  const adapter = { id: "test-probe", async prepare() {}, async execute() { return { findingId: "critical-1", verdict: "false" as const, reason: "fixture", durationMs: 1 }; }, async cleanup() {} };
+  const result = await runHunt(report, { adapter, execution });
+  assert.notEqual(result.outcomes[0]?.finding, report.findings[0]);
+  assert.ok(Object.isFrozen(result.outcomes[0]?.finding));
+  assert.equal(result.outcomes[0]?.finding?.title, "critical");
+  (report.findings[0] as { title: string }).title = "changed after run";
+  assert.equal(result.outcomes[0]?.finding?.title, "critical");
 });

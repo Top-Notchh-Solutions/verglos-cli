@@ -35,6 +35,8 @@ export interface MonitorRegisterOptions {
   slack?: string;
   webhook?: string;
   label?: string;
+  json?: boolean;
+  quiet?: boolean;
 }
 
 interface LockPackage {
@@ -104,6 +106,11 @@ export async function executeMonitorRegister(
   options: MonitorRegisterOptions,
   cliVersion: string,
 ): Promise<number> {
+  const fail = (reason: string, status?: number): number => {
+    if (options.json) console.log(JSON.stringify({ status: "error", reason, ...(status === undefined ? {} : { httpStatus: status }) }));
+    else if (!options.quiet) console.error(chalk.red(`verglos monitor: ${reason}`));
+    return 1;
+  };
   const projectRoot = resolve(options.cwd ?? process.cwd());
   const channels: MonitorChannels = {
     email: options.email,
@@ -112,22 +119,22 @@ export async function executeMonitorRegister(
   };
   const check = validateChannels(channels);
   if (!check.ok) {
-    console.error(chalk.red(`verglos monitor: ${check.reason}`));
-    console.error(
-      chalk.gray(
-        "  Pass at least one of --email, --slack, --webhook. Example:",
-      ),
-    );
-    console.error(
-      chalk.gray("  $ verglos monitor register --email me@example.com"),
-    );
+    if (options.json) return fail(check.reason ?? "at least one alert channel is required");
+    if (!options.quiet) {
+      console.error(chalk.red(`verglos monitor: ${check.reason}`));
+      console.error(chalk.gray("  Pass at least one of --email, --slack, --webhook. Example:"));
+      console.error(chalk.gray("  $ verglos monitor register --email me@example.com"));
+    }
     return 1;
   }
 
   const fingerprint = await computeProjectFingerprint(projectRoot);
   if (!fingerprint.fingerprint) {
-    console.error(chalk.red("verglos monitor: cannot compute a stable project fingerprint."));
-    console.error(chalk.gray("  Init a git repo or add a package.json first."));
+    if (options.json) return fail("cannot compute a stable project fingerprint");
+    if (!options.quiet) {
+      console.error(chalk.red("verglos monitor: cannot compute a stable project fingerprint."));
+      console.error(chalk.gray("  Init a git repo or add a package.json first."));
+    }
     return 1;
   }
 
@@ -135,12 +142,10 @@ export async function executeMonitorRegister(
   try {
     dependencies = await collectDeps(projectRoot);
   } catch (error) {
-    console.error(chalk.red(`verglos monitor: ${error instanceof Error ? error.message : "could not read project dependencies."}`));
-    return 1;
+    return fail(error instanceof Error ? error.message : "could not read project dependencies.");
   }
   if (dependencies.length === 0) {
-    console.error(chalk.red("verglos monitor: no dependencies found."));
-    return 1;
+    return fail("no dependencies found");
   }
 
   const label = options.label ?? fingerprint.details;
@@ -173,30 +178,24 @@ export async function executeMonitorRegister(
       signal: controller.signal,
     });
   } catch {
-    console.error(chalk.red("verglos monitor: could not reach the server. Check your connection."));
-    return 1;
+    return fail("could not reach the server");
   } finally {
     clearTimeout(timer);
   }
   if (res.body) await res.body.cancel();
 
   if (res.status === 401 || res.status === 402) {
-    console.error(
-      chalk.red(
-        `verglos monitor: license required (HTTP ${res.status}). Run \`verglos login\` first.`,
-      ),
-    );
-    return 1;
+    return fail("license required", res.status);
   }
   if (!res.ok) {
-    console.error(
-      chalk.red(
-        `verglos monitor: registration failed with HTTP ${res.status}.`,
-      ),
-    );
-    return 1;
+    return fail("registration failed", res.status);
   }
 
+  if (options.json) {
+    console.log(JSON.stringify({ status: "ok", projectFingerprint: fingerprint.fingerprint, projectLabel: label, dependencyCount: dependencies.length }));
+    return 0;
+  }
+  if (options.quiet) return 0;
   console.log(chalk.green(`✓ Registered ${dependencies.length} dependencies for continuous CVE monitoring.`));
   console.log(chalk.gray(`  Project: ${label}`));
   console.log(
@@ -269,14 +268,25 @@ interface MonitorStatusEntry {
   alertsFiredLast7d?: number;
 }
 
-export async function executeMonitorStatus(): Promise<number> {
+export interface MonitorStatusOptions {
+  json?: boolean;
+  quiet?: boolean;
+}
+
+export async function executeMonitorStatus(options: MonitorStatusOptions = {}): Promise<number> {
   const result = await authorizedFetch("/api/v1/monitor/registrations", { method: "GET" });
   if (!result.ok) {
-    explainFetchFailure("status", result.reason, result.status);
+    if (options.json) console.log(JSON.stringify({ status: "error", reason: result.reason, ...(result.status === undefined ? {} : { httpStatus: result.status }) }));
+    else if (!options.quiet) explainFetchFailure("status", result.reason, result.status);
     return result.reason === "not_implemented" ? 0 : 1;
   }
   const body = result.json as { registrations?: MonitorStatusEntry[] };
   const entries = body.registrations ?? [];
+  if (options.json) {
+    console.log(JSON.stringify({ status: "ok", registrations: entries }));
+    return 0;
+  }
+  if (options.quiet) return 0;
   if (entries.length === 0) {
     console.log(chalk.gray("No projects registered for continuous monitoring."));
     console.log(chalk.gray("  Run `verglos monitor register --email you@example.com` from a project directory."));
@@ -312,6 +322,8 @@ export async function executeMonitorStatus(): Promise<number> {
 export interface MonitorUnregisterOptions {
   cwd?: string;
   projectFingerprint?: string;
+  json?: boolean;
+  quiet?: boolean;
 }
 
 export async function executeMonitorUnregister(
@@ -322,8 +334,14 @@ export async function executeMonitorUnregister(
     const projectRoot = resolve(options.cwd ?? process.cwd());
     const fp = await computeProjectFingerprint(projectRoot);
     if (!fp.fingerprint) {
-      console.error(chalk.red("verglos monitor unregister: cannot compute a project fingerprint here."));
-      console.error(chalk.gray("  cd into a project directory or pass --project-fingerprint <fp>."));
+      if (options.json) {
+        console.log(JSON.stringify({ status: "error", reason: "cannot compute a project fingerprint" }));
+        return 1;
+      }
+      if (!options.quiet) {
+        console.error(chalk.red("verglos monitor unregister: cannot compute a project fingerprint here."));
+        console.error(chalk.gray("  cd into a project directory or pass --project-fingerprint <fp>."));
+      }
       return 1;
     }
     fingerprint = fp.fingerprint;
@@ -333,10 +351,12 @@ export async function executeMonitorUnregister(
     { method: "DELETE" },
   );
   if (!result.ok) {
-    explainFetchFailure("unregister", result.reason, result.status);
+    if (options.json) console.log(JSON.stringify({ status: "error", reason: result.reason, ...(result.status === undefined ? {} : { httpStatus: result.status }) }));
+    else if (!options.quiet) explainFetchFailure("unregister", result.reason, result.status);
     return result.reason === "not_implemented" || result.reason === "not_found" ? 0 : 1;
   }
-  console.log(chalk.green(`✓ Unregistered ${fingerprint.slice(0, 12)} — no further alerts for this project.`));
+  if (options.json) console.log(JSON.stringify({ status: "ok", projectFingerprint: fingerprint }));
+  else if (!options.quiet) console.log(chalk.green(`✓ Unregistered ${fingerprint.slice(0, 12)} — no further alerts for this project.`));
   return 0;
 }
 
@@ -345,6 +365,8 @@ export async function executeMonitorUnregister(
 export interface MonitorTestAlertOptions {
   cwd?: string;
   projectFingerprint?: string;
+  json?: boolean;
+  quiet?: boolean;
 }
 
 export async function executeMonitorTestAlert(
@@ -355,8 +377,11 @@ export async function executeMonitorTestAlert(
     const projectRoot = resolve(options.cwd ?? process.cwd());
     const fp = await computeProjectFingerprint(projectRoot);
     if (!fp.fingerprint) {
-      console.error(chalk.red("verglos monitor test-alert: cannot compute a project fingerprint here."));
-      console.error(chalk.gray("  cd into a registered project or pass --project-fingerprint <fp>."));
+      if (options.json) console.log(JSON.stringify({ status: "error", reason: "cannot compute a project fingerprint" }));
+      else if (!options.quiet) {
+        console.error(chalk.red("verglos monitor test-alert: cannot compute a project fingerprint here."));
+        console.error(chalk.gray("  cd into a registered project or pass --project-fingerprint <fp>."));
+      }
       return 1;
     }
     fingerprint = fp.fingerprint;
@@ -366,11 +391,17 @@ export async function executeMonitorTestAlert(
     body: { projectFingerprint: fingerprint },
   });
   if (!result.ok) {
-    explainFetchFailure("test-alert", result.reason, result.status);
+    if (options.json) console.log(JSON.stringify({ status: "error", reason: result.reason, ...(result.status === undefined ? {} : { httpStatus: result.status }) }));
+    else if (!options.quiet) explainFetchFailure("test-alert", result.reason, result.status);
     return result.reason === "not_implemented" ? 0 : 1;
   }
   const body = result.json as { sent?: { email?: boolean; slack?: boolean; webhook?: boolean } };
   const sent = body.sent ?? {};
+  if (options.json) {
+    console.log(JSON.stringify({ status: "ok", projectFingerprint: fingerprint, sent }));
+    return 0;
+  }
+  if (options.quiet) return 0;
   console.log(chalk.green("✓ Test alert dispatched."));
   const details = [
     sent.email ? "email delivered" : "",

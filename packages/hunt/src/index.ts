@@ -1,5 +1,5 @@
 import type { ScanResult } from "@verglos/shared";
-import { bindHuntExecution } from "@verglos/shared";
+import { bindHuntExecution, classifyHuntOutcome } from "@verglos/shared";
 import type { HuntFindingOutcome, HuntOptions, HuntResult } from "./types.js";
 
 export * from "./types.js";
@@ -37,6 +37,7 @@ export async function runHunt(
     const binding = bindHuntExecution(opts.execution);
     const outcomes: HuntFindingOutcome[] = [];
     let prepareAttempted = false;
+    let cleanupFailed = false;
     try {
       prepareAttempted = true;
       await opts.adapter.prepare();
@@ -44,7 +45,7 @@ export async function runHunt(
         const elapsed = Date.now() - started;
         const remaining = maxDurationMs - elapsed;
         if (remaining <= 0) {
-          outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: "Hunt total duration expired before adapter execution", durationMs: 0 });
+          outcomes.push({ findingId: finding.id, verdict: "not_attemptable", canonicalVerdict: classifyHuntOutcome({ policyAllowed: true, supported: true, timedOut: true }), finding, reason: "Hunt total duration expired before adapter execution", durationMs: 0 });
           continue;
         }
         const before = Date.now();
@@ -52,16 +53,38 @@ export async function runHunt(
           const outcome = await opts.adapter.execute({ finding, projectRoot, timeoutMs: remaining, binding });
           const validated = validateAdapterOutcome(outcome);
           if (!validated || validated.findingId !== finding.id) {
-            outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: "Hunt adapter returned a mismatched finding identity", durationMs: Math.max(0, Date.now() - before) });
+            outcomes.push({ findingId: finding.id, verdict: "not_attemptable", canonicalVerdict: classifyHuntOutcome({ policyAllowed: true, supported: false }), finding, reason: "Hunt adapter returned a mismatched finding identity", durationMs: Math.max(0, Date.now() - before) });
           } else {
             outcomes.push({ ...validated, finding, durationMs: Math.max(0, Date.now() - before) });
           }
         } catch (error) {
-          outcomes.push({ findingId: finding.id, verdict: "not_attemptable", finding, reason: `Hunt adapter failed: ${error instanceof Error ? error.message : "unknown error"}`, durationMs: Math.max(0, Date.now() - before) });
+          outcomes.push({ findingId: finding.id, verdict: "not_attemptable", canonicalVerdict: classifyHuntOutcome({ policyAllowed: true, supported: true, environmentError: true }), finding, reason: "Hunt adapter failed before a supported verdict could be evaluated", durationMs: Math.max(0, Date.now() - before) });
         }
       }
     } finally {
-      if (prepareAttempted) await opts.adapter.cleanup();
+      if (prepareAttempted) {
+        try {
+          await opts.adapter.cleanup();
+        } catch {
+          // Cleanup failure is intentionally opaque and must never mask a
+          // structured result or leave a verdict looking trustworthy.
+          cleanupFailed = true;
+        }
+      }
+    }
+    if (cleanupFailed) {
+      for (let index = 0; index < outcomes.length; index += 1) {
+        const outcome = outcomes[index];
+        if (!outcome) continue;
+        outcomes[index] = {
+          findingId: outcome.findingId,
+          verdict: "not_attemptable",
+          canonicalVerdict: classifyHuntOutcome({ policyAllowed: true, supported: true, environmentError: true }),
+          finding: outcome.finding,
+          reason: "Hunt sandbox cleanup failed; verdict was not retained",
+          durationMs: outcome.durationMs,
+        };
+      }
     }
     return { report, outcomes: freezeOutcomes(outcomes), startedAt, completedAt: new Date().toISOString(), sandbox: opts.adapter.id };
   }
@@ -71,6 +94,7 @@ export async function runHunt(
   const outcomes = findings.map((finding) => ({
     findingId: finding.id,
     verdict: "not_attemptable" as const,
+    canonicalVerdict: classifyHuntOutcome({ policyAllowed: true, supported: false }),
     finding,
     reason,
     durationMs: 0,
@@ -85,7 +109,21 @@ export async function runHunt(
 }
 
 function freezeOutcomes(outcomes: readonly HuntFindingOutcome[]): readonly HuntFindingOutcome[] {
-  return Object.freeze(outcomes.map((outcome) => Object.freeze({ ...outcome })));
+  return Object.freeze(outcomes.map((outcome) => {
+    const finding = outcome.finding === undefined ? undefined : cloneAndFreeze(outcome.finding);
+    return Object.freeze({ ...outcome, ...(finding === undefined ? {} : { finding }) });
+  }));
+}
+
+function cloneAndFreeze<T>(value: T): T {
+  const clone = structuredClone(value);
+  const visit = (current: unknown): void => {
+    if (!current || typeof current !== "object" || Object.isFrozen(current)) return;
+    for (const child of Object.values(current as Record<string, unknown>)) visit(child);
+    Object.freeze(current);
+  };
+  visit(clone);
+  return clone;
 }
 
 function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined {
@@ -101,6 +139,16 @@ function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined 
   if (outcome.truncated !== undefined && typeof outcome.truncated !== "boolean") return undefined;
   if (outcome.redacted !== undefined && outcome.redacted !== true) return undefined;
   if (outcome.executionStatus !== undefined && outcome.executionStatus !== "completed" && outcome.executionStatus !== "timed-out" && outcome.executionStatus !== "failed") return undefined;
+  if (outcome.canonicalVerdict !== undefined && (typeof outcome.canonicalVerdict !== "string" || !["confirmed", "not-reproduced", "inconclusive", "not-supported", "environment-error", "policy-denied"].includes(outcome.canonicalVerdict))) return undefined;
+  if (outcome.canonicalVerdict !== undefined) {
+    const canonical = outcome.canonicalVerdict as string;
+    const compatible = outcome.verdict === "true"
+      ? canonical === "confirmed"
+      : outcome.verdict === "false"
+        ? canonical === "not-reproduced"
+        : ["inconclusive", "not-supported", "environment-error", "policy-denied"].includes(canonical);
+    if (!compatible) return undefined;
+  }
   return {
     findingId: outcome.findingId,
     verdict: outcome.verdict,
@@ -112,5 +160,6 @@ function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined 
     ...(outcome.truncated === undefined ? {} : { truncated: outcome.truncated }),
     ...(outcome.redacted === undefined ? {} : { redacted: true as const }),
     ...(outcome.executionStatus === undefined ? {} : { executionStatus: outcome.executionStatus }),
+    ...(outcome.canonicalVerdict === undefined ? {} : { canonicalVerdict: outcome.canonicalVerdict }),
   } as HuntFindingOutcome;
 }

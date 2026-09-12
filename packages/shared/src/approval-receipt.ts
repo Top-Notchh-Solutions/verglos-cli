@@ -16,7 +16,10 @@ const ApprovalRequestBaseSchema = z.object({
   requestedAt: Time,
   expiresAt: Time,
 }).strict();
-export const ApprovalRequestSchema = ApprovalRequestBaseSchema.superRefine((value, ctx) => { if (value.expiresAt <= value.requestedAt) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["expiresAt"], message: "approval expiry must follow request time" }); });
+export const ApprovalRequestSchema = ApprovalRequestBaseSchema.superRefine((value, ctx) => {
+  if (value.expiresAt <= value.requestedAt) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["expiresAt"], message: "approval expiry must follow request time" });
+  if (new Set(value.network).size !== value.network.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["network"], message: "approval network scope must not contain duplicates" });
+});
 export type ApprovalRequest = z.infer<typeof ApprovalRequestSchema>;
 export const ApprovalReceiptSchema = ApprovalRequestBaseSchema.extend({ decision: z.enum(["approved", "denied"]), decidedBy: Id, decidedAt: Time, requestDigest: z.string().regex(/^sha256:[a-f0-9]{64}$/) }).strict().superRefine((value, ctx) => { if (value.decidedAt < value.requestedAt || value.decidedAt >= value.expiresAt) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["decidedAt"], message: "approval decision must fall within the request validity window" }); });
 export type ApprovalReceipt = z.infer<typeof ApprovalReceiptSchema>;

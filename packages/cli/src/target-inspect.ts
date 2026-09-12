@@ -28,7 +28,7 @@ export async function executeTargetInspect(kind: TargetKind, value: string, json
     return result.coverage === "complete" ? 0 : 3;
   } catch (error) {
     const message = error instanceof Error ? error.message : "Target inspection failed.";
-    if (json) console.log(JSON.stringify({ target, status: "error", message })); else if (!quiet) console.error(message);
+    if (json) console.log(JSON.stringify({ target, status: "error", message: "target inspection failed" })); else if (!quiet) console.error(message);
     return 78;
   }
 }

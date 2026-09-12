@@ -29,6 +29,17 @@ test("Docker runner turns timeout and process failures into explicit non-success
   assert.equal(failed.status, "failed");
 });
 
+test("Docker runner does not mistake a probe SIGTERM for host timeout", async () => {
+  const error = new Error("probe terminated") as Error & { signal?: string };
+  error.signal = "SIGTERM";
+  const result = await runDockerInvocation(["run"], {
+    timeoutMs: 500,
+    maxOutputBytes: 128,
+    run: async () => { throw error; },
+  });
+  assert.equal(result.status, "failed");
+});
+
 test("Docker runner preserves a successful exit code for assertion evaluation", async () => {
   const result = await runDockerInvocation(["run"], { timeoutMs: 500, maxOutputBytes: 128, run: async () => ({ stdout: "ok", stderr: "", exitCode: 0 }) });
   assert.equal(result.exitCode, 0);

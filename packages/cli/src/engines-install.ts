@@ -63,5 +63,9 @@ export async function executeEngineInstall(engineId: string, version: string, ar
       }
     }
     return 0;
-  } catch (error) { if (!options.quiet) console.error(error instanceof Error ? error.message : "Engine installation failed."); return 78; }
+  } catch (error) {
+    if (options.json) console.log(JSON.stringify({ status: "error", code: "ENGINE_INSTALL_INPUT", message: "engine installation failed" }));
+    else if (!options.quiet) console.error(error instanceof Error ? error.message : "Engine installation failed.");
+    return 78;
+  }
 }

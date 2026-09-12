@@ -16,4 +16,4 @@
  * the public npm registry, not Verglos infra).
  */
 export { createVerglosMcpServer, startStdioServer } from "./server.js";
-export type { CheckBeforeWriteInput, CheckBeforeWriteResult } from "./server.js";
+export type { CheckBeforeWriteInput, CheckBeforeWriteResult, VerglosMcpServerOptions } from "./server.js";

@@ -13,7 +13,8 @@
  * same commit or the offline-Pro path drifts from the online one.
  */
 
-export type Tier = "free" | "pro" | "studio" | "enterprise" | "founder";
+/** Public tiers are Free, Pro, Team, and Studio; legacy enterprise/founder remain internal aliases. */
+export type Tier = "free" | "pro" | "team" | "studio" | "enterprise" | "founder";
 
 const FREE_CAPS = [
   "scan.core",
@@ -77,6 +78,7 @@ const LEGACY_CLI_ALIASES = [
 export const TIER_CAPABILITIES: Record<Tier, readonly string[]> = {
   free: [...FREE_CAPS, ...LEGACY_CLI_ALIASES.slice(0, 9)],
   pro: [...FREE_CAPS, ...PRO_ADDS, ...LEGACY_CLI_ALIASES],
+  team: [...FREE_CAPS, ...PRO_ADDS, ...LEGACY_CLI_ALIASES],
   studio: [...FREE_CAPS, ...PRO_ADDS, ...STUDIO_ADDS, ...LEGACY_CLI_ALIASES],
   enterprise: [
     ...FREE_CAPS,
@@ -101,6 +103,7 @@ export function defaultCapabilitiesFor(tier: Tier): string[] {
 const KNOWN_TIERS: ReadonlySet<Tier> = new Set([
   "free",
   "pro",
+  "team",
   "studio",
   "enterprise",
   "founder",

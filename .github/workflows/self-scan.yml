@@ -14,10 +14,15 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: self-scan-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   scan:
     name: Verglos scans Verglos
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -36,17 +41,97 @@ jobs:
           node-version: 24
           cache: pnpm
 
+      # Install all platform-specific lock entries for license evidence; this does not declare them as supported product targets.
+      - name: Configure cross-platform license evidence
+        run: node -e 'const fs=require("node:fs"); const p=JSON.parse(fs.readFileSync("package.json","utf8")); p.pnpm={...(p.pnpm||{}),supportedArchitectures:{os:["current","aix","android","darwin","freebsd","linux","netbsd","openbsd","openharmony","sunos","win32"],cpu:["current","arm","arm64","ia32","loong64","mips64el","ppc64","riscv64","s390x","x64"]}}; fs.writeFileSync("package.json",JSON.stringify(p,null,2)+"\n");'
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Check dependency license inventory
+        run: node scripts/license-inventory.mjs --check > dependency-license-inventory.json
+
+      - name: Test dependency license inventory and SBOM coverage
+        run: node --test scripts/license-inventory.test.mjs
+
+      - name: Check third-party notices drift
+        run: |
+          node scripts/generate-third-party-notices.mjs > generated-third-party-notices
+          test -s generated-third-party-notices
+          grep -q '^THIRD-PARTY NOTICES$' generated-third-party-notices
+
+      - name: Check CycloneDX SBOM drift
+        run: |
+          node scripts/generate-sbom.mjs > generated-sbom.json
+          node -e 'const x=require("./generated-sbom.json"); if(x.bomFormat!=="CycloneDX" || !Array.isArray(x.components) || x.components.length===0) process.exit(1)'
+
+      - name: Check SPDX SBOM drift
+        run: |
+          node scripts/generate-spdx.mjs > generated-spdx.json
+          node -e 'const x=require("./generated-spdx.json"); if(x.spdxVersion!=="SPDX-2.3" || !Array.isArray(x.packages) || x.packages.length===0) process.exit(1)'
+
+      - name: Upload license and SBOM evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-license-evidence-${{ github.sha }}
+          path: |
+            dependency-license-inventory.json
+            generated-third-party-notices
+            generated-sbom.json
+            generated-spdx.json
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Build
         run: pnpm build
 
+      - name: Qualify clean public package archives
+        run: |
+          node --test scripts/pack-public-packages.test.mjs scripts/package-surface-audit.test.mjs
+          node scripts/pack-public-packages.mjs .artifacts/public-packages
+          node scripts/check-packed-manifests.mjs .artifacts/public-packages
+
+      - name: Verify clean consumer install
+        run: |
+          set -o pipefail
+          node --test scripts/verify-clean-consumer.test.mjs
+          node scripts/verify-clean-consumer.mjs .artifacts/public-packages | tee .artifacts/public-packages/clean-consumer-verification.txt
+
+      - name: Upload public package evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-package-archives-${{ github.sha }}
+          path: |
+            .artifacts/public-packages/*.tgz
+            .artifacts/public-packages/clean-consumer-verification.txt
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Test
         run: pnpm test
 
+      - name: Run pinned Hunt Docker adversarial suite
+        env:
+          VERGLOS_HUNT_DOCKER_INTEGRATION: "1"
+          VERGLOS_HUNT_TEST_IMAGE: postgres:15-alpine
+          VERGLOS_HUNT_TEST_DIGEST: sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a
+        run: |
+          set -o pipefail
+          pnpm --filter @verglos/hunt test 2>&1 | tee hunt-docker-adversarial.log
+
+      - name: Upload Hunt adversarial evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: hunt-docker-adversarial-${{ github.sha }}
+          path: hunt-docker-adversarial.log
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Test release artifact verifier
-        run: node --test scripts/verify-release-artifacts.test.mjs
+        run: node --test scripts/verify-release-artifacts.test.mjs scripts/package-surface-audit.test.mjs
 
       - name: Typecheck
         run: pnpm typecheck

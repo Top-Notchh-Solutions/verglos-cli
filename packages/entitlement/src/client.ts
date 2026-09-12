@@ -135,6 +135,12 @@ export async function verifyEntitlement(
   const nowSec = Math.floor(now / 1000);
   const claimError = validateClaims(claims, nowSec);
   if (claimError) return { valid: false, reason: claimError };
+  // `compliance` was an older wire value. Preserve signature validation
+  // against the original bytes, but expose only the canonical Enterprise
+  // tier to callers so legacy tokens cannot drift into a separate plan.
+  const canonicalClaims: EntitlementClaims = (claims as { tier: string }).tier === "compliance"
+    ? { ...claims, tier: "enterprise" }
+    : claims;
 
   if (typeof claims.exp !== "number") {
     return { valid: false, reason: "claims are missing exp" };
@@ -146,7 +152,7 @@ export async function verifyEntitlement(
       token,
       lastVerifiedAt: new Date(now).toISOString(),
     });
-    return { valid: true, claims };
+    return { valid: true, claims: canonicalClaims };
   }
 
   // Token is past exp. Check the offline-grace window using the
@@ -158,12 +164,12 @@ export async function verifyEntitlement(
     cache.token === token &&
     now - new Date(cache.lastVerifiedAt).getTime() < OFFLINE_GRACE_MS
   ) {
-    return { valid: true, claims, inOfflineGrace: true };
+    return { valid: true, claims: canonicalClaims, inOfflineGrace: true };
   }
 
   return {
     valid: false,
-    claims,
+    claims: canonicalClaims,
     reason: "token expired past the 7-day offline grace window",
   };
 }
@@ -172,7 +178,7 @@ function validateClaims(value: unknown, nowSec: number): string | undefined {
   if (!value || typeof value !== "object" || Array.isArray(value)) return "claims must be an object";
   const claims = value as Record<string, unknown>;
   if (typeof claims.keyHash !== "string" || claims.keyHash.length === 0 || claims.keyHash.length > 256) return "claims have an invalid keyHash";
-  if (!new Set(["free", "pro", "studio", "enterprise", "compliance", "founder"]).has(claims.tier as string)) return "claims have an invalid tier";
+  if (!new Set(["free", "pro", "team", "studio", "enterprise", "compliance", "founder"]).has(claims.tier as string)) return "claims have an invalid tier";
   if (!Array.isArray(claims.projects) || claims.projects.some((project) => typeof project !== "string" || project.length > 4096)) return "claims have invalid projects";
   if (!Number.isInteger(claims.seats) || (claims.seats as number) < 0 || (claims.seats as number) > 100_000) return "claims have invalid seats";
   if (!Array.isArray(claims.features) || claims.features.some((feature) => typeof feature !== "string" || feature.length === 0 || feature.length > 256)) return "claims have invalid features";

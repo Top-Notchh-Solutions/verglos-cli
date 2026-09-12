@@ -128,6 +128,42 @@ test("monitor status: reports 'not yet shipped' on server 501 without failing th
   }
 });
 
+test("monitor status: emits bounded JSON without human prose", async () => {
+  seedCredentials("vg_test_key");
+  mockFetch(() => new Response(JSON.stringify({ registrations: [{ projectFingerprint: "a".repeat(64), projectLabel: "api" }] }), { status: 200 }));
+  const logs: string[] = [];
+  const origLog = console.log;
+  console.log = (msg?: unknown) => { logs.push(String(msg)); };
+  try {
+    const code = await mod.executeMonitorStatus({ json: true });
+    assert.equal(code, 0);
+    assert.deepEqual(JSON.parse(logs[0]!), { status: "ok", registrations: [{ projectFingerprint: "a".repeat(64), projectLabel: "api" }] });
+  } finally { console.log = origLog; }
+});
+
+test("monitor register: emits bounded JSON without channel secrets", async () => {
+  seedCredentials("vg_test_key");
+  const project = mkdtempSync(join(tmpdir(), "verglos-monitor-register-"));
+  mkdirSync(join(project, ".git"));
+  writeFileSync(join(project, "package.json"), JSON.stringify({ name: "example-project", version: "1.0.0", dependencies: { "example-pkg": "1.2.3" } }));
+  mockFetch(() => new Response(JSON.stringify({ ok: true }), { status: 200 }));
+  const logs: string[] = [];
+  const origLog = console.log;
+  console.log = (msg?: unknown) => { logs.push(String(msg)); };
+  try {
+    const code = await mod.executeMonitorRegister({ cwd: project, email: "owner@example.com", json: true }, "test-cli");
+    assert.equal(code, 0);
+    const value = JSON.parse(logs[0]!);
+    assert.equal(value.status, "ok");
+    assert.equal(value.dependencyCount, 1);
+    assert.equal(value.projectLabel, "example-project@1.0.0");
+    assert.equal("owner@example.com" in value, false);
+  } finally {
+    console.log = origLog;
+    rmSync(project, { recursive: true, force: true });
+  }
+});
+
 // ── unregister ────────────────────────────────────────────────────────────
 
 test("monitor unregister: sends DELETE to /api/v1/monitor/registration/:fp", async () => {
@@ -165,6 +201,20 @@ test("monitor unregister: reports 401 as 'license required'", async () => {
   }
 });
 
+test("monitor unregister: emits machine-safe JSON", async () => {
+  seedCredentials("vg_test_key");
+  mockFetch(() => new Response(JSON.stringify({ ok: true }), { status: 200 }));
+  const logs: string[] = [];
+  const origLog = console.log;
+  console.log = (msg?: unknown) => { logs.push(String(msg)); };
+  try {
+    const fingerprint = "b".repeat(64);
+    const code = await mod.executeMonitorUnregister({ projectFingerprint: fingerprint, json: true });
+    assert.equal(code, 0);
+    assert.deepEqual(JSON.parse(logs[0]!), { status: "ok", projectFingerprint: fingerprint });
+  } finally { console.log = origLog; }
+});
+
 // ── test-alert ────────────────────────────────────────────────────────────
 
 test("monitor test-alert: POSTs { projectFingerprint } to /api/v1/monitor/test-alert", async () => {
@@ -190,4 +240,18 @@ test("monitor test-alert: POSTs { projectFingerprint } to /api/v1/monitor/test-a
   } finally {
     console.log = origLog;
   }
+});
+
+test("monitor test-alert: emits machine-safe JSON without prose", async () => {
+  seedCredentials("vg_test_key");
+  mockFetch(() => new Response(JSON.stringify({ ok: true, sent: { webhook: true } }), { status: 200 }));
+  const logs: string[] = [];
+  const origLog = console.log;
+  console.log = (msg?: unknown) => { logs.push(String(msg)); };
+  try {
+    const fingerprint = "c".repeat(64);
+    const code = await mod.executeMonitorTestAlert({ projectFingerprint: fingerprint, json: true });
+    assert.equal(code, 0);
+    assert.deepEqual(JSON.parse(logs[0]!), { status: "ok", projectFingerprint: fingerprint, sent: { webhook: true } });
+  } finally { console.log = origLog; }
 });

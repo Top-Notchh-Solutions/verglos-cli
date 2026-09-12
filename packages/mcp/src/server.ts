@@ -59,7 +59,7 @@ const APPROVAL_RECEIPT_PROPERTY = {
  *   - Speaks JSON-RPC over stdio
  *   - Startup banner goes to stderr; stdout is reserved for MCP transport
  *   - Zero extra install (bundled in the CLI)
- *   - Free-tier only: no license check, no network on the hot path
+ *   - Host-supplied entitlement is optional; no network lookup occurs on the hot path
  */
 
 // ─── Tool schemas ─────────────────────────────────────────────────────────
@@ -229,7 +229,14 @@ const TOOLS = [
 export function jsonResponse(payload: unknown): {
   content: { type: "text"; text: string }[];
 } {
-  const text = JSON.stringify(payload, null, 2);
+  let text: string;
+  try {
+    const encoded = JSON.stringify(payload, null, 2);
+    if (typeof encoded !== "string") throw new Error("response is not serializable");
+    text = encoded;
+  } catch {
+    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "output", code: "MCP_OUTPUT_INVALID", message: "tool response is not serializable JSON" }) }] };
+  }
   if (Buffer.byteLength(text, "utf8") > MAX_TOOL_RESPONSE_BYTES) {
     return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "output", code: "MCP_OUTPUT_LIMIT", message: "tool response exceeds the 512 KiB limit" }) }] };
   }
@@ -276,17 +283,37 @@ function approvalFile(name: string, input: Record<string, unknown>): string | un
 export async function dispatchTool(
   name: string,
   args: Record<string, unknown> | undefined,
-  options: { readonly approvalStoreRoot?: string; readonly now?: string } = {},
+  options: { readonly approvalStoreRoot?: string; readonly now?: string; readonly plan?: "free" | "pro" | "team" | "studio" | "enterprise" } = {},
 ): Promise<{ content: { type: "text"; text: string }[] }> {
   if (args !== undefined && (!args || typeof args !== "object" || Array.isArray(args))) {
     return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be an object" }) }] };
   }
-  if (args !== undefined && Buffer.byteLength(JSON.stringify(args), "utf8") > MAX_TOOL_ARGUMENT_BYTES) {
-    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments exceed the 256 KiB limit" }) }] };
+  if (args !== undefined) {
+    let encodedArgs: string;
+    try {
+      const encoded = JSON.stringify(args);
+      if (typeof encoded !== "string") throw new Error("arguments are not serializable");
+      encodedArgs = encoded;
+    } catch {
+      return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be serializable JSON" }) }] };
+    }
+    if (Buffer.byteLength(encodedArgs, "utf8") > MAX_TOOL_ARGUMENT_BYTES) {
+      return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments exceed the 256 KiB limit" }) }] };
+    }
   }
   const input = args ?? {};
   const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
   const authority = mcpToolAuthority(name);
+  const registered = TOOLS.some((tool) => tool.name === name);
+  if (!registered) return invalid("MCP_UNKNOWN_TOOL", "unknown MCP tool");
+  if (!authority) return invalid("MCP_AUTHORITY_MISSING", "registered MCP tool has no shared authority metadata");
+  if (options.plan !== undefined) {
+    const capability = listAdvertisedTools().find((tool) => tool.name === name)?._meta?.["verglos/capability"] as { plan?: "free" | "pro" | "team" | "studio" | "enterprise" } | undefined;
+    const required = capability?.plan;
+    const rank = { free: 0, pro: 1, team: 2, studio: 3, enterprise: 4 } as const;
+    if (typeof options.plan !== "string" || !(options.plan in rank)) return invalid("MCP_ENTITLEMENT_INVALID", "invalid entitlement plan");
+    if (required && rank[options.plan] < rank[required]) return invalid("MCP_ENTITLEMENT_REQUIRED", `MCP tool requires the ${required} plan`);
+  }
   if (authority?.approvalRequired) {
     const approvalReceipt = input.approvalReceipt as ApprovalReceipt | undefined;
     const approval = authorizeAgentAction(authority.action, approvalReceipt, options.now ?? new Date().toISOString());
@@ -299,7 +326,7 @@ export async function dispatchTool(
     if (Array.isArray(receipt?.network) && receipt.network.length > 0) return invalid("MCP_APPROVAL_SCOPE", "approval receipt declares network scope for a network-free tool");
     if (options.approvalStoreRoot) {
       try { await putApprovalReceipt(options.approvalStoreRoot, approvalReceipt!); }
-      catch (error) { return invalid("MCP_APPROVAL_AUDIT", error instanceof Error ? error.message : "approval receipt could not be persisted"); }
+      catch { return invalid("MCP_APPROVAL_AUDIT", "approval receipt could not be persisted"); }
     }
   }
   const toolInput = authority?.approvalRequired ? { ...input } : input;
@@ -307,20 +334,20 @@ export async function dispatchTool(
   switch (name) {
     case "verglos_check_before_write": {
       let parsed: CheckBeforeWriteInput; try { parsed = parseCheckBeforeWriteArgs(toolInput); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      try { return jsonResponse(await checkBeforeWrite(parsed)); } catch (error) { return invalid("MCP_CHECK_BEFORE_WRITE_FAILED", error instanceof Error ? error.message : "tool failed"); }
+      try { return jsonResponse(await checkBeforeWrite(parsed)); } catch { return invalid("MCP_CHECK_BEFORE_WRITE_FAILED", "check_before_write failed"); }
     }
     case "verglos_check_package": {
       let parsed; try { parsed = parseCheckPackageArgs(toolInput); } catch (error) { return invalid("MCP_CHECK_PACKAGE_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      try { return jsonResponse(await checkPackage(parsed)); } catch (error) { return invalid("MCP_CHECK_PACKAGE_FAILED", error instanceof Error ? error.message : "tool failed"); }
+      try { return jsonResponse(await checkPackage(parsed)); } catch { return invalid("MCP_CHECK_PACKAGE_FAILED", "check_package failed"); }
     }
     case "verglos_scan": {
       let parsed; try { parsed = parseScanArgs(toolInput); } catch (error) { return invalid("MCP_SCAN_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      try { return jsonResponse(await scanProject(parsed)); } catch (error) { return invalid("MCP_SCAN_FAILED", error instanceof Error ? error.message : "tool failed"); }
+      try { return jsonResponse(await scanProject(parsed)); } catch { return invalid("MCP_SCAN_FAILED", "scan failed"); }
     }
     case "verglos_explain_finding": {
       let parsed; try { parsed = parseExplainFindingArgs(toolInput); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
       let result: ReturnType<typeof explainFinding>;
-      try { result = explainFinding(parsed); } catch (error) { return invalid("MCP_EXPLAIN_FINDING_FAILED", error instanceof Error ? error.message : "tool failed"); }
+      try { result = explainFinding(parsed); } catch { return invalid("MCP_EXPLAIN_FINDING_FAILED", "explain_finding failed"); }
       return jsonResponse(result);
     }
     case "verglos_hunt_finding":
@@ -352,6 +379,7 @@ export function listAdvertisedTools() {
     const capability = capabilities.find((item) => item.tool === t.name);
     if (!capability) throw new Error("MCP capability metadata is missing");
     const authority = mcpToolAuthority(t.name);
+    if (!authority) throw new Error("MCP authority metadata is missing");
     return {
       name: t.name,
       description: t.description,
@@ -366,7 +394,12 @@ export function listAdvertisedTools() {
   });
 }
 
-export function createVerglosMcpServer(): Server {
+export interface VerglosMcpServerOptions {
+  /** Verified entitlement supplied by the host; omitted preserves alpha compatibility. */
+  readonly plan?: "free" | "pro" | "team" | "studio" | "enterprise";
+}
+
+export function createVerglosMcpServer(options: VerglosMcpServerOptions = {}): Server {
   const server = new Server(
     {
       name: "verglos",
@@ -388,7 +421,7 @@ export function createVerglosMcpServer(): Server {
     const args = request.params.arguments as
       | Record<string, unknown>
       | undefined;
-    return dispatchTool(name, args, { approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE });
+    return dispatchTool(name, args, { approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, plan: options.plan });
   });
 
   return server;
@@ -398,8 +431,8 @@ export function createVerglosMcpServer(): Server {
  * Start an MCP server over stdio. Prints a startup banner to stderr
  * so stdout stays clean for the MCP transport.
  */
-export async function startStdioServer(): Promise<void> {
-  const server = createVerglosMcpServer();
+export async function startStdioServer(options: VerglosMcpServerOptions = {}): Promise<void> {
+  const server = createVerglosMcpServer(options);
   const transport = new StdioServerTransport();
   process.stderr.write("verglos:mcp: server started on stdio\n");
   await server.connect(transport);

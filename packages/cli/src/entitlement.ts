@@ -20,8 +20,12 @@ import { defaultCapabilitiesFor, normalizeTier, type Tier } from "./tier-default
  *     server, which ignores it unless the caller is on founder.
  */
 
-const CACHE_DIR = join(homedir(), ".verglos");
-const CACHE_FILE = join(CACHE_DIR, "capabilities.json");
+// Respect an explicitly configured home on every platform. Node's
+// homedir() does not consistently follow HOME on Windows, while CI and
+// callers use HOME to isolate credentials and entitlement caches.
+const configuredHome = () => process.env.HOME || process.env.USERPROFILE || homedir();
+const cacheDir = () => join(configuredHome(), ".verglos");
+const cacheFile = () => join(cacheDir(), "capabilities.json");
 const REQUEST_TIMEOUT_MS = 5000;
 const MAX_CAPABILITIES_CACHE_BYTES = 1 * 1024 * 1024;
 const MAX_CAPABILITIES_RESPONSE_BYTES = 1 * 1024 * 1024;
@@ -78,10 +82,14 @@ const FREE_FALLBACK: CachedCapabilities = {
 
 async function readCache(): Promise<CachedCapabilities | null> {
   try {
-    const entry = await lstat(CACHE_FILE);
+    const entry = await lstat(cacheFile());
     if (!entry.isFile() || entry.size > MAX_CAPABILITIES_CACHE_BYTES) return null;
-    const raw = await readFile(CACHE_FILE, "utf8");
-    return JSON.parse(raw) as CachedCapabilities;
+    const raw = await readFile(cacheFile(), "utf8");
+    const parsed = parseCapabilitiesResponse(JSON.parse(raw));
+    if (!parsed) return null;
+    const value = JSON.parse(raw) as Record<string, unknown>;
+    if (typeof value.fetchedAt !== "string" || typeof value.expiresAt !== "string" || !Number.isFinite(new Date(value.fetchedAt).getTime()) || !Number.isFinite(new Date(value.expiresAt).getTime())) return null;
+    return { ...parsed, fetchedAt: value.fetchedAt, expiresAt: value.expiresAt, ...(typeof value.simulatedAsPlan === "string" ? { simulatedAsPlan: value.simulatedAsPlan } : {}), ...(value.stale === true ? { stale: true } : {}) };
   } catch {
     return null;
   }
@@ -89,8 +97,8 @@ async function readCache(): Promise<CachedCapabilities | null> {
 
 async function writeCache(entry: CachedCapabilities): Promise<void> {
   try {
-    await mkdir(CACHE_DIR, { recursive: true });
-    await writeFile(CACHE_FILE, JSON.stringify(entry, null, 2), "utf8");
+    await mkdir(cacheDir(), { recursive: true });
+    await writeFile(cacheFile(), JSON.stringify(entry, null, 2), "utf8");
   } catch {
     // non-fatal — next call will just re-fetch.
   }
@@ -129,10 +137,22 @@ async function fetchFromServer(
     if (Number.isFinite(length) && length > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
     const bytes = await res.arrayBuffer();
     if (bytes.byteLength > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
-    return JSON.parse(new TextDecoder().decode(bytes)) as CapabilitiesResponse;
+    return parseCapabilitiesResponse(JSON.parse(new TextDecoder().decode(bytes)));
   } catch {
     return null;
   }
+}
+
+function parseCapabilitiesResponse(value: unknown): CapabilitiesResponse | null {
+  if (!value || typeof value !== "object") return null;
+  const raw = value as Record<string, unknown>;
+  const plan = typeof raw.plan === "string" ? raw.plan.toLowerCase() : "";
+  if (!["free", "pro", "team", "studio", "enterprise", "compliance", "founder"].includes(plan) || !Array.isArray(raw.capabilities) || raw.capabilities.length > 4096 || raw.capabilities.some((item) => typeof item !== "string" || item.length === 0 || item.length > 256 || /[\u0000-\u001f\u007f]/.test(item))) return null;
+  if (typeof raw.cache_ttl_seconds !== "number" || !Number.isFinite(raw.cache_ttl_seconds) || raw.cache_ttl_seconds < 0 || raw.cache_ttl_seconds > 90 * 24 * 60 * 60) return null;
+  if (typeof raw.simulated !== "boolean" || typeof raw.active !== "boolean") return null;
+  const realPlan = typeof raw.real_plan === "string" ? raw.real_plan.toLowerCase() : raw.real_plan;
+  if (realPlan !== undefined && (typeof realPlan !== "string" || realPlan.length > 64 || !["free", "pro", "team", "studio", "enterprise", "compliance", "founder"].includes(realPlan))) return null;
+  return { plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(realPlan === undefined ? {} : { real_plan: realPlan }) };
 }
 
 export interface LoadCapabilitiesOptions {
@@ -269,12 +289,12 @@ export async function resolveEntitlement(
   // Case 1 + 2 — REST responded (fresh or stale-within-grace).
   if (restIsAuthoritative || caps.stale === true) {
     return {
-      plan: license?.tier ?? caps.plan,
+      plan: license?.tier ?? normalizeTier(caps.plan),
       capabilities: caps.capabilities,
       source: caps.stale === true ? "cache" : "rest",
       stale: caps.stale === true,
       simulated: caps.simulated,
-      realPlan: caps.real_plan,
+      realPlan: caps.real_plan === undefined ? undefined : normalizeTier(caps.real_plan),
       license: license ?? undefined,
     };
   }
@@ -378,20 +398,21 @@ export function printUpgradeCta(
 export async function requireCapability(
   capability: string,
   featureLabel: string,
-  opts: LoadCapabilitiesOptions & { extraLine?: string } = {},
+  opts: LoadCapabilitiesOptions & { extraLine?: string; output?: "json" | "quiet" } = {},
 ): Promise<boolean> {
   const resolved = await resolveEntitlement(opts);
   warnIfStale({ stale: resolved.stale, plan: resolved.plan });
   const ok = resolved.capabilities.includes(capability);
   if (!ok) {
-    printUpgradeCta(featureLabel, opts.extraLine);
+    if (opts.output === "json") console.log(JSON.stringify({ status: "error", code: "CAPABILITY_REQUIRED", capability, message: `${featureLabel} requires a paid capability` }));
+    else if (opts.output !== "quiet") printUpgradeCta(featureLabel, opts.extraLine);
   }
   return ok;
 }
 
 export async function clearCache(): Promise<void> {
   try {
-    await writeFile(CACHE_FILE, "{}", "utf8");
+    await writeFile(cacheFile(), "{}", "utf8");
   } catch {
     // ignore
   }

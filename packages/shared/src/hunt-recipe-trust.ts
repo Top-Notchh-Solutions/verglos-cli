@@ -6,10 +6,11 @@ import { z } from "zod";
 
 export function huntRecipeDigest(recipe: HuntRecipe): string { return `sha256:${createHash("sha256").update(canonicalizeJson(parseHuntRecipe(recipe)), "utf8").digest("hex")}`; }
 const DigestSchema = z.string().regex(/^sha256:[a-f0-9]{64}$/);
+const SignerSchema = z.string().min(1).max(512).refine((value) => !/[\u0000-\u001f\u007f]/.test(value), "signer contains control characters");
 export const HuntRecipeTrustPolicySchema = z.object({
-  signers: z.array(z.string().min(1).max(512)).min(1).max(128),
+  signers: z.array(SignerSchema).min(1).max(128),
   revokedRecipeIds: z.array(StableContractIdSchema).max(4096).optional(),
-  recipeDigests: z.array(DigestSchema).max(4096).optional(),
+  recipeDigests: z.array(DigestSchema).min(1).max(4096).optional(),
   at: z.string().datetime({ offset: true }).optional(),
 }).strict().superRefine((value, ctx) => {
   for (const [name, values] of [["signers", value.signers], ["revokedRecipeIds", value.revokedRecipeIds ?? []], ["recipeDigests", value.recipeDigests ?? []]] as const) {
@@ -37,4 +38,15 @@ export function isTrustedHuntRecipe(recipe: HuntRecipe, trust: HuntRecipeTrustPo
     && !(policy.revokedRecipeIds ?? []).includes(parsed.recipeId)
     && (!parsed.signature.expiresAt || Date.parse(parsed.signature.expiresAt) > Date.parse(policy.at ?? new Date().toISOString()))
     && (!policy.recipeDigests || policy.recipeDigests.includes(digest));
+}
+
+/** Execution requires an explicit content-digest allowlist; signer trust alone
+ * is sufficient for planning metadata but must not authorize an unknown recipe. */
+export function isExecutableHuntRecipe(recipe: HuntRecipe, trust: HuntRecipeTrustPolicy): boolean {
+  const policy = parseHuntRecipeTrustPolicy(trust);
+  const parsed = parseHuntRecipe(recipe);
+  const digest = huntRecipeDigest(parsed);
+  return isTrustedHuntRecipe(parsed, policy)
+    && Array.isArray(policy.recipeDigests)
+    && policy.recipeDigests.includes(digest);
 }

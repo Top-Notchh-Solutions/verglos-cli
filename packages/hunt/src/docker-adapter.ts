@@ -32,7 +32,7 @@ export async function validateDockerProjectRoot(projectRoot: string): Promise<vo
       const childEntry = await lstat(absolute);
       if (childEntry.isSymbolicLink()) {
         let destination: string;
-        try { destination = await realpath(absolute); } catch { throw new Error("Docker Hunt project root contains a broken symlink"); }
+        try { destination = await realpath(absolute); } catch { throw new Error("Docker Hunt project root contains a symlink escape (broken symlink)"); }
         const escape = relative(root, destination);
         if (escape === "" || (!escape.startsWith(".." + "/") && escape !== ".." && !isAbsolute(escape))) continue;
         throw new Error("Docker Hunt project root contains a symlink escape");

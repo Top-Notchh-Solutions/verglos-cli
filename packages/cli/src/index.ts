@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 import { createRequire } from "node:module";
-import { lstat, readFile, unlink, writeFile } from "node:fs/promises";
+import { lstat, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { Command } from "commander";
 import chalk from "chalk";
 import chokidar from "chokidar";
 import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
-import { applyHeaderFixes, authorizeHeaderFix, planHeaderFixes } from "./fix.js";
+import { applyHeaderFixes, authorizeHeaderFix, captureHeaderFixSnapshots, HeaderFixRollbackError, planHeaderFixes, rescanOrRollbackHeaderFix } from "./fix.js";
 import { loadCredentials, saveCredentials } from "./credentials.js";
 import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
@@ -26,12 +26,19 @@ import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
 import {
   currentPlan,
+  getVerifiedLicense,
   requireCapability,
 } from "./entitlement.js";
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
 import { executeTargetInspect } from "./target-inspect.js";
 import { ApprovalReceiptSchema, authorizeAgentAction, listCachedEngines, type ApprovalReceipt } from "@verglos/shared";
+
+function reportPreflightError(json: boolean | undefined, quiet: boolean | undefined, code: string, humanMessage: string, machineMessage: string): void {
+  if (json) console.log(JSON.stringify({ status: "error", code, message: machineMessage }));
+  else if (!quiet) console.error(humanMessage);
+}
+
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
@@ -72,7 +79,7 @@ program
   .option("--update", "Update Verglos CLI to the latest npm version")
   .option(
     "--as-plan <plan>",
-    "[founder only] Simulate a plan (free|pro|studio) for this invocation",
+    "[founder only] Simulate a plan (free|pro|team|studio|enterprise) for this invocation",
   )
   .showHelpAfterError(chalk.gray("\nRun `verglos --help` for available commands."))
   .addHelpText(
@@ -136,7 +143,8 @@ evidence.command("export <input> <output>")
       if (opts.json) console.log(JSON.stringify(result));
       else if (!opts.quiet) console.log("Exported " + result.format + " evidence (" + result.bytes + " bytes).");
     } catch (error) {
-      if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence export failed.");
+      if (opts.json) console.log(JSON.stringify({ status: "error", code: "EVIDENCE_EXPORT_INPUT", message: "evidence export failed" }));
+      else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence export failed.");
       process.exit(78);
     }
 });
@@ -174,7 +182,7 @@ record.command("sign <manifestPath> <signaturePath>")
   .action(async (manifestPath: string, signaturePath: string, opts: { key: string; signer: string; issuer: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => {
     let approvalReceipt: ApprovalReceipt | undefined;
     if (opts.approve && !opts.approvalReceipt) {
-      if (!opts.quiet) console.error("record signing requires an approval receipt (--approval-receipt) before reading the key");
+      reportPreflightError(opts.json, opts.quiet, "RECORD_SIGN_INPUT", "record signing requires an approval receipt (--approval-receipt) before reading the key", "record signing failed");
       process.exit(78);
     }
     if (opts.approve && opts.approvalReceipt) {
@@ -183,7 +191,7 @@ record.command("sign <manifestPath> <signaturePath>")
         const authorization = authorizeAgentAction("sign", approvalReceipt, new Date().toISOString());
         if (!authorization.allowed || approvalReceipt.target !== `manifest:${manifestPath}` || !approvalReceipt.files.includes(manifestPath) || approvalReceipt.network.length > 0) throw new Error(authorization.allowed ? "approval receipt scope does not match the signing manifest" : authorization.reason);
       } catch (error) {
-        if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid");
+        reportPreflightError(opts.json, opts.quiet, "RECORD_SIGN_INPUT", error instanceof Error ? error.message : "approval receipt is invalid", "record signing failed");
         process.exit(78);
       }
     }
@@ -214,7 +222,8 @@ evidence.command("import <input>")
       if (opts.json) console.log(JSON.stringify(result));
       else if (!opts.quiet) console.log(result.format + " " + result.version + " (" + result.bytes + " bytes)");
     } catch (error) {
-      if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence import failed.");
+      if (opts.json) console.log(JSON.stringify({ status: "error", code: "EVIDENCE_IMPORT_INPUT", message: "evidence import failed" }));
+      else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Evidence import failed.");
       process.exit(78);
     }
   });
@@ -240,7 +249,7 @@ engines.command("install <engineId> <version> <artifactPath>")
 .option("--approval-receipt <path>", "Path to an exact, time-bounded engine approval receipt")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress output")
-  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => { let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); } } process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey })); });
+  .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => { let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { reportPreflightError(opts.json, opts.quiet, "ENGINE_INSTALL_INPUT", error instanceof Error ? error.message : "approval receipt is invalid", "engine installation failed"); process.exit(78); } } process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey })); });
 
 for (const action of ["update", "rollback"] as const) {
   engines.command(`${action} <engineId> <version> <artifactPath>`)
@@ -253,7 +262,7 @@ for (const action of ["update", "rollback"] as const) {
     .option("--json", "Emit machine-readable JSON")
     .option("--quiet", "Suppress output")
     .action(async (engineId: string, version: string, artifactPath: string, opts: { digest: string; manifest?: string; manifestKey?: string; approve?: boolean; approvalReceipt?: string; json?: boolean; quiet?: boolean }) => {
-      let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { if (!opts.quiet) console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); } }
+      let approvalReceipt: ApprovalReceipt | undefined; if (opts.approve && opts.approvalReceipt) { try { approvalReceipt = await readApprovalReceiptFile(opts.approvalReceipt); } catch (error) { reportPreflightError(opts.json, opts.quiet, "ENGINE_INSTALL_INPUT", error instanceof Error ? error.message : "approval receipt is invalid", "engine installation failed"); process.exit(78); } }
       process.exit(await executeEngineInstall(engineId, version, artifactPath, opts.digest, { ...opts, approvalReceipt, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, manifestPath: opts.manifest, manifestPublicKeyPath: opts.manifestKey, action }));
     });
 }
@@ -266,7 +275,10 @@ program
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
   .action(async (kind: string, value: string, opts: { json?: boolean; quiet?: boolean }) => {
-    if (!["repository", "package", "filesystem", "artifact", "sbom", "oci"].includes(kind)) process.exit(78);
+    if (!["repository", "package", "filesystem", "artifact", "sbom", "oci"].includes(kind)) {
+      reportPreflightError(opts.json, opts.quiet, "TARGET_INSPECT_INPUT", `unsupported target kind: ${kind}`, "target inspection failed");
+      process.exit(78);
+    }
     process.exit(await executeTargetInspect(kind as "repository" | "package" | "filesystem" | "artifact" | "sbom" | "oci", value, opts.json, opts.quiet));
   });
 
@@ -362,7 +374,12 @@ program
   .option("--json", "Emit machine-readable JSON")
   .option("--config <path>", "Use a bounded JSON Verglos config file")
   .action(async (opts: { strict?: boolean; quiet?: boolean; json?: boolean; config?: string }) => {
-    await executeScore(undefined, opts.strict, opts.quiet, opts.config, opts.json);
+    try {
+      await executeScore(undefined, opts.strict, opts.quiet, opts.config, opts.json);
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "SCORE_INPUT", error instanceof Error ? error.message : "score generation failed", "score generation failed");
+      process.exit(2);
+    }
   });
 
 program
@@ -415,26 +432,33 @@ program
     if (policyPath) {
       process.exit(await executePolicyCheck(policyPath, opts.json, opts.quiet));
     }
-    const asPlan = process.env.VERGLOS_AS_PLAN;
-    const plan = await currentPlan({ asPlan });
-    const hasThreshold = plan.plan !== "free";
-    if (opts.hunt) {
-      const ok = await requireCapability("ci.hunt_gate", "`verglos ci --hunt`", {
-        asPlan,
-        extraLine:
-          "Verified-only CI gating ships in v2.0.0-beta. This alpha can still run standard CI.",
+    let code: number;
+    let hasThreshold: boolean;
+    try {
+      const asPlan = process.env.VERGLOS_AS_PLAN;
+      const plan = await currentPlan({ asPlan });
+      hasThreshold = plan.plan !== "free";
+      if (opts.hunt) {
+        const ok = await requireCapability("ci.hunt_gate", "`verglos ci --hunt`", {
+          asPlan,
+          extraLine:
+            "Verified-only CI gating ships in v2.0.0-beta. This alpha can still run standard CI.",
+        });
+        if (!ok) process.exit(1);
+      }
+      code = await executeCi({
+        threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
+        quiet: opts.quiet,
+        json: opts.json,
+        strict: opts.strict,
+        configPath: opts.config,
+        hunt: opts.hunt,
+        noTelemetry: opts.telemetry === false,
       });
-      if (!ok) process.exit(1);
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "CI_INPUT", error instanceof Error ? error.message : "CI scan failed", "CI scan failed");
+      process.exit(2);
     }
-    const code = await executeCi({
-      threshold: hasThreshold ? parseInt(opts.threshold, 10) : undefined,
-      quiet: opts.quiet,
-      json: opts.json,
-      strict: opts.strict,
-      configPath: opts.config,
-      hunt: opts.hunt,
-      noTelemetry: opts.telemetry === false,
-    });
     if (!hasThreshold && !opts.quiet && !opts.json) {
       console.log("");
       console.log(
@@ -456,7 +480,9 @@ program
   .option("--approval-receipt <path>", "Path to an exact, time-bounded mutate approval receipt")
   .option("--dry-run", "Show the planned file changes without mutating")
   .option("--rescan", "Run a local scan after applying the approved change")
-  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; rescan?: boolean }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; rescan?: boolean; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability("fix", "`verglos fix`", {
       asPlan,
@@ -466,73 +492,86 @@ program
     if (!ok) process.exit(1);
 
     const plan = await planHeaderFixes(process.cwd());
-    if (opts.dryRun || !opts.approve) {
-      if (plan.length === 0) console.log("No supported header change is planned.");
-      else for (const item of plan) {
-        console.log(`${item.action}: ${item.file}`);
-        for (const line of item.preview ?? []) console.log(line);
+    // A machine-readable non-approved invocation must emit only the stable
+    // approval error below. The plan is emitted only for an explicit dry run
+    // (or human-readable preflight), never as a second JSON document.
+    if (opts.dryRun || (!opts.approve && !opts.json)) {
+      if (opts.json) console.log(JSON.stringify({ planned: plan }));
+      else if (!opts.quiet) {
+        if (plan.length === 0) console.log("No supported header change is planned.");
+        else for (const item of plan) {
+          console.log(`${item.action}: ${item.file}`);
+          for (const line of item.preview ?? []) console.log(line);
+        }
       }
     }
     if (opts.dryRun) return;
     if (!opts.approve) {
-      console.error("verglos fix requires explicit approval (--approve) before changing files.");
+      reportPreflightError(opts.json, opts.quiet, "FIX_APPROVAL_REQUIRED", "verglos fix requires explicit approval (--approve) before changing files.", "fix requires explicit approval (--approve)");
       process.exit(78);
     }
     if (!opts.approvalReceipt) {
-      console.error("verglos fix requires an approval receipt (--approval-receipt) before changing files.");
+      reportPreflightError(opts.json, opts.quiet, "FIX_RECEIPT_REQUIRED", "verglos fix requires an approval receipt (--approval-receipt) before changing files.", "fix requires an approval receipt (--approval-receipt)");
       process.exit(78);
     }
     let receipt: ApprovalReceipt;
     try { receipt = await readApprovalReceiptFile(opts.approvalReceipt); }
-    catch (error) { console.error(error instanceof Error ? error.message : "approval receipt is invalid"); process.exit(78); }
+    catch (error) { reportPreflightError(opts.json, opts.quiet, "FIX_RECEIPT_INVALID", error instanceof Error ? error.message : "approval receipt is invalid", "approval receipt is invalid"); process.exit(78); }
     const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
-    const authorization = authorizeHeaderFix(receipt!, plannedFiles, new Date().toISOString());
+    const authorization = await authorizeHeaderFix(receipt!, plannedFiles, new Date().toISOString(), process.cwd());
     if (!authorization.allowed) {
-      console.error(`verglos fix approval denied: ${authorization.reason}`);
+      reportPreflightError(opts.json, opts.quiet, "FIX_APPROVAL_DENIED", `verglos fix approval denied: ${authorization.reason}`, "fix approval denied");
       process.exit(78);
     }
 
-    const snapshots = opts.rescan ? await Promise.all(plan.filter((item) => item.action !== "skip").map(async (item) => {
-      const path = resolve(process.cwd(), item.file);
-      try {
-        const entry = await lstat(path);
-        if (!entry.isFile() || entry.size > 1 * 1024 * 1024) throw new Error("fix rollback snapshot target is not a bounded regular file");
-        const bytes = await readFile(path);
-        if (bytes.byteLength > 1 * 1024 * 1024) throw new Error("fix rollback snapshot target is not a bounded regular file");
-        return { path, existed: true, bytes };
-      } catch (error) {
-        if (error instanceof Error && error.message.includes("rollback snapshot target")) throw error;
-        return { path, existed: false, bytes: undefined };
-      }
-    })) : [];
+    const snapshots = opts.rescan
+      ? await captureHeaderFixSnapshots(process.cwd(), plan.filter((item) => item.action !== "skip").map((item) => item.file))
+      : [];
 
-    console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
-    console.log("");
-    const fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString(), approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE });
-    console.log("");
+    if (!opts.quiet && !opts.json) {
+      console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
+      console.log("");
+    }
+    let fixed: number;
+    try {
+      fixed = await applyHeaderFixes(process.cwd(), { approvalReceipt: receipt, now: new Date().toISOString(), approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, quiet: opts.quiet || opts.json });
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "FIX_APPLY_FAILED", error instanceof Error ? error.message : "header fix failed", "header fix failed");
+      if (opts.json || opts.quiet) process.exit(78);
+      throw error;
+    }
+    if (!opts.quiet && !opts.json) console.log("");
     if (fixed > 0) {
-      console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
+      if (!opts.quiet && !opts.json) console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
       if (opts.rescan) {
-        console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
+        if (!opts.quiet && !opts.json) console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
         try {
-          await executeScan({ noTelemetry: true });
+          // A machine-readable fix response must remain one JSON document;
+          // keep the post-mutation verification scan quiet and offline.
+          await rescanOrRollbackHeaderFix(snapshots, () => executeScan({ noTelemetry: true, quiet: true }));
         } catch (error) {
-          for (const snapshot of snapshots) {
-            if (snapshot.existed && snapshot.bytes) await writeFile(snapshot.path, snapshot.bytes, { mode: 0o600 });
-            else await unlink(snapshot.path).catch(() => undefined);
-          }
-          console.error("Post-fix rescan failed; the approved mutation was rolled back.");
+          const rollbackSucceeded = error instanceof HeaderFixRollbackError && error.rollbackSucceeded;
+          const code = rollbackSucceeded ? "FIX_RESCAN_FAILED" : "FIX_ROLLBACK_FAILED";
+          const humanMessage = rollbackSucceeded
+            ? "Post-fix rescan failed; the approved mutation was rolled back."
+            : "Post-fix rescan failed and rollback could not be verified; inspect the affected files before proceeding.";
+          const machineMessage = rollbackSucceeded
+            ? "post-fix rescan failed; mutation rolled back"
+            : "post-fix rescan failed and rollback could not be verified";
+          reportPreflightError(opts.json, opts.quiet, code, humanMessage, machineMessage);
+          if (opts.json || opts.quiet) process.exit(78);
           throw error;
         }
       }
     }
+    if (opts.json) console.log(JSON.stringify({ planned: plan, fixed, rescanned: Boolean(opts.rescan) }));
   });
 
 program
   .command("hunt")
   .description("Verify findings in a local sandbox [Pro] (shell — v2.0.0-beta)")
   .option("--severity <level>", "Severity filter to hunt (default: critical,high)")
-  .option("--sandbox <adapter>", "Sandbox adapter: auto, node-vm, docker, firecracker")
+  .option("--sandbox <adapter>", "Sandbox adapter: auto, docker")
   .option("--dry-run", "Parse options without running sandbox verification")
   .option("--finding <id>", "Verify one finding ID from a Verglos report")
   .option("--json", "Emit machine-readable JSON")
@@ -557,8 +596,10 @@ program
 program
   .command("login")
   .description("Authenticate via a browser device-code flow")
-  .action(async () => {
-    const code = await executeLogin();
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
+    const code = await executeLogin(opts);
     if (code !== 0) process.exit(code);
   });
 
@@ -569,11 +610,18 @@ program
     "--ci",
     "CI-friendly output: skip prompts, exit non-zero on failure",
   )
-  .action(async (licenseKey: string, opts: { ci?: boolean }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (licenseKey: string, opts: { ci?: boolean; json?: boolean; quiet?: boolean }) => {
     const creds = await loadCredentials();
     const result = await validateLicense(licenseKey, creds.apiUrl);
 
     if (!result.valid) {
+      if (opts.json) {
+        console.log(JSON.stringify({ status: "error", reason: result.reason, ...(result.httpStatus === undefined ? {} : { httpStatus: result.httpStatus }) }));
+        process.exit(opts.ci ? 2 : 1);
+      }
+      if (opts.quiet) process.exit(opts.ci ? 2 : 1);
       if (result.reason === "network") {
         console.error(
           chalk.red(
@@ -626,6 +674,11 @@ program
       : result.plan === "founder"
         ? " · unlimited"
         : "";
+    if (opts.json) {
+      console.log(JSON.stringify({ status: "ok", plan: result.plan, expiresAt: result.expiresAt, active: result.active }));
+      return;
+    }
+    if (opts.quiet) return;
     console.log(
       chalk.green(
         `✓ ${result.plan.toUpperCase()} activated${renewal}`,
@@ -639,32 +692,55 @@ program
 program
   .command("whoami")
   .description("Show current sign-in, plan, renewal, and machine")
-  .action(async () => {
-    const code = await executeWhoami();
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
+    const code = await executeWhoami(opts);
     if (code !== 0) process.exit(code);
   });
 
 program
   .command("badge")
   .description("Generate README badge markdown")
-  .action(async () => {
-    const projectRoot = process.cwd();
-    const { runScan } = await import("@verglos/scanner");
-    const result = await runScan({ projectRoot, unlocked: true });
-    console.log(generateBadgeMarkdown(result.score.value));
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
+    try {
+      const projectRoot = process.cwd();
+      const { runScan } = await import("@verglos/scanner");
+      const result = await runScan({ projectRoot, unlocked: true });
+      const markdown = generateBadgeMarkdown(result.score.value);
+      if (opts.json) console.log(JSON.stringify({ status: "ok", score: result.score.value, markdown }));
+      else if (!opts.quiet) console.log(markdown);
+    } catch (error) {
+      if (opts.json) console.log(JSON.stringify({ status: "error", code: "BADGE_INPUT", message: "badge generation failed" }));
+      else if (!opts.quiet) console.error(error instanceof Error ? error.message : "badge generation failed");
+      process.exit(2);
+    }
   });
 
 program
   .command("hook")
   .description("Install pre-commit git hook")
-  .action(async () => {
-    await installPreCommitHook(process.cwd());
-    console.log(chalk.green("Pre-commit hook installed."));
-    console.log(
-      chalk.gray(
-        "  Bypass with `git commit --no-verify` if you need to override.",
-      ),
-    );
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
+    try {
+      const installed = await installPreCommitHook(process.cwd());
+      if (opts.json) console.log(JSON.stringify(installed ? { status: "ok", installed: true } : { status: "skipped", installed: false, reason: "not_a_git_repository" }));
+      else if (!opts.quiet) {
+        if (installed) {
+          console.log(chalk.green("Pre-commit hook installed."));
+          console.log(chalk.gray("  Bypass with `git commit --no-verify` if you need to override."));
+        } else {
+          console.log(chalk.gray("No Git repository found; pre-commit hook was not installed."));
+        }
+      }
+    } catch (error) {
+      if (opts.json) console.log(JSON.stringify({ status: "error", reason: "hook installation failed" }));
+      else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Pre-commit hook installation failed.");
+      process.exit(1);
+    }
   });
 
 const monitor = program
@@ -678,13 +754,16 @@ monitor
   .option("--slack <url>", "Slack incoming webhook (https://hooks.slack.com/services/...)")
   .option("--webhook <url>", "Generic webhook URL to POST alert JSON to")
   .option("--label <name>", "Human-friendly project label (defaults to git repo)")
-  .action(async (opts: { email?: string; slack?: string; webhook?: string; label?: string }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { email?: string; slack?: string; webhook?: string; label?: string; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability(
       "monitor_register",
       "Continuous CVE monitoring",
       {
         asPlan,
+        output: opts.json ? "json" : opts.quiet ? "quiet" : undefined,
         extraLine:
           "Nothing was registered. Pro alerts you on new CVEs affecting your deps.",
       },
@@ -697,14 +776,17 @@ monitor
 monitor
   .command("status")
   .description("List projects registered for continuous CVE monitoring [Pro]")
-  .action(async () => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability(
       "monitor_register",
       "Continuous CVE monitoring",
+      { output: opts.json ? "json" : opts.quiet ? "quiet" : undefined },
     );
     if (!ok) process.exit(1);
-    const code = await executeMonitorStatus();
+    const code = await executeMonitorStatus(opts);
     if (code !== 0) process.exit(code);
   });
 
@@ -715,15 +797,20 @@ monitor
     "--project-fingerprint <fp>",
     "Fingerprint from `verglos monitor status` (defaults to the current project)",
   )
-  .action(async (opts: { projectFingerprint?: string }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { projectFingerprint?: string; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability(
       "monitor_register",
       "Continuous CVE monitoring",
+      { output: opts.json ? "json" : opts.quiet ? "quiet" : undefined },
     );
     if (!ok) process.exit(1);
     const code = await executeMonitorUnregister({
       projectFingerprint: opts.projectFingerprint,
+      json: opts.json,
+      quiet: opts.quiet,
     });
     if (code !== 0) process.exit(code);
   });
@@ -735,15 +822,20 @@ monitor
     "--project-fingerprint <fp>",
     "Fingerprint from `verglos monitor status` (defaults to the current project)",
   )
-  .action(async (opts: { projectFingerprint?: string }) => {
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (opts: { projectFingerprint?: string; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability(
       "monitor_register",
       "Continuous CVE monitoring",
+      { output: opts.json ? "json" : opts.quiet ? "quiet" : undefined },
     );
     if (!ok) process.exit(1);
     const code = await executeMonitorTestAlert({
       projectFingerprint: opts.projectFingerprint,
+      json: opts.json,
+      quiet: opts.quiet,
     });
     if (code !== 0) process.exit(code);
   });
@@ -755,22 +847,20 @@ program
     "--print-config",
     "Print the JSON snippet you paste into your agent's MCP config, then exit",
   )
-  .action(async (opts: { printConfig?: boolean }) => {
+  .option("--json", "Emit only the machine-readable MCP config (with --print-config)")
+  .option("--quiet", "Suppress setup guidance (with --print-config)")
+  .action(async (opts: { printConfig?: boolean; json?: boolean; quiet?: boolean }) => {
     if (opts.printConfig) {
-      console.log(
-        JSON.stringify(
-          {
-            mcpServers: {
-              verglos: {
-                command: "npx",
-                args: ["-y", "verglos", "mcp"],
-              },
-            },
+      const config = {
+        mcpServers: {
+          verglos: {
+            command: "npx",
+            args: ["-y", "verglos", "mcp"],
           },
-          null,
-          2,
-        ),
-      );
+        },
+      };
+      console.log(JSON.stringify(config, null, opts.json ? 0 : 2));
+      if (opts.json || opts.quiet) return;
       console.log("");
       console.log(chalk.gray("Paste this into:"));
       console.log(chalk.gray("  Cursor       → ~/.cursor/mcp.json"));
@@ -790,7 +880,13 @@ program
       console.log(chalk.gray("  verglos_attest                  Studio — shell, v2.0.0-beta"));
       return;
     }
-    await startStdioServer();
+    // The MCP host receives only locally verified entitlement context. This
+    // avoids a network call on the stdio hot path while enforcing plan gates.
+    const verifiedLicense = await getVerifiedLicense();
+    const mcpPlan = verifiedLicense?.tier === "founder"
+      ? "enterprise"
+      : verifiedLicense?.tier;
+    await startStdioServer({ plan: mcpPlan });
   });
 
 program
@@ -830,8 +926,10 @@ program
   .command("init")
   .description("Configure Verglos in the current project (interactive)")
   .option("-y, --yes", "Non-interactive: keep existing config, skip hook install")
-  .action(async (opts: { yes?: boolean }) => {
-    const code = await executeInit({ yes: opts.yes });
+  .option("--json", "Emit machine-readable JSON (requires --yes)")
+  .option("--quiet", "Suppress output (requires --yes)")
+  .action(async (opts: { yes?: boolean; json?: boolean; quiet?: boolean }) => {
+    const code = await executeInit({ yes: opts.yes, json: opts.json, quiet: opts.quiet });
     if (code !== 0) process.exit(code);
   });
 

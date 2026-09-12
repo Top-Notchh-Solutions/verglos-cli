@@ -308,30 +308,30 @@ jobs:
 
 ## Plans
 
-| Capability | Free | Pro $29/mo | Studio $199/mo | Enterprise |
-|---|---|---|---|---|
-| `verglos scan` (all detectors) | Yes | Yes | Yes | Yes |
-| Provenance layer + slopsquat + typosquat | Yes | Yes | Yes | Yes |
-| Local HTML + JSON report | Yes | Yes | Yes | Yes |
-| MCP `verglos_scan` tool | Yes | Yes | Yes | Yes |
-| `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes |
-| Pre-commit hook | Yes | Yes | Yes | Yes |
-| `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes |
-| **`verglos hunt` on Critical + High** | — | Alpha shell | Beta | Beta |
-| **`verglos hunt` on Medium** | — | — | Beta | Beta |
-| **MCP hunt tools** | — | Alpha shell | Beta | Beta |
-| **`verglos fix`** | — | Yes | Yes | Yes |
-| **`verglos ci --hunt`** | — | Alpha path | Beta | Beta |
-| **CI score threshold** | — | Yes | Yes | Yes |
-| **Continuous CVE monitoring** | — | Yes | Yes | Yes |
-| **`verglos attest`** | — | — | Alpha shell | Beta |
-| **Public verify URL** | — | — | Beta | Beta |
-| **White-label report** | — | — | Beta | Beta |
-| **Firecracker sandbox adapter** | — | — | Beta | Beta |
-| **Agency dashboard** | — | — | Beta | Beta |
-| **SSO / SCIM · self-hosted verify chain · audit log · custom detector packs** | — | — | — | Yes |
+| Capability | Free | Pro $29/mo | Team $99/mo | Studio $249/mo | Enterprise |
+|---|---|---|---|---|---|
+| `verglos scan` (all detectors) | Yes | Yes | Yes | Yes | Yes |
+| Provenance layer + slopsquat + typosquat | Yes | Yes | Yes | Yes | Yes |
+| Local HTML + JSON report | Yes | Yes | Yes | Yes | Yes |
+| MCP `verglos_scan` tool | Yes | Yes | Yes | Yes | Yes |
+| `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes | Yes |
+| Pre-commit hook | Yes | Yes | Yes | Yes | Yes |
+| `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes | Yes |
+| **`verglos hunt` on Critical + High** | — | Alpha shell | Alpha shell | Beta | Beta |
+| **`verglos hunt` on Medium** | — | — | — | Beta | Beta |
+| **MCP hunt tools** | — | Alpha shell | Alpha shell | Beta | Beta |
+| **`verglos fix`** | — | Yes | Yes | Yes | Yes |
+| **`verglos ci --hunt`** | — | Alpha path | Alpha path | Beta | Beta |
+| **CI score threshold** | — | Yes | Yes | Yes | Yes |
+| **Continuous CVE monitoring** | — | Yes | Yes | Yes | Yes |
+| **`verglos attest`** | — | — | — | Alpha shell | Beta |
+| **Public verify URL** | — | — | — | Beta | Beta |
+| **White-label report** | — | — | — | Beta | Beta |
+| **Firecracker sandbox adapter** | — | — | — | Beta | Beta |
+| **Agency dashboard** | — | — | — | Beta | Beta |
+| **SSO / SCIM · self-hosted verify chain · audit log · custom detector packs** | — | — | — | — | Yes |
 
-Upgrade Pro at **[verglos.com/checkout](https://verglos.com/checkout)**. Studio starts at **[topnotchh.solutions@gmail.com](mailto:topnotchh.solutions@gmail.com?subject=Verglos%20Studio)**. Enterprise starts at **[support@verglos.com](mailto:support@verglos.com?subject=Enterprise)**.
+Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**. Studio starts at **[topnotchh.solutions@gmail.com](mailto:topnotchh.solutions@gmail.com?subject=Verglos%20Studio)**. Enterprise starts at **[support@verglos.com](mailto:support@verglos.com?subject=Enterprise)**.
 
 ---
 
@@ -339,7 +339,7 @@ Upgrade Pro at **[verglos.com/checkout](https://verglos.com/checkout)**. Studio 
 
 - Added `verglos hunt` shell (Pro+, exit `78` in alpha).
 - Added `verglos attest` shell (Studio, exit `78` in alpha).
-- Added `packages/hunt` and `packages/attest` scaffolds with stable interfaces.
+- Added `packages/hunt` and `packages/attest` alpha interfaces; Hunt now includes bounded recipe/trust/redaction/Docker runtime boundaries while supported recipes and hosted Attest remain gated.
 - Added `verified` on every finding (`null` until hunt runs).
 - Added verified-state rendering in HTML, terminal, and JSON reports.
 - Added five MCP stubs: `verglos_hunt_finding`, `verglos_hunt_report`, `verglos_hunt_before_write`, `verglos_hunt_explain_verdict`, and `verglos_attest`.
@@ -385,7 +385,7 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 | `VERGLOS_TELEMETRY=0` | Disable anonymous scan telemetry |
 | `VERGLOS_PROVENANCE_FILE_CAP` | Override the 300-file cap on provenance analysis (raise for exhaustive scans, lower for speed) |
 | `VERGLOS_LICENSE_KEY` | Consumed by `verglos activate --ci` in GitHub Actions |
-| `VERGLOS_AS_PLAN` | _Founder only._ Simulate a plan (`free` / `pro` / `studio` / `enterprise`) for testing |
+| `VERGLOS_AS_PLAN` | _Founder only._ Simulate a plan (`free` / `pro` / `team` / `studio` / `enterprise`) for testing |
 
 ---
 
@@ -401,7 +401,7 @@ Full disclosure: **[verglos.com/account/docs#privacy](https://verglos.com/accoun
 
 ## Repo layout
 
-This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages are published under the `@verglos` scope plus the `verglos` bin; `hunt` and `attest` are alpha interface scaffolds in this repo and move behind the private-registry split when they become functional.
+This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages are published under the `@verglos` scope plus the `verglos` bin; Hunt and Attest remain alpha surfaces, with supported Hunt recipe content and hosted Attest workflows gated for beta.
 
 | Package | What it does |
 |---|---|

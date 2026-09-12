@@ -3,8 +3,10 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 import { assembleReleaseRecord, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, putRecordMember } from "@verglos/shared";
 import { executeRecordVerify } from "./record-verify.js";
+import { runCliFixture } from "./cli-fixture.js";
 
 test("record verify checks content-addressed members and emits JSON", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-record-cli-"));
@@ -28,4 +30,15 @@ test("record verify rejects a missing or tampered member", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-record-cli-invalid-"));
   try { assert.equal(await executeRecordVerify(root, join(root, "missing.json"), true, true), 78); }
   finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("record verify JSON error is process-safe and does not create files", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-verify-process-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "verify", join(root, "store"), join(root, "missing.json"), "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 78);
+    assert.equal(result.stderr, "");
+    assert.equal(JSON.parse(result.stdout).status, "error");
+    assert.deepEqual(result.files, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

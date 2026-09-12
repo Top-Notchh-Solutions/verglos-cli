@@ -10,12 +10,21 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /command\("fix"\)[\s\S]*?\.option\("--approval-receipt <path>"/);
   assert.match(source, /command\("sign <manifestPath> <signaturePath>"\)[\s\S]*?\.option\("--approval-receipt <path>"/);
   assert.ok(source.includes('.option("--rescan", "Run a local scan after applying the approved change")'));
+  assert.match(source, /command\("fix"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("fix"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
+  assert.match(source, /FIX_APPROVAL_REQUIRED/);
+  assert.match(source, /FIX_RECEIPT_REQUIRED/);
+  assert.match(source, /FIX_RECEIPT_INVALID/);
+  assert.match(source, /FIX_APPROVAL_DENIED/);
+  assert.match(source, /FIX_APPLY_FAILED/);
   assert.match(source, /policy\.command\("check <evaluation>"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   assert.match(source, /\.command\("secrets"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /\.command\("deps"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /\.command\("score"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /evidence\.command\("export <input> <output>"\)[\s\S]*?if \(!opts\.quiet\) console\.error/);
   assert.match(source, /evidence\.command\("import <input>"\)[\s\S]*?if \(!opts\.quiet\) console\.error/);
+  assert.match(source, /EVIDENCE_EXPORT_INPUT/);
+  assert.match(source, /EVIDENCE_IMPORT_INPUT/);
   assert.match(source, /\.command\("diff <base> <head>"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   for (const command of ["scan", "score", "secrets", "deps", "ci", "precommit"]) assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--config <path>`));
   for (const command of ["scan", "score", "secrets", "deps", "ci", "precommit"]) assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--json`));
@@ -30,6 +39,23 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /command\("attest"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
   assert.match(source, /command\("explain \[rule\]"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
   assert.match(source, /command\("explain \[rule\]"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
+  assert.match(source, /command\("activate <licenseKey>"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("login"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("login"\)[\s\S]*?\.option\("--quiet", "Suppress output"\)/);
+  assert.match(source, /command\("whoami"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /command\("badge"\)[\s\S]*?\.option\("--quiet", "Suppress output"\)/);
+  assert.match(source, /BADGE_INPUT/);
+  assert.match(source, /SCORE_INPUT/);
+  assert.match(source, /CI_INPUT/);
+  assert.match(source, /command\("hook"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
+  assert.match(source, /if \(opts\.json\) console\.log\(JSON\.stringify\(\{ status: "error", reason: "hook installation failed" \}\)\)/);
+  assert.match(source, /command\("init"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON \(requires --yes\)"\)/);
+  assert.match(source, /command\("init"\)[\s\S]*?\.option\("--quiet", "Suppress output \(requires --yes\)"\)/);
+  for (const command of ["register", "status", "unregister", "test-alert"]) {
+    assert.match(source, new RegExp(`command\\("${command}"\\)[\\s\\S]*?--json`));
+  }
+  assert.match(source, /command\("mcp"\)[\s\S]*?\.option\("--json", "Emit only the machine-readable MCP config \(with --print-config\)"\)/);
+  assert.match(source, /command\("mcp"\)[\s\S]*?\.option\("--quiet", "Suppress setup guidance \(with --print-config\)"\)/);
   assert.equal(source.includes('.option("--policy"'), false);
 });
 
