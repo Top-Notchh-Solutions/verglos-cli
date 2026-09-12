@@ -2,6 +2,8 @@
 
 Latest checkpoint (2026-09-12; supersedes dated gate snapshots below): PR #32 head `cfe6936` passes Node 22 hosted run `34678789958`, GitGuardian, and Vercel with 83/83 PostgreSQL-backed tests plus typecheck/schema/migration/build/security checks. The catalog now prevents initiating Pro QR checkout while Pro is non-purchasable; this does not satisfy PLAN-WEB-011/012 or close R-031. Backlog remains 152 unchecked / 117 checked / 269. No merge, deployment, or public-copy change.
 
+Migration gate update (2026-09-12): web `9eba73d` adds a local read-only audit command; local 86/86 tests and build/type/schema/migration checks pass, hosted run `34679868578`, GitGuardian, and Vercel pass. The command observed an empty isolated DB, not production data. HOSTED-013 and R-021 still require a complete/reproducible baseline, authorized source snapshot, signed manifest, mapping/reconciliation evidence, tested rollback, and independent review; this helper does not satisfy or authorize those gates. Backlog count unchanged at 152 unchecked / 117 checked / 269.
+
 Local Hunt runtime revalidation (2026-09-12): Docker Desktop integration against pinned BusyBox passes all 15 runtime assertions; Hunt package aggregate 51 pass / 1 macOS namespace skip. HUNT-011/QUAL-CLI-004 remain open; the skip is not treated as a pass and Linux-host evidence/independent review are still required.
 
 ## Gate 0 — Truth and scope
