@@ -67,9 +67,11 @@ async function readApprovalReceiptFile(path: string): Promise<ApprovalReceipt> {
   return ApprovalReceiptSchema.parse(value);
 }
 
+// Preserve the historic early `--update` alias while routing it through the
+// same command boundary so JSON output can flush before process exit.
 if (args.includes("--update")) {
-  await updateCli(version);
-  process.exit(0);
+  const outputFlags = args.filter((arg) => arg === "--json" || arg === "--quiet");
+  process.argv = [...process.argv.slice(0, 2), "update", ...outputFlags];
 }
 
 program
@@ -105,8 +107,19 @@ Command groups:
 program
   .command("update")
   .description("Update Verglos CLI to the latest npm version")
-  .action(async () => {
-    await updateCli(version);
+  .option("--json", "Emit one machine-readable update result")
+  .option("--quiet", "Suppress update output")
+  .action(async (opts: { json?: boolean; quiet?: boolean }) => {
+    const result = await updateCli(version, undefined, {
+      quiet: opts.json || opts.quiet,
+      onInstallStart: opts.json || opts.quiet ? undefined : (latestVersion) => console.log(chalk.gray(`Updating Verglos CLI to ${latestVersion}...`)),
+    });
+    if (opts.json) console.log(JSON.stringify(result));
+    else if (!opts.quiet) {
+      if (result.status === "error") console.error(chalk.red(result.message));
+      else if (!result.updated) console.log(chalk.green(`Verglos CLI is already up to date (${result.currentVersion}).`));
+    }
+    if (result.status === "error") process.exitCode = 1;
   });
 
 const config = program.command("config").description("Inspect local Verglos configuration");

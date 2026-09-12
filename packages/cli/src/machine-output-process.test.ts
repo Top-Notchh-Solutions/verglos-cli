@@ -98,7 +98,7 @@ test("MCP print-config quiet mode emits JSON without setup prose", async () => {
 test("Hunt denied plan emits one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-hunt-"));
   try {
-    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "hunt", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "hunt", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: root } });
     assert.equal(result.exitCode, 3);
     assert.equal(result.stderr, "");
     assert.deepEqual(JSON.parse(result.stdout), { status: "denied", reason: "plan_required", requiredPlan: "pro" });
@@ -108,7 +108,7 @@ test("Hunt denied plan emits one bounded JSON response", async () => {
 test("Attest denied plan emits one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-attest-"));
   try {
-    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "attest", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "attest", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: root } });
     assert.equal(result.exitCode, 3);
     assert.equal(result.stderr, "");
     assert.deepEqual(JSON.parse(result.stdout), { status: "denied", reason: "plan_required", requiredPlan: "studio" });
