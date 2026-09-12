@@ -1,8 +1,9 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { readPackageLicenseTexts } from "./package-license-text.mjs";
 
 const run = promisify(execFile);
 const root = fileURLToPath(new URL("..", import.meta.url));
@@ -14,25 +15,15 @@ for (const [license, packages] of Object.entries(grouped ?? {})) {
   for (const item of packages) {
     if (!item || typeof item !== "object" || typeof item.name !== "string") continue;
     const versions = Array.isArray(item.versions) ? item.versions.filter((v) => typeof v === "string").sort() : [];
-    const packagePath = typeof item.paths?.[0] === "string" ? item.paths[0] : undefined;
+    const packagePaths = Array.isArray(item.paths) ? item.paths.filter((path) => typeof path === "string") : [];
     // OS/CPU-specific packages are retained: they are part of the supported
     // installation matrix and require notices when selected by a consumer.
-    let text = "";
-    if (packagePath) {
-      for (const candidate of ["LICENSE", "LICENSE.md", "LICENSE.txt", "NOTICE", "NOTICE.txt"]) {
-        try {
-          const candidatePath = join(packagePath, candidate);
-          const stat = await readFile(candidatePath, "utf8");
-          if (Buffer.byteLength(stat, "utf8") <= 512 * 1024) {
-            text = stat.trim();
-            if (text) break;
-          }
-        } catch {
-          // A package may declare a license without shipping a text file.
-        }
-      }
+    let texts = [];
+    if (packagePaths.length > 0) {
+      try { texts = await readPackageLicenseTexts(packagePaths); }
+      catch { texts = [{ kind: "License", file: "", text: "[not included: package license metadata could not be read; review required]" }]; }
     }
-    entries.push({ name: item.name, versions, license: typeof license === "string" ? license : "UNKNOWN", homepage: typeof item.homepage === "string" ? item.homepage : "", text });
+    entries.push({ name: item.name, versions, license: typeof license === "string" ? license : "UNKNOWN", homepage: typeof item.homepage === "string" ? item.homepage : "", texts });
   }
 }
 entries.sort((a, b) => a.name.localeCompare(b.name) || a.versions.join(",").localeCompare(b.versions.join(",")));
@@ -48,7 +39,12 @@ for (const entry of entries) {
   lines.push(`License: ${entry.license}`);
   if (entry.homepage) lines.push(`Source: ${entry.homepage}`);
   lines.push("");
-  lines.push(entry.text || "License text was not present in the installed package; consult the upstream source before redistribution.");
+  if (entry.texts.length === 0) lines.push("License text was not present in the installed package; consult the upstream source before redistribution.");
+  else for (const text of entry.texts) {
+    lines.push(`${text.kind} file: ${text.file || "unavailable"}`);
+    lines.push(text.text);
+    lines.push("");
+  }
   lines.push("");
 }
 const output = `${lines.join("\n").replaceAll(/[ \t]+\n/g, "\n").trimEnd()}\n`;
