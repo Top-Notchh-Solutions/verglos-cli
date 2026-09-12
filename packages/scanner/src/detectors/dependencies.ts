@@ -97,6 +97,11 @@ export const dependenciesDetector: Detector = {
       unique.set(`${pkg.name}@${pkg.version}`, pkg);
     }
 
+    if (context?.allowNetwork === false) {
+      if (unique.size > 0) context.onLimitation?.("OSV dependency advisory lookup skipped by network policy");
+      return findings;
+    }
+
     const batch = [...unique.values()].slice(0, 50);
     const results = await Promise.all(
       batch.map(async (pkg) => {

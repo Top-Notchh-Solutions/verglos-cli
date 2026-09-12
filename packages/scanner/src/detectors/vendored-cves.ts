@@ -165,6 +165,11 @@ export const vendoredCvesDetector: Detector = {
 
     const capped = unique.slice(0, MAX_QUERIES_PER_SCAN);
 
+    if (context?.allowNetwork === false) {
+      if (capped.length > 0) context.onLimitation?.("OSV vendored-library lookup skipped by network policy");
+      return [];
+    }
+
     const results = await inParallel(
       capped,
       async ({ file, parsed }) => {

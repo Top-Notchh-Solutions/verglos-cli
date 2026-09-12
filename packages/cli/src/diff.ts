@@ -1,18 +1,21 @@
 import { lstat, readFile } from "node:fs/promises";
-import { diffReleaseSnapshots, projectChangeActions, type ReleaseSnapshot } from "@verglos/shared";
+import { diffReleaseSnapshots, InspectCoverageManifestSchema, projectChangeActions, type AnyReleaseSnapshot } from "@verglos/shared";
 
-function parseSnapshot(value: string): ReleaseSnapshot {
+function parseSnapshot(value: string): AnyReleaseSnapshot {
   if (Buffer.byteLength(value, "utf8") > 32 * 1024 * 1024) throw new Error("snapshot exceeds the 32 MiB limit");
   const parsed: unknown = JSON.parse(value);
-  if (!parsed || typeof parsed !== "object" || (parsed as { schemaVersion?: unknown }).schemaVersion !== "1.0.0") {
-    throw new Error("snapshot must be a Verglos release snapshot with schemaVersion 1.0.0");
+  if (!parsed || typeof parsed !== "object" || !["1.0.0", "1.1.0"].includes(String((parsed as { schemaVersion?: unknown }).schemaVersion))) {
+    throw new Error("snapshot must be a supported Verglos release snapshot");
   }
   const snapshot = parsed as Record<string, unknown>;
-  if ((snapshot.subjectIds as unknown[]).length > 1_000 || (snapshot.observations as unknown[]).length > 20_000) throw new Error("snapshot exceeds subject or observation limits");
-  if (typeof snapshot.primarySubjectId !== "string" || !Array.isArray(snapshot.subjectIds) || !Array.isArray(snapshot.observations) || !snapshot.lineage || typeof snapshot.lineage !== "object" || typeof snapshot.policyInputDigest !== "string" || !/^sha256:[a-f0-9]{64}$/.test(snapshot.policyInputDigest)) throw new Error("snapshot structure is invalid");
+  if (!Array.isArray(snapshot.subjectIds) || !Array.isArray(snapshot.observations)) throw new Error("snapshot structure is invalid");
+  if (snapshot.subjectIds.length > 1_000 || snapshot.observations.length > 20_000) throw new Error("snapshot exceeds subject or observation limits");
+  if (typeof snapshot.primarySubjectId !== "string" || !snapshot.lineage || typeof snapshot.lineage !== "object" || typeof snapshot.policyInputDigest !== "string" || !/^sha256:[a-f0-9]{64}$/.test(snapshot.policyInputDigest)) throw new Error("snapshot structure is invalid");
   if (snapshot.observations.some((entry) => !entry || typeof entry !== "object" || !/^sha256:[a-f0-9]{64}$/.test(String((entry as Record<string, unknown>).fingerprint)))) throw new Error("snapshot observations are invalid");
   const lineage = snapshot.lineage as Record<string, unknown>; if (!Array.isArray(lineage.edges) || !Array.isArray(lineage.gaps)) throw new Error("snapshot lineage is invalid");
-  return snapshot as unknown as ReleaseSnapshot;
+  if (snapshot.schemaVersion === "1.1.0") InspectCoverageManifestSchema.parse(snapshot.coverage);
+  else if (snapshot.coverage !== undefined) throw new Error("legacy snapshot cannot contain a coverage manifest");
+  return snapshot as unknown as AnyReleaseSnapshot;
 }
 
 async function readSnapshot(path: string): Promise<string> {

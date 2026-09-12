@@ -285,6 +285,31 @@ test("scan output path writes reports only to the explicitly selected directory"
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("scan snapshot opt-in imports bounded SARIF and refuses to overwrite the snapshot", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-snapshot-"));
+  try {
+    const reportPath = join(root, "report.sarif");
+    const snapshotPath = join(root, "snapshot.json");
+    await writeFile(reportPath, JSON.stringify({ version: "2.1.0", runs: [{ tool: { driver: { name: "fixture" } }, results: [{ ruleId: "fixture.rule", level: "error", message: { text: "RAW_IMPORTED_RESULT_MUST_NOT_ESCAPE" }, locations: [{ physicalLocation: { artifactLocation: { uri: "src/app.ts" }, region: { startLine: 9 } } }] }] }] }));
+    const args = ["--import", tsx, cliEntry, "scan", "--snapshot", "snapshot.json", "--producer", "sarif", "--import", "report.sarif", "--json", "--quiet"];
+    const first = await runCliFixture(process.execPath, args, root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(first.exitCode, 3, first.stderr);
+    assert.equal(first.stderr, "");
+    const summary = JSON.parse(first.stdout) as { status?: string; snapshotDigest?: string; coverage?: { producers?: Array<{ producer: string; state: string; limitations: string[] }> } };
+    assert.equal(summary.status, "incomplete");
+    assert.match(summary.snapshotDigest ?? "", /^sha256:[a-f0-9]{64}$/);
+    assert.equal(summary.coverage?.producers?.[0]?.producer, "sarif");
+    assert.equal(summary.coverage?.producers?.[0]?.state, "incomplete");
+    assert.match(summary.coverage?.producers?.[0]?.limitations.join(" ") ?? "", /does not independently bind/);
+    const originalSnapshot = await readFile(snapshotPath, "utf8");
+    assert.equal(originalSnapshot.includes("RAW_IMPORTED_RESULT_MUST_NOT_ESCAPE"), false);
+    const second = await runCliFixture(process.execPath, args, root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(second.exitCode, 4);
+    assert.deepEqual(JSON.parse(second.stdout), { status: "error", code: "SCAN_FAILURE", message: "scan could not complete" });
+    assert.equal(await readFile(snapshotPath, "utf8"), originalSnapshot);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("scan policy option and legacy alias use the same evaluator path", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-alias-"));
   try {
