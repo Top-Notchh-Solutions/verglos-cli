@@ -1,12 +1,13 @@
 import { createRequire } from "node:module";
 import { isAbsolute } from "node:path";
+import { randomUUID } from "node:crypto";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { authorizeAgentAction, mcpToolAuthority, putApprovalReceipt, reconcileMcpCapabilities, type ApprovalReceipt, type Finding } from "@verglos/shared";
+import { authorizeAgentAction, createFailure, mcpToolAuthority, putApprovalReceipt, reconcileMcpCapabilities, type ApprovalReceipt, type FailureCategory, type Finding } from "@verglos/shared";
 import { checkBeforeWrite } from "./tools/check-before-write.js";
 import type {
   CheckBeforeWriteInput as ToolInput,
@@ -24,6 +25,42 @@ const { version: MCP_VERSION } = require("../package.json") as {
 
 const MAX_TOOL_ARGUMENT_BYTES = 256 * 1024;
 const MAX_TOOL_RESPONSE_BYTES = 512 * 1024;
+
+function failureCategoryFor(code: string): FailureCategory {
+  if (code === "MCP_UNKNOWN_TOOL") return "unsupported";
+  if (code === "MCP_ENTITLEMENT_INVALID") return "usage";
+  if (code === "MCP_APPROVAL_AUDIT") return "infrastructure";
+  if (code === "MCP_AUTHORITY_MISSING") return "integrity";
+  if (code.startsWith("MCP_APPROVAL_") || code.startsWith("MCP_ENTITLEMENT_")) return "authorization";
+  if (code.startsWith("MCP_OUTPUT_") || code.endsWith("_FAILED")) return "infrastructure";
+  return "usage";
+}
+
+function mcpError(code: string, message: string, legacyError: "usage" | "output" = "usage") {
+  const category = failureCategoryFor(code);
+  const categoryCode = category === "authorization"
+    ? "verglos.failure.authorization.denied"
+    : category === "unsupported"
+      ? "verglos.failure.unsupported.tool-unavailable"
+      : category === "infrastructure"
+        ? "verglos.failure.infrastructure.operation-failed"
+        : category === "integrity"
+          ? "verglos.failure.integrity.contract-invalid"
+        : "verglos.failure.usage.request-invalid";
+  const failure = createFailure({
+    failureId: `urn:uuid:${randomUUID()}`,
+    category,
+    code: categoryCode,
+    retry: category === "authorization" || category === "infrastructure" ? "after-action" : "never",
+    operation: "MCP tool dispatch",
+    message: category === "authorization" ? "The MCP request was not authorized." : category === "unsupported" ? "The requested MCP tool is not available." : category === "infrastructure" ? "The MCP operation could not produce a complete result." : category === "integrity" ? "The MCP authority contract could not be verified." : "The MCP request is invalid.",
+    limitation: "No successful MCP tool result was produced.",
+    action: category === "authorization" ? "Provide the required verified entitlement or exact approval." : category === "unsupported" ? "Use a tool advertised by this server." : category === "infrastructure" ? "Review runtime availability and retry only after the underlying failure is addressed." : category === "integrity" ? "Use a server build with matching tool authority and capability metadata." : "Correct the request and retry.",
+    occurredAt: new Date().toISOString(),
+  });
+  return { content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: legacyError, code, message, failure }) }] };
+}
+
 const APPROVAL_RECEIPT_PROPERTY = {
   approvalReceipt: {
     type: "object",
@@ -60,7 +97,7 @@ const APPROVAL_RECEIPT_PROPERTY = {
  *   - Speaks JSON-RPC over stdio
  *   - Startup banner goes to stderr; stdout is reserved for MCP transport
  *   - Zero extra install (bundled in the CLI)
- *   - Host-supplied entitlement is optional; no network lookup occurs on the hot path
+ *   - A host may supply verified entitlement; omission defaults to Free and never triggers network lookup
  */
 
 // ─── Tool schemas ─────────────────────────────────────────────────────────
@@ -238,10 +275,10 @@ export function jsonResponse(payload: unknown): {
     if (typeof encoded !== "string") throw new Error("response is not serializable");
     text = encoded;
   } catch {
-    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "output", code: "MCP_OUTPUT_INVALID", message: "tool response is not serializable JSON" }) }] };
+    return mcpError("MCP_OUTPUT_INVALID", "tool response is not serializable JSON", "output");
   }
   if (Buffer.byteLength(text, "utf8") > MAX_TOOL_RESPONSE_BYTES) {
-    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "output", code: "MCP_OUTPUT_LIMIT", message: "tool response exceeds the 512 KiB limit" }) }] };
+    return mcpError("MCP_OUTPUT_LIMIT", "tool response exceeds the 512 KiB limit", "output");
   }
   return { content: [{ type: "text", text }] };
 }
@@ -298,7 +335,7 @@ export async function dispatchTool(
   options: { readonly approvalStoreRoot?: string; readonly now?: string; readonly plan?: "free" | "pro" | "team" | "studio" | "enterprise" } = {},
 ): Promise<{ content: { type: "text"; text: string }[] }> {
   if (args !== undefined && (!args || typeof args !== "object" || Array.isArray(args))) {
-    return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be an object" }) }] };
+    return mcpError("MCP_ARGUMENTS_INPUT", "tool arguments must be an object");
   }
   if (args !== undefined) {
     let encodedArgs: string;
@@ -307,24 +344,28 @@ export async function dispatchTool(
       if (typeof encoded !== "string") throw new Error("arguments are not serializable");
       encodedArgs = encoded;
     } catch {
-      return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments must be serializable JSON" }) }] };
+      return mcpError("MCP_ARGUMENTS_INPUT", "tool arguments must be serializable JSON");
     }
     if (Buffer.byteLength(encodedArgs, "utf8") > MAX_TOOL_ARGUMENT_BYTES) {
-      return { content: [{ type: "text", text: JSON.stringify({ ok: false, error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments exceed the 256 KiB limit" }) }] };
+      return mcpError("MCP_ARGUMENTS_INPUT", "tool arguments exceed the 256 KiB limit");
     }
   }
   const input = args ?? {};
-  const invalid = (code: string, message: string) => ({ content: [{ type: "text" as const, text: JSON.stringify({ ok: false, error: "usage", code, message }) }] });
+  const invalid = (code: string, message: string) => mcpError(code, message);
   const authority = mcpToolAuthority(name);
   const registered = TOOLS.some((tool) => tool.name === name);
   if (!registered) return invalid("MCP_UNKNOWN_TOOL", "unknown MCP tool");
   if (!authority) return invalid("MCP_AUTHORITY_MISSING", "registered MCP tool has no shared authority metadata");
-  if (options.plan !== undefined) {
+  // A missing host-verified entitlement is not an upgrade grant. Preserve
+  // legacy tool names and Free access, but treat an absent plan as Free so a
+  // paid tool cannot be called merely because the host omitted entitlement.
+  {
     const capability = listAdvertisedTools().find((tool) => tool.name === name)?._meta?.["verglos/capability"] as { plan?: "free" | "pro" | "team" | "studio" | "enterprise" } | undefined;
     const required = capability?.plan;
     const rank = { free: 0, pro: 1, team: 2, studio: 3, enterprise: 4 } as const;
-    if (typeof options.plan !== "string" || !(options.plan in rank)) return invalid("MCP_ENTITLEMENT_INVALID", "invalid entitlement plan");
-    if (required && rank[options.plan] < rank[required]) return invalid("MCP_ENTITLEMENT_REQUIRED", `MCP tool requires the ${required} plan`);
+    const plan: unknown = options.plan ?? "free";
+    if (typeof plan !== "string" || !(plan in rank)) return invalid("MCP_ENTITLEMENT_INVALID", "invalid entitlement plan");
+    if (required && rank[plan as keyof typeof rank] < rank[required]) return invalid("MCP_ENTITLEMENT_REQUIRED", `MCP tool requires the ${required} plan`);
   }
   if (authority?.approvalRequired) {
     const approvalReceipt = input.approvalReceipt as ApprovalReceipt | undefined;
@@ -411,7 +452,7 @@ export function listAdvertisedTools() {
 }
 
 export interface VerglosMcpServerOptions {
-  /** Verified entitlement supplied by the host; omitted preserves alpha compatibility. */
+  /** Verified entitlement supplied by the host; omitted grants Free capabilities only. */
   readonly plan?: "free" | "pro" | "team" | "studio" | "enterprise";
 }
 
