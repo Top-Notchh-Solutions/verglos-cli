@@ -2,6 +2,8 @@
 
 Latest execution update (2026-09-12): web PR #32 `cfe693608276e4a51efb8bd2c8ee2f4060a21c66` is OPEN/CLEAN; hosted run `34678789958`, GitGuardian, and Vercel pass. A catalog-backed server guard now rejects new Pro QR checkout with bounded 503 before customer/provider side effects while Pro remains non-purchasable. Full local suite 83/83 (PostgreSQL active), typecheck, build, schema and migration checks pass. This mitigates R-031 but does not complete PLAN-WEB-011/012; no backlog item was accepted. Counts: 152 unchecked / 117 checked / 269.
 
+Latest CLI runtime test (2026-09-12): with Docker Desktop reachable, `VERGLOS_HUNT_DOCKER_INTEGRATION=1` and pinned `busybox:1.36@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662` ran `pnpm --filter @verglos/hunt test`: 51 passed, 1 Linux-host PID/IPC namespace test skipped on macOS, 0 failures. Runtime assertions covered non-root, read-only source/rootfs, network denial, absent socket/device, no-new-privileges, redaction, bounded output/timeout/CPU/processes/tmpfs, memory-ceiling visibility, and signal classification. HUNT-011/QUAL-CLI-004 remain open; this run provides no Linux-host namespace claim and no independent review.
+
 Historical rows retain the state at the cited commit. For current branch heads, PRs, blockers, and backlog counts, use the latest checkpoint below; older counts in execution notes are not current totals.
 
 This ledger records phase-level execution evidence. It is intentionally separate

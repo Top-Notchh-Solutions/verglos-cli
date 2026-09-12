@@ -2,6 +2,8 @@
 
 Latest R-031 update (2026-09-12): web `cfe6936` adds a 503 catalog-purchasability gate before new Pro QR creation; PR #32 run `34678789958`, GitGuardian, and Vercel pass. This partially contains new-charge exposure only. The existing QR/webhook fulfillment path is unchanged; env INR-paise remains independent of catalog USD pricing, and amount/currency binding, idempotent lifecycle/refund handling, and invoice reconciliation remain open. R-031 remains critical and release-blocking for billing.
 
+Latest R-009 evidence (2026-09-12): with Docker Desktop reachable, the pinned BusyBox runtime suite passed 15/15 adversarial runtime assertions; the PID/IPC comparison was explicitly skipped because the test host is macOS. Full Hunt package tests pass 51 with one platform skip. This is bounded local evidence only: it does not replace Linux namespace evidence, all HUNT-011 acceptance cases, recipe-path integration, or independent security review; R-009 remains critical and open.
+
 Status: governing risk baseline for `TRUTH-012`
 
 Reviewed: 2026-09-08
