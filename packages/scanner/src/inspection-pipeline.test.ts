@@ -129,6 +129,56 @@ test("missing import and adapter failure remain explicit incomplete coverage wit
   assert.equal(JSON.stringify(result.coverage).includes("/private"), false);
 });
 
+test("in-toto imports bind to the subject content digest, not the Verglos identity digest", async () => {
+  const digestInSubjectId = subject.subjectId.split(":sha256:").at(-1)!;
+  const run = async (digest: string) => {
+    const bytes = Buffer.from(JSON.stringify({
+      _type: "link",
+      subject: [{ name: "target", digest: { sha256: digest } }],
+      predicate: { builder: { id: "unverified-builder" } },
+    }));
+    return runInspectionPipeline({
+      target,
+      cwd: "/tmp",
+      resolveTarget: async (selected) => resolution(selected),
+      producers: ["provenance"],
+      imports: [{ producer: "provenance", bytes }],
+      policyInputs: {},
+    });
+  };
+
+  const matching = await run("a".repeat(64));
+  assert.match(matching.coverage.producers[0]!.limitations.join(" "), /digest matches the target, but signature and builder identity remain unverified/u);
+  const identityOnly = await run(digestInSubjectId);
+  assert.match(identityOnly.coverage.producers[0]!.limitations.join(" "), /does not prove the selected target identity/u);
+});
+
+test("CycloneDX and SPDX imports only bind to an exact selected SBOM document digest", async () => {
+  const cases = [
+    { producer: "cyclonedx" as const, bytes: Buffer.from(JSON.stringify({ bomFormat: "CycloneDX", specVersion: "1.5", components: [] })) },
+    { producer: "spdx" as const, bytes: Buffer.from(JSON.stringify({ spdxVersion: "SPDX-2.3", documentNamespace: "https://example.test/spdx/1", packages: [], files: [], relationships: [] })) },
+  ];
+  for (const item of cases) {
+    const digest = createHash("sha256").update(item.bytes).digest("hex");
+    const sbomTarget: TargetSpec = { kind: "sbom", value: "selected-sbom" };
+    const run = (documentDigest: string) => {
+      const selectedSbom = createSubject({ kind: "sbom", format: item.producer === "cyclonedx" ? "cyclonedx-json" : "spdx-json", documentDigest: { algorithm: "sha256", value: documentDigest } });
+      return runInspectionPipeline({
+        target: sbomTarget,
+        cwd: "/tmp",
+        resolveTarget: async (selected) => ({ target: selected, subject: selectedSbom, coverage: "complete", limitations: [] }),
+        producers: [item.producer],
+        imports: [{ producer: item.producer, bytes: item.bytes }],
+        policyInputs: {},
+      });
+    };
+    const matching = await run(digest);
+    assert.match(matching.coverage.producers[0]!.limitations.join(" "), /bytes match the selected SBOM subject/u);
+    const mismatch = await run("b".repeat(64));
+    assert.match(mismatch.coverage.producers[0]!.limitations.join(" "), /does not match the selected SBOM subject/u);
+  }
+});
+
 test("unsafe SARIF locations fail closed without creating observations", async () => {
   const unsafe = Buffer.from(JSON.stringify({ version: "2.1.0", runs: [{ tool: { driver: { name: "fixture" } }, results: [{ ruleId: "r1", locations: [{ physicalLocation: { artifactLocation: { uri: "../../outside.js" } } }] }] }] }));
   const result = await runInspectionPipeline({

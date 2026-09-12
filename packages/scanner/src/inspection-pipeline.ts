@@ -212,13 +212,32 @@ function normalizeSarif(document: ReturnType<typeof importSarif>, subjectId: str
   return { observations, limitations };
 }
 
-function normalizeImportedBatch(batch: ImportedEvidenceBatch, subjectId: string): ProducerOutput {
+function subjectSha256Digests(subject: Subject): readonly string[] {
+  const digests: string[] = [];
+  const add = (value: unknown) => {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return;
+    const digest = value as Record<string, unknown>;
+    if (digest.algorithm === "sha256" && typeof digest.value === "string" && /^[a-f0-9]{64}$/u.test(digest.value)) digests.push(digest.value);
+  };
+  switch (subject.kind) {
+    case "repository-tree": add(subject.worktreeDigest); break;
+    case "package":
+    case "artifact":
+    case "oci-manifest":
+    case "oci-index": add(subject.digest); break;
+    case "filesystem": add(subject.treeDigest); break;
+    case "sbom": add(subject.documentDigest); break;
+  }
+  return [...new Set(digests)];
+}
+
+function normalizeImportedBatch(batch: ImportedEvidenceBatch, subject: Subject): ProducerOutput {
   if (!(batch.bytes instanceof Uint8Array) || batch.bytes.byteLength === 0 || batch.bytes.byteLength > MAX_IMPORT_BYTES) throw new Error("imported evidence is empty or exceeds the 8 MiB limit");
   if (batch.producer === "sarif") {
     const imported = importSarif(batch.bytes);
     const sourceDigest = `sha256:${imported.sourceDigest.value}` as const;
     const runId = importRunId();
-    const normalized = normalizeSarif(imported, subjectId, runId, sourceDigest);
+    const normalized = normalizeSarif(imported, subject.subjectId, runId, sourceDigest);
     return { state: "incomplete", observations: normalized.observations, runIds: [runId], sourceDigests: [sourceDigest], limitations: normalized.limitations.slice(0, 16) };
   }
   if (batch.producer === "cyclonedx") {
@@ -227,17 +246,27 @@ function normalizeImportedBatch(batch: ImportedEvidenceBatch, subjectId: string)
     const vulnerabilities = (sbom.document as Record<string, unknown>).vulnerabilities;
     if (vulnerabilities !== undefined) importCycloneDxVex(batch.bytes);
     const hasVulnerabilities = Array.isArray(vulnerabilities) && vulnerabilities.length > 0;
-    return { state: "incomplete", observations: [], runIds: [], sourceDigests: [sourceDigest], limitations: [hasVulnerabilities ? "CycloneDX vulnerability assertions are digest-bound but are not converted into policy observations" : "CycloneDX inventory does not independently prove it describes the selected subject"] };
+    const bindsSelectedSbom = subject.kind === "sbom" && subject.documentDigest.algorithm === "sha256" && subject.documentDigest.value === sbom.sourceDigest.value;
+    return { state: "incomplete", observations: [], runIds: [], sourceDigests: [sourceDigest], limitations: [
+      ...(!bindsSelectedSbom ? ["CycloneDX document digest does not match the selected SBOM subject; inventory is not bound to the target"] : ["CycloneDX bytes match the selected SBOM subject, but inventory contents are not converted into policy observations"]),
+      ...(hasVulnerabilities ? ["CycloneDX vulnerability assertions are not converted into policy observations"] : []),
+    ] };
   }
   if (batch.producer === "spdx") {
     const spdx = importSpdx(batch.bytes);
     const sourceDigest = `sha256:${spdx.sourceDigest.value}` as const;
-    return { state: "incomplete", observations: [], runIds: [], sourceDigests: [sourceDigest], limitations: ["SPDX inventory does not independently prove it describes the selected subject"] };
+    const bindsSelectedSbom = subject.kind === "sbom" && subject.documentDigest.algorithm === "sha256" && subject.documentDigest.value === spdx.sourceDigest.value;
+    return { state: "incomplete", observations: [], runIds: [], sourceDigests: [sourceDigest], limitations: [bindsSelectedSbom
+      ? "SPDX bytes match the selected SBOM subject, but inventory contents are not converted into policy observations"
+      : "SPDX document digest does not match the selected SBOM subject; inventory is not bound to the target"] };
   }
   const provenance = importInTotoProvenance(batch.bytes);
   const sourceDigest = `sha256:${provenance.sourceDigest.value}` as const;
-  const targetDigest = subjectId.split(":sha256:").at(-1);
-  const bindsTarget = provenance.subjects.some((entry) => (entry.digest as Record<string, unknown>).sha256 === targetDigest);
+  const targetDigests = new Set(subjectSha256Digests(subject));
+  const bindsTarget = targetDigests.size > 0 && provenance.subjects.some((entry) => {
+    const digests = entry.digest as Record<string, unknown>;
+    return typeof digests.sha256 === "string" && targetDigests.has(digests.sha256);
+  });
   return { state: "incomplete", observations: [], runIds: [], sourceDigests: [sourceDigest], limitations: [bindsTarget ? "provenance digest matches the target, but signature and builder identity remain unverified" : "provenance does not prove the selected target identity"] };
 }
 
@@ -360,7 +389,7 @@ export async function runInspectionPipeline(options: InspectionPipelineOptions):
         const batches = (options.imports ?? []).filter((entry) => entry.producer === step.producer);
         if (batches.length === 0) output = { state: "not-provided", observations: [], runIds: [], sourceDigests: [], limitations: [`${step.producer} import was selected but no validated import batch was provided`] };
         else {
-          const results = batches.map((batch) => normalizeImportedBatch(batch, subject.subjectId));
+          const results = batches.map((batch) => normalizeImportedBatch(batch, subject));
           const observations = results.flatMap((result) => result.observations);
           if (observations.length > MAX_OBSERVATIONS) throw new Error("imported observation limit exceeded");
           const duplicateIds = new Set<string>();
