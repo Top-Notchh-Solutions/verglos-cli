@@ -1,8 +1,36 @@
+import { z } from "zod";
 import { TARGET_KINDS, type TargetKind } from "./target-resolver.js";
 
 export type InspectProducer = "native" | "trivy" | "sarif" | "cyclonedx" | "spdx" | "provenance";
 export type InspectPlanStep = Readonly<{ producer: InspectProducer; coverageClass: "native" | "external" | "imported"; executesTargetCode: false; network: "none"; timeoutMs: number }>;
 export type InspectPlan = Readonly<{ targetKind: TargetKind; steps: readonly InspectPlanStep[] }>;
+
+const DIGEST = /^sha256:[a-f0-9]{64}$/;
+export const InspectProducerCoverageSchema = z.object({
+  producer: z.enum(["native", "trivy", "sarif", "cyclonedx", "spdx", "provenance"]),
+  state: z.enum(["complete", "incomplete", "not-provided", "failed"]),
+  observationCount: z.number().int().min(0).max(20_000),
+  runIds: z.array(z.string().min(1).max(128)).max(32),
+  sourceDigests: z.array(z.string().regex(DIGEST)).max(32),
+  limitations: z.array(z.string().min(1).max(512)).max(16),
+}).strict();
+export const InspectCoverageManifestSchema = z.object({
+  schemaVersion: z.literal("1.0.0"),
+  status: z.enum(["complete", "incomplete"]),
+  target: z.object({ state: z.enum(["complete", "incomplete"]), limitations: z.array(z.string().min(1).max(512)).max(16) }).strict(),
+  producers: z.array(InspectProducerCoverageSchema).min(1).max(8),
+}).strict().superRefine((manifest, context) => {
+  const producerIds = manifest.producers.map((producer) => producer.producer);
+  if (new Set(producerIds).size !== producerIds.length) context.addIssue({ code: z.ZodIssueCode.custom, path: ["producers"], message: "coverage producer IDs must be unique" });
+  if (manifest.target.state === "incomplete" && manifest.target.limitations.length === 0) context.addIssue({ code: z.ZodIssueCode.custom, path: ["target", "limitations"], message: "incomplete target coverage requires a limitation" });
+  manifest.producers.forEach((producer, index) => {
+    if (producer.state !== "complete" && producer.limitations.length === 0) context.addIssue({ code: z.ZodIssueCode.custom, path: ["producers", index, "limitations"], message: "incomplete producer coverage requires a limitation" });
+  });
+  const complete = manifest.target.state === "complete" && manifest.target.limitations.length === 0 && manifest.producers.every((producer) => producer.state === "complete" && producer.limitations.length === 0);
+  if ((manifest.status === "complete") !== complete) context.addIssue({ code: z.ZodIssueCode.custom, path: ["status"], message: "overall coverage state must match target and producer evidence" });
+});
+export type InspectProducerCoverage = z.infer<typeof InspectProducerCoverageSchema>;
+export type InspectCoverageManifest = z.infer<typeof InspectCoverageManifestSchema>;
 
 const ORDER: readonly InspectProducer[] = ["native", "trivy", "sarif", "cyclonedx", "spdx", "provenance"];
 const CLASSES: Record<InspectProducer, InspectPlanStep["coverageClass"]> = { native: "native", trivy: "external", sarif: "imported", cyclonedx: "imported", spdx: "imported", provenance: "imported" };

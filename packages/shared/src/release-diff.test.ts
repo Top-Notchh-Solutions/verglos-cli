@@ -20,3 +20,10 @@ test("release diff compares identity and coverage canonically", () => {
   const base = snapshot([]); const head = { ...base, subjectIds: [...base.subjectIds].reverse(), lineage: { edges: [...base.lineage.edges].reverse(), gaps: [...base.lineage.gaps].reverse() } } as typeof base;
   const result = diffReleaseSnapshots(base, head); assert.equal(result.identityChanged, false); assert.equal(result.coverageChanged, false);
 });
+
+test("release diff reports producer coverage changes in snapshot v1.1", () => {
+  const coverage = { schemaVersion: "1.0.0" as const, status: "complete" as const, target: { state: "complete" as const, limitations: [] }, producers: [{ producer: "native" as const, state: "complete" as const, observationCount: 0, runIds: [], sourceDigests: [], limitations: [] }] };
+  const base = createReleaseSnapshot({ primarySubject: subject, subjects: [subject], observations: [], lineage: { edges: [], gaps: [] }, policyInputs: {}, coverage });
+  const head = createReleaseSnapshot({ primarySubject: subject, subjects: [subject], observations: [], lineage: { edges: [], gaps: [] }, policyInputs: {}, coverage: { ...coverage, producers: [{ ...coverage.producers[0]!, observationCount: 1 }] } });
+  assert.equal(diffReleaseSnapshots(base, head).coverageChanged, true);
+});
