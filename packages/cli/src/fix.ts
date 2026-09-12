@@ -1,6 +1,7 @@
-import { lstat, readFile, writeFile, access, mkdir, open, realpath, unlink } from "node:fs/promises";
+import { lstat, readFile, writeFile, access, mkdir, open, realpath, rename, unlink } from "node:fs/promises";
 import { constants } from "node:fs";
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
+import { randomUUID } from "node:crypto";
 import chalk from "chalk";
 import { detectProjectType } from "@verglos/scanner";
 import { authorizeAgentAction, putApprovalReceipt, type ApprovalReceipt, type ProjectType } from "@verglos/shared";
@@ -37,6 +38,7 @@ export interface HeaderFixSnapshot {
   readonly path: string;
   readonly existed: boolean;
   readonly bytes?: Buffer;
+  readonly mode?: number;
 }
 
 const MAX_FIX_SNAPSHOT_BYTES = 1 * 1024 * 1024;
@@ -62,16 +64,31 @@ async function readFixSnapshot(path: string): Promise<Buffer> {
   }
 }
 
-async function restoreFixSnapshot(path: string, bytes: Buffer): Promise<void> {
-  if (bytes.byteLength > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
-  const handle = await open(path, constants.O_WRONLY | constants.O_CREAT | constants.O_TRUNC | constants.O_NOFOLLOW, 0o600);
+async function replaceWithRegularFile(path: string, bytes: Buffer, mode: number): Promise<void> {
+  if (!Number.isInteger(mode) || mode < 0 || mode > 0o777) throw new Error("regular-file replacement mode is invalid");
+  const temporaryPath = join(dirname(path), `.verglos-rollback-${randomUUID()}.tmp`);
   try {
-    const stat = await handle.stat();
-    if (!stat.isFile()) throw new Error("fix rollback snapshot target is not a bounded regular file");
-    await handle.writeFile(bytes);
+    const handle = await open(temporaryPath, "wx", mode);
+    try {
+      const stat = await handle.stat();
+      if (!stat.isFile()) throw new Error("fix rollback temporary file is not regular");
+      await handle.chmod(mode);
+      await handle.writeFile(bytes);
+      await handle.sync();
+    } finally {
+      await handle.close();
+    }
+    // Rename replaces a raced-in symlink itself; opening the destination with
+    // O_NOFOLLOW is not portable (notably on Windows) and can follow it.
+    await rename(temporaryPath, path);
   } finally {
-    await handle.close();
+    await unlink(temporaryPath).catch(() => undefined);
   }
+}
+
+async function restoreFixSnapshot(path: string, bytes: Buffer, mode: number): Promise<void> {
+  if (bytes.byteLength > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+  await replaceWithRegularFile(path, bytes, mode);
 }
 
 export async function captureHeaderFixSnapshots(projectRoot: string, plannedFiles: readonly string[]): Promise<readonly HeaderFixSnapshot[]> {
@@ -90,13 +107,13 @@ export async function captureHeaderFixSnapshots(projectRoot: string, plannedFile
       throw error;
     }
     if (!entry.isFile() || entry.size > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
-    return { path, existed: true, bytes: await readFixSnapshot(path) };
+    return { path, existed: true, bytes: await readFixSnapshot(path), mode: entry.mode & 0o777 };
   }));
 }
 
 export async function rollbackHeaderFixSnapshots(snapshots: readonly HeaderFixSnapshot[]): Promise<void> {
   const outcomes = await Promise.allSettled(snapshots.map(async (snapshot) => {
-    if (snapshot.existed && snapshot.bytes) await restoreFixSnapshot(snapshot.path, snapshot.bytes);
+    if (snapshot.existed && snapshot.bytes) await restoreFixSnapshot(snapshot.path, snapshot.bytes, snapshot.mode ?? 0o600);
     else await unlink(snapshot.path).catch((error: unknown) => {
       if (!(error && typeof error === "object" && "code" in error && error.code === "ENOENT")) throw error;
     });
@@ -141,26 +158,11 @@ export async function authorizeHeaderFix(receipt: ApprovalReceipt, plannedFiles:
   return { allowed: true };
 }
 
-/** Write an already-planned regular file without following a replacement symlink. */
+/** Atomically replace an already-planned regular file without following a raced-in symlink. */
 async function replaceRegularFile(path: string, content: string): Promise<void> {
-  // Windows providers do not consistently implement O_NOFOLLOW. The caller
-  // has already performed a bounded regular-file check immediately before
-  // this open; retain kernel no-follow semantics on Unix where available.
-  // Opening with O_TRUNC is rejected with EINVAL by the Windows runners for
-  // this existing-file mutation. `r+` works on Windows (including hidden
-  // files); truncate only after the opened handle itself is confirmed regular.
-  const flags = process.platform === "win32"
-    ? "r+"
-    : constants.O_WRONLY | constants.O_TRUNC | constants.O_NOFOLLOW;
-  const handle = await open(path, flags);
-  try {
-    const stat = await handle.stat();
-    if (!stat.isFile() || stat.size > 1 * 1024 * 1024) throw new Error("Next.js config changed before mutation.");
-    if (process.platform === "win32") await handle.truncate(0);
-    await handle.writeFile(content, "utf8");
-  } finally {
-    await handle.close();
-  }
+  const entry = await lstat(path);
+  if (!entry.isFile() || entry.size > 1 * 1024 * 1024) throw new Error("Next.js config changed before mutation.");
+  await replaceWithRegularFile(path, Buffer.from(content, "utf8"), entry.mode & 0o777);
 }
 
 async function fileExists(path: string): Promise<boolean> {

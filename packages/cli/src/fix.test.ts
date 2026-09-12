@@ -11,14 +11,17 @@ import { fileURLToPath } from "node:url";
 
 test("fix approval requires mutate authority and exact planned file scope", async () => {
   const root = process.cwd();
+  const otherRoot = await mkdtemp(join(tmpdir(), "verglos-fix-other-workspace-"));
   const request = { requestId: "523e4567-e89b-12d3-a456-426614174000", action: "mutate" as const, actor: "agent", target: await headerFixWorkspaceTarget(root), files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" };
   const receipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
-  assert.equal((await authorizeHeaderFix(receipt, ["next.config.js"], "2026-01-02T00:00:00Z", root)).allowed, true);
-  assert.equal((await authorizeHeaderFix(receipt, ["next.config.js"], "2026-01-02T00:00:00Z", "/tmp")).reason, "workspace-target-mismatch");
-  assert.equal((await authorizeHeaderFix(receipt, ["src/other.ts"], "2026-01-02T00:00:00Z", root)).reason, "file-scope-mismatch");
-  assert.equal((await authorizeHeaderFix(receipt, [], "2026-01-02T00:00:00Z", root)).reason, "file-scope-mismatch");
-  const widened = createApprovalReceipt({ ...request, files: ["next.config.js", "src/other.ts"] }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
-  assert.equal((await authorizeHeaderFix(widened, ["next.config.js"], "2026-01-02T00:00:00Z", root)).reason, "file-scope-mismatch");
+  try {
+    assert.equal((await authorizeHeaderFix(receipt, ["next.config.js"], "2026-01-02T00:00:00Z", root)).allowed, true);
+    assert.equal((await authorizeHeaderFix(receipt, ["next.config.js"], "2026-01-02T00:00:00Z", otherRoot)).reason, "workspace-target-mismatch");
+    assert.equal((await authorizeHeaderFix(receipt, ["src/other.ts"], "2026-01-02T00:00:00Z", root)).reason, "file-scope-mismatch");
+    assert.equal((await authorizeHeaderFix(receipt, [], "2026-01-02T00:00:00Z", root)).reason, "file-scope-mismatch");
+    const widened = createApprovalReceipt({ ...request, files: ["next.config.js", "src/other.ts"] }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    assert.equal((await authorizeHeaderFix(widened, ["next.config.js"], "2026-01-02T00:00:00Z", root)).reason, "file-scope-mismatch");
+  } finally { await rm(otherRoot, { recursive: true, force: true }); }
 });
 
 test("header fix persists its approved receipt when an audit store is configured", async () => {
@@ -34,7 +37,7 @@ test("header fix persists its approved receipt when an audit store is configured
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test("approved Next.js header patch writes through a regular-file handle", async () => {
+test("approved Next.js header patch atomically replaces its regular config", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-next-fix-"));
   try {
     await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
@@ -271,7 +274,7 @@ test("failed post-fix rescan restores prior files and removes newly created fixe
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test("failed rollback is reported as unverified instead of claiming success", async () => {
+test("rollback replaces a raced-in symlink without changing its external target", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-fix-rollback-failure-"));
   const outside = await mkdtemp(join(tmpdir(), "verglos-fix-rollback-outside-"));
   try {
@@ -285,8 +288,9 @@ test("failed rollback is reported as unverified instead of claiming success", as
 
     await assert.rejects(
       () => rescanOrRollbackHeaderFix(snapshots, async () => { throw new Error("fixture scan failure"); }),
-      (error: unknown) => error instanceof HeaderFixRollbackError && !error.rollbackSucceeded,
+      (error: unknown) => error instanceof HeaderFixRollbackError && error.rollbackSucceeded,
     );
+    assert.equal(await readFile(path, "utf8"), "original");
     assert.equal(await readFile(outsidePath, "utf8"), "outside remains unchanged");
   } finally { await rm(root, { recursive: true, force: true }); await rm(outside, { recursive: true, force: true }); }
 });
