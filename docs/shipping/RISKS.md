@@ -1,5 +1,7 @@
 # Verglos V1 risk register
 
+Latest R-031 update (2026-09-12): web `cfe6936` adds a 503 catalog-purchasability gate before new Pro QR creation; PR #32 run `34678789958`, GitGuardian, and Vercel pass. This partially contains new-charge exposure only. The existing QR/webhook fulfillment path is unchanged; env INR-paise remains independent of catalog USD pricing, and amount/currency binding, idempotent lifecycle/refund handling, and invoice reconciliation remain open. R-031 remains critical and release-blocking for billing.
+
 Status: governing risk baseline for `TRUTH-012`
 
 Reviewed: 2026-09-08

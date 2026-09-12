@@ -1,5 +1,7 @@
 # Verglos V1 Execution Ledger
 
+Latest execution update (2026-09-12): web PR #32 `cfe693608276e4a51efb8bd2c8ee2f4060a21c66` is OPEN/CLEAN; hosted run `34678789958`, GitGuardian, and Vercel pass. A catalog-backed server guard now rejects new Pro QR checkout with bounded 503 before customer/provider side effects while Pro remains non-purchasable. Full local suite 83/83 (PostgreSQL active), typecheck, build, schema and migration checks pass. This mitigates R-031 but does not complete PLAN-WEB-011/012; no backlog item was accepted. Counts: 152 unchecked / 117 checked / 269.
+
 Historical rows retain the state at the cited commit. For current branch heads, PRs, blockers, and backlog counts, use the latest checkpoint below; older counts in execution notes are not current totals.
 
 This ledger records phase-level execution evidence. It is intentionally separate

@@ -1,5 +1,7 @@
 # Verglos V1 release gates
 
+Latest checkpoint (2026-09-12; supersedes dated gate snapshots below): PR #32 head `cfe6936` passes Node 22 hosted run `34678789958`, GitGuardian, and Vercel with 83/83 PostgreSQL-backed tests plus typecheck/schema/migration/build/security checks. The catalog now prevents initiating Pro QR checkout while Pro is non-purchasable; this does not satisfy PLAN-WEB-011/012 or close R-031. Backlog remains 152 unchecked / 117 checked / 269. No merge, deployment, or public-copy change.
+
 ## Gate 0 — Truth and scope
 
 - Current capability registry reconciled with code/tests.
