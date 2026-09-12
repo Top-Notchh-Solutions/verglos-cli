@@ -32,7 +32,19 @@ try {
   const result = await run(process.execPath, [cli, "--version"], { cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });
   if (!/^\d+\.\d+\.\d+[^\r\n]*\r?\n?$/.test(result.stdout.trim())) throw new Error("clean consumer CLI did not emit a version");
   await run(process.execPath, ["--input-type=module", "-e", "await Promise.all(['@verglos/shared','@verglos/scanner','@verglos/reporter','@verglos/mcp','@verglos/entitlement'].map((name) => import(name)))"], { cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });
-  console.log(`clean consumer installed ${archives.length} archives and executed Verglos ${result.stdout.trim()}`);
+  const engineCache = join(consumer, "engine-cache");
+  const home = join(consumer, "home");
+  const isolatedEnv = { ...process.env, VERGLOS_ENGINE_CACHE: engineCache, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: home, USERPROFILE: home };
+  const engineStatus = await run(process.execPath, [cli, "engines", "status", "--json"], { cwd: consumer, env: isolatedEnv, timeout: 15_000, maxBuffer: 1024 * 1024 });
+  const status = JSON.parse(engineStatus.stdout);
+  if (!Array.isArray(status.engines) || status.engines.length !== 0) throw new Error("clean consumer unexpectedly discovered an installed external engine");
+  try {
+    await lstat(engineCache);
+    throw new Error("clean consumer created an external-engine cache without an explicit install request");
+  } catch (error) {
+    if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error;
+  }
+  console.log(`clean consumer installed ${archives.length} archives, imported all libraries, executed Verglos ${result.stdout.trim()}, and confirmed no external engine installation`);
 } finally {
   await rm(consumer, { recursive: true, force: true });
 }

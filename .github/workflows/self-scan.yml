@@ -88,7 +88,7 @@ jobs:
 
       - name: Qualify clean public package archives
         run: |
-          node --test scripts/pack-public-packages.test.mjs
+          node --test scripts/pack-public-packages.test.mjs scripts/package-surface-audit.test.mjs
           node scripts/pack-public-packages.mjs .artifacts/public-packages
           node scripts/check-packed-manifests.mjs .artifacts/public-packages
 
@@ -131,7 +131,7 @@ jobs:
           retention-days: 14
 
       - name: Test release artifact verifier
-        run: node --test scripts/verify-release-artifacts.test.mjs
+        run: node --test scripts/verify-release-artifacts.test.mjs scripts/package-surface-audit.test.mjs
 
       - name: Typecheck
         run: pnpm typecheck

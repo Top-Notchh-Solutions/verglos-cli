@@ -19,7 +19,10 @@ try {
   for (const name of packageNames) {
     const source = join(root, "packages", name);
     const stage = join(stagingRoot, name);
-    await cp(join(source, "dist"), join(stage, "dist"), { recursive: true, filter: (path) => !/\.test\./u.test(path) });
+    await cp(join(source, "dist"), join(stage, "dist"), {
+      recursive: true,
+      filter: (path) => !/\.test\./u.test(path) && !/[\\/]cli-fixture\.[^/\\]+$/u.test(path),
+    });
     for (const file of ["README.md", "LICENSE", "NOTICE"]) {
       try { await cp(join(source, file), join(stage, file)); } catch { /* optional package metadata */ }
     }

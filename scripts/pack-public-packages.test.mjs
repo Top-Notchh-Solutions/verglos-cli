@@ -7,7 +7,7 @@ import { join } from "node:path";
 import { test } from "node:test";
 
 const run = promisify(execFile);
-test("clean public pack contains six archives without compiled tests", async () => {
+test("clean public pack contains six archives without compiled tests or CLI process fixtures", async () => {
   const output = await mkdtemp(join(tmpdir(), "verglos-public-pack-"));
   try {
     const { stdout: expectedNotices } = await run(process.execPath, ["scripts/generate-third-party-notices.mjs"], { maxBuffer: 16 * 1024 * 1024 });
@@ -17,6 +17,7 @@ test("clean public pack contains six archives without compiled tests", async () 
     for (const archive of archives) {
       const { stdout } = await run("tar", ["-tzf", join(output, archive)]);
       assert.doesNotMatch(stdout, /(^|\/)[^/]*\.test\./u);
+      assert.doesNotMatch(stdout, /(^|\/)cli-fixture\./u);
       assert.doesNotMatch(stdout, /workspace:/);
       const { stdout: license } = await run("tar", ["-xOf", join(output, archive), "package/LICENSE"], { encoding: "buffer" });
       assert.deepEqual(license, await readFile("LICENSE"), `${archive} must carry the repository license byte-for-byte`);
