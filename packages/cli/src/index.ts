@@ -553,7 +553,7 @@ program
     try { receipt = await readApprovalReceiptFile(opts.approvalReceipt); }
     catch (error) { reportPreflightError(opts.json, opts.quiet, "FIX_RECEIPT_INVALID", error instanceof Error ? error.message : "approval receipt is invalid", "approval receipt is invalid"); process.exit(78); }
     const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
-    const authorization = authorizeHeaderFix(receipt!, plannedFiles, new Date().toISOString());
+    const authorization = await authorizeHeaderFix(receipt!, plannedFiles, new Date().toISOString(), process.cwd());
     if (!authorization.allowed) {
       reportPreflightError(opts.json, opts.quiet, "FIX_APPROVAL_DENIED", `verglos fix approval denied: ${authorization.reason}`, "fix approval denied");
       process.exit(78);

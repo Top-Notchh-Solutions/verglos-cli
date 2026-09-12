@@ -1,6 +1,6 @@
-import { lstat, readFile, writeFile, access, mkdir, open } from "node:fs/promises";
+import { lstat, readFile, writeFile, access, mkdir, open, realpath } from "node:fs/promises";
 import { constants } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import chalk from "chalk";
 import { detectProjectType } from "@verglos/scanner";
 import { authorizeAgentAction, putApprovalReceipt, type ApprovalReceipt, type ProjectType } from "@verglos/shared";
@@ -33,9 +33,15 @@ export interface HeaderFixPlan {
   readonly preview?: readonly string[];
 }
 
-export function authorizeHeaderFix(receipt: ApprovalReceipt, plannedFiles: readonly string[], at: string): { readonly allowed: boolean; readonly reason?: string } {
+/** Stable approval identity for the exact workspace being modified. */
+export async function headerFixWorkspaceTarget(projectRoot: string): Promise<string> {
+  return `workspace:${await realpath(resolve(projectRoot))}`;
+}
+
+export async function authorizeHeaderFix(receipt: ApprovalReceipt, plannedFiles: readonly string[], at: string, projectRoot: string): Promise<{ readonly allowed: boolean; readonly reason?: string }> {
   const authorization = authorizeAgentAction("mutate", receipt, at);
   if (!authorization.allowed) return { allowed: false, reason: authorization.reason };
+  if (receipt.target !== await headerFixWorkspaceTarget(projectRoot)) return { allowed: false, reason: "workspace-target-mismatch" };
   const planned = [...new Set(plannedFiles)].sort();
   const approved = [...new Set(receipt.files)].sort();
   if (planned.length !== approved.length || planned.some((file, index) => file !== approved[index])) return { allowed: false, reason: "file-scope-mismatch" };
@@ -296,7 +302,7 @@ export async function applyHeaderFixes(projectRoot: string, options: { readonly 
   const plannedFiles = plan.filter((item) => item.action !== "skip").map((item) => item.file);
   if (plannedFiles.length > 0) {
     if (!options.approvalReceipt) throw new Error("header fix requires an approval receipt before changing files");
-    const authorization = authorizeHeaderFix(options.approvalReceipt, plannedFiles, options.now ?? new Date().toISOString());
+    const authorization = await authorizeHeaderFix(options.approvalReceipt, plannedFiles, options.now ?? new Date().toISOString(), projectRoot);
     if (!authorization.allowed) throw new Error(`header fix approval denied: ${authorization.reason}`);
     if (options.approvalStoreRoot) await putApprovalReceipt(options.approvalStoreRoot, options.approvalReceipt);
   }
