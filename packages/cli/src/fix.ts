@@ -1,6 +1,6 @@
-import { lstat, readFile, writeFile, access, mkdir, open, realpath } from "node:fs/promises";
+import { lstat, readFile, writeFile, access, mkdir, open, realpath, unlink } from "node:fs/promises";
 import { constants } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import chalk from "chalk";
 import { detectProjectType } from "@verglos/scanner";
 import { authorizeAgentAction, putApprovalReceipt, type ApprovalReceipt, type ProjectType } from "@verglos/shared";
@@ -31,6 +31,99 @@ export interface HeaderFixPlan {
   readonly file: string;
   readonly action: "create" | "patch" | "skip";
   readonly preview?: readonly string[];
+}
+
+export interface HeaderFixSnapshot {
+  readonly path: string;
+  readonly existed: boolean;
+  readonly bytes?: Buffer;
+}
+
+const MAX_FIX_SNAPSHOT_BYTES = 1 * 1024 * 1024;
+
+async function readFixSnapshot(path: string): Promise<Buffer> {
+  const handle = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW);
+  try {
+    const stat = await handle.stat();
+    if (!stat.isFile() || stat.size > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+    const chunks: Buffer[] = [];
+    let total = 0;
+    while (true) {
+      const buffer = Buffer.alloc(Math.min(64 * 1024, MAX_FIX_SNAPSHOT_BYTES + 1 - total));
+      const result = await handle.read(buffer, 0, buffer.byteLength, total);
+      if (result.bytesRead === 0) break;
+      total += result.bytesRead;
+      if (total > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+      chunks.push(buffer.subarray(0, result.bytesRead));
+    }
+    return Buffer.concat(chunks, total);
+  } finally {
+    await handle.close();
+  }
+}
+
+async function restoreFixSnapshot(path: string, bytes: Buffer): Promise<void> {
+  if (bytes.byteLength > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+  const handle = await open(path, constants.O_WRONLY | constants.O_CREAT | constants.O_TRUNC | constants.O_NOFOLLOW, 0o600);
+  try {
+    const stat = await handle.stat();
+    if (!stat.isFile()) throw new Error("fix rollback snapshot target is not a bounded regular file");
+    await handle.writeFile(bytes);
+  } finally {
+    await handle.close();
+  }
+}
+
+export async function captureHeaderFixSnapshots(projectRoot: string, plannedFiles: readonly string[]): Promise<readonly HeaderFixSnapshot[]> {
+  const root = await realpath(projectRoot);
+  return Promise.all(plannedFiles.map(async (file) => {
+    const path = resolve(root, file);
+    const fromRoot = relative(root, path);
+    if (!fromRoot || fromRoot === ".." || fromRoot.startsWith(`..${sep}`) || isAbsolute(fromRoot)) {
+      throw new Error("fix rollback snapshot path is outside the workspace");
+    }
+    let entry;
+    try {
+      entry = await lstat(path);
+    } catch (error) {
+      if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") return { path, existed: false };
+      throw error;
+    }
+    if (!entry.isFile() || entry.size > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
+    return { path, existed: true, bytes: await readFixSnapshot(path) };
+  }));
+}
+
+export async function rollbackHeaderFixSnapshots(snapshots: readonly HeaderFixSnapshot[]): Promise<void> {
+  const outcomes = await Promise.allSettled(snapshots.map(async (snapshot) => {
+    if (snapshot.existed && snapshot.bytes) await restoreFixSnapshot(snapshot.path, snapshot.bytes);
+    else await unlink(snapshot.path).catch((error: unknown) => {
+      if (!(error && typeof error === "object" && "code" in error && error.code === "ENOENT")) throw error;
+    });
+  }));
+  const failures = outcomes.filter((outcome): outcome is PromiseRejectedResult => outcome.status === "rejected");
+  if (failures.length > 0) throw new AggregateError(failures.map((failure) => failure.reason), "one or more fix rollback operations failed");
+}
+
+export class HeaderFixRollbackError extends Error {
+  constructor(readonly rollbackSucceeded: boolean) {
+    super(rollbackSucceeded ? "post-fix rescan failed; the approved mutation was rolled back" : "post-fix rescan and rollback failed");
+    this.name = "HeaderFixRollbackError";
+  }
+}
+
+export async function rescanOrRollbackHeaderFix(snapshots: readonly HeaderFixSnapshot[], rescan: () => Promise<unknown>): Promise<void> {
+  try {
+    await rescan();
+  } catch {
+    try {
+      await rollbackHeaderFixSnapshots(snapshots);
+      throw new HeaderFixRollbackError(true);
+    } catch (error) {
+      if (error instanceof HeaderFixRollbackError) throw error;
+      throw new HeaderFixRollbackError(false);
+    }
+  }
 }
 
 /** Stable approval identity for the exact workspace being modified. */
@@ -80,7 +173,12 @@ async function fileExists(path: string): Promise<boolean> {
 }
 
 async function pickSrcDir(projectRoot: string): Promise<string> {
-  if (await fileExists(join(projectRoot, "src"))) return "src";
+  try {
+    const entry = await lstat(join(projectRoot, "src"));
+    if (entry.isDirectory() && !entry.isSymbolicLink()) return "src";
+  } catch (error) {
+    if (!(error && typeof error === "object" && "code" in error && error.code === "ENOENT")) throw error;
+  }
   return ".";
 }
 

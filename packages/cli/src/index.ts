@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 import { createRequire } from "node:module";
-import { lstat, readFile, unlink, writeFile, open } from "node:fs/promises";
-import { constants } from "node:fs";
+import { lstat, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { Command } from "commander";
 import chalk from "chalk";
 import chokidar from "chokidar";
 import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
-import { applyHeaderFixes, authorizeHeaderFix, planHeaderFixes } from "./fix.js";
+import { applyHeaderFixes, authorizeHeaderFix, captureHeaderFixSnapshots, HeaderFixRollbackError, planHeaderFixes, rescanOrRollbackHeaderFix } from "./fix.js";
 import { loadCredentials, saveCredentials } from "./credentials.js";
 import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
@@ -40,40 +39,6 @@ function reportPreflightError(json: boolean | undefined, quiet: boolean | undefi
   else if (!quiet) console.error(humanMessage);
 }
 
-const MAX_FIX_SNAPSHOT_BYTES = 1 * 1024 * 1024;
-
-async function readFixSnapshot(path: string): Promise<Buffer> {
-  const handle = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW);
-  try {
-    const stat = await handle.stat();
-    if (!stat.isFile() || stat.size > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
-    const chunks: Buffer[] = [];
-    let total = 0;
-    while (true) {
-      const buffer = Buffer.alloc(Math.min(64 * 1024, MAX_FIX_SNAPSHOT_BYTES + 1 - total));
-      const result = await handle.read(buffer, 0, buffer.byteLength, total);
-      if (result.bytesRead === 0) break;
-      total += result.bytesRead;
-      if (total > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
-      chunks.push(buffer.subarray(0, result.bytesRead));
-    }
-    return Buffer.concat(chunks, total);
-  } finally {
-    await handle.close();
-  }
-}
-
-async function restoreFixSnapshot(path: string, bytes: Buffer): Promise<void> {
-  if (bytes.byteLength > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
-  const handle = await open(path, constants.O_WRONLY | constants.O_CREAT | constants.O_TRUNC | constants.O_NOFOLLOW, 0o600);
-  try {
-    const stat = await handle.stat();
-    if (!stat.isFile()) throw new Error("fix rollback snapshot target is not a bounded regular file");
-    await handle.writeFile(bytes);
-  } finally {
-    await handle.close();
-  }
-}
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
@@ -559,18 +524,9 @@ program
       process.exit(78);
     }
 
-    const snapshots = opts.rescan ? await Promise.all(plan.filter((item) => item.action !== "skip").map(async (item) => {
-      const path = resolve(process.cwd(), item.file);
-      try {
-        const entry = await lstat(path);
-        if (!entry.isFile() || entry.size > MAX_FIX_SNAPSHOT_BYTES) throw new Error("fix rollback snapshot target is not a bounded regular file");
-        const bytes = await readFixSnapshot(path);
-        return { path, existed: true, bytes };
-      } catch (error) {
-        if (error instanceof Error && error.message.includes("rollback snapshot target")) throw error;
-        return { path, existed: false, bytes: undefined };
-      }
-    })) : [];
+    const snapshots = opts.rescan
+      ? await captureHeaderFixSnapshots(process.cwd(), plan.filter((item) => item.action !== "skip").map((item) => item.file))
+      : [];
 
     if (!opts.quiet && !opts.json) {
       console.log(chalk.bold("verglos fix") + chalk.gray(" · framework-aware header injection"));
@@ -592,13 +548,17 @@ program
         try {
           // A machine-readable fix response must remain one JSON document;
           // keep the post-mutation verification scan quiet and offline.
-          await executeScan({ noTelemetry: true, quiet: true });
+          await rescanOrRollbackHeaderFix(snapshots, () => executeScan({ noTelemetry: true, quiet: true }));
         } catch (error) {
-          for (const snapshot of snapshots) {
-            if (snapshot.existed && snapshot.bytes) await restoreFixSnapshot(snapshot.path, snapshot.bytes);
-            else await unlink(snapshot.path).catch(() => undefined);
-          }
-          reportPreflightError(opts.json, opts.quiet, "FIX_RESCAN_FAILED", "Post-fix rescan failed; the approved mutation was rolled back.", "post-fix rescan failed; mutation rolled back");
+          const rollbackSucceeded = error instanceof HeaderFixRollbackError && error.rollbackSucceeded;
+          const code = rollbackSucceeded ? "FIX_RESCAN_FAILED" : "FIX_ROLLBACK_FAILED";
+          const humanMessage = rollbackSucceeded
+            ? "Post-fix rescan failed; the approved mutation was rolled back."
+            : "Post-fix rescan failed and rollback could not be verified; inspect the affected files before proceeding.";
+          const machineMessage = rollbackSucceeded
+            ? "post-fix rescan failed; mutation rolled back"
+            : "post-fix rescan failed and rollback could not be verified";
+          reportPreflightError(opts.json, opts.quiet, code, humanMessage, machineMessage);
           if (opts.json || opts.quiet) process.exit(78);
           throw error;
         }

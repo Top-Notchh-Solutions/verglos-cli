@@ -1,10 +1,10 @@
 import { test } from "node:test";
 import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
 import assert from "node:assert/strict";
-import { NEXT_CONFIG_DECL, authorizeHeaderFix, headerFixWorkspaceTarget, planHeaderFixes } from "./fix.js";
+import { captureHeaderFixSnapshots, HeaderFixRollbackError, NEXT_CONFIG_DECL, authorizeHeaderFix, headerFixWorkspaceTarget, planHeaderFixes, rescanOrRollbackHeaderFix } from "./fix.js";
 import { applyHeaderFixes } from "./fix.js";
 import { runCliFixture } from "./cli-fixture.js";
-import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -248,4 +248,60 @@ test("fix CLI rejects a receipt approved for a different workspace before mutati
     assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "FIX_APPROVAL_DENIED", message: "fix approval denied" });
     assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
   } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
+test("failed post-fix rescan restores prior files and removes newly created fixes", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-rollback-"));
+  try {
+    const existingPath = join(root, "next.config.js");
+    const createdPath = join(root, "src", "verglos-security-headers.ts");
+    const original = "const nextConfig = {}; module.exports = nextConfig;\n";
+    await mkdir(join(root, "src"));
+    await writeFile(existingPath, original);
+    const snapshots = await captureHeaderFixSnapshots(root, ["next.config.js", "src/verglos-security-headers.ts"]);
+    await writeFile(existingPath, "mutated config");
+    await writeFile(createdPath, "new helper");
+
+    await assert.rejects(
+      () => rescanOrRollbackHeaderFix(snapshots, async () => { throw new Error("fixture scan failure"); }),
+      (error: unknown) => error instanceof HeaderFixRollbackError && error.rollbackSucceeded,
+    );
+    assert.equal(await readFile(existingPath, "utf8"), original);
+    await assert.rejects(() => readFile(createdPath), { code: "ENOENT" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("failed rollback is reported as unverified instead of claiming success", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-rollback-failure-"));
+  const outside = await mkdtemp(join(tmpdir(), "verglos-fix-rollback-outside-"));
+  try {
+    const path = join(root, "next.config.js");
+    const outsidePath = join(outside, "outside.js");
+    await writeFile(path, "original");
+    await writeFile(outsidePath, "outside remains unchanged");
+    const snapshots = await captureHeaderFixSnapshots(root, ["next.config.js"]);
+    await rm(path);
+    await symlink(outsidePath, path);
+
+    await assert.rejects(
+      () => rescanOrRollbackHeaderFix(snapshots, async () => { throw new Error("fixture scan failure"); }),
+      (error: unknown) => error instanceof HeaderFixRollbackError && !error.rollbackSucceeded,
+    );
+    assert.equal(await readFile(outsidePath, "utf8"), "outside remains unchanged");
+  } finally { await rm(root, { recursive: true, force: true }); await rm(outside, { recursive: true, force: true }); }
+});
+
+test("header fix does not follow a symlinked src directory outside its workspace", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-symlink-src-"));
+  const outside = await mkdtemp(join(tmpdir(), "verglos-fix-symlink-outside-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { express: "5.0.0" } }));
+    await symlink(outside, join(root, "src"), "dir");
+    const plan = await planHeaderFixes(root);
+    assert.equal(plan[0]?.file, "verglos-security-headers.ts");
+    const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174101", action: "mutate", actor: "human", target: await headerFixWorkspaceTarget(root), files: ["verglos-security-headers.ts"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    assert.equal(await applyHeaderFixes(root, { approvalReceipt: receipt, now: "2026-01-01T00:02:00Z", quiet: true }), 1);
+    await assert.rejects(() => readFile(join(outside, "verglos-security-headers.ts")), { code: "ENOENT" });
+    assert.match(await readFile(join(root, "verglos-security-headers.ts"), "utf8"), /VERGLOS_SECURITY_HEADERS/);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(outside, { recursive: true, force: true }); }
 });
