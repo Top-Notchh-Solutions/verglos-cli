@@ -121,6 +121,7 @@ async function checkNpmExistence(name: string, onLimitation?: (limitation: strin
       {
         method: "HEAD",
         signal: controller.signal,
+        redirect: "error",
       },
     );
     clearTimeout(timer);

@@ -28,7 +28,7 @@ test("MCP tools/list publishes shared capability metadata for every tool", () =>
     assert.ok(Array.isArray(capability.outputFields));
   }
   const scan = tools.find((tool) => tool.name === "verglos_scan");
-  assert.deepEqual(scan?._meta, { "verglos/capability": { tool: "verglos_scan", action: "inspect", plan: "free", maturity: "shipped", approvalRequired: false, sideEffect: "none", inputFields: ["projectRoot", "limit", "noProvenance"], outputFields: ["projectRoot", "scannedAt", "durationMs", "score", "provenance", "findingCount", "findings", "truncated", "headline"] } });
+  assert.deepEqual(scan?._meta, { "verglos/capability": { tool: "verglos_scan", action: "network", plan: "free", maturity: "shipped", approvalRequired: true, sideEffect: "network", networkTargets: ["https://api.osv.dev", "https://registry.npmjs.org"], inputFields: ["projectRoot", "limit", "noProvenance", "approvalReceipt"], outputFields: ["projectRoot", "scannedAt", "durationMs", "score", "provenance", "findingCount", "findings", "truncated", "headline"] } });
   const hunt = tools.find((tool) => tool.name === "verglos_hunt_report");
   assert.equal((hunt?._meta["verglos/capability"] as { sideEffect: string }).sideEffect, "process");
 });
@@ -56,6 +56,77 @@ test("MCP dispatch denies approval-required tools before their handler or stub",
   const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/report.json" }));
   assert.equal(result.code, "MCP_APPROVAL_REQUIRED");
   assert.equal(result.error, "usage");
+});
+
+test("network MCP tools require exact target and recipient approval before lookup", async () => {
+  const priorFetch = globalThis.fetch;
+  let fetchCalls = 0;
+  globalThis.fetch = async (input, init) => {
+    fetchCalls++;
+    const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+    assert.equal(init?.redirect, "error", "approved network scopes must not be widened by redirects");
+    if (url.startsWith("https://registry.npmjs.org/")) return new Response(null, { status: 200 });
+    if (url === "https://api.osv.dev/v1/query") return new Response(JSON.stringify({ vulns: [] }), { status: 200 });
+    throw new Error("unexpected network recipient");
+  };
+  try {
+    const scanWithoutApproval = responseText(await dispatchTool("verglos_scan", { projectRoot: "/does-not-need-to-exist-for-denial" }));
+    assert.equal(scanWithoutApproval.code, "MCP_APPROVAL_REQUIRED");
+    assert.equal(fetchCalls, 0);
+
+    const noReceipt = responseText(await dispatchTool("verglos_check_package", { packageName: "safe-package", version: "1.0.0" }));
+    assert.equal(noReceipt.code, "MCP_APPROVAL_REQUIRED");
+    assert.equal(fetchCalls, 0);
+
+    const receipt = createApprovalReceipt({
+      requestId: "623e4567-e89b-12d3-a456-426614174000",
+      action: "network",
+      actor: "agent",
+      target: "npm:safe-package@1.0.0",
+      files: [],
+      network: ["https://api.osv.dev", "https://registry.npmjs.org"],
+      policyEffect: "verify one npm package against npm and OSV",
+      requestedAt: "2026-01-01T00:00:00Z",
+      expiresAt: "2099-01-01T00:00:00Z",
+    }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+
+    const wrongTarget = createApprovalReceipt({
+      requestId: "723e4567-e89b-12d3-a456-426614174000",
+      action: "network",
+      actor: "agent",
+      target: "npm:other-package@1.0.0",
+      files: [],
+      network: ["https://api.osv.dev", "https://registry.npmjs.org"],
+      policyEffect: "verify one npm package against npm and OSV",
+      requestedAt: "2026-01-01T00:00:00Z",
+      expiresAt: "2099-01-01T00:00:00Z",
+    }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const mismatched = responseText(await dispatchTool("verglos_check_package", { packageName: "safe-package", version: "1.0.0", approvalReceipt: wrongTarget }, { now: "2026-01-02T00:00:00Z" }));
+    assert.equal(mismatched.code, "MCP_APPROVAL_SCOPE");
+    assert.equal(fetchCalls, 0);
+
+    const missingOrigin = createApprovalReceipt({
+      requestId: "823e4567-e89b-12d3-a456-426614174000",
+      action: "network",
+      actor: "agent",
+      target: "npm:safe-package@1.0.0",
+      files: [],
+      network: ["https://registry.npmjs.org"],
+      policyEffect: "verify one npm package against npm and OSV",
+      requestedAt: "2026-01-01T00:00:00Z",
+      expiresAt: "2099-01-01T00:00:00Z",
+    }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const insufficient = responseText(await dispatchTool("verglos_check_package", { packageName: "safe-package", version: "1.0.0", approvalReceipt: missingOrigin }, { now: "2026-01-02T00:00:00Z" }));
+    assert.equal(insufficient.code, "MCP_APPROVAL_SCOPE");
+    assert.equal(fetchCalls, 0);
+
+    const exact = responseText(await dispatchTool("verglos_check_package", { packageName: "safe-package", version: "1.0.0", approvalReceipt: receipt }, { now: "2026-01-02T00:00:00Z" }));
+    assert.equal(exact.verdict, "safe");
+    assert.equal(exact.coverage, "complete");
+    assert.equal(fetchCalls, 2);
+  } finally {
+    globalThis.fetch = priorFetch;
+  }
 });
 
 test("MCP dispatch enforces the explicitly supplied entitlement plan", async () => {
@@ -108,9 +179,9 @@ test("MCP SDK interoperability preserves discovery and entitlement errors", asyn
   }
 });
 
-test("MCP read-only tools keep strict unknown-field validation", async () => {
-  const result = responseText(await dispatchTool("verglos_scan", { approvalReceipt: {} }));
-  assert.equal(result.code, "MCP_SCAN_INPUT");
+test("approval-free MCP tools keep strict unknown-field validation", async () => {
+  const result = responseText(await dispatchTool("verglos_check_before_write", { code: "const value = 1", unknown: true }));
+  assert.equal(result.code, "MCP_CHECK_BEFORE_WRITE_INPUT");
   assert.equal(result.error, "usage");
 });
 

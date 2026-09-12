@@ -1,4 +1,5 @@
 import { createRequire } from "node:module";
+import { isAbsolute } from "node:path";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
@@ -98,7 +99,7 @@ const TOOLS = [
   {
     name: "verglos_check_package",
     description:
-      "Before `npm install`. Checks whether a package exists on npm (AI-005 slopsquat), whether it looks like a typo of a top-N package (AI-006), and whether it has known CVEs.",
+      "Network lookup: sends the package name/version to npm Registry and OSV. Requires an exact approval receipt for the package target and both network origins. Checks existence, likely typosquats, and known CVEs.",
     inputSchema: {
       type: "object",
       properties: {
@@ -110,6 +111,7 @@ const TOOLS = [
           type: "string",
           description: "Optional version to check for CVEs. Defaults to 'latest'.",
         },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["packageName"],
     },
@@ -117,7 +119,7 @@ const TOOLS = [
   {
     name: "verglos_scan",
     description:
-      "Full project scan. Returns findings, score, and AI-provenance summary. Slower than check_before_write — use for pre-PR review, not per-line checks.",
+      "Full project scan. Sends dependency names/versions to npm Registry and OSV for package existence/advisory checks; requires an exact approval receipt bound to this project and both network origins. Returns findings, score, and local provenance summary. Slower than check_before_write — use for pre-PR review, not per-line checks.",
     inputSchema: {
       type: "object",
       properties: {
@@ -125,6 +127,7 @@ const TOOLS = [
           type: "string",
           description: "Absolute path to the project root. Defaults to cwd.",
         },
+        ...APPROVAL_RECEIPT_PROPERTY,
       },
     },
   },
@@ -265,6 +268,15 @@ function alphaStub(name: string, tier: "pro" | "studio"): {
 }
 
 function approvalTarget(name: string, input: Record<string, unknown>): string | undefined {
+  if (name === "verglos_scan") {
+    const root = input.projectRoot === undefined ? process.cwd() : input.projectRoot;
+    return typeof root === "string" && isAbsolute(root) ? `project:${root}` : undefined;
+  }
+  if (name === "verglos_check_package") {
+    return typeof input.packageName === "string"
+      ? `npm:${input.packageName.trim()}@${typeof input.version === "string" && input.version.trim() ? input.version.trim() : "latest"}`
+      : undefined;
+  }
   if (name === "verglos_hunt_report" || name === "verglos_attest") return typeof input.reportPath === "string" ? `report:${input.reportPath}` : undefined;
   if (name === "verglos_hunt_finding") {
     return typeof input.reportPath === "string" && typeof input.findingId === "string" ? `report:${input.reportPath}#finding:${input.findingId}` : undefined;
@@ -319,11 +331,15 @@ export async function dispatchTool(
     const approval = authorizeAgentAction(authority.action, approvalReceipt, options.now ?? new Date().toISOString());
     if (!approval.allowed) return invalid("MCP_APPROVAL_REQUIRED", `MCP tool authority denied: ${approval.reason}`);
     const target = approvalTarget(name, input);
+    if (authority.action === "network" && authority.networkTargets.length === 0) return invalid("MCP_AUTHORITY_MISSING", "network authority has no declared recipient scope");
+    if (authority.action === "network" && !target) return invalid("MCP_APPROVAL_SCOPE", "network approval must bind a valid exact target");
     if (target && (input.approvalReceipt as { target?: unknown } | undefined)?.target !== target) return invalid("MCP_APPROVAL_SCOPE", "approval receipt target does not match the requested tool target");
     const receipt = input.approvalReceipt as { files?: unknown; network?: unknown } | undefined;
     const file = approvalFile(name, input);
     if (file && (!Array.isArray(receipt?.files) || !receipt.files.includes(file))) return invalid("MCP_APPROVAL_SCOPE", "approval receipt does not cover the requested file scope");
-    if (Array.isArray(receipt?.network) && receipt.network.length > 0) return invalid("MCP_APPROVAL_SCOPE", "approval receipt declares network scope for a network-free tool");
+    const approvedNetwork = Array.isArray(receipt?.network) && receipt.network.every((value) => typeof value === "string") ? [...receipt.network] as string[] : [];
+    const requiredNetwork = [...authority.networkTargets];
+    if (approvedNetwork.sort().join("\n") !== requiredNetwork.sort().join("\n")) return invalid("MCP_APPROVAL_SCOPE", "approval receipt network scope does not exactly match the requested tool");
     if (options.approvalStoreRoot) {
       try { await putApprovalReceipt(options.approvalStoreRoot, approvalReceipt!); }
       catch { return invalid("MCP_APPROVAL_AUDIT", "approval receipt could not be persisted"); }

@@ -100,6 +100,8 @@ export async function scanProject(
     projectRoot,
     unlocked: true,
     includeGitHistory: true,
+    allowNetwork: true,
+    verifySecrets: false,
     noProvenance: input.noProvenance,
   });
 

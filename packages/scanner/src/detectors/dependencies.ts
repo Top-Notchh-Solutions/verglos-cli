@@ -33,6 +33,7 @@ async function queryOsv(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ package: { name, ecosystem: "npm" }, version }),
+      redirect: "error",
     });
     if (!res.ok) { onLimitation?.("OSV advisory lookup was unavailable"); return []; }
     const data = (await res.json()) as OsvResponse;
