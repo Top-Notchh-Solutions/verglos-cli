@@ -58,6 +58,10 @@ const MAX_IGNORE_LINE_BYTES = 512;
 const MAX_TOTAL_IGNORE_PATHS = 256;
 const DEFAULT_DETECTOR_CONCURRENCY = 2;
 
+export class ScanConfigurationError extends Error {
+  override readonly name = "ScanConfigurationError";
+}
+
 async function runDetectorsBounded<T>(items: readonly Detector[], concurrency: number, run: (detector: Detector) => Promise<readonly T[]>, signal?: AbortSignal, onProgress?: (event: ScanProgressEvent) => void): Promise<T[]> {
   const results: T[][] = Array.from({ length: items.length }, () => []);
   let next = 0;
@@ -101,13 +105,18 @@ export async function loadConfig(projectRoot: string, explicitConfigPath?: strin
   let base: VerglosConfig;
   if (explicitConfigPath) {
     const configPath = isAbsolute(explicitConfigPath) ? explicitConfigPath : resolve(projectRoot, explicitConfigPath);
-    const entry = await lstat(configPath);
-    if (!entry.isFile() || entry.size > MAX_CONFIG_BYTES) throw new Error("Verglos config must be a bounded regular file.");
-    const bytes = await readFile(configPath);
-    if (bytes.byteLength > MAX_CONFIG_BYTES) throw new Error("Verglos config must be a bounded regular file.");
+    let entry: Awaited<ReturnType<typeof lstat>>;
+    try { entry = await lstat(configPath); }
+    catch { throw new ScanConfigurationError("Explicit Verglos config could not be read as a bounded regular JSON file."); }
+    if (!entry.isFile() || entry.size > MAX_CONFIG_BYTES) throw new ScanConfigurationError("Verglos config must be a bounded regular file.");
+    let bytes: Buffer;
+    try { bytes = await readFile(configPath); }
+    catch { throw new ScanConfigurationError("Explicit Verglos config could not be read as a bounded regular JSON file."); }
+    if (bytes.byteLength > MAX_CONFIG_BYTES) throw new ScanConfigurationError("Verglos config must be a bounded regular file.");
     let parsed: unknown;
-    try { parsed = JSON.parse(bytes.toString("utf8")); } catch { throw new Error("Verglos config must be valid JSON."); }
-    base = mergeConfig(parsed as Partial<VerglosConfig>);
+    try { parsed = JSON.parse(bytes.toString("utf8")); } catch { throw new ScanConfigurationError("Verglos config must be valid JSON."); }
+    try { base = mergeConfig(parsed as Partial<VerglosConfig>); }
+    catch { throw new ScanConfigurationError("Verglos config contains invalid values."); }
   } else try {
     const { createRequire } = await import("node:module");
     const require = createRequire(import.meta.url);

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import { createRequire } from "node:module";
+import { ScanConfigurationError } from "@verglos/scanner";
 import { lstat, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { Command } from "commander";
+import { Command, CommanderError } from "commander";
 import chalk from "chalk";
 import chokidar from "chokidar";
 import { generateBadgeMarkdown } from "@verglos/reporter";
@@ -39,6 +40,26 @@ function reportPreflightError(json: boolean | undefined, quiet: boolean | undefi
   else if (!quiet) console.error(humanMessage);
 }
 
+async function runScanWithErrorBoundary(
+  options: Parameters<typeof executeScan>[0],
+  output: { readonly json?: boolean; readonly quiet?: boolean },
+): Promise<number> {
+  try {
+    await executeScan(options);
+    return 0;
+  } catch (error) {
+    const configurationError = error instanceof ScanConfigurationError;
+    reportPreflightError(
+      output.json,
+      output.quiet,
+      configurationError ? "SCAN_CONFIG" : "SCAN_FAILURE",
+      error instanceof Error ? error.message : "scan failed",
+      configurationError ? "scan configuration is invalid or unavailable" : "scan could not complete",
+    );
+    return configurationError ? 2 : 4;
+  }
+}
+
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
@@ -56,6 +77,8 @@ const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
 const args = process.argv.slice(2);
+const jsonRequested = args.includes("--json");
+const quietRequested = args.includes("--quiet") || args.includes("-q");
 
 async function readApprovalReceiptFile(path: string): Promise<ApprovalReceipt> {
   const entry = await lstat(path);
@@ -83,7 +106,11 @@ program
     "--as-plan <plan>",
     "[founder only] Simulate a plan (free|pro|team|studio|enterprise) for this invocation",
   )
-  .showHelpAfterError(chalk.gray("\nRun `verglos --help` for available commands."))
+  // Commander errors can echo invalid option text, including values that a
+  // user accidentally supplied as an option. Emit a stable, value-free error
+  // below instead; help/version output remains on stdout.
+  .configureOutput({ writeErr: () => {} })
+  .exitOverride()
   .addHelpText(
     "afterAll",
     `
@@ -357,7 +384,11 @@ program
       }
       if (opts.watch) {
         if (!opts.quiet && !opts.json) console.log(chalk.gray("Watching for changes... (Ctrl+C to stop)"));
-        await executeScan(scanOptions);
+        const initialExitCode = await runScanWithErrorBoundary(scanOptions, opts);
+        if (initialExitCode !== 0) {
+          process.exitCode = initialExitCode;
+          return;
+        }
         const watcher = chokidar.watch(".", {
           ignored: [
             /node_modules/,
@@ -371,11 +402,13 @@ program
         });
         watcher.on("change", async () => {
           if (!opts.quiet && !opts.json) console.log(chalk.gray("\nFile changed, re-scanning..."));
-          await executeScan(scanOptions);
+          const exitCode = await runScanWithErrorBoundary(scanOptions, opts);
+          if (exitCode !== 0) process.exitCode = exitCode;
         });
         return;
       }
-      await executeScan(scanOptions);
+      const exitCode = await runScanWithErrorBoundary(scanOptions, opts);
+      if (exitCode !== 0) process.exitCode = exitCode;
     },
   );
 
@@ -403,7 +436,8 @@ program
   .option("--config <path>", "Use a bounded JSON Verglos config file")
   .option("--output <dir>", "Write HTML/JSON reports to a bounded output directory")
   .action(async (opts: { quiet?: boolean; json?: boolean; config?: string; output?: string }) => {
-    await executeScan({ detectors: ["secrets"], focused: true, quiet: opts.quiet, json: opts.json, configPath: opts.config, outputDir: opts.output });
+    const exitCode = await runScanWithErrorBoundary({ detectors: ["secrets"], focused: true, quiet: opts.quiet, json: opts.json, configPath: opts.config, outputDir: opts.output }, opts);
+    if (exitCode !== 0) process.exitCode = exitCode;
   });
 
 program
@@ -414,7 +448,7 @@ program
   .option("--config <path>", "Use a bounded JSON Verglos config file")
   .option("--output <dir>", "Write HTML/JSON reports to a bounded output directory")
   .action(async (opts: { quiet?: boolean; json?: boolean; config?: string; output?: string }) => {
-    await executeScan({
+    const exitCode = await runScanWithErrorBoundary({
       detectors: ["dependencies"],
       focused: true,
       includeGitHistory: false,
@@ -422,7 +456,8 @@ program
       json: opts.json,
       configPath: opts.config,
       outputDir: opts.output,
-    });
+    }, opts);
+    if (exitCode !== 0) process.exitCode = exitCode;
   });
 
 program
@@ -957,4 +992,15 @@ program
     if (code !== 0) process.exit(code);
   });
 
-program.parse();
+try {
+  program.parse();
+} catch (error) {
+  if (!(error instanceof CommanderError)) throw error;
+  if (error.code === "commander.helpDisplayed" || error.code === "commander.version") {
+    process.exitCode = error.exitCode;
+  } else {
+    if (jsonRequested) console.log(JSON.stringify({ status: "error", code: "CLI_USAGE", message: "command-line arguments are invalid" }));
+    else if (!quietRequested) console.error("Invalid command-line arguments. Run `verglos --help` for available commands.");
+    process.exitCode = 2;
+  }
+}
