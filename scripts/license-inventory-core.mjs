@@ -110,24 +110,36 @@ export function createLicenseInventory({ lockedPackages, manifests, bundledManif
     const source = ownSource || parent?.source || "";
     const license = typeof manifest.license === "string" && manifest.license.trim() ? manifest.license.trim() : "UNKNOWN";
     const redistributionClass = PERMISSIVE.test(license) ? "permissive" : COPYLEFT.test(license) ? "copyleft" : "unknown";
-    const reviewBlocker = redistributionClass !== "permissive" || !source;
+    const parentDeclaredLicense = parent?.license || "UNKNOWN";
+    const licenseConflict = parentDeclaredLicense !== "UNKNOWN" && license !== parentDeclaredLicense;
+    const reviewBlocker = redistributionClass !== "permissive" || !source || licenseConflict;
+    const reviewReason = redistributionClass !== "permissive" ? "license-review-required" : !source ? "source-missing" : licenseConflict ? "nested-license-conflicts-with-container" : undefined;
     const record = {
       name: manifest.name,
       version: manifest.version,
       bundledBy: item.bundledBy,
+      privatePackage: manifest.private === true,
       declaredLicense: license,
+      parentDeclaredLicense,
       detectedLicense: license,
       detectionMethod: "nested-package-manifest-license-field",
       source: source || undefined,
       sourceBasis: ownSource ? "nested-package-manifest" : source ? "containing-package-repository" : "missing",
       redistributionClass,
-      noticeObligation: redistributionClass === "permissive" ? "retain-license-and-notice" : "review-required",
+      noticeObligation: reviewBlocker ? "review-required" : "retain-license-and-notice",
       reviewBlocker,
+      ...(reviewReason ? { reviewReason } : {}),
     };
     const previous = bundled.get(key);
     if (previous && JSON.stringify(previous) !== JSON.stringify(record)) throw new Error(`Conflicting bundled package metadata for '${manifest.name}@${manifest.version}' in '${item.bundledBy}'`);
     bundled.set(key, record);
-    if (reviewBlocker) blockers.push({ name: manifest.name, version: manifest.version, bundledBy: item.bundledBy, license, reason: redistributionClass !== "permissive" ? "license-review-required" : "source-missing" });
+    if (!previous && reviewBlocker) blockers.push({
+      name: manifest.name,
+      version: manifest.version,
+      bundledBy: item.bundledBy,
+      license,
+      reason: reviewReason,
+    });
   }
   const bundledComponents = [...bundled.values()].sort((a, b) => a.bundledBy.localeCompare(b.bundledBy) || a.name.localeCompare(b.name) || a.version.localeCompare(b.version));
   blockers.sort((a, b) => a.name.localeCompare(b.name) || a.version.localeCompare(b.version) || (a.bundledBy ?? "").localeCompare(b.bundledBy ?? ""));

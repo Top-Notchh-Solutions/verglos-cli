@@ -67,7 +67,7 @@ const lockfile = await readFile(join(root, "pnpm-lock.yaml"), "utf8");
 const lockedPackages = parsePnpmLockPackageIds(lockfile);
 const { manifests, bundledManifests } = await collectVirtualStoreManifests();
 const result = createLicenseInventory({ lockedPackages, manifests, bundledManifests, directDependencies });
-if (process.argv.includes("--check") && result.reviewBlockers.length > 0) {
+if (process.argv.includes("--require-clear") && result.reviewBlockers.length > 0) {
   console.error(`dependency license review required for ${result.reviewBlockers.length} package version(s)`);
   process.exitCode = 2;
 }

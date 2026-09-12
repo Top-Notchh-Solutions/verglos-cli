@@ -108,24 +108,30 @@ jobs:
           done < <(find "$AUDIT_DIR" -type f -name '*.tgz' -print)
           node scripts/check-packed-manifests.mjs "$AUDIT_DIR"
 
-      - name: Prepare release checksums
+      - name: Prepare release packages and licensing evidence
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           set -euo pipefail
           RELEASE_DIR=$(mktemp -d)
           echo "RELEASE_DIR=$RELEASE_DIR" >> "$GITHUB_ENV"
+          node scripts/license-inventory.mjs --require-clear > "$RELEASE_DIR/dependency-license-inventory.json"
           node scripts/pack-public-packages.mjs "$RELEASE_DIR"
-          node scripts/license-inventory.mjs --check > "$RELEASE_DIR/dependency-license-inventory.json"
           node scripts/generate-third-party-notices.mjs > "$RELEASE_DIR/THIRD_PARTY_NOTICES"
           node scripts/generate-sbom.mjs > "$RELEASE_DIR/SBOM.cdx.json"
           node scripts/generate-spdx.mjs > "$RELEASE_DIR/SBOM.spdx.json"
-          (cd "$RELEASE_DIR" && sha256sum ./*.tgz > SHA256SUMS)
 
       - name: Verify clean consumer install
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           node --test scripts/verify-clean-consumer.test.mjs
           node scripts/verify-clean-consumer.mjs "$RELEASE_DIR" > "$RELEASE_DIR/clean-consumer-verification.txt"
+
+      - name: Prepare release checksums
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: |
+          set -euo pipefail
+          cd "$RELEASE_DIR"
+          sha256sum ./*.tgz ./THIRD_PARTY_NOTICES ./SBOM.cdx.json ./SBOM.spdx.json ./dependency-license-inventory.json ./clean-consumer-verification.txt > SHA256SUMS
 
       - name: Verify release checksums
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}

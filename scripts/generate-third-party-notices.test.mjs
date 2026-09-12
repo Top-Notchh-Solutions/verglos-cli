@@ -16,6 +16,9 @@ test("third-party notices are deterministic and contain provenance disclaimers",
   assert.match(first, /^THIRD-PARTY NOTICES\n/);
   assert.match(first, /preserves upstream identity/);
   assert.match(first, /License:/);
+  assert.match(first, /Bundled by: fast-uri@3\.1\.4/u);
+  assert.match(first, /Review blocker: nested-license-conflicts-with-container/u);
+  assert.match(first, /License text was not present in the installed package; consult the upstream source before redistribution\./u);
   assert.doesNotMatch(first, /node_modules[\\/]/);
 });
 

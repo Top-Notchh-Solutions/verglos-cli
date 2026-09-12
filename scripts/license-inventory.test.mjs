@@ -21,7 +21,16 @@ test("dependency license inventory is deterministic and review-safe", async () =
   assert.ok(first.bundledComponents.some((entry) => entry.name === "benchmark" && entry.version === "1.0.0" && entry.bundledBy === "fast-uri@3.1.4"), "nested bundled package manifests must remain visible with parent attribution");
   assert.ok(first.packages.every((entry) => ["direct", "transitive"].includes(entry.scope)));
   assert.ok(first.packages.every((entry) => typeof entry.declaredLicense === "string" && typeof entry.detectedLicense === "string" && typeof entry.detectionMethod === "string" && typeof entry.source === "string" && typeof entry.reviewBlocker === "boolean"));
-  assert.deepEqual(first.reviewBlockers, []);
+  assert.deepEqual(first.reviewBlockers, [{
+    name: "benchmark",
+    version: "1.0.0",
+    bundledBy: "fast-uri@3.1.4",
+    license: "ISC",
+    reason: "nested-license-conflicts-with-container",
+  }]);
+  assert.equal(first.bundledComponents.find((entry) => entry.name === "benchmark")?.parentDeclaredLicense, "BSD-3-Clause");
+  assert.equal((await run("node", ["scripts/license-inventory.mjs", "--check"], { maxBuffer: 16 * 1024 * 1024 })).stdout.length > 0, true, "complete evidence remains usable while an explicit review blocker is recorded");
+  await assert.rejects(run("node", ["scripts/license-inventory.mjs", "--require-clear"], { maxBuffer: 16 * 1024 * 1024 }), /Command failed/u);
 });
 
 test("pnpm v9 package IDs parse scoped, quoted, and unquoted names without reading snapshots", () => {
@@ -57,11 +66,11 @@ test("nested components inherit only the containing repository source and remain
   });
   assert.equal(inventory.packages.reduce((count, entry) => count + entry.versions.length, 0), 1);
   assert.deepEqual(inventory.bundledComponents, [{
-    name: "embedded", version: "2.0.0", bundledBy: "parent@1.0.0", declaredLicense: "ISC", detectedLicense: "ISC",
+    name: "embedded", version: "2.0.0", bundledBy: "parent@1.0.0", privatePackage: false, declaredLicense: "ISC", parentDeclaredLicense: "MIT", detectedLicense: "ISC",
     detectionMethod: "nested-package-manifest-license-field", source: "https://example.com/parent.git", sourceBasis: "containing-package-repository",
-    redistributionClass: "permissive", noticeObligation: "retain-license-and-notice", reviewBlocker: false,
+    redistributionClass: "permissive", noticeObligation: "review-required", reviewBlocker: true, reviewReason: "nested-license-conflicts-with-container",
   }]);
-  assert.deepEqual(inventory.reviewBlockers, []);
+  assert.deepEqual(inventory.reviewBlockers, [{ name: "embedded", version: "2.0.0", bundledBy: "parent@1.0.0", license: "ISC", reason: "nested-license-conflicts-with-container" }]);
 });
 
 test("CycloneDX and SPDX generators preserve every lockfile license component", async () => {
