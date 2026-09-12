@@ -3,7 +3,7 @@ import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { loadConfig } from "./index.js";
+import { loadConfig, ScanConfigurationError } from "./index.js";
 
 test("scanner loads an explicit bounded JSON config without executing code", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-config-"));
@@ -26,6 +26,13 @@ test("scanner rejects symlink and malformed explicit configs", async () => {
     await assert.rejects(() => loadConfig(root, link), /bounded regular file/);
     await writeFile(target, "not-json", "utf8");
     await assert.rejects(() => loadConfig(root, target), /valid JSON/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("scanner classifies unreadable explicit config as a bounded configuration error", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-config-missing-"));
+  try {
+    await assert.rejects(() => loadConfig(root, "missing.json"), ScanConfigurationError);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

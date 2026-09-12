@@ -5,6 +5,8 @@ import { fileURLToPath } from "node:url";
 
 test("read-only commands expose their implemented output flags", async () => {
   const source = await readFile(fileURLToPath(new URL("./index.ts", import.meta.url)), "utf8");
+  assert.match(source, /\.command\("update"\)[\s\S]*?\.option\("--json"/);
+  assert.match(source, /\.command\("update"\)[\s\S]*?\.option\("--quiet"/);
   for (const command of ["diff", "policy", "target", "engines"]) assert.ok(source.includes('.option("--json", "Emit machine-readable JSON")'), `${command} must retain JSON output support`);
   assert.ok(source.includes('.command("fix")') && source.includes('.option("--approve", "Approve the filesystem mutation")'));
   assert.match(source, /command\("fix"\)[\s\S]*?\.option\("--approval-receipt <path>"/);
