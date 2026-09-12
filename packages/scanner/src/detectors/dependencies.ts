@@ -33,6 +33,7 @@ async function queryOsv(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ package: { name, ecosystem: "npm" }, version }),
+      redirect: "error",
     });
     if (!res.ok) { onLimitation?.("OSV advisory lookup was unavailable"); return []; }
     const data = (await res.json()) as OsvResponse;
@@ -95,6 +96,11 @@ export const dependenciesDetector: Detector = {
     const unique = new Map<string, LockPackage>();
     for (const pkg of packages) {
       unique.set(`${pkg.name}@${pkg.version}`, pkg);
+    }
+
+    if (context?.allowNetwork === false) {
+      if (unique.size > 0) context.onLimitation?.("OSV dependency advisory lookup skipped by network policy");
+      return findings;
     }
 
     const batch = [...unique.values()].slice(0, 50);

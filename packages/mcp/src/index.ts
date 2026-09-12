@@ -11,9 +11,9 @@
  *   verglos_scan                 full project scan
  *   verglos_explain_finding      why + fix, framework-aware
  *
- * All tools are free forever. No network
- * calls on the free path except registry lookups (which run against
- * the public npm registry, not Verglos infra).
+ * The current local scanner tools are Free capabilities. Package and full
+ * scan tools make outbound npm/OSV lookups only after exact network approval;
+ * no Verglos-hosted entitlement lookup occurs in the MCP call path.
  */
 export { createVerglosMcpServer, startStdioServer } from "./server.js";
 export type { CheckBeforeWriteInput, CheckBeforeWriteResult, VerglosMcpServerOptions } from "./server.js";

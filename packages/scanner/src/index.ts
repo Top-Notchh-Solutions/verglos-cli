@@ -137,6 +137,7 @@ export async function loadConfig(projectRoot: string, explicitConfigPath?: strin
 
 export async function runScan(options: ScanOptions): Promise<ScanResult> {
   if (options.signal?.aborted) throw new Error("scan cancelled");
+  if (options.allowNetwork === false && options.verifySecrets === true) throw new Error("live secret verification requires network access");
   const detectorConcurrency = options.detectorConcurrency ?? DEFAULT_DETECTOR_CONCURRENCY;
   if (!Number.isInteger(detectorConcurrency) || detectorConcurrency < 1 || detectorConcurrency > 8) throw new Error("detector concurrency must be between 1 and 8");
   if (!isAbsolute(options.projectRoot)) throw new Error("project root must be an absolute directory");
@@ -182,6 +183,7 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
   const limitations: string[] = [];
   const detectorContext = {
     verifySecrets: options.verifySecrets,
+    allowNetwork: options.allowNetwork !== false,
     onLimitation: (limitation: string) => {
       if (!limitations.includes(limitation) && limitations.length < 8) limitations.push(limitation);
     },
@@ -256,6 +258,8 @@ export async function runScan(options: ScanOptions): Promise<ScanResult> {
 
 export { detectProjectType, getGitRemote } from "./project.js";
 export { walkProject } from "./walker.js";
+export { runInspectionPipeline } from "./inspection-pipeline.js";
+export type { ImportedEvidenceBatch, InspectionEngine, InspectionPipelineOptions, InspectionPipelineResult, InspectionProgressEvent } from "./inspection-pipeline.js";
 
 // Individual detectors — exported so the MCP fast path (check_before_write)
 // can call a narrow subset without walking the whole project.

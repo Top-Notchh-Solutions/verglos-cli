@@ -3,7 +3,7 @@ import type { ObservationDocument } from "./observation.js";
 
 export interface AdapterCapability { readonly id: string; readonly description: string; readonly requiresNetwork: boolean; }
 export interface EngineRequirements { readonly runtime: string; readonly executable: string; readonly configDigest?: string; readonly databaseDigest?: string; }
-export interface EngineExecutionRequest { readonly targetSubjectId: string; readonly capabilities: readonly string[]; readonly timeoutMs: number; readonly network: "denied" | "allowlisted"; readonly allowlist?: readonly string[]; }
+export interface EngineExecutionRequest { readonly targetSubjectId: string; readonly targetPath?: string; readonly capabilities: readonly string[]; readonly timeoutMs: number; readonly network: "denied" | "allowlisted"; readonly allowlist?: readonly string[]; readonly signal?: AbortSignal; }
 export interface EngineRawOutput { readonly mediaType: string; readonly bytes: Uint8Array; readonly digest: string; readonly redacted: boolean; }
 export interface EngineExecutionResult { readonly run: ToolRunDocument; readonly observations: readonly ObservationDocument[]; readonly rawOutput?: EngineRawOutput; }
 
