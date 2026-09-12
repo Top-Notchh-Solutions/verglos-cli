@@ -2,6 +2,8 @@
 
 Updated: 2026-09-12
 
+Verified current checkpoint (2026-09-12): CLI PR #35 is OPEN/CLEAN at `a26bf68b010d95326ffb4f4f0c121c0d97dc99f8`; hosted run `34696804945` passes all nine Ubuntu/macOS/Windows Node 20/22/24 cells and Verglos self-scan. LOCAL-001 is accepted with direct command-process tests and uncached monorepo tests (12/12 package tasks, CLI process suite 36/36), typecheck (13/13), and build (8/8). Web PR #32 remains OPEN/CLEAN at `67bbe09d01de7b51ba8459997bed7d2f1ff17f16`, with typecheck/schema, GitGuardian, and Vercel passing; its already accepted items are unchanged. Backlog: 150 unchecked / 119 checked / 269 total. Production remains unchanged: no DDL/DML/migrations; HOSTED-013/R-021 stay blocked on deployed baseline/history, reconciliation, backup/restore and rollback qualification, review, and exact approved plan. Queue/object providers remain intentionally deferred; DIST-WEB-002 cannot be accepted by inventing their settings. Next candidate: LOCAL-002, after verifying its current config contract/dependencies and complete acceptance path.
+
 ## Current phase
 
 Phase 6 workstream — distribution and licensing preparation. Earlier-phase gates remain open; this is not a claim that Phases 0–5 are complete.
