@@ -29,6 +29,7 @@ import {
   type Subject,
   type TargetResolution,
   type TargetSpec,
+  type ToolRunDocument,
 } from "@verglos/shared";
 import { runScan } from "./index.js";
 
@@ -80,6 +81,7 @@ export interface InspectionPipelineResult {
 type ProducerOutput = {
   readonly observations: readonly ObservationDocument[];
   readonly runIds: readonly string[];
+  readonly toolRuns?: readonly ToolRunDocument[];
   readonly sourceDigests: readonly `sha256:${string}`[];
   readonly limitations: readonly string[];
   readonly state: "complete" | "incomplete" | "not-provided" | "failed";
@@ -350,7 +352,7 @@ async function runEngine(engine: InspectionEngine, subject: Subject, signal?: Ab
   }
   const limitations = run.coverage === "incomplete" || run.outcome !== "succeeded" ? run.incompleteReasons.map((reason) => `${reason.code}: ${reason.message}`) : [];
   if (run.coverage === "incomplete" && limitations.length === 0) limitations.push("engine reported incomplete coverage without a reason");
-  return { state: limitations.length === 0 ? "complete" : "incomplete", observations, runIds: [run.runId], sourceDigests, limitations: limitations.slice(0, 16) };
+  return { state: limitations.length === 0 ? "complete" : "incomplete", observations, runIds: [run.runId], toolRuns: [run], sourceDigests, limitations: limitations.slice(0, 16) };
 }
 
 export async function runInspectionPipeline(options: InspectionPipelineOptions): Promise<InspectionPipelineResult> {
@@ -385,6 +387,13 @@ export async function runInspectionPipeline(options: InspectionPipelineOptions):
       else if (step.producer === "trivy") {
         const engine = (options.engines ?? []).find((candidate) => candidate.producer === step.producer);
         output = engine ? await runEngine(engine, subject, options.signal) : { state: "not-provided", observations: [], runIds: [], sourceDigests: [], limitations: ["Trivy execution is unavailable until the managed, trusted process boundary is qualified"] };
+        if (engine && output.runIds.length > 0) {
+          const after = await options.resolveTarget(options.target, context);
+          const afterSubject = parseSubject(after.subject);
+          if (!targetMatches(after.target, options.target) || afterSubject.subjectId !== subject.subjectId || after.coverage !== "complete") {
+            output = { ...output, state: "incomplete", observations: [], limitations: [...new Set([...output.limitations, "target identity or completeness changed while Trivy inspection ran; observations were discarded"])].slice(0, 16) };
+          }
+        }
       } else {
         const batches = (options.imports ?? []).filter((entry) => entry.producer === step.producer);
         if (batches.length === 0) output = { state: "not-provided", observations: [], runIds: [], sourceDigests: [], limitations: [`${step.producer} import was selected but no validated import batch was provided`] };
@@ -411,11 +420,11 @@ export async function runInspectionPipeline(options: InspectionPipelineOptions):
 
   const entries = plan.steps.map((step, index) => {
     const output = outputs[index] ?? { state: "failed" as const, observations: [], runIds: [], sourceDigests: [], limitations: ["producer produced no result"] };
-    return { producer: step.producer, state: output.state, observationCount: output.observations.length, runIds: [...output.runIds].sort(), sourceDigests: [...output.sourceDigests].sort(), limitations: [...output.limitations].slice(0, 16) };
+    return { producer: step.producer, state: output.state, observationCount: output.observations.length, runIds: [...output.runIds].sort(), toolRuns: [...(output.toolRuns ?? [])], sourceDigests: [...output.sourceDigests].sort(), limitations: [...output.limitations].slice(0, 16) };
   });
   const allLimitations = [...new Set([...resolution.limitations, ...entries.flatMap((entry) => entry.limitations)])];
   const coverage = InspectCoverageManifestSchema.parse({
-    schemaVersion: "1.0.0",
+    schemaVersion: "1.1.0",
     status: targetState === "complete" && entries.every((entry) => entry.state === "complete" && entry.limitations.length === 0) && allLimitations.length === 0 ? "complete" : "incomplete",
     target: { state: targetState, limitations: targetLimitations },
     producers: entries,

@@ -1,7 +1,7 @@
 import { open, lstat, realpath, link, unlink } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import { basename, dirname, join, resolve } from "node:path";
-import { canonicalizeJson, importBoundedJson, resolveFilesystemTarget, type InspectProducer, type ScanOptions } from "@verglos/shared";
+import { TRIVY_CAPABILITIES, canonicalizeJson, importBoundedJson, resolveFilesystemTarget, trivyAdapter, type InspectProducer, type ScanOptions } from "@verglos/shared";
 import { runInspectionPipeline, type ImportedEvidenceBatch } from "@verglos/scanner";
 import ora from "ora";
 import { readEvidenceBytes } from "./evidence-transfer.js";
@@ -103,6 +103,11 @@ export async function executeInspectionSnapshot(options: InspectionCommandOption
           allowNetwork: false,
         },
       } : undefined,
+      engines: selected.includes("trivy") ? [{
+        producer: "trivy",
+        adapter: trivyAdapter,
+        request: { targetPath: options.cwd, capabilities: [...TRIVY_CAPABILITIES], timeoutMs: 30_000, network: "denied" },
+      }] : undefined,
       imports,
       policyInputs: { profile: "free", mode: "inspect-snapshot" },
       signal: controller.signal,

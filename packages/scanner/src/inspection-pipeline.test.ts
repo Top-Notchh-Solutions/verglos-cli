@@ -7,6 +7,7 @@ import { test } from "node:test";
 import {
   createSubject,
   parseEngineHealth,
+  resolveFilesystemTarget,
   type EngineAdapter,
   type EngineExecutionRequest,
   type TargetResolution,
@@ -23,7 +24,7 @@ function resolution(value: TargetSpec = target): TargetResolution {
 
 const sarifBytes = Buffer.from(JSON.stringify({ version: "2.1.0", runs: [{ tool: { driver: { name: "fixture" } }, results: [{ ruleId: "javascript.security.injection", level: "error", message: { text: "DO_NOT_ECHO_RAW_SARIF_TEXT" }, locations: [{ physicalLocation: { artifactLocation: { uri: "src/app.js" }, region: { startLine: 7 } } }] }] }] }));
 
-function healthyEngine() {
+function healthyEngine(subjectKind: "artifact" | "filesystem" = "artifact") {
   return parseEngineHealth({
     schemaId: "urn:verglos:schema:engine-health",
     schemaVersion: "1.0.0",
@@ -31,14 +32,14 @@ function healthyEngine() {
     observedAt: "2026-09-13T10:00:00.000Z",
     state: "healthy",
     components: [{ id: "trivy.binary", kind: "binary", name: "Trivy", version: "1.0.0", digest: { algorithm: "sha256", value: "c".repeat(64) }, source: "system", trust: "computed-only" }],
-    capabilities: [{ id: "trivy.scan", subjectKinds: ["artifact"], status: "supported" }],
+    capabilities: [{ id: "trivy.scan", subjectKinds: [subjectKind], status: "supported" }],
     freshness: [{ componentId: "trivy.binary", status: "current", checkedAt: "2026-09-13T10:00:00.000Z" }],
     incompleteReasons: [],
   });
 }
 
-function testEngine(options: { readonly fail?: boolean; readonly runId?: string } = {}) {
-  const health = healthyEngine();
+function testEngine(options: { readonly fail?: boolean; readonly runId?: string; readonly subjectKind?: "artifact" | "filesystem" } = {}) {
+  const health = healthyEngine(options.subjectKind);
   let executeCount = 0;
   const adapter: EngineAdapter = {
     id: "trivy",
@@ -103,6 +104,12 @@ test("inspection composes an adapter and raw SARIF import into one coverage-boun
   assert.equal(result.snapshot.schemaVersion, "1.1.0");
   assert.equal(result.snapshot.coverage.status, "incomplete");
   assert.equal(result.snapshot.coverage.producers.length, 2);
+  assert.equal(result.snapshot.coverage.schemaVersion, "1.1.0");
+  const trivyCoverage = result.snapshot.coverage.producers.find((entry) => entry.producer === "trivy");
+  assert.equal(trivyCoverage?.toolRuns?.length, 1);
+  assert.equal(trivyCoverage?.toolRuns?.[0]?.networkAccess, "none");
+  assert.equal(trivyCoverage?.toolRuns?.[0]?.executionClass, "local-process");
+  assert.equal(trivyCoverage?.toolRuns?.[0]?.coverage, "complete");
   assert.equal(result.snapshot.coverage.producers.find((entry) => entry.producer === "sarif")?.sourceDigests[0], `sha256:${createHash("sha256").update(sarifBytes).digest("hex")}`);
   assert.equal(result.snapshot.observations.length, 1);
   assert.equal(result.observations[0]?.origin.producerId, "sarif.import");
@@ -194,26 +201,40 @@ test("unsafe SARIF locations fail closed without creating observations", async (
   assert.deepEqual(result.observations, []);
 });
 
-test("native inspection runs without project scripts and marks opted-out provenance incomplete", async () => {
+test("native, adapter, and import producers share one snapshot under the configured concurrency bound", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-inspect-native-"));
   try {
     const marker = join(root, "executed.txt");
     await writeFile(join(root, "package.json"), JSON.stringify({ name: "fixture", scripts: { prepare: `node -e \"require('node:fs').writeFileSync(${JSON.stringify(marker)}, 'ran')\"` } }));
     await writeFile(join(root, "app.ts"), "export const safe = true;\n");
-    const fsSubject = createSubject({ kind: "filesystem", treeDigest: { algorithm: "sha256", value: "e".repeat(64) }, ignorePolicyDigest: { algorithm: "sha256", value: "f".repeat(64) }, entryCount: 2 });
+    const engine = testEngine({ subjectKind: "filesystem" });
     let resolutions = 0;
+    const producerEvents: string[] = [];
     const result = await runInspectionPipeline({
       target: { kind: "filesystem", value: root },
       cwd: root,
-      resolveTarget: async (selected) => { resolutions++; return { target: selected, subject: fsSubject, coverage: "complete", limitations: [] }; },
-      producers: ["native"],
+      resolveTarget: async (selected, context) => { resolutions++; return resolveFilesystemTarget(selected, context); },
+      producers: ["native", "trivy", "sarif"],
+      engines: [{ producer: "trivy", adapter: engine.adapter, request: { capabilities: ["trivy.scan"], timeoutMs: 10_000, network: "denied" } }],
+      imports: [{ producer: "sarif", bytes: sarifBytes }],
+      concurrency: 1,
       native: { projectRoot: root, options: { detectors: ["secrets"], noProvenance: true } },
       policyInputs: {},
+      onProgress: (event) => { if (event.phase === "producer" && event.producer) producerEvents.push(`${event.producer}:${event.status}`); },
     });
     assert.ok(result.nativeScan);
-    assert.equal(resolutions, 2);
+    assert.equal(engine.executed(), 1);
+    assert.equal(resolutions, 3);
     assert.equal(result.coverage.status, "incomplete");
-    assert.ok(result.coverage.producers[0]?.limitations.includes("provenance was explicitly skipped"));
+    assert.equal(result.coverage.schemaVersion, "1.1.0");
+    assert.deepEqual(result.coverage.producers.map((entry) => entry.producer), ["native", "trivy", "sarif"]);
+    assert.ok(result.coverage.producers.find((entry) => entry.producer === "native")?.limitations.includes("provenance was explicitly skipped"));
+    assert.equal(result.coverage.producers.find((entry) => entry.producer === "trivy")?.toolRuns?.length, 1);
+    assert.deepEqual(producerEvents, ["native:started", "native:incomplete", "trivy:started", "trivy:completed", "sarif:started", "sarif:incomplete"]);
+    assert.equal(result.observations.length, 1);
+    assert.equal(result.snapshot.schemaVersion, "1.1.0");
+    assert.equal(result.snapshot.coverage.schemaVersion, "1.1.0");
+    assert.equal(result.snapshot.coverage.producers.length, 3);
     await assert.rejects(() => readFile(marker));
   } finally {
     await rm(root, { recursive: true, force: true });

@@ -1,12 +1,13 @@
 import { z } from "zod";
 import { TARGET_KINDS, type TargetKind } from "./target-resolver.js";
+import { ToolRunDocumentSchema } from "./engine.js";
 
 export type InspectProducer = "native" | "trivy" | "sarif" | "cyclonedx" | "spdx" | "provenance";
 export type InspectPlanStep = Readonly<{ producer: InspectProducer; coverageClass: "native" | "external" | "imported"; executesTargetCode: false; network: "none"; timeoutMs: number }>;
 export type InspectPlan = Readonly<{ targetKind: TargetKind; steps: readonly InspectPlanStep[] }>;
 
 const DIGEST = /^sha256:[a-f0-9]{64}$/;
-export const InspectProducerCoverageSchema = z.object({
+const InspectProducerCoverageBaseSchema = z.object({
   producer: z.enum(["native", "trivy", "sarif", "cyclonedx", "spdx", "provenance"]),
   state: z.enum(["complete", "incomplete", "not-provided", "failed"]),
   observationCount: z.number().int().min(0).max(20_000),
@@ -14,12 +15,16 @@ export const InspectProducerCoverageSchema = z.object({
   sourceDigests: z.array(z.string().regex(DIGEST)).max(32),
   limitations: z.array(z.string().min(1).max(512)).max(16),
 }).strict();
-export const InspectCoverageManifestSchema = z.object({
-  schemaVersion: z.literal("1.0.0"),
+const InspectProducerCoverageV11Schema = InspectProducerCoverageBaseSchema.extend({ toolRuns: z.array(ToolRunDocumentSchema).max(32) }).strict();
+export const InspectProducerCoverageSchema = z.union([InspectProducerCoverageBaseSchema, InspectProducerCoverageV11Schema]);
+const InspectCoverageCommonSchema = z.object({
   status: z.enum(["complete", "incomplete"]),
   target: z.object({ state: z.enum(["complete", "incomplete"]), limitations: z.array(z.string().min(1).max(512)).max(16) }).strict(),
-  producers: z.array(InspectProducerCoverageSchema).min(1).max(8),
-}).strict().superRefine((manifest, context) => {
+});
+export const InspectCoverageManifestSchema = z.discriminatedUnion("schemaVersion", [
+  InspectCoverageCommonSchema.extend({ schemaVersion: z.literal("1.0.0"), producers: z.array(InspectProducerCoverageBaseSchema).min(1).max(8) }).strict(),
+  InspectCoverageCommonSchema.extend({ schemaVersion: z.literal("1.1.0"), producers: z.array(InspectProducerCoverageV11Schema).min(1).max(8) }).strict(),
+]).superRefine((manifest, context) => {
   const producerIds = manifest.producers.map((producer) => producer.producer);
   if (new Set(producerIds).size !== producerIds.length) context.addIssue({ code: z.ZodIssueCode.custom, path: ["producers"], message: "coverage producer IDs must be unique" });
   if (manifest.target.state === "incomplete" && manifest.target.limitations.length === 0) context.addIssue({ code: z.ZodIssueCode.custom, path: ["target", "limitations"], message: "incomplete target coverage requires a limitation" });
