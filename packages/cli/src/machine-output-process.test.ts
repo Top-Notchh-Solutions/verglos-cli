@@ -263,12 +263,20 @@ test("precommit success is one bounded JSON response", async () => {
 test("Scan JSON mode emits one parseable scan document", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-scan-"));
   try {
-    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--json", "--quiet", "--no-telemetry"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--json", "--quiet", "--no-telemetry"], root, { env: { HOME: root, USERPROFILE: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
     assert.equal(result.exitCode, 0);
     assert.equal(result.stderr, "");
-    const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown };
+    const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown; schemaVersion?: unknown; coverage?: { status?: unknown } };
     await assertSameDirectory(payload.projectRoot, await realpath(root));
     assert.ok(Array.isArray(payload.findings));
+    assert.equal(payload.schemaVersion, undefined, "legacy stdout JSON stays the ScanResult shape");
+    assert.equal(typeof payload.coverage?.status, "string");
+    assert.equal(result.files.includes("verglos-report.json"), true);
+    assert.equal(result.files.includes("verglos-report.html"), true);
+    const report = JSON.parse(await readFile(join(root, "verglos-report.json"), "utf8")) as { schemaVersion?: string; projectRoot?: string };
+    assert.equal(report.schemaVersion, "2.0.0", "legacy report schema remains readable");
+    await assertSameDirectory(report.projectRoot, await realpath(root));
+    assert.match(await readFile(join(root, "verglos-report.html"), "utf8"), /<title>Verglos Security Report/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -302,6 +310,9 @@ test("scan snapshot opt-in imports bounded SARIF and refuses to overwrite the sn
     assert.equal(summary.coverage?.producers?.[0]?.state, "incomplete");
     assert.match(summary.coverage?.producers?.[0]?.limitations.join(" ") ?? "", /does not independently bind/);
     const originalSnapshot = await readFile(snapshotPath, "utf8");
+    const parsedSnapshot = JSON.parse(originalSnapshot) as { schemaVersion?: string; coverage?: { schemaVersion?: string } };
+    assert.equal(parsedSnapshot.schemaVersion, "1.1.0");
+    assert.equal(parsedSnapshot.coverage?.schemaVersion, "1.1.0");
     assert.equal(originalSnapshot.includes("RAW_IMPORTED_RESULT_MUST_NOT_ESCAPE"), false);
     const second = await runCliFixture(process.execPath, args, root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
     assert.equal(second.exitCode, 4);
