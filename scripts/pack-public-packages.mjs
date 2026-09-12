@@ -22,6 +22,11 @@ try {
     for (const file of ["README.md", "LICENSE", "NOTICE"]) {
       try { await cp(join(source, file), join(stage, file)); } catch { /* optional package metadata */ }
     }
+    // Each npm archive is independently redistributable. Package-local terms
+    // take precedence; otherwise carry the repository's Apache license into
+    // the staged archive instead of relying on the source checkout.
+    try { await readFile(join(stage, "LICENSE")); }
+    catch { await cp(join(root, "LICENSE"), join(stage, "LICENSE")); }
     const manifest = manifests.get(name);
     for (const field of ["dependencies", "optionalDependencies", "devDependencies"]) {
       for (const [dependency, range] of Object.entries(manifest[field] ?? {})) {
