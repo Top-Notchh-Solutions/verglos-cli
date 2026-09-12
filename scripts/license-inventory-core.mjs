@@ -48,7 +48,7 @@ function getSource(manifest) {
   return "";
 }
 
-export function createLicenseInventory({ lockedPackages, manifests, directDependencies }) {
+export function createLicenseInventory({ lockedPackages, manifests, bundledManifests = [], directDependencies }) {
   const byNameVersion = new Map();
   for (const manifest of manifests) {
     if (!manifest || typeof manifest.name !== "string" || typeof manifest.version !== "string") continue;
@@ -98,13 +98,47 @@ export function createLicenseInventory({ lockedPackages, manifests, directDepend
 
   const entries = [...grouped.values()].map((entry) => ({ ...entry, versions: entry.versions.sort() }))
     .sort((a, b) => a.name.localeCompare(b.name) || a.versions.join(",").localeCompare(b.versions.join(",")));
+  const bundled = new Map();
+  for (const item of bundledManifests) {
+    const manifest = item?.manifest;
+    if (!manifest || typeof manifest.name !== "string" || typeof manifest.version !== "string" || typeof item.bundledBy !== "string") continue;
+    const key = `${item.bundledBy}\0${manifest.name}@${manifest.version}`;
+    const parentName = item.bundledBy.slice(0, item.bundledBy.lastIndexOf("@"));
+    const parentVersion = item.bundledBy.slice(item.bundledBy.lastIndexOf("@") + 1);
+    const parent = byNameVersion.get(`${parentName}@${parentVersion}`);
+    const ownSource = getSource(manifest);
+    const source = ownSource || parent?.source || "";
+    const license = typeof manifest.license === "string" && manifest.license.trim() ? manifest.license.trim() : "UNKNOWN";
+    const redistributionClass = PERMISSIVE.test(license) ? "permissive" : COPYLEFT.test(license) ? "copyleft" : "unknown";
+    const reviewBlocker = redistributionClass !== "permissive" || !source;
+    const record = {
+      name: manifest.name,
+      version: manifest.version,
+      bundledBy: item.bundledBy,
+      declaredLicense: license,
+      detectedLicense: license,
+      detectionMethod: "nested-package-manifest-license-field",
+      source: source || undefined,
+      sourceBasis: ownSource ? "nested-package-manifest" : source ? "containing-package-repository" : "missing",
+      redistributionClass,
+      noticeObligation: redistributionClass === "permissive" ? "retain-license-and-notice" : "review-required",
+      reviewBlocker,
+    };
+    const previous = bundled.get(key);
+    if (previous && JSON.stringify(previous) !== JSON.stringify(record)) throw new Error(`Conflicting bundled package metadata for '${manifest.name}@${manifest.version}' in '${item.bundledBy}'`);
+    bundled.set(key, record);
+    if (reviewBlocker) blockers.push({ name: manifest.name, version: manifest.version, bundledBy: item.bundledBy, license, reason: redistributionClass !== "permissive" ? "license-review-required" : "source-missing" });
+  }
+  const bundledComponents = [...bundled.values()].sort((a, b) => a.bundledBy.localeCompare(b.bundledBy) || a.name.localeCompare(b.name) || a.version.localeCompare(b.version));
+  blockers.sort((a, b) => a.name.localeCompare(b.name) || a.version.localeCompare(b.version) || (a.bundledBy ?? "").localeCompare(b.bundledBy ?? ""));
   return {
     schemaId: "urn:verglos:artifact:dependency-license-inventory",
-    schemaVersion: "1.1.0",
+    schemaVersion: "1.2.0",
     generatedBy: "verglos-cli",
     source: "pnpm-lock.yaml plus installed package manifests",
     lockfilePackageCount: lockedPackages.length,
     packages: entries,
-    reviewBlockers: blockers.sort((a, b) => a.name.localeCompare(b.name) || a.version.localeCompare(b.version)),
+    bundledComponents,
+    reviewBlockers: blockers,
   };
 }

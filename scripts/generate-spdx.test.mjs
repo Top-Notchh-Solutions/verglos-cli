@@ -11,4 +11,5 @@ test("SPDX SBOM is deterministic with unique package identifiers", async () => {
   assert.equal(a.spdxVersion, "SPDX-2.3");
   assert.equal(new Set(a.packages.map((p) => p.SPDXID)).size, a.packages.length);
   assert.ok(a.packages.length > 0);
+  assert.ok(a.packages.every((p) => p.licenseConcluded === "NOASSERTION"), "manifest declarations are not legal conclusions");
 });
