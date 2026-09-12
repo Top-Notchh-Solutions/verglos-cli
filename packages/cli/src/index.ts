@@ -65,6 +65,7 @@ async function runScanWithErrorBoundary(
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
+import { executeEngineInspection } from "./engines-inspect.js";
 import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
@@ -126,7 +127,7 @@ Command groups:
 `,
   )
   .hook("preAction", async (thisCommand, actionCommand) => {
-    if (actionCommand.name() === "update") return;
+    if (actionCommand.name() === "update" || (actionCommand.name() === "inspect" && actionCommand.parent?.name() === "engines")) return;
     // Program-level --as-plan propagates via env so every downstream
     // entitlement fetch picks it up without option-threading.
     const asPlan = thisCommand.opts().asPlan as string | undefined;
@@ -271,6 +272,15 @@ evidence.command("import <input>")
   });
 
 const engines = program.command("engines").description("Inspect managed engine state");
+engines.command("inspect <engineId>")
+  .description("Inspect an explicitly selected system engine without PATH fallback")
+  .requiredOption("--path <absolute>", "Absolute executable path to inspect")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (engineId: string, opts: { path: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeEngineInspection(engineId, opts.path, opts));
+  });
+
 engines.command("status")
   .description("List cached engine versions without changing state")
   .option("--json", "Emit machine-readable JSON")

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, mkdir, mkdtemp, readFile, readdir, realpath, rm, stat, writeFile } from "node:fs/promises";
+import { access, chmod, mkdir, mkdtemp, readFile, readdir, realpath, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -310,6 +310,25 @@ test("scan snapshot opt-in imports bounded SARIF and refuses to overwrite the sn
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("engine inspection uses only an explicit binary and refuses non-Trivy executables", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-engine-inspect-"));
+  try {
+    const pathTrivy = join(root, "trivy");
+    await writeFile(pathTrivy, "#!/bin/sh\ncase \"$1\" in\n  --help) printf 'Usage: trivy command target\\n' ;;\n  --version) printf 'Trivy 0.60.0\\n' ;;\n  *) printf 'Usage: trivy %s [flags]\\n' \"$1\" ;;\nesac\n");
+    await chmod(pathTrivy, 0o700);
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "engines", "inspect", "trivy", "--path", process.execPath, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", PATH: root } });
+    assert.equal(result.exitCode, 3);
+    assert.equal(result.stderr, "");
+    const summary = JSON.parse(result.stdout) as { status: string; engineId: string; path: string; trust: string; capabilities: string[]; limitations: string[] };
+    assert.equal(summary.status, "unavailable");
+    assert.equal(summary.engineId, "trivy");
+    assert.equal(summary.path, process.execPath);
+    assert.equal(summary.trust, "unavailable");
+    assert.deepEqual(summary.capabilities, []);
+    assert.match(summary.limitations.join(" "), /did not identify as a Trivy CLI/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("scan policy option and legacy alias use the same evaluator path", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-alias-"));
   try {
@@ -459,6 +478,7 @@ test("every public command leaf provides side-effect-free help", async () => {
     { path: "record project", flags: ["--json", "--quiet"] },
     { path: "record header", flags: ["--json", "--quiet"] },
     { path: "engines status", flags: ["--json", "--quiet"] },
+    { path: "engines inspect", flags: ["--path", "--json", "--quiet"] },
     { path: "engines install", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
     { path: "engines update", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
     { path: "engines rollback", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
