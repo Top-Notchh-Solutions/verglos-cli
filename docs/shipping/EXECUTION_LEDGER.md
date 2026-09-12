@@ -9,13 +9,13 @@ has evidence, and no preparatory slice is treated as a release gate.
 ## Current checkpoint
 
 - Date: 2026-09-12
-- CLI branch: `feat/post-merge-shipping-slice`, latest pushed commit `4435964` (PR #34; local/private documentation is never pushed)
+- CLI branch: `feat/post-merge-shipping-slice`, latest pushed commit `5b9b695` (PR #34; local/private documentation is never pushed)
 - Web branch: `feat/post-merge-shipping-slice`, latest pushed commit `4a6571a` ([open fork PR #32](https://github.com/anuragyadav-git/verglos-web/pull/32); checks green, mergeable)
-- Backlog count: 156 unchecked, 113 checked (including LIC-001 and LIC-004 verified complete in the prior targeted acceptance reconciliation)
+- Backlog count: 156 unchecked, 113 checked (including LIC-001 and LIC-004 verified complete in the prior targeted acceptance reconciliation; DIST-001 remains open because LOCAL/HUNT/RECORD dependencies are incomplete)
 - Public-history boundary: shipping documentation remains local-only on `local/private-shipping-ledger`; this private worktree is `/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-cli-private-shipping`
 - Scope guard: blog and landing-page elements are untouched
 - Preserved user assets: founder-provided untracked files under `verglos-cli/docs/` remain unstaged
-- Latest evidence: CLI release-script tests 17/17, license/SBOM tests 7/7, cache-bypassed Turbo tests/typecheck/build 23/23 tasks; PR #34 self-scan and Ubuntu/macOS/Windows Node 20/22/24 matrix green. Web PR #32 checks are green. Both PRs remain open and mergeable.
+- Latest evidence: CLI package-surface tests 8/8, package-content audit pass, six-archive manifest audit pass, clean consumer install/import/CLI/no-engine check pass, and cache-bypassed Turbo test/typecheck/build 23/23 tasks. PR #34 self-scan and all nine Ubuntu/macOS/Windows Node 20/22/24 cells pass for `5b9b695` (`34666384467`, matrix `34666384473` attempt 2); the first Windows/Node 20 Build attempt failed without a diagnostic, then passed on rerun unchanged. Web PR #32 checks are green. Both PRs remain open and mergeable.
 - Release blocker: nested `benchmark@1.0.0` under `fast-uri@3.1.4` has ISC vs BSD-3-Clause license conflict; publishing intentionally fails closed pending review
 - Backlog state: 156 unchecked / 113 checked / 269 total. LIC-001 and LIC-004 were checked after acceptance review of the overnight evidence; unrelated preparatory commits did not clear their larger feature items.
 
@@ -53,6 +53,7 @@ has evidence, and no preparatory slice is treated as a release gate.
 - GitHub verification for `4435964`: self-scan run `34664087596` passed; platform matrix run `34664087624` passed on Ubuntu, macOS, and Windows with Node 20, 22, and 24. PR #34 is open and mergeable, not merged.
 - Inventory identifies `benchmark@1.0.0` nested in `fast-uri@3.1.4` with conflicting ISC/BSD-3-Clause declarations. This remains a legal review blocker; no license is inferred or cleared.
 - Backlog audit: `VERGLOS_V1_BACKLOG.md` now records 156 unchecked / 113 checked / 269 total. The prior 158/111 checkpoint was stale because LIC-001/004 acceptance had not been credited.
+- DIST-001 artifact-surface batch: CLI `5b9b695` adds common entrypoint/export validation across all six public package archives, rejects unsafe/unexpected archive members and private-key PEM markers in declared package contents, rejects install hooks and direct Trivy package dependencies, and excludes the non-public `cli-fixture` test harness from `verglos`. Focused tests pass 8/8; package-content audit and packed-manifest audit pass; six archives install in a clean npm consumer, all package imports and `verglos --version` work, and `engines status --json` confirms no implicit engine install/cache creation. Forced Turbo test/typecheck/build passed 23/23 tasks. PR #34 self-scan and all nine Ubuntu/macOS/Windows Node 20/22/24 cells pass (`34666384467`, `34666384473` attempt 2); the initial Windows/Node 20 Build attempt failed without a diagnostic but passed on unchanged rerun. DIST-001 remains unchecked because its backlog dependencies LOCAL/HUNT/RECORD and final package surfaces are not complete; no acceptance item is credited and the total remains 156 unchecked / 113 checked / 269. No artifacts were published; private docs remain local-only.
 | 8 | Public copy, pricing, blog, landing, metadata | Deliberately deferred | scope guard | starts only after Phases 0–7 and release gates pass |
 
 ## Batch protocol

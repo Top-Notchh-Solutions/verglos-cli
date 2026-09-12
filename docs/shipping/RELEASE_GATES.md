@@ -35,7 +35,7 @@
 
 - Clean install/upgrade/rollback on supported macOS, Linux, and Windows architectures.
 - Trusted npm provenance, dependency SBOM, `THIRD_PARTY_NOTICES`, license validation, attribution, and modification notices are complete.
-- Current state (2026-09-12): OPEN. LIC-001 and LIC-004 engineering acceptance is complete and CI-verified; all six npm archives stage LICENSE/THIRD_PARTY_NOTICES and release evidence includes deterministic SBOMs/checksums/clean-consumer verification. Publishing remains fail-closed because the nested `benchmark@1.0.0` ISC/BSD-3-Clause conflict needs review; LIC-002 external content records, web redistribution review, release-note qualification, protected publish controls, and full amd64/arm64 install/rollback evidence remain open.
+- Current state (2026-09-12): OPEN. LIC-001 and LIC-004 engineering acceptance is complete and CI-verified; all six npm archives stage LICENSE/THIRD_PARTY_NOTICES and release evidence includes deterministic SBOMs/checksums/clean-consumer verification. CLI `5b9b695` additionally qualifies current archive entrypoints, package identities, forbidden paths/private-key markers, install-hook/implicit-engine boundaries, and a clean consumer install; PR #34 self-scan and all nine Ubuntu/macOS/Windows Node 20/22/24 matrix cells pass (`34666384467`, `34666384473` attempt 2). DIST-001 stays open behind LOCAL/HUNT/RECORD dependencies. Publishing remains fail-closed because the nested `benchmark@1.0.0` ISC/BSD-3-Clause conflict needs review; LIC-002 external content records, web redistribution review, release-note qualification, protected publish controls, and full amd64/arm64 install/rollback evidence remain open.
 
 ## Gate 6 — External acceptance
 
