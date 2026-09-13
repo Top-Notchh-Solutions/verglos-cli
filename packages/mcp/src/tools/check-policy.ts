@@ -48,6 +48,7 @@ export async function checkPolicyRecord(input: { manifestPath: string; recordSto
   const policyEntries = manifest.members.filter((member) => member.kind === "policy" && member.redaction !== "omitted");
   const decisionEntries = manifest.members.filter((member) => member.kind === "release-decision" && member.redaction !== "omitted");
   if (evaluationEntries.length !== 1 || policyEntries.length !== 1 || decisionEntries.length !== 1) throw new Error("policy record must contain exactly one policy, policy evaluation, and release decision");
+  if (![evaluationEntries[0]!, policyEntries[0]!, decisionEntries[0]!].every((member) => member.required)) throw new Error("policy, evaluation, and release decision members must be required");
   const members = await readAndVerifyRecord(input.recordStore, manifest);
   const policyBytes = members.get(policyEntries[0]!.path);
   const evaluationBytes = members.get(evaluationEntries[0]!.path);
@@ -80,6 +81,8 @@ export async function checkPolicyRecord(input: { manifestPath: string; recordSto
     return parseSubject(decodeJson(bytes));
   });
   if (!subjects.some((subject) => subject.subjectId === evaluation.subjectId)) throw new Error("policy evaluation subject is not present in the verified record");
+  const observedSubjectId = evaluation.subjectMatch.status === "mismatched" ? evaluation.subjectMatch.observedSubjectId : evaluation.subjectId;
+  if (observedSubjectId && !subjects.some((subject) => subject.subjectId === observedSubjectId)) throw new Error("policy evaluation observed subject is not present in the verified record");
 
   const observationEntries = manifest.members.filter((member) => member.kind === "observation" && member.redaction !== "omitted");
   const observations = observationEntries.map((member) => {
@@ -93,7 +96,7 @@ export async function checkPolicyRecord(input: { manifestPath: string; recordSto
   for (const check of evaluation.checks) {
     for (const observationId of check.observationIds) {
       const observation = observationsById.get(observationId);
-      if (!observation || observation.subjectId !== evaluation.subjectId) throw new Error("policy evaluation references an observation absent from the exact subject record");
+      if (!observedSubjectId || !observation || observation.subjectId !== observedSubjectId) throw new Error("policy evaluation references an observation absent from the exact observed-subject record");
     }
     for (const digest of check.evidenceDigests) {
       if (!verifiedDigests.has(`${digest.algorithm}:${digest.value}`)) throw new Error("policy evaluation references evidence absent from the verified record");
