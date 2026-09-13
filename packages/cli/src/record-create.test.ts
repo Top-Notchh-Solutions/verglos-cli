@@ -6,7 +6,8 @@ import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { executeRecordCreate } from "./record-create.js";
 import { runCliFixture } from "./cli-fixture.js";
-import { assembleReleaseRecord, describeRecordMember } from "@verglos/shared";
+import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, parsePolicyDocument, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, RELEASE_DECISION_SCHEMA, SUBJECT_SCHEMA } from "@verglos/shared";
+import { executeRecordVerify } from "./record-verify.js";
 
 test("record create materializes verified members and a canonical manifest", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-record-create-"));
@@ -80,6 +81,30 @@ test("record create complete mode enforces the graph gate", async () => {
     const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(manifest));
     assert.equal(await executeRecordCreate(source, manifestPath, output, true, true, true), 78);
     await assert.rejects(() => readdir(output));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("complete record create and verify preserve canonical policy and subject bindings", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-record-create-complete-valid-"));
+  try {
+    const source = join(root, "source"); const output = join(root, "output"); await mkdir(source);
+    const digest = (char: string) => ({ algorithm: "sha256" as const, value: char.repeat(64) });
+    const subject = createSubject({ kind: "filesystem", treeDigest: digest("a"), ignorePolicyDigest: digest("b"), entryCount: 1 });
+    const policy = parsePolicyDocument({ schemaId: POLICY_DOCUMENT_SCHEMA.id, schemaVersion: "1.0.0", policyId: "verglos.policy.release", policyVersion: "1.0.0", checks: [{ id: "verglos.check.native-sast", requirement: "required", onFailure: "BLOCK", severities: ["critical"], minimumConfidence: 0, freshness: "current", coverage: "complete", artifactMatch: "not-required", hunt: "not-required" }], exceptions: { enabled: false, requireApproval: false }, approvals: { required: false, authorities: [] } });
+    const policyDigest = policyDocumentDigest(policy).slice("sha256:".length);
+    const evaluation = createPolicyEvaluation({ schemaId: POLICY_EVALUATION_SCHEMA.id, schemaVersion: "1.0.0", evaluationId: "urn:uuid:72345678-1234-4123-8123-123456789abc", policy: { id: policy.policyId, version: policy.policyVersion, digest: { algorithm: "sha256", value: policyDigest } }, subjectId: subject.subjectId, subjectMatch: { status: "matched", observedSubjectId: subject.subjectId }, evaluatedAt: "2026-09-10T02:00:00.000Z", checks: [{ id: "verglos.check.native-sast", requirement: "required", onFailure: "BLOCK", status: "satisfied", evidenceDigests: [digest("c")], observationIds: [], freshness: { status: "current", checkedAt: "2026-09-10T01:00:00.000Z", sourceUpdatedAt: "2026-09-10T00:00:00.000Z", validUntil: "2026-09-11T02:00:00.000Z" }, owner: "appsec", reason: "Current evidence is available.", nextAction: "Retain evidence." }], limitations: ["Fixture only."] });
+    const decision = createReleaseDecision({ decisionId: "urn:uuid:82345678-1234-4123-8123-123456789abc", evaluation, subjects: [{ subjectId: subject.subjectId, role: "primary" }], issuedBy: { kind: "person", id: "release-owner", authority: "release-decision" }, generatedAt: "2026-09-10T03:00:00.000Z", limitations: ["Fixture only."] });
+    const payloads = [
+      { path: "subjects/0001.json", kind: "subject" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(subject)), required: true, schema: SUBJECT_SCHEMA },
+      { path: "policy.json", kind: "policy" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(policy)), required: true, schema: POLICY_DOCUMENT_SCHEMA },
+      { path: "policy-evaluation.json", kind: "policy-evaluation" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(evaluation)), required: true, schema: POLICY_EVALUATION_SCHEMA },
+      { path: "release-decision.json", kind: "release-decision" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(decision)), required: true, schema: RELEASE_DECISION_SCHEMA },
+    ];
+    const bundle = assembleReleaseRecordBundle({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:92345678-1234-4123-8123-123456789abc", generatedAt: "2026-09-10T04:00:00.000Z", generator: { id: "verglos.record-builder", version: "1.0.0" }, redaction: { status: "not-required" }, limitations: ["Fixture only."], payloads });
+    for (const payload of payloads) { const path = join(source, payload.path); await mkdir(join(path, ".."), { recursive: true }); await writeFile(path, payload.bytes); }
+    const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(bundle.manifest));
+    assert.equal(await executeRecordCreate(source, manifestPath, output, true, true, true), 0);
+    assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true, undefined, undefined, undefined, undefined, true), 0);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

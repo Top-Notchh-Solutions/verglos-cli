@@ -6,6 +6,7 @@ import {
   canonicalizeJson,
   parseReleaseRecordManifestJson,
   assertCompleteReleaseRecord,
+  assertCompleteReleaseRecordPayloads,
   putRecordMemberFromFile,
   type ReleaseRecordManifestDocument,
 } from "@verglos/shared";
@@ -66,6 +67,7 @@ export async function executeRecordCreate(
       if (!(error instanceof Error) || (error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
     }
     const inputs: { readonly path: string; readonly sourcePath: string; readonly size: number; readonly digest: string }[] = [];
+    const completePayloads = new Map<string, Uint8Array>();
     const digests = new Set<string>();
     for (const member of manifest.members) {
       if (member.redaction === "omitted") continue;
@@ -75,8 +77,15 @@ export async function executeRecordCreate(
       if (inspected.digest !== expected || inspected.size !== member.size) throw new Error(`record member ${member.path} does not match manifest digest or size`);
       if (digests.has(inspected.digest)) throw new Error(`record member digest is duplicated: ${member.path}`);
       digests.add(inspected.digest);
+      if (complete && ["subject", "policy", "policy-evaluation", "release-decision", "redaction-manifest"].includes(member.kind)) {
+        const semanticBytes = await readRegular(memberPath, MAX_MANIFEST_BYTES, `complete record member ${member.path}`);
+        const semanticDigest = `sha256:${createHash("sha256").update(semanticBytes).digest("hex")}`;
+        if (semanticDigest !== inspected.digest || semanticBytes.byteLength !== inspected.size) throw new Error(`record member ${member.path} changed during complete-graph validation`);
+        completePayloads.set(member.path, semanticBytes);
+      }
       inputs.push({ path: member.path, sourcePath: memberPath, size: inspected.size, digest: inspected.digest });
     }
+    if (complete) assertCompleteReleaseRecordPayloads(manifest, completePayloads);
     // Do not create the destination until every input has passed validation.
     // A failed preflight must leave no empty record store behind.
     await mkdir(destination, { recursive: true, mode: 0o700 });
