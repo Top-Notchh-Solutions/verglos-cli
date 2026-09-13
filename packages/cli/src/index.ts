@@ -8,7 +8,7 @@ import chalk from "chalk";
 import chokidar from "chokidar";
 import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
-import { applyHeaderFixes, authorizeHeaderFix, captureHeaderFixSnapshots, HeaderFixRollbackError, planHeaderFixes, rescanOrRollbackHeaderFix } from "./fix.js";
+import { applyHeaderFixes, authorizeHeaderFix, authorizeHeaderFixTests, captureHeaderFixSnapshots, HeaderFixRollbackError, HeaderFixTestsError, planHeaderFixes, planHeaderFixTests, runApprovedHeaderFixTests, verifyOrRollbackHeaderFix, type HeaderFixTestPlan, type HeaderFixTestResult } from "./fix.js";
 import { loadCredentials, saveCredentials } from "./credentials.js";
 import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
@@ -615,10 +615,12 @@ program
   .option("--approve", "Approve the filesystem mutation")
   .option("--approval-receipt <path>", "Path to an exact, time-bounded mutate approval receipt")
   .option("--dry-run", "Show the planned file changes without mutating")
+  .option("--test-file <path>", "Select a .js/.cjs/.mjs test entrypoint; explicit execute approval required; runs with normal OS permissions (repeatable)", (value: string, previous: string[] = []) => [...previous, value], [])
+  .option("--test-approval-receipt <path>", "Path to a separate execute receipt binding the exact workspace, test files, and content digests")
   .option("--rescan", "Run a local scan after applying the approved change")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
-  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; rescan?: boolean; json?: boolean; quiet?: boolean }) => {
+  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; testFile?: string[]; testApprovalReceipt?: string; rescan?: boolean; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability("fix", "`verglos fix`", {
       asPlan,
@@ -628,16 +630,31 @@ program
     if (!ok) process.exit(1);
 
     const plan = await planHeaderFixes(process.cwd());
+    let testPlan: HeaderFixTestPlan | undefined;
+    try {
+      if (opts.testFile?.length) testPlan = await planHeaderFixTests(process.cwd(), opts.testFile);
+      if (opts.testApprovalReceipt && !testPlan) throw new Error("a test approval receipt requires at least one selected test file");
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "FIX_TEST_SELECTION_INVALID", error instanceof Error ? error.message : "selected test plan is invalid", "selected test plan is invalid");
+      process.exit(78);
+    }
     // A machine-readable non-approved invocation must emit only the stable
     // approval error below. The plan is emitted only for an explicit dry run
     // (or human-readable preflight), never as a second JSON document.
     if (opts.dryRun || (!opts.approve && !opts.json)) {
-      if (opts.json) console.log(JSON.stringify({ planned: plan }));
+      if (opts.json) console.log(JSON.stringify({ planned: plan, ...(testPlan ? { testExecution: { action: "execute", target: testPlan.target, files: testPlan.files.map(({ path, sha256, size }) => ({ path, sha256, size })), policyEffect: testPlan.policyEffect, warning: "Selected test entrypoints and imported project code run with normal OS filesystem/process/network permissions; Node heap is capped per process, but execution is not sandboxed." } } : {}) }));
       else if (!opts.quiet) {
         if (plan.length === 0) console.log("No supported header change is planned.");
         else for (const item of plan) {
           console.log(`${item.action}: ${item.file}`);
-          for (const line of item.preview ?? []) console.log(line);
+          if (item.diff) console.log(item.diff);
+          else for (const line of item.preview ?? []) console.log(line);
+        }
+        if (testPlan) {
+          console.log("Selected post-fix test entrypoints (Node --test):");
+          for (const file of testPlan.files) console.log(`  ${file.path}  sha256:${file.sha256}`);
+          console.log(`  Execute approval policyEffect: ${testPlan.policyEffect}`);
+          console.log("  Warning: selected tests and imported project code run with normal OS filesystem/process/network permissions; Node heap is capped per process, but execution is not sandboxed.");
         }
       }
     }
@@ -650,6 +667,21 @@ program
       reportPreflightError(opts.json, opts.quiet, "FIX_RECEIPT_REQUIRED", "verglos fix requires an approval receipt (--approval-receipt) before changing files.", "fix requires an approval receipt (--approval-receipt)");
       process.exit(78);
     }
+    let testReceipt: ApprovalReceipt | undefined;
+    if (testPlan) {
+      if (!opts.testApprovalReceipt) {
+        reportPreflightError(opts.json, opts.quiet, "FIX_TEST_APPROVAL_REQUIRED", "selected tests require a separate execute approval receipt (--test-approval-receipt)", "selected tests require a separate execute approval receipt");
+        process.exit(78);
+      }
+      try {
+        testReceipt = await readApprovalReceiptFile(opts.testApprovalReceipt);
+        const testAuthorization = await authorizeHeaderFixTests(testReceipt, testPlan, new Date().toISOString(), process.cwd());
+        if (!testAuthorization.allowed) throw new HeaderFixTestsError("approval-denied");
+      } catch {
+        reportPreflightError(opts.json, opts.quiet, "FIX_TEST_APPROVAL_DENIED", "selected test execution approval is invalid or does not match the exact workspace, file set, and content digests", "selected test execution approval denied");
+        process.exit(78);
+      }
+    }
     let receipt: ApprovalReceipt;
     try { receipt = await readApprovalReceiptFile(opts.approvalReceipt); }
     catch (error) { reportPreflightError(opts.json, opts.quiet, "FIX_RECEIPT_INVALID", error instanceof Error ? error.message : "approval receipt is invalid", "approval receipt is invalid"); process.exit(78); }
@@ -660,7 +692,7 @@ program
       process.exit(78);
     }
 
-    const snapshots = opts.rescan
+    const snapshots = opts.rescan || testPlan
       ? await captureHeaderFixSnapshots(process.cwd(), plan.filter((item) => item.action !== "skip").map((item) => item.file))
       : [];
 
@@ -679,28 +711,41 @@ program
     if (!opts.quiet && !opts.json) console.log("");
     if (fixed > 0) {
       if (!opts.quiet && !opts.json) console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
+      const checks: Array<{ phase: "tests" | "rescan"; run: () => Promise<unknown> }> = [];
+      let testResult: HeaderFixTestResult | undefined;
+      if (testPlan && testReceipt) {
+        if (!opts.quiet && !opts.json) console.log(chalk.yellow("Running separately approved Node tests with normal OS filesystem/process/network permissions (not sandboxed; 120 second / 256 KiB output bounds; 256 MiB Node heap per process)..."));
+        checks.push({ phase: "tests", run: async () => { testResult = await runApprovedHeaderFixTests(process.cwd(), testPlan!, testReceipt!); } });
+      }
       if (opts.rescan) {
         if (!opts.quiet && !opts.json) console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
+        checks.push({ phase: "rescan", run: () => executeScan({ noTelemetry: true, quiet: true }) });
+      }
+      if (checks.length > 0) {
         try {
-          // A machine-readable fix response must remain one JSON document;
-          // keep the post-mutation verification scan quiet and offline.
-          await rescanOrRollbackHeaderFix(snapshots, () => executeScan({ noTelemetry: true, quiet: true }));
+          // Machine-readable output remains one JSON document; verification is quiet.
+          await verifyOrRollbackHeaderFix(snapshots, checks);
         } catch (error) {
           const rollbackSucceeded = error instanceof HeaderFixRollbackError && error.rollbackSucceeded;
-          const code = rollbackSucceeded ? "FIX_RESCAN_FAILED" : "FIX_ROLLBACK_FAILED";
+          const phase = error instanceof HeaderFixRollbackError ? error.phase : error instanceof HeaderFixTestsError ? "tests" : "rescan";
+          const code = !rollbackSucceeded ? "FIX_ROLLBACK_FAILED" : phase === "tests" ? "FIX_TESTS_FAILED" : "FIX_RESCAN_FAILED";
+          const phaseName = phase === "tests" ? "selected tests" : "rescan";
           const humanMessage = rollbackSucceeded
-            ? "Post-fix rescan failed; the approved mutation was rolled back."
-            : "Post-fix rescan failed and rollback could not be verified; inspect the affected files before proceeding.";
+            ? `Post-fix ${phaseName} failed; the approved mutation was rolled back.`
+            : `Post-fix ${phaseName} failed and rollback could not be verified; inspect the affected files before proceeding.`;
           const machineMessage = rollbackSucceeded
-            ? "post-fix rescan failed; mutation rolled back"
-            : "post-fix rescan failed and rollback could not be verified";
+            ? `post-fix ${phaseName} failed; mutation rolled back`
+            : `post-fix ${phaseName} failed and rollback could not be verified`;
           reportPreflightError(opts.json, opts.quiet, code, humanMessage, machineMessage);
           if (opts.json || opts.quiet) process.exit(78);
           throw error;
         }
       }
+      if (testResult && !opts.quiet && !opts.json) console.log(chalk.green(`Selected tests passed in ${testResult.durationMs} ms (${testResult.outputBytes} output bytes).`));
+      if (opts.json) console.log(JSON.stringify({ planned: plan, fixed, tests: testResult ? { status: testResult.status, files: testPlan?.files.map((file) => file.path), durationMs: testResult.durationMs, outputBytes: testResult.outputBytes, outputTruncated: testResult.outputTruncated, executionNotice: "selected entrypoints and imported project code ran with normal OS filesystem/process/network permissions; per-process Node heap is capped, but no sandbox was applied" } : undefined, rescanned: Boolean(opts.rescan) }));
+    } else if (opts.json) {
+      console.log(JSON.stringify({ planned: plan, fixed, tests: undefined, rescanned: false }));
     }
-    if (opts.json) console.log(JSON.stringify({ planned: plan, fixed, rescanned: Boolean(opts.rescan) }));
   });
 
 program

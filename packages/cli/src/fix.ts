@@ -1,10 +1,11 @@
 import { lstat, readFile, writeFile, access, mkdir, open, realpath, rename, unlink } from "node:fs/promises";
+import { spawn, type ChildProcess } from "node:child_process";
 import { constants } from "node:fs";
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
-import { randomUUID } from "node:crypto";
+import { randomUUID, createHash } from "node:crypto";
 import chalk from "chalk";
 import { detectProjectType } from "@verglos/scanner";
-import { authorizeAgentAction, putApprovalReceipt, type ApprovalReceipt, type ProjectType } from "@verglos/shared";
+import { authorizeAgentAction, canonicalizeJson, putApprovalReceipt, type ApprovalReceipt, type ProjectType } from "@verglos/shared";
 
 /**
  * Framework-aware security header injection for `verglos fix`.
@@ -32,6 +33,28 @@ export interface HeaderFixPlan {
   readonly file: string;
   readonly action: "create" | "patch" | "skip";
   readonly preview?: readonly string[];
+  readonly diff?: string;
+}
+
+export interface HeaderFixTestFile {
+  readonly path: string;
+  readonly sha256: string;
+  readonly size: number;
+  readonly absolutePath: string;
+}
+
+export interface HeaderFixTestPlan {
+  readonly target: string;
+  readonly files: readonly HeaderFixTestFile[];
+  readonly policyEffect: string;
+}
+
+export interface HeaderFixTestResult {
+  readonly status: "passed";
+  readonly exitCode: 0;
+  readonly durationMs: number;
+  readonly outputBytes: number;
+  readonly outputTruncated: boolean;
 }
 
 export interface HeaderFixSnapshot {
@@ -42,6 +65,11 @@ export interface HeaderFixSnapshot {
 }
 
 const MAX_FIX_SNAPSHOT_BYTES = 1 * 1024 * 1024;
+const MAX_FIX_TEST_FILES = 16;
+const MAX_FIX_TEST_FILE_BYTES = 1 * 1024 * 1024;
+const MAX_FIX_TEST_TOTAL_BYTES = 4 * 1024 * 1024;
+const MAX_FIX_TEST_OUTPUT_BYTES = 256 * 1024;
+const MAX_FIX_TEST_DURATION_MS = 120_000;
 
 async function readFixSnapshot(path: string): Promise<Buffer> {
   const handle = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW);
@@ -123,24 +151,192 @@ export async function rollbackHeaderFixSnapshots(snapshots: readonly HeaderFixSn
 }
 
 export class HeaderFixRollbackError extends Error {
-  constructor(readonly rollbackSucceeded: boolean) {
-    super(rollbackSucceeded ? "post-fix rescan failed; the approved mutation was rolled back" : "post-fix rescan and rollback failed");
+  constructor(readonly rollbackSucceeded: boolean, readonly phase: "tests" | "rescan" = "rescan") {
+    super(rollbackSucceeded ? `post-fix ${phase} failed; the approved mutation was rolled back` : `post-fix ${phase} failed and rollback could not be verified`);
     this.name = "HeaderFixRollbackError";
   }
 }
 
-export async function rescanOrRollbackHeaderFix(snapshots: readonly HeaderFixSnapshot[], rescan: () => Promise<unknown>): Promise<void> {
-  try {
-    await rescan();
-  } catch {
+export async function verifyOrRollbackHeaderFix(
+  snapshots: readonly HeaderFixSnapshot[],
+  checks: readonly { readonly phase: "tests" | "rescan"; readonly run: () => Promise<unknown> }[],
+): Promise<void> {
+  for (const check of checks) {
     try {
-      await rollbackHeaderFixSnapshots(snapshots);
-      throw new HeaderFixRollbackError(true);
-    } catch (error) {
-      if (error instanceof HeaderFixRollbackError) throw error;
-      throw new HeaderFixRollbackError(false);
+      await check.run();
+    } catch {
+      try {
+        await rollbackHeaderFixSnapshots(snapshots);
+        throw new HeaderFixRollbackError(true, check.phase);
+      } catch (error) {
+        if (error instanceof HeaderFixRollbackError) throw error;
+        throw new HeaderFixRollbackError(false, check.phase);
+      }
     }
   }
+}
+
+export async function rescanOrRollbackHeaderFix(snapshots: readonly HeaderFixSnapshot[], rescan: () => Promise<unknown>): Promise<void> {
+  return verifyOrRollbackHeaderFix(snapshots, [{ phase: "rescan", run: rescan }]);
+}
+
+function normalizeFixTestPath(value: string): string {
+  if (value.length === 0 || value.length > 512 || /[\u0000-\u001f\u007f]/.test(value)) throw new Error("selected test path is invalid");
+  const normalized = value.replaceAll("\\", "/");
+  if (normalized.startsWith("/") || /^[A-Za-z]:/.test(normalized) || normalized.split("/").some((part) => part === ".." || part === "" || part === ".")) {
+    throw new Error("selected test path must be a normalized relative path inside the workspace");
+  }
+  if (!/\.(?:c|m)?js$/i.test(normalized)) throw new Error("selected tests must be explicit .js, .cjs, or .mjs files supported by Node's built-in test runner");
+  return normalized;
+}
+
+async function readBoundedFixTestFile(root: string, path: string): Promise<Buffer> {
+  const parts = path.split("/");
+  let current = root;
+  for (const part of parts.slice(0, -1)) {
+    current = join(current, part);
+    const entry = await lstat(current);
+    if (!entry.isDirectory()) throw new Error("selected test path contains a non-directory or symlink component");
+  }
+  const absolutePath = join(root, ...parts);
+  const entry = await lstat(absolutePath);
+  if (!entry.isFile() || entry.size > MAX_FIX_TEST_FILE_BYTES) throw new Error("selected test must be a bounded regular file");
+  const handle = await open(absolutePath, constants.O_RDONLY | constants.O_NOFOLLOW);
+  try {
+    const opened = await handle.stat();
+    if (!opened.isFile() || opened.size > MAX_FIX_TEST_FILE_BYTES) throw new Error("selected test must be a bounded regular file");
+    const chunks: Buffer[] = [];
+    let total = 0;
+    while (true) {
+      if (total > MAX_FIX_TEST_FILE_BYTES) throw new Error("selected test exceeds the 1 MiB limit");
+      const buffer = Buffer.alloc(Math.min(64 * 1024, MAX_FIX_TEST_FILE_BYTES + 1 - total));
+      const read = await handle.read(buffer, 0, buffer.byteLength, total);
+      if (read.bytesRead === 0) break;
+      total += read.bytesRead;
+      if (total > MAX_FIX_TEST_FILE_BYTES) throw new Error("selected test exceeds the 1 MiB limit");
+      chunks.push(buffer.subarray(0, read.bytesRead));
+    }
+    return Buffer.concat(chunks, total);
+  } finally {
+    await handle.close();
+  }
+}
+
+function fixTestPolicyEffect(files: readonly Pick<HeaderFixTestFile, "path" | "sha256" | "size">[]): string {
+  const binding = createHash("sha256").update(canonicalizeJson(files.map(({ path, sha256, size }) => ({ path, sha256, size }))), "utf8").digest("hex");
+  return `Run Node --test on selected project files with normal OS permissions (filesystem/process/network are not sandboxed); selection sha256:${binding}`;
+}
+
+/** Plan explicit Node test entrypoints; this does not execute project code. */
+export async function planHeaderFixTests(projectRoot: string, selectedPaths: readonly string[]): Promise<HeaderFixTestPlan> {
+  if (selectedPaths.length === 0 || selectedPaths.length > MAX_FIX_TEST_FILES) throw new Error(`select between 1 and ${MAX_FIX_TEST_FILES} explicit test files`);
+  const root = await realpath(projectRoot);
+  const normalized = selectedPaths.map(normalizeFixTestPath).sort();
+  if (new Set(normalized).size !== normalized.length) throw new Error("selected test files must be unique");
+  let totalBytes = 0;
+  const files: HeaderFixTestFile[] = [];
+  for (const path of normalized) {
+    const bytes = await readBoundedFixTestFile(root, path);
+    totalBytes += bytes.byteLength;
+    if (totalBytes > MAX_FIX_TEST_TOTAL_BYTES) throw new Error("selected test files exceed the 4 MiB total limit");
+    files.push({ path, sha256: createHash("sha256").update(bytes).digest("hex"), size: bytes.byteLength, absolutePath: join(root, ...path.split("/")) });
+  }
+  return {
+    target: `workspace:${root}`,
+    files,
+    policyEffect: fixTestPolicyEffect(files),
+  };
+}
+
+export async function authorizeHeaderFixTests(receipt: ApprovalReceipt, plan: HeaderFixTestPlan, at: string, projectRoot: string): Promise<{ readonly allowed: boolean; readonly reason?: string }> {
+  const authorization = authorizeAgentAction("execute", receipt, at);
+  if (!authorization.allowed) return { allowed: false, reason: authorization.reason };
+  if (receipt.target !== `workspace:${await realpath(resolve(projectRoot))}` || receipt.target !== plan.target) return { allowed: false, reason: "workspace-target-mismatch" };
+  const selected = plan.files.map((file) => file.path);
+  const approved = [...receipt.files].sort();
+  if (selected.length !== approved.length || selected.some((file, index) => file !== approved[index])) return { allowed: false, reason: "test-file-scope-mismatch" };
+  if (receipt.policyEffect !== plan.policyEffect) return { allowed: false, reason: "test-content-mismatch" };
+  return { allowed: true };
+}
+
+function killTestProcessTree(child: ChildProcess): void {
+  if (!child.pid) return;
+  if (process.platform === "win32") {
+    const systemRoot = process.env.SystemRoot ?? "C:\\Windows";
+    const killer = spawn(join(systemRoot, "System32", "taskkill.exe"), ["/pid", String(child.pid), "/t", "/f"], { stdio: "ignore", windowsHide: true });
+    killer.on("error", () => child.kill("SIGKILL"));
+    return;
+  }
+  try { process.kill(-child.pid, "SIGTERM"); } catch { child.kill("SIGTERM"); }
+  const force = setTimeout(() => {
+    try { process.kill(-child.pid!, "SIGKILL"); } catch { child.kill("SIGKILL"); }
+  }, 500);
+  force.unref();
+}
+
+export class HeaderFixTestsError extends Error {
+  constructor(readonly reason: "approval-denied" | "changed-after-approval" | "failed" | "timed-out" | "output-limit" | "launch-failed", readonly exitCode?: number) {
+    super(`selected post-fix tests ${reason.replaceAll("-", " ")}`);
+    this.name = "HeaderFixTestsError";
+  }
+}
+
+/** Run only the approved Node test entrypoints, without a shell, with bounded time and output. */
+export async function runApprovedHeaderFixTests(
+  projectRoot: string,
+  plan: HeaderFixTestPlan,
+  receipt: ApprovalReceipt,
+  now = new Date().toISOString(),
+  testLimits: { readonly timeoutMs?: number; readonly outputBytes?: number } = {},
+): Promise<HeaderFixTestResult> {
+  const authorization = await authorizeHeaderFixTests(receipt, plan, now, projectRoot);
+  if (!authorization.allowed) throw new HeaderFixTestsError("approval-denied");
+  const current = await planHeaderFixTests(projectRoot, plan.files.map((file) => file.path));
+  if (current.policyEffect !== plan.policyEffect) throw new HeaderFixTestsError("changed-after-approval");
+  const timeoutMs = Number.isInteger(testLimits.timeoutMs) ? Math.max(1, Math.min(MAX_FIX_TEST_DURATION_MS, testLimits.timeoutMs!)) : MAX_FIX_TEST_DURATION_MS;
+  const outputLimit = Number.isInteger(testLimits.outputBytes) ? Math.max(1, Math.min(MAX_FIX_TEST_OUTPUT_BYTES, testLimits.outputBytes!)) : MAX_FIX_TEST_OUTPUT_BYTES;
+  const root = await realpath(projectRoot);
+  const started = Date.now();
+  const child = spawn(process.execPath, ["--max-old-space-size=256", "--test", "--test-concurrency=1", ...current.files.map((file) => file.absolutePath)], {
+    cwd: root,
+    shell: false,
+    detached: process.platform !== "win32",
+    windowsHide: true,
+    stdio: ["ignore", "pipe", "pipe"],
+    env: Object.fromEntries(["PATH", "SystemRoot", "WINDIR", "HOME", "USERPROFILE", "TMPDIR", "TMP", "TEMP"].flatMap((key) => process.env[key] === undefined ? [] : [[key, process.env[key] as string]])),
+  });
+  let outputBytes = 0;
+  let outputTruncated = false;
+  let failure: "timed-out" | "output-limit" | undefined;
+  let timer: NodeJS.Timeout | undefined;
+  const collect = (chunk: Buffer): void => {
+    outputBytes += chunk.byteLength;
+    if (outputBytes > outputLimit && !failure) {
+      outputTruncated = true;
+      failure = "output-limit";
+      killTestProcessTree(child);
+    }
+  };
+  child.stdout.on("data", collect);
+  child.stderr.on("data", collect);
+  const exit = await new Promise<{ code: number | null; signal: NodeJS.Signals | null; spawnError?: Error }>((resolveExit) => {
+    child.once("error", (error) => resolveExit({ code: null, signal: null, spawnError: error }));
+    child.once("close", (code, signal) => resolveExit({ code, signal }));
+    timer = setTimeout(() => {
+      if (!failure) { failure = "timed-out"; killTestProcessTree(child); }
+    }, timeoutMs);
+  });
+  if (timer) clearTimeout(timer);
+  if (exit.spawnError) throw new HeaderFixTestsError("launch-failed");
+  if (failure) throw new HeaderFixTestsError(failure, exit.code ?? undefined);
+  if (exit.code !== 0) throw new HeaderFixTestsError("failed", exit.code ?? undefined);
+  return { status: "passed", exitCode: 0, durationMs: Date.now() - started, outputBytes, outputTruncated };
+}
+
+function unifiedDiff(file: string, before: string, after: string): string {
+  const oldLines = before.replace(/\n$/, "").split("\n");
+  const newLines = after.replace(/\n$/, "").split("\n");
+  return [`--- a/${file}`, `+++ b/${file}`, `@@ -1,${oldLines.length} +1,${newLines.length} @@`, ...oldLines.map((line) => `-${line}`), ...newLines.map((line) => `+${line}`)].join("\n");
 }
 
 /** Stable approval identity for the exact workspace being modified. */
@@ -230,7 +426,10 @@ export async function planHeaderFixes(projectRoot: string): Promise<readonly Hea
         const content = await readFile(path, "utf8");
         if (Buffer.byteLength(content, "utf8") > 1 * 1024 * 1024) continue;
         if (content.includes("Content-Security-Policy") || content.includes("X-Frame-Options")) return [{ file: name, action: "skip" }];
-        if (NEXT_CONFIG_DECL.test(content)) return [{ file: name, action: "patch", preview: previewLines(NEXT_HEADERS_BLOCK) }];
+        if (NEXT_CONFIG_DECL.test(content)) {
+          const updated = content.replace(NEXT_CONFIG_DECL, (match) => `${match}${NEXT_HEADERS_BLOCK}`);
+          return [{ file: name, action: "patch", preview: previewLines(NEXT_HEADERS_BLOCK), diff: unifiedDiff(name, content, updated) }];
+        }
       } catch { /* unavailable config is not a mutation target */ }
     }
     return [];
@@ -238,7 +437,9 @@ export async function planHeaderFixes(projectRoot: string): Promise<readonly Hea
   if (type === "express" || type === "fastify" || type === "node" || type === "react") {
     const file = contractPath(join(await pickSrcDir(projectRoot), "verglos-security-headers.ts"));
     const filesystemFile = join(projectRoot, ...file.split("/"));
-    return [{ file, action: await fileExists(filesystemFile) ? "skip" : "create", ...(await fileExists(filesystemFile) ? {} : { preview: previewLines(HEADERS_HELPER_TS) }) }];
+    if (await fileExists(filesystemFile)) return [{ file, action: "skip" }];
+    const content = HEADERS_HELPER_TS + (HEADERS_HELPER_EXTRAS[type] ?? "");
+    return [{ file, action: "create", preview: previewLines(content), diff: unifiedDiff(file, "", content) }];
   }
   return [];
 }
