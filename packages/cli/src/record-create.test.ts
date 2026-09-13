@@ -6,8 +6,9 @@ import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { executeRecordCreate } from "./record-create.js";
 import { runCliFixture } from "./cli-fixture.js";
-import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createLineageGraphDocument, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, LINEAGE_GRAPH_SCHEMA, parsePolicyDocument, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, RELEASE_DECISION_SCHEMA, SUBJECT_SCHEMA } from "@verglos/shared";
+import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createLineageGraphDocument, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, LINEAGE_GRAPH_SCHEMA, parsePolicyDocument, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, RELEASE_DECISION_SCHEMA, releaseRecordManifestDigest, SUBJECT_SCHEMA } from "@verglos/shared";
 import { executeRecordVerify } from "./record-verify.js";
+import { executeRecordExport } from "./record-export.js";
 
 test("record create materializes verified members and a canonical manifest", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-record-create-"));
@@ -84,7 +85,7 @@ test("record create complete mode enforces the graph gate", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test("complete record create and verify preserve canonical policy and subject bindings", async () => {
+test("complete record create, verify, and export preserve canonical policy and subject bindings", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-record-create-complete-valid-"));
   try {
     const source = join(root, "source"); const output = join(root, "output"); await mkdir(source);
@@ -106,6 +107,22 @@ test("complete record create and verify preserve canonical policy and subject bi
     const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(bundle.manifest));
     assert.equal(await executeRecordCreate(source, manifestPath, output, true, true, true), 0);
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true, undefined, undefined, undefined, undefined, true), 0);
+    const statementPath = join(root, "release.intoto.json");
+    assert.equal(await executeRecordExport(output, join(output, "manifest.json"), statementPath, true, true), 0);
+    const statement = JSON.parse(await readFile(statementPath, "utf8")) as { _type: string; predicateType: string; predicate: { manifestDigest: string }; subject: Array<{ name: string }> };
+    assert.equal(statement._type, "https://in-toto.io/Statement/v1");
+    assert.equal(statement.predicateType, "https://verglos.dev/attestations/release/v1");
+    const storedManifest = JSON.parse(await readFile(join(output, "manifest.json"), "utf8")) as Parameters<typeof releaseRecordManifestDigest>[0];
+    assert.equal(statement.predicate.manifestDigest, releaseRecordManifestDigest(storedManifest));
+    assert.deepEqual(statement.subject.map(({ name }) => name), [subject.subjectId]);
+    assert.equal(await executeRecordExport(output, join(output, "manifest.json"), statementPath, true, true), 78);
+    assert.equal(JSON.parse(await readFile(statementPath, "utf8")).predicate.manifestDigest, statement.predicate.manifestDigest);
+    const decisionMember = storedManifest.members.find((member) => member.kind === "release-decision");
+    assert.ok(decisionMember);
+    await writeFile(join(output, `${decisionMember.digest.algorithm}-${decisionMember.digest.value}`), "tampered decision");
+    const rejectedExport = join(root, "tampered.intoto.json");
+    assert.equal(await executeRecordExport(output, join(output, "manifest.json"), rejectedExport, true, true), 78);
+    await assert.rejects(() => readFile(rejectedExport));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

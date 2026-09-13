@@ -21,6 +21,7 @@ import {
   executeMonitorUnregister,
 } from "./monitor.js";
 import { executeAttest } from "./attest.js";
+import { executeRecordExport } from "./record-export.js";
 import { executeHunt } from "./hunt.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
@@ -270,6 +271,13 @@ record.command("verify <storeRoot> <manifestPath>")
   .option("--quiet", "Suppress human output")
   .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; complete?: boolean }) => {
     process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, opts.complete));
+  });
+record.command("export <storeRoot> <manifestPath> <outputPath>")
+  .description("Export an in-toto statement locally from a verified complete record; review limitation text before sharing")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, outputPath: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordExport(storeRoot, manifestPath, outputPath, opts.json, opts.quiet));
   });
 record.command("sign <manifestPath> <signaturePath>")
   .description("Sign a validated record manifest with a user-supplied offline key")
