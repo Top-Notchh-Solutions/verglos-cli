@@ -14,12 +14,20 @@ test("record header verifies the store and emits decision-first JSON", async () 
     const subject = createSubject({ kind: "filesystem", treeDigest: { algorithm: "sha256", value: "a".repeat(64) }, ignorePolicyDigest: { algorithm: "sha256", value: "b".repeat(64) }, entryCount: 1 });
     const evaluation = createPolicyEvaluation({ schemaId: "urn:verglos:schema:policy-evaluation", schemaVersion: "1.0.0", evaluationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", subjectId: subject.subjectId, policy: { id: "verglos.policy.local-default", version: "1.0.0", digest: { algorithm: "sha256", value: "c".repeat(64) } }, subjectMatch: { status: "matched", observedSubjectId: subject.subjectId }, evaluatedAt: "2026-01-01T00:00:00Z", checks: [{ id: "verglos.check.native-sast", requirement: "required", onFailure: "BLOCK", status: "error", evidenceDigests: [], observationIds: [], freshness: { status: "unknown", checkedAt: "2026-01-01T00:00:00Z" }, owner: "application-security", reason: "Coverage unavailable.", nextAction: "Review coverage." }], limitations: ["coverage unavailable"] });
     const decision = createReleaseDecision({ decisionId: "urn:uuid:223e4567-e89b-12d3-a456-426614174000", evaluation, subjects: [{ subjectId: subject.subjectId, role: "primary" }], issuedBy: { kind: "service", id: "verglos", authority: "local" }, generatedAt: "2026-01-01T00:00:01Z", limitations: ["coverage unavailable"] });
-    const bytes = new TextEncoder().encode(JSON.stringify(decision)); await writeFile(join(source, "decision.json"), bytes);
+    const bytes = new TextEncoder().encode(JSON.stringify(decision)); const subjectBytes = new TextEncoder().encode(JSON.stringify(subject));
+    await writeFile(join(source, "decision.json"), bytes); await writeFile(join(source, "subject.json"), subjectBytes);
     const member = { ...describeRecordMember({ path: "decision.json", kind: "release-decision", mediaType: "application/json", bytes, required: true }), schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } };
-    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:323e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:02Z", generator: { id: "verglos", version: "2.0.0" }, members: [member], redaction: { status: "not-required" }, limitations: ["coverage unavailable"] });
+    const subjectMember = describeRecordMember({ path: "subject.json", kind: "subject", mediaType: "application/json", bytes: subjectBytes, required: true });
+    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:323e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:02Z", generator: { id: "verglos", version: "2.0.0" }, members: [member, subjectMember], redaction: { status: "not-required" }, limitations: ["coverage unavailable"] });
     const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(manifest));
     assert.equal(await executeRecordCreate(source, manifestPath, output, true, true), 0);
-    assert.equal(await executeRecordHeader(output, join(output, "manifest.json"), true, true), 0);
+    const originalLog = console.log; let headerJson = "";
+    try { console.log = (value?: unknown) => { headerJson = String(value); }; assert.equal(await executeRecordHeader(output, join(output, "manifest.json"), true, true), 0); }
+    finally { console.log = originalLog; }
+    const header = JSON.parse(headerJson);
+    assert.equal(header.decision, "INCOMPLETE"); assert.equal(header.coverageStatus, "incomplete");
+    assert.deepEqual(header.subjects, [{ subjectId: subject.subjectId, role: "primary", identityDigest: subject.subjectId.split(":").slice(-1)[0] ? `sha256:${subject.subjectId.split(":").slice(-1)[0]}` : "", memberDigest: `sha256:${subjectMember.digest.value}`, contentDigests: [{ purpose: "filesystem-tree", digest: `sha256:${"a".repeat(64)}` }, { purpose: "ignore-policy", digest: `sha256:${"b".repeat(64)}` }] }]);
+    assert.ok(header.limitations.includes("coverage unavailable"));
     assert.ok((await readFile(join(output, "manifest.json"))).byteLength > 0);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
