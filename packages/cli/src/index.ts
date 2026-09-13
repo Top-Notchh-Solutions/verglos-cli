@@ -503,7 +503,7 @@ program
   .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
-    "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
+    "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
   )
   .action(async (opts: { threshold: string; quiet?: boolean; json?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policy?: string; policyEvaluation?: string; config?: string }) => {
     const policyPath = opts.policyEvaluation ?? opts.policy;
