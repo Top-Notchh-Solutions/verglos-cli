@@ -3,7 +3,7 @@ import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { createReleaseSnapshot, createSubject } from "@verglos/shared";
+import { createReleaseSnapshot, createSubject, type InspectCoverageManifest, type ToolRunDocument } from "@verglos/shared";
 import { executeDiff } from "./diff.js";
 
 test("diff command rejects malformed snapshots with usage exit", async () => {
@@ -87,7 +87,7 @@ test("diff command renders validated evidence attribution, digest, confidence, r
   const fingerprint = `sha256:${"a".repeat(64)}`;
   const makeSnapshot = (severity: "high" | "critical", runId: string, startedAt: string) => {
     const completedAt = new Date(Date.parse(startedAt) + 1_000).toISOString();
-    const run = {
+    const run: ToolRunDocument = {
       schemaId: "urn:verglos:schema:tool-run", schemaVersion: "1.0.0", runId, subjectId: subject.subjectId,
       engine: {
         producer: { id: "verglos.native-scanner", kind: "native", name: "Verglos native scanner", version: "2.0.0" },
@@ -106,7 +106,7 @@ test("diff command renders validated evidence attribution, digest, confidence, r
       confidence: { level: "high", score: 0.9, method: "test.confidence", mappingVersion: "1.0.0" },
       remediation: { summary: "Apply the documented fix." }, evidence: [], references: [], extensions: {},
     };
-    const coverage = { schemaVersion: "1.1.0" as const, status: "complete" as const, target: { state: "complete" as const, limitations: [] }, producers: [{ producer: "native" as const, state: "complete" as const, observationCount: 1, runIds: [runId], sourceDigests: [], limitations: [], toolRuns: [run] }] };
+    const coverage: InspectCoverageManifest = { schemaVersion: "1.1.0", status: "complete", target: { state: "complete", limitations: [] }, producers: [{ producer: "native", state: "complete", observationCount: 1, runIds: [runId], sourceDigests: [], limitations: [], toolRuns: [run] }] };
     return createReleaseSnapshot({ primarySubject: subject, subjects: [subject], observations: [{ fingerprint, producerIds: ["verglos.native-scanner"], payloads: [observation], disagreement: false }], lineage: { edges: [], gaps: [] }, policyInputs: {}, coverage });
   };
   const originalLog = console.log;
