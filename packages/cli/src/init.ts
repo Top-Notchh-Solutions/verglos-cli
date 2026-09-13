@@ -11,50 +11,25 @@ import { installPreCommitHook } from "./config.js";
  * Two concerns, both explicit — no silent side effects (design §1:
  * "Free tier requires no account and no key" + "Never a hard-lock").
  *
- *   1. Write `.verglos.config.js` at the project root (asks before
- *      overwriting an existing config). The dotfile name is what
- *      the scanner's loadConfig() actually reads.
+ *   1. Write versioned `.verglos.config.json` at the project root
+ *      (asks before overwriting an existing config). A legacy JS file
+ *      is preserved and never evaluated by the migration inspector.
  *   2. Ask whether to install the pre-commit hook. Never installs
  *      without a confirmed y.
  */
 
-const CONFIG_FILENAME = ".verglos.config.js";
+const CONFIG_FILENAME = ".verglos.config.json";
+const LEGACY_CONFIG_FILENAME = ".verglos.config.js";
 
-const CONFIG_TEMPLATE = `/**
- * Verglos scanner configuration.
- * @see https://verglos.com/docs/config
- * @type {import('@verglos/shared').VerglosConfig}
- */
-module.exports = {
-  // "free" | "pro" | "team" | "studio" | "enterprise" (contracted) | "compliance" (legacy alias)
-  plan: "free",
-
-  // Exit CI when a critical is found.
+const CONFIG_TEMPLATE = `${JSON.stringify({
+  schemaVersion: "1.0.0",
   failOnCritical: true,
-
-  // Score threshold for \`verglos scan --ci\`. Fail below this.
   failThreshold: 60,
-
-  // Glob patterns to skip. Node_modules, dist, build outputs, and
-  // agent-config folders are already ignored by default.
-  ignorePaths: [
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/.next/**",
-    "**/build/**",
-    "**/coverage/**",
-  ],
-
-  // How far back to walk git history for secret leaks. 0 disables.
+  ignorePaths: ["**/node_modules/**", "**/dist/**", "**/.next/**", "**/build/**", "**/coverage/**"],
   secretScanDepth: 100,
-
-  // "html" | "json" | "both"
   reportFormat: "both",
-
-  // If true, \`verglos init\` will offer to install a pre-commit hook.
   preCommitHook: true,
-};
-`;
+}, null, 2)}\n`;
 
 async function fileExists(path: string): Promise<boolean> {
   try {
@@ -105,6 +80,11 @@ export async function executeInit(options: InitOptions = {}): Promise<number> {
     }
     try {
       const configExists = await fileExists(configPath);
+      const legacyConfigExists = await fileExists(join(projectRoot, LEGACY_CONFIG_FILENAME));
+      if (legacyConfigExists) {
+        console.log(JSON.stringify({ status: "legacy-config-preserved", configPath, legacyConfigPath: join(projectRoot, LEGACY_CONFIG_FILENAME), configWritten: false, hookInstalled: false, next: "run verglos config inspect with the legacy file; migrate settings to schemaVersion 1.0.0 JSON, then remove the legacy file" }));
+        return 0;
+      }
       if (!configExists) await writeFile(configPath, CONFIG_TEMPLATE, "utf8");
       console.log(JSON.stringify({ status: "ok", configPath, configWritten: !configExists, hookInstalled: false }));
       return 0;
@@ -122,9 +102,13 @@ export async function executeInit(options: InitOptions = {}): Promise<number> {
   }
 
   const configExists = await fileExists(configPath);
+  const legacyConfigExists = await fileExists(join(projectRoot, LEGACY_CONFIG_FILENAME));
 
   let writeConfig = true;
-  if (configExists) {
+  if (legacyConfigExists) {
+    writeConfig = false;
+    if (!options.quiet) console.log(chalk.yellow(`  Preserved legacy ${LEGACY_CONFIG_FILENAME}; review it with 'verglos config inspect', migrate to schemaVersion 1.0.0 JSON, then remove the old file.`));
+  } else if (configExists) {
     if (options.yes) {
       writeConfig = false;
       if (!options.quiet) console.log(

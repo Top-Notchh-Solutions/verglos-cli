@@ -75,6 +75,41 @@ test("config inspect failure is one bounded JSON response", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("config migration process reports unsupported settings without rewriting the file", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-config-migration-"));
+  const path = join(root, "legacy.json");
+  const source = JSON.stringify({ schemaVersion: "1.0.0", hunt: { sandbox: "node-vm" } });
+  try {
+    await writeFile(path, source);
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "config", "inspect", path, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 78);
+    assert.equal(result.stderr, "");
+    const report = JSON.parse(result.stdout);
+    assert.equal(report.status, "invalid");
+    assert.ok(report.warnings.some((warning: { id: string }) => warning.id === "obsolete-sandbox"));
+    assert.deepEqual(result.files, []);
+    assert.equal(await readFile(path, "utf8"), source);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("config migration process never evaluates legacy JavaScript", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-config-legacy-js-"));
+  const path = join(root, ".verglos.config.js");
+  const source = "throw new Error('legacy config was executed'); module.exports = { failThreshold: 1 };";
+  try {
+    await writeFile(path, source);
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "config", "inspect", path, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const report = JSON.parse(result.stdout);
+    assert.equal(report.status, "legacy");
+    assert.match(report.warnings[0].message, /not evaluated/);
+    assert.doesNotMatch(result.stdout, /legacy config was executed|failThreshold/);
+    assert.deepEqual(result.files, []);
+    assert.equal(await readFile(path, "utf8"), source);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("record header failure is one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-header-"));
   try {
@@ -538,8 +573,8 @@ test("init JSON mode writes only the bounded project config", async () => {
     assert.equal(payload.status, "ok");
     assert.equal(payload.configWritten, true);
     assert.equal(payload.hookInstalled, false);
-    await assertSameFile(payload.configPath, join(root, ".verglos.config.js"));
-    assert.deepEqual(result.files, [".verglos.config.js"]);
+    await assertSameFile(payload.configPath, join(root, ".verglos.config.json"));
+    assert.deepEqual(result.files, [".verglos.config.json"]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

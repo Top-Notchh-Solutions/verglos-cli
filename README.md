@@ -356,24 +356,19 @@ Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**.
 
 ## Configuration
 
-Sane defaults. Customize with a `.verglos.config.js` in your repo root:
+Sane defaults. Customize the versioned `.verglos.config.json` in your repo root:
 
-```js
-// .verglos.config.js
-module.exports = {
-  // Add project-specific ignore patterns (glob syntax)
-  ignorePaths: ["**/fixtures/**", "**/legacy/**"],
-
-  // Block CI when a critical is found (default: true)
-  failOnCritical: true,
-
-  // Block CI when the composite score falls below this (Pro; default: 60)
-  failThreshold: 80,
-
-  // How many commits back the secrets detector walks (default: 100)
-  secretScanDepth: 100,
-};
+```json
+{
+  "schemaVersion": "1.0.0",
+  "ignorePaths": ["**/fixtures/**", "**/legacy/**"],
+  "failOnCritical": true,
+  "failThreshold": 80,
+  "secretScanDepth": 100
+}
 ```
+
+Run `verglos config inspect <path>` before migration. It reads without modifying the file, reports unversioned or unsupported config, validates the `engine`, `hunt`, `record`, and `telemetry` sections, and rejects obsolete `hunt.sandbox` values `node-vm` and `firecracker`. Existing `.verglos.config.js` files remain compatible, but the inspector never executes them; translate settings to JSON, inspect the result, then remove the old file. Do not keep both config files: scan fails closed until the ambiguity is resolved. Hunt, engine, record, attest, and telemetry sections are migration metadata unless explicitly consumed by a shipped command; scan rejects such no-op settings. Config values do not grant entitlement, activate telemetry, or authorize execution. Telemetry consent remains an explicit local action.
 
 Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitignore`.
 

@@ -294,17 +294,19 @@ Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**.
 
 ## Configuration
 
-Sane defaults. Customize with a `.verglos.config.js` in your repo root:
+Sane defaults. Customize the versioned `.verglos.config.json` in your repo root:
 
-```js
-// .verglos.config.js
-module.exports = {
-  ignorePaths: ["**/fixtures/**", "**/legacy/**"],
-  failOnCritical: true,
-  failThreshold: 80,
-  secretScanDepth: 100,
-};
+```json
+{
+  "schemaVersion": "1.0.0",
+  "ignorePaths": ["**/fixtures/**", "**/legacy/**"],
+  "failOnCritical": true,
+  "failThreshold": 80,
+  "secretScanDepth": 100
+}
 ```
+
+`verglos init` creates versioned JSON and preserves any existing JavaScript config for manual migration. `verglos config inspect <path>` reads without modifying or evaluating input; unversioned and obsolete values receive explicit migration guidance. Do not keep both config files. `engine`, `hunt`, `record`, `attest`, and `telemetry` sections are validated migration metadata only unless a shipped command explicitly consumes them; scan rejects those no-op settings. Config values do not grant consent.
 
 Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitignore`.
 
