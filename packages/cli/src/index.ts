@@ -360,7 +360,7 @@ program
   .option("--hunt", "After scanning, hand eligible findings to hunt (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
-    "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
+    "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
   )
   .action(
     async (opts: {

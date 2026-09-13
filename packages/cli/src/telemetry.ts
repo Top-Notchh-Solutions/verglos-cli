@@ -7,10 +7,11 @@ import type { ScanResult } from "@verglos/shared";
 import { computeProjectFingerprint } from "@verglos/shared";
 import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
 
-// Anonymous scan telemetry. One event per `verglos scan`. Users can opt
-// out with `VERGLOS_TELEMETRY=0`. What we send is documented in the
-// project FAQ and in this file's payload builder. Nothing here touches
-// source code, file paths, finding titles, or user identity.
+// Scan telemetry is one event per eligible `verglos scan`. It contains a
+// derived project fingerprint/name and scan metadata; when a paid license
+// is present, its bearer is sent for account association. The event payload
+// must never include source contents, filesystem paths, finding text/snippets,
+// or matched secret values. Keep the payload allowlisted and process-tested.
 //
 // If this fails for any reason — network offline, DNS block, server
 // down, JSON serialisation error — we swallow it. Scans are never
@@ -65,12 +66,12 @@ export async function printFirstRunDisclosureIfNeeded(): Promise<void> {
   console.log("");
   console.log(
     chalk.gray(
-      "Verglos sends one anonymous event per scan (version, duration, counts).",
+      "Verglos sends scan metadata: a derived project fingerprint/name, versions, platform, score/counts, provenance flags, duration, and detector names.",
     ),
   );
   console.log(
     chalk.gray(
-      "  No code, no findings text, no identity. Opt out: VERGLOS_TELEMETRY=0",
+      "  No source, paths, finding text, snippets, or matched secret values are included. Paid scans send a license bearer for account association. Opt out: --no-telemetry or VERGLOS_TELEMETRY=0",
     ),
   );
   console.log("");
