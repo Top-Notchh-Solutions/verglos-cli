@@ -9,14 +9,16 @@ const TEST_ORIGIN = "https://recipes.example.test";
 const TEST_LICENSE = "SPDX-License-Identifier: MIT\nFixture license text.";
 const { privateKey, publicKey } = generateKeyPairSync("ed25519");
 
-export function createTestHuntTrustStore(recipe: HuntRecipe, options: { readonly revoked?: boolean } = {}): HuntRecipeTrustStore {
+export function createTestHuntTrustStore(recipe: HuntRecipe, options: { readonly revoked?: boolean; readonly at?: string } = {}): HuntRecipeTrustStore {
+  const issuedAt = options.at === undefined ? "2026-01-01T00:00:00Z" : new Date(Date.parse(options.at) - 60_000).toISOString();
+  const expiresAt = options.at === undefined ? "2026-02-01T00:00:00Z" : new Date(Date.parse(options.at) + 86_400_000).toISOString();
   const unsignedFeed = {
     schemaId: "urn:verglos:schema:hunt-recipe-feed" as const,
     schemaVersion: "1.0.0" as const,
     feedId: TEST_FEED_ID,
     origin: TEST_ORIGIN,
-    issuedAt: "2026-01-01T00:00:00Z",
-    expiresAt: "2026-02-01T00:00:00Z",
+    issuedAt,
+    expiresAt,
     entries: [{
       recipe,
       recipeDigest: huntRecipeDigest(recipe),
