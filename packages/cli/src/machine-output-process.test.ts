@@ -346,7 +346,7 @@ test("scan snapshot opt-in imports bounded SARIF and refuses to overwrite the sn
     assert.match(summary.coverage?.producers?.[0]?.limitations.join(" ") ?? "", /does not independently bind/);
     const originalSnapshot = await readFile(snapshotPath, "utf8");
     const parsedSnapshot = JSON.parse(originalSnapshot) as { schemaVersion?: string; coverage?: { schemaVersion?: string } };
-    assert.equal(parsedSnapshot.schemaVersion, "1.2.0");
+    assert.equal(parsedSnapshot.schemaVersion, "1.3.0");
     assert.equal(parsedSnapshot.coverage?.schemaVersion, "1.1.0");
     assert.equal(originalSnapshot.includes("RAW_IMPORTED_RESULT_MUST_NOT_ESCAPE"), false);
     const second = await runCliFixture(process.execPath, args, root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });

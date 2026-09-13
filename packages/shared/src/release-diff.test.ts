@@ -22,13 +22,13 @@ test("release diff compares identity and coverage canonically", () => {
   const result = diffReleaseSnapshots(base, head); assert.equal(result.identityChanged, false); assert.equal(result.coverageChanged, false);
 });
 
-test("release diff reports producer coverage changes in snapshot v1.2", () => {
+test("release diff reports producer coverage changes in snapshot v1.3", () => {
   const baseCoverage = coverageFor(0);
   const headCoverage = coverageFor(1);
   const base = createReleaseSnapshot({ primarySubject: subject, subjects: [subject], observations: [], lineage: { edges: [], gaps: [] }, policyInputs: {}, coverage: baseCoverage });
   const head = createReleaseSnapshot({ primarySubject: subject, subjects: [subject], observations: [], lineage: { edges: [], gaps: [] }, policyInputs: {}, coverage: headCoverage });
   const result = diffReleaseSnapshots(base, head);
-  assert.equal(base.schemaVersion, "1.2.0");
+  assert.equal(base.schemaVersion, "1.3.0");
   assert.equal(result.coverageChanged, true);
   assert.equal(result.coverageDelta.before.producers[0]?.observationCount, 0);
   assert.equal(result.coverageDelta.after.producers[0]?.observationCount, 1);
@@ -43,6 +43,18 @@ test("release diff reports target coverage state and limitations", () => {
   assert.equal(result.coverageChanged, true);
   assert.deepEqual(result.coverageDelta.before.target, { state: "complete", limitations: [] });
   assert.deepEqual(result.coverageDelta.after.target, { state: "incomplete", limitations: ["target inspection timed out"] });
+});
+
+test("release diff exposes lineage changes and blocks unresolved provenance", () => {
+  const base = snapshot([]);
+  const head = createReleaseSnapshot({ primarySubject: subject, subjects: [subject], observations: [], lineage: { edges: [{ fromSubjectId: subject.subjectId, toSubjectId: subject.subjectId, relation: "build-output", status: "unverifiable", evidenceRef: `sha256:${"c".repeat(64)}` }], gaps: ["lineage evidence unavailable"] }, policyInputs: {}, coverage: coverageFor(0) });
+  const result = diffReleaseSnapshots(base, head);
+  assert.equal(result.lineageDelta.changed, true);
+  assert.equal(result.lineageDelta.addedEdges.length, 1);
+  assert.equal(Object.isFrozen(result.lineageDelta.addedEdges[0]), true);
+  assert.equal(result.lineageDelta.afterGaps.length, 1);
+  assert.match(result.lineageDelta.afterGaps[0]!, /^sha256:[a-f0-9]{64}$/);
+  assert.ok(result.comparisonBlockers.some((blocker) => blocker.code === "lineage-unresolved"));
 });
 
 test("release diff reports severity worsening only from validated matching-fingerprint evidence", () => {

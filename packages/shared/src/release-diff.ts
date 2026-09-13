@@ -1,4 +1,7 @@
+import { createHash } from "node:crypto";
 import type { AnyReleaseSnapshot } from "./release-snapshot.js";
+import type { SnapshotEvidenceProjection } from "./release-snapshot.js";
+import type { LineageEdge } from "./lineage-graph.js";
 import { canonicalizeJson } from "./schema.js";
 
 export type CoverageProjection = Readonly<{
@@ -7,9 +10,16 @@ export type CoverageProjection = Readonly<{
   producers: readonly Readonly<{ producer: string; state: string; observationCount: number; limitations: readonly string[] }>[];
 }>;
 export type ComparisonBlocker = Readonly<{
-  code: "identity-changed" | "coverage-unavailable" | "coverage-incomplete" | "severity-unassessed";
+  code: "identity-changed" | "coverage-unavailable" | "coverage-incomplete" | "severity-unassessed" | "lineage-unresolved";
   count?: number;
   reason: string;
+}>;
+export type LineageDelta = Readonly<{
+  changed: boolean;
+  addedEdges: readonly LineageEdge[];
+  removedEdges: readonly LineageEdge[];
+  beforeGaps: readonly string[];
+  afterGaps: readonly string[];
 }>;
 export interface ReleaseDiff {
   readonly added: readonly string[];
@@ -23,6 +33,7 @@ export interface ReleaseDiff {
   readonly coverageChanged: boolean;
   readonly policyChanged: boolean;
   readonly coverageDelta: Readonly<{ before: CoverageProjection; after: CoverageProjection; changed: boolean }>;
+  readonly lineageDelta: LineageDelta;
   readonly comparisonBlockers: readonly ComparisonBlocker[];
 }
 
@@ -41,6 +52,17 @@ function coverageProjection(snapshot: AnyReleaseSnapshot): CoverageProjection {
 
 function riskMap(snapshot: AnyReleaseSnapshot): ReadonlyMap<string, RiskObservation> {
   return new Map(snapshot.observations.map((observation) => [observation.fingerprint, observation as RiskObservation]));
+}
+
+function compareLineage(base: AnyReleaseSnapshot, head: AnyReleaseSnapshot): LineageDelta {
+  const before = new Map(base.lineage.edges.map((edge) => [canonicalizeJson(edge), edge]));
+  const after = new Map(head.lineage.edges.map((edge) => [canonicalizeJson(edge), edge]));
+  const addedEdges = [...after].filter(([key]) => !before.has(key)).map(([, edge]) => Object.freeze({ ...edge })).sort((a, b) => canonicalizeJson(a).localeCompare(canonicalizeJson(b)));
+  const removedEdges = [...before].filter(([key]) => !after.has(key)).map(([, edge]) => Object.freeze({ ...edge })).sort((a, b) => canonicalizeJson(a).localeCompare(canonicalizeJson(b)));
+  const gapReferences = (gaps: readonly string[]) => [...new Set(gaps.map((gap) => `sha256:${createHash("sha256").update(gap, "utf8").digest("hex")}`))].sort();
+  const beforeGaps = gapReferences(base.lineage.gaps);
+  const afterGaps = gapReferences(head.lineage.gaps);
+  return Object.freeze({ changed: addedEdges.length > 0 || removedEdges.length > 0 || canonicalizeJson(beforeGaps) !== canonicalizeJson(afterGaps), addedEdges: Object.freeze(addedEdges), removedEdges: Object.freeze(removedEdges), beforeGaps: Object.freeze(beforeGaps), afterGaps: Object.freeze(afterGaps) });
 }
 
 export function diffReleaseSnapshots(base: AnyReleaseSnapshot, head: AnyReleaseSnapshot): ReleaseDiff {
@@ -73,17 +95,23 @@ export function diffReleaseSnapshots(base: AnyReleaseSnapshot, head: AnyReleaseS
     ? canonicalizeJson(base.lineage) !== canonicalizeJson(head.lineage)
     : baseCoverage.status !== headCoverage.status || canonicalizeJson(baseCoverage.target) !== canonicalizeJson(headCoverage.target) || canonicalizeJson(baseCoverage.producers) !== canonicalizeJson(headCoverage.producers);
   const policyChanged = base.policyInputDigest !== head.policyInputDigest;
+  const lineageDelta = compareLineage(base, head);
   const comparisonBlockers: ComparisonBlocker[] = [];
   if (identityChanged) comparisonBlockers.push({ code: "identity-changed", reason: "The subject set changed; findings are not directly comparable until identity is reconciled." });
   if (baseCoverage.status === "unavailable" || headCoverage.status === "unavailable") comparisonBlockers.push({ code: "coverage-unavailable", reason: "At least one snapshot predates producer coverage evidence; coverage completeness cannot be established." });
   if (baseCoverage.status === "incomplete" || headCoverage.status === "incomplete") comparisonBlockers.push({ code: "coverage-incomplete", reason: "At least one snapshot has incomplete producer or target coverage." });
   if (severityUnassessed.length) comparisonBlockers.push({ code: "severity-unassessed", count: severityUnassessed.length, reason: "Severity evidence is unavailable or mixed for shared fingerprints; risk change cannot be inferred." });
+  const unresolvedLineageEdges = new Set([...base.lineage.edges, ...head.lineage.edges].filter((edge) => edge.status !== "matched").map((edge) => canonicalizeJson(edge))).size;
+  const unresolvedLineageGaps = new Set([...base.lineage.gaps, ...head.lineage.gaps]).size;
+  const unresolvedLineageCount = unresolvedLineageEdges + unresolvedLineageGaps;
+  if (unresolvedLineageCount) comparisonBlockers.push({ code: "lineage-unresolved", count: unresolvedLineageCount, reason: "Lineage contains mismatched, unavailable, unverifiable, or missing evidence; provenance cannot be treated as complete." });
   return Object.freeze({
     added: Object.freeze(added), fixed: Object.freeze(fixed), worsened: Object.freeze(worsened.sort()), improved: Object.freeze(improved.sort()), unchanged: Object.freeze(unchanged), severityUnassessed: Object.freeze(severityUnassessed.sort()),
     identityChanged,
     coverageChanged,
     policyChanged,
     coverageDelta: Object.freeze({ before: baseCoverage, after: headCoverage, changed: coverageChanged }),
+    lineageDelta,
     comparisonBlockers: Object.freeze(comparisonBlockers),
   });
 }
@@ -95,4 +123,11 @@ export function getSnapshotRiskObservation(snapshot: AnyReleaseSnapshot, fingerp
 export function getSnapshotRiskSummary(snapshot: AnyReleaseSnapshot, fingerprint: string): readonly string[] {
   const observation = snapshot.observations.find((item) => item.fingerprint === fingerprint);
   return observation && "remediationSummaries" in observation ? observation.remediationSummaries as readonly string[] : Object.freeze([]);
+}
+
+export function getSnapshotEvidence(snapshot: AnyReleaseSnapshot, fingerprint: string): Readonly<{ status: "available" | "unavailable"; observations: readonly SnapshotEvidenceProjection[]; omittedObservationCount: number; invalidObservationCount: number; reason?: string }> {
+  const observation = snapshot.observations.find((item) => item.fingerprint === fingerprint);
+  if (!observation || !("evidence" in observation)) return Object.freeze({ status: "unavailable", observations: Object.freeze([]), omittedObservationCount: 0, invalidObservationCount: 0, reason: "Snapshot predates validated evidence/lineage detail." });
+  const records = observation.evidence as readonly SnapshotEvidenceProjection[];
+  return Object.freeze({ status: records.length ? "available" : "unavailable", observations: records, omittedObservationCount: observation.omittedEvidenceCount, invalidObservationCount: observation.invalidEvidenceCount, ...(!records.length ? { reason: "No validated producer evidence is present for this fingerprint." } : {}) });
 }

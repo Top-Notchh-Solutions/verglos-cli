@@ -39,6 +39,9 @@ test("change actions expose remediation, owner, rescan, Hunt, and decision-scope
   const actions = projectChangeActions(diff, base, head);
   assert.equal(actions.changes[0]?.status, "worsened");
   assert.deepEqual(actions.changes[0]?.remediation, ["Apply the documented fix."]);
+  assert.equal(actions.changes[0]?.evidence.status, "available");
+  assert.equal(actions.changes[0]?.evidence.observations[0]?.timestamp.status, "unavailable");
+  assert.equal(actions.changes[0]?.evidence.observations[0]?.engineHealth.state, "not-recorded");
   assert.equal(actions.changes[0]?.owner.status, "unassigned");
   assert.equal(actions.changes[0]?.rescan.status, "required");
   assert.equal(actions.changes[0]?.huntEligibility.status, "not-evaluated");
