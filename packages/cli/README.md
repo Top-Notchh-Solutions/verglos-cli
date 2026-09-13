@@ -313,7 +313,7 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 | Variable | Effect |
 |---|---|
 | `VERGLOS_API_URL` | Override the server (default: `https://verglos.com`) |
-| `VERGLOS_TELEMETRY=0` | Disable scan telemetry; non-interactive scans otherwise require `VERGLOS_TELEMETRY=1` |
+| `VERGLOS_TELEMETRY=0` | Disable optional scan analytics; hosted collection is currently disabled pending retention/deletion qualification |
 | `VERGLOS_PROVENANCE_FILE_CAP` | Override the 300-file cap on provenance analysis |
 | `VERGLOS_LICENSE_KEY` | Consumed by `verglos activate --ci` in CI |
 | `VERGLOS_AS_PLAN` | _Founder only._ Simulate a plan for testing |
@@ -322,9 +322,7 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 
 ## Privacy
 
-Verglos analyzes source locally; this does not mean the CLI makes no network requests. A normal scan may query npm/OSV and send scan telemetry. Quiet, JSON, and CI scans keep telemetry off unless `VERGLOS_TELEMETRY=1` explicitly opts in.
-
-Interactive scan telemetry is enabled by default and POSTed to `verglos.com/api/v1/telemetry/scan`. It can include a derived project fingerprint/name, event ID, CLI/Node versions, platform, score and severity counts, provenance/verification flags, duration, and detector names. When a license key is stored, the request includes it as a bearer credential for account association. The event payload does not include source contents, filesystem paths, finding text/snippets, or matched secret values. Disable a scan event with `--no-telemetry` or set `VERGLOS_TELEMETRY=0`; non-interactive runs require explicit `VERGLOS_TELEMETRY=1` to enable telemetry.
+Verglos analyzes source locally; this does not mean the CLI makes no network requests. Dependency checks may query npm/OSV. A licensed scan separately synchronizes the score and a derived project fingerprint to the authenticated account service; it does not upload source, paths, finding text, or secrets. Scan analytics are off by default and remain uncollected until hosted retention/deletion controls are qualified. `verglos privacy telemetry preview|status|enable --yes|disable` reviews and stores a revocable local consent preference; saving consent does not enable transmission while hosted collection is gated. `--no-telemetry` and `VERGLOS_TELEMETRY=0` disable analytics and account sync for that run.
 
 ---
 

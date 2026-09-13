@@ -76,12 +76,61 @@ import { executeRecordProject } from "./record-project.js";
 import { executeRecordSign } from "./record-sign.js";
 import { executeConfigInspect } from "./config-inspect.js";
 import { executeRecordHeader } from "./record-header.js";
+import { printTelemetryConsentPreview, readTelemetryConsent, writeTelemetryConsent } from "./telemetry.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
 const args = process.argv.slice(2);
 const jsonRequested = args.includes("--json");
 const quietRequested = args.includes("--quiet") || args.includes("-q");
+
+program
+  .command("privacy")
+  .description("Inspect and control local privacy settings")
+  .command("telemetry <action>")
+  .description("Preview, inspect, enable, or revoke optional scan analytics consent")
+  .option("--yes", "Affirmatively consent to the displayed analytics fields")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress non-error output")
+  .action(async (action: string, opts: { yes?: boolean; json?: boolean; quiet?: boolean }) => {
+    const fields = ["CLI major.minor", "Node major", "OS family", "score band", "finding-count bands", "duration band", "coarse result band"];
+    const excluded = ["project/repository identity", "license/account credentials", "source", "paths", "finding text", "detector names", "matched secret values"];
+    if (action === "preview") {
+      if (opts.json) console.log(JSON.stringify({ purpose: "aggregate CLI reliability metadata", fields, excluded, consentRequired: true, transmission: "disabled-pending-hosted-retention-controls" }));
+      else if (!opts.quiet) printTelemetryConsentPreview();
+      return;
+    }
+    if (action === "status") {
+      const consent = await readTelemetryConsent();
+      const result = { enabled: false, transmission: "disabled-pending-hosted-retention-controls", storedConsent: consent?.enabled ?? null, consentPolicyVersion: consent?.policyVersion ?? null, consentUpdatedAt: consent?.updatedAt ?? null, fields, excluded };
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log(`Scan analytics transmission: disabled pending hosted retention/deletion controls${consent ? ` (saved ${consent.enabled ? "opt-in" : "opt-out"} ${consent.updatedAt})` : " (no saved opt-in)"}`);
+      return;
+    }
+    if (action === "disable") {
+      const consent = await writeTelemetryConsent(false);
+      const result = { enabled: false, consentPolicyVersion: consent.policyVersion, consentUpdatedAt: consent.updatedAt };
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log("Scan analytics disabled; this local preference can be changed with `verglos privacy telemetry enable --yes`.");
+      return;
+    }
+    if (action === "enable") {
+      if (!opts.yes) {
+        if (opts.json) console.log(JSON.stringify({ status: "consent-required", purpose: "aggregate CLI reliability metadata", fields, excluded, next: "review this preview, then run verglos privacy telemetry enable --yes" }));
+        else if (!opts.quiet) { printTelemetryConsentPreview(); console.log("No consent recorded. Review the fields, then rerun with --yes to save consent."); }
+        process.exitCode = 2;
+        return;
+      }
+      if (!opts.json && !opts.quiet) printTelemetryConsentPreview();
+      const consent = await writeTelemetryConsent(true);
+      const result = { enabled: false, consentSaved: true, transmission: "disabled-pending-hosted-retention-controls", consentPolicyVersion: consent.policyVersion, consentUpdatedAt: consent.updatedAt, fields, excluded };
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log("Consent saved. Analytics transmission remains disabled pending hosted retention/deletion controls; revoke the saved consent with `verglos privacy telemetry disable`.");
+      return;
+    }
+    reportPreflightError(opts.json, opts.quiet, "PRIVACY_ACTION", "Use preview, status, enable, or disable.", "privacy telemetry action is invalid");
+    process.exitCode = 78;
+  });
 
 async function readApprovalReceiptFile(path: string): Promise<ApprovalReceipt> {
   const entry = await lstat(path);

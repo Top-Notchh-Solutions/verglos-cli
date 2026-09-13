@@ -1,36 +1,19 @@
-import { randomInt, randomUUID } from "node:crypto";
-import { mkdir, access, writeFile } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
+import { lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
 import { homedir, platform } from "node:os";
 import { join } from "node:path";
 import chalk from "chalk";
 import type { ScanResult } from "@verglos/shared";
-import { computeProjectFingerprint } from "@verglos/shared";
-import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
 
-// Scan telemetry is one event per eligible `verglos scan`. It contains a
-// derived project fingerprint/name and scan metadata; when a paid license
-// is present, its bearer is sent for account association. The event payload
-// must never include source contents, filesystem paths, finding text/snippets,
-// or matched secret values. Keep the payload allowlisted and process-tested.
+// Scan analytics are separate from account synchronization. Events are sent
+// only after affirmative, versioned local consent and contain coarse fields
+// only. Never attach project identity, credentials, source, paths, findings,
+// detector names, or matched secrets to this request.
 //
-// If this fails for any reason — network offline, DNS block, server
-// down, JSON serialisation error — we swallow it. Scans are never
-// interrupted by telemetry.
-//
-// Reliability history (why the numbers below):
-//   The v1.8.2 implementation had a 2-second timeout with no retry. In
-//   dogfood runs on 2026-08-15 we observed a ~50% telemetry drop-rate
-//   on paid-license traffic — 3 of 6 back-to-back scans on distinct
-//   repos never registered a score_history row or activation despite
-//   the scans succeeding locally. Root cause was almost certainly the
-//   Vercel cold-start window plus the aggressive timeout. v1.8.3
-//   raises the timeout to 8s AND retries once on transient failure so
-//   a single cold-start doesn't lose the write. See the truth audit
-//   Fix #4 in docs/TRUTH-AUDIT-FREE-PRO.md.
-
-const TIMEOUT_MS = 8000; // was 2000 — see reliability note above
-const RETRY_DELAY_MS = 750;
-const DISCLOSURE_MARKER = join(homedir(), ".verglos", "telemetry-disclosed");
+const configuredHome = () => process.env.HOME || process.env.USERPROFILE || homedir();
+const consentPath = () => join(configuredHome(), ".verglos", "telemetry-consent.json");
+const CONSENT_POLICY_VERSION = "2026-09-08";
+const MAX_CONSENT_BYTES = 4096;
 const DEBUG = (() => {
   const v = process.env.VERGLOS_DEBUG;
   if (!v) return false;
@@ -43,184 +26,141 @@ function debug(...args: unknown[]): void {
   console.error(chalk.gray("[verglos:debug]"), ...args);
 }
 
-export function isTelemetryDisabled(explicitFlag?: boolean, nonInteractive = false): boolean {
-  if (explicitFlag === true) return true;
-  const raw = process.env.VERGLOS_TELEMETRY;
-  // Non-interactive runs are opt-in only. This prevents quiet/JSON/CI/agent
-  // invocations from silently attaching project or paid identity metadata.
-  if (nonInteractive && raw == null) return true;
-  if (raw == null) return false;
-  const v = raw.trim().toLowerCase();
-  if (nonInteractive && !["1", "true", "on", "yes"].includes(v)) return true;
-  return v === "0" || v === "false" || v === "off" || v === "no";
+export interface TelemetryConsent {
+  readonly schemaVersion: 1;
+  readonly policyVersion: string;
+  readonly enabled: boolean;
+  readonly updatedAt: string;
 }
 
-export async function printFirstRunDisclosureIfNeeded(): Promise<void> {
+export async function readTelemetryConsent(): Promise<TelemetryConsent | null> {
   try {
-    await access(DISCLOSURE_MARKER);
-    return;
+    const path = consentPath();
+    const entry = await lstat(path);
+    if (!entry.isFile() || entry.size > MAX_CONSENT_BYTES) return null;
+    const raw = await readFile(path, "utf8");
+    if (Buffer.byteLength(raw, "utf8") > MAX_CONSENT_BYTES) return null;
+    const value: unknown = JSON.parse(raw);
+    if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+    const consent = value as Record<string, unknown>;
+    if (consent.schemaVersion !== 1 || consent.policyVersion !== CONSENT_POLICY_VERSION || typeof consent.enabled !== "boolean" || typeof consent.updatedAt !== "string" || !Number.isFinite(Date.parse(consent.updatedAt))) return null;
+    return consent as unknown as TelemetryConsent;
   } catch {
-    // marker missing → first run
+    return null;
   }
+}
 
-  console.log("");
-  console.log(
-    chalk.gray(
-      "Verglos sends scan metadata: a derived project fingerprint/name, versions, platform, score/counts, provenance flags, duration, and detector names.",
-    ),
-  );
-  console.log(
-    chalk.gray(
-      "  No source, paths, finding text, snippets, or matched secret values are included. Paid scans send a license bearer for account association. Opt out: --no-telemetry or VERGLOS_TELEMETRY=0",
-    ),
-  );
-  console.log("");
-
+export async function writeTelemetryConsent(enabled: boolean): Promise<TelemetryConsent> {
+  const path = consentPath();
+  const directory = join(configuredHome(), ".verglos");
+  await mkdir(directory, { recursive: true, mode: 0o700 });
+  const directoryEntry = await lstat(directory);
+  if (!directoryEntry.isDirectory()) throw new Error("Verglos state path must be a regular directory");
   try {
-    await mkdir(join(homedir(), ".verglos"), { recursive: true });
-    await writeFile(DISCLOSURE_MARKER, new Date().toISOString(), "utf8");
-  } catch {
-    // Non-fatal — worst case we show it again next run.
+    const existing = await lstat(path);
+    if (!existing.isFile()) throw new Error("telemetry consent must be a regular file");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
+  const consent: TelemetryConsent = { schemaVersion: 1, policyVersion: CONSENT_POLICY_VERSION, enabled, updatedAt: new Date().toISOString() };
+  const temporary = `${path}.${process.pid}.${randomUUID()}.tmp`;
+  const handle = await open(temporary, "wx", 0o600);
+  try {
+    await handle.writeFile(`${JSON.stringify(consent)}\n`, "utf8");
+    await handle.sync();
+  } finally {
+    await handle.close();
+  }
+  try {
+    await rename(temporary, path);
+  } catch (error) {
+    await unlink(temporary).catch(() => undefined);
+    throw error;
+  }
+  return consent;
+}
+
+export async function isTelemetryDisabled(explicitFlag?: boolean, nonInteractive = false): Promise<boolean> {
+  if (explicitFlag === true) return true;
+  const override = process.env.VERGLOS_TELEMETRY?.trim().toLowerCase();
+  if (["0", "false", "off", "no"].includes(override ?? "")) return true;
+  if (["1", "true", "on", "yes"].includes(override ?? "")) return false;
+  if (nonInteractive) return true;
+  return (await readTelemetryConsent())?.enabled !== true;
+}
+
+export function isExplicitTelemetryOptOut(explicitFlag?: boolean): boolean {
+  if (explicitFlag === true) return true;
+  return ["0", "false", "off", "no"].includes(process.env.VERGLOS_TELEMETRY?.trim().toLowerCase() ?? "");
+}
+
+export function printTelemetryConsentPreview(): void {
+  console.log("Verglos scan analytics consent preview");
+  console.log("Purpose: improve CLI reliability using aggregate scan metadata.");
+  console.log("Fields: CLI major.minor, Node major, OS family, score band, finding-count bands, duration band, coarse result band.");
+  console.log("Excluded: project/repository identity, license/account credentials, source, paths, finding text, detector names, and matched secret values.");
+  console.log("Consent is stored locally and can be revoked with `verglos privacy telemetry disable`.");
+  console.log("Transmission is disabled until hosted retention and deletion controls are qualified.");
 }
 
 interface SendOptions {
   cliVersion: string;
   durationMs: number;
-  detectorsRun?: string[];
-  verifySecrets?: boolean;
-}
-
-/**
- * Extract a human-readable project name from the fingerprint result's
- * `details` field. For a git-source fingerprint, `details` is shaped
- * like `github.com/owner/repo@abc1234` — we want just `owner/repo` so
- * the account UI shows something a person recognises instead of a
- * bare 12-char hash. Package-source falls back to the raw name.
- * Never throws; unresolvable → undefined.
- */
-export function projectNameFromDetails(
-  details: string | undefined,
-): string | undefined {
-  if (!details) return undefined;
-  // Strip @<sha> suffix if present
-  const beforeAt = details.split("@")[0];
-  if (!beforeAt) return undefined;
-  // github.com/owner/repo → owner/repo (also gitlab / bitbucket / gitea)
-  const parts = beforeAt.split("/").filter(Boolean);
-  const knownHost =
-    parts[0] === "github.com" ||
-    parts[0] === "gitlab.com" ||
-    parts[0] === "bitbucket.org" ||
-    parts[0] === "codeberg.org";
-  if (parts.length >= 3 && knownHost) {
-    return parts.slice(1).join("/").slice(0, 200);
-  }
-  // Bare name (package-source or unknown remote) — return as-is, capped
-  return beforeAt.slice(0, 200);
-}
-
-async function fetchOnce(
-  url: string,
-  init: RequestInit,
-  timeoutMs: number,
-): Promise<Response | null> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    return await fetch(url, { ...init, signal: controller.signal });
-  } catch (err) {
-    debug("fetch failed:", err instanceof Error ? err.message : err);
-    return null;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-async function isRetryable(res: Response | null): Promise<boolean> {
-  if (!res) return true; // network error / timeout / DNS → retry
-  if (res.status >= 500) return true; // server 5xx → retry
-  if (res.status === 429) return true; // rate limit → retry
-  return false;
 }
 
 export async function sendScanEvent(
+  _result: ScanResult,
+  _opts: SendOptions,
+): Promise<void> {
+  debug("scan analytics collection is disabled pending hosted retention/deletion qualification");
+}
+
+type CountBand = "0" | "1-4" | "5-19" | "20+";
+type DurationBand = "lt-1s" | "1-5s" | "5-15s" | "15-60s" | "60s-plus";
+
+function countBand(value: number): CountBand {
+  if (value <= 0) return "0";
+  if (value < 5) return "1-4";
+  if (value < 20) return "5-19";
+  return "20+";
+}
+
+function durationBand(value: number): DurationBand {
+  if (value < 1000) return "lt-1s";
+  if (value < 5000) return "1-5s";
+  if (value < 15000) return "5-15s";
+  if (value < 60000) return "15-60s";
+  return "60s-plus";
+}
+
+function platformFamily(value: string): "windows" | "macos" | "linux" | "other" {
+  if (value === "win32") return "windows";
+  if (value === "darwin") return "macos";
+  if (value === "linux") return "linux";
+  return "other";
+}
+
+function majorMinor(version: string): string {
+  const match = version.match(/^(\d+)\.(\d+)/u);
+  return match ? `${match[1]}.${match[2]}` : "unknown";
+}
+
+export function buildCoarseTelemetryEvent(
   result: ScanResult,
   opts: SendOptions,
-): Promise<void> {
-  // Fingerprint the project so the server can group score-history
-  // rows per repo without ever seeing a path. Cheap — hashes the
-  // git remote + package.json name + resolved root.
-  let fingerprint: string | undefined;
-  let projectName: string | undefined;
-  try {
-    const fp = await computeProjectFingerprint(result.projectRoot);
-    fingerprint = fp.fingerprint ?? undefined;
-    projectName = projectNameFromDetails(fp.details);
-  } catch (err) {
-    // Fingerprint failure is non-fatal — anonymous rows still land.
-    debug("fingerprint failed:", err instanceof Error ? err.message : err);
-  }
-
-  const payload = {
+  environment: { cliVersion?: string; nodeVersion?: string; platform?: string } = {},
+) {
+  const countTotal = Object.values(result.score.counts).reduce((total, count) => total + count, 0);
+  return {
+    schema_version: 2,
     event_id: randomUUID(),
-    fingerprint,
-    project_name: projectName,
-    cli_version: opts.cliVersion,
-    node_version: process.version,
-    platform: platform(),
-    score: result.score.value,
-    finding_critical: result.score.counts.critical,
-    finding_high: result.score.counts.high,
-    finding_medium: result.score.counts.medium,
-    finding_low: result.score.counts.low,
-    finding_info: result.score.counts.info,
-    ai_authored_percent: result.provenance?.aiAuthoredPercent,
-    has_provenance: !!result.provenance,
-    verify_secrets: opts.verifySecrets,
-    duration_ms: opts.durationMs,
-    detectors: opts.detectorsRun,
+    cli_version: majorMinor(environment.cliVersion ?? opts.cliVersion),
+    node_major: (environment.nodeVersion ?? process.version).match(/^v?(\d+)/u)?.[1] ?? "unknown",
+    platform_family: platformFamily(environment.platform ?? platform()),
+    score_band: Math.floor(result.score.value / 20) * 20,
+    finding_count_band: countBand(countTotal),
+    critical_count_band: countBand(result.score.counts.critical),
+    duration_band: durationBand(Math.max(0, opts.durationMs)),
+    result_band: result.score.counts.critical > 0 ? "critical-present" : countTotal > 0 ? "findings-present" : "no-findings",
   };
-
-  // Attach the license key when we have one, so the server can also
-  // write a score_history row keyed on the license for the Pro
-  // dashboard's 30/365/1095-day trend. Users without a stored license
-  // key omit this header; a stored license key associates the event with
-  // that account.
-  const creds = await loadCredentials().catch(() => null);
-  const headers: Record<string, string> = { "content-type": "application/json" };
-  if (creds?.licenseKey) {
-    headers.authorization = `Bearer ${creds.licenseKey}`;
-  }
-
-  const url = `${DEFAULT_API_URL}/api/v1/telemetry/scan`;
-  const body = JSON.stringify(payload);
-  const init: RequestInit = { method: "POST", headers, body };
-
-  debug(
-    "POST",
-    url,
-    "fingerprint",
-    fingerprint?.slice(0, 12) ?? "(none)",
-    "projectName",
-    projectName ?? "(none)",
-    "auth",
-    creds?.licenseKey ? "bearer" : "none",
-  );
-
-  // Attempt 1
-  const first = await fetchOnce(url, init, TIMEOUT_MS);
-  debug("attempt 1 →", first ? `HTTP ${first.status}` : "no response");
-  if (first && !(await isRetryable(first))) return;
-
-  // Retry once with a small delay + jitter. `event_id` deduplicates on
-  // the server via `onConflictDoNothing`, so a retry after a partial
-  // success is safe — it will not double-count.
-  await new Promise((r) => setTimeout(r, RETRY_DELAY_MS + randomInt(0, 250)));
-  const second = await fetchOnce(url, init, TIMEOUT_MS);
-  debug("attempt 2 →", second ? `HTTP ${second.status}` : "no response");
-
-  // Terminal — no third attempt. If both failed, silently drop; the
-  // user's scan report is still on disk and the next scan will re-try
-  // the write with a fresh event_id.
 }
