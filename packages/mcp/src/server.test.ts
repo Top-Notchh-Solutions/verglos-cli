@@ -373,6 +373,7 @@ test("MCP response encoder fails closed for non-serializable payloads", () => {
 });
 
 test("MCP SDK interoperability preserves discovery and entitlement errors", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-mcp-policy-sdk-"));
   const server = createVerglosMcpServer({ plan: "free" });
   const client = new Client({ name: "verglos-test-client", version: "1.0.0" }, { capabilities: {} });
   const [clientTransport, serverTransport] = await InMemoryTransport.createLinkedPair();
@@ -384,9 +385,15 @@ test("MCP SDK interoperability preserves discovery and entitlement errors", asyn
     const denied = await client.callTool({ name: "verglos_hunt_report", arguments: {} }) as { content?: Array<{ type?: string; text?: string }> };
     const payload = JSON.parse(String(denied.content?.[0]?.type === "text" ? denied.content[0].text : "{}")) as { code?: string };
     assert.equal(payload.code, "MCP_ENTITLEMENT_REQUIRED");
+    const fixture = await createPolicyRecord(root);
+    const checked = await client.callTool({ name: "verglos_policy_check", arguments: { manifestPath: fixture.manifestPath, recordStore: fixture.recordStore } }) as { content?: Array<{ type?: string; text?: string }> };
+    const policy = JSON.parse(String(checked.content?.[0]?.type === "text" ? checked.content[0].text : "{}")) as { decision?: string; coverage?: { observationReferencesVerified?: number } };
+    assert.equal(policy.decision, "PASS");
+    assert.equal(policy.coverage?.observationReferencesVerified, 1);
   } finally {
     await client.close();
     await server.close();
+    await rm(root, { recursive: true, force: true });
   }
 });
 
