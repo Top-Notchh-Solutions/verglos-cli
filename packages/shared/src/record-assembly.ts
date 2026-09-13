@@ -1,6 +1,10 @@
 import { createHash } from "node:crypto";
 import { createReleaseRecordManifest, type ReleaseRecordManifestDocument } from "./record-manifest.js";
 import { describeRecordMember } from "./record-store.js";
+import { TOOL_RUN_SCHEMA, parseToolRun } from "./engine.js";
+import { OBSERVATION_SCHEMA, parseObservation } from "./observation.js";
+import { VERIFICATION_ATTEMPT_SCHEMA, parseVerificationAttempt } from "./verification.js";
+import { EXCEPTION_APPROVAL_SCHEMA, POLICY_EXCEPTION_SCHEMA, parseExceptionApproval, parsePolicyException, digestPolicyException } from "./exception.js";
 import { SUBJECT_SCHEMA, parseSubject } from "./subject.js";
 import { POLICY_DOCUMENT_SCHEMA, parsePolicyDocument, policyDocumentDigest } from "./policy-document.js";
 import { POLICY_EVALUATION_SCHEMA, parsePolicyEvaluation } from "./policy-evaluation.js";
@@ -95,6 +99,73 @@ export function assertCompleteReleaseRecordPayloads(
   const subjectIds = new Set(subjects.map((subject) => subject.subjectId));
   if (subjectIds.size !== subjects.length) throw new Error("complete Release Record subject identities must be unique");
 
+  const runs = payloadFor("tool-run").map(({ member, value }) => {
+    requireSchema(member, TOOL_RUN_SCHEMA);
+    return parseToolRun(value);
+  });
+  const runById = new Map(runs.map((run) => [run.runId, run]));
+  if (runById.size !== runs.length) throw new Error("complete Release Record tool-run identities must be unique");
+  for (const run of runs) {
+    if (!subjectIds.has(run.subjectId)) throw new Error("complete Release Record tool-run references a subject not included in the record");
+  }
+
+  const observations = payloadFor("observation").map(({ member, value }) => {
+    requireSchema(member, OBSERVATION_SCHEMA);
+    return parseObservation(value);
+  });
+  const observationById = new Map(observations.map((observation) => [observation.observationId, observation]));
+  if (observationById.size !== observations.length) throw new Error("complete Release Record observation identities must be unique");
+  for (const observation of observations) {
+    if (!subjectIds.has(observation.subjectId)) throw new Error("complete Release Record observation references a subject not included in the record");
+    const run = runById.get(observation.origin.runId);
+    if (!run || run.subjectId !== observation.subjectId) throw new Error("complete Release Record observation must reference an included tool run for the same subject");
+  }
+
+  const verificationAttempts = payloadFor("verification-attempt").map(({ member, value }) => {
+    requireSchema(member, VERIFICATION_ATTEMPT_SCHEMA);
+    return parseVerificationAttempt(value);
+  });
+  const verificationIds = new Set(verificationAttempts.map((attempt) => attempt.attemptId));
+  if (verificationIds.size !== verificationAttempts.length) throw new Error("complete Release Record verification-attempt identities must be unique");
+  for (const attempt of verificationAttempts) {
+    const observation = observationById.get(attempt.observationId);
+    if (!observation || observation.subjectId !== attempt.subjectId || !subjectIds.has(attempt.subjectId)) {
+      throw new Error("complete Release Record verification attempt must reference an included observation for the same subject");
+    }
+  }
+
+  const exceptions = payloadFor("policy-exception").map(({ member, value }) => {
+    requireSchema(member, POLICY_EXCEPTION_SCHEMA);
+    return parsePolicyException(value);
+  });
+  const exceptionById = new Map(exceptions.map((exception) => [exception.exceptionId, exception]));
+  if (exceptionById.size !== exceptions.length) throw new Error("complete Release Record policy-exception identities must be unique");
+  for (const exception of exceptions) {
+    if (!subjectIds.has(exception.scope.subjectId)) throw new Error("complete Release Record policy exception references a subject not included in the record");
+    for (const observationId of exception.scope.observationIds) {
+      const observation = observationById.get(observationId);
+      if (!observation || observation.subjectId !== exception.scope.subjectId) {
+        throw new Error("complete Release Record policy exception must reference included observations for its exact subject");
+      }
+    }
+  }
+
+  const approvals = payloadFor("exception-approval").map(({ member, value }) => {
+    requireSchema(member, EXCEPTION_APPROVAL_SCHEMA);
+    return parseExceptionApproval(value);
+  });
+  const approvalIds = new Set<string>();
+  for (const approval of approvals) {
+    if (approvalIds.has(approval.approvalId)) throw new Error("complete Release Record exception-approval identities must be unique");
+    approvalIds.add(approval.approvalId);
+    const exception = exceptionById.get(approval.target.exceptionId);
+    if (!exception) throw new Error("complete Release Record exception approval must reference an included policy exception");
+    const expected = digestPolicyException(exception);
+    if (approval.target.requestDigest.algorithm !== expected.algorithm || approval.target.requestDigest.value !== expected.value) {
+      throw new Error("complete Release Record exception approval does not bind the included policy exception digest");
+    }
+  }
+
   const policies = payloadFor("policy");
   if (policies.length !== 1) throw new Error("complete Release Record requires exactly one policy payload");
   requireSchema(policies[0]!.member, POLICY_DOCUMENT_SCHEMA);
@@ -104,6 +175,14 @@ export function assertCompleteReleaseRecordPayloads(
   if (evaluations.length !== 1) throw new Error("complete Release Record requires exactly one policy-evaluation payload");
   requireSchema(evaluations[0]!.member, POLICY_EVALUATION_SCHEMA);
   const evaluation = parsePolicyEvaluation(evaluations[0]!.value);
+  for (const check of evaluation.checks) {
+    for (const observationId of check.observationIds) {
+      const observation = observationById.get(observationId);
+      if (!observation || observation.subjectId !== evaluation.subjectId) {
+        throw new Error("complete Release Record policy evaluation references an observation not included for its exact subject");
+      }
+    }
+  }
 
   const decisions = payloadFor("release-decision");
   if (decisions.length !== 1) throw new Error("complete Release Record requires exactly one release-decision payload");
