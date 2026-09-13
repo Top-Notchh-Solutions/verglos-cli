@@ -330,7 +330,7 @@ test("fix CLI approved JSON mutation uses the exact receipt and reports the writ
     const testReceipt = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174006", action: "execute", actor: "agent", target: testPlan.target, files: ["test/verification.test.js"], network: [], policyEffect: testPlan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
     const testReceiptPath = join(root, "test-approval.json");
     await writeFile(testReceiptPath, JSON.stringify(testReceipt));
-    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", receiptPath, "--test-file", "test/verification.test.js", "--test-approval-receipt", testReceiptPath, "--rescan"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", receiptPath, "--test-file", "test/verification.test.js", "--test-approval-receipt", testReceiptPath, "--rescan"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1", VERGLOS_APPROVAL_STORE: join(home, ".verglos", "approvals") } });
     assert.equal(result.exitCode, 0, `${result.stdout}\n${result.stderr}`);
     const output = JSON.parse(result.stdout) as { fixed: number; rescanned: boolean; tests: { status: string; files: string[]; durationMs: number; outputBytes: number; outputTruncated: boolean; executionNotice: string }; planned: readonly { action: string }[] };
     assert.equal(output.fixed, 1);
@@ -340,8 +340,38 @@ test("fix CLI approved JSON mutation uses the exact receipt and reports the writ
     assert.equal(output.tests.outputTruncated, false);
     assert.match(output.tests.executionNotice, /no sandbox was applied/);
     assert.equal(output.planned[0]?.action, "patch");
+    assert.deepEqual(await readApprovalReceipt(join(home, ".verglos", "approvals"), testReceipt.requestDigest), testReceipt);
+    assert.deepEqual(await readApprovalReceipt(join(home, ".verglos", "approvals"), receipt.requestDigest), receipt);
     assert.equal(result.stderr, "");
     assert.match(await readFile(join(root, "next.config.js"), "utf8"), /Content-Security-Policy/);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
+test("fix refuses to mutate or execute tests when the configured approval audit store fails", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-test-audit-failure-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-fix-test-audit-home-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
+    const original = "const nextConfig = {}; module.exports = nextConfig;\n";
+    await writeFile(join(root, "next.config.js"), original);
+    await mkdir(join(root, "test"));
+    await writeFile(join(root, "test", "selected.test.js"), "throw new Error('must not execute');\n");
+    await mkdir(join(home, ".verglos"), { recursive: true });
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    const mutateReceipt = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174008", action: "mutate", actor: "human", target: await headerFixWorkspaceTarget(root), files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const testPlan = await planHeaderFixTests(root, ["test/selected.test.js"]);
+    const testReceipt = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174009", action: "execute", actor: "agent", target: testPlan.target, files: ["test/selected.test.js"], network: [], policyEffect: testPlan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const mutatePath = join(root, "mutate-approval.json");
+    const testPath = join(root, "execute-approval.json");
+    const invalidStore = join(home, ".verglos", "approval-store-is-a-file");
+    await writeFile(mutatePath, JSON.stringify(mutateReceipt));
+    await writeFile(testPath, JSON.stringify(testReceipt));
+    await writeFile(invalidStore, "not a directory");
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", mutatePath, "--test-file", "test/selected.test.js", "--test-approval-receipt", testPath], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1", VERGLOS_APPROVAL_STORE: invalidStore } });
+    assert.equal(result.exitCode, 78);
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "FIX_TEST_APPROVAL_AUDIT_FAILED", message: "selected test approval audit persistence failed" });
+    assert.equal(result.stderr, "");
+    assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
   } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
 });
 

@@ -33,7 +33,7 @@ import {
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
 import { executeTargetInspect } from "./target-inspect.js";
-import { ApprovalReceiptSchema, authorizeAgentAction, listCachedEngines, type ApprovalReceipt } from "@verglos/shared";
+import { ApprovalReceiptSchema, authorizeAgentAction, listCachedEngines, putApprovalReceipt, type ApprovalReceipt } from "@verglos/shared";
 
 function reportPreflightError(json: boolean | undefined, quiet: boolean | undefined, code: string, humanMessage: string, machineMessage: string): void {
   if (json) console.log(JSON.stringify({ status: "error", code, message: machineMessage }));
@@ -680,6 +680,14 @@ program
       } catch {
         reportPreflightError(opts.json, opts.quiet, "FIX_TEST_APPROVAL_DENIED", "selected test execution approval is invalid or does not match the exact workspace, file set, and content digests", "selected test execution approval denied");
         process.exit(78);
+      }
+      if (process.env.VERGLOS_APPROVAL_STORE) {
+        try {
+          await putApprovalReceipt(process.env.VERGLOS_APPROVAL_STORE, testReceipt);
+        } catch {
+          reportPreflightError(opts.json, opts.quiet, "FIX_TEST_APPROVAL_AUDIT_FAILED", "selected test approval could not be persisted to the configured audit store; no mutation or tests were run", "selected test approval audit persistence failed");
+          process.exit(78);
+        }
       }
     }
     let receipt: ApprovalReceipt;
