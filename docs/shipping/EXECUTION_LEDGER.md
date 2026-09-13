@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-13 · CLI LOCAL-008 exception/export projection acceptance
+
+- **Acceptance:** `LOCAL-008` complete at CLI PR #38 exact head `bee63e3ad76850cd1a6af0345cb5498f87c381ca`. `verglos policy exception <exceptionPath> --approval <path>` is a read-only view of exact exception scope, owner/reason, compensating controls, reversal triggers, validity window, approval decision/digest binding/time state, and export-format support. It explicitly leaves applicability `not-evaluated`; unsupported `.vgl`/JSON, standards, HTML, and PDF formats are labeled not integrated/mapped/implemented rather than advertised as working exports.
+- **Verification:** focused tests pass 7/7; forced uncached `pnpm exec turbo run test typecheck build --filter=verglos --force` passes 8/8 Turbo tasks; `git diff --check` passes; exact-head self-scan `34764793925` and all nine platform cells in matrix `34764794099` pass. PR #38 is OPEN/CLEAN.
+- **Tracking:** recount from the task checkboxes gives 140 unchecked / 129 checked / 269 total. This corrects the stale 143/126 traceability summary; CLI-local tracker mirror is being synchronized from the authoritative private tracker.
+- **Scope:** no exception application/evaluation, export generation, signing, upload, production DB read/write/migration, merge, deploy, or release. Internal shipping docs remain local-only. Next acceptance batch: AGENT-003 MCP contract reconciliation.
+
 ## 2026-09-13 · CLI LOCAL-002 acceptance and tracker reconciliation
 
 - **Acceptance:** `LOCAL-002` complete at CLI commit `f494c3d` (PR #38 exact head `f494c3d6be6481112d99a5ec04d8a6cb7d156796`). The strict v1 config schema bounds engine/Hunt/record/telemetry sections; migration inspection reports obsolete/unsupported/invalid/inactive settings without mutation or evaluating legacy JavaScript; scan refuses to apply migration-only settings.
