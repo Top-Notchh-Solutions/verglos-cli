@@ -2,7 +2,7 @@
 
 Updated: 2026-09-14
 
-Current checkpoint (2026-09-14): **137 unchecked / 132 checked / 269 total**, recalculated from all task checkboxes. CLI PR #38 is OPEN at `b52065b2bb4532d80f8ae18a99d907ca39a2215b`; local uncached CLI tests/typecheck/build pass 18/18 Turbo tasks and `git diff --check` passes. Exact-head hosted checks are in progress; PR is not currently merge-ready. RECORD-002 remains open after transport-neutral typed redaction-manifest generation and verification binding: portable `.vgl` transport remains unselected, and packaging/signature/viewer integration plus full acceptance evidence remain. No checkbox changed. No production DB read/write/migration, merge, deployment, release, or marketing changes. Internal docs remain local-only.
+Current checkpoint (2026-09-14): **137 unchecked / 132 checked / 269 total**, recalculated from all task checkboxes. CLI PR #38 is OPEN/CLEAN at `b52065b2bb4532d80f8ae18a99d907ca39a2215b`; local uncached CLI tests/typecheck/build pass 18/18 Turbo tasks, `git diff --check` passes, and all ten exact-head hosted checks pass. No review decision is recorded. RECORD-002 remains open after transport-neutral typed redaction-manifest generation and verification binding: portable `.vgl` transport remains unselected, and packaging/signature/viewer integration plus full acceptance evidence remain. No checkbox changed. No production DB read/write/migration, merge, deployment, release, or marketing changes. Internal docs remain local-only.
 
 CI follow-up (2026-09-14): Windows Node 20 completed successfully after the first checkpoint was recorded. All ten exact-head hosted checks for CLI PR #38 are green at `e95e0e7a56a1318e4302eefe3f11a1563b0d8f6f`; PR state is OPEN/CLEAN.
 
