@@ -382,7 +382,7 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 | Variable | Effect |
 |---|---|
 | `VERGLOS_API_URL` | Override the server (default: `https://verglos.com`) |
-| `VERGLOS_TELEMETRY=0` | Disable anonymous scan telemetry |
+| `VERGLOS_TELEMETRY=0` | Disable scan telemetry; non-interactive scans otherwise require `VERGLOS_TELEMETRY=1` |
 | `VERGLOS_PROVENANCE_FILE_CAP` | Override the 300-file cap on provenance analysis (raise for exhaustive scans, lower for speed) |
 | `VERGLOS_LICENSE_KEY` | Consumed by `verglos activate --ci` in GitHub Actions |
 | `VERGLOS_AS_PLAN` | _Founder only._ Simulate a plan (`free` / `pro` / `team` / `studio` / `enterprise`) for testing |
@@ -391,9 +391,9 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 
 ## Privacy
 
-Verglos runs 100% locally. **Your source code is never uploaded.**
+Verglos analyzes source locally; this does not mean the CLI makes no network requests. A normal scan may query npm/OSV and send scan telemetry. Quiet, JSON, and CI scans keep telemetry off unless `VERGLOS_TELEMETRY=1` explicitly opts in.
 
-Anonymous scan telemetry (event ID, CLI version, Node version, platform, finding counts, project fingerprint hash, duration) is POSTed to `verglos.com/api/v1/telemetry/scan` after each scan. No source, no file paths, no findings text, no identity, no license key. Disable per-invocation with `--no-telemetry` or globally with `VERGLOS_TELEMETRY=0`.
+Interactive scan telemetry is enabled by default and POSTed to `verglos.com/api/v1/telemetry/scan`. It can include a derived project fingerprint/name, event ID, CLI/Node versions, platform, score and severity counts, provenance/verification flags, duration, and detector names. When a license key is stored, the request includes it as a bearer credential for account association. The event payload does not include source contents, filesystem paths, finding text/snippets, or matched secret values. Disable a scan event with `--no-telemetry` or set `VERGLOS_TELEMETRY=0`; non-interactive runs require explicit `VERGLOS_TELEMETRY=1` to enable telemetry.
 
 Full disclosure: **[verglos.com/account/docs#privacy](https://verglos.com/account/docs#privacy)**.
 
