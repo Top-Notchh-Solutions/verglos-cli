@@ -224,6 +224,8 @@ test("MCP dispatch treats missing host entitlement as Free, never as an upgrade 
   assertMcpError(denied, { error: "usage", code: "MCP_ENTITLEMENT_REQUIRED", message: "MCP tool requires the pro plan", category: "authorization" });
   const freeTool = responseText(await dispatchTool("verglos_check_before_write", { code: "const x = 1", targetPath: "x.ts" }));
   assert.equal(freeTool.verdict, "allow");
+  assert.equal((freeTool.coverage as { state?: string }).state, "partial");
+  assert.deepEqual((freeTool.coverage as { omittedDetectors?: string[] }).omittedDetectors, ["dependencies", "misconfig", "git-history", "slopsquat", "provenance"]);
 });
 
 test("MCP dispatch rejects unknown runtime entitlement plans", async () => {

@@ -110,22 +110,25 @@ const TOOLS = [
   {
     name: "verglos_check_before_write",
     description:
-      "The killer tool. Agent submits code it's about to write; Verglos returns allow/warn/block and (when possible) a corrected version. Runs only AI-* rules + secret patterns + high-confidence injection checks. <300ms, no network, free forever.",
+      "Agent submits code it's about to write; Verglos returns an allow/warn/block decision, shared Finding records attributed to the requested target path, explicit partial fast-path coverage, and (when possible) a corrected version. Runs only AI-* rules + secret patterns + high-confidence injection checks. No network.",
     inputSchema: {
       type: "object",
       properties: {
-        code: { type: "string", description: "The code the agent is about to write." },
+        code: { type: "string", maxLength: 1000000, description: "The code the agent is about to write; bounded to 1,000,000 UTF-8 bytes at runtime." },
         targetPath: {
           type: "string",
+          maxLength: 4096,
           description:
-            "Target file path (relative or absolute). Verglos uses the extension for language inference.",
+            "Target file path (relative or absolute). Verglos uses the basename extension for language inference and preserves this exact path as finding attribution.",
         },
         language: {
           type: "string",
+          maxLength: 128,
           description: "Optional language hint (e.g. 'ts', 'tsx').",
         },
         context: {
           type: "string",
+          maxLength: 4096,
           description: "Optional freeform description of what the code is for.",
         },
       },
@@ -142,10 +145,12 @@ const TOOLS = [
       properties: {
         packageName: {
           type: "string",
+          maxLength: 512,
           description: "The npm package name (e.g. 'reqeusts' or '@stripee/js').",
         },
         version: {
           type: "string",
+          maxLength: 512,
           description: "Optional version to check for CVEs. Defaults to 'latest'.",
         },
         ...APPROVAL_RECEIPT_PROPERTY,

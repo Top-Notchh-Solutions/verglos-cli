@@ -7,6 +7,7 @@ export function parseCheckBeforeWriteArgs(value: unknown): CheckBeforeWriteInput
   const input = value as Record<string, unknown>;
   for (const key of Object.keys(input)) if (!["code", "targetPath", "language", "context"].includes(key)) throw new Error(`unknown check_before_write argument: ${key}`);
   if (typeof input.code !== "string" || typeof input.targetPath !== "string" || (input.language !== undefined && typeof input.language !== "string") || (input.context !== undefined && typeof input.context !== "string")) throw new Error("check_before_write requires string code and targetPath");
+  if (input.language !== undefined && (Buffer.byteLength(input.language, "utf8") > 128 || /[\u0000-\u001f\u007f]/u.test(input.language))) throw new Error("check_before_write language exceeds 128 UTF-8 bytes or contains control characters");
   const parsed = { code: input.code, targetPath: input.targetPath, language: input.language as string | undefined, context: input.context as string | undefined };
   validateAgentInputBounds(parsed); return parsed;
 }

@@ -42,9 +42,22 @@ export interface CheckBeforeWriteInput {
 export interface CheckBeforeWriteResult {
   verdict: "allow" | "warn" | "block";
   findings: Finding[];
+  coverage: {
+    state: "partial";
+    includedDetectors: readonly ["secrets", "injection", "ai-patterns"];
+    omittedDetectors: readonly ["dependencies", "misconfig", "git-history", "slopsquat", "provenance"];
+    limitations: readonly ["fast-path-only", "full-project-scan-not-run"];
+  };
   correctedCode?: string;
   reasoning: string;
 }
+
+const CHECK_BEFORE_WRITE_COVERAGE: CheckBeforeWriteResult["coverage"] = Object.freeze({
+  state: "partial" as const,
+  includedDetectors: ["secrets", "injection", "ai-patterns"] as const,
+  omittedDetectors: ["dependencies", "misconfig", "git-history", "slopsquat", "provenance"] as const,
+  limitations: ["fast-path-only", "full-project-scan-not-run"] as const,
+});
 
 /**
  * Try to auto-correct known AI-* patterns. Currently only handles
@@ -142,10 +155,16 @@ export async function checkBeforeWrite(
   if (input.language !== undefined && typeof input.language !== "string") {
     throw new Error("check_before_write language must be a string");
   }
+  if (input.language !== undefined && (Buffer.byteLength(input.language, "utf8") > 128 || /[\u0000-\u001f\u007f]/u.test(input.language))) {
+    throw new Error("check_before_write language exceeds 128 UTF-8 bytes or contains control characters");
+  }
   if (input.context !== undefined && typeof input.context !== "string") {
     throw new Error("check_before_write context must be a string");
   }
   validateAgentInputBounds(input);
+  if (/[\u0000-\u001f\u007f]/u.test(input.targetPath)) {
+    throw new Error("check_before_write targetPath must not contain control characters");
+  }
   const tmpRoot = await mkdtemp(join(tmpdir(), "verglos-cbw-"));
   try {
     // Preserve extension so language-aware detectors (AI-* code-shape
@@ -187,7 +206,10 @@ export async function checkBeforeWrite(
     const correctedCode = tryCorrectCode(input.code, findings);
     const reasoning = buildReasoning(verdict, findings);
 
-    return { verdict, findings, correctedCode, reasoning };
+    // The detector sees a temporary file, but agents need attribution to the
+    // exact user-supplied target, not a lossy basename or ephemeral temp path.
+    const attributedFindings = findings.map((finding) => ({ ...finding, file: input.targetPath }));
+    return { verdict, findings: attributedFindings, coverage: CHECK_BEFORE_WRITE_COVERAGE, correctedCode, reasoning };
   } finally {
     await rm(tmpRoot, { recursive: true, force: true });
   }

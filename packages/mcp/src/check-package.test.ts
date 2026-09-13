@@ -11,6 +11,7 @@ test("check_package reports complete clean coverage", async () => {
   });
   assert.equal(result.verdict, "safe");
   assert.equal(result.coverage, "complete");
+  assert.deepEqual(result.cves, []);
   assert.deepEqual(result.limitations, []);
 });
 
@@ -32,6 +33,7 @@ test("check_package preserves blocking CVEs", async () => {
   });
   assert.equal(result.verdict, "block");
   assert.equal(result.coverage, "complete");
+  assert.deepEqual(result.cves, [{ id: "CVE-1", source: "OSV.dev", severity: "HIGH", summary: undefined }]);
 });
 
 test("check_package reports registry and latest-version gaps", async () => {
@@ -52,4 +54,6 @@ test("check_package rejects malformed direct calls", async () => {
   await assert.rejects(() => checkPackage({} as any), /packageName/);
   await assert.rejects(() => checkPackage({ packageName: "x", version: 1 } as any), /version/);
   await assert.rejects(() => checkPackage({ packageName: "x", extra: true } as any), /unknown/);
+  await assert.rejects(() => checkPackage({ packageName: "x", version: "1\u0000.0" }), /control characters/);
+  await assert.rejects(() => checkPackage({ packageName: "x", version: "1".repeat(513) }), /exceeds 512/);
 });
