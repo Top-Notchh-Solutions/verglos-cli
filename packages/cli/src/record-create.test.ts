@@ -107,6 +107,7 @@ test("complete record create, verify, and export preserve canonical policy and s
     assert.equal(bundle.manifest.members.filter((member) => member.kind === "redaction-manifest").length, 1);
     const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(bundle.manifest));
     assert.equal(await executeRecordCreate(source, manifestPath, output, true, true, true), 0);
+    assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true), 0);
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true, undefined, undefined, undefined, undefined, true), 0);
     const statementPath = join(root, "release.intoto.json");
     assert.equal(await executeRecordExport(output, join(output, "manifest.json"), statementPath, true, true), 0);

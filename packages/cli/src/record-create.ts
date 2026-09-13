@@ -7,6 +7,7 @@ import {
   parseReleaseRecordManifestJson,
   assertCompleteReleaseRecord,
   assertCompleteReleaseRecordPayloads,
+  assertReleaseRecordRedactionPayloads,
   putRecordMemberFromFile,
   type ReleaseRecordManifestDocument,
 } from "@verglos/shared";
@@ -77,7 +78,7 @@ export async function executeRecordCreate(
       if (inspected.digest !== expected || inspected.size !== member.size) throw new Error(`record member ${member.path} does not match manifest digest or size`);
       if (digests.has(inspected.digest)) throw new Error(`record member digest is duplicated: ${member.path}`);
       digests.add(inspected.digest);
-      if (complete && ["subject", "lineage", "tool-run", "observation", "verification-attempt", "policy-exception", "exception-approval", "policy", "policy-evaluation", "release-decision", "redaction-manifest"].includes(member.kind)) {
+      if ((complete && ["subject", "lineage", "tool-run", "observation", "verification-attempt", "policy-exception", "exception-approval", "policy", "policy-evaluation", "release-decision"].includes(member.kind)) || member.kind === "redaction-manifest") {
         const semanticBytes = await readRegular(memberPath, MAX_MANIFEST_BYTES, `complete record member ${member.path}`);
         const semanticDigest = `sha256:${createHash("sha256").update(semanticBytes).digest("hex")}`;
         if (semanticDigest !== inspected.digest || semanticBytes.byteLength !== inspected.size) throw new Error(`record member ${member.path} changed during complete-graph validation`);
@@ -85,6 +86,7 @@ export async function executeRecordCreate(
       }
       inputs.push({ path: member.path, sourcePath: memberPath, size: inspected.size, digest: inspected.digest });
     }
+    assertReleaseRecordRedactionPayloads(manifest, completePayloads);
     if (complete) assertCompleteReleaseRecordPayloads(manifest, completePayloads);
     // Do not create the destination until every input has passed validation.
     // A failed preflight must leave no empty record store behind.

@@ -97,6 +97,38 @@ export function assertCompleteReleaseRecord(manifest: ReleaseRecordManifestDocum
   return parsed;
 }
 
+/** Verify a declared redaction manifest against the record's member descriptors and bytes. */
+export function assertReleaseRecordRedactionPayloads(
+  manifest: ReleaseRecordManifestDocument,
+  payloads: ReadonlyMap<string, Uint8Array>,
+): ReleaseRecordManifestDocument {
+  const parsed = createReleaseRecordManifest(manifest);
+  if (!["complete", "partial"].includes(parsed.redaction.status)) return parsed;
+  const members = parsed.members.filter((member) => member.kind === "redaction-manifest");
+  if (members.length !== 1 || members[0]!.redaction === "omitted") throw new Error("complete or partial redaction requires exactly one included redaction manifest member");
+  const member = members[0]!;
+  if (!member.schema || member.schema.id !== REDACTION_MANIFEST_SCHEMA.id || member.schema.version !== REDACTION_MANIFEST_SCHEMA.version) {
+    throw new Error(`complete Release Record member schema does not match its payload: ${member.path}`);
+  }
+  const bytes = payloads.get(member.path);
+  if (!bytes) throw new Error(`complete or partial redaction manifest payload is missing: ${member.path}`);
+  const actualDigest = createHash(member.digest.algorithm).update(bytes).digest("hex");
+  if (bytes.byteLength !== member.size || actualDigest !== member.digest.value) throw new Error(`Release Record redaction manifest payload does not match its declared digest or size: ${member.path}`);
+  let value: unknown;
+  try { value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)); }
+  catch { throw new Error(`complete or partial redaction manifest JSON payload is invalid: ${member.path}`); }
+  const redactionManifest = parseRedactionManifest(value);
+  if (redactionManifest.status !== parsed.redaction.status) throw new Error("Release Record redaction status does not match its redaction manifest");
+  const declaredDigest = parsed.redaction.manifestDigest ? `${parsed.redaction.manifestDigest.algorithm}:${parsed.redaction.manifestDigest.value}` : "";
+  if (`${member.digest.algorithm}:${member.digest.value}` !== declaredDigest) throw new Error("Release Record redaction digest does not match the included redaction manifest");
+  const expectedEntries = parsed.members.filter((candidate) => candidate.kind !== "redaction-manifest").map((candidate) => `${candidate.digest.algorithm}:${candidate.digest.value}:${candidate.redaction}`).sort();
+  const actualEntries = redactionManifest.members.map((entry) => `${entry.memberDigest.algorithm}:${entry.memberDigest.value}:${entry.disposition}`).sort();
+  if (expectedEntries.length !== actualEntries.length || expectedEntries.some((entry, index) => entry !== actualEntries[index])) {
+    throw new Error("Release Record redaction manifest does not cover the exact declared member digests and dispositions");
+  }
+  return parsed;
+}
+
 /** Validate the canonical graph bindings using the actual member payloads. */
 export function assertCompleteReleaseRecordPayloads(
   manifest: ReleaseRecordManifestDocument,
@@ -247,19 +279,6 @@ export function assertCompleteReleaseRecordPayloads(
     throw new Error("complete Release Record decision does not bind the included policy evaluation payload");
   }
   if (Date.parse(decision.generatedAt) > Date.parse(parsed.generatedAt)) throw new Error("complete Release Record decision timestamp is after manifest generation");
-  if (["complete", "partial"].includes(parsed.redaction.status)) {
-    const redactionMembers = payloadFor("redaction-manifest");
-    if (redactionMembers.length !== 1) throw new Error("complete or partial redaction requires exactly one included redaction manifest payload");
-    requireSchema(redactionMembers[0]!.member, REDACTION_MANIFEST_SCHEMA);
-    const redactionManifest = parseRedactionManifest(redactionMembers[0]!.value);
-    if (redactionManifest.status !== parsed.redaction.status) throw new Error("Release Record redaction status does not match its redaction manifest");
-    const redactionMemberDigest = `${redactionMembers[0]!.member.digest.algorithm}:${redactionMembers[0]!.member.digest.value}`;
-    const declaredDigest = parsed.redaction.manifestDigest ? `${parsed.redaction.manifestDigest.algorithm}:${parsed.redaction.manifestDigest.value}` : "";
-    if (redactionMemberDigest !== declaredDigest) throw new Error("Release Record redaction digest does not match the included redaction manifest");
-    const expectedEntries = parsed.members.filter((member) => member.kind !== "redaction-manifest").map((member) => `${member.digest.algorithm}:${member.digest.value}:${member.redaction}`).sort();
-    const actualEntries = redactionManifest.members.map((member) => `${member.memberDigest.algorithm}:${member.memberDigest.value}:${member.disposition}`).sort();
-    if (expectedEntries.length !== actualEntries.length || expectedEntries.some((entry, index) => entry !== actualEntries[index])) throw new Error("Release Record redaction manifest does not cover the exact declared member digests and dispositions");
-  }
-
+  assertReleaseRecordRedactionPayloads(parsed, payloads);
   return parsed;
 }
