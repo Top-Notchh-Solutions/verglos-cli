@@ -275,6 +275,8 @@ export interface ScanOptions {
    * scanning must never touch the network on the free path.
    */
   verifySecrets?: boolean;
+  /** Permit optional registry/advisory requests; defaults to true for legacy scan compatibility. */
+  allowNetwork?: boolean;
   /** Abort an in-progress scan between bounded detector/provenance stages. */
   signal?: AbortSignal;
   /** Maximum concurrent detector executions (defaults to a bounded value). */

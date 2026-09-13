@@ -16,6 +16,7 @@ import {
   printFirstRunDisclosureIfNeeded,
   sendScanEvent,
 } from "./telemetry.js";
+import { executeInspectionSnapshot } from "./inspection-command.js";
 
 /**
  * Default detector set for a full `verglos scan`. Free-tier detectors
@@ -72,6 +73,10 @@ export interface ScanCommandOptions {
    * full-scan baseline, so printing a delta would lie.
    */
   focused?: boolean;
+  /** Opt-in canonical snapshot output; leaves the legacy scan flow untouched when absent. */
+  snapshotPath?: string;
+  inspectionProducers?: readonly string[];
+  importPaths?: readonly string[];
   /**
    * Whether to include the git-history detector. Defaults to true. Set
    * false for `verglos deps`, where combing commits for leaked secrets
@@ -84,6 +89,29 @@ export async function executeScan(
   options: ScanCommandOptions = {},
 ): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
+
+  if (options.snapshotPath) {
+    let detectors = options.detectors;
+    if (!detectors) {
+      detectors = [...FREE_DETECTORS];
+      for (const { detector, capability } of PRO_DETECTOR_CAPABILITIES) {
+        if (await hasCapability(capability)) detectors.push(detector);
+      }
+    }
+    return executeInspectionSnapshot({
+      cwd: projectRoot,
+      snapshotPath: options.snapshotPath,
+      producers: options.inspectionProducers,
+      importPaths: options.importPaths,
+      configPath: options.configPath,
+      detectors,
+      minConfidence: options.all ? 0 : undefined,
+      strict: options.strict,
+      noProvenance: options.noProvenance,
+      json: options.json,
+      quiet: options.quiet,
+    });
+  }
 
   const spinner = options.quiet || options.json ? null : ora("Scanning project...").start();
 

@@ -109,6 +109,7 @@ async function queryOsv(name: string, version: string, onLimitation?: (limitatio
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ package: { name, ecosystem: "npm" }, version }),
       signal: controller.signal,
+      redirect: "error",
     });
     if (!res.ok) { onLimitation?.("OSV advisory lookup was unavailable"); return []; }
     const data = (await res.json()) as OsvResponse;
@@ -164,6 +165,11 @@ export const vendoredCvesDetector: Detector = {
     }
 
     const capped = unique.slice(0, MAX_QUERIES_PER_SCAN);
+
+    if (context?.allowNetwork === false) {
+      if (capped.length > 0) context.onLimitation?.("OSV vendored-library lookup skipped by network policy");
+      return [];
+    }
 
     const results = await inParallel(
       capped,

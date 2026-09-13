@@ -40,13 +40,15 @@ function reportPreflightError(json: boolean | undefined, quiet: boolean | undefi
   else if (!quiet) console.error(humanMessage);
 }
 
+function collectRepeated(value: string, previous: string[] = []): string[] { return [...previous, value]; }
+
 async function runScanWithErrorBoundary(
-  options: Parameters<typeof executeScan>[0],
+  options: NonNullable<Parameters<typeof executeScan>[0]>,
   output: { readonly json?: boolean; readonly quiet?: boolean },
 ): Promise<number> {
   try {
-    await executeScan(options);
-    return 0;
+    const exitCode = await executeScan(options);
+    return options.snapshotPath ? exitCode : 0;
   } catch (error) {
     const configurationError = error instanceof ScanConfigurationError;
     reportPreflightError(
@@ -63,6 +65,7 @@ async function runScanWithErrorBoundary(
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { executeEngineInstall } from "./engines-install.js";
+import { executeEngineInspection } from "./engines-inspect.js";
 import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
@@ -124,7 +127,7 @@ Command groups:
 `,
   )
   .hook("preAction", async (thisCommand, actionCommand) => {
-    if (actionCommand.name() === "update") return;
+    if (actionCommand.name() === "update" || (actionCommand.name() === "inspect" && actionCommand.parent?.name() === "engines")) return;
     // Program-level --as-plan propagates via env so every downstream
     // entitlement fetch picks it up without option-threading.
     const asPlan = thisCommand.opts().asPlan as string | undefined;
@@ -269,6 +272,15 @@ evidence.command("import <input>")
   });
 
 const engines = program.command("engines").description("Inspect managed engine state");
+engines.command("inspect <engineId>")
+  .description("Inspect an explicitly selected system engine without PATH fallback")
+  .requiredOption("--path <absolute>", "Absolute executable path to inspect")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress output")
+  .action(async (engineId: string, opts: { path: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeEngineInspection(engineId, opts.path, opts));
+  });
+
 engines.command("status")
   .description("List cached engine versions without changing state")
   .option("--json", "Emit machine-readable JSON")
@@ -334,6 +346,9 @@ program
   .option("--output <dir>", "Write HTML/JSON reports to a bounded output directory")
   .option("--policy <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
+  .option("--snapshot <path>", "Write an opt-in canonical inspection snapshot without replacing existing files")
+  .option("--producer <id>", "Select an inspection producer (repeatable: native, trivy, sarif, cyclonedx, spdx, provenance)", collectRepeated, [])
+  .option("--import <path>", "Import bounded evidence into the inspection snapshot (repeatable; use - for stdin)", collectRepeated, [])
   .option(
     "--no-provenance",
     "Skip the AI-authorship analysis (no headline provenance line)",
@@ -358,6 +373,9 @@ program
       output?: string;
       policy?: string;
       policyEvaluation?: string;
+      snapshot?: string;
+      producer: string[];
+      import: string[];
       provenance?: boolean;
       verifySecrets?: boolean;
       hunt?: boolean;
@@ -366,6 +384,15 @@ program
       // Commander sets opts.provenance = false when --no-provenance is passed.
       const noProvenance = opts.provenance === false;
       const noTelemetry = opts.telemetry === false;
+      const inspectionRequested = Boolean(opts.snapshot || opts.producer.length || opts.import.length);
+      if (inspectionRequested && !opts.snapshot) {
+        reportPreflightError(opts.json, opts.quiet, "SCAN_SNAPSHOT_INPUT", "--producer and --import require --snapshot", "inspection snapshot path is required");
+        process.exit(78);
+      }
+      if (opts.watch && inspectionRequested) {
+        reportPreflightError(opts.json, opts.quiet, "SCAN_SNAPSHOT_INPUT", "Snapshot inspection cannot be combined with watch mode.", "inspection snapshot options are incompatible with watch mode");
+        process.exit(78);
+      }
       const scanOptions = {
         quiet: opts.quiet,
         json: opts.json,
@@ -376,7 +403,10 @@ program
         noProvenance,
         verifySecrets: opts.verifySecrets,
         hunt: opts.hunt,
-      noTelemetry,
+        noTelemetry,
+        snapshotPath: opts.snapshot,
+        inspectionProducers: opts.producer,
+        importPaths: opts.import,
       };
       const policyPath = opts.policyEvaluation ?? opts.policy;
       if (policyPath) {

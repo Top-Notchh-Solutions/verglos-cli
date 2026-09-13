@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, mkdir, mkdtemp, readFile, readdir, realpath, rm, stat, writeFile } from "node:fs/promises";
+import { access, chmod, mkdir, mkdtemp, readFile, readdir, realpath, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -263,12 +263,20 @@ test("precommit success is one bounded JSON response", async () => {
 test("Scan JSON mode emits one parseable scan document", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-scan-"));
   try {
-    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--json", "--quiet", "--no-telemetry"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--json", "--quiet", "--no-telemetry"], root, { env: { HOME: root, USERPROFILE: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
     assert.equal(result.exitCode, 0);
     assert.equal(result.stderr, "");
-    const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown };
+    const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown; schemaVersion?: unknown; coverage?: { status?: unknown } };
     await assertSameDirectory(payload.projectRoot, await realpath(root));
     assert.ok(Array.isArray(payload.findings));
+    assert.equal(payload.schemaVersion, undefined, "legacy stdout JSON stays the ScanResult shape");
+    assert.equal(typeof payload.coverage?.status, "string");
+    assert.equal(result.files.includes("verglos-report.json"), true);
+    assert.equal(result.files.includes("verglos-report.html"), true);
+    const report = JSON.parse(await readFile(join(root, "verglos-report.json"), "utf8")) as { schemaVersion?: string; projectRoot?: string };
+    assert.equal(report.schemaVersion, "2.0.0", "legacy report schema remains readable");
+    await assertSameDirectory(report.projectRoot, await realpath(root));
+    assert.match(await readFile(join(root, "verglos-report.html"), "utf8"), /<title>Verglos Security Report/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -282,6 +290,53 @@ test("scan output path writes reports only to the explicitly selected directory"
     assert.deepEqual((await readdir(join(root, "reports"))).sort(), ["verglos-report.html", "verglos-report.json"]);
     await assert.rejects(access(join(root, "verglos-report.html")));
     await assert.rejects(access(join(root, "verglos-report.json")));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("scan snapshot opt-in imports bounded SARIF and refuses to overwrite the snapshot", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-snapshot-"));
+  try {
+    const reportPath = join(root, "report.sarif");
+    const snapshotPath = join(root, "snapshot.json");
+    await writeFile(reportPath, JSON.stringify({ version: "2.1.0", runs: [{ tool: { driver: { name: "fixture" } }, results: [{ ruleId: "fixture.rule", level: "error", message: { text: "RAW_IMPORTED_RESULT_MUST_NOT_ESCAPE" }, locations: [{ physicalLocation: { artifactLocation: { uri: "src/app.ts" }, region: { startLine: 9 } } }] }] }] }));
+    const args = ["--import", tsx, cliEntry, "scan", "--snapshot", "snapshot.json", "--producer", "sarif", "--import", "report.sarif", "--json", "--quiet"];
+    const first = await runCliFixture(process.execPath, args, root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(first.exitCode, 3, first.stderr);
+    assert.equal(first.stderr, "");
+    const summary = JSON.parse(first.stdout) as { status?: string; snapshotDigest?: string; coverage?: { producers?: Array<{ producer: string; state: string; limitations: string[] }> } };
+    assert.equal(summary.status, "incomplete");
+    assert.match(summary.snapshotDigest ?? "", /^sha256:[a-f0-9]{64}$/);
+    assert.equal(summary.coverage?.producers?.[0]?.producer, "sarif");
+    assert.equal(summary.coverage?.producers?.[0]?.state, "incomplete");
+    assert.match(summary.coverage?.producers?.[0]?.limitations.join(" ") ?? "", /does not independently bind/);
+    const originalSnapshot = await readFile(snapshotPath, "utf8");
+    const parsedSnapshot = JSON.parse(originalSnapshot) as { schemaVersion?: string; coverage?: { schemaVersion?: string } };
+    assert.equal(parsedSnapshot.schemaVersion, "1.1.0");
+    assert.equal(parsedSnapshot.coverage?.schemaVersion, "1.1.0");
+    assert.equal(originalSnapshot.includes("RAW_IMPORTED_RESULT_MUST_NOT_ESCAPE"), false);
+    const second = await runCliFixture(process.execPath, args, root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(second.exitCode, 4);
+    assert.deepEqual(JSON.parse(second.stdout), { status: "error", code: "SCAN_FAILURE", message: "scan could not complete" });
+    assert.equal(await readFile(snapshotPath, "utf8"), originalSnapshot);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("engine inspection uses only an explicit binary and refuses non-Trivy executables", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-engine-inspect-"));
+  try {
+    const pathTrivy = join(root, "trivy");
+    await writeFile(pathTrivy, "#!/bin/sh\ncase \"$1\" in\n  --help) printf 'Usage: trivy command target\\n' ;;\n  --version) printf 'Trivy 0.60.0\\n' ;;\n  *) printf 'Usage: trivy %s [flags]\\n' \"$1\" ;;\nesac\n");
+    await chmod(pathTrivy, 0o700);
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "engines", "inspect", "trivy", "--path", process.execPath, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", PATH: root } });
+    assert.equal(result.exitCode, 3);
+    assert.equal(result.stderr, "");
+    const summary = JSON.parse(result.stdout) as { status: string; engineId: string; path: string; trust: string; capabilities: string[]; limitations: string[] };
+    assert.equal(summary.status, "unavailable");
+    assert.equal(summary.engineId, "trivy");
+    assert.equal(summary.path, process.execPath);
+    assert.equal(summary.trust, "unavailable");
+    assert.deepEqual(summary.capabilities, []);
+    assert.match(summary.limitations.join(" "), /did not identify as a Trivy CLI/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -434,6 +489,7 @@ test("every public command leaf provides side-effect-free help", async () => {
     { path: "record project", flags: ["--json", "--quiet"] },
     { path: "record header", flags: ["--json", "--quiet"] },
     { path: "engines status", flags: ["--json", "--quiet"] },
+    { path: "engines inspect", flags: ["--path", "--json", "--quiet"] },
     { path: "engines install", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
     { path: "engines update", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
     { path: "engines rollback", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },

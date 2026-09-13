@@ -121,6 +121,7 @@ async function checkNpmExistence(name: string, onLimitation?: (limitation: strin
       {
         method: "HEAD",
         signal: controller.signal,
+        redirect: "error",
       },
     );
     clearTimeout(timer);
@@ -359,18 +360,24 @@ export const slopsquatDetector: Detector = {
     }
 
     const limited = toCheck.slice(0, MAX_PACKAGES_PER_SCAN);
-    for (let i = 0; i < limited.length; i += BATCH_SIZE) {
-      const batch = limited.slice(i, i + BATCH_SIZE);
-      const results = await checkBatch(batch, context?.onLimitation);
-      for (const [name, exists] of results.entries()) {
-        if (exists === null) continue; // network hiccup — don't cache
-        cache[name] = { exists, checkedAt: new Date().toISOString() };
+    if (context?.allowNetwork === false) {
+      if (names.length > 0) context.onLimitation?.("npm package-existence results are limited to local cache while network access is denied");
+      if (limited.length > 0) context.onLimitation?.("npm package-existence lookup skipped by network policy");
+    } else {
+      for (let i = 0; i < limited.length; i += BATCH_SIZE) {
+        const batch = limited.slice(i, i + BATCH_SIZE);
+        const results = await checkBatch(batch, context?.onLimitation);
+        for (const [name, exists] of results.entries()) {
+          if (exists === null) continue; // network hiccup — don't cache
+          cache[name] = { exists, checkedAt: new Date().toISOString() };
+        }
       }
+      await saveCache(cache);
     }
-    await saveCache(cache);
 
     for (const name of names) {
-      const entry = cache[name];
+      const cachedEntry = cache[name];
+      const entry = cachedEntry && isFresh(cachedEntry) ? cachedEntry : undefined;
       const doesNotExist = entry && entry.exists === false;
 
       if (doesNotExist) {
