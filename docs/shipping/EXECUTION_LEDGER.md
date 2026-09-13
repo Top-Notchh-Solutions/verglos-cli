@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-13 · HUNT-002 local trust-store verification interface (not acceptance)
+
+- **Implementation:** CLI local commit `2318b9d` adds `verglos hunt verify-recipe <recipePath> --trust-store <path>`. It reads bounded regular JSON inputs, verifies recipe/feed/license digests and Ed25519 feed signatures against the exact caller-supplied local root set, rejects tampering and symlinks, and projects store/feed/recipe digests plus license ID/source/text digest without emitting license text. Output explicitly says publisher-root authenticity must be established out of band, legal clearance is not implied, and execution is not authorized. This command does not fetch feeds, install roots, or execute recipes.
+- **Verification:** forced uncached CLI monorepo `test typecheck build` passes 23/23 Turbo tasks. On final code, `pnpm --filter verglos test`, CLI typecheck, `git diff --check`, and `hunt verify-recipe --help` pass; verifier unit/process tests pass 4/4, including tamper and symlink denial. No Docker/runtime execution is part of this verifier path.
+- **Acceptance/tracking:** HUNT-002 remains unchecked; actual authenticated official publisher roots/feed and real licensed recipe provenance are not available, and official-root provisioning/feed rotation remain unimplemented. No checkbox changed: **138 unchecked / 131 checked / 269 total**. HUNT-003 remains dependent on accepted HUNT-002 plus its exact subject/finding planner criteria.
+- **Scope:** CLI commit is local, not pushed; PR #38 remains the separate ordinary-scan phase. No web changes, private-doc publication, production DB read/write/migration, recipe execution, merge, deploy, release, or marketing edits.
+
 ## 2026-09-13 · HUNT signed-feed verification implementation (not acceptance)
 
 - **Implementation:** CLI local commit `40b16dc` on `feat/agent-hunt-phase3` adds a versioned trust-store/feed contract, Ed25519 verification over canonical feed bytes, exact recipe content digest binding, embedded license-text SHA-256 verification, publisher/source metadata binding, root origin/key validity checks, and fail-closed unknown/expired/revoked/tampered handling. Planner and execution gate consume the verification result; execution checks the feed at the approved execution timestamp. Tests replace self-asserted signer allowlists with generated-key signed-feed fixtures.
