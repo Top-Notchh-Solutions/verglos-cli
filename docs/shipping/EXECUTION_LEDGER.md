@@ -1,5 +1,13 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-14 · RECORD-002 typed graph-binding hardening (not acceptance)
+
+- **Implementation:** CLI `d782e86` pushed to existing PR #38. Shared complete-record validation parses included tool-run, observation, verification-attempt, policy-exception, and exception-approval payloads and checks schema references, unique IDs, subject/run/observation relationships, exception request-digest bindings, and policy-evaluation observation references. CLI `record create --complete` loads these typed members under the existing 8 MiB semantic-payload cap; all included members still pass streaming size/digest preflight before publication.
+- **Verification:** focused shared record assembly tests 8/8; forced uncached `pnpm exec turbo run test typecheck build --filter=verglos... --force` 18/18 tasks; `git diff --check` passes. Exact PR head `d782e8602531beed12a96279a7fe409ad04f6d3d`. Hosted self-scan `34777706472` and matrix `34777706494` remain in progress; PR is OPEN and currently `UNSTABLE` due to pending checks. No completed hosted failure observed.
+- **Acceptance/tracking:** no checkbox changed. RECORD-002 remains open pending lineage/redaction/export/viewer/signature generation; signature placement relative to the manifest digest and `.vgl` transport representation remain unresolved. The governing contract keeps the manifest transport-neutral; no ZIP/tar/other packaging choice was inferred. Canonical count remains **137 unchecked / 132 checked / 269 total**.
+- **Scope/operations:** only shared/CLI source and tests were pushed; no private docs/secrets in PR diff. No Web code, database read/write, migration, merge, deployment, npm release, or marketing changes. Private docs remain local-only.
+- **Next:** continue component-level record assembly under existing contracts; do not implement signature/member or packaging semantics without resolving their contract. If that boundary blocks a complete RECORD-002, record it and continue the next independent acceptance item.
+
 ## 2026-09-14 · CLI AGENT-007 acceptance; tracker reconciliation
 
 - **Implementation:** CLI commits `a66e1f4` and `a64feb0` pushed to existing PR #38; exact head `a64feb0bb5c24b665bc464ba623f616d4f35f3f2`. The mutation preview displays a full unified diff and test digests; exact workspace/path receipts gate writes; selected Node tests require a separate execute receipt bound to selected file bytes. Runner caps time, output, test count/concurrency, and V8 heap; optional rescan follows successful tests. Any test/rescan failure triggers rollback, and rollback uncertainty is explicit. The configured approval store persists the test-execution receipt before mutation; audit-store failure prevents mutation and execution.
