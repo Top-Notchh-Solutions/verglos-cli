@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { randomUUID } from "node:crypto";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -139,19 +140,20 @@ test("network MCP tools require exact target and recipient approval before looku
 
 test("approved MCP scan routes through the shared scanner and returns its coverage evidence", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-mcp-approved-scan-"));
+  const fixturePackage = `fixture-safe-package-${randomUUID()}`;
   const priorFetch = globalThis.fetch;
   const recipients: string[] = [];
   globalThis.fetch = async (input, init) => {
     const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
     recipients.push(url);
     assert.equal(init?.redirect, "error");
-    if (url === "https://registry.npmjs.org/fixture-safe-package-xyz") return new Response(null, { status: 200 });
+    if (url === `https://registry.npmjs.org/${encodeURIComponent(fixturePackage)}`) return new Response(null, { status: 200 });
     if (url === "https://api.osv.dev/v1/query") return new Response(JSON.stringify({ vulns: [] }), { status: 200 });
     throw new Error("unexpected network recipient");
   };
   try {
-    await writeFile(join(root, "package.json"), JSON.stringify({ name: "fixture-project", dependencies: { "fixture-safe-package-xyz": "1.0.0" } }));
-    await writeFile(join(root, "package-lock.json"), JSON.stringify({ lockfileVersion: 3, packages: { "": { name: "fixture-project", version: "1.0.0", dependencies: { "fixture-safe-package-xyz": "1.0.0" } }, "node_modules/fixture-safe-package-xyz": { version: "1.0.0" } } }));
+    await writeFile(join(root, "package.json"), JSON.stringify({ name: "fixture-project", dependencies: { [fixturePackage]: "1.0.0" } }));
+    await writeFile(join(root, "package-lock.json"), JSON.stringify({ lockfileVersion: 3, packages: { "": { name: "fixture-project", version: "1.0.0", dependencies: { [fixturePackage]: "1.0.0" } }, [`node_modules/${fixturePackage}`]: { version: "1.0.0" } } }));
     const approvalReceipt = createApprovalReceipt({
       requestId: "923e4567-e89b-12d3-a456-426614174000",
       action: "network",
