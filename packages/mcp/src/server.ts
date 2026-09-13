@@ -88,10 +88,9 @@ const APPROVAL_RECEIPT_PROPERTY = {
 /**
  * MCP server for Verglos.
  *
- * All tool handlers are stubs — they respond with a shape
- * that describes the tool but doesn't execute yet. Real handlers
- * land (check_before_write), follow-up (check_package),
- * follow-up (scan), follow-up (explain_finding).
+ * Shipped pre-write, package, scan, and explanation tools route through shared
+ * scanner, input-boundary, authority, entitlement, and failure contracts.
+ * Hunt and Attest remain explicit alpha stubs and do not execute or sign.
  *
  * Design constraints from design §7:
  *   - Speaks JSON-RPC over stdio
@@ -131,6 +130,7 @@ const TOOLS = [
         },
       },
       required: ["code", "targetPath"],
+      additionalProperties: false,
     },
   },
   {
@@ -151,6 +151,7 @@ const TOOLS = [
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["packageName"],
+      additionalProperties: false,
     },
   },
   {
@@ -164,8 +165,11 @@ const TOOLS = [
           type: "string",
           description: "Absolute path to the project root. Defaults to cwd.",
         },
+        limit: { type: "integer", minimum: 0, maximum: 1000, description: "Maximum findings returned; 0 returns all findings." },
+        noProvenance: { type: "boolean", description: "Opt out of local provenance collection." },
         ...APPROVAL_RECEIPT_PROPERTY,
       },
+      additionalProperties: false,
     },
   },
   {
@@ -183,6 +187,7 @@ const TOOLS = [
         files: { type: "array", items: { type: "string" }, description: "Optional bounded relative file scope for the proposal; no files are written." },
       },
       required: ["rule"],
+      additionalProperties: false,
     },
   },
   {
@@ -197,6 +202,7 @@ const TOOLS = [
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath", "findingId"],
+      additionalProperties: false,
     },
   },
   {
@@ -210,6 +216,7 @@ const TOOLS = [
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath"],
+      additionalProperties: false,
     },
   },
   {
@@ -225,6 +232,7 @@ const TOOLS = [
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["code", "filePath", "language"],
+      additionalProperties: false,
     },
   },
   {
@@ -240,9 +248,9 @@ const TOOLS = [
           enum: ["true", "false", "not_attemptable"],
           description: "Hunt verdict to explain.",
         },
-        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["findingId", "verdict"],
+      additionalProperties: false,
     },
   },
   {
@@ -260,6 +268,7 @@ const TOOLS = [
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath"],
+      additionalProperties: false,
     },
   },
 ] as const;
@@ -364,7 +373,7 @@ export async function dispatchTool(
     const required = capability?.plan;
     const rank = { free: 0, pro: 1, team: 2, studio: 3, enterprise: 4 } as const;
     const plan: unknown = options.plan ?? "free";
-    if (typeof plan !== "string" || !(plan in rank)) return invalid("MCP_ENTITLEMENT_INVALID", "invalid entitlement plan");
+    if (typeof plan !== "string" || !Object.hasOwn(rank, plan)) return invalid("MCP_ENTITLEMENT_INVALID", "invalid entitlement plan");
     if (required && rank[plan as keyof typeof rank] < rank[required]) return invalid("MCP_ENTITLEMENT_REQUIRED", `MCP tool requires the ${required} plan`);
   }
   if (authority?.approvalRequired) {
@@ -437,16 +446,21 @@ export function listAdvertisedTools() {
     if (!capability) throw new Error("MCP capability metadata is missing");
     const authority = mcpToolAuthority(t.name);
     if (!authority) throw new Error("MCP authority metadata is missing");
+    const schemaFields = Object.keys(t.inputSchema.properties).sort();
+    if (schemaFields.join("\n") !== [...capability.inputFields].sort().join("\n")) throw new Error(`MCP input schema is out of sync for ${t.name}`);
+    if (t.inputSchema.additionalProperties !== false) throw new Error(`MCP input schema must reject unknown fields for ${t.name}`);
+    if (authority.action !== capability.action || authority.approvalRequired !== capability.approvalRequired || authority.sideEffect !== capability.sideEffect) throw new Error(`MCP authority and capability metadata are out of sync for ${t.name}`);
+    if (capability.inputFields.includes("approvalReceipt") !== authority.approvalRequired) throw new Error(`MCP approval receipt schema is out of sync for ${t.name}`);
     return {
       name: t.name,
       description: t.description,
       inputSchema: t.inputSchema,
       _meta: { "verglos/capability": capability },
-      annotations: authority ? {
+      annotations: {
         readOnlyHint: !authority.approvalRequired,
         destructiveHint: authority.sideEffect === "filesystem" || authority.sideEffect === "identity",
         openWorldHint: authority.sideEffect === "network" || authority.sideEffect === "hosted",
-      } : undefined,
+      },
     };
   });
 }

@@ -26,6 +26,10 @@ test("MCP tools/list publishes shared capability metadata for every tool", () =>
   const tools = listAdvertisedTools();
   assert.equal(tools.length, 9);
   assert.equal(new Set(tools.map((tool) => tool.name)).size, tools.length);
+  assert.deepEqual(tools.map((tool) => tool.name), [
+    "verglos_check_before_write", "verglos_check_package", "verglos_scan", "verglos_explain_finding",
+    "verglos_hunt_finding", "verglos_hunt_report", "verglos_hunt_before_write", "verglos_hunt_explain_verdict", "verglos_attest",
+  ]);
   for (const tool of tools) {
     const capability = tool._meta?.["verglos/capability"] as unknown as Record<string, unknown> | undefined;
     assert.ok(capability, `${tool.name} must publish capability metadata`);
@@ -40,6 +44,31 @@ test("MCP tools/list publishes shared capability metadata for every tool", () =>
   assert.deepEqual(scan?._meta, { "verglos/capability": { tool: "verglos_scan", action: "network", plan: "free", maturity: "shipped", approvalRequired: true, sideEffect: "network", networkTargets: ["https://api.osv.dev", "https://registry.npmjs.org"], inputFields: ["projectRoot", "limit", "noProvenance", "approvalReceipt"], outputFields: ["projectRoot", "scannedAt", "durationMs", "score", "coverage", "provenance", "findingCount", "findings", "truncated", "headline", "failure"] } });
   const hunt = tools.find((tool) => tool.name === "verglos_hunt_report");
   assert.equal((hunt?._meta["verglos/capability"] as { sideEffect: string }).sideEffect, "process");
+});
+
+test("MCP advertised schemas, capability inputs, and approval requirements agree for every tool", () => {
+  for (const tool of listAdvertisedTools()) {
+    const capability = tool._meta?.["verglos/capability"] as { inputFields: readonly string[]; approvalRequired: boolean; action: string; sideEffect: string };
+    const schema = tool.inputSchema as { properties: Record<string, unknown>; additionalProperties?: boolean };
+    assert.deepEqual(Object.keys(schema.properties).sort(), [...capability.inputFields].sort(), tool.name);
+    assert.equal(schema.additionalProperties, false, `${tool.name} must reject undeclared arguments`);
+    assert.equal(Object.hasOwn(schema.properties, "approvalReceipt"), capability.approvalRequired, `${tool.name} receipt field must match authority`);
+    assert.equal(typeof capability.action, "string");
+    assert.equal(typeof capability.sideEffect, "string");
+  }
+  const scan = listAdvertisedTools().find((tool) => tool.name === "verglos_scan")!;
+  const scanProperties = scan.inputSchema.properties as Record<string, { type?: string; minimum?: number; maximum?: number }>;
+  assert.deepEqual(scanProperties.limit, { type: "integer", minimum: 0, maximum: 1000, description: "Maximum findings returned; 0 returns all findings." });
+  assert.equal(scanProperties.noProvenance?.type, "boolean");
+});
+
+test("every authority-gated MCP tool denies before its handler when no approval is supplied", async () => {
+  for (const tool of listAdvertisedTools()) {
+    const capability = tool._meta?.["verglos/capability"] as { plan: "free" | "pro" | "team" | "studio" | "enterprise"; approvalRequired: boolean };
+    if (!capability.approvalRequired) continue;
+    const result = responseText(await dispatchTool(tool.name, {}, { plan: capability.plan }));
+    assert.equal(result.code, "MCP_APPROVAL_REQUIRED", tool.name);
+  }
 });
 
 test("MCP dispatch rejects non-object tool arguments", async () => {
@@ -198,7 +227,7 @@ test("MCP dispatch treats missing host entitlement as Free, never as an upgrade 
 });
 
 test("MCP dispatch rejects unknown runtime entitlement plans", async () => {
-  for (const plan of ["gold", "", 1]) assertMcpError(await dispatchTool("verglos_scan", {}, { plan: plan as never }), { error: "usage", code: "MCP_ENTITLEMENT_INVALID", message: "invalid entitlement plan", category: "usage" });
+  for (const plan of ["gold", "", "toString", "constructor", "__proto__", 1]) assertMcpError(await dispatchTool("verglos_scan", {}, { plan: plan as never }), { error: "usage", code: "MCP_ENTITLEMENT_INVALID", message: "invalid entitlement plan", category: "usage" });
 });
 
 test("MCP dispatch fails closed for non-serializable arguments", async () => {
