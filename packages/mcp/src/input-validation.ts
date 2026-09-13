@@ -48,6 +48,17 @@ export function parseScanArgs(value: unknown): { projectRoot?: string; limit?: n
   };
 }
 
+export function parsePolicyCheckArgs(value: unknown): { manifestPath: string; recordStore: string } {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("policy_check arguments must be an object");
+  const input = value as Record<string, unknown>;
+  rejectUnknown(input, ["manifestPath", "recordStore"], "policy_check");
+  const manifestPath = boundedString(input, "manifestPath", true)!;
+  const recordStore = boundedString(input, "recordStore", true)!;
+  if (!isAbsolute(manifestPath) || !isAbsolute(recordStore)) throw new Error("policy_check paths must be absolute");
+  if (/[\u0000-\u001f\u007f]/u.test(manifestPath) || /[\u0000-\u001f\u007f]/u.test(recordStore)) throw new Error("policy_check paths contain control characters");
+  return { manifestPath, recordStore };
+}
+
 function objectArgs(value: unknown, tool: string): Record<string, unknown> {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error(`${tool} arguments must be an object`);
   return value as Record<string, unknown>;

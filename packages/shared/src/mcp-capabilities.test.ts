@@ -8,6 +8,7 @@ test("MCP capability truth labels plan and maturity", () => {
   assert.equal(capabilities.find((item) => item.tool === "verglos_scan")?.maturity, "shipped");
   assert.deepEqual(capabilities.find((item) => item.tool === "verglos_scan"), { tool: "verglos_scan", action: "network", plan: "free", maturity: "shipped", approvalRequired: true, sideEffect: "network", networkTargets: ["https://api.osv.dev", "https://registry.npmjs.org"], inputFields: ["projectRoot", "limit", "noProvenance", "approvalReceipt"], outputFields: ["projectRoot", "scannedAt", "durationMs", "score", "coverage", "provenance", "findingCount", "findings", "truncated", "headline", "failure"] });
   assert.deepEqual(capabilities.find((item) => item.tool === "verglos_check_package")?.networkTargets, ["https://api.osv.dev", "https://registry.npmjs.org"]);
+  assert.deepEqual(capabilities.find((item) => item.tool === "verglos_policy_check"), { tool: "verglos_policy_check", action: "inspect", plan: "free", maturity: "shipped", approvalRequired: false, sideEffect: "none", networkTargets: [], inputFields: ["manifestPath", "recordStore"], outputFields: ["decision", "subjectId", "policy", "limitations", "reasons", "recordDigest", "coverage", "verification", "failure"] });
   assert.equal(capabilities.find((item) => item.tool === "verglos_hunt_report")?.approvalRequired, true);
   assert.equal(capabilities.find((item) => item.tool === "verglos_hunt_report")?.sideEffect, "process");
   assert.deepEqual(capabilities.find((item) => item.tool === "verglos_scan")?.inputFields, ["projectRoot", "limit", "noProvenance", "approvalReceipt"]);
@@ -27,7 +28,7 @@ test("MCP capability reconciliation rejects drift and preserves deterministic ou
 
 test("every advertised capability resolves to explicit authority without fallback defaults", () => {
   const capabilities = listMcpCapabilities();
-  assert.equal(capabilities.length, 9);
+  assert.equal(capabilities.length, 10);
   for (const capability of capabilities) {
     assert.ok((AGENT_ACTIONS as readonly string[]).includes(capability.action));
     const authority = actionAuthority(capability.action);

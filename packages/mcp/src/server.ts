@@ -16,7 +16,8 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
-import { parseAttestArgs, parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseHuntBeforeWriteArgs, parseHuntExplainVerdictArgs, parseHuntFindingArgs, parseHuntReportArgs, parseScanArgs } from "./input-validation.js";
+import { checkPolicyRecord } from "./tools/check-policy.js";
+import { parseAttestArgs, parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseHuntBeforeWriteArgs, parseHuntExplainVerdictArgs, parseHuntFindingArgs, parseHuntReportArgs, parsePolicyCheckArgs, parseScanArgs } from "./input-validation.js";
 
 const require = createRequire(import.meta.url);
 const { version: MCP_VERSION } = require("../package.json") as {
@@ -192,6 +193,20 @@ const TOOLS = [
         files: { type: "array", items: { type: "string" }, description: "Optional bounded relative file scope for the proposal; no files are written." },
       },
       required: ["rule"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "verglos_policy_check",
+    description:
+      "Validate and explain the canonical policy evaluation in a content-addressed Release Record. Verifies the policy digest, exact subject, referenced observations and evidence member digests, plus the deterministic decision fields. Read-only; does not rerun evidence producers or claim producer facts are true.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        manifestPath: { type: "string", maxLength: 4096, description: "Absolute path to Release Record manifest JSON (max 8 MiB); symlinks are rejected." },
+        recordStore: { type: "string", maxLength: 4096, description: "Absolute path to the content-addressed store (max 256 members / 32 MiB total); root and members must be regular files/directories, not symlinks." },
+      },
+      required: ["manifestPath", "recordStore"],
       additionalProperties: false,
     },
   },
@@ -420,6 +435,10 @@ export async function dispatchTool(
       let result: ReturnType<typeof explainFinding>;
       try { result = explainFinding(parsed); } catch { return invalid("MCP_EXPLAIN_FINDING_FAILED", "explain_finding failed"); }
       return jsonResponse(result);
+    }
+    case "verglos_policy_check": {
+      let parsed; try { parsed = parsePolicyCheckArgs(toolInput); } catch (error) { return invalid("MCP_POLICY_CHECK_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { return jsonResponse(await checkPolicyRecord(parsed)); } catch { return invalid("MCP_POLICY_CHECK_FAILED", "policy record could not be verified"); }
     }
     case "verglos_hunt_finding":
       try { parseHuntFindingArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }

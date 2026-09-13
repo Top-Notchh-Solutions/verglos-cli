@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
-import { randomUUID } from "node:crypto";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
+import { mkdtemp, rm, writeFile, symlink } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { createApprovalReceipt, parseFailure, readApprovalReceipt } from "@verglos/shared";
+import { OBSERVATION_SCHEMA, assembleReleaseRecord, canonicalizeJson, createApprovalReceipt, createFreePolicyProfile, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, parseFailure, policyDocumentDigest, putRecordMember, readApprovalReceipt } from "@verglos/shared";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 import { createVerglosMcpServer } from "./server.js";
@@ -22,12 +22,70 @@ function assertMcpError(result: Awaited<ReturnType<typeof dispatchTool>>, expect
   assert.equal(parseFailure(payload.failure).category, category);
 }
 
+async function createPolicyRecord(root: string, references: { observationId?: string; evidenceDigest?: string } = {}) {
+  const recordStore = join(root, "record-store");
+  const policy = createFreePolicyProfile();
+  const policyBytes = Buffer.from(canonicalizeJson(policy));
+  const subject = createSubject({ kind: "filesystem", treeDigest: { algorithm: "sha256", value: "a".repeat(64) }, ignorePolicyDigest: { algorithm: "sha256", value: "b".repeat(64) }, entryCount: 1 });
+  const evidenceBytes = Buffer.from('{"producer":"fixture","coverage":"native"}');
+  const evidenceDigest = createHash("sha256").update(evidenceBytes).digest("hex");
+  const observation = {
+    schemaId: OBSERVATION_SCHEMA.id,
+    schemaVersion: "1.0.0",
+    observationId: "urn:uuid:12345678-1234-4123-8123-123456789abc",
+    subjectId: subject.subjectId,
+    origin: { kind: "native", producerId: "verglos.native-scanner", runId: "urn:uuid:22345678-1234-4123-8123-123456789abc", ruleId: "D4-005" },
+    coverageClass: "native",
+    category: "secrets",
+    title: "Fixture observation",
+    description: "Fixture evidence for the MCP policy contract test.",
+    locations: [{ kind: "source", path: "src/example.ts", startLine: 1 }],
+    severity: { original: { system: "fixture", value: "low" }, normalized: "low", mapping: { id: "verglos.severity-map", version: "1.0.0" } },
+    confidence: { level: "high", method: "fixture", mappingVersion: "1.0.0" },
+    remediation: { summary: "No action required." },
+    evidence: [],
+    references: [],
+    extensions: {},
+  };
+  const subjectBytes = Buffer.from(canonicalizeJson(subject));
+  const observationBytes = Buffer.from(canonicalizeJson(observation));
+  const evaluation = createPolicyEvaluation({
+    schemaId: "urn:verglos:schema:policy-evaluation",
+    schemaVersion: "1.0.0",
+    evaluationId: "urn:uuid:32345678-1234-4123-8123-123456789abc",
+    policy: { id: policy.policyId, version: policy.policyVersion, digest: { algorithm: "sha256", value: policyDocumentDigest(policy).slice(7) } },
+    subjectId: subject.subjectId,
+    subjectMatch: { status: "matched", observedSubjectId: subject.subjectId },
+    evaluatedAt: "2026-09-13T00:00:00Z",
+    checks: [{ id: policy.checks[0]!.id, requirement: policy.checks[0]!.requirement, onFailure: policy.checks[0]!.onFailure, status: "satisfied", evidenceDigests: [{ algorithm: "sha256", value: references.evidenceDigest ?? evidenceDigest }], observationIds: [references.observationId ?? observation.observationId], freshness: { status: "current", checkedAt: "2026-09-12T23:00:00Z", validUntil: "2026-09-14T00:00:00Z" }, owner: "security", reason: "Fixture check is current.", nextAction: "Preserve the record." }],
+    limitations: ["Fixture only; no producer truth is implied."],
+  });
+  const releaseDecision = createReleaseDecision({ decisionId: "urn:uuid:52345678-1234-4123-8123-123456789abc", evaluation, subjects: [{ subjectId: subject.subjectId, role: "primary" }], issuedBy: { kind: "person", id: "fixture-owner", authority: "fixture only" }, generatedAt: "2026-09-13T00:00:00Z", limitations: ["Fixture only; no producer truth is implied."] });
+  const payloads = [
+    { path: "policy.json", kind: "policy" as const, bytes: policyBytes },
+    { path: "subject.json", kind: "subject" as const, bytes: subjectBytes },
+    { path: "observation.json", kind: "observation" as const, bytes: observationBytes },
+    { path: "evidence.json", kind: "export" as const, bytes: evidenceBytes },
+    { path: "policy-evaluation.json", kind: "policy-evaluation" as const, bytes: Buffer.from(canonicalizeJson(evaluation)) },
+    { path: "release-decision.json", kind: "release-decision" as const, bytes: Buffer.from(canonicalizeJson(releaseDecision)), schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } },
+  ];
+  const entries = [];
+  for (const payload of payloads) {
+    const stored = await putRecordMember(recordStore, payload.path, payload.bytes);
+    entries.push({ ...describeRecordMember({ path: payload.path, kind: payload.kind, mediaType: "application/json", bytes: payload.bytes, required: true }), digest: { algorithm: "sha256" as const, value: stored.digest.slice(7) }, ...(payload.schema ? { schema: payload.schema } : {}) });
+  }
+  const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:42345678-1234-4123-8123-123456789abc", generatedAt: "2026-09-13T00:00:00Z", generator: { id: "verglos.mcp.test", version: "1.0.0" }, members: entries, redaction: { status: "not-required" }, limitations: ["Fixture record."] });
+  const manifestPath = join(root, "record.json");
+  await writeFile(manifestPath, canonicalizeJson(manifest));
+  return { manifestPath, recordStore, manifest };
+}
+
 test("MCP tools/list publishes shared capability metadata for every tool", () => {
   const tools = listAdvertisedTools();
-  assert.equal(tools.length, 9);
+  assert.equal(tools.length, 10);
   assert.equal(new Set(tools.map((tool) => tool.name)).size, tools.length);
   assert.deepEqual(tools.map((tool) => tool.name), [
-    "verglos_check_before_write", "verglos_check_package", "verglos_scan", "verglos_explain_finding",
+    "verglos_check_before_write", "verglos_check_package", "verglos_scan", "verglos_explain_finding", "verglos_policy_check",
     "verglos_hunt_finding", "verglos_hunt_report", "verglos_hunt_before_write", "verglos_hunt_explain_verdict", "verglos_attest",
   ]);
   for (const tool of tools) {
@@ -60,6 +118,10 @@ test("MCP advertised schemas, capability inputs, and approval requirements agree
   const scanProperties = scan.inputSchema.properties as Record<string, { type?: string; minimum?: number; maximum?: number }>;
   assert.deepEqual(scanProperties.limit, { type: "integer", minimum: 0, maximum: 1000, description: "Maximum findings returned; 0 returns all findings." });
   assert.equal(scanProperties.noProvenance?.type, "boolean");
+  const policy = listAdvertisedTools().find((tool) => tool.name === "verglos_policy_check")!;
+  const policyProperties = policy.inputSchema.properties as Record<string, { type?: string; maxLength?: number }>;
+  assert.deepEqual(policyProperties.manifestPath, { type: "string", maxLength: 4096, description: "Absolute path to Release Record manifest JSON (max 8 MiB); symlinks are rejected." });
+  assert.deepEqual(policyProperties.recordStore, { type: "string", maxLength: 4096, description: "Absolute path to the content-addressed store (max 256 members / 32 MiB total); root and members must be regular files/directories, not symlinks." });
 });
 
 test("every authority-gated MCP tool denies before its handler when no approval is supplied", async () => {
@@ -79,6 +141,70 @@ test("MCP dispatch rejects non-object tool arguments", async () => {
 test("MCP dispatch rejects oversized tool arguments before handlers", async () => {
   const result = await dispatchTool("verglos_check_package", { packageName: "x".repeat(256 * 1024) });
   assertMcpError(result, { error: "usage", code: "MCP_ARGUMENTS_INPUT", message: "tool arguments exceed the 256 KiB limit", category: "usage" });
+});
+
+test("MCP policy check verifies the canonical policy record and immutable evidence references", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-mcp-policy-"));
+  try {
+    const fixture = await createPolicyRecord(root);
+    const payload = responseText(await dispatchTool("verglos_policy_check", { manifestPath: fixture.manifestPath, recordStore: fixture.recordStore }, { plan: "free" }));
+    assert.equal(payload.decision, "PASS");
+    assert.equal(typeof payload.subjectId, "string");
+    assert.equal(typeof payload.recordDigest, "string");
+    assert.equal((payload.coverage as Record<string, unknown>).policyPredicatesReevaluated, false);
+    assert.equal((payload.coverage as Record<string, unknown>).observationReferencesVerified, 1);
+    assert.equal((payload.verification as Record<string, unknown>).policy, "canonical-digest-verified");
+    assert.equal((payload.verification as Record<string, unknown>).observations, "referenced-observations-verified");
+    assert.match(String((payload.verification as Record<string, unknown>).limitation), /policy predicates are not rerun/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("MCP policy check rejects manifest symlinks and unknown input fields", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-mcp-policy-link-"));
+  try {
+    const fixture = await createPolicyRecord(root);
+    const linkPath = join(root, "record-link.json");
+    await symlink(fixture.manifestPath, linkPath);
+    const linked = responseText(await dispatchTool("verglos_policy_check", { manifestPath: linkPath, recordStore: fixture.recordStore }));
+    assert.equal(linked.code, "MCP_POLICY_CHECK_FAILED");
+    const extra = responseText(await dispatchTool("verglos_policy_check", { manifestPath: fixture.manifestPath, recordStore: fixture.recordStore, unexpected: true }));
+    assert.equal(extra.code, "MCP_POLICY_CHECK_INPUT");
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("MCP policy check fails closed when a content-addressed record member is changed", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-mcp-policy-corrupt-"));
+  try {
+    const fixture = await createPolicyRecord(root);
+    const evidence = fixture.manifest.members.find((member) => member.path === "evidence.json")!;
+    await writeFile(join(fixture.recordStore, `${evidence.digest.algorithm}-${evidence.digest.value}`), "changed");
+    const payload = responseText(await dispatchTool("verglos_policy_check", { manifestPath: fixture.manifestPath, recordStore: fixture.recordStore }, { plan: "free" }));
+    assert.equal(payload.code, "MCP_POLICY_CHECK_FAILED");
+    assert.equal(payload.ok, false);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("MCP policy check rejects observation and evidence references absent from the verified record", async () => {
+  for (const [name, references] of [
+    ["observation", { observationId: "urn:uuid:62345678-1234-4123-8123-123456789abc" }],
+    ["evidence", { evidenceDigest: "e".repeat(64) }],
+  ] as const) {
+    const root = await mkdtemp(join(tmpdir(), `verglos-mcp-policy-${name}-`));
+    try {
+      const fixture = await createPolicyRecord(root, references);
+      const payload = responseText(await dispatchTool("verglos_policy_check", { manifestPath: fixture.manifestPath, recordStore: fixture.recordStore }, { plan: "free" }));
+      assert.equal(payload.code, "MCP_POLICY_CHECK_FAILED", name);
+      assert.equal(payload.ok, false, name);
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  }
 });
 
 test("MCP response encoder fails closed on oversized payloads", () => {
@@ -253,7 +379,7 @@ test("MCP SDK interoperability preserves discovery and entitlement errors", asyn
   await Promise.all([server.connect(serverTransport), client.connect(clientTransport)]);
   try {
     const discovered = await client.listTools();
-    assert.equal(discovered.tools.length, 9);
+    assert.equal(discovered.tools.length, 10);
     assert.ok(discovered.tools.every((tool) => tool.name.startsWith("verglos_")));
     const denied = await client.callTool({ name: "verglos_hunt_report", arguments: {} }) as { content?: Array<{ type?: string; text?: string }> };
     const payload = JSON.parse(String(denied.content?.[0]?.type === "text" ? denied.content[0].text : "{}")) as { code?: string };
