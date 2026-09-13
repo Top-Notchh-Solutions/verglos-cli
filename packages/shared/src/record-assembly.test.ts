@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { test } from "node:test";
-import { assembleReleaseRecord, assembleReleaseRecordBundle, assertCompleteReleaseRecord, assertCompleteReleaseRecordPayloads } from "./record-assembly.js";
+import { assembleReleaseRecord, assembleReleaseRecordBundle, assertCompleteReleaseRecord, assertCompleteReleaseRecordPayloads, type ReleaseRecordPayloadInput } from "./record-assembly.js";
 import { canonicalizeJson } from "./schema.js";
 import { createSubject, SUBJECT_SCHEMA } from "./subject.js";
 import { POLICY_DOCUMENT_SCHEMA, parsePolicyDocument, policyDocumentDigest } from "./policy-document.js";
@@ -82,6 +82,100 @@ test("complete payload assembly binds policy, evaluation, decision, and exact su
   const tampered = new Map(bundle.payloads);
   tampered.set("policy.json", new TextEncoder().encode("{}"));
   assert.throws(() => assertCompleteReleaseRecordPayloads(bundle.manifest, tampered), /digest or size/);
+});
+
+test("complete or partial assembly generates a path-free digest-bound redaction manifest", () => {
+  const { bundle } = completeBundle();
+  const payloads: ReleaseRecordPayloadInput[] = bundle.manifest.members.map((member) => ({
+    path: member.path,
+    kind: member.kind,
+    mediaType: member.mediaType,
+    bytes: bundle.payloads.get(member.path)!,
+    required: member.required,
+    redaction: member.redaction,
+    ...(member.schema ? { schema: member.schema } : {}),
+  }));
+  payloads.push({ path: "private/client-a/source.ts", kind: "metadata" as const, mediaType: "text/plain", bytes: new TextEncoder().encode("already-redacted fixture"), required: false, redaction: "applied" as const, redactionCategories: ["source-content", "paths"] as const });
+
+  const assembled = assembleReleaseRecordBundle({ schemaId: bundle.manifest.schemaId, schemaVersion: bundle.manifest.schemaVersion, bundleVersion: bundle.manifest.bundleVersion, manifestId: bundle.manifest.manifestId, generatedAt: bundle.manifest.generatedAt, generator: bundle.manifest.generator, redaction: { status: "complete" }, limitations: bundle.manifest.limitations, payloads });
+  const redactionMember = assembled.manifest.members.find((member) => member.kind === "redaction-manifest");
+  assert.ok(redactionMember);
+  assert.equal(redactionMember.required, true);
+  assert.deepEqual(redactionMember.schema, { id: "urn:verglos:schema:redaction-manifest", version: "1.0.0" });
+  assert.equal(assembled.manifest.redaction.status, "complete");
+  assert.equal(`${redactionMember.digest.algorithm}:${redactionMember.digest.value}`, `${assembled.manifest.redaction.manifestDigest?.algorithm}:${assembled.manifest.redaction.manifestDigest?.value}`);
+  const redactionBytes = assembled.payloads.get(redactionMember.path)!;
+  const redaction = JSON.parse(new TextDecoder().decode(redactionBytes));
+  assert.equal(redaction.assurance, "producer-declared-only");
+  assert.equal(JSON.stringify(redaction).includes("private/client-a"), false);
+  assert.equal(JSON.stringify(redaction).includes("source.ts"), false);
+  assert.equal(assertCompleteReleaseRecordPayloads(assembled.manifest, assembled.payloads).redaction.status, "complete");
+});
+
+test("omitted members are declared in redaction evidence but never emitted as payload bytes", () => {
+  const { bundle } = completeBundle();
+  const payloads: ReleaseRecordPayloadInput[] = bundle.manifest.members.map((member) => ({
+    path: member.path,
+    kind: member.kind,
+    mediaType: member.mediaType,
+    bytes: bundle.payloads.get(member.path)!,
+    required: member.required,
+    redaction: member.redaction,
+    ...(member.schema ? { schema: member.schema } : {}),
+  }));
+  const omittedPath = "private/customer/source.ts";
+  payloads.push({ path: omittedPath, kind: "metadata", mediaType: "text/plain", bytes: new Uint8Array(), required: false, redaction: "omitted", redactionCategories: ["source-content", "paths"] });
+  const assembled = assembleReleaseRecordBundle({
+    schemaId: bundle.manifest.schemaId,
+    schemaVersion: bundle.manifest.schemaVersion,
+    bundleVersion: bundle.manifest.bundleVersion,
+    manifestId: bundle.manifest.manifestId,
+    generatedAt: bundle.manifest.generatedAt,
+    generator: bundle.manifest.generator,
+    redaction: { status: "complete" },
+    limitations: bundle.manifest.limitations,
+    payloads,
+  });
+  assert.equal(assembled.payloads.has(omittedPath), false);
+  assert.equal(assembled.manifest.members.find((member) => member.path === omittedPath)?.size, 0);
+  assert.equal(assertCompleteReleaseRecordPayloads(assembled.manifest, assembled.payloads).redaction.status, "complete");
+});
+
+test("complete record rejects redaction manifest that omits a member disposition", () => {
+  const { bundle } = completeBundle();
+  const payloads: ReleaseRecordPayloadInput[] = bundle.manifest.members.map((member) => ({
+    path: member.path,
+    kind: member.kind,
+    mediaType: member.mediaType,
+    bytes: bundle.payloads.get(member.path)!,
+    required: member.required,
+    redaction: member.redaction,
+    ...(member.schema ? { schema: member.schema } : {}),
+  }));
+  const assembled = assembleReleaseRecordBundle({
+    schemaId: bundle.manifest.schemaId,
+    schemaVersion: bundle.manifest.schemaVersion,
+    bundleVersion: bundle.manifest.bundleVersion,
+    manifestId: bundle.manifest.manifestId,
+    generatedAt: bundle.manifest.generatedAt,
+    generator: bundle.manifest.generator,
+    redaction: { status: "complete" },
+    limitations: bundle.manifest.limitations,
+    payloads,
+  });
+  const redactionMember = assembled.manifest.members.find((member) => member.kind === "redaction-manifest")!;
+  const declaration = JSON.parse(new TextDecoder().decode(assembled.payloads.get(redactionMember.path)!));
+  declaration.members.pop();
+  const tamperedBytes = bytes(declaration);
+  const tamperedDigest = { algorithm: "sha256" as const, value: createHash("sha256").update(tamperedBytes).digest("hex") };
+  const tamperedPayloads = new Map(assembled.payloads);
+  tamperedPayloads.set(redactionMember.path, tamperedBytes);
+  const tamperedManifest = assembleReleaseRecord({
+    ...assembled.manifest,
+    redaction: { status: "complete", manifestDigest: tamperedDigest },
+    members: assembled.manifest.members.map((member) => member.path === redactionMember.path ? { ...member, digest: tamperedDigest, size: tamperedBytes.byteLength } : member),
+  });
+  assert.throws(() => assertCompleteReleaseRecordPayloads(tamperedManifest, tamperedPayloads), /does not cover the exact declared member digests and dispositions/);
 });
 
 test("complete payload assembly rejects a policy whose identity/digest differs from the evaluation", () => {

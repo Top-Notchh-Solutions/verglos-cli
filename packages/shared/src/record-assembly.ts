@@ -11,6 +11,7 @@ import { POLICY_EVALUATION_SCHEMA, parsePolicyEvaluation } from "./policy-evalua
 import { RELEASE_DECISION_SCHEMA, parseReleaseDecision } from "./release-decision.js";
 import { canonicalizeJson } from "./schema.js";
 import { LINEAGE_GRAPH_SCHEMA, parseLineageGraphDocument } from "./lineage-graph.js";
+import { createRedactionManifest, parseRedactionManifest, REDACTION_MANIFEST_SCHEMA, type RedactionCategory } from "./redaction-manifest.js";
 
 export function assembleReleaseRecord(input: Omit<ReleaseRecordManifestDocument, "members" | "extensions"> & { readonly members: ReleaseRecordManifestDocument["members"]; readonly extensions?: ReleaseRecordManifestDocument["extensions"] }): ReleaseRecordManifestDocument {
   if (input.members.filter((member) => member.kind === "release-decision").length !== 1) throw new Error("Release Record assembly requires exactly one release-decision member");
@@ -24,26 +25,62 @@ export interface ReleaseRecordPayloadInput {
   readonly bytes: Uint8Array;
   readonly required: boolean;
   readonly redaction?: "none" | "applied" | "omitted";
+  readonly redactionCategories?: readonly RedactionCategory[];
   readonly schema?: ReleaseRecordManifestDocument["members"][number]["schema"];
 }
 
+type ReleaseRecordBundleRedactionInput =
+  | { readonly status: "not-required" | "unknown"; readonly manifestDigest?: never }
+  | { readonly status: "complete" | "partial"; readonly manifestDigest?: never };
+
 /** Assemble a deterministic manifest and payload map from member bytes. */
-export function assembleReleaseRecordBundle(input: Omit<ReleaseRecordManifestDocument, "members" | "extensions"> & { readonly payloads: readonly ReleaseRecordPayloadInput[]; readonly extensions?: ReleaseRecordManifestDocument["extensions"] }): { readonly manifest: ReleaseRecordManifestDocument; readonly payloads: ReadonlyMap<string, Uint8Array> } {
+export function assembleReleaseRecordBundle(input: Omit<ReleaseRecordManifestDocument, "members" | "extensions" | "redaction"> & { readonly redaction: ReleaseRecordBundleRedactionInput; readonly payloads: readonly ReleaseRecordPayloadInput[]; readonly extensions?: ReleaseRecordManifestDocument["extensions"] }): { readonly manifest: ReleaseRecordManifestDocument; readonly payloads: ReadonlyMap<string, Uint8Array> } {
   const { payloads: payloadInputs, ...manifestInput } = input;
   if (payloadInputs.filter((payload) => payload.kind === "release-decision").length !== 1) throw new Error("Release Record assembly requires exactly one release-decision payload");
+  const generatedRedactionManifest = ["complete", "partial"].includes(input.redaction.status);
+  if (generatedRedactionManifest && payloadInputs.some((payload) => payload.kind === "redaction-manifest")) throw new Error("redaction-manifest payload is generated from declared member dispositions");
   const payloads = new Map<string, Uint8Array>();
   const digests = new Set<string>();
   const members = payloadInputs.map((payload) => {
     if (payloads.has(payload.path)) throw new Error(`Release Record payload path is duplicated: ${payload.path}`);
+    if (payload.redactionCategories && payload.redactionCategories.length > 0 && (payload.redaction ?? "none") === "none") throw new Error(`unredacted Release Record payload cannot declare redaction categories: ${payload.path}`);
     if (payload.redaction === "omitted" && payload.bytes.byteLength !== 0) throw new Error(`omitted Release Record payload must be empty: ${payload.path}`);
-    payloads.set(payload.path, payload.bytes);
+    // Omitted members stay in the manifest/redaction inventory, but their
+    // empty placeholder bytes are not part of the publishable member store.
+    if (payload.redaction !== "omitted") payloads.set(payload.path, payload.bytes);
     const member = describeRecordMember(payload);
     const memberDigest = `${member.digest.algorithm}:${member.digest.value}`;
     if (digests.has(memberDigest)) throw new Error(`Release Record payload digest is duplicated: ${payload.path}`);
     digests.add(memberDigest);
     return payload.schema ? { ...member, schema: payload.schema } : member;
   });
-  return { manifest: createReleaseRecordManifest({ ...manifestInput, members }), payloads };
+  // The bundle API derives the digest for complete/partial manifests below;
+  // final strict manifest validation verifies the resulting discriminated union.
+  let redaction = input.redaction as ReleaseRecordManifestDocument["redaction"];
+  if (generatedRedactionManifest) {
+    const redactionPath = "redaction-manifest.json";
+    if (payloads.has(redactionPath)) throw new Error(`Release Record payload path is reserved for generated redaction evidence: ${redactionPath}`);
+    const redactionManifest = createRedactionManifest({
+      status: input.redaction.status as "complete" | "partial",
+      members: members.map((member, index) => ({
+        memberDigest: member.digest,
+        disposition: member.redaction,
+        categories: [...(payloadInputs[index]!.redactionCategories ?? [])],
+      })),
+    });
+    const redactionBytes = new TextEncoder().encode(canonicalizeJson(redactionManifest));
+    const redactionMember = {
+      ...describeRecordMember({ path: redactionPath, kind: "redaction-manifest", mediaType: "application/json", bytes: redactionBytes, required: true }),
+      schema: REDACTION_MANIFEST_SCHEMA,
+    };
+    members.push(redactionMember);
+    payloads.set(redactionPath, redactionBytes);
+    redaction = {
+      status: redactionManifest.status,
+      manifestDigest: { algorithm: "sha256", value: createHash("sha256").update(redactionBytes).digest("hex") },
+    };
+  }
+  return { manifest: createReleaseRecordManifest({ ...manifestInput, redaction, members }), payloads };
 }
 
 /** Apply the minimum complete Release Record graph gate before publication. */
@@ -213,9 +250,15 @@ export function assertCompleteReleaseRecordPayloads(
   if (["complete", "partial"].includes(parsed.redaction.status)) {
     const redactionMembers = payloadFor("redaction-manifest");
     if (redactionMembers.length !== 1) throw new Error("complete or partial redaction requires exactly one included redaction manifest payload");
+    requireSchema(redactionMembers[0]!.member, REDACTION_MANIFEST_SCHEMA);
+    const redactionManifest = parseRedactionManifest(redactionMembers[0]!.value);
+    if (redactionManifest.status !== parsed.redaction.status) throw new Error("Release Record redaction status does not match its redaction manifest");
     const redactionMemberDigest = `${redactionMembers[0]!.member.digest.algorithm}:${redactionMembers[0]!.member.digest.value}`;
     const declaredDigest = parsed.redaction.manifestDigest ? `${parsed.redaction.manifestDigest.algorithm}:${parsed.redaction.manifestDigest.value}` : "";
     if (redactionMemberDigest !== declaredDigest) throw new Error("Release Record redaction digest does not match the included redaction manifest");
+    const expectedEntries = parsed.members.filter((member) => member.kind !== "redaction-manifest").map((member) => `${member.digest.algorithm}:${member.digest.value}:${member.redaction}`).sort();
+    const actualEntries = redactionManifest.members.map((member) => `${member.memberDigest.algorithm}:${member.memberDigest.value}:${member.disposition}`).sort();
+    if (expectedEntries.length !== actualEntries.length || expectedEntries.some((entry, index) => entry !== actualEntries[index])) throw new Error("Release Record redaction manifest does not cover the exact declared member digests and dispositions");
   }
 
   return parsed;

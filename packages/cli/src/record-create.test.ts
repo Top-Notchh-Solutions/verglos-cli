@@ -102,8 +102,9 @@ test("complete record create, verify, and export preserve canonical policy and s
       { path: "policy-evaluation.json", kind: "policy-evaluation" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(evaluation)), required: true, schema: POLICY_EVALUATION_SCHEMA },
       { path: "release-decision.json", kind: "release-decision" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(decision)), required: true, schema: RELEASE_DECISION_SCHEMA },
     ];
-    const bundle = assembleReleaseRecordBundle({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:92345678-1234-4123-8123-123456789abc", generatedAt: "2026-09-10T04:00:00.000Z", generator: { id: "verglos.record-builder", version: "1.0.0" }, redaction: { status: "not-required" }, limitations: ["Fixture only."], payloads });
-    for (const payload of payloads) { const path = join(source, payload.path); await mkdir(join(path, ".."), { recursive: true }); await writeFile(path, payload.bytes); }
+    const bundle = assembleReleaseRecordBundle({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:92345678-1234-4123-8123-123456789abc", generatedAt: "2026-09-10T04:00:00.000Z", generator: { id: "verglos.record-builder", version: "1.0.0" }, redaction: { status: "complete" }, limitations: ["Fixture only."], payloads });
+    for (const [payloadPath, payloadBytes] of bundle.payloads) { const path = join(source, payloadPath); await mkdir(join(path, ".."), { recursive: true }); await writeFile(path, payloadBytes); }
+    assert.equal(bundle.manifest.members.filter((member) => member.kind === "redaction-manifest").length, 1);
     const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(bundle.manifest));
     assert.equal(await executeRecordCreate(source, manifestPath, output, true, true, true), 0);
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true, undefined, undefined, undefined, undefined, true), 0);
