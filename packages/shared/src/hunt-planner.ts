@@ -24,10 +24,10 @@ export interface HuntPlan {
   readonly signature: HuntRecipe["signature"];
   readonly executes: false;
 }
-export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; readonly subjectId: string }, options: { readonly trust?: HuntRecipeTrustPolicy } = {}): HuntPlan {
+export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; readonly subjectId: string }, options: { readonly trust?: HuntRecipeTrustPolicy; readonly at?: string } = {}): HuntPlan {
   const parsed = parseHuntRecipe(recipe);
   const matches = parsed.ruleId === input.ruleId && parsed.targetSubjectId === input.subjectId;
-  const trusted = options.trust ? isTrustedHuntRecipe(parsed, options.trust) : undefined;
+  const trusted = options.trust ? isTrustedHuntRecipe(parsed, options.trust, options.at) : undefined;
   const supported = matches && trusted !== false;
   return {
     supported,

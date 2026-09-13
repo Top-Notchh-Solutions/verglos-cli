@@ -8,7 +8,7 @@ export function canExecuteHunt(recipe: HuntRecipe, input: { readonly ruleId: str
       && recipe.network.destinations.every((destination) => input.approval.network.includes(destination));
     return recipe.ruleId === input.ruleId
       && recipe.targetSubjectId === input.subjectId
-      && isExecutableHuntRecipe(recipe, trust)
+      && isExecutableHuntRecipe(recipe, trust, input.at)
       && input.approval.action === "execute"
       && input.approval.policyEffect === "hunt"
       && input.approval.target === input.subjectId
