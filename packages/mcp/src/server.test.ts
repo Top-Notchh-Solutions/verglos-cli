@@ -36,7 +36,7 @@ test("MCP tools/list publishes shared capability metadata for every tool", () =>
     assert.ok(Array.isArray(capability.outputFields));
   }
   const scan = tools.find((tool) => tool.name === "verglos_scan");
-  assert.deepEqual(scan?._meta, { "verglos/capability": { tool: "verglos_scan", action: "network", plan: "free", maturity: "shipped", approvalRequired: true, sideEffect: "network", networkTargets: ["https://api.osv.dev", "https://registry.npmjs.org"], inputFields: ["projectRoot", "limit", "noProvenance", "approvalReceipt"], outputFields: ["projectRoot", "scannedAt", "durationMs", "score", "provenance", "findingCount", "findings", "truncated", "headline", "failure"] } });
+  assert.deepEqual(scan?._meta, { "verglos/capability": { tool: "verglos_scan", action: "network", plan: "free", maturity: "shipped", approvalRequired: true, sideEffect: "network", networkTargets: ["https://api.osv.dev", "https://registry.npmjs.org"], inputFields: ["projectRoot", "limit", "noProvenance", "approvalReceipt"], outputFields: ["projectRoot", "scannedAt", "durationMs", "score", "coverage", "provenance", "findingCount", "findings", "truncated", "headline", "failure"] } });
   const hunt = tools.find((tool) => tool.name === "verglos_hunt_report");
   assert.equal((hunt?._meta["verglos/capability"] as { sideEffect: string }).sideEffect, "process");
 });
@@ -134,6 +134,46 @@ test("network MCP tools require exact target and recipient approval before looku
     assert.equal(fetchCalls, 2);
   } finally {
     globalThis.fetch = priorFetch;
+  }
+});
+
+test("approved MCP scan routes through the shared scanner and returns its coverage evidence", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-mcp-approved-scan-"));
+  const priorFetch = globalThis.fetch;
+  const recipients: string[] = [];
+  globalThis.fetch = async (input, init) => {
+    const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+    recipients.push(url);
+    assert.equal(init?.redirect, "error");
+    if (url === "https://registry.npmjs.org/fixture-safe-package-xyz") return new Response(null, { status: 200 });
+    if (url === "https://api.osv.dev/v1/query") return new Response(JSON.stringify({ vulns: [] }), { status: 200 });
+    throw new Error("unexpected network recipient");
+  };
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ name: "fixture-project", dependencies: { "fixture-safe-package-xyz": "1.0.0" } }));
+    await writeFile(join(root, "package-lock.json"), JSON.stringify({ lockfileVersion: 3, packages: { "": { name: "fixture-project", version: "1.0.0", dependencies: { "fixture-safe-package-xyz": "1.0.0" } }, "node_modules/fixture-safe-package-xyz": { version: "1.0.0" } } }));
+    const approvalReceipt = createApprovalReceipt({
+      requestId: "923e4567-e89b-12d3-a456-426614174000",
+      action: "network",
+      actor: "agent",
+      target: `project:${root}`,
+      files: [],
+      network: ["https://api.osv.dev", "https://registry.npmjs.org"],
+      policyEffect: "scan this exact local project and query npm/OSV for declared package metadata",
+      requestedAt: "2026-01-01T00:00:00Z",
+      expiresAt: "2099-01-01T00:00:00Z",
+    }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const result = responseText(await dispatchTool("verglos_scan", { projectRoot: root, noProvenance: true, approvalReceipt }, { now: "2026-01-02T00:00:00Z" }));
+    const coverage = result.coverage as { status?: unknown; executedDetectors?: unknown; limitations?: unknown };
+    assert.equal(result.projectRoot, root);
+    assert.equal(coverage.status, "incomplete");
+    assert.ok(Array.isArray(coverage.executedDetectors));
+    assert.ok((coverage.limitations as string[]).includes("provenance was explicitly skipped"));
+    assert.deepEqual(new Set(recipients.map((url) => new URL(url).origin)), new Set(["https://api.osv.dev", "https://registry.npmjs.org"]));
+    assert.equal(recipients.length, 2);
+  } finally {
+    globalThis.fetch = priorFetch;
+    await rm(root, { recursive: true, force: true });
   }
 });
 

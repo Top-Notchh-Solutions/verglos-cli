@@ -1,5 +1,5 @@
 import { runScan } from "@verglos/scanner";
-import type { Finding, RepoProvenance, ScanScore } from "@verglos/shared";
+import type { Finding, RepoProvenance, ScanCoverageManifest, ScanScore } from "@verglos/shared";
 import { isAbsolute } from "node:path";
 
 /**
@@ -28,6 +28,8 @@ export interface ScanResultSummary {
   scannedAt: string;
   durationMs: number;
   score: ScanScore;
+  /** Exact scanner-reported execution/coverage manifest; null only if absent. */
+  coverage: ScanCoverageManifest | null;
   provenance?: RepoProvenance;
   findingCount: number;
   findings: Finding[];
@@ -113,6 +115,7 @@ export async function scanProject(
     scannedAt: result.scannedAt,
     durationMs: result.durationMs,
     score: result.score,
+    coverage: result.coverage ?? null,
     provenance: result.provenance,
     findingCount: result.findings.length,
     findings: capped,
