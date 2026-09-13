@@ -1,5 +1,13 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-14 · RECORD-002 redaction manifest and consumer binding (progress, not acceptance)
+
+- **Implementation:** CLI commits `8116c7f` and `b52065b` pushed to existing PR #38, exact head `b52065b2bb4532d80f8ae18a99d907ca39a2215b`. Shared assembly now creates a versioned, canonical, digest-bound redaction manifest from member digests, dispositions, and closed categories; it carries no member paths or free-form values and labels assurance producer-declared-only. Omitted members remain in the declared inventory but are excluded from emitted payload bytes. Record create/verify validate schema, digest, status, and exact member/disposition coverage even without complete-graph mode. Shared tests cover deterministic/path-free output, rejected categories/contradictions/future schemas, omission, and coverage tampering; CLI create→verify→export exercises the generated manifest.
+- **Verification:** forced uncached `pnpm exec turbo run test typecheck build --filter=verglos... --force` passes 18/18 Turbo tasks; `git diff --check` passes. PR #38 is OPEN at exact head above; hosted checks have started and are currently in progress, so this code is not yet merge-ready.
+- **Acceptance/tracking:** no checkbox changed; recalculated count remains **137 unchecked / 132 checked / 269 total**. RECORD-002 remains open: no `.vgl` portable transport has been selected or integrated; viewer/signature packaging and full product assembly/acceptance remain outstanding. This manifest is a producer declaration, not proof that data was sanitized or a general no-leak guarantee.
+- **Scope/operations:** staged/pushed only CLI source and tests; no private shipping docs or secrets in PR. No Web changes, production database read/write, migration, merge, deployment, release, or marketing changes. Internal docs remain local-only.
+- **Next:** inspect exact-head CI, then advance remaining RECORD-002 package/consumer integration without selecting transport contrary to the transport-neutral decision; keep RECORD-002/011 unchecked until their full acceptance criteria are evidenced.
+
 ## 2026-09-14 · RECORD-011 projection leakage hardening (progress, not acceptance)
 
 - **Implementation:** CLI `e95e0e7a56a1318e4302eefe3f11a1563b0d8f6f` pushed to existing PR #38. Public `record project` no longer serializes custom policy identifiers or arbitrary free-form manifest limitations; each limitation becomes an explicit fixed withholding notice. Shared and CLI-output tests exercise canaries in member paths, source text, secret-shaped text, tenant/client IDs, policy IDs, and decision issuer IDs; exact projection keys are asserted.
