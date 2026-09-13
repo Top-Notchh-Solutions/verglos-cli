@@ -69,6 +69,7 @@ import { executeEngineInspection } from "./engines-inspect.js";
 import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
+import { executePolicyExceptionShow } from "./policy-exception.js";
 import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordCreate } from "./record-create.js";
@@ -223,6 +224,14 @@ const policy = program.command("policy").description("Inspect local policy evalu
 policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--record-store <path>", "Verify a record manifest against its content-addressed member store").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { recordStore?: string; json?: boolean; quiet?: boolean }) => {
   process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet, { recordStore: opts.recordStore }));
 });
+policy.command("exception <exceptionPath>")
+  .description("Show exact exception scope, approval state, expiry, controls, and export-format support")
+  .requiredOption("--approval <path>", "Path to the separate exception approval JSON")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (exceptionPath: string, opts: { approval: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executePolicyExceptionShow(exceptionPath, opts.approval, opts.json, opts.quiet));
+  });
 
 const evidence = program.command("evidence").description("Import and export standards evidence");
 evidence.command("export <input> <output>")

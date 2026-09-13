@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { digestPolicyException, parseExceptionApproval, parsePolicyException, type ExceptionApprovalDocument, type PolicyExceptionDocument } from "./exception.js";
+import { digestPolicyException, parseExceptionApproval, parsePolicyException } from "./exception.js";
 
 const TimestampSchema = z.string().datetime({ offset: true });
 
@@ -14,7 +14,7 @@ const EXPORT_CHOICES = Object.freeze([
   Object.freeze({ format: "PDF", status: "not-implemented", reason: "No exception-specific PDF export is implemented." }),
 ] as const);
 
-export function projectExceptionExport(exceptionValue: PolicyExceptionDocument, approvalValue: ExceptionApprovalDocument, now = new Date().toISOString()) {
+export function projectExceptionExport(exceptionValue: unknown, approvalValue: unknown, now = new Date().toISOString()) {
   const exception = parsePolicyException(exceptionValue); const approval = parseExceptionApproval(approvalValue);
   const nowValue = TimestampSchema.parse(now);
   const nowMs = Date.parse(nowValue);

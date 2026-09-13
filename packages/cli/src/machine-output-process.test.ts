@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
+import { digestPolicyException, parsePolicyException } from "@verglos/shared";
 import { runCliFixture } from "./cli-fixture.js";
 
 const cliEntry = join(process.cwd(), "src", "index.ts");
@@ -271,6 +272,47 @@ test("policy check input failure is one bounded JSON response", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("policy exception projection failure is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-exception-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "policy", "exception", "missing-exception.json", "--approval", "missing-approval.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "POLICY_EXCEPTION_INPUT", message: "policy exception projection failed" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("policy exception command exposes the approval-bound export projection", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-exception-success-"));
+  try {
+    const exception = parsePolicyException({
+      schemaId: "urn:verglos:schema:policy-exception", schemaVersion: "1.0.0",
+      exceptionId: "urn:uuid:12345678-1234-4123-8123-123456789abc",
+      scope: { subjectId: `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`, observationIds: ["urn:uuid:22345678-1234-4123-8123-123456789abc"] },
+      owner: { kind: "person", id: "owner" }, requestedBy: { kind: "person", id: "requester" }, reason: "temporary acceptance",
+      compensatingControls: [{ description: "monitor", owner: { kind: "person", id: "owner" }, evidence: { system: "local", recordId: "audit-1", digest: { algorithm: "sha256", value: "b".repeat(64) } } }],
+      reversalTriggers: ["fix shipped"], requestedAt: "2026-09-01T00:00:00.000Z", effectiveFrom: "2026-09-01T00:00:00.000Z", expiresAt: "2026-09-30T00:00:00.000Z", limitations: ["test fixture"],
+    });
+    const approval = {
+      schemaId: "urn:verglos:schema:exception-approval", schemaVersion: "1.0.0",
+      approvalId: "urn:uuid:32345678-1234-4123-8123-123456789abc",
+      target: { exceptionId: exception.exceptionId, requestDigest: digestPolicyException(exception) },
+      decision: "approved", approver: { kind: "person", id: "approver", authority: "release" }, rationale: "bounded test approval",
+      decidedAt: "2026-09-02T00:00:00.000Z", validUntil: "2026-09-20T00:00:00.000Z",
+      auditReference: { system: "local", recordId: "approval-1", digest: { algorithm: "sha256", value: "c".repeat(64) } },
+    };
+    await writeFile(join(root, "exception.json"), JSON.stringify(exception));
+    await writeFile(join(root, "approval.json"), JSON.stringify(approval));
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "policy", "exception", "exception.json", "--approval", "approval.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const projection = JSON.parse(result.stdout);
+    assert.equal(projection.approval.binding, "matched");
+    assert.equal(projection.approval.applicability.status, "not-evaluated");
+    assert.deepEqual(projection.exportChoices.map((choice: { format: string }) => choice.format), [".vgl", "JSON", "SARIF", "CycloneDX", "SPDX", "VEX", "HTML", "PDF"]);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("engine status JSON is one bounded document", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-engine-status-"));
   try {
@@ -516,6 +558,7 @@ test("every public command leaf provides side-effect-free help", async () => {
     { path: "config inspect", flags: ["--json", "--quiet"] },
     { path: "diff", flags: ["--json", "--quiet"] },
     { path: "policy check", flags: ["--json", "--quiet"] },
+    { path: "policy exception", flags: ["--approval", "--json", "--quiet"] },
     { path: "evidence export", flags: ["--json", "--quiet"] },
     { path: "evidence import", flags: ["--json", "--quiet"] },
     { path: "record create", flags: ["--json", "--quiet"] },
