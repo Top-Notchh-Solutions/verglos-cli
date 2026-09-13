@@ -9,6 +9,7 @@ import { createPolicyEvaluation, POLICY_EVALUATION_SCHEMA } from "./policy-evalu
 import { createReleaseDecision, RELEASE_DECISION_SCHEMA } from "./release-decision.js";
 import { OBSERVATION_SCHEMA } from "./observation.js";
 import { TOOL_RUN_SCHEMA } from "./engine.js";
+import { createLineageGraphDocument, LINEAGE_GRAPH_SCHEMA } from "./lineage-graph.js";
 
 const digest = (char: string) => ({ algorithm: "sha256" as const, value: char.repeat(64) });
 const bytes = (value: unknown) => new TextEncoder().encode(canonicalizeJson(value));
@@ -38,6 +39,7 @@ function completeBundle(policyVersion = "1.0.0", observationIds: readonly string
     generator: { id: "verglos.record-builder", version: "1.0.0" }, redaction: { status: "not-required" }, limitations: ["Fixture only."],
     payloads: [
       { path: "subjects/0001.json", kind: "subject", mediaType: "application/json", bytes: bytes(subject), required: true, schema: SUBJECT_SCHEMA },
+      { path: "lineage.json", kind: "lineage", mediaType: "application/json", bytes: bytes(createLineageGraphDocument({ subjectIds: [subject.subjectId], edges: [], gaps: ["No source lineage was supplied."] })), required: true, schema: LINEAGE_GRAPH_SCHEMA },
       { path: "policy.json", kind: "policy", mediaType: "application/json", bytes: bytes(policy), required: true, schema: POLICY_DOCUMENT_SCHEMA },
       { path: "policy-evaluation.json", kind: "policy-evaluation", mediaType: "application/json", bytes: bytes(evaluation), required: true, schema: POLICY_EVALUATION_SCHEMA },
       { path: "release-decision.json", kind: "release-decision", mediaType: "application/json", bytes: bytes(decision), required: true, schema: RELEASE_DECISION_SCHEMA },
@@ -64,18 +66,19 @@ test("record bundle assembly derives bindings and preserves payloads", () => {
   assert.throws(() => assembleReleaseRecordBundle({ ...base, payloads: [{ path: "decision.json", kind: "release-decision", mediaType: "application/json", bytes, required: true, schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } }, { path: "metadata.json", kind: "metadata", mediaType: "application/json", bytes, required: false, redaction: "omitted" }] }), /omitted.*must be empty/);
 });
 
-test("complete record gate requires subject, policy evaluation, and decision members", () => {
+test("complete record gate requires subject, lineage, policy evaluation, and decision members", () => {
   const base = { schemaId: "urn:verglos:schema:release-record-manifest" as const, schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos", version: "2.0.0" }, redaction: { status: "not-required" as const }, limitations: ["fixture"] };
-  const member = (path: string, kind: "subject" | "policy" | "policy-evaluation" | "release-decision") => ({ path, kind, mediaType: "application/json", digest: { algorithm: "sha256" as const, value: path.charCodeAt(0).toString(16).padStart(64, "0") }, size: 2, required: kind === "release-decision", redaction: "none" as const, ...(kind === "release-decision" ? { schema: RELEASE_DECISION_SCHEMA } : kind === "policy-evaluation" ? { schema: POLICY_EVALUATION_SCHEMA } : kind === "policy" ? { schema: POLICY_DOCUMENT_SCHEMA } : {}) });
-  const manifest = assembleReleaseRecord({ ...base, members: [member("decision.json", "release-decision"), member("policy.json", "policy"), member("policy-eval.json", "policy-evaluation"), member("subject.json", "subject")] });
-  assert.equal(assertCompleteReleaseRecord(manifest).members.length, 4);
+  const member = (path: string, kind: "subject" | "lineage" | "policy" | "policy-evaluation" | "release-decision") => ({ path, kind, mediaType: "application/json", digest: { algorithm: "sha256" as const, value: path.charCodeAt(0).toString(16).padStart(64, "0") }, size: 2, required: kind === "release-decision", redaction: "none" as const, ...(kind === "release-decision" ? { schema: RELEASE_DECISION_SCHEMA } : kind === "policy-evaluation" ? { schema: POLICY_EVALUATION_SCHEMA } : kind === "policy" ? { schema: POLICY_DOCUMENT_SCHEMA } : kind === "lineage" ? { schema: LINEAGE_GRAPH_SCHEMA } : {}) });
+  const manifest = assembleReleaseRecord({ ...base, members: [member("decision.json", "release-decision"), member("lineage.json", "lineage"), member("policy.json", "policy"), member("policy-eval.json", "policy-evaluation"), member("subject.json", "subject")] });
+  assert.equal(assertCompleteReleaseRecord(manifest).members.length, 5);
   assert.throws(() => assertCompleteReleaseRecord(assembleReleaseRecord({ ...base, members: [member("decision.json", "release-decision")] })), /subject member/);
-  assert.throws(() => assertCompleteReleaseRecord(assembleReleaseRecord({ ...base, members: [member("decision.json", "release-decision"), member("policy.json", "policy"), member("policy-a.json", "policy-evaluation"), member("policy-b.json", "policy-evaluation"), member("subject.json", "subject")] })), /only one policy-evaluation/);
+  assert.throws(() => assertCompleteReleaseRecord(assembleReleaseRecord({ ...base, members: [member("decision.json", "release-decision"), member("policy.json", "policy"), member("policy-a.json", "policy-evaluation"), member("policy-b.json", "policy-evaluation"), member("subject.json", "subject")] })), /lineage member/);
+  assert.throws(() => assertCompleteReleaseRecord(assembleReleaseRecord({ ...base, members: [member("decision.json", "release-decision"), member("lineage.json", "lineage"), member("policy.json", "policy"), member("policy-a.json", "policy-evaluation"), member("policy-b.json", "policy-evaluation"), member("subject.json", "subject")] })), /only one policy-evaluation/);
 });
 
 test("complete payload assembly binds policy, evaluation, decision, and exact subjects", () => {
   const { bundle } = completeBundle();
-  assert.equal(assertCompleteReleaseRecordPayloads(bundle.manifest, bundle.payloads).members.length, 4);
+  assert.equal(assertCompleteReleaseRecordPayloads(bundle.manifest, bundle.payloads).members.length, 5);
   const tampered = new Map(bundle.payloads);
   tampered.set("policy.json", new TextEncoder().encode("{}"));
   assert.throws(() => assertCompleteReleaseRecordPayloads(bundle.manifest, tampered), /digest or size/);
@@ -130,7 +133,7 @@ test("complete payload assembly validates observation-to-run and subject binding
     { path: "runs/scan.json", kind: "tool-run", mediaType: "application/json", bytes: bytes(run), required: true, schema: TOOL_RUN_SCHEMA },
     { path: "observations/finding.json", kind: "observation", mediaType: "application/json", bytes: bytes(observation), required: true, schema: OBSERVATION_SCHEMA },
   ]);
-  assert.equal(assertCompleteReleaseRecordPayloads(bundle.manifest, bundle.payloads).members.length, 6);
+  assert.equal(assertCompleteReleaseRecordPayloads(bundle.manifest, bundle.payloads).members.length, 7);
   const wrongRun = JSON.parse(new TextDecoder().decode(bundle.payloads.get("observations/finding.json")!));
   wrongRun.origin.runId = "urn:uuid:32345678-1234-4123-8123-123456789abc";
   const wrongRunBytes = bytes(wrongRun);
@@ -142,4 +145,15 @@ test("complete payload assembly validates observation-to-run and subject binding
     digest: { algorithm: "sha256" as const, value: createHash("sha256").update(wrongRunBytes).digest("hex") },
   } : member) });
   assert.throws(() => assertCompleteReleaseRecordPayloads(mismatchedManifest, mismatched), /observation must reference an included tool run/);
+});
+
+test("complete payload assembly requires a lineage graph bound to the exact included subjects", () => {
+  const { bundle, subject } = completeBundle();
+  const wrongLineage = createLineageGraphDocument({ subjectIds: ["urn:verglos:subject:artifact:sha256:" + "e".repeat(64)], edges: [], gaps: ["source linkage unavailable"] });
+  const wrongBytes = bytes(wrongLineage);
+  const payloads = new Map(bundle.payloads);
+  payloads.set("lineage.json", wrongBytes);
+  const manifest = assembleReleaseRecord({ ...bundle.manifest, members: bundle.manifest.members.map((member) => member.path === "lineage.json" ? { ...member, size: wrongBytes.byteLength, digest: { algorithm: "sha256" as const, value: createHash("sha256").update(wrongBytes).digest("hex") } } : member) });
+  assert.throws(() => assertCompleteReleaseRecordPayloads(manifest, payloads), /lineage subject set must exactly match/);
+  assert.ok(subject.subjectId.startsWith("urn:verglos:subject:"));
 });

@@ -7,7 +7,16 @@ import { prepareReportView } from "./report-view.js";
 
 test("report view preparation validates JSON projections and escapes content", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-view-"));
-  try { const path = join(root, "header.json"); await writeFile(path, JSON.stringify({ decision: "INCOMPLETE", subjectId: "<subject>", policy: { id: "p", version: "1.0.0", digest: "sha256:a" }, generatedAt: "2026-09-09T00:00:00Z", signerStatus: "unknown", limitations: ["missing"], nextAction: "review" })); const html = await prepareReportView(path); assert.match(html, /&lt;subject&gt;/); } finally { await rm(root, { recursive: true, force: true }); }
+  try { const path = join(root, "header.json"); await writeFile(path, JSON.stringify({ decision: "INCOMPLETE", subjectId: "<subject>", policy: { id: "p", version: "1.0.0", digest: "sha256:a" }, generatedAt: "2026-09-09T00:00:00Z", signerStatus: "unknown", lineage: { status: "recorded", edgeCount: 1, matched: 0, mismatched: 1, unavailable: 0, unverifiable: 0, gapCount: 1 }, limitations: ["missing"], nextAction: "review" })); const html = await prepareReportView(path); assert.match(html, /&lt;subject&gt;/); assert.match(html, /Recorded lineage gaps: 1/); } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("report view rejects contradictory lineage summary counts", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-view-lineage-"));
+  try {
+    const path = join(root, "header.json");
+    await writeFile(path, JSON.stringify({ decision: "PASS", subjectId: "subject", policy: { id: "p", version: "1.0.0", digest: "sha256:a" }, generatedAt: "2026-09-09T00:00:00Z", signerStatus: "unsigned", lineage: { status: "recorded", edgeCount: 1, matched: 0, mismatched: 0, unavailable: 0, unverifiable: 0, gapCount: 0 }, limitations: ["none"], nextAction: "preserve" }));
+    await assert.rejects(() => prepareReportView(path), /unsupported lineage evidence/);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });
 
 test("report view preparation rejects HTML, records, malformed, and oversized inputs", async () => {

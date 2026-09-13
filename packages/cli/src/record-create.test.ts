@@ -6,7 +6,7 @@ import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { executeRecordCreate } from "./record-create.js";
 import { runCliFixture } from "./cli-fixture.js";
-import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, parsePolicyDocument, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, RELEASE_DECISION_SCHEMA, SUBJECT_SCHEMA } from "@verglos/shared";
+import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createLineageGraphDocument, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, LINEAGE_GRAPH_SCHEMA, parsePolicyDocument, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, RELEASE_DECISION_SCHEMA, SUBJECT_SCHEMA } from "@verglos/shared";
 import { executeRecordVerify } from "./record-verify.js";
 
 test("record create materializes verified members and a canonical manifest", async () => {
@@ -96,6 +96,7 @@ test("complete record create and verify preserve canonical policy and subject bi
     const decision = createReleaseDecision({ decisionId: "urn:uuid:82345678-1234-4123-8123-123456789abc", evaluation, subjects: [{ subjectId: subject.subjectId, role: "primary" }], issuedBy: { kind: "person", id: "release-owner", authority: "release-decision" }, generatedAt: "2026-09-10T03:00:00.000Z", limitations: ["Fixture only."] });
     const payloads = [
       { path: "subjects/0001.json", kind: "subject" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(subject)), required: true, schema: SUBJECT_SCHEMA },
+      { path: "lineage.json", kind: "lineage" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(createLineageGraphDocument({ subjectIds: [subject.subjectId], edges: [], gaps: ["Source lineage was not included in this fixture."] }))), required: true, schema: LINEAGE_GRAPH_SCHEMA },
       { path: "policy.json", kind: "policy" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(policy)), required: true, schema: POLICY_DOCUMENT_SCHEMA },
       { path: "policy-evaluation.json", kind: "policy-evaluation" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(evaluation)), required: true, schema: POLICY_EVALUATION_SCHEMA },
       { path: "release-decision.json", kind: "release-decision" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(decision)), required: true, schema: RELEASE_DECISION_SCHEMA },

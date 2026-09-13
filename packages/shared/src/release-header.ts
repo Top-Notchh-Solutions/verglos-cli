@@ -6,6 +6,15 @@ export type ReleaseHeaderSubjectEvidence = Readonly<{
   memberDigest: string;
   contentDigests: readonly Readonly<{ purpose: string; digest: string }>[];
 }>;
+export type ReleaseHeaderLineage = Readonly<{
+  status: "recorded" | "not-recorded";
+  edgeCount: number;
+  matched: number;
+  mismatched: number;
+  unavailable: number;
+  unverifiable: number;
+  gapCount: number;
+}>;
 export type ReleaseHeader = Readonly<{
   decision: ReleaseDecisionDocument["decision"];
   subjectId: string;
@@ -20,6 +29,7 @@ export type ReleaseHeader = Readonly<{
   generatedAt: string;
   signerStatus: ReleaseSignerStatus;
   coverageStatus?: "incomplete" | "not-established";
+  lineage?: ReleaseHeaderLineage;
   limitations: readonly string[];
   nextAction: string;
 }>;
@@ -29,6 +39,7 @@ export function projectReleaseHeader(
   signerStatus: ReleaseSignerStatus = "unknown",
   subjectEvidence: readonly ReleaseHeaderSubjectEvidence[] = [],
   recordLimitations: readonly string[] = [],
+  lineage?: ReleaseHeaderLineage,
 ): ReleaseHeader {
   const primary = decision.subjects.find((subject) => subject.role === "primary");
   if (!primary) throw new Error("release decision is missing a primary subject");
@@ -59,6 +70,7 @@ export function projectReleaseHeader(
     generatedAt: decision.generatedAt,
     signerStatus,
     coverageStatus: decision.decision === "INCOMPLETE" || missingSubjectPayloads.length > 0 ? "incomplete" : "not-established",
+    ...(lineage ? { lineage: Object.freeze({ ...lineage }) } : {}),
     limitations: Object.freeze(limitations),
     nextAction: decision.decision === "PASS" ? "Preserve the decision and its evidence bindings." : "Review the listed limitations and policy evidence before release.",
   });

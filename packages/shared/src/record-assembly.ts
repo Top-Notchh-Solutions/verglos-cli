@@ -10,6 +10,7 @@ import { POLICY_DOCUMENT_SCHEMA, parsePolicyDocument, policyDocumentDigest } fro
 import { POLICY_EVALUATION_SCHEMA, parsePolicyEvaluation } from "./policy-evaluation.js";
 import { RELEASE_DECISION_SCHEMA, parseReleaseDecision } from "./release-decision.js";
 import { canonicalizeJson } from "./schema.js";
+import { LINEAGE_GRAPH_SCHEMA, parseLineageGraphDocument } from "./lineage-graph.js";
 
 export function assembleReleaseRecord(input: Omit<ReleaseRecordManifestDocument, "members" | "extensions"> & { readonly members: ReleaseRecordManifestDocument["members"]; readonly extensions?: ReleaseRecordManifestDocument["extensions"] }): ReleaseRecordManifestDocument {
   if (input.members.filter((member) => member.kind === "release-decision").length !== 1) throw new Error("Release Record assembly requires exactly one release-decision member");
@@ -49,7 +50,7 @@ export function assembleReleaseRecordBundle(input: Omit<ReleaseRecordManifestDoc
 export function assertCompleteReleaseRecord(manifest: ReleaseRecordManifestDocument): ReleaseRecordManifestDocument {
   const parsed = createReleaseRecordManifest(manifest);
   const kinds = new Set(parsed.members.map((member) => member.kind));
-  for (const required of ["subject", "policy", "policy-evaluation", "release-decision"] as const) {
+  for (const required of ["subject", "lineage", "policy", "policy-evaluation", "release-decision"] as const) {
     if (!kinds.has(required)) throw new Error(`complete Release Record requires a ${required} member`);
   }
   if (["complete", "partial"].includes(parsed.redaction.status) && !kinds.has("redaction-manifest")) throw new Error("complete Release Record requires a redaction-manifest member");
@@ -98,6 +99,14 @@ export function assertCompleteReleaseRecordPayloads(
   });
   const subjectIds = new Set(subjects.map((subject) => subject.subjectId));
   if (subjectIds.size !== subjects.length) throw new Error("complete Release Record subject identities must be unique");
+
+  const lineages = payloadFor("lineage");
+  if (lineages.length !== 1) throw new Error("complete Release Record requires exactly one lineage graph payload");
+  requireSchema(lineages[0]!.member, LINEAGE_GRAPH_SCHEMA);
+  const lineage = parseLineageGraphDocument(lineages[0]!.value);
+  if (lineage.subjectIds.length !== subjectIds.size || lineage.subjectIds.some((subjectId) => !subjectIds.has(subjectId))) {
+    throw new Error("complete Release Record lineage subject set must exactly match included subject payloads");
+  }
 
   const runs = payloadFor("tool-run").map(({ member, value }) => {
     requireSchema(member, TOOL_RUN_SCHEMA);
@@ -189,7 +198,7 @@ export function assertCompleteReleaseRecordPayloads(
   requireSchema(decisions[0]!.member, RELEASE_DECISION_SCHEMA);
   const decision = parseReleaseDecision(decisions[0]!.value);
 
-  if (!subjectIds.has(evaluation.subjectId) || decision.subjects.some((subject) => !subjectIds.has(subject.subjectId))) {
+  if (!subjectIds.has(evaluation.subjectId) || decision.subjects.length !== subjectIds.size || decision.subjects.some((subject) => !subjectIds.has(subject.subjectId))) {
     throw new Error("complete Release Record decision and evaluation must reference included subject payloads");
   }
   const evaluationPolicy = `${evaluation.policy.digest.algorithm}:${evaluation.policy.digest.value}`;

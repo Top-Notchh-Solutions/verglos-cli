@@ -77,7 +77,7 @@ export async function executeRecordCreate(
       if (inspected.digest !== expected || inspected.size !== member.size) throw new Error(`record member ${member.path} does not match manifest digest or size`);
       if (digests.has(inspected.digest)) throw new Error(`record member digest is duplicated: ${member.path}`);
       digests.add(inspected.digest);
-      if (complete && ["subject", "tool-run", "observation", "verification-attempt", "policy-exception", "exception-approval", "policy", "policy-evaluation", "release-decision", "redaction-manifest"].includes(member.kind)) {
+      if (complete && ["subject", "lineage", "tool-run", "observation", "verification-attempt", "policy-exception", "exception-approval", "policy", "policy-evaluation", "release-decision", "redaction-manifest"].includes(member.kind)) {
         const semanticBytes = await readRegular(memberPath, MAX_MANIFEST_BYTES, `complete record member ${member.path}`);
         const semanticDigest = `sha256:${createHash("sha256").update(semanticBytes).digest("hex")}`;
         if (semanticDigest !== inspected.digest || semanticBytes.byteLength !== inspected.size) throw new Error(`record member ${member.path} changed during complete-graph validation`);
