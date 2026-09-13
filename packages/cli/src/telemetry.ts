@@ -184,8 +184,9 @@ export async function sendScanEvent(
 
   // Attach the license key when we have one, so the server can also
   // write a score_history row keyed on the license for the Pro
-  // dashboard's 30/365/1095-day trend. Free users never send this
-  // header — telemetry stays anonymous.
+  // dashboard's 30/365/1095-day trend. Users without a stored license
+  // key omit this header; a stored license key associates the event with
+  // that account.
   const creds = await loadCredentials().catch(() => null);
   const headers: Record<string, string> = { "content-type": "application/json" };
   if (creds?.licenseKey) {
