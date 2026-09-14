@@ -7,7 +7,7 @@ import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { executeRecordCreate } from "./record-create.js";
 import { runCliFixture } from "./cli-fixture.js";
-import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createLineageGraphDocument, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, digestPolicyException, EXCEPTION_APPROVAL_SCHEMA, LINEAGE_GRAPH_SCHEMA, MAX_RELEASE_RECORD_AGGREGATE_BYTES, OBSERVATION_SCHEMA, parseExceptionApproval, parsePolicyDocument, parsePolicyException, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, POLICY_EXCEPTION_SCHEMA, RELEASE_DECISION_SCHEMA, releaseRecordManifestDigest, SUBJECT_SCHEMA, TOOL_RUN_SCHEMA, VERIFICATION_ATTEMPT_SCHEMA } from "@verglos/shared";
+import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createApprovalReceipt, createLineageGraphDocument, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, digestPolicyException, EXCEPTION_APPROVAL_SCHEMA, LINEAGE_GRAPH_SCHEMA, MAX_RELEASE_RECORD_AGGREGATE_BYTES, OBSERVATION_SCHEMA, parseExceptionApproval, parsePolicyDocument, parsePolicyException, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, POLICY_EXCEPTION_SCHEMA, RELEASE_DECISION_SCHEMA, releaseRecordManifestDigest, SUBJECT_SCHEMA, TOOL_RUN_SCHEMA, VERIFICATION_ATTEMPT_SCHEMA } from "@verglos/shared";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordExport } from "./record-export.js";
 import { executeRecordPackage } from "./record-package.js";
@@ -236,10 +236,26 @@ test("complete record create, verify, and export preserve canonical policy and s
     const keyPair = generateKeyPairSync("ed25519");
     const publicKeyPath = join(root, "public.pem");
     const signaturePath = join(root, "signature.json");
+    const privateKeyPath = join(root, "private.pem");
     await writeFile(publicKeyPath, keyPair.publicKey.export({ format: "pem", type: "spki" }));
-    const { signReleaseRecordManifest } = await import("@verglos/shared");
-    const signature = signReleaseRecordManifest(storedManifest, keyPair.privateKey.export({ format: "pem", type: "pkcs8" }).toString(), { id: "fixture-signer", issuer: "fixture-issuer" }, "2026-09-10T05:00:00.000Z");
-    await writeFile(signaturePath, `${canonicalizeJson(signature)}\n`);
+    await writeFile(privateKeyPath, keyPair.privateKey.export({ format: "pem", type: "pkcs8" }));
+    const approvalReceiptPath = join(root, "signing-approval.json");
+    const approvalReceipt = createApprovalReceipt({
+      requestId: "92345678-1234-4123-8123-123456789abc",
+      action: "sign",
+      actor: "fixture-human-approver",
+      target: `manifest:${join(output, "manifest.json")}`,
+      files: [join(output, "manifest.json")],
+      network: [],
+      policyEffect: "record-sign",
+      requestedAt: "2026-09-10T04:00:00.000Z",
+      expiresAt: "2099-01-01T00:00:00.000Z",
+    }, { decision: "approved", decidedBy: "fixture-human-approver", decidedAt: "2026-09-10T04:01:00.000Z" });
+    await writeFile(approvalReceiptPath, `${canonicalizeJson(approvalReceipt)}\n`);
+    const signProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "sign", join(output, "manifest.json"), signaturePath, "--key", privateKeyPath, "--signer", "fixture-signer", "--issuer", "fixture-issuer", "--approve", "--approval-receipt", approvalReceiptPath, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(signProcess.exitCode, 0, `${signProcess.stdout}\n${signProcess.stderr}`);
+    assert.equal(signProcess.stderr, "");
+    assert.equal((JSON.parse(signProcess.stdout) as { manifestDigest: string }).manifestDigest, releaseRecordManifestDigest(storedManifest));
     const signedPackagePath = join(root, "signed.vgl");
     const signedPackageProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "pack", output, join(output, "manifest.json"), signedPackagePath, "--signature", signaturePath, "--public-key", publicKeyPath, "--trusted-issuer", "fixture-issuer", "--trusted-signer", "fixture-signer", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
     assert.equal(signedPackageProcess.exitCode, 0, `${signedPackageProcess.stdout}\n${signedPackageProcess.stderr}`);
@@ -290,6 +306,11 @@ test("complete record create, verify, and export preserve canonical policy and s
     await writeFile(packageMemberPath, originalMemberBytes);
     await writeFile(packageMemberPath, Buffer.concat([originalMemberBytes, Buffer.from("tamper")]));
     assert.equal(await executeRecordVerify(packagePath, undefined, true, true), 78);
+    const tamperedVerifyProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "verify", packagePath], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(tamperedVerifyProcess.exitCode, 78);
+    assert.equal(tamperedVerifyProcess.stdout, "");
+    assert.match(tamperedVerifyProcess.stderr, /record member digest mismatch/u);
+    assert.doesNotMatch(tamperedVerifyProcess.stderr, /fixture-private-canary/u);
     await writeFile(packageMemberPath, originalMemberBytes);
     const viewerTarget = join(root, "external-viewer.html");
     await writeFile(viewerTarget, "outside package");
