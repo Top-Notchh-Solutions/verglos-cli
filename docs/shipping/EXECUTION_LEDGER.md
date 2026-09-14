@@ -1,5 +1,13 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-14 · RECORD-011 public projection acceptance
+
+- **Implementation:** CLI commit `a898777` pushed to existing PR #38, exact head `a8987771eff59d3219e4fd4df857deaaf17b80d3`. Added decision-derived conservative coverage (`incomplete` / `not-established`), truthful signer states (`unknown` / `unsigned` / `unverified`) using verified package metadata, and reused the fixed limitation redaction for the in-toto predicate/export. CLI-process coverage checks unsigned and signed `.vgl` projections; canaries cover tenant/client, source/path/raw finding, secret, policy, issuer, signer, and limitation content.
+- **Acceptance evidence:** shared projection/provenance/viewer tests 7/7; CLI create/project tests 12/12; forced uncached `pnpm exec turbo run test typecheck build --filter=verglos... --force --output-logs=errors-only` 18/18; `git diff --check` and `node scripts/check-public-boundary.mjs` pass. Exact-head self-scan `34814230628` and all nine Ubuntu/macOS/Windows × Node 20/22/24 cells in matrix `34814230639` pass.
+- **Tracking/PR:** RECORD-011 accepted; backlog **135 checked / 134 unchecked / 269 total**, recalculated from task checkboxes. PR #38 is OPEN/CLEAN at exact head `a8987771eff59d3219e4fd4df857deaaf17b80d3`; no merge/review decision recorded. PR files contain only product source/tests; local internal docs were not pushed. Web PR #33 remains OPEN/CLEAN at `75b9a482ffdbaf3e31b273550af4aa2585d8a0bb` with checks green and no changes in this batch.
+- **Boundary/operations:** local `.vgl` public projection, static viewer, and in-toto export only. Does not establish sanitization of producer-declared member bytes or hosted receipt/upload/log/support safety. No production DB read/write/migration, merge, deployment, release, or marketing change occurred.
+- **Next:** inspect and pursue RECORD-010 legacy `attest` compatibility lifecycle, whose stated dependencies RECORD-009 and TRUTH-010 are checked; keep hosted `VERIFY-WEB-001` separate.
+
 ## 2026-09-14 · RECORD-009 local record command acceptance
 
 - **Implementation:** CLI commits `d0c5e34` and `fb60d57` pushed to existing PR #38; exact head `fb60d57f8d9723408f04c3ac1205c859df289344`. Extended the 11-member synthetic record journey to use the real CLI process for full `record create --complete`, sign with an exact manifest-scoped approval receipt and test-only Ed25519 private key, pack, and trusted offline verify. Added CLI-process tamper verification assertions for stable exit 78, useful human diagnostics, and no fixture-canary disclosure.
