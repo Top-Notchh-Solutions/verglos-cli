@@ -175,11 +175,13 @@ test("complete record create, verify, and export preserve canonical policy and s
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true, undefined, undefined, undefined, undefined, true), 0);
     const statementPath = join(root, "release.intoto.json");
     assert.equal(await executeRecordExport(output, join(output, "manifest.json"), statementPath, true, true), 0);
-    const statement = JSON.parse(await readFile(statementPath, "utf8")) as { _type: string; predicateType: string; predicate: { manifestDigest: string }; subject: Array<{ name: string }> };
+    const statement = JSON.parse(await readFile(statementPath, "utf8")) as { _type: string; predicateType: string; predicate: { manifestDigest: string; limitations: string[] }; subject: Array<{ name: string }> };
     assert.equal(statement._type, "https://in-toto.io/Statement/v1");
     assert.equal(statement.predicateType, "https://verglos.dev/attestations/release/v1");
     const storedManifest = JSON.parse(await readFile(join(output, "manifest.json"), "utf8")) as Parameters<typeof releaseRecordManifestDigest>[0];
     assert.equal(statement.predicate.manifestDigest, releaseRecordManifestDigest(storedManifest));
+    assert.deepEqual(statement.predicate.limitations, ["Limitation details withheld from this public projection."]);
+    assert.equal(JSON.stringify(statement).includes("fixture-private-canary-source-path"), false);
     assert.deepEqual(statement.subject.map(({ name }) => name), [subject.subjectId]);
 
     const oversizedManifestPath = join(root, "oversized-manifest.json");
@@ -208,6 +210,8 @@ test("complete record create, verify, and export preserve canonical policy and s
     const packageResult = JSON.parse(packageProcess.stdout) as { packaged: boolean; transport: string; outputPath: string; manifestDigest: string; members: number; bytes: number; signature: string; uploadPerformed: boolean; includesNonOmittedEvidence: boolean };
     assert.deepEqual(packageResult, { packaged: true, transport: "directory-v1", outputPath: packagePath, manifestDigest: releaseRecordManifestDigest(storedManifest), members: storedManifest.members.filter((member) => member.redaction !== "omitted").length, bytes: packageResult.bytes, signature: "not-included", uploadPerformed: false, includesNonOmittedEvidence: true });
     assert.equal(Number.isSafeInteger(packageResult.bytes) && packageResult.bytes > 0, true);
+    const packagedStatement = await readFile(join(packagePath, ".vgl-release.intoto.json"), "utf8");
+    assert.equal(packagedStatement.includes("fixture-private-canary-source-path"), false, "packaged public provenance must withhold free-form limitation text");
     const omittedMember = storedManifest.members.find((member) => member.path === "omitted/fixture-source.ts");
     assert.ok(omittedMember);
     assert.equal((await readdir(packagePath)).includes(`${omittedMember.digest.algorithm}-${omittedMember.digest.value}`), false);
@@ -216,6 +220,12 @@ test("complete record create, verify, and export preserve canonical policy and s
     assert.equal(verifyProcess.exitCode, 0, `${verifyProcess.stdout}\n${verifyProcess.stderr}`);
     assert.equal(verifyProcess.stderr, "");
     assert.equal((JSON.parse(verifyProcess.stdout) as { package?: { transport: string } }).package?.transport, "directory-v1");
+    const unsignedProjectionProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "project", packagePath, join(packagePath, "manifest.json"), "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(unsignedProjectionProcess.exitCode, 0, `${unsignedProjectionProcess.stdout}\n${unsignedProjectionProcess.stderr}`);
+    assert.equal(unsignedProjectionProcess.stderr, "");
+    const unsignedProjection = JSON.parse(unsignedProjectionProcess.stdout) as { signerStatus: string; coverageStatus: string };
+    assert.equal(unsignedProjection.signerStatus, "unsigned");
+    assert.equal(unsignedProjection.coverageStatus, "not-established");
     const symlinkPackagePath = join(root, "linked.vgl");
     await symlink(packagePath, symlinkPackagePath);
     assert.equal(await executeRecordVerify(symlinkPackagePath, undefined, true, true), 78, "a .vgl transport root must not be followed through a symlink");
@@ -265,6 +275,13 @@ test("complete record create, verify, and export preserve canonical policy and s
     assert.equal(signedVerifyProcess.exitCode, 0, `${signedVerifyProcess.stdout}\n${signedVerifyProcess.stderr}`);
     assert.equal(signedVerifyProcess.stderr, "");
     assert.equal((JSON.parse(signedVerifyProcess.stdout) as { signature?: { verified?: boolean } }).signature?.verified, true);
+    const signedProjectionProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "project", signedPackagePath, join(signedPackagePath, "manifest.json"), "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(signedProjectionProcess.exitCode, 0, `${signedProjectionProcess.stdout}\n${signedProjectionProcess.stderr}`);
+    assert.equal(signedProjectionProcess.stderr, "");
+    const signedProjection = JSON.parse(signedProjectionProcess.stdout) as { signerStatus: string; coverageStatus: string };
+    assert.equal(signedProjection.signerStatus, "unverified", "projection must not mistake package presence for trusted signature verification");
+    assert.equal(signedProjection.coverageStatus, "not-established", "PASS does not prove complete evidence coverage");
+    for (const canary of ["fixture-private-canary-source-path", "fixture-signer", "fixture-issuer"]) assert.equal(signedProjectionProcess.stdout.includes(canary), false, `record projection leaked ${canary}`);
     const wrongKeyPair = generateKeyPairSync("ed25519");
     const wrongPublicKeyPath = join(root, "wrong-public.pem");
     await writeFile(wrongPublicKeyPath, wrongKeyPair.publicKey.export({ format: "pem", type: "spki" }));

@@ -4,7 +4,7 @@ import { parseReleaseRecordManifest, type ReleaseRecordManifestDocument } from "
 import { parseReleaseDecisionJson, type ReleaseDecisionDocument } from "./release-decision.js";
 
 export interface PublicRecordProjection { readonly manifestId: string; readonly manifestDigest: string; readonly generatedAt: string; readonly decisionMemberDigest: string; readonly redaction: ReleaseRecordManifestDocument["redaction"]; readonly limitations: readonly string[]; }
-const PUBLIC_LIMITATION_REDACTION = "Limitation details withheld from this public projection.";
+export const PUBLIC_LIMITATION_REDACTION = "Limitation details withheld from this public projection.";
 
 export function projectPublicRecord(manifest: ReleaseRecordManifestDocument): PublicRecordProjection {
   const parsed = parseReleaseRecordManifest(manifest); const decision = parsed.members.find((member) => member.kind === "release-decision");
@@ -16,7 +16,8 @@ export function projectPublicRecord(manifest: ReleaseRecordManifestDocument): Pu
 export interface VerifiedPublicRecordProjection extends PublicRecordProjection {
   readonly decision: ReleaseDecisionDocument["decision"];
   readonly subjects: readonly { readonly subjectId: string; readonly role: ReleaseDecisionDocument["subjects"][number]["role"] }[];
-  readonly signerStatus: "unsigned" | "unknown";
+  readonly coverageStatus: "incomplete" | "not-established";
+  readonly signerStatus: "unsigned" | "unknown" | "unverified";
 }
 
 /**
@@ -27,6 +28,7 @@ export interface VerifiedPublicRecordProjection extends PublicRecordProjection {
 export function projectVerifiedPublicRecord(
   manifest: ReleaseRecordManifestDocument,
   members: ReadonlyMap<string, Uint8Array>,
+  options: { readonly detachedSignaturePresent?: boolean } = {},
 ): VerifiedPublicRecordProjection {
   const parsed = parseReleaseRecordManifest(manifest);
   const base = projectPublicRecord(parsed);
@@ -42,6 +44,9 @@ export function projectVerifiedPublicRecord(
     ...base,
     decision: decision.decision,
     subjects: Object.freeze(decision.subjects.map(({ subjectId, role }) => ({ subjectId, role }))),
-    signerStatus: parsed.members.some((member) => member.kind === "signature" && member.redaction !== "omitted") ? "unknown" : "unsigned",
+    coverageStatus: decision.decision === "INCOMPLETE" ? "incomplete" : "not-established",
+    signerStatus: parsed.members.some((member) => member.kind === "signature" && member.redaction !== "omitted") || options.detachedSignaturePresent === true
+      ? "unverified"
+      : options.detachedSignaturePresent === false ? "unsigned" : "unknown",
   };
 }
