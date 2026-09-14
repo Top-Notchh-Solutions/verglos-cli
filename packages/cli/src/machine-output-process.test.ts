@@ -562,6 +562,7 @@ test("every public command leaf provides side-effect-free help", async () => {
     { path: "evidence export", flags: ["--json", "--quiet"] },
     { path: "evidence import", flags: ["--json", "--quiet"] },
     { path: "record create", flags: ["--json", "--quiet"] },
+    { path: "record pack", flags: ["--signature", "--public-key", "--trusted-issuer", "--trusted-signer", "--json", "--quiet"] },
     { path: "record verify", flags: ["--json", "--quiet"] },
     { path: "record export", flags: ["--json", "--quiet"] },
     { path: "record sign", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },

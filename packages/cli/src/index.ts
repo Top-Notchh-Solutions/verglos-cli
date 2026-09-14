@@ -78,6 +78,7 @@ import { executeRecordProject } from "./record-project.js";
 import { executeRecordSign } from "./record-sign.js";
 import { executeConfigInspect } from "./config-inspect.js";
 import { executeRecordHeader } from "./record-header.js";
+import { executeRecordPackage } from "./record-package.js";
 import { printTelemetryConsentPreview, readTelemetryConsent, writeTelemetryConsent } from "./telemetry.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
@@ -260,8 +261,19 @@ record.command("create <membersRoot> <manifestPath> <outputRoot>")
   .action(async (membersRoot: string, manifestPath: string, outputRoot: string, opts: { json?: boolean; quiet?: boolean; complete?: boolean }) => {
     process.exit(await executeRecordCreate(membersRoot, manifestPath, outputRoot, opts.json, opts.quiet, opts.complete));
   });
-record.command("verify <storeRoot> <manifestPath>")
-  .description("Verify every stored record member against its manifest")
+record.command("pack <storeRoot> <manifestPath> <output.vgl>")
+  .description("Package a complete record as a local private .vgl directory")
+  .option("--signature <path>", "Include a detached signature after local trust verification")
+  .option("--public-key <path>", "Verify the signature with this user-supplied Ed25519 public key")
+  .option("--trusted-issuer <issuer>", "Require this exact signature issuer")
+  .option("--trusted-signer <id>", "Optionally require this exact signature identity")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, outputPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string }) => {
+    process.exit(await executeRecordPackage(storeRoot, manifestPath, outputPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner));
+  });
+record.command("verify <storeRoot> [manifestPath]")
+  .description("Verify a local record store or complete .vgl package; signed packages require an explicit trusted key")
   .option("--json", "Emit machine-readable JSON")
   .option("--signature <path>", "Verify an offline record signature envelope")
   .option("--public-key <path>", "Verify with a user-supplied Ed25519 public key")
@@ -269,7 +281,7 @@ record.command("verify <storeRoot> <manifestPath>")
   .option("--trusted-signer <id>", "Require this exact signature identity")
   .option("--complete", "Require the complete Release Record graph")
   .option("--quiet", "Suppress human output")
-  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; complete?: boolean }) => {
+  .action(async (storeRoot: string, manifestPath: string | undefined, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; complete?: boolean }) => {
     process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, opts.complete));
   });
 record.command("export <storeRoot> <manifestPath> <outputPath>")

@@ -1,20 +1,32 @@
 import { lstat, readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { assertCompleteReleaseRecord, assertCompleteReleaseRecordPayloads, assertReleaseRecordRedactionPayloads, parseReleaseDecisionJson, parseReleaseRecordManifestJson, readAndVerifyRecord, releaseRecordManifestDigest, verifyReleaseRecordSignature } from "@verglos/shared";
+import { verifyRecordPackageArtifacts } from "./record-package.js";
 
 const MAX_MANIFEST_BYTES = 8 * 1024 * 1024;
 
-export async function executeRecordVerify(root: string, manifestPath: string, json = false, quiet = false, signaturePath?: string, publicKeyPath?: string, trustedIssuer?: string, trustedSigner?: string, complete = false): Promise<number> {
+export async function executeRecordVerify(root: string, manifestPath: string | undefined, json = false, quiet = false, signaturePath?: string, publicKeyPath?: string, trustedIssuer?: string, trustedSigner?: string, complete = false): Promise<number> {
   try {
-    const entry = await lstat(manifestPath);
+    const resolvedManifestPath = manifestPath ?? join(root, "manifest.json");
+    const entry = await lstat(resolvedManifestPath);
     if (!entry.isFile()) throw new Error("record manifest must be a regular file");
     if (entry.size > MAX_MANIFEST_BYTES) throw new Error("record manifest exceeds the 8 MiB limit");
-    const bytes = await readFile(manifestPath);
+    const bytes = await readFile(resolvedManifestPath);
     if (bytes.byteLength > MAX_MANIFEST_BYTES) throw new Error("record manifest exceeds the 8 MiB limit");
     const parsedManifest = parseReleaseRecordManifestJson(bytes);
     const manifest = complete ? assertCompleteReleaseRecord(parsedManifest) : parsedManifest;
     const members = await readAndVerifyRecord(root, manifest);
     assertReleaseRecordRedactionPayloads(manifest, members);
     if (complete) assertCompleteReleaseRecordPayloads(manifest, members);
+    const packageArtifacts = await verifyRecordPackageArtifacts({ root, manifest, members });
+    if (packageArtifacts.packaged) {
+      assertCompleteReleaseRecord(manifest);
+      assertCompleteReleaseRecordPayloads(manifest, members);
+      if (signaturePath && packageArtifacts.signaturePath && signaturePath !== packageArtifacts.signaturePath) {
+        throw new Error("a .vgl package's embedded signature cannot be replaced with a different signature path");
+      }
+      signaturePath ??= packageArtifacts.signaturePath;
+    }
     const decisionMember = manifest.members.find((member) => member.kind === "release-decision");
     if (!decisionMember) throw new Error("record manifest is missing its release-decision member");
     const decisionBytes = members.get(decisionMember.path);
@@ -40,7 +52,7 @@ export async function executeRecordVerify(root: string, manifestPath: string, js
       const signedAt = typeof envelope === "object" && envelope !== null && "signedAt" in envelope ? Date.parse(String((envelope as { signedAt: unknown }).signedAt)) : NaN;
       if (!Number.isFinite(signedAt) || signedAt < Date.parse(manifest.generatedAt)) throw new Error("record signature timestamp predates manifest generation");
     }
-    const result = { verified: true, manifestDigest: releaseRecordManifestDigest(manifest), members: members.size, paths: [...members.keys()].sort(), decision: decision.decision, policyDigest: `${decision.policy.digest.algorithm}:${decision.policy.digest.value}`, ...(signature ? { signature } : {}) };
+    const result = { verified: true, manifestDigest: releaseRecordManifestDigest(manifest), members: members.size, paths: [...members.keys()].sort(), decision: decision.decision, policyDigest: `${decision.policy.digest.algorithm}:${decision.policy.digest.value}`, ...(packageArtifacts.packaged ? { package: { transport: "directory-v1", viewer: "verified", export: "verified" } } : {}), ...(signature ? { signature } : {}) };
     if (json) console.log(JSON.stringify(result));
     else if (!quiet) console.log(`Verified record ${result.manifestDigest} (${result.members} members).`);
     return 0;
