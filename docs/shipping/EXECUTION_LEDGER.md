@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-14 · QUAL-CLI-005 engine-exit and historical verification drill (accepted)
+
+- **Code / scope:** CLI commit `9fc208b14cf8bedd4d26ad5290a081324a39eff9` pushed to existing PR #38 at exact head. Added a process-level drill that runs the actual CLI without Docker/Trivy, imports a normalized SARIF observation, preserves honest incomplete coverage/policy state, and checks an old record and decision viewer still work offline.
+- **Verification:** Focused drill 1/1. Forced uncached `pnpm exec turbo run test typecheck build --filter=verglos... --force`: 18/18 Turbo tasks. Exact-head self-scan run `34859651208` and all nine Ubuntu/macOS/Windows × Node 20/22/24 matrix jobs in `34859651096` pass. `git diff --check` passes.
+- **Acceptance / operations:** QUAL-CLI-005 accepted; checkbox recount **129 unchecked / 140 checked / 269 total**. PR #38 is OPEN/CLEAN; no review decision was recorded. Its public file list contains the test file but no internal shipping document. PR #33 remains OPEN/CLEAN at `3377a26bddbd0998ab82d0d98695473427434aec`. No production DB/environment read or write, migration, merge, deployment, publish, or release occurred. This ledger/backlog/traceability/status update is private/local-only and must not be pushed to either public repository. Next: choose the highest-impact whole acceptance item whose dependencies are directly verified; QUAL-CLI-004 remains gated on HUNT-011.
+
 ## 2026-09-14 · QUAL-CLI-003 malformed/resource adversarial corpus (accepted)
 
 - **Code / scope:** CLI commit `ef6f92967d0f13392775cc59655a95cf2f688125` pushed to existing PR #38 at its exact head. Archive extraction now validates safe member metadata/resource limits before output, rejects root-equivalent and platform-specific traversal/link escapes, checks payload bytes against declared sizes, and never recursively deletes a caller-selected existing destination. Importers use bounded JSON parsing with byte, depth, node, object-property, and array limits; Trivy parsing has direct finding-count coverage. Tests exercise archive traversal/symlink/duplicate/size bombs, gzip expansion, destination preservation, malformed/deep/oversized imported JSON, manifest constraints, bounded output/time, record memory caps, temporary disk/memory ceilings, and cancellation.
