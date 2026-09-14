@@ -1,5 +1,13 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-14 · VERIFY-WEB-001 redacted receipt ingestion (accepted)
+
+- **Implementation:** Web `2d89869` pushed to existing PR #33, exact head `2d89869e75d3d0316bf71e94d585a64bff8e34ef`. Added canonical projection-digest binding over normalized fields and active PostgreSQL route tests for authorized bounded POST/list/detail, retry/idempotency, conflicts, and tenant isolation.
+- **Verification:** GitHub run `34835571918`: 98/98 tests with PostgreSQL-backed handler integration active; typecheck, `db:check`, 17-migration check, build, public-boundary diff audit, dependency audit, SBOM, license inventory/tests, tracked-secret guard pass. GitGuardian and Vercel pass. Local suite 95 pass / 3 DB-gated skips because local PostgreSQL is unavailable; local typecheck/schema/migration/diff checks pass.
+- **Acceptance/tracking:** VERIFY-WEB-001 checked; **138 checked / 131 unchecked / 269 total**, task-checkbox recount. Strict schema rejects source/raw keys; projection digest is recomputed; authorization precedes body parsing; tenant/project scope and exact retry are tested. Object custody, original `.vgl` verification, production data backfill, and recovery remain open.
+- **Operations:** no production DB read/write/migration, deployment, merge, or release. Web PR #33 OPEN/CLEAN; internal docs local-only and not pushed.
+- **Next:** inspect current migration/backfill/audit implementation for HOSTED-013 and select the strongest executable dry-run/reconciliation slice; keep production writes behind an exact reviewed plan and independent recovery evidence.
+
 ## 2026-09-14 · RECORD-006 keyless Sigstore adapter (accepted)
 
 - **Implementation:** CLI `4545eb4` pushed to existing PR #38, exact head `4545eb4f1e1b6d7476e4434c08336695d82a60a0`. Explicit caller-supplied OIDC token via named environment variable; explicit and separately scoped signing/network approvals; allowlisted Sigstore endpoints; canonical statement-to-bundle binding; verified issuer, identity, and bundle; offline verification against caller-root and exact policy. `.vgl` package v1.1 embeds optional bundle/binding and retains v1.0 when absent. No universal Verglos customer key.
