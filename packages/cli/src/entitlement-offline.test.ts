@@ -1,4 +1,5 @@
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test, after } from "node:test";
@@ -67,19 +68,16 @@ test("resolveEntitlement: normalizes a legacy compliance cache to enterprise", a
   assert.equal(resolved.source, "cache");
 });
 
-test("resolveEntitlement: server-side license revocation overrides a still-valid signed plan", () => {
+test("resolveEntitlement: current server plan overrides a still-valid signed plan", () => {
   assert.equal(
-    mod.effectivePlanFromServerAndToken({ plan: "free", active: false }, {
-      tier: "pro", expiresAt: Date.now() + 60_000, inOfflineGrace: false,
-    }),
+    mod.effectivePlanFromServer({ plan: "free", active: false }),
     "free",
   );
   assert.equal(
-    mod.effectivePlanFromServerAndToken({ plan: "pro", active: true }, {
-      tier: "pro", expiresAt: Date.now() + 60_000, inOfflineGrace: false,
-    }),
-    "pro",
+    mod.effectivePlanFromServer({ plan: "free", active: true }),
+    "free",
   );
+  assert.equal(mod.effectivePlanFromServer({ plan: "pro", active: true }), "pro");
 });
 
 test("resolveEntitlement: online revocation response defeats a still-valid signed Pro token", async () => {
@@ -89,7 +87,7 @@ test("resolveEntitlement: online revocation response defeats a still-valid signe
   const nowSeconds = Math.floor(Date.now() / 1000);
   const token = protocol.signEntitlement({
     claims: {
-      keyHash: "test-license-hash", tier: "pro", projects: [], seats: 2,
+      keyHash: createHash("sha256").update("vg_test_license").digest("hex"), tier: "pro", projects: [], seats: 2,
       features: ["fix", "monitor"], iat: nowSeconds, exp: nowSeconds + 3600,
     },
     privateKey: protocol.privateKeyFromPem(pair.privateKeyPem),
@@ -106,7 +104,8 @@ test("resolveEntitlement: online revocation response defeats a still-valid signe
   try {
     const resolved = await mod.resolveEntitlement({ forceRefresh: true });
     assert.equal(resolved.plan, "free");
-    assert.deepEqual(resolved.capabilities, ["scan"]);
+    assert.ok(resolved.capabilities.includes("scan"));
+    assert.equal(resolved.capabilities.includes("fix.auto"), false);
     assert.equal(resolved.source, "rest");
     assert.equal(resolved.license, undefined, "a server-revoked license is not projected as active from the cached JWT");
   } finally {

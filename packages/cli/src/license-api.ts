@@ -57,6 +57,26 @@ export type StatusError = {
 };
 
 const REQUEST_TIMEOUT_MS = 5000;
+const MAX_ENTITLEMENT_TOKEN_CHARS = 128_000;
+
+async function fetchV2EntitlementToken(licenseKey: string, apiUrl: string): Promise<string | undefined> {
+  try {
+    const res = await fetchWithTimeout(`${apiUrl}/api/v2/entitlement/token`, {
+      method: "POST",
+      headers: { authorization: `Bearer ${licenseKey}` },
+    });
+    if (!res.ok) return undefined;
+    const body = await readJsonResponse(res) as { ok?: unknown; token_version?: unknown; entitlement_token?: unknown } | null;
+    if (body?.ok !== true || body.token_version !== 2 || typeof body.entitlement_token !== "string"
+      || body.entitlement_token.length > MAX_ENTITLEMENT_TOKEN_CHARS
+      || body.entitlement_token.split(".").length !== 3) return undefined;
+    return body.entitlement_token;
+  } catch {
+    // V1 validation remains the compatibility path when v2 issuance is
+    // unavailable (for example, before a tenant mapping is provisioned).
+    return undefined;
+  }
+}
 
 async function fetchWithTimeout(
   url: string,
@@ -92,12 +112,18 @@ export async function validateLicense(
     };
 
     if (body.valid === true && body.plan) {
+      const legacyToken = typeof body.entitlement_token === "string"
+        && body.entitlement_token.length <= MAX_ENTITLEMENT_TOKEN_CHARS
+        && body.entitlement_token.split(".").length === 3
+        ? body.entitlement_token
+        : undefined;
+      const v2Token = await fetchV2EntitlementToken(licenseKey, apiUrl);
       return {
         valid: true,
         plan: body.plan,
         expiresAt: body.expires_at ?? null,
         active: true,
-        entitlementToken: body.entitlement_token,
+        entitlementToken: v2Token ?? legacyToken,
       };
     }
 
