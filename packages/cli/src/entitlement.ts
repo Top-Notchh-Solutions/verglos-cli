@@ -275,6 +275,15 @@ export interface ResolvedEntitlement {
   license?: VerifiedLicense;
 }
 
+/** A current server-side inactive result revokes cached signed-plan display. */
+export function effectivePlanFromServerAndToken(
+  server: Pick<CapabilitiesResponse, "plan" | "active">,
+  license: VerifiedLicense | null,
+): string {
+  if (!server.active) return normalizeTier(server.plan);
+  return license?.tier ?? normalizeTier(server.plan);
+}
+
 export async function resolveEntitlement(
   opts: LoadCapabilitiesOptions = {},
 ): Promise<ResolvedEntitlement> {
@@ -288,14 +297,15 @@ export async function resolveEntitlement(
 
   // Case 1 + 2 — REST responded (fresh or stale-within-grace).
   if (restIsAuthoritative || caps.stale === true) {
+    const serverDenied = !caps.active;
     return {
-      plan: license?.tier ?? normalizeTier(caps.plan),
+      plan: effectivePlanFromServerAndToken(caps, license),
       capabilities: caps.capabilities,
       source: caps.stale === true ? "cache" : "rest",
       stale: caps.stale === true,
       simulated: caps.simulated,
       realPlan: caps.real_plan === undefined ? undefined : normalizeTier(caps.real_plan),
-      license: license ?? undefined,
+      license: serverDenied ? undefined : license ?? undefined,
     };
   }
 

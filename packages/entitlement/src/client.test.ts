@@ -85,6 +85,69 @@ test("verifyEntitlement: successor slot also verifies (rotation path)", async ()
   assert.equal(result.claims?.tier, "studio");
 });
 
+test("verifyEntitlement: v2 kid selects only its pinned key and preserves v1 compatibility", async () => {
+  const legacy = generateEntitlementKeyPair();
+  const successor = generateEntitlementKeyPair();
+  const nowSec = now();
+  const v2Claims: Partial<EntitlementClaims> = {
+    schemaVersion: 2,
+    userId: "user-123",
+    tenantId: "tenant-456",
+    role: "owner",
+    plan: "pro",
+    capabilities: ["scan", "fix"],
+    allowances: { seats: 2, recordsPerMonth: 100 },
+    catalogVersion: "2026-09-12.1",
+    tokenId: "123e4567-e89b-42d3-a456-426614174000",
+  };
+  const token = signEntitlement({
+    claims: { ...makeClaims({ ...v2Claims, keyHash: "a".repeat(64) }), iat: nowSec, exp: nowSec + 3600 },
+    privateKey: privateKeyFromPem(successor.privateKeyPem),
+    keyId: "successor-v1",
+  });
+  const rotated = await verifyEntitlement(token, Date.now(), {
+    pinnedKeysById: { "legacy-v1": legacy.publicKeyBase64Url, "successor-v1": successor.publicKeyBase64Url },
+  });
+  assert.equal(rotated.valid, true, rotated.reason);
+  assert.equal(rotated.claims?.tenantId, "tenant-456");
+
+  const wrongKey = await verifyEntitlement(token, Date.now(), {
+    pinnedKeys: [successor.publicKeyBase64Url],
+    pinnedKeysById: { "legacy-v1": legacy.publicKeyBase64Url, "successor-v1": legacy.publicKeyBase64Url },
+  });
+  assert.equal(wrongKey.valid, false, "kid verification must not fall back to an unrelated legacy pin");
+});
+
+test("verifyEntitlement: rejects malformed v2 identifiers and unbounded capability lists", async () => {
+  const kp = generateEntitlementKeyPair();
+  const nowSec = now();
+  const baseV2: Partial<EntitlementClaims> = {
+    schemaVersion: 2, userId: "user-123", tenantId: "tenant-456", role: "owner", plan: "pro",
+    capabilities: ["scan"], allowances: { seats: 2 }, catalogVersion: "2026-09-12.1",
+    tokenId: "123e4567-e89b-42d3-a456-426614174000",
+  };
+  for (const patch of [{ tokenId: "not-a-uuid" }, { capabilities: Array.from({ length: 257 }, (_, i) => `cap.${i}`) }]) {
+    const token = signEntitlement({
+      claims: { ...makeClaims({ ...baseV2, ...patch, keyHash: "a".repeat(64) }), iat: nowSec, exp: nowSec + 3600 },
+      privateKey: privateKeyFromPem(kp.privateKeyPem), keyId: "successor-v1",
+    });
+    const result = await verifyEntitlement(token, Date.now(), { pinnedKeysById: { "successor-v1": kp.publicKeyBase64Url } });
+    assert.equal(result.valid, false);
+  }
+});
+
+test("verifyEntitlement: rejects v2 claims that omit the schema version", async () => {
+  const kp = generateEntitlementKeyPair();
+  const nowSec = now();
+  const token = signEntitlement({
+    claims: { ...makeClaims({ keyHash: "a".repeat(64), tenantId: "tenant-1" }), iat: nowSec, exp: nowSec + 3600 },
+    privateKey: privateKeyFromPem(kp.privateKeyPem),
+  });
+  const result = await verifyEntitlement(token, Date.now(), { pinnedKeys: [kp.publicKeyBase64Url] });
+  assert.equal(result.valid, false);
+  assert.match(result.reason ?? "", /schema version/u);
+});
+
 test("verifyEntitlement: legacy compliance tier is exposed canonically as enterprise", async () => {
   const kp = generateEntitlementKeyPair();
   const legacy = signEntitlement({

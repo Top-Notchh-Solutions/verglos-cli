@@ -11,6 +11,7 @@ const tempHome = mkdtempSync(join(tmpdir(), "verglos-entitlement-test-"));
 process.env.HOME = tempHome;
 
 const mod = await import("./entitlement.js");
+const protocol = await import("@verglos/entitlement");
 
 after(() => {
   rmSync(tempHome, { recursive: true, force: true });
@@ -64,6 +65,55 @@ test("resolveEntitlement: normalizes a legacy compliance cache to enterprise", a
   assert.equal(resolved.plan, "enterprise");
   assert.equal(resolved.realPlan, "enterprise");
   assert.equal(resolved.source, "cache");
+});
+
+test("resolveEntitlement: server-side license revocation overrides a still-valid signed plan", () => {
+  assert.equal(
+    mod.effectivePlanFromServerAndToken({ plan: "free", active: false }, {
+      tier: "pro", expiresAt: Date.now() + 60_000, inOfflineGrace: false,
+    }),
+    "free",
+  );
+  assert.equal(
+    mod.effectivePlanFromServerAndToken({ plan: "pro", active: true }, {
+      tier: "pro", expiresAt: Date.now() + 60_000, inOfflineGrace: false,
+    }),
+    "pro",
+  );
+});
+
+test("resolveEntitlement: online revocation response defeats a still-valid signed Pro token", async () => {
+  const previousPublicKey = process.env.VERGLOS_TEST_PUBKEY_B64URL;
+  const pair = protocol.generateEntitlementKeyPair();
+  process.env.VERGLOS_TEST_PUBKEY_B64URL = pair.publicKeyBase64Url;
+  const nowSeconds = Math.floor(Date.now() / 1000);
+  const token = protocol.signEntitlement({
+    claims: {
+      keyHash: "test-license-hash", tier: "pro", projects: [], seats: 2,
+      features: ["fix", "monitor"], iat: nowSeconds, exp: nowSeconds + 3600,
+    },
+    privateKey: protocol.privateKeyFromPem(pair.privateKeyPem),
+  });
+  writeFileSync(join(tempHome, ".verglos", "credentials.json"), JSON.stringify({
+    licenseKey: "vg_test_license", entitlementToken: token, apiUrl: "https://verglos.test",
+  }));
+
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async () => Response.json({
+    plan: "free", real_plan: "free", capabilities: ["scan"], cache_ttl_seconds: 60,
+    simulated: false, active: false, reason: "expired",
+  })) as typeof fetch;
+  try {
+    const resolved = await mod.resolveEntitlement({ forceRefresh: true });
+    assert.equal(resolved.plan, "free");
+    assert.deepEqual(resolved.capabilities, ["scan"]);
+    assert.equal(resolved.source, "rest");
+    assert.equal(resolved.license, undefined, "a server-revoked license is not projected as active from the cached JWT");
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (previousPublicKey === undefined) delete process.env.VERGLOS_TEST_PUBKEY_B64URL;
+    else process.env.VERGLOS_TEST_PUBKEY_B64URL = previousPublicKey;
+  }
 });
 
 test("loadCapabilities: rejects malformed cached capability shapes", async () => {
