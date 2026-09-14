@@ -150,10 +150,19 @@ test("complete record create, verify, and export preserve canonical policy and s
       usage: { durationMs: 0, cpuMs: 0, peakMemoryBytes: 0, diskBytes: 0, processes: 0, outputBytes: 0, networkRequests: 0 },
       output: { artifacts: [] }, verdict: "not_supported", reason: "No recipe or target execution occurred in this synthetic fixture.", limitations: ["Test fixture only; no runtime evidence."],
     };
+    const provenanceDir = join(source, "provenance");
+    await mkdir(provenanceDir, { recursive: true });
+    const githubSource = join(root, "github.intoto.json");
+    const githubMemberPath = join(provenanceDir, "github.json");
+    const expectedArtifactDigest = `sha256:${"a".repeat(64)}`;
+    const githubStatement = { _type: "https://in-toto.io/Statement/v1", subject: [{ name: "artifact.tgz", digest: { sha256: "a".repeat(64) } }], predicateType: "https://slsa.dev/provenance/v1", predicate: { buildType: "synthetic-fixture" } };
+    await writeFile(githubSource, JSON.stringify(githubStatement));
+    const importProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "import-provenance", githubSource, githubMemberPath, "--provider", "github", "--subject-id", subject.subjectId, "--expected-digest", expectedArtifactDigest, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(importProcess.exitCode, 0, `${importProcess.stdout}\n${importProcess.stderr}`);
+    const cliImportedGithubMember = new Uint8Array(await readFile(githubMemberPath));
     const provenanceSources = [
-      { provider: "github" as const, digest: "a".repeat(64), expected: `sha256:${"a".repeat(64)}` },
-      { provider: "npm" as const, digest: "b".repeat(64), expected: `sha256:${"a".repeat(64)}` },
-      { provider: "buildkit" as const, digest: "", expected: `sha256:${"a".repeat(64)}` },
+      { provider: "npm" as const, digest: "b".repeat(64), expected: expectedArtifactDigest },
+      { provider: "buildkit" as const, digest: "", expected: expectedArtifactDigest },
     ].map(({ provider, digest: provenanceDigest, expected }) => {
       const statement = provenanceDigest
         ? { _type: "https://in-toto.io/Statement/v1", subject: [{ name: "artifact.tgz", digest: { sha256: provenanceDigest } }], predicateType: "https://slsa.dev/provenance/v1", predicate: { buildType: "synthetic-fixture" } }
@@ -171,6 +180,7 @@ test("complete record create, verify, and export preserve canonical policy and s
       { path: "verification/fixture.json", kind: "verification-attempt" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(verificationAttempt)), required: true, schema: VERIFICATION_ATTEMPT_SCHEMA },
       { path: "exceptions/fixture.json", kind: "policy-exception" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(exception)), required: true, schema: POLICY_EXCEPTION_SCHEMA },
       { path: "exceptions/approval.json", kind: "exception-approval" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(exceptionApproval)), required: true, schema: EXCEPTION_APPROVAL_SCHEMA },
+      { path: "provenance/github.json", kind: "provenance" as const, mediaType: "application/json", bytes: cliImportedGithubMember, required: true, schema: { id: "urn:verglos:schema:provider-provenance", version: "1.0.0" } },
       ...provenanceSources.map(({ path, kind, mediaType, bytes, required, schema }) => ({ path, kind, mediaType, bytes, required, schema })),
       { path: "omitted/fixture-source.ts", kind: "metadata" as const, mediaType: "text/plain", bytes: new Uint8Array(), required: false, redaction: "omitted" as const, redactionCategories: ["source-content", "paths"] as const },
     ];
