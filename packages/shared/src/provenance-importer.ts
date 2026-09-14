@@ -67,6 +67,11 @@ export function importInTotoProvenance(bytes: Uint8Array): ImportedProvenance {
   }
 
   const subjects = statement.subject;
+  if ((typeof statement._type !== "string" && typeof statement.predicateType !== "string")
+    || (statement._type !== undefined && typeof statement._type !== "string")
+    || (statement.predicateType !== undefined && typeof statement.predicateType !== "string")) {
+    throw new ProvenanceImportError("INVALID_STATEMENT", "Provenance payload must identify an in-toto statement type.");
+  }
   if (!Array.isArray(subjects) || subjects.length === 0 || subjects.length > 4096 || subjects.some((entry) => typeof entry !== "object" || entry === null || Array.isArray(entry))) {
     throw new ProvenanceImportError("MISSING_SUBJECT", "Provenance statement requires bounded subject digests.");
   }
@@ -84,17 +89,27 @@ export function importInTotoProvenance(bytes: Uint8Array): ImportedProvenance {
     throw new ProvenanceImportError("INVALID_STATEMENT", "Provenance predicate must be an object.");
   }
   const predicateObject = predicate as Record<string, unknown> | undefined;
+  const runDetails = asObject(predicateObject?.runDetails);
+  const buildDefinition = asObject(predicateObject?.buildDefinition);
+  const metadata = asObject(runDetails?.metadata);
+  const builder = asObject(predicateObject?.builder) ?? asObject(runDetails?.builder);
+  const invocation = asObject(predicateObject?.invocation) ?? asObject(buildDefinition?.externalParameters)
+    ?? (typeof metadata?.invocationId === "string" ? { invocationId: metadata.invocationId } : undefined);
   return {
     format: "in-toto",
     sourceDigest: imported.sourceDigest,
     envelopeType,
     signatureCount,
     subjects: subjects as Record<string, unknown>[],
-    ...(predicateObject?.builder && typeof predicateObject.builder === "object" && !Array.isArray(predicateObject.builder) ? { builder: predicateObject.builder as Record<string, unknown> } : {}),
-    ...(predicateObject?.invocation && typeof predicateObject.invocation === "object" && !Array.isArray(predicateObject.invocation) ? { invocation: predicateObject.invocation as Record<string, unknown> } : {}),
+    ...(builder ? { builder } : {}),
+    ...(invocation ? { invocation } : {}),
     signatureStatus: "unverified",
     statement,
   };
+}
+
+function asObject(value: unknown): Record<string, unknown> | undefined {
+  return typeof value === "object" && value !== null && !Array.isArray(value) ? value as Record<string, unknown> : undefined;
 }
 
 function decodeCanonicalBase64(value: string): Buffer {

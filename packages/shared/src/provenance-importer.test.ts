@@ -11,7 +11,7 @@ test("in-toto importer rejects malformed envelopes and digest maps", () => {
 });
 
 test("DSSE importer preserves its original source digest and signature presence without claiming verification", () => {
-  const statement = { _type: "https://in-toto.io/Statement/v1", subject: [{ name: "artifact", digest: { sha256: "a".repeat(64) } }], predicateType: "https://slsa.dev/provenance/v1", predicate: { runDetails: { builder: { id: "builder" } } } };
+  const statement = { _type: "https://in-toto.io/Statement/v1", subject: [{ name: "artifact", digest: { sha256: "a".repeat(64) } }], predicateType: "https://slsa.dev/provenance/v1", predicate: { runDetails: { builder: { id: "builder" }, metadata: { invocationId: "fixture-run" } } } };
   const payload = Buffer.from(JSON.stringify(statement));
   const bytes = new TextEncoder().encode(JSON.stringify({ payloadType: "application/vnd.in-toto+json", payload: payload.toString("base64"), signatures: [{ keyid: "fixture-key", sig: "fixture-signature" }] }));
   const imported = importInTotoProvenance(bytes);
@@ -20,6 +20,8 @@ test("DSSE importer preserves its original source digest and signature presence 
   assert.equal(imported.signatureStatus, "unverified");
   assert.deepEqual(imported.statement, statement);
   assert.equal(imported.sourceDigest.value, createHash("sha256").update(bytes).digest("hex"));
+  assert.equal(imported.builder?.id, "builder");
+  assert.equal(imported.invocation?.invocationId, "fixture-run");
 });
 
 test("DSSE importer rejects unsupported payload types and non-canonical base64", () => {
