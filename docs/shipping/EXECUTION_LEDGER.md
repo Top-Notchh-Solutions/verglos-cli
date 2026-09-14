@@ -1,5 +1,13 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-14 · RECORD-009 local record command acceptance
+
+- **Implementation:** CLI commits `d0c5e34` and `fb60d57` pushed to existing PR #38; exact head `fb60d57f8d9723408f04c3ac1205c859df289344`. Extended the 11-member synthetic record journey to use the real CLI process for full `record create --complete`, sign with an exact manifest-scoped approval receipt and test-only Ed25519 private key, pack, and trusted offline verify. Added CLI-process tamper verification assertions for stable exit 78, useful human diagnostics, and no fixture-canary disclosure.
+- **Acceptance evidence:** success JSON/quiet behavior, scoped approval, signature/manifest digest binding, package output `uploadPerformed:false`, trusted signer/issuer verification, tamper reason, and fixed exit mapping are directly tested. Focused create/sign suite 13/13; forced uncached `pnpm exec turbo run test typecheck build --filter=verglos... --force --output-logs=errors-only` 18/18; `git diff --check` and `node scripts/check-public-boundary.mjs` pass. Exact-head self-scan `34812069439` and all nine platform jobs in `34812069451` pass.
+- **Tracking/PR:** RECORD-009 accepted; backlog **134 checked / 135 unchecked / 269 total**. PR #38 is OPEN/CLEAN and MERGEABLE at exact head `fb60d57f8d9723408f04c3ac1205c859df289344`; no review decision is recorded. Current PR file scope contains source/tests, not private shipping docs or secrets. Local private tracker and CLI documentation mirror reconciled; private docs remain unpushed.
+- **Boundary/operations:** this is user-supplied local Ed25519 signing, not guided Sigstore/cosign identity, universal-key custody, hosted receipt integration, legal/trust-root qualification, or proof of redaction. No production DB read/write/migration, merge, deployment, publish, release, Web code change, or marketing edit occurred.
+- **Next:** pursue the highest-impact remaining executable acceptance item in the same active CLI PR #38 / Web PR #33; keep marketing held and retain all remaining dependency/evidence gates.
+
 ## 2026-09-14 · RECORD-002 `.vgl` package acceptance
 
 - **Implementation:** CLI commit `d0c5e34` pushed to existing PR #38; exact head `d0c5e3441882dc9cd08e2b00ca430b11d0a28942`. Hardens package verification to reject a symlinked `.vgl` root. Strengthens the synthetic 11-member end-to-end CLI fixture to drive complete creation and signed pack/verify as child CLI processes, and verifies aggregate-limit rejection before reading blobs or creating output. The reversible private decision remains `directory-v1`; no archive, upload, or public release is implied.
