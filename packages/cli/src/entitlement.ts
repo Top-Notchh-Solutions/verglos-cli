@@ -1,10 +1,11 @@
+import { createHash } from "node:crypto";
 import { lstat, mkdir, readFile, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import chalk from "chalk";
 import { verifyEntitlement } from "@verglos/entitlement";
 import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
-import { defaultCapabilitiesFor, normalizeTier, type Tier } from "./tier-defaults.js";
+import { normalizeTier, type Tier } from "./tier-defaults.js";
 
 /**
  * Client-side entitlement checker.
@@ -58,6 +59,7 @@ interface CachedCapabilities extends CapabilitiesResponse {
    * unreachable. Callers can surface a renewal warning.
    */
   stale?: boolean;
+  source: "rest" | "cache" | "free";
 }
 
 const FREE_FALLBACK: CachedCapabilities = {
@@ -78,6 +80,7 @@ const FREE_FALLBACK: CachedCapabilities = {
   active: true,
   fetchedAt: new Date(0).toISOString(),
   expiresAt: new Date(0).toISOString(),
+  source: "free",
 };
 
 async function readCache(): Promise<CachedCapabilities | null> {
@@ -89,7 +92,7 @@ async function readCache(): Promise<CachedCapabilities | null> {
     if (!parsed) return null;
     const value = JSON.parse(raw) as Record<string, unknown>;
     if (typeof value.fetchedAt !== "string" || typeof value.expiresAt !== "string" || !Number.isFinite(new Date(value.fetchedAt).getTime()) || !Number.isFinite(new Date(value.expiresAt).getTime())) return null;
-    return { ...parsed, fetchedAt: value.fetchedAt, expiresAt: value.expiresAt, ...(typeof value.simulatedAsPlan === "string" ? { simulatedAsPlan: value.simulatedAsPlan } : {}), ...(value.stale === true ? { stale: true } : {}) };
+    return { ...parsed, source: "cache", fetchedAt: value.fetchedAt, expiresAt: value.expiresAt, ...(typeof value.simulatedAsPlan === "string" ? { simulatedAsPlan: value.simulatedAsPlan } : {}), ...(value.stale === true ? { stale: true } : {}) };
   } catch {
     return null;
   }
@@ -173,7 +176,7 @@ export async function loadCapabilities(
     new Date(cached.expiresAt).getTime() > now &&
     cached.simulatedAsPlan === opts.asPlan;
 
-  if (!opts.forceRefresh && cacheIsFresh && cached) return cached;
+  if (!opts.forceRefresh && cacheIsFresh && cached) return { ...cached, source: "cache" };
 
   const creds = await loadCredentials();
   const server = await fetchFromServer(
@@ -192,7 +195,7 @@ export async function loadCapabilities(
       const cachedFetchedAt = new Date(cached.fetchedAt).getTime();
       const ageMs = now - cachedFetchedAt;
       if (ageMs < ABSOLUTE_MAX_STALE_MS) {
-        return { ...cached, stale: true };
+        return { ...cached, source: "cache", stale: true };
       }
     }
     return FREE_FALLBACK;
@@ -205,6 +208,7 @@ export async function loadCapabilities(
     expiresAt: new Date(now + ttlMs).toISOString(),
     simulatedAsPlan: opts.asPlan,
     stale: false,
+    source: "rest",
   };
   await writeCache(entry);
   return entry;
@@ -218,16 +222,19 @@ export function _absoluteMaxStaleMs(): number {
   return ABSOLUTE_MAX_STALE_MS;
 }
 
-/**
- * Result of verifying the stored entitlement JWT. The CLI trusts this
- * for LICENSE VALIDITY (tier + expiry) but not for the CAPABILITY
- * LIST — that still comes from REST when we can reach the server, so
- * the fence can move server-side without a CLI release.
- */
+/** Cryptographically verified license; only v2 carries effective plan/catalog authority. */
 export interface VerifiedLicense {
   tier: Tier;
   expiresAt: number;
+  issuedAt: number;
   inOfflineGrace: boolean;
+  schemaVersion?: 2;
+  userId?: string;
+  tenantId?: string;
+  role?: "owner" | "admin" | "approver" | "member" | "viewer";
+  capabilities?: readonly string[];
+  allowances?: Readonly<Record<string, number | "unset" | "contracted">>;
+  catalogVersion?: string;
 }
 
 /**
@@ -240,48 +247,49 @@ export interface VerifiedLicense {
  */
 export async function getVerifiedLicense(): Promise<VerifiedLicense | null> {
   const creds = await loadCredentials();
-  if (!creds.entitlementToken) return null;
+  if (!creds.entitlementToken || !creds.licenseKey) return null;
   const result = await verifyEntitlement(creds.entitlementToken);
   if (!result.valid || !result.claims) return null;
+  const expectedKeyHash = createHash("sha256").update(creds.licenseKey).digest("hex");
+  if (result.claims.keyHash !== expectedKeyHash) return null;
+  const hasSignedCatalog = result.claims.schemaVersion === 2;
   return {
-    tier: normalizeTier(result.claims.tier),
+    // A legacy tier claim does not contain the server-owned capability
+    // projection. Do not let consumers such as MCP infer paid authority
+    // from that tier alone while offline.
+    tier: hasSignedCatalog ? normalizeTier(result.claims.plan ?? result.claims.tier) : "free",
     expiresAt: result.claims.exp * 1000,
+    issuedAt: result.claims.iat * 1000,
     inOfflineGrace: result.inOfflineGrace === true,
+    ...(hasSignedCatalog ? {
+      schemaVersion: 2 as const,
+      userId: result.claims.userId,
+      tenantId: result.claims.tenantId,
+      role: result.claims.role,
+      capabilities: Object.freeze([...(result.claims.capabilities ?? [])]),
+      allowances: Object.freeze({ ...(result.claims.allowances ?? {}) }),
+      catalogVersion: result.claims.catalogVersion,
+    } : {}),
   };
 }
 
-/**
- * Composite entitlement resolution: JWT for license truth, REST for
- * capability list, with fallbacks in this precedence:
- *
- *   1. REST fresh → capabilities = REST response
- *   2. REST cached within 7d → capabilities = cache (marked stale)
- *   3. JWT valid + REST unreachable + no cache → capabilities =
- *      baked-in defaults for JWT tier (paid users are never silently
- *      downgraded to Free while their license is valid)
- *   4. Nothing valid → Free
- *
- * The tier the caller sees is always taken from the JWT when it is
- * valid, otherwise from the REST response. That way a JWT that says
- * "expired" downgrades the tier even if the REST cache still says Pro.
- */
+/** Resolve current REST authority first, then its bounded cache, then signed v2 catalog claims. */
 export interface ResolvedEntitlement {
   plan: string;
   capabilities: string[];
-  source: "rest" | "cache" | "baked-in" | "free";
+  source: "rest" | "cache" | "signed-token" | "free";
   stale: boolean;
   simulated: boolean;
   realPlan?: string;
   license?: VerifiedLicense;
+  allowances?: Readonly<Record<string, number | "unset" | "contracted">>;
+  catalogVersion?: string;
+  schemaVersion?: 2;
 }
 
-/** A current server-side inactive result revokes cached signed-plan display. */
-export function effectivePlanFromServerAndToken(
-  server: Pick<CapabilitiesResponse, "plan" | "active">,
-  license: VerifiedLicense | null,
-): string {
-  if (!server.active) return normalizeTier(server.plan);
-  return license?.tier ?? normalizeTier(server.plan);
+/** A current server response is authoritative over every previously signed token. */
+export function effectivePlanFromServer(server: Pick<CapabilitiesResponse, "plan" | "active">): string {
+  return server.active ? normalizeTier(server.plan) : "free";
 }
 
 export async function resolveEntitlement(
@@ -292,36 +300,73 @@ export async function resolveEntitlement(
     getVerifiedLicense(),
   ]);
 
-  const restIsAuthoritative =
-    caps !== FREE_FALLBACK && caps.stale !== true;
-
-  // Case 1 + 2 — REST responded (fresh or stale-within-grace).
-  if (restIsAuthoritative || caps.stale === true) {
-    const serverDenied = !caps.active;
+  if (caps.source === "rest") {
+    const plan = effectivePlanFromServer(caps);
+    const matchingLicense = caps.active && license?.tier === plan ? license : undefined;
     return {
-      plan: effectivePlanFromServerAndToken(caps, license),
-      capabilities: caps.capabilities,
-      source: caps.stale === true ? "cache" : "rest",
+      plan,
+      capabilities: caps.active ? caps.capabilities : [...FREE_FALLBACK.capabilities],
+      source: "rest",
+      stale: false,
+      simulated: caps.simulated,
+      realPlan: caps.real_plan === undefined ? undefined : normalizeTier(caps.real_plan),
+      ...(matchingLicense ? { license: matchingLicense } : {}),
+      ...(matchingLicense?.schemaVersion === 2 ? {
+        schemaVersion: 2 as const,
+        allowances: matchingLicense.allowances,
+        catalogVersion: matchingLicense.catalogVersion,
+      } : {}),
+    };
+  }
+
+  if (caps.source === "cache") {
+    if (!caps.active) {
+      return { plan: "free", capabilities: [...FREE_FALLBACK.capabilities], source: "cache", stale: caps.stale === true, simulated: false };
+    }
+    const cacheFetchedAt = new Date(caps.fetchedAt).getTime();
+    const tokenSupersedesCache = license?.schemaVersion === 2
+      && license.issuedAt > cacheFetchedAt
+      && license.capabilities !== undefined;
+    if (tokenSupersedesCache && license) {
+      return {
+        plan: license.tier,
+        capabilities: [...license.capabilities!],
+        source: "signed-token",
+        stale: true,
+        simulated: false,
+        license,
+        schemaVersion: 2,
+        allowances: license.allowances,
+        catalogVersion: license.catalogVersion,
+      };
+    }
+    return {
+      plan: normalizeTier(caps.plan),
+      capabilities: [...caps.capabilities],
+      source: "cache",
       stale: caps.stale === true,
       simulated: caps.simulated,
       realPlan: caps.real_plan === undefined ? undefined : normalizeTier(caps.real_plan),
-      license: serverDenied ? undefined : license ?? undefined,
+      ...(license?.tier === normalizeTier(caps.plan) ? { license } : {}),
     };
   }
 
-  // Case 3 — REST unreachable AND no cache AND JWT says paid.
-  if (license && license.tier !== "free") {
+  // Without REST/cache, only a signed v2 catalog projection can grant paid
+  // capabilities. Legacy tier-only tokens safely retain Free functionality.
+  if (license?.schemaVersion === 2 && license.capabilities) {
     return {
       plan: license.tier,
-      capabilities: defaultCapabilitiesFor(license.tier),
-      source: "baked-in",
+      capabilities: [...license.capabilities],
+      source: "signed-token",
       stale: true,
       simulated: false,
       license,
+      schemaVersion: 2,
+      allowances: license.allowances,
+      catalogVersion: license.catalogVersion,
     };
   }
 
-  // Case 4 — nothing valid.
   return {
     plan: "free",
     capabilities: [...FREE_FALLBACK.capabilities],
