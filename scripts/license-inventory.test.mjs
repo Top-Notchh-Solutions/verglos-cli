@@ -18,16 +18,22 @@ test("dependency license inventory is deterministic and review-safe", async () =
   assert.equal(first.packages.reduce((count, entry) => count + entry.versions.length, 0), first.lockfilePackageCount);
   assert.ok(first.packages.some((entry) => entry.name === "@esbuild/aix-ppc64"), "non-host OS/CPU packages must remain visible");
   assert.ok(first.packages.some((entry) => entry.name === "@turbo/windows-64"), "Windows runtime packages must remain visible");
-  assert.ok(first.bundledComponents.some((entry) => entry.name === "benchmark" && entry.version === "1.0.0" && entry.bundledBy === "fast-uri@3.1.4"), "nested bundled package manifests must remain visible with parent attribution");
+  assert.ok(first.bundledComponents.some((entry) => entry.name === "benchmark" && entry.version === "1.0.0" && entry.bundledBy === "fast-uri@3.1.7"), "nested bundled package manifests must remain visible with parent attribution");
   assert.ok(first.packages.every((entry) => ["direct", "transitive"].includes(entry.scope)));
-  assert.ok(first.packages.every((entry) => typeof entry.declaredLicense === "string" && typeof entry.detectedLicense === "string" && typeof entry.detectionMethod === "string" && typeof entry.source === "string" && typeof entry.reviewBlocker === "boolean"));
-  assert.deepEqual(first.reviewBlockers, [{
-    name: "benchmark",
-    version: "1.0.0",
-    bundledBy: "fast-uri@3.1.4",
-    license: "ISC",
-    reason: "nested-license-conflicts-with-container",
-  }]);
+  assert.ok(first.packages.every((entry) => typeof entry.declaredLicense === "string" && typeof entry.detectedLicense === "string" && typeof entry.detectionMethod === "string" && (typeof entry.source === "string" || entry.reviewBlocker) && typeof entry.reviewBlocker === "boolean"));
+  assert.deepEqual(first.packages.filter((entry) => !entry.source).map((entry) => `${entry.name}@${entry.versions.join(",")}`).sort(), ["minipass-pipeline@1.2.4"]);
+  const blockerIds = first.reviewBlockers.map((entry) => `${entry.name}@${entry.version}${entry.bundledBy ? ` bundled by ${entry.bundledBy}` : ""}: ${entry.reason}`).sort();
+  assert.deepEqual(blockerIds, [
+    "benchmark@1.0.0 bundled by fast-uri@3.1.7: nested-license-conflicts-with-container",
+    "glob@13.0.6: license-review-required",
+    "lru-cache@11.5.2: license-review-required",
+    "minimatch@10.2.6: license-review-required",
+    "minipass-flush@1.0.7: license-review-required",
+    "minipass-pipeline@1.2.4: source-missing",
+    "minipass@7.1.3: license-review-required",
+    "path-scurry@2.0.2: license-review-required",
+  ]);
+  assert.equal(first.bundledComponents.find((entry) => entry.name === "benchmark")?.parentDeclaredLicense, "BSD-3-Clause");
   assert.equal(first.bundledComponents.find((entry) => entry.name === "benchmark")?.parentDeclaredLicense, "BSD-3-Clause");
   assert.equal((await run("node", ["scripts/license-inventory.mjs", "--check"], { maxBuffer: 16 * 1024 * 1024 })).stdout.length > 0, true, "complete evidence remains usable while an explicit review blocker is recorded");
   await assert.rejects(run("node", ["scripts/license-inventory.mjs", "--require-clear"], { maxBuffer: 16 * 1024 * 1024 }), /Command failed/u);
@@ -84,7 +90,7 @@ test("CycloneDX and SPDX generators preserve every lockfile license component", 
   assert.equal(spdx.packages.length, expectedCount);
   assert.ok(cycloneDx.components.some((component) => component.name === "@turbo/windows-64"));
   assert.ok(spdx.packages.some((component) => component.name === "@esbuild/aix-ppc64"));
-  assert.ok(cycloneDx.components.some((component) => component.name === "benchmark" && component.properties.some((property) => property.name === "verglos:bundled-by" && property.value === "fast-uri@3.1.4")));
+  assert.ok(cycloneDx.components.some((component) => component.name === "benchmark" && component.properties.some((property) => property.name === "verglos:bundled-by" && property.value === "fast-uri@3.1.7")));
   const benchmarkId = spdx.packages.find((component) => component.name === "benchmark" && component.versionInfo === "1.0.0")?.SPDXID;
   assert.ok(spdx.relationships.some((relationship) => relationship.relationshipType === "CONTAINS" && relationship.relatedSpdxElement === benchmarkId));
   assert.ok(spdx.packages.every((component) => component.licenseConcluded === "NOASSERTION"));

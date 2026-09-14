@@ -65,7 +65,8 @@ export interface CheckPackageResult {
   version: string;
   exists: boolean;
   typosquat?: { top: string; distance: number };
-  cves: { id: string; severity: string; summary?: string }[];
+  /** Advisory evidence, attributed to OSV; this is not a second Verglos finding model. */
+  cves: { id: string; source: "OSV.dev"; severity: string; summary?: string }[];
   coverage: "complete" | "incomplete";
   limitations: string[];
   reasoning: string;
@@ -191,6 +192,9 @@ export async function checkPackage(
     }
   }
   validateAgentInputBounds(input);
+  if (input.version !== undefined && /[\u0000-\u001f\u007f]/u.test(input.version)) {
+    throw new Error("check_package version must not contain control characters");
+  }
   const packageName = input.packageName.trim();
 
   const exists = await (lookups.packageExists ?? packageExists)(packageName);
@@ -241,6 +245,7 @@ export async function checkPackage(
 
   const cvesFmt = cves.map((v) => ({
     id: v.id,
+    source: "OSV.dev" as const,
     severity: v.database_specific?.severity ?? "UNKNOWN",
     summary: v.summary,
   }));

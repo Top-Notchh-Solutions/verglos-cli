@@ -16,7 +16,8 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
-import { parseAttestArgs, parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseHuntBeforeWriteArgs, parseHuntExplainVerdictArgs, parseHuntFindingArgs, parseHuntReportArgs, parseScanArgs } from "./input-validation.js";
+import { checkPolicyRecord } from "./tools/check-policy.js";
+import { parseAttestArgs, parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseHuntBeforeWriteArgs, parseHuntExplainVerdictArgs, parseHuntFindingArgs, parseHuntReportArgs, parsePolicyCheckArgs, parseScanArgs } from "./input-validation.js";
 
 const require = createRequire(import.meta.url);
 const { version: MCP_VERSION } = require("../package.json") as {
@@ -88,10 +89,9 @@ const APPROVAL_RECEIPT_PROPERTY = {
 /**
  * MCP server for Verglos.
  *
- * All tool handlers are stubs — they respond with a shape
- * that describes the tool but doesn't execute yet. Real handlers
- * land (check_before_write), follow-up (check_package),
- * follow-up (scan), follow-up (explain_finding).
+ * Shipped pre-write, package, scan, and explanation tools route through shared
+ * scanner, input-boundary, authority, entitlement, and failure contracts.
+ * Hunt and Attest remain explicit alpha stubs and do not execute or sign.
  *
  * Design constraints from design §7:
  *   - Speaks JSON-RPC over stdio
@@ -111,26 +111,30 @@ const TOOLS = [
   {
     name: "verglos_check_before_write",
     description:
-      "The killer tool. Agent submits code it's about to write; Verglos returns allow/warn/block and (when possible) a corrected version. Runs only AI-* rules + secret patterns + high-confidence injection checks. <300ms, no network, free forever.",
+      "Agent submits code it's about to write; Verglos returns an allow/warn/block decision, shared Finding records attributed to the requested target path, explicit partial fast-path coverage, and (when possible) a corrected version. Runs only AI-* rules + secret patterns + high-confidence injection checks. No network.",
     inputSchema: {
       type: "object",
       properties: {
-        code: { type: "string", description: "The code the agent is about to write." },
+        code: { type: "string", maxLength: 1000000, description: "The code the agent is about to write; bounded to 1,000,000 UTF-8 bytes at runtime." },
         targetPath: {
           type: "string",
+          maxLength: 4096,
           description:
-            "Target file path (relative or absolute). Verglos uses the extension for language inference.",
+            "Target file path (relative or absolute). Verglos uses the basename extension for language inference and preserves this exact path as finding attribution.",
         },
         language: {
           type: "string",
+          maxLength: 128,
           description: "Optional language hint (e.g. 'ts', 'tsx').",
         },
         context: {
           type: "string",
+          maxLength: 4096,
           description: "Optional freeform description of what the code is for.",
         },
       },
       required: ["code", "targetPath"],
+      additionalProperties: false,
     },
   },
   {
@@ -142,15 +146,18 @@ const TOOLS = [
       properties: {
         packageName: {
           type: "string",
+          maxLength: 512,
           description: "The npm package name (e.g. 'reqeusts' or '@stripee/js').",
         },
         version: {
           type: "string",
+          maxLength: 512,
           description: "Optional version to check for CVEs. Defaults to 'latest'.",
         },
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["packageName"],
+      additionalProperties: false,
     },
   },
   {
@@ -164,8 +171,11 @@ const TOOLS = [
           type: "string",
           description: "Absolute path to the project root. Defaults to cwd.",
         },
+        limit: { type: "integer", minimum: 0, maximum: 1000, description: "Maximum findings returned; 0 returns all findings." },
+        noProvenance: { type: "boolean", description: "Opt out of local provenance collection." },
         ...APPROVAL_RECEIPT_PROPERTY,
       },
+      additionalProperties: false,
     },
   },
   {
@@ -183,6 +193,21 @@ const TOOLS = [
         files: { type: "array", items: { type: "string" }, description: "Optional bounded relative file scope for the proposal; no files are written." },
       },
       required: ["rule"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "verglos_policy_check",
+    description:
+      "Validate and explain the canonical policy evaluation in a content-addressed Release Record. Verifies the policy digest, exact subject, referenced observations and evidence member digests, plus the deterministic decision fields. Read-only; does not rerun evidence producers or claim producer facts are true.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        manifestPath: { type: "string", maxLength: 4096, description: "Absolute path to Release Record manifest JSON (max 8 MiB); symlinks are rejected." },
+        recordStore: { type: "string", maxLength: 4096, description: "Absolute path to the content-addressed store (max 256 members / 32 MiB total); root and members must be regular files/directories, not symlinks." },
+      },
+      required: ["manifestPath", "recordStore"],
+      additionalProperties: false,
     },
   },
   {
@@ -197,6 +222,7 @@ const TOOLS = [
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath", "findingId"],
+      additionalProperties: false,
     },
   },
   {
@@ -210,6 +236,7 @@ const TOOLS = [
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath"],
+      additionalProperties: false,
     },
   },
   {
@@ -225,6 +252,7 @@ const TOOLS = [
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["code", "filePath", "language"],
+      additionalProperties: false,
     },
   },
   {
@@ -240,15 +268,15 @@ const TOOLS = [
           enum: ["true", "false", "not_attemptable"],
           description: "Hunt verdict to explain.",
         },
-        ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["findingId", "verdict"],
+      additionalProperties: false,
     },
   },
   {
     name: "verglos_attest",
     description:
-      "Studio. Sign a verified report into a portable evidence bundle with a public verify URL. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+      "Deprecated Studio compatibility shell. It does not read, sign, or publish a report or summary. Use the CLI's local `record create/sign/verify` workflow; hosted receipt/public verification is not available through this tool.",
     inputSchema: {
       type: "object",
       properties: {
@@ -260,6 +288,7 @@ const TOOLS = [
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath"],
+      additionalProperties: false,
     },
   },
 ] as const;
@@ -285,7 +314,7 @@ export function jsonResponse(payload: unknown): {
 
 function alphaStub(name: string, tier: "pro" | "studio"): {
   ok: false;
-  error: "not_implemented_in_alpha" | "studio_only";
+  error: "not_implemented_in_alpha" | "studio_only" | "legacy_retired";
   tool: string;
   tier: "pro" | "studio";
   message: string;
@@ -293,13 +322,15 @@ function alphaStub(name: string, tier: "pro" | "studio"): {
 } {
   return {
     ok: false,
-    error: tier === "studio" ? "studio_only" : "not_implemented_in_alpha",
+    error: name === "verglos_attest" ? "legacy_retired" : tier === "studio" ? "studio_only" : "not_implemented_in_alpha",
     tool: name,
     tier,
     message:
-      tier === "studio"
-        ? "verglos_attest is a Studio capability and ships functionally in v2.0.0-beta."
-        : `${name} is registered in v2.0.0-alpha and ships functionally in v2.0.0-beta.`,
+      name === "verglos_attest"
+        ? "verglos_attest is a deprecated compatibility shell and performs no signing or publication. Use the local CLI record workflow; this MCP tool does not accept canonical records."
+        : tier === "studio"
+          ? `${name} is a Studio capability and ships functionally in v2.0.0-beta.`
+          : `${name} is registered in v2.0.0-alpha and ships functionally in v2.0.0-beta.`,
     docsUrl: tier === "studio" ? "https://verglos.com/attest" : "https://verglos.com/hunt",
   };
 }
@@ -364,7 +395,7 @@ export async function dispatchTool(
     const required = capability?.plan;
     const rank = { free: 0, pro: 1, team: 2, studio: 3, enterprise: 4 } as const;
     const plan: unknown = options.plan ?? "free";
-    if (typeof plan !== "string" || !(plan in rank)) return invalid("MCP_ENTITLEMENT_INVALID", "invalid entitlement plan");
+    if (typeof plan !== "string" || !Object.hasOwn(rank, plan)) return invalid("MCP_ENTITLEMENT_INVALID", "invalid entitlement plan");
     if (required && rank[plan as keyof typeof rank] < rank[required]) return invalid("MCP_ENTITLEMENT_REQUIRED", `MCP tool requires the ${required} plan`);
   }
   if (authority?.approvalRequired) {
@@ -407,6 +438,10 @@ export async function dispatchTool(
       try { result = explainFinding(parsed); } catch { return invalid("MCP_EXPLAIN_FINDING_FAILED", "explain_finding failed"); }
       return jsonResponse(result);
     }
+    case "verglos_policy_check": {
+      let parsed; try { parsed = parsePolicyCheckArgs(toolInput); } catch (error) { return invalid("MCP_POLICY_CHECK_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { return jsonResponse(await checkPolicyRecord(parsed)); } catch { return invalid("MCP_POLICY_CHECK_FAILED", "policy record could not be verified"); }
+    }
     case "verglos_hunt_finding":
       try { parseHuntFindingArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "pro"));
@@ -437,16 +472,21 @@ export function listAdvertisedTools() {
     if (!capability) throw new Error("MCP capability metadata is missing");
     const authority = mcpToolAuthority(t.name);
     if (!authority) throw new Error("MCP authority metadata is missing");
+    const schemaFields = Object.keys(t.inputSchema.properties).sort();
+    if (schemaFields.join("\n") !== [...capability.inputFields].sort().join("\n")) throw new Error(`MCP input schema is out of sync for ${t.name}`);
+    if (t.inputSchema.additionalProperties !== false) throw new Error(`MCP input schema must reject unknown fields for ${t.name}`);
+    if (authority.action !== capability.action || authority.approvalRequired !== capability.approvalRequired || authority.sideEffect !== capability.sideEffect) throw new Error(`MCP authority and capability metadata are out of sync for ${t.name}`);
+    if (capability.inputFields.includes("approvalReceipt") !== authority.approvalRequired) throw new Error(`MCP approval receipt schema is out of sync for ${t.name}`);
     return {
       name: t.name,
       description: t.description,
       inputSchema: t.inputSchema,
       _meta: { "verglos/capability": capability },
-      annotations: authority ? {
+      annotations: {
         readOnlyHint: !authority.approvalRequired,
         destructiveHint: authority.sideEffect === "filesystem" || authority.sideEffect === "identity",
         openWorldHint: authority.sideEffect === "network" || authority.sideEffect === "hosted",
-      } : undefined,
+      },
     };
   });
 }

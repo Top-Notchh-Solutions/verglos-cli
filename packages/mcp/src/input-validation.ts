@@ -7,6 +7,7 @@ export function parseCheckBeforeWriteArgs(value: unknown): CheckBeforeWriteInput
   const input = value as Record<string, unknown>;
   for (const key of Object.keys(input)) if (!["code", "targetPath", "language", "context"].includes(key)) throw new Error(`unknown check_before_write argument: ${key}`);
   if (typeof input.code !== "string" || typeof input.targetPath !== "string" || (input.language !== undefined && typeof input.language !== "string") || (input.context !== undefined && typeof input.context !== "string")) throw new Error("check_before_write requires string code and targetPath");
+  if (input.language !== undefined && (Buffer.byteLength(input.language, "utf8") > 128 || /[\u0000-\u001f\u007f]/u.test(input.language))) throw new Error("check_before_write language exceeds 128 UTF-8 bytes or contains control characters");
   const parsed = { code: input.code, targetPath: input.targetPath, language: input.language as string | undefined, context: input.context as string | undefined };
   validateAgentInputBounds(parsed); return parsed;
 }
@@ -45,6 +46,17 @@ export function parseScanArgs(value: unknown): { projectRoot?: string; limit?: n
     ...(input.limit !== undefined ? { limit: input.limit as number } : {}),
     ...(input.noProvenance !== undefined ? { noProvenance: input.noProvenance as boolean } : {}),
   };
+}
+
+export function parsePolicyCheckArgs(value: unknown): { manifestPath: string; recordStore: string } {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("policy_check arguments must be an object");
+  const input = value as Record<string, unknown>;
+  rejectUnknown(input, ["manifestPath", "recordStore"], "policy_check");
+  const manifestPath = boundedString(input, "manifestPath", true)!;
+  const recordStore = boundedString(input, "recordStore", true)!;
+  if (!isAbsolute(manifestPath) || !isAbsolute(recordStore)) throw new Error("policy_check paths must be absolute");
+  if (/[\u0000-\u001f\u007f]/u.test(manifestPath) || /[\u0000-\u001f\u007f]/u.test(recordStore)) throw new Error("policy_check paths contain control characters");
+  return { manifestPath, recordStore };
 }
 
 function objectArgs(value: unknown, tool: string): Record<string, unknown> {

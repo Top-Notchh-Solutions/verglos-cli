@@ -4,18 +4,20 @@ import { parseReleaseRecordManifest, type ReleaseRecordManifestDocument } from "
 import { parseReleaseDecisionJson, type ReleaseDecisionDocument } from "./release-decision.js";
 
 export interface PublicRecordProjection { readonly manifestId: string; readonly manifestDigest: string; readonly generatedAt: string; readonly decisionMemberDigest: string; readonly redaction: ReleaseRecordManifestDocument["redaction"]; readonly limitations: readonly string[]; }
+export const PUBLIC_LIMITATION_REDACTION = "Limitation details withheld from this public projection.";
+
 export function projectPublicRecord(manifest: ReleaseRecordManifestDocument): PublicRecordProjection {
   const parsed = parseReleaseRecordManifest(manifest); const decision = parsed.members.find((member) => member.kind === "release-decision");
   if (!decision) throw new Error("public projection requires a release-decision member");
   const redaction = Object.freeze({ ...parsed.redaction, ...(parsed.redaction.manifestDigest ? { manifestDigest: Object.freeze({ ...parsed.redaction.manifestDigest }) } : {}) });
-  return { manifestId: parsed.manifestId, manifestDigest: releaseRecordManifestDigest(parsed), generatedAt: parsed.generatedAt, decisionMemberDigest: `${decision.digest.algorithm}:${decision.digest.value}`, redaction, limitations: Object.freeze([...parsed.limitations]) };
+  return { manifestId: parsed.manifestId, manifestDigest: releaseRecordManifestDigest(parsed), generatedAt: parsed.generatedAt, decisionMemberDigest: `${decision.digest.algorithm}:${decision.digest.value}`, redaction, limitations: Object.freeze(parsed.limitations.map(() => PUBLIC_LIMITATION_REDACTION)) };
 }
 
 export interface VerifiedPublicRecordProjection extends PublicRecordProjection {
   readonly decision: ReleaseDecisionDocument["decision"];
   readonly subjects: readonly { readonly subjectId: string; readonly role: ReleaseDecisionDocument["subjects"][number]["role"] }[];
-  readonly policy: Readonly<{ readonly id: string; readonly version: string; readonly digest: string }>;
-  readonly signerStatus: "unsigned" | "unknown";
+  readonly coverageStatus: "incomplete" | "not-established";
+  readonly signerStatus: "unsigned" | "unknown" | "unverified";
 }
 
 /**
@@ -26,6 +28,7 @@ export interface VerifiedPublicRecordProjection extends PublicRecordProjection {
 export function projectVerifiedPublicRecord(
   manifest: ReleaseRecordManifestDocument,
   members: ReadonlyMap<string, Uint8Array>,
+  options: { readonly detachedSignaturePresent?: boolean } = {},
 ): VerifiedPublicRecordProjection {
   const parsed = parseReleaseRecordManifest(manifest);
   const base = projectPublicRecord(parsed);
@@ -41,7 +44,9 @@ export function projectVerifiedPublicRecord(
     ...base,
     decision: decision.decision,
     subjects: Object.freeze(decision.subjects.map(({ subjectId, role }) => ({ subjectId, role }))),
-    policy: Object.freeze({ id: decision.policy.id, version: decision.policy.version, digest: `${decision.policy.digest.algorithm}:${decision.policy.digest.value}` }),
-    signerStatus: parsed.members.some((member) => member.kind === "signature" && member.redaction !== "omitted") ? "unknown" : "unsigned",
+    coverageStatus: decision.decision === "INCOMPLETE" ? "incomplete" : "not-established",
+    signerStatus: parsed.members.some((member) => member.kind === "signature" && member.redaction !== "omitted") || options.detachedSignaturePresent === true
+      ? "unverified"
+      : options.detachedSignaturePresent === false ? "unsigned" : "unknown",
   };
 }

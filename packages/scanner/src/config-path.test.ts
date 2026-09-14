@@ -16,6 +16,30 @@ test("scanner loads an explicit bounded JSON config without executing code", asy
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("scanner prefers versioned JSON implicitly and refuses ambiguous legacy coexistence", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-config-precedence-"));
+  try {
+    await writeFile(join(root, ".verglos.config.json"), JSON.stringify({ schemaVersion: "1.0.0", failThreshold: 42 }));
+    const config = await loadConfig(root);
+    assert.equal(config.failThreshold, 42);
+    await writeFile(join(root, ".verglos.config.js"), "module.exports = { failThreshold: 18 };\n");
+    await assert.rejects(() => loadConfig(root), /Both .verglos.config.json and legacy .verglos.config.js exist/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("scanner rejects migration-only settings and unsupported config versions", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-config-v1-"));
+  try {
+    const path = join(root, "config.json");
+    await writeFile(path, JSON.stringify({ schemaVersion: "1.0.0", telemetry: { enabled: true } }));
+    await assert.rejects(() => loadConfig(root, path), /this scan command does not apply/);
+    await writeFile(path, JSON.stringify({ schemaVersion: "2.0.0" }));
+    await assert.rejects(() => loadConfig(root, path), /requires migration/);
+    await writeFile(path, JSON.stringify({ schemaVersion: "1.0.0", hunt: { sandbox: "firecracker" } }));
+    await assert.rejects(() => loadConfig(root, path), /requires migration/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("scanner rejects symlink and malformed explicit configs", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-config-invalid-"));
   try {

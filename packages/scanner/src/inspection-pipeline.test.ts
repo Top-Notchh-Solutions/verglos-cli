@@ -101,7 +101,7 @@ test("inspection composes an adapter and raw SARIF import into one coverage-boun
     onProgress: (event) => progress.push({ phase: event.phase, ...("producer" in event && event.producer ? { producer: event.producer } : {}), status: event.status }),
   });
   assert.equal(engine.executed(), 1);
-  assert.equal(result.snapshot.schemaVersion, "1.1.0");
+  assert.equal(result.snapshot.schemaVersion, "1.3.0");
   assert.equal(result.snapshot.coverage.status, "incomplete");
   assert.equal(result.snapshot.coverage.producers.length, 2);
   assert.equal(result.snapshot.coverage.schemaVersion, "1.1.0");
@@ -232,7 +232,7 @@ test("native, adapter, and import producers share one snapshot under the configu
     assert.equal(result.coverage.producers.find((entry) => entry.producer === "trivy")?.toolRuns?.length, 1);
     assert.deepEqual(producerEvents, ["native:started", "native:incomplete", "trivy:started", "trivy:completed", "sarif:started", "sarif:incomplete"]);
     assert.equal(result.observations.length, 1);
-    assert.equal(result.snapshot.schemaVersion, "1.1.0");
+    assert.equal(result.snapshot.schemaVersion, "1.3.0");
     assert.equal(result.snapshot.coverage.schemaVersion, "1.1.0");
     assert.equal(result.snapshot.coverage.producers.length, 3);
     await assert.rejects(() => readFile(marker));

@@ -10,6 +10,7 @@ const TOOL_ACTIONS: Record<string, { readonly action: AgentAction; readonly netw
   verglos_check_package: { action: "network", networkTargets: PACKAGE_LOOKUP_NETWORK },
   verglos_scan: { action: "network", networkTargets: PACKAGE_LOOKUP_NETWORK },
   verglos_explain_finding: { action: "propose" },
+  verglos_policy_check: { action: "inspect" },
   verglos_hunt_finding: { action: "execute" },
   verglos_hunt_report: { action: "execute" },
   verglos_hunt_before_write: { action: "execute" },

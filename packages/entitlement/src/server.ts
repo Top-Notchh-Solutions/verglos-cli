@@ -34,6 +34,8 @@ export interface SignEntitlementInput {
   privateKey: KeyObject;
   /** Override token lifetime; defaults to 24h. */
   ttlSeconds?: number;
+  /** Optional v2 key identifier; omitted preserves the byte-identical v1 header. */
+  keyId?: string;
 }
 
 export function signEntitlement(input: SignEntitlementInput): SignedEntitlement {
@@ -51,13 +53,18 @@ export function signEntitlement(input: SignEntitlementInput): SignedEntitlement 
   const claimsJson = JSON.stringify(fullClaims);
   const claimsB64 = base64UrlEncode(Buffer.from(claimsJson, "utf8"));
 
-  const signingInput = Buffer.from(`${HEADER_B64}.${claimsB64}`, "utf8");
+  let headerB64 = HEADER_B64;
+  if (input.keyId !== undefined) {
+    if (!/^[a-z0-9][a-z0-9._-]{0,63}$/u.test(input.keyId)) throw new Error("entitlement signing key id is invalid");
+    headerB64 = base64UrlEncode(Buffer.from(JSON.stringify({ alg: "EdDSA", kid: input.keyId, typ: "JWT" }), "utf8"));
+  }
+  const signingInput = Buffer.from(`${headerB64}.${claimsB64}`, "utf8");
   // Ed25519 in Node's crypto — pass null for the hash algorithm
   // (Ed25519 has an implicit hash step per RFC 8032).
   const signature = ed25519Sign(null, signingInput, input.privateKey);
   const sigB64 = base64UrlEncode(signature);
 
-  return `${HEADER_B64}.${claimsB64}.${sigB64}`;
+  return `${headerB64}.${claimsB64}.${sigB64}`;
 }
 
 function base64UrlEncode(buf: Buffer): string {

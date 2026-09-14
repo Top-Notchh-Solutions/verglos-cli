@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { test } from "node:test";
 import { executeRecordCreate } from "./record-create.js";
 import { executeRecordHeader } from "./record-header.js";
-import { assembleReleaseRecord, createReleaseDecision, createPolicyEvaluation, createSubject, describeRecordMember } from "@verglos/shared";
+import { assembleReleaseRecord, createLineageGraphDocument, createReleaseDecision, createPolicyEvaluation, createSubject, describeRecordMember, LINEAGE_GRAPH_SCHEMA } from "@verglos/shared";
 
 test("record header verifies the store and emits decision-first JSON", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-record-header-"));
@@ -46,7 +46,10 @@ test("record header verifies the store and emits decision-first JSON", async () 
       await writeFile(join(source, path), subjectBytes);
       return describeRecordMember({ path, kind: "subject", mediaType: "application/json", bytes: subjectBytes, required: true });
     }));
-    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:323e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:02Z", generator: { id: "verglos", version: "2.0.0" }, members: [member, ...subjectMembers], redaction: { status: "not-required" }, limitations: ["coverage unavailable"] });
+    const lineageBytes = new TextEncoder().encode(JSON.stringify(createLineageGraphDocument({ subjectIds: subjects.map((subject) => subject.subjectId), edges: [{ fromSubjectId: subjects[1]!.subjectId, toSubjectId: subjects[0]!.subjectId, relation: "build-output", status: "mismatched" }], gaps: ["Source and artifact digests differ."] })));
+    await writeFile(join(source, "lineage.json"), lineageBytes);
+    const lineageMember = { ...describeRecordMember({ path: "lineage.json", kind: "lineage", mediaType: "application/json", bytes: lineageBytes, required: true }), schema: LINEAGE_GRAPH_SCHEMA };
+    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:323e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:02Z", generator: { id: "verglos", version: "2.0.0" }, members: [member, ...subjectMembers, lineageMember], redaction: { status: "not-required" }, limitations: ["coverage unavailable"] });
     const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(manifest));
     assert.equal(await executeRecordCreate(source, manifestPath, output, true, true), 0);
     const originalLog = console.log; let headerJson = "";
@@ -63,6 +66,7 @@ test("record header verifies the store and emits decision-first JSON", async () 
       contentDigests: Array.from({ length: subjectDigests[index]!.length / 2 }, (_, digestIndex) => ({ purpose: subjectDigests[index]![digestIndex * 2] as string, digest: formatDigest(subjectDigests[index]![digestIndex * 2 + 1] as { algorithm: string; value: string }) })),
     })));
     assert.ok(header.limitations.includes("coverage unavailable"));
+    assert.deepEqual(header.lineage, { status: "recorded", edgeCount: 1, matched: 0, mismatched: 1, unavailable: 0, unverifiable: 0, gapCount: 1 });
     assert.ok((await readFile(join(output, "manifest.json"))).byteLength > 0);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

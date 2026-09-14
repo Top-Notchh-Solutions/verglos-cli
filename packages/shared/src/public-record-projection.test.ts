@@ -16,19 +16,57 @@ test("public projection freezes redaction state", () => {
 });
 
 test("verified public projection checks decision bytes and excludes private fields", () => {
+  const tenantCanary = "TENANT-CANARY-DO-NOT-PUBLISH-7f3a";
+  const sourceCanary = "SOURCE-CANARY-PRIVATE-8e21";
+  const secretCanary = "SECRET-CANARY-PRIVATE-91bc";
+  const limitationCanary = `client=${tenantCanary} path=src/private/${sourceCanary} token=${secretCanary}`;
   const subject = createSubject({ kind: "filesystem", treeDigest: { algorithm: "sha256", value: "b".repeat(64) }, ignorePolicyDigest: { algorithm: "sha256", value: "a".repeat(64) }, entryCount: 1 });
   const evaluation = createPolicyEvaluation({
-    schemaId: "urn:verglos:schema:policy-evaluation", schemaVersion: "1.0.0", evaluationId: "urn:uuid:32345678-1234-4123-8123-123456789abc", subjectId: subject.subjectId, subjectMatch: { status: "matched", observedSubjectId: subject.subjectId }, policy: { id: "verglos.policy.local-default", version: "1.0.0", digest: { algorithm: "sha256", value: "c".repeat(64) } }, checks: [{ id: "verglos.check.release-evidence", requirement: "required", onFailure: "BLOCK", status: "satisfied", evidenceDigests: [{ algorithm: "sha256", value: "d".repeat(64) }], observationIds: [], freshness: { status: "current", checkedAt: "2026-01-01T00:00:00Z", validUntil: "2026-01-02T00:00:00Z" }, owner: "release-owner", reason: "Evidence is current.", nextAction: "Preserve evidence." }], limitations: ["fixture"], evaluatedAt: "2026-01-01T00:00:00Z",
+    schemaId: "urn:verglos:schema:policy-evaluation", schemaVersion: "1.0.0", evaluationId: "urn:uuid:32345678-1234-4123-8123-123456789abc", subjectId: subject.subjectId, subjectMatch: { status: "matched", observedSubjectId: subject.subjectId }, policy: { id: `verglos.policy.${tenantCanary.toLowerCase()}`, version: "1.0.0", digest: { algorithm: "sha256", value: "c".repeat(64) } }, checks: [{ id: "verglos.check.release-evidence", requirement: "required", onFailure: "BLOCK", status: "satisfied", evidenceDigests: [{ algorithm: "sha256", value: "d".repeat(64) }], observationIds: [], freshness: { status: "current", checkedAt: "2026-01-01T00:00:00Z", validUntil: "2026-01-02T00:00:00Z" }, owner: "release-owner", reason: `finding ${sourceCanary} secret ${secretCanary}`, nextAction: "Preserve evidence." }], limitations: [limitationCanary], evaluatedAt: "2026-01-01T00:00:00Z",
   });
   const decision = createReleaseDecision({
     decisionId: "urn:uuid:22345678-1234-4123-8123-123456789abc",
     evaluation,
     subjects: [{ subjectId: subject.subjectId, role: "primary" }],
-    issuedBy: { kind: "service", id: "internal-service-id", authority: "policy" }, generatedAt: "2026-01-01T00:00:01Z", limitations: ["fixture"],
+    issuedBy: { kind: "service", id: tenantCanary, authority: "policy" }, generatedAt: "2026-01-01T00:00:01Z", limitations: [limitationCanary],
   });
   const bytes = new TextEncoder().encode(JSON.stringify(decision));
   const digest = createHash("sha256").update(bytes).digest("hex");
-  const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:02Z", generator: { id: "verglos", version: "2.0.0" }, members: [{ path: "decision.json", kind: "release-decision", mediaType: "application/json", digest: { algorithm: "sha256", value: digest }, size: bytes.byteLength, required: true, redaction: "none", schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } }], redaction: { status: "not-required" }, limitations: ["fixture"] });
-  const projection = projectVerifiedPublicRecord(manifest, new Map([["decision.json", bytes]]));
-  assert.equal(projection.decision, "PASS"); assert.equal(projection.signerStatus, "unsigned"); assert.equal(projection.subjects[0]?.subjectId, decision.subjects[0]?.subjectId); assert.equal("issuedBy" in projection, false); assert.equal("paths" in projection, false);
+  const sourceBytes = new TextEncoder().encode(`private source ${sourceCanary} ${secretCanary}`);
+  const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:02Z", generator: { id: "verglos", version: "2.0.0" }, members: [{ path: `source/${tenantCanary}/private/${sourceCanary}.txt`, kind: "metadata", mediaType: "text/plain", digest: { algorithm: "sha256", value: createHash("sha256").update(sourceBytes).digest("hex") }, size: sourceBytes.byteLength, required: false, redaction: "none" }, { path: `internal/${tenantCanary}/decision.json`, kind: "release-decision", mediaType: "application/json", digest: { algorithm: "sha256", value: digest }, size: bytes.byteLength, required: true, redaction: "none", schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } }], redaction: { status: "not-required" }, limitations: [limitationCanary] });
+  const projection = projectVerifiedPublicRecord(manifest, new Map([[`internal/${tenantCanary}/decision.json`, bytes], [`source/${tenantCanary}/private/${sourceCanary}.txt`, sourceBytes]]));
+  assert.equal(projection.decision, "PASS"); assert.equal(projection.coverageStatus, "not-established"); assert.equal(projection.signerStatus, "unknown"); assert.equal(projection.subjects[0]?.subjectId, decision.subjects[0]?.subjectId); assert.equal("issuedBy" in projection, false); assert.equal("paths" in projection, false);
+  assert.equal("policy" in projection, false);
+  assert.deepEqual(projection.limitations, ["Limitation details withheld from this public projection."]);
+  const serialized = JSON.stringify(projection);
+  for (const canary of [tenantCanary, sourceCanary, secretCanary, "private source", "internal/"]) assert.equal(serialized.includes(canary), false, `public projection leaked ${canary}`);
+  assert.equal(Object.keys(projection).sort().join(","), "coverageStatus,decision,decisionMemberDigest,generatedAt,limitations,manifestDigest,manifestId,redaction,signerStatus,subjects");
+});
+
+test("public projection keeps incomplete coverage and included signature claims conservative", () => {
+  const subject = createSubject({ kind: "filesystem", treeDigest: { algorithm: "sha256", value: "a".repeat(64) }, ignorePolicyDigest: { algorithm: "sha256", value: "b".repeat(64) }, entryCount: 0 });
+  const evaluation = createPolicyEvaluation({
+    schemaId: "urn:verglos:schema:policy-evaluation", schemaVersion: "1.0.0", evaluationId: "urn:uuid:32345678-1234-4123-8123-123456789abc", subjectId: subject.subjectId,
+    subjectMatch: { status: "unresolved", reason: "Fixture identity is unavailable." },
+    policy: { id: "verglos.policy.fixture", version: "1.0.0", digest: { algorithm: "sha256", value: "c".repeat(64) } },
+    checks: [{ id: "verglos.check.fixture", requirement: "required", onFailure: "BLOCK", status: "missing", evidenceDigests: [], observationIds: [], freshness: { status: "unknown", checkedAt: "2026-01-01T00:00:00Z" }, owner: "fixture", reason: "Fixture evidence is absent.", nextAction: "Supply fixture evidence." }],
+    limitations: ["Fixture only."], evaluatedAt: "2026-01-01T00:00:00Z",
+  });
+  const decision = createReleaseDecision({ decisionId: "urn:uuid:22345678-1234-4123-8123-123456789abc", evaluation, subjects: [{ subjectId: subject.subjectId, role: "primary" }], issuedBy: { kind: "service", id: "fixture", authority: "fixture" }, generatedAt: "2026-01-01T00:00:01Z", limitations: ["Fixture only."] });
+  const bytes = new TextEncoder().encode(JSON.stringify(decision));
+  const digest = createHash("sha256").update(bytes).digest("hex");
+  const signatureBytes = new TextEncoder().encode("private-signature-envelope");
+  const manifest = assembleReleaseRecord({
+    schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:02Z", generator: { id: "verglos", version: "2.0.0" },
+    members: [
+      { path: "decision.json", kind: "release-decision", mediaType: "application/json", digest: { algorithm: "sha256", value: digest }, size: bytes.byteLength, required: true, redaction: "none", schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } },
+      { path: "signature.json", kind: "signature", mediaType: "text/plain", digest: { algorithm: "sha256", value: createHash("sha256").update(signatureBytes).digest("hex") }, size: signatureBytes.byteLength, required: false, redaction: "none" },
+    ], redaction: { status: "not-required" }, limitations: ["Fixture only."],
+  });
+  const projection = projectVerifiedPublicRecord(manifest, new Map([["decision.json", bytes], ["signature.json", signatureBytes]]));
+  assert.equal(projection.decision, "INCOMPLETE");
+  assert.equal(projection.coverageStatus, "incomplete");
+  assert.equal(projection.signerStatus, "unverified");
+  const detachedSignature = projectVerifiedPublicRecord(manifest, new Map([["decision.json", bytes], ["signature.json", signatureBytes]]), { detachedSignaturePresent: true });
+  assert.equal(detachedSignature.signerStatus, "unverified");
 });

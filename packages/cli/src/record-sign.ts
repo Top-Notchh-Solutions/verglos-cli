@@ -35,7 +35,7 @@ export async function executeRecordSign(
     const privateKey = (await boundedFile(keyPath, MAX_KEY_BYTES, "record signing key")).toString("utf8");
     const envelope = signReleaseRecordManifest(manifest, privateKey, { id: signerId, issuer }, new Date().toISOString());
     await writeFile(signaturePath, `${canonicalizeJson(envelope)}\n`, { flag: "wx", mode: 0o600 });
-    const result = { signaturePath, manifestDigest: envelope.manifestDigest, signer: envelope.signer, algorithm: envelope.algorithm };
+    const result = { signaturePath, manifestDigest: envelope.manifestDigest, keyId: "keyId" in envelope ? envelope.keyId : undefined, signer: envelope.signer, algorithm: envelope.algorithm };
     if (json) console.log(JSON.stringify(result)); else if (!quiet) console.log(`Signed record manifest ${result.manifestDigest}.`);
     return 0;
   } catch (error) {
