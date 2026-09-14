@@ -1,5 +1,13 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-14 · PLAN-WEB-003 entitlement vNext (progress; unchecked)
+
+- **Implementation:** CLI `d6cde6fb7ecd3d1d4aaeea13a973b286e4cd73a4` pushed to existing PR #38; Web `4c0bd49c6a4702bfa28436f98d641a337a77786c` pushed to existing PR #33. Tenant-bound v2 token issue/verify, key-ID selection, backward-compatible legacy signing, production successor-key configuration guard, and online inactive-license downgrade are covered. Web route signs under configured key ID; generated-key end-to-end test verifies successor signature and tenant claims.
+- **Verification:** Web 109/109 tests with local PostgreSQL integration active, typecheck, Drizzle check, 17-migration journal validation, production build, public-boundary and diff checks pass. CLI forced uncached test/typecheck/build graph 23/23 Turbo tasks; entitlement/CLI tests, public-boundary, and diff checks pass. Both pushed heads have hosted CI pending as of this ledger update. Local Node is 26.4.0; repos require Node 22.x, so hosted Node 22 checks remain required.
+- **Acceptance/tracking:** PLAN-WEB-003 and PLAN-CLI-001 remain unchecked. All-backlog checkbox recount: **138 checked / 131 unchecked / 269 total**. Web provides no immediate offline per-token revocation; fresh online capability refresh reflects inactive license, stale/offline grace remains bounded. CLI opaque allowances/catalog consumption is not complete.
+- **Blockers/scope:** Production successor private key plus exact CLI public-key pin alignment and live v2 tenant-mapping availability have not been verified/provisioned. Exact-head CI is pending. No production database read/write/migration or environment write, merge, deployment, release, or publish occurred. Internal documents are local/private and excluded from both public PRs.
+- **Next:** wait for the active PR checks to conclude (the runs are live); then resolve failures or record green exact-head evidence. Continue the next independent acceptance item without treating this preparatory entitlement work as acceptance.
+
 ## 2026-09-14 · VERIFY-WEB-001 redacted receipt ingestion (accepted)
 
 - **Implementation:** Web `2d89869` pushed to existing PR #33, exact head `2d89869e75d3d0316bf71e94d585a64bff8e34ef`. Added canonical projection-digest binding over normalized fields and active PostgreSQL route tests for authorized bounded POST/list/detail, retry/idempotency, conflicts, and tenant isolation.
