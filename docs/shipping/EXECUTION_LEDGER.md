@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-14 · PLAN-CLI-001 signed catalog consumption (progress; unchecked)
+
+- **Implementation:** CLI `7edb4a980ab118252a94f706e824a16790df7716` pushed to existing PR #38. V2 token is requested after valid v1 license validation with bounded payload and v1 fallback; locally verified v2 capability/allowance/catalog claims are key-hash-bound and drive offline entitlements; fresh REST state overrides signed state; legacy tier-only tokens yield Free for offline CLI and MCP gates; duplicated CLI plan capability maps removed.
+- **Verification:** Focused entitlement/token tests 24/24; forced uncached `pnpm turbo run test typecheck build --force` passes 23/23 tasks; public-boundary audit and `git diff --check` pass. PR #38 exact head `7edb4a980ab118252a94f706e824a16790df7716`, OPEN/UNSTABLE with hosted checks in progress. PR #33 remains OPEN/CLEAN at `4c0bd49c6a4702bfa28436f98d641a337a77786c`; hosted checks pass.
+- **Acceptance/operations:** PLAN-CLI-001 remains unchecked because dependent PLAN-WEB-003 signer/public-pin production alignment and deployed activation integration are unverified; no backlog count change: 131 unchecked / 138 checked / 269 total. Private tracker commit must remain local-only. No production DB read/write/migration or environment write; no merge, deployment, publish, or release.
+
 ## 2026-09-14 · PLAN-WEB-003 entitlement vNext (progress; unchecked)
 
 - **Implementation:** CLI `d6cde6fb7ecd3d1d4aaeea13a973b286e4cd73a4` pushed to existing PR #38; Web `4c0bd49c6a4702bfa28436f98d641a337a77786c` pushed to existing PR #33. Tenant-bound v2 token issue/verify, key-ID selection, backward-compatible legacy signing, production successor-key configuration guard, and online inactive-license downgrade are covered. Web route signs under configured key ID; generated-key end-to-end test verifies successor signature and tenant claims.
