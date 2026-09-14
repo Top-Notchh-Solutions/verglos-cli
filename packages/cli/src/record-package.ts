@@ -4,6 +4,7 @@ import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import {
   assertCompleteReleaseRecord,
   assertCompleteReleaseRecordPayloads,
+  assertProviderProvenancePayloads,
   assertReleaseRecordRedactionPayloads,
   canonicalizeJson,
   createReleaseRecordPackageDescriptor,
@@ -60,6 +61,7 @@ export async function executeRecordPackage(
     const manifest = assertCompleteReleaseRecord(parseReleaseRecordManifestJson(await readRegularFile(manifestPath, MAX_MANIFEST_BYTES, "record manifest")));
     const members = await readAndVerifyRecord(sourceRoot, manifest);
     assertReleaseRecordRedactionPayloads(manifest, members);
+    assertProviderProvenancePayloads(manifest, members);
     assertCompleteReleaseRecordPayloads(manifest, members);
 
     if (Boolean(signaturePath) !== Boolean(publicKeyPath) || Boolean(signaturePath) !== Boolean(trustedIssuer)) {

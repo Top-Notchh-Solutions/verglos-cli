@@ -12,6 +12,7 @@ import { RELEASE_DECISION_SCHEMA, parseReleaseDecision } from "./release-decisio
 import { canonicalizeJson } from "./schema.js";
 import { LINEAGE_GRAPH_SCHEMA, parseLineageGraphDocument } from "./lineage-graph.js";
 import { createRedactionManifest, parseRedactionManifest, REDACTION_MANIFEST_SCHEMA, type RedactionCategory } from "./redaction-manifest.js";
+import { parseProviderProvenanceDocument } from "./provenance-provider.js";
 
 export function assembleReleaseRecord(input: Omit<ReleaseRecordManifestDocument, "members" | "extensions"> & { readonly members: ReleaseRecordManifestDocument["members"]; readonly extensions?: ReleaseRecordManifestDocument["extensions"] }): ReleaseRecordManifestDocument {
   if (input.members.filter((member) => member.kind === "release-decision").length !== 1) throw new Error("Release Record assembly requires exactly one release-decision member");
@@ -127,6 +128,56 @@ export function assertReleaseRecordRedactionPayloads(
     throw new Error("Release Record redaction manifest does not cover the exact declared member digests and dispositions");
   }
   return parsed;
+}
+
+/** Validate retained source bytes and recompute provider provenance state for every included provenance member. */
+export function assertProviderProvenancePayloads(
+  manifest: ReleaseRecordManifestDocument,
+  payloads: ReadonlyMap<string, Uint8Array>,
+): void {
+  const members = manifest.members.filter((member) => member.kind === "provenance" && member.redaction !== "omitted");
+  if (members.length === 0) return;
+  const declaredSubjects = manifest.members.filter((member) => member.kind === "subject" && member.redaction !== "omitted");
+  const subjects = new Map<string, ReturnType<typeof parseSubject>>();
+  for (const member of declaredSubjects) {
+    if (!member.schema || member.schema.id !== SUBJECT_SCHEMA.id || member.schema.version !== SUBJECT_SCHEMA.version) throw new Error(`Release Record subject schema reference is invalid: ${member.path}`);
+    const bytes = payloads.get(member.path);
+    if (!bytes) throw new Error(`Release Record subject payload is missing: ${member.path}`);
+    let value: unknown;
+    try { value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)); }
+    catch { throw new Error(`Release Record subject payload is invalid JSON: ${member.path}`); }
+    const subject = parseSubject(value);
+    if (subjects.has(subject.subjectId)) throw new Error("Release Record provenance subject identities must be unique");
+    subjects.set(subject.subjectId, subject);
+  }
+  if (members.length > 0 && subjects.size === 0) throw new Error("Release Record provenance requires at least one included subject payload");
+  for (const member of members) {
+    if (member.schema?.id !== "urn:verglos:schema:provider-provenance" || member.schema.version !== "1.0.0") throw new Error(`Release Record provenance member schema reference is invalid: ${member.path}`);
+    const bytes = payloads.get(member.path);
+    if (!bytes) throw new Error(`Release Record provenance payload is missing: ${member.path}`);
+    let value: unknown;
+    try { value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)); }
+    catch { throw new Error(`Release Record provenance payload is invalid JSON: ${member.path}`); }
+    try {
+      const provenance = parseProviderProvenanceDocument(value);
+      const subject = subjects.get(provenance.subjectId);
+      if (!subject) throw new Error("provenance references a subject not included in the record");
+      if (!subjectSha256Digests(subject).includes(provenance.match.expectedDigest)) throw new Error("provenance expected artifact digest does not match its included record subject");
+    }
+    catch (error) { throw new Error(`Release Record provenance payload is invalid: ${member.path}: ${error instanceof Error ? error.message : "invalid payload"}`); }
+  }
+}
+
+function subjectSha256Digests(subject: ReturnType<typeof parseSubject>): string[] {
+  switch (subject.kind) {
+    case "repository-tree": return subject.worktreeDigest?.algorithm === "sha256" ? [`sha256:${subject.worktreeDigest.value}`] : [];
+    case "filesystem": return subject.treeDigest.algorithm === "sha256" ? [`sha256:${subject.treeDigest.value}`] : [];
+    case "package":
+    case "artifact":
+    case "oci-manifest":
+    case "oci-index": return subject.digest.algorithm === "sha256" ? [`sha256:${subject.digest.value}`] : [];
+    case "sbom": return subject.documentDigest.algorithm === "sha256" ? [`sha256:${subject.documentDigest.value}`] : [];
+  }
 }
 
 /** Validate the canonical graph bindings using the actual member payloads. */
@@ -280,5 +331,6 @@ export function assertCompleteReleaseRecordPayloads(
   }
   if (Date.parse(decision.generatedAt) > Date.parse(parsed.generatedAt)) throw new Error("complete Release Record decision timestamp is after manifest generation");
   assertReleaseRecordRedactionPayloads(parsed, payloads);
+  assertProviderProvenancePayloads(parsed, payloads);
   return parsed;
 }

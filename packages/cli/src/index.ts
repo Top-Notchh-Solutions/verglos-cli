@@ -78,6 +78,7 @@ import { executeRecordProject } from "./record-project.js";
 import { executeRecordSign } from "./record-sign.js";
 import { executeConfigInspect } from "./config-inspect.js";
 import { executeRecordHeader } from "./record-header.js";
+import { executeRecordProvenanceImport } from "./record-provenance-import.js";
 import { executeRecordPackage } from "./record-package.js";
 import { printTelemetryConsentPreview, readTelemetryConsent, writeTelemetryConsent } from "./telemetry.js";
 const require = createRequire(import.meta.url);
@@ -260,6 +261,16 @@ record.command("create <membersRoot> <manifestPath> <outputRoot>")
   .option("--quiet", "Suppress human output")
   .action(async (membersRoot: string, manifestPath: string, outputRoot: string, opts: { json?: boolean; quiet?: boolean; complete?: boolean }) => {
     process.exit(await executeRecordCreate(membersRoot, manifestPath, outputRoot, opts.json, opts.quiet, opts.complete));
+  });
+record.command("import-provenance <sourcePath> <outputMemberPath>")
+  .description("Import bounded in-toto/DSSE provenance into a private Release Record member; signatures remain unverified")
+  .requiredOption("--provider <name>", "Caller-declared provider: github, npm, buildkit, or unknown")
+  .requiredOption("--subject-id <id>", "Canonical subjectId of the artifact in the Release Record")
+  .requiredOption("--expected-digest <sha256>", "Expected artifact digest in sha256:<64 lowercase hex> form")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (sourcePath: string, outputMemberPath: string, opts: { provider: "github" | "npm" | "buildkit" | "unknown"; subjectId: string; expectedDigest: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordProvenanceImport(sourcePath, outputMemberPath, opts.provider, opts.subjectId, opts.expectedDigest, opts.json, opts.quiet));
   });
 record.command("pack <storeRoot> <manifestPath> <output.vgl>")
   .description("Package a complete record as a local private .vgl directory")

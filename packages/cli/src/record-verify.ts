@@ -1,6 +1,6 @@
 import { lstat, readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { assertCompleteReleaseRecord, assertCompleteReleaseRecordPayloads, assertReleaseRecordRedactionPayloads, parseReleaseDecisionJson, parseReleaseRecordManifestJson, readAndVerifyRecord, releaseRecordManifestDigest, verifyReleaseRecordSignature } from "@verglos/shared";
+import { assertCompleteReleaseRecord, assertCompleteReleaseRecordPayloads, assertProviderProvenancePayloads, assertReleaseRecordRedactionPayloads, parseReleaseDecisionJson, parseReleaseRecordManifestJson, readAndVerifyRecord, releaseRecordManifestDigest, verifyReleaseRecordSignature } from "@verglos/shared";
 import { verifyRecordPackageArtifacts } from "./record-package.js";
 
 const MAX_MANIFEST_BYTES = 8 * 1024 * 1024;
@@ -17,6 +17,7 @@ export async function executeRecordVerify(root: string, manifestPath: string | u
     const manifest = complete ? assertCompleteReleaseRecord(parsedManifest) : parsedManifest;
     const members = await readAndVerifyRecord(root, manifest);
     assertReleaseRecordRedactionPayloads(manifest, members);
+    assertProviderProvenancePayloads(manifest, members);
     if (complete) assertCompleteReleaseRecordPayloads(manifest, members);
     const packageArtifacts = await verifyRecordPackageArtifacts({ root, manifest, members });
     if (packageArtifacts.packaged) {

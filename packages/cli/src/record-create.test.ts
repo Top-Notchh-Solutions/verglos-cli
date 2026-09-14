@@ -7,7 +7,7 @@ import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { executeRecordCreate } from "./record-create.js";
 import { runCliFixture } from "./cli-fixture.js";
-import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createApprovalReceipt, createLineageGraphDocument, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, digestPolicyException, EXCEPTION_APPROVAL_SCHEMA, LINEAGE_GRAPH_SCHEMA, MAX_RELEASE_RECORD_AGGREGATE_BYTES, OBSERVATION_SCHEMA, parseExceptionApproval, parsePolicyDocument, parsePolicyException, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, POLICY_EXCEPTION_SCHEMA, RELEASE_DECISION_SCHEMA, releaseRecordManifestDigest, SUBJECT_SCHEMA, TOOL_RUN_SCHEMA, VERIFICATION_ATTEMPT_SCHEMA } from "@verglos/shared";
+import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createApprovalReceipt, createLineageGraphDocument, createPolicyEvaluation, createProviderProvenanceRecordMember, createReleaseDecision, createSubject, describeRecordMember, digestPolicyException, EXCEPTION_APPROVAL_SCHEMA, LINEAGE_GRAPH_SCHEMA, MAX_RELEASE_RECORD_AGGREGATE_BYTES, OBSERVATION_SCHEMA, parseExceptionApproval, parsePolicyDocument, parsePolicyException, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, POLICY_EXCEPTION_SCHEMA, RELEASE_DECISION_SCHEMA, releaseRecordManifestDigest, SUBJECT_SCHEMA, TOOL_RUN_SCHEMA, VERIFICATION_ATTEMPT_SCHEMA } from "@verglos/shared";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordExport } from "./record-export.js";
 import { executeRecordPackage } from "./record-package.js";
@@ -150,6 +150,16 @@ test("complete record create, verify, and export preserve canonical policy and s
       usage: { durationMs: 0, cpuMs: 0, peakMemoryBytes: 0, diskBytes: 0, processes: 0, outputBytes: 0, networkRequests: 0 },
       output: { artifacts: [] }, verdict: "not_supported", reason: "No recipe or target execution occurred in this synthetic fixture.", limitations: ["Test fixture only; no runtime evidence."],
     };
+    const provenanceSources = [
+      { provider: "github" as const, digest: "a".repeat(64), expected: `sha256:${"a".repeat(64)}` },
+      { provider: "npm" as const, digest: "b".repeat(64), expected: `sha256:${"a".repeat(64)}` },
+      { provider: "buildkit" as const, digest: "", expected: `sha256:${"a".repeat(64)}` },
+    ].map(({ provider, digest: provenanceDigest, expected }) => {
+      const statement = provenanceDigest
+        ? { _type: "https://in-toto.io/Statement/v1", subject: [{ name: "artifact.tgz", digest: { sha256: provenanceDigest } }], predicateType: "https://slsa.dev/provenance/v1", predicate: { buildType: "synthetic-fixture" } }
+        : { _type: "https://in-toto.io/Statement/v1", subject: [{ name: "artifact.tgz", digest: { sha512: "synthetic-only" } }], predicateType: "https://slsa.dev/provenance/v1", predicate: { buildType: "synthetic-fixture" } };
+      return createProviderProvenanceRecordMember({ path: `provenance/${provider}.json`, provider, subjectId: subject.subjectId, sourceBytes: new TextEncoder().encode(JSON.stringify(statement)), expectedDigest: expected, required: true });
+    });
     const payloads = [
       { path: "subjects/0001.json", kind: "subject" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(subject)), required: true, schema: SUBJECT_SCHEMA },
       { path: "lineage.json", kind: "lineage" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(createLineageGraphDocument({ subjectIds: [subject.subjectId], edges: [], gaps: ["Source lineage was not included in this fixture."] }))), required: true, schema: LINEAGE_GRAPH_SCHEMA },
@@ -161,6 +171,7 @@ test("complete record create, verify, and export preserve canonical policy and s
       { path: "verification/fixture.json", kind: "verification-attempt" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(verificationAttempt)), required: true, schema: VERIFICATION_ATTEMPT_SCHEMA },
       { path: "exceptions/fixture.json", kind: "policy-exception" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(exception)), required: true, schema: POLICY_EXCEPTION_SCHEMA },
       { path: "exceptions/approval.json", kind: "exception-approval" as const, mediaType: "application/json", bytes: new TextEncoder().encode(canonicalizeJson(exceptionApproval)), required: true, schema: EXCEPTION_APPROVAL_SCHEMA },
+      ...provenanceSources.map(({ path, kind, mediaType, bytes, required, schema }) => ({ path, kind, mediaType, bytes, required, schema })),
       { path: "omitted/fixture-source.ts", kind: "metadata" as const, mediaType: "text/plain", bytes: new Uint8Array(), required: false, redaction: "omitted" as const, redactionCategories: ["source-content", "paths"] as const },
     ];
     const bundle = assembleReleaseRecordBundle({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:92345678-1234-4123-8123-123456789abc", generatedAt: "2026-09-10T04:00:00.000Z", generator: { id: "verglos.record-builder", version: "1.0.0" }, redaction: { status: "complete" }, limitations: ["fixture-private-canary-source-path"], payloads });
@@ -170,7 +181,7 @@ test("complete record create, verify, and export preserve canonical policy and s
     const createProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "create", source, manifestPath, output, "--complete", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
     assert.equal(createProcess.exitCode, 0, `${createProcess.stdout}\n${createProcess.stderr}`);
     assert.equal(createProcess.stderr, "");
-    assert.equal((JSON.parse(createProcess.stdout) as { members: number }).members, 11);
+    assert.equal((JSON.parse(createProcess.stdout) as { members: number }).members, 14);
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true), 0);
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true, undefined, undefined, undefined, undefined, true), 0);
     const statementPath = join(root, "release.intoto.json");

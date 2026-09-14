@@ -7,6 +7,7 @@ import {
   parseReleaseRecordManifestJson,
   assertCompleteReleaseRecord,
   assertCompleteReleaseRecordPayloads,
+  assertProviderProvenancePayloads,
   assertReleaseRecordRedactionPayloads,
   putRecordMemberFromFile,
   type ReleaseRecordManifestDocument,
@@ -78,8 +79,10 @@ export async function executeRecordCreate(
       if (inspected.digest !== expected || inspected.size !== member.size) throw new Error(`record member ${member.path} does not match manifest digest or size`);
       if (digests.has(inspected.digest)) throw new Error(`record member digest is duplicated: ${member.path}`);
       digests.add(inspected.digest);
-      if ((complete && ["subject", "lineage", "tool-run", "observation", "verification-attempt", "policy-exception", "exception-approval", "policy", "policy-evaluation", "release-decision"].includes(member.kind)) || member.kind === "redaction-manifest") {
-        const semanticBytes = await readRegular(memberPath, MAX_MANIFEST_BYTES, `complete record member ${member.path}`);
+      const provenanceSubject = member.kind === "subject" && manifest.members.some((candidate) => candidate.kind === "provenance" && candidate.redaction !== "omitted");
+      if ((complete && ["subject", "lineage", "tool-run", "observation", "verification-attempt", "policy-exception", "exception-approval", "policy", "policy-evaluation", "release-decision"].includes(member.kind)) || member.kind === "redaction-manifest" || member.kind === "provenance" || provenanceSubject) {
+        const semanticLimit = member.kind === "provenance" ? MAX_MEMBER_BYTES : MAX_MANIFEST_BYTES;
+        const semanticBytes = await readRegular(memberPath, semanticLimit, `record member ${member.path}`);
         const semanticDigest = `sha256:${createHash("sha256").update(semanticBytes).digest("hex")}`;
         if (semanticDigest !== inspected.digest || semanticBytes.byteLength !== inspected.size) throw new Error(`record member ${member.path} changed during complete-graph validation`);
         completePayloads.set(member.path, semanticBytes);
@@ -87,6 +90,7 @@ export async function executeRecordCreate(
       inputs.push({ path: member.path, sourcePath: memberPath, size: inspected.size, digest: inspected.digest });
     }
     assertReleaseRecordRedactionPayloads(manifest, completePayloads);
+    assertProviderProvenancePayloads(manifest, completePayloads);
     if (complete) assertCompleteReleaseRecordPayloads(manifest, completePayloads);
     // Do not create the destination until every input has passed validation.
     // A failed preflight must leave no empty record store behind.
