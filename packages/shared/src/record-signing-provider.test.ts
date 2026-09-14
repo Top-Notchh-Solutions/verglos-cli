@@ -3,6 +3,7 @@ import { createHash, generateKeyPairSync, sign } from "node:crypto";
 import { test } from "node:test";
 import { assembleReleaseRecord } from "./record-assembly.js";
 import { releaseRecordManifestDigest } from "./record-digest.js";
+import { verifyReleaseRecordSignature } from "./record-signing.js";
 import { canonicalizeJson } from "./schema.js";
 import {
   parseRecordSigningTrustPolicy,
@@ -75,14 +76,19 @@ test("provider contract signs exact canonical manifest bytes and does not expose
   const trust = policy(key);
   const envelope = await signReleaseRecordManifestWithProvider({ manifest: record, keyReference: "opaque://fixture/key-version/1", provider, policy: trust, signedAt: "2026-01-02T00:00:00Z", allowTestFixture: true });
 
-  assert.equal(envelope.keyId, key.descriptor.keyId);
+  assert.equal("keyId" in envelope ? envelope.keyId : undefined, key.descriptor.keyId);
+  assert.equal(envelope.schemaVersion, "1.1.0");
   assert.equal(envelope.manifestDigest, releaseRecordManifestDigest(record));
   assert.deepEqual(verifyReleaseRecordSignatureWithPolicy(record, envelope, trust), {
     verified: true,
+    identityBound: true,
     signer: SIGNER,
     keyId: key.descriptor.keyId,
     manifestDigest: envelope.manifestDigest,
   });
+  const publicKeyPem = key.publicKeyPem;
+  assert.deepEqual(verifyReleaseRecordSignature(record, { ...envelope, signer: { ...SIGNER, issuer: "https://changed.example.test" } }, publicKeyPem), { verified: false, reason: "invalid-signature" });
+  assert.deepEqual(verifyReleaseRecordSignature(record, { ...envelope, signer: { ...SIGNER, id: "other-signer" } }, publicKeyPem), { verified: false, reason: "invalid-signature" });
   assert.equal(JSON.stringify({ envelope, descriptor: key.descriptor }).includes(key.privateKey.export({ format: "pem", type: "pkcs8" }).toString()), false);
   assert.equal((await signReleaseRecordManifestWithProvider({ manifest: record, keyReference: "opaque://fixture/key-version/1", provider, policy: trust, signedAt: "2026-01-02T00:00:00Z" }).catch((error: unknown) => (error as Error).message)), "test signing provider is not allowed for production signing");
 });
@@ -99,8 +105,9 @@ test("rotation signs only with the active key while retired signatures remain ve
   const rotatedPolicy = policy(currentKey, oldKey);
 
   assert.equal(verifyReleaseRecordSignatureWithPolicy(manifest(), oldEnvelope, rotatedPolicy).verified, true);
+  assert.deepEqual(verifyReleaseRecordSignatureWithPolicy(manifest(), { ...oldEnvelope, keyId: currentKey.descriptor.keyId }, rotatedPolicy), { verified: false, reason: "invalid-signature" }, "key id must be cryptographically bound");
   const currentEnvelope = await signReleaseRecordManifestWithProvider({ manifest: manifest(), keyReference: "opaque://current", provider, policy: rotatedPolicy, signedAt: "2026-06-01T00:00:00Z", allowTestFixture: true });
-  assert.equal(currentEnvelope.keyId, currentKey.descriptor.keyId);
+  assert.equal("keyId" in currentEnvelope ? currentEnvelope.keyId : undefined, currentKey.descriptor.keyId);
   await assert.rejects(signReleaseRecordManifestWithProvider({ manifest: manifest(), keyReference: "opaque://old", provider, policy: rotatedPolicy, signedAt: "2026-06-01T00:00:00Z", allowTestFixture: true }), /does not match the active signing policy/u);
 });
 
@@ -117,6 +124,7 @@ test("signing policy rejects revoked, unknown, mismatched, invalid, and out-of-w
   assert.deepEqual(verifyReleaseRecordSignatureWithPolicy(manifest(), envelope, revokedPolicy), { verified: false, reason: "revoked-key" });
   assert.deepEqual(verifyReleaseRecordSignatureWithPolicy(manifest(), { ...envelope, keyId: "unknown-key" }, trust), { verified: false, reason: "untrusted-key" });
   assert.deepEqual(verifyReleaseRecordSignatureWithPolicy(manifest(), { ...envelope, signer: { ...SIGNER, issuer: "https://other.example.test" } }, trust), { verified: false, reason: "signer-policy-mismatch" });
+  assert.deepEqual(verifyReleaseRecordSignatureWithPolicy(manifest(), { ...envelope, signedAt: "2026-01-03T00:00:00Z" }, trust), { verified: false, reason: "invalid-signature" }, "signedAt must be covered by the cryptographic signature");
   const expired = { ...trust, keys: [{ ...trust.keys[0]!, validUntil: "2025-12-31T23:59:59Z" }] };
   assert.deepEqual(verifyReleaseRecordSignatureWithPolicy(manifest(), envelope, expired), { verified: false, reason: "outside-key-validity" });
   assert.equal(verifyReleaseRecordSignatureWithPolicy(manifest(), envelope, { ...trust, activeKeyId: "bad space" }).verified, false);

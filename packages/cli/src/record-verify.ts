@@ -68,7 +68,7 @@ export async function executeRecordVerify(root: string, manifestPath: string | u
       const redactionMember = manifest.members.find((member) => member.kind === "redaction-manifest");
       if (!redactionMember || redactionMember.redaction === "omitted" || !members.has(redactionMember.path)) throw new Error("redaction manifest is required and must be present");
     }
-    let signature: { readonly verified: boolean; readonly reason?: string; readonly signer?: { readonly id: string; readonly issuer: string } } | undefined;
+    let signature: { readonly verified: boolean; readonly identityBound?: boolean; readonly reason?: string; readonly signer?: { readonly id: string; readonly issuer: string } } | undefined;
     if (signaturePath || publicKeyPath) {
       if (!signaturePath || !publicKeyPath) throw new Error("record signature verification requires --signature and --public-key");
       if (!trustedIssuer) throw new Error("record signature verification requires --trusted-issuer");
@@ -78,6 +78,7 @@ export async function executeRecordVerify(root: string, manifestPath: string | u
       const key = await readFile(publicKeyPath, "utf8");
       signature = verifyReleaseRecordSignature(manifest, envelope, key);
       if (!signature.verified) throw new Error(`record signature verification failed: ${signature.reason}`);
+      if (!signature.identityBound) throw new Error("legacy record signature verifies manifest bytes only; its signer, issuer, and timestamp are not cryptographically bound");
       if (signature.signer?.issuer !== trustedIssuer) throw new Error("record signature issuer is not trusted");
       if (trustedSigner && signature.signer?.id !== trustedSigner) throw new Error("record signature signer is not trusted");
       const signedAt = typeof envelope === "object" && envelope !== null && "signedAt" in envelope ? Date.parse(String((envelope as { signedAt: unknown }).signedAt)) : NaN;

@@ -87,6 +87,7 @@ export async function executeRecordPackage(
       catch { throw new Error("record signature envelope is invalid JSON"); }
       const verification = verifyReleaseRecordSignature(manifest, envelope, publicKey);
       if (!verification.verified) throw new Error(`record signature verification failed: ${verification.reason}`);
+      if (!verification.identityBound) throw new Error("legacy record signature verifies manifest bytes only; its signer, issuer, and timestamp are not cryptographically bound");
       if (verification.signer.issuer !== trustedIssuer) throw new Error("record signature issuer is not trusted");
       if (trustedSigner && verification.signer.id !== trustedSigner) throw new Error("record signature signer is not trusted");
       const signedAt = typeof envelope === "object" && envelope !== null && "signedAt" in envelope ? Date.parse(String((envelope as { signedAt: unknown }).signedAt)) : NaN;

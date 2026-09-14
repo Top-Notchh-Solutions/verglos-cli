@@ -3,7 +3,7 @@ import { z } from "zod";
 import { canonicalizeJson } from "./schema.js";
 import { parseReleaseRecordManifest, type ReleaseRecordManifestDocument } from "./record-manifest.js";
 import { releaseRecordManifestDigest } from "./record-digest.js";
-import { createRecordSignatureEnvelope, releaseRecordSigningBytes, verifyReleaseRecordSignature, type RecordSignatureEnvelope } from "./record-signing.js";
+import { createRecordSignatureEnvelope, providerRecordSigningBytes, verifyReleaseRecordSignature, type RecordSignatureEnvelope } from "./record-signing.js";
 
 const KEY_ID = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/u;
 const KeyReferenceSchema = z.string().min(1).max(1024).regex(/^[^\u0000-\u001f\u007f]+$/u);
@@ -66,7 +66,7 @@ export interface RecordSigningProvider {
 }
 
 export type PolicyVerification =
-  | { readonly verified: true; readonly signer: RecordSignatureEnvelope["signer"]; readonly keyId: string; readonly manifestDigest: string }
+  | { readonly verified: true; readonly identityBound: true; readonly signer: RecordSignatureEnvelope["signer"]; readonly keyId: string; readonly manifestDigest: string }
   | { readonly verified: false; readonly reason: "invalid-policy" | "untrusted-key" | "revoked-key" | "outside-key-validity" | "signer-policy-mismatch" | "manifest-digest-mismatch" | "invalid-key" | "invalid-signature" };
 
 export function parseRecordSigningTrustPolicy(input: unknown): RecordSigningTrustPolicy {
@@ -88,6 +88,7 @@ export function verifyReleaseRecordSignatureWithPolicy(
   const policy = policyResult.data;
   if (envelope === null || typeof envelope !== "object") return { verified: false, reason: "invalid-signature" };
   const candidate = envelope as Partial<RecordSignatureEnvelope>;
+  if (candidate.schemaVersion !== "1.1.0") return { verified: false, reason: "invalid-signature" };
   if (candidate.keyId === undefined || !KEY_ID.test(candidate.keyId)) return { verified: false, reason: "untrusted-key" };
   if (candidate.signer?.id !== policy.signer.id || candidate.signer.issuer !== policy.signer.issuer) return { verified: false, reason: "signer-policy-mismatch" };
   const key = policy.keys.find((entry) => entry.keyId === candidate.keyId);
@@ -96,7 +97,8 @@ export function verifyReleaseRecordSignatureWithPolicy(
   if (typeof candidate.signedAt !== "string" || !keyIsValidAt(key, candidate.signedAt)) return { verified: false, reason: "outside-key-validity" };
   const result = verifyReleaseRecordSignature(manifest, envelope, key.publicKeyPem);
   if (!result.verified) return result;
-  return { verified: true, signer: result.signer, keyId: key.keyId, manifestDigest: result.manifestDigest };
+  if (!result.identityBound) return { verified: false, reason: "invalid-signature" };
+  return { verified: true, identityBound: true, signer: result.signer, keyId: key.keyId, manifestDigest: result.manifestDigest };
 }
 
 export async function signReleaseRecordManifestWithProvider(input: {
@@ -126,7 +128,7 @@ export async function signReleaseRecordManifestWithProvider(input: {
   const activeKey = policy.keys.find((key) => key.keyId === policy.activeKeyId);
   if (!activeKey || activeKey.status !== "active" || !keyIsValidAt(activeKey, input.signedAt)) throw new Error("active signing key is not valid at the requested signing time");
   const manifest = parseReleaseRecordManifest(input.manifest);
-  const payload = releaseRecordSigningBytes(manifest);
+  const payload = providerRecordSigningBytes(manifest, { keyId: descriptor.keyId, signer: policy.signer, signedAt: input.signedAt });
   const payloadDigest = releaseRecordManifestDigest(manifest);
   let signature: Uint8Array;
   try {
