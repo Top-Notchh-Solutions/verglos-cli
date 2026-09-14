@@ -12,6 +12,14 @@ test("Trivy parser rejects malformed, unsupported, and oversized output", () => 
   assert.throws(() => parseTrivyJson(new Uint8Array(10), { maxBytes: 1 }), /exceeds/);
 });
 
+test("Trivy parser enforces a finding-count bound independently of its byte limit", () => {
+  const raw = new TextEncoder().encode(JSON.stringify({ Results: [{ Target: "package-lock.json", Vulnerabilities: [
+    { VulnerabilityID: "CVE-1", Severity: "HIGH", PkgName: "a", InstalledVersion: "1" },
+    { VulnerabilityID: "CVE-2", Severity: "MEDIUM", PkgName: "b", InstalledVersion: "2" },
+  ] }] }));
+  assert.throws(() => parseTrivyFindings(raw, { maxBytes: 1024, maxResults: 1 }), (error: unknown) => error instanceof TrivyParseError && error.code === "TOO_LARGE");
+});
+
 test("Trivy parser emits bounded misconfiguration and secret metadata without matched values or source snippets", () => {
   const raw = new TextEncoder().encode(JSON.stringify({ Results: [{ Target: "infra/main.tf", Misconfigurations: [{ ID: "AWS-0086", Title: "S3 public ACL", Severity: "HIGH", CauseMetadata: { StartLine: 3, Code: { Lines: [{ Content: "private fixture source" }] } } }], Secrets: [{ RuleID: "generic-api-key", Title: "Generic API Key", Severity: "HIGH", StartLine: 8, Match: "fixture-secret-value" }] }] }));
   const parsed = parseTrivyFindings(raw);

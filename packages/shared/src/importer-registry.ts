@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { JsonDocumentError, parseBoundedJson } from "./schema.js";
 
 export type ImportFormat = "sarif" | "cyclonedx" | "spdx" | "in-toto" | "detect-secrets";
 export interface ImportedDocument {
@@ -10,14 +11,23 @@ export interface ImportedDocument {
 
 export class ImporterError extends Error {
   override readonly name = "ImporterError";
-  constructor(readonly code: "TOO_LARGE" | "INVALID_JSON" | "UNKNOWN_FORMAT" | "AMBIGUOUS_FORMAT", message: string) { super(message); }
+  constructor(readonly code: "TOO_LARGE" | "TOO_COMPLEX" | "INVALID_JSON" | "UNKNOWN_FORMAT" | "AMBIGUOUS_FORMAT", message: string) { super(message); }
 }
 
 export function importBoundedJson(bytes: Uint8Array, maxBytes = 64 * 1024 * 1024): ImportedDocument {
+  if (!Number.isSafeInteger(maxBytes) || maxBytes <= 0) throw new ImporterError("TOO_LARGE", "Imported evidence byte limit is invalid.");
   if (bytes.byteLength > maxBytes) throw new ImporterError("TOO_LARGE", "Imported evidence exceeds the configured byte limit.");
   let value: unknown;
-  try { value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)); }
-  catch { throw new ImporterError("INVALID_JSON", "Imported evidence is not valid UTF-8 JSON."); }
+  try {
+    value = parseBoundedJson(bytes, { limits: { maxBytes, maxDepth: 64, maxNodes: 250_000, maxObjectProperties: 200_000, maxArrayItems: 200_000 } });
+  } catch (error) {
+    if (error instanceof JsonDocumentError) {
+      if (error.code === "DOCUMENT_TOO_LARGE") throw new ImporterError("TOO_LARGE", "Imported evidence exceeds the configured byte limit.");
+      if (error.code === "INVALID_UTF8" || error.code === "INVALID_JSON") throw new ImporterError("INVALID_JSON", "Imported evidence is not valid UTF-8 JSON.");
+      throw new ImporterError("TOO_COMPLEX", "Imported evidence exceeds a structural complexity limit.");
+    }
+    throw error;
+  }
   if (typeof value !== "object" || value === null || Array.isArray(value)) throw new ImporterError("UNKNOWN_FORMAT", "Imported evidence must be a JSON object.");
   const doc = value as Record<string, unknown>;
   const matches: Array<{ format: ImportFormat; version: string }> = [];
