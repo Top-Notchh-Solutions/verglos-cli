@@ -172,7 +172,7 @@ program
 Command groups:
   Scan       scan, secrets, deps, score
   Hunt       hunt — verify findings in a local sandbox (shell — v2.0.0-beta)
-  Attest     attest — sign an evidence bundle for client handoff (shell — v2.0.0-beta)
+  Attest     attest — retired compatibility shell; use record create/sign/verify
   Fix & CI   fix, ci, hook, precommit
   Session    login, whoami, activate
   Utilities  init, explain, badge, mcp, monitor, update
@@ -1086,7 +1086,7 @@ program
       console.log(chalk.gray("  verglos_hunt_report             Pro — shell, v2.0.0-beta"));
       console.log(chalk.gray("  verglos_hunt_before_write       Pro — shell, v2.0.0-beta"));
       console.log(chalk.gray("  verglos_hunt_explain_verdict    Pro — shell, v2.0.0-beta"));
-      console.log(chalk.gray("  verglos_attest                  Studio — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_attest                  Deprecated compatibility shell — no signing/publication"));
       return;
     }
     // The MCP host receives only locally verified entitlement context. This
@@ -1117,10 +1117,10 @@ program
 
 program
   .command("attest")
-  .description("Sign an evidence bundle for client handoff [Studio] (shell — v2.0.0-beta)")
-  .option("--report <path>", "Path to the Verglos JSON report to attest")
-  .option("--sign", "Request Ed25519 bundle signing")
-  .option("--verify-url <url>", "Verify URL base to embed in the bundle")
+  .description("Deprecated legacy shell; does not sign or publish (use `record create/sign/verify`)")
+  .option("--report <path>", "Deprecated compatibility option; the path is validated but never read")
+  .option("--sign", "Deprecated compatibility option; no signature is produced")
+  .option("--verify-url <url>", "Deprecated compatibility option; no URL or summary is published")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
   .action(async (opts: { report?: string; sign?: boolean; verifyUrl?: string; json?: boolean; quiet?: boolean }) => {

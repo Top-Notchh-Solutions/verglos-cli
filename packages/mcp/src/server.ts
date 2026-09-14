@@ -276,7 +276,7 @@ const TOOLS = [
   {
     name: "verglos_attest",
     description:
-      "Studio. Sign a verified report into a portable evidence bundle with a public verify URL. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+      "Deprecated Studio compatibility shell. It does not read, sign, or publish a report or summary. Use the CLI's local `record create/sign/verify` workflow; hosted receipt/public verification is not available through this tool.",
     inputSchema: {
       type: "object",
       properties: {
@@ -314,7 +314,7 @@ export function jsonResponse(payload: unknown): {
 
 function alphaStub(name: string, tier: "pro" | "studio"): {
   ok: false;
-  error: "not_implemented_in_alpha" | "studio_only";
+  error: "not_implemented_in_alpha" | "studio_only" | "legacy_retired";
   tool: string;
   tier: "pro" | "studio";
   message: string;
@@ -322,13 +322,15 @@ function alphaStub(name: string, tier: "pro" | "studio"): {
 } {
   return {
     ok: false,
-    error: tier === "studio" ? "studio_only" : "not_implemented_in_alpha",
+    error: name === "verglos_attest" ? "legacy_retired" : tier === "studio" ? "studio_only" : "not_implemented_in_alpha",
     tool: name,
     tier,
     message:
-      tier === "studio"
-        ? "verglos_attest is a Studio capability and ships functionally in v2.0.0-beta."
-        : `${name} is registered in v2.0.0-alpha and ships functionally in v2.0.0-beta.`,
+      name === "verglos_attest"
+        ? "verglos_attest is a deprecated compatibility shell and performs no signing or publication. Use the local CLI record workflow; this MCP tool does not accept canonical records."
+        : tier === "studio"
+          ? `${name} is a Studio capability and ships functionally in v2.0.0-beta.`
+          : `${name} is registered in v2.0.0-alpha and ships functionally in v2.0.0-beta.`,
     docsUrl: tier === "studio" ? "https://verglos.com/attest" : "https://verglos.com/hunt",
   };
 }

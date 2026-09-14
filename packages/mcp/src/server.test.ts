@@ -88,6 +88,11 @@ test("MCP tools/list publishes shared capability metadata for every tool", () =>
     "verglos_check_before_write", "verglos_check_package", "verglos_scan", "verglos_explain_finding", "verglos_policy_check",
     "verglos_hunt_finding", "verglos_hunt_report", "verglos_hunt_before_write", "verglos_hunt_explain_verdict", "verglos_attest",
   ]);
+  const attest = tools.find((tool) => tool.name === "verglos_attest");
+  assert.ok(attest);
+  assert.match(attest.description, /Deprecated Studio compatibility shell/);
+  assert.match(attest.description, /does not read, sign, or publish/);
+  assert.doesNotMatch(attest.description, /public verify URL|sign a verified report/);
   for (const tool of tools) {
     const capability = tool._meta?.["verglos/capability"] as unknown as Record<string, unknown> | undefined;
     assert.ok(capability, `${tool.name} must publish capability metadata`);

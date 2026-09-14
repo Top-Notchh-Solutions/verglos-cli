@@ -1,31 +1,6 @@
-import type { Finding, ScanResult } from "@verglos/shared";
-
-export interface EvidenceArtifact {
-  id: string;
-  findingId: string;
-  finding?: Finding;
-  reportPath?: string;
-  htmlPath?: string;
-  jsonPath?: string;
-  createdAt: string;
-}
-
-export interface VerifyChain {
-  algorithm: "Ed25519";
-  publicKeyId: string;
-  verifyUrl: string;
-  signedAt: string;
-}
-
-export interface AttestationBundle {
-  schemaVersion: "2.0.0";
-  report: ScanResult;
-  evidence: EvidenceArtifact[];
-  verifyChain: VerifyChain;
-  signature: string;
-}
-
-export interface SigningKey {
-  keyId: string;
-  privateKey: Uint8Array | string;
-}
+/**
+ * Canonical Release Record types used by the retired Attest alpha package.
+ * These types describe records; they do not imply signing, publication, or verification.
+ */
+export type { ReleaseRecordManifestDocument } from "@verglos/shared";
+export type { ReleaseRecordPackageDescriptor } from "@verglos/shared";
