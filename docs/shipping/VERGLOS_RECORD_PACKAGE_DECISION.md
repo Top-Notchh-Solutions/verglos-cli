@@ -4,6 +4,17 @@ Date: 2026-09-14
 Status: selected for local Release Record packaging; no public release approval implied
 Scope: `verglos record pack` / `record verify`, not `verglos attest`
 
+## Sigstore package addendum (2026-09-14)
+
+CLI PR #38 adds an optional Sigstore DSSE bundle and canonical record-binding
+member to package descriptor version 1.1. The binding records the canonical
+manifest and bundle digests plus the certificate identity and issuer verified
+against an operator-supplied trusted root. Package verification requires that
+root and exact identity/issuer policy; embedded bundle presence alone never
+confers trust. Packages without Sigstore evidence continue to use descriptor
+version 1.0, preserving existing package compatibility. This is implemented
+but unreleased, and does not add an interactive browser login or plan gate.
+
 ## Context
 
 RECORD-002 requires a portable `.vgl` assembly containing a canonical manifest,

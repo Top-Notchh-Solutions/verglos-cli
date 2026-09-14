@@ -1,5 +1,13 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-14 · RECORD-006 keyless Sigstore adapter (accepted)
+
+- **Implementation:** CLI `4545eb4` pushed to existing PR #38, exact head `4545eb4f1e1b6d7476e4434c08336695d82a60a0`. Explicit caller-supplied OIDC token via named environment variable; explicit and separately scoped signing/network approvals; allowlisted Sigstore endpoints; canonical statement-to-bundle binding; verified issuer, identity, and bundle; offline verification against caller-root and exact policy. `.vgl` package v1.1 embeds optional bundle/binding and retains v1.0 when absent. No universal Verglos customer key.
+- **Verification:** focused Sigstore and record process tests 13/13; forced uncached CLI/shared `test typecheck build` 18/18 Turbo tasks; `git diff --check` and public-boundary audit pass. Exact-head self-scan `34833650330` and all nine Ubuntu/macOS/Windows × Node 20/22/24 cells in matrix `34833650299` pass.
+- **Acceptance/tracking:** RECORD-006 checked; **137 checked / 132 unchecked / 269 total**, recounted from task checkboxes. PR #38 OPEN/CLEAN, no merge decision/release. Mock OIDC/Fulcio/Rekor E2E and historical upstream signed fixture qualify local behavior; no live public Rekor write or interactive browser login. Guided UX and plan enforcement remain separate.
+- **Scope/operations:** no Web code, production DB read/write/migration, merge, deploy, npm publish, release, or marketing change. Private documentation is local-only and was not pushed.
+- **Next:** continue with a whole independent acceptance batch, beginning with Web VERIFY-WEB-001 route-level acceptance evidence; check digest binding and tenant/idempotency behavior against exact route behavior before changing its status.
+
 ## 2026-09-14 · RECORD-012 provenance ingestion in Release Records (accepted)
 
 - **Implementation:** CLI commits `e14ac41`, `df9ccb9`, and `96bf984` pushed to existing PR #38; exact head `96bf9846b6fd892194c20a24bf3d9e9bd39387e0`. Added bounded `record import-provenance` for in-toto statement/DSSE input, canonical subject-bound provenance member, exact source-byte preservation, and semantic validation at record create/verify/package boundaries. The CLI process test imports with the new command, creates/exports/packages/verifies a complete record carrying matched GitHub, mismatched npm, and unavailable BuildKit states. A negative shared test rejects provenance matching a digest unrelated to its bound Release Record subject.

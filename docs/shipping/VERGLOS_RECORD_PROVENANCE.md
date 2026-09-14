@@ -18,4 +18,14 @@ The member identifies `urn:verglos:schema:provider-provenance` v1.0.0, retains e
 
 All imported envelope signatures remain `unverified`. DSSE signature entries and exact envelope bytes are preserved, but no key, certificate, issuer, transparency log, provider identity, or trust root is evaluated. A signature count is not a signature-validity result. Provider-specific verification/trust policy remains separate under RECORD-006; no cryptographic provenance claim is made by this importer.
 
+RECORD-006 implementation addendum (CLI PR #38, `4545eb4`, unreleased): the
+separate `record attest` flow signs the canonical Release Record statement
+using a caller-supplied OIDC token and Sigstore Fulcio/Rekor, stores the bundle
+and exact issuer/identity binding, and verifies offline with an explicit
+trusted root and exact identity policy. This does not upgrade imported
+GitHub/npm/BuildKit provider labels or their DSSE signatures: those remain
+caller-declared/unverified until independent provider-specific verification
+exists. Current signing E2E uses mocked services; no public Rekor write was
+performed.
+
 The retained source may contain sensitive build metadata. The record member is not redacted by import and must not be copied to a public projection. Public record projection does not expose arbitrary member payloads. Synthetic tests cover matched, mismatched, unavailable, malformed DSSE, digest tampering, record-subject mismatch, no-overwrite behavior, and CLI create/verify/package flow. These fixtures are software contract tests, not evidence from a production GitHub, npm, or BuildKit release.
