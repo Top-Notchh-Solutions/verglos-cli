@@ -22,6 +22,7 @@ import {
 } from "./monitor.js";
 import { executeAttest } from "./attest.js";
 import { executeRecordExport } from "./record-export.js";
+import { executeRecordAttest, SIGSTORE_NETWORK_ORIGINS } from "./record-sigstore.js";
 import { executeHunt } from "./hunt.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
@@ -278,22 +279,32 @@ record.command("pack <storeRoot> <manifestPath> <output.vgl>")
   .option("--public-key <path>", "Verify the signature with this user-supplied Ed25519 public key")
   .option("--trusted-issuer <issuer>", "Require this exact signature issuer")
   .option("--trusted-signer <id>", "Optionally require this exact signature identity")
+  .option("--sigstore-bundle <path>", "Include a verified Sigstore v0.3 DSSE bundle")
+  .option("--sigstore-binding <path>", "Include its digest-bound Release Record binding")
+  .option("--trusted-root <path>", "Verify with this out-of-band Sigstore trusted root")
+  .option("--certificate-issuer <issuer>", "Require this exact Sigstore certificate issuer")
+  .option("--certificate-identity <identity>", "Require this exact Sigstore certificate identity")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
-  .action(async (storeRoot: string, manifestPath: string, outputPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string }) => {
-    process.exit(await executeRecordPackage(storeRoot, manifestPath, outputPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner));
+  .action(async (storeRoot: string, manifestPath: string, outputPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; sigstoreBundle?: string; sigstoreBinding?: string; trustedRoot?: string; certificateIssuer?: string; certificateIdentity?: string }) => {
+    process.exit(await executeRecordPackage(storeRoot, manifestPath, outputPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, { bundlePath: opts.sigstoreBundle, bindingPath: opts.sigstoreBinding, trustedRootPath: opts.trustedRoot, issuer: opts.certificateIssuer, identity: opts.certificateIdentity }));
   });
 record.command("verify <storeRoot> [manifestPath]")
-  .description("Verify a local record store or complete .vgl package; signed packages require an explicit trusted key")
+  .description("Verify a local record store or complete .vgl package; signatures require explicit trusted verification material")
   .option("--json", "Emit machine-readable JSON")
   .option("--signature <path>", "Verify an offline record signature envelope")
   .option("--public-key <path>", "Verify with a user-supplied Ed25519 public key")
   .option("--trusted-issuer <issuer>", "Require this exact signature issuer")
   .option("--trusted-signer <id>", "Require this exact signature identity")
+  .option("--sigstore-bundle <path>", "Verify an attached Sigstore v0.3 DSSE bundle")
+  .option("--sigstore-binding <path>", "Verify the digest-bound Sigstore record binding")
+  .option("--trusted-root <path>", "Use an out-of-band Sigstore trusted-root JSON file")
+  .option("--certificate-issuer <issuer>", "Require this exact Sigstore certificate issuer")
+  .option("--certificate-identity <identity>", "Require this exact Sigstore certificate identity")
   .option("--complete", "Require the complete Release Record graph")
   .option("--quiet", "Suppress human output")
-  .action(async (storeRoot: string, manifestPath: string | undefined, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; complete?: boolean }) => {
-    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, opts.complete));
+  .action(async (storeRoot: string, manifestPath: string | undefined, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; complete?: boolean; sigstoreBundle?: string; sigstoreBinding?: string; trustedRoot?: string; certificateIssuer?: string; certificateIdentity?: string }) => {
+    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, opts.complete, { bundlePath: opts.sigstoreBundle, bindingPath: opts.sigstoreBinding, trustedRootPath: opts.trustedRoot, issuer: opts.certificateIssuer, identity: opts.certificateIdentity }));
   });
 record.command("export <storeRoot> <manifestPath> <outputPath>")
   .description("Export an in-toto statement locally from a verified complete record; review limitation text before sharing")
@@ -328,6 +339,35 @@ record.command("sign <manifestPath> <signaturePath>")
       }
     }
     process.exit(await executeRecordSign(manifestPath, signaturePath, opts.key, opts.signer, opts.issuer, opts.approve, opts.json, opts.quiet, approvalReceipt, new Date().toISOString(), process.env.VERGLOS_APPROVAL_STORE));
+  });
+record.command("attest <storeRoot> <manifestPath> <outputDirectory>")
+  .description("Create keyless Sigstore DSSE evidence; uploads the in-toto statement to public Rekor")
+  .requiredOption("--trusted-root <path>", "Out-of-band Sigstore trusted-root JSON file")
+  .requiredOption("--identity <identity>", "Exact expected certificate identity (SAN)")
+  .requiredOption("--issuer <issuer>", "Exact expected certificate issuer")
+  .requiredOption("--identity-token-env <name>", "Environment variable containing the caller's OIDC identity token; its value is never printed or saved")
+  .option("--publish-to-rekor", "Explicitly authorize public transparency-log upload (required)")
+  .option("--approve", "Confirm keyless signing and public transparency-log submission")
+  .option("--sign-approval-receipt <path>", "Exact, time-bounded sign approval receipt")
+  .option("--network-approval-receipt <path>", `Exact, time-bounded network approval receipt for ${SIGSTORE_NETWORK_ORIGINS.join(", ")}`)
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, outputDirectory: string, opts: { trustedRoot: string; identity: string; issuer: string; identityTokenEnv: string; publishToRekor?: boolean; approve?: boolean; signApprovalReceipt?: string; networkApprovalReceipt?: string; json?: boolean; quiet?: boolean }) => {
+    try {
+      if (!opts.approve || !opts.publishToRekor) throw new Error("record attest requires --approve and --publish-to-rekor before reading credentials");
+      if (!opts.signApprovalReceipt || !opts.networkApprovalReceipt) throw new Error("record attest requires both sign and network approval receipts before reading credentials");
+      const signingApproval = await readApprovalReceiptFile(opts.signApprovalReceipt);
+      const networkApproval = await readApprovalReceiptFile(opts.networkApprovalReceipt);
+      process.exit(await executeRecordAttest({
+        storeRoot, manifestPath, outputDirectory, trustedRootPath: opts.trustedRoot, identity: opts.identity, issuer: opts.issuer,
+        identityTokenEnv: opts.identityTokenEnv, publishToRekor: opts.publishToRekor, approve: opts.approve,
+        signingApproval, networkApproval, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE,
+        now: new Date().toISOString(), json: opts.json, quiet: opts.quiet,
+      }));
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "RECORD_SIGSTORE_INPUT", error instanceof Error ? error.message : "approval receipt is invalid", "Sigstore attestation failed");
+      process.exit(78);
+    }
   });
 record.command("project <storeRoot> <manifestPath>")
   .description("Project a verified record into safe public fields without uploading")

@@ -25,11 +25,16 @@ test("record package descriptor binds directory-v1 transport to the manifest and
   const { manifest } = fixture();
   const descriptor = createReleaseRecordPackageDescriptor(manifest, true);
   assert.equal(descriptor.transport, "directory-v1");
+  assert.equal(descriptor.schemaVersion, "1.0.0", "packages without Sigstore evidence retain the original descriptor version");
   assert.match(descriptor.manifestDigest, /^sha256:[a-f0-9]{64}$/u);
   assert.deepEqual(parseReleaseRecordPackageDescriptor(descriptor), descriptor);
   assert.throws(() => parseReleaseRecordPackageDescriptor({ ...descriptor, transport: "zip" }));
   assert.throws(() => parseReleaseRecordPackageDescriptor({ ...descriptor, extra: true }));
-  assert.deepEqual(RELEASE_RECORD_PACKAGE_FILES, { descriptor: ".vgl-package.json", viewer: ".vgl-viewer.html", export: ".vgl-release.intoto.json", signature: ".vgl-signature.json" });
+  const sigstoreDescriptor = createReleaseRecordPackageDescriptor(manifest, false, true);
+  assert.equal(sigstoreDescriptor.schemaVersion, "1.1.0");
+  assert.equal("sigstoreIncluded" in sigstoreDescriptor && sigstoreDescriptor.sigstoreIncluded, true);
+  assert.deepEqual(parseReleaseRecordPackageDescriptor(sigstoreDescriptor), sigstoreDescriptor);
+  assert.deepEqual(RELEASE_RECORD_PACKAGE_FILES, { descriptor: ".vgl-package.json", viewer: ".vgl-viewer.html", export: ".vgl-release.intoto.json", signature: ".vgl-signature.json", sigstoreBundle: ".vgl-sigstore.json", sigstoreBinding: ".vgl-sigstore-binding.json" });
 });
 
 test("offline viewer is script-free, privacy-limited, and excludes paths and free-form canaries", () => {
@@ -38,6 +43,7 @@ test("offline viewer is script-free, privacy-limited, and excludes paths and fre
   assert.match(html, /Decision member digest/u);
   assert.match(html, /Included; signer identity is not verified/u);
   assert.match(html, /not independent proof of sanitization/u);
+  assert.match(renderReleaseRecordViewer({ manifest, decision, signatureIncluded: false, sigstoreIncluded: true }), /trust and exact signer identity are not verified/u);
   assert.match(html, /default-src 'none'/u);
   for (const canary of ["PRIVATE-LIMITATION-CANARY", "private-issuer-canary", "private/path", "<script>", "alert(1)", "alert(2)"]) assert.equal(html.includes(canary), false, `viewer leaked ${canary}`);
   assert.doesNotMatch(html, /<script\b/iu);

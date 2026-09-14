@@ -15,7 +15,7 @@ export async function executeRecordProject(storeRoot: string, manifestPath: stri
     const members = await readAndVerifyRecord(storeRoot, manifest);
     const packageArtifacts = await verifyRecordPackageArtifacts({ root: storeRoot, manifest, members });
     const projection = projectVerifiedPublicRecord(manifest, members, {
-      ...(packageArtifacts.packaged ? { detachedSignaturePresent: Boolean(packageArtifacts.signaturePath) } : {}),
+      ...(packageArtifacts.packaged ? { detachedSignaturePresent: Boolean(packageArtifacts.signaturePath || packageArtifacts.sigstoreIncluded) } : {}),
     });
     if (json) console.log(JSON.stringify(projection));
     else if (!quiet) console.log(`${projection.decision} ${projection.manifestDigest} (${projection.signerStatus})`);

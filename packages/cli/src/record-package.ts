@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
-import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
+import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import {
   assertCompleteReleaseRecord,
   assertCompleteReleaseRecordPayloads,
@@ -17,10 +17,20 @@ import {
   renderReleaseRecordViewer,
   verifyReleaseRecordSignature,
 } from "@verglos/shared";
+import { SIGSTORE_BINDING_NAME, SIGSTORE_BUNDLE_NAME, MAX_SIGSTORE_BUNDLE_BYTES, MAX_TRUST_ROOT_BYTES, readBoundedRegularFile, verifyRecordSigstoreEvidenceBytes } from "./record-sigstore.js";
 
 const MAX_MANIFEST_BYTES = 8 * 1024 * 1024;
 const MAX_SIGNATURE_BYTES = 16 * 1024;
 const MAX_EXPORT_BYTES = 1024 * 1024;
+const MAX_SIGSTORE_BINDING_BYTES = 16 * 1024;
+
+export interface RecordPackageSigstoreOptions {
+  readonly bundlePath?: string;
+  readonly bindingPath?: string;
+  readonly trustedRootPath?: string;
+  readonly issuer?: string;
+  readonly identity?: string;
+}
 
 async function readRegularFile(path: string, limit: number, label: string): Promise<Buffer> {
   const entry = await lstat(path);
@@ -41,6 +51,7 @@ export async function executeRecordPackage(
   publicKeyPath?: string,
   trustedIssuer?: string,
   trustedSigner?: string,
+  sigstoreOptions: RecordPackageSigstoreOptions = {},
 ): Promise<number> {
   let staging: string | undefined;
   try {
@@ -85,6 +96,26 @@ export async function executeRecordPackage(
       throw new Error("signature trust options require --signature");
     }
 
+    const sigstorePaths = [sigstoreOptions.bundlePath, sigstoreOptions.bindingPath, sigstoreOptions.trustedRootPath, sigstoreOptions.issuer, sigstoreOptions.identity];
+    const sigstoreIncluded = sigstorePaths.some(Boolean);
+    if (sigstoreIncluded && sigstorePaths.some((path) => !path)) {
+      throw new Error("Sigstore packaging requires --sigstore-bundle, --sigstore-binding, --trusted-root, --certificate-issuer, and --certificate-identity together");
+    }
+    const sigstoreBundleBytes = sigstoreOptions.bundlePath ? await readBoundedRegularFile(sigstoreOptions.bundlePath, MAX_SIGSTORE_BUNDLE_BYTES, "Sigstore bundle") : undefined;
+    const sigstoreBindingBytes = sigstoreOptions.bindingPath ? await readBoundedRegularFile(sigstoreOptions.bindingPath, MAX_SIGSTORE_BINDING_BYTES, "Sigstore record binding") : undefined;
+    if (sigstoreIncluded && sigstoreBundleBytes && sigstoreBindingBytes && sigstoreOptions.trustedRootPath && sigstoreOptions.issuer && sigstoreOptions.identity) {
+      const trustedRootBytes = await readBoundedRegularFile(sigstoreOptions.trustedRootPath, MAX_TRUST_ROOT_BYTES, "Sigstore trusted root");
+      verifyRecordSigstoreEvidenceBytes({
+        bundleBytes: sigstoreBundleBytes,
+        bindingBytes: sigstoreBindingBytes,
+        trustedRootBytes,
+        manifest,
+        members,
+        identity: sigstoreOptions.identity,
+        issuer: sigstoreOptions.issuer,
+      });
+    }
+
     const decisionMember = manifest.members.find((member) => member.kind === "release-decision");
     if (!decisionMember) throw new Error("complete record has no release decision");
     const decisionBytes = members.get(decisionMember.path);
@@ -93,8 +124,8 @@ export async function executeRecordPackage(
     const statement = createReleaseStatement(manifest, decision.subjects.map((subject) => subject.subjectId));
     const exportBytes = Buffer.from(`${canonicalizeJson(statement)}\n`, "utf8");
     if (exportBytes.byteLength > MAX_EXPORT_BYTES) throw new Error("record export exceeds the 1 MiB limit");
-    const viewerBytes = Buffer.from(renderReleaseRecordViewer({ manifest, decision, signatureIncluded: Boolean(signatureBytes) }), "utf8");
-    const descriptor = createReleaseRecordPackageDescriptor(manifest, Boolean(signatureBytes));
+    const viewerBytes = Buffer.from(renderReleaseRecordViewer({ manifest, decision, signatureIncluded: Boolean(signatureBytes), sigstoreIncluded }), "utf8");
+    const descriptor = createReleaseRecordPackageDescriptor(manifest, Boolean(signatureBytes), sigstoreIncluded);
     const descriptorBytes = Buffer.from(`${canonicalizeJson(descriptor)}\n`, "utf8");
     const manifestBytes = Buffer.from(`${canonicalizeJson(manifest)}\n`, "utf8");
     if (manifestBytes.byteLength > MAX_MANIFEST_BYTES) throw new Error("record manifest exceeds the 8 MiB limit");
@@ -112,12 +143,16 @@ export async function executeRecordPackage(
     await writeFile(join(staging, ".vgl-viewer.html"), viewerBytes, { flag: "wx", mode: 0o600 });
     await writeFile(join(staging, ".vgl-release.intoto.json"), exportBytes, { flag: "wx", mode: 0o600 });
     if (signatureBytes) await writeFile(join(staging, ".vgl-signature.json"), signatureBytes, { flag: "wx", mode: 0o600 });
+    if (sigstoreBundleBytes && sigstoreBindingBytes) {
+      await writeFile(join(staging, SIGSTORE_BUNDLE_NAME), sigstoreBundleBytes, { flag: "wx", mode: 0o600 });
+      await writeFile(join(staging, SIGSTORE_BINDING_NAME), sigstoreBindingBytes, { flag: "wx", mode: 0o600 });
+    }
     await rename(staging, destination);
     staging = undefined;
 
-    const bytes = manifestBytes.byteLength + descriptorBytes.byteLength + viewerBytes.byteLength + exportBytes.byteLength + (signatureBytes?.byteLength ?? 0)
+    const bytes = manifestBytes.byteLength + descriptorBytes.byteLength + viewerBytes.byteLength + exportBytes.byteLength + (signatureBytes?.byteLength ?? 0) + (sigstoreBundleBytes?.byteLength ?? 0) + (sigstoreBindingBytes?.byteLength ?? 0)
       + manifest.members.filter((member) => member.redaction !== "omitted").reduce((total, member) => total + (members.get(member.path)?.byteLength ?? 0), 0);
-    const result = { packaged: true, transport: "directory-v1", outputPath: destination, manifestDigest: releaseRecordManifestDigest(manifest), members: members.size, bytes, signature: signatureBytes ? "verified-included" : "not-included", uploadPerformed: false, includesNonOmittedEvidence: true };
+    const result = { packaged: true, transport: "directory-v1", outputPath: destination, manifestDigest: releaseRecordManifestDigest(manifest), members: members.size, bytes, signature: signatureBytes ? "verified-included" : "not-included", sigstore: sigstoreIncluded ? "verified-included" : "not-included", uploadPerformed: false, includesNonOmittedEvidence: true };
     if (json) console.log(JSON.stringify(result));
     else if (!quiet) console.log(`Created local .vgl directory package ${destination}. It includes all non-omitted evidence bytes; inspect it and keep it private before sharing. No upload was performed.`);
     return 0;
@@ -133,8 +168,8 @@ export async function verifyRecordPackageArtifacts(input: {
   readonly root: string;
   readonly manifest: Parameters<typeof createReleaseRecordPackageDescriptor>[0];
   readonly members: ReadonlyMap<string, Uint8Array>;
-}): Promise<{ readonly packaged: boolean; readonly signaturePath?: string }> {
-  const expectsPackage = input.root.toLowerCase().endsWith(".vgl");
+}): Promise<{ readonly packaged: boolean; readonly signaturePath?: string; readonly sigstoreBundlePath?: string; readonly sigstoreBindingPath?: string; readonly sigstoreIncluded?: boolean }> {
+  const expectsPackage = basename(resolve(input.root)).toLowerCase().endsWith(".vgl");
   if (expectsPackage) {
     const rootEntry = await lstat(input.root);
     if (!rootEntry.isDirectory()) throw new Error(".vgl package root must be a regular directory");
@@ -158,12 +193,15 @@ export async function verifyRecordPackageArtifacts(input: {
   catch { throw new Error(".vgl package descriptor is invalid JSON"); }
   const descriptor = parseReleaseRecordPackageDescriptor(parsed);
   if (descriptorBytes.toString("utf8") !== `${canonicalizeJson(descriptor)}\n`) throw new Error(".vgl package descriptor is not in canonical form");
-  const expectedDescriptor = createReleaseRecordPackageDescriptor(input.manifest, descriptor.signatureIncluded);
+  const sigstoreIncluded = "sigstoreIncluded" in descriptor && descriptor.sigstoreIncluded;
+  const expectedDescriptor = descriptor.schemaVersion === "1.0.0"
+    ? { schemaId: "urn:verglos:schema:release-record-package", schemaVersion: "1.0.0", transport: "directory-v1", manifestDigest: releaseRecordManifestDigest(input.manifest), signatureIncluded: descriptor.signatureIncluded }
+    : createReleaseRecordPackageDescriptor(input.manifest, descriptor.signatureIncluded, sigstoreIncluded);
   if (canonicalizeJson(descriptor) !== canonicalizeJson(expectedDescriptor)) throw new Error(".vgl package descriptor does not bind this Release Record manifest");
 
   const expectedExport = await createPackageExport(input.manifest, input.members);
   await assertExactRegularFile(join(input.root, ".vgl-release.intoto.json"), expectedExport, MAX_EXPORT_BYTES, "record package export");
-  const expectedViewer = createPackageViewer(input.manifest, input.members, descriptor.signatureIncluded);
+  const expectedViewer = createPackageViewer(input.manifest, input.members, descriptor.signatureIncluded, sigstoreIncluded);
   await assertExactRegularFile(join(input.root, ".vgl-viewer.html"), expectedViewer, 256 * 1024, "record package viewer");
 
   const expectedNames = new Set([
@@ -171,6 +209,7 @@ export async function verifyRecordPackageArtifacts(input: {
     ...input.manifest.members.filter((member) => member.redaction !== "omitted").map((member) => `${member.digest.algorithm}-${member.digest.value}`),
     ".vgl-package.json", ".vgl-viewer.html", ".vgl-release.intoto.json",
     ...(descriptor.signatureIncluded ? [".vgl-signature.json"] : []),
+    ...(sigstoreIncluded ? [SIGSTORE_BUNDLE_NAME, SIGSTORE_BINDING_NAME] : []),
   ]);
   const actualNames = await readdir(input.root);
   if (actualNames.length !== expectedNames.size || actualNames.some((name) => !expectedNames.has(name))) throw new Error(".vgl package contains missing or unexpected entries");
@@ -191,7 +230,12 @@ export async function verifyRecordPackageArtifacts(input: {
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
   if (signatureExists !== descriptor.signatureIncluded) throw new Error(".vgl package signature presence does not match its descriptor");
-  return { packaged: true, ...(signatureExists ? { signaturePath } : {}) };
+  const sigstoreBundlePath = join(input.root, SIGSTORE_BUNDLE_NAME);
+  const sigstoreBindingPath = join(input.root, SIGSTORE_BINDING_NAME);
+  const sigstoreBundleExists = await assertOptionalBoundedRegularFile(sigstoreBundlePath, MAX_SIGSTORE_BUNDLE_BYTES, "Sigstore bundle");
+  const sigstoreBindingExists = await assertOptionalBoundedRegularFile(sigstoreBindingPath, MAX_SIGSTORE_BINDING_BYTES, "Sigstore record binding");
+  if (sigstoreBundleExists !== sigstoreIncluded || sigstoreBindingExists !== sigstoreIncluded) throw new Error(".vgl package Sigstore evidence presence does not match its descriptor");
+  return { packaged: true, ...(signatureExists ? { signaturePath } : {}), ...(sigstoreIncluded ? { sigstoreBundlePath, sigstoreBindingPath, sigstoreIncluded: true } : { sigstoreIncluded: false }) };
 }
 
 async function createPackageExport(manifest: Parameters<typeof createReleaseRecordPackageDescriptor>[0], members: ReadonlyMap<string, Uint8Array>): Promise<Buffer> {
@@ -203,12 +247,22 @@ async function createPackageExport(manifest: Parameters<typeof createReleaseReco
   return Buffer.from(`${canonicalizeJson(createReleaseStatement(manifest, decision.subjects.map((subject) => subject.subjectId)))}\n`, "utf8");
 }
 
-function createPackageViewer(manifest: Parameters<typeof createReleaseRecordPackageDescriptor>[0], members: ReadonlyMap<string, Uint8Array>, signatureIncluded: boolean): Buffer {
+function createPackageViewer(manifest: Parameters<typeof createReleaseRecordPackageDescriptor>[0], members: ReadonlyMap<string, Uint8Array>, signatureIncluded: boolean, sigstoreIncluded: boolean): Buffer {
   const decisionMember = manifest.members.find((member) => member.kind === "release-decision");
   if (!decisionMember) throw new Error("complete package has no release decision");
   const bytes = members.get(decisionMember.path);
   if (!bytes) throw new Error("complete package release decision is missing");
-  return Buffer.from(renderReleaseRecordViewer({ manifest, decision: parseReleaseDecisionJson(bytes), signatureIncluded }), "utf8");
+  return Buffer.from(renderReleaseRecordViewer({ manifest, decision: parseReleaseDecisionJson(bytes), signatureIncluded, sigstoreIncluded }), "utf8");
+}
+
+async function assertOptionalBoundedRegularFile(path: string, limit: number, label: string): Promise<boolean> {
+  try {
+    await readBoundedRegularFile(path, limit, label);
+    return true;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return false;
+    throw error;
+  }
 }
 
 async function assertExactRegularFile(path: string, expected: Uint8Array, limit: number, label: string): Promise<void> {

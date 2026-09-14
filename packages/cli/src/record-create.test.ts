@@ -1,16 +1,81 @@
 import assert from "node:assert/strict";
-import { generateKeyPairSync } from "node:crypto";
+import { createHash, generateKeyPairSync } from "node:crypto";
 import { mkdtemp, mkdir, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { basename, join } from "node:path";
+import { basename, join, sep } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
+import { initializeCA, initializeCTLog, initializeTLog, mockFulcio } from "@sigstore/mock";
+import { HashAlgorithm, PublicKeyDetails } from "@sigstore/protobuf-specs";
+import nock from "nock";
 import { executeRecordCreate } from "./record-create.js";
 import { runCliFixture } from "./cli-fixture.js";
 import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createApprovalReceipt, createLineageGraphDocument, createPolicyEvaluation, createProviderProvenanceRecordMember, createReleaseDecision, createSubject, describeRecordMember, digestPolicyException, EXCEPTION_APPROVAL_SCHEMA, LINEAGE_GRAPH_SCHEMA, MAX_RELEASE_RECORD_AGGREGATE_BYTES, OBSERVATION_SCHEMA, parseExceptionApproval, parsePolicyDocument, parsePolicyException, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, POLICY_EXCEPTION_SCHEMA, RELEASE_DECISION_SCHEMA, releaseRecordManifestDigest, SUBJECT_SCHEMA, TOOL_RUN_SCHEMA, VERIFICATION_ATTEMPT_SCHEMA } from "@verglos/shared";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordExport } from "./record-export.js";
 import { executeRecordPackage } from "./record-package.js";
+import { executeRecordAttest, SIGSTORE_NETWORK_ORIGINS } from "./record-sigstore.js";
+
+const MOCK_FULCIO_URL = SIGSTORE_NETWORK_ORIGINS[0]!;
+const MOCK_REKOR_URL = SIGSTORE_NETWORK_ORIGINS[1]!;
+
+async function mockTrustedRoot(): Promise<string> {
+  const fulcioKeys = generateKeyPairSync("ec", { namedCurve: "prime256v1" });
+  const rekorKeys = generateKeyPairSync("ec", { namedCurve: "prime256v1" });
+  const ctLog = await initializeCTLog(fulcioKeys);
+  const ca = await initializeCA(fulcioKeys, ctLog);
+  const rekor = await initializeTLog(MOCK_REKOR_URL, rekorKeys);
+  const now = Date.now();
+  const validity = { start: new Date(now - 60_000).toISOString(), end: new Date(now + 60 * 60_000).toISOString() };
+  const publicKey = (rawBytes: Uint8Array) => ({ rawBytes: Buffer.from(rawBytes).toString("base64"), keyDetails: PublicKeyDetails[PublicKeyDetails.PKIX_ECDSA_P256_SHA_256] });
+  const encodedView = (view: ArrayBufferView) => Buffer.from(new Uint8Array(view.buffer, view.byteOffset, view.byteLength)).toString("base64");
+  const logId = (keyId: ArrayBufferView) => ({ keyId: encodedView(keyId) });
+  const trustedRoot = {
+    mediaType: "application/vnd.dev.sigstore.trustedroot+json;version=0.1",
+    tlogs: [{
+      baseUrl: MOCK_REKOR_URL,
+      hashAlgorithm: HashAlgorithm[HashAlgorithm.SHA2_256],
+      publicKey: publicKey(rekor.publicKey),
+      logId: logId(createHash("sha256").update(rekor.publicKey).digest()),
+      operator: "sigstore.mock",
+    }],
+    certificateAuthorities: [{
+      subject: { commonName: "sigstore", organization: "sigstore.mock" },
+      uri: MOCK_FULCIO_URL,
+      certChain: { certificates: [{ rawBytes: encodedView(ca.rootCertificate) }] },
+      validFor: validity,
+      operator: "sigstore.mock",
+    }],
+    ctlogs: [{
+      baseUrl: "https://ctfe.sigstore.dev/2022",
+      hashAlgorithm: HashAlgorithm[HashAlgorithm.SHA2_256],
+      publicKey: publicKey(ctLog.publicKey),
+      logId: logId(ctLog.logID),
+      operator: "sigstore.mock",
+    }],
+    timestampAuthorities: [],
+  };
+  await mockFulcio({ keyPair: fulcioKeys, strict: true });
+  nock(MOCK_REKOR_URL).post("/api/v1/log/entries").reply(async (_path, requestBody) => {
+    const request = typeof requestBody === "string" ? JSON.parse(requestBody) as { spec: { proposedContent: { envelope: string; verifiers: string[] } } } : requestBody as { spec: { proposedContent: { envelope: string; verifiers: string[] } } };
+    const envelope = JSON.parse(request.spec.proposedContent.envelope) as { payloadType: string; payload: string; signatures: Array<{ sig: string; keyid?: string }> };
+    const signature = envelope.signatures[0];
+    const verifier = request.spec.proposedContent.verifiers[0];
+    if (!signature || !verifier) throw new Error("mock Rekor received an invalid DSSE request");
+    const envelopeForHash = { payloadType: envelope.payloadType, payload: envelope.payload, signatures: [{ sig: signature.sig, publicKey: verifier, ...(signature.keyid ? { keyid: signature.keyid } : {}) }] };
+    const entry = {
+      apiVersion: "0.0.1",
+      kind: "dsse",
+      spec: {
+        envelopeHash: { algorithm: "sha256", value: createHash("sha256").update(canonicalizeJson(envelopeForHash)).digest("hex") },
+        payloadHash: { algorithm: "sha256", value: createHash("sha256").update(Buffer.from(envelope.payload, "base64")).digest("hex") },
+        signatures: [{ signature: signature.sig, verifier }],
+      },
+    };
+    return [201, await rekor.log(entry)];
+  });
+  return JSON.stringify(trustedRoot);
+}
 
 test("record create materializes verified members and a canonical manifest", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-record-create-"));
@@ -194,6 +259,183 @@ test("complete record create, verify, and export preserve canonical policy and s
     assert.equal((JSON.parse(createProcess.stdout) as { members: number }).members, 14);
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true), 0);
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true, undefined, undefined, undefined, undefined, true), 0);
+
+    const recordManifestPath = join(output, "manifest.json");
+    const sigstoreDirectory = join(root, "release-evidence.vgl-sigstore");
+    const trustedRootPath = join(root, "mock-trusted-root.json");
+    const identity = "verglos-fixture@example.invalid";
+    const issuer = "https://issuer.example.invalid";
+    const tokenEnv = "VERGLOS_SIGSTORE_MOCK_TOKEN";
+    const payload = Buffer.from(JSON.stringify({ iss: issuer, sub: identity, iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 300 })).toString("base64url");
+    const token = `eyJhbGciOiJub25lIn0.${payload}.fixture-signature`;
+    const approvalTime = new Date().toISOString();
+    const approvalTarget = `sigstore:${recordManifestPath}:${sigstoreDirectory}:${issuer}:${identity}`;
+    const approvalFiles = [recordManifestPath, sigstoreDirectory];
+    const request = (action: "sign" | "network", requestId: string) => ({
+      requestId,
+      action,
+      actor: "synthetic-test-operator",
+      target: approvalTarget,
+      files: approvalFiles,
+      network: action === "network" ? [...SIGSTORE_NETWORK_ORIGINS] : [],
+      policyEffect: "Create and publish a synthetic Release Record attestation",
+      requestedAt: approvalTime,
+      expiresAt: new Date(Date.parse(approvalTime) + 120_000).toISOString(),
+    });
+    const signingApproval = createApprovalReceipt(request("sign", "92345678-1234-4123-8123-123456789abc"), { decision: "approved", decidedBy: "synthetic-test-reviewer", decidedAt: approvalTime });
+    const networkApproval = createApprovalReceipt(request("network", "a2345678-1234-4123-8123-123456789abc"), { decision: "approved", decidedBy: "synthetic-test-reviewer", decidedAt: approvalTime });
+    const approvalStoreRoot = join(root, "approval-receipts");
+    const existingToken = process.env[tokenEnv];
+    const originalLog = console.log;
+    let attestOutput = "";
+    process.env[tokenEnv] = token;
+    console.log = (...args: unknown[]) => { attestOutput = args.map(String).join(" "); };
+    nock.disableNetConnect();
+    try {
+      await writeFile(trustedRootPath, await mockTrustedRoot());
+      const attestExit = await executeRecordAttest({
+        storeRoot: output,
+        manifestPath: recordManifestPath,
+        outputDirectory: sigstoreDirectory,
+        trustedRootPath,
+        identity,
+        issuer,
+        identityTokenEnv: tokenEnv,
+        publishToRekor: true,
+        approve: true,
+        signingApproval,
+        networkApproval,
+        approvalStoreRoot,
+        now: approvalTime,
+        json: true,
+        quiet: true,
+      });
+      assert.equal(attestExit, 0, attestOutput);
+      const attestResult = JSON.parse(attestOutput) as { status: string; signer: string; issuer: string; transparencyLogUpload: string };
+      assert.equal(attestResult.status, "verified");
+      assert.equal(attestResult.signer, identity);
+      assert.equal(attestResult.issuer, issuer);
+      assert.equal(attestResult.transparencyLogUpload, "performed");
+      const successfulAttestOutput = attestOutput;
+      assert.equal(nock.isDone(), true, `unconsumed mocked Sigstore requests: ${nock.pendingMocks().join(", ")}`);
+      assert.equal(attestOutput.includes(token), false);
+      assert.equal((await readFile(join(sigstoreDirectory, ".vgl-sigstore.json"), "utf8")).includes(token), false);
+      assert.equal((await readdir(approvalStoreRoot)).length, 2, "both exact-scope approvals must be durably recorded before network use");
+      assert.equal((JSON.parse(await readFile(join(sigstoreDirectory, ".vgl-sigstore-status.json"), "utf8")) as { status: string }).status, "verified");
+      assert.equal(await executeRecordVerify(output, recordManifestPath, true, true, undefined, undefined, undefined, undefined, true, {
+        bundlePath: join(sigstoreDirectory, ".vgl-sigstore.json"),
+        bindingPath: join(sigstoreDirectory, ".vgl-sigstore-binding.json"),
+        trustedRootPath,
+        identity,
+        issuer,
+      }), 0, "the produced Sigstore evidence must independently verify offline against the caller's trusted root and exact identity policy");
+      const sigstoreVerifyProcess = await runCliFixture(process.execPath, [
+        "--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "verify",
+        output, recordManifestPath, "--complete", "--sigstore-bundle", join(sigstoreDirectory, ".vgl-sigstore.json"),
+        "--sigstore-binding", join(sigstoreDirectory, ".vgl-sigstore-binding.json"), "--trusted-root", trustedRootPath,
+        "--certificate-issuer", issuer, "--certificate-identity", identity, "--json", "--quiet",
+      ], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+      assert.equal(sigstoreVerifyProcess.exitCode, 0, `${sigstoreVerifyProcess.stdout}\n${sigstoreVerifyProcess.stderr}`);
+      assert.equal(sigstoreVerifyProcess.stderr, "");
+      assert.deepEqual((JSON.parse(sigstoreVerifyProcess.stdout) as { sigstore: { verified: boolean; identity: string; issuer: string } }).sigstore, {
+        verified: true,
+        bundleDigest: JSON.parse(successfulAttestOutput).bundleDigest,
+        identity,
+        issuer,
+      });
+
+      const sigstorePackagePath = join(root, "sigstore-signed.vgl");
+      const sigstorePackageProcess = await runCliFixture(process.execPath, [
+        "--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "pack",
+        output, recordManifestPath, sigstorePackagePath,
+        "--sigstore-bundle", join(sigstoreDirectory, ".vgl-sigstore.json"),
+        "--sigstore-binding", join(sigstoreDirectory, ".vgl-sigstore-binding.json"),
+        "--trusted-root", trustedRootPath, "--certificate-issuer", issuer, "--certificate-identity", identity, "--json", "--quiet",
+      ], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+      assert.equal(sigstorePackageProcess.exitCode, 0, `${sigstorePackageProcess.stdout}\n${sigstorePackageProcess.stderr}`);
+      assert.equal(sigstorePackageProcess.stderr, "");
+      assert.equal((JSON.parse(sigstorePackageProcess.stdout) as { sigstore: string }).sigstore, "verified-included");
+      const packagedSigstoreViewer = await readFile(join(sigstorePackagePath, ".vgl-viewer.html"), "utf8");
+      assert.match(packagedSigstoreViewer, /Sigstore bundle/u);
+      assert.match(packagedSigstoreViewer, /trust and exact signer identity are not verified/u);
+      const packagedSigstoreVerifyProcess = await runCliFixture(process.execPath, [
+        "--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "verify",
+        `${sigstorePackagePath}${sep}`, "--trusted-root", trustedRootPath, "--certificate-issuer", issuer, "--certificate-identity", identity, "--json", "--quiet",
+      ], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+      assert.equal(packagedSigstoreVerifyProcess.exitCode, 0, `${packagedSigstoreVerifyProcess.stdout}\n${packagedSigstoreVerifyProcess.stderr}`);
+      assert.equal(packagedSigstoreVerifyProcess.stderr, "");
+      assert.equal((JSON.parse(packagedSigstoreVerifyProcess.stdout) as { sigstore?: { verified?: boolean }; package?: { sigstoreIncluded?: boolean } }).sigstore?.verified, true);
+      assert.equal((JSON.parse(packagedSigstoreVerifyProcess.stdout) as { package?: { sigstoreIncluded?: boolean } }).package?.sigstoreIncluded, true);
+      const sigstoreProjectionProcess = await runCliFixture(process.execPath, [
+        "--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "project",
+        sigstorePackagePath, join(sigstorePackagePath, "manifest.json"), "--json", "--quiet",
+      ], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+      assert.equal(sigstoreProjectionProcess.exitCode, 0, `${sigstoreProjectionProcess.stdout}\n${sigstoreProjectionProcess.stderr}`);
+      assert.equal((JSON.parse(sigstoreProjectionProcess.stdout) as { signerStatus: string }).signerStatus, "unverified", "package projection must not call embedded Sigstore material unsigned or verified");
+      assert.equal(sigstoreProjectionProcess.stdout.includes(identity), false, "public projection must not disclose embedded signer identity");
+      const noTrustVerifyProcess = await runCliFixture(process.execPath, [
+        "--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "verify", sigstorePackagePath, "--json", "--quiet",
+      ], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+      assert.equal(noTrustVerifyProcess.exitCode, 78, "embedded Sigstore material must not be treated as trusted without an explicit root and exact identity policy");
+      const packagedSigstoreBundlePath = join(sigstorePackagePath, ".vgl-sigstore.json");
+      const packagedSigstoreBundle = await readFile(packagedSigstoreBundlePath);
+      await writeFile(packagedSigstoreBundlePath, Buffer.concat([packagedSigstoreBundle, Buffer.from("tamper")]));
+      assert.equal(await executeRecordVerify(sigstorePackagePath, undefined, true, true, undefined, undefined, undefined, undefined, true, { trustedRootPath, identity, issuer }), 78, "tampered embedded bundle must fail verification");
+      await writeFile(packagedSigstoreBundlePath, packagedSigstoreBundle);
+
+      const failedOutputDirectory = join(root, "untrusted-evidence.vgl-sigstore");
+      const failedTrustedRootPath = join(root, "untrusted-root.json");
+      const invalidTrustedRoot = JSON.parse(await mockTrustedRoot()) as { tlogs: Array<{ publicKey: { rawBytes: string } }> };
+      invalidTrustedRoot.tlogs[0]!.publicKey.rawBytes = generateKeyPairSync("ec", { namedCurve: "prime256v1" }).publicKey.export({ format: "der", type: "spki" }).toString("base64");
+      await writeFile(failedTrustedRootPath, JSON.stringify(invalidTrustedRoot));
+      const failedTarget = `sigstore:${recordManifestPath}:${failedOutputDirectory}:${issuer}:${identity}`;
+      const failedFiles = [recordManifestPath, failedOutputDirectory];
+      const failureReceipt = (action: "sign" | "network", requestId: string) => createApprovalReceipt({
+        requestId,
+        action,
+        actor: "synthetic-test-operator",
+        target: failedTarget,
+        files: failedFiles,
+        network: action === "network" ? [...SIGSTORE_NETWORK_ORIGINS] : [],
+        policyEffect: "Create and publish a synthetic Release Record attestation",
+        requestedAt: approvalTime,
+        expiresAt: new Date(Date.parse(approvalTime) + 120_000).toISOString(),
+      }, { decision: "approved", decidedBy: "synthetic-test-reviewer", decidedAt: approvalTime });
+      attestOutput = "";
+      const failedExit = await executeRecordAttest({
+        storeRoot: output,
+        manifestPath: recordManifestPath,
+        outputDirectory: failedOutputDirectory,
+        trustedRootPath: failedTrustedRootPath,
+        identity,
+        issuer,
+        identityTokenEnv: tokenEnv,
+        publishToRekor: true,
+        approve: true,
+        signingApproval: failureReceipt("sign", "b2345678-1234-4123-8123-123456789abc"),
+        networkApproval: failureReceipt("network", "c2345678-1234-4123-8123-123456789abc"),
+        now: approvalTime,
+        json: true,
+        quiet: true,
+      });
+      assert.equal(failedExit, 78);
+      assert.equal((JSON.parse(attestOutput) as { transparencyLogOutcome: string }).transparencyLogOutcome, "performed");
+      assert.deepEqual(JSON.parse(await readFile(join(failedOutputDirectory, ".vgl-sigstore-status.json"), "utf8")), {
+        status: "incomplete",
+        transparencyLogOutcome: "performed",
+        bundleAvailable: true,
+        bundleDigest: `sha256:${createHash("sha256").update(await readFile(join(failedOutputDirectory, ".vgl-sigstore.json"))).digest("hex")}`,
+      });
+      await assert.rejects(() => readFile(join(failedOutputDirectory, ".vgl-sigstore-binding.json")), { code: "ENOENT" });
+      assert.equal(nock.isDone(), true, `unconsumed mocked Sigstore requests: ${nock.pendingMocks().join(", ")}`);
+    } finally {
+      nock.cleanAll();
+      nock.enableNetConnect();
+      console.log = originalLog;
+      if (existingToken === undefined) delete process.env[tokenEnv];
+      else process.env[tokenEnv] = existingToken;
+    }
+
     const statementPath = join(root, "release.intoto.json");
     assert.equal(await executeRecordExport(output, join(output, "manifest.json"), statementPath, true, true), 0);
     const statement = JSON.parse(await readFile(statementPath, "utf8")) as { _type: string; predicateType: string; predicate: { manifestDigest: string; limitations: string[] }; subject: Array<{ name: string }> };
@@ -228,8 +470,8 @@ test("complete record create, verify, and export preserve canonical policy and s
     const packageProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "pack", output, join(output, "manifest.json"), packagePath, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
     assert.equal(packageProcess.exitCode, 0, `${packageProcess.stdout}\n${packageProcess.stderr}`);
     assert.equal(packageProcess.stderr, "");
-    const packageResult = JSON.parse(packageProcess.stdout) as { packaged: boolean; transport: string; outputPath: string; manifestDigest: string; members: number; bytes: number; signature: string; uploadPerformed: boolean; includesNonOmittedEvidence: boolean };
-    assert.deepEqual(packageResult, { packaged: true, transport: "directory-v1", outputPath: packagePath, manifestDigest: releaseRecordManifestDigest(storedManifest), members: storedManifest.members.filter((member) => member.redaction !== "omitted").length, bytes: packageResult.bytes, signature: "not-included", uploadPerformed: false, includesNonOmittedEvidence: true });
+    const packageResult = JSON.parse(packageProcess.stdout) as { packaged: boolean; transport: string; outputPath: string; manifestDigest: string; members: number; bytes: number; signature: string; sigstore: string; uploadPerformed: boolean; includesNonOmittedEvidence: boolean };
+    assert.deepEqual(packageResult, { packaged: true, transport: "directory-v1", outputPath: packagePath, manifestDigest: releaseRecordManifestDigest(storedManifest), members: storedManifest.members.filter((member) => member.redaction !== "omitted").length, bytes: packageResult.bytes, signature: "not-included", sigstore: "not-included", uploadPerformed: false, includesNonOmittedEvidence: true });
     assert.equal(Number.isSafeInteger(packageResult.bytes) && packageResult.bytes > 0, true);
     const packagedStatement = await readFile(join(packagePath, ".vgl-release.intoto.json"), "utf8");
     assert.equal(packagedStatement.includes("fixture-private-canary-source-path"), false, "packaged public provenance must withhold free-form limitation text");
