@@ -132,8 +132,12 @@ export async function verifyRecordPackageArtifacts(input: {
   readonly manifest: Parameters<typeof createReleaseRecordPackageDescriptor>[0];
   readonly members: ReadonlyMap<string, Uint8Array>;
 }): Promise<{ readonly packaged: boolean; readonly signaturePath?: string }> {
-  const descriptorPath = join(input.root, ".vgl-package.json");
   const expectsPackage = input.root.toLowerCase().endsWith(".vgl");
+  if (expectsPackage) {
+    const rootEntry = await lstat(input.root);
+    if (!rootEntry.isDirectory()) throw new Error(".vgl package root must be a regular directory");
+  }
+  const descriptorPath = join(input.root, ".vgl-package.json");
   let descriptorBytes: Buffer;
   try {
     const descriptor = await lstat(descriptorPath);

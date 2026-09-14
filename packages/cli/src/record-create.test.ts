@@ -7,7 +7,7 @@ import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { executeRecordCreate } from "./record-create.js";
 import { runCliFixture } from "./cli-fixture.js";
-import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createLineageGraphDocument, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, digestPolicyException, EXCEPTION_APPROVAL_SCHEMA, LINEAGE_GRAPH_SCHEMA, OBSERVATION_SCHEMA, parseExceptionApproval, parsePolicyDocument, parsePolicyException, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, POLICY_EXCEPTION_SCHEMA, RELEASE_DECISION_SCHEMA, releaseRecordManifestDigest, SUBJECT_SCHEMA, TOOL_RUN_SCHEMA, VERIFICATION_ATTEMPT_SCHEMA } from "@verglos/shared";
+import { assembleReleaseRecord, assembleReleaseRecordBundle, canonicalizeJson, createLineageGraphDocument, createPolicyEvaluation, createReleaseDecision, createSubject, describeRecordMember, digestPolicyException, EXCEPTION_APPROVAL_SCHEMA, LINEAGE_GRAPH_SCHEMA, MAX_RELEASE_RECORD_AGGREGATE_BYTES, OBSERVATION_SCHEMA, parseExceptionApproval, parsePolicyDocument, parsePolicyException, policyDocumentDigest, POLICY_DOCUMENT_SCHEMA, POLICY_EVALUATION_SCHEMA, POLICY_EXCEPTION_SCHEMA, RELEASE_DECISION_SCHEMA, releaseRecordManifestDigest, SUBJECT_SCHEMA, TOOL_RUN_SCHEMA, VERIFICATION_ATTEMPT_SCHEMA } from "@verglos/shared";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordExport } from "./record-export.js";
 import { executeRecordPackage } from "./record-package.js";
@@ -167,7 +167,10 @@ test("complete record create, verify, and export preserve canonical policy and s
     for (const [payloadPath, payloadBytes] of bundle.payloads) { const path = join(source, payloadPath); await mkdir(join(path, ".."), { recursive: true }); await writeFile(path, payloadBytes); }
     assert.equal(bundle.manifest.members.filter((member) => member.kind === "redaction-manifest").length, 1);
     const manifestPath = join(root, "manifest.json"); await writeFile(manifestPath, JSON.stringify(bundle.manifest));
-    assert.equal(await executeRecordCreate(source, manifestPath, output, true, true, true), 0);
+    const createProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "create", source, manifestPath, output, "--complete", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(createProcess.exitCode, 0, `${createProcess.stdout}\n${createProcess.stderr}`);
+    assert.equal(createProcess.stderr, "");
+    assert.equal((JSON.parse(createProcess.stdout) as { members: number }).members, 11);
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true), 0);
     assert.equal(await executeRecordVerify(output, join(output, "manifest.json"), true, true, undefined, undefined, undefined, undefined, true), 0);
     const statementPath = join(root, "release.intoto.json");
@@ -178,6 +181,25 @@ test("complete record create, verify, and export preserve canonical policy and s
     const storedManifest = JSON.parse(await readFile(join(output, "manifest.json"), "utf8")) as Parameters<typeof releaseRecordManifestDigest>[0];
     assert.equal(statement.predicate.manifestDigest, releaseRecordManifestDigest(storedManifest));
     assert.deepEqual(statement.subject.map(({ name }) => name), [subject.subjectId]);
+
+    const oversizedManifestPath = join(root, "oversized-manifest.json");
+    let oversizedTotal = 0;
+    const oversizedManifest = {
+      ...storedManifest,
+      members: storedManifest.members.map((member, index) => {
+        if (member.redaction === "omitted" || index >= 8) return member;
+        oversizedTotal += 50_000_000;
+        return { ...member, size: 50_000_000 };
+      }),
+    };
+    assert.ok(oversizedTotal > MAX_RELEASE_RECORD_AGGREGATE_BYTES);
+    await writeFile(oversizedManifestPath, `${canonicalizeJson(oversizedManifest)}\n`);
+    const oversizedPackagePath = join(root, "oversized.vgl");
+    const oversizedPackageProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "pack", output, oversizedManifestPath, oversizedPackagePath, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(oversizedPackageProcess.exitCode, 78, `${oversizedPackageProcess.stdout}\n${oversizedPackageProcess.stderr}`);
+    assert.equal(oversizedPackageProcess.stderr, "");
+    assert.deepEqual(JSON.parse(oversizedPackageProcess.stdout), { status: "error", code: "RECORD_PACKAGE_INPUT", message: "record package creation failed" });
+    await assert.rejects(() => readdir(oversizedPackagePath));
 
     const packagePath = join(root, "release.vgl");
     const packageProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "pack", output, join(output, "manifest.json"), packagePath, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
@@ -194,6 +216,10 @@ test("complete record create, verify, and export preserve canonical policy and s
     assert.equal(verifyProcess.exitCode, 0, `${verifyProcess.stdout}\n${verifyProcess.stderr}`);
     assert.equal(verifyProcess.stderr, "");
     assert.equal((JSON.parse(verifyProcess.stdout) as { package?: { transport: string } }).package?.transport, "directory-v1");
+    const symlinkPackagePath = join(root, "linked.vgl");
+    await symlink(packagePath, symlinkPackagePath);
+    assert.equal(await executeRecordVerify(symlinkPackagePath, undefined, true, true), 78, "a .vgl transport root must not be followed through a symlink");
+    await rm(symlinkPackagePath);
     const packagedViewer = await readFile(join(packagePath, ".vgl-viewer.html"), "utf8");
     assert.equal(packagedViewer.includes("fixture-private-canary-source-path"), false);
     assert.equal(packagedViewer.includes("<script"), false);
@@ -215,8 +241,14 @@ test("complete record create, verify, and export preserve canonical policy and s
     const signature = signReleaseRecordManifest(storedManifest, keyPair.privateKey.export({ format: "pem", type: "pkcs8" }).toString(), { id: "fixture-signer", issuer: "fixture-issuer" }, "2026-09-10T05:00:00.000Z");
     await writeFile(signaturePath, `${canonicalizeJson(signature)}\n`);
     const signedPackagePath = join(root, "signed.vgl");
-    assert.equal(await executeRecordPackage(output, join(output, "manifest.json"), signedPackagePath, true, true, signaturePath, publicKeyPath, "fixture-issuer", "fixture-signer"), 0);
-    assert.equal(await executeRecordVerify(signedPackagePath, undefined, true, true, undefined, publicKeyPath, "fixture-issuer", "fixture-signer", true), 0);
+    const signedPackageProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "pack", output, join(output, "manifest.json"), signedPackagePath, "--signature", signaturePath, "--public-key", publicKeyPath, "--trusted-issuer", "fixture-issuer", "--trusted-signer", "fixture-signer", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(signedPackageProcess.exitCode, 0, `${signedPackageProcess.stdout}\n${signedPackageProcess.stderr}`);
+    assert.equal(signedPackageProcess.stderr, "");
+    assert.equal((JSON.parse(signedPackageProcess.stdout) as { signature: string }).signature, "verified-included");
+    const signedVerifyProcess = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "record", "verify", signedPackagePath, "--complete", "--public-key", publicKeyPath, "--trusted-issuer", "fixture-issuer", "--trusted-signer", "fixture-signer", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(signedVerifyProcess.exitCode, 0, `${signedVerifyProcess.stdout}\n${signedVerifyProcess.stderr}`);
+    assert.equal(signedVerifyProcess.stderr, "");
+    assert.equal((JSON.parse(signedVerifyProcess.stdout) as { signature?: { verified?: boolean } }).signature?.verified, true);
     const wrongKeyPair = generateKeyPairSync("ed25519");
     const wrongPublicKeyPath = join(root, "wrong-public.pem");
     await writeFile(wrongPublicKeyPath, wrongKeyPair.publicKey.export({ format: "pem", type: "spki" }));
