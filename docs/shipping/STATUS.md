@@ -2,6 +2,21 @@
 
 Updated: 2026-09-16
 
+## Merged batch · 2026-09-16 · HOSTED-013 writer integration + target_kind fix
+
+Web PR **#40** merged at head `c7d5730f96eaae9623aa1760651db428a3f1f7b8` on phase branch `feat/web-hosted-013-writer-integration` (cut off new `origin/main` after PR #39 landed). Four commits:
+
+1. **`8f5bb64` · integration test** — DB-gated test that provisions a minimal user schema, exercises the writer's dry-run/commit/idempotency paths, and confirms the reconciler summariser returns `reconciled`. Skips cleanly when `TEST_DATABASE_URL` is unset (matches the existing pattern).
+2. **`f41d9c0` · public schema fix** — first hosted-CI failure was `relation "public.organizations" does not exist` because the test created TEMP tables in `pg_temp_*` while the writer inserts into `public.*`. Switched the fixture to real `public.*` tables inside the always-rolling-back transaction.
+3. **`e0d1403` · on-conflict clause fix** — hosted-CI failure `constraint "organization_members_org_user_idx" for table "organization_members" does not exist` because ON CONFLICT ON CONSTRAINT needs a real CONSTRAINT (a UNIQUE INDEX is not one). Switched to `ON CONFLICT (organization_id, user_id) DO NOTHING`.
+4. **`c7d5730` · target_kind check-constraint fix** — hosted-CI failure `legacy_migration_target_kind_check` because target_kind values with hyphens (`organization-personal`, `legacy-preserved-*`) violate the migration-0015 check regex `^[a-z][a-z0-9_]{0,62}$`. Renamed all target_kind values across the writer, reconciler, and three preservation planners to underscored form (`organization_personal`, `legacy_preserved_attestation`, `legacy_preserved_license`, `legacy_preserved_report`); tests updated in the same commit.
+
+Verification at final head: hosted `typecheck-and-schema`, `GitGuardian`, and `Vercel Preview Comments` all SUCCESS; local `pnpm test` 170 pass / 6 DB-integration skips / 0 fail; typecheck, `db:check`, 17-migration ordering, and public-boundary all pass.
+
+HOSTED-013 remains unchecked. All code needed to run the writer + reconciler is now on main; missing gates are founder-authorized production commit + post-commit reconciliation showing `reconciled` + restore/recovery drill on a copy. The private `HOSTED_013_EXECUTION_RUNBOOK.md` (commit `42d8ebb` on this local branch) describes the exact founder-runnable sequence. Backlog remains **141 checked / 128 unchecked / 269 total**. No production DB access, migration, deployment, publish, or release occurred; internal docs remain local-only.
+
+Post-merge branch discipline: this batch used **one phase branch per repo** with all four commits on that branch and one PR (#40) — matching the founder's 2026-09-16 correction.
+
 ## Acceptance batch · 2026-09-16 · HOSTED-013 writer + reconcile
 
 Web PR **#39** merged at exact head `cbce19ea4528e7ba29983ddf7686b6c82a003a27` on branch `feat/web-hosted-013-writer-and-reconcile` cut off new `origin/main` after the five planner PRs (#34–#38) landed. Two commits on one phase branch:
