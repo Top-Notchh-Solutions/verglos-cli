@@ -1,5 +1,5 @@
 import { lstat, readFile } from "node:fs/promises";
-import { parseReleaseDecisionJson, parseReleaseRecordManifestJson, parseSubjectJson, projectReleaseHeader, readAndVerifyRecord, type Subject } from "@verglos/shared";
+import { parseLineageGraphDocument, parseReleaseDecisionJson, parseReleaseRecordManifestJson, parseSubjectJson, projectReleaseHeader, readAndVerifyRecord, type Subject } from "@verglos/shared";
 
 const MAX_MANIFEST_BYTES = 8 * 1024 * 1024;
 
@@ -37,6 +37,19 @@ export async function executeRecordHeader(storeRoot: string, manifestPath: strin
     const decisionBytes = members.get(decisionMember.path);
     if (!decisionBytes) throw new Error("record header is missing the verified release-decision member");
     const decision = parseReleaseDecisionJson(decisionBytes);
+    const lineageMember = manifest.members.find((member) => member.kind === "lineage" && member.redaction !== "omitted");
+    const lineageBytes = lineageMember ? members.get(lineageMember.path) : undefined;
+    const lineage = lineageBytes ? parseLineageGraphDocument(JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(lineageBytes))) : undefined;
+    if (lineage && (lineage.subjectIds.length !== decision.subjects.length || decision.subjects.some((subject) => !lineage.subjectIds.includes(subject.subjectId)))) throw new Error("record lineage graph does not match the release-decision subject set");
+    const lineageProjection = lineage ? {
+      status: "recorded" as const,
+      edgeCount: lineage.edges.length,
+      matched: lineage.edges.filter((edge) => edge.status === "matched").length,
+      mismatched: lineage.edges.filter((edge) => edge.status === "mismatched").length,
+      unavailable: lineage.edges.filter((edge) => edge.status === "unavailable").length,
+      unverifiable: lineage.edges.filter((edge) => edge.status === "unverifiable").length,
+      gapCount: lineage.gaps.length,
+    } : { status: "not-recorded" as const, edgeCount: 0, matched: 0, mismatched: 0, unavailable: 0, unverifiable: 0, gapCount: 0 };
     const subjectIds = new Set(decision.subjects.map((subject) => subject.subjectId));
     const subjectEvidence = manifest.members.flatMap((member) => {
       if (member.kind !== "subject" || member.redaction === "omitted") return [];
@@ -51,7 +64,7 @@ export async function executeRecordHeader(storeRoot: string, manifestPath: strin
       }];
     });
     const signerStatus = manifest.members.some((member) => member.kind === "signature" && member.redaction !== "omitted") ? "unknown" : "unsigned";
-    const header = projectReleaseHeader(decision, signerStatus, subjectEvidence, manifest.limitations);
+    const header = projectReleaseHeader(decision, signerStatus, subjectEvidence, manifest.limitations, lineageProjection);
     const subjects = header.subjects ?? [];
     if (json) console.log(JSON.stringify(header));
     else if (!quiet) {
@@ -66,6 +79,7 @@ export async function executeRecordHeader(storeRoot: string, manifestPath: strin
       console.log(`Policy: ${header.policy.id}@${header.policy.version} (${header.policy.digest})`);
       console.log(`Generated: ${header.generatedAt}`);
       console.log(`Signer: ${header.signerStatus}`);
+      console.log(`Lineage: ${lineageProjection.status}; ${lineageProjection.edgeCount} edges; ${lineageProjection.gapCount} gaps`);
       console.log(`Next: ${header.nextAction}`);
       for (const limitation of header.limitations) console.log(`Limitation: ${limitation}`);
     }

@@ -1,5 +1,6 @@
 import { releaseRecordManifestDigest } from "./record-digest.js";
 import { parseReleaseRecordManifest, type ReleaseRecordManifestDocument } from "./record-manifest.js";
+import { PUBLIC_LIMITATION_REDACTION } from "./public-record-projection.js";
 
 const PREDICATE_TYPE = "https://verglos.dev/attestations/release/v1" as const;
 const SUBJECT_ID = /^urn:verglos:subject:([a-z-]+):sha256:([a-f0-9]{64})$/u;
@@ -31,7 +32,7 @@ export function createReleasePredicate(manifest: ReleaseRecordManifestDocument, 
   const parsed = parseReleaseRecordManifest(manifest);
   const subjects = normalizeSubjects(subjectIds);
   const manifestDigest = releaseRecordManifestDigest(parsed);
-  return { predicateType: PREDICATE_TYPE, manifestDigest, subjectIds: Object.freeze(subjects.map((entry) => entry.subjectId)), limitations: Object.freeze([...parsed.limitations]) };
+  return { predicateType: PREDICATE_TYPE, manifestDigest, subjectIds: Object.freeze(subjects.map((entry) => entry.subjectId)), limitations: Object.freeze(parsed.limitations.map(() => PUBLIC_LIMITATION_REDACTION)) };
 }
 
 /** Build a standard in-toto Statement binding the exact Release Record and subjects. */

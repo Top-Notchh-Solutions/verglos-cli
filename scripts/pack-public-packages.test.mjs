@@ -23,7 +23,7 @@ test("clean public pack contains six archives without compiled tests or CLI proc
       assert.deepEqual(license, await readFile("LICENSE"), `${archive} must carry the repository license byte-for-byte`);
       const { stdout: notices } = await run("tar", ["-xOf", join(output, archive), "package/THIRD_PARTY_NOTICES"], { encoding: "buffer", maxBuffer: 16 * 1024 * 1024 });
       assert.deepEqual(notices, Buffer.from(expectedNotices), `${archive} must carry the generated third-party notices`);
-      assert.match(notices.toString("utf8"), /benchmark \(1\.0\.0\)[\s\S]*?Bundled by: fast-uri@3\.1\.4/u);
+      assert.match(notices.toString("utf8"), /benchmark \(1\.0\.0\)[\s\S]*?Bundled by: fast-uri@3\.1\.7/u);
     }
   } finally { await rm(output, { recursive: true, force: true }); }
 });

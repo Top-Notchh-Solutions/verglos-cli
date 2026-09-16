@@ -294,17 +294,19 @@ Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**.
 
 ## Configuration
 
-Sane defaults. Customize with a `.verglos.config.js` in your repo root:
+Sane defaults. Customize the versioned `.verglos.config.json` in your repo root:
 
-```js
-// .verglos.config.js
-module.exports = {
-  ignorePaths: ["**/fixtures/**", "**/legacy/**"],
-  failOnCritical: true,
-  failThreshold: 80,
-  secretScanDepth: 100,
-};
+```json
+{
+  "schemaVersion": "1.0.0",
+  "ignorePaths": ["**/fixtures/**", "**/legacy/**"],
+  "failOnCritical": true,
+  "failThreshold": 80,
+  "secretScanDepth": 100
+}
 ```
+
+`verglos init` creates versioned JSON and preserves any existing JavaScript config for manual migration. `verglos config inspect <path>` reads without modifying or evaluating input; unversioned and obsolete values receive explicit migration guidance. Do not keep both config files. `engine`, `hunt`, `record`, `attest`, and `telemetry` sections are validated migration metadata only unless a shipped command explicitly consumes them; scan rejects those no-op settings. Config values do not grant consent.
 
 Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitignore`.
 
@@ -313,7 +315,7 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 | Variable | Effect |
 |---|---|
 | `VERGLOS_API_URL` | Override the server (default: `https://verglos.com`) |
-| `VERGLOS_TELEMETRY=0` | Disable anonymous scan telemetry |
+| `VERGLOS_TELEMETRY=0` | Disable optional scan analytics; hosted collection is currently disabled pending retention/deletion qualification |
 | `VERGLOS_PROVENANCE_FILE_CAP` | Override the 300-file cap on provenance analysis |
 | `VERGLOS_LICENSE_KEY` | Consumed by `verglos activate --ci` in CI |
 | `VERGLOS_AS_PLAN` | _Founder only._ Simulate a plan for testing |
@@ -322,9 +324,7 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 
 ## Privacy
 
-Verglos runs 100% locally. **Your source code is never uploaded.**
-
-Anonymous scan telemetry (event ID, CLI version, Node version, platform, finding counts, project fingerprint hash, duration) is POSTed to `verglos.com/api/v1/telemetry/scan` after each scan. No source, no file paths, no findings text, no identity, no license key. Disable per-invocation with `--no-telemetry` or globally with `VERGLOS_TELEMETRY=0`.
+Verglos analyzes source locally; this does not mean the CLI makes no network requests. Dependency checks may query npm/OSV. A licensed scan separately synchronizes the score and a derived project fingerprint to the authenticated account service; it does not upload source, paths, finding text, or secrets. Scan analytics are off by default and remain uncollected until hosted retention/deletion controls are qualified. `verglos privacy telemetry preview|status|enable --yes|disable` reviews and stores a revocable local consent preference; saving consent does not enable transmission while hosted collection is gated. `--no-telemetry` and `VERGLOS_TELEMETRY=0` disable analytics and account sync for that run.
 
 ---
 

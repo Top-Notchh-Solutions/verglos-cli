@@ -356,24 +356,19 @@ Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**.
 
 ## Configuration
 
-Sane defaults. Customize with a `.verglos.config.js` in your repo root:
+Sane defaults. Customize the versioned `.verglos.config.json` in your repo root:
 
-```js
-// .verglos.config.js
-module.exports = {
-  // Add project-specific ignore patterns (glob syntax)
-  ignorePaths: ["**/fixtures/**", "**/legacy/**"],
-
-  // Block CI when a critical is found (default: true)
-  failOnCritical: true,
-
-  // Block CI when the composite score falls below this (Pro; default: 60)
-  failThreshold: 80,
-
-  // How many commits back the secrets detector walks (default: 100)
-  secretScanDepth: 100,
-};
+```json
+{
+  "schemaVersion": "1.0.0",
+  "ignorePaths": ["**/fixtures/**", "**/legacy/**"],
+  "failOnCritical": true,
+  "failThreshold": 80,
+  "secretScanDepth": 100
+}
 ```
+
+Run `verglos config inspect <path>` before migration. It reads without modifying the file, reports unversioned or unsupported config, validates the `engine`, `hunt`, `record`, and `telemetry` sections, and rejects obsolete `hunt.sandbox` values `node-vm` and `firecracker`. Existing `.verglos.config.js` files remain compatible, but the inspector never executes them; translate settings to JSON, inspect the result, then remove the old file. Do not keep both config files: scan fails closed until the ambiguity is resolved. Hunt, engine, record, attest, and telemetry sections are migration metadata unless explicitly consumed by a shipped command; scan rejects such no-op settings. Config values do not grant entitlement, activate telemetry, or authorize execution. Telemetry consent remains an explicit local action.
 
 Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitignore`.
 
@@ -382,7 +377,7 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 | Variable | Effect |
 |---|---|
 | `VERGLOS_API_URL` | Override the server (default: `https://verglos.com`) |
-| `VERGLOS_TELEMETRY=0` | Disable anonymous scan telemetry |
+| `VERGLOS_TELEMETRY=0` | Disable optional scan analytics; hosted collection is currently disabled pending retention/deletion qualification |
 | `VERGLOS_PROVENANCE_FILE_CAP` | Override the 300-file cap on provenance analysis (raise for exhaustive scans, lower for speed) |
 | `VERGLOS_LICENSE_KEY` | Consumed by `verglos activate --ci` in GitHub Actions |
 | `VERGLOS_AS_PLAN` | _Founder only._ Simulate a plan (`free` / `pro` / `team` / `studio` / `enterprise`) for testing |
@@ -391,9 +386,7 @@ Or drop a `.verglosignore` file for path-only ignores — same syntax as `.gitig
 
 ## Privacy
 
-Verglos runs 100% locally. **Your source code is never uploaded.**
-
-Anonymous scan telemetry (event ID, CLI version, Node version, platform, finding counts, project fingerprint hash, duration) is POSTed to `verglos.com/api/v1/telemetry/scan` after each scan. No source, no file paths, no findings text, no identity, no license key. Disable per-invocation with `--no-telemetry` or globally with `VERGLOS_TELEMETRY=0`.
+Verglos analyzes source locally; this does not mean the CLI makes no network requests. Dependency checks may query npm/OSV. A licensed scan separately synchronizes the score and a derived project fingerprint to the authenticated account service; it does not upload source, paths, finding text, or secrets. Scan analytics are off by default and remain uncollected until hosted retention/deletion controls are qualified. `verglos privacy telemetry preview|status|enable --yes|disable` reviews and stores a revocable local consent preference; saving consent does not enable transmission while hosted collection is gated. `--no-telemetry` and `VERGLOS_TELEMETRY=0` disable analytics and account sync for that run.
 
 Full disclosure: **[verglos.com/account/docs#privacy](https://verglos.com/account/docs#privacy)**.
 

@@ -49,6 +49,22 @@ export interface EntitlementClaims {
   mid?: string;
   /** Verglos CLI version that requested this token. */
   ver?: string;
+  /** Present only on tenant-scoped entitlement tokens v2. */
+  schemaVersion?: 2;
+  /** Authenticated license owner; never inferred from an email address. */
+  userId?: string;
+  /** Tenant resolved from an explicit, verified legacy migration mapping. */
+  tenantId?: string;
+  /** Active tenant membership role when the token was issued. */
+  role?: "owner" | "admin" | "approver" | "member" | "viewer";
+  /** Canonical catalog plan. `tier` remains for old client gates. */
+  plan?: Tier;
+  /** Versioned server catalog projection. */
+  capabilities?: string[];
+  allowances?: Record<string, number | "unset" | "contracted">;
+  catalogVersion?: string;
+  /** Random per-token identifier for correlation; it does not enable offline revocation. */
+  tokenId?: string;
 }
 
 /**

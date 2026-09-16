@@ -8,7 +8,7 @@ import chalk from "chalk";
 import chokidar from "chokidar";
 import { generateBadgeMarkdown } from "@verglos/reporter";
 import { executeCi, executeScan, executeScore } from "./scan.js";
-import { applyHeaderFixes, authorizeHeaderFix, captureHeaderFixSnapshots, HeaderFixRollbackError, planHeaderFixes, rescanOrRollbackHeaderFix } from "./fix.js";
+import { applyHeaderFixes, authorizeHeaderFix, authorizeHeaderFixTests, captureHeaderFixSnapshots, HeaderFixRollbackError, HeaderFixTestsError, planHeaderFixes, planHeaderFixTests, runApprovedHeaderFixTests, verifyOrRollbackHeaderFix, type HeaderFixTestPlan, type HeaderFixTestResult } from "./fix.js";
 import { loadCredentials, saveCredentials } from "./credentials.js";
 import { installPreCommitHook } from "./config.js";
 import { executeInit } from "./init.js";
@@ -21,6 +21,8 @@ import {
   executeMonitorUnregister,
 } from "./monitor.js";
 import { executeAttest } from "./attest.js";
+import { executeRecordExport } from "./record-export.js";
+import { executeRecordAttest, SIGSTORE_NETWORK_ORIGINS } from "./record-sigstore.js";
 import { executeHunt } from "./hunt.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
@@ -33,7 +35,7 @@ import {
 import { startStdioServer } from "@verglos/mcp";
 import { enforceLatestVersion, updateCli } from "./update.js";
 import { executeTargetInspect } from "./target-inspect.js";
-import { ApprovalReceiptSchema, authorizeAgentAction, listCachedEngines, type ApprovalReceipt } from "@verglos/shared";
+import { ApprovalReceiptSchema, authorizeAgentAction, listCachedEngines, putApprovalReceipt, type ApprovalReceipt } from "@verglos/shared";
 
 function reportPreflightError(json: boolean | undefined, quiet: boolean | undefined, code: string, humanMessage: string, machineMessage: string): void {
   if (json) console.log(JSON.stringify({ status: "error", code, message: machineMessage }));
@@ -69,6 +71,7 @@ import { executeEngineInspection } from "./engines-inspect.js";
 import { formatEngineStatus } from "./engines-status.js";
 import { executeDiff } from "./diff.js";
 import { executePolicyCheck } from "./policy-check.js";
+import { executePolicyExceptionShow } from "./policy-exception.js";
 import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordCreate } from "./record-create.js";
@@ -76,12 +79,63 @@ import { executeRecordProject } from "./record-project.js";
 import { executeRecordSign } from "./record-sign.js";
 import { executeConfigInspect } from "./config-inspect.js";
 import { executeRecordHeader } from "./record-header.js";
+import { executeRecordProvenanceImport } from "./record-provenance-import.js";
+import { executeRecordPackage } from "./record-package.js";
+import { printTelemetryConsentPreview, readTelemetryConsent, writeTelemetryConsent } from "./telemetry.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
 const args = process.argv.slice(2);
 const jsonRequested = args.includes("--json");
 const quietRequested = args.includes("--quiet") || args.includes("-q");
+
+program
+  .command("privacy")
+  .description("Inspect and control local privacy settings")
+  .command("telemetry <action>")
+  .description("Preview, inspect, enable, or revoke optional scan analytics consent")
+  .option("--yes", "Affirmatively consent to the displayed analytics fields")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress non-error output")
+  .action(async (action: string, opts: { yes?: boolean; json?: boolean; quiet?: boolean }) => {
+    const fields = ["CLI major.minor", "Node major", "OS family", "score band", "finding-count bands", "duration band", "coarse result band"];
+    const excluded = ["project/repository identity", "license/account credentials", "source", "paths", "finding text", "detector names", "matched secret values"];
+    if (action === "preview") {
+      if (opts.json) console.log(JSON.stringify({ purpose: "aggregate CLI reliability metadata", fields, excluded, consentRequired: true, transmission: "disabled-pending-hosted-retention-controls" }));
+      else if (!opts.quiet) printTelemetryConsentPreview();
+      return;
+    }
+    if (action === "status") {
+      const consent = await readTelemetryConsent();
+      const result = { enabled: false, transmission: "disabled-pending-hosted-retention-controls", storedConsent: consent?.enabled ?? null, consentPolicyVersion: consent?.policyVersion ?? null, consentUpdatedAt: consent?.updatedAt ?? null, fields, excluded };
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log(`Scan analytics transmission: disabled pending hosted retention/deletion controls${consent ? ` (saved ${consent.enabled ? "opt-in" : "opt-out"} ${consent.updatedAt})` : " (no saved opt-in)"}`);
+      return;
+    }
+    if (action === "disable") {
+      const consent = await writeTelemetryConsent(false);
+      const result = { enabled: false, consentPolicyVersion: consent.policyVersion, consentUpdatedAt: consent.updatedAt };
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log("Scan analytics disabled; this local preference can be changed with `verglos privacy telemetry enable --yes`.");
+      return;
+    }
+    if (action === "enable") {
+      if (!opts.yes) {
+        if (opts.json) console.log(JSON.stringify({ status: "consent-required", purpose: "aggregate CLI reliability metadata", fields, excluded, next: "review this preview, then run verglos privacy telemetry enable --yes" }));
+        else if (!opts.quiet) { printTelemetryConsentPreview(); console.log("No consent recorded. Review the fields, then rerun with --yes to save consent."); }
+        process.exitCode = 2;
+        return;
+      }
+      if (!opts.json && !opts.quiet) printTelemetryConsentPreview();
+      const consent = await writeTelemetryConsent(true);
+      const result = { enabled: false, consentSaved: true, transmission: "disabled-pending-hosted-retention-controls", consentPolicyVersion: consent.policyVersion, consentUpdatedAt: consent.updatedAt, fields, excluded };
+      if (opts.json) console.log(JSON.stringify(result));
+      else if (!opts.quiet) console.log("Consent saved. Analytics transmission remains disabled pending hosted retention/deletion controls; revoke the saved consent with `verglos privacy telemetry disable`.");
+      return;
+    }
+    reportPreflightError(opts.json, opts.quiet, "PRIVACY_ACTION", "Use preview, status, enable, or disable.", "privacy telemetry action is invalid");
+    process.exitCode = 78;
+  });
 
 async function readApprovalReceiptFile(path: string): Promise<ApprovalReceipt> {
   const entry = await lstat(path);
@@ -120,7 +174,7 @@ program
 Command groups:
   Scan       scan, secrets, deps, score
   Hunt       hunt — verify findings in a local sandbox (shell — v2.0.0-beta)
-  Attest     attest — sign an evidence bundle for client handoff (shell — v2.0.0-beta)
+  Attest     attest — retired compatibility shell; use record create/sign/verify
   Fix & CI   fix, ci, hook, precommit
   Session    login, whoami, activate
   Utilities  init, explain, badge, mcp, monitor, update
@@ -174,6 +228,14 @@ const policy = program.command("policy").description("Inspect local policy evalu
 policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--record-store <path>", "Verify a record manifest against its content-addressed member store").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { recordStore?: string; json?: boolean; quiet?: boolean }) => {
   process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet, { recordStore: opts.recordStore }));
 });
+policy.command("exception <exceptionPath>")
+  .description("Show exact exception scope, approval state, expiry, controls, and export-format support")
+  .requiredOption("--approval <path>", "Path to the separate exception approval JSON")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (exceptionPath: string, opts: { approval: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executePolicyExceptionShow(exceptionPath, opts.approval, opts.json, opts.quiet));
+  });
 
 const evidence = program.command("evidence").description("Import and export standards evidence");
 evidence.command("export <input> <output>")
@@ -201,17 +263,55 @@ record.command("create <membersRoot> <manifestPath> <outputRoot>")
   .action(async (membersRoot: string, manifestPath: string, outputRoot: string, opts: { json?: boolean; quiet?: boolean; complete?: boolean }) => {
     process.exit(await executeRecordCreate(membersRoot, manifestPath, outputRoot, opts.json, opts.quiet, opts.complete));
   });
-record.command("verify <storeRoot> <manifestPath>")
-  .description("Verify every stored record member against its manifest")
+record.command("import-provenance <sourcePath> <outputMemberPath>")
+  .description("Import bounded in-toto/DSSE provenance into a private Release Record member; signatures remain unverified")
+  .requiredOption("--provider <name>", "Caller-declared provider: github, npm, buildkit, or unknown")
+  .requiredOption("--subject-id <id>", "Canonical subjectId of the artifact in the Release Record")
+  .requiredOption("--expected-digest <sha256>", "Expected artifact digest in sha256:<64 lowercase hex> form")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (sourcePath: string, outputMemberPath: string, opts: { provider: "github" | "npm" | "buildkit" | "unknown"; subjectId: string; expectedDigest: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordProvenanceImport(sourcePath, outputMemberPath, opts.provider, opts.subjectId, opts.expectedDigest, opts.json, opts.quiet));
+  });
+record.command("pack <storeRoot> <manifestPath> <output.vgl>")
+  .description("Package a complete record as a local private .vgl directory")
+  .option("--signature <path>", "Include a detached signature after local trust verification")
+  .option("--public-key <path>", "Verify the signature with this user-supplied Ed25519 public key")
+  .option("--trusted-issuer <issuer>", "Require this exact signature issuer")
+  .option("--trusted-signer <id>", "Optionally require this exact signature identity")
+  .option("--sigstore-bundle <path>", "Include a verified Sigstore v0.3 DSSE bundle")
+  .option("--sigstore-binding <path>", "Include its digest-bound Release Record binding")
+  .option("--trusted-root <path>", "Verify with this out-of-band Sigstore trusted root")
+  .option("--certificate-issuer <issuer>", "Require this exact Sigstore certificate issuer")
+  .option("--certificate-identity <identity>", "Require this exact Sigstore certificate identity")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, outputPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; sigstoreBundle?: string; sigstoreBinding?: string; trustedRoot?: string; certificateIssuer?: string; certificateIdentity?: string }) => {
+    process.exit(await executeRecordPackage(storeRoot, manifestPath, outputPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, { bundlePath: opts.sigstoreBundle, bindingPath: opts.sigstoreBinding, trustedRootPath: opts.trustedRoot, issuer: opts.certificateIssuer, identity: opts.certificateIdentity }));
+  });
+record.command("verify <storeRoot> [manifestPath]")
+  .description("Verify a local record store or complete .vgl package; signatures require explicit trusted verification material")
   .option("--json", "Emit machine-readable JSON")
   .option("--signature <path>", "Verify an offline record signature envelope")
   .option("--public-key <path>", "Verify with a user-supplied Ed25519 public key")
   .option("--trusted-issuer <issuer>", "Require this exact signature issuer")
   .option("--trusted-signer <id>", "Require this exact signature identity")
+  .option("--sigstore-bundle <path>", "Verify an attached Sigstore v0.3 DSSE bundle")
+  .option("--sigstore-binding <path>", "Verify the digest-bound Sigstore record binding")
+  .option("--trusted-root <path>", "Use an out-of-band Sigstore trusted-root JSON file")
+  .option("--certificate-issuer <issuer>", "Require this exact Sigstore certificate issuer")
+  .option("--certificate-identity <identity>", "Require this exact Sigstore certificate identity")
   .option("--complete", "Require the complete Release Record graph")
   .option("--quiet", "Suppress human output")
-  .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; complete?: boolean }) => {
-    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, opts.complete));
+  .action(async (storeRoot: string, manifestPath: string | undefined, opts: { json?: boolean; quiet?: boolean; signature?: string; publicKey?: string; trustedIssuer?: string; trustedSigner?: string; complete?: boolean; sigstoreBundle?: string; sigstoreBinding?: string; trustedRoot?: string; certificateIssuer?: string; certificateIdentity?: string }) => {
+    process.exit(await executeRecordVerify(storeRoot, manifestPath, opts.json, opts.quiet, opts.signature, opts.publicKey, opts.trustedIssuer, opts.trustedSigner, opts.complete, { bundlePath: opts.sigstoreBundle, bindingPath: opts.sigstoreBinding, trustedRootPath: opts.trustedRoot, issuer: opts.certificateIssuer, identity: opts.certificateIdentity }));
+  });
+record.command("export <storeRoot> <manifestPath> <outputPath>")
+  .description("Export an in-toto statement locally from a verified complete record; review limitation text before sharing")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, outputPath: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeRecordExport(storeRoot, manifestPath, outputPath, opts.json, opts.quiet));
   });
 record.command("sign <manifestPath> <signaturePath>")
   .description("Sign a validated record manifest with a user-supplied offline key")
@@ -239,6 +339,35 @@ record.command("sign <manifestPath> <signaturePath>")
       }
     }
     process.exit(await executeRecordSign(manifestPath, signaturePath, opts.key, opts.signer, opts.issuer, opts.approve, opts.json, opts.quiet, approvalReceipt, new Date().toISOString(), process.env.VERGLOS_APPROVAL_STORE));
+  });
+record.command("attest <storeRoot> <manifestPath> <outputDirectory>")
+  .description("Create keyless Sigstore DSSE evidence; uploads the in-toto statement to public Rekor")
+  .requiredOption("--trusted-root <path>", "Out-of-band Sigstore trusted-root JSON file")
+  .requiredOption("--identity <identity>", "Exact expected certificate identity (SAN)")
+  .requiredOption("--issuer <issuer>", "Exact expected certificate issuer")
+  .requiredOption("--identity-token-env <name>", "Environment variable containing the caller's OIDC identity token; its value is never printed or saved")
+  .option("--publish-to-rekor", "Explicitly authorize public transparency-log upload (required)")
+  .option("--approve", "Confirm keyless signing and public transparency-log submission")
+  .option("--sign-approval-receipt <path>", "Exact, time-bounded sign approval receipt")
+  .option("--network-approval-receipt <path>", `Exact, time-bounded network approval receipt for ${SIGSTORE_NETWORK_ORIGINS.join(", ")}`)
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (storeRoot: string, manifestPath: string, outputDirectory: string, opts: { trustedRoot: string; identity: string; issuer: string; identityTokenEnv: string; publishToRekor?: boolean; approve?: boolean; signApprovalReceipt?: string; networkApprovalReceipt?: string; json?: boolean; quiet?: boolean }) => {
+    try {
+      if (!opts.approve || !opts.publishToRekor) throw new Error("record attest requires --approve and --publish-to-rekor before reading credentials");
+      if (!opts.signApprovalReceipt || !opts.networkApprovalReceipt) throw new Error("record attest requires both sign and network approval receipts before reading credentials");
+      const signingApproval = await readApprovalReceiptFile(opts.signApprovalReceipt);
+      const networkApproval = await readApprovalReceiptFile(opts.networkApprovalReceipt);
+      process.exit(await executeRecordAttest({
+        storeRoot, manifestPath, outputDirectory, trustedRootPath: opts.trustedRoot, identity: opts.identity, issuer: opts.issuer,
+        identityTokenEnv: opts.identityTokenEnv, publishToRekor: opts.publishToRekor, approve: opts.approve,
+        signingApproval, networkApproval, approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE,
+        now: new Date().toISOString(), json: opts.json, quiet: opts.quiet,
+      }));
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "RECORD_SIGSTORE_INPUT", error instanceof Error ? error.message : "approval receipt is invalid", "Sigstore attestation failed");
+      process.exit(78);
+    }
   });
 record.command("project <storeRoot> <manifestPath>")
   .description("Project a verified record into safe public fields without uploading")
@@ -360,7 +489,7 @@ program
   .option("--hunt", "After scanning, hand eligible findings to hunt (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
-    "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
+    "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
   )
   .action(
     async (opts: {
@@ -503,7 +632,7 @@ program
   .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
-    "Do not send the anonymous scan event (also toggled by VERGLOS_TELEMETRY=0)",
+    "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
   )
   .action(async (opts: { threshold: string; quiet?: boolean; json?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policy?: string; policyEvaluation?: string; config?: string }) => {
     const policyPath = opts.policyEvaluation ?? opts.policy;
@@ -557,10 +686,12 @@ program
   .option("--approve", "Approve the filesystem mutation")
   .option("--approval-receipt <path>", "Path to an exact, time-bounded mutate approval receipt")
   .option("--dry-run", "Show the planned file changes without mutating")
+  .option("--test-file <path>", "Select a .js/.cjs/.mjs test entrypoint; explicit execute approval required; runs with normal OS permissions (repeatable)", (value: string, previous: string[] = []) => [...previous, value], [])
+  .option("--test-approval-receipt <path>", "Path to a separate execute receipt binding the exact workspace, test files, and content digests")
   .option("--rescan", "Run a local scan after applying the approved change")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
-  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; rescan?: boolean; json?: boolean; quiet?: boolean }) => {
+  .action(async (opts: { approve?: boolean; approvalReceipt?: string; dryRun?: boolean; testFile?: string[]; testApprovalReceipt?: string; rescan?: boolean; json?: boolean; quiet?: boolean }) => {
     const asPlan = process.env.VERGLOS_AS_PLAN;
     const ok = await requireCapability("fix", "`verglos fix`", {
       asPlan,
@@ -570,16 +701,31 @@ program
     if (!ok) process.exit(1);
 
     const plan = await planHeaderFixes(process.cwd());
+    let testPlan: HeaderFixTestPlan | undefined;
+    try {
+      if (opts.testFile?.length) testPlan = await planHeaderFixTests(process.cwd(), opts.testFile);
+      if (opts.testApprovalReceipt && !testPlan) throw new Error("a test approval receipt requires at least one selected test file");
+    } catch (error) {
+      reportPreflightError(opts.json, opts.quiet, "FIX_TEST_SELECTION_INVALID", error instanceof Error ? error.message : "selected test plan is invalid", "selected test plan is invalid");
+      process.exit(78);
+    }
     // A machine-readable non-approved invocation must emit only the stable
     // approval error below. The plan is emitted only for an explicit dry run
     // (or human-readable preflight), never as a second JSON document.
     if (opts.dryRun || (!opts.approve && !opts.json)) {
-      if (opts.json) console.log(JSON.stringify({ planned: plan }));
+      if (opts.json) console.log(JSON.stringify({ planned: plan, ...(testPlan ? { testExecution: { action: "execute", target: testPlan.target, files: testPlan.files.map(({ path, sha256, size }) => ({ path, sha256, size })), policyEffect: testPlan.policyEffect, warning: "Selected test entrypoints and imported project code run with normal OS filesystem/process/network permissions; Node heap is capped per process, but execution is not sandboxed." } } : {}) }));
       else if (!opts.quiet) {
         if (plan.length === 0) console.log("No supported header change is planned.");
         else for (const item of plan) {
           console.log(`${item.action}: ${item.file}`);
-          for (const line of item.preview ?? []) console.log(line);
+          if (item.diff) console.log(item.diff);
+          else for (const line of item.preview ?? []) console.log(line);
+        }
+        if (testPlan) {
+          console.log("Selected post-fix test entrypoints (Node --test):");
+          for (const file of testPlan.files) console.log(`  ${file.path}  sha256:${file.sha256}`);
+          console.log(`  Execute approval policyEffect: ${testPlan.policyEffect}`);
+          console.log("  Warning: selected tests and imported project code run with normal OS filesystem/process/network permissions; Node heap is capped per process, but execution is not sandboxed.");
         }
       }
     }
@@ -592,6 +738,29 @@ program
       reportPreflightError(opts.json, opts.quiet, "FIX_RECEIPT_REQUIRED", "verglos fix requires an approval receipt (--approval-receipt) before changing files.", "fix requires an approval receipt (--approval-receipt)");
       process.exit(78);
     }
+    let testReceipt: ApprovalReceipt | undefined;
+    if (testPlan) {
+      if (!opts.testApprovalReceipt) {
+        reportPreflightError(opts.json, opts.quiet, "FIX_TEST_APPROVAL_REQUIRED", "selected tests require a separate execute approval receipt (--test-approval-receipt)", "selected tests require a separate execute approval receipt");
+        process.exit(78);
+      }
+      try {
+        testReceipt = await readApprovalReceiptFile(opts.testApprovalReceipt);
+        const testAuthorization = await authorizeHeaderFixTests(testReceipt, testPlan, new Date().toISOString(), process.cwd());
+        if (!testAuthorization.allowed) throw new HeaderFixTestsError("approval-denied");
+      } catch {
+        reportPreflightError(opts.json, opts.quiet, "FIX_TEST_APPROVAL_DENIED", "selected test execution approval is invalid or does not match the exact workspace, file set, and content digests", "selected test execution approval denied");
+        process.exit(78);
+      }
+      if (process.env.VERGLOS_APPROVAL_STORE) {
+        try {
+          await putApprovalReceipt(process.env.VERGLOS_APPROVAL_STORE, testReceipt);
+        } catch {
+          reportPreflightError(opts.json, opts.quiet, "FIX_TEST_APPROVAL_AUDIT_FAILED", "selected test approval could not be persisted to the configured audit store; no mutation or tests were run", "selected test approval audit persistence failed");
+          process.exit(78);
+        }
+      }
+    }
     let receipt: ApprovalReceipt;
     try { receipt = await readApprovalReceiptFile(opts.approvalReceipt); }
     catch (error) { reportPreflightError(opts.json, opts.quiet, "FIX_RECEIPT_INVALID", error instanceof Error ? error.message : "approval receipt is invalid", "approval receipt is invalid"); process.exit(78); }
@@ -602,7 +771,7 @@ program
       process.exit(78);
     }
 
-    const snapshots = opts.rescan
+    const snapshots = opts.rescan || testPlan
       ? await captureHeaderFixSnapshots(process.cwd(), plan.filter((item) => item.action !== "skip").map((item) => item.file))
       : [];
 
@@ -621,28 +790,41 @@ program
     if (!opts.quiet && !opts.json) console.log("");
     if (fixed > 0) {
       if (!opts.quiet && !opts.json) console.log(chalk.gray("Re-run `verglos scan` to see the updated score."));
+      const checks: Array<{ phase: "tests" | "rescan"; run: () => Promise<unknown> }> = [];
+      let testResult: HeaderFixTestResult | undefined;
+      if (testPlan && testReceipt) {
+        if (!opts.quiet && !opts.json) console.log(chalk.yellow("Running separately approved Node tests with normal OS filesystem/process/network permissions (not sandboxed; 120 second / 256 KiB output bounds; 256 MiB Node heap per process)..."));
+        checks.push({ phase: "tests", run: async () => { testResult = await runApprovedHeaderFixTests(process.cwd(), testPlan!, testReceipt!); } });
+      }
       if (opts.rescan) {
         if (!opts.quiet && !opts.json) console.log(chalk.gray("Running the requested post-fix rescan (telemetry disabled)..."));
+        checks.push({ phase: "rescan", run: () => executeScan({ noTelemetry: true, quiet: true }) });
+      }
+      if (checks.length > 0) {
         try {
-          // A machine-readable fix response must remain one JSON document;
-          // keep the post-mutation verification scan quiet and offline.
-          await rescanOrRollbackHeaderFix(snapshots, () => executeScan({ noTelemetry: true, quiet: true }));
+          // Machine-readable output remains one JSON document; verification is quiet.
+          await verifyOrRollbackHeaderFix(snapshots, checks);
         } catch (error) {
           const rollbackSucceeded = error instanceof HeaderFixRollbackError && error.rollbackSucceeded;
-          const code = rollbackSucceeded ? "FIX_RESCAN_FAILED" : "FIX_ROLLBACK_FAILED";
+          const phase = error instanceof HeaderFixRollbackError ? error.phase : error instanceof HeaderFixTestsError ? "tests" : "rescan";
+          const code = !rollbackSucceeded ? "FIX_ROLLBACK_FAILED" : phase === "tests" ? "FIX_TESTS_FAILED" : "FIX_RESCAN_FAILED";
+          const phaseName = phase === "tests" ? "selected tests" : "rescan";
           const humanMessage = rollbackSucceeded
-            ? "Post-fix rescan failed; the approved mutation was rolled back."
-            : "Post-fix rescan failed and rollback could not be verified; inspect the affected files before proceeding.";
+            ? `Post-fix ${phaseName} failed; the approved mutation was rolled back.`
+            : `Post-fix ${phaseName} failed and rollback could not be verified; inspect the affected files before proceeding.`;
           const machineMessage = rollbackSucceeded
-            ? "post-fix rescan failed; mutation rolled back"
-            : "post-fix rescan failed and rollback could not be verified";
+            ? `post-fix ${phaseName} failed; mutation rolled back`
+            : `post-fix ${phaseName} failed and rollback could not be verified`;
           reportPreflightError(opts.json, opts.quiet, code, humanMessage, machineMessage);
           if (opts.json || opts.quiet) process.exit(78);
           throw error;
         }
       }
+      if (testResult && !opts.quiet && !opts.json) console.log(chalk.green(`Selected tests passed in ${testResult.durationMs} ms (${testResult.outputBytes} output bytes).`));
+      if (opts.json) console.log(JSON.stringify({ planned: plan, fixed, tests: testResult ? { status: testResult.status, files: testPlan?.files.map((file) => file.path), durationMs: testResult.durationMs, outputBytes: testResult.outputBytes, outputTruncated: testResult.outputTruncated, executionNotice: "selected entrypoints and imported project code ran with normal OS filesystem/process/network permissions; per-process Node heap is capped, but no sandbox was applied" } : undefined, rescanned: Boolean(opts.rescan) }));
+    } else if (opts.json) {
+      console.log(JSON.stringify({ planned: plan, fixed, tests: undefined, rescanned: false }));
     }
-    if (opts.json) console.log(JSON.stringify({ planned: plan, fixed, rescanned: Boolean(opts.rescan) }));
   });
 
 program
@@ -955,7 +1137,7 @@ program
       console.log(chalk.gray("  verglos_hunt_report             Pro — shell, v2.0.0-beta"));
       console.log(chalk.gray("  verglos_hunt_before_write       Pro — shell, v2.0.0-beta"));
       console.log(chalk.gray("  verglos_hunt_explain_verdict    Pro — shell, v2.0.0-beta"));
-      console.log(chalk.gray("  verglos_attest                  Studio — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_attest                  Deprecated compatibility shell — no signing/publication"));
       return;
     }
     // The MCP host receives only locally verified entitlement context. This
@@ -986,10 +1168,10 @@ program
 
 program
   .command("attest")
-  .description("Sign an evidence bundle for client handoff [Studio] (shell — v2.0.0-beta)")
-  .option("--report <path>", "Path to the Verglos JSON report to attest")
-  .option("--sign", "Request Ed25519 bundle signing")
-  .option("--verify-url <url>", "Verify URL base to embed in the bundle")
+  .description("Deprecated legacy shell; does not sign or publish (use `record create/sign/verify`)")
+  .option("--report <path>", "Deprecated compatibility option; the path is validated but never read")
+  .option("--sign", "Deprecated compatibility option; no signature is produced")
+  .option("--verify-url <url>", "Deprecated compatibility option; no URL or summary is published")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
   .action(async (opts: { report?: string; sign?: boolean; verifyUrl?: string; json?: boolean; quiet?: boolean }) => {

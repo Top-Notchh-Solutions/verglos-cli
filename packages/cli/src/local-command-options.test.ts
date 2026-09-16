@@ -20,6 +20,7 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /FIX_APPROVAL_DENIED/);
   assert.match(source, /FIX_APPLY_FAILED/);
   assert.match(source, /policy\.command\("check <evaluation>"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
+  assert.match(source, /policy\.command\("exception <exceptionPath>"\)[\s\S]*?\.requiredOption\("--approval <path>"[\s\S]*?\.option\("--json"[\s\S]*?\.option\("--quiet"/);
   assert.match(source, /\.command\("secrets"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /\.command\("deps"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /\.command\("score"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
@@ -76,7 +77,9 @@ test("scan routes progress only to the interactive spinner", async () => {
   assert.match(source, /if \(!spinner\) return/);
 });
 
-test("scan telemetry receives the resolved detector set", async () => {
+test("scan analytics eligibility follows explicit consent and quiet/machine mode", async () => {
   const source = await readFile(fileURLToPath(new URL("./scan.ts", import.meta.url)), "utf8");
-  assert.match(source, /detectorsRun: detectors,/);
+  assert.match(source, /await isTelemetryDisabled\(options\.noTelemetry, Boolean\(options\.quiet \|\| options\.json\)\)/);
+  assert.match(source, /await isTelemetryDisabled\(options\.noTelemetry, true\)/);
+  assert.match(source, /isExplicitTelemetryOptOut\(options\.noTelemetry\)/);
 });

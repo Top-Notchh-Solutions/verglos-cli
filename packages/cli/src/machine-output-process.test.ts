@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
+import { digestPolicyException, parsePolicyException } from "@verglos/shared";
 import { runCliFixture } from "./cli-fixture.js";
 
 const cliEntry = join(process.cwd(), "src", "index.ts");
@@ -72,6 +73,41 @@ test("config inspect failure is one bounded JSON response", async () => {
     assert.equal(result.exitCode, 78);
     assert.equal(result.stderr, "");
     assert.deepEqual(JSON.parse(result.stdout), { status: "invalid", warnings: [{ id: "invalid-config", message: "config inspection failed" }] });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("config migration process reports unsupported settings without rewriting the file", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-config-migration-"));
+  const path = join(root, "legacy.json");
+  const source = JSON.stringify({ schemaVersion: "1.0.0", hunt: { sandbox: "node-vm" } });
+  try {
+    await writeFile(path, source);
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "config", "inspect", path, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 78);
+    assert.equal(result.stderr, "");
+    const report = JSON.parse(result.stdout);
+    assert.equal(report.status, "invalid");
+    assert.ok(report.warnings.some((warning: { id: string }) => warning.id === "obsolete-sandbox"));
+    assert.deepEqual(result.files, []);
+    assert.equal(await readFile(path, "utf8"), source);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("config migration process never evaluates legacy JavaScript", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-config-legacy-js-"));
+  const path = join(root, ".verglos.config.js");
+  const source = "throw new Error('legacy config was executed'); module.exports = { failThreshold: 1 };";
+  try {
+    await writeFile(path, source);
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "config", "inspect", path, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const report = JSON.parse(result.stdout);
+    assert.equal(report.status, "legacy");
+    assert.match(report.warnings[0].message, /not evaluated/);
+    assert.doesNotMatch(result.stdout, /legacy config was executed|failThreshold/);
+    assert.deepEqual(result.files, []);
+    assert.equal(await readFile(path, "utf8"), source);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -236,6 +272,47 @@ test("policy check input failure is one bounded JSON response", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("policy exception projection failure is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-exception-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "policy", "exception", "missing-exception.json", "--approval", "missing-approval.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "POLICY_EXCEPTION_INPUT", message: "policy exception projection failed" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("policy exception command exposes the approval-bound export projection", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-exception-success-"));
+  try {
+    const exception = parsePolicyException({
+      schemaId: "urn:verglos:schema:policy-exception", schemaVersion: "1.0.0",
+      exceptionId: "urn:uuid:12345678-1234-4123-8123-123456789abc",
+      scope: { subjectId: `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`, observationIds: ["urn:uuid:22345678-1234-4123-8123-123456789abc"] },
+      owner: { kind: "person", id: "owner" }, requestedBy: { kind: "person", id: "requester" }, reason: "temporary acceptance",
+      compensatingControls: [{ description: "monitor", owner: { kind: "person", id: "owner" }, evidence: { system: "local", recordId: "audit-1", digest: { algorithm: "sha256", value: "b".repeat(64) } } }],
+      reversalTriggers: ["fix shipped"], requestedAt: "2026-09-01T00:00:00.000Z", effectiveFrom: "2026-09-01T00:00:00.000Z", expiresAt: "2026-09-30T00:00:00.000Z", limitations: ["test fixture"],
+    });
+    const approval = {
+      schemaId: "urn:verglos:schema:exception-approval", schemaVersion: "1.0.0",
+      approvalId: "urn:uuid:32345678-1234-4123-8123-123456789abc",
+      target: { exceptionId: exception.exceptionId, requestDigest: digestPolicyException(exception) },
+      decision: "approved", approver: { kind: "person", id: "approver", authority: "release" }, rationale: "bounded test approval",
+      decidedAt: "2026-09-02T00:00:00.000Z", validUntil: "2026-09-20T00:00:00.000Z",
+      auditReference: { system: "local", recordId: "approval-1", digest: { algorithm: "sha256", value: "c".repeat(64) } },
+    };
+    await writeFile(join(root, "exception.json"), JSON.stringify(exception));
+    await writeFile(join(root, "approval.json"), JSON.stringify(approval));
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "policy", "exception", "exception.json", "--approval", "approval.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const projection = JSON.parse(result.stdout);
+    assert.equal(projection.approval.binding, "matched");
+    assert.equal(projection.approval.applicability.status, "not-evaluated");
+    assert.deepEqual(projection.exportChoices.map((choice: { format: string }) => choice.format), [".vgl", "JSON", "SARIF", "CycloneDX", "SPDX", "VEX", "HTML", "PDF"]);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("engine status JSON is one bounded document", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-engine-status-"));
   try {
@@ -311,7 +388,7 @@ test("scan snapshot opt-in imports bounded SARIF and refuses to overwrite the sn
     assert.match(summary.coverage?.producers?.[0]?.limitations.join(" ") ?? "", /does not independently bind/);
     const originalSnapshot = await readFile(snapshotPath, "utf8");
     const parsedSnapshot = JSON.parse(originalSnapshot) as { schemaVersion?: string; coverage?: { schemaVersion?: string } };
-    assert.equal(parsedSnapshot.schemaVersion, "1.1.0");
+    assert.equal(parsedSnapshot.schemaVersion, "1.3.0");
     assert.equal(parsedSnapshot.coverage?.schemaVersion, "1.1.0");
     assert.equal(originalSnapshot.includes("RAW_IMPORTED_RESULT_MUST_NOT_ESCAPE"), false);
     const second = await runCliFixture(process.execPath, args, root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
@@ -481,10 +558,13 @@ test("every public command leaf provides side-effect-free help", async () => {
     { path: "config inspect", flags: ["--json", "--quiet"] },
     { path: "diff", flags: ["--json", "--quiet"] },
     { path: "policy check", flags: ["--json", "--quiet"] },
+    { path: "policy exception", flags: ["--approval", "--json", "--quiet"] },
     { path: "evidence export", flags: ["--json", "--quiet"] },
     { path: "evidence import", flags: ["--json", "--quiet"] },
     { path: "record create", flags: ["--json", "--quiet"] },
+    { path: "record pack", flags: ["--signature", "--public-key", "--trusted-issuer", "--trusted-signer", "--json", "--quiet"] },
     { path: "record verify", flags: ["--json", "--quiet"] },
+    { path: "record export", flags: ["--json", "--quiet"] },
     { path: "record sign", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
     { path: "record project", flags: ["--json", "--quiet"] },
     { path: "record header", flags: ["--json", "--quiet"] },
@@ -538,8 +618,8 @@ test("init JSON mode writes only the bounded project config", async () => {
     assert.equal(payload.status, "ok");
     assert.equal(payload.configWritten, true);
     assert.equal(payload.hookInstalled, false);
-    await assertSameFile(payload.configPath, join(root, ".verglos.config.js"));
-    assert.deepEqual(result.files, [".verglos.config.js"]);
+    await assertSameFile(payload.configPath, join(root, ".verglos.config.json"));
+    assert.deepEqual(result.files, [".verglos.config.json"]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

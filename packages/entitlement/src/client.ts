@@ -59,6 +59,13 @@ const CACHE_FILE = join(homedir(), ".verglos", "entitlement.json");
 const HEADER_B64 = base64UrlEncode(
   Buffer.from('{"alg":"EdDSA","typ":"JWT"}', "utf8"),
 );
+const V2_CLAIM_KEYS = ["userId", "tenantId", "role", "plan", "capabilities", "allowances", "catalogVersion", "tokenId"] as const;
+
+/** Key IDs are immutable wire identities, not array positions. */
+export const PINNED_PUBLIC_KEYS_BY_ID: Readonly<Record<string, string>> = Object.freeze({
+  "legacy-v1": PINNED_PUBLIC_KEYS_B64URL[0],
+  "successor-v1": PINNED_PUBLIC_KEYS_B64URL[1],
+});
 
 interface EntitlementCache {
   /** The most recent SignedEntitlement the CLI saw pass verify(). */
@@ -73,6 +80,8 @@ export interface VerifyOptions {
    * should let this default to {@link PINNED_PUBLIC_KEYS_B64URL}.
    */
   pinnedKeys?: readonly string[];
+  /** Test/rotation seam: override the immutable key-id map. */
+  pinnedKeysById?: Readonly<Record<string, string>>;
 }
 
 /**
@@ -98,8 +107,21 @@ export async function verifyEntitlement(
   }
   const [headerB64, claimsB64, sigB64] = parts as [string, string, string];
 
+  let keyId: string | undefined;
   if (headerB64 !== HEADER_B64) {
-    return { valid: false, reason: "unexpected JWT header" };
+    try {
+      const headerText = base64UrlDecode(headerB64).toString("utf8");
+      const header = JSON.parse(headerText) as Record<string, unknown>;
+      if (header.alg !== "EdDSA" || header.typ !== "JWT" || typeof header.kid !== "string"
+        || !/^[a-z0-9][a-z0-9._-]{0,63}$/u.test(header.kid)
+        || Object.keys(header).sort().join(",") !== "alg,kid,typ"
+        || JSON.stringify({ alg: "EdDSA", kid: header.kid, typ: "JWT" }) !== headerText) {
+        return { valid: false, reason: "unexpected JWT header" };
+      }
+      keyId = header.kid;
+    } catch {
+      return { valid: false, reason: "unexpected JWT header" };
+    }
   }
 
   let claims: EntitlementClaims;
@@ -116,8 +138,9 @@ export async function verifyEntitlement(
   // so downstream packages can test the full sign→verify pipeline
   // without threading VerifyOptions through every call site.
   const envKey = process.env.VERGLOS_TEST_PUBKEY_B64URL;
-  const pinned =
-    options.pinnedKeys ?? (envKey ? [envKey] : PINNED_PUBLIC_KEYS_B64URL);
+  const pinned = keyId
+    ? [options.pinnedKeysById?.[keyId] ?? PINNED_PUBLIC_KEYS_BY_ID[keyId]].filter((key): key is string => typeof key === "string")
+    : options.pinnedKeys ?? (envKey ? [envKey] : PINNED_PUBLIC_KEYS_B64URL);
   const sigOk = pinned.some((keyB64) => {
     try {
       const key = publicKeyFromBase64Url(keyB64);
@@ -178,6 +201,7 @@ function validateClaims(value: unknown, nowSec: number): string | undefined {
   if (!value || typeof value !== "object" || Array.isArray(value)) return "claims must be an object";
   const claims = value as Record<string, unknown>;
   if (typeof claims.keyHash !== "string" || claims.keyHash.length === 0 || claims.keyHash.length > 256) return "claims have an invalid keyHash";
+  if (claims.schemaVersion === undefined && V2_CLAIM_KEYS.some((key) => Object.hasOwn(claims, key))) return "claims include v2 fields without a schema version";
   if (!new Set(["free", "pro", "team", "studio", "enterprise", "compliance", "founder"]).has(claims.tier as string)) return "claims have an invalid tier";
   if (!Array.isArray(claims.projects) || claims.projects.some((project) => typeof project !== "string" || project.length > 4096)) return "claims have invalid projects";
   if (!Number.isInteger(claims.seats) || (claims.seats as number) < 0 || (claims.seats as number) > 100_000) return "claims have invalid seats";
@@ -187,6 +211,20 @@ function validateClaims(value: unknown, nowSec: number): string | undefined {
   if ((claims.exp as number) - nowSec > 90 * 24 * 60 * 60) return "claims expiry is too far in the future";
   if (claims.mid !== undefined && (typeof claims.mid !== "string" || claims.mid.length > 256)) return "claims have an invalid machine id";
   if (claims.ver !== undefined && (typeof claims.ver !== "string" || claims.ver.length > 128)) return "claims have an invalid client version";
+  if (claims.schemaVersion !== undefined) {
+    if (claims.schemaVersion !== 2) return "claims have an unsupported schema version";
+    if (!/^[a-f0-9]{64}$/u.test(claims.keyHash as string)) return "claims have an invalid v2 key hash";
+    if (typeof claims.userId !== "string" || claims.userId.length === 0 || claims.userId.length > 256 || /[\u0000-\u001f\u007f]/u.test(claims.userId)) return "claims have an invalid user id";
+    if (typeof claims.tenantId !== "string" || claims.tenantId.length === 0 || claims.tenantId.length > 128 || /[\u0000-\u001f\u007f]/u.test(claims.tenantId)) return "claims have an invalid tenant id";
+    if (!new Set(["owner", "admin", "approver", "member", "viewer"]).has(claims.role as string)) return "claims have an invalid tenant role";
+    if (!new Set(["free", "pro", "team", "studio", "enterprise"]).has(claims.plan as string) || claims.plan !== claims.tier) return "claims plan and tier do not match";
+    if (!Array.isArray(claims.capabilities) || claims.capabilities.length > 256 || new Set(claims.capabilities).size !== claims.capabilities.length || claims.capabilities.some((item) => typeof item !== "string" || item.length === 0 || item.length > 256 || /[\u0000-\u001f\u007f]/u.test(item))) return "claims have invalid capabilities";
+    if (!claims.allowances || typeof claims.allowances !== "object" || Array.isArray(claims.allowances)) return "claims have invalid allowances";
+    const allowances = claims.allowances as Record<string, unknown>;
+    if (Object.keys(allowances).length > 64 || Object.entries(allowances).some(([key, amount]) => !/^[a-z][A-Za-z0-9_.-]{0,127}$/u.test(key) || !(Number.isSafeInteger(amount) && (amount as number) >= 0) && amount !== "unset" && amount !== "contracted")) return "claims have invalid allowances";
+    if (typeof claims.catalogVersion !== "string" || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}\.[0-9]+$/u.test(claims.catalogVersion)) return "claims have an invalid catalog version";
+    if (typeof claims.tokenId !== "string" || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/u.test(claims.tokenId)) return "claims have an invalid token id";
+  }
   return undefined;
 }
 

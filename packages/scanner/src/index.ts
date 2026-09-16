@@ -2,6 +2,7 @@ import {
   calculateScore,
   DEFAULT_MIN_CONFIDENCE,
   mergeConfig,
+  inspectConfigMigration,
   redactFindings,
   toConfidenceNumeric,
   type DetectorId,
@@ -103,8 +104,7 @@ async function loadIgnoreFile(projectRoot: string): Promise<string[]> {
 
 export async function loadConfig(projectRoot: string, explicitConfigPath?: string): Promise<VerglosConfig> {
   let base: VerglosConfig;
-  if (explicitConfigPath) {
-    const configPath = isAbsolute(explicitConfigPath) ? explicitConfigPath : resolve(projectRoot, explicitConfigPath);
+  const loadJson = async (configPath: string): Promise<VerglosConfig> => {
     let entry: Awaited<ReturnType<typeof lstat>>;
     try { entry = await lstat(configPath); }
     catch { throw new ScanConfigurationError("Explicit Verglos config could not be read as a bounded regular JSON file."); }
@@ -115,18 +115,42 @@ export async function loadConfig(projectRoot: string, explicitConfigPath?: strin
     if (bytes.byteLength > MAX_CONFIG_BYTES) throw new ScanConfigurationError("Verglos config must be a bounded regular file.");
     let parsed: unknown;
     try { parsed = JSON.parse(bytes.toString("utf8")); } catch { throw new ScanConfigurationError("Verglos config must be valid JSON."); }
-    try { base = mergeConfig(parsed as Partial<VerglosConfig>); }
+    const migration = inspectConfigMigration(parsed);
+    if (migration.status === "invalid" || migration.warnings.some((warning) => !["unversioned-config", "legacy-plan"].includes(warning.id))) {
+      throw new ScanConfigurationError("Verglos config requires migration or contains settings that this scan command does not apply; run 'verglos config inspect <path>'.");
+    }
+    try { return mergeConfig(parsed as Partial<VerglosConfig>); }
     catch { throw new ScanConfigurationError("Verglos config contains invalid values."); }
-  } else try {
-    const { createRequire } = await import("node:module");
-    const require = createRequire(import.meta.url);
-    const configPath = `${projectRoot}/.verglos.config.js`;
-    const entry = await lstat(configPath);
-    if (!entry.isFile() || entry.size > MAX_CONFIG_BYTES) throw new Error("implicit config is not a bounded regular file");
-    const mod = require(configPath);
-    base = mergeConfig(mod.default ?? mod);
-  } catch {
-    base = mergeConfig({});
+  };
+  if (explicitConfigPath) {
+    const configPath = isAbsolute(explicitConfigPath) ? explicitConfigPath : resolve(projectRoot, explicitConfigPath);
+    base = await loadJson(configPath);
+  } else {
+    const jsonPath = resolve(projectRoot, ".verglos.config.json");
+    const legacyPath = resolve(projectRoot, ".verglos.config.js");
+    const [jsonEntry, legacyEntry] = await Promise.all([
+      lstat(jsonPath).catch((error: unknown) => {
+        if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") return undefined;
+        throw error;
+      }),
+      lstat(legacyPath).catch((error: unknown) => {
+        if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") return undefined;
+        throw error;
+      }),
+    ]);
+    if (jsonEntry && legacyEntry) throw new ScanConfigurationError("Both .verglos.config.json and legacy .verglos.config.js exist; remove one after explicit migration.");
+    if (jsonEntry) base = await loadJson(jsonPath);
+    else if (legacyEntry) {
+      try {
+        if (!legacyEntry.isFile() || legacyEntry.size > MAX_CONFIG_BYTES) throw new Error("implicit config is not a bounded regular file");
+        const { createRequire } = await import("node:module");
+        const require = createRequire(import.meta.url);
+        const mod = require(legacyPath);
+        base = mergeConfig(mod.default ?? mod);
+      } catch {
+        base = mergeConfig({});
+      }
+    } else base = mergeConfig({});
   }
 
   const extraIgnores = await loadIgnoreFile(projectRoot);
