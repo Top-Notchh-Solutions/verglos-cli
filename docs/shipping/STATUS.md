@@ -2,6 +2,21 @@
 
 Updated: 2026-09-16
 
+## Acceptance batch · 2026-09-16 · QUAL-CLI-001 + DIST-004 (CLI PR #39 merged)
+
+CLI PR **#39** merged at head after all 10 platform-matrix cells green on `feat/cli-qual-001-and-dist-004`. Two commits closing the last two CLI acceptance items whose deps were met:
+
+- **`b549055` · QUAL-CLI-001 frozen determinism corpus** — `packages/shared/src/determinism-corpus.test.ts` invokes SARIF, CycloneDX, CycloneDX VEX, SPDX, in-toto provenance, and detect-secrets importers twice against canonical fixtures and asserts byte-identical structured output. Control subtest exercises the harness itself with an intentionally-drifting factory to prove the invariant would fail loud on real non-determinism. 7 focused tests.
+- **`9ccfe48` · DIST-004 cross-platform install invariants** — `packages/shared/src/install-matrix-invariants.test.ts` freezes for every public package (cli, shared, scanner, reporter, mcp, entitlement, hunt, attest): no preinstall/install/postinstall/prepare/prepublish/prepublishOnly script (rules out any postinstall binary fetch); explicit `files` allowlist with no traversal or wildcard; pinned `engines.node`; and for the CLI package exactly one `bin` mapping (`verglos`) pointing at a real file. 26 focused subtests.
+
+Local verification: forced-uncached `pnpm exec turbo run test typecheck build --force` passes 23/23 tasks. Hosted verification: all 10 platform-matrix cells (Ubuntu/macOS/Windows × Node 20/22/24 + `Verglos scans Verglos` self-scan) SUCCESS on exact head.
+
+Both items check off. Backlog now **143 checked / 126 unchecked / 269 total** (was 141 / 128 / 269). No production DB access, deployment, publish, or release occurred.
+
+Also landed in this session's private tracker: `HOSTED_013_EXECUTION_RUNBOOK.md` (local commit `42d8ebb`) and `VERGLOS_V1_MANUAL_INPUT_BLOCKERS.md` naming the specific manual input (owner + action) every remaining open item is waiting on. Every remaining code-side blocker at 2026-09-16 has been shipped and merged; what remains is founder actions on the five buckets in that inventory.
+
+Follow-up code-side executable item without external input: **DIST-005** (upgrade/backward-compatibility matrix); deps CONTRACT-012 (checked) + DIST-004 (accepting now). Ship as the next phase PR.
+
 ## Merged batch · 2026-09-16 · HOSTED-013 writer integration + target_kind fix
 
 Web PR **#40** merged at head `c7d5730f96eaae9623aa1760651db428a3f1f7b8` on phase branch `feat/web-hosted-013-writer-integration` (cut off new `origin/main` after PR #39 landed). Four commits:

@@ -1,5 +1,9 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-09-16 · QUAL-CLI-001 + DIST-004
+
+CLI PR **#39** merged on phase branch `feat/cli-qual-001-and-dist-004`. Two commits: `b549055` (QUAL-CLI-001 determinism corpus over six data-plane importers with a harness self-test); `9ccfe48` (DIST-004 install-matrix invariants over eight public packages: no install hooks, explicit files allowlist, pinned engines.node, single CLI bin at a real file). Local forced-uncached `pnpm exec turbo run test typecheck build --force` 23/23 tasks; hosted 10/10 platform-matrix cells SUCCESS on exact head. Both items check off. Backlog **143 checked / 126 unchecked / 269 total**. No production DB access, deployment, publish, or release.
+
 ## Progress · 2026-09-16 · HOSTED-013 · writer integration + target_kind fix
 
 Web PR **#40** merged at head `c7d5730f96eaae9623aa1760651db428a3f1f7b8` on phase branch `feat/web-hosted-013-writer-integration`. Four commits: integration test + three defect fixes (public-schema fixture, column-list ON CONFLICT, underscored target_kind values). All hosted checks SUCCESS at head; local `pnpm test` 170/170 excluding 6 DB-integration skips; typecheck, db:check, 17-migration ordering, public-boundary all pass. HOSTED-013 remains unchecked; production commit + reconciliation + restore/recovery drill are the remaining gates and each requires founder action. Private runbook `HOSTED_013_EXECUTION_RUNBOOK.md` (local commit `42d8ebb`) documents the exact sequence. Backlog remains **141 checked / 128 unchecked / 269 total**. No production DB access or write, deployment, publish, or release.
