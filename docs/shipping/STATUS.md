@@ -1,6 +1,10 @@
 # Verglos V1 shipping status
 
-Updated: 2026-09-14
+Updated: 2026-09-16
+
+## Preparatory batch · 2026-09-16 · HOSTED-013 migration audit drift detection
+
+Web commit `1645ec208184e26bbcbca105fba6854d9969c188` is pushed to existing PR #33. The read-only migration audit now compares each expected local Drizzle journal entry (tag/timestamp/SQL SHA-256) against `drizzle.__drizzle_migrations` and reports `missing-history`, `current`, `pending`, or `diverged` state with a mismatched-tag pointer; preflight fails closed on missing history, pending migrations, or drift so table presence alone can no longer imply migration readiness. 6/6 focused tests, `pnpm typecheck`, `pnpm db:check`, and the 17-migration ordering check pass locally. PR #33 hosted `typecheck-and-schema`, `GitGuardian`, and `Vercel Preview Comments` are SUCCESS on `1645ec2`; the `Vercel` deployment check is still pending at this checkpoint. **HOSTED-013 remains unchecked**: this only hardens preflight evidence; data movement, dual-write, source-to-target reconciliation, cutover, and restore/recovery drill are unmet. Backlog remains **141 checked / 128 unchecked / 269 total**. No production DB read/write, migration, merge, deployment, publish, or release occurred; internal docs remain local-only. Codex's earlier stranded MCP edits on merged branch `feat/cli-agent-authority-contract` were discarded after confirming the current PR #38 worktree (`feat/cli-record-package`, head `55a052a`) already applies the same approval-receipt hardening to `verglos_scan` and `verglos_check_package`.
 
 ## Latest verified checkpoint · 2026-09-14 · ENT-CLI-002 accepted
 
