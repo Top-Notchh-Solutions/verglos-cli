@@ -2,6 +2,27 @@
 
 Updated: 2026-09-16
 
+## Acceptance batch · 2026-09-16 · HOSTED-013 writer + reconcile
+
+Web PR **#39** merged at exact head `cbce19ea4528e7ba29983ddf7686b6c82a003a27` on branch `feat/web-hosted-013-writer-and-reconcile` cut off new `origin/main` after the five planner PRs (#34–#38) landed. Two commits on one phase branch:
+
+- **`hosted-013-writer.ts` + tests (`42a56c0`)** — composes all five planners inside one `repeatable read` transaction, INSERTs only `would-create`/`would-preserve` outcomes into `organizations`, `organization_members`, `projects`, and `legacy_migration_mappings` with `ON CONFLICT DO NOTHING`, ROLLS BACK unless `--commit` is passed. Sentinel `DryRunRollback` unwinds the transaction after the manifest is captured so dry-run mode reports the same shape as commit mode would. `--sources=` filter allows one-source-at-a-time runs. 8/8 focused writer tests.
+- **`hosted-013-reconcile.ts` + tests (`cbce19e`)** — post-write reconciler that counts source rows, mapping rows (scoped to owned target kinds), orphan mappings (mapping without a source row), unmapped source rows (source without an owned mapping), and target-entity integrity (mapping.target_id points at a live `organizations`/`projects` row). Status is `reconciled` iff all drift buckets are zero. 7/7 focused reconcile tests.
+
+Verification: full `pnpm test` 121+15 = ~136 pass / 4 DB-integration skips / 0 fail; typecheck, `db:check`, 17-migration ordering, `check-public-boundary` all pass. Hosted `typecheck-and-schema`, `GitGuardian`, `Vercel Preview Comments` SUCCESS at exact head; `Vercel` deploy check null but non-blocking (matches recent history).
+
+Acceptance/operations: **HOSTED-013 still unchecked**. This gives the founder a reviewable rollback-by-default writer plus a drift-detection reconciler, but the item's acceptance criteria also require:
+
+1. Founder authorization to run `pnpm db:writer --commit` against production `DATABASE_URL`
+2. Actual production commit + reconciliation showing `reconciled` status
+3. Restore/recovery drill on a copy
+4. Tested rollback path
+
+Backlog remains **141 checked / 128 unchecked / 269 total**. No production DB read/write, migration, deployment, publish, or release occurred; the writer has never been invoked against production credentials. Internal docs remain local-only.
+
+Post-merge branch discipline: following the founder's 2026-09-16 correction, all HOSTED-013 progress since the planner-set merge lives on **one phase branch per repo** (#39 is the phase PR that consumed the writer + reconcile commits). Codex's `verglos-cli-record002` worktree remains untouched; CLI main advanced only through the earlier merge of #38 there.
+
+
 ## Post-merge state · 2026-09-16
 
 Web PR #33 (`1645ec2`) and CLI PR #38 (`55a052a`) merged. Web `origin/main` is now `97cdeab`; CLI `origin/main` catches up with the ENT-CLI-002 signing contract, QUAL-CLI-003/005 adversarial and engine-exit drills, PLAN-CLI-001 signed-catalog consumption, RECORD-006 keyless Sigstore adapter, RECORD-009/010/011/012 record commands, VERIFY-WEB-001 hosted receipt route, and DIST-WEB-002 runtime-config validation. Backlog counts do not change from this merge itself — each of those items was already checked at exact-head prior to merge.
