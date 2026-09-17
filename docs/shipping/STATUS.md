@@ -2,6 +2,14 @@
 
 Updated: 2026-09-16
 
+## Acceptance batch · 2026-09-16 · DIST-005 upgrade + backward-compatibility corpus (CLI PR #40 merged)
+
+CLI PR **#40** merged after all 10 platform-matrix cells green on `feat/cli-dist-005-upgrade-compat`. One commit `82cc9c2` closing DIST-005: `packages/shared/src/upgrade-compat-corpus.test.ts` freezes upgrade / backward-compat invariants across five surfaces — the schema compatibility classifier (across the full major/minor/patch matrix including the `older major → incompatible` never-inferred case), the semver triplet parser (rejects prefixed / pre-release / short / leading-zero), the frozen `legacy-scan-report-2.0.0.json` fixture shape and its `LEGACY_SCAN_REPORT_SCHEMA` URN reachability, the record signing envelope v1.0 (legacy, non-identity-bound) vs v1.1 (identity-bound) branches (both must remain reachable), the entitlement client's two pinned key slots (`legacy-v1` + `successor-v1`) and its v2-claim / v1-claim overlap rejection, and the 15 stable `VERGLOS_SCHEMA_IDS` URNs. 9 focused tests.
+
+Local: forced-uncached `pnpm exec turbo run test typecheck build --force` 23/23 tasks. DIST-005 checks off; backlog **144 checked / 125 unchecked / 269 total** (was 143 / 126 / 269). No production DB, deploy, publish, or release.
+
+**All code-side executables with green deps and no external input required are now shipped and merged.** Every remaining open item chains off one of the five manual-input buckets enumerated in `VERGLOS_V1_MANUAL_INPUT_BLOCKERS.md`. Continuing to execute would require code that either invents unresolved external state (violates goal-file rule against fabrication) or waits on a founder decision or credential.
+
 ## Acceptance batch · 2026-09-16 · QUAL-CLI-001 + DIST-004 (CLI PR #39 merged)
 
 CLI PR **#39** merged at head after all 10 platform-matrix cells green on `feat/cli-qual-001-and-dist-004`. Two commits closing the last two CLI acceptance items whose deps were met:

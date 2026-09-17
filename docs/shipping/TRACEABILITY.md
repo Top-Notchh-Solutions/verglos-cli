@@ -1,5 +1,9 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-09-16 · DIST-005
+
+CLI PR **#40** merged on phase branch `feat/cli-dist-005-upgrade-compat`. One commit `82cc9c2` adds `packages/shared/src/upgrade-compat-corpus.test.ts` — 9 focused tests freezing the schema compat classifier / parser, legacy scan-report fixture shape, record signing v1.0 + v1.1 envelopes, entitlement pinned key slots and v1/v2 claim overlap rejection, and the 15 stable `VERGLOS_SCHEMA_IDS` URNs. Local 23/23 Turbo tasks; hosted 10/10 platform-matrix cells SUCCESS. DIST-005 checks off. Backlog **144 checked / 125 unchecked / 269 total**. No production DB, deploy, publish, or release.
+
 ## Acceptance · 2026-09-16 · QUAL-CLI-001 + DIST-004
 
 CLI PR **#39** merged on phase branch `feat/cli-qual-001-and-dist-004`. Two commits: `b549055` (QUAL-CLI-001 determinism corpus over six data-plane importers with a harness self-test); `9ccfe48` (DIST-004 install-matrix invariants over eight public packages: no install hooks, explicit files allowlist, pinned engines.node, single CLI bin at a real file). Local forced-uncached `pnpm exec turbo run test typecheck build --force` 23/23 tasks; hosted 10/10 platform-matrix cells SUCCESS on exact head. Both items check off. Backlog **143 checked / 126 unchecked / 269 total**. No production DB access, deployment, publish, or release.

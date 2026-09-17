@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-16 · DIST-005 upgrade + backward-compatibility corpus (CLI PR #40 merged)
+
+- **Code / scope:** CLI PR **#40** merged. One commit `82cc9c2` on phase branch `feat/cli-dist-005-upgrade-compat`. Adds `packages/shared/src/upgrade-compat-corpus.test.ts` — nine focused tests covering the schema compat classifier over the full major/minor/patch matrix, the semver parser's rejection surface, the frozen `legacy-scan-report-2.0.0.json` fixture shape and URN, both record signing envelope branches (v1.0 legacy + v1.1 identity-bound), the two entitlement pinned key slots (`legacy-v1` + `successor-v1`), and the 15 stable `VERGLOS_SCHEMA_IDS` URNs. Deps satisfied: CONTRACT-012 (checked) + DIST-004 (accepted PR #39).
+- **Verification:** local forced-uncached `pnpm exec turbo run test typecheck build --force` 23/23 tasks; hosted all 10 platform-matrix cells SUCCESS on exact head; PR merged automatically after CI.
+- **Acceptance / operations:** DIST-005 checks off. Backlog recount **144 checked / 125 unchecked / 269 total**. No production DB access, migration, deployment, publish, or release. Public PR contains only test source under `packages/shared/src/`.
+- **Final code-side executable at 2026-09-16:** every remaining open item chains off one of the five manual-input buckets in `VERGLOS_V1_MANUAL_INPUT_BLOCKERS.md` — production DB write (bucket A), provider selection (bucket B), external content / trust root (bucket C), legal review (bucket D), POC / commercial (bucket E). No further code-side batch can proceed without founder resolution of at least one bucket. Stopping here per the founder's 2026-09-16 directive that the plan halts on any manual-input blocker.
+
 ## 2026-09-16 · QUAL-CLI-001 + DIST-004 accepted (CLI PR #39)
 
 - **Code / scope:** CLI PR **#39** merged on phase branch `feat/cli-qual-001-and-dist-004`. Two commits (`b549055`, `9ccfe48`) closing both items in one phase PR per the founder's 2026-09-16 one-phase-PR correction. QUAL-CLI-001 adds `packages/shared/src/determinism-corpus.test.ts` (7 tests: six data-plane importers exercised twice against canonical fixtures + one harness self-test). DIST-004 adds `packages/shared/src/install-matrix-invariants.test.ts` (26 subtests: for each of eight public packages, no install hook / explicit files allowlist / pinned engines.node; CLI package has exactly one bin mapping at an existing file; no wildcard files).
