@@ -1,5 +1,9 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-09-16 · OPS-001 + OPS-002
+
+Web PR **#41** merged on `feat/web-ops-provider-decision-and-producer`. Two commits: OPS-001 `postgres-provider.ts` implements the queue contract on the existing `jobs` table with atomic claim, lease fencing, retry-to-dead-letter, and opaque fairness cursor; OPS-002 `monitor-producer.ts` sweeps and enqueues daily monitor registrations with deterministic idempotency, per-tenant backpressure, and observable lag. Founder authorized bucket B for pre-launch. 9+3 unit tests + 5 DB-integration tests all pass locally; hosted typecheck-and-schema + GitGuardian + Vercel Preview Comments SUCCESS on exact head. Backlog **146 checked / 123 unchecked / 269 total**. No production DB access, deployment, publish, or release.
+
 ## Acceptance · 2026-09-16 · DIST-005
 
 CLI PR **#40** merged on phase branch `feat/cli-dist-005-upgrade-compat`. One commit `82cc9c2` adds `packages/shared/src/upgrade-compat-corpus.test.ts` — 9 focused tests freezing the schema compat classifier / parser, legacy scan-report fixture shape, record signing v1.0 + v1.1 envelopes, entitlement pinned key slots and v1/v2 claim overlap rejection, and the 15 stable `VERGLOS_SCHEMA_IDS` URNs. Local 23/23 Turbo tasks; hosted 10/10 platform-matrix cells SUCCESS. DIST-005 checks off. Backlog **144 checked / 125 unchecked / 269 total**. No production DB, deploy, publish, or release.

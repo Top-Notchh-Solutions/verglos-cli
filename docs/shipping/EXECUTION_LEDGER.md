@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-16 · OPS-001 Postgres queue provider + OPS-002 monitor producer accepted (Web PR #41)
+
+- **Code / scope:** Web PR **#41** merged. Two commits on `feat/web-ops-provider-decision-and-producer`. OPS-001: `src/lib/queue/postgres-provider.ts` — concrete `DurableQueueProvider` on the existing `jobs` table (atomic claim, lease fencing, retry-to-dead-letter, opaque fairness cursor); 9 unit + 5 DB-integration tests. OPS-002: `src/lib/queue/monitor-producer.ts` — sweep-and-enqueue for daily monitor registrations with deterministic idempotency key, per-tenant backpressure ceiling, observable lag manifest; 3 unit tests. Founder-authorized bucket B resolution 2026-09-16 with the reasoning that pre-launch (zero paying users) the architecture-decision-set gates for measured throughput / recovery drill / cost do not apply, and the provider-neutral interface makes a later swap cheap.
+- **Verification:** local full `pnpm test` 179 pass / 11 DB-integration skips / 0 fail; typecheck, `db:check`, 17-migration ordering, `check-public-boundary` all pass. Hosted `typecheck-and-schema` + `GitGuardian` + `Vercel Preview Comments` SUCCESS on exact head; PR merged automatically.
+- **Acceptance / operations:** OPS-001 and OPS-002 check off. Backlog recount **146 checked / 123 unchecked / 269 total**. No production DB access, migration, deployment, publish, or release. Public PR contains only queue-module source + tests + package.json wiring; private shipping files remain local.
+- **Next code-side executable:** OPS-003 (inventory/advisory worker) that consumes `monitor.check` jobs via the provider, queries OSV, updates `advisory_matches`. Follow-up phase PR.
+
 ## 2026-09-16 · DIST-005 upgrade + backward-compatibility corpus (CLI PR #40 merged)
 
 - **Code / scope:** CLI PR **#40** merged. One commit `82cc9c2` on phase branch `feat/cli-dist-005-upgrade-compat`. Adds `packages/shared/src/upgrade-compat-corpus.test.ts` — nine focused tests covering the schema compat classifier over the full major/minor/patch matrix, the semver parser's rejection surface, the frozen `legacy-scan-report-2.0.0.json` fixture shape and URN, both record signing envelope branches (v1.0 legacy + v1.1 identity-bound), the two entitlement pinned key slots (`legacy-v1` + `successor-v1`), and the 15 stable `VERGLOS_SCHEMA_IDS` URNs. Deps satisfied: CONTRACT-012 (checked) + DIST-004 (accepted PR #39).

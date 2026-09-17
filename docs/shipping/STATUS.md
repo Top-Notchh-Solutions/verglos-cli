@@ -2,6 +2,17 @@
 
 Updated: 2026-09-16
 
+## Acceptance batch · 2026-09-16 · OPS-001 + OPS-002 (Web PR #41 merged)
+
+Founder authorized bucket B resolution: pre-launch, no paying users, agent-selected durable queue = Neon PostgreSQL (existing `jobs` table). Web PR **#41** merged. Two commits on `feat/web-ops-provider-decision-and-producer`:
+
+- **OPS-001 PostgresQueueProvider** — `src/lib/queue/postgres-provider.ts` implements the `DurableQueueProvider` contract on the existing `jobs` table with `SELECT FOR UPDATE SKIP LOCKED` atomic claim, `lease_owner`+`lease_expires_at`+`attempts` fencing, retry-then-dead-letter transition at `maxAttempts`, and an opaque base64url tenant-id fairness cursor. 9 unit tests + 5 DB-integration tests (skipped without `TEST_DATABASE_URL`) prove enqueue idempotency, atomic claim / no double-lease, stale-fence rejection, retry-vs-dead-letter transition, and fairness cursor advance.
+- **OPS-002 MonitorProducer** — `src/lib/queue/monitor-producer.ts` sweeps `monitor_registrations` for due rows (default 24 h cadence), joins through `licenses → users → personal organizations` for ownership, and enqueues jobs with deterministic `monitor-check:<registration_id>:<YYYY-MM-DD>` idempotency key. Per-tenant static backpressure ceiling (default 50 outstanding jobs) prevents queue saturation. Observable lag (`observableLagSeconds`) and `nextDueAfter` reported in the manifest for OPS-013 metrics wiring. 3 unit tests cover UTC-day-boundary determinism and cross-registration key uniqueness.
+
+Both OPS-001 and OPS-002 checked. Backlog **146 checked / 123 unchecked / 269 total** (was 144 / 125 / 269, +2 accepted). No production DB access, deployment, publish, or release.
+
+Private `DECISIONS.md` updated to record the founder-authorized Neon/PostgreSQL selection and blanket-authorization scope for pre-launch bucket resolution.
+
 ## Acceptance batch · 2026-09-16 · DIST-005 upgrade + backward-compatibility corpus (CLI PR #40 merged)
 
 CLI PR **#40** merged after all 10 platform-matrix cells green on `feat/cli-dist-005-upgrade-compat`. One commit `82cc9c2` closing DIST-005: `packages/shared/src/upgrade-compat-corpus.test.ts` freezes upgrade / backward-compat invariants across five surfaces — the schema compatibility classifier (across the full major/minor/patch matrix including the `older major → incompatible` never-inferred case), the semver triplet parser (rejects prefixed / pre-release / short / leading-zero), the frozen `legacy-scan-report-2.0.0.json` fixture shape and its `LEGACY_SCAN_REPORT_SCHEMA` URN reachability, the record signing envelope v1.0 (legacy, non-identity-bound) vs v1.1 (identity-bound) branches (both must remain reachable), the entitlement client's two pinned key slots (`legacy-v1` + `successor-v1`) and its v2-claim / v1-claim overlap rejection, and the 15 stable `VERGLOS_SCHEMA_IDS` URNs. 9 focused tests.
