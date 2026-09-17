@@ -2,6 +2,10 @@
 
 Updated: 2026-09-16
 
+## Acceptance batch · 2026-09-16 · OPS-004 advisory normalization + TTL cache (Web PR #43 merged)
+
+Web PR **#43** merged on `feat/web-ops-004-advisory-normalization`. Bucket B continues — OPS-004 accepted: `src/lib/monitor/advisory-normalizer.ts` provides `canonicalAdvisoryId` (preference-ordered CVE > GHSA > OSV > other with case normalization), `dedupeFindings` (collapse+max-severity), `componentsNeedingCheck` (TTL predicate that skips fresh cache entries within 6h but always re-checks INCOMPLETE entries so a transient outage never persists as "recent enough"), and `normalizeFinding` (frozen persisted shape). 11 unit tests. Backlog **148 checked / 121 unchecked / 269 total** (was 147 / 122 / 269). No production DB access, deployment, publish, or release.
+
 ## Acceptance batch · 2026-09-16 · OPS-003 advisory worker (Web PR #42 merged)
 
 Web PR **#42** merged on `feat/web-ops-advisory-worker`. Bucket B continues — OPS-003 accepted: `src/lib/queue/advisory-worker.ts` consumes `monitor.check` jobs from the PostgresQueueProvider, upserts components per declared dependency, queries OSV once per job, and classifies OSV outage as `INCOMPLETE` (writes an explicit `INCOMPLETE-OSV-OUTAGE` marker per component) so a network failure can never look like a clean scan. Only stable errorCodes cross the queue failure boundary. 6 unit tests. Backlog **147 checked / 122 unchecked / 269 total** (was 146 / 123 / 269). No production DB access, deployment, publish, or release.

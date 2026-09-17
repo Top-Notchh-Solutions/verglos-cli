@@ -1,5 +1,9 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-09-16 · OPS-004
+
+Web PR **#43** merged on `feat/web-ops-004-advisory-normalization`. `advisory-normalizer.ts` closes the normalization/cache surface: preference-ordered canonical id, dedupe with max severity, 6h TTL that always re-checks INCOMPLETE, frozen persisted shape with 512-char summary limit. 11 unit tests. Backlog **148 checked / 121 unchecked / 269 total**.
+
 ## Acceptance · 2026-09-16 · OPS-003
 
 Web PR **#42** merged on `feat/web-ops-advisory-worker`. `src/lib/queue/advisory-worker.ts` closes the consumer half of the OPS-002 producer pipeline: leases `monitor.check` jobs, upserts components, queries OSV, persists advisory_matches with fresh/incomplete freshness, acks the fence. OSV outage writes an explicit `INCOMPLETE-OSV-OUTAGE` marker per component. Failure boundary carries only stable errorCodes. 6 unit tests. Local 185 pass / 11 skip / 0 fail; hosted typecheck-and-schema + GitGuardian + Vercel Preview Comments SUCCESS. Backlog **147 checked / 122 unchecked / 269 total**.

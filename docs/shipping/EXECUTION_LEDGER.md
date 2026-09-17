@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-16 · OPS-004 advisory normalization + TTL cache accepted (Web PR #43)
+
+- **Code:** `src/lib/monitor/advisory-normalizer.ts` + tests on `feat/web-ops-004-advisory-normalization`. `canonicalAdvisoryId` preference order (CVE > GHSA > OSV > other bounded > UNKNOWN-ADVISORY); `dedupeFindings` collapses identical (package, canonicalId) rows and keeps max severity; `componentsNeedingCheck` implements a 6-hour TTL that always re-checks INCOMPLETE cache entries; `normalizeFinding` freezes the persisted shape and enforces a 512-char summary limit.
+- **Verification:** 11 focused unit tests; local full `pnpm test` 196 pass / 11 DB skips / 0 fail; typecheck, public-boundary pass. Hosted typecheck-and-schema + GitGuardian + Vercel Preview Comments SUCCESS on exact head; PR merged.
+- **Acceptance / operations:** OPS-004 checks off. Backlog **148 checked / 121 unchecked / 269 total**. No production DB access, deployment, publish, or release.
+
 ## 2026-09-16 · OPS-003 advisory worker accepted (Web PR #42)
 
 - **Code / scope:** Web PR **#42** merged on `feat/web-ops-advisory-worker`. `src/lib/queue/advisory-worker.ts` implements the consumer half of the monitor pipeline: lease bounded `monitor.check` jobs (default 10, 5-minute lease), join through `monitor_registrations -> licenses -> personal organizations -> projects` for ownership, upsert components per npm dependency, query OSV, persist advisory_matches with explicit fresh/incomplete freshness state, acknowledge the fence. On OSV outage the worker writes an `INCOMPLETE-OSV-OUTAGE` advisory_matches marker per component — a network failure never silently reads as a clean scan (the acceptance-critical distinction). Failure boundary passes only bounded stable errorCodes (`MONITOR_REGISTRATION_MISSING`, `MONITOR_REGISTRATION_INACTIVE`, `OSV_OUTAGE`, `COMPONENT_UPSERT_FAILED`); no source, path, secret, package, or finding text leaves worker memory. 6 focused unit tests exercise empty payload, missing registration, inactive registration, unresolvable ownership (retries with 1-hour backoff so a later HOSTED-013 run can catch up), empty-queue manifest, and a type-shape guard that prevents future refactors from adding leakable failure fields.
