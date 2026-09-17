@@ -2,6 +2,12 @@
 
 Updated: 2026-09-16
 
+## Acceptance batch · 2026-09-16 · OPS-003 advisory worker (Web PR #42 merged)
+
+Web PR **#42** merged on `feat/web-ops-advisory-worker`. Bucket B continues — OPS-003 accepted: `src/lib/queue/advisory-worker.ts` consumes `monitor.check` jobs from the PostgresQueueProvider, upserts components per declared dependency, queries OSV once per job, and classifies OSV outage as `INCOMPLETE` (writes an explicit `INCOMPLETE-OSV-OUTAGE` marker per component) so a network failure can never look like a clean scan. Only stable errorCodes cross the queue failure boundary. 6 unit tests. Backlog **147 checked / 122 unchecked / 269 total** (was 146 / 123 / 269). No production DB access, deployment, publish, or release.
+
+Next code-side executable: OPS-004 (advisory normalization/cache — dedupe advisory identity across OSV vs GHSA-hint sources, cache source freshness, avoid re-fetching within TTL).
+
 ## Acceptance batch · 2026-09-16 · OPS-001 + OPS-002 (Web PR #41 merged)
 
 Founder authorized bucket B resolution: pre-launch, no paying users, agent-selected durable queue = Neon PostgreSQL (existing `jobs` table). Web PR **#41** merged. Two commits on `feat/web-ops-provider-decision-and-producer`:

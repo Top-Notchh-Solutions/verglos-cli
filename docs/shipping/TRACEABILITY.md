@@ -1,5 +1,9 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-09-16 · OPS-003
+
+Web PR **#42** merged on `feat/web-ops-advisory-worker`. `src/lib/queue/advisory-worker.ts` closes the consumer half of the OPS-002 producer pipeline: leases `monitor.check` jobs, upserts components, queries OSV, persists advisory_matches with fresh/incomplete freshness, acks the fence. OSV outage writes an explicit `INCOMPLETE-OSV-OUTAGE` marker per component. Failure boundary carries only stable errorCodes. 6 unit tests. Local 185 pass / 11 skip / 0 fail; hosted typecheck-and-schema + GitGuardian + Vercel Preview Comments SUCCESS. Backlog **147 checked / 122 unchecked / 269 total**.
+
 ## Acceptance · 2026-09-16 · OPS-001 + OPS-002
 
 Web PR **#41** merged on `feat/web-ops-provider-decision-and-producer`. Two commits: OPS-001 `postgres-provider.ts` implements the queue contract on the existing `jobs` table with atomic claim, lease fencing, retry-to-dead-letter, and opaque fairness cursor; OPS-002 `monitor-producer.ts` sweeps and enqueues daily monitor registrations with deterministic idempotency, per-tenant backpressure, and observable lag. Founder authorized bucket B for pre-launch. 9+3 unit tests + 5 DB-integration tests all pass locally; hosted typecheck-and-schema + GitGuardian + Vercel Preview Comments SUCCESS on exact head. Backlog **146 checked / 123 unchecked / 269 total**. No production DB access, deployment, publish, or release.
