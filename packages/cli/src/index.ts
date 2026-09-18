@@ -24,6 +24,7 @@ import { executeAttest } from "./attest.js";
 import { executeRecordExport } from "./record-export.js";
 import { executeRecordAttest, SIGSTORE_NETWORK_ORIGINS } from "./record-sigstore.js";
 import { executeHunt } from "./hunt.js";
+import { executeHuntRecipeVerification } from "./hunt-recipe-verify.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -827,7 +828,7 @@ program
     }
   });
 
-program
+const huntCommand = program
   .command("hunt")
   .description("Verify findings in a local sandbox [Pro] (shell — v2.0.0-beta)")
   .option("--severity <level>", "Severity filter to hunt (default: critical,high)")
@@ -852,6 +853,18 @@ program
       process.exit(code);
     },
   );
+
+huntCommand
+  .command("verify-recipe <recipePath>")
+  .description("Verify a recipe against a caller-supplied local signed-feed trust store; does not execute it")
+  .requiredOption("--trust-store <path>", "Local file containing trusted feed roots and signed feeds")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (recipePath: string, _opts: { trustStore: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { trustStore: string; json?: boolean; quiet?: boolean };
+    const code = await executeHuntRecipeVerification(recipePath, opts.trustStore, opts);
+    process.exit(code);
+  });
 
 program
   .command("login")

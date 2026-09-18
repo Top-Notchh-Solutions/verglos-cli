@@ -2,8 +2,9 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { planHunt } from "./hunt-planner.js";
 import { parseHuntRecipe } from "./hunt-recipe.js";
+import { createTestHuntTrustStore, TEST_HUNT_TRUST_KEY_ID } from "./hunt-trust-test-support.js";
 
-const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-sql", ruleId: "d1-1", targetSubjectId: "urn:verglos:subject:artifact:sha256:" + "a".repeat(64), imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["node", "check.js"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10000, processes: 32, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "local reproduction" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } });
+const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-sql", ruleId: "d1-1", targetSubjectId: "urn:verglos:subject:artifact:sha256:" + "a".repeat(64), imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["node", "check.js"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10000, processes: 32, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "local reproduction" }, redaction: "required", signature: { status: "verified", signer: TEST_HUNT_TRUST_KEY_ID } });
 
 test("Hunt planner is exact-match, immutable, and execution-free", () => {
   const withInputs = parseHuntRecipe({ ...recipe, inputs: { fixture: "safe" } });
@@ -26,6 +27,7 @@ test("Hunt planner is exact-match, immutable, and execution-free", () => {
   assert.ok(Object.isFrozen(plan.network.destinations));
   assert.ok(Object.isFrozen(plan.signature));
   assert.equal(planHunt(recipe, { ruleId: "other", subjectId: recipe.targetSubjectId }).supported, false);
-  assert.equal(planHunt(recipe, { ruleId: "d1-1", subjectId: recipe.targetSubjectId }, { trust: { signers: ["other"] } }).supported, false);
-  assert.equal(planHunt(recipe, { ruleId: "d1-1", subjectId: recipe.targetSubjectId }, { trust: { signers: ["verglos-release"] } }).trusted, true);
+  const trust = createTestHuntTrustStore(recipe);
+  assert.equal(planHunt(recipe, { ruleId: "d1-1", subjectId: recipe.targetSubjectId }, { trust: { ...trust, signedFeeds: [] }, at: "2026-01-02T00:00:00Z" }).trusted, false);
+  assert.equal(planHunt(recipe, { ruleId: "d1-1", subjectId: recipe.targetSubjectId }, { trust, at: "2026-01-02T00:00:00Z" }).trusted, true);
 });
