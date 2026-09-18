@@ -2,6 +2,22 @@
 
 Updated: 2026-09-16
 
+## Acceptance batch · 2026-09-16 · OPS-011+012+013+014 + retroactive OPS-006 (Web PR #45+#47)
+
+Web PR **#47** merged (retention + telemetry + metrics + backup/restore fat batch). Also retroactively check off **OPS-006** (transactional match/outbox write from PR #45) whose acceptance was overlooked in the earlier tracker commit. Five items closed:
+
+- **OPS-006** (`match-outbox.ts`) — transactional match + outbox delivery-intent inside caller's transaction; deterministic event_key on (org, event_key) unique index; INCOMPLETE freshness never fires alert.
+- **OPS-011** (`retention-policy.ts`) — tier-driven retention windows with 7-day warn + legal-hold override.
+- **OPS-012** (`telemetry-aggregation.ts`) — coarse counters with dimension allowlist, opt-out/deletion, `assertNoSensitiveFields` guard.
+- **OPS-013** (`health-metrics.ts`) — 8 stable metric names with info/warn/critical thresholds; non-finite values rejected.
+- **OPS-014** (`backup-restore.ts`) — content-digest manifest + reconciliation that reports drift as counts, never id lists.
+
+23 combined focused unit tests. Local `pnpm test` 249 pass / 11 skips / 0 fail. Backlog **158 checked / 111 unchecked / 269 total** (+5 vs previous checkpoint).
+
+Bucket B is complete except for **OPS-015** (monitoring migration/cutover), which chain-blocks on HOSTED-013 (bucket A — classifier-blocked production DB writes).
+
+Next: bucket C (HUNT external trust root) and bucket D (LIC-005 DCO contributor policy). Bucket C infrastructure can ship; the actual publisher-root key + licensed recipe content remain founder-supplied. Bucket D LIC-005 can ship as a DCO draft — DCO text is a standard Linux Foundation instrument, the founder-recording action is adopting it.
+
 ## Acceptance batch · 2026-09-16 · OPS-007+008+009+010 fat batch (Web PR #46 merged)
 
 Web PR **#46** merged with three commits on `feat/web-ops-007-010-delivery-and-dlq`. Four bucket-B items closed in one CI run:
