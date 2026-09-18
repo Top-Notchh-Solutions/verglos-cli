@@ -2,6 +2,19 @@
 
 Updated: 2026-09-16
 
+## Acceptance batch · 2026-09-16 · OPS-007+008+009+010 fat batch (Web PR #46 merged)
+
+Web PR **#46** merged with three commits on `feat/web-ops-007-010-delivery-and-dlq`. Four bucket-B items closed in one CI run:
+
+- **OPS-007** delivery worker (`delivery-worker.ts`): per-channel state, bounded exponential retry with jitter capped at attempts=8, `validateWebhookAdapter` composes with the safety module.
+- **OPS-008** SSRF-safe webhook (`webhook-safety.ts`): rejects non-https, credentials, unsafe ports, localhost, IPv4 loopback/private/CGN/link-local/metadata/multicast, IPv6 loopback/link-local/unique-local, and IPv4-mapped-IPv6 embeddings of private v4.
+- **OPS-009** alert dedup (shared with OPS-007): `aggregateStatus` produces delivered/partial/pending/terminal event-level status; failure of one channel never suppresses another; events are never deleted to force retry.
+- **OPS-010** DLQ replay (`dead-letter-replay.ts`): bounded authorized replay with fresh idempotency key per UTC day (re-replay on same day is no-op), audit_events row per success, hard cap 100 per call.
+
+24 focused unit tests total. Local `pnpm test` 231 pass / 11 skips / 0 fail. Backlog **153 checked / 116 unchecked / 269 total** (was 149 / 120 / 269, +4).
+
+Founder-requested working approach change: fat batches (3–5 items per phase branch, one CI run each) now embedded in `verglos_v1_shipping_operating_rules.md`.
+
 ## Acceptance batch · 2026-09-16 · OPS-004 advisory normalization + TTL cache (Web PR #43 merged)
 
 Web PR **#43** merged on `feat/web-ops-004-advisory-normalization`. Bucket B continues — OPS-004 accepted: `src/lib/monitor/advisory-normalizer.ts` provides `canonicalAdvisoryId` (preference-ordered CVE > GHSA > OSV > other with case normalization), `dedupeFindings` (collapse+max-severity), `componentsNeedingCheck` (TTL predicate that skips fresh cache entries within 6h but always re-checks INCOMPLETE entries so a transient outage never persists as "recent enough"), and `normalizeFinding` (frozen persisted shape). 11 unit tests. Backlog **148 checked / 121 unchecked / 269 total** (was 147 / 122 / 269). No production DB access, deployment, publish, or release.
