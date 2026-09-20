@@ -9,9 +9,10 @@ const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", sch
 test("Hunt planner is exact-match, immutable, and execution-free", () => {
   const withInputs = parseHuntRecipe({ ...recipe, inputs: { fixture: "safe" } });
   const plan = planHunt(withInputs, { ruleId: "d1-1", subjectId: recipe.targetSubjectId });
-  assert.equal(plan.supported, true);
+  assert.equal(plan.supported, false);
   assert.equal(plan.trusted, undefined);
   assert.equal(plan.executes, false);
+  assert.match(plan.reason, /trust policy is required/);
   assert.equal(plan.ruleId, recipe.ruleId);
   assert.equal(plan.targetSubjectId, recipe.targetSubjectId);
   assert.match(plan.recipeDigest, /^sha256:[a-f0-9]{64}$/);
@@ -19,6 +20,7 @@ test("Hunt planner is exact-match, immutable, and execution-free", () => {
   assert.ok(Object.isFrozen(plan.imageDigest));
   assert.deepEqual(plan.command, ["node", "check.js"]);
   assert.deepEqual(plan.inputs, { fixture: "safe" });
+  assert.deepEqual(plan.filesystem, { source: "project-root-read-only", scratch: "bounded-temporary" });
   assert.equal(plan.cleanup, "always");
   assert.equal(plan.redaction, "required");
   assert.equal(plan.signature.status, "verified");
@@ -26,8 +28,27 @@ test("Hunt planner is exact-match, immutable, and execution-free", () => {
   assert.ok(Object.isFrozen(plan.network));
   assert.ok(Object.isFrozen(plan.network.destinations));
   assert.ok(Object.isFrozen(plan.signature));
+  assert.ok(Object.isFrozen(plan.filesystem));
+  assert.ok(Object.isFrozen(plan));
   assert.equal(planHunt(recipe, { ruleId: "other", subjectId: recipe.targetSubjectId }).supported, false);
   const trust = createTestHuntTrustStore(recipe);
   assert.equal(planHunt(recipe, { ruleId: "d1-1", subjectId: recipe.targetSubjectId }, { trust: { ...trust, signedFeeds: [] }, at: "2026-01-02T00:00:00Z" }).trusted, false);
-  assert.equal(planHunt(recipe, { ruleId: "d1-1", subjectId: recipe.targetSubjectId }, { trust, at: "2026-01-02T00:00:00Z" }).trusted, true);
+  const trustedPlan = planHunt(recipe, { ruleId: "d1-1", subjectId: recipe.targetSubjectId }, { trust, at: "2026-01-02T00:00:00Z" });
+  assert.equal(trustedPlan.trusted, true);
+  assert.equal(trustedPlan.supported, true);
+});
+
+test("restricted-process plans declare no source access and still require trust", () => {
+  const restricted = parseHuntRecipe({
+    ...recipe,
+    command: ["verglos-probe", "utf8-contains"],
+    inputs: { value: "synthetic value", needle: "value" },
+    isolation: "restricted-process",
+    limits: { ...recipe.limits, processes: 1 },
+  });
+  const plan = planHunt(restricted, { ruleId: restricted.ruleId, subjectId: restricted.targetSubjectId });
+  assert.equal(plan.supported, false);
+  assert.deepEqual(plan.filesystem, { source: "none", scratch: "bounded-temporary" });
+  assert.deepEqual(plan.command, ["verglos-probe", "utf8-contains"]);
+  assert.deepEqual(plan.network, { mode: "denied", destinations: [], reason: "local reproduction" });
 });

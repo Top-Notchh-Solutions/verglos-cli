@@ -12,6 +12,10 @@ export interface HuntPlan {
   readonly imageDigest: HuntRecipe["imageDigest"];
   readonly command: readonly string[];
   readonly inputs: Readonly<Record<string, string>>;
+  readonly filesystem: Readonly<{
+    readonly source: "none" | "project-root-read-only";
+    readonly scratch: "bounded-temporary";
+  }>;
   readonly isolation: HuntRecipe["isolation"];
   readonly limits: HuntRecipe["limits"];
   readonly cleanup: HuntRecipe["cleanup"];
@@ -28,10 +32,19 @@ export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; r
   const parsed = parseHuntRecipe(recipe);
   const matches = parsed.ruleId === input.ruleId && parsed.targetSubjectId === input.subjectId;
   const trusted = options.trust ? isTrustedHuntRecipe(parsed, options.trust, options.at) : undefined;
-  const supported = matches && trusted !== false;
-  return {
+  // A dry-run plan is useful without a trust store, but it is never marked
+  // supported/executable until the selected recipe is trusted. This prevents
+  // model- or caller-supplied command text from being presented as runnable.
+  const supported = matches && trusted === true;
+  const plan: HuntPlan = {
     supported,
-    reason: !matches ? "recipe does not match the exact rule and subject" : trusted === false ? "recipe is not trusted by the supplied trust policy" : "recipe matches exact rule and subject",
+    reason: !matches
+      ? "recipe does not match the exact rule and subject"
+      : trusted === true
+        ? "trusted recipe matches the exact rule and subject"
+        : options.trust
+          ? "recipe is not trusted by the supplied trust policy"
+          : "a trust policy is required before this plan can be supported",
     trusted,
     recipeId: parsed.recipeId,
     recipeDigest: huntRecipeDigest(parsed),
@@ -40,6 +53,10 @@ export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; r
     imageDigest: Object.freeze({ ...parsed.imageDigest }),
     command: Object.freeze([...parsed.command]),
     inputs: Object.freeze({ ...(parsed.inputs ?? {}) }),
+    filesystem: Object.freeze({
+      source: parsed.isolation === "restricted-process" ? "none" : "project-root-read-only",
+      scratch: "bounded-temporary",
+    }),
     isolation: parsed.isolation,
     limits: Object.freeze({ ...parsed.limits }),
     cleanup: parsed.cleanup,
@@ -48,4 +65,5 @@ export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; r
     signature: Object.freeze({ ...parsed.signature }),
     executes: false,
   };
+  return Object.freeze(plan);
 }
