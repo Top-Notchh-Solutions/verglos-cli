@@ -13,7 +13,7 @@ function exceptionFixture() {
     scope: { subjectId: `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`, observationIds: ["urn:uuid:22345678-1234-4123-8123-123456789abc"] },
     owner: { kind: "person", id: "owner" }, requestedBy: { kind: "person", id: "requester" }, reason: "temporary acceptance",
     compensatingControls: [{ description: "monitor", owner: { kind: "person", id: "owner" }, evidence: { system: "local", recordId: "audit-1", digest: { algorithm: "sha256", value: "b".repeat(64) } } }],
-    reversalTriggers: ["fix shipped"], requestedAt: "2026-09-01T00:00:00.000Z", effectiveFrom: "2026-09-01T00:00:00.000Z", expiresAt: "2026-09-30T00:00:00.000Z", limitations: ["test fixture"],
+    reversalTriggers: ["fix shipped"], requestedAt: "2026-09-01T00:00:00.000Z", effectiveFrom: "2026-09-01T00:00:00.000Z", expiresAt: "2099-09-30T00:00:00.000Z", limitations: ["test fixture"],
   });
 }
 
@@ -24,7 +24,7 @@ function approvalFixture() {
     approvalId: "urn:uuid:32345678-1234-4123-8123-123456789abc",
     target: { exceptionId: exception.exceptionId, requestDigest: digestPolicyException(exception) },
     decision: "approved", approver: { kind: "person", id: "approver", authority: "release" }, rationale: "bounded test approval",
-    decidedAt: "2026-09-02T00:00:00.000Z", validUntil: "2026-09-20T00:00:00.000Z",
+    decidedAt: "2026-09-02T00:00:00.000Z", validUntil: "2099-09-20T00:00:00.000Z",
     auditReference: { system: "local", recordId: "approval-1", digest: { algorithm: "sha256", value: "c".repeat(64) } },
   };
 }
