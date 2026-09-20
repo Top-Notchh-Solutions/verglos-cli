@@ -32,7 +32,7 @@ Each unresolved class below points at its governing bucket. Resolving a bucket m
 
 - **OPS-001 through OPS-014** — accepted. Neon PostgreSQL is the founder-authorized V1 durable queue; producer, advisory processing, matching/outbox, delivery, webhook, dedup, DLQ, retention, telemetry, health metrics, and backup/reconciliation code are merged.
 - **OPS-015** — monitoring migration/cutover remains open on HOSTED-013 production data migration and an evidence-backed cutover/rollback run.
-- **DIST-WEB-002** — code-side matrix is complete at Web PR #49 head `76e58f4`; it remains open because the installed Vercel credential is unauthorized, so actual production variable names/scopes, provider-selector provisioning, and production deployment evidence cannot be verified.
+- **DIST-WEB-002** — code-side matrix remains complete at Web PR #49 head `b103d9e`; it remains open because the installed Vercel credential is unauthorized, so actual production variable names/scopes, provider-selector provisioning, and production deployment evidence cannot be verified.
 - **DIST-WEB-003** — OPS-013/014 are accepted; this runbook now remains chained to DIST-WEB-002 production configuration/deployment evidence and an executable health/rollback rehearsal.
 - **QUAL-WEB-003** — concurrency/idempotency load suite blocks on OPS/PLAN.
 - **QUAL-WEB-005** — privacy/deletion/retention qualification blocks on OPS-011/012 + Studio/Enterprise foundations.
@@ -68,7 +68,7 @@ Each unresolved class below points at its governing bucket. Resolving a bucket m
 - **PLAN-CLI-002** — effective-capability UX blocks on PLAN-CLI-001.
 - **PLAN-CLI-003** — modified/untrusted CLI test client blocks on PLAN-WEB-004-012 (bucket A + B chain).
 - **PLAN-CLI-004** — plan/catalog contract fixtures block on PLAN-WEB-002/003 + PLAN-CLI-001.
-- **PLAN-WEB-011 / PLAN-WEB-012** — billing amount/catalog binding + lifecycle blocks on PLAN-WEB-001 (checked). PLAN-WEB-011 has preparatory commit `cfe6936`. Founder must decide final billing lifecycle policy and authorize the mainline reconciliation.
+- **PLAN-WEB-011 / PLAN-WEB-012** — code qualification is complete on Web PR #49 head `b103d9e`: catalog-only signed snapshots plus an immutable serialized lifecycle/refund ledger pass local and hosted verification. Acceptance remains blocked on an approved verified INR catalog price, production migration `0018` backup/restore/rollback qualification and application, accessible production configuration, and live Razorpay reconciliation. No production write is authorized by the code result.
 
 ## ACCEPT / FINAL-WEB stack — bucket E (POC + commercial)
 
@@ -97,7 +97,7 @@ These lines in the backlog are explicit founder-decision items, not agent tasks:
 
 ## What CAN still be shipped without founder input
 
-At the 2026-09-20 recount, QUAL-WEB-002 is accepted and DIST-WEB-002 code/preview work is complete, but its production evidence is credential-blocked. The next independent implementation candidate is **PLAN-WEB-011/012** billing catalog binding plus lifecycle/idempotency; acceptance must still remain honest about unverified catalog prices/gateway configuration and any production evidence. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require the separately controlled production migration/cutover evidence; QUAL-CLI-006 remains dependency-gated by the unfinished RECORD compatibility surface; licensing, POC, and final marketing remain external gates.
+At the 2026-09-20 recount, QUAL-WEB-002 is accepted. DIST-WEB-002 and PLAN-WEB-011/012 now have exact-head code/preview qualification on PR #49 but remain production/commercial-evidence blocked. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require separately controlled production migration/cutover evidence; QUAL-CLI-006 remains dependency-gated by the unfinished RECORD compatibility surface; licensing, POC, and final marketing remain external gates. The next autonomous batch must be selected from a dependency-ready code/evidence item and must not manufacture external approval or production evidence.
 
 ## Recommended founder action order (to unblock the largest chunk fastest)
 

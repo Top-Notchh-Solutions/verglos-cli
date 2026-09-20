@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-20 · PLAN-WEB-011/012 code qualification complete; commercial/production evidence open (Web PR #49)
+
+- **Code / scope:** pushed Web commit `b103d9e5793913b52207af0497586159dc16cc15` on PR #49. The catalog alone supplies checkout amount/duration; an HMAC snapshot binds the user, one-time checkout, channel, plan, cadence, INR amount, entitlement days, and catalog version. QR status is owner-bound/read-only. Only captured exact-match QR credits and subscription charges grant access. Migration `0018` and the serialized immutable ledger cover renewal, failure, lifecycle ordering, replay/conflict, partial/full refund, natural expiry, and founder/legacy preservation.
+- **Verification:** local blank-DB full suite 291 pass / 0 fail / 1 intentional migrated-ledger skip; the skipped integration passes separately against PostgreSQL 15 with all 19 migrations. Typecheck, schema and migration ordering, 37-page build, public-boundary, tracked-secret, CycloneDX (413 components / 414 graph entries), and license tests pass. Hosted run `35503776577` / job `106060018392`, GitGuardian, Vercel preview, and preview comments pass at the exact head. The local high/critical audit retry was DNS-blocked; the lockfile is unchanged and the hosted dependency-audit step passed.
+- **Acceptance withheld:** PLAN-WEB-011/012 remain unchecked. Pro remains non-purchasable with an unverified USD catalog price, no real INR price is approved, migration `0018` is not production-qualified/applied, production configuration is not inspectable with the installed Vercel credential, and no live provider payment/renewal/refund trace exists. PR #49 stays open and unmerged.
+- **Accounting / operations:** no checkbox changed; **164 checked / 105 unchecked / 269 total**. No production environment/DB read or write, migration, production deployment, merge, release, publish, or marketing action occurred. Private evidence remains local-only.
+
 ## 2026-09-20 · DIST-WEB-002 code-side matrix complete; hosted production evidence blocked (Web PR #49)
 
 - **Code / scope:** pushed Web commit `76e58f42fd5ebc7954c5883a5e36fda64eaeedf6` on PR #49. One required-key contract covers auth, DB, signing, encryption, billing, selected queue/storage, cron, and canonical public URL. The validator requires the five billing controls, live Clerk/Razorpay keys, DB credentials with no explicit TLS disablement, approved `postgres` / `postgres-jsonb` selectors, safe integers, and value-free errors; `.env.example` drift is tested.
