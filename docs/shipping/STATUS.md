@@ -2,6 +2,18 @@
 
 Updated: 2026-09-20
 
+## Acceptance batch · 2026-09-20 · OPS-015 monitor cutover policy + reconciliation (Web PR #54 merged)
+
+Web PR **#54** merged tested head `030e9d3` as `d6823514e72ea8da388ff016b9d3ccbc6c7a4ccc`. Four commits on `feat/web-ops-015-monitoring-cutover`: `f385d41` cutover policy, `e5cfa09` reconciliation module, `35c58e4` gates in legacy cron + producer, `030e9d3` test wiring. OPS-015 closes on top of the just-executed HOSTED-013 tenant/project data.
+
+The cutover surface is a pure env-driven decision matrix: `MONITOR_CUTOVER_ROUTE = legacy | dual | queue`. Unknown or unset values collapse to `legacy` so an unset production stays on the pre-cutover safe path. `legacyDispatchAllowed`, `producerEnqueueAllowed`, and `queueDeliveryAllowed` are the three decision points every path consults; `describeCutoverRoute` produces an audit-friendly one-liner for logs. The legacy `/api/cron/monitor` route now returns `{ok: true, skipped: "cutover-not-legacy"}` when the flag is `queue`, keeping auth semantics but preventing double dispatch. `runMonitorProducer` returns a manifest-emitting no-op when the flag is `legacy` so operational metrics distinguish "idle because nothing due" from "idle because cutover suppressed enqueue"; the OPS-003 advisory worker continues to drain any outstanding queue jobs so nothing is stranded across a flip.
+
+Reconciliation module `cutover-reconcile.ts` compares legacy `alert_dispatches` vs queue `advisory_matches` snapshots on the shared `(registration_id, advisory_id, package_name)` grain and emits `matched` / `legacy_only` / `queue_only` counts, per-registration breakdown, and named divergences. Deduplication happens within each side first so a legacy cron that fired the same alert twice cannot inflate its count. `incomplete` OSV-outage queue observations are counted separately and never become matches or divergences — an indeterminate cannot resolve a legacy row. `monitor_registrations` are never mutated by the flag, so rollback is a single env-var flip back to `legacy` with zero migration.
+
+Local `pnpm typecheck` clean; the 14 new focused tests (7 policy + 7 reconcile) pass in ~155 ms; existing `monitor-cron-workflow`, `monitor/route-error-contract`, and `queue/monitor-producer` tests continue to pass so the gate change did not regress the legacy path. Hosted `Verify web` typecheck-and-schema, GitGuardian, Vercel preview, and preview-comments all SUCCESS at exact head `030e9d3`. Backlog is now **170 checked / 99 unchecked / 269 total** (+1 accepted). No production DB read/write, migration, deployment, or env-var change occurred; the operational cutover itself (setting `MONITOR_CUTOVER_ROUTE` in production Vercel env, running the reconciler against real windows) is downstream ops work chained to DIST-WEB-002's Vercel-scope resolution.
+
+Scope carve: `queueDeliveryAllowed` is surfaced but not yet consumed because the OPS-007 delivery worker is a library module without a route wire yet; when that wire lands it will read this flag without downstream code change. This PR did not modify `alert_dispatches`, `advisory_matches`, or `outbox_events` schema; no migration was introduced.
+
 ## Acceptance batch · 2026-09-20 · HOSTED-013 executed against production Neon (Web PR #53 reconcile fix merged)
 
 HOSTED-013 **executed end-to-end against production Neon `neondb` (PostgreSQL 18.6)** per `HOSTED_013_EXECUTION_RUNBOOK.md`. Founder-driven sequence with agent pre-flight, migration application, and drill:
