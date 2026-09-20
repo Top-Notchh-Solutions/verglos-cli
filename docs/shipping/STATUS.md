@@ -1,6 +1,18 @@
 # Verglos V1 shipping status
 
-Updated: 2026-09-16
+Updated: 2026-09-20
+
+## Acceptance batch · 2026-09-20 · HUNT-003+004+007 (CLI PR #43 + exact-finding follow-up #44)
+
+CLI PR **#43** merged tested head `c23483d` as `c99c776`; follow-up PR **#44** merged tested head `9bb447a` as `c11e24a` after acceptance review found and closed a missing selected-finding binding. Three items close:
+
+- **HUNT-003** — immutable, execution-free plan binds exact selected finding/rule/subject and renders trusted recipe digest, command/inputs, filesystem, isolation, limits, cleanup, network, redaction, and signature. It fails closed without an explicit trust policy and never executes recipe/model command text.
+- **HUNT-004** — A1 fixed-catalog pure probe harness runs one built-in `utf8-contains` probe with no source access, denied network, one worker, bounded time/CPU/memory/stack, empty environment, strict recipe/execution binding, and digest-only redacted evidence. It is explicitly labeled not a security or OS isolation boundary.
+- **HUNT-007** — exhaustive 48-case verdict matrix preserves all six canonical outcomes and proves environment/timeout/policy/support failures cannot collapse to `not-reproduced`.
+
+Local forced-uncached test/typecheck/build passed **23/23** tasks at both final trees. PR #43 and #44 each passed self-scan plus all nine Ubuntu/macOS/Windows × Node 20/22/24 cells. Pinned BusyBox Docker adversarial runtime passed **15**, with only the Linux PID/IPC namespace comparison skipped on the macOS host. Backlog **163 checked / 106 unchecked / 269 total**.
+
+HUNT-008 is the next Hunt item but remains evidence-gated: it needs real supported-rule recipes with authenticated provenance/license plus positive, negative, timeout, and failure fixtures. The next acceptance-eligible code batch is **QUAL-WEB-002**, whose OPS-008 dependency is now accepted; it needs redirect/DNS-rebinding/IP-family/metadata/payload/signature-replay/response-cap/egress-failure qualification. No production DB access/write, migration, deploy, publish, release, or marketing change occurred.
 
 ## Acceptance batch · 2026-09-16 · OPS-011+012+013+014 + retroactive OPS-006 (Web PR #45+#47)
 

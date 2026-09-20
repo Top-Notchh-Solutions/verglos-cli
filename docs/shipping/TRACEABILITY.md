@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-09-20 · HUNT-003 + HUNT-004 + HUNT-007
+
+CLI PR **#43** (`c23483d` → merge `c99c776`) implements the fail-closed recipe planner, fixed-catalog A1 pure-probe harness, strict assurance projection, and exhaustive verdict precedence. Follow-up PR **#44** (`9bb447a` → merge `c11e24a`) binds planner input/output to the selected scan finding and derives the matching rule from that finding, closing the exact subject/finding/rule criterion. Planner output is immutable and execution-free; absent trust is unsupported. A1 accepts only `verglos-probe utf8-contains`, validates the trusted recipe/execution binding, has no source/network access, uses one bounded worker with an empty environment, returns only redacted status/digest evidence, and visibly declares that it is not an OS/security boundary. The 48-case classifier matrix prevents policy, unsupported, environment, or timeout states from becoming `not-reproduced`.
+
+Verification: local forced-uncached test/typecheck/build **23/23** at both final trees; PR #43 and #44 each pass self-scan plus nine platform/runtime cells; pinned BusyBox Docker adversarial runtime **15 pass / 1 macOS-host Linux-namespace skip / 0 fail**. Acceptance count **163 checked / 106 unchecked / 269 total**. HUNT-008+ remain open; the public `verglos hunt` execution command remains gated. No production DB operation, deployment, publish, or release.
+
 ## Acceptance · 2026-09-16 · OPS-004
 
 Web PR **#43** merged on `feat/web-ops-004-advisory-normalization`. `advisory-normalizer.ts` closes the normalization/cache surface: preference-ordered canonical id, dedupe with max severity, 6h TTL that always re-checks INCOMPLETE, frozen persisted shape with 512-char summary limit. 11 unit tests. Backlog **148 checked / 121 unchecked / 269 total**.

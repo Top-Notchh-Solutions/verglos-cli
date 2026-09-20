@@ -1,6 +1,6 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
-Do not push publicly. This document enumerates every remaining open backlog item under Verglos V1 and names the specific manual input (owner + action) the founder must supply to unblock it. Compiled 2026-09-16 after the HOSTED-013 planner set, writer + reconcile, writer integration test, QUAL-CLI-001 determinism corpus, and DIST-004 install-matrix invariants all merged.
+Do not push publicly. This document enumerates remaining manual-input classes under Verglos V1 and names the specific owner action needed to unblock them. Reconciled 2026-09-20 after OPS-001-014, HUNT-002/003/004/007, LIC-005, and DIST-005 were accepted. Older bullets below are superseded where this update marks an item accepted.
 
 Per the goal file: "For every item left unchecked in the active area, state the specific unmet criterion and required evidence or owner. Do not describe a task as 'blocked' without naming the dependency and why it prevents work."
 
@@ -13,12 +13,12 @@ Every remaining item falls in one of these five buckets. Categorized this way so
 | Bucket | Manual input required | Items chained off it |
 |---|---|---|
 | **A · Production DB write** | Production `DATABASE_URL` with write privileges + explicit go/no-go on the writer's `--commit` run per `HOSTED_013_EXECUTION_RUNBOOK.md` | HOSTED-013, all PRO-*, QUAL-WEB-004, and every downstream that reads the tenant/project model |
-| **B · Provider selection** | Founder-authorized decision (with measured workload, security/privacy, recovery, exit, cost evidence) for durable queue + object storage per architecture decision set | OPS-001 through OPS-015, DIST-WEB-002, DIST-WEB-003, QUAL-WEB-002, QUAL-WEB-003, QUAL-WEB-004, PRO-005, PRO-006, PRO-009, OPS-015 →  most STUDIO/ENT retention items |
-| **C · External content / trust root** | Authenticated Hunt publisher root, licensed recipe content, and an approved recipe feed/rotation policy | HUNT-002 through HUNT-011, QUAL-CLI-004 |
-| **D · Legal review** | Approved licensing (Trivy / detect-secrets / scanner fixtures / premium rule packs), contributor DCO-or-CLA decision, third-party redistribution approval | LIC-002, LIC-003, LIC-005, DIST-002, DIST-003, DIST-006 |
+| **B · Provider/cutover evidence** | Neon PostgreSQL is selected and OPS-001-014 are accepted. Remaining input is the production migration/cutover state needed by OPS-015 plus later measured workload/recovery evidence. | OPS-015, DIST-WEB-003, QUAL-WEB-003/004/005, PRO-005/009 and downstream Studio/Enterprise operations |
+| **C · External Hunt content / independent review** | Authenticated, licensed evidence-backed recipe content plus approved supported-rule coverage; later independent isolation review | HUNT-008 through HUNT-011, QUAL-CLI-004 |
+| **D · Legal review** | Approved licensing (Trivy / detect-secrets / scanner fixtures / premium rule packs) and third-party redistribution approval. LIC-005 DCO policy is accepted. | LIC-002, LIC-003, DIST-002, DIST-003, DIST-006 |
 | **E · POC / commercial** | Authorized customer repositories, POC recruitment consent, paid-pilot authorization, external campaign go-ahead, npm publish / production deploy authorization | ACCEPT-001 through ACCEPT-010, FINAL-WEB-001 through FINAL-WEB-008, RECORD-010 (Phase-8 marketing embargo lift) |
 
-Every task listed below points at exactly one of these buckets. When the founder resolves a bucket, that block of items becomes executable.
+Each unresolved class below points at its governing bucket. Resolving a bucket makes only the dependency-satisfied items in that class executable.
 
 ## HOSTED / PRO / QUAL-WEB stack — bucket A (production DB write)
 
@@ -28,32 +28,32 @@ Every task listed below points at exactly one of these buckets. When the founder
 - **PLAN-WEB-005 through PLAN-WEB-010** — usage/allowance/seat/retention enforcement all require live tenant data + real quota measurements post-cutover.
 - **QUAL-WEB-004** — migration/restore/disaster-recovery drill requires HOSTED-013 committed and OPS-014/015 selected (see bucket B).
 
-## OPS / DIST-WEB stack — bucket B (provider selection)
+## OPS / DIST-WEB stack — bucket B (provider/cutover evidence)
 
-- **OPS-001** — architecture decision set explicitly defers durable queue/object-storage provider selection pending representative workload measurements, security/privacy review, recovery drill, exit plan, and actual-cost comparison. Provider-neutral contract already lands on main. Unmet: founder ranks candidates (Neon jobs, Vercel Queues, external queue service like AWS SQS/Cloud Tasks) and records a justified selection.
-- **OPS-002 through OPS-015** — every OPS item chains off OPS-001's provider choice: due-job producer, inventory/advisory worker, normalization/cache, reverse-index matcher, transactional outbox, delivery workers, webhook hardening, alert dedup, dead-letter, retention, telemetry, ops metrics, backup/restore, monitoring cutover.
-- **DIST-WEB-002** — production configuration validation stays preparatory until queue/object-storage variables exist (OPS-001).
+- **OPS-001 through OPS-014** — accepted. Neon PostgreSQL is the founder-authorized V1 durable queue; producer, advisory processing, matching/outbox, delivery, webhook, dedup, DLQ, retention, telemetry, health metrics, and backup/reconciliation code are merged.
+- **OPS-015** — monitoring migration/cutover remains open on HOSTED-013 production data migration and an evidence-backed cutover/rollback run.
+- **DIST-WEB-002** — remains separately open for actual production configuration/deployment evidence; provider selection itself is no longer the blocker.
 - **DIST-WEB-003** — deployment/rollback/health runbook needs OPS-013/014 to define what "healthy" and "restored" mean.
-- **QUAL-WEB-002** — SSRF/webhook suite blocks on OPS-008 (hardened webhook delivery).
 - **QUAL-WEB-003** — concurrency/idempotency load suite blocks on OPS/PLAN.
 - **QUAL-WEB-005** — privacy/deletion/retention qualification blocks on OPS-011/012 + Studio/Enterprise foundations.
 - **PLAN-WEB-007** — 80% warning behavior blocks on OPS-006.
 
-## HUNT stack — bucket C (external content / trust root)
+## HUNT stack — bucket C (external content / independent review)
 
-- **HUNT-002** — recipe verification/trust store needs authenticated official publisher root and licensed recipe feed. Local trust-store code (`40b16dc`, `2318b9d`) exists but is caller-supplied; no official root or managed feed exists.
-- **HUNT-003 through HUNT-011** — every downstream Hunt item chains off HUNT-002. Recipe planner, probe runners, verdict classifier, initial recipe set, functional hunt command, MCP Hunt tools, and adversarial sandbox suite all require trusted recipes.
+- **HUNT-002 through HUNT-007** — accepted where applicable (HUNT-001-007 are now all checked). The trust contract remains local/caller-supplied for pre-launch; planning, A1/A2 execution boundaries, redaction, and verdict classification are implemented and tested.
+- **HUNT-008** — needs real evidence-backed supported-rule recipes with authenticated provenance/license and positive, negative, timeout, and failure fixtures. Synthetic catalog scaffolding alone cannot satisfy this criterion.
+- **HUNT-009 through HUNT-011** — remain downstream of HUNT-008: functional command, MCP tools, and complete adversarial suite.
 - **QUAL-CLI-004** — Hunt independent isolation evidence pack chains off HUNT-011 and requires independent security review.
 
 ## Licensing stack — bucket D (legal review)
 
 - **LIC-002** — external engine/content license records need approved Trivy/detect-secrets/scanner-fixtures/premium-rule licenses, provenance, modification records, and trademark language. Owner/legal review is external.
 - **LIC-003** — `THIRD_PARTY_NOTICES` generator exists (`9a1dad4`, `4435964`) but final artifact/legal qualification needs LIC-002.
-- **LIC-005** — contributor ownership policy needs founder DCO-or-CLA decision, inbound license, and future entity-assignment path.
+- **LIC-005** — accepted at CLI PR #41 with DCO 1.1, inbound license, contribution licensing, trademark/security language, and CLA fallback documented.
 - **DIST-002** — trusted npm publishing workflow chains off LIC-003/004 (final licensing before publish). Workflow code (`2f162d2`) exists preparatory.
 - **DIST-003** — release artifact attestations/checksums generator (`e5e4e72`, `66312a4`, `d269e45`, `4435964`) is preparatory; needs LIC clearance for public release.
 - **DIST-006** — rollback/revocation workflow chains off DIST-002 through DIST-005.
-- **DIST-004 / DIST-005** — DIST-004 install invariants are shipping on the current CLI phase PR (QUAL-CLI-001 + DIST-004). DIST-005 upgrade/backward-compat matrix chains off DIST-004 + CONTRACT-012; once DIST-004 accepts, DIST-005 is executable *without* external inputs — noting as a follow-up executable item.
+- **DIST-004 / DIST-005** — accepted; they are no longer blocker-inventory items.
 
 ## Team / Studio / Enterprise stack — bucket A + bucket B chain
 
@@ -79,14 +79,14 @@ Every task listed below points at exactly one of these buckets. When the founder
 
 ## Miscellaneous — bucket A (production DB) or already-partial
 
-- **DIST-005** — upgrade/backward-compatibility matrix. Deps CONTRACT-012 (checked) + DIST-004 (accepting this phase). Once DIST-004 merges, DIST-005 is executable without external inputs: write cross-version fixtures for CLI/report/token/config/record paths + database compatibility + preserved local data. Estimated: one phase PR, follow-up.
+- No independent DIST-005 action remains; it is accepted. The next Hunt item is HUNT-008 and is blocked on the concrete content/provenance evidence stated above.
 
 ## Founder-checklist items (explicitly external — bucket A/B/D/E)
 
 These lines in the backlog are explicit founder-decision items, not agent tasks:
 
 - Confirm final plan hypotheses after evidence (Team $99 vs bounded founding cohort; Studio $249 vs bounded founding cohort). [E]
-- Select/approve queue and object-storage provider only after the Phase 0 cost/constraint decision. [B]
+- Neon PostgreSQL queue selection is complete for pre-launch; supply later production cutover/recovery evidence for OPS-015. [B]
 - Obtain legal review for premium content license, contributor terms, trademarks, privacy, terms, and enterprise obligations. [D]
 - Approve any external engine/fixture redistribution with unresolved license or NOTICE status. [D]
 - Approve networked Hunt recipe exceptions individually; default remains no network. [C]
@@ -97,14 +97,14 @@ These lines in the backlog are explicit founder-decision items, not agent tasks:
 
 ## What CAN still be shipped without founder input
 
-After QUAL-CLI-001 + DIST-004 merge, the only executable item left with green deps is **DIST-005** (upgrade/backward-compat matrix). Everything else is blocked in one of the five buckets above.
+At the 2026-09-20 recount, **QUAL-WEB-002** is acceptance-eligible without new founder input because OPS-008 is accepted. Ship the full SSRF/webhook/input security suite across redirects, DNS rebinding, IPv4/IPv6/private/link-local/metadata destinations, malformed payloads, signature replay, response caps, and egress failures. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require the separately controlled production migration/cutover evidence; licensing, POC, and final marketing remain external gates.
 
 ## Recommended founder action order (to unblock the largest chunk fastest)
 
 1. **Bucket A (production DB write)** — one hour of founder time to run the writer + reconciler + restore drill. Unblocks HOSTED-013 + ~30 downstream items (all PRO-*, PLAN-WEB-004+, TEAM/STUDIO/ENT foundations).
-2. **Bucket B (provider selection)** — record durable queue + object storage decision. Unblocks ~15 OPS-* items + DIST-WEB-002/003 + QUAL-WEB-002/003/005.
-3. **Bucket D (legal review)** — clear LIC-002 licensing + LIC-005 DCO-or-CLA. Unblocks DIST-002/003/006 (release engineering).
-4. **Bucket C (Hunt external content)** — provision authenticated publisher root + licensed recipes. Unblocks 8 HUNT-* items + QUAL-CLI-004.
+2. **Bucket D (legal review)** — clear LIC-002 external-content/redistribution licensing. LIC-005 is already accepted; remaining clearance unblocks DIST-002/003/006.
+3. **Bucket C (Hunt external content)** — supply authenticated/licensed evidence-backed recipes and supported-rule evidence. Unblocks HUNT-008-011 + QUAL-CLI-004.
+4. **Bucket B (cutover evidence)** — after HOSTED-013, run monitoring migration/cutover and recovery evidence for OPS-015 and downstream operations.
 5. **Bucket E (POC + commercial)** — happens last per the goal file's phase ordering. Everything else must be gate-passed first.
 
-Every code-side blocker at 2026-09-16 has been shipped and merged. What remains is founder actions on the five buckets above.
+Every currently identified acceptance blocker at 2026-09-20 names its required external evidence or owner above; completed provider, DCO, compatibility, and early Hunt items are no longer treated as blockers.

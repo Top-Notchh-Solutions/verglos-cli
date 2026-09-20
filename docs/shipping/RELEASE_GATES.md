@@ -24,6 +24,8 @@ Migration gate update (2026-09-12): web `9eba73d` adds a local read-only audit c
 
 Local Hunt runtime revalidation (2026-09-12): Docker Desktop integration against pinned BusyBox passes all 15 runtime assertions; Hunt package aggregate 51 pass / 1 macOS namespace skip. HUNT-011/QUAL-CLI-004 remain open; the skip is not treated as a pass and Linux-host evidence/independent review are still required.
 
+Hunt planning/A1/verdict update (2026-09-20): CLI PRs #43/#44 pass both local 23/23 task graphs and all exact-head hosted checks. HUNT-003/004/007 are accepted: planning requires trust and binds exact finding/rule/subject; A1 is a fixed pure-probe harness explicitly labeled non-isolating; verdict precedence cannot turn infrastructure failure into `not-reproduced`. Gate 2 remains OPEN because HUNT-008-011, authenticated/licensed recipe coverage, Linux adversarial namespace evidence, and independent review are incomplete. The public Hunt execution command remains disabled.
+
 ## Gate 0 — Truth and scope
 
 - Current capability registry reconciled with code/tests.
