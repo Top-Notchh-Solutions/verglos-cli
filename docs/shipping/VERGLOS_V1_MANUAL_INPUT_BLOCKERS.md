@@ -97,7 +97,7 @@ These lines in the backlog are explicit founder-decision items, not agent tasks:
 
 ## What CAN still be shipped without founder input
 
-At the 2026-09-20 recount, **QUAL-WEB-002** is acceptance-eligible without new founder input because OPS-008 is accepted. Ship the full SSRF/webhook/input security suite across redirects, DNS rebinding, IPv4/IPv6/private/link-local/metadata destinations, malformed payloads, signature replay, response caps, and egress failures. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require the separately controlled production migration/cutover evidence; licensing, POC, and final marketing remain external gates.
+At the 2026-09-20 recount, QUAL-WEB-002 is accepted. The next dependency-ready Web batch is **DIST-WEB-002** because the former OPS-001 provider-selection blocker is resolved: reconcile the runtime-config matrix with the selected PostgreSQL queue/jsonb storage strategy, verify every implemented production control fails closed without echoing values, and obtain read-only hosted environment/deployment evidence if the linked project scope is accessible. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require the separately controlled production migration/cutover evidence; QUAL-CLI-006 remains dependency-gated by the unfinished RECORD compatibility surface; licensing, POC, and final marketing remain external gates.
 
 ## Recommended founder action order (to unblock the largest chunk fastest)
 

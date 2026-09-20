@@ -2,6 +2,14 @@
 
 Updated: 2026-09-20
 
+## Acceptance batch · 2026-09-20 · QUAL-WEB-002 (Web PR #48)
+
+Web PR **#48** merged exact tested head `508cde0` as `5420ad1`. QUAL-WEB-002 closes with a single fail-closed delivery boundary: every attempt validates all DNS answers, rejects non-public IPv4/IPv6 destinations, pins the approved address into the HTTPS socket lookup, verifies the connected address, refuses redirects, and caps JSON request bytes, total DNS/request time, and declared or chunked response bytes. Unsafe literal destinations are also rejected at registration. Razorpay inbound webhooks now require a bounded provider event ID, use constant-time raw-body HMAC comparison, validate bounded payload shape, and claim exact event-ID/payload-digest pairs in PostgreSQL so completed replay is side-effect free, changed-content reuse conflicts, in-flight work asks for retry, and failed work releases its claim.
+
+The isolated PostgreSQL 15 run passed **280/280 with zero skips**. Typecheck, Drizzle schema check, 18-migration ordering, production build, public-boundary audit, license inventory/tests, 413-component CycloneDX generation, and the high-severity dependency gate passed; two moderate advisories remain. Exact-head hosted Node 22/PostgreSQL verification, GitGuardian, Vercel preview, and preview-comment checks passed. Backlog **164 checked / 105 unchecked / 269 total**.
+
+Migration `0017_razorpay_webhook_replay.sql` is reviewed and ordered but was not run against production. A disposable from-zero rehearsal stopped at the pre-existing foundational `0000` migration because that historical file assumes `licenses` already exists; R-021 remains open and no production database was read or written. The automatic PR preview deployed successfully; no production deployment, release, publish, or marketing change occurred. Code-level R-008 SSRF/rebinding/exhaustion and inbound replay controls are qualified; platform egress allowlisting/proxying and per-destination outbound signatures remain residual release controls. The next dependency-ready Web batch is **DIST-WEB-002** now that the OPS-001 provider decision is settled; it still requires a no-secret-leak production configuration matrix and hosted environment evidence.
+
 ## Acceptance batch · 2026-09-20 · HUNT-003+004+007 (CLI PR #43 + exact-finding follow-up #44)
 
 CLI PR **#43** merged tested head `c23483d` as `c99c776`; follow-up PR **#44** merged tested head `9bb447a` as `c11e24a` after acceptance review found and closed a missing selected-finding binding. Three items close:

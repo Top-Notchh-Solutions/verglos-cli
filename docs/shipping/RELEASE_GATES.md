@@ -26,6 +26,8 @@ Local Hunt runtime revalidation (2026-09-12): Docker Desktop integration against
 
 Hunt planning/A1/verdict update (2026-09-20): CLI PRs #43/#44 pass both local 23/23 task graphs and all exact-head hosted checks. HUNT-003/004/007 are accepted: planning requires trust and binds exact finding/rule/subject; A1 is a fixed pure-probe harness explicitly labeled non-isolating; verdict precedence cannot turn infrastructure failure into `not-reproduced`. Gate 2 remains OPEN because HUNT-008-011, authenticated/licensed recipe coverage, Linux adversarial namespace evidence, and independent review are incomplete. The public Hunt execution command remains disabled.
 
+Webhook/input qualification update (2026-09-20): Web PR #48 exact head `508cde0` passes 280/280 isolated-PostgreSQL tests, all local quality/schema/build/boundary checks, Node 22 hosted verification, GitGuardian, and Vercel preview. QUAL-WEB-002 is accepted for address-pinned SSRF/rebinding defense, redirects, IP-family/private/link-local/metadata cases, bounded inputs/responses/time, egress failures, and inbound HMAC/event-replay handling. Gate 2/4 remain OPEN: platform egress allowlisting/proxying, per-destination outbound webhook signatures, production migration `0017`, the R-021 foundational migration/backfill boundary, and broader operations/load qualification are not complete.
+
 ## Gate 0 — Truth and scope
 
 - Current capability registry reconciled with code/tests.
