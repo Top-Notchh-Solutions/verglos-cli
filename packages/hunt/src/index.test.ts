@@ -185,6 +185,18 @@ test("Hunt rejects malformed evidence metadata from adapters", async () => {
   assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
 });
 
+test("Hunt preserves only a strict bounded assurance disclosure", async () => {
+  const assurance = { class: "A1" as const, isolation: "restricted-process" as const, securityBoundary: false, sourceAccess: "none" as const, network: "denied" as const, processLimit: 1, limitation: "trusted built-in harness; not an OS isolation boundary" };
+  const adapter = { id: "test-probe", async prepare() {}, async execute() { return { findingId: "critical-1", verdict: "false" as const, canonicalVerdict: "not-reproduced" as const, reason: "fixture", durationMs: 1, assurance }; }, async cleanup() {} };
+  const result = await runHunt(report, { adapter, execution });
+  assert.deepEqual(result.outcomes[0]?.assurance, assurance);
+  assert.ok(Object.isFrozen(result.outcomes[0]?.assurance));
+
+  const malformed = { ...adapter, async execute() { return { findingId: "critical-1", verdict: "false" as const, canonicalVerdict: "not-reproduced" as const, reason: "fixture", durationMs: 1, assurance: { ...assurance, securityBoundary: "no" } } as never; } };
+  const rejected = await runHunt(report, { adapter: malformed, execution });
+  assert.equal(rejected.outcomes[0]?.verdict, "not_attemptable");
+});
+
 test("Hunt freezes projected outcomes before returning them", async () => {
   const dryRun = await runHunt(report, { dryRun: true });
   assert.ok(Object.isFrozen(dryRun.outcomes));

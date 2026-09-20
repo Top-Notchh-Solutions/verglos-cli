@@ -6,6 +6,7 @@ export * from "./types.js";
 export * from "./docker-adapter.js";
 export * from "./docker-runner.js";
 export * from "./docker-sandbox-adapter.js";
+export * from "./restricted-process-adapter.js";
 
 export async function runHunt(
   report: ScanResult,
@@ -149,6 +150,7 @@ function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined 
         : ["inconclusive", "not-supported", "environment-error", "policy-denied"].includes(canonical);
     if (!compatible) return undefined;
   }
+  if (outcome.assurance !== undefined && !isAssurance(outcome.assurance)) return undefined;
   return {
     findingId: outcome.findingId,
     verdict: outcome.verdict,
@@ -161,5 +163,23 @@ function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined 
     ...(outcome.redacted === undefined ? {} : { redacted: true as const }),
     ...(outcome.executionStatus === undefined ? {} : { executionStatus: outcome.executionStatus }),
     ...(outcome.canonicalVerdict === undefined ? {} : { canonicalVerdict: outcome.canonicalVerdict }),
+    ...(outcome.assurance === undefined ? {} : { assurance: Object.freeze({ ...(outcome.assurance as HuntFindingOutcome["assurance"]) }) }),
   } as HuntFindingOutcome;
+}
+
+function isAssurance(value: unknown): value is NonNullable<HuntFindingOutcome["assurance"]> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const assurance = value as Record<string, unknown>;
+  const keys = Object.keys(assurance).sort();
+  if (keys.join(",") !== "class,isolation,limitation,network,processLimit,securityBoundary,sourceAccess") return false;
+  if (!["A1", "A2", "A3", "A4"].includes(String(assurance.class))) return false;
+  if (!["restricted-process", "container", "gvisor", "microvm"].includes(String(assurance.isolation))) return false;
+  if (typeof assurance.securityBoundary !== "boolean") return false;
+  if (assurance.sourceAccess !== "none" && assurance.sourceAccess !== "read-only") return false;
+  if (assurance.network !== "denied" && assurance.network !== "allowlisted") return false;
+  if (!Number.isSafeInteger(assurance.processLimit) || Number(assurance.processLimit) <= 0 || Number(assurance.processLimit) > 4096) return false;
+  return typeof assurance.limitation === "string"
+    && assurance.limitation.length > 0
+    && assurance.limitation.length <= 1024
+    && !/[\u0000-\u001f\u007f]/.test(assurance.limitation);
 }
