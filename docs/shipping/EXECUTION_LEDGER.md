@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-20 · DIST-WEB-002 code-side matrix complete; hosted production evidence blocked (Web PR #49)
+
+- **Code / scope:** pushed Web commit `76e58f42fd5ebc7954c5883a5e36fda64eaeedf6` on PR #49. One required-key contract covers auth, DB, signing, encryption, billing, selected queue/storage, cron, and canonical public URL. The validator requires the five billing controls, live Clerk/Razorpay keys, DB credentials with no explicit TLS disablement, approved `postgres` / `postgres-jsonb` selectors, safe integers, and value-free errors; `.env.example` drift is tested.
+- **Verification:** isolated PostgreSQL 15 full suite 286 pass / 0 fail / 0 skip; focused config/build/startup 22/22; typecheck, Drizzle schema, 18 migrations, 37-page build, public-boundary, tracked-secret, high/critical audit, CycloneDX 413 components / 414 graph entries, and license inventory/tests pass. Two moderate advisories remain; license inventory still flags 79 manual reviews including 53 missing declarations. Hosted Node 22/PostgreSQL workflow `35502251082` job `106055975291`, GitGuardian, Vercel preview, and preview comments pass at the exact head.
+- **Attempted but open:** DIST-WEB-002 is not accepted. Metadata-only Vercel identity/env/project/deployment commands are denied by the installed credential, so actual production variable names/scopes and production fail-closed deployment remain unproved. The clean/mergeable PR remains open rather than risking an automatic production build before the new provider selectors are verified/provisioned.
+- **Accounting / operations:** no checkbox changed; **164 checked / 105 unchecked / 269 total**. No production environment value or DB data was read; no DB write/migration, production deployment, merge, release, publish, or marketing action occurred. Private evidence remains local-only.
+
 ## 2026-09-20 · QUAL-WEB-002 accepted (Web PR #48)
 
 - **Code / scope:** PR #48 exact head `508cde0bbc99ca96833e119f1b64a293674cc18a` merged as `5420ad13190406d1ede3e3e75e18f25f1c655551`. `afa03cf` centralizes webhook target classification and address-pinned native HTTPS delivery; `508cde0` adds constant-time Razorpay signature validation, bounded typed input, official provider-event identity claims, exact payload-digest replay semantics, subscription identity persistence, and ordered migration `0017`.

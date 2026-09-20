@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-20 · DIST-WEB-002 production configuration matrix
+
+Web PR **#49** exact head `76e58f42fd5ebc7954c5883a5e36fda64eaeedf6` completes the code-side matrix: all production-required keys are exported from one validator contract, `.env.example` is checked against it, approved queue/storage choices are pinned to PostgreSQL/PostgreSQL-JSONB, all five billing values are mandatory and safe-integer bounded, DB credentials/TLS, live Clerk/Razorpay keys, canonical site origin, signing/encryption/cron secrets, whitespace/control characters, and provider drift fail closed. Build/startup tests prove invalid matrices do not echo sentinel values and a complete matrix succeeds. Isolated PostgreSQL 15 full suite **286 pass / 0 fail / 0 skip**; focused config 22/22; typecheck, schema/18-migration checks, 37-page build, boundary/secret, high-audit, SBOM/license gates pass. Exact-head hosted run `35502251082` / job `106055975291`, GitGuardian, Vercel preview, and preview comments pass. PR is OPEN/CLEAN/MERGEABLE with no review decision.
+
+Acceptance is deliberately withheld: the installed Vercel credential returns `Not authorized`, so the actual production variable-name/scope matrix and a production deployment cannot be verified. No environment values or production DB data were read, and no production write/deploy occurred. Counts remain **164 checked / 105 unchecked / 269 total**.
+
 ## Acceptance · 2026-09-20 · QUAL-WEB-002
 
 Web PR **#48** (`508cde0` → merge `5420ad1`) binds the actual outbound connection to a DNS-approved public address and qualifies redirects, DNS/socket rebinding, numeric/mapped/transition IPv4+IPv6, private/shared/link-local/metadata/reserved ranges, mixed answers, malformed/oversized JSON, request/time/response caps, and egress failure. The transport never follows redirects, verifies the connected address, consumes only bounded response bytes, and exposes bounded failures. Registration rejects unsafe literal webhook destinations before encryption/persistence.

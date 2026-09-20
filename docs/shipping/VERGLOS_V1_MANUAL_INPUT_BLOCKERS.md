@@ -32,8 +32,8 @@ Each unresolved class below points at its governing bucket. Resolving a bucket m
 
 - **OPS-001 through OPS-014** — accepted. Neon PostgreSQL is the founder-authorized V1 durable queue; producer, advisory processing, matching/outbox, delivery, webhook, dedup, DLQ, retention, telemetry, health metrics, and backup/reconciliation code are merged.
 - **OPS-015** — monitoring migration/cutover remains open on HOSTED-013 production data migration and an evidence-backed cutover/rollback run.
-- **DIST-WEB-002** — remains separately open for actual production configuration/deployment evidence; provider selection itself is no longer the blocker.
-- **DIST-WEB-003** — deployment/rollback/health runbook needs OPS-013/014 to define what "healthy" and "restored" mean.
+- **DIST-WEB-002** — code-side matrix is complete at Web PR #49 head `76e58f4`; it remains open because the installed Vercel credential is unauthorized, so actual production variable names/scopes, provider-selector provisioning, and production deployment evidence cannot be verified.
+- **DIST-WEB-003** — OPS-013/014 are accepted; this runbook now remains chained to DIST-WEB-002 production configuration/deployment evidence and an executable health/rollback rehearsal.
 - **QUAL-WEB-003** — concurrency/idempotency load suite blocks on OPS/PLAN.
 - **QUAL-WEB-005** — privacy/deletion/retention qualification blocks on OPS-011/012 + Studio/Enterprise foundations.
 - **PLAN-WEB-007** — 80% warning behavior blocks on OPS-006.
@@ -97,7 +97,7 @@ These lines in the backlog are explicit founder-decision items, not agent tasks:
 
 ## What CAN still be shipped without founder input
 
-At the 2026-09-20 recount, QUAL-WEB-002 is accepted. The next dependency-ready Web batch is **DIST-WEB-002** because the former OPS-001 provider-selection blocker is resolved: reconcile the runtime-config matrix with the selected PostgreSQL queue/jsonb storage strategy, verify every implemented production control fails closed without echoing values, and obtain read-only hosted environment/deployment evidence if the linked project scope is accessible. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require the separately controlled production migration/cutover evidence; QUAL-CLI-006 remains dependency-gated by the unfinished RECORD compatibility surface; licensing, POC, and final marketing remain external gates.
+At the 2026-09-20 recount, QUAL-WEB-002 is accepted and DIST-WEB-002 code/preview work is complete, but its production evidence is credential-blocked. The next independent implementation candidate is **PLAN-WEB-011/012** billing catalog binding plus lifecycle/idempotency; acceptance must still remain honest about unverified catalog prices/gateway configuration and any production evidence. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require the separately controlled production migration/cutover evidence; QUAL-CLI-006 remains dependency-gated by the unfinished RECORD compatibility surface; licensing, POC, and final marketing remain external gates.
 
 ## Recommended founder action order (to unblock the largest chunk fastest)
 
