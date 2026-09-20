@@ -2,6 +2,14 @@
 
 Updated: 2026-09-20
 
+## Progress batch · 2026-09-20 · QUAL-WEB-003 carved concurrency invariants (Web PR #52 merged)
+
+Web PR **#52** merged tested head `e56975e` as `ac9ef38d2b908ad27323444579b9729bbf412253`. Two commits on `feat/web-qual-003-concurrency-invariants`: `60cf3a2` cross-module concurrency invariants test, `e56975e` test wiring. `src/lib/usage/concurrency-invariants.integration.test.ts` exercises the interactions between PLAN-WEB-005/006 ledger, PLAN-WEB-007 threshold outbox, and PLAN-WEB-008 admission policy under real parallel Postgres connections. Five invariants qualified: multi-tenant reservations remain isolated (3 tenants × 20 racers each, each tenant admits exactly its own limit); cross-dimension reservations do not share the limit lock (3 dimensions × 20 racers per tenant, each dimension admits its own limit); admission + ledger stay consistent under contention (at plan ceiling, strict tenants reject all 20 concurrent attempts and overage-capable tenants admit all 20 with the overage marker); threshold outbox stays deduplicated across dimensions under 40 concurrent racers (exactly one outbox row per dimension survives); idempotent replay under contention returns exactly one recorded row from 20 racers on the same key.
+
+Isolated file run 5/5 pass locally in 631 ms. Hosted `Verify web` typecheck-and-schema passed in ~2 min at exact head `e56975e`; GitGuardian, Vercel preview, and preview-comments all SUCCESS.
+
+**QUAL-WEB-003 remains unchecked.** The carved suite covers quota races, alert dedup (threshold outbox), tenant fairness (cross-tenant isolation), and idempotent replay — a substantial subset of the acceptance criteria list. Not covered by this carve: billing/webhook replay integration (chained to PR #49's billing lifecycle), worker-crash recovery drills, and the 10x forecast freshness SLO — each needs additional infrastructure and would not have improved acceptance signal per hour spent in this batch. Backlog remains **168 checked / 101 unchecked / 269 total** because the item is not fully satisfied.
+
 ## Acceptance batch · 2026-09-20 · PLAN-WEB-007/008 usage warning + ingestion admission (Web PR #51 merged)
 
 Web PR **#51** merged tested head `844aa09e4944031b8de0cceb51a4da93ac7e29db` as `326f48d511275c0b1adc0628b8829fcd71f16d1b`. Three commits on `feat/web-plan-quota-notice-and-enforcement`: `38997ad` threshold outbox, `1bc70f5` admission policy, `844aa09` test wiring. Two items close on top of the just-merged PLAN-WEB-005/006 ledger:
