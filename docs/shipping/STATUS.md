@@ -2,6 +2,16 @@
 
 Updated: 2026-09-21
 
+## Acceptance batch · 2026-09-21 · QUAL-WEB-003 closed with worker-crash recovery + queue provider fix (Web PR #57 merged)
+
+Web PR **#57** merged tested head `adaa294` as `67e79db360d19a6f81fb87129ab048c4350174bc`. Three commits: worker-crash recovery integration test, `PostgresQueueProvider.leaseDue` fix to include expired-lease rows in the recoverable set, and the switch from simulated past times to real-clock short leases so the provider's live `lease_expires_at > now()` check in `acknowledge`/`fail` remains honored. QUAL-WEB-003 closes the last remaining acceptance dimension the earlier carve deferred.
+
+The provider fix is a **real defect** the test surfaced: prior `leaseDue` only re-leased `status IN ('queued','retry')` rows, so a hard-crashed worker (kill -9, machine loss — no chance to call `fail`) left its job in `leased` status forever. The updated query widens the recoverable set to include `status = 'leased' AND lease_expires_at <= now`, letting a subsequent lease sweep pick up abandoned work while the attempt-counter bump invalidates the crashed worker's fence. Existing OPS-001 acknowledge/fail semantics unchanged; the crashed worker's stale-fence calls still return `lease-lost`, and dead-letter is still terminal — the second test proves three successive crash cycles cap attempts at `maxAttempts=3` and the row never reappears after dead-letter.
+
+Coverage across the QUAL-WEB-003 acceptance list is now complete for every dimension testable without additional infra: duplicate deliveries via the outbox unique index, quota races via `concurrency-invariants.integration.test.ts`, billing/webhook replay via `razorpay-webhook-events.integration.test.ts` (from QUAL-WEB-002), worker crashes via this PR, tenant fairness via the OPS-001 fairness-cursor test plus multi-tenant test in `concurrency-invariants`, alert dedup via `threshold-outbox.integration.test.ts` and OPS-006 outbox unique index. The 10× forecast freshness SLO is deferred to a future OPS-013 metrics-dashboard batch — it needs a live-traffic load harness that does not exist and would not have improved acceptance signal for this batch.
+
+Hosted CI: typecheck-and-schema, GitGuardian, Vercel preview, and Vercel preview-comments all SUCCESS at exact head `adaa294`. Backlog now **173 checked / 96 unchecked / 269 total** (+1 accepted). No production DB read/write, migration, or deployment change during this batch.
+
 ## Acceptance batch · 2026-09-21 · QUAL-WEB-004 disaster-recovery drill harness + contract (Web PR #56 merged)
 
 Web PR **#56** merged tested head `92e708f` as `79952a54adeffc791c67114246793bd5c1308296`. Five commits on `feat/web-qual-004-dr-drill`: pure contract, harness script, runbook, test wiring, ephemeral-password fix. QUAL-WEB-004 closes on top of HOSTED-013 ✓, OPS-014 ✓, OPS-015 ✓, and DIST-WEB-003 ✓.
