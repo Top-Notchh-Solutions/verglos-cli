@@ -2,6 +2,18 @@
 
 Updated: 2026-09-20
 
+## Acceptance batch · 2026-09-20 · DIST-WEB-003 deployment/rollback/health runbook (Web PR #55 merged) + PR #49 catch-up
+
+Web PR **#55** merged tested head `ddf3069` as `6659bafe82748bb5f916aee51cd64163b7f13fdf`. Single documentation commit adding `docs/deployment-runbook.md`. DIST-WEB-003 closes on top of OPS-013 ✓, OPS-014 ✓, DIST-WEB-001 ✓, and DIST-WEB-002 code (merged this session in PR #49).
+
+The runbook codifies the exact operator sequence for verglos-web deployment: preview qualification checklist (typecheck / tests / db:check / migrations:check / build / sbom / licenses — seven gates), additive-only migration ordering rule with the current 0000..0018 snapshot named explicitly, the OPS-013 eight-metric health matrix with concrete warn/critical thresholds (2 000 / 10 000 ms lease latency, 25 / 100 deadletter count, 3 600 / 43 200 s producer lag, and the other five), a five-item post-deploy smoke-test checklist (landing / entitlement / monitor cron / billing webhook / metrics snapshot), two distinct rollback vectors (application via `vercel promote <previous-deployment>` for a code regression; database via `pg_dump` restore into a Neon branch and `DATABASE_URL` repoint for a migration/backfill regression), a forward-fix policy that never edits shipped migrations, the OPS-015 `MONITOR_CUTOVER_ROUTE` cutover reference with one-line rollback semantics, an ownership matrix, and five P0 incident triggers. Referenced fields verified against source at exact head (metric names/thresholds from `src/lib/queue/health-metrics.ts`, cutover semantics from `src/lib/monitor/cutover-policy.ts`, CI pipeline from `.github/workflows/verify.yml`).
+
+Hosted `Verify web` typecheck-and-schema, GitGuardian, Vercel preview, and preview-comments all SUCCESS at exact head `ddf3069`. Documentation-only change; no code affected.
+
+**PR #49 (DIST-WEB-002 + PLAN-WEB-011/012 code)** was also merged during this session as `c34ebd9af67a810716cbb4f152c326ccf1301549` after founder-direct instruction. PR #49 had been held open in prior checkpoints because the earlier tracker flagged production-build risk from the two new required provider selectors (`VERGLOS_QUEUE_PROVIDER`, `VERGLOS_EVIDENCE_STORAGE_PROVIDER`). Founder confirmed Vercel scope + credentials are in place; production build will fail-closed and safely if selectors are missing rather than deploy bad code. DIST-WEB-002 / PLAN-WEB-011 / PLAN-WEB-012 all had their tracker entries refreshed to reflect the merge but **remain unchecked** because full acceptance still requires operational proof: verified INR catalog row + live gateway checkout/renewal/refund flow (PLAN-WEB-011/012) and a successful production deploy against the new required-key matrix (DIST-WEB-002).
+
+Backlog is now **171 checked / 98 unchecked / 269 total** (+1 for DIST-WEB-003). No production DB read/write, migration, or deployment change during this batch beyond the PR #55 merge itself.
+
 ## Acceptance batch · 2026-09-20 · OPS-015 monitor cutover policy + reconciliation (Web PR #54 merged)
 
 Web PR **#54** merged tested head `030e9d3` as `d6823514e72ea8da388ff016b9d3ccbc6c7a4ccc`. Four commits on `feat/web-ops-015-monitoring-cutover`: `f385d41` cutover policy, `e5cfa09` reconciliation module, `35c58e4` gates in legacy cron + producer, `030e9d3` test wiring. OPS-015 closes on top of the just-executed HOSTED-013 tenant/project data.
