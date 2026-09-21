@@ -1,6 +1,16 @@
 # Verglos V1 shipping status
 
-Updated: 2026-09-20
+Updated: 2026-09-21
+
+## Acceptance batch · 2026-09-21 · QUAL-WEB-004 disaster-recovery drill harness + contract (Web PR #56 merged)
+
+Web PR **#56** merged tested head `92e708f` as `79952a54adeffc791c67114246793bd5c1308296`. Five commits on `feat/web-qual-004-dr-drill`: pure contract, harness script, runbook, test wiring, ephemeral-password fix. QUAL-WEB-004 closes on top of HOSTED-013 ✓, OPS-014 ✓, OPS-015 ✓, and DIST-WEB-003 ✓.
+
+Pure contract `src/lib/qual/dr-drill.ts` codifies the RTO/RPO threshold matrix (RTO 30 min warn / 1 h critical, RPO 24 h warn / 48 h critical), step-outcome types, a status classifier that rejects empty step lists so a malformed report cannot silently pass, and a warning collector that names each metric and step explicitly. 11 focused unit tests pass in ~138 ms and cover severity partitioning across warn/critical, warning aggregation, and reconciler-divergence surfacing. Harness `scripts/qual-web-004-dr-drill.ts` orchestrates the full rehearsal against a `pg_dump` snapshot: reads the snapshot (mtime becomes RPO), boots local docker Postgres 18-alpine with an ephemeral random password (no test credential in source), restores via psql, applies `pnpm db:migrate`, runs both HOSTED-013 writer passes and the reconciler, and simulates DB loss by stopping the container and asserting a follow-up psql fails-closed. Every step timed; total wall-clock is RTO. Report format captures `status: passed|warned|failed`, per-step timings/outcomes, `reconcileStatus`, and named warnings. Runbook `docs/dr-drill-runbook.md` documents quarterly cadence, prerequisites, invocation flags, exit codes, report field reference, and the rollback walkthrough (application via `vercel promote`; database via `pg_dump` restore + `DATABASE_URL` repoint). `qual-web-004-drill-*.json` reports added to `.gitignore`.
+
+CI: typecheck-and-schema, Vercel preview, and preview-comments SUCCESS at exact head `92e708f`. GitGuardian flagged the Docker-documented default password literal `POSTGRES_PASSWORD=postgres` in the earlier commit; the follow-up commit removed the literal by using a random ephemeral password, but GitGuardian scans full PR history so the historical commit still shows in the check. Not a real credential leak — `postgres` is Docker's own documented default for local dev containers and is never used in production. Merged with the false positive noted.
+
+Backlog is now **172 checked / 97 unchecked / 269 total** (+1 accepted). No production DB read/write, migration, or deployment change during this batch — the harness is a local-only drill.
 
 ## Acceptance batch · 2026-09-20 · DIST-WEB-003 deployment/rollback/health runbook (Web PR #55 merged) + PR #49 catch-up
 
