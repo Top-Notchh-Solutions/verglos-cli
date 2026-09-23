@@ -2,6 +2,14 @@
 
 Updated: 2026-09-23
 
+## Acceptance batch · 2026-09-23 · PLAN-WEB-004 server-side authorization service (Web PR #58 merged)
+
+Web PR **#58** merged tested head `a1cdc66` as `6471f8bfa7f7122e05cd9866496a1a97a1731429`. Ships the composed authorization surface every future capability-gated route, worker, and CI-checker must call. `src/lib/organizations/authorization.ts` unifies the three orthogonal gates (membership+role → action from `access.ts`; tenant/project scoping from `auth.ts`/`scoped-db.ts`; plan → capability from `entitlement/capabilities.ts`) into one discriminated-union outcome. Denial reasons are stable and safe for 403 bodies — never leak which plan the tenant is on or which capability list they possess. Callers own the DB lookup for plan; the module is DB-free and unit-testable.
+
+Unblocks the biggest remaining dependency chain: `PLAN-WEB-009` (seat/member enforcement), `PLAN-WEB-010` (allowance enforcement), `PRO-001` through `PRO-010` (dashboard shells), and `TEAM-WEB-002` (RBAC matrix) — all had PLAN-WEB-004 as a required predecessor.
+
+9 focused unit tests pass in ~135 ms (capability absent → role/action authoritative; capability present → admit; capability absent from plan → `capability_not_available`; role denial forwarded before capability evaluation; malformed inputs rejected; project_not_found forwarded). Hosted CI: typecheck-and-schema, GitGuardian, Vercel preview, Vercel preview-comments all SUCCESS. Backlog is now **176 checked / 93 unchecked / 269 total** (+1 accepted). No production DB read/write, migration, or deployment change during this batch.
+
 ## Acceptance batch · 2026-09-23 · DIST-WEB-002 + PLAN-WEB-003 accepted operationally against Vercel production
 
 Executed the full Bucket A + Bucket B production-config sequence end-to-end against Vercel prod `anuragyadav20062002s-projects/verglos-web` after founder-provisioned Vercel + Neon tokens landed. Two acceptances flip on one production deploy, closing the last dependency-chain gaps for downstream PRO/TEAM/PLAN work.
