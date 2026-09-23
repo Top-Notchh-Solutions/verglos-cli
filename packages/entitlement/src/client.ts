@@ -44,14 +44,14 @@ import type {
  * and paste the output here.
  */
 export const PINNED_PUBLIC_KEYS_B64URL: readonly [string, string] = [
-  // current (v1, minted 2026-08-02) — server signs with the matching
-  // private key stored in Vercel env as VERGLOS_ENTITLEMENT_PRIVATE_KEY.
-  // Rotate by moving a new key into slot 0 and demoting the old one
-  // to slot 1 (successor) for a release cycle.
+  // current (v1) — server signs with the matching private key referenced
+  // by VERGLOS_ENTITLEMENT_KEY_ID=legacy-v1.
   "YFa-Ut1bGFrv--OKfyP56Dg8riD4NJ8kR0oAclidtbE",
-  // successor — reserved for the next rotation, safe to leave as
-  // the placeholder until the first rotation happens
-  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  // successor (v2) — rotation target. Server flips to this key by setting
+  // VERGLOS_ENTITLEMENT_KEY_ID=successor-v1 and signing with the matching
+  // private key. Clients verify against both slots during the transition,
+  // so a token issued under either key resolves without a CLI upgrade.
+  "xQ13ChMUWB4pBuyo47JKQvq3Xynx-TJt4_OEcb8eTj4",
 ];
 
 const OFFLINE_GRACE_MS = 7 * 24 * 60 * 60 * 1000;
