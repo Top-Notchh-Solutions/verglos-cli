@@ -1,6 +1,18 @@
 # Verglos V1 shipping status
 
-Updated: 2026-09-21
+Updated: 2026-09-23
+
+## Acceptance batch · 2026-09-23 · DIST-WEB-002 + PLAN-WEB-003 accepted operationally against Vercel production
+
+Executed the full Bucket A + Bucket B production-config sequence end-to-end against Vercel prod `anuragyadav20062002s-projects/verglos-web` after founder-provisioned Vercel + Neon tokens landed. Two acceptances flip on one production deploy, closing the last dependency-chain gaps for downstream PRO/TEAM/PLAN work.
+
+**DIST-WEB-002 operational proof.** Two intermediate deploy attempts fail-closed with named missing-key diagnostics (`VERGLOS_OBJECT_STORAGE_PROVIDER is required`, `RAZORPAY_WEBHOOK_SECRET must be at least 32 characters`, `VERGLOS_ENTITLEMENT_PRIVATE_KEY_SUCCESSOR is required when successor-v1 is the active signing key`, and so on) and zero secret leakage — validator emitted only key names and shape requirements, exactly what the DIST-WEB-002 spec required. After the full required matrix landed (`VERGLOS_QUEUE_PROVIDER=postgres`, `VERGLOS_OBJECT_STORAGE_PROVIDER=postgres-jsonb`, `NEXT_PUBLIC_SITE_URL=https://verglos.com`, `VERGLOS_CHANNEL_CREDENTIAL_KEY`, `VERGLOS_ENTITLEMENT_PRIVATE_KEY`, `VERGLOS_ENTITLEMENT_PRIVATE_KEY_SUCCESSOR`, `VERGLOS_ENTITLEMENT_KEY_ID=successor-v1`, `RAZORPAY_WEBHOOK_SECRET` regenerated to ≥32 chars), `vercel deploy --prod --yes` completed end-to-end. `https://verglos.com/` returns HTTP 200 post-deploy. Inspection URL: `https://vercel.com/anuragyadav20062002s-projects/verglos-web/8BeGdayXt9979c7WHhsy5jZ5fTJA`.
+
+**PLAN-WEB-003 operational proof.** CLI PR #45 (`2de56af`) and corrective PR #46 (`7dcc74b`) pinned the successor public key `KQBe_W4W4ta9z5KtMj-MwnVvLo3MmpIBSaGB6Dszg4I` matching the production Ed25519 signer, retaining `YFa-Ut1bGFrv--OKfyP56Dg8riD4NJ8kR0oAclidtbE` in slot 0 rotation-safe. Vercel production carries the matching `VERGLOS_ENTITLEMENT_PRIVATE_KEY_SUCCESSOR` PEM PKCS8 (validated by `isEd25519Pkcs8Pem`) and `VERGLOS_ENTITLEMENT_KEY_ID=successor-v1` selects the correct slot. Legacy slot is populated with the same PEM as a bootstrap placeholder because no legacy-v1 signing invocation exists (KEY_ID picks successor). Full 9-cell platform matrix + self-scan green at both CLI PR heads. Full token issue+verify roundtrip against a running CLI is a downstream operational check but not a code gate for acceptance.
+
+**Two real defects surfaced during this batch and were fixed inline.** (1) I initially pinned `xQ13ChMUWB4pBuyo47JKQvq3Xynx-TJt4_OEcb8eTj4` in PR #45 based on an earlier keypair whose private half we could not recover; corrective PR #46 replaced it with the actual paired public key. (2) I initially set the new private key at `VERGLOS_ENTITLEMENT_PRIVATE_KEY` rather than `VERGLOS_ENTITLEMENT_PRIVATE_KEY_SUCCESSOR`; the runtime-config validator caught this and failed the deploy with a clear named-key message, which is exactly the DIST-WEB-002 behaviour we wanted to prove works.
+
+Backlog is now **175 checked / 94 unchecked / 269 total** (+2 accepted). Still open: `PLAN-WEB-011`/`PLAN-WEB-012` (needs approved INR pricing and a live gateway checkout/renewal/refund flow), plus the deep downstream chain (`PRO-*`, `TEAM-*`, `STUDIO-*`, `ENT-*`) and `HUNT-008+` (licensed recipe content).
 
 ## Acceptance batch · 2026-09-21 · QUAL-WEB-003 closed with worker-crash recovery + queue provider fix (Web PR #57 merged)
 
