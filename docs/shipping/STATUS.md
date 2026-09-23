@@ -2,6 +2,16 @@
 
 Updated: 2026-09-23
 
+## Acceptance batch · 2026-09-23 · PLAN-WEB-009 + PLAN-WEB-010 catalog-allowance resource admission (Web PR #59 merged)
+
+Web PR **#59** merged tested head `363a714` as `1a937c11d59db1c90c0965e8869ff32b7d52bad7`. Ships `src/lib/plan/resource-admission.ts`, the pure decision surface that gates creation of tenant-scoped resources whose ceiling is a per-plan catalog allowance: `seats` (PLAN-WEB-009), `applications` (projects) and `clients` (PLAN-WEB-010). Retention days is already governed by OPS-011 `retention-policy.ts`; records/traffic/verification/managed-run/alert dimensions are governed by PLAN-WEB-005/006/007/008.
+
+Rules: numeric allowance admits until `currentCount + requestCount <= allowance`; `"unset"` denies with `allowance_not_configured` (never assume unlimited); `"contracted"` admits Enterprise with `overageMarker: "contracted"` so downstream contract-lookup binds the exact ceiling; zero admits nothing (explicit "not offered at this tier"). Multi-request batch admission covers invitation batches in one race-free call. Denial reasons are stable and 403-safe — they name dimension/count/limit but never the plan.
+
+Together with the three retention/ingestion/quota modules already on main, the complete PLAN-WEB-010 enforcement surface is now in place: **applications and clients gated at insert time; records/traffic gated at ingest via the ledger reserve/commit path; retention gated at row-age check time.** Route consumers (PRO-*, TEAM-*) will thread these through the PLAN-WEB-004 composed authorization surface when they wire.
+
+10 focused unit tests pass in ~96ms (boundary, batch, unset denial, contracted admit, zero denial, unknown-dimension rejection, malformed-quantity rejection, safe-integer overflow, dimension-set audit). Hosted CI green at exact head `363a714`. Backlog is now **178 checked / 91 unchecked / 269 total** (+2 accepted). No production change during this batch.
+
 ## Acceptance batch · 2026-09-23 · PLAN-WEB-004 server-side authorization service (Web PR #58 merged)
 
 Web PR **#58** merged tested head `a1cdc66` as `6471f8bfa7f7122e05cd9866496a1a97a1731429`. Ships the composed authorization surface every future capability-gated route, worker, and CI-checker must call. `src/lib/organizations/authorization.ts` unifies the three orthogonal gates (membership+role → action from `access.ts`; tenant/project scoping from `auth.ts`/`scoped-db.ts`; plan → capability from `entitlement/capabilities.ts`) into one discriminated-union outcome. Denial reasons are stable and safe for 403 bodies — never leak which plan the tenant is on or which capability list they possess. Callers own the DB lookup for plan; the module is DB-free and unit-testable.
