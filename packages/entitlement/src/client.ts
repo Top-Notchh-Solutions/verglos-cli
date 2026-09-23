@@ -51,7 +51,7 @@ export const PINNED_PUBLIC_KEYS_B64URL: readonly [string, string] = [
   // VERGLOS_ENTITLEMENT_KEY_ID=successor-v1 and signing with the matching
   // private key. Clients verify against both slots during the transition,
   // so a token issued under either key resolves without a CLI upgrade.
-  "xQ13ChMUWB4pBuyo47JKQvq3Xynx-TJt4_OEcb8eTj4",
+  "KQBe_W4W4ta9z5KtMj-MwnVvLo3MmpIBSaGB6Dszg4I",
 ];
 
 const OFFLINE_GRACE_MS = 7 * 24 * 60 * 60 * 1000;
