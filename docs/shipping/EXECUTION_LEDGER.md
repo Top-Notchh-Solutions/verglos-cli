@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-24 · PRO-004 canonical findings accepted (Web PR #67)
+
+- **Implementation:** Web commits `1ecf1c4` and `9ec9108`; exact head `9ec910824dd12b4d75757ca44757236d36739d0e`; PR #67 merged as `036ae3be09399c48caa34d2e41bba72f8a9df053`.
+- **Boundary:** server-rendered tenant-scoped finding groups/detail; fingerprint grouping only for valid persisted SHA-256 identity; exact subject and producer/run/release lineage; bounded metadata projection; raw evidence remains a digest reference; Hunt eligibility is explicit-only. No migration or production DB operation.
+- **Verification:** local focused 10/10, full suite 394 total / 372 pass / 22 environment skips, typecheck/build/diff check green. Added hosted PostgreSQL execution proving canonical grouping, lineage, and foreign-tenant exclusion. Protected CI, GitGuardian, and Vercel passed at exact head.
+- **Acceptance/tracking:** PRO-004 accepted; **184 checked / 85 unchecked / 269 total**. Next Epic 13 batch is PRO-005.
+
 ## 2026-09-24 · PR #50–66 ledger catch-up and PRO-003 accepted (Web PR #66)
 
 - **Why this entry exists:** BACKLOG had continued through PR #65 while STATUS stopped at PR #59 and TRACEABILITY/EXECUTION_LEDGER stopped at PR #49. The private worktree remains authoritative; the public CLI mirror was not modified.

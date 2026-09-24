@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-09-24 · PRO-004 (Web PR #67)
+
+- **Implementation:** Web `1ecf1c4` plus PostgreSQL fixture `9ec9108`, merged as `036ae3b`.
+- **Evidence:** tenant-scoped canonical finding groups, bounded detail/metadata projection, exact subject and producer/run/release lineage, explicit-only Hunt eligibility, and fail-closed detail selection. Hosted PostgreSQL executes and verifies the repository's grouping and foreign-tenant exclusion path.
+- **Authoritative result:** **184 checked / 85 unchecked / 269 total**. PRO-005 through PRO-010 remain open; no claim of production dashboard usage or final V1 acceptance is made.
+
 ## Acceptance/reconciliation · 2026-09-24 · Web PRs #50–66, through PRO-003
 
 - **Authoritative result:** the backlog now records **183 checked / 86 unchecked / 269 total**. This catch-up closes the traceability-document lag without changing any earlier acceptance decision.

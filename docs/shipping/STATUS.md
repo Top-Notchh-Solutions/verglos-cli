@@ -2,6 +2,16 @@
 
 Updated: 2026-09-24
 
+## Acceptance batch · 2026-09-24 · PRO-004 canonical findings list/detail (Web PR #67 merged)
+
+Web PR **#67** merged tested head `9ec910824dd12b4d75757ca44757236d36739d0e` as `036ae3be09399c48caa34d2e41bba72f8a9df053`. The Findings scaffold is now a server-rendered, tenant-scoped operator view: 20 canonical groups per page, severity/application-first information architecture, exact subject identity, rule and producer lineage, observation count, recency, and a bounded detail panel with per-observation run/release/status/coverage/confidence and raw-evidence digest references.
+
+Canonicalization is evidence-led: only an exact stored lowercase `sha256:` fingerprint collapses observations for the same subject. Missing or malformed fingerprints fall back to the stable observation ID, so the dashboard never invents equivalence. Presentation projects only allowlisted, length-bounded metadata fields; it does not render raw evidence. Hunt eligibility is displayed only from an explicit stored projection and otherwise remains `not-evaluated`, never inferred from severity or a producer name. Every mandatory tenant-owned join uses `tenantWhere`; optional tool-run/release joins carry organization and project predicates; malformed or foreign detail selectors return no panel.
+
+Verification: focused pure/static tests pass 10/10 locally; the full local suite reported 394 total / 372 passed / 22 environment-gated skips; typecheck, production build, and diff check pass. A follow-up PostgreSQL integration fixture executes the repository SQL and proves canonical grouping, preserved producer/release lineage, and exclusion of an identical fingerprint owned by another tenant. The protected hosted workflow, GitGuardian, Vercel preview, and preview comments all passed at exact head `9ec9108`. The unrelated user-owned `.gitignore` edit remained unstaged. No schema migration, production DB operation, public-route change, or raw-evidence custody change occurred.
+
+PRO-004 is accepted. Backlog is now **184 checked / 85 unchecked / 269 total**. Next dependency-ready Epic 13 item is PRO-005.
+
 ## Acceptance batch · 2026-09-24 · PRO-003 Releases/application views + PR #60–66 ledger reconciliation
 
 Web PR **#66** merged tested head `1a43e9b50acbadbb42d5161b19049f761cad04fa` as `10161a4568dd03c14848ced7c311ec792c2212b5`. The two PRO-003 scaffolds are now real, server-rendered operator surfaces. Releases paginate at 20 rows and show exact subject ID/kind/digest, policy digest, canonical decision, signer state, producer-declared coverage class/status, explicit limitations, and an evidence-warning block. Missing queryable coverage remains visible even beside `PASS`; `INCOMPLETE` never inherits success styling. A tenant-scoped release-history window reports decision, subject, policy, and coverage deltas against the immediately preceding application release. Applications paginate independently and show project state, release count, latest exact release, coverage, signer state, and a tenant-bound release filter.
