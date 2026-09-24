@@ -1,6 +1,16 @@
 # Verglos V1 shipping status
 
-Updated: 2026-09-23
+Updated: 2026-09-24
+
+## Acceptance batch · 2026-09-24 · PRO-003 Releases/application views + PR #60–66 ledger reconciliation
+
+Web PR **#66** merged tested head `1a43e9b50acbadbb42d5161b19049f761cad04fa` as `10161a4568dd03c14848ced7c311ec792c2212b5`. The two PRO-003 scaffolds are now real, server-rendered operator surfaces. Releases paginate at 20 rows and show exact subject ID/kind/digest, policy digest, canonical decision, signer state, producer-declared coverage class/status, explicit limitations, and an evidence-warning block. Missing queryable coverage remains visible even beside `PASS`; `INCOMPLETE` never inherits success styling. A tenant-scoped release-history window reports decision, subject, policy, and coverage deltas against the immediately preceding application release. Applications paginate independently and show project state, release count, latest exact release, coverage, signer state, and a tenant-bound release filter.
+
+Every tenant-owned query in the new repository carries `tenantWhere`, including each joined table. Unknown application filters resolve to zero rows instead of widening to all releases. The shared request-memoized dashboard guard now resolves authenticated user + active organization slug + active membership in one joined query, fixing the PRO-001 shell's earlier `findFirst(userId)` behavior for a user with multiple organization memberships. No schema migration, public-route change, production DB write, or client-side state bundle was introduced.
+
+Verification: local `pnpm test` reported 394 total / 372 passed / 22 environment-gated skips; the new dashboard suite passes 6/6; `pnpm typecheck`, `pnpm build`, and `git diff --check` pass. Hosted `Verify web` typecheck/tests/schema/migrations/build, GitGuardian, Vercel preview, and preview comments all succeeded at exact head. The pre-existing user-owned `.gitignore` edit remained unstaged and was not included.
+
+This entry also reconciles the status gap after PR #59: PR #60 shipped TEAM-WEB-001 invitation substrate (progress), PR #61 completed TEAM-WEB-001 routes/audit and acceptance, PR #62 accepted TEAM-WEB-002, PR #63 recorded TEAM-WEB-003 lifecycle substrate progress, PR #64 accepted PRO-001, and PR #65 accepted PRO-002. Their detailed acceptance evidence remains in the authoritative backlog entries and private commits `e11cc1e` through `4195e4e`. Backlog is now **183 checked / 86 unchecked / 269 total**. Next dependency-ready item in Epic 13 is PRO-004.
 
 ## Acceptance batch · 2026-09-23 · PLAN-WEB-009 + PLAN-WEB-010 catalog-allowance resource admission (Web PR #59 merged)
 

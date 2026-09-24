@@ -1,5 +1,14 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-24 · PR #50–66 ledger catch-up and PRO-003 accepted (Web PR #66)
+
+- **Why this entry exists:** BACKLOG had continued through PR #65 while STATUS stopped at PR #59 and TRACEABILITY/EXECUTION_LEDGER stopped at PR #49. The private worktree remains authoritative; the public CLI mirror was not modified.
+- **Reconciled accepted work:** PR #50 PLAN-WEB-005/006; #51 PLAN-WEB-007/008; #53 HOSTED-013 execution; #54 OPS-015; #55 DIST-WEB-003; #56 QUAL-WEB-004; #57 QUAL-WEB-003; #58 PLAN-WEB-004; #59 PLAN-WEB-009/010; #61 TEAM-WEB-001; #62 TEAM-WEB-002; #64 PRO-001; #65 PRO-002. PR #52 is superseded progress; #60 and #63 remain progress as recorded in BACKLOG.
+- **Implementation:** PR #66 exact head `1a43e9b50acbadbb42d5161b19049f761cad04fa`, merged as `10161a4568dd03c14848ced7c311ec792c2212b5`. Added request-memoized authenticated dashboard access; tenant-scoped release/application repositories; 20-row bounded pagination; exact subject/policy/decision/signer/coverage presentation; release-history deltas; explicit limitation/incomplete warnings; project latest-release summaries; fail-closed application filters; and six pure/static boundary tests. The Home and layout now share the same membership-safe guard.
+- **Evidence:** local full web suite 394 total / 372 pass / 22 environment-gated skips; focused dashboard 6/6; typecheck and optimized Next.js build pass under the available Node 26 runtime (repository declares Node 22 and emits the expected engine warning). Hosted Node 22 workflow completed typecheck, full tests, schema check, migration check, build, public-boundary/dependency/license/SBOM/secret steps successfully. GitGuardian and Vercel preview succeeded.
+- **Operations:** no production DB read/write, migration, production deployment, payment action, customer communication, or public marketing change. PR preview deployment only. Existing user-owned web `.gitignore` edit was excluded from the commit.
+- **Acceptance/tracking:** PRO-003 is accepted. Recount: **183 checked / 86 unchecked / 269 total**. PRO-004 is the next dependency-ready Epic 13 item.
+
 ## 2026-09-20 · PLAN-WEB-011/012 code qualification complete; commercial/production evidence open (Web PR #49)
 
 - **Code / scope:** pushed Web commit `b103d9e5793913b52207af0497586159dc16cc15` on PR #49. The catalog alone supplies checkout amount/duration; an HMAC snapshot binds the user, one-time checkout, channel, plan, cadence, INR amount, entitlement days, and catalog version. QR status is owner-bound/read-only. Only captured exact-match QR credits and subscription charges grant access. Migration `0018` and the serialized immutable ledger cover renewal, failure, lifecycle ordering, replay/conflict, partial/full refund, natural expiry, and founder/legacy preservation.

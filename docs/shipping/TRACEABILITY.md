@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## Acceptance/reconciliation · 2026-09-24 · Web PRs #50–66, through PRO-003
+
+- **Authoritative result:** the backlog now records **183 checked / 86 unchecked / 269 total**. This catch-up closes the traceability-document lag without changing any earlier acceptance decision.
+- **PR #50–59 chain:** PLAN-WEB-005/006, PLAN-WEB-007/008, HOSTED-013 production execution/reconciliation, OPS-015, DIST-WEB-003, QUAL-WEB-004, QUAL-WEB-003, PLAN-WEB-004, and PLAN-WEB-009/010 are accepted; PR #52 was progress later superseded by PR #57. Exact evidence is retained in the corresponding backlog entries and STATUS batches.
+- **PR #60–63 chain:** TEAM-WEB-001 invitation substrate in PR #60 was progress and its route/audit completion in PR #61 is accepted; TEAM-WEB-002 is accepted at PR #62; TEAM-WEB-003 PR #63 remains progress because transition/rollback HTTP routes and state-change audit rows are still missing.
+- **PRO-001:** Web `1eae188`, PR #64, merge `53a1ba3`; authenticated organization shell and nine-route IA, public routes untouched.
+- **PRO-002:** Web `0f01761`, PR #65, merge `22a3c13`; decision-first Home with tenant-scoped release/application/exception/member slices.
+- **PRO-003:** Web `1a43e9b`, PR #66, merge `10161a4`; tenant-scoped paginated Releases/Applications, exact evidence identity, release deltas, signer/coverage/limitation state, fail-closed filters, shared multi-membership-safe dashboard auth. Hosted build/test/security/preview checks green at exact head.
+- **Truth boundary:** no entry above claims production dashboard usage, customer acceptance, complete tool-run ingestion, or final V1 acceptance. PRO-004 through PRO-010 remain open.
+
 ## Progress · 2026-09-20 · PLAN-WEB-011/012 billing integrity
 
 Web PR **#49** exact head `b103d9e5793913b52207af0497586159dc16cc15` removes environment-driven price/duration duplication and derives checkout only from the versioned server catalog. Signed immutable snapshots bind user, one-time checkout ID, payment channel, plan, cadence, INR amount, entitlement duration, and catalog version. QR status is authenticated, owner-bound, read-only, and only reveals paid/license state after webhook-ledger credit. Webhooks grant only captured QR credits or subscription charges with exact signed amount/currency/channel; authentication/activation/cancel/halt do not pre-grant or prematurely revoke access.
