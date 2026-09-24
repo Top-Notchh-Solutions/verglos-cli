@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-09-24 · PRO-005 (Web PR #68)
+
+- **Implementation:** Web `0b4da64` plus deterministic-test correction `5dd54a8`, merged as `c54f19a`.
+- **Evidence:** tenant-scoped released inventory, registration completed/successful state, advisory freshness/matches, retry/dead-letter failures, and explicit-only affected-release linkage. Hosted PostgreSQL proves the aggregate query and foreign-tenant exclusion.
+- **Authoritative result:** **185 checked / 84 unchecked / 269 total**. PRO-006 through PRO-010 remain open; no production monitoring success or customer usage is inferred.
+
 ## Acceptance · 2026-09-24 · PRO-004 (Web PR #67)
 
 - **Implementation:** Web `1ecf1c4` plus PostgreSQL fixture `9ec9108`, merged as `036ae3b`.

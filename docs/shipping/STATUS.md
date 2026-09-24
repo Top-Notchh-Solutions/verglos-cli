@@ -2,6 +2,16 @@
 
 Updated: 2026-09-24
 
+## Acceptance batch · 2026-09-24 · PRO-005 monitoring/inventory (Web PR #68 merged)
+
+Web PR **#68** merged tested head `5dd54a816fa400c483110b1b5342ed3758aa888d` as `c54f19aa7d4dbe8a9d4af6315b4158f253843df2`. The Monitoring scaffold is now a tenant-scoped server surface over the HOSTED-008 and OPS-015 truth: cutover-route state, monitor registrations, released components, advisory freshness/matches, retry and dead-letter failures, and bounded component detail.
+
+Completed and successful checks remain distinct. Registration success is withheld when an incomplete marker is at least as recent as the completed check; components distinguish fresh, stale, incomplete, and never-checked states. Queue failures expose only stable error codes and attempt counts, never job payloads or channel credentials. Affected releases are displayed only from explicit bounded `releaseIds` stored on advisory metadata and revalidated through organization+project-scoped release queries. When that evidence is absent, the UI says linkage is unrecorded rather than inferring that every release in the project is affected.
+
+Verification: local focused/pretest 13 passed with 2 environment-gated PostgreSQL fixtures, full configured suite 394 total / 372 passed / 22 local environment skips, typecheck, optimized build, and diff check green. Hosted PostgreSQL ran both dashboard repository fixtures with zero skips and proved aggregate/freshness semantics, exact release linkage, queue failure projection, and foreign-tenant exclusion. The first hosted run's new monitoring tests passed but an older random invitation-digest test exposed a 1-in-16 false tamper; `5dd54a8` makes the tamper deterministically different without changing production code. The exact-head rerun passed protected tests/schema/migrations/build, GitGuardian, and Vercel.
+
+PRO-005 is accepted. Backlog is now **185 checked / 84 unchecked / 269 total**. PRO-006 is next.
+
 ## Acceptance batch · 2026-09-24 · PRO-004 canonical findings list/detail (Web PR #67 merged)
 
 Web PR **#67** merged tested head `9ec910824dd12b4d75757ca44757236d36739d0e` as `036ae3be09399c48caa34d2e41bba72f8a9df053`. The Findings scaffold is now a server-rendered, tenant-scoped operator view: 20 canonical groups per page, severity/application-first information architecture, exact subject identity, rule and producer lineage, observation count, recency, and a bounded detail panel with per-observation run/release/status/coverage/confidence and raw-evidence digest references.

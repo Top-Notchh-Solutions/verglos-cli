@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-24 · PRO-005 monitoring/inventory accepted (Web PR #68)
+
+- **Implementation:** Web `0b4da64`, exact tested head `5dd54a816fa400c483110b1b5342ed3758aa888d`, merged as `c54f19aa7d4dbe8a9d4af6315b4158f253843df2`.
+- **Boundary:** tenant-scoped registrations, released component inventory, advisory/freshness state, bounded retry/dead-letter codes, and affected releases only from explicit stored release IDs. No credential projection, schema migration, production DB operation, or project-level affected-release inference.
+- **Verification:** local full 394 total / 372 pass / 22 environment skips, focused dashboard tests/typecheck/build/diff green. Hosted PostgreSQL executed both dashboard repositories with zero skips. Initial hosted failure was an unrelated 1-in-16 invitation test defect; the deterministic test correction rerun passed all protected checks.
+- **Acceptance/tracking:** PRO-005 accepted; **185 checked / 84 unchecked / 269 total**. PRO-006 next.
+
 ## 2026-09-24 · PRO-004 canonical findings accepted (Web PR #67)
 
 - **Implementation:** Web commits `1ecf1c4` and `9ec9108`; exact head `9ec910824dd12b4d75757ca44757236d36739d0e`; PR #67 merged as `036ae3be09399c48caa34d2e41bba72f8a9df053`.
