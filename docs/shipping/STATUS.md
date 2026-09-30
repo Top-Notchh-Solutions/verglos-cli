@@ -587,3 +587,6 @@ The repository's real public-package path was executed locally on the current CL
 ## 2026-09-30 · QUAL-CLI-006 compatibility/rollback corpus evidence
 
 Focused current-code evidence also passes: `packages/shared/src/install-matrix-invariants.test.ts`, `packages/shared/src/upgrade-compat-corpus.test.ts`, and `packages/cli/src/engines-install.test.ts` run via the repository's local tsx launcher with **48/48 passing**. This covers package install invariants, schema/record backward compatibility, approved engine update/rollback labeling, digest/signature checks, and fail-closed paths. It strengthens the contract evidence but is not a substitute for a real cross-OS install/upgrade/rollback run; QUAL-CLI-006 remains unchecked pending that evidence and official in-toto/Sigstore validation.
+## 2026-09-30 · QUAL-CLI-006 Linux clean-consumer evidence
+
+The same six-archive clean-consumer verifier was executed inside the pinned local `node:24-bookworm` Linux container (linux/amd64 under host emulation) and passed: all archives installed, all libraries imported, the CLI reported `2.0.0-alpha.1`, and no external engine cache was created. Combined with the macOS host run, this adds direct Linux/macOS install evidence. Windows, upgrade/rollback as a real package transition, and official in-toto/Sigstore validation remain open; QUAL-CLI-006 stays unchecked.

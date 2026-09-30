@@ -680,3 +680,8 @@ while they remain unresolved.
 - **Run:** repository-local tsx launcher executed `packages/shared/src/install-matrix-invariants.test.ts`, `packages/shared/src/upgrade-compat-corpus.test.ts`, and `packages/cli/src/engines-install.test.ts`.
 - **Result:** **48/48 passed**. The run covers no-install-hook/explicit-files/engines/bin invariants, legacy/current schema and record compatibility, approved engine update and rollback mutation labels, digest/signature validation, and fail-closed invalid/symlink cases.
 - **Boundary:** source-level and local macOS evidence only; it does not prove a real Linux/Windows install/upgrade/rollback workflow or official in-toto/Sigstore trust validation. QUAL-CLI-006 remains unchecked.
+## 2026-09-30 · QUAL-CLI-006 Linux clean-consumer evidence
+
+- **Run:** `docker run --rm -v "$PWD:/work" -w /work node:24-bookworm node scripts/verify-clean-consumer.mjs .artifacts/public-packages`.
+- **Result:** Linux `node:24-bookworm` (linux/amd64 under host emulation) installed all six archives, imported every public library, executed `Verglos 2.0.0-alpha.1`, and created no external engine cache.
+- **Boundary:** direct Linux/macOS install evidence now exists. Windows install, real package upgrade/rollback transition, and official in-toto/Sigstore trust validation remain absent; QUAL-CLI-006 remains unchecked.
