@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · Web PostgreSQL contention isolation follow-up
+
+The local all-in-one `pnpm test` attempt associated with Web PR #119 exposed duplicate `pgcrypto` extension/deadlock failures only when several integration files shared one disposable database concurrently. Re-running the three affected files sequentially against a fresh disposable PostgreSQL 15 container passes **4/4 with zero failures** (`worker-crash-recovery` 2/2, usage ledger 1/1, threshold outbox 1/1). Hosted PR #119 run `36741825859` was already green. This is test-environment contention, not evidence of a product regression; no code or checkbox changed and no production operation occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 direct tenant data-route runtime (Web PR #119)
 
 Web PR #119 tested head `87f424cbfd93bd3d54232a66a29664c517b4d514` and merged as `1834f442086ab79862eb62984bc4111def3ad923`. The real PostgreSQL-backed evidence and policy-evaluation handlers now have a focused runtime integration: two isolated tenants, forged organization/project/tenant query fields, authorized writes, subject/release binding, and `private, no-store` responses. The focused disposable Docker PostgreSQL run passes 1/1; local typecheck, Drizzle schema check, 21-migration ordering check, and production build pass. Hosted run `36741825859` is green for the full configured test command, typecheck, schema/migrations, build, public-boundary, dependency, SBOM/license, and tracked-secret checks. A local all-in-one database run also exposed pre-existing concurrent integration-test extension/deadlock contention; it is not represented as green evidence. QUAL-WEB-001 remains unchecked: distinct search/export semantics and the complete runtime matrix remain open. No production database/environment operation or deployment occurred.

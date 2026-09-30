@@ -1,5 +1,10 @@
 # Verglos V1 traceability
 
+## Verification follow-up · 2026-09-30 · Web PostgreSQL contention isolation
+
+- **Evidence:** Fresh disposable PostgreSQL 15 container, sequential focused runs: worker-crash recovery 2/2, usage ledger 1/1, threshold outbox 1/1; total 4/4 with zero failures. The prior local all-in-one failure was concurrent extension/deadlock contention; hosted PR #119 remains green.
+- **Boundary:** No implementation or checkbox changed. This narrows the local failure to shared-test-database concurrency and does not replace hosted or full-suite evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 direct tenant data-route runtime (Web PR #119)
 
 - **Implementation:** Web `87f424cbfd93bd3d54232a66a29664c517b4d514`, merged as `1834f442086ab79862eb62984bc4111def3ad923`.

@@ -1,5 +1,10 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · Web PostgreSQL contention isolation follow-up
+
+- **Verification:** On a fresh disposable PostgreSQL 15 container, the three files implicated by the local all-in-one run pass sequentially: `worker-crash-recovery.integration.test.ts` 2/2, `ledger.integration.test.ts` 1/1, and `threshold-outbox.integration.test.ts` 1/1; 4/4 total.
+- **Interpretation:** The earlier duplicate-extension/deadlock failures require concurrent sharing of one local database; they do not reproduce in isolated sequential runs and are superseded by hosted PR #119's green full workflow. No code, checkbox, or production state changed.
+
 ## 2026-09-30 · QUAL-WEB-001 direct tenant data-route runtime (Web PR #119)
 
 - **Code:** Web tested head `87f424cbfd93bd3d54232a66a29664c517b4d514`; merged as `1834f442086ab79862eb62984bc4111def3ad923`.
