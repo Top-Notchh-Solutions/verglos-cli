@@ -12,9 +12,711 @@
   "components": [
     {
       "type": "library",
-      "bom-ref": "pkg:npm/@hono/node-server@1.19.14",
+      "bom-ref": "pkg:npm/@esbuild/aix-ppc64@0.28.1",
+      "name": "@esbuild/aix-ppc64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/android-arm@0.28.1",
+      "name": "@esbuild/android-arm",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/android-arm64@0.28.1",
+      "name": "@esbuild/android-arm64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/android-x64@0.28.1",
+      "name": "@esbuild/android-x64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/darwin-arm64@0.28.1",
+      "name": "@esbuild/darwin-arm64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/darwin-x64@0.28.1",
+      "name": "@esbuild/darwin-x64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/freebsd-arm64@0.28.1",
+      "name": "@esbuild/freebsd-arm64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/freebsd-x64@0.28.1",
+      "name": "@esbuild/freebsd-x64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/linux-arm@0.28.1",
+      "name": "@esbuild/linux-arm",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/linux-arm64@0.28.1",
+      "name": "@esbuild/linux-arm64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/linux-ia32@0.28.1",
+      "name": "@esbuild/linux-ia32",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/linux-loong64@0.28.1",
+      "name": "@esbuild/linux-loong64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/linux-mips64el@0.28.1",
+      "name": "@esbuild/linux-mips64el",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/linux-ppc64@0.28.1",
+      "name": "@esbuild/linux-ppc64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/linux-riscv64@0.28.1",
+      "name": "@esbuild/linux-riscv64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/linux-s390x@0.28.1",
+      "name": "@esbuild/linux-s390x",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/linux-x64@0.28.1",
+      "name": "@esbuild/linux-x64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/netbsd-arm64@0.28.1",
+      "name": "@esbuild/netbsd-arm64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/netbsd-x64@0.28.1",
+      "name": "@esbuild/netbsd-x64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/openbsd-arm64@0.28.1",
+      "name": "@esbuild/openbsd-arm64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/openbsd-x64@0.28.1",
+      "name": "@esbuild/openbsd-x64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/openharmony-arm64@0.28.1",
+      "name": "@esbuild/openharmony-arm64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/sunos-x64@0.28.1",
+      "name": "@esbuild/sunos-x64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/win32-arm64@0.28.1",
+      "name": "@esbuild/win32-arm64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/win32-ia32@0.28.1",
+      "name": "@esbuild/win32-ia32",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@esbuild/win32-x64@0.28.1",
+      "name": "@esbuild/win32-x64",
+      "version": "0.28.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/evanw/esbuild.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@gar/promise-retry@1.0.3",
+      "name": "@gar/promise-retry",
+      "version": "1.0.3",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git://github.com/wraithgar/node-promise-retry.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@hono/node-server@1.19.17",
       "name": "@hono/node-server",
-      "version": "1.19.14",
+      "version": "1.19.17",
       "scope": "optional",
       "licenses": [
         {
@@ -64,6 +766,32 @@
     },
     {
       "type": "library",
+      "bom-ref": "pkg:npm/@noble/hashes@1.4.0",
+      "name": "@noble/hashes",
+      "version": "1.4.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://paulmillr.com/noble/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "bom-ref": "pkg:npm/@nodelib/fs.scandir@2.1.5",
       "name": "@nodelib/fs.scandir",
       "version": "2.1.5",
@@ -78,7 +806,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/nodelib/nodelib/tree/master#readme"
+          "url": "https://github.com/nodelib/nodelib/tree/master/packages/fs/fs.scandir"
         }
       ],
       "properties": [
@@ -104,7 +832,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/nodelib/nodelib/tree/master#readme"
+          "url": "https://github.com/nodelib/nodelib/tree/master/packages/fs/fs.stat"
         }
       ],
       "properties": [
@@ -130,7 +858,839 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/nodelib/nodelib/tree/master#readme"
+          "url": "https://github.com/nodelib/nodelib/tree/master/packages/fs/fs.walk"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@npmcli/agent@4.0.2",
+      "name": "@npmcli/agent",
+      "version": "4.0.2",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/npm/agent#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@npmcli/fs@5.0.0",
+      "name": "@npmcli/fs",
+      "version": "5.0.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/npm/fs.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@npmcli/redact@4.0.0",
+      "name": "@npmcli/redact",
+      "version": "4.0.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/npm/redact.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-cms@2.9.4",
+      "name": "@peculiar/asn1-cms",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/cms#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-csr@2.9.4",
+      "name": "@peculiar/asn1-csr",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/csr#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-ecc@2.9.4",
+      "name": "@peculiar/asn1-ecc",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/ecc#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-pfx@2.9.4",
+      "name": "@peculiar/asn1-pfx",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/pfx#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-pkcs8@2.9.4",
+      "name": "@peculiar/asn1-pkcs8",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/pkcs8#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-pkcs9@2.9.4",
+      "name": "@peculiar/asn1-pkcs9",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/pkcs9#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-rsa@2.9.4",
+      "name": "@peculiar/asn1-rsa",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/rsa#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-schema@2.9.4",
+      "name": "@peculiar/asn1-schema",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/schema#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-x509-attr@2.9.4",
+      "name": "@peculiar/asn1-x509-attr",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/x509-attr#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/asn1-x509@2.9.4",
+      "name": "@peculiar/asn1-x509",
+      "version": "2.9.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/asn1-schema/tree/master/packages/x509#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/json-schema@1.1.12",
+      "name": "@peculiar/json-schema",
+      "version": "1.1.12",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/json-schema#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/utils@2.0.3",
+      "name": "@peculiar/utils",
+      "version": "2.0.3",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/pvtsutils#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/webcrypto@1.7.1",
+      "name": "@peculiar/webcrypto",
+      "version": "1.7.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/webcrypto#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@peculiar/x509@1.14.3",
+      "name": "@peculiar/x509",
+      "version": "1.14.3",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/x509#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@sigstore/bundle@4.0.0",
+      "name": "@sigstore/bundle",
+      "version": "4.0.0",
+      "scope": "required",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/sigstore/sigstore-js/tree/main/packages/bundle#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@sigstore/core@3.2.1",
+      "name": "@sigstore/core",
+      "version": "3.2.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/sigstore/sigstore-js/tree/main/packages/core#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@sigstore/mock@0.12.0",
+      "name": "@sigstore/mock",
+      "version": "0.12.0",
+      "scope": "required",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/sigstore/sigstore-js/tree/main/packages/mock#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@sigstore/protobuf-specs@0.5.2",
+      "name": "@sigstore/protobuf-specs",
+      "version": "0.5.2",
+      "scope": "required",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/sigstore/protobuf-specs#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@sigstore/sign@4.1.1",
+      "name": "@sigstore/sign",
+      "version": "4.1.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/sigstore/sigstore-js/tree/main/packages/sign#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@sigstore/tuf@4.0.2",
+      "name": "@sigstore/tuf",
+      "version": "4.0.2",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/sigstore/sigstore-js/tree/main/packages/tuf#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@sigstore/verify@3.1.1",
+      "name": "@sigstore/verify",
+      "version": "3.1.1",
+      "scope": "required",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/sigstore/sigstore-js/tree/main/packages/verify#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@tufjs/canonical-json@2.0.0",
+      "name": "@tufjs/canonical-json",
+      "version": "2.0.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/theupdateframework/tuf-js/tree/main/packages/canonical-json#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@tufjs/models@4.1.0",
+      "name": "@tufjs/models",
+      "version": "4.1.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/theupdateframework/tuf-js/tree/main/packages/models#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@turbo/darwin-64@2.10.6",
+      "name": "@turbo/darwin-64",
+      "version": "2.10.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://turborepo.dev"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@turbo/darwin-arm64@2.10.6",
+      "name": "@turbo/darwin-arm64",
+      "version": "2.10.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://turborepo.dev"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@turbo/linux-64@2.10.6",
+      "name": "@turbo/linux-64",
+      "version": "2.10.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://turborepo.dev"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@turbo/linux-arm64@2.10.6",
+      "name": "@turbo/linux-arm64",
+      "version": "2.10.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://turborepo.dev"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@turbo/windows-64@2.10.6",
+      "name": "@turbo/windows-64",
+      "version": "2.10.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://turborepo.dev"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/@turbo/windows-arm64@2.10.6",
+      "name": "@turbo/windows-arm64",
+      "version": "2.10.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://turborepo.dev"
         }
       ],
       "properties": [
@@ -182,7 +1742,33 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/accepts#readme"
+          "url": "jshttp/accepts"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/agent-base@7.1.4",
+      "name": "agent-base",
+      "version": "7.1.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/TooTallNate/proxy-agents.git"
         }
       ],
       "properties": [
@@ -260,10 +1846,96 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/chalk/ansi-regex#readme"
+          "url": "chalk/ansi-regex"
         }
       ],
       "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/asn1js@3.0.10",
+      "name": "asn1js",
+      "version": "3.0.10",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/ASN1.js"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/balanced-match@4.0.4",
+      "name": "balanced-match",
+      "version": "4.0.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git://github.com/juliangruber/balanced-match.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/benchmark@1.0.0?verglos-bundled-by=fast-uri%403.1.7",
+      "name": "benchmark",
+      "version": "1.0.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/fastify/fast-uri"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:scope",
+          "value": "bundled"
+        },
+        {
+          "name": "verglos:bundled-by",
+          "value": "fast-uri@3.1.7"
+        },
         {
           "name": "verglos:redistribution-class",
           "value": "permissive"
@@ -286,7 +1958,33 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/expressjs/body-parser#readme"
+          "url": "expressjs/body-parser"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/brace-expansion@5.0.9",
+      "name": "brace-expansion",
+      "version": "5.0.9",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/juliangruber/brace-expansion.git"
         }
       ],
       "properties": [
@@ -338,7 +2036,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/bundle-name#readme"
+          "url": "sindresorhus/bundle-name"
         }
       ],
       "properties": [
@@ -364,7 +2062,59 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/visionmedia/bytes.js#readme"
+          "url": "visionmedia/bytes.js"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/bytestreamjs@2.0.1",
+      "name": "bytestreamjs",
+      "version": "2.0.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git://github.com/PeculiarVentures/ByteStream.js.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/cacache@20.0.4",
+      "name": "cacache",
+      "version": "20.0.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/npm/cacache.git"
         }
       ],
       "properties": [
@@ -428,6 +2178,32 @@
     },
     {
       "type": "library",
+      "bom-ref": "pkg:npm/canonicalize@2.1.0",
+      "name": "canonicalize",
+      "version": "2.1.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/erdtman/canonicalize#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "bom-ref": "pkg:npm/chalk@5.6.2",
       "name": "chalk",
       "version": "5.6.2",
@@ -442,7 +2218,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/chalk/chalk#readme"
+          "url": "chalk/chalk"
         }
       ],
       "properties": [
@@ -494,7 +2270,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/cli-cursor#readme"
+          "url": "sindresorhus/cli-cursor"
         }
       ],
       "properties": [
@@ -520,7 +2296,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/cli-spinners#readme"
+          "url": "sindresorhus/cli-spinners"
         }
       ],
       "properties": [
@@ -546,7 +2322,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/tj/commander.js#readme"
+          "url": "git+https://github.com/tj/commander.js.git"
         }
       ],
       "properties": [
@@ -572,7 +2348,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/content-disposition#readme"
+          "url": "jshttp/content-disposition"
         }
       ],
       "properties": [
@@ -598,7 +2374,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/content-type#readme"
+          "url": "jshttp/content-type"
         }
       ],
       "properties": [
@@ -624,7 +2400,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/content-type#readme"
+          "url": "jshttp/content-type"
         }
       ],
       "properties": [
@@ -650,7 +2426,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/visionmedia/node-cookie-signature#readme"
+          "url": "https://github.com/visionmedia/node-cookie-signature.git"
         }
       ],
       "properties": [
@@ -676,7 +2452,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/cookie#readme"
+          "url": "jshttp/cookie"
         }
       ],
       "properties": [
@@ -702,7 +2478,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/expressjs/cors#readme"
+          "url": "expressjs/cors"
         }
       ],
       "properties": [
@@ -754,7 +2530,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/debug-js/debug#readme"
+          "url": "git://github.com/debug-js/debug.git"
         }
       ],
       "properties": [
@@ -780,7 +2556,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/default-browser-id#readme"
+          "url": "sindresorhus/default-browser-id"
         }
       ],
       "properties": [
@@ -806,7 +2582,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/default-browser#readme"
+          "url": "sindresorhus/default-browser"
         }
       ],
       "properties": [
@@ -832,7 +2608,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/define-lazy-prop#readme"
+          "url": "sindresorhus/define-lazy-prop"
         }
       ],
       "properties": [
@@ -858,7 +2634,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/dougwilson/nodejs-depd#readme"
+          "url": "dougwilson/nodejs-depd"
         }
       ],
       "properties": [
@@ -910,7 +2686,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jonathanong/ee-first#readme"
+          "url": "jonathanong/ee-first"
         }
       ],
       "properties": [
@@ -962,7 +2738,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/pillarjs/encodeurl#readme"
+          "url": "pillarjs/encodeurl"
         }
       ],
       "properties": [
@@ -1066,7 +2842,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/evanw/esbuild#readme"
+          "url": "git+https://github.com/evanw/esbuild.git"
         }
       ],
       "properties": [
@@ -1092,7 +2868,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/component/escape-html#readme"
+          "url": "component/escape-html"
         }
       ],
       "properties": [
@@ -1118,7 +2894,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/etag#readme"
+          "url": "jshttp/etag"
         }
       ],
       "properties": [
@@ -1274,7 +3050,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/mrmlnc/fast-glob#readme"
+          "url": "mrmlnc/fast-glob"
         }
       ],
       "properties": [
@@ -1286,9 +3062,9 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/fast-uri@3.1.4",
+      "bom-ref": "pkg:npm/fast-uri@3.1.7",
       "name": "fast-uri",
-      "version": "3.1.4",
+      "version": "3.1.7",
       "scope": "optional",
       "licenses": [
         {
@@ -1378,7 +3154,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/pillarjs/finalhandler#readme"
+          "url": "pillarjs/finalhandler"
         }
       ],
       "properties": [
@@ -1404,7 +3180,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/forwarded#readme"
+          "url": "jshttp/forwarded"
         }
       ],
       "properties": [
@@ -1430,7 +3206,59 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/fresh#readme"
+          "url": "jshttp/fresh"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fs-minipass@3.0.3",
+      "name": "fs-minipass",
+      "version": "3.0.3",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/npm/fs-minipass#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fsevents@2.3.3",
+      "name": "fsevents",
+      "version": "2.3.3",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/fsevents/fsevents"
         }
       ],
       "properties": [
@@ -1482,7 +3310,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/get-east-asian-width#readme"
+          "url": "sindresorhus/get-east-asian-width"
         }
       ],
       "properties": [
@@ -1560,13 +3388,39 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/gulpjs/glob-parent#readme"
+          "url": "gulpjs/glob-parent"
         }
       ],
       "properties": [
         {
           "name": "verglos:redistribution-class",
           "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/glob@13.0.6",
+      "name": "glob",
+      "version": "13.0.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BlueOak-1.0.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git@github.com:isaacs/node-glob.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "unknown"
         }
       ]
     },
@@ -1650,9 +3504,9 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/hono@4.12.31",
+      "bom-ref": "pkg:npm/hono@4.13.7",
       "name": "hono",
-      "version": "4.12.31",
+      "version": "4.13.7",
       "scope": "optional",
       "licenses": [
         {
@@ -1665,6 +3519,32 @@
         {
           "type": "distribution",
           "url": "https://hono.dev"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/http-cache-semantics@4.2.0",
+      "name": "http-cache-semantics",
+      "version": "4.2.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/kornelski/http-cache-semantics.git"
         }
       ],
       "properties": [
@@ -1690,7 +3570,59 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/http-errors#readme"
+          "url": "jshttp/http-errors"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/http-proxy-agent@7.0.2",
+      "name": "http-proxy-agent",
+      "version": "7.0.2",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/TooTallNate/proxy-agents.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/https-proxy-agent@7.0.6",
+      "name": "https-proxy-agent",
+      "version": "7.0.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/TooTallNate/proxy-agents.git"
         }
       ],
       "properties": [
@@ -1742,7 +3674,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/isaacs/inherits#readme"
+          "url": "git://github.com/isaacs/inherits"
         }
       ],
       "properties": [
@@ -1754,9 +3686,9 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/ip-address@10.2.0",
+      "bom-ref": "pkg:npm/ip-address@10.7.0",
       "name": "ip-address",
-      "version": "10.2.0",
+      "version": "10.7.0",
       "scope": "optional",
       "licenses": [
         {
@@ -1768,7 +3700,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/beaugunderson/ip-address#readme"
+          "url": "https://github.com/beaugunderson/ip-address.git"
         }
       ],
       "properties": [
@@ -1794,7 +3726,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/whitequark/ipaddr.js#readme"
+          "url": "git://github.com/whitequark/ipaddr.js"
         }
       ],
       "properties": [
@@ -1820,7 +3752,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/is-docker#readme"
+          "url": "sindresorhus/is-docker"
         }
       ],
       "properties": [
@@ -1898,7 +3830,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/is-inside-container#readme"
+          "url": "sindresorhus/is-inside-container"
         }
       ],
       "properties": [
@@ -1924,7 +3856,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/is-interactive#readme"
+          "url": "sindresorhus/is-interactive"
         }
       ],
       "properties": [
@@ -1976,7 +3908,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/then/is-promise#readme"
+          "url": "https://github.com/then/is-promise.git"
         }
       ],
       "properties": [
@@ -2002,7 +3934,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/is-unicode-supported#readme"
+          "url": "sindresorhus/is-unicode-supported"
         }
       ],
       "properties": [
@@ -2028,7 +3960,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/is-unicode-supported#readme"
+          "url": "sindresorhus/is-unicode-supported"
         }
       ],
       "properties": [
@@ -2054,7 +3986,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/is-wsl#readme"
+          "url": "sindresorhus/is-wsl"
         }
       ],
       "properties": [
@@ -2081,6 +4013,32 @@
         {
           "type": "distribution",
           "url": "https://github.com/isaacs/isexe#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/jose@5.10.0",
+      "name": "jose",
+      "version": "5.10.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/panva/jose"
         }
       ],
       "properties": [
@@ -2170,6 +4128,32 @@
     },
     {
       "type": "library",
+      "bom-ref": "pkg:npm/json-stringify-safe@5.0.1",
+      "name": "json-stringify-safe",
+      "version": "5.0.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/isaacs/json-stringify-safe"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "bom-ref": "pkg:npm/log-symbols@6.0.0",
       "name": "log-symbols",
       "version": "6.0.0",
@@ -2184,7 +4168,59 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/log-symbols#readme"
+          "url": "sindresorhus/log-symbols"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/lru-cache@11.5.2",
+      "name": "lru-cache",
+      "version": "11.5.2",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BlueOak-1.0.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+ssh://git@github.com/isaacs/node-lru-cache.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "unknown"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/make-fetch-happen@15.0.6",
+      "name": "make-fetch-happen",
+      "version": "15.0.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/npm/make-fetch-happen.git"
         }
       ],
       "properties": [
@@ -2236,7 +4272,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/media-typer#readme"
+          "url": "jshttp/media-typer"
         }
       ],
       "properties": [
@@ -2262,7 +4298,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/merge-descriptors#readme"
+          "url": "sindresorhus/merge-descriptors"
         }
       ],
       "properties": [
@@ -2340,7 +4376,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/mime-db#readme"
+          "url": "jshttp/mime-db"
         }
       ],
       "properties": [
@@ -2366,7 +4402,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/mime-types#readme"
+          "url": "jshttp/mime-types"
         }
       ],
       "properties": [
@@ -2392,7 +4428,235 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/mimic-function#readme"
+          "url": "sindresorhus/mimic-function"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minimatch@10.2.6",
+      "name": "minimatch",
+      "version": "10.2.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BlueOak-1.0.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git@github.com:isaacs/minimatch"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "unknown"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minipass-collect@2.0.1",
+      "name": "minipass-collect",
+      "version": "2.0.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/isaacs/minipass-collect"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minipass-fetch@5.0.2",
+      "name": "minipass-fetch",
+      "version": "5.0.2",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/npm/minipass-fetch.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minipass-flush@1.0.7",
+      "name": "minipass-flush",
+      "version": "1.0.7",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BlueOak-1.0.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/isaacs/minipass-flush.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "unknown"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minipass-pipeline@1.2.4",
+      "name": "minipass-pipeline",
+      "version": "1.2.4",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minipass-sized@2.0.0",
+      "name": "minipass-sized",
+      "version": "2.0.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/isaacs/minipass-sized.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minipass@3.3.6",
+      "name": "minipass",
+      "version": "3.3.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/isaacs/minipass.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minipass@7.1.3",
+      "name": "minipass",
+      "version": "7.1.3",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BlueOak-1.0.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/isaacs/minipass"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "unknown"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minizlib@3.1.0",
+      "name": "minizlib",
+      "version": "3.1.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/isaacs/minizlib.git"
         }
       ],
       "properties": [
@@ -2418,7 +4682,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/vercel/ms#readme"
+          "url": "vercel/ms"
         }
       ],
       "properties": [
@@ -2444,7 +4708,33 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/negotiator#readme"
+          "url": "jshttp/negotiator"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/nock@13.5.6",
+      "name": "nock",
+      "version": "13.5.6",
+      "scope": "required",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/nock/nock.git"
         }
       ],
       "properties": [
@@ -2470,7 +4760,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/object-assign#readme"
+          "url": "sindresorhus/object-assign"
         }
       ],
       "properties": [
@@ -2522,7 +4812,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/on-finished#readme"
+          "url": "jshttp/on-finished"
         }
       ],
       "properties": [
@@ -2548,7 +4838,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/isaacs/once#readme"
+          "url": "git://github.com/isaacs/once"
         }
       ],
       "properties": [
@@ -2574,7 +4864,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/onetime#readme"
+          "url": "sindresorhus/onetime"
         }
       ],
       "properties": [
@@ -2600,7 +4890,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/open#readme"
+          "url": "sindresorhus/open"
         }
       ],
       "properties": [
@@ -2626,7 +4916,33 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/ora#readme"
+          "url": "sindresorhus/ora"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/p-map@7.0.8",
+      "name": "p-map",
+      "version": "7.0.8",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "sindresorhus/p-map"
         }
       ],
       "properties": [
@@ -2652,7 +4968,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/pillarjs/parseurl#readme"
+          "url": "pillarjs/parseurl"
         }
       ],
       "properties": [
@@ -2678,13 +4994,39 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/path-key#readme"
+          "url": "sindresorhus/path-key"
         }
       ],
       "properties": [
         {
           "name": "verglos:redistribution-class",
           "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/path-scurry@2.0.2",
+      "name": "path-scurry",
+      "version": "2.0.2",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BlueOak-1.0.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/isaacs/path-scurry"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "unknown"
         }
       ]
     },
@@ -2704,7 +5046,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/pillarjs/path-to-regexp#readme"
+          "url": "https://github.com/pillarjs/path-to-regexp.git"
         }
       ],
       "properties": [
@@ -2768,6 +5110,84 @@
     },
     {
       "type": "library",
+      "bom-ref": "pkg:npm/pkijs@3.4.0",
+      "name": "pkijs",
+      "version": "3.4.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git://github.com/PeculiarVentures/PKI.js.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/proc-log@6.1.0",
+      "name": "proc-log",
+      "version": "6.1.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/npm/proc-log.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/propagate@2.0.1",
+      "name": "propagate",
+      "version": "2.0.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "http://github.com/nock/propagate#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "bom-ref": "pkg:npm/proxy-addr@2.0.7",
       "name": "proxy-addr",
       "version": "2.0.7",
@@ -2782,7 +5202,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/proxy-addr#readme"
+          "url": "jshttp/proxy-addr"
         }
       ],
       "properties": [
@@ -2794,9 +5214,61 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/qs@6.15.3",
+      "bom-ref": "pkg:npm/pvtsutils@1.3.6",
+      "name": "pvtsutils",
+      "version": "1.3.6",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/pvtsutils#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pvutils@1.2.0",
+      "name": "pvutils",
+      "version": "1.2.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/pvutils"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/qs@6.16.0",
       "name": "qs",
-      "version": "6.15.3",
+      "version": "6.16.0",
       "scope": "optional",
       "licenses": [
         {
@@ -2860,7 +5332,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/range-parser#readme"
+          "url": "jshttp/range-parser"
         }
       ],
       "properties": [
@@ -2886,7 +5358,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/stream-utils/raw-body#readme"
+          "url": "stream-utils/raw-body"
         }
       ],
       "properties": [
@@ -2924,6 +5396,32 @@
     },
     {
       "type": "library",
+      "bom-ref": "pkg:npm/reflect-metadata@0.2.2",
+      "name": "reflect-metadata",
+      "version": "0.2.2",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "http://rbuckton.github.io/reflect-metadata"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "bom-ref": "pkg:npm/require-from-string@2.0.2",
       "name": "require-from-string",
       "version": "2.0.2",
@@ -2938,7 +5436,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/floatdrop/require-from-string#readme"
+          "url": "floatdrop/require-from-string"
         }
       ],
       "properties": [
@@ -2964,7 +5462,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/restore-cursor#readme"
+          "url": "sindresorhus/restore-cursor"
         }
       ],
       "properties": [
@@ -3016,7 +5514,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/pillarjs/router#readme"
+          "url": "pillarjs/router"
         }
       ],
       "properties": [
@@ -3042,7 +5540,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/run-applescript#readme"
+          "url": "sindresorhus/run-applescript"
         }
       ],
       "properties": [
@@ -3094,7 +5592,33 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/ChALkeR/safer-buffer#readme"
+          "url": "git+https://github.com/ChALkeR/safer-buffer.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/semver@7.8.5",
+      "name": "semver",
+      "version": "7.8.5",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/npm/node-semver.git"
         }
       ],
       "properties": [
@@ -3120,7 +5644,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/pillarjs/send#readme"
+          "url": "pillarjs/send"
         }
       ],
       "properties": [
@@ -3146,7 +5670,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/expressjs/serve-static#readme"
+          "url": "expressjs/serve-static"
         }
       ],
       "properties": [
@@ -3198,7 +5722,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/kevva/shebang-command#readme"
+          "url": "kevva/shebang-command"
         }
       ],
       "properties": [
@@ -3224,7 +5748,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/shebang-regex#readme"
+          "url": "sindresorhus/shebang-regex"
         }
       ],
       "properties": [
@@ -3354,7 +5878,137 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/tapjs/signal-exit#readme"
+          "url": "https://github.com/tapjs/signal-exit.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/sigstore@4.1.1",
+      "name": "sigstore",
+      "version": "4.1.1",
+      "scope": "required",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/sigstore/sigstore-js/tree/main/packages/client#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/smart-buffer@4.2.0",
+      "name": "smart-buffer",
+      "version": "4.2.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/JoshGlazebrook/smart-buffer/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/socks-proxy-agent@8.0.5",
+      "name": "socks-proxy-agent",
+      "version": "8.0.5",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/TooTallNate/proxy-agents.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/socks@2.8.10",
+      "name": "socks",
+      "version": "2.8.10",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/JoshGlazebrook/socks/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/ssri@13.0.1",
+      "name": "ssri",
+      "version": "13.0.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/npm/ssri.git"
         }
       ],
       "properties": [
@@ -3380,7 +6034,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/statuses#readme"
+          "url": "jshttp/statuses"
         }
       ],
       "properties": [
@@ -3406,7 +6060,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/stdin-discarder#readme"
+          "url": "sindresorhus/stdin-discarder"
         }
       ],
       "properties": [
@@ -3432,7 +6086,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/string-width#readme"
+          "url": "sindresorhus/string-width"
         }
       ],
       "properties": [
@@ -3458,7 +6112,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/chalk/strip-ansi#readme"
+          "url": "chalk/strip-ansi"
         }
       ],
       "properties": [
@@ -3510,7 +6164,59 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/component/toidentifier#readme"
+          "url": "component/toidentifier"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/tslib@1.14.1",
+      "name": "tslib",
+      "version": "1.14.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://www.typescriptlang.org/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/tslib@2.8.1",
+      "name": "tslib",
+      "version": "2.8.1",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://www.typescriptlang.org/"
         }
       ],
       "properties": [
@@ -3548,10 +6254,62 @@
     },
     {
       "type": "library",
+      "bom-ref": "pkg:npm/tsyringe@4.10.0",
+      "name": "tsyringe",
+      "version": "4.10.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/Microsoft/tsyringe#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/tuf-js@4.1.0",
+      "name": "tuf-js",
+      "version": "4.1.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/theupdateframework/tuf-js/tree/main/packages/client#readme"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "bom-ref": "pkg:npm/turbo@2.10.6",
       "name": "turbo",
       "version": "2.10.6",
-      "scope": "optional",
+      "scope": "required",
       "licenses": [
         {
           "license": {
@@ -3588,7 +6346,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/type-is#readme"
+          "url": "jshttp/type-is"
         }
       ],
       "properties": [
@@ -3666,7 +6424,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/stream-utils/unpipe#readme"
+          "url": "stream-utils/unpipe"
         }
       ],
       "properties": [
@@ -3692,7 +6450,33 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/jshttp/vary#readme"
+          "url": "jshttp/vary"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/webcrypto-core@1.9.2",
+      "name": "webcrypto-core",
+      "version": "1.9.2",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/PeculiarVentures/webcrypto-core#readme"
         }
       ],
       "properties": [
@@ -3718,7 +6502,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/isaacs/node-which#readme"
+          "url": "git://github.com/isaacs/node-which.git"
         }
       ],
       "properties": [
@@ -3770,7 +6554,33 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/sindresorhus/wsl-utils#readme"
+          "url": "sindresorhus/wsl-utils"
+        }
+      ],
+      "properties": [
+        {
+          "name": "verglos:redistribution-class",
+          "value": "permissive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/yallist@4.0.0",
+      "name": "yallist",
+      "version": "4.0.0",
+      "scope": "optional",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "git+https://github.com/isaacs/yallist.git"
         }
       ],
       "properties": [
@@ -3796,7 +6606,7 @@
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://github.com/StefanTerdell/zod-to-json-schema#readme"
+          "url": "https://github.com/StefanTerdell/zod-to-json-schema"
         }
       ],
       "properties": [
