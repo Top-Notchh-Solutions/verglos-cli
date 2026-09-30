@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 organization API cache-boundary completion (Web PR #110)
+
+- **Code:** Web PR #110 exact tested head `f60a403` merged as `18ddb408`.
+- **Verification:** organization directory, member, project, policy, and release routes route all invalid, denied, validation, not-found, conflict, idempotent, and success responses through private no-store headers; tenant-scope tests pass 13/13 locally. Hosted run `36692358099` passes typecheck, full tests, DB/migration checks, build, boundary, dependency/SBOM/license, and secret checks; GitGuardian and Vercel pass.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked. This closes the explicit route-source cache-header gap but does not complete modified-CLI or direct list/search/export/runtime boundary evidence.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 private evidence/evaluation cache boundary (Web PR #108)
 
 - **Code:** Web PR #108 exact tested head `8a77d2a` merged as `7279ef2`.

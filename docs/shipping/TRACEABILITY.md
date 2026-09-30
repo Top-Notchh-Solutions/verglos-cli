@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 organization API cache boundaries
+
+- **Implementation:** Web `f60a403`, merged as `18ddb408` in PR #110, adds private no-store response helpers to organization directory, member, project, policy, and release APIs and inventories every authenticated organization route in the tenant-scope contract suite.
+- **Evidence:** Tenant-scope contract tests pass 13/13 locally; hosted run `36692358099` passes the full verification workflow, GitGuardian, and Vercel.
+- **Boundary:** This closes no checkbox. QUAL-WEB-001 still requires modified/untrusted CLI and direct list/search/export/runtime public-private matrix evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 private evidence/evaluation cache boundary
 
 - **Implementation:** Web `8a77d2a`, merged as `7279ef2` in PR #108, adds private no-store response helpers to evidence and policy-evaluation list/create routes and covers all data-bearing and denial paths.
