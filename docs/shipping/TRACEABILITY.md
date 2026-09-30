@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 private receipt cache boundary
+
+- **Implementation:** Web `27e972c`, merged as `6cb6734` in PR #105, adds a no-store response helper to private receipt collection/detail routes and binds all error/success paths to private cache headers.
+- **Evidence:** Tenant-scope contract tests pass 11/11 and hosted run `36690136102` is green. Public receipt behavior remains non-cacheable; private download headers remain explicit.
+- **Boundary:** This fixes one privacy boundary but closes no checkbox. QUAL-WEB-001 still requires the complete modified-CLI and list/search/export/cache/public/private matrix. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 modified-client entitlement boundary
 
 - **Implementation:** Web `3bd02da`, merged as `98169fa` in PR #104, extends the v2 entitlement route contract suite with forged-client authority fields.

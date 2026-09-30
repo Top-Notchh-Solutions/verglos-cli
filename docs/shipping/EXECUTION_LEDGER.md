@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 private receipt cache-boundary correction (Web PR #105)
+
+- **Code:** Web PR #105 exact tested head `27e972c` merged as `6cb6734`.
+- **Verification:** private receipt list/detail response paths now flow through no-store headers; the route contract suite passes 11/11, with local typecheck/diff checks green. Hosted run `36690136102` passes the full Web verification workflow, GitGuardian, and Vercel.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked. This closes a private-cache defect but not the complete modified-CLI/list/search/export/public/private matrix.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 modified-client entitlement qualification progress (Web PR #104)
 
 - **Code:** Web PR #104 exact tested head `3bd02da` merged as `98169fa`.
