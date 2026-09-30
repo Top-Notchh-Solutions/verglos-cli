@@ -600,3 +600,6 @@ Pinned official Cosign `v2.4.1` (Docker image digest previously recorded) succes
 ## 2026-09-30 · QUAL-CLI-006 real macOS upgrade/rollback transition
 
 On a fresh temporary npm consumer, the published `verglos@1.8.3` was installed and reported `1.8.3`; all six current local archives were then installed together and reported `2.0.0-alpha.1`; reinstalling `verglos@1.8.3` completed the rollback and reported `1.8.3`. This is direct macOS package-transition evidence. It does not establish the same transition on Linux/Windows or official in-toto/Sigstore trust evidence, so QUAL-CLI-006 remains unchecked.
+## 2026-09-30 · QUAL-CLI-006 real Linux upgrade/rollback transition
+
+Inside the pinned local `node:24-bookworm` Linux container (linux/amd64 under host emulation), a fresh consumer completed the same published `verglos@1.8.3` → local six-archive `2.0.0-alpha.1` → published `1.8.3` transition, reporting `1.8.3`, `2.0.0-alpha.1`, and `1.8.3` respectively. Combined with the macOS run and the nine-cell clean installs, this directly covers Linux/macOS install plus transition behavior. Windows real upgrade/rollback and official in-toto/Sigstore trust evidence remain open; QUAL-CLI-006 stays unchecked.

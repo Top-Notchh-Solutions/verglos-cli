@@ -702,3 +702,8 @@ while they remain unresolved.
 - **Run:** fresh temporary consumer; `npm install --prefix <consumer> verglos@1.8.3` → CLI `1.8.3`; `npm install --prefix <consumer> .artifacts/public-packages/*.tgz` → CLI `2.0.0-alpha.1`; repeat published `verglos@1.8.3` install → CLI `1.8.3`.
 - **Result:** install → upgrade → rollback completed successfully on macOS, with the reported versions proving each transition. No repository or production state changed.
 - **Boundary:** this is direct macOS transition evidence only. Linux/Windows real transitions and official in-toto/Sigstore trust evidence remain open; QUAL-CLI-006 stays unchecked.
+## 2026-09-30 · QUAL-CLI-006 real Linux upgrade/rollback transition
+
+- **Run:** `node:24-bookworm` container, fresh consumer; published `verglos@1.8.3` → local six archives → published `verglos@1.8.3`.
+- **Result:** CLI reported `1.8.3`, `2.0.0-alpha.1`, `1.8.3`; Linux install, upgrade, and rollback completed successfully.
+- **Boundary:** linux/amd64 under host emulation; Windows real transition and official in-toto/Sigstore trust remain absent. QUAL-CLI-006 remains unchecked.
