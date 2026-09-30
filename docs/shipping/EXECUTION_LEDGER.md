@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-006 browser capture results
+
+- **Local browser evidence:** complete cached Playwright Chromium captured public `/`, `/detectors`, and `/docs` successfully (HTTP 200, landmarks present). Measurements: `/` FCP 2344ms / TTFB 2284ms; `/detectors` FCP 308ms / TTFB 277ms; `/docs` FCP 372ms / TTFB 348ms. These are partial diagnostics; LCP/INP/CLS and screen-reader findings were not collected.
+- **Failures/limits:** local `/verify` returned HTTP 500 because `DATABASE_URL` is not set, confirmed by the Next.js server stack at `getDb()`. Hosted PR preview URL is protected by Vercel authentication and returned the Vercel login page for every path, so it is not a product capture.
+- **Acceptance boundary:** QUAL-WEB-006 remains unchecked; no authenticated dashboard or hosted CWV/accessibility evidence exists.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-006 browser evidence attempt
 
 - **Attempt:** `pnpm dlx @playwright/test@1.51.1` resolved successfully, but pinned Chromium 134.0.6998.35 download timed out during the primary and fallback downloads. No browser measurement or accessibility capture was produced.

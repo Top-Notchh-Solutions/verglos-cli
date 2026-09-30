@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-006 browser capture results
+
+Using a complete locally cached Playwright Chromium build, a real local browser run measured public pages: `/` 200 (FCP 2344ms, TTFB 2284ms, main/nav/header present, 57 focusable controls), `/detectors` 200 (FCP 308ms, TTFB 277ms, main/header, 2 focusable controls), and `/docs` 200 (FCP 372ms, TTFB 348ms, main/nav/header, 56 focusable controls). Local `/verify` returned 500 because `DATABASE_URL` is absent; the server log identifies `getDb()` as the exact cause. The hosted PR preview is Vercel-authenticated and returned the Vercel login page for all paths, so it is not product-rendering evidence. No LCP/INP/CLS, screen-reader audit, authenticated dashboard, or hosted product capture exists. QUAL-WEB-006 remains unchecked.
+
 ## 2026-09-30 · QUAL-WEB-006 browser evidence attempt
 
 A bounded attempt to provision pinned Playwright Chromium (`@playwright/test` 1.51.1 / Chromium 134.0.6998.35) timed out during the 124 MiB browser download after fallback retries. No browser, screen-reader, responsive, or Core Web Vitals measurements were collected. QUAL-WEB-006 remains unchecked; pure classifier tests are not runtime evidence. No production/database operation, migration, deployment, release, publish, or marketing action occurred.
