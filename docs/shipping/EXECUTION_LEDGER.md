@@ -2,9 +2,9 @@
 
 ## 2026-09-30 · QUAL-CLI-006 official-format progress (CLI PR #47)
 
-- **Code:** CLI `af3aa09` fixes SPDX generation: top-level `dataLicense`, `SPDXRef-DOCUMENT DESCRIBES` relationships for every package, and URI-safe download locations. Regenerated `SBOM.cdx.json` and `SBOM.spdx.json` are the only generated artifacts in the PR.
+- **Code:** CLI `af3aa09` fixes SPDX generation: top-level `dataLicense`, `SPDXRef-DOCUMENT DESCRIBES` relationships for every package, and URI-safe download locations. Regenerated `SBOM.cdx.json` and `SBOM.spdx.json` were the only generated artifacts in PR #47, merged as `ca88ef2`.
 - **Verification:** official CycloneDX CLI 0.33.1 (`cyclonedx/cyclonedx-cli@sha256:252c2e26f468c25fea1e63ecde1bc3198ad6e9dbb57f5ed3236bddcb2281b3a7`) validates `SBOM.cdx.json` (sha256 `69176796bfa676c7e466307b75051549fea4991c46a4f2f4bf8e6e09988f4137`); SPDX Tools 0.8.5 validates `SBOM.spdx.json` (sha256 `e29208279f017eb2be43cb045ecf9f40f375e8dbe97bbfe9c54ac03de552effd`); Microsoft SARIF Multitool 5.7.0 validates a bounded SARIF fixture. Focused generator/license/release tests, full Turbo test graph (12/12), typecheck, build, and diff checks pass.
-- **Open evidence:** PR #47 hosted nine-cell matrix/self-scan pending; official in-toto/Sigstore validation and supported-platform install/upgrade/rollback evidence are still missing. QUAL-CLI-006 remains open.
+- **Open evidence:** PR #47 hosted nine-cell matrix and self-scan passed. Official in-toto/Sigstore validation and complete supported-platform install/upgrade/rollback evidence are still missing. QUAL-CLI-006 remains open.
 - **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred; private docs and founder-owned assets remain outside the PR.
 
 ## 2026-09-30 · dependency audit and QUAL-CLI-006 handoff
