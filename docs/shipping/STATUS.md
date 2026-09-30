@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-005/006 evidence boundary audit
+
+The pure quality classifier suite passes **18/18** on the current Web branch, including fail-closed empty/non-finite/negative performance measurements and deletion invariants. Repository inspection finds no account-deletion HTTP route or hosted deletion trace, and no browser/screen-reader/CWV capture. QUAL-WEB-005 and QUAL-WEB-006 therefore remain unchecked; classifier tests are not runtime qualification. No production/database operation, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 authorization audit evidence
 
 Web focused authorization evidence passes **30/30** on the exact current branch: all 29 tenant API methods have explicit organization/project guards and least-privilege actions; unauthenticated, forbidden, and project-not-found denials use bounded non-enumerating responses; tenant predicates and scoped DB surfaces are audited; role×action×plan capability composition is exhaustive; public receipt responses are non-cacheable. QUAL-WEB-001 remains unchecked because the modified/untrusted CLI boundary and complete list/search/export/cache/public/private coverage still need direct qualification evidence. No production/database operation, migration, deployment, release, publish, or marketing action occurred.

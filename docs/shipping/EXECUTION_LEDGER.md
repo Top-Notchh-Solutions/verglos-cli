@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-005/006 evidence boundary audit
+
+- **Verification:** Web pure quality classifiers pass 18/18, including deletion hold/scope/offline-record invariants and fail-closed accessibility/performance validation for empty, non-finite, and negative measurements.
+- **Acceptance boundary:** repository inspection finds no account-deletion HTTP route or hosted deletion trace, and no browser/screen-reader/Core Web Vitals capture. QUAL-WEB-005 and QUAL-WEB-006 remain unchecked; pure classifiers are not runtime qualification.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 authorization audit evidence
 
 - **Verification:** Web focused authorization run passes 30/30 (`tenant-scope`, `authorization`, `denial-response`, and `rbac-matrix`). It exercises all 29 tenant API methods, organization/project guard selection, bounded denials for unauthenticated/forbidden/project-not-found actors, tenant predicates/scoped DB exposure, exhaustive role×action×plan capability composition, and non-cacheable public receipt behavior.
