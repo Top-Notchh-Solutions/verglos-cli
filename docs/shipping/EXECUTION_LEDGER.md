@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 direct tenant data-route runtime (Web PR #119)
+
+- **Code:** Web tested head `87f424cbfd93bd3d54232a66a29664c517b4d514`; merged as `1834f442086ab79862eb62984bc4111def3ad923`.
+- **Verification:** Focused disposable Docker PostgreSQL test passes 1/1; typecheck, Drizzle schema check, 21-migration ordering, and production build pass. Hosted run `36741825859` is fully green, including the configured PostgreSQL-backed test command and security/license/boundary checks.
+- **Runtime evidence:** Evidence and policy-evaluation real handlers preserve tenant/project scope, ignore forged query authority, bind writes to the authorized scope, and mark private responses `private, no-store`.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked pending distinct search/export semantics and the complete runtime matrix. No production DB/environment, migration, deployment, or release action occurred.
+
 ## 2026-09-30 · QUAL-CLI-006 current-source in-toto archive binding (CLI PR #51)
 
 - **Code:** CLI tested head `e63b5041727a175da1d770012cb945a061f05324`, rebased onto `f16c6f1`, merged as `353787539451e918dcda088ff6cbbd497ae1c631`.

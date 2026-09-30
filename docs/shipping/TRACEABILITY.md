@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 direct tenant data-route runtime (Web PR #119)
+
+- **Implementation:** Web `87f424cbfd93bd3d54232a66a29664c517b4d514`, merged as `1834f442086ab79862eb62984bc4111def3ad923`.
+- **Evidence:** Focused Docker PostgreSQL runtime test passes 1/1. Evidence and policy-evaluation list/create handlers ignore forged query authority, bind inserts to the authorized tenant/project, exclude the other tenant, and emit `private, no-store`. Hosted run `36741825859` passes the complete configured verification workflow.
+- **Boundary:** No checkbox changed. QUAL-WEB-001 still lacks distinct search/export route semantics and complete public/private/list/search/export runtime coverage. A local concurrent all-suite attempt hit existing pgcrypto/deadlock contention; hosted CI is the authoritative green run. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-CLI-006 current-source in-toto archive binding (CLI PR #51)
 
 - **Implementation:** CLI `e63b5041727a175da1d770012cb945a061f05324`, rebased onto current main `f16c6f1`, merged as `353787539451e918dcda088ff6cbbd497ae1c631`.
