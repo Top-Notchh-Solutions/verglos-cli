@@ -9,6 +9,8 @@ import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePat
 const run = promisify(execFile);
 const root = resolve(process.argv[2] ?? "");
 const repositoryRoot = fileURLToPath(new URL("..", import.meta.url));
+const tarCommand = process.platform === "win32" ? "tar.exe" : "tar";
+const tarOptions = { shell: process.platform === "win32" };
 const authoritativeLicense = await readFile(join(repositoryRoot, "LICENSE"));
 if (!process.argv[2]) throw new Error("packed artifact directory is required");
 if (!(await lstat(root)).isDirectory()) throw new Error("packed artifact root must be a directory");
@@ -22,13 +24,13 @@ for (const name of archives) {
   if (!(await lstat(archive)).isFile()) throw new Error(`packed artifact is not a regular file: ${name}`);
   let manifest;
   try {
-    const { stdout } = await run("tar", ["-xOf", archive, "package/package.json"]);
-    manifest = JSON.parse(stdout);
+    const { stdout } = await run(tarCommand, ["-xOf", archive, "package/package.json"], tarOptions);
+    manifest = JSON.parse(stdout.replace(/^\uFEFF/u, ""));
   } catch {
     throw new Error(`packed artifact has no valid package manifest: ${name}`);
   }
   manifests.push(manifest);
-  const { stdout: listing } = await run("tar", ["-tzf", archive], { maxBuffer: 8 * 1024 * 1024 });
+  const { stdout: listing } = await run(tarCommand, ["-tzf", archive], { ...tarOptions, maxBuffer: 8 * 1024 * 1024 });
   const packageFiles = [];
   const seenMembers = new Set();
   for (const rawPath of listing.split(/\r?\n/u).filter(Boolean)) {
@@ -56,7 +58,7 @@ for (const name of archives) {
   if (!manifest.license) throw new Error(`packed artifact has no license declaration: ${name}`);
   let packedLicense;
   try {
-    const { stdout } = await run("tar", ["-xOf", archive, "package/LICENSE"], { encoding: "buffer", maxBuffer: 1024 * 1024 });
+    const { stdout } = await run(tarCommand, ["-xOf", archive, "package/LICENSE"], { ...tarOptions, encoding: "buffer", maxBuffer: 1024 * 1024 });
     packedLicense = stdout;
   } catch {
     throw new Error(`packed artifact has no LICENSE file: ${name}`);
