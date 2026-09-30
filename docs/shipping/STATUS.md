@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-006 public accessibility remediation (Web PR #102)
+
+Web PR #102 merged as `f138e24bf85de7527a8d3896897bd1aa26fecbe0` after hosted Verify run `36685565094` passed, along with GitGuardian and Vercel. It corrects public contrast and keyboard/focus affordances and makes overflow tables/code examples keyboard reachable; no product claims or pricing copy changed. QUAL-WEB-006 remains open pending authenticated-dashboard, screen-reader, responsive, large-dataset, and complete CWV evidence. No production database/environment read or write, migration, deployment, release, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 accepted (Web PR #121)
 
 Web PR #121 merged as `a88495151f43d1a6addc16a88427288cb2d1458e` after hosted Verify run `36760390332` completed green. The follow-up adds the organization search route to the shared negative-boundary matrix and runs `pnpm test:negative-boundary` in hosted Verify. The hosted job also passed typecheck, the full configured test suite, Drizzle schema and 21-migration checks, production build, public-boundary, dependency audit, SBOM, license, and tracked-secret checks. Together with the Docker-backed tenant list/search/evidence/policy/receipt export integrations, public/private receipt assertions, and modified-CLI entitlement tests, this satisfies QUAL-WEB-001. No production database/environment read or write, migration, deployment, release, or marketing action occurred.

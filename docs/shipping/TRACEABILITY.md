@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-006 public accessibility remediation (Web PR #102)
+
+- **Implementation:** Web PR #102 tested head `a69e50da3827081c3ab23a8d943017ae26f82e0a`, merged as `f138e24bf85de7527a8d3896897bd1aa26fecbe0`.
+- **Evidence:** Hosted Verify run `36685565094`, GitGuardian, and Vercel passed. The patch raises low-contrast public text, uses theme-aware button text, adds keyboard focus to horizontally scrollable tables/code examples, and preserves existing copy, prices, and product states.
+- **Boundary:** QUAL-WEB-006 remains unchecked. Authenticated-dashboard, screen-reader, responsive, large-dataset, and complete Core Web Vitals evidence remain open. No production operation occurred.
+
 ## Acceptance · 2026-09-30 · QUAL-WEB-001 complete negative authorization suite (Web PR #121)
 
 - **Implementation:** Follow-up commits `d940136` and `e0fe054` on the runtime-data qualification branch, merged as `a88495151f43d1a6addc16a88427288cb2d1458e` in PR #121.

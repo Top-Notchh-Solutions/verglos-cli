@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-006 public accessibility remediation (Web PR #102)
+
+- **Code:** Web PR #102 exact head `a69e50da3827081c3ab23a8d943017ae26f82e0a` merged as `f138e24bf85de7527a8d3896897bd1aa26fecbe0`.
+- **Verification:** Hosted Verify run `36685565094`, GitGuardian, and Vercel passed. The patch changes only contrast/focus/keyboard affordances on public pages and components; product claims and pricing copy are unchanged.
+- **Acceptance boundary:** QUAL-WEB-006 remains open for authenticated-dashboard, screen-reader, responsive, large-dataset, and full CWV evidence. No production database/environment, migration, deployment, release, or marketing state changed.
+
 ## 2026-09-30 · QUAL-WEB-001 acceptance closeout (Web PR #121)
 
 - **Code:** Follow-up commits `d940136` and `e0fe054` merged as `a88495151f43d1a6addc16a88427288cb2d1458e` in PR #121.
