@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 runtime private-cache denial matrix (Web PR #112)
+
+Web PR #112 tested head `4548734` merged as `517df10c`. The route-boundary suite now invokes every protected organization API handler with forged authority fields and an authorization denial, asserting the real response is non-cacheable (`no-store` or `private, no-store`). The focused negative-boundary suite passes 2/2 and local typecheck/diff checks pass. Hosted run `36703830835`, GitGuardian, and Vercel all pass. QUAL-WEB-001 remains unchecked pending complete modified-CLI and direct list/search/export/public-private runtime evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-CLI-006 official in-toto layout/link verification progress
 
 An isolated Docker run installed official `in-toto==3.0.0`, generated an ephemeral Ed25519 layout key, produced a signed link with `in-toto-mock`/`in-toto-sign`, signed the root layout, and verified the layout/link with `in-toto-verify --verification-keys`; verification returned success. This is synthetic local layout/link evidence only. QUAL-CLI-006 remains unchecked pending validation against the actual release pipeline plus trusted keyless Sigstore/Fulcio/Rekor evidence. No production/database operation, deployment, release, publish, or marketing action occurred.

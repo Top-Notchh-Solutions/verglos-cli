@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 runtime denial cache matrix
+
+- **Implementation:** Web `4548734`, merged as `517df10c` in PR #112, extends the existing protected-route matrix with real handler calls for every organization API method and forged request-body authority fields.
+- **Evidence:** Focused negative-boundary suite passes 2/2; denial responses assert `no-store` or `private, no-store`. Hosted run `36703830835`, GitGuardian, and Vercel pass.
+- **Boundary:** This closes no checkbox. QUAL-WEB-001 still requires complete modified-CLI and direct list/search/export/public-private runtime evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-CLI-006 official in-toto layout/link smoke
 
 - **Evidence:** Docker `python:3.12-slim` installed official `in-toto==3.0.0`; an ephemeral Ed25519 key signed a synthetic root layout and `build` link, and `in-toto-verify --verification-keys` returned success.

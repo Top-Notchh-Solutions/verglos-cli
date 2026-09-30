@@ -1,5 +1,7 @@
 # Verglos V1 release gates
 
+QUAL-WEB-001 progress (2026-09-30): Web PR #112 tested head `4548734` merged as `517df10c`; every protected organization API route is now invoked through its real handler with forged body authority fields and denial responses are asserted non-cacheable (`no-store` or `private, no-store`). Focused negative-boundary tests pass 2/2; hosted run `36703830835`, GitGuardian, and Vercel pass. Gate remains OPEN pending complete modified-CLI and direct list/search/export/public-private runtime evidence. No production operation occurred.
+
 QUAL-CLI-006 progress (2026-09-30): an isolated Docker run with official `in-toto==3.0.0` generated and verified a signed synthetic root layout plus link using `in-toto-verify --verification-keys`; verification succeeded. This is format/verification smoke only, using an ephemeral key and synthetic materials. Gate remains OPEN pending actual release-pipeline binding and trusted keyless Sigstore/Fulcio/Rekor evidence. No production operation occurred.
 
 PLAN-CLI-004 progress (2026-09-30): CLI PR #50 tested head `9ff21be` merged as `f16c6f1`; frozen server-shaped plan/catalog fixtures cover Free/Pro/Team/Studio/Enterprise and malformed responses fail closed to Free without stale paid reuse. Hosted run `36700076759` passes the complete nine-cell platform matrix and self-scan `36700077215` passes. Gate remains OPEN: deployed signer/catalog alignment, supported-version old-token migration evidence, and hosted activation integration are still required. No production operation occurred.

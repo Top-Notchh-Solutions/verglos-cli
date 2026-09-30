@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 runtime denial cache matrix (Web PR #112)
+
+- **Code:** Web PR #112 exact tested head `4548734` merged as `517df10c`.
+- **Verification:** Every protected organization API route is called through its real handler with forged request-body authority fields while authorization denies; each denial response is asserted `no-store` or `private, no-store`. Focused negative-boundary suite passes 2/2 and local typecheck/diff checks pass. Hosted run `36703830835`, GitGuardian, and Vercel pass.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked; modified-CLI and direct list/search/export/public-private runtime evidence remain open.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-CLI-006 official in-toto layout/link smoke
 
 - **Run:** Docker `python:3.12-slim`; installed official `in-toto==3.0.0`; generated an ephemeral Ed25519 key; created a synthetic signed root layout and `build` link with `in-toto-mock`/`in-toto-sign`; verified with `in-toto-verify --verification-keys`.
