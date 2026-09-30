@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 acceptance closeout (Web PR #121)
+
+- **Code:** Follow-up commits `d940136` and `e0fe054` merged as `a88495151f43d1a6addc16a88427288cb2d1458e` in PR #121.
+- **Verification:** Hosted Verify run `36760390332` passed typecheck, full tests, `pnpm test:negative-boundary` (including search), schema/migration checks, build, public-boundary, dependency, SBOM/license, and tracked-secret checks. Vercel and GitGuardian checks passed. Existing Docker-backed list/search/export/public-private runtime and modified-CLI authority evidence remain part of the acceptance set.
+- **Acceptance boundary:** QUAL-WEB-001 accepted. No production database/environment read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 distinct search runtime (Web PR #120)
 
 - **Code:** Web tested head `9ecd0092e202a65549e4a53b0f0cbbb58e144957`; PR #120 merged as `677a78afd27435c57c498fe8bd8b4e9013096642`.

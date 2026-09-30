@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-09-30 · QUAL-WEB-001 complete negative authorization suite (Web PR #121)
+
+- **Implementation:** Follow-up commits `d940136` and `e0fe054` on the runtime-data qualification branch, merged as `a88495151f43d1a6addc16a88427288cb2d1458e` in PR #121.
+- **Evidence:** The shared negative-boundary matrix now includes the authenticated organization search route, and hosted Verify run `36760390332` executes `pnpm test:negative-boundary` in addition to the full test suite, typecheck, schema/migration checks, build, public-boundary, dependency, SBOM/license, and secret checks. All hosted steps completed successfully. Existing Docker-backed list/search/export/public-private integrations and modified-CLI authority tests complete the acceptance boundary.
+- **Acceptance:** QUAL-WEB-001 is accepted. The suite covers role/action authorization, guessed and malformed IDs, forged client/query authority, tenant-scoped list/search/export runtime, cache boundaries, public/private receipt behavior, and current CLI request behavior. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 distinct search runtime (Web PR #120)
 
 - **Implementation:** Web `9ecd0092e202a65549e4a53b0f0cbbb58e144957`, merged as `677a78afd27435c57c498fe8bd8b4e9013096642`.
