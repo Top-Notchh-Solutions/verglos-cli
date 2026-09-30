@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 authorized tenant list runtime (Web PR #116)
+
+- **Implementation:** Web `95ebce4`, merged as `d230af0f` in PR #116, invokes the real organization project-list GET handler through the authorization provider for two isolated tenants and includes forged query authority fields.
+- **Evidence:** Docker PostgreSQL focused run passes 2/2 with zero skips (project list plus receipt list/detail/download); project responses contain only the requested tenant's rows, preserve the server-derived organization identity, and return `private, no-store`. Hosted run `36716252644` and GitGuardian/Vercel pass.
+- **Boundary:** No checkbox changed. QUAL-WEB-001 still lacks a distinct search handler and hosted/provider-backed list/search/export plus complete public-private runtime evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 receipt list/detail/export runtime
 
 - **Evidence:** `verglos-web/src/lib/organizations/record-receipt-route.integration.test.ts` passed 1/1 against disposable Docker PostgreSQL with no skip.

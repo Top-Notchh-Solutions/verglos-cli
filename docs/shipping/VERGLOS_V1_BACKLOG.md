@@ -469,6 +469,8 @@ Evidence/problem: compilation cannot qualify a release-security product. The int
 
 The existing receipt route integration passed **1/1 with zero skips** against disposable local PostgreSQL, covering tenant-isolated list reads, authorized detail verification, and private download/export projection. No distinct search handler exists in the current route inventory; hosted/provider-backed list/search/export evidence and the complete public/private matrix remain open. No checkbox changed.
 
+Web PR #116 tested head `95ebce4` merged as `d230af0f` adds direct PostgreSQL-backed invocation of the organization project-list route for two tenants with forged query authority fields. The focused Docker run passes **2/2 with zero skips** and hosted run `36716252644` is green across the Web verification workflow. This strengthens list-boundary evidence only; QUAL-WEB-001 remains unchecked because distinct search semantics are absent and hosted/provider-backed list/search/export plus the complete public-private matrix remain open.
+
 ## Epic 19 — Post-release-candidate acceptance and GA truth lock
 
 Evidence/problem: external validation is deliberately last. It validates the complete release candidate and claims; it cannot redefine unfinished functionality as shipped or expand frozen V1 scope.

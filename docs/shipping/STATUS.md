@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 authorized tenant list runtime (Web PR #116)
+
+Web PR #116 tested head `95ebce4` merged as `d230af0fd0227f0f4625257e6ee743ed3ef460f0`. The PostgreSQL-backed tenant integration now invokes the real organization project-list GET handler for two isolated tenants, sends forged query authority fields, and asserts tenant-scoped rows, fixed organization identity, and `private, no-store`; the receipt list/detail/download integration remains active in the same Docker run. Focused local Docker run passes **2/2 with zero skips**; hosted run `36716252644` passes the Web verification workflow, GitGuardian, and Vercel. QUAL-WEB-001 remains unchecked because no distinct search handler exists and hosted/provider-backed list/search/export plus complete public-private matrix evidence remain open. No production database/environment operation, migration, deployment, release, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 receipt list/detail/export runtime evidence
 
 The existing PostgreSQL-backed `src/lib/organizations/record-receipt-route.integration.test.ts` passed **1/1 with zero skips** against a disposable local `postgres:15-alpine` container. Active assertions cover tenant A/B list isolation, authorized private receipt detail verification, and authorized private download/export projection; raw rejected source and signer identity fields remain excluded. This is local runtime evidence only: no production database/environment, migration, deployment, release, or marketing action occurred. QUAL-WEB-001 remains unchecked because no separate search handler exists and hosted/provider-backed evidence remains open.

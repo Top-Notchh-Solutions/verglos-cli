@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 authorized tenant list runtime (Web PR #116)
+
+- **Code:** Web tested head `95ebce448371ab773f2e8af342098894b6adb966`; merged as `d230af0fd0227f0f4625257e6ee743ed3ef460f0` in PR #116.
+- **Runtime evidence:** Disposable PostgreSQL 15 run passes 2/2 with zero skips. The real organization project-list route is invoked for tenant A and B with forged query fields; each response is scoped to its own rows and has `private, no-store`. Existing receipt list/detail/download integration also passes in the same run.
+- **Hosted evidence:** run `36716252644` completed successfully; GitGuardian, Vercel preview, and deployment checks passed.
+- **Boundary:** qualification progress only; no search endpoint was invented and no production DB/environment read/write, migration, deployment, release, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 receipt runtime boundary
 
 - **Run:** disposable local `postgres:15-alpine`; `TEST_DATABASE_URL=postgres://…/verglos_test pnpm exec tsx --test src/lib/organizations/record-receipt-route.integration.test.ts` from `verglos-web`.
