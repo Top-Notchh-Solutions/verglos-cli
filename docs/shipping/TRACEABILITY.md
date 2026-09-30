@@ -1,5 +1,10 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-CLI-006 official in-toto layout/link smoke
+
+- **Evidence:** Docker `python:3.12-slim` installed official `in-toto==3.0.0`; an ephemeral Ed25519 key signed a synthetic root layout and `build` link, and `in-toto-verify --verification-keys` returned success.
+- **Boundary:** This proves the official verifier can consume a valid layout/link pair, not release provenance. It uses synthetic data and an ephemeral key; trusted keyless Sigstore/Fulcio/Rekor evidence and actual release-pipeline binding remain open. QUAL-CLI-006 stays unchecked.
+
 ## Progress · 2026-09-30 · PLAN-CLI-004 compatibility fixtures
 
 - **Implementation:** CLI `9ff21be`, merged as `f16c6f1` in PR #50, adds frozen server-shaped plan/catalog fixtures for Free, Pro, Team, Studio, and Enterprise plus malformed-payload fail-closed cases. Capability and allowance keys remain opaque to the client.

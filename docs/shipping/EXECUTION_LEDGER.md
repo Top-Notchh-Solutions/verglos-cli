@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-CLI-006 official in-toto layout/link smoke
+
+- **Run:** Docker `python:3.12-slim`; installed official `in-toto==3.0.0`; generated an ephemeral Ed25519 key; created a synthetic signed root layout and `build` link with `in-toto-mock`/`in-toto-sign`; verified with `in-toto-verify --verification-keys`.
+- **Result:** official verifier returned success for the layout/link pair.
+- **Boundary:** synthetic local evidence only; no release artifact/pipeline binding, Fulcio identity, Rekor entry, or trusted keyless Sigstore evidence. QUAL-CLI-006 remains unchecked. No production/database read/write, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · PLAN-CLI-004 compatibility fixtures (CLI PR #50)
 
 - **Code:** CLI PR #50 exact tested head `9ff21be` merged as `f16c6f1`.

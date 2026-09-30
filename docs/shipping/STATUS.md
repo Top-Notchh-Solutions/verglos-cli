@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-CLI-006 official in-toto layout/link verification progress
+
+An isolated Docker run installed official `in-toto==3.0.0`, generated an ephemeral Ed25519 layout key, produced a signed link with `in-toto-mock`/`in-toto-sign`, signed the root layout, and verified the layout/link with `in-toto-verify --verification-keys`; verification returned success. This is synthetic local layout/link evidence only. QUAL-CLI-006 remains unchecked pending validation against the actual release pipeline plus trusted keyless Sigstore/Fulcio/Rekor evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · PLAN-CLI-004 plan/catalog compatibility qualification progress (CLI PR #50)
 
 CLI PR #50 tested head `9ff21be` merged as `f16c6f1`. The entitlement-jwt suite now freezes server-shaped Free/Pro/Team/Studio/Enterprise fixtures, preserves opaque capability/allowance keys, and proves malformed catalogs fail closed to Free without stale paid reuse. Local full CLI tests, typecheck, and build pass. Hosted run `36700076759` passes all nine Ubuntu/macOS/Windows × Node 20/22/24 matrix cells; self-scan `36700077215` passes. PLAN-CLI-004 remains unchecked: deployed signer/catalog alignment, old-token migration evidence across supported versions, and hosted activation integration remain open. No production/database operation, deployment, release, publish, or marketing action occurred.
