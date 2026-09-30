@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 public receipt authority/cache boundary (Web PR #113)
+
+- **Code:** Web PR #113 exact tested head `39dfb64` merged as `24232db2`.
+- **Verification:** Direct public receipt JSON invocation rejects an invalid identity before querying, does not reflect forged tenant/project query fields, and sets `no-store`; combined private denial/public boundary tests pass 4/4. Hosted run `36704251024`, GitGuardian, and Vercel pass.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked; complete modified-CLI and direct list/search/export/public-private runtime evidence remain open.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 runtime denial cache matrix (Web PR #112)
 
 - **Code:** Web PR #112 exact tested head `4548734` merged as `517df10c`.

@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 public receipt authority boundary
+
+- **Implementation:** Web `39dfb64`, merged as `24232db2` in PR #113, invokes the public receipt JSON route with invalid identity and forged tenant/project query parameters.
+- **Evidence:** Combined private denial/public receipt boundary tests pass 4/4; public invalid-path responses remain `no-store` and do not reflect forged authority fields. Hosted run `36704251024`, GitGuardian, and Vercel pass.
+- **Boundary:** This closes no checkbox. QUAL-WEB-001 still requires complete modified-CLI and direct list/search/export/public-private runtime evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 runtime denial cache matrix
 
 - **Implementation:** Web `4548734`, merged as `517df10c` in PR #112, extends the existing protected-route matrix with real handler calls for every organization API method and forged request-body authority fields.
