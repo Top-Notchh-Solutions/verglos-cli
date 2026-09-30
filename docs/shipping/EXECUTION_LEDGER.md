@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-CLI-006 official-format progress (CLI PR #47)
+
+- **Code:** CLI `af3aa09` fixes SPDX generation: top-level `dataLicense`, `SPDXRef-DOCUMENT DESCRIBES` relationships for every package, and URI-safe download locations. Regenerated `SBOM.cdx.json` and `SBOM.spdx.json` are the only generated artifacts in the PR.
+- **Verification:** official CycloneDX CLI 0.33.1 validates `SBOM.cdx.json`; SPDX Tools 0.8.5 validates `SBOM.spdx.json`; Microsoft SARIF Multitool 5.7.0 validates a bounded SARIF fixture. Focused generator/license/release tests, full Turbo test graph (12/12), typecheck, build, and diff checks pass.
+- **Open evidence:** PR #47 hosted nine-cell matrix/self-scan pending; official in-toto/Sigstore validation and supported-platform install/upgrade/rollback evidence are still missing. QUAL-CLI-006 remains open.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred; private docs and founder-owned assets remain outside the PR.
+
 ## 2026-09-30 · dependency audit and QUAL-CLI-006 handoff
 
 - **Reconciliation:** current backlog is **214 checked / 55 unchecked / 269 total**. RECORD-002/009/011/012 and DIST-004/005 are accepted, so QUAL-CLI-006 is dependency-ready; the prior inventory statement that it was RECORD-gated was stale and has been corrected.

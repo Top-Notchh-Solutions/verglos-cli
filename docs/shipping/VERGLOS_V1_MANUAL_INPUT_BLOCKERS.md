@@ -79,7 +79,7 @@ Each unresolved class below points at its governing bucket. Resolving a bucket m
 
 ## Miscellaneous — bucket A (production DB) or already-partial
 
-- **QUAL-CLI-006** — dependency-ready now that IMPORT exports, RECORD-002/009/011/012, and DIST-004/005 are accepted. The untracked `spec-validation-corpus.test.ts` is only a preparatory required-field corpus; acceptance still needs runs through the official SARIF/CycloneDX/SPDX/in-toto/Sigstore validators plus supported-platform install/upgrade/rollback evidence. No official validator is currently installed in the active environment, so this is an executable next batch, not an accepted item.
+- **QUAL-CLI-006** — dependency-ready now that IMPORT exports, RECORD-002/009/011/012, and DIST-004/005 are accepted. CLI PR #47 (`af3aa09`) fixes SPDX generator defects and records official SARIF/CycloneDX/SPDX validation evidence; acceptance still needs official in-toto/Sigstore validation plus supported-platform install/upgrade/rollback evidence. The item remains unchecked while PR #47 hosted matrix/self-scan checks are pending and those remaining evidence classes are absent.
 - No independent DIST-005 action remains; it is accepted. The next Hunt item is HUNT-008 and is blocked on the concrete content/provenance evidence stated above.
 
 ## Founder-checklist items (explicitly external — bucket A/B/D/E)
