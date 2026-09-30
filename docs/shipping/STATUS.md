@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-CLI-006 supported-platform upgrade/rollback transition (CLI PR #49)
+
+CLI PR #49 (`02c3c6e`) merged as `ef78ac6f82668d4dcefb927edc197e8cce7a7fe4` after hosted platform run `36682992576` passed all nine Ubuntu/macOS/Windows × Node 20/22/24 cells plus self-scan. Every cell completed the real published `verglos@1.8.3` → six local `2.0.0-alpha.1` archives → published `verglos@1.8.3` transition, alongside the existing clean-consumer, typecheck, and full test checks. A Windows `.cmd` spawn boundary was corrected before the green rerun. QUAL-CLI-006 remains unchecked: official in-toto layout/link validation and trusted keyless Sigstore/Fulcio/Rekor evidence are still absent. No production/database operation, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-CLI-006 cross-platform clean-consumer qualification (CLI PR #48)
 
 CLI PR #48 (`79ae04f`) merged as `f72b910` after hosted run `36681169580` passed all nine Ubuntu/macOS/Windows × Node 20/22/24 cells plus self-scan. The matrix now packs and audits all six public archives, installs them into a fresh consumer, imports every public library, executes the CLI version, confirms no external engine cache, and uploads a per-cell log. Windows-specific packaging defects found by the run were corrected: `pnpm.cmd`/`npm.cmd` shell dispatch and platform-independent Node tar inspection. Local pack, manifest, consumer, and notice tests pass. This closes the direct cross-platform clean-install evidence slice, but QUAL-CLI-006 remains unchecked: no real package upgrade/rollback transition, official in-toto layout/link validation, or trusted keyless Sigstore/Fulcio/Rekor evidence exists. No production/database operation, migration, deployment, release, publish, or marketing action occurred.

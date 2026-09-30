@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-CLI-006 supported-platform upgrade/rollback transition (CLI PR #49)
+
+- **Code:** PR #49 head `02c3c6ec4af78f0dca538795d12bc133d2d63381` merged as `ef78ac6f82668d4dcefb927edc197e8cce7a7fe4`.
+- **Hosted evidence:** platform run `36682992576` passed all nine Ubuntu/macOS/Windows × Node 20/22/24 cells plus self-scan. Each matrix cell completed the real `1.8.3 → 2.0.0-alpha.1 → 1.8.3` consumer transition, with the existing full test suite and clean-consumer checks also green.
+- **Boundary:** Windows `.cmd` CLI invocation required shell dispatch and was fixed before the successful rerun. This closes supported-platform transition evidence, but QUAL-CLI-006 stays unchecked pending official in-toto layout/link validation and trusted keyless Sigstore/Fulcio/Rekor evidence.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-CLI-006 cross-platform clean-consumer qualification (CLI PR #48)
 
 - **Code:** PR #48 head `79ae04fee9eb3127127a863ca5458619dce0774c` merged as `f72b9107867e026d8df93411da9c91cf796cde27`. The platform workflow packs/audits six public archives, runs the clean consumer verifier, and uploads one log per matrix cell. Windows support fixes use `pnpm.cmd`/`npm.cmd` with shell dispatch and a pure Node gzip/tar archive reader, avoiding host-specific tar behavior.
