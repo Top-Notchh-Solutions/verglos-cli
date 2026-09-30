@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 malformed-route boundaries
+
+- **Implementation:** Web `66c1f94`, merged as `0a85f08` in PR #103, adds `src/lib/organizations/negative-boundary.test.ts` and a targeted `test:negative-boundary` script.
+- **Evidence:** Every protected organization API method is exercised with malformed, traversal-shaped, and zero-UUID organization identifiers. The route layer either rejects malformed IDs before authorization or returns a fixed non-enumerating denial; attacker-controlled IDs are never echoed and authorization runs exactly once before any data-bearing path. Hosted run `36686440312` passed the full Web workflow.
+- **Boundary:** This closes no checkbox. QUAL-WEB-001 still requires modified/untrusted CLI and complete list/search/export/cache/public/private evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 + QUAL-WEB-005 + QUAL-WEB-006 substrate
 
 - **Implementation:** Web `82d2157` + `a24fef7` on `feat/web-qual-batch`; PR #100 merged as `666317e` after hosted checks passed.

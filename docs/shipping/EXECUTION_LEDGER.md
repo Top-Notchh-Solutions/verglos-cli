@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 malformed-route boundary qualification progress (Web PR #103)
+
+- **Code:** Web PR #103 exact tested head `66c1f94` merged as `0a85f08`.
+- **Verification:** `negative-boundary.test.ts` passes across every protected organization API method and three attacker-controlled organization-ID forms; malformed inputs are rejected before authorization, while guessed IDs receive bounded fixed denials with no identifier echo. Local typecheck/build/diff checks pass; hosted run `36686440312` passes the full Web verification workflow, GitGuardian, and Vercel.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked. This is route-boundary evidence only; modified/untrusted CLI behavior and complete list/search/export/cache/public/private coverage remain open.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-006 accessibility remediation ready (Web PR #102)
 
 - **Code:** Web PR #102 exact head `a69e50d` is pushed and remains open/unmerged. It fixes the measured public contrast failures, removes opacity-induced language-label failures, changes coral CTA text to a dark foreground, and adds keyboard focus/labels to docs horizontal scroll regions.

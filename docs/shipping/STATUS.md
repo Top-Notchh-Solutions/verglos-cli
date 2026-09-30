@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 malformed-route boundary qualification progress (Web PR #103)
+
+Web PR #103 (`feat/web-qual-001-negative-boundary`) merged as `0a85f08` after hosted run `36686440312` passed typecheck, the configured test suite, schema/migration checks, production build, public-boundary, dependency/SBOM/license, and tracked-secret checks; GitGuardian also passed. The new `negative-boundary.test.ts` probes every protected organization API method with malformed, traversal-shaped, and zero-UUID organization identifiers. It proves fixed non-enumerating denials, no echo of attacker-controlled identifiers, and exactly-once authorization before data access (or validation rejection before authorization). Local targeted test, typecheck, build, and diff checks pass. QUAL-WEB-001 remains unchecked: modified/untrusted CLI behavior and the complete list/search/export/cache/public/private matrix still require direct evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-006 accessibility remediation ready (Web PR #102)
 
 Web PR #102 (`feat/web-qual-006-a11y-remediation`) exact head `a69e50d` is hosted-green: run `36685565094` passed typecheck, full configured tests, schema/migration checks, production build, public-boundary, dependency/license/SBOM, and secret checks; GitGuardian, Vercel, and preview comments pass. The remediation raises audited low-contrast text, changes coral CTA foreground to dark text, removes opacity that suppressed language labels, and makes docs horizontal scroll regions keyboard-focusable with labels. Local axe-core 4.10.2 now reports **0 violations** on `/`, `/detectors`, and `/docs` (47/31/41 rules passing). PR #102 remains intentionally unmerged under the public truth/marketing freeze; QUAL-WEB-006 remains unchecked pending authenticated-dashboard, hosted, and complete CWV/accessibility evidence.
