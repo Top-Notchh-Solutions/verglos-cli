@@ -675,3 +675,8 @@ while they remain unresolved.
 - **Run:** `pnpm pack:public`; `node scripts/check-packed-manifests.mjs .artifacts/public-packages`; `node scripts/verify-clean-consumer.mjs .artifacts/public-packages` on CLI branch `af3aa09` (merged as `ca88ef2`).
 - **Result:** six public npm archives packed; packed-manifest audit passed; fresh temporary consumer installed all six archives, imported `@verglos/shared`, `@verglos/scanner`, `@verglos/reporter`, `@verglos/mcp`, and `@verglos/entitlement`, executed `Verglos 2.0.0-alpha.1`, and confirmed no external engine installation/cache.
 - **Boundary:** this is macOS clean-install evidence. It does not establish upgrade/rollback, Linux/Windows runtime evidence, or official in-toto/Sigstore trust validation. QUAL-CLI-006 remains unchecked. `.artifacts/public-packages` is ignored and was not committed.
+## 2026-09-30 · QUAL-CLI-006 compatibility/rollback corpus evidence
+
+- **Run:** repository-local tsx launcher executed `packages/shared/src/install-matrix-invariants.test.ts`, `packages/shared/src/upgrade-compat-corpus.test.ts`, and `packages/cli/src/engines-install.test.ts`.
+- **Result:** **48/48 passed**. The run covers no-install-hook/explicit-files/engines/bin invariants, legacy/current schema and record compatibility, approved engine update and rollback mutation labels, digest/signature validation, and fail-closed invalid/symlink cases.
+- **Boundary:** source-level and local macOS evidence only; it does not prove a real Linux/Windows install/upgrade/rollback workflow or official in-toto/Sigstore trust validation. QUAL-CLI-006 remains unchecked.
