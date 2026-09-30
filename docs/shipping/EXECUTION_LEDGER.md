@@ -685,3 +685,7 @@ while they remain unresolved.
 - **Run:** `docker run --rm -v "$PWD:/work" -w /work node:24-bookworm node scripts/verify-clean-consumer.mjs .artifacts/public-packages`.
 - **Result:** Linux `node:24-bookworm` (linux/amd64 under host emulation) installed all six archives, imported every public library, executed `Verglos 2.0.0-alpha.1`, and created no external engine cache.
 - **Boundary:** direct Linux/macOS install evidence now exists. Windows install, real package upgrade/rollback transition, and official in-toto/Sigstore trust validation remain absent; QUAL-CLI-006 remains unchecked.
+## 2026-09-30 · QUAL-CLI-006 official Cosign tool smoke
+
+- **Run:** Docker-pinned `gcr.io/projectsigstore/cosign:v2.4.1` generated and verified a DSSE attestation over the actual `verglos-2.0.0-alpha.1.tgz`; verification used `--offline --insecure-ignore-tlog` and returned `Verified OK`.
+- **Evidence boundary:** this is an official-tool format/cryptographic smoke only. It used an ephemeral local key, a synthetic predicate, no Fulcio identity, and no Rekor upload. It must not be reported as keyless Sigstore trust or release provenance. Official in-toto layout/link validation and trusted keyless evidence remain open; QUAL-CLI-006 stays unchecked.
