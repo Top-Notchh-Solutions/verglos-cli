@@ -2,7 +2,7 @@
 
 ## Progress · 2026-09-30 · qualification substrate handoff
 
-Web handoff commit `82d2157` (`feat/web-qual-batch`) adds pure decision surfaces for QUAL-WEB-001/005/006. Exact-branch focused tests pass 16/16; the configured suite passes 828/850 with 22 environment-gated skips; typecheck and optimized build pass. This does not qualify the backlog items: no account-deletion/persistence trace, browser/screen-reader/CWV capture, hosted provider evidence, or complete modified-CLI boundary run exists. The branch is not merged into the current `feat/web-final-001-truth-registry` branch, and GitHub PR/check state could not be re-queried in this session. No production DB/environment operation, migration, deployment, merge, release, or marketing change occurred. Backlog remains **214 checked / 55 unchecked / 269 total**.
+Web handoff commits `82d2157` + `a24fef7` (`feat/web-qual-batch`) add pure decision surfaces for QUAL-WEB-001/005/006 and make missing/invalid performance evidence fail closed. Exact-branch focused tests pass 18/18; the configured suite passes 830/852 with 22 environment-gated skips; typecheck and optimized build pass. This does not qualify the backlog items: no account-deletion/persistence trace, browser/screen-reader/CWV capture, hosted provider evidence, or complete modified-CLI boundary run exists. The branch is not merged into the current `feat/web-final-001-truth-registry` branch, and GitHub PR/check state could not be re-queried in this session. No production DB/environment operation, migration, deployment, merge, release, or marketing change occurred. Backlog remains **214 checked / 55 unchecked / 269 total**.
 
 Updated: 2026-09-24
 

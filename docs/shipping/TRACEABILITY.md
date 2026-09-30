@@ -2,8 +2,8 @@
 
 ## Progress · 2026-09-30 · QUAL-WEB-001 + QUAL-WEB-005 + QUAL-WEB-006 substrate
 
-- **Implementation:** Web `82d2157` on `feat/web-qual-batch`, not merged into the current truth-registry branch.
-- **Evidence:** `src/lib/qual/qual-web-suites.ts` provides pure authorization-coverage, privacy-deletion, and accessibility/performance decision surfaces. Its focused suite passes 16/16; the exact branch's configured full suite passes 828/850 with 22 environment-gated skips; typecheck and optimized build pass.
+- **Implementation:** Web `82d2157` + `a24fef7` on `feat/web-qual-batch`, pushed to the existing phase branch and not merged into the current truth-registry branch.
+- **Evidence:** `src/lib/qual/qual-web-suites.ts` provides pure authorization-coverage, privacy-deletion, and accessibility/performance decision surfaces. Its focused suite passes 18/18; the exact branch's configured full suite passes 830/852 with 22 environment-gated skips; typecheck and optimized build pass. The follow-up fails closed on empty, non-finite, and negative performance measurements.
 - **Boundary:** this is preparatory qualification logic, not route, persistence, browser, provider, or hosted acceptance. QUAL-WEB-001/005/006 remain open; no checkbox changed and no production operation occurred.
 
 ## Acceptance · 2026-09-24 · PRO-005 (Web PR #68)
