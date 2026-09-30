@@ -2,7 +2,7 @@
 
 ## Verification · 2026-09-30 · current branch audit
 
-Current Web truth-registry branch `65e2788` has a complete local configured run of **859 tests / 837 pass / 22 environment-gated skips / 0 failures** on Node 26 (the repositories declare Node 22). Current Web PR #101 remains green in hosted typecheck/schema, tests, migrations, build, security, Vercel, and GitGuardian checks, but is held under FINAL-WEB-001 pending the founder truth-freeze command. The current CLI branch remains clean in tracked files; `pnpm --filter @verglos/shared test` passes, including the untracked founder-owned `spec-validation-corpus.test.ts` (preparatory QUAL-CLI-006 evidence only; it was not staged or modified). No checkbox changes, production/database operations, migrations, deployment, release, or marketing changes occurred.
+Current Web truth-registry branch `8c67399` merges the already-accepted quality head `666317e` into PR #101 without changing its scope. Local configured verification is **877 tests / 855 pass / 22 environment-gated skips / 0 failures** on Node 26 (the repositories declare Node 22). Hosted typecheck/schema, tests, migrations, build, security, Vercel, and GitGuardian checks pass. PR #101 remains held under FINAL-WEB-001 pending the founder truth-freeze command. The current CLI branch remains clean in tracked files; `pnpm --filter @verglos/shared test` passes, including the untracked founder-owned `spec-validation-corpus.test.ts` (preparatory QUAL-CLI-006 evidence only; it was not staged or modified). No checkbox changes, production/database operations, migrations, deployment, release, or marketing changes occurred.
 
 ## Progress · 2026-09-30 · qualification substrate handoff
 
