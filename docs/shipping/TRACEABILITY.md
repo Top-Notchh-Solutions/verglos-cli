@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 forged query authority fields
+
+- **Implementation:** Web `f79a7a5`, merged as `88a809d3` in PR #114, adds attacker-controlled tenant/project/plan/allowance query fields to every protected route matrix request.
+- **Evidence:** Existing path-authorization and non-cacheable denial assertions continue to pass in the 4/4 boundary suite; hosted run `36704670862`, GitGuardian, and Vercel pass.
+- **Boundary:** This closes no checkbox. QUAL-WEB-001 still requires complete modified-CLI and direct list/search/export/public-private runtime evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 public receipt authority boundary
 
 - **Implementation:** Web `39dfb64`, merged as `24232db2` in PR #113, invokes the public receipt JSON route with invalid identity and forged tenant/project query parameters.

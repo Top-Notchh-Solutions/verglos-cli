@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 forged-query authority progress (Web PR #114)
+
+Web PR #114 tested head `f79a7a5` merged as `88a809d3`. The protected organization route matrix now sends forged tenant/project/plan/allowance query fields alongside forged bodies, while assertions continue to prove path-based authorization and non-cacheable denials. Combined boundary tests remain 4/4; hosted run `36704670862`, GitGuardian, and Vercel pass. QUAL-WEB-001 remains unchecked pending complete modified-CLI and list/search/export/public-private runtime evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 public receipt authority/cache progress (Web PR #113)
 
 Web PR #113 tested head `39dfb64` merged as `24232db2`. The public receipt JSON handler now has direct runtime coverage proving invalid identities reject forged tenant/project query parameters without reflection and retain explicit `no-store` behavior. Combined private-denial/public-boundary tests pass 4/4; hosted run `36704251024`, GitGuardian, and Vercel pass. QUAL-WEB-001 remains unchecked pending complete modified-CLI and list/search/export/public-private runtime evidence. No production/database operation, deployment, release, publish, or marketing action occurred.

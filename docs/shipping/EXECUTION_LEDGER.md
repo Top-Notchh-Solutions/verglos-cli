@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 forged-query authority matrix (Web PR #114)
+
+- **Code:** Web PR #114 exact tested head `f79a7a5` merged as `88a809d3`.
+- **Verification:** Protected route matrix requests include forged tenant/project/plan/allowance query fields and forged bodies; path-based authorization and non-cacheable denial assertions remain green in the 4/4 boundary suite. Hosted run `36704670862`, GitGuardian, and Vercel pass.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked; complete modified-CLI and direct list/search/export/public-private runtime evidence remain open.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 public receipt authority/cache boundary (Web PR #113)
 
 - **Code:** Web PR #113 exact tested head `39dfb64` merged as `24232db2`.
