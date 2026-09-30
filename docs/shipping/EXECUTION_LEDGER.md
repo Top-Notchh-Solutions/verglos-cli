@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 + QUAL-WEB-005 + QUAL-WEB-006 progress
+
+- **Implementation:** Web `82d2157` (`feat/web-qual-batch`) adds pure qualification decision surfaces and 16 focused tests; it remains separate from the current Web branch and is not represented as a merged product capability.
+- **Verification:** exact branch full configured suite `850 total / 828 pass / 22 environment-gated skips`, TypeScript clean, optimized production build clean.
+- **Accounting / boundary:** **214 checked / 55 unchecked / 269 total**; all three QUAL-WEB items remain unchecked. Missing evidence is route-level deletion/consent and hosted privacy trace, real browser accessibility/CWV measurements, and complete negative authorization/modified-CLI boundary coverage. No production DB/environment read or write, migration, deployment, merge, release, or marketing action occurred.
+
 ## 2026-09-24 · PRO-005 monitoring/inventory accepted (Web PR #68)
 
 - **Implementation:** Web `0b4da64`, exact tested head `5dd54a816fa400c483110b1b5342ed3758aa888d`, merged as `c54f19aa7d4dbe8a9d4af6315b4158f253843df2`.

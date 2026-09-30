@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 + QUAL-WEB-005 + QUAL-WEB-006 substrate
+
+- **Implementation:** Web `82d2157` on `feat/web-qual-batch`, not merged into the current truth-registry branch.
+- **Evidence:** `src/lib/qual/qual-web-suites.ts` provides pure authorization-coverage, privacy-deletion, and accessibility/performance decision surfaces. Its focused suite passes 16/16; the exact branch's configured full suite passes 828/850 with 22 environment-gated skips; typecheck and optimized build pass.
+- **Boundary:** this is preparatory qualification logic, not route, persistence, browser, provider, or hosted acceptance. QUAL-WEB-001/005/006 remain open; no checkbox changed and no production operation occurred.
+
 ## Acceptance · 2026-09-24 · PRO-005 (Web PR #68)
 
 - **Implementation:** Web `0b4da64` plus deterministic-test correction `5dd54a8`, merged as `c54f19a`.
