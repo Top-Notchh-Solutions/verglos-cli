@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · PLAN-CLI-004 compatibility fixtures (CLI PR #50)
+
+- **Code:** CLI PR #50 exact tested head `9ff21be` merged as `f16c6f1`.
+- **Verification:** frozen server-shaped fixtures cover Free, Pro, Team, Studio, and Enterprise; opaque capability/allowance fields round-trip; malformed catalogs fail closed to Free without stale paid reuse. Local full CLI tests, typecheck, and build pass. Hosted platform run `36700076759` passes all nine Ubuntu/macOS/Windows × Node 20/22/24 cells; self-scan `36700077215` passes.
+- **Acceptance boundary:** PLAN-CLI-004 remains unchecked pending deployed signer/catalog alignment, old-token migration evidence across supported versions, and hosted activation integration.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 private account/API cache-boundary completion (Web PR #111)
 
 - **Code:** Web PR #111 exact tested head `f524382` merged as `c83300b`.

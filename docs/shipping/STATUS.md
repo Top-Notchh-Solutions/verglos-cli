@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · PLAN-CLI-004 plan/catalog compatibility qualification progress (CLI PR #50)
+
+CLI PR #50 tested head `9ff21be` merged as `f16c6f1`. The entitlement-jwt suite now freezes server-shaped Free/Pro/Team/Studio/Enterprise fixtures, preserves opaque capability/allowance keys, and proves malformed catalogs fail closed to Free without stale paid reuse. Local full CLI tests, typecheck, and build pass. Hosted run `36700076759` passes all nine Ubuntu/macOS/Windows × Node 20/22/24 matrix cells; self-scan `36700077215` passes. PLAN-CLI-004 remains unchecked: deployed signer/catalog alignment, old-token migration evidence across supported versions, and hosted activation integration remain open. No production/database operation, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 private account/API cache-boundary completion (Web PR #111)
 
 Web PR #111 merged as `c83300b` after hosted run `36693118104` passed typecheck, the full test suite, DB/schema/migration checks, production build, public-boundary, dependency/SBOM/license, and tracked-secret checks; GitGuardian and Vercel also passed. Authenticated account sync, CLI authorization/status, license status, score history, and monitor registration/status/test/unregister endpoints now apply `private, no-store` to response paths, including shared paid-license denials. The combined focused contract suites pass 17/17 locally. QUAL-WEB-001 remains unchecked pending modified-CLI and direct runtime list/search/export/public-private matrix evidence. No production/database operation, deployment, release, publish, or marketing action occurred.

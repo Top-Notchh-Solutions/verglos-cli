@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · PLAN-CLI-004 compatibility fixtures
+
+- **Implementation:** CLI `9ff21be`, merged as `f16c6f1` in PR #50, adds frozen server-shaped plan/catalog fixtures for Free, Pro, Team, Studio, and Enterprise plus malformed-payload fail-closed cases. Capability and allowance keys remain opaque to the client.
+- **Evidence:** Full local CLI test suite, typecheck, and build pass. Hosted platform run `36700076759` passes all nine Ubuntu/macOS/Windows × Node 20/22/24 cells; self-scan `36700077215` passes.
+- **Boundary:** This is PLAN-CLI-004 progress only. The item remains unchecked pending deployed signer/catalog alignment, old-token migration evidence across supported versions, and hosted activation integration. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 private account/API cache boundaries
 
 - **Implementation:** Web `f524382`, merged as `c83300b` in PR #111, adds private no-store response headers to authenticated account sync, CLI-auth, license, score-history, and monitor routes and to shared paid-license denials.
