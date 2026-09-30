@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-CLI-006 current-source in-toto archive binding (CLI PR #51)
+
+- **Implementation:** CLI `e63b5041727a175da1d770012cb945a061f05324`, rebased onto current main `f16c6f1`, merged as `353787539451e918dcda088ff6cbbd497ae1c631`.
+- **Evidence:** The workflow packs six current source archives and verifies their exact SHA-256 products with official `in-toto==3.0.0`. Hosted run `36720267628` passes the in-toto job and all nine Ubuntu/macOS/Windows × Node 20/22/24 cells; self-scan `36720267470` passes. Local typecheck/build/contract/verifier checks pass.
+- **Boundary:** No checkbox changed. `2.0.0-alpha.1` remains unreleased; trusted keyless Sigstore/Fulcio/Rekor, final release identity, licensing, and publish authorization evidence are still absent. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 tenant release runtime (Web PR #118)
 
 - **Implementation:** Web `d0df2ee`, merged as `b0663e35` in PR #118, extends the isolated PostgreSQL tenant fixture with real release-list and release-detail route invocations.

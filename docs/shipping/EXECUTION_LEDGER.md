@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-CLI-006 current-source in-toto archive binding (CLI PR #51)
+
+- **Code:** CLI tested head `e63b5041727a175da1d770012cb945a061f05324`, rebased onto `f16c6f1`, merged as `353787539451e918dcda088ff6cbbd497ae1c631`.
+- **Verification:** Local typecheck/build/contract tests and official `in-toto==3.0.0` verification pass. Hosted run `36720267628` passes archive binding plus all nine platform/Node cells; self-scan `36720267470` passes.
+- **Acceptance boundary:** QUAL-CLI-006 remains unchecked. This binds current source archives to an ephemeral in-toto layout/link, not trusted keyless Sigstore/Fulcio/Rekor release provenance or final publish authorization. Package remains alpha.1 and no production DB/environment, deployment, release, or npm publish occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 tenant release runtime (Web PR #118)
 
 - **Code:** Web tested head `d0df2eecf769bf615cfbdad77848f7ce6a3f0f8f`; merged as `b0663e355d7e44eec1b59782f7a77f1a6d04750` in PR #118.
