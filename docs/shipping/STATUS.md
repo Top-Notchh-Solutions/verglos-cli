@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-006 accessibility remediation ready (Web PR #102)
+
+Web PR #102 (`feat/web-qual-006-a11y-remediation`) exact head `a69e50d` is hosted-green: run `36685565094` passed typecheck, full configured tests, schema/migration checks, production build, public-boundary, dependency/license/SBOM, and secret checks; GitGuardian, Vercel, and preview comments pass. The remediation raises audited low-contrast text, changes coral CTA foreground to dark text, removes opacity that suppressed language labels, and makes docs horizontal scroll regions keyboard-focusable with labels. Local axe-core 4.10.2 now reports **0 violations** on `/`, `/detectors`, and `/docs` (47/31/41 rules passing). PR #102 remains intentionally unmerged under the public truth/marketing freeze; QUAL-WEB-006 remains unchecked pending authenticated-dashboard, hosted, and complete CWV/accessibility evidence.
+
 ## 2026-09-30 · QUAL-WEB-006 axe accessibility findings
 
 An automated axe-core 4.10.2 audit against the local public pages found serious violations: `/` has 64 color-contrast nodes; `/detectors` has 16 color-contrast nodes; `/docs` has 2 color-contrast nodes and 2 non-focusable scrollable regions. These are direct qualification failures, not test-tool noise. Public-surface remediation remains held under the marketing/truth freeze until the applicable release gates authorize it. QUAL-WEB-006 remains unchecked. No production/database operation, migration, deployment, release, publish, or marketing action occurred.

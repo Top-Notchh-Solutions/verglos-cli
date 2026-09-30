@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-006 accessibility remediation ready (Web PR #102)
+
+- **Code:** Web PR #102 exact head `a69e50d` is pushed and remains open/unmerged. It fixes the measured public contrast failures, removes opacity-induced language-label failures, changes coral CTA text to a dark foreground, and adds keyboard focus/labels to docs horizontal scroll regions.
+- **Verification:** local typecheck, production build, and diff check pass. Axe-core 4.10.2 reports zero violations on `/`, `/detectors`, and `/docs` (47/31/41 rules passing). Hosted run `36685565094` passes typecheck/tests/schema/migrations/build/public-boundary/dependency/license/SBOM/secret checks; GitGuardian, Vercel, and preview comments pass.
+- **Acceptance boundary:** PR remains held under the public truth/marketing freeze. QUAL-WEB-006 stays unchecked pending authenticated-dashboard, hosted, and complete CWV/accessibility evidence.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-006 axe accessibility findings
 
 - **Evidence:** axe-core 4.10.2 against local public pages reports serious violations: `/` 64 color-contrast nodes, `/detectors` 16 color-contrast nodes, `/docs` 2 color-contrast nodes plus 2 `scrollable-region-focusable` nodes.
