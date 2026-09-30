@@ -102,6 +102,17 @@ function withOfflineFetch<T>(fn: () => Promise<T>): Promise<T> {
   });
 }
 
+/** Frozen wire fixtures for PLAN-CLI-004. These are server-shaped payloads,
+ * not a second client-side plan catalog: capabilities and allowance keys are
+ * intentionally opaque to the CLI. */
+const PLAN_CATALOG_FIXTURES = Object.freeze([
+  { plan: "free", capabilities: ["scan", "server.scan"], cache_ttl_seconds: 60, simulated: false, active: true },
+  { plan: "pro", real_plan: "pro", capabilities: ["scan", "server.fix", "vendor.future_capability"], cache_ttl_seconds: 900, simulated: false, active: true },
+  { plan: "team", real_plan: "team", capabilities: ["scan", "team.policy"], cache_ttl_seconds: 3600, simulated: false, active: true },
+  { plan: "studio", real_plan: "studio", capabilities: ["scan", "studio.attest"], cache_ttl_seconds: 86_400, simulated: false, active: true },
+  { plan: "enterprise", real_plan: "enterprise", capabilities: ["scan", "enterprise.sso"], cache_ttl_seconds: 86_400, simulated: false, active: true },
+] as const);
+
 beforeEach(() => {
   rmSync(join(verglosDir, "credentials.json"), { force: true });
   rmSync(join(verglosDir, "capabilities.json"), { force: true });
@@ -151,6 +162,44 @@ test("resolveEntitlement: fresh Free server response overrides a valid paid v2 t
     assert.equal(result.source, "rest");
     assert.deepEqual(result.capabilities, ["scan", "server.free.capability"]);
     assert.equal(result.license, undefined);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("PLAN-CLI-004: frozen server catalog fixtures remain opaque and round-trip across supported plans", async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    for (const fixture of PLAN_CATALOG_FIXTURES) {
+      seedCredentials(undefined);
+      globalThis.fetch = (async () => Response.json({ ...fixture, allowance_future_dimension: "opaque" })) as typeof fetch;
+      const result = await mod.loadCapabilities({ forceRefresh: true });
+      assert.equal(result.plan, fixture.plan);
+      assert.deepEqual(result.capabilities, fixture.capabilities);
+      assert.equal(result.cache_ttl_seconds, fixture.cache_ttl_seconds);
+      assert.equal(result.source, "rest");
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("PLAN-CLI-004: malformed catalog fixtures fail safely to Free without stale paid reuse", async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    for (const fixture of [
+      { plan: "gold", capabilities: ["paid"], cache_ttl_seconds: 60, simulated: false, active: true },
+      { plan: "pro", capabilities: ["paid"], cache_ttl_seconds: Number.NaN, simulated: false, active: true },
+      { plan: "pro", capabilities: [""], cache_ttl_seconds: 60, simulated: false, active: true },
+      { plan: "pro", capabilities: Array.from({ length: 4097 }, () => "x"), cache_ttl_seconds: 60, simulated: false, active: true },
+    ]) {
+      seedCredentials(undefined);
+      globalThis.fetch = (async () => Response.json(fixture)) as typeof fetch;
+      const result = await mod.loadCapabilities({ forceRefresh: true });
+      assert.equal(result.plan, "free");
+      assert.equal(result.source, "free");
+      assert.equal(result.capabilities.includes("fix"), false);
+    }
   } finally {
     globalThis.fetch = originalFetch;
   }
