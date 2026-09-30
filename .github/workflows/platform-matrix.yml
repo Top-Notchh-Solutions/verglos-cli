@@ -87,3 +87,52 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+  in-toto-release-binding:
+    name: in-toto release binding
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 9.15.9
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Configure cross-platform license evidence
+        shell: bash
+        run: node -e 'const fs=require("node:fs"); const p=JSON.parse(fs.readFileSync("package.json","utf8")); p.pnpm={...(p.pnpm||{}),supportedArchitectures:{os:["current","aix","android","darwin","freebsd","linux","netbsd","openbsd","openharmony","sunos","win32"],cpu:["current","arm","arm64","ia32","loong64","mips64el","ppc64","riscv64","s390x","x64"]}}; fs.writeFileSync("package.json",JSON.stringify(p,null,2)+"\n");'
+
+      - name: Install official in-toto verifier
+        run: python -m pip install --disable-pip-version-check --no-warn-script-location in-toto==3.0.0
+
+      - name: Build and bind public release archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm install --frozen-lockfile
+          pnpm build
+          node scripts/pack-public-packages.mjs .artifacts/public-packages
+          python scripts/verify-in-toto-release.py .artifacts/public-packages | tee in-toto-release-binding.log
+
+      - name: Upload in-toto release evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: in-toto-release-binding-${{ github.sha }}
+          path: in-toto-release-binding.log
+          if-no-files-found: error
+          retention-days: 14
