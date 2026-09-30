@@ -69,6 +69,19 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Qualify upgrade and rollback transition
+        shell: bash
+        run: node scripts/verify-upgrade-rollback.mjs .artifacts/public-packages | tee upgrade-rollback-${{ matrix.os }}-node-${{ matrix.node }}.log
+
+      - name: Upload upgrade and rollback evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: upgrade-rollback-${{ matrix.os }}-node-${{ matrix.node }}-${{ github.sha }}
+          path: upgrade-rollback-${{ matrix.os }}-node-${{ matrix.node }}.log
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Typecheck
         run: pnpm typecheck
 
