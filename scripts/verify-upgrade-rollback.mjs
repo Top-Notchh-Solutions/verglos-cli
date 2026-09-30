@@ -17,7 +17,7 @@ async function install(...packages) {
   await run(npmCommand, ["install", "--ignore-scripts", "--no-audit", "--no-fund", ...packages], { ...npmOptions, cwd: consumer });
 }
 async function version() {
-  const result = await run(cli(), ["--version"], { cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });
+  const result = await run(cli(), ["--version"], { ...npmOptions, cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });
   return result.stdout.trim();
 }
 try {
