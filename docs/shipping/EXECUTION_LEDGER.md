@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 authorization audit evidence
+
+- **Verification:** Web focused authorization run passes 30/30 (`tenant-scope`, `authorization`, `denial-response`, and `rbac-matrix`). It exercises all 29 tenant API methods, organization/project guard selection, bounded denials for unauthenticated/forbidden/project-not-found actors, tenant predicates/scoped DB exposure, exhaustive role×action×plan capability composition, and non-cacheable public receipt behavior.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked. Direct modified/untrusted CLI behavior and the full list/search/export/cache/public/private boundary matrix are not yet qualified by this run.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-CLI-006 in-toto validator availability check
 
 - **Tooling evidence:** an isolated temporary Python environment installed pinned `in-toto==3.0.0`; the official `in-toto-verify --help` command completed successfully.

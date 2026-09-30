@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 authorization audit evidence
+
+Web focused authorization evidence passes **30/30** on the exact current branch: all 29 tenant API methods have explicit organization/project guards and least-privilege actions; unauthenticated, forbidden, and project-not-found denials use bounded non-enumerating responses; tenant predicates and scoped DB surfaces are audited; role×action×plan capability composition is exhaustive; public receipt responses are non-cacheable. QUAL-WEB-001 remains unchecked because the modified/untrusted CLI boundary and complete list/search/export/cache/public/private coverage still need direct qualification evidence. No production/database operation, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-CLI-006 in-toto validator availability check
 
 A bounded isolated Python environment successfully installed pinned `in-toto==3.0.0` and exposed the official `in-toto-verify` command. Repository inspection still finds no signed in-toto layout/link set for the current release artifacts, so this removes a tooling-availability uncertainty but does not provide product validation or change QUAL-CLI-006. Trusted keyless Sigstore/Fulcio/Rekor evidence also remains absent. No production/database operation, migration, deployment, release, publish, or marketing action occurred.
