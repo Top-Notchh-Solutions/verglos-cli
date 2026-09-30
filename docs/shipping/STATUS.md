@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-006 browser evidence attempt
+
+A bounded attempt to provision pinned Playwright Chromium (`@playwright/test` 1.51.1 / Chromium 134.0.6998.35) timed out during the 124 MiB browser download after fallback retries. No browser, screen-reader, responsive, or Core Web Vitals measurements were collected. QUAL-WEB-006 remains unchecked; pure classifier tests are not runtime evidence. No production/database operation, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-005/006 evidence boundary audit
 
 The pure quality classifier suite passes **18/18** on the current Web branch, including fail-closed empty/non-finite/negative performance measurements and deletion invariants. Repository inspection finds no account-deletion HTTP route or hosted deletion trace, and no browser/screen-reader/CWV capture. QUAL-WEB-005 and QUAL-WEB-006 therefore remain unchecked; classifier tests are not runtime qualification. No production/database operation, migration, deployment, release, publish, or marketing action occurred.

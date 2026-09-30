@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-006 browser evidence attempt
+
+- **Attempt:** `pnpm dlx @playwright/test@1.51.1` resolved successfully, but pinned Chromium 134.0.6998.35 download timed out during the primary and fallback downloads. No browser measurement or accessibility capture was produced.
+- **Acceptance boundary:** QUAL-WEB-006 remains unchecked; classifier tests are not browser/CWV evidence.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-005/006 evidence boundary audit
 
 - **Verification:** Web pure quality classifiers pass 18/18, including deletion hold/scope/offline-record invariants and fail-closed accessibility/performance validation for empty, non-finite, and negative measurements.
