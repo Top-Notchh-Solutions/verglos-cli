@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 tenant release runtime (Web PR #118)
+
+- **Implementation:** Web `d0df2ee`, merged as `b0663e35` in PR #118, extends the isolated PostgreSQL tenant fixture with real release-list and release-detail route invocations.
+- **Evidence:** Disposable Docker PostgreSQL run passes 2/2 with zero skips; forged organization/project query fields are ignored, tenant A receives only its release and subject, and both real responses are `private, no-store`. Hosted run `36717893114`, GitGuardian, and Vercel pass.
+- **Boundary:** No checkbox changed. QUAL-WEB-001 still lacks a distinct search handler and hosted/provider-backed list/search/export plus complete public-private runtime evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 public receipt runtime (Web PR #117)
 
 - **Implementation:** Web `1b39c09`, merged as `d8c7edf0` in PR #117, adds a production-disabled AsyncLocalStorage database provider seam and uses it only in the isolated receipt integration.

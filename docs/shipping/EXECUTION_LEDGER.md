@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 tenant release runtime (Web PR #118)
+
+- **Code:** Web tested head `d0df2eecf769bf615cfbdad77848f7ce6a3f0f8f`; merged as `b0663e355d7e44eec1b59782f7a77f1a6d04750` in PR #118.
+- **Verification:** Disposable Docker PostgreSQL focused run passes 2/2 with zero skips; local TypeScript check passes; hosted run `36717893114` is fully green, including GitGuardian and Vercel.
+- **Runtime evidence:** Real tenant release list/detail handlers ignore forged query authority fields, return only the scoped release/subject, and emit `private, no-store`.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked; distinct search semantics and hosted/provider-backed list/search/export plus the complete public/private matrix remain open. No production database/environment operation occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 public receipt runtime (Web PR #117)
 
 - **Code:** Web tested head `1b39c09638e3d9876f898b3e14e064d4e6731bf8`; merged as `d8c7edf00256f7ceb332319c3d351a69e4861f50` in PR #117.
