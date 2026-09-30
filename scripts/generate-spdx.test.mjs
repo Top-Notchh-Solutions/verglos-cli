@@ -9,7 +9,12 @@ test("SPDX SBOM is deterministic with unique package identifiers", async () => {
   const b = JSON.parse((await run("node", args, { maxBuffer: 16 * 1024 * 1024 })).stdout);
   assert.deepEqual(a, b);
   assert.equal(a.spdxVersion, "SPDX-2.3");
+  assert.equal(a.dataLicense, "CC0-1.0");
   assert.equal(new Set(a.packages.map((p) => p.SPDXID)).size, a.packages.length);
   assert.ok(a.packages.length > 0);
+  const describes = a.relationships.filter((r) => r.spdxElementId === "SPDXRef-DOCUMENT" && r.relationshipType === "DESCRIBES");
+  assert.equal(describes.length, a.packages.length, "multi-package SPDX documents must describe every package");
+  assert.deepEqual(new Set(describes.map((r) => r.relatedSpdxElement)), new Set(a.packages.map((p) => p.SPDXID)));
+  assert.ok(a.packages.every((p) => p.downloadLocation === "NOASSERTION" || /^(?:[A-Za-z][A-Za-z0-9+.-]*):\/\//u.test(p.downloadLocation)), "download locations must be SPDX URI values or NOASSERTION");
   assert.ok(a.packages.every((p) => p.licenseConcluded === "NOASSERTION"), "manifest declarations are not legal conclusions");
 });
