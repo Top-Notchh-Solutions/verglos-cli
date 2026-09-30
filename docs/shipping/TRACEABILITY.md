@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 modified-client entitlement boundary
+
+- **Implementation:** Web `3bd02da`, merged as `98169fa` in PR #104, extends the v2 entitlement route contract suite with forged-client authority fields.
+- **Evidence:** forged plan/tier, tenant, capabilities, allowances, usage, and record payload fields are ignored; the issued claims remain bound to the server license, tenant resolver, role, and catalog. Focused route tests pass 6/6 and hosted run `36689496063` is green.
+- **Boundary:** This is progress only. QUAL-WEB-001 still requires the complete request matrix and list/search/export/cache/public/private evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 malformed-route boundaries
 
 - **Implementation:** Web `66c1f94`, merged as `0a85f08` in PR #103, adds `src/lib/organizations/negative-boundary.test.ts` and a targeted `test:negative-boundary` script.

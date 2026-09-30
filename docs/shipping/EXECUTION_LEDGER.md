@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 modified-client entitlement qualification progress (Web PR #104)
+
+- **Code:** Web PR #104 exact tested head `3bd02da` merged as `98169fa`.
+- **Verification:** the v2 entitlement route's focused suite passes 6/6, including a forged request carrying plan/tier, tenant, capability, allowance, usage, and record fields; the response and signed claims remain server-resolved. Local typecheck/diff checks pass; hosted run `36689496063` passes the full Web verification workflow, GitGuardian, and Vercel.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked. The full modified-CLI request matrix and list/search/export/cache/public/private coverage are still open.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 malformed-route boundary qualification progress (Web PR #103)
 
 - **Code:** Web PR #103 exact tested head `66c1f94` merged as `0a85f08`.

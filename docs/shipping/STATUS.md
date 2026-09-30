@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 modified-client entitlement qualification progress (Web PR #104)
+
+Web PR #104 (`feat/web-qual-001-modified-client`) merged as `98169fa` after hosted run `36689496063` passed the full Web workflow, GitGuardian, and Vercel. The v2 entitlement route test sends forged plan/tier, tenant, capability, allowance, usage, and record fields and proves they are ignored; issued claims come only from the server-resolved license, tenant membership, role, and catalog. The focused route suite passes 6/6 and local typecheck/diff checks pass. QUAL-WEB-001 remains unchecked pending the complete modified-CLI request matrix and list/search/export/cache/public/private boundary evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 malformed-route boundary qualification progress (Web PR #103)
 
 Web PR #103 (`feat/web-qual-001-negative-boundary`) merged as `0a85f08` after hosted run `36686440312` passed typecheck, the configured test suite, schema/migration checks, production build, public-boundary, dependency/SBOM/license, and tracked-secret checks; GitGuardian also passed. The new `negative-boundary.test.ts` probes every protected organization API method with malformed, traversal-shaped, and zero-UUID organization identifiers. It proves fixed non-enumerating denials, no echo of attacker-controlled identifiers, and exactly-once authorization before data access (or validation rejection before authorization). Local targeted test, typecheck, build, and diff checks pass. QUAL-WEB-001 remains unchecked: modified/untrusted CLI behavior and the complete list/search/export/cache/public/private matrix still require direct evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
