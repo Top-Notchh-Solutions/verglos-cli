@@ -1,6 +1,6 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
-Do not push publicly. This document enumerates remaining manual-input classes under Verglos V1 and names the specific owner action needed to unblock them. Reconciled 2026-09-20 after OPS-001-014, HUNT-002/003/004/007, LIC-005, and DIST-005 were accepted. Older bullets below are superseded where this update marks an item accepted.
+Do not push publicly. This document enumerates remaining manual-input classes under Verglos V1 and names the specific owner action needed to unblock them. Reconciled 2026-09-30 after the current Web qualification/truth-registry audit, CLI entitlement-key correction, and acceptance of RECORD-002/009/011/012 plus DIST-004/005. Older bullets below are superseded where this update marks an item accepted.
 
 Per the goal file: "For every item left unchecked in the active area, state the specific unmet criterion and required evidence or owner. Do not describe a task as 'blocked' without naming the dependency and why it prevents work."
 
@@ -63,8 +63,8 @@ Each unresolved class below points at its governing bucket. Resolving a bucket m
 
 ## Plan chain — chained off HOSTED-002/003 (bucket A) and production signer key
 
-- **PLAN-WEB-003** — signed entitlement token vNext blocks on production successor-key provisioning + CLI public-pin alignment. Progress code merged (`d6cde6f`, `4c0bd49`); founder must provision the production signer keypair and rotate the CLI public pin.
-- **PLAN-CLI-001** — progress code merged (`7edb4a9`); blocks on PLAN-WEB-003.
+- **PLAN-WEB-003** — signed entitlement token vNext is operationally qualified against the provisioned successor signer and corrected CLI public pin (`7dcc74b`); the remaining downstream check is a real activation/token issue→verify integration trace, not another key-pin change.
+- **PLAN-CLI-001** — capability/allowance consumption and bounded offline fallback are implemented (`7edb4a9`, corrected pin `ac74fb2`). It remains unchecked until the deployed activation/token issue→verify integration trace is captured; local unit/process evidence cannot substitute for that hosted boundary.
 - **PLAN-CLI-002** — effective-capability UX blocks on PLAN-CLI-001.
 - **PLAN-CLI-003** — modified/untrusted CLI test client blocks on PLAN-WEB-004-012 (bucket A + B chain).
 - **PLAN-CLI-004** — plan/catalog contract fixtures block on PLAN-WEB-002/003 + PLAN-CLI-001.
@@ -79,6 +79,7 @@ Each unresolved class below points at its governing bucket. Resolving a bucket m
 
 ## Miscellaneous — bucket A (production DB) or already-partial
 
+- **QUAL-CLI-006** — dependency-ready now that IMPORT exports, RECORD-002/009/011/012, and DIST-004/005 are accepted. The untracked `spec-validation-corpus.test.ts` is only a preparatory required-field corpus; acceptance still needs runs through the official SARIF/CycloneDX/SPDX/in-toto/Sigstore validators plus supported-platform install/upgrade/rollback evidence. No official validator is currently installed in the active environment, so this is an executable next batch, not an accepted item.
 - No independent DIST-005 action remains; it is accepted. The next Hunt item is HUNT-008 and is blocked on the concrete content/provenance evidence stated above.
 
 ## Founder-checklist items (explicitly external — bucket A/B/D/E)
@@ -97,7 +98,7 @@ These lines in the backlog are explicit founder-decision items, not agent tasks:
 
 ## What CAN still be shipped without founder input
 
-At the 2026-09-20 recount, QUAL-WEB-002 is accepted. DIST-WEB-002 and PLAN-WEB-011/012 now have exact-head code/preview qualification on PR #49 but remain production/commercial-evidence blocked. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require separately controlled production migration/cutover evidence; QUAL-CLI-006 remains dependency-gated by the unfinished RECORD compatibility surface; licensing, POC, and final marketing remain external gates. The next autonomous batch must be selected from a dependency-ready code/evidence item and must not manufacture external approval or production evidence.
+At the 2026-09-30 recount, QUAL-WEB-002 is accepted and the current Web qualification substrates plus truth-registry PR remain explicitly non-acceptance/held work. DIST-WEB-002 and PLAN-WEB-011/012 remain production/commercial-evidence blocked. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require separately controlled production migration/cutover evidence; PLAN-CLI-001 remains open for its hosted activation trace; QUAL-CLI-006 is dependency-ready but lacks official-validator and supported-platform evidence. Licensing, POC, and final marketing remain external gates. The next autonomous batch should be QUAL-CLI-006 if official tools and a reproducible private evidence run can be made available; otherwise record that exact tooling blocker rather than treating the draft corpus as acceptance.
 
 ## Recommended founder action order (to unblock the largest chunk fastest)
 

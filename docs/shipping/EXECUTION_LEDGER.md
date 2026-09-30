@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · dependency audit and QUAL-CLI-006 handoff
+
+- **Reconciliation:** current backlog is **214 checked / 55 unchecked / 269 total**. RECORD-002/009/011/012 and DIST-004/005 are accepted, so QUAL-CLI-006 is dependency-ready; the prior inventory statement that it was RECORD-gated was stale and has been corrected.
+- **Evidence boundary:** the preserved untracked `spec-validation-corpus.test.ts` passes within the shared suite but asserts required fields rather than invoking official validators. The active host has no `cosign`, `syft`, `grype`, `cyclonedx`, `spdx-tools`, `sarif-multitool`, or `trivy` executable. No tool was installed or pulled, and no QUAL-CLI-006 checkbox was changed.
+- **Next action:** execute one private, pinned official-validator run covering SARIF/CycloneDX/SPDX/in-toto/Sigstore and attach supported-platform install/upgrade/rollback evidence, or record the exact tooling/evidence blocker. PLAN-CLI-001 separately remains open pending the deployed activation/token issue→verify trace.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred. Founder-owned untracked assets were preserved.
+
 ## 2026-09-30 · current branch verification audit
 
 - **Web:** current truth-registry head `8c67399` merges the accepted quality head `666317e` into PR #101 and resolves the former conflict. It runs 877 configured tests (855 pass, 22 environment-gated skips, 0 failures) locally; hosted PR #101 checks are green. This is verification evidence only because FINAL-WEB-001 remains held pending the founder truth-freeze command.

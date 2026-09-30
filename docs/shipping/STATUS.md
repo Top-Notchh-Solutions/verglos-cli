@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · dependency audit and QUAL-CLI-006 handoff
+
+The current authoritative backlog is **214 checked / 55 unchecked / 269 total**. RECORD-002/009/011/012 and DIST-004/005 are checked, so QUAL-CLI-006 is dependency-ready; the older blocker wording that called it RECORD-gated is superseded. The preserved untracked `packages/shared/src/spec-validation-corpus.test.ts` passes as a preparatory required-field corpus, but it is not an official-validator run. `cosign`, `syft`, `grype`, `cyclonedx`, `spdx-tools`, `sarif-multitool`, and `trivy` are not installed in the active host PATH; no validator installation, external pull, or acceptance claim was made. The next executable batch is an official-validator evidence run only if reproducible pinned tools can be made available. PLAN-CLI-001 remains open for the hosted activation/token issue→verify trace. No production/database operation, migration, deployment, release, publish, or marketing action occurred; founder-owned untracked assets remain untouched.
+
 ## Verification · 2026-09-30 · current branch audit
 
 Current Web truth-registry branch `8c67399` merges the already-accepted quality head `666317e` into PR #101 without changing its scope. Local configured verification is **877 tests / 855 pass / 22 environment-gated skips / 0 failures** on Node 26 (the repositories declare Node 22). Hosted typecheck/schema, tests, migrations, build, security, Vercel, and GitGuardian checks pass. PR #101 remains held under FINAL-WEB-001 pending the founder truth-freeze command. The current CLI branch remains clean in tracked files; `pnpm --filter @verglos/shared test` passes, including the untracked founder-owned `spec-validation-corpus.test.ts` (preparatory QUAL-CLI-006 evidence only; it was not staged or modified). No checkbox changes, production/database operations, migrations, deployment, release, or marketing changes occurred.
