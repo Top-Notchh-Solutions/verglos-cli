@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 private evidence/evaluation cache boundary
+
+- **Implementation:** Web `8a77d2a`, merged as `7279ef2` in PR #108, adds private no-store response helpers to evidence and policy-evaluation list/create routes and covers all data-bearing and denial paths.
+- **Evidence:** Tenant-scope contract tests pass 12/12 locally; hosted run `36691398858` passes the full verification workflow, GitGuardian, and Vercel.
+- **Boundary:** This closes no checkbox. QUAL-WEB-001 still requires modified/untrusted CLI and complete list/search/export/cache/public/private evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 private receipt cache boundary
 
 - **Implementation:** Web `27e972c`, merged as `6cb6734` in PR #105, adds a no-store response helper to private receipt collection/detail routes and binds all error/success paths to private cache headers.

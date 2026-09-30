@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 private evidence/evaluation cache boundary (Web PR #108)
+
+- **Code:** Web PR #108 exact tested head `8a77d2a` merged as `7279ef2`.
+- **Verification:** evidence and policy-evaluation list/create routes route every response through private no-store headers, including denial and validation paths; tenant-scope tests pass 12/12 locally. Hosted run `36691398858` passes typecheck, full tests, DB/migration checks, build, boundary, dependency/SBOM/license, and secret checks; GitGuardian and Vercel pass.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked. This extends cache-boundary evidence but does not complete modified-CLI or the full list/search/export/cache/public/private matrix.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 private receipt cache-boundary correction (Web PR #105)
 
 - **Code:** Web PR #105 exact tested head `27e972c` merged as `6cb6734`.

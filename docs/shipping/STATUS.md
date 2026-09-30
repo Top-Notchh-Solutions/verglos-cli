@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 private evidence/evaluation cache boundary (Web PR #108)
+
+Web PR #108 merged as `7279ef2` after hosted run `36691398858` passed typecheck, the full test suite, DB/schema/migration checks, production build, public-boundary, dependency/SBOM/license, and tracked-secret checks; GitGuardian and Vercel also passed. Private evidence and policy-evaluation list/create routes now apply `private, no-store` to invalid-path, access-denial, validation, not-found, conflict, idempotent, storage-failure, and success responses. The tenant-scope contract suite passes 12/12 locally. QUAL-WEB-001 remains unchecked pending modified-CLI and complete list/search/export/cache/public/private matrix evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 private receipt cache-boundary correction (Web PR #105)
 
 Web PR #105 (`feat/web-qual-001-private-cache`) merged as `6cb6734` after hosted run `36690136102` passed the full Web workflow, GitGuardian, and Vercel. Private receipt collection/detail APIs now apply `private, no-store` to invalid-path, access-denial, not-found, validation, allowance, conflict, idempotent, integrity-failure, and success responses; the download route's existing private headers remain covered. The tenant-scope contract suite passes 11/11 locally, with typecheck and diff checks green. QUAL-WEB-001 remains unchecked pending the remaining modified-CLI and complete boundary matrix evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
