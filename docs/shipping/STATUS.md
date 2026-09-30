@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 public receipt runtime (Web PR #117)
+
+Web PR #117 tested head `1b39c09` merged as `d8c7edf00256f7ceb332319c3d351a69e4861f50`. A production-disabled request-scoped database provider seam, analogous to the existing authorization seam, lets the real public receipt handler run against disposable PostgreSQL. The focused Docker run passes **2/2 with zero skips**: public receipt lookup succeeds despite forged tenant/project query fields, returns `no-store`, and verifies the digest; private project-list and receipt list/detail/download boundaries remain green. Hosted run `36716982904`, GitGuardian, and Vercel pass. QUAL-WEB-001 remains unchecked because no distinct search handler exists and hosted/provider-backed list/search/export plus complete public-private matrix evidence remain open. No production database/environment operation, migration, deployment, release, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 authorized tenant list runtime (Web PR #116)
 
 Web PR #116 tested head `95ebce4` merged as `d230af0fd0227f0f4625257e6ee743ed3ef460f0`. The PostgreSQL-backed tenant integration now invokes the real organization project-list GET handler for two isolated tenants, sends forged query authority fields, and asserts tenant-scoped rows, fixed organization identity, and `private, no-store`; the receipt list/detail/download integration remains active in the same Docker run. Focused local Docker run passes **2/2 with zero skips**; hosted run `36716252644` passes the Web verification workflow, GitGuardian, and Vercel. QUAL-WEB-001 remains unchecked because no distinct search handler exists and hosted/provider-backed list/search/export plus complete public-private matrix evidence remain open. No production database/environment operation, migration, deployment, release, or marketing action occurred.
