@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · current branch verification audit
+
+- **Web:** current truth-registry head `65e2788` runs 859 configured tests (837 pass, 22 environment-gated skips, 0 failures) locally; hosted PR #101 checks are green. This is verification evidence only because FINAL-WEB-001 remains held pending the founder truth-freeze command.
+- **CLI:** current tracked worktree remains unchanged. The shared package suite passes with Claude's untracked `packages/shared/src/spec-validation-corpus.test.ts` included; that file remains founder-owned/untracked and was not staged, modified, or treated as acceptance.
+- **Operations:** no production/database read or write, migration, deployment, release, or marketing action occurred. Backlog remains 214 checked / 55 unchecked / 269 total.
+
 ## 2026-09-30 · QUAL-WEB-001 + QUAL-WEB-005 + QUAL-WEB-006 progress
 
 - **Implementation:** Web `82d2157` + `a24fef7` (`feat/web-qual-batch`) adds pure qualification decision surfaces and 18 focused tests; PR #100 merged as `666317e` after hosted checks passed. It remains preparatory logic and is not represented as a merged product capability.

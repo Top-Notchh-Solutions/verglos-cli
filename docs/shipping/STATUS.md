@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## Verification · 2026-09-30 · current branch audit
+
+Current Web truth-registry branch `65e2788` has a complete local configured run of **859 tests / 837 pass / 22 environment-gated skips / 0 failures** on Node 26 (the repositories declare Node 22). Current Web PR #101 remains green in hosted typecheck/schema, tests, migrations, build, security, Vercel, and GitGuardian checks, but is held under FINAL-WEB-001 pending the founder truth-freeze command. The current CLI branch remains clean in tracked files; `pnpm --filter @verglos/shared test` passes, including the untracked founder-owned `spec-validation-corpus.test.ts` (preparatory QUAL-CLI-006 evidence only; it was not staged or modified). No checkbox changes, production/database operations, migrations, deployment, release, or marketing changes occurred.
+
 ## Progress · 2026-09-30 · qualification substrate handoff
 
 Web handoff commits `82d2157` + `a24fef7` (`feat/web-qual-batch`) add pure decision surfaces for QUAL-WEB-001/005/006 and make missing/invalid performance evidence fail closed. Exact-branch focused tests pass 18/18; the configured suite passes 830/852 with 22 environment-gated skips; typecheck and optimized build pass. PR #100 merged as `666317e` after all hosted checks passed. This does not qualify the backlog items: no account-deletion/persistence trace, browser/screen-reader/CWV capture, hosted provider evidence, or complete modified-CLI boundary run exists. No production DB/environment operation, migration, deployment, release, or marketing change occurred. Backlog remains **214 checked / 55 unchecked / 269 total**.
