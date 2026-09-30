@@ -1,5 +1,13 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-CLI-006 cross-platform clean-consumer qualification (CLI PR #48)
+
+- **Code:** PR #48 head `79ae04fee9eb3127127a863ca5458619dce0774c` merged as `f72b9107867e026d8df93411da9c91cf796cde27`. The platform workflow packs/audits six public archives, runs the clean consumer verifier, and uploads one log per matrix cell. Windows support fixes use `pnpm.cmd`/`npm.cmd` with shell dispatch and a pure Node gzip/tar archive reader, avoiding host-specific tar behavior.
+- **Hosted evidence:** run `36681169580` passed Ubuntu/macOS/Windows × Node 20/22/24 (9/9) and self-scan. Every cell's clean-consumer step passed: six archives installed, all public libraries imported, `Verglos 2.0.0-alpha.1` executed, and no external engine cache created.
+- **Local evidence:** pack-public-packages, packed-manifest audit, clean-consumer verifier, notice tests, and package-surface tests pass. This is direct cross-platform clean-install evidence.
+- **Boundary:** no real package upgrade/rollback transition was executed; source compatibility and engine rollback tests remain separate evidence. Official in-toto layout/link validation and trusted keyless Sigstore/Fulcio/Rekor evidence remain absent. QUAL-CLI-006 stays unchecked.
+
+
 ## 2026-09-30 · QUAL-CLI-006 official-format progress (CLI PR #47)
 
 - **Code:** CLI `af3aa09` fixes SPDX generation: top-level `dataLicense`, `SPDXRef-DOCUMENT DESCRIBES` relationships for every package, and URI-safe download locations. Regenerated `SBOM.cdx.json` and `SBOM.spdx.json` were the only generated artifacts in PR #47, merged as `ca88ef2`.
