@@ -12,7 +12,13 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 // Keep the invocation explicit so release packaging works on every supported
 // platform, including the Windows consumer matrix.
 const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
-const { stdout } = await run(pnpmCommand, ["licenses", "list", "--json"], { cwd: root, maxBuffer: 16 * 1024 * 1024, timeout: 120_000, killSignal: "SIGKILL" });
+const { stdout } = await run(pnpmCommand, ["licenses", "list", "--json"], {
+  cwd: root,
+  maxBuffer: 16 * 1024 * 1024,
+  timeout: 120_000,
+  killSignal: "SIGKILL",
+  shell: process.platform === "win32",
+});
 const grouped = JSON.parse(stdout);
 const entries = [];
 const packageLocations = new Map();
