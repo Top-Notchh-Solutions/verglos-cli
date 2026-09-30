@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 modified-CLI entitlement progress (Web PR #115)
+
+Web PR #115 tested head `b3dfd77` merged as `4d2051e4`. The v2 entitlement test now simulates CLI-style headers (`verglos-cli/2.0.0-alpha.1`, modified-client marker) and forges organization, license, role, plan, capability, allowance, usage, and record fields; server-derived tenant, role, plan, and allowances remain authoritative. The combined focused route/boundary suite passes 10/10; hosted run `36705118215`, GitGuardian, and Vercel pass. QUAL-WEB-001 remains unchecked pending complete list/search/export/public-private runtime evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 forged-query authority progress (Web PR #114)
 
 Web PR #114 tested head `f79a7a5` merged as `88a809d3`. The protected organization route matrix now sends forged tenant/project/plan/allowance query fields alongside forged bodies, while assertions continue to prove path-based authorization and non-cacheable denials. Combined boundary tests remain 4/4; hosted run `36704670862`, GitGuardian, and Vercel pass. QUAL-WEB-001 remains unchecked pending complete modified-CLI and list/search/export/public-private runtime evidence. No production/database operation, deployment, release, publish, or marketing action occurred.

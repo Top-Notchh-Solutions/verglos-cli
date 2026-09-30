@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 modified-CLI entitlement request
+
+- **Implementation:** Web `b3dfd77`, merged as `4d2051e4` in PR #115, extends the forged entitlement request with CLI-style headers and organization/license/role authority fields.
+- **Evidence:** Server-derived tenant, role, plan, and allowances remain authoritative; focused route/boundary suite passes 10/10. Hosted run `36705118215`, GitGuardian, and Vercel pass.
+- **Boundary:** This closes no checkbox. QUAL-WEB-001 still requires complete list/search/export/public-private runtime evidence. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 forged query authority fields
 
 - **Implementation:** Web `f79a7a5`, merged as `88a809d3` in PR #114, adds attacker-controlled tenant/project/plan/allowance query fields to every protected route matrix request.

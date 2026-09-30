@@ -1,5 +1,7 @@
 # Verglos V1 release gates
 
+QUAL-WEB-001 progress (2026-09-30): Web PR #115 tested head `b3dfd77` merged as `4d2051e4`; CLI-style headers and forged organization/license/role/plan/capability/allowance/usage/record fields remain ignored in favor of server-derived entitlement claims. Focused route/boundary tests pass 10/10; hosted run `36705118215`, GitGuardian, and Vercel pass. Gate remains OPEN pending complete list/search/export/public-private runtime evidence. No production operation occurred.
+
 QUAL-WEB-001 progress (2026-09-30): Web PR #114 tested head `f79a7a5` merged as `88a809d3`; the protected route matrix now carries forged tenant/project/plan/allowance query fields alongside forged bodies while path authorization and non-cacheable denial invariants remain green. Hosted run `36704670862`, GitGuardian, and Vercel pass. Gate remains OPEN pending complete modified-CLI and list/search/export/public-private runtime evidence. No production operation occurred.
 
 QUAL-WEB-001 progress (2026-09-30): Web PR #113 tested head `39dfb64` merged as `24232db2`; direct public receipt JSON coverage rejects invalid identities with forged tenant/project query fields without reflection and preserves `no-store`. Combined boundary tests pass 4/4; hosted run `36704251024`, GitGuardian, and Vercel pass. Gate remains OPEN pending complete modified-CLI and list/search/export/public-private runtime evidence. No production operation occurred.

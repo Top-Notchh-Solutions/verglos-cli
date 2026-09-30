@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 modified-CLI entitlement request (Web PR #115)
+
+- **Code:** Web PR #115 exact tested head `b3dfd77` merged as `4d2051e4`.
+- **Verification:** CLI-style user-agent/client headers and forged organization, license, role, plan, capability, allowance, usage, and record fields are ignored; server-derived claims remain authoritative. Focused route/boundary suite passes 10/10. Hosted run `36705118215`, GitGuardian, and Vercel pass.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked; direct list/search/export/public-private runtime evidence remains open.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 forged-query authority matrix (Web PR #114)
 
 - **Code:** Web PR #114 exact tested head `f79a7a5` merged as `88a809d3`.
