@@ -7,7 +7,18 @@ import { readPackageLicenseTexts } from "./package-license-text.mjs";
 
 const run = promisify(execFile);
 const root = fileURLToPath(new URL("..", import.meta.url));
-const { stdout } = await run("pnpm", ["licenses", "list", "--json"], { cwd: root, maxBuffer: 16 * 1024 * 1024, timeout: 120_000, killSignal: "SIGKILL" });
+// Windows exposes pnpm through a .cmd shim; Node's direct child-process
+// launcher does not resolve that shim when given the bare command name.
+// Keep the invocation explicit so release packaging works on every supported
+// platform, including the Windows consumer matrix.
+const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
+const { stdout } = await run(pnpmCommand, ["licenses", "list", "--json"], {
+  cwd: root,
+  maxBuffer: 16 * 1024 * 1024,
+  timeout: 120_000,
+  killSignal: "SIGKILL",
+  shell: process.platform === "win32",
+});
 const grouped = JSON.parse(stdout);
 const entries = [];
 const packageLocations = new Map();

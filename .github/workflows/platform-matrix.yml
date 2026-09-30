@@ -38,11 +38,36 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: pnpm
 
+      # The release notice/SBOM generators account for every supported
+      # optional platform package, not only the runner's current platform.
+      # Materialize those lockfile entries before the matrix install so the
+      # clean-consumer qualification sees the same complete dependency graph
+      # on Ubuntu, macOS, and Windows.
+      - name: Configure cross-platform license evidence
+        shell: bash
+        run: node -e 'const fs=require("node:fs"); const p=JSON.parse(fs.readFileSync("package.json","utf8")); p.pnpm={...(p.pnpm||{}),supportedArchitectures:{os:["current","aix","android","darwin","freebsd","linux","netbsd","openbsd","openharmony","sunos","win32"],cpu:["current","arm","arm64","ia32","loong64","mips64el","ppc64","riscv64","s390x","x64"]}}; fs.writeFileSync("package.json",JSON.stringify(p,null,2)+"\n");'
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm build
+
+      - name: Qualify clean public package consumer
+        shell: bash
+        run: |
+          node scripts/pack-public-packages.mjs .artifacts/public-packages
+          node scripts/check-packed-manifests.mjs .artifacts/public-packages
+          node scripts/verify-clean-consumer.mjs .artifacts/public-packages | tee clean-consumer-${{ matrix.os }}-node-${{ matrix.node }}.log
+
+      - name: Upload clean consumer evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: clean-consumer-${{ matrix.os }}-node-${{ matrix.node }}-${{ github.sha }}
+          path: clean-consumer-${{ matrix.os }}-node-${{ matrix.node }}.log
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Typecheck
         run: pnpm typecheck

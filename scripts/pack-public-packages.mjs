@@ -7,6 +7,8 @@ import { fileURLToPath } from "node:url";
 const run = promisify(execFile);
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const packageNames = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"];
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
+const npmOptions = { cwd: root, maxBuffer: 4 * 1024 * 1024, shell: process.platform === "win32" };
 const manifests = new Map();
 for (const name of packageNames) manifests.set(name, JSON.parse(await readFile(join(root, "packages", name, "package.json"), "utf8")));
 const versions = new Map([...manifests.values()].map((manifest) => [manifest.name, manifest.version]));
@@ -44,7 +46,7 @@ try {
       }
     }
     await writeFile(join(stage, "package.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
-    await run("npm", ["pack", stage, "--pack-destination", destination, "--ignore-scripts"], { cwd: root, maxBuffer: 4 * 1024 * 1024 });
+    await run(npmCommand, ["pack", stage, "--pack-destination", destination, "--ignore-scripts"], npmOptions);
   }
 } finally {
   await rm(stagingRoot, { recursive: true, force: true });
