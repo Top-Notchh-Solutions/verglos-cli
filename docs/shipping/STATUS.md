@@ -597,3 +597,6 @@ The same six-archive clean-consumer verifier was executed inside the pinned loca
 ## 2026-09-30 · QUAL-CLI-006 official Cosign tool smoke
 
 Pinned official Cosign `v2.4.1` (Docker image digest previously recorded) successfully created and verified a DSSE/in-toto attestation over the actual `verglos-2.0.0-alpha.1.tgz` archive using an ephemeral local key, with `--tlog-upload=false --offline --insecure-ignore-tlog`; verification returned `Verified OK`. This confirms the archive and generated envelope are consumable by the official tool. It is deliberately **not** Sigstore release trust evidence: the key was ephemeral, no Rekor entry or Fulcio identity was used, and the predicate was synthetic. QUAL-CLI-006 therefore remains unchecked pending real in-toto layout/link validation and keyless/trusted-root evidence.
+## 2026-09-30 · QUAL-CLI-006 real macOS upgrade/rollback transition
+
+On a fresh temporary npm consumer, the published `verglos@1.8.3` was installed and reported `1.8.3`; all six current local archives were then installed together and reported `2.0.0-alpha.1`; reinstalling `verglos@1.8.3` completed the rollback and reported `1.8.3`. This is direct macOS package-transition evidence. It does not establish the same transition on Linux/Windows or official in-toto/Sigstore trust evidence, so QUAL-CLI-006 remains unchecked.

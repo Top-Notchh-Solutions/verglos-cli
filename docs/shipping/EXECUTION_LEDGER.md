@@ -697,3 +697,8 @@ while they remain unresolved.
 
 - **Run:** Docker-pinned `gcr.io/projectsigstore/cosign:v2.4.1` generated and verified a DSSE attestation over the actual `verglos-2.0.0-alpha.1.tgz`; verification used `--offline --insecure-ignore-tlog` and returned `Verified OK`.
 - **Evidence boundary:** this is an official-tool format/cryptographic smoke only. It used an ephemeral local key, a synthetic predicate, no Fulcio identity, and no Rekor upload. It must not be reported as keyless Sigstore trust or release provenance. Official in-toto layout/link validation and trusted keyless evidence remain open; QUAL-CLI-006 stays unchecked.
+## 2026-09-30 · QUAL-CLI-006 real macOS upgrade/rollback transition
+
+- **Run:** fresh temporary consumer; `npm install --prefix <consumer> verglos@1.8.3` → CLI `1.8.3`; `npm install --prefix <consumer> .artifacts/public-packages/*.tgz` → CLI `2.0.0-alpha.1`; repeat published `verglos@1.8.3` install → CLI `1.8.3`.
+- **Result:** install → upgrade → rollback completed successfully on macOS, with the reported versions proving each transition. No repository or production state changed.
+- **Boundary:** this is direct macOS transition evidence only. Linux/Windows real transitions and official in-toto/Sigstore trust evidence remain open; QUAL-CLI-006 stays unchecked.
