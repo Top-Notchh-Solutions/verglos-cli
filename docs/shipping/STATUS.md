@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-006 axe accessibility findings
+
+An automated axe-core 4.10.2 audit against the local public pages found serious violations: `/` has 64 color-contrast nodes; `/detectors` has 16 color-contrast nodes; `/docs` has 2 color-contrast nodes and 2 non-focusable scrollable regions. These are direct qualification failures, not test-tool noise. Public-surface remediation remains held under the marketing/truth freeze until the applicable release gates authorize it. QUAL-WEB-006 remains unchecked. No production/database operation, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-006 browser capture results
 
 Using a complete locally cached Playwright Chromium build, a real local browser run measured public pages: `/` 200 (FCP 2344ms, TTFB 2284ms, main/nav/header present, 57 focusable controls), `/detectors` 200 (FCP 308ms, TTFB 277ms, main/header, 2 focusable controls), and `/docs` 200 (FCP 372ms, TTFB 348ms, main/nav/header, 56 focusable controls). Local `/verify` returned 500 because `DATABASE_URL` is absent; the server log identifies `getDb()` as the exact cause. The hosted PR preview is Vercel-authenticated and returned the Vercel login page for all paths, so it is not product-rendering evidence. No LCP/INP/CLS, screen-reader audit, authenticated dashboard, or hosted product capture exists. QUAL-WEB-006 remains unchecked.

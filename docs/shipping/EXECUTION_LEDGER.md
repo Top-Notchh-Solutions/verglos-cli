@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-006 axe accessibility findings
+
+- **Evidence:** axe-core 4.10.2 against local public pages reports serious violations: `/` 64 color-contrast nodes, `/detectors` 16 color-contrast nodes, `/docs` 2 color-contrast nodes plus 2 `scrollable-region-focusable` nodes.
+- **Acceptance boundary:** these are direct qualification failures. Public-surface class/content remediation remains held by the truth/marketing freeze; QUAL-WEB-006 stays unchecked.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-006 browser capture results
 
 - **Local browser evidence:** complete cached Playwright Chromium captured public `/`, `/detectors`, and `/docs` successfully (HTTP 200, landmarks present). Measurements: `/` FCP 2344ms / TTFB 2284ms; `/detectors` FCP 308ms / TTFB 277ms; `/docs` FCP 372ms / TTFB 348ms. These are partial diagnostics; LCP/INP/CLS and screen-reader findings were not collected.
