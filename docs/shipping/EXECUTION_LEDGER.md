@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-CLI-006 in-toto validator availability check
+
+- **Tooling evidence:** an isolated temporary Python environment installed pinned `in-toto==3.0.0`; the official `in-toto-verify --help` command completed successfully.
+- **Acceptance boundary:** repository inspection found no signed layout/link set corresponding to the current release artifacts. This is validator availability evidence only; QUAL-CLI-006 remains unchecked pending actual signed in-toto evidence and trusted keyless Sigstore/Fulcio/Rekor verification.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-CLI-006 supported-platform upgrade/rollback transition (CLI PR #49)
 
 - **Code:** PR #49 head `02c3c6ec4af78f0dca538795d12bc133d2d63381` merged as `ef78ac6f82668d4dcefb927edc197e8cce7a7fe4`.
