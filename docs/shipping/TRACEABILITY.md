@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 distinct search runtime (Web PR #120)
+
+- **Implementation:** Web `9ecd0092e202a65549e4a53b0f0cbbb58e144957`, merged as `677a78afd27435c57c498fe8bd8b4e9013096642`.
+- **Evidence:** The real organization search handler runs against disposable PostgreSQL for two tenants. Forged query authority fields are ignored, tenant A cannot search tenant B's release, wildcard input is rejected, and the response is `private, no-store`; focused Docker run passes 1/1. Full configured Web suite is 836 passed / 22 environment-gated skips; typecheck, build, schema, migration ordering, negative-boundary, and production audit checks pass. Hosted run `36744036519` is green.
+- **Boundary:** This is progress only. QUAL-WEB-001 remains unchecked because distinct export semantics and the complete hosted/provider-backed list/search/export/public-private matrix are still missing. No production operation occurred.
+
 ## Verification follow-up · 2026-09-30 · Web PostgreSQL contention isolation
 
 - **Evidence:** Fresh disposable PostgreSQL 15 container, sequential focused runs: worker-crash recovery 2/2, usage ledger 1/1, threshold outbox 1/1; total 4/4 with zero failures. The prior local all-in-one failure was concurrent extension/deadlock contention; hosted PR #119 remains green.

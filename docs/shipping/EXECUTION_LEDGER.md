@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 distinct search runtime (Web PR #120)
+
+- **Code:** Web tested head `9ecd0092e202a65549e4a53b0f0cbbb58e144957`; PR #120 merged as `677a78afd27435c57c498fe8bd8b4e9013096642`.
+- **Verification:** Bounded organization search over project/release/subject identifiers preserves authorization-before-data-access and project-context scoping. Disposable Docker PostgreSQL runtime test passes 1/1; full configured Web suite passes 836/836 executed tests with 22 environment-gated skips; typecheck/build/schema/21-migration/negative-boundary pass; `pnpm audit --prod` reports no known vulnerabilities. Hosted run `36744036519` is green.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked. Search runtime evidence is now present, but export semantics and the complete hosted/provider-backed list/search/export/public-private matrix remain open. No production DB/environment, migration, deployment, release, or marketing state changed.
+
 ## 2026-09-30 · Web PostgreSQL contention isolation follow-up
 
 - **Verification:** On a fresh disposable PostgreSQL 15 container, the three files implicated by the local all-in-one run pass sequentially: `worker-crash-recovery.integration.test.ts` 2/2, `ledger.integration.test.ts` 1/1, and `threshold-outbox.integration.test.ts` 1/1; 4/4 total.

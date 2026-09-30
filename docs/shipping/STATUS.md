@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 distinct search runtime evidence (Web PR #120)
+
+Web PR #120 tested head `9ecd0092e202a65549e4a53b0f0cbbb58e144957` and merged as `677a78afd27435c57c498fe8bd8b4e9013096642`. The authenticated organization search route searches bounded project/release/subject identifiers, ignores forged query authority fields, rejects wildcard/control input, preserves the scoped-database project-context invariant by narrowing per authorized project, and returns `private, no-store` responses. The focused disposable Docker PostgreSQL runtime test passes **1/1**; the full configured Web suite passes **836/836 executed tests with 22 environment-gated skips**; typecheck, production build, Drizzle schema check, 21-migration ordering, negative-boundary tests, and `pnpm audit --prod` pass with no known vulnerabilities. Hosted Verify run `36744036519` is green after pinning patched transitive Axios `1.20.0` and PostCSS `8.5.28`. QUAL-WEB-001 remains unchecked: export semantics and the complete hosted/provider-backed list/search/export/public-private matrix remain open. No production database/environment read or write, migration, deployment, release, or marketing action occurred.
+
 ## 2026-09-30 · Web PostgreSQL contention isolation follow-up
 
 The local all-in-one `pnpm test` attempt associated with Web PR #119 exposed duplicate `pgcrypto` extension/deadlock failures only when several integration files shared one disposable database concurrently. Re-running the three affected files sequentially against a fresh disposable PostgreSQL 15 container passes **4/4 with zero failures** (`worker-crash-recovery` 2/2, usage ledger 1/1, threshold outbox 1/1). Hosted PR #119 run `36741825859` was already green. This is test-environment contention, not evidence of a product regression; no code or checkbox changed and no production operation occurred.
