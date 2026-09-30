@@ -6,6 +6,8 @@ import { promisify } from "node:util";
 
 const run = promisify(execFile);
 const archiveRoot = resolve(process.argv[2] ?? "");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
+const npmOptions = { shell: process.platform === "win32" };
 if (!process.argv[2]) throw new Error("release archive directory is required");
 const rootStat = await lstat(archiveRoot);
 if (!rootStat.isDirectory()) throw new Error("release archive path must be a directory");
@@ -27,7 +29,7 @@ const consumer = await mkdtemp(join(tmpdir(), "verglos-clean-consumer-"));
 try {
   await writeFile(join(consumer, "package.json"), JSON.stringify({ name: "verglos-release-consumer", private: true, version: "1.0.0" }));
   const paths = archives.map((name) => join(archiveRoot, name));
-  await run("npm", ["install", "--ignore-scripts", "--no-audit", "--no-fund", "--no-package-lock", ...paths], { cwd: consumer, timeout: 180_000, maxBuffer: 8 * 1024 * 1024 });
+  await run(npmCommand, ["install", "--ignore-scripts", "--no-audit", "--no-fund", "--no-package-lock", ...paths], { ...npmOptions, cwd: consumer, timeout: 180_000, maxBuffer: 8 * 1024 * 1024 });
   const cli = join(consumer, "node_modules", "verglos", "dist", "index.js");
   const result = await run(process.execPath, [cli, "--version"], { cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });
   if (!/^\d+\.\d+\.\d+[^\r\n]*\r?\n?$/.test(result.stdout.trim())) throw new Error("clean consumer CLI did not emit a version");
