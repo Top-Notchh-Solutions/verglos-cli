@@ -44,6 +44,22 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Qualify clean public package consumer
+        shell: bash
+        run: |
+          node scripts/pack-public-packages.mjs .artifacts/public-packages
+          node scripts/check-packed-manifests.mjs .artifacts/public-packages
+          node scripts/verify-clean-consumer.mjs .artifacts/public-packages | tee clean-consumer-${{ matrix.os }}-node-${{ matrix.node }}.log
+
+      - name: Upload clean consumer evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: clean-consumer-${{ matrix.os }}-node-${{ matrix.node }}-${{ github.sha }}
+          path: clean-consumer-${{ matrix.os }}-node-${{ matrix.node }}.log
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Typecheck
         run: pnpm typecheck
 
