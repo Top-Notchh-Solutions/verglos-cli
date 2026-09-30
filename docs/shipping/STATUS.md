@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 private account/API cache-boundary completion (Web PR #111)
+
+Web PR #111 merged as `c83300b` after hosted run `36693118104` passed typecheck, the full test suite, DB/schema/migration checks, production build, public-boundary, dependency/SBOM/license, and tracked-secret checks; GitGuardian and Vercel also passed. Authenticated account sync, CLI authorization/status, license status, score history, and monitor registration/status/test/unregister endpoints now apply `private, no-store` to response paths, including shared paid-license denials. The combined focused contract suites pass 17/17 locally. QUAL-WEB-001 remains unchecked pending modified-CLI and direct runtime list/search/export/public-private matrix evidence. No production/database operation, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 organization API cache-boundary completion (Web PR #110)
 
 Web PR #110 merged as `18ddb408` after hosted run `36692358099` passed typecheck, the full test suite, DB/schema/migration checks, production build, public-boundary, dependency/SBOM/license, and tracked-secret checks; GitGuardian and Vercel also passed. Organization directory, member, project, policy, and release APIs now apply `private, no-store` to every response path. The tenant-scope contract suite passes 13/13 locally and now inventories the complete authenticated organization route set. QUAL-WEB-001 remains unchecked pending modified-CLI and direct list/search/export/runtime public-private matrix evidence. No production/database operation, deployment, release, publish, or marketing action occurred.

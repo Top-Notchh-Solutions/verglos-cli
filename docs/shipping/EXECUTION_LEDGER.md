@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 private account/API cache-boundary completion (Web PR #111)
+
+- **Code:** Web PR #111 exact tested head `f524382` merged as `c83300b`.
+- **Verification:** account sync, CLI-auth, license status, score history, and monitor routes attach private no-store headers, including shared paid-license denial responses; focused tenant/monitor contract suites pass 17/17 locally. Hosted run `36693118104` passes typecheck, full tests, DB/migration checks, build, boundary, dependency/SBOM/license, and secret checks; GitGuardian and Vercel pass.
+- **Acceptance boundary:** QUAL-WEB-001 remains unchecked. This closes the remaining identified private API cache-header gap but does not complete modified-CLI or direct runtime list/search/export/public-private evidence.
+- **Operations:** no production/database read or write, migration, deployment, release, publish, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 organization API cache-boundary completion (Web PR #110)
 
 - **Code:** Web PR #110 exact tested head `f60a403` merged as `18ddb408`.
