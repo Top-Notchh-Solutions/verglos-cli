@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-09-30 · QUAL-WEB-001 receipt list/detail/export runtime evidence
+
+The existing PostgreSQL-backed `src/lib/organizations/record-receipt-route.integration.test.ts` passed **1/1 with zero skips** against a disposable local `postgres:15-alpine` container. Active assertions cover tenant A/B list isolation, authorized private receipt detail verification, and authorized private download/export projection; raw rejected source and signer identity fields remain excluded. This is local runtime evidence only: no production database/environment, migration, deployment, release, or marketing action occurred. QUAL-WEB-001 remains unchecked because no separate search handler exists and hosted/provider-backed evidence remains open.
+
 ## 2026-09-30 · QUAL-WEB-001 modified-CLI entitlement progress (Web PR #115)
 
 Web PR #115 tested head `b3dfd77` merged as `4d2051e4`. The v2 entitlement test now simulates CLI-style headers (`verglos-cli/2.0.0-alpha.1`, modified-client marker) and forges organization, license, role, plan, capability, allowance, usage, and record fields; server-derived tenant, role, plan, and allowances remain authoritative. The combined focused route/boundary suite passes 10/10; hosted run `36705118215`, GitGuardian, and Vercel pass. QUAL-WEB-001 remains unchecked pending complete list/search/export/public-private runtime evidence. No production/database operation, deployment, release, publish, or marketing action occurred.

@@ -465,6 +465,10 @@ Evidence/problem: compilation cannot qualify a release-security product. The int
 - [ ] **QUAL-WEB-005** · privacy/deletion/retention qualification · deps: OPS-011/012, Studio/Enterprise · Trace collection/consent/storage/export/delete/account-delete; customer-held signed records remain valid while hosted private data is removed. Commit(s): Web `82d2157`, `a24fef7`, PR #100 merged `666317e` (progress only: pure deletion/retention decision substrate and 18-test quality suite; no account-deletion route, hosted deletion trace, consent inventory, or customer-held record run exists yet.)
 - [ ] **QUAL-WEB-006** · accessibility/performance qualification · deps: dashboards/viewer · Test keyboard, screen reader, landmarks, focus, contrast, reduced motion, responsive states, loading/errors, Core Web Vitals budgets, and large datasets. Commit(s): Web `82d2157`, `a24fef7`, PR #100 merged `666317e` (pure threshold classifier); Web PR #102 head `a69e50d` is hosted-green and locally axe-clean on `/`, `/detectors`, and `/docs` after contrast/focus remediation, but remains held/unmerged under the public truth freeze. Empty/non-finite/negative measurements fail closed; authenticated-dashboard, hosted, screen-reader, responsive, large-dataset, and complete CWV evidence remain open.
 
+### QUAL-WEB-001 evidence addendum · 2026-09-30
+
+The existing receipt route integration passed **1/1 with zero skips** against disposable local PostgreSQL, covering tenant-isolated list reads, authorized detail verification, and private download/export projection. No distinct search handler exists in the current route inventory; hosted/provider-backed list/search/export evidence and the complete public/private matrix remain open. No checkbox changed.
+
 ## Epic 19 — Post-release-candidate acceptance and GA truth lock
 
 Evidence/problem: external validation is deliberately last. It validates the complete release candidate and claims; it cannot redefine unfinished functionality as shipped or expand frozen V1 scope.

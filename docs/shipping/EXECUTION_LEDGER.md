@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-09-30 · QUAL-WEB-001 receipt runtime boundary
+
+- **Run:** disposable local `postgres:15-alpine`; `TEST_DATABASE_URL=postgres://…/verglos_test pnpm exec tsx --test src/lib/organizations/record-receipt-route.integration.test.ts` from `verglos-web`.
+- **Result:** **1/1 passed, 0 skipped**. Tenant-isolated list reads for two organizations, authorized detail verification, and private download/export all executed; idempotency/conflict/strict projection assertions also passed.
+- **Boundary:** local Docker evidence only. No distinct search API was created; hosted/provider-backed runtime and complete public/private matrix remain open. No production database/environment read or write, migration, deployment, release, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-001 modified-CLI entitlement request (Web PR #115)
 
 - **Code:** Web PR #115 exact tested head `b3dfd77` merged as `4d2051e4`.

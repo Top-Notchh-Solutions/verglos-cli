@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-09-30 · QUAL-WEB-001 receipt list/detail/export runtime
+
+- **Evidence:** `verglos-web/src/lib/organizations/record-receipt-route.integration.test.ts` passed 1/1 against disposable Docker PostgreSQL with no skip.
+- **Boundary proven:** tenant-isolated list A/B, authorized detail verification, private download/export projection, idempotency/conflict/strict projection, and omission of signer identity/raw source.
+- **Boundary remaining:** no distinct search handler exists; hosted/provider-backed runtime and complete public/private matrix remain open. No checkbox changed.
+
 ## Progress · 2026-09-30 · QUAL-WEB-001 modified-CLI entitlement request
 
 - **Implementation:** Web `b3dfd77`, merged as `4d2051e4` in PR #115, extends the forged entitlement request with CLI-style headers and organization/license/role authority fields.
