@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Legacy verify production smoke
+
+- **Deployment:** Web PR #128 production deployment `verglos-5vy0enlkd-anuragyadav20062002s-projects.vercel.app` reached READY.
+- **Read-only smoke:** `curl https://verglos.com/verify` confirms the corrected legacy-summary language and offline verification pointer; removed counters/publish claims are absent.
+- **Boundary:** No database, payment, migration, or manual production write occurred.
+
 ## 2026-10-02 · Legacy verify truth correction
 
 - **Code:** Web PR #128 (`03304c0`) merged as `fc55203`.

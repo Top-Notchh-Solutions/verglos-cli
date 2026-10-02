@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-02 · Legacy verify production smoke
+
+- **Deployment:** Vercel production deployment `verglos-5vy0enlkd-anuragyadav20062002s-projects.vercel.app` reached READY after Web PR #128 merge.
+- **Smoke:** `https://verglos.com/verify` contains “Legacy summary lookup” and `verglos record verify`; the retired counters and publish language are absent.
+- **Boundary:** Read-only HTTP smoke only; no payment, database, migration, or manual production write occurred.
+
 ## Progress · 2026-10-02 · Legacy verify truth correction
 
 - **Implementation:** Web PR #128 head `03304c0`, merged as `fc552038c70a12a056103905753a9d744e2bd95b`.

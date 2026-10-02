@@ -782,3 +782,6 @@ Web PR #127 (`d92aba3`) merged as `cdc1fff` after hosted Verify run `36985775429
 # 2026-10-02 · Legacy verify truth correction
 
 Web PR #128 (`03304c0`) merged as `fc55203` after hosted Verify run `36986357199` passed. `/verify` no longer reads or displays historical attestation/view counters, calls legacy rows “verified,” or instructs users to publish with the retired `verglos attest` path. It now identifies `/verify/<hash>` as an unsigned historical lookup and points canonical evidence to offline `verglos record verify`. RECORD-010 remains open until the cross-repository legacy compatibility and final truth audit are reconciled; no production/database operation was performed in this batch.
+# 2026-10-02 · Legacy verify production smoke
+
+The Web PR #128 merge produced Vercel production deployment `verglos-5vy0enlkd-anuragyadav20062002s-projects.vercel.app`, which reached READY. Read-only `curl` checks against `https://verglos.com/verify` show the new “Legacy summary lookup” and offline `verglos record verify` truth; the removed counter/publish language is absent. No payment, database, migration, or manual production write occurred.
