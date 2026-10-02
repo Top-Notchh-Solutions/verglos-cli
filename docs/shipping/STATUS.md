@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-02 · Current-source full-history fixture scan
+
+The full-history OWASP Juice Shop fixture (23,312 reachable commits, 906 files) was
+rescanned with the merged current CLI tree `b781bc41539df3870769996426c03e9209a08ab7`,
+not the older PR-51 evidence head. The exact command exited 0, all requested detectors
+ran with no coverage limitations, and the report retained the honest `0 / critical`
+profile (16 critical, 12 high, 18 medium, 0 low, 9 informational; seven test findings
+excluded by policy). Private evidence: `docs/shipping/evidence/juice-shop-full-scan-current-2026-10-02.md`.
+This remains a public technical fixture, not customer acceptance or independent Hunt
+adjudication.
+
 ## 2026-10-02 · Production browser lab sweep and Linux namespace correction
 
 The existing Chrome session measured `/`, `/checkout`, `/docs`, `/detectors`, `/verify`,

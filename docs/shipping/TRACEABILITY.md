@@ -801,3 +801,11 @@ lab evidence only; it does not substitute for organization-dashboard data, human
 screen-reader review, large-dataset testing, or field CWV. Hosted Ubuntu self-scan
 `36984993552` already supplies Linux PID/IPC namespace evidence for HUNT-011; recipe
 provenance/execution and independent review remain open. No checkbox changed.
+## Progress · 2026-10-02 · current CLI full-history fixture scan
+
+The full-history OWASP Juice Shop clone was rescanned with current merged CLI tree
+`b781bc4` (tree `466d71a`), exit 0. The run walked 906 files, executed all requested
+detectors, and recorded the exact score/counts and report digests in
+`docs/shipping/evidence/juice-shop-full-scan-current-2026-10-02.md`. This strengthens
+technical fixture evidence only; it does not close customer consent, independent review,
+legal approval, or Hunt adjudication gates. No production operation occurred.
