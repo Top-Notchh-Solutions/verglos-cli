@@ -17,7 +17,14 @@ test("whoami emits machine-safe free-tier JSON without prose", async () => {
   try {
     const code = await mod.executeWhoami({ json: true });
     assert.equal(code, 0);
-    assert.deepEqual(JSON.parse(logs[0]!), { status: "ok", signedIn: false, plan: "free" });
+    assert.deepEqual(JSON.parse(logs[0]!), {
+      status: "ok",
+      signedIn: false,
+      plan: "free",
+      source: "free",
+      stale: false,
+      capabilityCount: 9,
+    });
   } finally { console.log = origLog; }
 });
 
