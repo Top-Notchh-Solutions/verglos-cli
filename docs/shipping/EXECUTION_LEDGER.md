@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Legacy verify truth correction
+
+- **Code:** Web PR #128 (`03304c0`) merged as `fc55203`.
+- **Verification:** Hosted run `36986357199` passed typecheck, 837 executed tests / 22 environment-gated skips, schema/migration, build, public-boundary, dependency/SBOM/license, tracked-secret, GitGuardian, and Vercel Preview checks.
+- **Boundary:** The public index no longer claims historical views are verification or advertises retired attestation publishing. RECORD-010 remains open pending final CLI/Web compatibility reconciliation. No production operation occurred.
+
 ## 2026-10-02 · Web organization dashboard accessibility shell
 
 - **Code:** Web PR #127 (`d92aba3`) merged as `cdc1fff`.

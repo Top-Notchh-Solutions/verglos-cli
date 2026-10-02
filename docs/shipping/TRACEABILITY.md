@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-02 · Legacy verify truth correction
+
+- **Implementation:** Web PR #128 head `03304c0`, merged as `fc552038c70a12a056103905753a9d744e2bd95b`.
+- **Behavior:** `/verify` is now a non-counting legacy-summary explanation; it does not present historical rows as signed usage evidence or advertise the retired publish path. Existing `/verify/<hash>` compatibility pages remain explicitly unsigned.
+- **Verification:** Hosted Verify `36986357199` passed the full configured Web gate, Vercel Preview, and the new source-level truth regression. RECORD-010 remains open for final cross-repository compatibility/truth reconciliation.
+
 ## Progress · 2026-10-02 · Organization dashboard accessibility shell
 
 - **Implementation:** Web PR #127 head `d92aba3`, merged as `cdc1fffc8afa06dbce7a67f5d10dd31d66307af3`.
