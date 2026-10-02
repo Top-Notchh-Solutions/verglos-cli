@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Founder authorization and external-evidence preflight
+
+- **Authorization:** Founder approved final truth/copy work after gates, a real billing/provider checkout test, authorized customer acceptance workflows, legal/licensing review, and independent Hunt isolation review.
+- **Read-only preflight:** Local Web environment has no Razorpay/database/Clerk credentials; Vercel CLI cannot access the linked project (`Not authorized`); no customer repository/fixture package, legal approval record, or independent Hunt review artifact was found in the workspace.
+- **Boundary:** Approval is recorded, but these missing inputs do not qualify the gates. No production checkout, deployment, customer workflow, legal assertion, independent-review claim, or production database operation occurred.
+
 ## 2026-10-02 · FINAL-WEB-001 truth-registry guard progress (Web PR #101)
 
 - **Code:** Reconciliation commit `662f91b` merged in PR #101 as `c3e6668ec87ef386e33462e815877e640004fc16`.

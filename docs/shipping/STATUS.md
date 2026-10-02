@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-10-02 · Founder authorization recorded; external evidence inputs still absent
+
+Founder authorized the final truth/copy pass after its gates, a real billing/provider checkout test, authorized customer workflows, legal/licensing review, and independent Hunt isolation review. Read-only environment inspection found no local Razorpay credentials, the linked Vercel project remains unauthorized, and no customer fixture, legal approval, or independent-review artifact is present. These are evidence/input gaps, not completed gates; no production checkout, deployment, customer workflow, legal claim, or independent-review claim was performed.
+
 ## 2026-10-02 · FINAL-WEB-001 truth-registry guard progress (Web PR #101)
 
 Web PR #101 merged as `c3e6668ec87ef386e33462e815877e640004fc16` after hosted run `36972830161` passed the complete Web verification workflow, including the dedicated truth-registry test. It adds a pure decision registry for plan, capability, signing, compliance, engine, and metric claims, plus bounded tests; it does not alter public copy. FINAL-WEB-001 remains open pending wiring every public surface and the later acceptance/founder gates. No production database/environment read or write, migration, deployment, release, or marketing action occurred.
