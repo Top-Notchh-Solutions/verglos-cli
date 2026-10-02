@@ -2,13 +2,12 @@
 
 - Origin: `https://verglos.com`
 - Page: `/checkout`
-- Browser path: authenticated-session probe was attempted through browser tooling; no payment was confirmed
+- Browser path: authenticated Chrome session over the user's existing remote-debugging window; no payment was confirmed
 - Homepage response: HTTP 200
 - Checkout UI rendered: yes
 - Checkout create request: `POST /api/razorpay/create-qr`
-- Observed response: HTTP 404 HTML document, not the JSON API contract
+- Observed response: HTTP 503 JSON `{"error":"Plan unavailable","code":"PLAN_UNAVAILABLE"}`
 - Consequence: no order, payment, webhook, or license write was performed
-- Billing acceptance status: open
+- Billing acceptance status: open; the route is present but the production catalog fails closed before order creation
 
-This is deployment evidence, not a billing pass. The local Web checkout route exists and local Razorpay contract tests pass, but the currently aliased production deployment did not expose the route during this probe. Investigate deployment/source/route drift before any Test Mode payment is attempted against `verglos.com`.
-
+This is deployment evidence, not a billing pass. The authenticated checkout UI and API route are reachable, but the production catalog currently refuses the Pro checkout because the plan is unavailable. No order, payment, webhook, entitlement, or license write occurred. Do not enable checkout or alter catalog pricing without an approved verified INR catalog row and the associated provider evidence.
