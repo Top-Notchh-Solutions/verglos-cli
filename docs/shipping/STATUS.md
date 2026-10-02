@@ -16,6 +16,10 @@ PR #124 (`a86bad5`) adds and hosts the missing Docker-backed release repository 
 
 PR #125 (`c4abda5`) corrects the live checkout’s contrast and landmark defects. Hosted Verify passed and the production Lighthouse smoke now reports Accessibility 100 / Best Practices 100 on `/checkout`. QUAL-WEB-006 remains open for the broader dashboard, screen-reader, responsive, large-dataset, and complete CWV gate.
 
+## 2026-10-02 · Public Lighthouse smoke expanded
+
+Production desktop Lighthouse reports Accessibility/Best Practices/SEO 100 on `/`, `/detectors`, and `/docs`; mobile checkout remains Accessibility/Best Practices 100. The recurring `llms-txt` recommendation is tracked separately and does not change product accessibility evidence. QUAL-WEB-006 remains open for authenticated-dashboard and complete performance qualification.
+
 ## 2026-10-02 · Hunt sandbox suite recheck
 
 The current CLI Hunt package suite passes **40 tests with 0 failures**. Sixteen Docker runtime adversarial cases remain skipped because Docker Desktop/socket access is unavailable on this host; direct Docker access returned permission denied. This is contract/unit evidence only and does not qualify HUNT-011, QUAL-CLI-004, Linux namespace isolation, or independent review. No production operation occurred.

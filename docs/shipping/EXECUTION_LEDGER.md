@@ -24,6 +24,12 @@
 - **Verification:** Hosted Verify run `36981068432` passed. Production deployment reached READY; post-deploy Chrome Lighthouse on `/checkout` reports Accessibility **100** and Best Practices **100** (up from Accessibility 94 with contrast and landmark failures).
 - **Boundary:** SEO/noindex/llms audit failures are intentional for transactional checkout. QUAL-WEB-006 remains unchecked pending authenticated-dashboard, screen-reader, responsive, large-dataset, and complete Core Web Vitals evidence. No payment, database, migration, or pricing behavior changed.
 
+## 2026-10-02 · Public Web Lighthouse smoke after PR #125
+
+- **Run:** Production Chrome Lighthouse navigation audits on `/`, `/detectors`, and `/docs` (desktop), plus `/checkout` (mobile).
+- **Result:** `/`, `/detectors`, and `/docs` each scored Accessibility 100, Best Practices 100, and SEO 100. `/checkout` scored Accessibility 100 and Best Practices 100 on mobile as well as desktop. The only recurring public audit failure is the separate `llms-txt` recommendation; checkout additionally remains intentionally noindex/without a meta description as a transactional surface.
+- **Boundary:** This is public smoke evidence only, not the complete QUAL-WEB-006 gate; dashboard screen-reader, large-dataset, and full CWV evidence remain open.
+
 ## 2026-10-02 · Hunt sandbox suite recheck
 
 - **Run:** CLI `pnpm --filter @verglos/hunt test` at `e63b504`.
