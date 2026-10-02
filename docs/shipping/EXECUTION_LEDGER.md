@@ -971,7 +971,7 @@ while they remain unresolved.
 ## 2026-10-02 · PLAN-CLI-002 effective entitlement UX
 
 - **Implementation:** CLI commits `b890763` and `1fe0a0e`, merged through PRs #53 and #54 as `e06de5b` and `443be30`. `verglos whoami` now reports the effective authority source, stale/offline state, capability count, catalog version, and bounded allowances in human and JSON output. Offline, legacy-token, and unavailable-endpoint paths remain fail-soft and do not invent paid access.
-- **Verification:** focused whoami tests pass; full process-output suite passes 42/42 locally; forced CLI typecheck passes. PR #53 exposed one stale machine-output assertion; PR #54 corrected it. PR #54 hosted in-toto passed and its platform/self-scan workflows were still running when this ledger entry was written.
+- **Verification:** focused whoami tests pass; full process-output suite passes 42/42 locally; forced CLI typecheck passes. PR #53 exposed one stale machine-output assertion; PR #54 corrected it. PR #54 hosted in-toto passed and all nine Ubuntu/macOS/Windows × Node 20/22/24 platform cells passed at exact merged head. The separate self-scan workflow was cancelled by the merge workflow and is not claimed as evidence.
 - **Boundary:** PLAN-CLI-002 remains unchecked. PLAN-CLI-001 production signer/catalog activation evidence and complete UX acceptance are still open. No production database write, migration, deployment, npm publish, or release tag occurred.
 
 ## 2026-10-02 · QUAL-WEB-006 authenticated account accessibility evidence
