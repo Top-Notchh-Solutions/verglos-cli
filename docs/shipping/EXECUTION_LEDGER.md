@@ -932,3 +932,8 @@ while they remain unresolved.
 - **Implementation:** Web commit `f574af3`, merged PR #122. `/checkout` computes available Pro cadences through `checkoutOfferFor`, the same verified-INR gate used by `POST /api/razorpay/create-qr`. With the current unverified USD catalog, the page renders an explicit unavailable state and does not advertise `$29/$290` or offer a QR action.
 - **Verification:** Hosted Verify run `36978025646` passed typecheck, full configured tests, negative-boundary, truth-registry, schema/migration checks, production build, public-boundary, dependency/license/SBOM, and tracked-secret guards. Local Razorpay focused suite remained 15 pass / 2 environment-gated skips.
 - **Boundary:** This is a truth/UX correction, not billing acceptance. No catalog price, entitlement, production environment, database, migration, payment, webhook, deployment, or marketing claim was changed.
+## 2026-10-02 · Razorpay sandbox provider + webhook replay evidence
+
+- **Provider:** Razorpay Test Mode Standard Checkout completed with mock-bank `Success`. Order `order_TixO0lU5jqQIui` produced captured payment `pay_TixQnWornJ3Yl1` for `280943` INR paise. A separate Test Mode QR probe was closed without payment because QR is not the supported mock-success path.
+- **Application binding:** signed `qr_code.credited` harness payload bound the captured payment to a valid INR/30-day checkout snapshot. First delivery returned 200 and credited once; replay returned duplicate 200; no release/error path fired.
+- **Boundary:** existing Razorpay-focused tests remain 15 pass / 2 environment-gated skips. PLAN-WEB-011/012 are not checked: this is sandbox/provider evidence, while the production catalog is still unverified and no production entitlement/database write occurred.
