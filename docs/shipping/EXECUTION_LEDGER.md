@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Hosted Linux namespace qualification
+
+- **Change:** CLI PR #55 (`933c14c`) added a manual trigger to `.github/workflows/self-scan.yml`; hosted matrix and PR self-scan passed, then the change merged as `b781bc4`.
+- **Evidence:** Manual `main` self-scan `36984993552` passed end-to-end on `ubuntu-latest`. The pinned `postgres:15-alpine` Hunt Docker adversarial suite completed successfully and the PID/IPC namespace-private assertion passed; the run also uploaded the Hunt transcript artifact.
+- **Boundary:** Linux namespace evidence is now present. HUNT-011 and QUAL-CLI-004 remain open for recipe execution/provenance and independent review. No production operation occurred.
+
 ## 2026-10-02 · Web PR #123 verified INR Pro catalog (pending production activation)
 
 - **Code:** Web `23a83f0` pushed as PR #123: canonical Pro catalog version `2026-10-02.0`, INR amounts `280943`/`2809430` paise, verified/purchasable flags, and checkout UI bound to catalog offers.

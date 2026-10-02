@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-02 · Authoritative hosted Linux Hunt run
+
+- **Run:** GitHub Actions manual `main` self-scan `36984993552`, exact merge head `b781bc41539df3870769996426c03e9209a08ab7`.
+- **Result:** Complete self-scan passed. The pinned `postgres:15-alpine` Hunt Docker suite passed with zero failures; the Linux PID/IPC namespace-private assertion passed on `ubuntu-latest`.
+- **Boundary:** This closes the Linux namespace evidence gap, but HUNT-011 and QUAL-CLI-004 remain unchecked for recipe execution/provenance and independent review.
+
 ## Verification · 2026-10-02 · Hunt Docker adversarial runtime revalidation
 
 - **Run:** CLI Hunt package tests with `VERGLOS_HUNT_DOCKER_INTEGRATION=1` against pinned `alpine@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc` on Docker Desktop Server 29.7.2.
