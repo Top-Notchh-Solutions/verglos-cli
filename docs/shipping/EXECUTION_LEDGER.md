@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Web PR #123 verified INR Pro catalog (pending production activation)
+
+- **Code:** Web `23a83f0` pushed as PR #123: canonical Pro catalog version `2026-10-02.0`, INR amounts `280943`/`2809430` paise, verified/purchasable flags, and checkout UI bound to catalog offers.
+- **Verification:** local full Web suite 858 total (836 pass, 22 environment-gated skips), typecheck, build, schema/migration, negative-boundary, truth-registry, license, and SBOM checks passed. Hosted Verify run `36979422192` passed typecheck, full tests, boundary/truth, schema/migrations, build, public-boundary, dependency, SBOM/license, and secret guards.
+- **Boundary:** no migration, database write, live payment, or production deployment has been performed by this change. PLAN-WEB-011/012 remain unchecked until production activation and real lifecycle reconciliation are observed. Rollback is a deployment revert or commit revert.
+
 ## 2026-10-02 · Hunt sandbox suite recheck
 
 - **Run:** CLI `pnpm --filter @verglos/hunt test` at `e63b504`.
