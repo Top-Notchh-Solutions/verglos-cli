@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-02 · Production browser lab sweep and Linux namespace correction
+
+The existing Chrome session measured `/`, `/checkout`, `/docs`, `/detectors`, `/verify`,
+and authenticated `/account` over CDP at 1200×859. All routes exposed a `<main>` landmark,
+had no horizontal overflow, and reported CLS 0.00; TTFB/FCP and focusable counts are in
+`docs/shipping/evidence/public-cwv-lab-sweep-2026-10-02.md`. These are lab measurements,
+not field-CWV or human screen-reader evidence. Separately, hosted Ubuntu self-scan
+`36984993552` already proved the PID/IPC namespace assertion at merge head `b781bc4`;
+the remaining HUNT-011 gaps are recipe provenance/execution and independent review, not
+Linux-host access. No production write or dashboard data creation occurred.
+
 ## 2026-10-02 · Hunt Docker adversarial runtime revalidation
 
 Docker Desktop Server 29.7.2 is reachable. The complete Hunt package suite passed 55/56 with the pinned Alpine digest `sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc`; all 15 enabled Docker adversarial checks passed and only the macOS-only PID/IPC namespace assertion was skipped. HUNT-011 and QUAL-CLI-004 remain open for Linux namespace evidence, recipe execution/provenance, and independent review. Private evidence is recorded in `docs/shipping/evidence/hunt-docker-adversarial-2026-10-02.md`.
