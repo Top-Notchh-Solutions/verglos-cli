@@ -8,6 +8,10 @@ PR #123 (`23a83f0`) has passed the complete hosted Web verification workflow. It
 
 The merged catalog change (`f31a8e2`) is READY in Vercel production. An existing authenticated Chrome session shows the live checkout at ₹2,809.43/month and the annual cadence. No production payment/order was initiated because live-key mode has not been independently proven as sandbox. This is deployment/UI evidence only; PLAN-WEB-011/012 remain open pending safe provider lifecycle reconciliation.
 
+## 2026-10-02 · Web PR #124 PRO-003 runtime evidence merged
+
+PR #124 (`a86bad5`) adds and hosts the missing Docker-backed release repository integration. The test proves exact release evidence/change/incomplete projections, tenant-scoped pagination/filtering, and foreign-tenant exclusion; hosted Verify is green. PRO-003 remains accepted and no production operation occurred.
+
 ## 2026-10-02 · Hunt sandbox suite recheck
 
 The current CLI Hunt package suite passes **40 tests with 0 failures**. Sixteen Docker runtime adversarial cases remain skipped because Docker Desktop/socket access is unavailable on this host; direct Docker access returned permission denied. This is contract/unit evidence only and does not qualify HUNT-011, QUAL-CLI-004, Linux namespace isolation, or independent review. No production operation occurred.

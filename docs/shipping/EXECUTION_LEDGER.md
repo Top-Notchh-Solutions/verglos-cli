@@ -12,6 +12,12 @@
 - **Smoke:** Existing authenticated Chrome session loaded `https://verglos.com/checkout`; the rendered offer is INR ₹2,809.43 monthly, with annual cadence available, 30-day monthly entitlement, and the QR action. No production QR/order was created.
 - **Boundary:** This verifies catalog/UI deployment only. It does not prove live-key mode, successful payment, webhook delivery, renewal/refund/out-of-order reconciliation, or exactly-one production grant. PLAN-WEB-011/012 remain unchecked; rollback is the prior Vercel deployment or revert `f31a8e2`.
 
+## 2026-10-02 · Web PR #124 PRO-003 release repository runtime evidence
+
+- **Code:** Web `1c21494` merged as `a86bad57bf4b0350f2e1bc1b03d918bb0de985c8` in PR #124. Added the missing Docker-backed PostgreSQL integration to the existing tenant-scoped release/application dashboard implementation and included it in the configured dashboard pretest.
+- **Evidence:** Disposable PostgreSQL test passed 1/1: exact subject/decision/policy/signer/coverage/change/incomplete projections, application filter, and foreign-tenant exclusion. Hosted Verify run `36980196035` passed the complete Web gate.
+- **Boundary:** No production database/environment operation, migration, deployment, or public-copy change occurred. PRO-003 was already checked in the authoritative backlog; this closes its previously recorded runtime-evidence gap.
+
 ## 2026-10-02 · Hunt sandbox suite recheck
 
 - **Run:** CLI `pnpm --filter @verglos/hunt test` at `e63b504`.
