@@ -922,3 +922,8 @@ while they remain unresolved.
 - **Run:** `node:24-bookworm` container, fresh consumer; published `verglos@1.8.3` → local six archives → published `verglos@1.8.3`.
 - **Result:** CLI reported `1.8.3`, `2.0.0-alpha.1`, `1.8.3`; Linux install, upgrade, and rollback completed successfully.
 - **Boundary:** linux/amd64 under host emulation; Windows real transition and official in-toto/Sigstore trust remain absent. QUAL-CLI-006 remains unchecked.
+## 2026-10-02 · CLI PR #52 merged and production billing probe corrected
+
+- **CLI:** PR #52 (`514349f`) merged as `ccb65ed` after inspection of the final five-file diff. The scanner redacts configured home-directory prefixes in agent-surface finding paths; hosted platform matrix, self-scan, and in-toto binding checks were green. No private shipping files or founder assets entered the public PR.
+- **Billing evidence:** authenticated existing-Chrome probe reached `https://verglos.com/checkout`; `POST /api/razorpay/create-qr` returned `503 PLAN_UNAVAILABLE`. No order, payment, webhook, entitlement, or license write occurred. Evidence file `docs/shipping/evidence/production-checkout-probe-2026-10-02.md` was corrected from the stale 404 observation.
+- **Boundary:** package remains `2.0.0-alpha.1`; no production/database write, migration, deployment, npm publish, release tag, or marketing change occurred. Billing/catalog acceptance remains open.

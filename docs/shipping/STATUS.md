@@ -735,3 +735,8 @@ On a fresh temporary npm consumer, the published `verglos@1.8.3` was installed a
 ## 2026-09-30 · QUAL-CLI-006 real Linux upgrade/rollback transition
 
 Inside the pinned local `node:24-bookworm` Linux container (linux/amd64 under host emulation), a fresh consumer completed the same published `verglos@1.8.3` → local six-archive `2.0.0-alpha.1` → published `1.8.3` transition, reporting `1.8.3`, `2.0.0-alpha.1`, and `1.8.3` respectively. Combined with the macOS run and the nine-cell clean installs, this directly covers Linux/macOS install plus transition behavior. Windows real upgrade/rollback and official in-toto/Sigstore trust evidence remain open; QUAL-CLI-006 stays unchecked.
+## 2026-10-02 · CLI PR #52 merged: portable agent-surface paths
+
+CLI PR #52 (`514349f`) merged as `ccb65ed`. Agent-surface findings now render developer-home paths as `~`-relative paths while preserving detection, preventing machine-specific absolute paths from entering portable reports. The exact-head hosted Ubuntu/macOS/Windows × Node 20/22/24 matrix, self-scan, and in-toto release-binding job all passed. The change is implementation progress only; it does not alter the package version (`2.0.0-alpha.1`) or constitute a release/publication.
+
+Production checkout evidence was corrected after an authenticated Chrome probe: `POST /api/razorpay/create-qr` currently returns HTTP 503 `PLAN_UNAVAILABLE`, so no order/payment/webhook/license write occurred. PLAN-WEB-011/012 and commercial acceptance remain open pending an approved verified INR catalog and real provider lifecycle evidence. No production/database write, migration, deployment, publish, or marketing change occurred.
