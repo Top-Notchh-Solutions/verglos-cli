@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Web organization dashboard accessibility shell
+
+- **Code:** Web PR #127 (`d92aba3`) merged as `cdc1fff`.
+- **Verification:** Hosted run `36985775429` passed typecheck, configured Web tests (836 executed / 22 environment-gated skips), negative boundary/truth, schema/migration checks, build, public-boundary, dependency/SBOM/license, tracked-secret, GitGuardian, and Vercel Preview.
+- **Boundary:** Dashboard shell accessibility/responsive implementation is shipped. QUAL-WEB-006 remains open for authenticated dashboard runtime evidence, human screen-reader review, large datasets, and field CWV. No production operation occurred.
+
 ## 2026-10-02 · Hosted Linux namespace qualification
 
 - **Change:** CLI PR #55 (`933c14c`) added a manual trigger to `.github/workflows/self-scan.yml`; hosted matrix and PR self-scan passed, then the change merged as `b781bc4`.

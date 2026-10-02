@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-02 · Organization dashboard accessibility shell
+
+- **Implementation:** Web PR #127 head `d92aba3`, merged as `cdc1fffc8afa06dbce7a67f5d10dd31d66307af3`.
+- **Behavior:** Authenticated organization dashboard chrome now exposes skip-to-main navigation, named workspace and organization-navigation landmarks, keyboard-visible focus, higher-contrast sidebar labels, mobile layout at narrow widths, and reduced-motion handling.
+- **Verification:** Hosted Verify run `36985775429` passed the full configured Web gate and Vercel Preview. This is implementation progress, not QUAL-WEB-006 acceptance: authenticated runtime, human screen-reader, large-dataset, and field-CWV evidence remain open.
+
 ## Verification · 2026-10-02 · Authoritative hosted Linux Hunt run
 
 - **Run:** GitHub Actions manual `main` self-scan `36984993552`, exact merge head `b781bc41539df3870769996426c03e9209a08ab7`.
