@@ -794,3 +794,6 @@ Read-only Chrome DevTools Protocol inspection of the existing authenticated `/ac
 # 2026-10-02 · Hunt independent review packet prepared
 
 Private reviewer packet `docs/shipping/evidence/hunt-independent-review-packet-2026-10-02.md` now contains the exact CLI merge head, hosted Ubuntu run `36984993552`, pinned image digest, artifact ID, threat model, reproduction commands, results, limitations, and reviewer sign-off fields. It does not fabricate reviewer identity or acceptance; HUNT-011/QUAL-CLI-004 remain open until an independent reviewer returns a signed/dated report.
+# 2026-10-02 · Public route accessibility/lab sweep
+
+Read-only CDP sweep of `/`, `/checkout`, `/docs`, `/detectors`, and `/verify` recorded one main landmark and no horizontal overflow on every route, accessibility-tree role sets, focusable counts, AX node counts, and DOMContentLoaded deltas. Private evidence: `docs/shipping/evidence/public-ax-lab-sweep-2026-10-02.md`. This is lab evidence only; it does not claim field CWV or human screen-reader completion.

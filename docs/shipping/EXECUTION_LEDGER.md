@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Public route accessibility/lab sweep
+
+- **Run:** Read-only Chrome CDP sweep in a temporary same-browser tab across five public routes.
+- **Result:** One main landmark and no horizontal overflow on all routes; accessibility-tree and DOM timing evidence recorded in the private artifact.
+- **Boundary:** Lab evidence only; no field-CWV or human screen-reader claim; no production write occurred.
+
 ## 2026-10-02 · Hunt independent review packet
 
 - **Artifact:** Private `hunt-independent-review-packet-2026-10-02.md` prepared from CLI head `b781bc4`, hosted run `36984993552`, artifact `11216049055`, and pinned image evidence.

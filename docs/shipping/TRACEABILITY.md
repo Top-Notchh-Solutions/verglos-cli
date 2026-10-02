@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Evidence · 2026-10-02 · Public route accessibility/lab sweep
+
+- Existing Chrome CDP session inspected five public routes in a temporary same-browser tab.
+- Every route exposed one `main` landmark and no horizontal overflow; AX roles, node counts, focusables, and DOMContentLoaded deltas are recorded privately.
+- This strengthens QUAL-WEB-006 lab evidence but does not substitute for field CWV or human screen-reader review.
+
 ## Evidence · 2026-10-02 · Hunt review packet
 
 - Private packet prepared with exact implementation head, hosted run/artifact, pinned image digests, threat model, reproduction commands, limitations, and sign-off fields.
