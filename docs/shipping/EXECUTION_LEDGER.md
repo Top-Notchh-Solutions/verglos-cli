@@ -18,6 +18,12 @@
 - **Evidence:** Disposable PostgreSQL test passed 1/1: exact subject/decision/policy/signer/coverage/change/incomplete projections, application filter, and foreign-tenant exclusion. Hosted Verify run `36980196035` passed the complete Web gate.
 - **Boundary:** No production database/environment operation, migration, deployment, or public-copy change occurred. PRO-003 was already checked in the authoritative backlog; this closes its previously recorded runtime-evidence gap.
 
+## 2026-10-02 · Web PR #125 checkout accessibility qualification progress
+
+- **Code:** Web `22a9f25` merged as `c4abda56dc4fcbe3306ceee69f45619765afd868` in PR #125. Checkout accent controls now use the accessible foreground token and the route exposes a semantic `main` landmark.
+- **Verification:** Hosted Verify run `36981068432` passed. Production deployment reached READY; post-deploy Chrome Lighthouse on `/checkout` reports Accessibility **100** and Best Practices **100** (up from Accessibility 94 with contrast and landmark failures).
+- **Boundary:** SEO/noindex/llms audit failures are intentional for transactional checkout. QUAL-WEB-006 remains unchecked pending authenticated-dashboard, screen-reader, responsive, large-dataset, and complete Core Web Vitals evidence. No payment, database, migration, or pricing behavior changed.
+
 ## 2026-10-02 · Hunt sandbox suite recheck
 
 - **Run:** CLI `pnpm --filter @verglos/hunt test` at `e63b504`.

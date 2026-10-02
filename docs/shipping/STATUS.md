@@ -12,6 +12,10 @@ The merged catalog change (`f31a8e2`) is READY in Vercel production. An existing
 
 PR #124 (`a86bad5`) adds and hosts the missing Docker-backed release repository integration. The test proves exact release evidence/change/incomplete projections, tenant-scoped pagination/filtering, and foreign-tenant exclusion; hosted Verify is green. PRO-003 remains accepted and no production operation occurred.
 
+## 2026-10-02 · Web PR #125 checkout accessibility progress
+
+PR #125 (`c4abda5`) corrects the live checkout’s contrast and landmark defects. Hosted Verify passed and the production Lighthouse smoke now reports Accessibility 100 / Best Practices 100 on `/checkout`. QUAL-WEB-006 remains open for the broader dashboard, screen-reader, responsive, large-dataset, and complete CWV gate.
+
 ## 2026-10-02 · Hunt sandbox suite recheck
 
 The current CLI Hunt package suite passes **40 tests with 0 failures**. Sixteen Docker runtime adversarial cases remain skipped because Docker Desktop/socket access is unavailable on this host; direct Docker access returned permission denied. This is contract/unit evidence only and does not qualify HUNT-011, QUAL-CLI-004, Linux namespace isolation, or independent review. No production operation occurred.
