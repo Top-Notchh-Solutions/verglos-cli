@@ -74,6 +74,8 @@ test("agent-surface: AGENT-002 fires on a real-shaped Anthropic key in env", asy
   assert.equal(agent002.length, 1);
   assert.equal(agent002[0]?.severity, "critical");
   assert.match(agent002[0]?.title ?? "", /Anthropic/);
+  assert.equal(agent002[0]?.file, "~/.cursor/mcp.json");
+  assert.doesNotMatch(agent002[0]?.file ?? "", /verglos-agent-surface-test-/);
 });
 
 test("agent-surface: AGENT-002 does NOT fire on a $VAR reference", async () => {
