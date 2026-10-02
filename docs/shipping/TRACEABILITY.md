@@ -1,5 +1,12 @@
 # Verglos V1 traceability
 
+## Evidence · 2026-10-02 · Authenticated account accessibility tree
+
+- Existing authenticated Chrome session was inspected read-only through CDP on `/account`.
+- One `main`, navigation, heading, alert, seven focusables, no horizontal overflow, and 65 AX nodes were observed.
+- `GET /api/v1/organizations` returned zero organizations; no production write occurred.
+- This is automated account-route evidence only; human screen-reader and organization-dashboard evidence remain open.
+
 ## Acceptance · 2026-10-02 · RECORD-010 legacy compatibility
 
 - **CLI evidence:** Current `attest-options.test.ts` + `local-command-options.test.ts` pass 7/7; retired shell returns bounded `LEGACY_ATTEST_RETIRED`, performs no signing/publication, and does not echo customer paths or URLs.

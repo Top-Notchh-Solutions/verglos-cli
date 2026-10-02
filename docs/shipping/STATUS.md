@@ -788,3 +788,6 @@ The Web PR #128 merge produced Vercel production deployment `verglos-5vy0enlkd-a
 # 2026-10-02 · RECORD-010 accepted
 
 RECORD-010 is accepted after the final cross-repository truth reconciliation. Current CLI retirement/option/registration tests pass 7/7; Web retired POST, legacy lookup, and corrected `/verify` index tests pass 3/3; hosted Web run `36986357199` and the production read-only `/verify` smoke are green. Legacy summaries remain readable but explicitly unsigned; no historical counter is presented as verification and no retired `verglos attest` publish path is advertised. Backlog is now 216 checked / 53 unchecked / 269 total.
+# 2026-10-02 · Authenticated accessibility-tree evidence
+
+Read-only Chrome DevTools Protocol inspection of the existing authenticated `/account` tab found one `main`, navigation, heading, alert, seven focusables, no horizontal overflow, and 65 accessibility-tree nodes. The same session returned zero organizations from `GET /api/v1/organizations`; no production data was created. Private evidence: `docs/shipping/evidence/account-ax-tree-2026-10-02.md`. This strengthens screen-reader evidence for the personal account route but does not qualify human assistive technology or the organization dashboard.

@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Authenticated account accessibility-tree evidence
+
+- **Run:** Existing authenticated Chrome tab, read-only CDP inspection of `/account`.
+- **Result:** One `main`, navigation, heading, alert, seven focusables, no horizontal overflow, 65 AX nodes; organization list returned empty.
+- **Boundary:** Partial automated accessibility evidence only. No organization was created and no production/database write occurred.
+
 ## 2026-10-02 · RECORD-010 accepted
 
 - **Acceptance:** CLI retirement/option/registration tests pass 7/7; Web retired POST, legacy lookup, and `/verify` truth tests pass 3/3; hosted run `36986357199` and production read-only smoke pass.
