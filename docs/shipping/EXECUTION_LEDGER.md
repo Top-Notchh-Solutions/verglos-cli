@@ -979,3 +979,9 @@ while they remain unresolved.
 - **Implementation:** Web commit `f66d32b`, merged PR #126 as `89056c3`, raises the `/account` signed-in label contrast from the measured 4.15:1 failure to an accessible value without changing copy or layout.
 - **Verification:** local typecheck passed; configured Web suite passed 836/836 runnable tests with 22 environment-gated skips. Hosted type/schema, GitGuardian, and Vercel passed. Production Lighthouse on the existing authenticated Chrome session scored Accessibility 100 and Best Practices 100 on desktop and mobile. A desktop performance trace measured LCP 551ms and CLS 0.00.
 - **Boundary:** QUAL-WEB-006 remains unchecked. This covers legacy `/account` only; organization-dashboard, screen-reader, reduced-motion, large-dataset, and complete field-CWV evidence remain open. No production database write, migration, billing action, or marketing change occurred. Evidence is private at `docs/shipping/evidence/account-a11y-cwv-2026-10-02.md`.
+
+## 2026-10-02 · HUNT-011 Docker adversarial runtime revalidation
+
+- **Run:** CLI Hunt package suite with Docker integration enabled against pinned Alpine digest `sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc`; Docker Desktop Server 29.7.2 is reachable.
+- **Result:** 55/56 passed with zero failures. Fifteen runtime adversarial checks passed, covering non-root, read-only mounts/rootfs, network denial, socket/device absence, no-new-privileges, redaction, output/time/CPU/process/disk/memory bounds, and signal classification. One macOS-only PID/IPC namespace assertion was skipped.
+- **Boundary:** HUNT-011 and QUAL-CLI-004 remain unchecked for Linux namespace evidence, complete recipe execution/provenance, and independent review. No production operation occurred. Private evidence: `docs/shipping/evidence/hunt-docker-adversarial-2026-10-02.md`.

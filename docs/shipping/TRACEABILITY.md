@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-02 · Hunt Docker adversarial runtime revalidation
+
+- **Run:** CLI Hunt package tests with `VERGLOS_HUNT_DOCKER_INTEGRATION=1` against pinned `alpine@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc` on Docker Desktop Server 29.7.2.
+- **Result:** 55/56 passed with zero failures. Fifteen Docker runtime adversarial checks passed: privilege, filesystem, network, socket/device, no-new-privileges, redaction, output/time/CPU/process/disk/memory bounds, and signal classification. One PID/IPC namespace comparison was skipped because the host is macOS.
+- **Boundary:** HUNT-011 and QUAL-CLI-004 remain unchecked pending Linux namespace evidence, recipe execution/provenance, and independent review. No production operation occurred.
+
 ## Progress · 2026-10-02 · QUAL-WEB-006 authenticated account evidence (Web PR #126)
 
 - **Implementation:** Web `f66d32b`, merged as `89056c3`, raises the `/account` signed-in label contrast without changing product copy or layout.

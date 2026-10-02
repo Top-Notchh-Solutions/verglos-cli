@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-10-02 · Hunt Docker adversarial runtime revalidation
+
+Docker Desktop Server 29.7.2 is reachable. The complete Hunt package suite passed 55/56 with the pinned Alpine digest `sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc`; all 15 enabled Docker adversarial checks passed and only the macOS-only PID/IPC namespace assertion was skipped. HUNT-011 and QUAL-CLI-004 remain open for Linux namespace evidence, recipe execution/provenance, and independent review. Private evidence is recorded in `docs/shipping/evidence/hunt-docker-adversarial-2026-10-02.md`.
+
 ## 2026-10-02 · QUAL-WEB-006 authenticated account evidence (Web PR #126)
 
 Web PR #126 (`f66d32b`) merged as `89056c3` after hosted type/schema, GitGuardian, and Vercel passed. It corrects the authenticated `/account` label contrast defect identified at 4.15:1. Production Lighthouse on the existing authenticated Chrome session reports Accessibility 100 and Best Practices 100 on desktop and mobile; the desktop trace reports LCP 551ms and CLS 0.00. QUAL-WEB-006 remains open for organization-dashboard, screen-reader, reduced-motion, large-dataset, and complete field-CWV evidence. Private evidence is recorded in `docs/shipping/evidence/account-a11y-cwv-2026-10-02.md`. No production database write, migration, billing action, or marketing change occurred.
@@ -24,10 +28,6 @@ PR #125 (`c4abda5`) corrects the live checkout’s contrast and landmark defects
 ## 2026-10-02 · Public Lighthouse smoke expanded
 
 Production desktop Lighthouse reports Accessibility/Best Practices/SEO 100 on `/`, `/detectors`, and `/docs`; mobile checkout remains Accessibility/Best Practices 100. The recurring `llms-txt` recommendation is tracked separately and does not change product accessibility evidence. QUAL-WEB-006 remains open for authenticated-dashboard and complete performance qualification.
-
-## 2026-10-02 · Hunt sandbox suite recheck
-
-The current CLI Hunt package suite passes **40 tests with 0 failures**. Sixteen Docker runtime adversarial cases remain skipped because Docker Desktop/socket access is unavailable on this host; direct Docker access returned permission denied. This is contract/unit evidence only and does not qualify HUNT-011, QUAL-CLI-004, Linux namespace isolation, or independent review. No production operation occurred.
 
 ## 2026-10-02 · Founder authorization recorded; external evidence inputs still absent
 
