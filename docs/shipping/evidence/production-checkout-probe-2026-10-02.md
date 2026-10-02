@@ -9,5 +9,6 @@
 - Observed response: HTTP 503 JSON `{"error":"Plan unavailable","code":"PLAN_UNAVAILABLE"}`
 - Consequence: no order, payment, webhook, or license write was performed
 - Billing acceptance status: open; the route is present but the production catalog fails closed before order creation
+- Follow-up deployment: Web merge `d206091` reached Vercel production deployment `verglos-i8oejmwhy-anuragyadav20062002s-projects.vercel.app` with status Ready. The rendered authenticated checkout now shows the explicit unavailable state instead of the stale USD price/QR action. An unauthenticated direct POST remains outside the auth boundary and was not used as billing evidence.
 
 This is deployment evidence, not a billing pass. The authenticated checkout UI and API route are reachable, but the production catalog currently refuses the Pro checkout because the plan is unavailable. No order, payment, webhook, entitlement, or license write occurred. Do not enable checkout or alter catalog pricing without an approved verified INR catalog row and the associated provider evidence.
