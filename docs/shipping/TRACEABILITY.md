@@ -1,5 +1,10 @@
 # Verglos V1 traceability
 
+## Evidence · 2026-10-02 · Hunt review packet
+
+- Private packet prepared with exact implementation head, hosted run/artifact, pinned image digests, threat model, reproduction commands, limitations, and sign-off fields.
+- The packet is review-ready but intentionally unsigned; independent review remains an external gate.
+
 ## Evidence · 2026-10-02 · Authenticated account accessibility tree
 
 - Existing authenticated Chrome session was inspected read-only through CDP on `/account`.

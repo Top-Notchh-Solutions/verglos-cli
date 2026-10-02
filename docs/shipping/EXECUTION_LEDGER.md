@@ -1,5 +1,10 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Hunt independent review packet
+
+- **Artifact:** Private `hunt-independent-review-packet-2026-10-02.md` prepared from CLI head `b781bc4`, hosted run `36984993552`, artifact `11216049055`, and pinned image evidence.
+- **Boundary:** Packet is ready for a non-author reviewer; no reviewer identity or signature is invented. HUNT-011/QUAL-CLI-004 remain open.
+
 ## 2026-10-02 · Authenticated account accessibility-tree evidence
 
 - **Run:** Existing authenticated Chrome tab, read-only CDP inspection of `/account`.
