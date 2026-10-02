@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-02 · QUAL-WEB-006 authenticated account evidence (Web PR #126)
+
+- **Implementation:** Web `f66d32b`, merged as `89056c3`, raises the `/account` signed-in label contrast without changing product copy or layout.
+- **Evidence:** Local typecheck and configured tests pass (836 runnable / 22 environment-gated skips); hosted type/schema, GitGuardian, and Vercel pass. Existing authenticated Chrome production Lighthouse reports Accessibility 100 and Best Practices 100 on desktop and mobile. Desktop performance trace reports LCP 551ms and CLS 0.00.
+- **Boundary:** QUAL-WEB-006 remains unchecked for organization-dashboard, screen-reader, reduced-motion, large-dataset, and complete field-CWV evidence. No production operation occurred.
+
 ## Verification · 2026-10-02 · Hunt sandbox suite recheck
 
 - **Run:** `pnpm --filter @verglos/hunt test` on CLI `feat/cli-qual-006-cross-platform-consumer` at `e63b504`.

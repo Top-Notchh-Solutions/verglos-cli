@@ -1,5 +1,10 @@
 # Verglos V1 shipping status
 
+## 2026-10-02 · QUAL-WEB-006 authenticated account evidence (Web PR #126)
+
+Web PR #126 (`f66d32b`) merged as `89056c3` after hosted type/schema, GitGuardian, and Vercel passed. It corrects the authenticated `/account` label contrast defect identified at 4.15:1. Production Lighthouse on the existing authenticated Chrome session reports Accessibility 100 and Best Practices 100 on desktop and mobile; the desktop trace reports LCP 551ms and CLS 0.00. QUAL-WEB-006 remains open for organization-dashboard, screen-reader, reduced-motion, large-dataset, and complete field-CWV evidence. Private evidence is recorded in `docs/shipping/evidence/account-a11y-cwv-2026-10-02.md`. No production database write, migration, billing action, or marketing change occurred.
+
+
 ## 2026-10-02 · Web PR #123 verified INR catalog ready for activation review
 
 PR #123 (`23a83f0`) has passed the complete hosted Web verification workflow. It enables the founder-approved INR Pro catalog (₹2,809.43 monthly / ₹28,094.30 annual) and binds checkout display and gateway requests to the same catalog snapshot. No migration or production write occurred. Because this changes the live Razorpay path from fail-closed to charge-capable, PLAN-WEB-011/012 remain open until the exact production deployment is activated and a real lifecycle (success, replay, failure/refund/renewal/out-of-order) is reconciled.
