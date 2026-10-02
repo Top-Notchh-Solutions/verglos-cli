@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-10-02 · Hunt sandbox suite recheck
+
+The current CLI Hunt package suite passes **40 tests with 0 failures**. Sixteen Docker runtime adversarial cases remain skipped because Docker Desktop/socket access is unavailable on this host; direct Docker access returned permission denied. This is contract/unit evidence only and does not qualify HUNT-011, QUAL-CLI-004, Linux namespace isolation, or independent review. No production operation occurred.
+
 ## 2026-10-02 · Founder authorization recorded; external evidence inputs still absent
 
 Founder authorized the final truth/copy pass after its gates, a real billing/provider checkout test, authorized customer workflows, legal/licensing review, and independent Hunt isolation review. Read-only environment inspection found no local Razorpay credentials, the linked Vercel project remains unauthorized, and no customer fixture, legal approval, or independent-review artifact is present. These are evidence/input gaps, not completed gates; no production checkout, deployment, customer workflow, legal claim, or independent-review claim was performed.

@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-02 · Hunt sandbox suite recheck
+
+- **Run:** `pnpm --filter @verglos/hunt test` on CLI `feat/cli-qual-006-cross-platform-consumer` at `e63b504`.
+- **Result:** 40 contract/unit tests passed with 0 failures. Sixteen Docker runtime adversarial cases were environment-gated because Docker Desktop/socket access is unavailable on this host; the direct Docker invocation failed with permission denied before execution.
+- **Boundary:** This does not qualify Linux namespace/runtime isolation, HUNT-011, QUAL-CLI-004, or independent security review. No checkbox changed and no production operation occurred.
+
 ## Progress · 2026-10-02 · FINAL-WEB-001 truth-registry guard (Web PR #101)
 
 - **Implementation:** PR #101 was reconciled with current `main` in commit `662f91b`, then merged as `c3e6668ec87ef386e33462e815877e640004fc16`.

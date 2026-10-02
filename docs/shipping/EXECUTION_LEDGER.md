@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · Hunt sandbox suite recheck
+
+- **Run:** CLI `pnpm --filter @verglos/hunt test` at `e63b504`.
+- **Evidence:** 40 tests passed, 0 failed; 16 Docker runtime adversarial tests skipped by their explicit environment gate. A direct Docker preflight failed with socket permission denied.
+- **Boundary:** No acceptance checkoff. Runtime isolation, Linux namespace evidence, and independent Hunt review remain open. No production DB/environment, deployment, release, or customer workflow occurred.
+
 ## 2026-10-02 · Founder authorization and external-evidence preflight
 
 - **Authorization:** Founder approved final truth/copy work after gates, a real billing/provider checkout test, authorized customer acceptance workflows, legal/licensing review, and independent Hunt isolation review.
