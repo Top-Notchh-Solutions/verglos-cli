@@ -4,6 +4,10 @@
 
 PR #123 (`23a83f0`) has passed the complete hosted Web verification workflow. It enables the founder-approved INR Pro catalog (₹2,809.43 monthly / ₹28,094.30 annual) and binds checkout display and gateway requests to the same catalog snapshot. No migration or production write occurred. Because this changes the live Razorpay path from fail-closed to charge-capable, PLAN-WEB-011/012 remain open until the exact production deployment is activated and a real lifecycle (success, replay, failure/refund/renewal/out-of-order) is reconciled.
 
+## 2026-10-02 · Web PR #123 deployed and catalog smoke verified
+
+The merged catalog change (`f31a8e2`) is READY in Vercel production. An existing authenticated Chrome session shows the live checkout at ₹2,809.43/month and the annual cadence. No production payment/order was initiated because live-key mode has not been independently proven as sandbox. This is deployment/UI evidence only; PLAN-WEB-011/012 remain open pending safe provider lifecycle reconciliation.
+
 ## 2026-10-02 · Hunt sandbox suite recheck
 
 The current CLI Hunt package suite passes **40 tests with 0 failures**. Sixteen Docker runtime adversarial cases remain skipped because Docker Desktop/socket access is unavailable on this host; direct Docker access returned permission denied. This is contract/unit evidence only and does not qualify HUNT-011, QUAL-CLI-004, Linux namespace isolation, or independent review. No production operation occurred.

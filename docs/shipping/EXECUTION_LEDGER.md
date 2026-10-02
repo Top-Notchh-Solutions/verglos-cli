@@ -6,6 +6,12 @@
 - **Verification:** local full Web suite 858 total (836 pass, 22 environment-gated skips), typecheck, build, schema/migration, negative-boundary, truth-registry, license, and SBOM checks passed. Hosted Verify run `36979422192` passed typecheck, full tests, boundary/truth, schema/migrations, build, public-boundary, dependency, SBOM/license, and secret guards.
 - **Boundary:** no migration, database write, live payment, or production deployment has been performed by this change. PLAN-WEB-011/012 remain unchecked until production activation and real lifecycle reconciliation are observed. Rollback is a deployment revert or commit revert.
 
+## 2026-10-02 · Web PR #123 production deployment smoke
+
+- **Deployment:** PR #123 merged as `f31a8e212d6fb3c995fd90d5baacde26940e2cc1`; Vercel production deployment `verglos-85ttjw5gm-anuragyadav20062002s-projects.vercel.app` reached READY.
+- **Smoke:** Existing authenticated Chrome session loaded `https://verglos.com/checkout`; the rendered offer is INR ₹2,809.43 monthly, with annual cadence available, 30-day monthly entitlement, and the QR action. No production QR/order was created.
+- **Boundary:** This verifies catalog/UI deployment only. It does not prove live-key mode, successful payment, webhook delivery, renewal/refund/out-of-order reconciliation, or exactly-one production grant. PLAN-WEB-011/012 remain unchecked; rollback is the prior Vercel deployment or revert `f31a8e2`.
+
 ## 2026-10-02 · Hunt sandbox suite recheck
 
 - **Run:** CLI `pnpm --filter @verglos/hunt test` at `e63b504`.
