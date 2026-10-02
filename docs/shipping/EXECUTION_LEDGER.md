@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · FINAL-WEB-001 truth-registry guard progress (Web PR #101)
+
+- **Code:** Reconciliation commit `662f91b` merged in PR #101 as `c3e6668ec87ef386e33462e815877e640004fc16`.
+- **Verification:** Hosted run `36972830161` passed typecheck, full tests, negative-boundary, dedicated truth-registry tests, schema/migration checks, build, public-boundary, dependency, SBOM/license, and tracked-secret checks.
+- **Acceptance boundary:** FINAL-WEB-001 remains open; no public copy was changed, and final claim-map wiring plus ACCEPT-009/010/founder authorization remain outstanding. No production DB/environment, migration, deployment, release, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-006 public accessibility remediation (Web PR #102)
 
 - **Code:** Web PR #102 exact head `a69e50da3827081c3ab23a8d943017ae26f82e0a` merged as `f138e24bf85de7527a8d3896897bd1aa26fecbe0`.

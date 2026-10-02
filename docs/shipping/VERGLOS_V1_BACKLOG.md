@@ -498,7 +498,7 @@ Evidence/problem: external validation is deliberately last. It validates the com
 
 HOLD: do not start these tasks until the founder explicitly says the product truth is frozen and authorizes the final web pass. No blog work is included.
 
-- [ ] **FINAL-WEB-001** · capability-driven public copy map · deps: ACCEPT-009/010 + founder command · Map homepage/docs/pricing/meta claims to truth registry and server plan catalog; remove stale alpha language only for verified capabilities. Commit(s): —
+- [ ] **FINAL-WEB-001** · capability-driven public copy map · deps: ACCEPT-009/010 + founder command · Map homepage/docs/pricing/meta claims to truth registry and server plan catalog; remove stale alpha language only for verified capabilities. Commit(s): Web PR #101 merged as `c3e6668e` after rebased hosted run `36972830161`; ships the pure `public-claim-registry` decision surface and dedicated hosted test step, but does not yet wire every public surface or authorize copy changes. Acceptance remains gated on ACCEPT-009/010 and founder command.
 - [ ] **FINAL-WEB-002** · homepage product promise/flow · deps: FINAL-WEB-001 · Update landing content to Inspect -> Decide -> Prove -> Monitor using real product evidence and no unsupported benchmarks/customers. Commit(s): —
 - [ ] **FINAL-WEB-003** · plan/pricing presentation · deps: FINAL-WEB-001 · Render Free/Pro/Team/Studio/Enterprise from canonical catalog with exact allowances, status, billing terms, and explicit overages. Commit(s): —
 - [ ] **FINAL-WEB-004** · public product/docs truth pass · deps: FINAL-WEB-001 · Align command docs, language coverage, engine attribution, signing limitations, Hunt assurance, and dashboard capabilities with shipped behavior. Commit(s): —

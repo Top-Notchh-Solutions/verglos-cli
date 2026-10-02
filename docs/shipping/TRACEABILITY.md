@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-02 · FINAL-WEB-001 truth-registry guard (Web PR #101)
+
+- **Implementation:** PR #101 was reconciled with current `main` in commit `662f91b`, then merged as `c3e6668ec87ef386e33462e815877e640004fc16`.
+- **Evidence:** Hosted Verify run `36972830161` passed typecheck, full tests, negative-boundary tests, the dedicated truth-registry suite, schema/migration checks, build, public-boundary, dependency, SBOM/license, and secret checks. The merge adds no public copy or claim changes.
+- **Boundary:** FINAL-WEB-001 remains open. The pure guard is not the public claim map, final truth sweep, or release authorization; ACCEPT-009/010 and founder command remain required. No production operation occurred.
+
 ## Progress · 2026-09-30 · QUAL-WEB-006 public accessibility remediation (Web PR #102)
 
 - **Implementation:** Web PR #102 tested head `a69e50da3827081c3ab23a8d943017ae26f82e0a`, merged as `f138e24bf85de7527a8d3896897bd1aa26fecbe0`.

@@ -1,5 +1,9 @@
 # Verglos V1 shipping status
 
+## 2026-10-02 · FINAL-WEB-001 truth-registry guard progress (Web PR #101)
+
+Web PR #101 merged as `c3e6668ec87ef386e33462e815877e640004fc16` after hosted run `36972830161` passed the complete Web verification workflow, including the dedicated truth-registry test. It adds a pure decision registry for plan, capability, signing, compliance, engine, and metric claims, plus bounded tests; it does not alter public copy. FINAL-WEB-001 remains open pending wiring every public surface and the later acceptance/founder gates. No production database/environment read or write, migration, deployment, release, or marketing action occurred.
+
 ## 2026-09-30 · QUAL-WEB-006 public accessibility remediation (Web PR #102)
 
 Web PR #102 merged as `f138e24bf85de7527a8d3896897bd1aa26fecbe0` after hosted Verify run `36685565094` passed, along with GitGuardian and Vercel. It corrects public contrast and keyboard/focus affordances and makes overflow tables/code examples keyboard reachable; no product claims or pricing copy changed. QUAL-WEB-006 remains open pending authenticated-dashboard, screen-reader, responsive, large-dataset, and complete CWV evidence. No production database/environment read or write, migration, deployment, release, or marketing action occurred.
