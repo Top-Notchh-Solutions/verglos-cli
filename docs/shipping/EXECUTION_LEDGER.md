@@ -967,3 +967,9 @@ while they remain unresolved.
 - **Provider:** Razorpay Test Mode Standard Checkout completed with mock-bank `Success`. Order `order_TixO0lU5jqQIui` produced captured payment `pay_TixQnWornJ3Yl1` for `280943` INR paise. A separate Test Mode QR probe was closed without payment because QR is not the supported mock-success path.
 - **Application binding:** signed `qr_code.credited` harness payload bound the captured payment to a valid INR/30-day checkout snapshot. First delivery returned 200 and credited once; replay returned duplicate 200; no release/error path fired.
 - **Boundary:** existing Razorpay-focused tests remain 15 pass / 2 environment-gated skips. PLAN-WEB-011/012 are not checked: this is sandbox/provider evidence, while the production catalog is still unverified and no production entitlement/database write occurred.
+
+## 2026-10-02 · PLAN-CLI-002 effective entitlement UX
+
+- **Implementation:** CLI commits `b890763` and `1fe0a0e`, merged through PRs #53 and #54 as `e06de5b` and `443be30`. `verglos whoami` now reports the effective authority source, stale/offline state, capability count, catalog version, and bounded allowances in human and JSON output. Offline, legacy-token, and unavailable-endpoint paths remain fail-soft and do not invent paid access.
+- **Verification:** focused whoami tests pass; full process-output suite passes 42/42 locally; forced CLI typecheck passes. PR #53 exposed one stale machine-output assertion; PR #54 corrected it. PR #54 hosted in-toto passed and its platform/self-scan workflows were still running when this ledger entry was written.
+- **Boundary:** PLAN-CLI-002 remains unchecked. PLAN-CLI-001 production signer/catalog activation evidence and complete UX acceptance are still open. No production database write, migration, deployment, npm publish, or release tag occurred.
