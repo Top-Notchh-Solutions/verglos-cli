@@ -785,3 +785,6 @@ Web PR #128 (`03304c0`) merged as `fc55203` after hosted Verify run `36986357199
 # 2026-10-02 · Legacy verify production smoke
 
 The Web PR #128 merge produced Vercel production deployment `verglos-5vy0enlkd-anuragyadav20062002s-projects.vercel.app`, which reached READY. Read-only `curl` checks against `https://verglos.com/verify` show the new “Legacy summary lookup” and offline `verglos record verify` truth; the removed counter/publish language is absent. No payment, database, migration, or manual production write occurred.
+# 2026-10-02 · RECORD-010 accepted
+
+RECORD-010 is accepted after the final cross-repository truth reconciliation. Current CLI retirement/option/registration tests pass 7/7; Web retired POST, legacy lookup, and corrected `/verify` index tests pass 3/3; hosted Web run `36986357199` and the production read-only `/verify` smoke are green. Legacy summaries remain readable but explicitly unsigned; no historical counter is presented as verification and no retired `verglos attest` publish path is advertised. Backlog is now 216 checked / 53 unchecked / 269 total.

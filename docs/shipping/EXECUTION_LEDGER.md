@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-02 · RECORD-010 accepted
+
+- **Acceptance:** CLI retirement/option/registration tests pass 7/7; Web retired POST, legacy lookup, and `/verify` truth tests pass 3/3; hosted run `36986357199` and production read-only smoke pass.
+- **Result:** RECORD-010 accepted. Legacy hash pages remain unsigned/read-only, historical view counters are removed, and canonical offline record verification is the only verification path advertised.
+- **Boundary:** No production/database write occurred.
+
 ## 2026-10-02 · Legacy verify production smoke
 
 - **Deployment:** Web PR #128 production deployment `verglos-5vy0enlkd-anuragyadav20062002s-projects.vercel.app` reached READY.

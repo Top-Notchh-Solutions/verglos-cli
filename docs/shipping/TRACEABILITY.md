@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-10-02 · RECORD-010 legacy compatibility
+
+- **CLI evidence:** Current `attest-options.test.ts` + `local-command-options.test.ts` pass 7/7; retired shell returns bounded `LEGACY_ATTEST_RETIRED`, performs no signing/publication, and does not echo customer paths or URLs.
+- **Web evidence:** Retired `POST /api/v1/attest`, legacy hash lookup, and `/verify` truth regression pass 3/3; hosted run `36986357199` is green; production `/verify` smoke confirms the corrected public boundary.
+- **Decision:** Accepted. Legacy links remain compatible and unsigned; canonical records use offline `record create/sign/verify`. No production/database write occurred.
+
 ## Verification · 2026-10-02 · Legacy verify production smoke
 
 - **Deployment:** Vercel production deployment `verglos-5vy0enlkd-anuragyadav20062002s-projects.vercel.app` reached READY after Web PR #128 merge.
