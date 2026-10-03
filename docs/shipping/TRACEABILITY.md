@@ -10,6 +10,8 @@
 The current-source Juice Shop scan's three redacted `~/.cursor/mcp.json` findings are
 expected global agent-surface scope, covered by isolated detector tests, not an unbounded
 read of the fixture. The exact scan report and hashes are in the private evidence file.
+The focused agent-surface contract cases pass 12/12, including global-home discovery and
+portable path redaction.
 
 ## Evidence · 2026-10-02 · Hunt review packet
 

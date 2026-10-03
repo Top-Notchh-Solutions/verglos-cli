@@ -15,6 +15,10 @@ The three `~/.cursor/mcp.json` findings are expected global `agent-surface` dete
 not an unbounded fixture read; the detector's focused tests explicitly isolate and qualify
 that global-config scope.
 
+The scanner package contract run completed with the agent-surface cases green (12/12),
+including global-home discovery, project-scoped filesystem distinction, localhost HTTP
+exception, and redacted portable paths.
+
 ## 2026-10-02 · Production browser lab sweep and Linux namespace correction
 
 The existing Chrome session measured `/`, `/checkout`, `/docs`, `/detectors`, `/verify`,
