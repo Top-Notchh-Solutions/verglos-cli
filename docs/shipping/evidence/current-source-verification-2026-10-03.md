@@ -32,3 +32,8 @@ verified against the real failure.
 
 No source, package, tag, publication, deployment, migration, or production
 state changed during this verification.
+## 2026-10-03 rerun
+
+- Web `pnpm typecheck` passed on main `763aab07a19f054dee41dc83ab9ec9f0743b4925`.
+- CLI current-source `pnpm --silent test` passed on `955412516b96cc09393e78c43bf7d02b9abd05d9` (12 Turbo tasks successful; package suites reported zero failures).
+- Node emitted the repository's existing engine warning under local Node 26; hosted Node 20/22/24 evidence remains the compatibility authority.
