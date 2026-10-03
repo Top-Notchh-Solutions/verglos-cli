@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · acceptance-story substrate recheck
+
+The corrected package-owned CLI runner passed **236/236** tests on the latest
+unreleased source `955412516`; the prior root-level invocation failure was only
+missing `tsx` resolution and is not product evidence. Web Studio/Enterprise/
+Team/quality acceptance substrates passed **72/72**, and the Hunt Docker
+adapter checks passed **5/5**. Evidence and command boundaries are recorded in
+`docs/shipping/evidence/acceptance-story-tests-2026-10-03.md`. These results do
+not close hosted HTTP, live provider, customer-consent, independent-review,
+authenticated dashboard, screen-reader, field-CWV, or final release gates.
+
 ## 2026-10-03 · current Web regression recheck
 
 On Web `main` at `763aab0`, the configured suite completed **859 total / 837

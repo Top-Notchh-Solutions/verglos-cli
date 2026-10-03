@@ -963,3 +963,13 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 - **Code:** Private `scripts/verify-acceptance-corpus.mjs`, exposed as `pnpm acceptance:corpus:verify`.
 - **Verification:** Six frozen full clones, authorization notices, report schemas, complete detector coverage, and JSON/HTML SHA-256 hashes verified at current unreleased CLI commit `9554125`; manifest hash `54c3f3bdc111d3a2faf35c841a8fb057649b6a859a5a45f9628945100ea8b2f4`.
 - **Boundary:** Reproducibility/integrity evidence only. ACCEPT-001/003 remain open for required corpus breadth, acceptance stories, customer authorization, and independent review.
+# 2026-10-03 acceptance-story substrate evidence
+
+`docs/shipping/evidence/acceptance-story-tests-2026-10-03.md` binds the latest
+unreleased CLI source `955412516b96cc09393e78c43bf7d02b9abd05d9` to the
+package-owned 236/236 CLI test result, five Hunt Docker-adapter checks, and
+72/72 Web Studio/Enterprise/Team/quality substrate tests. The initial failed
+root invocation is classified as harness resolution (`tsx` absent at the
+temporary worktree root), not a source regression. This evidence is progress
+only and does not satisfy external, authenticated, customer, legal, or
+independent-review gates.

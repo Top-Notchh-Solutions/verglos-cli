@@ -1204,3 +1204,12 @@ while they remain unresolved.
 - **Action:** Added private `verify-acceptance-corpus.mjs` and `acceptance:corpus:verify` package script.
 - **Result:** Run verified six full clones, exact HEADs, scope-limited authorization files, complete report coverage, and report hashes; wrote the versioned private manifest under `docs/shipping/evidence/`.
 - **Decision:** Stronger ACCEPT-001/003 evidence, but no checkbox change: the harness does not create customer consent, independent adjudication, or the final 10–20-corpus gate. No production or database operation.
+# 2026-10-03 — acceptance-story substrate recheck
+
+- CLI current source `955412516b96cc09393e78c43bf7d02b9abd05d9`: package-owned
+  runner `pnpm --filter verglos test` — 236/236 passed, 0 failed/skipped.
+- Hunt Docker adapter tests: 5/5 passed via the CLI package's `tsx` loader.
+- Web Studio/Enterprise/Team/quality acceptance substrates: 72/72 passed.
+- Evidence: `docs/shipping/evidence/acceptance-story-tests-2026-10-03.md`.
+- Classification: substrate regression evidence only; no checkbox closed and
+  no production/provider/customer/legal/independent-review operation performed.
