@@ -1018,3 +1018,7 @@ Two additional public vulnerable Node applications were cloned with complete Git
 # 2026-10-03 · Verglos Web self-scan with current CLI
 
 The current local Web `main` was scanned with CLI commit `955412516b96cc09393e78c43bf7d02b9abd05d9`: Next.js detected, 396 files walked, complete detector/provenance coverage, 17 findings (1 critical, 3 medium, 13 info), score `79` / medium risk. The one critical is an operator-machine Cursor MCP configuration under `~/.cursor/mcp.json`, not a tracked Web file; it remains private for remediation. Report hashes and exact command are in `docs/shipping/evidence/verglos-web-self-scan-2026-10-03.md`. This is current-source evidence only; no production write, deployment, or checkbox change occurred.
+
+# 2026-10-03 · CLI PR #61 hosted matrix completed
+
+The hosted workflow for merged CLI PR #61 (`18ab8e7`) initially appeared stalled, but run `37113657045` completed successfully at `09:46:04Z`. All nine Ubuntu/macOS/Windows × Node 20/22/24 jobs and the in-toto release binding passed. This verifies the cache-persistence code at the merged head; it does not close TEAM-CLI-001, which still lacks authenticated organization-policy HTTP fetch and user-facing CLI integration. No production operation occurred.
