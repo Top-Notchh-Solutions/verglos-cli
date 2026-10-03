@@ -1150,3 +1150,8 @@ while they remain unresolved.
 - **Decision:** Preparatory DIST-002 evidence only. The environment must have required reviewers configured and a real trusted publication/attestation must run before acceptance. No tag, npm publication, deployment, or production write.
 
 - **Operational configuration:** GitHub `release` environment created at `2026-10-03T09:19:05Z` with required reviewer `anuragyadav-git` and protected-branch deployment policy. This is a configuration change only; no workflow was approved or executed.
+# 2026-10-03 · signed organization policy cache substrate (CLI PR #60)
+
+- **Action:** Added shared organization-policy envelope verification and offline cache resolution, exported from `@verglos/shared`; added focused scope/digest/key/cache tests.
+- **Result:** Commit `f547cfa` pushed as PR `#60`; focused tests 3/3, full typecheck, build, and diff checks passed. Hosted checks pending.
+- **Decision:** Preparatory TEAM-CLI-001 evidence only. HTTP authentication, persistent cache, CLI integration, and hosted policy API/runtime evidence remain open. No checkbox changed; no production operation.
