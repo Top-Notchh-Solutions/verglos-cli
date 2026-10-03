@@ -918,3 +918,7 @@ Web PR #134 (`031200f`, merged as `5b52943`) adds additive migration `0022_scm_d
 # 2026-10-03 · Web PR #135 SCM tenant predicate correction
 
 Web PR #135 (`e65c61d`, merged as `80545aa`) adds explicit `organizationId` predicates to SCM installation listing and check-installation resolution. This closes a cross-tenant lookup risk independent of the access-database implementation. Tenant-boundary and SCM contract tests pass 19/19; hosted Verify, GitGuardian, Vercel, and type/schema checks are green. TEAM-WEB-006 remains open for provider HTTP execution, reconciliation scheduling, and live provider evidence.
+
+# 2026-10-03 · Web PR #136 provider delivery runner
+
+Web PR #136 (`d1b57b8`, merged as `6714dd8`) adds the provider delivery runner over the fenced SCM lease repository. It composes only the redacted GitHub/GitLab request, delegates bounded network transport, turns credential/transport exceptions into retryable status without retaining exception text or provider bodies, and acknowledges only through the worker-plus-expiry fence. Lease loss is explicitly counted as non-success. Runner/repository tests pass 5/5; full Web suite remains 859 total / 837 passed / 22 environment-gated skips / 0 failures; hosted Verify, GitGuardian, Vercel, typecheck, Drizzle, and migration checks are green. TEAM-WEB-006 remains open for a deployed scheduler/reconciliation trigger and live provider evidence.

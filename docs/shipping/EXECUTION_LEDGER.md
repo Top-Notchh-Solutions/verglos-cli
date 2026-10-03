@@ -24,6 +24,12 @@
 - **Verification:** Explicit organization predicates added to SCM installation list and check lookup; tenant-boundary/SCM contract tests 19/19 and hosted checks passed.
 - **Boundary:** No production data or migration touched. Provider HTTP execution, reconciliation scheduling, and live evidence remain open.
 
+## 2026-10-03 · TEAM-WEB-006 provider delivery runner
+
+- **Code:** Web PR #136 feature commit `d1b57b8`, merged as `6714dd8`.
+- **Verification:** Redacted provider request composition, bounded transport delegation, exception-to-retry mapping without body/error persistence, lease-fenced finish, and explicit lease-loss accounting; runner/repository tests 5/5; full Web suite 859/837/22/0; hosted checks passed.
+- **Boundary:** No scheduler/reconciliation trigger or live GitHub/GitLab evidence yet. No production migration or database write.
+
 ## 2026-10-03 · TEAM-WEB-006 test registration correction
 
 - **Code:** Web PR #131 merged as `eadc5ac`.
