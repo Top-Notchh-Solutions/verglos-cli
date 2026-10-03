@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-stories-verification.v1",
-  "verifiedAt": "2026-10-03T10:04:04.804Z",
+  "verifiedAt": "2026-10-03T10:27:27.340Z",
   "cliRoot": "/tmp/verglos-cli-current.MphZDs",
   "webRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
   "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
@@ -14,8 +14,8 @@
         "verglos",
         "test"
       ],
-      "startedAt": "2026-10-03T10:03:03.156Z",
-      "finishedAt": "2026-10-03T10:04:01.064Z",
+      "startedAt": "2026-10-03T10:26:28.433Z",
+      "finishedAt": "2026-10-03T10:27:23.764Z",
       "exitCode": 0,
       "summary": {
         "tests": 236,
@@ -24,7 +24,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "41b27aa6d98b609ae7525a89cab7f72281d84e3e9d4b8353e4a44c623eb204b6"
+      "outputSha256": "936eb005af5fd65365a8cd3aa628561b5709375e5442d58ed6e1a4e933adef69"
     },
     {
       "label": "web-full-suite",
@@ -32,8 +32,8 @@
       "args": [
         "test"
       ],
-      "startedAt": "2026-10-03T10:04:01.065Z",
-      "finishedAt": "2026-10-03T10:04:04.274Z",
+      "startedAt": "2026-10-03T10:27:23.764Z",
+      "finishedAt": "2026-10-03T10:27:26.822Z",
       "exitCode": 0,
       "summary": {
         "tests": 905,
@@ -42,7 +42,7 @@
         "cancelled": 0,
         "skipped": 28
       },
-      "outputSha256": "65df393bfcb33510c1b4e8e56084e7e2c13e83e140cc37b2719500f75438972c"
+      "outputSha256": "ab31d5e1e2dcf7ee72881a2283b4ef5300a0014140e952886035d6d06927065a"
     },
     {
       "label": "web-composed-acceptance-substrates",
@@ -59,8 +59,8 @@
         "src/lib/organizations/team-e2e.test.ts",
         "src/lib/qual/qual-web-suites.test.ts"
       ],
-      "startedAt": "2026-10-03T10:04:04.274Z",
-      "finishedAt": "2026-10-03T10:04:04.804Z",
+      "startedAt": "2026-10-03T10:27:26.822Z",
+      "finishedAt": "2026-10-03T10:27:27.340Z",
       "exitCode": 0,
       "summary": {
         "tests": 72,
@@ -69,7 +69,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "bda1926953f5fa902baeb9b8c8f3cbe470b4f06eb6eb8474852696fcbdde4bca"
+      "outputSha256": "0d71f0e86e3aa69c40cc25316b9473d9698e68751209117ef6417c0914d31ef9"
     }
   ],
   "allCommandsPassed": true,
