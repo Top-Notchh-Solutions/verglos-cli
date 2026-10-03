@@ -25,6 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Verify immutable release tag
+        if: ${{ github.event_name == 'push' }}
+        run: node scripts/verify-release-tag.mjs "$GITHUB_REF_NAME"
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v5
         with:
