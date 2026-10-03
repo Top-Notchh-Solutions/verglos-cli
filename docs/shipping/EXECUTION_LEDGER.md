@@ -1165,3 +1165,8 @@ while they remain unresolved.
 - **Observation:** PR #60 matrix `37112986882` had stale metadata since `09:25:28Z`; three Windows jobs had no logs or state transitions.
 - **Action:** Cancelled only the stale merged-PR run and dispatched Platform matrix `37113320349` against merged main `b7c0799`.
 - **Boundary:** Fresh matrix evidence is pending. No acceptance checkbox, publication, deployment, migration, or production write occurred.
+# 2026-10-03 · hosted runner infrastructure blocker
+
+- **Observation:** Fresh matrix `37113320349` became stale at `09:31:20Z` with no job logs or transitions; cancellation request remains unprocessed.
+- **Decision:** Do not infer pass/fail or repeatedly dispatch duplicate runs. Treat as an external GitHub runner/control-plane blocker while preserving existing terminal evidence.
+- **Boundary:** No acceptance checkbox, publication, deployment, migration, or production write.

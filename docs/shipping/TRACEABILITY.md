@@ -927,3 +927,7 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 
 - **Evidence:** Matrix `37112986882` was cancelled after stale metadata and no Windows logs; fresh merged-main matrix `37113320349` targets `b7c0799` and is queued.
 - **Decision:** Do not infer platform acceptance from the stale run. Await the fresh run's terminal result; no checkbox changed.
+# 2026-10-03 · hosted runner infrastructure blocker
+
+- **Evidence:** Runs `37112986882` and `37113320349` both stopped updating with matrix jobs lacking logs; the second cancellation request is still pending. Self-scan `37112986892` remains terminal-successful.
+- **Boundary:** Platform acceptance is unverified; this is not treated as a code failure or a completed gate.

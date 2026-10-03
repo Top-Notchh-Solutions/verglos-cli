@@ -998,3 +998,6 @@ CLI PR #60 Self-scan run `37112986892` completed successfully; its platform matr
 # 2026-10-03 · stale TEAM-CLI matrix replaced with merged-main run
 
 The PR #60 matrix `37112986882` stopped updating at `09:25:28Z` with three Windows jobs indefinitely in progress and no logs. Because the PR was already merged, the stale run was cancelled without treating it as a product failure. A fresh manual Platform matrix `37113320349` was dispatched against merged main `b7c0799`; its result is pending. The earlier Self-scan `37112986892` remains successful. No checkbox changed and no production operation occurred.
+# 2026-10-03 · hosted runner infrastructure blocker
+
+Fresh merged-main matrix `37113320349` also stopped updating at `09:31:20Z`; all nine platform jobs remained `in_progress` with no logs. A cancellation request was submitted, but GitHub still reports the run in progress after the request. This is a hosted-runner control-plane issue, not a source test failure. Existing successful Self-scan/in-toto and completed platform evidence remain recorded; no new platform acceptance is inferred. No checkbox or production state changed.
