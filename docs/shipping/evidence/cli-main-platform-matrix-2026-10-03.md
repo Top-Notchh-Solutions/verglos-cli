@@ -12,8 +12,8 @@ successes:
 - Ubuntu Node 20, 22, 24
 - macOS Node 20, 22, 24
 
-The three Windows cells (Node 20, 22, 24) remained `in_progress` with no
-terminal conclusion. This repeats the earlier hosted runner/control-plane
-stall pattern. The run is not recorded as a matrix pass or failure until GitHub
-reports a terminal state. No source, publication, deployment, migration, or
-production operation was performed.
+At the latest subsequent poll, Windows Node 24 became a terminal success while
+Windows Node 20 and 22 remained `in_progress`. This repeats the earlier hosted
+runner/control-plane stall pattern. The run is not recorded as a matrix pass or
+failure until GitHub reports a terminal state. No source, publication,
+deployment, migration, or production operation was performed.

@@ -1,5 +1,11 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · matrix poll advanced
+
+Run `37115386171` now has Windows Node 24 terminal-successful; Windows Node 20
+and 22 remain `in_progress`. The overall run is still non-terminal and is not
+claimed as a complete platform pass.
+
 ## 2026-10-03 · merged-main platform matrix still running
 
 Manual matrix run `37115386171` targets merged CLI `18ab8e7` (not the feature

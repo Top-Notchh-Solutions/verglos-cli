@@ -1242,3 +1242,8 @@ while they remain unresolved.
 - Windows Node 20/22/24 remain `in_progress`; no terminal result is inferred.
 - Evidence: `docs/shipping/evidence/cli-main-platform-matrix-2026-10-03.md`.
 - No checkbox, source, release, deployment, migration, or production state changed.
+# 2026-10-03 — matrix poll advanced
+
+Run `37115386171`: Windows Node 24 reached success; Windows Node 20 and 22
+remain in progress. Overall conclusion remains unclaimed pending terminal
+workflow state.
