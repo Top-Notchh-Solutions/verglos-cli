@@ -17,3 +17,16 @@ Status: local technical fixture evidence only; this is not customer acceptance o
 - HTML report SHA-256: `4e242d3a569eb367f1ced5c5241f5893e7d24ae154c9720b5748a2d18b952c3b`
 
 The derived reports remain in the local ignored `.local-evidence` directory. Findings are not uploaded, published, or represented as a customer assessment. This evidence does not close `ACCEPT-001`/`ACCEPT-005`, `QUAL-CLI-004`, or independent-review gates.
+
+## Complete-coverage rerun
+
+The same checkout and CLI commit were rerun with provenance enabled:
+
+- Command: `VERGLOS_TELEMETRY=0 node packages/cli/dist/index.js scan --json --output .local-evidence/juice-shop-cli-9554125-provenance`
+- Scan timestamp: `2026-10-03T09:41:35.927Z`
+- Duration: 52,859 ms; files walked: 906
+- Findings and score: unchanged (55; 16 critical, 12 high, 18 medium, 0 low, 9 info; score `0`, risk `critical`)
+- Provenance: complete, `aiAuthoredPercent=36`, confidence `high`; method sampled 300/649 files
+- Coverage: complete; no limitations
+- JSON report SHA-256: `d4909137067071200ca6fb0aecd5efc7ff86595d44431fcd1e72278da156e478`
+- HTML report SHA-256: `3ea373ce2e697b51a1f676087b55d417c69335cf697ae5cfe70b204f1bbee02d`
