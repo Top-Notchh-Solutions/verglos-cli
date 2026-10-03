@@ -30,6 +30,12 @@
 - **Verification:** Redacted provider request composition, bounded transport delegation, exception-to-retry mapping without body/error persistence, lease-fenced finish, and explicit lease-loss accounting; runner/repository tests 5/5; full Web suite 859/837/22/0; hosted checks passed.
 - **Boundary:** No scheduler/reconciliation trigger or live GitHub/GitLab evidence yet. No production migration or database write.
 
+## 2026-10-03 · TEAM-WEB-006 scheduled SCM reconciliation
+
+- **Code:** Web PR #137 commits `55ee4a8` and corrective `6c163d9`, merged as `763aab0`; additive migration `0023_scm_provider_token_envelopes.sql`.
+- **Verification:** Nullable encrypted token envelopes, authenticated cron scheduler, in-memory decryption, bounded fetch/Retry-After transport, and aggregate-only response; focused SCM route/lease/runner tests 15/15; full Web suite 859/837/22/0; typecheck, build, migration ordering (24), hosted Verify, security, and Vercel checks passed.
+- **Boundary:** Live provider evidence and production migration/cutover qualification remain open. No production database operation.
+
 ## 2026-10-03 · TEAM-WEB-006 test registration correction
 
 - **Code:** Web PR #131 merged as `eadc5ac`.
