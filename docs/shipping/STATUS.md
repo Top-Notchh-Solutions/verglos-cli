@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · TEAM-WEB-006 persistence and enqueue routes (Web PR #132)
+
+Web PR #132 merged as `049f8ba` after hosted type/schema, GitGuardian, Vercel,
+and preview checks passed. The additive migration `0021_scm_check_delivery.sql`
+adds tenant-scoped SCM installation and idempotent check-delivery metadata;
+installation secrets are AES-GCM envelopes using the existing credential key,
+and the installation/check routes authorize before bounded body reads, project
+no secret fields, enforce tenant scope, and enqueue redacted delivery metadata
+through the existing outbox. Focused route/provider/credential/tenant tests pass
+25/25; full Web suite passes 859 total / 837 passed / 22 environment-gated skips;
+typecheck, Drizzle check, migration ordering, and diff checks pass. No migration
+or production database write ran. TEAM-WEB-006 remains open pending provider
+webhook event routes, a delivery worker with durable retry/reconciliation, and
+live GitHub/GitLab evidence.
+
 ## 2026-10-03 · TEAM-WEB-006 test registration correction (Web PR #131)
 
 Web PR #131 merged as `eadc5ac` after hosted type/schema, GitGuardian, Vercel,

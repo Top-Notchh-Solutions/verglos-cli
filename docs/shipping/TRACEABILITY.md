@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-03 · TEAM-WEB-006 persistence and enqueue
+- **Implementation:** Web PR #132 merged as `049f8ba`.
+- **Behavior:** Additive `0021` stores tenant-bound installation identities and redacted check deliveries; encrypted webhook secrets never enter response projections; authorized routes cap raw bodies, enforce digest idempotency, and enqueue through the existing outbox.
+- **Verification:** Focused route/provider/credential/tenant tests 25/25; full Web suite 859 total / 837 passed / 22 skipped / 0 failed; typecheck, Drizzle check, migration ordering, hosted schema/typecheck, GitGuardian, Vercel, and preview checks passed.
+- **Boundary:** No production migration/write. Webhook event routes, provider delivery worker, durable retry/reconciliation, and live provider evidence remain open.
+
 ## Progress · 2026-10-03 · TEAM-WEB-006 test registration
 - **Implementation:** Web PR #131 merged as `eadc5ac`.
 - **Verification:** Provider tests are registered in `pretest`; focused configured slice passes 28/28 with 6 environment-gated skips; full Web suite passes 859 total / 837 passed / 22 skipped / 0 failed.

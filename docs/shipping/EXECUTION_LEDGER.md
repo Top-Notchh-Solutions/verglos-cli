@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · TEAM-WEB-006 persistence and enqueue routes
+
+- **Code:** Web PR #132 merged as `049f8ba`; additive migration `0021_scm_check_delivery.sql`.
+- **Verification:** Focused route/provider/credential/tenant tests 25/25; full Web suite 859/837/22/0; typecheck, Drizzle check, migration ordering, and hosted checks passed.
+- **Boundary:** No production migration or database write. Installation/check routes persist only bounded tenant metadata and queue an outbox event; webhook routes, provider worker/retry/reconciliation, and live evidence remain open.
+
 ## 2026-10-03 · TEAM-WEB-006 test registration correction
 
 - **Code:** Web PR #131 merged as `eadc5ac`.
