@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-10-03 · ACCEPT-004 protocol freeze
+
+- **Artifact:** Private `docs/shipping/acceptance/external-workflow-protocol.md` and `consent-record.template.md`.
+- **Verification:** `pnpm --silent acceptance:protocol:check` passed; the validator checks recruitment, consent, exact-scope, data-handling, success, and downstream-gate markers.
+- **Boundary:** No external contact, repository access, customer finding storage, or customer acceptance was performed. ACCEPT-005 onward remain open.
+
 ## Verification · 2026-10-03 · cross-repository acceptance rerun
 
 - **Source:** CLI `955412516b96cc09393e78c43bf7d02b9abd05d9`; Web `763aab07a19f054dee41dc83ab9ec9f0743b4925`.

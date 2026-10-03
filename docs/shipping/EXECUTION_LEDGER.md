@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · ACCEPT-004 protocol freeze
+
+- **Code/docs:** Private commit `454a0cf` adds the external acceptance protocol, consent template, validator, and package script.
+- **Verification:** `pnpm --silent acceptance:protocol:check` passed.
+- **Boundary:** Protocol definition only; no customer or external repository activity and no ACCEPT-005+ evidence inferred.
+
 ## 2026-10-03 · cross-repository acceptance rerun
 
 - **Source:** CLI `955412516`; Web `763aab0`.
