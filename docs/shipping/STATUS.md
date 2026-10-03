@@ -995,3 +995,6 @@ CLI PR #60 (`f547cfa`, merged as `b7c0799`) adds `packages/shared/src/organizati
 # 2026-10-03 · current-source regression verification after TEAM-CLI-001 substrate
 
 CLI PR #60 Self-scan run `37112986892` completed successfully; its platform matrix `37112986882` remains in progress for four cells, while the completed cells and in-toto binding are green. Current Web `main` read-only regression remains 859 total / 837 passed / 22 environment-gated skips / 0 failures. These are verification results only; TEAM-CLI-001 still lacks authenticated policy API runtime evidence and no checkbox changed.
+# 2026-10-03 · stale TEAM-CLI matrix replaced with merged-main run
+
+The PR #60 matrix `37112986882` stopped updating at `09:25:28Z` with three Windows jobs indefinitely in progress and no logs. Because the PR was already merged, the stale run was cancelled without treating it as a product failure. A fresh manual Platform matrix `37113320349` was dispatched against merged main `b7c0799`; its result is pending. The earlier Self-scan `37112986892` remains successful. No checkbox changed and no production operation occurred.

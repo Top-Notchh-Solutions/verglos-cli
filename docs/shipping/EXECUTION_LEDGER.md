@@ -1160,3 +1160,8 @@ while they remain unresolved.
 - **CLI:** TEAM-CLI-001 PR #60 Self-scan `37112986892` completed successfully. Matrix `37112986882` has green in-toto and completed OS/Node cells; four cells remain in progress.
 - **Web:** `main` read-only `pnpm test` passed 837/859 with 22 environment-gated skips and zero failures.
 - **Boundary:** No acceptance checkbox changed; authenticated hosted policy fetch, persistence, and runtime integration remain unproven. No production operation.
+# 2026-10-03 · stale matrix cancellation and merged-main requalification
+
+- **Observation:** PR #60 matrix `37112986882` had stale metadata since `09:25:28Z`; three Windows jobs had no logs or state transitions.
+- **Action:** Cancelled only the stale merged-PR run and dispatched Platform matrix `37113320349` against merged main `b7c0799`.
+- **Boundary:** Fresh matrix evidence is pending. No acceptance checkbox, publication, deployment, migration, or production write occurred.

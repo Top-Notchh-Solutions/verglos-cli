@@ -923,3 +923,7 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 
 - **Evidence:** CLI Self-scan `37112986892` passed; platform matrix `37112986882` has four still-running cells and all completed cells green. Web `main` regression passed 837/859 with 22 skips and zero failures.
 - **Decision:** Verification strengthens current-source confidence but does not satisfy TEAM-CLI-001 hosted policy API evidence or any external acceptance gate. No production or database write.
+# 2026-10-03 · stale matrix cancellation and merged-main requalification
+
+- **Evidence:** Matrix `37112986882` was cancelled after stale metadata and no Windows logs; fresh merged-main matrix `37113320349` targets `b7c0799` and is queued.
+- **Decision:** Do not infer platform acceptance from the stale run. Await the fresh run's terminal result; no checkbox changed.
