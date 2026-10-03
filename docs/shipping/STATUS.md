@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · TEAM-WEB-006 provider transport substrate (Web PR #130)
+
+Web PR #130 merged as `27cd6c7` after hosted type/schema, GitGuardian, Vercel,
+and preview checks passed. `scm-check-providers.ts` now builds bounded GitHub
+Checks and GitLab commit-status requests from the redacted SCM contract, maps
+decisions to provider states, rejects malformed commit/token/repository inputs,
+and classifies retryable versus permanent responses without exposing response
+bodies or credentials. Focused tests pass 5/5; local typecheck and diff checks
+pass. TEAM-WEB-006 remains unchecked pending persistence, webhook HTTP routes,
+durable retry delivery, provider response reconciliation, and live GitHub/GitLab
+evidence. No production operation occurred.
+
 ## 2026-10-03 · TEAM-CLI-002 CI check payload substrate (CLI PR #56)
 
 CLI PR #56 merged as `c17b335` after the Ubuntu/macOS/Windows × Node 20/22/24

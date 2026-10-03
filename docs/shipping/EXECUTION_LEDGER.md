@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · TEAM-WEB-006 provider transport substrate
+
+- **Code:** Web PR #130 merged as `27cd6c7`.
+- **Verification:** Focused tests 5/5; local typecheck/diff; hosted type/schema, GitGuardian, Vercel, and preview checks passed.
+- **Boundary:** Provider transport is pure and network-free. Persistence, webhook routes, durable retries, response reconciliation, and live provider evidence remain open. No production operation occurred.
+
 ## 2026-10-03 · TEAM-CLI-002 CI check payload substrate
 
 - **Code:** CLI PR #56 merged as `c17b335`.

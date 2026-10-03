@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-03 · TEAM-WEB-006 provider transport
+- **Implementation:** Web PR #130 merged as `27cd6c7`.
+- **Behavior:** Pure provider adapter builds GitHub Checks and GitLab commit-status requests from the redacted check contract; validates token/repository/commit boundaries, maps terminal decisions, and classifies retryable responses without returning response bodies.
+- **Verification:** Focused tests 5/5; local typecheck/diff; hosted type/schema, GitGuardian, Vercel, and preview checks passed.
+- **Boundary:** Persistence, webhook routes, durable retries, response reconciliation, and live provider evidence remain open. No production operation occurred.
+
 ## Progress · 2026-10-03 · TEAM-CLI-002 CI check payload
 - **Implementation:** CLI PR #56 merged as `c17b335`.
 - **Behavior:** `composeCiCheckPayload` validates a Release Decision and emits a bounded source-free payload containing exact subject, decision, policy identity/digest, record URL/manifest digest, and commit identity; `decideCiCheckDelivery` suppresses identical replays.
