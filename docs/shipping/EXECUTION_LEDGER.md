@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · ACCEPT-001 corpus freeze
+
+- **Code/evidence:** Private `ac00dca` extends corpus verification to ten items (six full clones + four source-bound contract artifacts) and writes the v2 manifest.
+- **Verification:** `pnpm --silent acceptance:corpus:verify` reports `fixtureCount=10`, `allFullClones=true`, `allCompleteCoverage=true`, `allArtifactsIntact=true`.
+- **Boundary:** Technical corpus only; no customer consent or external acceptance inferred.
+
 ## 2026-10-03 · ACCEPT-004 protocol freeze
 
 - **Code/docs:** Private commit `454a0cf` adds the external acceptance protocol, consent template, validator, and package script.

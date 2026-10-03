@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-10-03 · ACCEPT-001 corpus freeze
+
+- **Artifact:** Private ten-item corpus manifest `acceptance-corpus-verification-2026-10-03-v2.json`.
+- **Result:** Six full non-shallow public repositories plus four exact-source contract artifacts; all six scans have complete coverage and all four artifact digests/byte counts match CLI `955412516`.
+- **Boundary:** Public technical fixtures are not customers; no exploit, network callback, load test, customer consent, or external acceptance is claimed.
+
 ## Acceptance · 2026-10-03 · ACCEPT-004 protocol freeze
 
 - **Artifact:** Private `docs/shipping/acceptance/external-workflow-protocol.md` and `consent-record.template.md`.
