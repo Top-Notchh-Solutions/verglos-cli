@@ -900,3 +900,10 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 - **Contract:** `verify-release-tag.mjs` validates the exact release ref and all six public package versions before publication; malformed or mismatched refs fail closed. `publish-workflow-contract.test.mjs` asserts the guard precedes `npm publish`; focused tests pass 3/3 and combined release-safety checks pass 11/11.
 - **Hosted evidence:** Self-scan `37111006863` and Platform matrix `37111006817` passed, including in-toto binding and all nine Ubuntu/macOS/Windows Node 20/22/24 cells.
 - **Boundary:** DIST-002/003/006 remain unchecked pending protected publishing/legal approval, real release attestation, and rollback/revocation evidence. No tag, publication, deployment, or production operation occurred.
+
+## 2026-10-03 · CLI PR #58 rollback/revocation contract
+
+- **Code:** CLI `28512c7` merged as `8e39aa7c82c1f9630ba1a2f95b13271f0c1e3fe6`.
+- **Contract:** Shared `decideReleaseRollback` covers five release surfaces; refuses missing approval, mutable/same references, cross-kind targets, history invalidation, and signing-key revocation without a distinct replacement. Focused shared tests, full typecheck, and build passed.
+- **Hosted evidence:** Self-scan `37111798321`, Platform matrix `37111798352`, and in-toto binding passed; all nine platform cells passed.
+- **Boundary:** DIST-006 remains unchecked. This is a decision contract only; no registry, engine, feed, signing, or deployment rollback/revocation operation was executed.

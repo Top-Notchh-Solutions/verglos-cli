@@ -1137,3 +1137,9 @@ while they remain unresolved.
 - **Action:** Added a fail-closed immutable-tag check to the publish workflow and its contract tests.
 - **Result:** PR `#57`, head `2f18041`, merged as `8706c97`; local focused tests 3/3, combined release-safety checks 11/11, typecheck/build green; hosted Self-scan `37111006863` and Platform matrix `37111006817` green across in-toto plus nine OS/Node cells.
 - **Decision:** Record as preparatory progress only. DIST-002/003/006 are not accepted because no protected release, public attestation, legal approval, or rollback/revocation run was performed. No publication or production write.
+
+## 2026-10-03 · rollback/revocation contract (CLI PR #58)
+
+- **Action:** Added shared fail-closed decision logic for rollback/revocation across npm, engines, Hunt feeds, signing identities, and web deployments.
+- **Result:** PR `#58`, head `28512c7`, merged as `8e39aa7`; shared test suite, typecheck, and build passed; hosted Self-scan `37111798321`, Platform matrix `37111798352`, and in-toto binding passed.
+- **Decision:** Preparatory DIST-006 evidence only. Operational provider adapters, audit/recovery execution, and historical-record verification remain outstanding. No production operation.

@@ -107,3 +107,5 @@ Web verification addendum (2026-09-12): PR #32 head `21c3b19` passes Node 22 run
 - Acceptance stories in `VERGLOS_FINAL_ACCEPTANCE_AND_POC.md` pass.
 - Truth registry, docs, dashboard labels, pricing copy, and campaign claims updated only after evidence review.
 Release-safety addendum (2026-10-03): CLI PR #57 (`8706c97`) now enforces that a future release tag matches all six public package versions before publication. Hosted self-scan and the full nine-cell platform matrix pass at the exact PR head. This hardens the DIST-002/003/006 prerequisite surface but does not satisfy protected-environment approval, legal/trusted-publishing review, actual npm provenance, or rollback/revocation qualification.
+
+Rollback addendum (2026-10-03): CLI PR #58 (`8e39aa7`) adds a shared decision contract that refuses mutable targets and historical-record invalidation and requires replacement identity during signing-key revocation. It is not an operational rollback/revocation run; DIST-006 remains open.
