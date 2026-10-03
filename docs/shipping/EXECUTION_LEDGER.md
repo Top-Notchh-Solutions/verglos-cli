@@ -6,6 +6,12 @@
 - **Verification:** Focused route/provider/credential/tenant tests 25/25; full Web suite 859/837/22/0; typecheck, Drizzle check, migration ordering, and hosted checks passed.
 - **Boundary:** No production migration or database write. Installation/check routes persist only bounded tenant metadata and queue an outbox event; webhook routes, provider worker/retry/reconciliation, and live evidence remain open.
 
+## 2026-10-03 · TEAM-WEB-006 webhook intake and delivery contract
+
+- **Code:** Web PR #133 feature commit `06d90af`, merged as `510f66c`.
+- **Verification:** Provider-specific raw-byte webhook authentication with 256 KiB cap, strict minimal payload parsing, repository binding, and idempotent redacted outbox trigger; pure delivery transition tests cover success, retry bounds, max-attempt failure, and permanent failure. Focused suite 29/29; full Web suite 859 total / 837 passed / 22 skips / 0 failed; hosted Verify, GitGuardian, Vercel, typecheck, Drizzle, and migration checks passed.
+- **Boundary:** TEAM-WEB-006 remains open for durable DB worker leasing/updates, provider HTTP delivery, retry/reconciliation execution, and live provider evidence. No production migration or database write.
+
 ## 2026-10-03 · TEAM-WEB-006 test registration correction
 
 - **Code:** Web PR #131 merged as `eadc5ac`.

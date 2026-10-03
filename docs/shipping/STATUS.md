@@ -906,3 +906,7 @@ Private reviewer packet `docs/shipping/evidence/hunt-independent-review-packet-2
 # 2026-10-02 · Public route accessibility/lab sweep
 
 Read-only CDP sweep of `/`, `/checkout`, `/docs`, `/detectors`, and `/verify` recorded one main landmark and no horizontal overflow on every route, accessibility-tree role sets, focusable counts, AX node counts, and DOMContentLoaded deltas. Private evidence: `docs/shipping/evidence/public-ax-lab-sweep-2026-10-02.md`. This is lab evidence only; it does not claim field CWV or human screen-reader completion.
+
+# 2026-10-03 · Web PR #133 SCM webhook intake and delivery contract
+
+Web PR #133 (`06d90af`, merged as `510f66c`) adds provider-specific SCM webhook intake for GitHub/GitLab. The route verifies signatures over the bounded raw request body (256 KiB cap), requires an active installation and exact repository binding, parses only the minimal commit metadata, and queues a redacted idempotent outbox trigger. A pure delivery-worker transition contract now maps provider responses to delivered/retry/failed states with bounded exponential retry and no provider-body retention. Focused SCM/tenant/negative-boundary tests pass 29/29; full Web suite remains 859 total / 837 passed / 22 environment-gated skips / 0 failures; hosted Verify, GitGuardian, Vercel, typecheck, Drizzle, and migration checks are green. TEAM-WEB-006 remains open: DB worker leasing/updates, provider HTTP delivery, durable reconciliation, and live provider evidence are not claimed. No production migration or write occurred.
