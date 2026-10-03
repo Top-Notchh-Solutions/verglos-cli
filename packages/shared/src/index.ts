@@ -105,3 +105,4 @@ export * from "./record-signing.js";
 export * from "./record-signing-provider.js";
 export * from "./record-provenance.js";
 export * from "./record-sigstore.js";
+export * from "./release-rollback.js";
