@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · cross-repository acceptance rerun
+
+- **Source:** CLI `955412516`; Web `763aab0`.
+- **Verification:** private runner completed CLI 236/236, Web 877/905 with 28 environment skips and 0 failures, and composed substrates 72/72. Evidence JSON refreshed at `10:27:27Z`.
+- **Boundary:** No external provider/customer/browser-human/production acceptance inferred.
+
 ## 2026-10-03 · Web production build recheck
 
 - **Source:** Web `main` `763aab0`.

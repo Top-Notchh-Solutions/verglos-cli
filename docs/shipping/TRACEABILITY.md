@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-03 · cross-repository acceptance rerun
+
+- **Source:** CLI `955412516b96cc09393e78c43bf7d02b9abd05d9`; Web `763aab07a19f054dee41dc83ab9ec9f0743b4925`.
+- **Result:** CLI 236/236 passed; Web 905 total / 877 passed / 28 environment-gated skips / 0 failures; composed Studio/Enterprise/Team/quality substrates 72/72 passed.
+- **Boundary:** Substrate/regression evidence only. No hosted HTTP, provider, customer, reviewer, browser-human, field-CWV, migration, or production acceptance is claimed.
+
 ## Verification · 2026-10-03 · Web production build recheck
 
 - **Source:** Web `main` at `763aab07a19f054dee41dc83ab9ec9f0743b4925`.
