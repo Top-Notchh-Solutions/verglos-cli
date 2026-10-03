@@ -12,8 +12,9 @@ successes:
 - Ubuntu Node 20, 22, 24
 - macOS Node 20, 22, 24
 
-At the latest subsequent poll, Windows Node 24 became a terminal success while
-Windows Node 20 and 22 remained `in_progress`. This repeats the earlier hosted
-runner/control-plane stall pattern. The run is not recorded as a matrix pass or
-failure until GitHub reports a terminal state. No source, publication,
+The run later reached terminal **success**. Windows Node 20, 22, and 24 all
+completed successfully, joining the six Ubuntu/macOS cells and the successful
+in-toto binding. This qualifies the merged cache-persistence source across the
+full supported matrix; it does not qualify trusted publication, legal release,
+customer acceptance, or production migration. No source, publication,
 deployment, migration, or production operation was performed.

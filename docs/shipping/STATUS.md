@@ -1,5 +1,12 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · merged-main platform matrix complete
+
+Run `37115386171` reached terminal success for merged CLI `18ab8e7`: in-toto
+binding plus all Ubuntu/macOS/Windows Node 20/22/24 cells passed. This is
+current-source cross-platform evidence only; trusted publication, legal review,
+customer acceptance, and final release gates remain open.
+
 ## 2026-10-03 · matrix poll advanced
 
 Run `37115386171` now has Windows Node 24 terminal-successful; Windows Node 20

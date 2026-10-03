@@ -1247,3 +1247,9 @@ while they remain unresolved.
 Run `37115386171`: Windows Node 24 reached success; Windows Node 20 and 22
 remain in progress. Overall conclusion remains unclaimed pending terminal
 workflow state.
+# 2026-10-03 — merged-main platform matrix complete
+
+Run `37115386171` reached terminal success: in-toto binding and all nine
+Ubuntu/macOS/Windows × Node 20/22/24 cells passed against merged CLI `18ab8e7`.
+This strengthens current-source qualification only; no checkbox, publication,
+deployment, migration, or production state changed.
