@@ -914,3 +914,7 @@ Web PR #133 (`06d90af`, merged as `510f66c`) adds provider-specific SCM webhook 
 # 2026-10-03 · Web PR #134 fenced SCM delivery leases
 
 Web PR #134 (`031200f`, merged as `5b52943`) adds additive migration `0022_scm_delivery_leases.sql` with lease-owner/expiry fields and an index. The repository claims queued/retry/expired-delivering rows using `FOR UPDATE SKIP LOCKED`, increments attempts, and fences finish updates by worker plus exact lease expiry so stale workers cannot mutate reclaimed deliveries. Focused lease/worker tests pass 5/5; full Web suite remains 859 total / 837 passed / 22 environment-gated skips / 0 failures; hosted Verify and all configured schema/security/deploy checks are green. TEAM-WEB-006 remains open for provider HTTP execution, reconciliation scheduling, and live provider evidence. Migration is code-only and has not been run against production.
+
+# 2026-10-03 · Web PR #135 SCM tenant predicate correction
+
+Web PR #135 (`e65c61d`, merged as `80545aa`) adds explicit `organizationId` predicates to SCM installation listing and check-installation resolution. This closes a cross-tenant lookup risk independent of the access-database implementation. Tenant-boundary and SCM contract tests pass 19/19; hosted Verify, GitGuardian, Vercel, and type/schema checks are green. TEAM-WEB-006 remains open for provider HTTP execution, reconciliation scheduling, and live provider evidence.

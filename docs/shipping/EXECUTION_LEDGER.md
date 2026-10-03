@@ -18,6 +18,12 @@
 - **Verification:** lease-owner/expiry schema and index; `FOR UPDATE SKIP LOCKED` claim/reclaim repository; worker-plus-expiry fenced finish update; focused lease/worker tests 5/5; full Web suite 859/837/22/0; hosted Verify, schema, security, and Vercel checks passed.
 - **Boundary:** Provider HTTP execution, reconciliation scheduling, and live provider evidence remain open. Migration has not been run against production.
 
+## 2026-10-03 · TEAM-WEB-006 tenant predicate correction
+
+- **Code:** Web PR #135 feature commit `e65c61d`, merged as `80545aa`.
+- **Verification:** Explicit organization predicates added to SCM installation list and check lookup; tenant-boundary/SCM contract tests 19/19 and hosted checks passed.
+- **Boundary:** No production data or migration touched. Provider HTTP execution, reconciliation scheduling, and live evidence remain open.
+
 ## 2026-10-03 · TEAM-WEB-006 test registration correction
 
 - **Code:** Web PR #131 merged as `eadc5ac`.
