@@ -1109,3 +1109,9 @@ while they remain unresolved.
 - **Source:** Web `main` at `763aab0`.
 - **Result:** `pnpm test` passed 837 of 859 tests with 22 environment-gated skips and zero failures; the SCM pretest slice passed 40 of 46 with 6 skips and zero failures. `pnpm typecheck`, `pnpm db:check`, `pnpm db:migrations:check` (24 ordered migrations), and `git diff --check` passed.
 - **Boundary:** Read-only verification; no production migration, database write, deployment, or checkbox change.
+## 2026-10-03 · current CLI public-pack qualification blocker
+
+- **Source:** read-only `origin/main` at `c17b335`; host macOS install with repository-pinned pnpm `9.15.9` retry.
+- **Commands:** `node scripts/pack-public-packages.mjs <temp-dir>` and package-surface/clean-consumer tests.
+- **Result:** pack fails before archive output because `license-inventory` cannot find metadata for foreign-platform optional `@esbuild/*` lockfile entries. Surface tests pass 6/7; the pack test is the single failure. This is reproduced with pnpm 9 and is not treated as a passing artifact.
+- **Boundary:** no source edit, no inventory bypass, no package publication, no production operation, no checkbox change.

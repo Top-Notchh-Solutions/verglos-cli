@@ -936,3 +936,6 @@ The read-only `origin/main` worktree at `c17b335` was installed from its lockfil
 # 2026-10-03 · current Web main regression pass
 
 Web `main` at `763aab0` completed `pnpm test`: 859 total, 837 passed, 22 environment-gated skips, 0 failures. The SCM pretest slice was 46 total, 40 passed, 6 skipped, 0 failed. Typecheck, Drizzle check, 24-migration ordering, and diff checks passed in the same verification pass. No checkbox changed and no production operation occurred.
+# 2026-10-03 · current CLI public-pack qualification blocker
+
+The exact current CLI source (`c17b335`) cannot produce a locally valid public archive on this macOS install: the license inventory fails closed on missing metadata for foreign-platform optional `@esbuild/*` lockfile packages. Pinning pnpm `9.15.9` reproduces it. Package-surface checks pass 6/7; the pack test is not accepted. No bypass, archive publication, or checkbox change occurred.

@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-03 · current CLI public-pack qualification
+
+- **Source:** CLI `origin/main` at `c17b335`, clean read-only worktree.
+- **Result:** package-surface checks passed 6/7. The pack/clean-public-pack test and `pack-public-packages.mjs` both fail closed before archive creation because the macOS install lacks metadata for foreign-platform optional lockfile packages (`@esbuild/*`); the license inventory requires every lockfile package to be represented. Re-running with pinned pnpm `9.15.9` reproduced the same failure. No archive was treated as valid.
+- **Boundary:** This is a platform qualification blocker for DIST-001/003 and LIC-003, not a code or license bypass. The hosted OS matrix remains the authoritative route for cross-platform installation evidence; no public package or release was published.
+
 ## Verification · 2026-10-03 · current Web main regression pass
 
 - **Source:** Web `main` at `763aab0` (SCM scheduled reconciliation merge).
