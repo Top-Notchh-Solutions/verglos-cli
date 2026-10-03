@@ -11,6 +11,10 @@ excluded by policy). Private evidence: `docs/shipping/evidence/juice-shop-full-s
 This remains a public technical fixture, not customer acceptance or independent Hunt
 adjudication.
 
+The three `~/.cursor/mcp.json` findings are expected global `agent-surface` detector output,
+not an unbounded fixture read; the detector's focused tests explicitly isolate and qualify
+that global-config scope.
+
 ## 2026-10-02 · Production browser lab sweep and Linux namespace correction
 
 The existing Chrome session measured `/`, `/checkout`, `/docs`, `/detectors`, `/verify`,

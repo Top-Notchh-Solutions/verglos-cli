@@ -1,10 +1,15 @@
 # Verglos V1 traceability
 
 ## Evidence · 2026-10-02 · Public route accessibility/lab sweep
-
 - Existing Chrome CDP session inspected five public routes in a temporary same-browser tab.
 - Every route exposed one `main` landmark and no horizontal overflow; AX roles, node counts, focusables, and DOMContentLoaded deltas are recorded privately.
 - This strengthens QUAL-WEB-006 lab evidence but does not substitute for field CWV or human screen-reader review.
+
+## Progress · 2026-10-02 · current CLI fixture boundary clarification
+
+The current-source Juice Shop scan's three redacted `~/.cursor/mcp.json` findings are
+expected global agent-surface scope, covered by isolated detector tests, not an unbounded
+read of the fixture. The exact scan report and hashes are in the private evidence file.
 
 ## Evidence · 2026-10-02 · Hunt review packet
 

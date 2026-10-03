@@ -36,5 +36,9 @@ Report SHA-256 digests (private temporary output):
 
 This is a repeatable current-source technical fixture scan. It does not satisfy authorized
 customer acceptance, independent adjudication, or legal approval. Three findings reference
-`~/.cursor/mcp.json` outside the fixture root; that scanner-boundary observation remains
-recorded and unresolved rather than silently discarded. Raw reports remain private.
+`~/.cursor/mcp.json` outside the fixture root. This is expected: the Pro `agent-surface`
+detector explicitly inspects global Cursor/Claude/Windsurf configuration in addition to
+project-local configuration, and redacts the developer path to `~`. No source outside the
+fixture was uploaded or stored in the derived report; the global findings are retained
+because suppressing them would misrepresent the detector's documented scope. Raw reports
+remain private.
