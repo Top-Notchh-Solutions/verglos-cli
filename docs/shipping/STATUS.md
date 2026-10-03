@@ -987,3 +987,5 @@ GitHub Actions Self-scan `37109797227` passed at exact CLI `origin/main` head `c
 # 2026-10-03 · CLI PR #59 protected publication environment
 
 CLI PR #59 adds a named `release` GitHub environment to the public npm publication job and serializes all registry mutations with a non-cancelling concurrency group. The workflow contract test now requires both protections. Local shared tests, workflow contract test, full typecheck, and diff checks pass. PR #59 is awaiting hosted Self-scan, in-toto, and nine-cell platform matrix checks. DIST-002 remains open until repository environment reviewers are configured and a trusted release is actually published/attested; no tag, npm publication, or production operation occurred.
+
+Repository environment evidence: `release` was created through the GitHub API at `2026-10-03T09:19:05Z` with required reviewer `anuragyadav-git`, self-review permitted by explicit owner authorization, and protected-branch deployment policy. This configures the gate; it does not constitute a release or attestation.

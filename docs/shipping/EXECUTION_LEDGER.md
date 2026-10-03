@@ -1148,3 +1148,5 @@ while they remain unresolved.
 - **Action:** Added `environment: release` and serialized `verglos-release-publication` concurrency to `.github/workflows/publish.yml`; extended `publish-workflow-contract.test.mjs` to assert both controls.
 - **Result:** Commit `d531540` pushed as PR `#59`; local shared tests, workflow contract test, full typecheck, and `git diff --check` passed. Hosted checks are pending.
 - **Decision:** Preparatory DIST-002 evidence only. The environment must have required reviewers configured and a real trusted publication/attestation must run before acceptance. No tag, npm publication, deployment, or production write.
+
+- **Operational configuration:** GitHub `release` environment created at `2026-10-03T09:19:05Z` with required reviewer `anuragyadav-git` and protected-branch deployment policy. This is a configuration change only; no workflow was approved or executed.
