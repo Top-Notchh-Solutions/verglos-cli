@@ -973,3 +973,11 @@ root invocation is classified as harness resolution (`tsx` absent at the
 temporary worktree root), not a source regression. This evidence is progress
 only and does not satisfy external, authenticated, customer, legal, or
 independent-review gates.
+# 2026-10-03 acceptance-story runner
+
+Private `scripts/verify-acceptance-stories.mjs` runs the package-owned latest
+CLI suite, Web full suite, and composed Studio/Enterprise/Team/quality suites,
+records exact source commits, output hashes, exit codes, and parsed totals, and
+fails closed on any non-zero command. Run result: CLI 236/236; Web 877/905 with
+28 environment skips and zero failures; composed Web 72/72. This advances
+ACCEPT-002/003 reproducibility without asserting external acceptance.

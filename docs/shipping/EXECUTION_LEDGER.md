@@ -1213,3 +1213,14 @@ while they remain unresolved.
 - Evidence: `docs/shipping/evidence/acceptance-story-tests-2026-10-03.md`.
 - Classification: substrate regression evidence only; no checkbox closed and
   no production/provider/customer/legal/independent-review operation performed.
+# 2026-10-03 — reproducible acceptance-story runner
+
+- Added private `scripts/verify-acceptance-stories.mjs` and package command
+  `acceptance:stories:verify`.
+- Bound CLI `955412516b96cc09393e78c43bf7d02b9abd05d9` and Web
+  `763aab07a19f054dee41dc83ab9ec9f0743b4925`.
+- Results: CLI 236/236 passed; Web 877/905 passed, 28 environment-gated skips,
+  0 failures; composed Web substrates 72/72 passed.
+- Evidence: `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
+- No checkbox, production state, migration, provider, customer, reviewer, or
+  public release changed.

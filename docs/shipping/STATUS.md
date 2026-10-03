@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · reproducible cross-repository acceptance runner
+
+Private `pnpm --silent acceptance:stories:verify` binds and reruns the latest
+CLI/Web trees: CLI **236/236 passed**, Web **877/905 passed with 28
+environment-gated skips and 0 failures**, and composed Web acceptance
+substrates **72/72 passed**. Machine-readable output and command hashes are in
+`docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
+This is reproducible substrate evidence only; no hosted, provider, customer,
+reviewer, human screen-reader, field-CWV, migration, or production gate is
+closed.
+
 ## 2026-10-03 · acceptance-story substrate recheck
 
 The corrected package-owned CLI runner passed **236/236** tests on the latest

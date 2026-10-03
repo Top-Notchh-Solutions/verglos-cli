@@ -67,3 +67,18 @@ routes/provider evidence, customer authorization, legal/licensing approval,
 independent Hunt review, authenticated organization-dashboard interaction,
 human screen-reader review, large-dataset and field-CWV evidence, and final
 release/marketing truth review.
+
+## Reproducible cross-repository runner
+
+Private command `pnpm --silent acceptance:stories:verify` reran the repository-
+owned commands and wrote `docs/shipping/evidence/acceptance-stories-
+verification-2026-10-03.json`. It bound CLI
+`955412516b96cc09393e78c43bf7d02b9abd05d9` and Web
+`763aab07a19f054dee41dc83ab9ec9f0743b4925` and reported:
+
+- CLI package suite: 236/236 passed, 0 skipped.
+- Web full suite: 877/905 passed, 28 environment-gated skips, 0 failures.
+- Web composed acceptance substrates: 72/72 passed, 0 skipped.
+
+Each command's output hash is retained in the machine-readable result. The
+runner is private and fail-closed; a failed command exits non-zero.

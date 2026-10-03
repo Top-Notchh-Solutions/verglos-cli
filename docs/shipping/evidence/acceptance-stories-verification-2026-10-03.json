@@ -1,0 +1,77 @@
+{
+  "schema": "verglos.private.acceptance-stories-verification.v1",
+  "verifiedAt": "2026-10-03T10:04:04.804Z",
+  "cliRoot": "/tmp/verglos-cli-current.MphZDs",
+  "webRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
+  "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
+  "webCommit": "763aab07a19f054dee41dc83ab9ec9f0743b4925",
+  "results": [
+    {
+      "label": "cli-package-suite",
+      "cwd": "/tmp/verglos-cli-current.MphZDs",
+      "args": [
+        "--filter",
+        "verglos",
+        "test"
+      ],
+      "startedAt": "2026-10-03T10:03:03.156Z",
+      "finishedAt": "2026-10-03T10:04:01.064Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 236,
+        "pass": 236,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "outputSha256": "41b27aa6d98b609ae7525a89cab7f72281d84e3e9d4b8353e4a44c623eb204b6"
+    },
+    {
+      "label": "web-full-suite",
+      "cwd": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
+      "args": [
+        "test"
+      ],
+      "startedAt": "2026-10-03T10:04:01.065Z",
+      "finishedAt": "2026-10-03T10:04:04.274Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 905,
+        "pass": 877,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 28
+      },
+      "outputSha256": "65df393bfcb33510c1b4e8e56084e7e2c13e83e140cc37b2719500f75438972c"
+    },
+    {
+      "label": "web-composed-acceptance-substrates",
+      "cwd": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
+      "args": [
+        "exec",
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "src/lib/organizations/studio-e2e.test.ts",
+        "src/lib/organizations/enterprise-e2e.test.ts",
+        "src/lib/organizations/team-e2e.test.ts",
+        "src/lib/qual/qual-web-suites.test.ts"
+      ],
+      "startedAt": "2026-10-03T10:04:04.274Z",
+      "finishedAt": "2026-10-03T10:04:04.804Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 72,
+        "pass": 72,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "outputSha256": "bda1926953f5fa902baeb9b8c8f3cbe470b4f06eb6eb8474852696fcbdde4bca"
+    }
+  ],
+  "allCommandsPassed": true,
+  "note": "Substrate/regression evidence only. No hosted HTTP, provider, customer, reviewer, browser-human, field-CWV, migration, or production acceptance is claimed."
+}
