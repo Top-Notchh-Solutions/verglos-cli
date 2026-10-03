@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · ACCEPT-002 story map
+
+- **Code/evidence:** Private `9de1e3c` adds the frozen twelve-story map and makes the cross-repository runner emit it.
+- **Verification:** CLI 236/236, Web 877/905 with 28 skips, composed substrates 72/72; runner exits zero and records open story statuses explicitly.
+- **Boundary:** ACCEPT-002 remains open until every required story has direct runtime/provider/customer evidence.
+
 ## 2026-10-03 · ACCEPT-001 corpus freeze
 
 - **Code/evidence:** Private `ac00dca` extends corpus verification to ten items (six full clones + four source-bound contract artifacts) and writes the v2 manifest.

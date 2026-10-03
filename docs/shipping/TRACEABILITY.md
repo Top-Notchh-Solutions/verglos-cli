@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-10-03 · ACCEPT-002 story map
+
+- **Artifact:** Private `acceptance-story-map-2026-10-03.json` freezes twelve named story surfaces and their evidence/status.
+- **Result:** Runner passed CLI 236/236, Web 877/905 with 28 environment skips, and composed substrates 72/72; all story statuses are emitted in the machine manifest.
+- **Boundary:** This is explicit substrate mapping, not full external/hosted/customer acceptance. Open statuses remain visible for Hunt isolation, modified CLI runtime, Studio recipient, Enterprise provider, and account deletion.
+
 ## Acceptance · 2026-10-03 · ACCEPT-001 corpus freeze
 
 - **Artifact:** Private ten-item corpus manifest `acceptance-corpus-verification-2026-10-03-v2.json`.
