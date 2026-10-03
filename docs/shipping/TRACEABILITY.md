@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-03 · public production Lighthouse lab pass
+
+- **Targets:** `https://verglos.com/`, `/checkout`, `/detectors`, and `/docs`; read-only deployed responses.
+- **Result:** Accessibility 97–100 and Best Practices 100 across all four targets. Performance was 100/78/84/81 respectively; observed LCP was 1.3/4.3/4.0/4.4 seconds and CLS was 0 on every target.
+- **Boundary:** Lab data is not field CWV, authenticated dashboard evidence, or human screen-reader review. Checkout exposed only the verified Pro INR monthly/annual offers while signed out; no Team/Studio/Enterprise purchase capability is claimed.
+
 ## Verification · 2026-10-03 · current-source cross-platform matrix
 
 - **Run:** GitHub Actions platform matrix `37110048279`, exact CLI `origin/main` head `c17b335f2bfac6d9d63e6a8031f4c19811306296`.

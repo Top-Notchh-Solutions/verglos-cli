@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · public production Lighthouse lab evidence
+
+Read-only Lighthouse runs against the deployed public home, checkout, detectors,
+and docs surfaces returned accessibility 97–100 and Best Practices 100. Lab
+performance was 100/78/84/81 respectively, with CLS 0 throughout; this is
+regression evidence only, not field-CWV or authenticated dashboard evidence.
+The signed-out checkout rendered only the verified Pro INR monthly/annual
+catalog offers; other plan names on public marketing/docs surfaces do not imply
+their checkout activation. QUAL-WEB-006 and FINAL-WEB-007 remain open for
+human screen-reader, authenticated dashboard, large-dataset, and field-CWV
+evidence.
+
 ## 2026-10-03 · current-source cross-platform release qualification
 
 CLI `origin/main` head `c17b335f2bfac6d9d63e6a8031f4c19811306296` passed hosted
