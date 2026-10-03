@@ -907,3 +907,8 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 - **Contract:** Shared `decideReleaseRollback` covers five release surfaces; refuses missing approval, mutable/same references, cross-kind targets, history invalidation, and signing-key revocation without a distinct replacement. Focused shared tests, full typecheck, and build passed.
 - **Hosted evidence:** Self-scan `37111798321`, Platform matrix `37111798352`, and in-toto binding passed; all nine platform cells passed.
 - **Boundary:** DIST-006 remains unchecked. This is a decision contract only; no registry, engine, feed, signing, or deployment rollback/revocation operation was executed.
+# 2026-10-03 · CLI PR #59 protected publication environment
+
+- **Code:** CLI commit `d531540` (PR `#59`, pending merge) gates the publication job behind the `release` environment and serializes registry mutations with `verglos-release-publication` concurrency.
+- **Verification:** Local shared tests, publish workflow contract test, full typecheck, and diff checks passed; hosted checks pending.
+- **Boundary:** DIST-002 remains unchecked until GitHub environment reviewers are configured and a real keyless trusted publication/attestation is completed. No publication or production operation occurred.

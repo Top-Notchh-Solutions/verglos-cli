@@ -984,3 +984,6 @@ The exact current CLI source (`c17b335`) cannot produce a locally valid public a
 # 2026-10-03 · hosted current-source public-pack qualification
 
 GitHub Actions Self-scan `37109797227` passed at exact CLI `origin/main` head `c17b335`. Hosted Linux completed dependency-license inventory, notices/SBOM checks, six public archive packing, clean-consumer installation, tests, Hunt Docker adversarial checks, artifact verification, typecheck, package/public-boundary audits, and self-scan. This is evidence for the current unreleased source; publication, trusted provenance, legal clearance, and GA gates remain open.
+# 2026-10-03 · CLI PR #59 protected publication environment
+
+CLI PR #59 adds a named `release` GitHub environment to the public npm publication job and serializes all registry mutations with a non-cancelling concurrency group. The workflow contract test now requires both protections. Local shared tests, workflow contract test, full typecheck, and diff checks pass. PR #59 is awaiting hosted Self-scan, in-toto, and nine-cell platform matrix checks. DIST-002 remains open until repository environment reviewers are configured and a trusted release is actually published/attested; no tag, npm publication, or production operation occurred.

@@ -1143,3 +1143,8 @@ while they remain unresolved.
 - **Action:** Added shared fail-closed decision logic for rollback/revocation across npm, engines, Hunt feeds, signing identities, and web deployments.
 - **Result:** PR `#58`, head `28512c7`, merged as `8e39aa7`; shared test suite, typecheck, and build passed; hosted Self-scan `37111798321`, Platform matrix `37111798352`, and in-toto binding passed.
 - **Decision:** Preparatory DIST-006 evidence only. Operational provider adapters, audit/recovery execution, and historical-record verification remain outstanding. No production operation.
+# 2026-10-03 · protected publication environment (CLI PR #59)
+
+- **Action:** Added `environment: release` and serialized `verglos-release-publication` concurrency to `.github/workflows/publish.yml`; extended `publish-workflow-contract.test.mjs` to assert both controls.
+- **Result:** Commit `d531540` pushed as PR `#59`; local shared tests, workflow contract test, full typecheck, and `git diff --check` passed. Hosted checks are pending.
+- **Decision:** Preparatory DIST-002 evidence only. The environment must have required reviewers configured and a real trusted publication/attestation must run before acceptance. No tag, npm publication, deployment, or production write.
