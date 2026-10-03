@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-03 · LIC-002 pinned external-engine record
+
+- **Artifact:** Private `docs/shipping/legal/external-engines-and-standards-2026-10-03.md`, committed as `aa07dbf`.
+- **Coverage:** Records pinned Trivy image/version/digest and Apache texts, the explicit-path detect-secrets boundary, Sigstore package/fixture provenance, in-toto license split, standards non-vendoring, and fixture/premium-content restrictions.
+- **Boundary:** This is technical provenance, not legal approval or redistribution clearance. Immutable executable selection, image/database/signature review, premium recipe rights, trademark review, and independent review remain open; LIC-002 stays unchecked. No public repository, package, production database, or deployment changed.
+
 ## Progress · 2026-10-03 · TEAM-WEB-006 persistence and enqueue
 - **Implementation:** Web PR #132 merged as `049f8ba`.
 - **Behavior:** Additive `0021` stores tenant-bound installation identities and redacted check deliveries; encrypted webhook secrets never enter response projections; authorized routes cap raw bodies, enforce digest idempotency, and enqueue through the existing outbox.
