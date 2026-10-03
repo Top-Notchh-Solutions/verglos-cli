@@ -36,6 +36,12 @@
 - **Verification:** Nullable encrypted token envelopes, authenticated cron scheduler, in-memory decryption, bounded fetch/Retry-After transport, and aggregate-only response; focused SCM route/lease/runner tests 15/15; full Web suite 859/837/22/0; typecheck, build, migration ordering (24), hosted Verify, security, and Vercel checks passed.
 - **Boundary:** Live provider evidence and production migration/cutover qualification remain open. No production database operation.
 
+## 2026-10-03 · LIC-002 external engine and standards record
+
+- **Artifact:** Private `docs/shipping/legal/external-engines-and-standards-2026-10-03.md`.
+- **Evidence recorded:** pinned Trivy v0.74.0 image/revision and Apache LICENSE/NOTICE URLs; detect-secrets unbundled executable boundary; Sigstore versions/fixture commit/digests; in-toto software/documentation/specification license split; standards non-vendoring and fixture/premium-content restrictions.
+- **Boundary:** Technical inventory only. Final legal approval, immutable detect-secrets release, image/layer/database review, premium recipe provenance, trademark review, and independent review remain open. No public repository, package, production database, or deployment changed.
+
 ## 2026-10-03 · TEAM-WEB-006 test registration correction
 
 - **Code:** Web PR #131 merged as `eadc5ac`.
