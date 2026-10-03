@@ -1224,3 +1224,14 @@ while they remain unresolved.
 - Evidence: `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
 - No checkbox, production state, migration, provider, customer, reviewer, or
   public release changed.
+# 2026-10-03 — current CLI verification and packaging boundary
+
+- Current source `955412516b96cc09393e78c43bf7d02b9abd05d9`: typecheck, build,
+  and `@verglos/shared` tests passed.
+- macOS `licenses:inventory` and `pack:public` both failed closed because
+  pnpm omitted foreign-platform optional `@esbuild/*` manifests required by the
+  lockfile. No bypass or synthetic license metadata was added.
+- Hosted Linux Self-scan `37109797227` remains the successful public-pack
+  evidence. Private evidence: `docs/shipping/evidence/current-source-
+  verification-2026-10-03.md`.
+- No checkbox or production/public release state changed.

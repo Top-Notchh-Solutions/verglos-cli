@@ -1,5 +1,13 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · current CLI verification and local packaging boundary
+
+CLI `955412516` passes typecheck, build, and the shared-package test suite.
+Local macOS license inventory and public packing still fail closed on missing
+foreign-platform optional `@esbuild/*` manifests; no bypass was introduced.
+Hosted Linux self-scan `37109797227` remains the successful pack evidence.
+Details are in `docs/shipping/evidence/current-source-verification-2026-10-03.md`.
+
 ## 2026-10-03 · reproducible cross-repository acceptance runner
 
 Private `pnpm --silent acceptance:stories:verify` binds and reruns the latest
