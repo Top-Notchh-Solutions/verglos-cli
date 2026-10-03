@@ -936,3 +936,14 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 - **Code:** CLI `9554125` (PR `#61`, pending) adds `organization-policy-cache.ts` and tests.
 - **Evidence:** Cache persistence validates canonical policy digest and exact scope, refuses symlink/oversized/malformed/tampered entries, and uses exclusive temporary writes plus atomic rename. Full local CLI suite, typecheck, build, and diff checks pass.
 - **Boundary:** TEAM-CLI-001 remains unchecked pending authenticated policy API fetch and command integration. No production or database write occurred.
+
+# 2026-10-03 · current-source acceptance corpus and Web self-scan
+
+- **Evidence:** Full non-shallow public technical fixtures Juice Shop (`1618a611`), NodeGoat (`c5cb68a`), and DVNA (`9ba473a`) were scanned with CLI `9554125`; all detector/provenance coverage completed. Current Web `main` was also scanned: 396 files, 17 findings, score 79/medium.
+- **Artifacts:** Private corpus and self-scan evidence are recorded under `docs/shipping/evidence/acceptance-corpus-2026-10-03.md`, `juice-shop-scan-2026-10-03.md`, and `verglos-web-self-scan-2026-10-03.md`; reports remain in ignored local evidence storage.
+- **Boundary:** This is technical fixture evidence only. It does not represent customer consent, OWASP/Appsecco endorsement, independent review, or final acceptance. No checkbox or production state changed.
+
+# 2026-10-03 · CLI PR #61 hosted completion
+
+- **Evidence:** Merged PR `#61` at `18ab8e7`; run `37113657045` completed successfully with all nine Ubuntu/macOS/Windows × Node 20/22/24 platform cells and in-toto binding green.
+- **Boundary:** TEAM-CLI-001 remains open for authenticated organization-policy HTTP fetch and user-facing command integration. No production or database operation occurred.

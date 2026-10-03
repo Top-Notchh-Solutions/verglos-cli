@@ -1175,3 +1175,14 @@ while they remain unresolved.
 - **Action:** Added CLI cache read/write helpers over the signed shared policy contract, with atomic restricted-file persistence and adversarial boundary tests.
 - **Result:** Commit `9554125` pushed as PR `#61`; focused tests 2/2, full CLI suite, typecheck, build, and diff checks passed. Hosted checks pending.
 - **Decision:** Preparatory TEAM-CLI-001 evidence only. Authenticated remote fetch, endpoint contract, and user-facing command wiring remain open; no checkbox changed and no production operation.
+
+# 2026-10-03 · acceptance corpus and product self-scan
+
+- **Action:** Added full-history OWASP Juice Shop, OWASP NodeGoat, and Appsecco DVNA fixture checkouts with local authorization notices; scanned all three and the current Verglos Web repository using CLI `9554125`, telemetry disabled and provenance enabled.
+- **Result:** Complete detector coverage. Juice Shop: 906 files / 55 findings / score 0. NodeGoat: 67 files / 31 findings / score 0. DVNA: 35 files / 17 findings / score 34. Web: 396 files / 17 findings / score 79. Exact commits, report hashes, and limitations are recorded in private evidence documents.
+- **Decision:** Progress toward ACCEPT-001 only; public fixtures are not customers and no findings were uploaded. No checkbox, production deployment, migration, or database write.
+
+# 2026-10-03 · PR #61 hosted matrix terminal evidence
+
+- **Observation:** Earlier pending state was transient. Run `37113657045` reached terminal success at `09:46:04Z` with all nine platform cells and in-toto binding successful.
+- **Decision:** Hosted verification for merged cache persistence is accepted as evidence, while TEAM-CLI-001 remains open for missing remote API and command integration. No production operation.
