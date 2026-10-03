@@ -1198,3 +1198,9 @@ while they remain unresolved.
 - **Action:** Cloned Damm Vulnerable Node Application and buggy-node with complete history, added local authorization notices, and ran current CLI scans with telemetry disabled and provenance enabled.
 - **Result:** Damm: 38 files / 17 findings / score 34. buggy-node: 8 files / 57 findings / score 10. Both complete coverage; exact hashes are in the corpus evidence.
 - **Decision:** Six-fixture technical corpus progress only. No upload, exploit, production write, or acceptance checkbox change.
+
+# 2026-10-03 · acceptance corpus verification harness
+
+- **Action:** Added private `verify-acceptance-corpus.mjs` and `acceptance:corpus:verify` package script.
+- **Result:** Run verified six full clones, exact HEADs, scope-limited authorization files, complete report coverage, and report hashes; wrote the versioned private manifest under `docs/shipping/evidence/`.
+- **Decision:** Stronger ACCEPT-001/003 evidence, but no checkbox change: the harness does not create customer consent, independent adjudication, or the final 10–20-corpus gate. No production or database operation.

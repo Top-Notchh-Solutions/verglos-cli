@@ -21,3 +21,15 @@ Report artifacts remain under the ignored local `.local-evidence` directory:
 - buggy-node JSON `3e6a807e04ef8a08c4e4ff0811798e89e5f85e13e8cb1e8717fcd3826236374e`; HTML `e4b9c256bd2ab2ef2b221031c1c62dc0f8dff7e89cb1c18ee7ef20928b3e690b`
 
 All scans used `VERGLOS_TELEMETRY=0`, current unreleased CLI source commit `955412516b96cc09393e78c43bf7d02b9abd05d9`, and no network verification, exploit, fuzz, load, or Hunt execution. This corpus is progress toward `ACCEPT-001` only; it does not satisfy customer consent, independent review, or the 10–20-corpus final gate.
+
+## Reproducible corpus verification
+
+Private command: `pnpm acceptance:corpus:verify` (implemented by `scripts/verify-acceptance-corpus.mjs`). It verifies every fixture's full-clone state, frozen `HEAD`, authorization notice, report JSON shape, complete coverage, and JSON/HTML hashes without rescanning or making network calls. Run at `2026-10-03T09:53:51.890Z`:
+
+- six fixtures verified;
+- `allFullClones=true`;
+- `allCompleteCoverage=true`;
+- CLI commit bound to `955412516b96cc09393e78c43bf7d02b9abd05d9`;
+- verification manifest SHA-256: `54c3f3bdc111d3a2faf35c841a8fb057649b6a859a5a45f9628945100ea8b2f4`.
+
+The manifest is `docs/shipping/evidence/acceptance-corpus-verification-2026-10-03.json`. It is integrity evidence, not customer consent or independent adjudication.

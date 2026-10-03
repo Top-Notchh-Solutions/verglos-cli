@@ -957,3 +957,9 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 
 - **Evidence:** Full clones at `1946570b` (MIT) and `b1b9cbc8` (ISC) were scanned with CLI `9554125`; complete detector/provenance coverage produced 17 and 57 findings respectively.
 - **Boundary:** Both are public technical fixtures with local scope notices, not customers or endorsements. The six-repository corpus remains preparatory ACCEPT-001 evidence; no production state changed.
+
+# 2026-10-03 · acceptance corpus verification harness
+
+- **Code:** Private `scripts/verify-acceptance-corpus.mjs`, exposed as `pnpm acceptance:corpus:verify`.
+- **Verification:** Six frozen full clones, authorization notices, report schemas, complete detector coverage, and JSON/HTML SHA-256 hashes verified at current unreleased CLI commit `9554125`; manifest hash `54c3f3bdc111d3a2faf35c841a8fb057649b6a859a5a45f9628945100ea8b2f4`.
+- **Boundary:** Reproducibility/integrity evidence only. ACCEPT-001/003 remain open for required corpus breadth, acceptance stories, customer authorization, and independent review.
