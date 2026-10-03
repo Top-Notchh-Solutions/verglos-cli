@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · TEAM-WEB-006 SCM check contract substrate (Web PR #129)
+
+Web PR #129 merged as `b2352c6` after hosted type/schema, GitGuardian, Vercel, and
+preview checks passed. The current Web tree now includes a pure GitHub/GitLab SCM
+contract: bounded installation admission, raw-body GitHub HMAC and GitLab token
+verification, tenant-bound commit/subject/artifact identity, redacted HTTPS check
+payloads, and digest-based idempotent update decisions. Focused tests pass 4/4 and
+the configured Web suite passes **859 total / 837 passed / 22 environment-gated
+skips**; typecheck and diff checks pass. TEAM-WEB-006 remains unchecked: provider
+installation adapters, persistence, HTTP webhook routes, retry delivery, and live
+provider evidence are not implemented/qualified by this substrate. The same merge
+also carries the previously prepared organization-dashboard accessibility shell and
+legacy verify truth correction onto current `main`; those remain runtime-evidence
+gated. No production database write, migration, billing action, or marketing change
+occurred.
+
 ## 2026-10-03 · Billing lifecycle contract revalidation
 
 The Web Razorpay/checkout/webhook focused suite passed **18/18 runnable tests**: immutable

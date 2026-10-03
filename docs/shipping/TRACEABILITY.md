@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-03 · TEAM-WEB-006 SCM check contract
+- **Implementation:** Web PR #129 merged as `b2352c6` from `feat/web-team-scm-check-contract`.
+- **Behavior:** Pure contract validates GitHub/GitLab installation identities, verifies raw webhook material, rejects cross-tenant installation binding, and emits bounded redacted check payloads with deterministic external identity and payload-digest idempotency.
+- **Verification:** Focused tests 4/4; configured Web suite 859 total / 837 passed / 22 environment-gated skips; typecheck, hosted type/schema, GitGuardian, Vercel, preview, and diff checks passed.
+- **Boundary:** TEAM-WEB-006 remains open pending provider adapters, persistence, HTTP routes, retry delivery, and live GitHub/GitLab webhook evidence. No production operation occurred.
+
 ## Evidence · 2026-10-02 · Public route accessibility/lab sweep
 - Existing Chrome CDP session inspected five public routes in a temporary same-browser tab.
 - Every route exposed one `main` landmark and no horizontal overflow; AX roles, node counts, focusables, and DOMContentLoaded deltas are recorded privately.

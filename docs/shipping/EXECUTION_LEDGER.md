@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · TEAM-WEB-006 SCM check contract substrate
+
+- **Code:** Web PR #129 merged as `b2352c6`.
+- **Verification:** Focused SCM contract tests 4/4; configured Web suite 859 total / 837 passed / 22 environment-gated skips; typecheck, hosted Verify, GitGuardian, Vercel, preview, and diff checks passed.
+- **Boundary:** GitHub/GitLab provider adapters, persistence, HTTP webhook routes, retry delivery, and live provider evidence remain open. No production database write, migration, billing action, or marketing change occurred.
+
 ## 2026-10-02 · Public route accessibility/lab sweep
 
 - **Run:** Read-only Chrome CDP sweep in a temporary same-browser tab across five public routes.
