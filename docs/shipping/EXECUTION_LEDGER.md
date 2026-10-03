@@ -1098,3 +1098,9 @@ while they remain unresolved.
 - **Run:** CLI Hunt package suite with Docker integration enabled against pinned Alpine digest `sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc`; Docker Desktop Server 29.7.2 is reachable.
 - **Result:** 55/56 passed with zero failures. Fifteen runtime adversarial checks passed, covering non-root, read-only mounts/rootfs, network denial, socket/device absence, no-new-privileges, redaction, output/time/CPU/process/disk/memory bounds, and signal classification. One macOS-only PID/IPC namespace assertion was skipped.
 - **Boundary:** HUNT-011 and QUAL-CLI-004 remain unchecked for Linux namespace evidence, complete recipe execution/provenance, and independent review. No production operation occurred. Private evidence: `docs/shipping/evidence/hunt-docker-adversarial-2026-10-02.md`.
+## 2026-10-03 · current CLI source verification
+
+- **Source:** read-only worktree of `Top-Notchh-Solutions/verglos-cli` `origin/main` at `c17b335`, package `2.0.0-alpha.1`.
+- **Commands:** clean `pnpm install --frozen-lockfile`; `pnpm typecheck`; `pnpm build`; `pnpm --filter @verglos/shared test`.
+- **Result:** all commands exited successfully; the install-matrix sub-suite passed 26/26 after build. A pre-build attempt failed only because the generated CLI `dist/index.js` did not yet exist, then passed after the required build.
+- **Boundary:** verification only; no edits to the current-source worktree, no publication, no production operation, and no checkbox change.

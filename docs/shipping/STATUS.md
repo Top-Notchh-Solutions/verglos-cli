@@ -930,3 +930,6 @@ Web PR #137 (`55ee4a8` + corrective `6c163d9`, merged as `763aab0`) adds nullabl
 # 2026-10-03 · LIC-002 external license record
 
 Private artifact `docs/shipping/legal/external-engines-and-standards-2026-10-03.md` formalizes technical records for the pinned Trivy runtime, the unbundled detect-secrets executable boundary, Sigstore libraries/fixtures, in-toto licensing, standards non-vendoring, and fixture/premium-content restrictions. The record preserves exact versions/digests and explicitly leaves legal approval, immutable executable selection, image-layer/database review, premium recipe provenance, trademark review, and independent review pending. LIC-002 remains unchecked; no public repository or package was changed.
+# 2026-10-03 · current CLI source verification
+
+The read-only `origin/main` worktree at `c17b335` was installed from its lockfile and verified with `pnpm typecheck`, `pnpm build`, and the full `@verglos/shared` test command. The build-order-sensitive install invariants pass 26/26 after generated CLI output exists. This is current-source evidence for the unreleased `2.0.0-alpha.1` tree, not evidence that the published `1.8.3` or a future release is accepted. No source, public repository, package, production database, or deployment changed.

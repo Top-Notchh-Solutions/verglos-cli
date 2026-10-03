@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-03 · current CLI source baseline
+
+- **Source:** read-only worktree of public CLI `origin/main` at `c17b335` (package version `2.0.0-alpha.1`); no edits or reset to the founder checkout.
+- **Verification:** after a clean `pnpm install --frozen-lockfile`, `pnpm typecheck`, `pnpm build`, and `pnpm --filter @verglos/shared test` passed. The install-matrix suite reported 26/26 checks after build. The pre-build run correctly failed on the absent generated CLI `dist/index.js`; it was not counted as product evidence.
+- **Boundary:** This verifies current source contracts only. It does not constitute release, trusted publishing, Hunt isolation, independent review, or production acceptance; the old published `1.8.3` remains only a compatibility-matrix baseline.
+
 ## Progress · 2026-10-03 · LIC-002 pinned external-engine record
 
 - **Artifact:** Private `docs/shipping/legal/external-engines-and-standards-2026-10-03.md`, committed as `aa07dbf`.
