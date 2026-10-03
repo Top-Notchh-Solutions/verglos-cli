@@ -1104,3 +1104,8 @@ while they remain unresolved.
 - **Commands:** clean `pnpm install --frozen-lockfile`; `pnpm typecheck`; `pnpm build`; `pnpm --filter @verglos/shared test`.
 - **Result:** all commands exited successfully; the install-matrix sub-suite passed 26/26 after build. A pre-build attempt failed only because the generated CLI `dist/index.js` did not yet exist, then passed after the required build.
 - **Boundary:** verification only; no edits to the current-source worktree, no publication, no production operation, and no checkbox change.
+## 2026-10-03 · current Web main regression pass
+
+- **Source:** Web `main` at `763aab0`.
+- **Result:** `pnpm test` passed 837 of 859 tests with 22 environment-gated skips and zero failures; the SCM pretest slice passed 40 of 46 with 6 skips and zero failures. `pnpm typecheck`, `pnpm db:check`, `pnpm db:migrations:check` (24 ordered migrations), and `git diff --check` passed.
+- **Boundary:** Read-only verification; no production migration, database write, deployment, or checkbox change.

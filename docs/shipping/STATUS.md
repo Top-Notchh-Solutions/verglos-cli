@@ -933,3 +933,6 @@ Private artifact `docs/shipping/legal/external-engines-and-standards-2026-10-03.
 # 2026-10-03 · current CLI source verification
 
 The read-only `origin/main` worktree at `c17b335` was installed from its lockfile and verified with `pnpm typecheck`, `pnpm build`, and the full `@verglos/shared` test command. The build-order-sensitive install invariants pass 26/26 after generated CLI output exists. This is current-source evidence for the unreleased `2.0.0-alpha.1` tree, not evidence that the published `1.8.3` or a future release is accepted. No source, public repository, package, production database, or deployment changed.
+# 2026-10-03 · current Web main regression pass
+
+Web `main` at `763aab0` completed `pnpm test`: 859 total, 837 passed, 22 environment-gated skips, 0 failures. The SCM pretest slice was 46 total, 40 passed, 6 skipped, 0 failed. Typecheck, Drizzle check, 24-migration ordering, and diff checks passed in the same verification pass. No checkbox changed and no production operation occurred.

@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-03 · current Web main regression pass
+
+- **Source:** Web `main` at `763aab0` (SCM scheduled reconciliation merge).
+- **Verification:** `pnpm test` completed with 859 total / 837 passed / 22 environment-gated skips / 0 failures. The registered SCM pretest slice completed 46 total / 40 passed / 6 skips / 0 failures. Earlier same-session `pnpm typecheck`, `pnpm db:check`, `pnpm db:migrations:check` (24 ordered migrations), and `git diff --check` were also successful.
+- **Boundary:** This is regression evidence only. It does not close live billing, provider cutover, production migration, human accessibility, field-CWV, customer-consent, or independent-review gates.
+
 ## Verification · 2026-10-03 · current CLI source baseline
 
 - **Source:** read-only worktree of public CLI `origin/main` at `c17b335` (package version `2.0.0-alpha.1`); no edits or reset to the founder checkout.
