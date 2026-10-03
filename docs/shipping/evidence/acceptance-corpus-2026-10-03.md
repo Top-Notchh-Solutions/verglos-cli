@@ -1,6 +1,6 @@
 # Acceptance technical corpus — 2026-10-03
 
-This is a private technical-fixture corpus, not a customer cohort. Every checkout is a full clone (`git rev-parse --is-shallow-repository=false`), and every fixture has a local `AUTHORIZATION.md` limiting use to non-destructive local scanning. Findings are not uploaded or published.
+This is a private technical-fixture corpus, not a customer cohort. Every checkout is a full clone (`git rev-parse --is-shallow-repository=false`), and every repository fixture has a local `AUTHORIZATION.md` limiting use to non-destructive local scanning. Four additional versioned contract artifacts are bound to the exact CLI source commit; they are not customer data. Findings are not uploaded or published.
 
 | fixture | upstream | commit | license | scan | result |
 | --- | --- | --- | --- | --- | --- |
@@ -32,4 +32,9 @@ Private command: `pnpm acceptance:corpus:verify` (implemented by `scripts/verify
 - CLI commit bound to `955412516b96cc09393e78c43bf7d02b9abd05d9`;
 - verification manifest SHA-256: `54c3f3bdc111d3a2faf35c841a8fb057649b6a859a5a45f9628945100ea8b2f4`.
 
-The manifest is `docs/shipping/evidence/acceptance-corpus-verification-2026-10-03.json`. It is integrity evidence, not customer consent or independent adjudication.
+The refreshed ten-item manifest is `docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v2.json` (six full repository clones plus four source-bound contract artifacts). It is integrity evidence, not customer consent or independent adjudication.
+
+The four source-bound artifacts are the frozen contract catalog and valid,
+invalid-exit, and backward-compatible failure fixtures under
+`packages/shared/fixtures/contracts/` at CLI commit `955412516`. Their
+SHA-256 and byte counts are verified by `acceptance:corpus:verify`.
