@@ -1132,3 +1132,8 @@ while they remain unresolved.
 - **Run:** GitHub Actions Self-scan `37109797227` at exact head `c17b335f2bfac6d9d63e6a8031f4c19811306296`.
 - **Result:** All job steps passed, including license inventory, notices/SBOM drift, six-archive pack, clean consumer, tests, pinned Hunt Docker adversarial suite, release-artifact verification, typecheck, package/public-boundary audits, and self-scan.
 - **Boundary:** hosted evidence only; no npm publication, release tag, production deployment, migration, or checkbox change.
+## 2026-10-03 · release tag/version integrity (CLI PR #57)
+
+- **Action:** Added a fail-closed immutable-tag check to the publish workflow and its contract tests.
+- **Result:** PR `#57`, head `2f18041`, merged as `8706c97`; local focused tests 3/3, combined release-safety checks 11/11, typecheck/build green; hosted Self-scan `37111006863` and Platform matrix `37111006817` green across in-toto plus nine OS/Node cells.
+- **Decision:** Record as preparatory progress only. DIST-002/003/006 are not accepted because no protected release, public attestation, legal approval, or rollback/revocation run was performed. No publication or production write.

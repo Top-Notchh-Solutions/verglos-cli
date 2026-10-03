@@ -894,3 +894,9 @@ detectors, and recorded the exact score/counts and report digests in
 `docs/shipping/evidence/juice-shop-full-scan-current-2026-10-02.md`. This strengthens
 technical fixture evidence only; it does not close customer consent, independent review,
 legal approval, or Hunt adjudication gates. No production operation occurred.
+## 2026-10-03 · CLI PR #57 immutable release-tag guard
+
+- **Code:** CLI `2f18041` merged as `8706c9701ad62a39939080e7b7200f3db66c4cb4`.
+- **Contract:** `verify-release-tag.mjs` validates the exact release ref and all six public package versions before publication; malformed or mismatched refs fail closed. `publish-workflow-contract.test.mjs` asserts the guard precedes `npm publish`; focused tests pass 3/3 and combined release-safety checks pass 11/11.
+- **Hosted evidence:** Self-scan `37111006863` and Platform matrix `37111006817` passed, including in-toto binding and all nine Ubuntu/macOS/Windows Node 20/22/24 cells.
+- **Boundary:** DIST-002/003/006 remain unchecked pending protected publishing/legal approval, real release attestation, and rollback/revocation evidence. No tag, publication, deployment, or production operation occurred.
