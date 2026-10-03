@@ -1,5 +1,13 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · merged-main platform matrix still running
+
+Manual matrix run `37115386171` targets merged CLI `18ab8e7` (not the feature
+branch). Its in-toto binding and six Ubuntu/macOS cells are terminal success;
+Windows Node 20/22/24 remain `in_progress` after repeated polling. This is
+hosted-runner state, not inferred product success or failure. Private evidence:
+`docs/shipping/evidence/cli-main-platform-matrix-2026-10-03.md`.
+
 ## 2026-10-03 · current CLI verification and local packaging boundary
 
 CLI `955412516` passes typecheck, build, and the shared-package test suite.

@@ -1235,3 +1235,10 @@ while they remain unresolved.
   evidence. Private evidence: `docs/shipping/evidence/current-source-
   verification-2026-10-03.md`.
 - No checkbox or production/public release state changed.
+# 2026-10-03 — merged-main platform matrix observation
+
+- Dispatched Platform matrix run `37115386171` for merged CLI `18ab8e7`.
+- In-toto binding and Ubuntu/macOS Node 20/22/24 cells are terminal success.
+- Windows Node 20/22/24 remain `in_progress`; no terminal result is inferred.
+- Evidence: `docs/shipping/evidence/cli-main-platform-matrix-2026-10-03.md`.
+- No checkbox, source, release, deployment, migration, or production state changed.
