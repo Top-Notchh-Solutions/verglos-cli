@@ -916,6 +916,6 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 - **Operational evidence:** GitHub environment `release` now has required reviewer `anuragyadav-git` and protected-branch policy (configured 2026-10-03T09:19:05Z). Configuration alone is not release evidence.
 # 2026-10-03 · CLI PR #60 signed organization policy cache substrate
 
-- **Code:** CLI `f547cfa` (PR `#60`, pending) adds `organization-policy.ts` and tests, exported through shared package index.
-- **Evidence:** Signed envelope verification binds exact organization/repository scope, policy digest, active Ed25519 key identity, and canonical signature bytes; offline resolution accepts only a matching unexpired cache. Focused tests 3/3, typecheck/build/diff green.
+- **Code:** CLI `f547cfa` (PR `#60`, merged as `b7c0799`) adds `organization-policy.ts` and tests, exported through shared package index.
+- **Evidence:** Signed envelope verification binds exact organization/repository scope, policy digest, active Ed25519 key identity, and canonical signature bytes; offline resolution accepts only a matching unexpired cache. Focused tests 3/3, typecheck/build/diff green; hosted checks still running.
 - **Boundary:** TEAM-CLI-001 remains unchecked pending authenticated API fetch/cache persistence, CLI command wiring, and hosted policy integration. No production or database operation occurred.
