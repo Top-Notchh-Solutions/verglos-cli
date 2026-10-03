@@ -1170,3 +1170,8 @@ while they remain unresolved.
 - **Observation:** Fresh matrix `37113320349` became stale at `09:31:20Z` with no job logs or transitions; cancellation request remains unprocessed.
 - **Decision:** Do not infer pass/fail or repeatedly dispatch duplicate runs. Treat as an external GitHub runner/control-plane blocker while preserving existing terminal evidence.
 - **Boundary:** No acceptance checkbox, publication, deployment, migration, or production write.
+# 2026-10-03 · organization policy cache persistence (CLI PR #61)
+
+- **Action:** Added CLI cache read/write helpers over the signed shared policy contract, with atomic restricted-file persistence and adversarial boundary tests.
+- **Result:** Commit `9554125` pushed as PR `#61`; focused tests 2/2, full CLI suite, typecheck, build, and diff checks passed. Hosted checks pending.
+- **Decision:** Preparatory TEAM-CLI-001 evidence only. Authenticated remote fetch, endpoint contract, and user-facing command wiring remain open; no checkbox changed and no production operation.

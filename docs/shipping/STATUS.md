@@ -1001,3 +1001,6 @@ The PR #60 matrix `37112986882` stopped updating at `09:25:28Z` with three Windo
 # 2026-10-03 · hosted runner infrastructure blocker
 
 Fresh merged-main matrix `37113320349` also stopped updating at `09:31:20Z`; all nine platform jobs remained `in_progress` with no logs. A cancellation request was submitted, but GitHub still reports the run in progress after the request. This is a hosted-runner control-plane issue, not a source test failure. Existing successful Self-scan/in-toto and completed platform evidence remain recorded; no new platform acceptance is inferred. No checkbox or production state changed.
+# 2026-10-03 · CLI PR #61 organization policy cache persistence
+
+CLI PR #61 (`9554125`, pending hosted checks) adds atomic bounded persistence for the signed organization-policy cache substrate. `readOrganizationPolicyCache` rejects symlinks, non-regular/oversized files, malformed JSON, cross-scope entries, and policy-digest tampering. `writeOrganizationPolicyCache` validates the entry, writes mode-restricted bytes to an exclusive temporary file, and atomically renames it into place. Focused cache tests pass 2/2; the full CLI suite, typecheck, build, and diff checks pass. TEAM-CLI-001 remains open for authenticated HTTP fetch and CLI command integration. No production operation occurred.

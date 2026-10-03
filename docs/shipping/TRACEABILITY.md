@@ -931,3 +931,8 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 
 - **Evidence:** Runs `37112986882` and `37113320349` both stopped updating with matrix jobs lacking logs; the second cancellation request is still pending. Self-scan `37112986892` remains terminal-successful.
 - **Boundary:** Platform acceptance is unverified; this is not treated as a code failure or a completed gate.
+# 2026-10-03 · organization policy cache persistence (CLI PR #61)
+
+- **Code:** CLI `9554125` (PR `#61`, pending) adds `organization-policy-cache.ts` and tests.
+- **Evidence:** Cache persistence validates canonical policy digest and exact scope, refuses symlink/oversized/malformed/tampered entries, and uses exclusive temporary writes plus atomic rename. Full local CLI suite, typecheck, build, and diff checks pass.
+- **Boundary:** TEAM-CLI-001 remains unchecked pending authenticated policy API fetch and command integration. No production or database write occurred.
