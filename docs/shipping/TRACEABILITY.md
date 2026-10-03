@@ -952,3 +952,8 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 
 - **Evidence:** Full clone of Snyk Labs `nodejs-goof` at `add14ba59e98240d9e00a235dd7d42cd61ae9912` (Apache-2.0) scanned with CLI `9554125`; 25 files, 29 findings, score 9/critical, complete detector/provenance coverage.
 - **Boundary:** Public technical fixture only, with local authorization notice; not customer consent or vendor endorsement. `ACCEPT-001` remains open and no production state changed.
+
+# 2026-10-03 · damm-vulnerable-node and buggy-node corpus expansion
+
+- **Evidence:** Full clones at `1946570b` (MIT) and `b1b9cbc8` (ISC) were scanned with CLI `9554125`; complete detector/provenance coverage produced 17 and 57 findings respectively.
+- **Boundary:** Both are public technical fixtures with local scope notices, not customers or endorsements. The six-repository corpus remains preparatory ACCEPT-001 evidence; no production state changed.

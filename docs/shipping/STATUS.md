@@ -1017,6 +1017,8 @@ Two additional public vulnerable Node applications were cloned with complete Git
 
 The corpus was expanded with Snyk Labs nodejs-goof, full clone at `add14ba59e98240d9e00a235dd7d42cd61ae9912` (Apache-2.0). Current CLI provenance-enabled scan walked 25 files and produced 29 findings (1 critical, 13 high, 15 medium), score `9`/critical, with complete coverage. Its report hashes are recorded in the corpus evidence document. This remains technical-fixture evidence only.
 
+Two further full-history public fixtures were scanned with CLI `9554125`: Damm Vulnerable Node Application at `1946570b36bf8e6dcac48142f072f40ee9cee160` (MIT; 38 files, 17 findings, score 34/critical) and buggy-node at `b1b9cbc8b86f81a1ecb0b142190d4fa4698518da` (ISC; 8 files, 57 findings, score 10/critical). Both had complete detector/provenance coverage and explicit local authorization notices. The corpus now contains six full clones; `ACCEPT-001` remains open pending the 10–20 corpus and downstream authorization/review gates.
+
 # 2026-10-03 · Verglos Web self-scan with current CLI
 
 The current local Web `main` was scanned with CLI commit `955412516b96cc09393e78c43bf7d02b9abd05d9`: Next.js detected, 396 files walked, complete detector/provenance coverage, 17 findings (1 critical, 3 medium, 13 info), score `79` / medium risk. The one critical is an operator-machine Cursor MCP configuration under `~/.cursor/mcp.json`, not a tracked Web file; it remains private for remediation. Report hashes and exact command are in `docs/shipping/evidence/verglos-web-self-scan-2026-10-03.md`. This is current-source evidence only; no production write, deployment, or checkbox change occurred.

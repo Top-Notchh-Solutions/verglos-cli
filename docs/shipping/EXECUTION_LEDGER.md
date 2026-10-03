@@ -1192,3 +1192,9 @@ while they remain unresolved.
 - **Action:** Cloned Snyk Labs `nodejs-goof` with complete history, added scope-limited public-fixture authorization, and scanned locally with CLI `9554125`, telemetry disabled and provenance enabled.
 - **Result:** Complete coverage; 25 files and 29 findings (1 critical, 13 high, 15 medium), score 9/critical. Report hashes are in the private acceptance corpus evidence.
 - **Decision:** Technical corpus progress only; no upload, exploit, production write, or acceptance checkbox change.
+
+# 2026-10-03 · two additional vulnerable Node fixture scans
+
+- **Action:** Cloned Damm Vulnerable Node Application and buggy-node with complete history, added local authorization notices, and ran current CLI scans with telemetry disabled and provenance enabled.
+- **Result:** Damm: 38 files / 17 findings / score 34. buggy-node: 8 files / 57 findings / score 10. Both complete coverage; exact hashes are in the corpus evidence.
+- **Decision:** Six-fixture technical corpus progress only. No upload, exploit, production write, or acceptance checkbox change.
