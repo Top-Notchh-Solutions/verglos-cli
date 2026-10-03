@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-10-03 · ACCEPT-006/007 protocol freeze
+
+- **Artifacts:** Private comprehension-test and Hunt-adjudication protocols with validators.
+- **Verification:** `pnpm --silent acceptance:study-protocols:check` passed; the evidence bundle now hashes 12 documents and its secret scan passes.
+- **Boundary:** No participant responses, 100-sample adjudication, or independent sign-off exists yet; ACCEPT-006 and ACCEPT-007 remain open.
+
 ## Acceptance · 2026-10-03 · ACCEPT-003 evidence bundle progress
 
 - **Artifact:** Private `acceptance-evidence-bundle-2026-10-03.json` hashes ten bounded evidence documents.

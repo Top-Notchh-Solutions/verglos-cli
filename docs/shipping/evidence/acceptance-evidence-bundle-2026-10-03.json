@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-03T10:36:41.328Z",
+  "generatedAt": "2026-10-03T10:38:20.567Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -36,6 +36,16 @@
       "path": "docs/shipping/acceptance/consent-record.template.md",
       "sha256": "b9d92183eb341969c2dbb6072b58ff1e3a00955e29d481a5643b9db706abb8bb",
       "bytes": 856
+    },
+    {
+      "path": "docs/shipping/acceptance/comprehension-test-protocol.md",
+      "sha256": "49095f8c308cd57cc54a1a4b8b70028b78043c1ec8edddf42983d6a239a7eab5",
+      "bytes": 1853
+    },
+    {
+      "path": "docs/shipping/acceptance/hunt-adjudication-protocol.md",
+      "sha256": "757a65c9ba21fcdf0bde047dcfee44ba278f96771068b2177c1ba90f090fc463",
+      "bytes": 2121
     },
     {
       "path": "docs/shipping/evidence/razorpay-sandbox-qr-2026-10-03.md",

@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · ACCEPT-006/007 protocol freeze
+
+- **Code/docs:** Added private comprehension and Hunt-adjudication protocols plus `acceptance:study-protocols:check`.
+- **Verification:** Protocol validator passed; evidence bundle regenerated with 12 hashed documents and a passing secret scan.
+- **Boundary:** Protocol readiness only; no human participant, 100-sample, or independent-review result inferred.
+
 ## 2026-10-03 · ACCEPT-003 evidence bundle progress
 
 - **Code/evidence:** Added private `acceptance:evidence:bundle` generator and ten-file hash manifest.
