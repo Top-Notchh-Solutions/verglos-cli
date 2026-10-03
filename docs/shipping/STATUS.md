@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · current Web regression recheck
+
+On Web `main` at `763aab0`, the configured suite completed **859 total / 837
+passed / 22 environment-gated skips / 0 failures**. The registered SCM
+pretest slice completed **46 total / 40 passed / 6 skips / 0 failures**;
+`pnpm typecheck`, `pnpm db:check`, and `pnpm db:migrations:check` also passed
+with 24 ordered PostgreSQL migrations. This confirms no regression after the
+qualification evidence additions; it does not close production, deletion,
+provider, browser, field-CWV, customer-consent, or independent-review gates.
+
 ## 2026-10-03 · public production Lighthouse lab evidence
 
 Read-only Lighthouse runs against the deployed public home, checkout, detectors,

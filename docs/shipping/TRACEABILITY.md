@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-03 · current Web regression recheck
+
+- **Source:** Web `main` at `763aab0`.
+- **Result:** Full configured suite 859 total / 837 passed / 22 environment-gated skips / 0 failures; SCM pretest slice 46 / 40 / 6 / 0; typecheck, Drizzle schema check, and 24-migration ordering check passed.
+- **Boundary:** Regression evidence only; no production database write, migration, deployment, account deletion, provider lifecycle, or human/browser acceptance is inferred.
+
 ## Verification · 2026-10-03 · public production Lighthouse lab pass
 
 - **Targets:** `https://verglos.com/`, `/checkout`, `/detectors`, and `/docs`; read-only deployed responses.

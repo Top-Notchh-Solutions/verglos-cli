@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · Web regression recheck after qualification evidence
+
+- **Source:** Web `main` `763aab0`.
+- **Verification:** Full suite 859/837/22/0; SCM pretest 46/40/6/0; typecheck, Drizzle schema check, and migration ordering (24) passed.
+- **Boundary:** No production or destructive operation. Open deletion/provider/browser/field-CWV and independent-review gates remain unchanged.
+
 ## 2026-10-03 · current-source cross-platform matrix
 
 - **Source/run:** CLI `origin/main` exact head `c17b335f2bfac6d9d63e6a8031f4c19811306296`; GitHub Actions run `37110048279`.
