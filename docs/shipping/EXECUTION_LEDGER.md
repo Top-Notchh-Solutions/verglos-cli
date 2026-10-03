@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · TEAM-CLI-002 CI check payload substrate
+
+- **Code:** CLI PR #56 merged as `c17b335`.
+- **Verification:** Focused tests 3/3; shared typecheck/build; hosted platform matrix, self-scan, and in-toto binding passed.
+- **Boundary:** Source-free payload projection is shipped as a substrate only. Organization policy fetch/cache, CLI command wiring, provider adapters/routes, and live SCM evidence remain open. No production operation occurred.
+
 ## 2026-10-03 · TEAM-WEB-006 SCM check contract substrate
 
 - **Code:** Web PR #129 merged as `b2352c6`.

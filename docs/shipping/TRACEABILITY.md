@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-03 · TEAM-CLI-002 CI check payload
+- **Implementation:** CLI PR #56 merged as `c17b335`.
+- **Behavior:** `composeCiCheckPayload` validates a Release Decision and emits a bounded source-free payload containing exact subject, decision, policy identity/digest, record URL/manifest digest, and commit identity; `decideCiCheckDelivery` suppresses identical replays.
+- **Verification:** Focused tests 3/3; shared package typecheck/build; hosted Ubuntu/macOS/Windows × Node 20/22/24, self-scan, and in-toto binding passed.
+- **Boundary:** TEAM-CLI-002 remains open pending organization-policy authority/cache, CLI command integration, and hosted SCM/provider evidence. No production operation occurred.
+
 ## Progress · 2026-10-03 · TEAM-WEB-006 SCM check contract
 - **Implementation:** Web PR #129 merged as `b2352c6` from `feat/web-team-scm-check-contract`.
 - **Behavior:** Pure contract validates GitHub/GitLab installation identities, verifies raw webhook material, rejects cross-tenant installation binding, and emits bounded redacted check payloads with deterministic external identity and payload-digest idempotency.

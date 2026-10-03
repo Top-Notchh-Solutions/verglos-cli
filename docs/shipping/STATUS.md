@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · TEAM-CLI-002 CI check payload substrate (CLI PR #56)
+
+CLI PR #56 merged as `c17b335` after the Ubuntu/macOS/Windows × Node 20/22/24
+matrix, Verglos self-scan, and in-toto release-binding checks passed. The shared
+contract `ci-check-payload.ts` projects only the exact primary subject digest,
+decision, policy identity/digest, record-manifest digest, HTTPS record URL, and
+commit into a deterministic, source-free payload; malformed identities and unsafe
+links fail closed, and update delivery is digest-idempotent. Focused tests pass 3/3;
+shared typecheck and build pass. TEAM-CLI-002 remains unchecked pending TEAM-CLI-001
+signed organization-policy fetch/cache, CLI command wiring, and hosted SCM/provider
+integration. No production operation or release publication occurred.
+
 ## 2026-10-03 · TEAM-WEB-006 SCM check contract substrate (Web PR #129)
 
 Web PR #129 merged as `b2352c6` after hosted type/schema, GitGuardian, Vercel, and
