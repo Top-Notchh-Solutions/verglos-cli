@@ -12,6 +12,12 @@
 - **Verification:** Provider-specific raw-byte webhook authentication with 256 KiB cap, strict minimal payload parsing, repository binding, and idempotent redacted outbox trigger; pure delivery transition tests cover success, retry bounds, max-attempt failure, and permanent failure. Focused suite 29/29; full Web suite 859 total / 837 passed / 22 skips / 0 failed; hosted Verify, GitGuardian, Vercel, typecheck, Drizzle, and migration checks passed.
 - **Boundary:** TEAM-WEB-006 remains open for durable DB worker leasing/updates, provider HTTP delivery, retry/reconciliation execution, and live provider evidence. No production migration or database write.
 
+## 2026-10-03 · TEAM-WEB-006 fenced durable delivery leases
+
+- **Code:** Web PR #134 feature commit `031200f`, merged as `5b52943`; additive migration `0022_scm_delivery_leases.sql`.
+- **Verification:** lease-owner/expiry schema and index; `FOR UPDATE SKIP LOCKED` claim/reclaim repository; worker-plus-expiry fenced finish update; focused lease/worker tests 5/5; full Web suite 859/837/22/0; hosted Verify, schema, security, and Vercel checks passed.
+- **Boundary:** Provider HTTP execution, reconciliation scheduling, and live provider evidence remain open. Migration has not been run against production.
+
 ## 2026-10-03 · TEAM-WEB-006 test registration correction
 
 - **Code:** Web PR #131 merged as `eadc5ac`.
