@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · Billing lifecycle contract revalidation
+
+The Web Razorpay/checkout/webhook focused suite passed **18/18 runnable tests**: immutable
+INR checkout snapshots, QR amount/currency binding, captured-only grants, subscription
+lifecycle ordering, failed-payment handling, partial/full refunds, replay/conflict/retry
+semantics, malformed-signature/body bounds, and owner-bound status. The migrated PostgreSQL
+ledger and webhook-claim integration cases remained skipped because Docker/PostgreSQL is
+unavailable in this execution environment; no live lifecycle acceptance is claimed.
+
+The local test env file contains shell-special characters and must not be sourced with a
+plain `.` command. One attempted source caused the shell to echo part of the webhook secret;
+the founder must rotate the Razorpay Test Mode webhook secret before any further provider
+test. No production order, webhook, entitlement, or database write occurred.
+
 ## 2026-10-02 · Current-source full-history fixture scan
 
 The full-history OWASP Juice Shop fixture (23,312 reachable commits, 906 files) was
