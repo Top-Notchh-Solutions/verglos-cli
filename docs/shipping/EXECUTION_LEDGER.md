@@ -1253,3 +1253,12 @@ Run `37115386171` reached terminal success: in-toto binding and all nine
 Ubuntu/macOS/Windows × Node 20/22/24 cells passed against merged CLI `18ab8e7`.
 This strengthens current-source qualification only; no checkbox, publication,
 deployment, migration, or production state changed.
+# 2026-10-03 — Vercel read-only access reconciliation
+
+- Linked Web project environment names and deployment metadata are now
+  inspectable through Vercel CLI without revealing secret values.
+- Production deployment is READY with `verglos.com` aliases and the expected
+  runtime build command.
+- This corrects the current access fact only; no billing lifecycle, deployment
+  mutation, migration, or production write was performed.
+- Evidence: `docs/shipping/evidence/vercel-readonly-access-2026-10-03.md`.

@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · Vercel access reconciliation
+
+Read-only `vercel env ls`, deployment listing, and deployment inspection now
+succeed for the linked Web project. Production is `READY` and aliases include
+`verglos.com`; secret values were not printed. Older notes describing missing
+Vercel access are historical and superseded for access discovery. Live billing
+reconciliation remains unperformed. Evidence:
+`docs/shipping/evidence/vercel-readonly-access-2026-10-03.md`.
+
 ## 2026-10-03 · merged-main platform matrix complete
 
 Run `37115386171` reached terminal success for merged CLI `18ab8e7`: in-toto
