@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · ACCEPT-003 evidence bundle progress
+
+- **Code/evidence:** Added private `acceptance:evidence:bundle` generator and ten-file hash manifest.
+- **Verification:** Bundle generation passed; secret scan passed; provider/customer/reviewer/browser/field-CWV/account-deletion gates remain explicitly open.
+- **Boundary:** Reproducibility packaging only; no release approval inferred.
+
 ## 2026-10-03 · ACCEPT-002 story map
 
 - **Code/evidence:** Private `9de1e3c` adds the frozen twelve-story map and makes the cross-repository runner emit it.

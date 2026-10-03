@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Acceptance · 2026-10-03 · ACCEPT-003 evidence bundle progress
+
+- **Artifact:** Private `acceptance-evidence-bundle-2026-10-03.json` hashes ten bounded evidence documents.
+- **Verification:** `pnpm --silent acceptance:evidence:bundle` passed its secret-like material scan and recorded six explicit open gates.
+- **Boundary:** The bundle has no reviewer signature, provider capture, customer consent, browser-human, field-CWV, or account-deletion proof; ACCEPT-003 remains open until those required evidence fields are supplied.
+
 ## Acceptance · 2026-10-03 · ACCEPT-002 story map
 
 - **Artifact:** Private `acceptance-story-map-2026-10-03.json` freezes twelve named story surfaces and their evidence/status.
