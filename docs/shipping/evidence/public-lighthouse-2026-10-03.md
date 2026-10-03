@@ -21,3 +21,8 @@ evidence that those plans are commercially activated.
 These measurements support public lab regression tracking only. QUAL-WEB-006
 and FINAL-WEB-007 remain open for authenticated organization-dashboard runtime,
 human screen-reader review, large datasets, and complete field-CWV evidence.
+
+An unauthenticated probe of `/orgs/demo`, `/orgs/demo/home`, and
+`/orgs/demo/releases` returned HTTP 404 with Clerk's signed-out protection
+headers. This confirms the public surface does not disclose a guessed tenant
+slug, but it is not authenticated member-dashboard evidence.

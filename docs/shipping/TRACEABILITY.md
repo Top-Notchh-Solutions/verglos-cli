@@ -5,6 +5,7 @@
 - **Targets:** `https://verglos.com/`, `/checkout`, `/detectors`, and `/docs`; read-only deployed responses.
 - **Result:** Accessibility 97–100 and Best Practices 100 across all four targets. Performance was 100/78/84/81 respectively; observed LCP was 1.3/4.3/4.0/4.4 seconds and CLS was 0 on every target.
 - **Boundary:** Lab data is not field CWV, authenticated dashboard evidence, or human screen-reader review. Checkout exposed only the verified Pro INR monthly/annual offers while signed out; no Team/Studio/Enterprise purchase capability is claimed.
+- **Additional smoke:** Unauthenticated probes of `/orgs/demo`, `/orgs/demo/home`, and `/orgs/demo/releases` returned HTTP 404 with Clerk signed-out protection headers, so guessed organization slugs are not disclosed. This does not replace an authenticated member-dashboard run.
 
 ## Verification · 2026-10-03 · current-source cross-platform matrix
 
