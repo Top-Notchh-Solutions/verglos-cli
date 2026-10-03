@@ -1,0 +1,18 @@
+{
+  "schema": "verglos.private.acceptance-story-map.v1",
+  "stories": [
+    { "id": "free-scan", "status": "substrate-covered", "evidence": ["cli-package-suite", "acceptance-corpus-verification-2026-10-03-v3.json"] },
+    { "id": "ci-decision", "status": "substrate-covered", "evidence": ["cli-package-suite", "TEAM-CLI-002"] },
+    { "id": "trivy-import", "status": "substrate-covered", "evidence": ["cli-package-suite", "QUAL-CLI-005"] },
+    { "id": "multi-tool-dedup", "status": "substrate-covered", "evidence": ["cli-package-suite"] },
+    { "id": "mismatch-incomplete", "status": "substrate-covered", "evidence": ["cli-package-suite", "web-composed-acceptance-substrates"] },
+    { "id": "exception-register", "status": "substrate-covered", "evidence": ["cli-package-suite", "web-composed-acceptance-substrates"] },
+    { "id": "hunt-isolation", "status": "qualification-open", "evidence": ["cli-package-suite", "hunt-docker-adversarial-2026-10-02.md"] },
+    { "id": "offline-record", "status": "substrate-covered", "evidence": ["cli-package-suite"] },
+    { "id": "modified-cli", "status": "runtime-qualification-open", "evidence": ["QUAL-WEB-001", "web-full-suite"] },
+    { "id": "studio-recipient", "status": "customer-acceptance-open", "evidence": ["web-composed-acceptance-substrates"] },
+    { "id": "enterprise-runner", "status": "provider-qualification-open", "evidence": ["web-composed-acceptance-substrates"] },
+    { "id": "account-deletion", "status": "implementation-open", "evidence": [] }
+  ],
+  "boundary": "This map distinguishes repository-owned substrate evidence from hosted, provider, customer, reviewer, browser-human, and account-deletion gates. No open status is represented as passed."
+}

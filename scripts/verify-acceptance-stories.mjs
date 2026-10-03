@@ -19,6 +19,15 @@ const cliRoot = process.env.VERGLOS_CLI_ROOT ?? "/tmp/verglos-cli-current.MphZDs
 const webRoot = process.env.VERGLOS_WEB_ROOT ?? join(workspaceRoot, "verglos-web");
 const outputPath = process.env.VERGLOS_ACCEPTANCE_STORIES_OUTPUT
   ?? join(privateRoot, "docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json");
+const storyMapPath = join(privateRoot, "docs/shipping/evidence/acceptance-story-map-2026-10-03.json");
+const storyMap = JSON.parse(readFileSync(storyMapPath, "utf8"));
+if (storyMap.schema !== "verglos.private.acceptance-story-map.v1" || !Array.isArray(storyMap.stories) || storyMap.stories.length !== 12) {
+  throw new Error("acceptance story map must contain the twelve frozen V1 story surfaces");
+}
+const storyIds = new Set(storyMap.stories.map((story) => story.id));
+if (storyIds.size !== storyMap.stories.length || storyMap.stories.some((story) => typeof story.status !== "string" || !Array.isArray(story.evidence))) {
+  throw new Error("acceptance story map contains duplicate or malformed story entries");
+}
 
 function run(label, cwd, args) {
   const startedAt = new Date().toISOString();
@@ -57,6 +66,7 @@ const result = {
   webRoot,
   cliCommit: execFileSync("git", ["-C", cliRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   webCommit: execFileSync("git", ["-C", webRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+  stories: storyMap.stories,
   results,
   allCommandsPassed: results.every((entry) => entry.exitCode === 0),
   note: "Substrate/regression evidence only. No hosted HTTP, provider, customer, reviewer, browser-human, field-CWV, migration, or production acceptance is claimed.",

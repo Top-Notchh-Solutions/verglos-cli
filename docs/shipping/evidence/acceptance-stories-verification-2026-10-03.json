@@ -1,10 +1,101 @@
 {
   "schema": "verglos.private.acceptance-stories-verification.v1",
-  "verifiedAt": "2026-10-03T10:27:27.340Z",
+  "verifiedAt": "2026-10-03T10:35:36.403Z",
   "cliRoot": "/tmp/verglos-cli-current.MphZDs",
   "webRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
   "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
   "webCommit": "763aab07a19f054dee41dc83ab9ec9f0743b4925",
+  "stories": [
+    {
+      "id": "free-scan",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "acceptance-corpus-verification-2026-10-03-v3.json"
+      ]
+    },
+    {
+      "id": "ci-decision",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "TEAM-CLI-002"
+      ]
+    },
+    {
+      "id": "trivy-import",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "QUAL-CLI-005"
+      ]
+    },
+    {
+      "id": "multi-tool-dedup",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "mismatch-incomplete",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "exception-register",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "hunt-isolation",
+      "status": "qualification-open",
+      "evidence": [
+        "cli-package-suite",
+        "hunt-docker-adversarial-2026-10-02.md"
+      ]
+    },
+    {
+      "id": "offline-record",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "modified-cli",
+      "status": "runtime-qualification-open",
+      "evidence": [
+        "QUAL-WEB-001",
+        "web-full-suite"
+      ]
+    },
+    {
+      "id": "studio-recipient",
+      "status": "customer-acceptance-open",
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "enterprise-runner",
+      "status": "provider-qualification-open",
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "account-deletion",
+      "status": "implementation-open",
+      "evidence": []
+    }
+  ],
   "results": [
     {
       "label": "cli-package-suite",
@@ -14,8 +105,8 @@
         "verglos",
         "test"
       ],
-      "startedAt": "2026-10-03T10:26:28.433Z",
-      "finishedAt": "2026-10-03T10:27:23.764Z",
+      "startedAt": "2026-10-03T10:34:36.020Z",
+      "finishedAt": "2026-10-03T10:35:32.918Z",
       "exitCode": 0,
       "summary": {
         "tests": 236,
@@ -24,7 +115,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "936eb005af5fd65365a8cd3aa628561b5709375e5442d58ed6e1a4e933adef69"
+      "outputSha256": "9f85fcc58198b0d953d5d824529cf049f40b9a2786a1a6b2fd39e46394daae0b"
     },
     {
       "label": "web-full-suite",
@@ -32,8 +123,8 @@
       "args": [
         "test"
       ],
-      "startedAt": "2026-10-03T10:27:23.764Z",
-      "finishedAt": "2026-10-03T10:27:26.822Z",
+      "startedAt": "2026-10-03T10:35:32.919Z",
+      "finishedAt": "2026-10-03T10:35:35.865Z",
       "exitCode": 0,
       "summary": {
         "tests": 905,
@@ -42,7 +133,7 @@
         "cancelled": 0,
         "skipped": 28
       },
-      "outputSha256": "ab31d5e1e2dcf7ee72881a2283b4ef5300a0014140e952886035d6d06927065a"
+      "outputSha256": "b893f39139c855b20cf3f94c097fc91f6185038f37a985d08175646113b0ef66"
     },
     {
       "label": "web-composed-acceptance-substrates",
@@ -59,8 +150,8 @@
         "src/lib/organizations/team-e2e.test.ts",
         "src/lib/qual/qual-web-suites.test.ts"
       ],
-      "startedAt": "2026-10-03T10:27:26.822Z",
-      "finishedAt": "2026-10-03T10:27:27.340Z",
+      "startedAt": "2026-10-03T10:35:35.865Z",
+      "finishedAt": "2026-10-03T10:35:36.403Z",
       "exitCode": 0,
       "summary": {
         "tests": 72,
@@ -69,7 +160,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "0d71f0e86e3aa69c40cc25316b9473d9698e68751209117ef6417c0914d31ef9"
+      "outputSha256": "ba15f42768e677a5ff197ace2fde34900251e8910393427844951167fc5da8c7"
     }
   ],
   "allCommandsPassed": true,

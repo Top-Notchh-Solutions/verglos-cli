@@ -82,3 +82,12 @@ verification-2026-10-03.json`. It bound CLI
 
 Each command's output hash is retained in the machine-readable result. The
 runner is private and fail-closed; a failed command exits non-zero.
+
+## Frozen story map
+
+`acceptance-story-map-2026-10-03.json` maps all twelve story surfaces named by
+the acceptance requirement to the evidence that exists and an explicit status.
+The map deliberately keeps Hunt isolation, modified-CLI runtime qualification,
+Studio recipient acceptance, Enterprise provider qualification, and account
+deletion open. A substrate test cannot silently promote any of those to a
+customer or production PASS.
