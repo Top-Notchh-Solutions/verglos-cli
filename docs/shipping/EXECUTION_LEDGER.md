@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · current-source cross-platform matrix
+
+- **Source/run:** CLI `origin/main` exact head `c17b335f2bfac6d9d63e6a8031f4c19811306296`; GitHub Actions run `37110048279`.
+- **Result:** in-toto release binding and all nine Ubuntu/macOS/Windows × Node 20/22/24 jobs passed. Each job built the current source, clean-installed public archives, exercised published `1.8.3` upgrade/rollback, typechecked, and ran tests.
+- **Boundary:** This is hosted qualification evidence, not publication or release approval. Trusted keyless provenance, legal/independent review, protected publishing, and customer acceptance remain open.
+
 ## 2026-10-03 · TEAM-WEB-006 persistence and enqueue routes
 
 - **Code:** Web PR #132 merged as `049f8ba`; additive migration `0021_scm_check_delivery.sql`.

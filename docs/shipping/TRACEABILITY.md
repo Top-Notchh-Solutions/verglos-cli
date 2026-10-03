@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-03 · current-source cross-platform matrix
+
+- **Run:** GitHub Actions platform matrix `37110048279`, exact CLI `origin/main` head `c17b335f2bfac6d9d63e6a8031f4c19811306296`.
+- **Result:** Official in-toto release binding plus all nine Ubuntu/macOS/Windows × Node 20/22/24 cells passed. Each cell completed current-source build, public archive clean consumer, published `1.8.3` → current `2.0.0-alpha.1` → published `1.8.3` transition, typecheck, and tests.
+- **Boundary:** Cross-platform qualification is now evidenced on hosted runners. This does not prove trusted keyless Sigstore/Fulcio/Rekor release identity, legal authorization, protected npm publishing, or GA release.
+
 ## Verification · 2026-10-03 · hosted current-source public-pack qualification
 
 - **Run:** GitHub Actions Self-scan `37109797227`, exact `origin/main` head `c17b335f2bfac6d9d63e6a8031f4c19811306296`.

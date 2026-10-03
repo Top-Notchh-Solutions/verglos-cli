@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · current-source cross-platform release qualification
+
+CLI `origin/main` head `c17b335f2bfac6d9d63e6a8031f4c19811306296` passed hosted
+platform matrix run `37110048279`: the official in-toto release-binding job and
+all nine Ubuntu/macOS/Windows × Node 20/22/24 cells completed successfully.
+Every cell built the current source, packed and clean-installed the public
+archives, exercised upgrade/rollback against published `verglos@1.8.3`, ran
+typecheck and tests, and uploaded evidence. This is current-source qualification
+only; Node 20/action and Ubuntu image migration warnings are GitHub annotations,
+not failures. DIST-001/003 and QUAL-CLI-006 remain unchecked pending release
+identity/provenance, legal clearance, protected publishing, and final acceptance.
+
 ## 2026-10-03 · TEAM-WEB-006 persistence and enqueue routes (Web PR #132)
 
 Web PR #132 merged as `049f8ba` after hosted type/schema, GitGuardian, Vercel,
