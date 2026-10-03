@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-03 · TEAM-WEB-006 test registration correction (Web PR #131)
+
+Web PR #131 merged as `eadc5ac` after hosted type/schema, GitGuardian, Vercel,
+and preview checks passed. The provider transport suite is now included in the
+configured Web `pretest` gate; the focused pretest slice passes 28/28 with 6
+environment-gated skips, and the full Web suite passes 859/837/22 with zero
+failures. This corrects test coverage registration only; TEAM-WEB-006 remains
+open for persistence, webhook routes, durable retries, reconciliation, and live
+provider evidence. No production operation occurred.
+
 ## 2026-10-03 · TEAM-WEB-006 provider transport substrate (Web PR #130)
 
 Web PR #130 merged as `27cd6c7` after hosted type/schema, GitGuardian, Vercel,

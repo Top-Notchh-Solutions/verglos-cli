@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · TEAM-WEB-006 test registration correction
+
+- **Code:** Web PR #131 merged as `eadc5ac`.
+- **Verification:** Configured focused slice 28/28 passed with 6 environment-gated skips; full Web suite 859 total / 837 passed / 22 skipped / 0 failed.
+- **Boundary:** Test registration only; provider persistence, routes, retries, reconciliation, and live evidence remain open.
+
 ## 2026-10-03 · TEAM-WEB-006 provider transport substrate
 
 - **Code:** Web PR #130 merged as `27cd6c7`.

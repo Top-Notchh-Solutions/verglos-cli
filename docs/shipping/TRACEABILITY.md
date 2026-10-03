@@ -1,5 +1,10 @@
 # Verglos V1 traceability
 
+## Progress · 2026-10-03 · TEAM-WEB-006 test registration
+- **Implementation:** Web PR #131 merged as `eadc5ac`.
+- **Verification:** Provider tests are registered in `pretest`; focused configured slice passes 28/28 with 6 environment-gated skips; full Web suite passes 859 total / 837 passed / 22 skipped / 0 failed.
+- **Boundary:** Registration correction does not add persistence, routes, retries, reconciliation, or live provider evidence. No production operation occurred.
+
 ## Progress · 2026-10-03 · TEAM-WEB-006 provider transport
 - **Implementation:** Web PR #130 merged as `27cd6c7`.
 - **Behavior:** Pure provider adapter builds GitHub Checks and GitLab commit-status requests from the redacted check contract; validates token/repository/commit boundaries, maps terminal decisions, and classifies retryable responses without returning response bodies.
