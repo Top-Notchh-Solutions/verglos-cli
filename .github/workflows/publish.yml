@@ -20,6 +20,15 @@ jobs:
   publish:
     name: Publish npm packages
     runs-on: ubuntu-latest
+    # The repository's `release` environment must require an explicit
+    # reviewer before any registry mutation.  Keeping this at the job level
+    # places the gate in front of both tag-triggered publication and the
+    # deliberate dist-tag promotion workflow.
+    environment:
+      name: release
+    concurrency:
+      group: verglos-release-publication
+      cancel-in-progress: false
 
     steps:
       - name: Checkout

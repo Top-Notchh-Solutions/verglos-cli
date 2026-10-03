@@ -22,6 +22,8 @@ test("publish workflow verifies the same public artifact boundaries as release c
   assert.match(workflow, /generate-spdx\.mjs/u);
   assert.match(workflow, /docs\/shipping|\.env|id_rsa|id_ed25519/u);
   assert.match(workflow, /npm publish .*--provenance/u);
+  assert.match(workflow, /environment:\s*\n\s+name: release/u, "publication must be protected by the release environment");
+  assert.match(workflow, /concurrency:\s*\n\s+group: verglos-release-publication/u, "publication must serialize registry mutations");
   assert.match(workflow, /verify-release-tag\.mjs "[$]GITHUB_REF_NAME"/u);
   assert.ok(workflow.indexOf("verify-release-tag.mjs") < workflow.indexOf("npm publish"), "tag/version integrity must pass before publication");
 });
