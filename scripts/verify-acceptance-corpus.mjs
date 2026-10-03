@@ -6,7 +6,9 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 const workspace = resolve(process.env.TOP_NOTCHH_WORKSPACE ?? "/Users/anuragyadav/Developer/TopNotchh-Workspace");
+const privateRoot = resolve(process.env.VERGLOS_PRIVATE_ROOT ?? process.cwd());
 const fixtureRoot = resolve(process.env.VERGLOS_ACCEPTANCE_FIXTURES ?? join(workspace, "acceptance-fixtures"));
+const internalFixtureRoot = resolve(process.env.VERGLOS_INTERNAL_ACCEPTANCE_FIXTURES ?? join(process.cwd(), "acceptance-fixtures"));
 const evidenceRoot = resolve(process.env.VERGLOS_ACCEPTANCE_EVIDENCE ?? join(workspace, ".local-evidence"));
 const cliCommit = process.env.VERGLOS_CLI_COMMIT ?? "955412516b96cc09393e78c43bf7d02b9abd05d9";
 const cliRoot = resolve(process.env.VERGLOS_CLI_ROOT ?? "/tmp/verglos-cli-current.MphZDs");
@@ -28,6 +30,11 @@ const artifacts = [
   { name: "contract-failure-valid", path: "packages/shared/fixtures/contracts/failure-valid.json", sha256: "3118bb3d9afd2e4946652202df6dd033961e599b1a90b4718439ca7bd05c1c7d", bytes: 492, license: "Apache-2.0", expectedCoverage: "valid-contract" },
   { name: "contract-failure-invalid-exit", path: "packages/shared/fixtures/contracts/failure-invalid-exit.json", sha256: "ca2f8670e99172216bae120a4199d897af578a56ec02143add878851898d324f", bytes: 492, license: "Apache-2.0", expectedCoverage: "invalid-exit-contract" },
   { name: "contract-failure-backward-compatible", path: "packages/shared/fixtures/contracts/failure-backward-compatible.json", sha256: "7db493a7ddc2c3265dee479d1cc43a5a6c8a7bb4238978b53883eb29f1bc30a5", bytes: 421, license: "Apache-2.0", expectedCoverage: "backward-compatible-contract" },
+];
+
+const internalFixtures = [
+  { name: "internal-idor", license: "UNLICENSED", reportDir: "docs/shipping/evidence/internal-fixtures/internal-idor" },
+  { name: "internal-agent-surface", license: "UNLICENSED", reportDir: "docs/shipping/evidence/internal-fixtures/internal-agent-surface" },
 ];
 
 function sha256(path) {
@@ -83,20 +90,39 @@ function verifyArtifact(artifact) {
   return { ...artifact, sourceCommit: cliCommit, sourcePath: path, integrity: "verified" };
 }
 
+function verifyInternalFixture(fixture) {
+  const root = join(internalFixtureRoot, fixture.name);
+  const authorization = readFileSync(join(root, "AUTHORIZATION.md"), "utf8");
+  for (const required of [/private synthetic security fixture/i, /local non-destructive.*scan/i, /findings may be stored/i, /expiry/i]) {
+    if (!required.test(authorization)) throw new Error(`${fixture.name}: internal authorization notice missing ${required}`);
+  }
+  const reportDir = join(privateRoot, fixture.reportDir);
+  const jsonPath = join(reportDir, "verglos-report.json");
+  const htmlPath = join(reportDir, "verglos-report.html");
+  const report = JSON.parse(readFileSync(jsonPath, "utf8"));
+  if (report.coverage?.status !== "complete" || (report.coverage?.limitations ?? []).length !== 0) throw new Error(`${fixture.name}: report coverage is incomplete`);
+  if (!Number.isInteger(report.coverage?.filesWalked) || report.coverage.filesWalked <= 0) throw new Error(`${fixture.name}: invalid filesWalked`);
+  return { ...fixture, cliCommit, filesWalked: report.coverage.filesWalked, findings: report.findings?.length ?? 0, score: report.score, coverage: report.coverage, reportJson: { sha256: sha256(jsonPath), bytes: readFileSync(jsonPath).byteLength }, reportHtml: { sha256: sha256(htmlPath), bytes: readFileSync(htmlPath).byteLength } };
+}
+
 const verified = fixtures.map(verifyFixture);
 const verifiedArtifacts = artifacts.map(verifyArtifact);
+const verifiedInternalFixtures = internalFixtures.map(verifyInternalFixture);
 const result = {
   schema: "verglos.private.acceptance-corpus-verification.v1",
   verifiedAt: new Date().toISOString(),
   cliCommit,
-  fixtureCount: verified.length + verifiedArtifacts.length,
+  fixtureCount: verified.length + verifiedArtifacts.length + verifiedInternalFixtures.length,
   repositoryFixtureCount: verified.length,
   artifactCount: verifiedArtifacts.length,
+  internalFixtureCount: verifiedInternalFixtures.length,
   allFullClones: verified.every((fixture) => fixture.shallow === false),
   allCompleteCoverage: verified.every((fixture) => fixture.coverage.status === "complete" && fixture.coverage.limitations.length === 0),
   allArtifactsIntact: verifiedArtifacts.every((artifact) => artifact.integrity === "verified"),
+  allInternalFixturesComplete: verifiedInternalFixtures.every((fixture) => fixture.coverage.status === "complete" && fixture.coverage.limitations.length === 0),
   fixtures: verified,
   artifacts: verifiedArtifacts,
+  internalFixtures: verifiedInternalFixtures,
 };
 const outputPath = process.env.VERGLOS_ACCEPTANCE_VERIFICATION_OUTPUT;
 if (outputPath) writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, { flag: "wx" });
