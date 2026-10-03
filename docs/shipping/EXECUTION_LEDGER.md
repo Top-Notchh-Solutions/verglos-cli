@@ -1155,3 +1155,8 @@ while they remain unresolved.
 - **Action:** Added shared organization-policy envelope verification and offline cache resolution, exported from `@verglos/shared`; added focused scope/digest/key/cache tests.
 - **Result:** Commit `f547cfa` merged as `b7c0799` in PR `#60`; focused tests 3/3, full typecheck, build, and diff checks passed. Hosted Self-scan, in-toto, and platform-matrix runs remain in progress after merge.
 - **Decision:** Preparatory TEAM-CLI-001 evidence only. HTTP authentication, persistent cache, CLI integration, and hosted policy API/runtime evidence remain open. No checkbox changed; no production operation.
+# 2026-10-03 · post-merge hosted and Web regression verification
+
+- **CLI:** TEAM-CLI-001 PR #60 Self-scan `37112986892` completed successfully. Matrix `37112986882` has green in-toto and completed OS/Node cells; four cells remain in progress.
+- **Web:** `main` read-only `pnpm test` passed 837/859 with 22 environment-gated skips and zero failures.
+- **Boundary:** No acceptance checkbox changed; authenticated hosted policy fetch, persistence, and runtime integration remain unproven. No production operation.

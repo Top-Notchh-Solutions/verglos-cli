@@ -919,3 +919,7 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 - **Code:** CLI `f547cfa` (PR `#60`, merged as `b7c0799`) adds `organization-policy.ts` and tests, exported through shared package index.
 - **Evidence:** Signed envelope verification binds exact organization/repository scope, policy digest, active Ed25519 key identity, and canonical signature bytes; offline resolution accepts only a matching unexpired cache. Focused tests 3/3, typecheck/build/diff green; hosted checks still running.
 - **Boundary:** TEAM-CLI-001 remains unchecked pending authenticated API fetch/cache persistence, CLI command wiring, and hosted policy integration. No production or database operation occurred.
+# 2026-10-03 · post-merge hosted and Web regression verification
+
+- **Evidence:** CLI Self-scan `37112986892` passed; platform matrix `37112986882` has four still-running cells and all completed cells green. Web `main` regression passed 837/859 with 22 skips and zero failures.
+- **Decision:** Verification strengthens current-source confidence but does not satisfy TEAM-CLI-001 hosted policy API evidence or any external acceptance gate. No production or database write.
