@@ -27,3 +27,9 @@ provider lifecycle evidence.
 An earlier probe against `/v1/qr_codes` returned HTTP 404; the provider's
 working resource path is `/v1/payments/qr_codes`. No further QR was created
 after the successful attempt.
+
+## Read-only status recheck
+
+- `GET /v1/payments/qr_codes/:id` returned HTTP 200 with QR status `active`.
+- `GET /v1/payments/qr_codes/:id/payments` returned HTTP 200 with `count=0`.
+- No payment identifier, capture, refund, or webhook event exists yet for this QR.
