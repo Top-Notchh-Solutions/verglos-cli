@@ -947,3 +947,8 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 
 - **Evidence:** Merged PR `#61` at `18ab8e7`; run `37113657045` completed successfully with all nine Ubuntu/macOS/Windows × Node 20/22/24 platform cells and in-toto binding green.
 - **Boundary:** TEAM-CLI-001 remains open for authenticated organization-policy HTTP fetch and user-facing command integration. No production or database operation occurred.
+
+# 2026-10-03 · nodejs-goof corpus expansion
+
+- **Evidence:** Full clone of Snyk Labs `nodejs-goof` at `add14ba59e98240d9e00a235dd7d42cd61ae9912` (Apache-2.0) scanned with CLI `9554125`; 25 files, 29 findings, score 9/critical, complete detector/provenance coverage.
+- **Boundary:** Public technical fixture only, with local authorization notice; not customer consent or vendor endorsement. `ACCEPT-001` remains open and no production state changed.

@@ -1186,3 +1186,9 @@ while they remain unresolved.
 
 - **Observation:** Earlier pending state was transient. Run `37113657045` reached terminal success at `09:46:04Z` with all nine platform cells and in-toto binding successful.
 - **Decision:** Hosted verification for merged cache persistence is accepted as evidence, while TEAM-CLI-001 remains open for missing remote API and command integration. No production operation.
+
+# 2026-10-03 · nodejs-goof fixture scan
+
+- **Action:** Cloned Snyk Labs `nodejs-goof` with complete history, added scope-limited public-fixture authorization, and scanned locally with CLI `9554125`, telemetry disabled and provenance enabled.
+- **Result:** Complete coverage; 25 files and 29 findings (1 critical, 13 high, 15 medium), score 9/critical. Report hashes are in the private acceptance corpus evidence.
+- **Decision:** Technical corpus progress only; no upload, exploit, production write, or acceptance checkbox change.
