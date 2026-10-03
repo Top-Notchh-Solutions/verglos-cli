@@ -1115,3 +1115,8 @@ while they remain unresolved.
 - **Commands:** `node scripts/pack-public-packages.mjs <temp-dir>` and package-surface/clean-consumer tests.
 - **Result:** pack fails before archive output because `license-inventory` cannot find metadata for foreign-platform optional `@esbuild/*` lockfile entries. Surface tests pass 6/7; the pack test is the single failure. This is reproduced with pnpm 9 and is not treated as a passing artifact.
 - **Boundary:** no source edit, no inventory bypass, no package publication, no production operation, no checkbox change.
+## 2026-10-03 · hosted current-source public-pack qualification
+
+- **Run:** GitHub Actions Self-scan `37109797227` at exact head `c17b335f2bfac6d9d63e6a8031f4c19811306296`.
+- **Result:** All job steps passed, including license inventory, notices/SBOM drift, six-archive pack, clean consumer, tests, pinned Hunt Docker adversarial suite, release-artifact verification, typecheck, package/public-boundary audits, and self-scan.
+- **Boundary:** hosted evidence only; no npm publication, release tag, production deployment, migration, or checkbox change.

@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-03 · hosted current-source public-pack qualification
+
+- **Run:** GitHub Actions Self-scan `37109797227`, exact `origin/main` head `c17b335f2bfac6d9d63e6a8031f4c19811306296`.
+- **Result:** Complete hosted job passed: lockfile license inventory, third-party notices, CycloneDX/SPDX drift, build, six public archive packing, clean consumer installation, test suite, pinned Hunt Docker adversarial suite, release-artifact verifier, typecheck, package/public-boundary audits, and self-scan.
+- **Boundary:** This supplies hosted Linux artifact evidence and supersedes the local macOS optional-package limitation for that run. It does not authorize npm publication, trusted keyless provenance, legal clearance, or GA release; those gates remain open.
+
 ## Verification · 2026-10-03 · current CLI public-pack qualification
 
 - **Source:** CLI `origin/main` at `c17b335`, clean read-only worktree.

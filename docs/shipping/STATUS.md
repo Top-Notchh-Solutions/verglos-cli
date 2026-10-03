@@ -939,3 +939,6 @@ Web `main` at `763aab0` completed `pnpm test`: 859 total, 837 passed, 22 environ
 # 2026-10-03 · current CLI public-pack qualification blocker
 
 The exact current CLI source (`c17b335`) cannot produce a locally valid public archive on this macOS install: the license inventory fails closed on missing metadata for foreign-platform optional `@esbuild/*` lockfile packages. Pinning pnpm `9.15.9` reproduces it. Package-surface checks pass 6/7; the pack test is not accepted. No bypass, archive publication, or checkbox change occurred.
+# 2026-10-03 · hosted current-source public-pack qualification
+
+GitHub Actions Self-scan `37109797227` passed at exact CLI `origin/main` head `c17b335`. Hosted Linux completed dependency-license inventory, notices/SBOM checks, six public archive packing, clean-consumer installation, tests, Hunt Docker adversarial checks, artifact verification, typecheck, package/public-boundary audits, and self-scan. This is evidence for the current unreleased source; publication, trusted provenance, legal clearance, and GA gates remain open.
