@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-03 · Web production build recheck
+
+- **Source:** Web `main` `763aab0`.
+- **Verification:** `pnpm build` passed through runtime-config check, Next.js compilation, type validation, static generation (37 pages), and route trace generation.
+- **Boundary:** Local Node 26 engine warning only; no production deployment, migration, or data write.
+
 ## 2026-10-03 · Web regression recheck after qualification evidence
 
 - **Source:** Web `main` `763aab0`.

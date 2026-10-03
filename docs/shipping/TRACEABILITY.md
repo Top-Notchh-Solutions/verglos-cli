@@ -1,5 +1,11 @@
 # Verglos V1 traceability
 
+## Verification · 2026-10-03 · Web production build recheck
+
+- **Source:** Web `main` at `763aab07a19f054dee41dc83ab9ec9f0743b4925`.
+- **Result:** `pnpm build` passed: runtime-config prebuild check, Next.js compilation, type validation, 37 static pages, and route trace generation.
+- **Boundary:** Local Node 26 emitted the repository's existing Node 22 engine warning. No deployment, migration, or production write occurred.
+
 ## Verification · 2026-10-03 · current Web regression recheck
 
 - **Source:** Web `main` at `763aab0`.
