@@ -6,6 +6,12 @@
 - **Verification:** `pnpm --silent acceptance:corpus:verify` reports `fixtureCount=10`, `allFullClones=true`, `allCompleteCoverage=true`, `allArtifactsIntact=true`.
 - **Boundary:** Technical corpus only; no customer consent or external acceptance inferred.
 
+### ACCEPT-001 addendum
+
+- **Code/evidence:** Private `ed2b826` adds two internal synthetic vulnerable fixtures and v3 corpus evidence.
+- **Verification:** `acceptance:corpus:verify` reports 12 items, 6 full clones, 4 intact contract artifacts, and 2 complete internal scans.
+- **Boundary:** No customer source, external repository access, exploit, or public finding publication.
+
 ## 2026-10-03 · ACCEPT-004 protocol freeze
 
 - **Code/docs:** Private commit `454a0cf` adds the external acceptance protocol, consent template, validator, and package script.

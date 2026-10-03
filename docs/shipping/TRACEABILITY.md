@@ -6,6 +6,13 @@
 - **Result:** Six full non-shallow public repositories plus four exact-source contract artifacts; all six scans have complete coverage and all four artifact digests/byte counts match CLI `955412516`.
 - **Boundary:** Public technical fixtures are not customers; no exploit, network callback, load test, customer consent, or external acceptance is claimed.
 
+### ACCEPT-001 addendum
+
+Private `ed2b826` adds two synthetic vulnerable fixtures (`internal-idor` and
+`internal-agent-surface`) with explicit internal authorization and complete
+current-source scans. The refreshed v3 manifest now covers twelve items and
+closes the non-public-fixture requirement without introducing customer data.
+
 ## Acceptance · 2026-10-03 · ACCEPT-004 protocol freeze
 
 - **Artifact:** Private `docs/shipping/acceptance/external-workflow-protocol.md` and `consent-record.template.md`.
