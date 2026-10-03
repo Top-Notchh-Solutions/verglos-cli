@@ -909,8 +909,8 @@ legal approval, or Hunt adjudication gates. No production operation occurred.
 - **Boundary:** DIST-006 remains unchecked. This is a decision contract only; no registry, engine, feed, signing, or deployment rollback/revocation operation was executed.
 # 2026-10-03 · CLI PR #59 protected publication environment
 
-- **Code:** CLI commit `d531540` (PR `#59`, pending merge) gates the publication job behind the `release` environment and serializes registry mutations with `verglos-release-publication` concurrency.
-- **Verification:** Local shared tests, publish workflow contract test, full typecheck, and diff checks passed; hosted checks pending.
+- **Code:** CLI commit `d531540` (PR `#59`, merged as `93dbcf3`) gates the publication job behind the `release` environment and serializes registry mutations with `verglos-release-publication` concurrency.
+- **Verification:** Local shared tests, publish workflow contract test, full typecheck, and diff checks passed; hosted Self-scan, in-toto, and completed platform cells passed. Windows Node 20 remained in progress at merge.
 - **Boundary:** DIST-002 remains unchecked until GitHub environment reviewers are configured and a real keyless trusted publication/attestation is completed. No publication or production operation occurred.
 
 - **Operational evidence:** GitHub environment `release` now has required reviewer `anuragyadav-git` and protected-branch policy (configured 2026-10-03T09:19:05Z). Configuration alone is not release evidence.
