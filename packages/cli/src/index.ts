@@ -86,6 +86,7 @@ import { printTelemetryConsentPreview, readTelemetryConsent, writeTelemetryConse
 import { readFile as readFileBytes } from "node:fs/promises";
 import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
 import { executeClientProjection } from "./client-projection.js";
+import { executeReleaseRollbackPlan } from "./release-rollback-plan.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -283,6 +284,17 @@ evidence.command("export <input> <output>")
 });
 
 const record = program.command("record").description("Verify local content-addressed Verglos records");
+const release = program.command("release").description("Plan bounded release rollback or revocation operations");
+release.command("rollback-plan <currentPath> <targetPath>")
+  .description("Validate an immutable rollback/revocation transition without executing provider writes")
+  .requiredOption("--reason <text>", "Bounded operator reason")
+  .option("--replacement <path>", "Replacement signing identity reference")
+  .option("--approved", "Explicitly approve this plan")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (currentPath: string, targetPath: string, opts: { reason: string; replacement?: string; approved?: boolean; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeReleaseRollbackPlan({ currentPath, targetPath, replacementPath: opts.replacement, reason: opts.reason, approved: Boolean(opts.approved), json: opts.json, quiet: opts.quiet }));
+  });
 record.command("create <membersRoot> <manifestPath> <outputRoot>")
   .description("Materialize a validated manifest and its payloads into a local record store")
   .option("--complete", "Require subject, policy-evaluation, and release-decision graph members")
