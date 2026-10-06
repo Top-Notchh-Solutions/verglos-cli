@@ -1654,3 +1654,12 @@ changed and no checkbox was closed.
 - This closes only the hosted Linux namespace evidence gap. HUNT-011 remains
   open for trusted publisher roots, supported recipe coverage, and independent
   review; no checkbox or production state changed.
+
+# 2026-10-06 — Razorpay sandbox read-only connectivity
+
+- Local Test Mode credentials authenticated successfully against Razorpay's
+  read-only payments endpoint (HTTP 200; expected response shape). No checkout,
+  QR, payment, webhook, entitlement, database, or production write occurred.
+- Evidence: `docs/shipping/evidence/razorpay-sandbox-readonly-2026-10-06.md`.
+- This confirms provider connectivity only; PLAN-WEB-011/012 still require the
+  complete catalog-bound payment and lifecycle/replay evidence.
