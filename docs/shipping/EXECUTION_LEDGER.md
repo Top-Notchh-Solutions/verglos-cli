@@ -1735,3 +1735,11 @@ changed and no checkbox was closed.
   still contains unresolved redistribution blockers. LIC-002/003 and
   DIST-002/003/006 remain open; no publication or backlog checkbox changed.
 - Evidence: `docs/shipping/evidence/cli-release-artifact-gate-2026-10-06.md`.
+
+# 2026-10-06 — CLI release-contract tests
+
+- Exact current source passed the package-surface, license-inventory, SBOM,
+  release-verifier, and publish-workflow contract tests: 15/15, zero failures.
+- The tests preserve the fail-closed license blocker behavior; no legal,
+  publication, production, or backlog state changed.
+- Evidence: `docs/shipping/evidence/cli-release-contract-tests-2026-10-06.md`.
