@@ -1088,3 +1088,20 @@ The current local Web `main` was scanned with CLI commit `955412516b96cc09393e78
 # 2026-10-03 · CLI PR #61 hosted matrix completed
 
 The hosted workflow for merged CLI PR #61 (`18ab8e7`) initially appeared stalled, but run `37113657045` completed successfully at `09:46:04Z`. All nine Ubuntu/macOS/Windows × Node 20/22/24 jobs and the in-toto release binding passed. This verifies the cache-persistence code at the merged head; it does not close TEAM-CLI-001, which still lacks authenticated organization-policy HTTP fetch and user-facing CLI integration. No production operation occurred.
+
+# 2026-10-06 · current Docker runtime evidence
+
+The exact current CLI source at `955412516` was run with Docker 29.7.2 and a
+pinned Debian image digest. Hunt's enabled Docker adversarial scenarios passed
+15/15 with zero failures, covering non-root, read-only mounts, denied network,
+no socket/device access, no-new-privileges, resource bounds, redaction, and
+signal handling. The host-level namespace scenario remains unqualified on this
+macOS runner; HUNT-011, independent review, trusted recipe provenance, and the
+beta-gated command remain open. Evidence is in
+`docs/shipping/evidence/hunt-docker-adversarial-2026-10-06.md`.
+
+The retained hosted Self-scan artifact was also rechecked: Ubuntu passed all
+16/16 Docker runtime adversarial scenarios, including private PID/IPC
+namespaces. This resolves the host-platform evidence gap only; the recipe,
+publisher-root, independent-review, and beta-command gates remain open. See
+`docs/shipping/evidence/hunt-docker-hosted-linux-2026-10-06.md`.

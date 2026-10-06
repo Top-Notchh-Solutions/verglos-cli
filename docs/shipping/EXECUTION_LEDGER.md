@@ -1629,3 +1629,28 @@ changed and no checkbox was closed.
   correct repository.
 - No source, public repository, deployment, production database, or backlog
   checkbox changed in this reconciliation check.
+
+# 2026-10-06 — Hunt Docker adversarial runtime qualification
+
+- With Docker engine 29.7.2 and pinned image
+  `debian@sha256:7c7b2c966bc9ee8cedfeef67e0e279108992c77681fa595db4a9d65c06ccc587`,
+  the current CLI Hunt package test completed with zero failures. All 15
+  enabled runtime adversarial scenarios passed; the macOS-host namespace
+  scenario remained skipped because namespace identifiers are not available
+  from the host process.
+- Evidence: `docs/shipping/evidence/hunt-docker-adversarial-2026-10-06.md`.
+- This is stronger Docker runtime evidence, not Linux host namespace,
+  independent-review, trusted-publisher, or full Hunt-command acceptance.
+  HUNT-011 and its dependent gates remain open; no checkbox changed.
+
+# 2026-10-06 — hosted Linux Hunt namespace qualification
+
+- Rechecked GitHub Actions Self-scan run `37113682760` at head
+  `18ab8e7da3003186b80346c3ee4a58c5d8211626` and downloaded its retained Hunt
+  artifact. On `ubuntu-latest`, the pinned Docker suite passed 16/16 runtime
+  adversarial scenarios, including the PID/IPC namespace-private check that is
+  unavailable on macOS. The overall run concluded success.
+- Evidence: `docs/shipping/evidence/hunt-docker-hosted-linux-2026-10-06.md`.
+- This closes only the hosted Linux namespace evidence gap. HUNT-011 remains
+  open for trusted publisher roots, supported recipe coverage, and independent
+  review; no checkbox or production state changed.
