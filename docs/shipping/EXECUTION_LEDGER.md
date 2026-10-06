@@ -1478,3 +1478,13 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/cli-self-scan-2026-10-06.md`.
 - The critical result is retained; this is qualification evidence only and did
   not alter source, production, release, or backlog state.
+
+# 2026-10-06 — self-scan finding triage
+
+- Triage confirmed the critical AGENT-002 finding targets the operator's
+  external `~/.cursor/mcp.json`, not tracked Verglos source. The two high
+  AUTH-003 findings are URL-component checks in `isSafeNetworkOrigin`, not
+  password comparisons. Raw counts were preserved; no unsafe code change or
+  operator credential mutation was made.
+- Evidence: `docs/shipping/evidence/cli-self-scan-triage-2026-10-06.md`.
+- No checkbox, production, release, or backlog state changed.
