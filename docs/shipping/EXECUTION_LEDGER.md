@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-06 · exact-source acceptance harness rerun
+
+- **Source:** Persistent pinned CLI worktree `955412516b96cc09393e78c43bf7d02b9abd05d9`; Web `763aab07a19f054dee41dc83ab9ec9f0743b4925`.
+- **Verification:** CLI 236/236, Web 877/905 with 28 explicit environment-gated skips and 0 failures, composed Studio/Enterprise/Team/quality substrates 72/72; all commands exited 0.
+- **Boundary:** Substrate/regression evidence only. Provider lifecycle, customer workflows, independent review, authenticated browser-human checks, field-CWV, migrations, and production acceptance remain open.
+
 ## 2026-10-06 · Hunt Docker runtime revalidation
 
 - **Source/runtime:** Exact unreleased CLI commit `955412516b96cc09393e78c43bf7d02b9abd05d9`; Docker Desktop 29.7.2 on macOS/aarch64; pinned Alpine digest.
