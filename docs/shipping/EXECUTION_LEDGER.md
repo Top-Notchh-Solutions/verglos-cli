@@ -1861,3 +1861,16 @@ changed and no checkbox was closed.
 - QUAL-WEB-005 remains open because this is not the transaction worker or an
   external privacy/customer acceptance run. Backlog remains **218 checked / 51
   unchecked / 269 total**.
+
+# 2026-10-06 — account-deletion concurrency invariant
+
+- Web PR #141 (`72b651c9b2274c68e315f7a4256ff78109b07e2a`) merged as
+  `710a79fd`. Migration `0025` and the schema now enforce one pending deletion
+  request per user; the route translates only PostgreSQL uniqueness race `23505`
+  into an idempotent response and rethrows unrelated persistence failures.
+- Hosted Verify, Vercel, and GitGuardian passed. Local route contracts passed
+  3/3; typecheck, Drizzle check, ordered migration check (26), and diff check
+  passed. No production/database write or migration occurred.
+- QUAL-WEB-005 remains open for the reviewed deletion worker, legal/customer-held
+  record evidence, consent inventory, and runtime acceptance. Backlog remains
+  **218 checked / 51 unchecked / 269 total**.
