@@ -475,6 +475,74 @@ evidence, and release decision. A pending QR, a clicked polling button, a
 provider dashboard screenshot, a test fixture, or a green unit test alone is
 not payment acceptance evidence.
 
+---
+
+# Session, tooling, deadline, and machine-load constraints — 2026-10-07
+
+These constraints apply to the entire remaining shipping pass. They accelerate
+execution without weakening any product, security, privacy, evidence, or
+release requirement above.
+
+## Runtime tooling availability
+
+- The dedicated authenticated Chrome debug session is an approved qualification
+  instrument. Before any browser/runtime batch, verify that Chrome DevTools MCP
+  can list/select the Verglos page and that the local debugging endpoint is
+  reachable on 127.0.0.1:9222. If the browser restarts, re-verify the page ID
+  and authentication state before using it.
+- Use Chrome DevTools for rendered behavior, network status, console errors,
+  accessibility snapshots, and performance traces. Do not capture or record
+  cookies, authorization headers, payment credentials, database URLs, private
+  response bodies, or personal data. Redact payment identifiers in private
+  evidence.
+- Docker is expected to be available for bounded integration, webhook,
+  PostgreSQL, sandbox, and adversarial qualification. Verify Docker health before
+  starting a Docker batch; do not assume a previous daemon or container is still
+  valid.
+- Browser and Docker availability are execution prerequisites, not acceptance
+  evidence by themselves. Runtime claims still require the exact test output,
+  route/fixture scope, version, and limitation record.
+
+## Twenty-four-hour shipping window
+
+- The remaining implementation and qualification pass is timeboxed to the next
+  24 hours of active work. Maintain a live critical path and the next three
+  independent batches; run CLI, Web, browser, and Docker work in parallel only
+  when their resources and write boundaries are disjoint.
+- Prioritize, in order: security blockers and production safety; billing and
+  payment-method implementation; critical Web/CLI acceptance gates; hosted and
+  cross-repository verification; release gates; then final corpus/POC work.
+- Do not spend the window on marketing polish, speculative abstractions, or
+  repeated unchanged suites. Keep public pricing, marketing, npm publication,
+  and launch operations frozen until the completion standard passes.
+- The deadline does not authorize skipped tests, fabricated provider/customer
+  evidence, unreviewed production changes, unsafe credential use, or a reduced
+  definition of complete. If the window ends with gates open, report the exact
+  open gates, evidence missing, owner, and next action; leave the goal active.
+
+## Machine-load budget
+
+- Prefer focused tests during implementation and one required full suite per
+  completed phase. Do not rerun unchanged full suites merely to fill time.
+- Bound Docker resources, worker concurrency, repository size, browser trace
+  duration, polling intervals, and log/output volume. Reuse existing images,
+  caches, and worktrees when safe.
+- Avoid simultaneous CPU- or memory-heavy builds, full Web and CLI suites,
+  Docker databases, browser traces, and corpus scans. Schedule heavy batches or
+  run independent lightweight checks in parallel.
+- Stop only the exact runaway test, container, process, or trace you started;
+  never use broad destructive cleanup against the workspace or user data.
+- Record skips caused by resource limits separately from product failures. A
+  resource-limited skip is not acceptance evidence and cannot close a gate.
+
+## Resume rule
+
+Use this complete file as the operative goal for the resumed session. Start each
+fat batch by recording its backlog IDs, acceptance evidence, repository/write
+boundary, browser/Docker requirement, machine-load plan, and production-state
+status. Continue independent code and evidence work when production access or
+provider state is blocked; do not wait idly for external state.
+
 Primary provider references:
 - https://razorpay.com/docs/server-integration/python/test-app/
 - https://razorpay.com/docs/payments/payment-gateway/ecommerce-plugins/integration-steps/

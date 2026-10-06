@@ -54,3 +54,21 @@ the QR must not be scanned or paid.
 Implement the provider-hosted all-method checkout abstraction, tests, and
 preview/test-mode qualification before any production billing change. Keep
 public pricing and marketing frozen until the evidence matrix passes.
+
+## Operating constraints for the final shipping pass
+
+- Keep the dedicated Chrome DevTools debug session available for runtime
+  qualification. Verify 127.0.0.1:9222 and the current authenticated page before
+  each browser batch; never record cookies, authorization headers, payment
+  credentials, database URLs, or personal data.
+- Keep Docker available for bounded integration, webhook, PostgreSQL, sandbox,
+  and adversarial checks. Verify daemon health before each batch and record
+  resource-limited skips separately from product failures.
+- Complete the remaining active work within 24 hours. Parallelize only disjoint
+  CLI/Web/browser/Docker work, keep the next three independent batches live,
+  and prioritize safety, billing, critical acceptance, hosted verification, and
+  release gates. The deadline never waives evidence, tests, or production
+  preflight.
+- Protect the machine: bound concurrency, Docker resources, trace duration,
+  polling, logs, and corpus size; avoid simultaneous heavy builds/suites; stop
+  only exact processes started by the current batch; never use broad cleanup.
