@@ -2,7 +2,7 @@
 
 ## Scope
 
-Web branch `feat/github-app-org-contract`, commit `afb48dc`, PR #144. This
+Web branch `feat/github-app-org-contract`, commits `afb48dc` and `a496608`, PR #144. This
 batch implements the code-side substrate for GITHUB-WEB-001..003:
 
 - immutable GitHub account, installation, and repository IDs;
@@ -25,12 +25,15 @@ batch implements the code-side substrate for GITHUB-WEB-001..003:
 - `node scripts/check-public-boundary.mjs` passed.
 - `pnpm licenses:test`, `pnpm sbom:check`, and negative-boundary checks passed before commit.
 - `git diff --check` passed.
+- Hosted `pnpm audit --audit-level=high` passed after the lockfile override was
+  raised from `sharp >=0.35.4` to `sharp >=0.35.5` for CVE-2026-96889.
 
 ## Hosted state
 
-PR #144 is pushed to `anuragyadav-git/verglos-web`. Vercel Preview Comments
-and GitGuardian passed at the time of capture; Vercel deployment and the
-hosted type/schema check were still pending during bounded polling.
+PR #144 is pushed to `anuragyadav-git/verglos-web`. Vercel deployment, Vercel
+Preview Comments, GitGuardian, and hosted type/schema all passed. Hosted run
+`37486358263` completed in 2m48s; repository warnings were limited to the
+existing GitHub Actions Node 20 and Ubuntu image migration annotations.
 
 ## Boundary
 

@@ -10,8 +10,9 @@
 - **Verification:** 862 total / 840 passed / 22 explicit environment-gated
   skips / 0 failures; focused GitHub/SCM tests 16/16; typecheck, build, schema,
   27-migration ordering, public-boundary, SBOM, license, negative-boundary, and
-  diff checks passed. Preview Comments and GitGuardian passed; Vercel and
-  hosted type/schema checks were pending at bounded poll cutoff.
+  diff checks passed. Hosted run `37486358263` passed dependency audit,
+  Vercel, Preview Comments, GitGuardian, and hosted type/schema after the
+  `sharp >=0.35.5` security-floor fix (`a496608`).
 - **Boundary:** Code-side evidence only. No live App install/reauthorization,
   provider token exchange, permission cutover, production migration/deployment,
   database write, customer workflow, or release acceptance occurred.
