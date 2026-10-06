@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-06 · QUAL-CLI-006 / DIST-001 / DIST-003 release-artifact qualification
+
+- **Code:** Merged CLI `dacd286`; no public source change was needed. The
+  isolated worktree used a temporary all-supported-architectures pnpm overlay
+  only to install every lockfile optional-package manifest for legal inventory.
+- **Verification:** `pnpm build` 8/8; release-script tests 20/20; package
+  contents 6/6; packed manifests 6/6; public boundary; exact prerelease tag;
+  clean consumer; and upgrade/rollback all pass. Hosted in-toto remains green
+  in run `37497389053`; local official `in-toto-verify` was unavailable.
+- **Gate:** strict release verification correctly fails on eight unresolved
+  redistribution blockers: six BlueOak-1.0.0 packages, nested
+  `benchmark@1.0.0` under `fast-uri@3.1.7`, and source-missing
+  `minipass-pipeline@1.2.4`. QUAL-CLI-006 and DIST-001/003 remain unchecked.
+  No publication, tag, deployment, production access, or customer operation
+  occurred; R-041 remains open.
+- **Evidence:** `docs/shipping/evidence/qual-cli-006-dist-release-artifacts-2026-10-06.md`.
+
 ## 2026-10-06 · PLAN-CLI-001/004 opaque catalog and cache qualification
 
 - **Code:** CLI commits `937705b`, `fa4a131`, and `714cb3e`, PR #71 merged as
@@ -17,35 +34,32 @@
   tenant mapping, v2 issuance, database read/write, deployment, provider,
   customer, publish, or release operation occurred. R-041 remains open.
 
-## Next three independent batches · queue after `dacd286`
+## Next three independent batches · queue after release-artifact qualification
 
-1. **QUAL-CLI-006 + DIST-001/003 release-artifact qualification** — deps:
-   merged CLI `dacd286`, current notice/SBOM generators, and official validator
-   tools. Repo: `verglos-cli`; implementation boundary is local archive,
-   clean-consumer, format, checksum, and provenance evidence only. Existing
-   evidence: hosted run `37497389053` passed the nine-cell matrix, self-scan,
-   and in-toto. Active blocker: local `pnpm licenses list --json` lacks cached
-   `turbo@2.10.6` metadata; legal clearance, protected trusted publishing, and
-   keyless release identity remain open. No production operation is required.
-
-2. **PLAN-CLI-004 supported-version compatibility fixtures** — deps:
-   Web PLAN-WEB-002/003 contract and merged CLI `dacd286`. Repos:
+1. **PLAN-CLI-004 supported-version compatibility fixtures** — deps: Web
+   PLAN-WEB-002/003 contract and merged CLI `dacd286`. Repos:
    `verglos-cli` plus read-only Web contract inspection; implementation boundary
    is frozen v1/v2 token, catalog-version, malformed-payload, and old-client
-   migration fixtures. Existing evidence: CLI hosted matrix/self-scan/in-toto
-   green and Web v2 route tests green. Blocker: deployed signer, tenant
-   mapping, and live activation integration remain absent; R-041 prohibits
-   production access. No production write is authorized.
+   migration fixtures. Evidence: CLI hosted matrix/self-scan/in-toto green and
+   release code-side tests green. Blocker: deployed signer, tenant mapping, and
+   live activation integration; R-041 prohibits production access. No write.
 
-3. **QUAL-WEB-006 authenticated dashboard accessibility/performance** — deps:
+2. **QUAL-WEB-006 authenticated dashboard accessibility/performance** — deps:
    current Web dashboard routes and existing production Lighthouse snapshots.
    Repo: `verglos-web` `main` at `cbc0f5a`; implementation boundary is
    read-only browser/runtime evidence for keyboard, screen reader, responsive,
-   large-data, and field-CWV behavior, with code fixes only if a reproducible
-   defect appears. Existing evidence covers production `/checkout` and
-   `/account` Lighthouse plus dashboard keyboard/landmark code. Blockers are
-   human screen-reader, large-dataset, and complete field-CWV runs. No deploy
-   or production data change is required.
+   large-data, and field-CWV behavior, with code fixes only for reproducible
+   defects. Blockers are human screen-reader, large-dataset, and complete
+   field-CWV runs. No deploy or production data change.
+
+3. **DIST-001/003 legal and protected-release closure** — deps: the generated
+   six archives and sidecars from this qualification plus legal review of the
+   eight listed inventory blockers. Repo: private shipping ledger and CLI
+   release workflow; implementation boundary is review/rerun only, with no
+   source bypass of the strict verifier. Evidence required: zero-blocker
+   inventory, strict verifier, protected trusted publishing/keyless identity,
+   and official in-toto/Sigstore release binding. Blockers: legal decision and
+   protected release authority; R-041 still forbids production access.
 
 ## 2026-10-06 · TEAM-CLI-001 hosted policy authority substrate
 

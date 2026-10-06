@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## QUAL-CLI-006 / DIST-001 / DIST-003 qualification · 2026-10-06
+
+The merged CLI `dacd286` passed 20/20 release-script tests, six-package
+packing, package/boundary/tag audits, clean-consumer installation, and the
+`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` upgrade/rollback transition. The strict
+verifier remains OPEN because the inventory contains eight unresolved
+redistribution reviews: six BlueOak-1.0.0 packages, the nested
+`benchmark@1.0.0`/`fast-uri@3.1.7` license conflict, and missing source for
+`minipass-pipeline@1.2.4`. No publication, tag, deployment, production access,
+or customer operation occurred. R-041 remains open. Evidence:
+`docs/shipping/evidence/qual-cli-006-dist-release-artifacts-2026-10-06.md`.
+
 ## PLAN-CLI-001/004 addendum · 2026-10-06
 
 CLI PR #71 (`937705b`, `fa4a131`, `714cb3e`) merged as `dacd286` hardens the

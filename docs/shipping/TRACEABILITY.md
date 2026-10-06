@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## Release-artifact qualification · 2026-10-06 · merged CLI `dacd286`
+
+- **Implementation boundary:** isolated qualification only; no public source
+  change, publish, tag, deployment, production access, or customer operation.
+- **Verification:** 20/20 release-script tests, 6/6 package contents and
+  packed-manifest audits, public-boundary audit, exact `v2.0.0-alpha.1` tag
+  match, six-archive clean consumer, and upgrade/rollback all pass. Hosted
+  in-toto evidence remains green in run `37497389053`.
+- **Open gate:** strict release verification rejects eight redistribution
+  blockers: six BlueOak-1.0.0 packages, one nested-license conflict, and one
+  missing source. QUAL-CLI-006 and DIST-001/003 remain unchecked; R-041 still
+  blocks production access.
+
 ## Opaque entitlement catalog/cache · 2026-10-06 · CLI PR #71
 
 - **Implementation:** CLI commits `937705b`, `fa4a131`, and `714cb3e`, merged as

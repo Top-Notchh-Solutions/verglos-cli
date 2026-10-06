@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-06 · QUAL-CLI-006 / DIST-001 / DIST-003 release-artifact qualification
+
+Merged CLI `dacd286` builds successfully and the isolated release qualification
+passes 20/20 release-script tests, six-package packing, package/boundary/tag
+audits, clean-consumer installation, and the `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`
+upgrade/rollback transition. The strict release verifier remains open on eight
+redistribution reviews: six BlueOak terms, one nested-license conflict, and one
+missing source. QUAL-CLI-006 and DIST-001/003 remain unchecked; no publication,
+tag, deployment, production access, or customer operation occurred. R-041
+remains open. Private evidence:
+`docs/shipping/evidence/qual-cli-006-dist-release-artifacts-2026-10-06.md`.
+
 ## 2026-10-06 · PLAN-CLI-001/004 opaque catalog and cache qualification
 
 CLI commits `937705b`, `fa4a131`, and `714cb3e` merged PR #71 as `dacd286`; they preserve the server-owned Web
