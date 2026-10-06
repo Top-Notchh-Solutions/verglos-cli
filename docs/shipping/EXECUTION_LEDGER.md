@@ -1808,3 +1808,17 @@ changed and no checkbox was closed.
   independent review and final provenance/recipe gates. No production or
   customer data was accessed.
 - Evidence: `docs/shipping/evidence/qual-cli-004-hunt-evidence-pack-2026-10-06.md`.
+
+# 2026-10-06 — bounded Hunt supported-recipe catalog
+
+- CLI PR #67 (`30467e6`) merged as `9725e13`. The Hunt package now validates
+  the fixed A1 `utf8-contains` recipe contract and records positive, negative,
+  timeout, and adapter-failure fixture expectations. Unknown commands,
+  allowlisted network, non-unconditional cleanup, and non-redacted recipes are
+  refused before execution.
+- Hunt tests/typecheck/build passed; hosted matrix `37462319147`, Self-scan,
+  and in-toto passed across all nine platform cells. This is substrate progress
+  only; HUNT-008/HUNT-009 stay open for trusted/licensed provenance,
+  approval/entitlement wiring, functional command integration, and independent
+  review. No production or customer data was accessed.
+- Evidence: `docs/shipping/evidence/hunt-008-supported-recipe-catalog-2026-10-06.md`.
