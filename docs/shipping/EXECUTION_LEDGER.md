@@ -1459,3 +1459,12 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/release-artifact-verifier-2026-10-06.md`.
 - This confirms the release process cannot bypass legal review; no artifact was
   published and no checkbox changed.
+
+# 2026-10-06 — license blocker dependency map
+
+- Mapped all eight inventory blockers to their lockfile dependency paths and
+  installed package metadata, including the nested `benchmark` package under
+  `fast-uri` and source-missing `minipass-pipeline`.
+- Evidence: `docs/shipping/evidence/license-blocker-dependency-map-2026-10-06.md`.
+- This is a legal-review handoff only. No package was reclassified, removed,
+  published, or marked approved; no checkbox changed.
