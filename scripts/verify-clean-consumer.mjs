@@ -48,5 +48,8 @@ try {
   }
   console.log(`clean consumer installed ${archives.length} archives, imported all libraries, executed Verglos ${result.stdout.trim()}, and confirmed no external engine installation`);
 } finally {
-  await rm(consumer, { recursive: true, force: true });
+  // Windows can release npm/Node handles a moment after the child exits.
+  // Bounded retries keep cleanup deterministic without hiding a persistent
+  // failure or leaving the release check to fail on an otherwise valid run.
+  await rm(consumer, { recursive: true, force: true, maxRetries: 10, retryDelay: 250 });
 }
