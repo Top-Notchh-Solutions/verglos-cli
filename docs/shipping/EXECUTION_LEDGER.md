@@ -1781,3 +1781,17 @@ changed and no checkbox was closed.
   persistence, and customer acceptance evidence. No checkbox, production, or
   database state changed.
 - Evidence: `docs/shipping/evidence/studio-cli-client-projection-2026-10-06.md`.
+
+# 2026-10-06 — CLI release rollback planning command
+
+- CLI PR #65 (`fc05fb4`) merged as `7946234`. The bounded operator command now
+  exposes rollback/revocation decisions while refusing unapproved, mutable,
+  same-reference, history-invalidating, or replacement-less signing-identity
+  transitions.
+- Focused tests 2/2, typecheck/build/diff, hosted nine-cell matrix, Self-scan,
+  and in-toto binding passed. One transient Windows Node 24 build crash was
+  rerun successfully; it was a runner/toolchain exit, not a source diagnostic.
+- DIST-006 remains open pending authenticated provider execution, rollback /
+  recovery evidence, and independent qualification. No checkbox, production,
+  or database state changed.
+- Evidence: `docs/shipping/evidence/dist-006-rollback-plan-2026-10-06.md`.
