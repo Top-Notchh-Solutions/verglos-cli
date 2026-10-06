@@ -35,7 +35,12 @@ customer-consent, reviewer, or production-credential evidence blocks. Checkbox
 counts are recomputed from this private authoritative backlog after every
 substantial batch. No item is checked for preparatory code alone.
 
-Production access remains paused under R-041 until credential rotation and
-verification. This addendum authorizes planning and code/evidence work, not an
-unreviewed production write, payment charge, npm publication, release tag, or
-marketing claim.
+Founder authorizes Codex to perform the required production reads, writes,
+migrations, deployments, billing/payment qualification, and operational cutovers
+within the two Verglos repositories and their authorized providers. This does
+not remove the reviewed preflight boundary: the exact operation, dry run,
+backup/restore evidence, rollback plan, bounded execution, and post-write
+verification must be recorded before an irreversible operation runs. No extra
+permission prompt is required once that operation-specific preflight is
+satisfied. If a prerequisite is missing, only that operation pauses; independent
+shipping work continues and the blocker is recorded precisely.
