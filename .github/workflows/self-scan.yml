@@ -120,14 +120,17 @@ jobs:
           VERGLOS_HUNT_TEST_DIGEST: sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a
         run: |
           set -o pipefail
-          pnpm --filter @verglos/hunt test 2>&1 | tee hunt-docker-adversarial.log
+          node scripts/hunt-adversarial-evidence.mjs .artifacts/hunt-adversarial 2>&1 | tee hunt-docker-adversarial.log
 
       - name: Upload Hunt adversarial evidence
         if: ${{ success() }}
         uses: actions/upload-artifact@v4
         with:
           name: hunt-docker-adversarial-${{ github.sha }}
-          path: hunt-docker-adversarial.log
+          path: |
+            hunt-docker-adversarial.log
+            .artifacts/hunt-adversarial/report.json
+            .artifacts/hunt-adversarial/run.log
           if-no-files-found: error
           retention-days: 14
 
