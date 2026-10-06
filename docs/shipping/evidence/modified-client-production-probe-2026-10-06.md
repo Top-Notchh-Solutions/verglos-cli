@@ -37,6 +37,15 @@ an authenticated session:
 Each returned the auth-protected 404 surface; no data or attacker-controlled
 tenant projection was returned.
 
+Malformed/unknown bearer probes combined with `as_plan=studio` also failed
+closed:
+
+```text
+Bearer vg_fake       -> plan=free, active=false, reason=not_found
+Bearer forged-token  -> plan=free, active=false, reason=invalid_token
+Bearer <blank>       -> plan=free, active=true, reason=none
+```
+
 ## Boundary
 
 This is production boundary evidence for anonymous forged parameters only. It
