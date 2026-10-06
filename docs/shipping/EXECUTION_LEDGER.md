@@ -1716,3 +1716,12 @@ changed and no checkbox was closed.
 - The verifier still leaves Hunt, modified-client runtime, customer,
   provider, and account-deletion boundaries open. No checkbox, production, or
   deployment state changed.
+
+# 2026-10-06 — CLI license-inventory verifier qualification
+
+- Exact current CLI source passed `node --test
+  scripts/license-inventory.test.mjs`: 5/5 tests, 0 failures, exit 0. The
+  tests preserve deterministic and fail-closed license/SBOM behavior.
+- Evidence: `docs/shipping/evidence/cli-license-inventory-tests-2026-10-06.md`.
+- Manual license classifications remain unresolved; no publication or backlog
+  checkbox change occurred.
