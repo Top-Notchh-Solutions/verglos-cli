@@ -13,6 +13,17 @@
   GITHUB-WEB-001..004, provider permission/token exchange, production changes,
   and acceptance remain open.
 
+## Billing/Razorpay method truth · 2026-10-06 · Web PR #145
+
+- **Implementation:** `src/lib/billing/payment-methods.ts`, checkout page/client,
+  QR route selection, runtime-config validation, and `.env.example` contract.
+- **Verification:** Focused tests 25/25; full Web 863/841/22/0; hosted run
+  `37487362873` passed typecheck, tests, schema, build, dependency audit, SBOM,
+  license, public-boundary, and secret checks.
+- **Boundary:** PLAN-WEB-013 substrate only. Account-enabled methods,
+  provider lifecycle matrix, and production reconciliation remain open under
+  PLAN-WEB-014/015.
+
 ## Acceptance · 2026-10-03 · ACCEPT-006/007 protocol freeze
 
 - **Artifacts:** Private comprehension-test and Hunt-adjudication protocols with validators.

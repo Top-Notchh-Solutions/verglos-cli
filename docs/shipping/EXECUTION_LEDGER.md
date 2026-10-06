@@ -20,6 +20,19 @@
 - **Tracker:** GITHUB-WEB-001..004 and dependent final gates remain unchecked;
   R-043 remains open.
 
+## 2026-10-06 · Razorpay payment-method catalog substrate
+
+- **Code:** Web PR #145, `3ce60b8`, merged to `main` as `d6ce773`.
+- **Behavior:** Optional server-side method declaration, fail-closed parsing,
+  implemented-adapter filtering, UPI QR method selection, and redacted route
+  handling. Unsupported payment methods are not advertised or accepted.
+- **Verification:** Focused tests 25/25; full Web 863/841/22/0; local and
+  hosted typecheck, tests, schema/migration, build, dependency audit, SBOM,
+  license, secret, Vercel, and GitGuardian checks passed.
+- **Boundary:** No Razorpay account read/configuration change, provider payment
+  or lifecycle test, production billing action, or deployment. PLAN-WEB-014/015
+  remain unchecked.
+
 ## 2026-10-06 · serial disposable-Postgres integration revalidation
 
 - **Runtime:** Disposable local `postgres:15-alpine` database `verglos_test` on `127.0.0.1:55432`; no production connection.

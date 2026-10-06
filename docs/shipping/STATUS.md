@@ -19,6 +19,21 @@ provider permission/token exchange, org cutover, production migration,
 deployment, or customer acceptance occurred. Private evidence:
 `docs/shipping/evidence/github-app-identity-contract-2026-10-06.md`.
 
+## 2026-10-06 · Razorpay payment-method catalog substrate (Web PR #145)
+
+Web PR #145 commit `3ce60b8` merged to Web `main` as `d6ce773`. The server-side
+Razorpay method catalog parses optional provider-declared methods, preserves
+the existing UPI QR path when unset, advertises only implemented adapters,
+and fails closed for unsupported, malformed, duplicate, or empty declarations.
+Focused tests pass 25/25; full Web verification is 863 total / 841 passed /
+22 explicit environment-gated skips / 0 failures; hosted run `37487362873`,
+Vercel, Preview Comments, GitGuardian, dependency audit, SBOM, license, and
+secret checks pass. This is not account-method or lifecycle evidence: no
+Razorpay account configuration was read or changed and no provider payment,
+refund, renewal, replay, production billing action, or deployment occurred.
+PLAN-WEB-014/015 remain open. Private evidence:
+`docs/shipping/evidence/razorpay-method-catalog-contract-2026-10-06.md`.
+
 ## 2026-10-03 · Vercel access reconciliation
 
 Read-only `vercel env ls`, deployment listing, and deployment inspection now
