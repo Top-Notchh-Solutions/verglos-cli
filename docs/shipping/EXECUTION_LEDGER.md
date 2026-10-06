@@ -1984,3 +1984,15 @@ changed and no checkbox was closed.
   existing environment-gated PostgreSQL/integration skips and 0 failures.
   The local Node 26 versus repository Node 22 engine warning remains an
   explicit limitation; hosted Vercel verification passed on the exact head.
+
+# 2026-10-06 — current acceptance-story substrate rerun
+
+- Private `pnpm --silent acceptance:stories:verify` completed successfully
+  against CLI `ad6ee1479c887c59eb6630da4754a2e0b7b4045e` and Web `6bc6bcd1fbd51ad77e27a67463ba0e5c9572025d`.
+- CLI package suite: **241/241 passed**. Web configured suite: **880/908
+  passed**, 28 existing environment-gated skips, 0 failures. Composed
+  Studio/Enterprise/Team/quality substrates: **74/74 passed**.
+- Evidence JSON was refreshed with command output hashes. This remains
+  substrate/regression evidence only: no hosted HTTP, provider, customer,
+  reviewer, browser-human, field-CWV, migration, or production acceptance is
+  claimed. No production/database operation occurred.

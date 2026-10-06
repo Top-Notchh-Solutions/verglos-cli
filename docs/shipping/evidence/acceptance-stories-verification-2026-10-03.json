@@ -1,10 +1,10 @@
 {
   "schema": "verglos.private.acceptance-stories-verification.v1",
-  "verifiedAt": "2026-10-06T10:45:25.765Z",
+  "verifiedAt": "2026-10-06T14:27:47.340Z",
   "cliRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local/verglos-cli-current",
   "webRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
-  "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
-  "webCommit": "24232fd94a80d20e0d01ea80e758a3f77fd13dca",
+  "cliCommit": "ad6ee1479c887c59eb6630da4754a2e0b7b4045e",
+  "webCommit": "6bc6bcd1fbd51ad77e27a67463ba0e5c9572025d",
   "stories": [
     {
       "id": "free-scan",
@@ -105,17 +105,17 @@
         "verglos",
         "test"
       ],
-      "startedAt": "2026-10-06T10:44:21.810Z",
-      "finishedAt": "2026-10-06T10:45:21.499Z",
+      "startedAt": "2026-10-06T14:26:40.847Z",
+      "finishedAt": "2026-10-06T14:27:43.522Z",
       "exitCode": 0,
       "summary": {
-        "tests": 236,
-        "pass": 236,
+        "tests": 241,
+        "pass": 241,
         "fail": 0,
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "9fdbfa623806bf19ca6e7d13e554dfddf329061b417eb3401dd792666b649532"
+      "outputSha256": "ef8beef875086aefed6bc0713e31e7a9c29bc9f56d2fce4f5d8b2a9d58ee774b"
     },
     {
       "label": "web-full-suite",
@@ -123,17 +123,17 @@
       "args": [
         "test"
       ],
-      "startedAt": "2026-10-06T10:45:21.499Z",
-      "finishedAt": "2026-10-06T10:45:25.217Z",
+      "startedAt": "2026-10-06T14:27:43.522Z",
+      "finishedAt": "2026-10-06T14:27:46.808Z",
       "exitCode": 0,
       "summary": {
-        "tests": 905,
-        "pass": 877,
+        "tests": 908,
+        "pass": 880,
         "fail": 0,
         "cancelled": 0,
         "skipped": 28
       },
-      "outputSha256": "2eca24399bc07b42df3c3275bb505bb8aaf694a4822de9499015320b2e4c35cc"
+      "outputSha256": "cfd0d61424f1b44fdbed0cf134802502230aa21eb0e4e87dbc0cb61123e4769e"
     },
     {
       "label": "web-composed-acceptance-substrates",
@@ -150,17 +150,17 @@
         "src/lib/organizations/team-e2e.test.ts",
         "src/lib/qual/qual-web-suites.test.ts"
       ],
-      "startedAt": "2026-10-06T10:45:25.217Z",
-      "finishedAt": "2026-10-06T10:45:25.765Z",
+      "startedAt": "2026-10-06T14:27:46.808Z",
+      "finishedAt": "2026-10-06T14:27:47.340Z",
       "exitCode": 0,
       "summary": {
-        "tests": 72,
-        "pass": 72,
+        "tests": 74,
+        "pass": 74,
         "fail": 0,
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "312728aa8924e4c92bccb95cd35c3f163f8afa240192eb137e35be5691974f7d"
+      "outputSha256": "90747a481107c5091625826c04f97b8a7c6862296c65c8a7c00c11581ff537e7"
     }
   ],
   "allCommandsPassed": true,
