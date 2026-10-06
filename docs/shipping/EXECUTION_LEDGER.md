@@ -1966,3 +1966,17 @@ changed and no checkbox was closed.
 - No endpoint was added on top of that mismatch. `R-042` records the required
   canonical-alignment decision, cross-repository fixture tests, and any
   versioned migration/reconciliation needed before activation.
+
+# 2026-10-06 — versioned Web canonical policy contract
+
+- Web PR #143 (`b575084`) merged as `6bc6bcd`. It adds a side-by-side recursive
+  canonical JSON serializer and `canonicalPolicyDocumentDigest` matching the
+  CLI policy contract, with a nested fixture whose digest is
+  `sha256:d25b1fc5b6487ecf9f75fb46179c698c8fe3ce7f6a783d9e790f088785931bc8`.
+- The existing Web `digestPolicyDocument` path remains unchanged deliberately;
+  no stored policy rows were rewritten and no hosted endpoint was enabled.
+  TEAM-CLI-001 remains open pending row inventory, versioned migration/rollback
+  review, endpoint wiring, and PLAN-CLI-001 activation evidence.
+- Local Web policy lifecycle tests passed 12/12, typecheck passed, and Vercel
+  Preview completed successfully for the exact merge head. No production or
+  database operation occurred.

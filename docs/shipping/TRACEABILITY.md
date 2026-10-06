@@ -1058,5 +1058,14 @@ TEAM-CLI-001 implementation is present at CLI commits `04b48fb` / `390b0c0`:
 signed, versioned organization/repository-bound policy verification, bounded
 remote fetch, atomic private cache, offline expiry checks, and a CLI command
 that exposes source and policy digest. Focused cache/fetch tests pass 4/4.
+
+- **TEAM-CLI-001 canonical contract progress (unchecked):** Web PR #143
+  (`b575084`, merged `6bc6bcd`) adds a versioned recursive canonical JSON
+  serializer and digest helper with a nested fixture matching the CLI digest.
+  The legacy Web digest path is intentionally unchanged until stored-row
+  inventory and a reviewed migration/rollback plan exist. Policy tests 12/12,
+  Web typecheck, and Vercel Preview passed. Hosted endpoint activation,
+  production reconciliation, and PLAN-CLI-001 evidence remain open under
+  `R-042`; no production operation occurred.
 The hosted policy API and production PLAN-CLI activation are not qualified, so
 the backlog item remains open.
