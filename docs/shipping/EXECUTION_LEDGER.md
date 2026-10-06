@@ -1568,3 +1568,12 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/account-performance-trace-2026-10-06.md`.
 - Lab-only evidence; no field-CWV, screen-reader, large-dataset, deployment,
   production write, or backlog checkbox claim.
+
+# 2026-10-06 — authenticated account mobile performance trace
+
+- Production `/account` mobile/touch trace at 390×844 recorded lab LCP 768 ms,
+  TTFB 97 ms, render delay 671 ms, and CLS 0.00. CrUX field data remains
+  unavailable. Browser viewport was restored to 1280×800 afterward.
+- Evidence: `docs/shipping/evidence/account-mobile-performance-trace-2026-10-06.md`.
+- Lab-only evidence; no field-CWV, screen-reader, large-dataset, deployment,
+  production write, or backlog checkbox claim.
