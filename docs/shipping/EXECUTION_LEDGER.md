@@ -1832,3 +1832,18 @@ changed and no checkbox was closed.
 - DIST-001 remains open for final release/legal qualification and dependent
   product surfaces. No production, customer, or database state was accessed.
 - Evidence: `docs/shipping/evidence/dist-public-private-boundary-2026-10-06.md`.
+
+# 2026-10-06 — account-deletion request boundary
+
+- Web PR #139 (`077a7526b7a39af29cb0a1c9b2865b27cbe0af87`) merged as
+  `317102f`. The additive `account_deletion_requests` migration and
+  authenticated same-origin route provide explicit confirmation, bounded hosted
+  data kinds, private no-store responses, and idempotent pending requests.
+- Hosted verification `37468093583` passed full Web tests, type/schema,
+  migration ordering, build, public-boundary, dependency/license/security,
+  GitGuardian, and Vercel checks. Local focused route tests passed 2/2.
+- QUAL-WEB-005 remains open: no production migration or deletion was run, and
+  the reviewed legal-hold/customer-held-record worker, consent inventory, and
+  deletion acceptance run are still missing. Backlog remains **218 checked / 51
+  unchecked / 269 total**.
+- Evidence: `docs/shipping/evidence/qual-web-005-account-deletion-boundary-2026-10-06.md`.
