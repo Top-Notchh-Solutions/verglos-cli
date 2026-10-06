@@ -1931,3 +1931,14 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/qualification-pass-2026-10-06.md`.
   No public code changed, no PR was opened, and no production operation ran in
   this qualification pass. Backlog remains **218 checked / 51 unchecked / 269 total**.
+
+# 2026-10-06 — authenticated dashboard runtime boundary
+
+- Attached to the existing Chrome debugging session and inspected the deployed
+  authenticated route. `/account/dashboard` resolved to the legacy `/account`
+  dashboard with Free-state navigation; no organization slug or `/orgs/*`
+  surface was available in this session.
+- This proves browser attachment and authenticated account rendering only. It
+  does not prove organization-dashboard, screen-reader, large-dataset, or field
+  CWV acceptance. QUAL-WEB-006 remains open. Evidence:
+  `docs/shipping/evidence/authenticated-dashboard-runtime-2026-10-06.md`.

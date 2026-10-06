@@ -1127,3 +1127,10 @@ Qualification pass update 2026-10-06: current CLI forced Turbo graph completed
 tests, typecheck, Drizzle check, and ordered 26-migration check. This changed no
 runtime or production state. Production access remains paused until the database
 credential exposure tracked as `R-041` is rotated and verified.
+
+Authenticated browser runtime update 2026-10-06: the attached founder session
+reached the deployed legacy `/account` dashboard and rendered Free-state account
+navigation, but exposed no organization slug or `/orgs/*` dashboard route.
+This confirms the browser attachment works while leaving PRO-001/QUAL-WEB-006
+organization-dashboard, screen-reader, large-dataset, and field-CWV evidence
+open. Evidence: `docs/shipping/evidence/authenticated-dashboard-runtime-2026-10-06.md`.
