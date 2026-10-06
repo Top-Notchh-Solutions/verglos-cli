@@ -1725,3 +1725,13 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/cli-license-inventory-tests-2026-10-06.md`.
 - Manual license classifications remain unresolved; no publication or backlog
   checkbox change occurred.
+
+# 2026-10-06 — CLI release-artifact gate qualification
+
+- The disposable release pipeline assembled all six current archives and
+  required sidecars, passed clean-consumer installation/import/version checks,
+  and generated checksums.
+- The final verifier refused the artifact because the dependency inventory
+  still contains unresolved redistribution blockers. LIC-002/003 and
+  DIST-002/003/006 remain open; no publication or backlog checkbox changed.
+- Evidence: `docs/shipping/evidence/cli-release-artifact-gate-2026-10-06.md`.
