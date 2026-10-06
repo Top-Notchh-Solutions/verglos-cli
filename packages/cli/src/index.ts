@@ -88,6 +88,7 @@ import { executeRecordSign } from "./record-sign.js";
 import { executeConfigInspect } from "./config-inspect.js";
 import { executeRecordHeader } from "./record-header.js";
 import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
+import { executeClientProjection } from "./client-projection.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -263,6 +264,14 @@ record.command("project <storeRoot> <manifestPath>")
   .option("--quiet", "Suppress human output")
   .action(async (storeRoot: string, manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
     process.exit(await executeRecordProject(storeRoot, manifestPath, opts.json, opts.quiet));
+  });
+record.command("project-client <projectionPath> <approvalPath>")
+  .description("Validate a redacted client projection against an explicit workspace/record upload approval")
+  .requiredOption("--organization <id>", "Actor organization identifier")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (projectionPath: string, approvalPath: string, opts: { organization: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeClientProjection(projectionPath, approvalPath, opts.organization, opts.json, opts.quiet));
   });
 record.command("header <storeRoot> <manifestPath>")
   .description("Show the verified decision-first Release Record header")

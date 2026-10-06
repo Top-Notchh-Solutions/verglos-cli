@@ -102,3 +102,4 @@ export * from "./record-signing.js";
 export * from "./record-provenance.js";
 export * from "./record-sigstore.js";
 export * from "./organization-policy.js";
+export * from "./client-projection.js";
