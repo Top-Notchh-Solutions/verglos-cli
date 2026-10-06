@@ -1847,3 +1847,17 @@ changed and no checkbox was closed.
   deletion acceptance run are still missing. Backlog remains **218 checked / 51
   unchecked / 269 total**.
 - Evidence: `docs/shipping/evidence/qual-web-005-account-deletion-boundary-2026-10-06.md`.
+
+# 2026-10-06 — account-deletion execution gate
+
+- Web PR #140 (`3aec3b2bba22dcd5a689488e2cfd22ce9eb2e39f`) merged as
+  `b749c419`. The pure execution gate refuses cross-user, non-pending,
+  empty-scope, active-hold, incomplete hosted deletion, out-of-scope mutation,
+  and customer-held-record alteration cases; it completes only after the
+  before/after inventory qualifier passes.
+- Hosted Verify, Vercel, and GitGuardian all passed. Local quality suite passed
+  20/20, with typecheck, Drizzle check, migration ordering, and diff checks
+  clean. No production/database writes or migrations occurred.
+- QUAL-WEB-005 remains open because this is not the transaction worker or an
+  external privacy/customer acceptance run. Backlog remains **218 checked / 51
+  unchecked / 269 total**.
