@@ -72,3 +72,30 @@ public pricing and marketing frozen until the evidence matrix passes.
 - Protect the machine: bound concurrency, Docker resources, trace duration,
   polling, logs, and corpus size; avoid simultaneous heavy builds/suites; stop
   only exact processes started by the current batch; never use broad cleanup.
+
+## Whole-shipping POC matrix
+
+- “Complete in 24 hours” means complete the entire authoritative backlog and
+  its evidence, not merely the critical path or payment implementation.
+- Final POC qualification must use pinned live repositories or explicitly
+  authorized customer repositories, with consent, bounded scope, private
+  evidence, and retention/deletion handling. Public fixtures are technical
+  evidence, not customer acceptance.
+- Cover the revenue journey from pre-revenue/₹0 through approximately ₹1 crore,
+  ₹10 crore, ₹50 crore, and ₹100 crore annual-revenue scenarios, using the
+  operational differences as test dimensions rather than inventing customers,
+  revenue, or traction.
+- Exercise every canonical plan in the verified catalog—Free, Pro, Team,
+  Studio, and Enterprise where canonical after reconciliation—across actual
+  entitlements, limits, organization roles, billing state, upgrade/downgrade,
+  denials, audit evidence, CLI behavior, and Web behavior.
+- Include small-product, multi-user SaaS, multi-tenant/team, and
+  large-scale/enterprise-like repository shapes, with held-out scenarios for
+  false-positive, false-truth, coverage, and performance review.
+- Record exact repository/authorization, commit, license, plan, revenue-band
+  scenario, runtime/configuration, findings, resource use, reproducibility,
+  adjudication, and limitations privately. Do not publish repository contents,
+  customer data, credentials, or competitive intelligence.
+- If the 24-hour target expires with any backlog item or matrix evidence open,
+  keep the goal active and report the exact gap; never call a partial launch
+  whole shipping.
