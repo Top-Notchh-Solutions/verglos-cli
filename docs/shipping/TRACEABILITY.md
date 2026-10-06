@@ -1069,3 +1069,15 @@ that exposes source and policy digest. Focused cache/fetch tests pass 4/4.
   `R-042`; no production operation occurred.
 The hosted policy API and production PLAN-CLI activation are not qualified, so
 the backlog item remains open.
+
+## Scope addendum · 2026-10-06 · GitHub org, payments, acceptance corpus
+
+`GITHUB-WEB-001..004` trace to immutable GitHub account/repository identity, App
+installation/token lifecycle, delivery replay/lifecycle reconciliation, and an
+authorized organization cutover. `PLAN-WEB-013..015` trace to a server/catalog
+payment-method surface and account-specific Razorpay test evidence; provider
+documentation is not runtime evidence. `ACCEPT-011..014` trace to private
+non-shallow TypeScript/JavaScript fixtures, reproducible current-source scans,
+held-out false-positive review, and a final regression/go-no-go record. None of
+these items is accepted by this planning entry; no public repository receives
+fixture data, credentials, customer data, or private competitive intelligence.

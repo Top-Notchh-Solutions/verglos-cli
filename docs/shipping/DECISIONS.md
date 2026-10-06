@@ -50,3 +50,18 @@ This file is newly created because no tracked `DECISIONS.md` existed in the priv
 ## Blanket authorization scope (2026-09-16)
 
 Founder authorized: agent-selected durable queue provider (bucket B), agent-selected object-storage strategy (deferred to Studio implementation window; V1 uses Neon jsonb columns), agent-drafted contributor DCO policy (LIC-005 accepted at CLI PR #41), and routine branch/push/PR/merge/shipping actions without additional approval pauses. Production DB writes remain subject to the separately documented exact-operation preflight and postflight contract; blanket shipping authorization does not replace that evidence boundary.
+
+## Founder scope decision · 2026-10-06
+
+Verglos remains GitHub-first, but “GitHub-aligned” means a real App/org model:
+immutable account and repository IDs, installation permissions/tokens, multiple
+repositories, delivery-id replay protection, lifecycle events, and bounded
+cutover evidence. The existing provider-neutral SCM substrate is not sufficient
+for that claim. Razorpay support is expanded to every payment method actually
+enabled in the account/test configuration, represented by a server-side catalog;
+we will not advertise unavailable methods or infer support from documentation.
+Final validation will use private manifests and full non-shallow public
+TypeScript/JavaScript fixtures chosen by architecture shape. Public CLI history
+must never contain customer data, credentials, proprietary source, private
+reports, or competitive intelligence. The faster path is fat, dependency-ready
+phase PRs with one acceptance boundary at a time, not helper-only checkbox work.

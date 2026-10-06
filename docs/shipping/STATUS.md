@@ -1134,3 +1134,21 @@ navigation, but exposed no organization slug or `/orgs/*` dashboard route.
 This confirms the browser attachment works while leaving PRO-001/QUAL-WEB-006
 organization-dashboard, screen-reader, large-dataset, and field-CWV evidence
 open. Evidence: `docs/shipping/evidence/authenticated-dashboard-runtime-2026-10-06.md`.
+
+## 2026-10-06 · shipping scope expansion and acceleration mode
+
+Founder expanded the critical path with `GITHUB-WEB-001..004` (GitHub App/org
+architecture and live cutover evidence), `PLAN-WEB-013..015` (provider-supported
+Razorpay payment-method catalog and test/production reconciliation), and
+`ACCEPT-011..014` (private full-clone TS/JS architecture corpus, reproducible
+analysis, held-out false-truth review, and final regression/go/no-go). These are
+open items; the backlog intentionally grows rather than being gamed downward.
+
+Execution is now one dependency-ready acceptance boundary per phase PR/repo:
+finish implementation, integration, focused tests, and evidence together;
+parallelize independent CLI/Web tracks; run one full suite per merged phase;
+switch to independent work when provider/customer/reviewer evidence blocks; and
+recount from the private authoritative backlog after every substantial batch.
+No checkbox changes from planning alone. R-041 still blocks further production
+access until credential rotation and verification; no payment or database write
+occurred in this update.

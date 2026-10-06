@@ -129,3 +129,21 @@ rehearsal, and exact additive SQL review. Post-write verification reached 26
 migration rows and confirmed new SCM/deletion tables/indexes with invariant row
 counts unchanged. This does not close provider cutover, deletion acceptance,
 backup/restore operations, or independent-review gates.
+
+## Scope addendum · 2026-10-06
+
+Before Gate 3/6 can claim GitHub organization alignment, `GITHUB-WEB-001..004`
+must prove immutable account/repository binding, App installation permissions and
+token lifecycle, delivery replay/lifecycle reconciliation, and a bounded
+authorized-org cutover. Provider-neutral SCM tests alone are insufficient.
+
+Before Gate 4/6 can claim complete billing support, `PLAN-WEB-013..015` must
+derive methods from the server/catalog configuration and qualify every Razorpay
+method enabled for the account in test mode (cards, UPI, netbanking, wallets
+where enabled), including success/failure, capture, refund, renewal, replay, and
+out-of-order events. Documentation does not substitute for account evidence.
+
+Before Gate 6 can claim final acceptance, `ACCEPT-011..014` must use private
+non-shallow fixture manifests, held-out repositories, reproducible current-source
+scans, license/scope records, false-positive correction review, and a dated
+regression/go-no-go. No customer acceptance may be inferred from public fixtures.
