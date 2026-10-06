@@ -1875,6 +1875,19 @@ changed and no checkbox was closed.
   record evidence, consent inventory, and runtime acceptance. Backlog remains
   **218 checked / 51 unchecked / 269 total**.
 
+# 2026-10-06 — strict six-package release verification
+
+- CLI PR #70 (`67a132c`) merged as `3a0959a`. Publish-time strict verification
+  now requires exactly the six public npm archives and one shared version.
+- Local verifier tests passed 4/4, publish/platform contracts 2/2, and full CLI
+  typecheck passed 13/13 tasks. Hosted platform run `37472923540` passed
+  in-toto plus all Ubuntu/macOS/Windows Node 20/22/24 cells; self-scan
+  `37472923665` passed.
+- No tag, npm publish, provenance attestation, deployment, or production write
+  occurred. DIST-001/002/003 remain open for protected publication, legal
+  clearance, final package acceptance, and rollback evidence.
+- Evidence: `docs/shipping/evidence/dist-strict-six-package-verifier-2026-10-06.md`.
+
 # 2026-10-06 — account-deletion audit history
 
 - Web PR #142 (`0438316`) merged as `3127199`. The authenticated status route

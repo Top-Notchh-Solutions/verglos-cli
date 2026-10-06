@@ -1105,3 +1105,10 @@ The retained hosted Self-scan artifact was also rechecked: Ubuntu passed all
 namespaces. This resolves the host-platform evidence gap only; the recipe,
 publisher-root, independent-review, and beta-command gates remain open. See
 `docs/shipping/evidence/hunt-docker-hosted-linux-2026-10-06.md`.
+
+Distribution update 2026-10-06: CLI PR #70 (`67a132c`, merged `3a0959a`) adds
+strict publish-time verification of exactly six public archives with one shared
+version. Local verifier 4/4, workflow/platform contracts 2/2, and typecheck
+13/13 passed; hosted platform run `37472923540` and self-scan `37472923665`
+passed. No tag, npm publication, provenance attestation, deployment, legal
+approval, or production operation occurred; DIST-001/002/003 remain open.

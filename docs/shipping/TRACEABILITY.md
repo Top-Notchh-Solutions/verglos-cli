@@ -1030,3 +1030,12 @@ records exact source commits, output hashes, exit codes, and parsed totals, and
 fails closed on any non-zero command. Run result: CLI 236/236; Web 877/905 with
 28 environment skips and zero failures; composed Web 72/72. This advances
 ACCEPT-002/003 reproducibility without asserting external acceptance.
+
+# 2026-10-06 DIST strict six-package verifier
+
+CLI PR #70 (`67a132c`) merged as `3a0959a`. The publish workflow invokes strict
+artifact verification requiring exactly the six public npm archives at one
+shared version. Local verifier 4/4, workflow/platform contracts 2/2, typecheck
+13/13, hosted platform run `37472923540`, and self-scan `37472923665` passed.
+This is preparatory evidence only; protected publication, legal clearance,
+actual provenance, and rollback evidence remain open.

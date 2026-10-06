@@ -115,3 +115,10 @@ passed 15/15 enabled adversarial runtime scenarios against a pinned Debian image
 under Docker 29.7.2. This does not close Gate 2 or Gate 6: host-level Linux
 namespace qualification, independent review, trusted recipe publisher roots,
 and external acceptance remain absent.
+
+Distribution evidence addendum (2026-10-06): CLI PR #70 (`3a0959a`) makes the
+publish workflow fail closed unless the release contains exactly the six public
+npm archives at one shared version. Hosted platform run `37472923540` and
+self-scan `37472923665` passed. DIST-001/002/003 remain open pending protected
+trusted publication, legal clearance, actual provenance evidence, and final
+release-governance qualification.
