@@ -7,6 +7,7 @@ export * from "./docker-adapter.js";
 export * from "./docker-runner.js";
 export * from "./docker-sandbox-adapter.js";
 export * from "./restricted-process-adapter.js";
+export * from "./supported-recipe-catalog.js";
 
 export async function runHunt(
   report: ScanResult,
