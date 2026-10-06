@@ -1577,3 +1577,14 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/account-mobile-performance-trace-2026-10-06.md`.
 - Lab-only evidence; no field-CWV, screen-reader, large-dataset, deployment,
   production write, or backlog checkbox claim.
+
+# 2026-10-06 — authenticated account Lighthouse mobile audit
+
+- Lighthouse navigation audit on production `/account` scored Accessibility
+  100, Best Practices 100, SEO 58, and Agentic Browsing 67; 45 audits passed
+  and 3 failed. Failed SEO checks (`is-crawlable`, `canonical`, `llms-txt`)
+  are expected for this authenticated private route and were not “fixed” by
+  changing public metadata.
+- Evidence: `docs/shipping/evidence/account-lighthouse-mobile-2026-10-06.md`.
+- No public-copy change, deployment, production write, or backlog checkbox
+  change occurred.
