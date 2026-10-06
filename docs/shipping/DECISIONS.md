@@ -2,6 +2,19 @@
 
 This file is newly created because no tracked `DECISIONS.md` existed in the private shipping worktree when checked on 2026-09-14. It is local-only and must not be pushed to the public CLI or Web repositories.
 
+## PLAN-CLI-001 opaque catalog/cache boundary · 2026-10-06
+
+- **Decision:** Treat `catalog_version` and capability identifiers from the Web
+  entitlement response as server-owned opaque data. Validate only the bounded
+  wire shape; do not reconstruct plan capability or allowance maps in the CLI.
+- **Cache rule:** A stale cached response is eligible only for the same founder
+  `as_plan` simulation scope that produced it. A request for a different
+  simulation scope falls back to Free when the server is unreachable.
+- **Boundary:** This improves offline safety and observability but does not
+  authorize production signer activation, token issuance, or any production
+  operation. PLAN-CLI-001/004 remain open pending hosted and activation
+  evidence, with R-041 still enforced.
+
 ## HUNT-009 packaging boundary · 2026-10-06
 
 - **Decision:** Keep the public alpha CLI on its beta shell until a reviewed packaging design exists for private Hunt execution. Do not add a private workspace package as a public CLI dependency and do not copy private runtime implementation into public archives as an implicit workaround.

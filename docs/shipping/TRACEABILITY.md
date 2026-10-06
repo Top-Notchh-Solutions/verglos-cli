@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## Opaque entitlement catalog/cache · 2026-10-06 · CLI PR #71
+
+- **Implementation:** CLI commit `937705b` carries the server-provided
+  `catalog_version` through capability resolution, fails closed on malformed
+  catalog metadata, and refuses stale cache reuse across founder simulation
+  scopes. Frozen Web-shaped fixtures keep capability names and future fields
+  opaque to the client.
+- **Verification:** CLI package tests completed with zero failures; typecheck,
+  build, and diff checks passed. Hosted matrix/self-scan evidence is pending on
+  PR #71 and is not inferred from local results.
+- **Boundary:** This does not close PLAN-CLI-001/004. Production signer/public
+  pin alignment, tenant mapping, live issuance, and activation evidence remain
+  open; R-041 still blocks production access.
+
 ## Hosted organization-policy authority · 2026-10-06 · Web PR #148
 
 - **Implementation:** Web merge `cbc0f5a` adds additive SCM project binding,

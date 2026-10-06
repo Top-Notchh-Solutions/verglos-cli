@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## PLAN-CLI-001/004 addendum · 2026-10-06
+
+CLI PR #71 (`937705b`) hardens the opaque catalog-version and simulation-cache
+contract with local test/typecheck/build evidence. It is preparatory code-side
+evidence only. It does not satisfy production signer activation, trust-root
+alignment, live token issuance, or final release gates. No gate checkbox or
+backlog count changes from this batch; R-041 continues to block production
+operations.
+
 ## HUNT-009 boundary review · 2026-10-06
 
 The public CLI must not declare private `@verglos/hunt` or embed private Hunt

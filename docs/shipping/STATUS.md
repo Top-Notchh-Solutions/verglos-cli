@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-06 · PLAN-CLI-001/004 opaque catalog and cache qualification
+
+CLI commit `937705b` on PR #71 preserves the server-owned Web
+`catalog_version`, rejects malformed catalog metadata, and prevents stale
+capability cache entries from crossing founder `as_plan` simulations. The
+server-shaped entitlement fixtures retain opaque capability and future-field
+behavior. Local CLI package tests, typecheck, build, and diff hygiene pass;
+hosted PR checks are pending. This is code-side progress only: production v2
+signer/tenant activation and live integration evidence remain open. PLAN-CLI-001
+and PLAN-CLI-004 remain unchecked. R-041 still prohibits production access
+until credential rotation and verification. Private evidence:
+`docs/shipping/evidence/plan-cli-001-004-opaque-catalog-cache-2026-10-06.md`.
+
 ## 2026-10-06 · TEAM-CLI-001 hosted policy authority substrate
 
 Web PR #148 merged as `cbc0f5a`. It adds explicit SCM repository-to-project

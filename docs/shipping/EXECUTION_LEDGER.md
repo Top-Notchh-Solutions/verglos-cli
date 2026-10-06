@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-06 · PLAN-CLI-001/004 opaque catalog and cache qualification
+
+- **Code:** CLI commit `937705b`, PR #71, preserves server-owned
+  `catalog_version`, validates its bounded wire shape, and binds stale cache
+  reuse to the requested founder simulation. The fixtures remain opaque and
+  server-shaped; no client-side paid capability map was added.
+- **Verification:** CLI package runner completed all discovered tests with zero
+  failures, including entitlement JWT/offline/license API coverage; CLI
+  typecheck, build, and `git diff --check` pass locally. Hosted PR checks are
+  pending and will be recorded with their run ID after completion.
+- **Boundary:** PLAN-CLI-001/004 remain unchecked. No production signer,
+  tenant mapping, v2 issuance, database read/write, deployment, provider,
+  customer, publish, or release operation occurred. R-041 remains open.
+
 ## 2026-10-06 · TEAM-CLI-001 hosted policy authority substrate
 
 - **Code:** Web PR #148 merged as `cbc0f5a`. Migration `0028` adds an explicit
