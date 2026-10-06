@@ -19,8 +19,9 @@ const workspaceRoot = process.env.VERGLOS_WORKSPACE_ROOT ?? resolve(privateRoot,
 // temporary worktree used for earlier runs is only a last-resort fallback;
 // otherwise a deleted /tmp path makes this evidence harness appear broken.
 const workspaceCliRoot = join(workspaceRoot, "verglos-cli");
+const pinnedCliRoot = join(workspaceRoot, ".local", "verglos-cli-current");
 const cliRoot = process.env.VERGLOS_CLI_ROOT
-  ?? (existsSync(workspaceCliRoot) ? workspaceCliRoot : "/tmp/verglos-cli-current.MphZDs");
+  ?? (existsSync(pinnedCliRoot) ? pinnedCliRoot : existsSync(workspaceCliRoot) ? workspaceCliRoot : "/tmp/verglos-cli-current.MphZDs");
 const webRoot = process.env.VERGLOS_WEB_ROOT ?? join(workspaceRoot, "verglos-web");
 const outputPath = process.env.VERGLOS_ACCEPTANCE_STORIES_OUTPUT
   ?? join(privateRoot, "docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json");
