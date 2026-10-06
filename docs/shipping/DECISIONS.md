@@ -51,6 +51,20 @@ This file is newly created because no tracked `DECISIONS.md` existed in the priv
 
 Founder authorized: agent-selected durable queue provider (bucket B), agent-selected object-storage strategy (deferred to Studio implementation window; V1 uses Neon jsonb columns), agent-drafted contributor DCO policy (LIC-005 accepted at CLI PR #41), and routine branch/push/PR/merge/shipping actions without additional approval pauses. Production DB writes remain subject to the separately documented exact-operation preflight and postflight contract; blanket shipping authorization does not replace that evidence boundary.
 
+## GitHub App contract implementation boundary · 2026-10-06
+
+- **Decision:** Implement the GitHub App identity/lifecycle contract as a
+  dependency-ready Web phase PR before attempting any live installation or
+  organization cutover.
+- **Evidence:** Web PR #144 (`afb48dc`) and private evidence
+  `github-app-identity-contract-2026-10-06.md` record the immutable identity,
+  multi-repository, permission, token, lifecycle, replay, tenant, and redaction
+  checks plus the local/hosted check state.
+- **Boundary:** The phase is not acceptance of GITHUB-WEB-001..004. Live App
+  authorization, provider token exchange, production migration/deployment,
+  customer use, and release claims remain gated and require their own reviewed
+  preflight and postflight evidence.
+
 ## Founder scope decision · 2026-10-06
 
 Verglos remains GitHub-first, but “GitHub-aligned” means a real App/org model:

@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## SCM/GitHub App · 2026-10-06 · Web PR #144
+
+- **Implementation:** `src/lib/organizations/github-app-contract.ts`, additive
+  migration `0026_github_app_identity.sql`, installation/check/webhook route
+  integration, and tenant-scoped lifecycle/replay metadata.
+- **Verification:** Focused GitHub/SCM tests 16/16; full Web suite 862/840/22/0;
+  typecheck, build, Drizzle, migration ordering, public-boundary, SBOM, license,
+  negative-boundary, and diff checks passed.
+- **Boundary:** The implementation is not live-provider or org-cutover proof.
+  GITHUB-WEB-001..004, provider permission/token exchange, production changes,
+  and acceptance remain open.
+
 ## Acceptance · 2026-10-03 · ACCEPT-006/007 protocol freeze
 
 - **Artifacts:** Private comprehension-test and Hunt-adjudication protocols with validators.

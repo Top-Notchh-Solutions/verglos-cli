@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-06 · GitHub App identity contract substrate (Web PR #144)
+
+Web branch `feat/github-app-org-contract` commit `afb48dc` adds immutable
+GitHub account/installation/repository identity, bounded multi-repository
+admission, least-privilege permission validation, App JWT/token-request and
+token-expiry helpers, lifecycle transitions, delivery-ID replay binding, and
+tenant-scoped redacted webhook/check persistence. Local Web verification is
+862 total / 840 passed / 22 explicit environment-gated skips / 0 failures;
+focused GitHub/SCM tests pass 16/16; typecheck, build, Drizzle, 27-migration
+ordering, public-boundary, SBOM, license, negative-boundary, and diff checks
+pass. PR #144 is open; Preview Comments and GitGuardian passed while Vercel
+and hosted type/schema checks were still pending during bounded polling.
+This does not close GITHUB-WEB-001..004: no live GitHub App installation,
+provider permission/token exchange, org cutover, production migration,
+deployment, or customer acceptance occurred. Private evidence:
+`docs/shipping/evidence/github-app-identity-contract-2026-10-06.md`.
+
 ## 2026-10-03 · Vercel access reconciliation
 
 Read-only `vercel env ls`, deployment listing, and deployment inspection now

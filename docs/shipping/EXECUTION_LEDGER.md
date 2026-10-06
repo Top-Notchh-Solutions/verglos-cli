@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-06 · GitHub App identity contract substrate
+
+- **Code:** Web PR #144, branch `feat/github-app-org-contract`, commit `afb48dc`.
+- **Behavior:** Immutable GitHub account/installation/repository identity,
+  bounded multi-repository admission, least-privilege permissions, App JWT and
+  token-request helpers, token-expiry validation, lifecycle state handling,
+  delivery-ID replay binding, and redacted tenant-scoped webhook/check data.
+- **Verification:** 862 total / 840 passed / 22 explicit environment-gated
+  skips / 0 failures; focused GitHub/SCM tests 16/16; typecheck, build, schema,
+  27-migration ordering, public-boundary, SBOM, license, negative-boundary, and
+  diff checks passed. Preview Comments and GitGuardian passed; Vercel and
+  hosted type/schema checks were pending at bounded poll cutoff.
+- **Boundary:** Code-side evidence only. No live App install/reauthorization,
+  provider token exchange, permission cutover, production migration/deployment,
+  database write, customer workflow, or release acceptance occurred.
+- **Tracker:** GITHUB-WEB-001..004 and dependent final gates remain unchecked;
+  R-043 remains open.
+
 ## 2026-10-06 · serial disposable-Postgres integration revalidation
 
 - **Runtime:** Disposable local `postgres:15-alpine` database `verglos_test` on `127.0.0.1:55432`; no production connection.
