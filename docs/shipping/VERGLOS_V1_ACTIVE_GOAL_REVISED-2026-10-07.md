@@ -543,42 +543,36 @@ boundary, browser/Docker requirement, machine-load plan, and production-state
 status. Continue independent code and evidence work when production access or
 provider state is blocked; do not wait idly for external state.
 
-## Whole-backlog and 0-to-₹100-crore POC requirement
+## Whole-backlog shipping target and founder-supplied final POC
 
-- The 24-hour target means the whole authoritative backlog must be attempted and
-  the complete shipping end state must be verified—not only the critical path,
-  the payment slice, or the currently convenient checkboxes.
-- Final qualification must exercise real, pinned live repositories or
-  explicitly authorized customer repositories at exact commits. Public
-  repositories are acceptable only as technical fixtures; they are not customer
-  acceptance. Customer-owned repositories require recorded consent, bounded
-  scope, private evidence, and deletion/retention handling.
-- The final POC matrix must cover company/use-case shapes across the revenue
+- The primary execution target is the whole authoritative backlog and complete
+  product shipping path within 24 hours maximum, with a three-hour target for
+  implementation and qualification wherever the current evidence and hosted
+  dependencies allow. The three-hour target is aspirational; the 24-hour target
+  is the hard operating window. Neither permits skipped gates or invented proof.
+- Do not spend the critical path sourcing, selecting, cloning, or deeply
+  analyzing the final company-shaped repository corpus now. The founder will
+  provide the final live/authorized repositories and POC inputs. Prepare the
+  product, contracts, harnesses, fixtures, evidence templates, and acceptance
+  gates so that the supplied corpus can be run immediately afterward.
+- Final POC acceptance remains required after the shipping candidate is frozen:
+  it must cover the founder-supplied company/use-case shapes and the revenue
   journey from pre-revenue/₹0 through approximately ₹1 crore, ₹10 crore, ₹50
-  crore, and ₹100 crore annual revenue equivalents, including the operational
-  differences those stages create in security evidence, teams, tenancy, CI,
-  audit, retention, billing, and enterprise controls. Revenue is a scenario
-  axis, not a fabricated customer or traction claim.
-- The matrix must exercise every canonical plan actually present in the verified
-  catalog—Free, Pro, Team, Studio, and Enterprise where those names are
-  canonical after reconciliation. A plan cannot be counted as tested merely
-  because its label exists: its entitlements, limits, organization roles,
-  payment/billing state, CLI behavior, web behavior, upgrade/downgrade,
-  denial, and audit evidence must be exercised.
-- The POC set must include, at minimum, a small product, multi-user SaaS,
-  multi-tenant/team system, large-scale or enterprise-like system, and the
-  corresponding revenue-band scenarios. Hold out repositories and scenarios for
-  false-positive, false-truth, missing-coverage, and performance review after
-  tuning is frozen.
-- Record exact repository URL/owner authorization, commit, license, plan,
-  revenue-band scenario, configuration, command/runtime versions, findings,
-  resource use, reproducibility, adjudication, and limitations privately. Never
-  put repository contents, customer data, credentials, or competitive
-  intelligence in the public CLI or public PRs.
-- This requirement is not complete until every backlog item is accepted or has
-  an explicit owner, reason, evidence gap, and release decision. If the 24-hour
-  target expires before that condition is true, keep the goal open and report
-  the remaining matrix; do not redefine “whole shipping” as a partial launch.
+  crore, and ₹100 crore annual-revenue scenarios. Revenue is a scenario axis,
+  not a fabricated customer or traction claim.
+- The supplied POC must exercise every canonical plan in the verified catalog
+  after plan-name reconciliation. A plan counts only when its entitlements,
+  limits, organization roles, payment/billing state, CLI behavior, Web behavior,
+  upgrade/downgrade, denial, and audit evidence are exercised.
+- When the founder supplies the corpus, record exact repository authorization,
+  commit, license, plan, revenue-band scenario, configuration, runtime,
+  findings, resource use, reproducibility, adjudication, and limitations
+  privately. Do not put repository contents, customer data, credentials, or
+  competitive intelligence in public repositories or PRs.
+- Shipping is not complete until every backlog item is accepted or has an
+  explicit owner, reason, evidence gap, and release decision. If the 24-hour
+  window expires before that condition is true, keep the goal open and report
+  the exact gap; do not redefine whole shipping as a partial launch.
 
 Primary provider references:
 - https://razorpay.com/docs/server-integration/python/test-app/
