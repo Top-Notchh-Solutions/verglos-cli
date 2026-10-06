@@ -1874,3 +1874,15 @@ changed and no checkbox was closed.
 - QUAL-WEB-005 remains open for the reviewed deletion worker, legal/customer-held
   record evidence, consent inventory, and runtime acceptance. Backlog remains
   **218 checked / 51 unchecked / 269 total**.
+
+# 2026-10-06 — account-deletion audit history
+
+- Web PR #142 (`0438316`) merged as `3127199`. The authenticated status route
+  now returns at most 50 requests newest-first, preserving private no-store and
+  tenant/user authentication boundaries instead of exposing only the oldest row.
+- Hosted Verify, Vercel, and GitGuardian passed. Local route contracts passed
+  3/3; typecheck, Drizzle check, ordered migration check (26), and diff check
+  passed. No production/database write or migration occurred.
+- QUAL-WEB-005 remains open for the reviewed deletion worker, legal/customer-held
+  record evidence, consent inventory, and runtime acceptance. Backlog remains
+  **218 checked / 51 unchecked / 269 total**.
