@@ -8,6 +8,30 @@ This file is newly created because no tracked `DECISIONS.md` existed in the priv
 - **Rationale:** The public packer intentionally fails closed on private workspace dependencies. Enabling a command that cannot be installed from the public six-package release would create a false release surface and violate the repository code split.
 - **Follow-up:** Resolve the private-runtime distribution boundary only after trusted publisher roots, licensed recipe provenance, bounded execution, isolation/adversarial evidence, and independent review are complete.
 
+## TEAM-CLI-001 hosted policy authority boundary · 2026-10-06
+
+- **Repository binding:** A policy fetch is eligible only when an active GitHub
+  SCM installation row carries the immutable `repositoryId` and an explicit,
+  same-organization `projectId` binding. Repository owner/name or a free-form
+  project external ID must never be used as an implicit policy binding. A
+  missing or ambiguous binding fails closed without revealing adjacent tenant
+  state. GitLab policy fetch remains out of scope until it has an immutable
+  provider repository ID contract.
+- **Signer custody:** Organization policies use a dedicated Ed25519 signing
+  key, separate from entitlement JWT keys. The private key is a server-only
+  runtime secret; the envelope key ID is derived from the public SPKI bytes and
+  the corresponding public key is pinned in the CLI trusted-key bundle. The
+  endpoint is unavailable when the dedicated signer is absent or malformed.
+- **Payload contract:** Only a stored `published` policy with
+  `canonical-json-v1` digest, valid effective time, and a document conforming
+  to the CLI `PolicyDocument` schema may be emitted. The bearer license must
+  be active and resolve to an owner mapping for the exact organization UUID.
+- **Activation boundary:** Implement and qualify the endpoint, binding, signer,
+  and cross-repository fixtures in code first. Do not provision or activate the
+  production signer, rewrite production policy rows, or run a hosted fetch
+  until R-041 credential rotation and the separate PLAN-CLI-001 activation
+  evidence are complete.
+
 ## Pro INR catalog activation review frame (2026-10-02)
 
 - **Problem/evidence:** sandbox Standard Checkout completed at ₹2,809.43 (`280943` paise), with captured payment and signed webhook replay idempotency. Production previously failed closed because the canonical Pro catalog was unverified USD.
