@@ -1509,3 +1509,12 @@ changed and no checkbox was closed.
   refreshed at `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
 - No acceptance checkbox changed; no production write, migration, deployment,
   provider capture, customer fixture use, or reviewer sign-off occurred.
+
+# 2026-10-06 — pinned CLI forced qualification
+
+- Exact current CLI commit `955412516b96cc09393e78c43bf7d02b9abd05d9` passed
+  `pnpm exec turbo run test typecheck build --force`: 23/23 tasks successful,
+  exit 0, with remote caching disabled.
+- Evidence: `docs/shipping/evidence/cli-forced-qualification-2026-10-06.md`.
+- This is local qualification only; release/legal/provider/customer gates and
+  all corresponding backlog checkboxes remain unchanged.
