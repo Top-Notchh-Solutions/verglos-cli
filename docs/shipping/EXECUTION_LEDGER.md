@@ -1439,3 +1439,13 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/cli-license-package-qualification-2026-10-06.md`.
 - No distribution/legal checkbox changed; no publication, tag, deployment, or
   production state changed.
+
+# 2026-10-06 — clean consumer package qualification
+
+- Ran packed-manifest, package-surface, and clean-consumer checks against the
+  six freshly generated current CLI archives. All passed: six archives had
+  valid bounded manifests, declared entrypoints resolved, all libraries
+  imported, the CLI executed, and no external engine was installed implicitly.
+- Evidence: `docs/shipping/evidence/cli-clean-consumer-qualification-2026-10-06.md`.
+- Distribution/legal/release checkboxes remain open; no publication or
+  production state changed.
