@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-stories-verification.v1",
-  "verifiedAt": "2026-10-06T10:27:08.066Z",
+  "verifiedAt": "2026-10-06T10:45:25.765Z",
   "cliRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local/verglos-cli-current",
   "webRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
   "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
@@ -105,8 +105,8 @@
         "verglos",
         "test"
       ],
-      "startedAt": "2026-10-06T10:26:02.735Z",
-      "finishedAt": "2026-10-06T10:27:03.958Z",
+      "startedAt": "2026-10-06T10:44:21.810Z",
+      "finishedAt": "2026-10-06T10:45:21.499Z",
       "exitCode": 0,
       "summary": {
         "tests": 236,
@@ -115,7 +115,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "a74e77df29d3d7558cab4736c1c3e17617a7016853adee4696dd7cf14cc48a08"
+      "outputSha256": "9fdbfa623806bf19ca6e7d13e554dfddf329061b417eb3401dd792666b649532"
     },
     {
       "label": "web-full-suite",
@@ -123,8 +123,8 @@
       "args": [
         "test"
       ],
-      "startedAt": "2026-10-06T10:27:03.958Z",
-      "finishedAt": "2026-10-06T10:27:07.485Z",
+      "startedAt": "2026-10-06T10:45:21.499Z",
+      "finishedAt": "2026-10-06T10:45:25.217Z",
       "exitCode": 0,
       "summary": {
         "tests": 905,
@@ -133,7 +133,7 @@
         "cancelled": 0,
         "skipped": 28
       },
-      "outputSha256": "4ddd25185aaa8269952bfb38ce195ffaffa5dd03d0c029587000c628333d6aa8"
+      "outputSha256": "2eca24399bc07b42df3c3275bb505bb8aaf694a4822de9499015320b2e4c35cc"
     },
     {
       "label": "web-composed-acceptance-substrates",
@@ -150,8 +150,8 @@
         "src/lib/organizations/team-e2e.test.ts",
         "src/lib/qual/qual-web-suites.test.ts"
       ],
-      "startedAt": "2026-10-06T10:27:07.485Z",
-      "finishedAt": "2026-10-06T10:27:08.066Z",
+      "startedAt": "2026-10-06T10:45:25.217Z",
+      "finishedAt": "2026-10-06T10:45:25.765Z",
       "exitCode": 0,
       "summary": {
         "tests": 72,
@@ -160,7 +160,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "6299445eaa4b13ae9d45e232736d85098cbd5284cf42ae72445fcf47ea65a6e8"
+      "outputSha256": "312728aa8924e4c92bccb95cd35c3f163f8afa240192eb137e35be5691974f7d"
     }
   ],
   "allCommandsPassed": true,

@@ -1706,3 +1706,13 @@ changed and no checkbox was closed.
 - This is an isolated-test migration-baseline finding, not a production write.
   The billing integration tests remain skipped; PLAN-WEB-011/012 and migration
   gates remain open.
+
+# 2026-10-06 — acceptance stories verification refresh
+
+- Current pinned sources re-ran the private acceptance verifier: CLI 236/236,
+  Web 877/905 with 28 environment-gated skips, and composed Studio/Enterprise/
+  Team/quality substrates 72/72; all commands exited 0.
+- Evidence: `docs/shipping/evidence/acceptance-stories-verification-2026-10-06.md`.
+- The verifier still leaves Hunt, modified-client runtime, customer,
+  provider, and account-deletion boundaries open. No checkbox, production, or
+  deployment state changed.
