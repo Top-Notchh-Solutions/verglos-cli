@@ -1518,3 +1518,13 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/cli-forced-qualification-2026-10-06.md`.
 - This is local qualification only; release/legal/provider/customer gates and
   all corresponding backlog checkboxes remain unchanged.
+
+# 2026-10-06 — Web build and schema qualification
+
+- On Web commit `24232fd94a80d20e0d01ea80e758a3f77fd13dca`, typecheck,
+  Drizzle schema check, ordered migration check (24 migrations), and production
+  build all exited 0; build generated 37 static pages and completed Next.js
+  optimization.
+- Evidence: `docs/shipping/evidence/web-build-schema-2026-10-06.md`.
+- Existing Node 22 engine warning was observed under Node 26.4.0; no migration,
+  database write, deployment, or backlog checkbox changed.
