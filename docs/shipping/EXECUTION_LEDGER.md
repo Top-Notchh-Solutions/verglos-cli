@@ -1917,3 +1917,17 @@ changed and no checkbox was closed.
 - QUAL-WEB-005 remains open for the reviewed deletion worker, legal/customer-held
   record evidence, consent inventory, and runtime acceptance. Backlog remains
   **218 checked / 51 unchecked / 269 total**.
+
+# 2026-10-06 — cross-repository qualification pass
+
+- CLI exact branch `feat/cli-release-six-package-verifier`: forced Turbo
+  `test typecheck build` completed **23/23 tasks successfully**. Existing Linux
+  Docker-gated tests remained explicit skips where host namespace evidence was
+  unavailable; no skip was reclassified as a pass.
+- Web exact branch `feat/web-qual-005-deletion-history`: deletion route and
+  quality suites passed **23/23**, typecheck passed, Drizzle schema check passed,
+  and ordered migration check verified **26 migrations**. Node 26's existing
+  Node-22 engine warning was retained as an evidence limitation.
+- Evidence: `docs/shipping/evidence/qualification-pass-2026-10-06.md`.
+  No public code changed, no PR was opened, and no production operation ran in
+  this qualification pass. Backlog remains **218 checked / 51 unchecked / 269 total**.
