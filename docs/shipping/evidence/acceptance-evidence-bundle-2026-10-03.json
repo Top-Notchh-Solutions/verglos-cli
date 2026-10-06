@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-03T10:38:20.567Z",
+  "generatedAt": "2026-10-06T08:26:17.601Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -14,8 +14,8 @@
     },
     {
       "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json",
-      "sha256": "1241608d80e00eb71d05fd250b77b7d447f32efc9e7bcf28ec957026aa386397",
-      "bytes": 4377
+      "sha256": "29431a390d67d12da3fb549cb6951cff5f632df33661691d9bccdd5f1a22081f",
+      "bytes": 4465
     },
     {
       "path": "docs/shipping/evidence/acceptance-story-map-2026-10-03.json",
@@ -59,8 +59,8 @@
     },
     {
       "path": "docs/shipping/evidence/hunt-docker-adversarial-2026-10-02.md",
-      "sha256": "61d0976a31615c60aa18572946156a198ac62114a662eb3b2a79c6b3bb6abcb5",
-      "bytes": 1052
+      "sha256": "84d905e620ea19d517a30bb68cc5bb18e7121231cc10cf0442263613a861e378",
+      "bytes": 1711
     }
   ],
   "gateBoundary": {
