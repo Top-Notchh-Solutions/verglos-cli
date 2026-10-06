@@ -26,3 +26,7 @@
   lacks live GitHub/GitLab provider evidence; QUAL-WEB-005 still lacks a hosted
   deletion worker, legal/customer-held decision run, consent inventory, and
   end-to-end deletion acceptance. No deletion or customer-data mutation ran.
+- Operational security note: a temporary diagnostic process listing exposed the
+  production connection string as a command-line argument. The value is not
+  repeated here and was not committed. Rotate the Neon/database credential and
+  refresh the Vercel production secret before any further production operation.
