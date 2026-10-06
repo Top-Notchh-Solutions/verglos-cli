@@ -68,3 +68,9 @@ test("release verifier validates SBOM shape and refuses unresolved license block
     await assert.rejects(run(process.execPath, [script, root]), /unresolved redistribution blockers/);
   });
 });
+
+test("strict release mode refuses an incomplete public package set", async () => {
+  await withFixture(async (root) => {
+    await assert.rejects(run(process.execPath, [script, root, "--require-six"]), /strict release requires exactly 6 public npm archives/);
+  });
+});

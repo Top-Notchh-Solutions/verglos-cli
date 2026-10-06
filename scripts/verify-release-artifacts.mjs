@@ -8,6 +8,15 @@ const run = promisify(execFile);
 
 const root = resolve(process.argv[2] ?? "");
 if (!process.argv[2]) throw new Error("release artifact directory is required");
+const requireSixPublicPackages = process.argv.includes("--require-six");
+const EXPECTED_PUBLIC_PACKAGES = new Set([
+  "verglos",
+  "@verglos/shared",
+  "@verglos/scanner",
+  "@verglos/reporter",
+  "@verglos/mcp",
+  "@verglos/entitlement",
+]);
 
 const checksumsPath = join(root, "SHA256SUMS");
 if (!(await lstat(root)).isDirectory()) throw new Error("release artifact root must be a directory");
@@ -23,6 +32,24 @@ for (const line of checksums.split(/\r?\n/).filter(Boolean)) {
 const files = (await readdir(root)).filter((name) => name !== "SHA256SUMS").sort();
 const archives = files.filter((name) => name.endsWith(".tgz"));
 if (archives.length === 0) throw new Error("release artifact directory contains no npm archives");
+if (requireSixPublicPackages) {
+  if (archives.length !== EXPECTED_PUBLIC_PACKAGES.size) throw new Error(`strict release requires exactly ${EXPECTED_PUBLIC_PACKAGES.size} public npm archives`);
+  const archiveManifests = [];
+  for (const archive of archives) {
+    try {
+      const { stdout } = await run("tar", ["-xOf", join(root, archive), "package/package.json"], { encoding: "utf8", maxBuffer: 1024 * 1024 });
+      archiveManifests.push(JSON.parse(stdout));
+    } catch {
+      throw new Error(`release archive has no valid package manifest: ${archive}`);
+    }
+  }
+  const names = new Set(archiveManifests.map((manifest) => manifest.name));
+  const missing = [...EXPECTED_PUBLIC_PACKAGES].filter((name) => !names.has(name));
+  const unexpected = [...names].filter((name) => !EXPECTED_PUBLIC_PACKAGES.has(name));
+  if (missing.length || unexpected.length) throw new Error(`strict release package set mismatch: missing=${missing.join(",") || "none"}; unexpected=${unexpected.join(",") || "none"}`);
+  const versions = new Set(archiveManifests.map((manifest) => manifest.version));
+  if (versions.size !== 1 || [...versions][0] === undefined) throw new Error("strict release packages must share one version");
+}
 const requiredSidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "clean-consumer-verification.txt"];
 for (const name of requiredSidecars) if (!files.includes(name)) throw new Error(`release artifact directory is missing ${name}`);
 if (files.some((name) => !name.endsWith(".tgz") && !requiredSidecars.includes(name))) throw new Error("release artifact directory contains an unexpected file");
@@ -67,4 +94,4 @@ for (const archive of archives) {
   const { stdout: packagedNotices } = await run("tar", ["-xOf", join(root, archive), "package/THIRD_PARTY_NOTICES"], { encoding: "buffer", maxBuffer: 16 * 1024 * 1024 });
   if (!packagedNotices.equals(expectedNotices)) throw new Error(`THIRD_PARTY_NOTICES differs inside ${archive}`);
 }
-console.log(`verified ${files.length} release artifacts (${archives.length} npm archives, ${requiredSidecars.length} sidecars, and notices in every archive)`);
+console.log(`verified ${files.length} release artifacts (${archives.length} npm archives, ${requiredSidecars.length} sidecars, and notices in every archive${requireSixPublicPackages ? "; strict six-package set" : ""})`);

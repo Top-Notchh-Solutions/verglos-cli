@@ -148,7 +148,7 @@ jobs:
 
       - name: Verify release checksums
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
-        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR"
+        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR" --require-six
 
       - name: Upload release artifacts
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
