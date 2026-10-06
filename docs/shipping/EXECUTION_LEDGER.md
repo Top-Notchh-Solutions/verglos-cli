@@ -1402,3 +1402,15 @@ changed and no checkbox was closed.
   private ledger; the private tracker remains authoritative for acceptance and
   checkbox accounting.
 - No source, production, deployment, migration, or release state changed.
+
+# 2026-10-06 — full Juice Shop fixture scan
+
+- Ran the pinned current CLI `955412516b96cc09393e78c43bf7d02b9abd05d9`
+  against the full authorized technical fixture at Juice Shop commit
+  `1618a611b173b4bf114028e6e02549950606e29d`.
+- Result: exit 0, 906 files walked, 55 findings, complete coverage, and no
+  detector limitations. Severity counts were 16 critical, 12 high, 18 medium,
+  0 low, and 9 info; seven test-file findings were excluded from the score.
+- Evidence: `docs/shipping/evidence/juice-shop-scan-2026-10-06.md`.
+- This remains public-fixture technical evidence, not customer consent,
+  endorsement, hosted acceptance, or a production write. No checkbox changed.
