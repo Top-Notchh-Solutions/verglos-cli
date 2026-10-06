@@ -1559,3 +1559,12 @@ changed and no checkbox was closed.
   clipping. Evidence: `docs/shipping/evidence/account-dom-accessibility-probe-2026-10-06.md`.
 - Automated DOM evidence only; no human screen-reader, field-CWV, or large-data
   claim and no backlog checkbox change.
+
+# 2026-10-06 — authenticated account performance trace
+
+- Production `/account` desktop trace at 1280×800 recorded lab LCP 971 ms,
+  TTFB 115 ms, render delay 856 ms, and CLS 0.00. CrUX field data remains
+  unavailable; a legacy-JavaScript insight estimated 14.4 kB savings.
+- Evidence: `docs/shipping/evidence/account-performance-trace-2026-10-06.md`.
+- Lab-only evidence; no field-CWV, screen-reader, large-dataset, deployment,
+  production write, or backlog checkbox claim.
