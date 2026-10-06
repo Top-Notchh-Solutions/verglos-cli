@@ -49,6 +49,9 @@ importers:
       '@verglos/entitlement':
         specifier: workspace:*
         version: link:../entitlement
+      '@verglos/hunt':
+        specifier: workspace:*
+        version: link:../hunt
       '@verglos/mcp':
         specifier: workspace:*
         version: link:../mcp

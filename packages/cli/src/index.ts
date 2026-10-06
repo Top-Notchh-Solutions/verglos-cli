@@ -24,6 +24,7 @@ import { executeAttest } from "./attest.js";
 import { executeRecordExport } from "./record-export.js";
 import { executeRecordAttest, SIGSTORE_NETWORK_ORIGINS } from "./record-sigstore.js";
 import { executeHunt } from "./hunt.js";
+import { executeHuntRecipe } from "./hunt-execute.js";
 import { executeHuntRecipeVerification } from "./hunt-recipe-verify.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
@@ -882,6 +883,13 @@ const huntCommand = program
   .option("--sandbox <adapter>", "Sandbox adapter: auto, docker")
   .option("--dry-run", "Parse options without running sandbox verification")
   .option("--finding <id>", "Verify one finding ID from a Verglos report")
+  .option("--execute-report <path>", "Execute the fixed supported recipe against a local report")
+  .option("--execute-recipe <path>", "Signed local Hunt recipe required for execution")
+  .option("--execute-trust-store <path>", "Local Hunt trust store required for execution")
+  .option("--execute-approval <path>", "Approved Hunt receipt required for execution")
+  .option("--execute-rule-id <id>", "Exact rule ID bound to the recipe")
+  .option("--execute-subject-id <id>", "Exact subject ID bound to the recipe")
+  .option("--execute-observation-id <id>", "Exact observation ID bound to the execution")
   .option("--json", "Emit machine-readable JSON")
   .option("--quiet", "Suppress human output")
   .action(
@@ -890,9 +898,26 @@ const huntCommand = program
       sandbox?: string;
       dryRun?: boolean;
       finding?: string;
+      executeReport?: string;
+      executeRecipe?: string;
+      executeTrustStore?: string;
+      executeApproval?: string;
+      executeRuleId?: string;
+      executeSubjectId?: string;
+      executeObservationId?: string;
       json?: boolean;
       quiet?: boolean;
     }) => {
+      if (opts.executeReport || opts.executeRecipe || opts.executeTrustStore || opts.executeApproval) {
+        const required = [opts.executeReport, opts.executeRecipe, opts.executeTrustStore, opts.executeApproval, opts.executeRuleId, opts.executeSubjectId, opts.executeObservationId];
+        if (required.some((value) => !value)) {
+          if (opts.json) console.log(JSON.stringify({ status: "error", code: "HUNT_EXECUTION_INPUT", message: "execution requires report, recipe, trust-store, approval, rule-id, subject-id, and observation-id" }));
+          else if (!opts.quiet) console.error("execution requires report, recipe, trust-store, approval, rule-id, subject-id, and observation-id");
+          process.exit(2);
+        }
+        const code = await executeHuntRecipe({ reportPath: opts.executeReport!, recipePath: opts.executeRecipe!, trustStorePath: opts.executeTrustStore!, approvalPath: opts.executeApproval!, ruleId: opts.executeRuleId!, subjectId: opts.executeSubjectId!, observationId: opts.executeObservationId!, findingId: opts.finding, json: opts.json, quiet: opts.quiet });
+        process.exit(code);
+      }
       const code = await executeHunt({
         ...opts,
         asPlan: process.env.VERGLOS_AS_PLAN,
