@@ -1528,3 +1528,14 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/web-build-schema-2026-10-06.md`.
 - Existing Node 22 engine warning was observed under Node 26.4.0; no migration,
   database write, deployment, or backlog checkbox changed.
+
+# 2026-10-06 — production read-only smoke
+
+- Read-only production requests to `/`, `/checkout`, `/docs`, and
+  `/api/v1/entitlement/capabilities` returned HTTP 200. The capability payload
+  reported `free`, `simulated=false`, catalog `2026-10-02.0`, active/purchasable
+  Pro, inactive Team/Studio, and contracted Enterprise; this matches the
+  catalog contract and current checkout behavior.
+- Evidence: `docs/shipping/evidence/production-readonly-smoke-2026-10-06.md`.
+- No credentials/cookies/payment identifiers were recorded and no production
+  write, checkout creation, migration, or deployment occurred.
