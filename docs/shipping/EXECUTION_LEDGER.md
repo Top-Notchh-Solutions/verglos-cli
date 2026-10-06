@@ -1955,3 +1955,14 @@ changed and no checkbox was closed.
 - TEAM-CLI-001 remains unchecked because the hosted policy endpoint is not
   deployed/qualified and PLAN-CLI-001 production activation evidence remains
   open. No public code changed or production operation ran.
+
+# 2026-10-06 — policy digest interoperability blocker
+
+- Before adding the hosted organization-policy endpoint, a shared nested policy
+  fixture was hashed through Web `digestPolicyDocument` and CLI
+  `canonicalizeJson`. The resulting digests differed, proving the current Web
+  shallow-key ordering is not wire-compatible with the CLI recursive canonical
+  JSON contract.
+- No endpoint was added on top of that mismatch. `R-042` records the required
+  canonical-alignment decision, cross-repository fixture tests, and any
+  versioned migration/reconciliation needed before activation.
