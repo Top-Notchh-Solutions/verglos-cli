@@ -1588,3 +1588,14 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/account-lighthouse-mobile-2026-10-06.md`.
 - No public-copy change, deployment, production write, or backlog checkbox
   change occurred.
+
+# 2026-10-06 — Web negative-boundary and truth-registry qualification
+
+- `pnpm test:negative-boundary`: 2/2 passed. Tenant identifier probing is
+  refused before data-bearing access and protected denials are non-cacheable.
+- `pnpm test:truth-registry`: 25/25 passed. Public claims are published only
+  when exact, shipped, pinned, and measured; drifted or unsupported claims are
+  corrected or removed, and unsafe mixed batches refuse the build.
+- Evidence: `docs/shipping/evidence/web-negative-boundary-truth-registry-2026-10-06.md`.
+- These are qualification results only; no deployment, production write,
+  public-copy change, or backlog checkbox change occurred.
