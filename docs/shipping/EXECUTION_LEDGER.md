@@ -1342,3 +1342,15 @@ deployment, migration, or production state changed.
 - This improves reproducibility and removes a release-quality blocker. It does
   not close provider, customer-consent, independent-review, field-CWV,
   screen-reader, Linux-namespace, or production acceptance gates.
+
+# 2026-10-06 — modified-client production boundary probe
+
+- Read-only anonymous probes against `https://verglos.com` sent forged
+  `as_plan=pro|studio|enterprise` values and forged organization/tenant query
+  identifiers to entitlement, search, usage, evidence, and evaluation paths.
+- All entitlement probes returned the bounded Free projection; all protected
+  organization probes returned the auth-hidden 404 surface. Evidence:
+  `docs/shipping/evidence/modified-client-production-probe-2026-10-06.md`.
+- This is only anonymous forged-parameter evidence. Authenticated modified-CLI
+  request matrices for usage/records and hosted acceptance remain open; no
+  checkbox, production write, database operation, or deployment changed.
