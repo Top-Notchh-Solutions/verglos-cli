@@ -1468,3 +1468,13 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/license-blocker-dependency-map-2026-10-06.md`.
 - This is a legal-review handoff only. No package was reclassified, removed,
   published, or marked approved; no checkbox changed.
+
+# 2026-10-06 — exact pinned CLI self-scan
+
+- Ran the built current CLI against its own pinned source tree with
+  `--json --no-telemetry --all`. Result: exit 0, 470 files walked, complete
+  coverage, 75 findings, score 67/high risk (1 critical, 2 high, 3 medium,
+  69 info; 37 test-file findings excluded).
+- Evidence: `docs/shipping/evidence/cli-self-scan-2026-10-06.md`.
+- The critical result is retained; this is qualification evidence only and did
+  not alter source, production, release, or backlog state.
