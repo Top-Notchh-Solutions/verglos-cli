@@ -1,10 +1,15 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
+import { rmSync } from "node:fs";
+import { mkdtemp, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { digestPolicyException, parsePolicyException } from "@verglos/shared";
 import { executePolicyExceptionShow } from "./policy-exception.js";
+
+function removeTempTree(root: string): void {
+  rmSync(root, { recursive: true, force: true, maxRetries: 3, retryDelay: 50 });
+}
 
 function exceptionFixture() {
   return parsePolicyException({
@@ -50,7 +55,7 @@ test("policy exception command emits the complete bounded JSON projection", asyn
     assert.equal(projection.approval.binding, "matched");
     assert.equal(projection.approval.applicability.status, "not-evaluated");
     assert.deepEqual(projection.exportChoices.map((choice: { format: string }) => choice.format), [".vgl", "JSON", "SARIF", "CycloneDX", "SPDX", "VEX", "HTML", "PDF"]);
-  } finally { console.log = original; await rm(root, { recursive: true, force: true }); }
+  } finally { console.log = original; removeTempTree(root); }
 });
 
 test("policy exception command presents control, approval, expiry, and unavailable format reasons", async () => {
@@ -63,7 +68,7 @@ test("policy exception command presents control, approval, expiry, and unavailab
     assert.ok(output.some((line) => line.includes("Controls: 1")));
     assert.ok(output.some((line) => line.includes("Approval: approved; binding matched; time within-time-window; applicability not-evaluated")));
     assert.ok(output.some((line) => line.includes("PDF: not-implemented")));
-  } finally { console.log = original; await rm(root, { recursive: true, force: true }); }
+  } finally { console.log = original; removeTempTree(root); }
 });
 
 test("policy exception command rejects symlink and oversized documents", async () => {
@@ -75,5 +80,5 @@ test("policy exception command rejects symlink and oversized documents", async (
     const oversized = join(root, "oversized.json");
     await writeFile(oversized, Buffer.alloc(256 * 1024 + 1));
     assert.equal(await executePolicyExceptionShow(oversized, files.approval, true, true), 2);
-  } finally { await rm(root, { recursive: true, force: true }); }
+  } finally { removeTempTree(root); }
 });
