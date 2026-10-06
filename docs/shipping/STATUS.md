@@ -1189,3 +1189,19 @@ recount from the private authoritative backlog after every substantial batch.
 No checkbox changes from planning alone. R-041 still blocks further production
 access until credential rotation and verification; no payment or database write
 occurred in this update.
+
+# 2026-10-06 · Web canonical policy digest alignment
+
+Web PR #146 (`5763632`) merged to `main` as `88a7791` after hosted Verify run
+`37488304350` passed all tests, schema/migration, build, dependency, SBOM,
+license, secret, boundary, Vercel, and GitGuardian checks. The additive
+`0027_policy_digest_algorithm.sql` migration records `legacy-top-level-v1` or
+`canonical-json-v1`; new policy writes default to canonical JSON while existing
+rows remain legacy. Local Web verification passed 864 total / 842 passed / 22
+environment-gated skips / 0 failures and verified 28 ordered migrations.
+
+This resolves the code-side R-042 digest mismatch but does not perform a
+production migration or rewrite, activate the hosted policy endpoint, or close
+TEAM-CLI-001/PLAN-CLI-001. No checkbox changed; the authoritative backlog remains
+218 checked / 62 unchecked / 280 total. R-041 and all provider/customer/reviewer
+acceptance gates remain open.

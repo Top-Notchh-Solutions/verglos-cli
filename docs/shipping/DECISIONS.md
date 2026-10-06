@@ -79,3 +79,16 @@ TypeScript/JavaScript fixtures chosen by architecture shape. Public CLI history
 must never contain customer data, credentials, proprietary source, private
 reports, or competitive intelligence. The faster path is fat, dependency-ready
 phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
+
+## Canonical policy digest rollout boundary · 2026-10-06
+
+- **Decision:** Resolve the Web/CLI nested-policy digest mismatch with an
+  explicit versioned algorithm field. Preserve `legacy-top-level-v1` for
+  existing rows and use `canonical-json-v1` for new policy writes.
+- **Evidence:** Web PR #146 (`5763632`) merged as `88a7791`; hosted Verify
+  `37488304350` and the local 864/842/22/0 regression run passed. The additive
+  migration is `0027_policy_digest_algorithm.sql`.
+- **Rollback/boundary:** The change is additive and does not rewrite stored
+  documents. Hosted policy activation, production migration/reconciliation,
+  TEAM-CLI-001, and PLAN-CLI-001 remain gated until row inventory, rollout,
+  rollback, and endpoint evidence are reviewed. No production operation ran.

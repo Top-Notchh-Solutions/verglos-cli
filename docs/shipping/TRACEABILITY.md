@@ -24,6 +24,19 @@
   provider lifecycle matrix, and production reconciliation remain open under
   PLAN-WEB-014/015.
 
+## Organization policy digest · 2026-10-06 · Web PR #146
+
+- **Implementation:** Web PR #146 (`5763632`, merged as `88a7791`) adds explicit
+  legacy and recursive canonical JSON digest algorithms, persists the algorithm
+  with additive migration `0027_policy_digest_algorithm.sql`, and defaults new
+  policy writes to `canonical-json-v1` while preserving legacy rows.
+- **Verification:** Focused policy tests 13/13; full Web 864/842/22/0; 28
+  ordered migrations; hosted Verify `37488304350`, Vercel, GitGuardian, build,
+  dependency, SBOM, license, secret, boundary, and schema checks passed.
+- **Boundary:** This is code-side R-042 alignment only. No production row
+  rewrite, migration, hosted policy API activation, or PLAN-CLI-001 evidence
+  occurred; TEAM-CLI-001 and final reconciliation/activation remain open.
+
 ## Acceptance · 2026-10-03 · ACCEPT-006/007 protocol freeze
 
 - **Artifacts:** Private comprehension-test and Hunt-adjudication protocols with validators.

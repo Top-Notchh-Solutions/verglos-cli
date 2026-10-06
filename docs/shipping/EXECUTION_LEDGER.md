@@ -2030,6 +2030,20 @@ changed and no checkbox was closed.
   reviewer, browser-human, field-CWV, migration, or production acceptance is
   claimed. No production/database operation occurred.
 
+# 2026-10-06 — canonical policy digest alignment
+
+- Web PR #146 (`5763632`) merged as `88a7791`; hosted Verify run
+  `37488304350` passed all required checks.
+- The Web contract now names both digest algorithms, preserves legacy row
+  verification, defaults new writes to recursive `canonical-json-v1`, and
+  stores the algorithm through additive migration `0027_policy_digest_algorithm`.
+- Local Web verification passed 864/842/22/0; ordered migration validation
+  passed for 28 migrations. No stored rows were rewritten and no production
+  migration or hosted policy endpoint activation occurred.
+- This addresses the implementation mismatch recorded in R-042. TEAM-CLI-001,
+  PLAN-CLI-001, production reconciliation, and final activation evidence remain
+  open. No checkbox changed.
+
 # 2026-10-06 — scope expansion: GitHub orgs, payment methods, private acceptance corpus
 
 - **Founder direction recorded:** shipping scope now includes production-aligned GitHub organization/App architecture, all Razorpay payment methods enabled by the account, and a private full-clone evaluation corpus spanning TypeScript/JavaScript architecture shapes from small products through enterprise-like systems.
