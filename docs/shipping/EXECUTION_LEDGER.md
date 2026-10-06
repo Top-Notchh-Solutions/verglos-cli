@@ -1795,3 +1795,16 @@ changed and no checkbox was closed.
   recovery evidence, and independent qualification. No checkbox, production,
   or database state changed.
 - Evidence: `docs/shipping/evidence/dist-006-rollback-plan-2026-10-06.md`.
+
+# 2026-10-06 — structured Hunt isolation evidence pack
+
+- CLI PR #66 (`d3c0df0`) merged as `e62ae12`. Self-scan now writes a structured
+  report binding source commit, pinned image digest, runtime, and parsed
+  adversarial totals, plus the raw log. Local pinned Docker run: 55 pass, one
+  explicit macOS namespace skip, zero failures.
+- Hosted run `37458869285` passed all nine platform cells and in-toto. The first
+  Windows Node 20 attempt hit a transient `EBUSY` clean-consumer cleanup race;
+  the failed cell was rerun successfully. QUAL-CLI-004 remains open for
+  independent review and final provenance/recipe gates. No production or
+  customer data was accessed.
+- Evidence: `docs/shipping/evidence/qual-cli-004-hunt-evidence-pack-2026-10-06.md`.
