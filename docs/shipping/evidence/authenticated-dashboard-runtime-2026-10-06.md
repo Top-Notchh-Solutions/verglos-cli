@@ -23,3 +23,12 @@ the PRO organization dashboard, organization membership, authenticated dashboard
 accessibility, screen-reader behavior, large-dataset behavior, or field CWV.
 QUAL-WEB-006 remains open. No production write, checkout, entitlement change,
 or database operation occurred.
+
+## Supplemental public/runtime smoke
+
+Using the same attached page, a bounded DOM/navigation smoke observed one
+`main` landmark and zero unnamed form controls on `/`, `/checkout`, and
+`/account`. Navigation timing was 354.5 ms, 790.4 ms, and 722.9 ms
+respectively in this single browser run. These are navigation timings, not field
+Core Web Vitals, and do not substitute for the required screen-reader, dataset,
+or field-CWV evidence.
