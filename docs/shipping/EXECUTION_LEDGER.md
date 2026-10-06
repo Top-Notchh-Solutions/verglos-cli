@@ -1599,3 +1599,15 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/web-negative-boundary-truth-registry-2026-10-06.md`.
 - These are qualification results only; no deployment, production write,
   public-copy change, or backlog checkbox change occurred.
+
+# 2026-10-06 — CLI public-package packing qualification
+
+- Exact current CLI commit `955412516b96cc09393e78c43bf7d02b9abd05d9` packed six
+  `2.0.0-alpha.1` public archives successfully. Every archive includes the
+  package license and third-party notices; archive digests are recorded in the
+  evidence file.
+- `pnpm licenses:inventory` exited 0 but still reports unresolved review
+  blockers (nested-license conflict, BlueOak review requirements, and missing
+  source metadata). LIC/DIST release gates therefore remain open.
+- Evidence: `docs/shipping/evidence/cli-public-package-pack-2026-10-06.md`.
+- No publication, tag, deployment, or backlog checkbox change occurred.
