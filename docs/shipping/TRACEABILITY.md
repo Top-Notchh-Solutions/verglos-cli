@@ -1076,8 +1076,8 @@ the backlog item remains open.
 installation/token lifecycle, delivery replay/lifecycle reconciliation, and an
 authorized organization cutover. `PLAN-WEB-013..015` trace to a server/catalog
 payment-method surface and account-specific Razorpay test evidence; provider
-documentation is not runtime evidence. `ACCEPT-011..014` trace to private
-non-shallow TypeScript/JavaScript fixtures, reproducible current-source scans,
+documentation is not runtime evidence. `ACCEPT-011..014` trace to a post-shipping-
+candidate private non-shallow TypeScript/JavaScript fixture phase, reproducible current-source scans,
 held-out false-positive review, and a final regression/go-no-go record. None of
 these items is accepted by this planning entry; no public repository receives
 fixture data, credentials, customer data, or private competitive intelligence.

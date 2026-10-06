@@ -143,7 +143,8 @@ method enabled for the account in test mode (cards, UPI, netbanking, wallets
 where enabled), including success/failure, capture, refund, renewal, replay, and
 out-of-order events. Documentation does not substitute for account evidence.
 
-Before Gate 6 can claim final acceptance, `ACCEPT-011..014` must use private
+Before Gate 6 can claim final acceptance, and only after the shipping candidate
+is frozen, `ACCEPT-011..014` must use private
 non-shallow fixture manifests, held-out repositories, reproducible current-source
 scans, license/scope records, false-positive correction review, and a dated
 regression/go-no-go. No customer acceptance may be inferred from public fixtures.

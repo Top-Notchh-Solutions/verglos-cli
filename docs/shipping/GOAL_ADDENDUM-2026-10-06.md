@@ -13,11 +13,13 @@ any existing evidence or safety gate.
    server/catalog contract and qualify the enabled matrix (cards, UPI,
    netbanking, wallets where enabled) across success, failure, capture, refund,
    renewal, replay, and out-of-order events.
-3. Final evaluation must use private, full non-shallow TypeScript/JavaScript
+3. **After all shipping implementation and qualification gates are complete,**
+   final evaluation must use private, full non-shallow TypeScript/JavaScript
    repositories selected by architecture shape: small product, multi-user SaaS,
    multi-tenant/team, and enterprise-like boundaries. Public technical fixtures
    are not customer acceptance.
-4. Feedback must use a held-out corpus to identify false positives, false truth,
+4. Feedback must use a held-out corpus after the shipping candidate is frozen to
+   identify false positives, false truth,
    missing coverage, and performance regressions before the final go/no-go.
 5. Public CLI repositories must contain no customer data, credentials,
    proprietary source, private reports, fixture contents, or competitive

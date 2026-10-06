@@ -1141,7 +1141,10 @@ Founder expanded the critical path with `GITHUB-WEB-001..004` (GitHub App/org
 architecture and live cutover evidence), `PLAN-WEB-013..015` (provider-supported
 Razorpay payment-method catalog and test/production reconciliation), and
 `ACCEPT-011..014` (private full-clone TS/JS architecture corpus, reproducible
-analysis, held-out false-truth review, and final regression/go/no-go). These are
+analysis, held-out false-truth review, and final regression/go/no-go). The
+repository corpus is explicitly a post-shipping validation phase: it starts only
+after implementation, qualification, and release-candidate freeze are complete.
+These are
 open items; the backlog intentionally grows rather than being gamed downward.
 
 Execution is now one dependency-ready acceptance boundary per phase PR/repo:
