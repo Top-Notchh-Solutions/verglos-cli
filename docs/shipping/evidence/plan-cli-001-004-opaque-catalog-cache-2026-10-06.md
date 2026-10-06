@@ -3,7 +3,7 @@
 Date: 2026-10-06
 Repository: `verglos-cli`
 Branch: `feat/cli-hunt-execution-v1`
-Commit: `937705b`
+Commits: `937705b`, `fa4a131`, `714cb3e`; merged to CLI `main` as `dacd286`
 Pull request: [CLI PR #71](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/71)
 
 ## Scope
@@ -30,12 +30,16 @@ client plan catalog or changing production state:
 - `pnpm --filter verglos typecheck` passed.
 - `pnpm --filter verglos build` passed.
 - `git diff --check` passed before commit.
-- Hosted evidence is pending on PR #71 and must be recorded separately after
-  completion; local evidence is not substituted for hosted qualification.
+- Hosted run `37497389053` passed self-scan, in-toto release binding, and all
+  nine Ubuntu/macOS/Windows × Node 20/22/24 platform cells. Earlier runs
+  exposed Windows-only cleanup defects: `37495019334` failed `ENOTEMPTY` in
+  policy-exception teardown and `37496188177` failed `EBUSY` in clean-consumer
+  teardown; both were corrected with bounded cleanup handling before the final
+  green run.
 
 ## Boundary and remaining gates
 
-This is code-side PLAN-CLI-001/004 progress only. It does not prove production
+This is merged code-side PLAN-CLI-001/004 progress only. It does not prove production
 signer activation, trust-root deployment, tenant mapping, live v2 token
 issuance, provider billing, production access, or final release acceptance.
 PLAN-CLI-001, PLAN-CLI-004, PLAN-CLI-002, TEAM-CLI-001, and the dependent final

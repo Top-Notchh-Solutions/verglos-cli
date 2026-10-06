@@ -2,12 +2,13 @@
 
 ## PLAN-CLI-001/004 addendum · 2026-10-06
 
-CLI PR #71 (`937705b`) hardens the opaque catalog-version and simulation-cache
-contract with local test/typecheck/build evidence. It is preparatory code-side
-evidence only. It does not satisfy production signer activation, trust-root
-alignment, live token issuance, or final release gates. No gate checkbox or
-backlog count changes from this batch; R-041 continues to block production
-operations.
+CLI PR #71 (`937705b`, `fa4a131`, `714cb3e`) merged as `dacd286` hardens the
+opaque catalog-version and simulation-cache contract with local and hosted
+evidence. Hosted run `37497389053` passes self-scan, in-toto, and all nine
+platform cells. It is still preparatory code-side evidence only: it does not
+satisfy production signer activation, trust-root alignment, live token
+issuance, or final release gates. No gate checkbox or backlog count changes
+from this batch; R-041 continues to block production operations.
 
 ## HUNT-009 boundary review · 2026-10-06
 

@@ -2,14 +2,17 @@
 
 ## 2026-10-06 · PLAN-CLI-001/004 opaque catalog and cache qualification
 
-- **Code:** CLI commit `937705b`, PR #71, preserves server-owned
+- **Code:** CLI commits `937705b`, `fa4a131`, and `714cb3e`, PR #71 merged as
+  `dacd286`, preserve server-owned
   `catalog_version`, validates its bounded wire shape, and binds stale cache
   reuse to the requested founder simulation. The fixtures remain opaque and
   server-shaped; no client-side paid capability map was added.
 - **Verification:** CLI package runner completed all discovered tests with zero
   failures, including entitlement JWT/offline/license API coverage; CLI
-  typecheck, build, and `git diff --check` pass locally. Hosted PR checks are
-  pending and will be recorded with their run ID after completion.
+  typecheck, build, and `git diff --check` pass locally. Hosted run
+  `37497389053` passes self-scan, in-toto, and all nine platform cells. Earlier
+  Windows-only cleanup failures in runs `37495019334` and `37496188177` were
+  fixed before this final green run.
 - **Boundary:** PLAN-CLI-001/004 remain unchecked. No production signer,
   tenant mapping, v2 issuance, database read/write, deployment, provider,
   customer, publish, or release operation occurred. R-041 remains open.
