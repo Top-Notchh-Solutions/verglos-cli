@@ -83,6 +83,8 @@ import { executeRecordHeader } from "./record-header.js";
 import { executeRecordProvenanceImport } from "./record-provenance-import.js";
 import { executeRecordPackage } from "./record-package.js";
 import { printTelemetryConsentPreview, readTelemetryConsent, writeTelemetryConsent } from "./telemetry.js";
+import { readFile as readFileBytes } from "node:fs/promises";
+import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -236,6 +238,30 @@ policy.command("exception <exceptionPath>")
   .option("--quiet", "Suppress human output")
   .action(async (exceptionPath: string, opts: { approval: string; json?: boolean; quiet?: boolean }) => {
     process.exit(await executePolicyExceptionShow(exceptionPath, opts.approval, opts.json, opts.quiet));
+  });
+const organizationPolicy = policy.command("organization").description("Resolve a signed organization policy for one repository");
+organizationPolicy.command("fetch <organizationId> <repositoryId>")
+  .description("Fetch and verify a tenant-bound policy, or resolve its bounded offline cache")
+  .requiredOption("--trusted-keys <path>", "JSON file containing trusted organization policy public keys")
+  .requiredOption("--cache <path>", "Bounded local policy cache path")
+  .option("--offline", "Use the verified cache without network access")
+  .option("--endpoint <path>", "Override the policy endpoint path")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (organizationId: string, repositoryId: string, opts: { trustedKeys: string; cache: string; offline?: boolean; endpoint?: string; json?: boolean; quiet?: boolean }) => {
+    try {
+      const trustedKeys = JSON.parse((await readFileBytes(opts.trustedKeys, "utf8"))) as unknown;
+      if (!Array.isArray(trustedKeys)) throw new Error("trusted keys file must contain an array");
+      const result = await fetchOrganizationPolicy({ organizationId, repositoryId, trustedKeys: trustedKeys as never[], cachePath: opts.cache, offline: opts.offline, endpoint: opts.endpoint });
+      const safe = result.resolved && result.entry ? { resolved: true, source: result.source, organizationId: result.entry.organizationId, repositoryId: result.entry.repositoryId, policyDigest: result.entry.policyDigest, expiresAt: result.entry.expiresAt } : { resolved: false, reason: result.reason, status: result.status };
+      if (opts.json) console.log(JSON.stringify(safe));
+      else if (!opts.quiet) console.log(result.resolved ? `Resolved ${result.source} organization policy ${result.entry?.policyDigest}.` : `Organization policy unavailable: ${result.reason}.`);
+      process.exitCode = result.resolved ? 0 : 78;
+    } catch (error) {
+      if (opts.json) console.log(JSON.stringify({ resolved: false, reason: "invalid-input" }));
+      else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Organization policy fetch failed.");
+      process.exitCode = 78;
+    }
   });
 
 const evidence = program.command("evidence").description("Import and export standards evidence");
