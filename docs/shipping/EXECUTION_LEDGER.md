@@ -1328,3 +1328,17 @@ deployment, migration, or production state changed.
 - This corrects the current access fact only; no billing lifecycle, deployment
   mutation, migration, or production write was performed.
 - Evidence: `docs/shipping/evidence/vercel-readonly-access-2026-10-03.md`.
+
+# 2026-10-06 — Web qualification runner and dependency audit repair
+
+- Added `pnpm test:serial` to Web PR #138 (`6e9c707`) so the configured
+  pretest/test suites can run with Node test concurrency forced to one worker;
+  the existing parallel test command remains unchanged.
+- Local verification: Web serial suite 837 passed, 0 failed, 22 explicit
+  environment-gated skips. Hosted typecheck/schema, build, Vercel preview,
+  and security checks passed after pinning `source-map-js` 1.2.2 and
+  `compression` 1.8.2 in the lockfile. The audit still reports two moderate
+  findings; no high-severity findings remain.
+- This improves reproducibility and removes a release-quality blocker. It does
+  not close provider, customer-consent, independent-review, field-CWV,
+  screen-reader, Linux-namespace, or production acceptance gates.
