@@ -108,3 +108,4 @@ export * from "./record-sigstore.js";
 export * from "./release-rollback.js";
 export * from "./organization-policy.js";
 export * from "./private-runner.js";
+export * from "./client-projection.js";
