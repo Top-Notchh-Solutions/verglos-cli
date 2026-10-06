@@ -1768,3 +1768,16 @@ changed and no checkbox was closed.
   activation, and hosted SCM/provider integration evidence. No checkbox,
   production, or database state changed.
 - Evidence: `docs/shipping/evidence/team-cli-policy-fetch-2026-10-06.md`.
+
+# 2026-10-06 — CLI Studio client projection workflow
+
+- CLI PR #64 (`468bdc0`) merged as `1fa878d`. The shared and command-side
+  workflow now requires an explicit approval bound to organization, client
+  workspace, record digest, actor, and expiry before producing an upload-ready
+  redacted projection digest.
+- Focused shared/CLI tests 6/6, typecheck/build/diff, hosted nine-cell matrix,
+  Self-scan, and in-toto binding passed.
+- STUDIO-CLI-001 remains open pending upload transport, Web admission and
+  persistence, and customer acceptance evidence. No checkbox, production, or
+  database state changed.
+- Evidence: `docs/shipping/evidence/studio-cli-client-projection-2026-10-06.md`.
