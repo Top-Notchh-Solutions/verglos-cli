@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-06 · PLAN-CLI-003 authenticated request-matrix progress
+
+- **Code:** Web PR #147 merged as `7248919`; usage reconciliation now rejects
+  forged tenant/plan/capability/usage/record query fields before ledger access,
+  and hosted receipt ingestion rejects the same authority fields plus forged
+  allowance/project identity before persistence. Existing v2 entitlement tests
+  retain server-derived license, tenant, role, and catalog binding.
+- **Verification:** Local Web 865 total / 843 passed / 22 explicit skips / 0
+  failures; disposable PostgreSQL receipt integration 1/1; typecheck/build;
+  hosted run `37492088157` typecheck/schema, Vercel, GitGuardian, and Preview
+  Comments.
+- **Boundary:** PLAN-CLI-003 remains unchecked. This is code-side evidence only;
+  authenticated production request probing and the remaining list/search/export/
+  public-private runtime evidence are still required. No production/provider/
+  customer operation occurred.
+
 ## 2026-10-06 · HUNT-009 public/private boundary review
 
 - **Decision:** Do not accept or publish the functional Hunt command attempt.

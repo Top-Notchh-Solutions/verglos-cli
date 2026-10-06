@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## Modified authenticated client boundary · 2026-10-06 · Web PR #147
+
+- **Implementation:** Web commit `7248919` rejects forged tenant, plan,
+  capability, usage, and record fields on the authenticated usage and receipt
+  request paths before ledger access or persistence; the existing v2 token
+  matrix binds claims to server-side license/tenant/catalog state.
+- **Verification:** Local Web 865/843/22/0, disposable PostgreSQL receipt
+  integration 1/1, typecheck, build, hosted run `37492088157` typecheck/schema,
+  Vercel, GitGuardian, and Preview Comments all pass.
+- **Boundary:** Code-side qualification only. PLAN-CLI-003 remains open for
+  authenticated production probing and the remaining list/search/export/cache/
+  public-private runtime matrix. No production or customer operation occurred.
+
 ## Hunt functional command boundary · 2026-10-06
 
 - **Attempt:** A bounded local command was prototyped on CLI branch `feat/cli-hunt-execution-v1` from `67a132c`, but no commit was retained.

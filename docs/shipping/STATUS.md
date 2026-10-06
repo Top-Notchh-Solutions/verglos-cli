@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-06 · PLAN-CLI-003 authenticated request-matrix progress
+
+Web PR #147 merged as `7248919` adds explicit authenticated modified-client
+coverage for usage reconciliation and hosted receipt ingestion. Forged tenant,
+plan, capability, usage, and record query/body fields are rejected before the
+ledger or receipt persistence path is touched; the existing v2 entitlement
+claim-binding test covers forged plan, tenant, role, capability, allowance,
+usage, and record claims. Local Web verification is 865 total / 843 passed /
+22 explicit environment-gated skips / 0 failures; disposable PostgreSQL
+receipt integration is 1/1, typecheck and build pass, and hosted run
+`37492088157` passes typecheck/schema, Vercel, GitGuardian, and Preview
+Comments. This is code-side qualification only: no production authenticated
+probe or customer/provider operation occurred. PLAN-CLI-003 remains open for
+the complete authenticated production request matrix and list/search/export/
+public-private runtime evidence. Private evidence:
+`docs/shipping/evidence/modified-client-authenticated-request-matrix-2026-10-06.md`.
+
 ## 2026-10-06 · HUNT-009 public/private boundary review
 
 No HUNT-009 acceptance credit is recorded. A local functional-command attempt

@@ -75,6 +75,15 @@ Webhook/input qualification update (2026-09-20): Web PR #48 exact head `508cde0`
 - Every command and plan has a shipped/partial/planned label.
 - Open-core, premium content, third-party licenses, notices, and trademark boundaries reviewed.
 
+### PLAN-CLI-003 progress · 2026-10-06
+
+The authenticated usage/record request matrix has code and hosted CI evidence
+at Web PR #147 / merge `7248919`. Forged authority fields are rejected or
+ignored before server-side ledger/persistence decisions. The release gate
+remains open for the authenticated production probe and the complete
+list/search/export/cache/public-private runtime matrix; no production evidence
+is inferred from this code batch.
+
 ## Gate 1 — Evidence correctness
 
 - Subject identity is immutable and digest-bound.
