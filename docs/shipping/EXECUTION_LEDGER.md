@@ -1488,3 +1488,11 @@ changed and no checkbox was closed.
   operator credential mutation was made.
 - Evidence: `docs/shipping/evidence/cli-self-scan-triage-2026-10-06.md`.
 - No checkbox, production, release, or backlog state changed.
+
+# 2026-10-06 — full Web serial qualification suite
+
+- Ran `pnpm test:serial` from the current `verglos-web` checkout. Result:
+  859 tests discovered, 837 passed, 0 failed, 22 skipped, exit 0.
+- Evidence: `docs/shipping/evidence/web-serial-suite-2026-10-06.md`.
+- Skips are environment-dependent integration cases; no production write,
+  migration, deployment, or backlog checkbox changed.
