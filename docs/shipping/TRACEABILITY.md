@@ -1051,3 +1051,12 @@ confirmed 26 migration rows, new SCM/deletion tables and indexes, unchanged
 bounded row counts, Web qualification 23/23, typecheck, Drizzle, and migration
 checks. This proves schema deployment only, not provider cutover or deletion
 acceptance.
+
+# 2026-10-06 organization policy client
+
+TEAM-CLI-001 implementation is present at CLI commits `04b48fb` / `390b0c0`:
+signed, versioned organization/repository-bound policy verification, bounded
+remote fetch, atomic private cache, offline expiry checks, and a CLI command
+that exposes source and policy digest. Focused cache/fetch tests pass 4/4.
+The hosted policy API and production PLAN-CLI activation are not qualified, so
+the backlog item remains open.

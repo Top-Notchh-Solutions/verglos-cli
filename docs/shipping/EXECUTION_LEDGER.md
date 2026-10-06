@@ -1942,3 +1942,16 @@ changed and no checkbox was closed.
   does not prove organization-dashboard, screen-reader, large-dataset, or field
   CWV acceptance. QUAL-WEB-006 remains open. Evidence:
   `docs/shipping/evidence/authenticated-dashboard-runtime-2026-10-06.md`.
+
+# 2026-10-06 — organization policy client reconciliation
+
+- Current CLI source contains TEAM-CLI-001 implementation from `04b48fb` /
+  `390b0c0`: signed organization-policy envelope verification, tenant/repository
+  binding, bounded remote fetch, atomic private cache, expiry-aware offline
+  fallback, and the `policy organization` command.
+- Current focused tests passed **4/4** for cache/fetch behavior. MCP authority
+  and input-contract tests passed **28/28**; Hunt MCP tools remain explicit
+  alpha stubs and do not execute recipes.
+- TEAM-CLI-001 remains unchecked because the hosted policy endpoint is not
+  deployed/qualified and PLAN-CLI-001 production activation evidence remains
+  open. No public code changed or production operation ran.
