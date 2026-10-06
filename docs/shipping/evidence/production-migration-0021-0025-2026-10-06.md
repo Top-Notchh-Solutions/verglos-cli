@@ -30,3 +30,7 @@
   production connection string as a command-line argument. The value is not
   repeated here and was not committed. Rotate the Neon/database credential and
   refresh the Vercel production secret before any further production operation.
+- Deployment smoke: Vercel production deployment `dpl_Cie71NTDhWpx4tQY9NbtBqcDKCYp`
+  is Ready and its output manifest contains `api/v1/account/deletion`. An
+  anonymous request returns 404 because Clerk middleware intentionally hides
+  protected routes; this is not evidence of an absent deployment route.
