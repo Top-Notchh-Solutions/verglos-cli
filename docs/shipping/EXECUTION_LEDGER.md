@@ -1743,3 +1743,16 @@ changed and no checkbox was closed.
 - The tests preserve the fail-closed license blocker behavior; no legal,
   publication, production, or backlog state changed.
 - Evidence: `docs/shipping/evidence/cli-release-contract-tests-2026-10-06.md`.
+
+# 2026-10-06 — CLI private runner protocol substrate
+
+- CLI PR #62 (`1633108b`) merged as `e7b0986`. The shared private-runner
+  contract now bounds tenant/runner binding, short-lived signed jobs, replay,
+  target/network policy, resource limits, and least-evidence result projection;
+  it deliberately does not provide arbitrary remote shell execution.
+- Focused tests 3/3, shared typecheck/build, hosted nine-cell platform matrix,
+  self-scan, and in-toto binding passed.
+- ENT-CLI-001 remains open for HTTP enrollment/poll/result transport, hosted
+  integration, deployment evidence, and independent review. No checkbox,
+  production, or publication state changed.
+- Evidence: `docs/shipping/evidence/ent-cli-private-runner-2026-10-06.md`.
