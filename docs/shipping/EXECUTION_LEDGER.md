@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-06 · serial disposable-Postgres integration revalidation
+
+- **Runtime:** Disposable local `postgres:15-alpine` database `verglos_test` on `127.0.0.1:55432`; no production connection.
+- **Verification:** Queue/provider, worker-crash, usage-ledger, threshold-outbox, and concurrency integration files pass **14/14** with `--test-concurrency=1`.
+- **Boundary:** The parallel full-suite run is not credited because shared schema/extension setup races and incomplete disposable schema caused failures/hangs. Serial evidence validates these 14 paths only; no hosted or production qualification is inferred.
+
 ## 2026-10-06 · exact-source acceptance harness rerun
 
 - **Source:** Persistent pinned CLI worktree `955412516b96cc09393e78c43bf7d02b9abd05d9`; Web `763aab07a19f054dee41dc83ab9ec9f0743b4925`.
