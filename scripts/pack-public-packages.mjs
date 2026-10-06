@@ -12,6 +12,7 @@ const npmOptions = { cwd: root, maxBuffer: 4 * 1024 * 1024, shell: process.platf
 const manifests = new Map();
 for (const name of packageNames) manifests.set(name, JSON.parse(await readFile(join(root, "packages", name, "package.json"), "utf8")));
 const versions = new Map([...manifests.values()].map((manifest) => [manifest.name, manifest.version]));
+const privateWorkspacePackages = new Set([...manifests.values()].filter((manifest) => manifest.private === true).map((manifest) => manifest.name));
 const destination = resolve(process.argv[2] ?? "");
 if (!process.argv[2]) throw new Error("pack output directory is required");
 await mkdir(destination, { recursive: true });
@@ -39,6 +40,9 @@ try {
     for (const field of ["dependencies", "optionalDependencies", "devDependencies"]) {
       for (const [dependency, range] of Object.entries(manifest[field] ?? {})) {
         if (typeof range === "string" && range.startsWith("workspace:")) {
+          if (privateWorkspacePackages.has(dependency)) {
+            throw new Error(`public package ${manifest.name} cannot depend on private workspace package ${dependency}`);
+          }
           const version = versions.get(dependency);
           if (!version) throw new Error(`workspace dependency ${dependency} has no known package version`);
           manifest[field][dependency] = `^${version}`;

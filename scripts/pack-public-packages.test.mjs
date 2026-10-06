@@ -27,3 +27,9 @@ test("clean public pack contains six archives without compiled tests or CLI proc
     }
   } finally { await rm(output, { recursive: true, force: true }); }
 });
+
+test("public packer fails closed for private workspace dependencies", async () => {
+  const source = await readFile("scripts/pack-public-packages.mjs", "utf8");
+  assert.match(source, /privateWorkspacePackages/);
+  assert.match(source, /cannot depend on private workspace package/);
+});
