@@ -1449,3 +1449,13 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/cli-clean-consumer-qualification-2026-10-06.md`.
 - Distribution/legal/release checkboxes remain open; no publication or
   production state changed.
+
+# 2026-10-06 — release artifact verifier fail-closed check
+
+- Assembled a private release-shaped directory containing six archives,
+  notices, CycloneDX/SPDX SBOMs, dependency inventory, clean-consumer marker,
+  and checksums. The verifier accepted the artifact layout and then failed at
+  the unresolved-license-blocker gate exactly as designed.
+- Evidence: `docs/shipping/evidence/release-artifact-verifier-2026-10-06.md`.
+- This confirms the release process cannot bypass legal review; no artifact was
+  published and no checkbox changed.
