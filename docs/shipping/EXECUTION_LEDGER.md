@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-06 · TEAM-CLI-001 hosted policy authority substrate
+
+- **Code:** Web PR #148 merged as `cbc0f5a`. Migration `0028` adds an explicit
+  nullable SCM installation → project foreign key; GitHub installation admission
+  validates same-organization active projects; the new policy route requires an
+  active mapped license owner, exact GitHub repository binding, and published
+  canonical policy before signing a CLI-compatible envelope.
+- **Verification:** Focused policy/SCM/tenant contracts 23/23; full Web
+  868/846/22/0; typecheck/build/Drizzle/29-migration ordering; hosted run
+  `37493818464` typecheck/schema, Vercel, GitGuardian, and Preview Comments.
+- **Boundary:** Code-side substrate only. The dedicated signer remains unset;
+  no production migration, row inventory/rewrite, hosted fetch, or customer/
+  provider operation occurred. TEAM-CLI-001/PLAN-CLI-001 remain unchecked and
+  R-041 still blocks production access.
+
 ## 2026-10-06 · PLAN-CLI-003 authenticated request-matrix progress
 
 - **Code:** Web PR #147 merged as `7248919`; usage reconciliation now rejects

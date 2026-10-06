@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-06 · TEAM-CLI-001 hosted policy authority substrate
+
+Web PR #148 merged as `cbc0f5a`. It adds explicit SCM repository-to-project
+binding migration `0028`, same-organization active-project validation, and a
+license-bound `/api/v1/organizations/:organizationId/repositories/:repositoryId/policy`
+route that emits only a published canonical policy in a dedicated Ed25519-signed
+CLI envelope. Local policy/SCM/tenant contract tests pass 23/23; full Web
+verification is 868 total / 846 passed / 22 explicit environment-gated skips /
+0 failures; typecheck, build, Drizzle, 29-migration ordering, and hosted run
+`37493818464` pass. This remains code-side substrate only: no signer secret,
+production migration, policy-row reconciliation, hosted fetch, or production
+operation occurred. TEAM-CLI-001/PLAN-CLI-001 remain open pending activation
+and live evidence. Private evidence:
+`docs/shipping/evidence/organization-policy-hosted-authority-2026-10-06.md`.
+
 ## 2026-10-06 · PLAN-CLI-003 authenticated request-matrix progress
 
 Web PR #147 merged as `7248919` adds explicit authenticated modified-client

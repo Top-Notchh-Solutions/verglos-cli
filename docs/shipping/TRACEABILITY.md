@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## Hosted organization-policy authority · 2026-10-06 · Web PR #148
+
+- **Implementation:** Web merge `cbc0f5a` adds additive SCM project binding,
+  same-organization active-project validation, a license/tenant/repository-bound
+  policy route, canonical policy-document validation, and a separate Ed25519
+  organization-policy signer.
+- **Verification:** Focused policy/SCM/tenant contracts 23/23; full Web
+  868/846/22/0; typecheck, build, Drizzle, 29-migration ordering, hosted run
+  `37493818464`, Vercel, GitGuardian, and Preview Comments pass.
+- **Boundary:** No production signer/trust-root activation, policy inventory or
+  rewrite, hosted fetch, production migration, or customer/provider operation.
+  TEAM-CLI-001 and PLAN-CLI-001 remain open for activation and live evidence.
+
 ## Modified authenticated client boundary · 2026-10-06 · Web PR #147
 
 - **Implementation:** Web commit `7248919` rejects forged tenant, plan,
