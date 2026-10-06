@@ -16,6 +16,9 @@ was changed.
   or security failures.
 - Performance trace (desktop, no throttling): LCP **1,051 ms**, CLS **0.00**;
   TTFB was 522 ms and render delay 529 ms.
+- Lighthouse mobile navigation also scored Accessibility **100** and Best
+  Practices **100**. A mobile trace at 390×844 reported LCP **587 ms** and
+  CLS **0.00** (lab data; no CrUX field data).
 - CrUX field data is unavailable for this private route; this is lab evidence,
   not field-CWV evidence.
 - The page exposed named navigation landmarks, readable signed-in state, and
