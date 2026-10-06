@@ -1756,3 +1756,15 @@ changed and no checkbox was closed.
   integration, deployment evidence, and independent review. No checkbox,
   production, or publication state changed.
 - Evidence: `docs/shipping/evidence/ent-cli-private-runner-2026-10-06.md`.
+
+# 2026-10-06 — CLI organization policy fetch/cache integration
+
+- CLI PR #63 (`390b0c0`) merged as `04b48fb`. The command-side policy path now
+  performs bounded authenticated fetch, signed tenant/repository verification,
+  atomic cache persistence, and explicit offline cache resolution.
+- Focused fetch/cache tests 4/4, typecheck/build/diff, hosted nine-cell matrix,
+  Self-scan, and in-toto binding passed.
+- TEAM-CLI-001 remains open pending deployed Web policy endpoint, production
+  activation, and hosted SCM/provider integration evidence. No checkbox,
+  production, or database state changed.
+- Evidence: `docs/shipping/evidence/team-cli-policy-fetch-2026-10-06.md`.
