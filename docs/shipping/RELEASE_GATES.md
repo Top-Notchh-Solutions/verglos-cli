@@ -122,3 +122,10 @@ npm archives at one shared version. Hosted platform run `37472923540` and
 self-scan `37472923665` passed. DIST-001/002/003 remain open pending protected
 trusted publication, legal clearance, actual provenance evidence, and final
 release-governance qualification.
+
+Production schema addendum (2026-10-06): migrations `0021`–`0025` were applied
+to Neon production only after read-only inventory, a local `pg_dump` restore
+rehearsal, and exact additive SQL review. Post-write verification reached 26
+migration rows and confirmed new SCM/deletion tables/indexes with invariant row
+counts unchanged. This does not close provider cutover, deletion acceptance,
+backup/restore operations, or independent-review gates.

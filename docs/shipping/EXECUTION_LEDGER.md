@@ -1875,6 +1875,24 @@ changed and no checkbox was closed.
   record evidence, consent inventory, and runtime acceptance. Backlog remains
   **218 checked / 51 unchecked / 269 total**.
 
+# 2026-10-06 — production migration 0021–0025
+
+- Read-only Neon preflight identified 21 applied migrations and no
+  `account_deletion_requests` table. A 116 KiB `pg_dump` snapshot was restored
+  into Docker PostgreSQL 18; the local clone reached 26 migrations and exposed
+  the new SCM/deletion indexes before production apply.
+- With founder authorization, `pnpm db:migrate` applied only additive
+  migrations `0021` through `0025` to Vercel production. No data updates,
+  deletes, backfills, or cutover ran.
+- Post-write verification found 26 migration rows, SCM installation/delivery
+  tables, deletion table and pending unique index, and unchanged invariant
+  counts (2 users, 1 organization, 3 webhook events, 0 deletion requests).
+  Web route/quality tests passed 23/23; typecheck, Drizzle, and migration
+  checks passed. Evidence:
+  `docs/shipping/evidence/production-migration-0021-0025-2026-10-06.md`.
+- TEAM-WEB-006 and QUAL-WEB-005 remain open for live provider/cutover and
+  hosted deletion/legal/customer-held evidence respectively.
+
 # 2026-10-06 — strict six-package release verification
 
 - CLI PR #70 (`67a132c`) merged as `3a0959a`. Publish-time strict verification

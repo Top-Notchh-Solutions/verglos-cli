@@ -1039,3 +1039,15 @@ shared version. Local verifier 4/4, workflow/platform contracts 2/2, typecheck
 13/13, hosted platform run `37472923540`, and self-scan `37472923665` passed.
 This is preparatory evidence only; protected publication, legal clearance,
 actual provenance, and rollback evidence remain open.
+
+# 2026-10-06 production migration 0021–0025
+
+Production migration evidence is retained in
+`docs/shipping/evidence/production-migration-0021-0025-2026-10-06.md`.
+Read-only preflight found 21 applied migrations; snapshot/restore rehearsal
+reached 26 migrations in Docker PostgreSQL 18. Founder-authorized production
+apply of additive migrations `0021`–`0025` completed successfully. Verification
+confirmed 26 migration rows, new SCM/deletion tables and indexes, unchanged
+bounded row counts, Web qualification 23/23, typecheck, Drizzle, and migration
+checks. This proves schema deployment only, not provider cutover or deletion
+acceptance.

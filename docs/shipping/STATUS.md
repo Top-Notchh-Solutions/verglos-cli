@@ -1112,3 +1112,12 @@ version. Local verifier 4/4, workflow/platform contracts 2/2, and typecheck
 13/13 passed; hosted platform run `37472923540` and self-scan `37472923665`
 passed. No tag, npm publication, provenance attestation, deployment, legal
 approval, or production operation occurred; DIST-001/002/003 remain open.
+
+Production migration update 2026-10-06: after read-only preflight, a 116 KiB
+snapshot/restore rehearsal, and review of the exact additive SQL, founder-
+authorized `pnpm db:migrate` applied Web migrations `0021`–`0025` to Neon
+production. Verification reports 26 migration rows, SCM/deletion tables and
+indexes, unchanged users/organizations/webhook counts, and zero deletion
+requests. No deletes, backfills, or cutover ran. TEAM-WEB-006 remains open for
+live provider evidence; QUAL-WEB-005 remains open for the hosted worker,
+legal/customer-held, consent, and end-to-end deletion gates.
