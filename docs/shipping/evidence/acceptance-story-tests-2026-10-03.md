@@ -3,8 +3,8 @@
 ## Scope
 
 This evidence records tests run against the latest unreleased CLI source at
-`955412516b96cc09393e78c43bf7d02b9abd05d9` and Web `main` at
-`763aab07a19f054dee41dc83ab9ec9f0743b4925`. It is substrate and regression
+`955412516b96cc09393e78c43bf7d02b9abd05d9` and Web qualification head at
+`24232fd94a80d20e0d01ea80e758a3f77fd13dca`. It is substrate and regression
 evidence only; it does not claim hosted HTTP, live billing, customer consent,
 independent review, screen-reader, field-CWV, or production acceptance.
 
@@ -72,9 +72,9 @@ release/marketing truth review.
 
 Private command `pnpm --silent acceptance:stories:verify` reran the repository-
 owned commands and wrote `docs/shipping/evidence/acceptance-stories-
-verification-2026-10-03.json`. It bound CLI
+verification-2026-10-03.json`. The 2026-10-06 rerun bound CLI
 `955412516b96cc09393e78c43bf7d02b9abd05d9` and Web
-`763aab07a19f054dee41dc83ab9ec9f0743b4925` and reported:
+`24232fd94a80d20e0d01ea80e758a3f77fd13dca` and reported:
 
 - CLI package suite: 236/236 passed, 0 skipped.
 - Web full suite: 877/905 passed, 28 environment-gated skips, 0 failures.

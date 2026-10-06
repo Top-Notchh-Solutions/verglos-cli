@@ -1354,3 +1354,16 @@ deployment, migration, or production state changed.
 - This is only anonymous forged-parameter evidence. Authenticated modified-CLI
   request matrices for usage/records and hosted acceptance remain open; no
   checkbox, production write, database operation, or deployment changed.
+
+# 2026-10-06 — exact-source acceptance-story rerun
+
+- Reran the private cross-repository acceptance harness against CLI
+  `955412516b96cc09393e78c43bf7d02b9abd05d9` and Web qualification head
+  `24232fd94a80d20e0d01ea80e758a3f77fd13dca`.
+- Results: CLI **236/236 passed**; Web **877/905 passed with 28 explicit
+  environment-gated skips and 0 failures**; composed Studio/Enterprise/Team/
+  quality substrates **72/72 passed**. The evidence bundle was regenerated
+  and secret scan passed.
+- This refreshes exact-source regression evidence only. Provider lifecycle,
+  customer consent, independent review, authenticated browser, field-CWV, and
+  account-deletion gates remain open; no checkbox or production state changed.
