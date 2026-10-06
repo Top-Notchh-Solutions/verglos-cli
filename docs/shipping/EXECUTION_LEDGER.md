@@ -1376,5 +1376,17 @@ deployment, migration, or production state changed.
 - The repository contains no separate SCM repository integration fixture; this
   run therefore proves pure contract/runner behavior only. It does not prove
   live GitHub/GitLab credentials, production migrations, provider delivery, or
-  cutover. The temporary database was stopped and removed; no production state
-  changed and no checkbox was closed.
+cutover. The temporary database was stopped and removed; no production state
+changed and no checkbox was closed.
+
+# 2026-10-06 — pinned CLI full qualification
+
+- Repaired dependencies in the disposable pinned worktree, then reran
+  `pnpm exec turbo run test typecheck build --force` against CLI
+  `955412516b96cc09393e78c43bf7d02b9abd05d9`.
+- All **23/23 Turbo tasks** succeeded across tests, typechecks, and builds for
+  every package. The normal run's 16 Docker integration tests stayed
+  explicitly skipped; the separately recorded pinned Docker integration run
+  remains the source of the 55/56 result.
+- Evidence: `docs/shipping/evidence/cli-full-qualification-2026-10-06.md`.
+- No checkbox, release, deployment, migration, or production state changed.
