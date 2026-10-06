@@ -1367,3 +1367,14 @@ deployment, migration, or production state changed.
 - This refreshes exact-source regression evidence only. Provider lifecycle,
   customer consent, independent review, authenticated browser, field-CWV, and
   account-deletion gates remain open; no checkbox or production state changed.
+
+# 2026-10-06 — SCM delivery contract recheck
+
+- Ran the current Web SCM contract, provider mapping, delivery runner/worker,
+  route, and check-composition tests with a disposable PostgreSQL 15 service
+  available locally. Result: **19 passed, 0 failed, 0 skipped**.
+- The repository contains no separate SCM repository integration fixture; this
+  run therefore proves pure contract/runner behavior only. It does not prove
+  live GitHub/GitLab credentials, production migrations, provider delivery, or
+  cutover. The temporary database was stopped and removed; no production state
+  changed and no checkbox was closed.
