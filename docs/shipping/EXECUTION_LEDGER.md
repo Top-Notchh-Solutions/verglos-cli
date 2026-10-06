@@ -1,5 +1,11 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-06 · Hunt Docker runtime revalidation
+
+- **Source/runtime:** Exact unreleased CLI commit `955412516b96cc09393e78c43bf7d02b9abd05d9`; Docker Desktop 29.7.2 on macOS/aarch64; pinned Alpine digest.
+- **Verification:** `@verglos/hunt` Docker-enabled suite passed 55/56 with 0 failures; all 15 enabled runtime assertions passed. PID/IPC namespace comparison remained the single macOS/Linux-host skip.
+- **Boundary:** Fresh local runtime evidence only. Linux namespace qualification, independent Hunt review, recipe provenance, and HUNT-011/QUAL-CLI-004 acceptance remain open.
+
 ## 2026-10-03 · ACCEPT-006/007 protocol freeze
 
 - **Code/docs:** Added private comprehension and Hunt-adjudication protocols plus `acceptance:study-protocols:check`.
