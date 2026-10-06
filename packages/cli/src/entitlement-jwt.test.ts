@@ -9,6 +9,7 @@ import {
   privateKeyFromPem,
   signEntitlement,
 } from "@verglos/entitlement";
+import { validateLicense } from "./license-api.js";
 
 // One temp HOME + one keypair for the whole file. Tests seed
 // credentials.json / capabilities.json fresh in each beforeEach.
@@ -111,6 +112,11 @@ const PLAN_CATALOG_FIXTURES = Object.freeze([
   { plan: "team", real_plan: "team", capabilities: ["scan", "team.policy"], cache_ttl_seconds: 3600, simulated: false, active: true, catalog_version: "2026-10-02.0" },
   { plan: "studio", real_plan: "studio", capabilities: ["scan", "studio.attest"], cache_ttl_seconds: 86_400, simulated: false, active: true, catalog_version: "2026-10-02.0" },
   { plan: "enterprise", real_plan: "enterprise", capabilities: ["scan", "enterprise.sso"], cache_ttl_seconds: 86_400, simulated: false, active: true, catalog_version: "2026-10-02.0" },
+] as const);
+
+const SUPPORTED_VERSION_COMPATIBILITY_FIXTURES = Object.freeze([
+  { clientVersion: "1.8.3", tokenKind: "legacy-v1", expectedOfflinePlan: "free" },
+  { clientVersion: "2.0.0-alpha.1", tokenKind: "signed-v2", expectedOfflinePlan: "pro" },
 ] as const);
 
 beforeEach(() => {
@@ -230,6 +236,32 @@ test("PLAN-CLI-004: malformed catalog fixtures fail safely to Free without stale
       assert.equal(result.plan, "free");
       assert.equal(result.source, "free");
       assert.equal(result.capabilities.includes("fix"), false);
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("PLAN-CLI-004: supported-version fixture matrix migrates v1 validation to v2 and keeps legacy offline state safe", async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = (async (input: string | URL | Request) => {
+      const url = String(input);
+      if (url.endsWith("/api/v1/license/validate")) {
+        return Response.json({ valid: true, plan: "pro", entitlement_token: "legacy.v1.token" });
+      }
+      return Response.json({ ok: true, token_version: 2, entitlement_token: "v2.opaque.token" });
+    }) as typeof fetch;
+    const validation = await validateLicense("vg_test_key", "https://verglos.test");
+    assert.equal(validation.valid, true);
+    if (!validation.valid) return;
+    assert.equal(validation.entitlementToken, "v2.opaque.token", "a supported client prefers the v2 issuance path");
+
+    for (const fixture of SUPPORTED_VERSION_COMPATIBILITY_FIXTURES) {
+      seedCredentials(fixture.tokenKind === "legacy-v1" ? signLegacyProToken() : signProToken());
+      const resolved = await withOfflineFetch(() => mod.resolveEntitlement({ forceRefresh: true }));
+      assert.equal(resolved.plan, fixture.expectedOfflinePlan, fixture.clientVersion);
+      assert.equal(resolved.source, fixture.tokenKind === "legacy-v1" ? "free" : "signed-token", fixture.clientVersion);
     }
   } finally {
     globalThis.fetch = originalFetch;
