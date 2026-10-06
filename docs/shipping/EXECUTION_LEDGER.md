@@ -1611,3 +1611,21 @@ changed and no checkbox was closed.
   source metadata). LIC/DIST release gates therefore remain open.
 - Evidence: `docs/shipping/evidence/cli-public-package-pack-2026-10-06.md`.
 - No publication, tag, deployment, or backlog checkbox change occurred.
+
+# 2026-10-06 — authoritative tracker reconciliation check
+
+- The private tracker remains authoritative at 218 checked / 51 unchecked /
+  269 total. Its open items include the unresolved HUNT, billing/provider,
+  migration, distribution, qualification, acceptance, and final-web gates.
+- The checked-out public `verglos-cli` worktree is an older dirty `main`
+  checkout (`b070942`, ahead/behind divergence) with founder-owned untracked
+  shipping documents; it is not used as the current-source qualification tree.
+  The exact current CLI tree remains `.local/verglos-cli-current` at
+  `955412516b96cc09393e78c43bf7d02b9abd05d9`.
+- The public mirror backlog is stale (144 checked / 125 unchecked) and its
+  shipping documents are untracked in that dirty worktree. It was not silently
+  overwritten. The private tracker is the source used for accounting until a
+  deliberate mirror reconciliation can be reviewed and committed in the
+  correct repository.
+- No source, public repository, deployment, production database, or backlog
+  checkbox changed in this reconciliation check.
