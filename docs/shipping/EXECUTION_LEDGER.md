@@ -1426,3 +1426,16 @@ changed and no checkbox was closed.
   the evidence and is not treated as clean or complete coverage.
 - Evidence: `docs/shipping/evidence/damm-vulnerable-node-scan-2026-10-06.md`.
 - Public-fixture evidence only; no customer acceptance or checkbox changed.
+
+# 2026-10-06 — CLI license and public-package qualification
+
+- Repaired the disposable pinned worktree dependency index, then reran the
+  license inventory and direct public-packaging script.
+- Inventory passed structurally but reports eight explicit review blockers
+  (BlueOak packages, nested `benchmark`, and source-missing
+  `minipass-pipeline`). All six current `2.0.0-alpha.1` archives packed
+  successfully; archive inspection found notices in every archive and no
+  private-key, test-fixture, or CLI-fixture paths.
+- Evidence: `docs/shipping/evidence/cli-license-package-qualification-2026-10-06.md`.
+- No distribution/legal checkbox changed; no publication, tag, deployment, or
+  production state changed.
