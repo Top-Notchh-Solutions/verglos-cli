@@ -10,7 +10,8 @@ tenant-scoped redacted webhook/check persistence. Local Web verification is
 862 total / 840 passed / 22 explicit environment-gated skips / 0 failures;
 focused GitHub/SCM tests pass 16/16; typecheck, build, Drizzle, 27-migration
 ordering, public-boundary, SBOM, license, negative-boundary, and diff checks
-pass. Hosted run `37486358263` passed typecheck, tests, schema, build,
+pass. PR #144 is merged to Web `main` as `1b2a623`; hosted run `37486358263`
+passed typecheck, tests, schema, build,
 dependency audit, SBOM, license, secret guard, Vercel, Preview Comments, and
 GitGuardian after the `sharp >=0.35.5` security-floor fix (`a496608`).
 This does not close GITHUB-WEB-001..004: no live GitHub App installation,

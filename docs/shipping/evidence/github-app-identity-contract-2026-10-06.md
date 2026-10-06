@@ -2,7 +2,8 @@
 
 ## Scope
 
-Web branch `feat/github-app-org-contract`, commits `afb48dc` and `a496608`, PR #144. This
+Web branch `feat/github-app-org-contract`, commits `afb48dc` and `a496608`, merged
+to Web `main` as `1b2a623` through PR #144. This
 batch implements the code-side substrate for GITHUB-WEB-001..003:
 
 - immutable GitHub account, installation, and repository IDs;

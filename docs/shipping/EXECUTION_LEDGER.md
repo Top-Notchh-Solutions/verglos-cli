@@ -2,7 +2,8 @@
 
 ## 2026-10-06 · GitHub App identity contract substrate
 
-- **Code:** Web PR #144, branch `feat/github-app-org-contract`, commit `afb48dc`.
+- **Code:** Web PR #144, branch `feat/github-app-org-contract`, commits
+  `afb48dc`/`a496608`, merged to `main` as `1b2a623`.
 - **Behavior:** Immutable GitHub account/installation/repository identity,
   bounded multi-repository admission, least-privilege permissions, App JWT and
   token-request helpers, token-expiry validation, lifecycle state handling,
