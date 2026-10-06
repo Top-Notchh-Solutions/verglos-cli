@@ -1551,3 +1551,11 @@ changed and no checkbox was closed.
   fixtures, not customers or consented acceptance repositories. No exploit,
   upload, production write, migration, deployment, or backlog checkbox change
   occurred.
+
+# 2026-10-06 — authenticated account DOM accessibility probe
+
+- Production `/account` DOM inspection found one `main`, one `nav`, seven
+  focusable links, zero unlabeled form controls, and no document-level body
+  clipping. Evidence: `docs/shipping/evidence/account-dom-accessibility-probe-2026-10-06.md`.
+- Automated DOM evidence only; no human screen-reader, field-CWV, or large-data
+  claim and no backlog checkbox change.
