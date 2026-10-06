@@ -106,11 +106,11 @@ function withOfflineFetch<T>(fn: () => Promise<T>): Promise<T> {
  * not a second client-side plan catalog: capabilities and allowance keys are
  * intentionally opaque to the CLI. */
 const PLAN_CATALOG_FIXTURES = Object.freeze([
-  { plan: "free", capabilities: ["scan", "server.scan"], cache_ttl_seconds: 60, simulated: false, active: true },
-  { plan: "pro", real_plan: "pro", capabilities: ["scan", "server.fix", "vendor.future_capability"], cache_ttl_seconds: 900, simulated: false, active: true },
-  { plan: "team", real_plan: "team", capabilities: ["scan", "team.policy"], cache_ttl_seconds: 3600, simulated: false, active: true },
-  { plan: "studio", real_plan: "studio", capabilities: ["scan", "studio.attest"], cache_ttl_seconds: 86_400, simulated: false, active: true },
-  { plan: "enterprise", real_plan: "enterprise", capabilities: ["scan", "enterprise.sso"], cache_ttl_seconds: 86_400, simulated: false, active: true },
+  { plan: "free", capabilities: ["scan", "server.scan"], cache_ttl_seconds: 60, simulated: false, active: true, catalog_version: "2026-10-02.0" },
+  { plan: "pro", real_plan: "pro", capabilities: ["scan", "server.fix", "vendor.future_capability"], cache_ttl_seconds: 900, simulated: false, active: true, catalog_version: "2026-10-02.0" },
+  { plan: "team", real_plan: "team", capabilities: ["scan", "team.policy"], cache_ttl_seconds: 3600, simulated: false, active: true, catalog_version: "2026-10-02.0" },
+  { plan: "studio", real_plan: "studio", capabilities: ["scan", "studio.attest"], cache_ttl_seconds: 86_400, simulated: false, active: true, catalog_version: "2026-10-02.0" },
+  { plan: "enterprise", real_plan: "enterprise", capabilities: ["scan", "enterprise.sso"], cache_ttl_seconds: 86_400, simulated: false, active: true, catalog_version: "2026-10-02.0" },
 ] as const);
 
 beforeEach(() => {
@@ -177,8 +177,39 @@ test("PLAN-CLI-004: frozen server catalog fixtures remain opaque and round-trip 
       assert.equal(result.plan, fixture.plan);
       assert.deepEqual(result.capabilities, fixture.capabilities);
       assert.equal(result.cache_ttl_seconds, fixture.cache_ttl_seconds);
+      assert.equal(result.catalog_version, fixture.catalog_version);
       assert.equal(result.source, "rest");
     }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("PLAN-CLI-001: stale cache from another founder simulation is not reused offline", async () => {
+  seedCache(new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), "pro", ["scan", "stale.simulation"]);
+  seedCredentials(undefined);
+  const result = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true, asPlan: "studio" }));
+  assert.equal(result.plan, "free");
+  assert.equal(result.source, "free");
+  assert.equal(result.capabilities.includes("stale.simulation"), false);
+});
+
+test("PLAN-CLI-001: malformed catalog version fails closed without accepting paid capabilities", async () => {
+  seedCredentials(undefined);
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async () => Response.json({
+    plan: "pro",
+    capabilities: ["paid.from.invalid.catalog"],
+    cache_ttl_seconds: 60,
+    simulated: false,
+    active: true,
+    catalog_version: "future-catalog",
+  })) as typeof fetch;
+  try {
+    const result = await mod.loadCapabilities({ forceRefresh: true });
+    assert.equal(result.plan, "free");
+    assert.equal(result.source, "free");
+    assert.equal(result.capabilities.includes("paid.from.invalid.catalog"), false);
   } finally {
     globalThis.fetch = originalFetch;
   }

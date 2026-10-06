@@ -47,6 +47,7 @@ interface CapabilitiesResponse {
   cache_ttl_seconds: number;
   simulated: boolean;
   active: boolean;
+  catalog_version?: string;
   reason?: string;
 }
 
@@ -155,7 +156,9 @@ function parseCapabilitiesResponse(value: unknown): CapabilitiesResponse | null 
   if (typeof raw.simulated !== "boolean" || typeof raw.active !== "boolean") return null;
   const realPlan = typeof raw.real_plan === "string" ? raw.real_plan.toLowerCase() : raw.real_plan;
   if (realPlan !== undefined && (typeof realPlan !== "string" || realPlan.length > 64 || !["free", "pro", "team", "studio", "enterprise", "compliance", "founder"].includes(realPlan))) return null;
-  return { plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(realPlan === undefined ? {} : { real_plan: realPlan }) };
+  const catalogVersion = raw.catalog_version;
+  if (catalogVersion !== undefined && (typeof catalogVersion !== "string" || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}\.[0-9]+$/u.test(catalogVersion))) return null;
+  return { plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(realPlan === undefined ? {} : { real_plan: realPlan }), ...(catalogVersion === undefined ? {} : { catalog_version: catalogVersion }) };
 }
 
 export interface LoadCapabilitiesOptions {
@@ -191,7 +194,7 @@ export async function loadCapabilities(
     // JWT-based flow in @verglos/entitlement). If the cache is older,
     // fail closed to Free and let the caller warn — better than
     // silently letting a cancelled license keep Pro forever.
-    if (cached) {
+    if (cached && cached.simulatedAsPlan === opts.asPlan) {
       const cachedFetchedAt = new Date(cached.fetchedAt).getTime();
       const ageMs = now - cachedFetchedAt;
       if (ageMs < ABSOLUTE_MAX_STALE_MS) {
@@ -310,6 +313,7 @@ export async function resolveEntitlement(
       stale: false,
       simulated: caps.simulated,
       realPlan: caps.real_plan === undefined ? undefined : normalizeTier(caps.real_plan),
+      ...(caps.catalog_version ? { catalogVersion: caps.catalog_version } : {}),
       ...(matchingLicense ? { license: matchingLicense } : {}),
       ...(matchingLicense?.schemaVersion === 2 ? {
         schemaVersion: 2 as const,
@@ -347,6 +351,7 @@ export async function resolveEntitlement(
       stale: caps.stale === true,
       simulated: caps.simulated,
       realPlan: caps.real_plan === undefined ? undefined : normalizeTier(caps.real_plan),
+      ...(caps.catalog_version ? { catalogVersion: caps.catalog_version } : {}),
       ...(license?.tier === normalizeTier(caps.plan) ? { license } : {}),
     };
   }
