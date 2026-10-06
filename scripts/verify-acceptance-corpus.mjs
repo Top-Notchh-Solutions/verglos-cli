@@ -11,7 +11,8 @@ const fixtureRoot = resolve(process.env.VERGLOS_ACCEPTANCE_FIXTURES ?? join(work
 const internalFixtureRoot = resolve(process.env.VERGLOS_INTERNAL_ACCEPTANCE_FIXTURES ?? join(process.cwd(), "acceptance-fixtures"));
 const evidenceRoot = resolve(process.env.VERGLOS_ACCEPTANCE_EVIDENCE ?? join(workspace, ".local-evidence"));
 const cliCommit = process.env.VERGLOS_CLI_COMMIT ?? "955412516b96cc09393e78c43bf7d02b9abd05d9";
-const cliRoot = resolve(process.env.VERGLOS_CLI_ROOT ?? "/tmp/verglos-cli-current.MphZDs");
+const workspaceCliRoot = join(workspace, "verglos-cli");
+const cliRoot = resolve(process.env.VERGLOS_CLI_ROOT ?? (existsSync(workspaceCliRoot) ? workspaceCliRoot : "/tmp/verglos-cli-current.MphZDs"));
 
 const fixtures = [
   { name: "juice-shop", upstream: "https://github.com/juice-shop/juice-shop", commit: "1618a611b173b4bf114028e6e02549950606e29d", license: "MIT" },
