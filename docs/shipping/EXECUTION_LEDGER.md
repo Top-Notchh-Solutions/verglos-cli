@@ -1674,3 +1674,12 @@ changed and no checkbox was closed.
 - This does not close licensing, trusted publication, provenance, or final
   release gates; no publication, deployment, production operation, or backlog
   checkbox change occurred.
+
+# 2026-10-06 — CLI forced regression qualification
+
+- Exact current CLI commit `955412516` completed
+  `pnpm exec turbo run test typecheck build --force`: 23/23 uncached tasks
+  succeeded, zero failures, exit 0.
+- Evidence: `docs/shipping/evidence/cli-forced-regression-2026-10-06.md`.
+- No publication, deployment, production operation, or backlog checkbox
+  change occurred.
