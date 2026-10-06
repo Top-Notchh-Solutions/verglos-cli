@@ -1414,3 +1414,15 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/juice-shop-scan-2026-10-06.md`.
 - This remains public-fixture technical evidence, not customer consent,
   endorsement, hosted acceptance, or a production write. No checkbox changed.
+
+# 2026-10-06 — full DAMM Vulnerable Node fixture scan
+
+- Ran the pinned current CLI against fixture commit
+  `1946570b36bf8e6dcac48142f072f40ee9cee160` under its local authorization
+  manifest. Result: exit 0, 38 files walked, 17 findings, score 34, and
+  critical risk classification.
+- All requested detectors executed, but coverage is explicitly incomplete
+  because npm registry lookup was unavailable. This limitation is retained in
+  the evidence and is not treated as clean or complete coverage.
+- Evidence: `docs/shipping/evidence/damm-vulnerable-node-scan-2026-10-06.md`.
+- Public-fixture evidence only; no customer acceptance or checkbox changed.
