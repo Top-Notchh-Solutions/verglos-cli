@@ -17,6 +17,36 @@
   tenant mapping, v2 issuance, database read/write, deployment, provider,
   customer, publish, or release operation occurred. R-041 remains open.
 
+## Next three independent batches · queue after `dacd286`
+
+1. **QUAL-CLI-006 + DIST-001/003 release-artifact qualification** — deps:
+   merged CLI `dacd286`, current notice/SBOM generators, and official validator
+   tools. Repo: `verglos-cli`; implementation boundary is local archive,
+   clean-consumer, format, checksum, and provenance evidence only. Existing
+   evidence: hosted run `37497389053` passed the nine-cell matrix, self-scan,
+   and in-toto. Active blocker: local `pnpm licenses list --json` lacks cached
+   `turbo@2.10.6` metadata; legal clearance, protected trusted publishing, and
+   keyless release identity remain open. No production operation is required.
+
+2. **PLAN-CLI-004 supported-version compatibility fixtures** — deps:
+   Web PLAN-WEB-002/003 contract and merged CLI `dacd286`. Repos:
+   `verglos-cli` plus read-only Web contract inspection; implementation boundary
+   is frozen v1/v2 token, catalog-version, malformed-payload, and old-client
+   migration fixtures. Existing evidence: CLI hosted matrix/self-scan/in-toto
+   green and Web v2 route tests green. Blocker: deployed signer, tenant
+   mapping, and live activation integration remain absent; R-041 prohibits
+   production access. No production write is authorized.
+
+3. **QUAL-WEB-006 authenticated dashboard accessibility/performance** — deps:
+   current Web dashboard routes and existing production Lighthouse snapshots.
+   Repo: `verglos-web` `main` at `cbc0f5a`; implementation boundary is
+   read-only browser/runtime evidence for keyboard, screen reader, responsive,
+   large-data, and field-CWV behavior, with code fixes only if a reproducible
+   defect appears. Existing evidence covers production `/checkout` and
+   `/account` Lighthouse plus dashboard keyboard/landmark code. Blockers are
+   human screen-reader, large-dataset, and complete field-CWV runs. No deploy
+   or production data change is required.
+
 ## 2026-10-06 · TEAM-CLI-001 hosted policy authority substrate
 
 - **Code:** Web PR #148 merged as `cbc0f5a`. Migration `0028` adds an explicit
