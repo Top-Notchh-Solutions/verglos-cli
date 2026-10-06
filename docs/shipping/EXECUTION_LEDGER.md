@@ -1694,3 +1694,15 @@ changed and no checkbox was closed.
 - This does not substitute for real provider capture/webhook/refund/renewal or
   production reconciliation; PLAN-WEB-011/012 remain unchecked. No provider,
   database, production, or backlog state changed.
+
+# 2026-10-06 — Web billing PostgreSQL drill blocker
+
+- A disposable PostgreSQL 15.17 Docker database was used to try to promote the
+  two skipped billing integration tests. `pnpm db:migrate` failed at migration
+  `0000_rename_sentinel_to_pro` because the empty test database lacks the
+  legacy `licenses` table the migration assumes. The container was removed
+  afterward.
+- Evidence: `docs/shipping/evidence/web-billing-postgres-drill-2026-10-06.md`.
+- This is an isolated-test migration-baseline finding, not a production write.
+  The billing integration tests remain skipped; PLAN-WEB-011/012 and migration
+  gates remain open.
