@@ -1822,3 +1822,13 @@ changed and no checkbox was closed.
   approval/entitlement wiring, functional command integration, and independent
   review. No production or customer data was accessed.
 - Evidence: `docs/shipping/evidence/hunt-008-supported-recipe-catalog-2026-10-06.md`.
+
+# 2026-10-06 — public archive private-dependency boundary
+
+- CLI PR #69 (`ad6ee14`) merged as `b684eba`. The public packer now refuses
+  public packages that depend on private workspace packages, with a regression
+  contract test. Hosted run `37464586376` passed all nine platform cells,
+  clean consumer, upgrade/rollback, self-scan, and in-toto.
+- DIST-001 remains open for final release/legal qualification and dependent
+  product surfaces. No production, customer, or database state was accessed.
+- Evidence: `docs/shipping/evidence/dist-public-private-boundary-2026-10-06.md`.
