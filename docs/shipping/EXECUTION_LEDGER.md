@@ -1539,3 +1539,15 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/production-readonly-smoke-2026-10-06.md`.
 - No credentials/cookies/payment identifiers were recorded and no production
   write, checkout creation, migration, or deployment occurred.
+
+# 2026-10-06 — acceptance corpus integrity recheck
+
+- Re-ran `pnpm --silent acceptance:corpus:verify` against CLI commit
+  `955412516b96cc09393e78c43bf7d02b9abd05d9`. Result: 12 fixtures total,
+  including 6 full public repository clones, 4 contract artifacts, and 2
+  internal fixtures; all full-clone, coverage, artifact-integrity, and internal
+  fixture checks returned true.
+- The verification preserves the boundary that these are public technical
+  fixtures, not customers or consented acceptance repositories. No exploit,
+  upload, production write, migration, deployment, or backlog checkbox change
+  occurred.
