@@ -1663,3 +1663,14 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/razorpay-sandbox-readonly-2026-10-06.md`.
 - This confirms provider connectivity only; PLAN-WEB-011/012 still require the
   complete catalog-bound payment and lifecycle/replay evidence.
+
+# 2026-10-06 — CLI clean-consumer archive qualification
+
+- Fresh temporary consumer installed all six public `2.0.0-alpha.1` archives
+  from exact CLI commit `955412516`, imported every public library, executed
+  the CLI version command, and verified no external engine was implicitly
+  installed or cached. Exit 0.
+- Evidence: `docs/shipping/evidence/cli-clean-consumer-2026-10-06.md`.
+- This does not close licensing, trusted publication, provenance, or final
+  release gates; no publication, deployment, production operation, or backlog
+  checkbox change occurred.
