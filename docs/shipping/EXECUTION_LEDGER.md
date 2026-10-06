@@ -1390,3 +1390,15 @@ changed and no checkbox was closed.
   remains the source of the 55/56 result.
 - Evidence: `docs/shipping/evidence/cli-full-qualification-2026-10-06.md`.
 - No checkbox, release, deployment, migration, or production state changed.
+
+# 2026-10-06 — shipping-document mirror reconciliation
+
+- Compared the private authoritative backlog with the local public CLI
+  shipping mirror. They differ in content and age: the private ledger is the
+  current 218/51/269 tracker, while `verglos-cli/docs/shipping/` is an older
+  Sep-17 untracked user-owned snapshot.
+- The public mirror was not overwritten or staged. Private evidence, customer
+  material, credentials, and operational release state remain confined to the
+  private ledger; the private tracker remains authoritative for acceptance and
+  checkbox accounting.
+- No source, production, deployment, migration, or release state changed.
