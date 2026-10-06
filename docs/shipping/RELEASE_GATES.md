@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## HUNT-009 boundary review · 2026-10-06
+
+The public CLI must not declare private `@verglos/hunt` or embed private Hunt
+runtime code as an unreviewed workaround. The attempted functional wiring was
+removed before commit; typecheck/tests/build/public-boundary/diff checks pass.
+Public packing is not credited because the local pnpm license command fails on
+missing `turbo@2.10.6` package-index metadata. HUNT-008/009/010/011 and
+QUAL-CLI-004 remain open; the alpha shell stays exit-78.
+
 Founder authorization checkpoint (2026-10-02): approval was given to proceed with the final public truth/copy pass after prerequisites, a real billing/provider checkout test, authorized customer acceptance workflows, legal/licensing review, and independent Hunt isolation review. The authorization does not replace evidence. Current read-only inspection found no billing credentials or linked Vercel access, no authorized customer repository/fixture artifact, no legal approval record, and no independent Hunt review package. Those gates remain open; no production checkout, deployment, customer workflow, legal assertion, or independent-review claim occurred.
 
 QUAL-WEB-001 progress (2026-09-30): Web PR #115 tested head `b3dfd77` merged as `4d2051e4`; CLI-style headers and forged organization/license/role/plan/capability/allowance/usage/record fields remain ignored in favor of server-derived entitlement claims. Focused route/boundary tests pass 10/10; hosted run `36705118215`, GitGuardian, and Vercel pass. Gate remains OPEN pending complete list/search/export/public-private runtime evidence. No production operation occurred.

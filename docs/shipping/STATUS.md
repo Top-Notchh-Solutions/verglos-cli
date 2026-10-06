@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-06 · HUNT-009 public/private boundary review
+
+No HUNT-009 acceptance credit is recorded. A local functional-command attempt
+was removed before commit after confirming that the public CLI cannot declare
+private `@verglos/hunt`; the public packer rejects that dependency by design.
+The alpha CLI remains on the honest Pro beta shell and exit-78 contract.
+
+The rollback verification passed CLI typecheck, the full CLI package test suite,
+CLI build, public-boundary audit, and diff hygiene. The local public-pack command
+was not credited because `pnpm licenses list --json` fails on missing cached
+`turbo@2.10.6` package-index metadata. No production/provider/database/customer
+operation occurred. HUNT-008/009/010/011 and QUAL-CLI-004 remain open.
+Private evidence: `docs/shipping/evidence/hunt-009-public-boundary-review-2026-10-06.md`.
+Backlog remains **218 checked / 62 unchecked / 280 total**.
+
 ## 2026-10-06 · GitHub App identity contract substrate (Web PR #144)
 
 Web branch `feat/github-app-org-contract` commit `afb48dc` adds immutable

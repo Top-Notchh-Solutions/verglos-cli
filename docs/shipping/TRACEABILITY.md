@@ -1,5 +1,12 @@
 # Verglos V1 traceability
 
+## Hunt functional command boundary · 2026-10-06
+
+- **Attempt:** A bounded local command was prototyped on CLI branch `feat/cli-hunt-execution-v1` from `67a132c`, but no commit was retained.
+- **Finding:** Public CLI packaging cannot depend on private `@verglos/hunt`; the repository packer rejects private workspace dependencies. The previous unmerged candidate `0ee7348` has the same boundary defect and is not acceptance evidence.
+- **Verification:** After removal, CLI typecheck, tests, build, public-boundary, and diff checks pass. Public pack was not credited because pnpm license-index metadata is missing locally.
+- **Status:** HUNT-009 remains unchecked and the shell remains the truthful exit-78 alpha contract. No private implementation details, findings, or customer data entered the public repository.
+
 ## SCM/GitHub App · 2026-10-06 · Web PR #144
 
 - **Implementation:** `src/lib/organizations/github-app-contract.ts`, additive

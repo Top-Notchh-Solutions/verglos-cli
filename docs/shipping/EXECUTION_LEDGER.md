@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-06 · HUNT-009 public/private boundary review
+
+- **Decision:** Do not accept or publish the functional Hunt command attempt.
+  A public `verglos` package dependency on private `@verglos/hunt` is rejected
+  by `scripts/pack-public-packages.mjs`; the attempted wiring was removed before
+  commit.
+- **Verification:** CLI typecheck, full CLI package tests, build,
+  `scripts/check-public-boundary.mjs`, and `git diff --check` passed. Public
+  packing was not credited because the local pnpm license command failed with
+  `ERR_PNPM_MISSING_PACKAGE_INDEX_FILE` for `turbo@2.10.6`.
+- **Boundary:** The alpha `verglos hunt` shell remains exit-78 for entitled
+  users. HUNT-008/009/010/011 and QUAL-CLI-004 remain open pending the private
+  runtime packaging decision, trusted/licensed recipe provenance, adversarial
+  qualification, and independent review. Backlog remains 218/62/280; no
+  production, provider, customer, deployment, publish, or release action ran.
+
 ## 2026-10-06 · GitHub App identity contract substrate
 
 - **Code:** Web PR #144, branch `feat/github-app-org-contract`, commits
