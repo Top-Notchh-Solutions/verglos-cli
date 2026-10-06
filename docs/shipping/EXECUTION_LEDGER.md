@@ -1496,3 +1496,16 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/web-serial-suite-2026-10-06.md`.
 - Skips are environment-dependent integration cases; no production write,
   migration, deployment, or backlog checkbox changed.
+
+# 2026-10-06 — acceptance-story verification recheck
+
+- Re-ran `pnpm --silent acceptance:stories:verify` against CLI commit
+  `955412516b96cc09393e78c43bf7d02b9abd05d9` and Web commit
+  `24232fd94a80d20e0d01ea80e758a3f77fd13dca`. CLI: 236/236; Web: 877/905
+  with 28 skips; composed Studio/Enterprise/Team/quality: 72/72; exit 0.
+- The machine result preserves the open boundaries: Hunt qualification,
+  modified-client runtime qualification, customer acceptance, provider
+  qualification, and account deletion implementation. Evidence JSON was
+  refreshed at `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
+- No acceptance checkbox changed; no production write, migration, deployment,
+  provider capture, customer fixture use, or reviewer sign-off occurred.
