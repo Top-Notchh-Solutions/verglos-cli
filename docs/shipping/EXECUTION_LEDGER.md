@@ -1683,3 +1683,14 @@ changed and no checkbox was closed.
 - Evidence: `docs/shipping/evidence/cli-forced-regression-2026-10-06.md`.
 - No publication, deployment, production operation, or backlog checkbox
   change occurred.
+
+# 2026-10-06 — Web billing lifecycle focused qualification
+
+- Current Web checkout/webhook tests completed 20 total: 18 passed, 2
+  PostgreSQL-environment skips, 0 failures, exit 0. Signed catalog binding,
+  tamper denial, single-grant/replay semantics, failed/refunded events, and
+  malformed-input/configuration boundaries passed.
+- Evidence: `docs/shipping/evidence/web-billing-lifecycle-focused-2026-10-06.md`.
+- This does not substitute for real provider capture/webhook/refund/renewal or
+  production reconciliation; PLAN-WEB-011/012 remain unchecked. No provider,
+  database, production, or backlog state changed.
