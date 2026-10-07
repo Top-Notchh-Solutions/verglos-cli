@@ -2557,3 +2557,17 @@ namespace evidence, recipe/provenance qualification, or independent review.
 Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
 production, database, provider, payment, deployment, or credential operation
 occurred.
+
+## 2026-10-07 · PLAN-WEB-013 signed hosted-method binding
+
+Web PR #149 commit `67fb7e2` binds the server-selected hosted payment-method
+set into new Razorpay order notes before signing. Snapshot parsing validates a
+bounded, unique, hosted-only set; QR/subscription canonical signatures and
+legacy order notes remain readable. Focused checkout/webhook/payload tests pass
+**15/15**; Web typecheck, 40-page production build, `pnpm db:check`, and diff
+check pass. Private evidence:
+`docs/shipping/evidence/plan-web-013-hosted-method-binding-2026-10-07.md`.
+PLAN-WEB-013/014/015 remain open for provider lifecycle, all-enabled-method,
+deployment, and reconciliation evidence. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. No browser, provider, payment, production,
+database, migration, deployment, or credential operation occurred.

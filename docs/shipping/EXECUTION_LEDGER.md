@@ -3703,6 +3703,21 @@ before enabling any destructive adapter.
 - **Boundary:** No browser, provider, payment, production, database,
   deployment, credential, or external-recipe operation occurred.
 
+# 2026-10-07 — PLAN-WEB-013 signed hosted-method binding
+
+- **Implementation:** Web PR #149 commit `67fb7e2` binds the server-selected
+  hosted payment-method set into signed Razorpay order notes and validates it
+  on snapshot parsing. QR/subscription signatures and legacy order notes remain
+  readable.
+- **Verification:** Focused checkout/webhook/payload tests **15/15 pass**;
+  Web typecheck, 40-page build, `pnpm db:check`, and diff check pass.
+- **Limitation:** PLAN-WEB-013/014/015 remain open for provider lifecycle,
+  all-enabled-method, deployment, and reconciliation evidence. No checkbox
+  changed.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No browser, provider, payment, production, database,
+  migration, deployment, or credential operation occurred.
+
 # 2026-10-07 — CLI regression after MCP Hunt explanation
 
 - **Verification:** Root `pnpm test` at CLI PR #76 head `7022408` completed
