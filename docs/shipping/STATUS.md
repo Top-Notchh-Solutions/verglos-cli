@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · CLI current-main public artifact pack preflight
+
+In an isolated disposable worktree at exact CLI `origin/main` `7d060b2`, the
+documented cross-platform architecture setup materialized the 254-package
+lockfile graph; build passed **8/8** and public packaging produced all six
+expected archives. Official in-toto verification was not claimed because the
+host lacks `in-toto-verify` and the disposable `in-toto==3.0.0` installation
+stalled on its cryptography wheel. This is packaging evidence only;
+QUAL-CLI-006 remains open. No checkbox changed; backlog remains **218 checked /
+62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/cli-current-main-artifact-pack-2026-10-07.md`.
+
 ## 2026-10-07 · CLI current-main Hunt adversarial requalification
 
 The exact remote CLI head `7d060b2` reran the pinned Docker Hunt harness and

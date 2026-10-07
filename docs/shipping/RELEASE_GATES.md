@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## CLI current-main public artifact pack preflight · 2026-10-07
+
+Exact CLI `origin/main` `7d060b2` passed the documented cross-platform install,
+build **8/8**, and public packaging produced all six expected archives in an
+isolated worktree. Official in-toto verification was not run: the host lacks
+`in-toto-verify`, and the disposable `in-toto==3.0.0` installation stalled on
+its cryptography dependency. This does not pass QUAL-CLI-006, which still
+requires official validators, trusted publishing/legal review, and independent
+acceptance. No checkbox or production state changed; backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**.
+
 ## CLI current-main Hunt adversarial requalification · 2026-10-07
 
 The exact remote CLI head `7d060b2` reran the pinned Hunt harness and passed

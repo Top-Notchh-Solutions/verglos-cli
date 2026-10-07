@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## CLI current-main public artifact pack preflight · 2026-10-07
+
+Exact CLI `origin/main` `7d060b2` passed the documented architecture setup,
+frozen install, build **8/8**, and six-archive public package creation in an
+isolated worktree. Official in-toto verification was not claimed because the
+host lacks `in-toto-verify` and the disposable verifier installation stalled
+on its cryptography wheel. This is packaging evidence only; QUAL-CLI-006 and
+independent acceptance remain open. No checkbox changed. See
+`docs/shipping/evidence/cli-current-main-artifact-pack-2026-10-07.md`.
+
 ## CLI current-main Hunt adversarial requalification · 2026-10-07
 
 The exact remote CLI head `7d060b2` reran the pinned Docker Hunt harness and
