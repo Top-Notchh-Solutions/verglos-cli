@@ -11,3 +11,11 @@ or provider write, migration, deletion, payment, deployment, or browser
 mutation occurred. The goal therefore remains active; the next dependency-ready
 batch is the disposable-DB-backed user-scoped deletion job/store with explicit
 reconciliation and restore evidence.
+
+## 2026-10-07 batch update
+
+PR #153 head `b91222a8d4d6ffd08f2be71391d89a6dafedab1` now persists the
+user-scoped deletion job atomically with the request. Focused 16/16,
+disposable PostgreSQL 1/1, full serial 846/23/0, typecheck/schema/migration/
+build/diff checks pass. Hosted checks were pending immediately after push;
+`QUAL-WEB-005` remains open and migration `0031` is not applied to production.

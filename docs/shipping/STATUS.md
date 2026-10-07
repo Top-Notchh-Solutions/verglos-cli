@@ -1767,3 +1767,20 @@ rehearsal, and authenticated non-production E2E are still absent. Migrations
 database, provider, payment, deployment, migration, deletion, or browser
 mutation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-worker-scope-fence-pr153-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 user-scoped job persistence
+
+Web PR #153 advanced to `b91222a8d4d6ffd08f2be71391d89a6dafedab1`. The
+deletion request is now atomically paired with a durable user-scoped job using
+bounded attempts, unique request/idempotency identity, due time, lease pairing,
+and fail-closed status/kind checks. Focused tests pass **16/16**; disposable
+PostgreSQL migration/constraint integration passes **1/1**; the configured
+serial suite passes **846 / 23 explicit skips / 0 fail**; typecheck, Drizzle
+check, 32-migration ordering, diff check, and 38-page build pass. The new
+migration `0031` is source-only and not applied to production. Hosted checks
+were pending at capture; no hosted success, production write, deletion,
+provider/payment action, deployment, or browser mutation is claimed. The
+worker store/claim adapter, deletion transactions, reconciliation/audit,
+restore/rollback, and authenticated non-production E2E remain open. Private
+evidence:
+`docs/shipping/evidence/qual-web-005-job-persistence-pr153-2026-10-07.md`.

@@ -277,3 +277,16 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
   adapter, deletion-job persistence/wiring, row-count and audit reconciliation,
   restore rehearsal, and non-production E2E remain open; no production or
   destructive operation occurred.
+
+## User-scoped deletion job persistence · 2026-10-07
+
+- **Decision:** Pair every accepted deletion request with a durable job in the
+  same transaction, using a dedicated user-scoped table rather than the
+  organization-scoped generic queue.
+- **Evidence:** Web PR #153 head `b91222a`; focused 16/16, disposable
+  PostgreSQL integration 1/1, serial 846/23/0, typecheck/schema/migration/
+  build/diff pass.
+- **Boundary:** Migration `0031` is source-only. This supplies enqueue state
+  but not claim/retry SQL, per-kind deletion, reconciliation/audit receipt,
+  restore/rollback rehearsal, or acceptance; hosted checks were pending at
+  capture and no production operation occurred.

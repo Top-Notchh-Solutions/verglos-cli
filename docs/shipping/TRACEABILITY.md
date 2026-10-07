@@ -1585,3 +1585,14 @@ checks. This remains traceability for the contract only: no operational store,
 job route, destructive SQL, restore rehearsal, or authenticated non-production
 E2E exists, so `QUAL-WEB-005` remains unchecked and source-only migrations
 0029/0030 remain unapplied.
+
+# 2026-10-07 · QUAL-WEB-005 user-scoped job persistence
+
+PR #153 head `b91222a8d4d6ffd08f2be71391d89a6dafedab1` now traces the deletion
+request to a durable user-scoped job inserted in the same transaction. The
+schema contract is bounded by request/idempotency uniqueness, attempts,
+status/kind checks, due time, and paired lease fields. Focused 16/16,
+disposable PostgreSQL integration 1/1, serial 846/23/0, typecheck/schema/
+migration/build/diff checks pass. This remains substrate only: hosted checks
+were pending at capture, and no store claim/retry adapter, destructive SQL,
+reconciliation receipt, restore rehearsal, or authenticated E2E exists.

@@ -222,3 +222,12 @@ workflow `37560704115` passed. This reduces cross-user execution risk but does
 not change the critical status: the operational store/job boundary,
 transactional deletion, reconciliation receipt, restore/rollback rehearsal,
 and non-production E2E remain missing; migrations 0029/0030 are unapplied.
+
+R-048 update (2026-10-07, job persistence): PR #153 head
+`b91222a8d4d6ffd08f2be71391d89a6dafedab1` now atomically pairs the request
+ledger with a dedicated user-scoped job and bounds attempts, idempotency,
+status, kinds, and lease fields. Focused 16/16 and disposable PostgreSQL 1/1
+pass; migration `0031` remains unapplied. The critical risk is reduced at the
+enqueue boundary but remains open until fenced claim/retry SQL, complete
+user-owned-data execution, row-count/audit reconciliation, restore/rollback,
+and non-production E2E are qualified.

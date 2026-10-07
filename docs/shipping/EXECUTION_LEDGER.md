@@ -2785,3 +2785,25 @@ deletion, restore, rollback, provider, and release gates remain unresolved.
 - **Next:** implement the disposable-DB-backed user-scoped deletion job/store
   boundary, with row-count/audit reconciliation and restore/rollback evidence
   before any operational enablement.
+
+# 2026-10-07 — QUAL-WEB-005 user-scoped job persistence
+
+- **Batch:** persist a user-scoped deletion job atomically with the request on
+  the existing PR #153 boundary.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #153 head
+  `b91222a8d4d6ffd08f2be71391d89a6dafedab1`; additive migration `0031` and
+  request/job transaction are source-only.
+- **Local:** focused **16/16**, disposable PostgreSQL integration **1/1**,
+  serial **846 pass / 23 explicit skips / 0 fail**, typecheck, Drizzle check,
+  32-migration ordering, diff check, and 38-page build pass. Docker 16 test
+  container was stopped after the bounded run.
+- **Hosted:** checks were pending immediately after push; no hosted success
+  claimed. PR remains open; mergeability awaits the new checks.
+- **Boundary:** no production/database/provider/payment/deployment write,
+  migration, deletion, browser mutation, or secret handling.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-job-persistence-pr153-2026-10-07.md`.
+- **Next:** implement and qualify the fenced store claim/retry adapter before
+  any deletion execution or production migration consideration.
