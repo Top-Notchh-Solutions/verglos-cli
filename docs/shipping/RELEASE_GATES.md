@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 organization-directory CDP probe · 2026-10-07
+
+The existing `/orgs` page target was inspected with read-only direct CDP after
+the Chrome DevTools MCP transport was closed. One visible named interactive
+control, two landmarks including `main`, zero visible forms, zero unnamed
+interactive AX nodes, and CLS `0.0000` were observed; existing navigation
+timing was DOMContentLoaded `4939 ms` and load `5647 ms`. This does not pass
+QUAL-WEB-006: Pro/organization data, keyboard, human screen-reader,
+responsive/reduced-motion, reload-based CWV, large-data, and field-CWV
+evidence remain open. No checkbox or production state changed.
+
 ## QUAL-CLI-006 current-head standards run · 2026-10-07
 
 CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` passes the shared

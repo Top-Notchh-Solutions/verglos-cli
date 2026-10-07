@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-006 organization-directory CDP probe
+
+The existing dedicated Chrome target at `/orgs` was inspected read-only using
+direct CDP because the Chrome DevTools MCP transport was closed. No navigation,
+reload, new tab, form submission, or state mutation occurred. The aggregate
+snapshot found one visible interactive element with no unnamed controls, two
+landmarks including one `main`, zero visible forms, 30 accessibility-tree nodes,
+zero unnamed interactive AX nodes, and current-page CLS `0.0000`. Existing
+navigation timing was DOMContentLoaded `4939 ms` and load `5647 ms` across 250
+resource entries; LCP and field CWV were unavailable. QUAL-WEB-006 remains open
+for Pro/organization data, keyboard and human screen-reader review,
+responsive/reduced-motion states, reload-based CWV, large-data rendering, and
+field CWV. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence: `docs/shipping/evidence/qual-web-006-org-directory-cdp-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-014 isolated PostgreSQL integration
 
 The current Web PR #149 worktree at exact head `aa34127` ran against a

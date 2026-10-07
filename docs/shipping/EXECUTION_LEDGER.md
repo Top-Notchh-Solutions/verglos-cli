@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — QUAL-WEB-006 organization-directory CDP probe
+
+- **Scope:** Existing dedicated Chrome `/orgs` page target; direct CDP
+  read-only fallback because Chrome DevTools MCP transport was closed.
+- **Observation:** One visible interactive element, zero unnamed visible
+  interactive elements, two landmarks including one `main`, zero visible
+  forms, 30 AX nodes, zero unnamed interactive AX nodes, and CLS `0.0000`.
+  Existing navigation timing was DOMContentLoaded `4939 ms`, load `5647 ms`,
+  and 250 resource entries. LCP and field CWV were unavailable without a
+  reload/field source.
+- **Disposition:** Partial runtime evidence only. QUAL-WEB-006 remains open
+  for Pro/organization data, keyboard, human screen-reader, responsive,
+  reduced-motion, reload-CWV, large-data, and field-CWV evidence. No checkbox
+  changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No navigation, reload, new tab, form submission, browser-state
+  mutation, production/database/payment/deployment/migration operation, or
+  personal data capture occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-org-directory-cdp-2026-10-07.md`.
+
 # 2026-10-07 — PLAN-WEB-014 isolated PostgreSQL integration
 
 - **Source:** Web PR #149 exact head `aa34127`; disposable local Docker

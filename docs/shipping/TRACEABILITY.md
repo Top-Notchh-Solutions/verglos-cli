@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 organization-directory CDP probe · 2026-10-07
+
+The existing dedicated Chrome `/orgs` target was inspected read-only using
+direct CDP after the Chrome DevTools MCP transport failed closed. The aggregate
+snapshot recorded one named visible interactive control, two landmarks
+including `main`, zero visible forms, zero unnamed interactive AX nodes, and
+CLS `0.0000`; existing navigation timing was DOMContentLoaded `4939 ms` and
+load `5647 ms`. LCP, field CWV, keyboard sequence, human screen-reader,
+responsive/reduced-motion, Pro/organization data, and large-data rendering
+remain unverified. QUAL-WEB-006 remains open and no checkbox changed. See
+`docs/shipping/evidence/qual-web-006-org-directory-cdp-2026-10-07.md`.
+
 ## PLAN-WEB-014 isolated PostgreSQL integration · 2026-10-07
 
 Web PR #149 exact head `aa34127` passed the isolated local PostgreSQL billing

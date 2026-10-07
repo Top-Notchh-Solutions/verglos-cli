@@ -1,5 +1,17 @@
 # Goal addendum — 2026-10-07
 
+## QUAL-WEB-006 organization-directory CDP probe
+
+The existing dedicated Chrome `/orgs` target was inspected read-only with
+direct CDP because the Chrome DevTools MCP transport was closed. The aggregate
+observation found one named visible interactive control, two landmarks
+including `main`, zero visible forms, zero unnamed interactive AX nodes, and
+CLS `0.0000`; existing navigation timing was DOMContentLoaded `4939 ms` and
+load `5647 ms`. This is partial evidence only. Pro/organization data,
+keyboard, human screen-reader, responsive/reduced-motion, reload-CWV,
+large-data, and field-CWV evidence remain required. No checkbox changed and
+backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
 ## QUAL-CLI-006 current-head standards run
 
 CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` passed the shared

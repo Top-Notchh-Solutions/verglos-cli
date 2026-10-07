@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## R-QUAL-WEB-006 organization-directory runtime evidence gap · 2026-10-07
+
+The current `/orgs` target has a bounded aggregate CDP observation with no
+unnamed interactive AX nodes and no layout shift, but the MCP transport was
+closed and no reload-based LCP, field CWV, keyboard sequence, human
+screen-reader, Pro/organization-data, responsive/reduced-motion, or large-data
+browser evidence was collected in this batch. Owner: Web qualification;
+mitigation: use the existing authenticated non-production organization/Pro
+target when available, capture redacted reload metrics, and complete the human
+review before QUAL-WEB-006 acceptance. No production or browser-state write
+occurred.
+
 ## R-QUAL-CLI-006 official qualification gap · 2026-10-07
 
 The current CLI worktree passes its shared standards corpus, typecheck, build,

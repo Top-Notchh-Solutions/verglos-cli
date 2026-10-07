@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-006 organization-directory CDP probe · 2026-10-07
+
+- **Decision:** Treat the current `/orgs` aggregate CDP observation as partial
+  runtime evidence only; do not claim accessibility/performance acceptance.
+- **Evidence:** Existing dedicated Chrome target, direct CDP fallback after
+  closed MCP transport, one named visible interactive control, two landmarks
+  including `main`, zero visible forms, zero unnamed interactive AX nodes, and
+  CLS `0.0000`; existing navigation timing was DOMContentLoaded `4939 ms` and
+  load `5647 ms`.
+- **Boundary:** No navigation, reload, tab creation, browser-state mutation,
+  private-data capture, production/database/payment/deployment/migration
+  operation occurred. QUAL-WEB-006 remains open for the missing runtime and
+  field evidence.
+
 ## QUAL-CLI-006 current-head standards run · 2026-10-07
 
 - **Decision:** Accept the 448/448 shared standards-corpus, license, and SBOM
