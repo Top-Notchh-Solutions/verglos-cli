@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-006 production account browser smoke
+
+- **Browser:** Chrome 154 via the existing local DevTools Protocol endpoint;
+  read-only reload of the authenticated `/account` tab.
+- **Result:** `/account` and observed same-origin document/static resources all
+  returned HTTP 200. The DOM contained one main and one nav landmark, seven
+  links, no unlabeled controls, no tables, and no visible error copy. The
+  rendered state was the Free-plan Pro fence.
+- **Acceptance:** This is a smoke result for the available Free shell only.
+  It does not qualify paid organization/dashboard, large-data, human
+  screen-reader, or field-CWV evidence; QUAL-WEB-006 remains open. Backlog
+  remains 218 checked / 62 unchecked / 280 total.
+- **Boundary:** No checkout/provider call, account mutation, production DB
+  write, deployment, migration, or credential operation occurred.
+- **Evidence:** `docs/shipping/evidence/qual-web-account-browser-smoke-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted verification follow-up
 
 - **Code:** Web PR #149 head `550dba0` adds the missing hosted-method entry to

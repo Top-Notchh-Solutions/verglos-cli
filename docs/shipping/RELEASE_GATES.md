@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 production account browser smoke · 2026-10-07
+
+The existing Chrome DevTools target loaded `/account` read-only with HTTP 200;
+the Free account shell had one main/one nav landmark, seven links, no
+unlabeled controls, no tables, and no visible error copy. This is not paid
+dashboard or large-data acceptance. Human screen-reader, authenticated
+organization/paid-plan, and field-CWV evidence remain open, so QUAL-WEB-006
+and the dependent release gates remain open. No production operation occurred.
+
 ## PLAN-WEB-013 hosted verification follow-up · 2026-10-07
 
 Web PR #149 head `550dba0` passed hosted Verify run `37553696161` across the

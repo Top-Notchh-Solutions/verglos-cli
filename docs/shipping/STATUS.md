@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-006 production account browser smoke
+
+Using the existing Chrome 154 remote-debugging target, a read-only reload of
+`https://verglos.com/account` returned HTTP 200 and rendered the Free-plan
+account shell. DOM inspection found one main and one nav landmark, seven links,
+zero unlabeled controls, zero tables, and no visible error copy; observed
+same-origin document/static responses were all HTTP 200. The currently
+authenticated account has no paid organization/dashboard dataset, so this does
+not prove Pro/Team/Studio/Enterprise dashboard rendering, large-data behavior,
+human screen-reader behavior, or field Core Web Vitals. QUAL-WEB-006 remains
+open. Private evidence:
+`docs/shipping/evidence/qual-web-account-browser-smoke-2026-10-07.md`. No
+production mutation occurred; backlog remains **218 checked / 62 unchecked /
+280 total**.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted verification follow-up
 
 Web PR #149 head `550dba0` now has a green hosted Verify run

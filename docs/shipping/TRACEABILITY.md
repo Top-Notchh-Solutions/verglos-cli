@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 production account browser smoke · 2026-10-07
+
+- **Read-only browser evidence:** Chrome 154 DevTools Protocol reloaded the
+  authenticated `/account` tab. The document and observed same-origin static
+  resources returned HTTP 200; DOM inspection found one main/one nav landmark,
+  seven links, no unlabeled controls, no tables, and no visible error copy.
+- **Truth boundary:** The rendered page is the Free-plan Pro fence. No paid
+  organization, large dataset, human screen-reader, or field-CWV evidence is
+  present; QUAL-WEB-006 remains open.
+- **Safety:** No provider/payment, account mutation, production DB,
+  deployment, migration, or credential action occurred. See
+  `docs/shipping/evidence/qual-web-account-browser-smoke-2026-10-07.md`.
+
 ## PLAN-WEB-013 hosted verification follow-up · 2026-10-07 · Web PR #149
 
 - **Head/result:** `550dba0`; hosted Verify run `37553696161` is green for
