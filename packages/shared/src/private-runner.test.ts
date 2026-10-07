@@ -22,6 +22,11 @@ test("private runner verifies the exact signed job bytes before admission", () =
   assert.equal(admitPrivateRunnerJob({ job: signed, tenantId: "org_acme", runnerId: "runner_1", now: "2026-10-06T00:01:00.000Z", allowedTargets: new Set(["subject_app"]), trustedPublicKeyPem: keys.publicKey.export({ type: "spki", format: "pem" }).toString() }).admitted, true);
 });
 
+test("private runner fails closed on malformed nested job JSON", () => {
+  assert.equal(verifyPrivateRunnerJobSignature({ network: undefined } as never, "not-a-key"), false);
+  assert.deepEqual(admitPrivateRunnerJob({ job: { network: undefined } as never, tenantId: "org_acme", runnerId: "runner_1", now: "2026-10-06T00:01:00.000Z", allowedTargets: new Set(["subject_app"]) }), { admitted: false, reason: "invalid_job" });
+});
+
 test("private runner refuses tenant, replay, expiry, target, and network widening", () => {
   const reason = (value: ReturnType<typeof admitPrivateRunnerJob>) => value.admitted ? "admitted" : value.reason;
   assert.equal(reason(admitPrivateRunnerJob({ job, tenantId: "org_other", runnerId: "runner_1", now: "2026-10-06T00:01:00.000Z", allowedTargets: new Set(["subject_app"]) })), "tenant_mismatch");

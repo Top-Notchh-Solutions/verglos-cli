@@ -82,13 +82,18 @@ function validLimits(limits: PrivateRunnerJob["limits"]): boolean {
 }
 
 function validShape(job: PrivateRunnerJob): boolean {
-  return job.protocolVersion === PRIVATE_RUNNER_PROTOCOL_VERSION
-    && ID.test(job.jobId) && ID.test(job.tenantId) && ID.test(job.runnerId) && ID.test(job.recipeId)
-    && ID.test(job.targetSubjectId) && DIGEST.test(job.targetDigest)
-    && validDate(job.issuedAt) && validDate(job.expiresAt) && NONCE.test(job.nonce)
-    && (job.network.mode === "denied" || job.network.mode === "allowlisted")
-    && job.network.destinations.length <= 16 && job.network.destinations.every((value) => /^https:\/\//u.test(value) && value.length <= 512)
-    && SIGNATURE.test(job.signature) && validLimits(job.limits);
+  try {
+    return job.protocolVersion === PRIVATE_RUNNER_PROTOCOL_VERSION
+      && ID.test(job.jobId) && ID.test(job.tenantId) && ID.test(job.runnerId) && ID.test(job.recipeId)
+      && ID.test(job.targetSubjectId) && DIGEST.test(job.targetDigest)
+      && validDate(job.issuedAt) && validDate(job.expiresAt) && NONCE.test(job.nonce)
+      && (job.network.mode === "denied" || job.network.mode === "allowlisted")
+      && Array.isArray(job.network.destinations)
+      && job.network.destinations.length <= 16 && job.network.destinations.every((value) => /^https:\/\//u.test(value) && value.length <= 512)
+      && SIGNATURE.test(job.signature) && validLimits(job.limits);
+  } catch {
+    return false;
+  }
 }
 
 /** Return the exact canonical bytes a trusted runner signs for a job. */
