@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013/014/015 payment code-side qualification · 2026-10-07
+
+- PR #149 focused payment tests passed 44/44 with one explicit skip for the
+  prepared-database billing-ledger integration. Docker health passed, but a
+  disposable empty PostgreSQL database stopped at migration 0000 because the
+  reviewed legacy `licenses` baseline was not present; no integration pass was
+  inferred from that run.
+- This confirms code-side fail-closed method configuration, catalog-bound order
+  creation, and webhook/lifecycle contracts only. Razorpay account-enabled
+  test-mode runtime evidence remains missing. PLAN-WEB-013/014/015 stay
+  unchecked. See
+  `docs/shipping/evidence/payment-code-side-qualification-2026-10-07.md`.
+
 ## QUAL-WEB-006 organization-directory reload · 2026-10-07
 
 - A fresh reload in the authenticated Chrome session rendered the `/orgs`

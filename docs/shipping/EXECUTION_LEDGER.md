@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · payment code-side qualification
+
+- **Focused tests:** Web PR #149 payment/configuration set passed 44 tests,
+  with 0 failures and 1 explicit skip for the PostgreSQL billing-ledger test.
+- **Docker:** Docker Desktop Server 29.7.2 was reachable; a bounded disposable
+  `postgres:15-alpine` container was cleaned up after use.
+- **Harness limit:** The empty database could not apply migration 0000 because
+  the repository migration chain requires the reviewed legacy `licenses`
+  baseline. No integration pass was claimed and no persistent or production
+  database was changed.
+- **Acceptance:** Code-side guards and lifecycle contracts are strengthened,
+  but account-enabled Razorpay test-mode method/capture/failure/refund/renewal/
+  replay/out-of-order evidence is still absent. PLAN-WEB-013/014/015 remain
+  open; no checkbox changed.
+
 ## 2026-10-07 · QUAL-WEB-006 organization-directory reload
 
 - **Browser:** Fresh reload of the authenticated `/orgs` page rendered the
