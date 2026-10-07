@@ -12,10 +12,11 @@ QUAL-CLI-006 remains open.
 
 ## R-044 Checkout failure-state hardening · 2026-10-07
 
-PR #149 head `b78f732` now keeps provider failures and pre-confirmation
-dismissals retryable and avoids a false submitted state when `open()` throws.
-This reduces UI-state ambiguity but does not establish provider lifecycle,
-webhook, entitlement, reconciliation, or hosted acceptance. Owner:
+PR #149 head `aa34127` now clears stale order state after provider failures and
+pre-confirmation dismissals, returning users to the actual retry screen, and
+avoids a false submitted state when `open()` throws. This reduces UI-state
+ambiguity but does not establish provider lifecycle, webhook, entitlement,
+reconciliation, or hosted acceptance. Owner:
 billing/product; mitigation: complete the all-enabled-method Test Mode matrix
 and signed ledger reconciliation. PLAN-WEB-013/014/015 remain open.
 

@@ -15,11 +15,11 @@
 ## PLAN-WEB-013 Checkout retry-state hardening · 2026-10-07
 
 - **Decision:** Hosted Checkout failures and pre-confirmation dismissal must
-  return to a retryable state; the UI must not imply a submitted payment when
-  the provider rejected `open()`.
-- **Evidence:** PR #149 exact head `b78f732`; focused 23/23, typecheck, build,
-  and diff checks pass. Exact-head Verify `37635602846`, Vercel, and Preview
-  Comments pass; the PR is clean.
+  clear stale order state and return to the actual offer/retry screen; the UI
+  must not imply a submitted payment when the provider rejected `open()`.
+- **Evidence:** PR #149 exact head `aa34127`; focused 27/27, typecheck, build,
+  and diff checks pass. Vercel and Preview Comments pass; Verify
+  `37637158955` was pending at capture.
 - **Boundary:** This changes presentation state only and does not grant access
   or replace webhook authority. PLAN-WEB-013/014/015 remain open; no provider,
   production, database, or deployment mutation occurred.

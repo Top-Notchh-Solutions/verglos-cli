@@ -14,12 +14,12 @@ independent acceptance.
 
 ## PLAN-WEB-013 Checkout retry-state hardening · 2026-10-07
 
-PR #149 exact head `b78f732424a388f03a9a9740e570b0f01d7297e7` passes local
-focused 23/23, typecheck, production build, and diff checks. Exact-head Verify
-`37635602846`, Vercel, and Preview Comments also pass. The client now returns
-failed hosted attempts to a retryable state and does not show a submitted state
-when `checkout.open()` throws. This does not pass the payment gate or change
-any backlog checkbox.
+PR #149 exact head `aa34127` passes local focused 27/27, typecheck, production
+build, and diff checks. Vercel and Preview Comments pass; exact-head Verify
+`37637158955` was pending at capture. The client now clears stale order state
+after failed or pre-confirmation-dismissed hosted attempts and does not show a
+submitted state when `checkout.open()` throws. This does not pass the payment
+gate or change any backlog checkbox.
 
 ## PLAN-WEB-014 Test Mode method-display probe · 2026-10-07
 

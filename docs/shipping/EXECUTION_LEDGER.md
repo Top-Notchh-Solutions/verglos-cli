@@ -20,14 +20,14 @@
 
 # 2026-10-07 — PLAN-WEB-013 Checkout retry-state hardening
 
-- **Code:** Web PR #149 exact pushed head `b78f732424a388f03a9a9740e570b0f01d7297e7`.
-- **Change:** Provider failure events and pre-confirmation dismissal return to
-  a retryable state; the submitted state is set only after `checkout.open()`
-  returns successfully.
+- **Code:** Web PR #149 exact pushed head `aa34127`.
+- **Change:** Provider failure events and pre-confirmation dismissal clear the
+  stale order and return to the actual offer/retry screen; the submitted state
+  is set only after `checkout.open()` returns successfully.
 - **Verification:** Focused payment/checkout/webhook and route-contract tests
-  **23/23**, typecheck, production build, and diff check pass. Exact-head
-  Verify `37635602846`, Vercel, and Preview Comments also pass; PR #149 is
-  clean at this head.
+  **27/27**, typecheck, production build, and diff check pass. Vercel and
+  Preview Comments pass; exact-head Verify `37637158955` was pending at
+  capture.
 - **Boundary:** No provider, payment, entitlement, database, migration,
   deployment, production, or credential mutation occurred. PLAN-WEB-013/014/
   015 remain open; no checkbox changed. Backlog remains **218 checked / 62
