@@ -29,8 +29,8 @@ watermark, validates payment/currency/amount binding, and then invokes the
 monotonic application refund ledger. `refund.created` remains non-terminal and
 does not revoke entitlement. Local focused payment tests passed 29 with one
 explicit migrated-DB skip; typecheck, schema checks, migrations check, build,
-diff, and staged secret scan passed. Hosted Verify `37645815573` was in
-progress when this evidence was written.
+diff, and staged secret scan passed. Hosted Verify `37645815573` completed
+successfully for exact head `051d4be`.
 
 ## Disposition
 

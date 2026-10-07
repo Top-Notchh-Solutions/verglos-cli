@@ -3059,7 +3059,13 @@ configuration was changed. The account event set includes `refund.created` and
 processed event using a provider-fetched cumulative refund watermark and keeps
 creation non-terminal. Local focused payment tests passed **29 / 0 failures /
 1 explicit DB skip**, with typecheck, schema, migrations, build, diff, and
-secret-boundary checks passing. Hosted Verify `37645815573` was in progress at
-capture. No checkbox changed; backlog remains **218 checked / 62 unchecked /
+secret-boundary checks passing. Hosted Verify `37645815573` completed
+successfully for exact head `051d4be`; Vercel Preview Comments remained green.
+No checkbox changed; backlog remains **218 checked / 62 unchecked /
 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/plan-web-014-test-webhook-inventory-2026-10-07.md`.
+
+Hosted Verify `37645815573` subsequently completed successfully for exact Web
+PR #149 head `051d4be`; Vercel Preview Comments remained green. The run's only
+annotations were future GitHub runner/action deprecation notices. This does
+not close the provider lifecycle gate or change the backlog count.

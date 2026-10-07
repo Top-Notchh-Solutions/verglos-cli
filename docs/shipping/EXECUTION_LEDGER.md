@@ -4312,7 +4312,8 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
   terminal `refund.processed` using the provider's cumulative watermark.
 - **Verification:** Focused payment tests **29 pass / 1 explicit DB skip / 0
   failures**, typecheck, schema, migration-order, build, diff, and staged
-  secret scan passed. Hosted Verify `37645815573` was in progress.
+  secret scan passed. Hosted Verify `37645815573` completed successfully for
+  exact head `051d4be`; Vercel Preview Comments also passed.
 - **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
   (77.9%)**. PLAN-WEB-013/014/015 remain open.
 - **Boundary:** No webhook configuration, payment, entitlement, database,
