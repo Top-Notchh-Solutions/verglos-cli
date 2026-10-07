@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## SCM/payment qualification batch · 2026-10-07
+
+The focused SCM/GitHub contract suite passed **48/48** at exact Web
+`origin/main` `6fccfb26ffb707e53c3ef44166b42280be29de55`. One Razorpay
+test-mode order was created at the catalog monthly Pro amount (INR 280,943
+paise) and was not captured. These results reduce code-side and credential
+connectivity uncertainty only. Live GitHub installation/delivery/recovery,
+account-enabled payment methods, full payment lifecycle, production
+reconciliation, and R-041 rotation remain release-blocking. No checkbox
+changed.
+
 ## PLAN-WEB-013 hosted verification refresh · 2026-10-07
 
 Web PR #149 exact head passed Verify run `37563023349`: serial Web 871/872

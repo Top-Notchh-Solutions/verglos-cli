@@ -1,5 +1,13 @@
 # Verglos V1 risk register
 
+Latest SCM/payment qualification update (2026-10-07): exact Web `origin/main`
+passed the focused GitHub/SCM suite **48/48**, and a bounded test-mode
+Razorpay order was created at the catalog monthly Pro amount without capture.
+This reduces code-side and credential-connectivity uncertainty only. Live App
+installation/delivery/recovery, account-enabled payment methods, full
+provider lifecycle, production reconciliation, and R-041 rotation remain
+release-blocking; no production operation occurred.
+
 Latest R-044 hosted verification update (2026-10-07): Web PR #149 exact head
 `db68157da039d8aab939818f9023f867028e4432` passed Verify `37563023349` with
 serial Web 871/872 pass and one explicit skip, negative-boundary 2/2,

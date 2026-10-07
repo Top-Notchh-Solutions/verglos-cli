@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · SCM and payment qualification batch
+
+- **SCM:** Exact Web `origin/main` `6fccfb26ffb707e53c3ef44166b42280be29de55`
+  passed the focused GitHub/App/SCM, delivery, credential, tenant, and
+  negative-boundary suite **48/48**, with no skips.
+- **Payment:** `.env.test.local` test credentials created one Razorpay test
+  order for monthly Pro at INR 280,943 paise; status was `created`, with no
+  capture, payment, refund, webhook, entitlement, or database write.
+- **Boundary:** These results do not close GITHUB-WEB-001..004,
+  PLAN-CLI-003, PLAN-WEB-013/014/015, or R-041. No backlog checkbox changed.
+
+## 2026-10-07 · next independent batches
+
+1. **PLAN-WEB-014/015:** obtain the account-enabled Razorpay test method list
+   and run the isolated hosted lifecycle matrix; the single created order is
+   not lifecycle acceptance.
+2. **GITHUB-WEB-001..004:** perform an authorized live App installation and
+   delivery/recovery qualification after R-041 rotation; code-side contracts
+   are now requalified 48/48.
+3. **QUAL-WEB-005:** obtain a fresh backup within the 48h RPO and qualify
+   authenticated deletion plus deployment rollback; the existing snapshot is
+   still approximately 396h old.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted verification refresh
 
 - **Run:** Web PR #149 exact head

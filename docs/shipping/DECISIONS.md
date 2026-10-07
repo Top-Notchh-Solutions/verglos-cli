@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## SCM/payment qualification batch · 2026-10-07
+
+- **Decision:** Record the SCM 48/48 and Razorpay test-order results as
+  qualification evidence, but keep all live integration and payment gates
+  open.
+- **Evidence:** Exact Web `origin/main` passed the focused GitHub/SCM suite
+  48/48. `.env.test.local` created one Razorpay test-mode monthly Pro order at
+  INR 280,943 paise, status `created`, with no capture or fulfillment.
+- **Boundary:** No live GitHub installation, provider lifecycle, webhook,
+  entitlement, production reconciliation, database write, deployment, or
+  credential rotation occurred. No backlog checkbox changed.
+
 ## PLAN-WEB-013 hosted verification refresh · 2026-10-07
 
 - **Decision:** Treat PR #149 as hosted code-qualified but do not merge or

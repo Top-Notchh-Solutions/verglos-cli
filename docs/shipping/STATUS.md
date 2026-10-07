@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · SCM and payment qualification batch
+
+The exact merged Web source passed the focused GitHub/SCM contract suite
+**48/48**, covering identity, permissions, token lifecycle, delivery replay,
+webhook bounds, credentials, leases, and tenant boundaries. A bounded
+Razorpay **test-mode** order was also created at the server catalog's monthly
+Pro amount, INR 280,943 paise, with no capture or fulfillment. These are
+implementation/provider-substrate results only: live GitHub installation and
+Razorpay method/lifecycle evidence remain open. No production database,
+deployment, or payment operation occurred; no backlog checkbox changed.
+Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. Private
+evidence: `docs/shipping/evidence/github-scm-code-side-qualification-2026-10-07.md`
+and `docs/shipping/evidence/razorpay-test-order-creation-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted verification refresh
 
 Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` hosted Verify

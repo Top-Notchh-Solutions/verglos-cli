@@ -1,5 +1,17 @@
 # Goal addendum — 2026-10-07
 
+SCM/payment qualification batch: exact Web `origin/main`
+`6fccfb26ffb707e53c3ef44166b42280be29de55` passed the focused GitHub/SCM
+suite **48/48**. A bounded Razorpay test-mode order was created for the
+catalog monthly Pro amount of INR 280,943 paise and remained uncaptured. This
+advances code-side/provider connectivity only; live GitHub installation,
+Razorpay enabled-method/lifecycle evidence, production reconciliation, and
+R-041 rotation remain open. No production operation or backlog checkbox
+change occurred. Backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence is recorded in
+`docs/shipping/evidence/github-scm-code-side-qualification-2026-10-07.md` and
+`docs/shipping/evidence/razorpay-test-order-creation-2026-10-07.md`.
+
 Hosted payment-phase verification: Web PR #149 exact head passed Verify run
 `37563023349` on Node 22: serial Web 871/872 pass with one explicit skip,
 negative-boundary 2/2, truth-registry 25/25, 31 migrations, typecheck, build,

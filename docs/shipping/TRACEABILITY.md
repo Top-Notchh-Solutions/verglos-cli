@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## SCM/payment qualification batch · 2026-10-07
+
+Exact Web `origin/main` `6fccfb26ffb707e53c3ef44166b42280be29de55` passed the
+focused GitHub/SCM suite **48/48**. The suite covers the code-side contracts
+for immutable installation/repository identity, permissions, token lifecycle,
+delivery replay, webhook bounds, credentials, queue leases, and tenant
+scope. A separate bounded `.env.test.local` run created one uncaptured
+Razorpay test-mode order for monthly Pro at INR 280,943 paise. These results
+do not satisfy live App installation, provider method/lifecycle, production
+reconciliation, or R-041 evidence; no checkbox changed. See
+`docs/shipping/evidence/github-scm-code-side-qualification-2026-10-07.md` and
+`docs/shipping/evidence/razorpay-test-order-creation-2026-10-07.md`.
+
 ## PLAN-WEB-013 hosted verification refresh · 2026-10-07
 
 Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` passed hosted
