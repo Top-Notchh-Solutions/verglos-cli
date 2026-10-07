@@ -13,8 +13,9 @@ database/payment/customer-state write occurred. Evidence:
 ## 2026-10-07 · PLAN-WEB-014 merge and production fail-closed boundary
 
 Web PR #155 merged cleanly as main commit
-`f00b7225ae0c0b8f518e404828aa6247c97dd322` after hosted Verify
-`37659362013`, GitGuardian, and Vercel Preview Comments passed. The automatic
+`f00b7225ae0c0b8f518e404828aa6247c97dd322`; merged-main Verify run
+`37659738845` is successful, and GitGuardian/Vercel Preview Comments passed.
+The automatic
 production deployment `dpl_Btjq8knubUab1ENgF7CEtzdUFV7G` failed in
 `pnpm config:check` because `RAZORPAY_ENABLED_PAYMENT_METHODS` is missing;
 no promotion or production configuration change was made. A read-only live

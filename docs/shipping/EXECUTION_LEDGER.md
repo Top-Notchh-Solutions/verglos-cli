@@ -17,8 +17,8 @@
 
 - **Code:** Web PR #155 merged cleanly as main commit
   `f00b7225ae0c0b8f518e404828aa6247c97dd322`.
-- **Hosted verification:** Verify run `37659362013`, GitGuardian, and Vercel
-  Preview Comments passed; mergeability was clean.
+- **Hosted verification:** Merged-main Verify run `37659738845`, GitGuardian,
+  and Vercel Preview Comments passed; mergeability was clean.
 - **Deployment finding:** The merge-triggered production deployment
   `dpl_Btjq8knubUab1ENgF7CEtzdUFV7G` failed in `pnpm config:check` because
   `RAZORPAY_ENABLED_PAYMENT_METHODS` is missing. No promotion or production

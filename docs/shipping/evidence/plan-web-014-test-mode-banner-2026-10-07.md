@@ -19,8 +19,9 @@
   existing environment skip / 0 failed**.
 - Pinned Node 22 typecheck: passed.
 - Preview build: compiled successfully and generated **43 pages**.
-- Hosted Verify passed (`37659362013`), GitGuardian passed, Vercel Preview
-  Comments passed, and mergeability was clean. PR #155 merged to Web main as
+- Hosted Verify passed (`37659362013`); merged-main Verify run
+  `37659738845` also passed. GitGuardian passed, Vercel Preview Comments
+  passed, and mergeability was clean. PR #155 merged to Web main as
   `f00b7225ae0c0b8f518e404828aa6247c97dd322`.
 
 ## Boundary
