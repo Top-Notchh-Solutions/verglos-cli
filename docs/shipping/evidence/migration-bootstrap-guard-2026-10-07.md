@@ -64,3 +64,8 @@ left zero public tables on default refusal and applied all 35 migrations plus
 the five baseline tables only under explicit local opt-in. PR #153 remains
 open and must not be merged/deployed until its independent privacy, migration,
 restore/rollback, and release gates are accepted.
+
+PR #149 was subsequently merged as `8b843da` after its hosted typecheck/schema,
+Vercel, and Preview Comments checks passed. This merge advances the code-side
+checkout/migration implementation only; payment lifecycle, production
+reconciliation, and release gates remain open.

@@ -4385,3 +4385,14 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
 - **Boundary:** No production, provider, payment, deployment, credential, or
   browser mutation occurred. PRs remain open and must not be merged solely on
   this code-side correction.
+
+# 2026-10-07 — Web PR #149 merged after hosted verification
+
+- **Merge:** Web PR #149 exact head `e46299a` merged as `8b843da` after hosted
+  typecheck/schema, Vercel, and Preview Comments passed.
+- **Disposition:** This merges the hosted Razorpay/catalog/migration code phase;
+  it does not accept PLAN-WEB-011/012/013/014/015. Provider lifecycle,
+  all-enabled-method matrix, production reconciliation, and release gates remain
+  open.
+- **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
+  (77.9%)**.

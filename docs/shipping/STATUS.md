@@ -3114,3 +3114,10 @@ pushed as PR #149 `e46299a` and PR #153 `47af6fa`; typecheck, focused 12/12
 migration tests, ordered migration checks, and diff checks pass. Hosted checks
 for the new heads are queued/running. No checkbox changed; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+Web PR #149 exact head `e46299a` subsequently merged as `8b843da` after hosted
+typecheck/schema, Vercel, and Preview Comments passed. This merges the
+code-side hosted checkout/payment-catalog phase only; PLAN-WEB-011/012/013/014/
+015 remain open for provider lifecycle, all-enabled-method qualification,
+production reconciliation, and release evidence. Backlog remains **218 checked /
+62 unchecked / 280 total (77.9%)**.
