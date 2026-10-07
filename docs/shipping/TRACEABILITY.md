@@ -1508,3 +1508,12 @@ local test/typecheck/schema/build pass, hosted workflow `37557549508`, Vercel,
 GitGuardian, and Preview Comments passed, and the PR merged as
 `6fccfb26ffb707e53c3ef44166b42280be29de55`. This is remediation evidence
 only; no checkbox changed.
+
+# 2026-10-07 · payment production-method configuration hardening
+
+Web PR #149 head `6b5da26` makes production payment configuration fail closed
+when `RAZORPAY_ENABLED_PAYMENT_METHODS` is absent or blank and retains the
+QR-only rejection. Focused payment/runtime tests pass 8/8; typecheck, schema,
+and 40-page preview build pass. Hosted run `37558018780` and Vercel preview
+were pending/deploying at capture. This is remediation evidence only; no
+payment or release gate was accepted and no checkbox changed.

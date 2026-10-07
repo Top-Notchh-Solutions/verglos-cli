@@ -369,3 +369,13 @@ is frozen, `ACCEPT-011..014` must use private
 non-shallow fixture manifests, held-out repositories, reproducible current-source
 scans, license/scope records, false-positive correction review, and a dated
 regression/go-no-go. No customer acceptance may be inferred from public fixtures.
+
+Payment configuration addendum (2026-10-07): Web PR #149 head `6b5da26` now
+fails production runtime validation when `RAZORPAY_ENABLED_PAYMENT_METHODS` is
+unset or blank, and continues to reject QR-only configuration. Focused payment
+and runtime-config tests pass 8/8, typecheck, schema check, and the 40-page
+preview build pass. Hosted run `37558018780` and the Vercel preview were
+pending/deploying at capture. This hardens PLAN-WEB-013 but closes no payment
+or release gate; account-enabled method, test-mode lifecycle, and production
+reconciliation evidence remain open. Private evidence:
+`docs/shipping/evidence/plan-web-013-production-method-config-pr149-2026-10-07.md`.

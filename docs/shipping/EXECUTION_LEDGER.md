@@ -2633,3 +2633,17 @@ changed and no checkbox was closed.
 - **Boundary:** no production/provider/database write, migration, payment, or
   browser mutation; no checkbox changed; **218 checked / 62 unchecked / 280
   total**.
+
+# 2026-10-07 — payment production-method configuration hardening
+
+- **Batch:** harden the production payment-method configuration boundary on
+  the existing hosted-checkout phase PR.
+- **Code:** Web PR #149, head `6b5da26`, rejects an unset or blank
+  `RAZORPAY_ENABLED_PAYMENT_METHODS` in production and retains QR-only
+  rejection.
+- **Local:** focused payment/runtime tests **8/8**, typecheck, Drizzle check,
+  and 40-page preview build pass.
+- **Hosted:** workflow `37558018780` pending and Vercel preview deploying at
+  capture; GitGuardian and Preview Comments pass.
+- **Boundary:** no production/provider/database/payment/browser mutation; no
+  checkbox changed; **218 checked / 62 unchecked / 280 total**.

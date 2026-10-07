@@ -1669,3 +1669,13 @@ preview passed. PR #152 merged as
 `6fccfb26ffb707e53c3ef44166b42280be29de55`. This is a security follow-up, not
 a new backlog acceptance or checkbox change. Private evidence:
 `docs/shipping/evidence/org-creation-csrf-pr152-2026-10-07.md`.
+
+# 2026-10-07 · payment production-method configuration hardening
+
+Web PR #149 head `6b5da26` now rejects an unset or blank
+`RAZORPAY_ENABLED_PAYMENT_METHODS` in production and preserves the QR-only
+fail-closed rule. Focused payment/runtime tests 8/8, typecheck, schema check,
+and 40-page preview build pass. Hosted run `37558018780` and Vercel preview
+were pending/deploying at capture; GitGuardian and Preview Comments passed.
+No backlog checkbox changed. PLAN-WEB-013/014/015 remain open. Private
+evidence: `docs/shipping/evidence/plan-web-013-production-method-config-pr149-2026-10-07.md`.
