@@ -2395,3 +2395,13 @@ then returned six selectable radio labels: UPI, card, netbanking, wallet, EMI,
 and Pay Later. QR was not a selectable radio in that instance. This advances
 method-set observation only; no method was selected and no payment was
 submitted, so lifecycle and entitlement evidence remain open.
+
+## 2026-10-07 · GitHub App installation read-only preflight
+
+The authenticated GitHub identity can read the `Top-Notchh-Solutions`
+organization and repository inventory, but `GET /user/installations` returned
+HTTP 403 because the current token is not authorized to a GitHub App. No App
+installation id, permission set, repository selection, webhook, delivery, or
+lifecycle state can be inferred. `GITHUB-WEB-001` through `GITHUB-WEB-004`
+remain open; no GitHub mutation occurred. Private evidence:
+`docs/shipping/evidence/github-app-installation-readonly-2026-10-07.md`.

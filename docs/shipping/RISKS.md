@@ -41,6 +41,12 @@ rows exist. This reduces schema/state uncertainty but does not qualify
 provider reconciliation, migration, backup/restore, deletion, or RPO. No
 production write occurred.
 
+Latest GitHub App preflight (2026-10-07): organization/repository reads work,
+but the available GitHub token cannot list App installations and returns HTTP
+403 requiring App authorization. This leaves installation identity, scope,
+permissions, delivery, and lifecycle evidence unresolved for GITHUB-WEB-001
+through GITHUB-WEB-004. No GitHub mutation occurred.
+
 Latest Razorpay method-preflight update (2026-10-07): the official SDK method
 lookup returned HTTP 401 authentication failure, while read-only `/v1/orders`
 and `/v1/payments` calls with the same test credential pair returned 200. The

@@ -3517,3 +3517,16 @@ before enabling any destructive adapter.
   `api.razorpay.com` target exposed six selectable radio labels—UPI, card,
   netbanking, wallet, EMI, and Pay Later—and no QR radio. No method was
   selected or submitted; this is not lifecycle evidence.
+
+# 2026-10-07 — GitHub App installation read-only preflight
+
+- **Batch:** Inspect the authorized GitHub account and organization/App
+  installation state without changing provider state.
+- **Result:** Organization and repository reads succeeded; `GET
+  /user/installations` returned 403 requiring an App-authorized token.
+- **Backlog:** `GITHUB-WEB-001..004` attempted but open; no checkbox changes.
+  Count remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No installation, webhook, repository, check, organization,
+  production, payment, database, or deployment mutation occurred.
+- **Evidence file:**
+  `docs/shipping/evidence/github-app-installation-readonly-2026-10-07.md`.

@@ -2035,3 +2035,11 @@ card, netbanking, wallet, EMI, and Pay Later radio labels and no QR radio.
 This strengthens PLAN-WEB-013 method discovery but does not qualify any
 success, failure, capture, refund, renewal, replay, webhook, or entitlement
 path; no method was selected.
+
+# 2026-10-07 · GitHub App installation read-only preflight
+
+The authenticated GitHub account can read the authorized organization and
+repository inventory, but the installation endpoint returns HTTP 403 without
+an App-authorized token. Installation identity, permissions, repository scope,
+webhook delivery, and lifecycle evidence remain unverified; no provider
+mutation was attempted.

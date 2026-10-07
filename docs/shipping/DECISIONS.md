@@ -699,3 +699,11 @@ A direct provider-checkout target observation later exposed selectable UPI,
 card, netbanking, wallet, EMI, and Pay Later radios, with no QR radio. Record
 this as account-level method observation only; keep PLAN-WEB-014/015 open until
 each observed method has lifecycle and reconciliation evidence.
+
+## GitHub App installation read-only preflight · 2026-10-07
+
+- **Decision:** Keep GITHUB-WEB-001 through GITHUB-WEB-004 open; do not infer
+  installation or cutover state from organization repository access.
+- **Evidence:** Organization reads succeed, but `GET /user/installations`
+  returns 403 because the current GitHub token is not App-authorized.
+- **Boundary:** No GitHub provider mutation or production operation occurred.
