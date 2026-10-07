@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · exact production migration preflight
+
+The fresh read-only audit against the current PR #153 journal is
+`blocked-migration-history`: production has all 42 allowlisted tables but only
+26 of 35 migration rows. The pending tail is 0026–0034, including the GitHub
+identity/SCM and account-deletion authority/worker tables. Exact counts remain
+licenses 1, legacy mappings 3, webhook events 4, billing payments 0, and
+subscriptions 0. No production write, migration, deployment, payment,
+entitlement, or deletion occurred; no checkbox changed. Private evidence:
+`docs/shipping/evidence/production-migration-exact-audit-2026-10-07.md`.
+
 ## 2026-10-07 · fresh production snapshot and restore rehearsal
 
 A fresh production `pg_dump` completed at `2026-10-07T10:17:27.005Z` (150,515

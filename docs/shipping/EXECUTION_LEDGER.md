@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · exact production migration preflight
+
+- **Result:** Read-only exact audit against PR #153's 35-entry journal found
+  all 42 allowlisted tables present, 26 applied migration rows, and the
+  pending 0026–0034 tail. Preflight is `blocked-migration-history`.
+- **Counts:** licenses 1, legacy mappings 3, webhook events 4, payments 0,
+  subscriptions 0.
+- **Boundary:** No row contents, credentials, or identifiers were retained;
+  no production write/migration/deployment/payment/entitlement/deletion and no
+  backlog checkbox change occurred. This does not authorize PR #153 merge.
+
+## 2026-10-07 · merge decision
+
+- **PR #149:** Do not merge. Hosted checks are green, but the provider account
+  method list and all-method payment lifecycle are unverified; production also
+  lacks the explicit hosted-method configuration.
+- **PR #153:** Do not merge. Fresh restore and scoped worker rollback/retry are
+  green, but production migration approval, authenticated deletion E2E,
+  legal/customer-held-record disposition, and deployment rollback acceptance
+  remain open.
+- **Reason:** The active shipping goal requires those operational gates before
+  merge/deploy; merging green code into an unqualified production path would
+  not close any backlog item.
+
 ## 2026-10-07 · fresh production snapshot and restore rehearsal
 
 - **Snapshot:** Vercel Production `DATABASE_URL` was used by `pg_dump` in a
