@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · Razorpay Test Mode read-only method probe
+
+- **Request:** Read-only `GET /v1/payments?count=100` using a local
+  `rzp_test_` credential; no secret values are recorded.
+- **Result:** One returned payment, method `netbanking`, status `captured`, and
+  no failed payment in the returned page.
+- **Acceptance:** This is not an account capability list or PLAN-WEB-014
+  lifecycle evidence. Cards/UPI/wallets, refund/renewal, replay, and ordering
+  remain unqualified; backlog remains 218 checked / 62 unchecked / 280 total.
+- **Credential boundary:** The local env line is shell-unsafe and must be
+  repaired/rotated before any further provider calls. No file was changed.
+- **Safety:** No provider write, payment/refund/subscription/webhook,
+  production DB, deployment, migration, or credential operation occurred.
+- **Evidence:** `docs/shipping/evidence/razorpay-test-readonly-method-probe-2026-10-07.md`.
+
 ## 2026-10-07 · Production checkout read-only verification
 
 - **Browser:** Chrome 154 DevTools Protocol reloaded the live checkout only;

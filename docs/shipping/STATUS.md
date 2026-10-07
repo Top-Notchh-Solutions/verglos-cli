@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Razorpay Test Mode read-only method probe
+
+Using only a locally selected `rzp_test_` credential, a read-only
+`GET /v1/payments?count=100` returned one captured `netbanking` payment and no
+failed payment in that page. This is historical method evidence only; it does
+not prove the account-enabled method set or qualify card/UPI/wallet,
+refund/renewal, replay, or ordering paths. PLAN-WEB-014/015 remain open. The
+local env file also contains shell-unsafe secret syntax; no file was changed,
+and the affected Test Mode credential must be rotated before any further
+provider call. Private evidence:
+`docs/shipping/evidence/razorpay-test-readonly-method-probe-2026-10-07.md`.
+No provider write or production operation occurred.
+
 ## 2026-10-07 · Production checkout read-only verification
 
 The existing Chrome DevTools target reloaded the live checkout without clicking

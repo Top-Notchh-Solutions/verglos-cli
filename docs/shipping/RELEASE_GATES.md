@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## Razorpay Test Mode read-only method probe · 2026-10-07
+
+A read-only Test Mode payment listing observed one captured `netbanking`
+payment. This is not a complete account-enabled method or lifecycle matrix;
+PLAN-WEB-014/015 and billing release gates remain open. The local Test Mode env
+also has shell-unsafe secret syntax and must be rotated before further provider
+calls. No provider or production operation occurred.
+
 ## Production checkout read-only verification · 2026-10-07
 
 The live checkout still renders only the QR path (`Monthly`, `Annual`, and
