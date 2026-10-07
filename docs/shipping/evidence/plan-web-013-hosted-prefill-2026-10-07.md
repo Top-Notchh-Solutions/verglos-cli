@@ -12,8 +12,10 @@
   `pnpm db:migrations:check`, `pnpm build`, and `git diff --check` pass. The
   local build generated all 40 routes. The existing Node 22 engine warning was
   emitted because the machine is running Node `v26.4.0`.
-- **Hosted state:** The exact head is pushed. GitHub checks were still
-  initializing at capture; no hosted pass is claimed yet.
+- **Hosted state:** Exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474`
+  passed hosted `typecheck-and-schema` run `37624542330`; Vercel, Vercel
+  Preview Comments, and GitGuardian are green. The PR remains open and
+  unmerged because provider lifecycle and reconciliation gates remain open.
 - **Boundary:** No production, database, migration, provider, payment,
   deployment, entitlement, browser, or credential mutation occurred. This
   does not qualify payment success, capture, refund, renewal, cancellation,

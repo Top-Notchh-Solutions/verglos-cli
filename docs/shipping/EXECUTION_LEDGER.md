@@ -3959,8 +3959,10 @@ before enabling any destructive adapter.
   negative-boundary **2/2**, typecheck, Drizzle schema check, ordered
   31-migration check, production build (40 routes), and diff check pass.
   Node `v26.4.0` emitted the repository's existing Node 22 engine warning.
-- **Hosted state:** GitHub checks were initializing at capture; no hosted
-  success is claimed and the PR was not merged.
+- **Hosted state:** Exact head passed hosted `typecheck-and-schema` run
+  `37624542330`; Vercel, Vercel Preview Comments, and GitGuardian are green.
+  The PR was not merged because provider lifecycle and reconciliation gates
+  remain open.
 - **Boundary:** No production, database, migration, provider, payment,
   deployment, entitlement, browser, or credential mutation occurred.
 - **Limitation:** This does not prove provider configuration or any payment

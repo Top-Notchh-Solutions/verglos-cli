@@ -867,7 +867,8 @@ Hosted Checkout prefill addendum (2026-10-07): Web PR #149 exact head
 `b73fdd3beba513c0f9fc69a38c2fc69319ff9474` adds bounded server-derived email
 and E.164 contact prefill with fail-closed client parsing. Focused tests
 23/23, negative-boundary 2/2, typecheck, schema/migration checks, build, and
-diff check pass; hosted checks were pending at capture. This does not satisfy
+diff check pass; hosted `typecheck-and-schema` run `37624542330`, Vercel,
+Vercel Preview Comments, and GitGuardian are green. This does not satisfy
 the payment release gate: account-enabled method qualification, complete
 success/failure/capture/refund/renewal/cancellation/replay/out-of-order/webhook
 coverage, exactly-once entitlement behavior, and ledger-to-provider
