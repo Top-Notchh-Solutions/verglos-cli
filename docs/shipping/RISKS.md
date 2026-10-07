@@ -1,5 +1,10 @@
 # Verglos V1 risk register
 
+Latest Preview preflight update (2026-10-07): Vercel Preview lacks a
+recognizable Razorpay test/live key pair, a PostgreSQL database URL, and
+`RAZORPAY_ENABLED_PAYMENT_METHODS`. No Preview call was attempted. An
+isolated, valid test environment remains release-blocking for PLAN-WEB-014/015.
+
 Latest production read-only audit (2026-10-07): Vercel Production lacks
 `RAZORPAY_ENABLED_PAYMENT_METHODS`; production has 26 migration-history rows
 while the current hosted candidate has 31. Aggregate billing payments,

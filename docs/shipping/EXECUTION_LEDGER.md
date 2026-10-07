@@ -1,5 +1,14 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · Preview environment preflight
+
+- **Result:** Vercel Preview key values were neither `rzp_test_` nor
+  `rzp_live_`, the database value was not a PostgreSQL URL, and the hosted
+  method variable was absent.
+- **Safety:** No Preview provider/database call and no configuration mutation
+  occurred. Preview is not a valid payment-qualification target until its
+  isolated test credentials/database are provisioned.
+
 ## 2026-10-07 · production read-only billing/migration audit
 
 - **Environment:** Vercel production variable inventory lacks

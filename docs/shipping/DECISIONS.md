@@ -1,5 +1,14 @@
 # Verglos shipping decisions
 
+## Preview environment preflight · 2026-10-07
+
+- **Decision:** Do not use the current Vercel Preview for payment qualification.
+- **Evidence:** Its key values were not recognizable test/live prefixes, its
+  database value was not a PostgreSQL URL, and the hosted method variable was
+  absent.
+- **Boundary:** No Preview provider/database call or configuration mutation
+  occurred; provision an isolated test environment before lifecycle testing.
+
 ## Production read-only billing/migration audit · 2026-10-07
 
 - **Decision:** Keep production payment, migration, and deletion gates closed.

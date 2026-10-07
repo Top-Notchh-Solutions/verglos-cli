@@ -1,5 +1,12 @@
 # Verglos V1 release gates
 
+## Preview environment preflight · 2026-10-07
+
+Vercel Preview does not currently expose a recognizable Razorpay test/live key
+pair or PostgreSQL database URL and lacks `RAZORPAY_ENABLED_PAYMENT_METHODS`.
+No Preview provider/database call was attempted. The isolated payment gate
+therefore remains closed pending a valid non-production environment.
+
 ## Production read-only billing/migration audit · 2026-10-07
 
 Production Vercel configuration lacks `RAZORPAY_ENABLED_PAYMENT_METHODS`.

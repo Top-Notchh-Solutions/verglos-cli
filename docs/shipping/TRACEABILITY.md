@@ -1,5 +1,12 @@
 # Verglos V1 traceability
 
+## Preview environment preflight · 2026-10-07
+
+Vercel Preview variable-shape inspection found no recognizable Razorpay
+test/live key prefixes, no PostgreSQL database URL, and no
+`RAZORPAY_ENABLED_PAYMENT_METHODS`; no Preview provider/database call occurred.
+PLAN-WEB-014/015 therefore still lack a valid isolated runtime target.
+
 ## Production read-only billing/migration audit · 2026-10-07
 
 Vercel production variable inventory lacks `RAZORPAY_ENABLED_PAYMENT_METHODS`.

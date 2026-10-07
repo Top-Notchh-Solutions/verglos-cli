@@ -15,6 +15,12 @@ documentation or from the local method catalog. The earlier uncaptured test
 order proves only the previously recorded order-creation result; it does not
 resolve this method-account authentication gap.
 
+The linked Vercel Preview environment was also inspected by variable shape
+only. Its Razorpay key values were neither recognized test nor live prefixes,
+its database value was not a PostgreSQL URL, and it had no
+`RAZORPAY_ENABLED_PAYMENT_METHODS` variable. No Preview provider or database
+call was attempted.
+
 ## Implementation-side result
 
 Against Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432`,

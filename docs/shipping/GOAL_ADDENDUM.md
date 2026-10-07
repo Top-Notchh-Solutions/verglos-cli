@@ -1,5 +1,11 @@
 # Goal addendum — 2026-10-07
 
+Vercel Preview preflight: the pulled Preview values were not recognized Razorpay
+test/live key prefixes, the database value was not a PostgreSQL URL, and the
+hosted-method variable was absent. No Preview provider/database call was made.
+An isolated test deployment/database with valid test credentials is still
+required for PLAN-WEB-014/015.
+
 Production read-only audit: Vercel Production has no
 `RAZORPAY_ENABLED_PAYMENT_METHODS` variable. A bounded read-only transaction
 found 42 tables and 26 applied migrations, while the current hosted payment

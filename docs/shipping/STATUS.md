@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Preview environment preflight
+
+Vercel Preview was inspected by variable shape only: Razorpay key values were
+not recognized as test or live prefixes, the database value was not a
+PostgreSQL URL, and `RAZORPAY_ENABLED_PAYMENT_METHODS` was absent. No Preview
+provider or database call was attempted. The isolated test configuration and
+production read-only audit remain the only runtime evidence; no checkbox
+changed.
+
 ## 2026-10-07 · production read-only billing/migration audit
 
 Vercel production inventory has no `RAZORPAY_ENABLED_PAYMENT_METHODS` variable.
