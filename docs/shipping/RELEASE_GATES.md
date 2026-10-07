@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 large-data and serialized-CI merge · 2026-10-07
+
+Web PR #150 passed hosted Verify `37552936102`, Vercel, GitGuardian, and
+Preview Comments, then merged as
+`a64407d9e7b81ba4db8c52a96d1237da693cb910`. This strengthens the controlled
+qualification path for same-tenant pagination, 100-row truncation truth, and
+foreign-tenant exclusion. It does not close QUAL-WEB-006 or any release gate:
+paid/org browser, human screen-reader, and field-CWV evidence remain open. No
+deployment or production operation occurred.
+
 ## CLI license-source metadata hosted qualification and merge · 2026-10-07
 
 PR #73 tested head `d34ac4f` passed the complete Ubuntu/macOS/Windows Node

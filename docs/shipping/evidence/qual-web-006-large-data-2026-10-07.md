@@ -10,7 +10,8 @@ screen-reader review, and field Core Web Vitals remain open.
 Repository: `verglos-web` isolated worktree
 `/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web/.worktrees/web-qual-006-large-data`.
 Branch: `qual/web-006-large-data`.
-Commit: `70680f89cb1cb9e8324398fc0a789930420cb031`.
+Commit: `70680f89cb1cb9e8324398fc0a789930420cb031`; merged to Web `main` as
+`a64407d9e7b81ba4db8c52a96d1237da693cb910`.
 PR: https://github.com/anuragyadav-git/verglos-web/pull/150
 
 ## Implementation boundary
@@ -60,12 +61,12 @@ hosted workflow is the authoritative Node-baseline check.
 
 ## Hosted state and limitations
 
-PR #150 was pushed with only the integration-test change. Hosted
-`typecheck-and-schema` workflow run `37551537264` passed in 2m38s, including
-typecheck, configured tests, negative-boundary/truth-registry tests, build,
-public-boundary, dependency, SBOM, license, and tracked-secret checks. Vercel,
-GitGuardian, and Vercel Preview Comments also passed. GitHub reports the PR
-merge state `CLEAN` and mergeable. No merge or deployment was performed.
+PR #150 was pushed with only the integration-test and serial-CI changes.
+Hosted Verify run `37552936102` passed typecheck, serialized tests,
+negative-boundary/truth-registry, schema/migrations, build, public-boundary,
+dependency/SBOM/license, and tracked-secret checks; Vercel, GitGuardian, and
+Preview Comments also passed. It merged to Web `main` as
+`a64407d9e7b81ba4db8c52a96d1237da693cb910`. No deployment occurred.
 
 This evidence does not qualify large-data browser rendering, screen-reader
 behavior, field CWV, Pro entitlement, production database state, provider

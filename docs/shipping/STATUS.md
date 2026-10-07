@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-006 large-data and serialized-CI merge
+
+Web PR #150 passed hosted Verify run `37552936102`, Vercel, GitGuardian, and
+Preview Comments, then merged as
+`a64407d9e7b81ba4db8c52a96d1237da693cb910`. It adds only the bounded
+45-component/20-20-5-page monitoring fixture, foreign-tenant exclusion and
+truncation assertions, and the serialized shared-PostgreSQL Verify path.
+QUAL-WEB-006 remains open for authenticated Pro/org browser rendering, human
+screen-reader review, and field-CWV evidence. No deployment or production
+operation occurred. Backlog remains **218 checked / 62 unchecked / 280 total**.
+
 ## 2026-10-07 · CLI license-source metadata hosted qualification and merge
 
 CLI PR #73 tested head `d34ac4f` passed the complete Ubuntu/macOS/Windows Node

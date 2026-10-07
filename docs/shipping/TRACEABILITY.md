@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 large-data and serialized-CI merge · 2026-10-07
+
+- Web PR #150 passed hosted Verify `37552936102`, Vercel, GitGuardian, and
+  Preview Comments, then merged to Web `main` as
+  `a64407d9e7b81ba4db8c52a96d1237da693cb910`.
+- The merged boundary covers only the synthetic large-data monitoring fixture,
+  same-tenant pagination/truncation/foreign-tenant assertions, and serialized
+  shared-PostgreSQL CI execution.
+- QUAL-WEB-006 remains open for authenticated Pro/org browser evidence, human
+  screen-reader review, and field CWV. No deployment or production operation
+  occurred; see
+  `docs/shipping/evidence/qual-web-006-large-data-2026-10-07.md`.
+
 ## CLI license-source metadata hosted qualification and merge · 2026-10-07
 
 - Tested CLI head `d34ac4f` passed all Ubuntu/macOS/Windows Node 20/22/24

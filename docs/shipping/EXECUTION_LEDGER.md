@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-006 large-data and serialized-CI merge
+
+- **Hosted:** Web PR #150 passed Verify `37552936102` plus Vercel,
+  GitGuardian, and Preview Comments.
+- **Merge:** PR #150 merged to Web `main` as
+  `a64407d9e7b81ba4db8c52a96d1237da693cb910`.
+- **Boundary:** The merge contains the synthetic large-data monitoring
+  qualification and serialized shared-PostgreSQL CI path only. Paid/org
+  browser, human screen-reader, and field-CWV acceptance remain open;
+  QUAL-WEB-006 is not checked. No deployment or production/provider/payment/
+  database/credential operation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-large-data-2026-10-07.md`.
+
 ## 2026-10-07 · CLI license-source metadata hosted qualification and merge
 
 - **Hosted:** PR #73 tested head `d34ac4f` passed Ubuntu/macOS/Windows Node
