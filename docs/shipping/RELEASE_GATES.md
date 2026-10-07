@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## CLI current-main Hunt adversarial requalification · 2026-10-07
+
+The exact remote CLI head `7d060b2` reran the pinned Hunt harness and passed
+**60/60 executed assertions**, with one explicit macOS/Linux-namespace skip
+and zero failures; Docker client/server were `29.7.2/29.7.2`. This is
+repeatable macOS evidence only and does not pass HUNT-008/009/010/011 or
+QUAL-CLI-004/006: trusted recipe/publisher provenance, official validators,
+Linux-host isolation, legal/trusted-publishing review, and independent
+acceptance remain required. No checkbox or production state changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
 ## CLI exact origin/main qualification · 2026-10-07
 
 CLI remote head `7d060b2` passed **12/12** test tasks, **13/13** typecheck

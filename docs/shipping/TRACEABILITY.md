@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## CLI current-main Hunt adversarial requalification · 2026-10-07
+
+The exact remote CLI head `7d060b2` reran the pinned Docker Hunt harness and
+passed **60/60 executed assertions**, with one explicit macOS/Linux-namespace
+skip and zero failures. This supports repeatable current-source adversarial
+coverage only; Linux isolation, trusted recipe/publisher provenance, official
+validators, independent review, and release acceptance remain open. No
+checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. See
+`docs/shipping/evidence/cli-hunt-current-main-adversarial-2026-10-07.md`.
+
 ## CLI exact origin/main qualification · 2026-10-07
 
 Exact CLI remote head `7d060b2` passed Turbo **12/12** test, **13/13**

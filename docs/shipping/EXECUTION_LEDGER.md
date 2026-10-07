@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 — CLI current-main Hunt adversarial requalification
+
+- **Code:** CLI exact remote head `7d060b2` in clean worktree
+  `feat/cli-shipping-next`.
+- **Verification:** Pinned Docker Hunt harness exited 0 with **60 passed / 1
+  explicit macOS/Linux-namespace skip / 0 failures** across 61 assertions;
+  Docker client/server were `29.7.2/29.7.2` and no containers remained.
+- **Disposition:** Repeatable macOS evidence only. Linux host isolation,
+  trusted recipe/publisher provenance, official validators, independent
+  review, and release acceptance remain open. No checkbox changed; backlog
+  remains **218/62/280 (77.9%)**.
+- **Boundary:** No production/provider/customer/database/deployment/
+  publication operation occurred.
+- **Evidence:** `docs/shipping/evidence/cli-hunt-current-main-adversarial-2026-10-07.md`.
+
 # 2026-10-07 — CLI exact origin/main qualification
 
 - **Code:** CLI exact remote head `7d060b2` in clean worktree
