@@ -4,6 +4,8 @@ import { runHunt, RestrictedProcessAdapter, validateSupportedHuntRecipe } from "
 import { ApprovalReceiptSchema, parseHuntRecipe, parseHuntRecipeTrustPolicy, type ScanResult } from "@verglos/shared";
 
 const MAX_INPUT_BYTES = 8 * 1024 * 1024;
+const MAX_FINDINGS = 10_000;
+const MAX_FINDING_TEXT = 16 * 1024;
 
 async function readJson(path: string, label: string): Promise<unknown> {
   if (!path || path.length > 4096 || /[\u0000-\u001f\u007f]/u.test(path)) throw new Error(`${label} path is invalid`);
@@ -25,11 +27,11 @@ async function readJson(path: string, label: string): Promise<unknown> {
 function parseReport(value: unknown): ScanResult {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Hunt report is invalid");
   const report = value as Record<string, unknown>;
-  if (typeof report.projectRoot !== "string" || report.projectRoot.length === 0 || !Array.isArray(report.findings)) throw new Error("Hunt report is invalid");
+  if (typeof report.projectRoot !== "string" || report.projectRoot.length === 0 || report.projectRoot.length > 4096 || /[\u0000-\u001f\u007f]/u.test(report.projectRoot) || !Array.isArray(report.findings) || report.findings.length > MAX_FINDINGS) throw new Error("Hunt report is invalid");
   for (const finding of report.findings) {
     if (!finding || typeof finding !== "object" || Array.isArray(finding)) throw new Error("Hunt report contains an invalid finding");
     const item = finding as Record<string, unknown>;
-    if (typeof item.id !== "string" || typeof item.severity !== "string" || typeof item.title !== "string" || typeof item.description !== "string") {
+    if (typeof item.id !== "string" || item.id.length === 0 || item.id.length > MAX_FINDING_TEXT || typeof item.severity !== "string" || item.severity.length > 64 || typeof item.title !== "string" || item.title.length > MAX_FINDING_TEXT || typeof item.description !== "string" || item.description.length > MAX_FINDING_TEXT) {
       throw new Error("Hunt report contains an invalid finding");
     }
   }
