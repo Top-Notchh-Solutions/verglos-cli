@@ -24,7 +24,7 @@ import { executeAttest } from "./attest.js";
 import { executeRecordExport } from "./record-export.js";
 import { executeRecordAttest, SIGSTORE_NETWORK_ORIGINS } from "./record-sigstore.js";
 import { executeHunt } from "./hunt.js";
-import { executeHuntRecipe } from "./hunt-execute.js";
+import { executeHuntRecipe, runHuntRecipe } from "./hunt-execute.js";
 import { executeHuntRecipeVerification } from "./hunt-recipe-verify.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
@@ -1224,10 +1224,10 @@ program
       console.log(chalk.gray("  verglos_check_before_write      Free — legacy pre-write check"));
       console.log(chalk.gray("  verglos_check_package           Free — slopsquat / typo / CVE check"));
       console.log(chalk.gray("  verglos_explain_finding         Free — rule explanation"));
-      console.log(chalk.gray("  verglos_hunt_finding            Pro — shell, v2.0.0-beta"));
-      console.log(chalk.gray("  verglos_hunt_report             Pro — shell, v2.0.0-beta"));
-      console.log(chalk.gray("  verglos_hunt_before_write       Pro — shell, v2.0.0-beta"));
-      console.log(chalk.gray("  verglos_hunt_explain_verdict    Pro — shell, v2.0.0-beta"));
+      console.log(chalk.gray("  verglos_hunt_finding            Pro — approval-bound host runtime"));
+      console.log(chalk.gray("  verglos_hunt_report             Pro — approval-bound host runtime"));
+      console.log(chalk.gray("  verglos_hunt_before_write       Pro — bounded preflight, no arbitrary execution"));
+      console.log(chalk.gray("  verglos_hunt_explain_verdict    Pro — bounded non-executing explanation"));
       console.log(chalk.gray("  verglos_attest                  Deprecated compatibility shell — no signing/publication"));
       return;
     }
@@ -1237,7 +1237,30 @@ program
     const mcpPlan = verifiedLicense?.tier === "founder"
       ? "enterprise"
       : verifiedLicense?.tier;
-    await startStdioServer({ plan: mcpPlan });
+    await startStdioServer({
+      plan: mcpPlan,
+      huntExecutor: {
+        executeFinding: async (input) => (await runHuntRecipe({
+          reportPath: input.reportPath,
+          findingId: input.findingId,
+          recipePath: input.binding.recipePath!,
+          trustStorePath: input.binding.trustStorePath!,
+          ruleId: input.binding.ruleId!,
+          subjectId: input.binding.subjectId!,
+          observationId: input.binding.observationId!,
+          approval: input.approvalReceipt,
+        })).projection,
+        executeReport: async (input) => (await runHuntRecipe({
+          reportPath: input.reportPath,
+          recipePath: input.binding.recipePath!,
+          trustStorePath: input.binding.trustStorePath!,
+          ruleId: input.binding.ruleId!,
+          subjectId: input.binding.subjectId!,
+          observationId: input.binding.observationId!,
+          approval: input.approvalReceipt,
+        })).projection,
+      },
+    });
   });
 
 program
