@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-014 current-main migration/bootstrap qualification · 2026-10-07
+
+Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` was rehearsed against
+disposable PostgreSQL 15. The guarded empty-database bootstrap and all **37**
+ordered migrations passed; the isolated payment/catalog/checkout/webhook/
+replay/failure/refund/subscription/event-claim set passed **22/22**, followed by
+typecheck, schema validation, and a 43-page preview build. This is local
+implementation evidence only. Production migration/history reconciliation,
+backup/restore/rollback, Node 22 acceptance, provider lifecycle, and production
+reconciliation remain open. No checkbox changed. See
+`docs/shipping/evidence/plan-web-014-current-main-local-integration-2026-10-07.md`.
+
 ## CLI current-main public artifact pack preflight · 2026-10-07
 
 Exact CLI `origin/main` `7d060b2` passed the documented architecture setup,

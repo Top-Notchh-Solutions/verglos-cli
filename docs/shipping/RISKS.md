@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-013 migration bootstrap revalidation · 2026-10-07
+
+Current Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` includes a guarded
+local-only legacy-baseline bootstrap. A disposable empty PostgreSQL database
+passed that bootstrap and all **37** ordered migrations, with **22/22** isolated
+payment/database checks passing. The prior local empty-schema failure is
+therefore resolved for the documented rehearsal. Residual risk is production:
+verify the existing legacy baseline and 26-row migration history against the
+current tail, rehearse backup/restore and rollback, and obtain Node 22 runtime
+acceptance before any cutover. Provider lifecycle and production reconciliation
+remain separate release blockers. Owner: Web schema/release. No production
+state was touched.
+
 ## R-QUAL-CLI-006 current-main artifact/format evidence · 2026-10-07
 
 Exact CLI `origin/main` `7d060b2` now has current-head artifact evidence:

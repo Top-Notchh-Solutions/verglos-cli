@@ -1,5 +1,17 @@
 # Goal addendum — 2026-10-07
 
+## PLAN-WEB-014 current-main migration/bootstrap qualification
+
+The current Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` now has
+authoritative local evidence for its guarded empty-database bootstrap and all
+**37** ordered migrations. The isolated payment/catalog/checkout/webhook/
+replay/failure/refund/subscription/event-claim checks passed **22/22**, with
+typecheck, schema validation, and a 43-page preview build also passing. This
+does not close any backlog checkbox: production history/cutover, backup/restore,
+rollback, Node 22 acceptance, provider lifecycle, and production reconciliation
+remain open. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence: `docs/shipping/evidence/plan-web-014-current-main-local-integration-2026-10-07.md`.
+
 ## QUAL-CLI-006 current-main artifact and format validation
 
 Exact CLI `origin/main` `7d060b2` was qualified in disposable worktrees with

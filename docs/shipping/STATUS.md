@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Web current-main migration bootstrap revalidation
+
+The current Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` already has a
+guarded, explicit local-only empty-database bootstrap in `scripts/db-migrate.ts`.
+The disposable PostgreSQL rehearsal passed the bootstrap, all **37** ordered
+migrations, **22/22** payment/catalog/checkout/webhook/replay/failure/refund/
+subscription/event-claim checks, typecheck, schema validation, and a 43-page
+preview build. This resolves the local fresh-database bootstrap uncertainty;
+it does not establish production legacy-baseline/history compatibility,
+backup/restore, rollback, Node 22 acceptance, provider lifecycle, or production
+reconciliation. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-current-main-local-integration-2026-10-07.md`.
+
 ## 2026-10-07 · CLI current-main public artifact pack preflight
 
 In an isolated disposable worktree at exact CLI `origin/main` `7d060b2`, the

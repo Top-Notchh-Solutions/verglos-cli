@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014/015 migration-bootstrap boundary · 2026-10-07
+
+Current Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passes the guarded
+local empty-database bootstrap, all **37** ordered migrations, **22/22**
+isolated payment/database checks, typecheck, schema validation, and a 43-page
+preview build. This clears the local bootstrap uncertainty only; it does not
+pass production migration/history reconciliation, backup/restore, rollback,
+Node 22 runtime acceptance, provider lifecycle, or production reconciliation.
+No checkbox or production state changed. Evidence:
+`docs/shipping/evidence/plan-web-014-current-main-local-integration-2026-10-07.md`.
+
 ## CLI current-main public artifact pack preflight · 2026-10-07
 
 Exact CLI `origin/main` `7d060b2` passed the documented cross-platform install,

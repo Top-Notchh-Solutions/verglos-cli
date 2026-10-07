@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-014 migration-bootstrap revalidation · 2026-10-07
+
+- **Decision:** Treat the local migration-bootstrap uncertainty as resolved for
+  the documented current-main rehearsal, but keep production migration and
+  release acceptance open.
+- **Evidence:** Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea`; guarded
+  empty-database bootstrap; all **37** ordered migrations; isolated checks
+  **22/22**; typecheck, schema validation, and 43-page preview build passed.
+- **Boundary:** Production legacy history/cutover, backup/restore, rollback,
+  Node 22 acceptance, provider lifecycle, and production reconciliation remain
+  unverified. No checkbox or production state changed.
+
 ## QUAL-CLI-006 current-main artifact and format validation · 2026-10-07
 
 - **Decision:** Accept the exact-head artifact and format-validator results as
