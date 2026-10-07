@@ -3718,6 +3718,18 @@ before enabling any destructive adapter.
 - **Boundary:** No browser, provider, payment, production, database,
   deployment, credential, or external-recipe operation occurred.
 
+# 2026-10-07 — Web full regression after method webhook binding
+
+- **Verification:** Web PR #149 head `3f4a7aa` full `pnpm test` completed with
+  pretest **42/48** (6 environment-gated skips) and main suite **851/873** (22
+  environment-gated skips), **0 failures**.
+- **Limitation:** This strengthens code-side PLAN-WEB-013 evidence only;
+  provider lifecycle and reconciliation evidence remain open. No checkbox
+  changed.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No browser, provider, payment, production, database,
+  migration, deployment, or credential operation occurred.
+
 # 2026-10-07 — PLAN-WEB-013 signed hosted-method binding
 
 - **Implementation:** Web PR #149 commit `67fb7e2` binds the server-selected

@@ -13,6 +13,9 @@
   Web typecheck, production build (40 pages), `pnpm db:check`, and
   `git diff --check` pass. Existing Node 22 engine and multiple-lockfile
   warnings remain environmental only.
+- **Regression:** Full Web `pnpm test` at the current line completes with
+  pretest **42/48** (6 environment-gated skips) and main suite **851/873** (22
+  environment-gated skips), with **0 failures**.
 - **Limitation:** This is code-side binding evidence only. PLAN-WEB-013,
   PLAN-WEB-014, and PLAN-WEB-015 remain open pending provider lifecycle,
   all-enabled-method, deployment, and reconciliation evidence.

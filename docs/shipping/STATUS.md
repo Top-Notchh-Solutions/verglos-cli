@@ -2584,3 +2584,13 @@ lifecycle, all-enabled-method, deployment, and reconciliation evidence. Backlog
 remains **218 checked / 62 unchecked / 280 total (77.9%)**. No browser,
 provider, payment, production, database, migration, deployment, or credential
 operation occurred.
+
+## 2026-10-07 · Web full regression after method webhook binding
+
+At Web PR #149 head `3f4a7aa`, the full configured test command completed with
+pretest **42/48** (6 environment-gated skips) and main suite **851/873** (22
+environment-gated skips), **0 failures**. This strengthens code-side
+PLAN-WEB-013 evidence only; provider lifecycle and reconciliation gates remain
+open. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
+browser, provider, payment, production, database, migration, deployment, or
+credential operation occurred.
