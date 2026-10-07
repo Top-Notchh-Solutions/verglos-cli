@@ -261,3 +261,16 @@ restore/RPO, rollback, authenticated E2E, legal/customer-held, or independent
 acceptance gates. The container was removed; no production/provider/payment/
 deployment/browser mutation occurred. Backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)** and no checkbox changed.
+
+## 2026-10-07 QUAL-WEB-006 runtime probe
+
+The existing authenticated production `/orgs` page was inspected through CDP in
+desktop 1710x985 and bounded mobile 390x844 states. Neither state overflowed
+horizontally; AX trees were 30/18 named desktop and 32/20 named mobile. The
+empty state exposed one focusable link and no buttons. Desktop layout,
+recalculation, task, and heap metrics were 0.000059s/0.000669s/0.001557s/
+6,530,812 bytes. Programmatic focus is not keyboard/screen-reader proof, so
+QUAL-WEB-006 remains open for keyboard, human review, field-CWV, authenticated
+data, and large datasets. The viewport was restored, page targets remained
+stable, and no production mutation occurred. Backlog remains **218 checked /
+62 unchecked / 280 total (77.9%)**.

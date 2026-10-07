@@ -4031,4 +4031,18 @@ Web empty-Postgres regression batch (2026-10-07):
   production/provider/payment/deployment/browser mutation, or checkbox change.
   `QUAL-WEB-005` and all release gates remain open.
 - **Evidence:**
-  `docs/shipping/evidence/qual-web-005-empty-postgres-regression-2026-10-07.md`.
+ `docs/shipping/evidence/qual-web-005-empty-postgres-regression-2026-10-07.md`.
+
+QUAL-WEB-006 browser runtime batch (2026-10-07):
+
+- **Scope:** authenticated production `/orgs` empty state through the existing
+  CDP page; desktop 1710x985 and mobile 390x844 emulation.
+- **Result:** no horizontal overflow; AX trees 30/18 named desktop and 32/20
+  named mobile; one focusable link and zero buttons; desktop layout,
+  recalculation, task, and heap metrics 0.000059s/0.000669s/0.001557s/
+  6,530,812 bytes.
+- **Boundary:** Programmatic focus is not keyboard/screen-reader acceptance.
+  Data states, keyboard traversal, human review, field-CWV, and large-data
+  qualification remain open. The viewport was restored; a five-second target
+  monitor observed no page creation/destruction. No checkbox changed.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-org-directory-mobile-focus-2026-10-07.md`.

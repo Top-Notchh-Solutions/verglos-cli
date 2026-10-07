@@ -915,3 +915,14 @@ only. It does not pass the production deletion gate or any payment gate:
 authenticated non-production deletion E2E, migration/cutover, restore/RPO,
 rollback, reconciliation, provider lifecycle, and independent acceptance
 remain open. No checkbox changed and the disposable container was removed.
+
+## QUAL-WEB-006 mobile/focus runtime probe · 2026-10-07
+
+The authenticated production `/orgs` empty state showed no horizontal overflow
+at desktop 1710x985 or bounded mobile 390x844. AX trees were 30/18 named and
+32/20 named nodes; one focusable link and zero buttons were present. Desktop
+layout/style/task/heap metrics were 0.000059s/0.000669s/0.001557s/6,530,812
+bytes. This does not pass QUAL-WEB-006: keyboard traversal, human
+screen-reader review, focus-visible proof, field-CWV, authenticated data
+states, and large-data evidence remain open. No production mutation or
+checkbox change occurred.

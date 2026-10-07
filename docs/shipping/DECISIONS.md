@@ -767,6 +767,19 @@ each observed method has lifecycle and reconciliation evidence.
   deployment evidence was produced. PLAN-WEB-014/015 remain open; the CDP
   blank target was restored.
 
+## QUAL-WEB-006 mobile/focus runtime probe · 2026-10-07
+
+- **Decision:** Record the `/orgs` desktop/mobile and accessibility-tree
+  observations as partial runtime evidence only; do not mark accessibility,
+  responsive, or performance acceptance from an empty state.
+- **Evidence:** Existing authenticated CDP target; no horizontal overflow at
+  1710x985 or 390x844; AX trees 30/18 named and 32/20 named; one focusable
+  link; desktop layout/style/task/heap metrics
+  0.000059s/0.000669s/0.001557s/6,530,812 bytes.
+- **Boundary:** Programmatic focus does not prove keyboard-visible focus or
+  screen-reader usability. Data states, field-CWV, large datasets, and human
+  review remain open. No checkbox or production state changed.
+
 ## Web empty-Postgres regression qualification · 2026-10-07
 
 - **Decision:** Treat the empty-database serial run as local runtime-regression

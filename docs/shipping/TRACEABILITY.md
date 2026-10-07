@@ -2201,3 +2201,13 @@ trace production migrations, restore/RPO, rollback, authenticated deletion E2E,
 payment lifecycle, reconciliation, or independent acceptance. No checkbox
 changed. Evidence:
 `docs/shipping/evidence/qual-web-005-empty-postgres-regression-2026-10-07.md`.
+
+QUAL-WEB-006 runtime addendum (2026-10-07): the authenticated `/orgs` empty
+state was inspected through the existing CDP target at desktop 1710x985 and
+mobile 390x844. Neither state horizontally overflowed. Desktop/mobile
+accessibility trees were 30/18 named and 32/20 named nodes; one focusable link
+and no buttons were present. Desktop layout/style/task/heap metrics were
+0.000059s/0.000669s/0.001557s/6,530,812 bytes. This is partial empty-state
+evidence; keyboard, human screen-reader, field-CWV, authenticated data, and
+large-data acceptance remain open. No checkbox changed. Evidence:
+`docs/shipping/evidence/qual-web-006-org-directory-mobile-focus-2026-10-07.md`.

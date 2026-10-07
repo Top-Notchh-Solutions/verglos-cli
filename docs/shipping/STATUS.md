@@ -2817,3 +2817,16 @@ was removed, no migration or `db:push` was used, and no production/provider/
 payment/deployment/browser mutation occurred. `QUAL-WEB-005`, payment gates,
 and production gates remain open; no checkbox changed. Evidence:
 `docs/shipping/evidence/qual-web-005-empty-postgres-regression-2026-10-07.md`.
+
+# 2026-10-07 — QUAL-WEB-006 mobile/focus runtime probe
+
+The existing authenticated production `/orgs` page was inspected through the
+existing CDP target at desktop 1710x985 and bounded mobile 390x844. Both states
+had no horizontal overflow; the desktop AX tree was 30 nodes / 18 named nodes
+and mobile was 32 / 20. The page exposed one H1, one H2, two landmarks, one
+focusable link, and no buttons. Desktop runtime metrics were layout 0.000059s,
+style recalculation 0.000669s, task 0.001557s, and 6,530,812-byte JS heap.
+Programmatic focus is not keyboard/screen-reader evidence, so no focus pass is
+claimed. The viewport was restored and a five-second monitor saw no page-target
+churn. `QUAL-WEB-006` remains open; no checkbox changed. Evidence:
+`docs/shipping/evidence/qual-web-006-org-directory-mobile-focus-2026-10-07.md`.

@@ -481,3 +481,10 @@ renewal, replay, out-of-order, and entitlement reconciliation remain
 unverified. Production method configuration and billing cutover remain blocked
 until test-mode evidence and the required credential-rotation/preflight gates
 are complete.
+
+QUAL-WEB-006 runtime update (2026-10-07): the authenticated `/orgs` empty state
+has bounded desktop/mobile no-overflow and accessibility-tree observations,
+but only one focusable link was present and programmatic focus did not prove a
+keyboard-visible indicator. Keyboard traversal, human/screen-reader review,
+authenticated data states, field-CWV, and large-data behavior remain
+unverified; keep the accessibility/performance gate open.
