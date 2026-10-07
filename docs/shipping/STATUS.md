@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · live critical-path queue refresh
+
+1. **PLAN-WEB-014/015 — Razorpay test-mode matrix** · Web PR #149,
+   exact head `db68157da039d8aab939818f9023f867028e4432`; code-side and local
+   snapshot-backed payment tests pass, but account-enabled methods, test
+   credentials, and capture/failure/refund/renewal/replay/out-of-order runtime
+   evidence are missing. No provider operation is authorized from current
+   evidence.
+2. **QUAL-WEB-005 — restore/deletion/rollback acceptance** · Web PR #153,
+   exact head `250313e86ae6b746e1137c9f4d5436b23a96c170`; disposable restore
+   path and rollback logic pass, but the available snapshot is approximately
+   396h old against a 48h RPO threshold, and authenticated non-production
+   deletion plus deployment rollback evidence remain open.
+3. **GITHUB-WEB-001..004 / PLAN-CLI-003 — authorized SCM qualification** ·
+   implementation substrate is present, but live GitHub App installation,
+   immutable identity/permission validation, delivery evidence, and R-041
+   credential rotation are missing. Continue code/evidence work without a
+   production cutover.
+
+This queue is independent of the merged CLI packaging correction and the
+partial Free-account browser probe. Backlog remains **218 checked / 62
+unchecked / 280 total**.
+
 ## 2026-10-07 · payment code-side qualification
 
 Web PR #149 focused payment verification passed **44 tests / 0 failures / 1

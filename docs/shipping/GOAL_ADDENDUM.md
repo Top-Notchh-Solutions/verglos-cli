@@ -1,5 +1,14 @@
 # Goal addendum — 2026-10-07
 
+Live queue refresh: (1) PLAN-WEB-014/015 provider test-mode method/lifecycle
+qualification is blocked on account-enabled Razorpay test state; (2)
+QUAL-WEB-005 needs fresh-backup RPO, authenticated deletion E2E, and deployment
+rollback evidence; (3) GITHUB-WEB-001..004 / PLAN-CLI-003 needs live App
+installation/permission/delivery evidence and R-041 rotation. The merged CLI
+packaging correction and Free-account directory probe are complete partial
+steps, not remaining implementation queue items. Backlog remains **218 checked /
+62 unchecked / 280 total**.
+
 Payment critical-path continuation: PR #149 focused code-side tests passed
 44/44 with one explicit unit-test skip; a snapshot-backed disposable database
 run then passed both billing-ledger and webhook-claim integrations (2/2, no

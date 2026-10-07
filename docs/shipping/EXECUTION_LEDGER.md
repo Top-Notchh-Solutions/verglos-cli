@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · live critical-path queue refresh
+
+1. **PLAN-WEB-014/015** — Web PR #149 at exact head
+   `db68157da039d8aab939818f9023f867028e4432`; local code and snapshot-backed
+   payment tests are green, but the Razorpay account-enabled test-mode method
+   list and complete lifecycle matrix are unavailable.
+2. **QUAL-WEB-005** — Web PR #153 at exact head
+   `250313e86ae6b746e1137c9f4d5436b23a96c170`; restore/rollback code evidence
+   is available, but fresh-backup RPO, authenticated deletion E2E, and
+   deployment rollback evidence remain open.
+3. **GITHUB-WEB-001..004 / PLAN-CLI-003** — continue against the existing Web
+   and CLI substrate; live App installation/permission/delivery qualification
+   and R-041 rotation are external blockers. No production cutover is claimed.
+
+The merged CLI PR #75 and live Free-account directory probe are no longer
+queued as pending implementation batches. No checkbox changed.
+
 ## 2026-10-07 · payment code-side qualification
 
 - **Focused tests:** Web PR #149 payment/configuration set passed 44 tests,
