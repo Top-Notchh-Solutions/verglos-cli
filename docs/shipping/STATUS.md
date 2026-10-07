@@ -48,9 +48,10 @@ and Chrome DevTools prerequisites pass. Local execution used Node 26.4.0
 against the package Node 22.x baseline; hosted Node 22 evidence remains open.
 
 This is code-side evidence only. PR #149 is open/mergeable; GitGuardian is
-green, `typecheck-and-schema` is queued, and Vercel is pending. No Razorpay
-account configuration was read, no test payment/lifecycle matrix was run, and
-no production database/provider/payment/deployment/migration write occurred.
+green, `typecheck-and-schema`, Vercel, and Vercel Preview Comments are green,
+and GitHub reports merge state `CLEAN`. No Razorpay account configuration was
+read, no test payment/lifecycle matrix was run, and no production
+database/provider/payment/deployment/migration write occurred.
 PLAN-WEB-013/014/015 remain unchecked. Private evidence:
 `docs/shipping/evidence/plan-web-013-hosted-checkout-2026-10-07.md`.
 Backlog remains **218 checked / 62 unchecked / 280 total**.

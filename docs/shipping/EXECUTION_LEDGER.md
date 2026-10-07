@@ -46,8 +46,9 @@
   environment-gated skips, 0 failures; typecheck/build/Drizzle/31-migration
   ordering/diff checks pass. Docker 29.7.2 and Chrome DevTools are reachable.
   Node 26.4.0 was used locally; Node 22 hosted evidence is still required.
-- **Hosted state:** GitGuardian passed; PR `typecheck-and-schema` queued and
-  Vercel pending at capture. PR is open and mergeable.
+- **Hosted state:** GitGuardian, `typecheck-and-schema`, Vercel, and Vercel
+  Preview Comments pass; GitHub reports PR merge state `CLEAN`. The PR remains
+  open and no merge was performed.
 - **Boundary:** No Razorpay account read, sandbox payment, refund, renewal,
   replay, provider configuration, production database/provider/payment write,
   migration, deployment, or price change occurred. R-041 remains open.

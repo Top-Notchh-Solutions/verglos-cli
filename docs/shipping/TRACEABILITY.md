@@ -39,8 +39,9 @@
   an explicit `upi_qr` declaration and remains a separate adapter.
 - **Verification:** Focused billing/route/webhook tests 19/19; configured Web
   suite 850/872/22/0; typecheck, production build, Drizzle check, 31 ordered
-  migrations, Docker and Chrome prerequisites pass. GitGuardian is green;
-  hosted typecheck/schema is queued and Vercel pending.
+  migrations, Docker and Chrome prerequisites pass. GitGuardian,
+  typecheck/schema, Vercel, and Preview Comments pass; GitHub reports the PR
+  merge state `CLEAN`.
 - **Acceptance boundary:** PLAN-WEB-013/014/015 remain open. No provider
   account capabilities, test payment, refund/renewal/replay/order evidence,
   production reconciliation, deployment, migration, or payment write was
