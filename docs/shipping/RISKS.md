@@ -606,3 +606,11 @@ evidence. This reduces the hold/deletion race but does not resolve the wider
 QUAL-WEB-005 risks: authenticated non-production E2E, disposition and consent
 review, production migrations/cutover, reconciliation, restore/RPO, rollback,
 and independent acceptance remain open.
+
+R-PLAN-WEB-013 migration-bootstrap update (2026-10-07): Web PR #149
+`3f05b0a` adds a read-only preflight and an explicit local-only historical
+baseline so an empty database no longer fails opaquely at migration `0000`.
+Default empty databases refuse with zero writes; explicit local rehearsal
+applies all 31 migrations. This does not establish production migration
+history, backup/restore, rollback, or authorization evidence. R-041 credential
+rotation and production migration preflight remain open; no checkbox changed.

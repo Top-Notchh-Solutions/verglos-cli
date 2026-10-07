@@ -3069,3 +3069,19 @@ Hosted Verify `37645815573` subsequently completed successfully for exact Web
 PR #149 head `051d4be`; Vercel Preview Comments remained green. The run's only
 annotations were future GitHub runner/action deprecation notices. This does
 not close the provider lifecycle gate or change the backlog count.
+
+## 2026-10-07 · Web migration bootstrap guard
+
+Web PR #149 exact head `3f05b0a` adds a read-only migration preflight and an
+explicit local-only legacy baseline for genuinely empty databases. The guard
+requires existing migration history or the pre-Drizzle `users` + `licenses`
+baseline and refuses partial/unknown schemas. It never edits the numbered
+journal; CI and production cannot invoke the bootstrap path. Focused tests pass
+12/12; the serial Web suite passes 855/878 with 23 explicit environment-gated
+skips and zero failures; typecheck, schema, 31-migration ordering, build,
+public-boundary, SBOM/license inventory, and diff checks pass. A disposable
+PostgreSQL 15 rehearsal proves zero writes on default empty-db refusal and all
+31 migrations after explicit local bootstrap. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. No production,
+provider, payment, deployment, or credential operation occurred. Evidence:
+`docs/shipping/evidence/migration-bootstrap-guard-2026-10-07.md`.

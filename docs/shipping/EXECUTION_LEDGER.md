@@ -4320,3 +4320,22 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
   production, deployment, QR, or credential mutation occurred.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-test-webhook-inventory-2026-10-07.md`.
+
+## 2026-10-07 · Web migration bootstrap guard
+
+- **Code:** Web PR #149 exact pushed head `3f05b0a` adds a read-only
+  `db:migrate` preflight, an explicit local-only legacy baseline, and guard
+  tests without editing the numbered Drizzle journal.
+- **Verification:** Focused migration/guard/audit tests **12/12**, serial Web
+  suite **855 passed / 23 explicit skips / 0 failures** out of 878, typecheck,
+  schema check, ordered **31-migration** check, build, public-boundary,
+  SBOM/license inventory, and diff checks passed. Disposable PostgreSQL 15
+  rehearsal proved default empty-schema refusal with zero tables and explicit
+  local bootstrap followed by 31 applied migrations and five baseline tables.
+- **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
+  (77.9%)**. Migration evidence does not close payment, deletion, production,
+  or release gates.
+- **Boundary:** No production/provider/payment/deployment/credential write or
+  browser mutation occurred. The only database writes were to the disposable
+  local Docker database, which was removed.
+- **Evidence:** `docs/shipping/evidence/migration-bootstrap-guard-2026-10-07.md`.

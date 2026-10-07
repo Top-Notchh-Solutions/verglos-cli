@@ -948,3 +948,22 @@ each observed method has lifecycle and reconciliation evidence.
 - **Evidence:** Web PR #153 commit `85faba9`; focused tests **35/35** and
   disposable PostgreSQL integration **1/1**. Verify `37633633802` completed
   successfully at exact head. This is not full deletion acceptance.
+
+## Migration bootstrap safety boundary · 2026-10-07
+
+- **Decision:** Do not edit the applied `0000` migration or silently push an
+  empty/partial schema. Route `db:migrate` through a read-only preflight and
+  permit the reviewed legacy baseline only for an explicitly confirmed local
+  empty database; CI and production refuse that bootstrap path.
+- **Reason:** The numbered journal begins after the historical `users` and
+  `licenses` baseline, and later application code also depends on legacy
+  tables. A direct Drizzle run against an empty database fails before proving
+  what it would write; an unconditional bootstrap would risk an unknown or
+  production schema.
+- **Evidence:** Web PR #149 `3f05b0a`; focused 12/12, serial 855/878/23/0,
+  typecheck/schema/31-migration/build/public-boundary/SBOM/license checks, and
+  disposable PostgreSQL refusal + explicit 31-migration rehearsal. See
+  `docs/shipping/evidence/migration-bootstrap-guard-2026-10-07.md`.
+- **Boundary:** This is migration code-side safety only. Production history,
+  snapshot/restore, R-041 credential rotation, and deployment authorization
+  remain open; no backlog checkbox changed.

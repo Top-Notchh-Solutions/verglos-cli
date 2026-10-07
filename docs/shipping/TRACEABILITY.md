@@ -2406,3 +2406,17 @@ provider event and cumulative refund watermark without treating creation as a
 completed refund. This is code/configuration evidence only; no delivery or
 payment lifecycle is claimed. See
 `docs/shipping/evidence/plan-web-014-test-webhook-inventory-2026-10-07.md`.
+
+## Migration bootstrap boundary · 2026-10-07
+
+- **Requirement:** The Web migration command must not fail opaquely or write
+  into an unknown/partial database, while preserving the historical baseline
+  required by migration `0000`.
+- **Implementation:** Web PR #149 `3f05b0a` (`scripts/db-migrate.ts`,
+  `scripts/legacy-baseline.sql`, runbook and guard tests).
+- **Evidence:** `migration-bootstrap-guard-2026-10-07.md`; Docker PostgreSQL
+  15 default refusal and explicit 31-migration local rehearsal; serial 878
+  test run with zero failures.
+- **Disposition:** Code-side migration safety is strengthened. Production
+  migration history, backup/restore authorization, R-041 rotation, and
+  release acceptance remain separate open gates; no backlog checkbox changed.
