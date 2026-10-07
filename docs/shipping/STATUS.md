@@ -16,7 +16,8 @@ unchecked / 280 total (77.9%)**. Private evidence:
 
 ## 2026-10-07 · STUDIO-CLI-001 exact-preview binding
 
-CLI PR #77 exact head `fdaec852652425806ba20e6b95b03617ab0c06df` hardens the
+CLI PR #77 exact head `fdaec852652425806ba20e6b95b03617ab0c06df` merged to
+`main` as `de92976d3790fef1bd4ce0cf00e9e589ae603974`. It hardens the
 existing client projection command with an explicit safe-field allowlist and
 an upload approval bound to the exact canonical preview digest. Shared full
 suite and CLI full configured suite both exited 0; focused tests are 4/4 and

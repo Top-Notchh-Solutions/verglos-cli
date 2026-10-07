@@ -17,8 +17,9 @@ No checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
 
 ## STUDIO-CLI-001 exact-preview binding · 2026-10-07
 
-CLI PR #77 exact head `fdaec85` hardens the existing `record project-client`
-substrate from `1fa878d`: safe projection fields are allowlisted, arbitrary and
+CLI PR #77 exact head `fdaec85` merged to `main` as
+`de92976d3790fef1bd4ce0cf00e9e589ae603974`. It hardens the existing
+`record project-client` substrate from `1fa878d`: safe projection fields are allowlisted, arbitrary and
 private/nested fields are refused, fixed limitation redaction is enforced, and
 the explicit upload approval binds organization, client workspace, record, and
 the exact canonical preview digest. Shared full suite and CLI full configured

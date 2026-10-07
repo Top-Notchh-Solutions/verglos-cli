@@ -3859,6 +3859,9 @@ before enabling any destructive adapter.
 - **Implementation:** CLI PR #77 head `fdaec85` hardens `record project-client`
   with a safe-field allowlist, fixed limitation redaction, and an explicit
   approval bound to the exact canonical preview digest.
+- **Integration:** PR #77 merged to CLI `main` as
+  `de92976d3790fef1bd4ce0cf00e9e589ae603974` after all nine platform cells,
+  self-scan, and in-toto release binding passed.
 - **Verification:** Shared full suite and CLI full configured suite exit 0;
   focused tests pass 4/4 and 1/1; shared/CLI typecheck/build, public-boundary,
   and diff checks pass.

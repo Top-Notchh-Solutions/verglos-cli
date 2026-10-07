@@ -5,6 +5,7 @@
 - Existing main substrate: `1fa878d` (`project-client` command)
 - Hardening commit: `fdaec852652425806ba20e6b95b03617ab0c06df`
 - Public PR: CLI #77
+- Merge commit: `de92976d3790fef1bd4ce0cf00e9e589ae603974`
 
 The client projection boundary now accepts only explicit safe fields, rejects
 unknown/private/nested fields and raw limitations, and requires an explicit
