@@ -1,5 +1,14 @@
 # Verglos V1 risk register
 
+Latest R-044/PLAN-WEB-013 update (2026-10-07): Web PR #149 exact head
+`db68157da039d8aab939818f9023f867028e4432` passes focused payment-method,
+route-contract, and webhook-adversarial tests 18/18, typecheck, schema, 31
+ordered-migration, and 3/3 license checks. This reduces code-side checkout
+uncertainty only. Razorpay account-enabled test-mode methods, complete provider
+lifecycle/replay evidence, production reconciliation, and Node 22 runtime
+qualification remain open and release-blocking; no provider or production
+operation occurred.
+
 Latest R-046/QUAL-WEB-006 update (2026-10-07): the authenticated Free account
 surface was probed through the approved Chrome DevTools session. Automated
 desktop/mobile Lighthouse Accessibility and Best Practices scored 100; the

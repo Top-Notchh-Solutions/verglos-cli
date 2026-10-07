@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-013 exact-head payment qualification · 2026-10-07
+
+- **Decision:** Record the exact-head payment tests as code-side qualification
+  and keep the payment gate open. Do not merge PR #149 or claim method/lifecycle
+  acceptance from these tests.
+- **Evidence:** Web PR #149 head
+  `db68157da039d8aab939818f9023f867028e4432`; focused payment tests 18/18;
+  typecheck, schema, 31-migration, and 3/3 license checks pass; hosted checks
+  are green and the PR is CLEAN/MERGEABLE.
+- **Boundary:** Account-enabled Razorpay methods, test-mode runtime lifecycle,
+  provider replay/order timing, production reconciliation, and payment
+  acceptance remain open. No production/provider/database/deployment write.
+
 ## CLI PR #75 hosted qualification and merge · 2026-10-07
 
 - **Decision:** Merge the isolated public/private Hunt runtime packaging

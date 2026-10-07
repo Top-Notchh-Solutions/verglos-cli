@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013/014/015 exact-head payment continuation · 2026-10-07
+
+Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` passed
+focused payment/configuration/route/webhook tests **18/18**, typecheck,
+Drizzle schema validation, ordered migration validation (**31**), and license
+inventory (**3/3**). PR #149 remains OPEN, MERGEABLE, CLEAN, with reported
+hosted checks successful. This does not satisfy the payment gate: the
+Razorpay account-enabled method set, isolated test-mode capture/failure/refund/
+renewal/replay/out-of-order matrix, and production reconciliation remain
+unproven. No checkbox changed and no production/provider/database/deployment
+write occurred.
+
 ## QUAL-CLI-006 artifact qualification continuation · 2026-10-07
 
 Merged CLI `6bde945c60ac34351c02a70f6e7a2cb24f98ae1` passes the local package,

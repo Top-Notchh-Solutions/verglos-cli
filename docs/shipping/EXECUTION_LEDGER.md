@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · PLAN-WEB-013 exact-head payment continuation
+
+- **Source:** Web PR #149 exact head
+  `db68157da039d8aab939818f9023f867028e4432`.
+- **Verification:** Focused payment method/route/webhook tests **18/18**;
+  typecheck passed; Drizzle schema check passed; ordered migration check
+  verified **31** migrations; license inventory tests passed **3/3**.
+- **Hosted state:** PR #149 is OPEN, non-draft, MERGEABLE, CLEAN; reported
+  typecheck/schema, GitGuardian, Vercel, and Preview Comments checks are green.
+- **Boundary:** No production/provider/database/deployment write occurred.
+  The run proves code-side fail-closed/catalog/webhook contracts only; it does
+  not close PLAN-WEB-013/014/015 or authorize merge.
+
+## 2026-10-07 · next independent batches
+
+1. **PLAN-WEB-014/015** — obtain the Razorpay account-enabled method list and
+   complete the isolated test-mode lifecycle matrix; provider credentials and
+   runtime evidence are still absent.
+2. **QUAL-WEB-005** — obtain a fresh backup within the 48h RPO and qualify
+   authenticated deletion plus deployment rollback; the current snapshot is
+   approximately 396h old.
+3. **GITHUB-WEB-001..004 / PLAN-CLI-003** — qualify an authorized GitHub App
+   installation and immutable delivery identity after R-041 rotation; keep
+   production cutover closed.
+
 ## 2026-10-07 · QUAL-CLI-006 artifact qualification continuation
 
 - **Source:** CLI origin/main `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` in a

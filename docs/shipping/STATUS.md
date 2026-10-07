@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013 exact-head payment continuation
+
+Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` passed the
+focused payment-method, route-contract, and webhook-adversarial invocation
+**18/18** with no skips. Typecheck, Drizzle schema validation, ordered
+migration validation (**31**), and license inventory tests (**3/3**) also
+passed. The PR remains OPEN, MERGEABLE, CLEAN, and all reported hosted checks
+are successful. This is code-side evidence only: account-enabled Razorpay
+test-mode methods, provider lifecycle evidence, production reconciliation, and
+payment acceptance remain open. No checkbox changed; backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/payment-pr149-exact-head-qualification-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-CLI-006 artifact qualification continuation
 
 Against merged CLI `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`, package-content

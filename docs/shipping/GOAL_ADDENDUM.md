@@ -1,5 +1,14 @@
 # Goal addendum — 2026-10-07
 
+Payment continuation: Web PR #149 exact head
+`db68157da039d8aab939818f9023f867028e4432` passed focused payment method,
+route-contract, and webhook adversarial tests **18/18**, typecheck, Drizzle
+schema validation, all **31** ordered migration checks, and license inventory
+**3/3**. The PR remains open/mergeable/clean with green reported hosted
+checks. This is code-side evidence only; Razorpay account-enabled test-mode
+methods and complete provider lifecycle evidence remain absent. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
 QUAL-CLI-006 advanced on merged CLI `6bde945`: package/content, 16/16
 build/typecheck, all-platform license/notices, six-archive, clean-consumer,
 and upgrade/rollback checks passed. Official in-toto verification remains

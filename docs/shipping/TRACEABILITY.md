@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013/014/015 exact-head payment continuation · 2026-10-07
+
+Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` passed the
+focused payment-method, route-contract, and webhook-adversarial tests **18/18**
+with no skips. Typecheck, Drizzle schema validation, ordered migration
+validation (**31**), and license inventory (**3/3**) passed. The PR is OPEN,
+MERGEABLE, CLEAN, and its reported hosted checks are successful. This is
+implementation qualification only; account-enabled Razorpay test-mode method
+runtime and lifecycle evidence are missing, so PLAN-WEB-013/014/015 remain
+unchecked. No production/provider/database/deployment operation occurred. See
+`docs/shipping/evidence/payment-pr149-exact-head-qualification-2026-10-07.md`.
+
 ## QUAL-CLI-006 artifact qualification continuation · 2026-10-07
 
 CLI `6bde945c60ac34351c02a70f6e7a2cb24f98ae1` passed package-content audit,
