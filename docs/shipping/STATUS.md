@@ -1598,3 +1598,21 @@ production migration or rewrite, activate the hosted policy endpoint, or close
 TEAM-CLI-001/PLAN-CLI-001. No checkbox changed; the authoritative backlog remains
 218 checked / 62 unchecked / 280 total. R-041 and all provider/customer/reviewer
 acceptance gates remain open.
+
+# 2026-10-07 · QUAL-WEB-005 deletion-worker boundary
+
+The current Web source has an authenticated account-deletion request ledger,
+pure fail-closed deletion/retention decisions, and Studio/Enterprise hold
+decision inputs. Inspection found no persisted legal-hold/customer-held
+authority and no hosted worker capable of safely enumerating the full user-owned
+data graph. The generic queue is organization-scoped while account deletion is
+user-scoped. A destructive worker was not invented around that gap.
+
+Private evidence: `docs/shipping/evidence/qual-web-005-deletion-worker-boundary-2026-10-07.md`.
+`QUAL-WEB-005` remains unchecked. No production/database/provider write,
+browser mutation, or deletion occurred. Next dependency-ready batches are the
+open payment PR qualification/code boundary, non-production browser/large-data
+qualification, and GitHub App live-provider evidence when the credential and
+provider gates are supplied.
+
+The authoritative backlog remains **218 checked / 62 unchecked / 280 total**.

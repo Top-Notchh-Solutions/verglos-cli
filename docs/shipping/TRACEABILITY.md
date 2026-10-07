@@ -1459,3 +1459,14 @@ candidate private non-shallow TypeScript/JavaScript fixture phase, reproducible 
 held-out false-positive review, and a final regression/go-no-go record. None of
 these items is accepted by this planning entry; no public repository receives
 fixture data, credentials, customer data, or private competitive intelligence.
+
+# 2026-10-07 · QUAL-WEB-005 deletion-worker boundary
+
+The account-deletion route and pure qualification gates are implemented, but
+`QUAL-WEB-005` cannot be traced to an operational acceptance path yet. The
+current schema has no durable legal-hold/customer-held authority, and the
+organization-scoped generic queue cannot safely represent a user-scoped account
+deletion job spanning the owned data graph. The exact gap and required design
+boundary are recorded in
+`docs/shipping/evidence/qual-web-005-deletion-worker-boundary-2026-10-07.md`.
+No checkbox changed and no destructive operation ran.

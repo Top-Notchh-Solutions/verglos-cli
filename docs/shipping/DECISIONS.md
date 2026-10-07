@@ -197,3 +197,19 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
   documents. Hosted policy activation, production migration/reconciliation,
   TEAM-CLI-001, and PLAN-CLI-001 remain gated until row inventory, rollout,
   rollback, and endpoint evidence are reviewed. No production operation ran.
+
+## Account deletion worker boundary · 2026-10-07
+
+- **Decision:** Do not implement or run a destructive hosted deletion worker
+  until the legal-hold/customer-held authority and complete user-to-owned-data
+  inventory are durable and reviewed.
+- **Reason:** Existing hold and deletion modules are pure decision surfaces;
+  `account_deletion_requests` is only a request ledger. The generic queue is
+  organization-scoped, but account deletion is user-scoped and crosses legacy,
+  personal-organization, and organization-owned rows. There is no authoritative
+  hosted inventory of offline customer-held signed-record digests.
+- **Consequence:** `QUAL-WEB-005` remains open. The route continues to record
+  requests honestly as pending; no rows are deleted and no production migration
+  or cron worker is added by this batch.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-deletion-worker-boundary-2026-10-07.md`.

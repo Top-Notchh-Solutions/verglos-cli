@@ -2535,3 +2535,24 @@ changed and no checkbox was closed.
 - **Acceptance boundary:** new `ACCEPT-011..014` items are explicitly post-shipping: they start only after implementation/qualification gates and release-candidate freeze. They require private non-shallow public fixtures, exact commit/license manifests, reproducible scans from current unreleased source, held-out false-positive review, and final regression/go-no-go. Public technical fixtures do not represent customer consent. No fixture secrets, customer data, proprietary code, or competitive intelligence may enter the public CLI repository.
 - **Acceleration protocol:** one dependency-ready acceptance boundary per phase PR/repository; complete route/schema/module/tests/evidence together; parallelize independent CLI/Web work; use focused tests while implementing and one full suite per merged phase; switch to the next independent queue when provider/customer/reviewer evidence blocks; recount checkboxes from the authoritative private backlog after every substantial batch; never check a box for preparatory code alone.
 - **Safety:** no marketing edits, npm publication, release tags, or production database/payment changes are implied. Production operations remain subject to R-041 credential rotation and the reviewed preflight/write/postflight contract.
+
+# 2026-10-07 — QUAL-WEB-005 deletion-worker boundary
+
+- **Attempted batch:** `QUAL-WEB-005` privacy/deletion/retention operational
+  qualification.
+- **Inspected source:** Web `cbc0f5a89179995569308695419d4578c57ce716`;
+  account-deletion route, schema, pure deletion gate, retention policy, and
+  Studio/Enterprise hold contracts.
+- **Result:** progress/blocker evidence only. The request ledger and pure gates
+  exist, but no persisted legal-hold/customer-held authority or safe hosted
+  deletion worker exists. The generic queue is organization-scoped and cannot
+  be reused as a user-scoped account deletion job without an ownership/design
+  decision.
+- **Checks:** source/contract inspection only; no production/database/provider
+  write, browser mutation, deletion, migration, or credential operation.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-deletion-worker-boundary-2026-10-07.md`.
+- **Backlog:** no checkbox changed; **218 checked / 62 unchecked / 280 total**.
+- **Next:** keep this gate open and continue with independent payment/browser
+  qualification work; design the deletion inventory/hold authority before any
+  worker or destructive integration is attempted.
