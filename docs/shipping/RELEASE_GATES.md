@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## QUAL-CLI-006 current-head standards run · 2026-10-07
+
+CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` passes the shared
+standards corpus **448/448**, shared typecheck/build, and Docker availability.
+The local license/SBOM commands fail closed on macOS platform-optional
+`@esbuild/*@0.28.1` packages. This is supporting evidence only and does not
+pass QUAL-CLI-006, which still requires official validators, trusted keyless
+provenance, legal/trusted-publishing review, cross-platform evidence, and
+independent acceptance.
+
 ## PLAN-WEB-013 Checkout retry-state hardening · 2026-10-07
 
 PR #149 exact head `b78f732424a388f03a9a9740e570b0f01d7297e7` passes local

@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-CLI-006 current-head standards run
+
+CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` passed the shared
+package suite **448/448** across 113 test files, plus shared typecheck and
+build. Docker Server `29.7.2` was reachable. Local license/SBOM generation
+still fails closed because macOS does not materialize all optional
+`@esbuild/*@0.28.1` lockfile packages; no source or lockfile change was made.
+QUAL-CLI-006 remains open for official validators, trusted publishing/legal
+review, cross-platform consumer evidence, and independent acceptance. Backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-current-head-standards-run-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013 Checkout retry-state hardening
 
 Web PR #149 exact head `b78f732424a388f03a9a9740e570b0f01d7297e7` now keeps

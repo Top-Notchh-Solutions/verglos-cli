@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — QUAL-CLI-006 current-head standards run
+
+- **Source:** CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` in
+  `feat/cli-qual-006-importer-corpus`; worktree clean.
+- **Verification:** Docker Server `29.7.2`; shared package suite **448/448**
+  across 113 test files; shared typecheck and build pass.
+- **Limitation:** Local license/SBOM commands fail closed because macOS omits
+  platform-specific optional `@esbuild/*@0.28.1` packages. No source or
+  lockfile change occurred.
+- **Disposition:** QUAL-CLI-006 remains open for official validators,
+  cross-platform/trusted-publishing/legal evidence, and independent review.
+  No checkbox changed; backlog remains **218 checked / 62 unchecked / 280
+  total (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-current-head-standards-run-2026-10-07.md`.
+
 # 2026-10-07 — PLAN-WEB-013 Checkout retry-state hardening
 
 - **Code:** Web PR #149 exact pushed head `b78f732424a388f03a9a9740e570b0f01d7297e7`.

@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## QUAL-CLI-006 current-head standards run · 2026-10-07
+
+- **Decision:** Accept the 448/448 shared standards-corpus run as local
+  qualification progress only; keep QUAL-CLI-006 open.
+- **Evidence:** Exact CLI head `13d1444`; 113 package test files, shared
+  typecheck/build, and Docker `29.7.2` pass. License/SBOM commands fail closed
+  on missing macOS platform-optional packages.
+- **Boundary:** This does not establish official-validator, trusted keyless
+  provenance, legal, cross-platform consumer, or independent-review evidence.
+  No source/lockfile/public/production change occurred.
+
 ## PLAN-WEB-013 Checkout retry-state hardening · 2026-10-07
 
 - **Decision:** Hosted Checkout failures and pre-confirmation dismissal must

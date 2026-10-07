@@ -1,5 +1,15 @@
 # Goal addendum — 2026-10-07
 
+## QUAL-CLI-006 current-head standards run
+
+CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` passed the shared
+standards corpus **448/448** across 113 test files, shared typecheck/build,
+and Docker health. Local license/SBOM commands fail closed because macOS
+omits platform-specific optional `@esbuild/*@0.28.1` packages. No source,
+lockfile, public, production, or checkbox state changed. QUAL-CLI-006 remains
+open; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence: `docs/shipping/evidence/qual-cli-006-current-head-standards-run-2026-10-07.md`.
+
 ## PLAN-WEB-013 Checkout retry-state hardening
 
 PR #149 exact head `b78f732424a388f03a9a9740e570b0f01d7297e7` hardens the

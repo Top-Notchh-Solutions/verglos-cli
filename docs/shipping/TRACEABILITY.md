@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## QUAL-CLI-006 current-head standards run · 2026-10-07
+
+CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` passed the shared
+package suite **448/448** across 113 test files, plus shared typecheck/build.
+Docker Server `29.7.2` was reachable. Local license/SBOM commands fail closed
+because macOS omits platform-specific optional `@esbuild/*@0.28.1` packages;
+hosted/clean-consumer evidence remains required. QUAL-CLI-006 stays open and
+no checkbox changed. See
+`docs/shipping/evidence/qual-cli-006-current-head-standards-run-2026-10-07.md`.
+
 ## PLAN-WEB-013 Checkout retry-state hardening · 2026-10-07
 
 PR #149 exact head `b78f732424a388f03a9a9740e570b0f01d7297e7` records provider
