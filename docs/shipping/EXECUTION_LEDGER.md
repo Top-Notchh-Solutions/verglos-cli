@@ -3422,3 +3422,26 @@ before enabling any destructive adapter.
   remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Boundary:** QUAL-WEB-006 remains open for paid/org runtime, human
   screen-reader, large-data, and complete field-CWV evidence.
+
+# 2026-10-07 — QUAL-WEB-005 protected deletion hold authority
+
+- **Batch:** add super-admin-only hold activation/listing and atomic release
+  routes to the existing PR #153 deletion boundary.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total
+  (77.9%)**.
+- **Code:** Web PR #153 exact head
+  `929da1907f001c8db71df0e601e08014590fd580`, pushed and open.
+- **Local:** focused hold/admin/digest/worker contracts 10/10; serial
+  872/849/23/0; typecheck; Drizzle; 35-migration ordering;
+  negative-boundary 2/2; truth registry 25/25; SBOM; license inventory; and
+  build pass.
+- **Hosted:** Verify `37608932973` passed; Vercel, GitGuardian, and Preview
+  Comments passed. PR remains clean and unmerged.
+- **Boundary:** production audit still has migrations `0026`–`0034` pending.
+  Authenticated non-production deletion E2E, disposition decisions, consent
+  inventory, row reconciliation, restore/RPO, rollback, and independent
+  acceptance remain open. No production/database/provider/payment/deployment
+  write, migration, deletion, or browser mutation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-hold-authority-route-929da19-2026-10-07.md`.

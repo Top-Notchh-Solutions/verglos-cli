@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-005 protected deletion hold authority · 2026-10-07
+
+- **Decision:** Accept the super-admin hold routes as implementation progress;
+  keep `QUAL-WEB-005` and merge/deployment gates open.
+- **Evidence:** PR #153 exact head
+  `929da1907f001c8db71df0e601e08014590fd580`; focused 10/10; serial
+  872/849/23/0; hosted Verify `37608932973` passed.
+- **Safety:** Only a configured super-admin identity may activate or release
+  a hold. Mutations require same-origin, target/request ownership is checked,
+  customer-deletion holds require a request reference, and release uses an
+  unreleased-row predicate to prevent concurrent double release.
+- **Boundary:** This does not qualify production migration, deletion E2E,
+  legal/customer-held disposition, consent inventory, reconciliation,
+  restore/RPO, deployment rollback, or independent acceptance. No production
+  or destructive operation occurred; no checkbox changed.
+
 ## QUAL-WEB-005 customer-held digest registration route · 2026-10-07
 
 - **Decision:** Accept the authenticated customer-held digest registration

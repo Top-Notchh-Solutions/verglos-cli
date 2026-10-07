@@ -764,3 +764,16 @@ passing locally. The registry improves omission detection but does not close
 Gate 2/4/6 or accept `QUAL-WEB-005`: executable dispositions,
 reconciliation, restore/rollback, and authenticated non-production E2E remain
 open. No production invocation or destructive operation occurred.
+
+Hold-authority update (2026-10-07): PR #153 exact head
+`929da1907f001c8db71df0e601e08014590fd580` passed hosted Verify
+`37608932973` / job `112751169501`, with focused hold/admin/digest/worker
+contracts 10/10, serial 872/849/23/0, ordered 35-migration validation,
+negative-boundary, truth, SBOM/license, and build checks passing locally. The
+new routes are super-admin-only, same-origin for mutations, target/request
+bound, bounded, private/no-store, and race-safe on release. This does not
+close Gate 2/4/6 or accept `QUAL-WEB-005`: migrations `0029`–`0034` remain
+unapplied, and authenticated deletion E2E, approved dispositions, consent
+inventory, reconciliation, restore/RPO, rollback, and independent acceptance
+remain open. No production migration, deletion, or destructive operation
+occurred.

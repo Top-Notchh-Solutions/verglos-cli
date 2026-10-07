@@ -221,3 +221,18 @@ retention/legal approval, reconciliation, restore/rollback, authenticated
 non-production E2E, payment lifecycle, CLI release/legal, GitHub organization
 integration, and credential rotation remain open. Count stays **218 checked /
 62 unchecked / 280 total**. No production or destructive operation occurred.
+
+# 2026-10-07 · QUAL-WEB-005 protected hold authority route
+
+Web PR #153 exact head `929da1907f001c8db71df0e601e08014590fd580` now exposes
+super-admin-only hold activation/listing and race-safe release routes over the
+durable deletion-hold authority. The routes require configured operator
+identity, same-origin mutations, target/request binding, bounded reasons and
+expiry, and a deletion request for `customer_deletion_request`; ordinary users
+cannot self-authorize a hold. Focused contracts 10/10, serial 872/849/23/0,
+typecheck/schema/35-migration/negative/truth/SBOM/license/build checks, and
+hosted Verify `37608932973` pass. The whole shipping goal remains active:
+production migrations `0029`–`0034`, deletion E2E, disposition/consent
+acceptance, reconciliation, restore/RPO, rollback, and independent review
+remain required. Backlog remains **218 checked / 62 unchecked / 280 total**;
+no production or destructive operation occurred.

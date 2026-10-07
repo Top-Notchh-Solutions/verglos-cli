@@ -1976,3 +1976,18 @@ workflow `37564437899` / job `112608834179` passes. This improves omission
 detection only: the destructive store does not consume the registry, and
 reconciliation, recovery, and authenticated non-production E2E remain
 unqualified. `QUAL-WEB-005` remains open.
+
+# 2026-10-07 · QUAL-WEB-005 protected deletion hold authority
+
+PR #153 exact head `929da1907f001c8db71df0e601e08014590fd580` traces the
+deletion boundary to super-admin-only hold activation/listing and atomic
+release routes. The routes bind holds to a target user and optional matching
+deletion request, require bounded reasons/expiry, require a request reference
+for customer-deletion holds, and use an unreleased-row predicate for race-safe
+release. Focused hold/admin/digest/worker contracts pass 10/10; serial is
+872/849/23/0; typecheck, 35-migration/schema, negative-boundary, truth,
+SBOM/license, and build checks pass; hosted Verify `37608932973` passes.
+This is not operational acceptance: production migrations `0029`–`0034`,
+authenticated deletion E2E, disposition decisions, consent inventory,
+reconciliation, restore/RPO, rollback, and independent acceptance remain
+open. No checkbox changed.

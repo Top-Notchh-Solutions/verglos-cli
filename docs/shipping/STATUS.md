@@ -2307,3 +2307,25 @@ run `37557043246` passed typecheck/schema, Vercel, GitGuardian, and Preview
 Comments. This corrects stale PR state only; `QUAL-WEB-006` remains unchecked
 for paid/org runtime, human screen-reader, large-data, and complete field-CWV
 evidence. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+# 2026-10-07 · QUAL-WEB-005 protected deletion hold authority
+
+Web PR #153 exact head `929da1907f001c8db71df0e601e08014590fd580` adds
+super-admin-only activation/listing and race-safe release routes for durable
+account-deletion holds. The boundary requires Clerk authentication plus the
+configured super-admin identity, requires same-origin for mutations, binds
+optional deletion requests to the target user, enforces bounded reasons and
+expiry, requires a request for `customer_deletion_request`, and returns
+private/no-store responses without record bytes or raw database errors.
+
+Focused hold/admin/digest/worker contracts pass 10/10; serial Web is
+872/849/23/0; typecheck, Drizzle, 35-migration ordering, negative boundary
+2/2, truth registry 25/25, SBOM, license inventory, and build pass. Hosted
+Verify `37608932973`, Vercel, GitGuardian, and Preview Comments pass. PR #153
+remains open, clean, and unmerged. `QUAL-WEB-005` remains unchecked because
+production migrations `0029`–`0034`, authenticated non-production deletion
+E2E, disposition decisions, consent inventory, reconciliation, restore/RPO,
+rollback, and independent acceptance remain open. Backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**. No production or destructive
+operation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-hold-authority-route-929da19-2026-10-07.md`.
