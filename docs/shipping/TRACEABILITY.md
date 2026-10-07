@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## PLAN-CLI-003 authenticated boundary probe · 2026-10-07
+
+- Authenticated Chrome same-origin read-only requests proved forged Enterprise
+  and Studio plan selectors remain Free, organization listing is empty, forged
+  usage/search requests return bounded 403 denial, and account-deletion GET has
+  no requests. No sensitive response material was recorded.
+- This strengthens the modified-client boundary but does not close PLAN-CLI-003:
+  licensed CLI requests, record list/search/export, and public/private runtime
+  coverage remain open. See
+  `docs/shipping/evidence/modified-client-authenticated-browser-matrix-2026-10-07.md`.
+
 ## QUAL-WEB-005 snapshot-backed deletion qualification · 2026-10-07
 
 - Web PR #153 exact head `250313e` passed 44/44 focused qualification tests

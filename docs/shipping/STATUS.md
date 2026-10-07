@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-CLI-003 authenticated boundary probe
+
+The approved authenticated Chrome session performed a read-only forged-client
+matrix. `as_plan=enterprise` and `as_plan=studio` both remained `plan=free`,
+`real_plan=free`, `simulated=false`, `active=true`; organization listing returned
+zero organizations; forged usage/search requests returned bounded `403
+organization access denied`; account-deletion GET returned zero requests. No
+body, cookie, header, payment data, or identity field was captured. This is
+partial authenticated browser/API evidence only; licensed modified-CLI,
+record list/search/export, and public/private runtime coverage remain open. No
+checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total**.
+Private evidence:
+`docs/shipping/evidence/modified-client-authenticated-browser-matrix-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 snapshot-backed deletion qualification
 
 Web PR #153 exact head `250313e` passed a focused isolated snapshot-backed
