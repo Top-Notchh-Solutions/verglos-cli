@@ -2471,8 +2471,8 @@ recipe rule/subject binding before loading the private Hunt runtime or asking
 it to validate the supported catalog. Focused Hunt/process tests pass
 **55/55**, including a regression proving runtime loading is skipped on
 binding drift; CLI typecheck, build, and diff check pass. The pushed head is
-`67debee964c0c6be736d247793ec1d6faa7babb9`; hosted checks have restarted and
-no result is claimed yet. HUNT-009 remains open for trusted/licensed
+`67debee964c0c6be736d247793ec1d6faa7babb9`; the 9-cell platform matrix and
+self-scan are in progress, while the new in-toto binding has passed. HUNT-009 remains open for trusted/licensed
 publisher roots, bounded execution qualification, and independent review.
 Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
 production, database, provider, payment, deployment, or credential operation

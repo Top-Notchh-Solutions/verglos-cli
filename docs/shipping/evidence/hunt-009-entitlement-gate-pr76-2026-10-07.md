@@ -50,7 +50,7 @@ PR #76 commit `67debee` verifies the trust store and exact recipe rule/subject
 binding before loading the private runtime or validating the supported
 catalog. Focused Hunt/process tests pass **55/55**, typecheck/build/diff check
 pass, and the pushed head is
-`67debee964c0c6be736d247793ec1d6faa7babb9`. Hosted checks restarted after the
-push; no hosted result is claimed yet. HUNT-009 remains unchecked because
+`67debee964c0c6be736d247793ec1d6faa7babb9`. The 9-cell platform matrix and
+self-scan are in progress, while the new in-toto binding has passed. HUNT-009 remains unchecked because
 trusted/licensed publisher roots, bounded execution qualification, and
 independent review remain open.
