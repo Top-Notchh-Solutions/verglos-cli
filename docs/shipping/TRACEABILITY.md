@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## Hosted Razorpay checkout code-side evidence · 2026-10-07 · Web PR #149
+
+- **Implementation:** `eb7e55a` adds catalog-gated hosted order creation,
+  signed `order` commercial snapshots, provider-order binding, read-only
+  owner-bound status, webhook-authoritative capture/failure processing, and a
+  partial uniqueness index for successful order payments. QR creation requires
+  an explicit `upi_qr` declaration and remains a separate adapter.
+- **Verification:** Focused billing/route/webhook tests 19/19; configured Web
+  suite 850/872/22/0; typecheck, production build, Drizzle check, 31 ordered
+  migrations, Docker and Chrome prerequisites pass. GitGuardian is green;
+  hosted typecheck/schema is queued and Vercel pending.
+- **Acceptance boundary:** PLAN-WEB-013/014/015 remain open. No provider
+  account capabilities, test payment, refund/renewal/replay/order evidence,
+  production reconciliation, deployment, migration, or payment write was
+  observed. Node 22 hosted evidence and private sandbox lifecycle evidence
+  remain required.
+
 ## Release-artifact qualification · 2026-10-06 · merged CLI `dacd286`
 
 - **Implementation boundary:** isolated qualification only; no public source

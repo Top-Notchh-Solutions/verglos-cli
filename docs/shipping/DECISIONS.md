@@ -2,6 +2,20 @@
 
 This file is newly created because no tracked `DECISIONS.md` existed in the private shipping worktree when checked on 2026-09-14. It is local-only and must not be pushed to the public CLI or Web repositories.
 
+## Razorpay hosted order default · 2026-10-07
+
+- **Decision:** Use Razorpay hosted Checkout/order flow as the default customer
+  path. The server-side catalog and explicit provider method configuration are
+  authoritative; hosted UPI, cards, netbanking, and wallets are not promised
+  unless declared. QR is a separately qualified, explicit opt-in adapter.
+- **Evidence:** Web PR #149, commit `eb7e55a`; signed order snapshots, provider
+  order binding, read-only status, webhook-authoritative capture/failure, and
+  order-success uniqueness are locally verified.
+- **Boundary:** Code-side implementation is not account capability or payment
+  lifecycle acceptance. Isolated Razorpay test-mode evidence for each enabled
+  method, production reconciliation, and R-041 credential rotation remain
+  open. No production operation occurred.
+
 ## PLAN-CLI-001 opaque catalog/cache boundary · 2026-10-06
 
 - **Decision:** Treat `catalog_version` and capability identifiers from the Web

@@ -1,5 +1,13 @@
 # Verglos V1 risk register
 
+Latest R-044 update (2026-10-07): Web PR #149 implements the hosted order
+boundary, server/catalog method declaration, signed order binding,
+webhook-authoritative capture/failure path, read-only owner-bound status, and
+explicit QR opt-in. This reduces static-UI and polling-grant exposure but does
+not qualify account-enabled methods, test-mode lifecycle behavior, provider
+replay/order timing, production reconciliation, or the Node 22 hosted baseline.
+R-044 remains high and release-blocking under PLAN-WEB-013..015.
+
 Latest R-031 update (2026-09-20): Web PR #49 head `b103d9e` implements catalog-only checkout derivation, signed immutable one-time commercial snapshots, captured/exact-match fulfillment, owner-bound read-only QR status, and a serialized immutable payment ledger covering replay, renewals, failures, ordered lifecycle, and refunds. All exact-head local/hosted code gates pass. R-031 remains critical and release-blocking because Pro has no approved verified INR catalog price, migration `0018` is not production-qualified/applied, tax/invoice/regional policy is unresolved, and no live provider reconciliation evidence exists.
 
 Latest R-021 production inspection (2026-09-12): the approved migrations `0000`–`0014` have now been applied to the Vercel-linked Neon `production` branch. Read-only postflight confirms 33/33 declared application tables, 15 journal rows, 74 aggregate rows unchanged across the original ten tables, and 23 added tables empty. A time-based isolated branch from production returned the pre-migration 10-table/74-row counts and was deleted. The original 74 rows have not been backfilled or reinterpreted. R-021/HOSTED-013 remain critical/open for target mapping, dual-write/backfill, complete source-target reconciliation, and application recovery/cutover qualification. The production DB role remains DDL/DML-capable and requires careful scoped operation control.

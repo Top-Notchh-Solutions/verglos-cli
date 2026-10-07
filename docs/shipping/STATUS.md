@@ -1,5 +1,41 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013 hosted Razorpay checkout code-side batch
+
+Web PR #149, commit `eb7e55a`, adds the provider-hosted Razorpay order path as
+the default checkout, server/catalog-driven method declarations, signed order
+snapshots, order-bound read-only status, webhook-authoritative capture/failure
+handling, and one-successful-payment-per-order protection. The legacy QR route
+now requires an explicit `upi_qr` declaration and is not the default.
+
+Focused billing/route/webhook tests pass 19/19. The configured Web suite passes
+850/872 with 22 explicit environment-gated skips and 0 failures; typecheck,
+production build, Drizzle check, 31-migration ordering, diff hygiene, Docker
+and Chrome DevTools prerequisites pass. Local execution used Node 26.4.0
+against the package Node 22.x baseline; hosted Node 22 evidence remains open.
+
+This is code-side evidence only. PR #149 is open/mergeable; GitGuardian is
+green, `typecheck-and-schema` is queued, and Vercel is pending. No Razorpay
+account configuration was read, no test payment/lifecycle matrix was run, and
+no production database/provider/payment/deployment/migration write occurred.
+PLAN-WEB-013/014/015 remain unchecked. Private evidence:
+`docs/shipping/evidence/plan-web-013-hosted-checkout-2026-10-07.md`.
+Backlog remains **218 checked / 62 unchecked / 280 total**.
+
+Next three independent batches:
+
+1. **PLAN-WEB-014** — isolated Razorpay test-mode method/lifecycle matrix;
+   dependency PR #149 hosted checks/merge and explicit test-account method
+   configuration. Evidence: private redacted checkout, capture, failure,
+   refund, renewal/cancel, replay, duplicate, and ordering records. Blocker:
+   provider test-account capability/credentials are not currently verified.
+2. **PLAN-CLI-004** — compatibility PR/hosted verification for the current
+   CLI branch `059918c`; local evidence exists but hosted PR/check state must
+   be established. No production write.
+3. **QUAL-WEB-006** — authenticated dashboard accessibility/performance and
+   remaining browser/large-data/field-CWV evidence; browser is available, but
+   human screen-reader, large-dataset, and field-CWV evidence remain open.
+
 ## 2026-10-06 · QUAL-CLI-006 / DIST-001 / DIST-003 release-artifact qualification
 
 Merged CLI `dacd286` builds successfully and the isolated release qualification

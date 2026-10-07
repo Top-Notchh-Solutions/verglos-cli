@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013 code-side gate update · 2026-10-07
+
+Web PR #149 (`eb7e55a`) moves the customer path from QR-only to catalog-gated
+Razorpay hosted orders, with signed commercial binding, webhook-authoritative
+entitlement, read-only status, explicit QR opt-in, and successful-order
+uniqueness. Local Web 850/872/22/0, focused 19/19, typecheck/build/Drizzle/
+31-migration/diff checks pass. GitGuardian is green; hosted typecheck/schema is
+queued and Vercel is pending. This does not close PLAN-WEB-013/014/015 or Gate
+4/6: account-enabled test-mode method/lifecycle evidence, production
+reconciliation, Node 22 hosted verification, R-041 rotation, and required
+restore/rollback evidence remain open. No production operation occurred.
+
 ## QUAL-CLI-006 / DIST-001 / DIST-003 qualification · 2026-10-06
 
 The merged CLI `dacd286` passed 20/20 release-script tests, six-package

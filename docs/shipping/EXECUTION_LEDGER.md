@@ -1,5 +1,35 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · PLAN-WEB-013 hosted Razorpay checkout code-side batch
+
+- **Code:** Web PR #149, commit `eb7e55a`, on
+  `feat/web-plan-013-hosted-checkout`. Hosted Razorpay order creation and
+  read-only status routes replace the QR-only customer path; signed order
+  snapshots, webhook capture/failure handling, order-success uniqueness, and
+  explicit QR opt-in are implemented.
+- **Verification:** Focused 19/19; configured Web 850/872 passed, 22
+  environment-gated skips, 0 failures; typecheck/build/Drizzle/31-migration
+  ordering/diff checks pass. Docker 29.7.2 and Chrome DevTools are reachable.
+  Node 26.4.0 was used locally; Node 22 hosted evidence is still required.
+- **Hosted state:** GitGuardian passed; PR `typecheck-and-schema` queued and
+  Vercel pending at capture. PR is open and mergeable.
+- **Boundary:** No Razorpay account read, sandbox payment, refund, renewal,
+  replay, provider configuration, production database/provider/payment write,
+  migration, deployment, or price change occurred. R-041 remains open.
+- **Acceptance:** PLAN-WEB-013/014/015 remain unchecked because code-side
+  tests do not substitute for account-enabled test-mode lifecycle evidence.
+  Evidence: `docs/shipping/evidence/plan-web-013-hosted-checkout-2026-10-07.md`.
+
+## Next three independent batches after PLAN-WEB-013
+
+1. PLAN-WEB-014 isolated Razorpay test-mode method/lifecycle matrix — waiting
+   on explicit provider test-account capability and PR #149 hosted checks.
+2. PLAN-CLI-004 compatibility PR/hosted verification — CLI branch `059918c`,
+   independent of provider payment state.
+3. QUAL-WEB-006 browser accessibility/performance and remaining large-data/
+   field-CWV evidence — authenticated Chrome available; human/field evidence
+   remains open.
+
 ## 2026-10-06 · QUAL-CLI-006 / DIST-001 / DIST-003 release-artifact qualification
 
 - **Code:** Merged CLI `dacd286`; no public source change was needed. The
