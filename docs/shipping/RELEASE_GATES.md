@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 Test Mode pre-checkout disclosure · 2026-10-07
+
+Web PR #155 head `6b0c4f9` adds a truthful pre-checkout Test Mode notice and
+fails closed on public/server Razorpay key drift. Local and pinned Node 22
+focused checks, typecheck, and the 43-page preview build passed; hosted Verify
+was pending at capture. This does not qualify payment methods or lifecycle,
+and no provider or production state changed. `PLAN-WEB-014/015` remain open.
+
 ## PLAN-WEB-014 Test Mode read-only inventory freeze · 2026-10-07
 
 The final bounded read-only Test Mode inventory observed 10 created orders, 4

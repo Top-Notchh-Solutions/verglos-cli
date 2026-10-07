@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-014 Test Mode pre-checkout disclosure
+
+Web PR #155 current head `6b0c4f9` adds a server-derived, non-secret Test Mode
+indicator and visibly tells users before hosted Checkout opens that no real
+payment will be charged. Public/server Razorpay key drift fails closed to an
+unknown/live label. Host focused checks passed **33/33 executed** with one
+existing environment-gated skip; pinned Node 22 focused checks passed **13/13
+executed** with one existing skip; typecheck and the 43-page preview build
+passed. Hosted Verify was still pending at capture, so no checkbox changed.
+This is disclosure/code evidence only, not provider lifecycle acceptance.
+Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-test-mode-banner-2026-10-07.md`.
+
 ## 2026-10-07 · Razorpay Test Mode read-only inventory freeze
 
 Before freezing the previously flagged Test Mode credential, a redacted

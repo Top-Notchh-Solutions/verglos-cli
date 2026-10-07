@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · PLAN-WEB-014 Test Mode pre-checkout disclosure
+
+- **Code:** Web PR #155 head `6b0c4f9`; server-derived boolean mode indicator,
+  pre-checkout no-real-charge notice, and public/server key-drift regression.
+- **Verification:** Host focused payment/config checks **33 passed / 1
+  existing skip**; Node 22 focused checks **13 passed / 1 existing skip**;
+  Node 22 typecheck and 43-page preview build passed. Hosted Verify was
+  pending at capture; GitGuardian/Preview Comments state was not used as a
+  release acceptance substitute.
+- **Disposition:** Code-side disclosure evidence only; `PLAN-WEB-014/015`
+  remain open and no checkbox changed. Backlog remains **218/62/280 (77.9%)**.
+- **Boundary:** No provider, payment, database, migration, deployment, or
+  customer-state operation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-test-mode-banner-2026-10-07.md`.
+
 ## 2026-10-07 · Razorpay Test Mode read-only inventory freeze
 
 - **Scope:** Read-only Test Mode account-history inventory; no checkbox closure.

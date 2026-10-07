@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-07 · Show Test Mode before hosted checkout
+
+- **Decision:** A Test Mode checkout must disclose sandbox/no-real-charge
+  status before a user opens Razorpay Checkout; the indicator exposes only a
+  boolean and fails closed on public/server key drift.
+- **Evidence:** Web PR #155 head `6b0c4f9`; host and Node 22 focused checks,
+  typecheck, and 43-page preview build passed. Hosted Verify was pending at
+  capture.
+- **Boundary:** This improves payment disclosure but is not provider lifecycle
+  acceptance. No provider, payment, production, database, migration, or
+  deployment state changed.
+
 ## 2026-10-07 · Freeze flagged Razorpay Test Mode credential
 
 - **Decision:** Treat the final redacted read-only inventory as historical
