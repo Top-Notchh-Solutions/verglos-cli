@@ -2389,3 +2389,9 @@ approved Chrome CDP session in Razorpay hosted Checkout and closed without
 submission. The checkout-open result is recorded, but the child execution
 context exposed no stable method labels to the bounded text projection, so no
 payment method is claimed from the browser probe.
+
+A direct CDP attachment to the provider's `api.razorpay.com` checkout target
+then returned six selectable radio labels: UPI, card, netbanking, wallet, EMI,
+and Pay Later. QR was not a selectable radio in that instance. This advances
+method-set observation only; no method was selected and no payment was
+submitted, so lifecycle and entitlement evidence remain open.

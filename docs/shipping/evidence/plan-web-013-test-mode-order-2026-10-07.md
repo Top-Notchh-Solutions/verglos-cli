@@ -42,3 +42,13 @@ context, but no stable method labels were exposed to the bounded CDP text
 projection; therefore this is checkout-open evidence only and not method-list
 evidence. No card, UPI, netbanking, wallet, EMI, QR, payment, or capture was
 claimed from this probe.
+
+## Direct hosted-method observation
+
+A later test-mode checkout target was attached through Chrome CDP's browser
+target protocol and inspected without selecting a method. Its radio-label
+projection returned these selectable hosted methods: `upi`, `card`,
+`netbanking`, `wallet`, `emi`, and `pay later`. No QR radio was present in
+that projection. This is direct test-account UI evidence of the methods
+exposed by that checkout instance, not lifecycle qualification; no method was
+selected and no payment was submitted.

@@ -2029,3 +2029,9 @@ The approved Chrome CDP probe opened Razorpay hosted Checkout twice for
 test-mode orders and closed without submission. Because no stable method labels
 were available in the bounded child-context projection, it proves only that
 the hosted window opens; it does not qualify or claim any payment method.
+
+A direct attachment to the Razorpay checkout iframe observed selectable UPI,
+card, netbanking, wallet, EMI, and Pay Later radio labels and no QR radio.
+This strengthens PLAN-WEB-013 method discovery but does not qualify any
+success, failure, capture, refund, renewal, replay, webhook, or entitlement
+path; no method was selected.

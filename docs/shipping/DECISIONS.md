@@ -694,3 +694,8 @@ The approved Chrome CDP display probe opened hosted Checkout twice in test
 mode and closed without submission. Its child execution context did not expose
 stable method labels to the bounded projection, so the result is recorded as
 checkout-open evidence only and does not alter the payment decision.
+
+A direct provider-checkout target observation later exposed selectable UPI,
+card, netbanking, wallet, EMI, and Pay Later radios, with no QR radio. Record
+this as account-level method observation only; keep PLAN-WEB-014/015 open until
+each observed method has lifecycle and reconciliation evidence.

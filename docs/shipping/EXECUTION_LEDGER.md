@@ -3512,3 +3512,8 @@ before enabling any destructive adapter.
   twice for bounded test orders and closed both without submission. No stable
   method labels were exposed in the child execution context, so no method was
   claimed from browser text.
+
+- **Method observation:** A direct CDP attachment to the hosted
+  `api.razorpay.com` target exposed six selectable radio labels—UPI, card,
+  netbanking, wallet, EMI, and Pay Later—and no QR radio. No method was
+  selected or submitted; this is not lifecycle evidence.
