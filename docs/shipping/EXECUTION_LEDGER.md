@@ -2590,3 +2590,18 @@ changed and no checkbox was closed.
   or full QUAL-WEB-006 acceptance.
 - **State:** no production/provider/browser mutation; no checkbox changed;
   **218 checked / 62 unchecked / 280 total**.
+
+# 2026-10-07 — authenticated organization entry implementation
+
+- **Batch:** close the deployed `/orgs` discovery gap without mixing changes
+  into payment PR #149.
+- **Code:** Web PR #151, head `07788c08d`, adds the authenticated organization
+  directory, active-membership slug links, account navigation entry, and 2
+  focused contract tests.
+- **Local results:** focused tests **2/2 pass**, typecheck pass, Drizzle check
+  pass, and 38-page preview build pass.
+- **Hosted state:** GitGuardian and Preview Comments pass; type/schema and
+  Vercel were in progress at capture. PR is open and unmerged.
+- **Boundary:** no production/database/provider write, deployment promotion,
+  payment action, or browser mutation. `QUAL-WEB-006` remains unchecked.
+- **Backlog:** **218 checked / 62 unchecked / 280 total**.

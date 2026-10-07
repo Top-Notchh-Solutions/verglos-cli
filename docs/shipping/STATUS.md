@@ -1637,3 +1637,14 @@ ordering, and a 38-page production build. Private evidence:
 
 This is progress only. Authenticated slug-scoped runtime, human screen-reader,
 and field-CWV evidence remain open, so `QUAL-WEB-006` remains unchecked.
+
+# 2026-10-07 · organization entry implementation
+
+Web PR #151 adds an authenticated `/orgs` directory backed by the actor-bound
+organization repository, links each active membership to its slug-scoped home,
+and exposes the entry point from account navigation. Local focused tests pass
+2/2, typecheck/schema/build pass, and the build now includes dynamic `/orgs`.
+PR #151 is open at head `07788c08`; GitGuardian and Preview Comments pass while
+hosted type/schema and Vercel remain in progress. `QUAL-WEB-006` remains
+unchecked pending hosted completion and the broader authenticated, screen-reader,
+and field-CWV evidence.

@@ -1480,3 +1480,13 @@ tenant exclusion. The disposable PostgreSQL run passed 1/1 with zero skips;
 typecheck, schema, 29-migration ordering, and production build also passed.
 The evidence remains partial because authenticated slug runtime, human
 screen-reader, and field-CWV qualification are not proven.
+
+# 2026-10-07 · organization entry implementation
+
+`QUAL-WEB-006` now traces to Web PR #151, which adds the authenticated `/orgs`
+directory and account navigation link over the existing actor-bound directory
+repository. The route never accepts a tenant identifier from the URL; each
+slug-scoped link remains guarded by the organization layout. Local 2/2 focused
+contracts, typecheck, schema check, and production build pass. Hosted checks
+were still in progress at capture, and the full qualification gate remains
+open for authenticated runtime, human screen-reader, and field-CWV evidence.
