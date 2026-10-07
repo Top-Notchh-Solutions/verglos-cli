@@ -36,3 +36,12 @@ no authenticated registry writer, bounded deletion worker, claim/retry/
 idempotency path, transactional per-kind deletion, row-count reconciliation,
 terminal audit receipt, restore rehearsal, or authenticated non-production E2E.
 Hosted checks for the new head were pending at capture.
+
+## Hosted result update
+
+The exact-head hosted workflow `37559903900` later passed in **2m42s** at job
+`112594573865`, including serial tests, negative boundary, truth registry,
+schema/migration checks, build, public-boundary, dependency/SBOM/license, and
+tracked-secret checks. Vercel, GitGuardian, and Preview Comments also passed.
+PR #153 remains open and is not deletion acceptance or production migration
+evidence.

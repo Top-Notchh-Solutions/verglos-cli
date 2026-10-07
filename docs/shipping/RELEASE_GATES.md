@@ -86,6 +86,11 @@ method/lifecycle evidence, production reconciliation, restore/rollback,
 credential rotation, and release authorization remain open. No production
 operation occurred.
 
+Hosted result update (2026-10-07): PR #153 exact-head workflow `37559903900`
+passed at job `112594573865`; Vercel, GitGuardian, and Preview Comments also
+passed. The result does not pass the deletion gate or authorize migrations,
+deletion, restore, rollback, provider cutover, or promotion.
+
 Hold-authority update (2026-10-07): PR #153 head
 `adf9a23b395a2c35208bd7d9cfcc7973300c2827` adds the unapplied durable deletion
 hold schema and explicit release contract. Local hold 3/3, combined focus

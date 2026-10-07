@@ -1734,3 +1734,8 @@ check (31), diff check, and 38-page build pass. Hosted checks for the new head
 were pending at capture. `QUAL-WEB-005` remains unchecked; no production or
 destructive operation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-customer-held-digests-pr153-2026-10-07.md`.
+
+Hosted result update: exact-head workflow `37559903900` passed at job
+`112594573865`; Vercel, GitGuardian, and Preview Comments also passed. PR #153
+is clean but remains open and unmerged/unpromoted because deletion, restore,
+provider, and release gates remain unresolved.
