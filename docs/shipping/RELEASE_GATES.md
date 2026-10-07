@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## Merged-phase acceptance story refresh · 2026-10-07
+
+The exact merged CLI/Web substrate run passed CLI 250/250, Web 888/888 with 28
+explicit environment skips, and composed Studio/Enterprise/Team/qualification
+tests 74/74. This is regression evidence only. It does not close any hosted
+provider, customer, reviewer, browser-human, field-CWV, migration, or production
+gate; no release gate or backlog checkbox closed. Backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**.
+
 ## PLAN-CLI-003 authenticated boundary probe · 2026-10-07
 
 An authenticated read-only browser matrix kept forged paid-plan selectors at

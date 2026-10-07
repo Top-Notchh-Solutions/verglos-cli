@@ -1,5 +1,14 @@
 # Goal addendum — 2026-10-07
 
+Merged-phase acceptance refresh: the exact merged CLI/Web substrate harness
+passed CLI 250/250, Web 888/888 with 28 explicit environment skips, and
+composed Studio/Enterprise/Team/qualification substrates 74/74. This advances
+regression confidence only; it does not satisfy hosted payment/provider,
+restore/RPO, modified-CLI, GitHub App, customer/reviewer, browser-human,
+field-CWV, migration, or production acceptance. The whole-product goal remains
+active and the authoritative backlog remains **218 checked / 62 unchecked / 280
+total (77.9%)**.
+
 PLAN-CLI-003 continuation: authenticated read-only browser probes kept forged
 Enterprise/Studio selectors at Free, returned zero organizations, denied forged
 usage/search and expanded project/record/policy/release reads with bounded 403s,

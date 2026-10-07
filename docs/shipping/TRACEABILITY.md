@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## Merged-phase acceptance story refresh · 2026-10-07
+
+The private acceptance harness passed at exact CLI commit
+`6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` and Web commit
+`6fccfb26ffb707e53c3ef44166b42280be29de55`: CLI 250/250, Web 888/888 with 28
+explicit environment skips, and composed Studio/Enterprise/Team/qualification
+substrates 74/74. This is substrate/regression evidence only and does not close
+the hosted provider, customer, reviewer, browser-human, field-CWV, migration,
+or production gates. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Detailed evidence:
+`docs/shipping/evidence/acceptance-stories-merged-phase-2026-10-07.md`.
+
 ## PLAN-CLI-003 authenticated boundary probe · 2026-10-07
 
 - Authenticated Chrome same-origin read-only requests proved forged Enterprise

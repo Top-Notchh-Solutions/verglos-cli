@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · merged-phase acceptance story refresh
+
+- **Exact sources:** CLI `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`; Web
+  `6fccfb26ffb707e53c3ef44166b42280be29de55`.
+- **Result:** Private harness exited 0: CLI 250/250, Web 888/888 with 28
+  explicit environment skips, and composed Studio/Enterprise/Team/qualification
+  substrates 74/74.
+- **Boundary:** Substrate/regression evidence only. Hunt isolation,
+  modified-CLI runtime, provider payment, customer/reviewer/browser-human,
+  field-CWV, migration, and production acceptance remain open. No checkbox
+  changed; backlog remains 218 checked / 62 unchecked / 280 total.
+
 ## 2026-10-07 · PLAN-CLI-003 authenticated boundary probe
 
 - **Browser/API:** Authenticated same-origin read-only probes kept forged

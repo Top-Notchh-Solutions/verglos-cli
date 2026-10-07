@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · merged-phase acceptance story refresh
+
+The clean private acceptance harness passed against CLI commit
+`6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` and Web commit
+`6fccfb26ffb707e53c3ef44166b42280be29de55`: CLI **250/250**, Web **888/888
+with 28 explicit environment skips**, and composed Studio/Enterprise/Team/
+qualification substrates **74/74**. This is local substrate/regression
+evidence only; hosted provider, customer, reviewer, browser-human, field-CWV,
+migration, and production acceptance remain open. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/acceptance-stories-merged-phase-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-CLI-003 authenticated boundary probe
 
 The approved authenticated Chrome session performed a read-only forged-client
