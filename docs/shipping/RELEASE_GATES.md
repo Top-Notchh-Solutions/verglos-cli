@@ -451,6 +451,15 @@ pending at capture. This still does not pass Gate 2/4/6 or accept
 restore/rollback, and authenticated non-production E2E remain open; migration
 0031 is source-only and unapplied.
 
+Deletion inventory-read addendum (2026-10-07): Web PR #153 head `4656013`
+adds lease-fenced reads for seven hosted kinds, active holds, and customer-held
+digests, verified by disposable PostgreSQL 1/1 and the full local suite. The
+adapter explicitly returns `inventoryComplete=false` until supporting
+user/license/retention data and legal dispositions are covered. Hosted workflow
+`37562115786` was pending at capture. This does not pass Gate 2/4/6 or accept
+`QUAL-WEB-005`; destructive transactions, reconciliation/audit, restore/
+rollback, and authenticated non-production E2E remain open.
+
 Deletion adapter addendum (2026-10-07): Web PR #153 head
 `654c78c69a44d7b5aad4733ec7cb364d760b76b0` adds the user-scoped PostgreSQL
 claim/retry/block adapter with `SKIP LOCKED` and worker/attempt fencing.

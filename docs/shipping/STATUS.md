@@ -1799,3 +1799,18 @@ workflow `37561862519` was queued at capture; no hosted success is claimed.
 No production/provider/database/payment/deployment write, migration, deletion,
 or browser mutation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-store-adapter-pr153-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 fenced inventory read
+
+Web PR #153 advanced to `4656013`. The fenced store now reads the seven
+versioned hosted-kind counts across qualified personal organization/license
+scope, active holds, and customer-held digests, refusing reads after lease
+loss. It deliberately returns `inventoryComplete=false` because supporting
+user/license/retention tables and legal-retention dispositions are not yet
+covered. Disposable PostgreSQL integration passes **1/1**; serial passes
+**846 / 23 explicit skips / 0 fail**; typecheck, Drizzle check, 32-migration
+ordering, negative-boundary 2/2, diff check, and 38-page build pass. Hosted
+workflow `37562115786` was pending at capture. No production/provider/database/
+payment/deployment write, migration, deletion, or browser mutation occurred.
+Private evidence:
+`docs/shipping/evidence/qual-web-005-inventory-read-pr153-2026-10-07.md`.

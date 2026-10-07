@@ -1596,6 +1596,16 @@ typecheck/schema/migration/negative/build/diff checks pass; hosted workflow
 reconciliation/audit, restore rehearsal, and authenticated E2E remain absent,
 so this is substrate only and `QUAL-WEB-005` remains unchecked.
 
+# 2026-10-07 · QUAL-WEB-005 fenced inventory read
+
+PR #153 head `4656013` traces the user-scoped job to lease-fenced reads of all
+seven hosted kinds, active holds, and customer-held digest identities. The
+disposable PostgreSQL integration is 1/1 and the full local qualification set
+passes; hosted workflow `37562115786` was pending at capture. The adapter keeps
+`inventoryComplete=false` because supporting user/license/retention data and
+legal dispositions are not yet covered. Destructive SQL, reconciliation/audit,
+restore rehearsal, and authenticated E2E remain absent.
+
 # 2026-10-07 · QUAL-WEB-005 user-scoped job persistence
 
 PR #153 head `b91222a8d4d6ffd08f2be71391d89a6dafedab1` now traces the deletion

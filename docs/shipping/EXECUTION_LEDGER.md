@@ -2829,3 +2829,23 @@ deletion, restore, rollback, provider, and release gates remain unresolved.
 - **Next:** implement the inventory-backed read snapshot and per-kind
   transactional adapter, with row-count reconciliation and audit receipt
   persistence still behind restore/rollback qualification.
+
+# 2026-10-07 — QUAL-WEB-005 fenced inventory read
+
+- **Batch:** add lease-fenced reads for seven hosted kinds, active holds, and
+  customer-held digest identities on PR #153.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #153 head `4656013`; snapshot keeps `inventoryComplete`
+  false until supporting user/license/retention dispositions are covered.
+- **Local:** disposable PostgreSQL integration **1/1**, serial **846 pass /
+  23 explicit skips / 0 fail**, typecheck, Drizzle check, 32-migration
+  ordering, negative-boundary **2/2**, diff check, and 38-page build pass.
+- **Hosted:** workflow `37562115786` pending at capture; Vercel was deploying.
+  No hosted success claimed.
+- **Boundary:** no production/database/provider/payment/deployment write,
+  migration, deletion, browser mutation, or secret handling.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-inventory-read-pr153-2026-10-07.md`.
+- **Next:** complete the supporting ownership/retention inventory before any
+  per-kind deletion transaction can be enabled.

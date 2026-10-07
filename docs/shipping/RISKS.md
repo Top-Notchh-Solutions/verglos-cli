@@ -232,6 +232,14 @@ enqueue boundary but remains open until fenced claim/retry SQL, complete
 user-owned-data execution, row-count/audit reconciliation, restore/rollback,
 and non-production E2E are qualified.
 
+R-048 update (2026-10-07, inventory read): PR #153 head `4656013` adds
+lease-fenced counts for the seven hosted kinds plus hold/digest reads, but
+keeps `inventoryComplete=false` because supporting user/license/retention
+tables and legal dispositions are not yet covered. This reduces omission risk
+without enabling deletion; the critical risk remains open until the complete
+data graph, per-kind transactions, reconciliation/audit, restore/rollback,
+and non-production E2E are qualified.
+
 R-048 update (2026-10-07, fenced adapter): PR #153 head
 `654c78c69a44d7b5aad4733ec7cb364d760b76b0` adds atomic user-scoped
 `SKIP LOCKED` claim/retry/block state with worker/attempt fences and verifies

@@ -302,3 +302,14 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
 - **Boundary:** No runtime route or cron wires this adapter, migration 0031 is
   unapplied, and `QUAL-WEB-005` remains open pending inventory-backed reads,
   per-kind transactions, reconciliation/audit, restore/rollback, and E2E.
+
+## Deletion inventory read boundary · 2026-10-07
+
+- **Decision:** Read hosted-kind counts only while the job fence is live and
+  keep the operational completeness bit false until supporting user/license/
+  retention tables and legal dispositions are covered.
+- **Evidence:** Web PR #153 head `4656013`; disposable PostgreSQL integration
+  1/1, serial 846/23/0, typecheck/schema/migration/negative/build/diff pass;
+  hosted workflow `37562115786` was pending at capture.
+- **Boundary:** No per-kind deletion, audit receipt, restore rehearsal,
+  production migration, or acceptance is supplied by this read path.

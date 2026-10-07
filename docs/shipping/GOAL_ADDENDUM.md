@@ -24,3 +24,8 @@ The next PR #153 step adds only the fenced job-state adapter at head
 `654c78c69a44d7b5aad4733ec7cb364d760b76b0`. It passes disposable PostgreSQL
 1/1 and the full local qualification set, but inventory/destructive/audit
 methods remain fail-closed. The whole-product goal remains active.
+
+PR #153 head `4656013` now reads the seven hosted-kind inventory, holds, and
+customer-held digests under the job fence, while deliberately retaining
+`inventoryComplete=false`. The whole shipping goal remains active; no product
+release or deletion acceptance is implied.
