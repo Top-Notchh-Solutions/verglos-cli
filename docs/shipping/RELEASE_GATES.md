@@ -827,6 +827,16 @@ Checkout probe reached the hosted card form, but provider contact validation
 blocked continuation before the mock success/failure page. No payment,
 webhook, entitlement, or production operation occurred. PLAN-WEB-014 remains
 release-blocking and no checkbox changed.
+
+Payment qualification continuation (2026-10-07): a fresh provider-only
+test-mode probe used the documented E.164 contact and official sandbox card
+fixture. Razorpay recorded one attempted card payment with `amountPaid=0`;
+UPI and netbanking rendered but were not completed. This adds failure/display
+evidence only and does not satisfy success, capture, refund, renewal,
+cancellation, replay, out-of-order, webhook, exactly-once entitlement, or
+production reconciliation requirements. PLAN-WEB-014/015 remain open; no
+production, database, deployment, or live-payment operation occurred. See
+`docs/shipping/evidence/plan-web-014-test-mode-lifecycle-attempt-2026-10-07.md`.
 Hunt gate update (2026-10-07): CLI PR #76 exact head
 `17d0813737cda980ccb366c5adf948bda2e293a3` adds paid `hunt.critical`
 enforcement before supported-recipe execution input reads. Local focused

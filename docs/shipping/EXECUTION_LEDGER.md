@@ -3870,6 +3870,23 @@ before enabling any destructive adapter.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, provider, payment, database, deployment,
   credential, or browser operation occurred.
+
+# 2026-10-07 — PLAN-WEB-014 sandbox lifecycle continuation
+
+- **Scope:** Provider test-mode only; Razorpay test credentials from the
+  isolated environment, one reused Chrome CDP page, and temporary localhost
+  provider-only Checkout server. No production page, database, deployment, or
+  live credential was used.
+- **Evidence:** The official sandbox card flow recorded one attempted card
+  payment with `amountPaid=0` and no capture. UPI and netbanking rendered in
+  fresh test orders but were not completed. No identifiers, card data,
+  contact value, cookies, response bodies, or personal data were retained.
+- **Cleanup:** The CDP page was restored to `about:blank`; the exact temporary
+  server was stopped.
+- **Limitation:** This does not close PLAN-WEB-014/015 or any payment gate;
+  success, capture, refund, renewal, cancellation, replay, out-of-order,
+  webhook, exactly-once entitlement, and production reconciliation remain
+  unproven. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 # 2026-10-07 — ENT-CLI-001 bounded private runner client
 
 - **Implementation:** CLI PR #78 exact head `68772d7` merged to `main` as

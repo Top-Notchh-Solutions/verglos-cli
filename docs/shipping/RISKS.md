@@ -1,5 +1,13 @@
 # Verglos V1 risk register
 
+Latest PLAN-WEB-014 provider probe (2026-10-07): Razorpay test mode recorded
+one attempted card payment with zero amount paid after the official sandbox
+contact/card path; UPI and netbanking rendered but were not completed. This
+reduces contact-validation and hosted-display uncertainty only. Complete
+method lifecycle evidence, webhook/ledger reconciliation, isolated deployed
+runtime, production reconciliation, and R-041 rotation remain release-
+blocking. No production or live-payment operation occurred.
+
 Latest QUAL-WEB-005 preview-browser update (2026-10-07): the PR #153 Preview
 URL is protected by Vercel deployment login, so Chrome CDP could not reach the
 new privacy surface. No bypass or mutation was attempted. Authenticated

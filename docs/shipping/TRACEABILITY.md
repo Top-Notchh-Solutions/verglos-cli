@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-014 sandbox lifecycle continuation · 2026-10-07
+
+An isolated provider-only localhost Checkout probe using Razorpay test keys
+reached the hosted card, UPI, and netbanking surfaces. The official sandbox
+card path recorded one attempted payment with `amountPaid=0`; no capture,
+success callback, webhook, entitlement, or production mutation occurred. UPI
+and netbanking were displayed but not completed. The CDP page returned to
+`about:blank`, and no identifiers or personal/payment data were retained.
+PLAN-WEB-014/015 remain open. See
+`docs/shipping/evidence/plan-web-014-test-mode-lifecycle-attempt-2026-10-07.md`.
+
 ## ENT-CLI-001 bounded private runner client · 2026-10-07
 
 CLI PR #78 exact head `68772d7` merged to `main` as

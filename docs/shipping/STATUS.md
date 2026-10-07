@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-014 sandbox lifecycle continuation
+
+Using only the Razorpay test credentials in the isolated environment, a
+provider-only localhost Checkout probe reused one CDP page and created fresh
+test orders. The official sandbox card flow recorded one attempted card
+payment with `amountPaid=0`; no capture, webhook, entitlement, or production
+mutation occurred. UPI and netbanking rendered, but neither reached a
+completed lifecycle in this probe. No payment identifier, card data, contact
+value, cookie, or response body was retained; the page was restored to
+`about:blank` and the temporary server stopped. PLAN-WEB-014/015 remain open;
+backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. Private
+evidence: `docs/shipping/evidence/plan-web-014-test-mode-lifecycle-attempt-2026-10-07.md`.
+
 ## 2026-10-07 · ENT-CLI-001 bounded private runner client
 
 CLI PR #78 exact head `68772d71232faa955953c34b77c84b6160e904f1` merged to
@@ -44,13 +57,14 @@ checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
 
 ## 2026-10-07 · PLAN-WEB-014 test-mode failure-path attempt
 
-The bounded hosted test checkout reached the Razorpay mock card flow but ended
-with “Payment could not be completed” after the synthetic contact value was
-rejected. A provider read-only lookup found no payment attached to the
-qualification orders. This records a failure-path limitation only; no success,
-capture, refund, webhook, or entitlement evidence exists. No checkbox changed;
-backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. Private
-evidence: `docs/shipping/evidence/plan-web-014-test-mode-lifecycle-attempt-2026-10-07.md`.
+The bounded provider-only test checkout reached the Razorpay mock card flow.
+The first synthetic contact was rejected; a second probe with the documented
+E.164 test contact and official sandbox card fixture recorded one attempted
+card payment with `amountPaid=0`. UPI and netbanking rendered in fresh orders,
+but neither was submitted to completion. No success, capture, refund, webhook,
+or entitlement evidence exists. No checkbox changed; backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/plan-web-014-test-mode-lifecycle-attempt-2026-10-07.md`.
 
 ## 2026-10-07 · PLAN-WEB-013 direct test-mode method observation
 
