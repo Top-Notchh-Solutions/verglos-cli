@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-005 privacy surface
+
+- **Source:** Web PR #153 exact head `db27d793d890929f642ed0d5b5b9bd056a732bc`.
+- **Implementation:** Added `/account/privacy` navigation/page with explicit
+  confirmation, no-store request history, idempotent submission handling, and
+  honest pending-worker/customer-held-record language.
+- **Verification:** Focused local suite 23/23; typecheck; schema and 35
+  migration checks; build; negative boundary 2/2; SBOM/license; hosted Verify
+  `37607448915` all green.
+- **Boundary:** No deletion E2E, legal/held-record decision run, restore or
+  deployment rollback acceptance, production write/migration/deployment,
+  payment, entitlement, or checkbox change.
+
 ## 2026-10-07 · exact production migration preflight
 
 - **Result:** Read-only exact audit against PR #153's 35-entry journal found

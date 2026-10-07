@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-005 privacy surface
+
+Web PR #153 exact head `db27d793d890929f642ed0d5b5b9bd056a7322bc` adds the
+authenticated `/account/privacy` request/history surface with explicit
+confirmation, no-store reads, idempotent response handling, and honest
+pending-worker language. Local focused privacy/route/hold/inventory/digest/
+worker tests pass **23/23**; typecheck, schema, 35-migration ordering, build,
+negative boundary, SBOM/license gates pass. Hosted Verify `37607448915` is
+green across all configured checks. This remains implementation evidence only:
+no authenticated deletion E2E, legal/customer-held disposition, restore/
+rollback acceptance, or production operation occurred. No checkbox changed.
+Private evidence: `docs/shipping/evidence/qual-web-005-privacy-surface-db27d79-2026-10-07.md`.
+
 ## 2026-10-07 · exact production migration preflight
 
 The fresh read-only audit against the current PR #153 journal is

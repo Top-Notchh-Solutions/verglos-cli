@@ -1,5 +1,14 @@
 # Verglos V1 goal addendum — 2026-10-07
 
+## QUAL-WEB-005 privacy surface · 2026-10-07
+
+The active Web phase now exposes `/account/privacy` with an explicit
+confirmation flow and request history backed by the authenticated deletion
+API. It accurately reports that hosted deletion remains pending reviewed
+worker execution and preserves customer-held signed-record evidence. This is
+implementation progress only; it does not waive authenticated E2E,
+legal/customer-held disposition, restore/rollback, or production gates.
+
 ## Exact production migration preflight · 2026-10-07
 
 The current read-only audit is `blocked-migration-history`: all 42

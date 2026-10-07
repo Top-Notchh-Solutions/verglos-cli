@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-005 privacy surface · 2026-10-07
+
+- **Decision:** Accept the new account privacy surface as implementation
+  progress; keep QUAL-WEB-005 and merge/deploy gates open.
+- **Evidence:** PR #153 head `db27d793d890929f642ed0d5b5b9bd056a732bc`, local
+  23/23 focused tests and required checks, hosted Verify `37607448915` green.
+- **Boundary:** The UI records requests but does not claim hosted deletion
+  completion. No authenticated E2E, legal/held-record disposition,
+  rollback/restore acceptance, or production operation occurred.
+
 ## Exact production migration preflight · 2026-10-07
 
 - **Decision:** Keep production migration and PR #153 merge gates closed.

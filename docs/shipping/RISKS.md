@@ -1,5 +1,13 @@
 # Verglos V1 risk register
 
+Latest QUAL-WEB-005 implementation update (2026-10-07): Web PR #153 head
+`db27d793d890929f642ed0d5b5b9bd056a732bc` adds the authenticated privacy/
+deletion request surface and passes local 23/23 focused checks plus hosted
+Verify `37607448915`. This reduces user-facing wiring uncertainty only;
+authenticated deletion E2E, legal/customer-held disposition, restore/rollback,
+and production migration/cutover evidence remain release-blocking. No
+production operation occurred.
+
 Latest exact production migration preflight (2026-10-07): all 42 allowlisted
 tables are present, but production has 26 applied migration rows against the
 35-row PR #153 candidate and is blocked on the 0026–0034 tail. Exact counts

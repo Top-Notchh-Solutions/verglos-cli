@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 privacy surface · 2026-10-07
+
+Web PR #153 head `db27d793d890929f642ed0d5b5b9bd056a732bc` traces the
+authenticated `/account/privacy` request/history UI to the deletion API and
+reviewed worker boundary. Local focused tests pass 23/23 and hosted Verify
+`37607448915` is green. This traces implementation only; deletion E2E, legal/
+customer-held disposition, restore/rollback, and independent acceptance remain
+missing. See
+`docs/shipping/evidence/qual-web-005-privacy-surface-db27d79-2026-10-07.md`.
+
 ## Exact production migration preflight · 2026-10-07
 
 The read-only audit against PR #153's journal found all 42 allowlisted tables,

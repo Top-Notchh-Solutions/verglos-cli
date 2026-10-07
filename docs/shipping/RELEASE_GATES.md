@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-005 privacy surface · 2026-10-07
+
+PR #153 exact head `db27d793d890929f642ed0d5b5b9bd056a732bc` adds the
+authenticated account privacy/deletion request surface. Local 23/23 focused
+tests, typecheck, schema/35-migration ordering, build, negative boundary, and
+SBOM/license gates pass; hosted Verify `37607448915` is green. This does not
+pass QUAL-WEB-005: authenticated non-production deletion E2E, legal and
+customer-held-record disposition, row reconciliation, restore/rollback, and
+independent acceptance remain required.
+
 ## Exact production migration preflight · 2026-10-07
 
 The bounded read-only audit against PR #153's 35-entry migration journal found
