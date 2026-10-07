@@ -21,16 +21,16 @@
   remain open. Backlog remains 218 checked / 62 unchecked / 280 total.
 - **Evidence:** `docs/shipping/evidence/qual-web-006-dashboard-runtime-2026-10-07.md`.
 
-## 2026-10-07 · PLAN-CLI-004 compatibility PR #72 terminal hosted checks
+## 2026-10-07 · PLAN-CLI-004 compatibility PR #72 merge observation
 
-- **Code:** CLI branch `feat/cli-plan-004-compat`, exact head `059918c`, is
-  pushed and clean; PR #72 is open and mergeable against `main`.
+- **Code:** CLI exact head `059918cf920d136ded4528ad7512b82026459ece` merged
+  through PR #72 as `c1f1cd77468c28e85371b59fad297847ca5c5050`.
 - **Verification:** Previously recorded branch full tests, focused
   compatibility tests, typecheck, and build pass. No new hosted result is
   claimed from the PR creation step.
 - **Hosted state:** platform run `37550255842` (in-toto plus all Ubuntu/macOS/
   Windows Node 20/22/24 cells) and self-scan `37550255844` are terminal green.
-  GitHub reports PR #72 `CLEAN` and mergeable; no review decision is recorded.
+  GitHub reported PR #72 `CLEAN` and mergeable before merge.
   Deployed signer/catalog alignment, supported-version migration, hosted
   activation, and R-041 rotation remain open.
 - **Boundary:** No production signer, entitlement activation, database,

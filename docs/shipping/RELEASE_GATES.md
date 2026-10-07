@@ -2,8 +2,9 @@
 
 ## PLAN-CLI-004 hosted verification · 2026-10-07
 
-CLI PR #72 head `059918cf920d136ded4528ad7512b82026459ece` is open, mergeable,
-and GitHub reports merge state `CLEAN`. Platform run `37550255842` passes
+CLI PR #72 head `059918cf920d136ded4528ad7512b82026459ece` merged as
+`c1f1cd77468c28e85371b59fad297847ca5c5050` after GitHub reported merge state
+`CLEAN`. Platform run `37550255842` passes
 in-toto and all Ubuntu/macOS/Windows Node 20/22/24 cells; self-scan
 `37550255844` passes. This is terminal code/packaging verification only and
 does not close PLAN-CLI-004 or Gate 0/5: deployed signer/catalog alignment,

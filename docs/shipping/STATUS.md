@@ -21,10 +21,10 @@ are still open. Evidence addendum:
 `docs/shipping/evidence/qual-web-006-dashboard-runtime-2026-10-07.md`.
 Backlog remains **218 checked / 62 unchecked / 280 total**.
 
-## 2026-10-07 · PLAN-CLI-004 compatibility PR hosted verification terminal
+## 2026-10-07 · PLAN-CLI-004 compatibility PR merged after terminal verification
 
-CLI branch `feat/cli-plan-004-compat` at `059918c` is clean, pushed, one commit
-ahead of `origin/main`, and now has PR #72 open/mergeable. The branch carries
+CLI head `059918cf920d136ded4528ad7512b82026459ece` merged through PR #72 as
+`c1f1cd77468c28e85371b59fad297847ca5c5050`. The branch carried
 supported-entitlement compatibility coverage on top of the opaque
 catalog/cache contract. Previously recorded local full tests, focused tests,
 typecheck, and build pass. Hosted in-toto run `37550255842`, self-scan
