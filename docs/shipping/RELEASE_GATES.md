@@ -86,6 +86,13 @@ method/lifecycle evidence, production reconciliation, restore/rollback,
 credential rotation, and release authorization remain open. No production
 operation occurred.
 
+Worker-contract update (2026-10-07): PR #153 head `aef06b7` adds fenced
+user-scoped orchestration and stable retry handling. Focus 31/31, negative
+boundary 2/2, serial 846 pass / 22 explicit skips, typecheck/diff, and
+38-page build pass; hosted workflow `37560432960` was in progress. This does
+not pass Gate 2/4/6 or accept `QUAL-WEB-005`; the operational adapter,
+reconciliation, audit receipt, restore, and E2E remain open.
+
 Hosted result update (2026-10-07): PR #153 exact-head workflow `37559903900`
 passed at job `112594573865`; Vercel, GitGuardian, and Preview Comments also
 passed. The result does not pass the deletion gate or authorize migrations,

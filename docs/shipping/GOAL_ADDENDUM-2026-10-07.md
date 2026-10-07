@@ -123,3 +123,13 @@ typecheck/schema/migration/diff/build pass with 31 migrations. Hosted checks
 were pending at capture. The backlog remains **218 checked / 62 unchecked /
 280 total**; authenticated writing, worker execution, reconciliation, restore,
 and non-production E2E remain required.
+
+# 2026-10-07 · QUAL-WEB-005 worker contract
+
+PR #153 now includes a fenced user-scoped deletion worker contract with
+bounded retries, per-kind idempotency, hold/inventory gates, digest comparison,
+and audit-receipt fencing. Focus 31/31, negative boundary 2/2, serial 846 pass
+/ 22 explicit skips, typecheck/diff/build pass. Hosted workflow
+`37560432960` was in progress. The backlog remains **218 checked / 62
+unchecked / 280 total**; the operational adapter, restore rehearsal,
+reconciliation, and non-production E2E remain required.

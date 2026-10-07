@@ -1739,3 +1739,16 @@ Hosted result update: exact-head workflow `37559903900` passed at job
 `112594573865`; Vercel, GitGuardian, and Preview Comments also passed. PR #153
 is clean but remains open and unmerged/unpromoted because deletion, restore,
 provider, and release gates remain unresolved.
+
+# 2026-10-07 · QUAL-WEB-005 bounded worker contract
+
+PR #153 advanced to `aef06b70f1b16d2c4ade4edd43d236b80a0d0b19`. It adds a
+fenced user-scoped worker orchestration contract with bounded retries,
+idempotent per-kind adapter calls, fail-closed inventory/hold checks,
+held-digest comparison, post-delete reconciliation, and stable retry errors.
+Worker/deletion focus passes 31/31; negative boundary 2/2; serial 846/846 with
+22 explicit skips; typecheck, diff check, and 38-page build pass. Hosted
+workflow `37560432960` was in progress at capture. The operational adapter,
+restore rehearsal, and non-production E2E remain open; no production or
+destructive operation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-worker-contract-pr153-2026-10-07.md`.

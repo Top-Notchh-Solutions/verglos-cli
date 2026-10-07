@@ -1563,3 +1563,14 @@ never part of this surface. Focus 28/28, serial 846 pass / 22 explicit skips,
 typecheck/schema/migration/diff/build pass, and 31 migrations validate. An
 authenticated writer, deletion worker, reconciliation receipt, restore
 rehearsal, and non-production E2E remain open; hosted checks were pending.
+
+# 2026-10-07 · QUAL-WEB-005 bounded worker contract
+
+PR #153 head `aef06b7` traces the deletion boundary to a fenced, user-scoped
+worker orchestration contract. It binds the claimed request scope, checks
+inventory and holds before adapter calls, uses per-kind idempotency keys,
+compares held digests, requires the existing execution decision, and refuses
+completion without a fenced audit receipt. Focus 31/31, negative boundary 2/2,
+serial 846 pass / 22 explicit skips, typecheck/diff/build pass. The store
+adapter, restore/rollback rehearsal, and authenticated E2E remain unproven;
+hosted workflow `37560432960` was in progress.

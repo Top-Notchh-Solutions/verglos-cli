@@ -207,3 +207,9 @@ customers registered every held record, provide an authenticated writer, or
 make deletion operationally safe. Migrations `0029`/`0030` remain unapplied;
 the worker, reconciliation, audit receipt, restore, and E2E evidence are
 still critical open requirements.
+
+R-048 update (2026-10-07, worker contract): PR #153 adds bounded orchestration
+and stable failure handling but no store adapter or destructive execution.
+The organization queue remains unsuitable for user-scoped deletion. The
+critical risk remains open until disposable-DB integration, row-count/audit
+reconciliation, restore rehearsal, and non-production E2E pass.

@@ -2743,3 +2743,22 @@ deletion, restore, rollback, provider, and release gates remain unresolved.
   Vercel preview completed successfully.
 - **Boundary:** no production/provider/database/payment/browser mutation; no
   checkbox changed; **218 checked / 62 unchecked / 280 total**.
+
+# 2026-10-07 — QUAL-WEB-005 bounded worker contract
+
+- **Batch:** add the fenced user-scoped worker orchestration contract on PR
+  #153; no production adapter or destructive SQL.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #153 head `aef06b70f1b16d2c4ade4edd43d236b80a0d0b19`.
+- **Local:** worker/deletion focus **31/31**, negative boundary **2/2**,
+  serial **846 pass / 22 explicit skips / 0 fail**, typecheck/diff pass, and
+  38-page build pass.
+- **Hosted:** workflow `37560432960` was in progress at capture; no hosted
+  acceptance or merge claim made.
+- **Boundary:** no production/database/provider/payment/deployment write,
+  migration, deletion, browser mutation, or secret handling occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-worker-contract-pr153-2026-10-07.md`.
+- **Next:** implement the store adapter only with disposable-DB integration,
+  row-count/audit reconciliation, and restore rehearsal evidence.

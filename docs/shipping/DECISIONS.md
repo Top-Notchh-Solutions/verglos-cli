@@ -253,3 +253,15 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
 - **Boundary:** migrations `0029`/`0030` are unapplied; no authenticated
   writer, worker, destructive operation, restore rehearsal, or checkbox
   acceptance is supplied.
+
+## Bounded deletion worker contract · 2026-10-07
+
+- **Decision:** Keep the worker user-scoped and adapter-driven. The
+  organization-scoped generic queue is not used as an account-deletion
+  authority; the adapter must own transactional SQL, claims, retries,
+  idempotency, reconciliation, and audit persistence.
+- **Evidence:** Web PR #153 head `aef06b7`; worker focus 31/31, negative
+  boundary 2/2, serial 846/22/0, typecheck/diff/build pass.
+- **Boundary:** no production adapter, cron route, destructive operation,
+  migration, restore rehearsal, or checkbox acceptance is supplied by this
+  contract. Hosted workflow `37560432960` was in progress.
