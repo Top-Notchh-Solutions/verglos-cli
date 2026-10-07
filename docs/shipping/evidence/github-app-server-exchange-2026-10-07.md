@@ -24,6 +24,11 @@ provider-token/secret path.
 - Hosted Verify runs **37643258692** and final-head **37643938665**: success.
 - Vercel Preview Comments: success.
 
+The exact head was reverified after the adjacent migration-guard work: the
+full serial Web suite passed **846/868** with **22** explicit skips and zero
+failures; focused SCM/GitHub tests passed **19/19**; typecheck, `db:check`, and
+29-migration ordering passed. No source change was made in this recheck.
+
 ## Limits and disposition
 
 This is implementation and local/hosted CI evidence. No GitHub App credential,

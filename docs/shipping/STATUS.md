@@ -17,6 +17,11 @@ acceptance remain open; no checkbox changed. Backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/github-app-server-exchange-2026-10-07.md`.
 
+The exact PR #154 head was reverified locally: serial Web tests **846/868**
+with 22 explicit skips and zero failures, focused SCM/GitHub tests **19/19**,
+typecheck, schema, and 29-migration ordering passed. This is revalidation only;
+no checkbox changed and live App/org/webhook evidence remains open.
+
 ## 2026-10-07 · CLI origin/main reconciliation and Hunt adversarial qualification
 
 The founder-owned CLI checkout was preserved because it contains untracked

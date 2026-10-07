@@ -21,6 +21,11 @@
   credential/customer/browser write occurred.
 - **Evidence:** `docs/shipping/evidence/github-app-server-exchange-2026-10-07.md`.
 
+The exact PR #154 head was reverified locally after adjacent work: serial Web
+tests **846/868** with 22 explicit skips and zero failures; focused SCM/GitHub
+tests **19/19**; typecheck, schema, and 29-migration ordering passed. No
+checkbox changed and no provider/browser/production write occurred.
+
 # 2026-10-07 — CLI origin/main reconciliation and Hunt adversarial qualification
 
 - **Source:** Preserved founder-owned checkout; clean worktree exact
