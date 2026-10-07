@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · HUNT/MCP phase merged
+
+CLI PR #76 source head `b72982a` merged to `main` as
+`8e436544c164f9812263c504cd26b74e3bb8acec` after all hosted platform,
+self-scan, and in-toto checks passed. This integrates the bounded MCP/runtime
+bridge but does not accept the dependent Hunt items: trusted/licensed roots,
+bounded execution qualification, and independent review remain open. No
+checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Private evidence:
+`docs/shipping/evidence/hunt-mcp-merge-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-014 test-mode failure-path attempt
 
 The bounded hosted test checkout reached the Razorpay mock card flow but ended

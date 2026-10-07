@@ -3840,3 +3840,16 @@ before enabling any destructive adapter.
   deployment, entitlement, or payment-capture mutation occurred. The temporary
   server was stopped and browser target restored to `about:blank`.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+# 2026-10-07 — HUNT/MCP phase merge
+
+- **Integration:** CLI PR #76 source head `b72982a` merged to `main` as
+  `8e436544c164f9812263c504cd26b74e3bb8acec` after all hosted platform,
+  self-scan, and in-toto checks passed.
+- **Limitation:** This integrates the bounded bridge only. HUNT-009/HUNT-010
+  and related qualification items remain open for trusted/licensed roots,
+  bounded execution qualification, adversarial/independent review, and final
+  release acceptance. No checkbox changed.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No production, provider, payment, database, deployment,
+  credential, or browser mutation occurred in the merge operation.
