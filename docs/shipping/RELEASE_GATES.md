@@ -1,5 +1,11 @@
 # Verglos V1 release gates
 
+## CLI release-candidate source follow-up · 2026-10-07
+
+The rebuilt current source passes `pnpm test` (12/12 workspace tasks) and
+`pnpm typecheck` (13/13 tasks). This does not clear the eight redistribution
+review blockers or authorize publication; LIC/DIST gates remain open.
+
 ## CLI release-artifact qualification · 2026-10-07
 
 The source rebuild, six-archive public pack, packed-manifest audit, isolated

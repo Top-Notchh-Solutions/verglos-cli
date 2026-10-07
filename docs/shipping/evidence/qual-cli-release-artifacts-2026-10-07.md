@@ -25,3 +25,11 @@
 - **Acceptance boundary:** Mechanical packaging is qualified, but LIC-002,
   LIC-003, DIST-001, DIST-002, DIST-003, and final publication remain open. No
   npm publish, tag, deployment, production, or credential operation occurred.
+
+## Current-source follow-up
+
+- After the release rebuild, `pnpm test` completed 12/12 workspace tasks with
+  no failed task, and `pnpm typecheck` completed 13/13 workspace tasks with no
+  failed task.
+- These results strengthen the source/release-candidate evidence but do not
+  change the eight-item legal/provenance blocker list or the acceptance count.

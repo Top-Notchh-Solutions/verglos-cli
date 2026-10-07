@@ -1,5 +1,13 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · CLI release-candidate source follow-up
+
+After rebuilding the release candidate, the current CLI source completed
+`pnpm test` with 12/12 workspace tasks successful and `pnpm typecheck` with
+13/13 tasks successful. This strengthens the release evidence but changes no
+backlog checkbox: the eight redistribution blockers still require legal /
+provenance review. No publication or production operation occurred.
+
 ## 2026-10-07 · CLI release-artifact qualification
 
 The current CLI source rebuilt successfully across all eight workspace build

@@ -1,5 +1,14 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · CLI release-candidate source follow-up
+
+- After rebuilding source, CLI `pnpm test` completed 12/12 workspace tasks and
+  `pnpm typecheck` completed 13/13 tasks, with no failed task.
+- This is additional source qualification only; the eight legal/provenance
+  blockers remain and backlog stays 218 checked / 62 unchecked / 280 total.
+- No npm publication, tag, deployment, production, or credential operation
+  occurred.
+
 ## 2026-10-07 · CLI release-artifact qualification
 
 - **Build:** CLI commit `ad6ee14` rebuilt successfully across all eight

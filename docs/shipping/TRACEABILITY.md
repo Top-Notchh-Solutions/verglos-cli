@@ -1,5 +1,12 @@
 # Verglos V1 traceability
 
+## CLI release-candidate source follow-up · 2026-10-07
+
+- Rebuilt current CLI source passes `pnpm test` with 12/12 workspace tasks and
+  `pnpm typecheck` with 13/13 tasks.
+- This is source-level release evidence only; the eight redistribution review
+  blockers and LIC/DIST/publication gates remain open.
+
 ## CLI release-artifact qualification · 2026-10-07
 
 - CLI `ad6ee14` rebuilt across eight workspace packages. Six public archives
