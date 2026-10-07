@@ -1626,3 +1626,14 @@ so this does not qualify the slug-scoped dashboard, screen-reader behavior,
 large datasets, or field CWV. Private evidence:
 `docs/shipping/evidence/qual-web-006-org-route-probe-2026-10-07.md`.
 `QUAL-WEB-006` remains unchecked and no browser mutation occurred.
+
+# 2026-10-07 · QUAL-WEB-006 large-data qualification
+
+PR #150 is merged at Web `a64407d9e7b81ba4db8c52a96d1237da693cb910`. Its
+large-dashboard integration now passes locally against disposable PostgreSQL
+18: **1/1 with zero skips**, followed by typecheck, Drizzle check, 29-migration
+ordering, and a 38-page production build. Private evidence:
+`docs/shipping/evidence/qual-web-006-large-data-2026-10-07.md`.
+
+This is progress only. Authenticated slug-scoped runtime, human screen-reader,
+and field-CWV evidence remain open, so `QUAL-WEB-006` remains unchecked.

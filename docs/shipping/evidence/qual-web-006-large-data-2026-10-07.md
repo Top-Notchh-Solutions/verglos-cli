@@ -10,7 +10,8 @@ screen-reader review, and field Core Web Vitals remain open.
 Repository: `verglos-web` isolated worktree
 `/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web/.worktrees/web-qual-006-large-data`.
 Branch: `qual/web-006-large-data`.
-Commit: `70680f89cb1cb9e8324398fc0a789930420cb031`; merged to Web `main` as
+Qualification commit: `70680f89cb1cb9e8324398fc0a789930420cb031`; CI serialization
+head: `a78578effdce6f7abf4807d0232d8ed93fd07f07`; merged to Web `main` as
 `a64407d9e7b81ba4db8c52a96d1237da693cb910`.
 PR: https://github.com/anuragyadav-git/verglos-web/pull/150
 
@@ -30,38 +31,36 @@ changes:
 ## Evidence run
 
 Docker health was checked before the batch. A bounded temporary
-`postgres:18-alpine` container named `verglos-qual-web-006-postgres` was
-started on host port 55437 with a newly created `verglos_test` database, then
+`postgres:18-alpine` container named `verglos-qual-web-006-20261007` was
+started on host port 55432 with a local-only `verglos_test` database, then
 stopped after the run. No project or production data was used.
 
 Focused integration command:
 
 ```text
-TEST_DATABASE_URL=postgres://postgres@127.0.0.1:55437/verglos_test node --import tsx --test src/lib/organizations/dashboard-monitoring-repository.integration.test.ts
+TEST_DATABASE_URL=postgres://postgres:localtest@127.0.0.1:55432/verglos_test pnpm exec node --import tsx --test src/lib/organizations/dashboard-monitoring-repository.integration.test.ts
 ```
 
-Result: 1 test passed, 0 failed.
+Result: **1 test passed, 0 failed, 0 skipped**.
 
 Assertions include total 45, page sizes 20/20/5, 45 unique same-tenant
 component IDs across the three pages, 100 returned detail matches with
 truncation truth, and a null detail for the foreign component.
 
-Additional local verification:
+Additional local verification on the exact qualification worktree:
 
-- dashboard view plus integration tests: 4 passed, 0 failed;
-- tenant/security tests: 18 passed, 0 failed;
 - TypeScript `tsc --noEmit`: passed;
 - `pnpm db:check`: passed;
 - `pnpm db:migrations:check`: passed, 29 ordered migrations;
-- `pnpm build`: passed, 38 static pages generated and all routes compiled;
-- `git diff --check`: passed.
+- `VERCEL_ENV=preview NODE_ENV=production pnpm build`: passed, 38 pages
+  generated and all routes compiled;
+- `git diff --check`: passed for the private ledger update.
 
 The local run used Node `v26.4.0` while the package declares Node `22.x`; the
 hosted workflow is the authoritative Node-baseline check.
 
 ## Hosted state and limitations
 
-PR #150 was pushed with only the integration-test and serial-CI changes.
 Hosted Verify run `37552936102` passed typecheck, serialized tests,
 negative-boundary/truth-registry, schema/migrations, build, public-boundary,
 dependency/SBOM/license, and tracked-secret checks; Vercel, GitGuardian, and

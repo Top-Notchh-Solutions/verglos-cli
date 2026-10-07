@@ -2573,3 +2573,20 @@ changed and no checkbox was closed.
 - **Evidence:** `docs/shipping/evidence/qual-web-006-org-route-probe-2026-10-07.md`.
 - **Backlog:** `QUAL-WEB-006` remains unchecked; **218 checked / 62 unchecked /
   280 total**.
+
+# 2026-10-07 — QUAL-WEB-006 large-data qualification
+
+- **Batch:** validate the merged large-dashboard fixture on the exact Web
+  qualification head.
+- **Code/hosted:** PR #150 head `a78578e` merged as
+  `a64407d9e7b81ba4db8c52a96d1237da693cb910`; hosted required checks were
+  green.
+- **Local results:** disposable PostgreSQL 18 integration **1/1 pass, 0
+  skips**; typecheck pass; Drizzle check pass; 29 ordered migrations pass;
+  preview production build pass with 38 pages generated.
+- **Limitations:** Node 26.4.0 versus the repository Node 22.x baseline and the
+  existing multi-lockfile workspace-root warning remain recorded. This does
+  not prove slug-scoped authenticated runtime, human screen-reader, field CWV,
+  or full QUAL-WEB-006 acceptance.
+- **State:** no production/provider/browser mutation; no checkbox changed;
+  **218 checked / 62 unchecked / 280 total**.

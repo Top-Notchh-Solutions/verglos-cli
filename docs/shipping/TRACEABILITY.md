@@ -1470,3 +1470,13 @@ deletion job spanning the owned data graph. The exact gap and required design
 boundary are recorded in
 `docs/shipping/evidence/qual-web-005-deletion-worker-boundary-2026-10-07.md`.
 No checkbox changed and no destructive operation ran.
+
+# 2026-10-07 · QUAL-WEB-006 large-data qualification
+
+Web PR #150 (`a78578e`) merged as `a64407d`. Its organization monitoring
+repository fixture exercises 45 components, 124 selected-component matches,
+bounded pagination, freshness/failure projection, truncation, and foreign-
+tenant exclusion. The disposable PostgreSQL run passed 1/1 with zero skips;
+typecheck, schema, 29-migration ordering, and production build also passed.
+The evidence remains partial because authenticated slug runtime, human
+screen-reader, and field-CWV qualification are not proven.
