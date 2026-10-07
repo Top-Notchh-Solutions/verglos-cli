@@ -4,9 +4,9 @@
 
 - **Decision:** GitHub installation tokens and immutable installation identity
   must come from the server-held App JWT/provider API, not browser input.
-- **Evidence:** PR #154 final head `742a167`; focused SCM **24/24**; full Web
-  **846/868** with zero failures; Verify `37643258692` and `37643938665`, plus
-  Vercel, passed.
+- **Evidence:** PR #154 reconciled head `9032bda`, merged as `1498837`; focused
+  SCM/deletion **46/46**; serial Web **857/880** with 23 explicit skips and
+  zero failures; hosted typecheck/schema, Vercel, and Preview Comments passed.
 - **Security boundary:** The route accepts only installation/repository
   selection intent, validates least-privilege permissions and provider-owned
   IDs, encrypts token/expiry, refreshes through the App exchange, and takes the

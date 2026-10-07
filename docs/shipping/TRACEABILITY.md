@@ -2,7 +2,8 @@
 
 ## Web GitHub App server-side exchange · 2026-10-07
 
-PR #154 final exact head `742a167` wires the GitHub installation route to a
+PR #154 reconciled exact head `9032bda` (merged as `1498837`) wires the GitHub
+installation route to a
 server-held App-JWT exchange, provider-authoritative identity/permission and
 repository projection, encrypted token expiry, and delivery-time refresh.
 Focused SCM tests **24/24**, full Web **846/868** (22 explicit skips), hosted

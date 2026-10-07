@@ -2,9 +2,9 @@
 
 # 2026-10-07 — Web GitHub App server-side exchange
 
-- **Code:** Web PR #154 final exact head `742a167` (`096de93` implementation
-  plus `742a167` webhook-secret hardening); hosted Verify runs `37643258692`
-  and `37643938665`, plus Vercel Preview, passed.
+- **Code:** Web PR #154 reconciled exact head `9032bda`, merged as `1498837`
+  (`096de93` implementation plus `742a167` webhook-secret hardening);
+  hosted typecheck/schema, Vercel, and Preview Comments passed.
 - **Verification:** Focused SCM **24/24**; full Web **846/868** with 22
   explicit environment-gated skips and zero failures; typecheck, schema,
   29-migration ordering, negative boundary **2/2**, build **38/38**, and diff
@@ -20,6 +20,9 @@
 - **Boundary:** No production/provider/payment/database/migration/deployment/
   credential/customer/browser write occurred.
 - **Evidence:** `docs/shipping/evidence/github-app-server-exchange-2026-10-07.md`.
+- **Merge boundary:** The code-side phase is merged, but GITHUB-WEB-001..004
+  remain open for authorized organization installation, live provider delivery
+  and lifecycle evidence, cutover, and independent acceptance.
 
 The exact PR #154 head was reverified locally after adjacent work: serial Web
 tests **846/868** with 22 explicit skips and zero failures; focused SCM/GitHub

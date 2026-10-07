@@ -2,7 +2,7 @@
 
 ## R-GITHUB-WEB-006 provider exchange and cutover evidence · 2026-10-07
 
-PR #154 final head `742a167` moves GitHub App token issuance, identity binding,
+PR #154 reconciled head `9032bda` (merged as `1498837`) moves GitHub App token issuance, identity binding,
 expiry refresh, and webhook-secret storage behind server-held configuration and
 passes local/hosted code checks. Remaining
 risk is operational: no authorized GitHub App installation, live provider

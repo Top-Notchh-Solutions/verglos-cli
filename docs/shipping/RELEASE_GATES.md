@@ -2,14 +2,14 @@
 
 ## Web GitHub App server-side exchange · 2026-10-07
 
-PR #154 final exact head `742a167` passes focused SCM **24/24**, full Web **846/868**
-with 22 environment skips and zero failures, hosted Verify `37643258692` and
-final-head Verify `37643938665`,
-Vercel, typecheck/schema/migration/negative-boundary/build checks. This
-advances the GitHub implementation gate but does not pass it: live authorized
-App installation, immutable multi-repository scope, least-privilege provider
-verification, signed webhook lifecycle/replay/reconciliation, cutover, and
-independent acceptance remain required. No checkbox or production state changed.
+PR #154 reconciled head `9032bda` merged as `1498837` after focused
+SCM/deletion **46/46**, serial Web **857/880** with 23 explicit skips, hosted
+typecheck/schema, Vercel, and Preview Comments passed. This advances the GitHub
+implementation gate but does not pass it: live authorized App installation,
+immutable multi-repository scope, least-privilege provider verification, signed
+webhook lifecycle/replay/reconciliation, cutover, and independent acceptance
+remain required. No checkbox or production state changed; GITHUB-WEB-001..004
+remain unchecked.
 
 ## CLI origin/main reconciliation and Hunt adversarial qualification · 2026-10-07
 

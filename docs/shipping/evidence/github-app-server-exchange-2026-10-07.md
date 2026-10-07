@@ -2,7 +2,9 @@
 
 ## Implementation
 
-Web PR #154 final exact head `742a16707642715bdac96f2761135c33513a8ed0`
+Web PR #154 implementation exact head `742a16707642715bdac96f2761135c33513a8ed0`,
+subsequently reconciled and merged at exact head
+`9032bda8dc8e916d38151136479699ef7e7641d4`
 (implementation `096de93` plus follow-up `742a167`) changes the
 GitHub installation route so the browser submits only an installation ID and
 bounded repository/project selections. The server now signs a short-lived App
@@ -55,4 +57,12 @@ After PR #153 merged as `2e86514`, PR #154 was reconciled again and pushed at
 exact head `9032bda` against that main. The final reconciled branch passed
 focused SCM/deletion contracts **46/46**, serial Web **857/880** with **23**
 explicit skips and zero failures, typecheck, build, schema, 37-migration
-ordering, and diff checks. Hosted checks for `9032bda` have not yet appeared.
+ordering, and diff checks. Hosted typecheck/schema, Vercel, and Preview
+Comments passed for `9032bda`; the PR merged as `1498837`.
+
+## Limits and disposition after merge
+
+The merge is code-side implementation evidence only. No authorized GitHub App
+organization installation, live delivery/lifecycle/cutover, or independent
+acceptance was performed. GITHUB-WEB-001..004 remain open and no production
+provider/database/deployment/customer-state write occurred.

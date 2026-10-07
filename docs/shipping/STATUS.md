@@ -2,7 +2,8 @@
 
 ## 2026-10-07 · Web GitHub App server-side exchange
 
-Web PR #154 final exact head `742a167` (implementation `096de93` plus
+Web PR #154 reconciled exact head `9032bda` (merged as `1498837`; implementation
+`096de93` plus
 server-only-secret hardening) moves GitHub installation token issuance and
 immutable identity derivation server-side. The route no longer accepts a
 browser-supplied GitHub provider token/account/repository identity; the server
@@ -12,8 +13,10 @@ tokens in SCM delivery. GitHub webhook secrets now come only from
 `VERGLOS_GITHUB_WEBHOOK_SECRET`. Focused SCM tests **24/24**; full Web **846 passed / 22
 skips / 0 failures**; typecheck, schema, 29-migration, negative-boundary,
 build **38/38**, and diff checks passed. Hosted Verify **37643258692** and
-final-head Verify **37643938665**, plus Vercel, passed. Live authorized GitHub App/org/webhook evidence and independent
-acceptance remain open; no checkbox changed. Backlog remains **218 checked / 62
+final-head Verify **37643938665**, plus the reconciled head's hosted
+typecheck/schema, Vercel, and Preview Comments, passed. Live authorized GitHub
+App/org/webhook evidence and independent acceptance remain open; no checkbox
+changed. Backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/github-app-server-exchange-2026-10-07.md`.
 
@@ -3165,5 +3168,7 @@ After PR #153 merged as `2e86514`, PR #154 was reconciled against that main and
 pushed at exact head `9032bda`. Focused SCM/deletion contracts passed **46/46**;
 serial Web passed **857/880** with 23 explicit skips and zero failures;
 typecheck, build, schema, 37-migration ordering, and diff checks passed. Hosted
-checks for this final reconciled head have not yet appeared. Live GitHub
-App/org/webhook/cutover evidence remains open.
+checks then passed and PR #154 merged as `1498837`. Live GitHub
+App/org/webhook/cutover evidence remains open; GITHUB-WEB-001..004 remain
+unchecked for authorized installation, delivery/lifecycle, cutover, and
+independent acceptance.

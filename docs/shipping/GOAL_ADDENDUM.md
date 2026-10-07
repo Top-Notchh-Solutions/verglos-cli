@@ -2,7 +2,7 @@
 
 ## Web GitHub App server-side exchange
 
-PR #154 final exact head `742a167` implements the server-held App-JWT installation
+PR #154 reconciled exact head `9032bda` (merged as `1498837`) implements the server-held App-JWT installation
 exchange, provider-authoritative immutable identity/permissions/repository
 projection, encrypted token expiry, expiry/unknown-expiry refresh in SCM
 delivery, and server-only GitHub webhook-secret configuration. Focused SCM
