@@ -3687,3 +3687,18 @@ before enabling any destructive adapter.
   evidence. No merge, provider, production, database, deployment, payment,
   or credential operation occurred. Backlog remains **218 checked / 62
   unchecked / 280 total (77.9%)**.
+
+# 2026-10-07 — MCP Hunt verdict explanation
+
+- **Implementation:** CLI PR #76 commit `7022408` adds the bounded
+  `verglos_hunt_explain_verdict` result for all three recorded verdict values.
+  It does not rerun Hunt, load a runtime, authorize execution, or make a
+  network call; Pro entitlement remains enforced.
+- **Verification:** MCP package tests pass **38/38** across all shards;
+  typecheck, build, and `git diff --check` pass.
+- **Limitation:** HUNT-009 and HUNT-010 remain open because supported Hunt
+  execution, trusted/licensed provenance, independent review, and the other
+  MCP Hunt execution tools are not qualified. No checkbox changed.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No browser, provider, payment, production, database,
+  deployment, credential, or external-recipe operation occurred.

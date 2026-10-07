@@ -2478,6 +2478,21 @@ Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
 production, database, provider, payment, deployment, or credential operation
 occurred.
 
+## 2026-10-07 · MCP Hunt verdict explanation
+
+CLI PR #76 commit `7022408` adds a bounded `verglos_hunt_explain_verdict`
+response for `true`, `false`, and `not_attemptable`. It performs no Hunt
+execution, runtime load, approval, or network call; it keeps the shared Pro
+entitlement gate and rejects unbounded/control-character finding identifiers.
+MCP package tests pass **38/38** across all shards; typecheck, build, and diff
+check pass. Private evidence:
+`docs/shipping/evidence/hunt-mcp-explain-verdict-2026-10-07.md`. HUNT-009 and
+HUNT-010 remain unchecked because supported execution, licensed/trusted
+provenance, independent review, and the remaining MCP execution tools are not
+qualified. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+No browser, provider, payment, production, database, deployment, credential,
+or external-recipe operation occurred.
+
 ## 2026-10-07 · Web full-suite payment revalidation
 
 The active Web payment PR #149 full configured test command completed with
