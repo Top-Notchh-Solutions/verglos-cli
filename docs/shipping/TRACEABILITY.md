@@ -1,5 +1,14 @@
 # Verglos V1 traceability
 
+## Web current-main Node 22 qualification · 2026-10-07
+
+Exact Web `origin/main` `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed
+serial pretest **49/49** and main **879/880** with one explicit skip and zero
+failures under Node `22.23.3`. Empty-database bootstrap, all **37** ordered
+migrations, schema, negative-boundary **2/2**, truth registry **25/25**, and
+typecheck passed. No checkbox changed; see
+`docs/shipping/evidence/qual-web-node22-current-main-2026-10-07.md`.
+
 ## QUAL-CLI-006 Node 22 current-main qualification · 2026-10-07
 
 Exact CLI `origin/main` `7d060b2852551cc017bbb2b5f70bad22843e7273` passed a

@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## Web current-main Node 22 qualification · 2026-10-07
+
+- **Decision:** Accept the exact-head Node 22 and disposable-database results
+  as supporting evidence; do not close payment, production, or final release
+  gates.
+- **Evidence:** Web main
+  `14988371cdae94d66d068b49d07cc31f0b26c5ea`; serial pretest **49/49**, main
+  **879/880**, one explicit skip, zero failures; 37 migrations, schema,
+  negative-boundary **2/2**, truth registry **25/25**, and typecheck passed.
+- **Boundary:** Provider lifecycle, production reconciliation, deployment
+  acceptance, and final independent review remain open. Disposable database
+  and worktree only; no checkbox or external state changed.
+
 ## QUAL-CLI-006 Node 22 current-main qualification · 2026-10-07
 
 - **Decision:** Accept the pinned Node 22 run as supporting runtime evidence;

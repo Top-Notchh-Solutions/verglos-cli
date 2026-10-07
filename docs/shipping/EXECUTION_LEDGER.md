@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 — Web current-main Node 22 qualification
+
+- **Code:** Exact Web `origin/main`
+  `14988371cdae94d66d068b49d07cc31f0b26c5ea`.
+- **Runtime:** Pinned Node `22.23.3` container, pnpm `10.34.5`, disposable
+  PostgreSQL 15.
+- **Verification:** Empty-database serial pretest **49/49** and main suite
+  **879/880** with one explicit environment-gated skip and zero failures;
+  bootstrap/all **37** migrations, schema, negative-boundary **2/2**, truth
+  registry **25/25**, and typecheck passed.
+- **Disposition:** Supporting evidence only; no source change or checkbox
+  closure. Provider lifecycle, production reconciliation, build/deploy
+  acceptance, and remaining release gates stay open. Backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-node22-current-main-2026-10-07.md`.
+
 ## 2026-10-07 — CLI current-main Node 22 qualification
 
 - **Code:** Exact CLI `origin/main` and worktree HEAD

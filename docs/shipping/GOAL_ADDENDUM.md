@@ -1,5 +1,17 @@
 # Goal addendum — 2026-10-07
 
+## Web current-main Node 22 qualification
+
+Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed a disposable
+empty-database serial run under pinned Node `22.23.3`: pretest **49/49**, main
+**879/880**, one explicit environment-gated skip, zero failures. The reviewed
+bootstrap, all **37** migrations, schema, negative-boundary **2/2**, truth
+registry **25/25**, and typecheck passed; the worktree/database were removed.
+This does not close provider lifecycle, production reconciliation, build/deploy,
+or final acceptance gates. No checkbox changed; backlog remains **218 checked /
+62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-node22-current-main-2026-10-07.md`.
+
 ## QUAL-CLI-006 Node 22 current-main qualification
 
 Exact CLI `origin/main` `7d060b2852551cc017bbb2b5f70bad22843e7273` passed a

@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-QUAL-WEB Node 22 current-main qualification · 2026-10-07
+
+Exact Web main passed the empty-database serial suite with **49/49** pretests,
+**879/880** main tests, one explicit skip, and zero failures under pinned Node
+`22.23.3`; all **37** migrations, schema, negative-boundary, truth registry,
+and typecheck also passed. Remaining risks are external/provider and release
+boundaries: production reconciliation, Razorpay lifecycle, build/deploy
+acceptance, and final independent acceptance remain absent. Owner:
+Web/release qualification. No production/provider/database/deployment
+mutation occurred.
+
 ## R-QUAL-CLI-006 Node 22 runtime result · 2026-10-07
 
 The exact current CLI head passed fresh-install test **12/12**, typecheck
