@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013 current-head payment contract verification · 2026-10-07
+
+- **Source:** Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474`.
+- **Verification:** Focused payment/configuration/checkout/webhook/runtime
+  command passed **47/47**, with zero failures and zero skips.
+- **Coverage:** Server/catalog method configuration, signed commercial binding,
+  bounded prefill, provider-route error boundaries, read-only order status,
+  captured/failed/refunded actions, replay/conflict behavior, and production
+  runtime validation.
+- **Limit:** No provider runtime or production evidence; PLAN-WEB-014/015 and
+  the payment release gate remain open.
+
 ## QUAL-WEB-006 organization-directory AX/performance probe · 2026-10-07
 
 The authenticated production `/orgs` empty state was inspected through the

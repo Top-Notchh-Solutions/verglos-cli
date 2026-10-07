@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013 current-head payment contract verification
+
+Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474` passed the
+bounded local payment contract command with **47/47 tests, 0 failures, and 0
+skips**. The run covers configured hosted methods, Pay Later, signed catalog
+and method binding, prefill validation, route error boundaries, read-only order
+status, captured/failed/refunded webhook actions, replay/conflict behavior, and
+production runtime configuration validation. It is code-side evidence only:
+provider lifecycle, entitlement reconciliation, and production evidence remain
+open. No checkbox changed; backlog remains **218 checked / 62 unchecked / 280
+total (77.9%)**. Private evidence:
+`docs/shipping/evidence/plan-web-013-payment-contract-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-CLI-006 standards validation corpus
 
 CLI PR #79 exact head `13d144438045da574e7cbab6a21ec73341b8f796` adds a

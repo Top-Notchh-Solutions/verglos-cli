@@ -3971,3 +3971,17 @@ before enabling any destructive adapter.
   remain open.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-013-hosted-prefill-2026-10-07.md`.
+# 2026-10-07 — PLAN-WEB-013 current-head payment contract verification
+
+- **Batch:** Re-verify the current hosted-payment source boundary after the
+  prefill and Pay Later changes, without browser/provider access.
+- **Result:** Web PR #149 exact head `b73fdd3` passed the focused payment,
+  checkout, route, webhook, and runtime-config command **47/47 / 0 failures /
+  0 skips**.
+- **Backlog:** No accepted IDs; count remains **218 checked / 62 unchecked /
+  280 total (77.9%)**.
+- **Boundary:** No Chrome, Razorpay, database, deployment, migration,
+  entitlement, credential, or production operation occurred. Provider lifecycle
+  and reconciliation evidence remain required for PLAN-WEB-014/015.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-013-payment-contract-2026-10-07.md`.

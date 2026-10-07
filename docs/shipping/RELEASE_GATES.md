@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013 current-head payment contract verification · 2026-10-07
+
+Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474` passed the
+focused payment/configuration/webhook contract command **47/47, 0 failures,
+0 skips**. This confirms current-source fail-closed method configuration,
+commercial binding, prefill parsing, route boundaries, webhook replay/error
+handling, and production key validation. It does not pass the payment gate:
+provider method display/lifecycle, entitlement reconciliation, renewal,
+refund, and production evidence remain open. No checkbox or production state
+changed.
+
 ## QUAL-WEB-005 preview browser boundary · 2026-10-07
 
 Chrome CDP reached the PR #153 Preview URL but Vercel deployment protection
