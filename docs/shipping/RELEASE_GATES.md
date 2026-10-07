@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013 Checkout retry-state hardening · 2026-10-07
+
+PR #149 exact head `b78f732424a388f03a9a9740e570b0f01d7297e7` passes local
+focused 23/23, typecheck, production build, and diff checks. The client now
+returns failed hosted attempts to a retryable state and does not show a
+submitted state when `checkout.open()` throws. Vercel and the new Verify run
+were pending at capture. This does not pass the payment gate or change any
+backlog checkbox.
+
 ## PLAN-WEB-014 Test Mode method-display probe · 2026-10-07
 
 The isolated Test Mode provider probe created one order and rendered UPI,

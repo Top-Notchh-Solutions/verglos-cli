@@ -1,5 +1,15 @@
 # Goal addendum — 2026-10-07
 
+## PLAN-WEB-013 Checkout retry-state hardening
+
+PR #149 exact head `b78f732424a388f03a9a9740e570b0f01d7297e7` hardens the
+hosted Checkout client against provider failure, pre-confirmation dismissal,
+and `open()` exceptions. Local focused 23/23, typecheck, production build, and
+diff checks pass; hosted checks were pending at capture. No payment,
+entitlement, production, database, migration, deployment, or checkbox state
+changed. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence: `docs/shipping/evidence/plan-web-013-checkout-retry-state-2026-10-07.md`.
+
 ## PLAN-WEB-014 Test Mode method-display probe
 
 The isolated Test Mode provider probe rendered the configured hosted methods,

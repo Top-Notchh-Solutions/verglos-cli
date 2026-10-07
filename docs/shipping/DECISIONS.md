@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-013 Checkout retry-state hardening · 2026-10-07
+
+- **Decision:** Hosted Checkout failures and pre-confirmation dismissal must
+  return to a retryable state; the UI must not imply a submitted payment when
+  the provider rejected `open()`.
+- **Evidence:** PR #149 exact head `b78f732`; focused 23/23, typecheck, build,
+  and diff checks pass. Hosted checks were pending at capture.
+- **Boundary:** This changes presentation state only and does not grant access
+  or replace webhook authority. PLAN-WEB-013/014/015 remain open; no provider,
+  production, database, or deployment mutation occurred.
+
 ## PLAN-WEB-014 Test Mode method-display probe · 2026-10-07
 
 - **Decision:** Record the direct Test Mode run as provider UI evidence only;

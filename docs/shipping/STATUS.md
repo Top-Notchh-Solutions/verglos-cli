@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013 Checkout retry-state hardening
+
+Web PR #149 exact head `b78f732424a388f03a9a9740e570b0f01d7297e7` now keeps
+failed hosted Checkout attempts retryable, distinguishes dismissal before
+confirmation, and avoids showing a submitted state if `checkout.open()`
+throws. Focused payment/checkout/webhook and route-contract tests passed
+23/23; typecheck, production build, and diff check passed. At capture Vercel
+was pending and the new Verify run had not appeared. This is code-side
+progress only: PLAN-WEB-013/014/015 remain open and backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-013-checkout-retry-state-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-014 Test Mode method-display probe
 
 The isolated Razorpay Test Mode probe created one provider order and rendered
