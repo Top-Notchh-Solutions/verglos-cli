@@ -18,3 +18,8 @@ production account-enabled method set remains unknown, so no value for
 `RAZORPAY_ENABLED_PAYMENT_METHODS` may be guessed and no production hosted
 checkout cutover may be promoted from this result. The deployment at
 `8b843da` failed before build because that variable is absent.
+
+A subsequent automatic Production deployment from Web main `2e86514` failed at
+the same `pnpm config:check` stage with the same missing-variable message. This
+confirms the blocker is current on the merged mainline, not limited to the
+earlier deployment.

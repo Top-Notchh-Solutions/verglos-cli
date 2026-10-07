@@ -4428,6 +4428,9 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
 - **Deployment result:** Vercel’s production build from main `8b843da` failed
   runtime-config validation before build completion because the method variable
   is absent.
+- **Current-mainline confirmation:** The subsequent automatic Production
+  deployment from Web main `2e86514` failed at the same pre-build
+  runtime-config stage with the same missing-variable message.
 - **Disposition:** Do not guess the production method list or promote the
   hosted-checkout cutover. PLAN-WEB-013/014/015 remain open.
 - **Evidence:** `docs/shipping/evidence/razorpay-production-method-preflight-2026-10-07.md`.

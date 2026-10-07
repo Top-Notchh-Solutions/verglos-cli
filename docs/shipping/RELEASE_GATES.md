@@ -269,6 +269,9 @@ account-enabled production method set therefore remains unknown; do not guess
 The deployment built from Web main `8b843da` failed at runtime-config validation
 because that variable is absent. Payment and deployment gates remain open.
 Evidence: `docs/shipping/evidence/razorpay-production-method-preflight-2026-10-07.md`.
+The subsequent automatic Production deployment from Web main `2e86514` failed at
+the same pre-build runtime-config stage with the same missing-variable message,
+confirming that the blocker is current on merged mainline.
 
 ## QUAL-CLI-006 official in-toto artifact binding · 2026-10-07
 

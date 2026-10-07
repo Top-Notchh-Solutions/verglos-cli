@@ -3142,6 +3142,9 @@ The deployment from main `8b843da` therefore failed runtime-config validation;
 no method list was guessed and no deployment promotion or payment action was
 taken. PLAN-WEB-013/014/015 remain open. Evidence:
 `docs/shipping/evidence/razorpay-production-method-preflight-2026-10-07.md`.
+The subsequent automatic Production deployment from Web main `2e86514` failed
+at the same pre-build runtime-config stage with the same missing-variable
+message, confirming the blocker is current on merged mainline.
 
 Web PR #149 exact head `e46299a` subsequently merged as `8b843da` after hosted
 typecheck/schema, Vercel, and Preview Comments passed. This merges the
