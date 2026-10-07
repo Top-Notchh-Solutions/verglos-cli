@@ -26,6 +26,18 @@ tests **846/868** with 22 explicit skips and zero failures; focused SCM/GitHub
 tests **19/19**; typecheck, schema, and 29-migration ordering passed. No
 checkbox changed and no provider/browser/production write occurred.
 
+# 2026-10-07 — Authenticated modified-client probe boundary
+
+- **Runtime:** The existing authenticated CDP page at `https://verglos.com/orgs`
+  rendered `No organizations yet`; no organization identifier or tenant route
+  was available.
+- **Disposition:** `PLAN-CLI-003` remains open. No organization was created and
+  no forged authenticated organization request was sent; this is a blocker
+  record, not acceptance evidence.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**; no checkbox
+  changed.
+- **Evidence:** `docs/shipping/evidence/modified-client-authenticated-org-absence-2026-10-07.md`.
+
 # 2026-10-07 — CLI origin/main reconciliation and Hunt adversarial qualification
 
 - **Source:** Preserved founder-owned checkout; clean worktree exact

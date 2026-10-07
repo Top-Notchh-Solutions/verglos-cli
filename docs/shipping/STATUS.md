@@ -22,6 +22,14 @@ with 22 explicit skips and zero failures, focused SCM/GitHub tests **19/19**,
 typecheck, schema, and 29-migration ordering passed. This is revalidation only;
 no checkbox changed and live App/org/webhook evidence remains open.
 
+The authenticated modified-client probe reached the existing CDP session and
+found the signed-in account has no organizations (`/orgs` rendered `No
+organizations yet`). No organization was created and no forged authenticated
+organization request was sent. `PLAN-CLI-003` remains open; this is a blocker
+record, not acceptance evidence. Backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/modified-client-authenticated-org-absence-2026-10-07.md`.
+
 ## 2026-10-07 · CLI origin/main reconciliation and Hunt adversarial qualification
 
 The founder-owned CLI checkout was preserved because it contains untracked
