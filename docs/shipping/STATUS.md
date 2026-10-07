@@ -21,16 +21,16 @@ are still open. Evidence addendum:
 `docs/shipping/evidence/qual-web-006-dashboard-runtime-2026-10-07.md`.
 Backlog remains **218 checked / 62 unchecked / 280 total**.
 
-## 2026-10-07 · PLAN-CLI-004 compatibility PR reopened for hosted verification
+## 2026-10-07 · PLAN-CLI-004 compatibility PR hosted verification terminal
 
 CLI branch `feat/cli-plan-004-compat` at `059918c` is clean, pushed, one commit
 ahead of `origin/main`, and now has PR #72 open/mergeable. The branch carries
 supported-entitlement compatibility coverage on top of the opaque
 catalog/cache contract. Previously recorded local full tests, focused tests,
-typecheck, and build pass. Hosted in-toto, self-scan, and all Ubuntu/macOS
-Node 20/22/24 cells are green; Windows Node 20/22/24 are still in progress.
-PLAN-CLI-004 remains unchecked pending the terminal Windows matrix, deployed
-signer/catalog alignment, old-token migration, and activation evidence. No
+typecheck, and build pass. Hosted in-toto run `37550255842`, self-scan
+`37550255844`, and all Ubuntu/macOS/Windows Node 20/22/24 cells are green.
+PLAN-CLI-004 remains unchecked pending deployed signer/catalog alignment,
+old-token migration, hosted activation evidence, and R-041 rotation. No
 production operation occurred. Private evidence:
 `docs/shipping/evidence/plan-cli-004-pr72-2026-10-07.md`.
 

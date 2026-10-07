@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## PLAN-CLI-004 hosted verification · 2026-10-07
+
+CLI PR #72 head `059918cf920d136ded4528ad7512b82026459ece` is open, mergeable,
+and GitHub reports merge state `CLEAN`. Platform run `37550255842` passes
+in-toto and all Ubuntu/macOS/Windows Node 20/22/24 cells; self-scan
+`37550255844` passes. This is terminal code/packaging verification only and
+does not close PLAN-CLI-004 or Gate 0/5: deployed signer/catalog alignment,
+old-token migration, hosted activation, production safety, and R-041 rotation
+remain open. No production operation occurred.
+
 ## QUAL-WEB-006 browser continuation · 2026-10-07
 
 The authenticated account shell remains clean in read-only Chrome DevTools:

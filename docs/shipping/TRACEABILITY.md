@@ -18,15 +18,16 @@
   large-data evidence, human screen-reader review, and field CWV. See
   `docs/shipping/evidence/qual-web-006-dashboard-runtime-2026-10-07.md`.
 
-## PLAN-CLI-004 compatibility PR #72 · 2026-10-07
+## PLAN-CLI-004 compatibility PR #72 terminal hosted checks · 2026-10-07
 
 - **Implementation:** CLI head `059918c` adds supported-entitlement
   compatibility coverage on top of the opaque catalog/cache implementation at
   `dacd286`.
 - **Verification:** Existing branch evidence records full CLI tests, focused
-  compatibility tests, typecheck, and build passing. PR #72 is open/mergeable;
-  hosted in-toto, self-scan, and all Ubuntu/macOS Node 20/22/24 cells pass;
-  Windows Node 20/22/24 remain in progress.
+  compatibility tests, typecheck, and build passing. Platform run
+  `37550255842` and self-scan `37550255844` pass in-toto, self-scan, and all
+  Ubuntu/macOS/Windows Node 20/22/24 cells. PR #72 is open, mergeable, and
+  GitHub reports `CLEAN`; no review decision is recorded.
 - **Boundary:** PLAN-CLI-004 remains unchecked pending hosted platform checks,
   deployed signer/catalog alignment, old-token migration evidence, and hosted
   activation integration. No production operation occurred.
