@@ -2384,8 +2384,8 @@ success/failure/refund/renewal/cancellation/replay matrix remain open.
 unchecked / 280 total (77.9%)**. Private evidence:
 `docs/shipping/evidence/plan-web-013-test-mode-order-2026-10-07.md`.
 
-The same bounded test-mode order was opened through the approved Chrome CDP
-session in Razorpay hosted Checkout twice and closed without submission. The
-checkout-open result is recorded, but the child execution context exposed no
-stable method labels to the bounded text projection, so no payment method is
-claimed from the browser probe.
+Two separate bounded test-mode orders were each opened once through the
+approved Chrome CDP session in Razorpay hosted Checkout and closed without
+submission. The checkout-open result is recorded, but the child execution
+context exposed no stable method labels to the bounded text projection, so no
+payment method is claimed from the browser probe.
