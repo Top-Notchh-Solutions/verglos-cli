@@ -1,18 +1,22 @@
 # Verglos V1 shipping status
 
-## 2026-10-07 · ACCEPT-002/003 current-root substrate refresh
+## 2026-10-07 · ACCEPT-002/003 latest-source substrate refresh
 
-The private acceptance harness ran against CLI `b070942` and Web `cbc0f5a`:
-the configured CLI package suite passed 34/34, Web passed 888/916 with 28
-environment-gated skips, and composed Studio/Enterprise/Team/quality
-substrates passed 74/74. All commands exited 0. The current CLI command
-enumerates 34 tests rather than the historical 241-test surface; this is
-recorded as a coverage limitation, not treated as equivalent evidence.
+The private acceptance harness ran against unreleased CLI `ad6ee14` and Web
+`cbc0f5a`: the configured CLI package suite passed 241/241, Web passed 888/916
+with 28 environment-gated skips, and composed Studio/Enterprise/Team/quality
+substrates passed 74/74. All commands exited 0. An earlier compatibility-root
+run at `b070942` produced 34/34 and is explicitly excluded from latest-source
+acceptance evidence.
 ACCEPT-002/003 remain unchecked because hosted/provider/customer/reviewer
-acceptance and missing story coverage remain open. No production operation
+acceptance and open story coverage remain open. No production operation
 occurred. Private evidence:
 `docs/shipping/evidence/acceptance-stories-verification-2026-10-07.md`.
 Backlog remains **218 checked / 62 unchecked / 280 total**.
+Acceptance workflow and study-protocol integrity checks also pass; external
+contact, participant comprehension, Hunt adjudication, and customer
+acceptance remain open. Final corpus verification was intentionally deferred
+until release-candidate freeze.
 
 ## 2026-10-07 · QUAL-WEB-005 privacy/deletion/retention qualification
 

@@ -1,13 +1,13 @@
 # Verglos V1 release gates
 
-## ACCEPT-002/003 current-root substrate refresh · 2026-10-07
+## ACCEPT-002/003 latest-source substrate refresh · 2026-10-07
 
-The private harness passes CLI 34/34, Web 888/916 with 28 explicit
-environment-gated skips, and composed Studio/Enterprise/Team/quality 74/74.
-The current CLI configured package surface is only 34 tests versus the
-historical 241-test result, so the missing coverage is not credited. This does
-not close ACCEPT-002/003 or Gate 6: hosted/provider/customer/reviewer evidence
-and complete story coverage remain open. No production operation occurred.
+The private harness passes unreleased CLI 241/241, Web 888/916 with 28
+explicit environment-gated skips, and composed Studio/Enterprise/Team/quality
+74/74. An earlier compatibility-root run at `b070942` was only 34/34 and is
+not credited as latest-source evidence. This does not close ACCEPT-002/003 or
+Gate 6: hosted/provider/customer/reviewer evidence and complete story coverage
+remain open. No production operation occurred.
 
 ## QUAL-WEB-005 privacy/deletion/retention qualification · 2026-10-07
 

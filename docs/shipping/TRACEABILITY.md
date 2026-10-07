@@ -1,15 +1,19 @@
 # Verglos V1 traceability
 
-## ACCEPT-002/003 current-root substrate refresh · 2026-10-07
+## ACCEPT-002/003 latest-source substrate refresh · 2026-10-07
 
-- **Sources:** CLI `b070942dcf52fa01861573ce10182b69da2e6476` and Web
+- **Sources:** Unreleased CLI `ad6ee1479c887c59eb6630da4754a2e0b7b4045e` and Web
   `cbc0f5a89179995569308695419d4578c57ce716` were passed explicitly to the
   private verifier.
-- **Results:** CLI configured package suite 34/34; Web 888/916 with 28
+- **Results:** CLI configured package suite 241/241; Web 888/916 with 28
   environment-gated skips and 0 failures; composed substrates 74/74. All
   commands exited 0 and output hashes are retained in the private JSON.
-- **Limitation:** The current CLI package command enumerates 34 tests, not the
-  historical 241-test surface. No missing coverage is inferred as passing.
+- **Controls:** Acceptance protocol and study-protocol integrity checks pass;
+  external contact, participants, and Hunt adjudication remain explicitly
+  open. The final corpus verifier was intentionally deferred until release-
+  candidate freeze.
+- **Audit note:** An earlier compatibility-root run at `b070942` enumerated
+  34 tests and is excluded from latest-source acceptance evidence.
 - **Boundary:** ACCEPT-002/003 remain open for complete hosted/provider/
   customer/reviewer evidence and the missing story coverage. See
   `docs/shipping/evidence/acceptance-stories-verification-2026-10-07.md`.
