@@ -29,6 +29,12 @@ head `25b4470`. The reconciled branch passed focused SCM **33/33**, serial Web
 App/org/webhook/cutover and independent acceptance remain open. Backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**.
 
+Web PR #153 exact reconciled head `8a0bc3b` merged as `2e86514` after hosted
+checks passed. The deletion substrate and 37-entry journal are now on Web
+main; `QUAL-WEB-005` remains open for authenticated non-production E2E,
+legal/customer-held disposition, production migration, restore/rollback,
+reconciliation, and independent acceptance. No checkbox changed.
+
 The authenticated modified-client probe reached the existing CDP session and
 found the signed-in account has no organizations (`/orgs` rendered `No
 organizations yet`). No organization was created and no forged authenticated

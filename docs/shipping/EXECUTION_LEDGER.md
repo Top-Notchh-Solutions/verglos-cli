@@ -4442,3 +4442,15 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
   open.
 - **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
   (77.9%)**.
+
+# 2026-10-07 — Web PR #153 merged after migration reconciliation
+
+- **Merge:** PR #153 exact head `8a0bc3b` merged as `2e86514` after hosted
+  typecheck/schema, Vercel, Preview Comments, and GitGuardian checks passed.
+- **Disposition:** The deletion worker/inventory substrate and reconciled
+  37-entry journal are now on Web main. `QUAL-WEB-005` remains open for
+  authenticated non-production E2E, legal/customer-held disposition,
+  production migration, restore/rollback, reconciliation, and independent
+  acceptance.
+- **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
+  (77.9%)**.

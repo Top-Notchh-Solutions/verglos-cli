@@ -72,3 +72,8 @@ PR #149 was subsequently merged as `8b843da` after its hosted typecheck/schema,
 Vercel, and Preview Comments checks passed. This merge advances the code-side
 checkout/migration implementation only; payment lifecycle, production
 reconciliation, and release gates remain open.
+
+PR #153 was subsequently merged as `2e86514` after the reconciled hosted
+checks passed. This incorporates the deletion substrate and 37-entry journal
+into Web main; it does not accept `QUAL-WEB-005` or authorize production
+migration/deletion.
