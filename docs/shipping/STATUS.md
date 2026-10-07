@@ -3121,3 +3121,11 @@ code-side hosted checkout/payment-catalog phase only; PLAN-WEB-011/012/013/014/
 015 remain open for provider lifecycle, all-enabled-method qualification,
 production reconciliation, and release evidence. Backlog remains **218 checked /
 62 unchecked / 280 total (77.9%)**.
+
+PR #153 was reconciled with merged Web main after the PR #149 merge: exact
+pushed head `8a0bc3b` keeps billing migrations `0029–0030`, renumbers the
+deletion series to `0031–0036`, and validates a 37-entry journal. Typecheck,
+focused tests (**27/29 with 2 explicit DB skips**), full serial (**857/880 with
+23 skips, 0 failures**), build, schema, and diff checks pass. Hosted Verify for
+the new head is pending. QUAL-WEB-005 remains open; backlog is unchanged at
+**218 checked / 62 unchecked / 280 total (77.9%)**.

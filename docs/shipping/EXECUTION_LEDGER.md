@@ -4386,6 +4386,21 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
   browser mutation occurred. PRs remain open and must not be merged solely on
   this code-side correction.
 
+# 2026-10-07 — Web PR #153 migration reconciliation after PR #149 merge
+
+- **Code:** PR #153 exact pushed head `8a0bc3b` incorporates `origin/main`
+  merge `8b843da`; billing migrations remain `0029–0030`, and deletion
+  migrations were renumbered to `0031–0036` with journal/test references updated.
+- **Verification:** Typecheck passed when run alone; focused deletion/payment/
+  migration tests passed **27/29** with **2 explicit DB skips**; full serial Web
+  suite passed **857/880** with **23 explicit skips** and zero failures; build,
+  schema check, ordered **37-migration** check, and diff check passed.
+- **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
+  (77.9%)**. QUAL-WEB-005 remains open for its operational and independent
+  gates.
+- **Boundary:** No production migration, deletion, payment, provider,
+  deployment, credential, or browser-state write occurred.
+
 # 2026-10-07 — Web PR #149 merged after hosted verification
 
 - **Merge:** Web PR #149 exact head `e46299a` merged as `8b843da` after hosted

@@ -55,13 +55,16 @@
 
 ## Merge-candidate port
 
-The same guard was ported cleanly to Web PR #153, the 35-migration deletion
-candidate, at exact pushed head `47af6fa`. Its focused migration/guard/audit
+The same guard was ported cleanly to Web PR #153, the deletion candidate. Its
+pre-reconciliation head was `47af6fa`; after PR #149 was merged, billing
+migrations remain `0029..0030` and deletion migrations were safely renumbered
+to `0031..0036` at exact pushed head `8a0bc3b`. Its focused migration/guard/audit
 tests pass **12/12**, typecheck, `db:check`, and `db:migrations:check` verify
-**35 ordered migrations**, and its serial suite passes **850/873 with 23
+**37 ordered migrations**, and its serial suite passes **857/880 with 23
 explicit skips and 0 failures**. A fresh Docker `postgres:15` rehearsal again
-left zero public tables on default refusal and applied all 35 migrations plus
-the five baseline tables only under explicit local opt-in. PR #153 remains
+left zero public tables on default refusal and applied all 35 deletion-candidate
+migrations plus the five baseline tables only under explicit local opt-in before
+the merge reconciliation. PR #153 remains
 open and must not be merged/deployed until its independent privacy, migration,
 restore/rollback, and release gates are accepted.
 
