@@ -2618,3 +2618,18 @@ changed and no checkbox was closed.
   so slug-scoped dashboard, screen-reader, and field-CWV evidence remain open.
 - **Boundary:** no data/account/payment/provider mutation occurred.
 - **Backlog:** no checkbox changed; **218 checked / 62 unchecked / 280 total**.
+
+# 2026-10-07 — organization creation CSRF hardening
+
+- **Batch:** audit the state-changing `/api/v1/organizations` creation route
+  after adding the production organization entry point.
+- **Code:** Web PR #152, head `415ce17`, adds exact same-origin enforcement
+  before authentication/persistence plus a focused route contract.
+- **Local:** route contract **1/1 pass**, typecheck, Drizzle check, and 38-page
+  build pass.
+- **Hosted:** GitGuardian, Preview Comments, hosted workflow `37557549508`, and
+  Vercel preview passed. PR #152 merged as
+  `6fccfb26ffb707e53c3ef44166b42280be29de55`.
+- **Boundary:** no production/provider/database write, migration, payment, or
+  browser mutation; no checkbox changed; **218 checked / 62 unchecked / 280
+  total**.

@@ -1499,3 +1499,12 @@ the merged `/orgs` entry route. Existing authenticated page 13 received HTTP
 200, rendered the organization empty state, loaded the route chunk, and
 reported no console messages. No organization membership was available for
 slug-scoped dashboard exercise; the broader `QUAL-WEB-006` gate remains open.
+
+# 2026-10-07 · organization creation CSRF hardening
+
+The state-changing organization creation route now rejects cross-origin POSTs
+before auth/database work. Web PR #152 carries the focused ordering contract;
+local test/typecheck/schema/build pass, hosted workflow `37557549508`, Vercel,
+GitGuardian, and Preview Comments passed, and the PR merged as
+`6fccfb26ffb707e53c3ef44166b42280be29de55`. This is remediation evidence
+only; no checkbox changed.

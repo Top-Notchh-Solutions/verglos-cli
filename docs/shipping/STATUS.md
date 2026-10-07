@@ -1658,3 +1658,14 @@ active organization membership, so slug-scoped dashboard runtime remains
 untested. Private evidence:
 `docs/shipping/evidence/qual-web-006-org-directory-production-2026-10-07.md`.
 `QUAL-WEB-006` remains unchecked.
+
+# 2026-10-07 · organization creation CSRF hardening
+
+Web PR #152 (`415ce17`) hardens `POST /api/v1/organizations` with a strict
+same-origin check before authentication or persistence and adds a focused
+ordering contract. Local route test 1/1, typecheck/schema/build pass.
+GitGuardian, Preview Comments, hosted type/schema run `37557549508`, and Vercel
+preview passed. PR #152 merged as
+`6fccfb26ffb707e53c3ef44166b42280be29de55`. This is a security follow-up, not
+a new backlog acceptance or checkbox change. Private evidence:
+`docs/shipping/evidence/org-creation-csrf-pr152-2026-10-07.md`.
