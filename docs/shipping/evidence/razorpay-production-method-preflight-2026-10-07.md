@@ -23,3 +23,8 @@ A subsequent automatic Production deployment from Web main `2e86514` failed at
 the same `pnpm config:check` stage with the same missing-variable message. This
 confirms the blocker is current on the merged mainline, not limited to the
 earlier deployment.
+
+After Web PR #154 merged, the automatic Production deployment from exact main
+`1498837` (`verglos-aqnwzuqu5-anuragyadav20062002s-projects.vercel.app`) again
+failed before build at `pnpm config:check` with the same two runtime-config
+errors. No production configuration or deployment promotion was attempted.

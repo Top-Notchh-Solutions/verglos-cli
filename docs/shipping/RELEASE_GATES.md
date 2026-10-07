@@ -272,6 +272,9 @@ Evidence: `docs/shipping/evidence/razorpay-production-method-preflight-2026-10-0
 The subsequent automatic Production deployment from Web main `2e86514` failed at
 the same pre-build runtime-config stage with the same missing-variable message,
 confirming that the blocker is current on merged mainline.
+After PR #154 merged as `1498837`, Production again failed before build at
+`pnpm config:check` for the same absent variable. No production configuration
+write or promotion occurred.
 
 ## QUAL-CLI-006 official in-toto artifact binding · 2026-10-07
 
@@ -1102,3 +1105,12 @@ Gate 2/4/6 or accept `QUAL-WEB-005`: authenticated non-production E2E,
 approved dispositions, production migrations/cutover, reconciliation,
 restore/RPO, rollback, and independent acceptance remain open. No checkbox or
 production state changed.
+
+## PLAN-WEB-014 current-main local integration · 2026-10-07
+
+The exact merged Web main `1498837` passed a disposable PostgreSQL 15 run with
+37 ordered migrations and **22/22** payment/catalog/webhook/replay/refund/
+lifecycle tests, plus typecheck, schema check, and a preview-mode **43-page**
+build. This is isolated synthetic-event evidence only; it does not pass the
+provider lifecycle or production reconciliation gates. PLAN-WEB-014/015 remain
+open. Evidence: `docs/shipping/evidence/plan-web-014-current-main-local-integration-2026-10-07.md`.

@@ -3149,6 +3149,11 @@ The subsequent automatic Production deployment from Web main `2e86514` failed
 at the same pre-build runtime-config stage with the same missing-variable
 message, confirming the blocker is current on merged mainline.
 
+After PR #154 merged as `1498837`, the automatic Production deployment from
+that exact main again failed before build at `pnpm config:check` because
+`RAZORPAY_ENABLED_PAYMENT_METHODS` is absent. The payment/deployment gate stays
+open; no production configuration write was attempted.
+
 Web PR #149 exact head `e46299a` subsequently merged as `8b843da` after hosted
 typecheck/schema, Vercel, and Preview Comments passed. This merges the
 code-side hosted checkout/payment-catalog phase only; PLAN-WEB-011/012/013/014/
@@ -3172,3 +3177,13 @@ checks then passed and PR #154 merged as `1498837`. Live GitHub
 App/org/webhook/cutover evidence remains open; GITHUB-WEB-001..004 remain
 unchecked for authorized installation, delivery/lifecycle, cutover, and
 independent acceptance.
+
+## 2026-10-07 · PLAN-WEB-014 current-main local integration
+
+Fresh worktree at merged Web main `1498837` passed the isolated local payment
+integration batch: 37 ordered migrations, **22/22** payment/catalog/webhook
+tests, typecheck, Drizzle schema check, and a preview-mode **43-page** build.
+The run used a disposable PostgreSQL 15 container and synthetic signed events;
+no provider credential/API call or production operation occurred. This is
+implementation/integration evidence only; PLAN-WEB-014/015 remain open.
+Evidence: `docs/shipping/evidence/plan-web-014-current-main-local-integration-2026-10-07.md`.

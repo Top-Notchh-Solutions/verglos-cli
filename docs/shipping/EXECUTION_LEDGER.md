@@ -4434,6 +4434,9 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
 - **Current-mainline confirmation:** The subsequent automatic Production
   deployment from Web main `2e86514` failed at the same pre-build
   runtime-config stage with the same missing-variable message.
+- **Post-merge confirmation:** After PR #154 merged as `1498837`, the automatic
+  Production deployment from that exact main failed before build at
+  `pnpm config:check` for the same absent variable.
 - **Disposition:** Do not guess the production method list or promote the
   hosted-checkout cutover. PLAN-WEB-013/014/015 remain open.
 - **Evidence:** `docs/shipping/evidence/razorpay-production-method-preflight-2026-10-07.md`.
@@ -4448,6 +4451,19 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
   open.
 - **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
   (77.9%)**.
+
+# 2026-10-07 — PLAN-WEB-014 current-main local integration
+
+- **Code:** Exact merged Web main `1498837` in fresh worktree
+  `qual/web-plan-014-current-main`.
+- **Verification:** Disposable PostgreSQL 15 bootstrap and 37 ordered
+  migrations; payment/catalog/webhook/replay/refund/lifecycle tests **22/22**;
+  typecheck, Drizzle schema check, and preview-mode **43-page** build passed.
+- **Boundary:** Synthetic signed events only. No Razorpay API/credential,
+  hosted payment, provider webhook, production configuration/database,
+  deployment, or customer-state operation occurred. PLAN-WEB-014/015 remain
+  open and no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-current-main-local-integration-2026-10-07.md`.
 
 # 2026-10-07 — Web PR #154 final base reconciliation
 
