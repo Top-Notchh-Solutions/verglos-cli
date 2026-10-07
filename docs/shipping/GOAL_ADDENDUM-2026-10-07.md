@@ -236,3 +236,17 @@ production migrations `0029`–`0034`, deletion E2E, disposition/consent
 acceptance, reconciliation, restore/RPO, rollback, and independent review
 remain required. Backlog remains **218 checked / 62 unchecked / 280 total**;
 no production or destructive operation occurred.
+
+# 2026-10-07 · QUAL-WEB-005 supporting executor integration
+
+The current PR #153 source passed the full account-deletion integration **1/1**
+against a bounded disposable PostgreSQL 18 `verglos_test` container. It
+exercised hold blocking/release, lease retry/reclaim/stale fences, all 16
+supporting dispositions and retained-row receipts, channel-credential
+approval blocking, all seven hosted-kind deletes, idempotent terminal receipts,
+batch execution, and replay. The exact test container was removed afterward.
+This is stronger runtime evidence, not production acceptance: migrations
+`0029`–`0034`, authenticated browser E2E, consent/legal/customer-held
+decisions, reconciliation, restore/RPO, rollback, and independent review
+remain required. Backlog remains **218 checked / 62 unchecked / 280 total**;
+no production or destructive operation occurred.

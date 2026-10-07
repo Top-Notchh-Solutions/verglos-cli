@@ -2329,3 +2329,21 @@ rollback, and independent acceptance remain open. Backlog remains **218
 checked / 62 unchecked / 280 total (77.9%)**. No production or destructive
 operation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-hold-authority-route-929da19-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 supporting executor disposable integration
+
+The current Web PR #153 source passed the real account-deletion integration
+**1/1** against a disposable PostgreSQL 18 `verglos_test` container. The run
+covered hold blocking and release, lease retry/reclaim and stale fences, all
+16 supporting-table dispositions with retained-row receipts, channel-credential
+approval blocking, all seven hosted-kind deletes, idempotent receipts,
+terminal audit completion, batch execution, and replay protection. The exact
+test container was removed after the run.
+
+This strengthens runtime qualification only. `QUAL-WEB-005` remains unchecked
+for production migration/cutover, authenticated browser E2E, consent and
+legal/customer-held decisions, production reconciliation, restore/RPO,
+deployment rollback, and independent acceptance. Backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**. No production or destructive
+operation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-supporting-executor-integration-929da19-2026-10-07.md`.

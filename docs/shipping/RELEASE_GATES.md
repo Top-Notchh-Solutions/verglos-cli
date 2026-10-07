@@ -398,6 +398,17 @@ legal/customer-held-record decisions, consent/vendor inventory, and
 end-to-end production deletion evidence remain open. No production operation
 occurred.
 
+Supporting-executor integration update (2026-10-07): current Web PR #153
+source passed `account-deletion-jobs.integration.test.ts` **1/1** against a
+disposable PostgreSQL 18 `verglos_test` database. The run covers the full
+supporting disposition graph, hold/lease behavior, approval blocking, all
+seven hosted kinds, receipts, batch execution, and replay. This strengthens
+Gate 2 qualification but does not close Gate 2/4/6 or accept `QUAL-WEB-005`:
+production migration/cutover, authenticated browser E2E, consent and
+legal/customer-held decisions, reconciliation, restore/RPO, rollback, and
+independent acceptance remain open. The exact container was removed; no
+production migration or deletion occurred.
+
 ## QUAL-WEB-006 large-data qualification · 2026-10-07
 
 Web PR #150 (`70680f8`) adds bounded integration evidence for 45 same-tenant

@@ -3445,3 +3445,26 @@ before enabling any destructive adapter.
   write, migration, deletion, or browser mutation occurred.
 - **Evidence:**
   `docs/shipping/evidence/qual-web-005-hold-authority-route-929da19-2026-10-07.md`.
+
+# 2026-10-07 — QUAL-WEB-005 supporting executor disposable integration
+
+- **Batch:** run the real account-deletion store/runner integration against a
+  bounded disposable PostgreSQL 18 database after the supporting executor and
+  hold routes landed.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total
+  (77.9%)**.
+- **Runtime:** disposable container `verglos-qual-db-20261007`, isolated
+  `verglos_test`, local port 55432; integration **1/1 pass**. The exact
+  container was removed after the run.
+- **Evidence:** hold blocking/release, lease retry/reclaim/stale-fence safety,
+  all 16 supporting dispositions, retained-row receipts, channel-credential
+  approval block, seven hosted-kind deletes, idempotency, terminal audit
+  receipt, batch runner, and replay protection.
+- **Boundary:** no production/database/provider/payment/deployment write,
+  migration, deletion, or browser mutation. Production migration/cutover,
+  authenticated browser E2E, consent/legal/customer-held decisions,
+  reconciliation, restore/RPO, rollback, and independent acceptance remain
+  open.
+- **Evidence file:**
+  `docs/shipping/evidence/qual-web-005-supporting-executor-integration-929da19-2026-10-07.md`.

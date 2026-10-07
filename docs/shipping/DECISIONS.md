@@ -16,6 +16,19 @@
   restore/RPO, deployment rollback, or independent acceptance. No production
   or destructive operation occurred; no checkbox changed.
 
+## QUAL-WEB-005 supporting executor disposable integration · 2026-10-07
+
+- **Decision:** Accept the disposable PostgreSQL integration as stronger
+  runtime qualification; keep `QUAL-WEB-005` and production gates open.
+- **Evidence:** Web PR #153 current source; PostgreSQL 18 `verglos_test`
+  integration **1/1 pass** covering the supporting graph, per-kind deletes,
+  holds, leases, receipts, runner, replay, and approval blocking. The exact
+  test container was removed after execution.
+- **Boundary:** This does not prove production migration/cutover,
+  authenticated browser E2E, consent/legal/customer-held approval,
+  production reconciliation, restore/RPO, rollback, or independent review.
+  No production or destructive operation occurred; no checkbox changed.
+
 ## QUAL-WEB-005 customer-held digest registration route · 2026-10-07
 
 - **Decision:** Accept the authenticated customer-held digest registration

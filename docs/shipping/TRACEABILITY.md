@@ -1991,3 +1991,15 @@ This is not operational acceptance: production migrations `0029`–`0034`,
 authenticated deletion E2E, disposition decisions, consent inventory,
 reconciliation, restore/RPO, rollback, and independent acceptance remain
 open. No checkbox changed.
+
+# 2026-10-07 · QUAL-WEB-005 supporting executor disposable integration
+
+The current PR #153 store/runner now has disposable PostgreSQL 18 runtime
+evidence: `account-deletion-jobs.integration.test.ts` passes **1/1** against
+an isolated `verglos_test` database. The integration covers hold and lease
+behavior, all 16 supporting dispositions, retained-row receipts, approval
+blocking, all seven hosted deletion kinds, idempotency, terminal audit receipt,
+batch execution, and replay. The exact test container was removed. This is
+runtime qualification only; production migration/cutover, authenticated
+browser E2E, consent/legal/customer-held approval, reconciliation,
+restore/RPO, rollback, and independent acceptance remain open.
