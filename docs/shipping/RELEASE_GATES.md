@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## Production checkout read-only verification · 2026-10-07
+
+The live checkout still renders only the QR path (`Monthly`, `Annual`, and
+`Show UPI QR code`). PR #149's hosted checkout is not deployed. This is
+production truth evidence, not a release approval: PLAN-WEB-013/014/015 and
+the provider lifecycle/reconciliation gates remain open. No payment or other
+production operation occurred.
+
 ## QUAL-WEB-006 production account browser smoke · 2026-10-07
 
 The existing Chrome DevTools target loaded `/account` read-only with HTTP 200;

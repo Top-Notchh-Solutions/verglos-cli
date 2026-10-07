@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · Production checkout read-only verification
+
+- **Browser:** Chrome 154 DevTools Protocol reloaded the live checkout only;
+  no button was clicked and no provider request was initiated.
+- **Result:** HTTP 200; the rendered controls were `Monthly`, `Annual · save
+  17%`, and `Show UPI QR code`. No hosted card, UPI intent, netbanking, or
+  wallet selector appeared. Observed same-origin document/static resources were
+  HTTP 200.
+- **Acceptance:** Production remains on the pre-PR-149 QR-only surface. This
+  does not qualify provider methods or lifecycle/reconciliation gates;
+  PLAN-WEB-013/014/015 remain unchecked. Backlog remains 218 checked / 62
+  unchecked / 280 total.
+- **Boundary:** No payment, provider, account, production DB, migration,
+  deployment, or credential operation occurred.
+- **Evidence:** `docs/shipping/evidence/qual-web-production-checkout-readonly-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 production account browser smoke
 
 - **Browser:** Chrome 154 via the existing local DevTools Protocol endpoint;

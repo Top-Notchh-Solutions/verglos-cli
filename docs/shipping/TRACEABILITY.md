@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## Production checkout read-only verification · 2026-10-07
+
+- **Observed:** Chrome DevTools Protocol loaded the production checkout with
+  HTTP 200. The live DOM exposed only monthly/annual cadence controls and
+  `Show UPI QR code`; no hosted card, UPI intent, netbanking, or wallet method
+  selector was present.
+- **Interpretation:** Production remains pre-PR-149 QR-only. PLAN-WEB-013/014/
+  015 and production reconciliation remain open; this is not provider
+  lifecycle evidence.
+- **Boundary:** No button click, payment, provider, database, migration,
+  deployment, or credential operation occurred. See
+  `docs/shipping/evidence/qual-web-production-checkout-readonly-2026-10-07.md`.
+
 ## QUAL-WEB-006 production account browser smoke · 2026-10-07
 
 - **Read-only browser evidence:** Chrome 154 DevTools Protocol reloaded the

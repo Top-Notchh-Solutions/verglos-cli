@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Production checkout read-only verification
+
+The existing Chrome DevTools target reloaded the live checkout without clicking
+or initiating payment. Production returned HTTP 200 and rendered `Monthly`,
+`Annual · save 17%`, and only `Show UPI QR code`; no hosted card, UPI intent,
+netbanking, or wallet selector is deployed. This confirms the production
+surface remains pre-PR-149 QR-only. PLAN-WEB-013/014/015 remain open and no
+provider/database/payment/deployment/migration/credential operation occurred.
+Private evidence:
+`docs/shipping/evidence/qual-web-production-checkout-readonly-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 production account browser smoke
 
 Using the existing Chrome 154 remote-debugging target, a read-only reload of
