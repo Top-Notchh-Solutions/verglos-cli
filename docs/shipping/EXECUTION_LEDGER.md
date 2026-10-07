@@ -526,6 +526,7 @@ queued as pending implementation batches. No checkbox changed.
 - **Boundary:** Mechanical release qualification only; LIC/DIST gates and
   publication remain open. No npm publish, tag, deployment, production, or
   credential operation occurred.
+
 - **Evidence:** `docs/shipping/evidence/qual-cli-release-artifacts-2026-10-07.md`.
 
 ## 2026-10-07 · Razorpay Test Mode read-only method probe
@@ -3625,4 +3626,16 @@ before enabling any destructive adapter.
 - **Backlog:** HUNT-009 attempted but open; count remains **218 checked / 62
   unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, provider, payment, database, deployment, or
+  credential operation occurred.
+
+# 2026-10-07 — HUNT Docker adversarial re-run
+
+- **Evidence:** Current PR #76 head `67debee` ran the provided pinned harness
+  with the existing `postgres:15-alpine` digest and returned **60 pass / 1
+  explicit macOS namespace skip / 0 failures**, exit code 0, in 9.5 seconds.
+- **Private artifact:** `docs/shipping/evidence/hunt-docker-adversarial-2026-10-07.md`.
+- **Limitation:** This is local/CI adversarial evidence only; it is not an
+  independent security review. HUNT-011 and QUAL-CLI-004 remain open.
+- **Backlog:** Count remains **218 checked / 62 unchecked / 280 total
+  (77.9%)**. No production, provider, payment, database, deployment, or
   credential operation occurred.

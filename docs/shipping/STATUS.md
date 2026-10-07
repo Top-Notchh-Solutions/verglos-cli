@@ -2477,3 +2477,15 @@ publisher roots, bounded execution qualification, and independent review.
 Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
 production, database, provider, payment, deployment, or credential operation
 occurred.
+
+## 2026-10-07 · HUNT Docker adversarial re-run
+
+The provided pinned harness ran at CLI commit `67debee` with the existing
+`postgres:15-alpine` image digest. It produced **60 pass / 1 explicit macOS
+namespace skip / 0 failures**, exit code 0, in 9.5 seconds. Private evidence:
+`docs/shipping/evidence/hunt-docker-adversarial-2026-10-07.md`. This strengthens
+HUNT-011/QUAL-CLI-004 local evidence but does not replace Linux hosted
+namespace evidence, recipe/provenance qualification, or independent review.
+Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
+production, database, provider, payment, deployment, or credential operation
+occurred.
