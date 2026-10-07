@@ -3582,3 +3582,15 @@ before enabling any destructive adapter.
   unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, customer, provider, database, deployment, or
   private-fixture operation occurred.
+# 2026-10-07 — PLAN-WEB-014 direct checkout navigation probe
+
+- **Batch:** Reuse the existing Chrome target for one bounded Razorpay
+  test-mode checkout navigation attempt.
+- **Result:** A test-mode order was created, but the direct public checkout
+  target exposed no actionable form or method controls. The same page returned
+  to `about:blank`; no new tab was created.
+- **Boundary:** No payment, authorization, capture, refund, webhook,
+  entitlement, database, production, or customer-state write occurred.
+- **Backlog:** PLAN-WEB-014 attempted but open; count remains **218 checked /
+  62 unchecked / 280 total (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-direct-checkout-navigation-2026-10-07.md`.

@@ -2439,3 +2439,13 @@ pending. HUNT-009 remains open for hosted verification, trusted/licensed
 recipe provenance, and independent review. Backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. Private evidence:
 `docs/shipping/evidence/hunt-009-entitlement-gate-pr76-2026-10-07.md`.
+## 2026-10-07 · PLAN-WEB-014 direct checkout navigation probe
+
+One additional Razorpay test-mode order was created and opened by reusing the
+existing Chrome CDP page; the direct provider target exposed no actionable
+form, so no method or lifecycle is claimed. The same page was restored to
+`about:blank`; production `/orgs` was untouched. No payment, webhook,
+entitlement, database, or production mutation occurred. PLAN-WEB-013/014/015
+remain open. Backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Private evidence:
+`docs/shipping/evidence/plan-web-014-direct-checkout-navigation-2026-10-07.md`.

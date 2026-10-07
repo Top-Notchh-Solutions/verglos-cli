@@ -410,6 +410,12 @@ method set and complete payment lifecycle/reconciliation evidence remain
 unknown, so PLAN-WEB-013/014/015 stay critical open risks. No payment or
 production write occurred.
 
+R-049 update (2026-10-07, direct checkout retry): a second bounded test-mode
+order was created and navigated through the existing CDP target, but the
+direct provider page exposed no actionable form. No payment lifecycle or
+method evidence was claimed; the test order was not captured and the target
+was restored to `about:blank`.
+
 R-048 update (2026-10-07, per-kind transactions): PR #153 exact head
 `9476e5d` adds durable request/kind idempotency and scoped row-count deletes,
 verified locally and by hosted workflow `37563632682`. This reduces replay and
