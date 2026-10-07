@@ -562,3 +562,11 @@ authenticated organization entry directory and account navigation link; local
 focused contracts pass 2/2 with typecheck/schema/build green. This remains
 partial qualification: authenticated slug runtime, human screen-reader, and
 field-CWV evidence are still open. No checkbox changed.
+
+### QUAL-WEB-006 evidence addendum · 2026-10-07 · production entry
+
+Vercel production deployment `dpl_G7umvo3ZRerRWeg5SZUi8fPRnnHQ` now serves
+the merged `/orgs` route. Existing authenticated Chrome page 13 received HTTP
+200, rendered the accessible empty state, loaded the route chunk, and had no
+console messages. No organization membership was available for slug-scoped
+dashboard exercise; the item remains unchecked.

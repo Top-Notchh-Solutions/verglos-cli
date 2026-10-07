@@ -2606,3 +2606,15 @@ changed and no checkbox was closed.
 - **Boundary:** no production/database/provider write, deployment promotion,
   payment action, or browser mutation. `QUAL-WEB-006` remains unchecked.
 - **Backlog:** **218 checked / 62 unchecked / 280 total**.
+
+# 2026-10-07 — production organization entry verification
+
+- **Runtime:** Vercel production deployment
+  `dpl_G7umvo3ZRerRWeg5SZUi8fPRnnHQ` is Ready and aliases `verglos.com`.
+- **Browser:** existing authenticated Chrome page 13 requested `/orgs` and
+  received HTTP 200; the main landmark, organization empty state, account link,
+  route chunk, and clean console were observed.
+- **Limitation:** the attached account has no active organization membership,
+  so slug-scoped dashboard, screen-reader, and field-CWV evidence remain open.
+- **Boundary:** no data/account/payment/provider mutation occurred.
+- **Backlog:** no checkbox changed; **218 checked / 62 unchecked / 280 total**.

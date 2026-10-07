@@ -1491,3 +1491,11 @@ contracts, typecheck, schema check, and production build pass. Hosted run
 `37557043246` and the required provider checks passed; PR #151 merged as
 `c1bca533`. The full qualification gate remains open for authenticated runtime,
 human screen-reader, and field-CWV evidence.
+
+# 2026-10-07 · production organization entry verification
+
+Vercel production deployment `dpl_G7umvo3ZRerRWeg5SZUi8fPRnnHQ` now serves
+the merged `/orgs` entry route. Existing authenticated page 13 received HTTP
+200, rendered the organization empty state, loaded the route chunk, and
+reported no console messages. No organization membership was available for
+slug-scoped dashboard exercise; the broader `QUAL-WEB-006` gate remains open.

@@ -1647,3 +1647,14 @@ and exposed the entry point from account navigation. Local focused tests pass
 Hosted run `37557043246`, Vercel, GitGuardian, and Preview Comments passed; PR
 #151 merged as `c1bca533`. `QUAL-WEB-006` remains unchecked pending the broader
 authenticated, screen-reader, and field-CWV evidence.
+
+# 2026-10-07 · production organization entry verification
+
+The merged organization entry is live in Vercel production. Using the existing
+authenticated Chrome page 13, `GET https://verglos.com/orgs` returned 200 and
+rendered the accessible empty state “No organizations yet”; the route chunk
+loaded successfully and the console was clean. The attached account has no
+active organization membership, so slug-scoped dashboard runtime remains
+untested. Private evidence:
+`docs/shipping/evidence/qual-web-006-org-directory-production-2026-10-07.md`.
+`QUAL-WEB-006` remains unchecked.
