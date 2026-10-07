@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-005 supporting inventory snapshot · 2026-10-07
+
+Web PR #153 head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82` passed Verify
+`37564973546`; local focused, disposable-DB, serialized-suite, typecheck,
+build, schema, migration, and diff checks pass. The read-only inventory
+contract is not deletion acceptance: `supportingInventoryComplete=false`
+remains enforced. Executable dispositions, receipts, reconciliation,
+restore/rollback rehearsal, and authenticated E2E remain open. No release gate
+or backlog checkbox closed.
+
 ## HUNT-009 public-boundary requalification · 2026-10-07
 
 CLI PR #74 was closed without merge. Local focused execution tests and the

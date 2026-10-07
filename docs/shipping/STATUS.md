@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-005 supporting inventory snapshot
+
+Web PR #153 exact head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82` passed hosted
+Verify `37564973546` and is CLEAN/open. This batch adds the versioned,
+read-only sixteen-table supporting-data inventory and disposition qualification
+behind `supportingInventoryComplete=false`; it does not enable destructive
+supporting-row deletion. Focused tests pass 9/9, disposable PostgreSQL
+integration 1/1, serialized Web suite 846/23/0 (869 total), typecheck/build,
+Drizzle check, ordered 34-migration check, and 38-route production build pass.
+QUAL-WEB-005 remains open for executable dispositions, receipts,
+reconciliation, restore/rollback rehearsal, and authenticated non-production
+E2E. PR #153 is not merged or deployed. No production/provider/payment/
+database/migration/deployment/credential operation occurred. Backlog remains
+**218 checked / 62 unchecked / 280 total**. Private evidence:
+`docs/shipping/evidence/qual-web-005-supporting-snapshot-pr153-2026-10-07.md`.
+
 ## 2026-10-07 · HUNT-009 public-boundary requalification blocked
 
 CLI PR #74 tested the fixed A1 execution candidate at exact head

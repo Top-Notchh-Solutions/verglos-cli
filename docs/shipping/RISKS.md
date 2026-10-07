@@ -9,6 +9,14 @@ public/private boundary is preserved; HUNT-009 remains critical/open pending a
 reviewed packaging design, licensed recipe provenance, approval chain, and
 independent qualification.
 
+Latest R-046/QUAL-WEB-005 update (2026-10-07): Web PR #153 head
+`37c8a07ef2c1d4f914c0ace03864d60fb2649a82` passed Verify `37564973546` after
+adding the read-only sixteen-table supporting inventory and disposition
+qualification. The worker still fails closed with
+`supportingInventoryComplete=false`; executable dispositions, operation
+receipts, reconciliation, restore/rollback rehearsal, and authenticated E2E
+remain release-blocking. No production operation occurred.
+
 Latest R-018 update (2026-10-07): CLI PR #73 (`d34ac4f`) supplies exact HTTPS
 source metadata for `minipass-pipeline@1.2.4`, reducing the inventory's
 mechanical source-missing list from eight to seven. The nested

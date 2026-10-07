@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-005 supporting inventory gate · 2026-10-07
+
+- **Decision:** Accept the read-only supporting inventory/disposition contract
+  as progress only; keep the destructive worker gate closed.
+- **Evidence:** Web PR #153 head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82`
+  passed Verify `37564973546`; focused 9/9, disposable PostgreSQL 1/1,
+  serialized 846/23/0, typecheck/build/schema/migration/diff checks pass.
+- **Boundary:** `supportingInventoryComplete=false` remains required until
+  executable disposition operations, receipts, retained-row reconciliation,
+  restore/rollback rehearsal, and authenticated E2E exist. No production write,
+  migration, deletion, deployment, or provider operation occurred.
+
 ## HUNT-009 hosted boundary result · 2026-10-07
 
 - **Decision:** Close CLI PR #74 without merge and keep HUNT-009 unchecked.

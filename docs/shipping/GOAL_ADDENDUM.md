@@ -1,5 +1,14 @@
 # Goal addendum — 2026-10-07
 
+Web PR #153 exact head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82` passed hosted
+Verify `37564973546` and adds the read-only sixteen-table supporting inventory
+contract. Local focused 9/9, disposable PostgreSQL 1/1, serialized Web
+846/23/0, typecheck/build/schema/34-migration/diff checks pass. The worker
+continues to fail closed with `supportingInventoryComplete=false`; executable
+dispositions, receipts, reconciliation, restore/rollback, and authenticated
+E2E remain open. Backlog remains **218 checked / 62 unchecked / 280 total**;
+no production or provider operation occurred.
+
 The HUNT-009 public execution candidate was requalified locally but stopped at
 the hosted public/private boundary. CLI PR #74 exact head
 `a2a1335d2a0b69ec56391286a4ba77ef773c0457` passed focused execution tests,

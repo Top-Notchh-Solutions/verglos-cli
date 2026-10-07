@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-005 supporting inventory snapshot
+
+- **Code:** Web PR #153 exact head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82`
+  adds the versioned read-only sixteen-table supporting inventory and
+  disposition qualification while retaining `supportingInventoryComplete=false`.
+- **Local:** Focused 9/9; disposable PostgreSQL integration 1/1; serialized
+  Web suite 846 pass / 23 explicit skips / 0 fail / 869 total; typecheck,
+  production build (38 routes), Drizzle check, ordered 34-migration check,
+  and diff hygiene pass.
+- **Hosted:** Verify `37564973546` success; PR #153 is CLEAN/open.
+- **Boundary:** Executable supporting deletes, operation receipts, retained-row
+  reconciliation, restore/rollback rehearsal, and authenticated E2E remain
+  open. No production operation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-supporting-snapshot-pr153-2026-10-07.md`.
+
 ## 2026-10-07 · HUNT-009 public-boundary requalification blocked
 
 - **Candidate:** CLI PR #74, exact tested head

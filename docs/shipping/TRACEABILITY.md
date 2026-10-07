@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 supporting inventory snapshot · 2026-10-07
+
+- Web PR #153 head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82` passed hosted
+  Verify `37564973546` and remains CLEAN/open.
+- The read-only sixteen-table supporting inventory and disposition registry
+  now have focused 9/9 tests, disposable PostgreSQL integration 1/1, and full
+  serialized suite 846/23/0 over 869 tests. Typecheck, 38-route production
+  build, Drizzle check, ordered 34-migration check, and diff hygiene pass.
+- `supportingInventoryComplete=false` remains deliberate. No checkbox changed;
+  executable dispositions, receipts, reconciliation, restore/rollback, and
+  authenticated E2E remain required. See
+  `docs/shipping/evidence/qual-web-005-supporting-snapshot-pr153-2026-10-07.md`.
+
 ## HUNT-009 public-boundary requalification · 2026-10-07
 
 - CLI PR #74 tested head `a2a1335d2a0b69ec56391286a4ba77ef773c0457` and was
