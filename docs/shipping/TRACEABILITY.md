@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 privacy/deletion/retention qualification · 2026-10-07
+
+- **Verification:** On Web `main` `cbc0f5a`, an isolated Docker PostgreSQL
+  run passed 46/46 focused tests with 0 failures and 0 skips. The suite covers
+  deletion scope and legal-hold invariants, retention ceilings/warnings,
+  hosted-record integrity, export-cursor bounds, and tenant isolation.
+- **Boundary:** No source changed and no production operation occurred.
+  QUAL-WEB-005 remains open for hosted deletion-worker execution,
+  legal/customer-held-record decisions, consent/vendor inventory, and
+  end-to-end deletion evidence. See
+  `docs/shipping/evidence/qual-web-005-privacy-retention-2026-10-07.md`.
+
 ## QUAL-WEB-006 large-data qualification · 2026-10-07 · Web PR #150
 
 - **Implementation:** Web `70680f8` extends the isolated monitoring repository

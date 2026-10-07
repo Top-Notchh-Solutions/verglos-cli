@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-005 privacy/deletion/retention qualification · 2026-10-07
+
+The existing Web privacy/deletion/retention and hosted-record projection
+surfaces pass 46/46 focused tests with an isolated Docker PostgreSQL database,
+including account-deletion scope and hold behavior, retention decisions,
+content verification, and foreign-tenant exclusion. This does not close
+QUAL-WEB-005 or Gate 2/4/6: hosted deletion-worker execution,
+legal/customer-held-record decisions, consent/vendor inventory, and
+end-to-end production deletion evidence remain open. No production operation
+occurred.
+
 ## QUAL-WEB-006 large-data qualification · 2026-10-07
 
 Web PR #150 (`70680f8`) adds bounded integration evidence for 45 same-tenant

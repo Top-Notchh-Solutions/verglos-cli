@@ -1,5 +1,35 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-005 privacy/deletion/retention qualification
+
+- **Code:** Web `main` `cbc0f5a`; no source change or PR was needed for this
+  bounded verification batch.
+- **Integration/security:** Temporary `postgres:18-alpine` with isolated
+  `verglos_test` ran the focused privacy/deletion/retention and records suite:
+  46 passed, 0 failed, 0 skipped. It covered account-deletion scope and
+  active-hold refusal, legal/contract/deletion retention, persisted hosted
+  record integrity, bounded export cursors, and cross-tenant exclusion.
+- **Limitations:** Node 26.4.0 was used locally against the package Node
+  22.x baseline. Hosted deletion-worker, legal/customer-held-record,
+  consent/vendor, backup/log, and production deletion evidence were not run.
+- **Acceptance:** QUAL-WEB-005 remains unchecked. Backlog remains 218 checked /
+  62 unchecked / 280 total.
+- **Boundary:** No production database/provider/payment read or write,
+  migration, deletion, deployment, credential use, or customer operation
+  occurred. The temporary container was stopped after the run.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-privacy-retention-2026-10-07.md`.
+
+### Live queue after this batch
+
+1. QUAL-WEB-006 organization/Pro browser, human screen-reader, and field-CWV
+   evidence — current authenticated Chrome state is a Free account shell with
+   no organization route; PR #150 large-data evidence is green/open.
+2. PLAN-WEB-014 Razorpay test-mode method/lifecycle matrix — provider enabled
+   methods and sandbox credentials are not verified; no payment operation ran.
+3. GITHUB-WEB-004 / PLAN-CLI-003 authorized hosted qualification — external
+   provider/authenticated state and R-041 credential rotation remain open.
+
 ## 2026-10-07 · QUAL-WEB-006 large-data qualification PR #150
 
 - **Code:** Web isolated branch `qual/web-006-large-data`, commit `70680f8`,

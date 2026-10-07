@@ -1,5 +1,32 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-005 privacy/deletion/retention qualification
+
+The existing Web privacy, deletion, retention, and hosted-record projection
+surfaces pass a bounded isolated PostgreSQL run: 46/46 focused tests passed,
+including account-deletion scope/hold invariants, retention ceilings and
+warnings, persisted-content verification, and foreign-tenant exclusion. No
+source files changed. QUAL-WEB-005 remains unchecked because hosted deletion
+worker execution, legal/customer-held-record decisions, consent/vendor
+inventory, and end-to-end production deletion evidence are open. No production
+operation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-privacy-retention-2026-10-07.md`.
+Backlog remains **218 checked / 62 unchecked / 280 total**.
+
+Next three independent batches:
+
+1. **QUAL-WEB-006** — authenticated organization/Pro browser, human
+   screen-reader, and field-CWV evidence. Current Chrome session is only a
+   Free account shell with no organization route; large-data repository
+   evidence is now recorded and PR #150 is green/open. No production write is
+   authorized by that absence.
+2. **PLAN-WEB-014** — Razorpay test-mode method/lifecycle matrix. PR #149's
+   code-side path is green/open, but the provider account's enabled methods and
+   test credentials are not verified; no payment operation will be attempted.
+3. **GITHUB-WEB-004 / PLAN-CLI-003** — authorized GitHub cutover or the
+   authenticated modified-client matrix. Both require external/provider state;
+   R-041 credential rotation and bounded read-only verification remain open.
+
 ## 2026-10-07 · QUAL-WEB-006 large-data qualification PR #150
 
 The isolated Web dashboard monitoring integration fixture now exercises 45
