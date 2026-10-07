@@ -61,3 +61,37 @@ counted as accessibility failures. The raw private reports are preserved as:
 - Missing evidence remains: organization dashboard, Pro/large-dataset
   rendering, human screen-reader review, and field Core Web Vitals.
 - No Web code change was justified by a reproducible defect in this run.
+
+## 2026-10-07 continuation addendum
+
+The authenticated Chrome DevTools session was rechecked read-only. The
+dashboard URL again resolved from `/account/dashboard` to `/account`; the
+rendered account shell had no console errors, and the existing responsive and
+keyboard observations remained intact. The production checkout tab was also
+observed without interaction: it is still the pre-PR QR-only path, with
+repeated read-only `qr-status` polling and one transient `ERR_NETWORK_CHANGED`.
+No payment, scan, database/provider, deployment, or other write was performed.
+
+Fresh Lighthouse snapshot results for `https://verglos.com/account` were:
+
+| Device | Accessibility | Best practices | SEO | Agentic browsing |
+| --- | ---: | ---: | ---: | ---: |
+| Desktop | 100 | 100 | 100 | 50 |
+| Mobile | 100 | 100 | 100 | 50 |
+
+The only failed snapshot audit was `llms-txt`. A direct read-only request to
+`https://verglos.com/llms.txt` returned `200 text/plain` with a `# Verglos`
+H1, so this is recorded as an audit discrepancy rather than a product defect.
+The fresh desktop performance trace measured LCP `689 ms`, CLS `0.00`, and
+TTFB `110 ms`; no CrUX field data exists for this page. The trace identified
+14.4 kB of legacy-JavaScript opportunity with zero estimated FCP/LCP savings.
+
+The isolated PR #149 branch was run locally in development without runtime
+secrets. `/checkout` rendered the fail-closed state “Pro checkout is not
+currently available” and stated that no payment request would be created;
+the page emitted no XHR/fetch request. This is safety evidence, not provider
+or authenticated checkout acceptance.
+
+QUAL-WEB-006 remains unchecked. Organization/Pro and large-dataset rendering,
+human screen-reader review, and field Core Web Vitals remain open. The
+backlog count is unchanged at 218 checked / 62 unchecked / 280 total.

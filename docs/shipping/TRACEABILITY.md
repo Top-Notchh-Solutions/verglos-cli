@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 authenticated dashboard continuation · 2026-10-07
+
+- **Runtime evidence:** The authenticated Chrome session resolved
+  `/account/dashboard` to `/account` with no console errors; the current
+  account shell remained private and rendered without the previously recorded
+  desktop/mobile overflow or keyboard defects.
+- **Automated evidence:** Lighthouse snapshot results were 100/100/100 for
+  accessibility/best-practices/SEO on both desktop and mobile. Agentic
+  Browsing remained 50 because of the `llms.txt` audit, despite the public
+  endpoint returning a valid H1. The fresh desktop trace measured LCP 689 ms,
+  CLS 0.00, and TTFB 110 ms with no CrUX field data.
+- **Checkout safety:** Local PR #149 execution with absent runtime secrets
+  failed closed and made no payment request. The authenticated production tab
+  still serves the legacy QR path; no payment or write was performed.
+- **Acceptance boundary:** QUAL-WEB-006 remains open for organization/Pro and
+  large-data evidence, human screen-reader review, and field CWV. See
+  `docs/shipping/evidence/qual-web-006-dashboard-runtime-2026-10-07.md`.
+
 ## PLAN-CLI-004 compatibility PR #72 · 2026-10-07
 
 - **Implementation:** CLI head `059918c` adds supported-entitlement

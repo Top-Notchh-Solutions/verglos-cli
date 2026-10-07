@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-006 authenticated dashboard continuation
+
+Read-only Chrome DevTools evidence against the authenticated account shell
+shows `/account/dashboard` redirecting safely to `/account`, no console errors,
+private account navigation, and no horizontal overflow in the existing desktop
+and mobile checks. A fresh Lighthouse snapshot scored Accessibility 100,
+Best Practices 100, and SEO 100 on both desktop and mobile; Agentic Browsing
+was 50 because the audit still reports `llms.txt`, although the public
+`/llms.txt` response currently contains a valid H1. A fresh desktop trace
+reported LCP 689 ms, CLS 0.00, and TTFB 110 ms; CrUX field data is unavailable.
+
+The PR branch was also run locally in development with no runtime secrets:
+checkout failed closed with “Pro checkout is not currently available” and made
+no payment request. The authenticated production tab remains the old QR-only
+flow and showed one transient `ERR_NETWORK_CHANGED`; no payment or write was
+performed. QUAL-WEB-006 remains unchecked because organization/Pro and
+large-dataset rendering, human screen-reader review, and field-CWV evidence
+are still open. Evidence addendum:
+`docs/shipping/evidence/qual-web-006-dashboard-runtime-2026-10-07.md`.
+Backlog remains **218 checked / 62 unchecked / 280 total**.
+
 ## 2026-10-07 · PLAN-CLI-004 compatibility PR reopened for hosted verification
 
 CLI branch `feat/cli-plan-004-compat` at `059918c` is clean, pushed, one commit

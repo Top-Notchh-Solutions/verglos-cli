@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 browser continuation · 2026-10-07
+
+The authenticated account shell remains clean in read-only Chrome DevTools:
+Lighthouse snapshot Accessibility/Best Practices/SEO are each 100 on desktop
+and mobile, and the fresh desktop trace reports LCP 689 ms and CLS 0.00. The
+agentic score is 50 solely because the audit reports `llms.txt`; the public
+route currently returns a valid H1. Local PR #149 execution without secrets
+fails closed before creating a payment request. This does not close
+QUAL-WEB-006 or Gate 2/3/4: organization/Pro and large-data rendering,
+screen-reader, field-CWV, and payment/provider lifecycle evidence remain open.
+No production operation occurred.
+
 ## PLAN-WEB-013 code-side gate update · 2026-10-07
 
 Web PR #149 (`eb7e55a`) moves the customer path from QR-only to catalog-gated

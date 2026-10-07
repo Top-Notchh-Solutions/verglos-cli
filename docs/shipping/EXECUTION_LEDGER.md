@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-006 authenticated dashboard continuation
+
+- **Runtime:** Authenticated Chrome DevTools reached `/account/dashboard`,
+  which redirected to the current `/account` shell. The page had no console
+  errors, preserved private navigation, and retained the previously recorded
+  desktop/mobile no-overflow and keyboard evidence.
+- **Accessibility/performance:** Lighthouse snapshot scored 100 Accessibility,
+  100 Best Practices, and 100 SEO on both desktop and mobile. Agentic Browsing
+  was 50 due only to the `llms.txt` audit; the public endpoint itself returns a
+  valid H1. The fresh desktop trace recorded LCP 689 ms, CLS 0.00, and TTFB
+  110 ms; CrUX has no field data for this page.
+- **Checkout boundary:** Local PR #149 development execution without runtime
+  secrets displayed the fail-closed checkout state and emitted no payment
+  request. Production remains the pre-PR QR-only runtime; one transient
+  `ERR_NETWORK_CHANGED` was observed during its existing polling. No payment,
+  database/provider, deployment, migration, or production write occurred.
+- **Acceptance:** QUAL-WEB-006 remains unchecked. Organization/Pro and
+  large-dataset rendering, human screen-reader review, and field-CWV evidence
+  remain open. Backlog remains 218 checked / 62 unchecked / 280 total.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-dashboard-runtime-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-CLI-004 compatibility PR #72
 
 - **Code:** CLI branch `feat/cli-plan-004-compat`, exact head `059918c`, is
