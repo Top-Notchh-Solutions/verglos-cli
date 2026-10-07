@@ -1,5 +1,15 @@
 # Goal addendum — 2026-10-07
 
+Web PR #153 exact head `eb785d2e382fc60535c15702fe7ffd8b9ae66610` now adds the
+fenced supporting-disposition executor and durable per-table receipts. Worker
+tests pass 4/4, disposable PostgreSQL integration 1/1, serial Web 868/1/0,
+typecheck/build/schema/35-migration/diff checks pass; hosted typecheck/schema
+and Vercel were pending at capture. The approval-gated channel-credential
+case blocks before dependent deletes. QUAL-WEB-005 remains open for
+retained-row reconciliation, restore/rollback rehearsal, authenticated
+non-production E2E, and hosted completion. Backlog remains **218 checked / 62
+unchecked / 280 total**; no production operation or checkbox changed.
+
 Web PR #153 exact head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82` passed hosted
 Verify `37564973546` and adds the read-only sixteen-table supporting inventory
 contract. Local focused 9/9, disposable PostgreSQL 1/1, serialized Web

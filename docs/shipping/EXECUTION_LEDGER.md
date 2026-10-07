@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-005 supporting disposition executor
+
+- **Code:** Web PR #153 exact head
+  `eb785d2e382fc60535c15702fe7ffd8b9ae66610` adds fenced execution for the
+  sixteen-table supporting disposition registry and durable per-table receipts.
+- **Safety:** Retention-required rows are not mutated. Channel credentials are
+  checked first and block before dependent alert/monitor deletes when approval
+  is required. Replays use the same request/table idempotency keys.
+- **Local:** Worker 4/4; disposable PostgreSQL integration 1/1; serial Web
+  suite 868 pass / 1 explicit skip / 0 fail; typecheck, 38-route build,
+  schema, 35-migration, and diff checks pass. The disposable fixture was
+  removed after testing.
+- **Hosted:** Typecheck/schema and Vercel were pending at capture;
+  GitGuardian and Preview Comments passed.
+- **Acceptance:** QUAL-WEB-005 remains open for retained-row reconciliation,
+  restore/rollback rehearsal, authenticated non-production E2E, and hosted
+  completion. No production operation or checkbox change.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-supporting-executor-eb785d2-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 supporting inventory snapshot
 
 - **Code:** Web PR #153 exact head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82`

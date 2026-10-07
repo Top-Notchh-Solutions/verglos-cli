@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-005 supporting disposition executor
+
+Web PR #153 exact head `eb785d2e382fc60535c15702fe7ffd8b9ae66610` adds the
+fenced supporting-table executor and durable per-table operation receipts. The
+worker deletes only approved user/license-scoped rows, preserves retention and
+accounting/public/audit/digest rows, and blocks before dependent deletes when
+approval-gated channel credentials remain. Worker tests pass 4/4; disposable
+PostgreSQL integration passes 1/1 with replay and approval-block coverage; the
+full serialized Web suite passes 868/1/0 (869 total), typecheck/build/schema,
+ordered 35-migration, and diff checks pass. Hosted typecheck/schema and Vercel
+were pending at capture; GitGuardian and Preview Comments passed. QUAL-WEB-005
+remains open for retained-row reconciliation, restore/rollback rehearsal, and
+authenticated non-production E2E. No production/provider/payment/database/
+migration/deployment/credential operation occurred. Backlog remains
+**218 checked / 62 unchecked / 280 total**. Private evidence:
+`docs/shipping/evidence/qual-web-005-supporting-executor-eb785d2-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 supporting inventory snapshot
 
 Web PR #153 exact head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82` passed hosted

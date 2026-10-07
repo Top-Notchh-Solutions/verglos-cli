@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-005 supporting disposition executor · 2026-10-07
+
+- **Decision:** Allow the deletion worker to execute only the reviewed
+  user/license-scoped supporting dispositions, with one durable idempotency
+  receipt per table and the existing lease fence.
+- **Safety:** Preserve users, licenses, accounting/provider rows, unscoped
+  telemetry, legacy public rows, customer-held digests, and the deletion audit
+  ledger. Check approval-gated channel credentials before deleting dependent
+  alert or monitor rows; block closed if credentials remain.
+- **Boundary:** Local worker 4/4, disposable PostgreSQL 1/1, serial Web
+  868/1/0, typecheck/build/schema/35-migration checks pass. Hosted checks were
+  pending at capture. Retained-row reconciliation, restore/rollback rehearsal,
+  authenticated non-production E2E, and final gate acceptance remain open; no
+  production migration or deletion is authorized.
+
 ## QUAL-WEB-005 supporting inventory gate · 2026-10-07
 
 - **Decision:** Accept the read-only supporting inventory/disposition contract

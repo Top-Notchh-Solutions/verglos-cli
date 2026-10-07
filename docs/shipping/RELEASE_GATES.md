@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-005 supporting disposition executor · 2026-10-07
+
+Web PR #153 head `eb785d2e382fc60535c15702fe7ffd8b9ae66610` passes local worker,
+disposable-DB, serial-suite, typecheck, production-build, schema, migration,
+and diff checks. It adds durable supporting operation receipts and blocks
+approval-gated channel credentials before dependent deletes. Hosted typecheck/
+schema and Vercel were pending at capture. QUAL-WEB-005 is still open for
+retained-row reconciliation, restore/rollback rehearsal, authenticated
+non-production E2E, and hosted completion; no release gate or checkbox closed.
+
 ## QUAL-WEB-005 supporting inventory snapshot · 2026-10-07
 
 Web PR #153 head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82` passed Verify

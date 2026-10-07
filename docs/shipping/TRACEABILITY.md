@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 supporting disposition executor · 2026-10-07
+
+- Web PR #153 head `eb785d2e382fc60535c15702fe7ffd8b9ae66610` adds the
+  user/license-scoped supporting executor and durable per-table idempotency
+  receipts. Worker 4/4, disposable PostgreSQL integration 1/1, serial Web
+  868/1/0, typecheck/build/schema/35-migration/diff checks pass.
+- The approval-gated channel-credential case blocks before dependent deletes;
+  retained rows are reconciled by the worker's final inventory snapshot.
+- Hosted typecheck/schema and Vercel were pending at capture; GitGuardian and
+  Preview Comments passed. QUAL-WEB-005 remains open for restore/rollback and
+  authenticated non-production E2E. No checkbox changed. See
+  `docs/shipping/evidence/qual-web-005-supporting-executor-eb785d2-2026-10-07.md`.
+
 ## QUAL-WEB-005 supporting inventory snapshot · 2026-10-07
 
 - Web PR #153 head `37c8a07ef2c1d4f914c0ace03864d60fb2649a82` passed hosted
