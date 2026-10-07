@@ -237,6 +237,17 @@ acceptance, reconciliation, restore/RPO, rollback, and independent review
 remain required. Backlog remains **218 checked / 62 unchecked / 280 total**;
 no production or destructive operation occurred.
 
+# 2026-10-07 · HUNT-009 supported recipe execution requalification
+
+CLI PR #75 merged at `6bde945c`; hosted Ubuntu/macOS/Windows Node 20/22/24,
+self-scan, and in-toto checks passed, and the exact worktree package suite
+exited 0. Focused coverage proves exact trust/approval binding, positive and
+negative probes, binding-drift and symlink denial, and missing/malformed
+private-runtime denial. This remains progress only: HUNT-008 trusted/licensed
+provenance and independent Hunt qualification/review are still required.
+Backlog remains **218 checked / 62 unchecked / 280 total**; no checkbox or
+production state changed.
+
 # 2026-10-07 · QUAL-WEB-005 supporting executor integration
 
 The current PR #153 source passed the full account-deletion integration **1/1**

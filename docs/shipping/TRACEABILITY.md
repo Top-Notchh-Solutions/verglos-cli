@@ -2003,3 +2003,12 @@ batch execution, and replay. The exact test container was removed. This is
 runtime qualification only; production migration/cutover, authenticated
 browser E2E, consent/legal/customer-held approval, reconciliation,
 restore/RPO, rollback, and independent acceptance remain open.
+
+# 2026-10-07 · HUNT-009 supported recipe execution requalification
+
+CLI PR #75 merged at `6bde945c` with the public CLI/private-runtime protocol
+boundary and gated supported-recipe execution. Hosted platform, self-scan, and
+in-toto checks passed; the exact worktree package suite exited 0 with focused
+approval/trust, positive/negative, binding-drift, symlink, and runtime-denial
+coverage. HUNT-008 trusted/licensed provenance and independent Hunt review
+remain open, so this does not close HUNT-009 or change a checkbox.

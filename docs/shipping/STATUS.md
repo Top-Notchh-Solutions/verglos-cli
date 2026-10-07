@@ -2347,3 +2347,19 @@ deployment rollback, and independent acceptance. Backlog remains **218
 checked / 62 unchecked / 280 total (77.9%)**. No production or destructive
 operation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-supporting-executor-integration-929da19-2026-10-07.md`.
+
+# 2026-10-07 · HUNT-009 supported recipe execution requalification
+
+CLI PR #75 is merged at `6bde945c`. Its hosted Ubuntu/macOS/Windows Node
+20/22/24 matrix, self-scan, and in-toto release binding all passed. The exact
+requalification worktree's complete `packages/cli` test command exited 0;
+focused cases cover exact trust/approval binding, positive and negative
+probes, binding-drift and symlink denial, and missing/malformed private-runtime
+denial.
+
+This is implementation/regression progress only. `HUNT-009` remains unchecked
+pending HUNT-008 trusted/licensed recipe provenance and independent Hunt
+qualification/review. Backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. No external recipe, customer repository, or production operation
+occurred. Private evidence:
+`docs/shipping/evidence/hunt-009-supported-recipe-execution-pr75-2026-10-07.md`.

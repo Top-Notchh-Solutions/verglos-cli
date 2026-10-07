@@ -662,3 +662,15 @@ remain open; `QUAL-WEB-005` is not accepted.
   authorization. Provider/accounting retention, legacy public records,
   customer-held digest handling, reconciliation, restore/rollback, and
   authenticated non-production E2E remain open.
+
+## HUNT-009 supported recipe execution requalification · 2026-10-07
+
+- **Decision:** Record PR #75 as merged implementation and regression
+  evidence; keep `HUNT-009` open.
+- **Evidence:** Merge `6bde945c`; hosted Ubuntu/macOS/Windows Node 20/22/24,
+  self-scan, and in-toto checks all passed. The exact requalification worktree
+  package suite exited 0, including focused trust/approval, positive/negative,
+  binding-drift, symlink, and unavailable-runtime cases.
+- **Boundary:** HUNT-008 trusted/licensed provenance and independent Hunt
+  isolation/review remain acceptance gates. No checkbox changed and no external
+  recipe or production operation was performed.

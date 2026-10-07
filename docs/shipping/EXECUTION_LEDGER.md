@@ -3468,3 +3468,19 @@ before enabling any destructive adapter.
   open.
 - **Evidence file:**
   `docs/shipping/evidence/qual-web-005-supporting-executor-integration-929da19-2026-10-07.md`.
+
+# 2026-10-07 — HUNT-009 supported recipe execution requalification
+
+- **Batch:** Re-run the merged gated supported-recipe execution at CLI PR #75
+  exact merge `6bde945c`.
+- **Backlog:** `HUNT-009` attempted but open; no accepted IDs and no checkbox
+  changes. Count remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Evidence:** Hosted platform matrix, self-scan, and in-toto all green;
+  local `packages/cli` `pnpm test` exited 0. Focused cases cover exact
+  approval/trust binding, negative probe, binding drift, symlink input, and
+  unavailable private runtime denial.
+- **Boundary:** No external recipe, customer repository, production, payment,
+  deployment, or migration operation occurred. Trusted/licensed provenance
+  and independent Hunt review remain open.
+- **Evidence file:**
+  `docs/shipping/evidence/hunt-009-supported-recipe-execution-pr75-2026-10-07.md`.
