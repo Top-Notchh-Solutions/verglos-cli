@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-014 Test Mode credential preflight · 2026-10-07
+
+- **Decision:** Treat the test key and HTTP 200 Orders response as a usable
+  precondition only; do not treat it as payment acceptance.
+- **Boundary:** The seven method names come from application configuration, not
+  provider-account truth. Browser qualification was deferred after Chrome
+  DevTools and Playwright MCP returned `Transport closed`; no provider or
+  production write occurred.
+- **Next:** Restore a bounded browser instrument, observe the provider-hosted
+  Checkout in Test Mode, and qualify each actually enabled method and lifecycle
+  before revisiting PLAN-WEB-014.
+
 ## Web current-main Node 22 qualification · 2026-10-07
 
 - **Decision:** Accept the exact-head Node 22 and disposable-database results

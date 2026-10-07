@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 Test Mode credential preflight · 2026-10-07
+
+The supplied test environment authenticated successfully to Razorpay Test Mode
+via a redacted read-only Orders request (HTTP 200) and declares seven methods.
+This does not qualify provider-account method availability or any payment
+lifecycle. Browser evidence is pending because both browser MCP transports
+returned `Transport closed`. No provider or production state changed; the gate
+remains open.
+
 ## Web current-main Node 22 qualification · 2026-10-07
 
 Exact Web `origin/main` `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed

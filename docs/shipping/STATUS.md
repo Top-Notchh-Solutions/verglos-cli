@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Razorpay Test Mode credential preflight
+
+The supplied Web `.env.test.local` uses a `rzp_test_` key and declares seven
+application methods: UPI, cards, EMI, netbanking, wallets, Pay Later, and QR.
+A redacted read-only `GET /v1/orders?count=1` returned HTTP 200. This proves
+Test Mode credentials are usable, not that the provider account enables every
+declared method. No provider write or payment occurred. Chrome DevTools and
+Playwright MCP both returned `Transport closed`, so no browser payment action
+was attempted; raw CDP remained reachable and Chrome was left untouched.
+`PLAN-WEB-014` remains open. Backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-test-mode-credential-preflight-2026-10-07.md`.
+
 ## 2026-10-07 · Web exact current-main Node 22 qualification
 
 Exact Web `origin/main` `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed the

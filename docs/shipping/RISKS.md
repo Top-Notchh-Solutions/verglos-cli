@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014 Test Mode browser/provider boundary · 2026-10-07
+
+The Web test environment has usable Razorpay Test Mode credentials and a
+declared seven-method application configuration; a read-only Orders request
+returned HTTP 200. This does not prove account-enabled methods or lifecycle
+behavior. Browser qualification is currently constrained by closed Chrome
+DevTools/Playwright MCP transports, while raw CDP remains reachable. Owner:
+billing/release qualification. Next action: restore the browser transport or
+use an equivalent bounded browser instrument, then run the isolated hosted
+Checkout lifecycle with redacted evidence. No provider or production mutation
+occurred.
+
 ## R-QUAL-WEB Node 22 current-main qualification · 2026-10-07
 
 Exact Web main passed the empty-database serial suite with **49/49** pretests,

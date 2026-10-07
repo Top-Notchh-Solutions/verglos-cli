@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-014 Test Mode credential preflight · 2026-10-07
+
+The supplied test environment uses a `rzp_test_` key and declares seven
+application methods. A redacted read-only Razorpay Orders request returned
+HTTP 200. This is credential/authentication evidence only; provider-account
+method availability and payment lifecycle evidence remain absent. Browser
+qualification was not attempted after both browser MCP transports returned
+`Transport closed`; no checkbox changed. See
+`docs/shipping/evidence/plan-web-014-test-mode-credential-preflight-2026-10-07.md`.
+
 ## Web current-main Node 22 qualification · 2026-10-07
 
 Exact Web `origin/main` `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed

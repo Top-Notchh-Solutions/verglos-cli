@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 — Razorpay Test Mode credential preflight
+
+- **Scope:** `PLAN-WEB-014` preflight; no checkbox closure.
+- **Evidence:** Web `.env.test.local` has a `rzp_test_` key and seven declared
+  application methods. Redacted read-only Razorpay `GET /v1/orders?count=1`
+  returned HTTP 200 JSON.
+- **Boundary:** No provider order/payment/capture/refund/webhook or application,
+  database, deployment, or customer-state write. Chrome DevTools and Playwright
+  MCP transports returned `Transport closed`; raw CDP remained reachable and
+  Chrome was not restarted.
+- **Disposition:** Actual account-enabled method truth and full provider
+  lifecycle remain open; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-test-mode-credential-preflight-2026-10-07.md`.
+
 ## 2026-10-07 — Web current-main Node 22 qualification
 
 - **Code:** Exact Web `origin/main`

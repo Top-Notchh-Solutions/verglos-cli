@@ -1,5 +1,16 @@
 # Goal addendum — 2026-10-07
 
+## PLAN-WEB-014 Test Mode credential preflight
+
+The supplied Web test environment uses a `rzp_test_` key and declares seven
+application methods; a redacted read-only Razorpay Orders request returned HTTP
+200. This is only a precondition, not provider-account or payment-lifecycle
+acceptance. Chrome DevTools and Playwright MCP returned `Transport closed`, so
+no browser payment action or provider write occurred. `PLAN-WEB-014` remains
+open; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence:
+`docs/shipping/evidence/plan-web-014-test-mode-credential-preflight-2026-10-07.md`.
+
 ## Web current-main Node 22 qualification
 
 Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed a disposable
