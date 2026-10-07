@@ -3872,15 +3872,16 @@ before enabling any destructive adapter.
   credential, or browser operation occurred.
 # 2026-10-07 — ENT-CLI-001 bounded private runner client
 
-- **Implementation:** CLI PR #78 exact head `723f655` adds Ed25519
+- **Implementation:** CLI PR #78 exact head `68772d7` adds Ed25519
   canonical-job verification, authenticated GET-only polling, tenant/runner/
-  target binding, bounded persistent job/nonce replay protection, and a
+  target binding, bounded persistent job/nonce replay protection, fail-closed
+  malformed-job handling, and a
   least-evidence admission summary. No remote execution or result upload is
   exposed.
-- **Verification:** Shared focused tests 4/4, CLI focused tests 3/3, shared/
+- **Verification:** Shared focused tests 5/5, CLI focused tests 3/3, shared/
   CLI typecheck and build, full configured CLI suite (0 failures), public
   boundary, diff, and command-surface smoke pass. Hosted matrix
-  `37621505043` and self-scan `37621505126` were queued at capture.
+  `37621823761` and self-scan `37621823764` were pending at capture.
 - **Limitation:** ENT-CLI-001 remains unchecked pending hosted endpoint and
   runner enrollment, bounded execution/result reconciliation, cross-platform
   qualification, and independent review. No production/provider/database/

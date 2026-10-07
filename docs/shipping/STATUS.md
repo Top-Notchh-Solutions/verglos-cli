@@ -2,13 +2,15 @@
 
 ## 2026-10-07 · ENT-CLI-001 bounded private runner client
 
-CLI PR #78 exact head `723f655acc314584d93205caee2f7f35bf76379c` adds signed
+CLI PR #78 exact head `68772d71232faa955953c34b77c84b6160e904f1` adds signed
 job verification, GET-only polling, tenant/runner/target binding, persistent
-job/nonce replay protection, and least-evidence output. It never executes a
+job/nonce replay protection, fail-closed malformed-job handling, and least-evidence output. It never executes a
 remote command or uploads a result. Focused tests pass 4/4 shared and 3/3 CLI;
 shared/CLI typecheck and build pass; the full configured CLI suite exits 0;
-public-boundary and diff checks pass. Hosted platform run `37621505043` and
-self-scan `37621505126` are queued at capture. ENT-CLI-001 remains unchecked
+public-boundary and diff checks pass. Focused tests are 5/5 shared and 3/3 CLI.
+Current-head hosted platform run
+`37621823761` and self-scan `37621823764` are pending at capture.
+ENT-CLI-001 remains unchecked
 pending hosted endpoint/enrollment, bounded execution/result qualification, and
 independent review. No checkbox changed; backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. Private evidence:

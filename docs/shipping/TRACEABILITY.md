@@ -2,14 +2,15 @@
 
 ## ENT-CLI-001 bounded private runner client · 2026-10-07
 
-CLI PR #78 exact head `723f655` adds a canonical Ed25519 job-signature check,
+CLI PR #78 exact head `68772d7` adds a canonical Ed25519 job-signature check,
 GET-only authenticated polling, tenant/runner/allowlisted-target admission,
-bounded mode-0600 replay state for job IDs and nonces, and a source-free
-admission summary. There is no remote-shell path, job execution, or result
-upload. Shared focused tests pass 4/4; CLI focused tests pass 3/3; shared/CLI
+bounded mode-0600 replay state for job IDs and nonces, fail-closed malformed
+job handling, and a source-free admission summary. There is no remote-shell
+path, job execution, or result upload. Shared focused tests pass 5/5; CLI
+focused tests pass 3/3; shared/CLI
 typecheck/build, full configured CLI suite, diff, and public-boundary checks
-pass. Hosted matrix `37621505043` and self-scan `37621505126` were queued at
-capture. ENT-CLI-001 remains open for hosted endpoint/enrollment, execution and
+pass. Current-head hosted matrix `37621823761` and self-scan `37621823764` were
+pending at capture. ENT-CLI-001 remains open for hosted endpoint/enrollment, execution and
 result reconciliation, cross-platform qualification, and independent review.
 No checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
 (77.9%)**. See
