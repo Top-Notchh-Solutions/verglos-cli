@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## ACCEPT-002/003 current-root substrate refresh · 2026-10-07
+
+- **Sources:** CLI `b070942dcf52fa01861573ce10182b69da2e6476` and Web
+  `cbc0f5a89179995569308695419d4578c57ce716` were passed explicitly to the
+  private verifier.
+- **Results:** CLI configured package suite 34/34; Web 888/916 with 28
+  environment-gated skips and 0 failures; composed substrates 74/74. All
+  commands exited 0 and output hashes are retained in the private JSON.
+- **Limitation:** The current CLI package command enumerates 34 tests, not the
+  historical 241-test surface. No missing coverage is inferred as passing.
+- **Boundary:** ACCEPT-002/003 remain open for complete hosted/provider/
+  customer/reviewer evidence and the missing story coverage. See
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-07.md`.
+
 ## QUAL-WEB-005 privacy/deletion/retention qualification · 2026-10-07
 
 - **Verification:** On Web `main` `cbc0f5a`, an isolated Docker PostgreSQL

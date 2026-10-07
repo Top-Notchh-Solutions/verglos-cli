@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · ACCEPT-002/003 current-root substrate refresh
+
+- **Sources:** Private verifier ran explicitly against CLI `b070942` and Web
+  `cbc0f5a`; no temporary fallback worktree was used.
+- **Results:** CLI configured package suite 34/34; Web 888/916 with 28
+  environment-gated skips and 0 failures; composed substrates 74/74. All
+  commands exited 0 and hashes are in the private JSON evidence.
+- **Limitation:** The current CLI command enumerates 34 tests rather than the
+  historical 241-test surface. This difference is retained as an open
+  coverage limitation.
+- **Acceptance:** ACCEPT-002/003 remain unchecked for complete external,
+  hosted, provider, customer, reviewer, and missing story evidence. Backlog
+  remains 218 checked / 62 unchecked / 280 total.
+- **Boundary:** No production/database/provider/payment/deployment/migration
+  operation ran; no public repository or marketing surface changed.
+- **Evidence:**
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-07.md` and
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
+
 ## 2026-10-07 · QUAL-WEB-005 privacy/deletion/retention qualification
 
 - **Code:** Web `main` `cbc0f5a`; no source change or PR was needed for this
