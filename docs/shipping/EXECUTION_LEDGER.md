@@ -3853,3 +3853,17 @@ before enabling any destructive adapter.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, provider, payment, database, deployment,
   credential, or browser mutation occurred in the merge operation.
+
+# 2026-10-07 — STUDIO-CLI-001 exact-preview binding
+
+- **Implementation:** CLI PR #77 head `fdaec85` hardens `record project-client`
+  with a safe-field allowlist, fixed limitation redaction, and an explicit
+  approval bound to the exact canonical preview digest.
+- **Verification:** Shared full suite and CLI full configured suite exit 0;
+  focused tests pass 4/4 and 1/1; shared/CLI typecheck/build, public-boundary,
+  and diff checks pass.
+- **Limitation:** Hosted upload/custody, independent redaction proof, and
+  Studio recipient/customer acceptance remain open. No checkbox changed.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No production, provider, payment, database, deployment,
+  credential, or browser operation occurred.

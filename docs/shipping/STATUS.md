@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · STUDIO-CLI-001 exact-preview binding
+
+CLI PR #77 exact head `fdaec852652425806ba20e6b95b03617ab0c06df` hardens the
+existing client projection command with an explicit safe-field allowlist and
+an upload approval bound to the exact canonical preview digest. Shared full
+suite and CLI full configured suite both exited 0; focused tests are 4/4 and
+1/1; public-boundary audit passed. This remains code-side progress only:
+hosted upload/custody, independent redaction proof, and Studio recipient
+acceptance remain open. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/studio-cli-001-exact-preview-2026-10-07.md`.
+
 ## 2026-10-07 · HUNT/MCP phase merged
 
 CLI PR #76 source head `b72982a` merged to `main` as

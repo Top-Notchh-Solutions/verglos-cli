@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 exact-preview binding · 2026-10-07
+
+CLI PR #77 exact head `fdaec85` hardens the existing `record project-client`
+substrate from `1fa878d`: safe projection fields are allowlisted, arbitrary and
+private/nested fields are refused, fixed limitation redaction is enforced, and
+the explicit upload approval binds organization, client workspace, record, and
+the exact canonical preview digest. Shared full suite and CLI full configured
+suite exit 0; focused tests 4/4 and 1/1; public-boundary audit passes. This is
+code-side evidence only; hosted custody/upload, independent redaction proof,
+and Studio recipient acceptance remain open. No checkbox changed; backlog is
+**218 checked / 62 unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/studio-cli-001-exact-preview-2026-10-07.md`.
+
 ## QUAL-WEB-005 preview browser boundary · 2026-10-07
 
 Chrome CDP navigation to the PR #153 Preview `/account/privacy` reached
