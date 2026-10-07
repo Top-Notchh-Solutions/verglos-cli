@@ -2277,3 +2277,25 @@ and authenticated non-production E2E remain open, so `QUAL-WEB-005` remains
 unchecked. Backlog remains **218 checked / 62 unchecked / 280 total**.
 Private evidence:
 `docs/shipping/evidence/qual-web-005-supporting-dispositions-pr153-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 customer-held digest registration route
+
+Web PR #153 exact head `03d60e99ccf895b3122c4ae6641c3d12b44169bf` adds the
+authenticated, same-origin `/api/v1/account/customer-held-digests` route. It
+registers and lists only the authenticated user's canonical SHA-256 identities
+for the fixed `signed_vgl` kind, persists no customer-held bytes, bounds and
+strictly validates JSON input, returns private no-store responses, and is
+idempotent on the user/digest key. Legal and contract holds remain outside the
+ordinary user surface.
+
+Focused route/hold/digest/worker tests pass 11/11; full serial Web is
+870/847/23/0; typecheck, Drizzle, 35-migration ordering, negative boundary,
+and build pass. Hosted Verify `37608270504` and Vercel Preview Comments pass.
+PR #153 remains open, clean, and unmerged. `QUAL-WEB-005` remains unchecked:
+authenticated non-production deletion E2E, approved legal/customer-held
+dispositions, consent inventory, production migration, row reconciliation,
+restore/RPO, deployment rollback, and independent acceptance remain open.
+Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
+production/database/provider/payment/deployment write, migration, deletion, or
+browser mutation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-customer-held-digest-route-2026-10-07.md`.

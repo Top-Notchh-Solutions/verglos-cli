@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-005 customer-held digest registration route · 2026-10-07
+
+- **Decision:** Accept the authenticated customer-held digest registration
+  boundary as implementation progress; keep `QUAL-WEB-005` and all merge/
+  deployment gates open.
+- **Evidence:** PR #153 exact head
+  `03d60e99ccf895b3122c4ae6641c3d12b44169bf`; focused 11/11; serial
+  870/847/23/0; hosted Verify `37608270504` passed.
+- **Safety:** The route is user-scoped, same-origin, bounded, canonical,
+  idempotent, and stores only a digest plus fixed record kind. It never accepts
+  record bytes. Legal and contract holds are not user-controlled.
+- **Boundary:** This does not qualify authenticated deletion E2E, legal/
+  customer-held disposition, consent inventory, production migration,
+  reconciliation, restore/RPO, deployment rollback, or independent acceptance.
+  No production or destructive operation occurred; no checkbox changed.
+
 ## QUAL-WEB-005 preview browser boundary · 2026-10-07
 
 - **Decision:** Treat the protected-preview redirect as an access blocker, not

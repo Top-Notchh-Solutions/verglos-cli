@@ -3389,4 +3389,26 @@ before enabling any destructive adapter.
   production or destructive operation occurred; backlog remains 218 checked /
   62 unchecked / 280 total.
 - **Evidence:**
-  `docs/shipping/evidence/qual-web-005-supporting-dispositions-pr153-2026-10-07.md`.
+`docs/shipping/evidence/qual-web-005-supporting-dispositions-pr153-2026-10-07.md`.
+
+# 2026-10-07 — QUAL-WEB-005 customer-held digest registration route
+
+- **Batch:** add the authenticated same-origin customer-held digest registry
+  boundary to PR #153; accept only the fixed `signed_vgl` kind and canonical
+  SHA-256 identity, never record bytes.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total
+  (77.9%)**.
+- **Code:** Web PR #153 exact head
+  `03d60e99ccf895b3122c4ae6641c3d12b44169bf`, pushed and open.
+- **Local:** focused route/hold/digest/worker tests 11/11; serial 870/847/23/0;
+  typecheck; Drizzle; 35-migration ordering; negative-boundary 2/2; build;
+  diff check.
+- **Hosted:** Verify `37608270504` passed; Vercel Preview Comments passed.
+- **Boundary:** legal/contract hold administration is not exposed to ordinary
+  users. No production/database/provider/payment/deployment write, migration,
+  deletion, or browser mutation. Authenticated non-production deletion E2E,
+  executed dispositions, consent inventory, reconciliation, restore/RPO,
+  rollback, and independent acceptance remain open.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-customer-held-digest-route-2026-10-07.md`.
