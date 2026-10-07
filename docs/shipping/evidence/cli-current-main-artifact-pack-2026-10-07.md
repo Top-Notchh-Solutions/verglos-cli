@@ -30,12 +30,24 @@ container with `in-toto==3.0.0` and exited `0`:
 in-toto release binding verified: 6 archives with exact SHA-256 products
 ```
 
+The generated current-head format artifacts also passed official validators in
+disposable containers:
+
+- CycloneDX CLI `0.33.1`: CycloneDX 1.5 BOM validated successfully; 255
+  components were present.
+- SPDX Tools `0.8.5`: SPDX 2.3 document validated successfully; 255 packages
+  and 256 relationships were present.
+
+The license inventory contained 250 lockfile package entries, one bundled
+component, and 7 review blockers.
+
 ## Remaining boundary
 
 This is official in-toto shape/binding evidence for the current archive set,
 not Sigstore identity, trusted publishing, legal approval, or release
 acceptance. QUAL-CLI-006 remains open for the remaining official format
-validators, trusted-publishing/legal review, and independent acceptance.
+validator coverage, the 7 license review blockers, trusted-publishing/legal
+review, and independent acceptance.
 
 No production/provider/customer/database/deployment/publication operation
 occurred and no backlog checkbox changed.

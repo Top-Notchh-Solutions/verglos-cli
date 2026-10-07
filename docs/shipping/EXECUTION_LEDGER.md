@@ -8,9 +8,13 @@
   packaging produced all six expected archives. Official `in-toto==3.0.0` in
   disposable `python:3.12-slim` Docker then verified all six exact SHA-256
   products and exited 0.
+- **Standards:** Current-head CycloneDX CLI `0.33.1` and SPDX Tools `0.8.5`
+  validated the generated 255-component/package artifacts. The inventory
+  contains 7 license review blockers.
 - **Disposition:** Artifact provenance-shape evidence only. Sigstore identity,
-  trusted publishing/legal review, remaining official format validators, and
-  independent acceptance remain open; QUAL-CLI-006 remains open.
+  trusted publishing/legal review, resolution of the 7 license review
+  blockers, and independent acceptance remain open; QUAL-CLI-006 remains
+  open.
 - **Boundary:** No production/provider/customer/database/deployment/
   publication operation occurred; no checkbox changed; backlog remains
   **218/62/280 (77.9%)**.

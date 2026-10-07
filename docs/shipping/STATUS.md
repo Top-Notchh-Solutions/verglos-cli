@@ -8,9 +8,11 @@ lockfile graph; build passed **8/8** and public packaging produced all six
 expected archives. A disposable `python:3.12-slim` container running official
 `in-toto==3.0.0` then verified all six archives with exact SHA-256 products and
 exited 0. This advances artifact provenance-shape evidence but does not claim
-Sigstore identity, trusted publishing, legal approval, or release acceptance;
-QUAL-CLI-006 remains open. No checkbox changed; backlog remains **218 checked /
-62 unchecked / 280 total (77.9%)**. Evidence:
+Sigstore identity, trusted publishing, legal approval, or release acceptance.
+Current-head CycloneDX CLI `0.33.1` and SPDX Tools `0.8.5` also validated the
+generated 255-component/package artifacts; the inventory retains 7 license
+review blockers. QUAL-CLI-006 remains open. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/cli-current-main-artifact-pack-2026-10-07.md`.
 
 ## 2026-10-07 · CLI current-main Hunt adversarial requalification

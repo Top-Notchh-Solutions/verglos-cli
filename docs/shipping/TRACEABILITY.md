@@ -8,8 +8,8 @@ isolated worktree. Official `in-toto==3.0.0` in a disposable
 `python:3.12-slim` Docker container then verified all six archives with exact
 SHA-256 products and exited 0. This is artifact provenance-shape evidence
 only; Sigstore identity, trusted publishing/legal review, remaining official
-format validators, and independent acceptance remain open. No checkbox
-changed. See
+format validator coverage, the 7 license review blockers, and independent
+acceptance remain open. No checkbox changed. See
 `docs/shipping/evidence/cli-current-main-artifact-pack-2026-10-07.md`.
 
 ## CLI current-main Hunt adversarial requalification · 2026-10-07
