@@ -16,6 +16,8 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
+import { explainHuntVerdict } from "./tools/explain-hunt-verdict.js";
+import { huntBeforeWritePreflight } from "./tools/hunt-before-write.js";
 import { checkPolicyRecord } from "./tools/check-policy.js";
 import { parseAttestArgs, parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseHuntBeforeWriteArgs, parseHuntExplainVerdictArgs, parseHuntFindingArgs, parseHuntReportArgs, parsePolicyCheckArgs, parseScanArgs } from "./input-validation.js";
 
@@ -91,7 +93,10 @@ const APPROVAL_RECEIPT_PROPERTY = {
  *
  * Shipped pre-write, package, scan, and explanation tools route through shared
  * scanner, input-boundary, authority, entitlement, and failure contracts.
- * Hunt and Attest remain explicit alpha stubs and do not execute or sign.
+ * Hunt finding/report calls use an optional host-provided private runtime;
+ * before-write is a bounded preflight and never synthesizes arbitrary recipes.
+ * Attest remains an explicit compatibility shell. Verdict explanation is
+ * bounded and non-executing.
  *
  * Design constraints from design §7:
  *   - Speaks JSON-RPC over stdio
@@ -104,6 +109,34 @@ const APPROVAL_RECEIPT_PROPERTY = {
 
 export type CheckBeforeWriteInput = ToolInput;
 export type CheckBeforeWriteResult = ToolResult;
+
+/**
+ * Optional host-provided bridge to the private Hunt runtime. The public MCP
+ * package only owns the authority/input boundary; it never imports private
+ * recipe or sandbox code. A missing bridge is an explicit not-attemptable
+ * result, never an implicit fallback to arbitrary process execution.
+ */
+export interface HuntExecutionBinding {
+  readonly recipePath?: string;
+  readonly trustStorePath?: string;
+  readonly ruleId?: string;
+  readonly subjectId?: string;
+  readonly observationId?: string;
+}
+
+export interface VerglosMcpHuntExecutor {
+  executeFinding(input: {
+    readonly reportPath: string;
+    readonly findingId: string;
+    readonly approvalReceipt: ApprovalReceipt;
+    readonly binding: HuntExecutionBinding;
+  }): Promise<unknown>;
+  executeReport(input: {
+    readonly reportPath: string;
+    readonly approvalReceipt: ApprovalReceipt;
+    readonly binding: HuntExecutionBinding;
+  }): Promise<unknown>;
+}
 
 // ─── Tool registration ────────────────────────────────────────────────────
 
@@ -213,12 +246,17 @@ const TOOLS = [
   {
     name: "verglos_hunt_finding",
     description:
-      "Pro. Verify one finding from a Verglos report by firing a synthesized proof in a local sandbox. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+      "Pro. Verify one finding from a Verglos report through the host-provided bounded Hunt runtime. Requires an exact approval and, for execution, a signed recipe/trust/subject binding; never synthesizes or runs arbitrary commands.",
     inputSchema: {
       type: "object",
       properties: {
         reportPath: { type: "string", description: "Path to verglos-report.json." },
         findingId: { type: "string", description: "Finding id to verify." },
+        recipePath: { type: "string", description: "Absolute path to the signed recipe used for this bounded execution." },
+        trustStorePath: { type: "string", description: "Absolute path to the caller-supplied recipe trust store." },
+        ruleId: { type: "string", description: "Exact rule id bound to the signed recipe." },
+        subjectId: { type: "string", description: "Exact immutable subject id bound to the signed recipe." },
+        observationId: { type: "string", description: "Exact observation id bound to the execution." },
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath", "findingId"],
@@ -228,11 +266,16 @@ const TOOLS = [
   {
     name: "verglos_hunt_report",
     description:
-      "Pro. Verify eligible Critical and High findings from a Verglos report in a local sandbox. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+      "Pro. Verify eligible Critical and High findings from a Verglos report through the host-provided bounded Hunt runtime. Requires an exact approval and, for execution, a signed recipe/trust/subject binding; never runs arbitrary commands.",
     inputSchema: {
       type: "object",
       properties: {
         reportPath: { type: "string", description: "Path to verglos-report.json." },
+        recipePath: { type: "string", description: "Absolute path to the signed recipe used for this bounded execution." },
+        trustStorePath: { type: "string", description: "Absolute path to the caller-supplied recipe trust store." },
+        ruleId: { type: "string", description: "Exact rule id bound to the signed recipe." },
+        subjectId: { type: "string", description: "Exact immutable subject id bound to the signed recipe." },
+        observationId: { type: "string", description: "Exact observation id bound to the execution." },
         ...APPROVAL_RECEIPT_PROPERTY,
       },
       required: ["reportPath"],
@@ -242,7 +285,7 @@ const TOOLS = [
   {
     name: "verglos_hunt_before_write",
     description:
-      "Pro. In-loop verifier for coding agents: submit a code block before write, then receive a sandbox-backed verdict. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+      "Pro. In-loop Hunt preflight for coding agents. Runs the bounded fast-path detectors and reports explicit partial coverage; it never turns arbitrary agent code into an executable recipe or claims a sandbox verdict.",
     inputSchema: {
       type: "object",
       properties: {
@@ -258,7 +301,7 @@ const TOOLS = [
   {
     name: "verglos_hunt_explain_verdict",
     description:
-      "Pro. Explain a hunt verdict for a finding: verified exploitable, false positive, or not attemptable. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+      "Pro. Explain a recorded Hunt verdict for a finding without rerunning Hunt or authorizing execution. This is bounded interpretation, not a production exploitability or security-certification claim.",
     inputSchema: {
       type: "object",
       properties: {
@@ -335,6 +378,23 @@ function alphaStub(name: string, tier: "pro" | "studio"): {
   };
 }
 
+function huntExecutionUnavailable(name: "verglos_hunt_finding" | "verglos_hunt_report") {
+  return {
+    ok: true as const,
+    tool: name,
+    status: "not_attemptable" as const,
+    execution: {
+      attempted: false,
+      reason: "No host-provided private Hunt runtime and complete signed execution binding were supplied.",
+    },
+    limitations: [
+      "No process or sandbox was started.",
+      "Arbitrary commands are never synthesized or executed.",
+      "Supply a signed supported recipe, trust store, exact rule/subject/observation binding, and a host runtime.",
+    ] as const,
+  };
+}
+
 function approvalTarget(name: string, input: Record<string, unknown>): string | undefined {
   if (name === "verglos_scan") {
     const root = input.projectRoot === undefined ? process.cwd() : input.projectRoot;
@@ -354,16 +414,23 @@ function approvalTarget(name: string, input: Record<string, unknown>): string | 
   return undefined;
 }
 
-function approvalFile(name: string, input: Record<string, unknown>): string | undefined {
-  if (name === "verglos_hunt_report" || name === "verglos_hunt_finding" || name === "verglos_attest") return typeof input.reportPath === "string" ? input.reportPath : undefined;
-  if (name === "verglos_hunt_before_write") return typeof input.filePath === "string" ? input.filePath : undefined;
-  return undefined;
+function approvalFiles(name: string, input: Record<string, unknown>): readonly string[] {
+  const files: string[] = [];
+  if (name === "verglos_hunt_report" || name === "verglos_hunt_finding" || name === "verglos_attest") {
+    if (typeof input.reportPath === "string") files.push(input.reportPath);
+    if (name === "verglos_hunt_report" || name === "verglos_hunt_finding") {
+      if (typeof input.recipePath === "string") files.push(input.recipePath);
+      if (typeof input.trustStorePath === "string") files.push(input.trustStorePath);
+    }
+  }
+  if (name === "verglos_hunt_before_write" && typeof input.filePath === "string") files.push(input.filePath);
+  return files;
 }
 
 export async function dispatchTool(
   name: string,
   args: Record<string, unknown> | undefined,
-  options: { readonly approvalStoreRoot?: string; readonly now?: string; readonly plan?: "free" | "pro" | "team" | "studio" | "enterprise" } = {},
+  options: { readonly approvalStoreRoot?: string; readonly now?: string; readonly plan?: "free" | "pro" | "team" | "studio" | "enterprise"; readonly huntExecutor?: VerglosMcpHuntExecutor } = {},
 ): Promise<{ content: { type: "text"; text: string }[] }> {
   if (args !== undefined && (!args || typeof args !== "object" || Array.isArray(args))) {
     return mcpError("MCP_ARGUMENTS_INPUT", "tool arguments must be an object");
@@ -407,8 +474,8 @@ export async function dispatchTool(
     if (authority.action === "network" && !target) return invalid("MCP_APPROVAL_SCOPE", "network approval must bind a valid exact target");
     if (target && (input.approvalReceipt as { target?: unknown } | undefined)?.target !== target) return invalid("MCP_APPROVAL_SCOPE", "approval receipt target does not match the requested tool target");
     const receipt = input.approvalReceipt as { files?: unknown; network?: unknown } | undefined;
-    const file = approvalFile(name, input);
-    if (file && (!Array.isArray(receipt?.files) || !receipt.files.includes(file))) return invalid("MCP_APPROVAL_SCOPE", "approval receipt does not cover the requested file scope");
+    const files = approvalFiles(name, input);
+    if (files.some((file) => !Array.isArray(receipt?.files) || !receipt.files.includes(file))) return invalid("MCP_APPROVAL_SCOPE", "approval receipt does not cover the requested file scope");
     const approvedNetwork = Array.isArray(receipt?.network) && receipt.network.every((value) => typeof value === "string") ? [...receipt.network] as string[] : [];
     const requiredNetwork = [...authority.networkTargets];
     if (approvedNetwork.sort().join("\n") !== requiredNetwork.sort().join("\n")) return invalid("MCP_APPROVAL_SCOPE", "approval receipt network scope does not exactly match the requested tool");
@@ -442,18 +509,37 @@ export async function dispatchTool(
       let parsed; try { parsed = parsePolicyCheckArgs(toolInput); } catch (error) { return invalid("MCP_POLICY_CHECK_INPUT", error instanceof Error ? error.message : "invalid input"); }
       try { return jsonResponse(await checkPolicyRecord(parsed)); } catch { return invalid("MCP_POLICY_CHECK_FAILED", "policy record could not be verified"); }
     }
-    case "verglos_hunt_finding":
-      try { parseHuntFindingArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      return jsonResponse(alphaStub(name, "pro"));
-    case "verglos_hunt_report":
-      try { parseHuntReportArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_REPORT_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      return jsonResponse(alphaStub(name, "pro"));
-    case "verglos_hunt_before_write":
-      try { parseHuntBeforeWriteArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      return jsonResponse(alphaStub(name, "pro"));
+    case "verglos_hunt_finding": {
+      let parsed; try { parsed = parseHuntFindingArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_FINDING_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      if (!options.huntExecutor || !parsed.recipePath || !parsed.trustStorePath || !parsed.ruleId || !parsed.subjectId || !parsed.observationId) return jsonResponse(huntExecutionUnavailable(name));
+      try {
+        return jsonResponse(await options.huntExecutor.executeFinding({
+          reportPath: parsed.reportPath,
+          findingId: parsed.findingId,
+          approvalReceipt: input.approvalReceipt as ApprovalReceipt,
+          binding: parsed,
+        }));
+      } catch { return invalid("MCP_HUNT_EXECUTION_FAILED", "hunt finding execution failed"); }
+    }
+    case "verglos_hunt_report": {
+      let parsed; try { parsed = parseHuntReportArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_REPORT_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      if (!options.huntExecutor || !parsed.recipePath || !parsed.trustStorePath || !parsed.ruleId || !parsed.subjectId || !parsed.observationId) return jsonResponse(huntExecutionUnavailable(name));
+      try {
+        return jsonResponse(await options.huntExecutor.executeReport({
+          reportPath: parsed.reportPath,
+          approvalReceipt: input.approvalReceipt as ApprovalReceipt,
+          binding: parsed,
+        }));
+      } catch { return invalid("MCP_HUNT_EXECUTION_FAILED", "hunt report execution failed"); }
+    }
+    case "verglos_hunt_before_write": {
+      let parsed; try { parsed = parseHuntBeforeWriteArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { return jsonResponse(await huntBeforeWritePreflight({ code: parsed.code, targetPath: parsed.filePath, language: parsed.language })); } catch { return invalid("MCP_HUNT_BEFORE_WRITE_FAILED", "hunt before-write preflight failed"); }
+    }
     case "verglos_hunt_explain_verdict":
-      try { parseHuntExplainVerdictArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_EXPLAIN_VERDICT_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      return jsonResponse(alphaStub(name, "pro"));
+      let parsedVerdict;
+      try { parsedVerdict = parseHuntExplainVerdictArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_EXPLAIN_VERDICT_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { return jsonResponse(explainHuntVerdict(parsedVerdict)); } catch { return invalid("MCP_HUNT_EXPLAIN_VERDICT_FAILED", "hunt verdict explanation failed"); }
     case "verglos_attest":
       try { parseAttestArgs(toolInput); } catch (error) { return invalid("MCP_ATTEST_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "studio"));
@@ -494,6 +580,8 @@ export function listAdvertisedTools() {
 export interface VerglosMcpServerOptions {
   /** Verified entitlement supplied by the host; omitted grants Free capabilities only. */
   readonly plan?: "free" | "pro" | "team" | "studio" | "enterprise";
+  /** Optional private-runtime bridge. The public MCP package never imports the private Hunt package. */
+  readonly huntExecutor?: VerglosMcpHuntExecutor;
 }
 
 export function createVerglosMcpServer(options: VerglosMcpServerOptions = {}): Server {
@@ -518,7 +606,7 @@ export function createVerglosMcpServer(options: VerglosMcpServerOptions = {}): S
     const args = request.params.arguments as
       | Record<string, unknown>
       | undefined;
-    return dispatchTool(name, args, { approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, plan: options.plan });
+    return dispatchTool(name, args, { approvalStoreRoot: process.env.VERGLOS_APPROVAL_STORE, plan: options.plan, huntExecutor: options.huntExecutor });
   });
 
   return server;

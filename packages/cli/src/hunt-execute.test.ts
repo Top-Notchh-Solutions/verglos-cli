@@ -64,7 +64,15 @@ test("HUNT-009 executes the fixed A1 recipe with exact trust and approval bindin
     const result = await run(root);
     assert.equal(result.code, 1);
     assert.equal(result.output.status, "completed");
+    assert.equal(result.output.executionAuthorized, true);
     assert.equal(result.output.recipeId, "a1-utf8-contains");
+    const recipeTrust = result.output.recipeTrust as Record<string, unknown>;
+    assert.equal(recipeTrust.verified, true);
+    assert.equal(recipeTrust.legalClearance, false);
+    assert.match(String(recipeTrust.feedDigest), /^sha256:[a-f0-9]{64}$/u);
+    const license = recipeTrust.license as Record<string, unknown>;
+    assert.match(String((license.textDigest as Record<string, unknown>).value), /^[a-f0-9]{64}$/u);
+    assert.doesNotMatch(JSON.stringify(result.output), /licenseText|Fixture license text/u);
     assert.deepEqual((result.output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.canonicalVerdict), ["confirmed"]);
     assert.doesNotMatch(JSON.stringify(result.output), /unsafe|fixture contains/u);
   } finally { await rm(root, { recursive: true, force: true }); }
@@ -105,6 +113,22 @@ test("HUNT-009 fails closed for binding drift and symlinked inputs", async () =>
     } finally { console.log = originalLog; }
     assert.deepEqual(JSON.parse(logs[0] ?? "{}"), { status: "denied", reason: "hunt execution input or authorization is invalid" });
     assert.equal((await readFile(inputs.reportPath, "utf8")).includes("fixture"), true);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("HUNT-009 rejects binding drift before loading the private runtime", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-execute-preflight-"));
+  try {
+    let runtimeLoaded = false;
+    const result = await run(root, {
+      ruleId: "hunt.other-rule",
+      runtimeLoader: async () => {
+        runtimeLoaded = true;
+        return import("../../hunt/dist/index.js");
+      },
+    });
+    assert.equal(result.code, 78);
+    assert.equal(runtimeLoaded, false);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

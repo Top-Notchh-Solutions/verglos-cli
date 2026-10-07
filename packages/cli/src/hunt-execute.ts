@@ -1,6 +1,6 @@
 import { constants } from "node:fs";
 import { lstat, open } from "node:fs/promises";
-import { ApprovalReceiptSchema, parseHuntRecipe, parseHuntRecipeTrustPolicy, type ScanResult } from "@verglos/shared";
+import { ApprovalReceiptSchema, huntRecipeTrustPolicyDigest, parseHuntRecipe, parseHuntRecipeTrustPolicy, verifyHuntRecipe, type ApprovalReceipt, type ScanResult } from "@verglos/shared";
 import { loadHuntRuntime, type HuntRuntimeLoader } from "./hunt-runtime.js";
 
 const MAX_INPUT_BYTES = 8 * 1024 * 1024;
@@ -38,25 +38,45 @@ function parseReport(value: unknown): ScanResult {
   return report as unknown as ScanResult;
 }
 
-export async function executeHuntRecipe(
-  input: { readonly reportPath: string; readonly recipePath: string; readonly trustStorePath: string; readonly approvalPath: string; readonly ruleId: string; readonly subjectId: string; readonly observationId: string; readonly findingId?: string; readonly json?: boolean; readonly quiet?: boolean; readonly runtimeLoader?: HuntRuntimeLoader },
-): Promise<number> {
+export interface HuntRecipeExecutionInput {
+  readonly reportPath: string;
+  readonly recipePath: string;
+  readonly trustStorePath: string;
+  readonly approvalPath?: string;
+  readonly approval?: ApprovalReceipt;
+  readonly ruleId: string;
+  readonly subjectId: string;
+  readonly observationId: string;
+  readonly findingId?: string;
+  readonly runtimeLoader?: HuntRuntimeLoader;
+}
+
+export interface HuntRecipeExecutionResult {
+  readonly code: number;
+  readonly projection: Record<string, unknown>;
+}
+
+export async function runHuntRecipe(input: HuntRecipeExecutionInput): Promise<HuntRecipeExecutionResult> {
   try {
-    const [reportValue, recipeValue, trustValue, approvalValue] = await Promise.all([
+    const [reportValue, recipeValue, trustValue] = await Promise.all([
       readJson(input.reportPath, "Hunt report"),
       readJson(input.recipePath, "Hunt recipe"),
       readJson(input.trustStorePath, "Hunt trust store"),
-      readJson(input.approvalPath, "Hunt approval"),
     ]);
+    const approvalValue = input.approval ?? (input.approvalPath ? await readJson(input.approvalPath, "Hunt approval") : undefined);
+    if (!approvalValue) throw new Error("Hunt approval is missing");
     const report = parseReport(reportValue);
     const recipe = parseHuntRecipe(recipeValue);
+    const trust = parseHuntRecipeTrustPolicy(trustValue);
+    const approval = ApprovalReceiptSchema.parse(approvalValue);
+    const executionAt = new Date().toISOString();
+    const trustVerification = verifyHuntRecipe(recipe, trust, executionAt);
+    if (!trustVerification.trusted) throw new Error(`recipe trust verification failed: ${trustVerification.reason}`);
+    if (recipe.targetSubjectId !== input.subjectId || recipe.ruleId !== input.ruleId) throw new Error("recipe subject/rule does not match the requested execution binding");
     const runtime = await loadHuntRuntime(input.runtimeLoader);
     const supported = runtime.validateSupportedHuntRecipe(recipe);
     if (!supported.supported) throw new Error(`recipe is not in the supported A1 catalog (${supported.reason})`);
-    const trust = parseHuntRecipeTrustPolicy(trustValue);
-    const approval = ApprovalReceiptSchema.parse(approvalValue);
-    const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: new Date().toISOString() };
-    if (recipe.targetSubjectId !== input.subjectId || recipe.ruleId !== input.ruleId) throw new Error("recipe subject/rule does not match the requested execution binding");
+    const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: executionAt };
     const result = await runtime.runHunt(report, {
       adapter: new runtime.RestrictedProcessAdapter(recipe),
       sandbox: "restricted-process",
@@ -66,17 +86,40 @@ export async function executeHuntRecipe(
     });
     const projection = {
       status: "completed",
+      executionAuthorized: true,
       recipeId: recipe.recipeId,
       recipeDigest: supported.recipeDigest,
+      trustPolicyDigest: huntRecipeTrustPolicyDigest(trust),
+      recipeTrust: {
+        verified: true,
+        feedId: trustVerification.feedId,
+        feedOrigin: trustVerification.origin,
+        feedDigest: trustVerification.feedDigest,
+        recipeDigest: trustVerification.recipeDigest,
+        license: { id: trustVerification.license.licenseId, source: trustVerification.license.source, textDigest: trustVerification.license.textDigest },
+        legalClearance: false,
+        limitation: trustVerification.limitation,
+      },
       sandbox: result.sandbox,
       outcomes: result.outcomes.map((outcome) => ({ findingId: outcome.findingId, verdict: outcome.verdict, canonicalVerdict: outcome.canonicalVerdict, reason: outcome.reason, durationMs: outcome.durationMs, evidenceDigest: outcome.evidenceDigest, executionStatus: outcome.executionStatus, assurance: outcome.assurance })),
     };
-    if (input.json) console.log(JSON.stringify(projection));
-    else if (!input.quiet) console.log(`Hunt executed ${projection.outcomes.length} finding(s) with the fixed A1 ${recipe.recipeId} recipe.`);
-    return projection.outcomes.some((outcome) => outcome.canonicalVerdict === "confirmed") ? 1 : 0;
+    return {
+      code: projection.outcomes.some((outcome) => outcome.canonicalVerdict === "confirmed") ? 1 : 0,
+      projection,
+    };
   } catch {
-    if (input.json) console.log(JSON.stringify({ status: "denied", reason: "hunt execution input or authorization is invalid" }));
-    else if (!input.quiet) console.error("Hunt execution was not authorized or its bounded input was invalid.");
-    return 78;
+    return { code: 78, projection: { status: "denied", reason: "hunt execution input or authorization is invalid" } };
   }
+}
+
+export async function executeHuntRecipe(
+  input: HuntRecipeExecutionInput & { readonly json?: boolean; readonly quiet?: boolean },
+): Promise<number> {
+  const result = await runHuntRecipe(input);
+  if (input.json) console.log(JSON.stringify(result.projection));
+  else if (!input.quiet) {
+    if (result.code === 0) console.log(`Hunt executed ${Array.isArray(result.projection.outcomes) ? result.projection.outcomes.length : 0} finding(s) with the fixed A1 recipe.`);
+    else console.error("Hunt execution was not authorized or its bounded input was invalid.");
+  }
+  return result.code;
 }

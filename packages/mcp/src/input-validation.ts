@@ -75,14 +75,35 @@ function rejectUnknown(input: Record<string, unknown>, allowed: readonly string[
   for (const key of Object.keys(input)) if (!allowed.includes(key)) throw new Error(`unknown ${tool} argument: ${key}`);
 }
 
-export function parseHuntFindingArgs(value: unknown): { reportPath: string; findingId: string } {
-  const input = objectArgs(value, "hunt_finding"); rejectUnknown(input, ["reportPath", "findingId"], "hunt_finding");
-  return { reportPath: boundedString(input, "reportPath", true)!, findingId: boundedString(input, "findingId", true, 512)! };
+export function parseHuntFindingArgs(value: unknown): { reportPath: string; findingId: string } & HuntExecutionBindingInput {
+  const input = objectArgs(value, "hunt_finding"); rejectUnknown(input, ["reportPath", "findingId", ...HUNT_EXECUTION_KEYS], "hunt_finding");
+  return { reportPath: boundedString(input, "reportPath", true)!, findingId: boundedString(input, "findingId", true, 512)!, ...parseHuntExecutionBinding(input, "hunt_finding") };
 }
 
-export function parseHuntReportArgs(value: unknown): { reportPath: string } {
-  const input = objectArgs(value, "hunt_report"); rejectUnknown(input, ["reportPath"], "hunt_report");
-  return { reportPath: boundedString(input, "reportPath", true)! };
+export function parseHuntReportArgs(value: unknown): { reportPath: string } & HuntExecutionBindingInput {
+  const input = objectArgs(value, "hunt_report"); rejectUnknown(input, ["reportPath", ...HUNT_EXECUTION_KEYS], "hunt_report");
+  return { reportPath: boundedString(input, "reportPath", true)!, ...parseHuntExecutionBinding(input, "hunt_report") };
+}
+
+const HUNT_EXECUTION_KEYS = ["recipePath", "trustStorePath", "ruleId", "subjectId", "observationId"] as const;
+type HuntExecutionKey = (typeof HUNT_EXECUTION_KEYS)[number];
+export type HuntExecutionBindingInput = Partial<Record<HuntExecutionKey, string>>;
+
+function parseHuntExecutionBinding(input: Record<string, unknown>, tool: string): HuntExecutionBindingInput {
+  const values = HUNT_EXECUTION_KEYS.map((key) => input[key]);
+  const present = values.some((value) => value !== undefined);
+  if (!present) return {};
+  if (values.some((value) => value === undefined)) throw new Error(`${tool} execution binding requires recipePath, trustStorePath, ruleId, subjectId, and observationId together`);
+  const recipePath = boundedString(input, "recipePath", true)!;
+  const trustStorePath = boundedString(input, "trustStorePath", true)!;
+  if (!isAbsolute(recipePath) || !isAbsolute(trustStorePath)) throw new Error(`${tool} execution paths must be absolute`);
+  const ruleId = boundedString(input, "ruleId", true, 512)!;
+  const subjectId = boundedString(input, "subjectId", true, 4096)!;
+  const observationId = boundedString(input, "observationId", true, 512)!;
+  for (const value of [recipePath, trustStorePath, ruleId, subjectId, observationId]) {
+    if (/[\u0000-\u001f\u007f]/u.test(value)) throw new Error(`${tool} execution binding contains control characters`);
+  }
+  return { recipePath, trustStorePath, ruleId, subjectId, observationId };
 }
 
 export function parseHuntBeforeWriteArgs(value: unknown): { code: string; filePath: string; language: string } {

@@ -221,7 +221,7 @@ test("MCP dispatch rejects unknown tools with a stable structured error", async 
   assertMcpError(await dispatchTool("verglos_unknown", {}), { error: "usage", code: "MCP_UNKNOWN_TOOL", message: "unknown MCP tool", category: "unsupported" });
 });
 
-test("MCP dispatch denies approval-required tools before their handler or stub", async () => {
+test("MCP dispatch denies approval-required tools before their handler or unavailable result", async () => {
   const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/report.json" }, { plan: "pro" }));
   assert.equal(result.code, "MCP_APPROVAL_REQUIRED");
   assert.equal(result.error, "usage");
@@ -408,7 +408,7 @@ test("approval-free MCP tools keep strict unknown-field validation", async () =>
   assert.equal(result.error, "usage");
 });
 
-test("MCP dispatch accepts an exact approved receipt and preserves the alpha stub state", async () => {
+test("MCP dispatch accepts an exact approved receipt and returns an explicit unavailable execution", async () => {
   const request = {
     requestId: "123e4567-e89b-12d3-a456-426614174000",
     action: "execute" as const,
@@ -422,8 +422,76 @@ test("MCP dispatch accepts an exact approved receipt and preserves the alpha stu
   };
   const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
   const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/report.json", approvalReceipt }, { plan: "pro" }));
-  assert.equal(result.error, "not_implemented_in_alpha");
+  assert.equal(result.ok, true);
+  assert.equal(result.status, "not_attemptable");
+  assert.equal((result.execution as Record<string, unknown>).attempted, false);
   assert.equal(result.tool, "verglos_hunt_report");
+});
+
+test("MCP Hunt execution requires a complete binding and preserves approval scope", async () => {
+  const reportPath = "/tmp/report.json";
+  const recipePath = "/tmp/recipe.json";
+  const trustStorePath = "/tmp/trust-store.json";
+  const request = {
+    requestId: "623e4567-e89b-12d3-a456-426614174000",
+    action: "execute" as const,
+    actor: "agent",
+    target: `report:${reportPath}`,
+    files: [reportPath, recipePath, trustStorePath],
+    network: [],
+    policyEffect: "hunt report",
+    requestedAt: "2026-01-01T00:00:00Z",
+    expiresAt: "2099-01-01T00:00:00Z",
+  };
+  const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  let received: unknown;
+  const result = responseText(await dispatchTool("verglos_hunt_report", {
+    reportPath, recipePath, trustStorePath,
+    ruleId: "hunt.a1.utf8-contains", subjectId: "urn:verglos:subject:test", observationId: "urn:uuid:723e4567-e89b-12d3-a456-426614174000",
+    approvalReceipt,
+  }, {
+    plan: "pro",
+    huntExecutor: {
+      executeFinding: async (input) => { received = input; return { ok: true, status: "completed" }; },
+      executeReport: async (input) => { received = input; return { ok: true, status: "completed" }; },
+    },
+  }));
+  assert.deepEqual(result, { ok: true, status: "completed" });
+  assert.equal((received as { reportPath: string }).reportPath, reportPath);
+  assert.deepEqual((received as { approvalReceipt: unknown }).approvalReceipt, approvalReceipt);
+});
+
+test("MCP Hunt before-write never executes arbitrary agent code", async () => {
+  const request = {
+    requestId: "723e4567-e89b-12d3-a456-426614174000",
+    action: "execute" as const,
+    actor: "agent",
+    target: "file:/tmp/example.ts",
+    files: ["/tmp/example.ts"],
+    network: [],
+    policyEffect: "hunt before write",
+    requestedAt: "2026-01-01T00:00:00Z",
+    expiresAt: "2099-01-01T00:00:00Z",
+  };
+  const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  const result = responseText(await dispatchTool("verglos_hunt_before_write", { code: "const value = 1", filePath: "/tmp/example.ts", language: "ts", approvalReceipt }, { plan: "pro" }));
+  assert.equal(result.ok, true);
+  assert.equal(result.status, "not_attemptable");
+  assert.deepEqual(result.verdict, "not_attemptable");
+  assert.match(JSON.stringify(result.limitations), /Arbitrary code/);
+});
+
+test("MCP dispatch explains a Hunt verdict without approval or execution", async () => {
+  const result = responseText(await dispatchTool("verglos_hunt_explain_verdict", { findingId: "finding-1", verdict: "true" }, { plan: "pro" }));
+  assert.equal(result.ok, true);
+  assert.equal(result.tool, "verglos_hunt_explain_verdict");
+  assert.equal(result.findingId, "finding-1");
+  assert.equal(result.verdict, "true");
+  assert.match(String(result.meaning), /does not by itself establish production exploitability/);
+  assert.deepEqual(result.limitations instanceof Array, true);
+
+  const denied = responseText(await dispatchTool("verglos_hunt_explain_verdict", { findingId: "finding-1", verdict: "true" }));
+  assert.equal(denied.code, "MCP_ENTITLEMENT_REQUIRED");
 });
 
 test("MCP dispatch rejects a valid receipt widened to another target", async () => {
@@ -467,7 +535,8 @@ test("MCP dispatch persists an approved receipt when an audit store is configure
     const request = { requestId: "423e4567-e89b-12d3-a456-426614174000", action: "execute" as const, actor: "agent", target: "report:/tmp/audit.json", files: ["/tmp/audit.json"], network: [], policyEffect: "hunt report", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" };
     const approvalReceipt = createApprovalReceipt(request, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
     const result = responseText(await dispatchTool("verglos_hunt_report", { reportPath: "/tmp/audit.json", approvalReceipt }, { approvalStoreRoot: root, plan: "pro" }));
-    assert.equal(result.error, "not_implemented_in_alpha");
+    assert.equal(result.ok, true);
+    assert.equal(result.status, "not_attemptable");
     assert.equal((await readApprovalReceipt(root, approvalReceipt.requestDigest)).requestId, request.requestId);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

@@ -16,4 +16,4 @@
  * no Verglos-hosted entitlement lookup occurs in the MCP call path.
  */
 export { createVerglosMcpServer, startStdioServer } from "./server.js";
-export type { CheckBeforeWriteInput, CheckBeforeWriteResult, VerglosMcpServerOptions } from "./server.js";
+export type { CheckBeforeWriteInput, CheckBeforeWriteResult, HuntExecutionBinding, VerglosMcpHuntExecutor, VerglosMcpServerOptions } from "./server.js";
