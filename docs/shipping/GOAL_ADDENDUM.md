@@ -1,5 +1,18 @@
 # Goal addendum — 2026-10-07
 
+## Web GitHub App server-side exchange
+
+PR #154 exact head `096de93` implements the server-held App-JWT installation
+exchange, provider-authoritative immutable identity/permissions/repository
+projection, encrypted token expiry, and expiry/unknown-expiry refresh in SCM
+delivery. Focused SCM **24/24**, full Web **846/868** with 22 explicit skips,
+hosted Verify **37643258692**, Vercel, typecheck/schema/migration/security/build
+checks passed. Live authorized GitHub App/org/webhook/cutover evidence and
+independent acceptance remain required; no checkbox changed. Backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. No production/provider/
+payment/database/migration/deployment/credential/customer/browser state changed.
+Evidence: `docs/shipping/evidence/github-app-server-exchange-2026-10-07.md`.
+
 ## CLI origin/main reconciliation and Hunt adversarial qualification
 
 The founder-owned CLI checkout was preserved; a clean worktree at fetched

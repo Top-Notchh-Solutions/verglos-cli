@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## R-GITHUB-WEB-006 provider exchange and cutover evidence · 2026-10-07
+
+PR #154 moves GitHub App token issuance, identity binding, and expiry refresh
+behind the server-held App JWT and passes local/hosted code checks. Remaining
+risk is operational: no authorized GitHub App installation, live provider
+webhook lifecycle, multi-repository cutover, token-refresh observation, or
+independent review has occurred. Owner: SCM/release qualification. Mitigation:
+use test/preview credentials and an authorized organization to exercise install,
+permissions, token exchange/expiry, webhook replay, suspend/revoke/reauthorize,
+delivery reconciliation, and rollback before accepting TEAM-WEB-006 and the
+related gates. No production state was touched.
+
 ## R-QUAL-CLI-006 / HUNT-011 exact-head evidence boundary · 2026-10-07
 
 The clean remote-head CLI worktree passed forced Turbo validation **23/23** and

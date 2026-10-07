@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## Web GitHub App server-side exchange · 2026-10-07
+
+- **Decision:** GitHub installation tokens and immutable installation identity
+  must come from the server-held App JWT/provider API, not browser input.
+- **Evidence:** PR #154 head `096de93`; focused SCM **24/24**; full Web
+  **846/868** with zero failures; Verify `37643258692` and Vercel passed.
+- **Security boundary:** The route accepts only installation/repository
+  selection intent, validates least-privilege permissions and provider-owned
+  IDs, encrypts token/expiry, and refreshes through the App exchange.
+- **Limit:** No live App credential/org/webhook/cutover or independent review
+  evidence exists, so TEAM-WEB-006 and the GitHub release gates remain open.
+
 ## CLI origin/main reconciliation and Hunt adversarial qualification · 2026-10-07
 
 - **Decision:** Treat the exact remote-head and pinned Docker run as current

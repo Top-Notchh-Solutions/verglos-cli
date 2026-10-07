@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — Web GitHub App server-side exchange
+
+- **Code:** Web PR #154 exact head `096de93`, pushed; hosted Verify
+  `37643258692` and Vercel Preview passed.
+- **Verification:** Focused SCM **24/24**; full Web **846/868** with 22
+  explicit environment-gated skips and zero failures; typecheck, schema,
+  29-migration ordering, negative boundary **2/2**, build **38/38**, and diff
+  checks passed.
+- **Change:** Server-side App-JWT installation-token exchange and
+  provider-authoritative account/repository/permission projection; encrypted
+  expiry-aware refresh in the SCM delivery cron; browser-supplied GitHub token
+  and immutable identity removed from the GitHub route input.
+- **Disposition:** Implementation evidence only; TEAM-WEB-006 and live
+  GitHub/organization/webhook/independent gates remain open. No checkbox
+  changed; backlog remains **218/62/280 (77.9%)**.
+- **Boundary:** No production/provider/payment/database/migration/deployment/
+  credential/customer/browser write occurred.
+- **Evidence:** `docs/shipping/evidence/github-app-server-exchange-2026-10-07.md`.
+
 # 2026-10-07 — CLI origin/main reconciliation and Hunt adversarial qualification
 
 - **Source:** Preserved founder-owned checkout; clean worktree exact

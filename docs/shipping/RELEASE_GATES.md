@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## Web GitHub App server-side exchange · 2026-10-07
+
+PR #154 exact head `096de93` passes focused SCM **24/24**, full Web **846/868**
+with 22 environment skips and zero failures, hosted Verify `37643258692`,
+Vercel, typecheck/schema/migration/negative-boundary/build checks. This
+advances the GitHub implementation gate but does not pass it: live authorized
+App installation, immutable multi-repository scope, least-privilege provider
+verification, signed webhook lifecycle/replay/reconciliation, cutover, and
+independent acceptance remain required. No checkbox or production state changed.
+
 ## CLI origin/main reconciliation and Hunt adversarial qualification · 2026-10-07
 
 The exact remote CLI head `7d060b2` passes forced Turbo validation **23/23**;

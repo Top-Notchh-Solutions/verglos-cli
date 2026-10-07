@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Web GitHub App server-side exchange
+
+Web PR #154 exact head `096de93` moves GitHub installation token issuance and
+immutable identity derivation server-side. The route no longer accepts a
+browser-supplied GitHub provider token/account/repository identity; the server
+uses a signed App JWT, validates least-privilege permissions, stores the
+short-lived encrypted token/expiry, and refreshes expiring or unknown-expiry
+tokens in SCM delivery. Focused SCM tests **24/24**; full Web **846 passed / 22
+skips / 0 failures**; typecheck, schema, 29-migration, negative-boundary,
+build **38/38**, and diff checks passed. Hosted Verify **37643258692** and
+Vercel passed. Live authorized GitHub App/org/webhook evidence and independent
+acceptance remain open; no checkbox changed. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/github-app-server-exchange-2026-10-07.md`.
+
 ## 2026-10-07 · CLI origin/main reconciliation and Hunt adversarial qualification
 
 The founder-owned CLI checkout was preserved because it contains untracked

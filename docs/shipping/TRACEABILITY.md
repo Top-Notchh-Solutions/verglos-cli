@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## Web GitHub App server-side exchange · 2026-10-07
+
+PR #154 exact head `096de93` wires the GitHub installation route to a
+server-held App-JWT exchange, provider-authoritative identity/permission and
+repository projection, encrypted token expiry, and delivery-time refresh.
+Focused SCM tests **24/24**, full Web **846/868** (22 explicit skips), hosted
+Verify **37643258692**, Vercel, typecheck/schema/migration/security/build checks
+passed. This does not prove live GitHub App/org installation, webhook delivery,
+authorized cutover, or independent acceptance; TEAM-WEB-006 and related gates
+remain open. No checkbox changed. See
+`docs/shipping/evidence/github-app-server-exchange-2026-10-07.md`.
+
 ## CLI origin/main reconciliation and Hunt adversarial qualification · 2026-10-07
 
 The preserved founder checkout was not reset. Remote `origin/main` was fetched
