@@ -5,9 +5,10 @@
 In an isolated disposable worktree at exact CLI `origin/main` `7d060b2`, the
 documented cross-platform architecture setup materialized the 254-package
 lockfile graph; build passed **8/8** and public packaging produced all six
-expected archives. Official in-toto verification was not claimed because the
-host lacks `in-toto-verify` and the disposable `in-toto==3.0.0` installation
-stalled on its cryptography wheel. This is packaging evidence only;
+expected archives. A disposable `python:3.12-slim` container running official
+`in-toto==3.0.0` then verified all six archives with exact SHA-256 products and
+exited 0. This advances artifact provenance-shape evidence but does not claim
+Sigstore identity, trusted publishing, legal approval, or release acceptance;
 QUAL-CLI-006 remains open. No checkbox changed; backlog remains **218 checked /
 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/cli-current-main-artifact-pack-2026-10-07.md`.

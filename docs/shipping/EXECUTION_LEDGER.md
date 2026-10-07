@@ -5,10 +5,12 @@
 - **Code:** Exact CLI remote head `7d060b2`, isolated disposable worktree.
 - **Verification:** Cross-platform architecture setup plus frozen install
   materialized the 254-package lockfile graph; build **8/8** and public
-  packaging produced all six expected archives.
-- **Limitation:** Official in-toto verification was not claimed because
-  `in-toto-verify` is absent and the disposable `in-toto==3.0.0` installation
-  stalled on its cryptography wheel. QUAL-CLI-006 remains open.
+  packaging produced all six expected archives. Official `in-toto==3.0.0` in
+  disposable `python:3.12-slim` Docker then verified all six exact SHA-256
+  products and exited 0.
+- **Disposition:** Artifact provenance-shape evidence only. Sigstore identity,
+  trusted publishing/legal review, remaining official format validators, and
+  independent acceptance remain open; QUAL-CLI-006 remains open.
 - **Boundary:** No production/provider/customer/database/deployment/
   publication operation occurred; no checkbox changed; backlog remains
   **218/62/280 (77.9%)**.

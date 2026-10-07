@@ -4,10 +4,10 @@
 
 Exact CLI `origin/main` `7d060b2` passed the documented cross-platform install,
 build **8/8**, and public packaging produced all six expected archives in an
-isolated worktree. Official in-toto verification was not run: the host lacks
-`in-toto-verify`, and the disposable `in-toto==3.0.0` installation stalled on
-its cryptography dependency. This does not pass QUAL-CLI-006, which still
-requires official validators, trusted publishing/legal review, and independent
+isolated worktree. A disposable `python:3.12-slim` container running official
+`in-toto==3.0.0` verified all six archives with exact SHA-256 products and
+exited 0. This does not pass QUAL-CLI-006, which still requires the remaining
+official format validators, trusted publishing/legal review, and independent
 acceptance. No checkbox or production state changed; backlog remains **218
 checked / 62 unchecked / 280 total (77.9%)**.
 

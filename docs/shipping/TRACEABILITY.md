@@ -4,10 +4,12 @@
 
 Exact CLI `origin/main` `7d060b2` passed the documented architecture setup,
 frozen install, build **8/8**, and six-archive public package creation in an
-isolated worktree. Official in-toto verification was not claimed because the
-host lacks `in-toto-verify` and the disposable verifier installation stalled
-on its cryptography wheel. This is packaging evidence only; QUAL-CLI-006 and
-independent acceptance remain open. No checkbox changed. See
+isolated worktree. Official `in-toto==3.0.0` in a disposable
+`python:3.12-slim` Docker container then verified all six archives with exact
+SHA-256 products and exited 0. This is artifact provenance-shape evidence
+only; Sigstore identity, trusted publishing/legal review, remaining official
+format validators, and independent acceptance remain open. No checkbox
+changed. See
 `docs/shipping/evidence/cli-current-main-artifact-pack-2026-10-07.md`.
 
 ## CLI current-main Hunt adversarial requalification · 2026-10-07

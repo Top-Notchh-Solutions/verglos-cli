@@ -23,14 +23,19 @@ public archives:
 - `verglos-scanner-2.0.0-alpha.1.tgz`
 - `verglos-shared-2.0.0-alpha.1.tgz`
 
-## Limitation
+The official verifier then ran in a disposable `python:3.12-slim` Docker
+container with `in-toto==3.0.0` and exited `0`:
 
-Official in-toto verification was **not** claimed. The host did not have
-`in-toto-verify`; a disposable `in-toto==3.0.0` installation stalled while
-downloading its `cryptography` wheel and was stopped. The artifact set is
-therefore packaging evidence only, not official provenance or release
-acceptance. QUAL-CLI-006 remains open for official validators,
-trusted-publishing/legal review, and independent acceptance.
+```text
+in-toto release binding verified: 6 archives with exact SHA-256 products
+```
+
+## Remaining boundary
+
+This is official in-toto shape/binding evidence for the current archive set,
+not Sigstore identity, trusted publishing, legal approval, or release
+acceptance. QUAL-CLI-006 remains open for the remaining official format
+validators, trusted-publishing/legal review, and independent acceptance.
 
 No production/provider/customer/database/deployment/publication operation
 occurred and no backlog checkbox changed.
