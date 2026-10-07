@@ -3782,3 +3782,20 @@ before enabling any destructive adapter.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Boundary:** No browser, provider, payment, production, database,
   migration, deployment, or credential operation occurred.
+
+# 2026-10-07 — HUNT-010 MCP runtime bridge
+
+- **Implementation:** CLI PR #76 commit `b72982a` injects the private Hunt
+  runtime into the public MCP boundary without making it a public dependency.
+  Finding/report execution requires a complete signed binding and approval
+  coverage for report, recipe, and trust-store files; missing runtime/binding is
+  an explicit `not_attemptable` result. Before-write remains bounded preflight
+  only and cannot synthesize arbitrary recipes.
+- **Verification:** Shared/MCP builds, MCP **29/29**, CLI typecheck,
+  public-boundary audit, and HUNT-009 execution tests pass. Hosted platform
+  matrix `37617790266` and self-scan `37617790257` are queued at capture.
+- **Limitation:** HUNT-009/HUNT-010 remain open for trusted/licensed roots,
+  hosted execution qualification, and independent review. No checkbox changed.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No production, provider, payment, database, deployment,
+  credential, browser, or external-recipe operation occurred.

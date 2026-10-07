@@ -2619,3 +2619,19 @@ execution tools are still alpha stubs. Private evidence:
 **218 checked / 62 unchecked / 280 total (77.9%)**. No browser, provider,
 payment, production, database, deployment, credential, or external-recipe
 operation occurred.
+
+## 2026-10-07 · HUNT-010 MCP runtime bridge
+
+CLI PR #76 exact head `b72982a` adds the public-to-private Hunt runtime bridge.
+MCP finding/report tools now require a complete signed recipe/trust/subject
+binding and an approval receipt covering every input file; they return an
+explicit `not_attemptable` result when no host runtime or binding is supplied.
+The before-write tool performs only bounded fast-path preflight and never
+synthesizes arbitrary recipes. Shared/MCP builds, MCP **29/29**, CLI typecheck,
+public-boundary audit, and HUNT-009 execution tests pass. Hosted platform matrix
+`37617790266` and self-scan `37617790257` are queued at capture. HUNT-009 and
+HUNT-010 remain unchecked for trusted/licensed roots, hosted execution
+qualification, and independent review. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. No production, provider, payment, database,
+deployment, or external-recipe operation occurred. Private evidence:
+`docs/shipping/evidence/hunt-mcp-runtime-bridge-2026-10-07.md`.
