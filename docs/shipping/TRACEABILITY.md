@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## HUNT-009 public-boundary requalification · 2026-10-07
+
+- CLI PR #74 tested head `a2a1335d2a0b69ec56391286a4ba77ef773c0457` and was
+  closed without merge.
+- Local focused execution coverage passed 3/3; repository build, typecheck,
+  full test graph (13/13 tasks), and diff checks passed.
+- Hosted platform matrix `37565750571` and self-scan `37565750527` failed at
+  the public archive step because the six-package packer cannot resolve the
+  private/alpha `@verglos/hunt` workspace dependency. This confirms the
+  existing public/private boundary rather than authorizing a bypass.
+- HUNT-009 remains unchecked. See
+  `docs/shipping/evidence/hunt-009-public-boundary-requalification-2026-10-07.md`.
+
 ## QUAL-WEB-006 large-data and serialized-CI merge · 2026-10-07
 
 - Web PR #150 passed hosted Verify `37552936102`, Vercel, GitGuardian, and

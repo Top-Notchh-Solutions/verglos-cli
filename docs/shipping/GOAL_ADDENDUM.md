@@ -1,5 +1,16 @@
 # Goal addendum — 2026-10-07
 
+The HUNT-009 public execution candidate was requalified locally but stopped at
+the hosted public/private boundary. CLI PR #74 exact head
+`a2a1335d2a0b69ec56391286a4ba77ef773c0457` passed focused execution tests,
+build, typecheck, and the full 13/13-task repository test graph. Hosted runs
+`37565750571` and `37565750527` failed closed because the six-package public
+packer cannot resolve private/alpha `@verglos/hunt`; PR #74 was closed without
+merge. HUNT-009 remains unchecked. The whole-product goal remains active and
+the authoritative backlog remains **218 checked / 62 unchecked / 280 total**.
+No boundary bypass or production/provider/payment/database/migration/
+deployment/credential operation occurred.
+
 The active Verglos V1 goal remains whole-product shipping, not a reduced
 release. This batch records the latest PR #153 worker scope-fence correction:
 head `ade21b6f4c74b0a27bcf349bded6d9ceb7e39ee0`, local focused 32/32 and

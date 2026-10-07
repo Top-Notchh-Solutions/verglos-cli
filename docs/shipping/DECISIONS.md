@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## HUNT-009 hosted boundary result · 2026-10-07
+
+- **Decision:** Close CLI PR #74 without merge and keep HUNT-009 unchecked.
+- **Evidence:** Local execution tests/build/typecheck/full test graph passed,
+  but hosted platform matrix `37565750571` and self-scan `37565750527` failed
+  at public archive qualification because the public six-package packer cannot
+  resolve private/alpha `@verglos/hunt`.
+- **Boundary:** Do not make the private Hunt package public implicitly, copy it
+  into the CLI archive, or weaken the packer. A reviewed packaging design,
+  licensed recipe provenance, approval chain, and independent qualification
+  are still required before HUNT-009 can ship.
+
 ## CLI license-source metadata merge · 2026-10-07
 
 - **Decision:** Accept the exact-version HTTPS provenance repair into CLI

@@ -1,5 +1,14 @@
 # Verglos V1 risk register
 
+Latest R-009/HUNT-009 update (2026-10-07): CLI PR #74
+(`a2a1335d2a0b69ec56391286a4ba77ef773c0457`) passed local execution/build/
+typecheck/full-test evidence, but hosted platform matrix `37565750571` and
+self-scan `37565750527` failed closed because public archive packaging cannot
+resolve private/alpha `@verglos/hunt`. PR #74 was closed without merge. The
+public/private boundary is preserved; HUNT-009 remains critical/open pending a
+reviewed packaging design, licensed recipe provenance, approval chain, and
+independent qualification.
+
 Latest R-018 update (2026-10-07): CLI PR #73 (`d34ac4f`) supplies exact HTTPS
 source metadata for `minipass-pipeline@1.2.4`, reducing the inventory's
 mechanical source-missing list from eight to seven. The nested

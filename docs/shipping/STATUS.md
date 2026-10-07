@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · HUNT-009 public-boundary requalification blocked
+
+CLI PR #74 tested the fixed A1 execution candidate at exact head
+`a2a1335d2a0b69ec56391286a4ba77ef773c0457`. Local focused execution coverage,
+`pnpm build`, `pnpm typecheck`, `pnpm test` (**13/13** repository tasks), and
+diff checks passed. Hosted platform matrix `37565750571` and self-scan
+`37565750527` failed closed during public-archive qualification because the
+public six-package packer cannot resolve private/alpha `@verglos/hunt`:
+`workspace dependency @verglos/hunt has no known package version`. PR #74 was
+closed without merge. HUNT-009 remains unchecked; the public/private boundary
+was preserved and no implicit package or packer bypass was added. No
+production/provider/payment/database/migration/deployment/credential operation
+occurred. Backlog remains **218 checked / 62 unchecked / 280 total**. Private
+evidence: `docs/shipping/evidence/hunt-009-public-boundary-requalification-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted payment route hardening
 
 Web PR #149 exact head `0a765c9` adds same-origin protection before auth,

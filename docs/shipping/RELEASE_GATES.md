@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## HUNT-009 public-boundary requalification · 2026-10-07
+
+CLI PR #74 was closed without merge. Local focused execution tests and the
+full build/typecheck/test graph passed, but hosted platform matrix
+`37565750571` and self-scan `37565750527` failed at public-archive
+qualification because private/alpha `@verglos/hunt` is not one of the six
+public packages. HUNT-009 remains a release blocker; no packer bypass,
+implicit archive, or acceptance credit is allowed. Evidence:
+`docs/shipping/evidence/hunt-009-public-boundary-requalification-2026-10-07.md`.
+
 ## QUAL-WEB-006 large-data and serialized-CI merge · 2026-10-07
 
 Web PR #150 passed hosted Verify `37552936102`, Vercel, GitGuardian, and

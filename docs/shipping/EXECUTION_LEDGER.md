@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · HUNT-009 public-boundary requalification blocked
+
+- **Candidate:** CLI PR #74, exact tested head
+  `a2a1335d2a0b69ec56391286a4ba77ef773c0457`; closed without merge.
+- **Local:** Focused HUNT-009 tests 3/3; `pnpm build`, `pnpm typecheck`, full
+  `pnpm test` (13/13 repository tasks), and diff checks passed.
+- **Hosted:** Platform matrix `37565750571` and self-scan `37565750527` failed
+  closed at public archive qualification with
+  `workspace dependency @verglos/hunt has no known package version`.
+- **Boundary:** `@verglos/hunt` is private/alpha and intentionally absent from
+  the six-package public release. No packer weakening, implicit archive, or
+  public dependency bypass is acceptable. HUNT-009 remains unchecked.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-009-public-boundary-requalification-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted payment route hardening
 
 - **Code:** Web PR #149 exact head `0a765c9` adds same-origin checks before
