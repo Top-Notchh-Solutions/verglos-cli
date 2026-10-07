@@ -19,8 +19,8 @@ Web PR #149 exact head `aa34127` now keeps failed hosted Checkout attempts
 retryable, clears stale order state after failure or pre-confirmation
 dismissal, and avoids showing a submitted state if `checkout.open()` throws.
 Focused payment/checkout/webhook and route-contract tests passed 27/27;
-typecheck, production build, and diff check passed. Vercel and Preview
-Comments passed; Verify `37637158955` was pending at capture. This is hosted
+typecheck, production build, and diff check passed. Exact-head Verify
+`37637158955`, Vercel, and Preview Comments passed. This is hosted
 code/deployment evidence only:
 PLAN-WEB-013/014/015 remain open and backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:

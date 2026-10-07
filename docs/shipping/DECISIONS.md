@@ -18,8 +18,7 @@
   clear stale order state and return to the actual offer/retry screen; the UI
   must not imply a submitted payment when the provider rejected `open()`.
 - **Evidence:** PR #149 exact head `aa34127`; focused 27/27, typecheck, build,
-  and diff checks pass. Vercel and Preview Comments pass; Verify
-  `37637158955` was pending at capture.
+  and diff checks pass. Verify `37637158955`, Vercel, and Preview Comments pass.
 - **Boundary:** This changes presentation state only and does not grant access
   or replace webhook authority. PLAN-WEB-013/014/015 remain open; no provider,
   production, database, or deployment mutation occurred.

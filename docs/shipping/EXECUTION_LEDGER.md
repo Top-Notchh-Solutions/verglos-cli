@@ -26,8 +26,7 @@
   is set only after `checkout.open()` returns successfully.
 - **Verification:** Focused payment/checkout/webhook and route-contract tests
   **27/27**, typecheck, production build, and diff check pass. Vercel and
-  Preview Comments pass; exact-head Verify `37637158955` was pending at
-  capture.
+  Preview Comments and exact-head Verify `37637158955` pass.
 - **Boundary:** No provider, payment, entitlement, database, migration,
   deployment, production, or credential mutation occurred. PLAN-WEB-013/014/
   015 remain open; no checkbox changed. Backlog remains **218 checked / 62

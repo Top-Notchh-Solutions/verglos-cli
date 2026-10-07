@@ -15,8 +15,8 @@ independent acceptance.
 ## PLAN-WEB-013 Checkout retry-state hardening · 2026-10-07
 
 PR #149 exact head `aa34127` passes local focused 27/27, typecheck, production
-build, and diff checks. Vercel and Preview Comments pass; exact-head Verify
-`37637158955` was pending at capture. The client now clears stale order state
+build, and diff checks. Exact-head Verify `37637158955`, Vercel, and Preview
+Comments pass. The client now clears stale order state
 after failed or pre-confirmation-dismissed hosted attempts and does not show a
 submitted state when `checkout.open()` throws. This does not pass the payment
 gate or change any backlog checkbox.

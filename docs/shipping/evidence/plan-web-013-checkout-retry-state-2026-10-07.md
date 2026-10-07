@@ -11,9 +11,9 @@
   tests passed **27/27**; typecheck, production build, and `git diff --check`
   passed. Node `v26.4.0` emitted the repository's existing Node 22 engine
   warning.
-- **Hosted:** Vercel and Vercel Preview Comments passed for `aa34127`; GitHub
-  Verify run `37637158955` was in progress at capture. This is hosted code and
-  deployment evidence, not provider lifecycle or entitlement evidence.
+- **Hosted:** GitHub Verify run `37637158955`, Vercel, and Vercel Preview
+  Comments passed for `aa34127`. This is hosted code and deployment evidence,
+  not provider lifecycle or entitlement evidence.
 - **Boundary:** No provider, payment, entitlement, database, migration,
   deployment, production, or credential mutation occurred. PLAN-WEB-013/014/
   015 remain open; no backlog checkbox changed.

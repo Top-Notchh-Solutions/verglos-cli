@@ -17,8 +17,8 @@ PR #149 exact head `aa34127` records provider failure events, clears stale order
 state so failed attempts return to the retry screen, distinguishes
 pre-confirmation dismissal, and delays the submitted UI state until
 `checkout.open()` succeeds. Focused 27/27, typecheck, build, and diff checks
-pass. Vercel and Preview Comments pass; exact-head Verify `37637158955` is
-pending. This does not qualify any payment lifecycle or close
+pass. Exact-head Verify `37637158955`, Vercel, and Preview Comments pass. This
+does not qualify any payment lifecycle or close
 PLAN-WEB-013/014/015. No checkbox changed. See
 `docs/shipping/evidence/plan-web-013-checkout-retry-state-2026-10-07.md`.
 
