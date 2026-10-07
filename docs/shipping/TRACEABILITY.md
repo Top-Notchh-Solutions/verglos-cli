@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 large-data qualification · 2026-10-07 · Web PR #150
+
+- **Implementation:** Web `70680f8` extends the isolated monitoring repository
+  integration fixture to 45 same-tenant components and 125 selected-component
+  advisory matches. The assertions cover 20/20/5 pagination, 45 unique IDs,
+  the bounded 100-row detail result with `matchesTruncated: true`, and a
+  foreign-tenant component that remains inaccessible.
+- **Verification:** The focused Docker PostgreSQL integration passes 1/1;
+  dashboard tests pass 4/4; tenant/security tests pass 18/18; TypeScript,
+  production build, Drizzle schema check, 29-migration ordering, and diff
+  hygiene pass. Docker used a temporary synthetic `postgres:18-alpine`
+  database and was stopped after the run.
+- **Hosted state:** PR #150 is open and mergeable. Hosted run `37551537264`
+  was still in progress at capture; GitGuardian and Preview Comments passed,
+  while Vercel remained pending. No merge or deployment occurred.
+- **Boundary:** This does not close QUAL-WEB-006. Organization/Pro browser
+  rendering, human screen-reader review, and field-CWV evidence remain open.
+  No production/provider/payment/database/migration operation occurred.
+
 ## QUAL-WEB-006 authenticated dashboard continuation · 2026-10-07
 
 - **Runtime evidence:** The authenticated Chrome session resolved

@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-006 large-data qualification PR #150
+
+- **Code:** Web isolated branch `qual/web-006-large-data`, commit `70680f8`,
+  PR #150. The change is limited to the monitoring repository integration
+  fixture and assertions; no production source, migration, or public surface
+  changed.
+- **Integration/security:** Temporary Docker `postgres:18-alpine` with the
+  isolated `verglos_test` database passed the monitoring integration 1/1. The
+  dashboard suite passed 4/4 and tenant/security checks passed 18/18. The
+  fixture proves 45 same-tenant rows paginate 20/20/5, 125 detail matches are
+  bounded to 100 with truncation truth, and a foreign component is excluded.
+- **Checks:** TypeScript, `pnpm build`, `pnpm db:check`,
+  `pnpm db:migrations:check` (29 migrations), and `git diff --check` passed.
+  Node 26.4.0 was used locally against the package Node 22.x baseline.
+- **Hosted state:** PR #150 is pushed/open/mergeable. Run `37551537264` was
+  still `in_progress` at capture; GitGuardian and Preview Comments passed and
+  Vercel was pending. No merge or deployment occurred.
+- **Acceptance:** QUAL-WEB-006 remains unchecked for organization/Pro browser
+  rendering, human screen-reader review, field CWV, and complete runtime
+  evidence. Backlog remains 218 checked / 62 unchecked / 280 total.
+- **Boundary:** No production database/provider/payment read or write,
+  migration, deployment, credential use, or customer operation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-large-data-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 authenticated dashboard continuation
 
 - **Runtime:** Authenticated Chrome DevTools reached `/account/dashboard`,

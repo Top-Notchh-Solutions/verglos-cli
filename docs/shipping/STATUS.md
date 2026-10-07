@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-006 large-data qualification PR #150
+
+The isolated Web dashboard monitoring integration fixture now exercises 45
+same-tenant released components across 20/20/5 pages and 125 advisory matches
+for one selected component. The repository returns the bounded 100-row detail
+projection with `matchesTruncated: true`; a foreign tenant's component remains
+excluded. PR #150 (`70680f8`) is pushed and open. Local focused integration,
+tenant/security, typecheck, build, Drizzle schema, migration-order, and diff
+checks pass. Hosted workflow `37551537264` was still in progress at capture;
+GitGuardian and Preview Comments were green and Vercel was pending.
+
+This is partial QUAL-WEB-006 evidence only. Organization/Pro browser data,
+human screen-reader review, and field-CWV evidence remain open. No production,
+provider, payment, database, migration, deployment, or credential operation
+occurred. Backlog remains **218 checked / 62 unchecked / 280 total**. Private
+evidence: `docs/shipping/evidence/qual-web-006-large-data-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 authenticated dashboard continuation
 
 Read-only Chrome DevTools evidence against the authenticated account shell
