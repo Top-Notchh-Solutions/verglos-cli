@@ -8,8 +8,8 @@
   868/1/0, typecheck/build/schema/35-migration/diff checks pass.
 - The approval-gated channel-credential case blocks before dependent deletes;
   retained rows are reconciled by the worker's final inventory snapshot.
-- Hosted typecheck/schema and Vercel were pending at capture; GitGuardian and
-  Preview Comments passed. QUAL-WEB-005 remains open for restore/rollback and
+- Hosted Verify `37566730804` passed at the exact head; Vercel, GitGuardian,
+  and Preview Comments passed. QUAL-WEB-005 remains open for restore/rollback and
   authenticated non-production E2E. No checkbox changed. See
   `docs/shipping/evidence/qual-web-005-supporting-executor-eb785d2-2026-10-07.md`.
 

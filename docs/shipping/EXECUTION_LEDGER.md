@@ -12,8 +12,8 @@
   suite 868 pass / 1 explicit skip / 0 fail; typecheck, 38-route build,
   schema, 35-migration, and diff checks pass. The disposable fixture was
   removed after testing.
-- **Hosted:** Typecheck/schema and Vercel were pending at capture;
-  GitGuardian and Preview Comments passed.
+- **Hosted:** Verify `37566730804` passed at the exact head; Vercel,
+  GitGuardian, and Preview Comments passed. PR #153 is open and CLEAN.
 - **Acceptance:** QUAL-WEB-005 remains open for retained-row reconciliation,
   restore/rollback rehearsal, authenticated non-production E2E, and hosted
   completion. No production operation or checkbox change.

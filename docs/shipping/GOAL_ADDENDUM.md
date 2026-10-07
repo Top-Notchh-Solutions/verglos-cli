@@ -3,8 +3,8 @@
 Web PR #153 exact head `eb785d2e382fc60535c15702fe7ffd8b9ae66610` now adds the
 fenced supporting-disposition executor and durable per-table receipts. Worker
 tests pass 4/4, disposable PostgreSQL integration 1/1, serial Web 868/1/0,
-typecheck/build/schema/35-migration/diff checks pass; hosted typecheck/schema
-and Vercel were pending at capture. The approval-gated channel-credential
+typecheck/build/schema/35-migration/diff checks pass; hosted Verify
+`37566730804`, Vercel, GitGuardian, and Preview Comments pass. The approval-gated channel-credential
 case blocks before dependent deletes. QUAL-WEB-005 remains open for
 retained-row reconciliation, restore/rollback rehearsal, authenticated
 non-production E2E, and hosted completion. Backlog remains **218 checked / 62

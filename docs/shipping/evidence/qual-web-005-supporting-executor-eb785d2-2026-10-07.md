@@ -4,7 +4,8 @@
 
 - Web PR: `#153`
 - Head: `eb785d2e382fc60535c15702fe7ffd8b9ae66610`
-- Hosted checks at capture: typecheck/schema and Vercel pending; GitGuardian and Preview Comments passed
+- Hosted Verify `37566730804` passed at the exact head; Vercel, GitGuardian,
+  and Preview Comments passed
 - PR state: open, not merged or deployed
 
 ## Delivered boundary

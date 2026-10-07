@@ -7,8 +7,9 @@ disposable-DB, serial-suite, typecheck, production-build, schema, migration,
 and diff checks. It adds durable supporting operation receipts and blocks
 approval-gated channel credentials before dependent deletes. Hosted typecheck/
 schema and Vercel were pending at capture. QUAL-WEB-005 is still open for
-retained-row reconciliation, restore/rollback rehearsal, authenticated
-non-production E2E, and hosted completion; no release gate or checkbox closed.
+retained-row reconciliation, restore/rollback rehearsal, and authenticated
+non-production E2E; hosted Verify `37566730804`, Vercel, GitGuardian, and
+Preview Comments pass, but no release gate or checkbox closed.
 
 ## QUAL-WEB-005 supporting inventory snapshot · 2026-10-07
 

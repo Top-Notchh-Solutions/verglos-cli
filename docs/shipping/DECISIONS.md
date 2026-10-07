@@ -10,8 +10,9 @@
   ledger. Check approval-gated channel credentials before deleting dependent
   alert or monitor rows; block closed if credentials remain.
 - **Boundary:** Local worker 4/4, disposable PostgreSQL 1/1, serial Web
-  868/1/0, typecheck/build/schema/35-migration checks pass. Hosted checks were
-  pending at capture. Retained-row reconciliation, restore/rollback rehearsal,
+  868/1/0, typecheck/build/schema/35-migration checks pass. Hosted Verify
+  `37566730804`, Vercel, GitGuardian, and Preview Comments pass. Retained-row
+  reconciliation, restore/rollback rehearsal,
   authenticated non-production E2E, and final gate acceptance remain open; no
   production migration or deletion is authorized.
 
