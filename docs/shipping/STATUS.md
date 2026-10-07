@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013 direct test-mode method observation
+
+Using the repository test credentials and a bounded localhost hosted-Checkout
+page, the approved CDP session observed UPI, cards, EMI, netbanking, wallets,
+Pay Later, and UPI QR as selectable methods. The order was dismissed without a
+payment; no provider identifier or private response data was retained. This is
+direct method/display evidence only; lifecycle matrix, entitlement exactly-once
+behavior, and production reconciliation remain open. No checkbox changed; the
+backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. Private
+evidence: `docs/shipping/evidence/plan-web-013-test-mode-method-observation-2026-10-07.md`.
+
 ## 2026-10-07 · HUNT-010 hosted runtime-bridge qualification
 
 CLI PR #76 exact head `b72982a577d73a17273eb25d398521a92ad011c4` passed hosted

@@ -3813,3 +3813,16 @@ before enabling any destructive adapter.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, provider, payment, database, deployment,
   credential, browser, or external-recipe operation occurred.
+
+# 2026-10-07 — PLAN-WEB-013 direct test-mode method observation
+
+- **Evidence:** A bounded localhost Razorpay Checkout page using test-prefix
+  credentials rendered UPI, cards, EMI, netbanking, wallets, Pay Later, and UPI
+  QR in the hosted iframe. The approved CDP session captured method labels only.
+- **Boundary:** The catalog-amount test order was dismissed without payment; the
+  local server was stopped and the target restored to `about:blank`. No capture,
+  refund, webhook, entitlement, database, production, or deployment mutation
+  occurred.
+- **Limitation:** This strengthens PLAN-WEB-013 direct method evidence only.
+  PLAN-WEB-014/015 remain open for full lifecycle and production reconciliation.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
