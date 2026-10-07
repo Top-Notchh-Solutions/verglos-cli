@@ -286,3 +286,10 @@ been deployed or invoked in production, and its integration deliberately
 blocks on `inventoryComplete=false`. Supporting ownership/retention and legal
 dispositions, complete reconciliation, restore/rollback, and authenticated
 non-production E2E remain critical open risks.
+
+R-048 update (2026-10-07, supporting dispositions): PR #153 exact head
+`f83af5c` maps all 16 supporting tables to explicit dispositions and
+fail-closed omission tests, verified locally and by hosted workflow
+`37564437899`. The registry is not wired to destructive SQL; executable
+retention/legal decisions, provider/accounting handling, reconciliation,
+restore/rollback, and authenticated non-production E2E remain critical risks.

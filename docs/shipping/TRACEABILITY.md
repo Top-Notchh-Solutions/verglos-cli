@@ -1671,3 +1671,14 @@ build, and boundary checks pass; hosted workflow `37563987818` / job
 production invocation, supporting ownership/retention disposition,
 reconciliation, restore/rollback, and authenticated non-production E2E remain
 unqualified, so `QUAL-WEB-005` remains open.
+
+# 2026-10-07 · QUAL-WEB-005 supporting disposition registry
+
+PR #153 exact head `f83af5c0bdb9b15ee87ec83ac365e1fc5f91bd26` traces all 16
+supporting tables to an explicit bounded disposition, rationale, and approval
+flag. Focused deletion/hold/inventory tests are 11/11; serial is 846/23/0;
+typecheck, 34-migration/schema, build, and boundary checks pass; hosted
+workflow `37564437899` / job `112608834179` passes. This improves omission
+detection only: the destructive store does not consume the registry, and
+reconciliation, recovery, and authenticated non-production E2E remain
+unqualified. `QUAL-WEB-005` remains open.

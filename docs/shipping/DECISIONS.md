@@ -367,4 +367,18 @@ source-only and no production or destructive operation occurred.
 - **Boundary:** This wires the runtime contract but does not authorize
   deployment or production invocation. Supporting data dispositions,
   reconciliation, restore/rollback, and authenticated non-production E2E
-  remain open; `QUAL-WEB-005` is not accepted.
+remain open; `QUAL-WEB-005` is not accepted.
+
+## Supporting deletion dispositions · 2026-10-07
+
+- **Decision:** Enumerate every supporting deletion table with one bounded
+  disposition, rationale, and approval flag. Fail closed on omissions,
+  duplicate/unknown tables, or blank rationale. Keep the registry separate from
+  destructive SQL until every disposition is executable and recoverable.
+- **Evidence:** Web PR #153 exact head `f83af5c`; focused deletion/hold/
+  inventory 11/11, serial 846/23/0, typecheck/schema/34-migration/build/diff
+  pass; hosted workflow `37564437899` passed.
+- **Boundary:** This is an omission-detection contract, not deletion
+  authorization. Provider/accounting retention, legacy public records,
+  customer-held digest handling, reconciliation, restore/rollback, and
+  authenticated non-production E2E remain open.

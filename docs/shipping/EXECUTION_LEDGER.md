@@ -2955,3 +2955,23 @@ before enabling any destructive adapter.
   218 checked / 62 unchecked / 280 total.
 - **Evidence:**
   `docs/shipping/evidence/qual-web-005-runtime-runner-pr153-2026-10-07.md`.
+
+# 2026-10-07 — QUAL-WEB-005 supporting disposition registry
+
+- **Code:** Web PR #153 exact head
+  `f83af5c0bdb9b15ee87ec83ac365e1fc5f91bd26` adds a bounded registry for
+  every supporting table outside the seven hosted deletion projections. Each
+  entry names its disposition, rationale, and approval requirement; the checker
+  fails closed on omission, duplication, unknown tables, and blank rationale.
+- **Local:** Focused deletion/hold/inventory tests 11/11; serial 846/23/0;
+  typecheck; Drizzle; ordered 34-migration; diff; and 38-route build pass.
+- **Hosted:** Verify `37564437899`, job `112608834179`, plus Vercel,
+  GitGuardian, and Preview Comments passed. PR #153 remains open, CLEAN, and
+  unmerged.
+- **Boundary:** The registry is not consumed by the destructive store yet.
+  Executable SQL, reconciliation, approved retention/legal treatment,
+  restore/rollback, and authenticated non-production E2E remain open. No
+  production or destructive operation occurred; backlog remains 218 checked /
+  62 unchecked / 280 total.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-supporting-dispositions-pr153-2026-10-07.md`.

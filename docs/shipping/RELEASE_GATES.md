@@ -524,3 +524,12 @@ does not close Gate 2/4/6 or accept `QUAL-WEB-005`: the inventory gate remains
 false, and supporting dispositions, reconciliation, restore/rollback, and
 authenticated non-production E2E remain open. No production invocation or
 destructive operation occurred.
+
+Supporting-disposition update (2026-10-07): PR #153 exact head
+`f83af5c0bdb9b15ee87ec83ac365e1fc5f91bd26` passed hosted Verify
+`37564437899` / job `112608834179`, with focused deletion/hold/inventory
+11/11, serial 846/23/0, ordered 34-migration validation, and a 38-route build
+passing locally. The registry improves omission detection but does not close
+Gate 2/4/6 or accept `QUAL-WEB-005`: executable dispositions,
+reconciliation, restore/rollback, and authenticated non-production E2E remain
+open. No production invocation or destructive operation occurred.

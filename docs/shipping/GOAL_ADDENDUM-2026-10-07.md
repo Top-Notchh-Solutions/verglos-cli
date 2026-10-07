@@ -189,3 +189,16 @@ release/legal, GitHub organization integration, and credential rotation remain
 open. The authoritative count stays **218 checked / 62 unchecked / 280
 total**. No production invocation, destructive operation, deployment, payment,
 database, or credential write occurred.
+
+# 2026-10-07 · QUAL-WEB-005 supporting disposition registry
+
+PR #153 exact head `f83af5c0bdb9b15ee87ec83ac365e1fc5f91bd26` passed hosted
+Verify `37564437899` / job `112608834179` after mapping all 16 supporting
+tables to explicit dispositions, rationales, and approval flags. Focused
+deletion/hold/inventory tests 11/11, serial 846/23/0, typecheck, schema,
+ordered 34-migration validation, diff, and 38-route build all pass. This is
+still not whole shipping: the registry is not executable deletion, and
+retention/legal approval, reconciliation, restore/rollback, authenticated
+non-production E2E, payment lifecycle, CLI release/legal, GitHub organization
+integration, and credential rotation remain open. Count stays **218 checked /
+62 unchecked / 280 total**. No production or destructive operation occurred.

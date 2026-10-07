@@ -1887,3 +1887,17 @@ reconciliation, restore/rollback, and authenticated non-production E2E remain
 unqualified. Backlog remains **218 checked / 62 unchecked / 280 total**.
 Private evidence:
 `docs/shipping/evidence/qual-web-005-runtime-runner-pr153-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 supporting disposition registry
+
+Web PR #153 exact head `f83af5c0bdb9b15ee87ec83ac365e1fc5f91bd26` adds a
+fail-closed disposition registry covering all 16 supporting tables outside
+the seven hosted projections. Focused deletion/hold/inventory tests pass
+11/11, the full serial suite is 846/23/0, typecheck, Drizzle, 34-migration
+ordering, and the 38-route build pass. Hosted Verify `37564437899` / job
+`112608834179` and the required provider checks pass. This is omission
+detection only: executable dispositions, reconciliation, restore/rollback,
+and authenticated non-production E2E remain open, so `QUAL-WEB-005` remains
+unchecked. Backlog remains **218 checked / 62 unchecked / 280 total**.
+Private evidence:
+`docs/shipping/evidence/qual-web-005-supporting-dispositions-pr153-2026-10-07.md`.
