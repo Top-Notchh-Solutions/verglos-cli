@@ -7,8 +7,9 @@
   a retryable state; the submitted state is set only after `checkout.open()`
   returns successfully.
 - **Verification:** Focused payment/checkout/webhook and route-contract tests
-  **23/23**, typecheck, production build, and diff check pass. Vercel was
-  pending and the new Verify run was not visible at capture.
+  **23/23**, typecheck, production build, and diff check pass. Exact-head
+  Verify `37635602846`, Vercel, and Preview Comments also pass; PR #149 is
+  clean at this head.
 - **Boundary:** No provider, payment, entitlement, database, migration,
   deployment, production, or credential mutation occurred. PLAN-WEB-013/014/
   015 remain open; no checkbox changed. Backlog remains **218 checked / 62

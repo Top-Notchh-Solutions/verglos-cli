@@ -10,9 +10,11 @@
   tests passed **23/23**; typecheck, production build, and `git diff --check`
   passed. Node `v26.4.0` emitted the repository's existing Node 22 engine
   warning.
-- **Hosted state at capture:** The branch push succeeded. Vercel was pending;
-  the new exact-head Verify run had not appeared yet. Earlier hosted evidence
-  at the parent head does not qualify this new commit.
+- **Hosted:** Exact-head Verify run `37635602846` passed, including the
+  configured serial, boundary, truth, schema/migration, build, dependency,
+  SBOM/license, and tracked-secret checks. Vercel and Vercel Preview Comments
+  also passed. PR #149 is clean at this exact head. This is hosted code and
+  deployment evidence, not provider lifecycle or entitlement evidence.
 - **Boundary:** No provider, payment, entitlement, database, migration,
   deployment, production, or credential mutation occurred. PLAN-WEB-013/014/
   015 remain open; no backlog checkbox changed.

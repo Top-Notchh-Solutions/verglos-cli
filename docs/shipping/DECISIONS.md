@@ -6,7 +6,8 @@
   return to a retryable state; the UI must not imply a submitted payment when
   the provider rejected `open()`.
 - **Evidence:** PR #149 exact head `b78f732`; focused 23/23, typecheck, build,
-  and diff checks pass. Hosted checks were pending at capture.
+  and diff checks pass. Exact-head Verify `37635602846`, Vercel, and Preview
+  Comments pass; the PR is clean.
 - **Boundary:** This changes presentation state only and does not grant access
   or replace webhook authority. PLAN-WEB-013/014/015 remain open; no provider,
   production, database, or deployment mutation occurred.

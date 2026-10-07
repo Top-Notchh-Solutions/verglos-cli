@@ -5,9 +5,10 @@
 PR #149 exact head `b78f732424a388f03a9a9740e570b0f01d7297e7` records provider
 failure events, leaves failed attempts retryable, distinguishes pre-confirmation
 dismissal, and delays the submitted UI state until `checkout.open()` succeeds.
-Focused 23/23, typecheck, build, and diff checks pass. Vercel was pending and
-the new Verify run was not yet visible at capture. This does not qualify any
-payment lifecycle or close PLAN-WEB-013/014/015. No checkbox changed. See
+Focused 23/23, typecheck, build, and diff checks pass. Exact-head Verify
+`37635602846`, Vercel, and Vercel Preview Comments pass, and PR #149 is clean
+at this head. This does not qualify any payment lifecycle or close
+PLAN-WEB-013/014/015. No checkbox changed. See
 `docs/shipping/evidence/plan-web-013-checkout-retry-state-2026-10-07.md`.
 
 ## PLAN-WEB-014 Test Mode method-display probe · 2026-10-07
