@@ -396,6 +396,14 @@ method is live merely because its code is recognized. Keep `PLAN-WEB-013`,
 order/payment/webhook/replay evidence, and reconciliation are captured. No
 provider or production write was performed.
 
+R-049 update (2026-10-07, test-mode order probe): Razorpay accepted one
+bounded test-mode order for the exact canonical Pro monthly amount and the
+signed notes read back correctly; focused Web billing/configuration tests pass
+38/38. This reduces order-creation uncertainty only. The account-enabled
+method set and complete payment lifecycle/reconciliation evidence remain
+unknown, so PLAN-WEB-013/014/015 stay critical open risks. No payment or
+production write occurred.
+
 R-048 update (2026-10-07, per-kind transactions): PR #153 exact head
 `9476e5d` adds durable request/kind idempotency and scoped row-count deletes,
 verified locally and by hosted workflow `37563632682`. This reduces replay and

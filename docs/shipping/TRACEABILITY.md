@@ -2012,3 +2012,13 @@ in-toto checks passed; the exact worktree package suite exited 0 with focused
 approval/trust, positive/negative, binding-drift, symlink, and runtime-denial
 coverage. HUNT-008 trusted/licensed provenance and independent Hunt review
 remain open, so this does not close HUNT-009 or change a checkbox.
+
+# 2026-10-07 · PLAN-WEB-013 test-mode hosted order probe
+
+Web PR #149 head `db68157` now has provider test-mode order evidence: one
+bounded Razorpay order using the canonical Pro monthly catalog was created and
+read back as `created` with exact INR amount/currency and complete signed
+checkout notes. The focused billing/configuration suite passes **38/38**.
+This is not lifecycle acceptance: no payment, capture, refund, webhook, or
+entitlement was produced; account-enabled method discovery and the complete
+PLAN-WEB-014/015 matrix remain open.

@@ -3484,3 +3484,23 @@ before enabling any destructive adapter.
   and independent Hunt review remain open.
 - **Evidence file:**
   `docs/shipping/evidence/hunt-009-supported-recipe-execution-pr75-2026-10-07.md`.
+
+# 2026-10-07 — PLAN-WEB-013 test-mode hosted order probe
+
+- **Batch:** Run one bounded Razorpay test-mode hosted-order creation and
+  provider read-back against the canonical Pro monthly catalog snapshot.
+- **Backlog:** `PLAN-WEB-013/014/015` attempted but open; no accepted IDs and
+  no checkbox changes. Count remains **218 checked / 62 unchecked / 280 total
+  (77.9%)**.
+- **Result:** One order created and re-read successfully: status `created`,
+  exact INR 280,943 amount/currency, complete signed checkout-note binding.
+  Read-only payment history exposed one observed `netbanking` method; it does
+  not prove the complete enabled-method set.
+- **Verification:** Web PR #149 head `db68157` focused billing/configuration
+  suite **38/38 pass**.
+- **Boundary:** Test mode only; no authorization, capture, refund, webhook,
+  entitlement grant, production/provider configuration, database, migration,
+  deployment, or customer-state write. Full account-method and lifecycle
+  matrix remains open.
+- **Evidence file:**
+  `docs/shipping/evidence/plan-web-013-test-mode-order-2026-10-07.md`.

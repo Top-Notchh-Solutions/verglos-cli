@@ -398,6 +398,16 @@ legal/customer-held-record decisions, consent/vendor inventory, and
 end-to-end production deletion evidence remain open. No production operation
 occurred.
 
+Payment qualification update (2026-10-07): Razorpay test-mode order creation
+and read-back now pass for the canonical Pro monthly offer, with exact amount,
+currency, `created` state, and signed catalog binding; Web PR #149 focused
+billing/configuration tests pass 38/38. This is only provider order/binding
+evidence. It does not close the payment gate: account-enabled method discovery,
+all enabled methods, success/failure/capture/refund/renewal/cancellation,
+duplicate/out-of-order/retry behavior, exactly-once entitlement, and redacted
+browser/webhook evidence remain open. No payment or production operation
+occurred.
+
 Supporting-executor integration update (2026-10-07): current Web PR #153
 source passed `account-deletion-jobs.integration.test.ts` **1/1** against a
 disposable PostgreSQL 18 `verglos_test` database. The run covers the full

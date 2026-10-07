@@ -674,3 +674,16 @@ remain open; `QUAL-WEB-005` is not accepted.
 - **Boundary:** HUNT-008 trusted/licensed provenance and independent Hunt
   isolation/review remain acceptance gates. No checkbox changed and no external
   recipe or production operation was performed.
+
+## PLAN-WEB-013 test-mode hosted order probe · 2026-10-07
+
+- **Decision:** Accept the test-mode order/read-back as provider binding
+  evidence; keep PLAN-WEB-013/014/015 open.
+- **Evidence:** Web PR #149 head `db68157`; one bounded Razorpay test order
+  used the canonical INR 280,943 Pro monthly offer and returned `created` with
+  exact amount/currency and signed checkout notes. Focused billing/config
+  suite **38/38 pass**. One observed `netbanking` payment is retained only as
+  an aggregate observation.
+- **Boundary:** This does not prove account-enabled method discovery or any
+  payment lifecycle. No payment/capture/refund/webhook/entitlement or
+  production operation occurred; no checkbox changed.

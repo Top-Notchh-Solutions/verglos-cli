@@ -248,6 +248,17 @@ provenance and independent Hunt qualification/review are still required.
 Backlog remains **218 checked / 62 unchecked / 280 total**; no checkbox or
 production state changed.
 
+# 2026-10-07 · PLAN-WEB-013 test-mode hosted order probe
+
+Razorpay test mode accepted one bounded hosted order for the canonical Pro
+monthly offer, and provider read-back confirmed `created`, exact INR amount
+and currency, and complete signed checkout-note binding. Web PR #149 focused
+billing/configuration tests pass **38/38**. This is order-creation evidence
+only: no payment, capture, webhook, entitlement, production/provider config,
+database, migration, or deployment write occurred. Account-enabled methods and
+the complete lifecycle matrix remain open. Backlog remains **218 checked / 62
+unchecked / 280 total**; no checkbox changed.
+
 # 2026-10-07 · QUAL-WEB-005 supporting executor integration
 
 The current PR #153 source passed the full account-deletion integration **1/1**

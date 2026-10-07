@@ -2363,3 +2363,21 @@ qualification/review. Backlog remains **218 checked / 62 unchecked / 280 total
 (77.9%)**. No external recipe, customer repository, or production operation
 occurred. Private evidence:
 `docs/shipping/evidence/hunt-009-supported-recipe-execution-pr75-2026-10-07.md`.
+
+# 2026-10-07 · PLAN-WEB-013 test-mode hosted order probe
+
+The Razorpay test account accepted one bounded hosted order using the canonical
+Pro monthly offer: INR 280,943, 30 entitlement days, catalog `2026-10-02.0`.
+The order read-back returned `created`, exact amount/currency, and complete
+signed checkout-note keys. The focused Web PR #149 billing/configuration suite
+passed **38/38**.
+
+This is provider order-creation/binding evidence only. No payment was
+authorized or captured, no webhook or entitlement grant occurred, and no
+production/provider configuration, database, migration, deployment, or
+customer-state write occurred. The test account's observed payment history had
+one `netbanking` payment, but account-enabled method discovery and the complete
+success/failure/refund/renewal/cancellation/replay matrix remain open.
+`PLAN-WEB-013/014/015` remain unchecked. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/plan-web-013-test-mode-order-2026-10-07.md`.
