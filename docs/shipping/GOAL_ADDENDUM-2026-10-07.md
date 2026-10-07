@@ -113,3 +113,13 @@ in progress at capture. The backlog remains **218 checked / 62 unchecked /
 280 total**; no production or destructive operation occurred. Worker,
 customer-held digest proof, reconciliation/audit receipt, restore rehearsal,
 and authenticated non-production E2E remain required.
+
+# 2026-10-07 · QUAL-WEB-005 customer-held digest substrate
+
+PR #153 now includes a digest-only registry and exact before/after comparison
+contract for held signed `.vgl` identities. Migrations `0029` and `0030` remain
+unapplied. Focus 28/28, serial 846 pass / 22 explicit skips,
+typecheck/schema/migration/diff/build pass with 31 migrations. Hosted checks
+were pending at capture. The backlog remains **218 checked / 62 unchecked /
+280 total**; authenticated writing, worker execution, reconciliation, restore,
+and non-production E2E remain required.

@@ -242,3 +242,14 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
 - **Boundary:** migration `0029` is not applied; no API, cron worker,
   destructive deletion, customer-held digest proof, restore rehearsal, or
   checkbox acceptance is supplied by this substrate.
+
+## Customer-held digest registry substrate · 2026-10-07
+
+- **Decision:** Store only canonical SHA-256 identities for customer-held
+  signed `.vgl` records and compare the registered set before/after deletion;
+  never store or mutate the offline record bytes in the hosted deletion path.
+- **Evidence:** Web PR #153 head `4c5966f`; focus 28/28, serial 846/22/0,
+  typecheck/schema/migration/diff/build pass, and 31 ordered migrations.
+- **Boundary:** migrations `0029`/`0030` are unapplied; no authenticated
+  writer, worker, destructive operation, restore rehearsal, or checkbox
+  acceptance is supplied.

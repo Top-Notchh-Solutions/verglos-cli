@@ -2648,6 +2648,27 @@ changed and no checkbox was closed.
 - **Boundary:** no production/provider/database/payment/browser mutation; no
   checkbox changed; **218 checked / 62 unchecked / 280 total**.
 
+# 2026-10-07 — QUAL-WEB-005 customer-held digest registry substrate
+
+- **Batch:** add the digest-only customer-held record registry and comparison
+  contract on the existing PR #153 boundary.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #153 head `4c5966f`; migrations `0029` and `0030` are
+  source-only and not applied to production.
+- **Local:** combined deletion focus **28/28**, serial **846 pass / 22
+  explicit skips / 0 fail**, typecheck/schema pass, ordered migration check
+  **31**, diff check pass, and 38-page build pass.
+- **Hosted:** checks for the new head were pending at capture; no hosted
+  acceptance or merge claim made.
+- **Boundary:** no production/database/provider/payment/deployment write,
+  migration, deletion, browser mutation, or secret handling occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-customer-held-digests-pr153-2026-10-07.md`.
+- **Next:** add an authenticated writer only with bounded ownership and
+  idempotency, then qualify the worker against a disposable database and
+  restore rehearsal.
+
 # 2026-10-07 — QUAL-WEB-005 durable hold authority substrate
 
 - **Batch:** persist the reviewed legal/contract/customer-deletion hold

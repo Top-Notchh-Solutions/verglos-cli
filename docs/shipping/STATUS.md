@@ -1723,3 +1723,14 @@ new head were in progress at capture. This remains substrate only:
 restore, and non-production E2E evidence remain open. No production or
 destructive operation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-hold-authority-pr153-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 customer-held digest registry substrate
+
+PR #153 advanced to `4c5966f`. It adds the source-only `0030` digest registry,
+canonical SHA-256 validation, duplicate protection, before/after comparison,
+and inventory coverage. Combined deletion focus passes 28/28; serial passes
+846/846 with 22 explicit skips; typecheck, schema check, ordered migration
+check (31), diff check, and 38-page build pass. Hosted checks for the new head
+were pending at capture. `QUAL-WEB-005` remains unchecked; no production or
+destructive operation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-customer-held-digests-pr153-2026-10-07.md`.

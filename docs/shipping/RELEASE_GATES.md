@@ -95,6 +95,14 @@ capture. This does not pass Gate 2/4/6 or accept `QUAL-WEB-005`; the worker,
 customer-held digest proof, reconciliation, restore rehearsal, and
 non-production E2E remain open.
 
+Customer-held digest update (2026-10-07): PR #153 head `4c5966f` adds the
+source-only digest registry and exact before/after proof contract. Focus 28/28,
+serial 846 pass / 22 explicit skips, typecheck/schema/migration/diff, and
+38-page build pass; the journal validates 31 migrations. Hosted checks were
+pending at capture. This does not pass Gate 2/4/6 or accept `QUAL-WEB-005`;
+the authenticated writer, worker, reconciliation, restore, and E2E remain
+open. No production or destructive operation occurred.
+
 Hosted result update (2026-10-07): PR #153 workflow `37559045448` reached
 terminal green, with GitGuardian, Vercel Preview Comments, and Vercel passing.
 This only verifies the substrate checks; `QUAL-WEB-005` remains open and the

@@ -200,3 +200,10 @@ reconciliation, audit receipt, restore rehearsal, or non-production E2E. The
 critical deletion risk remains open and the hold table must not be treated as
 production authority until its migration and writer receive separate
 preflight, authorization, and post-write evidence.
+
+R-048 update (2026-10-07, digest substrate): PR #153 now has a digest-only
+registry and exact before/after comparison contract. This does not prove that
+customers registered every held record, provide an authenticated writer, or
+make deletion operationally safe. Migrations `0029`/`0030` remain unapplied;
+the worker, reconciliation, audit receipt, restore, and E2E evidence are
+still critical open requirements.

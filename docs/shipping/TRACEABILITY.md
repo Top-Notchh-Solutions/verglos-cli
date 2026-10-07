@@ -1553,3 +1553,13 @@ migration/diff/build pass, and the journal now validates 30 migrations. Hosted
 checks for the new head were in progress at capture. Worker, customer-held
 digest proof, reconciliation, restore rehearsal, and authenticated E2E remain
 unproven.
+
+# 2026-10-07 · QUAL-WEB-005 customer-held digest registry substrate
+
+PR #153 head `4c5966f` now traces the customer-held boundary to a source-only
+digest registry and pure canonicalization/comparison contracts. Only
+`sha256:` identities for signed `.vgl` records are stored; record bytes are
+never part of this surface. Focus 28/28, serial 846 pass / 22 explicit skips,
+typecheck/schema/migration/diff/build pass, and 31 migrations validate. An
+authenticated writer, deletion worker, reconciliation receipt, restore
+rehearsal, and non-production E2E remain open; hosted checks were pending.
