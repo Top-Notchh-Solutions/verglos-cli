@@ -4014,3 +4014,7 @@ before enabling any destructive adapter.
   target was restored. PLAN-WEB-014/015 remain unchecked and backlog remains
   218 checked / 62 unchecked / 280 total.
 - Evidence: `docs/shipping/evidence/plan-web-014-card-hosted-probe-2026-10-07.md`.
+
+The follow-up Netbanking probe reached bank selection but did not reach the
+provider mock-bank success/failure control. No callback, capture, webhook, or
+entitlement result was inferred; the CDP blank target was restored.

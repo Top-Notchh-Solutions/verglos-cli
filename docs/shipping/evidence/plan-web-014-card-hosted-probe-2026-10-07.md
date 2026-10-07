@@ -23,6 +23,16 @@
 - Focused Web payment/runtime contracts remained **47/47 passed**, with zero
   failures and zero skips.
 
+## Netbanking follow-up
+
+A second bounded Test Mode order reached the Netbanking bank-selection screen
+and exposed the provider bank list. Selecting a bank did not advance to a
+mock-bank success/failure control during the probe; no callback or provider
+lifecycle result was observed. The existing blank CDP target was restored.
+
+This remains method-display and navigation evidence only. It does not qualify
+Netbanking success, capture, refund, webhook delivery, or entitlement.
+
 ## Boundary
 
 No payment identifier, card/contact value, response body, cookie, credential,

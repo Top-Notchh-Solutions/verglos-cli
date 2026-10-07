@@ -2801,3 +2801,7 @@ Focused payment/runtime contracts passed 47/47. The existing CDP blank target
 was restored and no production operation occurred. PLAN-WEB-014/015 remain
 open; backlog remains **218 checked / 62 unchecked / 280 total**. Evidence:
 `docs/shipping/evidence/plan-web-014-card-hosted-probe-2026-10-07.md`.
+
+The same bounded Test Mode track also reached Netbanking bank selection, but
+did not reach the provider mock-bank success/failure control. No callback,
+capture, webhook, or entitlement result is inferred.

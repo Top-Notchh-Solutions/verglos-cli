@@ -2188,4 +2188,6 @@ trusted/licensed recipe provenance are still missing.
   lifecycle result is claimed. Focused payment/runtime contracts passed 47/47.
 - **Boundary:** No production/provider lifecycle/database/deployment write or
   entitlement evidence was produced. PLAN-WEB-014/015 remain open.
+- **Follow-up:** Netbanking reached bank selection but not the mock-bank
+  success/failure control; no callback or lifecycle result is claimed.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-card-hosted-probe-2026-10-07.md`.
