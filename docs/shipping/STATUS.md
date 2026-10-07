@@ -1690,3 +1690,17 @@ green across the configured checks and Vercel completed. No checkbox or
 production state changed. PLAN-WEB-013/014/015 remain open because the
 provider-enabled method set and lifecycle evidence are not available.
 Private evidence: `docs/shipping/evidence/plan-web-013-pr149-hosted-correction-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 versioned inventory substrate
+
+Web PR #153 head `718aadcaa384dcfd8a5fc4789c3b62c23c9e3858` adds a versioned
+account-deletion inventory and makes the pure execution gate fail closed on a
+stale or incomplete inventory. Local focused tests pass 22/22; typecheck,
+database checks, ordered-migration check (29 migrations), diff check, and
+38-page preview build pass. Hosted workflow `37559045448` remains pending at
+capture, so hosted qualification is not terminal. This is substrate only:
+there is still no durable hold authority, customer-held digest registration,
+bounded deletion worker, reconciliation receipt, restore rehearsal, or
+non-production end-to-end evidence. `QUAL-WEB-005` remains unchecked and no
+production/database/provider/payment/browser mutation occurred. Private
+evidence: `docs/shipping/evidence/qual-web-005-inventory-pr153-2026-10-07.md`.

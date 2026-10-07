@@ -213,3 +213,19 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
   or cron worker is added by this batch.
 - **Evidence:**
   `docs/shipping/evidence/qual-web-005-deletion-worker-boundary-2026-10-07.md`.
+
+## Account deletion inventory substrate · 2026-10-07
+
+- **Decision:** Treat Web PR #153 only as a dependency substrate, not as
+  `QUAL-WEB-005` acceptance. The versioned inventory and fail-closed gate may
+  precede the operational worker while the remaining authority and recovery
+  contracts are designed.
+- **Evidence:** PR #153 head
+  `718aadcaa384dcfd8a5fc4789c3b62c23c9e3858`; local focused tests 22/22,
+  typecheck, database/schema checks, ordered migration validation, diff check,
+  and 38-page build pass. Hosted workflow `37559045448` was still pending at
+  capture.
+- **Boundary:** no deletion worker, legal-hold persistence, customer-held
+  digest registration, migration, production write, payment action, browser
+  mutation, or checkbox change is authorized by this substrate. The existing
+  `QUAL-WEB-005` boundary record remains controlling.

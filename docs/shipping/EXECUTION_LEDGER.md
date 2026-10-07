@@ -2648,6 +2648,32 @@ changed and no checkbox was closed.
 - **Boundary:** no production/provider/database/payment/browser mutation; no
   checkbox changed; **218 checked / 62 unchecked / 280 total**.
 
+# 2026-10-07 — QUAL-WEB-005 versioned inventory substrate
+
+- **Batch:** add the reviewed prerequisite inventory and fail-closed gate for
+  account deletion without executing deletion.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Authoritative count remains **218 checked / 62 unchecked /
+  280 total**.
+- **Code:** Web PR #153, head
+  `718aadcaa384dcfd8a5fc4789c3b62c23c9e3858`, based on Web main
+  `6fccfb26ffb707e53c3ef44166b42280be29de55`.
+- **Local:** focused tests **22 pass / 0 fail / 0 skipped**; typecheck,
+  `db:check`, ordered migration check (**29**), diff check, and 38-page
+  preview build pass. No migration file changed; frozen lockfile install was
+  unchanged.
+- **Hosted:** GitGuardian, Preview Comments, and Vercel pass; required hosted
+  `typecheck-and-schema` workflow `37559045448` remained pending at capture
+  (job `112591905027`). PR remains open and is not acceptance evidence.
+- **Boundary:** no production/database/provider/payment/deployment write,
+  migration, deletion, browser mutation, or secret handling occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-inventory-pr153-2026-10-07.md`.
+- **Next:** finish hosted verification, then separately implement and qualify
+  durable hold authority, customer-held digest registration, bounded worker,
+  reconciliation/audit receipt, restore rehearsal, and authenticated
+  non-production E2E before considering the backlog item.
+
 # 2026-10-07 — payment hosted-correction
 
 - **Finding:** hosted workflow `37558018780` failed on one stale runtime-config

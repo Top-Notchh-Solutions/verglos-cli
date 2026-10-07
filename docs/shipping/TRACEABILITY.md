@@ -1528,3 +1528,16 @@ points at `900a6a5` with the corrected assertion. Local serial verification is
 all configured checks and Vercel completed. This is correction evidence only;
 no gate or checkbox changed. Provider-enabled method and lifecycle evidence
 remain open.
+
+# 2026-10-07 · QUAL-WEB-005 versioned inventory substrate
+
+`QUAL-WEB-005` now traces to Web PR #153 head
+`718aadcaa384dcfd8a5fc4789c3b62c23c9e3858` for a versioned seven-kind
+account-deletion inventory, source-table ownership map, customer-held
+disposition contract, and fail-closed stale/incomplete-inventory gate. Local
+focused tests pass 22/22, with typecheck, database/schema checks, ordered
+migration validation, diff check, and 38-page build pass. This is not the
+operational acceptance path: durable hold authority, customer-held digest
+registration, bounded worker, row-count/audit reconciliation, restore
+rehearsal, and authenticated non-production E2E remain required. Hosted
+workflow `37559045448` was pending at capture; no checkbox changed.

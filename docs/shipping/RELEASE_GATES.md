@@ -395,3 +395,14 @@ dependency, license, SBOM, and secret checks. Vercel preview completed. This
 does not close PLAN-WEB-013/014/015: the Vercel project still has no listed
 `RAZORPAY_ENABLED_PAYMENT_METHODS` configuration, and account-enabled
 test-mode lifecycle/reconciliation evidence is absent.
+
+Deletion qualification addendum (2026-10-07): Web PR #153 head
+`718aadcaa384dcfd8a5fc4789c3b62c23c9e3858` adds a versioned deletion inventory
+and fail-closed completeness/version gate. Local 22/22 focused tests,
+typecheck, schema/database checks, ordered migration validation, diff check,
+and 38-page build pass; hosted `typecheck-and-schema` workflow `37559045448`
+was pending at capture. This does not pass Gate 2/4/6 or accept
+`QUAL-WEB-005`: durable hold authority, customer-held digest registration,
+bounded worker, reconciliation/audit receipt, restore rehearsal, and
+authenticated non-production E2E remain open. No production or destructive
+operation occurred.

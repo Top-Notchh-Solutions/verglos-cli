@@ -89,3 +89,16 @@ public pricing and marketing frozen until the evidence matrix passes.
 - If the 24-hour target expires with any backlog or required evidence open, keep
   the goal active and report the exact gap; never call a partial launch whole
   shipping.
+
+# 2026-10-07 · QUAL-WEB-005 inventory substrate
+
+Web PR #153 records a versioned account-deletion inventory and fail-closed
+execution gate as a dependency-ready substrate. It does not satisfy the
+operational deletion requirement. Local 22/22 focused tests, typecheck,
+database/schema checks, ordered migration validation, diff check, and 38-page
+build pass; hosted workflow `37559045448` remained pending at capture. The
+private backlog remains **218 checked / 62 unchecked / 280 total**. No
+production/database/provider/payment/browser mutation or destructive action
+occurred. Durable hold authority, customer-held digest registration, bounded
+worker, reconciliation/audit receipt, restore rehearsal, and authenticated
+non-production E2E remain required.
