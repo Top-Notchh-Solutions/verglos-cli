@@ -853,3 +853,14 @@ does not close the accessibility/performance gate: keyboard, human
 screen-reader, mobile, field-CWV, authenticated dashboard-data, and large-data
 qualification remain open. No checkbox or production state changed. See
 `docs/shipping/evidence/qual-web-006-org-directory-ax-perf-2026-10-07.md`.
+
+Hosted Checkout prefill addendum (2026-10-07): Web PR #149 exact head
+`b73fdd3beba513c0f9fc69a38c2fc69319ff9474` adds bounded server-derived email
+and E.164 contact prefill with fail-closed client parsing. Focused tests
+23/23, negative-boundary 2/2, typecheck, schema/migration checks, build, and
+diff check pass; hosted checks were pending at capture. This does not satisfy
+the payment release gate: account-enabled method qualification, complete
+success/failure/capture/refund/renewal/cancellation/replay/out-of-order/webhook
+coverage, exactly-once entitlement behavior, and ledger-to-provider
+reconciliation remain required. No production/provider/payment/database/
+deployment operation occurred; no checkbox changed.

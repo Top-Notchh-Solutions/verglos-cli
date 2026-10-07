@@ -2035,6 +2035,19 @@ detection only: the destructive store does not consume the registry, and
 reconciliation, recovery, and authenticated non-production E2E remain
 unqualified. `QUAL-WEB-005` remains open.
 
+# 2026-10-07 · PLAN-WEB-013 hosted checkout prefill hardening
+
+Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474` adds
+server-derived bounded email/E.164 contact prefill to the hosted Checkout
+order response and rejects malformed prefill data at the client boundary.
+Focused checkout/payment/webhook tests pass **23/23**, negative-boundary tests
+pass **2/2**, and typecheck, schema/migration checks, build, and diff check
+pass. GitHub hosted checks were pending at capture; this remains code-side
+evidence only. PLAN-WEB-013/014/015 remain open for provider lifecycle,
+all-enabled-method, deployment, and reconciliation evidence. No checkbox
+changed and no production/provider/database/payment/deployment mutation
+occurred. See `docs/shipping/evidence/plan-web-013-hosted-prefill-2026-10-07.md`.
+
 # 2026-10-07 · QUAL-WEB-005 protected deletion hold authority
 
 PR #153 exact head `929da1907f001c8db71df0e601e08014590fd580` traces the

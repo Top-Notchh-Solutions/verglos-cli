@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013 hosted checkout prefill hardening
+
+Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474` adds
+server-derived, bounded Razorpay email/E.164 contact prefill and fail-closed
+client parsing before hosted Checkout opens. Focused checkout/payment/webhook
+tests pass **23/23**; negative-boundary tests pass **2/2**; typecheck, 31-
+migration/schema checks, production build, and diff check pass. The local build
+generated all 40 routes; Node `v26.4.0` emitted the existing Node 22 engine
+warning. The pushed PR's hosted checks were still initializing at capture, so
+no hosted pass is claimed. PLAN-WEB-013/014/015 remain open for provider
+lifecycle, all-enabled-method, and reconciliation evidence. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Private evidence: `docs/shipping/evidence/plan-web-013-hosted-prefill-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 organization-directory AX/performance probe
 
 Read-only CDP inspection of the authenticated production `/orgs` empty state

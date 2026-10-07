@@ -3920,3 +3920,28 @@ before enabling any destructive adapter.
   qualification, and independent review. No production/provider/database/
   payment/deployment/browser/customer operation occurred.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+# 2026-10-07 — PLAN-WEB-013 hosted checkout prefill hardening
+
+- **Batch:** Harden the existing hosted Checkout response with trusted
+  authenticated customer prefill while preserving the server/catalog payment
+  boundary.
+- **Backlog:** `PLAN-WEB-013` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total
+  (77.9%)**.
+- **Code:** Web PR #149 exact head
+  `b73fdd3beba513c0f9fc69a38c2fc69319ff9474`, pushed to the existing phase
+  branch.
+- **Verification:** Focused checkout/payment/webhook tests **23/23**,
+  negative-boundary **2/2**, typecheck, Drizzle schema check, ordered
+  31-migration check, production build (40 routes), and diff check pass.
+  Node `v26.4.0` emitted the repository's existing Node 22 engine warning.
+- **Hosted state:** GitHub checks were initializing at capture; no hosted
+  success is claimed and the PR was not merged.
+- **Boundary:** No production, database, migration, provider, payment,
+  deployment, entitlement, browser, or credential mutation occurred.
+- **Limitation:** This does not prove provider configuration or any payment
+  lifecycle, webhook, entitlement, or reconciliation path. PLAN-WEB-013/014/015
+  remain open.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-013-hosted-prefill-2026-10-07.md`.
