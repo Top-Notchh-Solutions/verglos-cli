@@ -248,3 +248,16 @@ save-card/confirming state; Netbanking reached bank selection. Neither reached
 a provider success/failure callback or lifecycle evidence. The existing CDP
 blank target was restored after each attempt. Backlog remains **218 checked /
 62 unchecked / 280 total** and PLAN-WEB-014/015 remain open.
+
+## 2026-10-07 Web regression qualification
+
+The current Web PR #153 deletion-worker candidate at exact head
+`929da1907f001c8db71df0e601e08014590fd580` passed its configured serial suite
+against a fresh empty disposable Docker `postgres:15` database: pretest 48/48,
+main 871/872 with one explicit environment skip, zero failures, exit 0. This
+strengthens the local deletion/queue/usage runtime substrate only. It does not
+close `QUAL-WEB-005`, payment lifecycle/reconciliation, production migration,
+restore/RPO, rollback, authenticated E2E, legal/customer-held, or independent
+acceptance gates. The container was removed; no production/provider/payment/
+deployment/browser mutation occurred. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)** and no checkbox changed.

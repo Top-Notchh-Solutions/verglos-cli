@@ -2191,3 +2191,13 @@ trusted/licensed recipe provenance are still missing.
 - **Follow-up:** Netbanking reached bank selection but not the mock-bank
   success/failure control; no callback or lifecycle result is claimed.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-card-hosted-probe-2026-10-07.md`.
+
+Web regression qualification (2026-10-07): PR #153 exact head
+`929da1907f001c8db71df0e601e08014590fd580` passed the configured serial suite
+against a fresh empty disposable Docker `postgres:15` database: pretest 48/48,
+main 871/872 with one explicit environment skip, zero failures, exit 0. This
+supports the current deletion/queue/usage runtime substrate only. It does not
+trace production migrations, restore/RPO, rollback, authenticated deletion E2E,
+payment lifecycle, reconciliation, or independent acceptance. No checkbox
+changed. Evidence:
+`docs/shipping/evidence/qual-web-005-empty-postgres-regression-2026-10-07.md`.

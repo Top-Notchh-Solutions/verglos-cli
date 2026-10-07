@@ -904,3 +904,14 @@ selection, but neither produced a success/failure callback or lifecycle event.
 This is method-display/navigation evidence only and does not close the payment
 gate or PLAN-WEB-014/015. No provider identifier, payment, webhook,
 entitlement, database, deployment, or production state was retained.
+
+## Web empty-Postgres regression qualification · 2026-10-07
+
+PR #153 exact head `929da1907f001c8db71df0e601e08014590fd580` passed
+`TEST_DATABASE_URL=<fresh-empty-local-db> pnpm test:serial` against disposable
+Docker `postgres:15`: pretest **48/48**, main **871/872** with one explicit
+environment skip, zero failures, exit 0. This is supporting runtime evidence
+only. It does not pass the production deletion gate or any payment gate:
+authenticated non-production deletion E2E, migration/cutover, restore/RPO,
+rollback, reconciliation, provider lifecycle, and independent acceptance
+remain open. No checkbox changed and the disposable container was removed.

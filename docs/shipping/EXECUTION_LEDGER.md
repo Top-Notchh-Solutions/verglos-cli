@@ -4018,3 +4018,17 @@ before enabling any destructive adapter.
 The follow-up Netbanking probe reached bank selection but did not reach the
 provider mock-bank success/failure control. No callback, capture, webhook, or
 entitlement result was inferred; the CDP blank target was restored.
+
+Web empty-Postgres regression batch (2026-10-07):
+
+- **Source:** Web PR #153 exact head
+  `929da1907f001c8db71df0e601e08014590fd580`.
+- **Environment:** fresh disposable Docker `postgres:15`, empty
+  `verglos_test`, `TEST_DATABASE_URL` only; the exact container was removed.
+- **Result:** `pnpm test:serial` exit 0; pretest 48/48; main 871/872 with one
+  explicit environment-gated billing skip and zero failures.
+- **Disposition:** runtime-regression evidence only. No migration, `db:push`,
+  production/provider/payment/deployment/browser mutation, or checkbox change.
+  `QUAL-WEB-005` and all release gates remain open.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-empty-postgres-regression-2026-10-07.md`.

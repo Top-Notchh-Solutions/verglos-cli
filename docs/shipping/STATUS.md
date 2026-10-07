@@ -2805,3 +2805,15 @@ open; backlog remains **218 checked / 62 unchecked / 280 total**. Evidence:
 The same bounded Test Mode track also reached Netbanking bank selection, but
 did not reach the provider mock-bank success/failure control. No callback,
 capture, webhook, or entitlement result is inferred.
+
+# 2026-10-07 — Web empty-Postgres regression qualification
+
+At Web PR #153 exact head `929da1907f001c8db71df0e601e08014590fd580`, a fresh
+empty disposable Docker `postgres:15` database ran `pnpm test:serial` with
+`TEST_DATABASE_URL` only. Pretest passed **48/48**; the main suite passed
+**871/872** with one intentional billing-environment skip and zero failures;
+the command exited 0. This is runtime-regression evidence only. The container
+was removed, no migration or `db:push` was used, and no production/provider/
+payment/deployment/browser mutation occurred. `QUAL-WEB-005`, payment gates,
+and production gates remain open; no checkbox changed. Evidence:
+`docs/shipping/evidence/qual-web-005-empty-postgres-regression-2026-10-07.md`.

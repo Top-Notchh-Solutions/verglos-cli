@@ -766,3 +766,15 @@ each observed method has lifecycle and reconciliation evidence.
   renewal, replay, out-of-order, entitlement, database, production, or
   deployment evidence was produced. PLAN-WEB-014/015 remain open; the CDP
   blank target was restored.
+
+## Web empty-Postgres regression qualification · 2026-10-07
+
+- **Decision:** Treat the empty-database serial run as local runtime-regression
+  evidence only; do not promote it to production or release acceptance.
+- **Evidence:** PR #153 exact head `929da1907f001c8db71df0e601e08014590fd580`,
+  disposable Docker `postgres:15`, `pnpm test:serial` exit 0, pretest 48/48,
+  main 871/872 with one explicit billing-environment skip and zero failures.
+- **Boundary:** No migration, `db:push`, production/provider/payment/
+  deployment/browser mutation, or backlog checkbox change occurred. The
+  deletion, payment, restore/rollback, reconciliation, and independent
+  acceptance gates remain open.
