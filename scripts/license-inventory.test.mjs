@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import { promisify } from "node:util";
 import { test } from "node:test";
 import { createLicenseInventory, parsePnpmLockPackageIds } from "./license-inventory-core.mjs";
+import { LICENSE_SOURCE_OVERRIDES } from "./license-source-overrides.mjs";
 
 const run = promisify(execFile);
 
@@ -21,7 +22,8 @@ test("dependency license inventory is deterministic and review-safe", async () =
   assert.ok(first.bundledComponents.some((entry) => entry.name === "benchmark" && entry.version === "1.0.0" && entry.bundledBy === "fast-uri@3.1.7"), "nested bundled package manifests must remain visible with parent attribution");
   assert.ok(first.packages.every((entry) => ["direct", "transitive"].includes(entry.scope)));
   assert.ok(first.packages.every((entry) => typeof entry.declaredLicense === "string" && typeof entry.detectedLicense === "string" && typeof entry.detectionMethod === "string" && (typeof entry.source === "string" || entry.reviewBlocker) && typeof entry.reviewBlocker === "boolean"));
-  assert.deepEqual(first.packages.filter((entry) => !entry.source).map((entry) => `${entry.name}@${entry.versions.join(",")}`).sort(), ["minipass-pipeline@1.2.4"]);
+  assert.deepEqual(first.packages.filter((entry) => !entry.source).map((entry) => `${entry.name}@${entry.versions.join(",")}`).sort(), []);
+  assert.equal(first.packages.find((entry) => entry.name === "minipass-pipeline")?.source, LICENSE_SOURCE_OVERRIDES["minipass-pipeline@1.2.4"]);
   const blockerIds = first.reviewBlockers.map((entry) => `${entry.name}@${entry.version}${entry.bundledBy ? ` bundled by ${entry.bundledBy}` : ""}: ${entry.reason}`).sort();
   assert.deepEqual(blockerIds, [
     "benchmark@1.0.0 bundled by fast-uri@3.1.7: nested-license-conflicts-with-container",
@@ -29,7 +31,6 @@ test("dependency license inventory is deterministic and review-safe", async () =
     "lru-cache@11.5.2: license-review-required",
     "minimatch@10.2.6: license-review-required",
     "minipass-flush@1.0.7: license-review-required",
-    "minipass-pipeline@1.2.4: source-missing",
     "minipass@7.1.3: license-review-required",
     "path-scurry@2.0.2: license-review-required",
   ]);
@@ -61,6 +62,23 @@ test("license inventory fails closed on missing lock metadata and surfaces unkno
     directDependencies,
   });
   assert.deepEqual(inventory.reviewBlockers, [{ name: "unknown", version: "2.0.0", license: "LicenseRef-Unknown", reason: "license-review-required" }]);
+});
+
+test("license source overrides are exact-version, HTTPS-only provenance and do not clear license blockers", () => {
+  const inventory = createLicenseInventory({
+    lockedPackages: [{ name: "known", version: "1.0.0" }],
+    manifests: [{ name: "known", version: "1.0.0", license: "BlueOak-1.0.0" }],
+    directDependencies: new Set(["known"]),
+    sourceOverrides: { "known@1.0.0": "https://example.com/known" },
+  });
+  assert.equal(inventory.packages[0].source, "https://example.com/known");
+  assert.deepEqual(inventory.reviewBlockers, [{ name: "known", version: "1.0.0", license: "BlueOak-1.0.0", reason: "license-review-required" }]);
+  assert.throws(() => createLicenseInventory({
+    lockedPackages: [{ name: "known", version: "1.0.0" }],
+    manifests: [{ name: "known", version: "1.0.0", license: "MIT" }],
+    directDependencies: new Set(["known"]),
+    sourceOverrides: { "known@1.0.0": "http://example.com/known" },
+  }), /must use HTTPS/);
 });
 
 test("nested components inherit only the containing repository source and remain separate from lock nodes", () => {

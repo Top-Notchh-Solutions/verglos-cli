@@ -2,6 +2,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createLicenseInventory, parsePnpmLockPackageIds } from "./license-inventory-core.mjs";
+import { LICENSE_SOURCE_OVERRIDES } from "./license-source-overrides.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const storeRoot = join(root, "node_modules", ".pnpm");
@@ -66,7 +67,7 @@ for (const manifestPath of workspaceManifests) {
 const lockfile = await readFile(join(root, "pnpm-lock.yaml"), "utf8");
 const lockedPackages = parsePnpmLockPackageIds(lockfile);
 const { manifests, bundledManifests } = await collectVirtualStoreManifests();
-const result = createLicenseInventory({ lockedPackages, manifests, bundledManifests, directDependencies });
+const result = createLicenseInventory({ lockedPackages, manifests, bundledManifests, directDependencies, sourceOverrides: LICENSE_SOURCE_OVERRIDES });
 if (process.argv.includes("--require-clear") && result.reviewBlockers.length > 0) {
   console.error(`dependency license review required for ${result.reviewBlockers.length} package version(s)`);
   process.exitCode = 2;
