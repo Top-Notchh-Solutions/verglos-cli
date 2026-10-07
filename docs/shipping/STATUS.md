@@ -2490,6 +2490,16 @@ Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
 provider, production, database, deployment, payment, or credential operation
 occurred.
 
+## 2026-10-07 · Web payment build/schema verification
+
+On active Web PR #149, `pnpm db:check` passed with no migration drift and
+`pnpm build` compiled successfully and generated all 40 pages. The local build
+recorded the existing Node 22 engine warning and multiple-lockfile workspace
+root warning; production runtime validation was skipped outside a production
+deployment. This is code-side evidence only. Backlog remains **218 checked /
+62 unchecked / 280 total (77.9%)**; no production, database, payment,
+deployment, or credential operation occurred.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted method response contract
 
 Web PR #149 commit `520d40a` adds fail-closed parsing of the server-created

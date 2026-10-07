@@ -3665,3 +3665,14 @@ before enabling any destructive adapter.
 - **Boundary:** This strengthens code-side PLAN-WEB-013 evidence only; provider
   lifecycle and production reconciliation remain open. No provider,
   production, database, deployment, payment, or credential operation occurred.
+
+# 2026-10-07 — Web payment build/schema verification
+
+- **Verification:** Active Web PR #149 `pnpm db:check` passed with no migration
+  drift; `pnpm build` compiled successfully and generated all 40 pages.
+- **Limitations:** Local build recorded the existing Node 22 engine warning and
+  multiple-lockfile workspace-root warning; production runtime validation was
+  skipped outside a production deployment.
+- **Boundary:** Code-side evidence only; no production, database, payment,
+  deployment, provider, or credential operation occurred. Backlog remains
+  **218 checked / 62 unchecked / 280 total (77.9%)**.

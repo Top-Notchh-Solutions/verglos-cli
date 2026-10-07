@@ -13,6 +13,11 @@
   passes: pretest **42/48** with 6 environment-gated skips, followed by
   **850/872** with 22 environment-gated skips and 0 failures. Node `v26.4.0`
   emitted the existing workspace Node 22 engine warning.
+- **Additional checks:** `pnpm db:check` passed with no migration drift;
+  `pnpm build` compiled successfully and generated all 40 pages. The build
+  emitted the existing Node 22 engine warning and multiple-lockfile workspace
+  root warning; production runtime validation was skipped outside a production
+  deployment.
 
 This is code-side PLAN-WEB-013 progress only. It does not prove provider
 account configuration, payment lifecycle, production reconciliation, or
