@@ -271,3 +271,10 @@ method is live merely because its code is recognized. Keep `PLAN-WEB-013`,
 `PLAN-WEB-014`, and `PLAN-WEB-015` open until test-mode method configuration,
 order/payment/webhook/replay evidence, and reconciliation are captured. No
 provider or production write was performed.
+
+R-048 update (2026-10-07, per-kind transactions): PR #153 exact head
+`9476e5d` adds durable request/kind idempotency and scoped row-count deletes,
+verified locally and by hosted workflow `37563632682`. This reduces replay and
+partial-operation risk but does not close the critical privacy gate: complete
+supporting ownership/retention dispositions, runtime invocation, full
+reconciliation, restore/rollback, and authenticated E2E remain open.

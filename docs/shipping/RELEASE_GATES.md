@@ -506,3 +506,11 @@ checkout evidence for each enabled method, success/failure/cancel/refund/
 webhook replay coverage, and ledger-to-provider reconciliation. QR is not a
 substitute for hosted-method qualification, and no live payment or production
 configuration change is authorized by this substrate batch.
+
+Deletion gate update (2026-10-07): PR #153 now has hosted-kind transactional
+deletes and durable per-kind receipts, but `QUAL-WEB-005` still fails closed.
+Before acceptance, qualify the complete supporting data graph and retention
+dispositions, wire and authenticate the worker invocation, reconcile actual
+row counts and audit receipts, rehearse restore/rollback, and run the
+authenticated non-production E2E. Migration `0033` remains unapplied to
+production; no deletion or production write occurred.

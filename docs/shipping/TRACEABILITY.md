@@ -1647,3 +1647,14 @@ serial suite is 850/22/0. This is catalog substrate only: account-enabled
 method configuration, provider lifecycle/replay qualification, production
 reconciliation, and the remaining payment plans are absent. `PLAN-WEB-013`,
 `PLAN-WEB-014`, and `PLAN-WEB-015` remain open.
+
+# 2026-10-07 · QUAL-WEB-005 fenced per-kind transactions
+
+PR #153 exact head `9476e5d018c9ab18bd09fa6bec4f89e2ff353e92` traces each of
+the seven hosted kinds to a lease-fenced, user-scoped PostgreSQL transaction
+and durable request/kind idempotency receipt. Focused 29/29, disposable
+PostgreSQL 1/1, serial 846/23/0, 34-migration/schema/build/boundary/truth
+checks, and hosted workflow `37563632682` pass. This is an operational
+substrate milestone only: the worker gate remains `inventoryComplete=false`
+until supporting retention/ownership, runtime invocation, reconciliation,
+restore/rollback, and authenticated E2E are qualified.

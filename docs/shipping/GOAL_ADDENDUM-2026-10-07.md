@@ -163,3 +163,13 @@ payment acceptance: account enablement, provider lifecycle/replay evidence,
 reconciliation, and the remaining payment plans are still open. The
 authoritative backlog remains **218 checked / 62 unchecked / 280 total**; no
 production/provider/payment/browser mutation occurred.
+
+# 2026-10-07 · QUAL-WEB-005 per-kind transaction substrate
+
+PR #153 exact head `9476e5d018c9ab18bd09fa6bec4f89e2ff353e92` passed hosted
+workflow `37563632682` after adding source-only migration `0033` and fenced
+per-kind deletion transactions. This materially advances deletion safety but
+does not accept `QUAL-WEB-005`: supporting retention/ownership inventory,
+runtime wiring, reconciliation, restore/rollback, and authenticated E2E remain
+open. Count remains **218 checked / 62 unchecked / 280 total**; no production
+or destructive operation occurred.

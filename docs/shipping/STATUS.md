@@ -1856,3 +1856,19 @@ provider lifecycle/replay evidence, production reconciliation, and
 production, deployment, payment, or browser mutation occurred. Backlog:
 **218 checked / 62 unchecked / 280 total**. Private evidence:
 `docs/shipping/evidence/plan-web-013-payment-method-catalog-pr149-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 fenced per-kind transactions
+
+Web PR #153 exact head `9476e5d018c9ab18bd09fa6bec4f89e2ff353e92` passed hosted
+workflow `37563632682` (job `112606299085`), Vercel, GitGuardian, and Preview
+Comments. Source-only migration `0033` adds durable request/kind idempotency;
+the store now implements lease-fenced transactional deletion and row-count
+receipts for all seven hosted kinds. Local focused qualification 29/29,
+disposable PostgreSQL integration 1/1, serial 846/23/0, typecheck, Drizzle,
+34-migration ordering, build, boundary, truth, and diff checks pass. The
+worker remains fail-closed because supporting ownership/retention inventory,
+runtime invocation, reconciliation, restore/rollback, and authenticated
+non-production E2E remain open. `QUAL-WEB-005` remains unchecked; count is
+**218 checked / 62 unchecked / 280 total**. No production or destructive
+operation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-kind-transactions-pr153-2026-10-07.md`.

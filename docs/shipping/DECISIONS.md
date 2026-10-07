@@ -340,3 +340,16 @@ production migration, or acceptance is supplied by this read path.
   transactions, webhook/replay behavior, production reconciliation, or
   acceptance. The PR remains open and no provider, payment, production,
   database, deployment, or browser mutation occurred.
+
+## Fenced per-kind deletion transactions · 2026-10-07
+
+- **Decision:** Persist one request/kind operation and deleted-row count in the
+  same transaction as each scoped deletion. Replays return the original count;
+  a stale lease cannot mutate data or record a receipt.
+- **Evidence:** Web PR #153 exact head `9476e5d`; focused 29/29, disposable
+  PostgreSQL 1/1, serial 846/23/0, typecheck/schema/34-migration/build/diff
+  pass; hosted workflow `37563632682` passed.
+- **Boundary:** Only the seven hosted projections are implemented. Supporting
+  account/license/billing/retention dispositions, runtime wiring,
+  reconciliation, restore/rollback, and E2E remain open; migration `0033` is
+  source-only and no production or destructive operation occurred.

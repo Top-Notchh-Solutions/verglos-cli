@@ -2911,3 +2911,25 @@ before enabling any destructive adapter.
   remain open.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-013-payment-method-catalog-pr149-2026-10-07.md`.
+
+# 2026-10-07 — QUAL-WEB-005 fenced per-kind transactions
+
+- **Batch:** add source-only migration `0033` and implement all seven
+  user-scoped, lease-fenced deletion operations with durable idempotency and
+  row-count receipts on PR #153.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no checkbox changes. Count
+  remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #153 exact head
+  `9476e5d018c9ab18bd09fa6bec4f89e2ff353e92`, pushed and open.
+- **Local:** focused qualification 29/29; disposable PostgreSQL integration
+  1/1; serial 846/23/0; typecheck; Drizzle check; 34 migration ordering;
+  negative boundary 2/2; truth registry 25/25; 38-route build; diff check.
+- **Hosted:** workflow `37563632682`, job `112606299085`, passed; Vercel,
+  GitGuardian, and Preview Comments passed. PR is `CLEAN` and unmerged.
+- **Boundary:** migration is source-only. Supporting ownership/retention
+  inventory, runtime worker invocation, complete reconciliation,
+  restore/rollback, and authenticated non-production E2E remain open. No
+  production/database/provider/payment/deployment write, migration, deletion,
+  or browser mutation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-kind-transactions-pr153-2026-10-07.md`.
