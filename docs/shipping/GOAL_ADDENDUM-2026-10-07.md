@@ -133,3 +133,13 @@ and audit-receipt fencing. Focus 31/31, negative boundary 2/2, serial 846 pass
 `37560432960` was in progress. The backlog remains **218 checked / 62
 unchecked / 280 total**; the operational adapter, restore rehearsal,
 reconciliation, and non-production E2E remain required.
+
+# 2026-10-07 · QUAL-WEB-005 hosted inventory verification
+
+PR #153 exact head `4656013425c4cadb498f004c1057aa6f1d5931b6` passed hosted
+workflow `37562115786` and its Vercel, GitGuardian, and Preview Comments
+checks. This is a verified substrate milestone, not whole shipping:
+`QUAL-WEB-005` remains unchecked, the inventory gate remains fail-closed, and
+supporting retention/ownership, destructive execution, reconciliation/audit,
+restore/rollback, runtime wiring, and authenticated E2E remain open. The
+authoritative count stays **218 checked / 62 unchecked / 280 total**.

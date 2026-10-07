@@ -248,3 +248,10 @@ inventory, destructive, and audit methods; no runtime wiring or production
 migration exists. The critical risk remains open until the complete data graph,
 per-kind transactions, row-count/audit reconciliation, restore/rollback, and
 non-production E2E are qualified.
+
+R-048 update (2026-10-07, hosted inventory verification): PR #153 exact head
+`4656013425c4cadb498f004c1057aa6f1d5931b6` passed hosted workflow
+`37562115786` and the required provider checks. This validates the read-side
+substrate only; `inventoryComplete=false` remains deliberate and no
+destructive method or runtime worker is enabled. The critical omission,
+retention, reconciliation, restore, and E2E risks remain open.

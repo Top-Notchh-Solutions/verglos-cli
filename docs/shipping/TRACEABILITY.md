@@ -1616,3 +1616,13 @@ disposable PostgreSQL integration 1/1, serial 846/23/0, typecheck/schema/
 migration/build/diff checks pass. This remains substrate only: hosted checks
 were pending at capture, and no store claim/retry adapter, destructive SQL,
 reconciliation receipt, restore rehearsal, or authenticated E2E exists.
+
+# 2026-10-07 · QUAL-WEB-005 fenced inventory hosted verification
+
+PR #153 exact head `4656013425c4cadb498f004c1057aa6f1d5931b6` passed hosted
+workflow `37562115786` with the full configured qualification, public-boundary,
+dependency/license/SBOM, secret, Vercel, GitGuardian, and Preview Comments
+checks. The evidence strengthens the lease-fenced inventory read only;
+supporting ownership/retention dispositions, destructive transactions,
+reconciliation/audit, restore/rollback, runtime wiring, and authenticated E2E
+remain absent, so `QUAL-WEB-005` remains open.

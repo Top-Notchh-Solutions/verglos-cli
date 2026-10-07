@@ -1814,3 +1814,16 @@ workflow `37562115786` was pending at capture. No production/provider/database/
 payment/deployment write, migration, deletion, or browser mutation occurred.
 Private evidence:
 `docs/shipping/evidence/qual-web-005-inventory-read-pr153-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 fenced inventory hosted verification
+
+Web PR #153 exact head `4656013` passed hosted workflow `37562115786`,
+including typecheck, serial tests, negative-boundary/truth checks, schema and
+migration validation, production build, public-boundary, dependency/license/
+SBOM, and tracked-secret checks; Vercel, GitGuardian, and Preview Comments
+passed. This remains qualification substrate only: the adapter keeps
+`inventoryComplete=false`, the PR is open, no deletion route/worker wiring or
+destructive operation exists, and `QUAL-WEB-005` remains unchecked. Count
+remains **218 checked / 62 unchecked / 280 total**. No production,
+database/provider/payment/deployment write, migration, deletion, or browser
+mutation occurred.

@@ -479,3 +479,13 @@ with Vercel, GitGuardian, and Preview Comments. This still does not pass Gate
 destructive SQL, row-count/audit reconciliation, restore/rollback rehearsal, or
 authenticated non-production E2E is present; migrations 0029/0030 remain
 unapplied.
+
+Deletion inventory hosted verification addendum (2026-10-07): Web PR #153
+exact head `4656013425c4cadb498f004c1057aa6f1d5931b6` passed workflow
+`37562115786`, including hosted typecheck/tests/schema/migration/build,
+public-boundary, dependency/license/SBOM, secret, Vercel, GitGuardian, and
+Preview Comments checks. This still does not pass Gate 2/4/6 or accept
+`QUAL-WEB-005`: the adapter intentionally reports incomplete inventory,
+destructive transactions, reconciliation/audit, restore/rollback, runtime
+wiring, and authenticated non-production E2E remain open. No production
+migration or deletion occurred.

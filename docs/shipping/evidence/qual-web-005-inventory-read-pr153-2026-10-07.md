@@ -30,8 +30,9 @@ covered; this prevents the worker from reaching destructive calls.
 - Negative-boundary suite: **2/2 pass**.
 - `VERCEL_ENV=preview NODE_ENV=production pnpm build`: pass; **38 pages**.
 - `git diff --check`: pass.
-- Hosted workflow `37562115786` was pending at capture; no hosted success is
-  claimed.
+- Hosted workflow `37562115786` passed on the exact head; Vercel, GitGuardian,
+  and Preview Comments also passed. The hosted run did not apply migrations or
+  execute deletion.
 
 ## Acceptance boundary
 
