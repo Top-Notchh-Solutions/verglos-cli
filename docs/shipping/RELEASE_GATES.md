@@ -896,3 +896,11 @@ success/failure/capture/refund/renewal/cancellation/replay/out-of-order/webhook
 coverage, exactly-once entitlement behavior, and ledger-to-provider
 reconciliation remain required. No production/provider/payment/database/
 deployment operation occurred; no checkbox changed.
+
+Payment qualification continuation (2026-10-07): the Razorpay Test Mode
+hosted Checkout rendered the observed Cards and Netbanking branches. Cards
+reached the provider save-card/confirming state and Netbanking reached bank
+selection, but neither produced a success/failure callback or lifecycle event.
+This is method-display/navigation evidence only and does not close the payment
+gate or PLAN-WEB-014/015. No provider identifier, payment, webhook,
+entitlement, database, deployment, or production state was retained.

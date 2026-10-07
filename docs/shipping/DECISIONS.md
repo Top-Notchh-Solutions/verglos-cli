@@ -753,3 +753,16 @@ each observed method has lifecycle and reconciliation evidence.
 - **Boundary:** This closes a code-side authorization gap only. HUNT-009 and
   HUNT-008 remain open for hosted/requalification, trusted/licensed provenance,
   and independent review.
+
+## PLAN-WEB-014 Cards and Netbanking hosted probes · 2026-10-07
+
+- **Decision:** Keep the all-method hosted order architecture and record the
+  Cards/Netbanking runs as incomplete provider UI evidence only. Do not grant
+  entitlement or mark any payment lifecycle as passed.
+- **Evidence:** Razorpay Test Mode on PR #149 exact head `b73fdd3` reached the
+  Cards save-card/confirming state and the Netbanking bank-selection screen.
+  Focused payment/runtime contracts remain 47/47 passed.
+- **Boundary:** No success/failure callback, capture, refund, webhook,
+  renewal, replay, out-of-order, entitlement, database, production, or
+  deployment evidence was produced. PLAN-WEB-014/015 remain open; the CDP
+  blank target was restored.

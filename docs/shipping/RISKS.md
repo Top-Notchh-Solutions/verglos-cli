@@ -473,3 +473,11 @@ R-009 update (2026-10-07, pre-runtime trust preflight): CLI `67debee` now
 verifies trust and exact rule/subject binding before loading the private Hunt
 runtime, reducing preflight authority. This does not establish publisher-root
 authenticity, bounded execution qualification, or independent review.
+
+R-041 payment update (2026-10-07): the local Test Mode account rendered Cards
+and Netbanking, but the bounded flows stopped at confirming/save-card and bank
+selection respectively. Provider success/failure, capture/refund, webhook,
+renewal, replay, out-of-order, and entitlement reconciliation remain
+unverified. Production method configuration and billing cutover remain blocked
+until test-mode evidence and the required credential-rotation/preflight gates
+are complete.

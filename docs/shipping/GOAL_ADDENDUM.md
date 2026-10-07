@@ -238,3 +238,13 @@ PR #153 head `4656013` now reads the seven hosted-kind inventory, holds, and
 customer-held digests under the job fence, while deliberately retaining
 `inventoryComplete=false`. The whole shipping goal remains active; no product
 release or deletion acceptance is implied.
+
+## 2026-10-07 payment qualification continuation
+
+The bounded Razorpay Test Mode track configured the locally ignored test
+environment with the observed hosted method set and reached both Cards and
+Netbanking UI branches on Web PR #149 exact head `b73fdd3`. Cards reached the
+save-card/confirming state; Netbanking reached bank selection. Neither reached
+a provider success/failure callback or lifecycle evidence. The existing CDP
+blank target was restored after each attempt. Backlog remains **218 checked /
+62 unchecked / 280 total** and PLAN-WEB-014/015 remain open.
