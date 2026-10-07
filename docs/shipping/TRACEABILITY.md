@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 organization-directory AX/performance probe · 2026-10-07
+
+The authenticated production `/orgs` empty state was inspected through the
+existing CDP target without navigation or mutation. It exposed one `main`, one
+`h1`, one `h2`, one named link, and a 30-node accessibility tree; the snapshot
+contained 79 DOM nodes with zero layout duration, 0.000991 s style
+recalculation, 0.004148 s task duration, and 7,941,820 bytes JS heap. This is
+partial evidence only; human screen-reader, keyboard, mobile, field-CWV,
+dashboard-data, and large-dataset checks remain open. See
+`docs/shipping/evidence/qual-web-006-org-directory-ax-perf-2026-10-07.md`.
+
 ## PLAN-WEB-014 sandbox lifecycle continuation · 2026-10-07
 
 An isolated provider-only localhost Checkout probe using Razorpay test keys

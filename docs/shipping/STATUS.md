@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-006 organization-directory AX/performance probe
+
+Read-only CDP inspection of the authenticated production `/orgs` empty state
+found one visible `main`, one `h1`, one `h2`, one named link, and a 30-node
+accessibility tree. The page snapshot had 79 DOM nodes, zero layout duration,
+0.000991 s style recalculation, 0.004148 s task duration, and 7,941,820 bytes
+JS heap. This is partial runtime evidence only: keyboard, human screen-reader,
+mobile/responsive, reduced-motion, field-CWV, authenticated dashboard-data,
+and large-dataset qualification remain open. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/qual-web-006-org-directory-ax-perf-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-014 sandbox lifecycle continuation
 
 Using only the Razorpay test credentials in the isolated environment, a

@@ -3887,6 +3887,20 @@ before enabling any destructive adapter.
   success, capture, refund, renewal, cancellation, replay, out-of-order,
   webhook, exactly-once entitlement, and production reconciliation remain
   unproven. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+# 2026-10-07 — QUAL-WEB-006 organization-directory AX/performance probe
+
+- **Scope:** Read-only Chrome CDP inspection of authenticated production
+  `/orgs`; no new tab, helper, navigation, or mutation.
+- **Verification:** One `main`, one `h1`, one `h2`, one named link, and a
+  30-node accessibility tree were observed. The page snapshot had 79 DOM
+  nodes, `LayoutDuration=0`, `RecalcStyleDuration=0.000991s`,
+  `TaskDuration=0.004148s`, and `JSHeapUsedSize=7941820` bytes.
+- **Limitation:** This is partial evidence only. Keyboard, human
+  screen-reader, mobile/responsive, reduced-motion, field-CWV,
+  authenticated-dashboard-data, and large-dataset qualification remain open.
+  No checkbox changed; backlog remains **218 checked / 62 unchecked / 280
+  total (77.9%)**.
 # 2026-10-07 — ENT-CLI-001 bounded private runner client
 
 - **Implementation:** CLI PR #78 exact head `68772d7` merged to `main` as

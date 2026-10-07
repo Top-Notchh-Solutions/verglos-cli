@@ -843,3 +843,13 @@ enforcement before supported-recipe execution input reads. Local focused
 Hunt/process tests 54/54 and typecheck pass; hosted cross-platform checks are
 pending. This closes no release gate: trusted/licensed recipe provenance,
 independent review, and complete Hunt qualification remain open.
+
+QUAL-WEB-006 runtime addendum (2026-10-07): read-only CDP inspection of the
+authenticated production `/orgs` empty state found one `main`, one `h1`, one
+`h2`, one named link, and a 30-node accessibility tree. The snapshot had 79
+DOM nodes, zero layout duration, 0.000991 s style recalculation, 0.004148 s
+task duration, and 7,941,820 bytes JS heap. This is partial evidence only and
+does not close the accessibility/performance gate: keyboard, human
+screen-reader, mobile, field-CWV, authenticated dashboard-data, and large-data
+qualification remain open. No checkbox or production state changed. See
+`docs/shipping/evidence/qual-web-006-org-directory-ax-perf-2026-10-07.md`.
