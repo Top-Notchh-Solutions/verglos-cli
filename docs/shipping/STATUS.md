@@ -19,7 +19,8 @@ and adds a validated optional-runtime boundary with fail-closed exit-78
 behavior. Hunt build, CLI typecheck, focused execution/runtime tests 6/6, the
 complete configured CLI package suite, public packaging/license/surface tests
 17/17, six public archives, package-content audit, and public-boundary audit
-passed. CLI PR #75 is OPEN/UNSTABLE at exact head
+passed; packed-manifest and clean-consumer verification also passed across all
+six local archives. CLI PR #75 is OPEN/UNSTABLE at exact head
 `c4beecb3525256cd2956660af8e3e6b49292b65f`; 11 hosted checks were pending at
 capture. This is packaging progress only: HUNT-008, HUNT-009, and QUAL-CLI-004
 remain open for provenance, isolation, independent review, and acceptance.

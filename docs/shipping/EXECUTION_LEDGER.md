@@ -19,7 +19,8 @@
   local execution coverage.
 - **Local:** Hunt build, CLI typecheck, full configured CLI package suite,
   focused Hunt/runtime 6/6, public archive/license/surface 17/17, six-archive
-  pack, package-content audit, public-boundary audit, and diff hygiene pass.
+  pack, packed-manifest audit, clean consumer, package-content audit,
+  public-boundary audit, and diff hygiene pass.
 - **Hosted:** PR #75 exact head `c4beecb3525256cd2956660af8e3e6b49292b65f`
   is OPEN/UNSTABLE with 11 checks pending at capture; review is undecided.
 - **Acceptance:** HUNT-008/HUNT-009/QUAL-CLI-004 remain open for trusted

@@ -13,8 +13,10 @@
 - **Local evidence:** Hunt build and CLI typecheck passed; focused runtime and
   execution tests passed 6/6; the complete configured CLI package suite passed;
   public packaging/license/surface tests passed 17/17; six public archives
-  were produced; package-content audit and public-boundary audit passed;
-  `git diff --check` passed.
+  were produced; packed-manifest, package-content, and public-boundary audits
+  passed; the clean consumer installed all six local archives, imported every
+  public library, ran `verglos --version` as `2.0.0-alpha.1`, and confirmed no
+  external engine cache was created; `git diff --check` passed.
 - **Boundary:** No private source, customer data, credentials, or private
   evidence entered the public archive. No production/provider/payment/
   database/migration/deployment/credential operation occurred. Trusted recipe
