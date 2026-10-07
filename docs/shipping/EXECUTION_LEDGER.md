@@ -2647,3 +2647,17 @@ changed and no checkbox was closed.
   capture; GitGuardian and Preview Comments pass.
 - **Boundary:** no production/provider/database/payment/browser mutation; no
   checkbox changed; **218 checked / 62 unchecked / 280 total**.
+
+# 2026-10-07 — payment hosted-correction
+
+- **Finding:** hosted workflow `37558018780` failed on one stale runtime-config
+  expectation after the production payment-method guard was added; 870 passed,
+  1 skipped, and 1 failed.
+- **Correction:** Web PR #149 advanced to head `900a6a5` with the matching
+  assertion; the behavior remains fail-closed.
+- **Local:** full serial suite **850 pass / 22 explicit skips / 0 fail**;
+  focused payment/runtime set **28/28 pass**.
+- **Hosted:** replacement workflow `37558287090` pending; Vercel preview
+  deploying at capture.
+- **Boundary:** no production/provider/database/payment/browser mutation; no
+  checkbox changed; **218 checked / 62 unchecked / 280 total**.

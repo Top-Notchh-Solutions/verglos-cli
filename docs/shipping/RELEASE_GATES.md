@@ -379,3 +379,11 @@ pending/deploying at capture. This hardens PLAN-WEB-013 but closes no payment
 or release gate; account-enabled method, test-mode lifecycle, and production
 reconciliation evidence remain open. Private evidence:
 `docs/shipping/evidence/plan-web-013-production-method-config-pr149-2026-10-07.md`.
+
+Payment hosted-correction addendum (2026-10-07): PR #149 head `6b5da26` was
+not accepted after hosted workflow `37558018780` found one stale runtime-config
+expectation (870 pass / 1 skip / 1 fail). The test was corrected at head
+`900a6a5`; the local serial suite is 850 pass / 22 explicit skips and the
+replacement hosted workflow `37558287090` is pending. No behavior was weakened
+and no production/provider state changed. Private evidence:
+`docs/shipping/evidence/plan-web-013-pr149-hosted-correction-2026-10-07.md`.

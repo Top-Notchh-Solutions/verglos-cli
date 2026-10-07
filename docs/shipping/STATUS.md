@@ -1679,3 +1679,12 @@ and 40-page preview build pass. Hosted run `37558018780` and Vercel preview
 were pending/deploying at capture; GitGuardian and Preview Comments passed.
 No backlog checkbox changed. PLAN-WEB-013/014/015 remain open. Private
 evidence: `docs/shipping/evidence/plan-web-013-production-method-config-pr149-2026-10-07.md`.
+
+# 2026-10-07 · payment hosted-correction
+
+Hosted workflow `37558018780` rejected PR #149 head `6b5da26` on one stale
+runtime-config expectation; the suite otherwise reported 870 pass, 1 skip, and
+1 fail. Head `900a6a5` adds the matching assertion. Local serial verification
+is 850 pass / 22 explicit skips; replacement hosted workflow `37558287090` is
+pending and Vercel is deploying. No checkbox or production state changed.
+Private evidence: `docs/shipping/evidence/plan-web-013-pr149-hosted-correction-2026-10-07.md`.
