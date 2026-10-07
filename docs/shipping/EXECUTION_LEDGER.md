@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 — Production hosted-checkout preflight
+
+- **Runtime:** Read-only Vercel inspection of production deployment
+  `dpl_H2eqnEqCY96yAAPphch9S2dvUKeK` at Web commit `1498837`.
+- **Finding:** Build stopped in `pnpm config:check` because
+  `RAZORPAY_ENABLED_PAYMENT_METHODS` is absent; the live alias still serves
+  the legacy QR-only checkout.
+- **Boundary:** No environment-variable, provider, database, deployment,
+  payment, or customer-state write. Production DB was not queried because its
+  exposed credential remains subject to R-041 rotation.
+- **Disposition:** PLAN-WEB-015 and R-041 remain open; no checkbox changed;
+  backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-015-production-preflight-2026-10-07.md`.
+
 ## 2026-10-07 — Web current-main hosted order qualification
 
 - **Code:** Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` in a

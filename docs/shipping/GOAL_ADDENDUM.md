@@ -1,5 +1,16 @@
 # Goal addendum — 2026-10-07
 
+## PLAN-WEB-015 production preflight
+
+Vercel’s latest production attempt at Web commit `1498837` failed closed in
+runtime configuration because `RAZORPAY_ENABLED_PAYMENT_METHODS` is absent.
+The live checkout remains the legacy QR-only page. This is not a reason to
+guess production methods or alter prices: R-041 requires credential rotation
+and provider/account truth before any cutover. `PLAN-WEB-015` remains open; no
+production/provider/database/deployment write occurred. Backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-015-production-preflight-2026-10-07.md`.
+
 ## PLAN-WEB-013/014 current-main hosted order qualification
 
 Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed the isolated

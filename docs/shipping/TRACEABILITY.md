@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-015 production preflight · 2026-10-07
+
+Vercel’s latest production attempt for Web commit `1498837` failed in the
+runtime-config check because `RAZORPAY_ENABLED_PAYMENT_METHODS` is absent.
+The live checkout still exposes the legacy QR-only CTA, proving the hosted
+order candidate has not reached the alias. Production DB inspection was
+intentionally not repeated while the exposed credential remains under R-041.
+No checkbox changed. See
+`docs/shipping/evidence/plan-web-015-production-preflight-2026-10-07.md`.
+
 ## PLAN-WEB-013/014 current-main hosted order qualification · 2026-10-07
 
 Web exact main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed **28/28**

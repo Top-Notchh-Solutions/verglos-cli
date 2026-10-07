@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-015 production configuration boundary · 2026-10-07
+
+Production deployment of Web commit `1498837` fails closed because
+`RAZORPAY_ENABLED_PAYMENT_METHODS` is missing, and the live alias still serves
+the legacy QR-only checkout. This does not pass production reconciliation. The
+method set must come from account-enabled provider configuration after the
+R-041 credential rotation; it must not be guessed from local or Test Mode UI.
+No production write or checkbox change occurred. Evidence:
+`docs/shipping/evidence/plan-web-015-production-preflight-2026-10-07.md`.
+
 ## PLAN-WEB-013/014 current-main hosted order qualification · 2026-10-07
 
 Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed the focused

@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-015 production preflight · 2026-10-07
+
+- **Decision:** Do not promote or configure the hosted-order checkout until
+  the production method set is explicitly established and R-041 is closed.
+- **Evidence:** Vercel deployment `dpl_H2eqnEqCY96yAAPphch9S2dvUKeK` at Web
+  commit `1498837` failed because `RAZORPAY_ENABLED_PAYMENT_METHODS` is
+  absent; live `/checkout` remains the QR-only surface.
+- **Boundary:** No guessed method list, production price change, provider
+  request, database read/write, environment-variable write, or deployment
+  cutover occurred. `PLAN-WEB-015` and R-041 remain open.
+
 ## PLAN-WEB-013/014 current-main hosted order qualification · 2026-10-07
 
 - **Decision:** Accept the current-main hosted-order and isolated PostgreSQL

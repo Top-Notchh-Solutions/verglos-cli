@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Production hosted-checkout preflight
+
+Read-only Vercel inspection found the latest production attempt at Web commit
+`1498837` failed before Next build because production lacks
+`RAZORPAY_ENABLED_PAYMENT_METHODS`. The live `/checkout` still serves the old
+QR-only CTA and `upi_qr`, so current hosted-order code is not live. The enabled
+production method set was not guessed, and the production DB was not queried
+because its previously exposed credential remains an `R-041` rotation blocker.
+`PLAN-WEB-015` remains open; no environment, provider, database, deployment,
+payment, or customer-state write occurred. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-015-production-preflight-2026-10-07.md`.
+
 ## 2026-10-07 · Web current-main hosted order qualification
 
 Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed the isolated

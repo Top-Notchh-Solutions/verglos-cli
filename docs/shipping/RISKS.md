@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-041 / PLAN-WEB-015 production configuration and credential boundary · 2026-10-07
+
+The latest production deployment at Web commit `1498837` fails before build
+because `RAZORPAY_ENABLED_PAYMENT_METHODS` is absent; the live alias therefore
+remains QR-only. The production database credential was previously exposed and
+is not reused for another audit. Owner: release/operations. Required sequence:
+rotate the DB credential, refresh the Vercel production secret, redeploy, revoke
+the old credential, verify bounded read-only schema/history, then reconcile the
+provider method set and hosted checkout. No production state was changed in
+this preflight.
+
 ## R-PLAN-WEB-014 current-main order qualification boundary · 2026-10-07
 
 The exact Web main hosted-order path passes **28/28** focused tests against
