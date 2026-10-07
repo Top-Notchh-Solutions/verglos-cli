@@ -39,6 +39,7 @@ projected.
 
 Focused Hunt/process tests remain **54/54 pass**; CLI typecheck, build, and
 `git diff --check` pass locally. The pushed PR head is
-`c8a2e4b4bf337a332a003ac9296a6d3bbde15d9a`; hosted checks have not started at
-capture. HUNT-009 remains unchecked because trusted/licensed publisher roots,
+`c8a2e4b4bf337a332a003ac9296a6d3bbde15d9a`; hosted platform-matrix and
+self-scan runs `37614239691`/`37614239664` are pending at capture, with in-toto
+passed. HUNT-009 remains unchecked because trusted/licensed publisher roots,
 bounded execution qualification, and independent review are still open.

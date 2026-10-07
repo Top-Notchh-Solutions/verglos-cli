@@ -3604,8 +3604,9 @@ before enabling any destructive adapter.
   `executionAuthorized`, and explicit `legalClearance: false`.
 - **Verification:** Focused Hunt/process tests **54/54 pass**; package
   typecheck, build, and diff check pass. PR #76 pushed at exact head
-  `c8a2e4b4bf337a332a003ac9296a6d3bbde15d9a`; hosted checks not started at
-  capture.
+  `c8a2e4b4bf337a332a003ac9296a6d3bbde15d9a`; hosted platform-matrix and
+  self-scan runs `37614239691`/`37614239664` are pending at capture, with
+  in-toto passed.
 - **Backlog:** HUNT-009 attempted but open; count remains **218 checked / 62
   unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, provider, payment, database, deployment, or

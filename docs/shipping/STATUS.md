@@ -2456,8 +2456,10 @@ CLI PR #76 commit `c8a2e4b` adds redacted verified recipe-feed/license
 provenance and `executionAuthorized` to the structured Hunt result, while
 explicitly preserving `legalClearance: false`. Focused Hunt/process tests pass
 **54/54**, typecheck/build/diff checks pass, and the pushed head is
-`c8a2e4b4bf337a332a003ac9296a6d3bbde15d9a`; hosted checks have not started at
-capture. HUNT-009 remains open for trusted/licensed publisher roots, bounded
-execution qualification, and independent review. Backlog remains **218
+`c8a2e4b4bf337a332a003ac9296a6d3bbde15d9a`; hosted platform-matrix and
+self-scan runs `37614239691`/`37614239664` are pending at capture, with the
+in-toto binding already passed. HUNT-009 remains open for trusted/licensed
+publisher roots, bounded execution qualification, and independent review.
+Backlog remains **218
 checked / 62 unchecked / 280 total (77.9%)**. No production, database,
 provider, payment, deployment, or credential operation occurred.
