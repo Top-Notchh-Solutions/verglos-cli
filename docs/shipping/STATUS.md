@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-CLI-004 compatibility PR reopened for hosted verification
+
+CLI branch `feat/cli-plan-004-compat` at `059918c` is clean, pushed, one commit
+ahead of `origin/main`, and now has PR #72 open/mergeable. The branch carries
+supported-entitlement compatibility coverage on top of the opaque
+catalog/cache contract. Previously recorded local full tests, focused tests,
+typecheck, and build pass. PR #72 has no hosted checks reported yet and is not
+claimed green. PLAN-CLI-004 remains unchecked pending hosted platform,
+deployed signer/catalog alignment, old-token migration, and activation
+evidence. No production operation occurred. Private evidence:
+`docs/shipping/evidence/plan-cli-004-pr72-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted Razorpay checkout code-side batch
 
 Web PR #149, commit `eb7e55a`, adds the provider-hosted Razorpay order path as

@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · PLAN-CLI-004 compatibility PR #72
+
+- **Code:** CLI branch `feat/cli-plan-004-compat`, exact head `059918c`, is
+  pushed and clean; PR #72 is open and mergeable against `main`.
+- **Verification:** Previously recorded branch full tests, focused
+  compatibility tests, typecheck, and build pass. No new hosted result is
+  claimed from the PR creation step.
+- **Hosted state:** PR #72 reports no status checks at capture time; it is not
+  hosted-green. Deployed signer/catalog alignment, supported-version
+  migration, and hosted activation remain open.
+- **Boundary:** No production signer, entitlement activation, database,
+  deployment, publish, release, or customer operation occurred. R-041 remains
+  open.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted Razorpay checkout code-side batch
 
 - **Code:** Web PR #149, commit `eb7e55a`, on

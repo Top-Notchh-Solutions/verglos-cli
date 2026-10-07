@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## PLAN-CLI-004 compatibility PR #72 · 2026-10-07
+
+- **Implementation:** CLI head `059918c` adds supported-entitlement
+  compatibility coverage on top of the opaque catalog/cache implementation at
+  `dacd286`.
+- **Verification:** Existing branch evidence records full CLI tests, focused
+  compatibility tests, typecheck, and build passing. PR #72 is open/mergeable;
+  no hosted checks are reported yet.
+- **Boundary:** PLAN-CLI-004 remains unchecked pending hosted platform checks,
+  deployed signer/catalog alignment, old-token migration evidence, and hosted
+  activation integration. No production operation occurred.
+
 ## Hosted Razorpay checkout code-side evidence · 2026-10-07 · Web PR #149
 
 - **Implementation:** `eb7e55a` adds catalog-gated hosted order creation,
