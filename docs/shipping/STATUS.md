@@ -1784,3 +1784,18 @@ worker store/claim adapter, deletion transactions, reconciliation/audit,
 restore/rollback, and authenticated non-production E2E remain open. Private
 evidence:
 `docs/shipping/evidence/qual-web-005-job-persistence-pr153-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 fenced store adapter substrate
+
+Web PR #153 advanced to `654c78c69a44d7b5aad4733ec7cb364d760b76b0`. The new
+PostgreSQL adapter atomically claims user-scoped jobs with `SKIP LOCKED`,
+recovers expired leases, enforces opaque worker/attempt fences, schedules
+bounded retries/dead letters, and blocks through the fence. Inventory reads,
+destructive per-kind SQL, and terminal audit completion fail closed and remain
+unwired. Disposable PostgreSQL integration passes **1/1**; serial passes
+**846 / 23 explicit skips / 0 fail**; typecheck, Drizzle check, 32-migration
+ordering, negative-boundary 2/2, diff check, and 38-page build pass. Hosted
+workflow `37561862519` was queued at capture; no hosted success is claimed.
+No production/provider/database/payment/deployment write, migration, deletion,
+or browser mutation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-store-adapter-pr153-2026-10-07.md`.

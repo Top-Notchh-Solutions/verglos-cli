@@ -19,3 +19,8 @@ user-scoped deletion job atomically with the request. Focused 16/16,
 disposable PostgreSQL 1/1, full serial 846/23/0, typecheck/schema/migration/
 build/diff checks pass. Hosted checks were pending immediately after push;
 `QUAL-WEB-005` remains open and migration `0031` is not applied to production.
+
+The next PR #153 step adds only the fenced job-state adapter at head
+`654c78c69a44d7b5aad4733ec7cb364d760b76b0`. It passes disposable PostgreSQL
+1/1 and the full local qualification set, but inventory/destructive/audit
+methods remain fail-closed. The whole-product goal remains active.

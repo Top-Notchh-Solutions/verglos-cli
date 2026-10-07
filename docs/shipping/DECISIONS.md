@@ -290,3 +290,15 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
   but not claim/retry SQL, per-kind deletion, reconciliation/audit receipt,
   restore/rollback rehearsal, or acceptance; hosted checks were pending at
   capture and no production operation occurred.
+
+## Fenced deletion job adapter boundary · 2026-10-07
+
+- **Decision:** Implement only the durable user-scoped claim/retry/block state
+  first. Use `SKIP LOCKED` plus worker/attempt fences; fail closed for all
+  inventory, destructive, and audit operations until separately qualified.
+- **Evidence:** Web PR #153 head `654c78c`; disposable PostgreSQL integration
+  1/1, serial 846/23/0, typecheck/schema/migration/negative/build/diff pass;
+  hosted workflow `37561862519` was queued at capture.
+- **Boundary:** No runtime route or cron wires this adapter, migration 0031 is
+  unapplied, and `QUAL-WEB-005` remains open pending inventory-backed reads,
+  per-kind transactions, reconciliation/audit, restore/rollback, and E2E.

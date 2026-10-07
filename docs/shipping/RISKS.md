@@ -231,3 +231,12 @@ pass; migration `0031` remains unapplied. The critical risk is reduced at the
 enqueue boundary but remains open until fenced claim/retry SQL, complete
 user-owned-data execution, row-count/audit reconciliation, restore/rollback,
 and non-production E2E are qualified.
+
+R-048 update (2026-10-07, fenced adapter): PR #153 head
+`654c78c69a44d7b5aad4733ec7cb364d760b76b0` adds atomic user-scoped
+`SKIP LOCKED` claim/retry/block state with worker/attempt fences and verifies
+it against disposable PostgreSQL. The adapter intentionally fails closed for
+inventory, destructive, and audit methods; no runtime wiring or production
+migration exists. The critical risk remains open until the complete data graph,
+per-kind transactions, row-count/audit reconciliation, restore/rollback, and
+non-production E2E are qualified.

@@ -451,6 +451,16 @@ pending at capture. This still does not pass Gate 2/4/6 or accept
 restore/rollback, and authenticated non-production E2E remain open; migration
 0031 is source-only and unapplied.
 
+Deletion adapter addendum (2026-10-07): Web PR #153 head
+`654c78c69a44d7b5aad4733ec7cb364d760b76b0` adds the user-scoped PostgreSQL
+claim/retry/block adapter with `SKIP LOCKED` and worker/attempt fencing.
+Disposable integration 1/1, serial 846/23/0, typecheck/schema/migration,
+negative-boundary, diff, and 38-page build pass. Hosted workflow `37561862519`
+was queued at capture. This still does not pass Gate 2/4/6 or accept
+`QUAL-WEB-005`: inventory-backed reads, destructive per-kind transactions,
+reconciliation/audit, restore/rollback, and authenticated non-production E2E
+remain open; migration 0031 is source-only and unapplied.
+
 Deletion worker scope-fence addendum (2026-10-07): Web PR #153 head
 `ade21b6f4c74b0a27bcf349bded6d9ceb7e39ee0` adds the claimed-job user-scope
 check before state reads or adapter calls. The worker/deletion focus is 32/32,

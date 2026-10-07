@@ -1586,6 +1586,16 @@ job route, destructive SQL, restore rehearsal, or authenticated non-production
 E2E exists, so `QUAL-WEB-005` remains unchecked and source-only migrations
 0029/0030 remain unapplied.
 
+# 2026-10-07 · QUAL-WEB-005 fenced store adapter substrate
+
+PR #153 head `654c78c69a44d7b5aad4733ec7cb364d760b76b0` now traces the durable
+job to an atomic PostgreSQL claim/retry/block adapter with `SKIP LOCKED` and
+worker/attempt fences. Disposable PostgreSQL integration 1/1, serial 846/23/0,
+typecheck/schema/migration/negative/build/diff checks pass; hosted workflow
+`37561862519` was queued at capture. Inventory reads, per-kind deletion,
+reconciliation/audit, restore rehearsal, and authenticated E2E remain absent,
+so this is substrate only and `QUAL-WEB-005` remains unchecked.
+
 # 2026-10-07 · QUAL-WEB-005 user-scoped job persistence
 
 PR #153 head `b91222a8d4d6ffd08f2be71391d89a6dafedab1` now traces the deletion

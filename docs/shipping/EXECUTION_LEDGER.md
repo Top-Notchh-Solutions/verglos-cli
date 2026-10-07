@@ -2807,3 +2807,25 @@ deletion, restore, rollback, provider, and release gates remain unresolved.
   `docs/shipping/evidence/qual-web-005-job-persistence-pr153-2026-10-07.md`.
 - **Next:** implement and qualify the fenced store claim/retry adapter before
   any deletion execution or production migration consideration.
+
+# 2026-10-07 — QUAL-WEB-005 fenced store adapter substrate
+
+- **Batch:** implement the user-scoped PostgreSQL claim/retry/block adapter on
+  PR #153 without wiring destructive execution.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #153 head
+  `654c78c69a44d7b5aad4733ec7cb364d760b76b0`.
+- **Local:** disposable PostgreSQL integration **1/1**, serial **846 pass /
+  23 explicit skips / 0 fail**, typecheck, Drizzle check, 32-migration
+  ordering, negative-boundary **2/2**, diff check, and 38-page build pass.
+- **Hosted:** workflow `37561862519` queued at capture; Vercel was deploying.
+  No hosted success claimed; PR remains open.
+- **Boundary:** inventory/destructive/audit methods fail closed; no
+  production/database/provider/payment/deployment write, migration, deletion,
+  browser mutation, or secret handling.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-store-adapter-pr153-2026-10-07.md`.
+- **Next:** implement the inventory-backed read snapshot and per-kind
+  transactional adapter, with row-count reconciliation and audit receipt
+  persistence still behind restore/rollback qualification.
