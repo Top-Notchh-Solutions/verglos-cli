@@ -1,5 +1,14 @@
 # Goal addendum — 2026-10-07
 
+Razorpay method preflight: the official SDK method lookup returned HTTP 401
+`BAD_REQUEST_ERROR` / authentication failed for the current test credential
+pair, so the real account-enabled method set remains unknown. No live-key
+fallback or provider mutation was attempted. PR #149 exact-head payment tests
+passed 27/28 with one explicit environment-gated skip; an isolated catalog
+check exposed UPI, card, netbanking, wallet, and EMI as configured hosted
+methods. This does not satisfy PLAN-WEB-013/014/015 or payment acceptance.
+Evidence: `docs/shipping/evidence/razorpay-method-preflight-2026-10-07.md`.
+
 SCM/payment qualification batch: exact Web `origin/main`
 `6fccfb26ffb707e53c3ef44166b42280be29de55` passed the focused GitHub/SCM
 suite **48/48**. A bounded Razorpay test-mode order was created for the

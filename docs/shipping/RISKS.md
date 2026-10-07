@@ -1,5 +1,14 @@
 # Verglos V1 risk register
 
+Latest Razorpay method-preflight update (2026-10-07): the official SDK method
+lookup returned HTTP 401 authentication failure with the current test
+credential pair, leaving the account-enabled method set unknown. Local PR #149
+configuration supports five hosted method IDs and its baseline payment suite
+passed 27/28 with one explicit environment-gated skip, but this is not
+provider acceptance. Valid test credentials/account access and the complete
+method lifecycle matrix remain release-blocking; no live-key fallback or
+production operation occurred.
+
 Latest SCM/payment qualification update (2026-10-07): exact Web `origin/main`
 passed the focused GitHub/SCM suite **48/48**, and a bounded test-mode
 Razorpay order was created at the catalog monthly Pro amount without capture.

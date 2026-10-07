@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · Razorpay method preflight
+
+- **Provider:** Official SDK `payments.fetchPaymentMethods()` with the current
+  test credential pair returned HTTP 401 `BAD_REQUEST_ERROR` / authentication
+  failed. The call was read-only; no payment/provider mutation occurred.
+- **Code:** PR #149 exact head payment suite passed **27/28**, with one
+  explicit environment-gated ledger skip and zero failures. An explicit
+  isolated catalog assertion exposed `upi`, `card`, `netbanking`, `wallet`,
+  and `emi` as hosted methods.
+- **Boundary:** Provider account methods are still unverified. No live-key
+  fallback, production operation, database write, deployment, or checkbox
+  change.
+
 ## 2026-10-07 · SCM and payment qualification batch
 
 - **SCM:** Exact Web `origin/main` `6fccfb26ffb707e53c3ef44166b42280be29de55`

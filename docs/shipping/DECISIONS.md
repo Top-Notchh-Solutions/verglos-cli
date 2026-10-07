@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## Razorpay method preflight · 2026-10-07
+
+- **Decision:** Keep the payment-method and lifecycle gates open until a valid
+  test-account method response is obtained. Do not infer enabled methods from
+  documentation or local configuration.
+- **Evidence:** SDK method lookup returned HTTP 401 authentication failure;
+  exact PR #149 payment tests passed 27/28 with one explicit environment-gated
+  skip; isolated config exposed five hosted method IDs.
+- **Boundary:** No live-key fallback, payment, refund, webhook, entitlement,
+  database, deployment, or production operation occurred.
+
 ## SCM/payment qualification batch · 2026-10-07
 
 - **Decision:** Record the SCM 48/48 and Razorpay test-order results as

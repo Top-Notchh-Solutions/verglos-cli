@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Razorpay method preflight and all-method config check
+
+The official Razorpay Node SDK method lookup returned HTTP 401
+`BAD_REQUEST_ERROR` / `Authentication failed` for the current test credential
+pair. The account-enabled method set therefore remains unknown; no live-key
+fallback or payment mutation was attempted. The exact PR #149 payment suite
+passed **27/28** with one explicit environment-gated skip and zero failures,
+and an isolated catalog check exposed five configured hosted methods (UPI,
+card, netbanking, wallet, EMI). This is implementation evidence only, not
+provider-method acceptance. PLAN-WEB-013/014/015 remain open; no checkbox
+changed. Private evidence:
+`docs/shipping/evidence/razorpay-method-preflight-2026-10-07.md`.
+
 ## 2026-10-07 · SCM and payment qualification batch
 
 The exact merged Web source passed the focused GitHub/SCM contract suite
