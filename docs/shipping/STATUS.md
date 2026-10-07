@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · CLI license-source metadata follow-up
+
+CLI PR #73 (`d34ac4f`) adds an exact-version HTTPS provenance override for
+`minipass-pipeline@1.2.4`, whose installed manifest lacks repository metadata.
+Focused inventory/SBOM tests pass 6/6; the full CLI test graph passes 12/12
+workspace tasks and typecheck passes 13/13 tasks. The inventory now has seven
+remaining blockers: one nested `benchmark`/`fast-uri` license conflict and six
+BlueOak legal reviews. `--require-clear` still exits 2, so LIC/DIST gates and
+publication remain open. PR #73 is open/mergeable with hosted checks queued;
+no merge or publication occurred.
+
+A local pnpm configuration diagnostic emitted an npm authentication token to
+the tool output. Its value is not recorded or reused; it must be revoked and
+rotated before further registry authentication. No credential write occurred.
+Backlog remains **218 checked / 62 unchecked / 280 total**. Private evidence:
+`docs/shipping/evidence/qual-cli-license-source-metadata-2026-10-07.md`.
+
 ## 2026-10-07 · CLI release-candidate source follow-up
 
 After rebuilding the release candidate, the current CLI source completed

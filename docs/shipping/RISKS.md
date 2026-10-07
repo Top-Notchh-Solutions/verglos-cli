@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+Latest R-018 update (2026-10-07): CLI PR #73 (`d34ac4f`) supplies exact HTTPS
+source metadata for `minipass-pipeline@1.2.4`, reducing the inventory's
+mechanical source-missing list from eight to seven. The nested
+`benchmark`/`fast-uri` conflict and six BlueOak classifications remain open;
+no legal or redistribution clearance is inferred. Hosted checks and counsel /
+founder review remain required.
+
+Latest R-010 update (2026-10-07): a local pnpm configuration diagnostic
+emitted an npm authentication token to tool output. The value was not recorded
+or reused; revoke/rotate it before further registry authentication. This is a
+credential-exposure response, not evidence of a production compromise.
+
 Latest R-046 update (2026-10-07): the full Web PostgreSQL-backed suite is not
 authoritative when parallel test workers share mutable fixture state: they can
 race while creating shared `pgcrypto` setup and leave an integration worker

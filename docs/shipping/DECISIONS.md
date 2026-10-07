@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## Exact-version license source metadata · 2026-10-07
+
+- **Decision:** Permit a narrowly scoped source-metadata override only for an
+  exact package/version key when the installed manifest omits provenance and
+  immutable registry metadata identifies the upstream HTTPS repository.
+- **Controls:** Validate HTTPS, keep the override version-pinned, preserve the
+  existing redistribution classifier, and keep `--require-clear` fail-closed
+  for non-permissive licenses and nested conflicts.
+- **Boundary:** This is mechanical provenance repair, not legal approval or
+  redistribution clearance. PR #73 must pass hosted checks before any merge;
+  no release/publication or production operation is authorized by this
+  decision.
+
 ## Serialized PostgreSQL qualification path · 2026-10-07
 
 - **Decision:** Use the repository's existing `test:serial` command as the

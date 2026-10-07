@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## CLI license-source metadata follow-up · 2026-10-07
+
+CLI PR #73 (`d34ac4f`) removes the mechanical source-missing classification for
+`minipass-pipeline@1.2.4` using an exact-version HTTPS provenance override.
+Inventory/SBOM tests 6/6, CLI tests 12/12 workspace tasks, and typecheck 13/13
+tasks pass. The final verifier remains intentionally blocked on seven items:
+the nested `benchmark`/`fast-uri` license conflict and six BlueOak legal
+reviews. `--require-clear` still exits 2. LIC-002/003, DIST-001/002/003, and
+publication remain open; PR #73 is open/mergeable with hosted checks queued.
+No merge, publication, production, provider, database, payment, deployment,
+or credential operation occurred. Evidence:
+`docs/shipping/evidence/qual-cli-license-source-metadata-2026-10-07.md`.
+
 ## CLI release-candidate source follow-up · 2026-10-07
 
 The rebuilt current source passes `pnpm test` (12/12 workspace tasks) and

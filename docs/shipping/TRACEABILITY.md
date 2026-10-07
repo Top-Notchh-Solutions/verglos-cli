@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## CLI license-source metadata follow-up · 2026-10-07
+
+- CLI PR #73 head `d34ac4f` adds an exact-version HTTPS source override for
+  `minipass-pipeline@1.2.4`, based on read-only npm registry metadata for that
+  immutable version.
+- Inventory/SBOM tests pass 6/6, full CLI tests pass 12/12 workspace tasks,
+  and typecheck passes 13/13 tasks. The inventory has 254 package versions,
+  one nested component, and seven remaining review blockers.
+- This removes only the source-missing classification. The nested license
+  conflict and six BlueOak legal reviews remain fail-closed; `--require-clear`
+  still exits 2. PR #73 is open with hosted checks queued. No checkbox,
+  release gate, merge, publication, production operation, or credential write
+  changed. See
+  `docs/shipping/evidence/qual-cli-license-source-metadata-2026-10-07.md`.
+
 ## CLI release-candidate source follow-up · 2026-10-07
 
 - Rebuilt current CLI source passes `pnpm test` with 12/12 workspace tasks and

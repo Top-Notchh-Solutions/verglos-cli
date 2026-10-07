@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · CLI license-source metadata follow-up
+
+- **Implementation:** CLI PR #73 / commit `d34ac4f` adds an exact-version,
+  HTTPS-only provenance override for `minipass-pipeline@1.2.4`.
+- **Verification:** Inventory/SBOM tests 6/6, `pnpm test` 12/12 workspace
+  tasks, and `pnpm typecheck` 13/13 tasks passed. Inventory output contains
+  254 lockfile package versions, one nested component, and seven unresolved
+  review blockers; `--require-clear` remains intentionally non-zero.
+- **Acceptance:** This is mechanical provenance evidence only. It does not
+  clear legal review, authorize publication, or change any backlog checkbox.
+  Backlog remains 218 checked / 62 unchecked / 280 total.
+- **Hosted/boundary:** PR #73 is pushed and open/mergeable with checks queued.
+  No merge, npm publication, provider/payment/database/deployment operation,
+  production write, or credential write occurred. An npm auth token emitted by
+  a local diagnostic was not recorded or reused and must be rotated.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-license-source-metadata-2026-10-07.md`.
+
 ## 2026-10-07 · CLI release-candidate source follow-up
 
 - After rebuilding source, CLI `pnpm test` completed 12/12 workspace tasks and
