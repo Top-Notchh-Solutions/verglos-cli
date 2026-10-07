@@ -1,5 +1,12 @@
 # Verglos V1 risk register
 
+Latest R-046 update (2026-10-07): the full Web PostgreSQL-backed suite is not
+yet qualification-green because parallel test workers can race while creating
+shared `pgcrypto` setup and can leave an integration worker unresolved. The
+affected queue and usage tests pass when isolated, but the aggregate result is
+not credited. This remains an open release-qualification/test-harness risk;
+no production operation occurred.
+
 Latest R-044 update (2026-10-07): Web PR #149 implements the hosted order
 boundary, server/catalog method declaration, signed order binding,
 webhook-authoritative capture/failure path, read-only owner-bound status, and

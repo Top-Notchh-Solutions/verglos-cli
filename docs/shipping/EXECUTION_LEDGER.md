@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · Web PostgreSQL suite isolation qualification
+
+- **Aggregate:** The full Web PostgreSQL-backed `pnpm test` run used a fresh
+  Docker `postgres:18-alpine` database on port `55439` and stalled with two
+  idle integration workers after more than three minutes. It was terminated;
+  no aggregate pass is claimed.
+- **Isolation:** Queue provider plus worker-crash integration passed 7/7 when
+  isolated. Threshold-outbox passed 1/1 alone, and usage-ledger passed 1/1
+  alone. The two usage files together reproduce a shared-database
+  `create extension if not exists pgcrypto` unique-index race (`23505`) and
+  worker hang; this is recorded as an open test-harness limitation.
+- **Acceptance:** No backlog checkbox or release gate changed. Backlog remains
+  218 checked / 62 unchecked / 280 total. Full configured Web qualification is
+  still open.
+- **Boundary:** All databases were temporary synthetic Docker databases. No
+  production/database/provider/payment/deployment/migration/credential or
+  customer operation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-db-suite-isolation-2026-10-07.md`.
+
 ## 2026-10-07 · ACCEPT-002/003 latest-source substrate refresh
 
 - **Sources:** Private verifier ran explicitly against unreleased CLI `ad6ee14`

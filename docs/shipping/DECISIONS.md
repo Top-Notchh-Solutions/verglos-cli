@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## Shared test-database initialization · 2026-10-07
+
+- **Decision:** Do not count the concurrent full Web PostgreSQL run as green
+  while independent Node test workers share a database and race on extension
+  setup. Preserve the failure/hang as qualification evidence and use isolated
+  per-file runs for diagnosis until the harness is serialized or initialization
+  is made concurrency-safe.
+- **Evidence:** Queue/worker-crash integration passes 7/7; threshold-outbox
+  and usage-ledger each pass 1/1 alone. The paired usage run reproduces
+  PostgreSQL `23505` on `pg_extension_name_index` and a pending worker.
+- **Boundary:** This is a testing decision only. It does not close any Web
+  qualification, acceptance, or release gate, and no production operation
+  occurred.
+
 This file is newly created because no tracked `DECISIONS.md` existed in the private shipping worktree when checked on 2026-09-14. It is local-only and must not be pushed to the public CLI or Web repositories.
 
 ## Razorpay hosted order default · 2026-10-07

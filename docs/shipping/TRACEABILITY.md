@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## Web PostgreSQL suite isolation qualification · 2026-10-07
+
+- **Evidence:** The aggregate full Web PostgreSQL run stalled and is not
+  credited. Queue provider/worker-crash integration passes 7/7 in isolation;
+  threshold-outbox and usage-ledger each pass 1/1 in isolation.
+- **Limitation:** Running the two usage files concurrently against one test DB
+  races on `pgcrypto` extension setup and leaves a worker unresolved. This is
+  tracked as test-harness qualification debt, not silently converted to a
+  product pass.
+- **Boundary:** No production operation occurred; no acceptance checkbox or
+  gate changed. See
+  `docs/shipping/evidence/qual-web-db-suite-isolation-2026-10-07.md`.
+
 ## ACCEPT-002/003 latest-source substrate refresh · 2026-10-07
 
 - **Sources:** Unreleased CLI `ad6ee1479c887c59eb6630da4754a2e0b7b4045e` and Web

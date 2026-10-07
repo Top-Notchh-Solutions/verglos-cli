@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Web PostgreSQL suite isolation qualification
+
+The attempted full Web PostgreSQL-backed `pnpm test` run was stopped after
+more than three minutes with two idle integration workers; it is not counted
+as a pass. The previously surfaced queue fairness and worker-crash failures
+both pass in isolated execution (7/7). Threshold-outbox and usage-ledger
+integration files each pass alone (1/1 and 1/1). Running those two usage files
+together reproduces a test-harness `pgcrypto` extension-creation race and a
+worker hang, so the aggregate suite remains an open qualification limitation.
+Private evidence: `docs/shipping/evidence/qual-web-db-suite-isolation-2026-10-07.md`.
+No production operation occurred. Backlog remains **218 checked / 62 unchecked
+/ 280 total**.
+
 ## 2026-10-07 · ACCEPT-002/003 latest-source substrate refresh
 
 The private acceptance harness ran against unreleased CLI `ad6ee14` and Web

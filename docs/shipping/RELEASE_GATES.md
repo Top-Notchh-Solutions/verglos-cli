@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## Web PostgreSQL suite isolation qualification · 2026-10-07
+
+The full PostgreSQL-backed Web suite was attempted but stalled and is not
+green evidence. Queue fairness/worker-crash failures pass in isolated 7/7
+execution; threshold-outbox and usage-ledger pass 1/1 separately. A shared
+database setup race occurs when the two usage files run concurrently. No
+release gate or backlog item is closed by this batch; full configured-suite
+qualification remains open. No production operation occurred.
+
 ## ACCEPT-002/003 latest-source substrate refresh · 2026-10-07
 
 The private harness passes unreleased CLI 241/241, Web 888/916 with 28
