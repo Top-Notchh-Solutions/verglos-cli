@@ -553,3 +553,12 @@ The final evaluation corpus is deliberately sequenced **after the complete shipp
 10. `TRUTH-010` — command compatibility inventory.
 
 The first implementation task after the founder's command is `TRUTH-001`. It is the correct start because every later schema, plan, migration, public claim, and compatibility decision depends on knowing precisely what is already shipped and must be retained.
+
+### QUAL-WEB-006 evidence addendum · 2026-10-07 · PR #151
+
+Web PR #151 head `07788c0` merged as `c1bca533` after hosted run
+`37557043246`, Vercel, GitGuardian, and Preview Comments passed. It adds the
+authenticated organization entry directory and account navigation link; local
+focused contracts pass 2/2 with typecheck/schema/build green. This remains
+partial qualification: authenticated slug runtime, human screen-reader, and
+field-CWV evidence are still open. No checkbox changed.

@@ -2600,8 +2600,9 @@ changed and no checkbox was closed.
   focused contract tests.
 - **Local results:** focused tests **2/2 pass**, typecheck pass, Drizzle check
   pass, and 38-page preview build pass.
-- **Hosted state:** GitGuardian and Preview Comments pass; type/schema and
-  Vercel were in progress at capture. PR is open and unmerged.
+- **Hosted state:** hosted run `37557043246`, type/schema, Vercel, GitGuardian,
+  and Preview Comments passed. PR #151 merged as
+  `c1bca533c0e617427e42fd1be3c449b0ed458311`.
 - **Boundary:** no production/database/provider write, deployment promotion,
   payment action, or browser mutation. `QUAL-WEB-006` remains unchecked.
 - **Backlog:** **218 checked / 62 unchecked / 280 total**.

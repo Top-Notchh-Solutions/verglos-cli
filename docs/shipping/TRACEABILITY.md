@@ -1487,6 +1487,7 @@ screen-reader, and field-CWV qualification are not proven.
 directory and account navigation link over the existing actor-bound directory
 repository. The route never accepts a tenant identifier from the URL; each
 slug-scoped link remains guarded by the organization layout. Local 2/2 focused
-contracts, typecheck, schema check, and production build pass. Hosted checks
-were still in progress at capture, and the full qualification gate remains
-open for authenticated runtime, human screen-reader, and field-CWV evidence.
+contracts, typecheck, schema check, and production build pass. Hosted run
+`37557043246` and the required provider checks passed; PR #151 merged as
+`c1bca533`. The full qualification gate remains open for authenticated runtime,
+human screen-reader, and field-CWV evidence.

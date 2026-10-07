@@ -29,10 +29,11 @@ not full acceptance. The exact Web phase branch is
 PR #151: https://github.com/anuragyadav-git/verglos-web/pull/151
 
 - Head: `07788c08d38731eae747a6e99d0b15fae017548a`.
-- GitGuardian and Preview Comments: pass.
-- `typecheck-and-schema`: in progress at the time of evidence capture.
-- Vercel deployment: in progress at the time of evidence capture.
-- No merge, deployment promotion, production/database/provider write, or
+- Merge: `c1bca533c0e617427e42fd1be3c449b0ed458311`.
+- GitGuardian, Preview Comments, Vercel, and hosted `typecheck-and-schema`:
+  pass; hosted run `37557043246` completed successfully.
+- PR #151 merged at `2026-10-07T01:28:41Z`.
+- No production/database/provider write, migration, payment action, or
   browser mutation occurred.
 
 This fixes the unscoped `/orgs` 404 in source and provides a discovery path,
