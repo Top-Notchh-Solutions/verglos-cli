@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## Production read-only billing/migration audit · 2026-10-07
+
+Vercel production variable inventory lacks `RAZORPAY_ENABLED_PAYMENT_METHODS`.
+A bounded read-only transaction found 42 tables and 26 migration-history rows
+with latest timestamp `2026-10-06T13:10:00Z`; aggregate billing payments,
+subscriptions, and deletion requests were zero, webhook events were four,
+licenses one, and legacy mappings three. The current hosted candidate has 31
+migrations. No contents or identifiers were selected and no production write
+occurred. This traces to PLAN-WEB-011/012/015 and QUAL-WEB-005 as missing
+production/provider evidence. See
+`docs/shipping/evidence/production-readonly-billing-and-migration-audit-2026-10-07.md`.
+
 ## Razorpay method preflight · 2026-10-07
 
 The official SDK `payments.fetchPaymentMethods()` call returned HTTP 401

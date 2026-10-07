@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## Production read-only billing/migration audit · 2026-10-07
+
+- **Decision:** Keep production payment, migration, and deletion gates closed.
+  Do not add a guessed method list or apply the 31-migration candidate to the
+  26-migration production database.
+- **Evidence:** Production variable inventory lacks
+  `RAZORPAY_ENABLED_PAYMENT_METHODS`; the read-only audit found 42 tables,
+  26 migration rows, zero billing payments/subscriptions, zero deletion
+  requests, and four webhook-event rows.
+- **Boundary:** No row contents/identifiers were selected and no production
+  DDL, DML, migration, deployment, payment, entitlement, or deletion occurred.
+
 ## Razorpay method preflight · 2026-10-07
 
 - **Decision:** Keep the payment-method and lifecycle gates open until a valid

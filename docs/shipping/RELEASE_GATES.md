@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## Production read-only billing/migration audit · 2026-10-07
+
+Production Vercel configuration lacks `RAZORPAY_ENABLED_PAYMENT_METHODS`.
+Read-only database metadata/aggregate audit found 42 tables and 26 applied
+migrations, versus 31 in the current hosted candidate; billing payments,
+subscriptions, and deletion requests are all 0, with 4 webhook-event rows.
+This does not qualify payment reconciliation, migration application, deletion,
+backup/restore, or RPO. No production write occurred.
+
 ## Razorpay method preflight · 2026-10-07
 
 The official SDK method lookup with the current test credentials returned HTTP

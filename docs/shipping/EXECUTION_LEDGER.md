@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · production read-only billing/migration audit
+
+- **Environment:** Vercel production variable inventory lacks
+  `RAZORPAY_ENABLED_PAYMENT_METHODS`; a temporary env pull was used without
+  printing values and was removed after inspection.
+- **Database:** One bounded read-only transaction found 42 tables and 26
+  Drizzle migrations (latest `2026-10-06T13:10:00Z`). Aggregate counts:
+  payments 0, subscriptions 0, deletion requests 0, webhook events 4,
+  licenses 1, legacy mappings 3.
+- **Boundary:** No contents/identifiers were selected and no production DDL,
+  DML, migration, deployment, payment, entitlement, or deletion occurred.
+  Current source migrations are not production-qualified/applied.
+
 ## 2026-10-07 · Razorpay method preflight
 
 - **Provider:** Official SDK `payments.fetchPaymentMethods()` with the current

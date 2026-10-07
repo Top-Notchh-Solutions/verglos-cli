@@ -1,5 +1,13 @@
 # Verglos V1 risk register
 
+Latest production read-only audit (2026-10-07): Vercel Production lacks
+`RAZORPAY_ENABLED_PAYMENT_METHODS`; production has 26 migration-history rows
+while the current hosted candidate has 31. Aggregate billing payments,
+subscriptions, and deletion requests are zero; four Razorpay webhook-event
+rows exist. This reduces schema/state uncertainty but does not qualify
+provider reconciliation, migration, backup/restore, deletion, or RPO. No
+production write occurred.
+
 Latest Razorpay method-preflight update (2026-10-07): the official SDK method
 lookup returned HTTP 401 authentication failure with the current test
 credential pair, leaving the account-enabled method set unknown. Local PR #149

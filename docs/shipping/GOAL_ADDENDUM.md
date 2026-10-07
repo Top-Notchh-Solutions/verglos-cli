@@ -1,5 +1,16 @@
 # Goal addendum — 2026-10-07
 
+Production read-only audit: Vercel Production has no
+`RAZORPAY_ENABLED_PAYMENT_METHODS` variable. A bounded read-only transaction
+found 42 tables and 26 applied migrations, while the current hosted payment
+candidate contains 31 migrations. Aggregate counts were 0 billing payments,
+0 subscriptions, 0 deletion requests, 4 Razorpay webhook events, 1 license,
+and 3 legacy migration mappings. No row contents or identifiers were read and
+no production write/migration/deployment/payment/deletion operation occurred.
+This is truth evidence only; PLAN-WEB-011/012/015 and QUAL-WEB-005 remain
+open. Evidence:
+`docs/shipping/evidence/production-readonly-billing-and-migration-audit-2026-10-07.md`.
+
 Razorpay method preflight: the official SDK method lookup returned HTTP 401
 `BAD_REQUEST_ERROR` / authentication failed for the current test credential
 pair, so the real account-enabled method set remains unknown. No live-key

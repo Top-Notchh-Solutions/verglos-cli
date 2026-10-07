@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · production read-only billing/migration audit
+
+Vercel production inventory has no `RAZORPAY_ENABLED_PAYMENT_METHODS` variable.
+A bounded read-only PostgreSQL audit found 42 tables and 26 applied Drizzle
+migrations (latest `2026-10-06T13:10:00Z`) versus 31 migrations in the current
+hosted PR. Aggregate counts were: billing payments 0, subscriptions 0,
+account-deletion requests 0, Razorpay webhook events 4, licenses 1, and legacy
+migration mappings 3. No row contents, identifiers, or secrets were selected;
+no production write, migration, deployment, payment, entitlement, or deletion
+operation occurred. PLAN-WEB-011/012/015 and QUAL-WEB-005 remain open; no
+checkbox changed. Private evidence:
+`docs/shipping/evidence/production-readonly-billing-and-migration-audit-2026-10-07.md`.
+
 ## 2026-10-07 · Razorpay method preflight and all-method config check
 
 The official Razorpay Node SDK method lookup returned HTTP 401
