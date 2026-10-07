@@ -2177,3 +2177,15 @@ execution command before bounded input reads. The Free-plan process regression
 and focused 54/54 suite prove the denial boundary; signed recipe, approval,
 catalog, binding, and runtime checks remain downstream. Hosted verification and
 trusted/licensed recipe provenance are still missing.
+## PLAN-WEB-014 hosted card probe and local method configuration · 2026-10-07
+
+- **Source:** Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474`.
+- **Configuration:** The ignored Test Mode environment declares the observed
+  hosted method set (`upi,card,emi,netbanking,wallet,paylater,upi_qr`); QR is
+  still excluded from the hosted order projection and remains optional.
+- **Runtime:** A bounded hosted card probe reached the card form and save-card
+  prompt in the existing CDP blank target. The final collector failed; no
+  lifecycle result is claimed. Focused payment/runtime contracts passed 47/47.
+- **Boundary:** No production/provider lifecycle/database/deployment write or
+  entitlement evidence was produced. PLAN-WEB-014/015 remain open.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-card-hosted-probe-2026-10-07.md`.

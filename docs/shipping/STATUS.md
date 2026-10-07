@@ -2789,3 +2789,15 @@ qualification, and independent review. Backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. No production, provider, payment, database,
 deployment, or external-recipe operation occurred. Private evidence:
 `docs/shipping/evidence/hunt-mcp-runtime-bridge-2026-10-07.md`.
+## 2026-10-07 · PLAN-WEB-014 hosted card probe and test method configuration
+
+The ignored local Web test environment now declares the Razorpay Test Mode
+methods observed in the hosted Checkout: UPI, cards, EMI, netbanking, wallets,
+Pay Later, and optional UPI QR. On PR #149 exact head `b73fdd3`, the bounded
+hosted Cards probe reached the provider card form and save-card prompt using
+synthetic sandbox data. The final screen collector failed, so no success,
+capture, refund, webhook, entitlement, or payment-lifecycle result is inferred.
+Focused payment/runtime contracts passed 47/47. The existing CDP blank target
+was restored and no production operation occurred. PLAN-WEB-014/015 remain
+open; backlog remains **218 checked / 62 unchecked / 280 total**. Evidence:
+`docs/shipping/evidence/plan-web-014-card-hosted-probe-2026-10-07.md`.

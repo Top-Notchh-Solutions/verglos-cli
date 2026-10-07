@@ -4001,3 +4001,16 @@ before enabling any destructive adapter.
   and reconciliation evidence remain required for PLAN-WEB-014/015.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-013-payment-contract-2026-10-07.md`.
+## 2026-10-07 · PLAN-WEB-014 hosted card probe and local method configuration
+
+- Added the observed Razorpay Test Mode method declaration to the ignored
+  local Web test environment so the hosted order route does not fail closed
+  during local qualification; production configuration was not changed.
+- PR #149 exact head `b73fdd3` rendered the six implemented hosted methods and
+  optional UPI QR. A bounded Cards probe reached the save-card prompt, but the
+  final collector failed; no success/capture/refund/webhook/entitlement result
+  was inferred.
+- Focused payment/runtime contracts passed 47/47. The existing blank CDP
+  target was restored. PLAN-WEB-014/015 remain unchecked and backlog remains
+  218 checked / 62 unchecked / 280 total.
+- Evidence: `docs/shipping/evidence/plan-web-014-card-hosted-probe-2026-10-07.md`.
