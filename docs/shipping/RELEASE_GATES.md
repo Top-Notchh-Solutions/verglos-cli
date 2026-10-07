@@ -1,12 +1,26 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014/015 merge and production fail-closed boundary · 2026-10-07
+
+Web PR #155 merged as main commit
+`f00b7225ae0c0b8f518e404828aa6247c97dd322` after hosted Verify
+`37659362013`, GitGuardian, and Vercel Preview Comments passed. The automatic
+production deployment `dpl_Btjq8knubUab1ENgF7CEtzdUFV7G` failed before build
+because `RAZORPAY_ENABLED_PAYMENT_METHODS` is missing in production. The
+live alias therefore remains on the legacy QR-only checkout. This gate stays
+open: do not guess the method set or configure production until R-041 is
+rotated and the account-enabled provider methods are established. No
+production configuration, provider, database, payment, or customer-state
+write occurred.
+
 ## PLAN-WEB-014 Test Mode pre-checkout disclosure · 2026-10-07
 
 Web PR #155 head `6b0c4f9` adds a truthful pre-checkout Test Mode notice and
 fails closed on public/server Razorpay key drift. Local and pinned Node 22
-focused checks, typecheck, and the 43-page preview build passed; hosted Verify
-was pending at capture. This does not qualify payment methods or lifecycle,
-and no provider or production state changed. `PLAN-WEB-014/015` remain open.
+focused checks, typecheck, and the 43-page preview build passed; hosted
+checks later passed and the PR merged. This does not qualify payment methods
+or lifecycle; the production deployment failed closed on the missing method
+allowlist. `PLAN-WEB-014/015` remain open.
 
 ## PLAN-WEB-014 Test Mode read-only inventory freeze · 2026-10-07
 

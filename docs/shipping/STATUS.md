@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-014 merge and production fail-closed boundary
+
+Web PR #155 merged cleanly as main commit
+`f00b7225ae0c0b8f518e404828aa6247c97dd322` after hosted Verify
+`37659362013`, GitGuardian, and Vercel Preview Comments passed. The automatic
+production deployment `dpl_Btjq8knubUab1ENgF7CEtzdUFV7G` failed in
+`pnpm config:check` because `RAZORPAY_ENABLED_PAYMENT_METHODS` is missing;
+no promotion or production configuration change was made. A read-only live
+check remained HTTP 200 but still served the legacy QR-only checkout. The
+Test Mode disclosure is shipped code evidence only; provider method truth,
+payment lifecycle, R-041 rotation, and PLAN-WEB-014/015 remain open. Backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
 ## 2026-10-07 · PLAN-WEB-014 Test Mode pre-checkout disclosure
 
 Web PR #155 current head `6b0c4f9` adds a server-derived, non-secret Test Mode

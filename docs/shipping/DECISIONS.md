@@ -1,16 +1,33 @@
 # Verglos shipping decisions
 
+## 2026-10-07 · Keep production fail-closed on unknown payment methods
+
+- **Decision:** Do not guess or add `RAZORPAY_ENABLED_PAYMENT_METHODS` in
+  production. Keep the hosted payment rollout blocked until R-041 is closed
+  and the provider account-enabled method set is established from an approved
+  source.
+- **Evidence:** Web PR #155 merged as
+  `f00b7225ae0c0b8f518e404828aa6247c97dd322`; the automatic production
+  deployment `dpl_Btjq8knubUab1ENgF7CEtzdUFV7G` failed in
+  `pnpm config:check` because the variable is absent. The live alias remains
+  the legacy QR-only checkout.
+- **Boundary:** No production configuration, provider, database, payment, or
+  customer-state write was made. Test Mode disclosure is code evidence only;
+  PLAN-WEB-014/015 remain open.
+
 ## 2026-10-07 · Show Test Mode before hosted checkout
 
 - **Decision:** A Test Mode checkout must disclose sandbox/no-real-charge
   status before a user opens Razorpay Checkout; the indicator exposes only a
   boolean and fails closed on public/server key drift.
 - **Evidence:** Web PR #155 head `6b0c4f9`; host and Node 22 focused checks,
-  typecheck, and 43-page preview build passed. Hosted Verify was pending at
-  capture.
+  typecheck, and 43-page preview build passed. Hosted Verify, GitGuardian, and
+  Vercel Preview Comments later passed and the PR merged; see the merge
+  decision above.
 - **Boundary:** This improves payment disclosure but is not provider lifecycle
-  acceptance. No provider, payment, production, database, migration, or
-  deployment state changed.
+  acceptance. The automatic production deployment failed closed on the
+  missing method allowlist; no production configuration or provider state
+  changed.
 
 ## 2026-10-07 · Freeze flagged Razorpay Test Mode credential
 

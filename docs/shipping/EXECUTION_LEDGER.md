@@ -1,14 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · PLAN-WEB-014 merge and production fail-closed boundary
+
+- **Code:** Web PR #155 merged cleanly as main commit
+  `f00b7225ae0c0b8f518e404828aa6247c97dd322`.
+- **Hosted verification:** Verify run `37659362013`, GitGuardian, and Vercel
+  Preview Comments passed; mergeability was clean.
+- **Deployment finding:** The merge-triggered production deployment
+  `dpl_Btjq8knubUab1ENgF7CEtzdUFV7G` failed in `pnpm config:check` because
+  `RAZORPAY_ENABLED_PAYMENT_METHODS` is missing. No promotion or production
+  configuration change was made; a read-only live check remained HTTP 200
+  but served the legacy QR-only checkout.
+- **Disposition:** Test Mode disclosure is shipped code evidence only.
+  Provider method truth, lifecycle evidence, R-041 rotation, and
+  PLAN-WEB-014/015 remain open. No provider, payment, database, or customer-
+  state write occurred. Backlog remains **218/62/280 (77.9%)**.
+
 ## 2026-10-07 · PLAN-WEB-014 Test Mode pre-checkout disclosure
 
 - **Code:** Web PR #155 head `6b0c4f9`; server-derived boolean mode indicator,
   pre-checkout no-real-charge notice, and public/server key-drift regression.
 - **Verification:** Host focused payment/config checks **33 passed / 1
   existing skip**; Node 22 focused checks **13 passed / 1 existing skip**;
-  Node 22 typecheck and 43-page preview build passed. Hosted Verify was
-  pending at capture; GitGuardian/Preview Comments state was not used as a
-  release acceptance substitute.
+  Node 22 typecheck and 43-page preview build passed. Hosted checks completed
+  after capture; see the merge entry above.
 - **Disposition:** Code-side disclosure evidence only; `PLAN-WEB-014/015`
   remain open and no checkbox changed. Backlog remains **218/62/280 (77.9%)**.
 - **Boundary:** No provider, payment, database, migration, deployment, or
