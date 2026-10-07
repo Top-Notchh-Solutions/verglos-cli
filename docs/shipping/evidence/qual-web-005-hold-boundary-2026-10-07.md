@@ -24,8 +24,10 @@ completion and prevents an audit receipt from claiming success.
 - `git diff --check`: passed.
 - Disposable Docker PostgreSQL 15 `account-deletion-jobs.integration.test.ts`:
   **1/1 passed**; the test uses temporary tables and the container was removed.
-- Hosted Verify run `37632466656` for the pushed head was **in progress** at
-  capture.
+- Hosted Verify run `37632466656` for the pushed head completed **successfully**.
+  The run passed typecheck, serial Web, negative-boundary, truth-registry,
+  schema/migration, build, public-boundary, dependency, SBOM/license, and
+  tracked-secret checks. GitHub emitted only runner/action deprecation notices.
 
 ## Boundary and disposition
 

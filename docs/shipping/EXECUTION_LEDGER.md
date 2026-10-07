@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — QUAL-WEB-005 hosted result for hold-boundary fix
+
+- **Result:** Hosted Verify `37632466656` completed successfully for PR #153
+  exact head `d7deec1bc115417e924c93846231074ea87ad51e`.
+- **Coverage:** Typecheck, serial Web, negative-boundary, truth-registry,
+  schema/migration, production build, public-boundary, dependency, SBOM/license,
+  and tracked-secret checks passed. Only runner/action deprecation notices were
+  emitted.
+- **Disposition:** Current-head hosted code evidence only; no accepted ID and
+  no checkbox change. `QUAL-WEB-005` remains open for authenticated E2E,
+  legal/customer-held disposition, reconciliation, restore/rollback, and
+  independent acceptance.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No production deletion/migration/configuration, provider,
+  payment, deployment, browser, entitlement, or credential operation.
+
 # 2026-10-07 — PLAN-WEB-013/014 hosted result for refund hardening
 
 - **Result:** Hosted Verify run `37632192255` completed successfully for PR

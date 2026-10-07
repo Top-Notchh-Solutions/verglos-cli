@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-005 hosted result for hold-boundary fix
+
+Hosted Verify run `37632466656` completed successfully for Web PR #153 exact
+head `d7deec1bc115417e924c93846231074ea87ad51e`. Typecheck, serial Web,
+negative-boundary, truth-registry, schema/migration, production build,
+public-boundary, dependency, SBOM/license, and tracked-secret checks all
+passed; only GitHub runner/action deprecation notices were emitted. This
+strengthens current-head code evidence only. `QUAL-WEB-005` remains open for
+authenticated non-production E2E, legal/customer-held disposition,
+reconciliation, restore/rollback, and independent acceptance. No checkbox or
+production state changed; backlog remains **218 checked / 62 unchecked / 280
+total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-hold-boundary-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013/014 hosted result for refund hardening
 
 Hosted Verify run `37632192255` completed successfully for Web PR #149 exact

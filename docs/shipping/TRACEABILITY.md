@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 hosted result for hold-boundary fix · 2026-10-07
+
+Hosted Verify `37632466656` passed at PR #153 exact head
+`d7deec1bc115417e924c93846231074ea87ad51e`, covering typecheck, serial Web,
+negative-boundary, truth-registry, schema/migration, build, public-boundary,
+dependency, SBOM/license, and tracked-secret checks. This is current-head
+hosted code evidence only; it does not qualify deletion E2E, legal/customer-held
+disposition, production migration/deletion, restore/rollback, or independent
+acceptance. No checkbox changed; `QUAL-WEB-005` remains open.
+
 ## PLAN-WEB-013/014 hosted result for refund hardening · 2026-10-07
 
 Hosted Verify `37632192255` completed successfully at Web PR #149 exact head

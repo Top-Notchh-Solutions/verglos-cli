@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-005 hosted result for hold-boundary fix · 2026-10-07
+
+Hosted Verify `37632466656` passed at PR #153 exact head
+`d7deec1bc115417e924c93846231074ea87ad51e`, including typecheck, serial,
+boundary, truth, schema/migration, build, public-boundary, dependency,
+SBOM/license, and secret checks. This does not pass QUAL-WEB-005: authenticated
+non-production deletion E2E, legal/customer-held disposition, row
+reconciliation, production migration, restore/rollback, and independent
+acceptance remain open. No merge, checkbox, or production state changed.
+
 ## PLAN-WEB-013/014 hosted result for refund hardening · 2026-10-07
 
 Hosted Verify `37632192255` passed at PR #149 exact head
