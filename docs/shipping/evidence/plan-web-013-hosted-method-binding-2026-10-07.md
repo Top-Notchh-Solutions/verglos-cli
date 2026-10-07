@@ -1,10 +1,11 @@
 # PLAN-WEB-013 hosted method binding · 2026-10-07
 
-- **Source:** Web PR #149, commit `67fb7e2`.
+- **Source:** Web PR #149 commits `67fb7e2` and `3f4a7aa`.
 - **Implementation:** New hosted orders bind the server-selected hosted
   payment-method set into the HMAC-signed Razorpay checkout notes. Webhook
   snapshot parsing validates that the set is non-empty, unique, hosted-only,
-  and bounded before accepting the signed snapshot.
+  and bounded before accepting the signed snapshot; captured and failed
+  provider payments for new orders must also report a method in that set.
 - **Compatibility:** QR and subscription snapshots retain their existing
   canonical signature shape; legacy order notes without the new optional field
   remain readable. New order creation always supplies the explicit hosted set.

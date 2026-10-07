@@ -2571,3 +2571,16 @@ PLAN-WEB-013/014/015 remain open for provider lifecycle, all-enabled-method,
 deployment, and reconciliation evidence. Backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. No browser, provider, payment, production,
 database, migration, deployment, or credential operation occurred.
+
+## 2026-10-07 · PLAN-WEB-013 webhook method binding
+
+Web PR #149 commit `3f4a7aa` extends the signed hosted-order method binding:
+new captured and failed order webhooks now require the provider-reported method
+to be present in the signed server-enabled hosted set. QR, subscription, and
+legacy order paths remain compatible. Focused checkout/webhook/payload tests
+pass **15/15**; Web typecheck and 40-page production build pass. This remains
+code-side evidence only; PLAN-WEB-013/014/015 remain open for provider
+lifecycle, all-enabled-method, deployment, and reconciliation evidence. Backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. No browser,
+provider, payment, production, database, migration, deployment, or credential
+operation occurred.
