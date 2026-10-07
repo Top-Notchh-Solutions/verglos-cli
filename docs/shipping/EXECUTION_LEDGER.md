@@ -26,6 +26,12 @@ tests **846/868** with 22 explicit skips and zero failures; focused SCM/GitHub
 tests **19/19**; typecheck, schema, and 29-migration ordering passed. No
 checkbox changed and no provider/browser/production write occurred.
 
+PR #154 was then reconciled with Web main after hosted checkout PR #149 merged:
+exact pushed head `25b4470`. The reconciled branch passed focused SCM **33/33**,
+serial Web **855/878** with 23 explicit skips and zero failures, typecheck,
+schema, 31-migration ordering, build, and diff checks. Hosted checks restarted;
+live App/org/webhook/cutover evidence remains open.
+
 # 2026-10-07 — Authenticated modified-client probe boundary
 
 - **Runtime:** The existing authenticated CDP page at `https://verglos.com/orgs`

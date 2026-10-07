@@ -40,3 +40,13 @@ unchecked / 280 total (77.9%)**.
 
 No production, provider, payment, database, migration, deployment, credential,
 customer-state, or browser-state write occurred.
+
+## Base reconciliation revalidation
+
+After Web main advanced through PR #149 merge `8b843da`, PR #154 was reconciled
+and pushed at exact head `25b4470`. The merged candidate retains the same
+server-side App exchange scope. Focused SCM tests passed **33/33**; serial Web
+tests passed **855/878** with **23** explicit skips and zero failures; typecheck,
+schema, 31-migration ordering, build, and diff checks passed. Hosted checks for
+the reconciled head restarted. Live App installation, authorized organization,
+webhook, deployment cutover, and independent acceptance remain open.

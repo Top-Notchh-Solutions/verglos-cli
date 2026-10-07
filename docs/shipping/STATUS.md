@@ -22,6 +22,13 @@ with 22 explicit skips and zero failures, focused SCM/GitHub tests **19/19**,
 typecheck, schema, and 29-migration ordering passed. This is revalidation only;
 no checkbox changed and live App/org/webhook evidence remains open.
 
+PR #154 was reconciled with Web main after PR #149 merged and pushed at exact
+head `25b4470`. The reconciled branch passed focused SCM **33/33**, serial Web
+**855/878** with 23 explicit skips and zero failures, typecheck, schema,
+31-migration ordering, build, and diff checks. Hosted checks restarted; live
+App/org/webhook/cutover and independent acceptance remain open. Backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**.
+
 The authenticated modified-client probe reached the existing CDP session and
 found the signed-in account has no organizations (`/orgs` rendered `No
 organizations yet`). No organization was created and no forged authenticated
