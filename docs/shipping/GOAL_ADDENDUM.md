@@ -1,5 +1,21 @@
 # Goal addendum — 2026-10-07
 
+## QUAL-CLI-006 current-main artifact and format validation
+
+Exact CLI `origin/main` `7d060b2` was qualified in disposable worktrees with
+the documented cross-platform architecture setup. Frozen install materialized
+the 254-package lockfile graph; build passed **8/8**, six public archives were
+created, official `in-toto==3.0.0` verified all six exact SHA-256 products in
+`python:3.12-slim`, CycloneDX CLI `0.33.1` validated the 1.5 BOM, and SPDX
+Tools `0.8.5` validated the 2.3 document. The inventory retains 7 license
+review blockers. This is artifact/format evidence only: no checkbox changed;
+Sigstore identity, trusted publishing/legal review, blocker resolution,
+independent acceptance, and final release approval remain open. Backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. No production,
+provider, payment, database, deployment, migration, credential, or publication
+state changed. Evidence:
+`docs/shipping/evidence/cli-current-main-artifact-pack-2026-10-07.md`.
+
 ## Web GitHub App server-side exchange
 
 PR #154 reconciled exact head `9032bda` (merged as `1498837`) implements the server-held App-JWT installation

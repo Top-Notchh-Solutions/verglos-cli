@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## QUAL-CLI-006 current-main artifact and format validation · 2026-10-07
+
+- **Decision:** Accept the exact-head artifact and format-validator results as
+  supporting release evidence only; do not close QUAL-CLI-006 or authorize
+  publication.
+- **Evidence:** CLI `origin/main` `7d060b2`; cross-platform install/build
+  **8/8**; six public archives; official `in-toto==3.0.0` exact-product
+  verification; CycloneDX CLI `0.33.1`; SPDX Tools `0.8.5`; inventory with 7
+  review blockers.
+- **Reason:** Mechanical validity does not establish trusted keyless identity,
+  legal redistribution clearance, protected publishing approval, independent
+  acceptance, or a complete release candidate.
+- **Boundary:** Disposable worktrees/containers only; no production,
+  provider, payment, database, deployment, migration, credential, or
+  publication mutation occurred. No checkbox changed.
+
 ## Web GitHub App server-side exchange · 2026-10-07
 
 - **Decision:** GitHub installation tokens and immutable installation identity

@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## R-QUAL-CLI-006 current-main artifact/format evidence · 2026-10-07
+
+Exact CLI `origin/main` `7d060b2` now has current-head artifact evidence:
+the cross-platform install/build and six-archive pack pass; official
+`in-toto==3.0.0` verifies exact archive products; CycloneDX CLI `0.33.1` and
+SPDX Tools `0.8.5` validate the generated documents. Remaining risk is not
+mechanical artifact validity: the license inventory retains 7 review blockers,
+and Sigstore identity, trusted publishing/legal approval, and independent
+acceptance remain absent. Owner: release/qualification. Keep QUAL-CLI-006,
+LIC-002/003, DIST-001/002/003, and final acceptance open until those external
+conditions are evidenced.
+
 ## R-GITHUB-WEB-006 provider exchange and cutover evidence · 2026-10-07
 
 PR #154 reconciled head `9032bda` (merged as `1498837`) moves GitHub App token issuance, identity binding,
