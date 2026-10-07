@@ -18,7 +18,9 @@ state changed.
 
 - Focused payment/runtime set: **28/28 pass, 0 fail, 0 skips**.
 - Full configured serial suite: **850 pass, 0 fail, 22 explicit skips**.
-- The new hosted workflow for head `900a6a5` is pending at capture:
-  `37558287090`.
-- Vercel preview for the corrected head is deploying at capture.
+- The replacement hosted workflow for head `900a6a5`, `37558287090`, passed all
+  configured checks: serial, negative-boundary, truth-registry, schema and
+  migration checks, build, public-boundary, dependency/SBOM/license checks,
+  and tracked-secret guard.
+- Vercel preview for the corrected head completed successfully.
 - No production/database/provider/payment/browser write occurred.

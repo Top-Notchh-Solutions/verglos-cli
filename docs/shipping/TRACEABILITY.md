@@ -1524,5 +1524,7 @@ Hosted workflow `37558018780` failed on the expected error list for missing
 production controls after the intentional payment-method validation change;
 the observed suite total was 870 pass / 1 skip / 1 fail. Web PR #149 now
 points at `900a6a5` with the corrected assertion. Local serial verification is
-850 pass / 22 explicit skips; replacement hosted workflow `37558287090` is
-pending. This is correction evidence only; no gate or checkbox changed.
+850 pass / 22 explicit skips; replacement hosted workflow `37558287090` passed
+all configured checks and Vercel completed. This is correction evidence only;
+no gate or checkbox changed. Provider-enabled method and lifecycle evidence
+remain open.

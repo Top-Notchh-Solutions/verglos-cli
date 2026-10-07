@@ -2657,7 +2657,7 @@ changed and no checkbox was closed.
   assertion; the behavior remains fail-closed.
 - **Local:** full serial suite **850 pass / 22 explicit skips / 0 fail**;
   focused payment/runtime set **28/28 pass**.
-- **Hosted:** replacement workflow `37558287090` pending; Vercel preview
-  deploying at capture.
+- **Hosted:** replacement workflow `37558287090` passed all configured checks;
+  Vercel preview completed successfully.
 - **Boundary:** no production/provider/database/payment/browser mutation; no
   checkbox changed; **218 checked / 62 unchecked / 280 total**.

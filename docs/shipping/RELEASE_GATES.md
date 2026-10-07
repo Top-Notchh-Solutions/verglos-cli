@@ -387,3 +387,11 @@ expectation (870 pass / 1 skip / 1 fail). The test was corrected at head
 replacement hosted workflow `37558287090` is pending. No behavior was weakened
 and no production/provider state changed. Private evidence:
 `docs/shipping/evidence/plan-web-013-pr149-hosted-correction-2026-10-07.md`.
+
+Payment hosted-correction result (2026-10-07): replacement workflow
+`37558287090` passed all configured hosted checks at PR #149 head `900a6a5`,
+including the 850-pass / 22-explicit-skip serial suite, build, boundary,
+dependency, license, SBOM, and secret checks. Vercel preview completed. This
+does not close PLAN-WEB-013/014/015: the Vercel project still has no listed
+`RAZORPAY_ENABLED_PAYMENT_METHODS` configuration, and account-enabled
+test-mode lifecycle/reconciliation evidence is absent.
