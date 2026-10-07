@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · CLI release-artifact qualification
+
+- **Build:** CLI commit `ad6ee14` rebuilt successfully across all eight
+  workspace packages.
+- **Artifacts:** Exactly six public npm archives passed packed-manifest audit;
+  the isolated clean consumer installed/imported all six, executed
+  `Verglos 2.0.0-alpha.1`, and confirmed no implicit engine installation.
+- **Assembly:** Six archives plus notices, CycloneDX, SPDX, inventory,
+  clean-consumer evidence, and checksums assembled in a temporary directory;
+  12 files total and checksum generation succeeded.
+- **Gate result:** The final verifier stops on the eight known redistribution
+  blockers (nested benchmark conflict, six BlueOak reviews, and missing
+  minipass-pipeline source). No blocker was suppressed. Backlog remains 218
+  checked / 62 unchecked / 280 total.
+- **Boundary:** Mechanical release qualification only; LIC/DIST gates and
+  publication remain open. No npm publish, tag, deployment, production, or
+  credential operation occurred.
+- **Evidence:** `docs/shipping/evidence/qual-cli-release-artifacts-2026-10-07.md`.
+
 ## 2026-10-07 · Razorpay Test Mode read-only method probe
 
 - **Request:** Read-only `GET /v1/payments?count=100` using a local

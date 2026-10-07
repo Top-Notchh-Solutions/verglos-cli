@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · CLI release-artifact qualification
+
+The current CLI source rebuilt successfully across all eight workspace build
+tasks. The public pack produced exactly six archives; packed-manifest audit and
+clean-consumer qualification passed, including `Verglos 2.0.0-alpha.1` execution
+and no implicit external-engine install. A temporary complete release assembly
+contained six archives, five required sidecars, and `SHA256SUMS` (12 files),
+with checksum generation successful. The release verifier fails only on the
+eight explicit redistribution blockers: the nested `benchmark`/`fast-uri`
+conflict, six BlueOak package reviews, and missing `minipass-pipeline` source.
+Those require legal/provenance review and were not bypassed. Mechanical
+qualification advances but does not close LIC-002/003, DIST-001/002/003 or
+publication. Private evidence:
+`docs/shipping/evidence/qual-cli-release-artifacts-2026-10-07.md`. No npm,
+tag, deployment, production, or credential operation occurred.
+
 ## 2026-10-07 · Razorpay Test Mode read-only method probe
 
 Using only a locally selected `rzp_test_` credential, a read-only

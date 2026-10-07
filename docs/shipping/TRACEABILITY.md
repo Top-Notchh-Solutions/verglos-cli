@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## CLI release-artifact qualification · 2026-10-07
+
+- CLI `ad6ee14` rebuilt across eight workspace packages. Six public archives
+  passed packed-manifest audit and an isolated clean consumer installed/imported
+  all six, ran `Verglos 2.0.0-alpha.1`, and confirmed no implicit engine
+  installation.
+- A complete temporary release assembly produced six archives, five sidecars,
+  and checksums. The final verifier reaches only the unresolved eight-item
+  redistribution review list: nested benchmark conflict, six BlueOak reviews,
+  and missing `minipass-pipeline` source.
+- This qualifies mechanical packaging only; LIC/DIST/publication gates remain
+  open and no npm/tag/deployment/production operation occurred. See
+  `docs/shipping/evidence/qual-cli-release-artifacts-2026-10-07.md`.
+
 ## Razorpay Test Mode read-only method probe · 2026-10-07
 
 - A read-only payment listing using a local `rzp_test_` credential returned one

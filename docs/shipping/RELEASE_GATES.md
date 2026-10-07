@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## CLI release-artifact qualification · 2026-10-07
+
+The source rebuild, six-archive public pack, packed-manifest audit, isolated
+clean-consumer install/import/version run, sidecar assembly, and checksum
+generation pass. The final verifier remains intentionally red on eight
+redistribution blockers: one nested license conflict, six BlueOak reviews, and
+one missing source. Mechanical packaging is qualified; legal/provenance
+review, notices clearance, trusted publication, attestation, and final release
+acceptance remain open. No publication or deployment occurred.
+
 ## Razorpay Test Mode read-only method probe · 2026-10-07
 
 A read-only Test Mode payment listing observed one captured `netbanking`
