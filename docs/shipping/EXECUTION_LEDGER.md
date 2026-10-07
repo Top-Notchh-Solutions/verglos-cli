@@ -2556,3 +2556,20 @@ changed and no checkbox was closed.
 - **Next:** keep this gate open and continue with independent payment/browser
   qualification work; design the deletion inventory/hold authority before any
   worker or destructive integration is attempted.
+
+# 2026-10-07 — QUAL-WEB-006 organization-route probe
+
+- **Attempted batch:** authenticated deployed organization-dashboard runtime
+  qualification.
+- **Runtime evidence:** Chrome DevTools page 15, `https://verglos.com/orgs`,
+  rendered the 404 page; the document request returned HTTP 404 and one
+  corresponding console resource error.
+- **Interpretation:** no unscoped `/orgs` listing surface was available in the
+  attached account. A slug-scoped route was not tested because no organization
+  slug or authorized organization fixture was available.
+- **Boundary:** this does not prove dashboard accessibility, large-data, field
+  CWV, or screen-reader acceptance. No checkout/payment/account/API mutation or
+  response-body capture occurred.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-org-route-probe-2026-10-07.md`.
+- **Backlog:** `QUAL-WEB-006` remains unchecked; **218 checked / 62 unchecked /
+  280 total**.

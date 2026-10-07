@@ -1616,3 +1616,13 @@ qualification, and GitHub App live-provider evidence when the credential and
 provider gates are supplied.
 
 The authoritative backlog remains **218 checked / 62 unchecked / 280 total**.
+
+# 2026-10-07 · QUAL-WEB-006 organization-route probe
+
+The authenticated Chrome session was verified against the deployed unscoped
+`/orgs` URL. It rendered a framework 404 and the document request returned
+HTTP 404. No organization slug was exposed by the attached account dashboard,
+so this does not qualify the slug-scoped dashboard, screen-reader behavior,
+large datasets, or field CWV. Private evidence:
+`docs/shipping/evidence/qual-web-006-org-route-probe-2026-10-07.md`.
+`QUAL-WEB-006` remains unchecked and no browser mutation occurred.
