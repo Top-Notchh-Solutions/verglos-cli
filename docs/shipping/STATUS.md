@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · ENT-CLI-001 bounded private runner client
+
+CLI PR #78 exact head `723f655acc314584d93205caee2f7f35bf76379c` adds signed
+job verification, GET-only polling, tenant/runner/target binding, persistent
+job/nonce replay protection, and least-evidence output. It never executes a
+remote command or uploads a result. Focused tests pass 4/4 shared and 3/3 CLI;
+shared/CLI typecheck and build pass; the full configured CLI suite exits 0;
+public-boundary and diff checks pass. Hosted platform run `37621505043` and
+self-scan `37621505126` are queued at capture. ENT-CLI-001 remains unchecked
+pending hosted endpoint/enrollment, bounded execution/result qualification, and
+independent review. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/ent-cli-001-private-runner-client-2026-10-07.md`.
+
 ## 2026-10-07 · STUDIO-CLI-001 exact-preview binding
 
 CLI PR #77 exact head `fdaec852652425806ba20e6b95b03617ab0c06df` hardens the

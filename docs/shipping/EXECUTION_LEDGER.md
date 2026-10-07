@@ -3867,3 +3867,19 @@ before enabling any destructive adapter.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, provider, payment, database, deployment,
   credential, or browser operation occurred.
+# 2026-10-07 — ENT-CLI-001 bounded private runner client
+
+- **Implementation:** CLI PR #78 exact head `723f655` adds Ed25519
+  canonical-job verification, authenticated GET-only polling, tenant/runner/
+  target binding, bounded persistent job/nonce replay protection, and a
+  least-evidence admission summary. No remote execution or result upload is
+  exposed.
+- **Verification:** Shared focused tests 4/4, CLI focused tests 3/3, shared/
+  CLI typecheck and build, full configured CLI suite (0 failures), public
+  boundary, diff, and command-surface smoke pass. Hosted matrix
+  `37621505043` and self-scan `37621505126` were queued at capture.
+- **Limitation:** ENT-CLI-001 remains unchecked pending hosted endpoint and
+  runner enrollment, bounded execution/result reconciliation, cross-platform
+  qualification, and independent review. No production/provider/database/
+  payment/deployment/browser/customer operation occurred.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
