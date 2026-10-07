@@ -1,5 +1,17 @@
 # Goal addendum — 2026-10-07
 
+## PLAN-WEB-013/014 current-main hosted order qualification
+
+Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed the isolated
+hosted-payment batch **28/28** against PostgreSQL, covering declared hosted
+methods, immutable order/catalog/user binding, capture/failure, replay, refund
+watermark, and webhook idempotency. Typecheck, schema, 37-migration ordering,
+negative-boundary **2/2**, truth-registry **25/25**, and a 43-page preview build
+passed. This does not close `PLAN-WEB-013/014/015`: real Razorpay Test Mode
+lifecycle and production reconciliation are still unverified. Backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-013-015-current-main-payment-order-qualification-2026-10-07.md`.
+
 ## PLAN-WEB-014 current-main migration/bootstrap qualification
 
 The current Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` now has

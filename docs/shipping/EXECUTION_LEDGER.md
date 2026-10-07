@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 — Web current-main hosted order qualification
+
+- **Code:** Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` in a
+  disposable worktree; no source change was made in this batch.
+- **Verification:** Local empty-database bootstrap and all **37** migrations
+  passed. Focused hosted-payment tests passed **28/28** with isolated
+  PostgreSQL. Typecheck, schema, negative-boundary **2/2**, truth-registry
+  **25/25**, and preview build **43 pages** passed.
+- **Disposition:** Code and database integration evidence only. Real Razorpay
+  Test Mode provider lifecycle, production reconciliation, and Node 22
+  supported-runtime acceptance remain open; PLAN-WEB-013/014/015 remain open.
+- **Boundary:** Disposable local database only; no provider API, payment,
+  production database, migration, deployment, credential, or customer-state
+  write occurred. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-013-015-current-main-payment-order-qualification-2026-10-07.md`.
+
 ## 2026-10-07 — CLI current-main public artifact pack preflight
 
 - **Code:** Exact CLI remote head `7d060b2`, isolated disposable worktree.

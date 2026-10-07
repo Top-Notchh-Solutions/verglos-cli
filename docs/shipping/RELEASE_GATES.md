@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013/014 current-main hosted order qualification · 2026-10-07
+
+Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed the focused
+hosted-order/payment suite **28/28** with isolated PostgreSQL, plus typecheck,
+schema, 37-migration ordering, negative-boundary **2/2**, truth-registry
+**25/25**, and a 43-page preview build. This advances implementation evidence
+but does not pass the payment gate: real Razorpay Test Mode order/payment,
+capture, failure, refund, renewal, webhook, and production reconciliation
+evidence remain absent. No checkbox or production state changed. Evidence:
+`docs/shipping/evidence/plan-web-013-015-current-main-payment-order-qualification-2026-10-07.md`.
+
 ## PLAN-WEB-014/015 migration-bootstrap boundary · 2026-10-07
 
 Current Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passes the guarded

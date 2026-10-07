@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-013/014 current-main hosted order qualification · 2026-10-07
+
+- **Decision:** Accept the current-main hosted-order and isolated PostgreSQL
+  results as implementation evidence; do not represent them as provider or
+  production payment acceptance.
+- **Evidence:** Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea`;
+  payment-focused **28/28**; 37 migrations; typecheck/schema; negative-boundary
+  **2/2**; truth-registry **25/25**; 43-page preview build.
+- **Boundary:** No provider API, payment, production database, migration,
+  deployment, credential, or customer-state write occurred. Real Test Mode
+  lifecycle, production reconciliation, and Node 22 acceptance remain open;
+  no checkbox changed.
+
 ## PLAN-WEB-014 migration-bootstrap revalidation · 2026-10-07
 
 - **Decision:** Treat the local migration-bootstrap uncertainty as resolved for

@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Web current-main hosted order qualification
+
+Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed the isolated
+hosted-payment batch **28/28**, including all declared hosted methods, order
+binding, capture/failure, replay, refund watermark, and webhook idempotency
+against disposable PostgreSQL. Typecheck, Drizzle schema, 37-migration
+ordering, negative-boundary **2/2**, truth-registry **25/25**, and a 43-page
+preview build also passed. Node `26.4.0` emitted the repository Node `22.x`
+engine warning. This is code/integration evidence only; real Razorpay Test
+Mode lifecycle, production reconciliation, and supported-runtime acceptance
+remain open. No checkbox changed; backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-013-015-current-main-payment-order-qualification-2026-10-07.md`.
+
 ## 2026-10-07 · Web current-main migration bootstrap revalidation
 
 The current Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` already has a

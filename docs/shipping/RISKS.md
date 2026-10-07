@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014 current-main order qualification boundary · 2026-10-07
+
+The exact Web main hosted-order path passes **28/28** focused tests against
+disposable PostgreSQL, including declared hosted methods, immutable order
+binding, capture/failure, replay, refund watermark, and webhook idempotency.
+The residual risk is external: no valid isolated Razorpay Test Mode account
+run has produced real payment/capture/refund/renewal/webhook evidence, and no
+production reconciliation has been attempted. Keep PLAN-WEB-013/014/015 open;
+owner: billing/release qualification. Node 22 runtime acceptance is also open.
+
+
 ## R-PLAN-WEB-013 migration bootstrap revalidation · 2026-10-07
 
 Current Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` includes a guarded

@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013/014 current-main hosted order qualification · 2026-10-07
+
+Web exact main `14988371cdae94d66d068b49d07cc31f0b26c5ea` passed **28/28**
+focused payment tests with isolated PostgreSQL, including all declared hosted
+methods, order binding, capture/failure, replay, refund watermark, and webhook
+idempotency. Typecheck, schema, 37-migration ordering, negative-boundary
+**2/2**, truth-registry **25/25**, and 43-page preview build passed. This does
+not prove real provider Test Mode lifecycle or production reconciliation; no
+checkbox changed. Evidence:
+`docs/shipping/evidence/plan-web-013-015-current-main-payment-order-qualification-2026-10-07.md`.
+
 ## PLAN-WEB-014 current-main migration/bootstrap qualification · 2026-10-07
 
 Exact Web main `14988371cdae94d66d068b49d07cc31f0b26c5ea` was rehearsed against
