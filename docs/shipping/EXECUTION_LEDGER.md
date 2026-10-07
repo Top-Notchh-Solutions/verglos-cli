@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — PLAN-WEB-014 Test Mode method-display probe
+
+- **Result:** One isolated Razorpay Test Mode order was created and hosted
+  Checkout rendered UPI, Cards, EMI, Netbanking, Wallet, Pay Later, and
+  optional UPI QR. UPI contact validation rejected synthetic input before a
+  provider outcome.
+- **Disposition:** No callback, capture, refund, webhook, entitlement, or
+  app-ledger result was observed. This is provider UI evidence only;
+  PLAN-WEB-014/015 remain open and no checkbox changed.
+- **Boundary:** The existing CDP blank target was reused and restored to
+  `about:blank`. No production, live-payment, database, deployment, or
+  credential mutation occurred. Backlog remains **218 checked / 62 unchecked /
+  280 total (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-test-mode-method-display-2026-10-07.md`.
+
 # 2026-10-07 — QUAL-WEB-005 hosted result for hold-boundary fix
 
 - **Result:** Hosted Verify `37632466656` completed successfully for PR #153

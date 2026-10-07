@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-014 Test Mode method-display probe · 2026-10-07
+
+- **Decision:** Record the direct Test Mode run as provider UI evidence only;
+  do not promote it to app payment, entitlement, or lifecycle acceptance.
+- **Evidence:** One isolated Test Mode order rendered the configured hosted
+  method surfaces. UPI contact validation stopped the run before a provider
+  outcome; no callback, capture, refund, webhook, or ledger reconciliation was
+  produced.
+- **Boundary:** The existing blank CDP target was reused and restored to
+  `about:blank`. PLAN-WEB-014/015 remain open; no production or live-payment
+  operation and no checkbox change occurred.
+
 ## QUAL-WEB-005 hold state at completion boundary · 2026-10-07
 
 - **Decision:** A deletion worker must feed the post-delete hold state into its

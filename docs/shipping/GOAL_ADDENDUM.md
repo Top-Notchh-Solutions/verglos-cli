@@ -1,5 +1,15 @@
 # Goal addendum — 2026-10-07
 
+## PLAN-WEB-014 Test Mode method-display probe
+
+The isolated Test Mode provider probe rendered the configured hosted methods,
+but synthetic UPI contact input was rejected before any provider outcome. No
+payment lifecycle, webhook, entitlement, or app-ledger evidence was produced;
+PLAN-WEB-014/015 remain open. The existing CDP blank target was restored to
+`about:blank`; no production operation or checkbox change occurred. Backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-test-mode-method-display-2026-10-07.md`.
+
 QUAL-WEB-005 fresh-snapshot rehearsal: a production `pg_dump` completed at
 `2026-10-07T10:17:27.005Z` (150,515 bytes), restored into disposable
 PostgreSQL 18, and accepted PR #153's migration tail to 35 history rows.

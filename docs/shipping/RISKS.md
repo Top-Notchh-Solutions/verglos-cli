@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-049 Test Mode method lifecycle remains incomplete · 2026-10-07
+
+The isolated Test Mode Checkout rendered the configured hosted method
+surfaces, but UPI contact validation stopped the run before a provider
+success/failure outcome. No capture, refund, webhook, entitlement, or
+ledger-reconciliation evidence exists. Owner: billing/product; mitigation:
+qualify the authenticated app route and every required provider lifecycle in
+an approved isolated runtime, then reconcile signed provider events to the
+ledger and entitlements. PLAN-WEB-014/015 remain release-blocking. No
+production or live-payment operation occurred.
+
 ## R-048 deletion hold race hardening · 2026-10-07
 
 The deletion worker now rechecks the durable legal-hold state at the completion

@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-014 Test Mode method-display probe · 2026-10-07
+
+The isolated Razorpay Test Mode probe created one provider order and rendered
+UPI, Cards, EMI, Netbanking, Wallet, Pay Later, and optional UPI QR. UPI contact
+validation rejected synthetic input before any provider outcome; no callback,
+capture, refund, webhook, entitlement, or app-ledger result was observed. The
+existing CDP blank target was restored to `about:blank`; no production
+operation occurred. PLAN-WEB-014/015 remain open and no checkbox changed. See
+`docs/shipping/evidence/plan-web-014-test-mode-method-display-2026-10-07.md`.
+
 ## QUAL-WEB-005 hosted result for hold-boundary fix · 2026-10-07
 
 Hosted Verify `37632466656` passed at PR #153 exact head

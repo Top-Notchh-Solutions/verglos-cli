@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 Test Mode method-display probe · 2026-10-07
+
+The isolated Test Mode provider probe created one order and rendered UPI,
+Cards, EMI, Netbanking, Wallet, Pay Later, and optional UPI QR. UPI contact
+validation stopped the run before a provider outcome; no callback, capture,
+refund, webhook, entitlement, or reconciliation result was produced. This
+does not pass the payment gate. PLAN-WEB-014/015 remain open; the existing
+CDP blank target was restored and no production state changed.
+
 ## QUAL-WEB-005 hosted result for hold-boundary fix · 2026-10-07
 
 Hosted Verify `37632466656` passed at PR #153 exact head
