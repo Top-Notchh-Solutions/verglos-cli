@@ -7,8 +7,9 @@ standards validation corpus for SARIF 2.1.0, CycloneDX 1.6, SPDX 2.3,
 in-toto Statement v1, and detect-secrets baselines, plus compatibility
 coverage pointers. Shared importer/security tests pass **29/29**; the full
 configured CLI graph passes **12/12** tasks; typecheck passes across 10
-packages; and build passes across 8 packages. Hosted OS/Node cells, self-scan,
-and in-toto were queued at capture. QUAL-CLI-006 remains open for official
+packages; and build passes across 8 packages. Hosted run `37625527232` passed
+all nine Ubuntu/macOS/Windows × Node 20/22/24 cells, self-scan, and in-toto;
+PR #79 merged as `7d060b2852551cc017bbb2b5f70bad22843e7273`. QUAL-CLI-006 remains open for official
 validator, artifact/legal/provenance, trusted publishing, and independent
 acceptance evidence. No checkbox changed; backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. Private evidence:

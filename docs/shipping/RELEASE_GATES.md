@@ -858,7 +858,9 @@ QUAL-CLI-006 validation addendum (2026-10-07): CLI PR #79 exact head
 `13d144438045da574e7cbab6a21ec73341b8f796` adds standards required-field
 corpus coverage. Shared importer/security tests 29/29, configured CLI graph
 12/12, typecheck across 10 packages, and build across 8 packages pass. Hosted
-matrix/self-scan/in-toto were pending at capture. This does not satisfy the
+run `37625527232` passed all nine Ubuntu/macOS/Windows × Node 20/22/24 cells,
+self-scan, and in-toto; PR #79 merged as
+`7d060b2852551cc017bbb2b5f70bad22843e7273`. This does not satisfy the
 release gate: official validators, artifact and legal/provenance review,
 trusted publishing, cross-platform release evidence, and independent
 acceptance remain required. No checkbox or external state changed.

@@ -3934,8 +3934,9 @@ before enabling any destructive adapter.
 - **Verification:** Shared importer/security tests **29/29**; full configured
   CLI graph **12/12** tasks; typecheck across 10 packages; build across 8
   packages; and diff check pass.
-- **Hosted state:** Nine OS/Node cells, self-scan, and in-toto were queued at
-  capture; no hosted success is claimed and the PR is not merged.
+- **Hosted state:** Run `37625527232` passed all nine OS/Node cells, self-scan,
+  and in-toto. PR #79 merged as
+  `7d060b2852551cc017bbb2b5f70bad22843e7273`.
 - **Boundary:** No production, provider, database, deployment, credential,
   package publication, or release operation occurred.
 - **Limitation:** Official-validator, cross-platform artifact, legal/

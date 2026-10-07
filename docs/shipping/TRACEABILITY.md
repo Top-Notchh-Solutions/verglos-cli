@@ -2042,8 +2042,10 @@ required-field validation coverage for SARIF, CycloneDX, SPDX, in-toto, and
 detect-secrets inputs, with pointers to Sigstore and cross-platform
 compatibility tests. Shared importer/security tests pass **29/29**; the full
 configured CLI graph passes **12/12** tasks; typecheck and build pass across
-the current 10/8 package surfaces. Hosted matrix/self-scan/in-toto checks were
-pending at capture. This is qualification progress only; QUAL-CLI-006 remains
+the current 10/8 package surfaces. Hosted run `37625527232` passed all nine
+Ubuntu/macOS/Windows × Node 20/22/24 cells, self-scan, and in-toto; PR #79
+merged as `7d060b2852551cc017bbb2b5f70bad22843e7273`. This is qualification
+progress only; QUAL-CLI-006 remains
 open for official validators, artifact/legal/provenance review, trusted
 publishing, and independent acceptance. No checkbox or external state changed.
 See `docs/shipping/evidence/qual-cli-006-standards-validation-corpus-2026-10-07.md`.
