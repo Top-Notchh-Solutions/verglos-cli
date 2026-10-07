@@ -86,6 +86,11 @@ method/lifecycle evidence, production reconciliation, restore/rollback,
 credential rotation, and release authorization remain open. No production
 operation occurred.
 
+Hosted result update (2026-10-07): PR #153 workflow `37559045448` reached
+terminal green, with GitGuardian, Vercel Preview Comments, and Vercel passing.
+This only verifies the substrate checks; `QUAL-WEB-005` remains open and the
+PR remains unmerged/unpromoted under the broader release-gate policy.
+
 ## Web hosted serial qualification CI · 2026-10-07
 
 PR #150 head `a78578e` changes the hosted Verify test step to the existing

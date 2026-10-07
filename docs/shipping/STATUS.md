@@ -1704,3 +1704,8 @@ bounded deletion worker, reconciliation receipt, restore rehearsal, or
 non-production end-to-end evidence. `QUAL-WEB-005` remains unchecked and no
 production/database/provider/payment/browser mutation occurred. Private
 evidence: `docs/shipping/evidence/qual-web-005-inventory-pr153-2026-10-07.md`.
+
+Hosted result update: workflow `37559045448` reached green, with GitGuardian,
+Vercel Preview Comments, and Vercel also passing. PR #153 remains open as
+substrate only; it was not merged or promoted because the broader deletion,
+restore, rollback, provider, and release gates remain unresolved.

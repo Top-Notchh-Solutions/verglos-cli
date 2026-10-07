@@ -37,10 +37,12 @@ restore rehearsal, migration, cron route, or production acceptance.
 
 ## Hosted evidence and limitations
 
-At capture, GitGuardian, Vercel Preview Comments, and Vercel were green. The
-required hosted `typecheck-and-schema` workflow `37559045448` remained pending
-at job `112591905027`; therefore hosted qualification is not yet terminal.
-PR #153 is open and not accepted or merged by this evidence.
+At the first capture, GitGuardian, Vercel Preview Comments, and Vercel were
+green while the required hosted `typecheck-and-schema` workflow
+`37559045448` was pending at job `112591905027`. A subsequent poll reached
+the terminal green state: GitGuardian, Vercel Preview Comments, Vercel, and
+`typecheck-and-schema` all passed. PR #153 is still open and not accepted or
+merged by this evidence.
 
 The required durable legal/customer-held authority, complete operational
 ownership mapping, bounded claim/retry/idempotent worker, row-count
