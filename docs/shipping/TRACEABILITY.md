@@ -2051,3 +2051,7 @@ adapter. Focused payment/route/runtime tests pass **30/30**, typecheck passes,
 and the diff is clean. This traces to method presentation only; no method was
 selected, no lifecycle evidence was produced, and PLAN-WEB-013/014/015 remain
 open.
+Hosted Verify run `37611750797` passed at exact PR #149 head
+`f734acc8d4b03625b96cb90b628be04d4713d91d`, with GitGuardian, Vercel, and
+Preview Comments also green. The trace remains presentation/code-side only;
+provider lifecycle and reconciliation are not evidenced.

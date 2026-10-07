@@ -817,3 +817,8 @@ runtime tests pass **30/30** and typecheck passes. This is presentation and
 catalog alignment only; no payment method was selected, and the provider
 lifecycle, reconciliation, production configuration, and release gates remain
 open. No production operation occurred.
+Hosted gate addendum (2026-10-07): PR #149 exact head
+`f734acc8d4b03625b96cb90b628be04d4713d91d` passed Verify `37611750797`,
+GitGuardian, Vercel, and Preview Comments. The code-side gate is green, but
+PLAN-WEB-013/014/015 remain release-blocking for provider lifecycle and
+production reconciliation; no merge or production operation occurred.
