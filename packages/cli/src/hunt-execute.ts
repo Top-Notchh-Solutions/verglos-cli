@@ -1,7 +1,7 @@
 import { constants } from "node:fs";
 import { lstat, open } from "node:fs/promises";
-import { runHunt, RestrictedProcessAdapter, validateSupportedHuntRecipe } from "@verglos/hunt";
 import { ApprovalReceiptSchema, parseHuntRecipe, parseHuntRecipeTrustPolicy, type ScanResult } from "@verglos/shared";
+import { loadHuntRuntime, type HuntRuntimeLoader } from "./hunt-runtime.js";
 
 const MAX_INPUT_BYTES = 8 * 1024 * 1024;
 const MAX_FINDINGS = 10_000;
@@ -39,7 +39,7 @@ function parseReport(value: unknown): ScanResult {
 }
 
 export async function executeHuntRecipe(
-  input: { readonly reportPath: string; readonly recipePath: string; readonly trustStorePath: string; readonly approvalPath: string; readonly ruleId: string; readonly subjectId: string; readonly observationId: string; readonly findingId?: string; readonly json?: boolean; readonly quiet?: boolean },
+  input: { readonly reportPath: string; readonly recipePath: string; readonly trustStorePath: string; readonly approvalPath: string; readonly ruleId: string; readonly subjectId: string; readonly observationId: string; readonly findingId?: string; readonly json?: boolean; readonly quiet?: boolean; readonly runtimeLoader?: HuntRuntimeLoader },
 ): Promise<number> {
   try {
     const [reportValue, recipeValue, trustValue, approvalValue] = await Promise.all([
@@ -50,14 +50,15 @@ export async function executeHuntRecipe(
     ]);
     const report = parseReport(reportValue);
     const recipe = parseHuntRecipe(recipeValue);
-    const supported = validateSupportedHuntRecipe(recipe);
+    const runtime = await loadHuntRuntime(input.runtimeLoader);
+    const supported = runtime.validateSupportedHuntRecipe(recipe);
     if (!supported.supported) throw new Error(`recipe is not in the supported A1 catalog (${supported.reason})`);
     const trust = parseHuntRecipeTrustPolicy(trustValue);
     const approval = ApprovalReceiptSchema.parse(approvalValue);
     const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: new Date().toISOString() };
     if (recipe.targetSubjectId !== input.subjectId || recipe.ruleId !== input.ruleId) throw new Error("recipe subject/rule does not match the requested execution binding");
-    const result = await runHunt(report, {
-      adapter: new RestrictedProcessAdapter(recipe),
+    const result = await runtime.runHunt(report, {
+      adapter: new runtime.RestrictedProcessAdapter(recipe),
       sandbox: "restricted-process",
       findingId: input.findingId,
       execution,

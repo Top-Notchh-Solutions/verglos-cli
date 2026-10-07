@@ -6,8 +6,10 @@ import { test } from "node:test";
 import { canonicalizeJson, createApprovalReceipt, parseHuntRecipe, type HuntRecipe } from "@verglos/shared";
 import { createTestHuntTrustStore, TEST_HUNT_TRUST_KEY_ID } from "../../shared/src/hunt-trust-test-support.js";
 import { executeHuntRecipe } from "./hunt-execute.js";
+import type { HuntRuntimeLoader } from "./hunt-runtime.js";
 
 const subjectId = `urn:verglos:subject:repository-tree:sha256:${"a".repeat(64)}`;
+const localHuntRuntime: HuntRuntimeLoader = () => import("../../hunt/dist/index.js");
 
 function recipe(inputs: Readonly<Record<string, string>> = { needle: "unsafe", value: "fixture contains unsafe" }): HuntRecipe {
   return parseHuntRecipe({
@@ -49,7 +51,7 @@ async function run(root: string, options: Partial<Parameters<typeof executeHuntR
   const originalLog = console.log;
   console.log = (...values: unknown[]) => logs.push(values.join(" "));
   try {
-    const code = await executeHuntRecipe({ ...inputs, ruleId: "hunt.a1.utf8-contains", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", json: true, ...options });
+    const code = await executeHuntRecipe({ ...inputs, ruleId: "hunt.a1.utf8-contains", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", json: true, runtimeLoader: localHuntRuntime, ...options });
     return { code, output: JSON.parse(logs[0] ?? "{}") as Record<string, unknown> };
   } finally {
     console.log = originalLog;
@@ -76,7 +78,7 @@ test("HUNT-009 preserves a negative probe as not-reproduced without leaking inpu
     const originalLog = console.log;
     console.log = (...values: unknown[]) => logs.push(values.join(" "));
     try {
-      const code = await executeHuntRecipe({ ...inputs, ruleId: "hunt.a1.utf8-contains", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", json: true });
+      const code = await executeHuntRecipe({ ...inputs, ruleId: "hunt.a1.utf8-contains", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", json: true, runtimeLoader: localHuntRuntime });
       assert.equal(code, 0);
     } finally { console.log = originalLog; }
     assert.equal(JSON.parse(logs[0] ?? "{}").outcomes[0].canonicalVerdict, "not-reproduced");
@@ -87,7 +89,7 @@ test("HUNT-009 preserves a negative probe as not-reproduced without leaking inpu
 test("HUNT-009 fails closed for binding drift and symlinked inputs", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-execute-denied-"));
   try {
-    const drift = await run(root, { ruleId: "hunt.other-rule" });
+    const drift = await run(root, { ruleId: "hunt.other-rule", runtimeLoader: localHuntRuntime });
     assert.equal(drift.code, 78);
     assert.deepEqual(drift.output, { status: "denied", reason: "hunt execution input or authorization is invalid" });
 
@@ -98,10 +100,19 @@ test("HUNT-009 fails closed for binding drift and symlinked inputs", async () =>
     const originalLog = console.log;
     console.log = (...values: unknown[]) => logs.push(values.join(" "));
     try {
-      const code = await executeHuntRecipe({ ...inputs, reportPath: link, ruleId: "hunt.a1.utf8-contains", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", json: true });
+      const code = await executeHuntRecipe({ ...inputs, reportPath: link, ruleId: "hunt.a1.utf8-contains", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", json: true, runtimeLoader: localHuntRuntime });
       assert.equal(code, 78);
     } finally { console.log = originalLog; }
     assert.deepEqual(JSON.parse(logs[0] ?? "{}"), { status: "denied", reason: "hunt execution input or authorization is invalid" });
     assert.equal((await readFile(inputs.reportPath, "utf8")).includes("fixture"), true);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("HUNT-009 denies execution when the private runtime is unavailable", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-runtime-missing-"));
+  try {
+    const result = await run(root, { runtimeLoader: async () => { throw new Error("private runtime absent"); } });
+    assert.equal(result.code, 78);
+    assert.deepEqual(result.output, { status: "denied", reason: "hunt execution input or authorization is invalid" });
   } finally { await rm(root, { recursive: true, force: true }); }
 });
