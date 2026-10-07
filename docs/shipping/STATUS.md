@@ -2594,3 +2594,16 @@ PLAN-WEB-013 evidence only; provider lifecycle and reconciliation gates remain
 open. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
 browser, provider, payment, production, database, migration, deployment, or
 credential operation occurred.
+
+## 2026-10-07 · HUNT PR #76 hosted matrix complete
+
+CLI PR #76 head `7022408` now passes all nine Ubuntu/macOS/Windows × Node
+20/22/24 cells, the Verglos self-scan, and the in-toto release binding. This
+removes the hosted-CI pending state but does not close HUNT-009: trusted/licensed
+publisher roots, bounded execution qualification, and independent review remain
+missing. HUNT-010 remains partial because the finding/report/before-write MCP
+execution tools are still alpha stubs. Private evidence:
+`docs/shipping/evidence/hunt-pr76-hosted-matrix-2026-10-07.md`. Backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. No browser, provider,
+payment, production, database, deployment, credential, or external-recipe
+operation occurred.
