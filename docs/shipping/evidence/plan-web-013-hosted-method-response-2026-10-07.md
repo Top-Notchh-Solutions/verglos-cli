@@ -18,6 +18,10 @@
   emitted the existing Node 22 engine warning and multiple-lockfile workspace
   root warning; production runtime validation was skipped outside a production
   deployment.
+- **Hosted PR result:** At exact head `520d40aa740bcf7dfb79cd7711a66d20555b7908`,
+  Web `typecheck-and-schema`, Vercel, Vercel Preview Comments, and GitGuardian
+  all passed. The PR remains open because provider lifecycle and production
+  reconciliation are separate release gates.
 
 This is code-side PLAN-WEB-013 progress only. It does not prove provider
 account configuration, payment lifecycle, production reconciliation, or
