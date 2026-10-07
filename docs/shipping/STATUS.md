@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · HUNT-010 hosted runtime-bridge qualification
+
+CLI PR #76 exact head `b72982a577d73a17273eb25d398521a92ad011c4` passed hosted
+platform run `37617790266` across all Ubuntu/macOS/Windows × Node 20/22/24
+cells, including in-toto release binding. Self-scan `37617790257` also passed.
+This qualifies public-source integration and hosted regression only; trusted
+recipe publisher roots, bounded Hunt execution qualification, and independent
+review remain open. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/hunt-mcp-runtime-hosted-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 preview browser boundary
 
 Read-only Chrome CDP navigation to the PR #153 Preview `/account/privacy`

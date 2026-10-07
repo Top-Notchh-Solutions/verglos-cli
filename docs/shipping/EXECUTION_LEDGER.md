@@ -3793,9 +3793,23 @@ before enabling any destructive adapter.
   only and cannot synthesize arbitrary recipes.
 - **Verification:** Shared/MCP builds, MCP **29/29**, CLI typecheck,
   public-boundary audit, and HUNT-009 execution tests pass. Hosted platform
-  matrix `37617790266` and self-scan `37617790257` are queued at capture.
+  matrix `37617790266` passed all nine Ubuntu/macOS/Windows × Node 20/22/24
+  cells and in-toto; self-scan `37617790257` also passed.
 - **Limitation:** HUNT-009/HUNT-010 remain open for trusted/licensed roots,
   hosted execution qualification, and independent review. No checkbox changed.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No production, provider, payment, database, deployment,
+  credential, browser, or external-recipe operation occurred.
+
+# 2026-10-07 — HUNT-010 hosted runtime-bridge qualification
+
+- **Evidence:** Exact CLI PR #76 head `b72982a577d73a17273eb25d398521a92ad011c4`
+  passed platform workflow `37617790266` across all nine supported
+  Ubuntu/macOS/Windows × Node 20/22/24 cells, with in-toto binding green;
+  self-scan `37617790257` passed as well.
+- **Interpretation:** This is hosted integration/regression evidence only.
+  HUNT-009/HUNT-010 remain open for trusted/licensed publisher roots, bounded
+  execution qualification, and independent review. No checkbox changed.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, provider, payment, database, deployment,
   credential, browser, or external-recipe operation occurred.
