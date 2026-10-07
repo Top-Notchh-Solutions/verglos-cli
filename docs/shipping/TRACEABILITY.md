@@ -1,5 +1,13 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013/014 hosted result for refund hardening · 2026-10-07
+
+Hosted Verify `37632192255` completed successfully at Web PR #149 exact head
+`238ec7425ff1979b82d97e3d371cedbe83fbd394`. This adds current-head hosted
+workflow evidence to the local monotonic-refund result, but does not prove
+provider method or lifecycle behavior, entitlement reconciliation, or
+production state. No checkbox changed; PLAN-WEB-013/014/015 remain open.
+
 ## QUAL-WEB-005 deletion hold completion boundary · 2026-10-07
 
 - **Source:** Web PR #153 exact pushed head

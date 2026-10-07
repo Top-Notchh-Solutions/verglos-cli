@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013/014 hosted result for refund hardening
+
+Hosted Verify run `37632192255` completed successfully for Web PR #149 exact
+head `238ec7425ff1979b82d97e3d371cedbe83fbd394`. This confirms the repository's
+hosted type/schema/security/build workflow at the new head, in addition to the
+local payment and disposable-ledger evidence already recorded. It does not
+qualify Razorpay account-enabled methods or provider lifecycle/reconciliation,
+and no payment or production operation occurred. PLAN-WEB-013/014/015 remain
+open; no checkbox changed and backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-013-refund-ordering-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 deletion hold completion boundary
 
 Web PR #153 exact pushed head `d7deec1bc115417e924c93846231074ea87ad51e`

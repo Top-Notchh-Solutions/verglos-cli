@@ -302,3 +302,14 @@ active and the authoritative backlog remains **218 checked / 62 unchecked /
 280 total (77.9%)**. No production, deletion, migration, deployment, provider,
 payment, entitlement, browser, or credential operation occurred. Evidence:
 `docs/shipping/evidence/qual-web-005-hold-boundary-2026-10-07.md`.
+
+## 2026-10-07 hosted payment result
+
+Hosted Verify `37632192255` completed successfully for PR #149 exact head
+`238ec7425ff1979b82d97e3d371cedbe83fbd394`. This confirms current-head hosted
+code/schema/security/build checks for the refund-ordering hardening, but does
+not qualify provider methods or payment lifecycle/reconciliation. The goal
+remains active; PLAN-WEB-013/014/015 remain open and the authoritative backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. No provider,
+production, payment, entitlement, migration, deployment, browser, or credential
+operation occurred.

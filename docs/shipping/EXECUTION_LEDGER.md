@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — PLAN-WEB-013/014 hosted result for refund hardening
+
+- **Result:** Hosted Verify run `37632192255` completed successfully for PR
+  #149 exact head `238ec7425ff1979b82d97e3d371cedbe83fbd394`.
+- **Disposition:** This is current-head hosted workflow evidence only. It does
+  not qualify provider methods, payment lifecycle/reconciliation, production
+  configuration, or payment acceptance; no checkbox changed.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No provider, browser payment, entitlement, production,
+  deployment, migration, or credential operation.
+
 # 2026-10-07 — QUAL-WEB-005 deletion hold completion boundary
 
 - **Batch:** Close the race in which a legal hold could appear between the

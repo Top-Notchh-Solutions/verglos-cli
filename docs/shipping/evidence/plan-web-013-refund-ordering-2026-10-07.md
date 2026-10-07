@@ -30,8 +30,8 @@ regressive observation.
 - An empty database `drizzle-kit migrate` attempt correctly failed at migration
   `0000` because the reviewed legacy `licenses` baseline is absent; this is a
   fixture limitation, not migration acceptance evidence.
-- Hosted Verify run `37632192255` for the pushed head was **queued** at capture;
-  prior-head hosted checks are not reused as current-head proof.
+- Hosted Verify run `37632192255` for the pushed head completed **successfully**;
+  prior-head hosted checks were not reused as current-head proof.
 
 ## Boundary and disposition
 

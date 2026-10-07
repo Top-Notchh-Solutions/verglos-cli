@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013/014 hosted result for refund hardening · 2026-10-07
+
+Hosted Verify `37632192255` passed at PR #149 exact head
+`238ec7425ff1979b82d97e3d371cedbe83fbd394`. This strengthens current-head
+hosted code/schema/security/build evidence but does not pass the payment gate:
+account-enabled Razorpay methods, provider success/failure/capture/refund/
+renewal/cancellation/replay/out-of-order evidence, entitlement reconciliation,
+and production preflight remain open. No merge, checkbox, or production state
+changed.
+
 ## QUAL-WEB-005 deletion hold completion boundary · 2026-10-07
 
 PR #153 exact head `d7deec1bc115417e924c93846231074ea87ad51e` now carries the
