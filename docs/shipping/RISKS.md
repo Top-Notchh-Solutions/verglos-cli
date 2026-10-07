@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-013 shared payment-test fixture isolation · 2026-10-07
+
+The route harness is isolated and hosted Verify is green, but the local normal
+parallel suite reports shared-schema writer races and the serial suite contains
+an empty-schema fixture assumption. This prevents a full-suite acceptance claim
+until test database ownership/reset is made explicit. Owner: Web test
+infrastructure; mitigation: give each integration group an isolated schema or
+database and remove destructive cross-fixture setup. PLAN-WEB-013/014/015 remain
+open. No production state was touched.
+
 ## R-QUAL-WEB-006 organization-directory runtime evidence gap · 2026-10-07
 
 The current `/orgs` target has a bounded aggregate CDP observation with no

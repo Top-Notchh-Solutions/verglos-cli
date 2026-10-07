@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013 isolated hosted-order route
+
+Web PR #149 exact head `1605340` passed the hosted Verify run **37640983179**:
+typecheck, serial tests, build, public-boundary, dependency, SBOM/license, and
+tracked-secret checks. The isolated route test passed **2/2** and the focused
+payment/quality command passed **44/44**; local typecheck, database checks,
+31-migration ordering, and build also passed. The normal local parallel suite
+still has a shared-fixture race (**864/877 passed, 11 failed, 2 cancelled**),
+and the local serial run has a writer-fixture empty-schema assumption, so no
+full-suite green claim is made. Provider lifecycle, entitlement reconciliation,
+production preflight, and deployment evidence remain open. No checkbox changed;
+backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-013-isolated-order-route-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 organization-directory CDP probe
 
 The existing dedicated Chrome target at `/orgs` was inspected read-only using

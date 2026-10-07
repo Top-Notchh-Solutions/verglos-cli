@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-013 isolated hosted-order route · 2026-10-07
+
+- **Decision:** Accept the route harness as qualification progress only; do not
+  mark the hosted payment or release backlog complete.
+- **Evidence:** PR #149 head `1605340`, hosted Verify **37640983179** green,
+  route integration **2/2**, focused payment/quality **44/44**, and local
+  typecheck/database/migration/build checks green.
+- **Reason:** The harness proves server-side catalog, auth/origin/validation
+  boundaries, signed notes, user binding, and provider projection without
+  production writes. It does not prove real provider lifecycle or entitlement
+  reconciliation. Local full-suite results are also limited by shared fixture
+  interference and are not claimed as green.
+
 ## QUAL-WEB-006 organization-directory CDP probe · 2026-10-07
 
 - **Decision:** Treat the current `/orgs` aggregate CDP observation as partial

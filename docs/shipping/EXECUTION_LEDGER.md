@@ -1,5 +1,14 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — PLAN-WEB-013 isolated hosted-order route
+
+- **Scope:** Web PR #149 exact head `160534025b58d3f14486390d569e8ba79e928dd2`, disposable local PostgreSQL 16 `verglos_test`, and non-production-only auth/provider seams.
+- **Evidence:** Route integration **2/2**; focused payment/quality command **44/44**; local typecheck, `db:check`, 31-migration ordering, and build passed. Hosted Verify **37640983179** passed all repository checks.
+- **Limitation:** Normal local parallel suite **864/877 passed, 11 failed, 2 cancelled** from shared database fixture races. Serial suite was not accepted because a writer fixture assumes an empty public schema. No full-suite green claim.
+- **Disposition:** Code-side PLAN-WEB-013 evidence strengthened; PLAN-WEB-013/014/015 remain open pending real provider lifecycle and reconciliation evidence. No checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No production database/payment/deployment/migration/credential mutation.
+- **Evidence file:** `docs/shipping/evidence/plan-web-013-isolated-order-route-2026-10-07.md`.
+
 # 2026-10-07 — QUAL-WEB-006 organization-directory CDP probe
 
 - **Scope:** Existing dedicated Chrome `/orgs` page target; direct CDP

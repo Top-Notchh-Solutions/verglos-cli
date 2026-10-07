@@ -1,5 +1,17 @@
 # Goal addendum — 2026-10-07
 
+## PLAN-WEB-013 isolated hosted-order route
+
+PR #149 exact head `1605340` passed hosted Verify **37640983179**. The isolated
+route test passed **2/2**, focused payment/quality checks **44/44**, and local
+typecheck, database checks, 31-migration ordering, and build passed. The normal
+parallel suite remains limited by shared database fixture races; the serial
+suite remains limited by an empty-schema writer fixture. This batch adds no
+checkbox completion. Real Razorpay lifecycle, webhook, entitlement,
+production-preflight, and deployment gates remain open. Backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-013-isolated-order-route-2026-10-07.md`.
+
 ## QUAL-WEB-006 organization-directory CDP probe
 
 The existing dedicated Chrome `/orgs` target was inspected read-only with

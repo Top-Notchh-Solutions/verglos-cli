@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013 isolated hosted-order route · 2026-10-07
+
+Hosted Verify **37640983179** is green for PR #149 exact head `1605340`; the
+isolated route and focused checks are green. This does **not** pass the payment
+release gate: real test-provider success/capture/failure/refund/renewal,
+webhooks, entitlement reconciliation, production preflight, and deployment
+evidence remain absent. The PR is intentionally not merged. No production or
+credential state changed; backlog remains **218 checked / 62 unchecked / 280
+total (77.9%)**.
+
 ## QUAL-WEB-006 organization-directory CDP probe · 2026-10-07
 
 The existing `/orgs` page target was inspected with read-only direct CDP after

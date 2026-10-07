@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013 isolated hosted-order route · 2026-10-07
+
+PR #149 exact head `1605340` passed hosted Verify **37640983179** and the
+isolated route test **2/2**; the focused payment/quality command passed **44/44**.
+Local typecheck, database checks, 31-migration ordering, and build passed. This
+is code-side and isolated-database evidence only. The local parallel suite has
+shared-fixture failures and the serial suite has an empty-schema writer-fixture
+assumption; neither supports a full-suite acceptance claim. Real provider
+lifecycle, callback, refund/renewal, entitlement, production preflight, and
+deployment evidence remain open. No checkbox changed. See
+`docs/shipping/evidence/plan-web-013-isolated-order-route-2026-10-07.md`.
+
 ## QUAL-WEB-006 organization-directory CDP probe · 2026-10-07
 
 The existing dedicated Chrome `/orgs` target was inspected read-only using

@@ -1,0 +1,9 @@
+# PLAN-WEB-013 isolated hosted-order route evidence — 2026-10-07
+
+- **Scope:** Web PR #149 at exact head `160534025b58d3f14486390d569e8ba79e928dd2`.
+- **Environment:** Disposable local Docker PostgreSQL 16 `verglos_test`, loopback port `55433`, bounded to 1 CPU and 768 MiB. The route test uses non-production-only request-auth and Razorpay provider seams; no production behavior or credential was changed.
+- **Route evidence:** Isolated route integration passed **2/2**. The focused payment/quality command passed **44/44**, including hosted-order catalog projection, signed notes, user binding, origin/auth/validation boundaries, payment-method handling, webhook/receipt contracts, and quality checks.
+- **Repository gates:** `pnpm typecheck`, `pnpm db:check`, `pnpm db:migrations:check` (31 ordered PostgreSQL migrations), and `pnpm build` passed locally. Hosted Verify run [37640983179](https://github.com/anuragyadav-git/verglos-web/actions/runs/37640983179) passed typecheck, serial tests, build, public-boundary, dependency, SBOM/license, and tracked-secret checks.
+- **Suite limitation:** The normal local parallel suite reported **877 total, 864 passed, 11 failed, 2 cancelled** because shared database fixtures race and drop/create shared relations. The local serial run was not accepted because a writer fixture assumes an empty public schema and later fixtures lose required relations. This is recorded as a test-infrastructure limitation, not a green full-suite claim.
+- **Not evidenced:** Real Razorpay order/payment success, capture, failure, refund, renewal, webhook delivery, entitlement reconciliation, production preflight, or deployment. PLAN-WEB-013/014/015 remain open.
+- **Boundary:** No production database write, payment, provider callback, entitlement mutation, deployment, migration-file change, or credential mutation occurred. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
