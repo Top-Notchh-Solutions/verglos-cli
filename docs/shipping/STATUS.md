@@ -3094,3 +3094,10 @@ local application of all 35 migrations plus five baseline tables. This keeps
 the merge candidate safe without changing the backlog or authorizing PR #153
 to merge/deploy: deletion, restore/rollback, production, and independent
 acceptance gates remain open.
+
+The migration preflight was then tightened on both candidates to count all
+non-system schemas before treating a database as empty. The correction is
+pushed as PR #149 `e46299a` and PR #153 `47af6fa`; typecheck, focused 12/12
+migration tests, ordered migration checks, and diff checks pass. Hosted checks
+for the new heads are queued/running. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**.

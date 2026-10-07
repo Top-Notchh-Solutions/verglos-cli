@@ -3,7 +3,7 @@
 ## Scope
 
 - Web worktree: `verglos-web/.worktrees/web-plan-013`.
-- PR: #149, pushed exact head `3f05b0a`.
+- PR: #149, pushed exact head `e46299a`.
 - Batch boundary: preserve the applied Drizzle journal and make the historical
   pre-Drizzle baseline explicit and fail-closed.
 
@@ -19,6 +19,9 @@
   edited and the journal remains unchanged.
 - `docs/deployment-runbook.md` documents the baseline boundary and current
   31-migration source set.
+- The final safety correction counts every non-system schema, not only
+  `public`, before classifying a database as empty. This prevents a database
+  containing custom-schema tables from entering the local bootstrap path.
 
 ## Verification
 
@@ -35,6 +38,10 @@
 - Disposable Docker `postgres:15` rehearsal: default invocation exited 1 and
   left **0** public tables; explicit local opt-in applied all **31** migrations
   and left all **5** baseline tables present. The container was removed.
+- After the non-system-schema correction, typecheck, focused migration/guard/
+  audit tests (**12/12**), ordered migration check, and diff checks passed on
+  both PR #149 (`e46299a`, 31 migrations) and PR #153 (`47af6fa`, 35
+  migrations).
 
 ## Boundary and disposition
 
@@ -49,7 +56,7 @@
 ## Merge-candidate port
 
 The same guard was ported cleanly to Web PR #153, the 35-migration deletion
-candidate, at exact pushed head `f81de9f`. Its focused migration/guard/audit
+candidate, at exact pushed head `47af6fa`. Its focused migration/guard/audit
 tests pass **12/12**, typecheck, `db:check`, and `db:migrations:check` verify
 **35 ordered migrations**, and its serial suite passes **850/873 with 23
 explicit skips and 0 failures**. A fresh Docker `postgres:15` rehearsal again

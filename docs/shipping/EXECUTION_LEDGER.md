@@ -4354,3 +4354,17 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
 - **Disposition:** This is merge-candidate integration evidence only. PR #153
   remains open for its privacy/deletion, restore/rollback, production, and
   independent acceptance gates; no checkbox changed.
+
+## 2026-10-07 · Web migration preflight schema-scope correction
+
+- **Code:** Corrected both candidates so the empty-database decision counts
+  base tables in every non-system schema, not only `public`. Exact pushed heads:
+  PR #149 `e46299a`; PR #153 `47af6fa`.
+- **Verification:** Typecheck, focused migration/guard/audit tests **12/12**,
+  ordered migration checks (**31** and **35** respectively), and diff checks
+  pass. Hosted checks are queued/running for the new heads.
+- **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
+  (77.9%)**.
+- **Boundary:** No production, provider, payment, deployment, credential, or
+  browser mutation occurred. PRs remain open and must not be merged solely on
+  this code-side correction.
