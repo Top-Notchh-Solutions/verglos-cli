@@ -6,8 +6,9 @@ Web PR #150 (`70680f8`) adds bounded integration evidence for 45 same-tenant
 components (20/20/5 pages), 125 advisory matches, the 100-row detail cap with
 explicit truncation truth, and foreign-tenant exclusion. Local focused tests,
 tenant/security checks, typecheck, build, schema, migration ordering, and diff
-hygiene pass. Hosted run `37551537264` was still in progress at capture and
-Vercel was pending. This is not full QUAL-WEB-006 acceptance: organization/Pro
+hygiene pass. Hosted run `37551537264`, Vercel, GitGuardian, and Preview
+Comments pass, and GitHub reports PR #150 `CLEAN` and mergeable. This is not
+full QUAL-WEB-006 acceptance: organization/Pro
 browser data, human screen-reader, and field-CWV evidence remain open. No
 production operation occurred.
 

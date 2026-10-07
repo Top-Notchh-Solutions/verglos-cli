@@ -14,9 +14,9 @@
 - **Checks:** TypeScript, `pnpm build`, `pnpm db:check`,
   `pnpm db:migrations:check` (29 migrations), and `git diff --check` passed.
   Node 26.4.0 was used locally against the package Node 22.x baseline.
-- **Hosted state:** PR #150 is pushed/open/mergeable. Run `37551537264` was
-  still `in_progress` at capture; GitGuardian and Preview Comments passed and
-  Vercel was pending. No merge or deployment occurred.
+- **Hosted state:** PR #150 is pushed/open/mergeable. Run `37551537264` passed
+  in 2m38s with the full Verify job; GitGuardian, Vercel, and Preview Comments
+  passed and GitHub reports `CLEAN`. No merge or deployment occurred.
 - **Acceptance:** QUAL-WEB-006 remains unchecked for organization/Pro browser
   rendering, human screen-reader review, field CWV, and complete runtime
   evidence. Backlog remains 218 checked / 62 unchecked / 280 total.

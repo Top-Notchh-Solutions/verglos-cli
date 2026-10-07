@@ -60,12 +60,12 @@ hosted workflow is the authoritative Node-baseline check.
 
 ## Hosted state and limitations
 
-PR #150 was pushed with only the integration-test change. GitGuardian and
-Vercel Preview Comments were green. Hosted `typecheck-and-schema` workflow
-run `37551537264` was still `in_progress` at evidence capture, with steps
-through migration checks green and the build step running; Vercel was pending.
-The PR was mergeable but GitHub reported `UNSTABLE` while required checks were
-pending. No merge or deployment was performed.
+PR #150 was pushed with only the integration-test change. Hosted
+`typecheck-and-schema` workflow run `37551537264` passed in 2m38s, including
+typecheck, configured tests, negative-boundary/truth-registry tests, build,
+public-boundary, dependency, SBOM, license, and tracked-secret checks. Vercel,
+GitGuardian, and Vercel Preview Comments also passed. GitHub reports the PR
+merge state `CLEAN` and mergeable. No merge or deployment was performed.
 
 This evidence does not qualify large-data browser rendering, screen-reader
 behavior, field CWV, Pro entitlement, production database state, provider

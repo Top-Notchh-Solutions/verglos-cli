@@ -13,8 +13,9 @@
   hygiene pass. Docker used a temporary synthetic `postgres:18-alpine`
   database and was stopped after the run.
 - **Hosted state:** PR #150 is open and mergeable. Hosted run `37551537264`
-  was still in progress at capture; GitGuardian and Preview Comments passed,
-  while Vercel remained pending. No merge or deployment occurred.
+  passed in 2m38s, including the full Verify job; Vercel, GitGuardian, and
+  Preview Comments passed, and GitHub reports `CLEAN`. No merge or deployment
+  occurred.
 - **Boundary:** This does not close QUAL-WEB-006. Organization/Pro browser
   rendering, human screen-reader review, and field-CWV evidence remain open.
   No production/provider/payment/database/migration operation occurred.
