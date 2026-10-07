@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-015 production environment shape recheck
+
+Read-only Vercel production inspection confirms
+`RAZORPAY_ENABLED_PAYMENT_METHODS` is absent; the local production env file
+also does not define it. The runtime guard therefore correctly prevents
+promotion of an unqualified multi-method checkout. No value was read or
+printed, no method set was inferred, and no Vercel environment/provider/
+database/payment/customer-state write occurred. Evidence:
+`docs/shipping/evidence/plan-web-015-production-env-shape-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-014 merge and production fail-closed boundary
 
 Web PR #155 merged cleanly as main commit

@@ -1,5 +1,14 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-015 production method-set absence · 2026-10-07
+
+Read-only environment-name inspection confirms that both Vercel production
+and the local production env file lack `RAZORPAY_ENABLED_PAYMENT_METHODS`.
+The merged Web runtime guard fails closed, so the live alias remains on the
+legacy QR-only surface until the account-enabled method set is established
+after Test Mode credential rotation and an approved production preflight.
+Owner: billing/release qualification. Do not guess or write this value.
+
 ## R-PLAN-WEB-014 Test Mode browser/provider boundary · 2026-10-07
 
 The Web test environment has usable Razorpay Test Mode credentials and a

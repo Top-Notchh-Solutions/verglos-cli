@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-015 production environment shape recheck · 2026-10-07
+
+Read-only Vercel production and local production env-name inspection found no
+`RAZORPAY_ENABLED_PAYMENT_METHODS` definition in either surface. The merged
+runtime guard consequently fails closed before promotion; the enabled method
+set was not inferred from Test Mode or UI. No values were read or recorded,
+and no environment, provider, database, payment, or customer-state write
+occurred. Evidence:
+`docs/shipping/evidence/plan-web-015-production-env-shape-2026-10-07.md`.
+
 ## PLAN-WEB-014 Test Mode credential preflight · 2026-10-07
 
 The supplied test environment uses a `rzp_test_` key and declares seven

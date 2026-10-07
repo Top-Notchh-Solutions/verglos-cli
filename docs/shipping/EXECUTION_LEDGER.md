@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · PLAN-WEB-015 production environment shape recheck
+
+- **Read-only finding:** Vercel production and the local production env file
+  both lack `RAZORPAY_ENABLED_PAYMENT_METHODS`.
+- **Disposition:** The merged runtime guard correctly blocks promotion before
+  build. The enabled method set was not guessed from Test Mode or UI.
+- **Boundary:** No environment value was read or recorded; no Vercel
+  environment/provider/database/payment/customer-state write occurred.
+  R-041 and PLAN-WEB-014/015 remain open. Backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-015-production-env-shape-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-014 merge and production fail-closed boundary
 
 - **Code:** Web PR #155 merged cleanly as main commit

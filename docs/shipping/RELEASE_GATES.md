@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-015 production environment shape recheck · 2026-10-07
+
+Vercel production and the local production env file both lack
+`RAZORPAY_ENABLED_PAYMENT_METHODS`. The runtime guard correctly fails closed
+before promotion. The gate remains open pending R-041 rotation, approved
+account-enabled method truth, and a reviewed production configuration. No
+environment/provider/database/payment write occurred.
+
 ## PLAN-WEB-014/015 merge and production fail-closed boundary · 2026-10-07
 
 Web PR #155 merged as main commit
