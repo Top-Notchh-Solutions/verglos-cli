@@ -213,3 +213,12 @@ and stable failure handling but no store adapter or destructive execution.
 The organization queue remains unsuitable for user-scoped deletion. The
 critical risk remains open until disposable-DB integration, row-count/audit
 reconciliation, restore rehearsal, and non-production E2E pass.
+
+R-048 update (2026-10-07, worker scope fence): PR #153 head
+`ade21b6f4c74b0a27bcf349bded6d9ceb7e39ee0` now blocks a claimed job whose
+persisted user identity differs from the invocation before reading deletion
+state or invoking an adapter. Focused 32/32, negative-boundary 2/2, and hosted
+workflow `37560704115` passed. This reduces cross-user execution risk but does
+not change the critical status: the operational store/job boundary,
+transactional deletion, reconciliation receipt, restore/rollback rehearsal,
+and non-production E2E remain missing; migrations 0029/0030 are unapplied.

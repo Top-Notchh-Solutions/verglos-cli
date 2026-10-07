@@ -440,3 +440,13 @@ was pending at capture. This does not pass Gate 2/4/6 or accept
 bounded worker, reconciliation/audit receipt, restore rehearsal, and
 authenticated non-production E2E remain open. No production or destructive
 operation occurred.
+
+Deletion worker scope-fence addendum (2026-10-07): Web PR #153 head
+`ade21b6f4c74b0a27bcf349bded6d9ceb7e39ee0` adds the claimed-job user-scope
+check before state reads or adapter calls. The worker/deletion focus is 32/32,
+the negative-boundary suite is 2/2, and hosted workflow `37560704115` passed
+with Vercel, GitGuardian, and Preview Comments. This still does not pass Gate
+2/4/6 or accept `QUAL-WEB-005`: no production adapter, deletion-job wiring,
+destructive SQL, row-count/audit reconciliation, restore/rollback rehearsal, or
+authenticated non-production E2E is present; migrations 0029/0030 remain
+unapplied.

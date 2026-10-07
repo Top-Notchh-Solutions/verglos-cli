@@ -265,3 +265,15 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
 - **Boundary:** no production adapter, cron route, destructive operation,
   migration, restore rehearsal, or checkbox acceptance is supplied by this
   contract. Hosted workflow `37560432960` was in progress.
+
+## Bounded deletion worker scope fence · 2026-10-07
+
+- **Decision:** A worker invocation must match the persisted user identity on
+  the claimed job before it may read deletion state or invoke any adapter.
+- **Evidence:** Web PR #153 head `ade21b6`; worker/deletion focus 32/32,
+  negative boundary 2/2, typecheck/diff pass, and hosted workflow
+  `37560704115` with job `112597060041` passed.
+- **Boundary:** This closes only the contract-level scope check. The store
+  adapter, deletion-job persistence/wiring, row-count and audit reconciliation,
+  restore rehearsal, and non-production E2E remain open; no production or
+  destructive operation occurred.

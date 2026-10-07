@@ -2762,3 +2762,26 @@ deletion, restore, rollback, provider, and release gates remain unresolved.
   `docs/shipping/evidence/qual-web-005-worker-contract-pr153-2026-10-07.md`.
 - **Next:** implement the store adapter only with disposable-DB integration,
   row-count/audit reconciliation, and restore rehearsal evidence.
+
+# 2026-10-07 — QUAL-WEB-005 worker scope-fence correction
+
+- **Batch:** close the claimed-job user-scope gap on the existing PR #153
+  worker boundary.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #153 head
+  `ade21b6f4c74b0a27bcf349bded6d9ceb7e39ee0`; claimed-job user mismatch is
+  blocked before state reads or adapter calls.
+- **Local:** worker/deletion focus **32/32**, negative boundary **2/2**,
+  typecheck pass, and diff check pass. Docker 29.7.2 was healthy but no
+  integration container was started.
+- **Hosted:** workflow `37560704115`, job `112597060041`, passed; Vercel,
+  GitGuardian, and Preview Comments passed. PR remains open/mergeable.
+- **Boundary:** no production/database/provider/payment/deployment write,
+  migration, deletion, browser mutation, or secret handling. Migrations
+  `0029`/`0030` remain unapplied.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-worker-scope-fence-pr153-2026-10-07.md`.
+- **Next:** implement the disposable-DB-backed user-scoped deletion job/store
+  boundary, with row-count/audit reconciliation and restore/rollback evidence
+  before any operational enablement.

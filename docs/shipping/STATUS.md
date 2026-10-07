@@ -1752,3 +1752,18 @@ workflow `37560432960` was in progress at capture. The operational adapter,
 restore rehearsal, and non-production E2E remain open; no production or
 destructive operation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-worker-contract-pr153-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 worker scope-fence correction
+
+Web PR #153 advanced to `ade21b6f4c74b0a27bcf349bded6d9ceb7e39ee0`. The
+worker now checks the claimed job's persisted user scope before reading state or
+calling a deletion adapter, and the focused worker/deletion set passes **32/32**;
+the negative-boundary suite passes **2/2**, with typecheck and diff checks also
+passing. Hosted workflow `37560704115` (job `112597060041`) passed, as did
+Vercel, GitGuardian, and Preview Comments. `QUAL-WEB-005` remains unchecked:
+the operational adapter, job wiring, row-count/audit reconciliation, restore
+rehearsal, and authenticated non-production E2E are still absent. Migrations
+`0029` and `0030` are source-only and not applied to production. No production,
+database, provider, payment, deployment, migration, deletion, or browser
+mutation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-worker-scope-fence-pr153-2026-10-07.md`.

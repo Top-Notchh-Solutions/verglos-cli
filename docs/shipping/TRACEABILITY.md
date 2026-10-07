@@ -1574,3 +1574,14 @@ completion without a fenced audit receipt. Focus 31/31, negative boundary 2/2,
 serial 846 pass / 22 explicit skips, typecheck/diff/build pass. The store
 adapter, restore/rollback rehearsal, and authenticated E2E remain unproven;
 hosted workflow `37560432960` was in progress.
+
+# 2026-10-07 · QUAL-WEB-005 worker scope-fence correction
+
+PR #153 head `ade21b6f4c74b0a27bcf349bded6d9ceb7e39ee0` now checks the claimed
+job's persisted user identity before reading state or invoking a deletion
+adapter. The worker/deletion focus passes 32/32, the negative-boundary suite
+passes 2/2, and hosted workflow `37560704115` passes with the required provider
+checks. This remains traceability for the contract only: no operational store,
+job route, destructive SQL, restore rehearsal, or authenticated non-production
+E2E exists, so `QUAL-WEB-005` remains unchecked and source-only migrations
+0029/0030 remain unapplied.
