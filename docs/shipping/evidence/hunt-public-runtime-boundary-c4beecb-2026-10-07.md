@@ -10,6 +10,10 @@
 - **PR:** [CLI PR #75](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/75),
   exact head `c4beecb3525256cd2956660af8e3e6b49292b65f`, OPEN/UNSTABLE at
   capture; 11 hosted checks were pending, with no review decision.
+- **Final hosted state:** The 11 checks subsequently passed across Ubuntu,
+  macOS, and Windows Node 20/22/24, Verglos self-scan, and in-toto release
+  binding. PR #75 merged by squash as
+  `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`.
 - **Local evidence:** Hunt build and CLI typecheck passed; focused runtime and
   execution tests passed 6/6; the complete configured CLI package suite passed;
   public packaging/license/surface tests passed 17/17; six public archives

@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · CLI PR #75 merged after hosted qualification
+
+CLI PR #75 merged as `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` after all 11
+hosted checks passed: Ubuntu, macOS, and Windows Node 20/22/24, Verglos
+self-scan, and in-toto release binding. This ships the public/private Hunt
+runtime packaging correction only. HUNT-008, HUNT-009, and QUAL-CLI-004
+remain open for trusted recipe provenance, complete isolation evidence,
+independent review, and authorized functional acceptance. No checkbox changed;
+backlog remains **218 checked / 62 unchecked / 280 total**. Private evidence:
+`docs/shipping/evidence/hunt-public-runtime-boundary-c4beecb-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 authenticated account browser probe
 
 Chrome DevTools MCP verified the approved debug session and authenticated

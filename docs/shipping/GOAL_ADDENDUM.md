@@ -1,5 +1,13 @@
 # Goal addendum — 2026-10-07
 
+CLI PR #75 subsequently passed all 11 hosted checks across Ubuntu, macOS, and
+Windows Node 20/22/24 plus Verglos self-scan and in-toto release binding. It
+merged as `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`. This is a shipped
+packaging correction, not Hunt acceptance: HUNT-008/HUNT-009/QUAL-CLI-004
+remain open for provenance, isolation, independent review, and functional
+acceptance. No checkbox changed; backlog remains **218 checked / 62 unchecked /
+280 total**.
+
 QUAL-WEB-006 browser evidence was captured through the approved Chrome DevTools
 session: authenticated Free `/account`, desktop/mobile Accessibility and Best
 Practices 100, Tab focus to Overview, clean console, 200/304 navigation,

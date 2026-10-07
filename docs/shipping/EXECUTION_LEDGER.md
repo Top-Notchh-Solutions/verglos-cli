@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · CLI PR #75 hosted qualification and merge
+
+- **Hosted:** All 11 checks passed across Ubuntu, macOS, and Windows Node
+  20/22/24, Verglos self-scan, and in-toto release binding. The PR was
+  mergeable and non-draft with no required branch-protection review.
+- **Mutation:** PR #75 merged by squash as
+  `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` from exact head
+  `c4beecb3525256cd2956660af8e3e6b49292b65f`.
+- **Acceptance boundary:** This merges the packaging correction only;
+  HUNT-008/HUNT-009/QUAL-CLI-004 remain open for provenance, isolation,
+  independent review, and functional acceptance. No backlog checkbox changed.
+
 ## 2026-10-07 · QUAL-WEB-006 authenticated account browser probe
 
 - **Runtime:** Approved Chrome DevTools page 13 authenticated on `/account`;

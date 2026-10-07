@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## CLI PR #75 hosted qualification and merge · 2026-10-07
+
+- **Decision:** Merge the isolated public/private Hunt runtime packaging
+  correction after its complete hosted matrix and release-binding checks
+  passed. Do not treat the merge as Hunt product acceptance.
+- **Evidence:** PR #75 exact head `c4beecb3525256cd2956660af8e3e6b49292b65f`;
+  all 11 checks passed; squash merge commit
+  `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`.
+- **Boundary:** Keep HUNT-008, HUNT-009, and QUAL-CLI-004 open for trusted
+  recipe provenance, complete isolation qualification, independent review,
+  and authorized functional acceptance. No provider, payment, database,
+  deployment, or credential operation.
+
 ## QUAL-WEB-006 authenticated account browser probe · 2026-10-07
 
 - **Decision:** Record the browser results as partial authenticated-surface
