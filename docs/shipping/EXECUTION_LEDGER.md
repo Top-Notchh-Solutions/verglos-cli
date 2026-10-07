@@ -3572,7 +3572,7 @@ before enabling any destructive adapter.
   capability before execution input reads; merge commit `17d0813` reconciles
   the branch with current `origin/main`.
 - **Verification:** Focused Hunt/process suite **54/54 pass**; package
-  typecheck and diff check pass; Free-plan process regression emits bounded
+  typecheck, build, and diff check pass; Free-plan process regression emits bounded
   `CAPABILITY_REQUIRED` JSON and performs no input reads.
 - **PR:** #76, exact head `17d0813737cda980ccb366c5adf948bda2e293a3`, mergeable;
   hosted matrix pending.

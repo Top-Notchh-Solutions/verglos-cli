@@ -15,7 +15,7 @@ runtime checks.
   resolve stale PR lineage; pushed PR head is
   `17d0813737cda980ccb366c5adf948bda2e293a3`.
 - Focused Hunt/process suite: **54/54 pass** from `packages/cli`.
-- CLI package TypeScript typecheck and `git diff --check` pass.
+- CLI package TypeScript typecheck, build, and `git diff --check` pass.
 - Process regression: a Free invocation returns one bounded
   `CAPABILITY_REQUIRED` JSON result and does not read execution inputs.
 
