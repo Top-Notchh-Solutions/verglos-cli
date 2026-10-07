@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { admitPrivateRunnerJob, privateRunnerResultDigest, projectPrivateRunnerResult, type PrivateRunnerJob } from "./private-runner.js";
+import { generateKeyPairSync, sign } from "node:crypto";
+import { admitPrivateRunnerJob, privateRunnerJobSigningBytes, privateRunnerResultDigest, projectPrivateRunnerResult, verifyPrivateRunnerJobSignature, type PrivateRunnerJob } from "./private-runner.js";
 
 const job: PrivateRunnerJob = {
   protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", recipeId: "recipe_cve", targetSubjectId: "subject_app", targetDigest: `sha256:${"a".repeat(64)}`,
@@ -10,6 +11,15 @@ const job: PrivateRunnerJob = {
 test("private runner admits a scoped short-lived outbound-only job", () => {
   const result = admitPrivateRunnerJob({ job, tenantId: "org_acme", runnerId: "runner_1", now: "2026-10-06T00:01:00.000Z", allowedTargets: new Set(["subject_app"]) });
   assert.equal(result.admitted, true);
+});
+
+test("private runner verifies the exact signed job bytes before admission", () => {
+  const keys = generateKeyPairSync("ed25519");
+  const unsigned = { ...job, signature: "" };
+  const signed = { ...unsigned, signature: sign(null, privateRunnerJobSigningBytes(unsigned), keys.privateKey).toString("base64") };
+  assert.equal(verifyPrivateRunnerJobSignature(signed, keys.publicKey.export({ type: "spki", format: "pem" }).toString()), true);
+  assert.equal(verifyPrivateRunnerJobSignature({ ...signed, targetSubjectId: "subject_changed" }, keys.publicKey.export({ type: "spki", format: "pem" }).toString()), false);
+  assert.equal(admitPrivateRunnerJob({ job: signed, tenantId: "org_acme", runnerId: "runner_1", now: "2026-10-06T00:01:00.000Z", allowedTargets: new Set(["subject_app"]), trustedPublicKeyPem: keys.publicKey.export({ type: "spki", format: "pem" }).toString() }).admitted, true);
 });
 
 test("private runner refuses tenant, replay, expiry, target, and network widening", () => {

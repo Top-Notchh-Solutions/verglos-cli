@@ -88,6 +88,7 @@ import { readFile as readFileBytes } from "node:fs/promises";
 import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
 import { executeClientProjection } from "./client-projection.js";
 import { executeReleaseRollbackPlan } from "./release-rollback-plan.js";
+import { pollPrivateRunnerJob, privateRunnerResultSummary } from "./private-runner-client.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -265,6 +266,28 @@ organizationPolicy.command("fetch <organizationId> <repositoryId>")
       else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Organization policy fetch failed.");
       process.exitCode = 78;
     }
+  });
+
+const privateRunner = program.command("runner").description("Poll a bounded private runner without executing remote commands");
+privateRunner.command("poll <tenantId> <runnerId>")
+  .description("Poll one signed, short-lived private-runner job; never executes or uploads results")
+  .requiredOption("--trusted-key <path>", "Ed25519 public key used to verify the job signature")
+  .requiredOption("--target <subjectId>", "Allowlisted target subject (repeat for each target)", collectRepeated, [])
+  .option("--replay-cache <path>", "Mode-0600 local replay cache path")
+  .option("--endpoint <path>", "Relative API path override for the poll endpoint")
+  .option("--now <iso>", "Fixed current time for deterministic qualification")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (tenantId: string, runnerId: string, opts: { trustedKey: string; target: string[]; replayCache?: string; endpoint?: string; now?: string; json?: boolean; quiet?: boolean }) => {
+    const result = await pollPrivateRunnerJob({ tenantId, runnerId, trustedKeyPath: opts.trustedKey, allowedTargets: opts.target, replayPath: opts.replayCache, endpoint: opts.endpoint, now: opts.now });
+    const safe = privateRunnerResultSummary(result);
+    if (opts.json) console.log(JSON.stringify(safe));
+    else if (!opts.quiet) {
+      if (result.status === "ready") console.log(`Private runner job admitted: ${result.job.jobId} (execution not performed)`);
+      else if (result.status === "empty") console.log("No private runner job available.");
+      else console.error(`Private runner poll ${result.status}: ${"reason" in result ? result.reason : "unknown"}`);
+    }
+    if (result.status === "error" || result.status === "denied") process.exitCode = 78;
   });
 
 const evidence = program.command("evidence").description("Import and export standards evidence");

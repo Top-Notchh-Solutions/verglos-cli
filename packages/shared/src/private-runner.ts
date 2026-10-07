@@ -1,4 +1,5 @@
-import { createHash } from "node:crypto";
+import { createHash, createPublicKey, verify } from "node:crypto";
+import { canonicalizeJson } from "./schema.js";
 
 /** ENT-CLI-001 · outbound-only private runner protocol.
  *
@@ -30,6 +31,7 @@ export type PrivateRunnerJob = Readonly<{
 
 export type PrivateRunnerAdmissionFailure =
   | "invalid_job"
+  | "invalid_signature"
   | "tenant_mismatch"
   | "runner_mismatch"
   | "job_expired"
@@ -89,6 +91,29 @@ function validShape(job: PrivateRunnerJob): boolean {
     && SIGNATURE.test(job.signature) && validLimits(job.limits);
 }
 
+/** Return the exact canonical bytes a trusted runner signs for a job. */
+export function privateRunnerJobSigningBytes(job: PrivateRunnerJob): Buffer {
+  const unsigned = { ...job } as Record<string, unknown>;
+  delete unsigned.signature;
+  return Buffer.from(canonicalizeJson(unsigned), "utf8");
+}
+
+/** Verify the Ed25519 signature before any job fields are acted upon. */
+export function verifyPrivateRunnerJobSignature(job: PrivateRunnerJob, publicKeyPem: string): boolean {
+  try {
+    if (!validShape(job)) return false;
+    const key = createPublicKey(publicKeyPem);
+    return key.asymmetricKeyType === "ed25519"
+      && verify(null, privateRunnerJobSigningBytes(job), key, Buffer.from(job.signature, "base64"));
+  } catch {
+    return false;
+  }
+}
+
+export function privateRunnerJobDigest(job: PrivateRunnerJob): string {
+  return `sha256:${createHash("sha256").update(canonicalizeJson(job), "utf8").digest("hex")}`;
+}
+
 /** Admit exactly one job; callers persist `jobId`/`nonce` before execution. */
 export function admitPrivateRunnerJob(input: Readonly<{
   job: PrivateRunnerJob;
@@ -97,9 +122,11 @@ export function admitPrivateRunnerJob(input: Readonly<{
   now: string;
   replayedJobIds?: ReadonlySet<string>;
   allowedTargets: ReadonlySet<string>;
+  trustedPublicKeyPem?: string;
 }>): PrivateRunnerAdmission {
   const { job } = input;
   if (!validShape(job)) return { admitted: false, reason: "invalid_job" };
+  if (input.trustedPublicKeyPem !== undefined && !verifyPrivateRunnerJobSignature(job, input.trustedPublicKeyPem)) return { admitted: false, reason: "invalid_signature" };
   if (job.tenantId !== input.tenantId) return { admitted: false, reason: "tenant_mismatch" };
   if (job.runnerId !== input.runnerId) return { admitted: false, reason: "runner_mismatch" };
   const now = Date.parse(input.now);
