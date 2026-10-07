@@ -192,8 +192,8 @@ Next three independent batches:
 1. **QUAL-WEB-006** — authenticated organization/Pro browser, human
    screen-reader, and field-CWV evidence. Current Chrome session is only a
    Free account shell with no organization route; large-data repository
-   evidence is now recorded and PR #150 is green/open. No production write is
-   authorized by that absence.
+   evidence is now recorded and merged in Web `a64407d`. No production write
+   is authorized by that absence.
 2. **PLAN-WEB-014** — Razorpay test-mode method/lifecycle matrix. PR #149's
    code-side path is green/open, but the provider account's enabled methods and
    test credentials are not verified; no payment operation will be attempted.
@@ -207,7 +207,7 @@ The isolated Web dashboard monitoring integration fixture now exercises 45
 same-tenant released components across 20/20/5 pages and 125 advisory matches
 for one selected component. The repository returns the bounded 100-row detail
 projection with `matchesTruncated: true`; a foreign tenant's component remains
-excluded. PR #150 (`70680f8`) is pushed and open. Local focused integration,
+excluded. PR #150 (`70680f8`) is merged as `a64407d`. Local focused integration,
 tenant/security, typecheck, build, Drizzle schema, migration-order, and diff
 checks pass. Hosted workflow `37551537264`, Vercel, GitGuardian, and Preview
 Comments pass; GitHub reports PR merge state `CLEAN` and mergeable.

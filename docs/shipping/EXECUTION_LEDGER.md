@@ -240,7 +240,8 @@
 
 1. QUAL-WEB-006 organization/Pro browser, human screen-reader, and field-CWV
    evidence — current authenticated Chrome state is a Free account shell with
-   no organization route; PR #150 large-data evidence is green/open.
+   no organization route; PR #150 large-data evidence is green and merged as
+   `a64407d`.
 2. PLAN-WEB-014 Razorpay test-mode method/lifecycle matrix — provider enabled
    methods and sandbox credentials are not verified; no payment operation ran.
 3. GITHUB-WEB-004 / PLAN-CLI-003 authorized hosted qualification — external
