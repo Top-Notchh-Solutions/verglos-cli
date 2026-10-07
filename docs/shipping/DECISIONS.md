@@ -819,3 +819,17 @@ each observed method has lifecycle and reconciliation evidence.
   deployment/browser mutation, or backlog checkbox change occurred. The
   deletion, payment, restore/rollback, reconciliation, and independent
   acceptance gates remain open.
+
+## QUAL-WEB-005 hold serialization · 2026-10-07
+
+- **Decision:** Use a user-scoped PostgreSQL transaction advisory lock as the
+  shared serialization boundary for hold activation/release and each
+  destructive deletion/terminal-receipt transaction. Recheck active holds
+  inside that boundary and return a bounded block reason.
+- **Reason:** A worker-level recheck alone could observe a hold only after an
+  earlier destructive transaction had already committed. Shared locking makes
+  the check and each protected mutation orderable without holding a database
+  connection across the complete worker attempt.
+- **Evidence:** Web PR #153 commit `85faba9`; focused tests **35/35** and
+  disposable PostgreSQL integration **1/1**. Verify `37633633802` completed
+  successfully at exact head. This is not full deletion acceptance.

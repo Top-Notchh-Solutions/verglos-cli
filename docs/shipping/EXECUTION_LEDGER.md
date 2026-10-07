@@ -4115,3 +4115,19 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
   qualification remain open. The viewport was restored; a five-second target
   monitor observed no page creation/destruction. No checkbox changed.
 - **Evidence:** `docs/shipping/evidence/qual-web-006-org-directory-mobile-focus-2026-10-07.md`.
+
+# 2026-10-07 — QUAL-WEB-005 hold serialization
+
+- **Batch:** Web PR #153, exact pushed head `85faba9d2e8569c285d631d1c7912753886d145b`.
+- **Result:** User-scoped advisory locking now serializes hold mutation with
+  supporting/hosted deletion and terminal receipt boundaries; active holds
+  block before mutation or completion.
+- **Verification:** Focused **35/35**, disposable PostgreSQL integration
+  **1/1**, typecheck, schema, ordered 35-migration, and diff checks pass.
+  Verify `37633633802` completed successfully at exact head; Vercel and
+  Preview Comments were also green.
+- **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
+  (77.9%)**. `QUAL-WEB-005` remains open.
+- **Boundary:** No production/provider/payment/database/deployment/deletion or
+  credential operation occurred. Lint was not accepted: `next lint` opened its
+  interactive ESLint setup prompt in the worktree.

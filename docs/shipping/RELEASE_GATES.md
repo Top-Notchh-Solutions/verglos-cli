@@ -968,3 +968,18 @@ bytes. This does not pass QUAL-WEB-006: keyboard traversal, human
 screen-reader review, focus-visible proof, field-CWV, authenticated data
 states, and large-data evidence remain open. No production mutation or
 checkbox change occurred.
+
+## QUAL-WEB-005 hold serialization · 2026-10-07
+
+Web PR #153 exact head `85faba9d2e8569c285d631d1c7912753886d145b` adds a
+user-scoped PostgreSQL advisory-lock boundary shared by hold activation/release
+and supporting/hosted deletion plus terminal receipt completion. Active holds
+are rechecked inside each protected transaction and cause a bounded worker
+block. Focused tests **35/35**, disposable PostgreSQL integration **1/1**,
+typecheck, schema, ordered 35-migration, and diff checks pass; hosted Verify
+`37633633802` completed successfully at exact head; Vercel and Preview
+Comments were also green. This strengthens but does not pass
+Gate 2/4/6 or accept `QUAL-WEB-005`: authenticated non-production E2E,
+approved dispositions, production migrations/cutover, reconciliation,
+restore/RPO, rollback, and independent acceptance remain open. No checkbox or
+production state changed.

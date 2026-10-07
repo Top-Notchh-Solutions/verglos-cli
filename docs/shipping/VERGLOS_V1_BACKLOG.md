@@ -1,8 +1,23 @@
 # Verglos V1 master execution backlog
 
-Updated: 2026-09-30
+Updated: 2026-10-07
 
 ## Current verified checkpoint · 2026-09-30
+
+QUAL-WEB-005 concurrency hardening (2026-10-07): Web PR #153 commit `85faba9`
+serializes hold activation/release with every destructive deletion transaction
+and terminal receipt through a user-scoped PostgreSQL advisory lock. Active
+holds are rechecked at supporting deletion, hosted-kind deletion, and
+completion; the worker blocks rather than claiming success. Focused deletion/
+hold tests pass 35/35, the disposable PostgreSQL integration passes 1/1,
+typecheck, schema/migration checks, and diff check pass. Hosted Verify
+`37633633802` completed successfully at exact head; Vercel and Preview
+Comments were also green. This is implementation/runtime
+evidence only; no checkbox changed and the authoritative count remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Authenticated deletion E2E,
+legal/customer-held disposition, production migration/cutover,
+reconciliation, restore/rollback, and independent acceptance remain open. No
+production/provider/payment/database/deployment operation occurred.
 
 Web PR #103 merged as `0a85f08` after hosted run `36686440312`, adding route-boundary qualification progress for QUAL-WEB-001. Every protected organization API method is probed with malformed, traversal-shaped, and zero-UUID organization identifiers; fixed denials, no identifier echo, and authorization-before-data-access are proven. This is progress only: modified/untrusted CLI behavior and complete list/search/export/cache/public/private coverage remain open. PR #102 remains held under the public truth/marketing freeze. No checkbox changes or production operations occurred.
 

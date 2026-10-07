@@ -510,3 +510,11 @@ but only one focusable link was present and programmatic focus did not prove a
 keyboard-visible indicator. Keyboard traversal, human/screen-reader review,
 authenticated data states, field-CWV, and large-data behavior remain
 unverified; keep the accessibility/performance gate open.
+
+R-QUAL-WEB-005 hold-boundary update (2026-10-07): Web PR #153 `85faba9`
+serializes hold mutation with each destructive deletion and terminal receipt
+using a user-scoped advisory lock, with focused and disposable-Postgres
+evidence. This reduces the hold/deletion race but does not resolve the wider
+QUAL-WEB-005 risks: authenticated non-production E2E, disposition and consent
+review, production migrations/cutover, reconciliation, restore/RPO, rollback,
+and independent acceptance remain open.

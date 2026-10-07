@@ -324,3 +324,17 @@ disposition, reconciliation, restore/rollback, and independent acceptance. The
 whole-product goal remains active; backlog remains **218 checked / 62 unchecked
 / 280 total (77.9%)**. No production, deletion, migration, deployment,
 provider, payment, browser, entitlement, or credential operation occurred.
+
+## 2026-10-07 deletion hold serialization
+
+Web PR #153 exact head `85faba9d2e8569c285d631d1c7912753886d145b` now shares a
+user-scoped PostgreSQL advisory lock between hold activation/release and every
+destructive deletion/terminal receipt boundary. Focused tests **35/35**,
+disposable PostgreSQL integration **1/1**, typecheck, schema, migration-order,
+and diff checks pass. Verify `37633633802` completed successfully at exact
+head; Vercel and Preview Comments were also green. This is
+not full deletion acceptance; authenticated E2E, legal/customer-held
+disposition, production migration/cutover, reconciliation, restore/rollback,
+and independent review remain open. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. No production/provider/
+payment/database/deployment/deletion/credential operation occurred.

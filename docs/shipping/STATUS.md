@@ -2885,3 +2885,20 @@ Programmatic focus is not keyboard/screen-reader evidence, so no focus pass is
 claimed. The viewport was restored and a five-second monitor saw no page-target
 churn. `QUAL-WEB-006` remains open; no checkbox changed. Evidence:
 `docs/shipping/evidence/qual-web-006-org-directory-mobile-focus-2026-10-07.md`.
+
+# 2026-10-07 — QUAL-WEB-005 hold serialization
+
+Web PR #153 commit `85faba9` adds a user-scoped PostgreSQL advisory-lock
+boundary shared by hold activation/release, supporting deletion, hosted-kind
+deletion, and terminal receipt completion. Active holds now block each
+destructive boundary and the worker persists a bounded blocked result.
+Focused tests pass **35/35**; the disposable PostgreSQL integration passes
+**1/1**; typecheck, schema check, ordered 35-migration check, and diff check
+pass. Hosted Verify `37633633802` completed successfully at exact head;
+Vercel and Preview Comments were also green. `QUAL-WEB-005`
+remains open for authenticated non-production E2E, legal/customer-held
+disposition, production migrations/cutover, reconciliation, restore/RPO,
+rollback, and independent acceptance. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. No production/provider/
+payment/database/deployment/deletion operation occurred. Evidence:
+`docs/shipping/evidence/qual-web-005-hold-serialization-2026-10-07.md`.

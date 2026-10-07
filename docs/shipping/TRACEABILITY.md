@@ -2259,3 +2259,19 @@ and no buttons were present. Desktop layout/style/task/heap metrics were
 evidence; keyboard, human screen-reader, field-CWV, authenticated data, and
 large-data acceptance remain open. No checkbox changed. Evidence:
 `docs/shipping/evidence/qual-web-006-org-directory-mobile-focus-2026-10-07.md`.
+
+## QUAL-WEB-005 hold serialization · 2026-10-07
+
+- **Implementation:** Web PR #153 commit `85faba9` makes hold activation,
+  release, supporting deletion, hosted-kind deletion, and terminal receipt
+  completion share a user-scoped PostgreSQL transaction advisory lock.
+- **Verification:** Focused tests **35/35**, isolated PostgreSQL integration
+  **1/1**, typecheck, schema check, ordered 35-migration validation, and diff
+  check pass. Hosted Verify `37633633802` completed successfully at exact
+  head; Vercel and Preview Comments were also green.
+- **Disposition:** Active holds block destructive boundaries and completion;
+  the worker records a bounded block rather than success. This strengthens
+  QUAL-WEB-005 but does not accept it. Authenticated non-production E2E,
+  disposition/reconciliation, production migration, restore/rollback, and
+  independent acceptance remain open. No checkbox changed; backlog remains
+  **218 checked / 62 unchecked / 280 total (77.9%)**.
