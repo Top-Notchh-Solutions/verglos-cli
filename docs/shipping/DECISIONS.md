@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## Serialized PostgreSQL qualification path · 2026-10-07
+
+- **Decision:** Use the repository's existing `test:serial` command as the
+  authoritative local PostgreSQL qualification path while fixtures share one
+  disposable database. Do not credit a parallel shared-database run that can
+  race on extension/schema setup.
+- **Evidence:** Pretest 48/48, configured Web suite 867/867 with one
+  intentional migrated-billing skip, and separate migrated billing integration
+  1/1. The prior queue/worker failures do not reproduce serially.
+- **Boundary:** This is a local test execution decision, not production or
+  release acceptance. No gate or backlog checkbox changed.
+
 ## Shared test-database initialization · 2026-10-07
 
 - **Decision:** Do not count the concurrent full Web PostgreSQL run as green

@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## Web serial PostgreSQL qualification · 2026-10-07
+
+- **Result:** The existing serial harness passes pretest 48/48 and the
+  configured Web suite 867/867 with one intentional billing-ledger skip. The
+  separately migrated billing baseline passes 1/1 after all current migrations
+  apply to a synthetic database.
+- **Interpretation:** This resolves the local serial qualification path and
+  explains the prior parallel-run failures; it is not hosted/provider/
+  production acceptance and does not close a backlog item or release gate.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-serial-postgres-suite-2026-10-07.md`.
+
 ## Web PostgreSQL suite isolation qualification · 2026-10-07
 
 - **Evidence:** The aggregate full Web PostgreSQL run stalled and is not

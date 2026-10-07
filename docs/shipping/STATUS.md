@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Web serial PostgreSQL qualification
+
+The repository's existing `test:serial` harness completed the Web PostgreSQL
+qualification path against a fresh temporary Docker database: pretest 48/48,
+configured suite 867 passed, 0 failed, 1 intentional migrated-billing skip.
+The separate migrated-baseline billing integration then passed 1/1 after all
+current migrations applied successfully. The earlier parallel-run failures
+were not reproduced in serial execution. Private evidence:
+`docs/shipping/evidence/qual-web-serial-postgres-suite-2026-10-07.md`.
+This improves local qualification evidence but closes no product acceptance or
+release gate. No production operation occurred. Backlog remains **218 checked /
+62 unchecked / 280 total**.
+
 ## 2026-10-07 · Web PostgreSQL suite isolation qualification
 
 The attempted full Web PostgreSQL-backed `pnpm test` run was stopped after

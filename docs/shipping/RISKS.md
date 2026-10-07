@@ -1,10 +1,12 @@
 # Verglos V1 risk register
 
 Latest R-046 update (2026-10-07): the full Web PostgreSQL-backed suite is not
-yet qualification-green because parallel test workers can race while creating
-shared `pgcrypto` setup and can leave an integration worker unresolved. The
-affected queue and usage tests pass when isolated, but the aggregate result is
-not credited. This remains an open release-qualification/test-harness risk;
+authoritative when parallel test workers share mutable fixture state: they can
+race while creating shared `pgcrypto` setup and leave an integration worker
+unresolved. The existing serialized qualification path now passes 867/867
+configured tests plus the separately migrated billing integration 1/1, so the
+local release evidence is controlled when serialized. The parallel invocation
+remains non-authoritative and the risk remains open for CI/harness consistency;
 no production operation occurred.
 
 Latest R-044 update (2026-10-07): Web PR #149 implements the hosted order

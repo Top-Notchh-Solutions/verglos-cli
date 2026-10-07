@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · Web serial PostgreSQL qualification
+
+- **Repository:** Web `main` `cbc0f5a89179995569308695419d4578c57ce716`; no
+  source change.
+- **Verification:** Existing `pnpm test:serial` with a fresh temporary Docker
+  PostgreSQL database passed pretest 48/48 and the configured suite 867/867
+  with one intentional billing-ledger skip. A separately migrated synthetic
+  legacy baseline applied all current migrations and billing integration passed
+  1/1.
+- **Resolution:** The previously observed queue/worker failures do not
+  reproduce under the serialized qualification path. Parallel shared-database
+  execution remains unsuitable evidence and is not credited.
+- **Acceptance:** No backlog checkbox or release gate changed. Backlog remains
+  218 checked / 62 unchecked / 280 total.
+- **Boundary:** Temporary Docker databases only; no production/database/provider/
+  payment/deployment/migration/credential/customer operation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-serial-postgres-suite-2026-10-07.md`.
+
 ## 2026-10-07 · Web PostgreSQL suite isolation qualification
 
 - **Aggregate:** The full Web PostgreSQL-backed `pnpm test` run used a fresh

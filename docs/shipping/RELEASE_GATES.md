@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## Web serial PostgreSQL qualification · 2026-10-07
+
+The existing `test:serial` path passes pretest 48/48 and configured Web tests
+867/867 with one intentionally skipped migrated-billing test. A separate
+synthetic migrated baseline passes billing integration 1/1. This qualifies the
+local serialized test path only; parallel shared-database execution remains
+non-authoritative, and no product, hosted, provider, production, or release
+gate is closed by this batch.
+
 ## Web PostgreSQL suite isolation qualification · 2026-10-07
 
 The full PostgreSQL-backed Web suite was attempted but stalled and is not
