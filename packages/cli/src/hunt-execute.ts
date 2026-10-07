@@ -1,6 +1,6 @@
 import { constants } from "node:fs";
 import { lstat, open } from "node:fs/promises";
-import { ApprovalReceiptSchema, parseHuntRecipe, parseHuntRecipeTrustPolicy, type ScanResult } from "@verglos/shared";
+import { ApprovalReceiptSchema, huntRecipeTrustPolicyDigest, parseHuntRecipe, parseHuntRecipeTrustPolicy, verifyHuntRecipe, type ScanResult } from "@verglos/shared";
 import { loadHuntRuntime, type HuntRuntimeLoader } from "./hunt-runtime.js";
 
 const MAX_INPUT_BYTES = 8 * 1024 * 1024;
@@ -55,7 +55,10 @@ export async function executeHuntRecipe(
     if (!supported.supported) throw new Error(`recipe is not in the supported A1 catalog (${supported.reason})`);
     const trust = parseHuntRecipeTrustPolicy(trustValue);
     const approval = ApprovalReceiptSchema.parse(approvalValue);
-    const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: new Date().toISOString() };
+    const executionAt = new Date().toISOString();
+    const trustVerification = verifyHuntRecipe(recipe, trust, executionAt);
+    if (!trustVerification.trusted) throw new Error(`recipe trust verification failed: ${trustVerification.reason}`);
+    const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: executionAt };
     if (recipe.targetSubjectId !== input.subjectId || recipe.ruleId !== input.ruleId) throw new Error("recipe subject/rule does not match the requested execution binding");
     const result = await runtime.runHunt(report, {
       adapter: new runtime.RestrictedProcessAdapter(recipe),
@@ -66,8 +69,20 @@ export async function executeHuntRecipe(
     });
     const projection = {
       status: "completed",
+      executionAuthorized: true,
       recipeId: recipe.recipeId,
       recipeDigest: supported.recipeDigest,
+      trustPolicyDigest: huntRecipeTrustPolicyDigest(trust),
+      recipeTrust: {
+        verified: true,
+        feedId: trustVerification.feedId,
+        feedOrigin: trustVerification.origin,
+        feedDigest: trustVerification.feedDigest,
+        recipeDigest: trustVerification.recipeDigest,
+        license: { id: trustVerification.license.licenseId, source: trustVerification.license.source, textDigest: trustVerification.license.textDigest },
+        legalClearance: false,
+        limitation: trustVerification.limitation,
+      },
       sandbox: result.sandbox,
       outcomes: result.outcomes.map((outcome) => ({ findingId: outcome.findingId, verdict: outcome.verdict, canonicalVerdict: outcome.canonicalVerdict, reason: outcome.reason, durationMs: outcome.durationMs, evidenceDigest: outcome.evidenceDigest, executionStatus: outcome.executionStatus, assurance: outcome.assurance })),
     };
