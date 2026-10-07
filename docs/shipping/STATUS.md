@@ -3122,6 +3122,14 @@ deployment action was taken. This confirms production has not cut over to the
 merged hosted-checkout code; PLAN-WEB-013/014/015 remain open. Evidence:
 `docs/shipping/evidence/live-checkout-still-qr-only-2026-10-07.md`.
 
+The read-only production Razorpay method preflight returned HTTP 401
+`BAD_REQUEST_ERROR` from `payments.fetchPaymentMethods()` and the Vercel
+Production variable inventory still lacks `RAZORPAY_ENABLED_PAYMENT_METHODS`.
+The deployment from main `8b843da` therefore failed runtime-config validation;
+no method list was guessed and no deployment promotion or payment action was
+taken. PLAN-WEB-013/014/015 remain open. Evidence:
+`docs/shipping/evidence/razorpay-production-method-preflight-2026-10-07.md`.
+
 Web PR #149 exact head `e46299a` subsequently merged as `8b843da` after hosted
 typecheck/schema, Vercel, and Preview Comments passed. This merges the
 code-side hosted checkout/payment-catalog phase only; PLAN-WEB-011/012/013/014/

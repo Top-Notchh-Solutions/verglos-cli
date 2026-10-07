@@ -4413,6 +4413,19 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
   changed.
 - **Evidence:** `docs/shipping/evidence/live-checkout-still-qr-only-2026-10-07.md`.
 
+# 2026-10-07 — Production Razorpay method preflight remains unauthenticated
+
+- **Read-only result:** Vercel Production has no
+  `RAZORPAY_ENABLED_PAYMENT_METHODS`; the SDK method lookup using the pulled
+  live-key pair returned HTTP **401 `BAD_REQUEST_ERROR`**. No provider payload
+  or secret was retained.
+- **Deployment result:** Vercel’s production build from main `8b843da` failed
+  runtime-config validation before build completion because the method variable
+  is absent.
+- **Disposition:** Do not guess the production method list or promote the
+  hosted-checkout cutover. PLAN-WEB-013/014/015 remain open.
+- **Evidence:** `docs/shipping/evidence/razorpay-production-method-preflight-2026-10-07.md`.
+
 # 2026-10-07 — Web PR #149 merged after hosted verification
 
 - **Merge:** Web PR #149 exact head `e46299a` merged as `8b843da` after hosted

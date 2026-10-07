@@ -259,6 +259,17 @@ or mutation request was made. This confirms Web PR #149 is not deployed and
 does not qualify any payment gate. PLAN-WEB-011/012/013/014/015 remain open;
 no production cutover or payment operation is authorized by this observation.
 
+## Razorpay production method preflight · 2026-10-07
+
+The linked Vercel Production environment has a live-key prefix, but the
+read-only Razorpay SDK `payments.fetchPaymentMethods()` request returned HTTP
+401 `BAD_REQUEST_ERROR`. No provider payload or secret was retained. The
+account-enabled production method set therefore remains unknown; do not guess
+`RAZORPAY_ENABLED_PAYMENT_METHODS` or promote a production checkout cutover.
+The deployment built from Web main `8b843da` failed at runtime-config validation
+because that variable is absent. Payment and deployment gates remain open.
+Evidence: `docs/shipping/evidence/razorpay-production-method-preflight-2026-10-07.md`.
+
 ## QUAL-CLI-006 official in-toto artifact binding · 2026-10-07
 
 The exact merged CLI head `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` passed

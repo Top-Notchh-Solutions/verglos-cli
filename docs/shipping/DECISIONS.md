@@ -309,6 +309,18 @@
 - **Boundary:** No payment, provider, database, entitlement, deployment, or
   production configuration operation occurred.
 
+## Razorpay production method preflight · 2026-10-07
+
+- **Decision:** Keep production payment configuration and cutover closed. The
+  account-enabled method set must be obtained from a valid provider response;
+  it must not be inferred from Test Mode UI, documentation, or code catalogs.
+- **Evidence:** Vercel Production has no `RAZORPAY_ENABLED_PAYMENT_METHODS`;
+  the read-only SDK method lookup with the pulled live-key pair returned HTTP
+  401 `BAD_REQUEST_ERROR`. The deploy from main `8b843da` consequently failed
+  runtime-config validation before build completion.
+- **Boundary:** No secret value, provider payload, payment, deployment
+  promotion, environment mutation, database, or customer-state write occurred.
+
 ## QUAL-CLI-006 official in-toto artifact binding · 2026-10-07
 
 - **Decision:** Record the official in-toto result as a qualified artifact
