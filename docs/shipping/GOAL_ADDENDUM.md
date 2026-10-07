@@ -1,5 +1,13 @@
 # Goal addendum — 2026-10-07
 
+QUAL-WEB-006 browser evidence was captured through the approved Chrome DevTools
+session: authenticated Free `/account`, desktop/mobile Accessibility and Best
+Practices 100, Tab focus to Overview, clean console, 200/304 navigation,
+LCP 1,111ms, CLS 0.00, and no CrUX field data. No organization or paid
+entitlement was available, so paid/org runtime, human screen-reader,
+large-data, and field-CWV gates remain open. Backlog remains **218 checked /
+62 unchecked / 280 total**; no checkbox changed.
+
 CLI PR #75 exact head `c4beecb3525256cd2956660af8e3e6b49292b65f` now removes
 the public CLI's static private Hunt dependency and validates an optional,
 separately provisioned runtime with fail-closed exit-78 behavior. Hunt build,

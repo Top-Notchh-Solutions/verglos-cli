@@ -1,5 +1,12 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 authenticated account browser probe · 2026-10-07
+
+The authenticated Free `/account` surface passes the captured automated
+accessibility/performance observations, but the account has no organization or
+paid entitlement. Paid/org runtime, human screen-reader, large-data, and field
+CWV gates remain unproven; no release gate or backlog checkbox closed.
+
 ## HUNT-008/HUNT-009/QUAL-CLI-004 public runtime boundary · 2026-10-07
 
 CLI PR #75 exact head `c4beecb3525256cd2956660af8e3e6b49292b65f` removes the

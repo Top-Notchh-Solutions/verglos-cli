@@ -1,5 +1,13 @@
 # Verglos V1 risk register
 
+Latest R-046/QUAL-WEB-006 update (2026-10-07): the authenticated Free account
+surface was probed through the approved Chrome DevTools session. Automated
+desktop/mobile Lighthouse Accessibility and Best Practices scored 100; the
+trace recorded LCP 1,111ms and CLS 0.00, but no organization, paid entitlement,
+screen-reader session, large dataset, or CrUX field data was available. The
+browser evidence reduces only the Free authenticated-surface uncertainty;
+QUAL-WEB-006 remains release-blocking/open.
+
 Latest R-009/HUNT-009 update (2026-10-07): CLI `c4beecb` removes the public
 archive's static private `@verglos/hunt` dependency and adds a validated,
 fail-closed optional runtime boundary. Local CLI, archive, package-content, and

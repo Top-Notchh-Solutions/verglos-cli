@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-006 authenticated account browser probe
+
+Chrome DevTools MCP verified the approved debug session and authenticated
+`/account` page. Desktop/mobile Lighthouse snapshots reported Accessibility
+100, Best Practices 100, and SEO 100; a Tab action focused the Overview link;
+console had no warnings/errors; account navigation returned 200/304. The
+unthrottled trace reported LCP 1,111ms and CLS 0.00, with no CrUX field data.
+The account is Free with no organization, so paid/org runtime, human
+screen-reader, large-data, and field-CWV evidence remain open. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total**. Private
+evidence: `docs/shipping/evidence/qual-web-006-auth-account-browser-2026-10-07.md`.
+
 ## 2026-10-07 · Hunt public/private runtime boundary
 
 CLI commit `c4beecb` removes the public CLI's static private Hunt dependency

@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 authenticated account browser probe · 2026-10-07
+
+- Chrome DevTools MCP verified the approved authenticated session. `/account`
+  rendered named navigation/main structure, Tab focus reached Overview, and
+  console/network checks were clean (200/304). Lighthouse desktop/mobile
+  Accessibility and Best Practices were 100; trace LCP was 1,111ms and CLS
+  0.00, with no CrUX data.
+- The session is Free with no organization, so paid/org runtime, human
+  screen-reader, large-data, and field-CWV evidence remain missing. No
+  checkbox changed. See
+  `docs/shipping/evidence/qual-web-006-auth-account-browser-2026-10-07.md`.
+
 ## HUNT-008/HUNT-009/QUAL-CLI-004 public runtime boundary · 2026-10-07
 
 - CLI `c4beecb` removes the public archive's static private Hunt dependency

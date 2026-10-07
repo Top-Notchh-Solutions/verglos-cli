@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-006 authenticated account browser probe · 2026-10-07
+
+- **Decision:** Record the browser results as partial authenticated-surface
+  evidence only. Do not promote them to full accessibility/performance
+  acceptance because the session has no paid entitlement or organization.
+- **Evidence:** Lighthouse desktop/mobile Accessibility 100 and Best Practices
+  100; Tab focus reached Overview; console clean; navigation 200/304; LCP
+  1,111ms; CLS 0.00; no CrUX field data.
+- **Boundary:** QUAL-WEB-006 remains open for paid/org runtime, human
+  screen-reader, large-data, and field-CWV evidence. No entitlement, payment,
+  database, deployment, or production configuration change.
+
 ## Hunt public/private runtime boundary · 2026-10-07
 
 - **Decision:** Accept the optional-runtime boundary as a real packaging

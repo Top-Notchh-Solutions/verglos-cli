@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-006 authenticated account browser probe
+
+- **Runtime:** Approved Chrome DevTools page 13 authenticated on `/account`;
+  no sensitive headers, cookies, credentials, or response bodies captured.
+- **Observed:** Accessibility/Best Practices/SEO 100 on desktop and mobile
+  Lighthouse snapshots; Tab focus reached Overview; console clean; account
+  navigation 200/304; LCP 1,111ms; CLS 0.00; no CrUX field data.
+- **Limitations:** Current account is Free and has no organization. Paid/org,
+  human screen-reader, large-dataset, and field-CWV qualification remain open.
+  No entitlement/payment/database/deployment change or checkbox change.
+
 ## 2026-10-07 · Hunt public/private runtime boundary
 
 - **Code:** CLI `c4beecb` removes the public `@verglos/hunt` workspace
