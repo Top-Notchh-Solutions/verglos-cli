@@ -1541,3 +1541,15 @@ operational acceptance path: durable hold authority, customer-held digest
 registration, bounded worker, row-count/audit reconciliation, restore
 rehearsal, and authenticated non-production E2E remain required. Hosted
 workflow `37559045448` was pending at capture; no checkbox changed.
+
+# 2026-10-07 · QUAL-WEB-005 durable hold authority substrate
+
+PR #153 head `adf9a23b395a2c35208bd7d9cfcc7973300c2827` now traces the
+deletion boundary to an unapplied durable hold schema and pure lifecycle
+contracts. The substrate records typed hold kind, actor, reason, expiry, and
+explicit release evidence; it does not execute deletion. New tests pass 3/3,
+combined focus 25/25, serial 846 pass / 22 explicit skips, typecheck/schema/
+migration/diff/build pass, and the journal now validates 30 migrations. Hosted
+checks for the new head were in progress at capture. Worker, customer-held
+digest proof, reconciliation, restore rehearsal, and authenticated E2E remain
+unproven.

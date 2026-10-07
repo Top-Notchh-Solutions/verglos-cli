@@ -86,6 +86,15 @@ method/lifecycle evidence, production reconciliation, restore/rollback,
 credential rotation, and release authorization remain open. No production
 operation occurred.
 
+Hold-authority update (2026-10-07): PR #153 head
+`adf9a23b395a2c35208bd7d9cfcc7973300c2827` adds the unapplied durable deletion
+hold schema and explicit release contract. Local hold 3/3, combined focus
+25/25, serial 846 pass / 22 explicit skips, typecheck/schema/migration/diff,
+and 38-page build pass. Hosted checks for the new head were in progress at
+capture. This does not pass Gate 2/4/6 or accept `QUAL-WEB-005`; the worker,
+customer-held digest proof, reconciliation, restore rehearsal, and
+non-production E2E remain open.
+
 Hosted result update (2026-10-07): PR #153 workflow `37559045448` reached
 terminal green, with GitGuardian, Vercel Preview Comments, and Vercel passing.
 This only verifies the substrate checks; `QUAL-WEB-005` remains open and the

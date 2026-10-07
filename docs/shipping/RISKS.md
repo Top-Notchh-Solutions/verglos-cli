@@ -192,3 +192,11 @@ legal/customer-held authority, a user-scoped bounded worker, row-count
 reconciliation, terminal audit receipt, restore rehearsal, or
 non-production end-to-end evidence. `QUAL-WEB-005` remains critical and open;
 no destructive execution is permitted.
+
+R-048 update (2026-10-07, hold substrate): PR #153 now contains a durable
+hold schema and explicit release contract, but the migration is unapplied and
+there is no operational writer, worker, customer-held digest proof, row-count
+reconciliation, audit receipt, restore rehearsal, or non-production E2E. The
+critical deletion risk remains open and the hold table must not be treated as
+production authority until its migration and writer receive separate
+preflight, authorization, and post-write evidence.

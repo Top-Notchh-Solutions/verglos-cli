@@ -102,3 +102,14 @@ production/database/provider/payment/browser mutation or destructive action
 occurred. Durable hold authority, customer-held digest registration, bounded
 worker, reconciliation/audit receipt, restore rehearsal, and authenticated
 non-production E2E remain required.
+
+# 2026-10-07 · QUAL-WEB-005 hold authority substrate
+
+The active deletion phase now includes a durable, versioned hold authority
+contract and explicit release semantics on Web PR #153, with migration `0029`
+kept unapplied. Local hold 3/3, combined focus 25/25, serial 846 pass / 22
+explicit skips, typecheck/schema/migration/diff/build pass. Hosted checks were
+in progress at capture. The backlog remains **218 checked / 62 unchecked /
+280 total**; no production or destructive operation occurred. Worker,
+customer-held digest proof, reconciliation/audit receipt, restore rehearsal,
+and authenticated non-production E2E remain required.

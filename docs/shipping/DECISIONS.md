@@ -229,3 +229,16 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
   digest registration, migration, production write, payment action, browser
   mutation, or checkbox change is authorized by this substrate. The existing
   `QUAL-WEB-005` boundary record remains controlling.
+
+## Durable deletion hold authority substrate · 2026-10-07
+
+- **Decision:** Add the durable hold table and pure release contract as a
+  prerequisite, but keep deletion execution disabled. A hold is active only
+  while unreleased and unexpired; release requires an actor, timestamp, and
+  bounded reason.
+- **Evidence:** Web PR #153 head
+  `adf9a23b395a2c35208bd7d9cfcc7973300c2827`; local hold tests 3/3, combined
+  focus 25/25, serial 846/22/0, typecheck/schema/migration/diff/build pass.
+- **Boundary:** migration `0029` is not applied; no API, cron worker,
+  destructive deletion, customer-held digest proof, restore rehearsal, or
+  checkbox acceptance is supplied by this substrate.

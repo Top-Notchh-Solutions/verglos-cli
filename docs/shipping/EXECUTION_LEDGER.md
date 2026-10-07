@@ -2648,6 +2648,27 @@ changed and no checkbox was closed.
 - **Boundary:** no production/provider/database/payment/browser mutation; no
   checkbox changed; **218 checked / 62 unchecked / 280 total**.
 
+# 2026-10-07 — QUAL-WEB-005 durable hold authority substrate
+
+- **Batch:** persist the reviewed legal/contract/customer-deletion hold
+  authority and explicit release semantics on the existing PR #153 boundary.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #153 head
+  `adf9a23b395a2c35208bd7d9cfcc7973300c2827`; migration `0029` is staged in
+  source only and is not applied to production.
+- **Local:** hold tests **3/3**, combined deletion focus **25/25**, serial
+  **846 pass / 22 explicit skips / 0 fail**, typecheck/schema pass, ordered
+  migration check **30**, diff check pass, and 38-page build pass.
+- **Hosted:** checks for the new head were in progress at capture; no hosted
+  acceptance or merge claim made.
+- **Boundary:** no production/database/provider/payment/deployment write,
+  migration, deletion, browser mutation, or secret handling occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-hold-authority-pr153-2026-10-07.md`.
+- **Next:** implement the bounded worker only after the customer-held digest
+  contract and row-level reconciliation/restore boundaries are reviewed.
+
 # 2026-10-07 — QUAL-WEB-005 versioned inventory substrate
 
 - **Batch:** add the reviewed prerequisite inventory and fail-closed gate for

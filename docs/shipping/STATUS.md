@@ -1709,3 +1709,17 @@ Hosted result update: workflow `37559045448` reached green, with GitGuardian,
 Vercel Preview Comments, and Vercel also passing. PR #153 remains open as
 substrate only; it was not merged or promoted because the broader deletion,
 restore, rollback, provider, and release gates remain unresolved.
+
+# 2026-10-07 · QUAL-WEB-005 durable hold authority substrate
+
+PR #153 advanced to `adf9a23b395a2c35208bd7d9cfcc7973300c2827`. It adds the
+unapplied `0029_account_deletion_holds.sql` migration, schema relations, and
+pure admission/release/active-hold contracts. New hold tests pass 3/3;
+combined deletion focus passes 25/25; the configured serial suite passes
+846/846 with 22 explicit skips; typecheck, schema check, ordered migration
+check (30), diff check, and 38-page preview build pass. Hosted checks for the
+new head were in progress at capture. This remains substrate only:
+`QUAL-WEB-005` is unchecked, and worker, digest registration, reconciliation,
+restore, and non-production E2E evidence remain open. No production or
+destructive operation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-005-hold-authority-pr153-2026-10-07.md`.
