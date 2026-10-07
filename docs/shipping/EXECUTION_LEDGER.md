@@ -3563,3 +3563,20 @@ before enabling any destructive adapter.
 - **Backlog:** PLAN-WEB-014 attempted but open; count remains **218 checked /
   62 unchecked / 280 total (77.9%)**.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-card-sandbox-contact-2026-10-07.md`.
+# 2026-10-07 — HUNT-009 execution entitlement gate
+
+- **Batch:** Close the authorization gap on the direct supported-recipe
+  execution path without weakening recipe, approval, catalog, binding, or
+  runtime checks.
+- **Implementation:** CLI commit `71de29f` requires the paid `hunt.critical`
+  capability before execution input reads; merge commit `17d0813` reconciles
+  the branch with current `origin/main`.
+- **Verification:** Focused Hunt/process suite **54/54 pass**; package
+  typecheck and diff check pass; Free-plan process regression emits bounded
+  `CAPABILITY_REQUIRED` JSON and performs no input reads.
+- **PR:** #76, exact head `17d0813737cda980ccb366c5adf948bda2e293a3`, mergeable;
+  hosted matrix pending.
+- **Backlog:** HUNT-009 attempted but open; count remains **218 checked / 62
+  unchecked / 280 total (77.9%)**.
+- **Boundary:** No production, customer, provider, database, deployment, or
+  private-fixture operation occurred.

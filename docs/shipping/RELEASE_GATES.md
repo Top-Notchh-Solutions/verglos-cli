@@ -827,3 +827,9 @@ Checkout probe reached the hosted card form, but provider contact validation
 blocked continuation before the mock success/failure page. No payment,
 webhook, entitlement, or production operation occurred. PLAN-WEB-014 remains
 release-blocking and no checkbox changed.
+Hunt gate update (2026-10-07): CLI PR #76 exact head
+`17d0813737cda980ccb366c5adf948bda2e293a3` adds paid `hunt.critical`
+enforcement before supported-recipe execution input reads. Local focused
+Hunt/process tests 54/54 and typecheck pass; hosted cross-platform checks are
+pending. This closes no release gate: trusted/licensed recipe provenance,
+independent review, and complete Hunt qualification remain open.

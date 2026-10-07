@@ -2427,3 +2427,15 @@ to `about:blank`; production `/orgs` was untouched. PLAN-WEB-014 and dependent
 payment gates remain open. Backlog remains **218 checked / 62 unchecked / 280
 total (77.9%)**. Private evidence:
 `docs/shipping/evidence/plan-web-014-card-sandbox-contact-2026-10-07.md`.
+## 2026-10-07 · HUNT-009 execution entitlement gate
+
+CLI PR #76 adds a paid `hunt.critical` capability check before the
+`hunt --execute-*` path reads or executes any report, recipe, trust store, or
+approval input. The existing signed-recipe, approval, supported-catalog,
+binding, and bounded-runtime gates remain in force. Focused Hunt/process tests
+pass **54/54** and package typecheck passes. PR #76 exact head is
+`17d0813737cda980ccb366c5adf948bda2e293a3`, mergeable, with hosted matrix
+pending. HUNT-009 remains open for hosted verification, trusted/licensed
+recipe provenance, and independent review. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/hunt-009-entitlement-gate-pr76-2026-10-07.md`.

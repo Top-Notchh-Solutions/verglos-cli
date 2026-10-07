@@ -2062,3 +2062,10 @@ rejected the synthetic contact input before the flow could reach its mock
 success/failure page. No payment or webhook evidence exists; this is an
 incomplete provider probe and PLAN-WEB-014 remains open. See
 `docs/shipping/evidence/plan-web-014-card-sandbox-contact-2026-10-07.md`.
+# 2026-10-07 · HUNT-009 execution entitlement gate
+
+PR #76 traces `hunt.critical` entitlement enforcement to the direct Hunt
+execution command before bounded input reads. The Free-plan process regression
+and focused 54/54 suite prove the denial boundary; signed recipe, approval,
+catalog, binding, and runtime checks remain downstream. Hosted verification and
+trusted/licensed recipe provenance are still missing.

@@ -730,3 +730,14 @@ each observed method has lifecycle and reconciliation evidence.
   sandbox rejected the synthetic contact input before continuation. The single
   persistent page was restored to `about:blank` and production was untouched.
 - **Boundary:** No payment or webhook was produced; PLAN-WEB-014 remains open.
+## HUNT-009 execution entitlement gate · 2026-10-07
+
+- **Decision:** Require `hunt.critical` at the CLI execution boundary before
+  reading any execution input. A paid plan alone is insufficient; signed
+  recipe, approval, supported catalog, exact bindings, and bounded runtime
+  gates remain required.
+- **Evidence:** PR #76 exact head `17d0813737cda980ccb366c5adf948bda2e293a3`;
+  focused 54/54; typecheck passes; Free-plan process denial is verified.
+- **Boundary:** This closes a code-side authorization gap only. HUNT-009 and
+  HUNT-008 remain open for hosted/requalification, trusted/licensed provenance,
+  and independent review.
