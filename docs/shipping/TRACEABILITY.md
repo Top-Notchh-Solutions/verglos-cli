@@ -2055,3 +2055,10 @@ Hosted Verify run `37611750797` passed at exact PR #149 head
 `f734acc8d4b03625b96cb90b628be04d4713d91d`, with GitGuardian, Vercel, and
 Preview Comments also green. The trace remains presentation/code-side only;
 provider lifecycle and reconciliation are not evidenced.
+# 2026-10-07 · PLAN-WEB-014 card sandbox probe
+
+The test-mode hosted Checkout path traces to the Cards UI, but the provider
+rejected the synthetic contact input before the flow could reach its mock
+success/failure page. No payment or webhook evidence exists; this is an
+incomplete provider probe and PLAN-WEB-014 remains open. See
+`docs/shipping/evidence/plan-web-014-card-sandbox-contact-2026-10-07.md`.

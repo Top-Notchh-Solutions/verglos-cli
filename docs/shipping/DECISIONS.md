@@ -722,3 +722,11 @@ each observed method has lifecycle and reconciliation evidence.
   passed Verify `37611750797` plus GitGuardian, Vercel, and Preview Comments.
   This permits code-side qualification only; it does not authorize merging
   while payment lifecycle and reconciliation gates remain open.
+## PLAN-WEB-014 card sandbox contact validation · 2026-10-07
+
+- **Decision:** Treat the card probe as incomplete provider UI evidence only;
+  do not claim success, failure, capture, or lifecycle acceptance.
+- **Evidence:** Cards rendered in Razorpay test-mode hosted Checkout, but the
+  sandbox rejected the synthetic contact input before continuation. The single
+  persistent page was restored to `about:blank` and production was untouched.
+- **Boundary:** No payment or webhook was produced; PLAN-WEB-014 remains open.

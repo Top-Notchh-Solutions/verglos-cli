@@ -2417,3 +2417,13 @@ pushed and hosted checks are pending at capture. Backlog remains **218 checked /
 62 unchecked / 280 total (77.9%)**. No production, database, provider,
 deployment, migration, or credential operation occurred.
 Hosted result addendum: PR #149 exact head `f734acc8d4b03625b96cb90b628be04d4713d91d` completed Verify run `37611750797` successfully; GitGuardian, Vercel deployment, and Preview Comments also passed. This confirms the Pay Later catalog correction is hosted-clean, not payment lifecycle acceptance. No checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+## 2026-10-07 · PLAN-WEB-014 card sandbox probe
+
+One bounded Razorpay test-mode hosted Checkout probe reused the existing
+`about:blank` CDP page and displayed Cards. The sandbox rejected the synthetic
+contact input before payment could continue, so no card authorization, capture,
+failure event, refund, webhook, or entitlement occurred. The page was restored
+to `about:blank`; production `/orgs` was untouched. PLAN-WEB-014 and dependent
+payment gates remain open. Backlog remains **218 checked / 62 unchecked / 280
+total (77.9%)**. Private evidence:
+`docs/shipping/evidence/plan-web-014-card-sandbox-contact-2026-10-07.md`.

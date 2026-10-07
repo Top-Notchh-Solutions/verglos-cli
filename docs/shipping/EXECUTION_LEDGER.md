@@ -3550,3 +3550,16 @@ before enabling any destructive adapter.
   `37611750797`; GitGuardian, Vercel, and Preview Comments passed. No
   checkbox changed because provider lifecycle/reconciliation evidence remains
   open.
+# 2026-10-07 — PLAN-WEB-014 card sandbox probe
+
+- **Batch:** Attempt one bounded test-mode hosted Cards flow without creating
+  or closing browser tabs.
+- **Result:** The existing persistent CDP page displayed Cards and accepted the
+  sandbox card fields, but provider contact validation rejected the synthetic
+  contact before continuation.
+- **Boundary:** No payment, authorization, capture, failure, refund, webhook,
+  entitlement, database, production, or credential operation occurred. Page
+  restored to `about:blank`; production `/orgs` was untouched.
+- **Backlog:** PLAN-WEB-014 attempted but open; count remains **218 checked /
+  62 unchecked / 280 total (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-card-sandbox-contact-2026-10-07.md`.

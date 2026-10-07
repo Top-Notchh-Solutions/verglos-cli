@@ -822,3 +822,8 @@ Hosted gate addendum (2026-10-07): PR #149 exact head
 GitGuardian, Vercel, and Preview Comments. The code-side gate is green, but
 PLAN-WEB-013/014/015 remain release-blocking for provider lifecycle and
 production reconciliation; no merge or production operation occurred.
+Payment qualification addendum (2026-10-07): a bounded test-mode Cards
+Checkout probe reached the hosted card form, but provider contact validation
+blocked continuation before the mock success/failure page. No payment,
+webhook, entitlement, or production operation occurred. PLAN-WEB-014 remains
+release-blocking and no checkbox changed.
