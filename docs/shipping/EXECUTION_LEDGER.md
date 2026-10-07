@@ -90,7 +90,10 @@
 
 - **Provider:** Official SDK `payments.fetchPaymentMethods()` with the current
   test credential pair returned HTTP 401 `BAD_REQUEST_ERROR` / authentication
-  failed. The call was read-only; no payment/provider mutation occurred.
+  failed, while read-only `/v1/orders` and `/v1/payments` calls with the same
+  pair returned HTTP 200. The 401 is endpoint-specific; the provider method
+  set remains unknown. All calls were read-only; no payment/provider mutation
+  occurred.
 - **Code:** PR #149 exact head payment suite passed **27/28**, with one
   explicit environment-gated ledger skip and zero failures. An explicit
   isolated catalog assertion exposed `upi`, `card`, `netbanking`, `wallet`,

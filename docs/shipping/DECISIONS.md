@@ -112,9 +112,11 @@
 - **Decision:** Keep the payment-method and lifecycle gates open until a valid
   test-account method response is obtained. Do not infer enabled methods from
   documentation or local configuration.
-- **Evidence:** SDK method lookup returned HTTP 401 authentication failure;
-  exact PR #149 payment tests passed 27/28 with one explicit environment-gated
-  skip; isolated config exposed five hosted method IDs.
+- **Evidence:** SDK method lookup returned HTTP 401 authentication failure,
+  while read-only `/v1/orders` and `/v1/payments` calls with the same test
+  pair returned HTTP 200; the 401 is endpoint-specific and the method set is
+  still unknown. Exact PR #149 payment tests passed 27/28 with one explicit
+  environment-gated skip; isolated config exposed five hosted method IDs.
 - **Boundary:** No live-key fallback, payment, refund, webhook, entitlement,
   database, deployment, or production operation occurred.
 

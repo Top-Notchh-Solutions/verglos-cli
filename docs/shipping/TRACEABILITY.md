@@ -61,12 +61,14 @@ production/provider evidence. See
 ## Razorpay method preflight · 2026-10-07
 
 The official SDK `payments.fetchPaymentMethods()` call returned HTTP 401
-`BAD_REQUEST_ERROR` / authentication failed with the current test credential
-pair. No payment mutation occurred. PR #149 exact-head payment tests passed
-27/28 with one explicit environment-gated skip; an isolated configuration
-check exposed UPI, card, netbanking, wallet, and EMI. This traces only to the
-implementation/configuration boundary; provider method and lifecycle evidence
-for PLAN-WEB-013/014/015 remain missing. See
+`BAD_REQUEST_ERROR` / authentication failed, while read-only `/v1/orders` and
+`/v1/payments` calls with the same test credential pair returned HTTP 200. The
+401 is endpoint-specific and does not invalidate the credential pair, but the
+provider method set remains unknown. No payment mutation occurred. PR #149
+exact-head payment tests passed 27/28 with one explicit environment-gated skip;
+an isolated configuration check exposed UPI, card, netbanking, wallet, and EMI.
+This traces only to the implementation/configuration boundary; provider method
+and lifecycle evidence for PLAN-WEB-013/014/015 remain missing. See
 `docs/shipping/evidence/razorpay-method-preflight-2026-10-07.md`.
 
 ## SCM/payment qualification batch · 2026-10-07

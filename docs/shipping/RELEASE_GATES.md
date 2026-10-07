@@ -55,12 +55,14 @@ backup/restore, or RPO. No production write occurred.
 ## Razorpay method preflight · 2026-10-07
 
 The official SDK method lookup with the current test credentials returned HTTP
-401 `BAD_REQUEST_ERROR` / authentication failed. The real account-enabled
-method set is therefore unknown. The PR #149 exact-head payment suite passed
-27/28 with one explicit environment-gated skip; a separate isolated catalog
-assertion exposed UPI, card, netbanking, wallet, and EMI. This keeps the
-provider-method and lifecycle gates open. No live-key fallback or provider,
-production, database, or deployment write occurred.
+401 `BAD_REQUEST_ERROR` / authentication failed, while a fresh read-only probe
+using the same pair returned HTTP 200 for `/v1/orders` and `/v1/payments`. The
+401 is therefore endpoint-specific, not proof that the credentials are
+invalid. The real account-enabled method set is still unknown. The PR #149
+exact-head payment suite passed 27/28 with one explicit environment-gated skip;
+a separate isolated catalog assertion exposed UPI, card, netbanking, wallet,
+and EMI. This keeps the provider-method and lifecycle gates open. No live-key
+fallback or provider, production, database, or deployment write occurred.
 
 ## SCM/payment qualification batch · 2026-10-07
 

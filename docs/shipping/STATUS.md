@@ -69,15 +69,17 @@ checkbox changed. Private evidence:
 
 ## 2026-10-07 · Razorpay method preflight and all-method config check
 
-The official Razorpay Node SDK method lookup returned HTTP 401
-`BAD_REQUEST_ERROR` / `Authentication failed` for the current test credential
-pair. The account-enabled method set therefore remains unknown; no live-key
-fallback or payment mutation was attempted. The exact PR #149 payment suite
-passed **27/28** with one explicit environment-gated skip and zero failures,
-and an isolated catalog check exposed five configured hosted methods (UPI,
-card, netbanking, wallet, EMI). This is implementation evidence only, not
-provider-method acceptance. PLAN-WEB-013/014/015 remain open; no checkbox
-changed. Private evidence:
+The official Razorpay method lookup returned HTTP 401
+`BAD_REQUEST_ERROR` / `Authentication failed`, but a fresh read-only probe
+using the same test credential pair returned HTTP 200 for `/v1/orders` and
+`/v1/payments`. The 401 is therefore endpoint-specific, not evidence that the
+credential pair is invalid. The account-enabled method set remains unknown;
+no live-key fallback or payment mutation was attempted. The exact PR #149
+payment suite passed **27/28** with one explicit environment-gated skip and
+zero failures, and an isolated catalog check exposed five configured hosted
+methods (UPI, card, netbanking, wallet, EMI). This is implementation and
+connectivity evidence only, not provider-method acceptance. PLAN-WEB-013/014/015
+remain open; no checkbox changed. Private evidence:
 `docs/shipping/evidence/razorpay-method-preflight-2026-10-07.md`.
 
 ## 2026-10-07 · SCM and payment qualification batch

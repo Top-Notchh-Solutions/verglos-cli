@@ -42,13 +42,13 @@ provider reconciliation, migration, backup/restore, deletion, or RPO. No
 production write occurred.
 
 Latest Razorpay method-preflight update (2026-10-07): the official SDK method
-lookup returned HTTP 401 authentication failure with the current test
-credential pair, leaving the account-enabled method set unknown. Local PR #149
-configuration supports five hosted method IDs and its baseline payment suite
-passed 27/28 with one explicit environment-gated skip, but this is not
-provider acceptance. Valid test credentials/account access and the complete
-method lifecycle matrix remain release-blocking; no live-key fallback or
-production operation occurred.
+lookup returned HTTP 401 authentication failure, while read-only `/v1/orders`
+and `/v1/payments` calls with the same test credential pair returned 200. The
+401 is endpoint-specific; the account-enabled method set remains unknown.
+Local PR #149 configuration supports five hosted method IDs and its baseline
+payment suite passed 27/28 with one explicit environment-gated skip, but this
+is not provider acceptance. The complete method lifecycle matrix remains
+release-blocking; no live-key fallback or production operation occurred.
 
 Latest SCM/payment qualification update (2026-10-07): exact Web `origin/main`
 passed the focused GitHub/SCM suite **48/48**, and a bounded test-mode
