@@ -525,7 +525,7 @@ queued as pending implementation batches. No checkbox changed.
   checked / 62 unchecked / 280 total.
 - **Boundary:** Mechanical release qualification only; LIC/DIST gates and
   publication remain open. No npm publish, tag, deployment, production, or
-  credential operation occurred.
+credential operation occurred.
 
 - **Evidence:** `docs/shipping/evidence/qual-cli-release-artifacts-2026-10-07.md`.
 
@@ -3638,4 +3638,19 @@ before enabling any destructive adapter.
   independent security review. HUNT-011 and QUAL-CLI-004 remain open.
 - **Backlog:** Count remains **218 checked / 62 unchecked / 280 total
   (77.9%)**. No production, provider, payment, database, deployment, or
+  credential operation occurred.
+
+# 2026-10-07 — PLAN-WEB-013 hosted method response contract
+
+- **Implementation:** Web PR #149 commit `520d40a` adds fail-closed client
+  parsing for the server-created hosted-order response before opening
+  Razorpay Checkout. The parser requires a bounded INR order and unique
+  non-empty hosted method list, accepting UPI/cards/netbanking/wallets/EMI/Pay
+  Later and rejecting QR or separately unsupported methods.
+- **Verification:** Focused payment/route tests **16/16 pass**; Web typecheck
+  and diff check pass. Private evidence:
+  `docs/shipping/evidence/plan-web-013-hosted-method-response-2026-10-07.md`.
+- **Backlog:** PLAN-WEB-013 attempted but open; PLAN-WEB-014/015 remain open;
+  count remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No provider, production, database, deployment, payment, or
   credential operation occurred.

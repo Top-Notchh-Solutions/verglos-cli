@@ -2478,6 +2478,19 @@ Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
 production, database, provider, payment, deployment, or credential operation
 occurred.
 
+## 2026-10-07 · PLAN-WEB-013 hosted method response contract
+
+Web PR #149 commit `520d40a` adds fail-closed parsing of the server-created
+hosted-order response before opening Razorpay Checkout. The client requires a
+bounded INR order and a unique non-empty hosted method list; QR and separately
+unsupported methods cannot be presented as hosted Checkout methods. Focused
+payment/route tests pass **16/16**, Web typecheck and diff check pass. Private
+evidence: `docs/shipping/evidence/plan-web-013-hosted-method-response-2026-10-07.md`.
+PLAN-WEB-013/014/015 remain open because provider lifecycle and production
+reconciliation evidence are still missing. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. No provider, production, database,
+deployment, payment, or credential operation occurred.
+
 ## 2026-10-07 · HUNT Docker adversarial re-run
 
 The provided pinned harness ran at CLI commit `67debee` with the existing

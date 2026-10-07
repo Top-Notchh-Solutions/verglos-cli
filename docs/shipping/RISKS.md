@@ -416,6 +416,12 @@ direct provider page exposed no actionable form. No payment lifecycle or
 method evidence was claimed; the test order was not captured and the target
 was restored to `about:blank`.
 
+R-049 update (2026-10-07, hosted response contract): Web PR #149 commit
+`520d40a` now rejects malformed, duplicate, QR-only, and separately unsupported
+method lists in the client before hosted Checkout opens. This reduces stale or
+overpromised UI risk only; account-enabled method truth, lifecycle evidence,
+and production reconciliation remain open.
+
 R-009 update (2026-10-07, provenance projection): the structured HUNT-009
 result now carries verified feed/license digests and an explicit legal-clearance
 limitation, reducing ambiguity when a local execution result is reviewed.
