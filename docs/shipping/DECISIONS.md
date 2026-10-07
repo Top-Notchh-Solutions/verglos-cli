@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-013/012 webhook-handler PostgreSQL integration · 2026-10-07
+
+- **Decision:** Accept the direct handler/database harness as implementation and
+  integration progress only; keep payment and release acceptance open.
+- **Evidence:** PR #149 head `9fd22d8`, handler **2/2**, route **2/2**, ledger
+  **1/1**, claim **1/1**, unit handler **8/8**, and hosted Verify **37642113170**.
+- **Reason:** The harness proves persistence and exactly-once behavior across
+  capture, replay, failed order, and monotonic refunds using real handler and
+  ledger functions. It does not prove real Razorpay lifecycle events, every
+  enabled method, or production reconciliation.
+- **Migration finding:** A fresh empty database cannot apply legacy-dependent
+  migration `0000` because `licenses` is absent. Do not bypass this with an
+  unsafe CI/production push; track it as a migration-bootstrap risk.
+
 ## PLAN-WEB-013 isolated hosted-order route · 2026-10-07
 
 - **Decision:** Accept the route harness as qualification progress only; do not

@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013/012 webhook-handler PostgreSQL integration · 2026-10-07
+
+The direct handler/database harness passes locally and PR #149 head `9fd22d8`
+passes hosted Verify **37642113170**. This advances the code-side payment gate
+but does not pass it: real provider lifecycle evidence, all-enabled-method
+qualification, production reconciliation, and migration-bootstrap resolution
+remain open. PR #149 remains intentionally unmerged. No production state or
+credential changed; backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**.
+
 ## PLAN-WEB-013 isolated hosted-order route · 2026-10-07
 
 Hosted Verify **37640983179** is green for PR #149 exact head `1605340`; the

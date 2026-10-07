@@ -1,5 +1,14 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — PLAN-WEB-013/012 webhook-handler PostgreSQL integration
+
+- **Scope:** Web PR #149 exact head `9fd22d8`, disposable local PostgreSQL 16, and synthetic signed Razorpay events.
+- **Evidence:** Real handler integration **2/2**; route **2/2**; ledger **1/1**; webhook claim **1/1**; handler unit **8/8**; local typecheck/schema/31-migration ordering/build/diff checks passed. Hosted Verify **37642113170** passed; Vercel and Preview Comments passed.
+- **Coverage:** Captured hosted order grants exactly once, duplicate event is ignored, refunds are monotonic across partial/full/stale observations, and failed order persists without an entitlement. Subscription lifecycle/renewal and identity-conflict behavior remain covered by the existing ledger/unit tests.
+- **Limitation:** Fresh CI database migration rehearsal fails at legacy-dependent migration `0000` because `licenses` does not yet exist; no bypass was added and the Verify workflow was left unchanged. Real provider events and production reconciliation remain open.
+- **Disposition:** Code-side evidence strengthened; no checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No production/provider/payment/deployment/migration/credential mutation.
+- **Evidence:** `docs/shipping/evidence/plan-web-013-webhook-handler-postgres-2026-10-07.md`.
+
 # 2026-10-07 — PLAN-WEB-013 isolated hosted-order route
 
 - **Scope:** Web PR #149 exact head `160534025b58d3f14486390d569e8ba79e928dd2`, disposable local PostgreSQL 16 `verglos_test`, and non-production-only auth/provider seams.

@@ -1,5 +1,19 @@
 # Goal addendum — 2026-10-07
 
+## PLAN-WEB-013/012 webhook-handler PostgreSQL integration
+
+Web PR #149 exact head `9fd22d8` adds a real webhook-handler/database harness.
+Handler **2/2**, route **2/2**, ledger **1/1**, claim **1/1**, and handler unit
+**8/8** passed; local typecheck/schema/31-migration ordering/build/diff and
+hosted Verify **37642113170** passed. Capture, entitlement, replay, failed
+order, and monotonic refund behavior are now directly exercised against a
+disposable database. A fresh empty database still cannot apply migration `0000`
+before the legacy `licenses` table exists, so this remains a local explicit
+gate. No checkbox changed; PLAN-WEB-011/012/013/014/015 and real provider
+lifecycle/reconciliation remain open. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-013-webhook-handler-postgres-2026-10-07.md`.
+
 ## PLAN-WEB-013 isolated hosted-order route
 
 PR #149 exact head `1605340` passed hosted Verify **37640983179**. The isolated

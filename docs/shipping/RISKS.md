@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-013 migration bootstrap and integration-evidence gap · 2026-10-07
+
+The new handler/database integration passes against a disposable database whose
+current schema was prepared locally. A fresh empty database cannot apply the
+current migration chain because migration `0000_rename_sentinel_to_pro`
+references the legacy `licenses` table before a creating migration. This
+blocks making the integration a fresh-CI gate without a reviewed migration
+bootstrap change. Owner: Web schema/release; mitigation: reconcile the legacy
+baseline and rehearse on a fresh disposable database before changing CI or
+production. Separately, real Razorpay lifecycle and production reconciliation
+remain open. No production state was touched.
+
 ## R-PLAN-WEB-013 shared payment-test fixture isolation · 2026-10-07
 
 The route harness is isolated and hosted Verify is green, but the local normal

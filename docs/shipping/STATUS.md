@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013/012 webhook-handler PostgreSQL integration
+
+Web PR #149 exact head `9fd22d8` adds a real webhook-handler-to-PostgreSQL
+integration harness. Handler integration passed **2/2** (capture, entitlement,
+replay, partial/full/stale refund, and failed-order no-entitlement); route
+integration **2/2**; ledger **1/1**; webhook-claim **1/1**; unit handler **8/8**.
+Typecheck, schema, 31-migration ordering, build, and diff checks passed. Hosted
+Verify **37642113170**, Vercel, and Preview Comments passed; PR #149 is
+merge-clean. The new integration remains an explicit local gate because a
+fresh empty database cannot apply migration `0000` before the legacy
+`licenses` table exists. Provider lifecycle and production reconciliation are
+still absent. No checkbox changed; backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-013-webhook-handler-postgres-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013 isolated hosted-order route
 
 Web PR #149 exact head `1605340` passed the hosted Verify run **37640983179**:

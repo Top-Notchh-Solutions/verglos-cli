@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013/012 webhook-handler PostgreSQL integration · 2026-10-07
+
+PR #149 exact head `9fd22d8` adds a direct integration of the real webhook
+handler, PostgreSQL event claims, and billing ledger. Handler **2/2**, route
+**2/2**, ledger **1/1**, claim **1/1**, and unit handler **8/8** passed locally;
+typecheck/schema/migration-order/build/diff checks and hosted Verify
+**37642113170** passed. This remains code-side evidence: provider callbacks,
+method matrix, production reconciliation, and release gates are open. The
+fresh-database migration bootstrap limitation was recorded without weakening
+CI or production policy. No checkbox changed. See
+`docs/shipping/evidence/plan-web-013-webhook-handler-postgres-2026-10-07.md`.
+
 ## PLAN-WEB-013 isolated hosted-order route · 2026-10-07
 
 PR #149 exact head `1605340` passed hosted Verify **37640983179** and the
