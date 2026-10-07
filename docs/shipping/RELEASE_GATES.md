@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 Test Mode plan inventory · 2026-10-07
+
+The authenticated Razorpay Test Mode plan inventory returned zero subscription
+plans. The production environment-name inventory has no subscription-plan ID
+mapping. No provider object was created because plans are immutable provider
+configuration and the catalog/cadence/entitlement mapping has not been
+approved. PLAN-WEB-014/015 remain open for the provider lifecycle and
+reconciliation matrix; no checkbox or production state changed.
+
 ## PLAN-WEB-013 current-head payment contract verification · 2026-10-07
 
 Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474` passed the

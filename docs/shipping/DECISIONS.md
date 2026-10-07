@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## Razorpay Test Mode subscription-plan inventory · 2026-10-07
+
+- **Decision:** Keep the current order-based hosted Checkout path; do not
+  create subscription plans or add speculative plan IDs.
+- **Evidence:** Read-only Test Mode plan inventory returned zero plans, and no
+  plan-ID variable exists in the production environment-name inventory.
+- **Reason:** Provider plans are immutable configuration and must bind an
+  approved catalog amount, cadence, currency, entitlement period, owner, and
+  reconciliation procedure before creation.
+- **Consequence:** PLAN-WEB-014/015 remain open for recurring lifecycle and
+  production reconciliation evidence.
+
 ## QUAL-WEB-005 protected deletion hold authority · 2026-10-07
 
 - **Decision:** Accept the super-admin hold routes as implementation progress;

@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-014 Razorpay Test Mode plan inventory · 2026-10-07
+
+- **Evidence:** Read-only Test Mode `plans.all({ count: 100 })` returned zero
+  subscription plans using the isolated test credential pair.
+- **Configuration:** Production environment names contain no subscription-plan
+  ID mapping; no values were printed.
+- **Boundary:** No provider object, subscription, payment, webhook, database,
+  deployment, or production state changed.
+- **Limit:** Renewal/cancellation/expiry needs an approved non-production plan
+  mapping before it can be implemented and qualified.
+
 ## PLAN-WEB-013 current-head payment contract verification · 2026-10-07
 
 - **Source:** Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474`.

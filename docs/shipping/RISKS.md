@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-044 evidence update · Razorpay Test Mode has no subscription plans · 2026-10-07
+
+The isolated Test Mode credential pair returned zero provider subscription
+plans, and the production environment-name inventory has no plan-ID mapping.
+The order-based hosted flow can continue to be qualified, but recurring
+renewal/cancellation/expiry cannot be claimed or safely enabled. Creating
+provider plans without an approved catalog/entitlement mapping would create
+immutable test objects and ambiguous commercial truth. Owner: billing/product
+owner; mitigation: approve non-production plan IDs and exact catalog binding,
+then qualify the subscription lifecycle privately.
+
 Latest PLAN-WEB-014 provider probe (2026-10-07): Razorpay test mode recorded
 one attempted card payment with zero amount paid after the official sandbox
 contact/card path; UPI and netbanking rendered but were not completed. This

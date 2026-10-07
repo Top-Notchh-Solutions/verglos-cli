@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — PLAN-WEB-014 Razorpay Test Mode plan inventory
+
+- **Batch:** Read the isolated provider Test Mode subscription-plan inventory
+  before attempting recurring checkout implementation.
+- **Result:** `plans.all({ count: 100 })` returned zero plans. Production
+  environment-name inspection found no subscription-plan ID mapping.
+- **Backlog:** No accepted IDs; count remains **218 checked / 62 unchecked /
+  280 total (77.9%)**.
+- **Boundary:** No provider plan or subscription was created; no browser,
+  payment, webhook, database, deployment, migration, or production operation
+  occurred.
+- **Decision:** Keep the order-based hosted path and require an approved
+  non-production plan mapping before recurring lifecycle qualification.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-razorpay-test-plan-inventory-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 preview browser boundary
 
 - **Observation:** Chrome CDP read-only navigation to the PR #153 Preview
