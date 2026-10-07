@@ -52,3 +52,10 @@ projection returned these selectable hosted methods: `upi`, `card`,
 that projection. This is direct test-account UI evidence of the methods
 exposed by that checkout instance, not lifecycle qualification; no method was
 selected and no payment was submitted.
+## Hosted catalog alignment addendum
+
+Web PR #149 commit `f734acc` aligns the hosted method catalog with the direct
+Checkout observation by marking `paylater` as supported by the hosted adapter.
+The focused payment/route/runtime suite passes **30/30** and typecheck passes.
+This changes method presentation only; no method was selected or submitted,
+and no lifecycle or entitlement evidence is claimed.

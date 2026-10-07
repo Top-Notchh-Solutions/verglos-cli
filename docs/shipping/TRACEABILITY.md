@@ -2043,3 +2043,11 @@ repository inventory, but the installation endpoint returns HTTP 403 without
 an App-authorized token. Installation identity, permissions, repository scope,
 webhook delivery, and lifecycle evidence remain unverified; no provider
 mutation was attempted.
+# 2026-10-07 · PLAN-WEB-013 hosted Pay Later alignment
+
+Web PR #149 commit `f734acc` aligns the method catalog with the direct
+test-mode hosted Checkout observation by exposing Pay Later through the hosted
+adapter. Focused payment/route/runtime tests pass **30/30**, typecheck passes,
+and the diff is clean. This traces to method presentation only; no method was
+selected, no lifecycle evidence was produced, and PLAN-WEB-013/014/015 remain
+open.

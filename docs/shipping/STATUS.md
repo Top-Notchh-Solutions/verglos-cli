@@ -2405,3 +2405,14 @@ installation id, permission set, repository selection, webhook, delivery, or
 lifecycle state can be inferred. `GITHUB-WEB-001` through `GITHUB-WEB-004`
 remain open; no GitHub mutation occurred. Private evidence:
 `docs/shipping/evidence/github-app-installation-readonly-2026-10-07.md`.
+## 2026-10-07 · PLAN-WEB-013 hosted Pay Later alignment
+
+Web PR #149 now includes commit `f734acc`, which marks Pay Later as a
+hosted-checkout-supported method because the direct test-mode Checkout probe
+observed it as a selectable radio alongside UPI, card, netbanking, wallet, and
+EMI. The focused payment/route/runtime suite passes **30/30** and typecheck
+passes locally. This is catalog/UI alignment only: no method was selected, no
+payment lifecycle was run, and PLAN-WEB-013/014/015 remain open. PR #149 is
+pushed and hosted checks are pending at capture. Backlog remains **218 checked /
+62 unchecked / 280 total (77.9%)**. No production, database, provider,
+deployment, migration, or credential operation occurred.

@@ -3530,3 +3530,18 @@ before enabling any destructive adapter.
   production, payment, database, or deployment mutation occurred.
 - **Evidence file:**
   `docs/shipping/evidence/github-app-installation-readonly-2026-10-07.md`.
+# 2026-10-07 — PLAN-WEB-013 hosted Pay Later alignment
+
+- **Batch:** Align the server payment-method catalog with the direct hosted
+  Checkout observation while preserving fail-closed behavior for unqualified
+  methods.
+- **Implementation:** Web PR #149 commit `f734acc` marks `paylater` as
+  `checkoutSupported` and adds a regression assertion; QR remains a separate
+  explicit adapter and cardless EMI, bank transfer, and eMandate remain hidden.
+- **Verification:** Focused payment/route/runtime suite **30/30 pass**;
+  `pnpm typecheck` passes; `git diff --check` passes.
+- **PR:** #149, pushed to `f734acc`; hosted checks pending at capture.
+- **Backlog:** PLAN-WEB-013/014/015 attempted but open; count remains
+  **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No method was selected or submitted. No provider lifecycle,
+  production, database, migration, deployment, or credential operation occurred.

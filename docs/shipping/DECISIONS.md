@@ -707,3 +707,14 @@ each observed method has lifecycle and reconciliation evidence.
 - **Evidence:** Organization reads succeed, but `GET /user/installations`
   returns 403 because the current GitHub token is not App-authorized.
 - **Boundary:** No GitHub provider mutation or production operation occurred.
+## PLAN-WEB-013 hosted Pay Later alignment · 2026-10-07
+
+- **Decision:** Expose Pay Later through the same hosted Checkout adapter as
+  the other directly observed methods; keep methods without an equivalent
+  qualification observation fail-closed.
+- **Evidence:** PR #149 commit `f734acc`; direct test-mode hosted Checkout
+  observation showed a selectable Pay Later radio; focused payment/route/runtime
+  tests pass 30/30 and typecheck passes.
+- **Boundary:** This does not qualify Pay Later success, failure, capture,
+  refund, renewal, replay, or entitlement behavior. PLAN-WEB-013/014/015 stay
+  open and no payment or production operation occurred.

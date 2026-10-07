@@ -810,3 +810,10 @@ unapplied, and authenticated deletion E2E, approved dispositions, consent
 inventory, reconciliation, restore/RPO, rollback, and independent acceptance
 remain open. No production migration, deletion, or destructive operation
 occurred.
+Payment hosted-method alignment update (2026-10-07): Web PR #149 commit
+`f734acc` marks Pay Later as hosted-checkout-supported after the direct
+test-mode Checkout target exposed a Pay Later radio. Focused payment/route/
+runtime tests pass **30/30** and typecheck passes. This is presentation and
+catalog alignment only; no payment method was selected, and the provider
+lifecycle, reconciliation, production configuration, and release gates remain
+open. No production operation occurred.
