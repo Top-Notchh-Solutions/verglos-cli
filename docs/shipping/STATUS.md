@@ -3049,3 +3049,17 @@ database, deployment, or QR operation occurred. This proves only the provider
 order API boundary; it does not satisfy PLAN-WEB-013/014/015. No checkbox
 changed. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 Evidence: `docs/shipping/evidence/plan-web-014-test-order-api-2026-10-07.md`.
+
+## 2026-10-07 · PLAN-WEB-014 Test Mode webhook inventory and refund alignment
+
+Read-only Razorpay Test Mode inspection found one configured webhook endpoint,
+but it is inactive and points at the `verglos.com` host. No provider
+configuration was changed. The account event set includes `refund.created` and
+`refund.processed`; Web PR #149 exact head `051d4be` now handles the terminal
+processed event using a provider-fetched cumulative refund watermark and keeps
+creation non-terminal. Local focused payment tests passed **29 / 0 failures /
+1 explicit DB skip**, with typecheck, schema, migrations, build, diff, and
+secret-boundary checks passing. Hosted Verify `37645815573` was in progress at
+capture. No checkbox changed; backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-test-webhook-inventory-2026-10-07.md`.

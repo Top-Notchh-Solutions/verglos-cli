@@ -4302,3 +4302,20 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
   deployment, or credential mutation occurred.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-test-order-api-2026-10-07.md`.
+
+## 2026-10-07 · PLAN-WEB-014 Test Mode webhook inventory and refund alignment
+
+- **Batch:** Read-only Test Mode webhook inventory plus Web PR #149 refund
+  event alignment.
+- **Result:** One inactive endpoint on `verglos.com`; relevant events include
+  `refund.created` and `refund.processed`. Code head `051d4be` processes only
+  terminal `refund.processed` using the provider's cumulative watermark.
+- **Verification:** Focused payment tests **29 pass / 1 explicit DB skip / 0
+  failures**, typecheck, schema, migration-order, build, diff, and staged
+  secret scan passed. Hosted Verify `37645815573` was in progress.
+- **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
+  (77.9%)**. PLAN-WEB-013/014/015 remain open.
+- **Boundary:** No webhook configuration, payment, entitlement, database,
+  production, deployment, QR, or credential mutation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-test-webhook-inventory-2026-10-07.md`.

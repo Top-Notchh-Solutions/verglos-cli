@@ -128,6 +128,14 @@ not pass the payment gate and does not close PLAN-WEB-013/014/015 because no
 hosted method lifecycle, webhook, entitlement, refund, renewal, or
 reconciliation evidence exists. No production/provider payment was charged.
 
+Refund-event addendum (2026-10-07): the Test Mode account's read-only event
+inventory includes `refund.created` and `refund.processed`, but its only
+configured webhook is inactive on the product host. Web PR #149 `051d4be` now
+uses the provider-fetched cumulative refund watermark for terminal processed
+refunds and ignores non-terminal creation for entitlement purposes. The
+payment gate remains open because no delivery or provider lifecycle was
+qualified.
+
 ## PLAN-WEB-013/014 refund ordering hardening · 2026-10-07
 
 PR #149 exact head `238ec7425ff1979b82d97e3d371cedbe83fbd394` now treats stale

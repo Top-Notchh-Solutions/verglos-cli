@@ -2396,3 +2396,13 @@ record traces only the order-creation boundary; it cannot support a claim of
 method success, capture, refund, renewal, webhook delivery, entitlement, or
 production reconciliation. See
 `docs/shipping/evidence/plan-web-014-test-order-api-2026-10-07.md`.
+
+# 2026-10-07 · PLAN-WEB-014 Test Mode webhook inventory and refund alignment
+
+The Test Mode provider returned one inactive webhook destination on the
+product host and an event set containing `refund.created` and
+`refund.processed`. Web PR #149 `051d4be` aligns the handler to the terminal
+provider event and cumulative refund watermark without treating creation as a
+completed refund. This is code/configuration evidence only; no delivery or
+payment lifecycle is claimed. See
+`docs/shipping/evidence/plan-web-014-test-webhook-inventory-2026-10-07.md`.

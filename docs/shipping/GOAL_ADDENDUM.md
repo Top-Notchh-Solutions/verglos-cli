@@ -456,4 +456,15 @@ on a follow-up fetch. This is provider order-creation evidence only. It does
 not prove hosted method success, capture, refund, renewal, webhook delivery,
 exactly-once entitlement, or production reconciliation; no checkbox changed.
 Evidence: `docs/shipping/evidence/plan-web-014-test-order-api-2026-10-07.md`.
+
+## PLAN-WEB-014 Test Mode webhook inventory and refund alignment
+
+The Test Mode account has one inactive webhook destination on the product host;
+no activation was attempted. The event inventory includes provider-native
+`refund.created` and `refund.processed` events. Web PR #149 `051d4be` now
+reconciles `refund.processed` from the provider's cumulative refund watermark
+and does not treat `refund.created` as terminal. This strengthens code-side
+qualification only; provider delivery, lifecycle, entitlement, and production
+reconciliation remain open. No checkbox changed.
+Evidence: `docs/shipping/evidence/plan-web-014-test-webhook-inventory-2026-10-07.md`.
 PR #149 exact head `aa34127` hardens the
