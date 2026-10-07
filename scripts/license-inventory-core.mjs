@@ -41,20 +41,32 @@ export function parsePnpmLockPackageIds(lockfile) {
   return packages;
 }
 
-function getSource(manifest) {
+function getSource(manifest, sourceOverrides) {
+  const key = manifest && typeof manifest.name === "string" && typeof manifest.version === "string"
+    ? `${manifest.name}@${manifest.version}`
+    : "";
+  const override = key ? sourceOverrides?.[key] : undefined;
+  if (override !== undefined) {
+    if (typeof override !== "string" || !override.trim()) throw new Error(`Invalid license source override for '${key}'`);
+    let parsed;
+    try { parsed = new URL(override.trim()); }
+    catch { throw new Error(`Invalid license source override for '${key}'`); }
+    if (parsed.protocol !== "https:") throw new Error(`License source override for '${key}' must use HTTPS`);
+    return override.trim();
+  }
   if (typeof manifest.homepage === "string" && manifest.homepage.trim()) return manifest.homepage.trim();
   if (typeof manifest.repository === "string" && manifest.repository.trim()) return manifest.repository.trim();
   if (manifest.repository && typeof manifest.repository.url === "string" && manifest.repository.url.trim()) return manifest.repository.url.trim();
   return "";
 }
 
-export function createLicenseInventory({ lockedPackages, manifests, bundledManifests = [], directDependencies }) {
+export function createLicenseInventory({ lockedPackages, manifests, bundledManifests = [], directDependencies, sourceOverrides = {} }) {
   const byNameVersion = new Map();
   for (const manifest of manifests) {
     if (!manifest || typeof manifest.name !== "string" || typeof manifest.version !== "string") continue;
     const key = `${manifest.name}@${manifest.version}`;
     const previous = byNameVersion.get(key);
-    const record = { name: manifest.name, version: manifest.version, license: typeof manifest.license === "string" ? manifest.license.trim() : "", source: getSource(manifest) };
+    const record = { name: manifest.name, version: manifest.version, license: typeof manifest.license === "string" ? manifest.license.trim() : "", source: getSource(manifest, sourceOverrides) };
     if (previous && JSON.stringify(previous) !== JSON.stringify(record)) throw new Error(`Conflicting package metadata for '${key}'`);
     byNameVersion.set(key, record);
   }
