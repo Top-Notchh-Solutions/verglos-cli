@@ -2,11 +2,11 @@
 
 ## PLAN-WEB-013/014/015 payment code-side qualification · 2026-10-07
 
-- PR #149 focused payment tests passed 44/44 with one explicit skip for the
-  prepared-database billing-ledger integration. Docker health passed, but a
-  disposable empty PostgreSQL database stopped at migration 0000 because the
-  reviewed legacy `licenses` baseline was not present; no integration pass was
-  inferred from that run.
+- PR #149 focused payment tests passed 44/44 with one explicit unit-test skip.
+  Docker health passed; a disposable snapshot-backed PostgreSQL database
+  applied the PR migrations and passed both billing-ledger and webhook-claim
+  integrations (2/2, no skips). An empty-database attempt correctly stopped at
+  migration 0000 because the reviewed legacy `licenses` baseline was absent.
 - This confirms code-side fail-closed method configuration, catalog-bound order
   creation, and webhook/lifecycle contracts only. Razorpay account-enabled
   test-mode runtime evidence remains missing. PLAN-WEB-013/014/015 stay

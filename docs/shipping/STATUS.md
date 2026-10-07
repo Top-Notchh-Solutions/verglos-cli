@@ -3,14 +3,14 @@
 ## 2026-10-07 · payment code-side qualification
 
 Web PR #149 focused payment verification passed **44 tests / 0 failures / 1
-explicit database skip** across method configuration, runtime config, route
-contracts, catalog binding, webhook handling, and Razorpay configuration. Docker
-Desktop Server 29.7.2 was healthy; the disposable PostgreSQL run was removed
-after the migration chain stopped at migration 0000 because an empty database
-lacks the reviewed legacy `licenses` baseline. This is not provider acceptance
-evidence. PLAN-WEB-013/014/015 remain open for the account-enabled Razorpay
-test-mode method/lifecycle matrix; backlog remains **218 checked / 62 unchecked /
-280 total**. Private evidence:
+explicit unit-test skip** across method configuration, runtime config, route
+contracts, catalog binding, webhook handling, and Razorpay configuration. A
+second disposable run restored the existing local snapshot, applied the PR
+migrations, and passed both database-backed payment integrations (**2/2**, no
+skips). Docker Desktop Server 29.7.2 was healthy. This is still not provider
+acceptance evidence: PLAN-WEB-013/014/015 remain open for the account-enabled
+Razorpay test-mode method/lifecycle matrix; backlog remains **218 checked / 62
+unchecked / 280 total**. Private evidence:
 `docs/shipping/evidence/payment-code-side-qualification-2026-10-07.md`.
 
 ## 2026-10-07 · QUAL-WEB-006 organization-directory reload

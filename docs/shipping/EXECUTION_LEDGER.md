@@ -3,12 +3,15 @@
 ## 2026-10-07 · payment code-side qualification
 
 - **Focused tests:** Web PR #149 payment/configuration set passed 44 tests,
-  with 0 failures and 1 explicit skip for the PostgreSQL billing-ledger test.
+  with 0 failures and 1 explicit unit-test skip. A snapshot-backed disposable
+  database run passed both billing-ledger and webhook-claim integrations (2/2,
+  0 failures, 0 skips).
 - **Docker:** Docker Desktop Server 29.7.2 was reachable; a bounded disposable
   `postgres:15-alpine` container was cleaned up after use.
-- **Harness limit:** The empty database could not apply migration 0000 because
+- **Harness:** An empty database correctly stopped at migration 0000 because
   the repository migration chain requires the reviewed legacy `licenses`
-  baseline. No integration pass was claimed and no persistent or production
+  baseline. Reusing the existing local snapshot supplied that baseline;
+  migrations and both integrations then passed. No persistent or production
   database was changed.
 - **Acceptance:** Code-side guards and lifecycle contracts are strengthened,
   but account-enabled Razorpay test-mode method/capture/failure/refund/renewal/

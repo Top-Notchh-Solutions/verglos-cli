@@ -3,11 +3,10 @@
 ## PLAN-WEB-013/014/015 payment code-side qualification · 2026-10-07
 
 PR #149 focused payment/configuration tests passed 44/44 with one explicit
-database skip. A bounded Docker/PostgreSQL attempt did not reach the ledger
-integration because an empty database lacks the repository’s reviewed legacy
-`licenses` baseline required by migration 0000. This closes no payment gate:
-account-enabled Razorpay test-mode methods and complete lifecycle/reconciliation
-evidence remain required.
+unit-test skip. A bounded snapshot-backed Docker/PostgreSQL run applied the PR
+migrations and passed both billing-ledger and webhook-claim integrations (2/2,
+no skips). This closes no payment gate: account-enabled Razorpay test-mode
+methods and complete lifecycle/reconciliation evidence remain required.
 
 ## QUAL-WEB-006 organization-directory reload · 2026-10-07
 

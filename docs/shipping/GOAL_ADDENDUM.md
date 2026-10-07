@@ -1,12 +1,11 @@
 # Goal addendum — 2026-10-07
 
 Payment critical-path continuation: PR #149 focused code-side tests passed
-44/44 with one explicit database skip. Docker was healthy, but the disposable
-empty PostgreSQL attempt stopped at migration 0000 because the reviewed legacy
-`licenses` baseline was absent; no integration pass was claimed. This adds no
-payment checkbox credit. PLAN-WEB-013/014/015 remain open for account-enabled
-Razorpay test-mode methods and full lifecycle evidence. Backlog remains **218
-checked / 62 unchecked / 280 total**.
+44/44 with one explicit unit-test skip; a snapshot-backed disposable database
+run then passed both billing-ledger and webhook-claim integrations (2/2, no
+skips). This adds no payment checkbox credit. PLAN-WEB-013/014/015 remain open
+for account-enabled Razorpay test-mode methods and full lifecycle evidence.
+Backlog remains **218 checked / 62 unchecked / 280 total**.
 
 QUAL-WEB-006 browser continuation: after a fresh reload, authenticated
 `/orgs` rendered its directory empty state (“Choose an organization” / “No
