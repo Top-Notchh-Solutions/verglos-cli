@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## Exact production migration preflight · 2026-10-07
+
+The read-only audit against PR #153's journal found all 42 allowlisted tables,
+26 applied migration rows, and pending 0026–0034. Exact counts were licenses
+1, legacy mappings 3, webhook events 4, billing payments 0, and subscriptions
+0. This traces to the production migration preflight for QUAL-WEB-005,
+GITHUB-WEB-001–004, and PLAN-WEB-015; it supplies no migration, merge,
+deployment, or acceptance credit. See
+`docs/shipping/evidence/production-migration-exact-audit-2026-10-07.md`.
+
 ## Fresh production snapshot/restore rehearsal · 2026-10-07
 
 A production `pg_dump` completed at `2026-10-07T10:17:27.005Z` and restored

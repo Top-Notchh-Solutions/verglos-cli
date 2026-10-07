@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## Exact production migration preflight · 2026-10-07
+
+- **Decision:** Keep production migration and PR #153 merge gates closed.
+- **Evidence:** Read-only audit found all 42 allowlisted tables, 26 applied
+  rows versus 35 expected, and pending migrations 0026–0034; exact counts are
+  licenses 1, legacy mappings 3, webhook events 4, payments 0, and
+  subscriptions 0.
+- **Boundary:** No production DDL, DML, migration, deployment, payment,
+  entitlement, deletion, or backlog checkbox change occurred.
+
 ## Fresh production snapshot/restore rehearsal · 2026-10-07
 
 - **Decision:** Accept the fresh snapshot and disposable restore as RPO/

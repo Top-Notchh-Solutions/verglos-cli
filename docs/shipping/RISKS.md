@@ -1,5 +1,13 @@
 # Verglos V1 risk register
 
+Latest exact production migration preflight (2026-10-07): all 42 allowlisted
+tables are present, but production has 26 applied migration rows against the
+35-row PR #153 candidate and is blocked on the 0026–0034 tail. Exact counts
+remain licenses 1, legacy mappings 3, webhook events 4, billing payments 0,
+and subscriptions 0. This reduces state uncertainty only; migration,
+deletion, provider, rollback, and merge gates remain open. No production write
+occurred.
+
 Latest QUAL-WEB-005 snapshot update (2026-10-07): a fresh 150,515-byte
 production dump completed at `2026-10-07T10:17:27.005Z`, restored in disposable
 PostgreSQL 18, and accepted PR #153's migration tail to 35 rows. This reduces

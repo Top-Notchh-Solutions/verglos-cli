@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## Exact production migration preflight · 2026-10-07
+
+The bounded read-only audit against PR #153's 35-entry migration journal found
+all 42 allowlisted tables present, 26 applied rows, and pending migrations
+0026–0034. Exact counts are licenses 1, legacy mappings 3, webhook events 4,
+payments 0, and subscriptions 0. Preflight is
+`blocked-migration-history`; no migration, merge, deployment, or checkbox
+credit is authorized by this result. See
+`docs/shipping/evidence/production-migration-exact-audit-2026-10-07.md`.
+
 ## Fresh production snapshot/restore rehearsal · 2026-10-07
 
 The fresh production snapshot completed at `2026-10-07T10:17:27.005Z`,

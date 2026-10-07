@@ -1,5 +1,15 @@
 # Verglos V1 goal addendum — 2026-10-07
 
+## Exact production migration preflight · 2026-10-07
+
+The current read-only audit is `blocked-migration-history`: all 42
+allowlisted tables are present, but production has 26 of the 35 migration
+rows required by PR #153. The pending tail is 0026–0034, including GitHub
+identity/SCM and account-deletion authority/worker migrations. Exact counts
+are licenses 1, legacy mappings 3, webhook events 4, billing payments 0, and
+subscriptions 0. This does not authorize migration, merge, deployment, or
+backlog credit. No production write occurred.
+
 This addendum supersedes the earlier QR-only checkout emphasis. It adds scope;
 it does not relax any existing evidence, security, privacy, or production gate.
 
