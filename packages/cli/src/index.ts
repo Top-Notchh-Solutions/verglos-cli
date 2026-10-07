@@ -915,6 +915,12 @@ const huntCommand = program
           else if (!opts.quiet) console.error("execution requires report, recipe, trust-store, approval, rule-id, subject-id, and observation-id");
           process.exit(2);
         }
+        const executionAuthorized = await requireCapability("hunt.critical", "`verglos hunt --execute`", {
+          asPlan: process.env.VERGLOS_AS_PLAN,
+          output: opts.json ? "json" : opts.quiet ? "quiet" : undefined,
+          extraLine: "Execution still requires a signed recipe, approved receipt, supported catalog entry, and bounded runtime.",
+        });
+        if (!executionAuthorized) process.exit(1);
         const code = await executeHuntRecipe({ reportPath: opts.executeReport!, recipePath: opts.executeRecipe!, trustStorePath: opts.executeTrustStore!, approvalPath: opts.executeApproval!, ruleId: opts.executeRuleId!, subjectId: opts.executeSubjectId!, observationId: opts.executeObservationId!, findingId: opts.finding, json: opts.json, quiet: opts.quiet });
         process.exit(code);
       }

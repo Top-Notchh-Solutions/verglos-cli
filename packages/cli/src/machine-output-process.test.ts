@@ -141,6 +141,34 @@ test("Hunt denied plan emits one bounded JSON response", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("Hunt recipe execution cannot bypass paid capability enforcement", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-hunt-execute-denied-"));
+  try {
+    const result = await runCliFixture(process.execPath, [
+      "--import", tsx, cliEntry,
+      "--as-plan", "free",
+      "hunt",
+      "--execute-report", "report.json",
+      "--execute-recipe", "recipe.json",
+      "--execute-trust-store", "trust-store.json",
+      "--execute-approval", "approval.json",
+      "--execute-rule-id", "hunt.a1.utf8-contains",
+      "--execute-subject-id", `urn:verglos:subject:repository-tree:sha256:${"a".repeat(64)}`,
+      "--execute-observation-id", "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+      "--json", "--quiet",
+    ], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: root, VERGLOS_API_URL: "http://127.0.0.1:9" } });
+    assert.equal(result.exitCode, 1);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), {
+      status: "error",
+      code: "CAPABILITY_REQUIRED",
+      capability: "hunt.critical",
+      message: "`verglos hunt --execute` requires a paid capability",
+    });
+    assert.deepEqual(result.files, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("Attest denied plan emits one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-attest-"));
   try {
