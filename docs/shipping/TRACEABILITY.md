@@ -497,6 +497,19 @@ closes the non-public-fixture requirement without introducing customer data.
 - Private evidence:
   `docs/shipping/evidence/qual-web-006-authenticated-account-performance-2026-10-07.md`.
 
+## Progress · 2026-10-07 · PLAN-WEB-013 hosted payment route hardening
+
+- Web PR #149 exact head `0a765c9` adds same-origin checks before auth or
+  provider/database side effects for hosted order and optional QR creation.
+- Focused tests passed 40/40; typecheck, Drizzle check, 31-migration ordering,
+  preview-semantics build, hosted Verify `37556130789`, Vercel, GitGuardian,
+  and Preview Comments passed. GitHub reports PR #149 CLEAN.
+- This changes no backlog checkbox. It does not establish provider-enabled
+  methods or test-mode lifecycle evidence; PLAN-WEB-013/014/015 remain open.
+  No production operation occurred.
+- Private evidence:
+  `docs/shipping/evidence/plan-web-013-payment-route-csrf-2026-10-07.md`.
+
 ## Progress · 2026-10-02 · current CLI fixture boundary clarification
 
 The current-source Juice Shop scan's three redacted `~/.cursor/mcp.json` findings are

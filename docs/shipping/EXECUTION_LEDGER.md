@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · PLAN-WEB-013 hosted payment route hardening
+
+- **Code:** Web PR #149 exact head `0a765c9` adds same-origin checks before
+  authentication, database lookup, or Razorpay side effects for hosted order
+  and optional QR creation.
+- **Local:** Focused payment/catalog/checkout/webhook/runtime/route tests
+  40/40; typecheck passed; Drizzle check passed; ordered migration check
+  verified 31 migrations; preview-semantics production build passed.
+- **Hosted:** Verify run `37556130789`, Vercel, GitGuardian, and Preview
+  Comments passed. PR #149 remains open, CLEAN, and unmerged.
+- **Acceptance:** Code-side hardening only. Provider method capability and
+  test-mode lifecycle evidence remain open, so PLAN-WEB-013/014/015 are not
+  checked. No provider/payment/database/migration/deployment/credential write
+  occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-013-payment-route-csrf-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 authenticated account accessibility/performance follow-up
 
 - **Browser:** Chrome 154 DevTools MCP page 13, existing authenticated
