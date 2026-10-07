@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — PLAN-WEB-013/014 refund ordering hardening
+
+- **Batch:** Harden the payment ledger against an out-of-order stale refund
+  observation on the existing Web payment phase PR.
+- **Backlog:** `PLAN-WEB-013` and `PLAN-WEB-014` attempted; no accepted IDs.
+  Count remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Code:** Web PR #149 commit `238ec74`, pushed as exact head
+  `238ec7425ff1979b82d97e3d371cedbe83fbd394`.
+- **Verification:** Focused payment/webhook tests 17 runnable passes plus one
+  explicit migrated-database skip; typecheck and `git diff --check` passed.
+  Disposable Docker PostgreSQL 15 schema fixture via the explicit local
+  db:push guard passed `ledger.integration.test.ts` 1/1. Empty-db migration
+  was not used as acceptance evidence because migration 0000 requires the
+  reviewed legacy baseline.
+- **Hosted:** Verify run `37632192255` was queued at capture; prior-head
+  success is not counted for the new head.
+- **Boundary:** No provider, browser, payment, entitlement, production
+  database/configuration, migration, deployment, or credential operation.
+- **Disposition:** Keep PR #149 open; provider method/lifecycle and production
+  reconciliation gates remain open. See
+  `docs/shipping/evidence/plan-web-013-refund-ordering-2026-10-07.md`.
+
 # 2026-10-07 — PLAN-WEB-014 Razorpay Test Mode plan inventory
 
 - **Batch:** Read the isolated provider Test Mode subscription-plan inventory

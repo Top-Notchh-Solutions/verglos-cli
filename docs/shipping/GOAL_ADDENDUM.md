@@ -274,3 +274,17 @@ QUAL-WEB-006 remains open for keyboard, human review, field-CWV, authenticated
 data, and large datasets. The viewport was restored, page targets remained
 stable, and no production mutation occurred. Backlog remains **218 checked /
 62 unchecked / 280 total (77.9%)**.
+
+## 2026-10-07 payment ledger continuation
+
+Web PR #149 exact head `238ec7425ff1979b82d97e3d371cedbe83fbd394` hardens
+out-of-order refund handling: valid stale smaller refund observations are
+idempotent no-ops, while invalid bounds remain fail-closed. Focused payment
+tests, typecheck, diff check, and a disposable schema-fixture billing
+integration pass. Hosted Verify `37632192255` was queued at capture. This
+advances code-side payment safety only; the whole-product goal remains active,
+the payment/provider/reconciliation gates remain open, and the authoritative
+backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No provider,
+production, deployment, payment, entitlement, migration, or credential
+operation occurred. Evidence:
+`docs/shipping/evidence/plan-web-013-refund-ordering-2026-10-07.md`.

@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-013/014 monotonic refund watermark · 2026-10-07
+
+- **Decision:** Treat a signed, valid refund observation lower than the durable
+  refund watermark as an idempotent no-op; continue rejecting negative and
+  over-amount values.
+- **Reason:** Provider deliveries and retries can be out of order. Moving the
+  watermark backwards or failing an already-reflected observation would create
+  retry churn without changing entitlement truth.
+- **Evidence:** Web PR #149 commit `238ec74`; focused tests, typecheck, and a
+  disposable schema-fixture billing integration passed.
+- **Boundary:** This is ledger hardening, not provider lifecycle acceptance.
+  PLAN-WEB-013/014/015, production reconciliation, and release gates remain
+  open; no provider or production operation occurred.
+
 ## Razorpay Test Mode subscription-plan inventory · 2026-10-07
 
 - **Decision:** Keep the current order-based hosted Checkout path; do not

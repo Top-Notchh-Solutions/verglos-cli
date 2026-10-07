@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013/014 refund ordering hardening
+
+Web PR #149 exact pushed head `238ec7425ff1979b82d97e3d371cedbe83fbd394`
+hardens `recordPaymentRefund`: negative and over-amount values still fail
+closed, while a stale smaller refund watermark is an idempotent no-op. The
+focused payment/webhook command passed **17/17 runnable tests** with one
+explicit migrated-database skip; typecheck and diff checks passed. A fresh
+disposable Docker PostgreSQL 15 schema fixture passed the billing ledger
+integration **1/1**, including the stale-refund assertion. Hosted Verify
+`37632192255` was queued at capture. This is code-side progress only; no
+provider, browser payment, entitlement, production, deployment, or credential
+operation occurred. PLAN-WEB-013/014/015 remain open and no checkbox changed;
+backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. Private
+evidence: `docs/shipping/evidence/plan-web-013-refund-ordering-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-014 Razorpay Test Mode plan inventory
 
 The read-only Razorpay Test Mode `plans.all({ count: 100 })` call using the

@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013/014 refund ordering hardening · 2026-10-07
+
+- **Source:** Web PR #149 exact pushed head
+  `238ec7425ff1979b82d97e3d371cedbe83fbd394`.
+- **Change:** Refund processing keeps the durable watermark monotonic; a stale
+  smaller provider observation is a no-op, while negative and over-amount
+  values remain invalid.
+- **Verification:** Focused payment/webhook tests had 17 runnable passes and
+  one explicit database-fixture skip; typecheck and diff checks passed; the
+  disposable schema-fixture billing integration passed 1/1.
+- **Limit:** This does not prove any provider runtime method or lifecycle,
+  webhook delivery, entitlement reconciliation, or production state. No
+  checkbox changed; PLAN-WEB-013/014/015 remain open. See
+  `docs/shipping/evidence/plan-web-013-refund-ordering-2026-10-07.md`.
+
 ## PLAN-WEB-014 Razorpay Test Mode plan inventory · 2026-10-07
 
 - **Evidence:** Read-only Test Mode `plans.all({ count: 100 })` returned zero

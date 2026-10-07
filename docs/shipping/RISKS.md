@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-044 refund ordering hardening · 2026-10-07
+
+The payment ledger now preserves a monotonic refund watermark: stale smaller
+refund observations are no-ops, while negative and over-amount observations are
+rejected. This reduces duplicate/out-of-order retry risk in code-side handling,
+but does not prove provider delivery ordering, account-enabled method behavior,
+capture/refund reconciliation, or production safety. Owner: billing/product
+owner; mitigation: qualify every enabled Razorpay method in isolated Test Mode
+and reconcile signed webhooks, ledger rows, and entitlements. PLAN-WEB-013/014/
+015 remain open. No provider or production operation occurred.
+
 ## R-044 evidence update · Razorpay Test Mode has no subscription plans · 2026-10-07
 
 The isolated Test Mode credential pair returned zero provider subscription

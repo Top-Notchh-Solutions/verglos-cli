@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013/014 refund ordering hardening · 2026-10-07
+
+PR #149 exact head `238ec7425ff1979b82d97e3d371cedbe83fbd394` now treats stale
+smaller refund watermarks as idempotent no-ops while rejecting invalid bounds.
+The focused runnable payment tests, typecheck, diff check, and disposable
+schema-fixture billing integration pass. This does not pass the payment gate:
+account-enabled method runtime, provider capture/refund/renewal/cancellation/
+replay/out-of-order evidence, entitlement reconciliation, and production
+configuration remain unverified. Hosted Verify `37632192255` was queued at
+capture; no checkbox, merge, deployment, or production state changed.
+
 ## PLAN-WEB-014 Test Mode plan inventory · 2026-10-07
 
 The authenticated Razorpay Test Mode plan inventory returned zero subscription
