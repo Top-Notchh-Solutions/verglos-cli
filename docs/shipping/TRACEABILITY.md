@@ -32,6 +32,15 @@ existing CDP blank target was restored to `about:blank`; no production
 operation occurred. PLAN-WEB-014/015 remain open and no checkbox changed. See
 `docs/shipping/evidence/plan-web-014-test-mode-method-display-2026-10-07.md`.
 
+## PLAN-WEB-014 provider iframe qualification attempt · 2026-10-07
+
+The Test Mode provider iframe exposed six method selectors, but the UPI input
+was unavailable to the bounded CDP interaction after selection. No callback,
+capture, refund, webhook, entitlement, or ledger result was observed; the
+existing target was restored to `about:blank`. This does not qualify
+PLAN-WEB-014/015. See
+`docs/shipping/evidence/plan-web-014-provider-iframe-qualification-2026-10-07.md`.
+
 ## QUAL-WEB-005 hosted result for hold-boundary fix · 2026-10-07
 
 Hosted Verify `37632466656` passed at PR #153 exact head

@@ -35,6 +35,17 @@
   `about:blank`. PLAN-WEB-014/015 remain open; no production or live-payment
   operation and no checkbox change occurred.
 
+## PLAN-WEB-014 provider iframe qualification attempt · 2026-10-07
+
+- **Decision:** Treat the provider iframe observation as incomplete runtime
+  evidence only. Do not infer payment success, failure, capture, or entitlement
+  from a loaded Checkout frame.
+- **Evidence:** Six provider method selectors were visible; the UPI field was
+  unavailable to the bounded CDP interaction after selection and no callback
+  or ledger result occurred. The target was restored to `about:blank`.
+- **Boundary:** PLAN-WEB-014/015 remain open; no production, database, payment,
+  migration, deployment, or customer-state operation occurred.
+
 ## QUAL-WEB-005 hold state at completion boundary · 2026-10-07
 
 - **Decision:** A deletion worker must feed the post-delete hold state into its

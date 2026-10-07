@@ -33,6 +33,16 @@ PLAN-WEB-014/015 remain open. The existing CDP blank target was restored to
 remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/plan-web-014-test-mode-method-display-2026-10-07.md`.
 
+## PLAN-WEB-014 provider iframe qualification attempt
+
+The bounded Test Mode Checkout loaded its cross-origin provider iframe and
+exposed six payment-method selectors, but the UPI input was not available to
+the CDP interaction after method selection. No provider outcome, capture,
+refund, webhook, entitlement, or app-ledger result was produced; the existing
+target was restored to `about:blank`. PLAN-WEB-014/015 remain open and backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-provider-iframe-qualification-2026-10-07.md`.
+
 QUAL-WEB-005 fresh-snapshot rehearsal: a production `pg_dump` completed at
 `2026-10-07T10:17:27.005Z` (150,515 bytes), restored into disposable
 PostgreSQL 18, and accepted PR #153's migration tail to 35 history rows.

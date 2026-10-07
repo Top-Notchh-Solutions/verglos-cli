@@ -30,6 +30,15 @@ refund, webhook, entitlement, or reconciliation result was produced. This
 does not pass the payment gate. PLAN-WEB-014/015 remain open; the existing
 CDP blank target was restored and no production state changed.
 
+## PLAN-WEB-014 provider iframe qualification attempt · 2026-10-07
+
+The bounded Test Mode Checkout loaded the cross-origin provider iframe and
+exposed six method selectors, but the UPI field was unavailable to the CDP
+interaction after selection. No callback, capture, refund, webhook,
+entitlement, or reconciliation result was produced. This does not pass the
+payment gate; PLAN-WEB-014/015 remain open. The existing target was restored
+to `about:blank` and no production state changed.
+
 ## QUAL-WEB-005 hosted result for hold-boundary fix · 2026-10-07
 
 Hosted Verify `37632466656` passed at PR #153 exact head

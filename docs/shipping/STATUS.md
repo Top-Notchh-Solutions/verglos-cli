@@ -37,6 +37,17 @@ operation occurred. PLAN-WEB-014/015 remain open and the backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/plan-web-014-test-mode-method-display-2026-10-07.md`.
 
+## 2026-10-07 · PLAN-WEB-014 provider iframe qualification attempt
+
+The bounded Test Mode Checkout loaded the cross-origin Razorpay iframe and
+exposed six method selectors, but the UPI field was unavailable to the CDP
+interaction after selection. No provider callback, capture, refund, webhook,
+entitlement, or application-ledger result occurred. The existing target was
+restored to `about:blank`; no production operation occurred. PLAN-WEB-014/015
+remain open and the backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-provider-iframe-qualification-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 hosted result for hold-boundary fix
 
 Hosted Verify run `37632466656` completed successfully for Web PR #153 exact

@@ -48,7 +48,21 @@
   credential mutation occurred. Backlog remains **218 checked / 62 unchecked /
   280 total (77.9%)**.
 - **Evidence:**
-  `docs/shipping/evidence/plan-web-014-test-mode-method-display-2026-10-07.md`.
+`docs/shipping/evidence/plan-web-014-test-mode-method-display-2026-10-07.md`.
+
+# 2026-10-07 — PLAN-WEB-014 provider iframe qualification attempt
+
+- **Scope:** One Razorpay Test Mode hosted Checkout order using the existing
+  Chrome CDP `about:blank` target; no new tab was opened.
+- **Observation:** The cross-origin provider iframe exposed six payment-method
+  selectors, but its UPI input was unavailable to the bounded CDP interaction
+  after selecting the method. No provider callback, capture, refund, webhook,
+  entitlement, or app-ledger result was produced.
+- **Disposition:** This is incomplete provider-rendering evidence only. The
+  target was restored to `about:blank`; PLAN-WEB-014/015 remain open and the
+  backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-provider-iframe-qualification-2026-10-07.md`.
 
 # 2026-10-07 — QUAL-WEB-005 hosted result for hold-boundary fix
 
