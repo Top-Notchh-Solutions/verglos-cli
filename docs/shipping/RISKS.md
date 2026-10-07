@@ -1,5 +1,10 @@
 # Verglos V1 risk register
 
+Latest QUAL-WEB-005 preview-browser update (2026-10-07): the PR #153 Preview
+URL is protected by Vercel deployment login, so Chrome CDP could not reach the
+new privacy surface. No bypass or mutation was attempted. Authenticated
+non-production deletion E2E remains release-blocking.
+
 Latest QUAL-WEB-005 implementation update (2026-10-07): Web PR #153 head
 `db27d793d890929f642ed0d5b5b9bd056a732bc` adds the authenticated privacy/
 deletion request surface and passes local 23/23 focused checks plus hosted

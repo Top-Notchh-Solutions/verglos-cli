@@ -1,5 +1,13 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 preview browser boundary · 2026-10-07
+
+Chrome CDP navigation to the PR #153 Preview `/account/privacy` reached
+Vercel deployment login before the app loaded. This traces to the missing
+authenticated non-production browser-E2E evidence boundary; no browser
+mutation or credential handling occurred. See
+`docs/shipping/evidence/qual-web-005-preview-auth-boundary-2026-10-07.md`.
+
 ## QUAL-WEB-005 privacy surface · 2026-10-07
 
 Web PR #153 head `db27d793d890929f642ed0d5b5b9bd056a732bc` traces the

@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-005 preview browser boundary
+
+Read-only Chrome CDP navigation to the PR #153 Preview `/account/privacy`
+redirected to Vercel deployment login before the Verglos app loaded. No app,
+deletion, database, payment, or entitlement request occurred; the debug tab
+was returned to production `/orgs`. This is a preview-access blocker, not
+authenticated E2E evidence. No checkbox changed. Private evidence:
+`docs/shipping/evidence/qual-web-005-preview-auth-boundary-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 privacy surface
 
 Web PR #153 exact head `db27d793d890929f642ed0d5b5b9bd056a7322bc` adds the

@@ -1,5 +1,12 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-005 preview browser boundary · 2026-10-07
+
+Chrome CDP reached the PR #153 Preview URL but Vercel deployment protection
+redirected to Vercel login before the application loaded. No bypass or browser
+mutation was attempted. Authenticated non-production deletion E2E remains an
+open gate; the redirect is not application acceptance evidence.
+
 ## QUAL-WEB-005 privacy surface · 2026-10-07
 
 PR #153 exact head `db27d793d890929f642ed0d5b5b9bd056a732bc` adds the

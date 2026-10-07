@@ -1,5 +1,14 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-005 preview browser boundary · 2026-10-07
+
+- **Decision:** Treat the protected-preview redirect as an access blocker, not
+  as a failed product request or acceptance result; keep QUAL-WEB-005 open.
+- **Evidence:** Chrome CDP reached the preview URL and observed Vercel login;
+  no Verglos response or mutation was reached. The tab was returned to
+  production `/orgs`.
+- **Boundary:** Do not bypass deployment protection or capture credentials.
+
 ## QUAL-WEB-005 privacy surface · 2026-10-07
 
 - **Decision:** Accept the new account privacy surface as implementation

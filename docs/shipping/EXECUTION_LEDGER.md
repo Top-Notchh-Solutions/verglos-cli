@@ -1,5 +1,15 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-005 preview browser boundary
+
+- **Observation:** Chrome CDP read-only navigation to the PR #153 Preview
+  `/account/privacy` was redirected to Vercel deployment login before the app
+  loaded.
+- **Safety:** No Vercel login, credential capture, app mutation, deletion,
+  database, payment, or entitlement request occurred; the tab returned to
+  production `/orgs`.
+- **Boundary:** This does not qualify authenticated preview deletion E2E.
+
 ## 2026-10-07 · QUAL-WEB-005 privacy surface
 
 - **Source:** Web PR #153 exact head `db27d793d890929f642ed0d5b5b9bd056a732bc`.
