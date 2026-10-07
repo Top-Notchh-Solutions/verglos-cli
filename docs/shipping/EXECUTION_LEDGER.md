@@ -6,9 +6,11 @@
   `feat/cli-qual-006-importer-corpus`; worktree clean.
 - **Verification:** Docker Server `29.7.2`; shared package suite **448/448**
   across 113 test files; shared typecheck and build pass.
-- **Limitation:** Local license/SBOM commands fail closed because macOS omits
-  platform-specific optional `@esbuild/*@0.28.1` packages. No source or
-  lockfile change occurred.
+- **Standards:** The repository's documented temporary
+  `pnpm.supportedArchitectures` setup rehydrated platform-optional packages;
+  license inventory and CycloneDX/SPDX SBOM generation passed for the
+  254-package lockfile. The temporary manifest and generated artifacts were
+  reverted and the worktree is clean.
 - **Disposition:** QUAL-CLI-006 remains open for official validators,
   cross-platform/trusted-publishing/legal evidence, and independent review.
   No checkbox changed; backlog remains **218 checked / 62 unchecked / 280

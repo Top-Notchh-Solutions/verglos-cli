@@ -1,13 +1,14 @@
 # Verglos V1 risk register
 
-## R-QUAL-CLI-006 macOS optional-package inventory gap · 2026-10-07
+## R-QUAL-CLI-006 official qualification gap · 2026-10-07
 
-The current CLI worktree passes its shared standards corpus, typecheck, and
-build, but local license/SBOM generation fails closed because macOS does not
-materialize every platform-specific optional `@esbuild/*@0.28.1` package in
-the virtual store. Owner: release/qualification; mitigation: use the hosted
-or clean-consumer platform matrix for complete inventory/SBOM evidence and
-retain the local limitation. QUAL-CLI-006 remains open.
+The current CLI worktree passes its shared standards corpus, typecheck, build,
+license inventory, and CycloneDX/SPDX SBOM generation after using the
+repository's documented temporary cross-platform package setup. The temporary
+manifest and generated artifacts were reverted. Remaining risk is official
+validator coverage, trusted keyless provenance, legal/trusted-publishing
+review, and independent acceptance. Owner: release/qualification.
+QUAL-CLI-006 remains open.
 
 ## R-044 Checkout failure-state hardening · 2026-10-07
 

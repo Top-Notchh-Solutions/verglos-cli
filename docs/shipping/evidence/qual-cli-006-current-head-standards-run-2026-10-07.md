@@ -9,10 +9,12 @@
   tests across 113 package test files; shared typecheck and build passed.
   Coverage includes the standards validation corpus for SARIF 2.1.0,
   CycloneDX 1.6, SPDX 2.3, in-toto Statement v1, and detect-secrets.
-- **Environment limitation:** The local license/SBOM commands fail closed
-  because the macOS install does not materialize all platform-specific optional
-  `@esbuild/*@0.28.1` lockfile packages. The source and lockfile were not
-  changed; hosted/clean-consumer license and SBOM evidence remains required.
+- **Standards qualification:** Following the repository's documented CI
+  setup, a temporary `pnpm.supportedArchitectures` matrix was used only to
+  rehydrate all platform-optional lockfile packages. License inventory,
+  CycloneDX SBOM, and SPDX SBOM generation then passed for the 254-package
+  lockfile. The temporary manifest change and generated artifacts were
+  reverted; the source, lockfile, and worktree are clean.
 - **Disposition:** QUAL-CLI-006 remains open for official-validator coverage,
   cross-platform consumer evidence, trusted keyless publishing/provenance,
   legal review, and independent acceptance. No backlog checkbox changed.
