@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-006 authenticated account accessibility/performance follow-up
+
+The existing authenticated Chrome DevTools target was reloaded read-only on
+`/account`. The snapshot contained one `main` and one `nav` landmark, seven
+links, no unlabeled controls, no tables, and no console errors/warnings. The
+unthrottled lab trace reported LCP **819 ms**, TTFB **80 ms**, render delay **740
+ms**, and CLS **0.00**; CrUX field data is unavailable. Mobile and desktop
+Lighthouse both reported Accessibility 100 and Best Practices 100. The page
+remains the Free-plan Pro fence with no organization route, so this strengthens
+lab/browser evidence only; Pro/org, human screen-reader, large-data browser,
+and field-CWV acceptance remain open. No production/provider/payment/database/
+migration/deployment/credential operation occurred. Backlog remains **218
+checked / 62 unchecked / 280 total**. Private evidence:
+`docs/shipping/evidence/qual-web-006-authenticated-account-performance-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 large-data and serialized-CI merge
 
 Web PR #150 passed hosted Verify run `37552936102`, Vercel, GitGuardian, and

@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-006 authenticated account accessibility/performance follow-up
+
+- **Browser:** Chrome 154 DevTools MCP page 13, existing authenticated
+  `/account` tab, read-only reload; no cookies, auth headers, private bodies,
+  payment data, or personal identifiers retained.
+- **Result:** Accessibility snapshot showed one `main` and one `nav`, seven
+  links, no unlabeled controls/tables, and no console errors/warnings. Lab
+  trace reported LCP 819 ms, TTFB 80 ms, render delay 740 ms, CLS 0.00, with no
+  field data. Mobile and desktop Lighthouse accessibility and best-practices
+  scores were both 100.
+- **Boundary:** The account is still the Free-plan shell and has no
+  organization route. Pro/org, human screen-reader, large-data browser, and
+  field-CWV acceptance remain open; no checkbox changed. No production,
+  provider, payment, database, migration, deployment, or credential operation
+  occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-authenticated-account-performance-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-006 large-data and serialized-CI merge
 
 - **Hosted:** Web PR #150 passed Verify `37552936102` plus Vercel,

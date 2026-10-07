@@ -482,6 +482,21 @@ closes the non-public-fixture requirement without introducing customer data.
 - Every route exposed one `main` landmark and no horizontal overflow; AX roles, node counts, focusables, and DOMContentLoaded deltas are recorded privately.
 - This strengthens QUAL-WEB-006 lab evidence but does not substitute for field CWV or human screen-reader review.
 
+## Evidence · 2026-10-07 · Authenticated account accessibility/performance follow-up
+
+- Existing Chrome DevTools page 13 reloaded the authenticated `/account` route
+  read-only. The snapshot exposed one `main` and one `nav` landmark, seven
+  links, no unlabeled controls, no tables, and no console errors/warnings.
+- Unthrottled lab trace: LCP 819 ms, TTFB 80 ms, render delay 740 ms, CLS
+  0.00; no CrUX field data was available. Mobile and desktop Lighthouse both
+  reported Accessibility 100 and Best Practices 100.
+- The page still rendered only the Free-plan Pro fence. This strengthens
+  browser/lab evidence but does not prove Pro/org dashboard rendering, human
+  screen-reader review, large-data browser behavior, or field CWV. QUAL-WEB-006
+  remains open. No production operation occurred.
+- Private evidence:
+  `docs/shipping/evidence/qual-web-006-authenticated-account-performance-2026-10-07.md`.
+
 ## Progress · 2026-10-02 · current CLI fixture boundary clarification
 
 The current-source Juice Shop scan's three redacted `~/.cursor/mcp.json` findings are
