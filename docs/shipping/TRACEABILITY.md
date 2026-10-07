@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-014 isolated PostgreSQL integration · 2026-10-07
+
+Web PR #149 exact head `aa34127` passed the isolated local PostgreSQL billing
+ledger, Razorpay webhook/PostgreSQL claim, and receipt-route integration tests
+**3/3** after guarded non-production schema setup. This strengthens
+database-backed application evidence only; it does not qualify provider
+methods, real payment lifecycle events, webhook delivery, entitlement
+reconciliation, or production state. PLAN-WEB-014/015 remain open and no
+checkbox changed. See
+`docs/shipping/evidence/plan-web-014-isolated-postgres-integration-2026-10-07.md`.
+
 ## QUAL-CLI-006 current-head standards run · 2026-10-07
 
 CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` passed the shared

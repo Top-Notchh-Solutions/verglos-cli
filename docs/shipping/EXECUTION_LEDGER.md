@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — PLAN-WEB-014 isolated PostgreSQL integration
+
+- **Source:** Web PR #149 exact head `aa34127`; disposable local Docker
+  PostgreSQL 16 container and database `verglos_test` on loopback only.
+- **Verification:** Guarded non-production schema setup completed. Billing
+  ledger, Razorpay webhook/PostgreSQL claim, and receipt-route integration
+  tests passed **3/3**.
+- **Disposition:** This is database-backed application evidence, not provider
+  acceptance. Account-enabled method behavior, real capture/failure/refund
+  callbacks, webhook delivery, entitlement reconciliation, and production
+  preflight remain open. PLAN-WEB-014/015 remain unchecked; backlog remains
+  **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No production, hosted database, customer-state, live-payment,
+  deployment, migration-file, or credential operation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-isolated-postgres-integration-2026-10-07.md`.
+
 # 2026-10-07 — QUAL-CLI-006 current-head standards run
 
 - **Source:** CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` in

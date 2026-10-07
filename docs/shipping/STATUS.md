@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-014 isolated PostgreSQL integration
+
+The current Web PR #149 worktree at exact head `aa34127` ran against a
+disposable local Docker PostgreSQL 16 `verglos_test` database. The guarded
+non-production schema setup completed, and billing-ledger, Razorpay
+webhook/PostgreSQL claim, and receipt-route integration tests passed **3/3**.
+This is isolated database-backed application evidence only; no real provider
+callback, capture, refund, entitlement reconciliation, production, or hosted
+database operation occurred. PLAN-WEB-014/015 remain open and backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-isolated-postgres-integration-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-CLI-006 current-head standards run
 
 CLI exact head `13d144438045da574e7cbab6a21ec73341b8f796` passed the shared
