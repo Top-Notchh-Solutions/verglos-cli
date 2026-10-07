@@ -50,16 +50,16 @@ export async function executeHuntRecipe(
     ]);
     const report = parseReport(reportValue);
     const recipe = parseHuntRecipe(recipeValue);
-    const runtime = await loadHuntRuntime(input.runtimeLoader);
-    const supported = runtime.validateSupportedHuntRecipe(recipe);
-    if (!supported.supported) throw new Error(`recipe is not in the supported A1 catalog (${supported.reason})`);
     const trust = parseHuntRecipeTrustPolicy(trustValue);
     const approval = ApprovalReceiptSchema.parse(approvalValue);
     const executionAt = new Date().toISOString();
     const trustVerification = verifyHuntRecipe(recipe, trust, executionAt);
     if (!trustVerification.trusted) throw new Error(`recipe trust verification failed: ${trustVerification.reason}`);
-    const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: executionAt };
     if (recipe.targetSubjectId !== input.subjectId || recipe.ruleId !== input.ruleId) throw new Error("recipe subject/rule does not match the requested execution binding");
+    const runtime = await loadHuntRuntime(input.runtimeLoader);
+    const supported = runtime.validateSupportedHuntRecipe(recipe);
+    if (!supported.supported) throw new Error(`recipe is not in the supported A1 catalog (${supported.reason})`);
+    const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: executionAt };
     const result = await runtime.runHunt(report, {
       adapter: new runtime.RestrictedProcessAdapter(recipe),
       sandbox: "restricted-process",

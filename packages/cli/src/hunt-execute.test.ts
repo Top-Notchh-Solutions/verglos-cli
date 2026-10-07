@@ -116,6 +116,22 @@ test("HUNT-009 fails closed for binding drift and symlinked inputs", async () =>
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("HUNT-009 rejects binding drift before loading the private runtime", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-execute-preflight-"));
+  try {
+    let runtimeLoaded = false;
+    const result = await run(root, {
+      ruleId: "hunt.other-rule",
+      runtimeLoader: async () => {
+        runtimeLoaded = true;
+        return import("../../hunt/dist/index.js");
+      },
+    });
+    assert.equal(result.code, 78);
+    assert.equal(runtimeLoaded, false);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("HUNT-009 denies execution when the private runtime is unavailable", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-runtime-missing-"));
   try {
