@@ -1,6 +1,6 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
-Do not push publicly. This document enumerates remaining manual-input classes under Verglos V1 and names the specific owner action needed to unblock them. Reconciled 2026-09-30 after the current Web qualification/truth-registry audit, CLI entitlement-key correction, and acceptance of RECORD-002/009/011/012 plus DIST-004/005. Older bullets below are superseded where this update marks an item accepted.
+Do not push publicly. This document enumerates remaining manual-input classes under Verglos V1 and names the specific owner action needed to unblock them. Reconciled 2026-10-07 after current CLI/Web head reconciliation, official CLI artifact validation, Razorpay Test Mode inventory freeze, and the latest private evidence commits. Older bullets below are superseded where this update marks an item accepted.
 
 Per the goal file: "For every item left unchecked in the active area, state the specific unmet criterion and required evidence or owner. Do not describe a task as 'blocked' without naming the dependency and why it prevents work."
 
@@ -98,7 +98,13 @@ These lines in the backlog are explicit founder-decision items, not agent tasks:
 
 ## What CAN still be shipped without founder input
 
-At the 2026-09-30 recount, QUAL-WEB-002 is accepted and the current Web qualification substrates plus truth-registry PR remain explicitly non-acceptance/held work. DIST-WEB-002 and PLAN-WEB-011/012 remain production/commercial-evidence blocked. HUNT-008 still requires concrete authenticated/licensed recipe content; HOSTED-013/OPS-015 require separately controlled production migration/cutover evidence; PLAN-CLI-001 remains open for its hosted activation trace; QUAL-CLI-006 is dependency-ready but lacks official-validator and supported-platform evidence. Licensing, POC, and final marketing remain external gates. The next autonomous batch should be QUAL-CLI-006 if official tools and a reproducible private evidence run can be made available; otherwise record that exact tooling blocker rather than treating the draft corpus as acceptance.
+The current CLI and Web implementation heads have no open phase PR requiring local merge work. QUAL-CLI-006's current-head supporting run now has official in-toto, CycloneDX, and SPDX evidence plus Node 22/platform evidence; it remains unchecked because trusted keyless identity, legal/license clearance, independent review, and release approval are not proven. PLAN-WEB-014 is frozen at the provider boundary until the flagged Test Mode credential is rotated/repaired; no further provider calls should use it. DIST-WEB-002/003, PLAN-WEB-015, HOSTED-013, OPS-015, and the downstream PRO/Team/Studio/Enterprise runtime items remain production/cutover-gated. HUNT-008/009/010/011 and QUAL-CLI-004 remain content/provenance/independent-review-gated. POC, legal, publication, and marketing remain external gates.
+
+The next three independent batches are therefore:
+
+1. **R-041 / production safety:** founder rotates the exposed production database credential, refreshes the Vercel production secret, redeploys, revokes the old credential, and provides bounded read-only verification before any production DB operation.
+2. **PLAN-WEB-014/015:** after Test Mode credential rotation, establish the account-enabled method set and capture the private lifecycle matrix; only then reconcile production configuration. No guessed method list or QR-only fallback is acceptable.
+3. **GITHUB-WEB-004 / external qualification:** authorized App/org installation and bounded install/webhook/check/uninstall/recovery evidence, or the next legal/trusted-publishing review batch if that authorization is not available.
 
 ## Recommended founder action order (to unblock the largest chunk fastest)
 
