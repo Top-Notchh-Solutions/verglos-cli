@@ -3157,3 +3157,10 @@ focused tests (**27/29 with 2 explicit DB skips**), full serial (**857/880 with
 23 skips, 0 failures**), build, schema, and diff checks pass. Hosted Verify for
 the new head is pending. QUAL-WEB-005 remains open; backlog is unchanged at
 **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+After PR #153 merged as `2e86514`, PR #154 was reconciled against that main and
+pushed at exact head `9032bda`. Focused SCM/deletion contracts passed **46/46**;
+serial Web passed **857/880** with 23 explicit skips and zero failures;
+typecheck, build, schema, 37-migration ordering, and diff checks passed. Hosted
+checks for this final reconciled head have not yet appeared. Live GitHub
+App/org/webhook/cutover evidence remains open.

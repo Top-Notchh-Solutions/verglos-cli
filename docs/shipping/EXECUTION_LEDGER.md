@@ -4443,6 +4443,15 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
 - **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
   (77.9%)**.
 
+# 2026-10-07 — Web PR #154 final base reconciliation
+
+After PR #153 merged as `2e86514`, PR #154 was reconciled against that main and
+pushed at exact head `9032bda`. Focused SCM/deletion contracts passed **46/46**;
+serial Web passed **857/880** with 23 explicit skips and zero failures;
+typecheck, build, schema, 37-migration ordering, and diff checks passed. Hosted
+checks for this final reconciled head have not yet appeared. Live GitHub
+App/org/webhook/cutover evidence remains open.
+
 # 2026-10-07 — Web PR #153 merged after migration reconciliation
 
 - **Merge:** PR #153 exact head `8a0bc3b` merged as `2e86514` after hosted

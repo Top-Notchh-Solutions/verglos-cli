@@ -50,3 +50,9 @@ tests passed **855/878** with **23** explicit skips and zero failures; typecheck
 schema, 31-migration ordering, build, and diff checks passed. Hosted checks for
 the reconciled head restarted. Live App installation, authorized organization,
 webhook, deployment cutover, and independent acceptance remain open.
+
+After PR #153 merged as `2e86514`, PR #154 was reconciled again and pushed at
+exact head `9032bda` against that main. The final reconciled branch passed
+focused SCM/deletion contracts **46/46**, serial Web **857/880** with **23**
+explicit skips and zero failures, typecheck, build, schema, 37-migration
+ordering, and diff checks. Hosted checks for `9032bda` have not yet appeared.
