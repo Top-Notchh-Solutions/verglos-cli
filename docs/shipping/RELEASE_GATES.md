@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## Production payment-surface truth recheck · 2026-10-07
+
+Production `/checkout` still renders the legacy UPI-only QR path at INR
+2,809.43/month. Chrome DevTools saw HTTP 200 and no console errors; no payment
+or mutation request was made. This confirms Web PR #149 is not deployed and
+does not qualify any payment gate. PLAN-WEB-011/012/013/014/015 remain open;
+no production cutover or payment operation is authorized by this observation.
+
 ## QUAL-CLI-006 official in-toto artifact binding · 2026-10-07
 
 The exact merged CLI head `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` passed

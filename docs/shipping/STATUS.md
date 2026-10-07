@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · production payment-surface truth recheck
+
+Read-only Chrome DevTools inspection of `https://verglos.com/checkout` returned
+HTTP 200 with a clean console but still rendered the legacy UPI-only QR path:
+INR **2,809.43/month**, “Pay in ₹ via any UPI app”, and `Show UPI QR code`.
+No payment or mutation request was made. This reconfirms that PR #149 is not
+deployed to production and that the live surface is not test-mode or
+all-method payment evidence. PLAN-WEB-011/012/013/014/015 remain open; no
+checkbox changed and backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Private evidence:
+`docs/shipping/evidence/qual-web-payment-production-qr-observation-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-CLI-006 official in-toto artifact binding
 
 The exact merged CLI head `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` was

@@ -1,5 +1,11 @@
 # Goal addendum — 2026-10-07
 
+Production payment truth recheck: read-only Chrome DevTools inspection of
+`/checkout` returned HTTP 200 and clean console but still displayed the legacy
+UPI-only QR path at INR 2,809.43/month. No payment or mutation request occurred.
+PR #149 is not deployed; PLAN-WEB-011/012/013/014/015 remain open. Backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
 QUAL-CLI-006 continuation: official `in-toto==3.0.0` verification passed for
 all six public archives from exact CLI head `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`
 with exact SHA-256 products in a bounded disposable Python 3.12 container.

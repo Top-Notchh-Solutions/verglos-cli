@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · production payment-surface truth recheck
+
+- **Browser:** Read-only Chrome DevTools load of `/checkout` returned HTTP 200
+  and no console messages. The current production UI still shows the INR
+  2,809.43/month Pro offer, UPI-only copy, and `Show UPI QR code`.
+- **Safety:** No button click, QR creation, order creation, payment, webhook,
+  entitlement, or other mutation request occurred; no sensitive browser data
+  was retained.
+- **Boundary:** This confirms the active production deployment has not adopted
+  PR #149. It is a truth/safety observation, not payment acceptance. The
+  provider test-mode method matrix remains the next external payment batch.
+
 ## 2026-10-07 · QUAL-CLI-006 official in-toto artifact binding
 
 - **Source:** CLI `origin/main` and disposable verifier worktree at exact

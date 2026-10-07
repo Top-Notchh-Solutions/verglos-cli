@@ -1,5 +1,12 @@
 # Verglos V1 risk register
 
+Latest R-044 production truth update (2026-10-07): read-only Chrome DevTools
+still observes the legacy UPI-only QR checkout at INR 2,809.43/month, while
+Web PR #149 remains open and not deployed. No payment or mutation request was
+made. The live payment surface therefore remains unsuitable for test-mode or
+all-method acceptance; account-enabled Razorpay test credentials and isolated
+lifecycle evidence remain release-blocking.
+
 Latest QUAL-CLI-006 update (2026-10-07): official `in-toto==3.0.0` verification
 passed for six public archives from exact CLI head
 `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`, with exact SHA-256 products in a

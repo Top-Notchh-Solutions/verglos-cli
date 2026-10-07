@@ -1,5 +1,14 @@
 # Verglos V1 traceability
 
+## Production payment-surface truth recheck · 2026-10-07
+
+Read-only Chrome DevTools inspection of production `/checkout` returned HTTP
+200 with clean console but rendered the legacy UPI-only QR path at INR
+2,809.43/month. No payment or mutation request occurred. This confirms PR #149
+is not deployed and provides no test-mode/provider lifecycle evidence;
+PLAN-WEB-011/012/013/014/015 remain unchecked. See
+`docs/shipping/evidence/qual-web-payment-production-qr-observation-2026-10-07.md`.
+
 ## QUAL-CLI-006 official in-toto artifact binding · 2026-10-07
 
 The exact merged CLI head `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` passed

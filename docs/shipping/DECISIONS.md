@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## Production payment-surface truth recheck · 2026-10-07
+
+- **Decision:** Treat the live checkout as legacy QR-only runtime truth and keep
+  all payment release gates open. Do not scan, pay, or use it as test evidence.
+- **Evidence:** Read-only Chrome DevTools `/checkout` load: HTTP 200, clean
+  console, INR 2,809.43/month, UPI-only copy, and `Show UPI QR code`; no
+  mutation request. PR #149 remains a non-production open PR.
+- **Boundary:** No payment, provider, database, entitlement, deployment, or
+  production configuration operation occurred.
+
 ## QUAL-CLI-006 official in-toto artifact binding · 2026-10-07
 
 - **Decision:** Record the official in-toto result as a qualified artifact
