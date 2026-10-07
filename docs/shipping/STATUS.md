@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-006 organization-directory reload
+
+After a fresh reload in the approved authenticated Chrome session,
+`https://verglos.com/orgs` rendered “Choose an organization” and “No
+organizations yet.” The earlier 404 was stale tab state; read-only GitHub
+deployment records show successful Production deployments for merged
+organization-directory commits `c1bca533` and `6fccfb26`. The account remains
+Free with no organization, so paid/org runtime, human screen-reader,
+large-data, and field-CWV evidence remain open. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total**. Private evidence:
+`docs/shipping/evidence/qual-web-006-auth-account-browser-2026-10-07.md`.
+
 ## 2026-10-07 · CLI PR #75 merged after hosted qualification
 
 CLI PR #75 merged as `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` after all 11

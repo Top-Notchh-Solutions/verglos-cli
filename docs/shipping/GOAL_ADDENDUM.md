@@ -1,5 +1,13 @@
 # Goal addendum — 2026-10-07
 
+QUAL-WEB-006 browser continuation: after a fresh reload, authenticated
+`/orgs` rendered its directory empty state (“Choose an organization” / “No
+organizations yet”). The earlier 404 was stale tab state; successful Production
+deployment records were confirmed for merged organization-directory commits
+`c1bca533` and `6fccfb26`. The account remains Free with no organization, so
+paid/org, human screen-reader, large-data, and field-CWV evidence remain open.
+No checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total**.
+
 CLI PR #75 subsequently passed all 11 hosted checks across Ubuntu, macOS, and
 Windows Node 20/22/24 plus Verglos self-scan and in-toto release binding. It
 merged as `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`. This is a shipped

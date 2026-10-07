@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 organization-directory reload · 2026-10-07
+
+Fresh authenticated browser evidence shows `/orgs` renders its truthful empty
+state after reload; the earlier 404 was stale tab state. This confirms the
+deployed directory route, but the account is Free with no organization. It does
+not close QUAL-WEB-006: paid/org runtime, human screen-reader, large-data, and
+field-CWV evidence remain open.
+
 ## QUAL-WEB-006 authenticated account browser probe · 2026-10-07
 
 The authenticated Free `/account` surface passes the captured automated

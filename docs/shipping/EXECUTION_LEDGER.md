@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-006 organization-directory reload
+
+- **Browser:** Fresh reload of the authenticated `/orgs` page rendered the
+  organization directory and its truthful empty state, “No organizations yet.”
+  The earlier 404 was stale tab state, not current route evidence.
+- **Deployment:** Read-only GitHub records show successful Production
+  deployments for merged commits `c1bca533c0e617427e42fd1be3c449b0ed458311`
+  and `6fccfb26ffb707e53c3ef44166b42280be29de55`.
+- **Boundary:** The session remains Free with no organization. This strengthens
+  the authenticated directory probe but does not qualify paid/org runtime,
+  human screen-reader, large-data, or field-CWV behavior; no checkbox changed.
+
 ## 2026-10-07 · CLI PR #75 hosted qualification and merge
 
 - **Hosted:** All 11 checks passed across Ubuntu, macOS, and Windows Node

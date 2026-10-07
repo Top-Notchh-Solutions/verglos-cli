@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 organization-directory reload · 2026-10-07
+
+- A fresh reload in the authenticated Chrome session rendered the `/orgs`
+  directory with “Choose an organization” and “No organizations yet.” The
+  prior 404 was stale tab state. Successful Production deployment records were
+  confirmed read-only for merged organization-directory commits `c1bca533` and
+  `6fccfb26`.
+- The account is still Free and has no organization. This is partial live
+  evidence only; paid/org, human screen-reader, large-data, and field-CWV
+  acceptance remain open. No checkbox changed. See
+  `docs/shipping/evidence/qual-web-006-auth-account-browser-2026-10-07.md`.
+
 ## QUAL-WEB-006 authenticated account browser probe · 2026-10-07
 
 - Chrome DevTools MCP verified the approved authenticated session. `/account`

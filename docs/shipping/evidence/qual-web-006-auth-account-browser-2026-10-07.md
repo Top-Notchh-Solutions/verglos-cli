@@ -9,6 +9,13 @@
   main region, navigation links, account state, and a Pro-fence explanation.
   One Tab action focused the `OVERVIEW` link. Console reported no warnings or
   errors. Account navigation/document requests returned 200/304.
+- **Organization directory continuation:** After a fresh reload of
+  `https://verglos.com/orgs`, the authenticated page rendered “Choose an
+  organization” and “No organizations yet” rather than the stale 404 shown by
+  the pre-reload tab. GitHub read-only deployment records show successful
+  Production deployments for merged organization-directory commits
+  `c1bca533c0e617427e42fd1be3c449b0ed458311` and
+  `6fccfb26ffb707e53c3ef44166b42280be29de55`.
 - **Lighthouse snapshot:** Desktop and mobile each reported Accessibility 100,
   Best Practices 100, and SEO 100. Agentic Browsing was 50 because the
   `llms.txt` audit reported no links; this is recorded as a separate public
