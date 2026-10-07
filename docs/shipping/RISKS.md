@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-048 deletion hold race hardening · 2026-10-07
+
+The deletion worker now rechecks the durable legal-hold state at the completion
+boundary and blocks the job if a hold appeared during deletion. This reduces a
+code-side race but does not prove transactional hold/deletion serialization,
+authenticated non-production E2E, legal/customer-held disposition, production
+reconciliation, restore/rollback, or independent review. Owner: privacy/data
+governance; mitigation: qualify the worker against the deployed schema and
+authorized legal/customer-held scenarios before enabling destructive execution.
+`QUAL-WEB-005` remains open. No production deletion occurred.
+
 ## R-044 refund ordering hardening · 2026-10-07
 
 The payment ledger now preserves a monotonic refund watermark: stale smaller

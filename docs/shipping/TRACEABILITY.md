@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 deletion hold completion boundary · 2026-10-07
+
+- **Source:** Web PR #153 exact pushed head
+  `d7deec1bc115417e924c93846231074ea87ad51e`.
+- **Change:** The final deletion decision now consumes the post-delete
+  `legalHoldActive` state instead of forcing false; a hold appearing during
+  execution blocks completion.
+- **Verification:** Focused deletion/qualification tests passed 36/36,
+  typecheck and diff checks passed, and the disposable PostgreSQL job
+  integration passed 1/1. Hosted Verify `37632466656` was in progress.
+- **Limit:** No authenticated E2E, legal/customer-held disposition, production
+  migration/deletion, restore/rollback, or independent acceptance. No checkbox
+  changed; `QUAL-WEB-005` remains open. See
+  `docs/shipping/evidence/qual-web-005-hold-boundary-2026-10-07.md`.
+
 ## PLAN-WEB-013/014 refund ordering hardening · 2026-10-07
 
 - **Source:** Web PR #149 exact pushed head

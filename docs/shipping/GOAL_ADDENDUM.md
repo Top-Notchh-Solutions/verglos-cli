@@ -288,3 +288,17 @@ backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No provider,
 production, deployment, payment, entitlement, migration, or credential
 operation occurred. Evidence:
 `docs/shipping/evidence/plan-web-013-refund-ordering-2026-10-07.md`.
+
+## 2026-10-07 deletion hold-boundary continuation
+
+Web PR #153 exact head `d7deec1bc115417e924c93846231074ea87ad51e` now rechecks
+the legal-hold state at the deletion completion boundary. Focused deletion and
+qualification tests pass 36/36; the disposable PostgreSQL job integration passes
+1/1; hosted Verify `37632466656` was in progress at capture. This is code-side
+privacy safety progress only. `QUAL-WEB-005` remains open for authenticated
+non-production E2E, legal/customer-held decisions, complete reconciliation,
+restore/rollback, and independent acceptance. The whole-product goal remains
+active and the authoritative backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. No production, deletion, migration, deployment, provider,
+payment, entitlement, browser, or credential operation occurred. Evidence:
+`docs/shipping/evidence/qual-web-005-hold-boundary-2026-10-07.md`.

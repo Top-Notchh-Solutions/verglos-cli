@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-005 deletion hold completion boundary
+
+Web PR #153 exact pushed head `d7deec1bc115417e924c93846231074ea87ad51e`
+now carries the re-read legal-hold state into the final deletion decision. A
+hold activated during deletion therefore blocks completion instead of allowing
+an audit receipt to claim success. Focused deletion/qualification tests passed
+**36/36**, typecheck and diff checks passed, and the disposable PostgreSQL job
+integration passed **1/1**. Hosted Verify `37632466656` was in progress at
+capture. This is worker safety progress only; no production, deletion, browser,
+credential, migration, deployment, or provider operation occurred.
+`QUAL-WEB-005` remains open and no checkbox changed; backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/qual-web-005-hold-boundary-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013/014 refund ordering hardening
 
 Web PR #149 exact pushed head `238ec7425ff1979b82d97e3d371cedbe83fbd394`

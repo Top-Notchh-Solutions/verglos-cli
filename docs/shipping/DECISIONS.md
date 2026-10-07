@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-005 hold state at completion boundary · 2026-10-07
+
+- **Decision:** A deletion worker must feed the post-delete hold state into its
+  final qualification decision; a hold appearing during execution blocks the
+  job from completing.
+- **Reason:** The initial hold check cannot protect the entire destructive
+  interval. An audit receipt must never claim completion after a hold becomes
+  active.
+- **Evidence:** Web PR #153 commit `d7deec1`; focused 36/36 and disposable
+  PostgreSQL 1/1 passed.
+- **Boundary:** This closes a code-side race only. `QUAL-WEB-005` remains open
+  for authenticated E2E, legal/customer-held disposition, reconciliation,
+  restore/rollback, and independent review. No destructive operation occurred.
+
 ## PLAN-WEB-013/014 monotonic refund watermark · 2026-10-07
 
 - **Decision:** Treat a signed, valid refund observation lower than the durable

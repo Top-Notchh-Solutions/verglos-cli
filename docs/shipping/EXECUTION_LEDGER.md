@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — QUAL-WEB-005 deletion hold completion boundary
+
+- **Batch:** Close the race in which a legal hold could appear between the
+  initial deletion check and the final audit decision.
+- **Backlog:** `QUAL-WEB-005` attempted; no accepted IDs. Count remains
+  **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Code:** Web PR #153 commit `d7deec1`, pushed as exact head
+  `d7deec1bc115417e924c93846231074ea87ad51e`.
+- **Verification:** Focused deletion/qualification tests **36/36**, typecheck,
+  and `git diff --check` passed. Disposable Docker PostgreSQL 15 job
+  integration passed **1/1** using temporary tables; the container was removed.
+- **Hosted:** Verify run `37632466656` was in progress at capture.
+- **Boundary:** No production migration, deletion, database/configuration write,
+  browser E2E, legal decision, deployment, rollback, provider, or credential
+  operation.
+- **Disposition:** Keep PR #153 and QUAL-WEB-005 open for authenticated E2E,
+  complete row/held-record reconciliation, legal/consent decisions,
+  restore/rollback, and independent acceptance. See
+  `docs/shipping/evidence/qual-web-005-hold-boundary-2026-10-07.md`.
+
 # 2026-10-07 — PLAN-WEB-013/014 refund ordering hardening
 
 - **Batch:** Harden the payment ledger against an out-of-order stale refund

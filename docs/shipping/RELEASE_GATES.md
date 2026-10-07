@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-005 deletion hold completion boundary · 2026-10-07
+
+PR #153 exact head `d7deec1bc115417e924c93846231074ea87ad51e` now carries the
+post-delete legal-hold state into the final qualification decision. Focused
+36/36 tests, typecheck, diff check, and disposable PostgreSQL integration 1/1
+pass; hosted Verify `37632466656` was in progress at capture. This is not
+QUAL-WEB-005 acceptance: authenticated non-production E2E, complete row and
+customer-held reconciliation, consent/legal disposition, production migration,
+restore/rollback, and independent review remain open. No checkbox or
+production state changed.
+
 ## PLAN-WEB-013/014 refund ordering hardening · 2026-10-07
 
 PR #149 exact head `238ec7425ff1979b82d97e3d371cedbe83fbd394` now treats stale
