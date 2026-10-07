@@ -28,9 +28,10 @@
 - **Verification:** Previously recorded branch full tests, focused
   compatibility tests, typecheck, and build pass. No new hosted result is
   claimed from the PR creation step.
-- **Hosted state:** PR #72 reports no status checks at capture time; it is not
-  hosted-green. Deployed signer/catalog alignment, supported-version
-  migration, and hosted activation remain open.
+- **Hosted state:** in-toto, self-scan, and all Ubuntu/macOS Node 20/22/24
+  cells are green; Windows Node 20/22/24 remain in progress. The PR is not
+  claimed terminal-green. Deployed signer/catalog alignment, supported-version
+  migration, hosted activation, and R-041 rotation remain open.
 - **Boundary:** No production signer, entitlement activation, database,
   deployment, publish, release, or customer operation occurred. R-041 remains
   open.

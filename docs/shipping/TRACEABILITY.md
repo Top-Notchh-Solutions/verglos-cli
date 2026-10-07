@@ -25,7 +25,8 @@
   `dacd286`.
 - **Verification:** Existing branch evidence records full CLI tests, focused
   compatibility tests, typecheck, and build passing. PR #72 is open/mergeable;
-  no hosted checks are reported yet.
+  hosted in-toto, self-scan, and all Ubuntu/macOS Node 20/22/24 cells pass;
+  Windows Node 20/22/24 remain in progress.
 - **Boundary:** PLAN-CLI-004 remains unchecked pending hosted platform checks,
   deployed signer/catalog alignment, old-token migration evidence, and hosted
   activation integration. No production operation occurred.
