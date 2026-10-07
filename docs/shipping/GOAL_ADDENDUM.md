@@ -1,5 +1,12 @@
 # Goal addendum — 2026-10-07
 
+QUAL-CLI-006 continuation: official `in-toto==3.0.0` verification passed for
+all six public archives from exact CLI head `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`
+with exact SHA-256 products in a bounded disposable Python 3.12 container.
+This is artifact-binding evidence only; trusted keyless Sigstore, legal,
+protected publishing, and final release gates remain open. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
 Payment continuation: Web PR #149 exact head
 `db68157da039d8aab939818f9023f867028e4432` passed focused payment method,
 route-contract, and webhook adversarial tests **18/18**, typecheck, Drizzle

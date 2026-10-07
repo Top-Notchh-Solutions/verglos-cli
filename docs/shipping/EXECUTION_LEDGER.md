@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-CLI-006 official in-toto artifact binding
+
+- **Source:** CLI `origin/main` and disposable verifier worktree at exact
+  `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`.
+- **Verification:** Bounded `python:3.12-slim` container installed official
+  `in-toto==3.0.0`; `scripts/verify-in-toto-release.py` passed for six public
+  archives and exact SHA-256 products.
+- **Boundary:** Ephemeral layout/functionary keys were used only for this
+  artifact-binding check. No keyless Sigstore identity, legal approval,
+  trusted npm publication, release tag, deployment, or production operation.
+  QUAL-CLI-006 remains open.
+
 ## 2026-10-07 · PLAN-WEB-013 exact-head payment continuation
 
 - **Source:** Web PR #149 exact head

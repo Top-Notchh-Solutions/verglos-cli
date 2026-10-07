@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-CLI-006 official in-toto artifact binding
+
+The exact merged CLI head `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` was
+verified in a bounded disposable `python:3.12-slim` container with official
+`in-toto==3.0.0`. The release verifier passed for all six public archives with
+exact SHA-256 products. This closes the local official in-toto artifact-binding
+sub-check only; trusted keyless Sigstore/Fulcio/Rekor identity, legal
+clearance, protected publishing, and final release acceptance remain open. No
+checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Private evidence:
+`docs/shipping/evidence/qual-cli-006-official-intoto-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013 exact-head payment continuation
 
 Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` passed the

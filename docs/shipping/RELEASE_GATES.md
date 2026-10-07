@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## QUAL-CLI-006 official in-toto artifact binding · 2026-10-07
+
+The exact merged CLI head `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` passed
+`scripts/verify-in-toto-release.py` in a bounded disposable Python 3.12
+container with official `in-toto==3.0.0`; all six public archives and their
+exact SHA-256 products verified. This closes the local official in-toto
+sub-check only. Trusted keyless Sigstore/Fulcio/Rekor release identity, legal
+clearance, protected publication, and final acceptance remain open; no
+checkbox changed and no release operation occurred.
+
 ## PLAN-WEB-013/014/015 exact-head payment continuation · 2026-10-07
 
 Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` passed

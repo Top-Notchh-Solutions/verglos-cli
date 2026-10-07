@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## QUAL-CLI-006 official in-toto artifact binding · 2026-10-07
+
+- **Decision:** Record the official in-toto result as a qualified artifact
+  binding sub-check, but keep QUAL-CLI-006 and release gates open.
+- **Evidence:** Exact CLI `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`; official
+  `in-toto==3.0.0` verifier passed six public archives with exact SHA-256
+  products in a bounded disposable Python 3.12 container.
+- **Boundary:** Ephemeral keys do not establish trusted keyless
+  Sigstore/Fulcio/Rekor identity, legal clearance, protected npm publishing,
+  or final release acceptance. No publication, tag, deployment, or production
+  operation occurred.
+
 ## PLAN-WEB-013 exact-head payment qualification · 2026-10-07
 
 - **Decision:** Record the exact-head payment tests as code-side qualification

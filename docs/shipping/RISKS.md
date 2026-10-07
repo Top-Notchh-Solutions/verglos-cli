@@ -1,5 +1,13 @@
 # Verglos V1 risk register
 
+Latest QUAL-CLI-006 update (2026-10-07): official `in-toto==3.0.0` verification
+passed for six public archives from exact CLI head
+`6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`, with exact SHA-256 products in a
+bounded disposable Python 3.12 container. This reduces artifact-format and
+local binding uncertainty only. Trusted keyless Sigstore/Fulcio/Rekor identity,
+legal clearance, protected publishing, and final release acceptance remain
+open; no release or production operation occurred.
+
 Latest R-044/PLAN-WEB-013 update (2026-10-07): Web PR #149 exact head
 `db68157da039d8aab939818f9023f867028e4432` passes focused payment-method,
 route-contract, and webhook-adversarial tests 18/18, typecheck, schema, 31
