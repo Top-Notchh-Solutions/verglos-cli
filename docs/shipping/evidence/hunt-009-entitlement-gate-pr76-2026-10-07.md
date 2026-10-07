@@ -18,14 +18,13 @@ runtime checks.
 - CLI package TypeScript typecheck, build, and `git diff --check` pass.
 - Process regression: a Free invocation returns one bounded
   `CAPABILITY_REQUIRED` JSON result and does not read execution inputs.
-- Hosted Platform matrix run `37612897011` currently passes in-toto, all
-  Ubuntu Node 20/22/24 cells, all macOS Node 20/22/24 cells, and Windows Node
-  24; Windows Node 20/22 remain pending. Hosted Self-scan run `37612897033`
-  passes.
+- Hosted Platform matrix run `37612897011` passes in-toto and all nine
+  Ubuntu/macOS/Windows Node 20/22/24 cells. Hosted Self-scan run
+  `37612897033` also passes; all 11 hosted checks are green.
 
 ## Boundary
 
 This is code-side security qualification only. HUNT-009 remains unchecked
-pending hosted cross-platform verification, trusted/licensed recipe provenance,
-bounded execution qualification, and independent review. No production,
+pending trusted/licensed recipe provenance, bounded execution qualification,
+and independent review. No production,
 customer, provider, or private-fixture operation occurred.

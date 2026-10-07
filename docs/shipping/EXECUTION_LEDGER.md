@@ -3574,10 +3574,10 @@ before enabling any destructive adapter.
 - **Verification:** Focused Hunt/process suite **54/54 pass**; package
   typecheck, build, and diff check pass; Free-plan process regression emits bounded
   `CAPABILITY_REQUIRED` JSON and performs no input reads.
-- **PR:** #76, exact head `17d0813737cda980ccb366c5adf948bda2e293a3`, mergeable;
-  hosted Self-scan `37612897033` passes; Platform matrix `37612897011` passes
-  in-toto, all Ubuntu/macOS Node 20/22/24 cells, and Windows Node 24, with
-  Windows Node 20/22 still pending at capture.
+- **PR:** #76, exact head `17d0813737cda980ccb366c5adf948bda2e293a3`, open and
+  mergeable; hosted Self-scan `37612897033` and Platform matrix
+  `37612897011` pass all 11 checks (in-toto plus Ubuntu/macOS/Windows Node
+  20/22/24).
 - **Backlog:** HUNT-009 attempted but open; count remains **218 checked / 62
   unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, customer, provider, database, deployment, or

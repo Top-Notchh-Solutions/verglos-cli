@@ -2434,10 +2434,11 @@ CLI PR #76 adds a paid `hunt.critical` capability check before the
 approval input. The existing signed-recipe, approval, supported-catalog,
 binding, and bounded-runtime gates remain in force. Focused Hunt/process tests
 pass **54/54** and package typecheck passes. PR #76 exact head is
-`17d0813737cda980ccb366c5adf948bda2e293a3`, mergeable, with hosted matrix
-pending. HUNT-009 remains open for hosted verification, trusted/licensed
-recipe provenance, and independent review. Backlog remains **218 checked / 62
-unchecked / 280 total (77.9%)**. Private evidence:
+`17d0813737cda980ccb366c5adf948bda2e293a3`, open and mergeable; Platform
+matrix `37612897011` and Self-scan `37612897033` pass all 11 hosted checks.
+HUNT-009 remains open for trusted/licensed recipe provenance, bounded
+execution qualification, and independent review. Backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**. Private evidence:
 `docs/shipping/evidence/hunt-009-entitlement-gate-pr76-2026-10-07.md`.
 ## 2026-10-07 · PLAN-WEB-014 direct checkout navigation probe
 
