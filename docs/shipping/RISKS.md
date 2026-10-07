@@ -443,3 +443,8 @@ fail-closed omission tests, verified locally and by hosted workflow
 `37564437899`. The registry is not wired to destructive SQL; executable
 retention/legal decisions, provider/accounting handling, reconciliation,
 restore/rollback, and authenticated non-production E2E remain critical risks.
+
+R-009 update (2026-10-07, pre-runtime trust preflight): CLI `67debee` now
+verifies trust and exact rule/subject binding before loading the private Hunt
+runtime, reducing preflight authority. This does not establish publisher-root
+authenticity, bounded execution qualification, or independent review.

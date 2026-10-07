@@ -43,3 +43,14 @@ Focused Hunt/process tests remain **54/54 pass**; CLI typecheck, build, and
 self-scan runs `37614239691`/`37614239664` are pending at capture, with in-toto
 passed. HUNT-009 remains unchecked because trusted/licensed publisher roots,
 bounded execution qualification, and independent review are still open.
+
+## Pre-runtime trust preflight follow-up
+
+PR #76 commit `67debee` verifies the trust store and exact recipe rule/subject
+binding before loading the private runtime or validating the supported
+catalog. Focused Hunt/process tests pass **55/55**, typecheck/build/diff check
+pass, and the pushed head is
+`67debee964c0c6be736d247793ec1d6faa7babb9`. Hosted checks restarted after the
+push; no hosted result is claimed yet. HUNT-009 remains unchecked because
+trusted/licensed publisher roots, bounded execution qualification, and
+independent review remain open.

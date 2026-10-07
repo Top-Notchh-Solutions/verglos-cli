@@ -3611,3 +3611,18 @@ before enabling any destructive adapter.
   unchecked / 280 total (77.9%)**.
 - **Boundary:** No production, provider, payment, database, deployment, or
   credential operation occurred.
+
+# 2026-10-07 — HUNT-009 pre-runtime trust preflight
+
+- **Implementation:** CLI commit `67debee` moves trust-store verification and
+  exact recipe rule/subject binding ahead of private runtime loading and
+  supported-catalog validation; invalid bindings cannot trigger runtime load.
+- **Verification:** Focused Hunt/process tests **55/55 pass**, including the
+  runtime-not-loaded regression; CLI typecheck, build, and diff check pass.
+  PR #76 is pushed at exact head
+  `67debee964c0c6be736d247793ec1d6faa7babb9`; hosted checks have restarted and
+  no result is claimed yet.
+- **Backlog:** HUNT-009 attempted but open; count remains **218 checked / 62
+  unchecked / 280 total (77.9%)**.
+- **Boundary:** No production, provider, payment, database, deployment, or
+  credential operation occurred.
