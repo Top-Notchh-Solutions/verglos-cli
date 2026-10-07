@@ -3085,3 +3085,12 @@ PostgreSQL 15 rehearsal proves zero writes on default empty-db refusal and all
 remains **218 checked / 62 unchecked / 280 total (77.9%)**. No production,
 provider, payment, deployment, or credential operation occurred. Evidence:
 `docs/shipping/evidence/migration-bootstrap-guard-2026-10-07.md`.
+
+The migration guard was also ported cleanly to Web PR #153 at exact head
+`f81de9f`, which carries 35 ordered migrations. Focused migration tests pass
+12/12; the serial suite passes 850/873 with 23 explicit skips and zero
+failures; disposable PostgreSQL proves default empty-db refusal and explicit
+local application of all 35 migrations plus five baseline tables. This keeps
+the merge candidate safe without changing the backlog or authorizing PR #153
+to merge/deploy: deletion, restore/rollback, production, and independent
+acceptance gates remain open.

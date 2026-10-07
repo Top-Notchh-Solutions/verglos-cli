@@ -45,3 +45,15 @@
   migration or close `QUAL-WEB-005`, `PLAN-WEB-011`–`015`, or R-041.
 - No backlog checkbox changed; authoritative count remains **218 checked / 62
   unchecked / 280 total (77.8571%, 77.9%)**.
+
+## Merge-candidate port
+
+The same guard was ported cleanly to Web PR #153, the 35-migration deletion
+candidate, at exact pushed head `f81de9f`. Its focused migration/guard/audit
+tests pass **12/12**, typecheck, `db:check`, and `db:migrations:check` verify
+**35 ordered migrations**, and its serial suite passes **850/873 with 23
+explicit skips and 0 failures**. A fresh Docker `postgres:15` rehearsal again
+left zero public tables on default refusal and applied all 35 migrations plus
+the five baseline tables only under explicit local opt-in. PR #153 remains
+open and must not be merged/deployed until its independent privacy, migration,
+restore/rollback, and release gates are accepted.

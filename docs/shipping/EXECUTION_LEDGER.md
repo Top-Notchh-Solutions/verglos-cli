@@ -4339,3 +4339,18 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
   browser mutation occurred. The only database writes were to the disposable
   local Docker database, which was removed.
 - **Evidence:** `docs/shipping/evidence/migration-bootstrap-guard-2026-10-07.md`.
+
+## 2026-10-07 · Web migration guard ported to PR #153
+
+- **Code:** The same guard is present on Web PR #153 exact pushed head
+  `f81de9f`, whose journal contains 35 migrations; the runbook count was
+  corrected to `0000..0034`.
+- **Verification:** Focused migration/guard/audit tests **12/12**, typecheck,
+  schema check, ordered **35-migration** check, and diff checks pass. Serial
+  Web suite: **850 passed / 23 explicit skips / 0 failures** out of 873.
+  Disposable PostgreSQL 15 again proved default refusal with zero public tables
+  and explicit local bootstrap through all 35 migrations and five baseline
+  tables.
+- **Disposition:** This is merge-candidate integration evidence only. PR #153
+  remains open for its privacy/deletion, restore/rollback, production, and
+  independent acceptance gates; no checkbox changed.
