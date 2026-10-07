@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-CLI-006 standards validation corpus
+
+CLI PR #79 exact head `13d144438045da574e7cbab6a21ec73341b8f796` adds a
+standards validation corpus for SARIF 2.1.0, CycloneDX 1.6, SPDX 2.3,
+in-toto Statement v1, and detect-secrets baselines, plus compatibility
+coverage pointers. Shared importer/security tests pass **29/29**; the full
+configured CLI graph passes **12/12** tasks; typecheck passes across 10
+packages; and build passes across 8 packages. Hosted OS/Node cells, self-scan,
+and in-toto were queued at capture. QUAL-CLI-006 remains open for official
+validator, artifact/legal/provenance, trusted publishing, and independent
+acceptance evidence. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Private evidence:
+`docs/shipping/evidence/qual-cli-006-standards-validation-corpus-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013 hosted checkout prefill hardening
 
 Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474` adds

@@ -3921,6 +3921,29 @@ before enabling any destructive adapter.
   payment/deployment/browser/customer operation occurred.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
 
+# 2026-10-07 — QUAL-CLI-006 standards validation corpus
+
+- **Batch:** Add the missing required-field validation corpus on top of the
+  already merged shared importer implementations.
+- **Backlog:** `QUAL-CLI-006` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total
+  (77.9%)**.
+- **Code:** CLI PR #79 exact head
+  `13d144438045da574e7cbab6a21ec73341b8f796`, pushed after rebasing onto
+  current `origin/main` (`dc4c1db`).
+- **Verification:** Shared importer/security tests **29/29**; full configured
+  CLI graph **12/12** tasks; typecheck across 10 packages; build across 8
+  packages; and diff check pass.
+- **Hosted state:** Nine OS/Node cells, self-scan, and in-toto were queued at
+  capture; no hosted success is claimed and the PR is not merged.
+- **Boundary:** No production, provider, database, deployment, credential,
+  package publication, or release operation occurred.
+- **Limitation:** Official-validator, cross-platform artifact, legal/
+  provenance, trusted-publishing, and independent acceptance evidence remain
+  required before QUAL-CLI-006 can close.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-standards-validation-corpus-2026-10-07.md`.
+
 # 2026-10-07 — PLAN-WEB-013 hosted checkout prefill hardening
 
 - **Batch:** Harden the existing hosted Checkout response with trusted

@@ -854,6 +854,15 @@ screen-reader, mobile, field-CWV, authenticated dashboard-data, and large-data
 qualification remain open. No checkbox or production state changed. See
 `docs/shipping/evidence/qual-web-006-org-directory-ax-perf-2026-10-07.md`.
 
+QUAL-CLI-006 validation addendum (2026-10-07): CLI PR #79 exact head
+`13d144438045da574e7cbab6a21ec73341b8f796` adds standards required-field
+corpus coverage. Shared importer/security tests 29/29, configured CLI graph
+12/12, typecheck across 10 packages, and build across 8 packages pass. Hosted
+matrix/self-scan/in-toto were pending at capture. This does not satisfy the
+release gate: official validators, artifact and legal/provenance review,
+trusted publishing, cross-platform release evidence, and independent
+acceptance remain required. No checkbox or external state changed.
+
 Hosted Checkout prefill addendum (2026-10-07): Web PR #149 exact head
 `b73fdd3beba513c0f9fc69a38c2fc69319ff9474` adds bounded server-derived email
 and E.164 contact prefill with fail-closed client parsing. Focused tests

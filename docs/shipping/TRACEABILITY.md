@@ -2035,6 +2035,19 @@ detection only: the destructive store does not consume the registry, and
 reconciliation, recovery, and authenticated non-production E2E remain
 unqualified. `QUAL-WEB-005` remains open.
 
+# 2026-10-07 · QUAL-CLI-006 standards validation corpus
+
+CLI PR #79 exact head `13d144438045da574e7cbab6a21ec73341b8f796` adds
+required-field validation coverage for SARIF, CycloneDX, SPDX, in-toto, and
+detect-secrets inputs, with pointers to Sigstore and cross-platform
+compatibility tests. Shared importer/security tests pass **29/29**; the full
+configured CLI graph passes **12/12** tasks; typecheck and build pass across
+the current 10/8 package surfaces. Hosted matrix/self-scan/in-toto checks were
+pending at capture. This is qualification progress only; QUAL-CLI-006 remains
+open for official validators, artifact/legal/provenance review, trusted
+publishing, and independent acceptance. No checkbox or external state changed.
+See `docs/shipping/evidence/qual-cli-006-standards-validation-corpus-2026-10-07.md`.
+
 # 2026-10-07 · PLAN-WEB-013 hosted checkout prefill hardening
 
 Web PR #149 exact head `b73fdd3beba513c0f9fc69a38c2fc69319ff9474` adds
