@@ -17,3 +17,18 @@
   rotated/repaired before any further provider calls.
 - **Safety:** This probe performed no order, payment, refund, subscription,
   webhook, database, deployment, migration, or production operation.
+
+## Read-only inventory follow-up — 2026-10-07
+
+Before freezing further use of the flagged Test Mode credential, a redacted
+read-only inventory queried orders, payments, subscriptions, plans, and
+webhooks. The API returned 10 orders (all `created`), 4 payments (3 `created`,
+1 `captured`), 0 subscriptions, 0 plans, and 1 webhook configuration. The
+webhook response did not expose an event list through this endpoint. No IDs,
+amounts, headers, response bodies, or personal data were recorded.
+
+This is an account-history snapshot, not proof that the seven application
+methods are enabled, and not success/failure/capture/refund/renewal/replay/
+out-of-order/entitlement acceptance. The earlier credential-hygiene finding
+still governs: rotate/repair this Test Mode credential before any further
+provider request. No provider write or production operation occurred.

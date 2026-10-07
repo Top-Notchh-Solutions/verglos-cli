@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Razorpay Test Mode read-only inventory freeze
+
+Before freezing the previously flagged Test Mode credential, a redacted
+read-only inventory returned 10 `created` orders, 4 payments (3 `created`, 1
+`captured`), 0 subscriptions, 0 plans, and 1 webhook configuration. This is
+historical account state only; it does not prove the account-enabled method
+set or any payment lifecycle. No IDs or response bodies were recorded. No
+further provider calls are authorized until the Test Mode credential is
+rotated/repaired. No provider write or production operation occurred.
+`PLAN-WEB-014/015` remain open; backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/razorpay-test-readonly-method-probe-2026-10-07.md`.
+
 ## 2026-10-07 · Razorpay Test Mode credential preflight
 
 The supplied Web `.env.test.local` uses a `rzp_test_` key and declares seven

@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 Test Mode read-only inventory freeze · 2026-10-07
+
+The final bounded read-only Test Mode inventory observed 10 created orders, 4
+payments (3 created and 1 captured), no subscriptions or plans, and one
+webhook configuration. It provides no account-enabled method truth and no
+payment lifecycle evidence. Further provider calls are frozen until the
+flagged Test Mode credential is rotated/repaired. The payment and production
+gates remain open; no provider or production state changed.
+
 ## PLAN-WEB-014 Test Mode credential preflight · 2026-10-07
 
 The supplied test environment authenticated successfully to Razorpay Test Mode

@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-07 · Freeze flagged Razorpay Test Mode credential
+
+- **Decision:** Treat the final redacted read-only inventory as historical
+  context only and make no more provider requests with this credential until
+  it is rotated/repaired.
+- **Evidence:** 10 created orders, 4 payments (3 created/1 captured), 0
+  subscriptions, 0 plans, and 1 webhook configuration; no identifiers or
+  response bodies retained.
+- **Boundary:** This does not qualify enabled methods or any payment
+  lifecycle, and no provider or production write occurred. `PLAN-WEB-014/015`
+  remain open.
+
 ## PLAN-WEB-014 Test Mode credential preflight · 2026-10-07
 
 - **Decision:** Treat the test key and HTTP 200 Orders response as a usable

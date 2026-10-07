@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · Razorpay Test Mode read-only inventory freeze
+
+- **Scope:** Read-only Test Mode account-history inventory; no checkbox closure.
+- **Result:** Orders **10** (`created` 10); payments **4** (`created` 3,
+  `captured` 1); subscriptions **0**; plans **0**; webhook configurations
+  **1**. No identifiers or response bodies were retained.
+- **Disposition:** This does not qualify account-enabled methods or any
+  payment lifecycle. Freeze further provider requests until the flagged
+  Test Mode credential is rotated/repaired; `PLAN-WEB-014/015` remain open.
+- **Boundary:** No provider write, payment, refund, subscription, webhook,
+  database, deployment, migration, or production operation occurred.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/razorpay-test-readonly-method-probe-2026-10-07.md`.
+
 ## 2026-10-07 — Razorpay Test Mode credential preflight
 
 - **Scope:** `PLAN-WEB-014` preflight; no checkbox closure.
