@@ -3826,3 +3826,17 @@ before enabling any destructive adapter.
 - **Limitation:** This strengthens PLAN-WEB-013 direct method evidence only.
   PLAN-WEB-014/015 remain open for full lifecycle and production reconciliation.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+# 2026-10-07 — PLAN-WEB-014 test-mode failure-path attempt
+
+- **Evidence:** Hosted test Checkout reached the mock card flow but ended with
+  “Payment could not be completed” after the synthetic contact value was
+  rejected. Provider order/payment lookup was read-only and found no attached
+  payment.
+- **Limitation:** No success, capture, refund, webhook, renewal, replay,
+  out-of-order, or exactly-once entitlement evidence was obtained. This is not
+  payment acceptance.
+- **Boundary:** Test-mode orders only; no production, live-key, database,
+  deployment, entitlement, or payment-capture mutation occurred. The temporary
+  server was stopped and browser target restored to `about:blank`.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
