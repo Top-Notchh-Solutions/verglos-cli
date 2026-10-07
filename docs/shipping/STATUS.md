@@ -6,9 +6,12 @@ The supplied Web `.env.test.local` uses a `rzp_test_` key and declares seven
 application methods: UPI, cards, EMI, netbanking, wallets, Pay Later, and QR.
 A redacted read-only `GET /v1/orders?count=1` returned HTTP 200. This proves
 Test Mode credentials are usable, not that the provider account enables every
-declared method. No provider write or payment occurred. Chrome DevTools and
-Playwright MCP both returned `Transport closed`, so no browser payment action
-was attempted; raw CDP remained reachable and Chrome was left untouched.
+declared method. Chrome DevTools and Playwright MCP both returned
+`Transport closed`. A single ₹1 Test Mode order creation was attempted by the
+fallback raw-CDP probe, but its result was not captured; no
+payment/capture/refund/webhook/entitlement evidence exists. Raw CDP remained
+reachable and Chrome was left untouched apart from that bounded background
+probe.
 `PLAN-WEB-014` remains open. Backlog remains **218 checked / 62 unchecked /
 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/plan-web-014-test-mode-credential-preflight-2026-10-07.md`.

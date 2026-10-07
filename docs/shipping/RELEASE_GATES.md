@@ -6,8 +6,9 @@ The supplied test environment authenticated successfully to Razorpay Test Mode
 via a redacted read-only Orders request (HTTP 200) and declares seven methods.
 This does not qualify provider-account method availability or any payment
 lifecycle. Browser evidence is pending because both browser MCP transports
-returned `Transport closed`. No provider or production state changed; the gate
-remains open.
+returned `Transport closed`; a fallback probe attempted one Test Mode order but
+did not capture its result. No lifecycle evidence was accepted. No production
+state changed; the gate remains open.
 
 ## Web current-main Node 22 qualification · 2026-10-07
 

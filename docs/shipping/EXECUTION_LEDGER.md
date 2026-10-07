@@ -6,10 +6,12 @@
 - **Evidence:** Web `.env.test.local` has a `rzp_test_` key and seven declared
   application methods. Redacted read-only Razorpay `GET /v1/orders?count=1`
   returned HTTP 200 JSON.
-- **Boundary:** No provider order/payment/capture/refund/webhook or application,
-  database, deployment, or customer-state write. Chrome DevTools and Playwright
-  MCP transports returned `Transport closed`; raw CDP remained reachable and
-  Chrome was not restarted.
+- **Boundary:** One ₹1 Test Mode order-creation attempt was made by a fallback
+  raw-CDP browser probe, but its result was not captured. No payment,
+  capture/refund, webhook, or entitlement evidence was obtained. No
+  production, application database, deployment, or customer-state write
+  occurred. Chrome DevTools and Playwright MCP transports returned
+  `Transport closed`; raw CDP remained reachable and Chrome was not restarted.
 - **Disposition:** Actual account-enabled method truth and full provider
   lifecycle remain open; backlog remains **218/62/280 (77.9%)**.
 - **Evidence:**

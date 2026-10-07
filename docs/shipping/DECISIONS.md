@@ -6,8 +6,9 @@
   precondition only; do not treat it as payment acceptance.
 - **Boundary:** The seven method names come from application configuration, not
   provider-account truth. Browser qualification was deferred after Chrome
-  DevTools and Playwright MCP returned `Transport closed`; no provider or
-  production write occurred.
+  DevTools and Playwright MCP returned `Transport closed`. A fallback probe
+  attempted one Test Mode order creation but returned no usable result; no
+  lifecycle evidence was accepted and no production write occurred.
 - **Next:** Restore a bounded browser instrument, observe the provider-hosted
   Checkout in Test Mode, and qualify each actually enabled method and lifecycle
   before revisiting PLAN-WEB-014.

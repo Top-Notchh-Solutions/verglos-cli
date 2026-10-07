@@ -9,8 +9,9 @@ behavior. Browser qualification is currently constrained by closed Chrome
 DevTools/Playwright MCP transports, while raw CDP remains reachable. Owner:
 billing/release qualification. Next action: restore the browser transport or
 use an equivalent bounded browser instrument, then run the isolated hosted
-Checkout lifecycle with redacted evidence. No provider or production mutation
-occurred.
+Checkout lifecycle with redacted evidence. A prior fallback probe attempted one
+Test Mode order but did not capture its result; do not count it as lifecycle
+evidence. No production mutation occurred.
 
 ## R-QUAL-WEB Node 22 current-main qualification · 2026-10-07
 

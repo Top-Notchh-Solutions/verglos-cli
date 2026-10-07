@@ -5,8 +5,9 @@
 The supplied Web test environment uses a `rzp_test_` key and declares seven
 application methods; a redacted read-only Razorpay Orders request returned HTTP
 200. This is only a precondition, not provider-account or payment-lifecycle
-acceptance. Chrome DevTools and Playwright MCP returned `Transport closed`, so
-no browser payment action or provider write occurred. `PLAN-WEB-014` remains
+acceptance. Chrome DevTools and Playwright MCP returned `Transport closed`; a
+fallback probe attempted one Test Mode order creation but did not capture its
+result, so no lifecycle evidence is accepted. `PLAN-WEB-014` remains
 open; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 Evidence:
 `docs/shipping/evidence/plan-web-014-test-mode-credential-preflight-2026-10-07.md`.
