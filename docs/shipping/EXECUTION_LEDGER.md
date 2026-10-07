@@ -3654,3 +3654,14 @@ before enabling any destructive adapter.
   count remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Boundary:** No provider, production, database, deployment, payment, or
   credential operation occurred.
+
+# 2026-10-07 — Web full-suite payment revalidation
+
+- **Verification:** Active Web PR #149 full configured test command completed
+  with pretest **42/48** (6 environment-gated skips) and main suite
+  **850/872** (22 environment-gated skips), **0 failures**. Focused
+  hosted-method tests remain 16/16; typecheck and diff check pass. Node
+  `v26.4.0` emitted the existing workspace Node 22 engine warning.
+- **Boundary:** This strengthens code-side PLAN-WEB-013 evidence only; provider
+  lifecycle and production reconciliation remain open. No provider,
+  production, database, deployment, payment, or credential operation occurred.
