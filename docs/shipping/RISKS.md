@@ -416,6 +416,12 @@ direct provider page exposed no actionable form. No payment lifecycle or
 method evidence was claimed; the test order was not captured and the target
 was restored to `about:blank`.
 
+R-009 update (2026-10-07, provenance projection): the structured HUNT-009
+result now carries verified feed/license digests and an explicit legal-clearance
+limitation, reducing ambiguity when a local execution result is reviewed.
+This does not establish publisher-root authenticity, legal clearance, sandbox
+security, or independent review; the critical Hunt release gate remains open.
+
 R-048 update (2026-10-07, per-kind transactions): PR #153 exact head
 `9476e5d` adds durable request/kind idempotency and scoped row-count deletes,
 verified locally and by hosted workflow `37563632682`. This reduces replay and

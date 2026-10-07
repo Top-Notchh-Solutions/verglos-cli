@@ -3594,3 +3594,19 @@ before enabling any destructive adapter.
 - **Backlog:** PLAN-WEB-014 attempted but open; count remains **218 checked /
   62 unchecked / 280 total (77.9%)**.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-direct-checkout-navigation-2026-10-07.md`.
+# 2026-10-07 — HUNT-009 structured provenance projection
+
+- **Batch:** Preserve the existing entitlement, signed-recipe, approval,
+  catalog, and bounded-runtime gates while exposing the provenance needed to
+  interpret a successful structured Hunt result.
+- **Implementation:** CLI commit `c8a2e4b` adds verified feed/origin/digest,
+  trust-store and recipe digests, redacted license evidence,
+  `executionAuthorized`, and explicit `legalClearance: false`.
+- **Verification:** Focused Hunt/process tests **54/54 pass**; package
+  typecheck, build, and diff check pass. PR #76 pushed at exact head
+  `c8a2e4b4bf337a332a003ac9296a6d3bbde15d9a`; hosted checks not started at
+  capture.
+- **Backlog:** HUNT-009 attempted but open; count remains **218 checked / 62
+  unchecked / 280 total (77.9%)**.
+- **Boundary:** No production, provider, payment, database, deployment, or
+  credential operation occurred.

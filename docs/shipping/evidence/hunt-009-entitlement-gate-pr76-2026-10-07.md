@@ -28,3 +28,17 @@ This is code-side security qualification only. HUNT-009 remains unchecked
 pending trusted/licensed recipe provenance, bounded execution qualification,
 and independent review. No production,
 customer, provider, or private-fixture operation occurred.
+
+## Provenance projection follow-up
+
+PR #76 commit `c8a2e4b` now includes the verified feed id/origin/digest,
+trust-store digest, recipe digest, redacted license id/source/text digest,
+`executionAuthorized: true`, and `legalClearance: false` in the structured
+execution result. License text, recipe inputs, and approval identity are not
+projected.
+
+Focused Hunt/process tests remain **54/54 pass**; CLI typecheck, build, and
+`git diff --check` pass locally. The pushed PR head is
+`c8a2e4b4bf337a332a003ac9296a6d3bbde15d9a`; hosted checks have not started at
+capture. HUNT-009 remains unchecked because trusted/licensed publisher roots,
+bounded execution qualification, and independent review are still open.
