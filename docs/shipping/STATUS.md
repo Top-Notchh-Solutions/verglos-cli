@@ -1,5 +1,32 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-CLI-006 artifact qualification continuation
+
+Against merged CLI `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`, package-content
+audit passed, forced build/typecheck passed **16/16**, the CI all-platform
+optional-dependency install made license inventory and notices generation pass,
+public packing produced six archives, packed-manifest audit passed, clean
+consumer passed, and upgrade/rollback passed
+`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`. Official in-toto verification was not
+completed because its local cryptography dependency installation was
+interrupted; trusted Sigstore/publishing/legal gates remain open. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Private evidence:
+`docs/shipping/evidence/qual-cli-006-artifact-qualification-2026-10-07.md`.
+
+## 2026-10-07 · QUAL-WEB-006 organization browser continuation
+
+The approved authenticated Chrome DevTools MCP session loaded `/orgs` with
+HTTP 200, clean console, and truthful “No organizations yet” empty state.
+Snapshot audits observed desktop Accessibility/Best Practices/SEO **100/100/100**
+and mobile **100/100/80**; Agentic Browsing was 50 on both. A cold trace
+recorded LCP **5,169ms** (797ms TTFB + 4,372ms render delay), CLS 0, and no
+CrUX field data. This is partial evidence only: paid/org runtime,
+screen-reader, large-data, field-CWV, and customer acceptance remain open. No
+checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Private evidence:
+`docs/shipping/evidence/qual-web-006-orgs-browser-continuation-2026-10-07.md`.
+
 ## 2026-10-07 · merged-phase acceptance story refresh
 
 The clean private acceptance harness passed against CLI commit

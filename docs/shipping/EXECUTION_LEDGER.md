@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-CLI-006 artifact qualification continuation
+
+- **Source:** CLI origin/main `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d` in a
+  disposable worktree.
+- **Result:** Package-content audit passed; forced build/typecheck 16/16;
+  all-platform optional dependency install; license inventory/notices; six
+  public archives; packed-manifest audit; clean-consumer import/version/no-
+  implicit-engine check; and `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` transition all
+  passed.
+- **Boundary:** Official in-toto verification was not completed because its
+  cryptography dependency download was interrupted. No trusted publishing,
+  legal, Sigstore, npm publication, or checkbox credit is claimed.
+
+## 2026-10-07 · QUAL-WEB-006 organization browser continuation
+
+- **Browser:** Authenticated MCP loaded `/orgs`; HTTP 200, empty organization
+  state, and no console messages. Automated snapshot observations were desktop
+  100/100/100 and mobile 100/100/80 for Accessibility/Best Practices/SEO.
+- **Performance:** Cold trace LCP 5,169ms, TTFB 797ms, render delay 4,372ms,
+  CLS 0, no CrUX data. This exposes a performance follow-up, not acceptance.
+- **Boundary:** Free account/no organization means paid/org, human
+  screen-reader, large-data, field-CWV, and customer evidence remain open. No
+  mutation or checkbox change.
+
 ## 2026-10-07 · merged-phase acceptance story refresh
 
 - **Exact sources:** CLI `6bde945c60ac34351c02a70f6e7a2cb24f98ae1d`; Web

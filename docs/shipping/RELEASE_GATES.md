@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## QUAL-CLI-006 artifact qualification continuation · 2026-10-07
+
+Merged CLI `6bde945c60ac34351c02a70f6e7a2cb24f98ae1` passes the local package,
+build/typecheck, all-platform license/notices, six-archive, clean-consumer, and
+upgrade/rollback checks. Official in-toto verification was not completed after
+its cryptography dependency installation was interrupted. Trusted
+Sigstore/publishing identity, legal clearance, protected publication, and
+release-candidate approval remain open; QUAL-CLI-006 does not close.
+
+## QUAL-WEB-006 organization browser continuation · 2026-10-07
+
+Authenticated `/orgs` read-only evidence is 200/empty-state/clean-console with
+desktop snapshot Accessibility/Best Practices/SEO 100/100/100 and mobile
+100/100/80. The cold trace's LCP was 5,169ms with 4,372ms render delay and no
+CrUX data. This does not close QUAL-WEB-006 or any release gate.
+
 ## Merged-phase acceptance story refresh · 2026-10-07
 
 The exact merged CLI/Web substrate run passed CLI 250/250, Web 888/888 with 28

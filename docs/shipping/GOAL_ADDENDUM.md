@@ -1,5 +1,17 @@
 # Goal addendum — 2026-10-07
 
+QUAL-CLI-006 advanced on merged CLI `6bde945`: package/content, 16/16
+build/typecheck, all-platform license/notices, six-archive, clean-consumer,
+and upgrade/rollback checks passed. Official in-toto verification remains
+unproven because its cryptography dependency installation was interrupted;
+trusted publishing, legal, Sigstore, and release gates remain open.
+
+QUAL-WEB-006 browser continuation loaded authenticated `/orgs` with HTTP 200,
+truthful empty state, clean console, desktop 100/100/100 and mobile 100/100/80
+Accessibility/Best Practices/SEO observations, and cold LCP 5,169ms (4,372ms
+render delay). This is partial evidence only. Backlog remains **218 checked /
+62 unchecked / 280 total (77.9%)**; no checkbox changed.
+
 Merged-phase acceptance refresh: the exact merged CLI/Web substrate harness
 passed CLI 250/250, Web 888/888 with 28 explicit environment skips, and
 composed Studio/Enterprise/Team/qualification substrates 74/74. This advances

@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## QUAL-CLI-006 artifact qualification continuation · 2026-10-07
+
+CLI `6bde945c60ac34351c02a70f6e7a2cb24f98ae1` passed package-content audit,
+forced build/typecheck 16/16, all-platform optional-dependency license
+inventory/notices, six-archive packing, packed-manifest audit, clean-consumer
+installation/import/version/no-implicit-engine checks, and the
+`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` transition. Official in-toto verification
+was not completed after its cryptography dependency installation was
+interrupted. QUAL-CLI-006 remains open for in-toto, trusted Sigstore/publishing,
+legal, and final release evidence. No checkbox changed; backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**.
+
+## QUAL-WEB-006 organization browser continuation · 2026-10-07
+
+The authenticated Chrome DevTools MCP session loaded `/orgs` with HTTP 200,
+truthful empty organization state, and clean console. Snapshot observations
+were desktop Accessibility/Best Practices/SEO 100/100/100 and mobile
+100/100/80. A cold trace recorded LCP 5,169ms, TTFB 797ms, render delay
+4,372ms, CLS 0, and no CrUX field data. This remains partial Free-account
+evidence; paid/org, human screen-reader, large-data, field-CWV, and customer
+acceptance remain open. No checkbox changed.
+
 ## Merged-phase acceptance story refresh · 2026-10-07
 
 The private acceptance harness passed at exact CLI commit
