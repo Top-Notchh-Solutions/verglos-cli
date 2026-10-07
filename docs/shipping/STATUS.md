@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Hunt public/private runtime boundary
+
+CLI commit `c4beecb` removes the public CLI's static private Hunt dependency
+and adds a validated optional-runtime boundary with fail-closed exit-78
+behavior. Hunt build, CLI typecheck, focused execution/runtime tests 6/6, the
+complete configured CLI package suite, public packaging/license/surface tests
+17/17, six public archives, package-content audit, and public-boundary audit
+passed. CLI PR #75 is OPEN/UNSTABLE at exact head
+`c4beecb3525256cd2956660af8e3e6b49292b65f`; 11 hosted checks were pending at
+capture. This is packaging progress only: HUNT-008, HUNT-009, and QUAL-CLI-004
+remain open for provenance, isolation, independent review, and acceptance.
+No checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total**.
+Private evidence: `docs/shipping/evidence/hunt-public-runtime-boundary-c4beecb-2026-10-07.md`.
+
 ## 2026-10-07 · restore/recovery harness qualification
 
 Web PR #153 exact head `250313e` hardens the disposable restore drill. The

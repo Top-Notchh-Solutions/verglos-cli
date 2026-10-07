@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## HUNT-008/HUNT-009/QUAL-CLI-004 public runtime boundary · 2026-10-07
+
+- CLI `c4beecb` removes the public archive's static private Hunt dependency
+  and validates a separately provisioned runtime boundary; absent/malformed
+  runtimes fail closed. Focused execution/runtime 6/6, CLI suite, public
+  archive/license/surface 17/17, six-archive pack, package-content, and
+  public-boundary checks pass.
+- PR #75 exact head
+  `c4beecb3525256cd2956660af8e3e6b49292b65f` is OPEN/UNSTABLE with 11 hosted
+  checks pending at capture. This does not prove Hunt provenance, isolation,
+  independent review, or acceptance; no checkbox changed. See
+  `docs/shipping/evidence/hunt-public-runtime-boundary-c4beecb-2026-10-07.md`.
+
 ## Restore/recovery harness qualification · 2026-10-07
 
 - Web PR #153 head `250313e` ran a disposable snapshot restore, 35 ordered

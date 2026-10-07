@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## HUNT-008/HUNT-009/QUAL-CLI-004 public runtime boundary · 2026-10-07
+
+CLI PR #75 exact head `c4beecb3525256cd2956660af8e3e6b49292b65f` removes the
+public/private packaging failure and passes local boundary evidence, but its
+11 hosted checks were pending at capture. Provenance, isolation, independent
+review, and functional Hunt acceptance remain open; no release gate or
+backlog checkbox closed.
+
 ## Restore/recovery harness qualification · 2026-10-07
 
 Web PR #153 head `250313e` passes the disposable restore, migration, writer,

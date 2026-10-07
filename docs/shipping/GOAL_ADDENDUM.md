@@ -1,5 +1,15 @@
 # Goal addendum — 2026-10-07
 
+CLI PR #75 exact head `c4beecb3525256cd2956660af8e3e6b49292b65f` now removes
+the public CLI's static private Hunt dependency and validates an optional,
+separately provisioned runtime with fail-closed exit-78 behavior. Hunt build,
+CLI typecheck, focused 6/6, complete configured CLI suite, public packaging/
+license/surface 17/17, six archives, package-content, and public-boundary
+audits pass. PR #75 was OPEN/UNSTABLE with 11 hosted checks pending at capture.
+This is packaging progress only; HUNT-008/HUNT-009/QUAL-CLI-004 remain open
+for provenance, isolation, independent review, and acceptance. Backlog remains
+**218 checked / 62 unchecked / 280 total**; no checkbox changed.
+
 Web PR #153 exact head `250313e` hardened the disposable restore drill. The
 existing snapshot restored, 35 migrations and both writer passes ran,
 reconciliation returned `reconciled`, and fail-closed simulation passed; RTO

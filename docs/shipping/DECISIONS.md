@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## Hunt public/private runtime boundary · 2026-10-07
+
+- **Decision:** Accept the optional-runtime boundary as a real packaging
+  correction, not as Hunt product acceptance. The public CLI may execute only
+  when the separately provisioned private runtime satisfies the validated
+  protocol; otherwise it denies with exit 78.
+- **Evidence:** CLI `c4beecb`; focused 6/6, full configured CLI suite,
+  packaging/license/surface 17/17, six archives, package-content and public
+  boundary audits pass. PR #75 exact head is OPEN/UNSTABLE with 11 hosted
+  checks pending at capture.
+- **Boundary:** Keep HUNT-008, HUNT-009, and QUAL-CLI-004 open for recipe
+  provenance, isolation, independent review, and acceptance. No production,
+  provider, payment, database, migration, deployment, or credential action.
+
 ## Restore/recovery harness qualification · 2026-10-07
 
 - **Decision:** Record the disposable restore path as partial recovery

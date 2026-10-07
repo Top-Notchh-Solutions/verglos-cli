@@ -1,5 +1,14 @@
 # Verglos V1 risk register
 
+Latest R-009/HUNT-009 update (2026-10-07): CLI `c4beecb` removes the public
+archive's static private `@verglos/hunt` dependency and adds a validated,
+fail-closed optional runtime boundary. Local CLI, archive, package-content, and
+public-boundary checks pass; PR #75 exact head
+`c4beecb3525256cd2956660af8e3e6b49292b65f` had 11 hosted checks pending at
+capture. This reduces the packaging blocker but does not resolve trusted
+recipe provenance, isolation evidence, independent review, or functional Hunt
+acceptance. HUNT-008/HUNT-009/QUAL-CLI-004 remain critical/open.
+
 Latest R-009/HUNT-009 update (2026-10-07): CLI PR #74
 (`a2a1335d2a0b69ec56391286a4ba77ef773c0457`) passed local execution/build/
 typecheck/full-test evidence, but hosted platform matrix `37565750571` and
