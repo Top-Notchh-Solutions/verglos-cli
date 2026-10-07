@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## QUAL-WEB-005 rollback/retry qualification · 2026-10-07
+
+- **Decision:** Treat the injected PostgreSQL failure/savepoint result as
+  transaction rollback/retry evidence only; do not equate it with production
+  restore or deployment rollback.
+- **Evidence:** Web PR #153 head `2127924e418fdca4094fa88bab02656952f4488b`,
+  disposable integration 1/1, serial Web 868/1/0, and hosted Verify
+  `37567278851` pass.
+- **Boundary:** Keep QUAL-WEB-005 open for production-grade restore,
+  deployment rollback, authenticated non-production E2E, and final privacy/
+  retention acceptance. No production operation is authorized by this result.
+
 ## QUAL-WEB-005 supporting disposition executor · 2026-10-07
 
 - **Decision:** Allow the deletion worker to execute only the reviewed

@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-005 rollback/retry qualification
+
+- **Code:** Web PR #153 head `2127924e418fdca4094fa88bab02656952f4488b`
+  adds a PostgreSQL savepoint failure-injection test for supporting deletion.
+- **Evidence:** The failed transaction leaves earlier deletes and operation
+  receipts absent; the recovered retry completes with the same fence and
+  idempotency key. Integration 1/1, serial Web 868/1/0, typecheck/build/schema/
+  35-migration/diff checks pass.
+- **Hosted:** Verify `37567278851`, Vercel, GitGuardian, and Preview Comments
+  pass; PR #153 is open and CLEAN.
+- **Acceptance:** This is transaction rollback/retry evidence only. Production
+  backup restore, deployment rollback, authenticated non-production E2E, and
+  QUAL-WEB-005 acceptance remain open. No production operation or checkbox
+  change.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-rollback-retry-2127924-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 supporting disposition executor
 
 - **Code:** Web PR #153 exact head

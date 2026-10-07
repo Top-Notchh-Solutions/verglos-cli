@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 rollback/retry qualification · 2026-10-07
+
+- Web PR #153 head `2127924e418fdca4094fa88bab02656952f4488b` proves injected
+  supporting-delete failure rollback and same-binding retry in disposable
+  PostgreSQL integration 1/1. Serial Web is 868/1/0; typecheck/build/schema/
+  35-migration/diff checks pass.
+- Hosted Verify `37567278851`, Vercel, GitGuardian, and Preview Comments pass.
+  This does not prove production restore/deployment rollback or authenticated
+  non-production E2E; QUAL-WEB-005 remains unchecked. See
+  `docs/shipping/evidence/qual-web-005-rollback-retry-2127924-2026-10-07.md`.
+
 ## QUAL-WEB-005 supporting disposition executor · 2026-10-07
 
 - Web PR #153 head `eb785d2e382fc60535c15702fe7ffd8b9ae66610` adds the

@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-005 rollback/retry qualification
+
+Web PR #153 exact head `2127924e418fdca4094fa88bab02656952f4488b` adds an
+injected-failure PostgreSQL integration proving that a failed supporting
+transaction rolls back prior deletes and receipts, then retries successfully
+with the same fence/idempotency binding. Full serial Web remains 868/1/0
+(869 total), the disposable deletion integration is 1/1, typecheck/build/
+schema/35-migration/diff checks pass, and hosted Verify `37567278851` plus
+Vercel, GitGuardian, and Preview Comments pass. QUAL-WEB-005 remains open for
+production-grade backup restore/deployment rollback rehearsal and authenticated
+non-production E2E. No production/provider/payment/database/migration/
+deployment/credential operation occurred. Backlog remains **218 checked / 62
+unchecked / 280 total**. Private evidence:
+`docs/shipping/evidence/qual-web-005-rollback-retry-2127924-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 supporting disposition executor
 
 Web PR #153 exact head `eb785d2e382fc60535c15702fe7ffd8b9ae66610` adds the

@@ -1,5 +1,13 @@
 # Goal addendum — 2026-10-07
 
+Web PR #153 exact head `2127924e418fdca4094fa88bab02656952f4488b` now proves
+supporting deletion transaction rollback and same-binding retry under an
+injected PostgreSQL failure. Local serial Web 868/1/0, deletion integration
+1/1, typecheck/build/schema/35-migration/diff checks, and hosted Verify
+`37567278851` pass. Production backup/deployment rollback and authenticated
+non-production E2E remain open; backlog stays **218 checked / 62 unchecked /
+280 total** and no checkbox changed.
+
 Web PR #153 exact head `eb785d2e382fc60535c15702fe7ffd8b9ae66610` now adds the
 fenced supporting-disposition executor and durable per-table receipts. Worker
 tests pass 4/4, disposable PostgreSQL integration 1/1, serial Web 868/1/0,

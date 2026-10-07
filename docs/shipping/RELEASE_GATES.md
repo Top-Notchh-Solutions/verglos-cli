@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-005 rollback/retry qualification · 2026-10-07
+
+Web PR #153 head `2127924e418fdca4094fa88bab02656952f4488b` passes local and
+hosted rollback/retry qualification, including Verify `37567278851`. It does
+not close the release gate: production backup restore/deployment rollback and
+authenticated non-production E2E remain unproven, so no release gate or
+backlog checkbox closed.
+
 ## QUAL-WEB-005 supporting disposition executor · 2026-10-07
 
 Web PR #153 head `eb785d2e382fc60535c15702fe7ffd8b9ae66610` passes local worker,
