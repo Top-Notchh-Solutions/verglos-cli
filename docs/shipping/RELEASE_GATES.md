@@ -122,6 +122,12 @@ customer-held reconciliation, consent/legal disposition, production migration,
 restore/rollback, and independent review remain open. No checkbox or
 production state changed.
 
+Payment order boundary addendum (2026-10-07): a bounded Test Mode Orders API
+create/fetch returned the matching INR amount and `created` state. This does
+not pass the payment gate and does not close PLAN-WEB-013/014/015 because no
+hosted method lifecycle, webhook, entitlement, refund, renewal, or
+reconciliation evidence exists. No production/provider payment was charged.
+
 ## PLAN-WEB-013/014 refund ordering hardening · 2026-10-07
 
 PR #149 exact head `238ec7425ff1979b82d97e3d371cedbe83fbd394` now treats stale

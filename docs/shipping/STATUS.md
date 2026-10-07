@@ -3037,3 +3037,15 @@ rollback, and independent acceptance. No checkbox changed; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. No production/provider/
 payment/database/deployment/deletion operation occurred. Evidence:
 `docs/shipping/evidence/qual-web-005-hold-serialization-2026-10-07.md`.
+
+## 2026-10-07 · PLAN-WEB-014 Test Mode order API boundary
+
+Using only the isolated Razorpay Test Mode key pair from the ignored Web test
+environment, one hosted Checkout order was created and fetched read-only.
+The provider returned the same INR `280943` minor-unit amount and `created`
+status on both responses. No payment method was selected, no authorization,
+capture, refund, renewal, webhook, ledger row, entitlement, production,
+database, deployment, or QR operation occurred. This proves only the provider
+order API boundary; it does not satisfy PLAN-WEB-013/014/015. No checkbox
+changed. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence: `docs/shipping/evidence/plan-web-014-test-order-api-2026-10-07.md`.

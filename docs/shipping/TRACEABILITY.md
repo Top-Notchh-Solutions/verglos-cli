@@ -2387,3 +2387,12 @@ large-data acceptance remain open. No checkbox changed. Evidence:
   disposition/reconciliation, production migration, restore/rollback, and
   independent acceptance remain open. No checkbox changed; backlog remains
   **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+# 2026-10-07 · PLAN-WEB-014 Test Mode order API boundary
+
+The isolated Razorpay Test Mode order API accepted one hosted order and a
+read-only fetch returned matching amount, currency, and `created` state. The
+record traces only the order-creation boundary; it cannot support a claim of
+method success, capture, refund, renewal, webhook delivery, entitlement, or
+production reconciliation. See
+`docs/shipping/evidence/plan-web-014-test-order-api-2026-10-07.md`.

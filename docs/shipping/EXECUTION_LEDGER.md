@@ -4287,3 +4287,18 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
 - **Boundary:** No production/provider/payment/database/deployment/deletion or
   credential operation occurred. Lint was not accepted: `next lint` opened its
   interactive ESLint setup prompt in the worktree.
+
+## 2026-10-07 · PLAN-WEB-014 Test Mode order API boundary
+
+- **Batch:** One bounded Razorpay Test Mode Orders API create/fetch operation
+  using the ignored Web test key pair; no browser or production payment was
+  attempted.
+- **Result:** Provider returned matching `created` status, INR currency, and
+  `280943` minor-unit amount on create and fetch.
+- **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
+  (77.9%)**. PLAN-WEB-013/014/015 remain open.
+- **Boundary:** No method selection, payment authorization/capture, refund,
+  renewal, webhook, entitlement, application database, production, QR,
+  deployment, or credential mutation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-test-order-api-2026-10-07.md`.

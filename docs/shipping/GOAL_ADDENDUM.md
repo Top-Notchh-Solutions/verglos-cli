@@ -447,4 +447,13 @@ disposition, production migration/cutover, reconciliation, restore/rollback,
 and independent review remain open. No checkbox changed; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. No production/provider/
 payment/database/deployment/deletion/credential operation occurred.
+
+## PLAN-WEB-014 Test Mode order API boundary
+
+The isolated Razorpay Test Mode key pair accepted one hosted order for the
+current Pro monthly INR catalog amount and returned a matching `created` order
+on a follow-up fetch. This is provider order-creation evidence only. It does
+not prove hosted method success, capture, refund, renewal, webhook delivery,
+exactly-once entitlement, or production reconciliation; no checkbox changed.
+Evidence: `docs/shipping/evidence/plan-web-014-test-order-api-2026-10-07.md`.
 PR #149 exact head `aa34127` hardens the
