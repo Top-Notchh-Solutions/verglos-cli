@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · CLI origin/main reconciliation and Hunt adversarial qualification
+
+The founder-owned CLI checkout was preserved because it contains untracked
+founder assets. After a read-only fetch, remote `origin/main` is exact head
+`7d060b2852551cc017bbb2b5f70bad22843e7273`; a clean worktree at that head
+passed forced Turbo `test typecheck build` **23/23**. Docker client/server were
+29.7.2/29.7.2. The bounded pinned-image Hunt adversarial harness passed
+**60**, skipped **1** macOS/Linux-namespace assertion, and failed **0**.
+This is local/CI harness evidence only, not independent review or Linux
+namespace acceptance. HUNT-008/009/010/011 and QUAL-CLI-004/006 remain open;
+no checkbox changed and the backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/cli-origin-main-reconciliation-2026-10-07.md`.
+
 ## 2026-10-07 · PLAN-WEB-013/012 webhook-handler PostgreSQL integration
 
 Web PR #149 exact head `9fd22d8` adds a real webhook-handler-to-PostgreSQL

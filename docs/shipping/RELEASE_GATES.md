@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## CLI origin/main reconciliation and Hunt adversarial qualification · 2026-10-07
+
+The exact remote CLI head `7d060b2` passes forced Turbo validation **23/23**;
+the pinned Hunt harness passes **60/60 executed checks**, with one explicit
+macOS/Linux-namespace skip and zero failures. This advances evidence but does
+not pass the Hunt/release gates: HUNT-008/009/010/011 and QUAL-CLI-004/006
+still require trusted recipe/publisher provenance, official validators,
+Linux-host isolation evidence, legal/trusted-publishing review, and independent
+acceptance. No checkbox or production state changed.
+
 ## PLAN-WEB-013/012 webhook-handler PostgreSQL integration · 2026-10-07
 
 The direct handler/database harness passes locally and PR #149 head `9fd22d8`

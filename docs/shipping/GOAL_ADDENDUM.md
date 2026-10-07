@@ -1,5 +1,19 @@
 # Goal addendum — 2026-10-07
 
+## CLI origin/main reconciliation and Hunt adversarial qualification
+
+The founder-owned CLI checkout was preserved; a clean worktree at fetched
+`origin/main` head `7d060b2` passed forced Turbo `test typecheck build` **23/23**.
+Docker 29.7.2 was healthy, and the pinned Hunt harness passed **60**, skipped
+one macOS/Linux-namespace assertion, and failed zero. This is supporting
+local/CI evidence only. HUNT-008/009/010/011 and QUAL-CLI-004/006 remain open
+for trusted publisher/recipe provenance, official validators, Linux isolation,
+legal/trusted-publishing review, and independent acceptance. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+No production/provider/payment/database/deployment/migration/credential/browser
+state changed. Evidence:
+`docs/shipping/evidence/cli-origin-main-reconciliation-2026-10-07.md`.
+
 ## PLAN-WEB-013/012 webhook-handler PostgreSQL integration
 
 Web PR #149 exact head `9fd22d8` adds a real webhook-handler/database harness.

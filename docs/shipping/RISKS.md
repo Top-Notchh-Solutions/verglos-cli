@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-QUAL-CLI-006 / HUNT-011 exact-head evidence boundary · 2026-10-07
+
+The clean remote-head CLI worktree passed forced Turbo validation **23/23** and
+the pinned `postgres:15-alpine` adversarial harness passed **60**, skipped one
+macOS/Linux-only namespace assertion, and failed zero. This reduces current
+source-regression risk but does not prove Linux isolation, official validators,
+trusted publisher/recipe provenance, legal/trusted-publishing review, or
+independent acceptance. Owner: release/qualification. Keep HUNT-008/009/010/011
+and QUAL-CLI-004/006 open until those external gates are evidenced.
+
 ## R-PLAN-WEB-013 migration bootstrap and integration-evidence gap · 2026-10-07
 
 The new handler/database integration passes against a disposable database whose

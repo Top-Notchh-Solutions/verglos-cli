@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — CLI origin/main reconciliation and Hunt adversarial qualification
+
+- **Source:** Preserved founder-owned checkout; clean worktree exact
+  `origin/main` head `7d060b2852551cc017bbb2b5f70bad22843e7273` after
+  `git fetch --prune origin main`.
+- **Verification:** `pnpm install --frozen-lockfile`; forced Turbo
+  `test typecheck build` **23/23**; Docker client/server **29.7.2/29.7.2**;
+  pinned `postgres:15-alpine` Hunt harness **60 passed / 1 skipped / 0 failed**.
+- **Disposition:** Current-head CLI and local/CI adversarial evidence improved;
+  no checkbox changed. HUNT-008/009/010/011 and QUAL-CLI-004/006 remain open
+  for trusted publisher/recipe roots, official validators, Linux isolation,
+  legal/trusted-publishing review, and independent acceptance.
+- **Boundary:** No production, provider, payment, database, deployment,
+  migration, credential, customer-state, or browser-state write occurred.
+- **Evidence:** `docs/shipping/evidence/cli-origin-main-reconciliation-2026-10-07.md`.
+
 # 2026-10-07 — PLAN-WEB-013/012 webhook-handler PostgreSQL integration
 
 - **Scope:** Web PR #149 exact head `9fd22d8`, disposable local PostgreSQL 16, and synthetic signed Razorpay events.

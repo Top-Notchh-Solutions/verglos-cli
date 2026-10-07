@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## CLI origin/main reconciliation and Hunt adversarial qualification · 2026-10-07
+
+The preserved founder checkout was not reset. Remote `origin/main` was fetched
+and a clean exact-head worktree at `7d060b2` passed forced Turbo validation
+**23/23**. The pinned Hunt adversarial run passed **60**, skipped one
+macOS/Linux-only namespace assertion, and failed zero. This supports current
+CLI/Hunt qualification but does not satisfy independent review, trusted
+publisher/recipe provenance, official validators, or Linux isolation. No
+checkbox changed; HUNT-008/009/010/011 and QUAL-CLI-004/006 remain open. See
+`docs/shipping/evidence/cli-origin-main-reconciliation-2026-10-07.md`.
+
 ## PLAN-WEB-013/012 webhook-handler PostgreSQL integration · 2026-10-07
 
 PR #149 exact head `9fd22d8` adds a direct integration of the real webhook

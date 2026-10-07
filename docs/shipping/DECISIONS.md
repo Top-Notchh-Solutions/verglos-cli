@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## CLI origin/main reconciliation and Hunt adversarial qualification · 2026-10-07
+
+- **Decision:** Treat the exact remote-head and pinned Docker run as current
+  CLI/Hunt qualification evidence only; do not close HUNT or independent-review
+  gates.
+- **Evidence:** Clean `origin/main` head `7d060b2`; forced Turbo validation
+  **23/23**; Docker `29.7.2`; Hunt **60 passed / 1 skipped / 0 failed**.
+- **Reason:** The run is macOS local/CI harness evidence. The namespace
+  assertion requires Linux, and no independent reviewer, official validator,
+  trusted publisher-root, or legal review was performed.
+- **Boundary:** Founder-owned untracked assets were preserved; no production,
+  provider, payment, database, deployment, migration, credential, or browser
+  mutation occurred. No checkbox changed.
+
 ## PLAN-WEB-013/012 webhook-handler PostgreSQL integration · 2026-10-07
 
 - **Decision:** Accept the direct handler/database harness as implementation and
