@@ -278,3 +278,11 @@ verified locally and by hosted workflow `37563632682`. This reduces replay and
 partial-operation risk but does not close the critical privacy gate: complete
 supporting ownership/retention dispositions, runtime invocation, full
 reconciliation, restore/rollback, and authenticated E2E remain open.
+
+R-048 update (2026-10-07, runtime runner): PR #153 exact head `1f8571b`
+adds a bounded batch runner and authenticated cron route, verified by local
+route/integration tests and hosted workflow `37563987818`. The route has not
+been deployed or invoked in production, and its integration deliberately
+blocks on `inventoryComplete=false`. Supporting ownership/retention and legal
+dispositions, complete reconciliation, restore/rollback, and authenticated
+non-production E2E remain critical open risks.

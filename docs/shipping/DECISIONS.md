@@ -352,4 +352,19 @@ production migration, or acceptance is supplied by this read path.
 - **Boundary:** Only the seven hosted projections are implemented. Supporting
   account/license/billing/retention dispositions, runtime wiring,
   reconciliation, restore/rollback, and E2E remain open; migration `0033` is
-  source-only and no production or destructive operation occurred.
+source-only and no production or destructive operation occurred.
+
+## Bounded deletion runtime runner · 2026-10-07
+
+- **Decision:** Expose only a bounded, authenticated cron adapter for due
+  deletion jobs. Enforce a maximum batch of 10, validate the frozen seven-kind
+  allowlist, delegate to the fenced worker, and always close the database
+  client. Keep malformed jobs untouched and preserve the inventory fail-closed
+  boundary.
+- **Evidence:** Web PR #153 exact head `1f8571b`; route contract 2/2,
+  disposable PostgreSQL integration 1/1, serial 846/23/0, typecheck/schema/
+  34-migration/build/diff pass; hosted workflow `37563987818` passed.
+- **Boundary:** This wires the runtime contract but does not authorize
+  deployment or production invocation. Supporting data dispositions,
+  reconciliation, restore/rollback, and authenticated non-production E2E
+  remain open; `QUAL-WEB-005` is not accepted.

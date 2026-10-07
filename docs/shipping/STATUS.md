@@ -1872,3 +1872,18 @@ non-production E2E remain open. `QUAL-WEB-005` remains unchecked; count is
 **218 checked / 62 unchecked / 280 total**. No production or destructive
 operation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-kind-transactions-pr153-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-005 bounded runtime runner
+
+Web PR #153 exact head `1f8571b4a146e9ef78ca9ae25c13b86f8e89665c` adds the
+bounded account-deletion batch runner and authenticated `CRON_SECRET` route.
+Local route contract is 2/2, disposable PostgreSQL integration is 1/1,
+negative boundary is 2/2, truth registry is 25/25, serial is 846/23/0, the
+34-migration check passes, and the 38-route production-semantics build passes.
+Hosted Verify `37563987818` / job `112607416147` and the required provider
+checks pass. This route has not been deployed or invoked in production;
+`QUAL-WEB-005` remains open because supporting ownership/retention mapping,
+reconciliation, restore/rollback, and authenticated non-production E2E remain
+unqualified. Backlog remains **218 checked / 62 unchecked / 280 total**.
+Private evidence:
+`docs/shipping/evidence/qual-web-005-runtime-runner-pr153-2026-10-07.md`.

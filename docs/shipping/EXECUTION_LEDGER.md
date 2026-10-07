@@ -2932,4 +2932,26 @@ before enabling any destructive adapter.
   production/database/provider/payment/deployment write, migration, deletion,
   or browser mutation occurred.
 - **Evidence:**
-  `docs/shipping/evidence/qual-web-005-kind-transactions-pr153-2026-10-07.md`.
+`docs/shipping/evidence/qual-web-005-kind-transactions-pr153-2026-10-07.md`.
+
+# 2026-10-07 — QUAL-WEB-005 bounded runtime runner
+
+- **Code:** Web PR #153 exact head
+  `1f8571b4a146e9ef78ca9ae25c13b86f8e89665c` adds a batch-limited
+  account-deletion runner and `CRON_SECRET`-authenticated Node cron route. It
+  selects only due jobs, caps the batch at 10, validates the frozen seven-kind
+  set, delegates to the fenced worker, and closes the database client in
+  `finally`.
+- **Local:** Route contract 2/2, disposable PostgreSQL integration 1/1,
+  negative boundary 2/2, truth registry 25/25, serial 846/23/0, typecheck,
+  schema, ordered 34-migration, diff, and 38-route build checks pass.
+- **Hosted:** Verify `37563987818`, job `112607416147`, plus Vercel,
+  GitGuardian, and Preview Comments passed. PR #153 remains open, CLEAN, and
+  unmerged.
+- **Boundary:** The batch integration deliberately remains blocked by
+  `inventoryComplete=false`; no production route invocation or destructive
+  write occurred. Supporting data disposition, reconciliation, restore/
+  rollback, and authenticated non-production E2E remain open. Backlog remains
+  218 checked / 62 unchecked / 280 total.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-runtime-runner-pr153-2026-10-07.md`.

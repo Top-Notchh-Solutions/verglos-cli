@@ -514,3 +514,13 @@ dispositions, wire and authenticate the worker invocation, reconcile actual
 row counts and audit receipts, rehearse restore/rollback, and run the
 authenticated non-production E2E. Migration `0033` remains unapplied to
 production; no deletion or production write occurred.
+
+Runtime runner update (2026-10-07): PR #153 exact head
+`1f8571b4a146e9ef78ca9ae25c13b86f8e89665c` passed hosted Verify
+`37563987818` / job `112607416147`, with route contract 2/2, disposable DB
+integration 1/1, serial 846/23/0, ordered 34-migration validation, and a
+38-route build passing locally. This wires a bounded authenticated adapter but
+does not close Gate 2/4/6 or accept `QUAL-WEB-005`: the inventory gate remains
+false, and supporting dispositions, reconciliation, restore/rollback, and
+authenticated non-production E2E remain open. No production invocation or
+destructive operation occurred.

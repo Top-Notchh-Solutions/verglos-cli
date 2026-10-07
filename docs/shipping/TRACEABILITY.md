@@ -1658,3 +1658,16 @@ checks, and hosted workflow `37563632682` pass. This is an operational
 substrate milestone only: the worker gate remains `inventoryComplete=false`
 until supporting retention/ownership, runtime invocation, reconciliation,
 restore/rollback, and authenticated E2E are qualified.
+
+# 2026-10-07 · QUAL-WEB-005 bounded runtime runner
+
+PR #153 exact head `1f8571b4a146e9ef78ca9ae25c13b86f8e89665c` traces due
+user-scoped deletion jobs through a batch-limited runner and an authenticated
+Node cron route. Route contract 2/2, disposable PostgreSQL integration 1/1,
+negative 2/2, truth registry 25/25, serial 846/23/0, 34-migration/schema,
+build, and boundary checks pass; hosted workflow `37563987818` / job
+`112607416147` passes. The integration remains blocked by the deliberate
+`inventoryComplete=false` fence. This is runtime wiring evidence only:
+production invocation, supporting ownership/retention disposition,
+reconciliation, restore/rollback, and authenticated non-production E2E remain
+unqualified, so `QUAL-WEB-005` remains open.

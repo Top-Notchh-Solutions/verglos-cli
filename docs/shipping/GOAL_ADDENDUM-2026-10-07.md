@@ -173,3 +173,19 @@ does not accept `QUAL-WEB-005`: supporting retention/ownership inventory,
 runtime wiring, reconciliation, restore/rollback, and authenticated E2E remain
 open. Count remains **218 checked / 62 unchecked / 280 total**; no production
 or destructive operation occurred.
+
+# 2026-10-07 · QUAL-WEB-005 bounded runtime runner
+
+PR #153 exact head `1f8571b4a146e9ef78ca9ae25c13b86f8e89665c` passed hosted
+Verify `37563987818` / job `112607416147` after adding the bounded deletion
+batch runner and authenticated cron route. Local route contract 2/2,
+disposable PostgreSQL integration 1/1, negative 2/2, truth registry 25/25,
+serial 846/23/0, ordered 34-migration validation, schema/typecheck, diff, and
+38-route build all pass. This advances runtime wiring but does not count as
+whole shipping: the integration remains blocked by `inventoryComplete=false`,
+and supporting ownership/retention dispositions, reconciliation,
+restore/rollback, authenticated non-production E2E, provider lifecycle, CLI
+release/legal, GitHub organization integration, and credential rotation remain
+open. The authoritative count stays **218 checked / 62 unchecked / 280
+total**. No production invocation, destructive operation, deployment, payment,
+database, or credential write occurred.
