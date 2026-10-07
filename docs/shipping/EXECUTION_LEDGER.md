@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · PLAN-WEB-013 hosted verification follow-up
+
+- **Code:** Web PR #149 head `550dba0` adds the missing hosted-method entry to
+  the complete production runtime-config fixture after production validation
+  was made fail closed for QR-only configuration.
+- **Verification:** Hosted Verify run `37553696161` is green across Node 22
+  typecheck, full tests, negative-boundary/truth-registry, DB/schema and
+  migration checks, build, public-boundary, dependency/SBOM/license, and
+  tracked-secret checks. Local focused payment/runtime/route-contract tests
+  pass 33/33 and typecheck passes.
+- **Acceptance:** This is code/CI evidence only. PLAN-WEB-013/014/015 remain
+  unchecked pending provider-account method and lifecycle evidence. Backlog
+  remains 218 checked / 62 unchecked / 280 total.
+- **Boundary:** PR remains open and unmerged. No Razorpay account read or
+  configuration change, payment/refund/renewal, production database,
+  migration, deployment, or credential operation occurred.
+- **Evidence:** `docs/shipping/evidence/qual-web-plan-013-hosted-2026-10-07.md`.
+
 ## 2026-10-07 · Web hosted serial qualification CI
 
 - **Code:** Web PR #150 head `a78578e` changes only Verify workflow test

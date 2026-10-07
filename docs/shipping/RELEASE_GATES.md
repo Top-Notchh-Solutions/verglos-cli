@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013 hosted verification follow-up · 2026-10-07
+
+Web PR #149 head `550dba0` passed hosted Verify run `37553696161` across the
+full Node 22 quality/security/build matrix. Local focused payment/runtime/
+route-contract tests are 33/33 and typecheck passes. This validates the
+fail-closed production method-config contract and CI fixture only; it does not
+close PLAN-WEB-013/014/015 or Gate 4/6. Account-enabled Razorpay test-mode
+method/lifecycle evidence, production reconciliation, restore/rollback,
+credential rotation, and release authorization remain open. No production
+operation occurred.
+
 ## Web hosted serial qualification CI · 2026-10-07
 
 PR #150 head `a78578e` changes the hosted Verify test step to the existing

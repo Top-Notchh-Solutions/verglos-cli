@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013 hosted verification follow-up
+
+Web PR #149 head `550dba0` now has a green hosted Verify run
+`37553696161`. The Node 22 job passed typecheck, full tests,
+negative-boundary/truth-registry, database/schema and migration checks,
+production build, public-boundary, dependency/SBOM/license, and tracked-secret
+checks. The local focused payment/runtime/route-contract suite passed 33/33
+and typecheck passed. The follow-up only aligns the production-config fixture
+with the fail-closed requirement for at least one hosted Razorpay method.
+PR #149 remains open and unmerged; no provider, production, payment,
+deployment, migration, or credential operation occurred. PLAN-WEB-013/014/015
+remain unchecked pending account-enabled method and lifecycle evidence. Private
+evidence: `docs/shipping/evidence/qual-web-plan-013-hosted-2026-10-07.md`.
+Backlog remains **218 checked / 62 unchecked / 280 total**.
+
 ## 2026-10-07 · Web hosted serial qualification CI
 
 PR #150 now heads `a78578e` and remains open/mergeable. Its Verify run

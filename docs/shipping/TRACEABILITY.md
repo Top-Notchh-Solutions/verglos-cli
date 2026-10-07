@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013 hosted verification follow-up · 2026-10-07 · Web PR #149
+
+- **Head/result:** `550dba0`; hosted Verify run `37553696161` is green for
+  Node 22 typecheck, full tests, negative-boundary/truth-registry,
+  DB/schema/migration checks, build, public-boundary, dependency/SBOM/license,
+  and tracked-secret checks.
+- **Local result:** Focused payment/runtime/route-contract tests pass 33/33;
+  typecheck passes.
+- **Boundary:** The change aligns the complete production-config fixture with
+  the new requirement for at least one hosted Razorpay method. It does not
+  establish provider account capabilities or lifecycle evidence. PR #149 is
+  open/unmerged; PLAN-WEB-013/014/015 remain open and no production,
+  provider, payment, migration, deployment, or credential operation occurred.
+
 ## Web hosted serial qualification CI · 2026-10-07
 
 - Web PR #150 head `a78578e` uses the existing serial PostgreSQL test harness
