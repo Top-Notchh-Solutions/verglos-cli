@@ -1,5 +1,12 @@
 # Goal addendum — 2026-10-07
 
+Hosted payment-phase verification: Web PR #149 exact head passed Verify run
+`37563023349` on Node 22: serial Web 871/872 pass with one explicit skip,
+negative-boundary 2/2, truth-registry 25/25, 31 migrations, typecheck, build,
+public-boundary, dependency/SBOM/license/secret checks. Provider test-mode
+method/lifecycle evidence remains missing; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**.
+
 Production payment truth recheck: read-only Chrome DevTools inspection of
 `/checkout` returned HTTP 200 and clean console but still displayed the legacy
 UPI-only QR path at INR 2,809.43/month. No payment or mutation request occurred.

@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-013 hosted verification refresh · 2026-10-07
+
+Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` passed hosted
+Verify run `37563023349`: serial Web 871/872 pass with one explicit skip,
+negative-boundary 2/2, truth-registry 25/25, 31 ordered migrations, typecheck,
+build, public-boundary, dependency, SBOM, license, and tracked-secret checks.
+This does not close PLAN-WEB-013/014/015 because provider runtime and
+account-enabled method evidence remain missing. See
+`docs/shipping/evidence/payment-pr149-hosted-qualification-2026-10-07.md`.
+
 ## Production payment-surface truth recheck · 2026-10-07
 
 Read-only Chrome DevTools inspection of production `/checkout` returned HTTP

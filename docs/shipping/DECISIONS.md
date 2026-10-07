@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## PLAN-WEB-013 hosted verification refresh · 2026-10-07
+
+- **Decision:** Treat PR #149 as hosted code-qualified but do not merge or
+  close payment gates from CI alone.
+- **Evidence:** Exact head `db68157da039d8aab939818f9023f867028e4432`, Verify
+  `37563023349`: serial 871/872 pass with one explicit skip, negative-boundary
+  2/2, truth-registry 25/25, 31 migrations, build and security/public-boundary
+  checks green.
+- **Boundary:** Razorpay account-enabled method and test-mode lifecycle evidence
+  are still required. No provider, production, database, deployment, or merge
+  operation occurred.
+
 ## Production payment-surface truth recheck · 2026-10-07
 
 - **Decision:** Treat the live checkout as legacy QR-only runtime truth and keep

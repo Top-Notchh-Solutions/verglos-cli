@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-013 hosted verification refresh · 2026-10-07
+
+Web PR #149 exact head passed Verify run `37563023349`: serial Web 871/872
+pass with one explicit skip, negative-boundary 2/2, truth-registry 25/25, 31
+ordered migrations, typecheck, build, public-boundary, dependency/SBOM/license,
+and tracked-secret checks. This is hosted code qualification only. The payment
+gate remains open for account-enabled Razorpay methods and complete isolated
+test-mode lifecycle evidence; no merge or production operation occurred.
+
 ## Production payment-surface truth recheck · 2026-10-07
 
 Production `/checkout` still renders the legacy UPI-only QR path at INR

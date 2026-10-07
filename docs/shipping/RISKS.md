@@ -1,5 +1,13 @@
 # Verglos V1 risk register
 
+Latest R-044 hosted verification update (2026-10-07): Web PR #149 exact head
+`db68157da039d8aab939818f9023f867028e4432` passed Verify `37563023349` with
+serial Web 871/872 pass and one explicit skip, negative-boundary 2/2,
+truth-registry 25/25, 31 migrations, build, public-boundary, dependency,
+SBOM/license, and secret checks. This reduces code/CI uncertainty only;
+account-enabled Razorpay methods, provider lifecycle/replay evidence, and
+production reconciliation remain release-blocking.
+
 Latest R-044 production truth update (2026-10-07): read-only Chrome DevTools
 still observes the legacy UPI-only QR checkout at INR 2,809.43/month, while
 Web PR #149 remains open and not deployed. No payment or mutation request was

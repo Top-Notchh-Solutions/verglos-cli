@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · PLAN-WEB-013 hosted verification refresh
+
+Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` hosted Verify
+run `37563023349` completed on Node 22: serial Web **871 pass / 1 explicit
+skip / 0 fail out of 872**, negative-boundary **2/2**, truth-registry **25/25**,
+ordered migrations **31**, plus typecheck, build, public-boundary, dependency,
+SBOM, license, and secret checks all passed. The PR remains OPEN, MERGEABLE,
+CLEAN. This strengthens hosted code qualification only; Razorpay test-mode
+method/lifecycle evidence and payment acceptance remain open. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Private evidence:
+`docs/shipping/evidence/payment-pr149-hosted-qualification-2026-10-07.md`.
+
 ## 2026-10-07 · production payment-surface truth recheck
 
 Read-only Chrome DevTools inspection of `https://verglos.com/checkout` returned

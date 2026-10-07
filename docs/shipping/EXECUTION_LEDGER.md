@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · PLAN-WEB-013 hosted verification refresh
+
+- **Run:** Web PR #149 exact head
+  `db68157da039d8aab939818f9023f867028e4432`; Verify run `37563023349`, job
+  `112604384062`, Node 22/pnpm 10.34.5.
+- **Result:** Serial suite 872 total / 871 pass / 1 explicit skip / 0 fail;
+  negative-boundary 2/2; truth-registry 25/25; 31 ordered migrations;
+  typecheck, build, public-boundary, dependency/SBOM/license/secret checks
+  passed.
+- **Boundary:** Hosted code qualification is green, but provider account
+  methods and test-mode payment lifecycle evidence are absent. No merge,
+  deployment, provider, database, or production operation occurred.
+
 ## 2026-10-07 · production payment-surface truth recheck
 
 - **Browser:** Read-only Chrome DevTools load of `/checkout` returned HTTP 200
