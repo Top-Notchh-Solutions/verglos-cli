@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · Web hosted serial qualification CI
+
+- **Code:** Web PR #150 head `a78578e` changes only Verify workflow test
+  execution from parallel `pnpm test` to existing `pnpm test:serial`; the
+  developer script remains unchanged.
+- **Hosted:** Verify run `37552936102` passes typecheck, serialized pretest and
+  configured tests, boundary/truth checks, schema/migrations, build,
+  public-boundary, dependency/SBOM/license, and tracked-secret checks. Vercel,
+  GitGuardian, and Preview Comments pass. PR is open/mergeable.
+- **Acceptance:** This is CI reliability evidence only. No backlog checkbox or
+  release gate changed; backlog remains 218 checked / 62 unchecked / 280 total.
+- **Boundary:** No merge, deployment, production/database/provider/payment/
+  migration/credential/customer operation occurred.
+- **Evidence:** `docs/shipping/evidence/qual-web-ci-serial-2026-10-07.md`.
+
 ## 2026-10-07 · Web serial PostgreSQL qualification
 
 - **Repository:** Web `main` `cbc0f5a89179995569308695419d4578c57ce716`; no

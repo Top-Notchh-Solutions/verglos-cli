@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## Web hosted serial qualification CI · 2026-10-07
+
+PR #150 head `a78578e` changes the hosted Verify test step to the existing
+serial shared-database harness. Run `37552936102` is green across typecheck,
+tests, schema/migrations, build, public-boundary, dependency/SBOM/license,
+secret, GitGuardian, Vercel, and preview checks. This improves the evidence
+path but closes no product or release gate; PR #150 remains open and no
+deployment/merge occurred.
+
 ## Web serial PostgreSQL qualification · 2026-10-07
 
 The existing `test:serial` path passes pretest 48/48 and configured Web tests

@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## Web hosted serial qualification CI · 2026-10-07
+
+- Web PR #150 head `a78578e` uses the existing serial PostgreSQL test harness
+  in Verify. Hosted run `37552936102` passes the complete job, including
+  serialized tests, schema/migration, build, security, public-boundary,
+  dependency, SBOM, license, and tracked-secret checks.
+- This resolves CI scheduling reliability only; it does not establish
+  provider, production, customer, GitHub cutover, or release-candidate
+  acceptance. See
+  `docs/shipping/evidence/qual-web-ci-serial-2026-10-07.md`.
+
 ## Web serial PostgreSQL qualification · 2026-10-07
 
 - **Result:** The existing serial harness passes pretest 48/48 and the

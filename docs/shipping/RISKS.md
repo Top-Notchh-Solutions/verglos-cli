@@ -5,9 +5,10 @@ authoritative when parallel test workers share mutable fixture state: they can
 race while creating shared `pgcrypto` setup and leave an integration worker
 unresolved. The existing serialized qualification path now passes 867/867
 configured tests plus the separately migrated billing integration 1/1, so the
-local release evidence is controlled when serialized. The parallel invocation
-remains non-authoritative and the risk remains open for CI/harness consistency;
-no production operation occurred.
+local release evidence is controlled when serialized. Web PR #150 head
+`a78578e` and hosted run `37552936102` now make serialized execution the CI
+path. The developer parallel invocation remains non-authoritative; no
+production operation occurred.
 
 Latest R-044 update (2026-10-07): Web PR #149 implements the hosted order
 boundary, server/catalog method declaration, signed order binding,

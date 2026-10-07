@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · Web hosted serial qualification CI
+
+PR #150 now heads `a78578e` and remains open/mergeable. Its Verify run
+`37552936102` passes the new `pnpm test:serial` workflow step plus typecheck,
+negative-boundary/truth-registry, schema/migration, build, public-boundary,
+dependency/SBOM/license, and secret checks; GitGuardian, Vercel, and Preview
+Comments pass. This closes only the shared-database CI scheduling gap. No
+merge/deployment or production/provider operation occurred. Private evidence:
+`docs/shipping/evidence/qual-web-ci-serial-2026-10-07.md`. Backlog remains
+**218 checked / 62 unchecked / 280 total**.
+
 ## 2026-10-07 · Web serial PostgreSQL qualification
 
 The repository's existing `test:serial` harness completed the Web PostgreSQL
