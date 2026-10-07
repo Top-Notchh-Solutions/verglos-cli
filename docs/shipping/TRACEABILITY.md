@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## Restore/recovery harness qualification · 2026-10-07
+
+- Web PR #153 head `250313e` ran a disposable snapshot restore, 35 ordered
+  migrations, both HOSTED-013 writer passes, reconciliation, and a stopped-DB
+  fail-closed simulation successfully; measured RTO was 3.09s and the
+  reconciler returned `reconciled`.
+- The snapshot was approximately 396h old, so the 48h critical RPO gate
+  failed. This is not production restore/deployment rollback or authenticated
+  deletion E2E evidence; QUAL-WEB-005 remains unchecked. See
+  `docs/shipping/evidence/qual-web-005-restore-harness-250313e-2026-10-07.md`.
+
 ## QUAL-WEB-005 rollback/retry qualification · 2026-10-07
 
 - Web PR #153 head `2127924e418fdca4094fa88bab02656952f4488b` proves injected

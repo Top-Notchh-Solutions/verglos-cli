@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## Restore/recovery harness qualification · 2026-10-07
+
+Web PR #153 head `250313e` passes the disposable restore, migration, writer,
+reconciliation, and fail-closed simulation steps, but the available snapshot
+is approximately 396h old and fails the critical 48h RPO threshold. No
+release gate or backlog checkbox closed; current backup, production restore,
+deployment rollback, and authenticated deletion E2E remain open.
+
 ## QUAL-WEB-005 rollback/retry qualification · 2026-10-07
 
 Web PR #153 head `2127924e418fdca4094fa88bab02656952f4488b` passes local and

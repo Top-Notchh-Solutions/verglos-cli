@@ -1,5 +1,14 @@
 # Goal addendum — 2026-10-07
 
+Web PR #153 exact head `250313e` hardened the disposable restore drill. The
+existing snapshot restored, 35 migrations and both writer passes ran,
+reconciliation returned `reconciled`, and fail-closed simulation passed; RTO
+was 3.09s. The report failed the critical RPO gate because the snapshot is
+approximately 396h old. This adds recovery-path evidence but does not close
+QUAL-WEB-005: current production backup/restore, deployment rollback,
+authenticated deletion E2E, and final acceptance remain open. Backlog remains
+**218 checked / 62 unchecked / 280 total**; no checkbox changed.
+
 Web PR #153 exact head `2127924e418fdca4094fa88bab02656952f4488b` now proves
 supporting deletion transaction rollback and same-binding retry under an
 injected PostgreSQL failure. Local serial Web 868/1/0, deletion integration

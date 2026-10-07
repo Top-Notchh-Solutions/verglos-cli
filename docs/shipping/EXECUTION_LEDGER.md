@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · restore/recovery harness qualification
+
+- **Code:** Web PR #153 head `250313e` hardens host-port readiness, bounded
+  `psql` restore diagnostics, and reconciliation manifest parsing.
+- **Rehearsal:** Disposable Postgres restore from the existing local snapshot;
+  35 migrations, two writer passes, reconciler, and fail-closed stopped-DB
+  simulation all passed. RTO: 3.09s; reconciliation: `reconciled`.
+- **Gate:** Snapshot age is approximately 396h, so the 48h critical RPO gate
+  failed. This does not certify current backup cadence, production restore,
+  deployment rollback, or deletion E2E. No checkbox or production state changed.
+- **Evidence:** `docs/shipping/evidence/qual-web-005-restore-harness-250313e-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 rollback/retry qualification
 
 - **Code:** Web PR #153 head `2127924e418fdca4094fa88bab02656952f4488b`

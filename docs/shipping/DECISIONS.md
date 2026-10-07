@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## Restore/recovery harness qualification · 2026-10-07
+
+- **Decision:** Record the disposable restore path as partial recovery
+  evidence only. Do not treat it as a clean DR or QUAL-WEB-005 acceptance
+  result because the snapshot is approximately 396h old and exceeds the
+  critical 48h RPO threshold.
+- **Evidence:** Web PR #153 head `250313e`; restore, 35 migrations, writer
+  passes, `reconciled` manifest, and fail-closed simulation passed; RTO 3.09s.
+- **Boundary:** Current production backup/restore, Vercel rollback,
+  authenticated deletion E2E, and provider/payment qualifications remain open.
+  No production operation or checkbox change.
+
 ## QUAL-WEB-005 rollback/retry qualification · 2026-10-07
 
 - **Decision:** Treat the injected PostgreSQL failure/savepoint result as

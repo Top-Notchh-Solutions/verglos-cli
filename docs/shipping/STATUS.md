@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · restore/recovery harness qualification
+
+Web PR #153 exact head `250313e` hardens the disposable restore drill. The
+available 156,269-byte snapshot restored successfully, all 35 migrations and
+both HOSTED-013 writer passes completed, reconciliation returned
+`status=reconciled`, and the stopped-container fail-closed check passed.
+Measured RTO was 3.09s. The report correctly failed because the snapshot is
+approximately 396 hours old, beyond the critical 48-hour RPO threshold. This
+is recovery-path evidence only; current production backup, deployment rollback,
+authenticated non-production deletion E2E, and QUAL-WEB-005 acceptance remain
+open. Focused TypeScript/DR/reconciliation tests passed 18/18. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total**. Private
+evidence: `docs/shipping/evidence/qual-web-005-restore-harness-250313e-2026-10-07.md`.
+
 ## 2026-10-07 · QUAL-WEB-005 rollback/retry qualification
 
 Web PR #153 exact head `2127924e418fdca4094fa88bab02656952f4488b` adds an
