@@ -1,5 +1,12 @@
 # Verglos V1 release gates
 
+## CLI exact origin/main qualification · 2026-10-07
+
+CLI remote head `7d060b2` passed **12/12** test tasks, **13/13** typecheck
+tasks, and **8/8** build tasks. This strengthens regression evidence but does
+not pass Hunt provenance, independent review, supported-platform release, or
+final acceptance gates.
+
 ## Web GitHub App server-side exchange · 2026-10-07
 
 PR #154 reconciled head `9032bda` merged as `1498837` after focused

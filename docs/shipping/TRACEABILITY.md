@@ -1,5 +1,12 @@
 # Verglos V1 traceability
 
+## CLI exact origin/main qualification · 2026-10-07
+
+Exact CLI remote head `7d060b2` passed Turbo **12/12** test, **13/13**
+typecheck, and **8/8** build tasks. This traces current-source regression
+coverage only; it does not establish Hunt provenance, independent review,
+release, or final acceptance.
+
 ## Web GitHub App server-side exchange · 2026-10-07
 
 PR #154 reconciled exact head `9032bda` (merged as `1498837`) wires the GitHub

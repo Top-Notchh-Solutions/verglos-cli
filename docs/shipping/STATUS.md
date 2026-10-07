@@ -1,5 +1,13 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · CLI exact origin/main qualification
+
+The exact remote CLI head `7d060b2` passed Turbo **12/12** test tasks,
+**13/13** typecheck tasks, and **8/8** build tasks in a clean worktree. This
+is current-source regression evidence only; Hunt provenance, independent
+review, platform/release qualification, and final acceptance remain open.
+Evidence: `docs/shipping/evidence/cli-origin-main-qualification-2026-10-07.md`.
+
 ## 2026-10-07 · Web GitHub App server-side exchange
 
 Web PR #154 reconciled exact head `9032bda` (merged as `1498837`; implementation

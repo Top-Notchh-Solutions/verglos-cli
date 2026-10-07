@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+# 2026-10-07 — CLI exact origin/main qualification
+
+- **Code:** CLI exact remote head `7d060b2` in clean worktree
+  `feat/cli-shipping-next`.
+- **Verification:** Turbo **12/12** test tasks, **13/13** typecheck tasks, and
+  **8/8** build tasks passed; `git diff --check` passed.
+- **Boundary:** No production/provider/customer operation, publication, tag,
+  merge, or public code change occurred. Hunt provenance, independent review,
+  release qualification, and final acceptance remain open.
+- **Evidence:** `docs/shipping/evidence/cli-origin-main-qualification-2026-10-07.md`.
+
 # 2026-10-07 — Web GitHub App server-side exchange
 
 - **Code:** Web PR #154 reconciled exact head `9032bda`, merged as `1498837`
