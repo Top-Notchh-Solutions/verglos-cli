@@ -3115,6 +3115,13 @@ migration tests, ordered migration checks, and diff checks pass. Hosted checks
 for the new heads are queued/running. No checkbox changed; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**.
 
+An in-place CDP inspection of live `https://verglos.com/checkout` after the
+PR #149 merge still rendered the QR-only `Show UPI QR code` action and UPI copy;
+hosted cards/netbanking/wallets/EMI/Pay Later were not rendered. No payment or
+deployment action was taken. This confirms production has not cut over to the
+merged hosted-checkout code; PLAN-WEB-013/014/015 remain open. Evidence:
+`docs/shipping/evidence/live-checkout-still-qr-only-2026-10-07.md`.
+
 Web PR #149 exact head `e46299a` subsequently merged as `8b843da` after hosted
 typecheck/schema, Vercel, and Preview Comments passed. This merges the
 code-side hosted checkout/payment-catalog phase only; PLAN-WEB-011/012/013/014/

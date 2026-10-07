@@ -4401,6 +4401,18 @@ QUAL-WEB-006 browser runtime batch (2026-10-07):
 - **Boundary:** No production migration, deletion, payment, provider,
   deployment, credential, or browser-state write occurred.
 
+# 2026-10-07 — Live checkout remains QR-only after PR #149 merge
+
+- **Observation:** In-place CDP inspection of `https://verglos.com/checkout`
+  still rendered the QR-only action and UPI copy; no hosted method list was
+  present.
+- **Disposition:** PR #149’s merge is not a production cutover. PLAN-WEB-013,
+  PLAN-WEB-014, and PLAN-WEB-015 remain open; no deployment or payment action
+  was attempted.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**; no checkbox
+  changed.
+- **Evidence:** `docs/shipping/evidence/live-checkout-still-qr-only-2026-10-07.md`.
+
 # 2026-10-07 — Web PR #149 merged after hosted verification
 
 - **Merge:** Web PR #149 exact head `e46299a` merged as `8b843da` after hosted
