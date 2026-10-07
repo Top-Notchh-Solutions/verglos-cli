@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## QUAL-CLI-006 Node 22 current-main qualification · 2026-10-07
+
+Exact CLI `origin/main` `7d060b2852551cc017bbb2b5f70bad22843e7273` passed a
+fresh container-local install, Turbo test **12/12**, typecheck **13/13**, and
+build **8/8** under pinned Node `22.23.3`; the container was removed cleanly.
+This is supported-runtime evidence only. QUAL-CLI-006 remains open for the
+remaining trust, legal, independent-acceptance, and release gates. No
+checkbox changed. See
+`docs/shipping/evidence/qual-cli-006-node22-current-main-2026-10-07.md`.
+
 ## PLAN-WEB-015 production preflight · 2026-10-07
 
 Vercel’s latest production attempt for Web commit `1498837` failed in the

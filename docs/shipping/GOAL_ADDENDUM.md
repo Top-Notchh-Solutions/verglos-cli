@@ -1,5 +1,18 @@
 # Goal addendum — 2026-10-07
 
+## QUAL-CLI-006 Node 22 current-main qualification
+
+Exact CLI `origin/main` `7d060b2852551cc017bbb2b5f70bad22843e7273` passed a
+fresh container-local install and Turbo test **12/12**, typecheck **13/13**,
+and build **8/8** under pinned Node `22.23.3`; the container was removed
+cleanly. This is supporting runtime evidence only. QUAL-CLI-006 remains open
+for official validators, trusted Sigstore/publishing identity, legal/license
+review, independent acceptance, and final release approval. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+No production/provider/database/deployment/payment/publication state changed.
+Evidence:
+`docs/shipping/evidence/qual-cli-006-node22-current-main-2026-10-07.md`.
+
 ## PLAN-WEB-015 production preflight
 
 Vercel’s latest production attempt at Web commit `1498837` failed closed in

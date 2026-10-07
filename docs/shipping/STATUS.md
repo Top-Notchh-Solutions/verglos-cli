@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · CLI exact current-main Node 22 qualification
+
+Exact CLI `origin/main` `7d060b2852551cc017bbb2b5f70bad22843e7273` completed a
+fresh container-local install and passed Turbo **12/12** test tasks,
+**13/13** typecheck tasks, and **8/8** build tasks under pinned Node
+`22.23.3` (`node:22-bookworm-slim` pinned by digest). The container was
+removed after the run and no source changed. This advances supported-runtime
+evidence but does not close QUAL-CLI-006: official validators, trusted
+Sigstore/publishing identity, legal/license review, independent acceptance,
+and release approval remain open. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-node22-current-main-2026-10-07.md`.
+
 ## 2026-10-07 · Production hosted-checkout preflight
 
 Read-only Vercel inspection found the latest production attempt at Web commit

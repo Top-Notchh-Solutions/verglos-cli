@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## QUAL-CLI-006 Node 22 runtime qualification · 2026-10-07
+
+Exact CLI `origin/main` `7d060b2852551cc017bbb2b5f70bad22843e7273` passed
+fresh-install test **12/12**, typecheck **13/13**, and build **8/8** in the
+pinned Node `22.23.3` container. This advances the runtime gate but does not
+pass QUAL-CLI-006: official validator completeness, trusted Sigstore and
+publishing identity, legal/license review, independent acceptance, and final
+release approval remain required. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**.
+
 ## PLAN-WEB-015 production configuration boundary · 2026-10-07
 
 Production deployment of Web commit `1498837` fails closed because

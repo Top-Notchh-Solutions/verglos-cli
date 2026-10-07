@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## QUAL-CLI-006 Node 22 current-main qualification · 2026-10-07
+
+- **Decision:** Accept the pinned Node 22 run as supporting runtime evidence;
+  do not close QUAL-CLI-006 or authorize release publication.
+- **Evidence:** Exact CLI head
+  `7d060b2852551cc017bbb2b5f70bad22843e7273`; fresh install; Turbo test
+  **12/12**, typecheck **13/13**, build **8/8**, all exit `0`.
+- **Boundary:** The container was removed cleanly. Official/trusted/legal/
+  independent release gates remain open; no source, production, provider,
+  database, deployment, payment, publication, or customer-state mutation
+  occurred. No checkbox changed.
+
 ## PLAN-WEB-015 production preflight · 2026-10-07
 
 - **Decision:** Do not promote or configure the hosted-order checkout until

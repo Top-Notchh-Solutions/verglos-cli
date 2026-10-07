@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-QUAL-CLI-006 Node 22 runtime result · 2026-10-07
+
+The exact current CLI head passed fresh-install test **12/12**, typecheck
+**13/13**, and build **8/8** under pinned Node `22.23.3`; the container was
+removed cleanly. Runtime drift is reduced for this source head. Remaining
+risk is release acceptance: official validator completeness, trusted
+Sigstore/publishing identity, legal/license review, independent acceptance,
+and final release approval remain absent. Owner: release/qualification. No
+production/provider/database/deployment/publication mutation occurred.
+
 ## R-041 / PLAN-WEB-015 production configuration and credential boundary · 2026-10-07
 
 The latest production deployment at Web commit `1498837` fails before build

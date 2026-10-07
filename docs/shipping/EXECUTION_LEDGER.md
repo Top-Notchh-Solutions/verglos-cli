@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 — CLI current-main Node 22 qualification
+
+- **Code:** Exact CLI `origin/main` and worktree HEAD
+  `7d060b2852551cc017bbb2b5f70bad22843e7273`.
+- **Runtime:** Pinned `node:22-bookworm-slim` image digest; Node `22.23.3`,
+  pnpm `9.15.9`, fresh container-local install.
+- **Verification:** Turbo test **12/12**, typecheck **13/13**, and build
+  **8/8** passed; all commands exited `0`. The container was removed cleanly.
+- **Disposition:** Supported-runtime evidence only. QUAL-CLI-006 remains open
+  for official/trusted/legal/independent release gates; no checkbox changed;
+  backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-node22-current-main-2026-10-07.md`.
+
 ## 2026-10-07 — Production hosted-checkout preflight
 
 - **Runtime:** Read-only Vercel inspection of production deployment
