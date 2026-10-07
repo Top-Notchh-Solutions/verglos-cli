@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## Fresh production snapshot/restore rehearsal · 2026-10-07
+
+- **Decision:** Accept the fresh snapshot and disposable restore as RPO/
+  migration-rehearsal evidence, but keep QUAL-WEB-005 and production cutover
+  gates open.
+- **Evidence:** 150,515-byte snapshot at `2026-10-07T10:17:27.005Z`; restore
+  and PR #153 migration tail succeeded; clone history reached 35 rows with
+  deletion/payments/subscriptions 0 and webhook events 4.
+- **Boundary:** No production write, migration, deployment, payment,
+  entitlement, or deletion occurred; hosted deletion E2E, legal/customer
+  disposition, rollback, and independent review remain required.
+
 ## Preview environment preflight · 2026-10-07
 
 - **Decision:** Do not use the current Vercel Preview for payment qualification.

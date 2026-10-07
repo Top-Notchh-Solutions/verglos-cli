@@ -1,5 +1,15 @@
 # Goal addendum — 2026-10-07
 
+QUAL-WEB-005 fresh-snapshot rehearsal: a production `pg_dump` completed at
+`2026-10-07T10:17:27.005Z` (150,515 bytes), restored into disposable
+PostgreSQL 18, and accepted PR #153's migration tail to 35 history rows.
+Restored aggregate counts were deletion requests 0, payments 0, subscriptions
+0, and webhook events 4. Temporary dump/credentials were removed. This
+advances RPO/restore/migration rehearsal only; deletion worker/E2E, legal,
+customer-held-record, rollback, and independent acceptance gates remain open.
+Evidence:
+`docs/shipping/evidence/qual-web-005-fresh-production-snapshot-restore-2026-10-07.md`.
+
 Vercel Preview preflight: the pulled Preview values were not recognized Razorpay
 test/live key prefixes, the database value was not a PostgreSQL URL, and the
 hosted-method variable was absent. No Preview provider/database call was made.

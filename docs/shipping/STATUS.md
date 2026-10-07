@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · fresh production snapshot and restore rehearsal
+
+A fresh production `pg_dump` completed at `2026-10-07T10:17:27.005Z` (150,515
+bytes) and restored successfully into disposable PostgreSQL 18. PR #153 exact
+head passed migration ordering and applied the current migration tail on the
+clone, ending at 35 migration rows. Aggregate reconciliation remained 0
+deletion requests, 0 billing payments, 0 subscriptions, and 4 webhook events.
+The dump and temporary credentials were removed; no production write,
+migration, deployment, payment, entitlement, or deletion occurred. This
+advances but does not close QUAL-WEB-005. Private evidence:
+`docs/shipping/evidence/qual-web-005-fresh-production-snapshot-restore-2026-10-07.md`.
+
 ## 2026-10-07 · Preview environment preflight
 
 Vercel Preview was inspected by variable shape only: Razorpay key values were

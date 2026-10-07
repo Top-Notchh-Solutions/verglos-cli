@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## Fresh production snapshot/restore rehearsal · 2026-10-07
+
+The fresh production snapshot completed at `2026-10-07T10:17:27.005Z`,
+restored into disposable PostgreSQL 18, and accepted PR #153's migration tail
+to 35 migration rows. This advances the RPO/restore rehearsal subcheck, but
+QUAL-WEB-005 remains open for authenticated deletion E2E, legal/customer-held
+record disposition, row reconciliation, rollback, and independent acceptance.
+No production write or migration occurred.
+
 ## Preview environment preflight · 2026-10-07
 
 Vercel Preview does not currently expose a recognizable Razorpay test/live key

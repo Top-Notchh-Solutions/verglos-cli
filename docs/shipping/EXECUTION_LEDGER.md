@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · fresh production snapshot and restore rehearsal
+
+- **Snapshot:** Vercel Production `DATABASE_URL` was used by `pg_dump` in a
+  read-only operation. Snapshot completed at `2026-10-07T10:17:27.005Z`,
+  size 150,515 bytes; the temporary mode-700 directory and credentials were
+  removed afterward.
+- **Restore/migration:** Disposable PostgreSQL 18 restore succeeded. PR #153
+  exact head `250313e86ae6b746e1137c9f4d5436b23a96c170` passed migration
+  ordering and applied the current migration tail; restored history ended at
+  35 rows.
+- **Reconciliation:** restored aggregate counts were migrations 35, deletion
+  requests 0, payments 0, subscriptions 0, webhook events 4.
+- **Boundary:** No production DDL/DML/migration/deployment/payment/
+  entitlement/deletion occurred. QUAL-WEB-005 remains open for worker,
+  authenticated E2E, legal/customer-held records, rollback, and independent
+  acceptance evidence.
+
 ## 2026-10-07 · Preview environment preflight
 
 - **Result:** Vercel Preview key values were neither `rzp_test_` nor

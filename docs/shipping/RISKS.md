@@ -1,5 +1,12 @@
 # Verglos V1 risk register
 
+Latest QUAL-WEB-005 snapshot update (2026-10-07): a fresh 150,515-byte
+production dump completed at `2026-10-07T10:17:27.005Z`, restored in disposable
+PostgreSQL 18, and accepted PR #153's migration tail to 35 rows. This reduces
+RPO/restore/migration-rehearsal uncertainty only; authenticated deletion E2E,
+legal/customer-held-record disposition, row reconciliation, rollback, and
+independent acceptance remain open. No production write occurred.
+
 Latest Preview preflight update (2026-10-07): Vercel Preview lacks a
 recognizable Razorpay test/live key pair, a PostgreSQL database URL, and
 `RAZORPAY_ENABLED_PAYMENT_METHODS`. No Preview call was attempted. An

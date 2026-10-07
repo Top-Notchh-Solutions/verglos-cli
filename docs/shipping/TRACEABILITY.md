@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## Fresh production snapshot/restore rehearsal · 2026-10-07
+
+A production `pg_dump` completed at `2026-10-07T10:17:27.005Z` and restored
+into disposable PostgreSQL 18. PR #153 exact head applied the current
+migration tail successfully, ending at 35 migration rows; restored aggregate
+deletion/payment/subscription counts were zero and webhook events were four.
+This traces to QUAL-WEB-005/QUAL-WEB-004 restore and migration subchecks only;
+deletion E2E, legal/customer-held-record, rollback, and independent acceptance
+remain missing. See
+`docs/shipping/evidence/qual-web-005-fresh-production-snapshot-restore-2026-10-07.md`.
+
 ## Preview environment preflight · 2026-10-07
 
 Vercel Preview variable-shape inspection found no recognizable Razorpay
