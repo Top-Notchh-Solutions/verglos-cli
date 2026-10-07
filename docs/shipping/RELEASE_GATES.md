@@ -400,6 +400,11 @@ legal/customer-held-record decisions, consent/vendor inventory, and
 end-to-end production deletion evidence remain open. No production operation
 occurred.
 
+The approved Chrome CDP display probe opened the Razorpay hosted Checkout UI
+twice for test-mode orders and closed without submission. No stable method
+labels were exposed in the bounded child-context projection, so this does not
+advance the account-enabled-method or lifecycle gates and no method is claimed.
+
 Payment qualification update (2026-10-07): Razorpay test-mode order creation
 and read-back now pass for the canonical Pro monthly offer, with exact amount,
 currency, `created` state, and signed catalog binding; Web PR #149 focused

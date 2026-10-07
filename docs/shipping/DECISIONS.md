@@ -689,3 +689,8 @@ remain open; `QUAL-WEB-005` is not accepted.
 - **Boundary:** This does not prove account-enabled method discovery or any
   payment lifecycle. No payment/capture/refund/webhook/entitlement or
   production operation occurred; no checkbox changed.
+
+The approved Chrome CDP display probe opened hosted Checkout twice in test
+mode and closed without submission. Its child execution context did not expose
+stable method labels to the bounded projection, so the result is recorded as
+checkout-open evidence only and does not alter the payment decision.

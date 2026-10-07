@@ -32,3 +32,13 @@ success/failure/refund/renewal/cancellation and out-of-order lifecycle
 qualification remain open for PLAN-WEB-013/014/015.
 
 Backlog at capture: **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+## Hosted display probe
+
+Using the approved Chrome CDP session, two bounded test-mode orders opened the
+Razorpay hosted Checkout UI successfully (`checkoutOpened=true`) and were
+closed without submission. The provider UI rendered in a child execution
+context, but no stable method labels were exposed to the bounded CDP text
+projection; therefore this is checkout-open evidence only and not method-list
+evidence. No card, UPI, netbanking, wallet, EMI, QR, payment, or capture was
+claimed from this probe.

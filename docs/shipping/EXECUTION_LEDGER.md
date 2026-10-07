@@ -3507,3 +3507,8 @@ before enabling any destructive adapter.
   matrix remains open.
 - **Evidence file:**
   `docs/shipping/evidence/plan-web-013-test-mode-order-2026-10-07.md`.
+
+- **Browser probe:** Approved Chrome CDP opened the hosted Razorpay Checkout
+  twice for bounded test orders and closed both without submission. No stable
+  method labels were exposed in the child execution context, so no method was
+  claimed from browser text.

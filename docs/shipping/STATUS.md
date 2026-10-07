@@ -2383,3 +2383,9 @@ success/failure/refund/renewal/cancellation/replay matrix remain open.
 `PLAN-WEB-013/014/015` remain unchecked. Backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. Private evidence:
 `docs/shipping/evidence/plan-web-013-test-mode-order-2026-10-07.md`.
+
+The same bounded test-mode order was opened through the approved Chrome CDP
+session in Razorpay hosted Checkout twice and closed without submission. The
+checkout-open result is recorded, but the child execution context exposed no
+stable method labels to the bounded text projection, so no payment method is
+claimed from the browser probe.

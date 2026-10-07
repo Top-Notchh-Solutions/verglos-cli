@@ -2024,3 +2024,8 @@ checkout notes. The focused billing/configuration suite passes **38/38**.
 This is not lifecycle acceptance: no payment, capture, refund, webhook, or
 entitlement was produced; account-enabled method discovery and the complete
 PLAN-WEB-014/015 matrix remain open.
+
+The approved Chrome CDP probe opened Razorpay hosted Checkout twice for
+test-mode orders and closed without submission. Because no stable method labels
+were available in the bounded child-context projection, it proves only that
+the hosted window opens; it does not qualify or claim any payment method.
