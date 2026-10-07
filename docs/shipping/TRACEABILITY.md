@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 snapshot-backed deletion qualification · 2026-10-07
+
+- Web PR #153 exact head `250313e` passed 44/44 focused qualification tests
+  after restoring the existing local snapshot into disposable PostgreSQL 18
+  and applying current migrations. Coverage includes deletion-job integration,
+  scope/hold/retry, inventory/dispositions, rollback/retry, DR thresholds, and
+  privacy qualification contracts.
+- The snapshot is approximately 396h old and the fixtures are synthetic/temp
+  table based. Authenticated hosted deletion E2E, current RPO, deployment
+  rollback, and production deletion remain unproven; QUAL-WEB-005 stays
+  unchecked. See
+  `docs/shipping/evidence/qual-web-005-snapshot-deletion-2026-10-07.md`.
+
 ## PLAN-WEB-013/014/015 payment code-side qualification · 2026-10-07
 
 - PR #149 focused payment tests passed 44/44 with one explicit unit-test skip.

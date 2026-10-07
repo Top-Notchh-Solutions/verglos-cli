@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · QUAL-WEB-005 snapshot-backed deletion qualification
+
+Web PR #153 exact head `250313e` passed a focused isolated snapshot-backed
+qualification set **44/44**: deletion-job PostgreSQL integration, worker
+scope/hold/retry behavior, inventory and disposition invariants, rollback
+savepoint/retry, DR threshold classification, privacy qualification, and
+accessibility qualification contracts. The existing snapshot restored into
+disposable PostgreSQL 18 and current migrations applied. Its age is ~396h, so
+it cannot satisfy the 48h RPO gate; authenticated hosted deletion E2E and
+deployment rollback also remain open. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total**. Private evidence:
+`docs/shipping/evidence/qual-web-005-snapshot-deletion-2026-10-07.md`.
+
 ## 2026-10-07 · live critical-path queue refresh
 
 1. **PLAN-WEB-014/015 — Razorpay test-mode matrix** · Web PR #149,

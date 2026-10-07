@@ -1,5 +1,12 @@
 # Goal addendum — 2026-10-07
 
+QUAL-WEB-005 continuation: PR #153 passed 44/44 focused snapshot-backed
+deletion/DR/privacy tests after restoring the existing local snapshot into
+disposable PostgreSQL 18 and applying current migrations. This does not close
+the gate: the snapshot is ~396h old, and authenticated hosted deletion E2E,
+current RPO, and deployment rollback remain open. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total**.
+
 Live queue refresh: (1) PLAN-WEB-014/015 provider test-mode method/lifecycle
 qualification is blocked on account-enabled Razorpay test state; (2)
 QUAL-WEB-005 needs fresh-backup RPO, authenticated deletion E2E, and deployment

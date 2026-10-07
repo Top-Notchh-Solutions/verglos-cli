@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · QUAL-WEB-005 snapshot-backed deletion qualification
+
+- **Fixture:** Existing local snapshot restored into disposable PostgreSQL 18;
+  PR #153 migrations applied. Snapshot age is approximately 396h and therefore
+  fails the 48h RPO requirement.
+- **Verification:** Focused QUAL-WEB-005 set passed 44/44, covering deletion
+  job integration, worker scope/hold/retry, inventory/dispositions, rollback
+  savepoint/retry, DR threshold logic, privacy qualification, and accessibility
+  qualification contracts.
+- **Boundary:** This uses synthetic/temp-table fixtures and does not prove
+  authenticated hosted deletion E2E, current backup cadence, deployment
+  rollback, or production deletion. No checkbox changed; the disposable
+  container was removed.
+
 ## 2026-10-07 · live critical-path queue refresh
 
 1. **PLAN-WEB-014/015** — Web PR #149 at exact head

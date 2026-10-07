@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-005 snapshot-backed deletion qualification · 2026-10-07
+
+The isolated snapshot-backed QUAL-WEB-005 set passed 44/44 after current
+migrations were applied to disposable PostgreSQL 18. This is local contract and
+rollback evidence only: the snapshot is approximately 396h old, and no
+authenticated hosted deletion E2E, current-backup RPO, deployment rollback, or
+production deletion was performed. The release gate remains open.
+
 ## PLAN-WEB-013/014/015 payment code-side qualification · 2026-10-07
 
 PR #149 focused payment/configuration tests passed 44/44 with one explicit
