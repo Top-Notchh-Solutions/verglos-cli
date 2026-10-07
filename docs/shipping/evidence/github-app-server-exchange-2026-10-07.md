@@ -2,7 +2,8 @@
 
 ## Implementation
 
-Web PR #154 exact head `096de93087d886d55432fe23484ca9937d1f8347` changes the
+Web PR #154 final exact head `742a16707642715bdac96f2761135c33513a8ed0`
+(implementation `096de93` plus follow-up `742a167`) changes the
 GitHub installation route so the browser submits only an installation ID and
 bounded repository/project selections. The server now signs a short-lived App
 JWT from `VERGLOS_GITHUB_APP_ID` and
@@ -10,8 +11,9 @@ JWT from `VERGLOS_GITHUB_APP_ID` and
 least-privilege permissions, and repository identities from provider responses,
 and encrypts the returned installation token with its expiry. GitHub delivery
 refreshes expired or unknown-expiry tokens through the same exchange and
-persists the encrypted replacement. GitLab keeps its existing provider-token
-path.
+persists the encrypted replacement. The GitHub webhook secret is now also
+server-only via `VERGLOS_GITHUB_WEBHOOK_SECRET`; GitLab keeps its existing
+provider-token/secret path.
 
 ## Verification
 
@@ -19,7 +21,7 @@ path.
 - Full Web test command: **846 passed / 22 environment-gated skips / 0 failed**.
 - Typecheck, `pnpm db:check`, 29-migration ordering, negative-boundary **2/2**,
   production build **38/38 pages**, and `git diff --check`: pass.
-- Hosted Verify run **37643258692**: success.
+- Hosted Verify runs **37643258692** and final-head **37643938665**: success.
 - Vercel Preview Comments: success.
 
 ## Limits and disposition

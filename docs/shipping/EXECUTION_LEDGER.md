@@ -2,8 +2,9 @@
 
 # 2026-10-07 — Web GitHub App server-side exchange
 
-- **Code:** Web PR #154 exact head `096de93`, pushed; hosted Verify
-  `37643258692` and Vercel Preview passed.
+- **Code:** Web PR #154 final exact head `742a167` (`096de93` implementation
+  plus `742a167` webhook-secret hardening); hosted Verify runs `37643258692`
+  and `37643938665`, plus Vercel Preview, passed.
 - **Verification:** Focused SCM **24/24**; full Web **846/868** with 22
   explicit environment-gated skips and zero failures; typecheck, schema,
   29-migration ordering, negative boundary **2/2**, build **38/38**, and diff
@@ -11,7 +12,8 @@
 - **Change:** Server-side App-JWT installation-token exchange and
   provider-authoritative account/repository/permission projection; encrypted
   expiry-aware refresh in the SCM delivery cron; browser-supplied GitHub token
-  and immutable identity removed from the GitHub route input.
+  and immutable identity removed from the GitHub route input; GitHub webhook
+  secret moved to server-only `VERGLOS_GITHUB_WEBHOOK_SECRET`.
 - **Disposition:** Implementation evidence only; TEAM-WEB-006 and live
   GitHub/organization/webhook/independent gates remain open. No checkbox
   changed; backlog remains **218/62/280 (77.9%)**.

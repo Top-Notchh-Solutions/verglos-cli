@@ -4,11 +4,13 @@
 
 - **Decision:** GitHub installation tokens and immutable installation identity
   must come from the server-held App JWT/provider API, not browser input.
-- **Evidence:** PR #154 head `096de93`; focused SCM **24/24**; full Web
-  **846/868** with zero failures; Verify `37643258692` and Vercel passed.
+- **Evidence:** PR #154 final head `742a167`; focused SCM **24/24**; full Web
+  **846/868** with zero failures; Verify `37643258692` and `37643938665`, plus
+  Vercel, passed.
 - **Security boundary:** The route accepts only installation/repository
   selection intent, validates least-privilege permissions and provider-owned
-  IDs, encrypts token/expiry, and refreshes through the App exchange.
+  IDs, encrypts token/expiry, refreshes through the App exchange, and takes the
+  GitHub webhook secret only from `VERGLOS_GITHUB_WEBHOOK_SECRET`.
 - **Limit:** No live App credential/org/webhook/cutover or independent review
   evidence exists, so TEAM-WEB-006 and the GitHub release gates remain open.
 

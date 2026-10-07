@@ -2,11 +2,12 @@
 
 ## Web GitHub App server-side exchange
 
-PR #154 exact head `096de93` implements the server-held App-JWT installation
+PR #154 final exact head `742a167` implements the server-held App-JWT installation
 exchange, provider-authoritative immutable identity/permissions/repository
-projection, encrypted token expiry, and expiry/unknown-expiry refresh in SCM
-delivery. Focused SCM **24/24**, full Web **846/868** with 22 explicit skips,
-hosted Verify **37643258692**, Vercel, typecheck/schema/migration/security/build
+projection, encrypted token expiry, expiry/unknown-expiry refresh in SCM
+delivery, and server-only GitHub webhook-secret configuration. Focused SCM
+**24/24**, full Web **846/868** with 22 explicit skips, hosted Verify
+**37643258692** and final-head **37643938665**, Vercel, typecheck/schema/migration/security/build
 checks passed. Live authorized GitHub App/org/webhook/cutover evidence and
 independent acceptance remain required; no checkbox changed. Backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. No production/provider/
