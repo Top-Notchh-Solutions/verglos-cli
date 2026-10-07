@@ -3,10 +3,10 @@
 ## PLAN-CLI-003 authenticated boundary probe · 2026-10-07
 
 An authenticated read-only browser matrix kept forged paid-plan selectors at
-Free and denied forged organization usage/search with bounded 403 responses.
-This is partial boundary evidence only; licensed modified-CLI coverage and
-complete record/list/search/export/public-private runtime evidence remain
-required. No release gate or backlog checkbox closed.
+Free and denied forged organization/project reads across the record, policy,
+release, usage, and search surfaces with bounded 403 responses. This is partial
+boundary evidence only; licensed modified-CLI coverage and public/private
+runtime evidence remain required. No release gate or backlog checkbox closed.
 
 ## QUAL-WEB-005 snapshot-backed deletion qualification · 2026-10-07
 

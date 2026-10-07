@@ -5,13 +5,15 @@
 - **Browser/API:** Authenticated same-origin read-only probes kept forged
   enterprise/studio plan requests at Free (`simulated=false`), returned zero
   organizations, denied forged usage/search with bounded 403 responses, and
-  reported zero deletion requests.
+  reported zero deletion requests. The expanded projects/members/evidence/
+  policies/evaluations/releases/receipts/download matrix returned the same
+  bounded 403 denial; the project-root path returned 405 because it exposes no
+  GET operation.
 - **Safety:** Only status codes and bounded safe projections were retained; no
   cookies, headers, response bodies, payment data, identity fields, or mutation
   requests were captured.
-- **Acceptance boundary:** Licensed modified-CLI requests and complete
-  record/list/search/export/public-private runtime coverage remain open. No
-  checkbox changed.
+- **Acceptance boundary:** Licensed modified-CLI requests and public/private
+  runtime coverage remain open. No checkbox changed.
 
 ## 2026-10-07 · QUAL-WEB-005 snapshot-backed deletion qualification
 

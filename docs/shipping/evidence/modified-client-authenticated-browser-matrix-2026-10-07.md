@@ -13,6 +13,11 @@
   returned `403` with the bounded reason `organization access denied`.
 - **Deletion read path:** `GET /api/v1/account/deletion` returned `200` with
   zero requests; no mutation was sent.
+- **Expanded tenant/read matrix:** Forged organization/project parameters on
+  projects, members, search, usage, evidence, policies, policy evaluations,
+  releases, receipts, receipt detail, and receipt download all returned `403`
+  with `organization access denied`. The project-root path exposes no GET
+  operation and returned `405`; it returned no data.
 - **Boundary:** This is authenticated browser/API boundary evidence for a Free
   account, not a complete modified CLI request matrix. Authenticated licensed
   CLI requests, record list/search/export coverage, and public/private runtime

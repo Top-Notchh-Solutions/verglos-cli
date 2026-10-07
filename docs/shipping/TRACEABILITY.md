@@ -4,8 +4,9 @@
 
 - Authenticated Chrome same-origin read-only requests proved forged Enterprise
   and Studio plan selectors remain Free, organization listing is empty, forged
-  usage/search requests return bounded 403 denial, and account-deletion GET has
-  no requests. No sensitive response material was recorded.
+  usage/search and the expanded project/record/policy/release reads return
+  bounded 403 denial, and account-deletion GET has no requests. No sensitive
+  response material was recorded.
 - This strengthens the modified-client boundary but does not close PLAN-CLI-003:
   licensed CLI requests, record list/search/export, and public/private runtime
   coverage remain open. See

@@ -2,10 +2,10 @@
 
 PLAN-CLI-003 continuation: authenticated read-only browser probes kept forged
 Enterprise/Studio selectors at Free, returned zero organizations, denied forged
-usage/search with bounded 403s, and showed zero deletion requests. No sensitive
-browser material or mutation was captured. Licensed modified-CLI and complete
-record/list/search/export/runtime coverage remain open; backlog remains **218
-checked / 62 unchecked / 280 total**.
+usage/search and expanded project/record/policy/release reads with bounded 403s,
+and showed zero deletion requests. No sensitive browser material or mutation
+was captured. Licensed modified-CLI and public/private runtime coverage remain
+open; backlog remains **218 checked / 62 unchecked / 280 total**.
 
 QUAL-WEB-005 continuation: PR #153 passed 44/44 focused snapshot-backed
 deletion/DR/privacy tests after restoring the existing local snapshot into
