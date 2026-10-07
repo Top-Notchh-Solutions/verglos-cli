@@ -498,3 +498,11 @@ or accept `QUAL-WEB-005`: migration `0032` is source-only, and complete
 ownership/retention inventory, destructive transactions, runtime wiring,
 reconciliation, restore/rollback, and authenticated non-production E2E remain
 open. No production migration or deletion occurred.
+
+Payment method gate update (2026-10-07): PR #149 hosted catalog verification
+is green, but the payment release gate is not satisfied. Required before
+acceptance: account-enabled test-mode method configuration, qualified hosted
+checkout evidence for each enabled method, success/failure/cancel/refund/
+webhook replay coverage, and ledger-to-provider reconciliation. QR is not a
+substitute for hosted-method qualification, and no live payment or production
+configuration change is authorized by this substrate batch.

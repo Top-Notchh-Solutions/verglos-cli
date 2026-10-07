@@ -2890,3 +2890,24 @@ before enabling any destructive adapter.
   restore/rollback, and authenticated non-production E2E remain open.
 - **Evidence:**
   `docs/shipping/evidence/qual-web-005-audit-receipt-pr153-2026-10-07.md`.
+
+# 2026-10-07 — PLAN-WEB-013 hosted payment method catalog
+
+- **Batch:** extend the server-authoritative hosted Razorpay method catalog on
+  the existing checkout PR; keep unsupported/unqualified methods fail-closed.
+- **Backlog:** `PLAN-WEB-013` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #149 exact head
+  `db68157da039d8aab939818f9023f867028e4432`.
+- **Local:** focused payment/runtime 25/25, negative boundary 2/2, truth
+  registry 25/25, serial 850/22/0, typecheck, Drizzle check, 31-migration
+  ordering, 40-page build, and diff check pass.
+- **Hosted:** workflow `37563023349`, job `112604384062`, passed with hosted
+  Vercel, GitGuardian, and Preview Comments checks. PR remains open and
+  unmerged.
+- **Boundary:** no account/provider configuration proof, payment transaction,
+  lifecycle/replay evidence, production reconciliation, database/provider/
+  deployment write, or browser mutation. `PLAN-WEB-014` and `PLAN-WEB-015`
+  remain open.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-013-payment-method-catalog-pr149-2026-10-07.md`.

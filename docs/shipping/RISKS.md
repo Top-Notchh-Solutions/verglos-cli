@@ -263,3 +263,11 @@ boundary, verified by disposable PostgreSQL and hosted workflow
 deletion: complete ownership/retention mapping, destructive transactions,
 runtime wiring, reconciliation, restore/rollback, and E2E remain critical open
 risks; migration `0032` is unapplied.
+
+R-049 update (2026-10-07, payment catalog): the hosted method catalog is
+broader in code, but provider/account enablement and lifecycle evidence are
+not established. Do not claim card, netbanking, wallet, EMI, or any other
+method is live merely because its code is recognized. Keep `PLAN-WEB-013`,
+`PLAN-WEB-014`, and `PLAN-WEB-015` open until test-mode method configuration,
+order/payment/webhook/replay evidence, and reconciliation are captured. No
+provider or production write was performed.

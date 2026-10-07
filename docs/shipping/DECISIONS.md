@@ -326,3 +326,17 @@ production migration, or acceptance is supplied by this read path.
 - **Boundary:** Migration `0032` is source-only and no destructive adapter or
   runtime worker is wired. Complete ownership/retention inventory,
   per-kind deletion, reconciliation, restore/rollback, and E2E remain open.
+
+## Hosted payment method catalog boundary · 2026-10-07
+
+- **Decision:** Represent the broader Razorpay hosted method surface in the
+  server catalog, but expose only methods that are both configured and
+  code-supported; keep QR and approval-dependent methods fail-closed until
+  separately qualified for the account and lifecycle.
+- **Evidence:** Web PR #149 exact head `db68157`; local payment/runtime
+  25/25, negative boundary 2/2, truth registry 25/25, serial 850/22/0,
+  typecheck/schema/build/diff pass; hosted workflow `37563023349` passed.
+- **Boundary:** This does not prove account enablement, provider test
+  transactions, webhook/replay behavior, production reconciliation, or
+  acceptance. The PR remains open and no provider, payment, production,
+  database, deployment, or browser mutation occurred.

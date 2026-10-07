@@ -1840,3 +1840,19 @@ remains unchecked and the count is **218 checked / 62 unchecked / 280 total**.
 No production, database/provider/payment/deployment write, migration,
 deletion, or browser mutation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-audit-receipt-pr153-2026-10-07.md`.
+
+# 2026-10-07 · PLAN-WEB-013 hosted payment method catalog
+
+Web PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` passed
+hosted workflow `37563023349` (job `112604384062`) and Vercel, GitGuardian,
+and Preview Comments. The catalog now recognizes additional Razorpay method
+codes and exposes only configured hosted methods that are code-supported;
+unqualified approval-dependent methods remain fail-closed. Local focused
+payment tests 25/25, negative-boundary 2/2, truth registry 25/25, serial
+850/22/0, typecheck, 31-migration check, build, and diff checks pass.
+`PLAN-WEB-013` remains open because account-enabled method configuration,
+provider lifecycle/replay evidence, production reconciliation, and
+`PLAN-WEB-014`/`PLAN-WEB-015` are not complete. No provider, database,
+production, deployment, payment, or browser mutation occurred. Backlog:
+**218 checked / 62 unchecked / 280 total**. Private evidence:
+`docs/shipping/evidence/plan-web-013-payment-method-catalog-pr149-2026-10-07.md`.

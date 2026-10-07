@@ -1636,3 +1636,14 @@ bounded per-kind metadata. Disposable PostgreSQL integration 1/1, serial
 `37562587132` pass. Destructive per-kind SQL, complete ownership/retention
 inventory, runtime wiring, restore/rollback, and authenticated E2E remain
 absent, so `QUAL-WEB-005` remains open.
+
+# 2026-10-07 · PLAN-WEB-013 hosted payment method catalog
+
+PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` traces the
+checkout method surface to a server-authoritative Razorpay catalog. Hosted
+workflow `37563023349` passed the configured code, schema, build, boundary,
+dependency, and secret checks; local payment/runtime focus is 25/25 and the
+serial suite is 850/22/0. This is catalog substrate only: account-enabled
+method configuration, provider lifecycle/replay qualification, production
+reconciliation, and the remaining payment plans are absent. `PLAN-WEB-013`,
+`PLAN-WEB-014`, and `PLAN-WEB-015` remain open.

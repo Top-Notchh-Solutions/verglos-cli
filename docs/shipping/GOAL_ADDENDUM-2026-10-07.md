@@ -153,3 +153,13 @@ milestone, not whole shipping: `QUAL-WEB-005` remains unchecked, migration
 execution, runtime wiring, reconciliation, restore/rollback, and authenticated
 E2E remain open. The authoritative count stays **218 checked / 62 unchecked /
 280 total**.
+
+# 2026-10-07 · PLAN-WEB-013 hosted payment catalog
+
+PR #149 exact head `db68157da039d8aab939818f9023f867028e4432` passed hosted
+workflow `37563023349`. The server catalog now has a broader hosted-method
+contract while remaining fail-closed for unqualified methods. This is not
+payment acceptance: account enablement, provider lifecycle/replay evidence,
+reconciliation, and the remaining payment plans are still open. The
+authoritative backlog remains **218 checked / 62 unchecked / 280 total**; no
+production/provider/payment/browser mutation occurred.
