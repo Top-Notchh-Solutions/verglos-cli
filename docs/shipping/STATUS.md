@@ -2493,6 +2493,15 @@ qualified. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 No browser, provider, payment, production, database, deployment, credential,
 or external-recipe operation occurred.
 
+## 2026-10-07 · CLI regression after MCP Hunt explanation
+
+The pushed CLI PR #76 head `7022408` passed the root `pnpm test` regression:
+**12/12 Turbo tasks successful**, including the MCP suite, with 0 failed
+tasks. This strengthens the bounded MCP explanation evidence only; no backlog
+checkbox changed. Backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. No browser, provider, payment, production, database, deployment,
+credential, or external-recipe operation occurred.
+
 ## 2026-10-07 · Web full-suite payment revalidation
 
 The active Web payment PR #149 full configured test command completed with

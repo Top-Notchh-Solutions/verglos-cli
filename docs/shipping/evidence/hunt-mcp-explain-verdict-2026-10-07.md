@@ -9,6 +9,8 @@
   that a verdict is not production exploitability or security certification.
 - **Verification:** MCP package tests pass **38/38** across all shards;
   typecheck, build, and `git diff --check` pass.
+- **Regression:** Root `pnpm test` completes with **12/12 Turbo tasks
+  successful** and 0 failed tasks.
 - **Limitation:** HUNT-009 remains open, and HUNT-010 remains open because
   finding/report/before-write execution tools are still alpha stubs and the
   dependent Hunt qualification gates are unmet. No backlog checkbox changed.

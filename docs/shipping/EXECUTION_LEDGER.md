@@ -3702,3 +3702,14 @@ before enabling any destructive adapter.
 - **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Boundary:** No browser, provider, payment, production, database,
   deployment, credential, or external-recipe operation occurred.
+
+# 2026-10-07 — CLI regression after MCP Hunt explanation
+
+- **Verification:** Root `pnpm test` at CLI PR #76 head `7022408` completed
+  with **12/12 Turbo tasks successful** and 0 failed tasks, including the MCP
+  package suite.
+- **Limitation:** This is regression evidence for the bounded explanation
+  surface only; no backlog checkbox changed and HUNT-009/HUNT-010 remain open.
+- **Backlog:** **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** No browser, provider, payment, production, database,
+  deployment, credential, or external-recipe operation occurred.
