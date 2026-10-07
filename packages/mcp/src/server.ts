@@ -16,6 +16,7 @@ import type {
 import { checkPackage } from "./tools/check-package.js";
 import { scanProject } from "./tools/scan.js";
 import { explainFinding } from "./tools/explain-finding.js";
+import { explainHuntVerdict } from "./tools/explain-hunt-verdict.js";
 import { checkPolicyRecord } from "./tools/check-policy.js";
 import { parseAttestArgs, parseCheckBeforeWriteArgs, parseCheckPackageArgs, parseExplainFindingArgs, parseHuntBeforeWriteArgs, parseHuntExplainVerdictArgs, parseHuntFindingArgs, parseHuntReportArgs, parsePolicyCheckArgs, parseScanArgs } from "./input-validation.js";
 
@@ -91,7 +92,8 @@ const APPROVAL_RECEIPT_PROPERTY = {
  *
  * Shipped pre-write, package, scan, and explanation tools route through shared
  * scanner, input-boundary, authority, entitlement, and failure contracts.
- * Hunt and Attest remain explicit alpha stubs and do not execute or sign.
+ * Hunt execution tools and Attest remain explicit alpha stubs and do not
+ * execute or sign. Verdict explanation is bounded and non-executing.
  *
  * Design constraints from design §7:
  *   - Speaks JSON-RPC over stdio
@@ -258,7 +260,7 @@ const TOOLS = [
   {
     name: "verglos_hunt_explain_verdict",
     description:
-      "Pro. Explain a hunt verdict for a finding: verified exploitable, false positive, or not attemptable. Stub in v2.0.0-alpha; functional in v2.0.0-beta.",
+      "Pro. Explain a recorded Hunt verdict for a finding without rerunning Hunt or authorizing execution. This is bounded interpretation, not a production exploitability or security-certification claim.",
     inputSchema: {
       type: "object",
       properties: {
@@ -452,8 +454,9 @@ export async function dispatchTool(
       try { parseHuntBeforeWriteArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_BEFORE_WRITE_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "pro"));
     case "verglos_hunt_explain_verdict":
-      try { parseHuntExplainVerdictArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_EXPLAIN_VERDICT_INPUT", error instanceof Error ? error.message : "invalid input"); }
-      return jsonResponse(alphaStub(name, "pro"));
+      let parsedVerdict;
+      try { parsedVerdict = parseHuntExplainVerdictArgs(toolInput); } catch (error) { return invalid("MCP_HUNT_EXPLAIN_VERDICT_INPUT", error instanceof Error ? error.message : "invalid input"); }
+      try { return jsonResponse(explainHuntVerdict(parsedVerdict)); } catch { return invalid("MCP_HUNT_EXPLAIN_VERDICT_FAILED", "hunt verdict explanation failed"); }
     case "verglos_attest":
       try { parseAttestArgs(toolInput); } catch (error) { return invalid("MCP_ATTEST_INPUT", error instanceof Error ? error.message : "invalid input"); }
       return jsonResponse(alphaStub(name, "studio"));

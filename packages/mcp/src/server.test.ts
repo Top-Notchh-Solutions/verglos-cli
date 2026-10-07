@@ -426,6 +426,19 @@ test("MCP dispatch accepts an exact approved receipt and preserves the alpha stu
   assert.equal(result.tool, "verglos_hunt_report");
 });
 
+test("MCP dispatch explains a Hunt verdict without approval or execution", async () => {
+  const result = responseText(await dispatchTool("verglos_hunt_explain_verdict", { findingId: "finding-1", verdict: "true" }, { plan: "pro" }));
+  assert.equal(result.ok, true);
+  assert.equal(result.tool, "verglos_hunt_explain_verdict");
+  assert.equal(result.findingId, "finding-1");
+  assert.equal(result.verdict, "true");
+  assert.match(String(result.meaning), /does not by itself establish production exploitability/);
+  assert.deepEqual(result.limitations instanceof Array, true);
+
+  const denied = responseText(await dispatchTool("verglos_hunt_explain_verdict", { findingId: "finding-1", verdict: "true" }));
+  assert.equal(denied.code, "MCP_ENTITLEMENT_REQUIRED");
+});
+
 test("MCP dispatch rejects a valid receipt widened to another target", async () => {
   const request = {
     requestId: "223e4567-e89b-12d3-a456-426614174000",

@@ -10,7 +10,7 @@ const CAPABILITIES: readonly Omit<McpCapability, "action" | "approvalRequired" |
   { tool: "verglos_hunt_finding", plan: "pro", maturity: "partial", inputFields: ["reportPath", "findingId", "approvalReceipt"], outputFields: ["ok", "error", "tool", "tier", "message", "docsUrl", "failure"] },
   { tool: "verglos_hunt_report", plan: "pro", maturity: "partial", inputFields: ["reportPath", "approvalReceipt"], outputFields: ["ok", "error", "tool", "tier", "message", "docsUrl", "failure"] },
   { tool: "verglos_hunt_before_write", plan: "pro", maturity: "partial", inputFields: ["code", "filePath", "language", "approvalReceipt"], outputFields: ["ok", "error", "tool", "tier", "message", "docsUrl", "failure"] },
-  { tool: "verglos_hunt_explain_verdict", plan: "pro", maturity: "partial", inputFields: ["findingId", "verdict"], outputFields: ["ok", "error", "tool", "tier", "message", "docsUrl", "failure"] },
+  { tool: "verglos_hunt_explain_verdict", plan: "pro", maturity: "partial", inputFields: ["findingId", "verdict"], outputFields: ["ok", "tool", "findingId", "verdict", "meaning", "limitations", "failure"] },
   { tool: "verglos_attest", plan: "studio", maturity: "partial", inputFields: ["reportPath", "signingConfig", "approvalReceipt"], outputFields: ["ok", "error", "tool", "tier", "message", "docsUrl", "failure"] },
 ];
 export function listMcpCapabilities(): readonly McpCapability[] {
