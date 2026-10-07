@@ -255,3 +255,11 @@ R-048 update (2026-10-07, hosted inventory verification): PR #153 exact head
 substrate only; `inventoryComplete=false` remains deliberate and no
 destructive method or runtime worker is enabled. The critical omission,
 retention, reconciliation, restore, and E2E risks remain open.
+
+R-048 update (2026-10-07, terminal receipt): PR #153 exact head `52be606`
+adds a source-only immutable receipt and live-fenced request/job completion
+boundary, verified by disposable PostgreSQL and hosted workflow
+`37562587132`. This reduces audit-idempotency ambiguity but does not enable
+deletion: complete ownership/retention mapping, destructive transactions,
+runtime wiring, reconciliation, restore/rollback, and E2E remain critical open
+risks; migration `0032` is unapplied.

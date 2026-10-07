@@ -143,3 +143,13 @@ checks. This is a verified substrate milestone, not whole shipping:
 supporting retention/ownership, destructive execution, reconciliation/audit,
 restore/rollback, runtime wiring, and authenticated E2E remain open. The
 authoritative count stays **218 checked / 62 unchecked / 280 total**.
+
+# 2026-10-07 · QUAL-WEB-005 hosted deletion receipt
+
+PR #153 exact head `52be606` passed hosted workflow `37562587132` after adding
+the source-only fenced terminal receipt. This is a verified substrate
+milestone, not whole shipping: `QUAL-WEB-005` remains unchecked, migration
+`0032` is unapplied, and complete ownership/retention mapping, destructive
+execution, runtime wiring, reconciliation, restore/rollback, and authenticated
+E2E remain open. The authoritative count stays **218 checked / 62 unchecked /
+280 total**.

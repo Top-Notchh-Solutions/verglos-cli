@@ -312,4 +312,17 @@ phase PRs with one acceptance boundary at a time, not helper-only checkbox work.
   1/1, serial 846/23/0, typecheck/schema/migration/negative/build/diff pass;
   hosted workflow `37562115786` was pending at capture.
 - **Boundary:** No per-kind deletion, audit receipt, restore rehearsal,
-  production migration, or acceptance is supplied by this read path.
+production migration, or acceptance is supplied by this read path.
+
+## Fenced deletion receipt boundary · 2026-10-07
+
+- **Decision:** Persist only bounded terminal decision metadata, and complete
+  the request/job atomically under the live worker/attempt fence. Enforce
+  unique request and audit-idempotency identity; stale or replayed fences must
+  not claim completion.
+- **Evidence:** Web PR #153 exact head `52be606`; disposable PostgreSQL
+  integration 1/1, serial 846/23/0, typecheck/schema/33-migration/build/diff
+  pass; hosted workflow `37562587132` passed.
+- **Boundary:** Migration `0032` is source-only and no destructive adapter or
+  runtime worker is wired. Complete ownership/retention inventory,
+  per-kind deletion, reconciliation, restore/rollback, and E2E remain open.

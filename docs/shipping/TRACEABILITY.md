@@ -1626,3 +1626,13 @@ checks. The evidence strengthens the lease-fenced inventory read only;
 supporting ownership/retention dispositions, destructive transactions,
 reconciliation/audit, restore/rollback, runtime wiring, and authenticated E2E
 remain absent, so `QUAL-WEB-005` remains open.
+
+# 2026-10-07 · QUAL-WEB-005 fenced deletion receipt
+
+PR #153 exact head `52be606` traces the live-fenced completion boundary to an
+immutable source-only receipt with unique request/idempotency identity and
+bounded per-kind metadata. Disposable PostgreSQL integration 1/1, serial
+846/23/0, typecheck/schema/33-migration/build/diff checks, and hosted workflow
+`37562587132` pass. Destructive per-kind SQL, complete ownership/retention
+inventory, runtime wiring, restore/rollback, and authenticated E2E remain
+absent, so `QUAL-WEB-005` remains open.

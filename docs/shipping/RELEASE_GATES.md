@@ -489,3 +489,12 @@ Preview Comments checks. This still does not pass Gate 2/4/6 or accept
 destructive transactions, reconciliation/audit, restore/rollback, runtime
 wiring, and authenticated non-production E2E remain open. No production
 migration or deletion occurred.
+
+Deletion receipt hosted verification addendum (2026-10-07): Web PR #153 exact
+head `52be606` passed workflow `37562587132`, including hosted tests,
+schema/migration/build, boundary, dependency/license/SBOM, secret, Vercel,
+GitGuardian, and Preview Comments checks. This still does not pass Gate 2/4/6
+or accept `QUAL-WEB-005`: migration `0032` is source-only, and complete
+ownership/retention inventory, destructive transactions, runtime wiring,
+reconciliation, restore/rollback, and authenticated non-production E2E remain
+open. No production migration or deletion occurred.

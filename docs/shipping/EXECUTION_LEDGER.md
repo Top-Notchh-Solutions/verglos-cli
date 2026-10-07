@@ -2869,4 +2869,24 @@ deletion, restore, rollback, provider, and release gates remain unresolved.
 - **Evidence:**
   `docs/shipping/evidence/qual-web-005-inventory-read-pr153-2026-10-07.md`.
 - **Next:** complete and qualify the supporting ownership/retention inventory
-  before enabling any destructive adapter.
+before enabling any destructive adapter.
+
+# 2026-10-07 — QUAL-WEB-005 fenced deletion receipt
+
+- **Batch:** add the source-only terminal receipt and fenced request/job
+  completion boundary on PR #153.
+- **Backlog:** `QUAL-WEB-005` attempted but open; no accepted IDs and no
+  checkbox changes. Count remains **218 checked / 62 unchecked / 280 total**.
+- **Code:** Web PR #153 exact head `52be606`; migration `0032` is not applied.
+- **Local:** disposable PostgreSQL integration **1/1**, serial **846 pass /
+  23 explicit skips / 0 fail**, typecheck, Drizzle check, 33-migration
+  ordering, build, and diff checks pass.
+- **Hosted:** workflow `37562587132` passed; Vercel, GitGuardian, and Preview
+  Comments passed.
+- **Boundary:** no production/database/provider/payment/deployment write,
+  migration, deletion, browser mutation, or secret handling.
+- **Acceptance:** destructive per-kind execution, complete ownership/
+  retention inventory, runtime wiring, reconciliation against actual deletes,
+  restore/rollback, and authenticated non-production E2E remain open.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-audit-receipt-pr153-2026-10-07.md`.
