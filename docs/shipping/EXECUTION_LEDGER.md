@@ -3412,3 +3412,13 @@ before enabling any destructive adapter.
   rollback, and independent acceptance remain open.
 - **Evidence:**
   `docs/shipping/evidence/qual-web-005-customer-held-digest-route-2026-10-07.md`.
+
+# 2026-10-07 — QUAL-WEB-006 PR ledger correction
+
+- **Correction:** Record Web PR #151 as merged at `f1384ba` after hosted run
+  `37557043246` passed typecheck/schema, Vercel, GitGuardian, and Preview
+  Comments.
+- **Backlog:** no acceptance ID closed and no checkbox changed; exact count
+  remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Boundary:** QUAL-WEB-006 remains open for paid/org runtime, human
+  screen-reader, large-data, and complete field-CWV evidence.

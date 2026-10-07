@@ -2299,3 +2299,11 @@ Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**. No
 production/database/provider/payment/deployment write, migration, deletion, or
 browser mutation occurred. Private evidence:
 `docs/shipping/evidence/qual-web-005-customer-held-digest-route-2026-10-07.md`.
+
+# 2026-10-07 · QUAL-WEB-006 PR ledger correction
+
+The private backlog now records Web PR #151 as merged at `f1384ba` after hosted
+run `37557043246` passed typecheck/schema, Vercel, GitGuardian, and Preview
+Comments. This corrects stale PR state only; `QUAL-WEB-006` remains unchecked
+for paid/org runtime, human screen-reader, large-data, and complete field-CWV
+evidence. Backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
