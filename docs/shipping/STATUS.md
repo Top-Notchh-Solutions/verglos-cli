@@ -4,7 +4,8 @@
 
 Read-only Vercel production inspection confirms
 `RAZORPAY_ENABLED_PAYMENT_METHODS` is absent; the local production env file
-also does not define it. The runtime guard therefore correctly prevents
+also does not define it. A key-only comparison found **17/18** required
+production runtime keys present, with this as the sole missing key. The runtime guard therefore correctly prevents
 promotion of an unqualified multi-method checkout. No value was read or
 printed, no method set was inferred, and no Vercel environment/provider/
 database/payment/customer-state write occurred. Evidence:

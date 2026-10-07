@@ -3,7 +3,9 @@
 ## 2026-10-07 · PLAN-WEB-015 production environment shape recheck
 
 - **Read-only finding:** Vercel production and the local production env file
-  both lack `RAZORPAY_ENABLED_PAYMENT_METHODS`.
+  both lack `RAZORPAY_ENABLED_PAYMENT_METHODS`; a key-only comparison found
+  **17/18** required production keys present, with this as the sole missing
+  required key.
 - **Disposition:** The merged runtime guard correctly blocks promotion before
   build. The enabled method set was not guessed from Test Mode or UI.
 - **Boundary:** No environment value was read or recorded; no Vercel

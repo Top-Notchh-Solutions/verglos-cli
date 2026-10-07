@@ -13,6 +13,8 @@
 - Vercel production does not define `RAZORPAY_ENABLED_PAYMENT_METHODS`.
 - The local production env file also does not define
   `RAZORPAY_ENABLED_PAYMENT_METHODS`.
+- A key-only comparison against the Web runtime validator found **17/18**
+  required production keys present; this is the only missing required key.
 - The merged Web runtime-config guard therefore correctly fails closed before
   the production build can promote the hosted multi-method checkout.
 - The method set was not inferred from Test Mode configuration or UI.
