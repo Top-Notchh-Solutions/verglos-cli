@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-07 · CLI license-source metadata hosted qualification and merge
+
+CLI PR #73 tested head `d34ac4f` passed the complete Ubuntu/macOS/Windows Node
+20/22/24 matrix, self-scan `37554811352`, and in-toto binding in
+`37554811372`; it merged to `origin/main` as
+`d63bf7a07c4dc421096b44593cd996aef40320d2`. The exact-version provenance fix
+removes only the `minipass-pipeline@1.2.4` source-missing classification. The
+nested license conflict and six BlueOak legal reviews remain, so
+`--require-clear` remains blocked and LIC/DIST/publication gates stay open.
+Backlog remains **218 checked / 62 unchecked / 280 total**. No npm publication,
+tag, production, provider, database, payment, deployment, or credential write
+occurred.
+
 ## 2026-10-07 · CLI license-source metadata follow-up
 
 CLI PR #73 (`d34ac4f`) adds an exact-version HTTPS provenance override for

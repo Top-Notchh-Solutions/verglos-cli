@@ -1,5 +1,14 @@
 # Verglos shipping decisions
 
+## CLI license-source metadata merge · 2026-10-07
+
+- **Decision:** Accept the exact-version HTTPS provenance repair into CLI
+  `main` after the complete platform matrix, self-scan, and in-toto checks
+  passed.
+- **Boundary:** The merge changes mechanical inventory provenance only. It is
+  not legal approval, redistribution clearance, npm publication, or a release
+  go/no-go; the remaining seven review blockers stay fail-closed.
+
 ## Exact-version license source metadata · 2026-10-07
 
 - **Decision:** Permit a narrowly scoped source-metadata override only for an

@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## CLI license-source metadata hosted qualification and merge · 2026-10-07
+
+- Tested CLI head `d34ac4f` passed all Ubuntu/macOS/Windows Node 20/22/24
+  cells, self-scan `37554811352`, and in-toto release binding in
+  `37554811372`.
+- PR #73 merged to CLI `origin/main` as
+  `d63bf7a07c4dc421096b44593cd996aef40320d2`.
+- The source-missing classification is removed mechanically; the nested
+  `benchmark`/`fast-uri` conflict and six BlueOak legal reviews remain
+  fail-closed. No backlog checkbox or release gate was closed, and no npm
+  publication, tag, deployment, production, provider, database, payment, or
+  credential operation occurred.
+
 ## CLI license-source metadata follow-up · 2026-10-07
 
 - CLI PR #73 head `d34ac4f` adds an exact-version HTTPS source override for

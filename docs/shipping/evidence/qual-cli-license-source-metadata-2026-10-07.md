@@ -1,7 +1,7 @@
 # CLI license-source metadata follow-up — 2026-10-07
 
-- **Source:** CLI PR #73, branch `feat/cli-license-source-metadata`, commit
-  `d34ac4f`, based on `origin/main` `c1f1cd7`.
+- **Source:** CLI PR #73, tested head `d34ac4f`, based on `origin/main`
+  `c1f1cd7`, merged to `origin/main` as `d63bf7a07c4dc421096b44593cd996aef40320d2`.
 - **Change:** Adds an exact-version provenance override for
   `minipass-pipeline@1.2.4`, whose installed manifest omits repository
   metadata. The override is HTTPS-only and points to the upstream repository
@@ -17,9 +17,10 @@
 - **Remaining blockers:** `benchmark@1.0.0` nested license conflict and six
   BlueOak-1.0.0 legal reviews (`glob`, `lru-cache`, `minimatch`, `minipass`,
   `minipass-flush`, `path-scurry`). No blocker was suppressed.
-- **Hosted state:** PR #73 is open and mergeable; Node 20/22/24, macOS,
-  Windows, self-scan, and in-toto checks were queued when recorded. No merge
-  or publication occurred.
+- **Hosted state:** PR #73 merged after all hosted checks passed: Ubuntu,
+  macOS, and Windows Node 20/22/24 matrix cells, self-scan run
+  `37554811352`, and in-toto release binding in run `37554811372`. No npm
+  publication or release tag was created.
 - **Install limitation:** A fresh macOS-only pnpm install did not link
   foreign-platform optional manifests, so the focused inventory/SBOM test was
   rerun against the already-qualified local dependency store. The inventory

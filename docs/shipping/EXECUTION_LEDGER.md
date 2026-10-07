@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-07 · CLI license-source metadata hosted qualification and merge
+
+- **Hosted:** PR #73 tested head `d34ac4f` passed Ubuntu/macOS/Windows Node
+  20/22/24, self-scan `37554811352`, and in-toto binding in `37554811372`.
+- **Merge:** GitHub merged PR #73 to CLI `origin/main` as
+  `d63bf7a07c4dc421096b44593cd996aef40320d2`.
+- **Gate:** Inventory output retains seven review blockers; the exact
+  source-missing classification is repaired, but legal review and
+  `--require-clear` remain open. Backlog remains 218 checked / 62 unchecked /
+  280 total.
+- **Boundary:** No npm publication, tag, production/provider/database/payment
+  write, deployment, or credential operation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-license-source-metadata-2026-10-07.md`.
+
 ## 2026-10-07 · CLI license-source metadata follow-up
 
 - **Implementation:** CLI PR #73 / commit `d34ac4f` adds an exact-version,

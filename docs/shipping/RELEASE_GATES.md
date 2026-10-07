@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## CLI license-source metadata hosted qualification and merge · 2026-10-07
+
+PR #73 tested head `d34ac4f` passed the complete Ubuntu/macOS/Windows Node
+20/22/24 platform matrix, self-scan `37554811352`, and in-toto binding in
+`37554811372`, then merged as
+`d63bf7a07c4dc421096b44593cd996aef40320d2`. This removes only the mechanical
+source-missing classification for `minipass-pipeline@1.2.4`. The verifier
+still fails closed on the nested `benchmark`/`fast-uri` conflict and six
+BlueOak legal reviews; LIC-002/003, DIST-001/002/003, and publication remain
+open. No release or production operation occurred.
+
 ## CLI license-source metadata follow-up · 2026-10-07
 
 CLI PR #73 (`d34ac4f`) removes the mechanical source-missing classification for
