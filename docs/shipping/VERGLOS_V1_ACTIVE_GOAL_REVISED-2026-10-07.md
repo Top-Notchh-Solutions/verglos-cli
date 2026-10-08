@@ -543,6 +543,12 @@ the remaining active shipping window.
     `a5152aa` and `737f318`. No production, database, payment, provider,
     deployment, or customer write occurred; the exact backlog remains
     **218 checked / 62 unchecked / 280 total (77.9%)**.
+  - A current read-only production checkout recheck rendered UPI, Cards,
+    Netbanking, Wallets, EMI, and Pay Later with no QR-only path and no console
+    warnings/errors. Production did not identify itself as Test Mode; no click,
+    order, payment, webhook, entitlement, database, provider, deployment, or
+    account write occurred. This remains configuration/rendering observation,
+    not payment lifecycle acceptance. Private reconciliation is `f4cfa2b`.
   - The exact count remains **218 checked / 62 unchecked / 280 total (77.9%)**
     until a current private-tracker reconciliation proves otherwise.
 
