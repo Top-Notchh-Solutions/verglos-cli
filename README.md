@@ -219,6 +219,18 @@ verglos secrets                # secrets only (fastest, <5s on most repos)
 verglos deps                   # dependency CVEs only
 ```
 
+To project an already verified local Release Decision into a source-free SCM
+check payload, provide the exact Release Record manifest digest, HTTPS record
+URL, and repository commit. This command only reads the local decision; it
+does not upload source or contact the provider.
+
+```bash
+verglos ci --check-payload decision.json \
+  --record-manifest-digest sha256:<64-hex-digest> \
+  --record-url https://verglos.com/verify/<record> \
+  --commit <40-or-64-hex-commit> --json
+```
+
 ### `verglos login` · `verglos whoami` · `verglos activate`
 
 ```bash

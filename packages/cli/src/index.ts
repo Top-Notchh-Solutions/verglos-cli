@@ -88,6 +88,7 @@ import { readFile as readFileBytes } from "node:fs/promises";
 import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
 import { executeClientProjection } from "./client-projection.js";
 import { executeReleaseRollbackPlan } from "./release-rollback-plan.js";
+import { executeCiCheckPayload } from "./ci-check-payload.js";
 import { pollPrivateRunnerJob, privateRunnerResultSummary } from "./private-runner-client.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
@@ -701,13 +702,29 @@ program
   .option("--config <path>", "Use a bounded JSON Verglos config file")
   .option("--policy <path>", "Use a local policy-evaluation artifact for the CI decision")
   .option("--policy-evaluation <path>", "Use a local policy-evaluation artifact for the CI decision")
+  .option("--check-payload <path>", "Project a local Release Decision into a source-free SCM check payload")
+  .option("--record-manifest-digest <digest>", "Verified sha256 digest of the Release Record manifest")
+  .option("--record-url <url>", "HTTPS URL for the verified Release Record")
+  .option("--commit <sha>", "Repository commit bound to the Release Decision")
   .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
   .option(
     "--no-telemetry",
     "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
   )
-  .action(async (opts: { threshold: string; quiet?: boolean; json?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policy?: string; policyEvaluation?: string; config?: string }) => {
+  .action(async (opts: { threshold: string; quiet?: boolean; json?: boolean; strict?: boolean; hunt?: boolean; telemetry?: boolean; policy?: string; policyEvaluation?: string; checkPayload?: string; recordManifestDigest?: string; recordUrl?: string; commit?: string; config?: string }) => {
     const policyPath = opts.policyEvaluation ?? opts.policy;
+    if (opts.checkPayload) {
+      const missing = [
+        ["--record-manifest-digest", opts.recordManifestDigest],
+        ["--record-url", opts.recordUrl],
+        ["--commit", opts.commit],
+      ].filter(([, value]) => !value).map(([name]) => name);
+      if (missing.length > 0) {
+        reportPreflightError(opts.json, opts.quiet, "CI_CHECK_PAYLOAD_INPUT", `check payload requires ${missing.join(", ")}`, "check payload input is incomplete");
+        process.exit(2);
+      }
+      process.exit(await executeCiCheckPayload({ decisionPath: opts.checkPayload, recordManifestDigest: opts.recordManifestDigest!, recordUrl: opts.recordUrl!, commit: opts.commit!, json: opts.json, quiet: opts.quiet }));
+    }
     if (policyPath) {
       process.exit(await executePolicyCheck(policyPath, opts.json, opts.quiet));
     }
