@@ -1241,3 +1241,15 @@ each observed method has lifecycle and reconciliation evidence.
 - **Boundary:** This is test-fixture qualification only. Hunt provenance,
   legal clearance, adversarial completion, independent review, and acceptance
   remain open. No backlog checkbox changed.
+
+## Credential containment after local inspection error · 2026-10-08
+
+- **Decision:** Treat the Razorpay/test and production-encrypted values emitted
+  by the malformed environment-inspection command as compromised; do not use
+  them for qualification or production operations.
+- **Required correction:** Rotate/revoke the affected provider credentials,
+  refresh the Vercel production secret, redeploy only after the provider and
+  deployment preflight is reviewed, and verify the old values are unusable
+  without recording any secret.
+- **Boundary:** No provider call, payment, deployment, database, or production
+  write was made after the incident. PLAN-WEB-014/015 and R-041 remain open.

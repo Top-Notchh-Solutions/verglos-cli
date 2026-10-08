@@ -859,3 +859,13 @@ Preview-only fixture identity. The browser now reaches the real order route,
 but the supplied Razorpay Test Mode credential returns a bounded provider
 failure before order creation. No lifecycle evidence exists; PLAN-WEB-014/015
 remain open pending credential repair and the complete matrix.
+
+R-041 credential-containment incident (2026-10-08): a local environment-name
+inspection command was malformed and emitted values from `.env.test.local` and
+`.env.production.local` into the agent tool output. Treat the affected
+Razorpay/test and production-encrypted values as compromised. No provider call,
+payment, deployment, database, or production write was made with them after
+the incident. Stop all provider/production qualification until the test and
+production credentials are rotated/revoked, Vercel production configuration is
+refreshed and redeployed where required, and bounded read-only verification
+confirms the old values are unusable. Do not copy any value into this ledger.

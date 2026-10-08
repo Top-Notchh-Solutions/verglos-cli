@@ -3877,3 +3877,15 @@ records implementation/test progress only and does not close HUNT-008–011,
 QUAL-CLI-004, or dependent acceptance items. No checkbox changed; backlog
 remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/qual-cli-hunt-fixture-2026-10-08.md`.
+
+## 2026-10-08 · Credential containment blocker
+
+A malformed local environment-inspection command emitted values from the Web
+test and production-local environment files into the agent tool output. The
+affected Razorpay/test and production-encrypted values are treated as
+compromised. No provider call, payment, deployment, database, or production
+write was made with them after discovery. Provider and production qualification
+are paused until credential rotation/revocation, Vercel secret refresh and
+redeploy where required, and bounded read-only verification of old-value
+invalidity are complete. No secret values are recorded here; no backlog
+checkbox changed.
