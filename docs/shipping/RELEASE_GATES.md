@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## Gate 4 scan result · 2026-10-09
+
+The provider-method catalog/checkout abstraction portion is accepted as
+`PLAN-WEB-013`; its checkbox is now closed. Gate 4 as a whole remains open:
+`PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and `PLAN-WEB-015` still require
+the stated provider lifecycle and Production-reconciliation evidence. The
+current evidence proves the supported four-method catalog and the isolated
+code-side lifecycle, but the Razorpay Test Mode account has no subscriptions,
+and the current Web surface has no subscription-creation route. No unsupported
+renewal/cancellation/expiry result is inferred. Score is **219/61/280
+(78.2%)**.
+
 ## PLAN-WEB-014 Preview and Production method set narrowed to provider-testable methods · 2026-10-09
 
 The isolated Preview/Test configuration now enables only `card`,

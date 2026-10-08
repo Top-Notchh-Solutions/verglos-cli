@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Accept PLAN-WEB-013; keep the complete payment gate open
+
+- **Decision:** Accept `PLAN-WEB-013` only. The server-owned payment catalog,
+  hosted order abstraction, signed commercial binding, fail-closed method
+  surface, and captured-only fulfillment are now evidenced for the four
+  provider-testable methods.
+- **Evidence:** Preview and Production expose `card`, `netbanking`, `wallet`,
+  and `emi`; the canonical-amount Test Mode aggregate, isolated database
+  matrix, focused tests, typecheck, and build are in the private payment
+  lifecycle evidence.
+- **Boundary:** This does not close Gate 4 or `PLAN-WEB-011/012/014/015`.
+  Provider subscription renewal/cancellation/expiry and full Production
+  reconciliation remain unproven; no such evidence is inferred from local
+  fixtures or the absence of provider rows. Score is **219/61/280 (78.2%)**.
+
 ## 2026-10-09 · Apply the provider-testable payment method set to Production
 
 - **Decision:** Apply the narrowed method set to Vercel Production:

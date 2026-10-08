@@ -51,7 +51,7 @@ Branch: `local/private-shipping-ledger`.
 
 Current exact scoreboard:
 
-- **218 checked / 62 unchecked / 280 total / 77.9%**.
+- **219 checked / 61 unchecked / 280 total / 78.2%**.
 - No checkbox changed during the latest CLI rollback-hardening batch.
 - Recompute the count from the live private backlog after every substantial
   batch. Never use a remembered count.
