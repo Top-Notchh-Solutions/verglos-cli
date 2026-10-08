@@ -1,5 +1,6 @@
 import { constants } from "node:fs";
-import { lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
+import { chmod, lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
 import { dirname } from "node:path";
 import { homedir } from "node:os";
 import {
@@ -84,7 +85,8 @@ async function readReplay(path: string): Promise<ReplayState> {
 
 async function writeReplay(path: string, state: ReplayState): Promise<void> {
   await mkdir(dirname(path), { recursive: true, mode: 0o700 });
-  const temporaryPath = `${path}.tmp-${process.pid}`;
+  await chmod(dirname(path), 0o700);
+  const temporaryPath = `${path}.tmp-${randomUUID()}`;
   const bytes = Buffer.from(`${JSON.stringify(state)}\n`, "utf8");
   const handle = await open(temporaryPath, constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL, 0o600);
   try {
