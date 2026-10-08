@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-QUAL-WEB-005-isolated-deletion-e2e · 2026-10-09
+
+The authenticated account-deletion route and deletion-job lease/idempotency
+flows now pass against a fresh local PostgreSQL 15 database with the complete
+38-migration/50-table schema. Residual risk is unchanged: this does not prove
+legal/customer-held-record disposition, production migration authorization,
+backup/restore/rollback, reconciliation, or independent acceptance. Owner:
+privacy/release qualification. No production or hosted data changed. Evidence:
+`docs/shipping/evidence/qual-web-005-deletion-route-e2e-2026-10-09.md`.
+
 ## R-041-vercel-rotation-metadata-audit · 2026-10-09
 
 Vercel metadata shows the production `DATABASE_URL` value was updated before

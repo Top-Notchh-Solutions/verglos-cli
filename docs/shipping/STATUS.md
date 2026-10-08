@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · QUAL-WEB-005 isolated account-deletion E2E
+
+The merged Web tree passed the authenticated privacy route E2E **1/1** and
+deletion-job lease/idempotency integration **1/1** against a disposable local
+PostgreSQL 15 database with **38 migrations / 50 public tables**. This is
+non-production qualification only; legal/customer-held, production recovery,
+reconciliation, and independent acceptance remain open. No checkbox changed;
+score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-005-deletion-route-e2e-2026-10-09.md`.
+
 ## 2026-10-09 · Vercel production/Preview configuration audit
 
 The latest production deployment is READY at Web `be4289f`, and production

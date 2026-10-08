@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · QUAL-WEB-005 isolated account-deletion E2E
+
+- **Source:** Web tree identical to merged `origin/main`
+  `be4289f838b4cd53ed243979bfd7623262b69636`.
+- **Fixture:** Disposable local PostgreSQL 15 container at the isolated
+  `verglos_test` database; 38 migrations applied, 50 public tables present;
+  container stopped after the run.
+- **Verification:** migration ordering passed; authenticated deletion route
+  E2E **1/1**; deletion-job lease/idempotency integration **1/1**.
+- **Disposition:** Strengthens non-production deletion qualification; legal,
+  customer-held-record, production migration/restore/rollback, reconciliation,
+  and independent acceptance remain open. No checkbox changed; score remains
+  **218/62/280 (77.9%)**.
+- **Boundary:** No production/hosted database, migration, payment, provider,
+  account, entitlement, deployment, or customer-data write.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-deletion-route-e2e-2026-10-09.md`.
+
 ## 2026-10-09 · Vercel production/Preview configuration audit
 
 - **Instrument:** Vercel CLI metadata-only reads against the linked

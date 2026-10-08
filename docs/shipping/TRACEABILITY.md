@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 isolated account-deletion route E2E · 2026-10-09
+
+- **Backlog strengthened:** `QUAL-WEB-005`; no checkbox accepted.
+- **Source:** Web tree identical to merged `origin/main`
+  `be4289f838b4cd53ed243979bfd7623262b69636`.
+- **Result:** Disposable PostgreSQL 15 qualification applied 38 migrations and
+  exposed 50 public tables; route E2E **1/1** and deletion-job integration
+  **1/1** passed.
+- **Boundary:** Local non-production database only; no production/provider/
+  payment/account/entitlement/deployment/customer-data write. Legal,
+  production recovery, reconciliation, and independent acceptance remain open.
+  Score remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-deletion-route-e2e-2026-10-09.md`.
+
 ## Vercel production/Preview configuration audit · 2026-10-09
 
 - **Backlog strengthened:** R-041, `PLAN-WEB-014/015`, and production

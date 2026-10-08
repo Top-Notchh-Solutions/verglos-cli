@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## QUAL-WEB-005 isolated account-deletion route E2E · 2026-10-09
+
+The merged Web tree was qualified against a disposable local PostgreSQL 15
+database: the explicit migration preflight applied **38 migrations** and
+created **50 public tables**; migration ordering passed; the authenticated
+privacy route E2E passed **1/1**; and the deletion-job lease/idempotency
+integration passed **1/1**. This strengthens non-production deletion evidence
+only. Legal/customer-held-record disposition, production migration/restore/
+rollback, reconciliation, and independent acceptance remain open. No checkbox
+changed; the exact score remains **218 checked / 62 unchecked / 280 total
+(77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-005-deletion-route-e2e-2026-10-09.md`.
+
 ## Vercel production/Preview configuration audit · 2026-10-09
 
 Read-only Vercel metadata confirms the latest production deployment is READY at

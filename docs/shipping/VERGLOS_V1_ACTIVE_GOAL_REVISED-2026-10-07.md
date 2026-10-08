@@ -170,6 +170,11 @@ a changed input or a clear acceptance need:
   catalog, so Preview remains safely payment-disabled. This is rotation and
   fail-closed configuration evidence only; it does not prove the target,
   revocation, backup/restore, migration reconciliation, or payment lifecycle.
+- A fresh local PostgreSQL 15 qualification of the merged Web tree applied all
+  38 migrations and passed the authenticated account-deletion route E2E 1/1
+  plus deletion-job lease/idempotency integration 1/1. This strengthens
+  QUAL-WEB-005 only; legal/customer-held-record, production recovery,
+  reconciliation, and independent acceptance remain open.
 
 Private evidence for the latest CLI batch is:
 
@@ -594,6 +599,10 @@ The latest current-head Hunt evidence is:
 The latest Vercel configuration evidence is:
 
 `docs/shipping/evidence/vercel-production-preview-config-audit-2026-10-09.md`
+
+The latest account-deletion qualification evidence is:
+
+`docs/shipping/evidence/qual-web-005-deletion-route-e2e-2026-10-09.md`
 
 The private tracker’s backlog, status, execution ledger, traceability,
 decisions, risks, release gates, evidence, and this goal are the source of
