@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · focused Hunt execution qualification
+
+- **Source:** CLI exact worktree commit `7d060b2852551cc017bbb2b5f70bad22843e7273`;
+  local shared, Hunt, CLI, and MCP packages.
+- **Verification:** CLI execution/verification/runtime **11/11**, shared
+  trust/gate/binding **12/12**, MCP explanation/before-write **2/2**;
+  aggregate **25/25** with zero failures/skips. Shared/Hunt builds and all
+  four package typechecks passed.
+- **Coverage:** Positive/negative fixed A1 execution, exact signed trust and
+  approval binding, tamper/symlink denial, preflight-before-runtime denial,
+  runtime-unavailable failure, redacted machine output, and MCP no-execution
+  explanation.
+- **Disposition:** Synthetic local evidence only. Legal clearance is false in
+  the test trust store; trusted/licensed recipe provenance, independent review,
+  hosted acceptance, and final release gates remain open. No checkbox changed;
+  backlog remains **218/62/280 (77.9%)**.
+- **Safety:** No production/provider/database/payment/entitlement/deployment
+  or public repository write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-focused-execution-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-006 paid dashboard route boundary mobile slice
 
 - **Runtime:** Existing authenticated Free Chrome session; requested

@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · focused Hunt execution qualification
+
+At CLI commit `7d060b2`, the focused Hunt batch passed **25/25** tests: CLI
+execution/verification/runtime **11/11**, shared trust/gate/binding **12/12**,
+and MCP explanation/before-write **2/2**. Shared/Hunt builds and all four
+package typechecks passed. This is synthetic local bounded-execution evidence;
+the test trust store has no legal clearance, and trusted publisher roots,
+licensed recipe provenance, independent review, and hosted acceptance remain
+open. No checkbox changed; backlog remains **218 checked / 62 unchecked / 280
+total (77.9%)**. Evidence:
+`docs/shipping/evidence/hunt-focused-execution-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-006 paid dashboard route boundary mobile slice
 
 Read-only mobile navigation to Monitoring, Alerts, Score History, and

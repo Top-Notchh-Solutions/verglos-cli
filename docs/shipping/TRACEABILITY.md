@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## HUNT-008/009/010 focused execution qualification · 2026-10-08
+
+CLI commit `7d060b2` passed the focused Hunt execution/verification/runtime
+suite **11/11**, shared trust/gate/binding suite **12/12**, and MCP
+explanation/before-write suite **2/2**. Shared/Hunt builds and package
+typechecks also passed. This establishes bounded synthetic local behavior only;
+the test trust store has no legal clearance and trusted/licensed publisher
+provenance, independent review, hosted acceptance, and final release evidence
+remain open. No checkbox changed. See
+`docs/shipping/evidence/hunt-focused-execution-2026-10-08.md`.
+
 ## QUAL-WEB-006 paid dashboard route boundary · 2026-10-08
 
 Authenticated Free-session navigation to Monitoring, Alerts, Score History,
