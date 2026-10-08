@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · PLAN-CLI-003 production capability boundary probe
+
+Read-only anonymous and forged-authority requests to the production
+capabilities endpoint remained on Free, rejected the forged Enterprise query,
+and returned `private, no-store`. A malformed Bearer token returned
+`active:false` with `invalid_token`. This strengthens only the public
+modified-client boundary; authenticated tenant/list/search/export evidence and
+paid activation remain open. No checkbox changed; backlog remains **218 checked
+/ 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-cli-003-production-capability-boundary-2026-10-08.md`.
+
 ## 2026-10-08 · Vercel production/Preview read-only reconciliation
 
 The linked Vercel project is accessible read-only. Production deployment

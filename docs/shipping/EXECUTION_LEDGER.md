@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · PLAN-CLI-003 production capability-boundary probe
+
+- **Result:** Anonymous, anonymous forged `as_plan=enterprise`, and malformed
+  Bearer requests to the production capabilities endpoint all returned HTTP 200
+  with `private, no-store`; every result stayed on Free and the forged plan was
+  not honored. The malformed token returned `active:false` and
+  `reason:invalid_token`.
+- **Scope:** Catalog version `2026-10-02.0`, nine Free capabilities, no license,
+  account, tenant, payment, entitlement, database, or deployment mutation.
+- **Disposition:** This extends the existing anonymous modified-client evidence
+  only. Authenticated modified-CLI access and complete tenant/list/search/export
+  runtime evidence remain open; `PLAN-CLI-003` is not checked. Backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence file:**
+  `docs/shipping/evidence/plan-cli-003-production-capability-boundary-2026-10-08.md`.
+
 ## 2026-10-08 · Vercel production/Preview read-only reconciliation
 
 - **Production:** Linked-project inspection shows latest deployment
