@@ -16,6 +16,11 @@
 - Latest Preview deployment for the merged guard: READY, source SHA
   `37796165c42654f43eaca44eb6a363657e22298d`.
 - The production deployment follows the merged Web PR #170.
+- `vercel curl /checkout` against the latest production deployment returned
+  HTTP **200** using a read-only GET.
+- `vercel integration list --format=json` returned no Marketplace resources for
+  the linked project; there is no existing Vercel-managed database resource
+  available to treat as an isolated Preview target.
 
 ## Environment metadata findings
 
