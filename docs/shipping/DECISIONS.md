@@ -1110,3 +1110,18 @@ each observed method has lifecycle and reconciliation evidence.
 - **Boundary:** This is migration code-side safety only. Production history,
   snapshot/restore, R-041 credential rotation, and deployment authorization
   remain open; no backlog checkbox changed.
+
+## Production checkout post-redeploy smoke · 2026-10-08
+
+- **Observation:** `https://verglos.com/checkout` returned HTTP 200 from Vercel
+  and rendered the hosted method projection `UPI · Cards · Netbanking · Wallets
+  · EMI · Pay Later` with the current Pro INR catalog. Chrome DevTools found no
+  console warnings or errors; Razorpay hosted assets loaded successfully.
+- **Mode:** The initial production surface did not show the Razorpay Test Mode
+  banner. Treat production as live-key checkout and do not use it for payment
+  qualification. Test-mode lifecycle qualification remains a Preview/staging
+  operation.
+- **Boundary:** No order creation, payment, webhook, entitlement, database,
+  provider configuration, price, or migration write occurred. This does not
+  close PLAN-WEB-011/012/013/014/015 or R-041. Evidence:
+  `docs/shipping/evidence/production-checkout-post-redeploy-2026-10-08.md`.

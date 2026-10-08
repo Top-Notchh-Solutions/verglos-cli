@@ -4670,3 +4670,18 @@ App/org/webhook/cutover evidence remains open.
   acceptance.
 - **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
   (77.9%)**.
+
+# 2026-10-08 — Production checkout post-redeploy smoke
+
+- **Scope:** Read-only production browser smoke at `/checkout` through the
+  connected Chrome DevTools session.
+- **Result:** HTTP 200; current hosted-checkout surface rendered the Pro INR
+  catalog and the configured hosted methods UPI, cards, netbanking, wallets,
+  EMI, and Pay Later. Razorpay assets loaded and the page console had no
+  warnings/errors.
+- **Limitations:** Production did not display the Test Mode banner. No order,
+  payment, webhook, entitlement, database, provider configuration, price, or
+  migration write was attempted. This is not payment acceptance evidence.
+- **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
+  (77.9%)**. PLAN-WEB-011/012/013/014/015 and R-041 remain open.
+- **Evidence:** `docs/shipping/evidence/production-checkout-post-redeploy-2026-10-08.md`.

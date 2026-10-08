@@ -555,4 +555,15 @@ and does not treat `refund.created` as terminal. This strengthens code-side
 qualification only; provider delivery, lifecycle, entitlement, and production
 reconciliation remain open. No checkbox changed.
 Evidence: `docs/shipping/evidence/plan-web-014-test-webhook-inventory-2026-10-07.md`.
+
+## Production checkout post-redeploy smoke · 2026-10-08
+
+The redeployed production checkout now renders the hosted all-method
+projection (UPI, cards, netbanking, wallets, EMI, and Pay Later) and loads
+without browser console errors. The initial production page did not show the
+Razorpay Test Mode banner, so it is not an acceptable Test Mode qualification
+surface. No order, payment, webhook, entitlement, database, or provider write
+was made. PLAN-WEB-011/012/013/014/015 and R-041 remain open; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/production-checkout-post-redeploy-2026-10-08.md`.
 PR #149 exact head `aa34127` hardens the
