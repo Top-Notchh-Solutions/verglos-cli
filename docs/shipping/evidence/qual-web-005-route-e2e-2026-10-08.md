@@ -32,10 +32,15 @@ open and no backlog checkbox changed.
   0 skipped**.
 - Safe-default serial run: **861 passed / 0 failed / 24 explicit environment
   skips** out of 885 tests.
-- Database-backed serial run: **876 passed / 8 failed / 1 skipped**. The eight
-  failures are the known shared-fixture schema collisions in the hosted-013
-  writer and queue/worker crash-recovery integration files (`users` or
-  `organizations` already exists); the new deletion route integration passed.
+- The clean database-backed serial run at the initial auth-seam head was
+  **876 passed / 8 failed / 1 skipped**. The eight failures were the known
+  shared-fixture schema collisions in the hosted-013 writer and queue/worker
+  crash-recovery integration files (`users` or `organizations` already
+  exists). On the rebuilt isolated database, the current head's route-to-worker
+  integration and existing deletion-job integration passed **2/2**.
+- A later attempt to rerun the entire database-backed serial suite was stopped
+  after an earlier shared-fixture process removed the legacy `users` table from
+  the disposable database; it is not counted as current-head evidence.
 - `pnpm typecheck`, `pnpm db:check`, `pnpm db:migrations:check`,
   `git diff --check`, and the preview-safe production build passed. The build
   generated 45 pages.

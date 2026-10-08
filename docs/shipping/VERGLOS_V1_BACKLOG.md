@@ -646,8 +646,10 @@ integration: the deletion request creates one bounded job, the isolated
 worker completes it, and the customer-held digest remains unchanged. Focused
 route integration is **8/8**; deletion/hold/inventory/worker contracts are
 **23/23**; safe-default Web serial is **861/885 with 24 explicit skips and
-zero failures**; the database-backed serial is **876/885 with 8 known shared
-fixture collisions and 1 skip**; typecheck/schema/migration/build pass. This
+zero failures**; the clean database-backed serial at the initial auth-seam
+head is **876/885 with 8 known shared-fixture collisions and 1 skip**, and the
+current head's rebuilt isolated route-to-worker/deletion-job integrations are
+**2/2**; typecheck/schema/migration/build pass. This
 is qualification progress only: legal/customer-held disposition, production
 authorization, reconciliation, restore/rollback, and independent acceptance
 remain open. No checkbox changed; backlog remains **218 checked / 62 unchecked /

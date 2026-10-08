@@ -5369,9 +5369,11 @@ App/org/webhook/cutover evidence remains open.
   executes the bounded worker to a completed request/job while preserving the
   held digest. Focused route integration passed **8/8** and
   deletion/hold/inventory/worker contracts passed **23/23**. The safe-default serial suite passed **861/885 with 24 explicit
-  skips and zero failures**. The database-backed run passed **876/885**, with
-  eight known shared-fixture schema collisions and one skip; the new route
-  integration passed. Typecheck, schema/migration checks, diff check, and the
+  skips and zero failures**. The clean database-backed run at the initial
+  auth-seam head passed **876/885** with eight known shared-fixture schema
+  collisions and one skip; on a rebuilt isolated database, the current
+  route-to-worker and existing deletion-job integrations passed **2/2**.
+  Typecheck, schema/migration checks, diff check, and the
   preview-safe **45-page** build passed locally.
 - **Hosted:** PR #162 hosted verification was still running at capture;
   Vercel, GitGuardian, and Preview Comments were green.

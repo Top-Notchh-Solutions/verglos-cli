@@ -2746,8 +2746,11 @@ the production-safe request-auth seam, and authenticated route integration
 executes the bounded worker to a completed request/job while preserving the
 held digest. Focused route integration passed **8/8** and
 deletion/hold/inventory/worker contracts passed **23/23**; the safe-default serial suite passed
-**861/885 with 24 explicit skips and zero failures**, and the new route passed
-in the database-backed run. Typecheck, schema/migration checks, diff check, and
+**861/885 with 24 explicit skips and zero failures**. The clean
+database-backed run at the initial auth-seam head was 876/885 with the known
+eight shared-fixture collisions; the current head's rebuilt isolated
+route-to-worker/deletion-job integrations pass 2/2. Typecheck,
+schema/migration checks, diff check, and
 the preview-safe 45-page build passed locally. This is code-side and isolated
 integration evidence only; legal/customer-held disposition, destructive-worker
 E2E, reconciliation, restore/rollback, production authorization, and

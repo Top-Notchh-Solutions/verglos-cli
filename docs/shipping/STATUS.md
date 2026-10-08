@@ -3841,7 +3841,10 @@ passed **8/8** and deletion/hold/inventory/worker contracts passed **23/23**;
 the safe-default Web serial suite passed
 **861/885 with 24 explicit environment-gated skips and zero failures**. The
 database-backed serial run passed **876/885**, with eight known shared-fixture
-schema collisions and one skip; the new route integration passed. Typecheck,
+schema collisions and one skip at the initial auth-seam head; on a rebuilt
+isolated database, the current route-to-worker and existing deletion-job
+integrations passed **2/2**. A later full-database rerun was stopped after a
+shared-fixture process removed the legacy `users` table. Typecheck,
 schema/migration checks, diff check, and the preview-safe **45-page** build
 passed locally. Hosted verification for PR #162 was running at capture;
 Vercel Preview Comments was green and the Vercel deployment check was pending.
