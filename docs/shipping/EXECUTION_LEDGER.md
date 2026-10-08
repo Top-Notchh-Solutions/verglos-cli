@@ -5408,3 +5408,28 @@ App/org/webhook/cutover evidence remains open.
   legal, sandbox-review, and acceptance gates. No checkbox changed; backlog
   remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Evidence:** `docs/shipping/evidence/qual-cli-hunt-fixture-2026-10-08.md`.
+
+## 2026-10-08 · PLAN-WEB-014 hosted-method contract matrix
+
+Web PR #163 source `a9158b180a682f6030835f03d1bdfabe8eb6953c` merged as
+`d88aa7b9b219df414707143bc8c6b9c6e9b18193`. The synthetic hosted-order
+webhook matrix covers captured, failed, and replay paths for UPI, cards,
+netbanking, wallets, EMI, and Pay Later, and rejects a captured QR method that
+is absent from the signed hosted-method snapshot. Focused payment/checkout/
+webhook tests passed **21/21**; full serial Web passed **862/886 with 24
+explicit skips and zero failures**; typecheck, schema, 38-migration ordering,
+45-page build, and diff check passed. Hosted Verify `37789719564`, Vercel,
+GitGuardian, and Preview Comments passed. This is synthetic code-side evidence
+only; no provider or production operation occurred. PLAN-WEB-014/015 remain
+open and backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence: `docs/shipping/evidence/plan-web-014-hosted-method-contract-matrix-2026-10-08.md`.
+
+## 2026-10-08 · QUAL-WEB-006 production browser qualification
+
+Read-only Chrome DevTools qualification observed `/` at LCP 249 ms / CLS 0.00
+and `/account` at LCP 605 ms desktop and 893 ms mobile / CLS 0.00. Lighthouse
+Accessibility and Best Practices scored 100 on the observed public and
+authenticated surfaces; the homepage SEO score was 100. This does not replace
+human screen-reader, large-dataset, complete-route, or field/CrUX evidence.
+No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
+`docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.

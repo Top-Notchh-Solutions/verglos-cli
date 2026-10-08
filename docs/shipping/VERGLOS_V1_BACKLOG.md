@@ -657,3 +657,25 @@ is qualification progress only: legal/customer-held disposition, production
 authorization, reconciliation, restore/rollback, and independent acceptance
 remain open. No checkbox changed; backlog remains **218 checked / 62 unchecked /
 280 total (77.9%)**.
+
+### PLAN-WEB-014 evidence addendum · 2026-10-08 · Web PR #163
+
+Web PR #163 source `a9158b1` merged as `d88aa7b9b219df414707143bc8c6b9c6e9b18193`
+after hosted Verify `37789719564`, Vercel, GitGuardian, and Preview Comments
+passed. Synthetic hosted-order webhook tests cover capture, failure, and replay
+for UPI, cards, netbanking, wallets, EMI, and Pay Later, and reject a captured
+QR method absent from the signed method snapshot. Focused payment tests pass
+**21/21**; the full serial Web suite passes **862/886 with 24 explicit skips**;
+typecheck, schema, 38-migration ordering, and 45-page build pass. This is
+code-side contract evidence only; provider lifecycle, entitlement, and
+production reconciliation remain open. No checkbox changed.
+
+### QUAL-WEB-006 evidence addendum · 2026-10-08 · production browser
+
+Read-only Chrome qualification observed `/` at LCP 249 ms / CLS 0.00 and
+`/account` at LCP 605 ms desktop / 893 ms mobile / CLS 0.00. Lighthouse
+Accessibility and Best Practices were 100 on the observed public and
+authenticated surfaces; the homepage SEO score was 100. Human screen-reader,
+large-dataset, complete-route, and field/CrUX gates remain open. No checkbox
+changed. Evidence:
+`docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.

@@ -1253,3 +1253,16 @@ each observed method has lifecycle and reconciliation evidence.
   without recording any secret.
 - **Boundary:** No provider call, payment, deployment, database, or production
   write was made after the incident. PLAN-WEB-014/015 and R-041 remain open.
+
+## Hosted payment methods remain contract-qualified, not provider-accepted · 2026-10-08
+
+- **Decision:** Preserve hosted checkout as the all-method path and keep QR as
+  a separate opt-in adapter. Lock the six currently supported hosted methods
+  into synthetic captured/failed/replay tests and reject methods absent from
+  the signed checkout snapshot.
+- **Evidence:** Web PR #163 merged as `d88aa7b9b219df414707143bc8c6b9c6e9b18193`;
+  focused 21/21, serial 862/886 with 24 skips, hosted Verify `37789719564`,
+  schema/migration/type/build gates green.
+- **Boundary:** Synthetic tests do not prove Razorpay provider lifecycle,
+  refunds, renewals, entitlement reconciliation, or production truth. R-041
+  credential containment and PLAN-WEB-014/015 remain open.

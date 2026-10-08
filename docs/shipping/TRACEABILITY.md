@@ -2773,3 +2773,24 @@ MCP build runner was rerun; PR #82 merged to CLI `main` as
 `b852c263fe5aa26f593e4f815532a7ddb6e8d9ff`. Hunt provenance, legal clearance,
 sandbox independent review, and acceptance gates remain open. No checkbox changed. See
 `docs/shipping/evidence/qual-cli-hunt-fixture-2026-10-08.md`.
+
+## PLAN-WEB-014 hosted method contract matrix · 2026-10-08
+
+Web PR #163 source `a9158b180a682f6030835f03d1bdfabe8eb6953c` merged as
+`d88aa7b9b219df414707143bc8c6b9c6e9b18193`. Synthetic order-webhook tests
+cover UPI, card, netbanking, wallet, EMI, and Pay Later for capture, failure,
+and replay, with QR method-binding rejection. Focused tests 21/21; serial
+862/886 with 24 explicit skips; Verify `37789719564`; Vercel, GitGuardian,
+schema, migrations, typecheck, and 45-page build passed. This is code-side
+evidence only; provider lifecycle and production reconciliation remain open.
+No checkbox changed. See
+`docs/shipping/evidence/plan-web-014-hosted-method-contract-matrix-2026-10-08.md`.
+
+## QUAL-WEB-006 production browser qualification · 2026-10-08
+
+Read-only Chrome DevTools observations recorded public-home LCP 249 ms and
+authenticated-account LCP 605 ms desktop / 893 ms mobile, all with CLS 0.00;
+Lighthouse Accessibility/Best Practices were 100 on the observed surfaces.
+Human screen-reader, large-data, complete-route, and field/CrUX gates remain
+open. No checkbox changed. See
+`docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.

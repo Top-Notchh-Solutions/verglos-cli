@@ -3889,3 +3889,21 @@ are paused until credential rotation/revocation, Vercel secret refresh and
 redeploy where required, and bounded read-only verification of old-value
 invalidity are complete. No secret values are recorded here; no backlog
 checkbox changed.
+
+## 2026-10-08 — Hosted payment method contract matrix and browser qualification
+
+- Web PR #163 merged as `d88aa7b9b219df414707143bc8c6b9c6e9b18193` after all
+  hosted checks passed. Synthetic webhook tests now cover captured, failed,
+  and replay paths for UPI, cards, netbanking, wallets, EMI, and Pay Later, and
+  reject an unbound QR method. Focused payment tests passed **21/21**; the
+  serial Web suite passed **862/886 with 24 explicit environment-gated skips**;
+  typecheck, schema, 38-migration ordering, and 45-page build passed.
+- Read-only production Chrome qualification recorded public-home LCP 249 ms,
+  authenticated-account LCP 605 ms desktop / 893 ms mobile, CLS 0.00 for all,
+  and Lighthouse Accessibility/Best Practices 100 on the observed surfaces.
+- No provider, payment, database, deployment, or production write occurred.
+  PLAN-WEB-014/015 and QUAL-WEB-006 remain open for real provider lifecycle,
+  credential containment, human screen-reader, large-data, field-CWV, and
+  reconciliation gates. Backlog remains **218 checked / 62 unchecked / 280
+  total (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-hosted-method-contract-matrix-2026-10-08.md`; `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
