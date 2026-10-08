@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-014 Preview database-isolation guard · 2026-10-09
+
+- **Backlog strengthened:** `PLAN-WEB-014`, `PLAN-WEB-015`, and Preview
+  safety; no checkbox accepted.
+- **Source:** Web PR #170 `37796165c42654f43eaca44eb6a363657e22298d`, merged as
+  `be4289f838b4cd53ed243979bfd7623262b69636`.
+- **Result:** Preview payment configuration requires a TLS-safe database URL
+  and explicit isolated-target marker; focused **38/38**, serial **864 pass /
+  24 skips / 0 fail**, typecheck, 45-page build, and all hosted checks passed.
+- **Boundary:** No production/provider/payment/database/migration/entitlement/
+  account or production deployment write. Score remains **218/62/280
+  (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-database-isolation-guard-2026-10-09.md`.
+
 ## HUNT-011 current-head pinned Docker requalification · 2026-10-09
 
 - **Backlog strengthened:** `HUNT-011` and dependent Hunt qualification rows;

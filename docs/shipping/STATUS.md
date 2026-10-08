@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Preview payment database-isolation guard merged
+
+Web PR #170 merged as `be4289f` after focused **38/38**, serial **864 pass /
+24 explicit skips / 0 fail**, typecheck, 45-page build, and all hosted checks
+passed. Preview payments now fail closed without an explicitly marked,
+TLS-safe isolated database target. This does not establish provider Test Mode
+lifecycle or production reconciliation. No checkbox changed; score remains
+**218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-database-isolation-guard-2026-10-09.md`.
+
 ## 2026-10-09 · current CLI-head Hunt adversarial requalification
 
 The exact merged CLI head `8bea4be2fa18533eafd088122be769e942965626` passed the

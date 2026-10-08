@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-preview-isolation-guard · 2026-10-09
+
+Web PR #170 is merged and prevents Preview payment configuration from starting
+without a TLS-safe database URL and explicit isolated-target marker. Residual
+risk is unchanged: the marker is an assertion, not verification of disposable
+database ownership, migration history, webhook routing, provider Test Mode
+lifecycle, or production reconciliation. Owner: billing/release qualification.
+No production/provider/payment/database/migration/entitlement/account or
+production deployment write occurred. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-database-isolation-guard-2026-10-09.md`.
+
 ## R-HUNT-011-current-head-requalification · 2026-10-09
 
 The exact merged CLI head now has a fresh pinned Docker adversarial result of

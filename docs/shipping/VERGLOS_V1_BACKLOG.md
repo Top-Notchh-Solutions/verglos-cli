@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## PLAN-WEB-014 Preview database-isolation guard · 2026-10-09
+
+Web PR #170 (`3779616`) merged as `be4289f`. Preview payment configuration
+now fails closed unless a TLS-safe database URL and explicit
+`VERGLOS_PREVIEW_DATABASE_ISOLATED=true` marker are present; focused tests
+passed **38/38**, the configured serial suite passed **864/864 with 24
+explicit skips**, typecheck/build passed with 45 generated pages, and all
+hosted checks passed. This is configuration safety only: isolated database
+migrations, webhook target verification, provider Test Mode lifecycle, and
+production reconciliation remain open. No checkbox changed; the exact score
+remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-database-isolation-guard-2026-10-09.md`.
+
 ## HUNT-011 current-head pinned Docker requalification · 2026-10-09
 
 The exact merged CLI `origin/main` head `8bea4be2fa18533eafd088122be769e942965626`

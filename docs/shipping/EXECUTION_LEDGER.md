@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Web Preview payment database-isolation guard merged
+
+- **Source:** Web PR #170, head `37796165c42654f43eaca44eb6a363657e22298d`,
+  merged as `be4289f838b4cd53ed243979bfd7623262b69636`.
+- **Implementation:** Preview payment configuration now requires a validated
+  TLS-safe `DATABASE_URL` and explicit isolated-database marker.
+- **Verification:** Focused tests **38/38**; serial **864 pass / 24 explicit
+  skips / 0 fail**; typecheck; 45-page Preview build; type/schema, GitGuardian,
+  Vercel, and Preview Comments all passed.
+- **Disposition:** Configuration-safety progress only; payment lifecycle,
+  isolated migration/schema, webhook-target, and production reconciliation
+  gates remain open. No checkbox changed; score remains **218/62/280 (77.9%)**.
+- **Boundary:** No production/provider/payment/database/migration/entitlement/
+  account or production deployment write.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-database-isolation-guard-2026-10-09.md`.
+
 ## 2026-10-09 · HUNT-011 current-head Docker adversarial requalification
 
 - **Source:** CLI `origin/main`

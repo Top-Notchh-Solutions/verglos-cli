@@ -61,18 +61,18 @@ Current exact scoreboard:
 Current source checkpoints:
 
 - CLI `origin/main`: `8bea4be2fa18533eafd088122be769e942965626`.
-- Web `origin/main`: `cedf199855a5c4734122ae4849253156328cff1b`.
+- Web `origin/main`: `be4289f838b4cd53ed243979bfd7623262b69636`.
 - Web PR #166 merged as `ff0dd15b3eada55eb898038bc66ea0c5394bead6`.
 - Web PR #167 merged as `9841236c64a816fc90402cd90ff2bc93ce35382c`.
 - Web PR #168 merged as `cedf199855a5c4734122ae4849253156328cff1b`.
 - CLI PR #85 merged as `80fa930`.
 - CLI PR #86 merged as `fc452ba`.
 - CLI PR #87 merged as `8bea4be2fa18533eafd088122be769e942965626`.
-- Web PR #170 is open from `3779616` and is not yet accepted or counted. It
-  adds a fail-closed Preview guard requiring both a validated database URL and
-  an explicit `VERGLOS_PREVIEW_DATABASE_ISOLATED=true` marker whenever Preview
-  payment methods are configured. Merge only after the hosted checks are green
-  and the exact three-file diff is reviewed.
+- Web PR #170 from `3779616` merged as `be4289f` after all hosted checks passed.
+  It adds a fail-closed Preview guard requiring both a validated database URL
+  and an explicit `VERGLOS_PREVIEW_DATABASE_ISOLATED=true` marker whenever
+  Preview payment methods are configured. It is progress, not payment
+  lifecycle acceptance, and does not change the backlog score.
 - Web PR #169 is a duplicate of already merged Preview-auth work (its patch is
   identical to PR #157 and its base is stale). Do not merge it or count it as
   new shipping progress.
@@ -158,6 +158,12 @@ a changed input or a clear acceptance need:
   macOS namespace skip, zero failures. This strengthens HUNT-011 evidence but
   does not replace independent AppSec review, trusted/licensed recipe
   provenance, production activation, or customer acceptance.
+- Web PR #170 is now merged and makes Preview payment configuration fail closed
+  without a TLS-safe database URL and explicit isolated-target marker. Local
+  focused tests passed 38/38, serial passed 864 with 24 explicit skips and no
+  failures, typecheck/build passed, and all hosted checks passed. This does not
+  prove database migration/schema, webhook-target, provider lifecycle, or
+  production reconciliation.
 
 Private evidence for the latest CLI batch is:
 
@@ -553,8 +559,8 @@ At resume, perform this exact sequence:
 1. Read `brain`, repository instructions, and the live private backlog.
 2. Recompute the scoreboard and open-ID list.
 3. Inspect current CLI and Web branches/PRs and verify the recorded heads.
-4. Resolve or explicitly record the state of the current Web PR #170; do not
-   merge duplicate PR #169.
+4. Verify the merged Web PR #170 head and record its acceptance boundary; do
+   not merge duplicate PR #169.
 5. Select the largest dependency-ready backend/CLI batch.
 6. Record IDs, criteria, evidence, write boundary, and machine-load plan.
 7. Implement and qualify the batch with focused and required tests.
