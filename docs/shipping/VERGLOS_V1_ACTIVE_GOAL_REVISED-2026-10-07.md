@@ -1,6 +1,6 @@
 # Verglos V1 Active Shipping Goal — Backend-First Unchecked-Backlog Pass
 
-Effective checkpoint: 2026-10-08. This is the operative replacement goal for
+Effective checkpoint: 2026-10-09. This is the operative replacement goal for
 the remaining active shipping window. Replace the previous active goal with
 this file when resuming.
 
@@ -30,20 +30,33 @@ this file when resuming.
   documentation edit, browser clicking without an acceptance purpose, or
   checkbox edit without current evidence is not progress.
 
-  The final repository scans, external POC, false-positive review, and company-architecture validation happen only after all implementation, integration, qualification,
-  release-gate, and release-candidate-freeze work is complete. Do not use repository scanning to create the appearance of shipping progress.
+  The final repository scans, external POC, false-positive review, and
+  company-architecture validation happen only after all implementation,
+  integration, qualification, release-gate, and release-candidate-freeze work
+  is complete. Do not use repository scanning to create the appearance of
+  shipping progress.
 
   Do not release or publish the final npm version until the complete V1 is actually qualified. The unreleased latest source tree is the product under test; the old
   published alpha is only a compatibility baseline where explicitly required.
 
-  CURRENT OPERATING PRIORITY — 2026-10-08
+  CURRENT OPERATING PRIORITY — 2026-10-09
 
-  The remaining work is now backend/CLI-first. The primary objective is to clear
-  genuinely executable unchecked backlog items in `verglos-cli` in coherent fat
-  batches, with the private tracker count as the scoreboard. Then complete the
+  The remaining work is now backend/CLI-first. The primary objective is to
+  clear genuinely executable unchecked backlog items in `verglos-cli` in
+  coherent fat batches, with the private tracker count as the scoreboard. Do
+  not move to frontend polish because it is easier. Continue backend work until
+  each CLI item is either accepted with current evidence or has an explicit
+  external owner, missing artifact, and release decision. Then complete the
   final `verglos-web` truth, browser, payment, production, and accessibility
-  pass. Web work is allowed before the CLI queue is exhausted only when it is
-  required to unblock a CLI contract or to fix a verified release blocker.
+  pass. Web work is allowed earlier only when it unblocks a backend contract or
+  repairs a verified release blocker.
+
+  Verglos is a product for local, CI, hosted, team, organization, and
+  enterprise-shaped use cases; it is not a local-only product. That broad
+  product scope must be earned by the corresponding contracts, authorization,
+  isolation, entitlement, operational, billing, and release evidence. Do not
+  claim Team, Studio, Enterprise, GitHub organization, or production payment
+  capability merely because local substrate or a UI route exists.
 
   BACKEND-FIRST PRIORITY LOCK
 
@@ -67,16 +80,42 @@ this file when resuming.
   hosted operational evidence. When one item is blocked, preserve the blocker
   and continue with the next executable item.
 
-  The authoritative checkpoint at the start of this operating phase is:
+  The authoritative checkpoint for this resume is:
 
   - **218 checked / 62 unchecked / 280 total / 77.9%**;
-  - CLI `origin/main`: `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`;
+  - CLI `origin/main`: `fc452ba05dc9222a5a454653ab29906107b09045`;
+  - Web `origin/main`: `cedf199855a5c4734122ae4849253156328cff1b`;
   - Web PR #166 merged as `ff0dd15b3eada55eb898038bc66ea0c5394bead6`;
   - Web PR #167 merged as `9841236c64a816fc90402cd90ff2bc93ce35382c`;
   - Web PR #168 merged as `cedf199855a5c4734122ae4849253156328cff1b`;
-  - private tracker base checkpoint before this batch: `706b13b`;
+  - CLI PR #85 merged as `80fa930` and CLI PR #86 merged as `fc452ba`;
+  - private tracker current documentation head: `7e9637d`;
   - no open CLI or Web PR was present at this checkpoint;
   - no checkbox is accepted merely because implementation exists or tests are green.
+
+  Current resume evidence already available:
+
+  - CLI PR #85 and #86 passed their recorded focused/full/hosted checks and
+    merged. The latest CLI changes harden private cache writes and private
+    runner replay persistence, but the related operational, trusted-provenance,
+    reviewer, publishing, and activation gates remain open where required.
+  - Web payment/ledger/webhook qualification passed **31/31** against a
+    disposable PostgreSQL 15 database migrated through all **38** migrations.
+    A separate fresh-database serial run passed **885/887**, with **2 explicit
+    skips and 0 failures**. Typecheck, migration ordering, schema checks,
+    build, and the 45-route local runtime sweep passed.
+  - The authenticated Chrome session is available on `127.0.0.1:9222` and
+    Docker is available for bounded qualification. These are instruments, not
+    acceptance evidence. The latest read-only production checkout rendered
+    UPI, Cards, Netbanking, Wallets, EMI, and Pay Later without console errors;
+    it did not prove Test Mode, order creation, capture, refund, webhook,
+    entitlement, renewal, or cancellation.
+  - No production database, migration, payment, provider, entitlement,
+    deployment, or account write occurred during the latest qualification.
+  - The remaining CLI queue must be re-read from the live private backlog at
+    resume. Do not assume every item is blocked from an old note: inspect each
+    acceptance criterion, complete any newly executable code-side batch, and
+    record only the exact external gates that still remain.
 
   The exact open IDs at this checkpoint are:
 
@@ -132,6 +171,26 @@ this file when resuming.
      and field/runtime evidence, final truth review, and the remaining hosted
      integrations. Keep this lane after the CLI-first pass except for a blocker
      that directly prevents a dependency-ready CLI batch.
+
+  BACKEND COMPLETION CHECKPOINT
+
+  “Backend complete” is not a feeling and is not the same as “the CLI builds.”
+  Before leaving the backend track, produce a row for every unchecked CLI,
+  governance, and release item with:
+
+  - the exact implementation or qualification surface;
+  - current source commit and private evidence path;
+  - focused and required full test results;
+  - security, adversarial, public-boundary, and supported-runtime results;
+  - hosted PR/check/release evidence where required;
+  - the remaining external dependency, named owner, expiry or review date,
+    and release decision when it cannot be satisfied in this session.
+
+  Close a checkbox only when all of its acceptance criteria are satisfied.
+  If a backend item is blocked, do not spend a turn restating the same blocker:
+  record it once, then take the next independent backend item. The main path
+  moves to Web only after no dependency-ready backend item remains, not merely
+  because a backend item is inconvenient to qualify.
 
   AUTHORITATIVE SOURCES
 
@@ -515,7 +574,7 @@ this file when resuming.
   - decisions made;
   - whether public/private boundaries were checked.
 
-  CURRENT SESSION LEARNINGS — 2026-10-08
+  CURRENT SESSION LEARNINGS — 2026-10-09
 
   - The Web homepage contrast/key batch was implemented in Web commit `5b351a9`,
     passed local typecheck, truth-registry 25/25, serial 862 passed / 24
@@ -523,9 +582,9 @@ this file when resuming.
     desktop Lighthouse Accessibility/Best Practices 100/100 with a clean
     console. It merged as PR #165 / `c620c39` after Vercel, Preview Comments,
     GitGuardian, and typecheck/schema passed. No backlog checkbox changed.
-  - The current next track is a fresh CLI worktree from `origin/main`
-    `94829e1`; the first action is to choose a dependency-ready unchecked CLI
-    batch from the private tracker, not to reopen merged Web work.
+  - The current next track is a fresh CLI worktree from the latest
+    `origin/main` `fc452ba`; the first action is to choose a dependency-ready
+    unchecked CLI batch from the private tracker, not to reopen merged Web work.
   - Current CLI open work includes implementation-progress items in Hunt,
     entitlement/catalog compatibility, organization policy/check payloads,
     client projection, private runner, licensing/distribution, and release
@@ -614,8 +673,10 @@ this file when resuming.
     the broader QUAL-WEB-006 acceptance item. Authenticated paid/org behavior,
     field performance, accessibility, complete-route coverage, and final truth
     review are still required before that checkbox can move.
-  - The current CLI qualification pass found no open CLI PR and no dependency-
-    ready CLI checkbox that could honestly be accepted from local code alone.
+  - The latest CLI qualification pass found no open CLI PR and no dependency-
+    ready CLI checkbox that could honestly be accepted from local code alone
+    at that time. This is not a permanent assumption: recompute the live queue
+    before the next batch and inspect every criterion again.
     The remaining CLI IDs are HUNT-008–011, PLAN-CLI-001–004,
     TEAM-CLI-001/002, STUDIO-CLI-001, ENT-CLI-001, LIC-002/003,
     DIST-001–003/006, QUAL-CLI-004, and QUAL-CLI-006. Their remaining proof
@@ -626,7 +687,7 @@ this file when resuming.
     code change merely to lower the count; inspect each criterion and move to
     the next independent item when a gate is not executable locally.
   - The backend qualification evidence at CLI `origin/main`
-    `94829e1a4fc8e42dd67545e99cbe9a3a837b9482` remains valid: configured tests,
+    `fc452ba05dc9222a5a454653ab29906107b09045` remains valid: configured tests,
     build, typecheck, lint, ordinary Hunt 45/45, pinned Docker adversarial
     60 pass / 1 explicit macOS namespace skip / 0 fail, package/public-boundary
     checks, packed manifests, and release-script tests 12/12. These results
@@ -714,6 +775,10 @@ this file when resuming.
     no checkbox changed and the score remains **218 checked / 62 unchecked /
     280 total (77.9%)**. Private evidence is
     `docs/shipping/evidence/qual-web-006-plan-web-015-production-checkout-cdp-2026-10-09.md`.
+  - The private tracker was reconciled through `7e9637d`, including the latest
+    browser-refresh blocker and risk record. The tracker is clean, no public
+    repository was changed by the private evidence updates, and no backlog
+    checkbox was changed without acceptance evidence.
 
   COMPLETION STANDARD
 
