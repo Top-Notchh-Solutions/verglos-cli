@@ -601,6 +601,13 @@ this file when resuming.
     its broader authenticated, field-CWV, and final-truth criteria.
   - The exact count remains **218 checked / 62 unchecked / 280 total (77.9%)**
     until a current private-tracker reconciliation proves otherwise.
+  - A manifest-driven keyless built-Preview sweep found one additional bounded
+    runtime gap: the public receipt route returned HTTP 500 when no database was
+    configured. Web PR #168 (`fb40f89`) now returns 503/no-store for the exact
+    missing-`DATABASE_URL` case, preserves real database errors, passed hosted
+    verification, and found no other unexpected route 500s. The three cron
+    routes' explicit missing-secret 500 responses remain their existing service
+    contract. QUAL-WEB-006 remains open for broader acceptance.
 
   COMPLETION STANDARD
 

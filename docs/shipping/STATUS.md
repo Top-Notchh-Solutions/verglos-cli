@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · Web keyless Preview route sweep and receipt fallback
+
+Web PR #168 (`fb40f89`) merged to Web `main` as `cedf199` after all hosted
+verification, GitGuardian, and Vercel checks passed. A manifest-driven keyless
+Preview sweep found the public receipt route returned HTTP 500 when no
+`DATABASE_URL` existed; it now returns a bounded HTTP 503 with `no-store` for
+that exact configuration case, while real database errors remain errors. Local
+receipt tests passed 10/10, typecheck and 45-route build passed, and the sweep
+found no unexpected 500s; only the three explicit missing-`CRON_SECRET` service
+unavailable responses remain 500. No production, database, payment, provider,
+entitlement, account, or deployment write occurred. This strengthens
+`QUAL-WEB-006` but closes no checkbox; score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-preview-route-sweep-no-db-2026-10-08.md`.
+
 ## 2026-10-08 · Web keyless Preview auth-consumer repair
 
 Web PR #167 (`12bfe68`) merged to Web `main` as `9841236c` after hosted

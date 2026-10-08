@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## Web keyless Preview route sweep and receipt fallback · 2026-10-08
+
+- **Backlog strengthened:** `QUAL-WEB-006`; no checkbox accepted because the
+  broader authenticated, field-CWV, payment, and final-truth criteria remain
+  open.
+- **Source:** Web PR #168 `fb40f89`, merged as
+  `cedf199855a5c4734122ae4849253156328cff1b`.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-preview-route-sweep-no-db-2026-10-08.md`.
+- **Result:** Database-less keyless Preview public receipt requests now return
+  bounded 503/no-store; the full route sweep found no unexpected HTTP 500s.
+- **Boundary:** No production/provider/database/payment/account/deployment
+  write; exact score remains **218/62/280 (77.9%)**.
+
 ## Web keyless Preview auth-consumer repair · 2026-10-08
 
 - **Backlog strengthened:** `QUAL-WEB-006` runtime qualification; no checkbox

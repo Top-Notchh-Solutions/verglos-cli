@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · Web keyless Preview route sweep and receipt fallback
+
+- **Source:** Web PR #168 source `fb40f89`, merged as
+  `cedf199855a5c4734122ae4849253156328cff1b`.
+- **Finding:** The public receipt route returned HTTP 500 when a built Preview
+  had no `DATABASE_URL`; the missing configuration was not a bounded response.
+- **Implementation:** Return 503/no-store only for the exact missing-database
+  configuration; preserve real database errors.
+- **Verification:** Focused receipt tests **10/10**, typecheck, 45-route build,
+  runtime receipt **503**, and manifest-driven keyless route sweep with no
+  unexpected 500s. Hosted workflow `37804005137` and GitGuardian/Vercel passed.
+- **Boundary:** No production, database, payment, provider, entitlement,
+  account, migration, or deployment write. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-preview-route-sweep-no-db-2026-10-08.md`.
+
 ## 2026-10-08 · Web keyless Preview auth-consumer repair
 
 - **Source:** Web PR #167 source `12bfe68`, merged as
