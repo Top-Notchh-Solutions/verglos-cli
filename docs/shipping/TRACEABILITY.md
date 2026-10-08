@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## PLAN-CLI-004 + QUAL-WEB-006 fat batch · 2026-10-08
+
+CLI PR #84 (`7c02099`) adds process-level legacy-v1 activation fallback
+evidence with synthetic loopback responses; focused 63/63 and repository gates
+are green locally. Web PR #164 (`4e00cc3`) corrects the `/docs/2.0.0` CTA
+contrast defect; typecheck, truth-registry 25/25, serial 862 passed / 24
+environment-gated skips / 0 failures, 45-page build, and local post-fix
+Lighthouse Accessibility/Best Practices 100/100 pass. Production route sweep
+is read-only and found no console errors; metadata/llms findings remain held
+for the truth pass. Hosted PR checks were pending when recorded. This is
+partial evidence only: PLAN-CLI-004 and QUAL-WEB-006 remain unchecked, and no
+production/provider/database/payment/deployment state changed.
+
+Evidence: `docs/shipping/evidence/plan-cli-004-qual-web-006-batch-2026-10-08.md`.
+
 ## QUAL-WEB-006 / public docs truth finding · 2026-10-08
 
 Read-only Chrome CDP navigation to `/docs` produced Accessibility 100, Best

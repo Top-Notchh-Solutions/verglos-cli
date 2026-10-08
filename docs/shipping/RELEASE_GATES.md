@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## PLAN-CLI-004 / QUAL-WEB-006 fat batch · 2026-10-08
+
+CLI PR #84 source `7c02099` adds process-level legacy-v1 activation fallback
+evidence; focused 63/63 and local full CLI test/typecheck/build/lint gates pass.
+Web PR #164 source `4e00cc3` corrects the `/docs/2.0.0` CTA contrast defect;
+typecheck, truth-registry 25/25, serial 862 passed / 24 environment-gated
+skips / 0 failed, 45-page build, and local post-fix Lighthouse
+Accessibility/Best Practices 100/100 pass. Hosted checks were pending at
+capture. The production browser sweep remains partial and metadata/llms
+findings stay held under the truth freeze. Neither backlog item passes yet:
+deployed compatibility, complete authenticated browser/CWV evidence, human
+screen-reader review, and the payment/provider gates remain open. No checkbox,
+production, provider, database, payment, migration, or deployment state
+changed. Count remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-004-qual-web-006-batch-2026-10-08.md`.
+
 ## DIST-006 / QUAL-WEB-006 current checkpoint · 2026-10-08
 
 CLI PR #83 merged as `c1a2856`. The local rollback/revocation rehearsal covers

@@ -1,5 +1,32 @@
 # Verglos shipping decisions
 
+## 2026-10-08 · Accept only the bounded accessibility correction from the route sweep
+
+- **Decision:** Keep the `/docs/2.0.0` contrast correction in Web PR #164, but
+  do not change public metadata, pricing, copy, or the unlinked `/pricing`
+  route during this batch.
+- **Evidence:** Local post-fix Lighthouse is Accessibility 100 / Best Practices
+  100; Web typecheck, truth-registry 25/25, serial 862/24/0, and 45-page
+  build pass. Remaining route findings are the held meta-description and
+  optional llms.txt recommendation.
+- **Reason:** The contrast defect is a concrete WCAG-affecting styling issue;
+  metadata and pricing changes are explicitly reserved for the founder-
+  authorized truth pass.
+- **Boundary:** QUAL-WEB-006 remains open for human screen-reader, keyboard,
+  paid/org data, large-data, responsive, field-CWV, and complete route
+  evidence. No production state changed.
+
+## 2026-10-08 · Preserve legacy entitlement activation during v2 unavailability
+
+- **Decision:** Keep legacy v1 entitlement persistence as the compatibility
+  fallback when v1 validation succeeds but v2 issuance returns a bounded
+  unavailable response.
+- **Evidence:** CLI PR #84 source `7c02099`; focused process/entitlement suite
+  63/63 and local full test/typecheck/build/lint gates pass.
+- **Boundary:** This is local synthetic compatibility evidence only. Deployed
+  signer/catalog alignment, released-version migration, and hosted activation
+  remain required before PLAN-CLI-004 acceptance.
+
 ## 2026-10-08 · Resolve truth-registry mirror divergence
 
 - **Observation:** The objective names `VERGLOS_TRUTH_REGISTRY.md`, but the
