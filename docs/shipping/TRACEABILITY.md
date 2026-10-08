@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 paid dashboard route boundary · 2026-10-08
+
+Authenticated Free-session navigation to Monitoring, Alerts, Score History,
+and Activations redirected to the personal account boundary without tenant
+data. The redirected mobile account surface scored Lighthouse
+Accessibility/Best Practices/SEO **100/100/100** with no console messages.
+This is Free isolation evidence only; paid dashboard, large-data,
+screen-reader, and field-CWV qualification remain open. No checkbox changed.
+See
+`docs/shipping/evidence/qual-web-006-paid-route-boundary-mobile-2026-10-08.md`.
+
 ## QUAL-WEB-005 local deletion integration qualification · 2026-10-08
 
 The current Web source passed the isolated account-deletion job integration

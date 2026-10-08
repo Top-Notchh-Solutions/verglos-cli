@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · QUAL-WEB-006 paid dashboard route boundary mobile slice
+
+Read-only mobile navigation to Monitoring, Alerts, Score History, and
+Activations from the authenticated Free session redirected each route to the
+personal account boundary. No tenant data, buttons, or forms were exposed;
+the resulting account surface scored Lighthouse Accessibility/Best
+Practices/SEO **100/100/100** with no console messages. This confirms Free
+isolation only, not paid dashboard qualification. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-paid-route-boundary-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-005 local deletion integration qualification
 
 The bounded privacy/deletion batch passed the isolated integration path

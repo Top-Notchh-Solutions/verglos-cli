@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · QUAL-WEB-006 paid dashboard route boundary mobile slice
+
+- **Runtime:** Existing authenticated Free Chrome session; requested
+  `/account/monitoring`, `/account/alerts`, `/account/history`, and
+  `/account/activations` under 390×844 mobile/touch and Fast 3G emulation.
+- **Result:** All four routes redirected to `/account`; no tenant data,
+  buttons, or forms were exposed. The redirected account surface scored
+  Lighthouse Accessibility/Best Practices/SEO **100/100/100** and produced
+  no console messages.
+- **Disposition:** Free-session isolation evidence only. Paid organization
+  dashboards, roles, large data, screen-reader, and field-CWV evidence remain
+  open. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Safety:** Read-only browser run; no production, database, payment,
+  entitlement, or deployment write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-paid-route-boundary-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-005 local deletion integration qualification
 
 - **Environment:** Disposable loopback-only PostgreSQL 15 Alpine container at
