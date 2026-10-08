@@ -30,6 +30,39 @@ Production is not excluded from this goal. It has four explicit stages:
 4. post-activation monitoring, payment/entitlement reconciliation, and
    rollback or forward-fix rehearsal.
 
+The current Production operation is a complete fail-closed code-rollout
+track, not a partial omission. For the current deployment, include all of the
+following in the Production work record:
+
+- inspect the exact source commit, build, runtime configuration shape, domain,
+  deployment state, health routes, logs, and rollback target without exposing
+  secrets or personal data;
+- deploy the reviewed application code to Production after typecheck, focused
+  tests, required full-suite checks, build, runtime-config validation, and
+  rollback-target verification;
+- verify the deployed public routes, HTTP methods, authentication boundaries,
+  console/runtime errors, checkout rendering, headers, caching, and
+  fail-closed behavior;
+- verify that Production has the correct environment separation and that no
+  Preview/Test Mode plan IDs, test database URL, test webhook secret, or test
+  credentials were copied into it;
+- record the deployment identifier, alias, source commit, build result,
+  smoke result, limitations, and rollback path in the private ledger and
+  evidence archive; and
+- keep recurring billing, provider writes, database migrations/backfills,
+  payment captures/refunds, entitlement changes, account changes, and
+  customer-data mutations disabled until each operation has its own approved
+  preflight, backup/restore or recovery evidence, reconciliation check, and
+  rollback/forward-fix decision.
+
+Therefore, the current Production statement is:
+
+> Deploy the reviewed code to Production as a fail-closed code rollout only.
+> No Production plan IDs, payment writes, database writes, migration writes,
+> entitlement changes, account changes, or customer-data mutations occur in
+> this rollout. These are deferred activation stages in the same shipping
+> goal, not removed from scope.
+
 Test Mode credentials, Test Mode plan IDs, Preview databases, and test
 webhook fixtures must never be copied into Production. A Production deploy
 with recurring billing disabled is still a real Production shipping event;
@@ -492,7 +525,10 @@ for each operation:
 Production is therefore neither skipped nor treated as a substitute for
 isolated Test Mode evidence. Production deployment can proceed when its code
 rollout preflight passes; Production billing/database activation proceeds only
-when its separate write preflight passes.
+when its separate write preflight passes. Every Production resume must report
+which of the audit, code-rollout, configuration, write-activation,
+post-deploy-reconciliation, monitoring, and rollback items were executed,
+which remain deferred, and why.
 
 The immediate technical sequence is:
 

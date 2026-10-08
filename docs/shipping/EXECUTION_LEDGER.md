@@ -5923,3 +5923,17 @@ authenticated surfaces; the homepage SEO score was 100. This does not replace
 human screen-reader, large-dataset, complete-route, or field/CrUX evidence.
 No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
 `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
+# 2026-10-09 — Production scope clarified: fail-closed code rollout
+
+- **Included:** Production source/build verification, runtime configuration
+  separation, deployment identity, public route/method/auth smoke, checkout
+  rendering, error/log checks, rollback target, and private evidence.
+- **Explicit boundary:** no Production plan IDs, payment/provider writes,
+  database or migration writes, entitlement changes, account changes, or
+  customer-data mutations. Test Mode and Preview values remain isolated.
+- **Disposition:** Production is not skipped. Billing/database activation,
+  post-deploy reconciliation, monitoring, and rollback/forward-fix rehearsal
+  remain later stages of this same goal and require operation-specific
+  preflight evidence.
+- **Backlog:** no checkbox changed; **219 checked / 61 unchecked / 280 total
+  (78.2%)**.

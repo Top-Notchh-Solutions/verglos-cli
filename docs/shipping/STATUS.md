@@ -17,6 +17,17 @@ disabled there until a separate live-mode Production activation preflight is
 approved. No Production database, migration, payment, provider,
 entitlement, account, or customer write occurred.
 
+Production is included in the active shipping goal as a complete staged
+track. The current operation is explicitly a fail-closed code rollout: source
+and build verification, runtime-config separation, public route/method/auth
+smoke, checkout rendering, error/log checks, deployment evidence, and a
+rollback target are in scope. No Production plan IDs, payment writes,
+database or migration writes, entitlement changes, account changes, or
+customer-data mutations occur in this rollout. Those activation and
+post-activation reconciliation/monitoring/rollback stages remain in the same
+goal and require their own preflight evidence; they are deferred, not
+omitted.
+
 The next technical batch is the authenticated isolated Preview/Test Mode
 subscription lifecycle, followed by provider/ledger/entitlement
 reconciliation. Production remains an active track for read-only audit,
