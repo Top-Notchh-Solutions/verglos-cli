@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## DIST-006 rollback rehearsal and public docs audit · 2026-10-08
+
+CLI PR #83 merged as `c1a2856` with a local-only five-boundary rollback/
+revocation rehearsal. Focused tests **4/4**, full CLI test tasks **12/12**,
+typecheck **13/13**, build **8/8**, lint **5/5**, and hosted self-scan/in-toto
+plus 10/11 platform cells are green; Windows Node 20 remains in progress.
+The repository license inventory command was run locally without the workflow's
+cross-platform optional-package provisioning and reported missing optional
+esbuild metadata; the hosted cross-platform license setup step passed. No
+provider, registry, signing, deployment, database, payment, or production
+write occurred. The private tracker also records a read-only `/docs` audit
+finding: legacy `$29/mo` and `$199/mo` rows conflict with the verified INR Pro
+catalog. Public copy remains frozen for the final truth pass. No checkbox
+changed; backlog remains **218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/dist-006-rollback-rehearsal-2026-10-08.md` and
+`docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
+
 ## ENT-CLI-001 concurrent result replay hardening · 2026-10-08
 
 Web PR #160 merged as `4cc1f5d3098435a845cffaae010f72c981ac8bcd`. Result

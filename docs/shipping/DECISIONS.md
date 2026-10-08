@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-08 · Resolve truth-registry mirror divergence
+
+- **Observation:** The objective names `VERGLOS_TRUTH_REGISTRY.md`, but the
+  private tracker has no current mirrored file. The public CLI worktree has an
+  older untracked founder-owned copy with stale checkpoints and must remain
+  untouched.
+- **Resolution:** Treat the private backlog, evidence, status, risks,
+  decisions, traceability, execution ledger, and release gates as the current
+  shipping authority. Preserve the public untracked asset and schedule a
+  reviewed truth-registry reconciliation before any final public-copy edit.
+- **Reason:** This prevents a stale public mirror from silently overriding
+  current production, Web, CLI, and private evidence.
+- **Boundary:** No public file, price, deployment, database, provider, payment,
+  or production state changed.
+
 ## 2026-10-08 · Hold public docs price correction for final truth pass
 
 - **Observation:** Read-only production `/docs` passed Accessibility, Best

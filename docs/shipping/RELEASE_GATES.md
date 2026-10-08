@@ -1,5 +1,27 @@
 # Verglos V1 release gates
 
+## DIST-006 / QUAL-WEB-006 current checkpoint · 2026-10-08
+
+CLI PR #83 merged as `c1a2856`. The local rollback/revocation rehearsal covers
+the five required kinds and preserves historical references, but it does not
+pass the distribution gate: authenticated registry/engine/feed/signing/Web
+rollback, trusted publication, legal clearance, and operational review remain
+missing. Hosted in-toto, self-scan, all macOS/Ubuntu cells, and Windows Node 22
+and 24 passed; Windows Node 20 remains in progress. The read-only `/docs`
+browser audit passed Accessibility/Best Practices/SEO at 100 with no console
+warnings, but found stale dollar pricing and therefore does not pass the final
+truth/public-copy gates. No checkbox or production state changed; backlog
+remains **218/62/280 (77.9%)**.
+
+## Mirror reconciliation note · 2026-10-08
+
+The objective references `VERGLOS_TRUTH_REGISTRY.md`, but the private tracker
+does not currently contain a mirrored copy. The public CLI worktree contains an
+older untracked founder-owned copy; it is preserved and is not used as current
+acceptance truth. Current private backlog, evidence, status, risks, decisions,
+and release-gate entries are the authoritative shipping record until a reviewed
+truth-registry reconciliation batch is authorized.
+
 ## ENT-CLI-001 concurrent result replay hardening · 2026-10-08
 
 Web PR #160 merged as `4cc1f5d3098435a845cffaae010f72c981ac8bcd`. A fresh

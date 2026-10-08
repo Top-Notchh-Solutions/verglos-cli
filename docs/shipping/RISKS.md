@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## R-001 / R-012 update · 2026-10-08
+
+The read-only production `/docs` audit found legacy `$29/mo` and `$199/mo`
+rows while the current verified Pro catalog is INR. This is an open public
+truth/release risk, not permission to infer Team/Studio/Enterprise pricing.
+Containment is to keep the final public-copy/pricing pass frozen until the
+truth registry and release-candidate gates authorize correction. The local
+DIST-006 rehearsal reduces rollback decision ambiguity but does not mitigate
+the absence of authenticated provider rollback or trusted release operations.
+Owner: Product Truth / Release Engineering. No production or public write
+occurred.
+
 ## R-PLAN-WEB-012-out-of-order-payment · 2026-10-08
 
 Web PR #161 now promotes a failed payment row when a later capture carries the
