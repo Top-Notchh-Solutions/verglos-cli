@@ -33,6 +33,22 @@
   cancellation, expiry, replay, timeout, refund, and tenant evidence. Count
   remains **218/62/280 (77.9%)**.
 
+## 2026-10-09 · Accept code-side payment qualification; retain provider lifecycle gate
+
+- **Decision:** Accept the isolated database and code-side payment
+  qualification rerun as evidence, but do not mark PLAN-WEB-014 complete.
+- **Evidence:** Razorpay Test Mode has 16 canonical-amount payment rows with
+  captured card/netbanking/wallet/`cardless_emi` outcomes, failed
+  card/netbanking/wallet outcomes, and two processed full refunds. The
+  isolated Docker PostgreSQL hosted-order, ledger, webhook-handler, and
+  webhook-claim integrations pass 6/6; focused payment/runtime tests pass
+  55/55 with one intentional skip; typecheck and the 43-route build pass.
+- **Boundary:** The provider account has zero Test Mode subscriptions and the
+  current Web surface has no subscription-creation route. Therefore provider
+  renewal/cancellation/expiry evidence cannot be claimed, and the remaining
+  provider-side matrix stays open. No production payment, database,
+  entitlement, customer record, or backlog checkbox changed.
+
 ## 2026-10-09 · Qualify the isolated hosted capture/refund slice and keep the full matrix open
 
 - **Decision:** Accept the protected Preview capture → signed webhook →

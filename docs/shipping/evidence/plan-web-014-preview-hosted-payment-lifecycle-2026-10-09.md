@@ -10,6 +10,38 @@ provider-testable method set (`card,netbanking,wallet,emi`) and redeployed.
 No Production database, credential, webhook, payment, entitlement, or
 customer record changed.
 
+## 2026-10-09 qualification rerun
+
+The Razorpay Test Mode API was queried read-only after the method set was
+narrowed. The account contained 16 payments, all at the canonical monthly Pro
+amount of 280,943 minor units (INR):
+
+- `card`: captured 1, failed 3, created 1
+- `netbanking`: captured 1, failed 3, refunded 2, created 2
+- `wallet`: captured 1, failed 1
+- `cardless_emi` (the provider outcome for the enabled EMI surface): captured 1
+- two processed full refunds, each for 280,943 minor units
+
+No UPI, UPI QR, or Pay Later payment row was present. The provider also
+reported zero Test Mode subscriptions, so no provider-side renewal,
+cancellation, or expiry record can be claimed for this account.
+
+The isolated Docker PostgreSQL database was restarted and the reviewed
+migration set was applied. Database-backed qualification then passed:
+
+- hosted order route: 2/2
+- billing ledger integration: 1/1
+- webhook handler integration: 2/2
+- webhook claim/replay integration: 1/1
+- focused billing/webhook/runtime suite: 55 pass, 0 fail, 1 intentional skip
+- typecheck and 43-route production build: pass
+
+These tests prove the code-side renewal ordering, cancellation state
+ordering, expiry/paid-time preservation, replay and conflicting-identity
+handling, partial/full refund watermark behavior, tenant-bound hosted order
+binding, and failed-payment non-granting behavior. They do not substitute for
+a provider-created subscription lifecycle.
+
 ## Scope
 
 This record extends the earlier method-display and failure-path probe with a

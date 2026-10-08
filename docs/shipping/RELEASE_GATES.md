@@ -21,6 +21,24 @@ cases. No database, key, webhook, payment, entitlement, or customer record
 changed. No checkbox changed; count remains **218/62/280 (77.9%)**. Evidence:
 `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`.
 
+## PLAN-WEB-014 qualification rerun · 2026-10-09
+
+The read-only Razorpay Test Mode aggregate contains 16 canonical-amount
+payments: captured outcomes for card, netbanking, wallet, and the provider's
+`cardless_emi` outcome; failed outcomes for card, netbanking, and wallet; and
+two processed full refunds. No UPI, UPI QR, or Pay Later row exists. The
+account has zero Test Mode subscriptions, so provider-side renewal,
+cancellation, and expiry evidence is unavailable rather than inferred.
+
+The restarted isolated Docker PostgreSQL path passed the hosted-order,
+ledger-renewal/refund, webhook-handler, and webhook-claim/replay integrations
+(6/6), the focused payment/runtime suite (55 pass, 0 fail, 1 intentional
+skip), typecheck, and the 43-route production build. This closes the
+code-side qualification slice, but does not close PLAN-WEB-014: a provider
+subscription lifecycle and the remaining provider-side matrix are still
+required. No checkbox changed; count remains **218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`.
+
 ## PLAN-WEB-014 isolated Preview hosted lifecycle correction · 2026-10-09
 
 The first real Razorpay Test Mode capture exposed a production-code defect in
