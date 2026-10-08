@@ -4699,3 +4699,16 @@ App/org/webhook/cutover evidence remains open.
 - **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
   (77.9%)**. PLAN-WEB-014/015 remain open.
 - **Evidence:** `docs/shipping/evidence/preview-payment-safety-2026-10-08.md`.
+
+# 2026-10-08 — Preview live-key guard merged
+
+- **Merge:** Web PR #156 merged as `f75609f14a8c6b385663b768226cf2c0586c0812`
+  after hosted type/schema, serial, negative-boundary, truth-registry,
+  database/migration, build, boundary, dependency/license, GitGuardian, and
+  Vercel checks passed.
+- **Disposition:** Preview now fails closed if payment methods are configured
+  with live Razorpay keys or incomplete test credentials. This is a safety
+  control, not payment lifecycle evidence.
+- **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
+  (77.9%)**. PLAN-WEB-014/015 remain open.
+- **Evidence:** `docs/shipping/evidence/preview-payment-guard-pr-156-2026-10-08.md`.

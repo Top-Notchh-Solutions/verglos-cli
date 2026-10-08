@@ -711,3 +711,10 @@ live checkout smoke. Preview was kept fail-closed because its available
 environment used live-key metadata and no isolated test database was present;
 the temporary method-enabled Preview deployment was deleted. Test Mode
 qualification remains blocked on isolated database and test-credential setup.
+
+R-041 payment/Preview guard update (2026-10-08): Web PR #156 merged as
+`f75609f14a8c6b385663b768226cf2c0586c0812` after hosted verification passed.
+Preview now rejects configured payment methods backed by live Razorpay keys or
+incomplete test credentials. This reduces accidental live-key exposure but does
+not establish provider lifecycle, method matrix, or production reconciliation
+evidence; PLAN-WEB-014/015 remain open.
