@@ -1,5 +1,5 @@
-import { createHash } from "node:crypto";
-import { lstat, mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
+import { chmod, lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import chalk from "chalk";
@@ -103,11 +103,24 @@ async function readCache(): Promise<CachedCapabilities | null> {
 }
 
 async function writeCache(entry: CachedCapabilities): Promise<void> {
+  const path = cacheFile();
+  const temporary = `${path}.${randomUUID()}.tmp`;
+  let handle: Awaited<ReturnType<typeof open>> | undefined;
   try {
     await mkdir(cacheDir(), { recursive: true });
-    await writeFile(cacheFile(), JSON.stringify(entry, null, 2), "utf8");
+    await chmod(cacheDir(), 0o700);
+    handle = await open(temporary, "wx", 0o600);
+    await handle.writeFile(JSON.stringify(entry, null, 2), "utf8");
+    await handle.chmod(0o600);
+    await handle.sync();
+    await handle.close();
+    handle = undefined;
+    await rename(temporary, path);
   } catch {
     // non-fatal — next call will just re-fetch.
+  } finally {
+    if (handle) await handle.close().catch(() => undefined);
+    await unlink(temporary).catch(() => undefined);
   }
 }
 
@@ -486,7 +499,7 @@ export async function requireCapability(
 
 export async function clearCache(): Promise<void> {
   try {
-    await writeFile(cacheFile(), "{}", "utf8");
+    await unlink(cacheFile());
   } catch {
     // ignore
   }

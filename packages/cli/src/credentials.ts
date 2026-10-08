@@ -1,7 +1,7 @@
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { homedir, hostname, userInfo } from "node:os";
-import { join } from "node:path";
-import { lstat, mkdir, readFile, writeFile, access } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { access, chmod, lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
 
 export interface Credentials {
   licenseKey?: string;
@@ -31,6 +31,26 @@ const credentialsDir = () => join(configuredHome(), ".verglos");
 const credentialsFile = () => join(credentialsDir(), "credentials.json");
 const scoreCacheFile = () => join(credentialsDir(), "last-score.json");
 const MAX_UNLOCK_RESPONSE_BYTES = 256 * 1024;
+
+async function writePrivateJson(path: string, value: unknown): Promise<void> {
+  const bytes = Buffer.from(JSON.stringify(value, null, 2), "utf8");
+  await mkdir(dirname(path), { recursive: true, mode: 0o700 });
+  await chmod(dirname(path), 0o700);
+  const temporary = `${path}.${randomUUID()}.tmp`;
+  let handle: Awaited<ReturnType<typeof open>> | undefined;
+  try {
+    handle = await open(temporary, "wx", 0o600);
+    await handle.writeFile(bytes);
+    await handle.chmod(0o600);
+    await handle.sync();
+    await handle.close();
+    handle = undefined;
+    await rename(temporary, path);
+  } finally {
+    if (handle) await handle.close().catch(() => undefined);
+    await unlink(temporary).catch(() => undefined);
+  }
+}
 
 async function readBoundedJson(response: Response): Promise<unknown> {
   const length = Number(response.headers.get("content-length") ?? "0");
@@ -62,8 +82,7 @@ export async function loadCredentials(): Promise<Credentials> {
 
 export async function saveCredentials(creds: Credentials): Promise<void> {
   try {
-    await mkdir(credentialsDir(), { recursive: true });
-    await writeFile(credentialsFile(), JSON.stringify(creds, null, 2), "utf8");
+    await writePrivateJson(credentialsFile(), creds);
   } catch {
     // Non-fatal if home dir is not writable
   }
@@ -152,7 +171,7 @@ export async function saveLastScore(
       // fresh
     }
     cache[key] = { score, criticals };
-    await writeFile(scoreCacheFile(), JSON.stringify(cache, null, 2), "utf8");
+    await writePrivateJson(scoreCacheFile(), cache);
   } catch {
     // Non-fatal
   }
