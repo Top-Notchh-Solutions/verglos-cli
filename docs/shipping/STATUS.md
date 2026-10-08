@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Canonical correction — latest Production fail-closed rollout
+
+The older `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` entry below is historical and is
+superseded by the latest reviewed Web source `a95deef` deployed as
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY and aliased to `https://verglos.com`.
+The latest runtime-config check, 45-page build, and read-only public smoke
+passed. Production remains a code-only fail-closed rollout: no Production
+plan IDs, payment/provider writes, database or migration writes, entitlement
+changes, account changes, or customer-data mutations occurred. The canonical
+score remains **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+changed. See the invoice-reconciliation evidence for the complete record:
+`docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · current Production rollout — fail-closed code only
 
 The reviewed Web source `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` is now

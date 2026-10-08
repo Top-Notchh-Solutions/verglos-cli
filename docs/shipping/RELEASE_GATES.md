@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Canonical correction — latest Production code-rollout record
+
+The older `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` entry below is historical and is
+superseded by Web source `a95deef` and Production deployment
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY and aliased to `https://verglos.com`.
+The remote runtime-config check, 45-page build, and read-only public smoke
+passed. This remains a complete fail-closed code rollout only: no Production
+plan IDs, payment/provider writes, database or migration writes, entitlement
+changes, account changes, or customer-data mutations occurred. Gate 4 is still
+open for the remaining provider lifecycle and provider/ledger/entitlement
+reconciliation evidence. Score remains **219/61/280 (78.2%)**; no checkbox
+changed. Canonical evidence:
+`docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+
 ## Current Production code-rollout qualification · 2026-10-09
 
 Production deployment `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` reached READY and is

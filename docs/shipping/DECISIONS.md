@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Supersede stale Production deployment reference
+
+- **Decision:** Treat Web source `a95deef` and Production deployment
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` as the current Production code-rollout
+  record. Older deployment identifiers remain historical and must not be used
+  as the current state.
+- **Boundary:** The rollout is fail-closed and code-only. No Production plan
+  IDs, payment/provider writes, database or migration writes, entitlement
+  changes, account changes, or customer-data mutations occurred. Billing and
+  database activation remain included later stages with operation-specific
+  preflight, recovery, reconciliation, and rollback evidence.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Promote reviewed code to Production without activation writes
 
 - **Decision:** Deploy the reviewed Web source to Production as a complete

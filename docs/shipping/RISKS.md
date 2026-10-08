@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## R-PROD-code-rollout-without-billing-activation · canonical 2026-10-09
+
+The current reviewed Web source `a95deef` is deployed as Production
+deployment `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY and aliased to
+`https://verglos.com`. Runtime configuration, the 45-page build, and
+read-only public smoke passed. Production remains fail-closed: no plan IDs,
+payment/provider writes, database or migration writes, entitlement changes,
+account changes, or customer-data mutations occurred. Residual risk is the
+unqualified live billing/database activation, deeper monitoring, rollback
+rehearsal, and provider/ledger/entitlement reconciliation. Owner:
+Web/release operations. The earlier same-day deployment references below are
+historical and superseded. Evidence:
+`docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+
 ## R-PROD-code-rollout-without-billing-activation · current 2026-10-09
 
 Production is now deployed from the reviewed Web source as

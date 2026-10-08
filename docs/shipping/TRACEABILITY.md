@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Canonical correction — Production rollout identity
+
+The current Production trace is Web source `a95deef` deployed as
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY and aliased to `https://verglos.com`.
+The runtime-config check, 45-page build, public route/method/auth smoke, and
+fail-closed environment separation passed. The older deployment identifiers
+below remain historical records and do not describe the current deployment.
+No Production plan IDs, payment/provider writes, database or migration writes,
+entitlement changes, account changes, or customer-data mutations occurred.
+The current score is **219 checked / 61 unchecked / 280 total (78.2%)**.
+Canonical evidence:
+`docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed code rollout
 
 - **Implementation/deployment:** Reviewed Web source

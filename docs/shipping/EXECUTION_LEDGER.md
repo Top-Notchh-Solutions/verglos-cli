@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Canonical Production rollout reconciliation
+
+- **Purpose:** Reconcile the private shipping control plane after the latest
+  reviewed Web source `a95deef` was promoted to Production. Older same-day
+  deployment identifiers remain historical; they are not the current
+  Production state.
+- **Current deployment:** `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY and
+  aliased to `https://verglos.com`. The remote runtime-config check, 45-page
+  build, and read-only public smoke passed.
+- **Production boundary:** Code rollout and read-only qualification only. No
+  Production plan IDs, payment/provider writes, database or migration writes,
+  entitlement changes, account changes, or customer-data mutations occurred.
+  Test Mode and Preview values remain isolated.
+- **Records reconciled:** `STATUS.md`, `TRACEABILITY.md`, `DECISIONS.md`,
+  `RISKS.md`, and `RELEASE_GATES.md` now identify the latest deployment and
+  preserve older entries as historical evidence. The active goal already
+  contains the same exhaustive Production boundary.
+- **Disposition:** Production is included and current for the fail-closed
+  code-rollout stage. Billing/database activation, monitoring depth,
+  reconciliation, and rollback rehearsal remain later operation-specific
+  stages. Gate 4 remains open; no checkbox changed.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed code rollout — dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg
 
 - **Source/preflight:** Reviewed Web source `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` was deployed after the configured Web serial suite passed **865 / 23 explicit skips / 0 fail**, local typecheck passed after the build completed, and the local production build generated 45 pages. The remote Vercel runtime-config check and build also passed.
