@@ -6,8 +6,9 @@ open and no backlog checkbox changed.
 
 ## Code and hosted review
 
-- Web PR #162 initial auth-seam commit: `d3f7dced`; current exact head:
-  `0e57200f01e9faebb7057b669706891e7e31407e`.
+- Web PR #162 initial auth-seam commit: `d3f7dced`; worker-flow commit
+  `0e57200f`; current exact head:
+  `3061b9a14bd01ba22e0076b8c30d71d387483ade`.
 - The account deletion, customer-held digest, and operator hold routes now
   use the existing `requestAuth()` / `requestCurrentUser()` seam. Production
   still resolves the real Clerk request context; only the explicit
@@ -41,6 +42,10 @@ open and no backlog checkbox changed.
 - A later attempt to rerun the entire database-backed serial suite was stopped
   after an earlier shared-fixture process removed the legacy `users` table from
   the disposable database; it is not counted as current-head evidence.
+- The current integration test performs a read-only required-table preflight
+  and records an explicit skip when run against CI's intentionally un-migrated
+  shared fixture. It still runs fully when the reviewed isolated database has
+  the application migrations.
 - `pnpm typecheck`, `pnpm db:check`, `pnpm db:migrations:check`,
   `git diff --check`, and the preview-safe production build passed. The build
   generated 45 pages.

@@ -5362,8 +5362,8 @@ App/org/webhook/cutover evidence remains open.
 # 2026-10-08 — QUAL-WEB-005 authenticated route qualification progress
 
 - **Source:** Web PR #162 current exact head
-  `0e57200f01e9faebb7057b669706891e7e31407e7` (initial auth-seam commit
-  `d3f7dce`).
+  `3061b9a14bd01ba22e0076b8c30d71d387483ade` (initial auth-seam commit
+  `d3f7dce`, worker-flow commit `0e57200`).
 - **Result:** Account deletion, customer-held digest, and operator hold routes
   use the production-safe request-auth seam. Authenticated route integration
   executes the bounded worker to a completed request/job while preserving the
@@ -5372,7 +5372,8 @@ App/org/webhook/cutover evidence remains open.
   skips and zero failures**. The clean database-backed run at the initial
   auth-seam head passed **876/885** with eight known shared-fixture schema
   collisions and one skip; on a rebuilt isolated database, the current
-  route-to-worker and existing deletion-job integrations passed **2/2**.
+  route-to-worker and existing deletion-job integrations passed **2/2**; the
+  shared fixture skips cleanly when its migrated tables are absent.
   Typecheck, schema/migration checks, diff check, and the
   preview-safe **45-page** build passed locally.
 - **Hosted:** PR #162 hosted verification was still running at capture;

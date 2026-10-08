@@ -3832,7 +3832,7 @@ production reconciliation evidence. No checkbox changed; backlog remains
 
 ## 2026-10-08 · QUAL-WEB-005 route qualification batch
 
-Web PR #162 current exact head `0e57200f01e9faebb7057b669706891e7e31407e`
+Web PR #162 current exact head `3061b9a14bd01ba22e0076b8c30d71d387483ade`
 extends the initial auth-seam commit `d3f7dce`: account deletion and
 customer-held digest routes use the production-safe request-auth seam, and
 isolated authenticated route integration now executes the bounded worker to a
@@ -3843,8 +3843,9 @@ the safe-default Web serial suite passed
 database-backed serial run passed **876/885**, with eight known shared-fixture
 schema collisions and one skip at the initial auth-seam head; on a rebuilt
 isolated database, the current route-to-worker and existing deletion-job
-integrations passed **2/2**. A later full-database rerun was stopped after a
-shared-fixture process removed the legacy `users` table. Typecheck,
+integrations passed **2/2**. The shared-fixture integration now skips cleanly
+when its required migrated tables are absent. A later full-database rerun was
+stopped after a shared-fixture process removed the legacy `users` table. Typecheck,
 schema/migration checks, diff check, and the preview-safe **45-page** build
 passed locally. Hosted verification for PR #162 was running at capture;
 Vercel Preview Comments was green and the Vercel deployment check was pending.

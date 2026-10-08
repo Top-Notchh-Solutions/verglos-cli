@@ -2740,7 +2740,7 @@ payment lifecycle is claimed. See
 ## QUAL-WEB-005 authenticated route seam and isolated integration · 2026-10-08
 
 Web PR #162 current exact head
-`0e57200f01e9faebb7057b669706891e7e31407e7` extends the initial auth-seam
+`3061b9a14bd01ba22e0076b8c30d71d387483ade` extends the initial auth-seam
 commit `d3f7dce`: deletion, customer-held digest, and operator hold routes use
 the production-safe request-auth seam, and authenticated route integration
 executes the bounded worker to a completed request/job while preserving the
@@ -2749,7 +2749,8 @@ deletion/hold/inventory/worker contracts passed **23/23**; the safe-default seri
 **861/885 with 24 explicit skips and zero failures**. The clean
 database-backed run at the initial auth-seam head was 876/885 with the known
 eight shared-fixture collisions; the current head's rebuilt isolated
-route-to-worker/deletion-job integrations pass 2/2. Typecheck,
+route-to-worker/deletion-job integrations pass 2/2; the shared fixture skips
+cleanly when its migrated tables are absent. Typecheck,
 schema/migration checks, diff check, and
 the preview-safe 45-page build passed locally. This is code-side and isolated
 integration evidence only; legal/customer-held disposition, destructive-worker

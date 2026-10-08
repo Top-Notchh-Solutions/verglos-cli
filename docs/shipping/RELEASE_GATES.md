@@ -1339,14 +1339,15 @@ changed and no production/provider/database/deployment state changed. Evidence:
 ## QUAL-WEB-005 route integration progress · 2026-10-08
 
 PR #162 current exact head
-`0e57200f01e9faebb7057b669706891e7e31407e7` passes the isolated authenticated
+`3061b9a14bd01ba22e0076b8c30d71d387483ade` passes the isolated authenticated
 route integration **8/8**, deletion/hold/inventory/worker contracts **23/23**,
 safe-default serial **861/885 with 24 explicit
 skips and zero failures**, typecheck, schema/migration checks, diff hygiene,
 and the preview-safe 45-page build. The clean database-backed serial run at
 the initial auth-seam head had eight known shared-fixture schema collisions;
 the current head's rebuilt isolated route-to-worker/deletion-job integrations
-pass 2/2.
+pass 2/2; the shared fixture skips cleanly when its migrated tables are
+absent.
 This does not pass the deletion release gate: legal/customer-held disposition,
 destructive-worker E2E, reconciliation, restore/rollback, production
 authorization, and independent acceptance remain open. No checkbox or
