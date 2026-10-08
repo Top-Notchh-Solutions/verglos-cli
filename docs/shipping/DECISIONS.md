@@ -16,6 +16,19 @@
   open; no provider, production, database, payment, webhook, or entitlement
   write occurred.
 
+## 2026-10-08 · Freeze the failing Test Mode credential after bounded route attempt
+
+- **Correction:** The local browser qualification made one bounded hosted-order
+  request through the app after the Preview fixture authenticated. Razorpay
+  returned the app’s bounded provider-failure response before an order was
+  created; this was not a successful payment or lifecycle event.
+- **Decision:** Make no further provider requests with this credential until it
+  is repaired or rotated. Preserve the failure as a limitation, not as a
+  provider-method result.
+- **Boundary:** Local database counts stayed zero for users, licenses,
+  payments, subscriptions, and webhook events. No production or deployment
+  write occurred.
+
 ## 2026-10-07 · Keep production fail-closed on unknown payment methods
 
 - **Decision:** Do not guess or add `RAZORPAY_ENABLED_PAYMENT_METHODS` in
