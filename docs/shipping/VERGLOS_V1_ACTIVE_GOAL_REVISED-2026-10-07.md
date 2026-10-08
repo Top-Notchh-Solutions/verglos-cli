@@ -186,6 +186,11 @@ a changed input or a clear acceptance need:
   gate without a paid fixture; privacy passed a mobile 100/100/100 Lighthouse
   snapshot and organizations loaded without mutation. Treat paid-route
   coverage as missing rather than as a failure or acceptance pass.
+- A fresh production `/account` lab trace measured LCP 784 ms, TTFB 100 ms,
+  render delay 684 ms, and CLS 0.00, with no CrUX field data. The concurrent
+  YouTube-tab network chain was excluded as contaminated; no performance code
+  change was justified by the 14.4 KiB legacy-JavaScript finding because its
+  estimated FCP/LCP savings were zero.
 
 Private evidence for the latest CLI batch is:
 

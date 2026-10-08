@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## QUAL-WEB-006 authenticated account performance trace · 2026-10-09
+
+The fresh production `/account` lab trace measured LCP **784 ms**, TTFB **100
+ms**, LCP render delay **684 ms**, and CLS **0.00**; CrUX field data was
+unavailable. The concurrent YouTube-tab network chain was excluded as
+contaminated. Legacy-JavaScript analysis found 14.4 KiB with zero estimated
+FCP/LCP savings, so no code change was justified. This strengthens lab
+evidence only; field INP, large-data, complete-route, screen-reader, and final
+truth evidence remain open. No checkbox changed; the exact score remains
+**218 checked / 62 unchecked / 280 total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-account-performance-trace-2026-10-09.md`.
+
 ## QUAL-WEB-006 authenticated account runtime requalification · 2026-10-09
 
 The current production authenticated `/account` route passed a read-only

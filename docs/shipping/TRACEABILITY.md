@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 authenticated account performance trace · 2026-10-09
+
+- **Backlog strengthened:** `QUAL-WEB-006`; no checkbox accepted.
+- **Result:** Production `/account` cold reload measured LCP **784 ms**, TTFB
+  **100 ms**, render delay **684 ms**, and CLS **0.00**. CrUX field data was
+  unavailable. Legacy-JavaScript analysis found 14.4 KiB with zero estimated
+  FCP/LCP savings, so no code change was justified.
+- **Limitation:** A concurrent YouTube tab contaminated the trace's network
+  chain; that cross-tab chain was excluded from product conclusions. Field
+  INP, large-data, full-route, screen-reader, and truth evidence remain open.
+  Score remains **218/62/280 (77.9%)**.
+- **Boundary:** Read-only browser observation; no production or hosted state
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-account-performance-trace-2026-10-09.md`.
+
 ## QUAL-WEB-006 authenticated account runtime requalification · 2026-10-09
 
 - **Backlog strengthened:** `QUAL-WEB-006`; no checkbox accepted.

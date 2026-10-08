@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · QUAL-WEB-006 authenticated account performance trace
+
+- **Verification:** Fresh read-only Chrome DevTools reload of production
+  `/account` measured LCP **784 ms**, TTFB **100 ms**, LCP render delay
+  **684 ms**, and CLS **0.00**; no CrUX field data was available.
+- **Finding:** Approximately 14.4 KiB of legacy JavaScript was identified with
+  zero estimated FCP/LCP savings; no code change was justified. A concurrent
+  YouTube tab contaminated the cross-tab network-chain view, which was
+  excluded from Verglos conclusions.
+- **Disposition:** Strengthens lab performance evidence for `QUAL-WEB-006`;
+  field/CrUX, INP interaction coverage, large-data, complete route,
+  screen-reader, and final truth gates remain open. No checkbox changed; score
+  remains **218/62/280 (77.9%)**.
+- **Boundary:** No production/database/migration/payment/provider/deployment,
+  account, entitlement, deletion, or customer-data write.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-account-performance-trace-2026-10-09.md`.
+
 ## 2026-10-09 · QUAL-WEB-006 authenticated account runtime requalification
 
 - **Source:** Current production Web deployment `be4289f` recorded by the

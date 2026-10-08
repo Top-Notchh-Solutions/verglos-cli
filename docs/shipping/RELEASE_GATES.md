@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 authenticated account performance trace · 2026-10-09
+
+Production `/account` lab reload measured LCP **784 ms**, TTFB **100 ms**,
+render delay **684 ms**, and CLS **0.00**; CrUX field data was unavailable.
+The trace's cross-tab network chain was contaminated by a concurrent YouTube
+tab and was excluded. This strengthens lab evidence only; field INP,
+large-data, complete-route, screen-reader, and final truth evidence remain
+open. No checkbox or production state changed; count remains
+**218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-account-performance-trace-2026-10-09.md`.
+
 ## QUAL-WEB-006 authenticated account runtime requalification · 2026-10-09
 
 The current authenticated production `/account` route passed a clean

@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-QUAL-WEB-006-lab-field-gap · 2026-10-09
+
+The authenticated production account lab trace is strong (LCP 784 ms, TTFB
+100 ms, CLS 0.00), but no CrUX field data exists and INP was not measured with
+a representative interaction set. A concurrent YouTube tab made the trace's
+cross-tab network chain unusable for product conclusions. Residual risk is
+field performance, interaction coverage, and complete route qualification—not
+the excluded cross-tab chain. Evidence:
+`docs/shipping/evidence/qual-web-006-account-performance-trace-2026-10-09.md`.
+
 ## R-QUAL-WEB-006-authenticated-runtime-evidence · 2026-10-09
 
 The current production account route passed a clean authenticated read-only
