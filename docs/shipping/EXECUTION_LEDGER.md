@@ -123,6 +123,19 @@
 - **Evidence:**
   `docs/shipping/evidence/qual-web-006-account-keyboard-2026-10-08.md`.
 
+## 2026-10-08 · QUAL-WEB-006 authenticated account mobile runtime
+
+- **Runtime:** Current authenticated production `/account` under Chrome mobile
+  emulation, read-only; no console messages.
+- **Result:** LCP 587 ms, CLS 0.00, accessibility 100, best practices 100;
+  SEO 58 due expected private-route noindex/no-canonical plus the site-level
+  `llms.txt` finding.
+- **Disposition:** One-route evidence only; paid organization,
+  screen-reader, large-data, field-CWV, and final SEO/metadata gates remain
+  open. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-account-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 - **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;

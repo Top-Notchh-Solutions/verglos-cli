@@ -110,6 +110,18 @@ checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
 (77.9%)**. Evidence:
 `docs/shipping/evidence/qual-web-006-account-keyboard-2026-10-08.md`.
 
+## 2026-10-08 · QUAL-WEB-006 authenticated account mobile runtime
+
+The current authenticated production `/account` mobile-emulation run recorded
+LCP **587 ms**, CLS **0.00**, accessibility **100**, best practices **100**,
+and no console messages. Lighthouse SEO was 58 because the private route is
+blocked from indexing, has no canonical, and the site-level `llms.txt` audit
+fails; the first two are expected privacy behavior. This remains one-route
+evidence only, not paid organization, screen-reader, large-data, field-CWV,
+or final SEO qualification. No checkbox changed; backlog remains **218
+checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-account-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned
