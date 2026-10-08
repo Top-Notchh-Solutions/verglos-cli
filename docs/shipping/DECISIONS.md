@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Qualify the isolated hosted capture/refund slice and keep the full matrix open
+
+- **Decision:** Accept the protected Preview capture → signed webhook →
+  entitlement → full-refund reconciliation result as a qualified lifecycle
+  slice, but keep PLAN-WEB-014 open until every enabled method and the
+  remaining lifecycle/replay/tenant cases are documented.
+- **Reason:** The first provider capture exposed that the runtime Neon HTTP
+  driver cannot execute the billing ledger's interactive transactions. Web
+  commit `d8dc35a` switched the application runtime to the existing
+  transaction-capable PostgreSQL driver, after which deployed Preview capture
+  and refund paths returned HTTP 200 and the isolated database reconciled both
+  payment and license state.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`.
+- **Boundary:** Razorpay remained in Test Mode and all state was isolated to
+  Preview/test infrastructure. No production payment, database, deployment,
+  entitlement, or backlog checkbox changed. Count remains **218/62/280
+  (77.9%)**.
+
 ## 2026-10-09 · Require complete release-boundary rollback rehearsals
 
 - **Decision:** A `DIST-006` rollback rehearsal is invalid unless it covers

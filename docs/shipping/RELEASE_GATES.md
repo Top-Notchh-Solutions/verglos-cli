@@ -1,5 +1,30 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 isolated Preview hosted lifecycle correction · 2026-10-09
+
+The first real Razorpay Test Mode capture exposed a production-code defect in
+the Preview runtime: the Neon HTTP driver cannot execute the interactive
+transactions required by the billing ledger. Web commit `d8dc35a` switched
+the runtime database module to the existing PostgreSQL driver with bounded
+connection reuse and prepared statements disabled for Neon pooled
+connections. Typecheck, focused Razorpay tests, and the production build
+passed; the fix was deployed only to isolated Preview.
+
+The protected Preview endpoint then accepted signed provider-state replays for
+canonical Test Mode order captures and full refunds. The isolated Neon
+database recorded completed capture/refund webhook events, payment rows with
+the full refund watermark, linked licenses, and inactive licenses after full
+refund. The six hosted method surfaces remained visible at the canonical
+price.
+
+This qualifies the hosted capture → entitlement → full-refund reconciliation
+slice, but does **not** close the complete PLAN-WEB-014 matrix. Each enabled
+method still needs documented provider success/failure behavior, and renewal,
+cancellation, expiry, replay/out-of-order, timeout, tenant-binding, and
+partial-refund evidence remain open. No checkbox changed; count remains
+**218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`.
+
 ## PLAN-WEB-014 isolated Preview hosted payment matrix · 2026-10-09
 
 The isolated Preview checkout used Razorpay Test Mode, the canonical monthly
