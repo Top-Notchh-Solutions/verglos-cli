@@ -1,7 +1,8 @@
-# Verglos V1 Active Shipping Goal — Backend-First Whole-Backlog Pass
+# Verglos V1 Active Shipping Goal — Backend-First Unchecked-Backlog Pass
 
 Effective checkpoint: 2026-10-08. This is the operative replacement goal for
-the remaining active shipping window.
+the remaining active shipping window. Replace the previous active goal with
+this file when resuming.
 
 ## OBJECTIVE
 
@@ -39,16 +40,39 @@ the remaining active shipping window.
 
   The remaining work is now backend/CLI-first. The primary objective is to clear
   genuinely executable unchecked backlog items in `verglos-cli` in coherent fat
-  batches, then complete the final `verglos-web` truth, browser, payment,
-  production, and accessibility pass. Web work is allowed before that only when
-  it is required to unblock a CLI contract or to fix a verified release blocker.
+  batches, with the private tracker count as the scoreboard. Then complete the
+  final `verglos-web` truth, browser, payment, production, and accessibility
+  pass. Web work is allowed before the CLI queue is exhausted only when it is
+  required to unblock a CLI contract or to fix a verified release blocker.
+
+  BACKEND-FIRST PRIORITY LOCK
+
+  Do not spend the main execution path on frontend polish, marketing copy,
+  pricing presentation, final metadata, public corpus scans, or speculative
+  POC work while a dependency-ready CLI/backend item exists. For each batch:
+
+  1. read the live unchecked backlog and select the largest coherent set of
+     dependency-ready backend/CLI IDs;
+  2. implement the missing code, tests, integration, or release surface;
+  3. run the smallest focused qualification, then the required phase suite;
+  4. inspect public/private boundaries, security behavior, and exact diffs;
+  5. verify hosted PR/CI state when a PR exists;
+  6. accept only IDs whose complete criteria are evidenced, and record all
+     remaining external gates without pretending they passed;
+  7. immediately take the next independent backend batch.
+
+  Code-side progress is valuable but is not checkbox acceptance when the item
+  still requires provider activation, legal approval, trusted publishing,
+  independent review, customer authorization, production reconciliation, or
+  hosted operational evidence. When one item is blocked, preserve the blocker
+  and continue with the next executable item.
 
   The authoritative checkpoint at the start of this operating phase is:
 
   - **218 checked / 62 unchecked / 280 total / 77.9%**;
   - CLI `origin/main`: `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`;
-  - Web PR #165 merged as `c620c39e837af641ba4ada1967117da4dcfa6761`;
-  - private tracker reconciliation commit: `fa75f12b`;
+  - Web PR #166 merged as `ff0dd15b3eada55eb898038bc66ea0c5394bead6`;
+  - latest private tracker reconciliation commit: `642ef7ad`;
   - no open CLI or Web PR was present at this checkpoint;
   - no checkbox is accepted merely because implementation exists or tests are green.
 
@@ -458,6 +482,21 @@ the remaining active shipping window.
   - Do not spend the CLI-first critical path repeatedly rerunning unchanged
     suites. Use focused evidence for implementation, then one full configured
     suite for the completed phase.
+  - The Web keyless-Preview middleware fix removed one real 500 path, but a
+    fresh built-runtime sweep then found direct Clerk `auth()`/`currentUser()`
+    calls still return 500 on `/activate`, `/cli-auth`, `/account`, and `/orgs`
+    when Preview has no Clerk key. This is a concrete Web release defect to
+    repair and requalify; it is not permission to weaken production auth or to
+    mark the route sweep complete.
+  - Production checkout currently renders UPI, Cards, Netbanking, Wallets,
+    EMI, and Pay Later with no QR-only path, but the page does not identify as
+    Test Mode. This is read-only rendering/configuration evidence only; it does
+    not prove order creation, capture, refund, webhook, entitlement, renewal,
+    or production payment acceptance.
+  - The all-method payment decision supersedes QR-only emphasis: use the
+    server/catalog-driven provider-hosted checkout and qualify every actually
+    enabled method in isolated Test Mode. QR may remain optional, but cannot be
+    the only payment path or a substitute for lifecycle evidence.
 
   SESSION LEARNINGS
 
@@ -549,6 +588,14 @@ the remaining active shipping window.
     order, payment, webhook, entitlement, database, provider, deployment, or
     account write occurred. This remains configuration/rendering observation,
     not payment lifecycle acceptance. Private reconciliation is `f4cfa2b`.
+  - The latest built Preview sweep confirmed the merged middleware fix on the
+    public surface, then exposed four remaining keyless-auth route failures:
+    `/activate`, `/cli-auth`, `/account`, and `/orgs` returned HTTP 500 because
+    those pages/data helpers call Clerk directly after middleware correctly
+    bypasses Clerk without a Preview key. The next Web repair must use the
+    request-auth seam or an equivalent safe Preview fallback while preserving
+    production fail-closed behavior. No production, database, payment,
+    provider, deployment, or entitlement write occurred.
   - The exact count remains **218 checked / 62 unchecked / 280 total (77.9%)**
     until a current private-tracker reconciliation proves otherwise.
 
@@ -761,8 +808,12 @@ release requirement above.
 Use this complete file as the operative goal for the resumed session. Start each
 fat batch by recording its backlog IDs, acceptance evidence, repository/write
 boundary, browser/Docker requirement, machine-load plan, and production-state
-status. Continue independent code and evidence work when production access or
-provider state is blocked; do not wait idly for external state.
+status. Begin with the live backend/CLI queue and keep the exact score visible
+after every substantial batch. Continue independent code and evidence work when
+production access or provider state is blocked; do not wait idly for external
+state. Only move the main path to Web finalization after the executable CLI
+queue is exhausted or every remaining CLI item has a documented external owner,
+evidence gap, and release decision.
 
 ## Whole-backlog shipping target and founder-supplied final POC
 
