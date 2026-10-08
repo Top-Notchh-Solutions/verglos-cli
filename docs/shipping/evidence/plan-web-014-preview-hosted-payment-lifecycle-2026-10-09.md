@@ -46,9 +46,12 @@ the build passed.
   canonical amount, including captured `card`, `wallet`, `netbanking`, and
   `cardless_emi` outcomes, plus captured/refunded and failed outcomes for the
   previously exercised methods. No UPI or Pay Later payment row was present.
-  The UPI QR attempt was not a valid Test Mode UPI fixture, and the Pay Later
-  OTP rejection did not create a provider payment; neither is treated as a
-  successful lifecycle result.
+- The current Test Mode checkout surface exposed only a UPI QR flow and no
+  UPI-ID/VPA entry. A real UPI app must not be used to scan this test QR, so
+  UPI success cannot be safely completed from this account surface. Razorpay's
+  documented VPA fixture is therefore unavailable in the rendered checkout.
+  The Pay Later OTP rejection also did not create a provider payment; neither
+  is treated as a successful lifecycle result.
 
 Only aggregate and state evidence is retained here. Provider identifiers,
 emails, phone numbers, signatures, webhook secrets, database URLs, and
@@ -63,7 +66,9 @@ ledger/license grant → full provider refund → signed refund webhook → ledg
 refund watermark → license deactivation`
 
 The complete PLAN-WEB-014 gate remains **open**. The remaining matrix must
-still document UPI and Pay Later provider outcomes and the required renewal,
+still document an approved/testable UPI flow and Pay Later provider outcomes,
+or explicitly remove methods that the provider account does not expose, plus
+the required renewal,
 cancellation, expiry, replay, out-of-order, timeout, tenant-binding, and
 partial-refund cases. Provider simulator stalls or rejected fixtures are
 recorded rather than treated as successful outcomes.
