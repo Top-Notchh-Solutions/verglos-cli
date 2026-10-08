@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · QUAL-WEB-006 production account/checkout audit
+
+The existing authenticated account and production checkout were audited
+read-only through Chrome DevTools. Both desktop snapshots scored Lighthouse
+Accessibility **100**, with LCP **857 ms** and **811 ms** and CLS **0.00**;
+checkout rendered UPI, Cards, Netbanking, Wallets, EMI, and Pay Later. The
+account remained Free with no license and no organization mutation was made.
+Mobile Lighthouse still reports provider/browser and final metadata findings,
+and keyboard/screen-reader, field-CWV, authenticated organization data, and
+large-dataset evidence are absent. `QUAL-WEB-006` remains open; payment and
+production reconciliation gates remain open. No checkbox changed; backlog is
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-production-account-checkout-2026-10-08.md`.
+
 ## 2026-10-08 · Preview payment authentication fixture
 
 Web PR #157 merged as `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe` after the

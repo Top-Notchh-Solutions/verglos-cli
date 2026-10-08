@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · QUAL-WEB-006 production account/checkout read-only audit
+
+- **Evidence:** Existing authenticated `/account` and production `/checkout`
+  were audited through Chrome DevTools. Desktop accessibility was **100** on
+  both surfaces; desktop LCP was **857 ms** and **811 ms**, respectively, with
+  CLS **0.00** and no console warnings/errors. Checkout rendered the current
+  hosted method projection: UPI, Cards, Netbanking, Wallets, EMI, and Pay Later.
+- **Limits:** The account was Free with no license and no organization
+  membership was created. Mobile Lighthouse reported provider/browser and
+  final-metadata findings; no human keyboard/screen-reader, field-CWV,
+  large-dataset, payment, or production reconciliation evidence was obtained.
+- **Disposition:** No checkbox changed. `QUAL-WEB-006` and
+  `PLAN-WEB-011/012/013/014/015` remain open. Backlog remains
+  **218/62/280 (77.9%)**. No production or customer-state mutation occurred.
+- **Evidence file:**
+  `docs/shipping/evidence/qual-web-006-production-account-checkout-2026-10-08.md`.
+
 ## 2026-10-07 · PLAN-WEB-015 production environment shape recheck
 
 - **Read-only finding:** Vercel production and the local production env file
