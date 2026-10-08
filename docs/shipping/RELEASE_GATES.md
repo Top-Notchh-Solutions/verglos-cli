@@ -1324,3 +1324,14 @@ lifecycle tests, plus typecheck, schema check, and a preview-mode **43-page**
 build. This is isolated synthetic-event evidence only; it does not pass the
 provider lifecycle or production reconciliation gates. PLAN-WEB-014/015 remain
 open. Evidence: `docs/shipping/evidence/plan-web-014-current-main-local-integration-2026-10-07.md`.
+
+## PLAN-WEB-012 out-of-order payment hardening · 2026-10-08
+
+Web PR #161 merged as `ec02cacf69f3adb0d8df5ccb36a1a4eb5ef4cc3f` after hosted
+typecheck/schema, serial, build, dependency/license/SBOM, public-boundary,
+GitGuardian, Vercel, and Preview Comments checks passed. The isolated ledger and
+webhook-handler tests prove failed→captured recovery and late-failure replay
+idempotency. This advances the code-side payment gate only; live provider
+method/lifecycle and production reconciliation remain required. No checkbox
+changed and no production/provider/database/deployment state changed. Evidence:
+`docs/shipping/evidence/plan-web-012-out-of-order-payment-2026-10-08.md`.

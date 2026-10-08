@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-08 · Preserve payment identity across out-of-order failure/capture
+
+- **Decision:** A failed Razorpay observation must not permanently poison the
+  same exact provider-payment identity. A later bound capture promotes that
+  row and grants once; a late failure after capture/refund is an idempotent
+  no-op.
+- **Evidence:** Web PR #161 merged as
+  `ec02cacf69f3adb0d8df5ccb36a1a4eb5ef4cc3f`; isolated ledger/webhook
+  integration **3/3**, focused payment suite **54/54**, and hosted Verify
+  `37781035716` passed.
+- **Boundary:** This is code-side lifecycle hardening only. Live provider
+  method/lifecycle, production reconciliation, and payment release gates
+  remain open. No production/provider/database/deployment write occurred.
+
+
 ## 2026-10-08 · Keep CI payload generation source-free and delivery-neutral
 
 The CLI command may validate and emit the shared check payload locally, but it

@@ -2654,6 +2654,20 @@ trusted/licensed recipe provenance are still missing.
   success/failure control; no callback or lifecycle result is claimed.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-card-hosted-probe-2026-10-07.md`.
 
+## PLAN-WEB-012 out-of-order payment hardening · 2026-10-08
+
+- **Implementation:** Web PR #161 merged as
+  `ec02cacf69f3adb0d8df5ccb36a1a4eb5ef4cc3f`. A failed payment observation can
+  be promoted by a later capture with the same exact signed binding; late
+  failure retries after capture/refund are idempotent.
+- **Verification:** Isolated PostgreSQL ledger/webhook integration **3/3**,
+  focused payment suite **54/54**, typecheck/schema/migration/build checks,
+  and hosted Verify `37781035716` passed.
+- **Boundary:** This is code-side evidence only. Account-enabled Test Mode
+  lifecycle, production reconciliation, and PLAN-WEB-011/012/014/015 remain
+  open. No production/provider/database/deployment write occurred.
+- **Evidence:** `docs/shipping/evidence/plan-web-012-out-of-order-payment-2026-10-08.md`.
+
 Web regression qualification (2026-10-07): PR #153 exact head
 `929da1907f001c8db71df0e601e08014590fd580` passed the configured serial suite
 against a fresh empty disposable Docker `postgres:15` database: pretest 48/48,

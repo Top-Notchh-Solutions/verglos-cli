@@ -5341,3 +5341,20 @@ App/org/webhook/cutover evidence remains open.
 - **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
   (77.9%)**.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-preview-auth-fixture-pr-157-2026-10-08.md`.
+
+# 2026-10-08 — Web PR #161 merged: out-of-order payment hardening
+
+- **Merge:** PR #161 source `396d72e` merged as
+  `ec02cacf69f3adb0d8df5ccb36a1a4eb5ef4cc3f`.
+- **Result:** Same-bound failed→captured payment recovery now grants once;
+  late failed webhook retries after capture/refund are no-ops. Isolated
+  PostgreSQL ledger/webhook integration passed **3/3** and focused payment
+  tests passed **54/54**.
+- **Hosted:** Verify run `37781035716`, Vercel, Preview Comments, GitGuardian,
+  schema/migration/build, dependency/license/SBOM, public-boundary, private
+  runner, negative-boundary, and truth-registry checks passed.
+- **Boundary:** Code-side evidence only. No live provider lifecycle,
+  production reconciliation, production database, payment, deployment, or
+  credential operation occurred. No checkbox changed; backlog remains
+  **218 checked / 62 unchecked / 280 total (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-012-out-of-order-payment-2026-10-08.md`.

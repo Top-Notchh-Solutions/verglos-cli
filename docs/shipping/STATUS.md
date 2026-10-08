@@ -3817,3 +3817,15 @@ The run used a disposable PostgreSQL 15 container and synthetic signed events;
 no provider credential/API call or production operation occurred. This is
 implementation/integration evidence only; PLAN-WEB-014/015 remain open.
 Evidence: `docs/shipping/evidence/plan-web-014-current-main-local-integration-2026-10-07.md`.
+
+## 2026-10-08 · PLAN-WEB-012 out-of-order payment hardening
+
+Web PR #161 merged as `ec02cacf69f3adb0d8df5ccb36a1a4eb5ef4cc3f`. The payment
+ledger now recovers a same-bound payment when capture follows failure and treats
+late failure retries after capture/refund as no-ops. Isolated PostgreSQL
+ledger/webhook integration passed **3/3**; focused payment tests passed
+**54/54**; hosted Verify `37781035716` and Vercel/security checks passed.
+This strengthens PLAN-WEB-012 but does not provide live provider lifecycle or
+production reconciliation evidence. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-012-out-of-order-payment-2026-10-08.md`.

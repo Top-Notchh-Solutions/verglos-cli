@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-012-out-of-order-payment · 2026-10-08
+
+Web PR #161 now promotes a failed payment row when a later capture carries the
+same immutable commercial binding, and ignores late failure retries after a
+capture/refund. The behavior is covered by isolated PostgreSQL ledger and real
+webhook-handler integrations. Residual risk is external: no account-enabled
+Razorpay Test Mode method/lifecycle run or production reconciliation has been
+accepted. Owner: billing/release qualification. PLAN-WEB-011/012/014/015 and
+R-041 remain open; no production/provider state changed.
+
 ## R-ENT-CLI-001-replay-race · 2026-10-08
 
 The result endpoint now fences concurrent identical uploads on the existing
