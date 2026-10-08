@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · Preview payment authentication fixture
+
+Web PR #157 merged as `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe` after the
+complete hosted verification, security, dependency/license, and Vercel checks
+passed. The strict non-production Preview fixture authenticated an isolated
+browser run and reached the real hosted order route. The supplied Razorpay
+Test Mode credential returned a bounded provider failure before order creation;
+local counts for users, licenses, payments, subscriptions, and webhook events
+remained zero. This removes the Clerk-session blocker but does not close
+PLAN-WEB-014/015. Backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-auth-fixture-pr-157-2026-10-08.md`.
+
 ## 2026-10-07 · PLAN-WEB-015 production environment shape recheck
 
 Read-only Vercel production inspection confirms

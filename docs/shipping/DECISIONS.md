@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-08 · Keep Preview test identity strictly non-production
+
+- **Decision:** Permit an explicit internal fixture identity only when the
+  runtime is non-production Preview, all fixture fields are bounded, and the
+  request carries the operator-supplied secret. Keep normal Clerk auth and
+  production auth unchanged.
+- **Evidence:** Web PR #157 merged as
+  `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe`; focused auth tests and the full
+  hosted verification suite passed. The local browser reached the real order
+  route, while the flagged Test Mode provider credential failed before order
+  creation.
+- **Boundary:** This is an internal qualification instrument, not founder
+  access, payment acceptance, or an entitlement bypass. PLAN-WEB-014/015 remain
+  open; no provider, production, database, payment, webhook, or entitlement
+  write occurred.
+
 ## 2026-10-07 · Keep production fail-closed on unknown payment methods
 
 - **Decision:** Do not guess or add `RAZORPAY_ENABLED_PAYMENT_METHODS` in

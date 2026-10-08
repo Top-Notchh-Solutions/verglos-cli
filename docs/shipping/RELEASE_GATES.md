@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 Preview authentication fixture · 2026-10-08
+
+Web PR #157 merged as `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe` after hosted
+verification, public-boundary, dependency/license, security, and Vercel checks
+passed. The internal fixture allowed an isolated local browser run to reach the
+real hosted order route without Clerk credentials. The supplied Test Mode
+provider credential failed before order creation, so no success, failure,
+capture, refund, renewal, webhook, replay, out-of-order, or entitlement
+evidence is accepted. PLAN-WEB-014/015 remain open.
+
 ## PLAN-WEB-015 production environment shape recheck · 2026-10-07
 
 Vercel production and the local production env file both lack

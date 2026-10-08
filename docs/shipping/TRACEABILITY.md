@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-08 · PLAN-WEB-014 Preview authentication fixture
+
+Web PR #157 merged as `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe`. The fixture
+is strictly limited to non-production `VERCEL_ENV=preview`, requires a bounded
+operator secret and fixture identity, and is covered by focused tests plus the
+hosted Web verification suite. The local browser reached the hosted order
+route, but the flagged Test Mode credential failed before order creation; no
+provider lifecycle evidence exists. PLAN-WEB-014/015 remain open and no
+checkbox changed. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-auth-fixture-pr-157-2026-10-08.md`.
+
 ## PLAN-WEB-015 production environment shape recheck · 2026-10-07
 
 Read-only Vercel production and local production env-name inspection found no

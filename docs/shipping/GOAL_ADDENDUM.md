@@ -1,5 +1,17 @@
 # Goal addendum — 2026-10-07
 
+## Preview payment authentication fixture · 2026-10-08
+
+Web PR #157 merged as `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe`. The
+non-production Preview-only fixture authenticated the isolated browser and
+reached the real hosted order route. The supplied Razorpay Test Mode
+credential returned a bounded provider failure before an order was created;
+the local database remained empty for user, payment, subscription, license,
+and webhook rows. This removes the Clerk-session blocker only. PLAN-WEB-014/015
+remain open, and backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-auth-fixture-pr-157-2026-10-08.md`.
+
 ## PLAN-WEB-014 Test Mode credential preflight
 
 The supplied Web test environment uses a `rzp_test_` key and declares seven
