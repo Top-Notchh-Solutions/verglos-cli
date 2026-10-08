@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · CLI release-safety contract qualification
+
+At CLI commit `7d060b2`, rollback-plan tests passed **2/2**, shared rollback and
+release-decision tests **13/13**, and package-surface/artifact/tag verifiers
+**11/11**; aggregate **26/26** with zero failures or skips. This verifies
+fail-closed local contracts only. Actual registry/deployment rollback,
+trusted publication, keyless attestation, legal clearance, and final platform
+acceptance remain open. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/cli-release-safety-contracts-2026-10-08.md`.
+
 ## 2026-10-08 · cross-tier local qualification
 
 The current Web source passed **106/106** bounded checks: 96 pure Team/Studio/

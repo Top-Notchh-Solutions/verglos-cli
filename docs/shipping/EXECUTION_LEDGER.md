@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · CLI release-safety contract qualification
+
+- **Source:** CLI exact current worktree commit `7d060b2852551cc017bbb2b5f70bad22843e7273`.
+- **Verification:** CLI rollback plan **2/2**, shared rollback/release
+  decision **13/13**, package-surface/artifact/tag verifiers **11/11**;
+  aggregate **26/26**, zero failures/skips.
+- **Coverage:** Approval and immutable-reference gates, history preservation,
+  signing replacement rules, release identity/time/digest binding, public
+  package boundaries, checksums/SBOM/sidecar shape, symlink/duplicate refusal,
+  incomplete package refusal, and immutable-tag matching.
+- **Disposition:** Local contract evidence only; actual rollback/revocation,
+  trusted publication, keyless attestation, legal clearance, and final
+  platform acceptance remain open. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Safety:** No production/provider/database/payment/entitlement/deployment,
+  registry, or public repository write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/cli-release-safety-contracts-2026-10-08.md`.
+
 ## 2026-10-08 · cross-tier local qualification
 
 - **Environment:** Fresh loopback-only PostgreSQL 15 Alpine container at the

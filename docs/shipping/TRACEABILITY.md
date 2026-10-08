@@ -1,5 +1,14 @@
 # Verglos V1 traceability
 
+## DIST-001/003/006 and QUAL-CLI-006 release-safety contracts · 2026-10-08
+
+CLI commit `7d060b2` passed rollback-plan **2/2**, shared rollback/release
+decision **13/13**, and package-surface/artifact/tag verification **11/11**.
+These are fail-closed local contracts only; actual registry/deployment
+rollback, revocation, trusted publication, keyless attestation, legal review,
+and final platform acceptance remain open. No checkbox changed. See
+`docs/shipping/evidence/cli-release-safety-contracts-2026-10-08.md`.
+
 ## Cross-tier local qualification · 2026-10-08
 
 The current Web source passed 96 pure Team/Studio/Enterprise/authorization
