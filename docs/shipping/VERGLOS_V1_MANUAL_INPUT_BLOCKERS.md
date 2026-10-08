@@ -1,5 +1,20 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-09
+
+The current authoritative score is **219 checked / 61 unchecked / 280 total
+(78.2%)**. `PLAN-WEB-013` is accepted. The separate Neon test database,
+Preview isolation marker, Razorpay Test Mode webhook, and four-method catalog
+are available; older entries below that describe Preview as having no isolated
+database are historical and superseded.
+
+No founder input is needed for the next code batch. The missing subscription-
+creation route is an implementation gap already tracked by `PLAN-WEB-011`, not
+a credential or reviewer blocker. The founder is needed later only for true
+external artifacts: an independent AppSec reviewer, legal/company approval,
+the npm/CLI versus Web SCM scope decision, and authorized final POC/customer
+fixtures. Never paste secrets or customer source into chat.
+
 Do not push publicly. This document enumerates remaining manual-input classes under Verglos V1 and names the specific owner action needed to unblock them. Reconciled 2026-10-07 after current CLI/Web head reconciliation, official CLI artifact validation, Razorpay Test Mode inventory freeze, and the latest private evidence commits. Older bullets below are superseded where this update marks an item accepted.
 
 Per the goal file: "For every item left unchecked in the active area, state the specific unmet criterion and required evidence or owner. Do not describe a task as 'blocked' without naming the dependency and why it prevents work."

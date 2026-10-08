@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · current whole-backlog shipping state
+
+The shipping system is larger than the gate list: the private backlog,
+execution ledger, traceability, decisions, risks, release gates, company
+feature map, architecture/truth contracts, acceptance/POC plan, and dated
+evidence are all maintained together. The current authoritative score is
+**219 checked / 61 unchecked / 280 total (78.2%)** after accepting
+`PLAN-WEB-013`.
+
+Gates 1–3 are qualified for the isolated Test Mode path. Gate 4 is partially
+qualified: the four retained methods and code-side ledger matrix are evidenced,
+but `PLAN-WEB-011/012/014/015` remain open because the Web tree has no
+provider-subscription creation route and the account has no Test Mode
+subscription lifecycle to reconcile. Gate 5 is not an npm publishing
+requirement; it depends on whether Web SCM remains in V1 scope. AppSec, legal,
+protected-release, and final-POC gates remain external/later gates.
+
+Next technical batch: implement and qualify the isolated subscription-creation
+path, then reconcile the payment backlog and all synchronized shipping records.
+No founder secret or customer repository is needed for this batch.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`.
+
 ## 2026-10-09 · backend/CLI external-gate recheck
 
 No open CLI PR or dependency-ready CLI code gap was found. Production Vercel

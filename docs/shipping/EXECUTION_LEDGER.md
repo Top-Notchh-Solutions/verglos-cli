@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · whole-backlog document-system reconciliation
+
+- **Control update:** The active goal now treats the gate matrix as one layer
+  of the complete shipping system. The backlog, company feature map,
+  architecture, truth registry, execution ledger, traceability, status,
+  decisions, risks, release gates, acceptance/POC, and evidence documents
+  remain jointly maintained.
+- **Current score:** `PLAN-WEB-013` is accepted; the authoritative backlog is
+  **219 checked / 61 unchecked / 280 total (78.2%)**. Gate 4 is still open for
+  `PLAN-WEB-011/012/014/015`, including the missing provider-subscription
+  creation route and its isolated renewal/cancellation/expiry evidence.
+- **Disposition:** This entry supersedes the older 2026-10-09
+  backend-readiness snapshot that said Preview had no isolated database. The
+  current setup has the separate Neon test database, Preview isolation marker,
+  Razorpay Test Mode webhook, and four-method catalog. Historical entries are
+  retained; current truth is maintained by the latest dated entry and the
+  private evidence files.
+- **Boundary:** Documentation reconciliation only. No production database,
+  payment, provider, deployment, account, customer, legal, reviewer, or
+  release state changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`;
+  goal commit `93195c9`; backlog decision commit `5a99b0d`.
+
 ## 2026-10-09 · backend/CLI external-gate recheck
 
 - **Verification:** No open CLI PR; Production Vercel metadata has the payment

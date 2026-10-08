@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · whole-backlog document-system reconciliation
+
+- **Backlog accepted:** `PLAN-WEB-013`; current score is **219 checked / 61
+  unchecked / 280 total (78.2%)**.
+- **Gate state:** Gates 1–3 are qualified for isolated Test Mode. Gate 4
+  remains open for `PLAN-WEB-011/012/014/015`; the concrete missing product
+  surface is provider-subscription creation, followed by Test Mode
+  renewal/cancellation/expiry reconciliation. Gate 5 is conditional on Web
+  SCM scope and is not an npm prerequisite. AppSec/legal/protected-release/
+  final-POC are separate external gates.
+- **Document set:** This traceability record must stay aligned with
+  `VERGLOS_V1_BACKLOG.md`, `EXECUTION_LEDGER.md`, `STATUS.md`, `DECISIONS.md`,
+  `RISKS.md`, `RELEASE_GATES.md`, the company feature map, architecture/truth
+  contracts, acceptance/POC, and dated evidence.
+- **Boundary:** Documentation/traceability reconciliation only; no production,
+  provider, database, payment, deployment, customer, legal, reviewer, or
+  release state changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`.
+
 ## Backend/CLI external-gate recheck · 2026-10-09
 
 - **Backlog strengthened:** HUNT/PLAN-CLI/TEAM-CLI/STUDIO-CLI/ENT-CLI and

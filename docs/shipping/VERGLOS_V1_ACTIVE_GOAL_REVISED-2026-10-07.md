@@ -1,4 +1,4 @@
-# Verglos V1 Active Shipping Goal — Gate-First Whole-Backlog Shipping Pass
+# Verglos V1 Active Shipping Goal — Whole-Backlog Shipping and Acceptance Pass
 
 Effective checkpoint: 2026-10-09. This file is the authoritative replacement
 goal for the remaining shipping work. Replace the previous active goal with
@@ -13,10 +13,12 @@ Ship the complete Verglos V1 across:
 
 The primary objective is to complete the whole authoritative private backlog
 with real implementation, integration, qualification, security review,
-release evidence, and final acceptance. Execution is gate-first: qualify and
-close the current technical release gates in order, record external gates with
-their real owner and missing artifact, then execute the largest dependency-ready
-backlog batches while keeping the execution ledger and evidence synchronized.
+release evidence, and final acceptance. Backlog delivery is the main
+workstream. Release gates are a parallel evidence and safety workstream:
+close gates that are technically ready, record external gates with their real
+owner and missing artifact, and continue the largest dependency-ready
+implementation batches without treating the gate list as a substitute for
+product shipping.
 
 The payment gate has one explicit product gap: the Web code has billing ledger
 and subscription-webhook handling, but no server route that creates a provider
@@ -90,6 +92,118 @@ The private tracker is authoritative for acceptance. The public repositories
 must never receive private tracker documents, customer data, credentials,
 private fixture contents, detailed security findings, or competitive
 intelligence.
+
+## 2A. Complete shipping document system
+
+This goal is an operating index, not a replacement for the other shipping
+documents. Every substantial batch must read the relevant documents below and
+update the appropriate records; never maintain progress only in this goal.
+
+### Private shipping control plane
+
+These files govern execution and acceptance in the private tracker:
+
+- `docs/shipping/VERGLOS_V1_BACKLOG.md` — authoritative checkbox backlog and
+  score.
+- `docs/shipping/EXECUTION_LEDGER.md` — chronological commands, results,
+  boundaries, owners, and dispositions for every substantial batch.
+- `docs/shipping/STATUS.md` — current human-readable shipping status.
+- `docs/shipping/TRACEABILITY.md` — backlog ID to implementation, test,
+  hosted-run, and evidence mapping.
+- `docs/shipping/DECISIONS.md` — scope, provider, architecture, and release
+  decisions; append corrections when older entries are superseded.
+- `docs/shipping/RISKS.md` — risk register, severity, owner, mitigation,
+  containment, and gate impact.
+- `docs/shipping/RELEASE_GATES.md` — gate acceptance and release-boundary
+  evidence.
+- `docs/shipping/VERGLOS_V1_MANUAL_INPUT_BLOCKERS.md` — exact founder,
+  reviewer, legal, provider, customer, and credential actions still needed.
+- `docs/shipping/FOUNDER_ACTION_STEPS.md` — plain-language founder actions;
+  it must not request secrets in chat.
+- `docs/shipping/HOSTED_013_EXECUTION_RUNBOOK.md` and
+  `docs/shipping/PRODUCTION_SOURCE_AUDIT_2026-09-12.md` — production data,
+  migration, backup, restore, reconciliation, and rollback procedures.
+- `docs/shipping/VERGLOS_RECORD_PACKAGE_DECISION.md`,
+  `docs/shipping/VERGLOS_RECORD_PROVENANCE.md`, and
+  `docs/shipping/VERGLOS_THIRD_PARTY_INVENTORY.md` — record, provenance,
+  dependency, notice, and redistribution truth.
+- `docs/shipping/GOAL_ADDENDUM*.md` — historical scope decisions and learning;
+  newer dated entries supersede older ones without deleting history.
+
+`docs/shipping/evidence/` is the private evidence archive. Add a dated,
+redacted evidence file for each meaningful qualification event. Do not dump
+all evidence into the goal. `docs/shipping/acceptance/` contains the external
+workflow, consent, comprehension, and Hunt adjudication protocols; it does
+not itself prove that a customer, reviewer, or legal approver completed them.
+`docs/shipping/legal/` is private and holds licensing/legal records only.
+The complete private Markdown scope is `docs/shipping/**/*.md`, including all
+root control-plane files plus every acceptance, evidence, and legal record;
+the named files above are the operating entry points, not a reduced subset.
+
+### Product, company, and architecture truth
+
+The product meaning and feature scope must remain connected to the shipping
+work. Read these before changing product behavior, plan claims, public copy,
+or architecture:
+
+- `verglos-cli/docs/VERGLOS_COMPANY_USAGE_AND_FEATURE_MAP.md` — who uses
+  each capability, where it runs, and which plan it serves.
+- `verglos-cli/docs/VERGLOS_PRODUCT_ARCHITECTURE_BLUEPRINT.md` — product
+  thesis, current/target truth, hypotheses, architecture, and ship gates.
+- `verglos-cli/docs/shipping/VERGLOS_TRUTH_REGISTRY.md` — current versus
+  partial/planned capability truth.
+- `verglos-cli/docs/shipping/VERGLOS_ARCHITECTURE_DECISION_SET.md` —
+  accepted architecture decisions and deferred hypotheses.
+- `verglos-cli/docs/shipping/VERGLOS_PLAN_AND_CAPABILITY_RECONCILIATION.md`
+  — canonical plan, allowance, entitlement, and pricing reconciliation.
+- `verglos-cli/docs/shipping/VERGLOS_FINAL_ACCEPTANCE_AND_POC.md` — final
+  acceptance stories, corpus, external validation, and go/no-go.
+- `verglos-cli/docs/shipping/VERGLOS_HOSTED_COST_AND_USAGE_LEDGER.md` —
+  usage dimensions, allowances, cost attribution, and reconciliation.
+- `verglos-cli/docs/shipping/VERGLOS_DATA_AND_SCHEMA_MIGRATION_INVENTORY.md`
+  — schema ownership, migration history, baseline, backfill, and recovery.
+- `verglos-cli/docs/shipping/VERGLOS_COMMAND_AND_UI_CONTRACT.md`,
+  `VERGLOS_AGENT_AND_MCP_CONTRACT.md`, `VERGLOS_MCP_CAPABILITY_TRUTH.md`,
+  `VERGLOS_AI_CHANGE_CONTEXT_CONTRACT.md`, and the other
+  `verglos-cli/docs/shipping/VERGLOS_*.md` documents — command, agent, MCP,
+  evidence, policy, engine, importer, record, provenance, target, schema,
+  privacy, compatibility, Hunt, release, and capability contracts. The
+  entire glob is in scope; the examples above are not an abbreviated allowlist.
+- `verglos-cli/docs/e2e-test-matrix.md` and all research documents under
+  `verglos-cli/docs/research/` — bounded evaluation methodology and research
+  context, never customer acceptance by themselves.
+
+The CLI shipping directory also contains its own public implementation
+records (`verglos-cli/docs/shipping/VERGLOS_V1_BACKLOG.md`,
+`VERGLOS_V1_MANUAL_INPUT_BLOCKERS.md`, `EXECUTION_LEDGER.md`, `STATUS.md`,
+`TRACEABILITY.md`, `DECISIONS.md`, `RISKS.md`, `RELEASE_GATES.md`, and
+`HOSTED_013_EXECUTION_RUNBOOK.md`). Keep them consistent with the private
+tracker without copying private evidence, credentials, customer data, or
+reviewer/legal records into the public repository.
+
+Company context remains available under
+`/Users/anuragyadav/Developer/TopNotchh-Workspace/knowledge/company/`,
+especially `products.md`, `current-focus.md`, `architecture.md`,
+`roadmap.md`, `mission.md`, `vision.md`, `deployment-strategy.md`,
+`ai-strategy.md`, `coding-standards.md`, `brand.md`, and `topnotch.md`.
+Those documents inform product intent; the private backlog and evidence still
+decide what is shipped.
+
+### Web operational documents
+
+For Web changes, also read `verglos-web/docs/deployment-runbook.md`,
+`verglos-web/docs/dr-drill-runbook.md`, `verglos-web/docs/cron-setup.md`, and
+`verglos-web/CLERK-RUNBOOK.md` when present. These do not override the
+private release gates, migration runbook, or production safety rules.
+
+### Required synchronization after every batch
+
+Update the smallest applicable set of `EXECUTION_LEDGER.md`, `STATUS.md`,
+`TRACEABILITY.md`, `DECISIONS.md`, `RISKS.md`, `RELEASE_GATES.md`, the
+backlog, and dated evidence. Recompute the backlog from checkboxes. Keep
+historical entries intact, append superseding corrections, and state whether
+any production, database, payment, provider, deployment, account, customer,
+legal, reviewer, or release state changed.
 
 ## 3. Current verified state and accumulated learning
 
@@ -222,12 +336,16 @@ Private evidence for the latest CLI batch is:
 
 `docs/shipping/evidence/dist-006-rollback-boundary-completeness-2026-10-09.md`
 
-## 4. Gate-first execution control plane
+## 4. Release-gate workstream inside whole-product shipping
 
-The nine release gates are the first control plane for this goal. A gate is
-closed only when its acceptance artifact exists in private evidence; founder
-permission does not turn missing provider, legal, reviewer, customer, or
-publishing evidence into a pass.
+The nine release gates are one control layer in the full shipping system; they
+do not replace the company feature map, architecture, implementation backlog,
+acceptance stories, execution ledger, traceability, risks, or release
+documents. We qualify the active technical gate while continuing the complete
+product/backlog pass with every document synchronized. A gate is closed only
+when its acceptance artifact exists in private evidence; founder permission
+does not turn missing provider, legal, reviewer, customer, or publishing
+evidence into a pass.
 
 ### Current gate state
 
@@ -280,12 +398,12 @@ publishing evidence into a pass.
 
 ### Gate operating rule
 
-First complete all technical work within current authority for the active gate.
-For an external gate, record the exact owner, missing artifact, expiry/review
-date, safe next action, and release decision; do not claim it passed. Do not
-wait idly for an external reviewer or legal approval while independent code
-work remains, but do not move the release forward as though that gate were
-closed.
+Complete technical work within current authority for the active gate while
+also taking independent, dependency-ready backlog batches. For an external
+gate, record the exact owner, missing artifact, expiry/review date, safe next
+action, and release decision; do not claim it passed. Do not wait idly for an
+external reviewer or legal approval while independent code work remains, but
+do not move the release forward as though that gate were closed.
 
 The immediate technical sequence is:
 
@@ -299,7 +417,7 @@ The immediate technical sequence is:
 6. Run final acceptance only after all required gates and the release-candidate
    freeze are complete.
 
-## 4A. Execution priority after gate triage: backend/CLI first
+## 4A. Execution priority: dependency-ready backend/CLI first
 
 Do not move to Web polish merely because it is easier. At the beginning of
 each batch:
@@ -664,6 +782,9 @@ This goal is complete only when:
 
 - every required backlog item is genuinely accepted or explicitly blocked with
   an owner, evidence gap, expiry/review date, and release decision;
+- the company feature map, architecture blueprint, truth registry, plan
+  reconciliation, acceptance/POC document, and public capability surfaces
+  agree on what is current, partial, planned, or excluded;
 - all critical release gates pass;
 - CLI, Web, cross-repository, supported-runtime, and platform verification
   passes;
@@ -706,9 +827,10 @@ At resume, perform this exact sequence:
    only as the starting checkpoint, then trust the recomputed result.
 3. Read the nine-gate matrix in Section 4 and update the execution ledger with
    each gate's status, owner, missing artifact, next action, and write boundary.
-4. Finish the current technical gate before moving to the next one. The first
-   implementation batch is the missing subscription-creation route for
-   `PLAN-WEB-011`, followed by isolated Preview/Test Mode lifecycle evidence.
+4. Execute the current technical gate and the largest independent backend/CLI
+   batch in the same shipping pass. The first implementation batch is the
+   missing subscription-creation route for `PLAN-WEB-011`, followed by
+   isolated Preview/Test Mode lifecycle evidence.
 5. Inspect current CLI and Web branches/PRs and verify recorded heads. Keep
    duplicate PR #169 closed and do not count it as shipping progress.
 6. For each batch, record IDs, criteria, dependencies, evidence, production/
@@ -760,7 +882,7 @@ The latest payment qualification and Gate 4 evidence is:
 
 `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`
 
-The latest gate-first payment decision and backlog acceptance are recorded in
+The latest payment decision and backlog acceptance are recorded in
 private commit `5a99b0d`; the preceding payment qualification evidence commit
 is `8eb85b7`.
 

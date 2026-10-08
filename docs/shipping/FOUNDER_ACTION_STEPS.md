@@ -6,80 +6,46 @@ This is the simple checklist for finishing the external parts of Verglos V1.
 You do not need to send passwords, database URLs, API keys, customer source
 code, or tokens in ChatGPT.
 
-## 1. Database: keep the existing Neon database
+## Current 2026-10-09 position
 
-You do **not** need to create a new Neon database.
+You do not need to do anything for the next technical batch. The isolated
+Neon test database, Preview isolation marker, Docker PostgreSQL path, Razorpay
+Test Mode credentials, and Test Mode webhook setup are already available for
+qualification. Do not replace the Production database URL for this work and
+do not manually edit entitlements or payment rows.
 
-The goal is only to change the password for the existing database user.
-Changing the password does not delete tables or rows.
+The next product gap is code-owned: the Web app has subscription ledger and
+webhook handling but no provider-subscription creation route. Codex should
+implement and test that against isolated Preview/Test Mode before asking for
+any external approval.
 
-### In Neon
+Later founder actions are genuinely external: select an independent AppSec
+reviewer, obtain authorized legal/licensing approval, decide whether Web SCM
+is part of V1 or npm/CLI-only, and provide authorized final POC fixtures after
+the release candidate is frozen. A general permission to work on Verglos does
+not create those independent approvals or customer consents.
 
-1. Open the existing Verglos project in Neon Console.
-2. Select the existing production branch.
-3. Open the database role used by `DATABASE_URL`.
-4. Choose **Reset password** and generate a new password.
-5. Keep the same project, branch, database name, host, and role.
-6. Copy the new connection string privately.
+## 1. Database: current status and safe future rotation
 
-Do not create a new empty database and do not paste the connection string here.
+Gate 1 and Gate 2 already have a separate Neon test database, an isolated
+Preview database configuration, and the Docker PostgreSQL fallback. The
+Production database remains separate.
 
-### In Vercel
+For the next technical batch, do **not** replace Production `DATABASE_URL`,
+run migrations against Production, or manually edit production entitlements or
+payment rows. The subscription-creation work is tested against isolated
+Preview/Test Mode and Docker fixtures.
 
-The variable name is:
-
-```text
-DATABASE_URL
-```
-
-Update it for both **Production** and **Preview**. Use the new connection
-string, then choose **Sensitive** if Vercel asks whether the value can be
-revealed.
-
-The CLI commands are:
-
-```bash
-cd /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web
-vercel env update DATABASE_URL production
-vercel env update DATABASE_URL preview
-```
-
-Enter the new value only when the command prompts for it. Never put the value
-after the command and never paste it into ChatGPT.
-
-### Redeploy Web
-
-Environment-variable changes affect new deployments only. From the Web
-directory, run:
-
-```bash
-cd /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web
-vercel redeploy dpl_Btjq8knubUab1ENgF7CEtzdUFV7G
-```
-
-If Vercel says that deployment cannot be redeployed because a newer deployment
-exists, use:
-
-```bash
-cd /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web
-vercel --prod
-```
-
-After it finishes, check:
-
-```bash
-vercel ls
-```
-
-The deployment must say `Ready`. If it fails, share only the error message;
-never share environment values.
-
-After the new deployment works, revoke the old Neon password/credential.
+Changing a database URL does not recreate tables. Any future database
+rotation or cutover must follow the backup, migration, verification, and
+rollback procedure in `HOSTED_013_EXECUTION_RUNBOOK.md`; never paste a
+connection string into chat. No founder action is required for the current
+batch.
 
 ## 2. Razorpay payment-method variable
 
-This variable tells Verglos which payment methods the Razorpay account has
-actually enabled.
+The current Test Mode qualification keeps the provider methods that have a
+usable hosted fixture:
 
 Variable name:
 
@@ -87,37 +53,16 @@ Variable name:
 RAZORPAY_ENABLED_PAYMENT_METHODS
 ```
 
-Use only method names that Razorpay shows as enabled for this account. The
-hosted methods understood by the current Web code are:
-
 ```text
-upi
-card
-netbanking
-wallet
-emi
-paylater
+card,netbanking,wallet,emi
 ```
 
-Example format only:
-
-```text
-upi,card,netbanking,wallet
-```
-
-Do not copy this example unless those exact methods are enabled in the
-Razorpay account. Do not invent a list. Do not configure production as
-QR-only.
-
-If the variable already exists, update it:
-
-```bash
-cd /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web
-vercel env update RAZORPAY_ENABLED_PAYMENT_METHODS production
-```
-
-Enter only the confirmed comma-separated method names when prompted. Then
-redeploy using the command in Section 1.
+UPI/UPI QR and Pay Later are not counted in the current hosted matrix because
+the provider fixture was unusable: the QR was invalid for the phone test and
+the Pay Later OTP fixture did not validate. Do not re-enable those methods by
+guesswork. No founder update is required now; the remaining Gate 4 work is
+code-owned subscription creation, renewal, cancellation, expiry, and ledger
+qualification.
 
 ## 3. Public repositories: no permission form is needed
 
@@ -139,10 +84,10 @@ public claims against the final evaluation set.
 
 ### What you need to do now
 
-Nothing for repository consent yet. Finish the database-variable update and
-production redeploy first. Do not clone a repository just to create a consent
-file. Consent files are stored in this private tracker, not inside the
-repository being evaluated.
+Nothing for repository consent yet. The next technical batch is the Web
+subscription-creation route and its isolated Test Mode lifecycle evidence.
+Do not clone a repository just to create a consent file. Consent files are
+stored in this private tracker, not inside the repository being evaluated.
 
 ## 4. Authorized repository permission — private/customer POC only
 
