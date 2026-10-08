@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Gate 4 — Test Mode cancellation reconciliation
+
+- **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`.
+- **Provider:** Test Mode inventory returned 9 subscriptions; the newest
+  active fixture was cancelled immediately through Razorpay and returned
+  HTTP 200 with `cancelled`.
+- **Web/DB:** Isolated Preview webhook processing produced 4
+  `authenticated`, 1 `cancelled`, and 4 `pending` rows. The cancelled row
+  retained its captured payment and active license for already-paid time.
+- **Boundary:** No direct database edit and no Production/provider/payment/
+  entitlement/account/customer mutation. This is not a complete Gate 4 pass.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-test-mode-subscription-cancellation-2026-10-09.md`.
+
 ## 2026-10-09 · Canonical correction — Production rollout identity
 
 The current Production trace is Web source `a95deef` deployed as

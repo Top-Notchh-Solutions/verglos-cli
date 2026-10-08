@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Gate 4 update — isolated subscription cancellation reconciled
+
+Razorpay Test Mode cancellation was exercised against the newest active
+isolated subscription with `cancel_at_cycle_end=false`. The provider returned
+HTTP 200 with `cancelled`; the isolated Preview database then showed the
+corresponding cancelled subscription, one captured subscription payment, and
+one still-active license for already-paid time. No row was manually edited.
+
+This strengthens `PLAN-WEB-011/012/014/015` and Gate 4 but does not close them:
+renewal, failure/halt, expiry/completion, refund, replay/out-of-order, and
+complete provider/ledger/entitlement reconciliation remain open. Production
+was not touched. Score remains **219 checked / 61 unchecked / 280 total
+(78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-test-mode-subscription-cancellation-2026-10-09.md`.
+
 ## 2026-10-09 · Canonical correction — latest Production fail-closed rollout
 
 The older `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` entry below is historical and is

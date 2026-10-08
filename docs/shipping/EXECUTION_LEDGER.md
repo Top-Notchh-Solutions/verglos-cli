@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Isolated Test Mode subscription cancellation
+
+- **Backlog/gate:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
+  `PLAN-WEB-015`; Gate 4 cancellation/reconciliation slice.
+- **Operation:** Read-only Test Mode inventory found 9 subscriptions (5
+  active, 4 created). The newest active Test Mode subscription was cancelled
+  through the provider API with `cancel_at_cycle_end=false`; provider returned
+  HTTP 200 and `cancelled`.
+- **Reconciliation:** The isolated Preview database then showed 4
+  `authenticated`, 1 `cancelled`, and 4 `pending` subscription rows. The
+  cancelled row retained one captured subscription payment and one active
+  license for already-paid time. No direct database row edit occurred.
+- **Boundary:** Test Mode provider operation plus isolated Preview webhook/
+  database processing only. No Production plan IDs, payment/provider writes,
+  database or migration writes, entitlement changes, account changes, or
+  customer-data mutations occurred.
+- **Disposition:** Cancellation evidence is added; the complete lifecycle
+  matrix remains open for renewal, failure/halt, expiry/completion, refunds,
+  replay/out-of-order, and complete reconciliation. Score remains **219
+  checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-test-mode-subscription-cancellation-2026-10-09.md`.
+
 ## 2026-10-09 · Canonical Production rollout reconciliation
 
 - **Purpose:** Reconcile the private shipping control plane after the latest

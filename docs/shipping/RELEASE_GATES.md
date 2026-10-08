@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Gate 4 progress — Test Mode cancellation
+
+The newest active isolated Test Mode subscription was cancelled immediately
+through Razorpay (`cancel_at_cycle_end=false`), returned HTTP 200 with
+`cancelled`, and reconciled through the isolated Preview webhook/database.
+The corresponding captured payment and active license remained present for
+already-paid time. No direct row edit or Production operation occurred.
+
+This is a Gate 4 qualification slice, not closure. Renewal, failure/halt,
+expiry/completion, refund, replay/out-of-order, and full provider/ledger/
+entitlement reconciliation remain open. Score remains **219/61/280 (78.2%)**;
+no checkbox changed. Evidence:
+`docs/shipping/evidence/plan-web-014-test-mode-subscription-cancellation-2026-10-09.md`.
+
 ## 2026-10-09 · Canonical correction — latest Production code-rollout record
 
 The older `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` entry below is historical and is

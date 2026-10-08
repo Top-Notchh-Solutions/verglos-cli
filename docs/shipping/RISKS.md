@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-test-mode-cancellation-slice · 2026-10-09
+
+The newest active isolated Test Mode subscription was cancelled successfully
+and reconciled through Preview. The captured payment and active license were
+preserved for already-paid time. Residual Gate 4 risk is renewal, failure or
+halt, expiry/completion, refunds, replay/out-of-order delivery, and complete
+provider/ledger/entitlement reconciliation. Owner: Web billing/release
+qualification. No Production state changed. Evidence:
+`docs/shipping/evidence/plan-web-014-test-mode-subscription-cancellation-2026-10-09.md`.
+
 ## R-PROD-code-rollout-without-billing-activation · canonical 2026-10-09
 
 The current reviewed Web source `a95deef` is deployed as Production

@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Cancellation preserves already-paid entitlement time
+
+- **Decision:** Treat a provider `subscription.cancelled` event as a
+  cancellation of future subscription charging, while preserving the license
+  period already granted by a captured payment.
+- **Evidence:** Isolated Razorpay Test Mode cancellation returned HTTP 200 and
+  reconciled to a cancelled subscription with one captured payment and one
+  active license in the isolated Preview database. No direct row edit occurred.
+- **Boundary:** Test Mode and isolated Preview only; Production remained
+  fail-closed with no plan, payment, database, entitlement, account, or
+  customer-data writes.
+- **Disposition:** This validates one Gate 4 lifecycle slice but does not
+  close the complete matrix. Score remains **219/61/280 (78.2%)**; no
+  checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-test-mode-subscription-cancellation-2026-10-09.md`.
+
 ## 2026-10-09 · Supersede stale Production deployment reference
 
 - **Decision:** Treat Web source `a95deef` and Production deployment
