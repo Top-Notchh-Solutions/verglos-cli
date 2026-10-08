@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · CLI backend, Hunt, and distribution qualification
+
+- **Source:** isolated CLI worktree `feat/cli-backend-qualification` at
+  `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`.
+- **Qualification:** Docker Desktop `29.7.2` was reachable. The pinned
+  PostgreSQL 15 Alpine fixture completed **60 pass / 1 explicit macOS Linux-
+  namespace skip / 0 fail** through `scripts/hunt-adversarial-evidence.mjs`.
+  The configured CLI package test command exited 0; ordinary Hunt tests were
+  **45/45**; build, typecheck, lint, and release/public-boundary contracts
+  **10/10** passed. `pnpm pack:public` passed after CI-equivalent optional
+  platform package provisioning.
+- **Gate result:** `license-inventory.mjs --require-clear` stopped the strict
+  release sequence on seven review blockers: BlueOak `glob`, `lru-cache`,
+  `minimatch`, `minipass`, `minipass-flush`, and `path-scurry`, plus nested
+  `benchmark@1.0.0` conflicting with `fast-uri`. No release artifact was
+  accepted and no license blocker was bypassed.
+- **Disposition:** Evidence strengthens HUNT-011/QUAL-CLI-004 and the CLI
+  distribution lane but does not close any backlog item. Hunt provenance,
+  trusted roots, independent review, legal disposition, release identity,
+  and actual operational publication remain open. No production, provider,
+  database, payment, deployment, registry, customer, or npm write occurred.
+  Backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-006 deployed docs contrast recheck
 
 - **Result:** Production `/docs/2.0.0` desktop and mobile Lighthouse both

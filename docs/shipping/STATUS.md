@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · CLI backend, Hunt, and distribution qualification
+
+The isolated CLI worktree at `origin/main` `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`
+passed the configured CLI test command, build, typecheck, lint, 45/45 ordinary
+Hunt tests, 60/61 pinned Docker adversarial cases on macOS (one explicit Linux
+namespace skip), and 10/10 release/public-boundary contract tests. `pnpm
+pack:public` passed after the same all-platform optional-package provisioning
+used by CI. The strict release sequence then stopped on seven license review
+blockers: six BlueOak-1.0.0 packages and a nested `benchmark@1.0.0` license
+conflict under `fast-uri@3.1.7`. No checkbox changed: HUNT-008–011,
+QUAL-CLI-004/006, LIC-002/003, and DIST-001–003/006 still require their
+provenance, legal, trusted-publishing, independent-review, and operational
+gates. Backlog remains **218/62/280 (77.9%)**. No production/provider/
+database/payment/deployment/npm write occurred.
+
+Evidence: `docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+
 ## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
 
 Production `/docs/2.0.0` now confirms the merged contrast correction through

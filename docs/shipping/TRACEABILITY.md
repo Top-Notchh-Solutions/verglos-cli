@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## CLI backend, Hunt, and distribution qualification · 2026-10-08
+
+At CLI source `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`, the isolated
+qualification batch passed the configured CLI package tests, build, typecheck,
+lint, ordinary Hunt tests **45/45**, pinned Docker adversarial evidence
+**60/61 with one explicit macOS namespace skip**, and release/public-boundary
+contracts **10/10**. `pnpm pack:public` passed with CI-equivalent
+cross-platform optional dependency provisioning. The strict release path
+remains blocked by seven license review blockers (six BlueOak-1.0.0 packages
+and nested `benchmark@1.0.0` license conflict under `fast-uri@3.1.7`). This is
+qualification progress only; HUNT-008–011, QUAL-CLI-004/006, LIC-002/003,
+and DIST-001–003/006 remain unchecked. No external or production state
+changed. See `docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+
 ## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
 
 Production `/docs/2.0.0` at Web merge `394d697` passes Lighthouse

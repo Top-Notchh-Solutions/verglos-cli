@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## CLI backend, Hunt, and distribution qualification · 2026-10-08
+
+The current CLI source passed the configured package tests, build, typecheck,
+lint, ordinary Hunt tests **45/45**, pinned Docker adversarial run **60 pass /
+1 explicit macOS namespace skip / 0 fail**, and release/public-boundary
+contracts **10/10**. Public package packing passed after CI-equivalent
+cross-platform optional-package installation. The strict release gate then
+failed closed at license review with seven blockers: six BlueOak-1.0.0
+dependencies (`glob`, `lru-cache`, `minimatch`, `minipass`, `minipass-flush`,
+`path-scurry`) and nested `benchmark@1.0.0` conflicting with `fast-uri`.
+This does not pass LIC-002/003, DIST-001–003/006, or QUAL-CLI-006; no
+checkbox changed and no publication occurred. Evidence:
+`docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+
 ## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
 
 Production `/docs/2.0.0` confirms the merged contrast correction: desktop and

@@ -1,5 +1,28 @@
 # Verglos V1 risk register
 
+## R-DIST-LICENSE-2026-10-08
+
+The CI-equivalent cross-platform install makes the license inventory complete,
+but the strict release gate identifies seven unresolved redistribution-review
+blockers: six BlueOak-1.0.0 transitive packages and a nested `benchmark@1.0.0`
+license conflict under `fast-uri@3.1.7`. The inventory correctly fails closed;
+do not classify these packages as clear or publish artifacts until legal review,
+an approved source/license disposition, or a reviewed dependency change is
+recorded. Owner: release/legal qualification. HUNT-008–011, LIC-002/003,
+DIST-001–003/006, and QUAL-CLI-006 remain open. No production, registry, or
+npm state changed. Evidence:
+`docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+
+## R-CLI-OPTIONAL-METADATA-2026-10-08
+
+The repository's strict license inventory requires metadata for every locked
+optional platform package. A default macOS install links only the current
+platform package and therefore reports missing esbuild metadata; the CI release
+workflow provisions all supported architectures before install. This is an
+operational reproducibility requirement, not permission to weaken inventory
+coverage. Owner: release engineering. Evidence:
+`docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+
 ## R-QUAL-WEB-006-deployed-docs · 2026-10-08
 
 The merged contrast correction is verified in production on desktop and mobile
