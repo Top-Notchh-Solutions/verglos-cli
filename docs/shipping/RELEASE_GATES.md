@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 Preview method set narrowed to provider-testable methods · 2026-10-09
+
+The isolated Preview/Test configuration now enables only `card`,
+`netbanking`, `wallet`, and `emi`. `upi`, `upi_qr`, and `paylater` were
+removed after the provider exposed UPI only as an unsafe-to-scan QR flow and
+the Pay Later test fixture rejected without creating a payment. The local test
+fixture matches Preview, and deployment
+`dpl_H7cXmiGNqddiEvwY9Dgf8rWLeZEK` built successfully; its checkout response
+contains only the four enabled method names. Production was not changed.
+
+This removes two provider-unavailable methods from the acceptance scope, but
+does **not** close PLAN-WEB-014. The four enabled methods still need complete
+provider success/failure/refund evidence and the renewal, cancellation,
+expiry, replay/out-of-order, timeout, tenant-binding, and partial-refund
+cases. No checkbox changed; count remains **218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`.
+
 ## PLAN-WEB-014 isolated Preview hosted lifecycle correction · 2026-10-09
 
 The first real Razorpay Test Mode capture exposed a production-code defect in

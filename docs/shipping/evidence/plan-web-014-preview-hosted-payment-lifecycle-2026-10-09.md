@@ -59,6 +59,14 @@ protection-bypass values are intentionally excluded.
 
 ## Qualification decision
 
+After the provider limitation was confirmed, the isolated Preview/Test
+configuration was narrowed to the provider-testable methods only:
+`card,netbanking,wallet,emi`. The Preview environment variable and local test
+fixture now agree, and the resulting Preview deployment exposes only those
+four method names. Production configuration was not changed. UPI and Pay
+Later are not claimed as supported until the provider account exposes an
+approved test flow.
+
 The following lifecycle slice is now qualified in isolated Preview:
 
 `canonical catalog binding → Test Mode capture → signed webhook → exactly-once
@@ -66,12 +74,10 @@ ledger/license grant → full provider refund → signed refund webhook → ledg
 refund watermark → license deactivation`
 
 The complete PLAN-WEB-014 gate remains **open**. The remaining matrix must
-still document an approved/testable UPI flow and Pay Later provider outcomes,
-or explicitly remove methods that the provider account does not expose, plus
-the required renewal,
-cancellation, expiry, replay, out-of-order, timeout, tenant-binding, and
-partial-refund cases. Provider simulator stalls or rejected fixtures are
-recorded rather than treated as successful outcomes.
+still document the four enabled methods' provider success/failure and refund
+behavior plus the required renewal, cancellation, expiry, replay,
+out-of-order, timeout, and tenant-binding cases. Provider simulator stalls or
+rejected fixtures are recorded rather than treated as successful outcomes.
 
 ## Backlog accounting
 

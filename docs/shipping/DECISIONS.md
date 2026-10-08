@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Narrow Preview payment methods to provider-testable set
+
+- **Decision:** Remove `upi`, `upi_qr`, and `paylater` from the isolated
+  Preview/Test configuration after the provider exposed only a QR-only UPI
+  surface and rejected the Pay Later fixture. Keep `card`, `netbanking`,
+  `wallet`, and `emi` enabled.
+- **Reason:** A rendered method label or an unusable QR/OTP screen is not
+  provider lifecycle evidence. Razorpay Test Mode produced captured provider
+  records for the four remaining methods, while UPI and Pay Later produced no
+  payment row.
+- **Evidence:** Preview variable and local `.env.test.local` now agree; the
+  Preview deployment `dpl_H7cXmiGNqddiEvwY9Dgf8rWLeZEK` built successfully and
+  its checkout response contains only the four enabled method names.
+- **Boundary:** Production configuration was not changed. PLAN-WEB-014
+  remains open for the four-method lifecycle matrix and renewal,
+  cancellation, expiry, replay, timeout, refund, and tenant evidence. Count
+  remains **218/62/280 (77.9%)**.
+
 ## 2026-10-09 · Qualify the isolated hosted capture/refund slice and keep the full matrix open
 
 - **Decision:** Accept the protected Preview capture → signed webhook →
