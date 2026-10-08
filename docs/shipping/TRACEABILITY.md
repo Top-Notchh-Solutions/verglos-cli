@@ -2,20 +2,19 @@
 
 ## ENT-CLI-001 hosted private-runner transport · 2026-10-08
 
-Web PR #158 (`7b3cea6`) merged as `d5c91df3a78dfdab29cb6150864de2fd761db1aa`;
-CLI PR #81 (`63fb714`) merged as `111d3aad9ddd89285c24aaec142aa71a72e22905`.
-The Web side now has tenant-scoped runner enrollment, signed short-lived job
-issuance/polling, source-free result reconciliation, and additive migration
-`0037_private_runner_transport`; the CLI side has bounded authenticated
-`runner upload-result` projection upload. Web private-runner contracts pass
-24/24, the organization tenant/access audit passes 38/38, Web type/schema/
-migration/build and hosted repository checks pass, and CLI focused tests pass
-5/5 with all hosted platform/self-scan/in-toto checks green. No production
-migration or state write occurred. This does not close `ENT-CLI-001`: runner
-credential exchange, isolated non-production execution/reconciliation, and
-independent Hunt review remain open. No checkbox changed; backlog remains
-**218 checked / 62 unchecked / 280 total (77.9%)**. See
-`docs/shipping/evidence/ent-cli-001-private-runner-transport-2026-10-08.md`.
+Web PR #159 merged as `2b3f37918fb386b0d5ffa231fa5f6ee11ae6e07b`. The first
+authenticated empty poll now activates an enrolled runner, and exact result
+replays are idempotent after completion while conflicting replays are refused.
+The real Web route lifecycle passed **1/1** against a fresh loopback PostgreSQL
+15 fixture; focused private-runner contracts passed **24/24**; the clean
+configured serial suite passed **883/884** with one intentional skip; hosted
+Verify, Vercel, and GitGuardian checks passed. This is route/database
+qualification only: operational credential exchange, approved runner
+execution, cross-platform qualification, independent Hunt review, and
+enterprise acceptance remain open. No production migration or state write
+occurred. No checkbox changed; backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. See
+`docs/shipping/evidence/ent-cli-001-private-runner-e2e-2026-10-08.md`.
 
 ## QUAL-WEB-006 / PLAN-WEB-015 read-only runtime observation · 2026-10-08
 

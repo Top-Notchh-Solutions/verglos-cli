@@ -1,21 +1,23 @@
 # Verglos V1 Execution Ledger
 
-## 2026-10-08 · ENT-CLI-001 hosted private-runner transport batch
+## 2026-10-08 · ENT-CLI-001 private-runner lifecycle qualification
 
-- **Sources:** Web PR #158 merged as `d5c91df3a78dfdab29cb6150864de2fd761db1aa`; CLI PR #81 merged as `111d3aad9ddd89285c24aaec142aa71a72e22905`.
-- **Verification:** Web private-runner contracts **24/24**, tenant/access
-  audit **38/38**, typecheck, schema, 38-migration ordering, build, hosted
-  type/schema/build/security/dependency/license/Vercel checks all pass. CLI
-  focused client tests **5/5**, hosted 9-cell platform matrix, self-scan, and
-  in-toto all pass.
-- **Safety:** The hosted schema stores only bounded runner/job/result metadata;
+- **Source:** Web PR #159 merged as `2b3f37918fb386b0d5ffa231fa5f6ee11ae6e07b`.
+- **Verification:** Real enrollment → first empty poll activation → signed job
+  poll → source-free result → exact replay/conflict → tenant-isolation route
+  lifecycle **1/1** on fresh PostgreSQL 15; focused private-runner contracts
+  **24/24**; clean serial suite **883 passed / 1 skipped / 0 failed**; Web
+  typecheck, schema, 38-migration ordering, build, hosted Verify, Vercel, and
+  GitGuardian checks pass.
+- **Safety:** The fixture is loopback-only and drops only tables it created.
+  Hosted runner/result data remains bounded metadata plus an evidence digest;
   no command, source, or raw output crosses the transport. No production
   migration, database/provider/payment/entitlement/deployment write occurred.
-- **Disposition:** Implementation substrate only. `ENT-CLI-001` remains open
-  for operational enrollment/credential exchange, isolated non-production
-  execution/result reconciliation, independent Hunt review, and acceptance.
-  Backlog remains **218/62/280 (77.9%)**.
-- **Evidence:** `docs/shipping/evidence/ent-cli-001-private-runner-transport-2026-10-08.md`.
+- **Disposition:** Stronger route/database qualification, but not full
+  `ENT-CLI-001`. Operational credential exchange, approved runner execution,
+  cross-platform qualification, independent Hunt review, and enterprise
+  acceptance remain open. Backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/ent-cli-001-private-runner-e2e-2026-10-08.md`.
 
 ## 2026-10-08 · Production read-only browser qualification
 

@@ -2,16 +2,17 @@
 
 ## ENT-CLI-001 hosted private-runner transport · 2026-10-08
 
-Web PR #158 and CLI PR #81 merged after their hosted repository checks passed,
-including Web type/schema/build/security/dependency/license gates and the CLI
-9-cell platform matrix, self-scan, and in-toto binding. The additive Web
-transport persists only bounded runner/job/result metadata and the CLI uploads
-only the least-evidence result projection. This advances implementation only;
-it does not pass ENT-CLI-001. Operational credential exchange, isolated
-non-production execution/result reconciliation, and independent Hunt review
-remain required. No production migration or write occurred.
+Web PR #159 merged as `2b3f37918fb386b0d5ffa231fa5f6ee11ae6e07b` after the
+real route lifecycle passed **1/1** against a fresh loopback PostgreSQL 15
+fixture. The first empty poll activates an enrolled runner and exact completed
+result replays are idempotent; conflicts remain refused. Focused contracts,
+clean serial tests, Web static checks, hosted Verify, Vercel, and GitGuardian
+all pass. This still does not pass ENT-CLI-001: operational credential
+exchange, approved runner execution, cross-platform qualification, independent
+Hunt review, and enterprise acceptance remain required. No production migration
+or write occurred.
 
-Evidence: `docs/shipping/evidence/ent-cli-001-private-runner-transport-2026-10-08.md`.
+Evidence: `docs/shipping/evidence/ent-cli-001-private-runner-e2e-2026-10-08.md`.
 
 ## QUAL-WEB-006 / PLAN-WEB-015 runtime observation · 2026-10-08
 

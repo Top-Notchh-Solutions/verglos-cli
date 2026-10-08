@@ -2,17 +2,20 @@
 
 ## ENT-CLI-001 private-runner hosted transport · 2026-10-08
 
-Web PR #158 merged as `d5c91df3a78dfdab29cb6150864de2fd761db1aa` and CLI PR #81
-merged as `111d3aad9ddd89285c24aaec142aa71a72e22905`. The batch adds the
-tenant-scoped enrollment/job/result transport, additive migration `0037`, and
-the CLI source-free result upload command. Web private-runner/access contracts
-pass 24/24 and 38/38; Web typecheck/schema/migration checks/build and hosted
-repository checks pass; CLI focused tests pass 5/5 and the hosted 9-cell,
-self-scan, and in-toto checks pass. This is not full ENT-CLI-001 acceptance:
-isolated non-production execution/result reconciliation, credential exchange,
-and independent Hunt review remain open. No production migration or write was
-performed. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
-Evidence: `docs/shipping/evidence/ent-cli-001-private-runner-transport-2026-10-08.md`.
+Web PR #159 merged as `2b3f37918fb386b0d5ffa231fa5f6ee11ae6e07b` after fixing
+two lifecycle boundary defects: the first authenticated empty poll activates
+an enrolled runner, and an identical result replay remains idempotent after
+completion while conflicting replay remains rejected. The real Web route
+lifecycle passed **1/1** against a fresh loopback PostgreSQL 15 fixture;
+`test:private-runner` passed **24/24**; the clean serial suite passed **883**
+with 1 intentional skip and 0 failures; typecheck, schema, 38-migration
+ordering, build, and hosted Verify/Vercel/GitGuardian checks passed. This is
+still not full ENT-CLI-001 acceptance: operational credential exchange,
+approved runner execution, cross-platform qualification, independent Hunt
+review, and enterprise acceptance remain open. No production migration or
+write was performed. No checkbox changed; backlog remains **218/62/280
+(77.9%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-private-runner-e2e-2026-10-08.md`.
 
 ## Production read-only browser qualification · 2026-10-08
 
