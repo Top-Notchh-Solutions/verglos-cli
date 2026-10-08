@@ -1493,3 +1493,21 @@ each observed method has lifecycle and reconciliation evidence.
 - **Boundary:** Synthetic tests do not prove Razorpay provider lifecycle,
   refunds, renewals, entitlement reconciliation, or production truth. R-041
   credential containment and PLAN-WEB-014/015 remain open.
+
+## Invoice-bound subscription captures and Production code rollout · 2026-10-09
+
+- **Decision:** Bind Razorpay subscription captures through the provider's paid
+  invoice when the payment entity omits `subscription_id`; normalize only the
+  observed string boolean representation of `captured` and retain all exact
+  commercial, signature, status, and refund checks.
+- **Evidence:** Web `a95deef`; focused webhook 13/13; full Web 891 total,
+  868 pass, 23 explicit skips, 0 failures; isolated Preview invoice/payment/
+  subscription/ledger/license reconciliation; Production deployment
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` with runtime-config, build, and read-only
+  smoke passing.
+- **Production boundary:** Production receives the reviewed code only. No
+  Production plan IDs, payment/provider writes, database/migration writes,
+  entitlement changes, account changes, or customer-data mutations occurred.
+- **Disposition:** The observed first-charge subscription defect is fixed. The
+  full Gate 4 lifecycle matrix and provider/ledger/entitlement reconciliation
+  remain open; no backlog checkbox is accepted from this batch.

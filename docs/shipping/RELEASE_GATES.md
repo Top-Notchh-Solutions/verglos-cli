@@ -1663,3 +1663,17 @@ destructive-worker E2E, reconciliation, restore/rollback, production
 authorization, and independent acceptance remain open. No checkbox or
 production state changed. Evidence:
 `docs/shipping/evidence/qual-web-005-route-e2e-2026-10-08.md`.
+
+## PLAN-WEB-014 subscription invoice binding and Production code rollout · 2026-10-09
+
+Web `a95deef` passed focused webhook **13/13**, full Web **891 total / 868
+pass / 23 explicit skips / 0 fail**, typecheck, and the 45-page build. A fresh
+isolated Preview/Test Mode subscription reconciled through its paid invoice to
+the provider payment/order/subscription, an active isolated subscription, a
+captured payment ledger row, and a license binding. Production deployment
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` passed runtime-config/build/read-only smoke
+and remains fail-closed for billing activation. This qualifies the observed
+first-charge subscription defect as fixed, but does not pass the complete Gate
+4 lifecycle matrix or provider/ledger/entitlement reconciliation. No checkbox
+changed. Evidence:
+`docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.

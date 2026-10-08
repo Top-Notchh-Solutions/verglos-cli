@@ -3,7 +3,7 @@
 ## Production code-rollout evidence — 2026-10-09
 
 The reviewed Web source is deployed to Production as READY deployment
-`dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg`, aliased to `https://verglos.com`, after
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, aliased to `https://verglos.com`, after
 the local/remote build and read-only public smoke passed. This is real
 Production shipping progress and is included in the active goal. It does not
 close a checkbox: `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
@@ -13,7 +13,26 @@ database writes, migrations, entitlement changes, account changes, and
 customer-data mutations remain fail-closed until their own preflight exists.
 The live score is **219 checked / 61 unchecked / 280 total (78.2%)**.
 
-Evidence: `docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`.
+Evidence: `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+
+## PLAN-WEB-014 subscription invoice-binding fix and Preview reconciliation · 2026-10-09
+
+Web commit `a95deef` binds subscription captures through Razorpay's paid
+invoice when the payment payload omits `subscription_id`, and normalizes the
+observed string form of the provider `captured` flag without weakening the
+captured/status/refund checks. Focused webhook tests passed **13/13**; the full
+Web suite passed **891 total / 868 pass / 23 explicit skips / 0 fail**;
+typecheck and the 45-page build passed. Preview deployment
+`dpl_FBtepYT84UUNCcvjo1jj43HxU7KB` delivered a fresh canonical Test Mode
+subscription whose provider invoice, payment, order, active subscription,
+captured ledger row, and license binding reconciled in the isolated database.
+No rows were manually edited. This advances but does not close the full Gate 4
+matrix: renewal, failure, cancellation/expiry, refunds, replay/out-of-order,
+and complete provider/ledger/entitlement reconciliation remain open. No
+checkbox changed; the score remains **219 checked / 61 unchecked / 280 total
+(78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
 
 ## Payment catalog/checkout abstraction accepted · 2026-10-09
 
@@ -29,14 +48,15 @@ to `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and `PLAN-WEB-015`; it is not
 being claimed here. Score is now **219 checked / 61 unchecked / 280 total
 (78.2%)**.
 
-## Backend/CLI external-gate recheck · 2026-10-09
+## Backend/CLI external-gate recheck · 2026-10-09 · superseded by later setup
 
-No open CLI PR or dependency-ready CLI code gap was found. Production metadata
-has the payment catalog and database variable; Preview has provider credential
-metadata but no database URL, isolation marker, or enabled payment catalog.
-Owners, missing evidence, and the next review point are recorded privately.
-No values or environment state were changed; no checkbox changed. The exact
-score remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+At the time of this read-only recheck, no open CLI PR or dependency-ready CLI
+code gap was found and Preview lacked the isolated payment prerequisites. The
+later same-day gate work created the isolated Neon test database, applied the
+reviewed migration set, set the Preview isolation marker, enabled the Test Mode
+method catalog, and verified the Test Mode webhook target. The current
+subscription and Production rollout evidence is recorded above. This historical
+entry is retained for audit order; no checkbox was changed by the recheck.
 
 Evidence: `docs/shipping/evidence/backend-external-gate-recheck-2026-10-09.md`.
 
@@ -796,7 +816,7 @@ The final evaluation corpus is deliberately sequenced **after the complete shipp
 - [ ] **GITHUB-WEB-003** · GitHub delivery/replay/reconciliation · deps: GITHUB-WEB-001/002 · Bind delivery IDs, installation IDs, repository IDs, commit/artifact identity, retries, and lifecycle reconciliation; prove duplicate and cross-tenant deliveries are harmless. Commit(s): Web PR #144 (`afb48dc`/`a496608`, merged `1b2a623`) and PR #154 (`9032bda`, merged `1498837`) implement the code-side binding/refresh contract; live delivery and reconciliation evidence remain open.
 - [ ] **GITHUB-WEB-004** · live GitHub organization cutover qualification · deps: GITHUB-WEB-001-003, R-041 rotation · Run a bounded test-mode/authorized GitHub organization installation and record permissions, webhook delivery, check publication, uninstall, and recovery evidence. Commit(s): —
 - [x] **PLAN-WEB-013** · provider payment-method catalog and checkout abstraction · deps: PLAN-WEB-011/012 · Model enabled Razorpay methods from server configuration/catalog; support method selection without claiming unavailable methods; preserve captured-only entitlement and idempotent lifecycle rules. Commit(s): Web PR #145 (`3ce60b8`, merged `d6ce773`) and Web PR #149 (`eb7e55a`, `f734acc`, `520d40a`, `67fb7e2`, `3f4a7aa`, `e46299a`, merged as `8b843da`) implement the fail-closed server catalog, hosted order checkout, signed order binding, webhook-authoritative fulfillment, explicit QR adapter boundary, fail-closed client response parsing, and provider-method validation on captured/failed order webhooks; the new order path binds the server-selected hosted method set while preserving legacy QR/subscription/order compatibility. Acceptance evidence: the canonical-amount Test Mode aggregate, four-method Preview/Production response checks, focused 55-test suite, isolated database integrations, typecheck, and 43-route build are recorded in `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`. Downstream provider lifecycle and Production reconciliation remain tracked by `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and `PLAN-WEB-015`.
-- [ ] **PLAN-WEB-014** · Razorpay test-mode payment matrix · deps: PLAN-WEB-013 · Qualify every method enabled for this account (at minimum cards, UPI, netbanking, wallets when enabled) across success/failure/capture/refund/renewal/replay/out-of-order paths, with private identifiers and redacted evidence. Commit(s): bounded hosted method observation, incomplete card/direct-navigation probes, and the 2026-10-07 hosted card failure-path attempt are recorded in `docs/shipping/evidence/plan-web-014-card-sandbox-contact-2026-10-07.md`, `docs/shipping/evidence/plan-web-014-direct-checkout-navigation-2026-10-07.md`, and `docs/shipping/evidence/plan-web-014-test-mode-lifecycle-attempt-2026-10-07.md`; no success/capture/refund/renewal or entitlement lifecycle evidence yet.
+- [ ] **PLAN-WEB-014** · Razorpay test-mode payment matrix · deps: PLAN-WEB-013 · Qualify every method enabled for this account (at minimum cards, UPI, netbanking, wallets when enabled) across success/failure/capture/refund/renewal/replay/out-of-order paths, with private identifiers and redacted evidence. Commit(s): bounded hosted method observation, incomplete card/direct-navigation probes, and the 2026-10-07 hosted card failure-path attempt are recorded in `docs/shipping/evidence/plan-web-014-card-sandbox-contact-2026-10-07.md`, `docs/shipping/evidence/plan-web-014-direct-checkout-navigation-2026-10-07.md`, and `docs/shipping/evidence/plan-web-014-test-mode-lifecycle-attempt-2026-10-07.md`; the 2026-10-09 isolated Test Mode run now evidences one canonical subscription first charge through a paid invoice, active subscription, captured ledger payment, and license binding. Renewal, failure, cancellation/expiry, refund, replay/out-of-order, and complete reconciliation evidence remain open.
 - [ ] **PLAN-WEB-015** · payment-method truth and production reconciliation · deps: PLAN-WEB-014, DIST-WEB-002 · Reconcile checkout UI, plan catalog, webhook subscriptions, provider configuration, and production deployment; fail closed when a method is not enabled or evidence is stale. Commit(s): —
 
 ### 2026-10-07 payment handler/database continuation

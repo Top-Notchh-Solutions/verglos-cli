@@ -5947,3 +5947,33 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
   preflight evidence.
 - **Backlog:** no checkbox changed; **219 checked / 61 unchecked / 280 total
   (78.2%)**.
+
+## 2026-10-09 · PLAN-WEB-014 invoice-bound subscription reconciliation and Production rollout
+
+- **Source:** Web commit `a95deef`, including the subscription creation/status
+  path, Preview-only redacted diagnostics, and invoice-backed subscription
+  capture binding.
+- **Verification:** focused webhook tests **13/13**; full Web suite **891
+  total / 868 pass / 23 explicit skips / 0 fail**; typecheck and 45-page build
+  passed. Razorpay Test Mode webhook remained enabled and targeted the isolated
+  Preview deployment `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB`.
+- **Hosted Preview:** a fresh canonical Test Mode subscription completed
+  checkout. Read-only provider evidence showed the paid invoice linked to the
+  payment, order, and subscription; read-only isolated-DB evidence showed the
+  subscription active, a captured subscription payment, and a license binding.
+  No database row was manually created or edited.
+- **Production:** the same reviewed code deployed successfully as
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY and aliased to `https://verglos.com`.
+  Runtime configuration and the 45-page build passed. Read-only smoke returned
+  200 for `/`, `/checkout`, and `/docs`, with expected 405/401 method/auth
+  boundaries; the checkout exposed no Test Mode marker or test key.
+- **Boundary:** no Production plan IDs, payment/provider writes, database or
+  migration writes, entitlement changes, account changes, or customer-data
+  mutations occurred. Production remains intentionally fail-closed for billing
+  activation.
+- **Disposition:** the observed subscription-capture defect is fixed and the
+  first-charge lifecycle is evidenced. Gate 4 remains open for the remaining
+  renewal/failure/cancellation/expiry/refund/replay/out-of-order matrix and
+  complete provider/ledger/entitlement reconciliation. No checkbox changed;
+  backlog remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.

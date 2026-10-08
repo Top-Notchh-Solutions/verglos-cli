@@ -78,6 +78,16 @@ and hosted UI. It still must be qualified against real isolated Razorpay Test
 Mode subscription authorization and lifecycle events before Gate 4 can be
 called complete.
 
+The next provider observation exposed and then verified a second concrete gap:
+Razorpay's first subscription capture is linked through a paid invoice and
+order, while the payment entity may omit `subscription_id`. Web commit
+`a95deef` adds invoice-backed binding and accepts the observed string form of
+the provider's captured flag while retaining exact amount, currency, status,
+refund, signature, and signed-note checks. A fresh isolated Preview/Test Mode
+subscription now reconciled to an active subscription, a captured subscription
+payment, and a license binding. This advances Gate 4 evidence; it does not
+claim the full renewal/failure/refund/replay/out-of-order matrix complete.
+
 Verglos is intended for local, CI, hosted, team, organization, and
 enterprise-shaped use cases. It is not a local-only product. Those claims are
 valid only when the corresponding authorization, isolation, entitlement,
@@ -142,23 +152,26 @@ Current source checkpoints:
 - Web PR #169 was a duplicate of already merged Preview-auth work (its patch
   was identical to PR #157 and its base was stale) and is now closed. It was
   not merged or counted as new shipping progress.
-- Current Web implementation branch: `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd`.
-  It adds the provider-subscription creation/status path and remains a code
-  qualification batch until the isolated provider lifecycle is evidenced.
+- Current Web qualification branch: `a95deef`.
+  It includes the provider-subscription creation/status path, Preview-only
+  redacted diagnostics, and invoice-backed subscription-capture reconciliation.
 - The latest isolated Preview deployment is
-  `dpl_BE76hsDCU3aA2qsEfKiGUbPXJTVK`, READY at
-  `https://verglos-9gksldv34-anuragyadav20062002s-projects.vercel.app` with
+  `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB`, READY at
+  `https://verglos-bhvvgg66m-anuragyadav20062002s-projects.vercel.app` with
   isolated Preview configuration, canonical Test Mode plan IDs, the enabled
-  Test Mode webhook, and the rotated Preview test-auth secret.
+  Test Mode webhook, and the rotated Preview test-auth secret. The fresh
+  provider subscription on this deployment reconciled through its paid invoice
+  into the isolated database and entitlement ledger.
 - The latest Production deployment is
-  `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg`, READY at
-  `https://verglos-og4wus4sa-anuragyadav20062002s-projects.vercel.app` and
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY at
+  `https://verglos-cghkmkzzg-anuragyadav20062002s-projects.vercel.app` and
   aliased to `https://verglos.com`. The remote runtime-config check, 45-page
   build, and read-only public smoke passed. Production plan IDs were
   deliberately not added, so recurring billing remains fail-closed there.
-  This is a complete Production code-rollout slice; live billing, provider,
-  database, migration, entitlement, account, and customer-data activation
-  remain explicitly included deferred stages with their own preflights.
+  This is the latest complete Production code-rollout slice; live billing,
+  provider, database, migration, entitlement, account, and customer-data
+  activation remain explicitly included deferred stages with their own
+  preflights.
 - Razorpay Test Mode accepted the credentials in
   `verglos-web/.env.gates.testing`; no rotation was required. The account had
   no plans, so the canonical Pro plans were created in Test Mode only:
@@ -388,10 +401,13 @@ a changed input or a clear acceptance need:
   subscription-creation route is now implemented and isolated route
   qualification passed **2/2**, but provider subscription
   authorization/renewal/cancellation/expiry is not claimed. The valid Test
-  Mode credential and canonical Test Mode plan setup are now available, but
-  the hosted subscription lifecycle still needs to be run and reconciled.
-  Private evidence is
-  `docs/shipping/evidence/plan-web-011-012-subscription-checkout-code-2026-10-09.md`.
+  Mode credential and canonical Test Mode plan setup are now available, and a
+  fresh first-charge subscription lifecycle has been run and reconciled through
+  the provider invoice on isolated Preview. The remaining Gate 4 matrix still
+  requires renewal, failure, cancellation/expiry, refunds, replay/out-of-order
+  delivery, and complete provider/ledger/entitlement reconciliation. Private
+  evidence is
+  `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
 - A fresh local PostgreSQL 15 qualification of the merged Web tree applied all
   38 migrations and passed the authenticated account-deletion route E2E 1/1
   plus deletion-job lease/idempotency integration 1/1. This strengthens
@@ -538,11 +554,13 @@ which remain deferred, and why.
 
 The immediate technical sequence is:
 
-1. Run isolated Preview/Test Mode subscription lifecycle evidence against the
-   newly implemented creation/status path.
-2. Reconcile the
-   payment ledger, provider records, and entitlement state.
-3. Close only the payment backlog IDs whose complete criteria are evidenced.
+1. Run the remaining isolated Preview/Test Mode subscription and hosted-order
+   matrix against the reviewed creation/status and invoice-binding paths.
+2. Reconcile each provider record, payment ledger row, subscription lifecycle,
+   and entitlement state without manual row edits.
+3. Close only the payment backlog IDs whose complete criteria are evidenced;
+   keep Production activation writes deferred until their operation-specific
+   preflight is complete.
 4. Run the Production read-only smoke/reconciliation pass against the newly
    deployed code; do not enable recurring billing from Test Mode configuration.
 5. Resolve the npm/CLI versus Web SCM scope decision before attempting Gate 5.
@@ -1022,7 +1040,7 @@ Production smoke evidence is:
 
 The latest exact Production code-rollout evidence is:
 
-`docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`
+`docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`
 
 The latest rollback boundary evidence is:
 
@@ -1047,6 +1065,10 @@ The latest authenticated account-runtime qualification evidence is:
 The latest payment qualification and Gate 4 evidence is:
 
 `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`
+
+The latest subscription invoice-binding and Production rollout evidence is:
+
+`docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`
 
 The latest payment decision and backlog acceptance are recorded in
 private commit `5a99b0d`; the preceding payment qualification evidence commit

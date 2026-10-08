@@ -1073,3 +1073,14 @@ the incident. Stop all provider/production qualification until the test and
 production credentials are rotated/revoked, Vercel production configuration is
 refreshed and redeployed where required, and bounded read-only verification
 confirms the old values are unusable. Do not copy any value into this ledger.
+
+R-041 update (2026-10-09, invoice-bound subscription and Production rollout):
+Web `a95deef` fixes the observed subscription-capture routing defect by binding
+through a paid provider invoice when `subscription_id` is absent; isolated
+Preview evidence now shows an active subscription, captured subscription
+payment, and license binding. The same code is READY in Production as
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` with no activation writes. Remaining risk is
+the unqualified renewal/failure/cancellation/expiry/refund/replay/out-of-order
+matrix and complete provider/ledger/entitlement reconciliation. Production
+billing and database activation remain fail-closed behind operation-specific
+backup/restore, reconciliation, and rollback preflights.

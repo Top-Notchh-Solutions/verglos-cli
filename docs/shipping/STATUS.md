@@ -4339,3 +4339,28 @@ checkbox changed.
   reconciliation gates. Backlog remains **218 checked / 62 unchecked / 280
   total (77.9%)**.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-hosted-method-contract-matrix-2026-10-08.md`; `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
+
+## 2026-10-09 · current Preview reconciliation and Production code rollout
+
+Web commit `a95deef` fixes the observed Razorpay subscription-capture binding:
+the handler now resolves a paid provider invoice when the payment entity omits
+`subscription_id`, while retaining exact signed-note, amount, currency, status,
+and refund checks. Focused webhook tests passed **13/13**; the full Web suite
+passed **891 total / 868 pass / 23 explicit skips / 0 fail**; typecheck and the
+45-page build passed. A fresh isolated Test Mode subscription reconciled to an
+active subscription, captured subscription ledger payment, and license binding
+without manual database edits.
+
+The same reviewed code is deployed to Production as READY deployment
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, aliased to `https://verglos.com`.
+Production runtime configuration, build, public route smoke, method/auth
+boundaries, checkout safety markers, private no-store headers, and HSTS passed.
+No Production plan IDs, payment/provider writes, database/migration writes,
+entitlement changes, account changes, or customer-data mutations occurred.
+
+The subscription first-charge defect is resolved, but Gate 4 remains open for
+the remaining renewal/failure/cancellation/expiry/refund/replay/out-of-order
+matrix and complete provider/ledger/entitlement reconciliation. No checkbox
+changed; the current authoritative score is **219 checked / 61 unchecked / 280
+total (78.2%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.

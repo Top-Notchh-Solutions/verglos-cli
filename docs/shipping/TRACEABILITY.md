@@ -421,6 +421,27 @@ FINAL-WEB-001–008 remain open, and the count remains **218 checked / 62
 unchecked / 280 total (77.9%)**. See
 `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
 
+## PLAN-WEB-014 invoice-bound subscription and Production rollout · 2026-10-09
+
+- **Implementation:** Web `a95deef` adds paid-invoice binding for subscription
+  captures whose payment entity omits `subscription_id`, plus observed string
+  boolean normalization for `captured`.
+- **Tests/build:** focused webhook **13/13**; full Web **891 total / 868 pass /
+  23 explicit skips / 0 fail**; typecheck and 45-page build passed.
+- **Hosted evidence:** Preview `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB` completed a
+  fresh canonical Test Mode subscription and reconciled provider invoice,
+  payment, order, active subscription, captured ledger row, and license in the
+  isolated database without manual edits.
+- **Production evidence:** the same reviewed code is READY as
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, aliased to `https://verglos.com`; runtime
+  config, build, route/method/auth smoke, checkout safety markers, and headers
+  passed. No Production billing/database/entitlement/account/customer writes.
+- **Disposition:** this advances PLAN-WEB-014/015 and fixes the observed
+  subscription-capture gap; the full Gate 4 lifecycle matrix and complete
+  provider/ledger/entitlement reconciliation remain open. No checkbox changed.
+  Evidence:
+  `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+
 ## DIST-006 rollback/revocation rehearsal · 2026-10-08
 
 CLI PR #83 source `d2a94d0` merged as `c1a2856`. The local command now
