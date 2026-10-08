@@ -11,7 +11,8 @@
   forged public receipt 1×404/no-store. A separate malformed-ID probe returned
   4×400/private-no-store and 1×404/no-store. Current Web source commit
   `1e2b392` passed the corresponding tenant/negative-boundary/public-receipt/
-  entitlement tests **24/24**.
+  entitlement tests **24/24**. The three legacy account-route 401 responses
+  are expected CLI-Bearer boundaries, not Clerk-browser regressions.
 - **Safety:** No write method, payment, entitlement, database, deployment,
   provider, or account-state operation occurred.
 - **Disposition:** Partial `PLAN-CLI-003` evidence only. Modified-CLI and

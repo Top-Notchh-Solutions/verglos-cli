@@ -10,8 +10,10 @@ receipt returned 404/no-store. No response bodies, cookies, authorization
 headers, or personal data were captured and no mutation occurred. This is
 partial `PLAN-CLI-003` evidence; the current Web source at `1e2b392` also
 passed the corresponding tenant/negative-boundary/public-receipt/entitlement
-batch **24/24**. Paid/list/search/export fixture coverage and modified-CLI
-end-to-end proof remain open. No checkbox changed; backlog
+batch **24/24**. The three 401 responses from legacy license/monitor/score
+routes are expected because they require CLI Bearer credentials rather than
+browser Clerk authentication. Paid/list/search/export fixture coverage and
+modified-CLI end-to-end proof remain open. No checkbox changed; backlog
 remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/plan-cli-003-hosted-forged-route-matrix-2026-10-08.md`.
 

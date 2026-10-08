@@ -23,7 +23,9 @@
 - Authenticated account-level GETs: **2 returned 200** with private
   `no-store`; this records availability only and does not inspect their bodies.
 - Unauthenticated/unsupported account routes: **3 returned 401** with private
-  `no-store`.
+  `no-store`; source inspection confirms these legacy license/monitor/score
+  routes intentionally require the CLI Bearer license/unlock credential, which
+  the browser’s Clerk session does not provide.
 - Malformed/invalid route input: **1 returned 400** with private `no-store`.
 - Forged public receipt: **1 returned 404** with `no-store`.
 - Separate malformed-ID probe: **4 returned 400** with private `no-store` and
