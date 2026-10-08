@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · Vercel production/Preview read-only reconciliation
+
+- **Production:** Linked-project inspection shows latest deployment
+  `dpl_GQSb8NahZMKUdabYQSKJLyXpP9r1` `READY` on merged Web commit `51bb6fe`;
+  the live aliases include `verglos.com` and `www.verglos.com`.
+- **Configuration shape:** Production variable-name presence includes
+  `DATABASE_URL`, Razorpay key/webhook names, and
+  `RAZORPAY_ENABLED_PAYMENT_METHODS`. Preview has its database and Razorpay
+  credential/webhook names but no enabled-method variable, preserving the
+  fail-closed Preview boundary. Values were never read or printed.
+- **Disposition:** This updates deployment/configuration evidence only. It does
+  not prove old database-credential revocation, DB isolation, provider method
+  account truth, or payment lifecycle. No checkbox changed; R-041 and
+  `PLAN-WEB-011/012/013/014/015` remain open. Backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence file:**
+  `docs/shipping/evidence/vercel-production-preview-readonly-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-006 production account/checkout read-only audit
 
 - **Evidence:** Existing authenticated `/account` and production `/checkout`

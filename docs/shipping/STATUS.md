@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · Vercel production/Preview read-only reconciliation
+
+The linked Vercel project is accessible read-only. Production deployment
+`dpl_GQSb8NahZMKUdabYQSKJLyXpP9r1` is `READY` on merged Web commit `51bb6fe`,
+and the Production variable-name inventory includes the hosted-method setting.
+Preview retains database and Razorpay credential names but no enabled-method
+setting, so it remains fail-closed. Values were not read or changed. This does
+not prove database-credential revocation/isolation, provider account truth, or
+payment lifecycle. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/vercel-production-preview-readonly-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-006 production account/checkout audit
 
 The existing authenticated account and production checkout were audited
