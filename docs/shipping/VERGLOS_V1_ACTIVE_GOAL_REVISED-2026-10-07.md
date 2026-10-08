@@ -164,6 +164,12 @@ a changed input or a clear acceptance need:
   failures, typecheck/build passed, and all hosted checks passed. This does not
   prove database migration/schema, webhook-target, provider lifecycle, or
   production reconciliation.
+- A metadata-only Vercel audit confirms the latest READY production deployment
+  is Web `be4289f` and that Production `DATABASE_URL` was updated before it.
+  Preview has no database URL, no isolation marker, and no enabled payment
+  catalog, so Preview remains safely payment-disabled. This is rotation and
+  fail-closed configuration evidence only; it does not prove the target,
+  revocation, backup/restore, migration reconciliation, or payment lifecycle.
 
 Private evidence for the latest CLI batch is:
 
@@ -584,6 +590,10 @@ The latest rollback boundary evidence is:
 The latest current-head Hunt evidence is:
 
 `docs/shipping/evidence/hunt-docker-adversarial-origin-main-2026-10-09.md`
+
+The latest Vercel configuration evidence is:
+
+`docs/shipping/evidence/vercel-production-preview-config-audit-2026-10-09.md`
 
 The private tracker’s backlog, status, execution ledger, traceability,
 decisions, risks, release gates, evidence, and this goal are the source of

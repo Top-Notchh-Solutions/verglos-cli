@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-041-vercel-rotation-metadata-audit · 2026-10-09
+
+Vercel metadata shows the production `DATABASE_URL` value was updated before
+the latest READY production deployment at Web `be4289f`. The audit did not read
+the value or target database, so it cannot prove old-credential revocation,
+database identity, backup/restore, migration reconciliation, or bounded
+post-rotation behavior. Preview intentionally has no database URL or isolation
+marker and no enabled payment catalog, keeping Preview payment-disabled. Owner:
+Web/release operations. Evidence:
+`docs/shipping/evidence/vercel-production-preview-config-audit-2026-10-09.md`.
+
 ## R-PLAN-WEB-014-preview-isolation-guard · 2026-10-09
 
 Web PR #170 is merged and prevents Preview payment configuration from starting

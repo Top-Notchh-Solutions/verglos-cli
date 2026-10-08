@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## Vercel production/Preview configuration audit · 2026-10-09
+
+Read-only Vercel metadata confirms the latest production deployment is READY at
+Web `be4289f`, and production `DATABASE_URL` has an updated metadata timestamp
+before that deployment. The value and target were not read. Preview has no
+`DATABASE_URL`, no `VERGLOS_PREVIEW_DATABASE_ISOLATED`, and no enabled payment
+catalog, so Preview remains safely payment-disabled. This supports rotation
+and fail-closed deployment evidence but does not close R-041 or payment
+lifecycle acceptance. No checkbox changed; the exact score remains **218
+checked / 62 unchecked / 280 total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/vercel-production-preview-config-audit-2026-10-09.md`.
+
 ## Web duplicate PR cleanup · 2026-10-09
 
 Web PR #169 was verified byte-for-byte identical to already merged PR #157,

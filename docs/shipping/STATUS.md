@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Vercel production/Preview configuration audit
+
+The latest production deployment is READY at Web `be4289f`, and production
+`DATABASE_URL` has update metadata after its original creation. Preview has no
+database URL, no explicit isolation marker, and no enabled payment-method
+catalog, so Preview remains fail-closed/payment-disabled. This is partial
+rotation/configuration evidence only; R-041, isolated migration/schema, and
+provider lifecycle remain open. No checkbox changed; score remains
+**218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/vercel-production-preview-config-audit-2026-10-09.md`.
+
 ## 2026-10-09 · Preview payment database-isolation guard merged
 
 Web PR #170 merged as `be4289f` after focused **38/38**, serial **864 pass /

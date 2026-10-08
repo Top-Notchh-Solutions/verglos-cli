@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Vercel production/Preview configuration audit
+
+- **Instrument:** Vercel CLI metadata-only reads against the linked
+  `verglos-web` project.
+- **Result:** Latest production deployment is READY at `be4289f`; production
+  `DATABASE_URL` has a later update metadata timestamp than creation. Preview
+  has no `DATABASE_URL`, no isolation marker, and no enabled payment catalog,
+  so Preview remains fail-closed/payment-disabled.
+- **Disposition:** Supports rotation/configuration evidence only. It does not
+  prove target database identity, credential revocation, backup/restore,
+  migration/schema, webhook routing, provider lifecycle, or production
+  reconciliation. R-041 and payment rows remain open.
+- **Boundary:** No secret values read or printed; no environment, production,
+  database, migration, payment, provider, entitlement, account, or deployment
+  write. No checkbox changed; score remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/vercel-production-preview-config-audit-2026-10-09.md`.
+
 ## 2026-10-09 · Web Preview payment database-isolation guard merged
 
 - **Source:** Web PR #170, head `37796165c42654f43eaca44eb6a363657e22298d`,

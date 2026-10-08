@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## Vercel production/Preview configuration audit · 2026-10-09
+
+- **Backlog strengthened:** R-041, `PLAN-WEB-014/015`, and production
+  configuration truth; no checkbox accepted.
+- **Result:** Production deployment is READY at Web `be4289f`; production
+  `DATABASE_URL` has newer update metadata than creation metadata. Preview has
+  no database URL, no isolation marker, and no enabled payment-method catalog.
+- **Boundary:** Metadata-only Vercel reads; no secret values, environment
+  updates, production/database/payment/provider/deployment writes, or data
+  reads. Score remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/vercel-production-preview-config-audit-2026-10-09.md`.
+
 ## PLAN-WEB-014 Preview database-isolation guard · 2026-10-09
 
 - **Backlog strengthened:** `PLAN-WEB-014`, `PLAN-WEB-015`, and Preview
