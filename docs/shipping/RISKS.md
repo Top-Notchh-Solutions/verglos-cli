@@ -718,3 +718,10 @@ Preview now rejects configured payment methods backed by live Razorpay keys or
 incomplete test credentials. This reduces accidental live-key exposure but does
 not establish provider lifecycle, method matrix, or production reconciliation
 evidence; PLAN-WEB-014/015 remain open.
+
+R-041 payment/Preview auth update (2026-10-08): Web PR #157 merged as
+`51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe` adds a strict non-production
+Preview-only fixture identity. The browser now reaches the real order route,
+but the supplied Razorpay Test Mode credential returns a bounded provider
+failure before order creation. No lifecycle evidence exists; PLAN-WEB-014/015
+remain open pending credential repair and the complete matrix.

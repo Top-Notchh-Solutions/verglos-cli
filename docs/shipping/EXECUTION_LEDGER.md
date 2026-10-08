@@ -4725,3 +4725,18 @@ App/org/webhook/cutover evidence remains open.
 - **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
   (77.9%)**. PLAN-WEB-014/015 remain open.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-local-preview-auth-gate-2026-10-08.md`.
+
+# 2026-10-08 — Preview authentication fixture merged
+
+- **Merge:** Web PR #157 merged as `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe`
+  after all hosted verification, security, dependency/license, and Vercel
+  checks passed.
+- **Result:** The explicit non-production Preview fixture authenticated the
+  local checkout browser run and reached the real hosted order route. The
+  supplied Test Mode credential then returned a bounded provider failure before
+  any order was created; local database counts stayed zero.
+- **Disposition:** This removes the Clerk-session blocker but does not qualify
+  payment methods or lifecycle. PLAN-WEB-014/015 remain open.
+- **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
+  (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-preview-auth-fixture-pr-157-2026-10-08.md`.
