@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 authenticated account runtime requalification · 2026-10-09
+
+The current authenticated production `/account` route passed a clean
+read-only reload, DOM accessibility checks, Lighthouse
+Accessibility/Best-Practices/SEO **100/100/100**, and bounded keyboard
+traversal with named links and no unnamed controls. This strengthens the
+authenticated account-runtime portion of `QUAL-WEB-006` only. Human
+screen-reader, complete route, large-data, field-CWV, and final truth evidence
+remain open. No checkbox or production state changed; count remains
+**218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-authenticated-account-runtime-2026-10-09.md`.
+
 ## QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
 
 Read-only Chrome DevTools inspection of a separate production checkout tab

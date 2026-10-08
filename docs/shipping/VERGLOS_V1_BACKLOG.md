@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## QUAL-WEB-006 authenticated account runtime requalification · 2026-10-09
+
+The current production authenticated `/account` route passed a read-only
+reload with no console warnings/errors, one main, one heading, nine named
+visible controls, no unnamed controls, no missing image alt values, no
+horizontal overflow, and Lighthouse Accessibility/Best Practices/SEO
+**100/100/100**. Bounded keyboard traversal observed named links and body
+return. This strengthens partial qualification only; human screen-reader,
+complete route, large-data, field-CWV, and final truth gates remain open. No
+checkbox changed; the exact score remains **218 checked / 62 unchecked / 280
+total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-authenticated-account-runtime-2026-10-09.md`.
+
 ## QUAL-WEB-005 isolated account-deletion route E2E · 2026-10-09
 
 The merged Web tree was qualified against a disposable local PostgreSQL 15

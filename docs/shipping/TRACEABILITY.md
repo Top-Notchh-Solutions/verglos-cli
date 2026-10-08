@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 authenticated account runtime requalification · 2026-10-09
+
+- **Backlog strengthened:** `QUAL-WEB-006`; no checkbox accepted.
+- **Source:** Current production Web deployment `be4289f`.
+- **Result:** Authenticated read-only `/account` reload had no console
+  warnings/errors; DOM checks found one main, one heading, nine named visible
+  controls, no unnamed controls, no missing image alt values, and no horizontal
+  overflow. Lighthouse snapshot scores were Accessibility/Best Practices/SEO
+  **100/100/100**; bounded keyboard traversal observed named links and body
+  return.
+- **Boundary:** No production/database/migration/payment/provider/deployment,
+  account, entitlement, deletion, or customer-data write. Human
+  screen-reader, complete route, large-data, field-CWV, and truth gates remain
+  open. Score remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-authenticated-account-runtime-2026-10-09.md`.
+
 ## QUAL-WEB-005 isolated account-deletion route E2E · 2026-10-09
 
 - **Backlog strengthened:** `QUAL-WEB-005`; no checkbox accepted.

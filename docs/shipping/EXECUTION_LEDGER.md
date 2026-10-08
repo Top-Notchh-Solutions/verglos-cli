@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · QUAL-WEB-006 authenticated account runtime requalification
+
+- **Source:** Current production Web deployment `be4289f` recorded by the
+  metadata-only Vercel audit.
+- **Verification:** Authenticated Chrome DevTools read-only reload of
+  `/account`; clean console; one main, one heading, nine named controls, no
+  unnamed controls, no missing image alt values, and no horizontal overflow;
+  Lighthouse snapshot Accessibility/Best Practices/SEO **100/100/100**;
+  bounded keyboard traversal remained on named links/body.
+- **Disposition:** Strengthens authenticated account-runtime and accessibility
+  evidence for `QUAL-WEB-006`; human screen-reader, complete route,
+  large-dataset, field-CWV, and final truth gates remain open. No checkbox
+  changed; score remains **218/62/280 (77.9%)**.
+- **Boundary:** No production/database/migration/payment/provider/deployment,
+  account, entitlement, deletion, or customer-data write.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-authenticated-account-runtime-2026-10-09.md`.
+
 ## 2026-10-09 · QUAL-WEB-005 isolated account-deletion E2E
 
 - **Source:** Web tree identical to merged `origin/main`

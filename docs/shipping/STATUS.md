@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · QUAL-WEB-006 authenticated account runtime requalification
+
+The current authenticated production `/account` route passed a clean
+read-only reload, DOM accessibility checks, Lighthouse
+Accessibility/Best-Practices/SEO **100/100/100**, and bounded keyboard
+traversal with named links and no unnamed controls. This is partial
+qualification only; human screen-reader, full route, large-data, field-CWV,
+and final truth gates remain open. No checkbox changed; score remains
+**218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-authenticated-account-runtime-2026-10-09.md`.
+
 ## 2026-10-09 · QUAL-WEB-005 isolated account-deletion E2E
 
 The merged Web tree passed the authenticated privacy route E2E **1/1** and

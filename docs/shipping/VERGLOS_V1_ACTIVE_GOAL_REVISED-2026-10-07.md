@@ -175,6 +175,12 @@ a changed input or a clear acceptance need:
   plus deletion-job lease/idempotency integration 1/1. This strengthens
   QUAL-WEB-005 only; legal/customer-held-record, production recovery,
   reconciliation, and independent acceptance remain open.
+- A fresh authenticated production `/account` read-only requalification after
+  reload found no console warnings/errors, one main, one heading, nine named
+  visible controls, no unnamed controls, no horizontal overflow, and
+  Lighthouse Accessibility/Best Practices/SEO 100/100/100. This strengthens
+  QUAL-WEB-006 only; human screen-reader, full route, large-dataset,
+  field-CWV, and final truth gates remain open.
 
 Private evidence for the latest CLI batch is:
 
@@ -603,6 +609,10 @@ The latest Vercel configuration evidence is:
 The latest account-deletion qualification evidence is:
 
 `docs/shipping/evidence/qual-web-005-deletion-route-e2e-2026-10-09.md`
+
+The latest authenticated account-runtime qualification evidence is:
+
+`docs/shipping/evidence/qual-web-006-authenticated-account-runtime-2026-10-09.md`
 
 The private tracker’s backlog, status, execution ledger, traceability,
 decisions, risks, release gates, evidence, and this goal are the source of

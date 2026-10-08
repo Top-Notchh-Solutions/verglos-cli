@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-QUAL-WEB-006-authenticated-runtime-evidence · 2026-10-09
+
+The current production account route passed a clean authenticated read-only
+reload, bounded DOM accessibility checks, Lighthouse accessibility/best-
+practices/SEO scores of 100/100/100, and named-link keyboard traversal at the
+captured viewport. Residual risk is unchanged: this is not human
+screen-reader, field-CWV, large-dataset, complete-route, or final truth
+acceptance. No production or hosted state changed. Evidence:
+`docs/shipping/evidence/qual-web-006-authenticated-account-runtime-2026-10-09.md`.
+
 ## R-QUAL-WEB-005-isolated-deletion-e2e · 2026-10-09
 
 The authenticated account-deletion route and deletion-job lease/idempotency
