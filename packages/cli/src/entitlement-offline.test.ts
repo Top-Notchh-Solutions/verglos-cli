@@ -13,6 +13,7 @@ process.env.HOME = tempHome;
 
 const mod = await import("./entitlement.js");
 const protocol = await import("@verglos/entitlement");
+const credentialScope = createHash("sha256").update(JSON.stringify(["https://verglos.test", "vg_test_license"])).digest("hex");
 
 after(() => {
   rmSync(tempHome, { recursive: true, force: true });
@@ -21,6 +22,7 @@ after(() => {
 function seedCache(fetchedAt: Date, plan: string, capabilities: string[]) {
   const dir = join(tempHome, ".verglos");
   mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "credentials.json"), JSON.stringify({ apiUrl: "https://verglos.test", licenseKey: "vg_test_license" }));
   writeFileSync(
     join(dir, "capabilities.json"),
     JSON.stringify({
@@ -30,6 +32,7 @@ function seedCache(fetchedAt: Date, plan: string, capabilities: string[]) {
       cache_ttl_seconds: 60,
       simulated: false,
       active: true,
+      credentialScope,
       fetchedAt: fetchedAt.toISOString(),
       expiresAt: fetchedAt.toISOString(),
     }),
@@ -118,7 +121,7 @@ test("resolveEntitlement: online revocation response defeats a still-valid signe
 test("loadCapabilities: rejects malformed cached capability shapes", async () => {
   const dir = join(tempHome, ".verglos");
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix", 42], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ credentialScope, plan: "pro", capabilities: ["fix", 42], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
   const caps = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true }));
   assert.equal(caps.plan, "free");
   assert.equal(caps.capabilities.includes("fix"), false);
@@ -127,7 +130,7 @@ test("loadCapabilities: rejects malformed cached capability shapes", async () =>
 test("loadCapabilities: rejects unknown plans before accepting capabilities", async () => {
   const dir = join(tempHome, ".verglos");
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ plan: "future-paid", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ credentialScope, plan: "future-paid", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
   const caps = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true }));
   assert.equal(caps.plan, "free");
   assert.equal(caps.capabilities.includes("fix"), false);
@@ -136,7 +139,7 @@ test("loadCapabilities: rejects unknown plans before accepting capabilities", as
 test("loadCapabilities: rejects unknown real_plan metadata before accepting capabilities", async () => {
   const dir = join(tempHome, ".verglos");
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ plan: "pro", real_plan: "future-paid", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: true, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ credentialScope, plan: "pro", real_plan: "future-paid", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: true, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
   const caps = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true }));
   assert.equal(caps.plan, "free");
   assert.equal(caps.capabilities.includes("fix"), false);
@@ -145,7 +148,7 @@ test("loadCapabilities: rejects unknown real_plan metadata before accepting capa
 test("loadCapabilities: rejects control characters in capability names", async () => {
   const dir = join(tempHome, ".verglos");
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix\nESCAPE"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+  writeFileSync(join(dir, "capabilities.json"), JSON.stringify({ credentialScope, plan: "pro", capabilities: ["fix\nESCAPE"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
   const caps = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true }));
   assert.equal(caps.plan, "free");
   assert.equal(caps.capabilities.includes("fix\nESCAPE"), false);

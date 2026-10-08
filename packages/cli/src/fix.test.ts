@@ -1,4 +1,5 @@
 import { test } from "node:test";
+import { createHash } from "node:crypto";
 import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
 import assert from "node:assert/strict";
 import { NEXT_CONFIG_DECL, authorizeHeaderFix, planHeaderFixes } from "./fix.js";
@@ -196,14 +197,108 @@ test("fix CLI JSON dry-run is process-safe and does not mutate the project", asy
     const original = "const nextConfig = {}; module.exports = nextConfig;\n";
     await writeFile(join(root, "next.config.js"), original);
     await mkdir(join(home, ".verglos"), { recursive: true });
-    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
-    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--dry-run"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--dry-run", "--test-file", "test/selected.test.js"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
     assert.equal(result.exitCode, 0, `${result.stdout}\n${result.stderr}`);
     assert.equal(JSON.parse(result.stdout).planned[0].action, "patch");
     assert.equal(result.stderr, "");
     assert.deepEqual(result.files, []);
     assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
   } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
+test("selected Node tests require exact execute approval and bind file bytes", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-selected-tests-"));
+  try {
+    await mkdir(join(root, "test"));
+    await writeFile(join(root, "test", "security.test.js"), 'import assert from "node:assert/strict"; assert.equal(2 + 2, 4);\n');
+    const plan = await planHeaderFixTests(root, ["test/security.test.js"]);
+    assert.match(plan.policyEffect, /network are not sandboxed/);
+    const receipt = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174001", action: "execute", actor: "agent", target: plan.target, files: ["test/security.test.js"], network: [], policyEffect: plan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    assert.equal((await authorizeHeaderFixTests(receipt, plan, "2026-01-02T00:00:00Z", root)).allowed, true);
+    assert.equal((await authorizeHeaderFixTests(receipt, { ...plan, policyEffect: "changed" }, "2026-01-02T00:00:00Z", root)).reason, "test-content-mismatch");
+    assert.equal((await runApprovedHeaderFixTests(root, plan, receipt, "2026-01-02T00:00:00Z")).status, "passed");
+    await writeFile(join(root, "test", "security.test.js"), "process.exitCode = 1;\n");
+    await assert.rejects(() => runApprovedHeaderFixTests(root, plan, receipt, "2026-01-02T00:00:00Z"), (error: unknown) => error instanceof HeaderFixTestsError && error.reason === "changed-after-approval");
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("selected test planning rejects path escape and symlink entrypoints", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-test-paths-"));
+  const outside = await mkdtemp(join(tmpdir(), "verglos-fix-test-outside-"));
+  try {
+    await mkdir(join(root, "test"));
+    await writeFile(join(outside, "outside.test.js"), "assert.ok(true);\n");
+    await symlink(join(outside, "outside.test.js"), join(root, "test", "linked.test.js"));
+    await assert.rejects(() => planHeaderFixTests(root, ["../outside/outside.test.js"]), /normalized relative path/);
+    await assert.rejects(() => planHeaderFixTests(root, ["test/linked.test.js"]), /regular file/);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(outside, { recursive: true, force: true }); }
+});
+
+test("selected test runner stops at its bounded output limit", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-test-output-"));
+  try {
+    await mkdir(join(root, "test"));
+    await writeFile(join(root, "test", "output.test.js"), 'process.stdout.write("x".repeat(300 * 1024));\n');
+    const plan = await planHeaderFixTests(root, ["test/output.test.js"]);
+    const receipt = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174005", action: "execute", actor: "agent", target: plan.target, files: ["test/output.test.js"], network: [], policyEffect: plan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    await assert.rejects(() => runApprovedHeaderFixTests(root, plan, receipt, "2026-01-02T00:00:00Z"), (error: unknown) => error instanceof HeaderFixTestsError && error.reason === "output-limit");
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("selected test runner terminates timed-out Node test processes", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-test-timeout-"));
+  try {
+    await mkdir(join(root, "test"));
+    await writeFile(join(root, "test", "hang.test.js"), "setInterval(() => {}, 1000);\n");
+    const plan = await planHeaderFixTests(root, ["test/hang.test.js"]);
+    const receipt = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174007", action: "execute", actor: "agent", target: plan.target, files: ["test/hang.test.js"], network: [], policyEffect: plan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    await assert.rejects(() => runApprovedHeaderFixTests(root, plan, receipt, "2026-01-02T00:00:00Z", { timeoutMs: 50 }), (error: unknown) => error instanceof HeaderFixTestsError && error.reason === "timed-out");
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("fix CLI reports a selected-test failure and restores the approved mutation", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-test-cli-rollback-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-fix-test-cli-home-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
+    const original = "const nextConfig = {}; module.exports = nextConfig;\n";
+    await writeFile(join(root, "next.config.js"), original);
+    await mkdir(join(root, "test"));
+    await writeFile(join(root, "test", "failure.test.js"), "throw new Error('fixture failure');\n");
+    await mkdir(join(home, ".verglos"), { recursive: true });
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    const mutateReceipt = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174003", action: "mutate", actor: "agent", target: await headerFixWorkspaceTarget(root), files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const testPlan = await planHeaderFixTests(root, ["test/failure.test.js"]);
+    const testReceipt = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174004", action: "execute", actor: "agent", target: testPlan.target, files: ["test/failure.test.js"], network: [], policyEffect: testPlan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const mutatePath = join(root, "mutate-approval.json");
+    const testPath = join(root, "execute-approval.json");
+    await writeFile(mutatePath, JSON.stringify(mutateReceipt));
+    await writeFile(testPath, JSON.stringify(testReceipt));
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", mutatePath, "--test-file", "test/failure.test.js", "--test-approval-receipt", testPath], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
+    assert.equal(result.exitCode, 78, `${result.stdout}\n${result.stderr}`);
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "FIX_TESTS_FAILED", message: "post-fix selected tests failed; mutation rolled back" });
+    assert.equal(result.stderr, "");
+    assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
+test("failed approved selected tests roll back the applied fix", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-test-rollback-"));
+  try {
+    await writeFile(join(root, "next.config.js"), "original config\n");
+    await mkdir(join(root, "test"));
+    await writeFile(join(root, "test", "failure.test.js"), "process.exitCode = 1;\n");
+    const snapshots = await captureHeaderFixSnapshots(root, ["next.config.js"]);
+    await writeFile(join(root, "next.config.js"), "mutated config\n");
+    const testPlan = await planHeaderFixTests(root, ["test/failure.test.js"]);
+    const receipt = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174002", action: "execute", actor: "agent", target: testPlan.target, files: ["test/failure.test.js"], network: [], policyEffect: testPlan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    await assert.rejects(
+      () => verifyOrRollbackHeaderFix(snapshots, [{ phase: "tests", run: () => runApprovedHeaderFixTests(root, testPlan, receipt, "2026-01-02T00:00:00Z") }]),
+      (error: unknown) => error instanceof HeaderFixRollbackError && error.rollbackSucceeded && error.phase === "tests",
+    );
+    assert.equal(await readFile(join(root, "next.config.js"), "utf8"), "original config\n");
+  } finally { await rm(root, { recursive: true, force: true }); }
 });
 
 test("fix CLI approved JSON mutation uses the exact receipt and reports the write", async () => {
@@ -213,8 +308,8 @@ test("fix CLI approved JSON mutation uses the exact receipt and reports the writ
     await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
     await writeFile(join(root, "next.config.js"), "const nextConfig = {}; module.exports = nextConfig;\n");
     await mkdir(join(home, ".verglos"), { recursive: true });
-    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
-    const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174099", action: "mutate", actor: "human", target: "workspace:fixture", files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174099", action: "mutate", actor: "human", target: await headerFixWorkspaceTarget(root), files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
     const receiptPath = join(root, "approval.json");
     await writeFile(receiptPath, JSON.stringify(receipt));
     const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", receiptPath, "--rescan"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
@@ -226,4 +321,109 @@ test("fix CLI approved JSON mutation uses the exact receipt and reports the writ
     assert.equal(result.stderr, "");
     assert.match(await readFile(join(root, "next.config.js"), "utf8"), /Content-Security-Policy/);
   } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
+test("fix refuses to mutate or execute tests when the configured approval audit store fails", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-test-audit-failure-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-fix-test-audit-home-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
+    const original = "const nextConfig = {}; module.exports = nextConfig;\n";
+    await writeFile(join(root, "next.config.js"), original);
+    await mkdir(join(root, "test"));
+    await writeFile(join(root, "test", "selected.test.js"), "throw new Error('must not execute');\n");
+    await mkdir(join(home, ".verglos"), { recursive: true });
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    const mutateReceipt = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174008", action: "mutate", actor: "human", target: await headerFixWorkspaceTarget(root), files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const testPlan = await planHeaderFixTests(root, ["test/selected.test.js"]);
+    const testReceipt = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174009", action: "execute", actor: "agent", target: testPlan.target, files: ["test/selected.test.js"], network: [], policyEffect: testPlan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const mutatePath = join(root, "mutate-approval.json");
+    const testPath = join(root, "execute-approval.json");
+    const invalidStore = join(home, ".verglos", "approval-store-is-a-file");
+    await writeFile(mutatePath, JSON.stringify(mutateReceipt));
+    await writeFile(testPath, JSON.stringify(testReceipt));
+    await writeFile(invalidStore, "not a directory");
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", mutatePath, "--test-file", "test/selected.test.js", "--test-approval-receipt", testPath], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1", VERGLOS_APPROVAL_STORE: invalidStore } });
+    assert.equal(result.exitCode, 78);
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "FIX_TEST_APPROVAL_AUDIT_FAILED", message: "selected test approval audit persistence failed" });
+    assert.equal(result.stderr, "");
+    assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
+test("fix CLI rejects a receipt approved for a different workspace before mutation", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-wrong-workspace-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-fix-wrong-workspace-home-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { next: "15.0.0" } }));
+    const original = "const nextConfig = {}; module.exports = nextConfig;\n";
+    await writeFile(join(root, "next.config.js"), original);
+    await mkdir(join(home, ".verglos"), { recursive: true });
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174100", action: "mutate", actor: "human", target: "workspace:/tmp/unrelated-project", files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    const receiptPath = join(root, "approval.json");
+    await writeFile(receiptPath, JSON.stringify(receipt));
+    const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--approve", "--approval-receipt", receiptPath], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
+    assert.equal(result.exitCode, 78);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "FIX_APPROVAL_DENIED", message: "fix approval denied" });
+    assert.equal(await readFile(join(root, "next.config.js"), "utf8"), original);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
+test("failed post-fix rescan restores prior files and removes newly created fixes", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-rollback-"));
+  try {
+    const existingPath = join(root, "next.config.js");
+    const createdPath = join(root, "src", "verglos-security-headers.ts");
+    const original = "const nextConfig = {}; module.exports = nextConfig;\n";
+    await mkdir(join(root, "src"));
+    await writeFile(existingPath, original);
+    const snapshots = await captureHeaderFixSnapshots(root, ["next.config.js", "src/verglos-security-headers.ts"]);
+    await writeFile(existingPath, "mutated config");
+    await writeFile(createdPath, "new helper");
+
+    await assert.rejects(
+      () => rescanOrRollbackHeaderFix(snapshots, async () => { throw new Error("fixture scan failure"); }),
+      (error: unknown) => error instanceof HeaderFixRollbackError && error.rollbackSucceeded,
+    );
+    assert.equal(await readFile(existingPath, "utf8"), original);
+    await assert.rejects(() => readFile(createdPath), { code: "ENOENT" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("rollback replaces a raced-in symlink without changing its external target", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-rollback-failure-"));
+  const outside = await mkdtemp(join(tmpdir(), "verglos-fix-rollback-outside-"));
+  try {
+    const path = join(root, "next.config.js");
+    const outsidePath = join(outside, "outside.js");
+    await writeFile(path, "original");
+    await writeFile(outsidePath, "outside remains unchanged");
+    const snapshots = await captureHeaderFixSnapshots(root, ["next.config.js"]);
+    await rm(path);
+    await symlink(outsidePath, path);
+
+    await assert.rejects(
+      () => rescanOrRollbackHeaderFix(snapshots, async () => { throw new Error("fixture scan failure"); }),
+      (error: unknown) => error instanceof HeaderFixRollbackError && error.rollbackSucceeded,
+    );
+    assert.equal(await readFile(path, "utf8"), "original");
+    assert.equal(await readFile(outsidePath, "utf8"), "outside remains unchanged");
+  } finally { await rm(root, { recursive: true, force: true }); await rm(outside, { recursive: true, force: true }); }
+});
+
+test("header fix does not follow a symlinked src directory outside its workspace", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-fix-symlink-src-"));
+  const outside = await mkdtemp(join(tmpdir(), "verglos-fix-symlink-outside-"));
+  try {
+    await writeFile(join(root, "package.json"), JSON.stringify({ dependencies: { express: "5.0.0" } }));
+    await symlink(outside, join(root, "src"), "dir");
+    const plan = await planHeaderFixes(root);
+    assert.equal(plan[0]?.file, "verglos-security-headers.ts");
+    const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174101", action: "mutate", actor: "human", target: await headerFixWorkspaceTarget(root), files: ["verglos-security-headers.ts"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+    assert.equal(await applyHeaderFixes(root, { approvalReceipt: receipt, now: "2026-01-01T00:02:00Z", quiet: true }), 1);
+    await assert.rejects(() => readFile(join(outside, "verglos-security-headers.ts")), { code: "ENOENT" });
+    assert.match(await readFile(join(root, "verglos-security-headers.ts"), "utf8"), /VERGLOS_SECURITY_HEADERS/);
+  } finally { await rm(root, { recursive: true, force: true }); await rm(outside, { recursive: true, force: true }); }
 });
