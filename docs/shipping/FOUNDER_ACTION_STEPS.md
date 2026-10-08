@@ -119,10 +119,29 @@ vercel env update RAZORPAY_ENABLED_PAYMENT_METHODS production
 Enter only the confirmed comma-separated method names when prompted. Then
 redeploy using the command in Section 1.
 
-## 3. Authorized repository permission
+## 3. Public repositories: no permission form is needed
 
-This is simply a permission form for a repository owner. It is **not** a file
-containing repository source code.
+For a public open-source repository, you do **not** need:
+
+- Customer consent
+- A GitHub login for the repository
+- A Trivy login
+- The repository owner's private credentials
+
+The repository can be cloned using its public URL. We record its URL, exact
+commit, and license/NOTICE information. Public-repository results are useful
+technical evidence, but they are **not** customer acceptance or a customer
+POC.
+
+The final public-repository corpus is intentionally run only after the
+release-candidate gates are complete. This prevents tuning the product or
+public claims against the final evaluation set.
+
+## 4. Authorized repository permission — private/customer POC only
+
+This section applies only if we test a private repository or claim that a real
+customer/team accepted Verglos. It is simply a permission form for that
+repository owner. It is **not** a file containing repository source code.
 
 Do this once for each private/customer repository:
 
@@ -156,10 +175,11 @@ Do not send us repository passwords, GitHub tokens, cookies, or raw private
 source code. The external POC happens only after the release-candidate gates
 allow it.
 
-## 4. Legal approval
+## 5. Legal approval
 
-This is a private written record that someone authorized to make the decision
-has checked the licenses and usage rights.
+This is not a Trivy login. It is a private written record that someone
+authorized to make the decision has checked the licenses and usage rights for
+software/content that Verglos may ship or redistribute.
 
 Create a file such as:
 
@@ -185,11 +205,13 @@ Write down the decision for each of these:
 This record stays in the private shipping tracker. Do not add it to the public
 CLI repository.
 
-## 5. Independent Hunt security review
+## 6. Independent Hunt security review
 
-Choose a separate AppSec/security person or security firm. The reviewer must
-not be the person who implemented the Hunt sandbox. I cannot sign this review
-myself because that would not be independent.
+This is a final security-acceptance gate for the Hunt sandbox, not a
+requirement for cloning ordinary public repositories. Choose a separate
+AppSec/security person or security firm. The reviewer must not be the person
+who implemented the Hunt sandbox. I cannot sign this review myself because
+that would not be independent.
 
 Give the reviewer this private packet:
 
@@ -210,7 +232,7 @@ The reviewer must:
 
 The signed review goes in the private `docs/shipping/evidence/` directory.
 
-## 6. What to tell Codex afterward
+## 7. What to tell Codex afterward
 
 Send only this kind of status message:
 
