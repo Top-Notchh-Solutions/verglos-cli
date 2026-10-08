@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
+
+Read-only Chrome DevTools inspection of a separate production checkout tab
+rendered UPI, Cards, Netbanking, Wallets, EMI, and Pay Later with no console
+messages. Desktop/mobile Lighthouse Accessibility and Best Practices were
+100/100; SEO was 80 (missing meta description) and Agentic Browsing was 50
+(`llms.txt` lacks the recommended H1). Production did not identify as Test
+Mode, so this is not payment lifecycle or production reconciliation evidence.
+No production/provider/payment/database/deployment/account write occurred;
+`PLAN-WEB-011/012/013/014/015` and `QUAL-WEB-006` remain open. Backlog
+remains **218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-plan-web-015-production-checkout-cdp-2026-10-09.md`.
+
 ## PLAN-WEB-014 current Web main local qualification · 2026-10-08
 
 Exact Web `origin/main` `cedf199855a5c4734122ae4849253156328cff1b` passed the

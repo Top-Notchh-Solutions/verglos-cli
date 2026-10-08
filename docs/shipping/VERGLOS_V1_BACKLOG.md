@@ -656,6 +656,19 @@ assumes the legacy `licenses` table. No checkbox changed; backlog remains
 - [ ] Authorize external conversations, paid pilots, checkout tests, campaign, publish, deploy, npm release, tags, pushes, and production migrations separately.
 - [ ] Do not claim Team/Studio/Enterprise generally available until their end-to-end gates pass.
 
+### QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
+
+Read-only Chrome DevTools inspection of a separate production checkout tab
+rendered UPI, Cards, Netbanking, Wallets, EMI, and Pay Later with no console
+messages. Desktop/mobile Lighthouse Accessibility and Best Practices were
+100/100; SEO was 80 (missing meta description) and Agentic Browsing was 50
+(`llms.txt` lacks the recommended H1). Production did not identify as Test
+Mode, so this does not qualify payment lifecycle or reconciliation. No
+production/provider/payment/database/deployment/account write occurred. No
+checkbox changed; score remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-plan-web-015-production-checkout-cdp-2026-10-09.md`.
+
 ## First ten dependency-ready tasks
 
 1. `TRUTH-001` — current CLI capability inventory.

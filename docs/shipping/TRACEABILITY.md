@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
+
+- **Backlog strengthened:** `QUAL-WEB-006`, `PLAN-WEB-015`; no checkbox
+  accepted because this is read-only rendering, not Test Mode lifecycle or
+  production reconciliation evidence.
+- **Result:** Production checkout rendered UPI, Cards, Netbanking, Wallets,
+  EMI, and Pay Later with no console messages. Accessibility/Best Practices
+  were 100/100 on desktop and mobile; SEO 80 and Agentic Browsing 50 expose
+  held metadata findings.
+- **Boundary:** No order/payment/webhook/entitlement/database/provider/
+  deployment/account write. Exact score remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-plan-web-015-production-checkout-cdp-2026-10-09.md`.
+
 ## PLAN-WEB-014 current Web main local qualification · 2026-10-08
 
 - **Backlog strengthened:** `PLAN-WEB-013/014`; no checkbox accepted because

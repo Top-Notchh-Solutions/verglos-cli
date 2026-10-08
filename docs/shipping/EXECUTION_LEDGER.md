@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · production checkout/browser recheck
+
+- **Instrument:** Approved Chrome DevTools session, separate production
+  checkout tab, read-only.
+- **Result:** Pro monthly INR checkout rendered UPI, Cards, Netbanking,
+  Wallets, EMI, and Pay Later; no console messages. Desktop/mobile Lighthouse
+  Accessibility and Best Practices were 100/100. SEO was 80 (missing meta
+  description); Agentic Browsing was 50 (llms.txt lacks recommended H1).
+- **Boundary:** Production did not identify as Razorpay Test Mode. No order,
+  payment, webhook, entitlement, database, provider, deployment, or account
+  write. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-plan-web-015-production-checkout-cdp-2026-10-09.md`.
+
 ## 2026-10-08 · current Web payment/runtime qualification
 
 - **Source:** Web `origin/main` `cedf199855a5c4734122ae4849253156328cff1b`.

@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · production checkout/browser recheck
+
+Read-only Chrome DevTools inspection of a separate production checkout tab
+rendered UPI, Cards, Netbanking, Wallets, EMI, and Pay Later with no console
+messages. Lighthouse Accessibility/Best Practices were **100/100** on desktop
+and mobile; SEO was **80** because the checkout lacks a meta description, and
+Agentic Browsing was **50** because `llms.txt` lacks the recommended H1. The
+page did not identify itself as Razorpay Test Mode, so no payment lifecycle or
+production reconciliation claim is made. No order, payment, webhook,
+entitlement, database, provider, deployment, or account write occurred. No
+checkbox changed; score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-plan-web-015-production-checkout-cdp-2026-10-09.md`.
+
 ## 2026-10-08 · current Web payment/runtime qualification
 
 Exact Web `origin/main` `cedf199` was exercised against disposable PostgreSQL
