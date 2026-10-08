@@ -3,7 +3,8 @@
 ## Scope
 
 - Repository: `verglos-web`
-- Source under test: Web PR #166, commit `eab48accfe3aa45574435fbf445947c0747673b9`
+- Source under test: Web PR #166, commit `eab48accfe3aa45574435fbf445947c0747673b9`,
+  merged to Web `main` as `ff0dd15b3eada55eb898038bc66ea0c5394bead6`
 - Worktree: `fix/web-keyless-preview-middleware`
 - Runtime: Next.js `15.5.25`, Node `v26.4.0` (the repository declares Node 22.x;
   this local runtime mismatch is recorded, not hidden)

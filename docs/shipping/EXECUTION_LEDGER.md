@@ -2,7 +2,9 @@
 
 ## 2026-10-08 · Web keyless Preview middleware and built runtime
 
-- **Source:** Web PR #166, commit `eab48accfe3aa45574435fbf445947c0747673b9`.
+- **Source:** Web PR #166, commit `eab48accfe3aa45574435fbf445947c0747673b9`,
+  merged to Web `main` as `ff0dd15b3eada55eb898038bc66ea0c5394bead6` after
+  GitGuardian, Vercel, Preview Comments, and typecheck/schema passed.
 - **Defect:** A keyless local/Preview `next start` returned HTTP 500 because
   Clerk threw before the middleware callback could apply the intended keyless
   path.

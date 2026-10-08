@@ -2,7 +2,8 @@
 
 ## Web keyless Preview middleware and built runtime · 2026-10-08
 
-Web PR #166 (`eab48ac`) fixes the keyless local/Preview Clerk middleware path.
+Web PR #166 (`eab48ac`) merged to Web `main` as `ff0dd15` after all hosted
+checks passed and fixes the keyless local/Preview Clerk middleware path.
 The previous wrapper invoked Clerk without a publishable key and returned HTTP
 500 before the callback could allow the intentionally unauthenticated Preview
 runtime. The conditional middleware now uses `NextResponse.next()` without a

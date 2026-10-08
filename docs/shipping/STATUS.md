@@ -2,7 +2,8 @@
 
 ## 2026-10-08 · Web keyless Preview runtime fix and built qualification
 
-Web PR #166 source `eab48ac` fixes a real keyless Preview/local runtime defect:
+Web PR #166 source `eab48ac` merged to Web `main` as `ff0dd15` and fixes a real
+keyless Preview/local runtime defect:
 the Clerk middleware wrapper previously threw before its callback when no
 publishable key was configured, returning HTTP 500 for every route. The fix
 selects a plain `NextResponse.next()` middleware when the key is absent;
