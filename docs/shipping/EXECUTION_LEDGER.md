@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · PLAN-CLI-003 hosted forged-route matrix
+
+- **Scope:** Production browser GET-only matrix with malformed and valid
+  nonexistent tenant/project/repository/receipt identifiers; no response
+  bodies or credential-bearing headers were captured.
+- **Verification:** **22/22** requests completed. Valid forged tenant/project
+  routes returned 15×403/private-no-store; account GETs returned 2×200/private-
+  no-store; 3×401/private-no-store; malformed input 1×400/private-no-store;
+  forged public receipt 1×404/no-store. A separate malformed-ID probe returned
+  4×400/private-no-store and 1×404/no-store.
+- **Safety:** No write method, payment, entitlement, database, deployment,
+  provider, or account-state operation occurred.
+- **Disposition:** Partial `PLAN-CLI-003` evidence only. Modified-CLI and
+  authorized paid/list/search/export/public-private fixture coverage remain
+  open. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-003-hosted-forged-route-matrix-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-WEB-014 Test Mode method preflight
 
 - **Scope:** Razorpay Test Mode `payments.fetchPaymentMethods()` using the

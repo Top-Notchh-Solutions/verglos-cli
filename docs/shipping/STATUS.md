@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · PLAN-CLI-003 hosted forged-route matrix
+
+The authenticated production browser ran a GET-only forged-identifier matrix
+across **22/22** organization, project, repository, entitlement, account, and
+public-receipt routes. Valid forged tenant/project requests returned 403 with
+private no-store responses; malformed inputs returned 400; the forged public
+receipt returned 404/no-store. No response bodies, cookies, authorization
+headers, or personal data were captured and no mutation occurred. This is
+partial `PLAN-CLI-003` evidence; paid/list/search/export fixture coverage and
+modified-CLI end-to-end proof remain open. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-cli-003-hosted-forged-route-matrix-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-WEB-014 Test Mode method preflight
 
 The read-only Razorpay Test Mode `fetchPaymentMethods()` call returned

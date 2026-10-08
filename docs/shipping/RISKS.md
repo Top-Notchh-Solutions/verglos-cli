@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-PLAN-CLI-003-hosted-boundary · 2026-10-08
+
+The production GET-only forged-route matrix returned bounded 403/400/404
+responses with no-store controls across organization, project, repository, and
+receipt paths. This reduces tenant-leakage uncertainty but does not prove the
+modified CLI path, paid fixture behavior, or complete list/search/export
+runtime coverage. Owner: CLI/Web qualification. Required next action: run the
+authorized modified-client matrix against a paid non-production fixture and
+retain sanitized public/private evidence.
+
 ## R-PLAN-WEB-014-test-credential · 2026-10-08
 
 The read-only Razorpay Test Mode capability request returned `Authentication

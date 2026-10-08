@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## PLAN-CLI-003 hosted forged-route matrix · 2026-10-08
+
+Production GET-only negative probing covered **22/22** organization, project,
+repository, account, entitlement, and receipt routes. Valid forged tenant
+requests returned 403/private-no-store, malformed input returned
+400/private-no-store, and a forged public receipt returned 404/no-store. This
+does not replace authorized modified-CLI, paid fixture, or complete
+list/search/export runtime evidence. No checkbox changed. See
+`docs/shipping/evidence/plan-cli-003-hosted-forged-route-matrix-2026-10-08.md`.
+
 ## PLAN-WEB-014 Test Mode method preflight · 2026-10-08
 
 The read-only Razorpay Test Mode capability call returned `Authentication
