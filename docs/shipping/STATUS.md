@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · QUAL-WEB-005 local deletion integration qualification
+
+The bounded privacy/deletion batch passed the isolated integration path
+**1/1**, the focused route/worker/hold/inventory/contract suite **23/23**, Web
+typecheck, Drizzle schema check, and all **37** migration-order checks. The
+pinned PostgreSQL container was loopback-only and stopped cleanly. This is
+local implementation evidence only; authenticated non-production E2E,
+consent/legal/customer-held-record decisions, production reconciliation,
+recovery, and independent review remain open. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-local-deletion-integration-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-005 authenticated privacy/deletion mobile slice
 
 The authenticated production `/account/privacy` surface was checked read-only

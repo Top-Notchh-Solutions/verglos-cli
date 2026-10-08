@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 local deletion integration qualification · 2026-10-08
+
+The current Web source passed the isolated account-deletion job integration
+**1/1** and focused privacy/worker/hold/inventory/route-contract suite
+**23/23** against a disposable loopback-only PostgreSQL 15 container. Web
+typecheck, schema validation, and all **37** migration-order checks also
+passed. This strengthens implementation evidence only; authenticated hosted
+deletion E2E, consent/legal/customer-held-record decisions, production
+reconciliation/recovery, and independent acceptance remain open. No checkbox
+changed. See
+`docs/shipping/evidence/qual-web-005-local-deletion-integration-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-WEB-014 Preview authentication fixture
 
 Web PR #157 merged as `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe`. The fixture

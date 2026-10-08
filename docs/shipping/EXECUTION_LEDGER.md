@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · QUAL-WEB-005 local deletion integration qualification
+
+- **Environment:** Disposable loopback-only PostgreSQL 15 Alpine container at
+  the pinned image digest; no Neon, Preview, Production, provider, or customer
+  state was used.
+- **Verification:** Account-deletion job integration **1/1**; focused privacy
+  route/worker/hold/inventory/cron/API contracts **23/23**; typecheck passed;
+  Drizzle schema check passed; 37 ordered migrations verified; container
+  stopped with no remaining containers.
+- **Coverage:** User scope, bounded inventory, legal holds, lease fencing,
+  retry/idempotency, rollback, held-record digest comparison, terminal receipts,
+  authenticated/same-origin request contracts, and operator-only hold paths.
+- **Disposition:** Local integration evidence only. Authenticated hosted E2E,
+  legal/consent/customer-held-record decisions, production cutover and
+  reconciliation, recovery, retention, and independent review remain open.
+  No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-local-deletion-integration-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-005 authenticated privacy/deletion mobile slice
 
 - **Runtime:** Existing authenticated Chrome debug session, production
