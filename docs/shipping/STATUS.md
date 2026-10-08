@@ -6,7 +6,8 @@ The authenticated production `/account` surface was checked at desktop and
 390×844 mobile emulation. Lighthouse Accessibility and Best Practices were
 **100/100** in both states; no console warnings/errors were observed. Mobile
 Fast 3G trace measured LCP **741 ms** and CLS **0.00**, and neither state had
-horizontal overflow. The session was Free-only, so paid dashboard data was not
+horizontal overflow. An automated keyboard sample found visible focus on
+**8/8** tab stops. The session was Free-only, so paid dashboard data was not
 available; SEO/agentic scores are intentionally not public-site evidence.
 `QUAL-WEB-006` remains open for paid data, keyboard/screen-reader review,
 large-data/loading/error states, and field-CWV. No checkbox changed; backlog

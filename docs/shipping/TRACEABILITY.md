@@ -4,7 +4,8 @@
 
 Production `/account` passed desktop/mobile Lighthouse Accessibility and Best
 Practices **100/100**, mobile Fast 3G LCP **741 ms**, CLS **0.00**, no console
-warnings/errors, and no horizontal overflow. The session was Free-only, so
+warnings/errors, no horizontal overflow, and an automated **8/8** visible-focus
+keyboard sample. The session was Free-only, so
 paid data and large-data/keyboard/screen-reader/field-CWV acceptance remain
 open. No checkbox changed. See
 `docs/shipping/evidence/qual-web-006-account-dashboard-mobile-2026-10-08.md`.

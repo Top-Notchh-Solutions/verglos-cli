@@ -6,7 +6,9 @@
   identity value retained and no account-state action taken.
 - **Verification:** Lighthouse desktop/mobile Accessibility and Best
   Practices **100/100**; mobile 390×844 Fast 3G LCP **741 ms**, CLS **0.00**;
-  no console warnings/errors; desktop/mobile width matched the viewport.
+  no console warnings/errors; desktop/mobile width matched the viewport;
+  automated keyboard sample **8/8** tab stops showed `:focus-visible` and a
+  non-zero outline.
 - **Boundary:** The authenticated session was Free-only. Paid dashboard
   routes/data, human keyboard/screen-reader review, large-data states,
   loading/error states, and field-CWV remain unverified.

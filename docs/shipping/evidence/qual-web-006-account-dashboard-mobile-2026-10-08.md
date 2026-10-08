@@ -22,6 +22,9 @@
 - Desktop and mobile DOM measurements: document/body width matched the
   viewport with no horizontal overflow; two landmarks and nine focusable
   elements were present in both states.
+- Keyboard traversal sample: **8/8** tab stops matched `:focus-visible` and
+  exposed a non-zero outline width; this is automated focus evidence, not a
+  human screen-reader review.
 - The account showed the Free-tier boundary; paid monitoring, alerts, score
   history, and activation data were not available for this session.
 
