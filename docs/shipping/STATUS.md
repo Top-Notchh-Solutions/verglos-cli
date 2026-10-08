@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Razorpay Test Mode credential blocker
+
+The isolated-provider qualification is currently blocked by credential truth,
+not by the new Web route: a read-only Test Mode plan-list request using the
+local test pair returned HTTP **401**, and the dashboard shows a different
+current Test Mode key. No recurring plan IDs are configured. The regeneration
+dialog was opened but cancelled before any rotation, so no provider or
+Production state changed.
+
+The authorized account operator must rotate the Test Mode key and update only
+isolated Test/Preview configuration before we can create canonical plans and
+run real subscription authorization/renewal/failure/cancellation/expiry and
+refund reconciliation. No secret should be sent in chat. Score remains **219
+checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-011-012-test-provider-credential-blocker-2026-10-09.md`.
+
 ## 2026-10-09 · hosted subscription checkout implementation
 
 Web commit `54e6fd0` now provides the missing recurring subscription path:

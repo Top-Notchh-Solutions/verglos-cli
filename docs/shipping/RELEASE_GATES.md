@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## Razorpay Test Mode credential blocker · 2026-10-09
+
+Read-only Test Mode plan discovery returned HTTP **401** with the local test
+credential pair. The dashboard confirmed a different current Test Mode key and
+offers key regeneration with an explicit old-key expiry choice. No rotation
+was performed. Gate 4 remains open until the authorized operator updates the
+isolated Test/Preview credential and the canonical recurring plans are created
+and exercised. No Production state changed; score remains **219/61/280
+(78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-011-012-test-provider-credential-blocker-2026-10-09.md`.
+
 ## Hosted subscription route implementation · 2026-10-09
 
 Web commit `54e6fd0` implements the previously missing subscription-creation

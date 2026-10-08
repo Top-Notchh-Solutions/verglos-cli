@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Razorpay Test Mode credential blocker
+
+- **Verification:** Read-only Test Mode `plans.all` using the local Web test
+  credential returned HTTP **401**. The authenticated dashboard showed a
+  different current Test Mode key; no recurring plan IDs are configured in
+  local test/gates/production files.
+- **Disposition:** Stopped before the dashboard's destructive key-regeneration
+  confirmation. Real provider subscription qualification cannot proceed until
+  the authorized account operator rotates the Test Mode key and updates only
+  isolated Test/Preview configuration. No secret was copied into chat or
+  evidence.
+- **Boundary:** No provider write, Production database/payment/environment/
+  deployment write, account mutation, or customer state change.
+- **Current score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no
+  checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-011-012-test-provider-credential-blocker-2026-10-09.md`.
+
 ## 2026-10-09 · hosted subscription checkout implementation
 
 - **Implementation:** Web commit `54e6fd0` adds the catalog-bound
