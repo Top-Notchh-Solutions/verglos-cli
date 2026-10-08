@@ -11,6 +11,17 @@ No checkbox changed; `PLAN-WEB-014/015` and R-041 remain open. Backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/preview-database-scope-correction-2026-10-08.md`.
 
+## 2026-10-08 · historical Preview deployment protection sample
+
+Three previously listed historical Preview deployment URLs were checked
+read-only and each returned `302` to the Vercel SSO boundary. Redirect query
+values, cookies, headers, and bodies were not retained. This confirms the
+sampled deployments are access-protected from unauthenticated requests, but
+does not prove their frozen environment snapshots or payment/database
+behavior. They were not deleted. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/historical-preview-protection-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned

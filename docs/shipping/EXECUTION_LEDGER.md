@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · historical Preview deployment protection sample
+
+- **Read-only result:** Three historical Preview `/checkout` URLs each
+  returned `302` to the Vercel SSO boundary. Only the redirect origin/path was
+  retained; query values, cookies, headers, and response bodies were not
+  recorded.
+- **Disposition:** The sampled deployments are access-protected from
+  unauthenticated requests. Their frozen environment snapshots and
+  authenticated behavior remain unverified, so they were not deleted. No
+  checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/historical-preview-protection-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 - **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;
