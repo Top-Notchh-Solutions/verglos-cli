@@ -59,6 +59,23 @@
 - **Evidence:**
   `docs/shipping/evidence/qual-web-006-public-surfaces-2026-10-08.md`.
 
+## 2026-10-08 · local test database isolation audit
+
+- **Read-only result:** The local Web test database contains 26 migration
+  records, 2 users, 1 license, 1 organization, and 4 Razorpay webhook-event
+  rows. Selected billing payment/subscription, report, receipt, and deletion
+  request counts were zero. Neon project/branch/endpoint settings were
+  present, but their values and the credential were not recorded.
+- **Safety decision:** This is not proven to be an empty isolated Preview
+  database and must not receive payment qualification traffic. Preview stays
+  without `DATABASE_URL` and payment methods, and no database/provider write
+  occurred.
+- **Disposition:** R-041 rotation/revocation and a separately provisioned
+  non-production database remain open. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/test-database-isolation-audit-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 - **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;

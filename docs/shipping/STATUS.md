@@ -58,6 +58,19 @@ and final-web release gates remain open. No checkbox changed; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/qual-web-006-public-surfaces-2026-10-08.md`.
 
+## 2026-10-08 · local test database isolation audit
+
+The database configured in the local Web test environment is populated, not a
+fresh isolated Preview database: it has 26 migration records, 2 users, 1
+license, 1 organization, and 4 Razorpay webhook-event rows (with zero billing
+payments/subscriptions, reports, receipts, or deletion requests in the
+bounded aggregate check). The credential and identifiers were not recorded or
+reused. Preview remains fail-closed without `DATABASE_URL`; no payment test
+was attempted. R-041 and separately provisioned non-production DB isolation
+remain open. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/test-database-isolation-audit-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned

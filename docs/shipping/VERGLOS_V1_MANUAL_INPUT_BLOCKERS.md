@@ -27,6 +27,12 @@ the production deployment still lacks the hosted-method configuration:
 - `PLAN-WEB-011/012/013/014/015` remain open because the live provider
   lifecycle and production reconciliation evidence is still missing. Further
   requests with the previously flagged Test Mode credential remain frozen.
+- The local Web test environment now contains a Neon PostgreSQL value, but a
+  bounded metadata/aggregate audit found 26 migration records, 2 users, 1
+  license, 1 organization, and 4 Razorpay webhook-event rows. It is therefore
+  not an empty isolated Preview database and must not be used for payment
+  qualification. The raw value and Neon identifiers were not recorded or
+  reused; see `test-database-isolation-audit-2026-10-08.md`.
 
 ## Blocker taxonomy
 
