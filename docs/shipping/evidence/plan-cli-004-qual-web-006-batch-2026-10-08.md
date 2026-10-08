@@ -4,8 +4,8 @@
 
 - Repository: `Top-Notchh-Solutions/verglos-cli`
 - Source commit: `7c02099` (`test(cli): rehearse legacy entitlement activation fallback`)
-- Pull request: #84, hosted checks 10/11 green with Windows Node 20 still in
-  progress at this update; no merge or release
+- Pull request: #84 merged as `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`
+  after all hosted platform, self-scan, and in-toto checks passed
 - Change: a process-level `activate` journey uses a loopback HTTP fixture where
   v1 validation returns a synthetic Pro entitlement and v2 token issuance returns
   bounded HTTP 503. The CLI exits successfully and persists the legacy v1 token.

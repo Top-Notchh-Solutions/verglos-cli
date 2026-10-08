@@ -4,9 +4,11 @@
 
 CLI PR #84 (`7c02099`) adds a process-level legacy-v1 activation fallback
 rehearsal; focused 63/63, full CLI 12/12, typecheck 13/13, build 8/8, and lint
-5/5 pass locally. Its hosted checks are 10/11 green with Windows Node 20 still
-in progress. Web PR #164 (`4e00cc3`) fixes the `/docs/2.0.0` Hunt CTA contrast
-defect and merged as `394d697903b7fa12ec537dc667f3807cdd75f588` after hosted
+5/5 pass locally. PR #84 merged as
+`94829e1a4fc8e42dd67545e99cbe9a3a837b9482` after all hosted platform,
+self-scan, and in-toto checks passed. Web PR #164 (`4e00cc3`) fixes the
+`/docs/2.0.0` Hunt CTA contrast defect and merged as
+`394d697903b7fa12ec537dc667f3807cdd75f588` after hosted
 typecheck/schema, Vercel, Preview Comments, and GitGuardian passed. A read-only
 production route sweep found no console errors; remaining metadata/llms
 findings are held under the public truth freeze. No checkbox changed; count

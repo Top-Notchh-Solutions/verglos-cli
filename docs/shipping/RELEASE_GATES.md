@@ -4,12 +4,14 @@
 
 CLI PR #84 source `7c02099` adds process-level legacy-v1 activation fallback
 evidence; focused 63/63 and local full CLI test/typecheck/build/lint gates pass.
+PR #84 merged as `94829e1a4fc8e42dd67545e99cbe9a3a837b9482` after all hosted
+platform, self-scan, and in-toto checks passed.
 Web PR #164 source `4e00cc3` corrects the `/docs/2.0.0` CTA contrast defect
 and merged as `394d697903b7fa12ec537dc667f3807cdd75f588` after hosted
 typecheck/schema, Vercel, Preview Comments, and GitGuardian passed. Local
 typecheck, truth-registry 25/25, serial 862 passed / 24 environment-gated
 skips / 0 failed, 45-page build, and post-fix Lighthouse Accessibility/Best
-Practices 100/100 pass. CLI Windows Node 20 remains in progress. The production browser sweep remains partial and metadata/llms
+Practices 100/100 pass. The production browser sweep remains partial and metadata/llms
 findings stay held under the truth freeze. Neither backlog item passes yet:
 deployed compatibility, complete authenticated browser/CWV evidence, human
 screen-reader review, and the payment/provider gates remain open. No checkbox,

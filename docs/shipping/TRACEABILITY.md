@@ -4,8 +4,9 @@
 
 CLI PR #84 (`7c02099`) adds process-level legacy-v1 activation fallback
 evidence with synthetic loopback responses; focused 63/63 and repository gates
-are green locally, with 10/11 hosted checks green and Windows Node 20 still in
-progress. Web PR #164 (`4e00cc3`) corrects the `/docs/2.0.0` CTA contrast
+are green locally. PR #84 merged as
+`94829e1a4fc8e42dd67545e99cbe9a3a837b9482` after all hosted platform,
+self-scan, and in-toto checks passed. Web PR #164 (`4e00cc3`) corrects the `/docs/2.0.0` CTA contrast
 defect and merged as `394d697903b7fa12ec537dc667f3807cdd75f588` after hosted
 typecheck/schema, Vercel, Preview Comments, and GitGuardian passed; typecheck,
 truth-registry 25/25, serial 862 passed / 24 environment-gated skips / 0

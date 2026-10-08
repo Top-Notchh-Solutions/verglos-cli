@@ -5,6 +5,9 @@
 - **CLI:** PR #84 source `7c02099` adds a loopback-only process rehearsal proving
   a valid legacy v1 token is retained when v2 issuance returns bounded 503.
   Focused 63/63, full 12/12, typecheck 13/13, build 8/8, and lint 5/5 pass.
+- **Hosted CLI:** PR #84 merged as
+  `94829e1a4fc8e42dd67545e99cbe9a3a837b9482` after all hosted platform,
+  self-scan, and in-toto checks passed.
 - **Web:** PR #164 source `4e00cc3` fixes the `/docs/2.0.0` CTA contrast issue
   and merged as `394d697903b7fa12ec537dc667f3807cdd75f588` after hosted
   typecheck/schema, Vercel, Preview Comments, and GitGuardian passed.
@@ -12,8 +15,7 @@
   post-fix Lighthouse Accessibility/Best Practices 100/100 pass.
 - **Boundary:** production browser inspection was GET/read-only; no provider,
   payment, database, deployment, migration, account, or customer state write
-  occurred. CLI hosted checks remain at 10/11 green with Windows Node 20 in
-  progress. Metadata/llms findings
+  occurred. Metadata/llms findings
   remain held under the public truth freeze. No checkbox changed; backlog
   remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 - **Evidence:** `docs/shipping/evidence/plan-cli-004-qual-web-006-batch-2026-10-08.md`.

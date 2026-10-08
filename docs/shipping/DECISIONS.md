@@ -26,6 +26,9 @@
   unavailable response.
 - **Evidence:** CLI PR #84 source `7c02099`; focused process/entitlement suite
   63/63 and local full test/typecheck/build/lint gates pass.
+- **Hosted result:** PR #84 merged as
+  `94829e1a4fc8e42dd67545e99cbe9a3a837b9482` after all hosted platform,
+  self-scan, and in-toto checks passed.
 - **Boundary:** This is local synthetic compatibility evidence only. Deployed
   signer/catalog alignment, released-version migration, and hosted activation
   remain required before PLAN-CLI-004 acceptance.
