@@ -87,7 +87,7 @@ import { printTelemetryConsentPreview, readTelemetryConsent, writeTelemetryConse
 import { readFile as readFileBytes } from "node:fs/promises";
 import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
 import { executeClientProjection } from "./client-projection.js";
-import { executeReleaseRollbackPlan } from "./release-rollback-plan.js";
+import { executeReleaseRollbackPlan, executeReleaseRollbackRehearsal } from "./release-rollback-plan.js";
 import { executeCiCheckPayload } from "./ci-check-payload.js";
 import { pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
 const require = createRequire(import.meta.url);
@@ -334,6 +334,13 @@ release.command("rollback-plan <currentPath> <targetPath>")
   .option("--quiet", "Suppress human output")
   .action(async (currentPath: string, targetPath: string, opts: { reason: string; replacement?: string; approved?: boolean; json?: boolean; quiet?: boolean }) => {
     process.exit(await executeReleaseRollbackPlan({ currentPath, targetPath, replacementPath: opts.replacement, reason: opts.reason, approved: Boolean(opts.approved), json: opts.json, quiet: opts.quiet }));
+  });
+release.command("rollback-rehearsal <manifestPath>")
+  .description("Exercise bounded rollback/revocation fixtures without executing provider writes")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (manifestPath: string, opts: { json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeReleaseRollbackRehearsal({ manifestPath, json: opts.json, quiet: opts.quiet }));
   });
 record.command("create <membersRoot> <manifestPath> <outputRoot>")
   .description("Materialize a validated manifest and its payloads into a local record store")
