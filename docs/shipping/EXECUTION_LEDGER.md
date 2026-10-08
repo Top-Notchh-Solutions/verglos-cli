@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · DIST-006 rollback-rehearsal boundary hardening
+
+- **Source:** CLI PR #87, head `0cbefab1cc1dca4a7b92d5d12e5e44a2d2011259`,
+  merged as `8bea4be2fa18533eafd088122be769e942965626`.
+- **Implementation:** Require exactly one operation for each of the five
+  supported release boundaries and reject duplicate or incomplete manifests
+  before rollback/revocation decision evaluation.
+- **Verification:** Focused rollback tests **5/5**; full CLI package test
+  command completed with all reported groups passing; typecheck/build passed;
+  public-boundary audit passed; package/release contracts **11/11**; hosted
+  self-scan, in-toto binding, and all nine platform cells passed.
+- **Boundary:** Local fixture rehearsal only. No registry, provider, signing,
+  deployment, database, payment, or production write. `DIST-006` remains
+  unchecked; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/dist-006-rollback-boundary-completeness-2026-10-09.md`.
+
 ## 2026-10-09 · production checkout/browser recheck
 
 - **Instrument:** Approved Chrome DevTools session, separate production

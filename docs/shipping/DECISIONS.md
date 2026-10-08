@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Require complete release-boundary rollback rehearsals
+
+- **Decision:** A `DIST-006` rollback rehearsal is invalid unless it covers
+  exactly one npm-package, engine-manifest, Hunt-feed, signing-identity, and
+  Web-deployment operation. Duplicate or missing boundary kinds fail closed.
+- **Reason:** A partial fixture could previously report a successful rehearsal
+  without exercising every boundary named by the backlog acceptance criteria.
+- **Evidence:** CLI PR #87 merged as `8bea4be`; focused rollback tests **5/5**,
+  package/release contracts **11/11**, CLI checks, and all hosted checks pass.
+- **Boundary:** This is local fixture/parser hardening only. It does not
+  authorize or execute provider/registry/signing/deployment rollback,
+  revocation, production writes, or release publication. `DIST-006` remains
+  open.
+
 ## 2026-10-08 · Accept only the bounded accessibility correction from the route sweep
 
 - **Decision:** Keep the `/docs/2.0.0` contrast correction in Web PR #164, but

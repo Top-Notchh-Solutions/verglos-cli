@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## DIST-006 rollback-rehearsal boundary completeness · 2026-10-09
+
+- **Backlog strengthened:** `DIST-006`; no checkbox accepted because the
+  change is local rehearsal/parser evidence rather than authenticated provider
+  execution.
+- **Source:** CLI PR #87 head `0cbefab1cc1dca4a7b92d5d12e5e44a2d2011259`,
+  merged as `8bea4be2fa18533eafd088122be769e942965626`.
+- **Result:** Exactly one npm, engine, Hunt-feed, signing-identity, and Web
+  deployment operation is now required; incomplete and duplicate boundary sets
+  fail closed.
+- **Verification:** Focused rollback **5/5**, package/release contracts
+  **11/11**, CLI typecheck/build/public-boundary, hosted self-scan, in-toto,
+  and all nine platform cells passed.
+- **Boundary:** No authenticated registry/provider/signing/deployment,
+  database, payment, or production state changed. Score remains
+  **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/dist-006-rollback-boundary-completeness-2026-10-09.md`.
+
 ## QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
 
 - **Backlog strengthened:** `QUAL-WEB-006`, `PLAN-WEB-015`; no checkbox

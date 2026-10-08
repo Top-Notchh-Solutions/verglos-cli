@@ -83,7 +83,7 @@ this file when resuming.
   The authoritative checkpoint for this resume is:
 
   - **218 checked / 62 unchecked / 280 total / 77.9%**;
-  - CLI `origin/main`: `fc452ba05dc9222a5a454653ab29906107b09045`;
+  - CLI `origin/main`: `8bea4be2fa18533eafd088122be769e942965626`;
   - Web `origin/main`: `cedf199855a5c4734122ae4849253156328cff1b`;
   - Web PR #166 merged as `ff0dd15b3eada55eb898038bc66ea0c5394bead6`;
   - Web PR #167 merged as `9841236c64a816fc90402cd90ff2bc93ce35382c`;
@@ -583,7 +583,7 @@ this file when resuming.
     console. It merged as PR #165 / `c620c39` after Vercel, Preview Comments,
     GitGuardian, and typecheck/schema passed. No backlog checkbox changed.
   - The current next track is a fresh CLI worktree from the latest
-    `origin/main` `fc452ba`; the first action is to choose a dependency-ready
+    `origin/main` `8bea4be`; the first action is to choose a dependency-ready
     unchecked CLI batch from the private tracker, not to reopen merged Web work.
   - Current CLI open work includes implementation-progress items in Hunt,
     entitlement/catalog compatibility, organization policy/check payloads,
@@ -687,7 +687,7 @@ this file when resuming.
     code change merely to lower the count; inspect each criterion and move to
     the next independent item when a gate is not executable locally.
   - The backend qualification evidence at CLI `origin/main`
-    `fc452ba05dc9222a5a454653ab29906107b09045` remains valid: configured tests,
+    `8bea4be2fa18533eafd088122be769e942965626` remains valid: configured tests,
     build, typecheck, lint, ordinary Hunt 45/45, pinned Docker adversarial
     60 pass / 1 explicit macOS namespace skip / 0 fail, package/public-boundary
     checks, packed manifests, and release-script tests 12/12. These results
@@ -779,6 +779,18 @@ this file when resuming.
     browser-refresh blocker and risk record. The tracker is clean, no public
     repository was changed by the private evidence updates, and no backlog
     checkbox was changed without acceptance evidence.
+  - On 2026-10-09, CLI PR #87 (`0cbefab`) merged as
+    `8bea4be2fa18533eafd088122be769e942965626` after all hosted platform,
+    self-scan, and in-toto checks passed. The `DIST-006` rollback rehearsal now
+    requires exactly one operation for each npm, engine, Hunt-feed, signing,
+    and Web-deployment boundary and rejects incomplete/duplicate fixtures.
+    Focused rollback tests passed **5/5**, package/release contracts passed
+    **11/11**, and local typecheck/build/public-boundary checks passed. This is
+    local rehearsal hardening only; no authenticated rollback/revocation or
+    production/provider write occurred, so `DIST-006` remains unchecked and
+    the score remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+    Private evidence is
+    `docs/shipping/evidence/dist-006-rollback-boundary-completeness-2026-10-09.md`.
 
   COMPLETION STANDARD
 

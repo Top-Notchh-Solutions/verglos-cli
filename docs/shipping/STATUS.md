@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · CLI DIST-006 rollback-rehearsal hardening
+
+CLI PR #87 (`0cbefab`) merged as `8bea4be` after all hosted checks passed:
+Verglos self-scan, in-toto binding, and all nine Ubuntu/macOS/Windows × Node
+20/22/24 platform cells. The local rehearsal parser now requires exactly one
+operation for each npm-package, engine-manifest, Hunt-feed, signing-identity,
+and Web-deployment boundary and rejects incomplete/duplicate sets. Focused
+rollback tests pass **5/5**; the full CLI test command, typecheck, build,
+public-boundary audit, and package/release contracts **11/11** pass. This
+strengthens `DIST-006` but does not perform authenticated provider, registry,
+signing, deployment, database, payment, or production writes. No checkbox
+changed; score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/dist-006-rollback-boundary-completeness-2026-10-09.md`.
+
 ## 2026-10-09 · production checkout/browser recheck
 
 Read-only Chrome DevTools inspection of a separate production checkout tab

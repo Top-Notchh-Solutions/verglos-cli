@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## R-DIST-006-boundary-coverage · 2026-10-09
+
+The local rollback rehearsal previously accepted a partial operation list even
+though `DIST-006` requires npm, engine, Hunt-feed, signing-identity, and Web
+deployment coverage. CLI PR #87 now rejects incomplete and duplicate boundary
+sets and is merged after all hosted checks passed. Residual risk is unchanged:
+no authenticated registry/provider/signing/deployment rollback or revocation,
+protected publishing, legal clearance, operational audit/recovery drill, or
+independent review has been performed. Owner: release engineering. No
+production or external provider state changed. Evidence:
+`docs/shipping/evidence/dist-006-rollback-boundary-completeness-2026-10-09.md`.
+
 ## R-QUAL-WEB-006-015-production-checkout · 2026-10-09
 
 The approved Chrome DevTools session now provides a clean read-only production
