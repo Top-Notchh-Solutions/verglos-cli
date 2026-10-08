@@ -1,4 +1,4 @@
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -50,6 +50,7 @@ function seedCache(fetchedAt: Date, plan: string, capabilities: string[]) {
       cache_ttl_seconds: 60,
       simulated: false,
       active: true,
+      credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", "vg_test_key"])).digest("hex"),
       fetchedAt: fetchedAt.toISOString(),
       expiresAt: fetchedAt.toISOString(),
     }),
@@ -122,6 +123,58 @@ const SUPPORTED_VERSION_COMPATIBILITY_FIXTURES = Object.freeze([
 beforeEach(() => {
   rmSync(join(verglosDir, "credentials.json"), { force: true });
   rmSync(join(verglosDir, "capabilities.json"), { force: true });
+});
+
+test("capability cache follows the license and endpoint across fresh and offline reuse", async () => {
+  const originalFetch = globalThis.fetch;
+  const cachePath = join(verglosDir, "capabilities.json");
+  try {
+    for (const forceRefresh of [false, true]) {
+      seedCredentials();
+      globalThis.fetch = (async () => Response.json(PLAN_CATALOG_FIXTURES[1])) as typeof fetch;
+      assert.equal((await mod.loadCapabilities({ forceRefresh: true })).source, "rest");
+      const cacheText = readFileSync(cachePath, "utf8");
+      assert.equal(cacheText.includes("vg_test_key"), false);
+      globalThis.fetch = (async () => { throw new Error("offline"); }) as typeof fetch;
+      assert.equal((await mod.loadCapabilities({ forceRefresh })).plan, "pro", "same identity retains bounded offline access");
+
+      for (const identity of [
+        { apiUrl: "http://127.0.0.1:1", licenseKey: "vg_other_key" },
+        { apiUrl: "http://127.0.0.1:2", licenseKey: "vg_test_key" },
+        { apiUrl: "http://127.0.0.1:1" },
+      ]) {
+        writeFileSync(join(verglosDir, "credentials.json"), JSON.stringify(identity));
+        const resolved = await mod.resolveEntitlement({ forceRefresh });
+        assert.equal(resolved.plan, "free");
+        assert.equal(resolved.source, "free");
+        assert.equal(resolved.capabilities.includes("server.fix"), false);
+      }
+    }
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test("legacy, future-dated, and over-age caches cannot bypass refresh through a future expiry", async () => {
+  seedCredentials();
+  const originalFetch = globalThis.fetch;
+  const cachePath = join(verglosDir, "capabilities.json");
+  try {
+    globalThis.fetch = (async () => Response.json(PLAN_CATALOG_FIXTURES[1])) as typeof fetch;
+    await mod.loadCapabilities({ forceRefresh: true });
+    const cached = JSON.parse(readFileSync(cachePath, "utf8"));
+    const legacy = { ...cached };
+    delete legacy.credentialScope;
+    const tomorrow = new Date(Date.now() + 86_400_000).toISOString();
+    globalThis.fetch = (async () => { throw new Error("offline"); }) as typeof fetch;
+    for (const invalid of [legacy,
+      { ...cached, fetchedAt: tomorrow, expiresAt: tomorrow },
+      { ...cached, fetchedAt: new Date(Date.now() - 8 * 86_400_000).toISOString(), expiresAt: tomorrow },
+    ]) {
+      writeFileSync(cachePath, JSON.stringify(invalid));
+      for (const forceRefresh of [false, true]) {
+        assert.equal((await mod.loadCapabilities({ forceRefresh })).source, "free");
+      }
+    }
+  } finally { globalThis.fetch = originalFetch; }
 });
 
 test("resolveEntitlement: signed v2 catalog is the only paid fallback when REST and cache are unavailable", async () => {

@@ -1,4 +1,5 @@
 import { test } from "node:test";
+import { createHash } from "node:crypto";
 import { createApprovalReceipt, readApprovalReceipt } from "@verglos/shared";
 import assert from "node:assert/strict";
 import { authorizeHeaderFixTests, captureHeaderFixSnapshots, HeaderFixRollbackError, HeaderFixTestsError, NEXT_CONFIG_DECL, authorizeHeaderFix, headerFixWorkspaceTarget, planHeaderFixes, planHeaderFixTests, rescanOrRollbackHeaderFix, runApprovedHeaderFixTests, verifyOrRollbackHeaderFix } from "./fix.js";
@@ -203,7 +204,7 @@ test("fix CLI JSON dry-run is process-safe and does not mutate the project", asy
     await mkdir(join(root, "test"));
     await writeFile(join(root, "test", "selected.test.js"), "assert.ok(true);\n");
     await mkdir(join(home, ".verglos"), { recursive: true });
-    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
     const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--dry-run", "--test-file", "test/selected.test.js"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "http://127.0.0.1:1" } });
     assert.equal(result.exitCode, 0, `${result.stdout}\n${result.stderr}`);
     const output = JSON.parse(result.stdout) as { planned: readonly { action: string; diff: string }[]; testExecution: { action: string; policyEffect: string; warning: string } };
@@ -279,7 +280,7 @@ test("fix CLI reports a selected-test failure and restores the approved mutation
     await mkdir(join(root, "test"));
     await writeFile(join(root, "test", "failure.test.js"), "throw new Error('fixture failure');\n");
     await mkdir(join(home, ".verglos"), { recursive: true });
-    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
     const mutateReceipt = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174003", action: "mutate", actor: "agent", target: await headerFixWorkspaceTarget(root), files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
     const testPlan = await planHeaderFixTests(root, ["test/failure.test.js"]);
     const testReceipt = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174004", action: "execute", actor: "agent", target: testPlan.target, files: ["test/failure.test.js"], network: [], policyEffect: testPlan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
@@ -322,7 +323,7 @@ test("fix CLI approved JSON mutation uses the exact receipt and reports the writ
     await mkdir(join(root, "test"));
     await writeFile(join(root, "test", "verification.test.js"), 'import assert from "node:assert/strict"; assert.ok(true);\n');
     await mkdir(join(home, ".verglos"), { recursive: true });
-    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
     const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174099", action: "mutate", actor: "human", target: await headerFixWorkspaceTarget(root), files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
     const receiptPath = join(root, "approval.json");
     await writeFile(receiptPath, JSON.stringify(receipt));
@@ -357,7 +358,7 @@ test("fix refuses to mutate or execute tests when the configured approval audit 
     await mkdir(join(root, "test"));
     await writeFile(join(root, "test", "selected.test.js"), "throw new Error('must not execute');\n");
     await mkdir(join(home, ".verglos"), { recursive: true });
-    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
     const mutateReceipt = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174008", action: "mutate", actor: "human", target: await headerFixWorkspaceTarget(root), files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
     const testPlan = await planHeaderFixTests(root, ["test/selected.test.js"]);
     const testReceipt = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174009", action: "execute", actor: "agent", target: testPlan.target, files: ["test/selected.test.js"], network: [], policyEffect: testPlan.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
@@ -383,7 +384,7 @@ test("fix CLI rejects a receipt approved for a different workspace before mutati
     const original = "const nextConfig = {}; module.exports = nextConfig;\n";
     await writeFile(join(root, "next.config.js"), original);
     await mkdir(join(home, ".verglos"), { recursive: true });
-    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
     const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174100", action: "mutate", actor: "human", target: "workspace:/tmp/unrelated-project", files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
     const receiptPath = join(root, "approval.json");
     await writeFile(receiptPath, JSON.stringify(receipt));

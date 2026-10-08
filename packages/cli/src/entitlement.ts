@@ -52,6 +52,8 @@ interface CapabilitiesResponse {
 }
 
 interface CachedCapabilities extends CapabilitiesResponse {
+  /** Local cache identity, never a substitute for hosted authorization. */
+  credentialScope?: string;
   fetchedAt: string;
   expiresAt: string;
   simulatedAsPlan?: string;
@@ -93,7 +95,8 @@ async function readCache(): Promise<CachedCapabilities | null> {
     if (!parsed) return null;
     const value = JSON.parse(raw) as Record<string, unknown>;
     if (typeof value.fetchedAt !== "string" || typeof value.expiresAt !== "string" || !Number.isFinite(new Date(value.fetchedAt).getTime()) || !Number.isFinite(new Date(value.expiresAt).getTime())) return null;
-    return { ...parsed, source: "cache", fetchedAt: value.fetchedAt, expiresAt: value.expiresAt, ...(typeof value.simulatedAsPlan === "string" ? { simulatedAsPlan: value.simulatedAsPlan } : {}), ...(value.stale === true ? { stale: true } : {}) };
+    if (typeof value.credentialScope !== "string" || !/^[a-f0-9]{64}$/u.test(value.credentialScope)) return null;
+    return { ...parsed, credentialScope: value.credentialScope, source: "cache", fetchedAt: value.fetchedAt, expiresAt: value.expiresAt, ...(typeof value.simulatedAsPlan === "string" ? { simulatedAsPlan: value.simulatedAsPlan } : {}), ...(value.stale === true ? { stale: true } : {}) };
   } catch {
     return null;
   }
@@ -172,7 +175,18 @@ export async function loadCapabilities(
   opts: LoadCapabilitiesOptions = {},
 ): Promise<CachedCapabilities> {
   const now = Date.now();
-  const cached = await readCache();
+  const creds = await loadCredentials();
+  const apiUrl = creds.apiUrl ?? DEFAULT_API_URL;
+  // Bind both online and offline reuse to the request identity. Legacy caches
+  // without this binding require one successful refresh; signed tokens remain
+  // available through the independently verified fallback.
+  const credentialScope = createHash("sha256")
+    .update(JSON.stringify([apiUrl, creds.licenseKey ?? null]))
+    .digest("hex");
+  const candidate = await readCache();
+  const ageMs = candidate ? now - new Date(candidate.fetchedAt).getTime() : Infinity;
+  const cached = candidate?.credentialScope === credentialScope
+    && ageMs >= 0 && ageMs < ABSOLUTE_MAX_STALE_MS ? candidate : null;
 
   const cacheIsFresh =
     cached &&
@@ -181,9 +195,8 @@ export async function loadCapabilities(
 
   if (!opts.forceRefresh && cacheIsFresh && cached) return { ...cached, source: "cache" };
 
-  const creds = await loadCredentials();
   const server = await fetchFromServer(
-    creds.apiUrl ?? DEFAULT_API_URL,
+    apiUrl,
     creds.licenseKey,
     opts.asPlan,
   );
@@ -207,6 +220,7 @@ export async function loadCapabilities(
   const ttlMs = Math.max(60, server.cache_ttl_seconds) * 1000;
   const entry: CachedCapabilities = {
     ...server,
+    credentialScope,
     fetchedAt: new Date(now).toISOString(),
     expiresAt: new Date(now + ttlMs).toISOString(),
     simulatedAsPlan: opts.asPlan,

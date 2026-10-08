@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { access, chmod, mkdir, mkdtemp, readFile, readdir, realpath, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -665,6 +666,7 @@ test("fix JSON mode refuses mutation without explicit approval", async () => {
     const now = Date.now();
     await writeFile(join(root, ".verglos", "capabilities.json"), JSON.stringify({
       plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 3600, simulated: false, active: true,
+      credentialScope: createHash("sha256").update(JSON.stringify([process.env.VERGLOS_API_URL ?? "https://verglos.com", null])).digest("hex"),
       fetchedAt: new Date(now).toISOString(), expiresAt: new Date(now + 3600_000).toISOString(),
     }));
     const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "fix", "--json", "--quiet"], root, { env: { HOME: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
