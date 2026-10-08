@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
+
+- **Result:** With the existing authenticated browser session, the organization
+  list returned zero rows. Unknown-organization projects, members, search,
+  usage, and SCM-installation GETs each returned HTTP 403 with stable
+  `organization access denied` and `private, no-store`; no tenant data leaked.
+- **Boundary:** Reserved unknown UUID only; no organization, project, member,
+  license, payment, database, or deployment mutation.
+- **Disposition:** This strengthens authenticated tenant isolation but does not
+  qualify a paid organization, valid tenant, modified-CLI headers, private
+  record export, or the complete acceptance matrix. `PLAN-CLI-003` remains
+  unchecked. Backlog remains **218/62/280 (77.9%)**.
+- **Evidence file:**
+  `docs/shipping/evidence/plan-cli-003-authenticated-unknown-tenant-probe-2026-10-08.md`.
+
 ## 2026-10-08 · authenticated Free-account route matrix
 
 - **Result:** Existing authenticated production session rendered the Free

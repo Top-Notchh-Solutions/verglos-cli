@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
+
+Authenticated GET probes against a reserved unknown organization returned
+stable `403 organization access denied` and `private, no-store` for projects,
+members, search, usage, and SCM installations; the organization list contained
+zero rows. This is tenant-isolation evidence only, not paid organization or
+complete modified-CLI acceptance. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-cli-003-authenticated-unknown-tenant-probe-2026-10-08.md`.
+
 ## 2026-10-08 · authenticated Free-account route matrix
 
 Read-only Chrome evidence confirms the current authenticated Free-account
