@@ -12,7 +12,55 @@
   release-gate, and release-candidate-freeze work is complete. Do not use repository scanning to create the appearance of shipping progress.
 
   Do not release or publish the final npm version until the complete V1 is actually qualified. The unreleased latest source tree is the product under test; the old
-  published alpha is onla compatibility baseline where explicitly required.
+  published alpha is only a compatibility baseline where explicitly required.
+
+  CURRENT OPERATING PRIORITY — 2026-10-08
+
+  The remaining work is now backend/CLI-first. The primary objective is to clear
+  genuinely executable unchecked backlog items in `verglos-cli` in coherent fat
+  batches, then complete the final `verglos-web` truth, browser, payment,
+  production, and accessibility pass. Web work is allowed before that only when
+  it is required to unblock a CLI contract or to fix a verified release blocker.
+
+  The authoritative checkpoint at the start of this operating phase is:
+
+  - **218 checked / 62 unchecked / 280 total / 77.9%**;
+  - CLI `origin/main`: `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`;
+  - Web PR #165 merged as `c620c39e837af641ba4ada1967117da4dcfa6761`;
+  - no checkbox is accepted merely because implementation exists or tests are green.
+
+  The CLI queue must be driven from the live private backlog, not from memory.
+  At each batch, select dependency-ready IDs, implement the missing product or
+  qualification surface, run the required tests, inspect the public boundary,
+  verify the PR, and reconcile private evidence. If an ID is blocked by a
+  provider, legal approver, independent reviewer, customer authorization,
+  production activation, or hosted integration, record that exact gap and move
+  to the next executable CLI ID. Do not relabel a blocked gate as complete.
+
+  INITIAL NEXT-THREE BATCH QUEUE
+
+  Recompute this queue against the live backlog at resume; these are execution
+  lanes, not accepted IDs:
+
+  1. **CLI backend qualification:** dependency-ready work across HUNT-008–011,
+     PLAN-CLI-001–004, TEAM-CLI-001/002, STUDIO-CLI-001, and ENT-CLI-001.
+     Required evidence is exact source behavior, focused and full CLI tests,
+     typecheck/build/lint, public-boundary and adversarial checks, and hosted
+     PR verification. Trusted publisher roots, hosted activation, operational
+     runner exchange, and independent review remain explicit blockers where
+     required by the individual item.
+  2. **CLI distribution and release gates:** LIC-002/003, DIST-001–003/006,
+     and QUAL-CLI-006. Required evidence is deterministic package/archive,
+     notice/SBOM, clean-consumer, rollback, supported-runtime, official-tool,
+     legal, trusted-publishing, and release-identity qualification. Do not
+     claim completion from local archive generation alone.
+  3. **Final Web and cross-repository qualification:** PLAN-WEB-011–015,
+     QUAL-WEB-005/006, TEAM-WEB-006, GITHUB-WEB-001–004, and FINAL-WEB-001–008.
+     Required evidence is isolated Test Mode payment lifecycle, production
+     preflight/reconciliation after credential rotation, authenticated browser
+     and field/runtime evidence, final truth review, and the remaining hosted
+     integrations. Keep this lane after the CLI-first pass except for a blocker
+     that directly prevents a dependency-ready CLI batch.
 
   AUTHORITATIVE SOURCES
 
@@ -64,7 +112,7 @@
 
   EXECUTION ACCELERATION WITHOUT LOWERING THE BAR
 
-  - Run CLI and Web work as parallel tracks whenever their files and acceptance boundaries are independent.
+  - Run the CLI/backend track first and continuously. Run Web work in parallel only when its files and acceptance boundaries are independent or it is required to unblock a CLI contract.
   - Never let a pending provider, browser, customer, reviewer, or hosted check on one track idle the other.
   - Maintain a live queue of the next three independent batches, each with dependency, acceptance evidence, repository, PR boundary, and blocker.
   - Prefer one substantial phase PR per repository.
@@ -107,6 +155,31 @@
 
   Maintain one phase PR per repository. Reuse the active phase PR while it is open. Create a new PR only after the current one is merged/closed or a genuine phase boundary
   exists.
+
+  BACKEND-FIRST BATCH POLICY
+
+  Until the CLI/backend queue is exhausted or explicitly blocked, use this
+  order:
+
+  1. CLI implementation and qualification items that are dependency-ready,
+     especially Hunt/agent authority, entitlement/catalog compatibility,
+     policy/cache/check payloads, records/provenance, private-runner client
+     behavior, and distribution/package safety.
+  2. Cross-repository contracts required by those CLI items, using Web only for
+     the smallest reviewed contract or test fixture needed to qualify them.
+  3. CLI distribution, supported-runtime, adversarial, and release-gate work.
+  4. Web final truth, hosted browser, payment-method/lifecycle, accessibility,
+     performance, privacy, production-reconciliation, and release-candidate
+     work.
+  5. Founder-supplied company-shaped POC, held-out corpus evaluation,
+     false-positive/false-truth correction, and final go/no-go.
+
+  A CLI batch may strengthen several open IDs, but it may claim an accepted ID
+  only when every criterion and external dependency for that ID is evidenced.
+  Code-side progress, a fixture, a mocked provider, a local test, or a hosted
+  platform matrix is recorded as progress—not acceptance—when the backlog says
+  live activation, legal review, independent review, customer authorization, or
+  production reconciliation is still required.
 
   BACKLOG ACCOUNTING
 
@@ -292,14 +365,20 @@
   2. CLI command, config, inspect, evidence, and compatibility foundations.
   3. Canonical records, signing, verification, provenance, and redaction.
   4. Agent/MCP authority and safe Hunt execution.
-  5. Hosted receipt ingestion, tenant isolation, authorization, and custody.
-  6. Plans, entitlements, usage, quotas, billing, payment methods, monitoring, queues, and operations.
+  5. Plans, entitlements, usage, quotas, and CLI/backend operations.
+  6. Hosted receipt ingestion, tenant isolation, authorization, custody, billing,
+     payment methods, monitoring, queues, and cross-repository contracts.
   7. GitHub App/org integration and SCM delivery qualification.
-  8. Distribution, CI/CD, SBOM/notices, rollback, supported platforms, and adversarial qualification.
-  9. Accessibility, performance, privacy, deletion, retention, backup, restore, and disaster-recovery qualification.
-  10. Acceptance stories, independent review, truth reconciliation, and release-candidate freeze.
-  11. Only after all prior gates pass: full repository corpus scans, external POC, false-positive correction, final regression, and go/no-go.
-  12. Only after final go/no-go: public docs, pricing, metadata, blog, landing-page, npm publication, release tags, and launch operations.
+  8. Distribution, CI/CD, SBOM/notices, rollback, supported platforms, and
+     adversarial qualification.
+  9. Accessibility, performance, privacy, deletion, retention, backup, restore,
+     payment lifecycle, and disaster-recovery qualification.
+  10. Acceptance stories, independent review, truth reconciliation, and
+      release-candidate freeze.
+  11. Only after all prior gates pass: full repository corpus scans, external
+      POC, false-positive correction, final regression, and go/no-go.
+  12. Only after final go/no-go: public docs, pricing, metadata, blog,
+      landing-page, npm publication, release tags, and launch operations.
 
   CURRENT EXECUTION LESSONS
 
@@ -316,6 +395,24 @@
   - Marketing truth remains frozen until final truth and release gates pass.
   - Do not create work solely to reduce the checkbox count; complete real acceptance criteria.
   - Do not use the public CLI repository as a place to store private evaluation intelligence.
+  - The CLI is the current primary execution track. Existing CLI substrate is
+    substantial, but open backlog IDs still require their stated operational,
+    legal, reviewer, provider, and cross-repository evidence.
+  - Chrome DevTools availability and Docker availability enable qualification;
+    neither is evidence that a route, payment lifecycle, sandbox boundary, or
+    production operation passed.
+  - A founder statement of consent is not a substitute for a repository owner's
+    written authorization, legal approval, an independent security review, or
+    provider/account evidence where the backlog requires those artifacts.
+  - Test Mode is not production evidence. Never lower a production price to
+    `$1`, use a live-looking QR, edit a production row, or treat a polling
+    response as payment success.
+  - A merged PR must be verified through the hosting provider. Local worktree
+    cleanup can fail independently because another worktree owns the local
+    base branch; that does not change the remote merge state.
+  - Do not spend the CLI-first critical path repeatedly rerunning unchanged
+    suites. Use focused evidence for implementation, then one full configured
+    suite for the completed phase.
 
   SESSION LEARNINGS
 
@@ -331,6 +428,29 @@
   - newly discovered risks;
   - decisions made;
   - whether public/private boundaries were checked.
+
+  CURRENT SESSION LEARNINGS — 2026-10-08
+
+  - The Web homepage contrast/key batch was implemented in Web commit `5b351a9`,
+    passed local typecheck, truth-registry 25/25, serial 862 passed / 24
+    environment-gated skips / 0 failures, 45-page build, and local mobile and
+    desktop Lighthouse Accessibility/Best Practices 100/100 with a clean
+    console. It merged as PR #165 / `c620c39` after Vercel, Preview Comments,
+    GitGuardian, and typecheck/schema passed. No backlog checkbox changed.
+  - The current next track is a fresh CLI worktree from `origin/main`
+    `94829e1`; the first action is to choose a dependency-ready unchecked CLI
+    batch from the private tracker, not to reopen merged Web work.
+  - Current CLI open work includes implementation-progress items in Hunt,
+    entitlement/catalog compatibility, organization policy/check payloads,
+    client projection, private runner, licensing/distribution, and release
+    qualification. Many remain open for external evidence; local code must be
+    strengthened without claiming those external gates are satisfied.
+  - No production database, migration, payment, provider, customer, or release
+    write is implied by this phase. Local dependency installation, tests, builds,
+    browser qualification, and PR operations remain separate from production
+    acceptance.
+  - The exact count remains **218 checked / 62 unchecked / 280 total (77.9%)**
+    until a current private-tracker reconciliation proves otherwise.
 
   COMPLETION STANDARD
 
@@ -509,9 +629,10 @@ release requirement above.
   24 hours of active work. Maintain a live critical path and the next three
   independent batches; run CLI, Web, browser, and Docker work in parallel only
   when their resources and write boundaries are disjoint.
-- Prioritize, in order: security blockers and production safety; billing and
-  payment-method implementation; critical Web/CLI acceptance gates; hosted and
-  cross-repository verification; release gates; then final corpus/POC work.
+- Prioritize, in order: security blockers and production safety; dependency-ready
+  CLI/backend unchecked items; cross-repository contracts needed by those items;
+  CLI release gates and supported-runtime/adversarial qualification; then final
+  Web truth, payment/browser/runtime qualification; then corpus/POC and go/no-go.
 - Do not spend the window on marketing polish, speculative abstractions, or
   repeated unchanged suites. Keep public pricing, marketing, npm publication,
   and launch operations frozen until the completion standard passes.
