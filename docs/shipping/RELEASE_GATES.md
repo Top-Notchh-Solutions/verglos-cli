@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## ENT-CLI-001 hosted private-runner transport · 2026-10-08
+
+Web PR #158 and CLI PR #81 merged after their hosted repository checks passed,
+including Web type/schema/build/security/dependency/license gates and the CLI
+9-cell platform matrix, self-scan, and in-toto binding. The additive Web
+transport persists only bounded runner/job/result metadata and the CLI uploads
+only the least-evidence result projection. This advances implementation only;
+it does not pass ENT-CLI-001. Operational credential exchange, isolated
+non-production execution/result reconciliation, and independent Hunt review
+remain required. No production migration or write occurred.
+
+Evidence: `docs/shipping/evidence/ent-cli-001-private-runner-transport-2026-10-08.md`.
+
 ## QUAL-WEB-006 / PLAN-WEB-015 runtime observation · 2026-10-08
 
 Read-only production CDP inspection is recorded, including the hosted-method

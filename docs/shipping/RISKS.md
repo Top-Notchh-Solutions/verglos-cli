@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## R-ENT-CLI-001-hosted-transport · 2026-10-08
+
+The hosted private-runner transport and CLI result projection are now merged
+and repository-qualified, but the transport has not been exercised through an
+approved isolated non-production enrollment, bounded execution, and durable
+result-reconciliation run. The enrollment response currently supplies a
+bounded one-time secret for the operational runner flow; credential exchange,
+execution evidence, replay/retry reconciliation, and independent Hunt review
+remain release risks. Do not treat the presence of job/result tables or a
+successful upload response as evidence that a private scan executed correctly.
+Owner: Enterprise/CLI/Web release qualification. Required next action: use an
+isolated non-production database and approved runner fixture, run the bounded
+matrix, reconcile job/result/entitlement state, and obtain independent review.
+No production migration or state write occurred.
+
 ## R-QUAL-WEB-006-015-runtime-observation · 2026-10-08
 
 The production checkout visually lists hosted methods, but a rendered label is

@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 hosted private-runner transport · 2026-10-08
+
+Web PR #158 (`7b3cea6`) merged as `d5c91df3a78dfdab29cb6150864de2fd761db1aa`;
+CLI PR #81 (`63fb714`) merged as `111d3aad9ddd89285c24aaec142aa71a72e22905`.
+The Web side now has tenant-scoped runner enrollment, signed short-lived job
+issuance/polling, source-free result reconciliation, and additive migration
+`0037_private_runner_transport`; the CLI side has bounded authenticated
+`runner upload-result` projection upload. Web private-runner contracts pass
+24/24, the organization tenant/access audit passes 38/38, Web type/schema/
+migration/build and hosted repository checks pass, and CLI focused tests pass
+5/5 with all hosted platform/self-scan/in-toto checks green. No production
+migration or state write occurred. This does not close `ENT-CLI-001`: runner
+credential exchange, isolated non-production execution/reconciliation, and
+independent Hunt review remain open. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. See
+`docs/shipping/evidence/ent-cli-001-private-runner-transport-2026-10-08.md`.
+
 ## QUAL-WEB-006 / PLAN-WEB-015 read-only runtime observation · 2026-10-08
 
 Production Chrome CDP inspection covered `/account` and `/checkout` with no

@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · ENT-CLI-001 hosted private-runner transport batch
+
+- **Sources:** Web PR #158 merged as `d5c91df3a78dfdab29cb6150864de2fd761db1aa`; CLI PR #81 merged as `111d3aad9ddd89285c24aaec142aa71a72e22905`.
+- **Verification:** Web private-runner contracts **24/24**, tenant/access
+  audit **38/38**, typecheck, schema, 38-migration ordering, build, hosted
+  type/schema/build/security/dependency/license/Vercel checks all pass. CLI
+  focused client tests **5/5**, hosted 9-cell platform matrix, self-scan, and
+  in-toto all pass.
+- **Safety:** The hosted schema stores only bounded runner/job/result metadata;
+  no command, source, or raw output crosses the transport. No production
+  migration, database/provider/payment/entitlement/deployment write occurred.
+- **Disposition:** Implementation substrate only. `ENT-CLI-001` remains open
+  for operational enrollment/credential exchange, isolated non-production
+  execution/result reconciliation, independent Hunt review, and acceptance.
+  Backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/ent-cli-001-private-runner-transport-2026-10-08.md`.
+
 ## 2026-10-08 · Production read-only browser qualification
 
 - **Instrument:** Chrome `154.0.8037.98`, loopback CDP `127.0.0.1:9222`.

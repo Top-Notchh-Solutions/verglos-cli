@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## ENT-CLI-001 private-runner hosted transport · 2026-10-08
+
+Web PR #158 merged as `d5c91df3a78dfdab29cb6150864de2fd761db1aa` and CLI PR #81
+merged as `111d3aad9ddd89285c24aaec142aa71a72e22905`. The batch adds the
+tenant-scoped enrollment/job/result transport, additive migration `0037`, and
+the CLI source-free result upload command. Web private-runner/access contracts
+pass 24/24 and 38/38; Web typecheck/schema/migration checks/build and hosted
+repository checks pass; CLI focused tests pass 5/5 and the hosted 9-cell,
+self-scan, and in-toto checks pass. This is not full ENT-CLI-001 acceptance:
+isolated non-production execution/result reconciliation, credential exchange,
+and independent Hunt review remain open. No production migration or write was
+performed. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+Evidence: `docs/shipping/evidence/ent-cli-001-private-runner-transport-2026-10-08.md`.
+
 ## Production read-only browser qualification · 2026-10-08
 
 The approved Chrome CDP session inspected production `/account` and
