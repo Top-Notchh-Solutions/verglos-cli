@@ -547,6 +547,9 @@ Then complete, as applicable:
 After the batch:
 
 - recalculate the exact checked/unchecked/total count;
+- give a concise user-facing shipping showcase: what was implemented or
+  repaired, which product surface is now demonstrable, the relevant files and
+  commits/PRs/deployment, and the evidence that proves it;
 - list accepted IDs;
 - list attempted-but-open IDs and missing evidence;
 - list repository commits and push/PR/merge state;
