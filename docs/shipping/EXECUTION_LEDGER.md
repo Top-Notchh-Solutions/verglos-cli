@@ -24,6 +24,9 @@
   database, payment, deployment, registry, customer, or npm write occurred.
   Backlog remains **218/62/280 (77.9%)**.
 - **Evidence:** `docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+  The exact package/source/digest legal review packet is
+  `docs/shipping/legal/transitive-license-review-2026-10-08.md`; it records
+  review inputs only and does not clear any blocker.
 
 ## 2026-10-08 · QUAL-WEB-006 deployed docs contrast recheck
 

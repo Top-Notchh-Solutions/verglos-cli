@@ -13,6 +13,9 @@ dependencies (`glob`, `lru-cache`, `minimatch`, `minipass`, `minipass-flush`,
 This does not pass LIC-002/003, DIST-001–003/006, or QUAL-CLI-006; no
 checkbox changed and no publication occurred. Evidence:
 `docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+The exact package/source/digest legal review packet is
+`docs/shipping/legal/transitive-license-review-2026-10-08.md`; it is not an
+approval and does not clear the blockers.
 
 ## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
 

@@ -12,7 +12,9 @@ remains blocked by seven license review blockers (six BlueOak-1.0.0 packages
 and nested `benchmark@1.0.0` license conflict under `fast-uri@3.1.7`). This is
 qualification progress only; HUNT-008–011, QUAL-CLI-004/006, LIC-002/003,
 and DIST-001–003/006 remain unchecked. No external or production state
-changed. See `docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+changed. See `docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`
+and the private legal review packet
+`docs/shipping/legal/transitive-license-review-2026-10-08.md`.
 
 ## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
 

@@ -17,6 +17,8 @@ gates. Backlog remains **218/62/280 (77.9%)**. No production/provider/
 database/payment/deployment/npm write occurred.
 
 Evidence: `docs/shipping/evidence/qual-cli-backend-hunt-distribution-2026-10-08.md`.
+The exact private package/source/digest review packet is
+`docs/shipping/legal/transitive-license-review-2026-10-08.md`.
 
 ## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
 
