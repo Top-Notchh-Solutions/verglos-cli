@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { generateKeyPairSync, sign } from "node:crypto";
-import { mkdtemp, mkdir, writeFile, readFile } from "node:fs/promises";
+import { chmod, lstat, mkdtemp, mkdir, writeFile, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -9,6 +9,15 @@ import { pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerRe
 
 const home = await mkdtemp(join(tmpdir(), "verglos-private-runner-client-"));
 process.env.HOME = home;
+
+async function assertPrivateMode(path: string, expected: number): Promise<void> {
+  const actual = (await lstat(path)).mode & 0o777;
+  if (process.platform === "win32") {
+    assert.notEqual(actual & 0o200, 0, `${path} must remain owner-writable`);
+    return;
+  }
+  assert.equal(actual, expected, `${path} must have mode ${expected.toString(8)}`);
+}
 
 function makeJob(privateKey: ReturnType<typeof generateKeyPairSync>["privateKey"]): PrivateRunnerJob {
   const unsigned: PrivateRunnerJob = {
@@ -23,6 +32,7 @@ test("private runner poll uses authenticated GET, verifies, admits, and persists
   const root = await mkdtemp(join(tmpdir(), "verglos-runner-fixture-"));
   const keyPath = join(root, "runner-public.pem");
   const replayPath = join(root, "replay.json");
+  await chmod(root, 0o755);
   await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
   await mkdir(join(home, ".verglos"), { recursive: true });
   await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
@@ -35,6 +45,8 @@ test("private runner poll uses authenticated GET, verifies, admits, and persists
   assert.equal(calls[0]?.method, "GET");
   assert.equal(calls[0]?.authorization, "Bearer license-sentinel");
   assert.equal((await readFile(replayPath, "utf8")).includes("job_1"), true);
+  await assertPrivateMode(root, 0o700);
+  await assertPrivateMode(replayPath, 0o600);
   const summary = privateRunnerResultSummary(result);
   assert.equal(typeof summary, "object");
   assert.equal("rawOutput" in (summary as Record<string, unknown>), false);
