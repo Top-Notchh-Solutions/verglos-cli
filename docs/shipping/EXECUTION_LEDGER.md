@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · QUAL-WEB-005 authenticated privacy/deletion mobile slice
+
+- **Runtime:** Existing authenticated Chrome debug session, production
+  `/account/privacy`, 390×844 mobile/touch emulation, Fast 3G, 1× CPU.
+- **Result:** Accessible deletion confirmation checkbox; submit button stayed
+  disabled; request history contained no requests. Lighthouse
+  Accessibility/Best Practices/SEO **100/100/100**; LCP **614 ms**, CLS
+  **0.00**, no console messages.
+- **Disposition:** Read-only surface evidence only. Deletion worker E2E,
+  consent/legal decision, customer-held-record preservation, retention,
+  restore/rollback, and independent review remain open. No checkbox changed;
+  backlog remains **218/62/280 (77.9%)**.
+- **Safety:** No deletion request or production, database, payment,
+  entitlement, or deployment write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-privacy-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-006 authenticated organization directory mobile slice
 
 - **Runtime:** Existing authenticated Chrome debug session, production

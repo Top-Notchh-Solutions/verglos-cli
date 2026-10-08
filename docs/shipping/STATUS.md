@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · QUAL-WEB-005 authenticated privacy/deletion mobile slice
+
+The authenticated production `/account/privacy` surface was checked read-only
+under 390×844/Fast 3G emulation. The deletion checkbox was named, the request
+button remained disabled until explicit confirmation, and history reported no
+requests. Lighthouse Accessibility/Best Practices/SEO were **100/100/100**;
+LCP was **614 ms**, CLS **0.00**, and no console messages were observed. This
+does not qualify deletion execution, retention, consent, customer-held-record
+preservation, or recovery. No checkbox changed; backlog remains **218 checked /
+62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-privacy-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-006 authenticated organization directory mobile slice
 
 The authenticated production `/orgs` route was checked read-only under mobile
