@@ -137,11 +137,22 @@ The final public-repository corpus is intentionally run only after the
 release-candidate gates are complete. This prevents tuning the product or
 public claims against the final evaluation set.
 
+### What you need to do now
+
+Nothing for repository consent yet. Finish the database-variable update and
+production redeploy first. Do not clone a repository just to create a consent
+file. Consent files are stored in this private tracker, not inside the
+repository being evaluated.
+
 ## 4. Authorized repository permission — private/customer POC only
 
 This section applies only if we test a private repository or claim that a real
 customer/team accepted Verglos. It is simply a permission form for that
 repository owner. It is **not** a file containing repository source code.
+
+AI or Claude may help format a draft, but they must not invent the owner,
+scope, approval, signature, expiry, or consent. The repository owner must
+review and explicitly approve the final record.
 
 Do this once for each private/customer repository:
 
