@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · QUAL-WEB-006 authenticated organization directory mobile slice
+
+The authenticated production `/orgs` route was checked read-only under mobile
+390×844/Fast 3G emulation. Lighthouse Accessibility, Best Practices, and SEO
+were **100/100/100**; LCP was **868 ms**, CLS **0.00**, and no console messages
+were observed. The empty-state snapshot exposed no tenant data. This is
+partial qualification only; paid organizations, large data, human
+screen-reader, field-CWV, and complete dashboard evidence remain open. No
+checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-org-directory-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · read-only migration-history audit
 
 The selected local test database has all 37 declared application tables, but

@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · QUAL-WEB-006 authenticated organization directory mobile slice
+
+- **Runtime:** Existing authenticated Chrome debug session, production
+  `/orgs`, 390×844 mobile/touch emulation, Fast 3G, 1× CPU.
+- **Result:** Lighthouse Accessibility/Best Practices/SEO **100/100/100**;
+  LCP **868 ms**, CLS **0.00**, no console messages. The empty organization
+  state exposed no tenant rows or organization identifiers.
+- **Disposition:** Partial `QUAL-WEB-006` evidence only. The Agentic Browsing
+  category had one failure; paid organization, large-data, screen-reader,
+  field-CWV, and complete dashboard evidence remain open. No checkbox changed;
+  backlog remains **218/62/280 (77.9%)**.
+- **Safety:** Read-only browser run. No organization, database, payment,
+  entitlement, production, or deployment write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-org-directory-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · read-only migration-history audit
 
 - **Scope:** Web migration-audit script against the selected local test
