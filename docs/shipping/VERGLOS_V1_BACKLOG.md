@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## PLAN-CLI-003 production read-only forged-route recheck · 2026-10-09
+
+The approved Chrome session performed a same-origin read-only production
+modified-client probe with forged plan, capability, tenant, usage,
+organization, fingerprint, and receipt inputs. Forged capability stayed Free;
+invalid license and score-history requests returned 401; forged organization
+usage/search/projects returned 403; forged receipt lookup returned 404. Private
+routes returned `private, no-store` where applicable. This strengthens
+PLAN-CLI-003 only: the authorized paid/org fixture and complete
+list/search/export/public-private matrix remain missing. No checkbox changed;
+count remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-003-production-readonly-forged-route-recheck-2026-10-09.md`.
+
 ## DIST-006 rollback rehearsal boundary completeness · 2026-10-09
 
 CLI PR #87 (`0cbefab`) merged as `8bea4be`. The local rollback rehearsal now

@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-PLAN-CLI-003-paid-fixture-matrix · 2026-10-09
+
+The production read-only modified-client probe confirms forged plan,
+capability, license, fingerprint, tenant, organization, usage, search,
+project, and receipt inputs do not grant the exercised unauthorized access.
+Residual risk is material: the session has no paid license or organization
+fixture, so it cannot prove authorized paid list/search/export behavior or the
+complete public/private runtime matrix. Owner: Web/CLI release qualification.
+No production or provider state changed. Evidence:
+`docs/shipping/evidence/plan-cli-003-production-readonly-forged-route-recheck-2026-10-09.md`.
+
 ## R-DIST-006-boundary-coverage · 2026-10-09
 
 The local rollback rehearsal previously accepted a partial operation list even

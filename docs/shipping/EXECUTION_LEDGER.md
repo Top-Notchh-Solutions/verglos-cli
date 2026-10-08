@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · PLAN-CLI-003 production read-only forged-route recheck
+
+- **Instrument:** Approved Chrome DevTools session on the deployed production
+  origin; same-origin GET requests only.
+- **Probe:** Forged plan/capability, license, fingerprint/history, tenant,
+  organization, usage, search, project, and receipt authority fields.
+- **Result:** Capability remained Free; invalid license/history returned 401;
+  forged organization routes returned 403; forged receipt lookup returned 404;
+  private responses used no-store headers where applicable.
+- **Boundary:** No order, payment, webhook, entitlement, database, migration,
+  provider, deployment, account, or data write. `PLAN-CLI-003` remains open;
+  score remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-cli-003-production-readonly-forged-route-recheck-2026-10-09.md`.
+
 ## 2026-10-09 · DIST-006 rollback-rehearsal boundary hardening
 
 - **Source:** CLI PR #87, head `0cbefab1cc1dca4a7b92d5d12e5e44a2d2011259`,

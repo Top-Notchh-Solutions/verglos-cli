@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · PLAN-CLI-003 production forged-route recheck
+
+A bounded same-origin GET probe through the approved Chrome session attempted
+forged paid-plan, capability, license, fingerprint, tenant, organization,
+usage, search, project, and receipt authority. Capability stayed Free; invalid
+license/history returned 401; forged organization access returned 403; forged
+receipt lookup returned 404. No write occurred. This is modified-client
+qualification progress only: the authorized paid/org fixture and complete
+list/search/export matrix remain open. No checkbox changed; score remains
+**218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-003-production-readonly-forged-route-recheck-2026-10-09.md`.
+
 ## 2026-10-09 · CLI DIST-006 rollback-rehearsal hardening
 
 CLI PR #87 (`0cbefab`) merged as `8bea4be` after all hosted checks passed:

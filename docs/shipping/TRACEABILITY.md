@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## PLAN-CLI-003 production read-only forged-route recheck · 2026-10-09
+
+- **Backlog strengthened:** `PLAN-CLI-003`; no checkbox accepted because the
+  paid/org fixture and complete list/search/export runtime matrix remain open.
+- **Method:** Same-origin GET probes through the authenticated Chrome session;
+  forged plan, capability, tenant, usage, organization, fingerprint, and
+  receipt fields; sanitized statuses only.
+- **Result:** Forged capability stayed Free; invalid license/history returned
+  401; forged organization usage/search/projects returned 403; forged receipt
+  returned 404; exercised private routes returned no-store headers.
+- **Boundary:** No order, payment, webhook, entitlement, database, migration,
+  provider, deployment, account, or data write. Score remains
+  **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-cli-003-production-readonly-forged-route-recheck-2026-10-09.md`.
+
 ## DIST-006 rollback-rehearsal boundary completeness · 2026-10-09
 
 - **Backlog strengthened:** `DIST-006`; no checkbox accepted because the
