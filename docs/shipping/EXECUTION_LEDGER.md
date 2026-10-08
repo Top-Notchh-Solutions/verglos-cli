@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · PLAN-WEB-014 Test Mode method preflight
+
+- **Scope:** Razorpay Test Mode `payments.fetchPaymentMethods()` using the
+  ignored Web test environment; credentials were held in memory and withheld.
+- **Result:** Provider returned `Authentication failed` before an account
+  method set was available.
+- **Safety:** Read-only capability request only. No order, payment, capture,
+  refund, subscription, webhook, entitlement, database, deployment, or
+  production write occurred.
+- **Disposition:** `PLAN-WEB-014/015` remain open pending authorized Test Mode
+  credential repair/rotation, isolated Preview database, and full lifecycle
+  evidence. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-test-mode-method-preflight-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-006 authenticated dashboard sweep
 
 - **Surface:** Production `/account` through connected Chrome DevTools; no

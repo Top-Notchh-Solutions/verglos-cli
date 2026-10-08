@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · PLAN-WEB-014 Test Mode method preflight
+
+The read-only Razorpay Test Mode `fetchPaymentMethods()` call returned
+**Authentication failed** before exposing the account method set. Keys were
+held in memory and never printed; no order, payment, refund, webhook,
+entitlement, database, deployment, or production operation occurred. The
+provider method matrix cannot proceed until the authorized Test Mode
+credential is repaired or rotated. `PLAN-WEB-014/015` remain open; no checkbox
+changed and backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence: `docs/shipping/evidence/plan-web-014-test-mode-method-preflight-2026-10-08.md`.
+
 ## 2026-10-08 · QUAL-WEB-006 authenticated dashboard sweep
 
 The authenticated production `/account` surface was checked at desktop and

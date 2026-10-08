@@ -1,5 +1,14 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-test-credential · 2026-10-08
+
+The read-only Razorpay Test Mode capability request returned `Authentication
+failed`, so the account-enabled method set is unknown. Do not infer methods
+from environment configuration or rendered UI and do not repeat the same
+request. Owner: billing/release qualification. Required next action: repair or
+rotate the authorized Test Mode credential, verify it with the capability
+preflight, and run the isolated Preview lifecycle matrix.
+
 ## R-QUAL-WEB-006-account-state · 2026-10-08
 
 Authenticated production `/account` is clean in the available Free state, but

@@ -1,5 +1,14 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-014 Test Mode method preflight · 2026-10-08
+
+The read-only Razorpay Test Mode capability call returned `Authentication
+failed` before the account-enabled method set could be inspected. No provider
+or application state changed, and no method list was inferred. `PLAN-WEB-014`
+and `PLAN-WEB-015` remain open pending credential repair/rotation, isolated
+Preview qualification, and the complete lifecycle matrix. See
+`docs/shipping/evidence/plan-web-014-test-mode-method-preflight-2026-10-08.md`.
+
 ## QUAL-WEB-006 authenticated dashboard sweep · 2026-10-08
 
 Production `/account` passed desktop/mobile Lighthouse Accessibility and Best
