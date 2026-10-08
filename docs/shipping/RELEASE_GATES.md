@@ -1,5 +1,32 @@
 # Verglos V1 release gates
 
+## Current reconciliation · 2026-10-09
+
+The earlier Test Mode credential blocker is superseded. The local isolated
+Test Mode pair was accepted by Razorpay with HTTP 200; no rotation was
+needed. Canonical Pro monthly and annual Test Mode plans now exist, and only
+their non-secret IDs were configured in Preview.
+
+Preview deployment `dpl_CwmAKov2aoDJmyk9o5LqHS849TEJ` and Production
+deployment `dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs` both reached READY. Production
+was aliased to `https://verglos.com`; its build, runtime configuration,
+`/`, and `/checkout` smoke passed. Production has no Test Mode plan IDs, so
+recurring billing remains disabled there. This is a completed code-rollout
+slice, not Gate 4 acceptance. No Production database, migration, payment,
+provider, entitlement, account, or customer write occurred.
+
+Gate 4 remains open for the real isolated subscription authorization,
+renewal/charge, failure, cancellation/expiry, refund, replay/out-of-order,
+and provider/ledger/entitlement reconciliation evidence. Production is now
+an active execution track: continue read-only audit, smoke, monitoring,
+rollback preparation, and later live-mode billing/database activation only
+after the operation-specific preflight.
+
+Score remains **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+changed.
+
+Evidence: `docs/shipping/evidence/plan-web-011-015-test-mode-plans-production-rollout-2026-10-09.md`.
+
 ## Razorpay Test Mode credential blocker · 2026-10-09
 
 Read-only Test Mode plan discovery returned HTTP **401** with the local test

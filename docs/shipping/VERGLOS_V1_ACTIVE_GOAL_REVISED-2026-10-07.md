@@ -1,4 +1,4 @@
-# Verglos V1 Active Shipping Goal — Whole-Backlog Shipping and Acceptance Pass
+# Verglos V1 Active Shipping Goal — Whole-Backlog, Preview, and Production Shipping
 
 Effective checkpoint: 2026-10-09. This file is the authoritative replacement
 goal for the remaining shipping work. Replace the previous active goal with
@@ -14,11 +14,28 @@ Ship the complete Verglos V1 across:
 The primary objective is to complete the whole authoritative private backlog
 with real implementation, integration, qualification, security review,
 release evidence, and final acceptance. Backlog delivery is the main
-workstream. Release gates are a parallel evidence and safety workstream:
-close gates that are technically ready, record external gates with their real
-owner and missing artifact, and continue the largest dependency-ready
-implementation batches without treating the gate list as a substitute for
-product shipping.
+workstream. Release gates and Production are parallel execution workstreams:
+close gates that are technically ready, perform the full Production code,
+configuration, smoke, reconciliation, rollback, and activation work in
+bounded stages, record external gates with their real owner and missing
+artifact, and continue the largest dependency-ready implementation batches
+without treating the gate list as a substitute for product shipping.
+
+Production is not excluded from this goal. It has four explicit stages:
+
+1. read-only audit and configuration verification;
+2. fail-closed application deployment and public smoke qualification;
+3. provider/database/payment activation only after the operation-specific
+   preflight, backup/restore, reconciliation, and rollback evidence exists;
+4. post-activation monitoring, payment/entitlement reconciliation, and
+   rollback or forward-fix rehearsal.
+
+Test Mode credentials, Test Mode plan IDs, Preview databases, and test
+webhook fixtures must never be copied into Production. A Production deploy
+with recurring billing disabled is still a real Production shipping event;
+it is not the final billing launch. Production billing and database writes
+remain part of this goal and will be executed when their concrete preflight
+criteria are satisfied.
 
 The payment gate had one explicit product gap: the Web code had billing ledger
 and subscription-webhook handling, but no server route that created a provider
@@ -63,6 +80,9 @@ Branch: `local/private-shipping-ledger`.
 Current exact scoreboard:
 
 - **219 checked / 61 unchecked / 280 total / 78.2%**.
+- The score is unchanged by the current subscription-plan setup and
+  deployments: no checkbox is closed until its complete acceptance evidence
+  exists. Recompute it from the live backlog after each batch.
 - `PLAN-WEB-013` was accepted after the four-method payment-catalog and
   hosted-order evidence batch; `PLAN-WEB-011`, `PLAN-WEB-012`,
   `PLAN-WEB-014`, and `PLAN-WEB-015` remain open.
@@ -92,6 +112,20 @@ Current source checkpoints:
 - Current Web implementation branch: `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd`.
   It adds the provider-subscription creation/status path and remains a code
   qualification batch until the isolated provider lifecycle is evidenced.
+- Preview deployment `dpl_CwmAKov2aoDJmyk9o5LqHS849TEJ` is READY at
+  `https://verglos-dhp0dkyma-anuragyadav20062002s-projects.vercel.app` with
+  isolated Preview configuration and canonical Test Mode plan IDs.
+- Production deployment `dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs` is READY and
+  aliased to `https://verglos.com`. Its 45-page build and runtime
+  configuration passed; Production plan IDs were deliberately not added, so
+  the new recurring subscription UI remains disabled there until live-mode
+  Production activation is separately preflighted.
+- Razorpay Test Mode accepted the credentials in
+  `verglos-web/.env.gates.testing`; no rotation was required. The account had
+  no plans, so the canonical Pro plans were created in Test Mode only:
+  monthly ₹2,809.43 (`plan_TlaD3tfF8tStbw`) and yearly ₹28,094.30
+  (`plan_TlaD4ASatpFUrM`). Preview now has those non-secret plan IDs and a
+  12-cycle test subscription count. No Production provider state changed.
 
 The private tracker is authoritative for acceptance. The public repositories
 must never receive private tracker documents, customer data, credentials,
@@ -249,9 +283,15 @@ a changed input or a clear acceptance need:
   Netbanking, Wallets, EMI, and Pay Later with no console errors and no
   QR-only path. It did not prove Test Mode, order creation, capture, refund,
   webhook, entitlement, renewal, cancellation, or payment acceptance.
-- Production browser, deployment, and local qualification work performed no
-  production database, migration, payment, provider, entitlement, account,
-  or deployment write.
+- Before the current rollout, production browser/deployment qualification
+  performed no Production database, migration, payment, provider,
+  entitlement, or account write. On 2026-10-09, the reviewed Web code was
+  deployed to Production as `dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs`; the build
+  passed, `https://verglos.com/` and `/checkout` returned 200, and the
+  subscription-creation route correctly returned 405 to an unauthenticated
+  GET. This was a bounded application deployment only: no Production
+  database, migration, payment, provider, entitlement, or account write
+  occurred, and no Test Mode plan or credential was copied to Production.
 - The authenticated Chrome DevTools session is available on
   `127.0.0.1:9222`; Docker Desktop is available. Both are instruments, not
   acceptance evidence by themselves.
@@ -308,8 +348,11 @@ a changed input or a clear acceptance need:
   refund checks. Razorpay reported zero Test Mode subscriptions. The Web
   subscription-creation route is now implemented and isolated route
   qualification passed **2/2**, but provider subscription
-  authorization/renewal/cancellation/expiry is not claimed. Private evidence
-  is `docs/shipping/evidence/plan-web-011-012-subscription-checkout-code-2026-10-09.md`.
+  authorization/renewal/cancellation/expiry is not claimed. The valid Test
+  Mode credential and canonical Test Mode plan setup are now available, but
+  the hosted subscription lifecycle still needs to be run and reconciled.
+  Private evidence is
+  `docs/shipping/evidence/plan-web-011-012-subscription-checkout-code-2026-10-09.md`.
 - A fresh local PostgreSQL 15 qualification of the merged Web tree applied all
   38 migrations and passed the authenticated account-deletion route E2E 1/1
   plus deletion-job lease/idempotency integration 1/1. This strengthens
@@ -364,17 +407,23 @@ evidence into a pass.
    configuration fails closed without both the URL and marker. Migration
    history, target identity, and webhook routing remain part of every future
    requalification.
-3. **Razorpay Test Mode and webhook — complete for qualification.** Test keys,
-   webhook secret, canonical catalog, and the isolated Preview webhook target
-   are configured. Secrets must never be pasted into chat or public files.
+3. **Razorpay Test Mode and webhook — complete for qualification.** Valid
+   Test Mode keys, webhook secret, canonical catalog, two canonical Test Mode
+   subscription plans, and the isolated Preview webhook target are
+   configured. The Test Mode plan IDs are present in Preview only. Secrets
+   must never be pasted into chat or public files. Production remains on its
+   separate provider configuration and has not received Test Mode plans or
+   credentials.
 4. **Hosted payment matrix — partially complete and highest technical
    priority.** `PLAN-WEB-013` is closed. `PLAN-WEB-011`, `PLAN-WEB-012`,
    `PLAN-WEB-014`, and `PLAN-WEB-015` remain open. Web commit `54e6fd0` now
    provides the provider-subscription creation/status API and UI, with signed
    notes, tenant binding, and pending persistence. The next requirement is
    real isolated Test Mode authorization, renewal/charge, failure,
-   cancellation/expiry, refund, replay, and entitlement reconciliation. Do
-   not use Production DB rows, `$1` pricing, or manual entitlement edits as
+   cancellation/expiry, refund, replay, and entitlement reconciliation. The
+   valid Test Mode credentials and canonical plan objects are now available;
+   hosted lifecycle execution and reconciliation remain open. Do not use
+   Production DB rows, `$1` pricing, or manual entitlement edits as
    substitutes.
 5. **GitHub/GitLab integration — scope decision required, not an npm
    prerequisite.** Publishing the npm/CLI package does not require a GitHub
@@ -411,6 +460,40 @@ action, and release decision; do not claim it passed. Do not wait idly for an
 external reviewer or legal approval while independent code work remains, but
 do not move the release forward as though that gate were closed.
 
+### Production execution track
+
+Production work is included in every resume, with the boundary made explicit
+for each operation:
+
+1. **Audit:** inspect Production environment names, provider mode, domain,
+   schema/migration history, health routes, deployment state, and relevant
+   aggregates read-only. Never print secret values, database URLs, payment
+   identifiers, or personal data.
+2. **Code rollout:** deploy reviewed code when typecheck, focused tests, full
+   required suite, build, runtime-config validation, and rollback target are
+   recorded. A code-only deploy may keep a new feature disabled until its
+   activation evidence exists. The 2026-10-09 subscription-route rollout is
+   the current example.
+3. **Configuration activation:** use the correct Production provider mode and
+   Production plan/customer/webhook configuration. Never copy Test Mode keys,
+   Test Mode plan IDs, Preview database URLs, or test webhook secrets into
+   Production. Rebuild after every environment change and verify the exact
+   deployed environment.
+4. **Database or payment writes:** before migrations, backfills, billing
+   activation, captures, refunds, entitlement changes, or account changes,
+   record the reviewed operation, dry-run/row counts, backup or snapshot,
+   restore rehearsal, reconciliation, bounded window, and rollback or
+   forward-fix. Execute only the operation that has that preflight.
+5. **Post-deploy acceptance:** run domain/route/console smoke checks,
+   provider configuration checks, health/metrics checks, ledger/provider/
+   entitlement reconciliation, and rollback readiness. Record pass,
+   limitation, owner, and release decision in private evidence.
+
+Production is therefore neither skipped nor treated as a substitute for
+isolated Test Mode evidence. Production deployment can proceed when its code
+rollout preflight passes; Production billing/database activation proceeds only
+when its separate write preflight passes.
+
 The immediate technical sequence is:
 
 1. Run isolated Preview/Test Mode subscription lifecycle evidence against the
@@ -418,10 +501,13 @@ The immediate technical sequence is:
 2. Reconcile the
    payment ledger, provider records, and entitlement state.
 3. Close only the payment backlog IDs whose complete criteria are evidenced.
-4. Resolve the npm/CLI versus Web SCM scope decision before attempting Gate 5.
-5. Prepare the AppSec/legal/release packets while continuing dependency-ready
+4. Run the Production read-only smoke/reconciliation pass against the newly
+   deployed code; do not enable recurring billing from Test Mode configuration.
+5. Resolve the npm/CLI versus Web SCM scope decision before attempting Gate 5.
+6. Prepare the AppSec/legal/release packets while continuing dependency-ready
    backend/CLI batches.
-6. Run final acceptance only after all required gates and the release-candidate
+7. Run final acceptance only after all required gates, Production activation
+   preflights, and the release-candidate
    freeze are complete.
 
 ## 4A. Execution priority: dependency-ready backend/CLI first
@@ -589,6 +675,13 @@ Before any irreversible production operation, require all of:
 - bounded execution plan;
 - post-write verification.
 
+A reviewed code-only Production deployment is also an in-scope shipping
+operation. It must have a clean build, runtime configuration validation, a
+known rollback deployment, a bounded smoke plan, and a post-deploy result.
+It may ship code while a feature remains fail-closed. It must not be used to
+silently activate Test Mode billing, bypass an unresolved database migration,
+or claim a payment lifecycle that has not been qualified.
+
 Rules:
 
 - First inspect production schema, migration history, permissions, provider
@@ -599,8 +692,9 @@ Rules:
 - Treat any exposed production credential or token as compromised: revoke,
   rotate, replace, redeploy, and verify bounded read-only behavior before use.
 - Never run production DDL, DML, migrations, backfills, cutovers, deletions,
-  payment charges, billing changes, deployments, or other writes without the
-  operation-specific preflight above.
+  payment charges, billing changes, or other state-changing writes without
+  the operation-specific preflight above. Production code deployments are
+  allowed only under the code-rollout preflight described above.
 - If access, backup evidence, provider configuration, or customer
   authorization is insufficient, pause only that operation and continue
   independent product work.
@@ -812,6 +906,11 @@ This goal is complete only when:
   limitation and release decision;
 - production migrations, reconciliation, backup/restore, rollback, and
   recovery are qualified where required;
+- Production has a dated code-deployment, configuration, smoke,
+  reconciliation, monitoring, and rollback record; Production billing and
+  database activation are either fully qualified with their own preflight or
+  explicitly recorded as blocked with an owner, evidence gap, and release
+  decision;
 - independent legal, licensing, security, and customer-authorization gates
   are satisfied;
 - the authorized final POC and held-out false-positive/false-truth evidence
@@ -836,9 +935,11 @@ At resume, perform this exact sequence:
    backlog.
 2. Recompute the scoreboard and open-ID list; report **219/61/280 (78.2%)**
    only as the starting checkpoint, then trust the recomputed result.
-3. Read the nine-gate matrix in Section 4 and update the execution ledger with
-   each gate's status, owner, missing artifact, next action, and write boundary.
-4. Execute the current technical gate and the largest independent backend/CLI
+3. Read the nine-gate matrix and Production execution track in Section 4 and
+   update the execution ledger with each gate's status, owner, missing
+   artifact, next action, and write boundary.
+4. Execute the current technical gate, the Production read-only/deployment
+   qualification, and the largest independent backend/CLI
    batch in the same shipping pass. The subscription-creation implementation
    batch is complete in Web `54e6fd0`; continue with isolated Preview/Test
    Mode lifecycle evidence for `PLAN-WEB-011`, followed by reconciliation.
@@ -851,7 +952,8 @@ At resume, perform this exact sequence:
 8. Inspect public/private boundaries, exact diff, staged files, hosted PR state,
    and deployment/provider results where applicable.
 9. Reconcile the backlog, execution ledger, evidence, decisions, risks,
-   release gates, and status; report the exact new score.
+   release gates, Production deployment/smoke result, and status; report the
+   exact new score.
 10. If a gate is externally blocked, record the real owner and artifact once;
     do not fabricate a signature, consent, legal approval, customer result,
     provider lifecycle, or trusted publication. Continue only with independent
@@ -859,15 +961,22 @@ At resume, perform this exact sequence:
 11. After Gate 4 is genuinely closed, resolve npm/CLI-only versus Web SCM
     scope before Gate 5. Do not treat GitHub/GitLab integration as an npm
     publishing prerequisite.
-12. Keep Production payment/database writes, customer fixtures, legal gates,
-    AppSec approval, protected publishing, and final POC acceptance closed
-    until their actual evidence and operation-specific preflights exist.
+12. Keep only unqualified Production payment/database writes, customer
+    fixtures, legal gates, AppSec approval, protected publishing, and final
+    POC acceptance closed until their actual evidence and operation-specific
+    preflights exist. Continue Production code, read-only audit, smoke,
+    monitoring, reconciliation, and rollback work in every applicable pass.
 
 The next batch must not begin with a repeated unchanged suite, a speculative
 marketing edit, a production payment click, a direct database entitlement
 edit, or a claim that local substrate equals hosted capability.
 
 ## 15. Private evidence references
+
+The latest Test Mode plan, Preview deployment, Production deployment, and
+Production smoke evidence is:
+
+`docs/shipping/evidence/plan-web-011-015-test-mode-plans-production-rollout-2026-10-09.md`
 
 The latest rollback boundary evidence is:
 

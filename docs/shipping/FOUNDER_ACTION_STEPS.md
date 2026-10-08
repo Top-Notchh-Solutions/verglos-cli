@@ -8,22 +8,29 @@ code, or tokens in ChatGPT.
 
 ## Current 2026-10-09 position
 
-You do not need to do anything for the next technical batch. The isolated
-Neon test database, Preview isolation marker, Docker PostgreSQL path, Razorpay
-Test Mode credentials, and Test Mode webhook setup are already available for
-qualification. Do not replace the Production database URL for this work and
-do not manually edit entitlements or payment rows.
+The separate Neon test database, Preview isolation marker, Docker PostgreSQL
+path, valid Razorpay Test Mode credentials, Test Mode webhook, and canonical
+Test Mode subscription plans are available. The Web subscription route is
+implemented and deployed to both Preview and Production. Production is
+aliased to `https://verglos.com`, but it deliberately has no Test Mode plan
+IDs or Test Mode credentials, so recurring billing remains fail-closed there.
+Do not replace the Production database URL or manually edit entitlements or
+payment rows for the current qualification.
 
-The next product gap is code-owned: the Web app has subscription ledger and
-webhook handling but no provider-subscription creation route. Codex should
-implement and test that against isolated Preview/Test Mode before asking for
-any external approval.
+The next technical action is to run the authenticated isolated Preview/Test
+Mode subscription lifecycle and reconcile provider, billing-ledger, webhook,
+and entitlement state. Production work is not skipped: Codex will continue
+read-only audit, public smoke, configuration verification, monitoring,
+rollback preparation, and code deployment. Production billing or database
+activation requires its own reviewed operation, backup/restore, dry-run,
+reconciliation, and rollback preflight.
 
 Later founder actions are genuinely external: select an independent AppSec
 reviewer, obtain authorized legal/licensing approval, decide whether Web SCM
-is part of V1 or npm/CLI-only, and provide authorized final POC fixtures after
-the release candidate is frozen. A general permission to work on Verglos does
-not create those independent approvals or customer consents.
+is part of V1 or npm/CLI-only, enable protected release approvals, and provide
+authorized final POC fixtures after the release candidate is frozen. A
+general permission to work on Verglos does not create those independent
+approvals or customer consents.
 
 ## 1. Database: current status and safe future rotation
 

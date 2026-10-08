@@ -1,5 +1,31 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · current Preview and Production shipping position
+
+The Test Mode credential blocker is superseded: the pair in the local
+`.env.gates.testing` file was accepted by Razorpay with HTTP 200, so rotation
+was not required. The Test Mode account now has canonical Pro monthly and
+annual plans, and Preview has their non-secret IDs plus a 12-cycle count.
+
+The reviewed Web code is deployed in both environments. Preview deployment
+`dpl_CwmAKov2aoDJmyk9o5LqHS849TEJ` is READY. Production deployment
+`dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs` is READY and aliased to `https://verglos.com`.
+Production `/` and `/checkout` returned HTTP 200, and the POST-only
+subscription route correctly returned 405 to unauthenticated GET. Production
+has no Test Mode plan IDs or Test Mode credentials; the recurring UI remains
+disabled there until a separate live-mode Production activation preflight is
+approved. No Production database, migration, payment, provider,
+entitlement, account, or customer write occurred.
+
+The next technical batch is the authenticated isolated Preview/Test Mode
+subscription lifecycle, followed by provider/ledger/entitlement
+reconciliation. Production remains an active track for read-only audit,
+smoke, monitoring, configuration, rollback, and later live billing/database
+activation with its own preflight. Score remains **219 checked / 61 unchecked /
+280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-011-015-test-mode-plans-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Razorpay Test Mode credential blocker
 
 The isolated-provider qualification is currently blocked by credential truth,

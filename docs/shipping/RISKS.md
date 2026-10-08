@@ -1,5 +1,30 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-011-015-subscription-lifecycle-and-production-activation · 2026-10-09
+
+The valid Razorpay Test Mode pair was accepted with HTTP 200 and canonical
+monthly/annual Test Mode plans now exist. The Web subscription route is
+deployed to Preview and Production. Residual risk is the unqualified real
+subscription lifecycle: authorization, charge/renewal, failure,
+cancellation/expiry, refund, replay/out-of-order delivery, and
+provider/ledger/entitlement reconciliation. Production recurring billing is
+intentionally disabled because Test Mode plan IDs and credentials must not be
+copied there. Production code and read-only smoke work is active; live-mode
+billing and database activation require a separate operation-specific
+preflight with backup/restore, reconciliation, and rollback evidence. Owner:
+Web billing/release qualification. Evidence:
+`docs/shipping/evidence/plan-web-011-015-test-mode-plans-production-rollout-2026-10-09.md`.
+
+## R-PROD-code-rollout-without-billing-activation · 2026-10-09
+
+Production deployment `dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs` is READY and aliased
+to `https://verglos.com`; build, `/`, and `/checkout` smoke checks passed. The
+deployment is a code rollout only. No Production database, migration, payment,
+provider, entitlement, account, or customer write occurred. Residual risk is
+the remaining configuration, monitoring, rollback, migration, and live-
+billing activation evidence. Owner: Web/release operations. Evidence:
+`docs/shipping/evidence/plan-web-011-015-test-mode-plans-production-rollout-2026-10-09.md`.
+
 ## R-QUAL-WEB-006-lab-field-gap · 2026-10-09
 
 The authenticated production account lab trace is strong (LCP 784 ms, TTFB

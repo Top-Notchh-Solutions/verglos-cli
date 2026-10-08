@@ -1,5 +1,29 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Test Mode plan setup and Preview/Production rollout
+
+- **Implementation/deployment:** Web `54e6fd0` is deployed to Preview as
+  `dpl_CwmAKov2aoDJmyk9o5LqHS849TEJ` and to Production as
+  `dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs`, aliased to `https://verglos.com`.
+- **Provider setup:** Valid isolated Razorpay Test Mode credentials were
+  accepted with HTTP 200. Canonical Pro monthly and annual Test Mode plans
+  were created; their IDs and the 12-cycle count were configured in Preview
+  only.
+- **Verification:** Both 45-page builds passed runtime validation. Production
+  `/` and `/checkout` returned 200; unauthenticated GET to the POST-only
+  subscription route returned 405.
+- **Mapped backlog:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
+  `PLAN-WEB-015` are strengthened but remain open. Deployment and plan setup
+  do not prove the provider subscription lifecycle or reconciliation.
+- **Boundary:** No Production database, migration, payment, provider,
+  entitlement, account, or customer write. Production is now explicitly an
+  active code/smoke/configuration/rollback track; billing/database activation
+  requires its own operation-specific preflight.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-011-015-test-mode-plans-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · hosted subscription checkout code batch
 
 - **Implementation:** Web `54e6fd0` adds the server subscription-creation

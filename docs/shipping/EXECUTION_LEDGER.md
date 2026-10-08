@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Test Mode plans and full Preview/Production rollout
+
+- **Verification:** The credentials in the local `.env.gates.testing` file
+  were checked without printing secrets. Razorpay Test Mode `plans.all`
+  returned HTTP **200**. The account had zero plans, so canonical Pro Test
+  Mode plans were created for monthly INR 280,943 minor units and yearly INR
+  2,809,430 minor units. Preview received only the non-secret plan IDs and a
+  12-cycle count.
+- **Deployments:** Preview `dpl_CwmAKov2aoDJmyk9o5LqHS849TEJ` reached READY.
+  Production `dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs` reached READY and was aliased
+  to `https://verglos.com`. Both builds passed runtime validation and created
+  45 pages.
+- **Production smoke:** `/` and `/checkout` returned HTTP 200; the
+  subscription-creation route returned the expected HTTP 405 to unauthenticated
+  GET. Production has no Test Mode plan IDs, so recurring subscription UI is
+  fail-closed there. No Production database, migration, payment, provider,
+  entitlement, account, or customer write occurred.
+- **Disposition:** Production work is now an active track, not skipped. The
+  code rollout is accepted as deployment evidence; Gate 4 and its payment
+  checkboxes remain open until the authenticated isolated subscription
+  lifecycle and provider/ledger/entitlement reconciliation are complete.
+- **Current score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no
+  checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-011-015-test-mode-plans-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Razorpay Test Mode credential blocker
 
 - **Verification:** Read-only Test Mode `plans.all` using the local Web test

@@ -1,5 +1,31 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-09 · Test Mode and Production
+
+The earlier note that the local Test Mode credential required rotation is
+superseded. The pair in `.env.gates.testing` was accepted by Razorpay with
+HTTP 200, so no rotation is required. Canonical Pro monthly and annual plans
+were created in Test Mode and only their non-secret IDs were added to the
+isolated Preview environment.
+
+The Web code is now deployed to Preview and Production. Production is
+aliased to `https://verglos.com`; its build and public `/` and `/checkout`
+smokes passed. Production has not received Test Mode keys, Test Mode plan
+IDs, or a Preview database URL. Recurring billing remains disabled in
+Production until a separate live-mode configuration and activation preflight
+is complete. No Production database, migration, payment, provider,
+entitlement, account, or customer write occurred.
+
+No founder input is needed for the current technical batch. The next
+technical action is the authenticated isolated Preview/Test Mode subscription
+lifecycle and provider/ledger/entitlement reconciliation. Genuine manual
+inputs still required later are the independent AppSec reviewer, legal/company
+approval, npm/CLI versus Web SCM scope decision, protected release approvals,
+and authorized final POC/customer fixtures. Production billing or database
+activation also requires the operation-specific backup, restore,
+reconciliation, and rollback preflight; it is part of the goal, not omitted
+from it. Never paste secrets or customer source into chat.
+
 ## Current superseding reconciliation · 2026-10-09
 
 The current authoritative score is **219 checked / 61 unchecked / 280 total

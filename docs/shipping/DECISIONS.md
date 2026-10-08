@@ -1,5 +1,39 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Make Production a first-class staged shipping track
+
+- **Decision:** Production work is included in the active goal. Ship reviewed
+  code and run read-only smoke/monitoring/reconciliation work when the
+  code-rollout preflight passes; activate Production billing or database
+  writes only after the operation-specific backup, restore, dry-run,
+  reconciliation, and rollback preflight passes.
+- **Reason:** Production cannot be treated as irrelevant, but Test Mode
+  credentials, Test Mode plan IDs, Preview databases, and test webhook
+  fixtures must never be copied into Production. A fail-closed Production
+  code rollout is a real shipping step, not a final billing acceptance.
+- **Evidence:** Web Production deployment
+  `dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs` is READY and aliased to
+  `https://verglos.com`; `/` and `/checkout` returned HTTP 200. Preview
+  deployment `dpl_CwmAKov2aoDJmyk9o5LqHS849TEJ` is READY with the canonical
+  Test Mode plan IDs.
+- **Boundary:** No Production database, migration, payment, provider,
+  entitlement, account, or customer write occurred. Score remains
+  **219/61/280 (78.2%)** and no checkbox changed.
+
+## 2026-10-09 · Use the valid Test Mode pair and create canonical plans
+
+- **Decision:** Do not rotate the Razorpay Test Mode key. The pair in the
+  local gate-testing file is accepted by Razorpay with HTTP 200. Create and
+  use canonical Pro monthly/yearly plans in Test Mode, configure only
+  isolated Preview with their non-secret IDs, and keep Production separate.
+- **Reason:** The earlier 401 was caused by the stale/different local test
+  file, not by the dashboard pair used for this batch. Rotation would add no
+  value once a valid pair is available.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-011-015-test-mode-plans-production-rollout-2026-10-09.md`.
+- **Boundary:** No secret was printed or committed; no Production provider,
+  database, payment, entitlement, account, or customer state changed.
+
 ## 2026-10-09 · Accept PLAN-WEB-013; keep the complete payment gate open
 
 - **Decision:** Accept `PLAN-WEB-013` only. The server-owned payment catalog,
