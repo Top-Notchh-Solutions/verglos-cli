@@ -71,6 +71,19 @@ remain open. No checkbox changed; backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/test-database-isolation-audit-2026-10-08.md`.
 
+## 2026-10-08 · payment and billing local integration qualification
+
+Against a fresh disposable Docker PostgreSQL 15 `verglos_test` database with
+the reviewed migrations applied, the current Web payment/billing integration
+batch passed **6/6** with zero failures or skips. Coverage included hosted
+method catalog binding, fail-closed auth/origin validation, capture/failure,
+refund monotonicity, renewal ordering, webhook replay/claim idempotency, and
+exactly-once entitlement behavior. No provider network call or production
+operation occurred; live Razorpay lifecycle and production reconciliation
+remain open. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/payment-local-integration-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned

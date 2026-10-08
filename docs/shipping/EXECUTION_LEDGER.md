@@ -76,6 +76,24 @@
 - **Evidence:**
   `docs/shipping/evidence/test-database-isolation-audit-2026-10-08.md`.
 
+## 2026-10-08 · payment and billing local integration qualification
+
+- **Batch:** `PLAN-WEB-011/012/013` local integration boundary.
+- **Environment:** Fresh disposable Docker PostgreSQL 15 `verglos_test` at
+  pinned digest; reviewed local empty-database bootstrap and migrations; no
+  Neon/Preview/Production database access.
+- **Result:** 6/6 passed, 0 failed, 0 skipped across create-order,
+  webhook-handler, webhook-event, and billing-ledger integration files. The
+  container was stopped after the run.
+- **Coverage:** Server-selected method/catalog binding, auth/origin denial,
+  capture/failure, monotonic refunds, renewal ordering, duplicate/in-flight/
+  conflicting webhook claims, retry release, and exactly-once entitlement.
+- **Disposition:** Local integration evidence only; real provider account
+  method/lifecycle and production reconciliation remain open. No checkbox
+  changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/payment-local-integration-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 - **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;
