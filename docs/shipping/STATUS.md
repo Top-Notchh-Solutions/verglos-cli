@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
+
+Production `/docs/2.0.0` now confirms the merged contrast correction through
+read-only CDP: desktop/mobile Lighthouse Accessibility and Best Practices are
+100/100, with no console warnings/errors; mobile has no horizontal overflow and
+no unnamed focusable controls. `rel=canonical` and optional `llms.txt` remain
+held metadata findings. No checkbox changed; score remains **218/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-deployed-docs-contrast-2026-10-08.md`.
+
 ## PLAN-CLI-004 + QUAL-WEB-006 fat batch · 2026-10-08
 
 CLI PR #84 (`7c02099`) locally passes focused 63/63, full 12/12, typecheck

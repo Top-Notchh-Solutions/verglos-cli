@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
+
+Production `/docs/2.0.0` confirms the merged contrast correction: desktop and
+mobile Lighthouse Accessibility/Best Practices are 100/100, no console
+warnings/errors were captured, and mobile has no horizontal overflow or
+unnamed focusable controls. The route still fails the held canonical and
+optional `llms.txt` metadata audits. This does not pass QUAL-WEB-006 because
+human screen-reader, authenticated paid/org, large-data, field-CWV, and
+complete-route evidence remain absent. No checkbox or production state changed.
+
+Evidence: `docs/shipping/evidence/qual-web-006-deployed-docs-contrast-2026-10-08.md`.
+
 ## PLAN-CLI-004 / QUAL-WEB-006 fat batch · 2026-10-08
 
 CLI PR #84 source `7c02099` adds process-level legacy-v1 activation fallback

@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
+
+The merged Web contrast correction is live on `/docs/2.0.0`. Read-only desktop
+and mobile Lighthouse both report Accessibility 100 and Best Practices 100;
+the mobile DOM has no horizontal overflow, four named focusable links, and no
+unnamed controls. No console warnings/errors were observed. Remaining failures
+are the held `rel=canonical` and optional `llms.txt` metadata audits. This is
+partial qualification only; no checkbox changed and the count remains
+**218 checked / 62 unchecked / 280 total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-deployed-docs-contrast-2026-10-08.md`.
+
 ## PLAN-CLI-004 + QUAL-WEB-006 fat batch · 2026-10-08
 
 CLI PR #84 (`7c02099`) adds a process-level legacy-v1 activation fallback

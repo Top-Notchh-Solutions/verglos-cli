@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 deployed docs contrast recheck · 2026-10-08
+
+Production `/docs/2.0.0` at Web merge `394d697` passes Lighthouse
+Accessibility/Best Practices 100/100 on desktop and mobile. Read-only CDP
+observed no console warnings/errors, no mobile horizontal overflow, four named
+focusable links, and no unnamed focusable controls. The only failed audits are
+the held missing canonical link and optional `llms.txt` recommendation. This
+strengthens route evidence but does not establish human screen-reader,
+authenticated paid/org, large-data, field-CWV, complete-route, or metadata
+truth acceptance. No checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-web-006-deployed-docs-contrast-2026-10-08.md`.
+
 ## PLAN-CLI-004 + QUAL-WEB-006 fat batch · 2026-10-08
 
 CLI PR #84 (`7c02099`) adds process-level legacy-v1 activation fallback

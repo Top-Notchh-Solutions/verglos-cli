@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · QUAL-WEB-006 deployed docs contrast recheck
+
+- **Result:** Production `/docs/2.0.0` desktop and mobile Lighthouse both
+  report Accessibility 100 / Best Practices 100. Mobile has no horizontal
+  overflow, four named focusable links, and no unnamed controls; no console
+  warnings/errors were observed.
+- **Residual:** SEO remains 92 because the deployed route lacks a valid
+  canonical link; Agentic Browsing remains 67 because the optional `llms.txt`
+  recommendation fails. These metadata changes remain frozen for the truth
+  pass.
+- **Boundary:** Read-only browser inspection only; no payment, provider,
+  account, database, customer, deployment, or production state mutation.
+  No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-deployed-docs-contrast-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-004 + QUAL-WEB-006 fat batch
 
 - **CLI:** PR #84 source `7c02099` adds a loopback-only process rehearsal proving

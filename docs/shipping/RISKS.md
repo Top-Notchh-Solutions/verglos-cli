@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-QUAL-WEB-006-deployed-docs · 2026-10-08
+
+The merged contrast correction is verified in production on desktop and mobile
+with Accessibility/Best Practices 100/100 and no console warnings/errors.
+Residual qualification risk is unchanged: metadata truth, human
+screen-reader, authenticated paid/org data, large datasets, complete route
+coverage, and field/CrUX CWV remain unproven. Owner: Web release
+qualification. No production state changed. Evidence:
+`docs/shipping/evidence/qual-web-006-deployed-docs-contrast-2026-10-08.md`.
+
 ## R-PLAN-CLI-004-QUAL-WEB-006-batch · 2026-10-08
 
 The batch reduces two implementation risks: CLI activation now has a
