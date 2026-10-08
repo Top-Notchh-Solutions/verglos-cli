@@ -83,6 +83,9 @@ operation occurred; live Razorpay lifecycle and production reconciliation
 remain open. No checkbox changed; backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/payment-local-integration-2026-10-08.md`.
+Supporting Web typecheck, Drizzle schema check, and 37-migration ordering
+checks also passed; the host used Node 26 while Web declares Node 22, recorded
+as a runtime limitation.
 
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 

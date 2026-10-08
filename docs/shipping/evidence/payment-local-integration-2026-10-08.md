@@ -37,3 +37,13 @@ real Razorpay account's enabled methods, provider checkout success/failure,
 capture/refund/renewal delivery, production reconciliation, or customer/tenant
 acceptance. The container was stopped after the run, and no public source or
 production state changed. No backlog checkbox changed.
+
+Supporting checks after the integration run also passed:
+
+- `pnpm typecheck`
+- `pnpm db:check` (Drizzle schema check)
+- `pnpm db:migrations:check` (**37** ordered PostgreSQL migrations)
+
+The host emitted the repository's expected engine warning because the machine
+is running Node `v26.4.0` while Web declares Node `22.x`; this was not a test
+failure and is retained as a runtime limitation.

@@ -88,6 +88,9 @@
 - **Coverage:** Server-selected method/catalog binding, auth/origin denial,
   capture/failure, monotonic refunds, renewal ordering, duplicate/in-flight/
   conflicting webhook claims, retry release, and exactly-once entitlement.
+- **Supporting checks:** Web typecheck, Drizzle schema check, and ordered
+  migration check passed (37 migrations). Host Node `v26.4.0` differs from
+  the declared Web Node `22.x` baseline; this was recorded as a limitation.
 - **Disposition:** Local integration evidence only; real provider account
   method/lifecycle and production reconciliation remain open. No checkbox
   changed; backlog remains **218/62/280 (77.9%)**.
