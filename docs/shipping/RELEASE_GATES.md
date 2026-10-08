@@ -1,5 +1,24 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 isolated Preview hosted payment matrix · 2026-10-09
+
+The isolated Preview checkout used Razorpay Test Mode, the canonical monthly
+Pro amount, and the six configured hosted methods: UPI, Cards, Netbanking,
+Wallets, EMI, and Pay Later. Fresh Preview order creation returned HTTP 200;
+status polling returned HTTP 200 with a read-only `pending` result; and
+provider cancellation/failure returned the user to a retryable state. The
+provider UI exposed UPI as QR-only in this session, while card and netbanking
+branches stalled at the provider's simulated OTP/processing states after
+waiting. Wallet and Pay Later had previously reached provider OTP/eligibility
+screens without capture.
+
+This is application-boundary and failure-path evidence only. No successful
+capture, signed webhook delivery, refund, or entitlement/license
+reconciliation was observed, so Gate 4 and the payment-related backlog items
+remain open. No production/provider/live-payment/database write occurred; the
+count remains **218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-hosted-payment-matrix-2026-10-09.md`.
+
 ## QUAL-WEB-006 authenticated account performance trace · 2026-10-09
 
 Production `/account` lab reload measured LCP **784 ms**, TTFB **100 ms**,
