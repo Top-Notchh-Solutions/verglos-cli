@@ -683,6 +683,25 @@ this file when resuming.
     checkbox changed and the score remains **218 checked / 62 unchecked / 280
     total (77.9%)**. Private evidence is
     `docs/shipping/evidence/ent-cli-001-private-runner-replay-hardening-2026-10-08.md`.
+  - After the CLI queue was refreshed, every remaining CLI checkbox was
+    confirmed to have an external gate rather than a dependency-ready local
+    implementation gap, so the next independent slice moved to Web payment
+    runtime qualification. Exact Web `origin/main` was
+    `cedf199855a5c4734122ae4849253156328cff1b`.
+  - The Web payment/ledger/webhook focused run passed **31/31** against a
+    disposable PostgreSQL 15 database migrated through all 38 ordered
+    migrations. A separate fresh-database configured serial run passed
+    **885/887 with 2 explicit skips and 0 failures**; typecheck, schema,
+    migration ordering, 45-route build, and a local public route sweep also
+    passed. The first serial attempt reused the migrated payment database and
+    hit eight expected fixture table collisions; it was discarded and rerun
+    cleanly.
+  - This Web result is isolated code/runtime evidence only. It does not prove
+    Razorpay account-enabled methods, real Test Mode success/capture/refund/
+    renewal/cancellation/webhook behavior, credential rotation, or production
+    reconciliation. No checkbox changed; the score remains **218 checked / 62
+    unchecked / 280 total (77.9%)**. Private evidence is
+    `docs/shipping/evidence/plan-web-014-current-main-local-qualification-2026-10-08.md`.
 
   COMPLETION STANDARD
 
