@@ -49,3 +49,10 @@ provider success, failure, capture, refund, renewal, cancellation, webhook
 delivery, entitlement reconciliation, or production payment truth. Those gates
 remain open, as does R-041 credential containment.
 
+## Current production UI observation
+
+After the PR merge, a read-only mobile Chrome snapshot of
+`https://verglos.com/checkout` rendered the verified Pro INR catalog and the
+hosted method projection `UPI · Cards · Netbanking · Wallets · EMI · Pay Later`.
+The payment button was not activated. No order, payment, webhook, entitlement,
+database, or provider mutation occurred.
