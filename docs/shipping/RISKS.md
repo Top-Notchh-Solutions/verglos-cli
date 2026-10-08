@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## R-CLI-EXTERNAL-GATES-2026-10-09
+
+The remaining CLI/backend and release rows have substantial tested substrate,
+but no open CLI PR or local dependency-ready code gap remains at the current
+head. Acceptance is still exposed to trusted Hunt/licensing provenance,
+production signer and tenant activation, hosted provider/SCM evidence, legal
+approval, independent security review, customer authorization, protected
+publishing, and authenticated rollback/revocation. Owner roles and review
+points are recorded in the private matrix. No external state changed. Evidence:
+`docs/shipping/evidence/cli-backend-external-gate-matrix-2026-10-09.md`.
+
 ## R-PLAN-CLI-003-paid-fixture-matrix · 2026-10-09
 
 The production read-only modified-client probe confirms forged plan,

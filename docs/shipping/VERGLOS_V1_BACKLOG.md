@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## CLI/backend external-gate matrix · 2026-10-09
+
+After CLI PR #87 merged, the live CLI queue and hosted PR state were re-read.
+No open CLI PR or dependency-ready CLI code gap was found. HUNT, plan,
+organization, Studio, Enterprise, licensing, distribution, and release rows
+remain unchecked only where their stated acceptance requires trusted roots,
+production activation, hosted provider/SCM evidence, legal approval,
+independent review, customer authorization, protected publishing, or an
+authenticated operational drill. The item-by-item disposition is recorded in
+`docs/shipping/evidence/cli-backend-external-gate-matrix-2026-10-09.md`.
+No checkbox changed; count remains **218 checked / 62 unchecked / 280 total
+(77.9%)**.
+
 ## PLAN-CLI-003 production read-only forged-route recheck · 2026-10-09
 
 The approved Chrome session performed a same-origin read-only production

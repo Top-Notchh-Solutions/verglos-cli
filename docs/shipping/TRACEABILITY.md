@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## CLI/backend external-gate matrix · 2026-10-09
+
+- **Backlog strengthened:** all remaining CLI/backend and release rows were
+  reconciled against the live private backlog and hosted PR state; no checkbox
+  accepted.
+- **Source:** CLI `origin/main`
+  `8bea4be2fa18533eafd088122be769e942965626`; no open CLI PR.
+- **Result:** Every remaining CLI row has either the recorded local substrate
+  or an explicit external gate: trusted provenance, production activation,
+  hosted provider/SCM operation, legal approval, independent review, customer
+  authorization, protected publishing, or authenticated rollback/revocation.
+- **Boundary:** No external or production state changed. Score remains
+  **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/cli-backend-external-gate-matrix-2026-10-09.md`.
+
 ## PLAN-CLI-003 production read-only forged-route recheck · 2026-10-09
 
 - **Backlog strengthened:** `PLAN-CLI-003`; no checkbox accepted because the

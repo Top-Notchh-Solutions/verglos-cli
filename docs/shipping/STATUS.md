@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · CLI/backend queue audit
+
+The live CLI backlog and hosted PR state were re-read at CLI
+`8bea4be2fa18533eafd088122be769e942965626`. There is no open CLI PR and no
+dependency-ready CLI code gap. The remaining backend/release IDs are mapped
+to exact external gates in the private matrix; they remain unchecked. The next
+independent execution lane is Web/cross-repository qualification. Score
+remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/cli-backend-external-gate-matrix-2026-10-09.md`.
+
 ## 2026-10-09 · PLAN-CLI-003 production forged-route recheck
 
 A bounded same-origin GET probe through the approved Chrome session attempted

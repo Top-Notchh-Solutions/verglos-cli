@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · CLI/backend external-gate audit
+
+- **Source:** Live private backlog, CLI `origin/main`
+  `8bea4be2fa18533eafd088122be769e942965626`, and hosted PR state.
+- **Result:** No open CLI PR or dependency-ready CLI code gap. Remaining rows
+  are mapped individually to their missing trusted provenance, activation,
+  provider/SCM, legal, independent-review, customer, publishing, or
+  authenticated rollback evidence.
+- **Disposition:** Preserve the exact blockers and move to the next
+  independent Web/cross-repository batch; do not create helper-only work to
+  lower the checkbox count.
+- **Boundary:** No production, provider, registry, signing, database,
+  payment, deployment, customer, legal, reviewer, or release write. Score
+  remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/cli-backend-external-gate-matrix-2026-10-09.md`.
+
 ## 2026-10-09 · PLAN-CLI-003 production read-only forged-route recheck
 
 - **Instrument:** Approved Chrome DevTools session on the deployed production
