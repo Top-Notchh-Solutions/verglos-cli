@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · production checkout method recheck
+
+Read-only Chrome DevTools recheck of `https://verglos.com/checkout` rendered
+the Pro INR catalog and UPI, Cards, Netbanking, Wallets, EMI, and Pay Later;
+no QR-only path or console warning/error appeared. Production did not identify
+itself as Test Mode, so this is hosted rendering/configuration observation only:
+no order, payment, webhook, entitlement, database, provider, or deployment
+write occurred. `PLAN-WEB-011/012/014/015` and `QUAL-WEB-006` remain open;
+backlog remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-plan-web-015-production-recheck-2026-10-08.md`.
+
 ## 2026-10-08 · Web keyless Preview runtime fix and built qualification
 
 Web PR #166 source `eab48ac` merged to Web `main` as `ff0dd15` and fixes a real

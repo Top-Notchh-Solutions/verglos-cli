@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## Production checkout method recheck · 2026-10-08
+
+Read-only Chrome DevTools observation of production `/checkout` rendered the
+Pro INR catalog and UPI, Cards, Netbanking, Wallets, EMI, and Pay Later labels;
+no QR-only path or console warnings/errors were present. Production did not
+identify itself as Test Mode. No order/payment/webhook/entitlement/database,
+provider, deployment, or account state was written. This strengthens the
+hosted configuration observation only; `PLAN-WEB-011/012/014/015` and
+`QUAL-WEB-006` remain open. See
+`docs/shipping/evidence/qual-web-006-plan-web-015-production-recheck-2026-10-08.md`.
+
 ## Web keyless Preview middleware and built runtime · 2026-10-08
 
 Web PR #166 (`eab48ac`) merged to Web `main` as `ff0dd15` after all hosted

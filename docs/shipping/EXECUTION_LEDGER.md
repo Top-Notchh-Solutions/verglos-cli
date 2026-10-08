@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · production checkout method recheck
+
+- **Instrument:** Approved Chrome DevTools session, production checkout, read-only.
+- **Result:** Pro INR monthly catalog rendered with UPI, Cards, Netbanking,
+  Wallets, EMI, and Pay Later labels; no QR-only path and no console errors.
+- **Safety:** The page did not identify itself as Test Mode. No click, order,
+  payment, webhook, entitlement, database, provider, deployment, or account
+  write occurred.
+- **Disposition:** This is hosted method/configuration observation only. It
+  does not close any payment lifecycle or reconciliation gate; backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-plan-web-015-production-recheck-2026-10-08.md`.
+
 ## 2026-10-08 · Web keyless Preview middleware and built runtime
 
 - **Source:** Web PR #166, commit `eab48accfe3aa45574435fbf445947c0747673b9`,
