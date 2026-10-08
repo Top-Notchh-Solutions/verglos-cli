@@ -7,7 +7,8 @@ passed the configured CLI test command, build, typecheck, lint, 45/45 ordinary
 Hunt tests, 60/61 pinned Docker adversarial cases on macOS (one explicit Linux
 namespace skip), and 10/10 release/public-boundary contract tests. `pnpm
 pack:public` passed after the same all-platform optional-package provisioning
-used by CI. The strict release sequence then stopped on seven license review
+used by CI; package contents, public boundary, packed manifests, and focused
+release-script tests (12/12) also passed. The strict release sequence then stopped on seven license review
 blockers: six BlueOak-1.0.0 packages and a nested `benchmark@1.0.0` license
 conflict under `fast-uri@3.1.7`. No checkbox changed: HUNT-008–011,
 QUAL-CLI-004/006, LIC-002/003, and DIST-001–003/006 still require their

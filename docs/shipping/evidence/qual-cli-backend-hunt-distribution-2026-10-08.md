@@ -26,6 +26,12 @@ individual external acceptance criteria are separately satisfied.
   existing cache entries for these commands; the full CLI test command was
   executed through the package test runner.
 - The release/public-boundary contract tests passed **10/10**.
+- `check-package-contents.mjs` passed for all six public packages,
+  `check-public-boundary.mjs` passed, and `check-packed-manifests.mjs` passed
+  for all six generated npm archives.
+- The focused release-script suite passed **12/12**, covering deterministic
+  notices, license inventory failure behavior, SBOM component preservation,
+  and clean public packing.
 - `pnpm pack:public` passed after installing all lockfile optional-platform
   packages using the same `supportedArchitectures` setup as the release
   workflow. The temporary setup was reverted in the worktree and no source

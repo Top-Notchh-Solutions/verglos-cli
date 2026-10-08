@@ -9,8 +9,9 @@
   namespace skip / 0 fail** through `scripts/hunt-adversarial-evidence.mjs`.
   The configured CLI package test command exited 0; ordinary Hunt tests were
   **45/45**; build, typecheck, lint, and release/public-boundary contracts
-  **10/10** passed. `pnpm pack:public` passed after CI-equivalent optional
-  platform package provisioning.
+  **10/10** passed. Package contents, public boundary, packed manifests, and
+  the focused release-script suite **12/12** also passed. `pnpm pack:public`
+  passed after CI-equivalent optional platform package provisioning.
 - **Gate result:** `license-inventory.mjs --require-clear` stopped the strict
   release sequence on seven review blockers: BlueOak `glob`, `lru-cache`,
   `minimatch`, `minipass`, `minipass-flush`, and `path-scurry`, plus nested
