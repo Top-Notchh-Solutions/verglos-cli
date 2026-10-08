@@ -5,7 +5,8 @@
 CLI PR #84 (`7c02099`) locally passes focused 63/63, full 12/12, typecheck
 13/13, build 8/8, and lint 5/5; PR #84 merged as
 `94829e1a4fc8e42dd67545e99cbe9a3a837b9482` after all hosted platform,
-self-scan, and in-toto checks passed. Web PR #164 (`4e00cc3`) locally passes typecheck,
+self-scan, and in-toto checks passed. Web PR #164 (`4e00cc3`) locally passes
+typecheck,
 truth-registry 25/25, serial 862 passed / 24 skipped / 0 failed, and the
 45-page production build; its local Lighthouse audit resolves the
 `/docs/2.0.0` CTA contrast failure. It merged as

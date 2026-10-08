@@ -4,9 +4,10 @@
 
 The batch reduces two implementation risks: CLI activation now has a
 process-level legacy-v1 fallback rehearsal, and the `/docs/2.0.0` Hunt CTA
-contrast defect is corrected in Web PR #164. Residual risks are unchanged:
-hosted CLI Windows Node 20 was still completing at capture, and neither local synthetic compatibility nor a
-route-level browser sweep proves deployed signer/catalog migration, paid/org
+contrast defect is corrected in Web PR #164, and both PRs are now hosted-green
+and merged. Residual risks are unchanged: neither local synthetic
+compatibility nor a route-level browser sweep proves deployed signer/catalog
+migration, paid/org
 runtime, human screen-reader, large-data, field-CWV, metadata truth, or
 payment lifecycle. Owner: CLI/Web release qualification. No production or
 provider state changed. Evidence:

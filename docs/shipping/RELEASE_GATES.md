@@ -11,8 +11,9 @@ and merged as `394d697903b7fa12ec537dc667f3807cdd75f588` after hosted
 typecheck/schema, Vercel, Preview Comments, and GitGuardian passed. Local
 typecheck, truth-registry 25/25, serial 862 passed / 24 environment-gated
 skips / 0 failed, 45-page build, and post-fix Lighthouse Accessibility/Best
-Practices 100/100 pass. The production browser sweep remains partial and metadata/llms
-findings stay held under the truth freeze. Neither backlog item passes yet:
+Practices 100/100 pass. The production browser sweep remains partial and
+metadata/llms findings stay held under the truth freeze. Neither backlog item
+passes yet:
 deployed compatibility, complete authenticated browser/CWV evidence, human
 screen-reader review, and the payment/provider gates remain open. No checkbox,
 production, provider, database, payment, migration, or deployment state
