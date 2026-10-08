@@ -16,6 +16,16 @@ function mode(path: string): number {
   return lstatSync(path).mode & 0o777;
 }
 
+function assertPrivateMode(path: string, expected: number): void {
+  const actual = mode(path);
+  if (process.platform === "win32") {
+    // Windows ACLs are not represented by POSIX group/other mode bits.
+    assert.notEqual(actual & 0o200, 0, `${path} must remain owner-writable`);
+    return;
+  }
+  assert.equal(actual, expected, `${path} must have mode ${expected.toString(8)}`);
+}
+
 test("credential and score caches are private and atomically readable", async () => {
   await credentials.saveCredentials({ apiUrl: "https://example.test", licenseKey: "secret-sentinel" });
   await credentials.saveLastScore("/workspace/project", 91, 0);
@@ -23,9 +33,9 @@ test("credential and score caches are private and atomically readable", async ()
   const directory = join(tempHome, ".verglos");
   const credentialsPath = join(directory, "credentials.json");
   const scorePath = join(directory, "last-score.json");
-  assert.equal(mode(directory), 0o700);
-  assert.equal(mode(credentialsPath), 0o600);
-  assert.equal(mode(scorePath), 0o600);
+  assertPrivateMode(directory, 0o700);
+  assertPrivateMode(credentialsPath, 0o600);
+  assertPrivateMode(scorePath, 0o600);
   assert.equal(JSON.parse(readFileSync(credentialsPath, "utf8")).licenseKey, "secret-sentinel");
   assert.equal(JSON.parse(readFileSync(scorePath, "utf8"))._workspace_project.score, 91);
 });
@@ -45,5 +55,5 @@ test("capability cache is private after a successful server refresh", async () =
   } finally {
     globalThis.fetch = originalFetch;
   }
-  assert.equal(mode(join(tempHome, ".verglos", "capabilities.json")), 0o600);
+  assertPrivateMode(join(tempHome, ".verglos", "capabilities.json"), 0o600);
 });
