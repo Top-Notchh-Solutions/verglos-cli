@@ -650,7 +650,9 @@ zero failures**; the clean database-backed serial at the initial auth-seam
 head is **876/885 with 8 known shared-fixture collisions and 1 skip**, and the
 current head's rebuilt isolated route-to-worker/deletion-job integrations are
 **2/2**; the shared fixture skips cleanly when its application tables are
-absent; typecheck/schema/migration/build pass. This
+absent; typecheck/schema/migration/build pass. PR #162 passed hosted Verify
+`37785153399` plus Vercel/GitGuardian/Preview Comments and merged to Web main
+as `b34376bb02525737830f1d075778ebce774ed006`. This
 is qualification progress only: legal/customer-held disposition, production
 authorization, reconciliation, restore/rollback, and independent acceptance
 remain open. No checkbox changed; backlog remains **218 checked / 62 unchecked /

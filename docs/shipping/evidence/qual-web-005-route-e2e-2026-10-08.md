@@ -9,6 +9,12 @@ open and no backlog checkbox changed.
 - Web PR #162 initial auth-seam commit: `d3f7dced`; worker-flow commit
   `0e57200f`; current exact head:
   `3061b9a14bd01ba22e0076b8c30d71d387483ade`.
+- PR #162 merged to Web `main` as `b34376bb02525737830f1d075778ebce774ed006`.
+- Hosted Verify run `37785153399` passed all configured checks in 2m14s;
+  Vercel, GitGuardian, and Preview Comments were green. The shared-fixture
+  route test preflight skipped only when the hosted disposable database lacked
+  the application migrations; the explicit migrated isolated run is recorded
+  above.
 - The account deletion, customer-held digest, and operator hold routes now
   use the existing `requestAuth()` / `requestCurrentUser()` seam. Production
   still resolves the real Clerk request context; only the explicit
@@ -49,9 +55,6 @@ open and no backlog checkbox changed.
 - `pnpm typecheck`, `pnpm db:check`, `pnpm db:migrations:check`,
   `git diff --check`, and the preview-safe production build passed. The build
   generated 45 pages.
-- Hosted verification for PR #162 at the current head was pending when this
-  evidence was captured; Vercel Preview Comments was green and the Vercel
-  deployment check was pending.
 
 ## Remaining acceptance boundary
 

@@ -2752,7 +2752,9 @@ eight shared-fixture collisions; the current head's rebuilt isolated
 route-to-worker/deletion-job integrations pass 2/2; the shared fixture skips
 cleanly when its migrated tables are absent. Typecheck,
 schema/migration checks, diff check, and
-the preview-safe 45-page build passed locally. This is code-side and isolated
+the preview-safe 45-page build passed locally. Hosted Verify `37785153399`,
+Vercel, GitGuardian, and Preview Comments passed, and PR #162 merged to Web
+main as `b34376bb02525737830f1d075778ebce774ed006`. This is code-side and isolated
 integration evidence only; legal/customer-held disposition, destructive-worker
 E2E, reconciliation, restore/rollback, production authorization, and
 independent acceptance remain open. No checkbox changed. See

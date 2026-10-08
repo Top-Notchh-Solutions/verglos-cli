@@ -1347,7 +1347,9 @@ and the preview-safe 45-page build. The clean database-backed serial run at
 the initial auth-seam head had eight known shared-fixture schema collisions;
 the current head's rebuilt isolated route-to-worker/deletion-job integrations
 pass 2/2; the shared fixture skips cleanly when its migrated tables are
-absent.
+absent. Hosted Verify `37785153399`, Vercel, GitGuardian, and Preview Comments
+passed, and PR #162 merged to Web main as
+`b34376bb02525737830f1d075778ebce774ed006`.
 This does not pass the deletion release gate: legal/customer-held disposition,
 destructive-worker E2E, reconciliation, restore/rollback, production
 authorization, and independent acceptance remain open. No checkbox or

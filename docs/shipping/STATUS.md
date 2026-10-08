@@ -3847,8 +3847,11 @@ integrations passed **2/2**. The shared-fixture integration now skips cleanly
 when its required migrated tables are absent. A later full-database rerun was
 stopped after a shared-fixture process removed the legacy `users` table. Typecheck,
 schema/migration checks, diff check, and the preview-safe **45-page** build
-passed locally. Hosted verification for PR #162 was running at capture;
-Vercel Preview Comments was green and the Vercel deployment check was pending.
+passed locally. PR #162 then passed hosted Verify `37785153399`, GitGuardian,
+Vercel, and Preview Comments, and merged to Web `main` as
+`b34376bb02525737830f1d075778ebce774ed006`. The shared-fixture route test
+preflight skips cleanly when the hosted database lacks application migrations;
+the explicit migrated isolated run remains the route-to-worker evidence.
 
 This is implementation and isolated integration progress only. `QUAL-WEB-005`
 remains open for legal/customer-held disposition, destructive-worker E2E,

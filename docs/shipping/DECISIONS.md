@@ -1213,11 +1213,12 @@ each observed method has lifecycle and reconciliation evidence.
   prevented authenticated route qualification without weakening production
   authentication. The seam makes the boundary testable while preserving the
   production path.
-- **Evidence:** Web PR #162 current exact head
-  `0e57200f01e9faebb7057b669706891e7e31407e7`; focused route integration 8/8,
+- **Evidence:** Web PR #162 merged from exact head
+  `3061b9a14bd01ba22e0076b8c30d71d387483ade` as
+  `b34376bb02525737830f1d075778ebce774ed006`; focused route integration 8/8,
   deletion/hold/inventory/worker contracts 23/23; isolated 38-migration
   database run; safe-default serial 861/885 with 24 explicit skips and zero
-  failures; preview-safe 45-page build.
+  failures; hosted Verify 37785153399; preview-safe 45-page build.
 - **Boundary:** This is not deletion acceptance. Legal/customer-held
   disposition, destructive-worker execution, reconciliation, restore/rollback,
   production authorization, and independent review remain open.
