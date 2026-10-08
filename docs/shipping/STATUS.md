@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · cross-tier local qualification
+
+The current Web source passed **106/106** bounded checks: 96 pure Team/Studio/
+Enterprise/authorization tests and 10 database-backed commercial,
+tenant-isolation, dashboard, alert, record, receipt, and runtime-route tests.
+A fresh loopback-only PostgreSQL database bootstrapped through the reviewed
+local baseline and all 37 migrations; typecheck and schema checks passed, and
+the container was stopped cleanly. This remains local evidence only; hosted
+paid-plan, provider billing, GitHub, signer, production recovery, independent
+review, and final POC gates remain open. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/cross-tier-local-qualification-2026-10-08.md`.
+
 ## 2026-10-08 · focused Hunt execution qualification
 
 At CLI commit `7d060b2`, the focused Hunt batch passed **25/25** tests: CLI

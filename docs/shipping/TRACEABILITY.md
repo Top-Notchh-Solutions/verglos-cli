@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## Cross-tier local qualification · 2026-10-08
+
+The current Web source passed 96 pure Team/Studio/Enterprise/authorization
+tests and 10 database-backed commercial, tenant-isolation, dashboard, alert,
+record, receipt, and runtime-route tests, for **106/106** total. The fresh
+disposable database completed reviewed bootstrap and all 37 migrations; type,
+schema, and migration checks passed. This does not establish hosted paid-plan
+acceptance, provider lifecycle, GitHub cutover, deployed signer activation,
+production recovery, independent review, or final POC. No checkbox changed.
+See `docs/shipping/evidence/cross-tier-local-qualification-2026-10-08.md`.
+
 ## HUNT-008/009/010 focused execution qualification · 2026-10-08
 
 CLI commit `7d060b2` passed the focused Hunt execution/verification/runtime

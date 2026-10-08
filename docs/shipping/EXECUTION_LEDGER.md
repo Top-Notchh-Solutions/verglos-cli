@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · cross-tier local qualification
+
+- **Environment:** Fresh loopback-only PostgreSQL 15 Alpine container at the
+  pinned digest; reviewed local empty-database bootstrap and all 37 migrations
+  applied. The container was stopped after the run.
+- **Verification:** Pure Team/Studio/Enterprise/authorization suite **96/96**;
+  database-backed commercial/tenant/dashboard/alert/record/receipt/runtime
+  suite **10/10**; aggregate **106/106** with zero failures or skips.
+  Typecheck and Drizzle schema/migration checks passed.
+- **Coverage:** Cross-tier role/capability/allowance behavior, Studio client
+  boundaries and retention, Enterprise SSO/SCIM/runner/KMS/egress/audit,
+  tenant predicates, commercial billing projection, dashboard repositories,
+  alert credential handling, receipt persistence, and runtime tenant privacy.
+- **Disposition:** Local implementation/integration evidence only. Hosted
+  customer organizations, real provider billing, GitHub App cutover, deployed
+  signer activation, independent review, production recovery, and final POC
+  remain open. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Safety:** No production/provider/payment/entitlement/deployment or public
+  repository write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/cross-tier-local-qualification-2026-10-08.md`.
+
 ## 2026-10-08 · focused Hunt execution qualification
 
 - **Source:** CLI exact worktree commit `7d060b2852551cc017bbb2b5f70bad22843e7273`;
