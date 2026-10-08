@@ -5,12 +5,13 @@
 - **Backlog strengthened:** CLI plan/entitlement/runner persistence surfaces;
   no checkbox accepted because hosted activation, provider, signer, legal,
   reviewer, and operational gates remain separate requirements.
-- **Source:** CLI PR #85, head `ecc6a3ae848ad2c900565acac49243eb0c0f2d83`.
+- **Source:** CLI PR #85, head `2efbf42008e7c5c0a48bbe6f44ccf01b39d257f4`.
 - **Result:** Credential, score, and capability caches are atomically replaced
   and privately permissioned; focused tests pass **34/34**, with local
   typecheck/build and the complete package test runner passing.
-- **Hosted state:** in-toto `37805219794` passed; platform/Verglos runs were
-  pending when recorded.
+- **Hosted state:** final-head platform matrix `37805630513` and Verglos scan
+  `37805630213` were pending when recorded; prior-head results are not used as
+  final-head acceptance.
 - **Boundary:** No production/provider/database/payment/deployment/registry/
   npm/customer/release write. Exact score remains **218/62/280 (77.9%)**.
 - **Evidence:** `docs/shipping/evidence/qual-cli-private-cache-hardening-2026-10-08.md`.

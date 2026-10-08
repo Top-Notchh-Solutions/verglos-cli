@@ -3,7 +3,7 @@
 ## Scope
 
 - Repository: `verglos-cli`
-- Source commit: `ecc6a3ae848ad2c900565acac49243eb0c0f2d83`
+- Source commit: `2efbf42008e7c5c0a48bbe6f44ccf01b39d257f4`
 - Pull request: #85
 - Branch: `feat/cli-backend-qualification`
 - Reviewed files:
@@ -29,9 +29,9 @@
 - The complete CLI package test runner emitted passing results for every test
   file it executed, including the existing Hunt, record, process-safety,
   private-runner, and whoami suites.
-- Hosted in-toto binding passed in run `37805219794`.
-- Hosted platform matrix and Verglos scan were pending at capture time:
-  `37805219794` and `37805219844`.
+- The final head triggered platform matrix run `37805630513` and Verglos
+  self-scan run `37805630213`; both were pending at capture time. The previous
+  head's in-toto check passed, but it is not treated as final-head acceptance.
 
 ## Boundary and disposition
 

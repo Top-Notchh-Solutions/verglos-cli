@@ -663,7 +663,7 @@ this file when resuming.
     are externally gated, record the exact owner/evidence gap once and continue
     with the next independent Web or cross-repository item; do not repeat an
     unchanged full suite or wait idle for production access.
-  - CLI PR #85 (`ecc6a3a`) is the current backend phase PR: it hardens
+  - CLI PR #85 (`2efbf42`) is the current backend phase PR: it hardens
     credentials, score, and entitlement-capability cache writes with atomic
     replacement and private file modes, with focused 34/34 coverage plus local
     typecheck/build. Hosted in-toto passed; the platform matrix and Verglos
