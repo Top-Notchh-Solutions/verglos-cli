@@ -1,5 +1,12 @@
 # Verglos V1 release gates
 
+## CLI check-payload batch merged · 2026-10-08
+
+The command path is merged at `d865fb1809ad651fd6ae7e011f089dee07733d79`
+after all hosted checks passed. This removes the local command-wiring gap but
+does not close signed policy activation, hosted SCM/provider delivery, or
+TEAM-CLI-002.
+
 ## Payment method/lifecycle local qualification · 2026-10-08
 
 The targeted Web payment suite is green locally (56 pass, 2 expected

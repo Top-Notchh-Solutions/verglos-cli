@@ -1,5 +1,12 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · CLI check-payload batch merged
+
+PR #80 passed the hosted 9-cell platform matrix, self-scan, and in-toto and
+merged as `d865fb1809ad651fd6ae7e011f089dee07733d79`. The merge records the
+implementation batch only; it is not provider delivery or TEAM-CLI-002
+acceptance. No production/provider/payment/database/deployment write occurred.
+
 ## 2026-10-08 · Payment method/lifecycle local qualification
 
 - **Verification:** targeted Web billing/configuration/webhook suite, 56 pass,

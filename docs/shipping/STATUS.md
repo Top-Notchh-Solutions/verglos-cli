@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## CLI check-payload command merged · 2026-10-08
+
+PR #80 passed the full 9-cell Ubuntu/macOS/Windows × Node 20/22/24 matrix,
+self-scan, and in-toto, then merged as
+`d865fb1809ad651fd6ae7e011f089dee07733d79`. The command-wiring evidence
+remains implementation progress only; TEAM-CLI-001/002 and downstream hosted
+SCM delivery gates remain open. No checkbox changed; score remains 218/280
+(77.9%).
+
 ## Payment methods and lifecycle local qualification · 2026-10-08
 
 The current Web payment implementation was rechecked with 58 targeted tests:

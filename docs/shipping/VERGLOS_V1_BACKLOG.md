@@ -1,5 +1,13 @@
 # Verglos V1 master execution backlog
 
+## CLI check-payload batch merged · 2026-10-08
+
+CLI PR #80 passed its full hosted qualification and merged as
+`d865fb1809ad651fd6ae7e011f089dee07733d79`. TEAM-CLI-002 remains unchecked:
+signed organization policy, hosted SCM/provider delivery, installation
+authorization, and live retry/replay evidence are still required. Count is
+unchanged at **218 checked / 62 unchecked / 280 total (77.9%)**.
+
 ## TEAM-CLI-002 implementation progress · 2026-10-08
 
 CLI PR #80 head `58bb9383bdd1273e973620472ffc2d9255be7e9d` wires the existing

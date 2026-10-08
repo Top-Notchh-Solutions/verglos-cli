@@ -26,6 +26,8 @@ The command accepts one local Release Decision projection, a verified Release Re
 - Public-boundary audit: pass.
 - Latest implementation head: `58bb9383bdd1273e973620472ffc2d9255be7e9d`.
 - Pull request: https://github.com/Top-Notchh-Solutions/verglos-cli/pull/80
+- Hosted qualification passed all 9 OS/Node cells, self-scan, and in-toto;
+  PR #80 merged by squash as `d865fb1809ad651fd6ae7e011f089dee07733d79`.
 
 ## Not accepted by this evidence
 
