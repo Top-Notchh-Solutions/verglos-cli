@@ -670,6 +670,19 @@ this file when resuming.
     typecheck/build. This is implementation/qualification progress, not
     acceptance of any externally gated checkbox, and the score remains
     **218 checked / 62 unchecked / 280 total (77.9%)**.
+  - CLI PR #86 (`cfb38c1`) merged as `fc452ba` after final-head hosted
+    workflow `37822993184` passed all nine Ubuntu/macOS/Windows × Node 20/22/24
+    cells and in-toto; hosted Verglos scan `37822993198` passed. It hardens
+    ENT-CLI-001 replay-state persistence by restoring the parent directory to
+    `0700` and using random exclusive temporary files while retaining `0600`
+    replay files, fsync, atomic rename, and cleanup. Focused private-runner
+    tests passed 5/5, and the complete CLI test runner, typecheck, and build
+    passed locally. This remains implementation/qualification progress only:
+    operational runner exchange, approved isolated execution/result
+    reconciliation, and independent Hunt/security review are still open. No
+    checkbox changed and the score remains **218 checked / 62 unchecked / 280
+    total (77.9%)**. Private evidence is
+    `docs/shipping/evidence/ent-cli-001-private-runner-replay-hardening-2026-10-08.md`.
 
   COMPLETION STANDARD
 

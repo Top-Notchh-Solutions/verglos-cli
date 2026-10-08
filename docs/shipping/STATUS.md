@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · CLI private-runner replay-state hardening
+
+CLI PR #86 (`cfb38c1`) merged as `fc452ba` after final-head hosted workflow
+`37822993184` passed all nine Ubuntu/macOS/Windows × Node 20/22/24 cells and
+in-toto; hosted Verglos scan `37822993198` also passed. The replay writer now
+restores its parent directory to `0700`, uses random exclusive temporary paths,
+and preserves `0600` replay files, atomic rename, fsync, and cleanup. Focused
+private-runner tests passed **5/5**; the complete CLI test runner, typecheck,
+build, and diff check passed locally. This strengthens ENT-CLI-001 but does
+not establish operational enrollment, approved runner execution/result
+reconciliation, or independent security review. No production, database,
+payment, provider, deployment, customer, registry, npm, or release write
+occurred. No checkbox changed; the score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/ent-cli-001-private-runner-replay-hardening-2026-10-08.md`.
+
 ## 2026-10-08 · CLI private entitlement/cache persistence hardening
 
 CLI PR #85 (`2efbf42`) merged as `80fa930` and hardens credentials, score, and entitlement-capability

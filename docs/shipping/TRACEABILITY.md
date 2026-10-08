@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 private-runner replay-state hardening · 2026-10-08
+
+- **Backlog strengthened:** `ENT-CLI-001`; no checkbox accepted because
+  operational enrollment, approved isolated execution/result reconciliation,
+  and independent review remain required.
+- **Source:** CLI PR #86 `cfb38c1f8019fa50ebbdcafade0c25c000792dd3`, merged as
+  `fc452ba05dc9222a5a454653ab29906107b09045`.
+- **Result:** Replay persistence corrects an overly permissive parent
+  directory, uses collision-resistant exclusive temporary files, and retains
+  private `0600` replay state with atomic publication.
+- **Hosted state:** Workflow `37822993184` passed all nine platform cells and
+  in-toto; hosted Verglos scan `37822993198` passed.
+- **Boundary:** No production/provider/database/payment/deployment/customer/
+  registry/npm/release write. Exact score remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/ent-cli-001-private-runner-replay-hardening-2026-10-08.md`.
+
 ## CLI private entitlement/cache persistence hardening · 2026-10-08
 
 - **Backlog strengthened:** CLI plan/entitlement/runner persistence surfaces;

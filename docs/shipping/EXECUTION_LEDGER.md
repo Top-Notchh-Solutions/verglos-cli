@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · CLI private-runner replay-state hardening
+
+- **Source:** CLI PR #86, head `cfb38c1f8019fa50ebbdcafade0c25c000792dd3`,
+  merged as `fc452ba05dc9222a5a454653ab29906107b09045`.
+- **Implementation:** Replay-state persistence restores the parent directory
+  to `0700`, uses a random UUID temporary path with exclusive creation, and
+  retains `0600` files, fsync, atomic rename, and cleanup.
+- **Verification:** Focused private-runner tests **5/5**, full CLI package test
+  command exit 0, typecheck, build, and diff check passed. Final hosted
+  workflow `37822993184` passed the nine Ubuntu/macOS/Windows × Node 20/22/24
+  cells and in-toto; hosted Verglos scan `37822993198` passed.
+- **Boundary:** No production/provider/database/payment/deployment/customer/
+  registry/npm/release write. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/ent-cli-001-private-runner-replay-hardening-2026-10-08.md`.
+
 ## 2026-10-08 · CLI private entitlement/cache persistence hardening
 
 - **Source:** CLI PR #85, head `2efbf42008e7c5c0a48bbe6f44ccf01b39d257f4`,
