@@ -1,5 +1,14 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 authenticated dashboard sweep · 2026-10-08
+
+Production `/account` passed desktop/mobile Lighthouse Accessibility and Best
+Practices **100/100**, mobile Fast 3G LCP **741 ms**, CLS **0.00**, no console
+warnings/errors, and no horizontal overflow. The session was Free-only, so
+paid data and large-data/keyboard/screen-reader/field-CWV acceptance remain
+open. No checkbox changed. See
+`docs/shipping/evidence/qual-web-006-account-dashboard-mobile-2026-10-08.md`.
+
 ## HOSTED-013 selected-database planners · 2026-10-08
 
 The current Web users, project, and license planners passed focused tests

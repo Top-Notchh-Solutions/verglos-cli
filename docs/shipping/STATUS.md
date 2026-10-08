@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · QUAL-WEB-006 authenticated dashboard sweep
+
+The authenticated production `/account` surface was checked at desktop and
+390×844 mobile emulation. Lighthouse Accessibility and Best Practices were
+**100/100** in both states; no console warnings/errors were observed. Mobile
+Fast 3G trace measured LCP **741 ms** and CLS **0.00**, and neither state had
+horizontal overflow. The session was Free-only, so paid dashboard data was not
+available; SEO/agentic scores are intentionally not public-site evidence.
+`QUAL-WEB-006` remains open for paid data, keyboard/screen-reader review,
+large-data/loading/error states, and field-CWV. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-account-dashboard-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · HOSTED-013 selected-database planner qualification
 
 The three current Web planners were run read-only against the explicitly

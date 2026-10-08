@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · QUAL-WEB-006 authenticated dashboard sweep
+
+- **Surface:** Production `/account` through connected Chrome DevTools; no
+  identity value retained and no account-state action taken.
+- **Verification:** Lighthouse desktop/mobile Accessibility and Best
+  Practices **100/100**; mobile 390×844 Fast 3G LCP **741 ms**, CLS **0.00**;
+  no console warnings/errors; desktop/mobile width matched the viewport.
+- **Boundary:** The authenticated session was Free-only. Paid dashboard
+  routes/data, human keyboard/screen-reader review, large-data states,
+  loading/error states, and field-CWV remain unverified.
+- **Disposition:** Partial qualification only; `QUAL-WEB-006` remains open.
+  No production/provider/payment/database/entitlement/deployment/public
+  repository write occurred. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-account-dashboard-mobile-2026-10-08.md`.
+
 ## 2026-10-08 · HOSTED-013 selected-database planner qualification
 
 - **Scope:** Current Web user, project, and license planners against the

@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-QUAL-WEB-006-account-state · 2026-10-08
+
+Authenticated production `/account` is clean in the available Free state, but
+the session does not expose paid dashboard data. Lighthouse Accessibility and
+Best Practices are 100/100 and mobile LCP/CLS are 741 ms/0.00, yet this cannot
+substitute for paid data, keyboard-visible focus, human screen-reader review,
+large datasets, loading/error states, or field-CWV evidence. Owner: Web
+qualification. Required next action: use an approved non-production paid
+fixture or authorized paid test organization and repeat the complete matrix.
+
 ## R-DB-LEGACY-DATA · 2026-10-08
 
 The selected local test database is structurally populated and behind the
