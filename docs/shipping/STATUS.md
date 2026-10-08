@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · read-only migration-history audit
+
+The selected local test database has all 37 declared application tables, but
+only 26 of the current Web journal's 37 migration records. Eleven migrations
+are pending, so the audit state is `blocked-migration-history`. The database is
+populated and is not accepted as an isolated Preview/payment database. No
+checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence:
+`docs/shipping/evidence/test-database-migration-audit-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 Preview no longer receives the project `DATABASE_URL`; Production remains the

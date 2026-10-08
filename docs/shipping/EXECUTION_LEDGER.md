@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · read-only migration-history audit
+
+- **Scope:** Web migration-audit script against the selected local test
+  database; no raw connection value, identifiers, primary keys, or row
+  contents were retained.
+- **Result:** All 37 declared tables are present; the current journal expects
+  37 migrations and the database has 26 applied records, leaving 11 pending.
+  The audit returned `blocked-migration-history`.
+- **Safety:** Repeatable-read read-only transaction with bounded timeouts. No
+  migration, backfill, payment, webhook, entitlement, deployment, or
+  production/database write occurred.
+- **Disposition:** The database is not approved for Preview payment
+  qualification or production cutover. R-041, isolated non-production
+  provisioning, and migration/backup/restore/reconciliation evidence remain
+  open. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/test-database-migration-audit-2026-10-08.md`.
+
 ## 2026-10-08 · historical Preview deployment protection sample
 
 - **Read-only result:** Three historical Preview `/checkout` URLs each

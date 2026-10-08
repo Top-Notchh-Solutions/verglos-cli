@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## R-DB-MIGRATION-DRIFT · 2026-10-08
+
+The selected local test database contains all declared tables but only 26 of
+the current Web journal's 37 migration records. Eleven migrations are pending,
+including GitHub identity, SCM binding, billing-order uniqueness, and account
+deletion operations. The read-only audit does not authorize applying them: the
+database is populated, its isolation/ownership is not accepted, and backup,
+restore, rollback, credential, and cutover evidence are incomplete. Owner:
+Web/schema/release operations. Required next action: use a separately approved
+non-production database for Preview qualification, or follow the approved
+production migration runbook only after R-041 and its backup/restore/recovery
+gates are closed. No production or database write occurred.
+
 ## R-PLAN-WEB-015 production method-set absence · 2026-10-07
 
 Read-only environment-name inspection confirms that both Vercel production
