@@ -6,6 +6,13 @@ const MAX_REHEARSAL_OPERATIONS = 5;
 const MAX_HISTORICAL_RECORDS = 1024;
 const SAFE_ID = /^[A-Za-z0-9_.:-]{1,128}$/u;
 const DIGEST = /^sha256:[a-f0-9]{64}$/u;
+const REQUIRED_REHEARSAL_KINDS = new Set([
+  "npm-package",
+  "engine-manifest",
+  "hunt-feed",
+  "signing-identity",
+  "web-deployment",
+] as const);
 
 type RollbackRehearsalOperation = Readonly<{
   id: string;
@@ -31,28 +38,38 @@ function parseReference(value: unknown): ReleaseReference {
 }
 
 function parseRehearsalManifest(value: unknown): RollbackRehearsalManifest {
-  if (!isRecord(value) || !Array.isArray(value.operations) || value.operations.length === 0 || value.operations.length > MAX_REHEARSAL_OPERATIONS) {
-    throw new Error("rollback rehearsal requires one to five operations");
+  if (!isRecord(value) || !Array.isArray(value.operations) || value.operations.length !== MAX_REHEARSAL_OPERATIONS) {
+    throw new Error("rollback rehearsal requires exactly five operations");
   }
   if (!Array.isArray(value.historicalRecords) || value.historicalRecords.length === 0 || value.historicalRecords.length > MAX_HISTORICAL_RECORDS) {
     throw new Error("rollback rehearsal requires bounded historical records");
   }
   const operationIds = new Set<string>();
+  const operationKinds = new Set<string>();
   const operations = value.operations.map((raw) => {
     if (!isRecord(raw) || typeof raw.id !== "string" || !SAFE_ID.test(raw.id) || operationIds.has(raw.id)
       || typeof raw.reason !== "string" || typeof raw.approved !== "boolean") {
       throw new Error("rollback rehearsal operation is invalid");
     }
     operationIds.add(raw.id);
+    const current = parseReference(raw.current);
+    const target = parseReference(raw.target);
+    if (!REQUIRED_REHEARSAL_KINDS.has(current.kind) || current.kind !== target.kind || operationKinds.has(current.kind)) {
+      throw new Error("rollback rehearsal must contain one operation for each required boundary");
+    }
+    operationKinds.add(current.kind);
     return {
       id: raw.id,
-      current: parseReference(raw.current),
-      target: parseReference(raw.target),
+      current,
+      target,
       ...(raw.replacement === undefined ? {} : { replacement: parseReference(raw.replacement) }),
       reason: raw.reason,
       approved: raw.approved,
     } satisfies RollbackRehearsalOperation;
   });
+  if (operationKinds.size !== REQUIRED_REHEARSAL_KINDS.size) {
+    throw new Error("rollback rehearsal is missing a required boundary");
+  }
   const recordIds = new Set<string>();
   const historicalRecords = value.historicalRecords.map((raw) => {
     if (!isRecord(raw) || typeof raw.id !== "string" || !SAFE_ID.test(raw.id) || recordIds.has(raw.id)

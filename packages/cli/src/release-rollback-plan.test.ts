@@ -59,7 +59,13 @@ test("rollback-rehearsal fails closed when one operation is not approved", async
   const root = await mkdtemp(join(tmpdir(), "verglos-rollback-rehearsal-denied-"));
   const digest = `sha256:${"a".repeat(64)}`;
   await writeFile(join(root, "manifest.json"), JSON.stringify({
-    operations: [{ id: "npm", current: { kind: "npm-package", identity: "bad", immutableRef: digest }, target: { kind: "npm-package", identity: "good", immutableRef: `sha256:${"b".repeat(64)}` }, reason: "operator review", approved: false }],
+    operations: [
+      { id: "npm", current: { kind: "npm-package", identity: "bad", immutableRef: digest }, target: { kind: "npm-package", identity: "good", immutableRef: `sha256:${"b".repeat(64)}` }, reason: "operator review", approved: false },
+      { id: "engine", current: { kind: "engine-manifest", identity: "trivy@bad", immutableRef: `sha256:${"c".repeat(64)}` }, target: { kind: "engine-manifest", identity: "trivy@good", immutableRef: `sha256:${"d".repeat(64)}` }, reason: "engine review", approved: true },
+      { id: "hunt", current: { kind: "hunt-feed", identity: "feed-bad", immutableRef: `sha256:${"e".repeat(64)}` }, target: { kind: "hunt-feed", identity: "feed-good", immutableRef: `sha256:${"f".repeat(64)}` }, reason: "feed review", approved: true },
+      { id: "signing", current: { kind: "signing-identity", identity: "key-old", immutableRef: `sha256:${"1".repeat(64)}` }, target: { kind: "signing-identity", identity: "key-revoked", immutableRef: `sha256:${"2".repeat(64)}` }, replacement: { kind: "signing-identity", identity: "key-new", immutableRef: `sha256:${"3".repeat(64)}` }, reason: "signing review", approved: true },
+      { id: "web", current: { kind: "web-deployment", identity: "verglos.com", immutableRef: `sha256:${"4".repeat(64)}` }, target: { kind: "web-deployment", identity: "verglos.com-previous", immutableRef: `sha256:${"5".repeat(64)}` }, reason: "web review", approved: true },
+    ],
     historicalRecords: [{ id: "record", digest }],
   }), "utf8");
   const lines: string[] = [];
@@ -71,4 +77,29 @@ test("rollback-rehearsal fails closed when one operation is not approved", async
     console.log = original;
   }
   assert.deepEqual(JSON.parse(lines[0]!), { status: "failed", failedOperation: "npm", reason: "approval-required", operations: [], historicalRecordsPreserved: true });
+});
+
+test("rollback-rehearsal rejects an incomplete or duplicated provider-boundary set", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-rollback-rehearsal-boundaries-"));
+  const digest = (letter: string) => `sha256:${letter.repeat(64)}`;
+  const ref = (kind: string, identity: string, letter: string) => ({ kind, identity, immutableRef: digest(letter) });
+  await writeFile(join(root, "manifest.json"), JSON.stringify({
+    operations: [
+      { id: "npm", current: ref("npm-package", "verglos@bad", "a"), target: ref("npm-package", "verglos@good", "b"), reason: "bad npm release", approved: true },
+      { id: "engine", current: ref("engine-manifest", "trivy@bad", "c"), target: ref("engine-manifest", "trivy@good", "d"), reason: "bad engine manifest", approved: true },
+      { id: "hunt", current: ref("hunt-feed", "feed-bad", "e"), target: ref("hunt-feed", "feed-good", "f"), reason: "bad recipe feed", approved: true },
+      { id: "duplicate", current: ref("npm-package", "verglos@other-bad", "1"), target: ref("npm-package", "verglos@other-good", "2"), reason: "duplicate boundary", approved: true },
+      { id: "web", current: ref("web-deployment", "verglos.com", "4"), target: ref("web-deployment", "verglos.com-previous", "5"), reason: "bad web deployment", approved: true },
+    ],
+    historicalRecords: [{ id: "record", digest: digest("6") }],
+  }), "utf8");
+  const lines: string[] = [];
+  const original = console.log;
+  console.log = (value?: unknown) => lines.push(String(value));
+  try {
+    assert.equal(await executeReleaseRollbackRehearsal({ manifestPath: join(root, "manifest.json"), json: true }), 78);
+  } finally {
+    console.log = original;
+  }
+  assert.deepEqual(JSON.parse(lines[0]!), { status: "invalid-input", historicalRecordsPreserved: false });
 });
