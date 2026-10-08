@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · authenticated Free-account route matrix
+
+Read-only Chrome evidence confirms the current authenticated Free-account
+boundary: paid-only account routes redirect safely, `/orgs` exposes no tenant
+data when there is no membership, and the privacy deletion-history projection
+returns `200 private, no-store` with zero requests. No consent or mutation was
+made. Paid organization/tenant runtime evidence and modified authenticated CLI
+coverage remain open; no checkbox changed. Backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-cli-003-qual-web-006-authenticated-free-route-matrix-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 production capability boundary probe
 
 Read-only anonymous and forged-authority requests to the production

@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · authenticated Free-account route matrix
+
+- **Result:** Existing authenticated production session rendered the Free
+  account with no license. Paid-only history, activation, monitoring, and
+  alert routes redirected to `/account`; `/orgs` rendered `No organizations
+  yet`; privacy deletion history returned HTTP 200 with `private, no-store`
+  and zero requests.
+- **Boundary:** No consent was submitted, organization/license/payment was
+  created, or database/deployment state changed. No console warnings/errors
+  appeared.
+- **Disposition:** This is partial auth/plan-boundary evidence only. Paid
+  organization dashboards, tenant list/search/export/private-record behavior,
+  authenticated modified-CLI requests, and deletion execution remain open.
+  `PLAN-CLI-003` and `QUAL-WEB-006` were not checked. Backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence file:**
+  `docs/shipping/evidence/plan-cli-003-qual-web-006-authenticated-free-route-matrix-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 production capability-boundary probe
 
 - **Result:** Anonymous, anonymous forged `as_plan=enterprise`, and malformed
