@@ -1,5 +1,13 @@
 # Verglos V1 traceability
 
+## CLI entitlement cache and reporting · 2026-10-08
+
+PLAN-CLI-001/002 now map to CLI PR #80 (`8f731b3`): scoped cache identity,
+bounded cache age, effective-plan output, offline signed metadata and key
+redaction. PLAN-CLI-003/004 receive regression evidence only. Hosted activation
+and full item acceptance remain open.
+Evidence: `docs/shipping/evidence/plan-cli-cache-identity-whoami-2026-10-08.md`.
+
 ## PLAN-CLI-001/004 cross-repository entitlement roundtrip · 2026-10-08
 
 Web `1e2b392` issued a synthetic v2 Pro token that CLI `7d060b2` accepted

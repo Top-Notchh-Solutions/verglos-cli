@@ -1,5 +1,14 @@
 # Verglos V1 master execution backlog
 
+## CLI entitlement cache and reporting · 2026-10-08
+
+PLAN-CLI-001/002 progress: CLI PR #80 (`8f731b3`) fixes cache identity reuse,
+cache age bounds and whoami effective-plan reporting. Supporting 003/004
+regression evidence passes. Node 22 focused tests 103/103; configured CLI
+suite/typecheck/build/boundary checks pass. Hosted checks and existing item
+acceptance gates remain open; no checkbox changed (218/62/280, 77.9%).
+Evidence: `docs/shipping/evidence/plan-cli-cache-identity-whoami-2026-10-08.md`.
+
 Updated: 2026-10-07
 
 ## Current verified checkpoint · 2026-09-30

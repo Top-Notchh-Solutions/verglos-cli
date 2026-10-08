@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## CLI entitlement cache and reporting · 2026-10-08
+
+PR #80 (`8f731b3`) passes local CLI qualification for cache identity and
+whoami output. Hosted workflows 37772968379 and 37772968314 are still pending.
+This does not close PLAN-CLI-001/002/003/004 or a production/payment/release
+gate. Backlog remains 218/62/280 (77.9%).
+Evidence: `docs/shipping/evidence/plan-cli-cache-identity-whoami-2026-10-08.md`.
+
 ## PLAN-WEB-014 Preview authentication fixture · 2026-10-08
 
 Web PR #157 merged as `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe` after hosted

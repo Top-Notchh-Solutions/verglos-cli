@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## CLI entitlement cache and reporting · 2026-10-08
+
+PR #80 (`8f731b3`) fixes cache reuse across licenses/API endpoints and makes
+whoami report effective access separately from the recorded license plan.
+Node 22 focused tests pass 103/103; the full configured CLI suite, typecheck,
+build and public-boundary checks pass. Hosted checks are pending. No backlog
+ID is accepted: 218 checked / 62 unchecked / 280 total (77.9%).
+Evidence: `docs/shipping/evidence/plan-cli-cache-identity-whoami-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-001/004 cross-repository entitlement roundtrip
 
 The exact current Web source issued a synthetic v2 Pro entitlement token and

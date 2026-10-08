@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## CLI entitlement cache and reporting · 2026-10-08
+
+Bind local capability cache reuse to license plus API endpoint and preserve
+server-side authorization as the security boundary. Reject legacy unbound
+caches until refresh instead of attributing them to whichever account happens
+to be current. whoami plan represents effective capability authority; retain
+licensePlan for the server/cached license label. Evidence: PR #80 (`8f731b3`),
+103/103 focused tests and successful configured CLI suite.
+Evidence: `docs/shipping/evidence/plan-cli-cache-identity-whoami-2026-10-08.md`.
+
 ## 2026-10-08 · Keep Preview test identity strictly non-production
 
 - **Decision:** Permit an explicit internal fixture identity only when the

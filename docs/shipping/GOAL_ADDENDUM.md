@@ -1,5 +1,14 @@
 # Goal addendum — 2026-10-07
 
+## CLI entitlement cache and reporting · 2026-10-08
+
+Implementation progress: PR #80 (`8f731b3`) binds local entitlement caches to
+identity and corrects effective-plan reporting. The next three batches and
+remaining dependencies are recorded in the evidence below. Full shipping
+scope, payment separation, production preflight and final acceptance remain
+unchanged.
+Evidence: `docs/shipping/evidence/plan-cli-cache-identity-whoami-2026-10-08.md`.
+
 ## Preview payment authentication fixture · 2026-10-08
 
 Web PR #157 merged as `51bb6fe701b65ffcb2a322e1ff5d67eeb99df3fe`. The

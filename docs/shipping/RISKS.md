@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## CLI entitlement cache and reporting · 2026-10-08
+
+CLI PR #80 (`8f731b3`) prevents accidental reuse of another license/endpoint's
+capability cache. Legacy unbound caches now require refresh; independently
+verified signed tokens remain a fallback. Cache digests are editable local
+metadata and are not a hosted security boundary. whoami plan now means
+effective access; consumers needing the status plan must read licensePlan.
+Owner: CLI release. Hosted platform qualification and deployment activation
+remain open; rollback is reverting this CLI change, with no database impact.
+Evidence: `docs/shipping/evidence/plan-cli-cache-identity-whoami-2026-10-08.md`.
+
 ## R-PLAN-CLI-001-cross-repo-activation · 2026-10-08
 
 The current Web v2 issuer and CLI verifier now pass an isolated synthetic

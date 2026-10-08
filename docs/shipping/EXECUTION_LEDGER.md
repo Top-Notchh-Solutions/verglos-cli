@@ -1,5 +1,15 @@
 # Verglos V1 Execution Ledger
 
+## CLI entitlement cache and reporting · 2026-10-08
+
+CLI `8f731b3` pushed as PR #80. Focused Node 22.23.3 batch 103/103; full CLI
+package suite exit 0; typecheck/build/boundary/diff pass. Platform workflow
+37772968379 and Self-scan 37772968314 are running; review decision empty,
+mergeable, not merged. No Web code or production/provider/database/payment/
+deployment changes. Accepted IDs: none; attempted PLAN-CLI-001/002 with
+supporting 003/004 tests. Count 218/62/280 (77.9%).
+Evidence: `docs/shipping/evidence/plan-cli-cache-identity-whoami-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-001/004 cross-repository entitlement roundtrip
 
 - **Sources:** Web `1e2b392` and CLI `7d060b2`; one bounded Node process with
