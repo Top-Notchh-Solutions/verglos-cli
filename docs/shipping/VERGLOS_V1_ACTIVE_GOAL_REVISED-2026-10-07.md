@@ -89,7 +89,7 @@ this file when resuming.
   - Web PR #167 merged as `9841236c64a816fc90402cd90ff2bc93ce35382c`;
   - Web PR #168 merged as `cedf199855a5c4734122ae4849253156328cff1b`;
   - CLI PR #85 merged as `80fa930` and CLI PR #86 merged as `fc452ba`;
-  - private tracker current documentation head: `7e9637d`;
+  - private tracker current documentation head: `d95ede7`;
   - no open CLI or Web PR was present at this checkpoint;
   - no checkbox is accepted merely because implementation exists or tests are green.
 
