@@ -153,6 +153,11 @@ a changed input or a clear acceptance need:
   typecheck/build, exact diff review, hosted checks, and private evidence.
   A stale worktree, duplicate PR, passing local tests on already-merged code,
   or a green browser page does not create a new acceptance event.
+- The exact merged CLI head `8bea4be2fa18533eafd088122be769e942965626` has a
+  fresh pinned Docker adversarial requalification: 60 pass, one documented
+  macOS namespace skip, zero failures. This strengthens HUNT-011 evidence but
+  does not replace independent AppSec review, trusted/licensed recipe
+  provenance, production activation, or customer acceptance.
 
 Private evidence for the latest CLI batch is:
 
@@ -569,6 +574,10 @@ edit, or a claim that local substrate equals hosted capability.
 The latest rollback boundary evidence is:
 
 `docs/shipping/evidence/dist-006-rollback-boundary-completeness-2026-10-09.md`
+
+The latest current-head Hunt evidence is:
+
+`docs/shipping/evidence/hunt-docker-adversarial-origin-main-2026-10-09.md`
 
 The private tracker’s backlog, status, execution ledger, traceability,
 decisions, risks, release gates, evidence, and this goal are the source of

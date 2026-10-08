@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-HUNT-011-current-head-requalification · 2026-10-09
+
+The exact merged CLI head now has a fresh pinned Docker adversarial result of
+60 pass, one documented macOS namespace skip, and zero failures. Residual risk
+is unchanged: local qualification is not independent AppSec review, trusted or
+licensed recipe provenance, production activation, or customer acceptance.
+Owner: Hunt/release qualification. No production, provider, database, payment,
+deployment, registry, signing, customer, or release write occurred. Evidence:
+`docs/shipping/evidence/hunt-docker-adversarial-origin-main-2026-10-09.md`.
+
 ## R-CLI-EXTERNAL-GATES-2026-10-09
 
 The remaining CLI/backend and release rows have substantial tested substrate,

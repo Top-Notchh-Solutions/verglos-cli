@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## HUNT-011 current-head pinned Docker requalification · 2026-10-09
+
+The exact merged CLI `origin/main` head `8bea4be2fa18533eafd088122be769e942965626`
+was requalified in an isolated worktree with the pinned
+`postgres:15-alpine@sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a`
+image. After a locked dependency install, the adversarial wrapper completed
+with **60 pass / 1 documented macOS namespace skip / 0 fail**. This strengthens
+the local HUNT-011 evidence only; independent security review, trusted/licensed
+recipe provenance, and the dependent external gates remain open. No checkbox
+changed; the exact score remains **218 checked / 62 unchecked / 280 total
+(77.9%)**.
+
+Evidence: `docs/shipping/evidence/hunt-docker-adversarial-origin-main-2026-10-09.md`.
+
 ## CLI/backend external-gate matrix · 2026-10-09
 
 After CLI PR #87 merged, the live CLI queue and hosted PR state were re-read.

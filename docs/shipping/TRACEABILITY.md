@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## HUNT-011 current-head pinned Docker requalification · 2026-10-09
+
+- **Backlog strengthened:** `HUNT-011` and dependent Hunt qualification rows;
+  no checkbox accepted.
+- **Source:** CLI `origin/main`
+  `8bea4be2fa18533eafd088122be769e942965626`.
+- **Result:** Pinned Docker adversarial wrapper completed **60 pass / 1
+  documented macOS namespace skip / 0 fail** on `postgres:15-alpine` at the
+  recorded digest.
+- **Boundary:** Local current-head qualification only; no production/provider/
+  database/payment/deployment/registry/signing/customer/release write. Score
+  remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-docker-adversarial-origin-main-2026-10-09.md`.
+
 ## CLI/backend external-gate matrix · 2026-10-09
 
 - **Backlog strengthened:** all remaining CLI/backend and release rows were

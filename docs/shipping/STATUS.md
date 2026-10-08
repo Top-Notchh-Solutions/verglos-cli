@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · current CLI-head Hunt adversarial requalification
+
+The exact merged CLI head `8bea4be2fa18533eafd088122be769e942965626` passed the
+pinned Docker adversarial wrapper at **60 pass / 1 documented macOS namespace
+skip / 0 fail** after a locked dependency install in an isolated worktree.
+This is local Hunt evidence only and does not replace independent review,
+trusted/licensed recipe provenance, or production activation. No checkbox
+changed; score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/hunt-docker-adversarial-origin-main-2026-10-09.md`.
+
 ## 2026-10-09 · CLI/backend queue audit
 
 The live CLI backlog and hosted PR state were re-read at CLI

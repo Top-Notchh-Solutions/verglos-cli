@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · HUNT-011 current-head Docker adversarial requalification
+
+- **Source:** CLI `origin/main`
+  `8bea4be2fa18533eafd088122be769e942965626`, isolated detached worktree.
+- **Command:** `pnpm --filter @verglos/hunt test` through the pinned evidence
+  wrapper with `postgres:15-alpine` at the recorded SHA-256 digest.
+- **Result:** **60 pass / 1 documented macOS namespace skip / 0 fail**, exit 0.
+- **Disposition:** Strengthens HUNT-011 local evidence; independent review,
+  trusted/licensed recipe provenance, and dependent external gates remain open.
+- **Boundary:** No production, provider, database, payment, deployment,
+  registry, signing, customer, or release write. No checkbox changed; score
+  remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-docker-adversarial-origin-main-2026-10-09.md`.
+
 ## 2026-10-09 · CLI/backend external-gate audit
 
 - **Source:** Live private backlog, CLI `origin/main`
