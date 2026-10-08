@@ -1335,3 +1335,18 @@ idempotency. This advances the code-side payment gate only; live provider
 method/lifecycle and production reconciliation remain required. No checkbox
 changed and no production/provider/database/deployment state changed. Evidence:
 `docs/shipping/evidence/plan-web-012-out-of-order-payment-2026-10-08.md`.
+
+## QUAL-WEB-005 route integration progress · 2026-10-08
+
+PR #162 current exact head
+`0e57200f01e9faebb7057b669706891e7e31407e7` passes the isolated authenticated
+route integration **8/8**, deletion/hold/inventory/worker contracts **23/23**,
+safe-default serial **861/885 with 24 explicit
+skips and zero failures**, typecheck, schema/migration checks, diff hygiene,
+and the preview-safe 45-page build. The database-backed serial run has eight
+known shared-fixture schema collisions; the new route integration passes.
+This does not pass the deletion release gate: legal/customer-held disposition,
+destructive-worker E2E, reconciliation, restore/rollback, production
+authorization, and independent acceptance remain open. No checkbox or
+production state changed. Evidence:
+`docs/shipping/evidence/qual-web-005-route-e2e-2026-10-08.md`.

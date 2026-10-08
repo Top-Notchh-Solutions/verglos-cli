@@ -2736,3 +2736,20 @@ payment lifecycle is claimed. See
 - **Disposition:** Code-side migration safety is strengthened. Production
   migration history, backup/restore authorization, R-041 rotation, and
   release acceptance remain separate open gates; no backlog checkbox changed.
+
+## QUAL-WEB-005 authenticated route seam and isolated integration · 2026-10-08
+
+Web PR #162 current exact head
+`0e57200f01e9faebb7057b669706891e7e31407e7` extends the initial auth-seam
+commit `d3f7dce`: deletion, customer-held digest, and operator hold routes use
+the production-safe request-auth seam, and authenticated route integration
+executes the bounded worker to a completed request/job while preserving the
+held digest. Focused route integration passed **8/8** and
+deletion/hold/inventory/worker contracts passed **23/23**; the safe-default serial suite passed
+**861/885 with 24 explicit skips and zero failures**, and the new route passed
+in the database-backed run. Typecheck, schema/migration checks, diff check, and
+the preview-safe 45-page build passed locally. This is code-side and isolated
+integration evidence only; legal/customer-held disposition, destructive-worker
+E2E, reconciliation, restore/rollback, production authorization, and
+independent acceptance remain open. No checkbox changed. See
+`docs/shipping/evidence/qual-web-005-route-e2e-2026-10-08.md`.

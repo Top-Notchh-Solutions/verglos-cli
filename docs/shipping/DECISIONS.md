@@ -1202,3 +1202,22 @@ each observed method has lifecycle and reconciliation evidence.
   `docs/shipping/evidence/preview-payment-safety-2026-10-08.md`.
 - **Boundary:** No test or live payment, order, webhook, entitlement, database,
   provider, or production write occurred. PLAN-WEB-014 remains open.
+
+## QUAL-WEB-005 request-auth seam for route qualification · 2026-10-08
+
+- **Decision:** Use the existing `requestAuth()` and `requestCurrentUser()` seam
+  for account deletion, customer-held digest, and operator hold routes. Keep
+  Clerk as the production resolver and permit the provider only in explicit
+  non-production integration tests.
+- **Reason:** Direct Clerk imports bypassed the reviewed isolated test seam and
+  prevented authenticated route qualification without weakening production
+  authentication. The seam makes the boundary testable while preserving the
+  production path.
+- **Evidence:** Web PR #162 current exact head
+  `0e57200f01e9faebb7057b669706891e7e31407e7`; focused route integration 8/8,
+  deletion/hold/inventory/worker contracts 23/23; isolated 38-migration
+  database run; safe-default serial 861/885 with 24 explicit skips and zero
+  failures; preview-safe 45-page build.
+- **Boundary:** This is not deletion acceptance. Legal/customer-held
+  disposition, destructive-worker execution, reconciliation, restore/rollback,
+  production authorization, and independent review remain open.

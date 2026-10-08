@@ -3829,3 +3829,26 @@ This strengthens PLAN-WEB-012 but does not provide live provider lifecycle or
 production reconciliation evidence. No checkbox changed; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/plan-web-012-out-of-order-payment-2026-10-08.md`.
+
+## 2026-10-08 · QUAL-WEB-005 route qualification batch
+
+Web PR #162 current exact head `0e57200f01e9faebb7057b669706891e7e31407e`
+extends the initial auth-seam commit `d3f7dce`: account deletion and
+customer-held digest routes use the production-safe request-auth seam, and
+isolated authenticated route integration now executes the bounded worker to a
+completed request/job while preserving the held digest. Focused route tests
+passed **8/8** and deletion/hold/inventory/worker contracts passed **23/23**;
+the safe-default Web serial suite passed
+**861/885 with 24 explicit environment-gated skips and zero failures**. The
+database-backed serial run passed **876/885**, with eight known shared-fixture
+schema collisions and one skip; the new route integration passed. Typecheck,
+schema/migration checks, diff check, and the preview-safe **45-page** build
+passed locally. Hosted verification for PR #162 was running at capture;
+Vercel Preview Comments was green and the Vercel deployment check was pending.
+
+This is implementation and isolated integration progress only. `QUAL-WEB-005`
+remains open for legal/customer-held disposition, destructive-worker E2E,
+reconciliation, restore/rollback, production authorization, and independent
+acceptance. No checkbox changed; backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-route-e2e-2026-10-08.md`.

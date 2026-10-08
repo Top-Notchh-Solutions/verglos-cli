@@ -637,3 +637,18 @@ the merged `/orgs` route. Existing authenticated Chrome page 13 received HTTP
 200, rendered the accessible empty state, loaded the route chunk, and had no
 console messages. No organization membership was available for slug-scoped
 dashboard exercise; the item remains unchecked.
+
+### QUAL-WEB-005 batch addendum · 2026-10-08 · Web PR #162
+
+Current PR head `0e57200f01e9faebb7057b669706891e7e31407e7` extends the
+production-safe request-auth seam with authenticated route-to-worker
+integration: the deletion request creates one bounded job, the isolated
+worker completes it, and the customer-held digest remains unchanged. Focused
+route integration is **8/8**; deletion/hold/inventory/worker contracts are
+**23/23**; safe-default Web serial is **861/885 with 24 explicit skips and
+zero failures**; the database-backed serial is **876/885 with 8 known shared
+fixture collisions and 1 skip**; typecheck/schema/migration/build pass. This
+is qualification progress only: legal/customer-held disposition, production
+authorization, reconciliation, restore/rollback, and independent acceptance
+remain open. No checkbox changed; backlog remains **218 checked / 62 unchecked /
+280 total (77.9%)**.
