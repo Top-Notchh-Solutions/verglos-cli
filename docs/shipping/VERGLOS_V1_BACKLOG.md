@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## DIST-006 rollback/revocation rehearsal · 2026-10-08
+
+CLI PR #83 merged as `c1a2856`. A local bounded rehearsal now covers npm,
+engine-manifest, Hunt-feed, signing-identity, and Web-deployment rollback or
+revocation decisions, including the approval failure path and historical-record
+preservation. It performs no provider, registry, signing, deployment, database,
+or production write. `DIST-006` remains unchecked pending real authenticated
+operations and operational review. Count remains **218 checked / 62 unchecked /
+280 total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/dist-006-rollback-rehearsal-2026-10-08.md`.
+
 ## Production read-only browser qualification · 2026-10-08
 
 Chrome CDP inspected production `/account` and `/checkout` without creating an

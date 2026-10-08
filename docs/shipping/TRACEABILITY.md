@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## DIST-006 rollback/revocation rehearsal · 2026-10-08
+
+CLI PR #83 source `d2a94d0` merged as `c1a2856`. The local command now
+rehearses npm-package, engine-manifest, Hunt-feed, signing-identity, and
+Web-deployment decisions with bounded references, explicit approval, a signing
+replacement requirement, and historical-record preservation. Focused tests
+passed **4/4**; full CLI test tasks **12/12**; typecheck **13/13**; build
+**8/8**; lint **5/5**; hosted in-toto binding `37790974189` passed. The
+license-inventory gate still reports missing optional esbuild license metadata
+and was not changed. No provider/registry/signing/deployment/database write
+occurred. `DIST-006` remains unchecked pending actual authenticated operations
+and operational review; count remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. See
+`docs/shipping/evidence/dist-006-rollback-rehearsal-2026-10-08.md`.
+
 ## ENT-CLI-001 concurrent result replay hardening · 2026-10-08
 
 Web PR #160 (`85665d1`) merged as `4cc1f5d3098435a845cffaae010f72c981ac8bcd`.

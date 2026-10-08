@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-08 · Keep rollback rehearsal local and history-preserving
+
+- **Decision:** Add a bounded `release rollback-rehearsal` command that
+  exercises every release rollback/revocation kind through the shared
+  fail-closed decision contract and verifies historical record references stay
+  unchanged.
+- **Reason:** This advances DIST-006 without inventing provider credentials or
+  performing an irreversible registry, signing, deployment, database, or
+  production operation.
+- **Evidence:** CLI PR #83 merged as `c1a2856`; focused **4/4**, full CLI test
+  tasks **12/12**, typecheck, build, lint, and hosted in-toto binding passed.
+- **Boundary:** This is not authenticated provider rollback/revocation or
+  trusted release acceptance. DIST-002/003/006 and independent operational
+  review remain open; no checkbox changed.
+
 ## 2026-10-08 · Preserve payment identity across out-of-order failure/capture
 
 - **Decision:** A failed Razorpay observation must not permanently poison the

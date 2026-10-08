@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · DIST-006 bounded rollback/revocation rehearsal
+
+- **Source:** CLI PR #83 source `d2a94d0`, merged as `c1a2856`.
+- **Verification:** The new local rehearsal covers all five release boundaries
+  (npm package, engine manifest, Hunt feed, signing identity, Web deployment),
+  preserves two historical record references, and refuses an unapproved
+  operation. Focused tests passed **4/4**; full CLI Turbo test tasks **12/12**;
+  typecheck **13/13**; build **8/8**; lint **5/5**; hosted in-toto binding
+  `37790974189` passed.
+- **Disposition:** Preparatory decision/fixture evidence only. No provider,
+  registry, signing, deployment, database, or production write occurred. Real
+  rollback/revocation, trusted publication, license inventory repair, and
+  independent operational review remain open. No checkbox changed; backlog
+  remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/dist-006-rollback-rehearsal-2026-10-08.md`.
+
 ## 2026-10-08 · ENT-CLI-001 concurrent result replay hardening
 
 - **Source:** Web PR #160, source `85665d1`, merged as
