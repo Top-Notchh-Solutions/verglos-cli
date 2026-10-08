@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { privateRunnerJobSigningBytes, type PrivateRunnerJob } from "@verglos/shared";
-import { pollPrivateRunnerJob, privateRunnerResultSummary } from "./private-runner-client.js";
+import { pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
 
 const home = await mkdtemp(join(tmpdir(), "verglos-private-runner-client-"));
 process.env.HOME = home;
@@ -64,4 +64,29 @@ test("private runner poll rejects malformed signatures before admission", async 
   const result = await pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath: join(root, "replay.json"), now: "2026-10-06T00:01:00.000Z", fetchImpl: async () => new Response(JSON.stringify({ job: { ...job, targetSubjectId: "subject_other" } }), { status: 200 }) });
   assert.equal(result.status, "denied");
   assert.equal(result.status === "denied" ? result.reason : "", "invalid_signature");
+});
+
+test("private runner result upload uses authenticated POST and sends only the shared projection", async () => {
+  const result = {
+    protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
+    startedAt: "2026-10-06T00:01:00.000Z", finishedAt: "2026-10-06T00:01:01.000Z", evidenceDigest: `sha256:${"b".repeat(64)}`, findingCount: 2, coverage: "complete",
+  } as const;
+  let requestBody = "";
+  const response = await uploadPrivateRunnerResult({ result, fetchImpl: async (input, init) => {
+    assert.equal(String(input), "https://example.test/api/v1/private-runner/results");
+    assert.equal(init?.method, "POST");
+    assert.equal(new Headers(init?.headers).get("authorization"), "Bearer license-sentinel");
+    requestBody = String(init?.body);
+    return new Response(JSON.stringify({ ok: true, resultDigest: `sha256:${"c".repeat(64)}`, idempotent: false }), { status: 201 });
+  } });
+  assert.deepEqual(response, { status: "uploaded", endpoint: "https://example.test/api/v1/private-runner/results", resultDigest: `sha256:${"c".repeat(64)}`, idempotent: false });
+  assert.deepEqual(JSON.parse(requestBody), result);
+  assert.equal(requestBody.includes("rawOutput"), false);
+});
+
+test("private runner result upload refuses malformed projections before network", async () => {
+  let called = false;
+  const response = await uploadPrivateRunnerResult({ result: { protocolVersion: "1.0.0", jobId: "job_1", command: "rm -rf" }, fetchImpl: async () => { called = true; return new Response(); } });
+  assert.deepEqual(response, { status: "error", reason: "invalid_result" });
+  assert.equal(called, false);
 });
