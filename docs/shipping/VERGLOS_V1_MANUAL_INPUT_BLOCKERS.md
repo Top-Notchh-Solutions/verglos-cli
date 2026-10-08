@@ -6,6 +6,28 @@ Per the goal file: "For every item left unchecked in the active area, state the 
 
 Nothing in this document is speculative. Every entry cites the exact acceptance criterion or dependency the item is waiting on.
 
+## Current-state reconciliation · 2026-10-08
+
+The historical entries below retain the evidence that existed when they were
+written. The following newer evidence supersedes any older statement that says
+the production deployment still lacks the hosted-method configuration:
+
+- The 2026-10-08 production smoke rendered the hosted UPI, Cards, Netbanking,
+  Wallets, EMI, and Pay Later projection with HTTP 200 and no browser console
+  errors. This confirms the current display/deployment boundary only; it does
+  not qualify payment success, capture, refund, renewal, replay ordering,
+  webhook delivery, entitlement issuance, or production reconciliation.
+- `DIST-WEB-002` and `DIST-WEB-003` are already checked in the authoritative
+  backlog. Their older unauthorized-Vercel/missing-variable notes below are
+  historical evidence, not current open checklist items.
+- `R-041` remains open until the exposed production database credential's
+  rotation, Vercel secret refresh, old-credential revocation, and bounded
+  read-only verification are independently evidenced. No production database
+  write is authorized by this reconciliation.
+- `PLAN-WEB-011/012/013/014/015` remain open because the live provider
+  lifecycle and production reconciliation evidence is still missing. Further
+  requests with the previously flagged Test Mode credential remain frozen.
+
 ## Blocker taxonomy
 
 Every remaining item falls in one of these five buckets. Categorized this way so the founder can unblock a batch of items with a single decision or credential.
