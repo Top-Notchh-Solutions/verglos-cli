@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-08 · Keep CI payload generation source-free and delivery-neutral
+
+The CLI command may validate and emit the shared check payload locally, but it
+must not infer delivery success, upload source, fetch a hosted record URL, or
+contact a provider. Provider delivery stays behind the signed organization
+policy, installation authorization, tenant binding, bounded retry/replay, and
+hosted qualification gates.
+
+Evidence: CLI PR #80 head
+`58bb9383bdd1273e973620472ffc2d9255be7e9d` and
+`docs/shipping/evidence/team-cli-002-cli-check-payload-2026-10-08.md`.
+
 ## CLI entitlement cache and reporting · 2026-10-08
 
 Bind local capability cache reuse to license plus API endpoint and preserve

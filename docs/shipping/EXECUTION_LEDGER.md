@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · TEAM-CLI-002 CLI check-payload command wiring
+
+- **Sources:** CLI PR #80 at `58bb9383bdd1273e973620472ffc2d9255be7e9d`.
+- **Verification:** focused check-payload/process tests 7/7; full configured
+  CLI suite exit 0; package typecheck/build/diff/public-boundary checks pass.
+- **Safety:** local bounded Release Decision input only. No source upload, URL
+  fetch, provider call, SCM delivery, production/provider/payment/database/
+  deployment write, or checkbox change.
+- **Disposition:** implementation progress only. Signed organization-policy
+  activation and hosted SCM/provider integration remain open.
+- **Evidence:** `docs/shipping/evidence/team-cli-002-cli-check-payload-2026-10-08.md`.
+
 ## CLI entitlement cache and reporting · 2026-10-08
 
 CLI `8f731b3` pushed as PR #80. Focused Node 22.23.3 batch 103/103; full CLI

@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## TEAM-CLI-002 implementation progress · 2026-10-08
+
+CLI PR #80 head `58bb9383bdd1273e973620472ffc2d9255be7e9d` wires the existing
+shared source-free check-payload contract into `verglos ci`. Local focused and
+full CLI verification passes. The item remains unchecked because signed
+organization-policy activation, hosted SCM/provider delivery, installation
+authorization, and live retry/replay evidence are still required. Count is
+unchanged at **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/team-cli-002-cli-check-payload-2026-10-08.md`.
+
 ## CLI entitlement cache and reporting · 2026-10-08
 
 PLAN-CLI-001/002 progress: CLI PR #80 (`8f731b3`) fixes cache identity reuse,

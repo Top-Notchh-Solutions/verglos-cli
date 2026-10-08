@@ -1,5 +1,14 @@
 # Verglos V1 risk register
 
+## R-TEAM-CLI-002-command-only · 2026-10-08
+
+The CLI now emits a validated source-free check payload, but it does not yet
+deliver that payload to GitHub/GitLab. Treating the local projection as a
+successful provider check would create a false release signal. Keep the item
+open until signed organization policy, provider installation authorization,
+tenant/commit binding, retry/replay handling, and hosted evidence are complete.
+Owner: CLI/Web release qualification. No production state changed.
+
 ## CLI entitlement cache and reporting · 2026-10-08
 
 CLI PR #80 (`8f731b3`) prevents accidental reuse of another license/endpoint's

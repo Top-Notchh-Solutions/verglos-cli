@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-002 CLI command wiring · 2026-10-08
+
+The shared `ci-check-payload` contract now has a CLI command path at PR #80
+head `58bb9383bdd1273e973620472ffc2d9255be7e9d`. The path validates the local
+Release Decision, exact manifest digest, safe HTTPS record URL, and commit and
+emits only the deterministic source-free payload. Provider delivery, signed
+organization-policy activation, and hosted SCM qualification remain separate
+gates; the backlog item stays unchecked.
+
+Evidence: `docs/shipping/evidence/team-cli-002-cli-check-payload-2026-10-08.md`.
+
 ## CLI entitlement cache and reporting · 2026-10-08
 
 PLAN-CLI-001/002 now map to CLI PR #80 (`8f731b3`): scoped cache identity,

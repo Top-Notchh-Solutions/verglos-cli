@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## TEAM-CLI-002 command-path progress · 2026-10-08
+
+PR #80 head `58bb9383bdd1273e973620472ffc2d9255be7e9d` passes focused and full
+local CLI checks for source-free payload generation. Hosted platform matrix
+and self-scan are pending. This is not SCM delivery evidence and does not
+close TEAM-CLI-001/002, TEAM-WEB-006, or a release gate. Backlog remains
+218/62/280 (77.9%).
+
+Evidence: `docs/shipping/evidence/team-cli-002-cli-check-payload-2026-10-08.md`.
+
 ## CLI entitlement cache and reporting · 2026-10-08
 
 PR #80 (`8f731b3`) passes local CLI qualification for cache identity and

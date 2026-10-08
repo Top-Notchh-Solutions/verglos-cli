@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## CLI CI check-payload command wiring · 2026-10-08
+
+CLI PR #80 advanced to `58bb9383bdd1273e973620472ffc2d9255be7e9d`. The new
+`verglos ci` path validates one bounded local Release Decision projection plus
+an exact record digest, HTTPS record URL, and commit, then emits the shared
+source-free SCM payload. It never uploads source, fetches the URL, contacts a
+provider, or delivers a check. Focused tests pass 7/7; the full configured CLI
+suite, typecheck, build, diff, and public-boundary audit pass. Hosted platform
+and self-scan checks are still running. No checkbox changed: **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-002-cli-check-payload-2026-10-08.md`.
+
 ## CLI entitlement cache and reporting · 2026-10-08
 
 PR #80 (`8f731b3`) fixes cache reuse across licenses/API endpoints and makes

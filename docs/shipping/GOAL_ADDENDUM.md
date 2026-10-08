@@ -1,5 +1,13 @@
 # Goal addendum — 2026-10-07
 
+## TEAM-CLI-002 CLI command-path progress · 2026-10-08
+
+The shared source-free CI check contract is now reachable through the CLI at
+PR #80 head `58bb9383bdd1273e973620472ffc2d9255be7e9d`. This removes the
+command-wiring gap only. It does not authorize provider delivery or replace
+the remaining signed-policy, installation, tenant-binding, retry/replay, and
+hosted qualification gates. No checkbox changed.
+
 ## CLI entitlement cache and reporting · 2026-10-08
 
 Implementation progress: PR #80 (`8f731b3`) binds local entitlement caches to
