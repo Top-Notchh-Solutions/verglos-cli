@@ -4712,3 +4712,16 @@ App/org/webhook/cutover evidence remains open.
 - **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
   (77.9%)**. PLAN-WEB-014/015 remain open.
 - **Evidence:** `docs/shipping/evidence/preview-payment-guard-pr-156-2026-10-08.md`.
+
+# 2026-10-08 — Local Preview payment attempt stopped at auth
+
+- **Result:** The isolated local checkout rendered Test Mode and the configured
+  hosted method set. After correcting the loopback hostname mismatch, the
+  authenticated order route returned `401 Unauthorized` because no Clerk test
+  session was configured for the local server.
+- **Boundary:** The local Docker database was migrated and then stopped. No
+  provider order, payment, webhook, entitlement, production database, or
+  deployment write occurred.
+- **Backlog:** No checkbox changed; **218 checked / 62 unchecked / 280 total
+  (77.9%)**. PLAN-WEB-014/015 remain open.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-local-preview-auth-gate-2026-10-08.md`.
