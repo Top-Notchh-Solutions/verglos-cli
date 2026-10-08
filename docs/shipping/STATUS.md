@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## ENT-CLI-001 concurrent result replay hardening · 2026-10-08
+
+Web PR #160 merged as `4cc1f5d3098435a845cffaae010f72c981ac8bcd`. Result
+creation now uses the organization/job uniqueness fence, so two identical
+uploads resolve as exactly one `201` and one idempotent `200`; conflicting
+payloads remain `409`. Fresh PostgreSQL E2E passed **1/1**, including the
+concurrent replay, with focused private-runner tests **24/24**, typecheck,
+schema, migration ordering, build, and hosted Verify/Vercel/GitGuardian checks
+green. This strengthens ENT-CLI-001 but does not close it: approved runner
+execution, operational credential exchange, cross-platform qualification,
+independent Hunt review, and enterprise acceptance remain open. No checkbox
+changed; backlog remains **218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-private-runner-replay-race-2026-10-08.md`.
+
 ## ENT-CLI-001 private-runner hosted transport · 2026-10-08
 
 Web PR #159 merged as `2b3f37918fb386b0d5ffa231fa5f6ee11ae6e07b` after fixing

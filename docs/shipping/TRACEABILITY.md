@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 concurrent result replay hardening · 2026-10-08
+
+Web PR #160 (`85665d1`) merged as `4cc1f5d3098435a845cffaae010f72c981ac8bcd`.
+The organization/job uniqueness fence makes concurrent identical result
+uploads resolve as one creation and one idempotent replay; conflicting payloads
+remain refused. Fresh PostgreSQL E2E passed **1/1** with the race case,
+focused private-runner tests passed **24/24**, and hosted Verify, Vercel, and
+GitGuardian checks passed. This is route/database qualification only;
+approved runner execution, credential exchange, cross-platform qualification,
+independent Hunt review, and enterprise acceptance remain open. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+See `docs/shipping/evidence/ent-cli-001-private-runner-replay-race-2026-10-08.md`.
+
 ## ENT-CLI-001 hosted private-runner transport · 2026-10-08
 
 Web PR #159 merged as `2b3f37918fb386b0d5ffa231fa5f6ee11ae6e07b`. The first

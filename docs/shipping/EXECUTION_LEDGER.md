@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · ENT-CLI-001 concurrent result replay hardening
+
+- **Source:** Web PR #160, source `85665d1`, merged as
+  `4cc1f5d3098435a845cffaae010f72c981ac8bcd`.
+- **Verification:** Fresh PostgreSQL E2E **1/1**, including concurrent
+  identical uploads resolving to one `201` and one idempotent `200`; focused
+  private-runner suite **24/24**; typecheck, schema, 38-migration ordering,
+  build, hosted Verify, Vercel, and GitGuardian all pass.
+- **Disposition:** Race-safe route/database qualification only. Approved
+  runner execution, operational credential exchange, cross-platform
+  qualification, independent Hunt review, and enterprise acceptance remain
+  open. Backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/ent-cli-001-private-runner-replay-race-2026-10-08.md`.
+
 ## 2026-10-08 · ENT-CLI-001 private-runner lifecycle qualification
 
 - **Source:** Web PR #159 merged as `2b3f37918fb386b0d5ffa231fa5f6ee11ae6e07b`.

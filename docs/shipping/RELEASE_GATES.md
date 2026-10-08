@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## ENT-CLI-001 concurrent result replay hardening · 2026-10-08
+
+Web PR #160 merged as `4cc1f5d3098435a845cffaae010f72c981ac8bcd`. A fresh
+PostgreSQL E2E proves the organization/job uniqueness fence resolves concurrent
+identical uploads as one creation plus one idempotent replay, while conflicting
+payloads remain refused. Hosted Verify, Vercel, and GitGuardian passed. This
+does not pass ENT-CLI-001: approved runner execution, operational credential
+exchange, cross-platform qualification, independent Hunt review, and
+enterprise acceptance remain required.
+
+Evidence: `docs/shipping/evidence/ent-cli-001-private-runner-replay-race-2026-10-08.md`.
+
 ## ENT-CLI-001 hosted private-runner transport · 2026-10-08
 
 Web PR #159 merged as `2b3f37918fb386b0d5ffa231fa5f6ee11ae6e07b` after the

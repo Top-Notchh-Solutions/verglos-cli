@@ -1,5 +1,15 @@
 # Verglos V1 risk register
 
+## R-ENT-CLI-001-replay-race · 2026-10-08
+
+The result endpoint now fences concurrent identical uploads on the existing
+organization/job uniqueness key and reconciles the losing request by digest.
+The race is covered by a fresh PostgreSQL E2E. This removes the duplicate
+result/500 risk at the route boundary, but does not establish that a real
+approved runner executed the job. Operational credential exchange, execution
+and expiry/retry qualification, independent Hunt review, and enterprise
+acceptance remain open. No production migration or state write occurred.
+
 ## R-ENT-CLI-001-hosted-transport · 2026-10-08
 
 The Web transport now has an isolated route/database lifecycle proof: enrollment,
