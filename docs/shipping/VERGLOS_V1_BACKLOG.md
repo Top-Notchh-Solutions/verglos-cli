@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## Production read-only browser qualification · 2026-10-08
+
+Chrome CDP inspected production `/account` and `/checkout` without creating an
+order. Checkout rendered UPI, Cards, Netbanking, Wallets, EMI, and Pay Later
+labels and no QR label; no console/exception events were observed. This is
+runtime progress only. `QUAL-WEB-006` and `PLAN-WEB-015` remain unchecked.
+Count remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-plan-web-015-production-readonly-cdp-2026-10-08.md`.
+
 ## CLI check-payload batch merged · 2026-10-08
 
 CLI PR #80 passed its full hosted qualification and merged as

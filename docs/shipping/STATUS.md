@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## Production read-only browser qualification · 2026-10-08
+
+The approved Chrome CDP session inspected production `/account` and
+`/checkout` without clicking checkout or creating an order. No console-error or
+exception events were observed. Checkout rendered UPI, Cards, Netbanking,
+Wallets, EMI, and Pay Later labels, with no QR label. This advances runtime
+observation only; `QUAL-WEB-006` and `PLAN-WEB-015` remain open because the
+complete accessibility/CWV and provider/configuration/lifecycle matrices are
+not proven. Evidence:
+`docs/shipping/evidence/qual-web-006-plan-web-015-production-readonly-cdp-2026-10-08.md`.
+
 ## CLI check-payload command merged · 2026-10-08
 
 PR #80 passed the full 9-cell Ubuntu/macOS/Windows × Node 20/22/24 matrix,

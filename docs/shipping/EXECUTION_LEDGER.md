@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · Production read-only browser qualification
+
+- **Instrument:** Chrome `154.0.8037.98`, loopback CDP `127.0.0.1:9222`.
+- **Scope:** authenticated production `/account` and `/checkout`; no clicks,
+  order creation, provider call, payment, database, deployment, or migration.
+- **Result:** 0 captured console-error/exception events; checkout rendered UPI,
+  Cards, Netbanking, Wallets, EMI, and Pay Later labels and no QR label.
+- **Disposition:** runtime observation only. `QUAL-WEB-006` and `PLAN-WEB-015`
+  remain open; complete accessibility/CWV and provider lifecycle/configuration
+  evidence are missing.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-plan-web-015-production-readonly-cdp-2026-10-08.md`.
+
 ## 2026-10-08 · CLI check-payload batch merged
 
 PR #80 passed the hosted 9-cell platform matrix, self-scan, and in-toto and

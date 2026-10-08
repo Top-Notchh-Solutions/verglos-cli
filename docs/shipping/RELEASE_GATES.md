@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## QUAL-WEB-006 / PLAN-WEB-015 runtime observation · 2026-10-08
+
+Read-only production CDP inspection is recorded, including the hosted-method
+labels and zero observed console/exception events. It does not pass either
+gate: full accessibility/performance evidence and provider/configuration/
+lifecycle reconciliation remain outstanding.
+
+Evidence: `docs/shipping/evidence/qual-web-006-plan-web-015-production-readonly-cdp-2026-10-08.md`.
+
 ## CLI check-payload batch merged · 2026-10-08
 
 The command path is merged at `d865fb1809ad651fd6ae7e011f089dee07733d79`

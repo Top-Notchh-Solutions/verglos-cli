@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 / PLAN-WEB-015 read-only runtime observation · 2026-10-08
+
+Production Chrome CDP inspection covered `/account` and `/checkout` with no
+captured console errors or exceptions. The checkout rendered the hosted-method
+labels UPI, Cards, Netbanking, Wallets, EMI, and Pay Later and no QR label.
+This does not prove provider configuration, order creation, payment lifecycle,
+complete accessibility, or Core Web Vitals acceptance.
+
+Evidence: `docs/shipping/evidence/qual-web-006-plan-web-015-production-readonly-cdp-2026-10-08.md`.
+
 ## TEAM-CLI-002 CLI command wiring · 2026-10-08
 
 The shared `ci-check-payload` contract now has a CLI command path at PR #80

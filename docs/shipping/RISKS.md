@@ -1,5 +1,14 @@
 # Verglos V1 risk register
 
+## R-QUAL-WEB-006-015-runtime-observation · 2026-10-08
+
+The production checkout visually lists hosted methods, but a rendered label is
+not evidence that the Razorpay account accepts or completes that method. Do
+not infer provider enablement, order creation, capture, refund, renewal, or
+entitlement from this observation. Likewise, a short CDP audit with missing
+LCP/INP data cannot establish full accessibility/performance acceptance.
+Owner: Web release qualification. No production state changed.
+
 ## R-TEAM-CLI-002-command-only · 2026-10-08
 
 The CLI now emits a validated source-free check payload, but it does not yet
