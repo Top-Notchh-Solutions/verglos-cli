@@ -89,7 +89,7 @@ import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
 import { executeClientProjection } from "./client-projection.js";
 import { executeReleaseRollbackPlan } from "./release-rollback-plan.js";
 import { executeCiCheckPayload } from "./ci-check-payload.js";
-import { pollPrivateRunnerJob, privateRunnerResultSummary } from "./private-runner-client.js";
+import { pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -289,6 +289,21 @@ privateRunner.command("poll <tenantId> <runnerId>")
       else console.error(`Private runner poll ${result.status}: ${"reason" in result ? result.reason : "unknown"}`);
     }
     if (result.status === "error" || result.status === "denied") process.exitCode = 78;
+  });
+
+privateRunner.command("upload-result <resultPath>")
+  .description("Upload a bounded source-free private-runner result projection")
+  .option("--endpoint <path>", "Relative API path override for the result endpoint")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (resultPath: string, opts: { endpoint?: string; json?: boolean; quiet?: boolean }) => {
+    let input: unknown;
+    try { input = JSON.parse(await readFileBytes(resultPath, "utf8")); }
+    catch { input = undefined; }
+    const result = await uploadPrivateRunnerResult({ result: input, endpoint: opts.endpoint });
+    if (opts.json) console.log(JSON.stringify(result));
+    else if (!opts.quiet) console.log(result.status === "uploaded" ? `Private runner result uploaded: ${result.resultDigest}` : `Private runner result upload ${result.status}: ${result.reason}`);
+    if (result.status === "error") process.exitCode = 78;
   });
 
 const evidence = program.command("evidence").description("Import and export standards evidence");

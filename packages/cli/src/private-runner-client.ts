@@ -5,9 +5,12 @@ import { homedir } from "node:os";
 import {
   admitPrivateRunnerJob,
   privateRunnerJobDigest,
+  projectPrivateRunnerResult,
   verifyPrivateRunnerJobSignature,
   type PrivateRunnerJob,
   type PrivateRunnerAdmissionFailure,
+  type PrivateRunnerResult,
+  type PrivateRunnerResultInput,
 } from "@verglos/shared";
 import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
 
@@ -17,12 +20,18 @@ const MAX_REPLAY_BYTES = 256 * 1024;
 const MAX_REPLAY_ENTRIES = 4096;
 const DEFAULT_TIMEOUT_MS = 8_000;
 const ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$/u;
+const MAX_RESULT_BYTES = 64 * 1024;
 
 export type PrivateRunnerPollResult = Readonly<
   | { status: "empty"; endpoint: string }
   | { status: "ready"; endpoint: string; job: PrivateRunnerJob; jobDigest: string }
   | { status: "denied"; endpoint: string; reason: PrivateRunnerAdmissionFailure | "invalid_response" | "invalid_signature" | "replayed_local" }
   | { status: "error"; endpoint?: string; reason: "no_license" | "network" | "http" | "response_too_large" | "invalid_json" | "invalid_input" }
+>;
+
+export type PrivateRunnerUploadResult = Readonly<
+  | { status: "uploaded"; endpoint: string; resultDigest: string; idempotent: boolean }
+  | { status: "error"; endpoint?: string; reason: "no_license" | "network" | "http" | "response_too_large" | "invalid_json" | "invalid_result" | "invalid_input" }
 >;
 
 type ReplayState = Readonly<{ jobIds: readonly string[]; nonces: readonly string[] }>;
@@ -113,6 +122,28 @@ function endpointFor(apiUrl: string, tenantId: string, runnerId: string, endpoin
   return `${apiUrl}${path}`;
 }
 
+function relativeEndpointFor(apiUrl: string, path: string): string {
+  if (!path.startsWith("/") || path.startsWith("//") || /[\u0000-\u001f\u007f]/u.test(path)) throw new Error("runner endpoint must be a relative API path");
+  return `${apiUrl}${path}`;
+}
+
+function parseSourceFreeResult(value: unknown): PrivateRunnerResult {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) throw new Error("private runner result must be an object");
+  const record = value as Record<string, unknown>;
+  const input: PrivateRunnerResultInput = {
+    jobId: record.jobId as string,
+    tenantId: record.tenantId as string,
+    runnerId: record.runnerId as string,
+    state: record.state as PrivateRunnerResultInput["state"],
+    startedAt: record.startedAt as string,
+    finishedAt: record.finishedAt as string,
+    evidenceDigest: record.evidenceDigest as string | null,
+    findingCount: record.findingCount as number,
+    coverage: record.coverage as PrivateRunnerResultInput["coverage"],
+  };
+  return projectPrivateRunnerResult(input);
+}
+
 /** Poll one signed private-runner job. This function never executes a job or uploads a result. */
 export async function pollPrivateRunnerJob(input: Readonly<{
   tenantId: string;
@@ -181,6 +212,53 @@ export async function pollPrivateRunnerJob(input: Readonly<{
   try { await writeReplay(input.replayPath ?? defaultReplayPath(), rememberReplay(replay, job)); }
   catch { return { status: "error", endpoint, reason: "invalid_input" }; }
   return { status: "ready", endpoint, job, jobDigest: privateRunnerJobDigest(job) };
+}
+
+/** Upload only the shared least-evidence result projection; this function never uploads raw output. */
+export async function uploadPrivateRunnerResult(input: Readonly<{
+  result: unknown;
+  endpoint?: string;
+  timeoutMs?: number;
+  fetchImpl?: typeof fetch;
+}>): Promise<PrivateRunnerUploadResult> {
+  let result: PrivateRunnerResult;
+  try { result = parseSourceFreeResult(input.result); } catch { return { status: "error", reason: "invalid_result" }; }
+  const creds = await loadCredentials();
+  if (!creds.licenseKey) return { status: "error", reason: "no_license" };
+  let endpoint: string;
+  try { endpoint = relativeEndpointFor(creds.apiUrl ?? DEFAULT_API_URL, input.endpoint ?? "/api/v1/private-runner/results"); } catch { return { status: "error", reason: "invalid_input" }; }
+  const body = JSON.stringify(result);
+  if (Buffer.byteLength(body, "utf8") > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "invalid_input" };
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), input.timeoutMs ?? DEFAULT_TIMEOUT_MS);
+  let response: Response;
+  try {
+    response = await (input.fetchImpl ?? fetch)(endpoint, {
+      method: "POST",
+      headers: { Accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${creds.licenseKey}` },
+      body,
+      signal: controller.signal,
+    });
+  } catch {
+    return { status: "error", endpoint, reason: "network" };
+  } finally {
+    clearTimeout(timer);
+  }
+  const contentLength = Number(response.headers.get("content-length") ?? "0");
+  if (Number.isFinite(contentLength) && contentLength > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
+  let value: unknown;
+  try {
+    const bytes = await response.arrayBuffer();
+    if (bytes.byteLength > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
+    value = JSON.parse(new TextDecoder().decode(bytes));
+  } catch {
+    return { status: "error", endpoint, reason: "invalid_json" };
+  }
+  if (!response.ok || typeof value !== "object" || value === null || (value as Record<string, unknown>).ok !== true || typeof (value as Record<string, unknown>).resultDigest !== "string") {
+    return { status: "error", endpoint, reason: "http" };
+  }
+  const record = value as Record<string, unknown>;
+  return { status: "uploaded", endpoint, resultDigest: record.resultDigest as string, idempotent: record.idempotent === true };
 }
 
 export function privateRunnerResultSummary(result: PrivateRunnerPollResult): unknown {
