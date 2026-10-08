@@ -1,4 +1,4 @@
-# Verglos V1 Active Shipping Goal — Backend-First Whole-Backlog Pass
+# Verglos V1 Active Shipping Goal — Gate-First Whole-Backlog Shipping Pass
 
 Effective checkpoint: 2026-10-09. This file is the authoritative replacement
 goal for the remaining shipping work. Replace the previous active goal with
@@ -13,9 +13,16 @@ Ship the complete Verglos V1 across:
 
 The primary objective is to complete the whole authoritative private backlog
 with real implementation, integration, qualification, security review,
-release evidence, and final acceptance. The main execution path is now
-backend/CLI-first: close every genuinely executable unchecked CLI/backend item
-in coherent fat batches before spending the critical path on Web polish.
+release evidence, and final acceptance. Execution is gate-first: qualify and
+close the current technical release gates in order, record external gates with
+their real owner and missing artifact, then execute the largest dependency-ready
+backlog batches while keeping the execution ledger and evidence synchronized.
+
+The payment gate has one explicit product gap: the Web code has billing ledger
+and subscription-webhook handling, but no server route that creates a provider
+subscription. This is already tracked by `PLAN-WEB-011` and blocks the full
+renewal/cancellation/expiry portion of Gate 4. It must be implemented and
+qualified in isolated Preview/Test Mode before Gate 4 can be called complete.
 
 Verglos is intended for local, CI, hosted, team, organization, and
 enterprise-shaped use cases. It is not a local-only product. Those claims are
@@ -52,7 +59,9 @@ Branch: `local/private-shipping-ledger`.
 Current exact scoreboard:
 
 - **219 checked / 61 unchecked / 280 total / 78.2%**.
-- No checkbox changed during the latest CLI rollback-hardening batch.
+- `PLAN-WEB-013` was accepted after the four-method payment-catalog and
+  hosted-order evidence batch; `PLAN-WEB-011`, `PLAN-WEB-012`,
+  `PLAN-WEB-014`, and `PLAN-WEB-015` remain open.
 - Recompute the count from the live private backlog after every substantial
   batch. Never use a remembered count.
 - Report the exact score every time a batch is completed or a blocker is
@@ -164,12 +173,23 @@ a changed input or a clear acceptance need:
   failures, typecheck/build passed, and all hosted checks passed. This does not
   prove database migration/schema, webhook-target, provider lifecycle, or
   production reconciliation.
-- A metadata-only Vercel audit confirms the latest READY production deployment
-  is Web `be4289f` and that Production `DATABASE_URL` was updated before it.
-  Preview has no database URL, no isolation marker, and no enabled payment
-  catalog, so Preview remains safely payment-disabled. This is rotation and
-  fail-closed configuration evidence only; it does not prove the target,
-  revocation, backup/restore, migration reconciliation, or payment lifecycle.
+- The current isolated payment setup uses a separate Neon test database with
+  the reviewed migration set applied and an explicit Preview isolation marker.
+  Preview and Production expose only the provider-testable method set
+  `card,netbanking,wallet,emi`; UPI/UPI QR and Pay Later were removed after
+  their account fixtures produced no usable payment lifecycle. The Preview
+  webhook is Razorpay Test Mode and points to the isolated Preview target.
+  This proves configuration and isolation only; it does not replace the
+  remaining provider lifecycle and Production-reconciliation evidence.
+- Gate 4 qualification now has canonical Test Mode evidence: 16 payments at
+  the canonical monthly Pro amount, captures for card/netbanking/wallet/EMI,
+  failures for card/netbanking/wallet, and two processed full refunds. The
+  isolated database suite passed hosted-order, renewal-ordering,
+  cancellation-ordering, replay, out-of-order, tenant-binding, and partial/full
+  refund checks. Razorpay reported zero Test Mode subscriptions, and the Web
+  tree has no subscription-creation route; therefore provider subscription
+  renewal/cancellation/expiry is not claimed. Private evidence is
+  `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`.
 - A fresh local PostgreSQL 15 qualification of the merged Web tree applied all
   38 migrations and passed the authenticated account-deletion route E2E 1/1
   plus deletion-job lease/idempotency integration 1/1. This strengthens
@@ -191,18 +211,95 @@ a changed input or a clear acceptance need:
   YouTube-tab network chain was excluded as contaminated; no performance code
   change was justified by the 14.4 KiB legacy-JavaScript finding because its
   estimated FCP/LCP savings were zero.
-- The latest backend/hosted-readiness recheck found no open CLI PR or
-  dependency-ready CLI code gap. Production metadata has the payment catalog
-  and database variable; Preview has provider credential metadata but no
-  database URL, isolation marker, or enabled payment catalog. Owners and next
-  review points are recorded in the private backend gate evidence; no values
-  or environment writes occurred.
+- The earlier backend/hosted-readiness recheck found no open CLI PR or
+  dependency-ready CLI code gap and recorded Preview as payment-disabled. That
+  snapshot is superseded for Gate 2/3 by the current isolated Neon Preview
+  database, isolation marker, Test Mode webhook, and four-method catalog. The
+  private gate evidence preserves both timestamps; do not use the older
+  snapshot as the current environment state.
 
 Private evidence for the latest CLI batch is:
 
 `docs/shipping/evidence/dist-006-rollback-boundary-completeness-2026-10-09.md`
 
-## 4. Execution priority: backend/CLI first
+## 4. Gate-first execution control plane
+
+The nine release gates are the first control plane for this goal. A gate is
+closed only when its acceptance artifact exists in private evidence; founder
+permission does not turn missing provider, legal, reviewer, customer, or
+publishing evidence into a pass.
+
+### Current gate state
+
+1. **Isolated test database — complete.** A separate Neon test database and
+   the isolated Docker PostgreSQL path are available. The reviewed migration
+   set was applied and schema/migration checks passed. No Production database
+   is used for Preview payment qualification.
+2. **Preview database isolation — complete.** Preview has the isolated
+   database URL and `VERGLOS_PREVIEW_DATABASE_ISOLATED=true`; payment
+   configuration fails closed without both the URL and marker. Migration
+   history, target identity, and webhook routing remain part of every future
+   requalification.
+3. **Razorpay Test Mode and webhook — complete for qualification.** Test keys,
+   webhook secret, canonical catalog, and the isolated Preview webhook target
+   are configured. Secrets must never be pasted into chat or public files.
+4. **Hosted payment matrix — partially complete and highest technical
+   priority.** `PLAN-WEB-013` is closed. `PLAN-WEB-011`, `PLAN-WEB-012`,
+   `PLAN-WEB-014`, and `PLAN-WEB-015` remain open. The real gap is the missing
+   provider-subscription creation route: the code has subscription ledger and
+   webhook handling but no `create-subscription` API/UI flow. Implement that
+   route from the server catalog, bind signed notes and tenant identity, store
+   the provider subscription, then qualify renewal/cancellation/expiry in
+   isolated Test Mode. Do not use Production DB rows, `$1` pricing, or manual
+   entitlement edits as substitutes.
+5. **GitHub/GitLab integration — scope decision required, not an npm
+   prerequisite.** Publishing the npm/CLI package does not require a GitHub
+   or GitLab installation. The active Web SaaS scope is GitHub-first and has
+   `TEAM-CLI-002`, `TEAM-WEB-006`, and `GITHUB-WEB-001..004` open for live SCM
+   qualification. If V1 is npm/CLI-only, record these Web SCM items as
+   explicitly deferred; if Web SCM is in V1, use one authorized company test
+   repository and keep its consent record private.
+6. **Independent AppSec review — external and open.** A real security
+   reviewer who did not implement Hunt must inspect the exact CLI commit, run
+   the Linux/Docker adversarial suite, document residual risks, and sign
+   pass/pass-with-limitations/fail. Codex may prepare the packet and tests but
+   cannot be the independent signer. No action is required from the founder
+   until a reviewer is selected; never fabricate or AI-generate the approval.
+7. **Legal/licensing approval — external and open.** An authorized legal or
+   company reviewer must approve the private addendum covering Trivy,
+   detect-secrets, fixtures, Hunt content, notices, modification/
+   redistribution, trademarks, scope, expiry, and reviewer identity.
+8. **Protected release and recovery — open.** Enable protected npm/Vercel
+   approvals and perform authenticated rollback/restore rehearsals across the
+   npm package, engine manifest, Hunt feed, signing identity, and Web
+   deployment. Local fixture tests alone do not close this gate.
+9. **Final acceptance/POC corpus — open and last.** After implementation and
+   release-candidate freeze, run the authorized POC corpus, plan/user/tenant
+   matrix, revenue scenarios, held-out false-positive/false-truth evaluation,
+   final regression, and dated go/no-go review.
+
+### Gate operating rule
+
+First complete all technical work within current authority for the active gate.
+For an external gate, record the exact owner, missing artifact, expiry/review
+date, safe next action, and release decision; do not claim it passed. Do not
+wait idly for an external reviewer or legal approval while independent code
+work remains, but do not move the release forward as though that gate were
+closed.
+
+The immediate technical sequence is:
+
+1. Implement and test the missing subscription-creation path for Gate 4.
+2. Re-run isolated Preview/Test Mode lifecycle evidence and reconcile the
+   payment ledger, provider records, and entitlement state.
+3. Close only the payment backlog IDs whose complete criteria are evidenced.
+4. Resolve the npm/CLI versus Web SCM scope decision before attempting Gate 5.
+5. Prepare the AppSec/legal/release packets while continuing dependency-ready
+   backend/CLI batches.
+6. Run final acceptance only after all required gates and the release-candidate
+   freeze are complete.
+
+## 4A. Execution priority after gate triage: backend/CLI first
 
 Do not move to Web polish merely because it is easier. At the beginning of
 each batch:
@@ -397,9 +494,18 @@ entitlement duration, plan, or provider identity. Provider success/capture and
 the signed webhook are authoritative for entitlement; polling is read-only and
 cannot grant access.
 
-For every enabled method—cards, UPI, netbanking, wallets, EMI, Pay Later, and
-any other account-enabled method—qualify in Razorpay Test Mode, privately and
-redacted, across:
+For every method currently enabled by the provider account—cards, netbanking,
+wallets, and EMI—qualify in Razorpay Test Mode, privately and redacted, across
+the full matrix below. UPI/UPI QR and Pay Later are not currently enabled
+because this account exposed no usable test lifecycle for them. If the account
+later exposes an approved usable fixture, add it to the matrix before release;
+do not claim a method merely because Checkout renders its label.
+
+The same qualification must cover the provider-subscription path once the
+missing subscription-creation route is implemented. Webhook lifecycle code
+without a creation path is not a complete subscription product.
+
+Qualify across:
 
 - checkout creation and display;
 - success and failure;
@@ -563,8 +669,13 @@ This goal is complete only when:
   passes;
 - Hunt authority, provenance, bounded execution, isolation, and adversarial
   review are complete;
-- GitHub App/org identity, permissions, token lifecycle, delivery replay
-  protection, reconciliation, and authorized cutover are qualified;
+- If Web SCM is in the V1 release scope, GitHub App/org identity, permissions,
+  token lifecycle, delivery replay protection, reconciliation, and authorized
+  cutover are qualified; if V1 is npm/CLI-only, the Web SCM items are
+  explicitly deferred rather than silently treated as npm requirements;
+- the Web billing surface has a real provider-subscription creation route,
+  with server-catalog binding and isolated Test Mode renewal/cancellation/
+  expiry evidence, before claiming recurring payment completeness;
 - every enabled payment method is qualified or has a documented provider
   limitation and release decision;
 - production migrations, reconciliation, backup/restore, rollback, and
@@ -589,20 +700,35 @@ deployment, or a partial hosted flow.
 
 At resume, perform this exact sequence:
 
-1. Read `brain`, repository instructions, and the live private backlog.
-2. Recompute the scoreboard and open-ID list.
-3. Inspect current CLI and Web branches/PRs and verify the recorded heads.
-4. Verify the merged Web PR #170 head and record its acceptance boundary; keep
+1. Read `brain`, repository instructions, this goal, and the live private
+   backlog.
+2. Recompute the scoreboard and open-ID list; report **219/61/280 (78.2%)**
+   only as the starting checkpoint, then trust the recomputed result.
+3. Read the nine-gate matrix in Section 4 and update the execution ledger with
+   each gate's status, owner, missing artifact, next action, and write boundary.
+4. Finish the current technical gate before moving to the next one. The first
+   implementation batch is the missing subscription-creation route for
+   `PLAN-WEB-011`, followed by isolated Preview/Test Mode lifecycle evidence.
+5. Inspect current CLI and Web branches/PRs and verify recorded heads. Keep
    duplicate PR #169 closed and do not count it as shipping progress.
-5. Select the largest dependency-ready backend/CLI batch.
-6. Record IDs, criteria, evidence, write boundary, and machine-load plan.
-7. Implement and qualify the batch with focused and required tests.
-8. Inspect public/private boundaries and hosted PR state.
-9. Reconcile private evidence and report the exact score.
-10. If no executable CLI item remains, record the backend external-gate matrix
-   once and move to the next independent Web/cross-repository item.
-11. Keep production, payment, customer, legal, and reviewer gates open until
-    their actual evidence exists.
+6. For each batch, record IDs, criteria, dependencies, evidence, production/
+   database/payment/provider write boundary, and machine-load plan before work.
+7. Implement and qualify the batch with focused tests, required integration,
+   security/adversarial checks, typecheck, build, schema, and migrations.
+8. Inspect public/private boundaries, exact diff, staged files, hosted PR state,
+   and deployment/provider results where applicable.
+9. Reconcile the backlog, execution ledger, evidence, decisions, risks,
+   release gates, and status; report the exact new score.
+10. If a gate is externally blocked, record the real owner and artifact once;
+    do not fabricate a signature, consent, legal approval, customer result,
+    provider lifecycle, or trusted publication. Continue only with independent
+    work that does not falsely depend on the missing gate.
+11. After Gate 4 is genuinely closed, resolve npm/CLI-only versus Web SCM
+    scope before Gate 5. Do not treat GitHub/GitLab integration as an npm
+    publishing prerequisite.
+12. Keep Production payment/database writes, customer fixtures, legal gates,
+    AppSec approval, protected publishing, and final POC acceptance closed
+    until their actual evidence and operation-specific preflights exist.
 
 The next batch must not begin with a repeated unchanged suite, a speculative
 marketing edit, a production payment click, a direct database entitlement
@@ -629,6 +755,14 @@ The latest account-deletion qualification evidence is:
 The latest authenticated account-runtime qualification evidence is:
 
 `docs/shipping/evidence/qual-web-006-authenticated-account-runtime-2026-10-09.md`
+
+The latest payment qualification and Gate 4 evidence is:
+
+`docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`
+
+The latest gate-first payment decision and backlog acceptance are recorded in
+private commit `5a99b0d`; the preceding payment qualification evidence commit
+is `8eb85b7`.
 
 The private tracker’s backlog, status, execution ledger, traceability,
 decisions, risks, release gates, evidence, and this goal are the source of
