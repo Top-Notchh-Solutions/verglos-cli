@@ -42,6 +42,13 @@ the build passed.
 - A second captured/refunded Test Mode order exercised the same deployed
   capture and refund paths, proving the transaction fix was not only a local
   unit-test result.
+- A later read-only Test Mode provider aggregate showed 16 payments at the
+  canonical amount, including captured `card`, `wallet`, `netbanking`, and
+  `cardless_emi` outcomes, plus captured/refunded and failed outcomes for the
+  previously exercised methods. No UPI or Pay Later payment row was present.
+  The UPI QR attempt was not a valid Test Mode UPI fixture, and the Pay Later
+  OTP rejection did not create a provider payment; neither is treated as a
+  successful lifecycle result.
 
 Only aggregate and state evidence is retained here. Provider identifiers,
 emails, phone numbers, signatures, webhook secrets, database URLs, and
@@ -56,9 +63,9 @@ ledger/license grant → full provider refund → signed refund webhook → ledg
 refund watermark → license deactivation`
 
 The complete PLAN-WEB-014 gate remains **open**. The remaining matrix must
-still document each enabled method's provider success/failure behavior and
-the required renewal, cancellation, expiry, replay, out-of-order, timeout,
-tenant-binding, and partial-refund cases. Provider simulator stalls are
+still document UPI and Pay Later provider outcomes and the required renewal,
+cancellation, expiry, replay, out-of-order, timeout, tenant-binding, and
+partial-refund cases. Provider simulator stalls or rejected fixtures are
 recorded rather than treated as successful outcomes.
 
 ## Backlog accounting
