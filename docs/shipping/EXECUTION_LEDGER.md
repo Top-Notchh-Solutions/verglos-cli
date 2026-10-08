@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · read-only legacy-data audit
+
+- **Scope:** Web `db:legacy-audit` against the selected local test database;
+  repeatable-read read-only transaction, bounded timeouts, aggregate output
+  only.
+- **Inventory:** 12/12 legacy source tables and 6/6 target tables present;
+  migration history 26/37; source digests computed in memory only.
+- **Findings:** No orphan/conflicting ownership rows. One legacy plan alias,
+  one legacy monitor-channel payload, 1,350 dependency entries, two expired
+  unconsumed auth codes, and one canary alert dispatch require explicit
+  mapping/retention/operational treatment.
+- **Disposition:** Preflight evidence only; no migration, backfill, row
+  reconciliation, payment, entitlement, deployment, or production write.
+  R-041, migration drift, backup/restore, and cutover remain open. No
+  checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/legacy-data-audit-2026-10-08.md`.
+
 ## 2026-10-08 · CLI release-safety contract qualification
 
 - **Source:** CLI exact current worktree commit `7d060b2852551cc017bbb2b5f70bad22843e7273`.

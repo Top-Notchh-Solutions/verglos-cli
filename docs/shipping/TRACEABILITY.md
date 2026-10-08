@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## Production/cutover legacy-data preflight · 2026-10-08
+
+The read-only legacy audit found 12/12 source tables and 6/6 target tables,
+26/37 applied migrations, clean orphan/ownership invariants, and explicit
+legacy states requiring mapping/retention decisions: one plan alias, one
+legacy monitor-channel payload, 1,350 dependency entries, two expired
+unconsumed auth codes, and one canary dispatch. No row values or identifiers
+were retained and no checkbox changed. See
+`docs/shipping/evidence/legacy-data-audit-2026-10-08.md`.
+
 ## DIST-001/003/006 and QUAL-CLI-006 release-safety contracts · 2026-10-08
 
 CLI commit `7d060b2` passed rollback-plan **2/2**, shared rollback/release

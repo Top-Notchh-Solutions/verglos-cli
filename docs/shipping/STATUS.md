@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · read-only legacy-data audit
+
+The selected local test database contains all 12 legacy source tables and 6
+target tables, but remains at 26/37 migration records. Aggregate invariants
+show no orphan or conflicting ownership rows; cutover-relevant state includes
+1 legacy plan-alias license, 1 legacy monitor-channel payload, 1,350 monitor
+dependency entries, 2 expired unconsumed CLI auth codes, and 1 canary
+alert-dispatch row. No row values or identifiers were retained and no write
+occurred. Mapping/retention decisions, R-041, migration drift, backup/restore,
+reconciliation, and cutover remain open. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/legacy-data-audit-2026-10-08.md`.
+
 ## 2026-10-08 · CLI release-safety contract qualification
 
 At CLI commit `7d060b2`, rollback-plan tests passed **2/2**, shared rollback and

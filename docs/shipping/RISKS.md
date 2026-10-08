@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## R-DB-LEGACY-DATA · 2026-10-08
+
+The selected local test database is structurally populated and behind the
+current journal. Its read-only aggregate audit found one legacy plan-alias
+license, one legacy monitor-channel payload, 1,350 dependency entries, two
+expired unconsumed CLI-auth codes, and one canary alert dispatch. Ownership and
+orphan checks were clean, but these legacy states require explicit mapping,
+retention, or operational treatment before a production cutover. Owner:
+Web/schema/release operations. Required next action: approve the mapping and
+retention decisions in the production migration runbook and verify them on an
+approved snapshot/restore rehearsal. No write occurred.
+
 ## R-DB-MIGRATION-DRIFT · 2026-10-08
 
 The selected local test database contains all declared tables but only 26 of
