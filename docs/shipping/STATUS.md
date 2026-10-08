@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · HOSTED-013 mapping and reconciliation contracts
+
+The current Web mapping/backfill batch passed **54/54**: 53 pure user,
+project, license, report, reconciler, and writer tests plus 1 isolated mapping
+SQL integration test. Typecheck, schema validation, and all 37 migration-order
+checks passed; the temporary mapping container was stopped cleanly. This
+verifies quarantine, alias preservation, digest-only mapping, duplicate
+rejection, and drift detection only. It does not authorize the production
+writer or resolve the legacy states from the read-only audit. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence: `docs/shipping/evidence/hosted-013-mapping-contracts-2026-10-08.md`.
+
 ## 2026-10-08 · read-only legacy-data audit
 
 The selected local test database contains all 12 legacy source tables and 6

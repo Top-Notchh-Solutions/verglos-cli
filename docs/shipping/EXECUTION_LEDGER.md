@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · HOSTED-013 mapping and reconciliation contracts
+
+- **Environment:** Current Web source; one isolated loopback-only PostgreSQL
+  mapping container at the pinned image digest; no external database/provider
+  state. Container stopped after the run.
+- **Verification:** User/project/license/report planners, reconciler, and
+  writer **53/53**; legacy mapping SQL integration **1/1**; aggregate **54/54**
+  with zero failures/skips. Typecheck, schema, and 37-migration checks passed.
+- **Coverage:** Deterministic names/digests, invalid-input quarantine, legacy
+  plan-alias preservation, parent ordering, deterministic writer filters,
+  explicit dry-run/commit boundary, duplicate/digest constraints, and drift
+  detection for orphan/unmapped/missing target rows.
+- **Disposition:** Local contract evidence only. Production writer,
+  backup/restore, row reconciliation, cutover, and the legacy alias/channel/
+  auth-code decisions remain open. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Safety:** No production/database/payment/entitlement/deployment/public
+  repository write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/hosted-013-mapping-contracts-2026-10-08.md`.
+
 ## 2026-10-08 · read-only legacy-data audit
 
 - **Scope:** Web `db:legacy-audit` against the selected local test database;

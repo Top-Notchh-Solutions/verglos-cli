@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## HOSTED-013 mapping/reconciliation contracts · 2026-10-08
+
+The Web source passed the six HOSTED-013 planner/reconciler/writer suites
+**53/53** and the isolated legacy-mapping SQL integration **1/1**. Typecheck,
+schema, and 37-migration checks passed. This verifies local quarantine,
+alias-preservation, duplicate-rejection, digest, and drift contracts only;
+production writer authorization, backup/restore, row reconciliation, cutover,
+and legacy-state decisions remain open. No checkbox changed. See
+`docs/shipping/evidence/hosted-013-mapping-contracts-2026-10-08.md`.
+
 ## Production/cutover legacy-data preflight · 2026-10-08
 
 The read-only legacy audit found 12/12 source tables and 6/6 target tables,
