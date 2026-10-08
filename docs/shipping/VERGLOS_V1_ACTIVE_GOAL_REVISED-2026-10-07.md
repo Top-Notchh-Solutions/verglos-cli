@@ -72,7 +72,9 @@ this file when resuming.
   - **218 checked / 62 unchecked / 280 total / 77.9%**;
   - CLI `origin/main`: `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`;
   - Web PR #166 merged as `ff0dd15b3eada55eb898038bc66ea0c5394bead6`;
-  - latest private tracker reconciliation commit: `6041cba`;
+  - Web PR #167 merged as `9841236c64a816fc90402cd90ff2bc93ce35382c`;
+  - Web PR #168 merged as `cedf199855a5c4734122ae4849253156328cff1b`;
+  - latest private tracker goal/reconciliation commit: `994e717`;
   - no open CLI or Web PR was present at this checkpoint;
   - no checkbox is accepted merely because implementation exists or tests are green.
 
@@ -608,6 +610,59 @@ this file when resuming.
     verification, and found no other unexpected route 500s. The three cron
     routes' explicit missing-secret 500 responses remain their existing service
     contract. QUAL-WEB-006 remains open for broader acceptance.
+  - Web PR #167 and #168 are merged and hosted checks passed, but neither closes
+    the broader QUAL-WEB-006 acceptance item. Authenticated paid/org behavior,
+    field performance, accessibility, complete-route coverage, and final truth
+    review are still required before that checkbox can move.
+  - The current CLI qualification pass found no open CLI PR and no dependency-
+    ready CLI checkbox that could honestly be accepted from local code alone.
+    The remaining CLI IDs are HUNT-008–011, PLAN-CLI-001–004,
+    TEAM-CLI-001/002, STUDIO-CLI-001, ENT-CLI-001, LIC-002/003,
+    DIST-001–003/006, QUAL-CLI-004, and QUAL-CLI-006. Their remaining proof
+    is tied to trusted Hunt roots and recipe provenance, independent security
+    review, hosted/provider activation, operational runner credentials,
+    customer or organization authorization, legal/license disposition, trusted
+    publishing identity, or other explicit external gates. Do not invent a
+    code change merely to lower the count; inspect each criterion and move to
+    the next independent item when a gate is not executable locally.
+  - The backend qualification evidence at CLI `origin/main`
+    `94829e1a4fc8e42dd67545e99cbe9a3a837b9482` remains valid: configured tests,
+    build, typecheck, lint, ordinary Hunt 45/45, pinned Docker adversarial
+    60 pass / 1 explicit macOS namespace skip / 0 fail, package/public-boundary
+    checks, packed manifests, and release-script tests 12/12. These results
+    qualify the tested substrate; they do not satisfy the external gates listed
+    above.
+  - Production `vercel --prod` and a read-only live checkout probe showed a
+    successful deployment/rendering path and all currently exposed hosted
+    payment methods, but no order, charge, capture, webhook, entitlement,
+    database, migration, provider, or account write occurred. Production
+    rendering is not Test Mode lifecycle evidence.
+  - Payment qualification must use Razorpay Test Mode with an isolated,
+    non-production database and webhook destination. A production database URL,
+    a direct Neon row edit, a founder-email allowlist, a clicked “check now”
+    response, a live-looking QR, or a `$1` production price is not payment
+    evidence. Changing `DATABASE_URL` does not recreate tables; the target
+    database must be migrated and its migration history/schema verified before
+    use. A changed Vercel variable is not active until the deployment using it
+    is verified, and any exposed credential/token is treated as compromised,
+    revoked, and replaced before further use.
+  - Chrome DevTools on `127.0.0.1:9222` and Docker Desktop are available as
+    bounded qualification instruments. They make testing possible but do not
+    themselves prove authentication, sandbox isolation, payment lifecycle,
+    production correctness, or backlog acceptance. Browser evidence must redact
+    cookies, authorization headers, payment identifiers, database URLs, and
+    personal data.
+  - Founder consent to work on Verglos is not a substitute for repository-owner
+    authorization, customer consent, legal approval, an independent Hunt
+    reviewer, trusted publisher identity, or provider/account evidence when a
+    backlog item explicitly requires those artifacts. Codex may prepare the
+    implementation, tests, templates, and private evidence packet, but must
+    leave the checkbox open until the required external artifact exists.
+  - The next resume must begin by recomputing the private backlog and selecting
+    the largest dependency-ready backend/CLI batch. If all remaining CLI items
+    are externally gated, record the exact owner/evidence gap once and continue
+    with the next independent Web or cross-repository item; do not repeat an
+    unchanged full suite or wait idle for production access.
 
   COMPLETION STANDARD
 
