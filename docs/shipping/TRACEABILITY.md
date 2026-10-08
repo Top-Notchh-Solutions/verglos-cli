@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## Web keyless Preview auth-consumer repair · 2026-10-08
+
+- **Backlog strengthened:** `QUAL-WEB-006` runtime qualification; no checkbox
+  accepted because authenticated, field-CWV, large-data, and final truth gates
+  remain open.
+- **Source:** Web PR #167 `12bfe68`, merged as
+  `9841236c64a816fc90402cd90ff2bc93ce35382c`.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-preview-keyless-auth-consumers-2026-10-08.md`.
+- **Result:** Keyless built Preview no longer throws from direct Clerk
+  consumers; former 500 routes redirect or fail closed, with local and hosted
+  verification recorded.
+- **Boundary:** No production/provider/database/payment/account/deployment
+  write; exact score remains **218/62/280 (77.9%)**.
+
 ## Production checkout method recheck · 2026-10-08
 
 Read-only Chrome DevTools observation of production `/checkout` rendered the

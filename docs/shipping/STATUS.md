@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · Web keyless Preview auth-consumer repair
+
+Web PR #167 (`12bfe68`) merged to Web `main` as `9841236c` after hosted
+typecheck/schema, serial, private-runner E2E, negative-boundary, truth-registry,
+migration/schema, build, public-boundary, dependency/SBOM/license, secret-guard,
+GitGuardian, and Vercel checks passed. It fixes the follow-on keyless Preview
+500 defect: `/activate`, `/cli-auth`, `/account`, `/orgs`, report loading,
+organization guards, and related authenticated APIs now use the request-auth
+seam. With no Clerk key, the built Preview runtime returns the expected login
+redirect or bounded 401/405 instead of invoking Clerk and throwing. Local
+focused contracts passed 9/9; typecheck, 45-route build, and serial 862/886
+with 24 explicit skips passed; Chrome DevTools found no console messages.
+No production, database, payment, provider, entitlement, account, or deployment
+write occurred. This strengthens `QUAL-WEB-006` but closes no checkbox; the
+score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-preview-keyless-auth-consumers-2026-10-08.md`.
+
 ## 2026-10-08 · production checkout method recheck
 
 Read-only Chrome DevTools recheck of `https://verglos.com/checkout` rendered

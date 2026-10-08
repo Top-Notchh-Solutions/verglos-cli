@@ -592,10 +592,13 @@ this file when resuming.
     public surface, then exposed four remaining keyless-auth route failures:
     `/activate`, `/cli-auth`, `/account`, and `/orgs` returned HTTP 500 because
     those pages/data helpers call Clerk directly after middleware correctly
-    bypasses Clerk without a Preview key. The next Web repair must use the
-    request-auth seam or an equivalent safe Preview fallback while preserving
-    production fail-closed behavior. No production, database, payment,
-    provider, deployment, or entitlement write occurred.
+    bypasses Clerk without a Preview key. Web PR #167 (`12bfe68`) migrated the
+    direct consumers to the request-auth seam and merged as `9841236c`; the
+    built route sweep now returns expected redirects/401/405 with no 500s and
+    Chrome reports no console messages. Production still preserves Clerk and
+    fail-closed runtime validation. No production, database, payment, provider,
+    deployment, or entitlement write occurred; QUAL-WEB-006 remains open for
+    its broader authenticated, field-CWV, and final-truth criteria.
   - The exact count remains **218 checked / 62 unchecked / 280 total (77.9%)**
     until a current private-tracker reconciliation proves otherwise.
 

@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · Web keyless Preview auth-consumer repair
+
+- **Source:** Web PR #167 source `12bfe68`, merged as
+  `9841236c64a816fc90402cd90ff2bc93ce35382c`.
+- **Defect:** After the middleware fix, direct Clerk consumers still returned
+  HTTP 500 on `/activate`, `/cli-auth`, `/account`, and `/orgs` in keyless
+  built Preview; report and organization guards and related APIs shared the
+  same failure mode.
+- **Implementation:** Migrated all direct consumers to the request-auth seam;
+  no-key local/Preview requests now resolve anonymously, while configured
+  production requests still use Clerk and production runtime validation remains
+  fail-closed.
+- **Verification:** Focused contracts **9/9**, typecheck, 45-route build,
+  serial **862 passed / 24 skipped / 0 failed**, built route sweep with
+  expected redirects/401/405 and no 500s, and Chrome console clean. Hosted
+  workflow `37803193381` and GitGuardian/Vercel checks passed.
+- **Boundary:** No production, database, payment, provider, entitlement,
+  account, migration, or deployment write. This strengthens QUAL-WEB-006 but
+  does not close a checkbox; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-preview-keyless-auth-consumers-2026-10-08.md`.
+
 ## 2026-10-08 · production checkout method recheck
 
 - **Instrument:** Approved Chrome DevTools session, production checkout, read-only.
