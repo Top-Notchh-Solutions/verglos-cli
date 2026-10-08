@@ -1,5 +1,14 @@
 # Verglos V1 traceability
 
+## PLAN-CLI-001/004 cross-repository entitlement roundtrip · 2026-10-08
+
+Web `1e2b392` issued a synthetic v2 Pro token that CLI `7d060b2` accepted
+with matching tenant/owner/catalog claims; payload tamper and unrelated-key
+verification were rejected. This proves isolated wire compatibility only;
+deployed signer/activation, supported-version migration, and hosted acceptance
+remain open. No checkbox changed. See
+`docs/shipping/evidence/plan-cli-001-004-cross-repo-token-roundtrip-2026-10-08.md`.
+
 ## PLAN-CLI-003 hosted forged-route matrix · 2026-10-08
 
 Production GET-only negative probing covered **22/22** organization, project,

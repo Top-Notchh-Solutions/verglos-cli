@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · PLAN-CLI-001/004 cross-repository entitlement roundtrip
+
+- **Sources:** Web `1e2b392` and CLI `7d060b2`; one bounded Node process with
+  ephemeral signing material, synthetic Pro license/tenant, and a temporary
+  cache directory removed after execution.
+- **Verification:** Web issuer HTTP **200** / token version 2; CLI verifier
+  accepted Pro/tenant/owner/catalog claims and 21 capabilities; payload tamper
+  and unrelated-key verification both rejected with signature failure.
+- **Safety:** Token/key material was withheld. No production/provider/payment/
+  database/deployment/customer/entitlement write occurred.
+- **Disposition:** Synthetic cross-repository contract evidence only.
+  Production signer alignment, deployed activation, old-version migration,
+  and hosted acceptance remain open. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-001-004-cross-repo-token-roundtrip-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 hosted forged-route matrix
 
 - **Scope:** Production browser GET-only matrix with malformed and valid

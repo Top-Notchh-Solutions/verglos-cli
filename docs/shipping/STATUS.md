@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · PLAN-CLI-001/004 cross-repository entitlement roundtrip
+
+The exact current Web source issued a synthetic v2 Pro entitlement token and
+the exact current CLI verifier accepted it with the matching ephemeral
+successor key, tenant/owner claims, catalog version, and 21 capabilities. The
+CLI rejected a payload tamper and an unrelated signing key. This is isolated
+wire-contract evidence only; production signer/public-pin alignment, deployed
+tenant activation, supported-version migration, and hosted acceptance remain
+open. No checkbox changed; backlog remains **218 checked / 62 unchecked / 280
+total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-cli-001-004-cross-repo-token-roundtrip-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 hosted forged-route matrix
 
 The authenticated production browser ran a GET-only forged-identifier matrix

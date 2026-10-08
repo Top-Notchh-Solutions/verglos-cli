@@ -1,5 +1,14 @@
 # Verglos V1 risk register
 
+## R-PLAN-CLI-001-cross-repo-activation · 2026-10-08
+
+The current Web v2 issuer and CLI verifier now pass an isolated synthetic
+roundtrip, including tenant/owner/catalog claims, tamper rejection, and wrong
+key rejection. Residual risk is operational: production signer/public-pin
+alignment, deployed tenant mapping and activation, supported-version migration,
+and hosted acceptance remain unverified. Owner: CLI/Web release
+qualification. No production state changed.
+
 ## R-PLAN-CLI-003-hosted-boundary · 2026-10-08
 
 The production GET-only forged-route matrix returned bounded 403/400/404
