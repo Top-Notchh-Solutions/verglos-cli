@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## Payment method/lifecycle local qualification · 2026-10-08
+
+The targeted Web payment suite is green locally (56 pass, 2 expected
+PostgreSQL-gated skips). This validates code-side method and lifecycle guards
+only; it does not satisfy live Razorpay Test Mode or production reconciliation
+gates. PLAN-WEB-011/012/013/014/015 remain open.
+
+Evidence: `docs/shipping/evidence/plan-web-013-015-payment-method-local-qualification-2026-10-08.md`.
+
 ## TEAM-CLI-002 command-path progress · 2026-10-08
 
 PR #80 head `58bb9383bdd1273e973620472ffc2d9255be7e9d` passes focused and full

@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · Payment method/lifecycle local qualification
+
+- **Verification:** targeted Web billing/configuration/webhook suite, 56 pass,
+  0 fail, 2 expected PostgreSQL-gated skips.
+- **Coverage:** supported hosted methods, QR-only production rejection,
+  signed catalog/method binding, capture-only grant, failure/refund/renewal,
+  replay/conflict/out-of-order handling, and bounded error responses.
+- **Disposition:** local implementation evidence only. No provider, payment,
+  database, entitlement, deployment, or production write; no checkbox change.
+- **Evidence:** `docs/shipping/evidence/plan-web-013-015-payment-method-local-qualification-2026-10-08.md`.
+
 ## 2026-10-08 · TEAM-CLI-002 CLI check-payload command wiring
 
 - **Sources:** CLI PR #80 at `58bb9383bdd1273e973620472ffc2d9255be7e9d`.

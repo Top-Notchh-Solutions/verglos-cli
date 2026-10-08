@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## Payment methods and lifecycle local qualification · 2026-10-08
+
+The current Web payment implementation was rechecked with 58 targeted tests:
+56 passed, 0 failed, and 2 expected PostgreSQL-gated tests skipped. Hosted
+Checkout supports all explicitly configured implemented methods; QR-only
+production configuration is rejected, and signed catalog/method binding plus
+webhook-authoritative lifecycle safeguards pass locally. This is not provider
+or production lifecycle evidence; PLAN-WEB-013/014/015 and PLAN-WEB-011/012
+remain open. No state was written. Evidence:
+`docs/shipping/evidence/plan-web-013-015-payment-method-local-qualification-2026-10-08.md`.
+
 ## CLI CI check-payload command wiring · 2026-10-08
 
 CLI PR #80 advanced to `58bb9383bdd1273e973620472ffc2d9255be7e9d`. The new
