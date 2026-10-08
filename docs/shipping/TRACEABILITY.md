@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## HOSTED-013 selected-database planners · 2026-10-08
+
+The current Web users, project, and license planners passed focused tests
+**29/29** and ran read-only against the selected test database. One personal
+organization was eligible to be created; the other user, project, and license
+were already represented. No collisions, unresolved parents, or quarantines
+were found. The selected database remains unsuitable for a write because it
+has 26/37 migrations and is not an approved isolated Preview target. No
+checkbox changed. See
+`docs/shipping/evidence/hosted-013-selected-db-planner-2026-10-08.md`.
+
 ## HOSTED-013 mapping/reconciliation contracts · 2026-10-08
 
 The Web source passed the six HOSTED-013 planner/reconciler/writer suites

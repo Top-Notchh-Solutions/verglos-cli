@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · HOSTED-013 selected-database planner qualification
+
+- **Scope:** Current Web user, project, and license planners against the
+  explicitly selected test database; URLs and row-level values were withheld.
+- **Verification:** Focused planner tests **29/29**, zero failures/skips.
+  Runtime planner results: users 1 would-create / 1 already-migrated;
+  projects 0 would-create / 1 already-migrated; licenses 0 would-preserve / 1
+  already-mapped; no collisions, unresolved parents, or quarantines.
+- **Safety:** Each planner used repeatable-read, read-only transactions with
+  bounded statement/lock timeouts. No database, migration, payment,
+  entitlement, deployment, provider, or production write occurred.
+- **Disposition:** Evidence is limited to the selected database. Its 26/37
+  migration state, populated ownership, lack of approved Preview isolation,
+  and missing backup/restore/cutover evidence keep HOSTED-013 and downstream
+  production acceptance open. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hosted-013-selected-db-planner-2026-10-08.md`.
+
 ## 2026-10-08 · HOSTED-013 mapping and reconciliation contracts
 
 - **Environment:** Current Web source; one isolated loopback-only PostgreSQL

@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · HOSTED-013 selected-database planner qualification
+
+The three current Web planners were run read-only against the explicitly
+selected test database: users **2**, monitor registrations **1**, and licenses
+**1**. Focused planner tests passed **29/29**. Aggregate runtime outcomes were
+one eligible personal-organization creation and one already-migrated user;
+the single project and single license were already mapped; no collisions,
+unresolved parents, or quarantines were found. This does not authorize the
+remaining organization write: the selected populated database is at 26/37
+migrations and is not approved as the isolated Preview target. No checkbox
+changed; backlog remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+Evidence: `docs/shipping/evidence/hosted-013-selected-db-planner-2026-10-08.md`.
+
 ## 2026-10-08 · HOSTED-013 mapping and reconciliation contracts
 
 The current Web mapping/backfill batch passed **54/54**: 53 pure user,

@@ -12,6 +12,12 @@ Web/schema/release operations. Required next action: approve the mapping and
 retention decisions in the production migration runbook and verify them on an
 approved snapshot/restore rehearsal. No write occurred.
 
+Selected-database planner qualification (2026-10-08) found one eligible
+personal-organization creation, while the other user, project, and license
+were already represented; no planner collision, unresolved parent, or
+quarantine was found. This narrows the pending data shape but does not resolve
+the required legacy alias/channel/auth-code decisions or authorize a write.
+
 ## R-DB-MIGRATION-DRIFT · 2026-10-08
 
 The selected local test database contains all declared tables but only 26 of
