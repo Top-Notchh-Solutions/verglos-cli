@@ -1,12 +1,33 @@
- OBJECTIVE
+# Verglos V1 Active Shipping Goal — Backend-First Whole-Backlog Pass
+
+Effective checkpoint: 2026-10-08. This is the operative replacement goal for
+the remaining active shipping window.
+
+## OBJECTIVE
 
   Ship the complete Verglos V1 across:
 
   - /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-cli
   - /Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web
 
-  Continue from the verified current state. Never restart completed work, trust stale conversation summaries, or equate commit volume with product completion. Optimize for
-  the fastest safe path to shipping without weakening Verglos’ philosophy, security, privacy, evidence standards, business safety, or public/private boundary.
+  Continue from the verified current state. Never restart completed work, trust
+  stale conversation summaries, or equate commit volume with product
+  completion. The primary execution objective is to close the unchecked
+  backlog through real implementation and qualification, backend/CLI first,
+  while preserving Verglos' philosophy, security, privacy, evidence standards,
+  business safety, and public/private boundary.
+
+  Every active work turn must do one of the following:
+
+  - implement or repair product code, tests, integration, or release tooling
+    for an unchecked backlog item;
+  - execute the smallest missing qualification needed by an unchecked item; or
+  - establish and record the exact external blocker, owner, evidence gap, and
+    next action, then immediately move to the next independent unchecked item.
+
+  A status recap, repeated unchanged test run, helper-only change, arbitrary
+  documentation edit, browser clicking without an acceptance purpose, or
+  checkbox edit without current evidence is not progress.
 
   The final repository scans, external POC, false-positive review, and company-architecture validation happen only after all implementation, integration, qualification,
   release-gate, and release-candidate-freeze work is complete. Do not use repository scanning to create the appearance of shipping progress.
@@ -27,7 +48,26 @@
   - **218 checked / 62 unchecked / 280 total / 77.9%**;
   - CLI `origin/main`: `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`;
   - Web PR #165 merged as `c620c39e837af641ba4ada1967117da4dcfa6761`;
+  - private tracker reconciliation commit: `fa75f12b`;
+  - no open CLI or Web PR was present at this checkpoint;
   - no checkbox is accepted merely because implementation exists or tests are green.
+
+  The exact open IDs at this checkpoint are:
+
+  - CLI/backend and release: HUNT-008–011, PLAN-CLI-001–004,
+    TEAM-CLI-001/002, STUDIO-CLI-001, ENT-CLI-001, LIC-002/003,
+    DIST-001–003/006, QUAL-CLI-004, and QUAL-CLI-006;
+  - Web/cross-repository: PLAN-WEB-011–015, PRO-008, TEAM-WEB-006,
+    QUAL-WEB-005/006, ACCEPT-002/003, ACCEPT-005–010/011–014,
+    FINAL-WEB-001–008, and GITHUB-WEB-001–004;
+  - governance and release decisions: the nine remaining governance
+    checkboxes covering plan hypotheses, queue/object-storage approval, legal
+    and external-license approval, networked Hunt exceptions, independent Hunt
+    review, authorized fixtures/consent, external-operation authorization, and
+    the prohibition on claiming Team/Studio/Enterprise GA.
+
+  Recompute this list from the authoritative private backlog before each batch;
+  it is a checkpoint, not permission to assume that any item is accepted.
 
   The CLI queue must be driven from the live private backlog, not from memory.
   At each batch, select dependency-ready IDs, implement the missing product or
@@ -36,6 +76,11 @@
   provider, legal approver, independent reviewer, customer authorization,
   production activation, or hosted integration, record that exact gap and move
   to the next executable CLI ID. Do not relabel a blocked gate as complete.
+
+  Backend-first means the CLI queue is exhausted only when every remaining CLI
+  item is either accepted with evidence or recorded as externally blocked with
+  an owner and release decision. Until then, do not spend the main execution
+  path on frontend polish, marketing, public pricing, or final corpus scans.
 
   INITIAL NEXT-THREE BATCH QUEUE
 
@@ -463,6 +508,21 @@
     roots, recipe provenance, independent review, publishing identity, and
     operational gates remain open. No public code, production, provider,
     database, payment, deployment, registry, or npm state changed.
+  - The CLI qualification worktree was left source-clean at exact
+    `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`; no CLI PR was open. The
+    remaining CLI IDs were therefore not checked: their missing proof is
+    hosted activation, trusted/legal provenance, independent review, official
+    publishing identity, or another external acceptance dependency rather than
+    an unverified local green test.
+  - The private tracker was reconciled in commits `b242099f` and `fa75f12b`.
+    These commits record the backend qualification result and the exact
+    external blockers; they do not represent product acceptance or public
+    release.
+  - The operating decision for the next resume is explicit: inspect the live
+    unchecked queue, take the next dependency-ready backend/CLI batch, and
+    produce implementation plus acceptance evidence. If no CLI item is
+    dependency-ready, move to the next independent Web/cross-repository item
+    while preserving every backend blocker and count.
   - The exact count remains **218 checked / 62 unchecked / 280 total (77.9%)**
     until a current private-tracker reconciliation proves otherwise.
 
