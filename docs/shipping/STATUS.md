@@ -3859,3 +3859,21 @@ reconciliation, restore/rollback, production authorization, and independent
 acceptance. No checkbox changed; backlog remains **218 checked / 62 unchecked /
 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/qual-web-005-route-e2e-2026-10-08.md`.
+
+## 2026-10-08 · QUAL-CLI Hunt fixture test qualification
+
+CLI PR #82 at exact head `806f2352f0f95d023a87ef8832a5a23aa47789a1` fixes a
+fresh-checkout test-harness defect: the CLI test task explicitly builds the
+separately provisioned private Hunt package before the HUNT-009 execution
+fixture loads its `dist` output. The public CLI dependency graph and runtime
+boundary are unchanged. Fresh-worktree local verification passed **924 tests,
+908 pass, 0 fail, 16 explicit skips** across 12 Turbo tasks; HUNT-009 focused
+execution passed 5/5; typecheck, build, and diff checks passed. Platform matrix
+run `37786406937` passed all nine Ubuntu/macOS/Windows × Node 20/22/24 cells
+after the isolated Windows Node 20 MCP build runner failure was rerun;
+self-scan `37786406760` and in-toto binding passed, and PR #82 merged to CLI
+`main` as `b852c263fe5aa26f593e4f815532a7ddb6e8d9ff`. This batch therefore
+records implementation/test progress only and does not close HUNT-008–011,
+QUAL-CLI-004, or dependent acceptance items. No checkbox changed; backlog
+remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-cli-hunt-fixture-2026-10-08.md`.

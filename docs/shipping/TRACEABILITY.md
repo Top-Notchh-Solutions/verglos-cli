@@ -2759,3 +2759,17 @@ integration evidence only; legal/customer-held disposition, destructive-worker
 E2E, reconciliation, restore/rollback, production authorization, and
 independent acceptance remain open. No checkbox changed. See
 `docs/shipping/evidence/qual-web-005-route-e2e-2026-10-08.md`.
+
+## QUAL-CLI Hunt fixture build qualification · 2026-10-08
+
+CLI PR #82 exact head `806f2352f0f95d023a87ef8832a5a23aa47789a1` makes the
+private Hunt fixture build explicit in the CLI test task. This corrects the
+fresh-checkout path without adding Hunt to the public CLI dependency graph or
+changing the production runtime boundary. Local current-head verification
+passed 924 tests (908 pass, 0 fail, 16 explicit skips), HUNT-009 focused 5/5,
+typecheck, build, and diff checks. Platform matrix `37786406937`, self-scan
+`37786406760`, and in-toto binding passed after the isolated Windows Node 20
+MCP build runner was rerun; PR #82 merged to CLI `main` as
+`b852c263fe5aa26f593e4f815532a7ddb6e8d9ff`. Hunt provenance, legal clearance,
+sandbox independent review, and acceptance gates remain open. No checkbox changed. See
+`docs/shipping/evidence/qual-cli-hunt-fixture-2026-10-08.md`.

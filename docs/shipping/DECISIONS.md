@@ -1222,3 +1222,22 @@ each observed method has lifecycle and reconciliation evidence.
 - **Boundary:** This is not deletion acceptance. Legal/customer-held
   disposition, destructive-worker execution, reconciliation, restore/rollback,
   production authorization, and independent review remain open.
+
+## QUAL-CLI Hunt fixture build boundary · 2026-10-08
+
+- **Decision:** Build the private Hunt package explicitly in the CLI package's
+  test script before HUNT-009 execution tests load its local fixture.
+- **Reason:** A fresh checkout had no `packages/hunt/dist`, so two valid
+  success-path tests incorrectly exercised the intended unavailable-runtime
+  response (`78`). The change keeps Hunt out of the public CLI dependency graph
+  and does not alter the production loader.
+- **Evidence:** CLI PR #82 exact head
+  `806f2352f0f95d023a87ef8832a5a23aa47789a1` merged as
+  `b852c263fe5aa26f593e4f815532a7ddb6e8d9ff`; local 924-test run with 908
+  passes, 0 failures, and 16 explicit skips; focused HUNT-009 5/5; typecheck
+  and build pass; platform matrix `37786406937`, self-scan `37786406760`, and
+  in-toto binding passed after the isolated Windows Node 20 runner failure was
+  rerun.
+- **Boundary:** This is test-fixture qualification only. Hunt provenance,
+  legal clearance, adversarial completion, independent review, and acceptance
+  remain open. No backlog checkbox changed.
