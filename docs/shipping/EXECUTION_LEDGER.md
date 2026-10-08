@@ -13,6 +13,20 @@
 - **Evidence:**
   `docs/shipping/evidence/historical-preview-protection-2026-10-08.md`.
 
+## 2026-10-08 · TEAM-CLI-001 focused policy-client verification
+
+- **CLI source:** Exact current worktree commit `7d060b2`.
+- **Verification:** Organization-policy shared tests 3/3, cache tests 2/2,
+  fetch tests 2/2, CLI typecheck, and shared typecheck passed.
+- **Coverage:** Scope/signer/digest verification, bounded atomic cache,
+  tamper/symlink rejection, remote fetch, credential non-disclosure, and
+  verified offline fallback.
+- **Disposition:** Implementation evidence only; deployed signer/public-key
+  pin, tenant activation, and hosted policy fetch remain open. No checkbox
+  changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-focused-policy-client-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 - **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;

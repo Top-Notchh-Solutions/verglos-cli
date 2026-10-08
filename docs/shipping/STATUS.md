@@ -22,6 +22,17 @@ behavior. They were not deleted. No checkbox changed; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/historical-preview-protection-2026-10-08.md`.
 
+## 2026-10-08 · TEAM-CLI-001 focused policy-client verification
+
+At CLI commit `7d060b2`, the organization-policy client passed 7 focused tests
+(scope/signer/digest verification, bounded cache, tamper rejection, remote
+fetch, credential non-disclosure, and offline fallback), and CLI/shared
+typechecks passed. This advances implementation evidence only; the deployed
+signer/public-key pin, tenant activation, and hosted organization fetch remain
+open. No checkbox changed; backlog remains **218 checked / 62 unchecked / 280
+total (77.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-focused-policy-client-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned
