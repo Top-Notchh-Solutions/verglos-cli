@@ -181,6 +181,11 @@ a changed input or a clear acceptance need:
   Lighthouse Accessibility/Best Practices/SEO 100/100/100. This strengthens
   QUAL-WEB-006 only; human screen-reader, full route, large-dataset,
   field-CWV, and final truth gates remain open.
+- A read-only account route sweep confirmed the paid monitoring, alerts,
+  history, and activations routes redirect through the existing paid-context
+  gate without a paid fixture; privacy passed a mobile 100/100/100 Lighthouse
+  snapshot and organizations loaded without mutation. Treat paid-route
+  coverage as missing rather than as a failure or acceptance pass.
 
 Private evidence for the latest CLI batch is:
 

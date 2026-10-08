@@ -29,6 +29,21 @@
   then continued through the named-link cycle. No unnamed focused control was
   observed and no application mutation occurred.
 
+## Route-sweep boundary
+
+- Direct navigation to `/account/monitoring`, `/account/alerts`,
+  `/account/history`, and `/account/activations` returned to `/account` in
+  this session. The current Web source intentionally protects those paid
+  routes with `requirePaidAccountContext`; this Free/no-paid-fixture session
+  therefore does not qualify their paid data views.
+- `/account/privacy` loaded directly, returned cleanly, and passed the mobile
+  Lighthouse snapshot at Accessibility/Best Practices/SEO **100/100/100**.
+  Its deletion checkbox is wrapped by its visible `<label>`; the deletion
+  button is intentionally disabled until confirmation, and no request was
+  submitted.
+- `/orgs` loaded directly with a clean console and no horizontal overflow, but
+  no organization-shaped fixture was available for dashboard qualification.
+
 ## Disposition
 
 This is fresh authenticated account-runtime and accessibility evidence for

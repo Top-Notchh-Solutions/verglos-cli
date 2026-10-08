@@ -10,7 +10,9 @@
   Lighthouse snapshot Accessibility/Best Practices/SEO **100/100/100**;
   bounded keyboard traversal remained on named links/body.
 - **Disposition:** Strengthens authenticated account-runtime and accessibility
-  evidence for `QUAL-WEB-006`; human screen-reader, complete route,
+  evidence for `QUAL-WEB-006`. Paid account routes correctly redirected to
+  the account overview without a paid fixture; privacy and organizations
+  routes loaded read-only. Human screen-reader, complete paid-route,
   large-dataset, field-CWV, and final truth gates remain open. No checkbox
   changed; score remains **218/62/280 (77.9%)**.
 - **Boundary:** No production/database/migration/payment/provider/deployment,

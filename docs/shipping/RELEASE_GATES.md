@@ -7,8 +7,10 @@ read-only reload, DOM accessibility checks, Lighthouse
 Accessibility/Best-Practices/SEO **100/100/100**, and bounded keyboard
 traversal with named links and no unnamed controls. This strengthens the
 authenticated account-runtime portion of `QUAL-WEB-006` only. Human
-screen-reader, complete route, large-data, field-CWV, and final truth evidence
-remain open. No checkbox or production state changed; count remains
+screen-reader, complete paid-route, large-data, field-CWV, and final truth
+evidence remain open. Direct paid-route navigation redirected through the
+existing paid-context gate without a paid fixture; privacy and organizations
+loaded read-only. No checkbox or production state changed; count remains
 **218/62/280 (77.9%)**. Evidence:
 `docs/shipping/evidence/qual-web-006-authenticated-account-runtime-2026-10-09.md`.
 

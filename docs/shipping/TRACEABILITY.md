@@ -9,7 +9,9 @@
   controls, no unnamed controls, no missing image alt values, and no horizontal
   overflow. Lighthouse snapshot scores were Accessibility/Best Practices/SEO
   **100/100/100**; bounded keyboard traversal observed named links and body
-  return.
+  return. Paid account routes redirected through the existing paid-context gate
+  without a paid fixture; privacy passed a mobile 100/100/100 snapshot and
+  organizations loaded read-only.
 - **Boundary:** No production/database/migration/payment/provider/deployment,
   account, entitlement, deletion, or customer-data write. Human
   screen-reader, complete route, large-data, field-CWV, and truth gates remain
