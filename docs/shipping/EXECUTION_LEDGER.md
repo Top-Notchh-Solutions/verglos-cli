@@ -41,6 +41,24 @@
 - **Evidence:**
   `docs/shipping/evidence/hunt-adversarial-local-2026-10-08.md`.
 
+## 2026-10-08 · QUAL-WEB-006 public-surface runtime qualification
+
+- **Scope:** Production `/`, `/docs`, and `/detectors`, read-only through the
+  connected Chrome debug session; authenticated checkout tab preserved.
+- **Performance:** Lab LCP 324 ms, 239 ms, and 254 ms respectively; CLS 0.00
+  on all three; no CrUX field data.
+- **Lighthouse:** Homepage desktop accessibility/best practices/SEO 100 each;
+  docs and detectors mobile accessibility/best practices/SEO 100 each;
+  homepage mobile accessibility 97 due to a contrast failure. The existing
+  `llms.txt` recommendation also failed on the audited pages.
+- **Disposition:** Public-surface evidence only. No public content/metadata
+  edit occurred because final-web claims remain frozen. Authenticated
+  organization, screen-reader/keyboard, large-data, field-CWV, and final
+  release evidence remain open. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-public-surfaces-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 - **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;

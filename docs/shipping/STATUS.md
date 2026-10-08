@@ -44,6 +44,20 @@ remain absent. No checkbox changed; backlog remains **218 checked / 62
 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/hunt-adversarial-local-2026-10-08.md`.
 
+## 2026-10-08 · QUAL-WEB-006 public-surface runtime qualification
+
+Read-only Chrome DevTools runs covered production `/`, `/docs`, and
+`/detectors`. Lab LCP was **324 ms / 239 ms / 254 ms** respectively, with
+CLS **0.00** on all three. Desktop homepage Lighthouse scored accessibility,
+best practices, and SEO **100** each; mobile docs/detectors scored **100** in
+those categories, while mobile homepage accessibility scored **97** due to a
+real contrast failure. Lighthouse also reports the existing `llms.txt`
+recommendation failure. This is public-surface evidence only; authenticated
+organization routes, screen-reader/keyboard review, large datasets, field CWV,
+and final-web release gates remain open. No checkbox changed; backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-public-surfaces-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned
