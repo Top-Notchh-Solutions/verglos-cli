@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · Web keyless Preview middleware and built runtime
+
+- **Source:** Web PR #166, commit `eab48accfe3aa45574435fbf445947c0747673b9`.
+- **Defect:** A keyless local/Preview `next start` returned HTTP 500 because
+  Clerk threw before the middleware callback could apply the intended keyless
+  path.
+- **Implementation:** `src/middleware.ts` now selects `NextResponse.next()`
+  when `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` is absent. Production remains
+  fail-closed through runtime configuration/instrumentation.
+- **Verification:** `pnpm build` passed with 45 generated pages. Built Preview
+  route sweep passed 8/8 HTTP 200; Chrome console had no errors; Lighthouse
+  Accessibility, Best Practices, and SEO were 100 on desktop and mobile;
+  performance trace LCP was 362 ms and CLS 0.00.
+- **Residual:** Agentic Browsing was 67 because the optional `llms.txt` audit
+  requires Markdown links and reports none. Keep FINAL-WEB-005 and final truth
+  gates open; do not change public metadata early. Human screen-reader,
+  authenticated paid/org, large-data, complete-route, and field-CWV evidence
+  remain open.
+- **Boundary:** No production/provider/database/payment/deployment write.
+  No backlog checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-preview-built-runtime-2026-10-08.md`.
+
 ## 2026-10-08 · CLI backend, Hunt, and distribution qualification
 
 - **Source:** isolated CLI worktree `feat/cli-backend-qualification` at

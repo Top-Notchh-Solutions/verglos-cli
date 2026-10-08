@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## Web keyless Preview middleware and built runtime · 2026-10-08
+
+Web PR #166 (`eab48ac`) fixes the keyless local/Preview Clerk middleware path.
+The previous wrapper invoked Clerk without a publishable key and returned HTTP
+500 before the callback could allow the intentionally unauthenticated Preview
+runtime. The conditional middleware now uses `NextResponse.next()` without a
+key; production remains protected by fail-closed runtime configuration.
+
+The exact built source passed `pnpm build` with 45 generated pages. Read-only
+Preview route checks returned 200 for the homepage, docs, verification,
+detectors, login, checkout, and `llms.txt`; Chrome reported no homepage
+console errors. Lighthouse Accessibility/Best Practices/SEO scored 100 on
+desktop and mobile; the local trace measured LCP 362 ms and CLS 0.00. The
+optional `llms.txt` audit remains open because its bare URL lines are not
+recognized as Markdown links. This is qualification progress, not acceptance:
+`QUAL-WEB-006`, `FINAL-WEB-005`, human screen-reader, authenticated paid/org,
+large-data, complete-route, and field-CWV gates remain open. No checkbox or
+production state changed. See
+`docs/shipping/evidence/qual-web-006-preview-built-runtime-2026-10-08.md`.
+
 ## CLI backend, Hunt, and distribution qualification · 2026-10-08
 
 At CLI source `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`, the isolated

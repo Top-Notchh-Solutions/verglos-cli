@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · Web keyless Preview runtime fix and built qualification
+
+Web PR #166 source `eab48ac` fixes a real keyless Preview/local runtime defect:
+the Clerk middleware wrapper previously threw before its callback when no
+publishable key was configured, returning HTTP 500 for every route. The fix
+selects a plain `NextResponse.next()` middleware when the key is absent;
+production still fails closed through runtime configuration validation.
+
+The rebuilt Preview-mode server passed a read-only public-route sweep (8/8
+HTTP 200), Chrome console check, and browser qualification. Lighthouse scored
+Accessibility/Best Practices/SEO 100 on desktop and mobile; the performance
+trace recorded LCP 362 ms and CLS 0.00. The only remaining audit failure is
+the optional `llms.txt` Markdown-link recommendation, held for FINAL-WEB-005
+truth/metadata work. No checkbox changed; backlog remains **218/62/280
+(77.9%)**. No production, database, payment, provider, or deployment write
+occurred.
+
+Evidence: `docs/shipping/evidence/qual-web-006-preview-built-runtime-2026-10-08.md`.
+
 ## 2026-10-08 · CLI backend, Hunt, and distribution qualification
 
 The isolated CLI worktree at `origin/main` `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`
