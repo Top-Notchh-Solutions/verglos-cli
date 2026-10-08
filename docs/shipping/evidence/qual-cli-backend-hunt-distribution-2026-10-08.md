@@ -36,6 +36,9 @@ individual external acceptance criteria are separately satisfied.
   packages using the same `supportedArchitectures` setup as the release
   workflow. The temporary setup was reverted in the worktree and no source
   change was made.
+- Hosted state was checked after fetching: CLI `origin/main` is still
+  `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`, there are no open CLI PRs, and
+  the post-merge Self-scan run `37798151936` completed successfully.
 
 ## Distribution blocker discovered
 
