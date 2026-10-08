@@ -110,6 +110,19 @@
 - **Evidence:**
   `docs/shipping/evidence/qual-web-006-checkout-keyboard-2026-10-08.md`.
 
+## 2026-10-08 · QUAL-WEB-006 authenticated account keyboard slice
+
+- **Runtime:** Existing authenticated Free `/account` page through Chrome
+  DevTools, read-only; account identifier was not recorded.
+- **Result:** Nine visible navigation links were keyboard-reachable in order,
+  each had an accessible name and visible focus outline, and the next Tab
+  reached the document body without an observed trap.
+- **Disposition:** Page-level evidence only. Paid organization, human
+  screen-reader, mobile-keyboard, large-data, and field-CWV evidence remain
+  open. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-account-keyboard-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 - **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;

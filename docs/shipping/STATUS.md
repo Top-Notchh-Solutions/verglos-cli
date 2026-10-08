@@ -98,6 +98,18 @@ checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
 (77.9%)**. Evidence:
 `docs/shipping/evidence/qual-web-006-checkout-keyboard-2026-10-08.md`.
 
+## 2026-10-08 · QUAL-WEB-006 authenticated account keyboard slice
+
+Read-only DevTools traversal of the authenticated Free `/account` page reached
+all nine visible navigation links in order; each exposed an accessible name
+and visible focus outline, and the next Tab reached the document body without
+an observed trap. The account identifier was not recorded and no link was
+activated. This remains page-level evidence only, not paid organization,
+screen-reader, mobile-keyboard, large-data, or field-CWV qualification. No
+checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-account-keyboard-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned
