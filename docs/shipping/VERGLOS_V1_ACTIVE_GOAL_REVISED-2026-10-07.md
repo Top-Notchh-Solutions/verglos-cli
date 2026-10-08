@@ -523,6 +523,26 @@ the remaining active shipping window.
     produce implementation plus acceptance evidence. If no CLI item is
     dependency-ready, move to the next independent Web/cross-repository item
     while preserving every backend blocker and count.
+  - The next independent Web qualification found a real keyless Preview
+    runtime defect: a production-built local Preview server returned HTTP 500
+    because Clerk was invoked without a publishable key before the existing
+    callback allowance could run. Web PR #166 source `eab48ac` selects a plain
+    `NextResponse.next()` path when the key is absent, passed the built
+    runtime/public-route qualification, and merged to Web `main` as
+    `ff0dd15`. Hosted GitGuardian, Vercel, Preview Comments, and
+    typecheck/schema checks all passed.
+  - The built Preview route sweep returned 200 for eight public routes;
+    Chrome reported no homepage console errors; Lighthouse Accessibility,
+    Best Practices, and SEO were 100 on desktop and mobile; the trace measured
+    LCP 362 ms and CLS 0.00. The optional `llms.txt` checker still reports
+    that bare URL lines are not Markdown links. This remains a FINAL-WEB-005
+    truth/metadata follow-up, not an accepted checkbox. Human screen-reader,
+    authenticated paid/org, large-data, complete-route, and field-CWV proof
+    remain open.
+  - The private runtime evidence and ledger reconciliation were committed as
+    `a5152aa` and `737f318`. No production, database, payment, provider,
+    deployment, or customer write occurred; the exact backlog remains
+    **218 checked / 62 unchecked / 280 total (77.9%)**.
   - The exact count remains **218 checked / 62 unchecked / 280 total (77.9%)**
     until a current private-tracker reconciliation proves otherwise.
 
