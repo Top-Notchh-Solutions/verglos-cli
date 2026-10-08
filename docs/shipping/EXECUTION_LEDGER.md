@@ -2,16 +2,17 @@
 
 ## 2026-10-08 · CLI private entitlement/cache persistence hardening
 
-- **Source:** CLI PR #85, head `2efbf42008e7c5c0a48bbe6f44ccf01b39d257f4`.
+- **Source:** CLI PR #85, head `2efbf42008e7c5c0a48bbe6f44ccf01b39d257f4`,
+  merged as `80fa930a8363aee103da8fa25fa37ccecffe77b0`.
 - **Implementation:** Credentials, score state, and entitlement capability
   state now use atomic private-file replacement; the cache directory is `0700`
   and private JSON files are `0600`; invalidation removes the capability cache.
 - **Verification:** Local typecheck and build passed; focused entitlement,
   organization-policy, and cache tests **34/34**; the complete CLI package
   test runner emitted passing results for every executed test file. Final-head
-  platform matrix `37805630513` and Verglos scan `37805630213` were pending at
-  capture time; the prior head's in-toto result is not treated as final-head
-  acceptance.
+  platform matrix `37805630513` passed all nine Ubuntu/macOS/Windows × Node
+  20/22/24 cells plus in-toto; Verglos scan `37805630213` passed. The PR was
+  merged after the complete hosted result.
 - **Boundary:** No production/provider/database/payment/deployment/registry/
   npm/customer/release write. No checkbox changed; backlog remains
   **218/62/280 (77.9%)**.

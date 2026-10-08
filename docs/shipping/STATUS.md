@@ -2,14 +2,15 @@
 
 ## 2026-10-08 · CLI private entitlement/cache persistence hardening
 
-CLI PR #85 (`2efbf42`) hardens credentials, score, and entitlement-capability
+CLI PR #85 (`2efbf42`) merged as `80fa930` and hardens credentials, score, and entitlement-capability
 cache persistence with atomic replacement, `0600` file modes, a `0700` cache
 directory, and cache invalidation by removal. New regression coverage verifies
 the private modes and readable post-write state. Local typecheck and build
 passed; focused entitlement, organization-policy, and cache tests passed
 **34/34**, and the complete CLI test runner emitted passing results for every
-test file executed. The final head triggered platform matrix `37805630513` and
-Verglos scan `37805630213`, both pending at capture time. No
+test file executed. Final-head platform matrix `37805630513` passed all nine
+Ubuntu/macOS/Windows × Node 20/22/24 cells plus in-toto; Verglos scan
+`37805630213` passed. No
 production, database, payment, provider, deployment, registry, npm, customer,
 or release write occurred. This is implementation/qualification progress only:
 no checkbox changed and the score remains **218/62/280 (77.9%)**.

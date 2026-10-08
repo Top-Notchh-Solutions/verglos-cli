@@ -5,6 +5,7 @@
 - Repository: `verglos-cli`
 - Source commit: `2efbf42008e7c5c0a48bbe6f44ccf01b39d257f4`
 - Pull request: #85
+- Merge commit: `80fa930a8363aee103da8fa25fa37ccecffe77b0`
 - Branch: `feat/cli-backend-qualification`
 - Reviewed files:
   - `packages/cli/src/credentials.ts`
@@ -29,9 +30,9 @@
 - The complete CLI package test runner emitted passing results for every test
   file it executed, including the existing Hunt, record, process-safety,
   private-runner, and whoami suites.
-- The final head triggered platform matrix run `37805630513` and Verglos
-  self-scan run `37805630213`; both were pending at capture time. The previous
-  head's in-toto check passed, but it is not treated as final-head acceptance.
+- Final-head platform matrix run `37805630513` passed all nine Ubuntu/macOS/
+  Windows × Node 20/22/24 cells and in-toto binding; Verglos self-scan
+  `37805630213` also passed. PR #85 merged after the complete hosted result.
 
 ## Boundary and disposition
 
