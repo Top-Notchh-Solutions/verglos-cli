@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · Preview database scope correction and safe redeploy
+
+- **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;
+  Production remains the only target. No value was read, printed, or changed.
+- **Redeploy:** Fresh Preview deployment
+  `dpl_5Wtw7ezHfiTzsTEKUneBmcSPnQ1f` from Web `1e2b392` completed `READY`.
+  Vercel build validation reported safe or payment-disabled; protected checkout
+  verification reported unavailable with no hosted methods and no Test Mode
+  banner.
+- **Limits:** Historical Preview deployment URLs remain and were not deleted or
+  inspected for frozen environment snapshots. This does not qualify isolated
+  Test Mode payment, and no provider/payment/database/Production write occurred.
+- **Disposition:** No checkbox changed. `PLAN-WEB-014/015` and R-041 remain
+  open; backlog remains **218/62/280 (77.9%)**.
+- **Evidence file:**
+  `docs/shipping/evidence/preview-database-scope-correction-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 - **Result:** With the existing authenticated browser session, the organization

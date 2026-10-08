@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · Preview database scope correction and safe redeploy
+
+Preview no longer receives the project `DATABASE_URL`; Production remains the
+only target. A fresh Preview deployment from Web `1e2b392` reached `READY`,
+passed the payment-disabled runtime guard, and its protected checkout reported
+unavailable with no hosted methods. Historical Preview deployments remain and
+were not deleted, so project-wide frozen-snapshot isolation is not claimed.
+No checkbox changed; `PLAN-WEB-014/015` and R-041 remain open. Backlog remains
+**218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/preview-database-scope-correction-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned
