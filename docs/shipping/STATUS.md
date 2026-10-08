@@ -24,6 +24,8 @@ server-catalog and cadence-bound plan selection, signed tenant/commercial
 notes, pending provider-subscription storage, owner-bound read-only status, and
 the hosted checkout UI. Typecheck, focused **43/43** tests, isolated route
 integration **2/2**, and the **45-page** production build passed.
+The configured full Web serial suite also passed **865 / 23 explicit skips /
+0 fail**.
 
 This is implementation progress, not a payment-gate pass. The provider test
 seam is not real Razorpay lifecycle evidence; isolated Test Mode still needs

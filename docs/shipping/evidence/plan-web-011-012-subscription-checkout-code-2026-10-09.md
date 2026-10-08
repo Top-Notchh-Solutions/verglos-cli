@@ -28,6 +28,7 @@ subscription lifecycle or Production reconciliation.
   provider was a test seam and the database target was the separate payment
   test database; the test created and removed only its own fixture rows. The
   status check returned `processing` until a captured webhook/ledger row exists.
+- Configured Web serial suite: **865 pass / 23 explicit skips / 0 fail**.
 - Next production build: passed; 45 generated pages and both new API routes
   were included.
 - `git diff --check`: passed.

@@ -11,7 +11,8 @@
   is accepted. Provider lifecycle and Production reconciliation remain
   outstanding.
 - **Verification:** Typecheck; focused **43/43**; isolated route integration
-  **2/2**; 45-page production build; and diff check passed.
+  **2/2**; configured serial suite **865 pass / 23 explicit skips / 0 fail**;
+  45-page production build; and diff check passed.
 - **Boundary:** Isolated payment test database and mocked provider seam only;
   no Production or hosted state write. Score remains **219/61/280 (78.2%)**.
 - **Evidence:**

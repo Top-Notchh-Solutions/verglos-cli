@@ -26,7 +26,8 @@
   and the recurring hosted checkout UI/configuration path.
 - **Verification:** Typecheck passed; focused parser/runtime/route-contract
   suite passed **43/43**; isolated database/provider route integration passed
-  **2/2**; the production build passed with **45 generated pages**, including
+  **2/2**; configured Web serial suite passed **865 / 23 explicit skips / 0
+  fail**; the production build passed with **45 generated pages**, including
   `create-subscription` and `subscription-status`; diff check passed.
 - **Disposition:** This removes the known code-side subscription-route gap,
   but does not close Gate 4 or any payment checkbox. Real Razorpay Test Mode
