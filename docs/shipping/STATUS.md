@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · current Production rollout — fail-closed code only
+
+The reviewed Web source `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` is now
+deployed to Production as Vercel deployment
+`dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg`, READY and aliased to `https://verglos.com`.
+The local Web serial suite passed **865 / 23 explicit skips / 0 fail**, local
+typecheck and the 45-page build passed, and the remote Production
+runtime-config/build checks passed.
+
+Read-only smoke passed for `/`, `/checkout`, and `/docs` (HTTP 200). The
+subscription-creation route returned 405 to unauthenticated GET, and the
+owner-bound subscription-status route returned 401 to unauthenticated GET.
+Production checkout contained no Test Mode or provider-plan marker and
+returned private no-store caching plus HSTS.
+
+This is a complete Production code-rollout slice, not a skipped or Preview-only
+deployment. It remains fail-closed: no Production plan IDs, database or
+migration writes, payment/provider writes, entitlement changes, account
+changes, or customer-data mutations occurred. Gate 4 and the payment
+backlog IDs remain open for the complete isolated provider lifecycle and
+provider/ledger/entitlement reconciliation. Score remains **219 checked / 61
+unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`.
+
 ## 2026-10-09 · current Preview and Production shipping position
 
 The Test Mode credential blocker is superseded: the pair in the local

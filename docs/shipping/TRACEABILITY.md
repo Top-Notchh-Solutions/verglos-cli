@@ -1,5 +1,29 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Production fail-closed code rollout
+
+- **Implementation/deployment:** Reviewed Web source
+  `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` is deployed to Production as
+  `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg`, READY and aliased to
+  `https://verglos.com`.
+- **Verification:** Local typecheck, the configured Web serial suite
+  (**865 pass / 23 explicit skips / 0 fail**), 45-page build, remote runtime
+  configuration validation, remote build, and read-only public smoke passed.
+  `/` `/checkout` `/docs` returned 200; the POST-only subscription-creation
+  route returned 405 to GET; the owner-bound status route returned 401 to an
+  unauthenticated GET.
+- **Mapped backlog:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
+  `PLAN-WEB-015` receive Production rollout evidence but remain open for the
+  complete provider lifecycle and provider/ledger/entitlement reconciliation.
+- **Boundary:** No Production plan IDs, database or migration writes,
+  payment/provider writes, entitlement changes, account changes, or
+  customer-data mutations. Test Mode and Preview values were not copied into
+  Production.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`.
+
 ## 2026-10-09 · Test Mode plan setup and Preview/Production rollout
 
 - **Implementation/deployment:** Web `54e6fd0` is deployed to Preview as

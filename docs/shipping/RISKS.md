@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## R-PROD-code-rollout-without-billing-activation · current 2026-10-09
+
+Production is now deployed from the reviewed Web source as
+`dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg`, READY and aliased to
+`https://verglos.com`. The code-only rollout and read-only smoke passed, but
+live billing/database activation, monitoring depth, rollback rehearsal, and
+provider/ledger/entitlement reconciliation remain separate residual risks.
+Production remains fail-closed: no plan IDs, database/migration writes,
+payment/provider writes, entitlement changes, account changes, or
+customer-data mutations occurred. Owner: Web/release operations. Evidence:
+`docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`.
+
 ## R-PLAN-WEB-011-015-subscription-lifecycle-and-production-activation · 2026-10-09
 
 The valid Razorpay Test Mode pair was accepted with HTTP 200 and canonical

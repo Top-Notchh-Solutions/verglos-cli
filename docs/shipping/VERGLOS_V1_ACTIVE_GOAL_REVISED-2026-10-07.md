@@ -145,14 +145,20 @@ Current source checkpoints:
 - Current Web implementation branch: `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd`.
   It adds the provider-subscription creation/status path and remains a code
   qualification batch until the isolated provider lifecycle is evidenced.
-- Preview deployment `dpl_CwmAKov2aoDJmyk9o5LqHS849TEJ` is READY at
-  `https://verglos-dhp0dkyma-anuragyadav20062002s-projects.vercel.app` with
-  isolated Preview configuration and canonical Test Mode plan IDs.
-- Production deployment `dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs` is READY and
-  aliased to `https://verglos.com`. Its 45-page build and runtime
-  configuration passed; Production plan IDs were deliberately not added, so
-  the new recurring subscription UI remains disabled there until live-mode
-  Production activation is separately preflighted.
+- The latest isolated Preview deployment is
+  `dpl_BE76hsDCU3aA2qsEfKiGUbPXJTVK`, READY at
+  `https://verglos-9gksldv34-anuragyadav20062002s-projects.vercel.app` with
+  isolated Preview configuration, canonical Test Mode plan IDs, the enabled
+  Test Mode webhook, and the rotated Preview test-auth secret.
+- The latest Production deployment is
+  `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg`, READY at
+  `https://verglos-og4wus4sa-anuragyadav20062002s-projects.vercel.app` and
+  aliased to `https://verglos.com`. The remote runtime-config check, 45-page
+  build, and read-only public smoke passed. Production plan IDs were
+  deliberately not added, so recurring billing remains fail-closed there.
+  This is a complete Production code-rollout slice; live billing, provider,
+  database, migration, entitlement, account, and customer-data activation
+  remain explicitly included deferred stages with their own preflights.
 - Razorpay Test Mode accepted the credentials in
   `verglos-web/.env.gates.testing`; no rotation was required. The account had
   no plans, so the canonical Pro plans were created in Test Mode only:
@@ -1013,6 +1019,10 @@ The latest Test Mode plan, Preview deployment, Production deployment, and
 Production smoke evidence is:
 
 `docs/shipping/evidence/plan-web-011-015-test-mode-plans-production-rollout-2026-10-09.md`
+
+The latest exact Production code-rollout evidence is:
+
+`docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`
 
 The latest rollback boundary evidence is:
 

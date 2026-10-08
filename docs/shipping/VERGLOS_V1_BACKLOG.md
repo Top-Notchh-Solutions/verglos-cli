@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## Production code-rollout evidence — 2026-10-09
+
+The reviewed Web source is deployed to Production as READY deployment
+`dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg`, aliased to `https://verglos.com`, after
+the local/remote build and read-only public smoke passed. This is real
+Production shipping progress and is included in the active goal. It does not
+close a checkbox: `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
+`PLAN-WEB-015` still require the complete provider lifecycle and
+provider/ledger/entitlement reconciliation. Production plan IDs, payment or
+database writes, migrations, entitlement changes, account changes, and
+customer-data mutations remain fail-closed until their own preflight exists.
+The live score is **219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`.
+
 ## Payment catalog/checkout abstraction accepted · 2026-10-09
 
 `PLAN-WEB-013` is accepted from the current implementation and qualification

@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Promote reviewed code to Production without activation writes
+
+- **Decision:** Deploy the reviewed Web source to Production as a complete
+  fail-closed code rollout. Production is included in the shipping objective;
+  the current operation does not activate billing or mutate hosted state.
+- **Evidence:** Deployment `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` is READY and
+  aliased to `https://verglos.com`; local and remote build/config checks passed;
+  public smoke passed for the documented routes and method/auth boundaries.
+- **Boundary:** Do not add Test Mode plan IDs, test credentials, Preview
+  database URLs, or test webhook secrets to Production. No Production
+  database, migration, payment/provider, entitlement, account, or
+  customer-data write occurred. Live activation remains an included later
+  stage requiring its own exact preflight, recovery, reconciliation, and
+  rollback/forward-fix decision.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`.
+
 ## 2026-10-09 · Make Production a first-class staged shipping track
 
 - **Decision:** Production work is included in the active goal. Ship reviewed

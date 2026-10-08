@@ -1,5 +1,34 @@
 # Verglos V1 release gates
 
+## Current Production code-rollout qualification · 2026-10-09
+
+Production deployment `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` reached READY and is
+aliased to `https://verglos.com` from reviewed Web source
+`54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd`. Local typecheck, the configured
+Web serial suite (**865 pass / 23 explicit skips / 0 fail**), the 45-page
+build, remote Production runtime-config validation, and remote build all
+passed.
+
+Read-only public smoke returned HTTP 200 for `/`, `/checkout`, and `/docs`;
+the POST-only subscription-creation route returned 405 to GET and the
+owner-bound subscription-status route returned 401 to unauthenticated GET.
+Production checkout exposed no Test Mode or provider-plan marker and retained
+private no-store caching plus HSTS.
+
+This qualifies the complete fail-closed Production code-rollout slice. It does
+not claim live billing or data activation. No Production plan IDs, database or
+migration writes, payment/provider writes, entitlement changes, account
+changes, or customer-data mutations occurred. Those are included deferred
+Production stages and remain blocked until their operation-specific preflight,
+backup/restore or recovery evidence, reconciliation, and rollback/forward-fix
+decision exist.
+
+Gate 4 remains open for the complete isolated provider subscription lifecycle
+and provider/ledger/entitlement reconciliation. Score remains **219 checked /
+61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`.
+
 ## Current reconciliation · 2026-10-09
 
 The earlier Test Mode credential blocker is superseded. The local isolated

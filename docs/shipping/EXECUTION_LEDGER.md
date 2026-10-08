@@ -1,5 +1,15 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Production fail-closed code rollout — dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg
+
+- **Source/preflight:** Reviewed Web source `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` was deployed after the configured Web serial suite passed **865 / 23 explicit skips / 0 fail**, local typecheck passed after the build completed, and the local production build generated 45 pages. The remote Vercel runtime-config check and build also passed.
+- **Deployment:** Production deployment `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` reached READY at `https://verglos-og4wus4sa-anuragyadav20062002s-projects.vercel.app` and was aliased to `https://verglos.com`.
+- **Read-only smoke:** `/`, `/checkout`, and `/docs` returned HTTP 200. `GET /api/razorpay/create-subscription` returned the expected 405 because it is POST-only. `GET /api/razorpay/subscription-status` returned 401 because it is owner-bound. Production checkout had no Test Mode or provider-plan marker; cache and HSTS headers were present.
+- **Boundary:** This was a code-only Production rollout. No Production plan IDs, database writes, migrations, payment/provider writes, entitlement changes, account changes, or customer-data mutations occurred. Test Mode credentials, plans, Preview database URLs, and test webhook secrets were not copied to Production.
+- **Disposition:** Production is fully included as an active shipping track. This entry qualifies the fail-closed code-rollout slice, not live billing/database activation or Gate 4. Those remain deferred until their operation-specific preflight, recovery evidence, reconciliation, and rollback/forward-fix decision exist.
+- **Current score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/production-code-rollout-dpl-HRbg2hLmHe2WTFxvupkewdw3u9hg-2026-10-09.md`.
+
 ## 2026-10-09 · Test Mode plans and full Preview/Production rollout
 
 - **Verification:** The credentials in the local `.env.gates.testing` file
