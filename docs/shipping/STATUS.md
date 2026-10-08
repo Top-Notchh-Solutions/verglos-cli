@@ -87,6 +87,17 @@ Supporting Web typecheck, Drizzle schema check, and 37-migration ordering
 checks also passed; the host used Node 26 while Web declares Node 22, recorded
 as a runtime limitation.
 
+## 2026-10-08 · QUAL-WEB-006 authenticated checkout keyboard slice
+
+Read-only DevTools focus traversal on the preserved authenticated production
+checkout reached Monthly, Annual, Continue to secure payment, and Back in a
+stable cycle. All four controls exposed names and non-zero browser focus
+outlines. This is a page-level keyboard slice only, not a human screen-reader,
+dashboard, mobile-keyboard, large-data, or field-CWV qualification. No
+checkbox changed; backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-checkout-keyboard-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned

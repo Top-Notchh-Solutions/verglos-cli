@@ -97,6 +97,19 @@
 - **Evidence:**
   `docs/shipping/evidence/payment-local-integration-2026-10-08.md`.
 
+## 2026-10-08 · QUAL-WEB-006 authenticated checkout keyboard slice
+
+- **Runtime:** Preserved authenticated Chrome checkout page, read-only DevTools
+  focus traversal; no control activation or network/state mutation.
+- **Result:** Monthly, Annual, Continue to secure payment, and Back were
+  reachable in a stable cycle; all had accessible names and non-zero browser
+  focus outlines.
+- **Disposition:** Page-level keyboard evidence only. Human screen-reader,
+  dashboard, mobile-keyboard, large-data, field-CWV, and final release gates
+  remain open. No checkbox changed; backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-checkout-keyboard-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 - **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;
