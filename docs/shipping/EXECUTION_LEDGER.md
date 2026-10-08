@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · QUAL-WEB-006 public docs audit finding
+
+- **Instrument:** Chrome DevTools CDP, read-only navigation to production
+  `/docs`.
+- **Result:** Lighthouse Accessibility, Best Practices, and SEO each scored
+  **100**; no console warnings/errors were observed. Agentic Browsing scored
+  **67** only because the optional `llms.txt` recommendation failed.
+- **Finding:** The docs plan table visibly contains legacy `$29/mo` and
+  `$199/mo` rows, conflicting with the verified INR Pro catalog. This is a
+  public truth defect for the held final pass, not a reason to invent Team,
+  Studio, or Enterprise pricing now.
+- **Disposition:** No public copy, price, database, provider, or deployment
+  mutation occurred. QUAL-WEB-006 and FINAL-WEB-001–008 remain open; backlog
+  remains **218/62/280 (77.9%)**. Evidence:
+  `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
+
 ## 2026-10-08 · DIST-006 bounded rollback/revocation rehearsal
 
 - **Source:** CLI PR #83 source `d2a94d0`, merged as `c1a2856`.

@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-08 · Hold public docs price correction for final truth pass
+
+- **Observation:** Read-only production `/docs` passed Accessibility, Best
+  Practices, and SEO at 100 with no console warnings/errors, but its plan table
+  still shows legacy `$29/mo` and `$199/mo` rows. Production currently exposes
+  the verified INR Pro catalog.
+- **Decision:** Record the contradiction and defer public copy/pricing edits
+  until the objective's truth-registry and final-public-pass gates authorize
+  them. Do not invent Team/Studio/Enterprise prices from the stale rows.
+- **Other finding:** Lighthouse's optional Agentic Browsing score was 67 due
+  only to the `llms.txt` recommended-H1 audit.
+- **Boundary:** No public copy, price, provider, database, or deployment write
+  occurred. FINAL-WEB and QUAL-WEB-006 remain open.
+
 ## 2026-10-08 · Keep rollback rehearsal local and history-preserving
 
 - **Decision:** Add a bounded `release rollback-rehearsal` command that

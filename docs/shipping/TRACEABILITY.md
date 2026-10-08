@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 / public docs truth finding · 2026-10-08
+
+Read-only Chrome CDP navigation to `/docs` produced Accessibility 100, Best
+Practices 100, and SEO 100 with no console warnings/errors. Agentic Browsing
+scored 67 solely because the optional `llms.txt` recommendation expects an H1.
+The same snapshot exposes legacy `$29/mo` and `$199/mo` plan rows, conflicting
+with the current verified INR Pro catalog. This is held for FINAL-WEB truth and
+pricing reconciliation; no public copy or price was changed. QUAL-WEB-006 and
+FINAL-WEB-001–008 remain open, and the count remains **218 checked / 62
+unchecked / 280 total (77.9%)**. See
+`docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
+
 ## DIST-006 rollback/revocation rehearsal · 2026-10-08
 
 CLI PR #83 source `d2a94d0` merged as `c1a2856`. The local command now

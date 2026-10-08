@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## QUAL-WEB-006 / held public truth finding · 2026-10-08
+
+Read-only Chrome qualification of `/docs` passed Accessibility 100, Best
+Practices 100, and SEO 100 with no console warnings/errors. The optional
+Agentic Browsing score was 67 because `llms.txt` lacks the recommended H1
+shape. The docs plan table still displays legacy `$29/mo` and `$199/mo` rows,
+which conflict with the current verified INR Pro catalog; this is recorded for
+the held final truth/pricing pass and was not changed prematurely. The count
+remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
 ## DIST-006 rollback/revocation rehearsal · 2026-10-08
 
 CLI PR #83 merged as `c1a2856`. A local bounded rehearsal now covers npm,
