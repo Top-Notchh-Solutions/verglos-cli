@@ -68,6 +68,14 @@ Current source checkpoints:
 - CLI PR #85 merged as `80fa930`.
 - CLI PR #86 merged as `fc452ba`.
 - CLI PR #87 merged as `8bea4be2fa18533eafd088122be769e942965626`.
+- Web PR #170 is open from `3779616` and is not yet accepted or counted. It
+  adds a fail-closed Preview guard requiring both a validated database URL and
+  an explicit `VERGLOS_PREVIEW_DATABASE_ISOLATED=true` marker whenever Preview
+  payment methods are configured. Merge only after the hosted checks are green
+  and the exact three-file diff is reviewed.
+- Web PR #169 is a duplicate of already merged Preview-auth work (its patch is
+  identical to PR #157 and its base is stale). Do not merge it or count it as
+  new shipping progress.
 
 The private tracker is authoritative for acceptance. The public repositories
 must never receive private tracker documents, customer data, credentials,
@@ -134,6 +142,17 @@ a changed input or a clear acceptance need:
 - The payment direction is now all enabled provider methods, not QR-only. QR
   may remain optional, but it cannot be the only payment route or lifecycle
   qualification path.
+- The current Web payment safety gap is explicit Preview database isolation:
+  test keys and an all-method catalog are not enough. Preview payment config
+  must fail closed without a disposable non-production database, TLS-safe URL,
+  and an independently verified webhook target. The marker is a safety
+  assertion, not proof by itself; migration history, schema, webhook routing,
+  and disposable-target verification remain required evidence.
+- The correct way to advance a backend item is a small, reviewable change on
+  the current upstream head with focused tests, the full required suite,
+  typecheck/build, exact diff review, hosted checks, and private evidence.
+  A stale worktree, duplicate PR, passing local tests on already-merged code,
+  or a green browser page does not create a new acceptance event.
 
 Private evidence for the latest CLI batch is:
 
@@ -529,14 +548,16 @@ At resume, perform this exact sequence:
 1. Read `brain`, repository instructions, and the live private backlog.
 2. Recompute the scoreboard and open-ID list.
 3. Inspect current CLI and Web branches/PRs and verify the recorded heads.
-4. Select the largest dependency-ready backend/CLI batch.
-5. Record IDs, criteria, evidence, write boundary, and machine-load plan.
-6. Implement and qualify the batch with focused and required tests.
-7. Inspect public/private boundaries and hosted PR state.
-8. Reconcile private evidence and report the exact score.
-9. If no executable CLI item remains, record the backend external-gate matrix
+4. Resolve or explicitly record the state of the current Web PR #170; do not
+   merge duplicate PR #169.
+5. Select the largest dependency-ready backend/CLI batch.
+6. Record IDs, criteria, evidence, write boundary, and machine-load plan.
+7. Implement and qualify the batch with focused and required tests.
+8. Inspect public/private boundaries and hosted PR state.
+9. Reconcile private evidence and report the exact score.
+10. If no executable CLI item remains, record the backend external-gate matrix
    once and move to the next independent Web/cross-repository item.
-10. Keep production, payment, customer, legal, and reviewer gates open until
+11. Keep production, payment, customer, legal, and reviewer gates open until
     their actual evidence exists.
 
 The next batch must not begin with a repeated unchanged suite, a speculative
