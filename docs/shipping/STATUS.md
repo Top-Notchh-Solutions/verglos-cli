@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · current Web payment/runtime qualification
+
+Exact Web `origin/main` `cedf199` was exercised against disposable PostgreSQL
+15 databases. The payment/ledger/webhook slice passed **31/31** with hosted
+method binding, capture/failure, refunds, replay/conflict claims, and
+failed-to-captured recovery. A separate fresh-database configured serial run
+passed **885/887** with **2 explicit skips and 0 failures**; the initial run
+against the migrated payment database exposed only expected fixture-setup table
+collisions and was not counted. Typecheck, Drizzle schema check, ordered
+**38-migration** check, 45-route build, and a local public route sweep all
+passed. This is isolated code/runtime evidence only; Razorpay provider
+lifecycle, credential rotation, and production reconciliation remain open.
+No production, provider, payment, deployment, entitlement, or customer write
+occurred. No checkbox changed; the score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-current-main-local-qualification-2026-10-08.md`.
+
 ## 2026-10-08 · CLI private-runner replay-state hardening
 
 CLI PR #86 (`cfb38c1`) merged as `fc452ba` after final-head hosted workflow

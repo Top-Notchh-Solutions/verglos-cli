@@ -1,5 +1,21 @@
 # Goal addendum — 2026-10-07
 
+## PLAN-WEB-014 current Web main local qualification · 2026-10-08
+
+Exact Web `origin/main` `cedf199855a5c4734122ae4849253156328cff1b` passed a
+focused payment/ledger/webhook run **31/31** against a disposable PostgreSQL
+15 database migrated through all **38** ordered migrations. A separate fresh
+database run of the configured serial suite passed **885/887**, with **2
+explicit skips and 0 failures**; typecheck, schema, migration ordering,
+45-route build, and local public-route checks also passed. The first serial
+attempt reused the migrated database and hit eight expected fixture table
+collisions, so it was discarded and rerun cleanly. This is code-side isolated
+qualification only. Razorpay account-enabled methods, provider lifecycle,
+credential rotation, and production reconciliation remain open; no checkbox
+changed and the backlog remains **218 checked / 62 unchecked / 280 total
+(77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-current-main-local-qualification-2026-10-08.md`.
+
 ## TEAM-CLI-002 CLI command-path progress · 2026-10-08
 
 The shared source-free CI check contract is now reachable through the CLI at

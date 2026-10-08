@@ -720,6 +720,22 @@ typecheck, schema, 38-migration ordering, and 45-page build pass. This is
 code-side contract evidence only; provider lifecycle, entitlement, and
 production reconciliation remain open. No checkbox changed.
 
+### PLAN-WEB-014 current Web main local qualification · 2026-10-08
+
+Exact Web `origin/main` `cedf199855a5c4734122ae4849253156328cff1b` passed the
+focused payment/ledger/webhook run **31/31** against disposable PostgreSQL 15
+with all **38** ordered migrations applied. A separate fresh database run of
+the configured serial suite passed **885/887 with 2 explicit skips and zero
+failures**; typecheck, schema, migration ordering, 45-route build, and local
+public-route checks passed. This corrects the test boundary exposed by the
+discarded first serial attempt, which reused the migrated payment database and
+hit eight expected fixture table collisions. It remains isolated synthetic
+code/runtime evidence: account-enabled provider methods, real Test Mode
+success/capture/refund/renewal/cancellation/webhook behavior, credential
+rotation, and production reconciliation are still open. No checkbox changed;
+the score remains **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-current-main-local-qualification-2026-10-08.md`.
+
 ### QUAL-WEB-006 evidence addendum · 2026-10-08 · production browser
 
 Read-only Chrome qualification observed `/` at LCP 249 ms / CLS 0.00 and

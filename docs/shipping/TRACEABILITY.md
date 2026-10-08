@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## PLAN-WEB-014 current Web main local qualification · 2026-10-08
+
+- **Backlog strengthened:** `PLAN-WEB-013/014`; no checkbox accepted because
+  account-enabled provider truth, live Test Mode lifecycle, credential
+  rotation, and production reconciliation remain unverified.
+- **Source:** Web `origin/main` `cedf199855a5c4734122ae4849253156328cff1b`.
+- **Evidence:** Focused payment/ledger/webhook tests **31/31**; fresh-database
+  serial **885/887 pass / 2 explicit skips / 0 fail**; typecheck/schema,
+  38-migration ordering, 45-route build, and local public-route sweep passed.
+- **Boundary:** Synthetic providers and disposable local databases only; no
+  production/provider/payment/deployment/entitlement/customer write. Exact
+  score remains **218/62/280 (77.9%)**.
+- **Evidence file:** `docs/shipping/evidence/plan-web-014-current-main-local-qualification-2026-10-08.md`.
+
 ## ENT-CLI-001 private-runner replay-state hardening · 2026-10-08
 
 - **Backlog strengthened:** `ENT-CLI-001`; no checkbox accepted because

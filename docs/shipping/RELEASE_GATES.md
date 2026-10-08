@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## PLAN-WEB-014 current Web main local qualification · 2026-10-08
+
+Exact Web `origin/main` `cedf199855a5c4734122ae4849253156328cff1b` passed the
+focused payment/ledger/webhook slice **31/31** against disposable PostgreSQL
+15 with all **38** ordered migrations applied. A fresh-database configured
+serial run passed **885/887**, with **2 explicit skips and 0 failures**;
+typecheck, schema, migration ordering, 45-route build, and local public-route
+checks passed. The first serial attempt reused the migrated payment database
+and produced eight expected fixture table-collision errors; the result was
+discarded and the suite rerun against a fresh database.
+
+This does not pass the payment release gate: no account-enabled provider method
+truth, real Razorpay lifecycle, credential rotation, or production
+reconciliation was exercised. No production/provider/payment/deployment or
+customer write occurred. `PLAN-WEB-013/014/015` remain open and the backlog
+remains **218/62/280 (77.9%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-current-main-local-qualification-2026-10-08.md`.
+
 ## CLI backend, Hunt, and distribution qualification · 2026-10-08
 
 The current CLI source passed the configured package tests, build, typecheck,

@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · current Web payment/runtime qualification
+
+- **Source:** Web `origin/main` `cedf199855a5c4734122ae4849253156328cff1b`.
+- **Verification:** Disposable PostgreSQL payment database migrated through
+  38 ordered migrations; focused payment/ledger/webhook tests **31/31**. A
+  separate fresh disposable database ran the configured serial suite at
+  **885/887 pass / 2 explicit skips / 0 fail**. Typecheck, schema check,
+  migration ordering, 45-route build, and local public-route sweep passed.
+- **Test-boundary correction:** The first serial attempt reused the migrated
+  payment database and hit eight expected table-creation collisions. A fresh
+  database rerun produced the counted result; no product failure is claimed.
+- **Boundary:** Synthetic providers and local-only databases only. No
+  production/provider/payment/deployment/entitlement/customer write; no
+  checkbox changed. Backlog remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-current-main-local-qualification-2026-10-08.md`.
+
 ## 2026-10-08 · CLI private-runner replay-state hardening
 
 - **Source:** CLI PR #86, head `cfb38c1f8019fa50ebbdcafade0c25c000792dd3`,
