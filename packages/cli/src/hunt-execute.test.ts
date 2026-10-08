@@ -9,6 +9,8 @@ import { executeHuntRecipe } from "./hunt-execute.js";
 import type { HuntRuntimeLoader } from "./hunt-runtime.js";
 
 const subjectId = `urn:verglos:subject:repository-tree:sha256:${"a".repeat(64)}`;
+// The Hunt runtime is intentionally not a public CLI dependency. The CLI test
+// task builds this private fixture explicitly before loading its dist output.
 const localHuntRuntime: HuntRuntimeLoader = () => import("../../hunt/dist/index.js");
 
 function recipe(inputs: Readonly<Record<string, string>> = { needle: "unsafe", value: "fixture contains unsafe" }): HuntRecipe {
