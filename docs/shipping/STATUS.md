@@ -33,6 +33,17 @@ open. No checkbox changed; backlog remains **218 checked / 62 unchecked / 280
 total (77.9%)**. Evidence:
 `docs/shipping/evidence/team-cli-001-focused-policy-client-2026-10-08.md`.
 
+## 2026-10-08 · Hunt adversarial local revalidation
+
+The current CLI commit `7d060b2` completed the pinned Docker adversarial
+suite: **60 passed / 1 explicit macOS namespace skip / 0 failed**, exit code
+0, using the pinned `postgres:15-alpine` digest. Docker had no running
+containers after the bounded run. This strengthens `HUNT-011` and
+`QUAL-CLI-004` only; trusted recipe provenance and independent security review
+remain absent. No checkbox changed; backlog remains **218 checked / 62
+unchecked / 280 total (77.9%)**. Evidence:
+`docs/shipping/evidence/hunt-adversarial-local-2026-10-08.md`.
+
 ## 2026-10-08 · PLAN-CLI-003 authenticated unknown-tenant probe
 
 Authenticated GET probes against a reserved unknown organization returned

@@ -27,6 +27,20 @@
 - **Evidence:**
   `docs/shipping/evidence/team-cli-001-focused-policy-client-2026-10-08.md`.
 
+## 2026-10-08 · Hunt adversarial local revalidation
+
+- **Batch:** `HUNT-011`, `QUAL-CLI-004`; exact CLI commit `7d060b2`.
+- **Run:** Pinned Docker suite on macOS arm64/Node `v26.4.0`, image
+  `postgres:15-alpine` at digest
+  `sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a`.
+- **Result:** 60 passed, 1 explicit Linux-namespace skip, 0 failed, exit 0;
+  Docker had no running containers after the run.
+- **Disposition:** Local/CI adversarial evidence only. Trusted recipe
+  provenance and independent review remain open; no checkbox changed and
+  backlog remains **218/62/280 (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-adversarial-local-2026-10-08.md`.
+
 ## 2026-10-08 · Preview database scope correction and safe redeploy
 
 - **Safety change:** Removed the `preview` target from Vercel `DATABASE_URL`;
