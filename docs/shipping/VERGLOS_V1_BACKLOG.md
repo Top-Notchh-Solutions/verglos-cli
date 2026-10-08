@@ -1,5 +1,12 @@
 # Verglos V1 master execution backlog
 
+## Web duplicate PR cleanup · 2026-10-09
+
+Web PR #169 was verified byte-for-byte identical to already merged PR #157,
+based on a stale branch, and closed without merge. It produced no new product
+change or acceptance evidence. No checkbox changed; the exact score remains
+**218 checked / 62 unchecked / 280 total (77.9%)**.
+
 ## PLAN-WEB-014 Preview database-isolation guard · 2026-10-09
 
 Web PR #170 (`3779616`) merged as `be4289f`. Preview payment configuration

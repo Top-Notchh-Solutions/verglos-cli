@@ -73,9 +73,9 @@ Current source checkpoints:
   and an explicit `VERGLOS_PREVIEW_DATABASE_ISOLATED=true` marker whenever
   Preview payment methods are configured. It is progress, not payment
   lifecycle acceptance, and does not change the backlog score.
-- Web PR #169 is a duplicate of already merged Preview-auth work (its patch is
-  identical to PR #157 and its base is stale). Do not merge it or count it as
-  new shipping progress.
+- Web PR #169 was a duplicate of already merged Preview-auth work (its patch
+  was identical to PR #157 and its base was stale) and is now closed. It was
+  not merged or counted as new shipping progress.
 
 The private tracker is authoritative for acceptance. The public repositories
 must never receive private tracker documents, customer data, credentials,
@@ -559,8 +559,8 @@ At resume, perform this exact sequence:
 1. Read `brain`, repository instructions, and the live private backlog.
 2. Recompute the scoreboard and open-ID list.
 3. Inspect current CLI and Web branches/PRs and verify the recorded heads.
-4. Verify the merged Web PR #170 head and record its acceptance boundary; do
-   not merge duplicate PR #169.
+4. Verify the merged Web PR #170 head and record its acceptance boundary; keep
+   duplicate PR #169 closed and do not count it as shipping progress.
 5. Select the largest dependency-ready backend/CLI batch.
 6. Record IDs, criteria, evidence, write boundary, and machine-load plan.
 7. Implement and qualify the batch with focused and required tests.
