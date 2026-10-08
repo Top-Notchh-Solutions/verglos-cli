@@ -15,6 +15,8 @@
 
 ## Results
 
+- **Source:** current Web branch exact commit
+  `1e2b392e3e4d15da0b9544931419f1088e24292f`.
 - Hosted route matrix: **22/22** completed without transport errors.
 - Valid forged tenant/project requests: **15 returned 403** with private
   `no-store` responses.
@@ -31,6 +33,12 @@ The matrix covered organization list/search/members/projects/usage/invitations,
 SCM installations, project evidence/exceptions/policies/evaluations/receipts/
 releases/download, repository policy, entitlement capabilities, license and
 monitor status, score history, and public receipt lookup.
+
+The corresponding current-source tenant/negative-boundary/public-receipt/
+entitlement test batch passed **24/24** with zero failures/skips. It covers
+modified-client plan/tenant/capability/usage/record fields, centralized
+authorization, no-store behavior, project/organization predicates, and public
+receipt authority rejection.
 
 ## Disposition
 

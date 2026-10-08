@@ -5,8 +5,9 @@
 Production GET-only negative probing covered **22/22** organization, project,
 repository, account, entitlement, and receipt routes. Valid forged tenant
 requests returned 403/private-no-store, malformed input returned
-400/private-no-store, and a forged public receipt returned 404/no-store. This
-does not replace authorized modified-CLI, paid fixture, or complete
+400/private-no-store, and a forged public receipt returned 404/no-store. The
+current Web source at `1e2b392` passed the matching route-boundary tests
+**24/24**. This does not replace authorized modified-CLI, paid fixture, or complete
 list/search/export runtime evidence. No checkbox changed. See
 `docs/shipping/evidence/plan-cli-003-hosted-forged-route-matrix-2026-10-08.md`.
 

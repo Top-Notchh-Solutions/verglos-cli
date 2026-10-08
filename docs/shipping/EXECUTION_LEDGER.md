@@ -9,7 +9,9 @@
   routes returned 15×403/private-no-store; account GETs returned 2×200/private-
   no-store; 3×401/private-no-store; malformed input 1×400/private-no-store;
   forged public receipt 1×404/no-store. A separate malformed-ID probe returned
-  4×400/private-no-store and 1×404/no-store.
+  4×400/private-no-store and 1×404/no-store. Current Web source commit
+  `1e2b392` passed the corresponding tenant/negative-boundary/public-receipt/
+  entitlement tests **24/24**.
 - **Safety:** No write method, payment, entitlement, database, deployment,
   provider, or account-state operation occurred.
 - **Disposition:** Partial `PLAN-CLI-003` evidence only. Modified-CLI and
