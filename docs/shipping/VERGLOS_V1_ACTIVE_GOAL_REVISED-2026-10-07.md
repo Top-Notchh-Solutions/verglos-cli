@@ -72,7 +72,7 @@ this file when resuming.
   - **218 checked / 62 unchecked / 280 total / 77.9%**;
   - CLI `origin/main`: `94829e1a4fc8e42dd67545e99cbe9a3a837b9482`;
   - Web PR #166 merged as `ff0dd15b3eada55eb898038bc66ea0c5394bead6`;
-  - latest private tracker reconciliation commit: `642ef7ad`;
+  - latest private tracker reconciliation commit: `2fb94d4`;
   - no open CLI or Web PR was present at this checkpoint;
   - no checkbox is accepted merely because implementation exists or tests are green.
 
