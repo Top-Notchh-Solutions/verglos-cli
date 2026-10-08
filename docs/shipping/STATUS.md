@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-08 · CLI private entitlement/cache persistence hardening
+
+CLI PR #85 (`ecc6a3a`) hardens credentials, score, and entitlement-capability
+cache persistence with atomic replacement, `0600` file modes, a `0700` cache
+directory, and cache invalidation by removal. New regression coverage verifies
+the private modes and readable post-write state. Local typecheck and build
+passed; focused entitlement, organization-policy, and cache tests passed
+**34/34**, and the complete CLI test runner emitted passing results for every
+test file executed. Hosted in-toto binding `37805219794` passed; its platform
+matrix and Verglos scan `37805219844` were pending at capture time. No
+production, database, payment, provider, deployment, registry, npm, customer,
+or release write occurred. This is implementation/qualification progress only:
+no checkbox changed and the score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/qual-cli-private-cache-hardening-2026-10-08.md`.
+
 ## 2026-10-08 · Web keyless Preview route sweep and receipt fallback
 
 Web PR #168 (`fb40f89`) merged to Web `main` as `cedf199` after all hosted

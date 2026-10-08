@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## CLI private entitlement/cache persistence hardening · 2026-10-08
+
+- **Backlog strengthened:** CLI plan/entitlement/runner persistence surfaces;
+  no checkbox accepted because hosted activation, provider, signer, legal,
+  reviewer, and operational gates remain separate requirements.
+- **Source:** CLI PR #85, head `ecc6a3ae848ad2c900565acac49243eb0c0f2d83`.
+- **Result:** Credential, score, and capability caches are atomically replaced
+  and privately permissioned; focused tests pass **34/34**, with local
+  typecheck/build and the complete package test runner passing.
+- **Hosted state:** in-toto `37805219794` passed; platform/Verglos runs were
+  pending when recorded.
+- **Boundary:** No production/provider/database/payment/deployment/registry/
+  npm/customer/release write. Exact score remains **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-cli-private-cache-hardening-2026-10-08.md`.
+
 ## Web keyless Preview route sweep and receipt fallback · 2026-10-08
 
 - **Backlog strengthened:** `QUAL-WEB-006`; no checkbox accepted because the

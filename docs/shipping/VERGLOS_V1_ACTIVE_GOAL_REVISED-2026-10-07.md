@@ -74,7 +74,7 @@ this file when resuming.
   - Web PR #166 merged as `ff0dd15b3eada55eb898038bc66ea0c5394bead6`;
   - Web PR #167 merged as `9841236c64a816fc90402cd90ff2bc93ce35382c`;
   - Web PR #168 merged as `cedf199855a5c4734122ae4849253156328cff1b`;
-  - latest private tracker goal/reconciliation commit: `994e717`;
+  - private tracker base checkpoint before this batch: `706b13b`;
   - no open CLI or Web PR was present at this checkpoint;
   - no checkbox is accepted merely because implementation exists or tests are green.
 
@@ -663,6 +663,13 @@ this file when resuming.
     are externally gated, record the exact owner/evidence gap once and continue
     with the next independent Web or cross-repository item; do not repeat an
     unchanged full suite or wait idle for production access.
+  - CLI PR #85 (`ecc6a3a`) is the current backend phase PR: it hardens
+    credentials, score, and entitlement-capability cache writes with atomic
+    replacement and private file modes, with focused 34/34 coverage plus local
+    typecheck/build. Hosted in-toto passed; the platform matrix and Verglos
+    scan were still pending when recorded. This is implementation progress,
+    not acceptance of any externally gated checkbox, and the score remains
+    **218 checked / 62 unchecked / 280 total (77.9%)**.
 
   COMPLETION STANDARD
 

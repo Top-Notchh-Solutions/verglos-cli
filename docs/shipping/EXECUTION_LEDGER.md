@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-08 · CLI private entitlement/cache persistence hardening
+
+- **Source:** CLI PR #85, head `ecc6a3ae848ad2c900565acac49243eb0c0f2d83`.
+- **Implementation:** Credentials, score state, and entitlement capability
+  state now use atomic private-file replacement; the cache directory is `0700`
+  and private JSON files are `0600`; invalidation removes the capability cache.
+- **Verification:** Local typecheck and build passed; focused entitlement,
+  organization-policy, and cache tests **34/34**; the complete CLI package
+  test runner emitted passing results for every executed test file. Hosted
+  in-toto run `37805219794` passed; platform cells and Verglos scan run
+  `37805219844` were pending at capture time.
+- **Boundary:** No production/provider/database/payment/deployment/registry/
+  npm/customer/release write. No checkbox changed; backlog remains
+  **218/62/280 (77.9%)**.
+- **Evidence:** `docs/shipping/evidence/qual-cli-private-cache-hardening-2026-10-08.md`.
+
 ## 2026-10-08 · Web keyless Preview route sweep and receipt fallback
 
 - **Source:** Web PR #168 source `fb40f89`, merged as
