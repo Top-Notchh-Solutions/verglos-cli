@@ -704,3 +704,10 @@ Default empty databases refuse with zero writes; explicit local rehearsal
 applies all 31 migrations. This does not establish production migration
 history, backup/restore, rollback, or authorization evidence. R-041 credential
 rotation and production migration preflight remain open; no checkbox changed.
+
+R-041 payment/Preview update (2026-10-08): Production deployment
+`dpl_EGSLPvvtccxcfK9BbPfmJzwEXY5Y` passed runtime-config validation and the
+live checkout smoke. Preview was kept fail-closed because its available
+environment used live-key metadata and no isolated test database was present;
+the temporary method-enabled Preview deployment was deleted. Test Mode
+qualification remains blocked on isolated database and test-credential setup.

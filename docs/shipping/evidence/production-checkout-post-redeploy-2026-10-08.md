@@ -2,7 +2,7 @@
 
 - **Target:** `https://verglos.com/checkout`
 - **Observed at:** `2026-10-08T07:15:21Z`
-- **Deployment evidence:** HTTP `200` from Vercel with the Next.js checkout route. The rendered surface contains the hosted-checkout implementation from Web main `f00b722`, including the server-projected method list.
+- **Deployment evidence:** Production deployment `dpl_EGSLPvvtccxcfK9BbPfmJzwEXY5Y` completed with `pnpm config:check` and the Next.js build passing, then aliased to `https://verglos.com`. The route returned HTTP `200` and rendered the hosted-checkout implementation from Web main `f00b722`, including the server-projected method list.
 - **Chrome DevTools:** The connected debug session rendered the Pro monthly INR catalog `₹2,809.43`, hosted methods `UPI · Cards · Netbanking · Wallets · EMI · Pay Later`, and the `Continue to secure payment` action.
 - **Network:** `/checkout` returned `200`; Razorpay checkout script and hosted assets loaded successfully. No order-creation request, payment, webhook, entitlement grant, or database write was made.
 - **Console:** No warning or error messages were present in the captured page console.

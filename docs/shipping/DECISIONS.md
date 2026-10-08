@@ -1125,3 +1125,14 @@ each observed method has lifecycle and reconciliation evidence.
   provider configuration, price, or migration write occurred. This does not
   close PLAN-WEB-011/012/013/014/015 or R-041. Evidence:
   `docs/shipping/evidence/production-checkout-post-redeploy-2026-10-08.md`.
+
+## Preview payment safety correction · 2026-10-08
+
+- **Decision:** Keep Preview payment checkout fail-closed until it has an
+  isolated non-production database and Razorpay Test Mode credentials.
+- **Evidence:** Preview deployment `dpl_CHmsR3ZVBsNDngm5D3z5Bb95h9tw` passed the
+  build and renders no approved payment methods. The temporary deployment that
+  rendered methods with `testMode: false` was deleted. Evidence:
+  `docs/shipping/evidence/preview-payment-safety-2026-10-08.md`.
+- **Boundary:** No test or live payment, order, webhook, entitlement, database,
+  provider, or production write occurred. PLAN-WEB-014 remains open.

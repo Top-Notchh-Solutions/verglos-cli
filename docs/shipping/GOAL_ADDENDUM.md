@@ -566,4 +566,14 @@ surface. No order, payment, webhook, entitlement, database, or provider write
 was made. PLAN-WEB-011/012/013/014/015 and R-041 remain open; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**. Evidence:
 `docs/shipping/evidence/production-checkout-post-redeploy-2026-10-08.md`.
+
+## Preview payment safety correction · 2026-10-08
+
+Preview was briefly tested with the documented method list, but its runtime
+reported `testMode: false` and the local Test Mode environment had no database
+URL. The temporary method-enabled Preview deployment was deleted; a fresh
+Preview deployment now fails closed with no approved methods. Test Mode
+qualification requires an isolated non-production database plus Test Mode
+Razorpay credentials and webhook secret. No payment or data write occurred.
+Evidence: `docs/shipping/evidence/preview-payment-safety-2026-10-08.md`.
 PR #149 exact head `aa34127` hardens the

@@ -4685,3 +4685,17 @@ App/org/webhook/cutover evidence remains open.
 - **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
   (77.9%)**. PLAN-WEB-011/012/013/014/015 and R-041 remain open.
 - **Evidence:** `docs/shipping/evidence/production-checkout-post-redeploy-2026-10-08.md`.
+
+# 2026-10-08 — Preview payment safety correction
+
+- **Scope:** Vercel Preview environment and deployments only.
+- **Result:** The Preview method variable was removed after a temporary
+  method-enabled deployment reported `testMode: false` and no isolated test
+  database was available. The temporary deployment was deleted. Fresh Preview
+  `dpl_CHmsR3ZVBsNDngm5D3z5Bb95h9tw` passed build and renders checkout
+  unavailable with no approved methods.
+- **Required next gate:** Isolated non-production database, Razorpay Test Mode
+  keys, and Preview webhook secret before payment lifecycle qualification.
+- **Backlog:** No accepted IDs; **218 checked / 62 unchecked / 280 total
+  (77.9%)**. PLAN-WEB-014/015 remain open.
+- **Evidence:** `docs/shipping/evidence/preview-payment-safety-2026-10-08.md`.
