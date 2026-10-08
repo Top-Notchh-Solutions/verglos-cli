@@ -191,6 +191,12 @@ a changed input or a clear acceptance need:
   YouTube-tab network chain was excluded as contaminated; no performance code
   change was justified by the 14.4 KiB legacy-JavaScript finding because its
   estimated FCP/LCP savings were zero.
+- The latest backend/hosted-readiness recheck found no open CLI PR or
+  dependency-ready CLI code gap. Production metadata has the payment catalog
+  and database variable; Preview has provider credential metadata but no
+  database URL, isolation marker, or enabled payment catalog. Owners and next
+  review points are recorded in the private backend gate evidence; no values
+  or environment writes occurred.
 
 Private evidence for the latest CLI batch is:
 

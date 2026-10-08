@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## Backend/CLI external-gate recheck · 2026-10-09
+
+- **Backlog strengthened:** HUNT/PLAN-CLI/TEAM-CLI/STUDIO-CLI/ENT-CLI and
+  LIC/DIST/QUAL external-gate rows; no checkbox accepted.
+- **Result:** No open CLI PR or dependency-ready CLI code gap. Production
+  metadata has the payment catalog and database variable; Preview has provider
+  credential metadata but no database URL, isolation marker, or enabled payment
+  catalog.
+- **Boundary:** Metadata-only read; no values, provider, database, payment,
+  deployment, release, or environment write. Score remains **218/62/280
+  (77.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/backend-external-gate-recheck-2026-10-09.md`.
+
 ## QUAL-WEB-006 authenticated account performance trace · 2026-10-09
 
 - **Backlog strengthened:** `QUAL-WEB-006`; no checkbox accepted.

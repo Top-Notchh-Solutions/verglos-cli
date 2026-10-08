@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## Backend/CLI external-gate recheck · 2026-10-09
+
+No open CLI PR or dependency-ready CLI code gap was found. Production metadata
+has the payment catalog and database variable; Preview has provider credential
+metadata but no database URL, isolation marker, or enabled payment catalog.
+Owners, missing evidence, and the next review point are recorded privately.
+No values or environment state were changed; no checkbox changed. The exact
+score remains **218 checked / 62 unchecked / 280 total (77.9%)**.
+
+Evidence: `docs/shipping/evidence/backend-external-gate-recheck-2026-10-09.md`.
+
 ## QUAL-WEB-006 authenticated account performance trace · 2026-10-09
 
 The fresh production `/account` lab trace measured LCP **784 ms**, TTFB **100

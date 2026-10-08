@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · backend/CLI external-gate recheck
+
+No open CLI PR or dependency-ready CLI code gap was found. Production Vercel
+metadata has the payment catalog and database variable; Preview still has no
+isolated database URL, isolation marker, or enabled payment catalog. This
+reconfirms the external blockers and next owners without changing any
+checkbox. Score remains **218/62/280 (77.9%)**.
+
+Evidence: `docs/shipping/evidence/backend-external-gate-recheck-2026-10-09.md`.
+
 ## 2026-10-09 · QUAL-WEB-006 authenticated account performance trace
 
 The fresh production account lab trace measured LCP **784 ms**, TTFB **100

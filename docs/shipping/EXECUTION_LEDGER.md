@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · backend/CLI external-gate recheck
+
+- **Verification:** No open CLI PR; Production Vercel metadata has the payment
+  catalog and database variable; Preview has provider credential metadata but
+  no database URL, isolation marker, or enabled payment catalog.
+- **Disposition:** Reconfirmed the external-gate matrix and owners; no
+  checkbox changed. Score remains **218/62/280 (77.9%)**.
+- **Boundary:** Metadata-only reads. No secret value, provider, database,
+  payment, deployment, release, or environment write.
+- **Evidence:**
+  `docs/shipping/evidence/backend-external-gate-recheck-2026-10-09.md`.
+
 ## 2026-10-09 · QUAL-WEB-006 authenticated account performance trace
 
 - **Verification:** Fresh read-only Chrome DevTools reload of production

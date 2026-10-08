@@ -18,6 +18,16 @@ checkbox is changed by this matrix.
   contracts, in-toto, and the Ubuntu/macOS/Windows × Node 20/22/24 matrix.
 - Score remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 
+## 2026-10-09 hosted-readiness recheck
+
+The recheck found no open CLI PR. Vercel metadata confirms Production has its
+payment-method catalog and database variable, while Preview has provider
+credential metadata but no `DATABASE_URL`, no exact
+`VERGLOS_PREVIEW_DATABASE_ISOLATED=true` marker, and no enabled payment-method
+catalog. No values were read or printed and no environment/provider/database/
+payment/deployment/release write occurred. The dated owner/review matrix is:
+`docs/shipping/evidence/backend-external-gate-recheck-2026-10-09.md`.
+
 ## Item-by-item disposition
 
 | ID | Code-side state | Missing acceptance artifact or operation | Owner role | Review point |
