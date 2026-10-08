@@ -8,6 +8,19 @@ Nothing in this document is speculative. Every entry cites the exact acceptance 
 
 ## Current-state reconciliation · 2026-10-08
 
+### Read-only browser refresh · 2026-10-09
+
+The approved Chrome DevTools transport is reachable again. A separate
+production checkout tab rendered UPI, Cards, Netbanking, Wallets, EMI, and Pay
+Later with no console messages; desktop/mobile Lighthouse Accessibility and
+Best Practices were 100/100. This updates the historical note that the browser
+transport was unavailable, but it does not change the provider boundary:
+production did not identify as Test Mode, and no order, payment, webhook,
+entitlement, database, provider, deployment, or account write occurred.
+`PLAN-WEB-011/012/013/014/015` and `QUAL-WEB-006` remain open. The missing
+meta description and `llms.txt` H1 are held for the final truth/metadata pass.
+Evidence: `docs/shipping/evidence/qual-web-006-plan-web-015-production-checkout-cdp-2026-10-09.md`.
+
 The historical entries below retain the evidence that existed when they were
 written. The following newer evidence supersedes any older statement that says
 the production deployment still lacks the hosted-method configuration:

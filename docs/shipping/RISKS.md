@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## R-QUAL-WEB-006-015-production-checkout · 2026-10-09
+
+The approved Chrome DevTools session now provides a clean read-only production
+checkout observation: UPI, Cards, Netbanking, Wallets, EMI, and Pay Later are
+rendered, and Accessibility/Best Practices are 100/100 on desktop and mobile.
+This reduces browser-transport uncertainty but does not establish provider
+account enablement or payment lifecycle. Production did not identify as Test
+Mode; SEO 80 is due to a missing meta description and Agentic Browsing 50 is
+due to the recommended `llms.txt` H1 being absent. Hold those metadata findings
+for the final truth pass. Owner: Web release qualification. No production or
+provider state changed. Evidence:
+`docs/shipping/evidence/qual-web-006-plan-web-015-production-checkout-cdp-2026-10-09.md`.
+
 ## R-DIST-LICENSE-2026-10-08
 
 The CI-equivalent cross-platform install makes the license inventory complete,
