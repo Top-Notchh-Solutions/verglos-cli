@@ -449,6 +449,20 @@
     write is implied by this phase. Local dependency installation, tests, builds,
     browser qualification, and PR operations remain separate from production
     acceptance.
+  - The CLI backend qualification batch at exact origin/main
+    `94829e1a4fc8e42dd67545e99cbe9a3a837b9482` passed the configured CLI tests,
+    build, typecheck, lint, ordinary Hunt tests 45/45, pinned Docker
+    adversarial evidence 60 pass / 1 explicit macOS namespace skip / 0 fail,
+    package/public-boundary audits, packed manifests, and release-script tests
+    12/12. `pnpm pack:public` passed after CI-equivalent all-platform optional
+    package provisioning.
+  - The strict release sequence correctly remains blocked by seven license
+    review entries: six BlueOak-1.0.0 transitive packages and the nested
+    `benchmark@1.0.0` conflict under `fast-uri@3.1.7`. A private package/source/
+    digest review packet was added; it is not legal approval. Hunt trusted
+    roots, recipe provenance, independent review, publishing identity, and
+    operational gates remain open. No public code, production, provider,
+    database, payment, deployment, registry, or npm state changed.
   - The exact count remains **218 checked / 62 unchecked / 280 total (77.9%)**
     until a current private-tracker reconciliation proves otherwise.
 
