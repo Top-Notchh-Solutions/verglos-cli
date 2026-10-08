@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Apply the provider-testable payment method set to Production
+
+- **Decision:** Apply the narrowed method set to Vercel Production:
+  `card,netbanking,wallet,emi`. The Production environment variable was
+  overridden and deployed through the normal Vercel production path.
+- **Evidence:** Production deployment `dpl_J1kkum4myNwMnt96EpCQwKtfvnB9`
+  reached READY, the `verglos.com` alias was updated, `/checkout` returned
+  HTTP 200, and the deployment response exposed only the four enabled method
+  names.
+- **Boundary:** No Production database, Razorpay key, webhook secret,
+  payment, entitlement, or customer record was changed. UPI/Pay Later remain
+  unavailable until an approved provider flow exists. PLAN-WEB-014 remains
+  open for the four-method lifecycle matrix and remaining lifecycle cases.
+  Count remains **218/62/280 (77.9%)**.
+
 ## 2026-10-09 · Narrow Preview payment methods to provider-testable set
 
 - **Decision:** Remove `upi`, `upi_qr`, and `paylater` from the isolated
@@ -13,8 +28,8 @@
 - **Evidence:** Preview variable and local `.env.test.local` now agree; the
   Preview deployment `dpl_H7cXmiGNqddiEvwY9Dgf8rWLeZEK` built successfully and
   its checkout response contains only the four enabled method names.
-- **Boundary:** Production configuration was not changed. PLAN-WEB-014
-  remains open for the four-method lifecycle matrix and renewal,
+- **Boundary:** Production was subsequently narrowed to the same four methods
+  and redeployed. PLAN-WEB-014 remains open for the four-method lifecycle matrix and renewal,
   cancellation, expiry, replay, timeout, refund, and tenant evidence. Count
   remains **218/62/280 (77.9%)**.
 

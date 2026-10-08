@@ -2,6 +2,14 @@
 
 Date: 2026-10-09
 
+## Current configuration note
+
+The lifecycle evidence below was captured against isolated Preview. After the
+provider limitation was confirmed, Production was also narrowed to the same
+provider-testable method set (`card,netbanking,wallet,emi`) and redeployed.
+No Production database, credential, webhook, payment, entitlement, or
+customer record changed.
+
 ## Scope
 
 This record extends the earlier method-display and failure-path probe with a
