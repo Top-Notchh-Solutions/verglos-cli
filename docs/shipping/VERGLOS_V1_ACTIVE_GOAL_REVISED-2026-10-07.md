@@ -20,11 +20,13 @@ owner and missing artifact, and continue the largest dependency-ready
 implementation batches without treating the gate list as a substitute for
 product shipping.
 
-The payment gate has one explicit product gap: the Web code has billing ledger
-and subscription-webhook handling, but no server route that creates a provider
-subscription. This is already tracked by `PLAN-WEB-011` and blocks the full
-renewal/cancellation/expiry portion of Gate 4. It must be implemented and
-qualified in isolated Preview/Test Mode before Gate 4 can be called complete.
+The payment gate had one explicit product gap: the Web code had billing ledger
+and subscription-webhook handling, but no server route that created a provider
+subscription. Web commit `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` now adds
+the catalog-bound creation route, pending binding, owner-bound status read,
+and hosted UI. It still must be qualified against real isolated Razorpay Test
+Mode subscription authorization and lifecycle events before Gate 4 can be
+called complete.
 
 Verglos is intended for local, CI, hosted, team, organization, and
 enterprise-shaped use cases. It is not a local-only product. Those claims are
@@ -87,6 +89,9 @@ Current source checkpoints:
 - Web PR #169 was a duplicate of already merged Preview-auth work (its patch
   was identical to PR #157 and its base was stale) and is now closed. It was
   not merged or counted as new shipping progress.
+- Current Web implementation branch: `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd`.
+  It adds the provider-subscription creation/status path and remains a code
+  qualification batch until the isolated provider lifecycle is evidenced.
 
 The private tracker is authoritative for acceptance. The public repositories
 must never receive private tracker documents, customer data, credentials,
@@ -300,10 +305,11 @@ a changed input or a clear acceptance need:
   failures for card/netbanking/wallet, and two processed full refunds. The
   isolated database suite passed hosted-order, renewal-ordering,
   cancellation-ordering, replay, out-of-order, tenant-binding, and partial/full
-  refund checks. Razorpay reported zero Test Mode subscriptions, and the Web
-  tree has no subscription-creation route; therefore provider subscription
-  renewal/cancellation/expiry is not claimed. Private evidence is
-  `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`.
+  refund checks. Razorpay reported zero Test Mode subscriptions. The Web
+  subscription-creation route is now implemented and isolated route
+  qualification passed **2/2**, but provider subscription
+  authorization/renewal/cancellation/expiry is not claimed. Private evidence
+  is `docs/shipping/evidence/plan-web-011-012-subscription-checkout-code-2026-10-09.md`.
 - A fresh local PostgreSQL 15 qualification of the merged Web tree applied all
   38 migrations and passed the authenticated account-deletion route E2E 1/1
   plus deletion-job lease/idempotency integration 1/1. This strengthens
@@ -363,13 +369,13 @@ evidence into a pass.
    are configured. Secrets must never be pasted into chat or public files.
 4. **Hosted payment matrix — partially complete and highest technical
    priority.** `PLAN-WEB-013` is closed. `PLAN-WEB-011`, `PLAN-WEB-012`,
-   `PLAN-WEB-014`, and `PLAN-WEB-015` remain open. The real gap is the missing
-   provider-subscription creation route: the code has subscription ledger and
-   webhook handling but no `create-subscription` API/UI flow. Implement that
-   route from the server catalog, bind signed notes and tenant identity, store
-   the provider subscription, then qualify renewal/cancellation/expiry in
-   isolated Test Mode. Do not use Production DB rows, `$1` pricing, or manual
-   entitlement edits as substitutes.
+   `PLAN-WEB-014`, and `PLAN-WEB-015` remain open. Web commit `54e6fd0` now
+   provides the provider-subscription creation/status API and UI, with signed
+   notes, tenant binding, and pending persistence. The next requirement is
+   real isolated Test Mode authorization, renewal/charge, failure,
+   cancellation/expiry, refund, replay, and entitlement reconciliation. Do
+   not use Production DB rows, `$1` pricing, or manual entitlement edits as
+   substitutes.
 5. **GitHub/GitLab integration — scope decision required, not an npm
    prerequisite.** Publishing the npm/CLI package does not require a GitHub
    or GitLab installation. The active Web SaaS scope is GitHub-first and has
@@ -407,8 +413,9 @@ do not move the release forward as though that gate were closed.
 
 The immediate technical sequence is:
 
-1. Implement and test the missing subscription-creation path for Gate 4.
-2. Re-run isolated Preview/Test Mode lifecycle evidence and reconcile the
+1. Run isolated Preview/Test Mode subscription lifecycle evidence against the
+   newly implemented creation/status path.
+2. Reconcile the
    payment ledger, provider records, and entitlement state.
 3. Close only the payment backlog IDs whose complete criteria are evidenced.
 4. Resolve the npm/CLI versus Web SCM scope decision before attempting Gate 5.
@@ -622,9 +629,10 @@ because this account exposed no usable test lifecycle for them. If the account
 later exposes an approved usable fixture, add it to the matrix before release;
 do not claim a method merely because Checkout renders its label.
 
-The same qualification must cover the provider-subscription path once the
-missing subscription-creation route is implemented. Webhook lifecycle code
-without a creation path is not a complete subscription product.
+The same qualification must cover the provider-subscription path now that the
+catalog-bound subscription-creation route and owner-bound status read are
+implemented. Webhook lifecycle code plus a route is still not acceptance until
+real isolated Test Mode lifecycle evidence exists.
 
 Qualify across:
 
@@ -831,9 +839,9 @@ At resume, perform this exact sequence:
 3. Read the nine-gate matrix in Section 4 and update the execution ledger with
    each gate's status, owner, missing artifact, next action, and write boundary.
 4. Execute the current technical gate and the largest independent backend/CLI
-   batch in the same shipping pass. The first implementation batch is the
-   missing subscription-creation route for `PLAN-WEB-011`, followed by
-   isolated Preview/Test Mode lifecycle evidence.
+   batch in the same shipping pass. The subscription-creation implementation
+   batch is complete in Web `54e6fd0`; continue with isolated Preview/Test
+   Mode lifecycle evidence for `PLAN-WEB-011`, followed by reconciliation.
 5. Inspect current CLI and Web branches/PRs and verify recorded heads. Keep
    duplicate PR #169 closed and do not count it as shipping progress.
 6. For each batch, record IDs, criteria, dependencies, evidence, production/

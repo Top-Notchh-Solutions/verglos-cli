@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · hosted subscription checkout code batch
+
+- **Implementation:** Web `54e6fd0` adds the server subscription-creation
+  route, pending subscription binding, owner-bound read-only status route,
+  hosted recurring checkout UI, strict response parsing, and plan-config
+  validation.
+- **Mapped backlog:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
+  `PLAN-WEB-015` are strengthened by code and isolated qualification, but none
+  is accepted. Provider lifecycle and Production reconciliation remain
+  outstanding.
+- **Verification:** Typecheck; focused **43/43**; isolated route integration
+  **2/2**; 45-page production build; and diff check passed.
+- **Boundary:** Isolated payment test database and mocked provider seam only;
+  no Production or hosted state write. Score remains **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-011-012-subscription-checkout-code-2026-10-09.md`.
+
 ## 2026-10-09 · whole-backlog document-system reconciliation
 
 - **Backlog accepted:** `PLAN-WEB-013`; current score is **219 checked / 61

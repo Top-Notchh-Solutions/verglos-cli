@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · hosted subscription checkout implementation
+
+Web commit `54e6fd0` now provides the missing recurring subscription path:
+server-catalog and cadence-bound plan selection, signed tenant/commercial
+notes, pending provider-subscription storage, owner-bound read-only status, and
+the hosted checkout UI. Typecheck, focused **43/43** tests, isolated route
+integration **2/2**, and the **45-page** production build passed.
+
+This is implementation progress, not a payment-gate pass. The provider test
+seam is not real Razorpay lifecycle evidence; isolated Test Mode still needs
+real plan IDs and authorization, renewal/charge, failed charge,
+cancellation/expiry, refund, replay, and entitlement reconciliation. No
+Production database, payment, provider, account, environment, or deployment
+write occurred. No checkbox changed. The exact score remains **219 checked / 61
+unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-011-012-subscription-checkout-code-2026-10-09.md`.
+
 ## 2026-10-09 · current whole-backlog shipping state
 
 The shipping system is larger than the gate list: the private backlog,

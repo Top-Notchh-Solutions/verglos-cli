@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## Hosted subscription route implementation · 2026-10-09
+
+Web commit `54e6fd0` implements the previously missing subscription-creation
+surface and its owner-bound status read. It is qualified with typecheck,
+focused **43/43** tests, isolated database/provider route integration **2/2**,
+and a **45-page** production build. The provider test seam does not substitute
+for real Razorpay Test Mode evidence.
+
+Gate 4 therefore remains open. The next acceptance artifact must use the
+isolated Test Mode account and record real authorization, subscription charge /
+renewal, failed charge, cancellation or expiry, refund, replay/out-of-order,
+and entitlement reconciliation results. No Production database, payment,
+provider, environment, or deployment write occurred; score remains
+**219/61/280 (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-011-012-subscription-checkout-code-2026-10-09.md`.
+
 ## Gate 4 scan result · 2026-10-09
 
 The provider-method catalog/checkout abstraction portion is accepted as
@@ -7,8 +24,8 @@ The provider-method catalog/checkout abstraction portion is accepted as
 `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and `PLAN-WEB-015` still require
 the stated provider lifecycle and Production-reconciliation evidence. The
 current evidence proves the supported four-method catalog and the isolated
-code-side lifecycle, but the Razorpay Test Mode account has no subscriptions,
-and the current Web surface has no subscription-creation route. No unsupported
+code-side lifecycle, but the Razorpay Test Mode account has no subscriptions.
+The subscription-creation route is now implemented, but no unsupported
 renewal/cancellation/expiry result is inferred. Score is **219/61/280
 (78.2%)**.
 

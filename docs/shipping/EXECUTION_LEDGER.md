@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · hosted subscription checkout implementation
+
+- **Implementation:** Web commit `54e6fd0` adds the catalog-bound
+  `POST /api/razorpay/create-subscription` route, signed provider notes,
+  pending subscription persistence, owner-bound read-only subscription status,
+  and the recurring hosted checkout UI/configuration path.
+- **Verification:** Typecheck passed; focused parser/runtime/route-contract
+  suite passed **43/43**; isolated database/provider route integration passed
+  **2/2**; the production build passed with **45 generated pages**, including
+  `create-subscription` and `subscription-status`; diff check passed.
+- **Disposition:** This removes the known code-side subscription-route gap,
+  but does not close Gate 4 or any payment checkbox. Real Razorpay Test Mode
+  subscription authorization, renewal, cancellation/expiry, refund, replay,
+  and entitlement reconciliation evidence is still required.
+- **Current score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no
+  checkbox changed.
+- **Boundary:** The database integration used only the isolated payment test
+  database and a provider test seam. No Production database, payment,
+  provider, entitlement, account, customer, environment, or deployment write
+  occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-011-012-subscription-checkout-code-2026-10-09.md`.
+
 ## 2026-10-09 · whole-backlog document-system reconciliation
 
 - **Control update:** The active goal now treats the gate matrix as one layer
