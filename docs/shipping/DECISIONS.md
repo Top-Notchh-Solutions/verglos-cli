@@ -12,6 +12,9 @@
 - **Reason:** The contrast defect is a concrete WCAG-affecting styling issue;
   metadata and pricing changes are explicitly reserved for the founder-
   authorized truth pass.
+- **Hosted result:** Web PR #164 merged as
+  `394d697903b7fa12ec537dc667f3807cdd75f588` after hosted typecheck/schema,
+  Vercel, Preview Comments, and GitGuardian passed.
 - **Boundary:** QUAL-WEB-006 remains open for human screen-reader, keyboard,
   paid/org data, large-data, responsive, field-CWV, and complete route
   evidence. No production state changed.

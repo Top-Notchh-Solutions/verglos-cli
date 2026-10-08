@@ -4,7 +4,8 @@
 
 - Repository: `Top-Notchh-Solutions/verglos-cli`
 - Source commit: `7c02099` (`test(cli): rehearse legacy entitlement activation fallback`)
-- Pull request: #84, hosted checks pending at capture time; no merge or release
+- Pull request: #84, hosted checks 10/11 green with Windows Node 20 still in
+  progress at this update; no merge or release
 - Change: a process-level `activate` journey uses a loopback HTTP fixture where
   v1 validation returns a synthetic Pro entitlement and v2 token issuance returns
   bounded HTTP 503. The CLI exits successfully and persists the legacy v1 token.
@@ -21,7 +22,9 @@
 
 - Repository: `anuragyadav-git/verglos-web`
 - Source commit: `4e00cc3` (`fix(web): improve docs CTA contrast`)
-- Pull request: #164, hosted typecheck/schema and Vercel pending at capture time
+- Pull request: #164 merged as `394d697903b7fa12ec537dc667f3807cdd75f588`
+  after hosted typecheck/schema, Vercel, Vercel Preview Comments, and
+  GitGuardian checks passed
 - Change: the `/docs/2.0.0` Hunt docs CTA now uses dark text on the existing
   accent background. Local Lighthouse navigation moved Accessibility from 96
   to 100 and left Best Practices at 100.

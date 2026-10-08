@@ -4,12 +4,14 @@
 
 CLI PR #84 (`7c02099`) adds process-level legacy-v1 activation fallback
 evidence with synthetic loopback responses; focused 63/63 and repository gates
-are green locally. Web PR #164 (`4e00cc3`) corrects the `/docs/2.0.0` CTA
-contrast defect; typecheck, truth-registry 25/25, serial 862 passed / 24
-environment-gated skips / 0 failures, 45-page build, and local post-fix
-Lighthouse Accessibility/Best Practices 100/100 pass. Production route sweep
-is read-only and found no console errors; metadata/llms findings remain held
-for the truth pass. Hosted PR checks were pending when recorded. This is
+are green locally, with 10/11 hosted checks green and Windows Node 20 still in
+progress. Web PR #164 (`4e00cc3`) corrects the `/docs/2.0.0` CTA contrast
+defect and merged as `394d697903b7fa12ec537dc667f3807cdd75f588` after hosted
+typecheck/schema, Vercel, Preview Comments, and GitGuardian passed; typecheck,
+truth-registry 25/25, serial 862 passed / 24 environment-gated skips / 0
+failures, 45-page build, and local post-fix Lighthouse Accessibility/Best
+Practices 100/100 pass. Production route sweep is read-only and found no
+console errors; metadata/llms findings remain held for the truth pass. This is
 partial evidence only: PLAN-CLI-004 and QUAL-WEB-006 remain unchecked, and no
 production/provider/database/payment/deployment state changed.
 

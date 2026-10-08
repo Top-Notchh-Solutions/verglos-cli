@@ -4,13 +4,13 @@
 
 CLI PR #84 (`7c02099`) adds a process-level legacy-v1 activation fallback
 rehearsal; focused 63/63, full CLI 12/12, typecheck 13/13, build 8/8, and lint
-5/5 pass locally. Web PR #164 (`4e00cc3`) fixes the `/docs/2.0.0` Hunt CTA
-contrast defect; Web typecheck, truth-registry 25/25, serial 862/24/0, and
-45-page production build pass. A read-only production route sweep found no
-console errors; remaining metadata/llms findings are held under the public
-truth freeze. Both PRs are awaiting hosted completion at this capture. No
-checkbox changed; count remains **218 checked / 62 unchecked / 280 total
-(77.9%)**.
+5/5 pass locally. Its hosted checks are 10/11 green with Windows Node 20 still
+in progress. Web PR #164 (`4e00cc3`) fixes the `/docs/2.0.0` Hunt CTA contrast
+defect and merged as `394d697903b7fa12ec537dc667f3807cdd75f588` after hosted
+typecheck/schema, Vercel, Preview Comments, and GitGuardian passed. A read-only
+production route sweep found no console errors; remaining metadata/llms
+findings are held under the public truth freeze. No checkbox changed; count
+remains **218 checked / 62 unchecked / 280 total (77.9%)**.
 
 Evidence: `docs/shipping/evidence/plan-cli-004-qual-web-006-batch-2026-10-08.md`.
 
