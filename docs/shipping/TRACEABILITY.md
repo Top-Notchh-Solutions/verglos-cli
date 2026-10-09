@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Web checkout terminal subscription lifecycle repair
+
+- **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`, and Gate 4.
+- **Implementation:** Web PR #171 commit `fa1b9f5` maps authenticated terminal
+  subscription states to a terminal checkout state, preserves paid/refunded
+  precedence, stops polling, and provides a restart action.
+- **Verification:** Focused tests **8/8**, typecheck, build, local serial
+  **896/872/24/0**, and hosted workflow `37866290786` passed.
+- **External limit:** This does not prove hosted Preview access, provider
+  authorization/capture, renewal/failure/expiry, refund, webhook delivery, or
+  complete provider/ledger/entitlement reconciliation. Production remained a
+  fail-closed code-only boundary with no write.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-checkout-terminal-lifecycle-2026-10-09.md`.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-09 · Gate 4 real Test Mode subscription cancellation slice
 
 - **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

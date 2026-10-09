@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Accept checkout terminal-state repair without closing Gate 4
+
+- **Decision:** Accept Web `fa1b9f5` as a code-side repair for terminal
+  subscription UX: cancelled/completed/expired/halted responses stop polling
+  and offer a bounded restart; paid/refunded responses remain authoritative.
+- **Reason:** The behavior was exposed by real isolated Test Mode cancellation
+  evidence. The fix prevents a customer from being trapped in an indefinite
+  processing state, while the actual hosted provider lifecycle remains
+  unqualified.
+- **Boundary:** Focused/local/hosted checks passed. No Production plan,
+  provider/payment, database/migration, entitlement, account, or customer-data
+  state changed.
+- **Disposition:** Keep Gate 4 and `PLAN-WEB-011`, `PLAN-WEB-012`,
+  `PLAN-WEB-014`, and `PLAN-WEB-015` open until hosted authorization/capture,
+  lifecycle delivery, and complete reconciliation evidence exists. Score
+  remains **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-checkout-terminal-lifecycle-2026-10-09.md`.
+
 ## 2026-10-09 · Accept the isolated Test Mode cancellation slice, keep Gate 4 open
 
 - **Decision:** Accept the real Test Mode subscription creation/cancellation,

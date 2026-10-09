@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Gate 4 checkout terminal-state repair
+
+Web PR #171 commit `fa1b9f5` closes a code-side lifecycle gap: checkout now
+stops polling and offers a restart for cancelled, completed, expired, or
+halted subscriptions instead of displaying indefinite processing. Focused
+tests, typecheck, build, the 896-test local serial suite, and hosted workflow
+`37866290786` passed.
+
+This does not close Gate 4. Hosted Preview is still blocked by Vercel
+Authentication, and real hosted provider authorization/capture, renewal,
+failure/expiry, refund, webhook delivery, and full ledger/entitlement
+reconciliation remain required. Production stays fail-closed with no
+plan/payment/database/entitlement write. Score remains **219/61/280 (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-checkout-terminal-lifecycle-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 progress — real Test Mode subscription cancellation
 
 The isolated Test Mode credential now passes read-only inventory (plans HTTP

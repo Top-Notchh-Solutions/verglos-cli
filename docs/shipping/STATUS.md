@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Web checkout terminal subscription lifecycle repair
+
+Web PR #171 commit `fa1b9f5` now stops checkout polling when the authenticated
+subscription status is terminal (`cancelled`, `completed`, `expired`, or
+`halted`), preserves paid/refunded precedence, and offers a bounded `Start
+again` action. Focused tests passed **8/8**; typecheck, production build, and
+the full local serial suite passed **896 total / 872 pass / 24 explicit skips /
+0 fail**. Hosted workflow `37866290786` passed all configured checks, including
+database/migration, build, security, dependency, SBOM, license, and secret
+guards.
+
+This repairs the customer-facing lifecycle surface but does not close Gate 4:
+hosted Preview remains protected by Vercel Authentication, and provider
+authorization/capture, renewal, provider-generated failure/expiry, refund,
+hosted webhook delivery, and complete reconciliation remain unproven.
+Production remains a fail-closed code-rollout boundary with no plan, payment,
+database, migration, entitlement, account, or customer-data write. Score
+remains **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-checkout-terminal-lifecycle-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 isolated Test Mode subscription cancellation slice
 
 The redacted Razorpay Test Mode recheck now returns HTTP 200 for plan and

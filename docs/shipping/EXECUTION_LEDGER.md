@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Web checkout terminal subscription lifecycle repair
+
+- **Mapped work:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`, and the Gate 4 checkout lifecycle surface.
+- **Implementation:** Web PR #171 commit `fa1b9f5` reconciles terminal
+  subscription states in the checkout client, stops indefinite polling, keeps
+  paid/refunded precedence, and exposes a bounded restart action.
+- **Verification:** Focused checkout tests **8/8**; typecheck and build passed;
+  local serial suite **896/872/24/0**; hosted workflow `37866290786` passed
+  all configured checks, including DB/migration, build, security, dependency,
+  SBOM, license, and secret checks.
+- **Boundary:** This is code qualification only. Preview application access
+  remains blocked by Vercel Authentication before the route. No Production
+  deploy, plan, provider/payment, database/migration, entitlement, account,
+  or customer-data write occurred.
+- **Disposition:** Gate 4 and its external provider/reconciliation evidence
+  remain open; PR #171 remains open and unmerged. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-checkout-terminal-lifecycle-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 isolated Test Mode subscription cancellation slice
 
 - **Mapped work:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

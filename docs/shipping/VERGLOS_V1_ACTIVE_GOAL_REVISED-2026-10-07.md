@@ -215,20 +215,19 @@ Current source checkpoints:
   activation remain explicitly included deferred stages with their own
   preflights.
 - The current Web qualification head is PR #171 at
-  `315a432cc84b3f6b2ece1e1794f8dd367a0a8237`. Its Preview-only auth fixture
-  repair passed hosted checks and its READY Preview deployment is recorded in
-  the latest evidence. Exact protected-browser smoke is pending. This
-  candidate is migration-bearing, so it is not a Production promotion
-  candidate until the current-backup RPO, migration, reconciliation, and
-  rollback preflight is complete.
+  `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5`. Its Preview-only auth fixture
+  repair and checkout terminal-lifecycle repair passed hosted checks. Exact
+  protected-browser smoke is still pending because Vercel Authentication
+  blocks the deployed Preview before the application route. This candidate is
+  migration-bearing, so it is not a Production promotion candidate until the
+  current-backup RPO, migration, reconciliation, and rollback preflight is
+  complete.
 - Earlier isolated Test Mode work recorded canonical Pro plans and first-charge
-  evidence, but the latest read-only recheck of Test Mode plan and subscription
-  inventory using `verglos-web/.env.gates.testing` returned HTTP 401. No
-  provider write was attempted after that response. The authorized operator
-  must correct or rotate the isolated Test Mode credential in the provider
-  dashboard before renewal, failure, expiry, refund, replay, and complete
-  provider/ledger/entitlement reconciliation can continue. No Production
-  provider state changed.
+  evidence, but one historical read-only recheck returned HTTP 401. No
+  provider write was attempted after that response. A later redacted recheck
+  using the current isolated configuration returned HTTP 200 for both plan and
+  subscription inventory; the historical 401 is superseded and does not
+  authorize Production activity.
 - A later redacted Test Mode recheck returned HTTP 200 for both plan and
   subscription inventory, and a local isolated Web qualification created real
   Test Mode subscriptions from the server catalog, cancelled them through the
@@ -238,6 +237,12 @@ Current source checkpoints:
   configuration, but it does not prove hosted Preview delivery or the full
   renewal/failure/expiry/refund/entitlement matrix. Evidence:
   `docs/shipping/evidence/plan-web-014-local-testmode-subscription-cancellation-2026-10-09.md`.
+
+Web commit `fa1b9f5` also repairs the customer-facing terminal lifecycle state:
+cancelled, completed, expired, and halted subscriptions stop polling and offer
+a restart, while paid/refunded responses retain precedence. This code-side
+qualification does not close the hosted provider gate. Evidence:
+`docs/shipping/evidence/plan-web-014-checkout-terminal-lifecycle-2026-10-09.md`.
 
 The private tracker is authoritative for acceptance. The public repositories
 must never receive private tracker documents, customer data, credentials,
@@ -544,9 +549,11 @@ evidence into a pass.
    real isolated Test Mode authorization, renewal/charge, failure,
    cancellation/expiry, refund, replay, and entitlement reconciliation. The
    valid Test Mode credentials and canonical plan objects are now available;
-   hosted lifecycle execution and reconciliation remain open. Do not use
-   Production DB rows, `$1` pricing, or manual entitlement edits as
-   substitutes.
+   hosted lifecycle execution and reconciliation remain open. Commit `fa1b9f5`
+   additionally repairs the checkout terminal-state UX so cancelled,
+   completed, expired, and halted subscriptions stop polling and offer a
+   restart, with paid/refunded precedence. Do not use Production DB rows,
+   `$1` pricing, or manual entitlement edits as substitutes.
 5. **GitHub/GitLab integration — scope decision required, not an npm
    prerequisite.** Publishing the npm/CLI package does not require a GitHub
    or GitLab installation. The active Web SaaS scope is GitHub-first and has
@@ -1153,6 +1160,10 @@ The latest invoice-only subscription-failure qualification and current
 Test Mode credential blocker evidence is:
 
 `docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`
+
+The latest checkout terminal-lifecycle repair evidence is:
+
+`docs/shipping/evidence/plan-web-014-checkout-terminal-lifecycle-2026-10-09.md`
 
 The latest Preview-auth and complete Production-boundary evidence is:
 

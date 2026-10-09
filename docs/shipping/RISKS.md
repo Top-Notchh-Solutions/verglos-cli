@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-checkout-terminal-state-repaired · 2026-10-09
+
+Web `fa1b9f5` removes the customer-facing risk that a cancelled, completed,
+expired, or halted subscription could remain in an indefinite processing state:
+the checkout now stops polling and offers a bounded restart, with paid/refunded
+precedence. Focused tests, local qualification, and hosted workflow checks
+passed. Residual risk is external Gate 4 coverage: Vercel Authentication still
+blocks deployed Preview before the route, and hosted provider authorization,
+renewal/failure/expiry/refund delivery, and complete ledger/entitlement
+reconciliation remain unproven. Owner: Web billing/release qualification.
+Production remains fail-closed with no plan, payment, database, migration,
+entitlement, account, or customer-data write. Evidence:
+`docs/shipping/evidence/plan-web-014-checkout-terminal-lifecycle-2026-10-09.md`.
+
 ## R-PLAN-WEB-014-preview-protection-hosted-lifecycle · 2026-10-09
 
 The isolated Razorpay Test Mode credential now passes read-only inventory and
