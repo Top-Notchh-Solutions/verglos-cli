@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Isolated Test Mode provider/application reconciliation
+
+- **Mapped IDs:** Gate 4; `PLAN-WEB-011/012/014/015`.
+- **Provider/application identity:** 34/34 subscription IDs matched in both
+  directions. Statuses were 5 active/active, 13 created/pending, 8
+  cancelled/cancelled, and 8 cancelled/pending.
+- **Payment identity:** 9/9 application payment IDs matched provider records;
+  24 additional provider payment records had no application projection and are
+  not counted as fulfillment.
+- **Acceptance boundary:** This is reconciliation progress only. Authorized
+  provider delivery/replay, complete lifecycle matrix, exactly-once behavior,
+  and final Production reconciliation remain open.
+- **Boundary:** Read-only provider/database queries; no manual row, provider,
+  payment, entitlement, account, customer, or Production write. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-provider-isolated-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Isolated Docker payment integration
 
 - **Mapped IDs:** `PLAN-WEB-011/012/014/015`; Gate 4.

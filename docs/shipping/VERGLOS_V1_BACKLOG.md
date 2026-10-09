@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Test Mode provider/application reconciliation addendum
+
+Read-only reconciliation matched all **34/34** Razorpay Test Mode
+subscription IDs to isolated application rows. Eight provider-cancelled rows
+remain application-pending, and 24 of 33 provider payment records have no
+application projection. This is concrete Gate 4 progress but not complete
+payment acceptance; no checkbox changed. Score remains **219 checked / 61
+unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-isolated-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 Docker payment integration qualification
 
 The isolated loopback PostgreSQL path applied the reviewed migrations after

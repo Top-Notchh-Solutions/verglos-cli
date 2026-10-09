@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 provider/application reconciliation narrowed
+
+Read-only Razorpay Test Mode reconciliation matched all **34/34** provider
+subscription IDs to isolated application rows. Five active and 13 created
+rows matched expected application projections; eight provider-cancelled rows
+remain application-pending. Provider payments numbered 33 while application
+payment rows numbered 9; all 9 application IDs matched, but 24 provider-only
+records are not application fulfillment evidence.
+
+Gate 4 remains open. The required next artifact is authorized
+provider-supported delivery/replay into the isolated webhook followed by
+read-only reconciliation, alongside the remaining renewal/failure/expiry,
+replay/order, timeout/retry, exactly-once, and final Production evidence. No
+manual repair or Production write occurred. Score remains **219/61/280
+(78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-isolated-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 local PostgreSQL integration addendum
 
 The disposable Docker PostgreSQL path applied the reviewed migrations and

@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Keep Gate 4 open after provider/application reconciliation
+
+- **Observation:** Read-only Razorpay Test Mode reconciliation matched all
+  34/34 provider subscription IDs to isolated application rows, but 8
+  provider-cancelled rows remain application-pending. Of 33 provider payment
+  records, 9 have application rows and 24 remain provider-only.
+- **Decision:** Record this as concrete reconciliation progress, not complete
+  payment acceptance. Do not manually repair rows, grant entitlements, or
+  claim provider-only payments as application fulfillment.
+- **Next owner/action:** Authorized provider operation must deliver or replay
+  the exact missing signed lifecycle events to the isolated webhook, followed
+  by fresh read-only reconciliation.
+- **Boundary:** No Production/provider/payment/database/entitlement/account/
+  customer write occurred. Score remains **219/61/280 (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-provider-isolated-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Preserve divergent local CLI and qualify upstream release head
 
 - **Decision:** Treat CLI `origin/main` `f5686b5c` as the release

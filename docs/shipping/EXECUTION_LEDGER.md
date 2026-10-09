@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Isolated Test Mode provider/application reconciliation
+
+- **Scope:** Read-only Razorpay Test Mode inventory compared with the isolated
+  Neon test database; no Production or manual-row mutation.
+- **Result:** 34/34 subscription provider IDs matched application rows in both
+  directions. Five provider `active` rows matched application `active`; 13
+  provider `created` rows matched application `pending`; 8 provider
+  `cancelled` rows matched application `cancelled`; and 8 provider
+  `cancelled` rows still matched application `pending`.
+- **Payment result:** 33 provider payment records versus 9 application rows;
+  all 9 application IDs matched, while 24 provider records had no application
+  projection and therefore do not count as fulfillment evidence.
+- **Disposition:** This narrows the hosted delivery/reconciliation gap but does
+  not close Gate 4 or `PLAN-WEB-011/012/014/015`. The next safe step is an
+  authorized provider-supported delivery/replay followed by fresh read-only
+  reconciliation; no manual repair or entitlement workaround is allowed.
+- **Boundary:** Read-only provider/database queries only. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-provider-isolated-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Isolated Docker payment integration qualification
 
 - **Fixture:** bounded local PostgreSQL 15 container on loopback only; the

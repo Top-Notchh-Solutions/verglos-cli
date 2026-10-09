@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Test Mode provider/application reconciliation narrowed
+
+Read-only reconciliation matched all **34/34** Razorpay Test Mode
+subscription IDs to isolated application rows. Five active and 13 created
+subscriptions projected to the expected application states; eight provider
+cancelled subscriptions are still pending in the application. Of 33 provider
+payments, 9 have application rows and 24 remain provider-only, so those rows
+cannot be counted as application fulfillment.
+
+This is concrete hosted progress, but Gate 4 and `PLAN-WEB-011/012/014/015`
+remain open for authorized delivery/replay, complete lifecycle coverage,
+exactly-once reconciliation, and Production acceptance. No manual repair,
+Production write, or entitlement workaround occurred. Score remains
+**219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-isolated-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Docker payment integration qualification complete
 
 The isolated local PostgreSQL path is now exercised rather than skipped:
