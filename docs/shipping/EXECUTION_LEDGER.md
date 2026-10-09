@@ -1,5 +1,32 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Production fail-closed checkout-origin repair
+
+- **Mapped work:** Production code-rollout stage; `PLAN-WEB-011`,
+  `PLAN-WEB-012`, `PLAN-WEB-014`, `PLAN-WEB-015`, and the Gate 4 checkout
+  qualification boundary.
+- **Implementation:** Web `7373c8b` replaces the brittle framework-URL Origin
+  comparison with a strict same-origin helper using exact Origin, Fetch
+  Metadata, and Referer/Host validation. Order, subscription, and QR routes
+  now accept the browser request shape observed in the debug profile while
+  retaining the foreign-origin rejection boundary.
+- **Verification:** Origin/route tests **11/11**, typecheck, 47-page build,
+  Vercel runtime-config/build, and read-only Production smoke passed.
+  Deployment `dpl_CLo119NrTffsbLiaNKw4Pq7K2kCA` is READY and aliased to
+  `https://verglos.com`.
+- **Hosted observation:** The isolated local Test Mode checkout reached the
+  real Razorpay hosted iframe and provider confirmation, then returned to
+  retry. It is recorded as a failed provider attempt, not as capture or full
+  lifecycle evidence.
+- **Boundary:** No Production plan IDs, Test Mode values, provider/payment
+  calls, migrations, database writes, entitlement changes, account changes,
+  or customer-data mutations. Production activation, monitoring,
+  reconciliation, and rollback remain required later stages.
+- **Disposition:** Production code rollout is qualified; Gate 4 is still open.
+  Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-code-rollout-7373c8b-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed code rollout from Web `fa1b9f5`
 
 - **Mapped work:** Production code-rollout stage; `PLAN-WEB-011`,

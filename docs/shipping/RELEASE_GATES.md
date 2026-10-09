@@ -1,5 +1,25 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Production code rollout repaired and redeployed
+
+Web `7373c8b` fixes the browser same-origin checkout boundary in the order,
+subscription, and QR creation routes. Origin/route tests **11/11**, typecheck,
+the 47-page build, Vercel Production runtime-config validation, and read-only
+smoke passed. Deployment `dpl_CLo119NrTffsbLiaNKw4Pq7K2kCA` is READY and
+aliased to `https://verglos.com`.
+
+This qualifies the current Production code-rollout stage only. Production
+plan/payment/database/migration/entitlement/account/customer activation,
+post-deploy monitoring, reconciliation, and rollback remain separate required
+stages. No Production write occurred. The isolated Test Mode hosted checkout
+reached provider confirmation but returned to retry, so that attempt is not
+successful Gate 4 evidence. Gate 4 remains open for the complete provider
+lifecycle and provider/ledger/entitlement matrix; Gates 6–9 remain open for
+their external reviewers, protected release/recovery, and final acceptance.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-code-rollout-7373c8b-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed code rollout qualified
 
 The reviewed Web source `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5` is

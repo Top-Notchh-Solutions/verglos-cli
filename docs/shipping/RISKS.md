@@ -1,5 +1,24 @@
 # Verglos V1 risk register
 
+## R-PROD-code-rollout-7373c8b-checkout-origin · 2026-10-09
+
+Web `7373c8b` repairs a false same-origin rejection that prevented the debug
+browser's legitimate checkout POST from reaching application authorization.
+The code is deployed as Vercel `dpl_CLo119NrTffsbLiaNKw4Pq7K2kCA`, READY and
+aliased to `https://verglos.com`; tests, build, runtime-config validation, and
+read-only smoke passed. The rollout remains fail-closed: no Production plan,
+provider/payment, migration, database, entitlement, account, or customer-data
+write occurred.
+
+Residual risk is explicit: one isolated Razorpay Test Mode card attempt reached
+provider confirmation but returned to retry, so it does not prove capture or
+close Gate 4. The complete provider lifecycle, current Production backup/RPO,
+migration, reconciliation, monitoring, rollback/forward-fix, independent
+AppSec, legal, protected release, and final acceptance gates remain open. The
+repository's `pnpm lint` script also needs an intentional ESLint migration;
+this batch did not create one interactively. Owner: Web/release operations.
+Evidence: `docs/shipping/evidence/production-code-rollout-7373c8b-2026-10-09.md`.
+
 ## R-PROD-code-rollout-fa1b9f5-without-activation · 2026-10-09
 
 Web `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5` is deployed as Vercel

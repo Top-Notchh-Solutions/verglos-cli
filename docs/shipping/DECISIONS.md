@@ -1,5 +1,29 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Deploy Web `7373c8b` to Production as fail-closed code only
+
+- **Decision:** Ship the checkout-origin repair to Production because it fixes
+  a reproducible browser integration defect, while keeping Production billing
+  and persistent writes disabled.
+- **Reason:** The browser debug profile reached the checkout page but its
+  same-origin POST omitted `Origin`; Next reconstructed the request URL with a
+  different loopback host, causing a false 403. The new helper is covered by
+  focused tests and preserves foreign-origin rejection.
+- **Evidence:** Deployment `dpl_CLo119NrTffsbLiaNKw4Pq7K2kCA` is READY and
+  aliased to `https://verglos.com`; runtime-config/build validation and
+  read-only smoke passed.
+- **Boundary:** No Production plan IDs, Test Mode values, provider/payment
+  calls, migrations, database writes, entitlement changes, account changes,
+  or customer-data mutations. Do not interpret the code rollout as billing
+  activation.
+- **Disposition:** Keep Gate 4 and the Production activation,
+  current-backup/RPO, migration, reconciliation, monitoring, rollback,
+  reviewer, legal, protected-release, and final-acceptance stages open. An
+  isolated Test Mode card attempt returned to provider retry and is not
+  counted as success. Score remains **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/production-code-rollout-7373c8b-2026-10-09.md`.
+
 ## 2026-10-09 · Deploy Web `fa1b9f5` to Production as fail-closed code only
 
 - **Decision:** Include and execute the Production code-rollout stage now,

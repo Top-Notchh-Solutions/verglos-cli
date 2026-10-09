@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Web checkout-origin repair and Production rollout
+
+- **Mapped IDs:** Production code-rollout stage; `PLAN-WEB-011`,
+  `PLAN-WEB-012`, `PLAN-WEB-014`, `PLAN-WEB-015`, and Gate 4 hosted checkout.
+- **Source/deployment:** Web `7373c8b` deployed as Vercel
+  `dpl_CLo119NrTffsbLiaNKw4Pq7K2kCA`, READY and aliased to
+  `https://verglos.com`.
+- **Qualification:** Origin/route tests **11/11**, typecheck, production
+  build, Vercel runtime-config validation, and read-only smoke passed; `/` and
+  `/checkout` returned 200.
+- **Observed limit:** The isolated Test Mode hosted checkout reached provider
+  confirmation but returned to retry. It is failed provider evidence, not a
+  successful capture or Gate 4 close.
+- **Production boundary:** No Production plan IDs, Test Mode values,
+  provider/payment calls, migrations, database writes, entitlement changes,
+  account changes, or customer-data mutations. Production activation,
+  monitoring, reconciliation, and rollback remain mapped required stages.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-code-rollout-7373c8b-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed code rollout from Web `fa1b9f5`
 
 - **Mapped IDs:** Production code-rollout stage; `PLAN-WEB-011`,

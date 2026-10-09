@@ -1,5 +1,35 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Production fail-closed rollout of Web `7373c8b`
+
+Web commit `7373c8b` repairs a real checkout defect: browser POST requests
+without an explicit `Origin` header were being rejected because the framework
+reconstructed `request.url` with a different loopback host than the browser's
+trusted Host/Referer. The new strict same-origin helper preserves rejection of
+foreign requests while accepting exact browser same-origin metadata and the
+safe local proxy case. Order, subscription, and QR creation routes use it.
+
+Focused origin/route tests **11/11**, typecheck, and the 47-page production
+build passed. Production deployment `dpl_CLo119NrTffsbLiaNKw4Pq7K2kCA` is
+READY and aliased to `https://verglos.com`; read-only smoke returned 200 for
+`/` and `/checkout`. This is the complete Production code-rollout slice for
+this batch, not billing activation.
+
+An isolated local Razorpay Test Mode checkout reached the real hosted iframe
+and the provider confirmation step, then returned to the provider retry state.
+That attempt is recorded as failed provider evidence and does not close Gate
+4. No Production plan IDs, Test Mode values, provider/payment calls,
+migrations, database writes, entitlement changes, account changes, or customer
+mutations occurred. The full Production activation, monitoring,
+reconciliation, and rollback stages remain in scope. The `pnpm lint` script is
+still an external repository setup gap because `next lint` prompts for a new
+ESLint configuration; no unrelated lint configuration was created.
+
+Score remains **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+changed.
+
+Evidence: `docs/shipping/evidence/production-code-rollout-7373c8b-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed code rollout from Web `fa1b9f5`
 
 The reviewed Web source `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5` is now
