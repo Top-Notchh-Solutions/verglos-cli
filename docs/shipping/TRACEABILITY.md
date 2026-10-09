@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · CLI backend queue audit
+
+- **Source:** CLI `origin/main` `f5686b5c`; implementation PRs #79–#88 are
+  merged; no open CLI implementation PR remains.
+- **Open acceptance classes:** trusted publisher/signing activation,
+  protected npm publication, hosted tenant/SCM operation, legal/licensing,
+  independent Hunt review, customer/recipient acceptance, and final release
+  qualification.
+- **Decision:** Continue Web payment/Production qualification and external
+  packet preparation; do not create a duplicate CLI PR or claim acceptance
+  from the empty PR queue.
+- **Boundary:** read-only Git/PR inspection; no state-changing operation.
+  Score remains **219/61/280 (78.2%)**.
+- **Evidence:** `docs/shipping/evidence/cli-backend-queue-audit-2026-10-10.md`.
+
 ## 2026-10-10 · CLI release-head divergence
 
 - **Surface:** CLI release qualification and all dependent distribution/

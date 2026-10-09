@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · CLI implementation queue audited
+
+Authoritative CLI `origin/main` is `f5686b5c`; the current implementation PR
+sequence through #88 is merged and no open CLI PR remains to implement. The
+unchecked CLI rows are held by trusted publishing/signing, hosted tenant or
+SCM evidence, legal/licensing, independent Hunt review, customer acceptance,
+or final release qualification. Web payment qualification remains an
+independent active workstream.
+
+No state-changing operation occurred. Score remains **219/61/280 (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/cli-backend-queue-audit-2026-10-10.md`.
+
 ## 2026-10-10 · CLI release-head divergence recorded
 
 The local CLI `main` (`d0a3b217`) is not the release head: it is 73 commits

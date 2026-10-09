@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · CLI backend queue audit
+
+- **Upstream:** CLI `origin/main` is `f5686b5c`; the current implementation
+  sequence through PR #88 is merged and no open CLI PR needs implementation
+  pickup.
+- **Disposition:** The remaining CLI unchecked items require trusted signing/
+  publishing, hosted tenant/SCM operation, legal/licensing, independent Hunt
+  review, customer/recipient acceptance, or final release evidence. Do not
+  create a duplicate implementation PR or close a checkbox from queue
+  emptiness.
+- **Boundary:** Read-only Git/PR inspection only; no source, branch, package,
+  deployment, provider, database, payment, entitlement, account, customer,
+  or release state changed.
+- **Evidence:** `docs/shipping/evidence/cli-backend-queue-audit-2026-10-10.md`.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-10 · CLI source-of-truth divergence audit
 
 - **Finding:** Public CLI local `main` `d0a3b217` is 73 commits ahead and 883

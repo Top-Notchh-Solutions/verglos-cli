@@ -1,5 +1,22 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-10 · CLI backend queue audit
+
+The authoritative CLI `origin/main` is `f5686b5c`; implementation PRs through
+#88 are merged and no open CLI implementation PR remains. The remaining CLI
+checkboxes require real external artifacts: trusted npm signing/publishing,
+legal/licensing decisions, independent Hunt review, hosted tenant/SCM
+operations, customer/recipient acceptance, or final release qualification.
+
+Owner/action: release maintainer coordinates trusted publishing; authorized
+legal/company reviewer handles licensing; independent AppSec reviewer handles
+Hunt; authorized organization/customer owners handle hosted and POC evidence.
+Review before the next release-candidate decision on **2026-10-10**. Do not
+create a duplicate PR or fabricate any approval. Web payment qualification
+continues independently.
+
+Evidence: `docs/shipping/evidence/cli-backend-queue-audit-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · Partial refund qualification
 
 A second isolated captured subscription payment passed provider identity
