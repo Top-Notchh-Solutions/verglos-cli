@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Production fail-closed environment audit
+
+- **Scope:** Read-only recheck of the live Production deployment and Vercel
+  environment-name boundary after the Production rollout request.
+- **Observed:** `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` remains `READY` and aliased to
+  `https://verglos.com`. Production has no recurring Razorpay plan-ID or
+  subscription-count variable configured. Existing method and one-time billing
+  configuration names remain present; their values were not revealed.
+- **Boundary:** No environment value was read, changed, or copied; no deploy,
+  provider call, database/migration write, payment write, entitlement change,
+  account change, or customer-data mutation occurred.
+- **Disposition:** Production is included and verified for the current
+  fail-closed code-rollout stage. Billing/database activation, full Gate 4
+  lifecycle reconciliation, monitoring depth, and rollback rehearsal remain
+  separate operation-specific stages. Score remains **219 checked / 61
+  unchecked / 280 total (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-fail-closed-env-audit-2026-10-09.md`.
+
 ## 2026-10-09 · Prepare legal/licensing review addendum
 
 - **Mapped IDs:** `LIC-002`, `LIC-003`, `DIST-001`, `DIST-002`, `DIST-003`,

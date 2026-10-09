@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Production fail-closed environment audit
+
+The live read-only Vercel check confirms Production deployment
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` is still READY and aliased to
+`https://verglos.com`. The Production environment-name listing contains no
+recurring Razorpay plan-ID or subscription-count variable. Existing method and
+one-time billing configuration names remain present, but no values were
+revealed or copied.
+
+This confirms the current Production code-rollout boundary: no deploy,
+provider call, database/migration write, payment write, entitlement change,
+account change, or customer-data mutation occurred during this audit. The
+active goal still includes the later Production activation, monitoring,
+reconciliation, and rollback stages. Score remains **219 checked / 61
+unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-fail-closed-env-audit-2026-10-09.md`.
+
 ## 2026-10-09 · Legal/licensing review packet prepared
 
 Private addendum

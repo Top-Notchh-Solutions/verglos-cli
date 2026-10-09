@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Production fail-closed environment audit
+
+The read-only Vercel audit confirms Production deployment
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` remains READY at `https://verglos.com` and
+has no recurring Razorpay plan-ID or subscription-count variable configured.
+No environment values were revealed. No deployment, provider, database,
+migration, payment, entitlement, account, or customer-data write occurred.
+
+This keeps Production accepted for the current fail-closed code-rollout
+stage. It does not close Gate 4 or the later billing/database activation,
+monitoring, reconciliation, and rollback stages. Score remains
+**219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-fail-closed-env-audit-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 7 preparation — legal/licensing addendum
 
 The private legal review addendum now covers Trivy image/release/NOTICE use,
