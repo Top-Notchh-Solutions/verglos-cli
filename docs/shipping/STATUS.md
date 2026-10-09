@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Current Production fail-closed audit
+
+The current Production deployment is READY at `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`
+and is sourced from Web `6f932d4`. Metadata-only environment inspection found
+no recurring Razorpay plan-ID or subscription-count variable; no environment
+values were read. Public `/`, `/checkout`, and `/docs` returned 200, the
+unauthenticated subscription GET returned 405, and public HTML exposed no
+provider-key, Test-Mode, session-token, or database-URL marker.
+
+This confirms Production is actively included at the fail-closed code-rollout
+stage. It does not qualify payment lifecycle, Production database/migration or
+entitlement activation, reconciliation, monitoring, or rollback. No Production
+plan/provider/payment, database/migration, entitlement, account, or
+customer-data write occurred. Score remains **219 checked / 61 unchecked /
+280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-current-fail-closed-audit-2026-10-09.md`.
+
 ## 2026-10-09 · Production anonymous modified-client probe
 
 Production read-only probes with forged plan values remained server-owned Free

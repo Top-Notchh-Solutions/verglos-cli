@@ -1343,6 +1343,10 @@ The latest Vercel configuration evidence is:
 
 `docs/shipping/evidence/vercel-production-preview-config-audit-2026-10-09.md`
 
+The latest current Production fail-closed audit is:
+
+`docs/shipping/evidence/production-current-fail-closed-audit-2026-10-09.md`
+
 The latest account-deletion qualification evidence is:
 
 `docs/shipping/evidence/qual-web-005-deletion-route-e2e-2026-10-09.md`

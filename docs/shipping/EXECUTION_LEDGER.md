@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Current Production fail-closed audit
+
+- **Mapped work:** Production audit, code-rollout boundary, and recurring
+  billing activation boundary.
+- **Deployment:** Vercel Production `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` is
+  `READY` and its metadata identifies Web `6f932d4`.
+- **Read-only checks:** `/`, `/checkout`, and `/docs` returned HTTP 200;
+  unauthenticated subscription GET returned 405; public HTML contained no
+  provider-key, Test-Mode, session-token, or database-URL marker.
+- **Configuration metadata:** The Production variable-name listing had no
+  `RAZORPAY_PRO_MONTHLY_PLAN_ID`, `RAZORPAY_PRO_ANNUAL_PLAN_ID`, or
+  `RAZORPAY_SUBSCRIPTION_TOTAL_COUNT`. No environment values were read.
+- **Boundary:** No Production plan ID was added, no provider/payment request
+  was made, and no Production database, migration, entitlement, account, or
+  customer-data write occurred.
+- **Disposition:** Production is included and currently qualified only for the
+  fail-closed code-rollout stage. Payment lifecycle, database/migration and
+  entitlement activation, reconciliation, monitoring, and rollback remain
+  open. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/production-current-fail-closed-audit-2026-10-09.md`.
+
 ## 2026-10-09 · Production anonymous modified-client probe
 
 - **Mapped work:** `PLAN-CLI-003` Production boundary evidence.

@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Current Production fail-closed audit
+
+Production deployment `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` is READY from Web
+`6f932d4`. Metadata-only environment inspection found no recurring Razorpay
+plan-ID or subscription-count variable, and no environment values were read.
+Public route smoke passed (`/`, `/checkout`, `/docs` → 200; unauthenticated
+subscription GET → 405) with no public provider-key, Test-Mode, session-token,
+or database-URL marker.
+
+This qualifies the current fail-closed Production code-rollout boundary only.
+It does not close Gate 4 or the later Production billing/database activation,
+reconciliation, monitoring, rollback/restore, legal, independent-review, or
+final-acceptance gates. No Production state-changing write occurred; score
+remains **219/61/280 (78.2%)**.
+
+Evidence: `docs/shipping/evidence/production-current-fail-closed-audit-2026-10-09.md`.
+
 ## 2026-10-09 · Production anonymous modified-client probe
 
 Read-only Production probes ignored forged Pro/Studio/Enterprise plan values
