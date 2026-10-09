@@ -1,5 +1,29 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-10 · CLI consumer and Production code rollout
+
+`QUAL-CLI-006` now has current-head clean-consumer and transition evidence:
+all six public archives installed and imported, `Verglos 2.0.0-alpha.1`
+executed without implicit external-engine installation, and
+`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` passed. The remaining artifacts are
+trusted keyless publisher identity, protected npm approval/publication, legal
+clearance, independent review, and final acceptance.
+
+The current READY Production deployment from Web `6f932d4` passed bounded
+read-only route smoke and remains fail-closed. No Production/provider/
+database/entitlement/account/customer write occurred. Production activation,
+reconciliation, monitoring, restore, and rollback remain operation-specific
+gates.
+
+No founder input is needed for this technical batch. The separate missing
+artifact for Gate 4 remains the protected Preview auth fixture needed to run
+the isolated subscription lifecycle; it must be supplied to an authorized
+runner, never pasted into chat or committed.
+
+Evidence:
+`docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+`docs/shipping/evidence/production-current-code-rollout-smoke-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · Preview fixture access and CLI qualification
 
 The exact current CLI `main` head

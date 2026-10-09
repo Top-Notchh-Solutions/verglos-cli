@@ -33,6 +33,21 @@ was performed.
 - Cosign `v2.4.1` signed and locally verified an ephemeral fixture with
   `--insecure-ignore-tlog=true`.
 
+## Current-head consumer transition
+
+Using the same exact detached source head, the release archives were tested
+without publishing them:
+
+- The clean-consumer verifier installed all six archives, imported every
+  public library, executed `Verglos 2.0.0-alpha.1`, and confirmed that no
+  external engine was installed implicitly.
+- The upgrade/rollback verifier passed the package transition
+  `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`.
+
+The consumer used a bounded temporary directory and the existing dependency
+cache. It did not access credentials, Production, a provider, a database, or
+an account.
+
 ## Qualification boundary
 
 This is substantial current-head backend and artifact progress, but it is not

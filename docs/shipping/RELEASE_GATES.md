@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Current-head consumer and Production rollout update
+
+The exact CLI `main` head `f5686b5c` now passes clean-consumer installation of
+all six public archives, public-library imports, no-implicit-engine execution,
+and the `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` upgrade/rollback transition. This
+advances `QUAL-CLI-006`; trusted keyless identity, legal/protected publishing,
+independent review, and final acceptance remain open.
+
+The current READY Production deployment from Web `6f932d4` passed bounded
+read-only route smoke. This confirms the fail-closed code-rollout stage only;
+it does not close Gate 4 or Production billing/database activation,
+reconciliation, monitoring, restore, or rollback. No state-changing write
+occurred and the score remains **219/61/280 (78.2%)**.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+`docs/shipping/evidence/production-current-code-rollout-smoke-2026-10-10.md`.
+
 ## 2026-10-10 · Qualification progress and unresolved lifecycle access
 
 The exact current CLI `main` head

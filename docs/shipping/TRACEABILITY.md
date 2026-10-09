@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Current-head consumer and Production rollout evidence
+
+- **Mapped surfaces:** `QUAL-CLI-006` and Production code-rollout/
+  `PLAN-WEB-015` read-only boundary.
+- **CLI evidence:** The exact `f5686b5c` head installed all six public
+  archives into a clean consumer, imported all public libraries, ran
+  `Verglos 2.0.0-alpha.1`, created no implicit external-engine cache, and
+  passed `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` upgrade/rollback.
+- **Production evidence:** Current READY Web deployment `6f932d4` served
+  `/`, `/checkout`, and `/docs` with 200; unauthenticated subscription
+  creation GET returned 405; no provider/Test-Mode/database marker was
+  exposed.
+- **Acceptance boundary:** No checkbox changed. Trusted release identity,
+  protected/legal release, provider lifecycle, Production activation and
+  reconciliation, and final acceptance remain separate gates. Score remains
+  **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+  `docs/shipping/evidence/production-current-code-rollout-smoke-2026-10-10.md`.
+
 ## 2026-10-10 · Current CLI artifact qualification and Preview boundary
 
 - **Mapped surfaces:** `QUAL-CLI-006`; Gate 4;

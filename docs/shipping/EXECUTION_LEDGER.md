@@ -1,5 +1,33 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Current-head consumer transition and Production smoke
+
+- **Mapped work:** `QUAL-CLI-006`; Production code-rollout and
+  `PLAN-WEB-015` read-only qualification.
+- **CLI result:** Exact public CLI `main` head
+  `f5686b5c5aa11f45f392e647bd9d7e31830654ba` installed cleanly into a
+  temporary consumer with all six public archives and imported every public
+  library. The clean consumer ran `Verglos 2.0.0-alpha.1` and created no
+  external-engine cache. The transition verifier passed
+  `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`.
+- **Production result:** Current READY deployment
+  `verglos-hhortlf1l-anuragyadav20062002s-projects.vercel.app` is sourced from
+  Web `6f932d4`; `/`, `/checkout`, and `/docs` returned 200, while
+  unauthenticated `GET /api/razorpay/create-subscription` returned 405. Public
+  HTML exposed no provider key, Test-Mode marker, or database URL.
+- **Boundary:** One bounded temporary CLI worktree and existing dependency
+  cache were reused. No npm publish/tag, provider/payment, database/migration,
+  entitlement, account, customer, or Production state-changing write
+  occurred.
+- **Disposition:** This advances `QUAL-CLI-006` and the Production
+  code-rollout boundary. Trusted keyless release identity, legal/protected
+  publishing, independent review, and final acceptance remain open. Payment
+  lifecycle and Production activation/reconciliation remain open. Score
+  remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+  `docs/shipping/evidence/production-current-code-rollout-smoke-2026-10-10.md`.
+
 ## 2026-10-10 · Current-head CLI qualification and Preview lifecycle blocker
 
 - **Mapped work:** `QUAL-CLI-006`; Gate 4 and

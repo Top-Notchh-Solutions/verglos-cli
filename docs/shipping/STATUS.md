@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Current CLI consumer transition and Production smoke
+
+The exact public CLI `main` head `f5686b5c` now has clean-consumer evidence:
+all six public archives install and import successfully, `Verglos
+2.0.0-alpha.1` executes, no external engine is installed implicitly, and the
+package transition `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` passes. `QUAL-CLI-006`
+remains open only for its remaining trusted identity, legal/protected release,
+independent review, and final-acceptance gates.
+
+The current READY Production deployment is sourced from Web `6f932d4`; public
+`/`, `/checkout`, and `/docs` returned 200, and unauthenticated subscription
+creation returned 405. No provider key, Test-Mode marker, database URL, or
+state-changing operation was exposed or performed. Production remains at the
+fail-closed code-rollout stage; billing, database activation, reconciliation,
+monitoring, and rollback acceptance remain open.
+
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+`docs/shipping/evidence/production-current-code-rollout-smoke-2026-10-10.md`.
+
 ## 2026-10-10 · Backend qualification advanced; Preview lifecycle access blocked
 
 The exact current public CLI `main` head

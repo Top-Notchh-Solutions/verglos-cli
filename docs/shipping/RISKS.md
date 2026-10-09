@@ -1,5 +1,29 @@
 # Verglos V1 risk register
 
+## R-QUAL-CLI-006-CURRENT-HEAD-CONSUMER · 2026-10-10
+
+The exact public CLI `main` head `f5686b5c` now passes clean-consumer
+installation/import, no-implicit-engine execution, and the
+`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` transition. Residual risk is limited to
+trusted keyless identity, legal/protected publication, independent review,
+and final acceptance; the local transition is not an npm release. Owner:
+CLI/release qualification. Gate impact: preparatory progress only;
+`QUAL-CLI-006` remains open.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`.
+
+## R-PROD-CURRENT-CODE-ROLLOUT-SMOKE · 2026-10-10
+
+The current READY Production deployment from Web `6f932d4` passed bounded
+public route smoke and kept subscription creation unauthenticated GET-fail
+closed. No provider, database, entitlement, account, or customer write was
+performed. Residual risk remains for Production billing/database activation,
+backup/restore, reconciliation, monitoring, and rollback evidence. Owner:
+Web/release operations. Gate impact: code-rollout boundary qualified only;
+payment and activation gates remain open.
+
+Evidence: `docs/shipping/evidence/production-current-code-rollout-smoke-2026-10-10.md`.
+
 ## R-QUAL-CLI-006-CURRENT-HEAD-REMAINING-GATES · 2026-10-10
 
 Official CycloneDX/SPDX, exact-source build, six-archive in-toto binding, and
