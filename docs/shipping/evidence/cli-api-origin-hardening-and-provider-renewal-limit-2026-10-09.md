@@ -55,6 +55,9 @@ the missing provider-generated renewal/expiry evidence remains an external
 Razorpay qualification limitation, not an application-path failure and not
 something to fabricate with synthetic webhook events.
 
+Provider references: [Create a Plan](https://razorpay.com/docs/api/payments/subscriptions/create-plan/?preferred-country=IN)
+and [Test App / Test Mode integration](https://razorpay.com/docs/server-integration/python/test-app/).
+
 ## Production read-only pass
 
 Against `https://verglos.com`, the bounded public smoke returned:
