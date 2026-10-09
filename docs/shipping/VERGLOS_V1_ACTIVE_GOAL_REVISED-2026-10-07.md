@@ -31,8 +31,9 @@ Production is not excluded from this goal. It has four explicit stages:
    rollback or forward-fix rehearsal.
 
 The current Production operation is a complete fail-closed code-rollout
-track, not a partial omission. For the current deployment, include all of the
-following in the Production work record:
+slice, not the whole Production scope and not a reason to skip the remaining
+Production work. For every Production pass, include all of the following in
+the work record:
 
 - inspect the exact source commit, build, runtime configuration shape, domain,
   deployment state, health routes, logs, and rollback target without exposing
@@ -49,6 +50,11 @@ following in the Production work record:
 - record the deployment identifier, alias, source commit, build result,
   smoke result, limitations, and rollback path in the private ledger and
   evidence archive; and
+- continue the same Production record through provider configuration,
+  migration/backfill planning, payment and subscription actions,
+  entitlement/account/customer-data changes, post-deploy reconciliation,
+  monitoring, incident response, rollback, and final acceptance whenever
+  those operations are authorized and their own preflights are complete; and
 - keep recurring billing, provider writes, database migrations/backfills,
   payment captures/refunds, entitlement changes, account changes, and
   customer-data mutations disabled until each operation has its own approved
@@ -57,11 +63,13 @@ following in the Production work record:
 
 Therefore, the current Production statement is:
 
-> Deploy the reviewed code to Production as a fail-closed code rollout only.
-> No Production plan IDs, payment writes, database writes, migration writes,
-> entitlement changes, account changes, or customer-data mutations occur in
-> this rollout. These are deferred activation stages in the same shipping
-> goal, not removed from scope.
+> Production shipping is in scope end-to-end. This operation deploys the
+> reviewed code as a fail-closed rollout only: no Production plan IDs,
+> payment writes, database writes, migration writes, entitlement changes,
+> account changes, or customer-data mutations occur in this rollout. Those
+> Production activation, reconciliation, monitoring, rollback, and final
+> acceptance stages remain mandatory parts of the same goal; they are
+> deferred only until their operation-specific preflights are satisfied.
 
 Test Mode credentials, Test Mode plan IDs, Preview databases, and test
 webhook fixtures must never be copied into Production. A Production deploy
@@ -98,21 +106,32 @@ The present operation is the first Production stage only: a reviewed,
 fail-closed code rollout. The later surfaces are still in the same goal and
 must not be silently omitted. Conversely, a migration-bearing candidate must
 not be promoted just because its hosted build is green; the Production
-migration preflight and recovery evidence must be current first. The current
-known Production deployment remains `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` at
-`https://verglos.com`; the current Web qualification candidate is PR #171,
-head `315a432cc84b3f6b2ece1e1794f8dd367a0a8237`, and it remains unmerged.
+migration preflight and recovery evidence must be current first. The latest
+verified Production deployment is `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`, READY
+and aliased to `https://verglos.com`; its public smoke was read-only and its
+billing/database/entitlement state remained fail-closed. The current Web
+qualification worktree is `feat/preview-test-auth` at `6f932d4`; its focused
+lifecycle suite, typecheck, diff check, and full local build passed. It is
+not a Production activation candidate merely because those checks passed.
 
 Evidence for this current boundary is:
 `docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`.
 
+The current fail-closed retry rollout evidence is:
+`docs/shipping/evidence/plan-web-014-hosted-retry-production-rollout-2026-10-09.md`.
+
+The current provider-to-database lifecycle-ordering reconciliation evidence
+is:
+`docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`.
+
 The payment gate had one explicit product gap: the Web code had billing ledger
 and subscription-webhook handling, but no server route that created a provider
-subscription. Web commit `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` now adds
-the catalog-bound creation route, pending binding, owner-bound status read,
-and hosted UI. It still must be qualified against real isolated Razorpay Test
-Mode subscription authorization and lifecycle events before Gate 4 can be
-called complete.
+subscription. Web commit `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` added the
+catalog-bound creation route, pending binding, owner-bound status read, and
+hosted UI. That route is now additionally covered by the current lifecycle
+ordering repair at `6f932d4`; it still must be qualified against the complete
+isolated Razorpay Test Mode subscription matrix before Gate 4 can be called
+complete.
 
 The next provider observation exposed and then verified a second concrete gap:
 Razorpay's first subscription capture is linked through a paid invoice and
@@ -188,15 +207,21 @@ Current source checkpoints:
 - Web PR #169 was a duplicate of already merged Preview-auth work (its patch
   was identical to PR #157 and its base was stale) and is now closed. It was
   not merged or counted as new shipping progress.
-- Current Web qualification branch: `da45a97` on `feat/preview-test-auth`.
-  It includes invoice-backed subscription-capture reconciliation, the
-  code-side `subscription.expired` lifecycle path, and the invoice-only
-  `payment.failed` subscription binding path. It is qualified against a fresh
-  isolated database and protected Preview deployment. This migration-bearing
-  change is not yet a Production promotion candidate until its migration
-  preflight, recovery, reconciliation, and rollback evidence is recorded. It
-  also includes the provider-subscription creation/status path, Preview-only
-  redacted diagnostics, and no-entitlement-grant failure handling.
+- Current Web production-qualification sequence on
+  `feat/preview-test-auth` is `7373c8b` (same-origin checkout request
+  acceptance), `0bafe73` (hosted payment-failure retry preservation), and
+  `6f932d4` (subscription lifecycle ordering guard). These changes passed the
+  focused suites, typecheck, diff check, and full local build and were deployed
+  only through the fail-closed Production path.
+- Earlier Web qualification branch `da45a97` on `feat/preview-test-auth`
+  supplied invoice-backed subscription-capture reconciliation, the code-side
+  `subscription.expired` path, and invoice-only `payment.failed` binding.
+  Those records remain historical evidence. The current worktree head is
+  `6f932d4` on the same branch; its lifecycle ordering repair is qualified
+  locally and deployed through the fail-closed Production path. Neither the
+  migration-bearing qualification work nor the lifecycle work is a Production
+  activation candidate until the applicable migration, recovery,
+  reconciliation, and rollback evidence is current.
 - The latest isolated Preview deployment for the current qualification branch
   is `dpl_HbYCQG4hnDH6Jew48YcNUuRkVVaA`, READY, with the isolated Preview
   configuration and the invoice-only subscription-failure path. Protected
@@ -205,23 +230,19 @@ Current source checkpoints:
   `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB` remains evidence for invoice-backed
   first-charge reconciliation.
 - The latest Production deployment is
-  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY at
-  `https://verglos-cghkmkzzg-anuragyadav20062002s-projects.vercel.app` and
-  aliased to `https://verglos.com`. The remote runtime-config check, 45-page
-  build, and read-only public smoke passed. Production plan IDs were
-  deliberately not added, so recurring billing remains fail-closed there.
-  This is the latest complete Production code-rollout slice; live billing,
-  provider, database, migration, entitlement, account, and customer-data
-  activation remain explicitly included deferred stages with their own
-  preflights.
-- The current Web qualification head is PR #171 at
-  `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5`. Its Preview-only auth fixture
-  repair and checkout terminal-lifecycle repair passed hosted checks. Exact
-  protected-browser smoke is still pending because Vercel Authentication
-  blocks the deployed Preview before the application route. This candidate is
-  migration-bearing, so it is not a Production promotion candidate until the
-  current-backup RPO, migration, reconciliation, and rollback preflight is
-  complete.
+  `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`, READY and aliased to
+  `https://verglos.com`. The remote runtime-config check, 47-page local build,
+  and read-only public smoke passed. Production plan IDs were deliberately
+  not added, so recurring billing remains fail-closed there. This is the
+  latest complete Production code-rollout slice; live billing, provider,
+  database, migration, entitlement, account, and customer-data activation
+  remain explicitly included deferred stages with their own preflights.
+- Earlier Web PR #171 at `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5`
+  remains historical evidence for the Preview-only auth fixture and checkout
+  terminal-lifecycle repair. The current production-qualification head is
+  tracked by the local private ledger at `6f932d4`; protected Preview/browser
+  qualification and migration-bearing promotion requirements remain separate
+  and are not implied by a Production code rollout.
 - Earlier isolated Test Mode work recorded canonical Pro plans and first-charge
   evidence, but one historical read-only recheck returned HTTP 401. No
   provider write was attempted after that response. A later redacted recheck
@@ -237,6 +258,19 @@ Current source checkpoints:
   configuration, but it does not prove hosted Preview delivery or the full
   renewal/failure/expiry/refund/entitlement matrix. Evidence:
   `docs/shipping/evidence/plan-web-014-local-testmode-subscription-cancellation-2026-10-09.md`.
+
+- The latest isolated lifecycle reconciliation created a fresh canonical Pro
+  subscription, reconciled the provider's active state to the isolated Web
+  database, verified one captured first payment and the active paid license,
+  cancelled a subscription in Test Mode, and reconciled the signed webhook.
+  A redacted provider-to-database aggregate then matched 5 active, 7
+  cancelled, and 9 pending/created records after the application-path replay
+  repair. The ordering guard rejects older, same-time, and authenticated
+  regressions. This is real qualification progress but it still does not
+  prove provider-generated renewal, expiry, halted/failure, subscription
+  refund, external replay/out-of-order delivery, timeout/retry, or full
+  exactly-once acceptance across every enabled method. Evidence:
+  `docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`.
 
 Web commit `fa1b9f5` also repairs the customer-facing terminal lifecycle state:
 cancelled, completed, expired, and halted subscriptions stop polling and offer
@@ -400,15 +434,15 @@ a changed input or a clear acceptance need:
   Netbanking, Wallets, EMI, and Pay Later with no console errors and no
   QR-only path. It did not prove Test Mode, order creation, capture, refund,
   webhook, entitlement, renewal, cancellation, or payment acceptance.
-- Before the current rollout, production browser/deployment qualification
-  performed no Production database, migration, payment, provider,
-  entitlement, or account write. On 2026-10-09, the reviewed Web code was
-  deployed to Production as `dpl_E3Xr4UZe1ZXaZfRB7ygvS8HvmQTs`; the build
-  passed, `https://verglos.com/` and `/checkout` returned 200, and the
-  subscription-creation route correctly returned 405 to an unauthenticated
-  GET. This was a bounded application deployment only: no Production
-  database, migration, payment, provider, entitlement, or account write
-  occurred, and no Test Mode plan or credential was copied to Production.
+- Earlier Production browser/deployment qualification performed no
+  Production database, migration, payment, provider, entitlement, or account
+  write. The current reviewed Web code was subsequently deployed to
+  Production as `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`; the build and read-only
+  public smoke passed, and no Production database, migration, payment,
+  provider, entitlement, or account write occurred. No Test Mode plan or
+  credential was copied to Production. This is a bounded application
+  deployment slice, while the complete Production activation track remains
+  mandatory in this goal.
 - The authenticated Chrome DevTools session is available on
   `127.0.0.1:9222`; Docker Desktop is available. Both are instruments, not
   acceptance evidence by themselves.
@@ -545,15 +579,21 @@ evidence into a pass.
    priority.** `PLAN-WEB-013` is closed. `PLAN-WEB-011`, `PLAN-WEB-012`,
    `PLAN-WEB-014`, and `PLAN-WEB-015` remain open. Web commit `54e6fd0` now
    provides the provider-subscription creation/status API and UI, with signed
-   notes, tenant binding, and pending persistence. The next requirement is
-   real isolated Test Mode authorization, renewal/charge, failure,
-   cancellation/expiry, refund, replay, and entitlement reconciliation. The
-   valid Test Mode credentials and canonical plan objects are now available;
-   hosted lifecycle execution and reconciliation remain open. Commit `fa1b9f5`
-   additionally repairs the checkout terminal-state UX so cancelled,
+   notes, tenant binding, and pending persistence. A fresh isolated canonical
+   Pro subscription was authorized, captured, reconciled through the provider
+   invoice, and bound to an active paid license; a Test Mode cancellation was
+   also reconciled. The current ordering guard rejects older, same-time, and
+   authenticated regressions, and signed application-path replay repaired
+   the current provider-to-database aggregate to active 5, cancelled 7, and
+   pending/created 9. The remaining requirement is provider-backed evidence
+   for renewal/charge, failure/halted behavior, expiry, subscription refund,
+   external duplicate/replay/out-of-order delivery, timeout/retry, exactly-once
+   ledger and entitlement behavior, and complete tenant/method binding. Commit
+   `fa1b9f5` additionally repairs the checkout terminal-state UX so cancelled,
    completed, expired, and halted subscriptions stop polling and offer a
    restart, with paid/refunded precedence. Do not use Production DB rows,
-   `$1` pricing, or manual entitlement edits as substitutes.
+   `$1` pricing, synthetic events as provider evidence, or manual entitlement
+   edits as substitutes.
 5. **GitHub/GitLab integration — scope decision required, not an npm
    prerequisite.** Publishing the npm/CLI package does not require a GitHub
    or GitLab installation. The active Web SaaS scope is GitHub-first and has
@@ -629,14 +669,20 @@ which remain deferred, and why.
 The immediate technical sequence is:
 
 1. Run the remaining isolated Preview/Test Mode subscription and hosted-order
-   matrix against the reviewed creation/status and invoice-binding paths.
+   matrix against the reviewed creation/status, invoice-binding, and ordering
+   paths; do not repeat already evidenced active/capture/cancel checks unless
+   a changed provider input requires it.
 2. Reconcile each provider record, payment ledger row, subscription lifecycle,
    and entitlement state without manual row edits.
 3. Close only the payment backlog IDs whose complete criteria are evidenced;
    keep Production activation writes deferred until their operation-specific
    preflight is complete.
-4. Run the Production read-only smoke/reconciliation pass against the newly
-   deployed code; do not enable recurring billing from Test Mode configuration.
+4. Continue the Production track in the same pass: audit configuration and
+   migration compatibility, verify the fail-closed deployment, run public
+   smoke and monitoring checks, reconcile any permitted read-only provider /
+   ledger / entitlement observations, verify rollback readiness, and record
+   every deferred activation surface. Do not enable recurring billing from
+   Test Mode configuration.
 5. Resolve the npm/CLI versus Web SCM scope decision before attempting Gate 5.
 6. Prepare the AppSec/legal/release packets while continuing dependency-ready
    backend/CLI batches.
@@ -1151,6 +1197,15 @@ The latest payment qualification and Gate 4 evidence is:
 The latest subscription invoice-binding and Production rollout evidence is:
 
 `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`
+
+The latest hosted retry and current Production deployment evidence is:
+
+`docs/shipping/evidence/plan-web-014-hosted-retry-production-rollout-2026-10-09.md`
+
+The latest lifecycle-ordering and provider-to-database reconciliation evidence
+is:
+
+`docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`
 
 The latest expiry-lifecycle and current Preview qualification evidence is:
 
