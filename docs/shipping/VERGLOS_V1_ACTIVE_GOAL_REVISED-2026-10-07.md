@@ -1389,6 +1389,22 @@ The latest Preview-auth and complete Production-boundary evidence is:
 
 `docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`
 
+The latest Preview subscription-authorization limitation evidence is:
+
+`docs/shipping/evidence/plan-web-014-preview-subscription-otp-limitation-2026-10-09.md`
+
+The latest Production read-only smoke evidence is:
+
+`docs/shipping/evidence/production-readonly-smoke-2026-10-09.md`
+
+The latest CLI standards-corpus evidence is:
+
+`docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`
+
+The latest official CycloneDX/Cosign qualification evidence is:
+
+`docs/shipping/evidence/qual-cli-006-official-cyclonedx-cosign-2026-10-09.md`
+
 The latest payment decision and backlog acceptance are recorded in
 private commit `5a99b0d`; the preceding payment qualification evidence commit
 is `8eb85b7`.
