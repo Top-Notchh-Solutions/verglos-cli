@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Authoritative CLI release-head qualification
+
+- **Mapped IDs:** `QUAL-CLI-006`; CLI distribution and dependent backend rows.
+- **Source:** exact CLI `origin/main` `f5686b5c` in a detached worktree.
+- **Result:** tests **12/12 Turbo tasks**, forced typecheck **13/13**, forced
+  build **8/8**; temporary worktree removed afterward.
+- **Acceptance boundary:** Implementation head only; trusted publishing,
+  legal, Hunt review, hosted integration, customer acceptance, and final
+  release evidence remain open.
+- **Boundary:** No public branch/package/registry/deployment/provider/
+  database/payment/entitlement/account/customer/release state changed. Score
+  remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/qual-cli-006-authoritative-head-2026-10-10.md`.
+
 ## 2026-10-10 · Razorpay Test Mode webhook configuration inventory
 
 - **Mapped IDs:** Gate 3 configuration; Gate 4 delivery/reconciliation.

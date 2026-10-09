@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Authoritative CLI release-head qualification
+
+CLI `origin/main` at `f5686b5c` passed the locked offline test run (**12/12
+Turbo tasks**), uncached typecheck (**13/13**), and uncached build (**8/8**)
+in a detached worktree. This qualifies the implementation head only; trusted
+publishing, legal, independent Hunt review, hosted integration, customer
+acceptance, and final release gates remain open. No repository or release state
+changed. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-authoritative-head-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 3 Test Mode webhook configuration inventory
 
 Read-only Razorpay Test Mode inventory returned HTTP 200 with five active

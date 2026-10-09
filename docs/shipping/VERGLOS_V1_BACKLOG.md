@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Authoritative CLI release-head qualification
+
+CLI `origin/main` at `f5686b5c` passed the locked offline test run (**12/12
+Turbo tasks**), uncached typecheck (**13/13**), and uncached build (**8/8**)
+in a detached worktree. This is release-head qualification progress only;
+trusted publishing, external review, hosted integration, customer acceptance,
+and final release gates remain open. No checkbox changed; score remains **219
+checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-authoritative-head-2026-10-10.md`.
+
 ## 2026-10-10 · Test Mode webhook configuration inventory
 
 Read-only provider inventory returned HTTP 200 with five active Preview/test

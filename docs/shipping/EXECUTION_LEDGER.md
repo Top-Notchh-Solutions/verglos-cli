@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Authoritative CLI release-head qualification
+
+- **Source:** detached CLI `origin/main` at `f5686b5c`; the divergent local
+  `main` and founder-owned untracked assets were preserved.
+- **Result:** locked offline install; `pnpm test` **12/12** Turbo tasks;
+  uncached `pnpm typecheck --force` **13/13** tasks; uncached
+  `pnpm build --force` **8/8** tasks. The temporary worktree was removed.
+- **Disposition:** This strengthens release-head implementation evidence but
+  does not close `QUAL-CLI-006` or trusted publishing, legal, independent
+  review, hosted integration, customer acceptance, and final release gates.
+- **Boundary:** No public branch, package, registry, deployment, provider,
+  database, payment, entitlement, account, customer, or release state changed.
+  Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/qual-cli-006-authoritative-head-2026-10-10.md`.
+
 ## 2026-10-10 · Razorpay Test Mode webhook inventory
 
 - **Read-only result:** Provider API returned HTTP 200 with 6 webhook
