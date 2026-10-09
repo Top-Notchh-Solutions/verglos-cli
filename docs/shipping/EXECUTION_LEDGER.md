@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Isolated subscription create/cancel and reconciliation gap
+
+- **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,
+  `PLAN-WEB-014`, and `PLAN-WEB-015`.
+- **Configuration:** A branch-scoped Preview auth fixture was rotated for
+  `feat/preview-test-auth`; the new Preview deployment was READY and Vercel
+  protection was accessed through authenticated `vercel curl`. Production was
+  not changed.
+- **Provider result:** Two canonical monthly Test Mode subscription creations
+  succeeded. Owner-bound status reads returned `processing/pending`. Both
+  fresh provider subscriptions were cancelled through the Test Mode API and
+  returned HTTP 200 with provider state `cancelled`.
+- **Database/provider reconciliation:** Provider aggregate after the run was
+  6 active, 11 created, 9 cancelled. Isolated DB aggregate was 5 active, 7
+  cancelled, 14 pending; payment aggregate was 5 captured, 1 failed, 2
+  refunded. The two fresh DB rows did not transition from pending, so signed
+  provider cancellation delivery/reconciliation remains unproven.
+- **Boundary:** Test Mode provider and isolated Preview DB writes only; no
+  Production/provider/payment/database/migration/entitlement/account/
+  customer write occurred. No manual row edit or entitlement grant was used.
+- **Disposition:** This is real payment-lifecycle progress and a concrete
+  reconciliation finding, not Gate 4 acceptance. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-create-cancel-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Current-head consumer transition and Production smoke
 
 - **Mapped work:** `QUAL-CLI-006`; Production code-rollout and

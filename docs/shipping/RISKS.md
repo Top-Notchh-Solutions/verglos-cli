@@ -1,5 +1,24 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-PREVIEW-CANCEL-WEBHOOK-RECONCILIATION · 2026-10-10
+
+Two real canonical Test Mode subscription creates succeeded and their provider
+cancellations returned HTTP 200/state `cancelled`. The isolated application
+rows remained `pending`, and the owner-bound status route correctly returned
+`processing/pending` without granting payment or entitlement. The evidence gap
+is signed provider cancellation delivery to the isolated Preview endpoint and
+the resulting DB transition, not a license workaround.
+
+Owner: Web/provider operations. Missing artifact: provider delivery record plus
+isolated webhook acceptance and reconciled `cancelled` row. Review before the
+next Preview lifecycle run on 2026-10-10. Safe next action: configure a
+provider-reachable isolated webhook target or capture a provider-supported
+replay through the authorized protected path; do not disable protection or use
+Production as a test target. Gate impact: Gate 4 and
+`PLAN-WEB-011/012/014/015` remain open.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-create-cancel-reconciliation-2026-10-10.md`.
+
 ## R-QUAL-CLI-006-CURRENT-HEAD-CONSUMER · 2026-10-10
 
 The exact public CLI `main` head `f5686b5c` now passes clean-consumer

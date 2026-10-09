@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Preview subscription create/cancel reconciliation
+
+- **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`.
+- **Implementation/runtime:** Preview branch `feat/preview-test-auth`,
+  deployment `verglos-gbhjjpuhd-anuragyadav20062002s-projects.vercel.app`,
+  catalog-bound subscription route and owner-bound status route.
+- **Evidence:** Two real canonical Test Mode creates succeeded; both status
+  reads were `processing/pending`; both provider cancellations returned 200 and
+  `cancelled`.
+- **Gap:** Isolated DB remained at 14 pending rows while provider state was
+  9 cancelled; fresh cancellation webhook delivery/reconciliation was not
+  observed. The no-grant behavior is safe but not acceptance.
+- **Boundary:** Preview/Test Mode and isolated DB writes only; no Production
+  state changed. Score remains **219/61/280 (78.2%)** and no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-create-cancel-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Current-head consumer and Production rollout evidence
 
 - **Mapped surfaces:** `QUAL-CLI-006` and Production code-rollout/

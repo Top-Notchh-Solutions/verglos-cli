@@ -1,5 +1,25 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-10 · Provider cancellation delivery
+
+The Preview fixture access issue is resolved for the authorized runner through
+a branch-scoped secret and authenticated Vercel transport. Two real canonical
+Test Mode subscription creates and two Test Mode cancellations succeeded.
+However, the provider reported the fresh subscriptions cancelled while the
+isolated database retained their rows as pending; the owner-bound status route
+returned processing/pending and granted nothing.
+
+The missing artifact is a signed Razorpay cancellation delivery to the
+isolated Preview endpoint plus the reconciled database transition. Owner: Web/
+provider operations. Review before the next lifecycle run on 2026-10-10. The
+safe next action is a provider-reachable isolated webhook target or a
+provider-supported replay through the authorized protected path. Do not
+disable Preview protection, use Production, or edit rows manually. Gate 4 and
+`PLAN-WEB-011/012/014/015` remain open.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-subscription-create-cancel-reconciliation-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · CLI consumer and Production code rollout
 
 `QUAL-CLI-006` now has current-head clean-consumer and transition evidence:

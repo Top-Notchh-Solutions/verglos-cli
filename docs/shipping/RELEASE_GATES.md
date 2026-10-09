@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 real subscription cancellation finding
+
+The isolated Preview/Test Mode route produced two canonical monthly provider
+subscriptions and two successful provider cancellations. The owner-bound
+status path remained safely `processing/pending` before payment. After
+cancellation, Razorpay reported the fresh subscriptions as `cancelled`, while
+the isolated application rows remained `pending`; no payment or entitlement
+was granted.
+
+This materially advances Gate 4 but does not close it. Signed provider
+cancellation delivery, application reconciliation, replay/out-of-order
+handling, renewal, expiry/failure/refund, and remaining method evidence are
+still required. The branch-scoped Preview secret and Vercel protection bypass
+were not copied to Production, and no Production state-changing write
+occurred. Score remains **219/61/280 (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-create-cancel-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Current-head consumer and Production rollout update
 
 The exact CLI `main` head `f5686b5c` now passes clean-consumer installation of

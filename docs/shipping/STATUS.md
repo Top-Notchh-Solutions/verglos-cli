@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Real Preview subscription create/cancel evidence; webhook gap remains
+
+The isolated Preview route now has real Razorpay Test Mode subscription
+evidence: two canonical monthly subscription creations succeeded, both
+owner-bound status reads were safely `processing/pending`, and both provider
+subscriptions were cancelled successfully through the Test Mode API. The
+isolated database retained the two rows as pending while the provider reported
+them cancelled; no payment or entitlement was granted.
+
+This is a concrete Gate 4 reconciliation finding. Signed provider cancellation
+delivery and application transition to `cancelled` were not observed, so
+`PLAN-WEB-011/012/014/015` remain open. The new branch-scoped Preview fixture
+was used only for this isolated run; Production remains unchanged.
+
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-create-cancel-reconciliation-2026-10-10.md`.
+
 ## 2026-10-10 · Current CLI consumer transition and Production smoke
 
 The exact public CLI `main` head `f5686b5c` now has clean-consumer evidence:
