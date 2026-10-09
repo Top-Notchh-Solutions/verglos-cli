@@ -1,5 +1,23 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-CARDLESS-EMI-BINDING · 2026-10-10 · update
+
+The provider Test Mode account returned a captured `cardless_emi` order payment
+for a signed snapshot containing canonical `emi`. Web `210d880` now accepts
+that one representation only when `emi` is bound and continues to reject
+unbound methods.
+
+Residual risk remains for the complete enabled-method matrix, provider
+renewal/failure/expiry, refund replay/order, timeout/retry, exactly-once
+behavior, and full provider/ledger/entitlement reconciliation. PR #172's
+hosted schema job is also awaiting an external GitHub/Docker Hub service
+availability fix after two rate-limit failures before test execution. Owner:
+Web/provider/release operations. Gate impact: this repairs one Gate 4 code gap;
+it does not close Gate 4 or any backlog checkbox.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-cardless-emi-binding-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-PREVIEW-PARTIAL-REFUND · 2026-10-10 · update
 
 The isolated Test Mode partial-refund path now has provider and application

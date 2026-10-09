@@ -1,5 +1,26 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 provider Cardless EMI binding repair
+
+The read-only Test Mode inventory exposed one captured `cardless_emi` order
+payment whose immutable checkout notes contained canonical `emi`. Web
+`210d880` repairs the binding boundary with a single explicit mapping and
+regression tests; it does not expose a new method or grant entitlement from
+provider labels alone.
+
+Focused tests, the full serial Web suite, typecheck, build, Vercel Preview,
+and GitGuardian passed. The hosted schema job has not run because its GitHub
+runner cannot pull `postgres:15-alpine` under Docker Hub's unauthenticated
+rate limit; one retry reached the same infrastructure failure.
+
+Gate 4 remains open for the complete enabled-method and subscription/payment
+lifecycle matrix, replay/order, timeout/retry, exactly-once behavior, and
+provider/ledger/entitlement reconciliation. No Production state changed.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-cardless-emi-binding-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 partial-refund slice now evidenced
 
 A separate isolated captured subscription payment passed identity preflight.

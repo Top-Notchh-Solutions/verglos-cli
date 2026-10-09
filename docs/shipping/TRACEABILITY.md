@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Provider Cardless EMI order binding repair
+
+- **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`;
+  `src/lib/billing/payment-methods.ts` and
+  `src/lib/razorpay-webhook-handler.ts`.
+- **Provider observation:** A captured Test Mode `cardless_emi` order payment
+  matched the canonical amount/currency and an immutable order snapshot that
+  contained `emi`.
+- **Implementation:** Web `210d880` canonicalizes that one provider
+  representation to `emi` for binding; it does not make Cardless EMI a new
+  checkout option.
+- **Verification:** Focused **25/25**, serial **900/876/24/0**, typecheck,
+  build, Vercel Preview, and GitGuardian passed. Hosted schema verification
+  remains an infrastructure hold before tests due to Docker Hub rate limit.
+- **Boundary:** No state-changing provider, database, entitlement, account,
+  customer, or Production operation occurred.
+- **Acceptance boundary:** This repairs one method-binding gap only. Complete
+  enabled-method, lifecycle, replay/order, timeout/retry, exactly-once, and
+  Production reconciliation evidence remain open. Score remains
+  **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-cardless-emi-binding-2026-10-10.md`.
+
 ## 2026-10-10 · Preview/Test Mode partial-refund reconciliation
 
 - **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`.

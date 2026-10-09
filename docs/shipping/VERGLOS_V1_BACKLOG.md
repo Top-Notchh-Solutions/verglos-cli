@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Repair provider Cardless EMI order binding
+
+Web branch `fix/razorpay-emi-provider-binding` commit `210d880` repairs a
+provider representation gap: a captured Razorpay `cardless_emi` payment is
+accepted only when the signed hosted-order snapshot explicitly contains the
+canonical `emi` method. Unbound methods remain fail-closed. Focused tests
+passed **25/25**, the full Web serial suite passed **900 total / 876 pass / 24
+explicit skips / 0 fail**, typecheck/build passed, and PR #172's Vercel and
+GitGuardian checks passed. Its hosted schema job is currently held by the
+GitHub runner's Docker Hub unauthenticated `postgres:15-alpine` pull-rate
+limit, not by a test failure. This repairs one Gate 4 code gap but does not
+close the payment matrix or change the score: **219 checked / 61 unchecked /
+280 total (78.2%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-cardless-emi-binding-2026-10-10.md`.
+
 ## Current execution note · 2026-10-10 · signed cancellation slice
 
 Web `d8ddeda`/`51e07f5` repaired the Preview Razorpay lifecycle binding path.

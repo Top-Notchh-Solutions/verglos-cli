@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Repair provider Cardless EMI order binding
+
+- **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,
+  `PLAN-WEB-014`, and `PLAN-WEB-015`.
+- **Trigger:** A read-only Test Mode provider inventory contained one captured
+  `cardless_emi` order payment whose signed order notes bound canonical `emi`.
+  The literal method comparison would have rejected the captured payment.
+- **Implementation:** Web `210d880` maps only provider `cardless_emi` to
+  canonical `emi` during order-payment binding; unbound methods remain
+  rejected. PR #172 is open.
+- **Verification:** Focused tests **25/25**, full Web serial **900 total / 876
+  pass / 24 explicit skips / 0 fail**, typecheck, build, Vercel Preview, and
+  GitGuardian passed. Hosted schema verification was retried once but was
+  blocked before test execution by Docker Hub's unauthenticated Postgres pull
+  rate limit.
+- **Boundary:** No database, payment, entitlement, account, customer,
+  provider, or Production state write occurred.
+- **Disposition:** Code gap repaired; hosted verification and merge remain
+  pending. Gate 4 and the four mapped payment IDs remain open. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-cardless-emi-binding-2026-10-10.md`.
+
 ## 2026-10-10 · Preview/Test Mode partial-refund lifecycle slice
 
 - **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,

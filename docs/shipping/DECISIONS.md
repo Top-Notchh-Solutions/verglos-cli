@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Bind provider Cardless EMI to canonical hosted EMI
+
+- **Decision:** Accept only the observed provider representation
+  `cardless_emi` as canonical `emi` when `emi` is explicitly present in the
+  signed hosted-order snapshot. Do not add Cardless EMI to the enabled
+  checkout catalog or loosen other method checks.
+- **Reason:** The Test Mode account returned one captured `cardless_emi`
+  payment for an order whose server-owned snapshot contained `emi`; literal
+  comparison would reject a valid captured payment, while broad method
+  acceptance would weaken commercial binding.
+- **Evidence:** Web commit `210d880`, PR #172, focused tests **25/25**, full
+  serial **900 total / 876 pass / 24 explicit skips / 0 fail**, typecheck,
+  build, and read-only provider observation. Hosted schema verification is
+  held by the Docker Hub Postgres pull-rate limit before test execution.
+- **Disposition:** Keep Gate 4 and `PLAN-WEB-011/012/014/015` open until the
+  complete method/lifecycle/reconciliation matrix is evidenced. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Boundary:** No Production, provider, payment, database, entitlement,
+  account, or customer-data write.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-cardless-emi-binding-2026-10-10.md`.
+
 ## 2026-10-09 · Record authoritative CLI transport hardening
 
 - **Decision:** Treat CLI commit
