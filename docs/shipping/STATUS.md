@@ -5296,3 +5296,15 @@ matrix and complete provider/ledger/entitlement reconciliation. No checkbox
 changed; the current authoritative score is **219 checked / 61 unchecked / 280
 total (78.2%)**. Evidence:
 `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+## 2026-10-10 · ACCEPT-002/003 authoritative-source substrate verification
+
+The private acceptance verifier passed against CLI `origin/main` `f5686b5c`
+and Web `51e07f5`: CLI 274/274, Web 918/948 with 30 explicit
+environment-gated skips, and composed Studio/Enterprise/Team/quality
+substrates 74/74. Protocol, study-protocol, and 12-fixture corpus integrity
+checks pass. This is substrate evidence only; provider lifecycle, customer
+consent, independent review, authenticated browser, field-CWV, and account
+deletion remain open. ACCEPT-002/003 remain unchecked. No production operation
+occurred. Backlog remains **219 checked / 61 unchecked / 280 total**.
+
+Evidence: `docs/shipping/evidence/acceptance-stories-verification-2026-10-10.md`.

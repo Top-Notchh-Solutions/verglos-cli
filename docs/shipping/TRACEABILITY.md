@@ -4044,3 +4044,21 @@ Lighthouse Accessibility/Best Practices were 100 on the observed surfaces.
 Human screen-reader, large-data, complete-route, and field/CrUX gates remain
 open. No checkbox changed. See
 `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
+## Acceptance · 2026-10-10 · authoritative-source substrate verification
+
+- **Sources:** CLI `origin/main` `f5686b5c` and Web `51e07f5` were passed
+  explicitly to the private acceptance verifier.
+- **Results:** CLI 274/274; Web 918/948 with 30 explicit environment-gated
+  skips and 0 failures; composed Studio/Enterprise/Team/quality substrates
+  74/74. Protocol, study-protocol, and 12-fixture corpus integrity checks
+  pass.
+- **Boundary:** This is repository-owned substrate evidence only. Provider
+  lifecycle, customer consent, independent review, authenticated browser,
+  field-CWV, and account-deletion evidence remain open. No state-changing
+  production, provider, database, payment, entitlement, migration, or
+  customer operation occurred.
+- **Acceptance:** ACCEPT-002/003 remain unchecked; backlog remains 219
+  checked / 61 unchecked / 280 total.
+- **Evidence:**
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-10.md` and
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.

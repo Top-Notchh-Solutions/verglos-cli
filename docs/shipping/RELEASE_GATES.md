@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · ACCEPT-002/003 authoritative-source substrate verification
+
+The private acceptance verifier now passes against CLI `origin/main`
+`f5686b5c` and Web `51e07f5`: CLI **274/274**, Web **918/948** with 30
+explicit environment-gated skips, and composed Studio/Enterprise/Team/quality
+substrates **74/74**. Protocol integrity, study-protocol integrity, and the
+12-fixture acceptance corpus also pass.
+
+This resolves the stale pinned-worktree qualification issue but does not close
+ACCEPT-002/003. Provider lifecycle, customer consent, independent review,
+authenticated browser, field-CWV, and account-deletion evidence remain open.
+No production/database/provider/payment/entitlement/migration/customer state
+changed. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/acceptance-stories-verification-2026-10-10.md`.
+
 ## 2026-10-10 · Privacy/deletion isolated qualification
 
 Web `51e07f5` passed the privacy/deletion batch **29/29**, zero failures:

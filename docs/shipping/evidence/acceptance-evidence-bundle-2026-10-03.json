@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-06T08:50:52.814Z",
+  "generatedAt": "2026-10-09T21:56:37.219Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -14,8 +14,8 @@
     },
     {
       "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json",
-      "sha256": "1c8122c054d53d2488f156c0708ca81572fa97a93c9c638711b056ccd38a9f1b",
-      "bytes": 4465
+      "sha256": "736af443eb8da7e52f5afef9dd98681314ae987fa967a2ff03018b4a2e96f47d",
+      "bytes": 4383
     },
     {
       "path": "docs/shipping/evidence/acceptance-story-map-2026-10-03.json",
@@ -24,8 +24,8 @@
     },
     {
       "path": "docs/shipping/evidence/acceptance-story-tests-2026-10-03.md",
-      "sha256": "433a6f9e6e05d2169e2e09a011e42c5e9658afc64e47e68187100ca2e8871da9",
-      "bytes": 3719
+      "sha256": "d7e6a78ded7532396f0b0110d63a15c8812623a342dd4cddf5ec622d1b4af708",
+      "bytes": 3749
     },
     {
       "path": "docs/shipping/acceptance/external-workflow-protocol.md",

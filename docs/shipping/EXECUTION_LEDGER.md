@@ -7088,3 +7088,18 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
   or release state changed. Score remains **219 checked / 61 unchecked / 280
   total (78.2%)**.
 - **Evidence:** `docs/shipping/evidence/qual-cli-006-official-cyclonedx-cosign-2026-10-09.md`.
+## 2026-10-10 · ACCEPT-002/003 authoritative-source substrate verification
+
+- **Source:** The private verifier ran against CLI `origin/main` `f5686b5c`
+  and Web `51e07f5`; the stale `.local` feature worktree was not credited.
+- **Results:** CLI 274/274, Web 918/948 with 30 explicit environment-gated
+  skips, composed substrates 74/74, protocol and study-protocol checks pass,
+  and the 12-fixture corpus integrity check passes.
+- **Acceptance:** This removes the stale-source/harness issue for the
+  repository-owned substrate. ACCEPT-002/003 remain unchecked for provider,
+  customer, reviewer, browser-human, field-CWV, and account-deletion evidence.
+- **Backlog:** 219 checked / 61 unchecked / 280 total; no checkbox changed.
+- **Boundary:** No production, provider, database, payment, entitlement,
+  migration, or customer state changed.
+- **Evidence:**
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-10.md`.
