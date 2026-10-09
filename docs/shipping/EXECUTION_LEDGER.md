@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Razorpay Test Mode webhook inventory
+
+- **Read-only result:** Provider API returned HTTP 200 with 6 webhook
+  configurations: 5 active Preview/test targets and 1 disabled Production
+  target; each advertises 56 event types.
+- **Acceptance boundary:** This supports Gate 3 configuration presence only;
+  it does not prove delivery, replay safety, or application reconciliation.
+- **Boundary:** No provider mutation, Production, database, payment,
+  entitlement, account, or customer-data write. Score remains **219/61/280
+  (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/razorpay-testmode-webhook-inventory-2026-10-10.md`.
+
 ## 2026-10-10 · Production read-only smoke follow-up
 
 - **Smoke:** Production `/`, `/checkout`, and `/docs` returned HTTP 200 with

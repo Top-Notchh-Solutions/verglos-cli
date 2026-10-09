@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Test Mode webhook configuration inventory
+
+Read-only provider inventory returned HTTP 200 with five active Preview/test
+webhook targets and one disabled Production target; all six advertise 56 event
+types. This supports Gate 3 configuration presence, not event delivery or
+reconciliation. Gate 4 remains open and the score remains **219/61/280
+(78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/razorpay-testmode-webhook-inventory-2026-10-10.md`.
+
 ## 2026-10-10 · Production read-only smoke follow-up
 
 Production `/`, `/checkout`, and `/docs` returned 200 with HSTS; the

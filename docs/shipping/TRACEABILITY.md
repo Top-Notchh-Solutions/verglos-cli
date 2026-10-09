@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Razorpay Test Mode webhook configuration inventory
+
+- **Mapped IDs:** Gate 3 configuration; Gate 4 delivery/reconciliation.
+- **Result:** HTTP 200; 5 active Preview/test targets and 1 disabled
+  Production target, each advertising 56 event types.
+- **Boundary:** Read-only provider inventory; URLs, secrets, payloads, and
+  identifiers were not retained. No provider, Production, database, payment,
+  entitlement, account, or customer-data write. Score remains **219/61/280
+  (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/razorpay-testmode-webhook-inventory-2026-10-10.md`.
+
 ## 2026-10-10 · Production read-only smoke follow-up
 
 - **Mapped IDs:** Gate 4; `PLAN-WEB-011/012/014/015`; Production code rollout.
