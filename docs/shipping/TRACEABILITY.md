@@ -1,5 +1,29 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Gate 4 — expiry code-side qualification
+
+- **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`.
+- **Implementation:** Web `4ba15ad` adds the `expired` status, ordered ledger
+  handling, constraint migration `0037_billing_subscription_expired.sql`,
+  and `subscription.expired` webhook mapping without payment creation or
+  paid-time revocation.
+- **Verification:** Fresh isolated PostgreSQL applied all 38 migrations;
+  focused webhook tests **13/13**, ledger integration **1/1**, and
+  webhook-handler integration **3/3** passed. Full suite passed **891 total /
+  868 pass / 23 explicit skips / 0 fail**. Preview deployment
+  `dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u` is READY.
+- **Boundary:** Production remains the fail-closed code rollout from
+  `a95deef` / `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`; the new migration was not
+  promoted. No Production plan IDs, payment/provider writes, database or
+  migration writes, entitlement changes, account changes, or customer-data
+  mutations occurred.
+- **Disposition:** Provider-generated expiry and the remaining renewal,
+  failure, refund, replay/out-of-order, and complete reconciliation evidence
+  remain open. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-expired-lifecycle-preview-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 — Test Mode cancellation reconciliation
 
 - **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

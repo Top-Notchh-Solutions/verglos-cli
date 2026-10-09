@@ -1,5 +1,34 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Expired subscription lifecycle implementation and Preview qualification
+
+- **Backlog/gate:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
+  `PLAN-WEB-015`; Gate 4 expiry/code qualification slice.
+- **Implementation:** Web `4ba15ad` adds the `expired` subscription status,
+  the reviewed `0037_billing_subscription_expired.sql` constraint migration,
+  the `subscription.expired` provider-event mapping, and focused integration
+  coverage. Expiry changes subscription state without creating a payment or
+  revoking already-paid time.
+- **Verification:** Focused webhook tests **13/13**, fresh ledger integration
+  **1/1**, fresh webhook-handler integration **3/3**, full Web suite
+  **891 total / 868 pass / 23 explicit skips / 0 fail**, typecheck, build,
+  database checks, and all 38 ordered migrations passed on a fresh database.
+  Preview deployment `dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u` reached READY and
+  protected read-only smoke passed.
+- **Production boundary:** The current Production code-only rollout remains
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` from `a95deef`. The migration-bearing
+  expiry commit was not promoted; Production migration preflight,
+  backup/restore or recovery evidence, reconciliation, and rollback decision
+  are still required. No Production plan IDs, payment/provider writes,
+  database or migration writes, entitlement changes, account changes, or
+  customer-data mutations occurred.
+- **Disposition:** This qualifies code-side expiry only. Provider-generated
+  expiry, renewal/failure, refunds, replay/out-of-order delivery, and full
+  provider/ledger/entitlement reconciliation remain open. Score remains
+  **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-expired-lifecycle-preview-2026-10-09.md`.
+
 ## 2026-10-09 · Isolated Test Mode subscription cancellation
 
 - **Backlog/gate:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and

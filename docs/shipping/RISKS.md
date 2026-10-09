@@ -1,5 +1,33 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-expiry-provider-and-production-migration · 2026-10-09
+
+The Web `subscription.expired` path is implemented and qualified in isolated
+Preview/Test Mode from `4ba15ad`; fresh 38-migration database and focused
+integration checks passed. Residual Gate 4 risk is provider-generated expiry,
+renewal/charge, failure/halt, refunds, replay/out-of-order delivery, and
+complete provider/ledger/entitlement reconciliation. The commit contains a
+schema migration, so Production promotion also requires migration preflight,
+backup/restore or recovery evidence, reconciliation, and rollback/forward-fix
+approval. Production remains the active fail-closed code-only rollout with no
+plan, payment, database, migration, entitlement, account, or customer-data
+write. Owner: Web billing/release operations. Evidence:
+`docs/shipping/evidence/plan-web-014-expired-lifecycle-preview-2026-10-09.md`.
+
+## R-SEC-local-env-and-browser-diagnostic-exposure · 2026-10-09
+
+A local diagnostic attempted to shell-source `.env.test.local`, which is not
+safe because its `RAZORPAY_WEBHOOK_SECRET` and `DATABASE_URL` values contain
+shell-significant content. The command did not perform a database operation,
+but emitted fragments during parsing; an earlier browser diagnostic also
+exposed sensitive checkout/session material in local tool output. Do not
+source that file or reuse the exposed session. The authorized operator must
+rotate/revoke the affected webhook/database credentials as applicable,
+refresh or close the old checkout tab, update only the correct isolated
+environments, redeploy, and re-verify without printing values. No Production
+write was performed. Owner: Web/release operations. This is a manual
+security-remediation gate and does not change the backlog score.
+
 ## R-PLAN-WEB-014-test-mode-cancellation-slice · 2026-10-09
 
 The newest active isolated Test Mode subscription was cancelled successfully

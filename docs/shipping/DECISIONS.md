@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Qualify expiry in Preview before Production migration preflight
+
+- **Decision:** Accept the Web code-side `expired` lifecycle qualification in
+  isolated Preview, but do not promote migration `0037_billing_subscription_expired.sql`
+  to Production yet.
+- **Reason:** The fresh database, focused integrations, full Web suite, and
+  protected Preview deployment pass. Production promotion would change the
+  database schema and therefore needs an operation-specific migration
+  preflight, backup/restore or recovery evidence, reconciliation, and
+  rollback/forward-fix decision.
+- **Boundary:** Production remains a real, active fail-closed code-rollout
+  track. No Production plan IDs, payment/provider writes, database or
+  migration writes, entitlement changes, account changes, or customer-data
+  mutations occurred.
+- **Disposition:** Provider-generated expiry and the rest of Gate 4 remain
+  open. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-expired-lifecycle-preview-2026-10-09.md`.
+
 ## 2026-10-09 · Cancellation preserves already-paid entitlement time
 
 - **Decision:** Treat a provider `subscription.cancelled` event as a

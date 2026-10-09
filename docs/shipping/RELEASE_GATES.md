@@ -1,5 +1,24 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Gate 4 progress — expiry code qualified, provider expiry open
+
+The Web expiry path is implemented and qualified in isolated Preview/Test
+Mode from `4ba15ad`: the fresh database applied all 38 migrations, focused
+webhook/ledger integrations passed **13/13**, **1/1**, and **3/3**, and the
+full suite passed **891 total / 868 pass / 23 explicit skips / 0 fail**.
+Preview deployment `dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u` is READY.
+
+This is not a Gate 4 close. Provider-generated expiry, renewal/failure,
+refund, replay/out-of-order, and complete provider/ledger/entitlement
+reconciliation remain open. Production is still actively included through
+the current fail-closed code rollout `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`; the
+new migration-bearing commit requires its own Production migration preflight
+before promotion. No Production plan IDs, payment/provider writes, database
+or migration writes, entitlement changes, account changes, or customer-data
+mutations occurred. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-expired-lifecycle-preview-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 progress — Test Mode cancellation
 
 The newest active isolated Test Mode subscription was cancelled immediately

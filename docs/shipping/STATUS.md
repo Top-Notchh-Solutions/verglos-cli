@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Gate 4 update — expiry code qualified in isolated Preview
+
+Web `4ba15ad` now records Razorpay `subscription.expired` as a first-class
+subscription lifecycle state. A fresh disposable database applied all 38
+migrations; focused webhook/ledger integrations passed **13/13**, **1/1**,
+and **3/3**, and the full Web suite passed **891 total / 868 pass / 23
+explicit skips / 0 fail**. Preview deployment
+`dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u` reached READY with protected read-only
+smoke passing.
+
+This closes only the code-side expiry qualification. Gate 4 still needs
+provider-generated renewal/failure/expiry behavior, refunds, replay and
+out-of-order evidence, and complete provider/ledger/entitlement
+reconciliation. The migration-bearing commit remains Preview-only pending a
+Production migration preflight, recovery/restore evidence, reconciliation,
+and rollback decision. Production remains active as the fail-closed code-only
+rollout; no Production plan IDs, payment/provider writes, database or
+migration writes, entitlement changes, account changes, or customer-data
+mutations occurred. Score remains **219 checked / 61 unchecked / 280 total
+(78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-expired-lifecycle-preview-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 update — isolated subscription cancellation reconciled
 
 Razorpay Test Mode cancellation was exercised against the newest active

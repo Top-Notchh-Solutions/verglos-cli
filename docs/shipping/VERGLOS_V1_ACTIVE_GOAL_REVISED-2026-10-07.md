@@ -152,16 +152,19 @@ Current source checkpoints:
 - Web PR #169 was a duplicate of already merged Preview-auth work (its patch
   was identical to PR #157 and its base was stale) and is now closed. It was
   not merged or counted as new shipping progress.
-- Current Web qualification branch: `a95deef`.
-  It includes the provider-subscription creation/status path, Preview-only
+- Current Web qualification branch: `4ba15ad` on `feat/preview-test-auth`.
+  It includes the invoice-backed subscription-capture reconciliation and the
+  code-side `subscription.expired` lifecycle path, qualified against a fresh
+  isolated database and protected Preview deployment. This migration-bearing
+  change is not yet a Production promotion candidate until its migration
+  preflight, recovery, reconciliation, and rollback evidence is recorded. It
+  also includes the provider-subscription creation/status path, Preview-only
   redacted diagnostics, and invoice-backed subscription-capture reconciliation.
-- The latest isolated Preview deployment is
-  `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB`, READY at
-  `https://verglos-bhvvgg66m-anuragyadav20062002s-projects.vercel.app` with
-  isolated Preview configuration, canonical Test Mode plan IDs, the enabled
-  Test Mode webhook, and the rotated Preview test-auth secret. The fresh
-  provider subscription on this deployment reconciled through its paid invoice
-  into the isolated database and entitlement ledger.
+- The latest isolated Preview deployment for the current qualification branch
+  is `dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u`, READY, with the isolated Preview
+  configuration and the expiry code path. Protected read-only smoke passed.
+  The earlier `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB` record remains evidence for
+  the invoice-backed first-charge reconciliation.
 - The latest Production deployment is
   `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY at
   `https://verglos-cghkmkzzg-anuragyadav20062002s-projects.vercel.app` and
@@ -408,6 +411,14 @@ a changed input or a clear acceptance need:
   delivery, and complete provider/ledger/entitlement reconciliation. Private
   evidence is
   `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+- The code-side `subscription.expired` lifecycle is now additionally qualified
+  from Web `4ba15ad` against a fresh database with all 38 migrations and
+  focused webhook/ledger integrations passing. This strengthens Gate 4 but
+  does not prove provider-generated expiry or close any payment checkbox. The
+  new schema migration remains Preview-only pending a Production migration
+  preflight, recovery/restore evidence, reconciliation, and rollback decision.
+  Evidence:
+  `docs/shipping/evidence/plan-web-014-expired-lifecycle-preview-2026-10-09.md`.
 - A fresh local PostgreSQL 15 qualification of the merged Web tree applied all
   38 migrations and passed the authenticated account-deletion route E2E 1/1
   plus deletion-job lease/idempotency integration 1/1. This strengthens
@@ -1069,6 +1080,10 @@ The latest payment qualification and Gate 4 evidence is:
 The latest subscription invoice-binding and Production rollout evidence is:
 
 `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`
+
+The latest expiry-lifecycle and current Preview qualification evidence is:
+
+`docs/shipping/evidence/plan-web-014-expired-lifecycle-preview-2026-10-09.md`
 
 The latest payment decision and backlog acceptance are recorded in
 private commit `5a99b0d`; the preceding payment qualification evidence commit
