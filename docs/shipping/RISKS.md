@@ -1,5 +1,23 @@
 # Verglos V1 risk register
 
+## R-PROD-code-rollout-fa1b9f5-without-activation · 2026-10-09
+
+Web `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5` is deployed as Vercel
+`dpl_4cb7vvAA88aZe3FKXftdmYfSbGJN`, READY and aliased to `https://verglos.com`.
+Runtime-config/build validation and read-only public smoke passed. The rollout
+is fail-closed: no Production plan IDs, Test Mode values, provider/payment
+calls, migration execution, database writes, entitlement changes, account
+changes, or customer-data mutations occurred. Previous READY deployment
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` is the rollback target.
+
+Residual risk is explicit: source migration `0038` was not applied; current
+backup/RPO, schema migration, reconciliation, monitoring, rollback/forward
+fix, full Test Mode lifecycle, independent AppSec review, legal approval,
+protected release approval, and final acceptance remain open. Do not activate
+Production billing or database writes until those operation-specific gates
+pass. Owner: Web/release operations. Evidence:
+`docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
+
 ## R-PLAN-WEB-014-checkout-terminal-state-repaired · 2026-10-09
 
 Web `fa1b9f5` removes the customer-facing risk that a cancelled, completed,

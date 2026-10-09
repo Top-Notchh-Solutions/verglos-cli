@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Deploy Web `fa1b9f5` to Production as fail-closed code only
+
+- **Decision:** Include and execute the Production code-rollout stage now,
+  without activating billing or hosted data mutation.
+- **Evidence:** Vercel deployment `dpl_4cb7vvAA88aZe3FKXftdmYfSbGJN` is READY
+  and aliased to `https://verglos.com`; runtime-config/build validation and
+  read-only smoke passed. Previous READY deployment
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` is retained as rollback target.
+- **Boundary:** Do not copy Test Mode plan IDs, credentials, Preview database
+  URLs, webhook secrets, or fixture identities into Production. No Production
+  plan, payment/provider, migration, database, entitlement, account, or
+  customer-data write occurred. Source migration `0038` was not executed.
+- **Disposition:** Treat this as a completed Production code-rollout slice,
+  not as live billing activation. Keep Gate 4, migration/RPO/reconciliation,
+  rollback, monitoring, independent review, legal, protected release, and
+  final acceptance rows open until their evidence exists. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
+
 ## 2026-10-09 · Accept checkout terminal-state repair without closing Gate 4
 
 - **Decision:** Accept Web `fa1b9f5` as a code-side repair for terminal

@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Production fail-closed code rollout from Web `fa1b9f5`
+
+The reviewed Web source `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5` is now
+deployed to Production as Vercel deployment `dpl_4cb7vvAA88aZe3FKXftdmYfSbGJN`,
+READY and aliased to `https://verglos.com`. Remote Production runtime-config
+validation, the Next.js build, and public read-only smoke passed: `/` and
+`/checkout` returned HTTP 200, the subscription-creation route returned 405
+to unauthenticated GET, and an unauthenticated POST was rejected with 403.
+
+This is the requested Production code rollout, not billing activation. No
+Production plan IDs, Test Mode values, payment/provider calls, migrations,
+database writes, entitlement changes, account changes, or customer-data
+mutations occurred. The source still contains unreleased migration `0038`,
+which was not applied; Production schema activation remains gated by the
+current-backup/RPO, migration, reconciliation, and rollback/forward-fix
+preflight. Previous READY deployment `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` is the
+rollback target.
+
+Evidence: `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
+Score remains **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+changed.
+
 ## 2026-10-09 · Web checkout terminal subscription lifecycle repair
 
 Web PR #171 commit `fa1b9f5` now stops checkout polling when the authenticated

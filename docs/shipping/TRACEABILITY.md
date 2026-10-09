@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Production fail-closed code rollout from Web `fa1b9f5`
+
+- **Mapped IDs:** Production code-rollout stage; `PLAN-WEB-011`,
+  `PLAN-WEB-012`, `PLAN-WEB-014`, `PLAN-WEB-015`, and the Production
+  activation/recovery gates.
+- **Source/deployment:** Web `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5`
+  deployed as Vercel `dpl_4cb7vvAA88aZe3FKXftdmYfSbGJN`, READY and aliased to
+  `https://verglos.com`; prior READY rollback target is
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`.
+- **Qualification:** Remote Production runtime-config/build passed; `/` and
+  `/checkout` returned 200; unauthenticated subscription creation returned
+  405 to GET and 403 to POST. No authenticated write path was exercised.
+- **Boundary:** No Production plan IDs, Test Mode values, provider/payment
+  calls, migration execution, database writes, entitlement changes, account
+  changes, or customer-data mutations. Source migration `0038` was not
+  applied.
+- **Disposition:** Code rollout qualified; billing/database activation,
+  current-backup/RPO, migration/reconciliation, monitoring, rollback,
+  provider lifecycle, reviewer, and final acceptance gates remain open. Score
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
+
 ## 2026-10-09 · Web checkout terminal subscription lifecycle repair
 
 - **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

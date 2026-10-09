@@ -1,5 +1,30 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Production fail-closed code rollout qualified
+
+The reviewed Web source `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5` is
+deployed as Vercel `dpl_4cb7vvAA88aZe3FKXftdmYfSbGJN`, READY and aliased to
+`https://verglos.com`. Runtime-config validation, the remote build, and
+read-only public smoke passed. Unauthenticated subscription creation is
+rejected at the route boundary (GET 405; POST 403).
+
+This opens/qualifies only the Production code-rollout stage. Production
+billing, provider, database, migration, entitlement, account, and
+customer-data activation remain separate gated stages. No Production plan
+IDs, Test Mode values, provider/payment calls, migration execution, database
+write, entitlement change, account change, or customer-data mutation
+occurred. Migration `0038` exists in the source but was not applied. The
+previous READY deployment `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` is the rollback
+target.
+
+Gate 4 and the payment rows remain open for the complete isolated provider
+lifecycle and provider/ledger/entitlement reconciliation. Gates 6–9 remain
+open for their real reviewer, legal, protected-release/recovery, and final
+acceptance evidence. Score remains **219/61/280 (78.2%)**; no checkbox
+changed.
+
+Evidence: `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 checkout terminal-state repair
 
 Web PR #171 commit `fa1b9f5` closes a code-side lifecycle gap: checkout now
