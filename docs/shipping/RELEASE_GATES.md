@@ -25,6 +25,24 @@ changed.
 
 Evidence: `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
 
+## 2026-10-09 · Gate 4 partial hosted cancellation qualification
+
+Isolated Preview Test Mode now has provider-bound evidence for a signed
+`subscription.cancelled` event, exact replay deduplication, an older-event
+rejection path, owner-bound status, and provider/database reconciliation. The
+provider and database both report `cancelled`; the canonical monthly Pro
+binding and paid-time license expiry remain intact.
+
+The first synthetic request was rejected because its payload omitted the
+provider-signed checkout binding; the corrected signed run is the evidence.
+This does not close Gate 4. Renewal/charge, failure/expiry, refund,
+timeout/retry, complete method coverage, and the full exactly-once
+provider/ledger/entitlement matrix remain required. Production remains a
+qualified fail-closed code rollout only. Score remains **219/61/280 (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-hosted-subscription-cancel-replay-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 checkout terminal-state repair
 
 Web PR #171 commit `fa1b9f5` closes a code-side lifecycle gap: checkout now

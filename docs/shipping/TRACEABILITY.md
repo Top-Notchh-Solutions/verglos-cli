@@ -23,6 +23,20 @@
 - **Evidence:**
   `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
 
+## 2026-10-09 · Hosted Preview cancellation/replay qualification
+
+- **Mapped IDs:** Gate 4 hosted lifecycle; `PLAN-WEB-014`.
+- **Observed:** Signed cancellation 200; exact replay deduplicated; older
+  activation did not resurrect state; owner-bound status reported cancelled.
+- **Reconciled:** Provider and isolated database matched on cancellation and
+  canonical monthly Pro binding; completed webhook rows and active paid-time
+  license expiry were present.
+- **Boundary:** This is partial Gate 4 evidence. Renewal/charge,
+  failure/expiry, refund, timeout/retry, full payment-method coverage, and
+  exactly-once provider/ledger/entitlement reconciliation remain open.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-hosted-subscription-cancel-replay-2026-10-09.md`.
+
 ## 2026-10-09 · Web checkout terminal subscription lifecycle repair
 
 - **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

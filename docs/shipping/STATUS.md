@@ -22,6 +22,30 @@ Evidence: `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`
 Score remains **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
 changed.
 
+## 2026-10-09 · Hosted Preview Test Mode cancellation/replay qualification
+
+The isolated Preview lifecycle was exercised against the canonical monthly Pro
+catalog. A signed `subscription.cancelled` webhook returned HTTP 200; an exact
+replay returned HTTP 200 with `duplicate: true`; and an older signed activation
+did not resurrect the cancelled subscription. The owner-bound status response
+reported `subscriptionStatus: cancelled`.
+
+Read-only reconciliation matched the provider and isolated database: the
+bound provider subscription was cancelled with notes present; the database
+projection was cancelled, `pro`, monthly, catalog `2026-10-02.0`, INR,
+`280943` minor units, 30 days; recent activation and cancellation webhook rows
+were completed; and the license retained paid-time expiry.
+
+The first synthetic webhook was correctly rejected because the harness omitted
+the provider-signed checkout binding; the corrected run is the accepted
+evidence. This is partial Gate 4 evidence only. Renewal/charge,
+provider-generated failure/expiry, refund, timeout/retry, and the complete
+payment-method/exactly-once matrix remain open. Production remained unchanged
+after the fail-closed code rollout. Score remains **219/61/280 (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-hosted-subscription-cancel-replay-2026-10-09.md`.
+
 ## 2026-10-09 · Web checkout terminal subscription lifecycle repair
 
 Web PR #171 commit `fa1b9f5` now stops checkout polling when the authenticated

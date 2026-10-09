@@ -23,6 +23,30 @@
 - **Evidence:**
   `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
 
+## 2026-10-09 · Hosted Preview Test Mode cancellation/replay qualification
+
+- **Mapped work:** Gate 4 hosted lifecycle and `PLAN-WEB-014`; isolated
+  Preview, canonical monthly Pro, isolated test database, Razorpay Test Mode.
+- **Execution:** Signed cancellation returned HTTP 200; exact replay returned
+  HTTP 200 with `duplicate: true`; an older signed activation returned HTTP
+  200 without resurrecting the cancelled subscription; owner-bound status
+  reported `cancelled`.
+- **Reconciliation:** Provider status and isolated database projection both
+  reported cancellation. The database binding remained `pro`/monthly,
+  catalog `2026-10-02.0`, INR, `280943` minor units, 30 days. Recent activation
+  and cancellation webhook rows were completed, and the license retained
+  paid-time expiry.
+- **Harness note:** The first malformed synthetic payload was rejected because
+  provider-signed checkout notes were omitted. The corrected signed run is the
+  evidence; no malformed request is counted as acceptance.
+- **Disposition:** Partial Gate 4 evidence only. Renewal/charge,
+  provider-generated failure/expiry, refund, timeout/retry, full hosted method
+  coverage, and complete exactly-once reconciliation remain open. Production
+  stayed fail-closed after the code-only rollout. Score remains **219/61/280**;
+  no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-hosted-subscription-cancel-replay-2026-10-09.md`.
+
 ## 2026-10-09 · Web checkout terminal subscription lifecycle repair
 
 - **Mapped work:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

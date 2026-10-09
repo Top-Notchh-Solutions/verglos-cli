@@ -20,6 +20,23 @@
 - **Evidence:**
   `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
 
+## 2026-10-09 · Record partial hosted cancellation evidence without closing Gate 4
+
+- **Decision:** Record the corrected isolated Preview Test Mode cancellation,
+  replay, out-of-order, owner-binding, and provider/database reconciliation
+  results as partial Gate 4 evidence.
+- **Reason:** The provider-bound signed event was accepted, an exact replay was
+  deduplicated, an older activation did not resurrect state, and the isolated
+  database matched the provider. The malformed first harness payload was
+  correctly rejected and is excluded from acceptance.
+- **Boundary:** This does not prove renewal/charge, failure/expiry, refund,
+  timeout/retry, complete payment-method coverage, or full exactly-once
+  entitlement reconciliation. Production remains code-only and fail-closed.
+- **Disposition:** Keep Gate 4 open and leave the backlog score at
+  **219/61/280 (78.2%)** until the missing lifecycle evidence exists.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-hosted-subscription-cancel-replay-2026-10-09.md`.
+
 ## 2026-10-09 · Accept checkout terminal-state repair without closing Gate 4
 
 - **Decision:** Accept Web `fa1b9f5` as a code-side repair for terminal

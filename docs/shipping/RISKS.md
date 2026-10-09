@@ -18,6 +18,19 @@ Production billing or database writes until those operation-specific gates
 pass. Owner: Web/release operations. Evidence:
 `docs/shipping/evidence/production-code-rollout-fa1b9f5-2026-10-09.md`.
 
+## R-PLAN-WEB-014-hosted-cancellation-partial-2026-10-09 · 2026-10-09
+
+The isolated Preview Test Mode run now proves a provider-bound signed
+cancellation, exact replay deduplication, out-of-order protection, owner
+binding, and provider/database reconciliation. The license retained paid-time
+expiry after cancellation. Residual Gate 4 risk remains for renewal/charge,
+provider-generated failure/expiry, refund, timeout/retry, complete payment
+method coverage, and exactly-once ledger/entitlement reconciliation. The
+initial malformed synthetic payload was rejected as designed and is not
+acceptance evidence. Production remains fail-closed after its code-only
+rollout. Owner: Web billing/release qualification. Evidence:
+`docs/shipping/evidence/plan-web-014-hosted-subscription-cancel-replay-2026-10-09.md`.
+
 ## R-PLAN-WEB-014-checkout-terminal-state-repaired · 2026-10-09
 
 Web `fa1b9f5` removes the customer-facing risk that a cancelled, completed,
