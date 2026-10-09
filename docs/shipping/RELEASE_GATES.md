@@ -1,5 +1,24 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Web PR #171 integrated and hosted-verified
+
+PR #171 is now based on current `main` at `be8cd219` and is mergeable. The
+private-runner migration remains `0037`, while the unreleased subscription
+expiry migration is `0038`. The ordered migration check, full Web serial suite
+(**896 total / 872 pass / 24 explicit skips / 0 fail**), hosted workflow
+`37864205130`, Vercel Preview, GitGuardian, typecheck, build, dependency and
+licence checks all passed. The PR remains open and unmerged.
+
+Production was only inspected read-only and remains READY at
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`; this batch made no Production deploy,
+migration, provider/payment, database, entitlement, account, or customer-data
+write. Production is therefore still included at the fail-closed code-rollout
+stage. Gate 4, migration activation, recovery/rollback evidence, and external
+provider/reviewer gates remain open. Score remains **219/61/280 (78.2%)**; no
+checkbox changed.
+
+Evidence: `docs/shipping/evidence/web-pr-171-main-integration-2026-10-09.md`.
+
 ## 2026-10-09 · Current Web migration-tail restore rehearsal
 
 The current Web branch `da45a97` was restored into disposable PostgreSQL 15,

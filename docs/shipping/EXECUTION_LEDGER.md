@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Web PR #171 main integration and hosted verification
+
+- **Mapped work:** Web billing/subscription lifecycle, Preview isolation,
+  migration ordering, hosted verification, and the Production code-only
+  rollout boundary.
+- **Implementation:** Integrated current `main` into Web PR #171 at
+  `be8cd2194b298b3921b3a1521e1ae4cac338920c`. Preserved main's
+  `0037_private_runner_transport` and renumbered the unreleased subscription
+  expiry migration to `0038_billing_subscription_expired`.
+- **Verification:** 39 migrations validated; focused suite **48 total / 44
+  pass / 4 explicit skips / 0 fail**; full serial suite **896 total / 872
+  pass / 24 explicit skips / 0 fail**; typecheck and Drizzle schema checks
+  passed. Hosted workflow `37864205130`, Vercel Preview, GitGuardian, and
+  Preview comments passed.
+- **Disposition:** PR #171 is open and mergeable but not merged. Gate 4 and
+  external provider/reviewer/release evidence remain open.
+- **Production boundary:** Read-only inspection confirmed READY deployment
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`. No Production deploy, migration,
+  provider/payment, database, entitlement, account, or customer-data write
+  occurred. Promotion remains fail-closed until operation-specific recovery,
+  reconciliation, and rollback evidence is complete.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/web-pr-171-main-integration-2026-10-09.md`.
+
 ## 2026-10-09 · Current Web migration-tail restore rehearsal
 
 - **Mapped work:** migration/recovery support for the current Web branch

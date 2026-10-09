@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Web PR #171 integrated with current main and hosted-verified
+
+Web `be8cd219` now integrates the current `main` branch without dropping the
+Preview isolation, keyless-Preview fallback, subscription, or webhook changes.
+Main's private-runner migration remains `0037`; the unreleased subscription
+expiry migration is correctly recorded as `0038`. Ordered migration validation,
+focused tests, the full Web serial suite (**896 total / 872 pass / 24 explicit
+skips / 0 fail**), typecheck, Drizzle schema checks, and hosted workflow
+`37864205130` all passed. Vercel Preview, GitGuardian, and Preview comments
+also passed. PR #171 is mergeable but remains open and unmerged.
+
+Production was inspected read-only and remains READY at deployment
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`. This batch did not deploy the
+migration-bearing PR or perform any Production plan, provider, payment,
+database/migration, entitlement, account, or customer-data write. Production
+remains included as the fail-closed code-rollout stage; activation still needs
+operation-specific recovery and reconciliation evidence. Score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/web-pr-171-main-integration-2026-10-09.md`.
+
 ## 2026-10-09 · Current Web migration-tail restore rehearsal
 
 The migration-bearing Web branch `da45a97` was restored into a disposable
