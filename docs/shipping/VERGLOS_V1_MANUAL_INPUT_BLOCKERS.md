@@ -1,5 +1,28 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-10 · Preview fixture access and CLI qualification
+
+The exact current CLI `main` head
+`f5686b5c5aa11f45f392e647bd9d7e31830654ba` now has official CycloneDX/SPDX,
+exact-source build, six-archive in-toto binding, standards-corpus, and
+public-boundary evidence. `QUAL-CLI-006` still needs trusted keyless release
+identity, protected publication, legal/independent review, consumer platform
+evidence, and final acceptance.
+
+The isolated Preview subscription operation did not start because Vercel
+withheld the hidden Preview auth-fixture secret from the authorized runner.
+No HTTP request or provider/database/entitlement/Production write occurred.
+Owner: founder or Vercel project administrator. Missing artifact: protected
+runtime access for an authorized runner, never a secret pasted into chat or
+committed. Review before the next Preview attempt on 2026-10-10. Gate 4 and
+`PLAN-WEB-011/012/014/015` remain open until the complete lifecycle matrix and
+reconciliation are executed. Score remains **219/61/280 (78.2%)**; no checkbox
+changed.
+
+Evidence:
+`docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+`docs/shipping/evidence/plan-web-014-preview-auth-fixture-unavailable-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-09 · Legal review packet
 
 The private legal/licensing review request is prepared here:

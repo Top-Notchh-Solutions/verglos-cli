@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Current CLI artifact qualification and Preview boundary
+
+- **Mapped surfaces:** `QUAL-CLI-006`; Gate 4;
+  `PLAN-WEB-011/012/014/015`.
+- **CLI evidence:** Exact `main` head
+  `f5686b5c5aa11f45f392e647bd9d7e31830654ba` passed official CycloneDX/SPDX
+  validation, exact-source 8/8 build, six-archive in-toto binding, 7/7
+  standards corpus, and public-boundary checks. The Cosign check was an
+  ephemeral local verification with the transparency log intentionally
+  skipped.
+- **Preview evidence:** Vercel withheld the hidden Preview test-auth secret
+  before the runner could send the subscription request. No external or
+  application state changed.
+- **Acceptance boundary:** The CLI item and hosted lifecycle items remain
+  unchecked; score remains **219/61/280 (78.2%)**. Production remains
+  fail-closed and no Production state-changing write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+  `docs/shipping/evidence/plan-web-014-preview-auth-fixture-unavailable-2026-10-10.md`.
+
 ## 2026-10-09 · Production anonymous modified-client probe
 
 - **Mapped surface:** `PLAN-CLI-003` forged-authority boundary.

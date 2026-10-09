@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Backend qualification advanced; Preview lifecycle access blocked
+
+The exact current public CLI `main` head
+`f5686b5c5aa11f45f392e647bd9d7e31830654ba` passed official CycloneDX and SPDX
+validation, an exact-source 8/8 build, six-archive in-toto binding
+verification, the 7/7 standards corpus, and the public-boundary audit. A
+Cosign fixture verified only with an ephemeral local key and skipped the
+transparency log, so `QUAL-CLI-006` remains open for trusted identity,
+protected publishing, legal review, platform/consumer evidence, and final
+acceptance.
+
+The next isolated Preview subscription probe could not start because Vercel
+withheld the hidden Preview auth-fixture secret from the authorized local
+runner. No HTTP request or provider/database/entitlement/Production write was
+made. Gate 4 and the hosted lifecycle rows remain open until an authorized
+runner can execute the complete matrix and reconciliation.
+
+Production remains included at the fail-closed code-rollout boundary; no
+Production billing, migration, database, entitlement, account, or customer
+write was used to manufacture progress. Score remains **219/61/280 (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+`docs/shipping/evidence/plan-web-014-preview-auth-fixture-unavailable-2026-10-10.md`.
+
 ## 2026-10-09 · Current Production fail-closed audit
 
 The current Production deployment is READY at `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`

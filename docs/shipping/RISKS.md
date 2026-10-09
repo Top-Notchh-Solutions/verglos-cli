@@ -1,5 +1,32 @@
 # Verglos V1 risk register
 
+## R-QUAL-CLI-006-CURRENT-HEAD-REMAINING-GATES · 2026-10-10
+
+Official CycloneDX/SPDX, exact-source build, six-archive in-toto binding, and
+standards-corpus checks now pass for CLI `main`
+`f5686b5c5aa11f45f392e647bd9d7e31830654ba`. Residual risk is that Cosign was
+only verified with an ephemeral local key and `--insecure-ignore-tlog=true`:
+trusted Fulcio/OIDC/Rekor provenance, protected npm publication, legal review,
+independent review, clean-consumer platform evidence, and final acceptance are
+still absent. Owner: CLI/release qualification. Gate impact: preparatory
+progress only; `QUAL-CLI-006` remains open.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`.
+
+## R-PLAN-WEB-014-PREVIEW-AUTH-FIXTURE-ACCESS · 2026-10-10
+
+The next isolated Preview subscription probe stopped before HTTP because the
+Vercel CLI would not expose the hidden Preview auth-fixture secret to the
+authorized local runner. No provider, database, payment, webhook,
+entitlement, account, customer, deployment, or Production state changed.
+Owner: founder or Vercel project administrator. Safe next action: make the
+secret available only through the protected authorized runner/CI/browser
+fixture, without chat or repository exposure, then rerun the complete
+subscription lifecycle and reconciliation matrix. Gate impact: Gate 4 and
+`PLAN-WEB-011/012/014/015` remain open.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-auth-fixture-unavailable-2026-10-10.md`.
+
 ## R-CLI-API-ORIGIN-AUTHORITATIVE-SOURCE · 2026-10-09
 
 The API-origin hardening was first recorded against stale local CLI commit

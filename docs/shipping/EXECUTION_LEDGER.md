@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Current-head CLI qualification and Preview lifecycle blocker
+
+- **Mapped work:** `QUAL-CLI-006`; Gate 4 and
+  `PLAN-WEB-011/012/014/015`.
+- **CLI result:** Exact public `main` head
+  `f5686b5c5aa11f45f392e647bd9d7e31830654ba` passed the official CycloneDX
+  validator, official SPDX tooling, exact-source 8/8 build, six-archive
+  in-toto binding verification, 7/7 standards corpus, and public-boundary
+  audit. Cosign was verified only with an ephemeral local key and skipped the
+  transparency log.
+- **Preview result:** The bounded subscription probe stopped before HTTP
+  because Vercel withheld the hidden Preview auth fixture secret. No provider,
+  database, payment, webhook, entitlement, account, customer, deployment, or
+  Production write occurred.
+- **Disposition:** `QUAL-CLI-006` remains open for trusted release identity,
+  legal/protected publication, independent review, clean-consumer evidence,
+  and final acceptance. Gate 4 remains open for the authenticated isolated
+  lifecycle matrix and reconciliation evidence. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+  `docs/shipping/evidence/plan-web-014-preview-auth-fixture-unavailable-2026-10-10.md`.
+
 ## 2026-10-09 · Current Production fail-closed audit
 
 - **Mapped work:** Production audit, code-rollout boundary, and recurring

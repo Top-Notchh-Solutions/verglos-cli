@@ -1,5 +1,25 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Qualification progress and unresolved lifecycle access
+
+The exact current CLI `main` head
+`f5686b5c5aa11f45f392e647bd9d7e31830654ba` passed official CycloneDX/SPDX
+validation, an 8/8 build, six-archive in-toto binding verification, and the
+7/7 standards corpus. The local Cosign result is not trusted release
+provenance because it used an ephemeral key and skipped the transparency log.
+`QUAL-CLI-006` therefore remains open for trusted identity, legal and
+protected publishing approval, independent review, clean-consumer evidence,
+and final acceptance.
+
+The isolated Preview lifecycle run did not reach the HTTP route: Vercel
+withheld the hidden Preview auth-fixture secret. Gate 4 and
+`PLAN-WEB-011/012/014/015` remain open; no provider, database, payment,
+entitlement, or Production state changed. Score remains
+**219/61/280 (78.2%)** and no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-official-current-head-2026-10-10.md`;
+`docs/shipping/evidence/plan-web-014-preview-auth-fixture-unavailable-2026-10-10.md`.
+
 ## 2026-10-09 · Current Production fail-closed audit
 
 Production deployment `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` is READY from Web
