@@ -1837,3 +1837,19 @@ each observed method has lifecycle and reconciliation evidence.
 - **Disposition:** The observed first-charge subscription defect is fixed. The
   full Gate 4 lifecycle matrix and provider/ledger/entitlement reconciliation
   remain open; no backlog checkbox is accepted from this batch.
+
+## Preview subscription mandate/OTP limitation · 2026-10-09
+
+- **Decision:** Treat the bounded Test Mode subscription mandate/OTP failure as
+  a provider-qualification limitation, not as payment success and not as a
+  product acceptance failure. Do not repeat the same OTP interaction without
+  a changed provider fixture or documented provider control.
+- **Evidence:** The catalog-bound Preview route returned 200 and reached the
+  provider mandate step; the bounded OTP and bank-like OTP paths failed. The
+  isolated database was reconciled read-only with 38 migrations, 4 captured
+  subscription payments, 2 active Pro licenses, and cumulative subscription
+  and webhook aggregates recorded in the dated evidence file.
+- **Boundary:** No Production plan, provider/payment, database/migration,
+  entitlement, account, or customer-data write occurred. Gate 4 and
+  `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and `PLAN-WEB-015` remain
+  open until the missing provider lifecycle and reconciliation evidence exists.

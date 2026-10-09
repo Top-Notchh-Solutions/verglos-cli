@@ -6521,3 +6521,28 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
   complete provider/ledger/entitlement reconciliation. No checkbox changed;
   backlog remains **219 checked / 61 unchecked / 280 total (78.2%)**.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+
+## 2026-10-09 · PLAN-WEB-014 bounded subscription-authorization retry
+
+- **Scope:** Preview/Test Mode only on the isolated database and webhook
+  target. The catalog-bound subscription route returned HTTP 200 and the
+  provider Checkout reached the subscription-card mandate/OTP step.
+- **Provider result:** the bounded Test Mode mandate/OTP attempt failed, and a
+  second bank-like OTP interaction also failed. No successful authorization,
+  new captured payment, or entitlement claim is attributed to this retry.
+- **Reconciliation:** read-only isolated aggregates after the run were 5
+  active, 7 cancelled, and 12 pending subscription rows; 4 captured
+  subscription payments; 2 active Pro licenses; 61 completed webhook-event
+  rows; and 38 applied migrations. No manual row edit occurred.
+- **Verification:** temporary auth diagnostics were removed; Preview-auth
+  tests passed 4/4; Web typecheck passed with only the existing Node 22 engine
+  warning under the Node 26 runner. Docker and Chrome CDP were available.
+- **Production boundary:** no Production plan IDs, payment/provider writes,
+  database or migration writes, entitlement changes, account changes, or
+  customer-data mutations occurred.
+- **Disposition:** Gate 4 and `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  and `PLAN-WEB-015` remain open. The provider-supported Test Mode mandate
+  fixture and the remaining renewal/failure/expiry/refund/replay/out-of-order
+  lifecycle evidence are missing. No checkbox changed; backlog remains
+  **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-preview-subscription-otp-limitation-2026-10-09.md`.

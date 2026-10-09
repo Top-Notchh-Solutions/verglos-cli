@@ -471,6 +471,25 @@ score remains **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
 changed. See the invoice-reconciliation evidence for the complete record:
 `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
 
+## 2026-10-09 · Subscription authorization fixture limitation
+
+A bounded Preview/Test Mode retry reached the catalog-bound subscription route
+and returned HTTP 200, then reached Razorpay’s subscription-card mandate/OTP
+step. The provider rejected the bounded OTP attempt and a second bank-like OTP
+interaction; this retry did not create a new captured payment or entitlement
+claim. Read-only isolated aggregates remain 5 active, 7 cancelled, and 12
+pending subscriptions; 4 captured subscription payments; 2 active Pro
+licenses; 61 completed webhook events; and 38 applied migrations. No manual
+database edit occurred.
+
+Gate 4 remains open. A provider-supported Test Mode subscription
+mandate/renewal fixture and the remaining failure/expiry/refund/replay/
+out-of-order reconciliation evidence are required. No Production plan IDs,
+payment/provider writes, database/migration writes, entitlement changes,
+account changes, or customer-data mutations occurred. Score remains **219 / 61
+/ 280 (78.2%)**. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-subscription-otp-limitation-2026-10-09.md`.
+
 ## 2026-10-09 · current Production rollout — fail-closed code only
 
 The reviewed Web source `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` is now

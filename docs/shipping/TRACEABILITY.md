@@ -774,6 +774,19 @@ FINAL-WEB-001–008 remain open, and the count remains **218 checked / 62
 unchecked / 280 total (77.9%)**. See
 `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
 
+## PLAN-WEB-014 Preview subscription authorization limitation · 2026-10-09
+
+The Preview subscription route returned 200 and reached Razorpay Test Mode’s
+subscription-card mandate/OTP step, but the bounded OTP attempt and a second
+bank-like OTP interaction failed. Isolated read-only reconciliation found 38
+applied migrations, 5 active/7 cancelled/12 pending subscription rows, 4
+captured subscription payments, 2 active Pro licenses, and 61 completed
+webhook rows. This is cumulative fixture state and does not claim success for
+the failed retry. Gate 4 remains open for provider-supported authorization,
+renewal/failure/expiry/refund/replay/out-of-order lifecycle evidence and full
+provider/ledger/entitlement reconciliation. No checkbox changed. See
+`docs/shipping/evidence/plan-web-014-preview-subscription-otp-limitation-2026-10-09.md`.
+
 ## PLAN-WEB-014 invoice-bound subscription and Production rollout · 2026-10-09
 
 - **Implementation:** Web `a95deef` adds paid-invoice binding for subscription

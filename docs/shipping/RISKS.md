@@ -1340,3 +1340,14 @@ the unqualified renewal/failure/cancellation/expiry/refund/replay/out-of-order
 matrix and complete provider/ledger/entitlement reconciliation. Production
 billing and database activation remain fail-closed behind operation-specific
 backup/restore, reconciliation, and rollback preflights.
+
+R-041 update (2026-10-09, Test Mode subscription authorization limitation):
+The isolated Preview subscription route reached Razorpay’s mandate/OTP step,
+but the bounded Test Mode OTP path and a second bank-like OTP interaction did
+not authorize. The first-charge/invoice reconciliation remains evidenced, but
+renewal, provider failure/expiry, subscription refund, replay/out-of-order,
+and complete provider/ledger/entitlement reconciliation remain unqualified.
+Owner: Verglos release owner with the Razorpay Test Mode account owner. Until
+a provider-supported subscription fixture or documented simulation control is
+available, Gate 4 remains open and Production recurring billing remains
+fail-closed. No Production or manual database write occurred.

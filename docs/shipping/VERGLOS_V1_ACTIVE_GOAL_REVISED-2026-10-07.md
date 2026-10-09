@@ -12,13 +12,21 @@ CLI process tests **44/44**, workspace typecheck **12/12**, and workspace
 build **12/12** pass. This is progress toward the backend portion of the
 whole-backlog goal, not a release or gate closure.
 
-Production remains explicitly in scope for the complete objective. This
-CLI-only batch made no Web redeploy, npm publish/tag, Production plan or
-provider/payment call, database/migration write, entitlement/account change,
-or customer-data mutation. Continue the goal with the same sequence: close
-only evidenced gates, keep Production fail-closed until its operation-specific
-preflight/recovery/reconciliation/rollback evidence exists, and maintain the
-live score at **219 checked / 61 unchecked / 280 total (78.2%)**.
+Production remains explicitly in scope for the complete objective, and the
+current action is a real Production code deployment—not a documentation-only
+placeholder. This rollout is intentionally **fail-closed code only**: it
+includes the reviewed application source, build, deployment, public smoke,
+authentication/configuration boundary checks, runtime/console checks,
+rollback target, and private evidence; it does **not** include Production
+plan IDs, payment writes, database or migration writes, entitlement changes,
+account changes, or customer-data mutations. This CLI-only batch made no Web
+redeploy, npm publish/tag, Production plan or provider/payment call,
+database/migration write, entitlement/account change, or customer-data
+mutation. Continue the goal with the same sequence: close only evidenced
+gates, keep each state-changing Production surface fail-closed until its
+operation-specific preflight/recovery/reconciliation/rollback evidence
+exists, and maintain the live score at **219 checked / 61 unchecked / 280
+total (78.2%)**.
 
 ## 1. Objective
 
@@ -94,6 +102,100 @@ it is not the final billing launch. Production billing and database writes
 remain part of this goal and will be executed when their concrete preflight
 criteria are satisfied.
 
+### Current Production rollout declaration — do not narrow the goal
+
+The current Production action is a reviewed code deployment as a
+**fail-closed code rollout only**. It is an accepted in-scope shipping step,
+but it is not permission to silently skip the rest of Production. The rollout
+must include and report every item below:
+
+- source commit, diff review, typecheck, focused tests, required full-suite
+  checks, build, runtime-configuration validation, and known rollback target;
+- deployment ID, target/environment, aliases, build result, route/health
+  results, HTTP-method and authentication-boundary checks, browser rendering,
+  console/runtime errors, headers, caching, and fail-closed behavior;
+- proof that Production did not receive Preview/Test Mode plan IDs, test
+  credentials, test webhook secrets, isolated-test database URLs, fixture
+  customers, or test entitlement state;
+- read-only verification of Production provider mode, database/migration
+  compatibility, deployment logs, monitoring/alerts, and relevant aggregate
+  state without exposing secrets, payment identifiers, database URLs, or
+  personal data;
+- a private evidence record and execution-ledger entry that state what passed,
+  what was not exercised, the exact limitation, the owner, the rollback path,
+  and the release decision; and
+- a live backlog recomputation after the batch. A code-only rollout does not
+  close payment, database, migration, entitlement, account, customer-data,
+  monitoring, recovery, or final-acceptance checkboxes by itself.
+
+The following Production work remains mandatory in this same goal after the
+code rollout: correct live provider/customer/plan/webhook configuration;
+database migrations and backfills; subscription, capture, refund, and other
+provider actions; entitlement, account, organization, and customer-data
+changes; post-write ledger/provider/entitlement reconciliation; monitoring
+and incident response; authenticated rollback/restore or forward-fix
+rehearsal; and final Production acceptance. Each state-changing operation
+requires its own reviewed dry run, bounded scope, backup/snapshot, restore
+evidence, reconciliation criteria, rollback/forward-fix decision, and
+post-write verification before execution. Until then, those surfaces stay
+disabled or fail closed and are recorded as open—not omitted.
+
+### Production scope map — every surface remains in the shipping objective
+
+The phrase “fail-closed code rollout only” describes the **current safe
+Production operation**. It does not reduce the Production deliverable to a
+code deploy. The same goal must carry the complete Production chain below to
+completion, with a separate evidence record and backlog decision for every
+stage:
+
+1. **Application rollout:** reviewed source, dependency and migration
+   compatibility, focused and full tests, typecheck, build, deployment,
+   runtime configuration validation, route/authentication/HTTP checks,
+   browser and console smoke, headers/caching checks, monitoring hookup, and
+   a verified rollback target.
+2. **Live configuration:** the correct live provider account and mode,
+   canonical catalog and price records, plan IDs, customer/organization
+   ownership rules, live webhook endpoint and secret, feature flags, email,
+   object storage, queue, rate limits, and every other required Production
+   integration. Test keys, Preview URLs, test plan IDs, fixture customers,
+   and test webhook secrets must never be copied into Production.
+3. **Database release:** schema inspection, exact migration plan, dry run,
+   bounded DDL/DML, backup or snapshot, restore rehearsal, migration and
+   backfill row counts, compatibility checks, post-write verification, and a
+   rollback or forward-fix decision. This includes every required table,
+   index, constraint, catalog, billing, ledger, organization, entitlement,
+   audit, and customer-data change.
+4. **Payment and subscription lifecycle:** server-selected canonical price
+   and catalog binding; order/subscription creation; authorization, capture,
+   failure, retry, timeout, cancellation, renewal, expiry, full and partial
+   refund; provider webhook signature, duplicate, replay, out-of-order, and
+   reconciliation handling; and exactly-once payment-ledger behavior. No
+   lifecycle step is considered shipped from a route or a green build alone.
+5. **Entitlement and account state:** verified payment-to-ledger-to-
+   entitlement ordering; plan upgrades/downgrades; Team, Studio, and
+   Enterprise organization ownership; account/customer data changes;
+   license issuance, renewal, revocation, and expiry; tenant isolation;
+   audit records; and repair/reconciliation behavior without manual row
+   edits or founder-email shortcuts.
+6. **Release operations:** protected npm and Vercel approvals, package
+   provenance and notices, deployment promotion, rollback/restore rehearsal,
+   incident and alert routing, rate-limit and abuse controls, and recovery
+   evidence for both the Web application and the npm/CLI product.
+7. **Acceptance and handoff:** authenticated Production smoke, live
+   provider/database/ledger/entitlement reconciliation, monitoring window,
+   rollback readiness, final backlog recomputation, final acceptance, and
+   the authorized POC corpus across companies from zero to 100 crore revenue
+   and across all supported plans. External AppSec, legal, customer-consent,
+   and repository-authorization gates must be recorded with their real
+   owner and artifact; they may not be silently marked complete.
+
+The current code-only rollout is therefore a real first Production slice,
+not the completion claim. A later Production resume must explicitly report
+each item above as **passed, failed, deferred with owner/date, or blocked by
+an external gate**. “Deferred” means the checkbox stays open; it never means
+the surface was forgotten. The backlog score changes only when the complete
+acceptance evidence for the corresponding item exists.
+
 ### Production completeness contract — current execution update
 
 The Production workstream must be reported as a complete chain, not as a
@@ -149,6 +251,30 @@ The current CLI standards-validation source restoration is:
 It is qualification progress only; official validators, trusted release
 provenance, protected publishing, legal review, and independent acceptance
 remain open.
+
+### 2026-10-09 continuation checkpoint — provider authorization remains open
+
+The next bounded Preview/Test Mode subscription attempt reached the
+catalog-bound creation route with HTTP 200 and Razorpay’s subscription-card
+mandate/OTP step. The provider rejected the bounded OTP attempt and a second
+bank-like OTP interaction also failed. This is a provider-qualification
+limitation, not payment success and not a reason to claim Gate 4 complete.
+Read-only isolated reconciliation found 38 applied migrations, 5 active, 7
+cancelled, and 12 pending subscription rows, 4 captured subscription payment
+rows, 2 active Pro licenses, and 61 completed webhook-event rows. These are
+cumulative isolated-fixture aggregates and do not attribute a captured
+payment or entitlement to the failed retry.
+
+Temporary Preview auth diagnostics were removed after diagnosis; focused
+Preview-auth tests passed 4/4 and Web typecheck passed with only the existing
+Node 22 engine warning under the Node 26 runner. No Production plan IDs,
+payment/provider writes, database or migration writes, entitlement changes,
+account changes, or customer-data mutations occurred. Gate 4 and
+`PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and `PLAN-WEB-015` remain open.
+The next valid attempt requires a provider-supported Test Mode subscription
+mandate/renewal fixture or documented provider simulation control; do not
+repeat the same OTP path indefinitely. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-subscription-otp-limitation-2026-10-09.md`.
 
 The payment gate had one explicit product gap: the Web code had billing ledger
 and subscription-webhook handling, but no server route that created a provider
