@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Authoritative CLI API-origin hardening
+
+- **Mapped work:** Backend transport security and Production fail-closed
+  scope; no checkbox accepted.
+- **Source correction:** The earlier `439b782d` implementation was in a stale
+  local checkout. Authoritative CLI commit
+  `1972af3abe648312a427c20dc96bbcce54db55a` now contains the same hardening.
+- **Implementation:** Clean HTTPS-origin validation covers license/status,
+  unlock, entitlement, login, monitor, organization policy, private runner,
+  and account-sync transports; unsafe values fail before `fetch`.
+- **Verification:** Focused **24/24**, complete CLI process suite **44/44**,
+  workspace typecheck **12/12**, workspace build **12/12**, and diff check
+  passed.
+- **Production boundary:** CLI-only; no Web redeploy, npm publish/tag,
+  Production plan/provider/payment, database/migration, entitlement, account,
+  or customer-data write occurred.
+- **Disposition:** `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, and external
+  reviewer/legal/protected-release/rollback/final-acceptance gates remain
+  open. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
+
 ## 2026-10-09 · CLI standards-validation source restoration
 
 - **Mapped work:** `QUAL-CLI-006` preparatory source qualification; no checkbox

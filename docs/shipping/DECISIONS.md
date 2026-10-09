@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Record authoritative CLI transport hardening
+
+- **Decision:** Treat CLI commit
+  `1972af3abe648312a427c20dc96bbcce54db55a` as the authoritative API-origin
+  hardening source. The earlier `439b782d` remains a stale-checkout
+  historical record and is not a release claim.
+- **Result:** All bearer-bearing configured API transports reject unsafe bases
+  before request construction; the focused and complete CLI suites pass
+  **24/24** and **44/44**, with workspace typecheck/build **12/12** each.
+- **Production boundary:** Production remains in scope, but this CLI-only
+  batch required no Web redeploy and made no npm, provider/payment, plan,
+  database/migration, entitlement, account, or customer-data write.
+- **Disposition:** Keep `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, and the
+  external reviewer/legal/protected-release/rollback/final-acceptance gates
+  open. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
+
 ## 2026-10-09 · Restore standards importer source before claiming validation
 
 - **Decision:** Restore the missing bounded parser/importer source and public

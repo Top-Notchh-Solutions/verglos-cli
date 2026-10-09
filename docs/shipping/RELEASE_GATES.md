@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Authoritative CLI transport hardening
+
+Authoritative CLI commit
+`1972af3abe648312a427c20dc96bbcce54db55a` now applies the clean-HTTPS-origin
+boundary to every configured bearer-bearing transport. Focused tests **24/24**,
+complete CLI process tests **44/44**, workspace typecheck **12/12**, and
+workspace build **12/12** pass. This is backend qualification progress only;
+it does not close `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, legal/reviewer,
+protected release, rollback, or final acceptance.
+
+Production remains explicitly in scope. No Web redeploy or npm publish/tag was
+needed for this CLI-only change, and no Production plan/provider/payment,
+database/migration, entitlement, account, or customer-data write occurred.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
+
 ## 2026-10-09 · CLI standards-validation source restoration
 
 Public CLI `d0a3b21` restores the shared bounded parser/importer source and

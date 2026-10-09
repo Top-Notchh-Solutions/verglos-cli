@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## Current execution note · 2026-10-09
+
+Authoritative CLI API-origin hardening is complete at commit
+`1972af3abe648312a427c20dc96bbcce54db55a` with focused **24/24**, complete
+CLI process **44/44**, and workspace typecheck/build **12/12** each. This is
+backend/security progress only: `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, and
+the externally gated Production/release/reviewer/legal/rollback items remain
+unchecked until their own evidence exists. Production remains in scope; this
+CLI-only batch made no Web deploy, npm publish/tag, plan/provider/payment,
+database/migration, entitlement, account, or customer-data write. Score
+remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+
 ## Gate 4 lifecycle ordering guard and isolated reconciliation · 2026-10-09
 
 Web `6f932d4` prevents a later `subscription.authenticated` webhook from

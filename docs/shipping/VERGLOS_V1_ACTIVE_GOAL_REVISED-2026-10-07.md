@@ -4,6 +4,22 @@ Effective checkpoint: 2026-10-09. This file is the authoritative replacement
 goal for the remaining shipping work. Replace the previous active goal with
 this complete version before resuming.
 
+## Current checkpoint · 2026-10-09
+
+The authoritative CLI backend now includes API-origin hardening at commit
+`1972af3abe648312a427c20dc96bbcce54db55a`. Focused tests **24/24**, complete
+CLI process tests **44/44**, workspace typecheck **12/12**, and workspace
+build **12/12** pass. This is progress toward the backend portion of the
+whole-backlog goal, not a release or gate closure.
+
+Production remains explicitly in scope for the complete objective. This
+CLI-only batch made no Web redeploy, npm publish/tag, Production plan or
+provider/payment call, database/migration write, entitlement/account change,
+or customer-data mutation. Continue the goal with the same sequence: close
+only evidenced gates, keep Production fail-closed until its operation-specific
+preflight/recovery/reconciliation/rollback evidence exists, and maintain the
+live score at **219 checked / 61 unchecked / 280 total (78.2%)**.
+
 ## 1. Objective
 
 Ship the complete Verglos V1 across:

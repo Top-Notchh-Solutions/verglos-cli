@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## R-CLI-API-ORIGIN-AUTHORITATIVE-SOURCE · 2026-10-09
+
+The API-origin hardening was first recorded against stale local CLI commit
+`439b782d`. The authoritative source now contains the equivalent boundary at
+`1972af3abe648312a427c20dc96bbcce54db55a`, verified by focused **24/24** and
+complete CLI process **44/44** tests plus **12/12** workspace typecheck/build
+tasks. The stale commit must not be used as release provenance.
+
+Residual risk: this is code qualification only. It does not prove package
+publication provenance, hosted paid authorization, provider lifecycle,
+Production billing/database activation, independent security/legal review, or
+rollback/final acceptance. Owner: CLI/release security. Gate impact:
+backend progress only; no checkbox change.
+
+Evidence: `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
+
 ## R-QUAL-CLI-006-SOURCE-RESTORATION · 2026-10-09
 
 The public CLI `main` tree briefly had the standards-validation corpus test

@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Authoritative CLI API-origin hardening
+
+The fail-closed API-origin boundary is now implemented in the authoritative
+CLI source at `1972af3abe648312a427c20dc96bbcce54db55a`. The earlier local
+`439b782d` record was from a stale checkout; it is retained as historical
+context, not as the release head. License, entitlement, login, monitor,
+organization-policy, private-runner, unlock, and account-sync transports now
+reject unsafe configured API bases before request construction.
+
+Verification is complete for this code batch: focused tests **24/24**,
+complete CLI process suite **44/44**, workspace typecheck **12/12**, workspace
+build **12/12**, and diff check passed. The unsafe saved-base regression made
+zero fetch calls.
+
+Production remains in scope end-to-end, but this CLI-only change required no
+Web redeploy. No npm publish/tag, Production plan/provider/payment,
+database/migration, entitlement, account, or customer-data write occurred.
+`PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, and the external release/reviewer/legal
+gates remain open. Score remains **219 checked / 61 unchecked / 280 total
+(78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
+
 ## 2026-10-09 · CLI standards-validation source restoration
 
 Public CLI commit `d0a3b21` restores the bounded shared parser, importer

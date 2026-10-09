@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Authoritative CLI API-origin hardening
+
+- **Mapped surfaces:** CLI credential/API transports, backend security, and
+  the Production fail-closed rollout boundary.
+- **Authoritative source:** CLI commit
+  `1972af3abe648312a427c20dc96bbcce54db55a`; the earlier `439b782d` was a
+  stale-checkout implementation and is not treated as the release head.
+- **Verification:** Focused **24/24**, complete CLI process suite **44/44**,
+  workspace typecheck **12/12**, workspace build **12/12**, and diff check
+  passed. Unsafe saved HTTP configuration produced zero fetch calls.
+- **Acceptance boundary:** This strengthens the backend but does not close
+  `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, or external release, legal,
+  independent-review, rollback, or final-acceptance gates.
+- **Production boundary:** No Web redeploy, npm publish/tag, Production
+  plan/provider/payment, database/migration, entitlement, account, or
+  customer-data write occurred. Score remains **219/61/280 (78.2%)**; no
+  checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
+
 ## 2026-10-09 · CLI standards-validation source restoration
 
 - **Mapped surface:** `QUAL-CLI-006` standards-validation corpus and shared
