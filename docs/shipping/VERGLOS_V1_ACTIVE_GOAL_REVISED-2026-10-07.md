@@ -6,27 +6,63 @@ this complete version before resuming.
 
 ## Current checkpoint · 2026-10-10
 
-The authoritative CLI backend now includes API-origin hardening at commit
-`1972af3abe648312a427c20dc96bbcce54db55a`. Focused tests **24/24**, complete
-CLI process tests **44/44**, workspace typecheck **12/12**, and workspace
-build **12/12** pass. This is progress toward the backend portion of the
-whole-backlog goal, not a release or gate closure.
+This is the complete replacement goal for the current shipping run. The
+authoritative private backlog currently recomputes to **219 checked / 61
+unchecked / 280 total (78.2%)**. This number must be recomputed from the live
+backlog after every substantial batch; no goal-file edit, deployment, browser
+click, configuration change, or test run closes a checkbox by itself.
 
-Production remains explicitly in scope for the complete objective, and the
-current action is a real Production code deployment—not a documentation-only
-placeholder. This rollout is intentionally **fail-closed code only**: it
-includes the reviewed application source, build, deployment, public smoke,
-authentication/configuration boundary checks, runtime/console checks,
-rollback target, and private evidence; it does **not** include Production
-plan IDs, payment writes, database or migration writes, entitlement changes,
-account changes, or customer-data mutations. This CLI-only batch made no Web
-redeploy, npm publish/tag, Production plan or provider/payment call,
-database/migration write, entitlement/account change, or customer-data
-mutation. Continue the goal with the same sequence: close only evidenced
-gates, keep each state-changing Production surface fail-closed until its
-operation-specific preflight/recovery/reconciliation/rollback evidence
-exists, and maintain the live score at **219 checked / 61 unchecked / 280
-total (78.2%)**.
+The active item is `PLAN-WEB-014`. It remains the only implementation and
+acceptance workstream until it is accepted with complete evidence or recorded
+as genuinely blocked with an owner, missing artifact, review/expiry date, and
+release decision. The next item is not selected merely because it is easier.
+All work on the CLI, Web application, Preview, Production, payment provider,
+browser, Docker, and private tracker must either implement, unblock, qualify,
+or document evidence for this active item.
+
+The current release-candidate payment decision is **Cards-only**. The
+deployed method configuration is `card` in Preview and Production; UPI/QR,
+netbanking, wallet, EMI, Pay Later, eMandate, and other methods are not
+claimed until separately qualified. Cards-only is a product-scope decision,
+not payment acceptance: the remaining requirement is a real canonical-price
+Razorpay Test Mode recurring-card lifecycle in isolated Preview.
+
+The latest Web repair is commit `a2b305c` on `feat/preview-test-auth`. It
+keeps the isolated Preview fixture-auth seam available outside an explicit
+Production runtime while requiring the explicit auth-enabled and isolated-
+database markers. The Production code rollout `dpl_GXN9UCK2fotoRcGACJx85p9s7dBi`
+is READY and aliased to `https://verglos.com`; its public checkout renders
+Cards only. The rollout is fail-closed code/configuration verification only:
+it did not create a Production payment, subscription, database row,
+migration, entitlement, account, or customer-data mutation. Preview branch
+requalification remains a separate step and must use the isolated database,
+test provider configuration, and private fixture evidence.
+
+The current gate state is: Gates 1–3 are complete for isolated
+qualification; Gate 4 is partially qualified but remains open until the
+Cards-only recurring lifecycle and entitlement reconciliation are evidenced;
+Gates 5–9 remain open or external as described in Section 4. No production
+billing or database activation is implied by this checkpoint.
+
+For every successful payment acceptance, private evidence must show the full
+chain: server-selected canonical catalog and amount, provider authorization
+or capture, valid signed webhook, one payment row, one ledger row, correct
+user/tenant/organization binding, one entitlement/license, correct access,
+replay idempotency, and correct failure/cancellation/refund/renewal/expiry
+transitions. Provider IDs, secrets, database URLs, cookies, authorization
+headers, personal data, and raw payment payloads must be redacted. Direct
+entitlement edits, founder-email shortcuts, screenshots, synthetic provider
+events, and green local tests are not substitutes.
+
+Production remains explicitly in scope for the complete objective. Every
+Production pass must distinguish read-only audit, fail-closed code rollout,
+configuration activation, state-changing payment/database/entitlement work,
+post-write reconciliation, monitoring, and rollback/restore. State-changing
+Production work stays disabled until its own dry run, bounded scope,
+backup/restore, reconciliation, rollback or forward-fix, and post-write
+verification evidence exists. Continue the goal with one active item, exact
+score recomputation, private evidence, execution-ledger synchronization, and
+a concise implementation showcase after each accepted batch.
 
 ### 2026-10-10 execution lock — one backlog item at a time
 
@@ -1135,14 +1171,18 @@ catalog-bound subscription-creation route and owner-bound status read are
 implemented. Webhook lifecycle code plus a route is still not acceptance until
 real isolated Test Mode lifecycle evidence exists.
 
-Entitlement evidence is mandatory, not an optional follow-up document:
-successful authorization/capture must lead to signed webhook verification,
-exactly one payment row, exactly one ledger row, the correct tenant binding,
-one license/entitlement, and correct account access. Replay must not
-duplicate. Failure, cancellation, refund, and expiry must not leave
-unauthorized access. Renewal must extend the existing entitlement rather than
-create a duplicate. A rendered Cards label, a local test, a direct database
-edit, or a synthetic provider event is not enough.
+Entitlement evidence is mandatory, not an optional follow-up document. The
+private record must connect the same redacted checkout/provider correlation to
+the signed webhook verification, exactly one payment row, exactly one ledger
+row, the correct user/tenant/organization binding, one license/entitlement,
+and the resulting account-access decision. It must also show deduplication
+for duplicate/replayed events, rejection or containment of out-of-order
+events, and no unauthorized access after failure, cancellation, refund, or
+expiry. Renewal must extend the existing entitlement rather than create a
+duplicate, and a repair/reconciliation run must explain any pre-existing
+aggregate discrepancy without manual entitlement-row edits. A rendered Cards
+label, a local test, a direct database edit, a screenshot, or a synthetic
+provider event is not enough.
 
 Qualify across:
 
