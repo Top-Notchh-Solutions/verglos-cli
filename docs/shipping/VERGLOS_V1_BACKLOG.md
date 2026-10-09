@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Provider renewal-shaped invoice reconciliation gap
+
+Read-only Test Mode inventory found one active canonical monthly subscription
+with two paid provider invoices, while the matching isolated Preview row has
+zero matching application payment rows, zero licenses, and no matching
+`subscription.charged` event. Provider invoice state is not accepted as
+renewal or entitlement evidence. The required next artifact is an exact
+provider delivery/replay to the isolated webhook followed by reconciliation.
+No checkbox changed; score remains **219 checked / 61 unchecked / 280 total
+(78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-renewal-reconciliation-gap-2026-10-10.md`.
+
 ## 2026-10-10 · Cardless EMI repair merged; Production code rollout verified
 
 Web PR #172 merged as `98dd571` after hosted Verify passed with the pinned

@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Renewal-shaped provider invoice remains unreconciled
+
+Read-only Test Mode data shows an active canonical monthly subscription with
+two paid provider invoices. The matching isolated Preview subscription row is
+active, but the application has no matching payment or license row and no
+matching `subscription.charged` webhook event. Provider invoice state is not
+accepted as renewal evidence without the signed application delivery and
+projection.
+
+Missing artifact: provider-supported exact event delivery/replay to the
+isolated Preview webhook and read-only reconciliation. Owner: Web/provider
+operations. Gate 4 and `PLAN-WEB-011/012/014/015` remain open; Production is
+untouched. Score remains **219/61/280 (78.2%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-provider-renewal-reconciliation-gap-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 Cardless EMI repair and Production code rollout
 
 Web PR #172 merged as `98dd571` after hosted Verify

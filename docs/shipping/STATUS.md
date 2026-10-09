@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Renewal-shaped provider invoice is not reconciled
+
+Read-only Test Mode inventory found one active monthly Pro subscription with
+two paid provider invoices. The matching isolated Preview subscription row is
+active, but no matching application payment, license, or `subscription.charged`
+event exists. This is a real reconciliation gap, not renewal acceptance.
+
+The safe next action is a provider-supported exact event delivery/replay to the
+isolated Preview webhook, followed by read-only ledger/subscription/license
+reconciliation. No manual row edit or entitlement workaround is allowed.
+Gate 4 and `PLAN-WEB-011/012/014/015` remain open. Score remains
+**219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-renewal-reconciliation-gap-2026-10-10.md`.
+
 ## 2026-10-10 · Cardless EMI repair merged and Production rollout complete
 
 Web PR #172 is merged as `98dd571`. Hosted Verify run `37991101222` passed

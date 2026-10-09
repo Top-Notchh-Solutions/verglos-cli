@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-PROVIDER-RENEWAL-RECONCILIATION · 2026-10-10
+
+Test Mode reports two paid invoices for one active canonical monthly
+subscription, while the matching isolated Preview subscription has no payment,
+license, or `subscription.charged` projection. This prevents claiming renewal
+or entitlement acceptance. Owner: Web/provider operations. Missing artifact:
+provider delivery record or supported replay of the exact signed event to the
+isolated webhook, followed by ledger/subscription/license reconciliation.
+Safe next action: use the provider-supported delivery/replay path only; do not
+edit rows or grant entitlements manually. Gate impact: Gate 4 and
+`PLAN-WEB-011/012/014/015` remain open.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-provider-renewal-reconciliation-gap-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-CARDLESS-EMI-BINDING · 2026-10-10 · resolved code/CI slice
 
 Web PR #172 merged as `98dd571` after the hosted schema job passed with the

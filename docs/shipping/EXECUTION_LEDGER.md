@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Provider renewal-shaped invoice reconciliation gap
+
+- **Read-only provider observation:** Test Mode contained one active monthly
+  Pro subscription with canonical amount 280,943 paise, `paid_count=2`, and
+  two paid invoices. The subscription identifier is redacted in the private
+  evidence record.
+- **Read-only isolated DB observation:** The matching active subscription row
+  exists, but there are zero matching billing-payment rows, zero matching
+  license rows, and no matching `subscription.charged` event in the local
+  webhook aggregate.
+- **Boundary:** Provider and isolated Preview reads only. No provider,
+  payment, database, migration, entitlement, account, customer, or Production
+  write occurred.
+- **Disposition:** Do not claim renewal or entitlement acceptance. The next
+  required artifact is an exact provider delivery record or supported replay
+  to the isolated Preview webhook, then ledger/subscription/license
+  reconciliation. Gate 4 and the four mapped payment IDs remain open. Score
+  remains **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-provider-renewal-reconciliation-gap-2026-10-10.md`.
+
 ## 2026-10-10 · Cardless EMI binding merged and Production code rollout
 
 - **Source:** Web PR #172 code `210d880`, CI mirror `7cfbba6`, merged as

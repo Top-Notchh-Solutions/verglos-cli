@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Provider renewal-shaped invoice reconciliation gap
+
+- **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`; provider
+  subscription renewal and Preview reconciliation.
+- **Provider read:** One active canonical monthly Pro subscription has
+  `paid_count=2` and two paid invoices.
+- **Application read:** The matching isolated active subscription has zero
+  matching payment rows, zero licenses, and no matching `subscription.charged`
+  event in the webhook aggregate.
+- **Acceptance boundary:** Provider invoice state alone is insufficient to
+  claim renewal or entitlement. Exact signed delivery/replay and subsequent
+  reconciliation remain required. No state-changing operation occurred.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-provider-renewal-reconciliation-gap-2026-10-10.md`.
+
 ## 2026-10-10 · Cardless EMI binding merge and Production rollout
 
 - **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`; Web payment
