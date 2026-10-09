@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Current Web migration-tail restore rehearsal
+
+The migration-bearing Web branch `da45a97` was restored into a disposable
+PostgreSQL 15 container and migrated through all **38** current migrations.
+Both writer passes succeeded, object reconciliation returned `reconciled`,
+and the stopped-database read failed closed. Measured RTO was **3,302 ms**.
+
+The harness correctly kept the overall result open because the available
+snapshot is **441 hours** old, beyond the critical 48-hour RPO. This is useful
+current-branch recovery evidence, not current-backup or Production migration
+authorization. No Production or persistent test state changed. Score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-web-004-current-migration-tail-rehearsal-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed environment audit
 
 The live read-only Vercel check confirms Production deployment

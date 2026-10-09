@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Current Web migration-tail restore rehearsal
+
+- **Mapped work:** migration/recovery support for the current Web branch
+  `da45a97b6e41c52b471b697446d6bbc26346c59a`, `QUAL-WEB-005`, `DIST-006`,
+  and the Production migration/rollback track.
+- **Rehearsal:** The existing local snapshot was restored into a disposable
+  PostgreSQL 15 Docker container. Current migrations applied through **38**;
+  both writer passes succeeded; reconciliation returned `reconciled`; and a
+  stopped-database read failed closed as expected.
+- **Measured result:** RTO **3,302 ms**. Snapshot age/RPO **441 hours**, so the
+  harness correctly returned `failed` against the critical 48-hour RPO limit.
+- **Disposition:** This is current-branch migration-tail and recovery
+  evidence only. It does not authorize Production migration, close
+  `QUAL-WEB-005` or `DIST-006`, or close the payment rows. Current-backup,
+  hosted deletion, Production reconciliation, deployment rollback, and
+  operation-specific approval remain open.
+- **Boundary:** No Production deployment, database/migration write,
+  provider/payment write, entitlement change, account change, or customer-data
+  mutation occurred. The temporary container was stopped.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-004-current-migration-tail-rehearsal-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed environment audit
 
 - **Scope:** Read-only recheck of the live Production deployment and Vercel

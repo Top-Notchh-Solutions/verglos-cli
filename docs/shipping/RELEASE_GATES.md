@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Current Web migration-tail restore rehearsal
+
+The current Web branch `da45a97` was restored into disposable PostgreSQL 15,
+migrated through **38** migrations, reconciled successfully, and exercised the
+stopped-database fail-closed path. RTO was **3,302 ms**. The available snapshot
+is **441 hours** old, so the critical 48-hour RPO gate correctly remains open.
+
+This strengthens current-branch recovery evidence but does not authorize a
+Production migration or close `QUAL-WEB-005`, `DIST-006`, the payment rows, or
+the Production activation track. No Production/provider/database/payment/
+entitlement/account/customer-data write occurred. Score remains
+**219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-web-004-current-migration-tail-rehearsal-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed environment audit
 
 The read-only Vercel audit confirms Production deployment
