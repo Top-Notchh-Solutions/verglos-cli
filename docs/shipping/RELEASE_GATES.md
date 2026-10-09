@@ -2485,13 +2485,14 @@ changed. Evidence:
 `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
 ## PLAN-WEB-014 `invoice.paid` renewal binding · 2026-10-10
 
-Web commit `a97bc2b` adds a subscription-bound `invoice.paid` webhook path
+Web commits `a97bc2b` and `b1bd248` add a subscription-bound `invoice.paid` webhook path
 that reuses the existing signed checkout and provider-invoice/payment binding
 checks. Unrelated one-off invoices are acknowledged without a ledger or
 entitlement write. Focused webhook tests pass **20/20**; the broader payment
 and lifecycle set passes **48 pass / 0 fail / 3 explicit skips**; typecheck,
-the 47-page build, and disposable PostgreSQL handler integration **4/4**
-pass. This is isolated code/integration evidence only. A real signed provider
+the 47-page build, and disposable PostgreSQL handler integration **5/5**
+pass, including paid-invoice fulfillment and replay deduplication. This is
+isolated code/integration evidence only. A real signed provider
 renewal delivery and complete provider/ledger/license reconciliation remain
 required, so Gate 4 and PLAN-WEB-011/012/014/015 remain open. No Production,
 provider, Neon, migration, payment, entitlement, account, or customer-data

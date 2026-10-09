@@ -2,7 +2,7 @@
 
 ## Implementation
 
-Web commit `a97bc2b` adds a fail-closed `invoice.paid` webhook path for
+Web commits `a97bc2b` and `b1bd248` add a fail-closed `invoice.paid` webhook path for
 subscription-backed provider invoices. The handler resolves the provider
 invoice, requires a bound subscription, then reuses the existing signed
 checkout snapshot, exact amount/currency, paid-invoice, captured-payment, and
@@ -21,7 +21,8 @@ was added.
   environment skips**.
 - TypeScript typecheck: pass.
 - Production build: pass; **47 pages** generated.
-- Disposable PostgreSQL migration and real handler integration: **4/4 pass**.
+- Disposable PostgreSQL migration and real handler integration: **5/5 pass**,
+  including successful paid-invoice fulfillment and replay deduplication.
 
 The integration database was loopback-only, initialized with the reviewed
 baseline/migrations, and stopped after the run. The remote Test Mode/Neon

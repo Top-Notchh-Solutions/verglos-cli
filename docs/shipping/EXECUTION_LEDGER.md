@@ -7105,13 +7105,13 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
   `docs/shipping/evidence/acceptance-stories-verification-2026-10-10.md`.
 ## 2026-10-10 · Gate 4 invoice-paid renewal binding
 
-- **Source:** Web `a97bc2b`.
+- **Source:** Web `a97bc2b` and integration coverage `b1bd248`.
 - **Change:** Added subscription-bound `invoice.paid` handling with exact
   provider invoice/payment binding and safe no-op behavior for unrelated
   invoices; existing event claim/replay and ledger paths remain authoritative.
 - **Checks:** Webhook handler 20/20; broader payment/lifecycle 48 pass, 0 fail,
   3 explicit skips; typecheck; 47-page build; disposable PostgreSQL handler
-  integration 4/4.
+  integration 5/5, including paid-invoice fulfillment and replay deduplication.
 - **Scope:** Loopback disposable PostgreSQL only. No provider, Neon,
   Production, payment, migration, entitlement, account, or customer-data
   write.

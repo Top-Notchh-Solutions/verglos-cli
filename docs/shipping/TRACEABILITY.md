@@ -4064,13 +4064,14 @@ open. No checkbox changed. See
   `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
 ## PLAN-WEB-014 · invoice-paid subscription renewal path · 2026-10-10
 
-- **Implementation:** Web `a97bc2b` accepts a provider `invoice.paid` event
+- **Implementation:** Web `a97bc2b` with integration coverage `b1bd248` accepts a provider `invoice.paid` event
   only when its paid invoice resolves to a Verglos subscription; it then
   reuses exact signed commercial binding and idempotent ledger fulfillment.
   Non-subscription invoices are safe no-ops.
 - **Verification:** focused webhook **20/20**, broader payment/lifecycle
   **48 pass / 0 fail / 3 explicit skips**, typecheck/build, and isolated
-  PostgreSQL integration **4/4** pass.
+  PostgreSQL integration **5/5** pass, including paid-invoice fulfillment and
+  replay deduplication.
 - **Boundary:** no external provider delivery was fabricated and no
   Production/Neon/provider/payment/entitlement/customer state was changed.
   Signed provider renewal delivery and complete reconciliation remain open;

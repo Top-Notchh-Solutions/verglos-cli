@@ -5310,14 +5310,14 @@ occurred. Backlog remains **219 checked / 61 unchecked / 280 total**.
 Evidence: `docs/shipping/evidence/acceptance-stories-verification-2026-10-10.md`.
 ## 2026-10-10 · Gate 4 `invoice.paid` renewal binding
 
-Web `a97bc2b` adds a subscription-bound `invoice.paid` path. The handler
+Web `a97bc2b` with integration coverage `b1bd248` adds a subscription-bound `invoice.paid` path. The handler
 requires a paid provider invoice linked to the subscription, then applies the
 existing signed snapshot, exact amount/currency, captured payment, provider
 identity, and replay/idempotency protections. Unrelated invoices are
 acknowledged without a ledger or entitlement write. Focused webhook tests
 passed **20/20**; the broader payment/lifecycle set passed **48 pass / 0 fail /
 3 explicit skips**; typecheck/build and disposable PostgreSQL integration
-**4/4** passed.
+**5/5** passed, including paid-invoice fulfillment and replay deduplication.
 
 This advances the code side of Gate 4 only. No provider-delivered renewal was
 claimed, and no Production, Neon, payment, migration, entitlement, account,
