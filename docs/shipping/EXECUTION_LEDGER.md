@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Production code rollout for lifecycle binding fix
+
+- **Source/release:** Web `51e07f5`, merged PR #171 as `b08bb509`.
+- **Deployment:** Vercel Production `dpl_ySGLm8Hx7DTjjSZd9Dx4tq7RrMxf` READY
+  and aliased to `https://verglos.com`; Production config validation passed.
+- **Read-only smoke:** `/`, `/checkout`, and `/docs` returned 200;
+  unauthenticated subscription creation returned 405; no Test Mode/provider
+  test-key/database/protection-bypass marker appeared in checkout; HSTS was
+  present.
+- **Boundary:** Code rollout only. No Production provider/payment,
+  database/migration, entitlement, account, or customer-data write occurred.
+- **Disposition:** Production code is current and fail-closed; billing
+  activation and Gate 4 reconciliation remain open. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-lifecycle-binding-fix-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · Signed cancellation delivery and binding fix
 
 - **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,

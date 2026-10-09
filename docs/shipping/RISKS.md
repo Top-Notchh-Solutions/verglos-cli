@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## R-PROD-CURRENT-CODE-ROLLOUT-SMOKE · 2026-10-10 · update
+
+Web `51e07f5` was merged as `b08bb509` and deployed READY to Production as
+`dpl_ySGLm8Hx7DTjjSZd9Dx4tq7RrMxf`. Configuration validation and read-only
+public smoke passed; checkout exposed no Test Mode, provider-test-key,
+database, or protection-bypass marker, and HSTS was present. No Production
+state-changing write occurred.
+
+Residual risk remains for billing/database activation, full provider lifecycle
+reconciliation, monitoring, restore, and rollback rehearsal. Owner: Web/release
+operations. Gate impact: Production code rollout qualified only; Gate 4 and
+Production activation remain open.
+
+Evidence: `docs/shipping/evidence/production-lifecycle-binding-fix-rollout-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-PREVIEW-CANCEL-WEBHOOK-RECONCILIATION · 2026-10-10 · update
 
 Web `d8ddeda`/`51e07f5` repaired the observed provider-shape gap: signed

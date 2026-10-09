@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Production code rollout remains fail-closed
+
+Web `51e07f5` was merged through PR #171 as `b08bb509` and deployed READY as
+Production `dpl_ySGLm8Hx7DTjjSZd9Dx4tq7RrMxf`, aliased to `https://verglos.com`.
+Production config validation passed. Read-only smoke returned 200 for `/`,
+`/checkout`, and `/docs`, the unauthenticated subscription route returned 405,
+checkout exposed no Test Mode/provider-test-key/database/protection marker, and
+HSTS was present.
+
+This advances the Production code-rollout stage only. It does not authorize or
+claim Production billing/database activation, payment lifecycle acceptance,
+reconciliation, monitoring, restore, or rollback. No Production state-changing
+write occurred. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-lifecycle-binding-fix-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 signed cancellation slice now reconciles
 
 The Preview/Test Mode lifecycle handler now recovers the immutable checkout

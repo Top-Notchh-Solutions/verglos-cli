@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Production code rollout after lifecycle binding fix
+
+Reviewed Web source `51e07f5` was merged through PR #171 as `b08bb509` and
+deployed to Production as READY Vercel deployment
+`dpl_ySGLm8Hx7DTjjSZd9Dx4tq7RrMxf`, aliased to `https://verglos.com`.
+Production configuration validation passed. Read-only smoke returned 200 for
+`/`, `/checkout`, and `/docs`; unauthenticated subscription creation returned
+405; checkout contained no Test Mode, provider test-key, database URL, or
+protection-bypass marker; and HSTS was present.
+
+This is real Production code progress, not billing activation. No Production
+provider, payment, database, migration, entitlement, account, or customer-data
+write occurred. The complete Gate 4 payment matrix and reconciliation remain
+open. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-lifecycle-binding-fix-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · Signed Preview cancellation reconciled after provider-shape fix
 
 Web commits `d8ddeda` and `51e07f5` fix the Razorpay lifecycle binding path:

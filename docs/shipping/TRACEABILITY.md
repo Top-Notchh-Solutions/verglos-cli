@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Production rollout of lifecycle binding fix
+
+- **Mapped surface:** Production code-rollout boundary; `PLAN-WEB-015`.
+- **Source/deployment:** Web `51e07f5`, merged as `b08bb509`, deployed READY as
+  `dpl_ySGLm8Hx7DTjjSZd9Dx4tq7RrMxf` and aliased to `https://verglos.com`.
+- **Verification:** Production config validation passed; public route smoke
+  `/`, `/checkout`, `/docs` was 200; unauthenticated subscription creation was
+  405; no Test Mode/provider test-key/database/protection marker was public;
+  HSTS was present.
+- **Boundary:** Code rollout only; no Production state-changing write. This
+  does not close payment lifecycle or full Production reconciliation. Score
+  remains **219/61/280 (78.2%)** and no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-lifecycle-binding-fix-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · Signed Preview cancellation binding repair
 
 - **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`;
