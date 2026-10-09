@@ -9,7 +9,7 @@ again` action. Focused tests passed **8/8**; typecheck, production build, and
 the full local serial suite passed **896 total / 872 pass / 24 explicit skips /
 0 fail**. Hosted workflow `37866290786` passed all configured checks, including
 database/migration, build, security, dependency, SBOM, license, and secret
-guards.
+guards. The Vercel deployment and Preview Comments checks also passed.
 
 This repairs the customer-facing lifecycle surface but does not close Gate 4:
 hosted Preview remains protected by Vercel Authentication, and provider

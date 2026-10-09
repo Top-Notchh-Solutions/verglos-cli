@@ -10,7 +10,8 @@
 - **Verification:** Focused checkout tests **8/8**; typecheck and build passed;
   local serial suite **896/872/24/0**; hosted workflow `37866290786` passed
   all configured checks, including DB/migration, build, security, dependency,
-  SBOM, license, and secret checks.
+  SBOM, license, and secret checks; Vercel deployment and Preview Comments
+  checks passed as well.
 - **Boundary:** This is code qualification only. Preview application access
   remains blocked by Vercel Authentication before the route. No Production
   deploy, plan, provider/payment, database/migration, entitlement, account,

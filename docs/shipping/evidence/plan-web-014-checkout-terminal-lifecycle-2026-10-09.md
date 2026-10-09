@@ -27,6 +27,7 @@ retain precedence, and the customer receives a bounded explanation with a
   private-runner E2E, negative-boundary and truth-registry tests, database and
   migration checks, build, public-boundary, dependency, SBOM, license, and
   tracked-secret checks.
+- Vercel deployment and Preview Comments checks: passed for the PR commit.
 - PR #171 remains open and mergeable; this commit is not merged.
 
 ## Boundary and disposition
