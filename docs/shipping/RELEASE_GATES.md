@@ -1,5 +1,25 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 Cardless EMI repair and Production code rollout
+
+Web PR #172 merged as `98dd571` after hosted Verify
+`37991101222` / job `114025167923` passed all required Web checks. The CI
+Postgres service is now pinned to the matching Docker Official Image through
+ECR Public, avoiding the previously observed Docker Hub rate-limit failure.
+Production deployment `dpl_EtggBABkjCRWS9NWHozgH6qbvr5J` is READY and aliased
+to `https://verglos.com`; read-only route/configuration smoke passed and no
+Test Mode identifiers were exposed.
+
+This advances Gate 4's provider-method binding and Production code-rollout
+boundaries only. The complete enabled-method/subscription lifecycle matrix,
+replay/order, timeout/retry, exactly-once, provider/ledger/entitlement
+reconciliation, and Production billing/database activation remain open. No
+Production state-changing write occurred. Score remains **219/61/280
+(78.2%)**; no checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-cardless-emi-merge-production-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 provider Cardless EMI binding repair
 
 The read-only Test Mode inventory exposed one captured `cardless_emi` order

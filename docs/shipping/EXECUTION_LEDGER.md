@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Cardless EMI binding merged and Production code rollout
+
+- **Source:** Web PR #172 code `210d880`, CI mirror `7cfbba6`, merged as
+  `98dd571`.
+- **Hosted qualification:** Verify run `37991101222`, job `114025167923`,
+  passed all typecheck, serial, private-runner, boundary, truth-registry,
+  database/schema, build, public-boundary, dependency, SBOM, license, and
+  tracked-secret steps. The workflow now uses the pinned Docker Official
+  Postgres image through ECR Public after Docker Hub rate limiting blocked the
+  prior run before test execution.
+- **Production:** Deployment `dpl_EtggBABkjCRWS9NWHozgH6qbvr5J` reached READY
+  and was aliased to `https://verglos.com`. Configuration validation passed;
+  read-only `/`, `/checkout`, `/docs` smoke returned 200, unauthenticated
+  subscription GET returned 405, and HSTS was present. No Test Mode keys,
+  plan IDs, Preview markers, or database URL appeared in the checkout response.
+- **Boundary:** Code rollout only. No Production database, migration, payment,
+  provider, entitlement, account, customer-data, or manual-row write occurred.
+- **Disposition:** This repairs the observed `cardless_emi` to canonical `emi`
+  binding gap and advances Gate 4, but does not close the full payment matrix
+  or `PLAN-WEB-011/012/014/015`. Score remains **219/61/280 (78.2%)**; no
+  checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-cardless-emi-merge-production-2026-10-10.md`.
+
 ## 2026-10-10 · Repair provider Cardless EMI order binding
 
 - **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,

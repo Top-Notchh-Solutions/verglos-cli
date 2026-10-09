@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Cardless EMI repair merged and Production rollout complete
+
+Web PR #172 is merged as `98dd571`. Hosted Verify run `37991101222` passed
+after the Postgres service was moved to the pinned matching Docker Official
+image through ECR Public, resolving the Docker Hub pull-rate blocker. The
+cardless-EMI provider representation is now accepted only when canonical EMI
+is bound in the signed order snapshot.
+
+Production deployment `dpl_EtggBABkjCRWS9NWHozgH6qbvr5J` is READY and aliased
+to `https://verglos.com`. Runtime configuration, `/`, `/checkout`, `/docs`,
+unauthenticated subscription-route 405 behavior, HSTS, and absence of Test
+Mode identifiers passed read-only verification. No Production state-changing
+operation occurred.
+
+This remains a Gate 4 repair and code rollout, not full payment acceptance.
+Renewal, provider failure/expiry, refund replay/order, replay/out-of-order,
+timeout/retry, exactly-once, and complete reconciliation remain open. Score
+remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-cardless-emi-merge-production-2026-10-10.md`.
+
 ## 2026-10-10 · Provider Cardless EMI order-binding repair
 
 The live Test Mode inventory exposed one captured hosted payment reported as

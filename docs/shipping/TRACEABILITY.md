@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Cardless EMI binding merge and Production rollout
+
+- **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`; Web payment
+  method binding and Production code rollout.
+- **Source:** Web `210d880` plus CI mirror `7cfbba6`, merged as `98dd571` in
+  PR #172.
+- **Hosted evidence:** Verify `37991101222` / job `114025167923` passed all
+  required Web verification stages after the pinned ECR Public Postgres
+  mirror replaced the rate-limited Docker Hub service.
+- **Production evidence:** READY deployment
+  `dpl_EtggBABkjCRWS9NWHozgH6qbvr5J`; `/`, `/checkout`, `/docs` 200;
+  unauthenticated subscription GET 405; HSTS present; no Test Mode keys,
+  plan IDs, Preview marker, or database URL in checkout response.
+- **Boundary:** No Production database, migration, payment, provider,
+  entitlement, account, or customer-data write. The full Gate 4 lifecycle and
+  reconciliation criteria remain open. Score remains **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-cardless-emi-merge-production-2026-10-10.md`.
+
 ## 2026-10-10 · Provider Cardless EMI order binding repair
 
 - **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`;

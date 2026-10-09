@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Cardless EMI repair merged; Production code rollout verified
+
+Web PR #172 merged as `98dd571` after hosted Verify passed with the pinned
+official Postgres ECR mirror. The provider `cardless_emi` representation is
+now bound to canonical `emi` only when `emi` is present in the signed order
+snapshot. Production deployment `dpl_EtggBABkjCRWS9NWHozgH6qbvr5J` passed
+configuration and read-only smoke while remaining fail-closed for billing.
+This advances Gate 4 and `PLAN-WEB-011/012/014/015` but does not satisfy their
+full lifecycle/reconciliation criteria. No checkbox changed; score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-cardless-emi-merge-production-2026-10-10.md`.
+
 ## 2026-10-10 · Repair provider Cardless EMI order binding
 
 Web branch `fix/razorpay-emi-provider-binding` commit `210d880` repairs a

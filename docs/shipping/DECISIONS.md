@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Merge the Cardless EMI repair and use a pinned CI mirror
+
+- **Decision:** Merge Web PR #172 as `98dd571` after replacing the
+  rate-limited Docker Hub Postgres service with the matching Docker Official
+  Image through ECR Public at a pinned image-index digest. Keep the observed
+  `cardless_emi` to canonical `emi` mapping narrow and bound to the signed
+  method snapshot.
+- **Reason:** The provider representation was real and captured, while the
+  prior literal comparison rejected it; the hosted verification failure was
+  infrastructure-only and the official ECR mirror restored reproducible CI.
+- **Verification:** Hosted run `37991101222` / job `114025167923` passed all
+  required Web checks. Production deployment
+  `dpl_EtggBABkjCRWS9NWHozgH6qbvr5J` passed runtime configuration and bounded
+  read-only smoke.
+- **Gate decision:** This advances Gate 4 and Production code rollout only.
+  The full payment lifecycle, reconciliation, and Production activation gates
+  remain open. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Boundary:** No Production database, migration, payment, provider,
+  entitlement, account, or customer-data write.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-cardless-emi-merge-production-2026-10-10.md`.
+
 ## 2026-10-10 · Bind provider Cardless EMI to canonical hosted EMI
 
 - **Decision:** Accept only the observed provider representation

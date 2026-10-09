@@ -1,5 +1,22 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-CARDLESS-EMI-BINDING · 2026-10-10 · resolved code/CI slice
+
+Web PR #172 merged as `98dd571` after the hosted schema job passed with the
+pinned ECR Public Postgres mirror. Production code rollout
+`dpl_EtggBABkjCRWS9NWHozgH6qbvr5J` passed configuration and read-only smoke.
+The provider `cardless_emi` representation is accepted only when canonical
+`emi` is bound.
+
+Residual risk remains for the full Gate 4 method/lifecycle matrix,
+renewal/failure/expiry, refund replay/order, timeout/retry, exactly-once
+behavior, complete reconciliation, and Production billing activation. Owner:
+Web/provider/release operations. Gate impact: the observed code and CI gap is
+resolved; Gate 4 and the mapped backlog items remain open.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-cardless-emi-merge-production-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-CARDLESS-EMI-BINDING · 2026-10-10 · update
 
 The provider Test Mode account returned a captured `cardless_emi` order payment
