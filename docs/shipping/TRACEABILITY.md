@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Production read-only smoke follow-up
+
+- **Mapped IDs:** Gate 4; `PLAN-WEB-011/012/014/015`; Production code rollout.
+- **Result:** `/`, `/checkout`, and `/docs` returned 200 with HSTS; checkout
+  exposed Cards, Netbanking, Wallets, and EMI plus the canonical monthly
+  amount; unauthenticated subscription GET returned 405.
+- **Boundary:** Read-only HTTP only. No Production plan/provider/payment,
+  database/migration, entitlement, account, customer, environment, or
+  deployment state changed. Score remains **219/61/280 (78.2%)**; no checkbox
+  changed.
+- **Evidence:** `docs/shipping/evidence/production-readonly-smoke-2026-10-10-followup.md`.
+
 ## 2026-10-10 · Docker payment integration revalidation
 
 - **Mapped IDs:** Gate 4; `PLAN-WEB-011/012/014/015`.

@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Production read-only smoke follow-up
+
+Production `/`, `/checkout`, and `/docs` returned 200 with HSTS; checkout
+showed Cards, Netbanking, Wallets, and EMI with the canonical monthly amount;
+the unauthenticated subscription GET returned 405; and no Test Mode/test-key/
+database marker was exposed. This is fail-closed Production code evidence only;
+no checkbox changed and the score remains **219 checked / 61 unchecked / 280
+total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/production-readonly-smoke-2026-10-10-followup.md`.
+
 ## 2026-10-10 · Gate 4 Docker payment integration revalidation
 
 The isolated PostgreSQL harness refused unsafe Neon and identical-target

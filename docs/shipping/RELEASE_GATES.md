@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Production read-only smoke follow-up
+
+Production `/`, `/checkout`, and `/docs` returned HTTP 200 with HSTS; the
+unauthenticated subscription GET returned 405. Checkout exposed the configured
+Cards, Netbanking, Wallets, and EMI methods and the canonical monthly amount,
+with no Test Mode/test-key/database marker.
+
+This qualifies the fail-closed code surface only. Production billing,
+reconciliation, and Gate 4 remain open. No state-changing operation occurred;
+score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-readonly-smoke-2026-10-10-followup.md`.
+
 ## 2026-10-10 · Gate 4 Docker payment integration revalidated
 
 The disposable PostgreSQL harness rejected the initially supplied Neon target

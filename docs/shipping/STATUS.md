@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Production read-only smoke follow-up
+
+Production `/`, `/checkout`, and `/docs` returned 200 with HSTS; the
+subscription route correctly returned 405 to unauthenticated GET. Checkout
+showed Cards, Netbanking, Wallets, and EMI with the canonical monthly amount
+and no Test Mode/test-key/database marker. This advances the Production
+code-rollout boundary only; no billing or database operation was performed.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-readonly-smoke-2026-10-10-followup.md`.
+
 ## 2026-10-10 · Docker payment integration revalidated
 
 The exact disposable PostgreSQL harness was restarted with separate runtime

@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Production read-only smoke follow-up
+
+- **Smoke:** Production `/`, `/checkout`, and `/docs` returned HTTP 200 with
+  HSTS; checkout retained private no-store caching; unauthenticated GET of the
+  subscription route returned 405. Checkout exposed Cards, Netbanking, Wallets,
+  and EMI, with the canonical monthly amount and no Test Mode/test-key/database
+  marker.
+- **Boundary:** Read-only HTTP requests only; no Production plan, provider,
+  payment, database, migration, entitlement, account, customer, environment,
+  or deployment state changed.
+- **Disposition:** Production code health remains qualified while billing
+  activation and reconciliation remain fail-closed. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/production-readonly-smoke-2026-10-10-followup.md`.
+
 ## 2026-10-10 · Docker payment integration revalidation
 
 - **Result:** After the target-isolation guards rejected an unsafe Neon target
