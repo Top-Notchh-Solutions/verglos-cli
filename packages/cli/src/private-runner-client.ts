@@ -13,7 +13,7 @@ import {
   type PrivateRunnerResult,
   type PrivateRunnerResultInput,
 } from "@verglos/shared";
-import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
+import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
 
 const MAX_KEY_BYTES = 16 * 1024;
 const MAX_RESPONSE_BYTES = 1 * 1024 * 1024;
@@ -161,8 +161,10 @@ export async function pollPrivateRunnerJob(input: Readonly<{
   if (!validId(input.tenantId) || !validId(input.runnerId) || input.allowedTargets.length === 0 || input.allowedTargets.some((target) => !validId(target))) return { status: "error", reason: "invalid_input" };
   const creds = await loadCredentials();
   if (!creds.licenseKey) return { status: "error", reason: "no_license" };
+  const apiOrigin = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
+  if (!apiOrigin) return { status: "error", reason: "invalid_input" };
   let endpoint: string;
-  try { endpoint = endpointFor(creds.apiUrl ?? DEFAULT_API_URL, input.tenantId, input.runnerId, input.endpoint); } catch { return { status: "error", reason: "invalid_input" }; }
+  try { endpoint = endpointFor(apiOrigin, input.tenantId, input.runnerId, input.endpoint); } catch { return { status: "error", reason: "invalid_input" }; }
 
   let trustedKey: string;
   let replay: ReplayState;
@@ -227,8 +229,10 @@ export async function uploadPrivateRunnerResult(input: Readonly<{
   try { result = parseSourceFreeResult(input.result); } catch { return { status: "error", reason: "invalid_result" }; }
   const creds = await loadCredentials();
   if (!creds.licenseKey) return { status: "error", reason: "no_license" };
+  const apiOrigin = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
+  if (!apiOrigin) return { status: "error", reason: "invalid_input" };
   let endpoint: string;
-  try { endpoint = relativeEndpointFor(creds.apiUrl ?? DEFAULT_API_URL, input.endpoint ?? "/api/v1/private-runner/results"); } catch { return { status: "error", reason: "invalid_input" }; }
+  try { endpoint = relativeEndpointFor(apiOrigin, input.endpoint ?? "/api/v1/private-runner/results"); } catch { return { status: "error", reason: "invalid_input" }; }
   const body = JSON.stringify(result);
   if (Buffer.byteLength(body, "utf8") > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "invalid_input" };
   const controller = new AbortController();

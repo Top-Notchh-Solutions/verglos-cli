@@ -1,4 +1,4 @@
-import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
+import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
 
 const MAX_RESPONSE_BYTES = 1 * 1024 * 1024;
 
@@ -51,7 +51,11 @@ export async function authorizedFetch(
   if (!creds.licenseKey) {
     return { ok: false, status: 0, json: null, reason: "no_license" };
   }
-  const url = `${creds.apiUrl ?? DEFAULT_API_URL}${path}`;
+  const apiOrigin = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
+  if (!apiOrigin || !path.startsWith("/") || path.startsWith("//") || /[\u0000-\u001f\u007f]/u.test(path)) {
+    return { ok: false, status: 0, json: null, reason: "network" };
+  }
+  const url = new URL(path, `${apiOrigin}/`).toString();
   try {
     const res = await fetch(url, {
       method: init.method,

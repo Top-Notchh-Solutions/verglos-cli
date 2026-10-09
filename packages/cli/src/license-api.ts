@@ -1,4 +1,4 @@
-import { DEFAULT_API_URL } from "./credentials.js";
+import { DEFAULT_API_URL, getTrustedApiOrigin } from "./credentials.js";
 import { readJsonResponse } from "./http-response.js";
 
 /**
@@ -95,8 +95,11 @@ export async function validateLicense(
   licenseKey: string,
   apiUrl: string = DEFAULT_API_URL,
 ): Promise<ValidateResult> {
+  const apiOrigin = getTrustedApiOrigin(apiUrl);
+  if (!apiOrigin) return { valid: false, reason: "network" };
+
   try {
-    const res = await fetchWithTimeout(`${apiUrl}/api/v1/license/validate`, {
+    const res = await fetchWithTimeout(`${apiOrigin}/api/v1/license/validate`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ license_key: licenseKey }),
@@ -117,7 +120,7 @@ export async function validateLicense(
         && body.entitlement_token.split(".").length === 3
         ? body.entitlement_token
         : undefined;
-      const v2Token = await fetchV2EntitlementToken(licenseKey, apiUrl);
+      const v2Token = await fetchV2EntitlementToken(licenseKey, apiOrigin);
       return {
         valid: true,
         plan: body.plan,
@@ -157,8 +160,11 @@ export async function fetchLicenseStatus(
   licenseKey: string,
   apiUrl: string = DEFAULT_API_URL,
 ): Promise<StatusResult | StatusError> {
+  const apiOrigin = getTrustedApiOrigin(apiUrl);
+  if (!apiOrigin) return { ok: false, reason: "network" };
+
   try {
-    const res = await fetchWithTimeout(`${apiUrl}/api/v1/license/status`, {
+    const res = await fetchWithTimeout(`${apiOrigin}/api/v1/license/status`, {
       method: "GET",
       headers: { authorization: `Bearer ${licenseKey}` },
     });

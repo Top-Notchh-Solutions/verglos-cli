@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { computeProjectFingerprint } from "@verglos/shared";
 import type { ScanResult } from "@verglos/shared";
-import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
+import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
 
 /**
  * Account score history is a product-sync operation, not analytics. It uses
@@ -14,6 +14,8 @@ export async function sendAccountScanSync(
 ): Promise<void> {
   const credentials = await loadCredentials();
   if (!credentials.licenseKey) return;
+  const apiOrigin = getTrustedApiOrigin(credentials.apiUrl ?? DEFAULT_API_URL);
+  if (!apiOrigin) return;
 
   const project = await computeProjectFingerprint(options.projectRoot);
   if (!project.fingerprint) return;
@@ -21,7 +23,7 @@ export async function sendAccountScanSync(
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 8_000);
   try {
-    await fetch(`${DEFAULT_API_URL}/api/v1/account/scan-sync`, {
+    await fetch(`${apiOrigin}/api/v1/account/scan-sync`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

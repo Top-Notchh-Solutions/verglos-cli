@@ -1,4 +1,4 @@
-import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
+import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
 import { readOrganizationPolicyCache, writeOrganizationPolicyCache } from "./organization-policy-cache.js";
 import { resolveOrganizationPolicy, type OrganizationPolicyCacheEntry, type OrganizationPolicyPublicKey } from "@verglos/shared";
 
@@ -37,7 +37,8 @@ export async function fetchOrganizationPolicy(input: Readonly<{
   let status: number | undefined;
   if (!input.offline) {
     const creds = await loadCredentials();
-    const apiUrl = input.apiUrl ?? creds.apiUrl ?? DEFAULT_API_URL;
+    const apiUrl = getTrustedApiOrigin(input.apiUrl ?? creds.apiUrl ?? DEFAULT_API_URL);
+    if (!apiUrl) return { resolved: false, reason: "unsafe-api-url" };
     const licenseKey = input.licenseKey ?? creds.licenseKey;
     if (!licenseKey) return { resolved: false, reason: "no-license" };
     const endpoint = input.endpoint ?? `/api/v1/organizations/${encodeURIComponent(input.organizationId)}/repositories/${encodeURIComponent(input.repositoryId)}/policy`;
