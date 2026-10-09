@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Authoritative CLI hardening merged
+
+PR [#88](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/88) is now
+merged into the public CLI `main` as
+`f5686b5c5aa11f45f392e647bd9d7e31830654ba`. All protected platform cells
+(Ubuntu, macOS, and Windows on Node 20/22/24), the Verglos self-scan, and the
+in-toto release binding passed before merge.
+
+Production remains explicitly in scope. This was a CLI-only fail-closed code
+rollout; no Web redeploy, npm publish/tag, Production plan/provider/payment,
+database/migration, entitlement, account, or customer-data write occurred.
+The external release, reviewer, legal, protected-release, rollback, Gate 4,
+`PLAN-CLI-003`, and `QUAL-CLI-006` gates remain open. Score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
+
 ## 2026-10-09 · Authoritative CLI API-origin hardening
 
 The fail-closed API-origin boundary is now implemented in the authoritative

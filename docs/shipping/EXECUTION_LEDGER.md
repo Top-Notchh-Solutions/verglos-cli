@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Authoritative CLI hardening merged
+
+- **Release result:** PR [#88](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/88)
+  merged by squash into `main` at
+  `f5686b5c5aa11f45f392e647bd9d7e31830654ba` after every protected check
+  passed: platform matrix for Ubuntu/macOS/Windows Node 20/22/24, self-scan,
+  and in-toto release binding.
+- **Source:** The merged change is the authoritative implementation from
+  `1972af3abe648312a427c20dc96bbcce54db55a`, not the stale local checkout
+  recorded historically as `439b782d`.
+- **Production boundary:** Production remains explicitly in scope, but this
+  CLI-only merge required no Web redeploy and made no npm publish/tag,
+  Production plan/provider/payment, database/migration, entitlement,
+  account, or customer-data write.
+- **Disposition:** This merge is verified backend/security progress; it does
+  not close `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, or external
+  reviewer/legal/protected-release/rollback/final-acceptance gates. Score
+  remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
+
 ## 2026-10-09 · Authoritative CLI API-origin hardening
 
 - **Mapped work:** Backend transport security and Production fail-closed
