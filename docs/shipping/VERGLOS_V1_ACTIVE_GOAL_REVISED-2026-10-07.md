@@ -1,10 +1,10 @@
 # Verglos V1 Active Shipping Goal — Whole-Backlog, Preview, and Production Shipping
 
-Effective checkpoint: 2026-10-09. This file is the authoritative replacement
+Effective checkpoint: 2026-10-10. This file is the authoritative replacement
 goal for the remaining shipping work. Replace the previous active goal with
 this complete version before resuming.
 
-## Current checkpoint · 2026-10-09
+## Current checkpoint · 2026-10-10
 
 The authoritative CLI backend now includes API-origin hardening at commit
 `1972af3abe648312a427c20dc96bbcce54db55a`. Focused tests **24/24**, complete
@@ -28,6 +28,34 @@ operation-specific preflight/recovery/reconciliation/rollback evidence
 exists, and maintain the live score at **219 checked / 61 unchecked / 280
 total (78.2%)**.
 
+### 2026-10-10 execution lock — one backlog item at a time
+
+The active backlog item is `PLAN-WEB-014` and it is the only implementation
+and acceptance workstream until it is fully accepted or explicitly blocked
+with a current owner, missing artifact, expiry/review date, and release
+decision. Do not start the next backlog item, next gate, Web polish batch,
+SCM batch, or unrelated documentation batch while this item is open. Work is
+allowed only when it implements, unblocks, qualifies, or records complete
+evidence for `PLAN-WEB-014`.
+
+The current payment-release decision is **Cards-only**. The declared hosted
+method set for the release candidate must be `card` in Preview and Production;
+UPI/QR, netbanking, wallet, EMI, Pay Later, eMandate, and other methods must
+be disabled or hidden until separately qualified. This narrows the acceptance
+matrix; it does not waive provider authorization, webhook, reconciliation, or
+entitlement evidence. The configuration change is not complete until the
+exact deployed Preview and Production environment shapes are verified.
+
+The immediate acceptance proof is one canonical-price Razorpay Test Mode card
+subscription in isolated Preview, followed by the complete chain: provider
+authorization/capture, signed webhook, exactly one payment row, exactly one
+ledger entry, correct tenant binding, one Pro entitlement/license, replay
+idempotency, and the required failure/cancellation/refund/renewal state
+transitions. Until that chain is evidenced, `PLAN-WEB-014`, Gate 4, and the
+backlog score remain open. A provider rejection of a recurring test card is a
+real blocker to record and repair; it is not a reason to substitute synthetic
+events or manually edit entitlement rows.
+
 ## 1. Objective
 
 Ship the complete Verglos V1 across:
@@ -38,12 +66,13 @@ Ship the complete Verglos V1 across:
 The primary objective is to complete the whole authoritative private backlog
 with real implementation, integration, qualification, security review,
 release evidence, and final acceptance. Backlog delivery is the main
-workstream. Release gates and Production are parallel execution workstreams:
-close gates that are technically ready, perform the full Production code,
-configuration, smoke, reconciliation, rollback, and activation work in
-bounded stages, record external gates with their real owner and missing
-artifact, and continue the largest dependency-ready implementation batches
-without treating the gate list as a substitute for product shipping.
+workstream. Release gates and Production are part of that same shipping
+objective, but execution is strictly one active backlog item at a time:
+qualify the current gate or Production operation only when it directly
+unblocks that item, record external gates with their real owner and missing
+artifact, and advance only after the active item is accepted or genuinely
+blocked with a release decision. The gate list never substitutes for product
+shipping, and product work never substitutes for missing external evidence.
 
 Production is not excluded from this goal. It has four explicit stages:
 
@@ -306,14 +335,21 @@ dependencies allow. The deadline accelerates execution; it does not permit
 skipped gates, fabricated evidence, unsafe production changes, or redefining
 “whole shipping” as a partial launch.
 
+Every active work turn must stay on the current active backlog item until that
+item is accepted or explicitly blocked. A different backlog item may begin
+only after the current item has a documented acceptance decision or a genuine
+external blocker; dependency work is allowed only when it directly unblocks
+the current item.
+
 Every active work turn must do at least one of the following:
 
 1. Implement or repair product code, tests, integration, or release tooling
    for an unchecked backlog item.
 2. Execute the smallest missing qualification needed by an unchecked item.
 3. Record the exact external blocker, owner, evidence gap, expiry/review date,
-   and release decision, then immediately continue with the next independent
-   unchecked item.
+   and release decision, then continue only with work that can unblock the
+   same active item. Do not advance the queue merely because another item is
+   easier or technically independent.
 
 A status-only recap, repeated unchanged test run, helper-only change, arbitrary
 documentation edit, browser clicking without an acceptance purpose, or
@@ -619,9 +655,9 @@ a changed input or a clear acceptance need:
   owner authorization, legal approval, an independent Hunt reviewer, trusted
   publisher identity, customer consent, or provider/account evidence when an
   item explicitly requires that artifact.
-- The payment direction is now all enabled provider methods, not QR-only. QR
-  may remain optional, but it cannot be the only payment route or lifecycle
-  qualification path.
+- The earlier all-enabled-method direction is now superseded for the current
+  release candidate by the 2026-10-10 Cards-only decision below. QR may not
+  be used as the sole payment route or as payment acceptance evidence.
 - The current Web payment safety gap is explicit Preview database isolation:
   test keys and an all-method catalog are not enough. Preview payment config
   must fail closed without a disposable non-production database, TLS-safe URL,
@@ -646,12 +682,22 @@ a changed input or a clear acceptance need:
   production reconciliation.
 - The current isolated payment setup uses a separate Neon test database with
   the reviewed migration set applied and an explicit Preview isolation marker.
-  Preview and Production expose only the provider-testable method set
-  `card,netbanking,wallet,emi`; UPI/UPI QR and Pay Later were removed after
-  their account fixtures produced no usable payment lifecycle. The Preview
+  The historical `card,netbanking,wallet,emi` configuration is only a prior
+  qualification baseline. The active release-candidate decision is now
+  Cards-only: Preview and Production must expose `card` only, with all other
+  hosted methods disabled or hidden until separately qualified. The Preview
   webhook is Razorpay Test Mode and points to the isolated Preview target.
   This proves configuration and isolation only; it does not replace the
-  remaining provider lifecycle and Production-reconciliation evidence.
+  remaining provider lifecycle, entitlement, and Production-reconciliation
+  evidence.
+- The Cards-only decision reduces the matrix but does not close Gate 4. The
+  current missing proof is a successful provider-supported recurring card
+  authorization plus signed delivery, one-to-one payment/ledger/license
+  reconciliation, replay idempotency, and failure/cancellation/refund/renewal
+  transitions. A test card rejected as ineligible for recurring payments is a
+  blocker for this same item and must be repaired or formally dispositioned;
+  synthetic events, direct entitlement edits, and a rendered Cards label do
+  not satisfy it.
 - Gate 4 qualification now has canonical Test Mode evidence: 16 payments at
   the canonical monthly Pro amount, captures for card/netbanking/wallet/EMI,
   failures for card/netbanking/wallet, and two processed full refunds. The
@@ -712,11 +758,11 @@ Private evidence for the latest CLI batch is:
 The nine release gates are one control layer in the full shipping system; they
 do not replace the company feature map, architecture, implementation backlog,
 acceptance stories, execution ledger, traceability, risks, or release
-documents. We qualify the active technical gate while continuing the complete
-product/backlog pass with every document synchronized. A gate is closed only
-when its acceptance artifact exists in private evidence; founder permission
-does not turn missing provider, legal, reviewer, customer, or publishing
-evidence into a pass.
+documents. Qualify only the gate or Production operation that directly
+supports the current active backlog item, while synchronizing every relevant
+document. A gate is closed only when its acceptance artifact exists in private
+evidence; founder permission does not turn missing provider, legal, reviewer,
+customer, or publishing evidence into a pass.
 
 ### Current gate state
 
@@ -755,6 +801,16 @@ evidence into a pass.
    restart, with paid/refunded precedence. Do not use Production DB rows,
    `$1` pricing, synthetic events as provider evidence, or manual entitlement
    edits as substitutes.
+   As of 2026-10-10, the active release-candidate matrix is intentionally
+   narrowed to Cards-only. Set and verify `RAZORPAY_ENABLED_PAYMENT_METHODS`
+   as `card` in both Preview and Production and remove every other hosted
+   method from the declared surface. Do not mark this item complete until a
+   provider-supported recurring card authorization succeeds and the signed
+   webhook, payment row, ledger row, entitlement/license, replay, tenant
+   binding, failure, cancellation, refund, and renewal evidence all match.
+   The currently rejected recurring test-card attempt is the active blocker;
+   resolve or formally disposition it before advancing to another backlog
+   item or gate.
 5. **GitHub/GitLab integration — scope decision required, not an npm
    prerequisite.** Publishing the npm/CLI package does not require a GitHub
    or GitLab installation. The active Web SaaS scope is GitHub-first and has
@@ -783,12 +839,12 @@ evidence into a pass.
 
 ### Gate operating rule
 
-Complete technical work within current authority for the active gate while
-also taking independent, dependency-ready backlog batches. For an external
-gate, record the exact owner, missing artifact, expiry/review date, safe next
-action, and release decision; do not claim it passed. Do not wait idly for an
-external reviewer or legal approval while independent code work remains, but
-do not move the release forward as though that gate were closed.
+Complete technical work within current authority for the active gate, but do
+not advance to another backlog item or gate until the active item is accepted
+or explicitly blocked. For an external blocker, record the exact owner,
+missing artifact, expiry/review date, safe next action, and release decision;
+then work only on the same item's unblock path. Do not claim a gate passed
+because configuration changed, a label rendered, or local tests passed.
 
 ### Production execution track
 
@@ -827,37 +883,36 @@ which of the audit, code-rollout, configuration, write-activation,
 post-deploy-reconciliation, monitoring, and rollback items were executed,
 which remain deferred, and why.
 
-The immediate technical sequence is:
+The immediate technical sequence is deliberately one-item-at-a-time:
 
-1. Run the remaining isolated Preview/Test Mode subscription and hosted-order
-   matrix against the reviewed creation/status, invoice-binding, and ordering
-   paths; do not repeat already evidenced active/capture/cancel checks unless
-   a changed provider input requires it.
-2. Reconcile each provider record, payment ledger row, subscription lifecycle,
-   and entitlement state without manual row edits.
-3. Close only the payment backlog IDs whose complete criteria are evidenced;
-   keep Production activation writes deferred until their operation-specific
-   preflight is complete.
-4. Continue the Production track in the same pass: audit configuration and
-   migration compatibility, verify the fail-closed deployment, run public
-   smoke and monitoring checks, reconcile any permitted read-only provider /
-   ledger / entitlement observations, verify rollback readiness, and record
-   every deferred activation surface. Do not enable recurring billing from
-   Test Mode configuration.
-5. Resolve the npm/CLI versus Web SCM scope decision before attempting Gate 5.
-6. Prepare the AppSec/legal/release packets while continuing dependency-ready
-   backend/CLI batches.
-7. Run final acceptance only after all required gates, Production activation
-   preflights, and the release-candidate
-   freeze are complete.
+1. Apply and verify the Cards-only configuration in isolated Preview first;
+   keep Production fail-closed until the Preview configuration and method
+   surface are proven.
+2. Complete one canonical-price recurring card authorization in isolated
+   Razorpay Test Mode, then reconcile provider → signed webhook → payment row
+   → ledger row → entitlement/license → account access.
+3. Exercise replay/idempotency, tenant binding, failure, cancellation,
+   refund, renewal, expiry, timeout, and retry behavior for that same Cards-
+   only surface. Do not substitute another payment method or synthetic event.
+4. Record the exact provider limitation if recurring card authorization still
+   fails, repair only this path, and keep `PLAN-WEB-014` open. Do not begin
+   `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-015`, Gate 5, or unrelated backlog
+   work until this item is accepted or genuinely blocked.
+5. After acceptance or a documented external block, recompute the backlog,
+   update the ledger/evidence/gates/status/traceability records, and then
+   select the next single item. Production code rollout, read-only audit,
+   monitoring, and rollback checks may continue only when they directly
+   support this item; Production billing, database, and entitlement writes
+   still require their own preflight.
 
-## 4A. Execution priority: dependency-ready backend/CLI first
+## 4A. Execution priority: current backlog item first
 
-Do not move to Web polish merely because it is easier. At the beginning of
-each batch:
+Do not move to Web polish, CLI polish, SCM, or another gate merely because it
+is easier. While an active item is open, take one item only. At the beginning
+of each batch:
 
 1. Read the live private backlog and recompute the unchecked queue.
-2. Select the largest coherent set of dependency-ready backend/CLI IDs.
+2. Select exactly one active ID. The current active ID is `PLAN-WEB-014`.
 3. Inspect the acceptance criteria and all repository instructions.
 4. Implement the missing code, tests, integration, or release surface.
 5. Run focused qualification, then the required phase suite once the batch is
@@ -868,8 +923,9 @@ each batch:
 8. Push one reviewable phase PR when a PR is needed; verify hosted checks,
    review state, head, and mergeability.
 9. Accept only IDs whose complete criteria are evidenced.
-10. Record remaining external gates with their owner and next action, then
-    immediately take the next independent backend batch.
+10. Record remaining external gates with their owner and next action, but do
+    not take the next backlog item until the active ID is accepted or genuinely
+    blocked with a release decision.
 
 Backend work is exhausted only when every remaining CLI/backend, governance,
 and release item is either accepted with current evidence or recorded as
@@ -950,8 +1006,9 @@ When an item is blocked, record it once in the private tracker with:
 - safe next action;
 - release decision while the gate remains open.
 
-Then continue with the next independent item. Do not relabel a blocked gate as
-complete and do not repeatedly rerun unchanged tests to fill time.
+Then remain on the same active item and work only on its unblock path. Do not
+relabel a blocked gate as complete, do not jump to the next item to improve
+the score, and do not repeatedly rerun unchanged tests to fill time.
 
 ## 6. Fat-batch acceptance protocol
 
@@ -966,6 +1023,11 @@ Every substantial batch must identify:
 - active phase PR;
 - production/database/payment/deployment write status;
 - machine-load plan.
+
+While the execution lock in this goal is active, a batch contains exactly one
+backlog ID: `PLAN-WEB-014`. A gate, Production check, documentation update,
+or test batch may be included only when it directly implements, unblocks,
+qualifies, or records evidence for that ID.
 
 Then complete, as applicable:
 
@@ -991,7 +1053,9 @@ After the batch:
 - list private evidence and documentation commits;
 - state whether any production, database, payment, provider, deployment, or
   account write occurred;
-- state the next independent batch or exact blocker.
+- state whether the active ID was accepted or remains open, and state its exact
+  next unblock action or blocker. Do not name a different backlog item as the
+  next batch while the active ID remains open.
 
 Keep the backlog, traceability, execution ledger, status, decisions, risks,
 release gates, truth registry, and evidence mutually consistent. Make one
@@ -1045,10 +1109,13 @@ Rules:
 
 ## 8. Payment architecture and qualification
 
-The QR-only direction is superseded. Implement and qualify a server- and
-catalog-driven provider-hosted Razorpay Checkout/order flow that exposes every
-payment method actually enabled and approved for the account. The UI must not
-promise a method the provider configuration does not enable.
+The QR-only direction is superseded. The current release-candidate decision is
+Cards-only: implement and qualify a server- and catalog-driven
+provider-hosted Razorpay Checkout/order and subscription flow that exposes
+`card` only. UPI/QR, netbanking, wallets, EMI, Pay Later, eMandate, and other
+hosted methods must be disabled or hidden in Preview and Production until they
+are separately qualified. The UI must not promise a method the provider
+configuration does not enable.
 
 The checkout must bind the server-selected catalog snapshot, plan, cadence,
 currency, amount, entitlement period, user, organization where applicable,
@@ -1057,17 +1124,25 @@ entitlement duration, plan, or provider identity. Provider success/capture and
 the signed webhook are authoritative for entitlement; polling is read-only and
 cannot grant access.
 
-For every method currently enabled by the provider account—cards, netbanking,
-wallets, and EMI—qualify in Razorpay Test Mode, privately and redacted, across
-the full matrix below. UPI/UPI QR and Pay Later are not currently enabled
-because this account exposed no usable test lifecycle for them. If the account
-later exposes an approved usable fixture, add it to the matrix before release;
-do not claim a method merely because Checkout renders its label.
+For this release candidate, qualify `card` only in Razorpay Test Mode,
+privately and redacted, across the full lifecycle matrix below. If the account
+later needs another method, explicitly expand the declared method set, add its
+fixtures and lifecycle evidence, and re-run the acceptance matrix before
+release. Do not claim a method merely because Checkout renders its label.
 
 The same qualification must cover the provider-subscription path now that the
 catalog-bound subscription-creation route and owner-bound status read are
 implemented. Webhook lifecycle code plus a route is still not acceptance until
 real isolated Test Mode lifecycle evidence exists.
+
+Entitlement evidence is mandatory, not an optional follow-up document:
+successful authorization/capture must lead to signed webhook verification,
+exactly one payment row, exactly one ledger row, the correct tenant binding,
+one license/entitlement, and correct account access. Replay must not
+duplicate. Failure, cancellation, refund, and expiry must not leave
+unauthorized access. Renewal must extend the existing entitlement rather than
+create a duplicate. A rendered Cards label, a local test, a direct database
+edit, or a synthetic provider event is not enough.
 
 Qualify across:
 
@@ -1243,8 +1318,9 @@ This goal is complete only when:
 - the Web billing surface has a real provider-subscription creation route,
   with server-catalog binding and isolated Test Mode renewal/cancellation/
   expiry evidence, before claiming recurring payment completeness;
-- every enabled payment method is qualified or has a documented provider
-  limitation and release decision;
+- the current release candidate's declared payment method set is `card` only,
+  and Cards is fully qualified; any future method expansion has its own
+  provider-supported matrix, limitation record, and release decision;
 - production migrations, reconciliation, backup/restore, rollback, and
   recovery are qualified where required;
 - Production has a dated code-deployment, configuration, smoke,
@@ -1279,11 +1355,14 @@ At resume, perform this exact sequence:
 3. Read the nine-gate matrix and Production execution track in Section 4 and
    update the execution ledger with each gate's status, owner, missing
    artifact, next action, and write boundary.
-4. Execute the current technical gate, the Production read-only/deployment
-   qualification, and the largest independent backend/CLI
-   batch in the same shipping pass. The subscription-creation implementation
-   batch is complete in Web `54e6fd0`; continue with isolated Preview/Test
-   Mode lifecycle evidence for `PLAN-WEB-011`, followed by reconciliation.
+4. Work only on `PLAN-WEB-014`: apply and verify the Cards-only configuration,
+   complete the recurring card provider authorization, reconcile entitlement
+   evidence, and repair the active blocker. Production read-only/code-rollout
+   work is allowed only when it directly supports this item. Do not start
+   another backlog item or gate until `PLAN-WEB-014` is accepted or genuinely
+   blocked with a current release decision. The subscription-creation
+   implementation batch is complete in Web `54e6fd0`; the remaining work is
+   isolated Preview/Test Mode lifecycle evidence and reconciliation.
 5. Inspect current CLI and Web branches/PRs and verify recorded heads. Keep
    duplicate PR #169 closed and do not count it as shipping progress.
 6. For each batch, record IDs, criteria, dependencies, evidence, production/
@@ -1295,10 +1374,12 @@ At resume, perform this exact sequence:
 9. Reconcile the backlog, execution ledger, evidence, decisions, risks,
    release gates, Production deployment/smoke result, and status; report the
    exact new score.
-10. If a gate is externally blocked, record the real owner and artifact once;
+10. If the active item is externally blocked, record the real owner, missing
+    artifact, expiry/review date, safe next action, and release decision once;
     do not fabricate a signature, consent, legal approval, customer result,
-    provider lifecycle, or trusted publication. Continue only with independent
-    work that does not falsely depend on the missing gate.
+    provider lifecycle, or trusted publication. Continue only with the same
+    item's unblock path; do not use an external blocker as permission to jump
+    to the next backlog item.
 11. After Gate 4 is genuinely closed, resolve npm/CLI-only versus Web SCM
     scope before Gate 5. Do not treat GitHub/GitLab integration as an npm
     publishing prerequisite.
@@ -1306,7 +1387,9 @@ At resume, perform this exact sequence:
     fixtures, legal gates, AppSec approval, protected publishing, and final
     POC acceptance closed until their actual evidence and operation-specific
     preflights exist. Continue Production code, read-only audit, smoke,
-    monitoring, reconciliation, and rollback work in every applicable pass.
+    monitoring, reconciliation, and rollback work only when it directly
+    supports the active item; otherwise leave it queued until that item is
+    accepted or genuinely blocked.
 
 The next batch must not begin with a repeated unchanged suite, a speculative
 marketing edit, a production payment click, a direct database entitlement
