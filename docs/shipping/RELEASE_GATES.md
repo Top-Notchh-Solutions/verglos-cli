@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Gate 7 preparation — legal/licensing addendum
+
+The private legal review addendum now covers Trivy image/release/NOTICE use,
+`detect-secrets`, scanner fixtures, Hunt recipes/rules, modification and
+redistribution, trademarks, required notices, scope, expiry, reviewer
+identity, conditions, and approval reference. This is a review request only;
+it is not legal approval and does not clear any release artifact. Gate 7,
+`LIC-002`, `LIC-003`, and dependent release rows remain open until an
+authorized reviewer completes it against the exact release candidate. No
+production, provider, database, payment, deployment, registry, signing,
+customer, or release write occurred. Score remains **219/61/280 (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/legal/legal-review-addendum-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 6 preparation — current Hunt reviewer packet
 
 The private independent-review packet now targets CLI

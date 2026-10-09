@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Prepare legal/licensing review addendum
+
+- **Mapped IDs:** `LIC-002`, `LIC-003`, `DIST-001`, `DIST-002`, `DIST-003`,
+  and Gate 7.
+- **Action:** Added a private legal/licensing review request covering Trivy
+  image/release/NOTICE use, `detect-secrets`, scanner fixtures, Hunt
+  recipes/rules, modification and redistribution rights, trademarks,
+  required notices, scope, expiry, reviewer identity, conditions, and
+  approval reference.
+- **Boundary:** This is a structured packet, not legal approval. No legal
+  conclusion, reviewer identity, signature, license clearance, publication,
+  registry, production, provider, database, payment, deployment, or account
+  state was changed.
+- **Disposition:** Gate 7 and the dependent licensing/release rows remain open
+  until an authorized reviewer completes the packet against exact release
+  artifacts. Score remains **219 checked / 61 unchecked / 280 total (78.2%)**;
+  no checkbox changed.
+- **Evidence:**
+  `docs/shipping/legal/legal-review-addendum-2026-10-09.md`.
+
 ## 2026-10-09 · Refresh current Hunt independent-review packet
 
 - **Mapped IDs:** `HUNT-011`, `QUAL-CLI-004`, and dependent Hunt/release rows.

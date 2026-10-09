@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Prepare, but do not approve, the legal addendum
+
+- **Decision:** Use a private structured addendum for Gate 7 review; keep all
+  legal/licensing and dependent release rows open until an authorized reviewer
+  completes the exact decisions and sign-off.
+- **Reason:** Existing technical inventories identify versions, digests, and
+  unresolved restrictions but are not legal approval. The new packet makes the
+  required decision surface explicit without inventing counsel or clearance.
+- **Boundary:** No license was marked clear, no notice was suppressed, and no
+  package, registry, Production, provider, database, payment, deployment, or
+  customer state changed.
+- **Evidence:** `docs/shipping/legal/legal-review-addendum-2026-10-09.md`.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-09 · Use a superseding exact-head Hunt review packet
 
 - **Decision:** Keep the 2026-10-02 packet as historical evidence and use the

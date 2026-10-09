@@ -1,5 +1,17 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-09 · Legal review packet
+
+The private legal/licensing review request is prepared here:
+
+`docs/shipping/legal/legal-review-addendum-2026-10-09.md`
+
+Owner/action: an authorized legal/company reviewer must decide each section,
+state conditions, scope, expiry, reviewer identity, and verifiable approval
+reference against the exact release artifacts. This is not approval. Until it
+is completed, Gate 7, `LIC-002`, `LIC-003`, and dependent release rows remain
+open. No credential or customer source is needed in chat.
+
 ## Current superseding reconciliation · 2026-10-09 · Hunt reviewer packet
 
 The independent Hunt review packet is refreshed for exact CLI head

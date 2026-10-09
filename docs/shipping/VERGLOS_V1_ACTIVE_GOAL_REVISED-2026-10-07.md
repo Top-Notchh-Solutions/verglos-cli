@@ -1069,6 +1069,10 @@ The current independent Hunt reviewer packet is:
 
 `docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md`
 
+The current legal/licensing review addendum is:
+
+`docs/shipping/legal/legal-review-addendum-2026-10-09.md`
+
 The latest Vercel configuration evidence is:
 
 `docs/shipping/evidence/vercel-production-preview-config-audit-2026-10-09.md`

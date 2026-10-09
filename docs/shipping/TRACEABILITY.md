@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Legal/licensing review packet preparation
+
+- **Mapped IDs:** `LIC-002`, `LIC-003`, `DIST-001`, `DIST-002`, `DIST-003`,
+  and Gate 7.
+- **Artifact:** Private addendum covering third-party engines, fixtures, Hunt
+  content, modification/redistribution, trademarks, notices, scope, expiry,
+  reviewer, conditions, and approval reference.
+- **Boundary:** Preparation only; no legal approval or license clearance is
+  claimed. Exact release artifacts still require authorized review.
+- **Evidence:** `docs/shipping/legal/legal-review-addendum-2026-10-09.md`.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-09 · Hunt independent-review packet refresh
 
 - **Mapped IDs:** `HUNT-011`, `QUAL-CLI-004`, and dependent Hunt/release rows.

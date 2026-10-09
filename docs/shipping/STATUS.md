@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Legal/licensing review packet prepared
+
+Private addendum
+`docs/shipping/legal/legal-review-addendum-2026-10-09.md` now gives the
+authorized legal/company reviewer explicit decisions for Trivy,
+`detect-secrets`, fixtures, Hunt recipes/rules, modification/redistribution,
+trademarks, notices, scope, expiry, and approval. It is not legal approval;
+`LIC-002`, `LIC-003`, and dependent release rows remain open until the real
+reviewer completes and verifies it. No production/provider/database/payment/
+deployment/registry/release write occurred. Score remains **219 checked / 61
+unchecked / 280 total (78.2%)**; no checkbox changed.
+
 ## 2026-10-09 · Current Hunt review packet refreshed
 
 The private Hunt review packet now targets the exact current CLI head

@@ -144,11 +144,15 @@ This is not a Trivy login. It is a private written record that someone
 authorized to make the decision has checked the licenses and usage rights for
 software/content that Verglos may ship or redistribute.
 
-Create a file such as:
+Use the prepared private review packet:
 
 ```text
-docs/shipping/legal/legal-review-YYYY-MM-DD.md
+docs/shipping/legal/legal-review-addendum-2026-10-09.md
 ```
+
+It is a review request, not an approval. The authorized reviewer must fill in
+each decision and the scope, expiry, identity, conditions, and verifiable
+approval fields.
 
 Write down the decision for each of these:
 
