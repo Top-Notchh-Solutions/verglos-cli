@@ -12,13 +12,13 @@ const mod = await import("./monitor.js");
 
 after(() => rmSync(tempHome, { recursive: true, force: true }));
 
-function seedCredentials(licenseKey: string | undefined) {
+function seedCredentials(licenseKey: string | undefined, apiUrl = "https://verglos.com") {
   const dir = join(tempHome, ".verglos");
   mkdirSync(dir, { recursive: true });
   writeFileSync(
     join(dir, "credentials.json"),
     JSON.stringify({
-      apiUrl: "http://127.0.0.1:1",
+      apiUrl,
       ...(licenseKey ? { licenseKey } : {}),
     }),
   );
@@ -57,6 +57,26 @@ test("monitor status: bails with a helpful message when no license key is stored
     const code = await mod.executeMonitorStatus();
     assert.equal(code, 1);
     assert.match(errs.join("\n"), /no license key/i);
+  } finally {
+    console.error = origErr;
+  }
+});
+
+test("monitor status: refuses an unsafe saved API base before sending a bearer", async () => {
+  seedCredentials("vg_test_key", "http://127.0.0.1:1");
+  let fetchCalled = false;
+  globalThis.fetch = (async () => {
+    fetchCalled = true;
+    return new Response("{}", { status: 200 });
+  }) as typeof fetch;
+  const errs: string[] = [];
+  const origErr = console.error;
+  console.error = (msg?: unknown) => { errs.push(String(msg)); };
+  try {
+    const code = await mod.executeMonitorStatus();
+    assert.equal(code, 1);
+    assert.equal(fetchCalled, false);
+    assert.match(errs.join("\n"), /could not reach the server/i);
   } finally {
     console.error = origErr;
   }

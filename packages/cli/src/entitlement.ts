@@ -4,7 +4,11 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import chalk from "chalk";
 import { verifyEntitlement } from "@verglos/entitlement";
-import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
+import {
+  DEFAULT_API_URL,
+  getTrustedApiOrigin,
+  loadCredentials,
+} from "./credentials.js";
 import { normalizeTier, type Tier } from "./tier-defaults.js";
 
 /**
@@ -142,7 +146,10 @@ async function fetchFromServer(
   licenseKey: string | undefined,
   asPlan: string | undefined,
 ): Promise<CapabilitiesResponse | null> {
-  const url = new URL(`${apiUrl}/api/v1/entitlement/capabilities`);
+  const apiOrigin = getTrustedApiOrigin(apiUrl);
+  if (!apiOrigin) return null;
+
+  const url = new URL("/api/v1/entitlement/capabilities", `${apiOrigin}/`);
   if (asPlan) url.searchParams.set("as_plan", asPlan);
 
   try {
@@ -189,7 +196,8 @@ export async function loadCapabilities(
 ): Promise<CachedCapabilities> {
   const now = Date.now();
   const creds = await loadCredentials();
-  const apiUrl = creds.apiUrl ?? DEFAULT_API_URL;
+  const apiUrl = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
+  if (!apiUrl) return FREE_FALLBACK;
   // Bind both online and offline reuse to the request identity. Legacy caches
   // without this binding require one successful refresh; signed tokens remain
   // available through the independently verified fallback.

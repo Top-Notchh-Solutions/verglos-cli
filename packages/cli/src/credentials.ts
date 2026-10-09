@@ -71,6 +71,38 @@ async function readLocalJson(path: string, maxBytes: number): Promise<string> {
 export const DEFAULT_API_URL =
   process.env.VERGLOS_API_URL ?? "https://verglos.com";
 
+/**
+ * Resolve a configured API base to a bare HTTPS origin.
+ *
+ * Credentials are stored locally and may be edited by another process. Never
+ * concatenate an unvalidated value into a request URL: doing so could send a
+ * license bearer to a path, host, or URL carrying userinfo selected by that
+ * file. Custom/self-hosted API origins remain supported, but they must be an
+ * explicit HTTPS origin with no path, query, fragment, username, or password.
+ */
+export function getTrustedApiOrigin(value: unknown = DEFAULT_API_URL): string | null {
+  if (typeof value !== "string") return null;
+  const candidate = value.trim();
+  if (!candidate) return null;
+
+  try {
+    const parsed = new URL(candidate);
+    if (
+      parsed.protocol !== "https:" ||
+      parsed.username ||
+      parsed.password ||
+      parsed.pathname !== "/" ||
+      parsed.search ||
+      parsed.hash
+    ) {
+      return null;
+    }
+    return parsed.origin;
+  } catch {
+    return null;
+  }
+}
+
 export async function loadCredentials(): Promise<Credentials> {
   try {
     const raw = await readLocalJson(credentialsFile(), 1 * 1024 * 1024);
@@ -102,6 +134,8 @@ export async function refreshUnlockToken(
 ): Promise<boolean> {
   const creds = await loadCredentials();
   if (!creds.licenseKey) return false;
+  const apiOrigin = getTrustedApiOrigin(creds.apiUrl);
+  if (!apiOrigin) return false;
 
   const { detectProjectType, getGitRemote } = await import(
     "@verglos/scanner"
@@ -117,7 +151,7 @@ export async function refreshUnlockToken(
   });
 
   try {
-    const res = await fetch(`${creds.apiUrl}/api/license/unlock`, {
+    const res = await fetch(`${apiOrigin}/api/license/unlock`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

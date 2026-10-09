@@ -32,7 +32,7 @@ function seedCredentials(entitlementToken?: string, licenseKey = "vg_test_key") 
   writeFileSync(
     join(verglosDir, "credentials.json"),
     JSON.stringify({
-      apiUrl: "http://127.0.0.1:1",
+      apiUrl: "https://api.example.test",
       licenseKey,
       entitlementToken,
     }),
@@ -50,7 +50,7 @@ function seedCache(fetchedAt: Date, plan: string, capabilities: string[]) {
       cache_ttl_seconds: 60,
       simulated: false,
       active: true,
-      credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", "vg_test_key"])).digest("hex"),
+      credentialScope: createHash("sha256").update(JSON.stringify(["https://api.example.test", "vg_test_key"])).digest("hex"),
       fetchedAt: fetchedAt.toISOString(),
       expiresAt: fetchedAt.toISOString(),
     }),
@@ -139,9 +139,9 @@ test("capability cache follows the license and endpoint across fresh and offline
       assert.equal((await mod.loadCapabilities({ forceRefresh })).plan, "pro", "same identity retains bounded offline access");
 
       for (const identity of [
-        { apiUrl: "http://127.0.0.1:1", licenseKey: "vg_other_key" },
-        { apiUrl: "http://127.0.0.1:2", licenseKey: "vg_test_key" },
-        { apiUrl: "http://127.0.0.1:1" },
+        { apiUrl: "https://other-api.example.test", licenseKey: "vg_other_key" },
+        { apiUrl: "https://api-2.example.test", licenseKey: "vg_test_key" },
+        { apiUrl: "https://api.example.test" },
       ]) {
         writeFileSync(join(verglosDir, "credentials.json"), JSON.stringify(identity));
         const resolved = await mod.resolveEntitlement({ forceRefresh });

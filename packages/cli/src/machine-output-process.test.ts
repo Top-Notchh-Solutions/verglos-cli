@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { access, chmod, mkdir, mkdtemp, readFile, readdir, realpath, rm, stat, writeFile } from "node:fs/promises";
-import { createServer } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -507,44 +506,21 @@ test("activate network failure is one bounded JSON response", async () => {
   } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
 });
 
-test("activate preserves a legacy v1 token when v2 issuance is unavailable", async () => {
-  const root = await mkdtemp(join(tmpdir(), "verglos-process-activate-legacy-v1-"));
-  const home = await mkdtemp(join(tmpdir(), "verglos-process-activate-legacy-home-"));
-  const server = createServer((request, response) => {
-    response.setHeader("content-type", "application/json");
-    if (request.url === "/api/v1/license/validate" && request.method === "POST") {
-      response.end(JSON.stringify({ valid: true, plan: "pro", entitlement_token: "legacy.header.signature" }));
-      return;
-    }
-    if (request.url === "/api/v2/entitlement/token" && request.method === "POST") {
-      response.statusCode = 503;
-      response.end(JSON.stringify({ ok: false, reason: "not_ready" }));
-      return;
-    }
-    response.statusCode = 404;
-    response.end(JSON.stringify({ reason: "not_found" }));
-  });
-  await new Promise<void>((resolve, reject) => {
-    server.once("error", reject);
-    server.listen(0, "127.0.0.1", resolve);
-  });
-  const address = server.address();
-  assert.ok(address && typeof address !== "string");
+test("activate refuses an insecure configured API origin before network", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-activate-unsafe-origin-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-process-activate-unsafe-home-"));
   try {
     const result = await runCliFixture(
       process.execPath,
-      ["--import", tsx, cliEntry, "activate", "vg_legacy_v1", "--ci", "--json", "--quiet"],
+      ["--import", tsx, cliEntry, "activate", "vg_test_key", "--ci", "--json", "--quiet"],
       root,
-      { env: { HOME: home, VERGLOS_API_URL: `http://127.0.0.1:${address.port}`, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } },
+      { env: { HOME: home, VERGLOS_API_URL: "http://api.example.test", VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } },
     );
-    assert.equal(result.exitCode, 0);
+    assert.equal(result.exitCode, 2);
     assert.equal(result.stderr, "");
-    assert.deepEqual(JSON.parse(result.stdout), { status: "ok", plan: "pro", expiresAt: null, active: true });
-    const credentials = JSON.parse(await readFile(join(home, ".verglos", "credentials.json"), "utf8")) as { licenseKey?: string; entitlementToken?: string };
-    assert.equal(credentials.licenseKey, "vg_legacy_v1");
-    assert.equal(credentials.entitlementToken, "legacy.header.signature");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", reason: "network" });
+    assert.deepEqual(result.files, []);
   } finally {
-    await new Promise<void>((resolve) => server.close(() => resolve()));
     await rm(root, { recursive: true, force: true });
     await rm(home, { recursive: true, force: true });
   }
