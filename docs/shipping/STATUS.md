@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · CLI release-head divergence recorded
+
+The local CLI `main` (`d0a3b217`) is not the release head: it is 73 commits
+ahead and 883 behind `origin/main` (`f5686b5c`). It also contains founder-owned
+untracked assets. No merge or reset was performed. Release qualification will
+use a detached worktree at authoritative `origin/main`; local-only test output
+will not be promoted to release evidence until histories are reconciled.
+
+No repository, Production, provider, database, payment, entitlement, account,
+customer, or release state changed. Score remains **219/61/280 (78.2%)**; no
+checkbox changed.
+
+Evidence: `docs/shipping/evidence/cli-source-divergence-2026-10-10.md`.
+
 ## 2026-10-10 · Full CLI qualification and Production smoke rechecked
 
 CLI local head `d0a3b217` passed the full Turbo test/typecheck/build pipeline:

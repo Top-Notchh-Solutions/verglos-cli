@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · CLI source-of-truth divergence audit
+
+- **Finding:** Public CLI local `main` `d0a3b217` is 73 commits ahead and 883
+  behind authoritative `origin/main` `f5686b5c`; merge base is `f3bc33a`.
+  The local tree also contains founder-owned untracked shipping assets.
+- **Decision:** Do not reset, merge, force-push, or treat local-only tests as
+  release-head evidence. A detached worktree at `origin/main` is the current
+  CLI qualification surface until the owner reconciles the histories.
+- **Boundary:** Read-only Git inspection and an isolated detached worktree
+  only; no source, public branch, package, deployment, provider, database,
+  payment, entitlement, account, customer, or release state changed.
+- **Disposition:** The local `d0a3b217` qualification remains local evidence;
+  the upstream `f5686b5c` evidence controls release acceptance. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/cli-source-divergence-2026-10-10.md`.
+
 ## 2026-10-10 · Full CLI qualification and Production smoke recheck
 
 - **CLI:** local `main` `d0a3b217`; Turbo test output **103 pass / 0 fail**,

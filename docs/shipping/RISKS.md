@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## R-CLI-SOURCE-DIVERGENCE · 2026-10-10
+
+The local public CLI `main` (`d0a3b217`) is 73 commits ahead and 883 behind
+the authoritative remote `origin/main` (`f5686b5c`) and contains founder-owned
+untracked shipping assets. Local tests cannot be used as release-head proof
+until the histories are reconciled. Owner: founder/release maintainer. Safe
+containment: preserve the local tree, qualify only a detached upstream
+worktree, and reconcile through an explicit reviewed merge or branch decision.
+Gate impact: CLI release qualification, `QUAL-CLI-006`, distribution,
+protected publishing, and final acceptance remain open. No source or release
+state was changed by the audit.
+
+Evidence: `docs/shipping/evidence/cli-source-divergence-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-SUBSCRIPTION-OTP · 2026-10-10
 
 The real isolated Test Mode subscription path reaches Razorpay card

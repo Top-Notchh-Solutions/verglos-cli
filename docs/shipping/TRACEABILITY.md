@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · CLI release-head divergence
+
+- **Surface:** CLI release qualification and all dependent distribution/
+  acceptance items.
+- **Observed:** local `main` `d0a3b217` is 73 ahead/883 behind
+  `origin/main` `f5686b5c`; merge base `f3bc33a`.
+- **Evidence rule:** local-only tests remain local evidence; the detached
+  upstream `origin/main` worktree is the release qualification surface until
+  an owner-reviewed history reconciliation occurs.
+- **Boundary:** no source, branch, deployment, package, provider, database,
+  payment, entitlement, account, customer, or release state changed. Score
+  remains **219/61/280 (78.2%)**.
+- **Evidence:** `docs/shipping/evidence/cli-source-divergence-2026-10-10.md`.
+
 ## 2026-10-10 · Full CLI qualification and Production smoke
 
 - **Mapped surfaces:** CLI API-origin/validation/distribution/qualification;

@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Preserve divergent local CLI and qualify upstream release head
+
+- **Decision:** Treat CLI `origin/main` `f5686b5c` as the release
+  qualification head. Preserve local `main` `d0a3b217` without merge, reset,
+  or force-push because it is 73 commits ahead and 883 behind and contains
+  founder-owned untracked assets.
+- **Reason:** Tests on a divergent local line cannot prove the remote release
+  candidate. An isolated detached worktree at the upstream head preserves the
+  owner’s work while keeping release evidence attributable.
+- **Disposition:** Existing local `d0a3b217` evidence is labeled local-only;
+  upstream `f5686b5c` evidence remains authoritative for CLI acceptance.
+  `QUAL-CLI-006` and all dependent external gates stay open.
+- **Boundary:** Read-only source inspection and isolated worktree only; no
+  public source, deploy, package, provider, database, payment, entitlement,
+  account, customer, or release state changed. Score remains
+  **219/61/280 (78.2%)**.
+- **Evidence:** `docs/shipping/evidence/cli-source-divergence-2026-10-10.md`.
+
 ## 2026-10-10 · Merge the Cardless EMI repair and use a pinned CI mirror
 
 - **Decision:** Merge Web PR #172 as `98dd571` after replacing the
