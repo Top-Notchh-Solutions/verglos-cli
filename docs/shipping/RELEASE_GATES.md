@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Exact-source official in-toto qualification
+
+The merged CLI source rebuilt successfully (**8/8** tasks), produced the six
+public archives, and passed the official `in-toto==3.0.0` exact-product
+verification. This advances `QUAL-CLI-006` only. Trusted keyless
+Sigstore/Fulcio/Rekor release identity, legal approval, protected npm
+publication, and final acceptance remain separate open gates. No npm or
+Production state-changing write occurred; score remains **219/61/280
+(78.2%)** and no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-official-intoto-merged-source-2026-10-09.md`.
+
 ## 2026-10-09 · Authoritative CLI transport hardening
 
 Authoritative CLI commit

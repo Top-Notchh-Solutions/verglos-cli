@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Exact-source official in-toto qualification
+
+The merged authoritative CLI source was rebuilt and packaged locally, then
+verified with the official `in-toto==3.0.0` verifier. The build passed **8/8**
+tasks and all six public archives passed exact SHA-256 release binding.
+
+This advances `QUAL-CLI-006` but does not close it: trusted keyless
+Sigstore/Fulcio/Rekor identity, legal clearance, protected npm publication,
+and final acceptance remain open. Production remains in scope, but no npm
+publish/tag, Production plan/provider/payment, database/migration,
+entitlement, account, or customer-data write occurred. Score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-official-intoto-merged-source-2026-10-09.md`.
+
 ## 2026-10-09 · Authoritative CLI hardening merged
 
 PR [#88](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/88) is now

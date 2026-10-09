@@ -2,6 +2,12 @@
 
 ## Current execution note · 2026-10-09
 
+The exact merged CLI source also passed the official `in-toto==3.0.0`
+release-archive verifier: build **8/8** and six public archives with exact
+SHA-256 products. This advances `QUAL-CLI-006` only; trusted keyless release
+identity, legal clearance, protected publishing, and final acceptance remain
+open. No checkbox changed.
+
 Authoritative CLI API-origin hardening is complete at commit
 `1972af3abe648312a427c20dc96bbcce54db55a` with focused **24/24**, complete
 CLI process **44/44**, and workspace typecheck/build **12/12** each. This is

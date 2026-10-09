@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Exact-source official in-toto qualification
+
+- **Mapped surface:** `QUAL-CLI-006` official release-archive validation.
+- **Source:** CLI `1972af3abe648312a427c20dc96bbcce54db55a`, merged to `main` as
+  `f5686b5c5aa11f45f392e647bd9d7e31830654ba`.
+- **Evidence:** Build **8/8**, six public archives, and official
+  `in-toto==3.0.0` exact-product verification passed.
+- **Boundary:** This does not prove trusted keyless release identity, legal
+  approval, protected publishing, or final acceptance; no Production or npm
+  state-changing write occurred. `QUAL-CLI-006` remains unchecked and the
+  score remains **219/61/280 (78.2%)**.
+- **Evidence file:**
+  `docs/shipping/evidence/qual-cli-006-official-intoto-merged-source-2026-10-09.md`.
+
 ## 2026-10-09 · Authoritative CLI API-origin hardening
 
 - **Mapped surfaces:** CLI credential/API transports, backend security, and

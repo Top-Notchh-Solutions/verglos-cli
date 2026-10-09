@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Exact-source official in-toto qualification
+
+- **Mapped work:** `QUAL-CLI-006` official-validator progress.
+- **Source:** Hardened CLI `1972af3abe648312a427c20dc96bbcce54db55a`, now
+  merged into public `main` as `f5686b5c5aa11f45f392e647bd9d7e31830654ba`.
+- **Verification:** `pnpm build` passed **8/8**; public packaging produced
+  six archives; official `in-toto==3.0.0` `in-toto-verify` passed exact
+  SHA-256 binding for all six archives.
+- **Boundary:** Temporary validation material stayed outside the repository.
+  No npm publish/tag, Production plan/provider/payment, database/migration,
+  entitlement, account, or customer-data write occurred.
+- **Disposition:** `QUAL-CLI-006` remains unchecked pending trusted keyless
+  release identity, legal clearance, protected publishing, and final
+  acceptance. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-official-intoto-merged-source-2026-10-09.md`.
+
 ## 2026-10-09 · Authoritative CLI hardening merged
 
 - **Release result:** PR [#88](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/88)
