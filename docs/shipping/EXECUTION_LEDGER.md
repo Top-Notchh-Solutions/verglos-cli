@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Preview/Test Mode full-refund lifecycle slice
+
+- **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,
+  `PLAN-WEB-014`, and `PLAN-WEB-015`.
+- **Preflight:** The latest isolated captured subscription payment had a
+  non-null license binding; the provider identity matched with HTTP 200 and
+  status `captured`.
+- **Provider result:** The full Test Mode refund returned HTTP 200. A later
+  provider read reported `refunded`, and its refund list contained one
+  processed full refund for 280,943 paise.
+- **Webhook/ledger result:** One fresh `refund.processed` event completed in
+  isolated Preview. The matching payment row became `refunded` with
+  `amount_refunded_minor=280943`; its linked license remained active under
+  the paid-time policy.
+- **Boundary:** Test Mode provider and isolated Preview only. No manual DB
+  edit, entitlement workaround, or Production provider/payment/database/
+  migration/account/customer write occurred.
+- **Disposition:** One full-refund slice is evidenced; the full Gate 4
+  matrix remains open. Score remains **219/61/280 (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-refund-2026-10-10.md`.
+
 ## 2026-10-10 · Preview/Test Mode pause-resume lifecycle slice
 
 - **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,

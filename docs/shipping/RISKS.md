@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-PREVIEW-REFUND · 2026-10-10 · update
+
+The isolated Test Mode refund path now has provider and application evidence:
+the matched full refund returned HTTP 200, the provider reported one processed
+refund, the signed Preview event completed, and the payment ledger projected
+to `refunded` with the full watermark. The linked license remained active
+under the paid-time rule.
+
+Residual risk remains for partial/refund replay and ordering, all enabled
+methods, renewal, provider failure/expiry, timeout/retry, exactly-once across
+the full matrix, complete reconciliation, and Production activation. Owner:
+Web/provider operations. Gate impact: this advances Gate 4 only; it does not
+close Gate 4 or any backlog checkbox.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-refund-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-PREVIEW-PAUSE-RESUME · 2026-10-10 · update
 
 The isolated Test Mode provider accepted a bounded pause/resume operation and

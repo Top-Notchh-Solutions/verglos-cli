@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Preview/Test Mode full-refund reconciliation
+
+- **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`.
+- **Provider evidence:** A matched captured subscription payment returned HTTP
+  200 for a full refund and later reported `refunded` with one processed
+  refund for 280,943 paise.
+- **Application evidence:** One fresh `refund.processed` event completed in
+  isolated Preview; the payment row became `refunded` with the full watermark;
+  the linked license remained active under the paid-time policy.
+- **Safety boundary:** No manual database or entitlement mutation and no
+  Production state change.
+- **Acceptance boundary:** One refund slice only. Partial/replayed/refund
+  ordering, methods, renewal/failure/expiry, timeout/retry, exactly-once, and
+  complete reconciliation remain open. Score remains **219/61/280 (78.2%)**
+  and no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-refund-2026-10-10.md`.
+
 ## 2026-10-10 · Preview/Test Mode pause-resume reconciliation
 
 - **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`.

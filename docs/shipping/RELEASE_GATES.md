@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 full-refund slice now evidenced
+
+A read-only identity preflight matched an isolated captured subscription
+payment to Razorpay Test Mode. The full refund returned HTTP 200; the provider
+reported `refunded` with one processed full refund; the isolated Preview
+webhook completed one fresh `refund.processed` event; and the ledger payment
+row projected to `refunded` with the full refund watermark. The linked license
+remained active under the paid-time policy.
+
+This closes only the full-refund delivery/projection slice. Gate 4 remains
+open for partial refunds, refund replay/order, the complete enabled-method
+matrix, renewal, failure/expiry, timeout/retry, exactly-once, and full
+provider/ledger/entitlement reconciliation. Production remains fail-closed
+and untouched. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-refund-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 pause-resume slice now evidenced
 
 One active isolated Razorpay Test Mode subscription was paused and resumed.

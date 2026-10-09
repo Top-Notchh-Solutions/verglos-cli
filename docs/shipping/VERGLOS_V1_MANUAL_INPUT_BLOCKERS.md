@@ -1,5 +1,21 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-10 · Test Mode refund qualification
+
+The previously flagged Test Mode credential boundary is no longer blocking
+this technical run: the authorized `gates-testing` environment passed a
+read-only identity preflight and one bounded full refund. Razorpay returned
+HTTP 200, delivered a completed `refund.processed` event to isolated Preview,
+and the matched payment row reconciled to `refunded`.
+
+This does not close Gate 4. Partial refund, refund replay/order, remaining
+payment methods, renewal, failure/expiry, timeout/retry, exactly-once, and
+complete provider/ledger/entitlement reconciliation remain missing artifacts.
+No secret is recorded here. Production remains untouched.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-subscription-refund-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · Provider cancellation delivery
 
 The Preview fixture access issue is resolved for the authorized runner through

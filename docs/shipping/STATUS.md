@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Preview/Test Mode full-refund lifecycle slice
+
+A read-only preflight matched an isolated captured subscription payment to
+the Razorpay Test Mode provider record. A full refund returned HTTP 200; the
+provider then reported `refunded` with one processed refund; the isolated
+Preview endpoint completed the fresh `refund.processed` event; and the
+application payment row projected to `refunded` with the full refund
+watermark. The linked license remained active under the paid-time ledger rule.
+
+No manual database or entitlement mutation occurred, and Production was not
+touched. This is real Gate 4 refund progress, not full acceptance. Partial
+refund, refund replay/order, enabled-method coverage, renewal, failure/expiry,
+timeout/retry, exactly-once, and complete reconciliation remain open. Score
+remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-refund-2026-10-10.md`.
+
 ## 2026-10-10 · Preview/Test Mode pause-resume lifecycle slice
 
 One active Razorpay Test Mode subscription was paused and resumed in the
