@@ -1,5 +1,26 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Production is a complete staged workstream, not a code-only stop
+
+The current Production boundary is explicitly accepted only for the
+fail-closed code-rollout stage. The full Production track remains in scope:
+read-only audit; reviewed code deployment; environment/provider separation;
+operation-specific migration, payment, entitlement, account, and customer-data
+preflights; backup/restore and current RPO; reconciliation; post-deploy health
+and monitoring; rollback/forward-fix rehearsal; and final acceptance.
+
+Web `315a432` is migration-bearing and remains a Preview qualification
+candidate. It must not be promoted to Production until the current-backup,
+migration, reconciliation, and rollback preflight is complete. The known
+Production deployment remains READY at
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`; this batch made no Production deploy or
+plan, provider/payment, database/migration, entitlement, account, or
+customer-data write. Test Mode values remain excluded from Production.
+
+The Preview auth repair and hosted/local evidence are recorded in
+`docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-09 · Web PR #171 integrated and hosted-verified
 
 PR #171 is now based on current `main` at `be8cd219` and is mergeable. The

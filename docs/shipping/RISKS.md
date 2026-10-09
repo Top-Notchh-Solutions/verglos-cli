@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## R-PROD-migration-bearing-candidate-and-stale-rpo · 2026-10-09
+
+The current Web candidate `315a432` is migration-bearing. Its disposable
+39-migration restore rehearsal reconciled and measured RTO **3,177 ms**, but
+the available snapshot is approximately **441 hours** old versus the critical
+48-hour RPO. Exact protected Preview browser smoke is also pending because
+the current debug profile was redirected to Vercel login. Do not promote this
+candidate to Production until a current-backup/migration preflight,
+reconciliation, rollback decision, and authenticated smoke evidence exist.
+This is a release-safety boundary, not a reason to omit Production: the
+existing fail-closed Production deployment and its later activation,
+monitoring, reconciliation, and rollback stages remain in scope. Owner: Web
+release operations. Evidence:
+`docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`.
+
 ## R-PLAN-WEB-014-current-test-provider-401 · 2026-10-09
 
 The current read-only Razorpay Test Mode plan and subscription inventory calls

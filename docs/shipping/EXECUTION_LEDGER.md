@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Preview auth repair and Production completeness boundary
+
+- **Mapped work:** Preview fixture authentication, Web PR #171, Gate 4
+  qualification support, and the complete Production execution track.
+- **Implementation:** Web `315a432` makes the Clerk bypass Preview-only and
+  requires the complete fixture tuple. Production authentication remains
+  unchanged.
+- **Verification:** Hosted workflow `37865021464` passed; Preview deployment
+  `dpl_AqiQRh8ZoSrmD5pGhiLQyH84SR9a` is READY; focused auth tests passed
+  **4/4**; the full Web suite passed **896 total / 872 pass / 24 explicit
+  skips / 0 fail**; typecheck, build, schema, and 39-migration checks passed.
+  Exact protected-browser smoke remains pending because the current profile was
+  redirected to Vercel login.
+- **Recovery:** The disposable 39-migration PostgreSQL rehearsal reconciled,
+  passed both writer passes, and measured RTO **3,177 ms**. The available
+  snapshot is about **441 hours** old, so the 48-hour RPO gate remains open.
+- **Production boundary:** Production remains at READY deployment
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`. No Production deploy or plan,
+  provider/payment, database/migration, entitlement, account, or customer-data
+  write occurred. Production billing/database activation, monitoring,
+  reconciliation, and rollback remain required later stages, not omitted work.
+- **Disposition:** PR #171 remains open and unmerged; no backlog checkbox
+  changed. Score remains **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Web PR #171 main integration and hosted verification
 
 - **Mapped work:** Web billing/subscription lifecycle, Preview isolation,

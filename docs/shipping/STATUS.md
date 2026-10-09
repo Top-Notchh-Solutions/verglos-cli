@@ -1,5 +1,34 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Preview auth repair and complete Production boundary
+
+Web commit `315a432` repairs the isolated Preview fixture seam without
+weakening Production: only a complete explicit Preview fixture tuple bypasses
+Clerk; Production and incomplete Preview configuration remain Clerk-backed.
+PR #171 is open, mergeable, and unmerged. Hosted workflow `37865021464` and
+the READY Preview deployment `dpl_AqiQRh8ZoSrmD5pGhiLQyH84SR9a` passed their
+available checks. Exact browser smoke on that protected Preview is pending
+because the current debug profile was redirected to Vercel login.
+
+Local qualification passed **896 total / 872 pass / 24 explicit skips / 0
+fail**, focused auth tests **4/4**, typecheck, build, schema, and 39-migration
+ordering. A disposable restore rehearsal applied all 39 migrations, returned
+`reconciled`, and measured RTO **3,177 ms**; its overall result correctly
+remains open because the snapshot is about **441 hours** old versus the 48-hour
+RPO threshold.
+
+Production remains included, not skipped: the known READY deployment is
+`dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` at `https://verglos.com`. This batch made no
+Production deploy or plan, provider/payment, database/migration, entitlement,
+account, or customer-data write. The current migration-bearing candidate is
+not promoted until its current-backup, migration, reconciliation, and rollback
+preflight is complete. Later Production billing/database activation,
+post-activation monitoring, reconciliation, and rollback remain in the same
+goal as separate required stages. Score remains **219 checked / 61 unchecked /
+280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Web PR #171 integrated with current main and hosted-verified
 
 Web `be8cd219` now integrates the current `main` branch without dropping the

@@ -70,6 +70,42 @@ it is not the final billing launch. Production billing and database writes
 remain part of this goal and will be executed when their concrete preflight
 criteria are satisfied.
 
+### Production completeness contract — current execution update
+
+The Production workstream must be reported as a complete chain, not as a
+code-only stopping point. Every Production pass must explicitly account for
+all of these surfaces:
+
+- source commit, migration compatibility, build, runtime configuration shape,
+  deployment identity, domain aliases, health routes, logs, headers, caching,
+  authentication boundaries, checkout rendering, console/runtime errors,
+  rollback target, and public smoke;
+- environment separation, including proof that Preview/Test Mode keys, plan
+  IDs, webhook secrets, fixture database URLs, and test customer data were not
+  copied into Production;
+- Production provider configuration and canonical plan/customer/webhook
+  configuration, but only after the correct provider mode and account state
+  are independently verified;
+- every requested database migration, backfill, payment/provider write,
+  capture, refund, subscription action, entitlement change, account change,
+  and customer-data mutation, each with its own dry run, bounded scope,
+  backup/snapshot, restore rehearsal, row-count/reconciliation result,
+  rollback or forward-fix decision, and named owner;
+- post-deploy health, payment/ledger/entitlement reconciliation, alerting and
+  monitoring, failure response, rollback readiness, and final acceptance.
+
+The present operation is the first Production stage only: a reviewed,
+fail-closed code rollout. The later surfaces are still in the same goal and
+must not be silently omitted. Conversely, a migration-bearing candidate must
+not be promoted just because its hosted build is green; the Production
+migration preflight and recovery evidence must be current first. The current
+known Production deployment remains `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` at
+`https://verglos.com`; the current Web qualification candidate is PR #171,
+head `315a432cc84b3f6b2ece1e1794f8dd367a0a8237`, and it remains unmerged.
+
+Evidence for this current boundary is:
+`docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`.
+
 The payment gate had one explicit product gap: the Web code had billing ledger
 and subscription-webhook handling, but no server route that created a provider
 subscription. Web commit `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` now adds
@@ -178,6 +214,13 @@ Current source checkpoints:
   provider, database, migration, entitlement, account, and customer-data
   activation remain explicitly included deferred stages with their own
   preflights.
+- The current Web qualification head is PR #171 at
+  `315a432cc84b3f6b2ece1e1794f8dd367a0a8237`. Its Preview-only auth fixture
+  repair passed hosted checks and its READY Preview deployment is recorded in
+  the latest evidence. Exact protected-browser smoke is pending. This
+  candidate is migration-bearing, so it is not a Production promotion
+  candidate until the current-backup RPO, migration, reconciliation, and
+  rollback preflight is complete.
 - Earlier isolated Test Mode work recorded canonical Pro plans and first-charge
   evidence, but the latest read-only recheck of Test Mode plan and subscription
   inventory using `verglos-web/.env.gates.testing` returned HTTP 401. No
@@ -1101,6 +1144,10 @@ The latest invoice-only subscription-failure qualification and current
 Test Mode credential blocker evidence is:
 
 `docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`
+
+The latest Preview-auth and complete Production-boundary evidence is:
+
+`docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`
 
 The latest payment decision and backlog acceptance are recorded in
 private commit `5a99b0d`; the preceding payment qualification evidence commit

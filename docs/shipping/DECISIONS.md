@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Keep Production complete but staged
+
+- **Decision:** Treat Production as a full staged workstream. The current
+  operation may be a fail-closed code rollout only, but later configuration,
+  billing/database/entitlement activation, monitoring, reconciliation, and
+  rollback remain required in the same shipping goal.
+- **Reason:** A green hosted build does not prove migration compatibility,
+  current-backup RPO, provider lifecycle correctness, or safe write recovery.
+  The current Web candidate `315a432` is migration-bearing and its restore
+  rehearsal has a stale approximately 441-hour snapshot.
+- **Boundary:** Keep the known Production deployment
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` fail-closed. No Production plan IDs,
+  payment/provider writes, database/migration writes, entitlement changes,
+  account changes, or customer-data mutations occurred in this batch. Do not
+  copy Test Mode or Preview values into Production.
+- **Disposition:** Do not promote the migration-bearing candidate until the
+  operation-specific migration, current-backup, reconciliation, and rollback
+  preflight is complete. No checkbox changed; score remains
+  **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Prepare, but do not approve, the legal addendum
 
 - **Decision:** Use a private structured addendum for Gate 7 review; keep all

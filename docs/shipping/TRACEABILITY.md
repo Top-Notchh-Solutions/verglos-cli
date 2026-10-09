@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Preview auth repair and full Production trace
+
+- **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`, `QUAL-WEB-004`, `QUAL-WEB-005`, `QUAL-WEB-006`,
+  `DIST-006`, and the Production code-rollout/activation gates.
+- **Implementation:** Web `315a432` repairs only the complete isolated
+  Preview fixture auth seam. Production remains Clerk-backed and fail-closed.
+- **Qualification:** Hosted workflow `37865021464`, READY Preview deployment
+  `dpl_AqiQRh8ZoSrmD5pGhiLQyH84SR9a`, local **896/872/24/0** suite, focused
+  auth **4/4**, typecheck/build/schema, and 39 ordered migrations passed.
+  Protected-browser smoke remains pending due Vercel login protection.
+- **Recovery boundary:** The 39-migration disposable rehearsal reconciled and
+  measured RTO **3,177 ms**, but its approximately 441-hour snapshot age fails
+  the 48-hour RPO requirement.
+- **Production boundary:** Production remains READY at
+  `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`; no Production deploy or plan,
+  provider/payment, database/migration, entitlement, account, or customer-data
+  write occurred. Billing/database activation, monitoring, reconciliation,
+  and rollback remain mapped deferred stages, not omitted scope.
+- **Evidence:**
+  `docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-09 · Legal/licensing review packet preparation
 
 - **Mapped IDs:** `LIC-002`, `LIC-003`, `DIST-001`, `DIST-002`, `DIST-003`,
