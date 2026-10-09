@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Preview/Test Mode pause-resume lifecycle slice
+
+One active Razorpay Test Mode subscription was paused and resumed in the
+isolated Preview environment. Provider pause and resume both returned HTTP
+200 (`paused` then `active`); the signed `subscription.paused` and
+`subscription.resumed` webhook events were each completed once; and the
+isolated database projected one recently updated row back to `active`. No
+recent payment or license row was created, and no manual database or
+entitlement mutation occurred.
+
+This is real Gate 4 progress, not full Gate 4 acceptance. Renewal,
+failure/expiry/refund, enabled-method coverage, replay/order, timeout/retry,
+exactly-once, and complete reconciliation remain open. Production remains
+fail-closed and untouched. Score remains **219/61/280 (78.2%)**; no checkbox
+changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-pause-resume-2026-10-10.md`.
+
 ## 2026-10-10 · Production code rollout after lifecycle binding fix
 
 Reviewed Web source `51e07f5` was merged through PR #171 as `b08bb509` and

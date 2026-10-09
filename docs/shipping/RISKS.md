@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-PREVIEW-PAUSE-RESUME · 2026-10-10 · update
+
+The isolated Test Mode provider accepted a bounded pause/resume operation and
+the Preview webhook path completed both lifecycle events. The application
+projected the recently updated subscription back to `active`, with no recent
+payment or license creation.
+
+Residual risk remains for renewal, provider-generated failure/expiry/refund,
+all enabled payment methods, replay/out-of-order, timeout/retry, exactly-once,
+complete provider/ledger/entitlement reconciliation, and Production
+activation. Owner: Web/provider operations. Gate impact: this advances Gate 4
+only; it does not close Gate 4 or any backlog checkbox.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-pause-resume-2026-10-10.md`.
+
 ## R-PROD-CURRENT-CODE-ROLLOUT-SMOKE · 2026-10-10 · update
 
 Web `51e07f5` was merged as `b08bb509` and deployed READY to Production as

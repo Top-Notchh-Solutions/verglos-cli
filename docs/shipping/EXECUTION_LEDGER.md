@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Preview/Test Mode pause-resume lifecycle slice
+
+- **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,
+  `PLAN-WEB-014`, and `PLAN-WEB-015`.
+- **Provider result:** One active Test Mode subscription was paused with
+  `pause_at=now` and resumed with `resume_at=now`; both provider operations
+  returned HTTP 200 and reported `paused` then `active`.
+- **Webhook result:** The isolated Preview database recorded one completed
+  `subscription.paused` and one completed `subscription.resumed` event.
+  One subscription row updated during the observation window and projected to
+  `active`.
+- **Safety result:** Zero recent payment rows and zero recent license rows;
+  no manual database edit, entitlement grant, or payment mutation occurred.
+- **Boundary:** Razorpay Test Mode and isolated Preview only. Production
+  provider, payment, database, migration, entitlement, account, and customer
+  state were untouched.
+- **Disposition:** Pause/resume delivery and projection are evidenced, but
+  the full Gate 4 matrix remains open. Score remains **219/61/280 (78.2%)**;
+  no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-pause-resume-2026-10-10.md`.
+
 ## 2026-10-10 · Production code rollout for lifecycle binding fix
 
 - **Source/release:** Web `51e07f5`, merged PR #171 as `b08bb509`.

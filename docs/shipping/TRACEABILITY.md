@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Preview/Test Mode pause-resume reconciliation
+
+- **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`.
+- **Provider evidence:** One active Test Mode subscription returned HTTP 200
+  for pause (`paused`) and resume (`active`).
+- **Application evidence:** The isolated Preview database completed one
+  `subscription.paused` and one `subscription.resumed` event and projected
+  one recently updated subscription row to `active`.
+- **Safety boundary:** No recent payment or license row; no manual database or
+  entitlement mutation; no Production state change.
+- **Acceptance boundary:** This is a lifecycle slice only. Full methods,
+  renewal/failure/expiry/refund, replay/order, timeout/retry, exactly-once,
+  and complete reconciliation remain open. Score remains **219/61/280
+  (78.2%)** and no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-pause-resume-2026-10-10.md`.
+
 ## 2026-10-10 · Production rollout of lifecycle binding fix
 
 - **Mapped surface:** Production code-rollout boundary; `PLAN-WEB-015`.

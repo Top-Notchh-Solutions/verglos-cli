@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 pause-resume slice now evidenced
+
+One active isolated Razorpay Test Mode subscription was paused and resumed.
+Both provider calls returned HTTP 200; the isolated Preview endpoint accepted
+one completed `subscription.paused` and one completed
+`subscription.resumed` event; and the recently updated application row ended
+in `active`. No recent payment or license row was created.
+
+This closes only the pause/resume delivery/projection slice. Gate 4 remains
+open for the complete enabled-method matrix, renewal, provider failure/expiry,
+refund, replay/out-of-order, timeout/retry, exactly-once, and full
+provider/ledger/entitlement reconciliation. Production remains fail-closed
+and untouched. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-pause-resume-2026-10-10.md`.
+
 ## 2026-10-10 · Production code rollout remains fail-closed
 
 Web `51e07f5` was merged through PR #171 as `b08bb509` and deployed READY as
