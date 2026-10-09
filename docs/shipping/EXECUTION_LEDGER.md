@@ -6563,3 +6563,21 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
   monitoring, and rollback/restore remain open. No checkbox changed; score
   remains **219 checked / 61 unchecked / 280 total (78.2%)**.
 - **Evidence:** `docs/shipping/evidence/production-readonly-smoke-2026-10-09.md`.
+
+## 2026-10-09 · QUAL-CLI-006 standards corpus requalification
+
+- **Scope:** current CLI `main` source only; no source or public-document edit.
+- **Verification:** standards corpus passed **7/7**, shared package typecheck
+  passed, shared package build passed, and Docker was healthy. The corpus
+  covers SARIF, CycloneDX, SPDX, in-toto, detect-secrets, Sigstore guards,
+  and the install/upgrade/rollback contract reference.
+- **Limitation:** official `cosign`, `in-toto-verify`, `syft`, and `trivy`
+  executables were unavailable on the host. This is not official-validator or
+  trusted-publishing evidence.
+- **Disposition:** `QUAL-CLI-006` remains open for independent official-tool
+  validation, exact release-candidate consumer install/upgrade/rollback,
+  trusted keyless identity, protected publishing, legal clearance, and final
+  acceptance. No Production, database, payment, provider, deployment, npm
+  publication, or release state changed. Score remains **219 checked / 61
+  unchecked / 280 total (78.2%)**.
+- **Evidence:** `docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`.

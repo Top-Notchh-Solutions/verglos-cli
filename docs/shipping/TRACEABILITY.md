@@ -797,6 +797,14 @@ boundary only; provider activation, database release, payment lifecycle,
 entitlement reconciliation, monitoring, and rollback remain open. See
 `docs/shipping/evidence/production-readonly-smoke-2026-10-09.md`.
 
+## QUAL-CLI-006 current standards corpus · 2026-10-09
+
+At the current CLI source head, the restored standards corpus passed 7/7 and
+the shared package typecheck/build passed. Host-level official validator
+executables were absent, so official-tool, trusted-publishing, and final
+release acceptance remain open. No checkbox changed. See
+`docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`.
+
 ## PLAN-WEB-014 invoice-bound subscription and Production rollout · 2026-10-09
 
 - **Implementation:** Web `a95deef` adds paid-invoice binding for subscription

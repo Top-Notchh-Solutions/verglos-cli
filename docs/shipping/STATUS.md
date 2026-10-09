@@ -502,6 +502,18 @@ write occurred. Production billing activation and full reconciliation remain
 fail-closed. Score remains **219 / 61 / 280 (78.2%)**. Evidence:
 `docs/shipping/evidence/production-readonly-smoke-2026-10-09.md`.
 
+## 2026-10-09 · QUAL-CLI-006 standards corpus
+
+The restored current-head standards corpus passed **7/7**; the shared package
+typecheck and build passed and Docker was healthy. Host-level `cosign`,
+`in-toto-verify`, `syft`, and `trivy` executables were unavailable, so this is
+code-side evidence only. `QUAL-CLI-006` remains open for official-validator
+execution, exact release-candidate consumer install/upgrade/rollback,
+trusted keyless identity, protected publishing, legal clearance, and final
+acceptance. No production/provider/database/deployment/npm state changed.
+Score remains **219 / 61 / 280 (78.2%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`.
+
 ## 2026-10-09 · current Production rollout — fail-closed code only
 
 The reviewed Web source `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` is now

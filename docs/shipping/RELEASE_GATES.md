@@ -402,6 +402,17 @@ Production plan IDs, payment/provider writes, database/migration writes,
 entitlement changes, account changes, or customer-data mutations occurred.
 Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-otp-limitation-2026-10-09.md`.
 
+## QUAL-CLI-006 current standards corpus · 2026-10-09
+
+The current CLI standards-validation corpus passed 7/7, and the shared package
+typecheck/build passed. This does not close `QUAL-CLI-006`: host-level
+`cosign`, `in-toto-verify`, `syft`, and `trivy` were unavailable, and the
+required official-validator, exact release-candidate consumer,
+trusted-keyless-identity, protected-publish, legal, and final-acceptance
+evidence is still missing. No checkbox changed and no Production/provider/
+database/payment/deployment/npm state changed. Evidence:
+`docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`.
+
 ## Current Production code-rollout qualification · 2026-10-09
 
 Production deployment `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` reached READY and is
