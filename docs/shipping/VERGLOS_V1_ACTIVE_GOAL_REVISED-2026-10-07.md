@@ -27,16 +27,20 @@ claimed until separately qualified. Cards-only is a product-scope decision,
 not payment acceptance: the remaining requirement is a real canonical-price
 Razorpay Test Mode recurring-card lifecycle in isolated Preview.
 
-The latest Web repair is commit `a2b305c` on `feat/preview-test-auth`. It
+The current Web head is commit `445d8ed` on `feat/preview-test-auth`. It
 keeps the isolated Preview fixture-auth seam available outside an explicit
 Production runtime while requiring the explicit auth-enabled and isolated-
-database markers. The Production code rollout `dpl_GXN9UCK2fotoRcGACJx85p9s7dBi`
-is READY and aliased to `https://verglos.com`; its public checkout renders
-Cards only. The rollout is fail-closed code/configuration verification only:
-it did not create a Production payment, subscription, database row,
-migration, entitlement, account, or customer-data mutation. Preview branch
-requalification remains a separate step and must use the isolated database,
-test provider configuration, and private fixture evidence.
+database markers, and it constrains the hosted Razorpay display configuration
+to the declared Cards-only catalog instead of allowing provider defaults to
+reopen unqualified methods. The current Preview rollout
+`dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5` is READY. The current Production code
+rollout `dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw` is READY and aliased to
+`https://verglos.com`; its public checkout is configured for Cards only. This
+rollout is fail-closed code/configuration verification only: it did not create
+a Production payment, subscription, database row, migration, entitlement,
+account, or customer-data mutation. Preview branch requalification remains a
+separate step and must use the isolated database, Test Mode provider
+configuration, and private fixture evidence.
 
 The current gate state is: Gates 1–3 are complete for isolated
 qualification; Gate 4 is partially qualified but remains open until the
@@ -290,12 +294,12 @@ fail-closed code rollout. The later surfaces are still in the same goal and
 must not be silently omitted. Conversely, a migration-bearing candidate must
 not be promoted just because its hosted build is green; the Production
 migration preflight and recovery evidence must be current first. The latest
-verified Production deployment is `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`, READY
-and aliased to `https://verglos.com`; its public smoke was read-only and its
-billing/database/entitlement state remained fail-closed. The current Web
-qualification worktree is `feat/preview-test-auth` at `6f932d4`; its focused
-lifecycle suite, typecheck, diff check, and full local build passed. It is
-not a Production activation candidate merely because those checks passed.
+verified Production deployment is `dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw`, READY
+and aliased to `https://verglos.com`; its public rollout was fail-closed and
+its billing/database/entitlement state remained untouched. The current Web
+qualification worktree is `feat/preview-test-auth` at `445d8ed`; its focused
+checkout suite, typecheck, diff check, and full local build passed. It is not
+a Production activation candidate merely because those checks passed.
 
 Evidence for this current boundary is:
 `docs/shipping/evidence/production-and-preview-auth-rollout-2026-10-09.md`.
@@ -316,6 +320,40 @@ The current CLI standards-validation source restoration is:
 It is qualification progress only; official validators, trusted release
 provenance, protected publishing, legal review, and independent acceptance
 remain open.
+
+### 2026-10-10 current execution checkpoint — Cards-only hosted display repaired
+
+The active Web batch repaired a concrete `PLAN-WEB-014` acceptance defect:
+the Verglos page catalog was Cards-only, but the hosted Razorpay Checkout
+modal could still show provider-default UPI and eMandate tabs. Web commit
+`445d8ed` adds a server/catalog-driven hosted display configuration with
+`show_default_blocks: false` and passes it to both order and subscription
+Checkout paths. Focused checkout tests passed **12/12**, Web typecheck
+passed, the Preview build passed, and the Production build passed.
+
+The batch was deployed to the READY Preview deployment
+`dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5` and the READY Production deployment
+`dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw`, aliased to `https://verglos.com`.
+Production verification remains fail-closed and read-only for billing state:
+no Production payment, subscription, database, migration, entitlement,
+account, or customer-data write occurred. The isolated Preview subscription
+route and database remain the only place where Test Mode lifecycle writes may
+be exercised.
+
+This repairs the hosted-method display boundary; it does not close
+`PLAN-WEB-014` or Gate 4. The remaining active-item proof is the complete
+canonical-price recurring-card lifecycle: provider authorization/capture,
+signed webhook, exactly-once payment and ledger reconciliation, tenant-bound
+Pro entitlement, replay/idempotency, and the remaining cancellation, failure,
+renewal, expiry, refund, timeout, and out-of-order cases. The live score
+therefore remains **219 checked / 61 unchecked / 280 total / 78.2%** until
+that evidence is complete.
+
+The private evidence record for this batch must include the redacted commit,
+deployment IDs, test results, hosted-method observation, database write
+boundary, and remaining limitations. It must never include provider secrets,
+full provider IDs, database URLs, cookies, authorization headers, or raw
+payment payloads.
 
 ### 2026-10-09 continuation checkpoint — provider authorization remains open
 
@@ -432,11 +470,12 @@ Current source checkpoints:
   was identical to PR #157 and its base was stale) and is now closed. It was
   not merged or counted as new shipping progress.
 - Current Web production-qualification sequence on
-  `feat/preview-test-auth` is `7373c8b` (same-origin checkout request
-  acceptance), `0bafe73` (hosted payment-failure retry preservation), and
-  `6f932d4` (subscription lifecycle ordering guard). These changes passed the
-  focused suites, typecheck, diff check, and full local build and were deployed
-  only through the fail-closed Production path.
+  `feat/preview-test-auth` includes `7373c8b` (same-origin checkout request
+  acceptance), `0bafe73` (hosted payment-failure retry preservation),
+  `6f932d4` (subscription lifecycle ordering guard), and `445d8ed`
+  (Cards-only hosted Checkout display restriction). These changes passed the
+  applicable focused suites, typecheck, diff check, and full local build and
+  were deployed only through the fail-closed Production path.
 - Current CLI backend hardening commits are `439b782d` and `d0a3b21`. The former
   rejects unsafe saved
   API bases before license, entitlement, monitor, login, unlock, or telemetry
@@ -450,26 +489,26 @@ Current source checkpoints:
   supplied invoice-backed subscription-capture reconciliation, the code-side
   `subscription.expired` path, and invoice-only `payment.failed` binding.
   Those records remain historical evidence. The current worktree head is
-  `6f932d4` on the same branch; its lifecycle ordering repair is qualified
-  locally and deployed through the fail-closed Production path. Neither the
-  migration-bearing qualification work nor the lifecycle work is a Production
-  activation candidate until the applicable migration, recovery,
+  `445d8ed` on the same branch; its hosted display repair is qualified by the
+  focused checkout suite and deployed through the fail-closed Production path.
+  Neither the migration-bearing qualification work nor the lifecycle work is a
+  Production activation candidate until the applicable migration, recovery,
   reconciliation, and rollback evidence is current.
 - The latest isolated Preview deployment for the current qualification branch
-  is `dpl_HbYCQG4hnDH6Jew48YcNUuRkVVaA`, READY, with the isolated Preview
-  configuration and the invoice-only subscription-failure path. Protected
-  read-only smoke passed. The earlier `dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u`
-  record remains evidence for the expiry code path, and
-  `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB` remains evidence for invoice-backed
+  is `dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5`, READY, with the isolated Preview
+  configuration and the Cards-only hosted display repair. The earlier
+  `dpl_HbYCQG4hnDH6Jew48YcNUuRkVVaA`, `dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u`,
+  and `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB` records remain historical evidence
+  for the invoice-only failure, expiry code path, and invoice-backed
   first-charge reconciliation.
 - The latest Production deployment is
-  `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`, READY and aliased to
-  `https://verglos.com`. The remote runtime-config check, 47-page local build,
-  and read-only public smoke passed. Production plan IDs were deliberately
-  not added, so recurring billing remains fail-closed there. This is the
-  latest complete Production code-rollout slice; live billing, provider,
-  database, migration, entitlement, account, and customer-data activation
-  remain explicitly included deferred stages with their own preflights.
+  `dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw`, READY and aliased to
+  `https://verglos.com`. The remote runtime-config check, 47-page build, and
+  fail-closed public rollout passed. Production plan IDs were deliberately not
+  added, so recurring billing remains fail-closed there. This is the latest
+  complete Production code-rollout slice; live billing, provider, database,
+  migration, entitlement, account, and customer-data activation remain
+  explicitly included deferred stages with their own preflights.
 - Earlier Web PR #171 at `fa1b9f5c50258ef23daaac4bbf32b24bbd590ef5`
   remains historical evidence for the Preview-only auth fixture and checkout
   terminal-lifecycle repair. The current production-qualification head is
@@ -663,15 +702,18 @@ a changed input or a clear acceptance need:
   preserving fail-closed production auth. PR #168 changed the missing-database
   receipt route to a bounded 503/no-store response while preserving real
   database errors.
-- The latest read-only production browser check rendered UPI, Cards,
+- The pre-repair read-only Production browser check rendered UPI, Cards,
   Netbanking, Wallets, EMI, and Pay Later with no console errors and no
   QR-only path. It did not prove Test Mode, order creation, capture, refund,
-  webhook, entitlement, renewal, cancellation, or payment acceptance.
+  webhook, entitlement, renewal, cancellation, or payment acceptance. The
+  current Web `445d8ed` repair constrains the hosted display to Cards-only and
+  disables provider default blocks; a new hosted-modal verification belongs
+  to the active `PLAN-WEB-014` acceptance chain.
 - Earlier Production browser/deployment qualification performed no
   Production database, migration, payment, provider, entitlement, or account
   write. The current reviewed Web code was subsequently deployed to
-  Production as `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`; the build and read-only
-  public smoke passed, and no Production database, migration, payment,
+  Production as `dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw`; the build and fail-closed
+  public rollout passed, and no Production database, migration, payment,
   provider, entitlement, or account write occurred. No Test Mode plan or
   credential was copied to Production. This is a bounded application
   deployment slice, while the complete Production activation track remains
@@ -726,6 +768,13 @@ a changed input or a clear acceptance need:
   This proves configuration and isolation only; it does not replace the
   remaining provider lifecycle, entitlement, and Production-reconciliation
   evidence.
+- The current hosted Checkout display repair is Web `445d8ed`. It applies the
+  Cards-only method catalog to the provider's hosted display configuration and
+  disables provider default blocks. Preview and Production are deployed from
+  that head through `dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5` and
+  `dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw`, respectively. This is a method-display
+  and fail-closed rollout only; it does not itself prove a paid recurring
+  lifecycle or alter the backlog score.
 - The Cards-only decision reduces the matrix but does not close Gate 4. The
   current missing proof is a successful provider-supported recurring card
   authorization plus signed delivery, one-to-one payment/ledger/license
@@ -1395,14 +1444,16 @@ At resume, perform this exact sequence:
 3. Read the nine-gate matrix and Production execution track in Section 4 and
    update the execution ledger with each gate's status, owner, missing
    artifact, next action, and write boundary.
-4. Work only on `PLAN-WEB-014`: apply and verify the Cards-only configuration,
-   complete the recurring card provider authorization, reconcile entitlement
-   evidence, and repair the active blocker. Production read-only/code-rollout
-   work is allowed only when it directly supports this item. Do not start
-   another backlog item or gate until `PLAN-WEB-014` is accepted or genuinely
-   blocked with a current release decision. The subscription-creation
-   implementation batch is complete in Web `54e6fd0`; the remaining work is
-   isolated Preview/Test Mode lifecycle evidence and reconciliation.
+4. Work only on `PLAN-WEB-014`: verify the Cards-only application and hosted
+   Checkout configuration from Web `445d8ed`, complete the recurring card
+   provider authorization, reconcile entitlement evidence, and repair the
+   active blocker. Production read-only/code-rollout work is allowed only when
+   it directly supports this item. Do not start another backlog item or gate
+   until `PLAN-WEB-014` is accepted or genuinely blocked with a current
+   release decision. The subscription-creation implementation batch is
+   complete in Web `54e6fd0`; the hosted display repair is `445d8ed`; the
+   remaining work is isolated Preview/Test Mode lifecycle evidence and
+   reconciliation.
 5. Inspect current CLI and Web branches/PRs and verify recorded heads. Keep
    duplicate PR #169 closed and do not count it as shipping progress.
 6. For each batch, record IDs, criteria, dependencies, evidence, production/
@@ -1523,6 +1574,11 @@ The latest Preview subscription-authorization limitation evidence is:
 The latest Production read-only smoke evidence is:
 
 `docs/shipping/evidence/production-readonly-smoke-2026-10-09.md`
+
+The latest Cards-only hosted-display and current Production rollout evidence
+is:
+
+`docs/shipping/evidence/plan-web-014-cards-only-hosted-config-and-production-rollout-2026-10-10.md`
 
 The latest CLI standards-corpus evidence is:
 
