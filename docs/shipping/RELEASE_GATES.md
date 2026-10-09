@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 subscription authorization reached real OTP boundary
+
+The isolated Preview creation route produced a canonical monthly Test Mode
+subscription and persisted its pending binding. Razorpay hosted checkout
+reached card tokenization; the documented sandbox card attempt currently has a
+failed payment projection, while provider state remains created with zero paid
+cycles. The next artifact is the authorized operator's real tokenization OTP,
+then signed webhook and payment/subscription/license reconciliation. No
+Production state changed. Gate 4 and `PLAN-WEB-011/012/014/015` remain open;
+score remains **219/61/280 (78.2%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-provider-subscription-authorization-otp-2026-10-10.md`.
+
 ## 2026-10-10 · Renewal-shaped provider invoice remains unreconciled
 
 Read-only Test Mode data shows an active canonical monthly subscription with

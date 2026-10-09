@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Provider subscription reached card-tokenization OTP boundary
+
+- **Technical result:** Fresh Preview/Test Mode subscription creation succeeded
+  through the catalog-bound route and returned `testMode=true`, monthly Pro,
+  catalog `2026-10-02.0`, and twelve cycles. Read-only provider state is
+  `created`/`paid_count=0`; the isolated app row is `pending`.
+- **Partial attempt:** The documented sandbox Visa fixture reached hosted card
+  tokenization; one failed payment projection exists and no successful payment
+  or new entitlement was accepted.
+- **External blocker:** Razorpay requires the authorized operator's real OTP
+  for card tokenization. The checkout remains open in Chrome; the next safe
+  action is to enter that OTP, then reconcile signed delivery and projections.
+- **Boundary:** Preview fixture secret rotation and isolated Test Mode provider/
+  database activity only. No Production state changed and no direct SQL or
+  entitlement edit occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-provider-subscription-authorization-otp-2026-10-10.md`.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-10 · Provider renewal-shaped invoice reconciliation gap
 
 - **Read-only provider observation:** Test Mode contained one active monthly

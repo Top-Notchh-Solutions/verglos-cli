@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Subscription qualification is waiting at operator OTP
+
+The isolated Preview creation route now successfully creates a canonical
+monthly Test Mode subscription and persists the pending binding. Razorpay
+hosted card checkout reached tokenization; the documented sandbox card attempt
+has one failed application projection and no successful payment or new
+entitlement. The provider subscription remains `created` with zero paid
+cycles. The only next action for this slice is the operator's real OTP,
+followed by signed webhook and payment/subscription/license reconciliation.
+
+No Production state changed. Gate 4 and `PLAN-WEB-011/012/014/015` remain open;
+score remains **219/61/280 (78.2%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-provider-subscription-authorization-otp-2026-10-10.md`.
+
 ## 2026-10-10 · Renewal-shaped provider invoice is not reconciled
 
 Read-only Test Mode inventory found one active monthly Pro subscription with

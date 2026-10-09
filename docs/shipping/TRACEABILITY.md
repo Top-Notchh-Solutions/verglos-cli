@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Provider subscription authorization OTP boundary
+
+- **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`; Gate 4.
+- **Route evidence:** isolated Preview `POST /api/razorpay/create-subscription`
+  returned a catalog-bound Test Mode subscription with monthly cadence,
+  canonical catalog version, and twelve cycles.
+- **Projection evidence:** provider read is `created`/zero paid cycles; the
+  matching isolated app subscription is `pending`; the card attempt has a
+  failed payment projection and no accepted successful payment or new
+  entitlement.
+- **Missing evidence:** operator OTP, successful provider authorization,
+  signed webhook delivery, and final ledger/subscription/license reconciliation.
+- **Boundary:** Preview/Test Mode only; no Production state-changing write.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-provider-subscription-authorization-otp-2026-10-10.md`.
+
 ## 2026-10-10 · Provider renewal-shaped invoice reconciliation gap
 
 - **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`; provider

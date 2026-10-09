@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Provider subscription authorization reached OTP boundary
+
+The isolated Preview/Test Mode route created a canonical monthly Pro
+subscription and persisted its pending binding. Razorpay hosted card checkout
+reached tokenization; provider state is `created` with zero paid cycles and
+the attempted card flow has one failed payment projection. The authorized
+operator's real OTP and the resulting signed webhook/reconciliation are still
+required. No checkbox changed; score remains **219 checked / 61 unchecked / 280
+total (78.2%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-provider-subscription-authorization-otp-2026-10-10.md`.
+
 ## 2026-10-10 · Provider renewal-shaped invoice reconciliation gap
 
 Read-only Test Mode inventory found one active canonical monthly subscription

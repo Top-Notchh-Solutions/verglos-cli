@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-SUBSCRIPTION-OTP · 2026-10-10
+
+The real isolated Test Mode subscription path reaches Razorpay card
+tokenization, but authorization is waiting for an operator OTP. Provider state
+is created with zero paid cycles; the application has a pending subscription
+and one failed payment projection from the attempted card flow. Owner:
+authorized payment-test operator/provider operations. Safe next action: enter
+the received OTP in the open hosted checkout, then reconcile the signed event
+and projections. Do not guess OTPs, edit rows, or grant entitlements. Gate 4
+remains open.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-provider-subscription-authorization-otp-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-PROVIDER-RENEWAL-RECONCILIATION · 2026-10-10
 
 Test Mode reports two paid invoices for one active canonical monthly
