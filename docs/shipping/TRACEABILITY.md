@@ -805,6 +805,15 @@ executables were absent, so official-tool, trusted-publishing, and final
 release acceptance remain open. No checkbox changed. See
 `docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`.
 
+## QUAL-CLI-006 official artifact validators · 2026-10-09
+
+Release-shaped CycloneDX 1.5 and SPDX 2.3 artifacts were generated; official
+CycloneDX CLI validation passed for the 150-component SBOM, and an ephemeral
+Cosign local sign/verify passed with the transparency log disabled. Trusted
+keyless release identity, public provenance, complete format validation, and
+protected publishing remain open. See
+`docs/shipping/evidence/qual-cli-006-official-cyclonedx-cosign-2026-10-09.md`.
+
 ## PLAN-WEB-014 invoice-bound subscription and Production rollout · 2026-10-09
 
 - **Implementation:** Web `a95deef` adds paid-invoice binding for subscription

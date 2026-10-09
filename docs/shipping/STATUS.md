@@ -514,6 +514,17 @@ acceptance. No production/provider/database/deployment/npm state changed.
 Score remains **219 / 61 / 280 (78.2%)**. Evidence:
 `docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`.
 
+## 2026-10-09 · Official artifact-validator qualification
+
+The generated release-shaped CycloneDX 1.5 SBOM (150 components) passed the
+cached official CycloneDX CLI `0.33.1` validator. An ephemeral local Cosign
+`v2.4.1` sign/verify also passed with transparency-log upload and verification
+disabled. This strengthens artifact/tool qualification only; it is not a
+trusted keyless release identity or public provenance result. `QUAL-CLI-006`,
+`DIST-002`, and `DIST-003` remain open. No production/provider/database/
+deployment/npm state changed. Score remains **219 / 61 / 280 (78.2%)**.
+Evidence: `docs/shipping/evidence/qual-cli-006-official-cyclonedx-cosign-2026-10-09.md`.
+
 ## 2026-10-09 · current Production rollout — fail-closed code only
 
 The reviewed Web source `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` is now

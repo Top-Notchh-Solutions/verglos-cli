@@ -6581,3 +6581,20 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
   publication, or release state changed. Score remains **219 checked / 61
   unchecked / 280 total (78.2%)**.
 - **Evidence:** `docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`.
+
+## 2026-10-09 · QUAL-CLI-006 official artifact-validator pass
+
+- **Scope:** temporary release-shaped SBOM artifacts and an ephemeral
+  non-production signing fixture; no repository or public artifact mutation.
+- **Verification:** generated CycloneDX 1.5 with 150 components and SPDX 2.3
+  with 150 packages. Official cached CycloneDX CLI `0.33.1` returned BOM
+  validation success. Official cached Cosign `v2.4.1` completed an ephemeral
+  local sign/verify with transparency-log upload and verification disabled.
+- **Limitation:** no Fulcio/OIDC identity, Rekor entry, trusted release key,
+  protected npm publication, exact clean-consumer upgrade/rollback, or
+  independent validator for every required format was exercised.
+- **Disposition:** `QUAL-CLI-006`, `DIST-002`, and `DIST-003` remain open;
+  no Production, database, payment, provider, deployment, npm publication,
+  or release state changed. Score remains **219 checked / 61 unchecked / 280
+  total (78.2%)**.
+- **Evidence:** `docs/shipping/evidence/qual-cli-006-official-cyclonedx-cosign-2026-10-09.md`.

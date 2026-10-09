@@ -413,6 +413,17 @@ evidence is still missing. No checkbox changed and no Production/provider/
 database/payment/deployment/npm state changed. Evidence:
 `docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`.
 
+## QUAL-CLI-006 official artifact-validator pass · 2026-10-09
+
+The generated 150-component CycloneDX 1.5 SBOM passed cached official
+CycloneDX CLI `0.33.1` validation. Cached Cosign `v2.4.1` also completed an
+ephemeral local sign/verify with transparency-log upload/verification disabled.
+This does not close `QUAL-CLI-006`, `DIST-002`, or `DIST-003`: trusted
+Fulcio/OIDC identity, Rekor/public provenance, exact release-candidate
+consumer install/upgrade/rollback, complete official-format validation,
+protected publishing, and legal approval remain missing. No checkbox changed.
+Evidence: `docs/shipping/evidence/qual-cli-006-official-cyclonedx-cosign-2026-10-09.md`.
+
 ## Current Production code-rollout qualification · 2026-10-09
 
 Production deployment `dpl_HRbg2hLmHe2WTFxvupkewdw3u9hg` reached READY and is
