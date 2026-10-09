@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Preview/Test Mode partial-refund lifecycle slice
+
+A separate isolated captured subscription payment passed identity preflight.
+A partial Test Mode refund of 140,471 paise returned HTTP 200; the provider
+reported cumulative `amount_refunded=140471` while remaining `captured`; the
+fresh `refund.processed` event completed; and the application row projected to
+`partially_refunded` with the same watermark. The linked license remained
+active, with no manual database or entitlement mutation.
+
+This is real Gate 4 progress, not full acceptance. Refund replay/order,
+enabled-method coverage, renewal, failure/expiry, timeout/retry, exactly-once,
+and complete reconciliation remain open. Production was not touched. Score
+remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-partial-refund-2026-10-10.md`.
+
 ## 2026-10-10 · Preview/Test Mode full-refund lifecycle slice
 
 A read-only preflight matched an isolated captured subscription payment to

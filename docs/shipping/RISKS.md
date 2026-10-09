@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-PREVIEW-PARTIAL-REFUND · 2026-10-10 · update
+
+The isolated Test Mode partial-refund path now has provider and application
+evidence: a 140,471-paise refund returned HTTP 200, the provider reported a
+processed cumulative refund while remaining captured, the signed Preview
+event completed, and the payment ledger projected to `partially_refunded`.
+The linked license remained active under the paid-time rule.
+
+Residual risk remains for refund replay/order, all enabled methods, renewal,
+provider failure/expiry, timeout/retry, exactly-once across the full matrix,
+complete reconciliation, and Production activation. Owner: Web/provider
+operations. Gate impact: this advances Gate 4 only; it does not close Gate 4
+or any backlog checkbox.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-partial-refund-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-PREVIEW-REFUND · 2026-10-10 · update
 
 The isolated Test Mode refund path now has provider and application evidence:

@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Preview/Test Mode partial-refund reconciliation
+
+- **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`.
+- **Provider evidence:** A separate matched captured subscription payment
+  accepted a 140,471-paise partial refund with HTTP 200; provider cumulative
+  refund became 140471 while payment status remained `captured`.
+- **Application evidence:** One fresh `refund.processed` event completed in
+  isolated Preview; the payment row became `partially_refunded` with the same
+  watermark; the linked license remained active.
+- **Safety boundary:** No manual database or entitlement mutation and no
+  Production state change.
+- **Acceptance boundary:** One partial-refund slice only. Refund replay/order,
+  methods, renewal/failure/expiry, timeout/retry, exactly-once, and complete
+  reconciliation remain open. Score remains **219/61/280 (78.2%)** and no
+  checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-partial-refund-2026-10-10.md`.
+
 ## 2026-10-10 · Preview/Test Mode full-refund reconciliation
 
 - **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`.

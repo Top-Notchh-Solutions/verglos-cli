@@ -1,5 +1,20 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-10 · Partial refund qualification
+
+A second isolated captured subscription payment passed provider identity
+preflight. Its 140,471-paise Test Mode partial refund returned HTTP 200, the
+provider reported one processed cumulative refund, and the isolated Preview
+payment row reconciled to `partially_refunded` with the same watermark.
+
+The full Gate 4 matrix remains open for refund replay/order, enabled methods,
+renewal, failure/expiry, timeout/retry, exactly-once, and complete
+provider/ledger/entitlement reconciliation. No secret is recorded here and
+Production remains untouched.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-subscription-partial-refund-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · Test Mode refund qualification
 
 The previously flagged Test Mode credential boundary is no longer blocking

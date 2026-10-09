@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 partial-refund slice now evidenced
+
+A separate isolated captured subscription payment passed identity preflight.
+A 140,471-paise Test Mode partial refund returned HTTP 200; the provider
+remained `captured` with cumulative refund `140471` and one processed refund;
+the isolated Preview endpoint completed one fresh `refund.processed` event;
+and the ledger row projected to `partially_refunded` with the same watermark.
+The linked license remained active.
+
+This closes only the partial-refund/watermark projection slice. Gate 4 remains
+open for refund replay/order, the complete enabled-method matrix, renewal,
+failure/expiry, timeout/retry, exactly-once, and full
+provider/ledger/entitlement reconciliation. Production remains fail-closed
+and untouched. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-partial-refund-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 full-refund slice now evidenced
 
 A read-only identity preflight matched an isolated captured subscription
