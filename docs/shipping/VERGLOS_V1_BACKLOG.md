@@ -5,12 +5,17 @@
 Authoritative CLI API-origin hardening is complete at commit
 `1972af3abe648312a427c20dc96bbcce54db55a` with focused **24/24**, complete
 CLI process **44/44**, and workspace typecheck/build **12/12** each. This is
-backend/security progress only: `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, and
+now merged into public CLI `main` through PR #88 at
+`f5686b5c5aa11f45f392e647bd9d7e31830654ba`; all protected platform cells,
+self-scan, and in-toto release binding passed. This is backend/security
+progress only: `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, and
 the externally gated Production/release/reviewer/legal/rollback items remain
 unchecked until their own evidence exists. Production remains in scope; this
-CLI-only batch made no Web deploy, npm publish/tag, plan/provider/payment,
-database/migration, entitlement, account, or customer-data write. Score
-remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+CLI-only batch made no Web deploy and no npm publish/tag, plan/provider/payment,
+database/migration, entitlement, account, or customer-data write. The existing
+fail-closed Web Production deployment remains READY; read-only `/` and
+`/checkout` smoke returned HTTP 200. Score remains **219 checked / 61 unchecked
+/ 280 total (78.2%)**.
 
 ## Gate 4 lifecycle ordering guard and isolated reconciliation · 2026-10-09
 

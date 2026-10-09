@@ -7,16 +7,20 @@
 - **Authoritative source:** CLI commit
   `1972af3abe648312a427c20dc96bbcce54db55a`; the earlier `439b782d` was a
   stale-checkout implementation and is not treated as the release head.
+- **Release state:** PR #88 is merged into CLI `main` at
+  `f5686b5c5aa11f45f392e647bd9d7e31830654ba`; all protected platform cells,
+  self-scan, and in-toto release binding passed.
 - **Verification:** Focused **24/24**, complete CLI process suite **44/44**,
   workspace typecheck **12/12**, workspace build **12/12**, and diff check
   passed. Unsafe saved HTTP configuration produced zero fetch calls.
 - **Acceptance boundary:** This strengthens the backend but does not close
   `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, or external release, legal,
   independent-review, rollback, or final-acceptance gates.
-- **Production boundary:** No Web redeploy, npm publish/tag, Production
-  plan/provider/payment, database/migration, entitlement, account, or
-  customer-data write occurred. Score remains **219/61/280 (78.2%)**; no
-  checkbox changed.
+- **Production boundary:** The existing fail-closed Web Production deployment
+  remains READY and read-only `/` and `/checkout` smoke returned HTTP 200. No
+  Web redeploy, npm publish/tag, Production plan/provider/payment,
+  database/migration, entitlement, account, or customer-data write occurred.
+  Score remains **219/61/280 (78.2%)**; no checkbox changed.
 - **Evidence:**
   `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
 

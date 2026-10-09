@@ -10,9 +10,14 @@ workspace build **12/12** pass. This is backend qualification progress only;
 it does not close `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, legal/reviewer,
 protected release, rollback, or final acceptance.
 
-Production remains explicitly in scope. No Web redeploy or npm publish/tag was
-needed for this CLI-only change, and no Production plan/provider/payment,
-database/migration, entitlement, account, or customer-data write occurred.
+PR #88 is merged into CLI `main` at
+`f5686b5c5aa11f45f392e647bd9d7e31830654ba`; all protected platform cells,
+self-scan, and in-toto release binding passed. Production remains explicitly
+in scope. The existing fail-closed Web deployment remains READY and its
+read-only `/` and `/checkout` smoke returned HTTP 200. No Web redeploy or npm
+publish/tag was needed for this CLI-only change, and no Production
+plan/provider/payment, database/migration, entitlement, account, or
+customer-data write occurred.
 Score remains **219/61/280 (78.2%)**; no checkbox changed.
 
 Evidence: `docs/shipping/evidence/cli-api-origin-hardening-authoritative-2026-10-09.md`.
