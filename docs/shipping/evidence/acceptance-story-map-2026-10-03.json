@@ -12,7 +12,7 @@
     { "id": "modified-cli", "status": "runtime-qualification-open", "evidence": ["QUAL-WEB-001", "web-full-suite"] },
     { "id": "studio-recipient", "status": "customer-acceptance-open", "evidence": ["web-composed-acceptance-substrates"] },
     { "id": "enterprise-runner", "status": "provider-qualification-open", "evidence": ["web-composed-acceptance-substrates"] },
-    { "id": "account-deletion", "status": "implementation-open", "evidence": [] }
+    { "id": "account-deletion", "status": "qualification-open", "evidence": ["qual-web-005-privacy-deletion-2026-10-10"] }
   ],
   "boundary": "This map distinguishes repository-owned substrate evidence from hosted, provider, customer, reviewer, browser-human, and account-deletion gates. No open status is represented as passed."
 }

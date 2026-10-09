@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-stories-verification.v1",
-  "verifiedAt": "2026-10-09T21:56:05.005Z",
+  "verifiedAt": "2026-10-09T21:58:45.574Z",
   "cliRoot": "/tmp/verglos-cli-acceptance.YDopTg",
   "webRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
   "cliCommit": "f5686b5c5aa11f45f392e647bd9d7e31830654ba",
@@ -92,8 +92,10 @@
     },
     {
       "id": "account-deletion",
-      "status": "implementation-open",
-      "evidence": []
+      "status": "qualification-open",
+      "evidence": [
+        "qual-web-005-privacy-deletion-2026-10-10"
+      ]
     }
   ],
   "results": [
@@ -105,8 +107,8 @@
         "verglos",
         "test"
       ],
-      "startedAt": "2026-10-09T21:55:00.259Z",
-      "finishedAt": "2026-10-09T21:56:00.883Z",
+      "startedAt": "2026-10-09T21:57:40.567Z",
+      "finishedAt": "2026-10-09T21:58:41.623Z",
       "exitCode": 0,
       "summary": {
         "tests": 274,
@@ -115,7 +117,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "6ff4d05d75cd923f531324651847c679db0627d512ab50f99ec4057d55ce0897"
+      "outputSha256": "1f936004a0e6f2c417287fc3cba4c8b6de554513f373cf0d517c954259eb6321"
     },
     {
       "label": "web-full-suite",
@@ -123,8 +125,8 @@
       "args": [
         "test"
       ],
-      "startedAt": "2026-10-09T21:56:00.883Z",
-      "finishedAt": "2026-10-09T21:56:04.415Z",
+      "startedAt": "2026-10-09T21:58:41.623Z",
+      "finishedAt": "2026-10-09T21:58:45.045Z",
       "exitCode": 0,
       "summary": {
         "tests": 948,
@@ -133,7 +135,7 @@
         "cancelled": 0,
         "skipped": 30
       },
-      "outputSha256": "1f466c904955a45704b0e00329c5016be24ea03d90f52f36e3156deeb3f09b76"
+      "outputSha256": "8d08c9214be2fa25246f52aeb1f39962fe9c3fb5c8b5deff489694cbd362a68e"
     },
     {
       "label": "web-composed-acceptance-substrates",
@@ -150,8 +152,8 @@
         "src/lib/organizations/team-e2e.test.ts",
         "src/lib/qual/qual-web-suites.test.ts"
       ],
-      "startedAt": "2026-10-09T21:56:04.415Z",
-      "finishedAt": "2026-10-09T21:56:05.005Z",
+      "startedAt": "2026-10-09T21:58:45.045Z",
+      "finishedAt": "2026-10-09T21:58:45.574Z",
       "exitCode": 0,
       "summary": {
         "tests": 74,
@@ -160,7 +162,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "82ef138cc9fcca5e8280195dacd810ff229d583319b6890d5c683c4fd4ac993f"
+      "outputSha256": "72b0e27af5acca74ef8844a8befe4bb2f8e90c0562cb13c737afe4d7c383a6c0"
     }
   ],
   "allCommandsPassed": true,
