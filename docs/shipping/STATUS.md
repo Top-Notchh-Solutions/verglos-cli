@@ -490,6 +490,18 @@ account changes, or customer-data mutations occurred. Score remains **219 / 61
 / 280 (78.2%)**. Evidence:
 `docs/shipping/evidence/plan-web-014-preview-subscription-otp-limitation-2026-10-09.md`.
 
+## 2026-10-09 · Production read-only smoke
+
+The current Vercel Production deployment `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`
+was READY. Read-only requests to `/`, `/checkout`, and `/docs` returned 200;
+the checkout retained private no-store caching; and unauthenticated GET of the
+subscription-creation route returned 405. No public HTML marker exposed a
+provider key, Test Mode, session token, or database URL. No Production plan,
+payment/provider, database/migration, entitlement, account, or customer-data
+write occurred. Production billing activation and full reconciliation remain
+fail-closed. Score remains **219 / 61 / 280 (78.2%)**. Evidence:
+`docs/shipping/evidence/production-readonly-smoke-2026-10-09.md`.
+
 ## 2026-10-09 · current Production rollout — fail-closed code only
 
 The reviewed Web source `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` is now

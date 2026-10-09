@@ -6546,3 +6546,20 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
   lifecycle evidence are missing. No checkbox changed; backlog remains
   **219 checked / 61 unchecked / 280 total (78.2%)**.
 - **Evidence:** `docs/shipping/evidence/plan-web-014-preview-subscription-otp-limitation-2026-10-09.md`.
+
+## 2026-10-09 · Production read-only smoke after Preview qualification
+
+- **Deployment:** Vercel deployment `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` was
+  inspected as READY with Production target and alias `https://verglos.com`.
+- **Smoke:** `/`, `/checkout`, and `/docs` returned 200; checkout retained a
+  private no-store policy; unauthenticated `GET /api/razorpay/create-subscription`
+  returned the expected 405 method boundary. Public HTML contained no provider
+  key, Test Mode, session-token, or database-URL marker.
+- **Boundary:** read-only requests only. No Production plan IDs,
+  payment/provider calls, database or migration writes, entitlement changes,
+  account changes, or customer-data mutations occurred.
+- **Disposition:** Production code health and fail-closed boundaries remain
+  qualified; Production billing/database activation, reconciliation,
+  monitoring, and rollback/restore remain open. No checkbox changed; score
+  remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:** `docs/shipping/evidence/production-readonly-smoke-2026-10-09.md`.

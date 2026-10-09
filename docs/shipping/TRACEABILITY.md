@@ -787,6 +787,16 @@ renewal/failure/expiry/refund/replay/out-of-order lifecycle evidence and full
 provider/ledger/entitlement reconciliation. No checkbox changed. See
 `docs/shipping/evidence/plan-web-014-preview-subscription-otp-limitation-2026-10-09.md`.
 
+## Production read-only smoke · 2026-10-09
+
+Production deployment `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` was READY. Public
+route 200s, checkout no-store behavior, the subscription route’s unauthenticated
+405 boundary, and absence of provider/Test Mode/session/database markers were
+verified without a write. This strengthens the Production code-rollout
+boundary only; provider activation, database release, payment lifecycle,
+entitlement reconciliation, monitoring, and rollback remain open. See
+`docs/shipping/evidence/production-readonly-smoke-2026-10-09.md`.
+
 ## PLAN-WEB-014 invoice-bound subscription and Production rollout · 2026-10-09
 
 - **Implementation:** Web `a95deef` adds paid-invoice binding for subscription
