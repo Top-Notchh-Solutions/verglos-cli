@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Gate 4 — failed subscription invoice binding
+
+- **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`.
+- **Implementation:** Web `da45a97` resolves invoice-only failed payments to
+  their subscription, checks signed commercial binding and amount/currency,
+  records pending/failed state, and does not grant access.
+- **Evidence:** Focused webhook **14/14**, isolated PostgreSQL handler
+  integration **4/4**, full Web serial **892/869/23/0**, typecheck, 45-page
+  build, migration checks, and READY Preview deployment
+  `dpl_HbYCQG4hnDH6Jew48YcNUuRkVVaA`.
+- **Provider boundary:** Test Mode plan and subscription inventory returned
+  HTTP 401 using `.env.gates.testing`; no provider write was attempted. Real
+  provider lifecycle and reconciliation remain open.
+- **Production boundary:** The current fail-closed Production rollout
+  `a95deef` / `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN` was not changed; no
+  Production plan, payment/provider, database/migration, entitlement,
+  account, or customer-data write occurred.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 — expiry code-side qualification
 
 - **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

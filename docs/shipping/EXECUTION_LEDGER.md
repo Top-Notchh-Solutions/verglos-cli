@@ -1,5 +1,36 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Failed subscription invoice binding and current provider blocker
+
+- **Backlog/gate:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
+  `PLAN-WEB-015`; Gate 4 failure-path qualification.
+- **Implementation:** Web `da45a97` binds invoice-only `payment.failed`
+  events to the provider subscription, validates the signed commercial
+  snapshot and amount/currency, records a pending lifecycle plus failed
+  payment, and never grants entitlement. Direct subscription and hosted-order
+  failure paths remain covered.
+- **Verification:** Focused webhook tests **14/14**, fresh isolated database
+  integration **4/4**, full Web serial **892 total / 869 pass / 23 explicit
+  skips / 0 fail**, typecheck, 45-page build, schema/migration checks, and
+  diff check passed. Preview deployment
+  `dpl_HbYCQG4hnDH6Jew48YcNUuRkVVaA` reached READY; protected read-only smoke
+  passed for `/`, `/checkout`, and `/docs`, with subscription-creation GET
+  returning 405.
+- **Provider blocker:** Read-only Test Mode plan and subscription inventory
+  requests using `.env.gates.testing` returned HTTP 401. No provider write was
+  attempted after the failure. The authorized operator must correct the
+  isolated Test Mode credential configuration before real renewal/failure/
+  expiry/refund/replay/reconciliation evidence can continue.
+- **Production boundary:** Current Production remains the fail-closed code
+  rollout `a95deef` / `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`; this commit was not
+  promoted. No Production plan IDs, payment/provider writes, database or
+  migration writes, entitlement changes, account changes, or customer-data
+  mutations occurred.
+- **Disposition:** Code-side progress only; no checkbox changed. Score remains
+  **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`.
+
 ## 2026-10-09 · Expired subscription lifecycle implementation and Preview qualification
 
 - **Backlog/gate:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and

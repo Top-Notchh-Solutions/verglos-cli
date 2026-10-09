@@ -1,5 +1,24 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Gate 4 progress — failed invoice-only subscription path
+
+Web `da45a97` qualifies the invoice-only failed subscription path in
+isolated Preview: a failed payment without `subscription_id` is bound through
+its invoice, recorded as failed with a pending subscription lifecycle, and
+does not grant entitlement. Focused tests **14/14**, isolated integration
+**4/4**, full Web suite **892 total / 869 pass / 23 explicit skips / 0 fail**,
+typecheck/build/schema checks, and Preview deployment
+`dpl_HbYCQG4hnDH6Jew48YcNUuRkVVaA` passed.
+
+The current gate-testing plan/subscription inventory returned HTTP 401, so
+real provider lifecycle execution is paused pending corrected isolated
+credentials. Gate 4 is not closed. Production remains included through the
+existing fail-closed code rollout; this batch made no Production plan,
+payment/provider, database/migration, entitlement, account, or customer-data
+write. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 progress — expiry code qualified, provider expiry open
 
 The Web expiry path is implemented and qualified in isolated Preview/Test

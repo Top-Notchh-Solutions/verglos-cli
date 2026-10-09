@@ -152,19 +152,22 @@ Current source checkpoints:
 - Web PR #169 was a duplicate of already merged Preview-auth work (its patch
   was identical to PR #157 and its base was stale) and is now closed. It was
   not merged or counted as new shipping progress.
-- Current Web qualification branch: `4ba15ad` on `feat/preview-test-auth`.
-  It includes the invoice-backed subscription-capture reconciliation and the
-  code-side `subscription.expired` lifecycle path, qualified against a fresh
+- Current Web qualification branch: `da45a97` on `feat/preview-test-auth`.
+  It includes invoice-backed subscription-capture reconciliation, the
+  code-side `subscription.expired` lifecycle path, and the invoice-only
+  `payment.failed` subscription binding path. It is qualified against a fresh
   isolated database and protected Preview deployment. This migration-bearing
   change is not yet a Production promotion candidate until its migration
   preflight, recovery, reconciliation, and rollback evidence is recorded. It
   also includes the provider-subscription creation/status path, Preview-only
-  redacted diagnostics, and invoice-backed subscription-capture reconciliation.
+  redacted diagnostics, and no-entitlement-grant failure handling.
 - The latest isolated Preview deployment for the current qualification branch
-  is `dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u`, READY, with the isolated Preview
-  configuration and the expiry code path. Protected read-only smoke passed.
-  The earlier `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB` record remains evidence for
-  the invoice-backed first-charge reconciliation.
+  is `dpl_HbYCQG4hnDH6Jew48YcNUuRkVVaA`, READY, with the isolated Preview
+  configuration and the invoice-only subscription-failure path. Protected
+  read-only smoke passed. The earlier `dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u`
+  record remains evidence for the expiry code path, and
+  `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB` remains evidence for invoice-backed
+  first-charge reconciliation.
 - The latest Production deployment is
   `dpl_72ptf8YQyLxxXvJHVQDg2vUfh3CN`, READY at
   `https://verglos-cghkmkzzg-anuragyadav20062002s-projects.vercel.app` and
@@ -175,12 +178,14 @@ Current source checkpoints:
   provider, database, migration, entitlement, account, and customer-data
   activation remain explicitly included deferred stages with their own
   preflights.
-- Razorpay Test Mode accepted the credentials in
-  `verglos-web/.env.gates.testing`; no rotation was required. The account had
-  no plans, so the canonical Pro plans were created in Test Mode only:
-  monthly ₹2,809.43 (`plan_TlaD3tfF8tStbw`) and yearly ₹28,094.30
-  (`plan_TlaD4ASatpFUrM`). Preview now has those non-secret plan IDs and a
-  12-cycle test subscription count. No Production provider state changed.
+- Earlier isolated Test Mode work recorded canonical Pro plans and first-charge
+  evidence, but the latest read-only recheck of Test Mode plan and subscription
+  inventory using `verglos-web/.env.gates.testing` returned HTTP 401. No
+  provider write was attempted after that response. The authorized operator
+  must correct or rotate the isolated Test Mode credential in the provider
+  dashboard before renewal, failure, expiry, refund, replay, and complete
+  provider/ledger/entitlement reconciliation can continue. No Production
+  provider state changed.
 
 The private tracker is authoritative for acceptance. The public repositories
 must never receive private tracker documents, customer data, credentials,
@@ -400,17 +405,16 @@ a changed input or a clear acceptance need:
   failures for card/netbanking/wallet, and two processed full refunds. The
   isolated database suite passed hosted-order, renewal-ordering,
   cancellation-ordering, replay, out-of-order, tenant-binding, and partial/full
-  refund checks. Razorpay reported zero Test Mode subscriptions. The Web
-  subscription-creation route is now implemented and isolated route
-  qualification passed **2/2**, but provider subscription
-  authorization/renewal/cancellation/expiry is not claimed. The valid Test
-  Mode credential and canonical Test Mode plan setup are now available, and a
-  fresh first-charge subscription lifecycle has been run and reconciled through
-  the provider invoice on isolated Preview. The remaining Gate 4 matrix still
-  requires renewal, failure, cancellation/expiry, refunds, replay/out-of-order
-  delivery, and complete provider/ledger/entitlement reconciliation. Private
-  evidence is
-  `docs/shipping/evidence/plan-web-014-subscription-invoice-reconciliation-and-production-rollout-2026-10-09.md`.
+  refund checks. The Web subscription-creation route is implemented and
+  isolated route qualification passed **2/2**. A fresh first-charge
+  subscription lifecycle was reconciled through the provider invoice on
+  isolated Preview, and `da45a97` additionally qualifies an invoice-only
+  failed subscription payment with no entitlement grant. Provider-generated
+  renewal, failure, cancellation/expiry, refunds, replay/out-of-order
+  delivery, and complete provider/ledger/entitlement reconciliation remain
+  unclaimed because the latest read-only Test Mode recheck returned HTTP 401;
+  no write was attempted after it. Private evidence is
+  `docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`.
 - The code-side `subscription.expired` lifecycle is now additionally qualified
   from Web `4ba15ad` against a fresh database with all 38 migrations and
   focused webhook/ledger integrations passing. This strengthens Gate 4 but
@@ -1084,6 +1088,11 @@ The latest subscription invoice-binding and Production rollout evidence is:
 The latest expiry-lifecycle and current Preview qualification evidence is:
 
 `docs/shipping/evidence/plan-web-014-expired-lifecycle-preview-2026-10-09.md`
+
+The latest invoice-only subscription-failure qualification and current
+Test Mode credential blocker evidence is:
+
+`docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`
 
 The latest payment decision and backlog acceptance are recorded in
 private commit `5a99b0d`; the preceding payment qualification evidence commit

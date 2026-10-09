@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-current-test-provider-401 · 2026-10-09
+
+The current read-only Razorpay Test Mode plan and subscription inventory calls
+using `.env.gates.testing` both return HTTP 401. No provider write was
+attempted after the failure. This blocks real isolated subscription
+authorization, renewal/charge, failure, expiry, refund, replay, and
+provider/ledger/entitlement reconciliation evidence. Owner: authorized
+Web/release operator. Remediation: correct or rotate the isolated Test Mode
+credential in the provider dashboard, update only isolated Preview/Test
+configuration, then rerun bounded read-only inventory. Never paste the
+credential into chat. Production remains fail-closed with no state write.
+Evidence:
+`docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`.
+
 ## R-PLAN-WEB-014-expiry-provider-and-production-migration · 2026-10-09
 
 The Web `subscription.expired` path is implemented and qualified in isolated

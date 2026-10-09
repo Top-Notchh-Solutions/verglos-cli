@@ -1,5 +1,23 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-09 · Test Mode credential recheck
+
+The current read-only Razorpay Test Mode plan and subscription inventory calls
+using `.env.gates.testing` returned HTTP 401. No provider write was attempted.
+The authorized Web/release operator must correct or rotate the isolated Test
+Mode credential in the Razorpay dashboard, update only Preview/Test
+configuration, and rerun bounded read-only inventory. Do not send the secret
+in chat. Until that succeeds, real provider subscription authorization,
+renewal, failure, expiry, refund, replay, and reconciliation evidence remains
+open.
+
+The invoice-only failed subscription path is now code-qualified in Preview by
+Web `da45a97`, so no code action is waiting on the credential. Production
+remains the existing fail-closed code-only rollout; no Production plan,
+payment/provider, database/migration, entitlement, account, or customer-data
+write occurred in this recheck. Score remains **219/61/280 (78.2%)**.
+Evidence: `docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`.
+
 ## Current superseding reconciliation · 2026-10-09 · Test Mode and Production
 
 The earlier note that the local Test Mode credential required rotation is

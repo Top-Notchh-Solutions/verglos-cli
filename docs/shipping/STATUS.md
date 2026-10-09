@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Gate 4 update — failed subscription invoice binding
+
+Web `da45a97` now handles a failed subscription payment whose provider event
+contains an invoice but no `subscription_id`: it resolves and validates the
+invoice-to-subscription binding, records a pending lifecycle and failed
+payment, and grants no entitlement. Focused webhook tests passed **14/14**;
+fresh isolated database integration passed **4/4**; the full Web suite passed
+**892 total / 869 pass / 23 explicit skips / 0 fail**; typecheck, build,
+schema/migration checks, and Preview deployment
+`dpl_HbYCQG4hnDH6Jew48YcNUuRkVVaA` passed.
+
+Current Test Mode plan and subscription inventory calls returned HTTP 401 from
+the gate-testing credential file. This is recorded as the current provider
+blocker; no provider write was attempted. Gate 4 remains open for real
+provider lifecycle and reconciliation evidence. Production remains active as
+the fail-closed code-only rollout, with no Production plan, payment,
+database/migration, entitlement, account, or customer-data write. Score
+remains **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 update — expiry code qualified in isolated Preview
 
 Web `4ba15ad` now records Razorpay `subscription.expired` as a first-class

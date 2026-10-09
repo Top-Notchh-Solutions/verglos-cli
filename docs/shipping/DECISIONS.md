@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Keep provider lifecycle gate open after invoice-failure qualification
+
+- **Decision:** Accept the invoice-only failed subscription path as isolated
+  code/database qualification, but do not close Gate 4 or payment backlog
+  checkboxes.
+- **Reason:** The handler and reconciliation path now pass, but the current
+  gate-testing plan and subscription inventory calls return HTTP 401. Real
+  provider-generated lifecycle evidence cannot be inferred from local tests or
+  Preview code.
+- **Boundary:** No provider write was attempted after the 401. Production
+  remains a fail-closed code-only rollout; no Production plan, payment,
+  database/migration, entitlement, account, or customer-data write occurred.
+- **Next owner/action:** Authorized Web/release operator corrects the isolated
+  Razorpay Test Mode credential configuration without sending secrets in chat;
+  then rerun read-only inventory before any Test Mode lifecycle write.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-failed-subscription-invoice-binding-2026-10-09.md`.
+
 ## 2026-10-09 · Qualify expiry in Preview before Production migration preflight
 
 - **Decision:** Accept the Web code-side `expired` lifecycle qualification in
