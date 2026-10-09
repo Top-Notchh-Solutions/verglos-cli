@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Provider Cardless EMI order-binding repair
+
+The live Test Mode inventory exposed one captured hosted payment reported as
+`cardless_emi` for a signed order snapshot containing canonical `emi`. Web
+`210d880` now accepts that provider representation only when `emi` is bound;
+unbound methods remain fail-closed. Focused tests passed **25/25**; the full
+Web serial suite passed **900 total / 876 pass / 24 explicit skips / 0 fail**;
+typecheck, production build, local Drizzle schema check, and the 39-migration
+ordering check passed. Vercel Preview and GitGuardian passed. The hosted
+schema job failed before test execution twice because its runner hit Docker
+Hub's unauthenticated Postgres pull-rate limit.
+
+This is a concrete Gate 4 code repair, not full payment acceptance. PR #172
+remains unmerged pending clean hosted verification. No database, payment,
+entitlement, account, customer, provider, or Production state write occurred.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-cardless-emi-binding-2026-10-10.md`.
+
 ## 2026-10-10 · Preview/Test Mode partial-refund lifecycle slice
 
 A separate isolated captured subscription payment passed identity preflight.

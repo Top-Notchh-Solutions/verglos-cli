@@ -32,6 +32,8 @@ canonicalized during signed order-payment binding.
   failures**.
 - Typecheck: passed.
 - Production build: passed; 47 routes generated.
+- Local Drizzle schema check: passed.
+- Local migration-order check: passed; 39 ordered PostgreSQL migrations.
 - Hosted Vercel preview check: passed.
 - GitGuardian: passed.
 - Hosted `typecheck-and-schema` could not start because the GitHub runner hit
@@ -45,4 +47,3 @@ No database, payment, entitlement, account, customer, provider, or Production
 state write occurred. This repair is not a complete Gate 4 pass and does not
 close `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, or `PLAN-WEB-015`.
 The backlog remains **219 checked / 61 unchecked / 280 total (78.2%)**.
-
