@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Gate 4 lifecycle ordering guard and isolated reconciliation
+
+Web `6f932d4` blocks the observed advanced-subscription → `authenticated`
+regression while preserving valid lifecycle transitions. Focused tests passed
+**38/38**, typecheck and the 47-page build passed. A fresh canonical Test Mode
+hosted subscription reached provider `active` and isolated ledger `active`
+with a captured payment and active Pro license; Test Mode cancellation then
+reconciled to `cancelled` while paid time remained.
+
+The signed isolated webhook reconciliation path repaired the older stale rows.
+The current redacted binding is **5 active→active, 7 cancelled→cancelled,
+9 created→pending**. This is application-path reconciliation, not a claim of
+provider-generated renewal/expiry or external delivery evidence. Production
+is included at READY deployment `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`, aliased to
+`https://verglos.com`, with no Test Mode marker and no Production plan,
+provider/payment, database, migration, entitlement, account, or customer-data
+write.
+
+Renewal/charge, expiry, subscription failure/refund, replay/out-of-order,
+timeout/retry, exactly-once, and complete enabled-method evidence remain open.
+Score remains **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`.
+
 ## 2026-10-09 · Hosted retry repair and Production fail-closed rollout
 
 Web `0bafe73` keeps the Verglos checkout session alive when Razorpay emits a

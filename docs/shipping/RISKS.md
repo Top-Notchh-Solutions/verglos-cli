@@ -1,5 +1,22 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-active-authenticated-projection-mitigated · 2026-10-09
+
+The isolated provider-to-ledger mismatch is mitigated in code and reconciled
+through the signed application path. Web `6f932d4` blocks an advanced
+subscription from regressing to `authenticated`; current redacted provider
+binding is **5 active→active, 7 cancelled→cancelled, 9 created→pending**.
+The fresh hosted Test Mode success and cancellation also matched provider and
+isolated state while preserving captured payment and paid time.
+
+Residual risk remains for provider-generated renewal/expiry/failure/refund,
+external webhook delivery order, timeout/retry and exactly-once behavior across
+the full enabled-method matrix. The signed reconciliation replay proves the
+application path but does not replace those provider operations. Gate 4 and
+`PLAN-WEB-011/012/014/015` remain open.
+
+Evidence: `docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`.
+
 ## R-PLAN-WEB-014-active-authenticated-projection · 2026-10-09
 
 The isolated Razorpay Test Mode inventory is provider-bound, but five provider

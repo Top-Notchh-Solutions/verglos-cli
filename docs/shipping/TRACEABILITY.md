@@ -1,5 +1,29 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Lifecycle ordering guard and isolated reconciliation
+
+- **Mapped IDs:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
+  `PLAN-WEB-015`.
+- **Source/deployment:** Web `6f932d4` → Vercel
+  `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG`, READY and aliased to
+  `https://verglos.com`.
+- **Code evidence:** Advanced lifecycle projections cannot be regressed by a
+  later authenticated event; focused tests **38/38**, typecheck, and the
+  47-page build passed.
+- **Hosted evidence:** A fresh canonical isolated Test Mode subscription
+  reconciled active provider state to active ledger state with captured
+  payment and active license; Test Mode cancellation reconciled to cancelled
+  and preserved paid time.
+- **Reconciliation evidence:** Signed application-path replay now yields **5
+  active→active, 7 cancelled→cancelled, 9 created→pending**. It is not a
+  claim of provider-generated renewal, expiry, or external delivery.
+- **Production boundary:** No Production plan/provider/payment,
+  database/migration, entitlement, account, or customer-data write occurred.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`.
+
 ## 2026-10-09 · Hosted retry repair and Production rollout
 
 - **Mapped IDs:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and

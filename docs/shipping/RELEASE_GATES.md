@@ -1,5 +1,24 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Gate 4 lifecycle ordering and reconciliation qualification
+
+Web `6f932d4` prevents a later authenticated lifecycle event from regressing
+an advanced subscription. Focused tests **38/38**, typecheck, the 47-page
+build, remote Production validation, and read-only smoke passed. A fresh
+isolated Test Mode hosted subscription reconciled active provider state to an
+active ledger row with captured payment and active license; cancellation also
+reconciled and preserved paid time.
+
+The signed isolated reconciliation replay now reports **5 active→active, 7
+cancelled→cancelled, 9 created→pending** across the provider inventory. This
+qualifies the application ordering/reconciliation path, not provider renewal,
+expiry, failure, refund, external delivery, or complete exactly-once matrix
+acceptance. Production deployment `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` remains
+fail-closed; no Production write occurred. Gate 4 remains open, as do Gates
+6–9. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`.
+
 ## 2026-10-09 · Hosted retry repair and Production code rollout
 
 Web `0bafe73` repairs the hosted retry state after a provider `payment.failed`

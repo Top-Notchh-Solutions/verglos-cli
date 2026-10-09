@@ -1,5 +1,33 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Lifecycle ordering guard and isolated provider reconciliation
+
+- **Mapped work:** Gate 4 and `PLAN-WEB-011`, `PLAN-WEB-012`,
+  `PLAN-WEB-014`, and `PLAN-WEB-015`.
+- **Implementation:** Web `6f932d4` rejects advanced-state → authenticated
+  lifecycle regression while preserving valid authorization, pending, and
+  out-of-order handling.
+- **Verification:** Web focused checkout/origin/route/webhook/lifecycle tests
+  **38/38**, typecheck, 47-page build, remote Production config/build, and
+  read-only smoke passed. Production deployment
+  `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` is READY and aliased to
+  `https://verglos.com`.
+- **Isolated provider result:** Fresh hosted Test Mode authorization matched
+  provider active, isolated active, canonical catalog, captured payment, and
+  active license. Test Mode cancellation returned HTTP 200 and reconciled to
+  cancelled without removing paid time.
+- **Reconciliation result:** Signed application-path replay repaired stale
+  projections; redacted aggregate binding is **5 active→active, 7
+  cancelled→cancelled, 9 created→pending**. This is not provider-generated
+  renewal/expiry evidence.
+- **Boundary:** No Production provider/payment, plan, database/migration,
+  entitlement, account, or customer-data write occurred.
+- **Disposition:** Gate 4 remains open for renewal, expiry, failure, refund,
+  replay/out-of-order, timeout/retry, exactly-once, and complete method
+  evidence. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`.
+
 ## 2026-10-09 · Hosted retry repair and Production fail-closed deployment
 
 - **Mapped work:** Web hosted checkout retry behavior, Gate 4, and the

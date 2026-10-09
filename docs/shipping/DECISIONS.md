@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Keep Gate 4 open after lifecycle ordering repair
+
+- **Decision:** Ship Web `6f932d4` to Production as a fail-closed code-only
+  correction because the observed provider lifecycle regression could stale
+  billing projections without requiring Production activation.
+- **Evidence:** Focused tests **38/38**, typecheck, 47-page build, remote
+  runtime-config/build, and read-only smoke passed. Production deployment
+  `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` is READY.
+- **Isolated qualification:** Fresh Test Mode hosted active and cancellation
+  reconciled to isolated active/cancelled rows; captured payment and paid time
+  were preserved. Signed application-path replay repaired the prior stale
+  rows, with aggregate binding **5 active→active, 7 cancelled→cancelled, 9
+  created→pending**.
+- **Gate decision:** This is not a complete Gate 4 pass. Provider-generated
+  renewal, expiry, failure/refund, external delivery ordering, timeout/retry,
+  exactly-once, and complete enabled-method evidence remain open.
+- **Boundary:** No Production plan, provider/payment, database/migration,
+  entitlement, account, or customer-data write occurred.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`.
+
 ## 2026-10-09 · Deploy hosted retry repair to Production without activation
 
 - **Decision:** Deploy Web `0bafe73` to Production because the hosted
