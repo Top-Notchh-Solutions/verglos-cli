@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-preview-protection-hosted-lifecycle · 2026-10-09
+
+The isolated Razorpay Test Mode credential now passes read-only inventory and
+the local `TEST_DATABASE_URL` route has real provider creation/cancellation,
+signed cancellation, replay, and out-of-order evidence. The deployed Preview
+still returns HTTP 401 from Vercel Authentication before the application route,
+so hosted subscription authorization and provider-to-hosted webhook delivery
+remain unverified. Owner: authorized Web/release operator. Safe next action:
+authenticate the existing debug browser to the Vercel project or deliberately
+configure a time-bounded approved Preview access path, then rerun the hosted
+flow. Do not bypass protection or copy Test Mode values into Production.
+Evidence:
+`docs/shipping/evidence/plan-web-014-local-testmode-subscription-cancellation-2026-10-09.md`.
+
 ## R-PROD-migration-bearing-candidate-and-stale-rpo · 2026-10-09
 
 The current Web candidate `315a432` is migration-bearing. Its disposable

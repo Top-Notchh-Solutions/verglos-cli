@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Gate 4 real Test Mode subscription cancellation slice
+
+- **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`, and Gate 4.
+- **Provider:** Read-only Test Mode inventory returned HTTP 200 for both plans
+  and subscriptions. A server-catalog-bound isolated subscription was created
+  and cancelled through Razorpay Test Mode.
+- **Web/DB:** The isolated local Web route persisted pending lifecycle state in
+  `TEST_DATABASE_URL`; the signed cancellation webhook reconciled to
+  `cancelled`; duplicate replay was detected; and an older lifecycle event did
+  not resurrect the cancelled projection.
+- **Limit:** Vercel Authentication blocked the deployed Preview before the
+  route with HTTP 401. Local signed delivery is not hosted provider delivery;
+  hosted authorization/capture, renewal/failure/expiry/refund, and complete
+  provider/ledger/entitlement reconciliation remain open.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-local-testmode-subscription-cancellation-2026-10-09.md`.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-09 · Preview auth repair and full Production trace
 
 - **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

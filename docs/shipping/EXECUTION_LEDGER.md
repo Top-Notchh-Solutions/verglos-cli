@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Gate 4 isolated Test Mode subscription cancellation slice
+
+- **Mapped work:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`, and Gate 4 subscription lifecycle qualification.
+- **Preflight:** Redacted Razorpay Test Mode plan/subscription inventory
+  returned HTTP **200** with **2** and **9** items. The local process used
+  `TEST_DATABASE_URL`; no Production database or credentials were used.
+- **Execution:** Server-catalog-bound subscription creation returned 200 and
+  `testMode=true`; a real Test Mode subscription was cancelled through the
+  provider with HTTP 200 and state `cancelled`. The signed local webhook
+  reconciled cancellation, detected duplicate replay, and preserved the
+  cancelled state against a delayed older lifecycle event.
+- **Hosted boundary:** The protected deployed Preview returned HTTP 401 from
+  Vercel Authentication before the application route; no bypass was attempted.
+  Local signed delivery is not claimed as provider-to-hosted webhook delivery.
+- **Disposition:** Authorization/capture, renewal, provider-generated failure/
+  expiry, refund, hosted delivery, and complete reconciliation remain open.
+  No Production/provider state outside Test Mode, database outside the isolated
+  test target, entitlement, account, or customer-data write occurred. Score
+  remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-local-testmode-subscription-cancellation-2026-10-09.md`.
+
 ## 2026-10-09 · Preview auth repair and Production completeness boundary
 
 - **Mapped work:** Preview fixture authentication, Web PR #171, Gate 4

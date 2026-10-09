@@ -229,6 +229,15 @@ Current source checkpoints:
   dashboard before renewal, failure, expiry, refund, replay, and complete
   provider/ledger/entitlement reconciliation can continue. No Production
   provider state changed.
+- A later redacted Test Mode recheck returned HTTP 200 for both plan and
+  subscription inventory, and a local isolated Web qualification created real
+  Test Mode subscriptions from the server catalog, cancelled them through the
+  provider, reconciled signed cancellation webhooks, detected replay, and
+  preserved cancellation against an older out-of-order lifecycle event. This
+  supersedes the earlier credential observation for the current isolated
+  configuration, but it does not prove hosted Preview delivery or the full
+  renewal/failure/expiry/refund/entitlement matrix. Evidence:
+  `docs/shipping/evidence/plan-web-014-local-testmode-subscription-cancellation-2026-10-09.md`.
 
 The private tracker is authoritative for acceptance. The public repositories
 must never receive private tracker documents, customer data, credentials,

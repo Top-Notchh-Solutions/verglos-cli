@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Gate 4 isolated Test Mode subscription cancellation slice
+
+The redacted Razorpay Test Mode recheck now returns HTTP 200 for plan and
+subscription inventory (**2** and **9** items); the earlier HTTP 401 blocker is
+superseded for the current isolated credentials. A local Web process used only
+`TEST_DATABASE_URL`, Preview fixture auth, the isolated marker, and the four
+qualified methods. The server-catalog-bound subscription route returned 200
+with `testMode=true`; owner-bound status returned 202 pending; a real Test Mode
+subscription cancellation returned provider HTTP 200 and `cancelled`.
+
+The signed cancellation webhook reconciled through the isolated database,
+replay was detected, and a later-delivered older lifecycle event did not
+resurrect the cancelled subscription. The deployed Preview route remains
+blocked before application execution by Vercel Authentication (HTTP 401), so
+this is not hosted Preview delivery evidence. Provider authorization/capture,
+renewal, provider-generated failure/expiry, refund, hosted delivery, and full
+provider/ledger/entitlement reconciliation remain open. Production was not
+touched. Score remains **219 checked / 61 unchecked / 280 total (78.2%)**; no
+checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-local-testmode-subscription-cancellation-2026-10-09.md`.
+
 ## 2026-10-09 · Preview auth repair and complete Production boundary
 
 Web commit `315a432` repairs the isolated Preview fixture seam without

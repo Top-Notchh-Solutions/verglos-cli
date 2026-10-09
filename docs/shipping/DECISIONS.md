@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Accept the isolated Test Mode cancellation slice, keep Gate 4 open
+
+- **Decision:** Accept the real Test Mode subscription creation/cancellation,
+  signed local webhook, replay, and out-of-order result as partial Gate 4
+  evidence only.
+- **Reason:** The provider credential now returns HTTP 200 inventory and the
+  local isolated route reconciles cancellation correctly, but Vercel
+  Authentication blocks the deployed Preview before application execution.
+  Hosted authorization/capture, provider delivery, renewal/failure/expiry,
+  refund, and full entitlement reconciliation are not proven.
+- **Boundary:** Test Mode and `TEST_DATABASE_URL` only. No Production plan,
+  payment/provider, database/migration, entitlement, account, or customer-data
+  state changed.
+- **Disposition:** Keep `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,
+  `PLAN-WEB-015`, and Gate 4 open. The next external action is authenticated
+  access to the protected Preview (or an approved bounded protection setting)
+  followed by hosted subscription authorization and webhook delivery; no
+  protection bypass is permitted. Score remains **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-local-testmode-subscription-cancellation-2026-10-09.md`.
+
 ## 2026-10-09 · Keep Production complete but staged
 
 - **Decision:** Treat Production as a full staged workstream. The current

@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Gate 4 progress — real Test Mode subscription cancellation
+
+The isolated Test Mode credential now passes read-only inventory (plans HTTP
+200, subscriptions HTTP 200). The local server created a subscription from the
+canonical catalog using `TEST_DATABASE_URL`; Razorpay cancelled it with HTTP
+200; the signed cancellation event reconciled; replay was idempotent; and an
+older out-of-order lifecycle event did not restore the cancelled state.
+
+This is a real provider creation/cancellation slice, not a Gate 4 close. The
+protected deployed Preview returned HTTP 401 before the application route, so
+provider-to-hosted webhook delivery and browser subscription authorization are
+still unproven. Renewal/charge, capture, provider-generated failure/expiry,
+refund, complete entitlement reconciliation, and hosted delivery remain open.
+Production remains fail-closed and unchanged. Score remains
+**219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-local-testmode-subscription-cancellation-2026-10-09.md`.
+
 ## 2026-10-09 · Production is a complete staged workstream, not a code-only stop
 
 The current Production boundary is explicitly accepted only for the
