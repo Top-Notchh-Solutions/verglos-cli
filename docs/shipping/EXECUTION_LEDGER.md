@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Docker payment integration revalidation
+
+- **Result:** After the target-isolation guards rejected an unsafe Neon target
+  and then an identical runtime/payment target, the exact loopback PostgreSQL
+  container was restarted with a separate runtime database target. Migrations
+  applied successfully and the five payment integration files passed **10/10**
+  with zero failures and zero skips.
+- **Boundary:** The container was stopped after testing. Only disposable local
+  PostgreSQL state changed; no Neon, Production, provider, payment,
+  entitlement, account, customer, or manual-row state changed.
+- **Disposition:** This revalidates the database integration harness but does
+  not close Gate 4 or the provider/reconciliation gates. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-docker-payment-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · Isolated Test Mode provider/application reconciliation
 
 - **Scope:** Read-only Razorpay Test Mode inventory compared with the isolated

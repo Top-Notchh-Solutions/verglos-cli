@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Docker payment integration revalidated
+
+The exact disposable PostgreSQL harness was restarted with separate runtime
+and payment-test targets, migrations applied successfully, and the five
+payment integration files passed **10/10** with zero failures and zero skips.
+The earlier Neon/identical-target attempts were refused by the isolation
+guards, confirming that the test harness cannot silently target a shared or
+Production database. The container was stopped afterward.
+
+This is implementation/integration evidence only; provider delivery,
+reconciliation, Production billing, and external gates remain open. Score
+remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-docker-payment-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · Test Mode provider/application reconciliation narrowed
 
 Read-only reconciliation matched all **34/34** Razorpay Test Mode

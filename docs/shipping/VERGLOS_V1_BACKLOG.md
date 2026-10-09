@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Gate 4 Docker payment integration revalidation
+
+The isolated PostgreSQL harness refused unsafe Neon and identical-target
+configurations, then passed after runtime/payment targets were separated.
+Reviewed migrations applied successfully and the five payment integration
+files passed **10/10**, zero failures, zero skips. This is integration
+evidence only; no checkbox changed and the score remains **219 checked / 61
+unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-docker-payment-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · Test Mode provider/application reconciliation addendum
 
 Read-only reconciliation matched all **34/34** Razorpay Test Mode

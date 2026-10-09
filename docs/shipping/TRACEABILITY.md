@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Docker payment integration revalidation
+
+- **Mapped IDs:** Gate 4; `PLAN-WEB-011/012/014/015`.
+- **Result:** Reviewed migrations applied to the disposable loopback database;
+  five payment integration files passed **10/10**, zero failures, zero skips,
+  with separate runtime and payment-test database targets.
+- **Safety:** Neon and identical-target configurations were refused by the
+  test guards; the container was stopped after the passing run.
+- **Boundary:** Local disposable database only. No provider, Neon,
+  Production, payment, entitlement, account, customer, or manual-row write.
+  Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-docker-payment-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · Isolated Test Mode provider/application reconciliation
 
 - **Mapped IDs:** Gate 4; `PLAN-WEB-011/012/014/015`.

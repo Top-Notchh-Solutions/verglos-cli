@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 Docker payment integration revalidated
+
+The disposable PostgreSQL harness rejected the initially supplied Neon target
+and an identical runtime/payment target, then passed after the runtime target
+was separated. Reviewed migrations applied successfully; the five payment
+integration files passed **10/10** with zero failures and zero skips. The
+container was stopped after testing.
+
+This strengthens code/integration evidence only. Gate 4 remains open for
+provider delivery/replay, complete lifecycle reconciliation, and Production
+acceptance. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-docker-payment-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 provider/application reconciliation narrowed
 
 Read-only Razorpay Test Mode reconciliation matched all **34/34** provider
