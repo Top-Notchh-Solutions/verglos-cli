@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Full CLI qualification and Production smoke recheck
+
+CLI local head `d0a3b217` completed the full Turbo test/typecheck/build
+pipeline: package tests **103/103**, typecheck **11/11**, and build **6/6**;
+the independently executed focused current-head suite is **17/17**. Public
+Production `/`, `/checkout`, and `/docs` returned 200 with HSTS, no Test Mode,
+test-plan, Preview, or database markers, and unauthenticated subscription GET
+returned 405. This strengthens implementation and fail-closed rollout
+evidence but does not close provider, reviewer, legal, trusted-publishing,
+Production billing, or final-POC criteria. No checkbox changed; score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/cli-full-qualification-and-production-smoke-2026-10-10.md`.
+
 ## 2026-10-10 · Current-head Web and CLI focused qualification
 
 Web head `51e07f5` passed the focused payment/lifecycle/origin suite with

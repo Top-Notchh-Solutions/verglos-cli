@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Full CLI qualification and Production smoke
+
+- **Mapped surfaces:** CLI API-origin/validation/distribution/qualification;
+  Production code-rollout boundary; Gate 4 remains open.
+- **CLI source:** `d0a3b217`; package tests **103/103**, typecheck **11/11**,
+  build **6/6**; current-head focused suite **17/17**.
+- **Production:** `/`, `/checkout`, `/docs` 200; HSTS present; no Test Mode,
+  test-plan, Preview, or database markers; unauthenticated subscription GET
+  405. Four configured hosted methods remain visible on checkout.
+- **Acceptance boundary:** No provider payment/subscription lifecycle,
+  signed delivery, entitlement reconciliation, Production billing, trusted
+  publishing, independent review, legal, customer, or final POC evidence.
+- **Write boundary:** No Production/provider/database/payment/entitlement/
+  account/customer/manual-row write. Score remains **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/cli-full-qualification-and-production-smoke-2026-10-10.md`.
+
 ## 2026-10-10 · Current-head Web and CLI focused qualification
 
 - **Mapped IDs:** Gate 4; `PLAN-WEB-011/012/014/015`; CLI support for

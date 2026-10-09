@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Full CLI qualification and Production smoke addendum
+
+CLI local head `d0a3b217` passed package tests **103/103**, typecheck **11/11**,
+and build **6/6**; focused current-head tests passed **17/17**. Production
+read-only smoke returned 200 for `/`, `/checkout`, and `/docs`, with HSTS and
+no Test Mode/test-plan/Preview/database markers; unauthenticated subscription
+GET returned 405. This strengthens the code and fail-closed rollout boundary,
+but does not close Gate 4 or any trusted-publishing, AppSec, legal, customer,
+Production billing, or final POC gate. No checkbox changed; score remains
+**219/61/280 (78.2%)**.
+
+Evidence: `docs/shipping/evidence/cli-full-qualification-and-production-smoke-2026-10-10.md`.
+
 ## 2026-10-10 · Current-head code qualification addendum
 
 The current Web head `51e07f5` passed the focused payment/lifecycle suite

@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Full CLI qualification and Production smoke rechecked
+
+CLI local head `d0a3b217` passed the full Turbo test/typecheck/build pipeline:
+package tests **103/103**, typecheck **11/11** tasks, and build **6/6** tasks.
+The public Production alias returned 200 for `/`, `/checkout`, and `/docs`,
+with HSTS and no Test Mode, test-plan, Preview, or database markers; the
+unauthenticated subscription route returned 405. This is real code and
+fail-closed Production progress, not payment-lifecycle acceptance.
+
+No state-changing operation occurred. External provider, publishing,
+AppSec/legal, customer, Production billing, and final POC gates remain open.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/cli-full-qualification-and-production-smoke-2026-10-10.md`.
+
 ## 2026-10-10 · Current-head regression qualification recorded
 
 Web head `51e07f5` passed the focused payment/lifecycle suite **41/42** with

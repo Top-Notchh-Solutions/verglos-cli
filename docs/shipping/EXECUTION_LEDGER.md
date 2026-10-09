@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Full CLI qualification and Production smoke recheck
+
+- **CLI:** local `main` `d0a3b217`; Turbo test output **103 pass / 0 fail**,
+  typecheck **11/11** tasks, and build **6/6** tasks. Cached logs were
+  replayed only for tasks keyed to the exact source state; the focused
+  current-head suite remains independently executed at **17/17**.
+- **Production:** public `/`, `/checkout`, and `/docs` returned 200 with HSTS;
+  checkout had no Test Mode/test-key/Test-plan/Preview/database markers and
+  retained the four configured hosted methods; unauthenticated subscription
+  creation GET returned 405.
+- **Disposition:** This advances code-side and fail-closed rollout evidence;
+  it does not close trusted publishing, AppSec/legal/customer approval,
+  provider lifecycle/reconciliation, Production billing, or final POC gates.
+- **Boundary:** No Production, provider, database, migration, payment,
+  entitlement, account, customer, or manual-row write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/cli-full-qualification-and-production-smoke-2026-10-10.md`.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-10 · Current-head Web and CLI focused qualification
 
 - **Web:** exact head `51e07f5`; focused payment/lifecycle/origin suite passed
