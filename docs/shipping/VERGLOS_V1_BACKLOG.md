@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Current-head Web and CLI focused qualification
+
+Web head `51e07f5` passed the focused payment/lifecycle/origin suite with
+**41 pass / 1 explicit PostgreSQL-environment skip / 0 fail**. CLI head
+`d0a3b217` passed CLI/shared typechecks and the focused API-origin, monitor,
+and standards-validation suite **17/17**. This strengthens code-side
+qualification for Gate 4 and the mapped CLI items, but does not prove hosted
+provider authorization, renewal, failure/expiry, replay/reconciliation,
+Production billing, or external review/release gates. No checkbox changed;
+score remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/web-cli-focused-qualification-2026-10-10.md`.
+
 ## 2026-10-10 · Provider subscription authorization reached OTP boundary
 
 The isolated Preview/Test Mode route created a canonical monthly Pro

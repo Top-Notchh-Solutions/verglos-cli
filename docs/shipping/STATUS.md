@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Current-head regression qualification recorded
+
+Web head `51e07f5` passed the focused payment/lifecycle suite **41/42** with
+one explicit PostgreSQL-environment skip and zero failures. CLI head
+`d0a3b217` passed CLI/shared typechecks and the focused API-origin,
+monitor, and standards-validation suite **17/17**. This is implementation
+qualification progress, not completion of the hosted provider lifecycle or
+external release gates.
+
+No Production, provider, database, migration, payment, entitlement, account,
+customer, or manual-row write occurred. Score remains **219/61/280 (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/web-cli-focused-qualification-2026-10-10.md`.
+
 ## 2026-10-10 · Subscription qualification is waiting at operator OTP
 
 The isolated Preview creation route now successfully creates a canonical

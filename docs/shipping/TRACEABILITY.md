@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Current-head Web and CLI focused qualification
+
+- **Mapped IDs:** Gate 4; `PLAN-WEB-011/012/014/015`; CLI support for
+  `PLAN-CLI-003` and `QUAL-CLI-006`.
+- **Web source/evidence:** `51e07f5`; focused suite **41 pass / 1 explicit
+  PostgreSQL skip / 0 fail** covering catalog binding, hosted methods,
+  subscription lifecycle ordering, invoice resolution, refunds, replay, and
+  origin/error boundaries.
+- **CLI source/evidence:** `d0a3b217`; CLI/shared typechecks passed and the
+  focused API-origin/monitor/spec-validation suite passed **17/17**.
+- **Acceptance boundary:** Code-side qualification only. Hosted Test Mode
+  authorization/renewal/failure/expiry/replay/reconciliation, Production
+  billing, and external approval gates remain open.
+- **Boundary:** No Production/provider/database/payment/entitlement/account/
+  customer write; no manual row edit. Score remains **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/web-cli-focused-qualification-2026-10-10.md`.
+
 ## 2026-10-10 · Provider subscription authorization OTP boundary
 
 - **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

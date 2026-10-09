@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Current-head code qualification addendum
+
+The current Web head `51e07f5` passed the focused payment/lifecycle suite
+**41/42** with one explicit PostgreSQL-environment skip and zero failures.
+The current CLI head `d0a3b217` passed CLI/shared typechecks and the focused
+API-origin/monitor/spec-validation suite **17/17**. These results strengthen
+the implementation evidence but do not close Gate 4: real provider
+authorization, signed lifecycle delivery, renewal/failure/expiry,
+replay/order, exactly-once reconciliation, and Production billing evidence
+remain open. No checkbox changed; score remains **219/61/280 (78.2%)**.
+
+Evidence: `docs/shipping/evidence/web-cli-focused-qualification-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 subscription authorization reached real OTP boundary
 
 The isolated Preview creation route produced a canonical monthly Test Mode

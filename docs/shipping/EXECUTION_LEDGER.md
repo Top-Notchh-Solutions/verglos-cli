@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Current-head Web and CLI focused qualification
+
+- **Web:** exact head `51e07f5`; focused payment/lifecycle/origin suite passed
+  **41/42**, with one explicit PostgreSQL-environment skip and zero failures.
+- **CLI:** exact local head `d0a3b217`; CLI and shared typechecks passed, and
+  the API-origin/monitor/spec-validation focused suite passed **17/17**.
+- **Mapped work:** Gate 4 and `PLAN-WEB-011/012/014/015`, plus the CLI
+  modified-client/API-origin and validation-corpus support for
+  `PLAN-CLI-003`/`QUAL-CLI-006`.
+- **Disposition:** Fresh regression qualification strengthens the code-side
+  evidence but does not satisfy the hosted provider lifecycle, signed
+  delivery/reconciliation, Production billing, reviewer, legal, publishing,
+  customer, or final POC criteria. No checkbox changed.
+- **Boundary:** Only ignored local dependency directories were recreated; no
+  Production, provider, database, migration, payment, entitlement, account,
+  customer, or manual-row write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/web-cli-focused-qualification-2026-10-10.md`.
+- **Score:** **219/61/280 (78.2%)**.
+
 ## 2026-10-10 · Provider subscription reached card-tokenization OTP boundary
 
 - **Technical result:** Fresh Preview/Test Mode subscription creation succeeded
