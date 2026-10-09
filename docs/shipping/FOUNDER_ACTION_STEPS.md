@@ -179,8 +179,11 @@ that would not be independent.
 Give the reviewer this private packet:
 
 ```text
-docs/shipping/evidence/hunt-independent-review-packet-2026-10-02.md
+docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md
 ```
+
+The 2026-10-02 packet is historical. The current packet targets CLI
+`8bea4be2fa18533eafd088122be769e942965626` and must be used for the review.
 
 The reviewer must:
 

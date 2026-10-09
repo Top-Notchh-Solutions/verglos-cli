@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Refresh current Hunt independent-review packet
+
+- **Mapped IDs:** `HUNT-011`, `QUAL-CLI-004`, and dependent Hunt/release rows.
+- **Action:** Replaced the stale review target with a superseding private
+  packet for exact CLI head `8bea4be2fa18533eafd088122be769e942965626`.
+  The packet cites hosted self-scan `37827269372`, the pinned Docker image,
+  the current 60-pass/1-macOS-namespace-skip/0-fail result, and the exact
+  independent reviewer procedure and sign-off fields.
+- **Boundary:** This prepares the external review; it is not a reviewer
+  signature. Codex did not self-approve the Hunt. No production, provider,
+  database, payment, deployment, registry, signing, customer, legal, or
+  release write occurred.
+- **Disposition:** `HUNT-011` and `QUAL-CLI-004` remain open pending a real
+  AppSec reviewer who did not implement the sandbox, plus trusted/licensed
+  recipe provenance and dependent acceptance.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md`.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+
 ## 2026-10-09 · Failed subscription invoice binding and current provider blocker
 
 - **Backlog/gate:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and

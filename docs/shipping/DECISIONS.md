@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Use a superseding exact-head Hunt review packet
+
+- **Decision:** Keep the 2026-10-02 packet as historical evidence and use the
+  superseding 2026-10-09 packet for any independent review.
+- **Reason:** The old packet targeted CLI `b781bc4`; the current reviewed CLI
+  head is `8bea4be2`, with current hosted self-scan `37827269372` and pinned
+  Docker evidence. A reviewer must inspect the exact current commit.
+- **Boundary:** Packet preparation does not constitute independent review.
+  Codex will not sign it and no reviewer identity or recommendation is
+  invented. No external or Production state changed.
+- **Disposition:** `HUNT-011` and `QUAL-CLI-004` remain open until the real
+  reviewer report and the remaining trusted/licensed provenance evidence
+  exist. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md`.
+
 ## 2026-10-09 · Keep provider lifecycle gate open after invoice-failure qualification
 
 - **Decision:** Accept the invoice-only failed subscription path as isolated

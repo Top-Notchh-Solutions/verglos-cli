@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Hunt independent-review packet refresh
+
+- **Mapped IDs:** `HUNT-011`, `QUAL-CLI-004`, and dependent Hunt/release rows.
+- **Exact target:** CLI `8bea4be2fa18533eafd088122be769e942965626`.
+- **Supplied evidence:** hosted self-scan `37827269372`; pinned Docker result
+  **60 pass / 1 documented macOS namespace skip / 0 fail**.
+- **External boundary:** packet preparation is not independent review. A real
+  AppSec reviewer must independently run Linux/Docker tests and sign the
+  report. Trusted/licensed recipe provenance and dependent acceptance remain
+  open.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md`.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+
 ## 2026-10-09 · Gate 4 — failed subscription invoice binding
 
 - **Mapped IDs:** `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`,

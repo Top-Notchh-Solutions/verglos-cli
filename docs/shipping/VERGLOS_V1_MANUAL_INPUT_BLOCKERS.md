@@ -1,5 +1,21 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-09 · Hunt reviewer packet
+
+The independent Hunt review packet is refreshed for exact CLI head
+`8bea4be2fa18533eafd088122be769e942965626` and hosted self-scan
+`37827269372`:
+
+`docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md`
+
+Owner/action: an AppSec/security reviewer who did not implement the Hunt
+sandbox must independently run the Linux/Docker tests, record findings and
+residual risks, choose `PASS`, `PASS WITH LIMITATIONS`, or `FAIL`, and return a
+verifiable signed report. Codex may prepare the packet but cannot sign it.
+Until that external artifact exists, `HUNT-011`, `QUAL-CLI-004`, and dependent
+release rows remain open. No secret, customer source, or credential is needed
+from chat for this action.
+
 ## Current superseding reconciliation · 2026-10-09 · Test Mode credential recheck
 
 The current read-only Razorpay Test Mode plan and subscription inventory calls

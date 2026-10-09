@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Gate 6 preparation — current Hunt reviewer packet
+
+The private independent-review packet now targets CLI
+`8bea4be2fa18533eafd088122be769e942965626`, cites hosted self-scan
+`37827269372`, and supplies the current pinned Docker evidence and reviewer
+procedure. This is preparation only: Codex cannot be the independent signer.
+Gate 6, `HUNT-011`, and `QUAL-CLI-004` remain open until a real AppSec
+reviewer who did not implement the sandbox runs the Linux/Docker tests and
+returns a signed report. No production, provider, database, payment,
+deployment, registry, signing, customer, legal, or release write occurred.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 progress — failed invoice-only subscription path
 
 Web `da45a97` qualifies the invoice-only failed subscription path in

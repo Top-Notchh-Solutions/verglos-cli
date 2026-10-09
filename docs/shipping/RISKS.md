@@ -164,6 +164,9 @@ licensed recipe provenance, production activation, or customer acceptance.
 Owner: Hunt/release qualification. No production, provider, database, payment,
 deployment, registry, signing, customer, or release write occurred. Evidence:
 `docs/shipping/evidence/hunt-docker-adversarial-origin-main-2026-10-09.md`.
+The current independent-review packet is
+`docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md`; it does
+not replace the required external signature.
 
 ## R-CLI-EXTERNAL-GATES-2026-10-09
 

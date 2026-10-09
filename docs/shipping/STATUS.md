@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Current Hunt review packet refreshed
+
+The private Hunt review packet now targets the exact current CLI head
+`8bea4be2fa18533eafd088122be769e942965626` and cites hosted self-scan
+`37827269372` plus the current pinned Docker result of **60 pass / 1 documented
+macOS namespace skip / 0 fail**. This makes the external review reproducible;
+it does not fabricate or replace an independent AppSec sign-off. `HUNT-011`
+and `QUAL-CLI-004` remain open pending the real reviewer report and trusted or
+licensed recipe provenance. No production/provider/database/payment/deployment
+or release write occurred. Score remains **219 checked / 61 unchecked / 280
+total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 update — failed subscription invoice binding
 
 Web `da45a97` now handles a failed subscription payment whose provider event
