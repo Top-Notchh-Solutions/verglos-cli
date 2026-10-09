@@ -1,5 +1,26 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · CLI transport hardening and provider renewal boundary
+
+CLI `439b782d` now fails closed on unsafe configured API origins across
+license, entitlement, monitor, login, unlock, and telemetry transports.
+Focused tests **17/17**, typecheck, and build passed. This strengthens the
+backend/security substrate but does not close a release checkbox.
+
+The read-only Test Mode inventory returned 21 subscriptions (5 active, 7
+cancelled, 9 created) with no active/pending record due for charge. The
+official provider material documents mock payment success/failure and plan
+periods, but no immediate renewal/expiry trigger. Gate 4 remains open for
+provider-generated renewal/expiry/failure/refund, external replay/order,
+timeout/retry, exactly-once, and complete enabled-method evidence.
+
+Production smoke remained read-only: `/` and `/checkout` returned 200, the
+unauthenticated API GET probes returned 405, and no Test Mode marker appeared.
+No Production/provider/database/entitlement/account/customer-data write
+occurred. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 lifecycle ordering and reconciliation qualification
 
 Web `6f932d4` prevents a later authenticated lifecycle event from regressing

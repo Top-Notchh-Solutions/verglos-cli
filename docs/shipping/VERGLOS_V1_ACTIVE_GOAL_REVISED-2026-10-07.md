@@ -124,6 +124,9 @@ The current provider-to-database lifecycle-ordering reconciliation evidence
 is:
 `docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`.
 
+The current CLI API-origin and provider-renewal-boundary evidence is:
+`docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`.
+
 The payment gate had one explicit product gap: the Web code had billing ledger
 and subscription-webhook handling, but no server route that created a provider
 subscription. Web commit `54e6fd0344b2f8b74e2c4d5ff15a0b02c12b51dd` added the
@@ -213,6 +216,12 @@ Current source checkpoints:
   `6f932d4` (subscription lifecycle ordering guard). These changes passed the
   focused suites, typecheck, diff check, and full local build and were deployed
   only through the fail-closed Production path.
+- Current CLI backend hardening commit is `439b782d`. It rejects unsafe saved
+  API bases before license, entitlement, monitor, login, unlock, or telemetry
+  requests are built; focused security/entitlement/monitor tests passed
+  **17/17**, and CLI typecheck/build passed. This is backend progress mapped
+  to the modified-client/security surface, not a complete production signer
+  or entitlement activation gate.
 - Earlier Web qualification branch `da45a97` on `feat/preview-test-auth`
   supplied invoice-backed subscription-capture reconciliation, the code-side
   `subscription.expired` path, and invoice-only `payment.failed` binding.
@@ -1206,6 +1215,10 @@ The latest lifecycle-ordering and provider-to-database reconciliation evidence
 is:
 
 `docs/shipping/evidence/plan-web-014-lifecycle-ordering-reconciliation-2026-10-09.md`
+
+The latest CLI API-origin hardening and provider-renewal-boundary evidence is:
+
+`docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`
 
 The latest expiry-lifecycle and current Preview qualification evidence is:
 

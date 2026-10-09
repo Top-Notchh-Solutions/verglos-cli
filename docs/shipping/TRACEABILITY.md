@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · CLI API-origin hardening and provider renewal boundary
+
+- **Mapped surfaces:** CLI credential/API transport security, Gate 4, and
+  Production read-only qualification.
+- **Implementation:** CLI `439b782d`; `getTrustedApiOrigin` protects license
+  validation/status, unlock, capabilities, monitor, login, and telemetry
+  requests. Invalid HTTP, path-bearing, query-bearing, fragment-bearing,
+  userinfo-bearing, malformed, empty, or non-string values fail closed.
+- **Evidence:** Focused suite **17/17**, typecheck, build, and diff check
+  passed; unsafe saved-base regression made zero network calls.
+- **Provider/Production boundary:** Test Mode inventory was read-only with no
+  due renewal; Production public smoke was read-only with `/` and `/checkout`
+  200, API GET probes 405, and no Test Mode marker. No state-changing write
+  occurred.
+- **Acceptance:** This is implementation and qualification progress only. It
+  does not satisfy provider-generated renewal/expiry/failure/refund,
+  external delivery ordering, or any legal/reviewer/publishing gate. Score
+  remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`.
+
 ## 2026-10-09 · Lifecycle ordering guard and isolated reconciliation
 
 - **Mapped IDs:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and

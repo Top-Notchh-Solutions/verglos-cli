@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Reject unsafe saved CLI API origins
+
+- **Decision:** Require every CLI network helper to resolve its configured API
+  base to a bare HTTPS origin before building a request. Preserve explicit
+  custom/self-hosted HTTPS origins; reject HTTP and URL components that could
+  redirect or reinterpret a request target.
+- **Reason:** A locally editable credentials file must not be able to cause a
+  license bearer to be sent to an unsafe destination. The boundary is enforced
+  before fetch, not only by response handling.
+- **Evidence:** CLI `439b782d`, focused tests **17/17**, typecheck, build,
+  and `docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`.
+- **Provider decision:** Do not fabricate renewal/expiry events. The current
+  Test Mode inventory has no due active subscription, and the official
+  provider material does not document an immediate trigger. Keep the provider
+  lifecycle rows open and continue independent backend work.
+- **Boundary:** No Production or provider write, database/migration write,
+  entitlement/account/customer-data mutation, deployment, or release occurred
+  in this CLI batch. Score remains **219/61/280 (78.2%)**.
+
 ## 2026-10-09 · Keep Gate 4 open after lifecycle ordering repair
 
 - **Decision:** Ship Web `6f932d4` to Production as a fail-closed code-only

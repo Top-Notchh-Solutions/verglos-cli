@@ -1,5 +1,33 @@
 # Verglos V1 risk register
 
+## R-CLI-API-ORIGIN-CONFIG · 2026-10-09
+
+The CLI stores a configurable API base in a local credentials file. Before
+`439b782d`, each transport could concatenate that value directly and attach a
+license bearer. The shared `getTrustedApiOrigin` boundary now rejects
+non-HTTPS and non-origin values before any request is created, with a focused
+zero-fetch regression.
+
+Residual risk: a user can intentionally configure a different clean HTTPS
+origin, so custom/self-hosted endpoint ownership remains an operational
+trust decision. The CLI does not claim that an arbitrary HTTPS server is
+Verglos. Owner: CLI/release security. Gate impact: backend hardening progress;
+does not close PLAN-CLI-003 or any external trust/reviewer gate.
+
+Evidence: `docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`.
+
+## R-PLAN-WEB-014-provider-renewal-unavailable · 2026-10-09
+
+The current Razorpay Test Mode inventory has no active/pending subscription due
+for charge, and the official API material does not expose an immediate
+renewal/expiry trigger. Do not shorten canonical Production pricing, alter the
+Production database, or synthesize provider events as a substitute. Owner:
+Web billing/provider qualification. Gate impact: Gate 4 and
+`PLAN-WEB-011/012/014/015` remain open until genuine provider lifecycle
+evidence or an explicit provider limitation/release decision is obtained.
+
+Evidence: `docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`.
+
 ## R-PLAN-WEB-014-active-authenticated-projection-mitigated · 2026-10-09
 
 The isolated provider-to-ledger mismatch is mitigated in code and reconciled

@@ -1,5 +1,29 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · CLI API-origin hardening and provider renewal boundary
+
+CLI `439b782d` now rejects unsafe saved API bases before any request is built:
+license/status, unlock, entitlement, monitor, device login, and telemetry
+requests require a clean HTTPS origin. The focused security/entitlement/
+monitor suite passed **17/17**, CLI typecheck and package build passed, and a
+new regression confirmed an unsafe saved HTTP base causes zero fetch calls.
+
+The read-only Razorpay Test Mode inventory returned HTTP 200 with 21 records:
+5 active, 7 cancelled, and 9 created; no active/pending subscription was due
+for charge. Official provider documentation does not expose an immediate
+renewal/expiry trigger, so provider-generated renewal evidence remains an
+external limitation rather than something to synthesize.
+
+Production read-only smoke returned 200 for `/` and `/checkout`, 405 for the
+unauthenticated API GET probes, and no Test Mode marker. No Production,
+provider, database, entitlement, account, or customer-data write occurred.
+The complete CLI test command remains **27/28** because an unrelated,
+pre-existing untracked shared test imports absent modules; no user file was
+changed. Score remains **219 checked / 61 unchecked / 280 total (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`.
+
 ## 2026-10-09 · Gate 4 lifecycle ordering guard and isolated reconciliation
 
 Web `6f932d4` blocks the observed advanced-subscription → `authenticated`

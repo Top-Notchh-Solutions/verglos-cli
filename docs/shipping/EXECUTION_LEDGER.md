@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · CLI API-origin hardening and provider renewal boundary
+
+- **Mapped work:** backend security hardening, Gate 4 provider qualification,
+  and the Production read-only stage; no checkbox accepted.
+- **Implementation:** CLI `439b782d` centralizes clean HTTPS-origin
+  validation for license, entitlement, monitor, login, unlock, and telemetry
+  transports. Unsafe saved API bases fail closed before fetch and cannot
+  receive a license bearer.
+- **Verification:** Focused tests **17/17**, CLI typecheck, package build, and
+  diff check passed. Full CLI test reached **27 passed / 1 failed** because a
+  pre-existing untracked shared test imports five absent importer modules; the
+  same unrelated issue blocks shared build/typecheck. No untracked user file
+  was changed.
+- **Provider read-only result:** Test Mode HTTP 200; 21 subscriptions total,
+  5 active, 7 cancelled, 9 created, and zero active/pending records due for
+  charge at observation time. No provider write was attempted. Official
+  provider material does not document an immediate renewal/expiry trigger.
+- **Production read-only result:** `/` and `/checkout` HTTP 200; unauthenticated
+  API GET probes HTTP 405; no Test Mode marker. No Production plan/provider,
+  payment, database/migration, entitlement, account, or customer-data write.
+- **Disposition:** Keep Gate 4 and the payment rows open for genuine provider
+  renewal/expiry/failure/refund/replay/timeout/exactly-once evidence. Score
+  remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`.
+
 ## 2026-10-09 · Lifecycle ordering guard and isolated provider reconciliation
 
 - **Mapped work:** Gate 4 and `PLAN-WEB-011`, `PLAN-WEB-012`,
