@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · SCM/GitHub-GitLab code qualification
+
+Web head `51e07f5` passed the focused SCM suite **24/24**, zero failures and
+zero skips, covering provider identity, raw webhooks, tenant binding, redacted
+checks, idempotency, leases, token refresh, retries, workers, and routes. Live
+authorized repository installation and delivery remain open; no checkbox
+changed and the score remains **219 checked / 61 unchecked / 280 total
+(78.2%)**.
+
+Evidence: `docs/shipping/evidence/team-web-006-scm-code-qualification-2026-10-10.md`.
+
 ## 2026-10-10 · Authoritative CLI release-head qualification
 
 CLI `origin/main` at `f5686b5c` passed the locked offline test run (**12/12

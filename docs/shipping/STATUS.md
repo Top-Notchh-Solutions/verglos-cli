@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · SCM/GitHub-GitLab code qualification
+
+The focused SCM suite on Web head `51e07f5` passed **24/24** with zero
+failures/skips, covering identity binding, raw webhook security, redacted
+check delivery, idempotency, leases, token refresh, retries, and route
+boundaries. This is real backend qualification progress; live authorized
+repository installation and provider delivery evidence remain open. Score
+remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/team-web-006-scm-code-qualification-2026-10-10.md`.
+
 ## 2026-10-10 · Authoritative CLI release-head qualification
 
 CLI `origin/main` at `f5686b5c` passed the locked offline test run (**12/12

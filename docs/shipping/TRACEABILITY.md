@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · SCM/GitHub-GitLab code qualification
+
+- **Mapped IDs:** `TEAM-WEB-006`, `TEAM-CLI-001/002`, `GITHUB-WEB-001/002/003`.
+- **Source/result:** Web `51e07f5`; focused SCM suite **24/24**, zero
+  failures/skips.
+- **Coverage:** immutable provider identity, raw webhook authentication,
+  tenant/commit/artifact binding, redacted checks, idempotency, fenced leases,
+  token refresh, retries, source-free workers, and route boundaries.
+- **Acceptance boundary:** Code-side only. Live authorized installation,
+  delivery, check publication, replay, removal, and recovery remain open.
+- **Boundary:** No repository source/credential/provider/database/Production/
+  customer state changed. Score remains **219/61/280 (78.2%)**; no checkbox
+  changed.
+- **Evidence:** `docs/shipping/evidence/team-web-006-scm-code-qualification-2026-10-10.md`.
+
 ## 2026-10-10 · Authoritative CLI release-head qualification
 
 - **Mapped IDs:** `QUAL-CLI-006`; CLI distribution and dependent backend rows.

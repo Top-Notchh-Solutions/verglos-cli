@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · SCM/GitHub-GitLab code qualification
+
+Web head `51e07f5` passed the focused SCM suite **24/24**, zero failures and
+zero skips. The code-side identity, raw-webhook, redaction, idempotency,
+lease, token-refresh, retry, worker, and route contracts are qualified.
+
+This does not close `TEAM-WEB-006` or the live integration gate: an authorized
+repository installation, webhook/check delivery, replay, removal, and recovery
+run remain required. No state changed; score remains **219/61/280 (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/team-web-006-scm-code-qualification-2026-10-10.md`.
+
 ## 2026-10-10 · Authoritative CLI release-head qualification
 
 CLI `origin/main` at `f5686b5c` passed the locked offline test run (**12/12

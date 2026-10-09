@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · SCM/GitHub-GitLab code qualification
+
+- **Source:** Web head `51e07f5`; focused SCM suite passed **24/24**, zero
+  failures and zero skips.
+- **Coverage:** immutable installation identity, raw webhook authentication,
+  tenant/commit/artifact binding, redacted check composition, idempotent
+  delivery, fenced leases, token refresh, retry classification, source-free
+  worker projections, and authenticated route boundaries.
+- **Disposition:** This advances `TEAM-WEB-006` code evidence only. Live
+  authorized repository installation, delivery, check publication, replay,
+  removal, and recovery remain open.
+- **Boundary:** No repository source, credential, provider, database,
+  Production, or customer state changed. Score remains **219/61/280 (78.2%)**;
+  no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/team-web-006-scm-code-qualification-2026-10-10.md`.
+
 ## 2026-10-10 · Authoritative CLI release-head qualification
 
 - **Source:** detached CLI `origin/main` at `f5686b5c`; the divergent local
