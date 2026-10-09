@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Privacy/deletion isolated qualification
+
+- **Source:** Web `51e07f5`; privacy/deletion contract and behavior batch
+  passed **27/27**; migrated disposable PostgreSQL route/job integrations
+  passed **2/2**. Combined result: **29/29**, zero failures.
+- **Coverage:** authenticated deletion and digest routes, bounded cron,
+  versioned inventory/dispositions, legal holds, digest proof, worker leases,
+  retries, and route-to-job execution.
+- **Disposition:** This advances `QUAL-WEB-005` implementation/integration
+  evidence only. Legal/customer consent, Production authorization,
+  restore/rollback, and independent acceptance remain open.
+- **Boundary:** Loopback disposable DB only; no Neon, Production, provider,
+  payment, entitlement, account, customer, or manual-row state changed. Score
+  remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/qual-web-005-privacy-deletion-2026-10-10.md`.
+
 ## 2026-10-10 · SCM/GitHub-GitLab code qualification
 
 - **Source:** Web head `51e07f5`; focused SCM suite passed **24/24**, zero

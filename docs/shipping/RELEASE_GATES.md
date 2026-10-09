@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Privacy/deletion isolated qualification
+
+Web `51e07f5` passed the privacy/deletion batch **29/29**, zero failures:
+27 contract/behavior tests and 2 migrated PostgreSQL route/job integrations.
+The disposable database was stopped after testing.
+
+This advances `QUAL-WEB-005` code/integration evidence only. Legal/customer
+consent, Production authorization, restore/rollback, and independent
+acceptance remain open. No state changed; score remains **219/61/280 (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-web-005-privacy-deletion-2026-10-10.md`.
+
 ## 2026-10-10 · SCM/GitHub-GitLab code qualification
 
 Web head `51e07f5` passed the focused SCM suite **24/24**, zero failures and

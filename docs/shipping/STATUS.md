@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Privacy/deletion isolated qualification
+
+The authenticated privacy/deletion batch passed **29/29** with zero failures:
+27 contract/behavior tests plus 2 migrated PostgreSQL route/job integrations.
+The isolated Docker database was stopped afterward. This advances backend
+qualification, while legal/customer consent, Production authorization,
+restore/rollback, and independent acceptance remain open. Score remains
+**219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/qual-web-005-privacy-deletion-2026-10-10.md`.
+
 ## 2026-10-10 · SCM/GitHub-GitLab code qualification
 
 The focused SCM suite on Web head `51e07f5` passed **24/24** with zero

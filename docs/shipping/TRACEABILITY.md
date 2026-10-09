@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Privacy/deletion isolated qualification
+
+- **Mapped IDs:** `QUAL-WEB-005`, `OPS-011/012`, customer-held record paths.
+- **Source/result:** Web `51e07f5`; contract/behavior **27/27** plus PostgreSQL
+  route/job integration **2/2**, combined **29/29** with zero failures.
+- **Coverage:** auth/same-origin boundaries, deletion idempotency, bounded
+  worker/cron, inventory/dispositions, legal holds, digest proof, leases, and
+  route-to-job execution.
+- **Acceptance boundary:** Implementation/isolation only; legal/customer,
+  Production authorization, restore/rollback, and independent acceptance
+  remain open.
+- **Boundary:** No Neon/Production/provider/payment/entitlement/account/
+  customer/manual-row state changed. Score remains **219/61/280 (78.2%)**; no
+  checkbox changed.
+- **Evidence:** `docs/shipping/evidence/qual-web-005-privacy-deletion-2026-10-10.md`.
+
 ## 2026-10-10 · SCM/GitHub-GitLab code qualification
 
 - **Mapped IDs:** `TEAM-WEB-006`, `TEAM-CLI-001/002`, `GITHUB-WEB-001/002/003`.

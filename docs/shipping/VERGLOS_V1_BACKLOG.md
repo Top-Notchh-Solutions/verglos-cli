@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Privacy/deletion isolated qualification
+
+Web `51e07f5` passed the privacy/deletion qualification **29/29**, zero
+failures: 27 contract/behavior tests and 2 migrated PostgreSQL integrations.
+This is implementation/integration evidence only; external legal, customer,
+Production, restore/rollback, and independent acceptance gates remain open.
+No checkbox changed; score remains **219 checked / 61 unchecked / 280 total
+(78.2%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-005-privacy-deletion-2026-10-10.md`.
+
 ## 2026-10-10 · SCM/GitHub-GitLab code qualification
 
 Web head `51e07f5` passed the focused SCM suite **24/24**, zero failures and
