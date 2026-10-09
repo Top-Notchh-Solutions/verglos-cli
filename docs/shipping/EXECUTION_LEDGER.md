@@ -14,6 +14,11 @@
   CLI-only merge required no Web redeploy and made no npm publish/tag,
   Production plan/provider/payment, database/migration, entitlement,
   account, or customer-data write.
+- **Production verification:** The existing fail-closed Web deployment
+  `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` remains `READY`, aliased to
+  `https://verglos.com`; read-only smoke returned HTTP **200** for `/` and
+  `/checkout`. This confirms the Production code rollout is serving, not that
+  any paid lifecycle or entitlement gate is complete.
 - **Disposition:** This merge is verified backend/security progress; it does
   not close `PLAN-CLI-003`, `QUAL-CLI-006`, Gate 4, or external
   reviewer/legal/protected-release/rollback/final-acceptance gates. Score

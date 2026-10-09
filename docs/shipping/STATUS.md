@@ -11,6 +11,10 @@ in-toto release binding passed before merge.
 Production remains explicitly in scope. This was a CLI-only fail-closed code
 rollout; no Web redeploy, npm publish/tag, Production plan/provider/payment,
 database/migration, entitlement, account, or customer-data write occurred.
+The existing Web Production deployment `dpl_CvNvt9YEQLMhnEB8htL7eiCocbmG` is
+still `READY` and aliased to `https://verglos.com`; read-only smoke returned
+HTTP 200 for `/` and `/checkout`. This is code-rollout verification only, not
+payment or entitlement acceptance.
 The external release, reviewer, legal, protected-release, rollback, Gate 4,
 `PLAN-CLI-003`, and `QUAL-CLI-006` gates remain open. Score remains
 **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
