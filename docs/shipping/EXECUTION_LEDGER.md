@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Production anonymous modified-client probe
+
+- **Mapped work:** `PLAN-CLI-003` Production boundary evidence.
+- **Read-only result:** Forged `as_plan=pro|studio|enterprise` entitlement
+  requests all returned the server-owned Free projection; forged tenant,
+  organization, project, usage, evidence, and policy requests all returned
+  HTTP 404. No credentials, cookies, or state-changing method was used.
+- **Boundary:** This does not prove the authenticated modified-client matrix
+  or full list/search/export/private-runtime acceptance. No Production plan,
+  payment, database, entitlement, account, or customer-data write occurred.
+- **Disposition:** `PLAN-CLI-003` remains unchecked. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/modified-client-production-probe-2026-10-09.md`.
+
 ## 2026-10-09 · Exact-source official in-toto qualification
 
 - **Mapped work:** `QUAL-CLI-006` official-validator progress.

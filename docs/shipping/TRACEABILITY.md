@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Production anonymous modified-client probe
+
+- **Mapped surface:** `PLAN-CLI-003` forged-authority boundary.
+- **Evidence:** Production entitlement requests with forged Pro/Studio/
+  Enterprise parameters all stayed on the Free projection; forged
+  organization/tenant/project/usage/evidence/policy requests returned HTTP
+  404.
+- **Boundary:** Anonymous read-only evidence only; authenticated modified
+  client and private runtime acceptance remain open. No Production state
+  changed and the score remains **219/61/280 (78.2%)**.
+- **Evidence file:**
+  `docs/shipping/evidence/modified-client-production-probe-2026-10-09.md`.
+
 ## 2026-10-09 · Exact-source official in-toto qualification
 
 - **Mapped surface:** `QUAL-CLI-006` official release-archive validation.

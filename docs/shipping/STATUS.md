@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Production anonymous modified-client probe
+
+Production read-only probes with forged plan values remained server-owned Free
+(`pro`, `studio`, and `enterprise` simulations all returned `plan=free`), and
+forged organization/tenant/project/usage/evidence/policy requests returned
+HTTP 404. No credentials, cookies, or mutating request was used.
+
+This strengthens `PLAN-CLI-003` only; authenticated modified-client and full
+private runtime evidence remain open. No Production plan/payment/database/
+entitlement/account/customer-data write occurred. Score remains **219 checked /
+61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/modified-client-production-probe-2026-10-09.md`.
+
 ## 2026-10-09 · Exact-source official in-toto qualification
 
 The merged authoritative CLI source was rebuilt and packaged locally, then

@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Production anonymous modified-client probe
+
+Read-only Production probes ignored forged Pro/Studio/Enterprise plan values
+and returned the server-owned Free projection. Forged organization, tenant,
+project, usage, evidence, and policy requests returned HTTP 404. This is
+progress for `PLAN-CLI-003`, not authenticated acceptance; no Production
+state-changing write occurred and no checkbox changed.
+
+Evidence: `docs/shipping/evidence/modified-client-production-probe-2026-10-09.md`.
+
 ## 2026-10-09 · Exact-source official in-toto qualification
 
 The merged CLI source rebuilt successfully (**8/8** tasks), produced the six
