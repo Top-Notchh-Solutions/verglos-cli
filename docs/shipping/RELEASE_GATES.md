@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 local PostgreSQL integration addendum
+
+The disposable Docker PostgreSQL path applied the reviewed migrations and
+passed the payment integration batch **10/10**, with zero failures and zero
+skips. This strengthens order/subscription catalog binding, webhook replay
+claims, ledger ordering, failed/no-grant, invoice binding, refund, and expiry
+code evidence. The container was loopback-only and stopped after testing.
+
+Gate 4 remains open for real Razorpay authorization, signed provider delivery,
+provider renewal/failure/expiry, hosted replay/reconciliation, Production
+billing, and exactly-once end-to-end evidence. No Neon, Production, provider,
+payment, entitlement, account, or customer write occurred. Score remains
+**219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-docker-payment-integration-2026-10-10.md`.
+
 ## 2026-10-10 · Full CLI qualification and Production smoke addendum
 
 CLI local head `d0a3b217` passed package tests **103/103**, typecheck **11/11**,

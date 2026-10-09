@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Isolated Docker payment integration qualification
+
+- **Fixture:** bounded local PostgreSQL 15 container on loopback only; the
+  reviewed migrations were applied after the explicit empty-database guard
+  confirmation, and the container was stopped after the run.
+- **Mapped work:** Gate 4; `PLAN-WEB-011/012/014/015`.
+- **Result:** five payment integration files passed **10/10**, zero failures,
+  zero skips. Coverage included order/subscription catalog binding, ledger
+  renewal ordering, webhook claim/replay, captured/refund, failed/no-grant,
+  invoice-bound failed subscription, and expiry behavior.
+- **Limitation:** Node `v26.4.0` emitted the repository's Node 22.x engine
+  warning; this is isolated integration evidence, not supported-runtime
+  acceptance or real provider lifecycle evidence.
+- **Boundary:** Disposable local Docker database writes only; no Neon,
+  Production, provider, payment, entitlement, account, customer, or manual
+  row write. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-docker-payment-integration-2026-10-10.md`.
+
 ## 2026-10-10 · CLI backend queue audit
 
 - **Upstream:** CLI `origin/main` is `f5686b5c`; the current implementation

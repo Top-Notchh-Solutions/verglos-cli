@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Isolated Docker payment integration
+
+- **Mapped IDs:** `PLAN-WEB-011/012/014/015`; Gate 4.
+- **Database:** local loopback PostgreSQL 15 only; reviewed migrations applied
+  with the explicit disposable bootstrap confirmation; container stopped after
+  tests. No Neon or Production target was used.
+- **Integration result:** five payment files, **10 pass / 0 fail / 0 skip**;
+  catalog binding, subscription pending row, renewal ordering, webhook claim/
+  replay, captured/refund, failed/no-grant, invoice binding, and expiry were
+  exercised against real PostgreSQL.
+- **Acceptance boundary:** This removes the local DB skip but does not prove
+  provider-originated authorization, signed delivery, renewal/failure,
+  Production billing, or complete reconciliation. Node 26 was used locally;
+  Node 22 hosted evidence remains the supported-runtime authority.
+- **Boundary:** only disposable local DB rows changed. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-docker-payment-integration-2026-10-10.md`.
+
 ## 2026-10-10 · CLI backend queue audit
 
 - **Source:** CLI `origin/main` `f5686b5c`; implementation PRs #79–#88 are

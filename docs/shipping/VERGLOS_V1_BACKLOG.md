@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Gate 4 Docker payment integration qualification
+
+The isolated loopback PostgreSQL path applied the reviewed migrations after
+the explicit disposable bootstrap confirmation. Five payment integration
+files passed **10/10**, zero failures, zero skips, covering server-catalog
+order/subscription binding, ledger ordering, webhook replay claims,
+captured/refund, failed/no-grant, invoice-bound failure, and expiry behavior.
+This removes the local integration skip but does not close the real provider
+lifecycle/reconciliation criteria. No checkbox changed; score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-docker-payment-integration-2026-10-10.md`.
+
 ## 2026-10-10 · Full CLI qualification and Production smoke recheck
 
 CLI local head `d0a3b217` completed the full Turbo test/typecheck/build

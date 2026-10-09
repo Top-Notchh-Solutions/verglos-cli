@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Docker payment integration qualification complete
+
+The isolated local PostgreSQL path is now exercised rather than skipped:
+reviewed migrations applied after the explicit local bootstrap confirmation,
+and the payment integration batch passed **10/10** with zero failures or
+skips. It proves catalog-bound order/subscription persistence, webhook replay
+claims, ledger ordering, failed/no-grant behavior, invoice binding, refunds,
+and expiry projection at the database boundary.
+
+This is code/integration evidence only; real Razorpay authorization, signed
+provider delivery, renewal/failure, Production billing, and complete
+reconciliation remain open. The fixture was local Docker only and is stopped.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-docker-payment-integration-2026-10-10.md`.
+
 ## 2026-10-10 · CLI implementation queue audited
 
 Authoritative CLI `origin/main` is `f5686b5c`; the current implementation PR
