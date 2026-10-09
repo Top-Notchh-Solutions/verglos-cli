@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · CLI standards-validation source restoration
+
+Public CLI commit `d0a3b21` restores the bounded shared parser, importer
+registry, SARIF/CycloneDX/SPDX/in-toto/detect-secrets importers, public exports,
+and the existing standards-validation corpus that had been present as a test
+without its source dependencies. The corpus passes **7/7**; the CLI focused
+security/entitlement/monitor suite passes **17/17**; root Turbo test, typecheck,
+and build graphs pass **8/8**, **11/11**, and **6/6** tasks respectively.
+
+This is source and local qualification progress only. Official validators,
+trusted release provenance, clean-consumer cross-platform qualification,
+protected publishing, legal clearance, and independent acceptance remain open
+under `QUAL-CLI-006`; no checkbox changed. Production was not deployed or
+written in this batch: no plan/provider, payment, database/migration,
+entitlement, account, or customer-data mutation occurred. Production remains
+in scope end-to-end; its current deployed operation is the fail-closed code
+rollout stage.
+
+Score remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-standards-source-restoration-2026-10-09.md`.
+
 ## 2026-10-09 · CLI API-origin hardening and provider renewal boundary
 
 CLI `439b782d` now rejects unsafe saved API bases before any request is built:
@@ -16,10 +38,10 @@ external limitation rather than something to synthesize.
 
 Production read-only smoke returned 200 for `/` and `/checkout`, 405 for the
 unauthenticated API GET probes, and no Test Mode marker. No Production,
-provider, database, entitlement, account, or customer-data write occurred.
-The complete CLI test command remains **27/28** because an unrelated,
-pre-existing untracked shared test imports absent modules; no user file was
-changed. Score remains **219 checked / 61 unchecked / 280 total (78.2%)**;
+provider, database, entitlement, account, or customer-data write occurred in
+that earlier checkpoint. The missing shared importer source was restored by
+the subsequent `d0a3b21` batch above; the historical 27/28 limitation is
+superseded. Score remains **219 checked / 61 unchecked / 280 total (78.2%)**;
 no checkbox changed.
 
 Evidence: `docs/shipping/evidence/cli-api-origin-hardening-and-provider-renewal-limit-2026-10-09.md`.

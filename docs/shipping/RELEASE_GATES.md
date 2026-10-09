@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · CLI standards-validation source restoration
+
+Public CLI `d0a3b21` restores the shared bounded parser/importer source and
+standards corpus dependencies. The corpus passes **7/7** and the root Turbo
+test/typecheck/build graphs pass **8/8**, **11/11**, and **6/6** tasks. This is
+qualification progress only: `QUAL-CLI-006` remains open for official
+validators, trusted release provenance, cross-platform clean-consumer evidence,
+protected publishing, legal approval, and independent acceptance. No Production
+deployment or state-changing write occurred; Production remains in scope
+end-to-end with the current operation fail-closed.
+
+Score remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-standards-source-restoration-2026-10-09.md`.
+
 ## 2026-10-09 · CLI transport hardening and provider renewal boundary
 
 CLI `439b782d` now fails closed on unsafe configured API origins across

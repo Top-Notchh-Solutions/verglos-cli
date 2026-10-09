@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · CLI standards-validation source restoration
+
+- **Mapped surface:** `QUAL-CLI-006` standards-validation corpus and shared
+  evidence import foundation.
+- **Implementation:** Public CLI `d0a3b21` restores bounded JSON parsing,
+  source-digest/importer detection, SARIF/CycloneDX/SPDX/in-toto/
+  detect-secrets importers, deterministic baseline export, and shared exports.
+- **Verification:** Standards corpus **7/7**, focused CLI suite **17/17**,
+  root Turbo test/typecheck/build graphs **8/8**, **11/11**, and **6/6**.
+- **Boundary:** This does not prove official validators, trusted release
+  identity, clean-consumer platform qualification, protected publishing,
+  legal clearance, or independent acceptance. No Production write occurred.
+- **Acceptance:** `QUAL-CLI-006` remains unchecked; score remains
+  **219/61/280 (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-standards-source-restoration-2026-10-09.md`.
+
 ## 2026-10-09 · CLI API-origin hardening and provider renewal boundary
 
 - **Mapped surfaces:** CLI credential/API transport security, Gate 4, and

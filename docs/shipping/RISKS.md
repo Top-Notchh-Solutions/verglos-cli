@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## R-QUAL-CLI-006-SOURCE-RESTORATION · 2026-10-09
+
+The public CLI `main` tree briefly had the standards-validation corpus test
+without the shared importer/parser source it imported. Commit `d0a3b21` restores
+that source and the public export surface; local tests, typecheck, and build
+are green. The remaining risk is qualification drift between this exact source
+and the official validator/cross-platform/protected-release evidence required
+by `QUAL-CLI-006`.
+
+Owner: CLI/release qualification. Gate impact: preparatory progress only; the
+item remains open until official validators, trusted release provenance,
+protected publishing, legal review, and independent acceptance are recorded.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-standards-source-restoration-2026-10-09.md`.
+
 ## R-CLI-API-ORIGIN-CONFIG · 2026-10-09
 
 The CLI stores a configurable API base in a local credentials file. Before

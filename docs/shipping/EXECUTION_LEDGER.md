@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · CLI standards-validation source restoration
+
+- **Mapped work:** `QUAL-CLI-006` preparatory source qualification; no checkbox
+  accepted.
+- **Implementation:** Public CLI `d0a3b21` restores the bounded shared JSON
+  parser, importer registry, SARIF/CycloneDX/SPDX/in-toto/detect-secrets
+  importers, exports, and the existing standards corpus test that had missing
+  source dependencies on the checked-out `main` tree.
+- **Verification:** Standards corpus **7/7**, CLI focused security suite
+  **17/17**, root Turbo test graph **8/8**, typecheck graph **11/11**, build
+  graph **6/6**, and diff check passed.
+- **Acceptance boundary:** Official validators, trusted release provenance,
+  clean-consumer cross-platform evidence, protected publishing, legal review,
+  and independent acceptance remain open. `QUAL-CLI-006` stays unchecked.
+- **Production boundary:** No Production deployment or provider/payment,
+  plan, database/migration, entitlement, account, or customer-data write
+  occurred. Production remains an end-to-end goal with the current operation
+  at the fail-closed code-rollout stage.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-standards-source-restoration-2026-10-09.md`.
+
 ## 2026-10-09 · CLI API-origin hardening and provider renewal boundary
 
 - **Mapped work:** backend security hardening, Gate 4 provider qualification,

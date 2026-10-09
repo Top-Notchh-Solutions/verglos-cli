@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Restore standards importer source before claiming validation
+
+- **Decision:** Restore the missing bounded parser/importer source and public
+  exports required by the existing standards-validation corpus.
+- **Reason:** The checked-out public `main` tree contained the corpus test but
+  lacked the source modules it imported; generated `dist` files are not a
+  source or release qualification substitute.
+- **Evidence:** Public CLI `d0a3b21`; standards corpus **7/7**, focused CLI
+  suite **17/17**, root Turbo test/typecheck/build graphs **8/8**, **11/11**,
+  and **6/6**.
+- **Gate decision:** Keep `QUAL-CLI-006` open for official validators,
+  trusted release provenance, cross-platform clean-consumer evidence,
+  protected publishing, legal approval, and independent acceptance.
+- **Production boundary:** This code-only batch made no Production deploy or
+  plan/provider, payment, database/migration, entitlement, account, or
+  customer-data write. The Production scope remains end-to-end in the active
+  goal; current operation remains fail-closed.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-standards-source-restoration-2026-10-09.md`.
+
 ## 2026-10-09 · Reject unsafe saved CLI API origins
 
 - **Decision:** Require every CLI network helper to resolve its configured API
