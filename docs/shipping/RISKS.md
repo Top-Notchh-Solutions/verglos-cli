@@ -1,5 +1,23 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-active-authenticated-projection · 2026-10-09
+
+The isolated Razorpay Test Mode inventory is provider-bound, but five provider
+subscriptions report `active` while their isolated `billing_subscriptions`
+rows remain `authenticated`. This can make the ledger projection stale even
+when the provider and captured-payment/license evidence indicate a successful
+subscription. The checkout retry UI repair is deployed in Production as a
+fail-closed code rollout, but no Production billing or database write was used
+to mask this finding.
+
+**Required closure:** reproduce the provider event ordering with a fresh
+isolated subscription, prove that activation cannot be regressed by a later
+authenticated event, replay/reconcile the current isolated rows through the
+signed webhook path, and rerun the exact provider-to-database-to-payment-to-
+license matrix. Until then, keep Gate 4 and `PLAN-WEB-011/012/014/015` open.
+
+Evidence: `docs/shipping/evidence/plan-web-014-hosted-retry-production-rollout-2026-10-09.md`.
+
 ## R-PROD-code-rollout-7373c8b-checkout-origin · 2026-10-09
 
 Web `7373c8b` repairs a false same-origin rejection that prevented the debug

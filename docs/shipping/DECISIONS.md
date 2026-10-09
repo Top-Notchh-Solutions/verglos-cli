@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-09 · Deploy hosted retry repair to Production without activation
+
+- **Decision:** Deploy Web `0bafe73` to Production because the hosted
+  `payment.failed` retry defect is customer-facing and the change preserves
+  the fail-closed billing boundary.
+- **Evidence:** Focused tests **20/20**, typecheck, 47-page build, remote
+  Production validation, and read-only smoke passed. Deployment
+  `dpl_GnVheZKWyqbMX2zdDfsHmy8y9xHB` is READY and aliased to
+  `https://verglos.com`.
+- **Boundary:** Do not add Production plan IDs or Test Mode values and do not
+  perform Production provider/payment, database/migration, entitlement,
+  account, or customer-data writes.
+- **Gate decision:** Keep Gate 4 open. Exact isolated reconciliation found
+  five provider `active` rows projected as `authenticated`, in addition to
+  the still-missing renewal, failure/expiry, refund, replay/out-of-order,
+  exactly-once, and complete-method evidence.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-hosted-retry-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Deploy Web `7373c8b` to Production as fail-closed code only
 
 - **Decision:** Ship the checkout-origin repair to Production because it fixes

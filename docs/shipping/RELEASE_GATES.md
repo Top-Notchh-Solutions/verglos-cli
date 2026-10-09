@@ -1,5 +1,26 @@
 # Verglos V1 release gates
 
+## 2026-10-09 · Hosted retry repair and Production code rollout
+
+Web `0bafe73` repairs the hosted retry state after a provider `payment.failed`
+event, with **20/20** focused tests, passing typecheck, and a passing 47-page
+production build. Vercel deployment `dpl_GnVheZKWyqbMX2zdDfsHmy8y9xHB` is
+READY and aliased to `https://verglos.com`; remote runtime-config validation
+and read-only public smoke passed. Production checkout has no Test Mode or
+provider-test-key marker.
+
+This qualifies another Production fail-closed code-rollout slice only. No
+Production plan IDs, Test Mode values, provider/payment calls, database or
+migration writes, entitlement changes, account changes, or customer-data
+mutations occurred. The isolated Test Mode retry reached provider success, but
+exact reconciliation still shows five provider `active` subscriptions mapped
+to `authenticated` isolated ledger rows. Gate 4 therefore remains open for
+that defect plus renewal, failure/expiry, refund, replay/out-of-order,
+exactly-once, and complete enabled-method evidence. Gates 6–9 remain open.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-hosted-retry-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Production code rollout repaired and redeployed
 
 Web `7373c8b` fixes the browser same-origin checkout boundary in the order,

@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-09 · Hosted retry repair and Production fail-closed deployment
+
+- **Mapped work:** Web hosted checkout retry behavior, Gate 4, and the
+  Production code-rollout stage for `PLAN-WEB-011`, `PLAN-WEB-012`,
+  `PLAN-WEB-014`, and `PLAN-WEB-015`.
+- **Implementation:** Web `0bafe73` preserves the active hosted checkout
+  session after a `payment.failed` callback so a later Razorpay-hosted retry
+  can reach signed confirmation and status polling.
+- **Verification:** Focused checkout/origin/route tests **20/20**, typecheck,
+  local 47-page build, remote Production runtime-config/build, and public
+  read-only smoke passed. Production deployment
+  `dpl_GnVheZKWyqbMX2zdDfsHmy8y9xHB` is READY and aliased to
+  `https://verglos.com`.
+- **Isolated observation:** Canonical monthly Pro Test Mode hosted success
+  produced a captured subscription payment and active Pro license after a
+  failed retry. Provider rows were bound to isolated rows, but five provider
+  `active` rows remain `authenticated` in the isolated ledger.
+- **Boundary:** No Production plan, provider/payment, database/migration,
+  entitlement, account, or customer-data write occurred.
+- **Disposition:** Production code rollout is qualified; the reconciliation
+  mismatch and the remaining Gate 4 lifecycle matrix stay open. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-hosted-retry-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed checkout-origin repair
 
 - **Mapped work:** Production code-rollout stage; `PLAN-WEB-011`,

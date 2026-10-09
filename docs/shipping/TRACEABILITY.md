@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## 2026-10-09 · Hosted retry repair and Production rollout
+
+- **Mapped IDs:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and
+  `PLAN-WEB-015`; Production code-rollout stage.
+- **Source/deployment:** Web `0bafe73` → Vercel
+  `dpl_GnVheZKWyqbMX2zdDfsHmy8y9xHB`, READY and aliased to
+  `https://verglos.com`.
+- **Qualification:** Focused tests **20/20**, typecheck, 47-page build,
+  remote runtime-config/build, and read-only Production smoke passed. The
+  isolated canonical Test Mode hosted retry reached provider success with a
+  captured payment and active Pro license.
+- **Unresolved truth:** Five provider `active` subscriptions still map to
+  isolated ledger rows with `authenticated` status. Renewal, provider
+  failure/expiry, refund, replay/out-of-order, exactly-once, and full method
+  coverage remain unqualified.
+- **Production boundary:** No Production plan IDs, Test Mode values,
+  provider/payment calls, database/migration writes, entitlement changes,
+  account changes, or customer-data mutations.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-hosted-retry-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Web checkout-origin repair and Production rollout
 
 - **Mapped IDs:** Production code-rollout stage; `PLAN-WEB-011`,

@@ -1,5 +1,31 @@
 # Verglos V1 shipping status
 
+## 2026-10-09 · Hosted retry repair and Production fail-closed rollout
+
+Web `0bafe73` keeps the Verglos checkout session alive when Razorpay emits a
+failed payment while its hosted modal remains open for retry. Focused tests
+passed **20/20**, typecheck and the 47-page build passed, and Vercel deployment
+`dpl_GnVheZKWyqbMX2zdDfsHmy8y9xHB` reached READY and was aliased to
+`https://verglos.com`. Read-only smoke returned 200 for `/` and `/checkout`,
+405 for unauthenticated API GETs, and no Test Mode or `rzp_test` marker was
+present in Production checkout HTML.
+
+Production is included and moving forward at the fail-closed code-rollout
+stage. No Production plan IDs, Test Mode values, provider/payment calls,
+database writes, migrations, entitlement changes, account changes, or
+customer-data mutations occurred.
+
+The isolated Test Mode flow reached provider success after a failed retry and
+the successful subscription row had a captured payment and active Pro license.
+The required exact reconciliation found 5 provider `active` rows whose
+isolated database projections remain `authenticated`; this is an explicit
+remaining Gate 4 defect, not a close. Renewal, provider failure/expiry,
+refund, replay/out-of-order, exactly-once, and full enabled-method coverage
+remain open. Score remains **219 checked / 61 unchecked / 280 total (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-hosted-retry-production-rollout-2026-10-09.md`.
+
 ## 2026-10-09 · Production fail-closed rollout of Web `7373c8b`
 
 Web commit `7373c8b` repairs a real checkout defect: browser POST requests
