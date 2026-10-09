@@ -1,5 +1,25 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 signed cancellation slice now reconciles
+
+The Preview/Test Mode lifecycle handler now recovers the immutable checkout
+binding from the exact provider subscription when Razorpay omits notes and
+accepts `current_end: null` on terminal lifecycle payloads. Web `d8ddeda` and
+`51e07f5` passed focused webhook tests **18/18**, complete Web tests **899
+total / 875 pass / 24 explicit skips / 0 fail**, typecheck, and the hosted
+Preview build. A fresh canonical create/cancel operation returned HTTP 200/200;
+the protected webhook endpoint emitted no diagnostic failure; and read-only
+isolated DB evidence showed a recent `cancelled` row with no recent payment or
+license row.
+
+This closes only the signed cancellation binding slice. Gate 4 remains open
+for the complete enabled-method matrix, renewals, failure/expiry/refund,
+replay/out-of-order/exactly-once, timeout/retry, and full provider/ledger/
+entitlement reconciliation. Production remained fail-closed and untouched.
+Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-webhook-binding-fix-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 real subscription cancellation finding
 
 The isolated Preview/Test Mode route produced two canonical monthly provider

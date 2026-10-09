@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Signed cancellation delivery and binding fix
+
+- **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,
+  `PLAN-WEB-014`, and `PLAN-WEB-015`.
+- **Implementation:** Web `d8ddeda`/`51e07f5` recover lifecycle binding from
+  the exact provider subscription when signed webhook notes are omitted and
+  accept `current_end: null` for terminal subscriptions. Focused tests passed
+  **18/18**; complete Web passed **899/899 with 24 explicit skips and zero
+  failures**; typecheck and the hosted Preview build passed.
+- **Hosted result:** Final isolated Preview create/cancel returned HTTP 200/200.
+  The protected webhook endpoint emitted no diagnostic failure. Read-only DB
+  reconciliation showed one recent `cancelled` subscription, one prior
+  pre-fix `pending` row, zero recent payment rows, and zero recent license
+  rows. No manual repair or entitlement grant occurred.
+- **Boundary:** Test Mode provider and isolated Preview state only. No
+  Production provider/payment/database/migration/entitlement/account/customer
+  write occurred. Prior temporary provider webhook endpoints remain an
+  operational cleanup item before final release.
+- **Disposition:** One cancellation slice is now evidenced; the full Gate 4
+  matrix and `PLAN-WEB-011/012/014/015` remain open. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-webhook-binding-fix-2026-10-10.md`.
+
 ## 2026-10-10 · Isolated subscription create/cancel and reconciliation gap
 
 - **Mapped work:** Gate 4; `PLAN-WEB-011`, `PLAN-WEB-012`,

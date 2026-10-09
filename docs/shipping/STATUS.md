@@ -1,5 +1,31 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Signed Preview cancellation reconciled after provider-shape fix
+
+Web commits `d8ddeda` and `51e07f5` fix the Razorpay lifecycle binding path:
+when a signed lifecycle payload omits checkout notes, the handler resolves the
+exact provider subscription record; terminal payloads with `current_end: null`
+are accepted; malformed or unresolvable bindings still fail closed. Focused
+webhook tests passed **18/18**; the complete Web suite passed **899 total / 875
+pass / 24 explicit environment-gated skips / 0 fail**; typecheck passed; and
+the final isolated Preview deployment built successfully.
+
+A fresh canonical monthly Test Mode subscription was created and cancelled
+with HTTP 200/200. The final protected webhook endpoint produced no diagnostic
+failure, and a read-only isolated database check showed one recent
+`cancelled` subscription row, with no recent payment or license rows. One
+earlier `pending` row remains from the pre-fix delivery and was not manually
+edited. This closes one signed cancellation/reconciliation slice only.
+
+Gate 4 and `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and `PLAN-WEB-015`
+remain open for the complete method and lifecycle matrix, renewals,
+failure/expiry/refund, replay/out-of-order/exactly-once, and Production
+reconciliation. Production remains at the fail-closed code-rollout boundary;
+no Production provider, payment, database, entitlement, account, or customer
+write occurred. Score remains **219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-webhook-binding-fix-2026-10-10.md`.
+
 ## 2026-10-10 · Real Preview subscription create/cancel evidence; webhook gap remains
 
 The isolated Preview route now has real Razorpay Test Mode subscription

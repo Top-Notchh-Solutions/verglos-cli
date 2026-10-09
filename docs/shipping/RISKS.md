@@ -1,5 +1,23 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-PREVIEW-CANCEL-WEBHOOK-RECONCILIATION · 2026-10-10 · update
+
+Web `d8ddeda`/`51e07f5` repaired the observed provider-shape gap: signed
+terminal lifecycle events can recover missing notes from the exact provider
+subscription, and `current_end: null` is accepted. A final isolated Preview
+Test Mode create/cancel returned HTTP 200/200; the protected endpoint emitted
+no diagnostic failure; and the read-only isolated DB showed one recent
+`cancelled` row with no recent payment or license row. The earlier pre-fix
+`pending` row remains visible and was not manually edited.
+
+Residual risk: only one cancellation slice is evidenced. Renewal,
+failure/expiry/refund, all enabled methods, replay/out-of-order/exactly-once,
+timeout/retry, full reconciliation, and cleanup of temporary provider webhook
+targets remain open. Owner: Web/provider operations. Gate impact: Gate 4 and
+`PLAN-WEB-011/012/014/015` remain open.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-subscription-webhook-binding-fix-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-PREVIEW-CANCEL-WEBHOOK-RECONCILIATION · 2026-10-10
 
 Two real canonical Test Mode subscription creates succeeded and their provider

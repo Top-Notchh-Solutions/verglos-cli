@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Signed Preview cancellation binding repair
+
+- **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`;
+  `src/lib/razorpay-webhook-handler.ts` and its focused tests.
+- **Implementation:** Web `d8ddeda`/`51e07f5` use a provider subscription
+  lookup only when a signed lifecycle event omits notes, require exact provider
+  identity and the immutable checkout snapshot, and accept terminal
+  `current_end: null` payloads.
+- **Verification:** Focused webhook tests **18/18**, complete Web suite
+  **899 total / 875 pass / 24 explicit skips / 0 fail**, typecheck, hosted
+  Preview build, Test Mode create/cancel HTTP **200/200**, and read-only
+  isolated DB observation of a recent `cancelled` row.
+- **Boundary:** This is one lifecycle slice, not full Gate 4 acceptance.
+  Renewal, failure/expiry/refund, method matrix, replay/order/exactly-once,
+  and Production reconciliation remain open. No Production state-changing
+  write occurred; score remains **219/61/280 (78.2%)** and no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-webhook-binding-fix-2026-10-10.md`.
+
 ## 2026-10-10 · Preview subscription create/cancel reconciliation
 
 - **Mapped surfaces:** Gate 4; `PLAN-WEB-011/012/014/015`.
