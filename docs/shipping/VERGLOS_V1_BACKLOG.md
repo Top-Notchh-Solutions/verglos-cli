@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `invoice.paid` subscription renewal binding
+
+Web `a97bc2b` adds a subscription-bound `invoice.paid` webhook path. It
+reuses the signed snapshot, exact amount/currency, paid-invoice, captured
+payment, and provider identity checks; unrelated one-off invoices are
+acknowledged without a ledger or entitlement write. Focused webhook tests pass
+**20/20**, the broader payment/lifecycle set passes **48/48** with three
+explicit environment skips, typecheck/build pass, and disposable PostgreSQL
+handler integration passes **4/4**. This is code-side Gate 4 progress only:
+provider-delivered signed renewal evidence and provider-to-ledger-to-license
+reconciliation remain open. No checkbox changed; score remains **219 checked /
+61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-invoice-paid-renewal-path-2026-10-10.md`.
+
 ## 2026-10-10 · Privacy/deletion isolated qualification
 
 Web `51e07f5` passed the privacy/deletion qualification **29/29**, zero
