@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-CLI-001 accepted
+
+The isolated Preview qualification completed the real canonical Test Mode
+card-capture → signed webhook → billing ledger/license → personal-tenant
+mapping → deployed v2 token → CLI verification trace. CLI commit `be06761`
+adds strict support for the Web server's keyed `legacy-v1`/`successor-v1`
+headers without weakening the legacy header check. Focused entitlement tests
+pass **12/12**; the deployed token was accepted by the pinned CLI key as
+`schemaVersion=2`, Pro, owner, tenant-bound.
+
+`PLAN-CLI-001` is now checked. Gate 4 remains separately open for provider
+delivery timing, renewal/failure/expiry/refund/replay, and complete payment
+reconciliation. Score is **220 checked / 60 unchecked / 280 total (78.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-001-preview-v2-issue-verify-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-001 Production v2 entitlement-route rollout
 
 Web source `ecc32f2` fixed the middleware allowlist so the deployed v2

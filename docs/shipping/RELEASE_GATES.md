@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PLAN-CLI-001 isolated Preview acceptance
+
+The isolated Preview Test Mode trace completed the canonical card capture,
+signed webhook, billing ledger/license, migrated owner-tenant mapping, deployed
+v2 issuance, and CLI verification chain. CLI commit `be06761` accepts the
+server's strict `legacy-v1`/`successor-v1` key-ID headers while retaining the
+legacy header contract; focused entitlement tests pass **12/12**.
+
+`PLAN-CLI-001` is checked at **220/60/280 (78.6%)**. This acceptance is scoped
+to opaque entitlement consumption and does not close Gate 4, which remains open
+for provider delivery timing, renewal/failure/expiry/refund/replay, and full
+payment reconciliation. No Production billing, database, entitlement,
+account, or customer-data write occurred.
+
+Evidence: `docs/shipping/evidence/plan-cli-001-preview-v2-issue-verify-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-001 Production v2 route boundary
 
 Web source `ecc32f2` corrected the middleware allowlist for the v2 entitlement

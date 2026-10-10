@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-CLI-001 accepted at isolated Preview boundary
+
+- **Implementation:** CLI commit `be06761` accepts the Web server's explicit
+  `legacy-v1`/`successor-v1` JWT key IDs while preserving the legacy header and
+  pinned-key verification. The focused entitlement suite passed **12/12**.
+- **Hosted trace:** Isolated Preview Test Mode recorded a canonical Cards-only
+  Pro capture; the deployed signed webhook route credited the isolated ledger
+  and active Pro license; the reviewed users writer supplied the personal
+  organization/owner mapping; the deployed v2 route issued an opaque token; and
+  the CLI verified it as Pro, v2, owner, tenant-bound, and correctly signed.
+- **Disposition:** `PLAN-CLI-001` is checked. Gate 4 remains open for genuine
+  provider-delivery timing, renewal/failure/expiry/refund/replay, and complete
+  payment reconciliation evidence; this item does not claim those gates.
+- **Score:** **220 checked / 60 unchecked / 280 total (78.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-001-preview-v2-issue-verify-2026-10-10.md`.
+
 ## 2026-10-10 · top-of-backlog queue transition
 
 - **HUNT-008:** The fixed A1 recipe and fixture contracts are present, but
