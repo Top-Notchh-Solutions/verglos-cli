@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-CLI-001 Production v2 entitlement-route rollout
+
+Web source `ecc32f2` fixed the middleware allowlist so the deployed v2
+entitlement-token handler is reachable. Focused entitlement tests passed
+**7/7**, typecheck passed, and Production deployment
+`dpl_DiRR2g2upWNein7bzXRmrEb3mtHm` reached READY. Missing authorization now
+returns the intended 401; a fake key returns 404; anonymous capabilities still
+return Free. No payment, database, license, entitlement, account, or
+customer-data write occurred.
+
+This is implementation and fail-closed hosted-boundary progress only.
+`PLAN-CLI-001` remains open until a real authorized paid-tenant v2
+issue→verify trace is captured with the pinned CLI key. Score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-cli-001-production-v2-route-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 signed Test Mode webhook ingress
 
 The temporary Test Mode Preview webhook target was made reachable through a

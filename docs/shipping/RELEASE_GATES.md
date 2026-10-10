@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PLAN-CLI-001 Production v2 route boundary
+
+Web source `ecc32f2` corrected the middleware allowlist for the v2 entitlement
+token route. Focused entitlement tests passed **7/7**, typecheck passed, and
+Production deployment `dpl_DiRR2g2upWNein7bzXRmrEb3mtHm` reached READY. The
+route now returns 401 for missing authorization and 404 for a fake key rather
+than Clerk's misleading 404; anonymous capabilities remain Free. No state
+write occurred. The gate remains open for a real authorized paid-tenant
+issue→verify trace and opaque catalog projection. Score remains **219 checked /
+61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-cli-001-production-v2-route-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 signed Test Mode webhook ingress and pause/resume
 
 One active isolated Test Mode subscription with prior paid cycles was paused

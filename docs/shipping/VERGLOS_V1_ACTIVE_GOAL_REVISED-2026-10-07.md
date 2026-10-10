@@ -19,12 +19,12 @@ provider card-tokenization/OTP boundary and ended in a provider terminal-state
 failure. Three exact recent Test Mode subscriptions were cancelled and a
 read-only provider query found zero payments for them. No Production payment,
 database, entitlement, account, organization, or customer-data write occurred.
-`PLAN-WEB-014` remains the sole active item, unchecked and genuinely blocked
-on a provider-supported recurring-card fixture or provider-side renewal/
-delivery control. Owner: Verglos founder/provider support. Unblock artifact:
-the provider fixture/control plus signed webhook evidence. Review:
-2026-10-11 IST. No next backlog item is selected while this active item is
-blocked. Evidence:
+At that checkpoint, `PLAN-WEB-014` was the sole active item, unchecked and
+genuinely blocked on a provider-supported recurring-card fixture or
+provider-side renewal/delivery control. It is now parked under the queue rule
+below; it remains unchecked. Owner: Verglos founder/provider support. Unblock
+artifact: the provider fixture/control plus signed webhook evidence. Review:
+2026-10-11 IST. Evidence:
 `docs/shipping/evidence/plan-web-014-preview-recurring-card-retry-boundary-2026-10-10.md`.
 
 ### 2026-10-10 · Production schema migration evidence
@@ -36,8 +36,8 @@ audit was corrected to use Drizzle application order because journal
 timestamps are non-monotonic after branch merges. Production `/`, `/checkout`,
 and `/docs` returned 200 afterward; no payment, entitlement, account,
 organization, customer-data, or backfill write occurred. This is supporting
-evidence only. `PLAN-WEB-014` and Gate 4 remain the sole active payment
-qualification workstream and remain open. Evidence:
+evidence only. The Gate 4 payment qualification workstream remains open.
+Evidence:
 `docs/shipping/evidence/production-migration-2026-10-10.md`.
 
 ### 2026-10-10 · current Preview webhook configuration
@@ -72,12 +72,12 @@ lifecycle, and retry behavior. It does not replace provider-generated renewal
 or provider replay/out-of-order evidence. `PLAN-WEB-014`, Gate 4, and the
 score remain open at **219 checked / 61 unchecked / 280 total (78.2%)**.
 
-The active item is `PLAN-WEB-014`. It remains the only implementation and
-acceptance workstream until it is accepted with complete evidence or recorded
-as genuinely blocked with an owner, missing artifact, review/expiry date, and
-release decision. If that complete blocked record is committed, the item may
-be parked without being checked; then the first dependency-ready unchecked
-item is selected by scanning the backlog from the top. The next item is never
+At this historical Preview checkpoint, `PLAN-WEB-014` was the only
+implementation and acceptance workstream. Its complete blocked record is now
+committed, so it remains parked without being checked and the first
+dependency-ready unchecked item has been selected by scanning the backlog from
+the top. The current active item is `PLAN-CLI-001`; it was selected because it
+is dependency-ready, not merely because it is easier. The next item is never
 selected merely because it is easier.
 All work on the CLI, Web application, Preview, Production, payment provider,
 browser, Docker, and private tracker must either implement, unblock, qualify,
@@ -129,7 +129,8 @@ forward-fix, and post-write verification.
 
 The execution queue is strict:
 
-1. Keep exactly one active backlog ID. The current ID is `PLAN-WEB-014`.
+1. Keep exactly one active backlog ID. The current ID is `PLAN-CLI-001`;
+   `PLAN-WEB-014` and `HUNT-008` remain parked and unchecked.
 2. Finish or genuinely document the active ID's remaining acceptance work. If
    it is genuinely blocked, commit the complete blocked record, park it
    unchecked, and select the first dependency-ready unchecked item from the
@@ -165,6 +166,24 @@ recorded before selecting a later ID. If those requirements are externally
 blocked, park `HUNT-008` with the same owner/artifact/date/release record, then
 assess the next dependency-ready candidate, currently `PLAN-CLI-001`. A
 blocked item is never checked, and parking one never improves the score.
+
+The first unchecked queue item, `HUNT-008`, has now been audited and parked
+unchecked because its authenticated/licensed recipe provenance, approval
+wiring qualification, and independent AppSec qualification are missing. The
+single active item is now `PLAN-CLI-001`; its next action is a bounded
+deployed v2 entitlement-token issue→verify trace for an authorized tenant.
+This queue transition does not close either item or change the score. Evidence:
+`docs/shipping/evidence/top-backlog-queue-transition-2026-10-10.md`.
+
+The first active-item implementation pass for `PLAN-CLI-001` is complete:
+Web `ecc32f2` deployed the v2 entitlement-token route behind a middleware fix,
+the focused entitlement tests passed 7/7, and the Production route now
+returns its intended fail-closed 401/404 responses. The item remains
+unchecked because no authorized paid-tenant issue→verify trace has been
+captured yet. The next action remains the bounded activation preflight and
+hosted trace; no fake key, anonymous Free response, or direct entitlement
+write may be used as acceptance. Evidence:
+`docs/shipping/evidence/plan-cli-001-production-v2-route-rollout-2026-10-10.md`.
 
 The latest controlled Preview run created and then cancelled two isolated
 Test Mode recurring-card fixtures. The provider stopped both at card

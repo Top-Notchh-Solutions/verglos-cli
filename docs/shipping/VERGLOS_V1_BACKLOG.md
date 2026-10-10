@@ -1,5 +1,34 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · top-of-backlog queue transition
+
+The first unchecked item, `HUNT-008`, was audited against the current CLI
+head and private gate matrix. Its recipe/fixture implementation exists, but
+authenticated/licensed recipe provenance, supported-rule approval wiring, and
+independent AppSec qualification are missing. It is parked unchecked with an
+explicit owner, review date, and release decision; HUNT-009 through HUNT-011
+remain downstream. The next dependency-ready item is now `PLAN-CLI-001`, whose
+implementation exists but requires a deployed v2 entitlement-token
+issue→verify trace for an authorized tenant. No checkbox changed; score
+remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/top-backlog-queue-transition-2026-10-10.md`.
+
+## 2026-10-10 · `PLAN-CLI-001` Production v2 entitlement-route rollout
+
+Web source `ecc32f2` added `/api/v2/entitlement/token` to the middleware
+public-route allowlist so its own bearer validation is reachable. Focused
+entitlement tests passed **7/7**, typecheck passed, and Production deployment
+`dpl_DiRR2g2upWNein7bzXRmrEb3mtHm` reached READY. The live route now returns
+the intended 401 for missing authorization and 404 for a fake key; anonymous
+capabilities still return Free. No state-changing write occurred. This is
+real `PLAN-CLI-001` progress, but the item remains unchecked pending an
+authorized paid-tenant v2 issue→verify trace with the pinned CLI key and
+catalog/capability/allowance projection. Score remains **219 checked / 61
+unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-001-production-v2-route-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` recurring-card retry boundary
 
 The current isolated Preview/Test Mode checkout reached the provider

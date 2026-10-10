@@ -1,5 +1,41 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · top-of-backlog queue transition
+
+- **HUNT-008:** The fixed A1 recipe and fixture contracts are present, but
+  authenticated/licensed provenance, approval wiring qualification, and
+  independent AppSec qualification are missing. The item is parked
+  unchecked with its owner/review/release boundary; downstream HUNT items are
+  not started.
+- **PLAN-CLI-001:** This is now the single active item. Its code-side
+  opaque catalog/capability consumption and offline fallback are implemented;
+  the required next artifact is a deployed v2 entitlement-token issue→verify
+  trace for an authorized tenant. Local tests do not substitute for that
+  hosted boundary.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+`docs/shipping/evidence/top-backlog-queue-transition-2026-10-10.md`.
+
+## 2026-10-10 · PLAN-CLI-001 Production v2 entitlement-route rollout
+
+- **Fix:** Web source `ecc32f2` added `/api/v2/entitlement/token` to the
+  middleware public-route allowlist; the handler now receives requests and
+  enforces its own bearer validation.
+- **Qualification:** Focused entitlement tests passed **7/7** and typecheck
+  passed. Production deployment `dpl_DiRR2g2upWNein7bzXRmrEb3mtHm` reached
+  READY and was aliased to `https://verglos.com`.
+- **Hosted boundary:** Missing authorization returned 401; a fake key
+  returned 404; anonymous capabilities returned Free 200. No payment,
+  database, license, entitlement, account, or customer-data write occurred.
+- **Disposition:** `PLAN-CLI-001` remains the single active unchecked item;
+  the remaining artifact is a real authorized paid-tenant v2 issue→verify
+  trace with the pinned CLI key and opaque catalog projection.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-001-production-v2-route-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 recurring-card retry boundary
 
 - **Preview/Test Mode:** The current isolated checkout rendered the canonical
