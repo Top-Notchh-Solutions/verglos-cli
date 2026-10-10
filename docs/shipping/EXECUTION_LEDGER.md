@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · TEAM-CLI-001 hosted activation recheck
+
+- **Verification:** Shared organization-policy tests **3/3**, CLI cache/fetch
+  tests **4/4**, and shared/CLI typechecks passed. Vercel environment names
+  were audited without exposing values.
+- **Finding:** No organization-policy private signer or trust-root activation
+  is configured in Preview or Production. Entitlement signing configuration is
+  a separate authority and does not satisfy this gate.
+- **Disposition:** Keep `TEAM-CLI-001` unchecked pending signer/trust-root
+  activation, policy-row reconciliation, and live tenant/repository-bound
+  fetch evidence. Assess the existing `STUDIO-CLI-001` hosted block next, then
+  `LIC-002`. Score remains **223/57/280 (79.6%)**.
+- **Boundary:** No Production, database, provider, entitlement, account, or
+  customer-data write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-hosted-activation-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PRO-008 invoice metadata projection advanced
 
 - **Implementation:** Web `cad9404` adds the `billing_invoices` metadata

@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · TEAM-CLI-001 hosted activation recheck
+
+Shared organization-policy tests passed **3/3**, CLI cache/fetch tests passed
+**4/4**, and shared/CLI typechecks passed. Vercel variable names were audited
+without revealing or changing values; no organization-policy signer/trust-root
+activation is configured in Preview or Production.
+
+`TEAM-CLI-001` remains open for signer/trust-root activation, hosted policy-row
+reconciliation, and a live tenant/repository-bound fetch. The next independent
+queue assessment is the existing `STUDIO-CLI-001` custody block, then `LIC-002`.
+No Production or database write occurred. Score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/team-cli-001-hosted-activation-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 Test Mode renewal qualification recheck
 
 The bounded Test Mode subscription inventory returned 42 rows: 5 active, 15

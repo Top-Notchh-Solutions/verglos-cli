@@ -26,6 +26,20 @@ Cards-only fail-closed release decision. The score remains **223/57/280
 Evidence:
 `docs/shipping/evidence/plan-web-014-testmode-renewal-qualification-recheck-2026-10-10.md`.
 
+### 2026-10-10 · TEAM-CLI-001 hosted activation recheck
+
+Shared organization-policy tests passed **3/3**, CLI cache/fetch tests passed
+**4/4**, and shared/CLI typechecks passed. A Vercel environment-name audit
+found no organization-policy signer/trust-root activation in Preview or
+Production; no values were revealed or changed. `TEAM-CLI-001` remains
+unchecked pending hosted signer/trust-root activation, policy-row
+reconciliation, and a live tenant/repository-bound fetch. The existing
+`STUDIO-CLI-001` custody block is assessed next, followed by `LIC-002`. Score
+remains **223/57/280 (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/team-cli-001-hosted-activation-recheck-2026-10-10.md`.
+
 ### 2026-10-10 · PLAN-CLI-001 revalidation and queue correction
 
 `PLAN-CLI-001` is already checked in the authoritative backlog. The current

@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · TEAM-CLI-001 hosted activation recheck
+
+The signed organization-policy implementation remains locally healthy: shared
+policy tests **3/3**, CLI cache/fetch tests **4/4**, and shared/CLI typechecks
+passed. A Vercel environment inventory by variable name found no
+`VERGLOS_ORGANIZATION_POLICY_PRIVATE_KEY` or equivalent organization-policy
+trust-root activation in Preview or Production; no values were revealed or
+changed.
+
+`TEAM-CLI-001` remains unchecked because signer/trust-root activation, hosted
+policy-row reconciliation, and live tenant/repository-bound fetch evidence are
+missing. The current Studio hosted-custody block is assessed next, followed by
+`LIC-002`. No Production, database, provider, entitlement, account, or
+customer-data write occurred. Score remains **223 checked / 57 unchecked / 280
+total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/team-cli-001-hosted-activation-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 Test Mode renewal qualification recheck
 
 The bounded Razorpay Test Mode subscription inventory returned 42 rows: 5

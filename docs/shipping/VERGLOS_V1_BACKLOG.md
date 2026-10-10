@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · TEAM-CLI-001 hosted activation recheck
+
+The organization-policy client remains locally qualified: shared policy tests
+**3/3**, CLI cache/fetch tests **4/4**, and shared/CLI typechecks passed. The
+Vercel environment-name audit found no organization-policy signer/trust-root
+activation in Preview or Production. `TEAM-CLI-001` remains unchecked pending
+the hosted signer, policy-row reconciliation, and live bound-fetch artifacts;
+the existing Studio custody block is next, followed by `LIC-002`. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/team-cli-001-hosted-activation-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 Test Mode renewal qualification recheck
 
 The bounded Razorpay Test Mode inventory returned 42 subscriptions: 5 active,
