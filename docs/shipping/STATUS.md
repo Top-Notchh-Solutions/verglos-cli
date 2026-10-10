@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-WEB-014 provider tokenization feature boundary
+
+The authenticated Razorpay Test Mode Subscriptions dashboard exposed no
+supported immediate charge, renewal, delivery replay, or out-of-order control.
+Its settings show ordinary Card support, while the recurring hosted attempts
+still stop at card tokenization/OTP. Razorpay's official saved-card
+documentation identifies tokenization as an on-demand account feature requiring
+Support activation. An ordinary captured Card payment therefore cannot be
+counted as recurring mandate acceptance.
+
+No provider setting, subscription, payment, webhook, database, entitlement, or
+Production state changed. `PLAN-WEB-014` and Gate 4 remain open pending the
+provider-supported tokenization/recurring-card fixture or delivery control and
+the resulting signed payment-to-ledger-to-license reconciliation. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-tokenization-feature-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 recurring Cards-only guard shipped to Production
 
 Web commit `9a3c32a` makes recurring subscription creation fail closed without

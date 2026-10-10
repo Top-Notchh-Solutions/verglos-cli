@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 provider tokenization feature boundary
+
+- **Observation:** Authenticated Razorpay Test Mode Subscriptions exposed no
+  supported charge-now, renewal, delivery replay, or out-of-order control.
+- **Provider requirement:** Official Razorpay documentation identifies saved-card
+  tokenization as an on-demand feature requiring Support activation.
+- **Boundary:** Ordinary Card capture is not recurring mandate authorization.
+  No provider setting, subscription, payment, webhook, database, entitlement,
+  or Production state changed.
+- **Disposition:** Keep `PLAN-WEB-014` and Gate 4 open pending provider
+  tokenization/recurring-card enablement or a supported renewal/delivery control,
+  followed by signed payment-to-ledger-to-license reconciliation.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-provider-tokenization-feature-boundary-2026-10-10.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-10 · PLAN-WEB-014 Cards-only recurring guard and Production rollout
 
 - **Implementation:** Web `9a3c32a` requires `card` for recurring subscription

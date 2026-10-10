@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Do not treat ordinary Card capture as recurring acceptance
+
+- **Decision:** Keep recurring billing fail-closed. A successful one-off Card
+  payment does not satisfy the recurring tokenization/mandate gate.
+- **Evidence:** Test Mode Subscriptions exposes no supported charge-now or
+  replay control; Razorpay's official documentation describes saved-card
+  tokenization as an on-demand Support-enabled feature.
+- **Required unblock:** Account owner/provider Support must provide the enabled
+  recurring-card fixture or supported renewal/delivery control, followed by
+  signed webhook and complete payment/ledger/license reconciliation.
+- **Boundary:** No undocumented provider call, guessed OTP, synthetic event,
+  direct row edit, entitlement grant, or Production write.
+
 ## 2026-10-10 · Keep recurring checkout Cards-only in Production
 
 - **Decision:** Recurring subscription creation and its hosted display must

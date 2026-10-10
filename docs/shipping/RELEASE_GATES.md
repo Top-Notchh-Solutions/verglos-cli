@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 provider tokenization boundary confirmed
+
+The authenticated Razorpay Test Mode Subscriptions dashboard exposes no
+supported immediate charge, renewal, delivery replay, or out-of-order control.
+Razorpay's official saved-card documentation identifies card tokenization as an
+on-demand Support-enabled feature. Ordinary Card capture therefore cannot be
+used as recurring mandate evidence. Keep Gate 4 and `PLAN-WEB-014` open until
+the account owner obtains the supported recurring-card fixture or provider
+control and the signed payment-to-ledger-to-license reconciliation is complete.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-tokenization-feature-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · Cards-only recurring guard Production rollout; Gate 4 remains open
 
 Web `9a3c32a` now fails closed for recurring subscription creation when Cards
