@@ -34,6 +34,18 @@ Date: 2026-10-10
   row, ledger row, entitlement/license change, account-access change, or
   Production write was observed.
 
+## Runtime configuration cross-check
+
+Razorpay's current official Web Checkout sample for showing only Cards uses a
+single `card` instrument, a single display block, a matching block sequence,
+and `preferences.show_default_blocks: false`. Verglos' helper implements that
+shape and `checkout-client.tsx` passes it to both the order and subscription
+Checkout constructors. This validates the code-side configuration contract;
+it does not substitute for opening the real application-hosted modal and
+completing a provider authorization.
+
+Source: <https://razorpay.com/docs/payments/payment-gateway/web-integration/standard/configure-payment-methods/sample-code>.
+
 ## Disposition
 
 This is concrete provider/browser activation evidence, not a payment success.
