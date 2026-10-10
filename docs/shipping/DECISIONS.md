@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Keep PLAN-CLI-003 open after authenticated Production probe
+
+- **Decision:** Accept the current authenticated Production probe as boundary
+  evidence only; do not check `PLAN-CLI-003`.
+- **Evidence:** Forged paid-plan selection remained Free, the account had zero
+  organizations, and forged organization/project/search/usage/receipt/policy/
+  release/SCM reads were bounded without a state-changing request.
+- **Missing:** An authorized isolated paid fixture plus complete public/private
+  list/search/export runtime evidence from the modified/untrusted CLI client.
+- **Production boundary:** Production is Cards-only and recurring billing is
+  fail-closed because plan IDs/total-count configuration are absent. The local
+  `.env.gates.testing` file was not deployed or printed.
+- **Score:** **223/57/280 (79.6%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-003-production-authenticated-readonly-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · Do not treat ordinary Card capture as recurring acceptance
 
 - **Decision:** Keep recurring billing fail-closed. A successful one-off Card

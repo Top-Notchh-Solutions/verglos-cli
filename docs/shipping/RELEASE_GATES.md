@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PLAN-CLI-003 authenticated Production boundary revalidation
+
+The existing authenticated Chrome session completed a 17-request read-only
+Production matrix. Forged Enterprise capability selection remained Free, the
+account returned zero organizations, and forged organization/project/search/
+usage/receipt/policy/release/SCM reads returned bounded denial or validation.
+No cookies, bearer tokens, response bodies, or customer identifiers were
+retained, and no state-changing request was issued.
+
+This advances the modified-client boundary only. The paid fixture and complete
+authorized public/private list/search/export runtime matrix are still absent,
+so `PLAN-CLI-003` remains unchecked. Production remains Cards-only with live
+credentials and no recurring plan IDs/total-count configuration; recurring
+billing stays fail-closed. The local `.env.gates.testing` file was not deployed
+or printed. Score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-003-production-authenticated-readonly-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 provider tokenization boundary confirmed
 
 The authenticated Razorpay Test Mode Subscriptions dashboard exposes no

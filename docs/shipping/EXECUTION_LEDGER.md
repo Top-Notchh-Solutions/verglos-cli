@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-CLI-003 authenticated Production boundary revalidation
+
+- **Probe:** The existing authenticated Chrome session ran 17 read-only
+  Production `GET` requests with browser credentials; no browser secret,
+  cookie, bearer token, response body, or customer identifier was retained.
+- **Result:** Forged Enterprise capability selection stayed Free; the account
+  returned zero organizations; forged organization/project/search/usage/
+  receipt/policy/release/SCM reads returned bounded denial or validation.
+- **Production shape:** Cards-only hosted method set; live provider key; no
+  recurring plan IDs or total-count setting, so subscription creation remains
+  fail-closed. `.env.gates.testing` stayed local and was not deployed.
+- **Boundary:** No Production, provider, payment, database, entitlement,
+  account, organization, or customer-data write occurred.
+- **Disposition:** Keep `PLAN-CLI-003` unchecked. A paid fixture and the full
+  authorized public/private list/search/export runtime matrix are still
+  required.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-003-production-authenticated-readonly-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 provider tokenization feature boundary
 
 - **Observation:** Authenticated Razorpay Test Mode Subscriptions exposed no
