@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Test Mode card activation boundary
+
+- **Mapped IDs:** `PLAN-WEB-014`, Gate 4; provider/browser authorization.
+- **Result:** Known Test Mode subscription harness reached the card form;
+  official test-card fixture entry plus bounded DOM and viewport activation did
+  not produce an OTP or terminal provider result. Provider and isolated DB
+  aggregates remained unchanged on read-only recheck.
+- **Acceptance boundary:** No provider authorization/capture, signed webhook,
+  payment/ledger/license reconciliation, or entitlement/access change is
+  claimed. The provider-supported activation artifact remains missing.
+- **Owner/next action:** Authorized payment-test operator with Razorpay Test
+  Mode operations; use a changed provider fixture or real operator activation/
+  OTP path, then reconcile read-only. Review by 2026-10-11 IST or fixture
+  change.
+- **Boundary:** No Production or manual database write; score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-testmode-card-activation-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · Cards-only Preview route boundary
 
 - **Mapped IDs:** `PLAN-WEB-014`, Gate 4; hosted checkout/catalog boundary.

@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-WEB-014 Test Mode card activation boundary
+
+The known isolated Test Mode subscription harness reached the card form after
+the official test-card fixture was entered. A bounded DOM activation and a
+real viewport-coordinate activation did not produce an OTP, success, failure,
+or terminal provider result. Read-only provider and isolated-database
+aggregates were unchanged. No entitlement or Production state changed.
+
+This is a real provider/browser boundary, not a payment success. The missing
+artifact is provider-supported recurring-card authorization plus signed
+delivery and exactly-once reconciliation. Owner: authorized payment-test
+operator with Razorpay Test Mode operations. Safe next action: change the
+provider-supported fixture or complete a real operator activation/OTP path;
+do not guess or edit rows. Gate 4 and `PLAN-WEB-014` remain open. Review by
+2026-10-11 IST or on provider-fixture change. Score remains **219/61/280
+(78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-testmode-card-activation-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · Cards-only Preview route boundary
 
 Web `445d8ed` is deployed to READY Preview `dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7`.

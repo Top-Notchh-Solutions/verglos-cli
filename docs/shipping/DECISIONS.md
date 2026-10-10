@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Keep Gate 4 open after Test Mode card activation boundary
+
+- **Decision:** Treat the known Test Mode card-form interaction as an
+  activation limitation, not a payment success. Keep Cards-only scope and
+  Production recurring billing fail-closed.
+- **Evidence:** The provider checkout remained on the card form after the
+  official test-card fixture and two bounded activation attempts; read-only
+  provider and isolated application aggregates were unchanged.
+- **Next owner/action:** Authorized payment-test operator with Razorpay Test
+  Mode operations must provide a changed supported subscription fixture or
+  complete a real operator activation/OTP path. Then reconcile the signed
+  webhook, payment, ledger, license, entitlement, and access state.
+- **Release decision:** `PLAN-WEB-014` and Gate 4 remain open. Do not guess
+  OTPs, edit rows, grant entitlements, or advance to another item/gate. Review
+  by 2026-10-11 IST or on provider-fixture change.
+- **Boundary:** No Production, manual database, entitlement, account, or
+  customer-data write; score remains **219/61/280 (78.2%)**.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-testmode-card-activation-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · Keep Cards-only route boundary qualified, not Gate 4 complete
 
 - **Decision:** Keep the release candidate's declared hosted method set at

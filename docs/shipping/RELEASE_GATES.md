@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 Test Mode card activation boundary
+
+The known isolated Test Mode subscription harness reached the card form. The
+official test-card fixture was entered, then one DOM activation and one
+viewport-coordinate activation were attempted. The provider stayed on the
+card form with no OTP, success, failure, or terminal event. Provider and
+isolated application aggregates remained unchanged on read-only recheck.
+
+Gate 4 remains open for provider-supported recurring-card authorization,
+signed delivery, exactly-once payment/ledger/license reconciliation, and the
+remaining lifecycle matrix. Owner: authorized payment-test operator with
+Razorpay Test Mode operations. Next action: changed supported fixture or real
+operator activation/OTP path. Review by 2026-10-11 IST or on fixture change.
+No Production or manual database write occurred; score remains
+**219/61/280 (78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-testmode-card-activation-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 Cards-only Preview route boundary
 
 The protected Preview create-order route on Web `445d8ed` returned HTTP 200

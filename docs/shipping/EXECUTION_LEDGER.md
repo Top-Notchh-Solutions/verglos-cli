@@ -1,5 +1,32 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 Test Mode card activation boundary
+
+- **Operation:** The known Test Mode Razorpay subscription harness was
+  activated in Chrome, the Cards tab was selected, and the official provider
+  test-card fixture was entered without recording card values. One DOM click
+  and one bounded viewport-coordinate activation were attempted; no OTP was
+  guessed or entered.
+- **Result:** The provider stayed on the card form. No OTP, success, failure,
+  or terminal checkout event appeared. Provider and isolated-database
+  read-only aggregates were unchanged: provider subscriptions 36
+  (`created:15`, `cancelled:16`, `active:5`), provider payments 35
+  (`created:4`, `failed:15`, `captured:13`, `refunded:3`), application
+  subscriptions `active:5`, `cancelled:8`, `pending:23`, active licenses `2`,
+  and completed webhook events `70`.
+- **Boundary:** No successful authorization/capture, signed webhook, payment,
+  ledger, entitlement, account-access, Production, or manual database state
+  change was observed.
+- **Disposition:** This is provider/browser activation evidence only. Owner:
+  authorized payment-test operator with Razorpay Test Mode operations. Missing
+  artifact: provider-supported recurring-card authorization and signed
+  delivery into isolated Preview. Safe next action: use a changed provider
+  fixture or real operator activation/OTP path; do not guess OTPs or edit rows.
+  Gate 4 and `PLAN-WEB-014` remain open. Review by 2026-10-11 IST or on
+  provider-fixture change.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-testmode-card-activation-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 Cards-only Preview route and hosted-display boundary
 
 - **Source:** Web `445d8ed`; branch `feat/preview-test-auth`; current Preview

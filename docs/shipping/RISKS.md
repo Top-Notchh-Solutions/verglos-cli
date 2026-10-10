@@ -1,5 +1,22 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-TESTMODE-CARD-ACTIVATION · 2026-10-10
+
+The isolated Test Mode subscription harness reached the card form, but the
+official test-card fixture and two bounded activations produced no OTP,
+success, failure, or terminal provider event. Provider and isolated database
+aggregates were unchanged on read-only recheck. Owner: authorized payment-test
+operator with Razorpay Test Mode operations. Missing artifact: a
+provider-supported recurring-card authorization and signed delivery into
+isolated Preview, followed by exact payment/ledger/license reconciliation.
+Safe next action: use a changed provider fixture or a real operator
+activation/OTP path; do not guess OTPs or edit rows. Review by 2026-10-11 IST
+or on provider-fixture change. Gate 4 and `PLAN-WEB-014` remain open; no
+Production write occurred.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-testmode-card-activation-boundary-2026-10-10.md`.
+
 ## R-PLAN-WEB-014-CARDS-ONLY-HOSTED-DISPLAY · 2026-10-10
 
 Web `445d8ed` now passes the server-owned Cards-only display configuration to
