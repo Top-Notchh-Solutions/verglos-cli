@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · TEAM-CLI-001 queue transition
+
+- **Disposition:** The implementation batch is complete, but production
+  signer/trust-root activation, hosted policy-row reconciliation, and live
+  tenant/repository-bound fetch evidence are missing.
+- **Decision:** Keep `TEAM-CLI-001` unchecked and park it. The first
+  dependency-ready unchecked item by backlog order is now `STUDIO-CLI-001`.
+- **Owner/next action:** Authorized policy/deployment operator must activate
+  the signer, reconcile hosted rows, and capture the signed fetch trace.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-hosted-activation-block-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 policy-client implementation batch
 
 - **Implementation:** Added the shared signed organization-policy contract,

@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · TEAM-CLI-001 parked on hosted activation
+
+The CLI policy client implementation is complete and locally qualified, but
+the production signer/trust-root activation, hosted policy-row reconciliation,
+and live tenant/repository-bound fetch are not available. `TEAM-CLI-001`
+therefore remains unchecked and is parked. The next dependency-ready backlog
+item by order is `STUDIO-CLI-001`; its hosted upload/custody and customer
+acceptance gates are separate.
+
+Evidence: `docs/shipping/evidence/team-cli-001-hosted-activation-block-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 policy-client implementation advanced
 
 The current private shipping branch now contains the signed organization-policy

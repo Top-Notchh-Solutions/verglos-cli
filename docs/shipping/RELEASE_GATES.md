@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · TEAM-CLI-001 parked; STUDIO-CLI-001 selected
+
+The Team CLI policy client is implemented and locally tested, but its hosted
+signer/trust-root and tenant-bound fetch artifacts are still missing. Keep
+`TEAM-CLI-001` open. The strict top-to-bottom queue now selects
+`STUDIO-CLI-001` for assessment; hosted upload/custody and customer acceptance
+must be proven independently.
+
+Evidence: `docs/shipping/evidence/team-cli-001-hosted-activation-block-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 implementation boundary
 
 The CLI organization-policy client is now present on the current shipping

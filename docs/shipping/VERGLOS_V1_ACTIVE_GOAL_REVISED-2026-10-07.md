@@ -18,11 +18,12 @@ The current CLI branch now contains the signed organization-policy envelope,
 bounded atomic cache, authenticated fetch, and `verglos policy organization
 fetch` command. Shared policy tests pass 3/3, CLI cache/fetch tests pass 4/4,
 and shared/CLI typecheck plus CLI build pass. This is implementation progress,
-not acceptance: `TEAM-CLI-001` remains the single active unchecked item until
+not acceptance: `TEAM-CLI-001` remains unchecked and is parked until
 production signer/trust-root activation, hosted policy-row reconciliation, and
-a live tenant/repository-bound fetch are evidenced. No extra input is required
-from the founder for this code batch, and the supplied gate-test environment is
-not used as Production evidence.
+a live tenant/repository-bound fetch are evidenced. The strict queue now
+selects `STUDIO-CLI-001` for assessment. No extra input is required from the
+founder for this code batch, and the supplied gate-test environment is not used
+as Production evidence.
 
 Evidence:
 `docs/shipping/evidence/team-cli-001-policy-client-2026-10-10.md`.
@@ -146,8 +147,9 @@ The execution queue is strict:
 
 1. Keep exactly one active backlog ID. `PLAN-CLI-001`, `PLAN-CLI-002`,
    `PLAN-CLI-004`, and `PLAN-WEB-011` are now checked. `PLAN-WEB-012` is
-   parked pending provider lifecycle artifacts; the current dependency-ready
-   ID is `TEAM-CLI-001`;
+   parked pending provider lifecycle artifacts; `TEAM-CLI-001` is now parked
+   pending hosted signer/fetch activation, and the current dependency-ready ID
+   is `STUDIO-CLI-001`;
    `PLAN-WEB-014` and `HUNT-008` remain parked and unchecked.
 2. Finish or genuinely document the active ID's remaining acceptance work. If
    it is genuinely blocked, commit the complete blocked record, park it
@@ -203,13 +205,27 @@ Evidence:
 `PLAN-WEB-012` remains unchecked because provider-generated renewal,
 failure/expiry, replay/out-of-order, timeout/retry, and exactly-once lifecycle
 evidence are still missing; local or synthetic webhook fixtures cannot replace
-that artifact. The next dependency-ready independent track is
-`TEAM-CLI-001`. `PLAN-CLI-004` is checked at **223 checked / 57 unchecked /
+that artifact. The next dependency-ready independent track was `TEAM-CLI-001`;
+its implementation is complete but hosted activation is parked. The next
+dependency-ready item is `STUDIO-CLI-001`. `PLAN-CLI-004` is checked at **223 checked / 57 unchecked /
 280 total (79.6%)** after compatibility fixtures, legacy activation fallback,
 hosted matrix evidence, and the current v2 issue→verify trace were reconciled.
 R-041 and protected release activation remain external gates.
 Evidence:
 `docs/shipping/evidence/plan-cli-004-compatibility-accepted-2026-10-10.md`.
+
+### 2026-10-10 execution update · TEAM-CLI-001 parked, Studio selected
+
+The signed organization-policy client, cache, fetch command, and local tests
+are complete. Acceptance remains blocked by production signer/trust-root
+activation, hosted policy-row reconciliation, and live tenant/repository fetch
+evidence. The item remains unchecked. The queue therefore advances to
+`STUDIO-CLI-001`, whose exact-preview projection is already implemented but
+still needs hosted upload/custody, independent redaction proof, and Studio
+recipient/customer acceptance.
+
+Evidence:
+`docs/shipping/evidence/team-cli-001-hosted-activation-block-2026-10-10.md`.
 
 ### 2026-10-10 execution amendment · blocked-item queue rule
 
