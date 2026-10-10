@@ -129,7 +129,8 @@ forward-fix, and post-write verification.
 
 The execution queue is strict:
 
-1. Keep exactly one active backlog ID. The current ID is `PLAN-CLI-001`;
+1. Keep exactly one active backlog ID. `PLAN-CLI-001` and `PLAN-CLI-002` are
+   now checked. The current dependency-ready ID is `PLAN-WEB-011`;
    `PLAN-WEB-014` and `HUNT-008` remain parked and unchecked.
 2. Finish or genuinely document the active ID's remaining acceptance work. If
    it is genuinely blocked, commit the complete blocked record, park it
@@ -149,6 +150,25 @@ The execution queue is strict:
    artifact, expiry/review date, and next unblock action while keeping the
    checkbox open. Do not silently skip the item or claim a lower-environment
    result as Production evidence.
+
+### 2026-10-10 execution update · PLAN-CLI-002 accepted and queue advanced
+
+`PLAN-CLI-002` is checked at **221 checked / 59 unchecked / 280 total
+(78.9%)**. The CLI now reports effective plan, authority source,
+stale/offline-grace state, opaque capability count, catalog version, bounded
+allowances, and verified-token expiry through `whoami` in human and
+machine-safe output. The exact local verification and hosted-evidence
+boundary are recorded in
+`docs/shipping/evidence/plan-cli-002-effective-capability-ux-2026-10-10.md`.
+
+The queue now returns to the first dependency-ready Web item,
+`PLAN-WEB-011`, whose implementation is present but whose whole acceptance
+still requires signed provider delivery and payment reconciliation. The
+earlier `HUNT-008` item remains parked because trusted/licensed recipe
+provenance and a real independent AppSec review cannot be manufactured by
+local code or by this agent. No Production write is implied by this queue
+transition; controlled writes remain bounded by the preflight, backup,
+reconciliation, and rollback rules above.
 
 ### 2026-10-10 execution amendment · blocked-item queue rule
 

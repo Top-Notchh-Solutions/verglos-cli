@@ -332,9 +332,15 @@ Each unresolved class below points at its governing bucket. Resolving a bucket m
 
 ## Plan chain — chained off HOSTED-002/003 (bucket A) and production signer key
 
+### 2026-10-10 update
+
+`PLAN-CLI-001` and `PLAN-CLI-002` are now checked. The current score is
+**221 checked / 59 unchecked / 280 total (78.9%)**. `PLAN-CLI-002` evidence is
+`docs/shipping/evidence/plan-cli-002-effective-capability-ux-2026-10-10.md`.
+
 - **PLAN-WEB-003** — signed entitlement token vNext is operationally qualified against the provisioned successor signer and corrected CLI public pin (`7dcc74b`); the remaining downstream check is a real activation/token issue→verify integration trace, not another key-pin change.
-- **PLAN-CLI-001** — capability/allowance consumption and bounded offline fallback are implemented (`7edb4a9`, corrected pin `ac74fb2`). It remains unchecked until the deployed activation/token issue→verify integration trace is captured; local unit/process evidence cannot substitute for that hosted boundary.
-- **PLAN-CLI-002** — effective-capability UX blocks on PLAN-CLI-001.
+- **PLAN-CLI-001** — capability/allowance consumption and bounded offline fallback are implemented (`7edb4a9`, corrected pin `ac74fb2`). The isolated Preview activation/token issue→verify integration trace is now recorded and the item is checked; Gate 4 remains separate.
+- **PLAN-CLI-002** — effective-capability UX is checked after the current-plan/authority/stale/allowance/expiry reporting and complete local verification were recorded. See the dated evidence above.
 - **PLAN-CLI-003** — modified/untrusted CLI test client blocks on PLAN-WEB-004-012 (bucket A + B chain).
 - **PLAN-CLI-004** — plan/catalog contract fixtures block on PLAN-WEB-002/003 + PLAN-CLI-001.
 - **PLAN-WEB-011 / PLAN-WEB-012** — code qualification is complete on Web PR #49 head `b103d9e`: catalog-only signed snapshots plus an immutable serialized lifecycle/refund ledger pass local and hosted verification. Acceptance remains blocked on an approved verified INR catalog price, production migration `0018` backup/restore/rollback qualification and application, accessible production configuration, and live Razorpay reconciliation. No production write is authorized by the code result.
