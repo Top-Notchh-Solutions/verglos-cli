@@ -1,5 +1,25 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 official recurring-card fixture boundary
+
+The isolated Preview route created a canonical Pro monthly Razorpay Test Mode
+subscription. The official domestic Visa fixture reached the provider's
+recurring card-save/mandate step, but the supported `Skip OTP` control ended
+with Razorpay's terminal response that the card was not eligible for recurring
+payments. Read-only provider state showed `created`, `paid_count=0`, and no
+linked payment; the exact Test Mode subscription was cancelled with HTTP 200.
+
+This confirms the provider-side boundary but does not pass Gate 4 or
+`PLAN-WEB-014`. The remaining acceptance artifact is a provider-supported
+recurring-card/tokenization fixture or renewal/delivery control, followed by
+signed payment-to-ledger-to-license reconciliation and the outstanding
+renewal/failure/expiry/refund replay/order/out-of-order/timeout/retry and
+exactly-once cases. Production remains fail-closed. Score remains **223/57/280
+(79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-official-recurring-card-fixture-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · Razorpay gates-testing inventory recheck
 
 The isolated `.env.gates.testing` values passed a read-only Razorpay Test Mode

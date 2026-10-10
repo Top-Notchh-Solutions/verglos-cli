@@ -12,6 +12,26 @@ unchecked / 280 total (79.6%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · official recurring-card fixture boundary
+
+The protected isolated Preview route created a canonical Pro monthly Razorpay
+Test Mode subscription. Razorpay's official domestic Visa fixture reached the
+hosted recurring card-save/mandate step, but the supported `Skip OTP` control
+ended with the provider result that the card was not eligible for recurring
+payments. Read-only provider state showed `created`, `paid_count=0`, and no
+linked payment; the exact Test Mode subscription was then cancelled with HTTP
+200. No Production or application-state write occurred.
+
+This strengthens the existing provider block but does not close `PLAN-WEB-014`
+or Gate 4. The active missing artifact is still a provider-supported
+recurring-card/tokenization fixture or renewal/delivery control followed by
+signed payment-to-ledger-to-license reconciliation. Keep the checkbox open,
+do not guess OTPs or synthesize provider events, and recompute the live score
+as **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-official-recurring-card-fixture-boundary-2026-10-10.md`.
+
 ### 2026-10-10 · gates-testing inventory recheck
 
 The isolated Web `.env.gates.testing` values were used for a read-only

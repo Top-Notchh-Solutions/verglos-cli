@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · PLAN-WEB-014 official recurring-card fixture boundary
+
+The isolated Preview route created a canonical Pro monthly Razorpay Test Mode
+subscription. Razorpay's official domestic Visa fixture reached the hosted
+card-saving/mandate step, but the provider returned **“This card is not
+eligible for recurring payments”** after its supported `Skip OTP` control. A
+read-only provider query showed `created`, `paid_count=0`, and no linked
+payment; the exact Test Mode subscription was then cancelled with HTTP 200.
+This confirms the provider boundary and cleanup path but does not close
+`PLAN-WEB-014` or Gate 4. Score remains **223 checked / 57 unchecked / 280
+total (79.6%)**; no checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-official-recurring-card-fixture-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · QUAL-WEB-006 Production route/performance qualification
 
 The authenticated Production account trace measured LCP **2,327 ms** and CLS

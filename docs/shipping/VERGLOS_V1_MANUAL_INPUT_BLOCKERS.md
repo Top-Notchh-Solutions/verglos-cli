@@ -1,5 +1,22 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-10 · Official recurring-card fixture
+
+The protected isolated Preview route created a canonical Pro monthly Test Mode
+subscription. Razorpay's official domestic Visa fixture reached the recurring
+card-save/mandate step, but the supported `Skip OTP` control returned that the
+card was not eligible for recurring payments. The provider reported
+`created`/`paid_count=0` with no linked payment; the exact isolated
+subscription was cancelled with HTTP 200.
+
+The provider-supported recurring-card/tokenization fixture or renewal/delivery
+control remains the only missing artifact for the next Gate 4 attempt. Keep
+`PLAN-WEB-014` and Gate 4 open; no OTP guessing, undocumented endpoint,
+synthetic webhook, manual row edit, or Production billing operation is
+permitted. Review: 2026-10-17 IST. Score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-official-recurring-card-fixture-boundary-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · gates-testing inventory
 
 The isolated `.env.gates.testing` values were parsed without recording any

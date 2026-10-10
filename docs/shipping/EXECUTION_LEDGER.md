@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 official recurring-card fixture boundary
+
+- **Isolation:** The protected Preview deployment used the isolated Test Mode
+  database and Cards-only application catalog. Production was not contacted
+  for a state-changing operation.
+- **Create:** The authenticated Preview route created one canonical Pro
+  monthly Test Mode subscription and returned `testMode=true` with catalog
+  version `2026-10-02.0`.
+- **Provider result:** Razorpay's official domestic Visa fixture reached the
+  recurring card-save/mandate step. The supported `Skip OTP` control led to
+  the provider terminal result that the card was not eligible for recurring
+  payments.
+- **Reconciliation:** Read-only provider state was `created` with
+  `paid_count=0`; the payment inventory had no linked payment. The exact
+  isolated subscription was cancelled through the documented provider
+  endpoint and returned HTTP 200 with `cancelled`.
+- **Disposition:** Keep `PLAN-WEB-014` and Gate 4 open. The missing artifact
+  is provider-supported recurring-card/tokenization or renewal/delivery
+  control followed by signed payment-to-ledger-to-license evidence. No OTP was
+  guessed, no synthetic webhook was posted, and no application row was edited.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-official-recurring-card-fixture-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · Razorpay gates-testing read-only inventory
 
 - **Input:** The isolated Web `.env.gates.testing` file was parsed locally;
