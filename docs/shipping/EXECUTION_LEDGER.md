@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 current protected Preview browser revalidation
+
+- **Preview browser:** The current READY Preview deployment for Web `445d8ed`
+  was opened through the existing authenticated Chrome DevTools session with
+  Vercel protection left enabled. Checkout rendered Razorpay Test Mode, the
+  canonical Pro offer, and Cards as the only hosted method. No UPI/QR,
+  Netbanking, Wallet, EMI, Pay Later, or eMandate label appeared.
+- **Stale-target correction:** The earlier four-method browser result belonged
+  to an older authorized webhook target and was not treated as current
+  acceptance.
+- **Local support:** Disposable Docker PostgreSQL payment webhook integration
+  passed **5/5**; the combined route/webhook/lifecycle suite passed **33/33**.
+- **Boundary:** These results cover current browser rendering and code-side
+  reconciliation only. Provider-generated renewal and provider replay/out-of-
+  order evidence remain open. No synthetic provider event, manual row edit,
+  Production payment/database write, entitlement write, or customer-data
+  mutation occurred.
+- **Disposition:** No checkbox changed; `PLAN-WEB-014` and Gate 4 remain open;
+  score remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-current-preview-browser-acceptance-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 Production Cards-only revalidation
 
 - **Read-only result:** Public Production checkout returned HTTP 200 with

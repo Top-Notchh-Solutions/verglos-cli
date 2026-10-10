@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` current protected Preview browser revalidation
+
+The current READY Preview deployment for Web `445d8ed` was opened through the
+existing authenticated Chrome DevTools session with Vercel protection left
+enabled. The browser-rendered checkout showed Razorpay Test Mode, the
+canonical Pro offer, and exactly one hosted method: Cards. No UPI/QR,
+Netbanking, Wallet, EMI, Pay Later, or eMandate label was present. The older
+four-method page was confirmed to be a stale webhook target, not the current
+deployment. No checkbox changed; score remains **219 checked / 61 unchecked /
+280 total (78.2%)**.
+
+The disposable Docker PostgreSQL run passed the payment webhook integration
+suite **5/5** and the combined route/webhook/lifecycle suite **33/33**. This
+supports code-side replay/idempotency, refund, failure, invoice, expiry,
+lifecycle, and retry behavior but does not replace provider-generated renewal
+or provider replay/out-of-order evidence.
+
+Evidence: `docs/shipping/evidence/plan-web-014-current-preview-browser-acceptance-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` current Preview Cards-only revalidation
 
 The current READY Preview deployment for Web `445d8ed` was inspected with

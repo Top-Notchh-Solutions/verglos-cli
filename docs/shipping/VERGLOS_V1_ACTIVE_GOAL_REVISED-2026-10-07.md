@@ -12,6 +12,24 @@ unchecked / 280 total (78.2%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · current protected Preview browser revalidation
+
+The current READY Preview deployment for Web `445d8ed` was opened through the
+existing authenticated Chrome DevTools session with Vercel protection left
+enabled. The browser-rendered checkout showed Razorpay Test Mode, the
+canonical Pro offer, and exactly one hosted method: Cards. No UPI/QR,
+Netbanking, Wallet, EMI, Pay Later, or eMandate label was present. The older
+four-method page was confirmed to be a stale webhook target, not the current
+deployment. Evidence:
+`docs/shipping/evidence/plan-web-014-current-preview-browser-acceptance-2026-10-10.md`.
+
+The disposable Docker PostgreSQL run passed the payment webhook integration
+suite **5/5** and the combined route/webhook/lifecycle suite **33/33**. This
+supports code-side replay/idempotency, refund, failure, invoice, expiry,
+lifecycle, and retry behavior. It does not replace provider-generated renewal
+or provider replay/out-of-order evidence. `PLAN-WEB-014`, Gate 4, and the
+score remain open at **219 checked / 61 unchecked / 280 total (78.2%)**.
+
 The active item is `PLAN-WEB-014`. It remains the only implementation and
 acceptance workstream until it is accepted with complete evidence or recorded
 as genuinely blocked with an owner, missing artifact, review/expiry date, and
