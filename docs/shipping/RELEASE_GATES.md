@@ -2565,3 +2565,19 @@ the isolated Preview webhook. This is not a synthetic event and must retain
 the original Razorpay signature. Gate 4 and `PLAN-WEB-014` remain open; no
 checkbox changed. Evidence:
 `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
+
+## PLAN-WEB-014 Preview ingress and pause/resume · 2026-10-10
+
+The isolated Preview webhook protection boundary is now reachable without the
+former 401; the fresh automation bypass is retained only by the provider and
+Vercel configuration and is omitted from evidence. A read-only GET returned
+405 at the application route. One exact Test Mode subscription was paused and
+resumed through Razorpay, producing one completed signed event of each type
+and returning the isolated application subscription to `active`.
+
+The hosted recurring-card attempt remains unqualified. No authorization,
+capture, entitlement, or license grant was observed. This evidence advances
+Gate 4 ingress/lifecycle coverage but does not pass Gate 4 or close the
+backlog item. Production remains fail-closed for billing state.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.

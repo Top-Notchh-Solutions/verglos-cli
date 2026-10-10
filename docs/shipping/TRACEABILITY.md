@@ -4139,4 +4139,20 @@ open. No checkbox changed. See
   selecting only the isolated Preview webhook, then reconcile read-only.
 - **Disposition:** Requirement remains open; no checkbox changed.
 - **Evidence:**
-  `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
+`docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
+
+## PLAN-WEB-014 · Preview signed ingress and pause/resume · 2026-10-10
+
+- **Requirement:** A provider-generated lifecycle event must traverse the
+  protected isolated Preview webhook and update the matching subscription
+  without synthetic payloads or direct database edits.
+- **Evidence:** The Preview bypass repair made the route reachable; the
+  provider pause/resume pair produced one completed `subscription.paused` and
+  one completed `subscription.resumed` event, and the application subscription
+  returned to `active`.
+- **Remaining proof:** Canonical recurring-card authorization/capture, one
+  payment/ledger/license projection, replay idempotency for that payment, and
+  the remaining failure/refund/renewal matrix.
+- **Disposition:** Gate 4 and `PLAN-WEB-014` remain open; no checkbox changed.
+- **Evidence file:**
+  `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.

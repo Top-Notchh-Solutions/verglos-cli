@@ -5396,3 +5396,28 @@ Gate 4 and `PLAN-WEB-014` remain open. Backlog remains **219 checked / 61
 unchecked / 280 total (78.2%)**.
 
 Evidence: `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
+
+## 2026-10-10 · Preview webhook ingress repaired; pause/resume qualified
+
+The isolated Preview webhook's stale protection bypass was replaced only for
+the Test Mode Preview target. A read-only request returned HTTP 405 instead of
+the former protection 401. One matched Test Mode subscription was paused and
+resumed through Razorpay's documented APIs; one signed `subscription.paused`
+and one signed `subscription.resumed` event completed in Preview, and the app
+row returned to `active`.
+
+The hosted card attempt still did not authorize/capture. The provider rejected
+the first general test fixture as not eligible for recurring payments; the
+official subscription fixture remained in tokenization/OTP flow. No OTP was
+guessed and no entitlement or license was asserted. A provider
+`payment.failed` event completed, with read-only aggregates of 3 captured, 4
+failed, 1 partially refunded, 3 refunded, 2 active licenses, and 75 completed
+webhook events.
+
+This is Gate 4 progress only. `PLAN-WEB-014` remains open for recurring-card
+authorization/capture and exactly-once payment/ledger/license reconciliation.
+No Production state or Production webhook changed. Backlog remains **219
+checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.

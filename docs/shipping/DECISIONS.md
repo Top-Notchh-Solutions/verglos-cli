@@ -1998,4 +1998,22 @@ each observed method has lifecycle and reconciliation evidence.
 - **Boundary:** No provider write was accepted and no application or
   Production state changed. Gate 4 and `PLAN-WEB-014` remain open.
 - **Evidence:**
-  `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
+`docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
+
+## Preview ingress repaired; recurring-card acceptance remains open · 2026-10-10
+
+- **Decision:** Replace the stale protection bypass only on the isolated Test
+  Mode Preview webhook, then qualify the route with a provider-controlled
+  pause/resume pair. Keep Production untouched and fail-closed.
+- **Result:** The endpoint reached the application route, both signed lifecycle
+  events completed exactly once, and the application subscription returned to
+  `active`. A bounded hosted-card attempt still did not authorize/capture; the
+  provider remained at recurring-card eligibility/tokenization/OTP.
+- **Boundary:** No OTP was guessed, no synthetic webhook or direct database
+  edit was used, and no Production payment, database, entitlement, or account
+  write occurred.
+- **Disposition:** This is qualified ingress/lifecycle progress, not Gate 4
+  acceptance. Keep `PLAN-WEB-014` open until recurring-card authorization/
+  capture and payment/ledger/license reconciliation are evidenced.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.

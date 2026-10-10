@@ -1642,3 +1642,14 @@ operator. Until replay or a changed provider-supported fixture is completed,
 Gate 4 and `PLAN-WEB-014` remain open and Production billing remains
 fail-closed. No provider, database, entitlement, or Production write was
 accepted.
+
+R-041 update (2026-10-10, Preview ingress repair and pause/resume): The stale
+Preview protection bypass was replaced only on the isolated Test Mode webhook;
+a read-only probe reached the application route with HTTP 405. A provider
+pause/resume pair then delivered one completed signed event of each type and
+returned the application subscription to `active`. The hosted recurring-card
+attempt still stopped at provider eligibility/tokenization/OTP and produced no
+capture or entitlement. Gate 4 remains open for recurring-card
+authorization/capture and full payment/ledger/license reconciliation. No
+Production webhook, billing, database, migration, or entitlement state was
+changed.

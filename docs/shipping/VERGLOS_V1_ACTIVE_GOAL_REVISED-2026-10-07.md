@@ -1705,3 +1705,37 @@ The private tracker’s backlog, status, execution ledger, traceability,
 decisions, risks, release gates, evidence, and this goal are the source of
 truth for the score and acceptance state. Keep this goal active until the
 completion standard is actually satisfied.
+
+### 2026-10-10 execution checkpoint — Preview ingress repaired; recurring-card proof remains
+
+The authenticated Razorpay Test Mode Dashboard was used to replace the stale
+automation bypass only on the isolated Preview webhook. A read-only request to
+that Preview endpoint returned HTTP 405, proving the request reached Verglos'
+webhook route rather than the Vercel protection wall. Production was not
+selected or changed.
+
+One exact active Test Mode Pro/monthly subscription matched one isolated
+`billing_subscriptions` row. The documented provider pause operation returned
+HTTP 200 and produced one completed signed `subscription.paused` event; the
+documented resume operation returned HTTP 200 and produced one completed signed
+`subscription.resumed` event. The application row returned to `active`.
+
+The bounded recurring-card attempt still did not authorize or capture. The
+initial general test fixture was rejected as not eligible for recurring
+payments; the official subscription fixture remained in provider
+tokenization/OTP flow. No OTP was guessed or entered. One provider
+`payment.failed` event completed, but no new captured payment, ledger grant,
+entitlement, or license was observed. Read-only aggregates are captured 3,
+failed 4, partially refunded 1, refunded 3, active licenses 2, and 75
+completed webhook events.
+
+This is Gate 4 ingress/lifecycle progress only. `PLAN-WEB-014` and Gate 4
+remain open for recurring-card authorization/capture and complete
+payment/ledger/license reconciliation. The authenticated Test Mode
+Subscriptions detail page exposed no provider `charge now` control, so no
+additional provider action was taken through an undocumented endpoint. The
+score remains **219 checked / 61 unchecked / 280 total / 78.2%**; no checkbox
+changed.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.

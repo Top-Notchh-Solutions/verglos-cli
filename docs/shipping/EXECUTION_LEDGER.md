@@ -7216,3 +7216,32 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
 - **Disposition:** Gate 4 and `PLAN-WEB-014` remain open; no checkbox changed.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
+
+## 2026-10-10 · Gate 4 Preview webhook bypass and pause/resume qualification
+
+- **Boundary repair:** The selected isolated Preview webhook had provider logs
+  returning HTTP 401. A fresh Vercel automation bypass was applied only to the
+  Test Mode Preview webhook; a read-only request to the resulting endpoint
+  returned HTTP 405, proving the request reached the application route. No
+  Production webhook or protection setting changed.
+- **Provider lifecycle:** One exact active Test Mode Pro/monthly subscription
+  was paused with the documented `pause_at: "now"` request and resumed with
+  `resume_at: "now"`; both provider operations returned HTTP 200. One signed
+  `subscription.paused` and one signed `subscription.resumed` event completed
+  in isolated Preview, and the application row returned to `active`.
+- **Card result:** The bounded hosted-card attempt did not authorize/capture.
+  The initial general fixture was rejected as not recurring-eligible; the
+  official subscription fixture remained in provider tokenization/OTP flow.
+  No OTP was guessed, and no entitlement/license was asserted.
+- **Reconciliation:** The only new payment-side state was one completed
+  provider `payment.failed` event. Read-only aggregates were captured 3,
+  failed 4, partially refunded 1, refunded 3, active licenses 2, and 75
+  completed webhook events. No Production/provider/database/migration/
+  entitlement/customer write occurred outside the isolated Test Mode flow.
+- **Disposition:** This qualifies signed Preview ingress and reversible
+  provider lifecycle handling but does not close Gate 4 or PLAN-WEB-014. The
+  canonical recurring-card authorization/capture and payment/ledger/license
+  reconciliation remain open. No checkbox changed; score remains **219 checked
+  / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
