@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · whole-backlog closeability audit
+
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Completed current slice:** the current Preview Razorpay Test Mode webhook
+  is enabled with its secret present and 20 selected lifecycle events; the
+  current Preview and Production checkout surfaces are Cards-only.
+- **Remote state:** the current Production browser account is Free with no
+  organization fixture; the authenticated GitHub organization has no installed
+  Verglos App.
+- **Disposition:** no unchecked item had all of its acceptance artifacts. The
+  remaining items require provider lifecycle reconciliation, paid/org fixtures,
+  live SCM installation, legal/AppSec sign-off, trusted release operations, or
+  final acceptance artifacts. No checkbox was changed.
+- **Evidence:**
+  `docs/shipping/evidence/backlog-closeability-audit-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 current Preview webhook configuration
 
 - **Provider:** Razorpay Test Mode reports a new enabled webhook for the
