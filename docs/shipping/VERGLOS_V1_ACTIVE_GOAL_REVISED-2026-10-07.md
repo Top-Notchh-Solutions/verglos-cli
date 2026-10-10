@@ -32,15 +32,18 @@ keeps the isolated Preview fixture-auth seam available outside an explicit
 Production runtime while requiring the explicit auth-enabled and isolated-
 database markers, and it constrains the hosted Razorpay display configuration
 to the declared Cards-only catalog instead of allowing provider defaults to
-reopen unqualified methods. The current Preview rollout
-`dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5` is READY. The current Production code
+reopen unqualified methods. The latest Preview hosted-display deployment
+`dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5` was READY. The latest protected Preview
+route-check deployment is `dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7`; its checkout
+route returned HTTP 200 with `testMode:true`, catalog version `2026-10-02.0`,
+and the server-declared method set `card` only. The current Production code
 rollout `dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw` is READY and aliased to
-`https://verglos.com`; its public checkout is configured for Cards only. This
-rollout is fail-closed code/configuration verification only: it did not create
-a Production payment, subscription, database row, migration, entitlement,
-account, or customer-data mutation. Preview branch requalification remains a
-separate step and must use the isolated database, Test Mode provider
-configuration, and private fixture evidence.
+`https://verglos.com`; its public checkout is configured for Cards only. These
+are fail-closed code/configuration and isolated-route checks only: they did not
+create a Production payment, subscription, database row, migration,
+entitlement, account, or customer-data mutation. Preview branch
+requalification remains a separate step and must use the isolated database,
+Test Mode provider configuration, and private fixture evidence.
 
 The current gate state is: Gates 1–3 are complete for isolated
 qualification; Gate 4 is partially qualified but remains open until the
@@ -92,9 +95,40 @@ authorization/capture, signed webhook, exactly one payment row, exactly one
 ledger entry, correct tenant binding, one Pro entitlement/license, replay
 idempotency, and the required failure/cancellation/refund/renewal state
 transitions. Until that chain is evidenced, `PLAN-WEB-014`, Gate 4, and the
-backlog score remain open. A provider rejection of a recurring test card is a
-real blocker to record and repair; it is not a reason to substitute synthetic
-events or manually edit entitlement rows.
+backlog score remain open. The latest route check proved canonical Test Mode
+order creation only; it did not prove a paid subscription, signed webhook,
+payment/ledger/license reconciliation, or account access. A previous provider
+OTP/recurring-card attempt was rejected, and automated activation of a fresh
+hosted provider frame was not usable. Resolve this provider-activation
+boundary or formally disposition it with a real owner and release decision;
+do not substitute synthetic events or manually edit entitlement rows.
+
+### Entitlement evidence definition — required for Gate 4 acceptance
+
+For this goal, entitlement evidence means one private, redacted record that
+joins the same checkout/provider correlation across the complete path:
+
+1. Verglos selects the canonical plan, amount, currency, cadence, catalog
+   version, user, and tenant or organization on the server.
+2. Razorpay Test Mode authorizes and captures the recurring card payment.
+3. The isolated Preview webhook verifies the provider signature and accepts
+   the event exactly once.
+4. The database contains exactly one corresponding payment row and one ledger
+   row, both bound to the correct user and tenant or organization.
+5. One correct Pro entitlement/license is created or extended, and the
+   account-access decision matches that entitlement.
+6. A duplicate or replayed event is harmless, an out-of-order event is
+   rejected or contained, and no second payment, ledger row, or entitlement
+   appears.
+7. Failure, cancellation, refund, expiry, timeout, and retry do not grant
+   unauthorized access; renewal extends the existing entitlement instead of
+   creating a duplicate.
+8. Read-only reconciliation shows provider, webhook, payment, ledger,
+   entitlement, and access state agree. No direct entitlement-row edit is
+   allowed as evidence.
+
+The latest batch added protected Preview order-route evidence only. It did not
+add this entitlement chain, so Gate 4 and `PLAN-WEB-014` remain open.
 
 ## 1. Objective
 
@@ -331,14 +365,17 @@ modal could still show provider-default UPI and eMandate tabs. Web commit
 Checkout paths. Focused checkout tests passed **12/12**, Web typecheck
 passed, the Preview build passed, and the Production build passed.
 
-The batch was deployed to the READY Preview deployment
+The batch was deployed to the READY Preview hosted-display deployment
 `dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5` and the READY Production deployment
 `dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw`, aliased to `https://verglos.com`.
-Production verification remains fail-closed and read-only for billing state:
-no Production payment, subscription, database, migration, entitlement,
-account, or customer-data write occurred. The isolated Preview subscription
-route and database remain the only place where Test Mode lifecycle writes may
-be exercised.
+Protected Preview route qualification was then checked on
+`dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7`: the order route returned HTTP 200,
+`testMode:true`, catalog `2026-10-02.0`, and `card` only. Production
+verification remains fail-closed and read-only for billing state: no
+Production payment, subscription, database, migration, entitlement, account,
+or customer-data write occurred. The isolated Preview subscription route and
+database remain the only place where Test Mode lifecycle writes may be
+exercised.
 
 This repairs the hosted-method display boundary; it does not close
 `PLAN-WEB-014` or Gate 4. The remaining active-item proof is the complete
@@ -349,7 +386,9 @@ renewal, expiry, refund, timeout, and out-of-order cases. The live score
 therefore remains **219 checked / 61 unchecked / 280 total / 78.2%** until
 that evidence is complete.
 
-The private evidence record for this batch must include the redacted commit,
+The private evidence record for this batch is
+`docs/shipping/evidence/plan-web-014-cards-only-preview-route-and-hosted-display-2026-10-10.md`.
+It must include the redacted commit,
 deployment IDs, test results, hosted-method observation, database write
 boundary, and remaining limitations. It must never include provider secrets,
 full provider IDs, database URLs, cookies, authorization headers, or raw
@@ -494,9 +533,11 @@ Current source checkpoints:
   Neither the migration-bearing qualification work nor the lifecycle work is a
   Production activation candidate until the applicable migration, recovery,
   reconciliation, and rollback evidence is current.
-- The latest isolated Preview deployment for the current qualification branch
-  is `dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5`, READY, with the isolated Preview
-  configuration and the Cards-only hosted display repair. The earlier
+- The latest isolated Preview hosted-display deployment for the current
+  qualification branch is `dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5`, READY, with the
+  isolated Preview configuration and Cards-only hosted display repair. The
+  protected route-check deployment is `dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7` and
+  returned the expected isolated Test Mode order-route result. The earlier
   `dpl_HbYCQG4hnDH6Jew48YcNUuRkVVaA`, `dpl_EhFoWzfHSbQt5LkRYaxS7MdGqc4u`,
   and `dpl_FBtepYT84UUNCcvjo1jj43HxU7KB` records remain historical evidence
   for the invoice-only failure, expiry code path, and invoice-backed
@@ -770,9 +811,10 @@ a changed input or a clear acceptance need:
   evidence.
 - The current hosted Checkout display repair is Web `445d8ed`. It applies the
   Cards-only method catalog to the provider's hosted display configuration and
-  disables provider default blocks. Preview and Production are deployed from
-  that head through `dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5` and
-  `dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw`, respectively. This is a method-display
+  disables provider default blocks. The hosted-display deployment is
+  `dpl_Es8QZoQr7H7sYRzhKMTqVnzMfnB5`; the protected route check is
+  `dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7`; Production is
+  `dpl_9tXipBQD1CmYK8EpmMLCBPrgh3zw`. This is a method-display, route-check,
   and fail-closed rollout only; it does not itself prove a paid recurring
   lifecycle or alter the backlog score.
 - The Cards-only decision reduces the matrix but does not close Gate 4. The
@@ -893,9 +935,13 @@ customer, or publishing evidence into a pass.
    provider-supported recurring card authorization succeeds and the signed
    webhook, payment row, ledger row, entitlement/license, replay, tenant
    binding, failure, cancellation, refund, and renewal evidence all match.
-   The currently rejected recurring test-card attempt is the active blocker;
-   resolve or formally disposition it before advancing to another backlog
-   item or gate.
+   The latest route check proved canonical Test Mode order creation only; it
+   did not prove a paid subscription, signed webhook, payment/ledger/license
+   reconciliation, or account access. A previous provider OTP/recurring-card
+   attempt was rejected, and automated activation of a fresh hosted provider
+   frame was not usable. Resolve this provider-activation boundary or formally
+   disposition it with a real owner and release decision before advancing to
+   another backlog item or gate.
 5. **GitHub/GitLab integration — scope decision required, not an npm
    prerequisite.** Publishing the npm/CLI package does not require a GitHub
    or GitLab installation. The active Web SaaS scope is GitHub-first and has
@@ -1580,6 +1626,11 @@ is:
 
 `docs/shipping/evidence/plan-web-014-cards-only-hosted-config-and-production-rollout-2026-10-10.md`
 
+The latest protected Preview order-route and hosted-display qualification
+evidence is:
+
+`docs/shipping/evidence/plan-web-014-cards-only-preview-route-and-hosted-display-2026-10-10.md`
+
 The latest CLI standards-corpus evidence is:
 
 `docs/shipping/evidence/qual-cli-006-standards-corpus-current-2026-10-09.md`
@@ -1588,9 +1639,10 @@ The latest official CycloneDX/Cosign qualification evidence is:
 
 `docs/shipping/evidence/qual-cli-006-official-cyclonedx-cosign-2026-10-09.md`
 
-The latest payment decision and backlog acceptance are recorded in
-private commit `5a99b0d`; the preceding payment qualification evidence commit
-is `8eb85b7`.
+The earlier payment decision and backlog acceptance are recorded in private
+commit `5a99b0d`; the preceding payment qualification evidence commit is
+`8eb85b7`. The latest protected Preview route and Cards-only display evidence
+is recorded in private commit `995f8398`.
 
 The private tracker’s backlog, status, execution ledger, traceability,
 decisions, risks, release gates, evidence, and this goal are the source of
