@@ -129,9 +129,10 @@ forward-fix, and post-write verification.
 
 The execution queue is strict:
 
-1. Keep exactly one active backlog ID. `PLAN-CLI-001`, `PLAN-CLI-002`, and
-   `PLAN-WEB-011` are now checked. The current dependency-ready ID is
-   `PLAN-WEB-012`;
+1. Keep exactly one active backlog ID. `PLAN-CLI-001`, `PLAN-CLI-002`,
+   `PLAN-CLI-004`, and `PLAN-WEB-011` are now checked. `PLAN-WEB-012` is
+   parked pending provider lifecycle artifacts; the current dependency-ready
+   ID is `TEAM-CLI-001`;
    `PLAN-WEB-014` and `HUNT-008` remain parked and unchecked.
 2. Finish or genuinely document the active ID's remaining acceptance work. If
    it is genuinely blocked, commit the complete blocked record, park it
@@ -181,6 +182,19 @@ the catalog/amount item only; Production billing remains fail-closed under
 `PLAN-WEB-015`, and full lifecycle work is now active under `PLAN-WEB-012`.
 Evidence:
 `docs/shipping/evidence/plan-web-011-canonical-amount-binding-accepted-2026-10-10.md`.
+
+### 2026-10-10 execution update · PLAN-WEB-012 parked, PLAN-CLI-004 accepted
+
+`PLAN-WEB-012` remains unchecked because provider-generated renewal,
+failure/expiry, replay/out-of-order, timeout/retry, and exactly-once lifecycle
+evidence are still missing; local or synthetic webhook fixtures cannot replace
+that artifact. The next dependency-ready independent track is
+`TEAM-CLI-001`. `PLAN-CLI-004` is checked at **223 checked / 57 unchecked /
+280 total (79.6%)** after compatibility fixtures, legacy activation fallback,
+hosted matrix evidence, and the current v2 issue→verify trace were reconciled.
+R-041 and protected release activation remain external gates.
+Evidence:
+`docs/shipping/evidence/plan-cli-004-compatibility-accepted-2026-10-10.md`.
 
 ### 2026-10-10 execution amendment · blocked-item queue rule
 

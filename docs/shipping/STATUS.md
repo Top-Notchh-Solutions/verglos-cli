@@ -1,5 +1,32 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-CLI-004 accepted
+
+The CLI/server compatibility contract is now accepted: opaque Free/Pro/Team/
+Studio/Enterprise catalog fixtures, malformed/unknown-plan and identity-bound
+cache refusal, signed v2 catalog fallback, legacy v1 activation fallback, and
+the current deployed v2 issue→verify trace all pass. Entitlement/catalog
+tests passed **15/15**, focused CLI tests **28/28**, machine-output process
+tests **30/30**, and full test/typecheck/build checks passed. Existing hosted
+platform, self-scan, and in-toto evidence remains attached to the reviewed
+compatibility commits.
+
+`PLAN-CLI-004` is now checked. R-041 credential containment, protected
+release activation, provider lifecycle, and Production billing remain separate
+gates. Score is **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-004-compatibility-accepted-2026-10-10.md`.
+
+## 2026-10-10 · PLAN-WEB-012 parked on provider lifecycle artifact
+
+The Web lifecycle implementation and isolated harness are qualified, but the
+provider-supported recurring fixture still has not produced renewal,
+failure/expiry, refund replay/order, out-of-order, timeout/retry, and complete
+exactly-once provider reconciliation evidence. `PLAN-WEB-012` remains
+unchecked; this is a real external provider boundary, not a code-test failure.
+
+Evidence: `docs/shipping/evidence/plan-web-012-provider-lifecycle-block-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-011 accepted
 
 The isolated Preview/Test Mode subscription trace now satisfies the

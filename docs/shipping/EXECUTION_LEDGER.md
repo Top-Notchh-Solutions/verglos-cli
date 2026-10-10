@@ -1,5 +1,38 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-CLI-004 accepted
+
+- **Compatibility:** Opaque server-shaped Free/Pro/Team/Studio/Enterprise
+  catalog fixtures, malformed/unknown-plan/cache identity refusal, signed v2
+  catalog fallback, and legacy v1 activation fallback are covered. Legacy
+  tier-only tokens remain Free offline.
+- **Hosted linkage:** The current isolated Preview v2 issue→verify trace and
+  the existing nine-cell platform/self-scan/in-toto compatibility evidence are
+  attached; no new hosted run at this private branch head is claimed.
+- **Verification:** Entitlement/catalog **15/15**, focused CLI **28/28**,
+  machine-output process **30/30**, full test/typecheck/build passed.
+- **Disposition:** `PLAN-CLI-004` is checked. R-041 and protected release
+  activation remain separate gates; no Production/provider/database/payment/
+  entitlement/npm/customer-data write occurred.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-004-compatibility-accepted-2026-10-10.md`.
+
+## 2026-10-10 · PLAN-WEB-012 parked on provider lifecycle boundary
+
+- **Qualified:** Web code and isolated PostgreSQL cover lifecycle ordering,
+  failure, expiry, refund watermarks, replay claims, invoice binding, and
+  exactly-once license behavior; one real isolated first-charge capture is
+  evidenced.
+- **Missing:** Provider-generated renewal/second charge, failure/expiry,
+  refund replay/order, out-of-order, timeout/retry, and complete signed
+  payment→ledger→license reconciliation.
+- **Disposition:** Keep `PLAN-WEB-012` unchecked. Production has no Test Mode
+  plan IDs or test credentials; no Production payment or database write was
+  attempted. Owner is the authorized provider-test operator/provider support.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-012-provider-lifecycle-block-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-011 accepted
 
 - **Hosted trace:** Isolated Preview/Test Mode created a canonical Pro/monthly

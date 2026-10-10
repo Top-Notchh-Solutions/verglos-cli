@@ -1,5 +1,27 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PLAN-CLI-004 compatibility acceptance
+
+The CLI/server compatibility boundary is accepted: opaque catalog fixtures
+cover Free/Pro/Team/Studio/Enterprise, malformed/unknown-plan and cache
+identity failures fall back to Free, signed v2 catalog claims are the only
+paid offline fallback, and legacy v1 activation remains compatible when v2
+issuance is unavailable. The current isolated Preview v2 issue→verify trace
+and existing hosted platform/self-scan/in-toto evidence complete the recorded
+compatibility path. R-041 and protected release activation remain separate.
+Score is **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-004-compatibility-accepted-2026-10-10.md`.
+
+## 2026-10-10 · PLAN-WEB-012 provider lifecycle boundary
+
+`PLAN-WEB-012` remains open after the implementation and isolated harness
+qualification. The missing artifact is provider-generated signed renewal,
+failure/expiry, refund replay/order, out-of-order, timeout/retry, and complete
+exactly-once reconciliation. Production remains fail-closed with no Test Mode
+plan IDs or test payment credentials. Evidence:
+`docs/shipping/evidence/plan-web-012-provider-lifecycle-block-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-011 catalog/amount binding acceptance
 
 The isolated Preview/Test Mode subscription trace is accepted for
