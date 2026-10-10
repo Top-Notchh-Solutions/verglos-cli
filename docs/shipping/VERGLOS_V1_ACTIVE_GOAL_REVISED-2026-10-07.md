@@ -12,6 +12,21 @@ unchecked / 280 total (78.2%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · `PLAN-WEB-014` provider retry block
+
+The current isolated Preview/Test Mode recurring-card retry reached the
+provider card-tokenization/OTP boundary and ended in a provider terminal-state
+failure. Three exact recent Test Mode subscriptions were cancelled and a
+read-only provider query found zero payments for them. No Production payment,
+database, entitlement, account, organization, or customer-data write occurred.
+`PLAN-WEB-014` remains the sole active item, unchecked and genuinely blocked
+on a provider-supported recurring-card fixture or provider-side renewal/
+delivery control. Owner: Verglos founder/provider support. Unblock artifact:
+the provider fixture/control plus signed webhook evidence. Review:
+2026-10-11 IST. No next backlog item is selected while this active item is
+blocked. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-recurring-card-retry-boundary-2026-10-10.md`.
+
 ### 2026-10-10 · Production schema migration evidence
 
 The bounded Production schema operation created a pre-write backup, applied

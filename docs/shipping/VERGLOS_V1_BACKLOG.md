@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` recurring-card retry boundary
+
+The current isolated Preview/Test Mode checkout reached the provider
+card-tokenization/OTP step but ended in a provider terminal-state failure.
+Three exact recent Test Mode subscriptions were cancelled successfully and a
+read-only provider query found zero payments for them. No Production or
+entitlement write occurred. This is a genuine provider fixture/account block,
+not acceptance: recurring authorization, renewal, provider failure/expiry,
+replay/out-of-order, retry/exactly-once, and final hosted reconciliation remain
+open. `PLAN-WEB-014` remains the sole active item and no next item is selected
+until the provider unblock artifact exists. No checkbox changed; score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-recurring-card-retry-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · Production schema availability evidence
 
 The bounded Production migration operation created a pre-write backup, applied

@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 recurring-card retry boundary
+
+- **Preview/Test Mode:** The current isolated checkout rendered the canonical
+  Pro monthly offer with the Cards-only application catalog. A bounded hosted
+  retry reached the provider card-tokenization/OTP boundary but ended with a
+  provider terminal-state failure.
+- **Cleanup:** Three exact recent Test Mode subscriptions were cancelled via
+  the provider endpoint; all returned HTTP 200 with `cancelled`. A read-only
+  provider payment query found zero payments for those exact subscriptions.
+- **Boundary:** No Production payment, subscription, database, entitlement,
+  account, organization, or customer-data write occurred.
+- **Disposition:** `PLAN-WEB-014` remains the sole active item and is now
+  genuinely blocked on a provider-supported recurring-card fixture or
+  provider-side renewal/delivery control. It is not checked, and no next item
+  is selected. Review 2026-10-11 IST.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-recurring-card-retry-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · Production bounded schema migration and audit correction
 
 - **Preflight:** The reviewed Web journal contained 39 migrations; Production
