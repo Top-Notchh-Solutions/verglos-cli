@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-WEB-014 current Test Mode inventory recheck
+
+The local Test Mode credentials were used for a bounded read-only provider API
+query. Razorpay returned 42 subscriptions: 5 active, 15 created/awaiting
+authorization, and 22 cancelled. The active rows have one or two paid cycles;
+the earliest future charge is 2026-11-08T18:30:00Z. No charge-now, replay, or
+out-of-order operation was issued.
+
+This is current inventory evidence only. The created rows do not prove
+recurring authorization, and a future scheduled charge is not a substitute for
+the acceptance matrix. Account-specific card tokenization/renewal support and
+the signed payment-to-ledger-to-license lifecycle remain unresolved.
+`PLAN-WEB-014` and Gate 4 stay open; no checkbox changed. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-testmode-subscription-inventory-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-003 authenticated Production boundary revalidation
 
 The existing authenticated Chrome session completed a read-only Production

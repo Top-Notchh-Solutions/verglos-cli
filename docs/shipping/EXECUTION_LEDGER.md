@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 current Test Mode inventory recheck
+
+- **Operation:** Bounded read-only `GET /v1/subscriptions?count=100` with
+  local Test Mode credentials from `.env.gates.testing`; no value was printed
+  or retained.
+- **Result:** HTTP 200; 42 total subscriptions: 5 active, 15 created, and 22
+  cancelled. Active rows have one or two paid cycles; the earliest future
+  charge is 2026-11-08T18:30:00Z.
+- **Boundary:** No subscription, payment, webhook, database, entitlement,
+  account, Production, or customer-data write; no charge-now/replay request.
+- **Disposition:** Keep `PLAN-WEB-014` and Gate 4 open. Created rows and future
+  schedule state do not prove recurring-card authorization or the complete
+  signed lifecycle matrix.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-testmode-subscription-inventory-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-003 authenticated Production boundary revalidation
 
 - **Probe:** The existing authenticated Chrome session ran 17 read-only

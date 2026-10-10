@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 current Test Mode inventory recheck
+
+The bounded Test Mode subscription API read returned 42 rows: 5 active, 15
+created/awaiting authorization, and 22 cancelled. The active rows have one or
+two paid cycles, with the earliest future charge at 2026-11-08T18:30:00Z.
+No charge-now, replay, out-of-order, or other provider write was attempted.
+
+This does not close Gate 4. Created rows and a future scheduled charge do not
+prove provider recurring-card authorization or the complete signed
+payment/ledger/license lifecycle. Keep `PLAN-WEB-014` unchecked until the
+provider fixture/control and remaining reconciliation matrix exist. Score
+remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-testmode-subscription-inventory-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-003 authenticated Production boundary revalidation
 
 The existing authenticated Chrome session completed a 17-request read-only

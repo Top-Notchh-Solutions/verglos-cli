@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Do not treat scheduled Test Mode charges as renewal acceptance
+
+- **Decision:** Keep `PLAN-WEB-014` and Gate 4 open after the current provider
+  inventory recheck.
+- **Observation:** Test Mode returned 5 active, 15 created/awaiting
+  authorization, and 22 cancelled subscriptions; the earliest active charge
+  is scheduled for 2026-11-08T18:30:00Z.
+- **Reason:** A created subscription has no paid cycle, and a future scheduled
+  charge has not produced a signed renewal, failure, retry, replay, or
+  payment-to-ledger-to-license reconciliation.
+- **Boundary:** No charge-now/replay call, provider update, Production write,
+  database edit, entitlement grant, or customer-data mutation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-testmode-subscription-inventory-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · Keep PLAN-CLI-003 open after authenticated Production probe
 
 - **Decision:** Accept the current authenticated Production probe as boundary
