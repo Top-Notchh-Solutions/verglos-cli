@@ -18,16 +18,19 @@ Evidence: `docs/shipping/evidence/plan-web-012-local-lifecycle-pass-provider-blo
 
 ## 2026-10-10 · HUNT-008 local qualification passed; external gates remain
 
-The current Hunt package build and tests passed **45 executable tests** with
-**16 explicit Docker integration skips** and 0 failures. The fixed A1 catalog,
-fixture expectations, bounded runner, cleanup, redaction, and trust/approval
-contracts are locally qualified. Trusted/licensed recipe provenance,
-supported-rule approval wiring, and an independent AppSec review remain
-missing, so `HUNT-008` stays unchecked and parked. Downstream HUNT-009–011 are
-not silently advanced; the next dependency-ready item by backlog order is
+The baseline Hunt package run passed **45 executable tests** with **16 explicit
+Docker integration skips** and 0 failures. A supplementary pinned Docker run
+passed **60 checks / 1 explicit macOS namespace skip / 0 failures**. The fixed
+A1 catalog, fixture expectations, bounded runner, cleanup, redaction, and
+trust/approval contracts are locally qualified. Trusted/licensed recipe
+provenance, supported-rule approval wiring, and an independent AppSec review
+remain missing, so `HUNT-008` stays unchecked and parked. Downstream HUNT-009–011
+are not silently advanced; the next dependency-ready item by backlog order is
 `PLAN-WEB-012`.
 
-Evidence: `docs/shipping/evidence/hunt-008-requalification-block-2026-10-10.md`.
+Evidence: `docs/shipping/evidence/hunt-008-requalification-block-2026-10-10.md`;
+supplementary run:
+`docs/shipping/evidence/hunt-008-docker-adversarial-macos-2026-10-10.md`.
 
 ## 2026-10-10 · ACCEPT-002 substrate verifier repaired and passed
 

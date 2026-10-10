@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · HUNT-008 supplementary Docker adversarial run
+
+- **Verification:** The pinned CLI checkout `ad6ee1479c887c59eb6630da4754a2e0b7b4045e`
+  ran `pnpm --filter @verglos/hunt test` with the pinned
+  `postgres:15-alpine` image and Docker integration enabled.
+- **Result:** **60 passed / 1 skipped / 0 failed**, exit code 0, on macOS
+  arm64 with Node `v26.4.0`. The one skip is the Linux-only PID/IPC namespace
+  assertion.
+- **Boundary:** This is supplementary local adversarial evidence only. It is
+  not an independent AppSec review, trusted recipe provenance, licensing
+  approval, or Linux namespace result. No provider, Production, database,
+  entitlement, customer, or repository state was accessed or changed.
+- **Disposition:** Keep `HUNT-008` unchecked and parked. Score remains
+  **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-008-docker-adversarial-macos-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-012 local lifecycle pass; provider gate remains
 
 - **Verification:** A disposable local PostgreSQL 15 `verglos_test` container

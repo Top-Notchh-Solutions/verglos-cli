@@ -2259,3 +2259,58 @@ tokenization/authorization fixture or official replay/charge control. Owner:
 Verglos release owner with the Razorpay Test Mode account owner; review by
 2026-10-17. Gate 4 and `PLAN-WEB-014` remain open, and the score remains
 **219 checked / 61 unchecked / 280 total / 78.2%**; no checkbox changed.
+
+### 2026-10-10 execution amendment — production-inclusive checkbox closure mode
+
+The current provider-webhook configuration work is complete. Do not repeat an
+unchanged Dashboard/webhook probe as progress. The live private tracker, not
+historical paragraphs lower in this file, is authoritative for the current
+score, active item, and queue: **223 checked / 57 unchecked / 280 total
+(79.6%)**. The first unchecked backlog item is `HUNT-008`; its current
+implementation qualification is recorded, but trusted/licensed recipe
+provenance, approval wiring, and an independent AppSec review are still
+missing. Those external requirements cannot be replaced by founder consent or
+an agent-signed report.
+
+`verglos-web/.env.gates.testing` is an authorized Razorpay Test Mode input for
+isolated Preview qualification only. Read it with a safe dotenv parser when
+needed; never print its values, source it as shell code, copy it to Production,
+or treat its presence as gate evidence. It does not contain permission to
+perform Production billing or entitlement writes.
+
+Production is in scope for reviewed code deployment, read-only verification,
+and operation-specific state changes. Before any Production write, require a
+dry run, exact target and mode check, current backup/snapshot, restore
+rehearsal, reconciliation criteria, rollback or forward-fix plan, and
+post-write verification. Keep provider Test Mode keys, Test Mode plan IDs,
+Preview databases, fixture identities, and bypass values out of Production.
+
+The execution priority is now checkbox closure, one item at a time:
+
+1. Recompute the score from the live backlog after every substantial batch.
+2. Scan from the top and select the first unchecked item whose dependencies
+   are genuinely ready; implement the smallest complete slice, run the tests
+   and relevant hosted/Production verification, and write private evidence.
+3. Update the backlog, `STATUS.md`, `EXECUTION_LEDGER.md`, traceability,
+   decisions/risks, and this goal in the same tracker batch. Check a box only
+   when every acceptance criterion is evidenced.
+4. If the selected item is externally blocked, record the owner, missing
+   artifact, review/expiry date, safe unblock action, and release decision,
+   then select the next dependency-ready unchecked item. Do not fabricate an
+   approval, silently skip the queue, or retry an unchanged provider path.
+
+This amendment supersedes stale historical statements in this file that name
+`PLAN-CLI-001`, `PLAN-WEB-014`, or the 219/61 score as the current active
+checkpoint. It does not close Gate 4 or any backlog item by itself.
+
+### 2026-10-10 HUNT-008 supplementary Docker qualification
+
+The pinned Docker adversarial run completed with **60 passes / 1 explicit
+macOS namespace skip / 0 failures** at CLI source commit
+`ad6ee1479c887c59eb6630da4754a2e0b7b4045e`. This is useful qualification
+evidence, but it is not a Linux namespace result, independent AppSec review,
+trusted recipe provenance, or legal approval. `HUNT-008` remains unchecked and
+parked; the score remains **223/57/280 (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/hunt-008-docker-adversarial-macos-2026-10-10.md`.

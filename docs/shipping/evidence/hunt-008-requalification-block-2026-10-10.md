@@ -13,6 +13,11 @@ passed**, **16 Docker integration tests were explicitly skipped**, and **0
 tests failed**. The skips require a pinned test image and Linux host namespace
 evidence; they are not treated as failures or as independent review.
 
+A supplementary pinned Docker run is recorded separately at
+`docs/shipping/evidence/hunt-008-docker-adversarial-macos-2026-10-10.md`:
+**60 passed / 1 skipped / 0 failed** on macOS arm64. The Linux-only namespace
+assertion remained explicitly skipped.
+
 The run covers the bounded Docker invocation/runner contracts, A1 adapter,
 recipe catalog positive/negative/timeout/failure fixtures, cleanup, redaction,
 trust/approval binding, and canonical verdict behavior. No remote recipe,
