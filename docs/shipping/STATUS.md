@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · TEAM-CLI-001 Production prerequisite boundary
+
+The authenticated Production organization directory returned HTTP 200 with
+zero organizations. The deployed policy route requires an active mapped paid
+license, an active GitHub installation/project binding, a published canonical
+policy, and the Production organization-policy signer configuration. Creating
+an organization alone would not satisfy the item, so no Production write was
+made. `TEAM-CLI-001` remains unchecked; score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/team-cli-001-production-prerequisite-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · live queue and external-gate synchronization
 
 The live backlog recomputes to **223 checked / 57 unchecked / 280 total

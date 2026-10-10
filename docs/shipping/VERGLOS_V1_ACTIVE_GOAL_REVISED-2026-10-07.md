@@ -2456,3 +2456,16 @@ followed by signed webhook and payment-to-ledger-to-license reconciliation.
 This is a partial amendment to the goal, not a replacement of the historical
 record. Evidence:
 `docs/shipping/evidence/live-queue-external-gates-2026-10-10.md`.
+
+### 2026-10-10 `TEAM-CLI-001` Production prerequisite boundary
+
+The authenticated Production organization directory returned HTTP 200 with
+zero organizations. The policy route itself requires an active mapped paid
+license, active GitHub installation/project binding, a published canonical
+policy row, and the Production organization-policy signer configuration.
+Creating an organization alone would not close the item, so no Production
+write was made. Keep `TEAM-CLI-001` unchecked until those exact artifacts and
+the signed fetch/cache/offline/cross-tenant evidence exist.
+
+Evidence:
+`docs/shipping/evidence/team-cli-001-production-prerequisite-boundary-2026-10-10.md`.

@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · TEAM-CLI-001 Production prerequisite boundary
+
+- **Read-only result:** Authenticated Production `GET /api/v1/organizations`
+  returned HTTP 200, `private, no-store`, and zero organizations.
+- **Route contract:** The policy endpoint requires an active mapped license,
+  active GitHub installation/project binding, published canonical policy row,
+  and Production organization-policy signer configuration.
+- **Disposition:** Keep `TEAM-CLI-001` unchecked. An organization-only write,
+  founder-email shortcut, entitlement signer, or Test Mode environment cannot
+  satisfy this acceptance. No Production state changed.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-production-prerequisite-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · live queue and external-gate synchronization
 
 - **Score:** The live backlog is **223 checked / 57 unchecked / 280 total
