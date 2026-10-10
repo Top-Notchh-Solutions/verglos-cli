@@ -149,8 +149,8 @@ The execution queue is strict:
    `PLAN-CLI-004`, and `PLAN-WEB-011` are now checked. `PLAN-WEB-012` is
    parked pending provider lifecycle artifacts; `TEAM-CLI-001` is now parked
    pending hosted signer/fetch activation, and the current dependency-ready ID
-   is `LIC-002`; `STUDIO-CLI-001` is parked pending hosted custody and
-   recipient acceptance;
+   is `QUAL-CLI-006`; `STUDIO-CLI-001` is parked pending hosted custody and
+   recipient acceptance, and `LIC-002` is parked pending legal approval;
    `PLAN-WEB-014` and `HUNT-008` remain parked and unchecked.
 2. Finish or genuinely document the active ID's remaining acceptance work. If
    it is genuinely blocked, commit the complete blocked record, park it
@@ -239,6 +239,17 @@ missing, so `STUDIO-CLI-001` stays unchecked. The strict queue now selects
 
 Evidence:
 `docs/shipping/evidence/studio-cli-001-hosted-custody-block-2026-10-10.md`.
+
+### 2026-10-10 execution update · LIC-002 parked, QUAL-CLI-006 selected
+
+The technical license/notice inventory is reproducible and its local checks
+pass, but no legal reviewer approval exists for the exact release candidate.
+`LIC-002` remains unchecked. The queue now selects `QUAL-CLI-006`, whose
+official validation and clean-consumer evidence must still be reconciled with
+legal, trusted-publishing, and independent-review gates.
+
+Evidence:
+`docs/shipping/evidence/lic-002-legal-approval-block-2026-10-10.md`.
 
 ### 2026-10-10 execution amendment · blocked-item queue rule
 

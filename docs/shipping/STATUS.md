@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · LIC-002 parked on legal approval
+
+The current technical inventory is reproducible: 148 package entries / 150
+versions, no unknown redistribution classes, no automated review blockers,
+and 8/8 inventory/notice/release-verifier tests passed. This does not provide
+legal approval. Trivy image/layer/database terms, detect-secrets release
+selection, fixture and Hunt provenance, trademark restrictions, final notice
+scope, and an authorized signature remain missing. `LIC-002` stays unchecked;
+the next dependency-ready item is `QUAL-CLI-006`.
+
+Evidence: `docs/shipping/evidence/lic-002-legal-approval-block-2026-10-10.md`.
+
 ## 2026-10-10 · STUDIO-CLI-001 parked on hosted custody
 
 The local Studio projection/upload-preview workflow is implemented and

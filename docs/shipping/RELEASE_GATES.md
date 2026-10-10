@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · LIC-002 parked; QUAL-CLI-006 selected
+
+The technical license/notice inventory is reproducible and its local checks
+pass, but it is not legal approval. The exact release still lacks authorized
+decisions for external engines, fixtures, Hunt content, trademarks, and final
+archive notices. Keep `LIC-002` open; the strict queue now selects
+`QUAL-CLI-006` while preserving the legal and trusted-publication gates.
+
+Evidence: `docs/shipping/evidence/lic-002-legal-approval-block-2026-10-10.md`.
+
 ## 2026-10-10 · STUDIO-CLI-001 parked; LIC-002 selected
 
 The local Studio projection and approval-bound preview are implemented and

@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · LIC-002 queue transition
+
+- **Verification:** Current inventory has 148 package entries / 150 versions,
+  no unknown classes, and no automated review blockers. Inventory, notice, and
+  release-verifier tests pass **8/8**.
+- **Disposition:** Technical preparation is complete, but legal approval and
+  final external-content/release decisions are absent. Keep `LIC-002` open and
+  park it; the next dependency-ready item is `QUAL-CLI-006`.
+- **Owner/next action:** Authorized company/legal reviewer must complete the
+  private addendum against the exact release artifacts and sign it.
+- **Evidence:**
+  `docs/shipping/evidence/lic-002-legal-approval-block-2026-10-10.md`.
+
 ## 2026-10-10 · STUDIO-CLI-001 queue transition
 
 - **Implementation:** Integrated the reviewed redacted client projection and
