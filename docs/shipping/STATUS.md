@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · STUDIO-CLI-001 hosted custody implementation advanced
+
+Web commit `e3e416d` adds the private client-projection custody route and
+dedicated persistence. It validates the same safe-field, organization,
+workspace, record-digest, approval, expiry, and canonical projection-digest
+contract as the CLI; requires the existing project `publish_record`/`view`
+authorization; and is retry-safe without storing source or private findings.
+
+The explicitly selected isolated Neon Test database received migration
+`0039_client_projection_custody`. A read-only audit reported **40/40 applied**,
+zero pending migrations, zero missing tables, and the new table present. The
+route integration passed **1/1**, pure contract tests **2/2**, and Web
+typecheck/Drizzle check/migration check/production build all passed.
+
+This is implementation evidence, not final Studio acceptance. Independent
+hosted-recipient redaction proof and an authorized Studio recipient/customer
+run remain missing. No Production database/provider/entitlement/account or
+customer-data write occurred. Score remains **223 checked / 57 unchecked / 280
+total (79.6%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/studio-cli-001-hosted-custody-block-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 current Test Mode inventory recheck
 
 The local Test Mode credentials were used for a bounded read-only provider API

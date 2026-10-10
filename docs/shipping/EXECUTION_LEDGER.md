@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · STUDIO-CLI-001 hosted custody implementation progress
+
+- **Implementation:** Web `e3e416d` adds the private client-projection custody
+  GET/POST route, CLI-parity admission, retry-safe digest binding, and
+  `client_projection_custody` migration/table. Only bounded redacted fields
+  are persisted.
+- **Verification:** Isolated Test Neon migration applied successfully; a
+  read-only audit reported 40 expected/40 applied, zero pending migrations,
+  zero missing tables, and the new table present. Route integration **1/1**,
+  pure contract tests **2/2**, Web typecheck, Drizzle check, migration check,
+  and 47-page production build passed.
+- **Boundary:** No Production database/provider/entitlement/account or
+  customer-data write occurred. The only database write was migration `0039`
+  on the explicitly selected isolated Test database.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked. Independent hosted
+  recipient redaction proof and authorized Studio recipient/customer acceptance
+  remain required. Score remains **223/57/280 (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-hosted-custody-block-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 current Test Mode inventory recheck
 
 - **Operation:** Bounded read-only `GET /v1/subscriptions?count=100` with

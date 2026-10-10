@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · STUDIO-CLI-001 hosted custody implementation progress
+
+The Web custody endpoint and dedicated persistence are now implemented at
+`e3e416d`. The isolated Test database is fully migrated (40/40, no pending
+migrations, custody table present), and the route/contract/build checks pass.
+This does not open a release gate or close the checkbox: independent hosted
+recipient redaction proof and an authorized Studio recipient/customer run are
+still required. Score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/studio-cli-001-hosted-custody-block-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 current Test Mode inventory recheck
 
 The bounded Test Mode subscription API read returned 42 rows: 5 active, 15
