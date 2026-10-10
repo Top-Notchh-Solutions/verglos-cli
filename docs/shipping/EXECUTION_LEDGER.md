@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-CLI-002 accepted
+
+- **Implementation:** Integrated the reviewed v2 tenant-bound entitlement,
+  signed catalog, identity-bound cache, and effective-plan reporting changes.
+  `whoami --json` and human output show the effective plan, authority source,
+  stale/offline-grace state, capability count, catalog version, bounded
+  allowances, and verified-token expiry. Legacy tier-only tokens remain Free
+  offline; upgrade output remains actionable.
+- **Verification:** Entitlement **15/15**, focused CLI entitlement/whoami
+  **28/28**, machine-output process **30/30**; full CLI test, typecheck,
+  build, and `git diff --check` passed.
+- **Disposition:** `PLAN-CLI-002` is checked. No Production/provider/
+  database/entitlement/npm/customer-data write occurred. Gate 4 and hosted
+  provider lifecycle evidence remain separate.
+- **Score:** **221 checked / 59 unchecked / 280 total (78.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-002-effective-capability-ux-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-001 accepted at isolated Preview boundary
 
 - **Implementation:** CLI commit `be06761` accepts the Web server's explicit

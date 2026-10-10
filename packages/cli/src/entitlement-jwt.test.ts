@@ -103,6 +103,15 @@ function withOfflineFetch<T>(fn: () => Promise<T>): Promise<T> {
   });
 }
 
+/** Frozen server-shaped fixtures: capabilities and allowance keys remain opaque to the CLI. */
+const PLAN_CATALOG_FIXTURES = Object.freeze([
+  { plan: "free", capabilities: ["scan", "server.scan"], cache_ttl_seconds: 60, simulated: false, active: true },
+  { plan: "pro", real_plan: "pro", capabilities: ["scan", "server.fix", "vendor.future_capability"], cache_ttl_seconds: 900, simulated: false, active: true },
+  { plan: "team", real_plan: "team", capabilities: ["scan", "team.policy"], cache_ttl_seconds: 3600, simulated: false, active: true },
+  { plan: "studio", real_plan: "studio", capabilities: ["scan", "studio.attest"], cache_ttl_seconds: 86_400, simulated: false, active: true },
+  { plan: "enterprise", real_plan: "enterprise", capabilities: ["scan", "enterprise.sso"], cache_ttl_seconds: 86_400, simulated: false, active: true },
+] as const);
+
 beforeEach(() => {
   rmSync(join(verglosDir, "credentials.json"), { force: true });
   rmSync(join(verglosDir, "capabilities.json"), { force: true });

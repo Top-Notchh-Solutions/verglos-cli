@@ -4,7 +4,7 @@ import chalk from "chalk";
 import { loadCredentials, saveCredentials } from "./credentials.js";
 import { fetchLicenseStatus } from "./license-api.js";
 import { normalizeTier } from "./tier-defaults.js";
-import { resolveEntitlement } from "./entitlement.js";
+import { resolveEntitlement, type ResolvedEntitlement } from "./entitlement.js";
 
 /**
  * `verglos whoami` — one-command truth telling.
@@ -52,22 +52,41 @@ export interface WhoamiOptions {
   quiet?: boolean;
 }
 
-async function entitlementSummary() {
+type EntitlementSummary = Pick<ResolvedEntitlement, "plan" | "source" | "stale" | "catalogVersion" | "allowances"> & {
+  capabilityCount: number;
+  entitlementExpiresAt?: string;
+  inOfflineGrace?: boolean;
+};
+
+async function entitlementSummary(): Promise<EntitlementSummary> {
   try {
     const resolved = await resolveEntitlement({ forceRefresh: true });
     return {
+      plan: resolved.plan,
       source: resolved.source,
       stale: resolved.stale,
       capabilityCount: resolved.capabilities.length,
       ...(resolved.catalogVersion ? { catalogVersion: resolved.catalogVersion } : {}),
       ...(resolved.allowances ? { allowances: resolved.allowances } : {}),
+      ...(resolved.license ? {
+        entitlementExpiresAt: new Date(resolved.license.expiresAt).toISOString(),
+        inOfflineGrace: resolved.license.inOfflineGrace,
+      } : {}),
     };
   } catch {
-    // `whoami` must remain useful when the entitlement endpoint is unavailable
-    // or a legacy credential cannot be decoded. License status remains the
-    // primary answer; do not turn an informational command into a hard fail.
-    return undefined;
+    return { plan: "free", source: "free", stale: false, capabilityCount: 9 };
   }
+}
+
+function printEntitlement(entitlement: EntitlementSummary): void {
+  console.log(`  ${chalk.bold("Authority:")} ${entitlement.source}${entitlement.stale ? chalk.yellow(" (stale)") : ""}`);
+  console.log(`  ${chalk.bold("Access:")}    ${entitlement.capabilityCount} capabilities`);
+  if (entitlement.catalogVersion) console.log(`  ${chalk.bold("Catalog:")}   ${entitlement.catalogVersion}`);
+  if (entitlement.allowances) {
+    const summary = Object.entries(entitlement.allowances).map(([key, value]) => `${key}=${value}`).join(", ");
+    if (summary) console.log(`  ${chalk.bold("Allowances:")} ${summary}`);
+  }
+  if (entitlement.entitlementExpiresAt) console.log(`  ${chalk.bold("Token expiry:")} ${formatDate(entitlement.entitlementExpiresAt)}${entitlement.inOfflineGrace ? " (offline grace)" : ""}`);
 }
 
 export async function executeWhoami(options: WhoamiOptions = {}): Promise<number> {
@@ -103,7 +122,7 @@ export async function executeWhoami(options: WhoamiOptions = {}): Promise<number
         license: maskKey(creds.licenseKey),
         ...(creds.email ? { email: creds.email } : {}),
         ...(creds.planExpiresAt ? { expiresAt: creds.planExpiresAt } : {}),
-        ...(entitlement ?? { source: "free", stale: false, capabilityCount: 9 }),
+        ...entitlement,
         reason: status.reason,
       }));
       return status.reason === "invalid_token" || status.reason === "license_not_found" ? 1 : 0;
@@ -112,11 +131,10 @@ export async function executeWhoami(options: WhoamiOptions = {}): Promise<number
     console.log(
       `  ${chalk.bold("You:")}      ${creds.email ?? chalk.gray("(unknown — server unreachable)")}`,
     );
-    console.log(`  ${chalk.bold("Plan:")}     ${chalk.gray(cachedPlan.toUpperCase())} ${chalk.gray("(cached)")}`);
-    if (entitlement) {
-      console.log(`  ${chalk.bold("Authority:")} ${entitlement.source}${entitlement.stale ? chalk.yellow(" (stale)") : ""}`);
-      console.log(`  ${chalk.bold("Access:")}    ${entitlement.capabilityCount} capabilities`);
-    }
+    console.log(`  ${chalk.bold("Plan:")}     ${chalk.gray(entitlement.plan.toUpperCase())}`);
+    console.log(`  ${chalk.bold("License plan:")} ${cachedPlan.toUpperCase()} (cached)`);
+    printEntitlement(entitlement);
+    if (entitlement.source === "free") console.log(chalk.gray("  Paid access could not be verified. Run `verglos login` when online to refresh your entitlement."));
     console.log(`  ${chalk.bold("License:")}  ${maskKey(creds.licenseKey)}`);
     if (creds.planExpiresAt) {
       console.log(
@@ -187,17 +205,8 @@ export async function executeWhoami(options: WhoamiOptions = {}): Promise<number
   console.log(
     `  ${chalk.bold("Plan:")}     ${planStyle}${status.active ? "" : chalk.red(" (inactive)")}`,
   );
-  if (entitlement) {
-    console.log(`  ${chalk.bold("Authority:")} ${entitlement.source}${entitlement.stale ? chalk.yellow(" (stale)") : ""}`);
-    console.log(`  ${chalk.bold("Access:")}    ${entitlement.capabilityCount} capabilities`);
-    if (entitlement.catalogVersion) console.log(`  ${chalk.bold("Catalog:")}   ${entitlement.catalogVersion}`);
-    if (entitlement.allowances) {
-      const allowanceSummary = Object.entries(entitlement.allowances)
-        .map(([key, value]) => `${key}=${value}`)
-        .join(", ");
-      if (allowanceSummary) console.log(`  ${chalk.bold("Allowances:")} ${allowanceSummary}`);
-    }
-  }
+  console.log(`  ${chalk.bold("License plan:")} ${canonicalPlan.toUpperCase()}`);
+  printEntitlement(entitlement);
   console.log(`  ${chalk.bold("License:")}  ${maskKey(status.licenseKey)}`);
   if (status.expiresAt) {
     const dayLabel =

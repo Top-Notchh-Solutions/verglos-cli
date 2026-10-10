@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-CLI-002 accepted
+
+The CLI now exposes the effective entitlement truth in `verglos whoami` JSON
+and human output: current plan, authority (`rest`/`cache`/`signed-token`/`free`),
+stale/offline-grace state, opaque capability count, catalog version, bounded
+allowances, and verified-token expiry. Paid capability is never inferred from
+a legacy tier-only token, and the upgrade path remains actionable without
+claiming unavailable features.
+
+Entitlement tests passed **15/15**, focused CLI entitlement/whoami tests
+passed **28/28**, the machine-output process suite passed **30/30**, and the
+full CLI test, typecheck, build, and diff checks passed. Existing hosted
+evidence for the reviewed merged heads `e06de5b`/`443be30` remains attached;
+no new hosted run is claimed for this private integration. No Production,
+provider, database, entitlement, npm, or customer-data write occurred.
+
+`PLAN-CLI-002` is now checked. Score is **221 checked / 59 unchecked / 280
+total (78.9%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-002-effective-capability-ux-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-001 accepted
 
 The isolated Preview qualification completed the real canonical Test Mode

@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PLAN-CLI-002 effective-capability UX acceptance
+
+The CLI effective-entitlement boundary is accepted: current plan, authority
+source, stale/offline-grace state, opaque capability count, catalog version,
+bounded allowances, and signed-token expiry are exposed through `whoami` in
+human and machine-safe forms. Current server authority wins, legacy tier-only
+tokens cannot grant paid capability offline, and the upgrade path remains
+explicit. Entitlement **15/15**, focused CLI **28/28**, machine-output
+**30/30**, full test/typecheck/build, and diff checks passed. No Production or
+provider write occurred. Score is **221/59/280 (78.9%)**.
+
+Evidence: `docs/shipping/evidence/plan-cli-002-effective-capability-ux-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-001 isolated Preview acceptance
 
 The isolated Preview Test Mode trace completed the canonical card capture,
