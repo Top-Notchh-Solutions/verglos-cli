@@ -725,13 +725,22 @@ Dashboard follow-up:
 
 ### 2026-10-10 execution lock — one backlog item at a time
 
-The active backlog item is `PLAN-WEB-014` and it is the only implementation
-and acceptance workstream until it is fully accepted or explicitly blocked
-with a current owner, missing artifact, expiry/review date, and release
-decision. Do not start the next backlog item, next gate, Web polish batch,
-SCM batch, or unrelated documentation batch while this item is open. Work is
-allowed only when it implements, unblocks, qualifies, or records complete
-evidence for `PLAN-WEB-014`.
+The active backlog item was `PLAN-WEB-014`. It is now explicitly blocked on
+the recorded provider-supported recurring-card/renewal artifact, with owner,
+review date, cleanup evidence, and release decision recorded in the private
+tracker. Keep it unchecked. Do not repeatedly retry the unchanged provider
+fixture, guess OTPs, synthesize provider events, or use a Production write as
+a substitute for the missing provider evidence.
+
+After a genuine external block is recorded, start the next top-to-bottom
+unchecked item only if it is genuinely independent and dependency-ready.
+`HUNT-008` has already been assessed and parked on its provenance/AppSec
+artifacts; the current tracker therefore proceeds with the next independent
+queue assessment (`TEAM-CLI-001`, then the recorded Studio/legal tracks).
+Each item must first be implemented or qualified and then either accepted
+with complete evidence or parked with its own owner, missing artifact,
+review date, and release decision. Production work remains in scope when it
+directly satisfies that active item and meets the controlled-write contract.
 
 The current payment-release decision is **Cards-only**. The declared hosted
 method set for the release candidate must be `card` in Preview and Production;
@@ -1151,7 +1160,7 @@ Branch: `local/private-shipping-ledger`.
 
 Current exact scoreboard:
 
-- **219 checked / 61 unchecked / 280 total / 78.2%**.
+- **223 checked / 57 unchecked / 280 total / 79.6%**.
 - The score is unchanged by the current subscription-plan setup and
   deployments: no checkbox is closed until its complete acceptance evidence
   exists. Recompute it from the live backlog after each batch.
