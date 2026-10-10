@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · QUAL-WEB-006 parked on complete hosted matrix
+
+The authenticated desktop account page passed a read-only Chrome accessibility
+snapshot and Lighthouse Accessibility/Best Practices/SEO 100 scores; LCP was
+1,879 ms with 106 ms TTFB. The trace's CLS culprit data was contaminated by a
+mismatched YouTube node tree, so CLS is not claimed. Mobile, screen-reader,
+large-data, field-CWV, and complete authenticated-route evidence remain open.
+`QUAL-WEB-006` stays unchecked; the next dependency-ready item is
+`ACCEPT-002`.
+
+Evidence: `docs/shipping/evidence/qual-web-006-qualification-block-2026-10-10.md`.
+
+## 2026-10-10 · QUAL-CLI-006 parked on release trust
+
+Official format, packaging, in-toto, standards, and consumer-transition
+evidence are present, but trusted keyless identity, protected publication,
+legal clearance, independent review, and final protected-pipeline consumer
+evidence are missing. `QUAL-CLI-006` remains unchecked and parked; the next
+dependency-ready item is `QUAL-WEB-006`.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-release-trust-block-2026-10-10.md`.
+
 ## 2026-10-10 · LIC-002 parked on legal approval
 
 The current technical inventory is reproducible: 148 package entries / 150

@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · QUAL-WEB-006 queue transition
+
+- **Hosted read-only result:** Authenticated account accessibility snapshot and
+  desktop Lighthouse Accessibility/Best Practices/SEO all scored 100; LCP was
+  1,879 ms and TTFB 106 ms.
+- **Boundary:** The CLS culprit output was mismatched to YouTube nodes, so it
+  was rejected. Mobile, screen-reader, keyboard, large-data, field-CWV, and
+  complete authenticated-route evidence remain open.
+- **Disposition:** Keep `QUAL-WEB-006` unchecked and park it. The next
+  dependency-ready item is `ACCEPT-002`.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-qualification-block-2026-10-10.md`.
+
+## 2026-10-10 · QUAL-CLI-006 queue transition
+
+- **Qualified:** Official SARIF/CycloneDX/SPDX/in-toto and six-archive
+  packaging/consumer evidence is recorded.
+- **Missing:** Trusted keyless release identity, protected publication,
+  legal clearance, independent review, and final protected-pipeline consumer
+  evidence.
+- **Disposition:** Keep `QUAL-CLI-006` open and park it. The next
+  dependency-ready item is `QUAL-WEB-006`.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-release-trust-block-2026-10-10.md`.
+
 ## 2026-10-10 · LIC-002 queue transition
 
 - **Verification:** Current inventory has 148 package entries / 150 versions,

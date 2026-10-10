@@ -149,8 +149,10 @@ The execution queue is strict:
    `PLAN-CLI-004`, and `PLAN-WEB-011` are now checked. `PLAN-WEB-012` is
    parked pending provider lifecycle artifacts; `TEAM-CLI-001` is now parked
    pending hosted signer/fetch activation, and the current dependency-ready ID
-   is `QUAL-CLI-006`; `STUDIO-CLI-001` is parked pending hosted custody and
-   recipient acceptance, and `LIC-002` is parked pending legal approval;
+   is `ACCEPT-002`; `STUDIO-CLI-001` is parked pending hosted custody and
+   recipient acceptance, `LIC-002` is parked pending legal approval, and
+   `QUAL-CLI-006` is parked pending trusted release identity/publication, and
+   `QUAL-WEB-006` is parked pending complete hosted matrix evidence;
    `PLAN-WEB-014` and `HUNT-008` remain parked and unchecked.
 2. Finish or genuinely document the active ID's remaining acceptance work. If
    it is genuinely blocked, commit the complete blocked record, park it
@@ -250,6 +252,29 @@ legal, trusted-publishing, and independent-review gates.
 
 Evidence:
 `docs/shipping/evidence/lic-002-legal-approval-block-2026-10-10.md`.
+
+### 2026-10-10 execution update · QUAL-CLI-006 parked, QUAL-WEB-006 selected
+
+The official CLI format, package, in-toto, standards, and consumer-transition
+evidence is complete, but trusted keyless release identity, protected
+publication, legal clearance, independent review, and final protected-pipeline
+consumer evidence are missing. `QUAL-CLI-006` remains unchecked. The queue now
+selects `QUAL-WEB-006` for a read-only authenticated Chrome qualification.
+
+Evidence:
+`docs/shipping/evidence/qual-cli-006-release-trust-block-2026-10-10.md`.
+
+### 2026-10-10 execution update · QUAL-WEB-006 parked, ACCEPT-002 selected
+
+The authenticated desktop account page passed a read-only accessibility
+snapshot and desktop Lighthouse Accessibility/Best Practices/SEO checks, but
+the CLS trace was invalidated because its culprit tree named YouTube nodes.
+Mobile, keyboard, human screen-reader, large-data, field-CWV, and complete
+authenticated-route evidence remain missing. `QUAL-WEB-006` stays unchecked;
+the queue now selects `ACCEPT-002`.
+
+Evidence:
+`docs/shipping/evidence/qual-web-006-qualification-block-2026-10-10.md`.
 
 ### 2026-10-10 execution amendment · blocked-item queue rule
 

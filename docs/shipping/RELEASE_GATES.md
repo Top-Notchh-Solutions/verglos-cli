@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · QUAL-WEB-006 parked; ACCEPT-002 selected
+
+The authenticated desktop account route has positive a11y and LCP evidence,
+but the complete mobile/keyboard/screen-reader/large-data/field-CWV matrix is
+not complete and the CLS trace was invalidated as contaminated. Keep
+`QUAL-WEB-006` open; the strict queue now selects `ACCEPT-002`.
+
+Evidence: `docs/shipping/evidence/qual-web-006-qualification-block-2026-10-10.md`.
+
+## 2026-10-10 · QUAL-CLI-006 parked; QUAL-WEB-006 selected
+
+The CLI qualification evidence is substantial but not final: trusted keyless
+identity, protected publication, legal clearance, independent review, and
+protected-pipeline consumer evidence remain absent. Keep `QUAL-CLI-006` open;
+the strict queue now selects `QUAL-WEB-006` for assessment.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-release-trust-block-2026-10-10.md`.
+
 ## 2026-10-10 · LIC-002 parked; QUAL-CLI-006 selected
 
 The technical license/notice inventory is reproducible and its local checks
