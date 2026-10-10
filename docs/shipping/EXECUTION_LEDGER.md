@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 Production Cards-only revalidation
+
+- **Read-only result:** Public Production checkout returned HTTP 200 with
+  server-rendered `paymentMethods: [{id: "card", label: "Cards"}]`,
+  `testMode: false`, and `subscriptionEnabled: false`.
+- **Browser result:** Forced reload of both existing Chrome Production
+  checkout tabs rendered Cards only; no UPI/QR, Netbanking, Wallet, EMI, Pay
+  Later, or eMandate labels remained. The earlier extra-label observation was
+  stale tab state.
+- **Boundary:** No checkout submission or Production provider, payment,
+  database, migration, entitlement, account, customer-data, or environment
+  write occurred. This does not qualify Production payment acceptance.
+- **Disposition:** The current public Production method shape is consistent;
+  `PLAN-WEB-014` and Gate 4 remain open for isolated lifecycle and
+  provider-to-ledger-to-license evidence.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-production-cards-only-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 provider renewal dashboard boundary
 
 - **Read-only check:** The authenticated Razorpay Test Mode dashboard showed

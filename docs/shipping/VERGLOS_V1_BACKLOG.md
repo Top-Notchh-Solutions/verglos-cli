@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` Production Cards-only revalidation
+
+Fresh public and browser verification supersedes the stale-tab observation in
+the earlier Production smoke note. `https://verglos.com/checkout` returned
+HTTP 200 with server-rendered `paymentMethods: [{id: "card", label:
+"Cards"}]`, `testMode: false`, and `subscriptionEnabled: false`. After forced
+reload, both existing Chrome Production checkout tabs rendered Cards only and
+no UPI/QR, Netbanking, Wallet, EMI, Pay Later, or eMandate labels. This is
+read-only configuration evidence, not Production payment acceptance. No
+checkbox changed; score remains **219 checked / 61 unchecked / 280 total
+(78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-production-cards-only-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` provider renewal dashboard boundary
 
 The authenticated Razorpay Test Mode dashboard showed the active canonical

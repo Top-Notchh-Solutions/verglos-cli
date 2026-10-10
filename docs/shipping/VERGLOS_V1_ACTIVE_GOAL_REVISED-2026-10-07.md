@@ -54,6 +54,18 @@ evidenced;
 Gates 5–9 remain open or external as described in Section 4. No production
 billing or database activation is implied by this checkpoint.
 
+### 2026-10-10 · Production Cards-only revalidation superseding stale-tab observation
+
+Fresh public and browser checks returned HTTP 200 and confirmed the current
+Production checkout configuration is Cards-only: the server-rendered payload
+reported `paymentMethods: [{id: "card", label: "Cards"}]`, `testMode: false`,
+and `subscriptionEnabled: false`; forced reload of both existing Chrome
+Production tabs showed no UPI/QR, Netbanking, Wallet, EMI, Pay Later, or
+eMandate labels. The earlier extra-label observation was stale browser state.
+This remains read-only configuration evidence and does not qualify
+Production payment acceptance. Evidence:
+`docs/shipping/evidence/plan-web-014-production-cards-only-revalidation-2026-10-10.md`.
+
 ### 2026-10-10 · official subscription-card capture superseding checkpoint
 
 The official Razorpay Test Mode subscription-card fixture completed one
