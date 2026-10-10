@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-CLI-001 Preview issue→verify revalidation
+
+The current Web Preview deployment `dpl_553h93xmbKWFAPKSdr8t3679reU7` was
+rechecked against the isolated Neon Test database and Preview isolation marker.
+An existing mapped active Pro fixture received a deployed v2 token (HTTP 200,
+catalog `2026-10-02.0`, three JWT segments); the current CLI verifier accepted
+it as `schemaVersion=2`, tenant-scoped owner, with 21 capabilities and bounded
+allowances. The verifier used a temporary HOME for the cache.
+
+This confirms the already-checked `PLAN-CLI-001` acceptance at the current
+heads. It does not close Gate 4 or the provider lifecycle matrix. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**. No Production state changed.
+
+Evidence: `docs/shipping/evidence/plan-cli-001-preview-v2-issue-verify-rerun-2026-10-10.md`.
+
 ## 2026-10-10 · PRO-008 invoice metadata projection advanced
 
 Web commit `cad9404` adds validated, idempotent provider-invoice metadata

@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PLAN-CLI-001 Preview issue→verify revalidation
+
+Current Preview deployment `dpl_553h93xmbKWFAPKSdr8t3679reU7` was rechecked
+against the isolated Neon Test database. A mapped active Pro fixture received
+an HTTP 200 v2 entitlement token at catalog `2026-10-02.0`; the current CLI
+verifier accepted the pinned signature, `schemaVersion=2`, owner role, tenant
+scope, 21 capabilities, and bounded allowances. This revalidates the already
+checked `PLAN-CLI-001` item and does not close Gate 4. Score remains
+**223/57/280 (79.6%)**; no Production state changed.
+
+Evidence: `docs/shipping/evidence/plan-cli-001-preview-v2-issue-verify-rerun-2026-10-10.md`.
+
 ## 2026-10-10 · PRO-008 invoice metadata projection advanced
 
 Web `cad9404` adds validated, idempotent provider-invoice metadata persistence
