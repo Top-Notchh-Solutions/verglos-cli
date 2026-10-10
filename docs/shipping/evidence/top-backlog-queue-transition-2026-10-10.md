@@ -1,4 +1,8 @@
-# Top-backlog queue transition — 2026-10-10
+# Top-backlog queue transition — 2026-10-10 (historical checkpoint)
+
+> Superseded by the later queue records in tracker commit `8a94df26`.
+> The current strict queue has since assessed `ACCEPT-002`, `HUNT-008`, and
+> `PLAN-WEB-012`; all remain unchecked on their external-evidence boundaries.
 
 ## Scope
 
