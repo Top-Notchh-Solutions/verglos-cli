@@ -86,6 +86,28 @@ test("verifyEntitlement: successor slot also verifies (rotation path)", async ()
   assert.equal(result.claims?.tier, "studio");
 });
 
+test("verifyEntitlement: accepts the server's keyed legacy-v1 header", async () => {
+  const kp = generateEntitlementKeyPair();
+  const legacyToken = signEntitlement({
+    claims: makeClaims(),
+    privateKey: privateKeyFromPem(kp.privateKeyPem),
+  });
+  const [, claimsB64] = legacyToken.split(".");
+  const headerB64 = Buffer.from('{"alg":"EdDSA","kid":"legacy-v1","typ":"JWT"}', "utf8")
+    .toString("base64url");
+  const signature = ed25519Sign(
+    null,
+    Buffer.from(`${headerB64}.${claimsB64}`, "utf8"),
+    privateKeyFromPem(kp.privateKeyPem),
+  ).toString("base64url");
+
+  const result = await verifyEntitlement(`${headerB64}.${claimsB64}.${signature}`, Date.now(), {
+    pinnedKeys: [kp.publicKeyBase64Url, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"],
+  });
+  assert.equal(result.valid, true);
+  assert.equal(result.claims?.tier, "pro");
+});
+
 test("verifyEntitlement: v2 kid selects only its pinned key and preserves v1 compatibility", async () => {
   const legacy = generateEntitlementKeyPair();
   const successor = generateEntitlementKeyPair();
