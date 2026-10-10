@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · QUAL-CLI-006 current private-source qualification
+
+The current private source completed `pnpm exec turbo run test typecheck
+build --force` with **23/23 tasks successful**, zero failures, and zero cached
+tasks. No provider, database, entitlement, account, customer, npm, or
+Production state was accessed or changed.
+
+`QUAL-CLI-006` remains open for trusted keyless signing, protected
+publication/attestation, legal clearance, independent release review, and
+protected-pipeline consumer evidence. The next independent assessment is
+`QUAL-WEB-006`. Score remains **223 checked / 57 unchecked / 280 total
+(79.6%)**.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-current-private-run-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 hosted activation recheck
 
 The signed organization-policy implementation remains locally healthy: shared

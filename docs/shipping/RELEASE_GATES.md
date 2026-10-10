@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · QUAL-CLI-006 current private-source qualification
+
+The current private source passed the complete `test`, `typecheck`, and
+`build` task set: **23/23 successful**, zero failures, zero cached tasks. This
+does not satisfy trusted keyless signing, protected publication/attestation,
+legal clearance, independent review, or protected-pipeline consumer evidence.
+`QUAL-CLI-006` remains open and `QUAL-WEB-006` is next. Score remains
+**223/57/280 (79.6%)**; no provider, database, entitlement, account, customer,
+npm, or Production state changed.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-current-private-run-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 hosted activation recheck
 
 Shared organization-policy tests passed **3/3**, CLI cache/fetch tests passed

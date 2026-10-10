@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · QUAL-CLI-006 current private-source qualification
+
+The current private source completed the full `test`, `typecheck`, and `build`
+task set with **23/23 successful**, zero failures, and zero cached tasks.
+`QUAL-CLI-006` remains unchecked pending trusted keyless signing, protected
+publication/attestation, legal clearance, independent review, and protected
+pipeline consumer evidence. `QUAL-WEB-006` is next; score remains **223 checked
+ / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/qual-cli-006-current-private-run-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 hosted activation recheck
 
 The organization-policy client remains locally qualified: shared policy tests

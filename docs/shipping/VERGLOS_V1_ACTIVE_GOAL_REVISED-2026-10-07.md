@@ -40,6 +40,19 @@ remains **223/57/280 (79.6%)**.
 Evidence:
 `docs/shipping/evidence/team-cli-001-hosted-activation-recheck-2026-10-10.md`.
 
+### 2026-10-10 · QUAL-CLI-006 current private-source qualification
+
+The current private source completed `pnpm exec turbo run test typecheck
+build --force` with **23/23 tasks successful**, zero failures, and zero cached
+tasks. This is current-source regression/build evidence only. Trusted keyless
+signing, protected publication/attestation, legal clearance, independent
+release review, and protected-pipeline consumer evidence remain open, so
+`QUAL-CLI-006` stays unchecked. The next independent assessment is
+`QUAL-WEB-006`. Score remains **223/57/280 (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/qual-cli-006-current-private-run-2026-10-10.md`.
+
 ### 2026-10-10 · PLAN-CLI-001 revalidation and queue correction
 
 `PLAN-CLI-001` is already checked in the authoritative backlog. The current

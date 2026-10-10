@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · QUAL-CLI-006 current private-source qualification
+
+- **Verification:** `pnpm exec turbo run test typecheck build --force` completed
+  **23/23 tasks successfully**, with zero failures and zero cached tasks.
+- **Boundary:** No provider, database, entitlement, account, customer, npm,
+  or Production state was accessed or changed.
+- **Disposition:** Keep `QUAL-CLI-006` unchecked. Trusted keyless signing,
+  protected publication/attestation, legal clearance, independent review, and
+  protected-pipeline consumer evidence remain open. The next independent
+  assessment is `QUAL-WEB-006`; score remains **223/57/280 (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-current-private-run-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 hosted activation recheck
 
 - **Verification:** Shared organization-policy tests **3/3**, CLI cache/fetch
