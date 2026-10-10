@@ -12,6 +12,27 @@ unchecked / 280 total (79.6%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · PLAN-CLI-001 revalidation and queue correction
+
+`PLAN-CLI-001` is already checked in the authoritative backlog. The current
+Web Preview deployment `dpl_553h93xmbKWFAPKSdr8t3679reU7`, isolated Neon Test
+database, and Preview isolation marker were rechecked with an existing mapped
+active Pro fixture. The deployed v2 route returned HTTP 200 at catalog
+`2026-10-02.0`; the current CLI verifier accepted the pinned signature,
+`schemaVersion=2`, owner/tenant scope, 21 capabilities, and bounded
+allowances. This rerun changes no checkbox and does not close Gate 4.
+
+The queue must not select `PLAN-CLI-001` again. `HUNT-008` and `PLAN-WEB-012`
+remain parked on their recorded external provenance/provider artifacts;
+`PLAN-CLI-003` and `PRO-008` remain dependency-bound to the open lifecycle
+work. The next dependency-ready assessment is `TEAM-CLI-001`, whose code is
+implemented but whose hosted signer/trust-root activation, policy-row
+reconciliation, and live tenant/repository-bound fetch are still required.
+The live score remains **223/57/280 (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-cli-001-preview-v2-issue-verify-rerun-2026-10-10.md`.
+
 ### 2026-10-10 · PLAN-WEB-012 local lifecycle update
 
 A disposable local PostgreSQL 15 `verglos_test` container initialized the
@@ -207,7 +228,10 @@ The execution queue is strict:
 2. Finish or genuinely document the active ID's remaining acceptance work. If
    it is genuinely blocked, commit the complete blocked record, park it
    unchecked, and select the first dependency-ready unchecked item from the
-   top of the backlog. This is a queue transition, not acceptance.
+   top of the backlog. This is a queue transition, not acceptance. After the
+   current `PLAN-CLI-001` revalidation, the next dependency-ready assessment
+   is `TEAM-CLI-001`; do not count its local implementation as hosted
+   acceptance until the signer/trust-root and live fetch artifacts exist.
 3. Recompute the live score from `docs/shipping/VERGLOS_V1_BACKLOG.md` after
    each substantial batch. Only complete acceptance evidence may change a
    checkbox; code, deployment, browser clicks, configuration, or a partial
