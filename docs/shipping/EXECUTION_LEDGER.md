@@ -7376,6 +7376,20 @@ it was not sent and contains no credentials or customer data.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-provider-renewal-schedule-recheck-2026-10-10.md`.
 
+## 2026-10-10 · PLAN-WEB-014 provider webhook replay-control boundary
+
+- **Read-only inspection:** Chrome DevTools reloaded the authenticated Razorpay
+  Test Mode Webhooks surface. It exposed configuration and active-event
+  settings only; no delivery history, delivery identifier, retry, replay, or
+  out-of-order scheduling control was available.
+- **Boundary:** No webhook configuration changed and no event was replayed or
+  synthetically posted. Docker replay tests remain code-side evidence only.
+- **Disposition:** Provider replay/out-of-order evidence remains open; Gate 4
+  and `PLAN-WEB-014` remain open. No checkbox changed; score remains **219
+  checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-provider-webhook-replay-control-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 official subscription-card capture reconciliation
 
 - **Provider:** The official Razorpay Test Mode subscription-card fixture

@@ -116,6 +116,18 @@ control for them. No provider update or payment operation was submitted.
 This is a read-only provider boundary, not Gate 4 acceptance. Evidence:
 `docs/shipping/evidence/plan-web-014-provider-renewal-schedule-recheck-2026-10-10.md`.
 
+### 2026-10-10 · provider webhook replay-control boundary
+
+The authenticated Razorpay Test Mode Webhooks surface was reloaded through
+Chrome DevTools. It exposed webhook configuration and active-event settings,
+but no delivery history, delivery identifier, retry, replay, or out-of-order
+scheduling control. No configuration was changed and no event was replayed or
+synthetically posted. The Docker replay tests remain code-side only. Evidence:
+`docs/shipping/evidence/plan-web-014-provider-webhook-replay-control-boundary-2026-10-10.md`.
+
+This keeps `PLAN-WEB-014` and Gate 4 open; the provider replay/out-of-order
+case needs a supported provider fixture or real provider retry evidence.
+
 ### 2026-10-10 · Production Cards-only revalidation superseding stale-tab observation
 
 Fresh public and browser checks returned HTTP 200 and confirmed the current

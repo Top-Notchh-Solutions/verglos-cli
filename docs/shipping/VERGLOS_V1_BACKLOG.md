@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` provider webhook replay-control boundary
+
+The authenticated Razorpay Test Mode Webhooks surface was reloaded through
+Chrome DevTools. It exposed webhook configuration and active-event settings,
+but no delivery history, delivery identifier, retry, replay, or out-of-order
+scheduling control. No configuration was changed and no event was replayed or
+synthetically posted. The Docker replay tests remain code-side only. This
+provider boundary keeps `PLAN-WEB-014` and Gate 4 open; score remains **219
+checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-webhook-replay-control-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` provider renewal schedule recheck
 
 The authenticated Razorpay Test Mode subscription inventory returned HTTP 200
