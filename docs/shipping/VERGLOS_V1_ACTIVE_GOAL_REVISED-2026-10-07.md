@@ -2402,6 +2402,27 @@ This amendment supersedes stale historical statements in this file that name
 `PLAN-CLI-001`, `PLAN-WEB-014`, or the 219/61 score as the current active
 checkpoint. It does not close Gate 4 or any backlog item by itself.
 
+### 2026-10-10 production migration and exact-head rollout checkpoint
+
+The Production database was first snapshotted to the one-day Neon child branch
+`pre-migration-2026-10-10`, then the guarded migration runner applied additive
+migrations `0039_client_projection_custody` and
+`0040_billing_invoice_metadata` through Vercel's Production environment. The
+post-write read-only audit is **41/41 applied, zero pending, zero missing
+tables**. Production is now deployed from Web `e310c57` as
+`dpl_3H8Ejwb7wfbPMD8f7TuXZ5gYcw3v`; runtime validation, the 47-route build,
+landing/checkout smoke, Cards-only display, and POST-only route checks passed.
+
+This was a reviewed Production code/schema rollout only. No payment, provider,
+webhook, entitlement, account, or customer-data write occurred. It advances
+the Production readiness evidence but does not close `STUDIO-CLI-001`,
+`PRO-008`, `PLAN-WEB-014`, `PLAN-WEB-015`, or any other item whose independent,
+provider, customer, legal, or reviewer artifact is still absent. The live score
+remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/production-migration-and-code-rollout-2026-10-10.md`.
+
 ### 2026-10-10 HUNT-008 supplementary Docker qualification
 
 The pinned Docker adversarial run completed with **60 passes / 1 explicit

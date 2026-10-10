@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Production migration and exact-head code rollout
+
+- **Safety:** Neon child branch `pre-migration-2026-10-10` was created from
+  the `verglos` Production branch with data and schema and one-day expiry.
+  The branch reached 41/41 migrations before the Production operation.
+- **Migration:** The guarded Vercel Production `db:migrate` run applied the
+  two pending additive migrations. The post-write read-only audit reports
+  **41/41 applied, zero pending, zero missing tables**.
+- **Deployment:** Production deployment `dpl_3H8Ejwb7wfbPMD8f7TuXZ5gYcw3v`
+  is READY and aliases `verglos.com`, sourced from Web `e310c57`. The build
+  generated 47 routes and Production runtime validation passed.
+- **Smoke:** `/` and `/checkout` returned 200; Production checkout exposes
+  Cards only and subscription creation is disabled; webhook/order/subscription
+  GET probes returned 405 as required for POST-only routes.
+- **Boundary:** No payment, provider, webhook, entitlement, account, or
+  customer-data write occurred. No existing rows were rewritten or deleted.
+- **Disposition:** This advances Production readiness and the Studio/invoice
+  implementation but does not close their externally gated backlog items. No
+  checkbox changed; score remains **223 checked / 57 unchecked / 280 total
+  (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/production-migration-and-code-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · Production-inclusive Preview rollout and migration preflight
 
 - **Source:** Web `e310c57afec730d0266e72a7adbfff59e5efa09a`; focused

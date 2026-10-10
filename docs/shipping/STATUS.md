@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Production migration and exact-head code rollout
+
+The Neon `verglos` Production branch was snapshotted to the one-day
+`pre-migration-2026-10-10` child branch. The guarded Production migration run
+then applied `0039_client_projection_custody` and
+`0040_billing_invoice_metadata`; the post-write audit is **41/41 applied, zero
+pending, zero missing tables**.
+
+Production is now on deployment `dpl_3H8Ejwb7wfbPMD8f7TuXZ5gYcw3v`, sourced from
+Web `e310c57`, with runtime validation and 47-route build passing. `/` and
+`/checkout` return 200; Production checkout is Cards-only with subscription
+creation disabled; webhook/order/subscription GET probes correctly return 405.
+No payment, provider, webhook, entitlement, account, or customer-data write
+occurred. This advances Production readiness but does not close the externally
+gated lifecycle, Studio-recipient, or payment-reconciliation items. Score
+remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/production-migration-and-code-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · Production-inclusive Preview rollout and migration preflight
 
 Web `e310c57afec730d0266e72a7adbfff59e5efa09a` passed focused tests **41/42**
