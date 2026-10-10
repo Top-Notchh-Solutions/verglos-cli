@@ -7250,6 +7250,33 @@ The redacted provider unblock packet is prepared at
 `docs/shipping/evidence/razorpay-testmode-recurring-card-support-request-2026-10-10.md`;
 it was not sent and contains no credentials or customer data.
 
+## 2026-10-10 · PLAN-WEB-014 official subscription-card capture reconciliation
+
+- **Provider:** The official Razorpay Test Mode subscription-card fixture
+  completed one canonical Pro/monthly authorization and capture through the
+  isolated Test Mode Checkout flow. The documented random four-digit payment
+  OTP was used only on the provider mock payment page; no tokenization OTP was
+  guessed.
+- **Webhook:** Five signed events completed: `payment.authorized`,
+  `payment.captured`, `subscription.authenticated`,
+  `subscription.activated`, and `subscription.charged`. The five recent event
+  IDs and payload digests were distinct.
+- **Reconciliation:** Redacted read-only joins matched one active subscription,
+  one captured subscription payment, and one active Pro license with the same
+  canonical INR amount/currency and matching payment-to-license and
+  subscription-to-license binding. Aggregate state after the attempt was four
+  captured, four failed, one partially refunded, and three refunded payments;
+  six active, eight cancelled, and 22 pending subscriptions; three active
+  licenses; and 80 completed webhook events.
+- **Disposition:** This is material Gate 4 and `PLAN-WEB-014` progress, but it
+  does not close the item. Provider-generated renewal, failure/expiry,
+  refund replay/order, out-of-order delivery, timeout/retry, and final hosted
+  Preview acceptance remain open. No Production/provider/database/migration/
+  entitlement/customer write occurred outside the isolated Test Mode flow.
+  Score remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-official-subscription-card-success-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 continuation requalification
 
 - **Surface:** Fresh read-only Production and isolated Preview checkout

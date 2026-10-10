@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` official subscription-card capture reconciliation
+
+The official Razorpay Test Mode subscription-card fixture completed one
+canonical Pro/monthly authorization and capture for an isolated Preview-created
+subscription. Five distinct signed webhook events completed, and the isolated rows
+reconciled one captured subscription payment to one active subscription and
+one active Pro license with matching redacted tenant/user binding. This is
+material Gate 4 progress, but provider-generated renewal, failure/expiry,
+refund replay/order, out-of-order delivery, timeout/retry, and final hosted
+Preview acceptance remain open. No checkbox changed; score remains **219
+checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-official-subscription-card-success-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` Cards-only Preview route boundary
 
 Web `445d8ed` is deployed to READY Preview `dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7`.
