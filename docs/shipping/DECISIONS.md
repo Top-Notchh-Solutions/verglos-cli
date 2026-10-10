@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Keep recurring checkout Cards-only in Production
+
+- **Decision:** Recurring subscription creation and its hosted display must
+  fail closed unless `card` is present in the server-owned method catalog.
+- **Reason:** The release candidate is Cards-only; a broader order catalog must
+  not accidentally expose unsupported recurring methods or create a provider
+  subscription under an unqualified method.
+- **Evidence:** Web `9a3c32a`, display **4/4**, isolated route integration
+  **2/2**, Production `dpl_12hRaACdnE4SvGmFHZFXpcUCTsC2` READY, and read-only
+  root/checkout HTTP 200 checks.
+- **Disposition:** Keep `PLAN-WEB-014` and Gate 4 open until the remaining
+  provider-generated lifecycle and signed reconciliation evidence exists.
+- **Boundary:** No `.env.gates.testing` values were deployed; no provider,
+  payment, database, entitlement, account, or customer-data write occurred.
+
 ## 2026-10-10 · Test Mode webhook ingress uses temporary Vercel bypass
 
 For isolated Preview qualification only, one Razorpay Test Mode webhook URL

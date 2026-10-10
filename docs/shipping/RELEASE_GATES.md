@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Cards-only recurring guard Production rollout; Gate 4 remains open
+
+Web `9a3c32a` now fails closed for recurring subscription creation when Cards
+are absent and filters the recurring hosted display to Cards. Display tests
+passed **4/4**, isolated PostgreSQL route tests **2/2**, and Production
+deployment `dpl_12hRaACdnE4SvGmFHZFXpcUCTsC2` reached `READY` with read-only
+root/checkout HTTP 200 checks.
+
+This is a safe code rollout only. No Test Mode values from `.env.gates.testing`
+were deployed and no provider, payment, webhook, database, entitlement,
+account, or customer-data write occurred. Gate 4 and `PLAN-WEB-014` remain
+open for provider-generated recurring lifecycle and complete signed
+payment-to-ledger-to-license reconciliation.
+
+Evidence: `docs/shipping/evidence/plan-web-014-cards-only-recurring-guard-production-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-012 local lifecycle pass; provider matrix remains
 
 The disposable local PostgreSQL payment-webhook integration passed **5/5**

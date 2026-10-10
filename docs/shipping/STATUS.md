@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-WEB-014 recurring Cards-only guard shipped to Production
+
+Web commit `9a3c32a` makes recurring subscription creation fail closed without
+Cards and makes the subscription checkout display Cards-only even if an order
+catalog is broader. Checkout display tests passed **4/4**; the isolated
+PostgreSQL route integration passed **2/2** with distinct configured and test
+database URLs; typecheck and the 47-page production build passed.
+
+Production deployment `dpl_12hRaACdnE4SvGmFHZFXpcUCTsC2` reached `READY`; the
+read-only `/` and `/checkout` checks returned HTTP 200. The local
+`.env.gates.testing` values were not passed to the deployment. No provider,
+payment, webhook, database, entitlement, account, customer-data, or environment
+variable write occurred.
+
+This hardens the Cards-only boundary but does not close `PLAN-WEB-014` or Gate
+4. Provider-generated renewal, failure/expiry, refund/replay/order,
+out-of-order, timeout/retry, exactly-once, and complete tenant-bound
+reconciliation evidence remain open. Score remains **223 checked / 57
+unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-cards-only-recurring-guard-production-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-012 local lifecycle integration passed
 
 A disposable local PostgreSQL 15 `verglos_test` container was initialized with

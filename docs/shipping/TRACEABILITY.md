@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · PLAN-WEB-014 recurring Cards-only guard and Production rollout
+
+- **Mapped IDs:** `PLAN-WEB-014`, Gate 4; recurring checkout method boundary.
+- **Implementation:** Web `9a3c32a` requires Cards for subscription creation and
+  filters the recurring hosted display to Cards.
+- **Qualification:** Display tests **4/4**, isolated PostgreSQL route tests
+  **2/2**, typecheck, local/remote 47-page builds, and read-only Production
+  `/` plus `/checkout` HTTP 200 checks passed.
+- **Boundary:** No Test Mode values were passed to the deployment. No provider,
+  payment, webhook, database, entitlement, account, or customer-data write.
+- **Acceptance:** This proves the code/deployment Cards-only boundary only;
+  provider-generated recurring lifecycle and complete signed reconciliation
+  remain open. Score remains **223/57/280 (79.6%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-cards-only-recurring-guard-production-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 webhook ingress slice
 
 - **Item:** `PLAN-WEB-014`

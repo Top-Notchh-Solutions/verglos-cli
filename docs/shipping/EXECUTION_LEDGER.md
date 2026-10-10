@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 Cards-only recurring guard and Production rollout
+
+- **Implementation:** Web `9a3c32a` requires `card` for recurring subscription
+  creation and filters the recurring hosted display to Cards.
+- **Verification:** Checkout display tests **4/4**, isolated PostgreSQL route
+  integration **2/2** with distinct configured/test URLs, typecheck, local
+  47-page build, and Vercel Production build all passed.
+- **Deployment:** Production `dpl_12hRaACdnE4SvGmFHZFXpcUCTsC2` reached
+  `READY`; read-only `/` and `/checkout` checks returned HTTP 200.
+- **Boundary:** `.env.gates.testing` remained local Test Mode context and was
+  not passed to Vercel. No provider, payment, webhook, database, migration,
+  entitlement, license, account, customer-data, or environment-variable write
+  occurred.
+- **Disposition:** Keep `PLAN-WEB-014` and Gate 4 open. Provider-generated
+  renewal, failure/expiry, refund/replay/order, out-of-order, timeout/retry,
+  exactly-once, and complete tenant-bound reconciliation remain open.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-cards-only-recurring-guard-production-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · HUNT-008 supplementary Docker adversarial run
 
 - **Verification:** The pinned CLI checkout `ad6ee1479c887c59eb6630da4754a2e0b7b4045e`

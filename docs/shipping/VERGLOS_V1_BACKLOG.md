@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · PLAN-WEB-014 Cards-only recurring guard addendum
+
+Web `9a3c32a` hardens recurring subscription creation and display to require
+Cards, with display **4/4**, isolated PostgreSQL route integration **2/2**,
+typecheck, local/remote 47-page builds, and READY Production deployment
+`dpl_12hRaACdnE4SvGmFHZFXpcUCTsC2` with read-only `/` and `/checkout` HTTP
+200 checks. No Test Mode values were deployed and no provider, payment,
+webhook, database, entitlement, account, or customer-data write occurred.
+
+This is supporting implementation/deployment evidence only. The checkbox stays
+open until provider-generated renewal, failure/expiry, refund/replay/order,
+out-of-order, timeout/retry, exactly-once, and complete tenant-bound
+reconciliation are proven. Score remains **223 checked / 57 unchecked / 280
+total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-cards-only-recurring-guard-production-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-002 accepted
 
 The effective-capability UX is now qualified in the CLI. `whoami` human and
