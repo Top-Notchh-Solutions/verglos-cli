@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · TEAM-CLI-001 policy-client implementation batch
+
+- **Implementation:** Added the shared signed organization-policy contract,
+  bounded atomic cache persistence, authenticated bounded fetch, and the
+  `verglos policy organization fetch` command to the current private shipping
+  branch.
+- **Verification:** Shared policy **3/3** and CLI cache/fetch **4/4** focused
+  tests passed; shared/CLI typechecks, CLI build, and `git diff --check` passed.
+- **Disposition:** Progress only. Keep `TEAM-CLI-001` unchecked pending
+  production signer/trust-root activation, policy-row reconciliation, and a
+  live tenant/repository-bound hosted fetch. No Production/provider/database/
+  entitlement/npm/customer-data write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-policy-client-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-004 accepted
 
 - **Compatibility:** Opaque server-shaped Free/Pro/Team/Studio/Enterprise

@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · TEAM-CLI-001 policy-client implementation advanced
+
+The current private shipping branch now contains the signed organization-policy
+envelope, bounded atomic cache, authenticated fetch, and
+`verglos policy organization fetch` command. Shared organization-policy tests
+passed **3/3**; CLI cache/fetch tests passed **4/4**; shared and CLI typechecks,
+CLI build, and diff checks passed. No secret was printed and no Production,
+provider, database, entitlement, npm, or customer-data write occurred.
+
+This is implementation evidence only. `TEAM-CLI-001` remains unchecked until
+the production signer/trust root is activated, existing policy rows are
+reconciled, and a live tenant/repository-bound hosted fetch is verified.
+The next queue transition must not treat this code batch as acceptance.
+
+Evidence: `docs/shipping/evidence/team-cli-001-policy-client-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-004 accepted
 
 The CLI/server compatibility contract is now accepted: opaque Free/Pro/Team/

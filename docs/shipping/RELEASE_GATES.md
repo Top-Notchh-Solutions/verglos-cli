@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · TEAM-CLI-001 implementation boundary
+
+The CLI organization-policy client is now present on the current shipping
+branch: strict signed envelope verification, exact tenant/repository binding,
+bounded atomic cache, authenticated fetch, offline fallback, and visible
+digest output. Focused shared and CLI tests pass **7/7**, with typecheck/build
+clean.
+
+The release gate remains open. A local implementation cannot prove the
+production signer/trust-root activation, hosted policy-row reconciliation, or
+live tenant/repository-bound fetch. No Production/provider/database or
+entitlement write occurred.
+
+Evidence: `docs/shipping/evidence/team-cli-001-policy-client-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-004 compatibility acceptance
 
 The CLI/server compatibility boundary is accepted: opaque catalog fixtures

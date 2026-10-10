@@ -7,10 +7,25 @@ this complete version before resuming.
 ## Current checkpoint · 2026-10-10
 
 This is the complete replacement goal for the current shipping run. The
-authoritative private backlog currently recomputes to **219 checked / 61
-unchecked / 280 total (78.2%)**. This number must be recomputed from the live
+authoritative private backlog currently recomputes to **223 checked / 57
+unchecked / 280 total (79.6%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
+
+### 2026-10-10 · TEAM-CLI-001 implementation progress
+
+The current CLI branch now contains the signed organization-policy envelope,
+bounded atomic cache, authenticated fetch, and `verglos policy organization
+fetch` command. Shared policy tests pass 3/3, CLI cache/fetch tests pass 4/4,
+and shared/CLI typecheck plus CLI build pass. This is implementation progress,
+not acceptance: `TEAM-CLI-001` remains the single active unchecked item until
+production signer/trust-root activation, hosted policy-row reconciliation, and
+a live tenant/repository-bound fetch are evidenced. No extra input is required
+from the founder for this code batch, and the supplied gate-test environment is
+not used as Production evidence.
+
+Evidence:
+`docs/shipping/evidence/team-cli-001-policy-client-2026-10-10.md`.
 
 ### 2026-10-10 · `PLAN-WEB-014` provider retry block
 
