@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · Cards-only Preview route boundary
+
+- **Mapped IDs:** `PLAN-WEB-014`, Gate 4; hosted checkout/catalog boundary.
+- **Source/result:** Web `445d8ed`; protected Preview create-order returned
+  HTTP 200, Test Mode, catalog `2026-10-02.0`, and `paymentMethods: ["card"]`.
+  Focused checkout tests passed **12/12**; Preview/Production builds passed;
+  deployed Preview and Production HTML both exposed Cards only.
+- **Acceptance boundary:** Server/catalog method selection is qualified. The
+  provider authorization/capture, signed lifecycle delivery, entitlement and
+  ledger reconciliation, replay/order, renewal, failure/expiry, refund,
+  timeout/retry, and complete tenant-binding matrix remain open.
+- **Boundary:** Test Mode/isolated Preview only; no Production billing,
+  database, migration, entitlement, account, or customer-data write. Score
+  remains **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-cards-only-preview-route-and-hosted-display-2026-10-10.md`.
+
 ## 2026-10-10 · Privacy/deletion isolated qualification
 
 - **Mapped IDs:** `QUAL-WEB-005`, `OPS-011/012`, customer-held record paths.

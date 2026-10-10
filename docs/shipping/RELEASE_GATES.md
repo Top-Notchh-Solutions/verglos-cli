@@ -1,5 +1,24 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 Cards-only Preview route boundary
+
+The protected Preview create-order route on Web `445d8ed` returned HTTP 200
+in Test Mode with catalog `2026-10-02.0` and exactly `card` in the server
+payment-method response. Focused checkout tests passed **12/12** and the
+Preview/Production builds passed; deployed Preview and Production checkout
+HTML both exposed Cards only. This qualifies the application/catalog
+boundary only. Fresh automated provider frames did not render a usable hosted
+form without real user activation; therefore provider authorization/capture,
+signed delivery, payment/ledger/license reconciliation, replay/order,
+renewal, failure/expiry, refund, timeout/retry, and complete tenant-binding
+evidence remain required. Gate 4 and the mapped backlog items remain open.
+
+No Production billing, database, migration, entitlement, account, or
+customer-data write occurred. Score remains **219/61/280 (78.2%)**; no
+checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-cards-only-preview-route-and-hosted-display-2026-10-10.md`.
+
 ## 2026-10-10 · ACCEPT-002/003 authoritative-source substrate verification
 
 The private acceptance verifier now passes against CLI `origin/main`

@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Cards-only Preview route boundary
+
+Web `445d8ed` is deployed to READY Preview `dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7`.
+The protected Preview create-order route returned HTTP 200 in Test Mode with
+catalog `2026-10-02.0` and exactly the server-declared method `card`. Focused
+checkout tests passed **12/12** and the 47-page builds passed. Production
+and Preview checkout HTML both expose Cards only; smoke remained read-only; no Production billing, database, migration,
+entitlement, account, or customer-data write occurred.
+
+This qualifies the Cards-only server/catalog boundary only. `PLAN-WEB-014`
+and Gate 4 remain open for provider authorization/capture, signed webhook,
+payment/ledger/license reconciliation, replay/order, renewal, failure/expiry,
+refund, timeout/retry, and complete tenant binding. Score remains **219/61/280
+(78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-cards-only-preview-route-and-hosted-display-2026-10-10.md`.
+
 ## 2026-10-10 · Privacy/deletion isolated qualification
 
 The authenticated privacy/deletion batch passed **29/29** with zero failures:

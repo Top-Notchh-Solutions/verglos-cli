@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## R-PLAN-WEB-014-CARDS-ONLY-HOSTED-DISPLAY · 2026-10-10
+
+Web `445d8ed` now passes the server-owned Cards-only display configuration to
+order and subscription Checkout paths and disables provider default blocks.
+The protected Preview create-order route returned HTTP 200 with Test Mode,
+canonical catalog `2026-10-02.0`, and method set `card`. A fresh automated
+provider frame did not render a usable form without real user activation, so
+hosted modal visibility remains unverified by this batch. Owner: Web/provider
+operations. Safe next action: use an authorized real browser activation or
+provider-supported fixture, then reconcile the resulting signed lifecycle.
+Gate 4 and `PLAN-WEB-014` remain open; no Production write occurred.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-cards-only-preview-route-and-hosted-display-2026-10-10.md`.
+
 ## R-CLI-SOURCE-DIVERGENCE · 2026-10-10
 
 The local public CLI `main` (`d0a3b217`) is 73 commits ahead and 883 behind

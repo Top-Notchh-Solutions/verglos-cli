@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` Cards-only Preview route boundary
+
+Web `445d8ed` is deployed to READY Preview `dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7`.
+The protected application route returned HTTP 200 in Test Mode with canonical
+catalog `2026-10-02.0` and exactly `paymentMethods: ["card"]`; focused
+checkout tests passed **12/12** and the 47-page builds passed. This supersedes
+the historical multi-method display observation for the current release
+candidate. It does not close `PLAN-WEB-014`: provider authorization/capture,
+signed webhook, payment/ledger/license reconciliation, replay/order,
+renewal, failure/expiry, refund, timeout/retry, and complete tenant binding
+remain open. Score remains **219 checked / 61 unchecked / 280 total (78.2%)**;
+no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-cards-only-preview-route-and-hosted-display-2026-10-10.md`.
+
 ## 2026-10-10 · `invoice.paid` subscription renewal binding
 
 Web `a97bc2b` plus integration coverage `b1bd248` add a subscription-bound `invoice.paid` webhook path. It

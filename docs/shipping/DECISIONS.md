@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Keep Cards-only route boundary qualified, not Gate 4 complete
+
+- **Decision:** Keep the release candidate's declared hosted method set at
+  `card`. Accept the protected Preview route result as evidence that the
+  server-owned catalog returns only Cards; do not claim provider lifecycle
+  acceptance from that response.
+- **Evidence:** Web `445d8ed`, Preview `dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7`,
+  HTTP 200 Test Mode create-order response, catalog `2026-10-02.0`, method
+  set `card`, focused checkout tests **12/12**, and passing 47-page builds.
+- **Disposition:** `PLAN-WEB-014` and Gate 4 remain open. The next acceptance
+  artifact must be provider-backed card authorization/capture followed by a
+  signed webhook and exactly-once payment/ledger/license reconciliation, then
+  the remaining replay/order, renewal, failure/expiry, refund, timeout/retry,
+  and tenant-binding evidence.
+- **Boundary:** No Production billing/database/entitlement/account/customer
+  write. No manual isolated-row edit or entitlement grant. Score remains
+  **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-cards-only-preview-route-and-hosted-display-2026-10-10.md`.
+
 ## 2026-10-10 · Keep Gate 4 open after provider/application reconciliation
 
 - **Observation:** Read-only Razorpay Test Mode reconciliation matched all

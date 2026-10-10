@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 Cards-only Preview route and hosted-display boundary
+
+- **Source:** Web `445d8ed`; branch `feat/preview-test-auth`; current Preview
+  deployment `dpl_36zQf2zEsVCrxpic8rcrjFJbQbK7` READY.
+- **Result:** Real protected Preview `POST /api/razorpay/create-order` returned
+  HTTP 200, Test Mode, catalog `2026-10-02.0`, and method set `card`; the
+  order was created by the application route. Focused checkout tests passed
+  **12/12**; typecheck and 47-page Preview/Production builds passed.
+- **Rendered boundary:** Deployed Preview and Production checkout HTML both
+  contained Cards and zero UPI/netbanking/wallet/EMI/Pay Later occurrences;
+  Preview retained its Test Mode marker and Production did not.
+- **Production boundary:** Public Production smoke was read-only (`/`,
+  `/checkout`, `/docs` 200; unauthenticated subscription GET 405). No
+  Production billing, database, migration, entitlement, account, or
+  customer-data write occurred.
+- **Disposition:** This qualifies the server/catalog Cards-only boundary and
+  advances `PLAN-WEB-014`; it does not close the item or Gate 4. Provider
+  capture/authorization, signed webhook, entitlement/ledger reconciliation,
+  replay/order, renewal, failure/expiry, refund, timeout/retry, and complete
+  tenant binding remain open. Fresh automated hosted frames did not render a
+  usable form without real user activation, so modal visibility is not claimed
+  by this batch.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-cards-only-preview-route-and-hosted-display-2026-10-10.md`.
+
 ## 2026-10-10 · Privacy/deletion isolated qualification
 
 - **Source:** Web `51e07f5`; privacy/deletion contract and behavior batch
