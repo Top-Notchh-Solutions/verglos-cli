@@ -7361,6 +7361,21 @@ it was not sent and contains no credentials or customer data.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-local-docker-webhook-regression-2026-10-10.md`.
 
+## 2026-10-10 · PLAN-WEB-014 provider renewal schedule recheck
+
+- **Read-only provider state:** The authenticated Razorpay Test Mode inventory
+  returned HTTP 200 with five active subscriptions. Four have one paid cycle
+  and the earliest next charge is 9 November 2026; one has two paid cycles
+  and a later January 2027 charge.
+- **Boundary:** No active subscription can produce a renewal during this run,
+  and no supported immediate charge or renewal-replay control is exposed. No
+  provider update or payment operation was submitted.
+- **Disposition:** Renewal-boundary evidence only; Gate 4 and `PLAN-WEB-014`
+  remain open. No checkbox changed; score remains **219 checked / 61
+  unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-provider-renewal-schedule-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 official subscription-card capture reconciliation
 
 - **Provider:** The official Razorpay Test Mode subscription-card fixture

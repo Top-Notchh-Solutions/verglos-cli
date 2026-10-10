@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` provider renewal schedule recheck
+
+The authenticated Razorpay Test Mode subscription inventory returned HTTP 200
+with five active subscriptions. Four have one paid cycle and the earliest
+next charge is 9 November 2026; one has two paid cycles and a later January
+2027 charge. No active subscription can produce a renewal during this run,
+and the provider exposes no supported immediate charge or renewal-replay
+control for them. No provider update or payment operation was submitted.
+This records the external renewal boundary but does not close
+`PLAN-WEB-014` or Gate 4. Score remains **219 checked / 61 unchecked / 280
+total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-renewal-schedule-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` local Docker webhook regression support
 
 The Web payment webhook suite ran against disposable local PostgreSQL 15

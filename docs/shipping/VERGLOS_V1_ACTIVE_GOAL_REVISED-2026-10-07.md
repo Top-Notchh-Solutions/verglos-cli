@@ -105,6 +105,17 @@ retry semantics at code level. It does not replace provider-delivered
 renewal, provider replay/out-of-order, or hosted Preview acceptance. Evidence:
 `docs/shipping/evidence/plan-web-014-local-docker-webhook-regression-2026-10-10.md`.
 
+### 2026-10-10 · provider renewal schedule recheck
+
+The authenticated Razorpay Test Mode subscription inventory returned HTTP 200
+with five active subscriptions. Four have one paid cycle and the earliest
+next charge is 9 November 2026; one has two paid cycles and a later January
+2027 charge. No active subscription can produce a renewal during this run,
+and the provider exposes no supported immediate charge or renewal-replay
+control for them. No provider update or payment operation was submitted.
+This is a read-only provider boundary, not Gate 4 acceptance. Evidence:
+`docs/shipping/evidence/plan-web-014-provider-renewal-schedule-recheck-2026-10-10.md`.
+
 ### 2026-10-10 · Production Cards-only revalidation superseding stale-tab observation
 
 Fresh public and browser checks returned HTTP 200 and confirmed the current
