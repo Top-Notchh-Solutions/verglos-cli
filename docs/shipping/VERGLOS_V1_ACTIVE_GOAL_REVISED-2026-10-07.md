@@ -12,6 +12,21 @@ unchecked / 280 total (79.6%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · gates-testing inventory recheck
+
+The isolated Web `.env.gates.testing` values were used for a read-only
+Razorpay Test Mode inventory without recording any secret. Both canonical Pro
+plans and the subscription collection returned HTTP 200; 42 Test Mode
+subscriptions were visible across `active`, `cancelled`, and `created`. The
+local hosted-method catalog is Cards-only. This removes credential validity
+and plan discovery as the current blocker, but it does not close Gate 4 or
+`PLAN-WEB-012`/`014`: signed provider lifecycle delivery and isolated
+payment-to-ledger-to-license reconciliation remain required. Production stays
+Cards-only and subscription-disabled. Score remains **223/57/280 (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/razorpay-gates-testing-readonly-inventory-2026-10-10.md`.
+
 ### 2026-10-10 · ACCEPT-002 committed-head regression repair
 
 Web commit `e310c57afec730d0266e72a7adbfff59e5efa09a` repairs the current

@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Razorpay gates-testing read-only inventory
+
+The isolated `.env.gates.testing` values were loaded without recording any
+secret. Razorpay Test Mode returned HTTP 200 for read-only plan and
+subscription inventory; the canonical Pro monthly/annual plans were present,
+and 42 subscriptions were visible across `active`, `cancelled`, and `created`.
+The local method configuration is Cards-only. This removes credential validity
+and plan discovery as the current blocker, but does not close Gate 4 or
+`PLAN-WEB-012`/`014`: signed provider lifecycle delivery and isolated
+payment-to-ledger-to-license reconciliation remain missing. No checkbox
+changed; score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/razorpay-gates-testing-readonly-inventory-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 Production prerequisite boundary
 
 The authenticated Production organization directory returned HTTP 200 with

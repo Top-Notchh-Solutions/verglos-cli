@@ -1,5 +1,22 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-10 · gates-testing inventory
+
+The isolated `.env.gates.testing` values were parsed without recording any
+secret. Read-only Razorpay Test Mode plan and subscription inventory returned
+HTTP 200. The configured canonical Pro monthly and annual plans were present,
+and the provider returned 42 Test Mode subscriptions across `active`,
+`cancelled`, and `created`. The local method configuration is Cards-only.
+
+This removes credential validity and plan discovery as the current Gate 4
+blocker. It does not close Gate 4 or `PLAN-WEB-012`/`014`: the remaining
+artifact is a bounded isolated lifecycle run with signed provider-generated
+renewal, failure/expiry, refund replay/order, out-of-order, timeout/retry,
+exactly-once, and payment-to-ledger-to-license reconciliation evidence. No
+Production or database/provider/entitlement write occurred.
+
+Evidence: `docs/shipping/evidence/razorpay-gates-testing-readonly-inventory-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · Recurring-card provider boundary
 
 The earlier Test Mode credential and dashboard-authentication blockers are

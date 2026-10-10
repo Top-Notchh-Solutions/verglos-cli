@@ -10,7 +10,11 @@ code, or tokens in ChatGPT.
 
 The separate Neon test database, Preview isolation marker, Docker PostgreSQL
 path, valid Razorpay Test Mode credentials, Test Mode webhook, and canonical
-Test Mode subscription plans are available. The Web subscription route is
+Test Mode subscription plans are available. A 2026-10-10 read-only inventory
+also confirmed HTTP 200 access to those plans and the Test Mode subscription
+collection; see
+`docs/shipping/evidence/razorpay-gates-testing-readonly-inventory-2026-10-10.md`.
+The Web subscription route is
 implemented and deployed to both Preview and Production. Production is
 aliased to `https://verglos.com`, but it deliberately has no Test Mode plan
 IDs or Test Mode credentials, so recurring billing remains fail-closed there.
@@ -61,15 +65,14 @@ RAZORPAY_ENABLED_PAYMENT_METHODS
 ```
 
 ```text
-card,netbanking,wallet,emi
+card
 ```
 
-UPI/UPI QR and Pay Later are not counted in the current hosted matrix because
-the provider fixture was unusable: the QR was invalid for the phone test and
-the Pay Later OTP fixture did not validate. Do not re-enable those methods by
-guesswork. No founder update is required now; the remaining Gate 4 work is
-code-owned subscription creation, renewal, cancellation, expiry, and ledger
-qualification.
+UPI/UPI QR, Netbanking, Wallet, EMI, and Pay Later are not claimed in the
+current hosted matrix. Do not re-enable them by guesswork. No founder update
+is required for the read-only credential/plan check; the remaining Gate 4
+work is provider-generated lifecycle delivery and isolated
+payment/ledger/license reconciliation.
 
 ## 3. Public repositories: no permission form is needed
 

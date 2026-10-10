@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Razorpay gates-testing inventory recheck
+
+The isolated `.env.gates.testing` values passed a read-only Razorpay Test Mode
+inventory: plans and subscriptions returned HTTP 200, both canonical Pro
+plans were present, and 42 Test Mode subscriptions were visible. The local
+method catalog is Cards-only. Gate 4 remains open because provider-generated
+signed renewal/failure/expiry/refund/replay/out-of-order/timeout evidence and
+complete isolated payment-to-ledger-to-license reconciliation are still
+missing. No checkbox or Production state changed; score remains
+**223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/razorpay-gates-testing-readonly-inventory-2026-10-10.md`.
+
 ## 2026-10-10 · ACCEPT-002 substrate/regression repair
 
 Web `e310c57` repairs the current tenant-scope audit coverage and shared

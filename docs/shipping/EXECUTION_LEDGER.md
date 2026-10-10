@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Razorpay gates-testing read-only inventory
+
+- **Input:** The isolated Web `.env.gates.testing` file was parsed locally;
+  no secret value was printed or recorded.
+- **Read-only result:** Razorpay Test Mode plan and subscription inventory
+  returned HTTP 200. The canonical Pro monthly/annual plans were present and
+  42 subscriptions were returned across `active`, `cancelled`, and `created`.
+- **Configuration:** The local hosted-method catalog contains only `card`.
+- **Disposition:** Credential validity and plan discovery are no longer the
+  current Gate 4 blocker. Keep Gate 4 and `PLAN-WEB-012`/`014` open for
+  signed provider lifecycle events and isolated payment/ledger/license
+  reconciliation. No provider, payment, database, entitlement, account,
+  customer, or Production state write occurred.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/razorpay-gates-testing-readonly-inventory-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 Production prerequisite boundary
 
 - **Read-only result:** Authenticated Production `GET /api/v1/organizations`
