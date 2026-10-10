@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · QUAL-WEB-006 Production route/performance qualification
+
+The authenticated Production account trace measured LCP **2,327 ms** and CLS
+**0.00**; desktop/mobile Lighthouse Accessibility and Best Practices were
+**100**. Account, privacy, organizations, and docs rendered without an
+application-error marker, while paid-only routes correctly redirected the Free
+account. `QUAL-WEB-006` remains unchecked pending keyboard/screen-reader,
+large-data, field-CWV, and complete paid-route evidence. Score remains **223
+checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-production-route-performance-2026-10-10.md`.
+
 ## 2026-10-10 · QUAL-CLI-006 current private-source qualification
 
 The current private source completed the full `test`, `typecheck`, and `build`

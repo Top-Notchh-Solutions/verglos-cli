@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · QUAL-WEB-006 Production route/performance qualification
+
+- **Verification:** Production `/account` trace measured LCP **2,327 ms** and
+  CLS **0.00**. Lighthouse Accessibility and Best Practices scored **100** on
+  both desktop and mobile. `/account`, privacy, organizations, and docs
+  rendered without an application-error marker; paid-only account routes
+  redirected to the Free account boundary.
+- **Boundary:** No provider, payment, database, entitlement, account,
+  organization, customer, deployment, or Production state write occurred.
+- **Disposition:** Keep `QUAL-WEB-006` unchecked pending keyboard/screen-reader,
+  large-data, field-CWV, and complete paid/authenticated-route evidence. Score
+  remains **223/57/280 (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-production-route-performance-2026-10-10.md`.
+
 ## 2026-10-10 · QUAL-CLI-006 current private-source qualification
 
 - **Verification:** `pnpm exec turbo run test typecheck build --force` completed

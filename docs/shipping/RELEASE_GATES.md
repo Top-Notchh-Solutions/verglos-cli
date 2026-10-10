@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · QUAL-WEB-006 Production route/performance qualification
+
+The authenticated Production account trace measured LCP **2,327 ms** and CLS
+**0.00**. Lighthouse Accessibility and Best Practices scored **100** on
+desktop and mobile. Account, privacy, organizations, and docs rendered
+without an application-error marker; paid-only routes redirected to the Free
+account boundary. `QUAL-WEB-006` remains open for keyboard/screen-reader,
+large-data, field-CWV, and complete paid/authenticated-route evidence. No
+Production write occurred. Score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-production-route-performance-2026-10-10.md`.
+
 ## 2026-10-10 · QUAL-CLI-006 current private-source qualification
 
 The current private source passed the complete `test`, `typecheck`, and

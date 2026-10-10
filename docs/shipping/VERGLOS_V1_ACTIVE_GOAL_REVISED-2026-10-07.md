@@ -53,6 +53,20 @@ release review, and protected-pipeline consumer evidence remain open, so
 Evidence:
 `docs/shipping/evidence/qual-cli-006-current-private-run-2026-10-10.md`.
 
+### 2026-10-10 · QUAL-WEB-006 Production route/performance qualification
+
+The authenticated Production account trace measured LCP **2,327 ms** and CLS
+**0.00**. Lighthouse Accessibility and Best Practices scored **100** on both
+desktop and mobile. Account, privacy, organizations, and docs rendered
+without an application-error marker; paid-only routes redirected the current
+Free account to the account boundary. This is read-only evidence only.
+`QUAL-WEB-006` remains unchecked pending keyboard/screen-reader, large-data,
+field-CWV, and complete paid/authenticated-route coverage. Score remains
+**223/57/280 (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/qual-web-006-production-route-performance-2026-10-10.md`.
+
 ### 2026-10-10 · PLAN-CLI-001 revalidation and queue correction
 
 `PLAN-CLI-001` is already checked in the authoritative backlog. The current
