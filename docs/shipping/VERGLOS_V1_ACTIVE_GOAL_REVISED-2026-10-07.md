@@ -243,12 +243,52 @@ events, and green local tests are not substitutes.
 Production remains explicitly in scope for the complete objective. Every
 Production pass must distinguish read-only audit, fail-closed code rollout,
 configuration activation, state-changing payment/database/entitlement work,
-post-write reconciliation, monitoring, and rollback/restore. State-changing
-Production work stays disabled until its own dry run, bounded scope,
-backup/restore, reconciliation, rollback or forward-fix, and post-write
-verification evidence exists. Continue the goal with one active item, exact
-score recomputation, private evidence, execution-ledger synchronization, and
-a concise implementation showcase after each accepted batch.
+post-write reconciliation, monitoring, and rollback/restore. The founder has
+now explicitly authorized **controlled Production write work** for this goal
+(2026-10-10), so the next Production batches may execute their required
+bounded writes instead of stopping at read-only evidence. That authorization
+does not authorize unbounded deletion, credential exposure, real-money
+charging, test-data mixing, or an unchecked entitlement shortcut.
+
+Each Production write still requires a recorded dry run, exact target and
+scope, environment/mode check, backup or snapshot where data can change,
+reconciliation criteria, rollback or forward-fix decision, post-write
+verification, and a private evidence record. Continue the goal with one active
+backlog item, exact score recomputation, private evidence,
+execution-ledger synchronization, and a concise implementation showcase after
+each accepted batch.
+
+### Controlled Production write mode — added 2026-10-10
+
+The execution order is now:
+
+1. Identify the exact unchecked backlog item and the Production operation that
+   directly satisfies it.
+2. Inspect the exact deployment/source/configuration shape and perform a
+   read-only dry run. Confirm the live/test provider mode, canonical amount,
+   account/tenant fixture, and rollback target.
+3. For database or migration work, take or verify the approved snapshot,
+   record the migration/backfill and expected row counts, and rehearse the
+   restore or forward-fix path before writing.
+4. Execute only the bounded operation. Use a non-production Test Mode fixture
+   for no-money payment evidence; never put Preview/Test Mode keys, plan IDs,
+   webhook secrets, or test database URLs into Production. A live Production
+   payment is never described as free merely because the owner expects no
+   customer to be present.
+5. Reconcile provider state → database ledger → entitlement/license → account
+   or organization access. A write that lacks the complete chain does not
+   close a checkbox.
+6. Verify monitoring, failure handling, rollback/forward-fix readiness, and
+   the public surface. Then update the backlog score, evidence archive,
+   execution ledger, goal checkpoint, and implementation showcase.
+
+The user’s standing instruction is to keep moving through the backlog and use
+Production where the acceptance contract requires it. The safety boundary is
+operational rather than a reason to pause: if an item’s required write is
+reversible and its preflight is complete, perform it; if it requires a missing
+legal, independent-review, provider, customer-consent, or credential artifact,
+record that owner and continue with the next genuinely independent item
+without falsely checking the blocked item.
 
 ### 2026-10-10 provider renewal trigger boundary
 
@@ -353,8 +393,9 @@ The primary objective is to complete the whole authoritative private backlog
 with real implementation, integration, qualification, security review,
 release evidence, and final acceptance. Backlog delivery is the main
 workstream. Release gates and Production are part of that same shipping
-objective, but execution is strictly one active backlog item at a time:
-qualify the current gate or Production operation only when it directly
+objective, and controlled Production writes are authorized when they directly
+serve the active acceptance item. Execution remains one active backlog item at
+a time: qualify the current gate or Production operation only when it directly
 unblocks that item, record external gates with their real owner and missing
 artifact, and advance only after the active item is accepted or genuinely
 blocked with a release decision. The gate list never substitutes for product
@@ -371,8 +412,10 @@ Production is not excluded from this goal. It has four explicit stages:
 
 The current Production operation is a complete fail-closed code-rollout
 slice, not the whole Production scope and not a reason to skip the remaining
-Production work. For every Production pass, include all of the following in
-the work record:
+Production work. From the 2026-10-10 authorization checkpoint onward,
+Production write operations may be executed when the controlled-write
+contract above is satisfied. For every Production pass, include all of the
+following in the work record:
 
 - inspect the exact source commit, build, runtime configuration shape, domain,
   deployment state, health routes, logs, and rollback target without exposing
@@ -398,7 +441,8 @@ the work record:
   payment captures/refunds, entitlement changes, account changes, and
   customer-data mutations disabled until each operation has its own approved
   preflight, backup/restore or recovery evidence, reconciliation check, and
-  rollback/forward-fix decision.
+  rollback/forward-fix decision; after that checkpoint, execute the bounded
+  operation and record its post-write result.
 
 Therefore, the current Production statement is:
 

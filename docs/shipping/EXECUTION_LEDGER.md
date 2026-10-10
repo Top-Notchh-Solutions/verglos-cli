@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-CLI-003 isolated Preview fixture organization
+
+- **Preview repair:** Removed the duplicate branch-scoped Preview auth-secret
+  entry, retained one general Preview-only secret, and redeployed a READY
+  Preview build.
+- **Hosted result:** Authenticated Preview account and organization routes
+  returned 200. One bounded acceptance organization was created in the
+  isolated Preview database; capability projection is still Free with no paid
+  license.
+- **Disposition:** This advances `PLAN-CLI-003` but does not close it. A paid
+  entitlement fixture and the complete authenticated modified-client
+  list/search/export/public-private matrix remain required.
+- **Boundary:** No Production environment, payment, database, migration,
+  entitlement, account, or customer-data write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-003-preview-fixture-organization-2026-10-10.md`.
+
 ## 2026-10-10 · whole-backlog closeability audit
 
 - **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**.
