@@ -1,10 +1,10 @@
 {
   "schema": "verglos.private.acceptance-stories-verification.v1",
-  "verifiedAt": "2026-10-09T21:58:45.574Z",
-  "cliRoot": "/tmp/verglos-cli-acceptance.YDopTg",
+  "verifiedAt": "2026-10-10T09:36:36.687Z",
+  "cliRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local/verglos-cli-current",
   "webRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
-  "cliCommit": "f5686b5c5aa11f45f392e647bd9d7e31830654ba",
-  "webCommit": "51e07f5670c1dc4a5de2c0fe1951a5d58c03bf63",
+  "cliCommit": "ad6ee1479c887c59eb6630da4754a2e0b7b4045e",
+  "webCommit": "e35788d220225239ca0a75436043ff3ee3c520a3",
   "stories": [
     {
       "id": "free-scan",
@@ -101,23 +101,23 @@
   "results": [
     {
       "label": "cli-package-suite",
-      "cwd": "/tmp/verglos-cli-acceptance.YDopTg",
+      "cwd": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local/verglos-cli-current",
       "args": [
         "--filter",
         "verglos",
         "test"
       ],
-      "startedAt": "2026-10-09T21:57:40.567Z",
-      "finishedAt": "2026-10-09T21:58:41.623Z",
+      "startedAt": "2026-10-10T09:35:31.068Z",
+      "finishedAt": "2026-10-10T09:36:32.620Z",
       "exitCode": 0,
       "summary": {
-        "tests": 274,
-        "pass": 274,
+        "tests": 241,
+        "pass": 241,
         "fail": 0,
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "1f936004a0e6f2c417287fc3cba4c8b6de554513f373cf0d517c954259eb6321"
+      "outputSha256": "e5ec7f0e7e7e6199be16e41f70f438267dd251cdcbc13a97b1622c20d5d665cf"
     },
     {
       "label": "web-full-suite",
@@ -125,17 +125,17 @@
       "args": [
         "test"
       ],
-      "startedAt": "2026-10-09T21:58:41.623Z",
-      "finishedAt": "2026-10-09T21:58:45.045Z",
+      "startedAt": "2026-10-10T09:36:32.620Z",
+      "finishedAt": "2026-10-10T09:36:36.145Z",
       "exitCode": 0,
       "summary": {
-        "tests": 948,
-        "pass": 918,
+        "tests": 951,
+        "pass": 921,
         "fail": 0,
         "cancelled": 0,
         "skipped": 30
       },
-      "outputSha256": "8d08c9214be2fa25246f52aeb1f39962fe9c3fb5c8b5deff489694cbd362a68e"
+      "outputSha256": "614e1f99d5d061e38156d18de72f7ea58e52762c2e83157b38811bf1a3e3d48c"
     },
     {
       "label": "web-composed-acceptance-substrates",
@@ -152,8 +152,8 @@
         "src/lib/organizations/team-e2e.test.ts",
         "src/lib/qual/qual-web-suites.test.ts"
       ],
-      "startedAt": "2026-10-09T21:58:45.045Z",
-      "finishedAt": "2026-10-09T21:58:45.574Z",
+      "startedAt": "2026-10-10T09:36:36.146Z",
+      "finishedAt": "2026-10-10T09:36:36.687Z",
       "exitCode": 0,
       "summary": {
         "tests": 74,
@@ -162,7 +162,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "72b0e27af5acca74ef8844a8befe4bb2f8e90c0562cb13c737afe4d7c383a6c0"
+      "outputSha256": "bf6352818bc1d8d4207f086058ef6c0798f54622f45a4df7f01c8365c370df93"
     }
   ],
   "allCommandsPassed": true,

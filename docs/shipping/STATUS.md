@@ -1,5 +1,51 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-WEB-012 local lifecycle integration passed
+
+A disposable local PostgreSQL 15 `verglos_test` container was initialized with
+the reviewed migrations and removed after testing. Payment-webhook integration
+passed **5/5** with 0 failures: capture/replay/refund, failed order, failed
+subscription invoice, paid invoice exactly-once, and expiry. The remote Neon
+test URL was rejected by the local-isolation guard and was not used.
+
+This proves the application/database substrate only. Provider-generated
+renewal, failure/expiry, refund/replay/order, timeout/retry, and complete
+signed reconciliation evidence remain open, so `PLAN-WEB-012` stays unchecked
+and parked. The next dependency-ready assessment follows the strict backlog
+order after this provider gate.
+
+Evidence: `docs/shipping/evidence/plan-web-012-local-lifecycle-pass-provider-block-2026-10-10.md`.
+
+## 2026-10-10 · HUNT-008 local qualification passed; external gates remain
+
+The current Hunt package build and tests passed **45 executable tests** with
+**16 explicit Docker integration skips** and 0 failures. The fixed A1 catalog,
+fixture expectations, bounded runner, cleanup, redaction, and trust/approval
+contracts are locally qualified. Trusted/licensed recipe provenance,
+supported-rule approval wiring, and an independent AppSec review remain
+missing, so `HUNT-008` stays unchecked and parked. Downstream HUNT-009–011 are
+not silently advanced; the next dependency-ready item by backlog order is
+`PLAN-WEB-012`.
+
+Evidence: `docs/shipping/evidence/hunt-008-requalification-block-2026-10-10.md`.
+
+## 2026-10-10 · ACCEPT-002 substrate verifier repaired and passed
+
+The exact private acceptance verifier now passes against the pinned current
+checkouts: CLI **241/241**, Web **921/951** with 30 explicit
+environment-gated skips, and composed Studio/Enterprise/Team/quality
+substrates **74/74**. A stale ignored workspace link was corrected before the
+rerun; no source, hosted state, provider, database, or Production state was
+changed.
+
+This is substrate/regression evidence only. Hosted/provider, customer,
+recipient, independent-reviewer, browser-human, field-CWV, and deletion
+evidence remain open, so `ACCEPT-002` stays unchecked and parked. The next
+queue assessment is the first dependency-ready unchecked item by backlog
+order, beginning with the earlier Hunt gates.
+
+Evidence: `docs/shipping/evidence/accept-002-substrate-pass-external-block-2026-10-10.md`.
+
 ## 2026-10-10 · QUAL-WEB-006 parked on complete hosted matrix
 
 The authenticated desktop account page passed a read-only Chrome accessibility

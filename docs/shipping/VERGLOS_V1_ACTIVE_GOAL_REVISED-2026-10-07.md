@@ -12,6 +12,56 @@ unchecked / 280 total (79.6%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · PLAN-WEB-012 local lifecycle update
+
+A disposable local PostgreSQL 15 `verglos_test` container initialized the
+reviewed migrations and was removed after the payment-webhook integration
+passed **5/5** with 0 failures: capture/replay/refund, failed order, failed
+subscription invoice, paid invoice exactly-once, and expiry. The remote Neon
+test URL was rejected by the local-isolation guard and was not used.
+
+This proves only the application/database substrate. Provider-generated
+renewal, failure/expiry, refund/replay/order, timeout/retry, and complete
+signed reconciliation remain open, so `PLAN-WEB-012` stays unchecked and
+parked. The score remains **223/57/280 (79.6%)**; the next selection must be a
+dependency-ready item after this provider gate.
+
+Evidence:
+`docs/shipping/evidence/plan-web-012-local-lifecycle-pass-provider-block-2026-10-10.md`.
+
+### 2026-10-10 · HUNT-008 qualification update
+
+The current Hunt package build and tests passed **45 executable tests**, with
+**16 explicit Docker integration skips** and 0 failures. This qualifies the
+fixed A1 catalog and bounded local runner contracts only. Trusted/licensed
+recipe provenance, supported-rule approval wiring, and independent AppSec
+review remain missing, so `HUNT-008` stays unchecked and parked. HUNT-009–011
+remain downstream or separately gated; the next dependency-ready item by
+strict backlog order is `PLAN-WEB-012`. The score remains **223/57/280
+(79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/hunt-008-requalification-block-2026-10-10.md`.
+
+### 2026-10-10 · ACCEPT-002 substrate verification update
+
+The exact private acceptance verifier now passes against the pinned current
+checkouts: CLI **241/241**, Web **921/951** with 30 explicit
+environment-gated skips, and composed Studio/Enterprise/Team/quality
+substrates **74/74**. A stale ignored workspace dependency link was repaired
+before rerunning; no tracked source, provider, database, entitlement,
+customer, or Production state changed.
+
+This does not close `ACCEPT-002`: the verifier explicitly remains
+substrate/regression evidence only. Hosted/provider lifecycle, modified-CLI
+runtime, Studio recipient, Enterprise runner, human browser/field-CWV,
+account-deletion, consent, and independent-review evidence remain open. Keep
+the checkbox open, park the item, and assess the earlier Hunt items next by
+strict top-to-bottom backlog order. The score remains **223/57/280 (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/accept-002-substrate-pass-external-block-2026-10-10.md`.
+
 ### 2026-10-10 · TEAM-CLI-001 implementation progress
 
 The current CLI branch now contains the signed organization-policy envelope,

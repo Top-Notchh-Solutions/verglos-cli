@@ -1,5 +1,56 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-012 local lifecycle pass; provider gate remains
+
+- **Verification:** A disposable local PostgreSQL 15 `verglos_test` container
+  initialized the reviewed migrations; the payment-webhook integration passed
+  **5/5** with 0 failures and the container was removed afterward.
+- **Coverage:** Capture/replay/refund, failed order, failed subscription
+  invoice, paid subscription invoice exactly once, and expiry all passed.
+- **Boundary:** The remote Neon test URL was rejected by the local-isolation
+  guard and was not used. Provider-generated renewal, failure/expiry,
+  refund/replay/order, timeout/retry, and complete signed reconciliation remain
+  absent. No Production or provider write occurred.
+- **Disposition:** Keep `PLAN-WEB-012` unchecked and park it; proceed only to
+  a dependency-ready item after this provider gate.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-012-local-lifecycle-pass-provider-block-2026-10-10.md`.
+
+## 2026-10-10 · HUNT-008 qualification passed; external gate remains
+
+- **Verification:** `pnpm --filter @verglos/hunt test` completed with 45
+  executable passes, 16 explicit Docker integration skips, and 0 failures;
+  package build completed as part of the command.
+- **Boundary:** The run qualifies the fixed A1 catalog, bounded runner,
+  fixtures, cleanup, redaction, and trust/approval contracts only. It does not
+  establish trusted/licensed publisher provenance, supported-rule approval
+  wiring, or independent AppSec review.
+- **Disposition:** Keep `HUNT-008` unchecked and park it. HUNT-009–011 are
+  downstream or separately gated; the next dependency-ready item is
+  `PLAN-WEB-012`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-008-requalification-block-2026-10-10.md`.
+
+## 2026-10-10 · ACCEPT-002 substrate verification passed; external stories still block
+
+- **Verification:** The private acceptance verifier completed with CLI
+  **241/241**, Web **921/951** with 30 explicit environment-gated skips, and
+  composed Studio/Enterprise/Team/quality substrates **74/74**; exit code 0.
+- **Repair:** The pinned CLI checkout had an ignored stale workspace link to a
+  different shared package. The link was repaired locally and the exact
+  verifier rerun; no tracked source or hosted state was modified.
+- **Boundary:** This remains substrate/regression evidence only. Hosted and
+  provider lifecycle, modified-CLI runtime, Studio recipient, Enterprise
+  runner, browser-human/field-CWV, account-deletion, consent, and independent
+  review evidence are not claimed.
+- **Disposition:** Keep `ACCEPT-002` unchecked and park it. Assess the earlier
+  Hunt items next by strict top-to-bottom backlog order.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-substrate-pass-external-block-2026-10-10.md`.
+
 ## 2026-10-10 · QUAL-WEB-006 queue transition
 
 - **Hosted read-only result:** Authenticated account accessibility snapshot and

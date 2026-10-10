@@ -1,5 +1,39 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PLAN-WEB-012 local lifecycle pass; provider matrix remains
+
+The disposable local PostgreSQL payment-webhook integration passed **5/5**
+with 0 failures and was removed after the run. It proves code-side capture,
+replay/refund, failed-order/invoice, exactly-once paid-invoice, and expiry
+behavior only. Provider-generated renewal/failure/refund/replay/timeout and
+complete signed reconciliation are still absent. Keep `PLAN-WEB-012`
+unchecked and parked; continue only with a dependency-ready item after this
+provider gate.
+
+Evidence: `docs/shipping/evidence/plan-web-012-local-lifecycle-pass-provider-block-2026-10-10.md`.
+
+## 2026-10-10 · HUNT-008 local qualification; provenance/review block
+
+The current Hunt package passed **45 executable tests**, with 16 explicit
+Docker integration skips and 0 failures. This qualifies the bounded local A1
+catalog and runner contracts only. Trusted/licensed recipe provenance,
+approval wiring, and independent AppSec review remain absent. Keep HUNT-008
+unchecked and park it; HUNT-009–011 are downstream, and the next
+dependency-ready item is `PLAN-WEB-012`.
+
+Evidence: `docs/shipping/evidence/hunt-008-requalification-block-2026-10-10.md`.
+
+## 2026-10-10 · ACCEPT-002 substrate pass; full acceptance remains open
+
+The private verifier passed CLI **241/241**, Web **921/951** with 30
+environment-gated skips, and composed substrates **74/74** after repairing a
+stale ignored workspace dependency link. This does not prove hosted/provider,
+customer/recipient, independent-reviewer, browser-human, field-CWV, or
+deletion stories. Keep `ACCEPT-002` unchecked and park it; assess the earlier
+Hunt items next by strict backlog order.
+
+Evidence: `docs/shipping/evidence/accept-002-substrate-pass-external-block-2026-10-10.md`.
+
 ## 2026-10-10 · QUAL-WEB-006 parked; ACCEPT-002 selected
 
 The authenticated desktop account route has positive a11y and LCP evidence,
