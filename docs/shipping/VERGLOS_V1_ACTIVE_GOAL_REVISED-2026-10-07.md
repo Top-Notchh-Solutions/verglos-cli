@@ -2434,3 +2434,25 @@ parked; the score remains **223/57/280 (79.6%)**.
 
 Evidence:
 `docs/shipping/evidence/hunt-008-docker-adversarial-macos-2026-10-10.md`.
+
+### 2026-10-10 live queue synchronization after Production rollout
+
+The live private backlog is authoritative at **223 checked / 57 unchecked /
+280 total (79.6%)**. `HUNT-008` and `PLAN-WEB-012` are parked with current
+owner/artifact/review records; `PLAN-CLI-003` and `PRO-008` remain dependency-
+blocked by the open billing lifecycle. `TEAM-CLI-001` is the first independent
+backend track, but its production signer/trust root, hosted policy-row
+reconciliation, and authorized tenant/repository fetch are missing. No
+checkbox is changed by this amendment.
+
+Production remains in scope and is already on the reviewed exact-head rollout,
+but billing stays fail-closed. The release candidate remains Cards-only. Do
+not repeat the unchanged Razorpay OTP/tokenization path, use undocumented
+provider endpoints, synthesize events, edit entitlement rows, or copy
+`.env.gates.testing` into Production. The payment unblock is provider-supported
+recurring-card/tokenization enablement or an official renewal/delivery control,
+followed by signed webhook and payment-to-ledger-to-license reconciliation.
+
+This is a partial amendment to the goal, not a replacement of the historical
+record. Evidence:
+`docs/shipping/evidence/live-queue-external-gates-2026-10-10.md`.

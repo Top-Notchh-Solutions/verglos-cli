@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · live queue and external-gate synchronization
+
+The live backlog recomputes to **223 checked / 57 unchecked / 280 total
+(79.6%)**. `HUNT-008` and `PLAN-WEB-012` remain parked with current external
+blocker records; `PLAN-CLI-003` and `PRO-008` remain dependency-blocked by the
+open billing lifecycle. The first independent backend track is `TEAM-CLI-001`,
+but its production policy signer/trust root, hosted policy-row reconciliation,
+and authorized tenant/repository fetch are still missing. No checkbox changed.
+
+The current payment unblock is provider-side recurring-card/tokenization
+support or an official renewal/delivery control, followed by signed
+payment-to-ledger-to-license reconciliation. Production billing remains
+fail-closed and the release candidate remains Cards-only.
+
+Evidence: `docs/shipping/evidence/live-queue-external-gates-2026-10-10.md`.
+
 ## 2026-10-10 · Production migration and exact-head code rollout
 
 The Neon `verglos` Production branch was snapshotted to the one-day

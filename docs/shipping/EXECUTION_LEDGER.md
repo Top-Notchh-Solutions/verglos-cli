@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · live queue and external-gate synchronization
+
+- **Score:** The live backlog is **223 checked / 57 unchecked / 280 total
+  (79.6%)**; no checkbox changed.
+- **Queue:** `HUNT-008` and `PLAN-WEB-012` are parked with current blocker
+  records. `PLAN-CLI-003` and `PRO-008` wait on the open billing lifecycle.
+  `TEAM-CLI-001` is the first independent dependency-ready backend track, but
+  its signer/trust-root activation, hosted policy-row reconciliation, and
+  authorized tenant/repository fetch are absent.
+- **Payment disposition:** Do not repeat the unchanged provider OTP path or
+  use undocumented endpoints. Keep Production billing fail-closed and the
+  release candidate Cards-only until provider-supported recurring-card
+  evidence and signed payment-to-ledger-to-license reconciliation exist.
+- **Boundary:** No provider, payment, database, entitlement, account,
+  customer, or Production state write occurred in this queue synchronization.
+- **Evidence:**
+  `docs/shipping/evidence/live-queue-external-gates-2026-10-10.md`.
+
 ## 2026-10-10 · Production migration and exact-head code rollout
 
 - **Safety:** Neon child branch `pre-migration-2026-10-10` was created from
