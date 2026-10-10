@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 current Preview webhook configuration
+
+- **Provider:** Razorpay Test Mode reports a new enabled webhook for the
+  current READY Preview deployment, with a secret present and 20 active
+  application lifecycle events.
+- **Preservation:** Historical webhook targets were left unchanged; none was
+  deleted or edited.
+- **Route check:** A protected GET to the current Preview webhook route
+  returned the expected HTTP 405 for the POST-only signed endpoint.
+- **Boundary:** No provider event, payment, subscription, database,
+  migration, license, entitlement, Production, or customer-data write was
+  generated.
+- **Disposition:** Configuration is complete, but `PLAN-WEB-014` and Gate 4
+  remain open; score remains **219 checked / 61 unchecked / 280 total
+  (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-current-preview-webhook-configuration-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 current protected Preview browser revalidation
 
 - **Preview browser:** The current READY Preview deployment for Web `445d8ed`

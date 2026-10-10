@@ -12,6 +12,20 @@ unchecked / 280 total (78.2%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · current Preview webhook configuration
+
+Razorpay Test Mode now reports an enabled webhook for the current READY
+Preview deployment. Its secret is present and 20 application lifecycle events
+are active. The historical webhook targets were left untouched. A protected
+GET to the current Preview webhook route returned the expected HTTP 405 for
+the POST-only signed endpoint. No provider event or application write was
+generated. Evidence:
+`docs/shipping/evidence/plan-web-014-current-preview-webhook-configuration-2026-10-10.md`.
+
+This completes webhook configuration only; `PLAN-WEB-014`, Gate 4, and the
+score remain open at **219 checked / 61 unchecked / 280 total (78.2%)** until
+provider lifecycle and entitlement reconciliation evidence exists.
+
 ### 2026-10-10 · current protected Preview browser revalidation
 
 The current READY Preview deployment for Web `445d8ed` was opened through the
