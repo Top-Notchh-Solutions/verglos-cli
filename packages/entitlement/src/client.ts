@@ -59,6 +59,7 @@ const CACHE_FILE = join(homedir(), ".verglos", "entitlement.json");
 const HEADER_B64 = base64UrlEncode(
   Buffer.from('{"alg":"EdDSA","typ":"JWT"}', "utf8"),
 );
+const PINNED_KEY_IDS = ["legacy-v1", "successor-v1"] as const;
 
 interface EntitlementCache {
   /** The most recent SignedEntitlement the CLI saw pass verify(). */
@@ -73,6 +74,22 @@ export interface VerifyOptions {
    * should let this default to {@link PINNED_PUBLIC_KEYS_B64URL}.
    */
   pinnedKeys?: readonly string[];
+}
+
+type HeaderKeySelection =
+  | { readonly kind: "legacy" }
+  | { readonly kind: "key-id"; readonly slot: number };
+
+function headerKeySelection(headerB64: string): HeaderKeySelection | null {
+  if (headerB64 === HEADER_B64) return { kind: "legacy" };
+  try {
+    const header = JSON.parse(base64UrlDecode(headerB64).toString("utf8")) as Record<string, unknown>;
+    if (header.alg !== "EdDSA" || header.typ !== "JWT" || typeof header.kid !== "string") return null;
+    const slot = PINNED_KEY_IDS.indexOf(header.kid as (typeof PINNED_KEY_IDS)[number]);
+    return slot === -1 ? null : { kind: "key-id", slot };
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -98,7 +115,8 @@ export async function verifyEntitlement(
   }
   const [headerB64, claimsB64, sigB64] = parts as [string, string, string];
 
-  if (headerB64 !== HEADER_B64) {
+  const keySelection = headerKeySelection(headerB64);
+  if (!keySelection) {
     return { valid: false, reason: "unexpected JWT header" };
   }
 
@@ -116,8 +134,11 @@ export async function verifyEntitlement(
   // so downstream packages can test the full sign→verify pipeline
   // without threading VerifyOptions through every call site.
   const envKey = process.env.VERGLOS_TEST_PUBKEY_B64URL;
-  const pinned =
-    options.pinnedKeys ?? (envKey ? [envKey] : PINNED_PUBLIC_KEYS_B64URL);
+  const pinned = options.pinnedKeys ?? (envKey
+    ? [envKey]
+    : keySelection.kind === "key-id"
+      ? [PINNED_PUBLIC_KEYS_B64URL[keySelection.slot]]
+      : PINNED_PUBLIC_KEYS_B64URL);
   const sigOk = pinned.some((keyB64) => {
     try {
       const key = publicKeyFromBase64Url(keyB64);
