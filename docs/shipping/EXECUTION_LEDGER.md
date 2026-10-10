@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Production-inclusive Preview rollout and migration preflight
+
+- **Source:** Web `e310c57afec730d0266e72a7adbfff59e5efa09a`; focused
+  organization/payment tests passed **41/42** with one intentional skip,
+  typecheck passed, and the 47-route production build passed.
+- **Preview:** Isolated deployment `dpl_A56xwcNBrx3qVSfZ1VpUNUoKV5ec` is
+  READY. Checkout returned HTTP 200 with Test Mode and Cards-only; webhook,
+  subscription-create, and order-create GET probes returned the expected 405.
+- **Production read-only preflight:** Vercel's environment runner found 39/41
+  migrations applied and pending `0039_client_projection_custody` plus
+  `0040_billing_invoice_metadata`; the audit state is
+  `blocked-missing-tables`.
+- **Boundary:** No Production database migration, payment, entitlement,
+  account, customer-data, or provider write occurred. The Production alias
+  remains on the previously qualified `9a3c32a` deployment.
+- **Disposition:** Do not promote until a reviewed snapshot/restore point,
+  ordered Production migration, and passing post-migration audit exist. No
+  checkbox changed; score remains **223 checked / 57 unchecked / 280 total
+  (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/production-inclusive-preview-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · ACCEPT-002 substrate/regression repair
 
 - **Implementation:** Web `e310c57` updates the tenant-scope audit for the

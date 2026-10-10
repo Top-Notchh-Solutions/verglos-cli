@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · Production-inclusive Preview rollout and migration preflight
+
+Web `e310c57afec730d0266e72a7adbfff59e5efa09a` passed focused tests **41/42**
+with one intentional skip, typecheck, and the 47-route production build. Its
+isolated Preview deployment is READY; checkout is Test Mode and Cards-only, and
+the POST-only payment/webhook routes return the expected 405 to GET probes.
+
+A read-only Production migration audit through Vercel's environment runner
+reports **39/41** migrations applied, with `0039_client_projection_custody` and
+`0040_billing_invoice_metadata` pending and two tables missing. Production
+therefore remains on the previously qualified `9a3c32a` deployment; promotion
+would be unsafe until a snapshot/restore point and ordered migration run are
+reviewed and verified. No Production state write occurred. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/production-inclusive-preview-rollout-2026-10-10.md`.
+
 ## 2026-10-10 · ACCEPT-002 substrate/regression repair
 
 Web commit `e310c57afec730d0266e72a7adbfff59e5efa09a` repaired the tenant
