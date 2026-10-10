@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` provider renewal dashboard boundary
+
+The authenticated Razorpay Test Mode dashboard showed the active canonical
+Pro/monthly subscription with one paid cycle and its next charge scheduled
+for 10 November 2026. The provider Update dialog exposed only plan/offer and
+remaining-cycle changes, applied immediately or at the next cycle; it did not
+provide an immediate charge or renewal-replay action. No update was submitted.
+This records the provider timing boundary but is not renewal evidence. No
+checkbox changed; score remains **219 checked / 61 unchecked / 280 total
+(78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-provider-renewal-dashboard-boundary-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` official subscription-card failure reconciliation
 
 The official Razorpay Test Mode subscription-card failure fixture was run

@@ -123,15 +123,17 @@ a concise implementation showcase after each accepted batch.
 
 One supported Razorpay Test Mode subscription-update attempt was bounded to
 the exact active provider/application match and rejected with HTTP 400 because
-the subscription cycle start is in the future. No provider write was accepted;
-post-attempt read-only reconciliation still shows zero bound application
-payments and licenses for that subscription. Razorpay's documented next route
-is Dashboard replay of an unacknowledged Subscription/Invoice event within
-seven days, selecting only the isolated Preview webhook. The debugging Chrome
-profile is currently unauthenticated to Razorpay, so no replay was attempted.
+the subscription cycle start is in the future. The authenticated Test Mode
+dashboard was then rechecked: the active canonical subscription has one paid
+cycle and its next charge is 10 November 2026; its Update dialog exposes no
+immediate-charge or renewal-replay action. No provider update was submitted.
+A provider-generated renewal or eligible Dashboard replay still must reach the
+isolated Preview webhook and reconcile to the existing entitlement/license.
 This does not change the active item, Gate 4, Production safeguards, or score.
 Evidence:
 `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
+Dashboard follow-up:
+`docs/shipping/evidence/plan-web-014-provider-renewal-dashboard-boundary-2026-10-10.md`.
 
 ### 2026-10-10 execution lock — one backlog item at a time
 
