@@ -129,8 +129,9 @@ forward-fix, and post-write verification.
 
 The execution queue is strict:
 
-1. Keep exactly one active backlog ID. `PLAN-CLI-001` and `PLAN-CLI-002` are
-   now checked. The current dependency-ready ID is `PLAN-WEB-011`;
+1. Keep exactly one active backlog ID. `PLAN-CLI-001`, `PLAN-CLI-002`, and
+   `PLAN-WEB-011` are now checked. The current dependency-ready ID is
+   `PLAN-WEB-012`;
    `PLAN-WEB-014` and `HUNT-008` remain parked and unchecked.
 2. Finish or genuinely document the active ID's remaining acceptance work. If
    it is genuinely blocked, commit the complete blocked record, park it
@@ -169,6 +170,17 @@ provenance and a real independent AppSec review cannot be manufactured by
 local code or by this agent. No Production write is implied by this queue
 transition; controlled writes remain bounded by the preflight, backup,
 reconciliation, and rollback rules above.
+
+### 2026-10-10 execution update · PLAN-WEB-011 accepted
+
+`PLAN-WEB-011` is checked at **222 checked / 58 unchecked / 280 total
+(79.3%)**. The isolated Preview/Test Mode trace proves the server-catalog
+Pro/monthly INR offer, exact amount/currency binding, signed provider events,
+active subscription, captured payment, and linked active license. This closes
+the catalog/amount item only; Production billing remains fail-closed under
+`PLAN-WEB-015`, and full lifecycle work is now active under `PLAN-WEB-012`.
+Evidence:
+`docs/shipping/evidence/plan-web-011-canonical-amount-binding-accepted-2026-10-10.md`.
 
 ### 2026-10-10 execution amendment · blocked-item queue rule
 

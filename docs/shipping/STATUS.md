@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-WEB-011 accepted
+
+The isolated Preview/Test Mode subscription trace now satisfies the
+catalog/amount-binding item: canonical Pro/monthly INR pricing, server-signed
+checkout notes, provider `active` subscription, captured payment with the
+same amount/currency, five distinct signed lifecycle events, and the linked
+active Pro license all reconciled without manual writes. Production remains
+fail-closed; its payment activation and reconciliation are separate
+`PLAN-WEB-015`/Gate 4 work.
+
+`PLAN-WEB-011` is now checked. Score is **222 checked / 58 unchecked / 280
+total (79.3%)**. The complete renewal/failure/expiry/refund/replay/timeout
+matrix remains open under `PLAN-WEB-012`/`PLAN-WEB-014`.
+
+Evidence: `docs/shipping/evidence/plan-web-011-canonical-amount-binding-accepted-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-002 accepted
 
 The CLI now exposes the effective entitlement truth in `verglos whoami` JSON

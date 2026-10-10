@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PLAN-WEB-011 catalog/amount binding acceptance
+
+The isolated Preview/Test Mode subscription trace is accepted for
+catalog/amount binding: server-owned Pro/monthly INR offer, HMAC-bound notes,
+provider-active subscription, captured payment with exact amount/currency,
+five distinct signed lifecycle events, and linked active Pro license. No
+manual row edit or entitlement grant occurred. Production payment activation
+remains fail-closed and belongs to `PLAN-WEB-015`; the full lifecycle remains
+open under `PLAN-WEB-012`/`PLAN-WEB-014` and Gate 4. Score is **222/58/280
+(79.3%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-011-canonical-amount-binding-accepted-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-002 effective-capability UX acceptance
 
 The CLI effective-entitlement boundary is accepted: current plan, authority

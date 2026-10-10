@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-011 accepted
+
+- **Hosted trace:** Isolated Preview/Test Mode created a canonical Pro/monthly
+  subscription from the server catalog. The provider card fixture completed;
+  the provider and isolated database both showed `active` subscription state,
+  `captured` subscription payment, exact INR amount/currency, and an active
+  linked Pro license.
+- **Signed delivery:** Five distinct completed events were reconciled:
+  `payment.authorized`, `payment.captured`, `subscription.authenticated`,
+  `subscription.activated`, and `subscription.charged`.
+- **Disposition:** `PLAN-WEB-011` is checked for catalog/amount binding. No
+  manual database edit, Production payment, Production database write, or
+  Production Test Mode activation occurred. Renewal/failure/expiry/refund/
+  replay/timeout and Production reconciliation remain separate gates.
+- **Score:** **222 checked / 58 unchecked / 280 total (79.3%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-011-canonical-amount-binding-accepted-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-002 accepted
 
 - **Implementation:** Integrated the reviewed v2 tenant-bound entitlement,
