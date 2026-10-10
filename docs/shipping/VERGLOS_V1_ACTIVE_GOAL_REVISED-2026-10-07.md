@@ -128,6 +128,19 @@ synthetically posted. The Docker replay tests remain code-side only. Evidence:
 This keeps `PLAN-WEB-014` and Gate 4 open; the provider replay/out-of-order
 case needs a supported provider fixture or real provider retry evidence.
 
+### 2026-10-10 · current Preview Cards-only revalidation
+
+The current READY Preview deployment for Web `445d8ed` was inspected with
+Vercel CLI. Its `/checkout` route returned HTTP 200 with canonical catalog
+`2026-10-02.0`, exactly `paymentMethods: [{id: "card", label: "Cards"}]`,
+`testMode: true`, and `subscriptionEnabled: true`. The Preview environment
+listing showed the isolated-database marker, Preview `DATABASE_URL`, Razorpay
+Test Mode configuration, webhook secret, and Cards-only method configuration
+without revealing values. Direct browser navigation without the Vercel
+protection bypass redirected to Vercel login, so this is server/configuration
+evidence only and not final hosted browser acceptance. Evidence:
+`docs/shipping/evidence/plan-web-014-current-preview-cards-only-revalidation-2026-10-10.md`.
+
 ### 2026-10-10 · Production Cards-only revalidation superseding stale-tab observation
 
 Fresh public and browser checks returned HTTP 200 and confirmed the current

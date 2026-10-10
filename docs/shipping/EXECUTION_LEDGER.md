@@ -7390,6 +7390,24 @@ it was not sent and contains no credentials or customer data.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-provider-webhook-replay-control-boundary-2026-10-10.md`.
 
+## 2026-10-10 · PLAN-WEB-014 current Preview Cards-only revalidation
+
+- **Deployment:** The current Web `445d8ed` Preview deployment reported
+  `READY`; its protected `/checkout` route returned HTTP 200 through Vercel
+  CLI.
+- **Server response:** Canonical catalog `2026-10-02.0`, exactly the `card`
+  / `Cards` method, `testMode: true`, and `subscriptionEnabled: true` were
+  present. Vercel environment listing showed the Preview isolation marker,
+  Preview database variable, Test Mode provider configuration, webhook secret,
+  and Cards-only configuration without revealing values.
+- **Boundary:** Direct browser navigation without the Vercel protection
+  bypass redirected to login. This is server/configuration evidence only, not
+  final hosted browser acceptance. No state-changing write occurred.
+- **Disposition:** `PLAN-WEB-014` and Gate 4 remain open; no checkbox changed;
+  score remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-current-preview-cards-only-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 official subscription-card capture reconciliation
 
 - **Provider:** The official Razorpay Test Mode subscription-card fixture

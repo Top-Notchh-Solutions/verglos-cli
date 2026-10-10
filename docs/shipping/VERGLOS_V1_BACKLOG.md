@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` current Preview Cards-only revalidation
+
+The current READY Preview deployment for Web `445d8ed` was inspected with
+Vercel CLI. Its `/checkout` route returned HTTP 200 with canonical catalog
+`2026-10-02.0`, exactly `paymentMethods: [{id: "card", label: "Cards"}]`,
+`testMode: true`, and `subscriptionEnabled: true`. The Preview environment
+listing showed the isolated-database marker, Preview `DATABASE_URL`, Razorpay
+Test Mode configuration, webhook secret, and Cards-only method configuration
+without revealing values. Direct browser navigation without the Vercel
+protection bypass redirected to Vercel login, so this is server/configuration
+evidence only—not final hosted browser acceptance. No checkbox changed; score
+remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-current-preview-cards-only-revalidation-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` provider webhook replay-control boundary
 
 The authenticated Razorpay Test Mode Webhooks surface was reloaded through
