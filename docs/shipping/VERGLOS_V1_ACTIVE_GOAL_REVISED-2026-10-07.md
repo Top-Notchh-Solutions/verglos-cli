@@ -12,6 +12,20 @@ unchecked / 280 total (79.6%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · PLAN-WEB-014 provider-state recheck
+
+The current Razorpay Test Mode subscription inventory was rechecked read-only:
+42 rows total, 5 active, 15 awaiting authorization, 22 cancelled, 0 due for
+charge, and 0 tokenized cards. No provider, payment, webhook, database,
+entitlement, account, or Production write occurred. This confirms rather than
+weakens the existing recurring-card blocker. `PLAN-WEB-014` and Gate 4 remain
+open and parked with the recorded owner, unblock artifact, review date, and
+Cards-only fail-closed release decision. The score remains **223/57/280
+(79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-testmode-renewal-qualification-recheck-2026-10-10.md`.
+
 ### 2026-10-10 · PLAN-CLI-001 revalidation and queue correction
 
 `PLAN-CLI-001` is already checked in the authoritative backlog. The current

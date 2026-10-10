@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · PLAN-WEB-014 Test Mode renewal qualification recheck
+
+The bounded Razorpay Test Mode inventory returned 42 subscriptions: 5 active,
+15 awaiting authorization, and 22 cancelled. None was due for charge and none
+reported a tokenized card. No provider or application state write occurred.
+This confirms the existing provider block; `PLAN-WEB-014` remains unchecked and
+Gate 4 remains open. Score remains **223 checked / 57 unchecked / 280 total
+(79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-testmode-renewal-qualification-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-001 Preview issue→verify revalidation
 
 The current Preview deployment `dpl_553h93xmbKWFAPKSdr8t3679reU7` was

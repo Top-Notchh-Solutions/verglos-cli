@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PLAN-WEB-014 Test Mode renewal qualification recheck
+
+The bounded Test Mode subscription inventory returned 42 rows: 5 active, 15
+awaiting authorization, and 22 cancelled. None was due for charge at
+observation time and none reported a tokenized card. No provider, payment,
+webhook, database, entitlement, account, or Production write occurred.
+
+This revalidates the existing provider blocker; `PLAN-WEB-014` and Gate 4
+remain open and parked. Score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-testmode-renewal-qualification-recheck-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-001 Preview issue→verify revalidation
 
 Current Preview deployment `dpl_553h93xmbKWFAPKSdr8t3679reU7` was rechecked
