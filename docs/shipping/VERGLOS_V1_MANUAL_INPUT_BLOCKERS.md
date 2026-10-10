@@ -23,6 +23,9 @@ provider events.
 Evidence:
 `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
 
+The redacted provider-support request is prepared at:
+`docs/shipping/evidence/razorpay-testmode-recurring-card-support-request-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · CLI backend queue audit
 
 The authoritative CLI `origin/main` is `f5686b5c`; implementation PRs through

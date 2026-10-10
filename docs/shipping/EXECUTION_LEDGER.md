@@ -7246,6 +7246,10 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
 
+The redacted provider unblock packet is prepared at
+`docs/shipping/evidence/razorpay-testmode-recurring-card-support-request-2026-10-10.md`;
+it was not sent and contains no credentials or customer data.
+
 ## 2026-10-10 · PLAN-WEB-014 continuation requalification
 
 - **Surface:** Fresh read-only Production and isolated Preview checkout
