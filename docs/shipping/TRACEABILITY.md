@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-10 · PLAN-WEB-014 webhook ingress slice
+
+- **Item:** `PLAN-WEB-014`
+- **Implementation boundary:** Existing Web lifecycle handler plus temporary
+  Vercel automation-bypass query on one Test Mode Preview webhook target.
+- **Qualification:** Razorpay Test Mode pause/resume HTTP 200; completed signed
+  `subscription.paused` and `subscription.resumed`; isolated row
+  `active → paused → active`.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-testmode-webhook-ingress-pause-resume-2026-10-10.md`.
+- **Decision:** Partial Gate 4 progress only; checkbox remains open pending
+  provider payment/renewal and full lifecycle/reconciliation evidence.
+
+
 ## 2026-10-10 · Test Mode card activation boundary
 
 - **Mapped IDs:** `PLAN-WEB-014`, Gate 4; provider/browser authorization.

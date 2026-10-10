@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · Gate 4 signed Test Mode webhook ingress and pause/resume
+
+One active isolated Test Mode subscription with prior paid cycles was paused
+and resumed after one Preview webhook target was made reachable through a
+fresh temporary Vercel automation-bypass query parameter. Razorpay returned
+HTTP 200 for both operations. The isolated Preview endpoint accepted and
+completed signed `subscription.paused` and `subscription.resumed` events;
+the matched row projected `active → paused → active`.
+
+This proves the provider-to-Preview ingress and this lifecycle projection. It
+does not close Gate 4: payment capture/renewal, failure/expiry, subscription
+refund, replay/out-of-order, timeout/retry, exactly-once payment/ledger/license
+behavior, and complete reconciliation remain open. No Production or manual
+database write occurred. Score remains **219/61/280 (78.2%)**; no checkbox
+changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-testmode-webhook-ingress-pause-resume-2026-10-10.md`.
+
 ## 2026-10-10 · Gate 4 Test Mode card activation boundary
 
 The known isolated Test Mode subscription harness reached the card form. The

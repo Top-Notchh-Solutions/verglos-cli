@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PLAN-WEB-014 signed Test Mode webhook ingress
+
+The temporary Test Mode Preview webhook target was made reachable through a
+fresh Vercel automation-bypass value kept out of evidence. One isolated active
+subscription with prior paid cycles was paused and resumed through Razorpay;
+both provider operations returned HTTP 200. The isolated Preview database
+recorded completed signed `subscription.paused` and `subscription.resumed`
+events and projected `active → paused → active`. No payment, license,
+entitlement, account, or Production state changed.
+
+This advances the Gate 4 ingress/reconciliation slice but does not close
+`PLAN-WEB-014`. Renewal/payment capture, failure/expiry, subscription refund,
+replay/order, timeout/retry, exactly-once payment/ledger/license behavior, and
+complete tenant reconciliation remain open. Score remains **219/61/280
+(78.2%)**; no checkbox changed.
+
+Evidence: `docs/shipping/evidence/plan-web-014-testmode-webhook-ingress-pause-resume-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 Test Mode card activation boundary
 
 The known isolated Test Mode subscription harness reached the card form after

@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-10 · Test Mode webhook ingress uses temporary Vercel bypass
+
+For isolated Preview qualification only, one Razorpay Test Mode webhook URL
+may carry a temporary Vercel Protection Bypass for Automation query parameter
+when the Preview deployment is otherwise protected. The bypass is platform
+reachability only; Razorpay HMAC verification remains mandatory and Production
+URLs must not receive the parameter. The value is never stored in source,
+evidence, chat, or logs and must be revoked/removed after qualification.
+
+This decision was validated by a signed Test Mode pause/resume pair that
+projected `active → paused → active` in the isolated database. It does not
+authorize synthetic events, direct database edits, Production writes, or a
+Gate 4 completion claim.
+
 ## 2026-10-10 · Keep Gate 4 open after Test Mode card activation boundary
 
 - **Decision:** Treat the known Test Mode card-form interaction as an

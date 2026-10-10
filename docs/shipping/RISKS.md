@@ -1,5 +1,24 @@
 # Verglos V1 risk register
 
+## 2026-10-10 · R-PLAN-WEB-014 webhook ingress partially mitigated
+
+- **Risk:** Vercel Deployment Protection previously blocked Razorpay before
+  the isolated Preview webhook route, preventing signed provider lifecycle
+  reconciliation.
+- **Evidence:** One Test Mode Preview target now uses a temporary, fresh
+  automation-bypass query parameter; pause/resume events completed and the
+  isolated row projected `active → paused → active`.
+- **Residual risk:** The bypass is temporary and must be rotated/removed;
+  provider renewal/payment delivery, replay/order, timeout/retry,
+  exactly-once payment/ledger/license behavior, and complete reconciliation
+  are still unqualified.
+- **Owner:** Web/provider operations.
+- **Severity:** High until the full Gate 4 matrix is accepted.
+- **Mitigation:** Keep Production webhook disabled for Test Mode, retain
+  Razorpay HMAC verification, use isolated Preview only, and clean up the
+  bypass after the remaining qualification window.
+
+
 ## R-PLAN-WEB-014-TESTMODE-CARD-ACTIVATION · 2026-10-10
 
 The isolated Test Mode subscription harness reached the card form, but the

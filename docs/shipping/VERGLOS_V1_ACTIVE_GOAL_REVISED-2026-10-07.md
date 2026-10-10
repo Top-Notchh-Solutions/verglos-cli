@@ -51,6 +51,23 @@ Cards-only recurring lifecycle and entitlement reconciliation are evidenced;
 Gates 5–9 remain open or external as described in Section 4. No production
 billing or database activation is implied by this checkpoint.
 
+### 2026-10-10 signed Test Mode webhook ingress boundary
+
+The Vercel platform protection boundary was repaired for one Test Mode
+Preview webhook target using a fresh automation-bypass value kept out of
+source, logs, and evidence. A provider subscription with prior paid cycles
+was paused and resumed in Razorpay Test Mode. Both provider operations
+returned HTTP 200; the isolated Preview endpoint completed signed
+`subscription.paused` and `subscription.resumed` events and projected the
+matched row `active → paused → active`. No payment, license, entitlement,
+account, manual database, or Production state changed.
+
+This is new Gate 4 progress, not payment acceptance. Provider-generated
+renewal/payment capture, failure/expiry, subscription refund,
+replay/out-of-order, timeout/retry, exactly-once payment/ledger/license, and
+complete tenant reconciliation remain open. Evidence:
+`docs/shipping/evidence/plan-web-014-testmode-webhook-ingress-pause-resume-2026-10-10.md`.
+
 For every successful payment acceptance, private evidence must show the full
 chain: server-selected canonical catalog and amount, provider authorization
 or capture, valid signed webhook, one payment row, one ledger row, correct
@@ -1652,6 +1669,10 @@ evidence is:
 The latest Test Mode card activation-boundary evidence is:
 
 `docs/shipping/evidence/plan-web-014-testmode-card-activation-boundary-2026-10-10.md`
+
+The latest Test Mode webhook-ingress and pause/resume evidence is:
+
+`docs/shipping/evidence/plan-web-014-testmode-webhook-ingress-pause-resume-2026-10-10.md`
 
 The latest CLI standards-corpus evidence is:
 

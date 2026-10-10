@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 signed Test Mode webhook ingress and pause/resume
+
+- **Preflight:** A fresh Vercel automation-bypass value was generated in
+  process memory. One Test Mode Preview webhook target was updated with the
+  documented bypass query parameter; its 56-event subscription set was
+  preserved. The selected provider subscription had prior paid cycles and an
+  exact active-row match in the isolated test database.
+- **Result:** Razorpay Test Mode pause and resume each returned HTTP 200. The
+  isolated Preview endpoint recorded completed signed
+  `subscription.paused` and `subscription.resumed` events, and the matched
+  application row transitioned `active → paused → active`.
+- **Boundary:** No payment, capture, license, entitlement, account,
+  Production, or manual database write occurred. The Razorpay signature,
+  not the Vercel bypass, remained the application authentication boundary.
+- **Disposition:** This advances Gate 4 and `PLAN-WEB-014` by proving the
+  provider-to-Preview ingress and pause/resume projection. Renewal/payment,
+  failure/expiry, subscription refund, replay/order, timeout/retry,
+  exactly-once payment/ledger/license behavior, and complete reconciliation
+  remain open. Temporary bypass cleanup is required after qualification.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-testmode-webhook-ingress-pause-resume-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 Test Mode card activation boundary
 
 - **Operation:** The known Test Mode Razorpay subscription harness was
