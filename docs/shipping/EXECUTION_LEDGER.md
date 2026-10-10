@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · STUDIO-CLI-001 queue transition
+
+- **Implementation:** Integrated the reviewed redacted client projection and
+  exact approval-bound preview command.
+- **Verification:** Shared projection **4/4**, CLI command **1/1**; shared/CLI
+  typechecks, CLI build, and diff checks passed.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked and park it pending hosted
+  upload/custody, independent redaction proof, and an authorized Studio
+  recipient/customer run. The next dependency-ready item is `LIC-002`.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-hosted-custody-block-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 queue transition
 
 - **Disposition:** The implementation batch is complete, but production

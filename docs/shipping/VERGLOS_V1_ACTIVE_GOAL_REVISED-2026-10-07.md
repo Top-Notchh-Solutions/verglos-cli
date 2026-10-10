@@ -149,7 +149,8 @@ The execution queue is strict:
    `PLAN-CLI-004`, and `PLAN-WEB-011` are now checked. `PLAN-WEB-012` is
    parked pending provider lifecycle artifacts; `TEAM-CLI-001` is now parked
    pending hosted signer/fetch activation, and the current dependency-ready ID
-   is `STUDIO-CLI-001`;
+   is `LIC-002`; `STUDIO-CLI-001` is parked pending hosted custody and
+   recipient acceptance;
    `PLAN-WEB-014` and `HUNT-008` remain parked and unchecked.
 2. Finish or genuinely document the active ID's remaining acceptance work. If
    it is genuinely blocked, commit the complete blocked record, park it
@@ -222,10 +223,22 @@ activation, hosted policy-row reconciliation, and live tenant/repository fetch
 evidence. The item remains unchecked. The queue therefore advances to
 `STUDIO-CLI-001`, whose exact-preview projection is already implemented but
 still needs hosted upload/custody, independent redaction proof, and Studio
-recipient/customer acceptance.
+recipient/customer acceptance. The next dependency-ready item is now
+`LIC-002`, which is an external legal/release evidence track.
 
 Evidence:
 `docs/shipping/evidence/team-cli-001-hosted-activation-block-2026-10-10.md`.
+
+### 2026-10-10 execution update · STUDIO-CLI-001 parked, LIC-002 selected
+
+The exact redacted Studio client projection and approval-bound preview are
+implemented and locally qualified. Hosted upload/custody, independent
+redaction proof, and an authorized Studio recipient/customer run remain
+missing, so `STUDIO-CLI-001` stays unchecked. The strict queue now selects
+`LIC-002`, the next dependency-ready item by backlog order.
+
+Evidence:
+`docs/shipping/evidence/studio-cli-001-hosted-custody-block-2026-10-10.md`.
 
 ### 2026-10-10 execution amendment · blocked-item queue rule
 

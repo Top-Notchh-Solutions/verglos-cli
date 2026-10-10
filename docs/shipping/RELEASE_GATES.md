@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · STUDIO-CLI-001 parked; LIC-002 selected
+
+The local Studio projection and approval-bound preview are implemented and
+tested. Hosted upload/custody, independent redaction proof, and authorized
+recipient/customer acceptance remain missing. Keep `STUDIO-CLI-001` open; the
+strict top-to-bottom queue now selects `LIC-002` for assessment.
+
+Evidence: `docs/shipping/evidence/studio-cli-001-hosted-custody-block-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 parked; STUDIO-CLI-001 selected
 
 The Team CLI policy client is implemented and locally tested, but its hosted

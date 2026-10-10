@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · STUDIO-CLI-001 parked on hosted custody
+
+The local Studio projection/upload-preview workflow is implemented and
+qualified, including exact approval binding and refusal of private or unknown
+fields. Hosted upload/custody, independent redaction proof, and a real Studio
+recipient/customer acceptance run are missing, so `STUDIO-CLI-001` remains
+unchecked and parked. The next dependency-ready backlog item is `LIC-002`.
+
+Evidence: `docs/shipping/evidence/studio-cli-001-hosted-custody-block-2026-10-10.md`.
+
 ## 2026-10-10 · TEAM-CLI-001 parked on hosted activation
 
 The CLI policy client implementation is complete and locally qualified, but
