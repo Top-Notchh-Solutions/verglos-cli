@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · `PLAN-WEB-014` official subscription-card failure reconciliation
+
+The official Razorpay Test Mode subscription-card failure fixture was run
+against a canonical Pro/monthly subscription created by the isolated Preview
+application path. A signed `payment.failed` webhook completed, the isolated
+application recorded one failed payment with no `license_id`, and active
+licenses remained unchanged at three. One pending subscription row was
+created for the attempt. This is concrete no-grant/failure-path Gate 4
+evidence, but provider-generated renewal, expiry, refund replay/order,
+out-of-order delivery, timeout/retry, and final hosted Preview acceptance
+remain open. No checkbox changed; score remains **219 checked / 61 unchecked /
+280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-official-subscription-card-failure-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` official subscription-card capture reconciliation
 
 The official Razorpay Test Mode subscription-card fixture completed one

@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PLAN-WEB-014 official subscription-card failure reconciliation
+
+- **Operation:** The official Razorpay Test Mode subscription-card failure
+  fixture was run against a canonical Pro/monthly subscription created by the
+  isolated Preview application path. Card values and OTPs were not recorded;
+  no OTP was guessed or entered.
+- **Result:** One signed `payment.failed` webhook completed. The isolated
+  database recorded one new pending subscription and one new failed payment;
+  the failed payment had no `license_id`, and the active-license count stayed
+  at three. Recent webhook identity was one event ID and one payload digest.
+- **Boundary:** No entitlement grant, manual row edit, synthetic provider
+  event, Production write, or Production configuration change occurred.
+- **Disposition:** This proves the hosted failure projection and no-grant
+  boundary for one canonical recurring-card attempt. Provider renewal,
+  expiry, refund replay/order, out-of-order delivery, timeout/retry, and final
+  hosted Preview acceptance remain open. Gate 4 and `PLAN-WEB-014` remain
+  open.
+- **Score:** **219/61/280 (78.2%)**; no checkbox changed.
+- **Evidence:** `docs/shipping/evidence/plan-web-014-preview-official-subscription-card-failure-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 signed Test Mode webhook ingress and pause/resume
 
 - **Preflight:** A fresh Vercel automation-bypass value was generated in

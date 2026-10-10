@@ -24,8 +24,10 @@ The current release-candidate payment decision is **Cards-only**. The
 deployed method configuration is `card` in Preview and Production; UPI/QR,
 netbanking, wallet, EMI, Pay Later, eMandate, and other methods are not
 claimed until separately qualified. Cards-only is a product-scope decision,
-not payment acceptance: the remaining requirement is a real canonical-price
-Razorpay Test Mode recurring-card lifecycle in isolated Preview.
+not payment acceptance: one canonical-price Razorpay Test Mode recurring-card
+authorization/capture and its first payment-to-license reconciliation are now
+evidenced in isolated Preview. The remaining requirement is the complete
+lifecycle matrix and final hosted Preview acceptance.
 
 The current Web head is commit `445d8ed` on `feat/preview-test-auth`. It
 keeps the isolated Preview fixture-auth seam available outside an explicit
@@ -46,10 +48,39 @@ requalification remains a separate step and must use the isolated database,
 Test Mode provider configuration, and private fixture evidence.
 
 The current gate state is: Gates 1–3 are complete for isolated
-qualification; Gate 4 is partially qualified but remains open until the
-Cards-only recurring lifecycle and entitlement reconciliation are evidenced;
+qualification; Gate 4 is materially qualified but remains open until the
+remaining Cards-only lifecycle matrix and final hosted reconciliation are
+evidenced;
 Gates 5–9 remain open or external as described in Section 4. No production
 billing or database activation is implied by this checkpoint.
+
+### 2026-10-10 · official subscription-card capture superseding checkpoint
+
+The official Razorpay Test Mode subscription-card fixture completed one
+canonical Pro/monthly authorization and capture for an isolated Preview-created
+subscription. Five distinct signed webhook events completed:
+`payment.authorized`, `payment.captured`, `subscription.authenticated`,
+`subscription.activated`, and `subscription.charged`. Redacted read-only
+joins matched the captured payment to the active subscription and active Pro
+license with the same canonical INR amount/currency and tenant/user binding.
+This proves the first payment-to-ledger-to-license chain in the isolated
+environment; it does not prove provider-generated renewal, failure/expiry,
+refund replay/order, out-of-order delivery, timeout/retry, or final hosted
+Preview acceptance. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-official-subscription-card-success-2026-10-10.md`.
+
+### 2026-10-10 · official subscription-card failure superseding checkpoint
+
+The official Razorpay Test Mode subscription-card failure fixture was run
+against a canonical Pro/monthly subscription created through isolated
+Preview. A signed `payment.failed` webhook completed, one failed payment row
+was recorded without a `license_id`, and the active-license count remained
+unchanged at three. The hosted provider UI stopped at its Test Mode
+OTP/tokenization boundary; no OTP was guessed or entered. This proves one
+hosted failure/no-grant projection, but not provider-generated renewal,
+expiry, refund replay/order, out-of-order delivery, timeout/retry, or final
+hosted Preview acceptance. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-official-subscription-card-failure-2026-10-10.md`.
 
 ### 2026-10-10 signed Test Mode webhook ingress boundary
 
@@ -125,14 +156,13 @@ subscription in isolated Preview, followed by the complete chain: provider
 authorization/capture, signed webhook, exactly one payment row, exactly one
 ledger entry, correct tenant binding, one Pro entitlement/license, replay
 idempotency, and the required failure/cancellation/refund/renewal state
-transitions. Until that chain is evidenced, `PLAN-WEB-014`, Gate 4, and the
-backlog score remain open. The latest route check proved canonical Test Mode
-order creation only; it did not prove a paid subscription, signed webhook,
-payment/ledger/license reconciliation, or account access. A previous provider
-OTP/recurring-card attempt was rejected, and automated activation of a fresh
-hosted provider frame was not usable. Resolve this provider-activation
-boundary or formally disposition it with a real owner and release decision;
-do not substitute synthetic events or manually edit entitlement rows.
+transitions. The first authorization/capture and payment-to-license chain and
+one failure/no-grant path are now evidenced once each; until the remaining
+matrix and final hosted acceptance are evidenced, `PLAN-WEB-014`, Gate 4, and
+the backlog score remain open. The remaining provider renewal/expiry, refund
+replay/order,
+out-of-order, timeout/retry, and final hosted acceptance cases must be
+qualified without synthetic events or manually edited entitlement rows.
 
 ### Entitlement evidence definition — required for Gate 4 acceptance
 
