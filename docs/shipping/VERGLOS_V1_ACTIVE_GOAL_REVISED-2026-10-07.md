@@ -1734,6 +1734,9 @@ remain open for recurring-card authorization/capture and complete
 payment/ledger/license reconciliation. The authenticated Test Mode
 Subscriptions detail page exposed no provider `charge now` control, so no
 additional provider action was taken through an undocumented endpoint. The
+published Test Card guide's random OTP instruction applies to the later
+sample-payment page, not the saved-card tokenization-eligibility step that
+stopped this recurring flow. The
 score remains **219 checked / 61 unchecked / 280 total / 78.2%**; no checkbox
 changed.
 

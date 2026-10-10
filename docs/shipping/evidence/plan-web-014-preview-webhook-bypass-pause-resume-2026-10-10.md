@@ -53,6 +53,11 @@ Date: 2026-10-10
   active state and payment history but exposed no provider `charge now`
   control. No additional provider action was taken through an undocumented
   endpoint.
+- Razorpay's published Test Card guide documents a random four-to-ten-digit
+  OTP for the later sample-payment page, but does not publish a tokenization-
+  eligibility OTP for the saved-card step. The current recurring checkout
+  stopped at that earlier provider-controlled step, so the documented sample
+  payment OTP rule cannot be used to claim recurring authorization here.
 
 ## Read-only reconciliation after the run
 
