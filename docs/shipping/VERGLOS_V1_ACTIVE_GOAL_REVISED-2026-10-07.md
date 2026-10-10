@@ -54,6 +54,57 @@ evidenced;
 Gates 5–9 remain open or external as described in Section 4. No production
 billing or database activation is implied by this checkpoint.
 
+### 2026-10-10 · isolated Preview/Test Mode full-refund reconciliation
+
+A read-only preflight matched the authenticated Razorpay Test Mode payment
+detail to one isolated captured canonical Pro/monthly card payment with an
+active subscription and active Pro license. A provider-dashboard full Test
+Mode refund completed for that exact payment. The isolated Preview webhook
+store completed two distinct signed events, `refund.created` and
+`refund.processed`; the payment projected to `refunded` with the full
+refund watermark and the linked Pro license became inactive. The application
+subscription remained `active` at observation time, so provider
+cancellation/expiry after refund is still open and is not inferred from the
+refund. No manual database, payment, subscription, license, or entitlement
+edit occurred. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-official-subscription-card-full-refund-2026-10-10.md`.
+
+This is Gate 4 progress only. `PLAN-WEB-014` remains the sole active item and
+the score remains **219 checked / 61 unchecked / 280 total (78.2%)** because
+renewal/expiry, refund replay/order and out-of-order, timeout/retry,
+exactly-once reconciliation, and final hosted Preview acceptance remain
+unqualified.
+
+### 2026-10-10 · isolated Preview/Test Mode cancellation after full refund
+
+After the full-refund observation, a read-only join found exactly one active
+application subscription linked to the refunded canonical Pro/monthly card
+payment and inactive Pro license. The exact Razorpay Test Mode subscription
+was cancelled immediately through the documented provider endpoint and
+returned HTTP 200 with status `cancelled`. The isolated Preview webhook store
+completed one distinct signed `subscription.cancelled` event; the
+application subscription projected `active → cancelled`, while the payment
+remained fully `refunded` and the license remained inactive. No manual row
+edit occurred. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-subscription-cancellation-after-refund-2026-10-10.md`.
+
+This is Gate 4 progress only. `PLAN-WEB-014` remains open and the score
+remains **219 checked / 61 unchecked / 280 total (78.2%)** because
+renewal/expiry, refund replay/order and out-of-order, timeout/retry,
+exactly-once reconciliation, and final hosted Preview acceptance remain
+unqualified.
+
+### 2026-10-10 · local Docker webhook regression support
+
+The Web payment webhook suite ran against disposable local PostgreSQL 15
+after its localhost-only isolation guard correctly refused the Neon URL:
+database-backed integration tests passed **5/5**, and focused route/webhook
+tests passed **28/28**. This supports replay/idempotency, monotonic refund,
+failure/no-grant, invoice binding, expiry projection, lifecycle ordering, and
+retry semantics at code level. It does not replace provider-delivered
+renewal, provider replay/out-of-order, or hosted Preview acceptance. Evidence:
+`docs/shipping/evidence/plan-web-014-local-docker-webhook-regression-2026-10-10.md`.
+
 ### 2026-10-10 · Production Cards-only revalidation superseding stale-tab observation
 
 Fresh public and browser checks returned HTTP 200 and confirmed the current

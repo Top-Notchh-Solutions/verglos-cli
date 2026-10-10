@@ -7305,6 +7305,62 @@ The redacted provider unblock packet is prepared at
 `docs/shipping/evidence/razorpay-testmode-recurring-card-support-request-2026-10-10.md`;
 it was not sent and contains no credentials or customer data.
 
+## 2026-10-10 · PLAN-WEB-014 isolated Preview/Test Mode full refund
+
+- **Preflight:** A redacted read-only join matched the authenticated Razorpay
+  Test Mode payment detail to one isolated captured canonical Pro/monthly card
+  payment, active subscription, and active Pro license. No row was edited.
+- **Provider operation:** The exact captured payment received a full refund in
+  Razorpay Test Mode through the authenticated dashboard. This was isolated
+  Preview work; no Production or real-money operation occurred.
+- **Webhook/reconciliation:** Two distinct signed events, `refund.created`
+  and `refund.processed`, completed. The payment projected to `refunded` with
+  the full amount-refunded watermark, and the linked Pro license projected to
+  inactive. The application subscription remained active at observation time;
+  cancellation/expiry after refund remains a separate lifecycle case.
+- **Disposition:** Real refund reconciliation progress for Cards-only Preview;
+  Gate 4 and `PLAN-WEB-014` remain open. Renewal/expiry, refund replay/order
+  and out-of-order, timeout/retry, exactly-once, and final hosted Preview
+  acceptance remain open. No checkbox changed; score remains **219 checked /
+  61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-official-subscription-card-full-refund-2026-10-10.md`.
+
+## 2026-10-10 · PLAN-WEB-014 isolated Preview/Test Mode cancellation after refund
+
+- **Preflight:** After the full-refund projection, a redacted read-only join
+  found exactly one active application subscription linked to that refunded
+  canonical card payment and inactive Pro license.
+- **Provider operation:** The exact provider Test Mode subscription was
+  cancelled immediately through the documented cancellation endpoint. The
+  provider returned HTTP 200 with status `cancelled`.
+- **Webhook/reconciliation:** One distinct signed `subscription.cancelled`
+  event completed. The application subscription projected `active →
+  cancelled`; the payment remained fully `refunded` and the license remained
+  inactive. No manual database or entitlement mutation occurred.
+- **Disposition:** Real provider cancellation reconciliation progress;
+  Gate 4 and `PLAN-WEB-014` remain open. Renewal/expiry, refund replay/order
+  and out-of-order, timeout/retry, exactly-once, and final hosted Preview
+  acceptance remain open. No checkbox changed; score remains **219 checked /
+  61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-subscription-cancellation-after-refund-2026-10-10.md`.
+
+## 2026-10-10 · PLAN-WEB-014 local Docker webhook regression support
+
+- **Boundary:** The Web payment webhook suite was pointed only at disposable
+  local PostgreSQL 15. The test guard correctly refused the remote Neon URL.
+- **Result:** Database-backed integration tests passed **5/5**; focused
+  route/webhook tests passed **28/28**, including replay/idempotency,
+  monotonic refunds, failure/no-grant, invoice binding, expiry projection,
+  lifecycle ordering, and retry semantics.
+- **Disposition:** Code-side support only. It does not substitute for
+  provider-delivered renewal/replay/out-of-order or final hosted Preview
+  acceptance. No checkbox changed; score remains **219 checked / 61 unchecked /
+  280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-local-docker-webhook-regression-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 official subscription-card capture reconciliation
 
 - **Provider:** The official Razorpay Test Mode subscription-card fixture
