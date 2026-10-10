@@ -75,7 +75,10 @@ score remain open at **219 checked / 61 unchecked / 280 total (78.2%)**.
 The active item is `PLAN-WEB-014`. It remains the only implementation and
 acceptance workstream until it is accepted with complete evidence or recorded
 as genuinely blocked with an owner, missing artifact, review/expiry date, and
-release decision. The next item is not selected merely because it is easier.
+release decision. If that complete blocked record is committed, the item may
+be parked without being checked; then the first dependency-ready unchecked
+item is selected by scanning the backlog from the top. The next item is never
+selected merely because it is easier.
 All work on the CLI, Web application, Preview, Production, payment provider,
 browser, Docker, and private tracker must either implement, unblock, qualify,
 or document evidence for this active item.
@@ -127,20 +130,41 @@ forward-fix, and post-write verification.
 The execution queue is strict:
 
 1. Keep exactly one active backlog ID. The current ID is `PLAN-WEB-014`.
-2. Finish or genuinely document the active ID's remaining acceptance work;
-   do not move to a different backlog item because it is easier.
+2. Finish or genuinely document the active ID's remaining acceptance work. If
+   it is genuinely blocked, commit the complete blocked record, park it
+   unchecked, and select the first dependency-ready unchecked item from the
+   top of the backlog. This is a queue transition, not acceptance.
 3. Recompute the live score from `docs/shipping/VERGLOS_V1_BACKLOG.md` after
    each substantial batch. Only complete acceptance evidence may change a
    checkbox; code, deployment, browser clicks, configuration, or a partial
    provider observation never changes it by itself.
-4. After the active ID is accepted, update the backlog, execution ledger,
-   evidence index, status/showcase records, and score in one traceable batch;
-   then select the next ID from the live unchecked queue.
+4. After the active ID is accepted—or after a complete blocked record is
+   committed—update the backlog, execution ledger, evidence index,
+   status/showcase records, and score in one traceable batch. If blocked, keep
+   the checkbox open and select the first dependency-ready ID by top-to-bottom
+   backlog order; do not skip an earlier parked item silently.
 5. If an external provider, reviewer, legal approval, customer fixture, or
    Production credential is genuinely missing, record the exact owner,
    artifact, expiry/review date, and next unblock action while keeping the
    checkbox open. Do not silently skip the item or claim a lower-environment
    result as Production evidence.
+
+### 2026-10-10 execution amendment · blocked-item queue rule
+
+The current `PLAN-WEB-014` provider block is recorded with its owner, missing
+artifact, review date, cleanup evidence, and release decision. It is not
+checked. No new secret or credential is required from the founder for the next
+execution turn; the only missing external artifact currently identified is a
+provider-supported recurring-card/renewal fixture with signed webhook
+evidence.
+
+After the blocked record is committed, the next scan starts at the top of the
+live backlog. `HUNT-008` is the first unchecked ID; its trusted/licensed
+provenance and independent-qualification requirements must be assessed and
+recorded before selecting a later ID. If those requirements are externally
+blocked, park `HUNT-008` with the same owner/artifact/date/release record, then
+assess the next dependency-ready candidate, currently `PLAN-CLI-001`. A
+blocked item is never checked, and parking one never improves the score.
 
 The latest controlled Preview run created and then cancelled two isolated
 Test Mode recurring-card fixtures. The provider stopped both at card
@@ -1458,8 +1482,10 @@ When an item is blocked, record it once in the private tracker with:
 - release decision while the gate remains open.
 
 Then remain on the same active item and work only on its unblock path. Do not
-relabel a blocked gate as complete, do not jump to the next item to improve
-the score, and do not repeatedly rerun unchanged tests to fill time.
+relabel a blocked gate as complete or jump to the next item merely to improve
+the score. Once the complete blocked record is committed, park the item and
+select the first dependency-ready unchecked item from the top of the backlog;
+do not repeatedly rerun unchanged tests to fill time.
 
 ## 6. Fat-batch acceptance protocol
 
@@ -1835,8 +1861,10 @@ At resume, perform this exact sequence:
     artifact, expiry/review date, safe next action, and release decision once;
     do not fabricate a signature, consent, legal approval, customer result,
     provider lifecycle, or trusted publication. Continue only with the same
-    item's unblock path; do not use an external blocker as permission to jump
-    to the next backlog item.
+    item's unblock path until its complete blocked record is committed. After
+    that record, park the item and select the first dependency-ready unchecked
+    item from the top of the backlog; do not skip an earlier parked item or
+    use the block to inflate the score.
 11. After Gate 4 is genuinely closed, resolve npm/CLI-only versus Web SCM
     scope before Gate 5. Do not treat GitHub/GitLab integration as an npm
     publishing prerequisite.
