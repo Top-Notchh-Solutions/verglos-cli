@@ -86,6 +86,42 @@ evidenced;
 Gates 5–9 remain open or external as described in Section 4. No production
 billing or database activation is implied by this checkpoint.
 
+### 2026-10-10 · strict execution lock and latest Preview boundary
+
+The founder has explicitly authorized controlled write operations, including
+bounded Production work, for this shipping goal. That authorization does not
+turn incomplete evidence into acceptance and does not permit unbounded data
+mutation, credential disclosure, test/Production mixing, or real-money
+charging. Every write must still have an exact target, dry-run result, mode
+check, backup/restore plan when data can change, reconciliation, rollback or
+forward-fix, and post-write verification.
+
+The execution queue is strict:
+
+1. Keep exactly one active backlog ID. The current ID is `PLAN-WEB-014`.
+2. Finish or genuinely document the active ID's remaining acceptance work;
+   do not move to a different backlog item because it is easier.
+3. Recompute the live score from `docs/shipping/VERGLOS_V1_BACKLOG.md` after
+   each substantial batch. Only complete acceptance evidence may change a
+   checkbox; code, deployment, browser clicks, configuration, or a partial
+   provider observation never changes it by itself.
+4. After the active ID is accepted, update the backlog, execution ledger,
+   evidence index, status/showcase records, and score in one traceable batch;
+   then select the next ID from the live unchecked queue.
+5. If an external provider, reviewer, legal approval, customer fixture, or
+   Production credential is genuinely missing, record the exact owner,
+   artifact, expiry/review date, and next unblock action while keeping the
+   checkbox open. Do not silently skip the item or claim a lower-environment
+   result as Production evidence.
+
+The latest controlled Preview run created and then cancelled two isolated
+Test Mode recurring-card fixtures. The provider stopped both at card
+tokenization/mandate authorization: no captured payment or license grant was
+produced, and the owner-bound status route reconciled both rows as cancelled.
+This boundary is recorded in
+`docs/shipping/evidence/plan-web-014-preview-recurring-card-boundary-2026-10-10.md`.
+It strengthens Gate 4 evidence but does not close `PLAN-WEB-014`.
+
 ### 2026-10-10 · isolated Preview/Test Mode full-refund reconciliation
 
 A read-only preflight matched the authenticated Razorpay Test Mode payment

@@ -7553,3 +7553,18 @@ it was not sent and contains no credentials or customer data.
   score remains **219 checked / 61 unchecked / 280 total (78.2%)**.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
+# 2026-10-10 · isolated Preview recurring-card boundary
+
+- **Scope:** Continue the one-item-at-a-time payment lifecycle qualification
+  after rotating only the Preview fixture secret and deploying
+  `dpl_6RRRpPktiXQEW2i2wi1SWuyGBsWn`.
+- **Writes:** Created two canonical monthly Test Mode subscriptions in the
+  isolated Preview database through the authenticated application route;
+  cancelled both through Razorpay Test Mode; no Production payment/database/
+  entitlement/account/customer write occurred.
+- **Result:** Both provider subscriptions reconciled to `cancelled`; neither
+  reached a captured payment or entitlement. The hosted recurring card flow
+  stopped at provider card-tokenization/mandate authorization.
+- **Decision:** PLAN-WEB-014 and PLAN-WEB-015 remain unchecked. Do not infer
+  provider success from route creation or checkout rendering. Evidence:
+  `docs/shipping/evidence/plan-web-014-preview-recurring-card-boundary-2026-10-10.md`.
