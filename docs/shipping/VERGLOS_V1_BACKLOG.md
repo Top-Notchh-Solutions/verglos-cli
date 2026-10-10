@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · Production schema availability evidence
+
+The bounded Production migration operation created a pre-write backup, applied
+the pending reviewed migrations through the protected Vercel environment
+runner, and verified **39/39** migrations with zero missing declared tables.
+The migration-audit false positive caused by non-monotonic journal timestamps
+was corrected in Web `2a050be`, and the corrected read-only Production audit
+reports the expected inventory-only state. Public `/`, `/checkout`, and
+`/docs` returned 200 after the operation. No payment, entitlement, account,
+organization, customer-data, or backfill write occurred. This is supporting
+Production schema evidence only: `PLAN-WEB-014`, Gate 4, and the full
+payment/provider lifecycle remain open. No checkbox changed; score remains
+**219 checked / 61 unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/production-migration-2026-10-10.md`.
+
 ## 2026-10-10 · `PLAN-WEB-014` current Preview webhook configuration
 
 Razorpay Test Mode now reports an enabled webhook for the current READY

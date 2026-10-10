@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Production bounded schema migration and audit correction
+
+- **Preflight:** The reviewed Web journal contained 39 migrations; Production
+  had 26 applied and three declared private-runner tables missing. A local
+  custom-format backup was created before the write and its manifest was
+  verified.
+- **Write:** The Vercel Production environment runner applied only the
+  pending reviewed migrations. No payment/provider, entitlement, account,
+  organization, customer-data, or backfill write occurred.
+- **Verification:** The corrected read-only audit reports 39/39 migrations,
+  zero missing declared tables, and all private-runner tables present with
+  zero rows. Public `/`, `/checkout`, and `/docs` returned 200; the
+  POST-only Razorpay webhook route returned 405 to GET.
+- **Tool correction:** Web commit `2a050be` orders Drizzle migration history
+  by application ID instead of non-monotonic `created_at`, with a regression
+  test. The earlier drift result was a checker false positive.
+- **Disposition:** Production schema availability is now evidenced, but this
+  does not close `PLAN-WEB-014` or Gate 4. Provider lifecycle and entitlement
+  reconciliation remain open.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-migration-2026-10-10.md`.
+
 ## 2026-10-10 · Production controlled-write preflight
 
 - **Read-only result:** Production deployment is READY; the environment key

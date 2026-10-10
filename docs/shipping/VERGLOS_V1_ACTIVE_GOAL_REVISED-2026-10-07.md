@@ -12,6 +12,19 @@ unchecked / 280 total (78.2%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · Production schema migration evidence
+
+The bounded Production schema operation created a pre-write backup, applied
+the pending reviewed migrations through the protected environment runner, and
+verified **39/39** migrations with zero missing declared tables. The migration
+audit was corrected to use Drizzle application order because journal
+timestamps are non-monotonic after branch merges. Production `/`, `/checkout`,
+and `/docs` returned 200 afterward; no payment, entitlement, account,
+organization, customer-data, or backfill write occurred. This is supporting
+evidence only. `PLAN-WEB-014` and Gate 4 remain the sole active payment
+qualification workstream and remain open. Evidence:
+`docs/shipping/evidence/production-migration-2026-10-10.md`.
+
 ### 2026-10-10 · current Preview webhook configuration
 
 Razorpay Test Mode now reports an enabled webhook for the current READY
