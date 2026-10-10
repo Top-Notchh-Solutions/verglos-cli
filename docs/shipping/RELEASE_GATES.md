@@ -1,10 +1,29 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · PRO-008 invoice metadata projection advanced
+
+Web `cad9404` adds validated, idempotent provider-invoice metadata persistence
+and an owner-scoped masked billing projection. Migration `0040` is applied in
+both isolated Neon Test and Docker PostgreSQL; both audits report **41/41
+applied**, zero pending, zero missing, with the invoice and Studio custody
+tables present. Unit billing/webhook tests pass **22/22**, isolated Docker
+integration passes **7/7**, and typecheck/schema/migration/build checks pass.
+
+This is code-side progress only. It does not close `PRO-008` or Gate 4 because
+provider-generated lifecycle events and complete signed
+payment-to-ledger-to-license reconciliation remain absent. Invoice documents,
+tax payloads, and download URLs are intentionally not stored. No Production or
+provider/database/payment/entitlement/account/customer-data write occurred.
+Score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/pro-008-invoice-metadata-projection-2026-10-10.md`.
+
 ## 2026-10-10 · STUDIO-CLI-001 hosted custody implementation progress
 
 The Web custody endpoint and dedicated persistence are now implemented at
-`e3e416d`. The isolated Test database is fully migrated (40/40, no pending
-migrations, custody table present), and the route/contract/build checks pass.
+`e3e416d`. The isolated Test database is fully migrated (41/41, no pending
+migrations, custody and invoice tables present), and the route/contract/build
+checks pass.
 This does not open a release gate or close the checkbox: independent hosted
 recipient redaction proof and an authorized Studio recipient/customer run are
 still required. Score remains **223/57/280 (79.6%)**.

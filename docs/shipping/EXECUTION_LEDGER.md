@@ -1,14 +1,32 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · PRO-008 invoice metadata projection advanced
+
+- **Implementation:** Web `cad9404` adds the `billing_invoices` metadata
+  projection, validated invoice binding through subscription payment/invoice
+  webhooks, idempotent owner-scoped persistence, and masked billing display.
+  Invoice documents, tax payloads, and provider download URLs remain excluded.
+- **Verification:** Migration `0040` applied to isolated Neon Test and Docker
+  databases. Both audits report **41/41 applied**, zero pending, zero missing;
+  billing/webhook unit tests **22/22**, isolated Docker integration **7/7**,
+  typecheck, schema/migration checks, 47-page build, and diff check passed.
+- **Boundary:** No Production deployment or Production/provider/payment/
+  database/entitlement/account/customer-data write occurred.
+- **Disposition:** Keep `PRO-008` unchecked until provider-generated payment
+  lifecycle and complete tenant-bound payment-to-ledger-to-license evidence
+  exists. Score remains **223/57/280 (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/pro-008-invoice-metadata-projection-2026-10-10.md`.
+
 ## 2026-10-10 · STUDIO-CLI-001 hosted custody implementation progress
 
 - **Implementation:** Web `e3e416d` adds the private client-projection custody
   GET/POST route, CLI-parity admission, retry-safe digest binding, and
   `client_projection_custody` migration/table. Only bounded redacted fields
   are persisted.
-- **Verification:** Isolated Test Neon migration applied successfully; a
-  read-only audit reported 40 expected/40 applied, zero pending migrations,
-  zero missing tables, and the new table present. Route integration **1/1**,
+- **Verification:** Isolated Test Neon migrations applied successfully; a
+  read-only audit reported 41 expected/41 applied, zero pending migrations,
+  zero missing tables, and the custody/invoice tables present. Route integration **1/1**,
   pure contract tests **2/2**, Web typecheck, Drizzle check, migration check,
   and 47-page production build passed.
 - **Boundary:** No Production database/provider/entitlement/account or

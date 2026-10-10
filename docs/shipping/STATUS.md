@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · PRO-008 invoice metadata projection advanced
+
+Web commit `cad9404` adds validated, idempotent provider-invoice metadata
+storage for subscription payment/invoice webhook paths and exposes masked
+metadata in the owner billing view. The projection stores no invoice document,
+tax payload, or provider download URL; mismatched invoice identity, amount,
+currency, payment, subscription, order, and owner bindings fail closed.
+
+Migration `0040_billing_invoice_metadata` is applied in the isolated Neon Test
+database and the isolated Docker database. Both read-only audits report **41/41
+applied**, zero pending, zero missing tables, with both invoice and Studio
+custody tables present. Billing/webhook unit tests pass **22/22**; isolated
+Docker billing/commercial/webhook integration passes **7/7**; typecheck,
+schema/migration checks, 47-page build, and diff check pass.
+
+This advances code-side PRO-008 evidence but does not close the checkbox:
+provider-generated lifecycle evidence and complete payment-to-ledger-to-license
+reconciliation remain required. No Production deployment or Production/provider/
+payment/database/entitlement/account/customer-data write occurred. Score
+remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/pro-008-invoice-metadata-projection-2026-10-10.md`.
+
 ## 2026-10-10 · STUDIO-CLI-001 hosted custody implementation advanced
 
 Web commit `e3e416d` adds the private client-projection custody route and
@@ -8,9 +31,10 @@ workspace, record-digest, approval, expiry, and canonical projection-digest
 contract as the CLI; requires the existing project `publish_record`/`view`
 authorization; and is retry-safe without storing source or private findings.
 
-The explicitly selected isolated Neon Test database received migration
-`0039_client_projection_custody`. A read-only audit reported **40/40 applied**,
-zero pending migrations, zero missing tables, and the new table present. The
+The explicitly selected isolated Neon Test database received migrations
+`0039_client_projection_custody` and `0040_billing_invoice_metadata`. A
+read-only audit reported **41/41 applied**, zero pending migrations, zero
+missing tables, and the custody/invoice tables present. The
 route integration passed **1/1**, pure contract tests **2/2**, and Web
 typecheck/Drizzle check/migration check/production build all passed.
 

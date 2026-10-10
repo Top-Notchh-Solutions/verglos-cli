@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-10 · PRO-008 invoice metadata projection advanced
+
+Web `cad9404` adds the validated, idempotent `billing_invoices` metadata
+projection through the provider invoice/payment webhook paths and an
+owner-scoped masked billing view. Migration `0040` is applied and isolated
+Neon/Docker audits are **41/41** with zero pending or missing tables. Billing
+and webhook unit tests pass **22/22**; isolated Docker integration passes
+**7/7**; typecheck, schema/migration checks, build, and diff checks pass.
+Invoice documents, tax payloads, and provider download URLs remain explicitly
+out of scope. Provider-generated lifecycle and complete payment-to-ledger-
+to-license reconciliation remain required; no checkbox changed. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/pro-008-invoice-metadata-projection-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 current Test Mode inventory recheck
 
 The bounded Test Mode subscription API read returned 42 rows: 5 active, 15
