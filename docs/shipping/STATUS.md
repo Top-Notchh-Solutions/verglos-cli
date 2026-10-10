@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-10 · ACCEPT-002 substrate/regression repair
+
+Web commit `e310c57afec730d0266e72a7adbfff59e5efa09a` repaired the tenant
+authorization inventory/denial-contract regression and normalized the hosted
+subscription unavailable-method error contract. The committed-head verifier
+passed CLI **241/241**, Web **923/953** with 30 explicit environment-gated
+skips, and composed substrates **74/74**, with all commands exiting 0.
+
+This remains substrate/regression evidence only. It does not close `ACCEPT-002`
+or `ACCEPT-003`: hosted/provider lifecycle, customer/recipient acceptance,
+independent review, browser-human/field-CWV, and account-deletion evidence are
+still required. No provider, database, entitlement, customer, deployment, or
+Production state write occurred. Score remains **223 checked / 57 unchecked /
+280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/accept-002-substrate-regression-repair-2026-10-10.md`.
+
 ## 2026-10-10 · QUAL-WEB-006 Production route/performance qualification
 
 The authenticated Production account trace measured LCP **2,327 ms** and CLS

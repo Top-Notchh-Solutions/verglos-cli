@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-10 · ACCEPT-002 substrate/regression repair
+
+Web `e310c57` repairs the current tenant-scope audit coverage and shared
+payment-method-unavailable error contract. The committed-head acceptance
+verifier passes CLI **241/241**, Web **923/953** with 30 explicit
+environment-gated skips, and composed Studio/Enterprise/Team/quality
+substrates **74/74**; all commands exit 0.
+
+This does not close `ACCEPT-002` or `ACCEPT-003`. It is repository-owned
+substrate evidence only; hosted/provider lifecycle, customer/recipient,
+independent-review, browser-human/field-CWV, and deletion acceptance remain
+open. No provider, database, payment, entitlement, customer, deployment, npm,
+or Production state write occurred. Score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/accept-002-substrate-regression-repair-2026-10-10.md`.
+
 ## 2026-10-10 · QUAL-WEB-006 Production route/performance qualification
 
 The authenticated Production account trace measured LCP **2,327 ms** and CLS

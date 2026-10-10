@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · ACCEPT-002 substrate/regression repair
+
+- **Implementation:** Web `e310c57` updates the tenant-scope audit for the
+  current 23 protected routes and 36 guarded methods, including private-runner
+  and client-projection routes, and normalizes the recurring subscription
+  unavailable-method error to `PAYMENT_METHOD_UNAVAILABLE`.
+- **Verification:** The committed-head `pnpm acceptance:stories:verify` run
+  passed CLI **241/241**, Web **923/953** with 30 explicit environment-gated
+  skips, and composed Studio/Enterprise/Team/quality substrates **74/74**;
+  every command exited 0.
+- **Boundary:** Substrate/regression evidence only. No provider, payment,
+  webhook, database, entitlement, account, customer, deployment, npm, or
+  Production state write occurred.
+- **Disposition:** Keep `ACCEPT-002` and `ACCEPT-003` unchecked. Hosted
+  provider lifecycle, customer/recipient, independent-review, browser-human,
+  field-CWV, and deletion evidence remain open. Score remains
+  **223/57/280 (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-substrate-regression-repair-2026-10-10.md`;
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
+
 ## 2026-10-10 · QUAL-WEB-006 Production route/performance qualification
 
 - **Verification:** Production `/account` trace measured LCP **2,327 ms** and

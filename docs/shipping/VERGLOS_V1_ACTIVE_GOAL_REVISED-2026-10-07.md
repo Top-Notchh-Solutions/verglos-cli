@@ -12,6 +12,26 @@ unchecked / 280 total (79.6%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
 
+### 2026-10-10 · ACCEPT-002 committed-head regression repair
+
+Web commit `e310c57afec730d0266e72a7adbfff59e5efa09a` repairs the current
+tenant-scope audit coverage (23 protected routes / 36 guarded methods) and
+normalizes the recurring subscription unavailable-method error contract. The
+committed-head acceptance verifier passes CLI **241/241**, Web **923/953** with
+30 explicit environment-gated skips, and composed Studio/Enterprise/Team/
+quality substrates **74/74**; all commands exit 0.
+
+This is substrate/regression evidence only. It does not close `ACCEPT-002` or
+`ACCEPT-003`: hosted/provider lifecycle, customer/recipient, independent
+review, browser-human/field-CWV, and account-deletion evidence remain open.
+No provider, payment, webhook, database, entitlement, account, customer,
+deployment, npm, or Production state write occurred. The live score remains
+**223/57/280 (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/accept-002-substrate-regression-repair-2026-10-10.md`;
+`docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
+
 ### 2026-10-10 · PLAN-WEB-014 provider-state recheck
 
 The current Razorpay Test Mode subscription inventory was rechecked read-only:
