@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-10 · Production controlled-write preflight
+
+- **Read-only result:** Production deployment is READY; the environment key
+  shape is separated from Preview/Test Mode; public route smoke passed; the
+  authenticated Production account is Free with no organization fixture.
+- **Migration check:** the source journal contains 39 ordered migrations.
+  The local `.env.production.local` `DATABASE_URL` is a Vercel-encrypted
+  secret representation, not a usable PostgreSQL DSN. `psql` rejected it
+  before connecting, so the migration audit, snapshot, restore rehearsal, and
+  write were not run.
+- **Boundary:** No Production SQL, payment, entitlement, account,
+  organization, or customer-data write occurred.
+- **Next artifact:** an approved trusted-shell secret-manager path or a
+  protected runtime migration runner that can perform the reviewed backup,
+  migration, reconciliation, and rollback sequence.
+- **Score:** **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/production-write-preflight-2026-10-10.md`.
+
 ## 2026-10-10 · PLAN-CLI-003 isolated Preview fixture organization
 
 - **Preview repair:** Removed the duplicate branch-scoped Preview auth-secret
