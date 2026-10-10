@@ -92,3 +92,32 @@ Provider references:
 Secrets, bypass values, database URLs, cookies, authorization headers, raw
 provider payloads, full provider identifiers, phone numbers, card values, and
 OTP values are omitted.
+
+## Continuation requalification · 2026-10-10
+
+- Fresh Vercel configuration inspection showed the deployed Production
+  checkout exposes `card` only with subscription creation disabled, while the
+  isolated Preview checkout exposes `card` only with Test Mode and the
+  subscription route enabled. No environment values were revealed.
+- The authenticated Razorpay Test Mode webhook detail showed HTTP 200 for the
+  completed `payment.failed`, `subscription.paused`, and
+  `subscription.resumed` deliveries. Older HTTP 401 rows are historical
+  protection failures. The Dashboard exposed no replay or charge-now control
+  for the selected target; no undocumented endpoint was used.
+- Read-only provider inventory returned HTTP 200 with five active
+  subscriptions; one has two paid cycles and four have one. The isolated
+  database currently reports `active: 5`, `cancelled: 8`, `pending: 23`,
+  payment aggregates `captured: 3`, `failed: 4`, `partially_refunded: 1`,
+  `refunded: 3`, two active licenses, and 75 completed webhook events.
+- The additional pending rows are failed/unfinished Test Mode attempts and do
+  not establish authorization, capture, entitlement, or renewal evidence.
+
+The external blocker is now precise: the account is authenticated and the
+isolated route is reachable, but Razorpay has not exposed a supported
+recurring-card tokenization/authorization fixture or an official replay/
+charge control that can produce the missing provider-backed capture. Owner:
+Verglos release owner with the Razorpay Test Mode account owner. Review by
+2026-10-17. Safe next action: obtain provider confirmation or a supported
+Test Mode recurring-card fixture/control, then run only the missing
+authorization and reconciliation cases. Gate 4 and `PLAN-WEB-014` remain
+open; no checkbox changed.

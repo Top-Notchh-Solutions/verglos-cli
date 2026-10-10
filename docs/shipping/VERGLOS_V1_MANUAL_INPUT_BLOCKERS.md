@@ -1,5 +1,28 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## Current superseding reconciliation · 2026-10-10 · Recurring-card provider boundary
+
+The earlier Test Mode credential and dashboard-authentication blockers are
+superseded. Fresh read-only provider inventory returned HTTP 200, the
+authenticated Razorpay webhook detail showed HTTP 200 for the repaired
+`payment.failed`, `subscription.paused`, and `subscription.resumed` deliveries,
+and fresh deployed responses confirmed Cards-only in Production and isolated
+Preview. Production remains subscription-disabled and Preview remains
+isolated Test Mode subscription-enabled.
+
+The remaining missing artifact is provider-supported recurring-card
+tokenization/authorization and capture, followed by one-to-one payment,
+ledger, license, and access reconciliation. The selected Dashboard target
+exposed no replay or charge-now control. Owner: Verglos release owner with
+the Razorpay Test Mode account owner. Review by 2026-10-17. Safe next action:
+obtain provider confirmation or a supported Test Mode fixture/control and run
+only the missing cases. Keep Gate 4 and `PLAN-WEB-014` open; do not retry the
+same OTP path indefinitely, use Production, edit rows, or use synthetic
+provider events.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · CLI backend queue audit
 
 The authoritative CLI `origin/main` is `f5686b5c`; implementation PRs through

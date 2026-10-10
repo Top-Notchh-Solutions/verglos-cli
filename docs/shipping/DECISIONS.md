@@ -2017,3 +2017,18 @@ each observed method has lifecycle and reconciliation evidence.
   capture and payment/ledger/license reconciliation are evidenced.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
+
+## Cards-only deployed truth and provider boundary · 2026-10-10
+
+- **Decision:** Keep the release candidate Cards-only. Fresh Production
+  responses expose Cards-only with subscription creation disabled; isolated
+  Preview exposes Cards-only with Test Mode subscription creation enabled.
+- **Provider boundary:** The authenticated Test Mode dashboard confirms the
+  repaired webhook deliveries return HTTP 200, but provides no replay or
+  charge-now control for the selected target. Do not use undocumented APIs,
+  synthetic events, guessed OTPs, or direct database edits.
+- **Release decision:** Keep Gate 4 and `PLAN-WEB-014` open until a supported
+  recurring-card tokenization/authorization fixture or provider control
+  yields capture and complete payment/ledger/license reconciliation. Owner is
+  the Verglos release owner with the Razorpay Test Mode account owner; review
+  by 2026-10-17.

@@ -5421,3 +5421,18 @@ checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
 
 Evidence:
 `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
+
+## 2026-10-10 · Current Cards-only and provider requalification
+
+Production and isolated Preview now both render Cards-only in fresh deployed
+responses. Production remains fail-closed for subscription creation; isolated
+Preview remains Test Mode-enabled against the isolated database. Razorpay's
+authenticated webhook detail confirms the repaired lifecycle deliveries return
+HTTP 200, while no replay or charge-now control is available for the selected
+target.
+
+`PLAN-WEB-014` remains open for provider-supported recurring-card
+authorization/capture and the exact payment → ledger → license reconciliation.
+The owner is the Verglos release owner with the Razorpay Test Mode account
+owner, review by 2026-10-17. Score: **219 checked / 61 unchecked / 280 total
+(78.2%)**; no checkbox changed.

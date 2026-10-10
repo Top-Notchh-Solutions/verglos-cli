@@ -2581,3 +2581,17 @@ Gate 4 ingress/lifecycle coverage but does not pass Gate 4 or close the
 backlog item. Production remains fail-closed for billing state.
 
 Evidence: `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
+
+## PLAN-WEB-014 continuation requalification · 2026-10-10
+
+Gate 4 remains partially qualified. Fresh deployed responses prove Cards-only
+in Production and isolated Preview; Production is subscription-disabled and
+Preview is Test Mode subscription-enabled. Authenticated Razorpay webhook
+logs show HTTP 200 for the repaired failed/paused/resumed deliveries. The
+Dashboard exposes no replay or charge-now control for the selected target.
+
+Missing artifact: provider-supported recurring-card tokenization/
+authorization and capture followed by exactly-once payment, ledger, license,
+and access reconciliation. Owner: Verglos release owner plus Razorpay Test
+Mode account owner. Review by 2026-10-17. Release decision: keep Gate 4,
+`PLAN-WEB-014`, and Production billing fail-closed until the artifact exists.

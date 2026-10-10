@@ -7245,3 +7245,29 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
   / 61 unchecked / 280 total (78.2%)**.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
+
+## 2026-10-10 · PLAN-WEB-014 continuation requalification
+
+- **Surface:** Fresh read-only Production and isolated Preview checkout
+  inspection confirmed Cards-only in both environments. Production has
+  subscription creation disabled; isolated Preview has Test Mode subscription
+  creation enabled. No environment values were exposed.
+- **Provider:** Authenticated Razorpay Test Mode webhook detail showed HTTP
+  200 for the completed `payment.failed`, `subscription.paused`, and
+  `subscription.resumed` deliveries. Older 401 rows are historical. No replay
+  or charge-now control was exposed for the selected target, and no
+  undocumented endpoint was used.
+- **Reconciliation:** Provider inventory returned HTTP 200 with five active
+  subscriptions; one has two paid cycles and four have one. Isolated read-only
+  aggregates are active 5, cancelled 8, pending 23 subscriptions; captured 3,
+  failed 4, partially_refunded 1, refunded 3 payments; two active licenses;
+  and 75 completed webhook events. Pending attempts do not count as captures.
+- **Disposition:** The isolated route and signed ingress are qualified, but
+  recurring-card authorization/capture and complete payment/ledger/license
+  reconciliation remain open. Owner is the Verglos release owner with the
+  Razorpay Test Mode account owner; review by 2026-10-17. Safe next action is
+  provider confirmation or a supported recurring-card fixture/control. No
+  Production/provider/database/migration/entitlement/customer write occurred;
+  score remains **219 checked / 61 unchecked / 280 total (78.2%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.

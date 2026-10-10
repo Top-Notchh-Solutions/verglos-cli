@@ -1653,3 +1653,13 @@ capture or entitlement. Gate 4 remains open for recurring-card
 authorization/capture and full payment/ledger/license reconciliation. No
 Production webhook, billing, database, migration, or entitlement state was
 changed.
+
+R-041 update (2026-10-10, current provider requalification): Fresh deployed
+responses confirm Cards-only in Production and isolated Preview, with billing
+subscription creation disabled in Production and enabled only in isolated
+Preview Test Mode. Razorpay webhook logs show HTTP 200 for the repaired
+failed/paused/resumed deliveries, but no replay or charge-now control is
+available for the selected target. Owner: Verglos release owner with the
+Razorpay Test Mode account owner; review by 2026-10-17. Keep Gate 4 and
+Production billing fail-closed until a supported recurring-card fixture or
+provider control produces authorization/capture and reconciliation evidence.

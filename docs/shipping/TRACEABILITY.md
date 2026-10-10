@@ -4156,3 +4156,17 @@ open. No checkbox changed. See
 - **Disposition:** Gate 4 and `PLAN-WEB-014` remain open; no checkbox changed.
 - **Evidence file:**
   `docs/shipping/evidence/plan-web-014-preview-webhook-bypass-pause-resume-2026-10-10.md`.
+
+### PLAN-WEB-014 · continuation requalification · 2026-10-10
+
+- **Implemented/verified:** Fresh Production and isolated Preview responses
+  expose Cards-only; Preview is Test Mode subscription-enabled and Production
+  remains subscription-disabled. Razorpay webhook detail shows HTTP 200 for
+  the repaired failed/paused/resumed deliveries.
+- **Still missing:** Provider-supported recurring-card tokenization,
+  authorization/capture, and the complete one-to-one payment → ledger →
+  license/access reconciliation. No replay or charge-now Dashboard control
+  was available.
+- **Owner/next action:** Verglos release owner with the Razorpay Test Mode
+  account owner; obtain a supported fixture/control and rerun only the missing
+  cases. Review by 2026-10-17. No checkbox changed.
