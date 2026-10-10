@@ -1630,3 +1630,15 @@ Owner: Verglos release owner with the Razorpay Test Mode account owner. Until
 a provider-supported subscription fixture or documented simulation control is
 available, Gate 4 remains open and Production recurring billing remains
 fail-closed. No Production or manual database write occurred.
+
+R-041 update (2026-10-10, renewal trigger/replay boundary): Razorpay's
+documented subscription update was attempted once against the exact isolated
+Test Mode active match and rejected with HTTP 400 because its cycle start is
+in the future. The provider has no documented charge-now endpoint. The next
+supported path is Dashboard replay of an unacknowledged Subscription/Invoice
+event within seven days, but the available debugging Chrome profile is not
+authenticated to the Razorpay Dashboard. Owner: authorized Razorpay Test Mode
+operator. Until replay or a changed provider-supported fixture is completed,
+Gate 4 and `PLAN-WEB-014` remain open and Production billing remains
+fail-closed. No provider, database, entitlement, or Production write was
+accepted.

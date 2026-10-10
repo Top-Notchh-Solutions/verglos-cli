@@ -88,6 +88,20 @@ verification evidence exists. Continue the goal with one active item, exact
 score recomputation, private evidence, execution-ledger synchronization, and
 a concise implementation showcase after each accepted batch.
 
+### 2026-10-10 provider renewal trigger boundary
+
+One supported Razorpay Test Mode subscription-update attempt was bounded to
+the exact active provider/application match and rejected with HTTP 400 because
+the subscription cycle start is in the future. No provider write was accepted;
+post-attempt read-only reconciliation still shows zero bound application
+payments and licenses for that subscription. Razorpay's documented next route
+is Dashboard replay of an unacknowledged Subscription/Invoice event within
+seven days, selecting only the isolated Preview webhook. The debugging Chrome
+profile is currently unauthenticated to Razorpay, so no replay was attempted.
+This does not change the active item, Gate 4, Production safeguards, or score.
+Evidence:
+`docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
+
 ### 2026-10-10 execution lock — one backlog item at a time
 
 The active backlog item is `PLAN-WEB-014` and it is the only implementation

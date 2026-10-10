@@ -1985,3 +1985,17 @@ each observed method has lifecycle and reconciliation evidence.
   entitlement, account, or customer-data write occurred. Gate 4 and
   `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and `PLAN-WEB-015` remain
   open until the missing provider lifecycle and reconciliation evidence exists.
+
+## Test Mode renewal trigger and replay boundary · 2026-10-10
+
+- **Decision:** Do not use an undocumented charge endpoint or synthetic
+  webhook. The supported subscription update was attempted once and rejected
+  because the selected subscription's cycle start is in the future.
+- **Next permitted action:** Use Razorpay's official Dashboard replay flow for
+  an unacknowledged Subscription/Invoice event within seven days, selecting
+  only the isolated Preview webhook. Replayed payloads must retain the
+  provider signature and pass the existing idempotency path.
+- **Boundary:** No provider write was accepted and no application or
+  Production state changed. Gate 4 and `PLAN-WEB-014` remain open.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.

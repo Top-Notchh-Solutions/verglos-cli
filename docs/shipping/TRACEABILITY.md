@@ -4125,3 +4125,18 @@ open. No checkbox changed. See
   no backlog checkbox changed.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-invoice-paid-renewal-path-2026-10-10.md`.
+
+## PLAN-WEB-014 · Test Mode renewal trigger/replay boundary · 2026-10-10
+
+- **Requirement:** Provider-generated recurring payment delivery must reach
+  isolated Preview and reconcile once through payment, ledger, entitlement,
+  and access state.
+- **Attempt:** A documented Razorpay subscription update was bounded to one
+  exact Test Mode active match and rejected with HTTP 400 because the cycle
+  start is in the future. Post-attempt state remained unchanged.
+- **Next evidence:** Use the provider Dashboard's specific-event replay for
+  an unacknowledged Subscription/Invoice event no more than seven days old,
+  selecting only the isolated Preview webhook, then reconcile read-only.
+- **Disposition:** Requirement remains open; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.

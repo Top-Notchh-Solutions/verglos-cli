@@ -2553,3 +2553,15 @@ required, so Gate 4 and PLAN-WEB-011/012/014/015 remain open. No Production,
 provider, Neon, migration, payment, entitlement, account, or customer-data
 write occurred. Score remains **219 checked / 61 unchecked / 280 total
 (78.2%)**. Evidence: `docs/shipping/evidence/plan-web-014-invoice-paid-renewal-path-2026-10-10.md`.
+
+## PLAN-WEB-014 Test Mode renewal trigger/replay boundary · 2026-10-10
+
+One supported Razorpay subscription-update attempt was preflighted against
+one exact isolated Test Mode match and rejected with HTTP 400 because the
+subscription cycle start is in the future. No provider or application state
+changed. The official remaining provider-controlled route is Dashboard replay
+of an unacknowledged Subscription/Invoice event within seven days, using only
+the isolated Preview webhook. This is not a synthetic event and must retain
+the original Razorpay signature. Gate 4 and `PLAN-WEB-014` remain open; no
+checkbox changed. Evidence:
+`docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.

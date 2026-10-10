@@ -5380,3 +5380,19 @@ open for signed provider delivery and complete reconciliation. Backlog remains
 **219 checked / 61 unchecked / 280 total (78.2%)**; no checkbox changed.
 
 Evidence: `docs/shipping/evidence/plan-web-014-invoice-paid-renewal-path-2026-10-10.md`.
+
+## 2026-10-10 · Test Mode renewal trigger and replay boundary
+
+The bounded Razorpay Test Mode subscription-update attempt was rejected with
+HTTP 400 because the selected subscription's cycle start is in the future; no
+provider write, database write, payment, license, entitlement, or Production
+state changed. Post-attempt read-only reconciliation still shows the exact
+active provider/application match with zero bound application payments and
+licenses. Razorpay's supported next path is Dashboard replay of an
+unacknowledged Subscription/Invoice event within seven days, selecting only
+the isolated Preview webhook. The agent's debugging Chrome profile is not
+authenticated to Razorpay, so replay remains an external operator action.
+Gate 4 and `PLAN-WEB-014` remain open. Backlog remains **219 checked / 61
+unchecked / 280 total (78.2%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.

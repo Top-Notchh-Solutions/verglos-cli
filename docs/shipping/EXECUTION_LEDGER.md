@@ -7196,3 +7196,23 @@ No mutation occurred and no QUAL-WEB-006 checkbox changed. Evidence:
   changed.
 - **Evidence:**
   `docs/shipping/evidence/plan-web-014-invoice-paid-renewal-path-2026-10-10.md`.
+
+## 2026-10-10 · Gate 4 Test Mode renewal trigger/replay boundary
+
+- **Preflight:** The active item remained `PLAN-WEB-014` at 219 checked / 61
+  unchecked / 280 total (78.2%). Exactly one active Test Mode Pro/monthly
+  subscription with two paid cycles matched one active isolated database row.
+- **Provider attempt:** One documented subscription-update request using only
+  `start_at`, `schedule_change_at: "now"`, and `customer_notify: false` was
+  rejected by Razorpay with HTTP 400 `BAD_REQUEST_ERROR` because the cycle
+  start is in the future. No provider write was accepted.
+- **Reconciliation:** A post-attempt read-only check still found the same
+  active provider/application match, zero application payments and zero
+  licenses for that subscription, and no new event or Production state.
+- **Next boundary:** Razorpay's documented Dashboard replay flow is the next
+  provider-controlled option for an unacknowledged Subscription/Invoice event
+  within seven days. The debugging Chrome profile is not authenticated to
+  Razorpay, so no replay was attempted by the agent.
+- **Disposition:** Gate 4 and `PLAN-WEB-014` remain open; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-testmode-renewal-replay-boundary-2026-10-10.md`.
