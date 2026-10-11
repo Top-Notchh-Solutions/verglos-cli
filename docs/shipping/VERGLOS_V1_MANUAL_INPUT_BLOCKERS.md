@@ -1,5 +1,21 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · PLAN-WEB-012 cleared by Final V1 contract reconciliation
+
+The old recurring-subscription acceptance wording is retired. Final V1 now
+means Cards-only prepaid fixed-term access with a second user-initiated order;
+automatic recurring renewal is compatibility-only. The accepted Preview/Docker
+matrix covers capture, failure/no-grant, refund, manual renewal, expiry,
+replay/order, retry, and exactly-once reconciliation.
+
+`PLAN-WEB-012` is checked. Score is **227/53/280 (81.1%)**. The next queue is
+external HUNT-008 provenance/review (blocked) followed by the next
+dependency-ready implementation item. Gate 5, legal, protected release/
+rollback, and final acceptance remain open.
+
+Evidence:
+`docs/shipping/evidence/plan-web-012-final-v1-lifecycle-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-015 cleared by read-only Production reconciliation
 
 Production now matches the Final V1 Cards-only contract: the environment

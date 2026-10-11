@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · PLAN-WEB-012 final prepaid lifecycle acceptance
+
+- **Mapped ID:** `PLAN-WEB-012`.
+- **Contract:** One-time Cards-only fixed term with customer-initiated manual
+  renewal; automatic recurring renewal is compatibility-only and not a V1
+  promise.
+- **Verification:** Isolated Preview signed capture/failure/refund and second
+  order reconciliation, fresh Docker payment integration 6/6, focused payment
+  suite 29/29 with one explicit skip, and existing compatibility cancellation/
+  replay evidence.
+- **Acceptance:** The item is checked at **227 checked / 53 unchecked / 280
+  total (81.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-012-final-v1-lifecycle-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-015 Production Cards-only acceptance
 
 - **Mapped ID:** `PLAN-WEB-015`.

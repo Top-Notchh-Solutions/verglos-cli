@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-WEB-012 accepted · Final V1 prepaid lifecycle
+
+The billing lifecycle is now reconciled to the final product contract:
+Cards-only prepaid fixed terms with manual renewal. Isolated Preview/Docker
+evidence covers capture, failure/no-grant, full/partial refund, second-order
+renewal, expiry projection, replay/out-of-order, retry, and exactly-once
+behavior. Automatic recurring renewal is compatibility-only and is not a V1
+customer promise.
+
+`PLAN-WEB-012` is checked. Score is **227 checked / 53 unchecked / 280 total
+(81.1%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-012-final-v1-lifecycle-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-015 accepted · Production Cards-only contract
 
 Read-only Production verification reported the server-owned method catalog as

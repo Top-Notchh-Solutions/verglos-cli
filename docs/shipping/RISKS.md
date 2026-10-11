@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-PLAN-WEB-012 lifecycle contract reconciled
+
+- **Risk:** Legacy recurring-subscription code could be mistaken for a V1
+  customer promise or leave payment and entitlement state inconsistent.
+- **Verification:** Final V1 prepaid Preview/Docker evidence covers signed
+  capture/failure/refund, manual renewal, expiry projection, replay/order,
+  retry, and exactly-once payment→ledger→license behavior; compatibility
+  cancellation/replay evidence remains preserved.
+- **Status:** `PLAN-WEB-012` accepted after explicitly retiring automatic
+  recurring renewal from the V1 promise. Do not advertise recurring renewal.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-012-final-v1-lifecycle-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · R-PLAN-WEB-015 Production contract reduced
 
 - **Risk:** Production billing could expose a method or Test Mode state that

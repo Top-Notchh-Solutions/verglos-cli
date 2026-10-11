@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PLAN-WEB-012 accepted · Final V1 prepaid lifecycle
+
+- **Contract:** Re-scoped the old recurring-lifecycle wording to the final
+  Cards-only prepaid fixed-term and customer-initiated manual-renewal model.
+  Automatic subscription renewal remains compatibility-only.
+- **Evidence:** Isolated Preview signed capture/failure/refund delivery,
+  second one-time renewal, and payment→ledger→license reconciliation combine
+  with fresh Docker PostgreSQL **6/6** and focused payment **29/29** results
+  (one explicit environment-gated skip, zero failures). Replay, ordering,
+  retry, expiry, refund monotonicity, and exactly-once behavior are covered.
+- **Decision:** Check PLAN-WEB-012; do not advertise recurring renewal.
+- **Score:** **227 checked / 53 unchecked / 280 total (81.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-012-final-v1-lifecycle-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-015 accepted · Production Cards-only contract
 
 - **Production read-only check:** The pulled Production method catalog was

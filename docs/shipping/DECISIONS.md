@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Accept PLAN-WEB-012 under Final V1 billing contract
+
+- **Decision:** Check `PLAN-WEB-012` against Cards-only prepaid fixed-term
+  billing with manual renewal. Treat automatic recurring subscription renewal
+  as compatibility-only, not as a V1 customer promise.
+- **Evidence:** Isolated Preview signed capture/failure/refund delivery and
+  manual second-order reconciliation combine with Docker 6/6 and focused
+  payment 29/29 evidence for replay, ordering, retry, expiry, and exactly-once
+  behavior.
+- **Boundary:** No Production billing/database/entitlement write occurred;
+  old subscription cancellation/replay evidence remains a compatibility
+  check only.
+- **Score:** **227/53/280 (81.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-012-final-v1-lifecycle-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · Accept PLAN-WEB-015 Production Cards-only contract
 
 - **Decision:** Check `PLAN-WEB-015` after the read-only Production method

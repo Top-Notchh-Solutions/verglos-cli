@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · PLAN-WEB-012 accepted under prepaid/manual-renewal contract
+
+The billing lifecycle is accepted for the Final V1 contract: signed
+Cards-only capture/refund delivery, failure/no-grant, a second manual-renewal
+order, expiry projection, replay/out-of-order, retry, and exactly-once
+payment/ledger/license behavior are evidenced in isolated Preview/Docker.
+Automatic recurring renewal is explicitly not a V1 promise. This closes the
+backlog lifecycle item, not Gate 5, Hunt review, legal, protected release,
+rollback, or final acceptance.
+
+Score is **227/53/280 (81.1%)**. Evidence:
+`docs/shipping/evidence/plan-web-012-final-v1-lifecycle-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-015 Production Cards-only contract accepted
 
 The read-only Production environment catalog is exactly `card`; the live
