@@ -8722,3 +8722,19 @@ it was not sent and contains no credentials or customer data.
 - **Evidence:** docs/shipping/deliverables/00-COLLECTION-INDEX-2026-10-12.md;
   docs/shipping/deliverables/11-BLOCKER-REGISTER-2026-10-12.md;
   docs/shipping/deliverables/FOUNDER-INPUTS-ONLY-2026-10-12.md.
+
+## 2026-10-12 · HUNT-008 technical fixture-contract recheck
+
+- **Run:** `pnpm --filter @verglos/hunt test` in the private shipping workspace
+  at commit `73161c06c7a2959760a80a8317aadd0654e956a8`.
+- **Result:** 45 focused checks passed, 16 Docker integration checks were
+  explicitly skipped because the required Linux/namespace fixture was not
+  enabled, and 0 failed.
+- **Disposition:** This records real code-side contract evidence only. It does
+  not close HUNT-008, HUNT-011, or QUAL-CLI-004; the skipped Linux/Docker run,
+  trusted/licensed provenance, and independent review remain open.
+- **Boundary:** No external provider, Production, database, entitlement,
+  customer-data, publication, or deployment write occurred.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+- **Evidence:** `docs/shipping/evidence/hunt-a1-utf8-contains-fixtures-2026-10-12.md`.
