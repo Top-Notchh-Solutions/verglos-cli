@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · ACCEPT-002 current-head substrate recheck
+
+- **Verification:** CLI **37/37**, Web **923/953** with 30 explicit skips,
+  and composed Team/Studio/Enterprise/quality substrates **74/74** passed;
+  all three verifier commands exited 0.
+- **Heads:** CLI `74fd6cdc595ae6911792d0afb444dbbb5ca5985f`; Web
+  `887249d9f4d09842107fc6636b239af9f67b91d4`.
+- **Disposition:** Keep `ACCEPT-002` unchecked. Hunt, modified-CLI,
+  Studio-recipient, Enterprise-runner, and account-deletion story acceptance
+  remains qualification/customer/provider work.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-current-head-substrate-recheck-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · QUAL-WEB-006 Production read-only qualification
 
 - **Verification:** Authenticated Production `/account` and `/orgs` loaded

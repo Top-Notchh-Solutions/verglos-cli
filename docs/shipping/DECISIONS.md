@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep ACCEPT-002 open after current-head substrate pass
+
+- **Decision:** Accept the fresh harness results as regression/substrate
+  evidence only; do not check `ACCEPT-002`.
+- **Reason:** The remaining story statuses require hosted, provider,
+  customer, human-review, or account-deletion qualification that the harness
+  explicitly does not claim.
+- **Boundary:** No external, Production, provider, database, payment,
+  entitlement, migration, or customer state changed.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-current-head-substrate-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · Keep QUAL-WEB-006 open after Production read-only run
 
 - **Decision:** Accept the authenticated browser, Lighthouse, accessibility

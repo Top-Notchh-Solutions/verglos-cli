@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · ACCEPT-002 current-head substrate recheck
+
+- **Mapped ID:** `ACCEPT-002`.
+- **Verification:** Current CLI package tests 37/37, Web tests 923/953 with
+  30 explicit skips, and composed Team/Studio/Enterprise/quality tests 74/74
+  passed with zero command failures.
+- **Acceptance:** The story map still identifies Hunt, modified CLI, Studio
+  recipient, Enterprise runner, and account deletion as external qualification
+  or customer/provider work; the checkbox remains open.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-current-head-substrate-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · QUAL-WEB-006 Production read-only qualification
 
 - **Mapped ID:** `QUAL-WEB-006`.

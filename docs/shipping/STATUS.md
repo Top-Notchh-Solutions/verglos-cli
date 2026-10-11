@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · ACCEPT-002 current-head substrate recheck
+
+The acceptance verifier passed CLI **37/37**, Web **923/953** with **30
+explicit environment-gated skips**, and composed Team/Studio/Enterprise/
+quality substrates **74/74**. All commands exited 0 against CLI `74fd6cd`
+and Web `887249d`. `ACCEPT-002` remains open because the remaining stories
+need hosted/provider/customer/independent qualification. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/accept-002-current-head-substrate-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · QUAL-WEB-006 Production read-only qualification
 
 The authenticated Production `/account` and `/orgs` pages loaded without

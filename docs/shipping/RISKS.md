@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-ACCEPT-002 external story acceptance absent
+
+- **Risk:** Repository-owned acceptance substrates are green, but several
+  frozen stories still lack hosted/provider/customer or independent evidence.
+- **Impact:** The full acceptance corpus cannot be called complete and cannot
+  authorize final publication.
+- **Safe next action:** Run each remaining authorized external story with its
+  required evidence owner and preserve failures as limitations.
+- **Status:** Substrate revalidated; acceptance gate remains open. Score is
+  **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-current-head-substrate-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · R-QUAL-WEB-006 remaining human/field qualification
 
 - **Risk:** Production account rendering is accessible and fast in the lab

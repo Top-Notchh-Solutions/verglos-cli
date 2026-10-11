@@ -1,5 +1,17 @@
 # Verglos V1 Active Shipping Goal — Complete Contract, Whole Backlog, Preview, Production, and Release
 
+## 2026-10-11 execution checkpoint — ACCEPT-002 current-head substrate pass
+
+The current acceptance harness passed CLI **37/37**, Web **923/953** with 30
+explicit environment-gated skips, and composed Team/Studio/Enterprise/quality
+substrates **74/74**; every verifier command exited 0. The harness still marks
+Hunt, modified CLI, Studio recipient, Enterprise runner, and account deletion
+as qualification/customer/provider-open. `ACCEPT-002` remains unchecked and
+the score remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/accept-002-current-head-substrate-recheck-2026-10-11.md`.
+
 ## 2026-10-11 execution checkpoint — QUAL-WEB-006 Production read-only run
 
 The authenticated Production `/account` and `/orgs` pages were tested through
