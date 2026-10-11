@@ -12,9 +12,13 @@
   build passed; disposable PostgreSQL 15 write-capable payment integration
   passed **6/6**, including capture, replay, refund, failure recovery, and
   manual renewal.
-- **Hosted boundary:** `vercel deploy --yes` returned `Not authorized`, so the
-  exact commit is not yet Preview-qualified. No Production or hosted database,
-  entitlement, customer, or payment write occurred.
+- **Hosted boundary:** The GitHub-connected Vercel integration completed the
+  exact commit's Preview deployment (`Vercel / success`, deployment record
+  `Bq4mh1Rm98isPjkVn1fsvZvhTWE9`). The local Vercel CLI remains `Not
+  authorized`, and the current browser session cannot inspect the deployment
+  URL/details, so the exact head is not yet hosted-payment-qualified. No
+  Production or hosted database, entitlement, customer, or payment write
+  occurred.
 - **Disposition:** Keep `PLAN-WEB-012` unchecked until exact-head Preview and
   provider-originated card lifecycle reconciliation are captured. The old
   recurring-card fixture requirement is retired by the Final V1 contract.

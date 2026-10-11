@@ -11,12 +11,14 @@ production build, and a disposable PostgreSQL 15 write-capable 6/6 webhook
 run passed. The isolated run covered capture, replay, refund watermarking,
 failed-payment recovery, and manual renewal.
 
-The exact commit could not yet be deployed for current-head Preview
-qualification because the local Vercel CLI returned `Not authorized`. The
-previous hosted provider records remain historical; no hosted success is
-claimed for this commit and no Production state changed. `PLAN-WEB-012`
-remains unchecked pending current-head Preview/provider reconciliation. Score
-remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+The GitHub-connected Vercel integration completed a Preview deployment for the
+exact commit (`Vercel / success`, deployment record
+`Bq4mh1Rm98isPjkVn1fsvZvhTWE9`). The local Vercel CLI returns `Not
+authorized`, and the current browser session cannot inspect the deployment
+URL/details; therefore no current-head hosted payment result is claimed and
+no Production state changed. `PLAN-WEB-012` remains unchecked pending
+current-head Preview/provider reconciliation. Score remains **223 checked / 57
+unchecked / 280 total (79.6%)**.
 
 Evidence: `docs/shipping/evidence/plan-web-012-prepaid-card-order-qualification-2026-10-11.md`.
 

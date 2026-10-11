@@ -34,10 +34,12 @@ typecheck passed; and a disposable PostgreSQL 15 run passed the complete
 6/6 write-capable webhook scenarios including card capture, replay, refund,
 failure recovery, and manual renewal.
 
-`PLAN-WEB-012` remains unchecked because the exact commit still needs isolated
-Preview deployment and current-head provider-originated card capture/failure/
-refund reconciliation. The local Vercel CLI currently returns `Not
-authorized`, so no hosted result is invented. The previous recurring-card
+`PLAN-WEB-012` remains unchecked because the exact commit's Vercel Preview
+deployment completed but its URL/details are not inspectable from the current
+Vercel-authenticated session, so current-head provider-originated card
+capture/failure/refund reconciliation cannot yet be recorded. The local
+Vercel CLI returns `Not authorized`; GitHub status records the successful
+deployment as `Bq4mh1Rm98isPjkVn1fsvZvhTWE9`. The previous recurring-card
 fixture blocker is retired by the Final V1 contract; manual renewal does not
 require a recurring provider fixture. Score remains **223 checked / 57
 unchecked / 280 total (79.6%)**.

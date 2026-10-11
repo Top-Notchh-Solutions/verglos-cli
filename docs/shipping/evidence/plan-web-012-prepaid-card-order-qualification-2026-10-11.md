@@ -43,10 +43,13 @@ real-money payment was written by this qualification.
 
 ## Hosted boundary
 
-The exact commit could not yet be deployed for current-head Preview
-qualification because the local Vercel CLI returned `Not authorized`. The
-previous hosted provider evidence is retained as historical evidence and is
-not silently relabeled as exact-head evidence. No checkbox is credited from
+The GitHub-connected Vercel integration completed a Preview deployment for
+commit `887249d` (GitHub status: `Vercel / success`; deployment record
+`Bq4mh1Rm98isPjkVn1fsvZvhTWE9`). The local Vercel CLI is still `Not
+authorized`, and the deployment URL/details are not available in the current
+browser session, so the deployed checkout and webhook cannot yet be inspected.
+The previous hosted provider evidence is retained as historical evidence and
+is not silently relabeled as exact-head evidence. No checkbox is credited from
 this code-side and isolated-DB run alone.
 
 ## Disposition
