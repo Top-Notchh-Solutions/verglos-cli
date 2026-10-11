@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · PLAN-WEB-014 Preview prepaid-card hosted qualification
+
+- **Mapped ID:** `PLAN-WEB-014`.
+- **Implementation:** Current Web head `887249d9` was deployed to isolated
+  Preview with the final Cards-only prepaid/manual-renewal configuration.
+- **Verification:** Canonical order creation returned HTTP **200**; hosted
+  Razorpay Test Mode showed Cards only; the official Test Mode Visa reached
+  provider card creation and consent with HTTP **200**.
+- **Acceptance:** Provider authorization remained at `Sending OTP`; no
+  terminal capture/failure/refund event or signed application reconciliation
+  was available. The order status remained `pending`, so the checkbox stays
+  open and the score is unchanged.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-card-hosted-qualification-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-015 Production cards-only contract checkpoint
 
 - **Mapped ID:** `PLAN-WEB-015`.

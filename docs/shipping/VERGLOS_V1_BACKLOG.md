@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · PLAN-WEB-014 Preview prepaid-card hosted qualification
+
+The current Web head was redeployed to isolated Preview with the canonical
+Cards-only prepaid contract. Preview order creation returned HTTP **200** for
+the server-owned Pro monthly offer (₹2,809.43, 30 days), and Razorpay Test
+Mode opened the hosted Checkout with Cards only. The official Test Mode Visa
+card reached provider card creation and consent with HTTP **200**, but the
+provider remained at its own `Sending OTP` state; no terminal capture,
+failure, refund, signed webhook, payment-ledger transition, or entitlement
+grant was observed. The app status remained `pending`.
+
+`PLAN-WEB-014` remains unchecked. The final prepaid/manual-renewal contract
+still requires signed capture/failure/refund/expiry and second-order renewal
+reconciliation; no OTP may be guessed and no rows may be edited. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-prepaid-card-hosted-qualification-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-015 Production cards-only contract checkpoint
 
 The authenticated Production `/checkout` page showed the fixed-term monthly/

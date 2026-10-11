@@ -1,5 +1,24 @@
 # Verglos V1 Active Shipping Goal — Complete Contract, Whole Backlog, Preview, Production, and Release
 
+## 2026-10-11 execution checkpoint — PLAN-WEB-014 Preview prepaid-card hosted run
+
+The current Web head `887249d9` was redeployed to isolated Preview as
+`dpl_7oCmrMDHmEtXgk32tjeRaRdy68vp`. The server-owned Pro monthly offer
+(₹2,809.43, 30 days, catalog `2026-10-02.0`) created successfully in
+Razorpay Test Mode and opened hosted Checkout with Cards only. The official
+Test Mode Visa card reached provider card creation and consent with HTTP 200,
+but Razorpay stopped at its provider-owned `Sending OTP` state. The app status
+remained `pending`; no signed terminal event, payment-ledger transition, or
+entitlement grant was observed.
+
+This is valid hosted evidence but not acceptance. Keep `PLAN-WEB-014`,
+`PLAN-WEB-015`, and Gate 4 open; do not guess OTPs, fabricate provider events,
+edit database rows, or use Production payment. Score remains **223 checked /
+57 unchecked / 280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-prepaid-card-hosted-qualification-2026-10-11.md`.
+
 ## 2026-10-11 execution checkpoint — PLAN-WEB-015 Production cards-only display
 
 The authenticated Production `/checkout` page showed the fixed-term

@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PLAN-WEB-014 Preview prepaid-card hosted qualification
+
+- **Implementation/deployment:** Web `887249d9f4d09842107fc6636b239af9f67b91d4`
+  was redeployed to isolated Preview as `dpl_7oCmrMDHmEtXgk32tjeRaRdy68vp`.
+- **Verification:** Preview reported the isolation marker and Test Mode.
+  Canonical monthly order creation returned HTTP **200** with the server-owned
+  amount, currency, term, catalog version, and Cards-only method list.
+  Razorpay hosted Checkout displayed Cards only; the official Test Mode Visa
+  card reached provider card creation and consent, both HTTP **200**.
+- **Boundary result:** Razorpay remained at `Sending OTP`; the app status
+  route returned `pending`. No signed terminal event, capture, failure,
+  refund, ledger transition, or entitlement grant was observed. Production was
+  not used.
+- **Disposition:** Keep `PLAN-WEB-014` and Gate 4 open. Do not guess an OTP,
+  fabricate a provider event, or edit the isolated database. The next valid
+  artifact is an authorized provider OTP/fixture or supported terminal-event
+  replay, followed by signed payment/ledger/entitlement reconciliation and a
+  manual second-order renewal.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-card-hosted-qualification-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · PLAN-WEB-015 Production cards-only contract checkpoint
 
 - **Verification:** Authenticated Production `/checkout` showed the

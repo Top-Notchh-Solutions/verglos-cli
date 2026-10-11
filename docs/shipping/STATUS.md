@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-WEB-014 Preview prepaid-card hosted qualification
+
+The current Web head was exercised in isolated Preview. Canonical monthly
+order creation returned HTTP **200**, Razorpay Test Mode opened Cards-only
+hosted Checkout, and the official Test Mode Visa card reached provider card
+creation and consent with HTTP **200**. Razorpay then stopped at its
+provider-owned `Sending OTP` state; the app status stayed `pending`, with no
+capture, signed webhook, payment-ledger transition, or entitlement grant.
+
+`PLAN-WEB-014` remains open. This is real hosted progress, not a checkbox
+closure; the remaining terminal provider lifecycle and manual-renewal
+reconciliation are still required. Score remains **223 checked / 57 unchecked /
+280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-prepaid-card-hosted-qualification-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-015 Production cards-only contract checkpoint
 
 Production `/checkout` rendered the fixed-term monthly/annual offer and only

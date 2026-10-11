@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep PLAN-WEB-014 open after Preview hosted card run
+
+- **Decision:** Accept the isolated Preview order and hosted-card results as
+  genuine implementation/provider-boundary evidence; do not check the row.
+- **Reason:** Razorpay Test Mode accepted the canonical order and card/consent
+  requests but remained at provider-owned `Sending OTP`. There is no signed
+  terminal capture/failure/refund event, payment-ledger transition,
+  entitlement grant, or manual-renewal second order.
+- **Boundary:** No Production payment, database, entitlement, migration,
+  account, organization, or customer-data write occurred. No guessed OTP,
+  fabricated webhook, or direct row edit was used.
+- **Next:** Use only an authorized provider OTP/fixture or supported replay
+  control, then reconcile the complete one-time card lifecycle in isolated
+  Preview. Keep the final V1 prepaid/manual-renewal contract; do not revive
+  the deferred recurring-subscription promise.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-card-hosted-qualification-2026-10-11.md`.
+
 ## 2026-10-11 · Keep PLAN-WEB-015 open after cards-only display check
 
 - **Decision:** Accept the Production checkout display as contract evidence;

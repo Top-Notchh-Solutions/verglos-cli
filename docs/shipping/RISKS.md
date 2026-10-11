@@ -1,5 +1,23 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-PLAN-WEB-014 prepaid-card provider OTP boundary
+
+- **Risk:** Isolated Preview now reaches the canonical Cards-only order and
+  Razorpay hosted card flow, but the provider remains at `Sending OTP` after
+  successful card-create and consent requests.
+- **Impact:** Capture/failure/refund, signed webhook delivery, payment-ledger
+  transition, fixed-term entitlement, expiry, and manual-renewal second-order
+  reconciliation cannot yet be claimed.
+- **Owner:** Authorized payment-test operator and Razorpay Test Mode
+  operations.
+- **Safe next action:** Use the provider's official OTP/fixture or supported
+  terminal-event replay only. Do not guess OTPs, fabricate events, edit rows,
+  or test the Production checkout.
+- **Status:** Real hosted progress recorded; `PLAN-WEB-014` and Gate 4 remain
+  open. Score is **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-card-hosted-qualification-2026-10-11.md`.
+
 ## 2026-10-11 · R-PLAN-WEB-015 lifecycle evidence remains incomplete
 
 - **Risk:** Production correctly displays Cards-only fixed-term checkout, but
