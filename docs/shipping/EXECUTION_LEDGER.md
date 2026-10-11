@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · ACCEPT-002/003 current shipping-worktree substrate recheck
+
+- **Run:** The private 12-story verifier ran with
+  `VERGLOS_CLI_ROOT=verglos-cli-shipping-worktree` against CLI `0ef96caa` and
+  Web `d4dd7f9`.
+- **Result:** CLI **274/274**, Web **923/953** with 30 explicit
+  environment-gated skips, and composed acceptance substrates **74/74**;
+  all commands exited 0.
+- **Boundary:** Repository-owned substrate only. No hosted/provider/customer,
+  human browser/screen-reader/field-CWV, account-deletion, legal, or
+  independent-review acceptance was performed; no Production/provider/
+  database/entitlement/customer write occurred.
+- **Decision:** Keep `ACCEPT-002` and `ACCEPT-003` unchecked.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-current-shipping-worktree-2026-10-11.md`;
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
+
 ## 2026-10-11 · QUAL-CLI-006 process-entry repair qualification
 
 - **Implementation:** CLI shipping worktree commit `0ef96caa` repaired the

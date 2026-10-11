@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · ACCEPT-002/003 current shipping-worktree substrate recheck
+
+The private 12-story verifier passed against CLI `0ef96caa` and Web `d4dd7f9`:
+CLI **274/274**, Web **923/953** with 30 explicit environment-gated skips,
+and composed acceptance substrates **74/74**. This is repository-owned
+substrate evidence only; hosted/provider/customer, human browser/field-CWV,
+account-deletion, legal, and independent-review requirements remain open.
+`ACCEPT-002` and `ACCEPT-003` stay unchecked.
+
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/accept-002-current-shipping-worktree-2026-10-11.md`.
+
 ## 2026-10-11 · QUAL-CLI-006 process-entry repair qualification addendum
 
 The shared CLI process-test harness now resolves the actual package entry after

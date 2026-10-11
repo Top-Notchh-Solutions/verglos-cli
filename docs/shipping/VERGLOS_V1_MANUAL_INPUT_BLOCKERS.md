@@ -1,5 +1,22 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · ACCEPT-002/003 substrate is green; external acceptance remains
+
+The 12-story verifier passed against current shipping sources: CLI 274/274,
+Web 923/953 with 30 explicit environment-gated skips, and composed
+Team/Studio/Enterprise/quality substrates 74/74. No founder input is needed
+for this rerun.
+
+The remaining artifacts are not code-test failures: hosted/provider lifecycle,
+customer/recipient acceptance, human browser/screen-reader/field-CWV proof,
+account-deletion acceptance, legal approval, and independent review. Owner:
+acceptance/release owner with the relevant provider, customer, legal, and
+reviewer owners. Review: 2026-10-11 or when artifacts are available. Keep
+`ACCEPT-002` and `ACCEPT-003` unchecked; score remains **228/52/280 (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/accept-002-current-shipping-worktree-2026-10-11.md`.
+
 ## 2026-10-11 · QUAL-CLI-006 harness repair complete; external release artifacts remain
 
 The shared CLI process-test entry defect is fixed and requalified: record

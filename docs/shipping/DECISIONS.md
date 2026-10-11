@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep ACCEPT-002/003 open after current substrate recheck
+
+- **Decision:** Record the current shipping-worktree verifier as substrate
+  progress only; do not check `ACCEPT-002` or `ACCEPT-003`.
+- **Evidence:** CLI 274/274 at `0ef96caa`; Web 923/953 with 30 explicit
+  skips at `d4dd7f9`; composed acceptance substrates 74/74; all commands exit
+  0.
+- **Reason:** Hosted/provider/customer, human browser/field-CWV,
+  account-deletion, legal, independent-review, and final acceptance evidence
+  are not produced by this verifier.
+- **Boundary:** No Production/provider/database/entitlement/customer write.
+- **Score:** 228/52/280 (81.4%).
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-current-shipping-worktree-2026-10-11.md`.
+
 ## 2026-10-11 · Keep QUAL-CLI-006 open after process-entry repair
 
 - **Decision:** Accept the shared CLI process-entry repair as qualification

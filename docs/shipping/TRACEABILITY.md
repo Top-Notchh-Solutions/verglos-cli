@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · ACCEPT-002/003 current shipping-worktree substrate recheck
+
+- **Mapped IDs:** `ACCEPT-002`, `ACCEPT-003`.
+- **Verification:** CLI `0ef96caa` passed 274/274; Web `d4dd7f9` passed
+  923/953 with 30 explicit environment-gated skips; composed substrates passed
+  74/74; all commands exited 0.
+- **Acceptance:** The verifier is repository-owned substrate evidence and does
+  not prove hosted/provider/customer, human browser, account-deletion, legal,
+  or independent-review acceptance. Both checkboxes remain open.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-current-shipping-worktree-2026-10-11.md`.
+
 ## 2026-10-11 · QUAL-CLI-006 process-entry repair addendum
 
 - **Mapped ID:** `QUAL-CLI-006`.

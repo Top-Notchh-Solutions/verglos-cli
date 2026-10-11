@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · ACCEPT-002/003 current substrate recheck
+
+The private acceptance verifier passed CLI 274/274, Web 923/953 with 30
+explicit environment-gated skips, and composed Team/Studio/Enterprise/quality
+substrates 74/74 at current shipping heads. This is not a release-gate pass:
+hosted/provider/customer acceptance, human browser/field-CWV, deletion,
+legal, independent-review, and final acceptance evidence remain open. Score
+remains 228/52/280 (81.4%).
+
+Evidence:
+`docs/shipping/evidence/accept-002-current-shipping-worktree-2026-10-11.md`.
+
 ## 2026-10-11 · QUAL-CLI-006 process-entry repair qualification
 
 The shared CLI process-test launcher now resolves the package entry correctly.
