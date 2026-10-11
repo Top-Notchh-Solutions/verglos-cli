@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · DIST-001 package-boundary recheck
+
+- **Mapped ID:** `DIST-001`.
+- **Implementation:** Public packaging excludes compiled internal fixture
+  modules and stages generated `THIRD_PARTY_NOTICES` in every one of the six
+  public archives.
+- **Verification:** Archive inspection found notices in all six and no
+  forbidden fixture modules; clean-consumer installation and CLI execution
+  passed; package, release-verifier, typecheck, and diff checks passed.
+- **Acceptance:** The checkbox remains open because `LOCAL/HUNT/RECORD`
+  dependencies and final legal/release qualification are absent.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-package-boundary-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · LIC-003 notice-generator recheck
 
 - **Mapped ID:** `LIC-003`.

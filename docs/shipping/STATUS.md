@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · DIST-001 package-boundary recheck
+
+The rebuilt public pack contains six archives. Every archive includes the
+generated `THIRD_PARTY_NOTICES`; compiled `cli-fixture`, `fixture-engine`, and
+`fixture-validator` modules are absent. The clean consumer installed all six
+archives and ran the CLI as `2.0.0-alpha.1`. Package regression, release
+verifier, clean-consumer, shared/CLI typechecks, and `git diff --check` passed.
+
+This is code-side evidence only. `DIST-001` remains open because its
+`LOCAL/HUNT/RECORD` dependencies and final legal/release qualification are
+still missing. Score remains **223 checked / 57 unchecked / 280 total
+(79.6%)**. Evidence:
+`docs/shipping/evidence/dist-001-package-boundary-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · LIC-003 notice-generator recheck
 
 The notice generator produced byte-identical output twice: **197,966 bytes**,

@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · DIST-001 package-boundary recheck
+
+- **Verification:** Six public archives rebuilt at private shipping commit
+  `14d264dc76f82dad6a53fe929f80edc280ce9642`; notices were present in all
+  six, forbidden compiled fixture modules were absent, and the clean consumer
+  installed all six and executed `verglos 2.0.0-alpha.1`.
+- **Checks:** Package regression **1/1**, release/clean-consumer verifier
+  suite **5/5**, clean-consumer script passed, shared/CLI typechecks passed,
+  and `git diff --check` passed.
+- **Disposition:** Keep `DIST-001` unchecked. `LOCAL/HUNT/RECORD` product
+  dependencies and legal/final-release qualification remain open.
+- **Next:** Reassess `DIST-001` after those dependencies; do not advance to
+  `DIST-002` on package evidence alone.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-package-boundary-recheck-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · LIC-003 notice-generator recheck and artifact boundary
 
 - **Verification:** Notice output was byte-identical across two runs,

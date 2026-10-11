@@ -1,5 +1,20 @@
 # Verglos V1 Active Shipping Goal — Complete Contract, Whole Backlog, Preview, Production, and Release
 
+## 2026-10-11 execution checkpoint — DIST-001 package boundary
+
+The public packer was repaired and requalified: six candidate archives contain
+the generated `THIRD_PARTY_NOTICES`, exclude compiled internal fixture
+modules, install together in a clean consumer, and run the CLI. Package,
+release-verifier, typecheck, and diff checks passed. This is implementation
+evidence, not a checkbox closure: `DIST-001` remains open until its declared
+`LOCAL/HUNT/RECORD` dependencies and final legal/release qualification are
+complete. The score remains **223 checked / 57 unchecked / 280 total
+(79.6%)**. Record this evidence, then continue the same first-ready-item
+queue; do not publish or advance to `DIST-002` solely on this result.
+
+Evidence:
+`docs/shipping/evidence/dist-001-package-boundary-recheck-2026-10-11.md`.
+
 **Canonical active goal restored and amended: 2026-10-11.** This is the
 complete operating goal. It preserves the full 2,519-line backlog, execution,
 Preview, Production, evidence, acceptance, and release instructions from the

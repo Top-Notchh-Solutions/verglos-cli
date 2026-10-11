@@ -3,10 +3,18 @@ THIRD-PARTY NOTICES
 This file is generated from the installed dependency graph. It preserves upstream identity and available license text; it does not imply endorsement or alter upstream terms.
 
 ================================================================================
+@esbuild/darwin-arm64 (0.28.1)
+License: MIT
+Source: https://github.com/evanw/esbuild#readme
+
+License text was not present in the installed package; consult the upstream source before redistribution.
+
+================================================================================
 @hono/node-server (1.19.14)
 License: MIT
 Source: https://github.com/honojs/node-server
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2022 - present, Yusuke Wada and Hono contributors
@@ -29,11 +37,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 @modelcontextprotocol/sdk (1.29.0)
 License: MIT
 Source: https://modelcontextprotocol.io
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 Anthropic, PBC
@@ -56,11 +66,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 @nodelib/fs.scandir (2.1.5)
 License: MIT
 Source: https://github.com/nodelib/nodelib/tree/master#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) Denis Malinochkin
@@ -82,12 +94,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 
 ================================================================================
 @nodelib/fs.stat (2.0.5)
 License: MIT
 Source: https://github.com/nodelib/nodelib/tree/master#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) Denis Malinochkin
@@ -109,12 +123,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 
 ================================================================================
 @nodelib/fs.walk (1.2.8)
 License: MIT
 Source: https://github.com/nodelib/nodelib/tree/master#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) Denis Malinochkin
@@ -137,11 +153,28 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+================================================================================
+@turbo/darwin-arm64 (2.10.6)
+License: MIT
+Source: https://turborepo.dev
+
+License file: LICENSE
+Copyright (c) 2026 Vercel, Inc
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
 ================================================================================
 @types/node (22.20.1)
 License: MIT
 Source: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node
 
+License file: LICENSE
 MIT License
 
     Copyright (c) Microsoft Corporation.
@@ -164,11 +197,13 @@ MIT License
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE
 
+
 ================================================================================
 accepts (2.0.0)
 License: MIT
 Source: https://github.com/jshttp/accepts#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
@@ -193,11 +228,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 ajv (8.20.0)
 License: MIT
 Source: https://ajv.js.org
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2015-2021 Evgeny Poberezkin
@@ -220,11 +257,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 ajv-formats (3.0.1)
 License: MIT
 Source: https://github.com/ajv-validator/ajv-formats#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2020 Evgeny Poberezkin
@@ -247,11 +286,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 ansi-regex (6.2.2)
 License: MIT
 Source: https://github.com/chalk/ansi-regex#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -262,11 +303,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 body-parser (2.3.0)
 License: MIT
 Source: https://github.com/expressjs/body-parser#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
@@ -291,11 +334,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 braces (3.0.3)
 License: MIT
 Source: https://github.com/micromatch/braces
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014-present, Jon Schlinkert.
@@ -318,11 +363,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 bundle-name (4.1.0)
 License: MIT
 Source: https://github.com/sindresorhus/bundle-name#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -333,11 +380,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 bytes (3.1.2)
 License: MIT
 Source: https://github.com/visionmedia/bytes.js#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2012-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -362,11 +411,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 call-bind-apply-helpers (1.0.2)
 License: MIT
 Source: https://github.com/ljharb/call-bind-apply-helpers#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 Jordan Harband
@@ -388,12 +439,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 
 ================================================================================
 call-bound (1.0.4)
 License: MIT
 Source: https://github.com/ljharb/call-bound#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 Jordan Harband
@@ -416,11 +469,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 chalk (5.6.2)
 License: MIT
 Source: https://github.com/chalk/chalk#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -431,11 +486,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 chokidar (4.0.3)
 License: MIT
 Source: https://github.com/paulmillr/chokidar
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2012 Paul Miller (https://paulmillr.com), Elan Shanker
@@ -458,11 +515,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 cli-cursor (5.0.0)
 License: MIT
 Source: https://github.com/sindresorhus/cli-cursor#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -472,12 +531,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ================================================================================
 cli-spinners (2.9.2)
 License: MIT
 Source: https://github.com/sindresorhus/cli-spinners#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -488,11 +549,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 commander (14.0.3)
 License: MIT
 Source: https://github.com/tj/commander.js#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2011 TJ Holowaychuk <tj@vision-media.ca>
@@ -516,11 +579,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 content-disposition (1.1.0)
 License: MIT
 Source: https://github.com/jshttp/content-disposition#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014-2017 Douglas Christopher Wilson
@@ -544,11 +609,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 content-type (1.0.5, 2.0.0)
 License: MIT
 Source: https://github.com/jshttp/content-type#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2015 Douglas Christopher Wilson
@@ -572,11 +639,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 cookie (0.7.2)
 License: MIT
 Source: https://github.com/jshttp/cookie#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2012-2014 Roman Shtylman <shtylman@gmail.com>
@@ -601,11 +670,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 cookie-signature (1.2.2)
 License: MIT
 Source: https://github.com/visionmedia/node-cookie-signature#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2012–2024 LearnBoost <tj@learnboost.com> and other contributors;
@@ -629,11 +700,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 cors (2.8.6)
 License: MIT
 Source: https://github.com/expressjs/cors#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2013 Troy Goode <troygoode@gmail.com>
@@ -657,11 +730,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 cross-spawn (7.0.6)
 License: MIT
 Source: https://github.com/moxystudio/node-cross-spawn
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2018 Made With MOXY Lda <hello@moxy.studio>
@@ -684,11 +759,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 debug (4.4.3)
 License: MIT
 Source: https://github.com/debug-js/debug#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014-2017 TJ Holowaychuk <tj@vision-media.ca>
@@ -709,11 +786,13 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMA
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 default-browser (5.5.0)
 License: MIT
 Source: https://github.com/sindresorhus/default-browser#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -723,12 +802,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ================================================================================
 default-browser-id (5.0.1)
 License: MIT
 Source: https://github.com/sindresorhus/default-browser-id#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -738,12 +819,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ================================================================================
 define-lazy-prop (3.0.0)
 License: MIT
 Source: https://github.com/sindresorhus/define-lazy-prop#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -754,11 +837,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 depd (2.0.0)
 License: MIT
 Source: https://github.com/dougwilson/nodejs-depd#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014-2018 Douglas Christopher Wilson
@@ -782,11 +867,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 dunder-proto (1.0.1)
 License: MIT
 Source: https://github.com/es-shims/dunder-proto#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 ECMAScript Shims
@@ -809,11 +896,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 ee-first (1.1.1)
 License: MIT
 Source: https://github.com/jonathanong/ee-first#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014 Jonathan Ong me@jongleberry.com
@@ -836,6 +925,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 emoji-regex (10.6.0)
 License: MIT
@@ -848,6 +938,7 @@ encodeurl (2.0.0)
 License: MIT
 Source: https://github.com/pillarjs/encodeurl#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2016 Douglas Christopher Wilson
@@ -871,11 +962,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 es-define-property (1.0.1)
 License: MIT
 Source: https://github.com/ljharb/es-define-property#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 Jordan Harband
@@ -897,12 +990,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 
 ================================================================================
 es-errors (1.3.0)
 License: MIT
 Source: https://github.com/ljharb/es-errors#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 Jordan Harband
@@ -924,12 +1019,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 
 ================================================================================
 es-object-atoms (1.1.2)
 License: MIT
 Source: https://github.com/ljharb/es-object-atoms#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 Jordan Harband
@@ -952,11 +1049,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 esbuild (0.28.1)
 License: MIT
 Source: https://github.com/evanw/esbuild#readme
 
+License file: LICENSE.md
 MIT License
 
 Copyright (c) 2020 Evan Wallace
@@ -979,11 +1078,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 escape-html (1.0.3)
 License: MIT
 Source: https://github.com/component/escape-html#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2012-2013 TJ Holowaychuk
@@ -1009,11 +1110,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 etag (1.8.1)
 License: MIT
 Source: https://github.com/jshttp/etag#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014-2016 Douglas Christopher Wilson
@@ -1037,11 +1140,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 eventsource (3.0.7)
 License: MIT
 Source: https://github.com/EventSource/eventsource#readme
 
+License file: LICENSE
 The MIT License
 
 Copyright (c) EventSource GitHub organisation
@@ -1065,11 +1170,13 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 eventsource-parser (3.1.0)
 License: MIT
 Source: https://github.com/rexxars/eventsource-parser#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2026 Espen Hovlandsdal <espen@hovlandsdal.com>
@@ -1092,11 +1199,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 express (5.2.1)
 License: MIT
 Source: https://expressjs.com/
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2009-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -1122,11 +1231,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 express-rate-limit (8.6.0)
 License: MIT
 Source: https://github.com/express-rate-limit/express-rate-limit
 
+License file: LICENSE.md
 # MIT License
 
 Copyright 2023 Nathan Friedly, Vedant K
@@ -1148,11 +1259,13 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 fast-deep-equal (3.1.3)
 License: MIT
 Source: https://github.com/epoberezkin/fast-deep-equal#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2017 Evgeny Poberezkin
@@ -1175,11 +1288,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 fast-glob (3.3.3)
 License: MIT
 Source: https://github.com/mrmlnc/fast-glob#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) Denis Malinochkin
@@ -1202,11 +1317,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 fast-uri (3.1.4)
 License: BSD-3-Clause
 Source: https://github.com/fastify/fast-uri
 
+License file: LICENSE
 Copyright (c) 2011-2021, Gary Court until https://github.com/garycourt/uri-js/commit/a1acf730b4bba3f1097c9f52e7d9d3aba8cdcaae
 Copyright (c) 2021-present The Fastify team <https://github.com/fastify/fastify#team>
 All rights reserved.
@@ -1238,11 +1355,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The complete list of contributors can be found at:
 - https://github.com/garycourt/uri-js/graphs/contributors
 
+
 ================================================================================
 fastq (1.20.1)
 License: ISC
 Source: https://github.com/mcollina/fastq#readme
 
+License file: LICENSE
 Copyright (c) 2015-2020, Matteo Collina <matteo.collina@gmail.com>
 
 Permission to use, copy, modify, and/or distribute this software for any
@@ -1257,11 +1376,13 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+
 ================================================================================
 fill-range (7.1.1)
 License: MIT
 Source: https://github.com/jonschlinkert/fill-range
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014-present, Jon Schlinkert.
@@ -1284,11 +1405,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 finalhandler (2.1.1)
 License: MIT
 Source: https://github.com/pillarjs/finalhandler#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014-2022 Douglas Christopher Wilson <doug@somethingdoug.com>
@@ -1312,11 +1435,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 forwarded (0.2.0)
 License: MIT
 Source: https://github.com/jshttp/forwarded#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014-2017 Douglas Christopher Wilson
@@ -1340,11 +1465,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 fresh (2.0.0)
 License: MIT
 Source: https://github.com/jshttp/fresh#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca>
@@ -1369,11 +1496,43 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
+================================================================================
+fsevents (2.3.3)
+License: MIT
+Source: https://github.com/fsevents/fsevents
+
+License file: LICENSE
+MIT License
+-----------
+
+Copyright (C) 2010-2020 by Philipp Dunkel, Ben Noordhuis, Elan Shankar, Paul Miller
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
 ================================================================================
 function-bind (1.1.2)
 License: MIT
 Source: https://github.com/Raynos/function-bind
 
+License file: LICENSE
 Copyright (c) 2013 Raynos.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1394,11 +1553,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 get-east-asian-width (1.6.0)
 License: MIT
 Source: https://github.com/sindresorhus/get-east-asian-width#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -1409,11 +1570,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 get-intrinsic (1.3.0)
 License: MIT
 Source: https://github.com/ljharb/get-intrinsic#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2020 Jordan Harband
@@ -1436,11 +1599,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 get-proto (1.0.1)
 License: MIT
 Source: https://github.com/ljharb/get-proto#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2025 Jordan Harband
@@ -1463,11 +1628,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 glob-parent (5.1.2)
 License: ISC
 Source: https://github.com/gulpjs/glob-parent#readme
 
+License file: LICENSE
 The ISC License
 
 Copyright (c) 2015, 2019 Elan Shanker
@@ -1484,11 +1651,13 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
 IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+
 ================================================================================
 gopd (1.2.0)
 License: MIT
 Source: https://github.com/ljharb/gopd#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2022 Jordan Harband
@@ -1511,11 +1680,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 has-symbols (1.1.0)
 License: MIT
 Source: https://github.com/ljharb/has-symbols#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2016 Jordan Harband
@@ -1538,11 +1709,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 hasown (2.0.4)
 License: MIT
 Source: https://github.com/inspect-js/hasOwn#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Jordan Harband and contributors
@@ -1565,11 +1738,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 hono (4.12.31)
 License: MIT
 Source: https://hono.dev
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2021 - present, Yusuke Wada and Hono contributors
@@ -1592,11 +1767,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 http-errors (2.0.1)
 License: MIT
 Source: https://github.com/jshttp/http-errors#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014 Jonathan Ong me@jongleberry.com
@@ -1620,11 +1797,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 iconv-lite (0.7.3)
 License: MIT
 Source: https://github.com/pillarjs/iconv-lite
 
+License file: LICENSE
 Copyright (c) 2011 Alexander Shtuchkin
 
 Permission is hereby granted, free of charge, to any person obtaining
@@ -1646,11 +1825,13 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 inherits (2.0.4)
 License: ISC
 Source: https://github.com/isaacs/inherits#readme
 
+License file: LICENSE
 The ISC License
 
 Copyright (c) Isaac Z. Schlueter
@@ -1667,11 +1848,13 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 
+
 ================================================================================
 ip-address (10.2.0)
 License: MIT
 Source: https://github.com/beaugunderson/ip-address#readme
 
+License file: LICENSE
 Copyright (C) 2011 by Beau Gunderson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1692,11 +1875,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 ipaddr.js (1.9.1)
 License: MIT
 Source: https://github.com/whitequark/ipaddr.js#readme
 
+License file: LICENSE
 Copyright (C) 2011-2017 whitequark <whitequark@whitequark.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1717,11 +1902,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 is-docker (3.0.0)
 License: MIT
 Source: https://github.com/sindresorhus/is-docker#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -1732,11 +1919,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 is-extglob (2.1.1)
 License: MIT
 Source: https://github.com/jonschlinkert/is-extglob
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014-2016, Jon Schlinkert
@@ -1759,11 +1948,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 is-glob (4.0.3)
 License: MIT
 Source: https://github.com/micromatch/is-glob
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014-2017, Jon Schlinkert.
@@ -1786,11 +1977,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 is-inside-container (1.0.0)
 License: MIT
 Source: https://github.com/sindresorhus/is-inside-container#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -1800,12 +1993,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ================================================================================
 is-interactive (2.0.0)
 License: MIT
 Source: https://github.com/sindresorhus/is-interactive#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -1816,11 +2011,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 is-number (7.0.0)
 License: MIT
 Source: https://github.com/jonschlinkert/is-number
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014-present, Jon Schlinkert.
@@ -1843,11 +2040,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 is-promise (4.0.0)
 License: MIT
 Source: https://github.com/then/is-promise#readme
 
+License file: LICENSE
 Copyright (c) 2014 Forbes Lindesay
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1868,11 +2067,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 is-unicode-supported (1.3.0, 2.1.0)
 License: MIT
 Source: https://github.com/sindresorhus/is-unicode-supported#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -1882,12 +2083,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ================================================================================
 is-wsl (3.1.1)
 License: MIT
 Source: https://github.com/sindresorhus/is-wsl#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -1898,11 +2101,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 isexe (2.0.0)
 License: ISC
 Source: https://github.com/isaacs/isexe#readme
 
+License file: LICENSE
 The ISC License
 
 Copyright (c) Isaac Z. Schlueter and Contributors
@@ -1919,11 +2124,13 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
 IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+
 ================================================================================
 jose (6.2.4)
 License: MIT
 Source: https://github.com/panva/jose
 
+License file: LICENSE.md
 The MIT License (MIT)
 
 Copyright (c) 2018 Filip Skokan
@@ -1946,11 +2153,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 json-schema-traverse (1.0.0)
 License: MIT
 Source: https://github.com/epoberezkin/json-schema-traverse#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2017 Evgeny Poberezkin
@@ -1973,11 +2182,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 json-schema-typed (8.0.2)
 License: BSD-2-Clause
 Source: https://github.com/RemyRylan/json-schema-typed/tree/main/dist/node
 
+License file: LICENSE.md
 BSD 2-Clause License
 
 Original source code is copyright (c) 2019-2025 Remy Rylan
@@ -2036,11 +2247,13 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
 ================================================================================
 log-symbols (6.0.0)
 License: MIT
 Source: https://github.com/sindresorhus/log-symbols#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -2051,11 +2264,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 math-intrinsics (1.1.0)
 License: MIT
 Source: https://github.com/es-shims/math-intrinsics#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 ECMAScript Shims
@@ -2078,11 +2293,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 media-typer (1.1.0)
 License: MIT
 Source: https://github.com/jshttp/media-typer#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014-2017 Douglas Christopher Wilson
@@ -2106,11 +2323,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 merge-descriptors (2.0.0)
 License: MIT
 Source: https://github.com/sindresorhus/merge-descriptors#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Jonathan Ong <me@jongleberry.com>
@@ -2123,11 +2342,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 merge2 (1.4.1)
 License: MIT
 Source: https://github.com/teambition/merge2
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014-2020 Teambition
@@ -2150,11 +2371,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 micromatch (4.0.8)
 License: MIT
 Source: https://github.com/micromatch/micromatch
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014-present, Jon Schlinkert.
@@ -2177,11 +2400,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 mime-db (1.54.0)
 License: MIT
 Source: https://github.com/jshttp/mime-db#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
@@ -2206,11 +2431,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 mime-types (3.0.2)
 License: MIT
 Source: https://github.com/jshttp/mime-types#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
@@ -2235,11 +2462,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 mimic-function (5.0.1)
 License: MIT
 Source: https://github.com/sindresorhus/mimic-function#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -2250,11 +2479,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 ms (2.1.3)
 License: MIT
 Source: https://github.com/vercel/ms#readme
 
+License file: LICENSE.md
 The MIT License (MIT)
 
 Copyright (c) 2020 Vercel, Inc.
@@ -2277,11 +2508,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 negotiator (1.0.0)
 License: MIT
 Source: https://github.com/jshttp/negotiator#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2012-2014 Federico Romero
@@ -2307,11 +2540,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 object-assign (4.1.1)
 License: MIT
 Source: https://github.com/sindresorhus/object-assign#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
@@ -2334,11 +2569,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 object-inspect (1.13.4)
 License: MIT
 Source: https://github.com/inspect-js/object-inspect
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2013 James Halliday
@@ -2361,11 +2598,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 on-finished (2.4.1)
 License: MIT
 Source: https://github.com/jshttp/on-finished#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2013 Jonathan Ong <me@jongleberry.com>
@@ -2390,11 +2629,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 once (1.4.0)
 License: ISC
 Source: https://github.com/isaacs/once#readme
 
+License file: LICENSE
 The ISC License
 
 Copyright (c) Isaac Z. Schlueter and Contributors
@@ -2411,11 +2652,13 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
 IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+
 ================================================================================
 onetime (7.0.0)
 License: MIT
 Source: https://github.com/sindresorhus/onetime#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -2425,12 +2668,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ================================================================================
 open (10.2.0)
 License: MIT
 Source: https://github.com/sindresorhus/open#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -2440,12 +2685,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ================================================================================
 ora (8.2.0)
 License: MIT
 Source: https://github.com/sindresorhus/ora#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -2456,11 +2703,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 parseurl (1.3.3)
 License: MIT
 Source: https://github.com/pillarjs/parseurl#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
@@ -2485,11 +2734,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 path-key (3.1.1)
 License: MIT
 Source: https://github.com/sindresorhus/path-key#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
@@ -2500,11 +2751,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 path-to-regexp (8.4.2)
 License: MIT
 Source: https://github.com/pillarjs/path-to-regexp#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014 Blake Embrey (hello@blakeembrey.com)
@@ -2527,11 +2780,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 picomatch (2.3.2)
 License: MIT
 Source: https://github.com/micromatch/picomatch
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2017-present, Jon Schlinkert.
@@ -2554,11 +2809,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 pkce-challenge (5.0.1)
 License: MIT
 Source: https://github.com/crouchcd/pkce-challenge#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2019
@@ -2581,11 +2838,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 proxy-addr (2.0.7)
 License: MIT
 Source: https://github.com/jshttp/proxy-addr#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014-2016 Douglas Christopher Wilson
@@ -2609,11 +2868,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 qs (6.15.3)
 License: BSD-3-Clause
 Source: https://github.com/ljharb/qs
 
+License file: LICENSE.md
 BSD 3-Clause License
 
 Copyright (c) 2014, Nathan LaFreniere and other [contributors](https://github.com/ljharb/qs/graphs/contributors)
@@ -2644,11 +2905,13 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
 ================================================================================
 queue-microtask (1.2.3)
 License: MIT
 Source: https://github.com/feross/queue-microtask
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) Feross Aboukhadijeh
@@ -2670,11 +2933,13 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 range-parser (1.3.0)
 License: MIT
 Source: https://github.com/jshttp/range-parser#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2012-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -2699,11 +2964,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 raw-body (3.0.2)
 License: MIT
 Source: https://github.com/stream-utils/raw-body#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2013-2014 Jonathan Ong <me@jongleberry.com>
@@ -2727,11 +2994,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 readdirp (4.1.2)
 License: MIT
 Source: https://github.com/paulmillr/readdirp
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2012-2019 Thorsten Lorenz, Paul Miller (https://paulmillr.com)
@@ -2754,11 +3023,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 require-from-string (2.0.2)
 License: MIT
 Source: https://github.com/floatdrop/require-from-string#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) Vsevolod Strukchinsky <floatdrop@gmail.com> (github.com/floatdrop)
@@ -2781,11 +3052,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 restore-cursor (5.1.0)
 License: MIT
 Source: https://github.com/sindresorhus/restore-cursor#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -2796,11 +3069,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 reusify (1.1.0)
 License: MIT
 Source: https://github.com/mcollina/reusify#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2015-2024 Matteo Collina
@@ -2823,11 +3098,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 router (2.2.0)
 License: MIT
 Source: https://github.com/pillarjs/router#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2013 Roman Shtylman
@@ -2852,11 +3129,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 run-applescript (7.1.0)
 License: MIT
 Source: https://github.com/sindresorhus/run-applescript#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -2867,11 +3146,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 run-parallel (1.2.0)
 License: MIT
 Source: https://github.com/feross/run-parallel
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) Feross Aboukhadijeh
@@ -2893,11 +3174,13 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 safer-buffer (2.1.2)
 License: MIT
 Source: https://github.com/ChALkeR/safer-buffer#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2018 Nikita Skovoroda <chalkerx@gmail.com>
@@ -2920,11 +3203,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 send (1.2.1)
 License: MIT
 Source: https://github.com/pillarjs/send#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2012 TJ Holowaychuk
@@ -2949,11 +3234,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 serve-static (2.2.1)
 License: MIT
 Source: https://github.com/expressjs/serve-static#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2010 Sencha Inc.
@@ -2980,11 +3267,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 setprototypeof (1.2.0)
 License: ISC
 Source: https://github.com/wesleytodd/setprototypeof
 
+License file: LICENSE
 Copyright (c) 2015, Wes Todd
 
 Permission to use, copy, modify, and/or distribute this software for any
@@ -2999,11 +3288,13 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
 OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+
 ================================================================================
 shebang-command (2.0.0)
 License: MIT
 Source: https://github.com/kevva/shebang-command#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Kevin Mårtensson <kevinmartensson@gmail.com> (github.com/kevva)
@@ -3014,11 +3305,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 shebang-regex (3.0.0)
 License: MIT
 Source: https://github.com/sindresorhus/shebang-regex#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
@@ -3029,11 +3322,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 side-channel (1.1.1)
 License: MIT
 Source: https://github.com/ljharb/side-channel#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2019 Jordan Harband
@@ -3055,12 +3350,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 
 ================================================================================
 side-channel-list (1.0.1)
 License: MIT
 Source: https://github.com/ljharb/side-channel-list#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 Jordan Harband
@@ -3082,12 +3379,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 
 ================================================================================
 side-channel-map (1.0.1)
 License: MIT
 Source: https://github.com/ljharb/side-channel-map#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2024 Jordan Harband
@@ -3110,11 +3409,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 side-channel-weakmap (1.0.2)
 License: MIT
 Source: https://github.com/ljharb/side-channel-weakmap#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2019 Jordan Harband
@@ -3137,11 +3438,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 signal-exit (4.1.0)
 License: ISC
 Source: https://github.com/tapjs/signal-exit#readme
 
+License file: LICENSE.txt
 The ISC License
 
 Copyright (c) 2015-2023 Benjamin Coe, Isaac Z. Schlueter, and Contributors
@@ -3159,11 +3462,13 @@ OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
 WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
 ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+
 ================================================================================
 statuses (2.0.2)
 License: MIT
 Source: https://github.com/jshttp/statuses#readme
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
@@ -3187,11 +3492,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 stdin-discarder (0.2.2)
 License: MIT
 Source: https://github.com/sindresorhus/stdin-discarder#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -3201,12 +3508,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ================================================================================
 string-width (7.2.0)
 License: MIT
 Source: https://github.com/sindresorhus/string-width#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -3216,12 +3525,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ================================================================================
 strip-ansi (7.2.0)
 License: MIT
 Source: https://github.com/chalk/strip-ansi#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -3232,11 +3543,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 to-regex-range (5.0.1)
 License: MIT
 Source: https://github.com/micromatch/to-regex-range
 
+License file: LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2015-present, Jon Schlinkert.
@@ -3259,11 +3572,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ================================================================================
 toidentifier (1.0.1)
 License: MIT
 Source: https://github.com/component/toidentifier#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2016 Douglas Christopher Wilson <doug@somethingdoug.com>
@@ -3286,11 +3601,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 tsx (4.23.1)
 License: MIT
 Source: https://tsx.hirok.io
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Hiroki Osame <hiroki.osame@gmail.com>
@@ -3313,11 +3630,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 turbo (2.10.6)
 License: MIT
 Source: https://turborepo.dev
 
+License file: LICENSE
 Copyright (c) 2026 Vercel, Inc
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -3326,11 +3645,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 type-is (2.1.0)
 License: MIT
 Source: https://github.com/jshttp/type-is#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
@@ -3355,11 +3676,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 typescript (5.9.3)
 License: Apache-2.0
 Source: https://www.typescriptlang.org/
 
+License file: LICENSE.txt
 Apache License
 
 Version 2.0, January 2004
@@ -3416,11 +3739,13 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 
 END OF TERMS AND CONDITIONS
 
+
 ================================================================================
 undici-types (6.21.0)
 License: MIT
 Source: https://undici.nodejs.org
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Matteo Collina and Undici contributors
@@ -3443,11 +3768,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 unpipe (1.0.0)
 License: MIT
 Source: https://github.com/stream-utils/unpipe#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2015 Douglas Christopher Wilson <doug@somethingdoug.com>
@@ -3471,11 +3798,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 vary (1.1.2)
 License: MIT
 Source: https://github.com/jshttp/vary#readme
 
+License file: LICENSE
 (The MIT License)
 
 Copyright (c) 2014-2017 Douglas Christopher Wilson
@@ -3499,11 +3828,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 which (2.0.2)
 License: ISC
 Source: https://github.com/isaacs/node-which#readme
 
+License file: LICENSE
 The ISC License
 
 Copyright (c) Isaac Z. Schlueter and Contributors
@@ -3519,12 +3850,14 @@ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
 IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
 
 ================================================================================
 wrappy (1.0.2)
 License: ISC
 Source: https://github.com/npm/wrappy
 
+License file: LICENSE
 The ISC License
 
 Copyright (c) Isaac Z. Schlueter and Contributors
@@ -3541,11 +3874,13 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
 IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+
 ================================================================================
 wsl-utils (0.1.0)
 License: MIT
 Source: https://github.com/sindresorhus/wsl-utils#readme
 
+License file: LICENSE
 MIT License
 
 Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -3556,11 +3891,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ================================================================================
 zod (3.25.76)
 License: MIT
 Source: https://zod.dev
 
+License file: LICENSE
 MIT License
 
 Copyright (c) 2025 Colin McDonnell
@@ -3583,11 +3920,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
 ================================================================================
 zod-to-json-schema (3.25.2)
 License: ISC
 Source: https://github.com/StefanTerdell/zod-to-json-schema#readme
 
+License file: LICENSE
 ISC License
 
 Copyright (c) 2020, Stefan Terdell

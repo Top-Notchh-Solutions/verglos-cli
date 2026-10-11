@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · DIST-001 package-boundary recheck
+
+The public packer was repaired and requalified at private shipping commit
+`14d264dc76f82dad6a53fe929f80edc280ce9642`: all six candidate npm archives
+were rebuilt, each carries the generated `THIRD_PARTY_NOTICES`, and none
+contains compiled `cli-fixture`, `fixture-engine`, or `fixture-validator`
+modules. The clean-consumer install passed for all six archives and executed
+the CLI as `2.0.0-alpha.1`; package regression, clean-consumer, release
+verifier, typecheck, and diff checks passed.
+
+`DIST-001` remains unchecked because its `LOCAL/HUNT/RECORD` dependencies and
+final legal/release qualification remain open. No checkbox or score changed.
+Score remains **223 checked / 57 unchecked / 280 total (79.6%)**. Evidence:
+`docs/shipping/evidence/dist-001-package-boundary-recheck-2026-10-11.md`.
+The next dependency-ready assessment is `DIST-001` after its dependencies are
+satisfied; do not advance to `DIST-002` on package evidence alone.
+
 ## 2026-10-11 · LIC-003 notice-generator recheck and artifact boundary
 
 The private notice generator produced byte-identical output on two runs:

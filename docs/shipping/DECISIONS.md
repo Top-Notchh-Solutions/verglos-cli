@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep DIST-001 open after package recheck
+
+- **Decision:** Accept the repaired public packer and six-archive inspection
+  as code-side evidence, but do not check `DIST-001`.
+- **Reason:** The package surface is clean and installable, while the declared
+  `LOCAL/HUNT/RECORD` dependencies and final legal/release qualification are
+  still open.
+- **Boundary:** No registry publication, Production deployment, payment,
+  database, entitlement, customer-data, or legal-review state changed.
+- **Next:** Reassess `DIST-001` only after its dependencies are qualified;
+  package evidence alone does not open `DIST-002`.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-package-boundary-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · Keep LIC-003 open after notice recheck
 
 - **Decision:** Accept deterministic notice generation as mechanical evidence

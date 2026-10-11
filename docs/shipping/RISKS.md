@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-DIST-001 dependent product/release qualification absent
+
+- **Risk:** The six public archives now have a clean package boundary and
+  install together, but the final release claim depends on qualified
+  `LOCAL/HUNT/RECORD` product surfaces and legal/release decisions.
+- **Impact:** The package cannot yet be treated as the final V1 release or
+  published artifact.
+- **Owner:** Release qualification owner, with Hunt/Attest and legal owners.
+- **Safe next action:** Complete the dependent product evidence, reconcile the
+  legal record, then rerun the exact archive and clean-consumer qualification.
+- **Status:** Code-side boundary repaired; release gate remains open. Score is
+  **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-package-boundary-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · R-LIC-003 final notice/archive qualification absent
 
 - **Risk:** Notice generation is deterministic, but no current release archive

@@ -7,6 +7,8 @@ import { fileURLToPath } from "node:url";
 const run = promisify(execFile);
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const packageNames = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"];
+const PUBLIC_NOTICE = "THIRD_PARTY_NOTICES";
+const PRIVATE_DIST_NAMES = /(?:^|\/)(?:cli-fixture|fixture-engine|fixture-validator)(?:\.[^/]+)?$/u;
 const manifests = new Map();
 for (const name of packageNames) manifests.set(name, JSON.parse(await readFile(join(root, "packages", name, "package.json"), "utf8")));
 const versions = new Map([...manifests.values()].map((manifest) => [manifest.name, manifest.version]));
@@ -18,10 +20,14 @@ try {
   for (const name of packageNames) {
     const source = join(root, "packages", name);
     const stage = join(stagingRoot, name);
-    await cp(join(source, "dist"), join(stage, "dist"), { recursive: true, filter: (path) => !/\.test\./u.test(path) });
+    await cp(join(source, "dist"), join(stage, "dist"), {
+      recursive: true,
+      filter: (path) => !/\.test\./u.test(path) && !PRIVATE_DIST_NAMES.test(path.replaceAll("\\", "/")),
+    });
     for (const file of ["README.md", "LICENSE", "NOTICE"]) {
       try { await cp(join(source, file), join(stage, file)); } catch { /* optional package metadata */ }
     }
+    await cp(join(root, PUBLIC_NOTICE), join(stage, PUBLIC_NOTICE));
     // Each npm archive is independently redistributable. Package-local terms
     // take precedence; otherwise carry the repository's Apache license into
     // the staged archive instead of relying on the source checkout.
@@ -37,6 +43,8 @@ try {
         }
       }
     }
+    const files = Array.isArray(manifest.files) ? manifest.files.filter((file) => typeof file === "string") : [];
+    if (!files.includes(PUBLIC_NOTICE)) manifest.files = [...files, PUBLIC_NOTICE];
     await writeFile(join(stage, "package.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     await run("npm", ["pack", stage, "--pack-destination", destination, "--ignore-scripts"], { cwd: root, maxBuffer: 4 * 1024 * 1024 });
   }

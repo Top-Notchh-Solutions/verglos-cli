@@ -16,9 +16,12 @@ test("clean public pack contains six archives without compiled tests", async () 
     for (const archive of archives) {
       const { stdout } = await run("tar", ["-tzf", join(output, archive)]);
       assert.doesNotMatch(stdout, /(^|\/)[^/]*\.test\./u);
+      assert.doesNotMatch(stdout, /(?:^|\/)(?:cli-fixture|fixture-engine|fixture-validator)(?:\.[^/]+)?$/u);
       assert.doesNotMatch(stdout, /workspace:/);
       const { stdout: license } = await run("tar", ["-xOf", join(output, archive), "package/LICENSE"], { encoding: "buffer" });
       assert.deepEqual(license, await readFile("LICENSE"), `${archive} must carry the repository license byte-for-byte`);
+      const { stdout: notices } = await run("tar", ["-xOf", join(output, archive), "package/THIRD_PARTY_NOTICES"]);
+      assert.deepEqual(notices, await readFile("THIRD_PARTY_NOTICES", "utf8"), `${archive} must carry the generated notices byte-for-byte`);
     }
   } finally { await rm(output, { recursive: true, force: true }); }
 });
