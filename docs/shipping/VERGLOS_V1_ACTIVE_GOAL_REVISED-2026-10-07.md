@@ -1,5 +1,19 @@
 # Verglos V1 Active Shipping Goal — Complete Contract, Whole Backlog, Preview, Production, and Release
 
+## 2026-10-11 execution checkpoint — QUAL-WEB-006 Production read-only run
+
+The authenticated Production `/account` and `/orgs` pages were tested through
+Chrome DevTools without writes. `/account` returned 200 route assets, exposed
+named navigation/heading semantics, had no console errors/warnings, scored
+Lighthouse Accessibility/Best Practices **100** on desktop and mobile, and
+measured cold LCP **993 ms** with CLS **0.00**. `QUAL-WEB-006` remains
+unchecked because human screen-reader, large authenticated dataset, and field
+CWV evidence are still required. Score remains **223 checked / 57 unchecked /
+280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/qual-web-006-production-readonly-cdp-2026-10-11.md`.
+
 ## 2026-10-11 execution checkpoint — DIST-001 package boundary
 
 The public packer was repaired and requalified: six candidate archives contain

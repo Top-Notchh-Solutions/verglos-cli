@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · QUAL-WEB-006 Production read-only qualification
+
+- **Verification:** Authenticated Production `/account` and `/orgs` loaded
+  without writes. `/account` exposed named navigation/heading semantics,
+  returned 200 route assets, and had no console errors/warnings.
+- **Performance:** Lighthouse Accessibility/Best Practices were **100** on
+  desktop and mobile; cold desktop LCP was **993 ms** and CLS **0.00**.
+- **Disposition:** Keep `QUAL-WEB-006` unchecked. Human screen-reader,
+  large-authenticated-dataset, and field-CWV evidence remain missing.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-production-readonly-cdp-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · DIST-001 package-boundary recheck
 
 - **Verification:** Six public archives rebuilt at private shipping commit

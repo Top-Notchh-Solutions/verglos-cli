@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · QUAL-WEB-006 Production read-only qualification
+
+- **Mapped ID:** `QUAL-WEB-006`.
+- **Verification:** Authenticated `/account` and `/orgs` loaded read-only;
+  named navigation/heading semantics were present, Lighthouse Accessibility
+  and Best Practices scored 100 on desktop/mobile, and the cold desktop trace
+  measured LCP 993ms and CLS 0.00 with no console errors/warnings.
+- **Acceptance:** Human screen-reader, large-data, and field-CWV evidence are
+  still absent; the checkbox remains open.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-production-readonly-cdp-2026-10-11.md`.
+
 ## 2026-10-11 · DIST-001 package-boundary recheck
 
 - **Mapped ID:** `DIST-001`.

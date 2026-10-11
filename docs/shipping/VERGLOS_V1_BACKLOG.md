@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · QUAL-WEB-006 Production read-only qualification
+
+Production `/account` and `/orgs` were exercised through the authenticated
+Chrome session without writes. The account page had named navigation and
+heading semantics, no console errors/warnings, HTTP 200 route assets,
+Lighthouse Accessibility **100** and Best Practices **100** on desktop and
+mobile, and a cold desktop trace of LCP **993 ms** with CLS **0.00**. The
+organization page showed the safe empty state because this account has no
+active organization.
+
+`QUAL-WEB-006` remains unchecked: human screen-reader, large authenticated
+dataset, and field-CWV evidence are still missing. No checkbox or score
+changed. Score remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+Evidence: `docs/shipping/evidence/qual-web-006-production-readonly-cdp-2026-10-11.md`.
+
 ## 2026-10-11 · DIST-001 package-boundary recheck
 
 The public packer was repaired and requalified at private shipping commit
@@ -1818,3 +1833,4 @@ authenticated surfaces; the homepage SEO score was 100. Human screen-reader,
 large-dataset, complete-route, and field/CrUX gates remain open. No checkbox
 changed. Evidence:
 `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
+s

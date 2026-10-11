@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-QUAL-WEB-006 remaining human/field qualification
+
+- **Risk:** Production account rendering is accessible and fast in the lab
+  run, but this does not establish human screen-reader behavior, large
+  authenticated dataset behavior, or field CWV.
+- **Impact:** Complete accessibility/performance acceptance cannot be claimed.
+- **Safe next action:** Run the authorized screen-reader and large-data
+  scenarios and collect field CWV after the required customer/organization
+  state is available.
+- **Status:** Partial evidence recorded; checkbox and release gate remain open.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-production-readonly-cdp-2026-10-11.md`.
+
 ## 2026-10-11 · R-DIST-001 dependent product/release qualification absent
 
 - **Risk:** The six public archives now have a clean package boundary and

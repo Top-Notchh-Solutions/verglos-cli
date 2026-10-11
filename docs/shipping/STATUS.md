@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · QUAL-WEB-006 Production read-only qualification
+
+The authenticated Production `/account` and `/orgs` pages loaded without
+writes. `/account` had Lighthouse Accessibility **100** and Best Practices
+**100** on desktop and mobile, LCP **993 ms**, CLS **0.00**, HTTP 200 route
+assets, and no console errors/warnings. The account had no active organization,
+so the slug-scoped dashboard was not exercised. `QUAL-WEB-006` remains open
+for human screen-reader, large-data, and field-CWV evidence. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/qual-web-006-production-readonly-cdp-2026-10-11.md`.
+
 ## 2026-10-11 · DIST-001 package-boundary recheck
 
 The rebuilt public pack contains six archives. Every archive includes the

@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep QUAL-WEB-006 open after Production read-only run
+
+- **Decision:** Accept the authenticated browser, Lighthouse, accessibility
+  snapshot, network, and performance results as qualification evidence only;
+  do not check `QUAL-WEB-006`.
+- **Reason:** Human screen-reader, large authenticated dataset, and field-CWV
+  evidence are still required by the row.
+- **Boundary:** No Production write, payment, database, entitlement,
+  organization, membership, or account-data mutation occurred.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-production-readonly-cdp-2026-10-11.md`.
+
 ## 2026-10-11 · Keep DIST-001 open after package recheck
 
 - **Decision:** Accept the repaired public packer and six-archive inspection
