@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PLAN-CLI-003 accepted · isolated paid modified-client matrix
+
+- **Hosted qualification:** Isolated Preview used the active Pro fixture and
+  recorded a 27-request authenticated organization/project/list/search/
+  usage-query/record/download/public-private matrix with 0 transport errors.
+  One acceptance organization and one test project were created only in the
+  isolated database.
+- **Paid CLI/API qualification:** Five bearer requests covered forged
+  Enterprise selection, license status, monitor list, score-history list, and
+  malformed license validation. Four valid requests returned server-owned Pro
+  data with private no-store headers; the malformed request returned bounded
+  HTTP 400.
+- **Verification:** Focused Web boundary suite passed 40 with one explicit
+  environment-gated skip and zero failures. Web test-contract repair is
+  `003def6`; hosted route source was `887249d`.
+- **Decision:** Check `PLAN-CLI-003`. Keep Production read-only; this does not
+  pass Gate 5 or the independent Hunt/legal/release/final-acceptance gates.
+- **Score:** **225 checked / 55 unchecked / 280 total (80.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-003-preview-paid-modified-client-matrix-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 accepted · Gate 4 passed
 
 - **Hosted qualification:** Two isolated Preview Razorpay Test Mode Cards-only

@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · PLAN-CLI-003 isolated paid modified-client acceptance
+
+- **Mapped ID:** `PLAN-CLI-003`.
+- **Implementation:** Web route source `887249d`; the stale organization
+  entry test contract was aligned at `003def6`.
+- **Verification:** Isolated Preview exercised authenticated organization,
+  project, list/search, usage-query, record, download/export, public receipt,
+  and private no-store boundaries with forged authority inputs. The active Pro
+  Bearer matrix preserved server-owned Pro capability/license projections.
+- **Acceptance:** The item is checked at **225 checked / 55 unchecked / 280
+  total (80.4%)**. Production was read-only; no customer or secret-bearing
+  evidence was retained.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-003-preview-paid-modified-client-matrix-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 current Preview prepaid order boundary
 
 - **Mapped ID:** `PLAN-WEB-014`, Gate 4.

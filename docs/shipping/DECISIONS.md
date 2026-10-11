@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Accept PLAN-CLI-003 after isolated paid matrix
+
+- **Decision:** Check `PLAN-CLI-003` after the isolated Preview authenticated
+  modified-client and paid Bearer matrices completed without a scope or plan
+  elevation.
+- **Evidence:** The matrix covered forged plan/capability/tenant/query values,
+  organization/project and record lists, search, download/export, and
+  public/private cache boundaries. The active Pro Bearer path kept
+  `real_plan=pro` and `active=true` under forged Enterprise selection.
+- **Boundary:** Only the isolated Preview database was written, for one
+  acceptance organization and test project. No Production payment, database,
+  entitlement, account, provider, or customer-data write occurred.
+- **Remaining:** Gate 5 live GitHub/GitLab organization evidence, Hunt
+  provenance and independent review, legal approval, protected release/
+  rollback, and final acceptance remain separate. Score is **225/55/280
+  (80.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-003-preview-paid-modified-client-matrix-2026-10-11.md`.
+
 ## PLAN-WEB-014 accepted and Gate 4 passed · 2026-10-11
 
 - **Evidence:** Two isolated Preview/Test Mode Cards-only captures reached

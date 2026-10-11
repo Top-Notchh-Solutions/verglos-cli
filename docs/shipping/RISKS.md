@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-PLAN-CLI-003 modified-client boundary reduced
+
+- **Risk:** A modified client could try to select a higher plan, cross tenant
+  scope, or read private/public record surfaces.
+- **Verification:** Isolated Preview paid and authenticated matrices covered
+  forged plan, capability, tenant, usage/query, list/search, download/export,
+  and public/private cache inputs. The server preserved the active Pro
+  projection and bounded authorization/not-found responses.
+- **Status:** `PLAN-CLI-003` accepted. Remaining risk is external Hunt
+  provenance/reviewer qualification and separate hosted SCM/release/legal
+  gates, not an untested modified-client route in this matrix.
+- **Evidence:**
+  `docs/shipping/evidence/plan-cli-003-preview-paid-modified-client-matrix-2026-10-11.md`.
+
 ## 2026-10-11 · R-PLAN-WEB-014 prepaid provider terminal-result boundary
 
 - **Risk:** Isolated Preview now creates the canonical Cards-only prepaid

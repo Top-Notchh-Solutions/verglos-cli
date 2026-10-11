@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-CLI-003 accepted · paid modified-client boundary
+
+The isolated Preview qualification now includes an active Pro fixture. The
+authenticated modified-client matrix exercised forged plan/capability/tenant
+values, organization/project and record lists, search, usage-query validation,
+download/export boundaries, and public/private cache behavior. It created only
+one bounded test organization and project in the isolated database. The paid
+Bearer matrix kept the server-owned Pro projection despite forged Enterprise
+input. Hosted requests had no transport errors; the focused boundary suite is
+**40 passed / 1 explicit environment-gated skip / 0 failures**.
+
+`PLAN-CLI-003` is checked. Score is **225 checked / 55 unchecked / 280 total
+(80.4%)**. Production remains read-only. The next queue is external Hunt
+provenance/reviewer qualification; `PLAN-WEB-012` and `PLAN-WEB-015` remain
+separate open billing/reconciliation items.
+
+Evidence:
+`docs/shipping/evidence/plan-cli-003-preview-paid-modified-client-matrix-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 accepted · Gate 4 passed
 
 The Final V1 prepaid Cards-only lifecycle is qualified in isolated Preview/Test

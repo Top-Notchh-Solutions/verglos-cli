@@ -1,5 +1,24 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · PLAN-CLI-003 cleared; next queue is Hunt provenance
+
+The isolated Preview paid modified-client matrix is complete and
+`PLAN-CLI-003` is checked. It covered forged plan/capability/tenant/query
+inputs, private organization/project/list/search/record/download boundaries,
+public receipt behavior, and the active Pro Bearer CLI surfaces. The only
+Preview writes were one acceptance organization and one test project in the
+isolated database. Score is **225/55/280 (80.4%)**.
+
+The next queue item by dependency order is `HUNT-008`, but it is externally
+blocked rather than code-blocked: the missing inputs are trusted/licensed
+recipe provenance and independent qualification. Record that owner/action
+before moving to the next dependency-ready implementation item. `PLAN-WEB-012`
+and `PLAN-WEB-015` remain open billing/reconciliation work and Gate 5 remains
+open for the authorized GitHub organization workflow.
+
+Evidence:
+`docs/shipping/evidence/plan-cli-003-preview-paid-modified-client-matrix-2026-10-11.md`.
+
 ## 2026-10-11 · Gate 4 cleared for Final V1 prepaid billing
 
 The Final V1 Cards-only prepaid lifecycle is no longer blocked: two real

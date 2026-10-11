@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · PLAN-CLI-003 modified-client boundary accepted
+
+The isolated Preview paid modified-client matrix is accepted: forged plan,
+capability, tenant, usage/query, organization/project, record/list,
+search, download/export, and public/private cache inputs did not elevate or
+cross scope. The paid Pro Bearer path returned only server-owned Pro data.
+This is backlog evidence, not a new release-gate pass. Gate 5 still requires
+the authorized GitHub organization installation and live delivery/replay/
+removal evidence; Hunt, legal, protected release, rollback, and final
+acceptance gates remain open.
+
+Score is **225/55/280 (80.4%)**. Evidence:
+`docs/shipping/evidence/plan-cli-003-preview-paid-modified-client-matrix-2026-10-11.md`.
+
 ## 2026-10-11 · Gate 4 passed · Final V1 prepaid Cards-only lifecycle
 
 Gate 4 is satisfied for the current Final V1 contract. Isolated Preview/Test
