@@ -8701,3 +8701,24 @@ it was not sent and contains no credentials or customer data.
 - **Decision:** PLAN-WEB-014 and PLAN-WEB-015 remain unchecked. Do not infer
   provider success from route creation or checkout rendering. Evidence:
   `docs/shipping/evidence/plan-web-014-preview-recurring-card-boundary-2026-10-10.md`.
+## 2026-10-12 · founder deliverables collection packets generated
+
+- **Collection:** Created the private ten-group deliverables index, blocker
+  register, founder-input form, and group packets for Hunt, independent AppSec,
+  organization policy, SCM, Studio/Enterprise, legal, release/rollback,
+  Web-quality, acceptance, and final POC work.
+- **Technical facts:** Populated workspace heads from Git and populated the
+  initial A1 Hunt provenance/approval/fixture records from the existing catalog
+  and evidence. No commit hashes were requested from the founder.
+- **Human-only boundary:** Records remain DRAFT/PENDING where they require a
+  legal decision, independent AppSec run, repository owner consent, recipient
+  confirmation, provider installation, or founder choice. No signature or
+  approval was invented.
+- **Disposition:** No backlog checkbox changed. The packets are collection
+  infrastructure for the remaining 52 rows.
+- **Boundary:** No Production/provider/database/entitlement/customer-data
+  write, npm publication, tag, push, or deployment mutation occurred.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Evidence:** docs/shipping/deliverables/00-COLLECTION-INDEX-2026-10-12.md;
+  docs/shipping/deliverables/11-BLOCKER-REGISTER-2026-10-12.md;
+  docs/shipping/deliverables/FOUNDER-INPUTS-ONLY-2026-10-12.md.
