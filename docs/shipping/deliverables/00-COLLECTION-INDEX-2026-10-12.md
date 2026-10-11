@@ -38,7 +38,7 @@ the exact head actually tested at that time.
 
 | Packet | Covers | Current status |
 |---|---|---|
-| 01 Hunt rules | HUNT-008, HUNT-009, HUNT-010 | Technical rule exists; provenance/approval inputs remain |
+| 01 Hunt rules | HUNT-008, HUNT-009, HUNT-010 | Technical rule exists; first-party TNS ownership is recorded, while exact source/version/digest and approval remain |
 | 02 Hunt review | HUNT-011, QUAL-CLI-004 | Engineering evidence exists; independent reviewer is missing |
 | 03 Policy signer | TEAM-CLI-001, TEAM-CLI-002 | Code exists; hosted signer and live fetch evidence are missing |
 | 04 SCM | TEAM-WEB-006, GITHUB-WEB-001 to GITHUB-WEB-004 | Code exists; live App installation/evidence are missing |
@@ -102,4 +102,3 @@ For each packet Codex will:
 
 The next packet is 01-HUNT-RULES. No external reviewer, legal signature, or
 customer consent is being fabricated by creating these files.
-

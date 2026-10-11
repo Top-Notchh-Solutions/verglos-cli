@@ -8,7 +8,7 @@ external actions that must come from a real authorized person/provider.
 
 | Group | Backlog family | Technical state | Missing deliverable | Owner | Next action |
 |---|---|---|---|---|---|
-| 1 | HUNT-008 to HUNT-010 | Fixed A1 catalog and wiring exist | Rule ownership/license/provenance and approval record | Founder/legal owner | Confirm utf8-contains ownership; Codex fills technical record |
+| 1 | HUNT-008 to HUNT-010 | Fixed A1 catalog and wiring exist; first-party TNS ownership is now recorded for utf8-contains | Exact source/version/digest, supported-rule approval, and final release treatment | Codex + authorized product/release approver | Record the exact source automatically, approve the bounded rule, and carry its first-party status into the release record |
 | 2 | HUNT-011, QUAL-CLI-004 | Hosted/local adversarial evidence exists | Independent Linux/Docker AppSec report | Independent reviewer | Select reviewer and send current packet |
 | 3 | TEAM-CLI-001/002 | CLI/Web contracts exist | Preview signer activation, policy row, live fetch/cache | Founder/operator + Codex | Activate Preview-only signer and run isolated flow |
 | 4 | TEAM-WEB-006, GITHUB-WEB-001 to 004 | Provider contracts exist; no live App | GitHub App installation and event/check/replay evidence | Founder/GitHub owner + Codex | Create least-privilege Preview App |
@@ -38,4 +38,3 @@ Codex reads those from Git and local files.
 - a decision to authorize a protected external operation.
 
 No backlog checkbox changes merely because this register was created.
-

@@ -17,7 +17,7 @@ Write one short answer beside each item. Do not provide secrets or commit
 hashes here.
 
 1. Hunt rule ownership:
-   - utf8-contains: FIRST-PARTY / THIRD-PARTY / OPERATOR-INSTALLED / EXCLUDED
+   - utf8-contains: FIRST-PARTY — owned by Top Notchh Solutions and part of Verglos
    - Any other V1 Hunt rule:
 2. GitHub V1 scope:
    - GitHub only / GitHub and GitLab
@@ -58,4 +58,3 @@ Codex will read technical commits from Git. The only values needed from the
 founder here are decisions, names/roles, and authorization status. Passwords,
 database URLs, API keys, private keys, tokens, cookies, and customer source do
 not belong in this file.
-

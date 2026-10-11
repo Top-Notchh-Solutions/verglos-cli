@@ -1,7 +1,11 @@
 
 # Hunt recipe provenance — a1-utf8-contains
 
-**Status: DRAFT — pending ownership/license confirmation**
+**Status: FIRST-PARTY CONFIRMED — technical approval and independent review pending**
+
+Founder clarification recorded on 2026-10-12: a1-utf8-contains is owned by
+Top Notchh Solutions and is part of Verglos. It is not being treated as a
+copied third-party recipe for this V1 record.
 
 ## Technical identity collected from the workspace
 
@@ -37,23 +41,26 @@
 
 ## Ownership/legal fields requiring confirmation
 
-- Ownership classification: [FOUNDER INPUT REQUIRED]
-  FIRST-PARTY / THIRD-PARTY / OPERATOR-INSTALLED / EXCLUDED
-- Publisher/author: [FOUNDER INPUT REQUIRED]
-- Exact source URL or internal source path: [CODE/FOUNDER TO CONFIRM]
+- Ownership classification: FIRST-PARTY
+- Publisher/author: Top Notchh Solutions / Verglos
+- Exact source URL or internal source path: Verglos Hunt catalog in the private
+  shipping workspace; Codex records the exact source commit during qualification
 - Exact source version/commit: [CODE WILL RECORD AT QUALIFICATION]
 - Artifact digest, if copied: [CODE WILL CALCULATE]
-- License/SPDX identifier: [FOUNDER/LEGAL REQUIRED]
-- License/NOTICE URL: [FOUNDER/LEGAL REQUIRED]
-- Modification permission: [LEGAL REQUIRED]
-- Redistribution permission: [LEGAL REQUIRED]
-- Trademark/endorsement restrictions: [LEGAL REQUIRED]
-- Required attribution/NOTICE text: [LEGAL REQUIRED]
+- License/SPDX identifier: Verglos/TNS-owned first-party product code; final
+  release license decision remains in LIC-002/LIC-003
+- License/NOTICE URL: [LEGAL/RELEASE RECORD REQUIRED]
+- Modification permission: TNS-controlled; final contributor/release policy
+  record remains in LIC-002/LIC-003
+- Redistribution permission: TNS-controlled; final V1 release decision remains
+  in LIC-002/LIC-003
+- Trademark/endorsement restrictions: [LEGAL/RELEASE RECORD REQUIRED]
+- Required attribution/NOTICE text: [LEGAL/RELEASE RECORD REQUIRED]
 - Approval reference: OPEN
 
 ## Important boundary
 
-The technical catalog proves that the rule is bounded and recognized. It does
-not prove that the content is legally redistributable or independently
-security-reviewed. Keep this record DRAFT until those facts are confirmed.
-
+The technical catalog and founder ownership statement establish first-party
+ownership for this rule. They do not by themselves complete the product
+approval, independent Hunt/AppSec review, or final release/legal records.
+Those separate gates remain open.
