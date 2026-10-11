@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · QUAL-WEB-006 account recheck remains partial
+
+The authenticated Production account shell now has fresh desktop/mobile
+evidence: Lighthouse Accessibility and Best Practices are 100/100, keyboard
+focus reaches all nine named controls, mobile `390x844` has no horizontal
+overflow, the console is empty, target resources are successful, and a clean
+trace measured LCP 483 ms, TTFB 72 ms, and CLS 0.00. Focused Web contracts
+passed 37/37.
+
+`QUAL-WEB-006` remains open. This run does not replace the missing human
+screen-reader review, paid organization/large-dataset rendering, or field CWV
+evidence. No Web code change or Production mutation was justified. Score
+remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · public Web/CLI push and merge complete
 
 The waiting public-safe changes are now synchronized. Web PR #173 merged at

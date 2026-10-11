@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · QUAL-WEB-006 authenticated account recheck
+
+The current authenticated Production account shell passed desktop/mobile
+Lighthouse Accessibility and Best Practices **100/100**, keyboard traversal
+through all nine named controls with visible focus, mobile `390x844` no-
+overflow, empty console, successful target resources, and a clean account
+trace of LCP **483 ms**, TTFB **72 ms**, and CLS **0.00**. Focused Web
+qualification/account/organization contracts passed **37/37**.
+
+`QUAL-WEB-006` remains unchecked because human screen-reader,
+paid-organization/large-dataset, and field-CWV evidence are still missing. No
+checkbox or score changed. Score remains **228 checked / 52 unchecked / 280
+total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · DIST-001 public package boundary recheck
 
 The current CLI shipping head `0ef96caa` rebuilt all six public packages. The

@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · QUAL-WEB-006 authenticated account recheck
+
+- **Mapped ID:** `QUAL-WEB-006`.
+- **Surface:** Read-only authenticated Production `/account`, with desktop
+  and mobile emulation plus a clean same-session trace.
+- **Verification:** Lighthouse Accessibility/Best Practices 100/100 on both
+  devices; nine-control keyboard traversal with visible focus; no mobile
+  overflow; empty console; successful target resources; focused contracts
+  37/37; clean trace LCP 483 ms, TTFB 72 ms, CLS 0.00.
+- **Acceptance:** Partial account-shell evidence only. The checkbox remains
+  open for human screen-reader, paid organization/large-dataset, and field-CWV
+  evidence.
+- **Boundary:** No Production/provider/database/entitlement/customer write.
+- **Score:** **228/52/280 (81.4%)**; no checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · public Web/CLI push and merge reconciliation
 
 - **Mapped work:** Current Web and CLI shipping worktree changes waiting for

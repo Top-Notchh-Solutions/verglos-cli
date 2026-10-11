@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep QUAL-WEB-006 open after clean account recheck
+
+- **Decision:** Record the current account-shell accessibility/performance
+  evidence but do not check `QUAL-WEB-006`.
+- **Evidence:** Desktop/mobile Lighthouse Accessibility and Best Practices
+  100/100; keyboard reached all nine named controls with visible focus; mobile
+  `390x844` had no overflow; console clean; focused contracts 37/37; clean
+  account trace LCP 483 ms, TTFB 72 ms, CLS 0.00.
+- **Reason:** The row still requires an authorized human screen-reader pass,
+  paid organization/large-dataset rendering, and field CWV. A browser tree or
+  Lighthouse score must not be represented as human screen-reader evidence.
+- **Boundary:** No Production/provider/database/entitlement/customer-data
+  write and no code change from this run.
+- **Score:** **228/52/280 (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · synchronize public Web/CLI repositories before next batch
 
 - **Decision:** Merge only the public-safe changes that were waiting in the

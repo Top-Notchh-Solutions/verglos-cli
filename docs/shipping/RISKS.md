@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-QUAL-WEB-006 account-shell evidence boundary
+
+- **Risk:** Automated accessibility and a clean lab trace could be mistaken
+  for complete accessibility/performance acceptance.
+- **Verification:** Current account shell has Lighthouse Accessibility/
+  Best Practices 100/100 on desktop/mobile, nine-control keyboard traversal,
+  no mobile overflow, clean console, 37/37 focused contracts, and LCP 483 ms /
+  TTFB 72 ms / CLS 0.00 in a clean trace.
+- **Status:** Partial evidence only. Keep `QUAL-WEB-006` open until the
+  authorized human screen-reader, paid organization/large-dataset, and field
+  CWV scenarios are independently recorded.
+- **Safe next action:** Obtain those external observations; do not claim them
+  from Lighthouse, an accessibility tree, or a local fixture.
+- **Evidence:**
+  docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md.
+
 ## 2026-10-11 · R-PUBLIC-SYNC-001 public/private history boundary mitigated
 
 - **Risk:** Local shipping branches can contain private tracker history that

@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · QUAL-WEB-006 account-shell qualification addendum
+
+The current authenticated account shell passed desktop/mobile Lighthouse
+Accessibility and Best Practices 100/100, named-control keyboard traversal,
+mobile no-overflow, clean console, successful target-resource, and clean-trace
+checks (LCP 483 ms, TTFB 72 ms, CLS 0.00). Focused repository contracts pass
+37/37.
+
+This does not pass the gate. Human screen-reader, paid organization/
+large-dataset, and field-CWV evidence remain missing. Score remains
+**228/52/280 (81.4%)** and no checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · public repository synchronization complete
 
 Web PR #173 and CLI PR #90 are merged. Web passed its focused test, typecheck,

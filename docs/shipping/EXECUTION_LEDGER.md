@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · QUAL-WEB-006 authenticated account recheck
+
+- **Verification:** Production `/account` remained read-only. Desktop/mobile
+  Lighthouse Accessibility and Best Practices were **100/100**; keyboard
+  traversal visited all nine named controls with `:focus-visible`; mobile
+  `390x844` had no horizontal overflow; console was empty; target resources
+  returned 200/expected 304 responses.
+- **Performance:** Clean account trace measured LCP **483 ms**, TTFB **72 ms**,
+  render delay **411 ms**, and CLS **0.00**. No CrUX field data exists.
+- **Repository:** Focused Web qualification/account/organization contracts
+  passed **37/37**. No reproducible code defect justified a Web code change.
+- **Disposition:** Keep `QUAL-WEB-006` unchecked. Human screen-reader,
+  paid-organization/large-dataset, and field-CWV evidence remain required.
+- **Boundary:** No Production/provider/database/entitlement/account/
+  organization/customer-data write or deployment mutation.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · public Web/CLI push and merge reconciliation
 
 - **Web:** PR #173 merged to `main` at
