@@ -2681,3 +2681,18 @@ dependency-ready item is `LIC-002`; score remains **223 checked / 57 unchecked /
 
 Evidence:
 `docs/shipping/evidence/studio-cli-001-code-revalidation-2026-10-11.md`.
+
+### 2026-10-11 `LIC-002` mechanical inventory checkpoint
+
+The private CLI shipping source passed the license inventory with **148
+dependency entries and zero automated review blockers**; the license/notice
+test set passed **5/5**. This is mechanical inventory evidence only.
+
+`LIC-002` remains unchecked because external Trivy, detect-secrets, fixture,
+Hunt-content, trademark, and redistribution decisions remain unresolved. The
+private legal addendum is still a review request with no authorized reviewer,
+signature, decision, or approval date. No release or external state changed.
+The next dependency-ready item is `LIC-003`; score remains **223 checked / 57
+unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/lic-002-technical-recheck-2026-10-11.md`.

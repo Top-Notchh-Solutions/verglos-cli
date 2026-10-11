@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep LIC-002 open after mechanical inventory
+
+- **Decision:** Accept the automated inventory and notice tests as mechanical
+  evidence only; do not check `LIC-002`.
+- **Reason:** Permission to redistribute or modify external engines, image
+  layers/databases, fixtures, rules/recipes, and trademarks requires an
+  authorized review of exact artifacts. The current legal packet has no
+  reviewer, signature, decision, or approval date.
+- **Boundary:** No release, registry, package, Production, provider,
+  database, entitlement, account, or customer-data state changed.
+- **Next:** Assess `LIC-003`.
+- **Evidence:** `docs/shipping/evidence/lic-002-technical-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · Keep STUDIO-CLI-001 open after code revalidation
 
 - **Decision:** Accept the local projection and hosted-custody code evidence

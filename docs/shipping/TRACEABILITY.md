@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · LIC-002 mechanical inventory and legal boundary
+
+- **Mapped ID:** `LIC-002`.
+- **Verification:** 148 dependency entries, zero automated review blockers,
+  and license/notice tests **5/5**.
+- **Acceptance:** External engine/content provenance, redistribution,
+  trademark, and authorized legal review are unresolved; the checkbox remains
+  open.
+- **Next:** `LIC-003`.
+- **Evidence:** `docs/shipping/evidence/lic-002-technical-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · STUDIO-CLI-001 code revalidation
 
 - **Mapped ID:** `STUDIO-CLI-001`.

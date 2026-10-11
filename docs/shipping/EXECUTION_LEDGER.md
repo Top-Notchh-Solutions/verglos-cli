@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · LIC-002 mechanical inventory and legal boundary
+
+- **Verification:** License inventory passed with **148 entries / 0 automated
+  review blockers**; license/notice tests passed **5/5**.
+- **Disposition:** Keep `LIC-002` unchecked. External Trivy, detect-secrets,
+  fixture, Hunt-content, trademark, and redistribution decisions remain
+  unresolved; the legal addendum has no authorized approval. No release or
+  external state changed.
+- **Next:** `LIC-003` is the next dependency-ready assessment.
+- **Evidence:** `docs/shipping/evidence/lic-002-technical-recheck-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · STUDIO-CLI-001 code revalidation and recipient boundary
 
 - **Implementation:** CLI `2b05390f` revalidated `record project-client`,

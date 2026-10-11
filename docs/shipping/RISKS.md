@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-LIC-002 external-content approval remains absent
+
+- **Risk:** Mechanical dependency inventory is clean, but external engine,
+  database, fixture, Hunt-content, and trademark rights are not legally
+  approved for the exact release scope.
+- **Impact:** Redistribution and public release cannot claim complete legal or
+  notice qualification.
+- **Owner:** Authorized company/legal reviewer and release owner.
+- **Safe next action:** Review the exact release artifacts and complete the
+  private addendum with decisions, conditions, reviewer identity, scope,
+  expiry, and verifiable approval. Keep unresolved assets unbundled and do
+  not publish until disposition is recorded.
+- **Status:** Mechanical inventory passed; legal gate open. Next
+  dependency-ready assessment is `LIC-003`.
+- **Evidence:** `docs/shipping/evidence/lic-002-technical-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · R-STUDIO-CLI-001 hosted recipient acceptance absent
 
 - **Risk:** The CLI projection and Web custody route enforce the intended

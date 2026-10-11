@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · LIC-002 mechanical inventory and legal boundary
+
+The private CLI shipping source passed the license inventory with **148
+dependency entries and zero automated review blockers**. The license/notice
+test set passed **5/5**. This is mechanical evidence only.
+
+`LIC-002` remains unchecked: the external-content record still needs decisions
+for Trivy image/layer/database terms, detect-secrets release/redistribution,
+fixture rights, Hunt recipe provenance, and trademarks. The legal addendum is
+still a review request with no authorized reviewer/signature/approval date. No
+release or external state changed. The next dependency-ready item is
+`LIC-003`. Score remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/lic-002-technical-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · STUDIO-CLI-001 code revalidation
 
 The current CLI head `2b05390f` revalidated the bounded `record project-client`
