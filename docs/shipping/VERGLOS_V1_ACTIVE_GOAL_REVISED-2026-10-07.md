@@ -1,12 +1,135 @@
-# Verglos V1 Active Shipping Goal — Whole-Backlog, Preview, and Production Shipping
+# Verglos V1 Active Shipping Goal — Complete Contract, Whole Backlog, Preview, Production, and Release
 
-> **Superseded on 2026-10-11:** use
-> `docs/shipping/VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-11.md` as the complete
-> replacement goal. This historical file is retained for audit history.
+**Canonical active goal restored and amended: 2026-10-11.** This is the
+complete operating goal. It preserves the full 2,519-line backlog, execution,
+Preview, Production, evidence, acceptance, and release instructions from the
+previous shipping goal. The shorter 2026-10-11 file is only an index and must
+not replace this file or create a second execution direction.
 
-Effective checkpoint: 2026-10-10. This file is the authoritative replacement
-goal for the remaining shipping work. Replace the previous active goal with
-this complete version before resuming.
+## 2026-10-11 master amendment — contract change without backlog diversion
+
+The final V1 product contract is now:
+
+```text
+docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md
+```
+
+This amendment changes the product contract; it does **not** reset, reorder,
+or shrink the backlog. The existing backlog remains the execution queue. The
+contract is applied to each row as it is implemented and qualified.
+
+### Product contract that governs the existing queue
+
+- Verglos remains a terminal-first product for JavaScript/TypeScript and a Web
+  product for Free, Pro, Team, Studio, and Enterprise.
+- Hunt is a real product capability for every plan with plan-appropriate
+  limits. It must use signed, digest-pinned, declarative recipes and a bounded
+  sandbox; it is not an AI-generated arbitrary-shell feature.
+- Attest/Release Records remain required Pro+ capabilities. A customer-facing
+  `.vgl` record must be portable, signed, offline-verifiable, and clearly
+  separate from npm/in-toto/Sigstore provenance and imported SARIF/SPDX/
+  CycloneDX evidence.
+- Paid plans use Cards-only, one-time prepaid fixed-term payment with
+  user-initiated manual renewal in V1. Automatic recurring-card renewal is
+  deferred and is not a V1 promise. Capture, webhook, ledger, refund, expiry,
+  manual renewal, and entitlement behavior must still be bound to the exact
+  user, organization, plan, catalog version, amount, currency, and term.
+- Team/Studio/Enterprise organization policy and GitHub/GitLab checks remain
+  part of V1. The authorized company test organization is TopNotchh; public
+  TypeScript/JavaScript forks may be used for the test corpus. Customers do
+  not create their own trust root for the V1 hosted policy path.
+- Production work is allowed only as bounded, auditable work. It must use an
+  exact target, preflight, mode/environment check, backup or rollback plan for
+  state-changing operations, reconciliation, and post-write verification. No
+  secret, database URL, token, cookie, private source, or customer data goes
+  into chat or public repositories.
+
+### The backlog remains the source of completion truth
+
+The current private score at this amendment is **223 checked / 57 unchecked /
+280 total (79.6%)**. Recompute it from the live
+`docs/shipping/VERGLOS_V1_BACKLOG.md` after every substantial batch.
+
+For every unchecked row, keep exactly one active ID, implement the complete
+row, run its required tests and hosted evidence, write private evidence, and
+only then check the row. If a row is genuinely blocked by a provider,
+reviewer, legal approval, consent, or founder decision, record the owner,
+missing artifact, review date, and next action; keep it unchecked; then select
+the first dependency-ready row in top-to-bottom backlog order. That is a
+logged dependency transition, not skipping the backlog.
+
+Contract synchronization is one bounded documentation batch. After it is
+recorded, return immediately to the active backlog row. Do not spend a new
+shipping cycle rewriting the contract, and do not use the contract change as
+a reason to ignore implementation, testing, evidence, score updates, or
+Production qualification.
+
+### Authoritative file set carried by this goal
+
+Private shipping truth and execution state:
+
+```text
+docs/shipping/VERGLOS_V1_BACKLOG.md
+docs/shipping/EXECUTION_LEDGER.md
+docs/shipping/STATUS.md
+docs/shipping/RELEASE_GATES.md
+docs/shipping/DECISIONS.md
+docs/shipping/RISKS.md
+docs/shipping/TRACEABILITY.md
+docs/shipping/VERGLOS_V1_MANUAL_INPUT_BLOCKERS.md
+docs/shipping/FOUNDER_ACTION_STEPS.md
+docs/shipping/VERGLOS_RECORD_PACKAGE_DECISION.md
+docs/shipping/VERGLOS_RECORD_PROVENANCE.md
+docs/shipping/VERGLOS_THIRD_PARTY_INVENTORY.md
+docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md
+docs/shipping/FOUNDER_GUIDE_FROM_ALPHA_TO_FINAL_2026-10-11.md
+docs/shipping/acceptance/
+docs/shipping/evidence/
+docs/shipping/legal/
+```
+
+Implementation surfaces that must stay aligned:
+
+```text
+/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-cli
+/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-cli-private-shipping
+/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-cli-shipping-worktree
+/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web
+```
+
+Public-safe product references that must agree with the contract:
+
+```text
+verglos-cli/docs/VERGLOS_COMPANY_USAGE_AND_FEATURE_MAP.md
+verglos-cli/docs/VERGLOS_PRODUCT_ARCHITECTURE_BLUEPRINT.md
+verglos-cli/docs/shipping/
+verglos-web/docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md
+```
+
+The private tracker owns the score, evidence, legal records, consent, and
+release approvals. Public repositories may contain only public-safe code,
+tests, contracts, and claims. Historical evidence is preserved; current truth
+is added as a dated superseding entry rather than rewriting old results.
+
+### Required per-item completion report
+
+After each accepted or blocked item, update the backlog and the execution
+ledger/status records together and report:
+
+1. checked/open/total score and percentage;
+2. exact checkbox IDs changed, if any;
+3. implementation summary;
+4. tests, deployment/browser/provider evidence, and private evidence paths;
+5. remaining external gate or limitation;
+6. the next single dependency-ready backlog ID.
+
+No score increase is allowed for a code-only pass, deployment, browser click,
+configuration change, or local test that does not satisfy the row’s complete
+acceptance condition.
+
+Effective checkpoint: 2026-10-11. The detailed historical/current execution
+entries below remain part of this active goal and are subordinate only to the
+master amendment above.
 
 ## Current checkpoint · 2026-10-10
 
@@ -15,6 +138,11 @@ authoritative private backlog currently recomputes to **223 checked / 57
 unchecked / 280 total (79.6%)**. This number must be recomputed from the live
 backlog after every substantial batch; no goal-file edit, deployment, browser
 click, configuration change, or test run closes a checkbox by itself.
+
+The dated entries below preserve the prior execution history. Where an older
+entry describes automatic recurring billing as a required V1 artifact, read it
+as historical evidence and apply the 2026-10-11 prepaid/manual-renewal
+amendment above to the current queue. Do not rewrite historical evidence.
 
 ### 2026-10-10 · official recurring-card fixture boundary
 

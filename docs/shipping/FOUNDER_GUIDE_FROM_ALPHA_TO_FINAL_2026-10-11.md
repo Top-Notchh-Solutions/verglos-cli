@@ -2,10 +2,13 @@
 
 **Private shipping guide — 11 October 2026**
 
-**Contract update:** The final V1 product direction is now superseded by
-`FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md`: Hunt and Attest remain required
+**Contract update:** The final V1 product direction is defined by
+`FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md`. Hunt and Attest remain required
 capabilities, Team/Studio/Enterprise SCM testing uses the TopNotchh
 organization and public forks, and paid plans use prepaid manual renewal.
+This guide remains the comprehensive founder explanation; its older
+recurring-card discussion is historical context and does not create a new
+blocking direction for V1.
 
 This is the plain-language explanation of where Verglos has reached and what
 is still needed before calling the new product a final V1 release.
@@ -58,17 +61,34 @@ gates are cleared; do not silently treat `2.0.0-alpha.1` as the final V1.
 
 | Requirement | Product area | What it proves |
 | --- | --- | --- |
-| Razorpay recurring-card Test Mode fixture or renewal/replay control | `verglos-web` Preview/Test Mode payment and webhook flow | A real provider-generated subscription lifecycle can reconcile into Verglos billing and entitlements |
+| Razorpay prepaid-card Test Mode lifecycle | `verglos-web` Preview/Test Mode payment and webhook flow | A canonical prepaid payment, signed delivery, ledger, refund, expiry, manual renewal, and entitlement lifecycle reconciles correctly |
 | Organization-policy signer/trust root and authorized test repository | Web organization/SCM integration plus CLI policy fetch/cache | Team/Studio/Enterprise policy can be trusted and bound to the correct organization and repository |
 | Independent AppSec review | Private CLI Hunt sandbox | A person who did not build Hunt independently checked its isolation and residual risks |
 | Legal/company approval | Private shipping and release records | Verglos is allowed to use, modify, and redistribute the listed third-party content and notices |
 
 These are different gates. Completing one does not automatically complete the
-others.
+others. The gates are evaluated through the existing backlog and execution
+ledger; this guide and the product-contract amendment do not replace or
+reorder backlog checkboxes.
 
 ---
 
-## 1. Razorpay: what is missing and what to do
+## 1. Razorpay: prepaid card billing and manual renewal
+
+### Active V1 decision
+
+Final V1 uses Cards-only, one-time prepaid fixed-term payment. A customer
+renews by starting a new payment; automatic recurring-card renewal is not a
+V1 promise. Therefore a provider recurring-card fixture is **not** a blanket
+release blocker for this V1 contract. The older recurring-card investigation
+below is retained as historical evidence and may remain relevant to a future
+recurring-billing version.
+
+For the active V1 payment rows, the required proof is the canonical prepaid
+order/capture, signed webhook delivery, ledger projection, refund, expiry,
+manual renewal, idempotency/replay, and entitlement reconciliation in the
+isolated Preview/Test Mode path. Production remains controlled and must not be
+used to manufacture missing evidence.
 
 ### This belongs to
 
@@ -92,44 +112,41 @@ The tracker records that these pieces are available:
   and entitlement behavior.
 
 Some Test Mode payment and refund cases have been exercised. This is useful
-evidence, but it is not the complete recurring lifecycle.
+evidence, but it is not yet the complete prepaid lifecycle matrix.
 
-### What is still missing
+### Historical provider boundary and current work
 
-The official Razorpay card fixture reached the recurring-card/mandate step but
-reported that the card was not eligible for recurring payments. The dashboard
-also did not expose a supported “charge now”, renewal, or replay control for
-the needed cases.
+The official Razorpay recurring-card probe reached the recurring-card/mandate
+step but the Test Mode card was not eligible, and the provider dashboard did
+not expose a supported immediate renewal/replay control. That result remains
+recorded for future recurring billing; it is not converted into a fake
+success and it does not block the prepaid V1 contract by itself.
 
-The missing proof is therefore:
-
-1. A provider-supported recurring-card Test Mode fixture, **or**
-2. An official provider-supported renewal/retry/replay control.
-
-After that control exists, the isolated Preview run must show the provider
-event, the matching Verglos payment/ledger record, and the correct entitlement
-state for success, failure/expiry, retry/timeout, refund, replay/order, and
-duplicate delivery cases.
+The active implementation/evidence work is the prepaid lifecycle matrix. If a
+specific backlog row still names recurring behavior, update that row’s
+acceptance wording through a dated private decision/ledger entry before
+checking it. Do not silently check it, silently delete it, or let the wording
+change skip other rows.
 
 ### Your steps
 
-1. Ask the Razorpay account owner or Razorpay support for the official Test
-   Mode recurring-card fixture or official renewal/replay procedure.
-2. Ask specifically whether the account has a card that is eligible for
-   recurring mandates in Test Mode, or whether Razorpay can enable the official
-   simulator/control for this account.
-3. Keep the activity in Razorpay **Test Mode** and the isolated Preview
-   environment. Do not use Production, real money, guessed OTPs, fake provider
-   events, direct database edits, or `$1` pricing.
-4. Do not send the secret key or database URL in chat. A status such as
-   “Razorpay supplied the recurring fixture” is enough.
-5. Once the official fixture/control is available, the authorized runner can
-   execute the remaining isolated matrix and record the evidence.
+1. Keep the hosted work in Razorpay **Test Mode** and the isolated Preview
+   environment. Do not use real money, guessed OTPs, fake provider events,
+   direct database edits, or `$1` pricing.
+2. Run the canonical prepaid card order/capture and signed webhook flow.
+3. Run the supported refund, expiry, manual-renewal, duplicate/replay, and
+   out-of-order/error cases using real provider delivery where required and
+   isolated Docker/PostgreSQL fixtures for code-side behavior.
+4. Reconcile payment, ledger, entitlement, user, organization, amount,
+   currency, catalog version, and term. Record failures and limitations.
+5. Do not send the secret key or database URL in chat. A private evidence path
+   and a status summary are enough.
 
 ### What this does not mean
 
 - It does not require changing the Production database URL.
-- It does not require enabling recurring billing in Production first.
+- It does not require enabling recurring billing in Production first; recurring
+  billing is not promised by the active V1 contract.
 - It does not require supporting every payment method if the release decision
   is Cards-only.
 - It does not permit marking the backlog item complete merely because a card,
@@ -320,8 +337,8 @@ treated as complete until the authorized reviewer fills it in.
 
 The release sequence is:
 
-1. Finish the provider-supported Razorpay recurring lifecycle evidence, if Web
-   billing is part of final V1.
+1. Finish the active prepaid Razorpay lifecycle evidence and the corresponding
+   backlog rows.
 2. Finish the organization signer/repository evidence, or formally record that
    Web SCM is deferred from final V1.
 3. Obtain the independent Hunt review.

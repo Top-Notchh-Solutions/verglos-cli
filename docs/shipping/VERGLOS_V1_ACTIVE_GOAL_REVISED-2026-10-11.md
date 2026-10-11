@@ -1,6 +1,17 @@
-# Verglos V1 Active Goal — Final Product, Whole Backlog, and Release
+# Verglos V1 Active Goal Index — Final Product Contract and Whole-Backlog Shipping
 
-Use this file as the replacement active goal for the next shipping run.
+> **Canonical goal:** use
+> `docs/shipping/VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-07.md`.
+>
+> The 10/07 file is the complete active goal (2,519 lines) and now contains
+> the 10/11 product-contract amendment at its top. This file is retained as a
+> readable contract/index summary only; it must not replace the comprehensive
+> goal or be treated as a second queue.
+
+The contract synchronization below is already incorporated into the canonical
+goal. It exists here as a quick reference so the founder can see what changed
+without losing the full backlog, execution ledger, evidence, production, and
+release workflow.
 
 ## Objective
 
@@ -27,7 +38,8 @@ docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md
 The goal is complete only when every required backlog checkbox is genuinely
 satisfied, the final acceptance/POC corpus is recorded, and the protected
 release is ready. A document edit, deployment, browser click, or local test
-does not check a box by itself.
+does not check a box by itself. The existing backlog remains the queue; the
+contract change does not reorder it or authorize skipping an unchecked row.
 
 ## Starting checkpoint
 
