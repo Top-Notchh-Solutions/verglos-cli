@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · DIST-001 public package boundary recheck
+
+- **Mapped ID:** `DIST-001`.
+- **Implementation:** CLI `0ef96caa` public packer and six package manifests
+  were rebuilt and audited.
+- **Verification:** Source audit passed; six archives packed; packed-manifest
+  audit passed; package contracts **8/8**; clean consumer installed/imported
+  all six and executed the CLI without an external-engine cache.
+- **Acceptance:** The row remains unchecked because LOCAL/HUNT/RECORD and
+  final legal/trusted-publication/release dependencies remain open.
+- **Next:** `QUAL-WEB-006` after this boundary is parked.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-package-boundary-current-2026-10-11.md`.
+
 ## 2026-10-11 · ACCEPT-002/003 current shipping-worktree substrate recheck
 
 - **Mapped IDs:** `ACCEPT-002`, `ACCEPT-003`.

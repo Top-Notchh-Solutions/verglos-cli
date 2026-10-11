@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · DIST-001 public package boundary recheck
+
+- **Verification:** CLI `0ef96caa` Turbo build **6/6**; source package audit
+  passed; exactly six `2.0.0-alpha.1` archives packed; packed-manifest audit
+  passed; package contract tests **8/8**; clean consumer installed/imported
+  all six, ran the CLI, and confirmed no implicit external-engine cache.
+- **Environment:** The shared pnpm/npm caches were not usable for this run;
+  disposable task-scoped stores were used. No global cache ownership changed.
+- **Disposition:** Keep `DIST-001` unchecked. LOCAL/HUNT/RECORD dependencies
+  and final legal/trusted-publication/release qualification remain open.
+- **Boundary:** No npm publication, registry write, Production/provider/
+  database/entitlement/customer write, or release promotion occurred.
+- **Next:** `QUAL-WEB-006` is the next dependency-ready assessment after this
+  package boundary is parked.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-package-boundary-current-2026-10-11.md`.
+
 ## 2026-10-11 · ACCEPT-002/003 current shipping-worktree substrate recheck
 
 - **Run:** The private 12-story verifier ran with

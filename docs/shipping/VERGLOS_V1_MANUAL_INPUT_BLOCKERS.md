@@ -1,5 +1,20 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · DIST-001 package boundary qualified; dependencies remain
+
+The public six-package surface is code-qualified at CLI `0ef96caa`: build 6/6,
+source audit passed, six archives packed, packed-manifest audit passed,
+package contracts 8/8, and clean-consumer install/import/CLI execution passed.
+
+The checkbox remains open because LOCAL/HUNT/RECORD product surfaces and final
+legal/trusted-publication/release evidence are still dependencies. Owner:
+CLI/release qualification. Review: 2026-10-11 or when those artifacts are
+available. Next dependency-ready assessment: `QUAL-WEB-006`. Score remains
+**228/52/280 (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/dist-001-package-boundary-current-2026-10-11.md`.
+
 ## 2026-10-11 · ACCEPT-002/003 substrate is green; external acceptance remains
 
 The 12-story verifier passed against current shipping sources: CLI 274/274,

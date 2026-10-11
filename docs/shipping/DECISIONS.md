@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep DIST-001 open after package-boundary qualification
+
+- **Decision:** Record the six-package public boundary as qualified progress;
+  do not check `DIST-001`.
+- **Evidence:** CLI `0ef96caa`; build 6/6; source and packed audits passed;
+  package contracts 8/8; clean consumer passed with all six archives and no
+  implicit engine cache.
+- **Reason:** LOCAL/HUNT/RECORD dependencies and final legal,
+  trusted-publishing, and release qualification remain incomplete.
+- **Next:** `QUAL-WEB-006` is the next dependency-ready assessment.
+- **Boundary:** No npm publication, registry write, Production/provider/
+  database/entitlement/customer write, or release promotion.
+- **Score:** 228/52/280 (81.4%).
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-package-boundary-current-2026-10-11.md`.
+
 ## 2026-10-11 · Keep ACCEPT-002/003 open after current substrate recheck
 
 - **Decision:** Record the current shipping-worktree verifier as substrate

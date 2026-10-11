@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · DIST-001 package boundary qualified; dependent release gates remain
+
+The six-package public surface at CLI `0ef96caa` rebuilt successfully. The
+source package audit passed, exactly six `2.0.0-alpha.1` archives packed, the
+packed-manifest audit passed, package contract tests passed **8/8**, and the
+clean consumer installed/imported all six packages, ran the CLI, and confirmed
+no implicit external-engine installation. `git diff --check` passed.
+
+This is package qualification progress, not a checkbox acceptance:
+`DIST-001` still depends on open LOCAL/HUNT/RECORD surfaces and final legal,
+trusted-release, and publication qualification. Score remains **228 checked /
+52 unchecked / 280 total (81.4%)**; no npm or Production state changed.
+
+Evidence:
+`docs/shipping/evidence/dist-001-package-boundary-current-2026-10-11.md`.
+
 ## 2026-10-11 · ACCEPT-002/003 current shipping-worktree substrate recheck
 
 The private 12-story acceptance verifier now ran against the repaired CLI

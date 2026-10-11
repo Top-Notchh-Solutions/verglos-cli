@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · DIST-001 public package boundary recheck
+
+The current CLI shipping head `0ef96caa` rebuilt all six public packages. The
+source audit passed, six `2.0.0-alpha.1` archives were created, packed
+manifests passed, package contract tests passed **8/8**, and a clean consumer
+installed/imported all six and ran the CLI with no implicit engine cache.
+`DIST-001` remains unchecked because its LOCAL/HUNT/RECORD dependencies and
+final legal/trusted-publication/release qualification are not complete.
+
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/dist-001-package-boundary-current-2026-10-11.md`.
+
 ## 2026-10-11 · ACCEPT-002/003 current shipping-worktree substrate recheck
 
 The private 12-story verifier passed against CLI `0ef96caa` and Web `d4dd7f9`:

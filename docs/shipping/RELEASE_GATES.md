@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · DIST-001 package boundary qualification
+
+The six public archives rebuilt, passed source and packed-manifest audits,
+passed package contract tests 8/8, and passed clean-consumer install/import/
+CLI execution with no implicit engine cache. This does not pass the release
+gate: LOCAL/HUNT/RECORD dependencies and legal, trusted-publishing, and final
+release evidence remain open. Score remains 228/52/280 (81.4%).
+
+Evidence:
+`docs/shipping/evidence/dist-001-package-boundary-current-2026-10-11.md`.
+
 ## 2026-10-11 · ACCEPT-002/003 current substrate recheck
 
 The private acceptance verifier passed CLI 274/274, Web 923/953 with 30
