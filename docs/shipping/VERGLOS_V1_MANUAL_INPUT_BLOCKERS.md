@@ -1,5 +1,22 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · PLAN-WEB-015 cleared by read-only Production reconciliation
+
+Production now matches the Final V1 Cards-only contract: the environment
+method catalog is exactly `card`, the live checkout returned HTTP 200 with
+Cards only, and no Test Mode or non-card method marker appeared. Checkout was
+not submitted and no Production state changed. The provider lifecycle is
+already accepted in isolated Preview under PLAN-WEB-014.
+
+`PLAN-WEB-015` is checked. Score is **226/54/280 (80.7%)**. The next
+dependency-ready queue item remains `PLAN-WEB-012`; its remaining provider
+subscription compatibility evidence is separate from the final prepaid offer.
+HUNT-008 remains externally blocked on trusted/licensed recipe provenance and
+independent review, and Gate 5 remains open.
+
+Evidence:
+`docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-CLI-003 cleared; next queue is Hunt provenance
 
 The isolated Preview paid modified-client matrix is complete and

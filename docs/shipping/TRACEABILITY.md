@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · PLAN-WEB-015 Production Cards-only acceptance
+
+- **Mapped ID:** `PLAN-WEB-015`.
+- **Verification:** Read-only Production environment configuration returned
+  exactly `card`; live `/checkout` returned HTTP 200 with Cards only and no
+  Test Mode or non-card method marker.
+- **Acceptance:** The Production contract/reconciliation item is checked at
+  **226 checked / 54 unchecked / 280 total (80.7%)**. No checkout or state
+  mutation was attempted; provider lifecycle remains Preview-qualified by
+  PLAN-WEB-014.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-CLI-003 isolated paid modified-client acceptance
 
 - **Mapped ID:** `PLAN-CLI-003`.

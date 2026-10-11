@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · PLAN-WEB-015 Production Cards-only contract accepted
+
+The read-only Production environment catalog is exactly `card`; the live
+`/checkout` page returned HTTP 200 with Cards only and no Test Mode or non-card
+method marker. No checkout submission or Production state write occurred.
+The provider lifecycle remains qualified in isolated Preview by PLAN-WEB-014.
+This closes the Production contract/reconciliation backlog item only; it does
+not pass the independent Hunt, Gate 5 SCM, legal, protected release/rollback,
+or final acceptance gates.
+
+Score is **226/54/280 (80.7%)**. Evidence:
+`docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-CLI-003 modified-client boundary accepted
 
 The isolated Preview paid modified-client matrix is accepted: forged plan,

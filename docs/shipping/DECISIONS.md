@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Accept PLAN-WEB-015 Production Cards-only contract
+
+- **Decision:** Check `PLAN-WEB-015` after the read-only Production method
+  catalog and live checkout display matched the Final V1 prepaid Cards-only
+  contract.
+- **Evidence:** Production returned HTTP 200; the configured method set was
+  exactly `card`; the page showed Cards and no Test Mode or non-card method.
+- **Boundary:** No checkout submission or Production payment, database,
+  migration, entitlement, account, organization, or customer-data write.
+  Provider lifecycle evidence is isolated Preview evidence under
+  `PLAN-WEB-014`.
+- **Score:** **226/54/280 (80.7%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · Accept PLAN-CLI-003 after isolated paid matrix
 
 - **Decision:** Check `PLAN-CLI-003` after the isolated Preview authenticated

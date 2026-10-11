@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PLAN-WEB-015 accepted · Production Cards-only contract
+
+- **Production read-only check:** The pulled Production method catalog was
+  exactly `card`; `https://verglos.com/checkout` returned HTTP 200 and the
+  page contained Cards only, with no Test Mode or non-card marker.
+- **Safety:** Checkout was not submitted. No Production payment, database,
+  migration, entitlement, account, organization, or customer-data write
+  occurred.
+- **Decision:** Check PLAN-WEB-015. Provider lifecycle evidence remains the
+  isolated Preview PLAN-WEB-014 record; no Production billing activation is
+  implied.
+- **Score:** **226 checked / 54 unchecked / 280 total (80.7%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-CLI-003 accepted · isolated paid modified-client matrix
 
 - **Hosted qualification:** Isolated Preview used the active Pro fixture and

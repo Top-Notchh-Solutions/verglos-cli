@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-WEB-015 accepted · Production Cards-only contract
+
+Read-only Production verification reported the server-owned method catalog as
+exactly `card`; `/checkout` returned HTTP 200 with Cards only, no Test Mode, and
+no non-card method marker. Checkout was not submitted and no Production state
+changed. The complete provider lifecycle remains the isolated Preview evidence
+accepted under PLAN-WEB-014.
+
+`PLAN-WEB-015` is checked. Score is **226 checked / 54 unchecked / 280 total
+(80.7%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-CLI-003 accepted · paid modified-client boundary
 
 The isolated Preview qualification now includes an active Pro fixture. The

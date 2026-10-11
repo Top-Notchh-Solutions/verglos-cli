@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-PLAN-WEB-015 Production contract reduced
+
+- **Risk:** Production billing could expose a method or Test Mode state that
+  conflicts with the Final V1 prepaid Cards-only contract.
+- **Verification:** Read-only environment and live-page checks found exactly
+  `card`, HTTP 200, Cards only, no Test Mode, and no non-card method marker.
+- **Status:** `PLAN-WEB-015` accepted for the no-write Production contract;
+  provider lifecycle remains isolated Preview evidence under PLAN-WEB-014.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · R-PLAN-CLI-003 modified-client boundary reduced
 
 - **Risk:** A modified client could try to select a higher plan, cross tenant
