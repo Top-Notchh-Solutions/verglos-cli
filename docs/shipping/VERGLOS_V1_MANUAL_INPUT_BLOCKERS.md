@@ -1,5 +1,22 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · full refund processed; remaining lifecycle qualification
+
+The isolated Preview Test Mode full refund is now processed. The signed
+`refund.processed` webhook returned HTTP **200**, and the isolated database
+projects the matching payment to `refunded` with the full refund watermark.
+The existing paid-time license remains active until its recorded expiry under
+the current refund contract. This supersedes the pending-refund entry below.
+
+The manual-input blocker is no longer the refund transition for this payment.
+PLAN-WEB-014 and Gate 4 still require provider-backed failure/recovery and
+expiry evidence, a second customer-initiated manual-renewal order, and
+replay/out-of-order, timeout/retry, and exactly-once reconciliation. Score
+remains **223/57/280 (79.6%)**; no checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-cards-refund-processed-2026-10-11.md`.
+
 ## 2026-10-11 · success-path capture/webhook is proven; remaining lifecycle open
 
 The isolated Preview Cards-only run completed through an official Razorpay Test

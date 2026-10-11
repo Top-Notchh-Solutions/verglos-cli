@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PLAN-WEB-014 full-refund provider delivery completed
+
+- **Provider:** The isolated Razorpay Test Mode full refund moved from
+  processing to `processed` on read-only recheck.
+- **Hosted delivery:** The current Preview received the signed
+  `refund.processed` webhook and returned HTTP **200**.
+- **Database reconciliation:** The matching isolated `billing_payments` row is
+  `refunded` with the complete refund watermark; its existing paid-time license
+  remains active through the previously granted expiry, with no new grant.
+- **Disposition:** This supersedes the pending-refund boundary and proves one
+  real full-refund slice. Keep PLAN-WEB-014 and Gate 4 open for failure/
+  recovery, expiry, manual renewal, replay/out-of-order, timeout/retry, and
+  exactly-once matrix evidence.
+- **Safety:** No Production payment, database, migration, entitlement,
+  account, or customer-data write; no synthetic event or direct row edit.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-cards-refund-processed-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 Preview capture and signed webhook qualification
 
 - **Implementation/provider:** The isolated Preview webhook target was enabled

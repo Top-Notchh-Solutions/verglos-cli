@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-WEB-014 Preview full-refund webhook reconciliation
+
+The previously pending isolated Preview Test Mode refund is now provider-
+reported as **processed**. The current Preview received the signed
+`refund.processed` webhook and returned HTTP **200**; the isolated database
+projects the payment to `refunded` with the full refund watermark. The linked
+paid-time license remains active through its existing expiry under the refund
+contract. No Production state changed and no direct database edit or synthetic
+event was used.
+
+This is one additional real lifecycle slice, not full item completion.
+Failure/recovery, expiry, manual renewal, replay/out-of-order, timeout/retry,
+and exactly-once matrix evidence remain open. Score remains **223 checked / 57
+unchecked / 280 total (79.6%)**; no checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-cards-refund-processed-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 Preview capture and signed webhook qualification
 
 The isolated Preview target was enabled before the official Razorpay Test Mode

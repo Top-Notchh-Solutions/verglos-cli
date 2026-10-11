@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · PLAN-WEB-014 Preview full-refund webhook reconciliation
+
+The full Test Mode refund left processing and is now provider-reported as
+`processed`. The current isolated Preview received the signed
+`refund.processed` delivery and returned HTTP **200**. The isolated database
+projects the matching payment to `refunded` with the complete refund watermark,
+and the linked paid-time license remains active through its existing expiry as
+required by the current refund contract. No direct database edit or synthetic
+provider event was used.
+
+This supersedes the earlier pending-refund observation and proves one real
+provider-generated full-refund path. `PLAN-WEB-014` and Gate 4 remain open for
+failure/recovery, expiry, a second manual-renewal order, replay/out-of-order,
+timeout/retry, and complete exactly-once reconciliation. Score remains **223
+checked / 57 unchecked / 280 total (79.6%)**; no checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-cards-refund-processed-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 Preview capture and signed webhook qualification
 
 With the isolated Preview webhook target enabled before payment, the official

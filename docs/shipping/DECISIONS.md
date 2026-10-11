@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## Full refund is now reconciled; lifecycle remains open · 2026-10-11
+
+- **Observation:** The isolated Razorpay Test Mode full refund is now
+  provider-reported as `processed`; the current Preview accepted the signed
+  `refund.processed` webhook with HTTP **200**; and the isolated payment row is
+  `refunded` with the full refund watermark.
+- **Contract result:** The linked license remains active through its existing
+  paid-time expiry. The refund did not create a new grant or silently remove
+  already granted paid time.
+- **Decision:** Supersede the pending-refund observation, but keep
+  PLAN-WEB-014, PLAN-WEB-015, and Gate 4 open for failure/recovery, expiry,
+  manual renewal, replay/out-of-order, timeout/retry, and exactly-once proof.
+- **Boundary:** Test Mode and isolated Preview only; no direct database edit,
+  fake provider event, Production payment, or Production state change.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-cards-refund-processed-2026-10-11.md`.
+
 ## Preview capture and signed webhook are proven; full lifecycle remains open · 2026-10-11
 
 - **Observation:** After enabling the isolated Preview target, the official
