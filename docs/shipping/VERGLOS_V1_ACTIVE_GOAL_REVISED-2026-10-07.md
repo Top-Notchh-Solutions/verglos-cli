@@ -2578,6 +2578,25 @@ This amendment supersedes stale historical statements in this file that name
 `PLAN-CLI-001`, `PLAN-WEB-014`, or the 219/61 score as the current active
 checkpoint. It does not close Gate 4 or any backlog item by itself.
 
+### 2026-10-11 TEAM-CLI-001 code revalidation checkpoint
+
+The authoritative CLI shipping worktree at `2b05390f` revalidated
+`TEAM-CLI-001`: shared organization-policy tests passed **3/3**, CLI
+cache/fetch tests passed **4/4**, the full CLI package test process exited **0**,
+typechecks/builds passed, and `git diff --check` passed. The existing client
+implementation covers signed scope/digest verification, bounded HTTPS fetch,
+atomic private cache, offline expiry, and command wiring.
+
+The item remains unchecked. Hosted signer/trust-root activation, an authorized
+mapped paid/non-production organization, GitHub repository binding, a
+published canonical policy row, and live signed fetch/cache/offline/
+cross-tenant evidence are still required. No Production or application state
+changed. The next dependency-ready item is `STUDIO-CLI-001`; the score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/team-cli-001-code-revalidation-2026-10-11.md`.
+
 ### 2026-10-10 production migration and exact-head rollout checkpoint
 
 The Production database was first snapshotted to the one-day Neon child branch

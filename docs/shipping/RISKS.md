@@ -1,5 +1,23 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-TEAM-CLI-001 hosted policy authority remains absent
+
+- **Risk:** The CLI can verify and cache a policy safely, but the hosted
+  signer/trust root, mapped paid tenant, GitHub repository binding, canonical
+  policy row, and live signed response are not activated.
+- **Impact:** Team/Studio/Enterprise organization-policy acceptance and
+  downstream SCM checks cannot be claimed.
+- **Owner:** Verglos release owner / hosted organization-policy operator.
+- **Safe next action:** Provision the authorized non-production tenant and
+  repository binding through the application/provider path, publish the
+  canonical policy, activate the approved signer, then capture the bounded
+  signed-fetch/cache/offline/cross-tenant evidence. Do not create rows by
+  direct database edit or use the entitlement key as a policy signer.
+- **Status:** Code-side revalidated; hosted gate open. Next dependency-ready
+  assessment is `STUDIO-CLI-001`.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-code-revalidation-2026-10-11.md`.
+
 ## 2026-10-10 · R-PLAN-WEB-014 webhook ingress partially mitigated
 
 - **Risk:** Vercel Deployment Protection previously blocked Razorpay before

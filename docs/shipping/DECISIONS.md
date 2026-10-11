@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep TEAM-CLI-001 open after code revalidation
+
+- **Decision:** Accept the current CLI verification as implementation evidence
+  only; do not check `TEAM-CLI-001`.
+- **Reason:** The live acceptance contract needs a hosted organization-policy
+  signer/trust root, mapped paid/non-production tenant, authorized GitHub
+  repository binding, canonical policy row, and signed fetch/cache/offline/
+  cross-tenant evidence. Local tests cannot create those facts.
+- **Boundary:** No Production, database, provider, entitlement, account,
+  repository, or customer-data write occurred.
+- **Next:** Assess `STUDIO-CLI-001` as the next dependency-ready item.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-code-revalidation-2026-10-11.md`.
+
 ## 2026-10-11 · Final V1 product contract
 
 - **Decision:** Final V1 remains one CLI across Free, Pro, Team, Studio, and

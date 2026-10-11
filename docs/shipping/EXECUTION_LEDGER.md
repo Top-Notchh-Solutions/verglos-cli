@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · TEAM-CLI-001 code revalidation and hosted boundary
+
+- **Implementation:** CLI worktree commit `2b05390f` revalidated signed
+  organization-policy verification, exact organization/repository binding,
+  bounded HTTPS fetch, atomic mode-0600 cache, offline expiry, and
+  `verglos policy organization fetch` wiring.
+- **Verification:** Shared policy **3/3**, CLI cache/fetch **4/4**, full CLI
+  package test process exit **0**, shared/CLI typechecks and builds passed,
+  and `git diff --check` passed.
+- **Disposition:** Keep `TEAM-CLI-001` unchecked. Hosted signer/trust-root,
+  mapped paid tenant, authorized GitHub binding, canonical policy row, and
+  live signed fetch/cache/offline/cross-tenant evidence remain missing. No
+  Production or application state changed.
+- **Next:** `STUDIO-CLI-001` is the next dependency-ready assessment.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-code-revalidation-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · PLAN-WEB-012 prepaid card-order implementation recheck
 
 - **Implementation:** Web commit `887249d` enforces exact Cards-only runtime

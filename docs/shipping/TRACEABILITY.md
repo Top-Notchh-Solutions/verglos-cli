@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · TEAM-CLI-001 code revalidation
+
+- **Mapped ID:** `TEAM-CLI-001`.
+- **Implementation:** CLI `2b05390f` provides signed policy verification,
+  exact organization/repository binding, bounded HTTPS fetch, atomic private
+  cache, offline expiry, and command wiring.
+- **Verification:** Shared policy **3/3**, CLI cache/fetch **4/4**, full CLI
+  test process exit **0**, typecheck/build/diff checks passed.
+- **Acceptance:** Hosted signer/trust-root activation, mapped tenant,
+  authorized GitHub binding, canonical policy row, and live signed fetch
+  evidence are absent; the checkbox remains open.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-code-revalidation-2026-10-11.md`.
+
 ## Current contract pointer · 2026-10-11
 
 Trace current product claims and implementation work against

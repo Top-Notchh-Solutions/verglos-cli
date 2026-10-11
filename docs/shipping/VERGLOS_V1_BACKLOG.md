@@ -46,6 +46,25 @@ unchecked / 280 total (79.6%)**.
 
 Evidence: `docs/shipping/evidence/plan-web-012-prepaid-card-order-qualification-2026-10-11.md`.
 
+## 2026-10-11 · TEAM-CLI-001 code revalidation and hosted boundary
+
+The authoritative CLI shipping worktree at `2b05390f` revalidated the signed
+organization-policy schema, exact tenant/repository binding, bounded HTTPS
+fetch, atomic mode-0600 cache, offline expiry behavior, and command wiring.
+Shared organization-policy tests passed **3/3**, CLI cache/fetch tests passed
+**4/4**, the full CLI package test process exited **0**, typechecks/builds
+passed, and `git diff --check` passed.
+
+`TEAM-CLI-001` remains unchecked. Hosted acceptance still requires an active
+organization-policy signer/trust root, a mapped paid/non-production tenant,
+an authorized GitHub installation and repository binding, a published policy
+row, and a live signed fetch/cache/offline/cross-tenant evidence run. No
+Production or application state was changed. The next dependency-ready item
+after this blocked record is `STUDIO-CLI-001`. Score remains **223 checked /
+57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/team-cli-001-code-revalidation-2026-10-11.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 official recurring-card fixture boundary
 
 The isolated Preview route created a canonical Pro monthly Razorpay Test Mode

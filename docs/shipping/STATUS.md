@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · TEAM-CLI-001 code revalidation
+
+The authoritative CLI shipping worktree at `2b05390f` revalidated the signed
+organization-policy verifier, exact tenant/repository scope, bounded HTTPS
+fetch, mode-0600 atomic cache, offline expiry, and command wiring. Shared
+policy tests passed **3/3**, CLI cache/fetch tests **4/4**, the full CLI test
+process exited **0**, typechecks/builds passed, and `git diff --check` passed.
+
+The item remains unchecked because hosted signer/trust-root activation, a
+mapped paid/non-production organization, authorized GitHub repository binding,
+a published policy row, and live signed fetch/cache/offline/cross-tenant
+evidence are still missing. No Production or application state changed. The
+next dependency-ready item is `STUDIO-CLI-001`. Score remains **223 checked /
+57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/team-cli-001-code-revalidation-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-012 prepaid card-order implementation recheck
 
 Web commit `887249d` now enforces the Final V1 commercial contract: Cards-only
