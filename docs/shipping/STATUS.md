@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · TEAM-CLI-001 code qualified; hosted signer/SCM gate remains
+
+The shipping CLI organization-policy implementation passed its focused
+**8/8** tests and the CLI dependency-graph Turbo typecheck/build **12/12**.
+The checkbox remains open because production signer/trust-root activation,
+active company GitHub installation/repository binding, live hosted policy
+fetch, and provider evidence are external acceptance artifacts. No credentials
+or Production state were changed.
+
+Evidence:
+docs/shipping/evidence/team-cli-001-code-qualification-block-2026-10-11.md.
+
 ## 2026-10-11 · PRO-008 accepted · Final V1 billing view
 
 The Pro organization surfaces now match the Final V1 billing contract:

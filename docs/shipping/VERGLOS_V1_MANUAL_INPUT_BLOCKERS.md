@@ -1,5 +1,23 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · TEAM-CLI-001 hosted signer/SCM block
+
+TEAM-CLI-001's repository-owned code is qualified at focused tests 8/8 and
+Turbo typecheck/build 12/12, but its complete acceptance is externally
+blocked. The missing artifacts are the activated Verglos organization-policy
+signing root, one active TopNotchh GitHub installation/repository binding, and
+the live signed hosted fetch/cache/provider evidence.
+
+Owner: release owner plus TopNotchh organization administrator. Review:
+2026-10-11 or when artifacts are available. Next action: install/bind the
+authorized company test repository, publish a non-sensitive policy row, and
+run the live fetch plus offline-cache recheck. Release decision: keep the
+checkbox and all dependent SCM checkboxes open; do not treat unit tests as
+provider evidence.
+
+Evidence:
+docs/shipping/evidence/team-cli-001-code-qualification-block-2026-10-11.md.
+
 ## 2026-10-11 · PRO-008 cleared by Final V1 billing contract
 
 The Pro member and billing view is no longer blocked by the retired

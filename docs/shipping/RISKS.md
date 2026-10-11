@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-TEAM-CLI-001 hosted policy trust boundary
+
+- **Risk:** A locally passing policy verifier could be mistaken for an
+  activated Verglos organization policy trust root or live GitHub binding.
+- **Verification:** Shipping worktree tests pass 8/8 and the CLI dependency
+  graph typecheck/build passes 12/12; the implementation remains fail-closed
+  without a trusted active key, matching hosted policy row, or valid scope.
+- **Status:** Code-qualified but externally blocked. Keep TEAM-CLI-001 and
+  dependent SCM rows unchecked until the named signer, company installation,
+  repository binding, and hosted delivery evidence exist.
+- **Owner/next action:** Release owner plus TopNotchh organization
+  administrator; activate the bounded test trust root, bind the company test
+  repository, and run the live fetch/cache/provider matrix.
+- **Evidence:**
+  docs/shipping/evidence/team-cli-001-code-qualification-block-2026-10-11.md.
+
 ## 2026-10-11 · R-PRO-008 billing contract aligned
 
 - Risk: A Pro customer could mistake legacy subscription rows or provider

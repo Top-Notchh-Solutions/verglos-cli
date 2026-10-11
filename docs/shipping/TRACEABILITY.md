@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · TEAM-CLI-001 code qualification boundary
+
+- Mapped ID: TEAM-CLI-001.
+- Implementation: Shipping CLI organization-policy fetch/cache and command
+  are present and verify scope, digest, active signer, bounded transport,
+  atomic cache, and offline TTL behavior.
+- Verification: Focused tests 8/8 and CLI dependency-graph Turbo
+  typecheck/build 12/12 passed at worktree head 2b05390f.
+- Acceptance: Checkbox remains open pending signer-root activation, active
+  company GitHub installation/repository binding, live hosted fetch/cache
+  evidence, and provider cutover.
+- Evidence:
+  docs/shipping/evidence/team-cli-001-code-qualification-block-2026-10-11.md.
+
 ## 2026-10-11 · PRO-008 final V1 billing-view acceptance
 
 - Mapped ID: PRO-008.

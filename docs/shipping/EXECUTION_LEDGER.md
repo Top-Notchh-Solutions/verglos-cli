@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · TEAM-CLI-001 code qualification recorded; not accepted
+
+- **Verification:** Shipping CLI worktree head 2b05390f passed the
+  organization-policy/shared focused suite **8/8** and Turbo typecheck/build
+  **12/12**.
+- **Missing external artifacts:** production organization-policy signing-root
+  activation/rotation ownership, active TopNotchh GitHub installation and
+  repository binding, a live signed hosted fetch/cache recheck, and provider
+  evidence.
+- **Decision:** Keep TEAM-CLI-001 unchecked and do not check dependent SCM rows
+  from repository tests alone. Owner is release owner plus organization
+  administrator; review 2026-10-11 or when artifacts are supplied.
+- **Evidence:**
+  docs/shipping/evidence/team-cli-001-code-qualification-block-2026-10-11.md.
+
 ## 2026-10-11 · PRO-008 accepted · Final V1 billing view
 
 - Implementation: Web d4dd7f9 aligns the organization billing view with the
