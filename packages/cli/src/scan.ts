@@ -12,10 +12,12 @@ import ora from "ora";
 import { loadLastScore, saveLastScore } from "./credentials.js";
 import { has as hasCapability } from "./entitlement.js";
 import {
+  isExplicitTelemetryOptOut,
   isTelemetryDisabled,
-  printFirstRunDisclosureIfNeeded,
   sendScanEvent,
 } from "./telemetry.js";
+import { sendAccountScanSync } from "./account-scan-sync.js";
+import { executeInspectionSnapshot } from "./inspection-command.js";
 
 /**
  * Default detector set for a full `verglos scan`. Free-tier detectors
@@ -72,6 +74,10 @@ export interface ScanCommandOptions {
    * full-scan baseline, so printing a delta would lie.
    */
   focused?: boolean;
+  /** Opt-in canonical snapshot output; leaves the legacy scan flow untouched when absent. */
+  snapshotPath?: string;
+  inspectionProducers?: readonly string[];
+  importPaths?: readonly string[];
   /**
    * Whether to include the git-history detector. Defaults to true. Set
    * false for `verglos deps`, where combing commits for leaked secrets
@@ -84,6 +90,29 @@ export async function executeScan(
   options: ScanCommandOptions = {},
 ): Promise<number> {
   const projectRoot = resolve(options.cwd ?? process.cwd());
+
+  if (options.snapshotPath) {
+    let detectors = options.detectors;
+    if (!detectors) {
+      detectors = [...FREE_DETECTORS];
+      for (const { detector, capability } of PRO_DETECTOR_CAPABILITIES) {
+        if (await hasCapability(capability)) detectors.push(detector);
+      }
+    }
+    return executeInspectionSnapshot({
+      cwd: projectRoot,
+      snapshotPath: options.snapshotPath,
+      producers: options.inspectionProducers,
+      importPaths: options.importPaths,
+      configPath: options.configPath,
+      detectors,
+      minConfidence: options.all ? 0 : undefined,
+      strict: options.strict,
+      noProvenance: options.noProvenance,
+      json: options.json,
+      quiet: options.quiet,
+    });
+  }
 
   const spinner = options.quiet || options.json ? null : ora("Scanning project...").start();
 
@@ -179,19 +208,20 @@ export async function executeScan(
     );
   }
 
-  // Machine/non-interactive output must not silently attach project or paid
-  // identity telemetry; interactive scans retain the documented opt-out model.
-  if (!isTelemetryDisabled(options.noTelemetry, Boolean(options.quiet || options.json))) {
-    if (!options.quiet) await printFirstRunDisclosureIfNeeded();
+  if (!(await isTelemetryDisabled(options.noTelemetry, Boolean(options.quiet || options.json)))) {
     // Fire-and-forget. Awaited so the CLI stays around long enough to
     // send in short-lived processes (npx one-shots), but errors are
-    // swallowed inside sendScanEvent. 2s timeout inside.
+    // swallowed inside sendScanEvent.
     await sendScanEvent(result, {
       cliVersion: CLI_VERSION,
       durationMs,
-      detectorsRun: detectors,
-      verifySecrets: options.verifySecrets,
     });
+  }
+
+  // Paid account score history is a distinct product-sync purpose and route;
+  // it is not attached to, or enabled by, analytics consent.
+  if (!isExplicitTelemetryOptOut(options.noTelemetry)) {
+    await sendAccountScanSync(result, { projectRoot, cliVersion: CLI_VERSION });
   }
 
   return result.score.value;
@@ -242,9 +272,9 @@ export async function executeCi(options: {
     }
   }
 
-  // CI is non-interactive: telemetry is opt-in via an explicit standalone
-  // telemetry integration, never an implicit bearer-associated scan write.
-  if (!isTelemetryDisabled(options.noTelemetry, true)) {
+  // CI is non-interactive: analytics requires an explicit opt-in, while the
+  // hosted collection gate currently keeps transmission disabled.
+  if (!(await isTelemetryDisabled(options.noTelemetry, true))) {
     await sendScanEvent(result, {
       cliVersion: CLI_VERSION,
       durationMs,

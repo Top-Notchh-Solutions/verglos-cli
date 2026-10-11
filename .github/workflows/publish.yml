@@ -20,10 +20,23 @@ jobs:
   publish:
     name: Publish npm packages
     runs-on: ubuntu-latest
+    # The repository's `release` environment must require an explicit
+    # reviewer before any registry mutation.  Keeping this at the job level
+    # places the gate in front of both tag-triggered publication and the
+    # deliberate dist-tag promotion workflow.
+    environment:
+      name: release
+    concurrency:
+      group: verglos-release-publication
+      cancel-in-progress: false
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
+      - name: Verify immutable release tag
+        if: ${{ github.event_name == 'push' }}
+        run: node scripts/verify-release-tag.mjs "$GITHUB_REF_NAME"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v5
@@ -36,6 +49,11 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
           cache: pnpm
+
+      # Install all platform-specific lock entries for license evidence; this does not declare them as supported product targets.
+      - name: Configure cross-platform license evidence
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: node -e 'const fs=require("node:fs"); const p=JSON.parse(fs.readFileSync("package.json","utf8")); p.pnpm={...(p.pnpm||{}),supportedArchitectures:{os:["current","aix","android","darwin","freebsd","linux","netbsd","openbsd","openharmony","sunos","win32"],cpu:["current","arm","arm64","ia32","loong64","mips64el","ppc64","riscv64","s390x","x64"]}}; fs.writeFileSync("package.json",JSON.stringify(p,null,2)+"\n");'
 
       - name: Promote package versions to npm latest
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.promote_latest }}
@@ -78,7 +96,7 @@ jobs:
 
       - name: Test release artifact verifier
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
-        run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-third-party-notices.test.mjs
+        run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-third-party-notices.test.mjs scripts/license-inventory.test.mjs scripts/package-surface-audit.test.mjs
 
       - name: Audit package contents
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
@@ -103,18 +121,17 @@ jobs:
           done < <(find "$AUDIT_DIR" -type f -name '*.tgz' -print)
           node scripts/check-packed-manifests.mjs "$AUDIT_DIR"
 
-      - name: Prepare release checksums
+      - name: Prepare release packages and licensing evidence
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           set -euo pipefail
           RELEASE_DIR=$(mktemp -d)
           echo "RELEASE_DIR=$RELEASE_DIR" >> "$GITHUB_ENV"
+          node scripts/license-inventory.mjs --require-clear > "$RELEASE_DIR/dependency-license-inventory.json"
           node scripts/pack-public-packages.mjs "$RELEASE_DIR"
-          node scripts/license-inventory.mjs --check > "$RELEASE_DIR/dependency-license-inventory.json"
           node scripts/generate-third-party-notices.mjs > "$RELEASE_DIR/THIRD_PARTY_NOTICES"
           node scripts/generate-sbom.mjs > "$RELEASE_DIR/SBOM.cdx.json"
           node scripts/generate-spdx.mjs > "$RELEASE_DIR/SBOM.spdx.json"
-          (cd "$RELEASE_DIR" && sha256sum ./*.tgz > SHA256SUMS)
 
       - name: Verify clean consumer install
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
@@ -122,9 +139,16 @@ jobs:
           node --test scripts/verify-clean-consumer.test.mjs
           node scripts/verify-clean-consumer.mjs "$RELEASE_DIR" > "$RELEASE_DIR/clean-consumer-verification.txt"
 
+      - name: Prepare release checksums
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: |
+          set -euo pipefail
+          cd "$RELEASE_DIR"
+          sha256sum ./*.tgz ./THIRD_PARTY_NOTICES ./SBOM.cdx.json ./SBOM.spdx.json ./dependency-license-inventory.json ./clean-consumer-verification.txt > SHA256SUMS
+
       - name: Verify release checksums
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
-        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR"
+        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR" --require-six
 
       - name: Upload release artifacts
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}

@@ -1,7 +1,7 @@
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { homedir, hostname, userInfo } from "node:os";
-import { join } from "node:path";
-import { lstat, mkdir, readFile, writeFile, access } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { access, chmod, lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
 
 export interface Credentials {
   licenseKey?: string;
@@ -32,6 +32,26 @@ const credentialsFile = () => join(credentialsDir(), "credentials.json");
 const scoreCacheFile = () => join(credentialsDir(), "last-score.json");
 const MAX_UNLOCK_RESPONSE_BYTES = 256 * 1024;
 
+async function writePrivateJson(path: string, value: unknown): Promise<void> {
+  const bytes = Buffer.from(JSON.stringify(value, null, 2), "utf8");
+  await mkdir(dirname(path), { recursive: true, mode: 0o700 });
+  await chmod(dirname(path), 0o700);
+  const temporary = `${path}.${randomUUID()}.tmp`;
+  let handle: Awaited<ReturnType<typeof open>> | undefined;
+  try {
+    handle = await open(temporary, "wx", 0o600);
+    await handle.writeFile(bytes);
+    await handle.chmod(0o600);
+    await handle.sync();
+    await handle.close();
+    handle = undefined;
+    await rename(temporary, path);
+  } finally {
+    if (handle) await handle.close().catch(() => undefined);
+    await unlink(temporary).catch(() => undefined);
+  }
+}
+
 async function readBoundedJson(response: Response): Promise<unknown> {
   const length = Number(response.headers.get("content-length") ?? "0");
   if (Number.isFinite(length) && length > MAX_UNLOCK_RESPONSE_BYTES) return null;
@@ -51,6 +71,38 @@ async function readLocalJson(path: string, maxBytes: number): Promise<string> {
 export const DEFAULT_API_URL =
   process.env.VERGLOS_API_URL ?? "https://verglos.com";
 
+/**
+ * Resolve a configured API base to a bare HTTPS origin.
+ *
+ * Credentials are stored locally and may be edited by another process. Never
+ * concatenate an unvalidated value into a request URL: doing so could send a
+ * license bearer to a path, host, or URL carrying userinfo selected by that
+ * file. Custom/self-hosted API origins remain supported, but they must be an
+ * explicit HTTPS origin with no path, query, fragment, username, or password.
+ */
+export function getTrustedApiOrigin(value: unknown = DEFAULT_API_URL): string | null {
+  if (typeof value !== "string") return null;
+  const candidate = value.trim();
+  if (!candidate) return null;
+
+  try {
+    const parsed = new URL(candidate);
+    if (
+      parsed.protocol !== "https:" ||
+      parsed.username ||
+      parsed.password ||
+      parsed.pathname !== "/" ||
+      parsed.search ||
+      parsed.hash
+    ) {
+      return null;
+    }
+    return parsed.origin;
+  } catch {
+    return null;
+  }
+}
+
 export async function loadCredentials(): Promise<Credentials> {
   try {
     const raw = await readLocalJson(credentialsFile(), 1 * 1024 * 1024);
@@ -62,8 +114,7 @@ export async function loadCredentials(): Promise<Credentials> {
 
 export async function saveCredentials(creds: Credentials): Promise<void> {
   try {
-    await mkdir(credentialsDir(), { recursive: true });
-    await writeFile(credentialsFile(), JSON.stringify(creds, null, 2), "utf8");
+    await writePrivateJson(credentialsFile(), creds);
   } catch {
     // Non-fatal if home dir is not writable
   }
@@ -83,6 +134,8 @@ export async function refreshUnlockToken(
 ): Promise<boolean> {
   const creds = await loadCredentials();
   if (!creds.licenseKey) return false;
+  const apiOrigin = getTrustedApiOrigin(creds.apiUrl);
+  if (!apiOrigin) return false;
 
   const { detectProjectType, getGitRemote } = await import(
     "@verglos/scanner"
@@ -98,7 +151,7 @@ export async function refreshUnlockToken(
   });
 
   try {
-    const res = await fetch(`${creds.apiUrl}/api/license/unlock`, {
+    const res = await fetch(`${apiOrigin}/api/license/unlock`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -152,7 +205,7 @@ export async function saveLastScore(
       // fresh
     }
     cache[key] = { score, criticals };
-    await writeFile(scoreCacheFile(), JSON.stringify(cache, null, 2), "utf8");
+    await writePrivateJson(scoreCacheFile(), cache);
   } catch {
     // Non-fatal
   }

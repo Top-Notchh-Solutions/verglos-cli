@@ -30,7 +30,7 @@ test("login JSON network failure is one bounded machine-safe error", async () =>
     assert.equal(lines.length, 1);
     const payload = JSON.parse(lines[0]!);
     assert.equal(payload.status, "error");
-    assert.equal(payload.code, "LOGIN_START");
+    assert.equal(payload.code, "LOGIN_CONFIG");
     assert.equal(typeof payload.message, "string");
     assert.equal(payload.message.includes("device_code"), false);
   } finally {

@@ -39,7 +39,7 @@ Every row runs from a JS/TS project directory unless noted.
 | F15 | `npx verglos hook` | Installs `.git/hooks/pre-commit` | `cat .git/hooks/pre-commit` shows it |
 | F16 | `npx verglos precommit` | Fast secrets + criticals scan under 2s | Exit 0 if clean |
 | F17 | `npx verglos badge` | Prints Markdown badge line | `[![Verglos](...)]()` shape |
-| F18 | `npx verglos init -y` | Writes `.verglos.config.js` (or keeps existing), silent | File exists after |
+| F18 | `npx verglos init -y` | Writes versioned `.verglos.config.json` (or preserves existing JSON/legacy JavaScript config), silent | Versioned file exists unless a legacy config requires manual migration |
 | F19 | `npx verglos explain --list` | Lists every rule ID Verglos knows | Includes AGENT-001..005, API-001..005, AUTH-001..006 (new packs) |
 | F20 | `npx verglos explain AI-002` | Prints why + fix for AI-002 | Multi-line, human-readable |
 | F21 | `npx verglos mcp --print-config` | Prints MCP JSON snippet for Cursor/Claude/Windsurf/Cline | Copy-paste ready |

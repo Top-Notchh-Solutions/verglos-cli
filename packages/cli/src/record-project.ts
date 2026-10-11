@@ -1,5 +1,6 @@
 import { lstat, readFile } from "node:fs/promises";
 import { parseReleaseRecordManifestJson, projectVerifiedPublicRecord, readAndVerifyRecord } from "@verglos/shared";
+import { verifyRecordPackageArtifacts } from "./record-package.js";
 
 const MAX_MANIFEST_BYTES = 8 * 1024 * 1024;
 
@@ -12,7 +13,10 @@ export async function executeRecordProject(storeRoot: string, manifestPath: stri
     if (bytes.byteLength > MAX_MANIFEST_BYTES) throw new Error("record manifest exceeds the 8 MiB limit");
     const manifest = parseReleaseRecordManifestJson(bytes);
     const members = await readAndVerifyRecord(storeRoot, manifest);
-    const projection = projectVerifiedPublicRecord(manifest, members);
+    const packageArtifacts = await verifyRecordPackageArtifacts({ root: storeRoot, manifest, members });
+    const projection = projectVerifiedPublicRecord(manifest, members, {
+      ...(packageArtifacts.packaged ? { detachedSignaturePresent: Boolean(packageArtifacts.signaturePath || packageArtifacts.sigstoreIncluded) } : {}),
+    });
     if (json) console.log(JSON.stringify(projection));
     else if (!quiet) console.log(`${projection.decision} ${projection.manifestDigest} (${projection.signerStatus})`);
     return 0;

@@ -106,6 +106,15 @@ function configuredHome(): string {
   return process.env.HOME || process.env.USERPROFILE || homedir();
 }
 
+/** Keep developer-machine paths out of portable reports. */
+function displayPath(path: string): string {
+  const home = configuredHome();
+  if (path === home) return "~";
+  if (path.startsWith(`${home}/`)) return `~${path.slice(home.length)}`;
+  if (path.startsWith(`${home}\\`)) return `~${path.slice(home.length).replaceAll("\\", "/")}`;
+  return path;
+}
+
 async function fileExists(path: string): Promise<boolean> {
   try {
     await access(path);
@@ -238,6 +247,7 @@ export const agentSurfaceDetector: Detector = {
       if (!servers) continue;
 
       for (const [serverName, entry] of Object.entries(servers)) {
+        const reportPath = displayPath(loc.path);
         // AGENT-001 — wildcard / missing allowedTools
         const wildcard = checkWildcardTools(serverName, entry);
         if (wildcard) {
@@ -250,8 +260,8 @@ export const agentSurfaceDetector: Detector = {
             title: `${loc.agent}: MCP server "${serverName}" has wildcard or missing tool allowlist`,
             description: wildcard.description,
             why: "MCP servers execute inside the coding agent with the agent's permissions. Without an allowlist, a compromised or misbehaving server can call every tool the agent supports — including filesystem writes, shell exec, and network calls.",
-            file: loc.path,
-            fix: `Add an allowedTools array on "${serverName}" in ${loc.path} that names only the tools the agent actually uses from that server.`,
+            file: reportPath,
+            fix: `Add an allowedTools array on "${serverName}" in ${reportPath} that names only the tools the agent actually uses from that server.`,
             confidence: "certain",
             category: "Agent Surface",
           });
@@ -268,7 +278,7 @@ export const agentSurfaceDetector: Detector = {
             title: `${loc.agent}: MCP server "${serverName}" env contains a plaintext ${hit.label} credential (${hit.envName})`,
             description: `The env field ${hit.envName} on "${serverName}" is set to a real credential value rather than a shell reference like $${hit.envName}.`,
             why: "MCP config files are checked into dotfiles, backed up, and shared across machines. A committed API key in an MCP env block leaks the same way a committed .env does — and the value keeps working until it is rotated.",
-            file: loc.path,
+            file: reportPath,
             fix: `Replace the value of "${hit.envName}" with a shell reference (e.g. \${${hit.envName}}) and export the credential from your shell environment or a secrets manager.`,
             confidence: "high",
             category: "Agent Surface",
@@ -286,7 +296,7 @@ export const agentSurfaceDetector: Detector = {
             title: `${loc.agent}: MCP server "${serverName}" runs an unpinned npx package`,
             description: `"${serverName}" launches via npx without a @version suffix, so every session pulls whatever is latest on npm.`,
             why: "An unpinned npx MCP means the agent silently upgrades to whatever the maintainer publishes next — an ideal supply-chain attack vector. A single malicious version reaches every Cursor session on your machine.",
-            file: loc.path,
+            file: reportPath,
             fix: `Pin the package version, e.g. \`npx -y @vendor/pkg@1.2.3\`, and bump it deliberately.`,
             confidence: "high",
             category: "Agent Surface",
@@ -304,7 +314,7 @@ export const agentSurfaceDetector: Detector = {
             title: `${loc.agent}: MCP server "${serverName}" grants the filesystem server root or $HOME access`,
             description: `The @modelcontextprotocol/server-filesystem server on "${serverName}" is rooted at "/" or "$HOME".`,
             why: "The filesystem MCP lets the coding agent read and write anywhere under the root you give it. Rooting it at $HOME gives the agent access to every credential file, browser profile, and shell history on the machine.",
-            file: loc.path,
+            file: reportPath,
             fix: `Scope the filesystem MCP to a specific project or workspace directory, e.g. "${projectRoot}".`,
             confidence: "certain",
             category: "Agent Surface",
@@ -322,7 +332,7 @@ export const agentSurfaceDetector: Detector = {
             title: `${loc.agent}: MCP server "${serverName}" uses a plaintext HTTP URL`,
             description: `The URL for "${serverName}" is ${entry.url} — plaintext HTTP.`,
             why: "The coding agent sends prompts, tool calls, and often authentication headers to the MCP server. Over plaintext HTTP, any network attacker between the machine and the server can read every request and inject tampered responses.",
-            file: loc.path,
+            file: reportPath,
             fix: `Use https:// for the "${serverName}" URL, or run the server on localhost.`,
             confidence: "certain",
             category: "Agent Surface",

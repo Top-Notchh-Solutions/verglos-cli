@@ -79,27 +79,21 @@ export async function enforceLatestVersion(currentVersion: string): Promise<void
   process.exit(1);
 }
 
-export async function updateCli(currentVersion: string): Promise<void> {
-  const latestVersion = await fetchLatestVersion();
+export type UpdateResult =
+  | { readonly status: "ok"; readonly currentVersion: string; readonly latestVersion: string; readonly updated: boolean }
+  | { readonly status: "error"; readonly code: "UPDATE_VERSION_CHECK" | "UPDATE_INSTALL_FAILED"; readonly message: string };
 
-  if (!latestVersion) {
-    console.error(chalk.red("Could not check npm for the latest Verglos CLI."));
-    process.exit(1);
-  }
+export interface UpdateDependencies {
+  readonly fetchLatestVersion: () => Promise<string | null>;
+  readonly installLatest: (quiet: boolean) => Promise<void>;
+}
 
-  if (!isNewerVersion(latestVersion, currentVersion)) {
-    console.log(chalk.green(`Verglos CLI is already up to date (${currentVersion}).`));
-    return;
-  }
-
-  console.log(
-    chalk.gray(`Updating Verglos CLI from ${currentVersion} to ${latestVersion}...`),
-  );
-
-  await new Promise<void>((resolve, reject) => {
+const defaultDependencies: UpdateDependencies = {
+  fetchLatestVersion,
+  installLatest: (quiet) => new Promise<void>((resolve, reject) => {
     const command = process.platform === "win32" ? "npm.cmd" : "npm";
     const child = spawn(command, ["install", "-g", "verglos@latest"], {
-      stdio: "inherit",
+      stdio: quiet ? "ignore" : "inherit",
     });
 
     child.on("error", reject);
@@ -111,9 +105,33 @@ export async function updateCli(currentVersion: string): Promise<void> {
 
       reject(new Error(`npm install exited with code ${code ?? "unknown"}`));
     });
-  }).catch((error: unknown) => {
-    const message = error instanceof Error ? error.message : String(error);
-    console.error(chalk.red(`Update failed: ${message}`));
-    process.exit(1);
-  });
+  }),
+};
+
+/**
+ * Resolve and optionally install the latest CLI. Output and process exits are
+ * owned by the command boundary so JSON/quiet invocations stay deterministic.
+ */
+export async function updateCli(
+  currentVersion: string,
+  dependencies: UpdateDependencies = defaultDependencies,
+  options: { readonly quiet?: boolean; readonly onInstallStart?: (latestVersion: string) => void } = {},
+): Promise<UpdateResult> {
+  let latestVersion: string | null;
+  try {
+    latestVersion = await dependencies.fetchLatestVersion();
+  } catch {
+    return { status: "error", code: "UPDATE_VERSION_CHECK", message: "could not check npm for the latest Verglos CLI" };
+  }
+  if (!latestVersion) return { status: "error", code: "UPDATE_VERSION_CHECK", message: "could not check npm for the latest Verglos CLI" };
+  if (!isNewerVersion(latestVersion, currentVersion)) {
+    return { status: "ok", currentVersion, latestVersion, updated: false };
+  }
+  try {
+    options.onInstallStart?.(latestVersion);
+    await dependencies.installLatest(options.quiet === true);
+    return { status: "ok", currentVersion, latestVersion, updated: true };
+  } catch {
+    return { status: "error", code: "UPDATE_INSTALL_FAILED", message: "Verglos CLI update failed" };
+  }
 }

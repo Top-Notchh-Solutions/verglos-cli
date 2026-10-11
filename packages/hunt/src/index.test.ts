@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { runHunt } from "./index.js";
-import { createApprovalReceipt, huntRecipeDigest, parseHuntRecipe, type ScanResult } from "@verglos/shared";
+import { createApprovalReceipt, parseHuntRecipe, type ScanResult } from "@verglos/shared";
+import { createHuntTestTrustStore, HUNT_TEST_TRUST_KEY_ID } from "./hunt-trust-test-support.js";
 
 const report = {
   projectRoot: "/tmp/project",
@@ -17,9 +18,10 @@ const report = {
 } as unknown as ScanResult;
 
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
+const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-runner", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10000, processes: 32, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID } });
 const execution = {
-  recipe: parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-runner", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, memoryMb: 256, outputBytes: 10000, processes: 32 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } }),
-  trust: { signers: ["verglos-release"], recipeDigests: [huntRecipeDigest(parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-runner", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, memoryMb: 256, outputBytes: 10000, processes: 32 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: "verglos-release" } }))] },
+  recipe,
+  trust: createHuntTestTrustStore(recipe),
   approval: createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: subjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" }),
   ruleId: "d1-1", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", at: "2026-01-01T00:02:00Z",
 };
@@ -181,6 +183,18 @@ test("Hunt rejects malformed evidence metadata from adapters", async () => {
   };
   const result = await runHunt(report, { adapter, execution });
   assert.equal(result.outcomes[0]?.verdict, "not_attemptable");
+});
+
+test("Hunt preserves only a strict bounded assurance disclosure", async () => {
+  const assurance = { class: "A1" as const, isolation: "restricted-process" as const, securityBoundary: false, sourceAccess: "none" as const, network: "denied" as const, processLimit: 1, limitation: "trusted built-in harness; not an OS isolation boundary" };
+  const adapter = { id: "test-probe", async prepare() {}, async execute() { return { findingId: "critical-1", verdict: "false" as const, canonicalVerdict: "not-reproduced" as const, reason: "fixture", durationMs: 1, assurance }; }, async cleanup() {} };
+  const result = await runHunt(report, { adapter, execution });
+  assert.deepEqual(result.outcomes[0]?.assurance, assurance);
+  assert.ok(Object.isFrozen(result.outcomes[0]?.assurance));
+
+  const malformed = { ...adapter, async execute() { return { findingId: "critical-1", verdict: "false" as const, canonicalVerdict: "not-reproduced" as const, reason: "fixture", durationMs: 1, assurance: { ...assurance, securityBoundary: "no" } } as never; } };
+  const rejected = await runHunt(report, { adapter: malformed, execution });
+  assert.equal(rejected.outcomes[0]?.verdict, "not_attemptable");
 });
 
 test("Hunt freezes projected outcomes before returning them", async () => {

@@ -24,6 +24,7 @@ const EXTENSION_ID = /^urn:verglos:extension:[a-z][a-z0-9]*(?:-[a-z0-9]+)*:[a-z]
 const MEMBER_KINDS = [
   "metadata",
   "subject",
+  "lineage",
   "tool-run",
   "observation",
   "verification-attempt",

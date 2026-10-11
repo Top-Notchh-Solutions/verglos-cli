@@ -1,5 +1,6 @@
 import { parseHuntRecipe, type HuntRecipe } from "./hunt-recipe.js";
 import { huntRecipeDigest, isTrustedHuntRecipe, type HuntRecipeTrustPolicy } from "./hunt-recipe-trust.js";
+import type { Finding } from "./types.js";
 
 export interface HuntPlan {
   readonly supported: boolean;
@@ -7,11 +8,16 @@ export interface HuntPlan {
   readonly reason: string;
   readonly recipeId: string;
   readonly recipeDigest: string;
+  readonly findingId: string;
   readonly ruleId: string;
   readonly targetSubjectId: string;
   readonly imageDigest: HuntRecipe["imageDigest"];
   readonly command: readonly string[];
   readonly inputs: Readonly<Record<string, string>>;
+  readonly filesystem: Readonly<{
+    readonly source: "none" | "project-root-read-only";
+    readonly scratch: "bounded-temporary";
+  }>;
   readonly isolation: HuntRecipe["isolation"];
   readonly limits: HuntRecipe["limits"];
   readonly cleanup: HuntRecipe["cleanup"];
@@ -24,22 +30,37 @@ export interface HuntPlan {
   readonly signature: HuntRecipe["signature"];
   readonly executes: false;
 }
-export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; readonly subjectId: string }, options: { readonly trust?: HuntRecipeTrustPolicy } = {}): HuntPlan {
+export function planHunt(recipe: HuntRecipe, input: { readonly finding: Pick<Finding, "id" | "detector" | "rule">; readonly subjectId: string }, options: { readonly trust?: HuntRecipeTrustPolicy; readonly at?: string } = {}): HuntPlan {
   const parsed = parseHuntRecipe(recipe);
-  const matches = parsed.ruleId === input.ruleId && parsed.targetSubjectId === input.subjectId;
-  const trusted = options.trust ? isTrustedHuntRecipe(parsed, options.trust) : undefined;
-  const supported = matches && trusted !== false;
-  return {
+  const selectedRuleId = input.finding.rule ?? input.finding.detector;
+  const matches = parsed.ruleId === selectedRuleId && parsed.targetSubjectId === input.subjectId;
+  const trusted = options.trust ? isTrustedHuntRecipe(parsed, options.trust, options.at) : undefined;
+  // A dry-run plan is useful without a trust store, but it is never marked
+  // supported/executable until the selected recipe is trusted. This prevents
+  // model- or caller-supplied command text from being presented as runnable.
+  const supported = matches && trusted === true;
+  const plan: HuntPlan = {
     supported,
-    reason: !matches ? "recipe does not match the exact rule and subject" : trusted === false ? "recipe is not trusted by the supplied trust policy" : "recipe matches exact rule and subject",
+    reason: !matches
+      ? "recipe does not match the selected finding's exact rule and subject"
+      : trusted === true
+        ? "trusted recipe matches the selected finding's exact rule and subject"
+        : options.trust
+          ? "recipe is not trusted by the supplied trust policy"
+          : "a trust policy is required before this plan can be supported",
     trusted,
     recipeId: parsed.recipeId,
     recipeDigest: huntRecipeDigest(parsed),
+    findingId: input.finding.id,
     ruleId: parsed.ruleId,
     targetSubjectId: parsed.targetSubjectId,
     imageDigest: Object.freeze({ ...parsed.imageDigest }),
     command: Object.freeze([...parsed.command]),
     inputs: Object.freeze({ ...(parsed.inputs ?? {}) }),
+    filesystem: Object.freeze({
+      source: parsed.isolation === "restricted-process" ? "none" : "project-root-read-only",
+      scratch: "bounded-temporary",
+    }),
     isolation: parsed.isolation,
     limits: Object.freeze({ ...parsed.limits }),
     cleanup: parsed.cleanup,
@@ -48,4 +69,5 @@ export function planHunt(recipe: HuntRecipe, input: { readonly ruleId: string; r
     signature: Object.freeze({ ...parsed.signature }),
     executes: false,
   };
+  return Object.freeze(plan);
 }

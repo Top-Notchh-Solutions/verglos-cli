@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { buildLineageGraph, LineageValidationError } from "./lineage-graph.js";
+import { buildLineageGraph, createLineageGraphDocument, LineageValidationError, parseLineageGraphDocument } from "./lineage-graph.js";
 import { createSubject } from "./subject.js";
 
 const source = createSubject({ kind: "artifact", digest: { algorithm: "sha256", value: "a".repeat(64) }, size: 1, mediaType: "application/octet-stream", path: "dist/app" });
@@ -26,4 +26,14 @@ test("lineage mismatches remain explicit gaps", () => {
   const graph = buildLineageGraph([source], [{ fromSubjectId: source.subjectId, toSubjectId: source.subjectId, relation: "build-output", status: "mismatched" }]);
   assert.equal(graph.edges[0]?.status, "mismatched");
   assert.match(graph.gaps[0]!, /mismatches/);
+});
+
+test("record lineage payload is versioned, canonical, and limited to included subjects", () => {
+  const left = createLineageGraphDocument({ subjectIds: [source.subjectId, sbom.subjectId], edges: [{ fromSubjectId: sbom.subjectId, toSubjectId: source.subjectId, relation: "sbom-subject", status: "matched" }], gaps: ["z gap", "a gap"] });
+  const right = createLineageGraphDocument({ subjectIds: [sbom.subjectId, source.subjectId], edges: [{ fromSubjectId: sbom.subjectId, toSubjectId: source.subjectId, relation: "sbom-subject", status: "matched" }], gaps: ["a gap", "z gap"] });
+  assert.deepEqual(left, right);
+  assert.deepEqual(parseLineageGraphDocument(left).subjectIds, [source.subjectId, sbom.subjectId].sort());
+  assert.throws(() => createLineageGraphDocument({ subjectIds: [source.subjectId, source.subjectId], edges: [], gaps: [] }), LineageValidationError);
+  assert.throws(() => createLineageGraphDocument({ subjectIds: [source.subjectId], edges: [{ fromSubjectId: source.subjectId, toSubjectId: sbom.subjectId, relation: "sbom-subject", status: "unavailable" }], gaps: ["SBOM subject missing"] }), LineageValidationError);
+  assert.throws(() => parseLineageGraphDocument({ ...left, schemaVersion: "2.0.0" }), LineageValidationError);
 });

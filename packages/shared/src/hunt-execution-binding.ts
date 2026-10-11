@@ -2,7 +2,7 @@ import { z } from "zod";
 import { approvalRequestDigest, ApprovalReceiptSchema, type ApprovalReceipt } from "./approval-receipt.js";
 import { canExecuteHunt } from "./hunt-execution-gate.js";
 import { huntRecipeDigest, huntRecipeTrustPolicyDigest, parseHuntRecipeTrustPolicy, type HuntRecipeTrustPolicy } from "./hunt-recipe-trust.js";
-import { parseHuntRecipe, type HuntRecipe } from "./hunt-recipe.js";
+import { HuntResourceLimitsSchema, parseHuntRecipe, type HuntRecipe } from "./hunt-recipe.js";
 import { ObservationIdSchema } from "./observation.js";
 import { StableContractIdSchema } from "./engine.js";
 import { ContentDigestSchema, SubjectIdSchema } from "./subject.js";
@@ -23,7 +23,7 @@ export const HuntExecutionBindingSchema = z.object({
   command: z.array(z.string().min(1).max(4096)).min(1).max(32),
   assertions: z.array(z.string().min(1).max(4096)).min(1).max(64),
   isolation: z.enum(["none", "restricted-process", "container", "gvisor", "microvm"]),
-  limits: z.object({ timeoutMs: z.number().int().positive().max(600_000), memoryMb: z.number().int().positive().max(16_384), outputBytes: z.number().int().positive().max(10_000_000), processes: z.number().int().positive().max(4_096) }).strict(),
+  limits: HuntResourceLimitsSchema,
   cleanup: z.enum(["always", "on-success", "none"]),
   redaction: z.enum(["required", "best-effort"]),
   network: z.object({ mode: z.enum(["denied", "allowlist"]), destinations: z.array(z.string().url().max(2048)).max(32) }).strict(),

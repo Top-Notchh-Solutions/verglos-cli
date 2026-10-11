@@ -1,4 +1,11 @@
 import { SubjectDocumentSchema, SubjectIdSchema, type Subject } from "./subject.js";
+import { z } from "zod";
+import { VERGLOS_SCHEMA_IDS, classifySchemaCompatibility, parseSchemaVersion, type SchemaDescriptor } from "./schema.js";
+
+export const LINEAGE_GRAPH_SCHEMA = {
+  id: VERGLOS_SCHEMA_IDS.lineageGraph,
+  version: "1.0.0",
+} as const satisfies SchemaDescriptor;
 
 export const LINEAGE_RELATIONS = [
   "source-commit",
@@ -33,6 +40,46 @@ export interface LineageGraph {
   readonly nodes: readonly Subject[];
   readonly edges: readonly LineageEdge[];
   readonly gaps: readonly string[];
+}
+
+const LineageGraphDocumentSchema = z.object({
+  schemaId: z.literal(LINEAGE_GRAPH_SCHEMA.id),
+  schemaVersion: z.string().refine((value) => parseSchemaVersion(value) !== null),
+  subjectIds: z.array(SubjectIdSchema).min(1).max(10_000),
+  edges: z.array(z.object({
+    fromSubjectId: SubjectIdSchema,
+    toSubjectId: SubjectIdSchema,
+    relation: z.enum(LINEAGE_RELATIONS),
+    status: z.enum(LINEAGE_STATUSES),
+    evidenceRef: z.string().regex(/^sha256:[a-f0-9]{64}$/).optional(),
+  }).strict()).max(20_000),
+  gaps: z.array(z.string().min(1).max(512)).max(20_000),
+}).strict();
+
+export type LineageGraphDocument = z.infer<typeof LineageGraphDocumentSchema>;
+const compareCodeUnits = (left: string, right: string) => left < right ? -1 : left > right ? 1 : 0;
+
+export function createLineageGraphDocument(input: Omit<LineageGraphDocument, "schemaId" | "schemaVersion">): LineageGraphDocument {
+  return parseLineageGraphDocument({
+    schemaId: LINEAGE_GRAPH_SCHEMA.id,
+    schemaVersion: LINEAGE_GRAPH_SCHEMA.version,
+    subjectIds: [...input.subjectIds].sort(),
+    edges: [...input.edges].sort((a, b) => compareCodeUnits(`${a.fromSubjectId}:${a.toSubjectId}:${a.relation}:${a.status}:${a.evidenceRef ?? ""}`, `${b.fromSubjectId}:${b.toSubjectId}:${b.relation}:${b.status}:${b.evidenceRef ?? ""}`)),
+    gaps: [...input.gaps].sort(),
+  });
+}
+
+export function parseLineageGraphDocument(value: unknown): LineageGraphDocument {
+  const parsed = LineageGraphDocumentSchema.parse(value);
+  const compatibility = classifySchemaCompatibility(parsed.schemaVersion, LINEAGE_GRAPH_SCHEMA.version);
+  if (compatibility === "upgrade-required" || compatibility === "incompatible") throw new LineageValidationError(`Lineage graph schema ${parsed.schemaVersion} requires a compatible reader.`);
+  if (new Set(parsed.subjectIds).size !== parsed.subjectIds.length || parsed.subjectIds.some((id, index) => index > 0 && parsed.subjectIds[index - 1]! > id)) throw new LineageValidationError("Lineage graph subject IDs must be unique and sorted.");
+  const edgeKeys = parsed.edges.map((edge) => `${edge.fromSubjectId}:${edge.toSubjectId}:${edge.relation}:${edge.status}:${edge.evidenceRef ?? ""}`);
+  if (new Set(edgeKeys).size !== edgeKeys.length || edgeKeys.some((key, index) => index > 0 && compareCodeUnits(edgeKeys[index - 1]!, key) > 0)) throw new LineageValidationError("Lineage graph edges must be unique and sorted.");
+  if (new Set(parsed.gaps).size !== parsed.gaps.length || parsed.gaps.some((gap, index) => index > 0 && parsed.gaps[index - 1]! > gap)) throw new LineageValidationError("Lineage graph gaps must be unique and sorted.");
+  const subjects = new Set(parsed.subjectIds);
+  if (parsed.edges.some((edge) => !subjects.has(edge.fromSubjectId) || !subjects.has(edge.toSubjectId))) throw new LineageValidationError("Lineage graph edges must reference subjects included in the record.");
+  return parsed;
 }
 export class LineageValidationError extends Error { override readonly name = "LineageValidationError"; }
 

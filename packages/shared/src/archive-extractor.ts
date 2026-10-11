@@ -14,15 +14,24 @@ export class ArchiveExtractionError extends Error {
 export async function extractArchiveMembers(root: string, members: readonly ArchivePayload[], limits?: { maxMembers?: number; maxBytes?: number }): Promise<void> {
   validateArchiveMembers(members, limits);
   const destination = resolve(root);
-  await rm(destination, { recursive: true, force: true });
-  await mkdir(destination, { recursive: true });
+  const prepared = members.map((member) => {
+    const target = resolve(destination, member.path);
+    const relativeTarget = relative(destination, target);
+    if (target !== destination && (isAbsolute(relativeTarget) || relativeTarget === ".." || relativeTarget.startsWith(`..${sep}`))) throw new ArchiveSafetyError("TRAVERSAL", "Archive member path escapes the extraction root.");
+    if (member.kind === "symlink" || member.kind === "hardlink") throw new ArchiveExtractionError("UNSUPPORTED_LINK", "Archive links are not materialized during safe extraction.");
+    if (member.kind === "file") {
+      if (!(member.data instanceof Uint8Array)) throw new ArchiveExtractionError("MISSING_DATA", `Archive member ${member.path} has no payload.`);
+      if (member.data.byteLength !== member.size) throw new ArchiveSafetyError("LIMIT", "Archive member payload size does not match its declared size.");
+    }
+    return { member, target };
+  });
+  await mkdir(dirname(destination), { recursive: true });
+  // Never recursively remove a caller-selected output path: extraction only owns a directory it created.
+  await mkdir(destination);
   try {
-    for (const member of members) {
-      const target = resolve(destination, member.path);
-      const relativeTarget = relative(destination, target);
-      if (target !== destination && (isAbsolute(relativeTarget) || relativeTarget === ".." || relativeTarget.startsWith(`..${sep}`))) throw new ArchiveSafetyError("TRAVERSAL", "Archive member path escapes the extraction root.");
+    for (const { member, target } of prepared) {
       if (member.kind === "directory") { await mkdir(target, { recursive: true }); continue; }
-      if (member.kind === "symlink" || member.kind === "hardlink") throw new ArchiveExtractionError("UNSUPPORTED_LINK", "Archive links are not materialized during safe extraction.");
+      // File payloads were verified against the declared aggregate-bound sizes above.
       if (!member.data) throw new ArchiveExtractionError("MISSING_DATA", `Archive member ${member.path} has no payload.`);
       await mkdir(dirname(target), { recursive: true });
       await writeFile(target, member.data, { flag: "wx" });

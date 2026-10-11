@@ -3,6 +3,7 @@ import open from "open";
 import ora from "ora";
 import {
   DEFAULT_API_URL,
+  getTrustedApiOrigin,
   loadCredentials,
   saveCredentials,
 } from "./credentials.js";
@@ -106,7 +107,13 @@ export interface LoginOptions {
 
 export async function executeLogin(opts: LoginOptions = {}): Promise<number> {
   const creds = await loadCredentials();
-  const apiUrl = creds.apiUrl ?? DEFAULT_API_URL;
+  const apiUrl = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
+  if (!apiUrl) {
+    const message = "Could not start login: configured API URL must be a clean HTTPS origin.";
+    if (opts.json) console.log(JSON.stringify({ status: "error", code: "LOGIN_CONFIG", message }));
+    else if (!opts.quiet) console.error(chalk.red(message));
+    return 1;
+  }
 
   let start: StartResponse;
   try {

@@ -23,6 +23,22 @@ for (const entry of inventory.packages ?? []) {
     });
   }
 }
+for (const entry of inventory.bundledComponents ?? []) {
+  components.push({
+    type: "library",
+    "bom-ref": `pkg:npm/${entry.name}@${entry.version}?verglos-bundled-by=${encodeURIComponent(entry.bundledBy)}`,
+    name: entry.name,
+    version: entry.version,
+    scope: "optional",
+    licenses: [{ license: { id: entry.declaredLicense } }],
+    ...(entry.source ? { externalReferences: [{ type: "distribution", url: entry.source }] } : {}),
+    properties: [
+      { name: "verglos:scope", value: "bundled" },
+      { name: "verglos:bundled-by", value: entry.bundledBy },
+      { name: "verglos:redistribution-class", value: entry.redistributionClass },
+    ],
+  });
+}
 components.sort((a, b) => a["bom-ref"].localeCompare(b["bom-ref"]));
 const bom = {
   bomFormat: "CycloneDX",

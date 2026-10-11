@@ -9,6 +9,7 @@ import {
   privateKeyFromPem,
   signEntitlement,
 } from "@verglos/entitlement";
+import { validateLicense } from "./license-api.js";
 
 // One temp HOME + one keypair for the whole file. Tests seed
 // credentials.json / capabilities.json fresh in each beforeEach.
@@ -31,7 +32,7 @@ function seedCredentials(entitlementToken?: string, licenseKey = "vg_test_key") 
   writeFileSync(
     join(verglosDir, "credentials.json"),
     JSON.stringify({
-      apiUrl: "http://127.0.0.1:1",
+      apiUrl: "https://api.example.test",
       licenseKey,
       entitlementToken,
     }),

@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
+import { digestPolicyException, parsePolicyException } from "@verglos/shared";
 import { runCliFixture } from "./cli-fixture.js";
 
 const cliEntry = join(process.cwd(), "src", "index.ts");
@@ -76,6 +77,41 @@ test("config inspect failure is one bounded JSON response", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("config migration process reports unsupported settings without rewriting the file", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-config-migration-"));
+  const path = join(root, "legacy.json");
+  const source = JSON.stringify({ schemaVersion: "1.0.0", hunt: { sandbox: "node-vm" } });
+  try {
+    await writeFile(path, source);
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "config", "inspect", path, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 78);
+    assert.equal(result.stderr, "");
+    const report = JSON.parse(result.stdout);
+    assert.equal(report.status, "invalid");
+    assert.ok(report.warnings.some((warning: { id: string }) => warning.id === "obsolete-sandbox"));
+    assert.deepEqual(result.files, []);
+    assert.equal(await readFile(path, "utf8"), source);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("config migration process never evaluates legacy JavaScript", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-config-legacy-js-"));
+  const path = join(root, ".verglos.config.js");
+  const source = "throw new Error('legacy config was executed'); module.exports = { failThreshold: 1 };";
+  try {
+    await writeFile(path, source);
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "config", "inspect", path, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const report = JSON.parse(result.stdout);
+    assert.equal(report.status, "legacy");
+    assert.match(report.warnings[0].message, /not evaluated/);
+    assert.doesNotMatch(result.stdout, /legacy config was executed|failThreshold/);
+    assert.deepEqual(result.files, []);
+    assert.equal(await readFile(path, "utf8"), source);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("record header failure is one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-header-"));
   try {
@@ -99,17 +135,45 @@ test("MCP print-config quiet mode emits JSON without setup prose", async () => {
 test("Hunt denied plan emits one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-hunt-"));
   try {
-    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "hunt", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "hunt", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: root } });
     assert.equal(result.exitCode, 3);
     assert.equal(result.stderr, "");
     assert.deepEqual(JSON.parse(result.stdout), { status: "denied", reason: "plan_required", requiredPlan: "pro" });
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("Hunt recipe execution cannot bypass paid capability enforcement", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-hunt-execute-denied-"));
+  try {
+    const result = await runCliFixture(process.execPath, [
+      "--import", tsx, cliEntry,
+      "--as-plan", "free",
+      "hunt",
+      "--execute-report", "report.json",
+      "--execute-recipe", "recipe.json",
+      "--execute-trust-store", "trust-store.json",
+      "--execute-approval", "approval.json",
+      "--execute-rule-id", "hunt.a1.utf8-contains",
+      "--execute-subject-id", `urn:verglos:subject:repository-tree:sha256:${"a".repeat(64)}`,
+      "--execute-observation-id", "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+      "--json", "--quiet",
+    ], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: root, VERGLOS_API_URL: "http://127.0.0.1:9" } });
+    assert.equal(result.exitCode, 1);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), {
+      status: "error",
+      code: "CAPABILITY_REQUIRED",
+      capability: "hunt.critical",
+      message: "`verglos hunt --execute` requires a paid capability",
+    });
+    assert.deepEqual(result.files, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("Attest denied plan emits one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-attest-"));
   try {
-    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "attest", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "--as-plan", "free", "attest", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: root } });
     assert.equal(result.exitCode, 3);
     assert.equal(result.stderr, "");
     assert.deepEqual(JSON.parse(result.stdout), { status: "denied", reason: "plan_required", requiredPlan: "studio" });
@@ -185,6 +249,38 @@ test("precommit configuration failure is one bounded JSON response", async () =>
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("scan-family configuration failures are bounded across full and focused scans", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-scan-config-error-"));
+  try {
+    for (const command of ["scan", "secrets", "deps"]) {
+      const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, command, "--config", "missing-config.json", "--json", "--quiet"], root, { env: { HOME: root, USERPROFILE: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+      assert.equal(result.exitCode, 2, `${command} must use the configuration-error exit code`);
+      assert.equal(result.stderr, "", `${command} must not leak stack traces in JSON mode`);
+      assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "SCAN_CONFIG", message: "scan configuration is invalid or unavailable" });
+      assert.equal(result.stdout.includes(root), false, `${command} must not expose local paths in JSON`);
+      assert.equal(result.files.some((file) => file.startsWith("verglos-report")), false, `${command} must fail before writing reports`);
+    }
+    const watched = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--watch", "--config", "missing-config.json", "--json", "--quiet"], root, { timeoutMs: 3_000, env: { HOME: root, USERPROFILE: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(watched.timedOut, false, "watch mode must not remain active after its initial configuration failure");
+    assert.equal(watched.exitCode, 2);
+    assert.equal(watched.stderr, "");
+    assert.deepEqual(JSON.parse(watched.stdout), { status: "error", code: "SCAN_CONFIG", message: "scan configuration is invalid or unavailable" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("scan report output failures use infrastructure exit without a stack trace", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-output-error-"));
+  try {
+    const outputFile = join(root, "reports");
+    await writeFile(outputFile, "preserve this file", "utf8");
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--json", "--quiet", "--no-telemetry", "--output", "reports"], root, { env: { HOME: root, USERPROFILE: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(result.exitCode, 4);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "SCAN_FAILURE", message: "scan could not complete" });
+    assert.equal(await readFile(outputFile, "utf8"), "preserve this file");
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("diff input failure is one bounded JSON response", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-diff-error-"));
   try {
@@ -202,6 +298,47 @@ test("policy check input failure is one bounded JSON response", async () => {
     assert.equal(result.exitCode, 2);
     assert.equal(result.stderr, "");
     assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "POLICY_CHECK_INPUT", message: "policy check failed" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("policy exception projection failure is one bounded JSON response", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-exception-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "policy", "exception", "missing-exception.json", "--approval", "missing-approval.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", code: "POLICY_EXCEPTION_INPUT", message: "policy exception projection failed" });
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("policy exception command exposes the approval-bound export projection", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-exception-success-"));
+  try {
+    const exception = parsePolicyException({
+      schemaId: "urn:verglos:schema:policy-exception", schemaVersion: "1.0.0",
+      exceptionId: "urn:uuid:12345678-1234-4123-8123-123456789abc",
+      scope: { subjectId: `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`, observationIds: ["urn:uuid:22345678-1234-4123-8123-123456789abc"] },
+      owner: { kind: "person", id: "owner" }, requestedBy: { kind: "person", id: "requester" }, reason: "temporary acceptance",
+      compensatingControls: [{ description: "monitor", owner: { kind: "person", id: "owner" }, evidence: { system: "local", recordId: "audit-1", digest: { algorithm: "sha256", value: "b".repeat(64) } } }],
+      reversalTriggers: ["fix shipped"], requestedAt: "2026-09-01T00:00:00.000Z", effectiveFrom: "2026-09-01T00:00:00.000Z", expiresAt: "2026-09-30T00:00:00.000Z", limitations: ["test fixture"],
+    });
+    const approval = {
+      schemaId: "urn:verglos:schema:exception-approval", schemaVersion: "1.0.0",
+      approvalId: "urn:uuid:32345678-1234-4123-8123-123456789abc",
+      target: { exceptionId: exception.exceptionId, requestDigest: digestPolicyException(exception) },
+      decision: "approved", approver: { kind: "person", id: "approver", authority: "release" }, rationale: "bounded test approval",
+      decidedAt: "2026-09-02T00:00:00.000Z", validUntil: "2026-09-20T00:00:00.000Z",
+      auditReference: { system: "local", recordId: "approval-1", digest: { algorithm: "sha256", value: "c".repeat(64) } },
+    };
+    await writeFile(join(root, "exception.json"), JSON.stringify(exception));
+    await writeFile(join(root, "approval.json"), JSON.stringify(approval));
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "policy", "exception", "exception.json", "--approval", "approval.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const projection = JSON.parse(result.stdout);
+    assert.equal(projection.approval.binding, "matched");
+    assert.equal(projection.approval.applicability.status, "not-evaluated");
+    assert.deepEqual(projection.exportChoices.map((choice: { format: string }) => choice.format), [".vgl", "JSON", "SARIF", "CycloneDX", "SPDX", "VEX", "HTML", "PDF"]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -232,12 +369,96 @@ test("precommit success is one bounded JSON response", async () => {
 test("Scan JSON mode emits one parseable scan document", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-scan-"));
   try {
-    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--json", "--quiet", "--no-telemetry"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--json", "--quiet", "--no-telemetry"], root, { env: { HOME: root, USERPROFILE: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
     assert.equal(result.exitCode, 0);
     assert.equal(result.stderr, "");
-    const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown };
+    const payload = JSON.parse(result.stdout) as { projectRoot?: string; findings?: unknown; schemaVersion?: unknown; coverage?: { status?: unknown } };
     await assertSameDirectory(payload.projectRoot, await realpath(root));
     assert.ok(Array.isArray(payload.findings));
+    assert.equal(payload.schemaVersion, undefined, "legacy stdout JSON stays the ScanResult shape");
+    assert.equal(typeof payload.coverage?.status, "string");
+    assert.equal(result.files.includes("verglos-report.json"), true);
+    assert.equal(result.files.includes("verglos-report.html"), true);
+    const report = JSON.parse(await readFile(join(root, "verglos-report.json"), "utf8")) as { schemaVersion?: string; projectRoot?: string };
+    assert.equal(report.schemaVersion, "2.0.0", "legacy report schema remains readable");
+    await assertSameDirectory(report.projectRoot, await realpath(root));
+    assert.match(await readFile(join(root, "verglos-report.html"), "utf8"), /<title>Verglos Security Report/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("scan output path writes reports only to the explicitly selected directory", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-output-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--json", "--quiet", "--no-telemetry", "--output", "reports"], root, { env: { HOME: root, USERPROFILE: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    assert.doesNotThrow(() => JSON.parse(result.stdout));
+    assert.deepEqual((await readdir(join(root, "reports"))).sort(), ["verglos-report.html", "verglos-report.json"]);
+    await assert.rejects(access(join(root, "verglos-report.html")));
+    await assert.rejects(access(join(root, "verglos-report.json")));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("scan snapshot opt-in imports bounded SARIF and refuses to overwrite the snapshot", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-snapshot-"));
+  try {
+    const reportPath = join(root, "report.sarif");
+    const snapshotPath = join(root, "snapshot.json");
+    await writeFile(reportPath, JSON.stringify({ version: "2.1.0", runs: [{ tool: { driver: { name: "fixture" } }, results: [{ ruleId: "fixture.rule", level: "error", message: { text: "RAW_IMPORTED_RESULT_MUST_NOT_ESCAPE" }, locations: [{ physicalLocation: { artifactLocation: { uri: "src/app.ts" }, region: { startLine: 9 } } }] }] }] }));
+    const args = ["--import", tsx, cliEntry, "scan", "--snapshot", "snapshot.json", "--producer", "sarif", "--import", "report.sarif", "--json", "--quiet"];
+    const first = await runCliFixture(process.execPath, args, root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(first.exitCode, 3, first.stderr);
+    assert.equal(first.stderr, "");
+    const summary = JSON.parse(first.stdout) as { status?: string; snapshotDigest?: string; coverage?: { producers?: Array<{ producer: string; state: string; limitations: string[] }> } };
+    assert.equal(summary.status, "incomplete");
+    assert.match(summary.snapshotDigest ?? "", /^sha256:[a-f0-9]{64}$/);
+    assert.equal(summary.coverage?.producers?.[0]?.producer, "sarif");
+    assert.equal(summary.coverage?.producers?.[0]?.state, "incomplete");
+    assert.match(summary.coverage?.producers?.[0]?.limitations.join(" ") ?? "", /does not independently bind/);
+    const originalSnapshot = await readFile(snapshotPath, "utf8");
+    const parsedSnapshot = JSON.parse(originalSnapshot) as { schemaVersion?: string; coverage?: { schemaVersion?: string } };
+    assert.equal(parsedSnapshot.schemaVersion, "1.3.0");
+    assert.equal(parsedSnapshot.coverage?.schemaVersion, "1.1.0");
+    assert.equal(originalSnapshot.includes("RAW_IMPORTED_RESULT_MUST_NOT_ESCAPE"), false);
+    const second = await runCliFixture(process.execPath, args, root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(second.exitCode, 4);
+    assert.deepEqual(JSON.parse(second.stdout), { status: "error", code: "SCAN_FAILURE", message: "scan could not complete" });
+    assert.equal(await readFile(snapshotPath, "utf8"), originalSnapshot);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("engine inspection uses only an explicit binary and refuses non-Trivy executables", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-engine-inspect-"));
+  try {
+    const pathTrivy = join(root, "trivy");
+    await writeFile(pathTrivy, "#!/bin/sh\ncase \"$1\" in\n  --help) printf 'Usage: trivy command target\\n' ;;\n  --version) printf 'Trivy 0.60.0\\n' ;;\n  *) printf 'Usage: trivy %s [flags]\\n' \"$1\" ;;\nesac\n");
+    await chmod(pathTrivy, 0o700);
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "engines", "inspect", "trivy", "--path", process.execPath, "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", PATH: root } });
+    assert.equal(result.exitCode, 3);
+    assert.equal(result.stderr, "");
+    const summary = JSON.parse(result.stdout) as { status: string; engineId: string; path: string; trust: string; capabilities: string[]; limitations: string[] };
+    assert.equal(summary.status, "unavailable");
+    assert.equal(summary.engineId, "trivy");
+    assert.equal(summary.path, process.execPath);
+    assert.equal(summary.trust, "unavailable");
+    assert.deepEqual(summary.capabilities, []);
+    assert.match(summary.limitations.join(" "), /did not identify as a Trivy CLI/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("scan policy option and legacy alias use the same evaluator path", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-policy-alias-"));
+  try {
+    const outputs = [];
+    for (const option of ["--policy", "--policy-evaluation"]) {
+      const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", option, "missing-evaluation.json", "--json", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+      assert.equal(result.exitCode, 2);
+      assert.equal(result.stderr, "");
+      outputs.push(JSON.parse(result.stdout));
+    }
+    assert.deepEqual(outputs[0], outputs[1]);
+    assert.deepEqual(outputs[0], { status: "error", code: "POLICY_CHECK_INPUT", message: "policy check failed" });
+    assert.deepEqual((await readdir(root)).sort(), []);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -283,6 +504,26 @@ test("activate network failure is one bounded JSON response", async () => {
     assert.equal(payload.reason, "network");
     assert.equal(payload.httpStatus, undefined);
   } finally { await rm(root, { recursive: true, force: true }); await rm(home, { recursive: true, force: true }); }
+});
+
+test("activate refuses an insecure configured API origin before network", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-activate-unsafe-origin-"));
+  const home = await mkdtemp(join(tmpdir(), "verglos-process-activate-unsafe-home-"));
+  try {
+    const result = await runCliFixture(
+      process.execPath,
+      ["--import", tsx, cliEntry, "activate", "vg_test_key", "--ci", "--json", "--quiet"],
+      root,
+      { env: { HOME: home, VERGLOS_API_URL: "http://api.example.test", VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } },
+    );
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.stderr, "");
+    assert.deepEqual(JSON.parse(result.stdout), { status: "error", reason: "network" });
+    assert.deepEqual(result.files, []);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+    await rm(home, { recursive: true, force: true });
+  }
 });
 
 test("monitor status without credentials is one bounded JSON response", async () => {
@@ -341,6 +582,88 @@ test("CLI help is deterministic and side-effect free", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("CLI usage failures have deterministic exits and value-free JSON", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-usage-"));
+  try {
+    const json = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--invalid=sentinel-secret", "--json"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(json.exitCode, 2);
+    assert.equal(json.stderr, "");
+    assert.deepEqual(JSON.parse(json.stdout), { status: "error", code: "CLI_USAGE", message: "command-line arguments are invalid" });
+    assert.equal(json.stdout.includes("sentinel-secret"), false);
+    assert.deepEqual(json.files, []);
+
+    const quiet = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--invalid=sentinel-secret", "--quiet"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(quiet.exitCode, 2);
+    assert.equal(quiet.stdout, "");
+    assert.equal(quiet.stderr, "");
+    assert.deepEqual(quiet.files, []);
+
+    const human = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--invalid=sentinel-secret"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+    assert.equal(human.exitCode, 2);
+    assert.equal(human.stdout, "");
+    assert.match(human.stderr, /Invalid command-line arguments/u);
+    assert.equal(human.stderr.includes("sentinel-secret"), false);
+    assert.deepEqual(human.files, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("every public command leaf provides side-effect-free help", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-command-help-"));
+  const commands: Array<{ path: string; flags: readonly string[] }> = [
+    { path: "update", flags: ["--json", "--quiet"] },
+    { path: "config inspect", flags: ["--json", "--quiet"] },
+    { path: "diff", flags: ["--json", "--quiet"] },
+    { path: "policy check", flags: ["--json", "--quiet"] },
+    { path: "policy exception", flags: ["--approval", "--json", "--quiet"] },
+    { path: "evidence export", flags: ["--json", "--quiet"] },
+    { path: "evidence import", flags: ["--json", "--quiet"] },
+    { path: "record create", flags: ["--json", "--quiet"] },
+    { path: "record pack", flags: ["--signature", "--public-key", "--trusted-issuer", "--trusted-signer", "--json", "--quiet"] },
+    { path: "record verify", flags: ["--json", "--quiet"] },
+    { path: "record export", flags: ["--json", "--quiet"] },
+    { path: "record sign", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
+    { path: "record project", flags: ["--json", "--quiet"] },
+    { path: "record header", flags: ["--json", "--quiet"] },
+    { path: "engines status", flags: ["--json", "--quiet"] },
+    { path: "engines inspect", flags: ["--path", "--json", "--quiet"] },
+    { path: "engines install", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
+    { path: "engines update", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
+    { path: "engines rollback", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
+    { path: "target inspect", flags: ["--json", "--quiet"] },
+    { path: "scan", flags: ["--json", "--quiet", "--config", "--policy", "--policy-evaluation", "--output"] },
+    { path: "score", flags: ["--json", "--quiet", "--config"] },
+    { path: "secrets", flags: ["--json", "--quiet", "--config", "--output"] },
+    { path: "deps", flags: ["--json", "--quiet", "--config", "--output"] },
+    { path: "ci", flags: ["--json", "--quiet", "--config", "--policy", "--policy-evaluation"] },
+    { path: "fix", flags: ["--json", "--quiet", "--approve", "--approval-receipt"] },
+    { path: "hunt", flags: ["--json", "--quiet"] },
+    { path: "login", flags: ["--json", "--quiet"] },
+    { path: "activate", flags: ["--json", "--quiet"] },
+    { path: "whoami", flags: ["--json", "--quiet"] },
+    { path: "badge", flags: ["--json", "--quiet"] },
+    { path: "hook", flags: ["--json", "--quiet"] },
+    { path: "monitor register", flags: ["--json", "--quiet"] },
+    { path: "monitor status", flags: ["--json", "--quiet"] },
+    { path: "monitor unregister", flags: ["--json", "--quiet"] },
+    { path: "monitor test-alert", flags: ["--json", "--quiet"] },
+    { path: "mcp", flags: ["--print-config", "--json", "--quiet"] },
+    { path: "precommit", flags: ["--json", "--quiet", "--config"] },
+    { path: "attest", flags: ["--json", "--quiet"] },
+    { path: "init", flags: ["--json", "--quiet", "--yes"] },
+    { path: "explain", flags: ["--json", "--quiet"] },
+  ];
+  try {
+    for (const command of commands) {
+      const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, ...command.path.split(" "), "--help"], root, { env: { VERGLOS_DEV_SKIP_UPDATE_CHECK: "1" } });
+      assert.equal(result.exitCode, 0, `${command.path} --help must succeed`);
+      assert.equal(result.stderr, "", `${command.path} --help must not emit diagnostics`);
+      assert.match(result.stdout, /Usage: verglos/u, `${command.path} --help must render command usage`);
+      for (const flag of command.flags) assert.ok(result.stdout.includes(flag), `${command.path} help must expose ${flag}`);
+      assert.deepEqual(result.files, [], `${command.path} --help must not mutate the working directory`);
+    }
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("init JSON mode writes only the bounded project config", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-init-"));
   try {
@@ -351,8 +674,8 @@ test("init JSON mode writes only the bounded project config", async () => {
     assert.equal(payload.status, "ok");
     assert.equal(payload.configWritten, true);
     assert.equal(payload.hookInstalled, false);
-    await assertSameFile(payload.configPath, join(root, ".verglos.config.js"));
-    assert.deepEqual(result.files, [".verglos.config.js"]);
+    await assertSameFile(payload.configPath, join(root, ".verglos.config.json"));
+    assert.deepEqual(result.files, [".verglos.config.json"]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

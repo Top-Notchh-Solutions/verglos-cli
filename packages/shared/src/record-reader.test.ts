@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -46,5 +46,24 @@ test("safe record reader rejects unsupported member schema versions", async () =
     const bytes = new TextEncoder().encode("{}"); const stored = await putRecordMember(root, "decision.json", bytes);
     const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos", version: "2.0.0" }, members: [{ path: "decision.json", kind: "release-decision", mediaType: "application/json", digest: { algorithm: "sha256", value: stored.digest.slice(7) }, size: bytes.byteLength, required: true, redaction: "none", schema: { id: "urn:verglos:schema:release-decision", version: "2.0.0" } }], redaction: { status: "not-required" }, limitations: ["fixture"] });
     await assert.rejects(() => readAndVerifyRecord(root, manifest), /unsupported record member schema version/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("safe record reader rejects aggregates above the memory bound before opening blobs", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-reader-aggregate-"));
+  try {
+    const members = Array.from({ length: 6 }, (_, index) => ({
+      path: index === 0 ? "decision.json" : `metadata-${index}.json`,
+      kind: index === 0 ? "release-decision" as const : "metadata" as const,
+      mediaType: index === 0 ? "application/json" : "text/plain",
+      digest: { algorithm: "sha256" as const, value: (index + 1).toString(16).padStart(64, "0") },
+      size: 50_000_000,
+      required: index === 0,
+      redaction: "none" as const,
+      ...(index === 0 ? { schema: { id: "urn:verglos:schema:release-decision", version: "1.0.0" } } : {}),
+    }));
+    const manifest = assembleReleaseRecord({ schemaId: "urn:verglos:schema:release-record-manifest", schemaVersion: "1.0.0", bundleVersion: "1.0.0", manifestId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", generatedAt: "2026-01-01T00:00:00Z", generator: { id: "verglos", version: "2.0.0" }, members, redaction: { status: "not-required" }, limitations: ["fixture"] });
+    await assert.rejects(() => readAndVerifyRecord(root, manifest), /256 MB aggregate member limit/);
+    assert.deepEqual(await readdir(root), []);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

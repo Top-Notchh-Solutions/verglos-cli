@@ -8,7 +8,6 @@ export interface DockerSandboxAdapterOptions {
   readonly imageDigest: string;
   readonly memoryMb?: number;
   readonly maxProcesses?: number;
-  readonly cpus?: number;
   readonly diskMb?: number;
   readonly maxOutputBytes?: number;
   readonly run?: DockerRunOptions["run"];
@@ -29,19 +28,23 @@ export class DockerSandboxAdapter implements SandboxAdapter {
     if (boundImageDigest !== this.options.imageDigest) throw new Error("Docker adapter image digest does not match execution binding");
     if (input.binding.isolation !== "container") throw new Error("Docker adapter requires a recipe declaring container isolation");
     if (input.binding.network.mode !== "denied") throw new Error("Docker adapter does not support allowlisted network execution");
+    if (input.binding.limits.maxNetworkRequests !== 0) throw new Error("Docker adapter requires a zero network-request budget");
+    const executionTimeoutMs = Math.min(input.timeoutMs, input.binding.limits.timeoutMs, input.binding.limits.cpuMs);
     const invocation = buildDockerInvocation({
       projectRoot: input.projectRoot,
       image: this.options.image,
       imageDigest: this.options.imageDigest,
       command: input.binding.command,
-      timeoutMs: Math.min(input.timeoutMs, input.binding.limits.timeoutMs),
+      // The runner pins this container to one CPU; applying the recipe CPU-ms
+      // budget as an equal-or-smaller wall timeout therefore cannot exceed it.
+      timeoutMs: executionTimeoutMs,
       memoryMb: Math.min(this.options.memoryMb ?? input.binding.limits.memoryMb, input.binding.limits.memoryMb),
       maxProcesses: Math.min(this.options.maxProcesses ?? input.binding.limits.processes, input.binding.limits.processes),
-      cpus: this.options.cpus,
-      diskMb: this.options.diskMb,
+      cpus: 1,
+      diskMb: Math.min(this.options.diskMb ?? input.binding.limits.diskMb, input.binding.limits.diskMb),
     } satisfies DockerInvocationInput);
     const result = await runDockerInvocation(invocation, {
-      timeoutMs: input.timeoutMs,
+      timeoutMs: executionTimeoutMs,
       maxOutputBytes: Math.min(this.options.maxOutputBytes ?? input.binding.limits.outputBytes, input.binding.limits.outputBytes),
       sensitivePaths: [input.projectRoot],
       run: this.options.run,

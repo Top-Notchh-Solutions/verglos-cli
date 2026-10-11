@@ -7,9 +7,10 @@ import { join } from "node:path";
 import { test } from "node:test";
 
 const run = promisify(execFile);
-test("clean public pack contains six archives without compiled tests", async () => {
+test("clean public pack contains six archives without compiled tests or CLI process fixtures", async () => {
   const output = await mkdtemp(join(tmpdir(), "verglos-public-pack-"));
   try {
+    const { stdout: expectedNotices } = await run(process.execPath, ["scripts/generate-third-party-notices.mjs"], { maxBuffer: 16 * 1024 * 1024 });
     await run(process.execPath, ["scripts/pack-public-packages.mjs", output], { maxBuffer: 8 * 1024 * 1024 });
     const archives = (await readdir(output)).filter((name) => name.endsWith(".tgz"));
     assert.equal(archives.length, 6);
@@ -24,4 +25,10 @@ test("clean public pack contains six archives without compiled tests", async () 
       assert.deepEqual(notices, await readFile("THIRD_PARTY_NOTICES", "utf8"), `${archive} must carry the generated notices byte-for-byte`);
     }
   } finally { await rm(output, { recursive: true, force: true }); }
+});
+
+test("public packer fails closed for private workspace dependencies", async () => {
+  const source = await readFile("scripts/pack-public-packages.mjs", "utf8");
+  assert.match(source, /privateWorkspacePackages/);
+  assert.match(source, /cannot depend on private workspace package/);
 });

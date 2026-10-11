@@ -8,7 +8,11 @@ import {
   type MonitorRegistration,
   type MonitorDependency,
 } from "@verglos/entitlement";
-import { loadCredentials, DEFAULT_API_URL } from "./credentials.js";
+import {
+  getTrustedApiOrigin,
+  loadCredentials,
+  DEFAULT_API_URL,
+} from "./credentials.js";
 import {
   authorizedFetch,
   type AuthorizedFetchResult,
@@ -159,8 +163,11 @@ export async function executeMonitorRegister(
   };
 
   const creds = await loadCredentials();
-  const apiUrl = creds.apiUrl ?? DEFAULT_API_URL;
-  const url = `${apiUrl}/api/v1/monitor/register`;
+  const apiOrigin = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
+  if (!apiOrigin) {
+    return fail("configured API URL must be a clean HTTPS origin");
+  }
+  const url = `${apiOrigin}/api/v1/monitor/register`;
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 8_000);

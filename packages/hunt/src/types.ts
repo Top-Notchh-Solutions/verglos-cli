@@ -16,6 +16,16 @@ export interface HuntFindingOutcome {
   executionStatus?: "completed" | "timed-out" | "failed";
   /** Canonical V1 truth state; legacy verdict remains for alpha compatibility. */
   canonicalVerdict?: CanonicalHuntVerdict;
+  /** Visible assurance boundary for execution-backed outcomes. */
+  assurance?: Readonly<{
+    class: "A1" | "A2" | "A3" | "A4";
+    isolation: "restricted-process" | "container" | "gvisor" | "microvm";
+    securityBoundary: boolean;
+    sourceAccess: "none" | "read-only";
+    network: "denied" | "allowlisted";
+    processLimit: number;
+    limitation: string;
+  }>;
 }
 
 export interface HuntResult {

@@ -47,6 +47,7 @@ interface CapabilitiesResponse {
   cache_ttl_seconds: number;
   simulated: boolean;
   active: boolean;
+  catalog_version?: string;
   reason?: string;
 }
 
@@ -102,11 +103,24 @@ async function readCache(): Promise<CachedCapabilities | null> {
 }
 
 async function writeCache(entry: CachedCapabilities): Promise<void> {
+  const path = cacheFile();
+  const temporary = `${path}.${randomUUID()}.tmp`;
+  let handle: Awaited<ReturnType<typeof open>> | undefined;
   try {
     await mkdir(cacheDir(), { recursive: true });
-    await writeFile(cacheFile(), JSON.stringify(entry, null, 2), "utf8");
+    await chmod(cacheDir(), 0o700);
+    handle = await open(temporary, "wx", 0o600);
+    await handle.writeFile(JSON.stringify(entry, null, 2), "utf8");
+    await handle.chmod(0o600);
+    await handle.sync();
+    await handle.close();
+    handle = undefined;
+    await rename(temporary, path);
   } catch {
     // non-fatal — next call will just re-fetch.
+  } finally {
+    if (handle) await handle.close().catch(() => undefined);
+    await unlink(temporary).catch(() => undefined);
   }
 }
 
@@ -128,7 +142,10 @@ async function fetchFromServer(
   licenseKey: string | undefined,
   asPlan: string | undefined,
 ): Promise<CapabilitiesResponse | null> {
-  const url = new URL(`${apiUrl}/api/v1/entitlement/capabilities`);
+  const apiOrigin = getTrustedApiOrigin(apiUrl);
+  if (!apiOrigin) return null;
+
+  const url = new URL("/api/v1/entitlement/capabilities", `${apiOrigin}/`);
   if (asPlan) url.searchParams.set("as_plan", asPlan);
 
   try {
@@ -158,7 +175,9 @@ function parseCapabilitiesResponse(value: unknown): CapabilitiesResponse | null 
   if (typeof raw.simulated !== "boolean" || typeof raw.active !== "boolean") return null;
   const realPlan = typeof raw.real_plan === "string" ? raw.real_plan.toLowerCase() : raw.real_plan;
   if (realPlan !== undefined && (typeof realPlan !== "string" || realPlan.length > 64 || !["free", "pro", "team", "studio", "enterprise", "compliance", "founder"].includes(realPlan))) return null;
-  return { plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(realPlan === undefined ? {} : { real_plan: realPlan }) };
+  const catalogVersion = raw.catalog_version;
+  if (catalogVersion !== undefined && (typeof catalogVersion !== "string" || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}\.[0-9]+$/u.test(catalogVersion))) return null;
+  return { plan, capabilities: [...raw.capabilities], cache_ttl_seconds: raw.cache_ttl_seconds, simulated: raw.simulated, active: raw.active, ...(realPlan === undefined ? {} : { real_plan: realPlan }), ...(catalogVersion === undefined ? {} : { catalog_version: catalogVersion }) };
 }
 
 export interface LoadCapabilitiesOptions {
@@ -204,7 +223,7 @@ export async function loadCapabilities(
     // JWT-based flow in @verglos/entitlement). If the cache is older,
     // fail closed to Free and let the caller warn — better than
     // silently letting a cancelled license keep Pro forever.
-    if (cached) {
+    if (cached && cached.simulatedAsPlan === opts.asPlan) {
       const cachedFetchedAt = new Date(cached.fetchedAt).getTime();
       const ageMs = now - cachedFetchedAt;
       if (ageMs < ABSOLUTE_MAX_STALE_MS) {
@@ -481,7 +500,7 @@ export async function requireCapability(
 
 export async function clearCache(): Promise<void> {
   try {
-    await writeFile(cacheFile(), "{}", "utf8");
+    await unlink(cacheFile());
   } catch {
     // ignore
   }

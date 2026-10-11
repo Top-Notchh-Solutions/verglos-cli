@@ -1,9 +1,15 @@
-# @verglos/attest
+# `@verglos/attest` (retired alpha scaffold)
 
-`@verglos/attest` is the planned signing engine behind `verglos attest`.
+The old Ed25519 summary-bundle scaffold is retired. This private alpha package no longer exports `signBundle`, `SigningKey`, `VerifyChain`, or summary-shaped `AttestationBundle` types. Its remaining type exports are canonical Release Record types from `@verglos/shared`; those types alone do not assert that a record was signed, published, or verified.
 
-Attest turns verified findings into a portable evidence bundle for client handoff. The intended bundle is JSON plus HTML evidence, signed with Ed25519 and anchored to a public verify URL trust chain. That is the Studio wedge: agencies and startups need something they can hand to a client, procurement team, or diligence reviewer without asking that reviewer to trust a local terminal screenshot.
+Use the CLI's local workflow instead:
 
-This alpha package is interface scaffolding only. The stable contract is `signBundle(report, signingKey): Promise<AttestationBundle>`, plus the `EvidenceArtifact`, `VerifyChain`, and `AttestationBundle` types in `src/types.ts`. Functional signing, verify URLs, and white-label bundles land in v2.0.0-beta.
+```text
+verglos record create
+verglos record sign
+verglos record verify
+```
 
-See [`docs/2.0.0-hunt-and-attest.md`](../../docs/2.0.0-hunt-and-attest.md).
+The record workflow does not upload or publish by default. Hosted record receipt and public verification are separate, incomplete capabilities; do not treat legacy random-hash summary URLs as cryptographic verification.
+
+See [`docs/2.0.0-hunt-and-attest.md`](../../docs/2.0.0-hunt-and-attest.md) for the alpha/beta boundary.

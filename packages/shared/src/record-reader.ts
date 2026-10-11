@@ -3,6 +3,7 @@ import { readRecordMember } from "./record-store.js";
 import { classifySchemaCompatibility } from "./schema.js";
 
 const REQUIRED_MEDIA_TYPES = new Set(["application/json", "application/sarif+json", "application/vnd.cyclonedx+json", "application/spdx+json", "application/vnd.in-toto+json"]);
+export const MAX_RELEASE_RECORD_AGGREGATE_BYTES = 256_000_000;
 
 function mediaTypeBase(mediaType: string): string { return mediaType.split(";", 1)[0]!.toLowerCase(); }
 function validateMemberSchema(member: ReleaseRecordManifestDocument["members"][number]): void {
@@ -18,6 +19,10 @@ function validateJsonBytes(member: ReleaseRecordManifestDocument["members"][numb
 
 export async function readAndVerifyRecord(root: string, manifest: ReleaseRecordManifestDocument): Promise<ReadonlyMap<string, Uint8Array>> {
   const parsed = parseReleaseRecordManifest(manifest);
+  const aggregateBytes = parsed.members.reduce((total, member) => total + member.size, 0);
+  if (!Number.isSafeInteger(aggregateBytes) || aggregateBytes > MAX_RELEASE_RECORD_AGGREGATE_BYTES) {
+    throw new Error("record exceeds the 256 MB aggregate member limit");
+  }
   const members = new Map<string, Uint8Array>();
   const digests = new Set<string>();
   for (const member of parsed.members) {

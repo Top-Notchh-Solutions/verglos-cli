@@ -12,9 +12,11 @@ const PRIVATE_DIST_NAMES = /(?:^|\/)(?:cli-fixture|fixture-engine|fixture-valida
 const manifests = new Map();
 for (const name of packageNames) manifests.set(name, JSON.parse(await readFile(join(root, "packages", name, "package.json"), "utf8")));
 const versions = new Map([...manifests.values()].map((manifest) => [manifest.name, manifest.version]));
+const privateWorkspacePackages = new Set([...manifests.values()].filter((manifest) => manifest.private === true).map((manifest) => manifest.name));
 const destination = resolve(process.argv[2] ?? "");
 if (!process.argv[2]) throw new Error("pack output directory is required");
 await mkdir(destination, { recursive: true });
+const { stdout: thirdPartyNotices } = await run(process.execPath, [join(root, "scripts/generate-third-party-notices.mjs")], { cwd: root, maxBuffer: 16 * 1024 * 1024, timeout: 120_000 });
 const stagingRoot = await mkdtemp(join(root, ".pack-staging-"));
 try {
   for (const name of packageNames) {
@@ -33,10 +35,15 @@ try {
     // the staged archive instead of relying on the source checkout.
     try { await readFile(join(stage, "LICENSE")); }
     catch { await cp(join(root, "LICENSE"), join(stage, "LICENSE")); }
+    await writeFile(join(stage, "THIRD_PARTY_NOTICES"), thirdPartyNotices, { encoding: "utf8", mode: 0o644 });
     const manifest = manifests.get(name);
+    manifest.files = [...new Set([...(Array.isArray(manifest.files) ? manifest.files : []), "THIRD_PARTY_NOTICES"])];
     for (const field of ["dependencies", "optionalDependencies", "devDependencies"]) {
       for (const [dependency, range] of Object.entries(manifest[field] ?? {})) {
         if (typeof range === "string" && range.startsWith("workspace:")) {
+          if (privateWorkspacePackages.has(dependency)) {
+            throw new Error(`public package ${manifest.name} cannot depend on private workspace package ${dependency}`);
+          }
           const version = versions.get(dependency);
           if (!version) throw new Error(`workspace dependency ${dependency} has no known package version`);
           manifest[field][dependency] = `^${version}`;
@@ -46,7 +53,7 @@ try {
     const files = Array.isArray(manifest.files) ? manifest.files.filter((file) => typeof file === "string") : [];
     if (!files.includes(PUBLIC_NOTICE)) manifest.files = [...files, PUBLIC_NOTICE];
     await writeFile(join(stage, "package.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
-    await run("npm", ["pack", stage, "--pack-destination", destination, "--ignore-scripts"], { cwd: root, maxBuffer: 4 * 1024 * 1024 });
+    await run(npmCommand, ["pack", stage, "--pack-destination", destination, "--ignore-scripts"], npmOptions);
   }
 } finally {
   await rm(stagingRoot, { recursive: true, force: true });
