@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep Hunt backlog rows open after current-main qualification
+
+- **Decision:** Record the bounded Hunt runtime and package tests as valid
+  implementation evidence, but do not check HUNT-008/009/010/011.
+- **Reason:** The test suite proves code-side boundaries and fixed-recipe
+  behavior. It does not establish trusted/licensed publisher provenance,
+  independent AppSec sign-off, legal approval, or the required hosted/customer
+  qualification.
+- **Boundary:** No Production, provider, database, entitlement, payment,
+  registry, or customer-data state changed.
+- **Evidence:**
+  `docs/shipping/evidence/cli-current-main-reconciliation-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · Keep PLAN-WEB-014 open after Preview hosted card run
 
 - **Decision:** Accept the isolated Preview order and hosted-card results as

@@ -81,8 +81,15 @@ import { executeRecordProject } from "./record-project.js";
 import { executeRecordSign } from "./record-sign.js";
 import { executeConfigInspect } from "./config-inspect.js";
 import { executeRecordHeader } from "./record-header.js";
+import { executeRecordProvenanceImport } from "./record-provenance-import.js";
+import { executeRecordPackage } from "./record-package.js";
+import { printTelemetryConsentPreview, readTelemetryConsent, writeTelemetryConsent } from "./telemetry.js";
+import { readFile as readFileBytes } from "node:fs/promises";
 import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
 import { executeClientProjection } from "./client-projection.js";
+import { executeReleaseRollbackPlan, executeReleaseRollbackRehearsal } from "./release-rollback-plan.js";
+import { executeCiCheckPayload } from "./ci-check-payload.js";
+import { pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -229,6 +236,14 @@ const policy = program.command("policy").description("Inspect local policy evalu
 policy.command("check <evaluation>").description("Render a policy evaluation and return its contract exit code").option("--record-store <path>", "Verify a record manifest against its content-addressed member store").option("--json", "Emit machine-readable JSON").option("--quiet", "Suppress human output").action(async (evaluation: string, opts: { recordStore?: string; json?: boolean; quiet?: boolean }) => {
   process.exit(await executePolicyCheck(evaluation, opts.json, opts.quiet, { recordStore: opts.recordStore }));
 });
+policy.command("exception <exceptionPath>")
+  .description("Show exact exception scope, approval state, expiry, controls, and export-format support")
+  .requiredOption("--approval <path>", "Path to the separate exception approval JSON")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (exceptionPath: string, opts: { approval: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executePolicyExceptionShow(exceptionPath, opts.approval, opts.json, opts.quiet));
+  });
 const organizationPolicy = policy.command("organization").description("Resolve a signed organization policy for one repository");
 organizationPolicy.command("fetch <organizationId> <repositoryId>")
   .description("Fetch and verify a tenant-bound policy, or resolve its bounded offline cache")
@@ -240,7 +255,7 @@ organizationPolicy.command("fetch <organizationId> <repositoryId>")
   .option("--quiet", "Suppress human output")
   .action(async (organizationId: string, repositoryId: string, opts: { trustedKeys: string; cache: string; offline?: boolean; endpoint?: string; json?: boolean; quiet?: boolean }) => {
     try {
-      const trustedKeys = JSON.parse((await readFile(opts.trustedKeys, "utf8"))) as unknown;
+      const trustedKeys = JSON.parse((await readFileBytes(opts.trustedKeys, "utf8"))) as unknown;
       if (!Array.isArray(trustedKeys)) throw new Error("trusted keys file must contain an array");
       const result = await fetchOrganizationPolicy({ organizationId, repositoryId, trustedKeys: trustedKeys as never[], cachePath: opts.cache, offline: opts.offline, endpoint: opts.endpoint });
       const safe = result.resolved && result.entry ? { resolved: true, source: result.source, organizationId: result.entry.organizationId, repositoryId: result.entry.repositoryId, policyDigest: result.entry.policyDigest, expiresAt: result.entry.expiresAt } : { resolved: false, reason: result.reason, status: result.status };

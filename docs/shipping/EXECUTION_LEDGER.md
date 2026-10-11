@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · current CLI main reconciliation and bounded Hunt qualification
+
+- **Source:** Reconciled `origin/main`
+  `f5686b5c5aa11f45f392e647bd9d7e31830654ba` into the private tracker at
+  base `90eaaa1e`.
+- **Verification:** CLI process passed, including `fix` **27/27** and command
+  boundary **44/44**; Hunt passed **45** with **16** explicit Docker
+  integration skips on macOS; MCP passed **48**; CLI/Hunt/MCP typechecks and
+  `git diff --check` passed.
+- **Disposition:** This validates the bounded runtime and package-owned
+  safety behavior only. Keep HUNT-008/009/010/011 and dependent acceptance
+  rows open for trusted/licensed provenance, independent AppSec/legal review,
+  hosted/customer qualification, and final release evidence.
+- **Boundary:** No Production, provider, database, entitlement, payment,
+  registry, or customer-data write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/cli-current-main-reconciliation-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · PLAN-WEB-014 Preview prepaid-card hosted qualification
 
 - **Implementation/deployment:** Web `887249d9f4d09842107fc6636b239af9f67b91d4`

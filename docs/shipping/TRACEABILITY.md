@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · current CLI main reconciliation and bounded Hunt qualification
+
+- **Mapped IDs:** `HUNT-008`, `HUNT-009`, `HUNT-010`, `HUNT-011`, and the
+  dependent acceptance/release rows.
+- **Implementation:** The tracker includes the bounded Hunt runtime, fixed
+  supported recipe catalog, MCP binding, approval/trust checks, and package
+  safety boundary from CLI `origin/main`
+  `f5686b5c5aa11f45f392e647bd9d7e31830654ba`.
+- **Verification:** CLI, Hunt, and MCP test processes passed; Hunt reported
+  45 passes and 16 explicit host-gated Docker skips; all three typechecks and
+  `git diff --check` passed.
+- **Acceptance:** Repository-owned behavior is qualified, but the rows stay
+  open for trusted/licensed recipe provenance, independent AppSec review,
+  legal approval, hosted/customer qualification, and final release evidence.
+- **Evidence:**
+  `docs/shipping/evidence/cli-current-main-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 Preview prepaid-card hosted qualification
 
 - **Mapped ID:** `PLAN-WEB-014`.

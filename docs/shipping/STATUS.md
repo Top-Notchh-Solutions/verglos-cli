@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · current CLI main reconciliation and bounded Hunt qualification
+
+The private tracker now contains the current CLI `origin/main` bounded Hunt
+runtime, supported recipe catalog, MCP binding, private-runner boundary,
+release-record exports, and rollback hardening. The reconciliation base is
+`90eaaa1e`; the source head reconciled was
+`f5686b5c5aa11f45f392e647bd9d7e31830654ba`.
+
+CLI tests passed (including `fix` **27/27** and command-boundary **44/44**),
+Hunt passed **45** tests with **16** explicit macOS/Linux Docker integration
+skips, MCP passed **48** tests, all three package typechecks passed, and
+`git diff --check` passed. This is repository-owned qualification only.
+
+No checkbox changed: trusted/licensed recipe provenance, independent AppSec
+review, legal approval, hosted/customer qualification, and final release
+evidence remain open. Score remains **223 checked / 57 unchecked / 280 total
+(79.6%)**.
+
+Evidence: `docs/shipping/evidence/cli-current-main-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 Preview prepaid-card hosted qualification
 
 The current Web head was exercised in isolated Preview. Canonical monthly

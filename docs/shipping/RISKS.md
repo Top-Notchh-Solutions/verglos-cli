@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-HUNT current runtime is code-qualified but not externally accepted
+
+- **Risk:** The current bounded Hunt runtime, fixed recipe catalog, MCP
+  binding, and deny-by-default adapters pass repository tests, but final
+  customer enablement still depends on trusted/licensed recipe provenance,
+  independent AppSec review, legal approval, and hosted/customer evidence.
+- **Impact:** Checking the Hunt and final acceptance rows now would overstate
+  shipping readiness.
+- **Safe next action:** Preserve the passing package evidence, obtain the
+  required provenance/reviewer approvals, then run the Linux/Docker and
+  hosted/customer acceptance matrix against the exact source commit.
+- **Status:** Code-side qualification passed; external gates remain open.
+- **Evidence:**
+  `docs/shipping/evidence/cli-current-main-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · R-PLAN-WEB-014 prepaid-card provider OTP boundary
 
 - **Risk:** Isolated Preview now reaches the canonical Cards-only order and

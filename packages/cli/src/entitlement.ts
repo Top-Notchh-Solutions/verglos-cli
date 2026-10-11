@@ -1,10 +1,10 @@
-import { createHash } from "node:crypto";
-import { lstat, mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
+import { chmod, lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import chalk from "chalk";
 import { verifyEntitlement } from "@verglos/entitlement";
-import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
+import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
 import { normalizeTier, type Tier } from "./tier-defaults.js";
 
 /**
@@ -192,7 +192,8 @@ export async function loadCapabilities(
 ): Promise<CachedCapabilities> {
   const now = Date.now();
   const creds = await loadCredentials();
-  const apiUrl = creds.apiUrl ?? DEFAULT_API_URL;
+  const apiUrl = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
+  if (!apiUrl) return FREE_FALLBACK;
   // Bind both online and offline reuse to the request identity. Legacy caches
   // without this binding require one successful refresh; signed tokens remain
   // available through the independently verified fallback.
@@ -343,6 +344,7 @@ export async function resolveEntitlement(
       stale: false,
       simulated: caps.simulated,
       realPlan: caps.real_plan === undefined ? undefined : normalizeTier(caps.real_plan),
+      ...(caps.catalog_version ? { catalogVersion: caps.catalog_version } : {}),
       ...(matchingLicense ? { license: matchingLicense } : {}),
       ...(matchingLicense?.schemaVersion === 2 ? {
         schemaVersion: 2 as const,
@@ -380,6 +382,7 @@ export async function resolveEntitlement(
       stale: caps.stale === true,
       simulated: caps.simulated,
       realPlan: caps.real_plan === undefined ? undefined : normalizeTier(caps.real_plan),
+      ...(caps.catalog_version ? { catalogVersion: caps.catalog_version } : {}),
       ...(license?.tier === normalizeTier(caps.plan) ? { license } : {}),
     };
   }

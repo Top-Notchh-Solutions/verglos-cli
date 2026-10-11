@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · current CLI main reconciliation and bounded Hunt qualification
+
+The private tracker now contains the current bounded Hunt runtime, supported
+recipe catalog, MCP approval binding, private-runner boundary, release-record
+exports, and rollback hardening from CLI `origin/main`
+`f5686b5c5aa11f45f392e647bd9d7e31830654ba`. CLI, Hunt, and MCP test suites
+passed; Hunt recorded **45 passes / 16 explicit macOS Docker skips**, MCP
+recorded **48 passes**, all three typechecks passed, and `git diff --check`
+passed.
+
+This closes the code-side implementation gap but does not close a backlog
+checkbox. HUNT-008/009/010/011 remain open for trusted/licensed recipe
+provenance, independent AppSec/legal review, and hosted/customer
+qualification. Score remains **223 checked / 57 unchecked / 280 total
+(79.6%)**. Evidence:
+`docs/shipping/evidence/cli-current-main-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 Preview prepaid-card hosted qualification
 
 The current Web head was redeployed to isolated Preview with the canonical
