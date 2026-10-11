@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · STUDIO-CLI-001 code revalidation and recipient boundary
+
+- **Implementation:** CLI `2b05390f` revalidated `record project-client`,
+  exact organization/workspace/record and projection-digest binding,
+  allowlisted redaction, and time-bounded approval.
+- **Verification:** Shared client-projection **4/4**, CLI command **1/1**, full
+  CLI test process exit **0**, typechecks/builds, and diff check passed.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked. Independent hosted
+  recipient redaction proof and authorized Studio recipient/customer
+  acceptance remain missing. No Production or application state changed.
+- **Next:** `LIC-002` is the next dependency-ready assessment.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-code-revalidation-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · TEAM-CLI-001 code revalidation and hosted boundary
 
 - **Implementation:** CLI worktree commit `2b05390f` revalidated signed

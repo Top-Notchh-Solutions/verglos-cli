@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · STUDIO-CLI-001 code revalidation and recipient boundary
+
+The current CLI head `2b05390f` revalidated the bounded `record project-client`
+projection, organization/workspace/record and projection-digest binding,
+private-field refusal, and explicit time-bounded upload approval. Shared
+client-projection tests passed **4/4**, the CLI command test passed **1/1**,
+the full CLI test process exited **0**, typechecks/builds passed, and
+`git diff --check` passed.
+
+`STUDIO-CLI-001` remains unchecked. Independent hosted-recipient redaction
+proof and a real authorized Studio recipient/customer acceptance run are still
+missing. No Production or application state changed. The next
+dependency-ready item is `LIC-002`. Score remains **223 checked / 57 unchecked
+/ 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/studio-cli-001-code-revalidation-2026-10-11.md`.
+
 ## 2026-10-11 · Final V1 product-contract decision
 
 The authoritative product contract is now

@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · STUDIO-CLI-001 code revalidation
+
+- **Mapped ID:** `STUDIO-CLI-001`.
+- **Implementation:** CLI `2b05390f` provides the bounded client projection,
+  exact workspace/record/digest binding, refusal of private fields, and
+  explicit upload approval.
+- **Verification:** Shared projection **4/4**, CLI command **1/1**, full CLI
+  test process exit **0**, typecheck/build/diff checks passed.
+- **Acceptance:** Independent hosted-recipient redaction proof and an
+  authorized Studio recipient/customer acceptance run are absent; checkbox
+  remains open.
+- **Next:** `LIC-002`.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-code-revalidation-2026-10-11.md`.
+
 ## 2026-10-11 · TEAM-CLI-001 code revalidation
 
 - **Mapped ID:** `TEAM-CLI-001`.

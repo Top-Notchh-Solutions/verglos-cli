@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep STUDIO-CLI-001 open after code revalidation
+
+- **Decision:** Accept the local projection and hosted-custody code evidence
+  only; do not check `STUDIO-CLI-001`.
+- **Reason:** The contract requires independent recipient-side redaction proof
+  and a real authorized Studio recipient/customer acceptance run. Local tests
+  and founder consent do not prove what the hosted recipient preserves.
+- **Boundary:** No Production, provider, entitlement, account, customer, or
+  public deployment write occurred.
+- **Next:** Assess `LIC-002` as the next dependency-ready item.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-code-revalidation-2026-10-11.md`.
+
 ## 2026-10-11 · Keep TEAM-CLI-001 open after code revalidation
 
 - **Decision:** Accept the current CLI verification as implementation evidence

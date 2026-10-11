@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · STUDIO-CLI-001 code revalidation
+
+The current CLI head `2b05390f` revalidated the bounded `record project-client`
+projection, exact organization/workspace/record and projection-digest binding,
+private-field refusal, and explicit time-bounded upload approval. Shared
+client-projection tests passed **4/4**, the CLI command test **1/1**, the full
+CLI test process exited **0**, typechecks/builds passed, and `git diff --check`
+passed.
+
+The item remains unchecked because independent hosted-recipient redaction
+proof and a real authorized Studio recipient/customer acceptance run are
+missing. No Production or application state changed. The next
+dependency-ready item is `LIC-002`. Score remains **223 checked / 57 unchecked
+/ 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/studio-cli-001-code-revalidation-2026-10-11.md`.
+
 ## 2026-10-11 · TEAM-CLI-001 code revalidation
 
 The authoritative CLI shipping worktree at `2b05390f` revalidated the signed

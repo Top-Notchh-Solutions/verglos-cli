@@ -1,5 +1,22 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-STUDIO-CLI-001 hosted recipient acceptance absent
+
+- **Risk:** The CLI projection and Web custody route enforce the intended
+  allowlist and digest/tenant binding locally, but recipient-side redaction
+  and an authorized Studio acceptance have not been independently observed.
+- **Impact:** Studio customer-held projection/custody cannot be claimed as
+  fully accepted.
+- **Owner:** Verglos release owner / authorized Studio recipient.
+- **Safe next action:** Use an isolated authorized Studio recipient, capture
+  the exact redacted projection and stored digest through the supported route,
+  and record independent review/customer acceptance. Do not upload source or
+  private findings and do not edit custody rows directly.
+- **Status:** Code-side revalidated; hosted/customer gate open. Next
+  dependency-ready assessment is `LIC-002`.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-code-revalidation-2026-10-11.md`.
+
 ## 2026-10-11 · R-TEAM-CLI-001 hosted policy authority remains absent
 
 - **Risk:** The CLI can verify and cache a policy safely, but the hosted
