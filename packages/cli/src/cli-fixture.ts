@@ -1,6 +1,8 @@
 import { spawn } from "node:child_process";
 import { readdir } from "node:fs/promises";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+
+const cliEntryPath = fileURLToPath(new URL("./index.ts", import.meta.url));
 
 export interface CliFixtureOptions {
   readonly timeoutMs?: number;
@@ -17,9 +19,10 @@ export async function runCliFixture(
   // tsx's Windows resolver accepts forward-slash drive paths, while raw
   // backslash paths can be interpreted as URL schemes by Node's ESM loader.
   // Convert only loader/CLI entry arguments; fixture paths remain unchanged.
+  const canonicalArgs = args.map((arg) => /[\\/]src[\\/]index\.ts$/.test(arg) ? cliEntryPath : arg);
   const normalizedArgs = process.platform === "win32"
-    ? args.map((arg, index) => {
-      const previous = args[index - 1];
+    ? canonicalArgs.map((arg, index) => {
+      const previous = canonicalArgs[index - 1];
       const isLoader = previous === "--import";
       const isCliEntry = /[\\/]src[\\/]index\.ts$/.test(arg);
       if (!/^[A-Za-z]:[\\/]/.test(arg)) return arg;
@@ -28,7 +31,7 @@ export async function runCliFixture(
       if (isLoader) return pathToFileURL(arg).href;
       return isCliEntry ? arg.replaceAll("\\", "/") : arg;
     })
-    : [...args];
+    : canonicalArgs;
   const result = await new Promise<{ exitCode: number; stdout: string; stderr: string; timedOut: boolean }>((resolve, reject) => {
     const child = spawn(command, normalizedArgs, { cwd, env: options.env ? { ...process.env, ...options.env } : process.env, stdio: ["ignore", "pipe", "pipe"] }); let stdout = ""; let stderr = ""; let timedOut = false;
     const timeout = options.timeoutMs === undefined ? undefined : setTimeout(() => { timedOut = true; child.kill("SIGTERM"); }, options.timeoutMs);
