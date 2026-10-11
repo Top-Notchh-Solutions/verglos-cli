@@ -1,5 +1,41 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · PLAN-WEB-014 Preview capture and signed webhook qualification
+
+With the isolated Preview webhook target enabled before payment, the official
+Razorpay Test Mode domestic card fixture completed the canonical Cards-only
+monthly order. Razorpay showed **Captured**; the signed webhook route returned
+HTTP **200**; the read-only order-status route returned HTTP **200**; and the
+browser reached Pro activation. A full Test Mode refund was then issued, but
+the provider currently reports it as processing, so `refund.processed` delivery
+and post-refund entitlement revocation remain unobserved.
+
+This proves the capture→signed webhook→ledger/activation path for one success
+case. It does not prove the complete failure/refund/expiry/manual-renewal/
+replay/timeout/exactly-once matrix. `PLAN-WEB-014` and Gate 4 remain open.
+Score remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-cards-capture-webhook-2026-10-11.md`.
+
+## 2026-10-11 · PLAN-WEB-014 Preview Cards capture with webhook timing boundary
+
+The official Razorpay Test Mode domestic card fixture completed the hosted
+card/OTP flow and the provider dashboard showed the canonical Pro monthly
+payment as **Captured**. The exact Preview webhook target was enabled after
+that payment, so no historical signed event was delivered and the application
+correctly remained waiting for webhook confirmation. No event was replayed or
+synthesized.
+
+This proves provider-side capture but not signed `payment.captured` delivery,
+ledger credit, fixed-term entitlement, refund, expiry, second manual-renewal
+order, replay/out-of-order handling, timeout/retry, or exactly-once behavior.
+`PLAN-WEB-014` and Gate 4 remain open. Score remains **223 checked / 57
+unchecked / 280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-cards-capture-webhook-boundary-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 current Preview prepaid order boundary
 
 The isolated Preview test-auth fixture was normalized without changing

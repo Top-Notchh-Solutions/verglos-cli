@@ -1,5 +1,41 @@
 # Verglos shipping decisions
 
+## Preview capture and signed webhook are proven; full lifecycle remains open · 2026-10-11
+
+- **Observation:** After enabling the isolated Preview target, the official
+  Razorpay Test Mode Cards-only payment was captured. The signed webhook and
+  order-status routes returned HTTP 200, and the browser reached Pro
+  activation. A full Test Mode refund was issued, but the provider reports it
+  as processing.
+- **Decision:** Accept this as valid success-path lifecycle evidence, but keep
+  `PLAN-WEB-014`, `PLAN-WEB-015`, and Gate 4 open. Do not mark the item complete
+  until processed-refund delivery/revocation and the remaining failure,
+  expiry, manual-renewal, replay, timeout, and exactly-once cases are proven.
+- **Boundary:** Test Mode and isolated Preview only; no fake event, direct
+  database edit, Production payment, or Production state change occurred.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-cards-capture-webhook-2026-10-11.md`.
+
+## Preview Cards capture is not signed entitlement evidence · 2026-10-11
+
+- **Observation:** The official Razorpay Test Mode card fixture completed and
+  the provider dashboard showed the canonical Pro monthly payment as Captured.
+  The exact Preview webhook target was enabled after the payment, so no
+  historical signed event was delivered.
+- **Decision:** Keep `PLAN-WEB-014`, `PLAN-WEB-015`, and Gate 4 open. Do not
+  treat provider capture alone as ledger credit or entitlement evidence.
+- **Next proof:** Run a fresh official Test Mode card payment after the enabled
+  Preview target is in place, then reconcile signed capture, refund, expiry,
+  manual renewal, replay/out-of-order, timeout/retry, and exactly-once cases.
+- **Boundary:** No fake event, direct database edit, Production payment, or
+  Production state change occurred.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-cards-capture-webhook-boundary-2026-10-11.md`.
+
 ## Preview prepaid card provider terminal boundary · 2026-10-11
 
 - **Observation:** Two official Razorpay domestic Test Mode card attempts in

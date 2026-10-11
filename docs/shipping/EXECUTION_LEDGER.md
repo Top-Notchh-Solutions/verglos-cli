@@ -1,5 +1,45 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PLAN-WEB-014 Preview capture and signed webhook qualification
+
+- **Implementation/provider:** The isolated Preview webhook target was enabled
+  before the official Razorpay Test Mode Cards-only payment. The canonical
+  monthly order completed and Razorpay showed **Captured**.
+- **Reconciliation:** The signed webhook route returned HTTP **200**, the
+  read-only order-status route returned HTTP **200**, and the browser reached
+  Pro activation.
+- **Refund boundary:** A full Test Mode refund was issued afterward. Razorpay
+  currently reports it as processing; no processed-refund event or entitlement
+  revocation has been recorded yet.
+- **Disposition:** Success-path capture/webhook/activation is proven, but keep
+  `PLAN-WEB-014` and Gate 4 open for failure, refund, expiry, manual renewal,
+  replay/out-of-order, timeout/retry, and exactly-once qualification.
+- **Boundary:** No Production payment, database, migration, entitlement,
+  account, or customer-data write occurred.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-cards-capture-webhook-2026-10-11.md`.
+
+## 2026-10-11 · PLAN-WEB-014 Preview Cards capture and webhook timing boundary
+
+- **Provider result:** The official Razorpay Test Mode card fixture completed
+  the hosted card/OTP flow and the provider dashboard showed the canonical Pro
+  monthly payment as **Captured**.
+- **Webhook timing:** The exact isolated Preview webhook target was enabled
+  after the payment had already been captured. No historical event was
+  delivered; no event was replayed or synthesized.
+- **Disposition:** Provider capture is evidence, not entitlement evidence.
+  Keep `PLAN-WEB-014` and Gate 4 open until a fresh payment proves signed
+  `payment.captured` delivery, ledger credit, fixed-term entitlement, and the
+  remaining refund/expiry/manual-renewal/exactly-once cases.
+- **Boundary:** No Production payment, database, migration, entitlement,
+  account, or customer-data write occurred.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-cards-capture-webhook-boundary-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 isolated Preview prepaid order creation
 
 - **Preflight:** The target was the current Web `887249d` isolated Preview

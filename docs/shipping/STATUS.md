@@ -1,5 +1,38 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-WEB-014 Preview capture and signed webhook qualification
+
+The isolated Preview target was enabled before the official Razorpay Test Mode
+Cards-only payment. Razorpay showed **Captured**; the signed webhook route and
+read-only order-status route returned HTTP **200**; and the browser reached Pro
+activation. A full Test Mode refund was issued afterward, but Razorpay reports
+it as processing, so processed-refund delivery and entitlement revocation are
+not yet proven.
+
+This is valid success-path lifecycle evidence, not full item completion.
+Failure recovery, processed refund, expiry, manual renewal, replay/out-of-order,
+timeout/retry, and exactly-once coverage remain open. Score remains **223
+checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-cards-capture-webhook-2026-10-11.md`.
+
+## 2026-10-11 · PLAN-WEB-014 Preview Cards capture with webhook timing boundary
+
+The official Razorpay Test Mode card fixture completed the hosted card/OTP
+flow and the provider dashboard showed the canonical Pro monthly payment as
+**Captured**. The exact Preview webhook target was enabled after that payment,
+so no historical signed event was delivered and the app correctly remained in
+its webhook-waiting state. No event was replayed or synthesized.
+
+Provider-side capture is proven; signed delivery, ledger credit, fixed-term
+entitlement, refund, expiry, manual-renewal second order, and exactly-once
+reconciliation remain open. `PLAN-WEB-014` and Gate 4 remain open. Score
+remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-cards-capture-webhook-boundary-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 current Preview prepaid order boundary
 
 The isolated Preview fixture was normalized and redeployed without touching
