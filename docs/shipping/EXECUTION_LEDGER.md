@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · Final V1 contract and execution protocol
+
+- **Contract:** `docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md` is the
+  current product direction across CLI, Web, Hunt, Attest, SCM, and plan
+  entitlements.
+- **Commercial model:** Paid plans use Cards-only prepaid fixed terms with
+  user-initiated manual renewal. Automatic recurring-card renewal is no longer
+  a V1 acceptance promise.
+- **Product scope:** Free/Pro/Team/Studio/Enterprise share one CLI; native
+  TypeScript/JavaScript coverage is first; Hunt is enabled through bounded
+  signed recipes; Attest creates portable signed Release Records; Team+
+  repository testing uses the authorized TopNotchh GitHub organization and
+  forked public TS/JS repositories.
+- **Execution:** Each batch selects the first dependency-ready unchecked
+  backlog item, implements it in the owning repository, runs the relevant
+  focused and full verification, writes evidence, updates this ledger and
+  `STATUS.md`, checks only a fully satisfied checkbox, and recomputes the
+  score. A document or test run alone never checks a row.
+- **External boundary:** Independent AppSec, legal/company approval, provider
+  account behavior, customer consent, and protected release approval cannot be
+  fabricated by the implementation runner.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed in this contract batch.
+
 ## 2026-10-10 · PLAN-WEB-014 official recurring-card fixture boundary
 
 - **Isolation:** The protected Preview deployment used the isolated Test Mode

@@ -1,5 +1,12 @@
 # Verglos V1 traceability
 
+## Current contract pointer · 2026-10-11
+
+Trace current product claims and implementation work against
+`docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md`. Historical evidence
+entries remain immutable; current checkbox/evidence status is maintained in
+`VERGLOS_V1_BACKLOG.md`, `EXECUTION_LEDGER.md`, and `STATUS.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 recurring Cards-only guard and Production rollout
 
 - **Mapped IDs:** `PLAN-WEB-014`, Gate 4; recurring checkout method boundary.

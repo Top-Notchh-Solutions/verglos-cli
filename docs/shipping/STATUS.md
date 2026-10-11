@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · Final V1 contract synchronization
+
+The shared product contract is
+`docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md`. It defines one CLI
+across Free, Pro, Team, Studio, and Enterprise; native TypeScript/JavaScript
+first; Hunt enabled through signed bounded recipes; Attest/Release Records as
+a required Pro+ capability; TopNotchh GitHub-organization/forked-public-repo
+testing for SCM; and Cards-only prepaid fixed-term billing with manual renewal.
+
+This is a target-contract synchronization, not acceptance evidence. Existing
+historical entries below remain unchanged. The payment blocker is now a code
+and qualification task for the prepaid order/entitlement lifecycle rather than
+a requirement to obtain a recurring-card simulator. Hunt, Attest, SCM,
+licensing, independent AppSec review, protected release, and final acceptance
+remain open until their evidence exists.
+
+The live score remains **223 checked / 57 unchecked / 280 total (79.6%)**. No
+checkbox changed in this documentation batch.
+
 ## 2026-10-10 · PLAN-WEB-014 official recurring-card fixture boundary
 
 The isolated Preview route created a canonical Pro monthly Razorpay Test Mode

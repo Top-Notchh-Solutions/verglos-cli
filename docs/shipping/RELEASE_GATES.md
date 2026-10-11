@@ -1,5 +1,28 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · Contract reset for implementable Final V1
+
+The current product contract is
+`docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md`.
+
+Gate 4 is now evaluated against Cards-only prepaid fixed-term billing with
+manual renewal: one-time card order, provider webhook, payment ledger,
+refund, expiry, and a new user-initiated renewal. Automatic recurring-card
+renewal is not a Final V1 promise, so the prior recurring-card fixture boundary
+is retained below as historical evidence and is not repeated as a required
+provider artifact.
+
+Gate 5 uses the authorized TopNotchh GitHub organization and forked public
+TypeScript/JavaScript repositories for installation, binding, webhook,
+pull-request, replay, failure/retry, and removal evidence.
+
+Hunt and Attest remain required product capabilities, not optional marketing
+claims. Gate 6 still requires an independent AppSec review of the Hunt
+sandbox; Gate 7 still requires authorized legal/company approval; Gate 8
+still requires protected release and rollback evidence; and Gate 9 still
+requires final acceptance/POC evidence. No gate is automatically passed by
+this documentation decision. The score remains **223/57/280 (79.6%)**.
+
 ## 2026-10-10 · Gate 4 official recurring-card fixture boundary
 
 The isolated Preview route created a canonical Pro monthly Razorpay Test Mode

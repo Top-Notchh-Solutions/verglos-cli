@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Final V1 product contract
+
+- **Decision:** Final V1 remains one CLI across Free, Pro, Team, Studio, and
+  Enterprise, with TypeScript/JavaScript as the initial native scanner
+  surface; Hunt enabled through bounded signed recipes; Attest/portable
+  Release Records required for Pro+; TopNotchh GitHub organization plus
+  forked public TS/JS repositories as the authorized SCM test corpus; and
+  Cards-only prepaid fixed-term billing with manual renewal.
+- **Rationale:** This preserves the complete product value while removing the
+  provider-specific automatic-renewal simulator dependency and avoiding
+  customer-managed cryptographic roots in ordinary V1.
+- **Boundary:** This is an implementation decision, not acceptance evidence.
+  Hunt distribution, Attest completion, SCM integration, payment/entitlement
+  reconciliation, AppSec review, legal approval, protected release, and final
+  acceptance remain separately gated.
+- **Authority:**
+  `docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md`.
+
 ## 2026-10-10 · Do not treat scheduled Test Mode charges as renewal acceptance
 
 - **Decision:** Keep `PLAN-WEB-014` and Gate 4 open after the current provider

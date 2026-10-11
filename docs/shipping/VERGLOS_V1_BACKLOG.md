@@ -1,5 +1,28 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · Final V1 product-contract decision
+
+The authoritative product contract is now
+`docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md`.
+
+The final V1 target is one CLI for Free, Pro, Team, Studio, and Enterprise;
+native TypeScript/JavaScript scanning first; bounded Hunt enabled by plan;
+portable Attest/Release Records for Pro+; TopNotchh GitHub-organization and
+forked public TypeScript/JavaScript repository testing for Team/Studio/
+Enterprise; and Cards-only prepaid fixed-term billing with manual renewal.
+
+This decision replaces the automatic-recurring-renewal promise. It does not
+close the payment rows: the Web order path, fixed-term entitlement, webhook,
+refund, expiry, and manual-renewal matrix must still be implemented and
+qualified. It also does not close Hunt, Attest, SCM, legal, AppSec, or final
+release rows. No checkbox changed in this documentation batch.
+
+Execution rule: implement the first dependency-ready unchecked item, run the
+required CLI/Web/hosted tests, write evidence, update the execution ledger and
+status, then recompute the checkbox score. Do not add duplicate rows for this
+contract decision. Starting score remains **223 checked / 57 unchecked / 280
+total (79.6%)**.
+
 ## 2026-10-10 · PLAN-WEB-014 official recurring-card fixture boundary
 
 The isolated Preview route created a canonical Pro monthly Razorpay Test Mode

@@ -2,6 +2,11 @@
 
 **Private shipping guide — 11 October 2026**
 
+**Contract update:** The final V1 product direction is now superseded by
+`FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md`: Hunt and Attest remain required
+capabilities, Team/Studio/Enterprise SCM testing uses the TopNotchh
+organization and public forks, and paid plans use prepaid manual renewal.
+
 This is the plain-language explanation of where Verglos has reached and what
 is still needed before calling the new product a final V1 release.
 

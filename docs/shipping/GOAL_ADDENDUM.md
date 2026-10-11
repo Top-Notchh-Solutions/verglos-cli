@@ -1,5 +1,10 @@
 # Goal addendum — 2026-10-07
 
+> **Current contract:** The dated 2026-10-11 product-contract and active-goal
+> entries supersede the historical checkpoint notes in this file. Use
+> `FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md` and
+> `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-11.md` for current execution.
+
 ## QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
 
 Read-only Chrome DevTools inspection of a separate production checkout tab

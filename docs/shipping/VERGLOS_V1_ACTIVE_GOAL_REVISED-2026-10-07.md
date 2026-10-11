@@ -1,5 +1,9 @@
 # Verglos V1 Active Shipping Goal — Whole-Backlog, Preview, and Production Shipping
 
+> **Superseded on 2026-10-11:** use
+> `docs/shipping/VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-11.md` as the complete
+> replacement goal. This historical file is retained for audit history.
+
 Effective checkpoint: 2026-10-10. This file is the authoritative replacement
 goal for the remaining shipping work. Replace the previous active goal with
 this complete version before resuming.
