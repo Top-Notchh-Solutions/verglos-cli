@@ -16,6 +16,11 @@
 - **Evidence:**
   docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md.
 
+**Queue transition:** The risk remains externally owned until the named
+screen-reader, paid-dataset, and field-CWV artifacts arrive. `HUNT-008` is
+already parked on its provenance/reviewer gate; `TEAM-CLI-001` is next for a
+separate hosted-trust assessment.
+
 ## 2026-10-11 · R-PUBLIC-SYNC-001 public/private history boundary mitigated
 
 - **Risk:** Local shipping branches can contain private tracker history that

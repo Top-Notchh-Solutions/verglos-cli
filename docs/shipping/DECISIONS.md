@@ -17,6 +17,11 @@
 - **Evidence:**
   `docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
 
+- **Queue decision:** After documenting the genuine external remainder,
+  `QUAL-WEB-006` stays open. Do not repeat the same automated account probe;
+  assess `TEAM-CLI-001` next while retaining `HUNT-008` as a parked external
+  blocker. No checkbox changed.
+
 ## 2026-10-11 · synchronize public Web/CLI repositories before next batch
 
 - **Decision:** Merge only the public-safe changes that were waiting in the

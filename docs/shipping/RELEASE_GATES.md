@@ -15,6 +15,10 @@ large-dataset, and field-CWV evidence remain missing. Score remains
 Evidence:
 `docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
 
+The manual blocker inventory now names the missing reviewer/fixture owners,
+the 2026-10-18 review date, and the safe unblock action. The next assessment
+is `TEAM-CLI-001`; this is a queue transition, not a release-gate pass.
+
 ## 2026-10-11 · public repository synchronization complete
 
 Web PR #173 and CLI PR #90 are merged. Web passed its focused test, typecheck,

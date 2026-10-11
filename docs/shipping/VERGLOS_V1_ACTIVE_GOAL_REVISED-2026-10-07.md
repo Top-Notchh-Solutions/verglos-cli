@@ -1,5 +1,26 @@
 # Verglos V1 Active Shipping Goal — Complete Contract, Whole Backlog, Preview, Production, and Release
 
+## 2026-10-11 execution checkpoint — QUAL-WEB-006 external remainder recorded
+
+The authenticated account-shell qualification completed its automated and
+repository-owned evidence: desktop/mobile Accessibility and Best Practices
+100/100, nine-control keyboard focus, mobile no-overflow, clean console and
+resources, LCP 483 ms, TTFB 72 ms, CLS 0.00, and focused contracts 37/37.
+The item remains unchecked because a human screen-reader report, an
+authorized paid-organization/large-dataset browser run, and field CWV evidence
+are still missing. The manual blocker inventory records their owners, missing
+artifacts, 2026-10-18 review date, safe unblock action, and release decision.
+Automated accessibility output is not being represented as human or field
+evidence.
+
+Public synchronization is complete: Web PR #173 and CLI PR #90 are merged,
+hosted checks passed, and no public PR is open. `HUNT-008` remains separately
+parked on trusted/licensed recipe provenance and independent review. The next
+dependency-ready assessment is `TEAM-CLI-001`; its hosted signer and
+repository-binding evidence must be assessed separately. The live score
+remains **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+changed.
+
 ## 2026-10-11 execution checkpoint — PLAN-WEB-014 Preview prepaid-card hosted run
 
 The current Web head `887249d9` was redeployed to isolated Preview as

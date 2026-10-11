@@ -17,6 +17,11 @@
 - **Evidence:**
   `docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
 
+- **External transition:** The remaining acceptance artifacts have named
+  owners and a 2026-10-18 review date in the manual blocker inventory.
+  `HUNT-008` remains separately parked; `TEAM-CLI-001` is the next assessment
+  and is not accepted by this record.
+
 ## 2026-10-11 · public Web/CLI push and merge reconciliation
 
 - **Mapped work:** Current Web and CLI shipping worktree changes waiting for

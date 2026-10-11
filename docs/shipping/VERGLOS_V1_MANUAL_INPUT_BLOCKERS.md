@@ -1,5 +1,38 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · QUAL-WEB-006 complete account-shell evidence; external remainder
+
+The authenticated Production account-shell recheck is complete for the
+repository-owned and automated portions of `QUAL-WEB-006`: desktop/mobile
+Lighthouse Accessibility and Best Practices are 100/100, keyboard traversal
+reached all nine named controls with visible focus, mobile 390x844 has no
+horizontal overflow, the console is clean, target resources are successful,
+the clean trace measured LCP 483 ms / TTFB 72 ms / CLS 0.00, and focused
+contracts passed 37/37. The page was read-only; no Production/provider,
+database, entitlement, organization, account, or customer-data write occurred.
+
+The checkbox remains open. Missing artifacts are: (1) an authorized human
+screen-reader report covering the authenticated account and organization
+journey, (2) an authorized paid-organization/large-dataset browser run with
+the exact fixture/deployment recorded, and (3) field Core Web Vitals from
+CrUX/RUM or an equivalent authorized field source. Lighthouse, an accessibility
+tree, and a lab trace are not substitutes for those three artifacts.
+
+Owner: release owner plus the authorized accessibility/performance reviewer
+and the owner of the paid/large-dataset fixture. Review: 2026-10-18 or when
+the artifacts are available. Next action: run those observations against the
+exact current deployment, retain redacted evidence with route/device/commit
+metadata, and reconcile failures before acceptance. Release decision: keep
+`QUAL-WEB-006` unchecked; do not claim complete accessibility or field
+performance acceptance.
+
+Queue transition: `HUNT-008` remains the first unchecked backlog row but is
+already parked on its separate trusted/licensed recipe-provenance and
+independent-review blocker. The next dependency-ready assessment is
+`TEAM-CLI-001`; its code is qualified, but its hosted signer/repository
+binding evidence must be assessed separately. Score remains **228/52/280
+(81.4%)**.
+
 ## 2026-10-11 · DIST-001 package boundary qualified; dependencies remain
 
 The public six-package surface is code-qualified at CLI `0ef96caa`: build 6/6,

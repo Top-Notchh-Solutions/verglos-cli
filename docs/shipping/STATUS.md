@@ -17,6 +17,11 @@ remains **228 checked / 52 unchecked / 280 total (81.4%)**.
 Evidence:
 `docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
 
+The next dependency-ready assessment is `TEAM-CLI-001` after the already
+recorded external `HUNT-008` blocker. `TEAM-CLI-001` must be evaluated as its
+own hosted signer/repository-binding item; no checkbox is implied by this
+queue transition.
+
 ## 2026-10-11 · public Web/CLI push and merge complete
 
 The waiting public-safe changes are now synchronized. Web PR #173 merged at

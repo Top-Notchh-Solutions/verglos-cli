@@ -20,6 +20,12 @@
 - **Evidence:**
   `docs/shipping/evidence/qual-web-006-account-recheck-2026-10-11.md`.
 
+- **Blocker record:** Human screen-reader, paid-organization/large-dataset,
+  and field-CWV evidence still require their named external owners. The
+  first unchecked `HUNT-008` row is already parked on its independent
+  provenance/review gate; the next dependency-ready assessment is
+  `TEAM-CLI-001`.
+
 ## 2026-10-11 · public Web/CLI push and merge reconciliation
 
 - **Web:** PR #173 merged to `main` at
