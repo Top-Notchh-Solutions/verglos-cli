@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-PRO-008 billing contract aligned
+
+- Risk: A Pro customer could mistake legacy subscription rows or provider
+  invoice metadata for automatic renewal or a tax-invoice product.
+- Verification: Web d4dd7f9 labels legacy subscriptions as
+  reconciliation-only, exposes an owner-managed manual-renewal link to the
+  Cards-only checkout, and explicitly withholds invoice documents, tax
+  payloads, and provider URLs. Existing server-side member/allowance/usage
+  projections remain tenant scoped.
+- Status: PRO-008 accepted under the Final V1 prepaid contract. The remaining
+  risk is external release/SCM/Hunt/legal/acceptance qualification, not an
+  unbounded client-side billing control.
+- Evidence:
+  docs/shipping/evidence/pro-008-final-v1-billing-view-2026-10-11.md.
+
 ## 2026-10-11 · R-PLAN-WEB-012 lifecycle contract reconciled
 
 - **Risk:** Legacy recurring-subscription code could be mistaken for a V1

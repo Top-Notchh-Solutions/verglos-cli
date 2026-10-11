@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Accept PRO-008 under Final V1 billing contract
+
+- Decision: Check PRO-008 for the server-enforced Pro member and
+  billing/usage view. Final V1 exposes Cards-only prepaid fixed-term access
+  and customer-initiated manual renewal; legacy subscription rows are
+  reconciliation-only.
+- Implementation: Web d4dd7f9 adds the explicit owner-managed renewal path and
+  truthful billing boundary on top of the existing server-side
+  member/allowance/threshold/payment/provider-metadata implementation.
+- Verification: Focused commercial/payment suites pass 39/40 and 29/30 with
+  one explicit environment-gated skip each; isolated Docker
+  commercial-state/billing integration passed 7/7; typecheck/build/diff
+  passed.
+- Boundary: No Production or provider/database/entitlement/customer-data
+  write. V1 does not claim tax-invoice documents, provider download URLs, or
+  automatic recurring renewal.
+- Score: 228/52/280 (81.4%).
+- Evidence:
+  docs/shipping/evidence/pro-008-final-v1-billing-view-2026-10-11.md.
+
 ## 2026-10-11 · Accept PLAN-WEB-012 under Final V1 billing contract
 
 - **Decision:** Check `PLAN-WEB-012` against Cards-only prepaid fixed-term

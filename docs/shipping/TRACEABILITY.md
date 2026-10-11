@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · PRO-008 final V1 billing-view acceptance
+
+- Mapped ID: PRO-008.
+- Implementation: Web d4dd7f9 adds the explicit owner-managed manual-renewal
+  path and aligns billing language/state to Cards-only prepaid access; Web
+  982b57d supplies server-side seat/member admission and cad9404 supplies
+  validated provider-invoice metadata projection.
+- Verification: Focused commercial/payment suites pass 39/40 and 29/30, each
+  with one explicit environment-gated skip; isolated Docker
+  commercial-state/billing integration passed 7/7; typecheck, build, and diff
+  checks pass.
+- Acceptance: Checkbox checked at 228/52/280 (81.4%). Invoice
+  documents/tax payloads and automatic recurring renewal are outside the
+  Final V1 promise; payment/provider metadata remains tenant- and
+  owner-scoped.
+- Evidence:
+  docs/shipping/evidence/pro-008-final-v1-billing-view-2026-10-11.md.
+
 ## 2026-10-11 · PLAN-WEB-012 final prepaid lifecycle acceptance
 
 - **Mapped ID:** `PLAN-WEB-012`.

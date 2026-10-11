@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · PRO-008 accepted · Final V1 billing view
+
+The Pro organization billing surface is accepted against the Final V1
+Cards-only prepaid/manual-renewal contract. Server-side member admission,
+allowance bars, threshold warnings, owner-only payment/provider metadata, and
+the explicit manual-renewal checkout path are implemented and verified.
+Automatic recurring renewal, tax-invoice documents, and provider download URLs
+are not V1 claims.
+
+This closes one backlog item only. It does not pass Gate 5 SCM, independent
+Hunt/AppSec, legal, protected release/rollback, or final acceptance.
+
+Score is 228/52/280 (81.4%). Evidence:
+docs/shipping/evidence/pro-008-final-v1-billing-view-2026-10-11.md.
+
 ## 2026-10-11 · PLAN-WEB-012 accepted under prepaid/manual-renewal contract
 
 The billing lifecycle is accepted for the Final V1 contract: signed

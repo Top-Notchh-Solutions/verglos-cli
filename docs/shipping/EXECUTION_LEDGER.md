@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PRO-008 accepted · Final V1 billing view
+
+- Implementation: Web d4dd7f9 aligns the organization billing view with the
+  Cards-only prepaid/manual-renewal contract and links owner-managed renewal
+  to the server-owned checkout. Existing Web 982b57d server-side seat
+  admission/member lifecycle and cad9404 provider-invoice metadata projection
+  remain in scope.
+- Verification: Focused commercial/allowance/threshold/checkout/route
+  contracts 39/40 (one explicit environment-gated skip); focused payment
+  suite 29/30 (one explicit environment-gated skip); existing isolated Docker
+  commercial-state/billing integration 7/7; typecheck, 47-page production
+  build, and diff check passed.
+- Contract boundary: Payment/provider metadata is owner-only and tenant
+  bound. Legacy subscriptions do not renew or grant access by themselves.
+  V1 does not fabricate tax invoices or provider download URLs.
+- Decision: Check PRO-008. No Production payment, database, migration,
+  entitlement, account, organization, provider, or customer-data write.
+- Score: 228 checked / 52 unchecked / 280 total (81.4%).
+- Evidence:
+  docs/shipping/evidence/pro-008-final-v1-billing-view-2026-10-11.md.
+
 ## 2026-10-11 · PLAN-WEB-012 accepted · Final V1 prepaid lifecycle
 
 - **Contract:** Re-scoped the old recurring-lifecycle wording to the final

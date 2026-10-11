@@ -1,5 +1,24 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · PRO-008 cleared by Final V1 billing contract
+
+The Pro member and billing view is no longer blocked by the retired
+recurring-subscription or invoice-document expectation. V1 provides
+server-enforced two-seat membership, allowance and threshold projections,
+owner-only payment/provider metadata, and a customer-initiated manual-renewal
+link to Cards-only prepaid checkout. Legacy subscription rows remain visible
+only for reconciliation; tax-invoice documents and provider download URLs are
+not claimed.
+
+PRO-008 is checked. Score is 228/52/280 (81.4%). No external input is needed
+for this checkbox. The next dependency-ready item is selected only after the
+HUNT-008 external provenance/reviewer blocker is recorded; remaining gates are
+Gate 5 SCM, independent Hunt/AppSec, legal, protected release/rollback, and
+final acceptance.
+
+Evidence:
+docs/shipping/evidence/pro-008-final-v1-billing-view-2026-10-11.md.
+
 ## 2026-10-11 · PLAN-WEB-012 cleared by Final V1 contract reconciliation
 
 The old recurring-subscription acceptance wording is retired. Final V1 now

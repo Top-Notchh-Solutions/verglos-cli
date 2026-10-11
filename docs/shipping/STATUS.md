@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PRO-008 accepted · Final V1 billing view
+
+The Pro organization surfaces now match the Final V1 billing contract:
+server-enforced two-seat invitations, allowance bars, server-reconciled
+threshold warnings, owner-only payment/provider metadata, and an explicit
+manual-renewal path to the Cards-only prepaid checkout. Legacy subscription
+rows are reconciliation-only; V1 does not claim tax-invoice documents or
+automatic card renewal.
+
+PRO-008 is checked. Focused commercial/payment suites passed 39/40 and
+29/30 with only explicit environment-gated skips, the existing isolated
+Docker commercial-state/billing integration passed 7/7, and typecheck/build
+passed. Score is 228 checked / 52 unchecked / 280 total (81.4%).
+
+Evidence:
+docs/shipping/evidence/pro-008-final-v1-billing-view-2026-10-11.md.
+
 ## 2026-10-11 · PLAN-WEB-012 accepted · Final V1 prepaid lifecycle
 
 The billing lifecycle is now reconciled to the final product contract:
