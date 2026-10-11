@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · LIC-003 notice-generator recheck and artifact boundary
+
+- **Verification:** Notice output was byte-identical across two runs,
+  **197,966 bytes**, SHA-256
+  `2355bbf2062a9b3dbe86daf95dbb4d8708236cc276f1b25e59475a7b64febad1`.
+  The current artifact directory contains zero `.tgz` archives.
+- **Disposition:** Keep `LIC-003` unchecked. Final archives, `LIC-002` legal
+  disposition, and authorized approval remain missing. No package or external
+  state changed.
+- **Next:** `DIST-001` is the next dependency-ready assessment after parking
+  this legal/artifact boundary.
+- **Evidence:**
+  `docs/shipping/evidence/lic-003-notice-generator-recheck-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · LIC-002 mechanical inventory and legal boundary
 
 - **Verification:** License inventory passed with **148 entries / 0 automated

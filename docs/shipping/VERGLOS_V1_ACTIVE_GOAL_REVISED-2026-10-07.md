@@ -2696,3 +2696,18 @@ The next dependency-ready item is `LIC-003`; score remains **223 checked / 57
 unchecked / 280 total (79.6%)**.
 
 Evidence: `docs/shipping/evidence/lic-002-technical-recheck-2026-10-11.md`.
+
+### 2026-10-11 `LIC-003` notice-generator checkpoint
+
+The private notice generator produced byte-identical output twice: **197,966
+bytes**, SHA-256
+`2355bbf2062a9b3dbe86daf95dbb4d8708236cc276f1b25e59475a7b64febad1`. The
+current `.artifacts` directory contains zero `.tgz` archives for final package
+qualification.
+
+`LIC-003` remains unchecked because exact release archives, reconciliation with
+the unresolved `LIC-002` legal record, and authorized legal approval remain
+missing. No package or external state changed. The next dependency-ready item
+is `DIST-001`; score remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/lic-003-notice-generator-recheck-2026-10-11.md`.

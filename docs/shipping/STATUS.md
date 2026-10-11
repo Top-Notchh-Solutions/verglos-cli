@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · LIC-003 notice-generator recheck
+
+The notice generator produced byte-identical output twice: **197,966 bytes**,
+SHA-256 `2355bbf2062a9b3dbe86daf95dbb4d8708236cc276f1b25e59475a7b64febad1`.
+The current private `.artifacts` directory has **zero `.tgz` archives** for
+final package-surface qualification.
+
+`LIC-003` remains unchecked: exact release archives, the unresolved `LIC-002`
+legal record, and authorized legal approval are still required. No package or
+external state changed. The next dependency-ready assessment is `DIST-001`.
+Score remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/lic-003-notice-generator-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · LIC-002 mechanical inventory and legal boundary
 
 The private CLI shipping source passed the license inventory with **148

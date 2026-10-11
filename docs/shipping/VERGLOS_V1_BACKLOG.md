@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · LIC-003 notice-generator recheck and artifact boundary
+
+The private notice generator produced byte-identical output on two runs:
+**197,966 bytes**, SHA-256
+`2355bbf2062a9b3dbe86daf95dbb4d8708236cc276f1b25e59475a7b64febad1`. It
+retains upstream identity/LICENSE/NOTICE text and the non-endorsement
+disclaimer. The current `.artifacts` directory has **zero `.tgz` archives**.
+
+`LIC-003` remains unchecked because final acceptance still needs exact release
+archive qualification, reconciliation with the unresolved `LIC-002` record,
+and authorized legal approval. No package or external state changed. The next
+dependency-ready assessment after this boundary is `DIST-001`. Score remains
+**223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/lic-003-notice-generator-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · LIC-002 mechanical inventory and legal boundary
 
 The private CLI shipping source passed `node scripts/license-inventory.mjs

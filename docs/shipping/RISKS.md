@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-LIC-003 final notice/archive qualification absent
+
+- **Risk:** Notice generation is deterministic, but no current release archive
+  has been inspected against the exact dependency graph and unresolved legal
+  record.
+- **Impact:** Public package notice completeness and redistribution readiness
+  cannot be claimed.
+- **Owner:** Release/legal qualification owner.
+- **Safe next action:** Build the exact candidate archives, inspect every
+  package surface and notice, reconcile with `LIC-002`, and obtain the
+  authorized legal decision before publication.
+- **Status:** Generator revalidated; final artifact/legal gate open. Next
+  dependency-ready assessment is `DIST-001`.
+- **Evidence:**
+  `docs/shipping/evidence/lic-003-notice-generator-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · R-LIC-002 external-content approval remains absent
 
 - **Risk:** Mechanical dependency inventory is clean, but external engine,

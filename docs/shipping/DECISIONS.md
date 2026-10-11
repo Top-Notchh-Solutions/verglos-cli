@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep LIC-003 open after notice recheck
+
+- **Decision:** Accept deterministic notice generation as mechanical evidence
+  only; do not check `LIC-003`.
+- **Reason:** No final `.tgz` archives are present for package-surface
+  qualification, and the dependent external-content/legal decisions in
+  `LIC-002` remain open.
+- **Boundary:** No package, registry, release, Production, provider,
+  database, entitlement, account, or customer-data state changed.
+- **Next:** Assess `DIST-001` after parking this boundary.
+- **Evidence:**
+  `docs/shipping/evidence/lic-003-notice-generator-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · Keep LIC-002 open after mechanical inventory
 
 - **Decision:** Accept the automated inventory and notice tests as mechanical

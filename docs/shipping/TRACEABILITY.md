@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · LIC-003 notice-generator recheck
+
+- **Mapped ID:** `LIC-003`.
+- **Verification:** Deterministic notice output, **197,966 bytes**, SHA-256
+  `2355bbf2062a9b3dbe86daf95dbb4d8708236cc276f1b25e59475a7b64febad1`;
+  zero current `.tgz` archives.
+- **Acceptance:** Exact archive qualification and authorized legal approval
+  remain absent; the checkbox remains open.
+- **Next:** `DIST-001` after the legal/artifact boundary is parked.
+- **Evidence:**
+  `docs/shipping/evidence/lic-003-notice-generator-recheck-2026-10-11.md`.
+
 ## 2026-10-11 · LIC-002 mechanical inventory and legal boundary
 
 - **Mapped ID:** `LIC-002`.
