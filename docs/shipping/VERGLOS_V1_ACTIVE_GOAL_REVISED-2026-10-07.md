@@ -1,5 +1,64 @@
 # Verglos V1 Active Shipping Goal — Complete Contract, Whole Backlog, Preview, Production, and Release
 
+## 2026-10-12 final qualification finish-line amendment
+
+This is the current operating direction for the same goal. Preserve the
+historical checkpoints and score snapshots below; the latest live backlog
+score and the latest evidence files are authoritative.
+
+The finish line is now explicit: complete the remaining backlog rows in
+dependency order, close every row whose implementation and evidence gates are
+actually satisfied, run the final qualification suite across the CLI, Web,
+Preview, and bounded Production paths, freeze the release candidate, run the
+held-out TypeScript/JavaScript proof-of-concept corpus, and record a dated
+founder go/no-go decision. Stop at that final qualification and POC decision.
+Campaign execution, additional language expansion, general availability
+claims, and unrelated feature expansion are outside this goal.
+
+The new founder-friendly collection packets are part of this goal and are
+the operational index for external deliverables:
+
+```text
+docs/shipping/FOUNDER_DELIVERABLES_GUIDE_2026-10-12.md
+docs/shipping/deliverables/00-COLLECTION-INDEX-2026-10-12.md
+docs/shipping/deliverables/11-BLOCKER-REGISTER-2026-10-12.md
+```
+
+Codex must inspect the local repositories and record exact current commit
+SHAs itself. The founder does not need to send commit hashes, repository
+source, secrets, database URLs, tokens, cookies, or customer data in chat.
+Codex may generate and maintain private Markdown/JSON evidence and run
+in-scope local, Docker, Preview, and bounded Production checks. A draft,
+automated check, or generated packet never substitutes for a real human or
+external approval.
+
+The remaining work is divided into two kinds:
+
+- Codex-completable work: implementation, tests, repository-owned evidence,
+  private packet preparation, score reconciliation, release scripts, and
+  safe hosted checks where the required account is already authorized.
+- Human/external work: source-owner or license confirmation, an independent
+  AppSec reviewer who did not build Hunt, an authorized legal/company
+  approval, GitHub/GitLab organization-owner installation or consent, Studio
+  recipient and Enterprise operator acceptance, and any provider-controlled
+  payment or field-performance evidence.
+
+The finish sequence is: Hunt provenance and independent review; hosted Team
+policy signer and SCM binding; Studio and Enterprise acceptance; legal and
+release provenance/rollback; Web privacy, accessibility, and field-quality
+evidence; commercial and participant acceptance; then final Web qualification
+and the held-out POC corpus. A dependency transition is allowed only after
+the active row has a written blocker owner, missing artifact, review date,
+safe next action, and private evidence entry. No checkbox is checked for a
+plan, draft, or partial provider run.
+
+The goal is complete only when the live backlog has no required unchecked
+rows, all external gates are either evidenced or explicitly accepted in the
+release decision, the final qualification suite passes with skips explained,
+the held-out TS/JS POC corpus is recorded, and the founder has a dated
+go/no-go decision. At that point stop and report the final score, evidence,
+residual risks, and release decision.
+
 ## 2026-10-11 execution checkpoint — QUAL-WEB-006 external remainder recorded
 
 The authenticated account-shell qualification completed its automated and
@@ -139,8 +198,9 @@ contract is applied to each row as it is implemented and qualified.
 
 ### The backlog remains the source of completion truth
 
-The current private score at this amendment is **223 checked / 57 unchecked /
-280 total (79.6%)**. Recompute it from the live
+The score recorded at that 2026-10-11 amendment was **223 checked / 57
+unchecked / 280 total (79.6%)**. The latest live score is **228 checked / 52
+unchecked / 280 total (81.4%)**. Recompute it from the live
 `docs/shipping/VERGLOS_V1_BACKLOG.md` after every substantial batch.
 
 For every unchecked row, keep exactly one active ID, implement the complete
@@ -178,6 +238,8 @@ docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md
 docs/shipping/FOUNDER_GUIDE_FROM_ALPHA_TO_FINAL_2026-10-11.md
 docs/shipping/acceptance/
 docs/shipping/evidence/
+docs/shipping/FOUNDER_DELIVERABLES_GUIDE_2026-10-12.md
+docs/shipping/deliverables/
 docs/shipping/legal/
 ```
 
