@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · HUNT-008 recheck and next implementation queue
+
+The exact CLI shipping worktree Hunt build and executable tests pass. The
+current implementation already enforces signed feed/trust-root verification,
+license-text digests, approval receipts, exact recipe/rule/subject binding,
+the fixed supported catalog, bounded execution, cleanup, and fail-closed
+drift. HUNT-008 remains unchecked because authorized recipe provenance/legal
+disposition and independent AppSec approval are external requirements. Its
+private recheck is recorded in
+`docs/shipping/evidence/hunt-008-contract-recheck-2026-10-11.md`.
+
+The queue now assesses `PLAN-WEB-012` for the prepaid Cards-only/manual-renewal
+contract. Score remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · Final V1 contract synchronization
 
 The shared product contract is

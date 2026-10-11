@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · HUNT-008 contract recheck and queue transition
+
+- **Code-side result:** The exact CLI shipping worktree commit
+  `2b05390f99811fb70f4dcdc1fca0b9662ed79f2c` passed the Hunt package build and
+  executable tests. The run confirms signed feed/trust-root verification,
+  license-text digest validation, approval receipt enforcement, exact binding,
+  fixed-catalog validation, bounded execution, cleanup, redaction, and
+  fail-closed drift handling. Docker/Linux integration cases remain explicit
+  environment-gated skips.
+- **External boundary:** HUNT-008 still requires authorized publisher and
+  license/provenance records plus independent AppSec review. The code-side
+  approval path cannot fabricate those approvals. No checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-008-contract-recheck-2026-10-11.md`.
+- **Queue:** HUNT-008 remains parked unchecked. The next dependency-ready
+  implementation assessment is `PLAN-WEB-012`, under the final prepaid
+  Cards-only/manual-renewal contract.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · Final V1 contract and execution protocol
 
 - **Contract:** `docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md` is the
