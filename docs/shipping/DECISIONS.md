@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## Preview prepaid card provider terminal boundary · 2026-10-11
+
+- **Observation:** Two official Razorpay domestic Test Mode card attempts in
+  isolated Preview reached hosted Checkout, but the provider returned its own
+  payment-failure result before any signed terminal event. No OTP was guessed.
+- **Disposition:** This proves the provider failure presentation and keeps the
+  payment path fail-closed, but it does not prove capture, ledger credit,
+  entitlement, refund, expiry, manual renewal, or exactly-once reconciliation.
+  Keep `PLAN-WEB-014`, `PLAN-WEB-015`, and Gate 4 open.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-provider-terminal-failure-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed.
+
 ## Preview prepaid order creation is qualified; Gate 4 remains open · 2026-10-11
 
 - **Decision:** Treat the current isolated Preview Cards-only order response as

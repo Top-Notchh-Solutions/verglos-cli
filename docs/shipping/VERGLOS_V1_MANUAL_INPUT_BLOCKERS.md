@@ -1,5 +1,15 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · prepaid provider terminal boundary
+
+Two official Razorpay domestic Test Mode card attempts reached the isolated
+Preview hosted checkout, but the provider returned its own failure result
+before a signed terminal event. The application therefore has no provider
+capture to reconcile into the payment ledger or fixed-term entitlement. Keep
+`PLAN-WEB-014`, `PLAN-WEB-015`, and Gate 4 open. Do not guess an OTP, synthesize
+a webhook, edit a database row, or use Production billing. Evidence:
+`docs/shipping/evidence/plan-web-014-preview-prepaid-provider-terminal-failure-2026-10-11.md`.
+
 ## 2026-10-11 · prepaid contract current boundary
 
 The current Final V1 contract replaces the historical recurring-card payment
