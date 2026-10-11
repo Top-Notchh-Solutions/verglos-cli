@@ -1,5 +1,22 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · QUAL-CLI-006 harness repair complete; external release artifacts remain
+
+The shared CLI process-test entry defect is fixed and requalified: record
+create/verify **11/11**, full focused QUAL-CLI-006 set **34/34**, and Turbo
+typecheck/build **12/12**. No founder input is needed for this code repair.
+
+The remaining blocker is external and unchanged: bind a trusted keyless
+Fulcio/Rekor identity to the protected npm release pipeline, obtain licensing
+clearance and an independent review, and record final release acceptance.
+Owner: CLI/release qualification plus the protected release administrator.
+Review: 2026-10-11 or when those artifacts are available. Release decision:
+keep `QUAL-CLI-006` unchecked and do not claim a public release from local
+qualification. Score remains **228/52/280 (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/qual-cli-006-process-entry-repair-2026-10-11.md`.
+
 ## 2026-10-11 · TEAM-CLI-001 hosted signer/SCM block
 
 TEAM-CLI-001's repository-owned code is qualified at focused tests 8/8 and

@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep QUAL-CLI-006 open after process-entry repair
+
+- **Decision:** Accept the shared CLI process-entry repair as qualification
+  progress only; do not check `QUAL-CLI-006`.
+- **Evidence:** Commit `0ef96caa`; record create/verify 11/11; focused
+  QUAL-CLI-006 set 34/34; Turbo typecheck/build 12/12; diff check passed.
+- **Reason:** The live release still lacks trusted keyless Fulcio/Rekor
+  provenance, protected publishing, licensing clearance, independent review,
+  and final acceptance.
+- **Boundary:** No npm publication, Production/provider/database/entitlement
+  write, or release promotion occurred.
+- **Score:** 228/52/280 (81.4%).
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-process-entry-repair-2026-10-11.md`.
+
 ## 2026-10-11 · Accept PRO-008 under Final V1 billing contract
 
 - Decision: Check PRO-008 for the server-enforced Pro member and

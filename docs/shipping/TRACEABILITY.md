@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · QUAL-CLI-006 process-entry repair addendum
+
+- **Mapped ID:** `QUAL-CLI-006`.
+- **Implementation:** Shipping CLI commit `0ef96caa` canonicalizes the CLI
+  process entry in the shared test fixture from the invalid monorepo-root path
+  to `packages/cli/src/index.ts`.
+- **Verification:** Record create/verify **11/11**; full focused release
+  qualification **34/34**; Turbo typecheck/build **12/12**; diff check passed.
+- **Acceptance:** Preparatory evidence only. The item remains unchecked until
+  trusted keyless release provenance, protected publishing, legal clearance,
+  independent review, and final acceptance are recorded.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-process-entry-repair-2026-10-11.md`.
+
 ## 2026-10-11 · TEAM-CLI-001 code qualification boundary
 
 - Mapped ID: TEAM-CLI-001.

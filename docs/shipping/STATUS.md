@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · QUAL-CLI-006 process-entry repair qualified; release gate remains
+
+The current CLI shipping worktree repaired a shared process-test harness defect:
+tests were resolving a nonexistent monorepo-root `src/index.ts` instead of the
+package entry. Commit `0ef96caa` now canonicalizes that entry in the shared
+fixture launcher. Record create/verify passed **11/11**; the complete focused
+QUAL-CLI-006 set passed **34/34**; Turbo typecheck/build passed **12/12**; and
+`git diff --check` passed.
+
+This is qualification progress, not a checkbox acceptance. Trusted keyless
+release identity, protected publication, legal clearance, independent review,
+and final release acceptance remain absent. Score remains **228 checked / 52
+unchecked / 280 total (81.4%)**. No npm publication or Production/provider/
+database/entitlement write occurred.
+
+Evidence:
+`docs/shipping/evidence/qual-cli-006-process-entry-repair-2026-10-11.md`.
+
 ## 2026-10-11 · TEAM-CLI-001 code qualified; hosted signer/SCM gate remains
 
 The shipping CLI organization-policy implementation passed its focused

@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · QUAL-CLI-006 process-entry repair qualification
+
+- **Implementation:** CLI shipping worktree commit `0ef96caa` repaired the
+  shared process-test launcher so legacy monorepo-root `src/index.ts` arguments
+  resolve to the actual `packages/cli/src/index.ts` entry. Fixture paths are
+  not rewritten.
+- **Verification:** Record create/verify process tests **11/11**; complete
+  focused record/Sigstore/rollback/standards/platform/release/clean-consumer
+  set **34/34**; Turbo dependency-graph typecheck/build **12/12**; diff check
+  passed.
+- **Boundary:** This removes a local harness failure only. QUAL-CLI-006 stays
+  unchecked pending trusted keyless Fulcio/Rekor identity, protected npm
+  publication, licensing, independent review, and final release acceptance.
+  No npm publication, Production/provider/database/entitlement write, or
+  release promotion occurred.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-process-entry-repair-2026-10-11.md`.
+
 ## 2026-10-11 · TEAM-CLI-001 code qualification recorded; not accepted
 
 - **Verification:** Shipping CLI worktree head 2b05390f passed the

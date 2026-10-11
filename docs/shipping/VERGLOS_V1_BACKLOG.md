@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · QUAL-CLI-006 process-entry repair qualification addendum
+
+The shared CLI process-test harness now resolves the actual package entry after
+commit `0ef96caa` repaired the invalid monorepo-root `src/index.ts` path.
+Record create/verify passed **11/11**, the full focused release qualification
+set passed **34/34**, Turbo typecheck/build passed **12/12**, and the diff check
+passed. This is implementation/test progress only: trusted keyless release
+identity, protected publication, legal clearance, independent review, and final
+acceptance remain open, so `QUAL-CLI-006` stays unchecked.
+
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/qual-cli-006-process-entry-repair-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-012 accepted · Final V1 prepaid lifecycle
 
 The lifecycle item is reconciled to the Final V1 contract: paid access is a

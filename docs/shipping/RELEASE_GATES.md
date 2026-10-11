@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · QUAL-CLI-006 process-entry repair qualification
+
+The shared CLI process-test launcher now resolves the package entry correctly.
+Record create/verify passed 11/11, the focused release/record/Sigstore/
+rollback/platform/release set passed 34/34, and Turbo typecheck/build passed
+12/12. This improves release confidence but does not pass the gate: trusted
+keyless release identity, protected npm publication, legal clearance,
+independent review, and final acceptance are still missing. Score remains
+228/52/280 (81.4%).
+
+Evidence:
+`docs/shipping/evidence/qual-cli-006-process-entry-repair-2026-10-11.md`.
+
 ## 2026-10-11 · PRO-008 accepted · Final V1 billing view
 
 The Pro organization billing surface is accepted against the Final V1
