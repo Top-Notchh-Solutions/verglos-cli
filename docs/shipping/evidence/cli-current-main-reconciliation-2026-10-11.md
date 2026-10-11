@@ -8,6 +8,8 @@ The private shipping tracker was reconciled with the current CLI `origin/main`
 at `f5686b5c5aa11f45f392e647bd9d7e31830654ba`. The reconciliation base is
 `90eaaa1eeee66f24e85a8fa0d3d769ca6c644247`.
 
+The committed qualification result is `a5eb189a`.
+
 This brought the bounded Hunt execution path, supported recipe catalog, MCP
 binding, private-runner boundary, release-record exports, and rollback
 hardening into the shipping tracker. The remaining source fixes aligned the
