@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · Keep PLAN-WEB-015 open after cards-only display check
+
+- **Decision:** Accept the Production checkout display as contract evidence;
+  do not check `PLAN-WEB-015`.
+- **Reason:** Displayed methods do not prove order, signed webhook, refund,
+  expiry, or manual-renewal reconciliation.
+- **Boundary:** No checkout submission or Production payment/database/
+  entitlement/account/organization/customer-data write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · Keep ACCEPT-002 open after current-head substrate pass
 
 - **Decision:** Accept the fresh harness results as regression/substrate

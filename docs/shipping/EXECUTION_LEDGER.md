@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PLAN-WEB-015 Production cards-only contract checkpoint
+
+- **Verification:** Authenticated Production `/checkout` showed the
+  fixed-term monthly/annual offer and only **Cards** in the enabled-method
+  projection; checkout was not submitted.
+- **Disposition:** Contract display is aligned, but keep `PLAN-WEB-015`
+  unchecked until order, signed webhook, refund, expiry, and manual-renewal
+  reconciliation are qualified.
+- **Boundary:** No payment, database, migration, entitlement, account,
+  organization, or customer-data write occurred.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**.
+
 ## 2026-10-11 · ACCEPT-002 current-head substrate recheck
 
 - **Verification:** CLI **37/37**, Web **923/953** with 30 explicit skips,

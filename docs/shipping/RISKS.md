@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-PLAN-WEB-015 lifecycle evidence remains incomplete
+
+- **Risk:** Production correctly displays Cards-only fixed-term checkout, but
+  the display does not prove the full prepaid lifecycle.
+- **Impact:** Payment truth could still drift from webhook, refund, expiry, or
+  manual-renewal reconciliation if those are not qualified separately.
+- **Safe next action:** Run the isolated canonical card lifecycle against the
+  current deployment and preserve provider-signed evidence; never press the
+  Production checkout or edit payment/entitlement rows for evidence.
+- **Status:** Contract display aligned; lifecycle checkbox remains open.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · R-ACCEPT-002 external story acceptance absent
 
 - **Risk:** Repository-owned acceptance substrates are green, but several

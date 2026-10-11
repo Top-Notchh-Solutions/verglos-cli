@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · PLAN-WEB-015 Production cards-only contract checkpoint
+
+The authenticated Production `/checkout` page showed the fixed-term monthly/
+annual offer and an enabled-payment-method section containing only **Cards**.
+This matches the Final V1 one-time prepaid card payment plus customer-initiated
+manual renewal contract. It does not qualify order creation, signed webhook,
+refund, expiry, or renewal reconciliation, so no checkbox or score changed.
+Score remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+Evidence: `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · ACCEPT-002 current-head substrate recheck
 
 The current private acceptance harness passed CLI **37/37**, Web **923/953**
@@ -1658,7 +1668,14 @@ HOLD: do not start these tasks until the founder explicitly says the product tru
 
 Decision (2026-10-06): expand the shipping scope deliberately. Verglos is GitHub-first, but production alignment requires GitHub App installation identity, immutable account/repository binding, multi-repository installations, token/permission lifecycle, delivery replay protection, and lifecycle reconciliation. The current provider-neutral SCM substrate is progress only; it must not be presented as a complete GitHub-org integration.
 
-Payment scope is provider-supported and catalog-driven, not an invented promise of every global payment method. Razorpay documentation identifies cards, UPI, netbanking, and wallets as checkout modes, with some methods requiring provider approval; the exact enabled methods must come from the account/test-mode configuration and be recorded as evidence. Test mode must cover success/failure, capture, refunds, renewals, replay, and out-of-order events without printing secrets or payment payloads.
+Payment scope is now explicitly **Cards-only prepaid fixed-term billing with manual renewal** for Final V1. The checkout/catalog must show only Cards, and the customer starts a new one-time card payment when renewing. UPI, QR, netbanking, wallets, EMI, Pay Later, and automatic recurring billing are not Final V1 promises. Test Mode must cover the card success/failure, capture, refund, expiry, replay, out-of-order, timeout/retry, exactly-once, and manual-renewal paths without printing secrets or payment payloads.
+
+Authoritative amendment: the older `PLAN-WEB-014`/`PLAN-WEB-015` row text below
+contains historical recurring/multi-method observations. Those observations
+remain evidence history, but the acceptance target is the Final V1 contract
+above. Do not reopen or require a recurring-card provider fixture for Final V1;
+qualify the one-time Cards-only order lifecycle and its customer-initiated
+manual renewal instead.
 
 The final evaluation corpus is deliberately sequenced **after the complete shipping implementation and qualification path**, not used to inflate progress during implementation. It will use full, non-shallow public TypeScript/JavaScript repositories selected for architecture shape (small product, multi-user SaaS, multi-tenant/team, and large-scale/enterprise-like boundaries). Public technical fixtures are not customer consent and cannot be used to claim customer acceptance. Manifests, authorization notes, findings, and feedback remain private; the public CLI receives no proprietary corpus, credentials, customer data, or competitive intelligence.
 

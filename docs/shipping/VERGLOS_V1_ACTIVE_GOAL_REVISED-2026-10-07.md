@@ -1,5 +1,17 @@
 # Verglos V1 Active Shipping Goal — Complete Contract, Whole Backlog, Preview, Production, and Release
 
+## 2026-10-11 execution checkpoint — PLAN-WEB-015 Production cards-only display
+
+The authenticated Production `/checkout` page showed the fixed-term
+monthly/annual offer and only **Cards** under enabled payment methods. This
+matches the final one-time prepaid/manual-renewal contract, but does not prove
+order, signed webhook, refund, expiry, or renewal reconciliation. Keep the
+checkbox open and the score at **223 checked / 57 unchecked / 280 total
+(79.6%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 execution checkpoint — ACCEPT-002 current-head substrate pass
 
 The current acceptance harness passed CLI **37/37**, Web **923/953** with 30

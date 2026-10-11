@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-WEB-015 Production cards-only contract checkpoint
+
+Production `/checkout` rendered the fixed-term monthly/annual offer and only
+**Cards** under enabled payment methods. This is consistent with one-time
+prepaid billing and manual renewal; it is not lifecycle acceptance. Score
+remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · ACCEPT-002 current-head substrate recheck
 
 The acceptance verifier passed CLI **37/37**, Web **923/953** with **30

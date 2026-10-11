@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · PLAN-WEB-015 Production cards-only contract checkpoint
+
+- **Mapped ID:** `PLAN-WEB-015`.
+- **Verification:** Production `/checkout` projected the fixed-term
+  monthly/annual offer and only Cards as enabled; no checkout submission was
+  made.
+- **Acceptance:** Provider order/webhook/refund/expiry/manual-renewal
+  reconciliation is still absent; the checkbox remains open.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`.
+
 ## 2026-10-11 · ACCEPT-002 current-head substrate recheck
 
 - **Mapped ID:** `ACCEPT-002`.
