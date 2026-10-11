@@ -1,5 +1,22 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · Gate 4 cleared for Final V1 prepaid billing
+
+The Final V1 Cards-only prepaid lifecycle is no longer blocked: two real
+isolated Preview captures, signed webhook delivery, failed/no-grant behavior,
+full and partial refund, and a second manual-renewal order were reconciled.
+Fresh Docker payment integration passed 6/6 and the focused payment suite
+passed 29/29 with one explicit environment-gated skip and zero failures.
+
+The recurring-card fixture request is retired from the V1 blocker list because
+automatic recurring renewal is not in the current product contract. The next
+single dependency-ready queue item is `PLAN-CLI-003`; `PLAN-WEB-015` remains a
+separate Production contract/reconciliation item. Score is **224/56/280
+(80.0%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-prepaid-cards-lifecycle-2026-10-11.md`.
+
 ## 2026-10-11 · full refund processed; remaining lifecycle qualification
 
 The isolated Preview Test Mode full refund is now processed. The signed

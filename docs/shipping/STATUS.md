@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-WEB-014 accepted · Gate 4 passed
+
+The Final V1 prepaid Cards-only lifecycle is qualified in isolated Preview/Test
+Mode. Two hosted captures reached signed Preview webhooks and the isolated
+payment→ledger→license path; one completed a full refund, the second was a
+customer-initiated manual-renewal order and completed a partial refund. Failed
+one-time order rows have no license. Fresh disposable Docker integration passed
+**6/6** and the focused payment suite passed **29/29** with one explicit
+environment-gated skip and zero failures.
+
+`PLAN-WEB-014` is checked and Gate 4 is passed under the prepaid/manual-renewal
+contract. `PLAN-WEB-015` remains open for the separate Production contract and
+reconciliation checkpoint. Score is **224 checked / 56 unchecked / 280 total
+(80.0%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-prepaid-cards-lifecycle-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 Preview full-refund webhook reconciliation
 
 The previously pending isolated Preview Test Mode refund is now provider-

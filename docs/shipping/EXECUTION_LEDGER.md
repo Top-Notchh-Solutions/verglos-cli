@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PLAN-WEB-014 accepted · Gate 4 passed
+
+- **Hosted qualification:** Two isolated Preview Razorpay Test Mode Cards-only
+  orders captured through signed provider delivery and the payment→ledger→
+  license path. One completed a full refund; the second was a user-initiated
+  second one-time order (manual renewal) and completed a partial refund.
+- **Failure boundary:** Failed one-time order rows were reconciled without a
+  linked license or entitlement grant.
+- **Local qualification:** Fresh disposable Docker PostgreSQL migrations and
+  the payment webhook integration passed **6/6**; the focused non-database
+  payment suite passed **29/29**, one explicit environment-gated skip, zero
+  failures. Replay, conflict, retry, expiry, and exactly-once behavior are
+  covered by the integration/handler matrix.
+- **Decision:** Check PLAN-WEB-014 and pass Gate 4 under the Final V1
+  prepaid/manual-renewal contract. Keep PLAN-WEB-015 open for Production
+  contract/reconciliation; this does not authorize Production billing writes.
+- **Safety:** No Production payment, database, migration, entitlement,
+  account, customer-data, fake-event, or direct-row write was used.
+- **Score:** **224 checked / 56 unchecked / 280 total (80.0%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-cards-lifecycle-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 full-refund provider delivery completed
 
 - **Provider:** The isolated Razorpay Test Mode full refund moved from

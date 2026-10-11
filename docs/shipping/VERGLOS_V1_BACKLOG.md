@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · PLAN-WEB-014 accepted · Preview prepaid Cards-only lifecycle
+
+The Final V1 one-time prepaid Cards-only lifecycle is now qualified in the
+isolated Preview/Test Mode path. Two hosted card captures reached the signed
+webhook and isolated payment→ledger→license path; the first completed a real
+full refund; the second is a customer-initiated manual-renewal order and
+completed a real partial refund. Failed one-time order rows have no license.
+Fresh disposable Docker PostgreSQL integration passed **6/6** and the focused
+non-database payment suite passed **29/29** with one explicit environment-gated
+skip and zero failures, covering replay, ordering, retry, expiry, and
+exactly-once behavior.
+
+The automatic recurring-card promise is not part of Final V1. `PLAN-WEB-015`
+remains open for the separate Production Cards-only contract/reconciliation
+checkpoint. Score is now **224 checked / 56 unchecked / 280 total (80.0%)**.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-prepaid-cards-lifecycle-2026-10-11.md`.
+
 ## 2026-10-11 · PLAN-WEB-014 Preview full-refund webhook reconciliation
 
 The full Test Mode refund left processing and is now provider-reported as
@@ -1792,7 +1811,7 @@ The final evaluation corpus is deliberately sequenced **after the complete shipp
 - [ ] **GITHUB-WEB-003** · GitHub delivery/replay/reconciliation · deps: GITHUB-WEB-001/002 · Bind delivery IDs, installation IDs, repository IDs, commit/artifact identity, retries, and lifecycle reconciliation; prove duplicate and cross-tenant deliveries are harmless. Commit(s): Web PR #144 (`afb48dc`/`a496608`, merged `1b2a623`) and PR #154 (`9032bda`, merged `1498837`) implement the code-side binding/refresh contract; live delivery and reconciliation evidence remain open.
 - [ ] **GITHUB-WEB-004** · live GitHub organization cutover qualification · deps: GITHUB-WEB-001-003, R-041 rotation · Run a bounded test-mode/authorized GitHub organization installation and record permissions, webhook delivery, check publication, uninstall, and recovery evidence. Commit(s): —
 - [x] **PLAN-WEB-013** · provider payment-method catalog and checkout abstraction · deps: PLAN-WEB-011/012 · Model enabled Razorpay methods from server configuration/catalog; support method selection without claiming unavailable methods; preserve captured-only entitlement and idempotent lifecycle rules. Commit(s): Web PR #145 (`3ce60b8`, merged `d6ce773`) and Web PR #149 (`eb7e55a`, `f734acc`, `520d40a`, `67fb7e2`, `3f4a7aa`, `e46299a`, merged as `8b843da`) implement the fail-closed server catalog, hosted order checkout, signed order binding, webhook-authoritative fulfillment, explicit QR adapter boundary, fail-closed client response parsing, and provider-method validation on captured/failed order webhooks; the new order path binds the server-selected hosted method set while preserving legacy QR/subscription/order compatibility. Acceptance evidence: the canonical-amount Test Mode aggregate, four-method Preview/Production response checks, focused 55-test suite, isolated database integrations, typecheck, and 43-route build are recorded in `docs/shipping/evidence/plan-web-014-preview-hosted-payment-lifecycle-2026-10-09.md`. Downstream provider lifecycle and Production reconciliation remain tracked by `PLAN-WEB-011`, `PLAN-WEB-012`, `PLAN-WEB-014`, and `PLAN-WEB-015`.
-- [ ] **PLAN-WEB-014** · Razorpay Test Mode prepaid-card lifecycle · deps: PLAN-WEB-013 · Qualify the Final V1 one-time prepaid Cards-only order across canonical success/capture, failure/recovery, partial/full refund, expiry, user-initiated manual renewal with a second one-time order, replay/out-of-order, timeout/retry, and exactly-once payment/ledger/entitlement reconciliation. Historical multi-method and recurring-subscription observations remain evidence only; UPI, QR, netbanking, wallets, EMI, Pay Later, and automatic recurring renewal are not Final V1 acceptance targets. Commit(s): prior provider/subscription evidence remains preserved in its original records; isolated Preview order-creation evidence is `docs/shipping/evidence/plan-web-014-preview-prepaid-card-hosted-qualification-2026-10-11.md`, and the latest provider terminal boundary is `docs/shipping/evidence/plan-web-014-preview-prepaid-provider-terminal-failure-2026-10-11.md`. Remains unchecked until signed provider terminal events and the complete isolated Preview reconciliation are available.
+- [x] **PLAN-WEB-014** · Razorpay Test Mode prepaid-card lifecycle · deps: PLAN-WEB-013 · Qualify the Final V1 one-time prepaid Cards-only order across canonical success/capture, failure/recovery, partial/full refund, expiry, user-initiated manual renewal with a second one-time order, replay/out-of-order, timeout/retry, and exactly-once payment/ledger/entitlement reconciliation. Historical multi-method and recurring-subscription observations remain evidence only; UPI, QR, netbanking, wallets, EMI, Pay Later, and automatic recurring renewal are not Final V1 acceptance targets. Commit(s): Web `887249d9f4d09842107fc6636b239af9f67b91d4`; private acceptance evidence `docs/shipping/evidence/plan-web-014-preview-prepaid-cards-lifecycle-2026-10-11.md`; prior provider/subscription observations remain preserved as historical evidence. Accepted after signed Preview capture/failure/refund/manual-renewal reconciliation and fresh Docker/in-process lifecycle qualification.
 - [ ] **PLAN-WEB-015** · Cards-only production contract/reconciliation · deps: PLAN-WEB-014, DIST-WEB-002 · Reconcile the Production checkout display and server catalog with the Final V1 one-time prepaid Cards-only contract, while keeping payment, database, entitlement, and account writes out of Production qualification. Fail closed when Cards-only configuration is absent or stale; preserve manual renewal as a second user-initiated order, not automatic recurring billing. The current Production display evidence is `docs/shipping/evidence/plan-web-015-production-cards-only-display-2026-10-11.md`; full provider lifecycle evidence remains a Preview responsibility before any release decision.
 
 ### 2026-10-10 PLAN-WEB-014 evidence addendum · Preview/Test Mode partial refund

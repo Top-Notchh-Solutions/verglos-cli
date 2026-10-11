@@ -1,5 +1,25 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · Gate 4 passed · Final V1 prepaid Cards-only lifecycle
+
+Gate 4 is satisfied for the current Final V1 contract. Isolated Preview/Test
+Mode evidence now combines two real hosted Cards-only captures, signed
+`payment.captured` delivery, failed-order/no-grant rows, full and partial
+refund delivery, a second customer-initiated one-time renewal order, and
+payment→ledger→license reconciliation. Fresh disposable Docker PostgreSQL
+integration passed **6/6** with zero failures/skips; the focused payment suite
+passed **29/29** with one explicit environment-gated skip and zero failures.
+Replay, out-of-order/identity conflict, retry, expiry, and exactly-once
+behavior are covered by the reviewed integration and handler contracts.
+
+Automatic recurring-card renewal is not a Final V1 promise. Gate 4 does not
+authorize Production billing activation; `PLAN-WEB-015` remains open for the
+separate read-only Production Cards-only contract/reconciliation checkpoint.
+No Production state changed during this qualification.
+
+Evidence:
+`docs/shipping/evidence/plan-web-014-preview-prepaid-cards-lifecycle-2026-10-11.md`.
+
 ## 2026-10-11 · Gate 4 current Preview prepaid order boundary
 
 The isolated Preview fixture was normalized and redeployed without changing
