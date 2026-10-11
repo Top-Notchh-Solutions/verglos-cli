@@ -23,6 +23,27 @@ status, then recompute the checkbox score. Do not add duplicate rows for this
 contract decision. Starting score remains **223 checked / 57 unchecked / 280
 total (79.6%)**.
 
+## 2026-10-11 · PLAN-WEB-012 prepaid order implementation recheck
+
+Web commit `887249d` applies the current contract: exact Cards-only runtime
+configuration, signed one-time order checkout, fixed-term entitlement, manual
+renewal through a second one-time order, and a fail-closed legacy subscription
+creation route. The Web serial suite passed **880/880 configured tests** with
+24 environment-gated skips; focused checkout/runtime/webhook tests and
+typecheck passed; and a disposable PostgreSQL 15 run passed the complete
+6/6 write-capable webhook scenarios including card capture, replay, refund,
+failure recovery, and manual renewal.
+
+`PLAN-WEB-012` remains unchecked because the exact commit still needs isolated
+Preview deployment and current-head provider-originated card capture/failure/
+refund reconciliation. The local Vercel CLI currently returns `Not
+authorized`, so no hosted result is invented. The previous recurring-card
+fixture blocker is retired by the Final V1 contract; manual renewal does not
+require a recurring provider fixture. Score remains **223 checked / 57
+unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-012-prepaid-card-order-qualification-2026-10-11.md`.
+
 ## 2026-10-10 · PLAN-WEB-014 official recurring-card fixture boundary
 
 The isolated Preview route created a canonical Pro monthly Razorpay Test Mode

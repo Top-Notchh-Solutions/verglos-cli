@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-WEB-012 prepaid card-order implementation recheck
+
+Web commit `887249d` now enforces the Final V1 commercial contract: Cards-only
+one-time prepaid orders, fixed-term entitlements, customer-initiated manual
+renewal through a new order, and a fail-closed legacy subscription-creation
+route. The complete Web serial suite passed **880/880 configured tests** with
+24 environment-gated skips; focused checkout/runtime/webhook tests, typecheck,
+production build, and a disposable PostgreSQL 15 write-capable 6/6 webhook
+run passed. The isolated run covered capture, replay, refund watermarking,
+failed-payment recovery, and manual renewal.
+
+The exact commit could not yet be deployed for current-head Preview
+qualification because the local Vercel CLI returned `Not authorized`. The
+previous hosted provider records remain historical; no hosted success is
+claimed for this commit and no Production state changed. `PLAN-WEB-012`
+remains unchecked pending current-head Preview/provider reconciliation. Score
+remains **223 checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-012-prepaid-card-order-qualification-2026-10-11.md`.
+
 ## 2026-10-11 · HUNT-008 recheck and next implementation queue
 
 The exact CLI shipping worktree Hunt build and executable tests pass. The
