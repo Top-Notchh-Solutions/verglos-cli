@@ -1,5 +1,23 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-PLAN-WEB-014 prepaid provider terminal-result boundary
+
+- **Risk:** Isolated Preview now creates the canonical Cards-only prepaid
+  order successfully, but this run has no provider terminal capture/failure,
+  signed webhook, ledger/entitlement transition, expiry, or second-order
+  renewal evidence.
+- **Impact:** Gate 4 and `PLAN-WEB-014` cannot yet claim a complete payment
+  lifecycle.
+- **Owner:** Authorized payment-test operator and Razorpay Test Mode
+  operations.
+- **Safe next action:** Complete only the provider-supported Test Mode card
+  terminal path, then reconcile the signed event in isolated Preview. Do not
+  guess OTPs, fabricate events, edit rows, or use Production checkout.
+- **Status:** Code and order-creation progress recorded; score remains
+  **223 checked / 57 unchecked / 280 total (79.6%)**.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-order-creation-2026-10-11.md`.
+
 ## 2026-10-11 · R-HUNT current runtime is code-qualified but not externally accepted
 
 - **Risk:** The current bounded Hunt runtime, fixed recipe catalog, MCP

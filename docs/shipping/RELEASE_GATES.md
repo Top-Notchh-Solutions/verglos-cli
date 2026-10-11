@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · Gate 4 current Preview prepaid order boundary
+
+The isolated Preview fixture was normalized and redeployed without changing
+Production. The current Cards-only prepaid order route returned HTTP **200**
+for the server-owned canonical Pro monthly offer (INR 280,943 minor units,
+30 days, catalog `2026-10-02.0`, Test Mode). The response exposed only
+`card` / `Cards`; focused payment tests passed 42 with zero failures and three
+explicit local-PostgreSQL skips.
+
+This does not pass Gate 4. A provider terminal one-time card result and signed
+Preview reconciliation for capture/failure, refund, expiry, and a second
+customer-initiated order remain missing. Automatic recurring renewal and its
+fixture are not Final V1 requirements. Score remains **223/57/280 (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-prepaid-order-creation-2026-10-11.md`.
+
 ## 2026-10-11 · Contract reset for implementable Final V1
 
 The current product contract is

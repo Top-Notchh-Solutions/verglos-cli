@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · PLAN-WEB-014 current Preview prepaid order boundary
+
+- **Mapped ID:** `PLAN-WEB-014`, Gate 4.
+- **Implementation:** Web `887249d` with the final Cards-only prepaid/manual-
+  renewal contract; Preview fixture markers and test identity were normalized
+  without changing Production.
+- **Verification:** Isolated Preview order creation returned HTTP **200** with
+  canonical INR 280,943 minor units, 30 days, catalog `2026-10-02.0`, Test
+  Mode, and only `card` / `Cards`. Focused payment tests passed 42 with three
+  explicit local-PostgreSQL skips and zero failures.
+- **Acceptance:** No provider terminal capture/failure/refund, signed webhook,
+  ledger/entitlement transition, expiry, or second manual-renewal order was
+  observed. The checkbox remains open; the former recurring-card fixture is
+  historical only under the current product contract.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-order-creation-2026-10-11.md`.
+
 ## 2026-10-11 · current CLI main reconciliation and bounded Hunt qualification
 
 - **Mapped IDs:** `HUNT-008`, `HUNT-009`, `HUNT-010`, `HUNT-011`, and the

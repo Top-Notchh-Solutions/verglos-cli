@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## Preview prepaid order creation is qualified; Gate 4 remains open · 2026-10-11
+
+- **Decision:** Treat the current isolated Preview Cards-only order response as
+  valid hosted implementation progress under the Final V1 prepaid/manual-
+  renewal contract.
+- **Evidence:** Web `887249d`; canonical monthly order HTTP 200; INR 280,943
+  minor units, 30 days, catalog `2026-10-02.0`, Test Mode, and only Cards;
+  focused payment tests passed 42 with three explicit local-PostgreSQL skips.
+- **Boundary:** The order was created in Test Mode, but no terminal provider
+  payment, signed webhook, ledger/entitlement transition, expiry, or second
+  manual-renewal order was observed. No Production state changed.
+- **Disposition:** Do not check `PLAN-WEB-014` or Gate 4 yet. The next proof
+  must be provider-supported terminal card evidence and isolated signed
+  reconciliation. The historical recurring-card fixture requirement is
+  retired by the current product contract.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-order-creation-2026-10-11.md`.
+
 ## 2026-10-11 · Keep Hunt backlog rows open after current-main qualification
 
 - **Decision:** Record the bounded Hunt runtime and package tests as valid

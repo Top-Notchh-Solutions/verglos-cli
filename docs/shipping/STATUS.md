@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · PLAN-WEB-014 current Preview prepaid order boundary
+
+The isolated Preview fixture was normalized and redeployed without touching
+Production. The current Cards-only prepaid route returned HTTP **200** for a
+server-owned canonical Pro monthly order: INR 280,943 minor units, 30 days,
+catalog `2026-10-02.0`, Test Mode, and only `card` / `Cards`. Focused payment
+tests passed **42** with zero failures and three explicit local-PostgreSQL
+skips.
+
+The order-creation write did not produce a provider terminal result, signed
+webhook, ledger transition, fixed-term entitlement, expiry, or manual-renewal
+second order. `PLAN-WEB-014` and Gate 4 remain open. Score remains **223
+checked / 57 unchecked / 280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-prepaid-order-creation-2026-10-11.md`.
+
 ## 2026-10-11 · current CLI main reconciliation and bounded Hunt qualification
 
 The private tracker now contains the current CLI `origin/main` bounded Hunt

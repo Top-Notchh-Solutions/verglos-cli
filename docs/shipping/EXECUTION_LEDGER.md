@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · PLAN-WEB-014 isolated Preview prepaid order creation
+
+- **Preflight:** The target was the current Web `887249d` isolated Preview
+  deployment. Preview test-auth markers and the bounded fixture identity were
+  normalized; Production variables, database, and identities were not changed.
+- **Application/provider write:** An authenticated Preview order request
+  created one server-owned Razorpay Test Mode order for the canonical Pro
+  monthly offer: INR 280,943 minor units, 30 days, catalog `2026-10-02.0`,
+  Cards-only. The response was HTTP 200 with private no-store headers.
+- **Verification:** Focused payment tests passed 42 with zero failures and
+  three explicit local-PostgreSQL skips. Automatic subscription creation
+  remains disabled in the final V1 route contract.
+- **Disposition:** This is hosted order-creation evidence only. No provider
+  capture/failure/refund, signed webhook, payment-ledger transition,
+  fixed-term entitlement, expiry, or second manual-renewal order was observed;
+  `PLAN-WEB-014` and Gate 4 remain open. No Production payment, database,
+  migration, entitlement, account, or customer write occurred.
+- **Score:** **223 checked / 57 unchecked / 280 total (79.6%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/plan-web-014-preview-prepaid-order-creation-2026-10-11.md`.
+
 ## 2026-10-11 · current CLI main reconciliation and bounded Hunt qualification
 
 - **Source:** Reconciled `origin/main`

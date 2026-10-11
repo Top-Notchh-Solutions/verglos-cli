@@ -1,5 +1,17 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-11 · prepaid contract current boundary
+
+The current Final V1 contract replaces the historical recurring-card payment
+promise with one-time Cards-only prepaid access and customer-initiated manual
+renewal. Isolated Preview order creation now returns the canonical server-owned
+offer and Cards-only method set, but no provider terminal result or signed
+payment-to-ledger-to-entitlement reconciliation has been captured in this
+run. Keep `PLAN-WEB-014` and Gate 4 open for that evidence. Do not request or
+retest a recurring-card fixture as a V1 prerequisite.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-prepaid-order-creation-2026-10-11.md`.
+
 ## Current superseding reconciliation · 2026-10-10 · Official recurring-card fixture
 
 The protected isolated Preview route created a canonical Pro monthly Test Mode

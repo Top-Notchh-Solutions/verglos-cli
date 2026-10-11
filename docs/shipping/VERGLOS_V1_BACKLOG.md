@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-11 · PLAN-WEB-014 current Preview prepaid order boundary
+
+The isolated Preview test-auth fixture was normalized without changing
+Production variables or identities. Current Web head `887249d` now has fresh
+hosted evidence: the server-owned Pro monthly order returned HTTP **200** with
+canonical INR 280,943 minor units, 30 days, catalog `2026-10-02.0`, Test Mode,
+and exactly `card` / `Cards`. Focused payment tests passed **42/42** with three
+explicit local-PostgreSQL skips and zero failures.
+
+This is order-creation evidence only. No provider capture/failure/refund,
+signed webhook, ledger transition, fixed-term entitlement, expiry, or second
+manual-renewal order was observed, so `PLAN-WEB-014` and Gate 4 remain open.
+The prior recurring-card fixture requirement is retired by the Final V1
+prepaid/manual-renewal contract. Score remains **223 checked / 57 unchecked /
+280 total (79.6%)**.
+
+Evidence: `docs/shipping/evidence/plan-web-014-preview-prepaid-order-creation-2026-10-11.md`.
+
 ## 2026-10-11 · current CLI main reconciliation and bounded Hunt qualification
 
 The private tracker now contains the current bounded Hunt runtime, supported
