@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-11 · public Web/CLI push and merge complete
+
+The waiting public-safe changes are now synchronized. Web PR #173 merged at
+`1fb7f9c36b9b64a6c9bfa33b8139b13d04021e53`; its focused organization-entry
+test passed 2/2, typecheck passed, and the 47-page production build passed.
+CLI PR #90 merged at `5077add10fb6a9f065748b83cf96e3a93da92746`; local focused
+qualification passed 34/34, the public-boundary audit passed, and the hosted
+self-scan, in-toto binding, and complete macOS/Ubuntu/Windows Node 20/22/24
+matrix passed.
+
+The earlier CLI candidate with private shipping history was not merged; it was
+closed and replaced by a clean main-based branch. No private tracker content
+was pushed to the public CLI. No npm, Production/provider/database/
+entitlement/customer write or release promotion occurred. No checkbox changed.
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**; the next
+dependency-ready assessment is `QUAL-WEB-006`.
+
+Evidence:
+`docs/shipping/evidence/public-repository-sync-2026-10-11.md`.
+
 ## 2026-10-11 · DIST-001 package boundary qualified; dependent release gates remain
 
 The six-package public surface at CLI `0ef96caa` rebuilt successfully. The

@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-11 · synchronize public Web/CLI repositories before next batch
+
+- **Decision:** Merge only the public-safe changes that were waiting in the
+  active shipping worktrees, then pause backlog selection until the sync was
+  complete.
+- **Web:** PR #173 merged at
+  `1fb7f9c36b9b64a6c9bfa33b8139b13d04021e53`; focused test 2/2, typecheck,
+  and 47-page build passed.
+- **CLI:** PR #90 merged at
+  `5077add10fb6a9f065748b83cf96e3a93da92746`; local 34/34 qualification and
+  the complete hosted self-scan, in-toto, and platform matrix passed.
+- **Safety decision:** The candidate containing private `docs/shipping`
+  history was closed. The replacement was based on current public `main` and
+  contains no private tracker material.
+- **Disposition:** Sync complete; no checkbox changed. Score remains
+  **228/52/280 (81.4%)**; next dependency-ready assessment is `QUAL-WEB-006`.
+- **Boundary:** No npm publication, registry write, Production/provider/
+  database/entitlement/customer write, or release promotion.
+- **Evidence:**
+  `docs/shipping/evidence/public-repository-sync-2026-10-11.md`.
+
 ## 2026-10-11 · Keep DIST-001 open after package-boundary qualification
 
 - **Decision:** Record the six-package public boundary as qualified progress;

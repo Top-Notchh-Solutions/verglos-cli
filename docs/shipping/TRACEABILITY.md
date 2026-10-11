@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-11 · public Web/CLI push and merge reconciliation
+
+- **Mapped work:** Current Web and CLI shipping worktree changes waiting for
+  public synchronization; no backlog row is accepted by this record.
+- **Web:** PR #173 merged at
+  `1fb7f9c36b9b64a6c9bfa33b8139b13d04021e53`; focused organization-entry test
+  2/2, typecheck, and 47-page build passed.
+- **CLI:** PR #90 merged at
+  `5077add10fb6a9f065748b83cf96e3a93da92746`; focused qualification 34/34,
+  public-boundary audit, self-scan, in-toto binding, and the complete
+  macOS/Ubuntu/Windows Node matrix passed.
+- **Boundary:** Private shipping history was excluded from the public CLI by
+  rebuilding from current `main`; no npm/Production/provider/database/
+  entitlement/customer write occurred.
+- **Acceptance:** No checkbox changed. Score remains **228/52/280 (81.4%)**.
+- **Next:** `QUAL-WEB-006`.
+- **Evidence:**
+  `docs/shipping/evidence/public-repository-sync-2026-10-11.md`.
+
 ## 2026-10-11 · DIST-001 public package boundary recheck
 
 - **Mapped ID:** `DIST-001`.

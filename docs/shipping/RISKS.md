@@ -1,5 +1,22 @@
 # Verglos V1 risk register
 
+## 2026-10-11 · R-PUBLIC-SYNC-001 public/private history boundary mitigated
+
+- **Risk:** Local shipping branches can contain private tracker history that
+  would fail the public CLI boundary audit if pushed directly.
+- **Verification:** The first CLI candidate was closed after the audit found
+  private `docs/shipping` history. The replacement CLI PR was rebuilt from
+  current public `main`; its public-boundary audit, self-scan, in-toto binding,
+  and complete platform matrix all passed. Web PR #173 also passed its local
+  and hosted checks.
+- **Status:** Mitigated for this synchronization. No private tracker content
+  was pushed; no backlog checkbox changed. Continue using fresh public-main
+  branches for public CLI changes.
+- **Next:** Resume the dependency-ready queue at `QUAL-WEB-006` only after
+  this ledger update.
+- **Evidence:**
+  `docs/shipping/evidence/public-repository-sync-2026-10-11.md`.
+
 ## 2026-10-11 · R-TEAM-CLI-001 hosted policy trust boundary
 
 - **Risk:** A locally passing policy verifier could be mistaken for an

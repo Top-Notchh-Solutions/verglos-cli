@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-11 · public Web/CLI push and merge reconciliation
+
+- **Web:** PR #173 merged to `main` at
+  `1fb7f9c36b9b64a6c9bfa33b8139b13d04021e53`; the organization-entry auth
+  contract test passed 2/2, Web typecheck passed, and the 47-page production
+  build passed.
+- **CLI:** PR #90 merged to `main` at
+  `5077add10fb6a9f065748b83cf96e3a93da92746`; the clean public branch carries
+  only the process-entry fixture repair. Local focused qualification passed
+  34/34, the public-boundary audit passed, and the hosted self-scan,
+  in-toto binding, and macOS/Ubuntu/Windows Node 20/22/24 matrix all passed.
+- **Public boundary:** The earlier CLI candidate containing private
+  `docs/shipping` history was closed rather than merged. A fresh main-based
+  branch was used, so private tracker material was not pushed to the public
+  repository.
+- **Disposition:** Repository sync complete; no backlog checkbox changed.
+- **Boundary:** No npm publication, registry write, Production/provider/
+  database/entitlement/customer write, or release promotion occurred.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Next:** `QUAL-WEB-006` remains the next dependency-ready assessment.
+- **Evidence:**
+  `docs/shipping/evidence/public-repository-sync-2026-10-11.md`.
+
 ## 2026-10-11 · DIST-001 public package boundary recheck
 
 - **Verification:** CLI `0ef96caa` Turbo build **6/6**; source package audit

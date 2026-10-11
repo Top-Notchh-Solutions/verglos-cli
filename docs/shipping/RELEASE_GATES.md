@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-11 · public repository synchronization complete
+
+Web PR #173 and CLI PR #90 are merged. Web passed its focused test, typecheck,
+and 47-page build. CLI passed focused qualification 34/34, the public-boundary
+audit, self-scan, in-toto binding, and the complete macOS/Ubuntu/Windows Node
+20/22/24 platform matrix.
+
+This is release-branch hygiene and qualification progress, not a release-gate
+pass or backlog acceptance. No npm publication, registry write, Production/
+provider/database/entitlement/customer write, or release promotion occurred.
+Score remains **228/52/280 (81.4%)**; `QUAL-WEB-006` remains next.
+
+Evidence:
+`docs/shipping/evidence/public-repository-sync-2026-10-11.md`.
+
 ## 2026-10-11 · DIST-001 package boundary qualification
 
 The six public archives rebuilt, passed source and packed-manifest audits,
