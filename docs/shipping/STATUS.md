@@ -1,10 +1,36 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A1 recipe-family fixture catalog merged (PR #97)
+
+Public PR #97 merged at
+`f207240b3370222ee8c36b0dd13029b7d5a1c4ee`. The A1 bounded worker now admits
+eight deterministic first-party fixture probes: UTF-8 containment,
+path-traversal shape, command-injection shape, private/local SSRF target
+classification, tenant-boundary mismatch, SQL injection shape, safe XSS
+shape, and Agent/MCP tool-boundary mismatch. Each catalog entry declares
+positive, negative, timeout, and adapter-failure fixture outcomes.
+
+The probes do not read target source, make network requests, launch a browser,
+connect to a database, invoke tools, accept arbitrary shell, or execute
+model-generated commands. The four Hunt roles remain controlled architecture
+roles, not four autonomous AI agents. The seven target-code recipe families
+and their acceptance gates remain open.
+
+Build, complete Hunt/CLI tests, typechecks, self-scan, in-toto binding, and
+protected macOS/Ubuntu/Windows Node 20/22/24 checks passed. Sixteen
+Linux/Docker integration cases remain explicit skips pending their pinned
+integration image and Linux isolation run.
+
+No checkbox changed: **228 checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/hunt-a1-recipe-family-catalog-pr97-2026-10-13.md`.
+
 ## 2026-10-13 · A1 bounded fixture-probe catalog merged (PR #96)
 
 Public PR #96 merged at
 `9900ebb4f051595c202d11645f91a47f9bd85114`. The existing A1 bounded worker
-now admits five deterministic first-party fixture probes: UTF-8 containment,
+then admitted five deterministic first-party fixture probes: UTF-8 containment,
 path-traversal shape, command-injection shape, private/local SSRF target
 classification, and tenant-boundary mismatch. Each catalog entry declares
 positive, negative, timeout, and adapter-failure fixture outcomes.

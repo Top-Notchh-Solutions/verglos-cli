@@ -1,10 +1,33 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A1 recipe-family fixture catalog merged (PR #97)
+
+- **Public merge:** PR #97 merged at
+  `f207240b3370222ee8c36b0dd13029b7d5a1c4ee`.
+- **Implemented:** the supported A1 catalog now contains eight deterministic
+  first-party fixture probes: UTF-8 containment, path-traversal shape,
+  command-injection shape, private/local SSRF classification, tenant-boundary
+  mismatch, SQL injection shape, safe XSS shape, and Agent/MCP tool-boundary
+  mismatch.
+- **Verification:** full build, Hunt and CLI tests, typechecks, self-scan,
+  in-toto binding, and the protected macOS/Ubuntu/Windows Node 20/22/24 matrix
+  passed. Sixteen Linux/Docker integration cases remain explicit skips pending
+  their pinned integration image and Linux isolation run.
+- **Boundary:** fixture probes are not target-code execution, remote DAST,
+  database/browser/tool execution, or autonomous AI agents. The worker remains
+  no-source, no-network, no-arbitrary-shell, and fail-closed.
+- **Acceptance:** HUNT-008 remains open for target-code recipes,
+  provenance/licensing, supported-rule approval, hosted entitlement,
+  isolation/review, and final release treatment. No checkbox changed; score
+  remains **228/52/280 (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a1-recipe-family-catalog-pr97-2026-10-13.md`.
+
 ## 2026-10-13 · A1 bounded fixture-probe catalog merged (PR #96)
 
 - **Public merge:** PR #96 merged at
   `9900ebb4f051595c202d11645f91a47f9bd85114` from branch commit `0cd1878c`.
-- **Implemented:** the supported A1 catalog now contains five deterministic
+- **Implemented:** the supported A1 catalog then contained five deterministic
   first-party fixture probes: UTF-8 containment, path-traversal shape,
   command-injection shape, private/local SSRF target classification, and
   tenant-boundary mismatch. Each declares positive, negative, timeout, and
@@ -36,7 +59,7 @@
   Verglos organizations and GitHub/GitLab; Studio/Enterprise controls;
   distribution; and Point-5 public TS/JS corpus acceptance.
 - **Current implementation truth:** the supported catalog is the A1 Hunt
-  family with five deterministic built-in fixture probes. The other recipe
+  family with eight deterministic built-in fixture probes. The other recipe
   sub-scopes are planned target-code contract work; four Hunt roles describe
   controlled responsibilities, not autonomous agents already deployed.
 - **Execution rule:** implement and qualify existing backlog rows in

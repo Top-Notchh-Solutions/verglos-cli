@@ -7,10 +7,11 @@
 
 **Coverage index:** Read
 `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md` for the feature-by-feature
-mapping to existing backlog rows. The current supported Hunt catalog is still
-the A1 family with five deterministic fixture probes; the other target-code
-recipe sub-scopes and the four controlled roles are contract/implementation
-targets, not completed autonomous agents.
+mapping to existing backlog rows. The current supported Hunt catalog is the A1
+family with eight deterministic fixture probes; these are fixture-level shapes,
+not completed target-code recipes or autonomous agents. The other target-code
+recipe sub-scopes and the four controlled roles remain contract/implementation
+targets.
 
 The approved execution goal is deliberately bounded to Points 1–5: synchronize
 this contract across the repositories, implement the real bounded Hunt/public

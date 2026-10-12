@@ -19,10 +19,12 @@ Hunt recipe sub-scopes `HUNT-008-R1` through `HUNT-008-R7` (injection,
 command, path/file, SSRF, agent/MCP, safe XSS, and authorization/tenant
 fixtures) are matrix sub-scopes owned by the existing HUNT rows, not extra
 counted checkboxes. The supported catalog currently contains the signed
-first-party A1 family with five deterministic built-in fixture probes; actual
-target-code recipe sub-scopes stay open until their recipes, provenance,
-fixtures, bounded adapters, and acceptance evidence exist. The four Hunt roles
-are architecture roles, not four already running autonomous AI agents.
+first-party A1 family with eight deterministic built-in fixture probes,
+covering fixture-level shapes for all seven approved sub-scopes plus the
+original UTF-8 probe. Actual target-code recipe sub-scopes stay open until
+their recipes, provenance, fixtures, bounded adapters, and acceptance evidence
+exist. The four Hunt roles are architecture roles, not four already running
+autonomous AI agents.
 
 **Live score:** **228 checked / 52 unchecked / 280 total (81.4%)**. No
 checkbox changed in this documentation synchronization. Every later closure
@@ -37,7 +39,7 @@ sanitized documentation may be proposed there.
 ## 2026-10-13 · A1 bounded fixture-probe catalog merged (PR #96)
 
 Public PR #96 merged at
-`9900ebb4f051595c202d11645f91a47f9bd85114`. The A1 catalog now contains five
+`9900ebb4f051595c202d11645f91a47f9bd85114`. The A1 catalog then contained five
 deterministic built-in fixture probes and explicit positive, negative, timeout,
 and adapter-failure outcomes. The protected platform matrix, self-scan, and
 in-toto binding passed.
@@ -50,6 +52,30 @@ release treatment remain open. No checkbox changed; the live score remains
 
 Evidence:
 `docs/shipping/evidence/hunt-a1-fixture-catalog-pr96-2026-10-13.md`.
+
+## 2026-10-13 · A1 recipe-family fixture catalog merged (PR #97)
+
+Public PR #97 merged at
+`f207240b3370222ee8c36b0dd13029b7d5a1c4ee`. The A1 catalog now contains
+eight deterministic built-in fixture probes: UTF-8 containment, path
+traversal, command-injection shape, private/local SSRF classification,
+tenant-boundary mismatch, SQL injection shape, safe XSS shape, and
+Agent/MCP tool-boundary mismatch. Each declares positive, negative, timeout,
+and adapter-failure outcomes.
+
+This adds fixture-level coverage for the remaining approved recipe sub-scopes;
+it does not claim target-code execution, database/browser/tool execution, or
+autonomous AI agents. The public protected matrix, self-scan, in-toto binding,
+build, tests, and typechecks passed. Sixteen Linux/Docker integration cases
+remain explicit skips pending the pinned integration image and Linux run.
+
+`HUNT-008` remains open for target-code recipe treatment, provenance/licensing,
+supported-rule approval, hosted entitlement, required isolation assurance,
+independent review, and final release acceptance. No checkbox changed; the
+live score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/hunt-a1-recipe-family-catalog-pr97-2026-10-13.md`.
 
 ## 2026-10-13 · TEAM-CLI-001 organization-policy endpoint hardening merged (PR #95)
 
@@ -1852,7 +1878,7 @@ Evidence/problem: current MCP tools are a separate thin surface and Hunt is a sh
 - [x] **HUNT-005** · hardened Docker A2 adapter · deps: HUNT-003 · Enforce non-root, read-only source/rootfs, tmpfs, dropped caps, no-new-privileges, seccomp, no socket/devices/namespaces, network deny, and resource bounds. Commit(s): `4460f1a`, `4ae9bf2`, `e1d4893`, `67e6e92`, `403f214`, `5e4c922`, `ef698d7`, `2991658`, `2af2cd7`, `83b3994` (complete: pinned Docker integration suite passes 40/40; broader multi-image/adversarial qualification remains HUNT-011)
 - [x] **HUNT-006** · synthetic input/redaction pipeline · deps: HUNT-003-005 · Replace secrets, cap/stdout/stderr, hash evidence, redact paths/identifiers, and prove raw secrets cannot escape. Commit(s): `08e6efb`, `c893e81`, `1e86c7d`, `eb80e0a`, `9f029f9`, `f32f80a`, `2e366a4`, `d422adc`, `25e29ea`, `abe6978`, `ceb3f8e` (complete: shared redaction/synthetic-input/evidence-digest tests and pinned Docker secret-exfiltration/output-bound tests pass; raw output is never returned)
 - [x] **HUNT-007** · verdict/failure classifier · deps: CONTRACT-006, HUNT-004-006 · Distinguish confirmed/not-reproduced/inconclusive/not-supported/environment-error/policy-denied; infrastructure failure cannot become false-positive. Commit(s): `adb9061`, `88059fc`, `c23483d` (accepted at CLI PR #43: exhaustive 48-case precedence matrix covers assertion/support/policy/environment/timeout combinations; policy denial, unsupported recipes, environment failure, and timeout take precedence over boolean assertions, so infrastructure failure cannot become `not-reproduced`. A1 runtime outcomes expose canonical verdicts plus strict bounded assurance metadata.)
-- [ ] **HUNT-008** · initial high-value recipe set · deps: HUNT-002-007, LIC-001 later · Implement only evidence-backed recipes with positive/negative/timeout/failure fixtures and explicit supported-rule coverage. Commit(s): CLI PR #67 `30467e6` merged as `9725e13` adds the A1 family; PR #94 merged as `53448684` adds and CI-runs the retained four-case verifier; PR #96 merged as `9900ebb4` adds five deterministic A1 fixture probes. Protected self-scan, in-toto, and macOS/Ubuntu/Windows Node 20/22/24 matrix pass. Remains unchecked pending target-code recipe families, supported-rule approval, trusted/licensed release treatment, Linux/Docker qualification where required, and independent review. Evidence: `docs/shipping/evidence/hunt-a1-fixture-catalog-pr96-2026-10-13.md` and the prior requalification records.
+- [ ] **HUNT-008** · initial high-value recipe set · deps: HUNT-002-007, LIC-001 later · Implement only evidence-backed recipes with positive/negative/timeout/failure fixtures and explicit supported-rule coverage. Commit(s): CLI PR #67 `30467e6` merged as `9725e13` adds the A1 family; PR #94 merged as `53448684` adds and CI-runs the retained four-case verifier; PR #96 merged as `9900ebb4` adds five deterministic A1 fixture probes; PR #97 merged as `f207240b` adds three more fixture probes covering the remaining approved sub-scope shapes. Protected self-scan, in-toto, and macOS/Ubuntu/Windows Node 20/22/24 matrix pass. Remains unchecked pending target-code recipe families, supported-rule approval, trusted/licensed release treatment, Linux/Docker qualification where required, and independent review. Evidence: `docs/shipping/evidence/hunt-a1-recipe-family-catalog-pr97-2026-10-13.md`, the PR #96 catalog record, and prior requalification records.
 - [ ] **HUNT-009** · `verglos hunt` functional command · deps: HUNT-008, POLICY-009, PLAN-CLI · Replace exit-78 shell only when gates pass; require approval, entitlement, supported recipe, and structured local result. Commit(s): rewritten `fea28ac`, `16f0315`; execution substrate `7459869`, `a2a1335`, `c4beecb`; entitlement gate `71de29f` merged with current main in `17d0813`; provenance projection `c8a2e4b`, preflight hardening `67debee`, PR #76 merged as `8e436544`, PR #93 merged as `fe28730d`, and PR #94 merged as `53448684`. The protected packed-consumer and four-case fixture paths now execute through the signed A1, approval, entitlement-cache, and restricted-process path. Remains unchecked pending trusted/licensed publisher roots, hosted entitlement evidence, Linux/Docker qualification, and independent review.
 - [ ] **HUNT-010** · MCP Hunt tools · deps: AGENT-003/002, HUNT-009 · Expose plan/approval-limited finding/report/before-write/explain tools without extra authority or arbitrary execution. Commit(s): `7022408`, `b72982a` add bounded verdict explanation, an injected private-runtime bridge for finding/report execution with complete signed binding and approval-file coverage, and a before-write fast-path preflight that never synthesizes arbitrary recipes. Hosted platform run `37617790266`, self-scan `37617790257`, and in-toto binding passed at exact head `b72982a`; the phase merged to CLI `main` as `8e436544`. HUNT-009 trusted/licensed-root, bounded-execution, and independent-review gates remain open.
 - [ ] **HUNT-011** · sandbox adversarial suite · deps: HUNT-005-010 · Test network, socket, device, namespace, symlink, fork bomb, CPU/memory/disk/output/time, signal, cleanup, and secret exfiltration defenses. Commit(s): CLI `8bea4be2fa18533eafd088122be769e942965626` current-head requalification passes 60 checks with one documented macOS namespace skip and zero failures; hosted Ubuntu self-scan `37827269372` at the same exact head passes the pinned Docker adversarial job. Private evidence: `docs/shipping/evidence/hunt-docker-adversarial-origin-main-2026-10-09.md`. The independent reviewer packet is refreshed at `docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md`; HUNT-011 remains open for independent review, trusted/licensed recipe provenance, and dependent acceptance.

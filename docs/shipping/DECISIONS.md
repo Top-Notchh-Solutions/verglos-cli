@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-13 · Cover all approved Hunt sub-scopes with bounded fixture probes
+
+- **Decision:** Extend the first-party A1 fixture catalog from five to eight
+  deterministic probes by adding SQL injection shape, safe XSS shape, and
+  Agent/MCP tool-boundary mismatch.
+- **Reason:** This gives every one of the seven approved Hunt sub-scopes a
+  concrete, testable fixture-level shape while keeping the public runtime
+  honest about what it does and does not execute.
+- **Safety:** The probes do not access target source, network, databases,
+  browsers, tools, arbitrary shell, or model-generated commands. They run only
+  through the exact restricted built-in command catalog.
+- **Disposition:** Public PR #97 merged at
+  `f207240b3370222ee8c36b0dd13029b7d5a1c4ee`; HUNT-008 remains open for
+  target-code recipes and all provenance, approval, hosted, isolation, review,
+  and release gates. No checkbox changed; score remains **228/52/280
+  (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a1-recipe-family-catalog-pr97-2026-10-13.md`.
+
 ## 2026-10-13 · Expand A1 with deterministic fixture probes
 
 - **Decision:** Keep the A1 execution family bounded and first-party while
@@ -27,9 +46,10 @@
   not have one readable map for all scanner domains, engines, Hunt scopes,
   records, plans, Web/SCM, and acceptance work. A matrix closes that
   traceability gap without duplicating or inflating the backlog.
-- **Hunt truth:** Four Hunt roles are controlled architecture roles, not four
-  already-running AI agents. The supported catalog currently contains only
-  `a1-utf8-contains`; the other recipe sub-scopes remain open.
+- **Hunt truth at that earlier synchronization:** Four Hunt roles are
+  controlled architecture roles, not four already-running AI agents. The
+  supported catalog then contained only `a1-utf8-contains`; the other recipe
+  sub-scopes remained open at that point.
 - **Boundary:** No checkbox, entitlement, provider state, public-repository
   content, or release state changed.
 - **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**.

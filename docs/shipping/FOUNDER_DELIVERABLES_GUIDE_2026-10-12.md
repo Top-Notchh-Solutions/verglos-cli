@@ -200,8 +200,8 @@ For every supported Hunt rule, create or verify these four cases:
 | Timeout | The bounded runtime stops and classifies the result as timeout/environment failure, never as a clean result |
 | Adapter failure | Missing/broken/unsupported adapter is classified as infrastructure or policy, never as “not reproduced” |
 
-The current CLI already has an A1 utf8-contains catalog and supporting
-evidence. Do not create a second invented catalog. First inspect the existing
+The current CLI already has an A1 catalog with eight bounded fixture probes and
+supporting evidence. Do not create a second invented catalog. First inspect the existing
 recipe and fixture tests, then add only the missing provenance/approval or
 qualification artifact:
 

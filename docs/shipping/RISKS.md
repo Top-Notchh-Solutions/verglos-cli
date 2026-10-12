@@ -1,8 +1,27 @@
 # Verglos V1 risk register
 
+## 2026-10-13 · R-HUNT-FIXTURE-VS-TARGET-002 eight-probe catalog boundary
+
+- **Risk:** The eight-probe A1 catalog could be mistaken for eight attack
+  agents, complete target-code recipes, or full SAST/DAST verification.
+- **Mitigation:** The public runtime and private evidence call these
+  deterministic fixture probes. SQL, XSS, and Agent/MCP probes classify bounded
+  input shapes only; they do not connect to databases, launch browsers, invoke
+  tools, access network/source, or run arbitrary/model-generated commands.
+  The four architecture roles are controlled responsibilities, not autonomous
+  AI agents.
+- **Status:** Public PR #97 merged and all protected checks passed. This is
+  code-side fixture progress only; no acceptance checkbox is closed.
+- **Residual risk:** Target-code recipe adapters, provenance/licensing,
+  supported-rule approval, hosted entitlement, Linux/Docker qualification,
+  independent review, and final release evidence remain open under HUNT-008
+  through HUNT-011.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a1-recipe-family-catalog-pr97-2026-10-13.md`.
+
 ## 2026-10-13 · R-HUNT-FIXTURE-VS-TARGET-001 fixture catalog boundary
 
-- **Risk:** The expanded A1 fixture catalog could be mistaken for five
+- **Risk:** The earlier A1 fixture catalog could be mistaken for five
   autonomous attack agents or for target-code vulnerability verification.
 - **Mitigation:** The public runtime and private evidence call these
   deterministic fixture probes. They use no target source, no network, no

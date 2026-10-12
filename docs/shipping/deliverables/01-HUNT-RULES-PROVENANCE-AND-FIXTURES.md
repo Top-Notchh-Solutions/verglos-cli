@@ -6,7 +6,7 @@
 ## What is already verified
 
 The current public CLI evidence describes an A1 fixture-probe catalog with
-five first-party deterministic probes. Each has an adapter, command,
+eight first-party deterministic probes. Each has an adapter, command,
 assertion, bounded input, denied network, cleanup, redaction, and
 positive/negative/timeout/adapter-failure expectations. These are still
 fixture-level checks; they are not target-code attack agents.
