@@ -2,7 +2,8 @@
 
 ## 2026-10-12 · Public packed Hunt runtime qualification
 
-The public CLI commits `6762bf41`, `9945c5a9`, and `78251d1b` (PR #91) now include the bounded
+The public CLI commits `6762bf41`, `9945c5a9`, and `78251d1b` (PR #91, merged
+to public `main` as `13ee73b5dbe2d0e40ff3e47dab692ca3426f90ef`) now include the bounded
 `@verglos/hunt` package in the seven-archive public set. Shared, Hunt, MCP,
 and full CLI tests passed; the MCP suite reported 29 passing tests. Package
 surface/release tests passed 12/12, and the packed archives passed manifest

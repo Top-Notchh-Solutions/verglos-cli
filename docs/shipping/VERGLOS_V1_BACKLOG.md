@@ -15,7 +15,8 @@ acceptance conditions.
 
 ### Public packed Hunt runtime qualification — 2026-10-12
 
-Public CLI commits `6762bf41`, `9945c5a9`, and `78251d1b` (PR #91) now ship the bounded
+Public CLI commits `6762bf41`, `9945c5a9`, and `78251d1b` (PR #91, merged to
+public `main` as `13ee73b5dbe2d0e40ff3e47dab692ca3426f90ef`) now ship the bounded
 `@verglos/hunt` package and wires the packed CLI/MCP path to the signed A1
 recipe executor. Seven public archives passed the package-surface, manifest,
 clean-consumer, and release-verifier checks. The exact packed CLI executed

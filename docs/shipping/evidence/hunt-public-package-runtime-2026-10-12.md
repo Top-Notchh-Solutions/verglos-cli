@@ -5,6 +5,7 @@
 **Public runtime commit:** `6762bf41` (`feat(cli): ship bounded Hunt runtime in public packages`)
 **Qualified public head:** `78251d1b` (package-content and release-tag audit fixes)
 **Public PR:** `https://github.com/Top-Notchh-Solutions/verglos-cli/pull/91`
+**Merged public `main` commit:** `13ee73b5dbe2d0e40ff3e47dab692ca3426f90ef`
 **Package version:** `2.0.0-alpha.1`
 
 ## What changed
