@@ -110,6 +110,20 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Verify Hunt fixture verdicts
+        run: |
+          set -o pipefail
+          node scripts/verify-hunt-fixtures.mjs | tee hunt-fixture-verification.log
+
+      - name: Upload Hunt fixture evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: hunt-fixtures-${{ github.sha }}
+          path: hunt-fixture-verification.log
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Test
         run: pnpm test
 
