@@ -30,6 +30,15 @@ test("Docker sandbox adapter uses the bound digest and evaluates bounded exit as
     assert.match(result.evidenceDigest ?? "", /^sha256:/);
     assert.equal(result.redacted, true);
     assert.equal(result.executionStatus, "completed");
+    assert.deepEqual(result.assurance, {
+      class: "A2",
+      isolation: "container",
+      securityBoundary: true,
+      sourceAccess: "read-only",
+      network: "denied",
+      processLimit: 32,
+      limitation: "A2 runs a signed recipe in a pinned Docker container with read-only project input, denied network, dropped capabilities, and bounded resources; host Docker daemon/VM policy and platform-specific kernel differences remain outside this result",
+    });
     assert.equal(runnerTimeout, 900, "the shorter declared CPU budget must also cap host supervision");
     assert.ok(argv.includes("--network"));
     assert.ok(argv.includes("none"));
