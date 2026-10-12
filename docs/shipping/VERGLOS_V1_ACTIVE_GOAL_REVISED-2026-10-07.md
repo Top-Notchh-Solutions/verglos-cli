@@ -39,6 +39,23 @@ remain in the private tracker. The live score remains **228 checked / 52
 unchecked / 280 total (81.4%)**; no checkbox changes in this documentation
 pass.
 
+### Current implementation checkpoint — 2026-10-13
+
+The seven A2 reference harnesses now have positive, negative, and unsupported
+fixture outcomes; all 21 direct runs passed in the pinned Docker boundary.
+The exact public head under validation is PR #102,
+`3801125f9486ccc2d4725b178766ac703dd8f762`. Preview-only organization-policy
+signing is configured and deployed, but the isolated policy route returns the
+expected fail-closed 503 because no SCM installation or published policy row
+exists. These facts advance implementation evidence without closing HUNT-008
+or TEAM-CLI-001. The corresponding private packets are:
+
+- `docs/shipping/evidence/hunt-a2-fixture-outcome-matrix-pr102-2026-10-13.md`;
+- `docs/shipping/evidence/team-cli-001-preview-signer-deployment-2026-10-13.md`.
+
+The score remains **228 checked / 52 unchecked / 280 total (81.4%)** until a
+backlog row's complete acceptance evidence exists.
+
 ## 2026-10-12 approved-contract execution boundary — current
 
 This section supersedes the older finish-line amendments below. The approved

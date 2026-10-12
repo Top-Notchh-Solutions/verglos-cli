@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · Current A2 and TEAM-CLI evidence checkpoint
+
+PR #102 (`3801125f9486ccc2d4725b178766ac703dd8f762`) adds positive, negative,
+and unsupported fixture outcomes to all seven A2 reference harnesses. Direct
+pinned-Docker execution passed all 21 combinations. Preview now has a
+signer-configured deployment, but its policy route correctly returns
+fail-closed 503 because the isolated database has no SCM installation or
+published policy row. These are implementation/evidence updates only;
+HUNT-008 and TEAM-CLI-001 remain unchecked.
+
+Evidence:
+
+- `docs/shipping/evidence/hunt-a2-fixture-outcome-matrix-pr102-2026-10-13.md`
+- `docs/shipping/evidence/team-cli-001-preview-signer-deployment-2026-10-13.md`
+
+The live score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+No checkbox changed.
+
 ## 2026-10-13 · Final V1 feature-to-backlog coverage synchronization
 
 The approved contract is now mapped in
@@ -18,13 +36,12 @@ provenance; and final acceptance/Point-5 public TypeScript/JavaScript corpus.
 Hunt recipe sub-scopes `HUNT-008-R1` through `HUNT-008-R7` (injection,
 command, path/file, SSRF, agent/MCP, safe XSS, and authorization/tenant
 fixtures) are matrix sub-scopes owned by the existing HUNT rows, not extra
-counted checkboxes. The supported catalog now contains the signed first-party
-A1 family with eight deterministic built-in fixture probes and seven A2
-target-harness descriptors using a pinned Docker execution path. The A2
-catalog/protocol is implemented, with a direct public SQL/NoSQL fixture run;
-full per-family fixtures, provenance, bounded qualification, and acceptance
-evidence remain open. The four Hunt roles are architecture roles, not four
-already running autonomous AI agents.
+counted checkboxes. The supported catalog contains eight deterministic A1
+fixture probes and seven A2 target-harness descriptors using a pinned Docker
+execution path. The A2 catalog/protocol and sanitized reference harnesses are
+implemented, with full per-family fixtures, provenance, bounded qualification,
+and acceptance evidence still open. The four Hunt roles are architecture
+roles, not four already running autonomous AI agents.
 
 **Live score:** **228 checked / 52 unchecked / 280 total (81.4%)**. No
 checkbox changed in this documentation synchronization. Every later closure

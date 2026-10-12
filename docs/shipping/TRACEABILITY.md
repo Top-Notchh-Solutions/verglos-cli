@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## A2 outcome matrix and hosted signer · 2026-10-13
+
+- **Public implementation:** PR #102 head
+  `3801125f9486ccc2d4725b178766ac703dd8f762` adds positive, negative, and
+  unsupported outcomes to all seven A2 sanitized reference harnesses.
+- **Evidence:** 21 direct pinned-Docker fixture runs passed; local Hunt/CLI/
+  build/diff checks passed. Timeout and infrastructure failure remain
+  adapter outcomes rather than fabricated harness verdicts.
+- **Hosted implementation:** Preview signer variables are configured for
+  `dpl_CRK55VBFXboK3dEiDmk9Uxg7X21W`; the route returned fail-closed 503
+  because the isolated database has no SCM installation or policy row.
+- **Boundary:** Production, credentials, customer source, and public-private
+  evidence boundaries were preserved.
+- **Acceptance:** HUNT-008 and TEAM-CLI-001 remain open; score remains
+  **228/52/280 (81.4%)**.
+- **Evidence packets:**
+  `hunt-a2-fixture-outcome-matrix-pr102-2026-10-13.md` and
+  `team-cli-001-preview-signer-deployment-2026-10-13.md`.
+
 ## A2 reference harnesses · 2026-10-13
 
 - **Implementation:** Public CLI PR #100 merged at

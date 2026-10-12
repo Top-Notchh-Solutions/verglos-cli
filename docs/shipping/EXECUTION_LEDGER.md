@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A2 outcome matrix and Preview signer progress
+
+- **Public work:** PR #102 is open at
+  `3801125f9486ccc2d4725b178766ac703dd8f762`. Seven A2 reference harnesses
+  now cover positive, negative, and unsupported fixture cases.
+- **Verification:** all 21 family/case combinations passed directly in the
+  pinned Docker boundary; local Hunt/CLI/build/diff checks passed. The
+  repository-dispatched self-scan and platform matrix are still in progress.
+- **Hosted work:** Preview-only organization-policy signer configuration was
+  deployed as `dpl_CRK55VBFXboK3dEiDmk9Uxg7X21W`. The route correctly
+  fail-closed with HTTP 503 because the isolated database has no SCM
+  installation or policy row. Production was not changed.
+- **Acceptance:** HUNT-008 and TEAM-CLI-001 remain unchecked. No checkbox was
+  closed from fixture or signer configuration evidence alone.
+- **Evidence:**
+  `evidence/hunt-a2-fixture-outcome-matrix-pr102-2026-10-13.md` and
+  `evidence/team-cli-001-preview-signer-deployment-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%).
+
 ## 2026-10-13 · Seven A2 reference harnesses merged (PR #100)
 
 - **Public merge:** PR #100 merged at

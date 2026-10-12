@@ -1,5 +1,37 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A2 three-outcome matrix on PR #102
+
+The seven approved A2 families now have public sanitized reference harnesses
+that accept positive, negative, and unsupported fixture cases. Direct pinned
+Docker execution passed all 21 family/case combinations with the expected
+canonical outcomes. Local Hunt, CLI, build, and diff checks passed.
+
+PR #102 is open at the exact head commit
+`3801125f9486ccc2d4725b178766ac703dd8f762`; its repository-dispatched
+self-scan and platform matrix are still being observed. The private evidence
+packet is
+`docs/shipping/evidence/hunt-a2-fixture-outcome-matrix-pr102-2026-10-13.md`.
+
+This is implementation and fixture evidence only. HUNT-008 remains open for
+target-code acceptance, provenance/licensing, supported-rule approval,
+hosted entitlement, Linux/Docker adversarial proof, independent review, and
+release treatment. Score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**; no checkbox changed.
+
+## 2026-10-13 · Preview organization-policy signer configured
+
+The organization-policy signer is now configured in Preview only and the
+current Preview deployment is
+`dpl_CRK55VBFXboK3dEiDmk9Uxg7X21W`. The policy route was reached, but the
+isolated database has zero SCM installations and zero policy rows, so it
+returned the expected fail-closed `503 policy unavailable` response.
+
+Production was untouched. TEAM-CLI-001 remains open pending authorized SCM
+installation, repository binding, policy publication, and live fetch/cache/
+offline/cross-tenant evidence. Evidence:
+`docs/shipping/evidence/team-cli-001-preview-signer-deployment-2026-10-13.md`.
+
 ## 2026-10-13 · Seven A2 reference harnesses merged (PR #100)
 
 Public PR #100 merged at
