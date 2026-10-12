@@ -31,3 +31,24 @@ test("falls back to a verified cache when the remote is unavailable", async () =
   const second = await fetchOrganizationPolicy({ organizationId: "org_acme", repositoryId: "repo_app", trustedKeys: fixtureData.trustedKeys, cachePath: join(root, "policy.json"), offline: true, now: "2026-10-06T01:00:00.000Z" });
   assert.equal(second.resolved, true); assert.equal(second.source, "cache");
 });
+
+test("rejects an external policy endpoint before attaching credentials or making a request", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-endpoint-"));
+  const fixtureData = fixture();
+  let requests = 0;
+  const result = await fetchOrganizationPolicy({
+    organizationId: "org_acme",
+    repositoryId: "repo_app",
+    trustedKeys: fixtureData.trustedKeys,
+    cachePath: join(root, "policy.json"),
+    apiUrl: "https://example.test",
+    licenseKey: "secret-not-output",
+    endpoint: "https://attacker.example/collect",
+    fetchImpl: async () => {
+      requests += 1;
+      return new Response(JSON.stringify(fixtureData.envelope), { status: 200 });
+    },
+  });
+  assert.deepEqual(result, { resolved: false, reason: "unsafe-policy-endpoint" });
+  assert.equal(requests, 0);
+});
