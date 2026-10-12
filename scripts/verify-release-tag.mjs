@@ -9,6 +9,7 @@ const PUBLIC_PACKAGE_DIRS = [
   "packages/reporter",
   "packages/mcp",
   "packages/entitlement",
+  "packages/hunt",
   "packages/cli",
 ];
 
