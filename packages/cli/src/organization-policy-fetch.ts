@@ -5,6 +5,17 @@ import { resolveOrganizationPolicy, type OrganizationPolicyCacheEntry, type Orga
 const MAX_RESPONSE_BYTES = 1 * 1024 * 1024;
 const DEFAULT_TIMEOUT_MS = 8_000;
 
+function isSafePolicyEndpoint(value: string): boolean {
+  return value.length > 0
+    && value.length <= 2048
+    && value.startsWith("/")
+    && !value.startsWith("//")
+    && !value.includes("\\")
+    && !value.includes("?")
+    && !value.includes("#")
+    && !/[\u0000-\u001f\u007f]/u.test(value);
+}
+
 export type OrganizationPolicyFetchResult = Readonly<{
   resolved: boolean;
   source?: "remote" | "cache";
@@ -42,6 +53,7 @@ export async function fetchOrganizationPolicy(input: Readonly<{
     const licenseKey = input.licenseKey ?? creds.licenseKey;
     if (!licenseKey) return { resolved: false, reason: "no-license" };
     const endpoint = input.endpoint ?? `/api/v1/organizations/${encodeURIComponent(input.organizationId)}/repositories/${encodeURIComponent(input.repositoryId)}/policy`;
+    if (!isSafePolicyEndpoint(endpoint)) return { resolved: false, reason: "unsafe-policy-endpoint" };
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), input.timeoutMs ?? DEFAULT_TIMEOUT_MS);
     try {
