@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Packed public consumer executes signed Hunt runtime (PR #93)
+
+- **Public merge:** PR #93 (`a667d568`) merged to `main` at
+  `fe28730da35ec7f626473e00b68ca27faf1b77d2`.
+- **Implemented:** the clean public-package consumer verifier now creates an
+  ephemeral signed A1 feed, exact approval, isolated Pro capability cache, and
+  bounded report, then executes the installed packed CLI through
+  `verglos hunt --execute`.
+- **Verification:** local packed consumer completed with the expected
+  confirmed verdict and exit 1; typecheck and full tests passed. Protected
+  scan, in-toto, and macOS/Ubuntu/Windows Node 20/22/24 checks all passed.
+- **Privacy/scope:** fixture inputs, license text, capability cache, and HOME
+  were temporary and removed. No provider, database, Production, npm,
+  customer-repository, or source-upload write occurred.
+- **Disposition:** technical Point-3/Point-5 evidence only. HUNT-008/009/011
+  still require their documented provenance, hosted, Linux/Docker, and
+  independent-review gates. No checkbox changed; score remains **228 checked /
+  52 unchecked / 280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-packed-consumer-execution-2026-10-13.md`.
+
 ## 2026-10-13 · Public Hunt handoff merged (PR #92)
 
 - **Public merge:** PR #92 merged to `main` at

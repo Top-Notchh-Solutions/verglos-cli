@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Packed public consumer executes signed Hunt runtime (PR #93)
+
+Public PR #93 (`a667d568`) merged to `main` at
+`fe28730da35ec7f626473e00b68ca27faf1b77d2`. The clean public-package
+consumer verifier now installs all seven packed archives and executes the
+installed CLI through the signed A1 recipe, trust-store, approval, entitlement,
+and restricted-process path with an isolated offline Pro capability fixture.
+It asserts the expected confirmed result and that synthetic input/license text
+is not emitted.
+
+Protected scan, in-toto, macOS/Ubuntu/Windows Node 20/22/24 checks passed;
+local typecheck and the complete test suite passed. This strengthens the
+packed-artifact path only. It does not supply hosted entitlement, legal or
+licensed-recipe clearance, Linux/Docker namespace proof, independent review,
+or final acceptance. No checkbox changed; score remains **228 checked / 52
+unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/hunt-packed-consumer-execution-2026-10-13.md`.
+
 ## 2026-10-13 · Public Hunt handoff merged (PR #92)
 
 Public PR #92 merged to `main` at
