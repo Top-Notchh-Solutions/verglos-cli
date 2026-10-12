@@ -24,7 +24,7 @@ score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
 | Web account and hosted evidence | Optional/no account required | Private records/history | Organization control plane | Client workspaces/handoffs | Private governance | `PLAN-WEB-001..015`, `PRO-001..010`, `FINAL-WEB-001..008` | Web capability exists in code, but several hosted and final acceptance rows remain open. |
 | MCP and AI-assisted development | Basic checks/explanations | Full Hunt/MCP depth | Shared policy/approvals | Client-safe handoff | Private runners/policy | `AGENT-001..007`, `HUNT-010` | MCP must never silently approve, sign, publish, mutate source, or bypass Hunt controls. |
 | Attest and portable `.vgl` Release Records | Local verification/evidence | Signed local/private records | Shared approvals/audit | Public/client verification | Customer roots/KMS/HSM options | `RECORD-001..012`, `DIST-001..006` | Record contract is defined; end-to-end hosted and release evidence is not yet universally complete. |
-| Bounded Hunt verification | Safe starter | Full supported catalogue | Shared org policy | Client redaction/handoff | Private runners/custom recipes | `HUNT-001..011`, `QUAL-CLI-004` | A1 currently contains eight deterministic fixture probes, covering fixture-level shapes for all seven approved recipe sub-scopes plus UTF-8 containment. Actual target-code recipe families and their acceptance evidence remain open. |
+| Bounded Hunt verification | Safe starter | Full supported catalogue | Shared org policy | Client redaction/handoff | Private runners/custom recipes | `HUNT-001..011`, `QUAL-CLI-004` | The catalog contains eight A1 deterministic fixture probes plus seven A2 target-harness descriptors with a pinned Docker execution path. A direct public SQL/NoSQL fixture run passes; complete per-family target-code fixtures and acceptance evidence remain open. |
 | SCM organization workflows | Local/no integration required | Personal/private projects where enabled | GitHub/GitLab org checks | Client repositories | Enterprise governance | `TEAM-CLI-001..002`, `TEAM-WEB-*`, `GITHUB-WEB-*` | Code-side hardening is merged; hosted signer, installation, binding, webhook, and removal evidence remain separate gates. |
 | Cards-only prepaid billing | Not required | One-time fixed term/manual renewal | Shared org entitlements | Client billing views | Contracted billing/governance | `PLAN-CLI-001..004`, `PLAN-WEB-001..015`, `PRO-*`, `ENT-*` | V1 does not promise automatic recurring renewal. Provider lifecycle acceptance remains evidence-driven. |
 
@@ -84,30 +84,33 @@ adversarial sandbox qualification.
 
 | Matrix sub-scope | Intended verification | Required recipe characteristics | Current truth |
 | --- | --- | --- | --- |
-| `HUNT-008-R1` | SQL/NoSQL injection | Deterministic local fixture, no external database, safe adapter, positive/negative/timeout/failure cases | A1 has a SQL-shaped fixture classifier; target-code SQL/NoSQL recipe remains open. |
-| `HUNT-008-R2` | Command injection | Non-privileged fixture, no host shell escape, denied network, cleanup | A1 has a fixture-level command-injection shape classifier; target-code recipe remains open. |
-| `HUNT-008-R3` | Path traversal/file boundary | Temporary fixture root, allowlisted files only, no host paths/devices | A1 has fixture-level path-shape classification; target-code/file-boundary recipe remains open. |
-| `HUNT-008-R4` | SSRF | Local fake target only, network denied except declared fixture adapter | A1 has no-network private/local target classification; target-code/fixture-adapter recipe remains open. |
-| `HUNT-008-R5` | Agent/MCP tool boundary | Fake tools, no real credentials/network, approval and output redaction | A1 has a bounded allowlist-mismatch classifier; real tool-boundary recipe remains open. |
-| `HUNT-008-R6` | XSS where a deterministic safe fixture exists | No remote browser target, bounded fixture, redacted output | A1 has a safe-XSS input-shape classifier; target-code/browser-free recipe remains open. |
-| `HUNT-008-R7` | Authorization/tenant/mass-assignment | In-memory or disposable fixture with explicit tenant identities | A1 has a tenant-mismatch classifier; target-code authorization/mass-assignment recipe remains open. |
+| `HUNT-008-R1` | SQL/NoSQL injection | Deterministic local fixture, no external database, safe adapter, positive/negative/timeout/failure cases | A1 classifier plus A2 descriptor/protocol and direct public SQL/NoSQL fixture run; complete target-code fixture/qualification remains open. |
+| `HUNT-008-R2` | Command injection | Non-privileged fixture, no host shell escape, denied network, cleanup | A1 classifier plus A2 descriptor/protocol; complete target-code fixture/qualification remains open. |
+| `HUNT-008-R3` | Path traversal/file boundary | Temporary fixture root, allowlisted files only, no host paths/devices | A1 classifier plus A2 descriptor/protocol; complete target-code fixture/qualification remains open. |
+| `HUNT-008-R4` | SSRF | Local fake target only, network denied except declared fixture adapter | A1 classifier plus A2 descriptor/protocol; complete target-code fixture/qualification remains open. |
+| `HUNT-008-R5` | Agent/MCP tool boundary | Fake tools, no real credentials/network, approval and output redaction | A1 classifier plus A2 descriptor/protocol; complete target-code fixture/qualification remains open. |
+| `HUNT-008-R6` | XSS where a deterministic safe fixture exists | No remote browser target, bounded fixture, redacted output | A1 classifier plus A2 descriptor/protocol; complete target-code fixture/qualification remains open. |
+| `HUNT-008-R7` | Authorization/tenant/mass-assignment | In-memory or disposable fixture with explicit tenant identities | A1 classifier plus A2 descriptor/protocol; complete target-code fixture/qualification remains open. |
 
 ### 4.3 Current Hunt implementation truth
 
-- The supported catalog contains the A1 family with **eight** deterministic
-  built-in fixture probes: `a1-utf8-contains`, `a1-path-traversal`,
+- The supported catalog contains eight A1 deterministic built-in fixture probes
+  and seven A2 target-harness descriptors. The A1 probes are
+  `a1-utf8-contains`, `a1-path-traversal`,
   `a1-command-injection`, `a1-ssrf-target`, `a1-tenant-boundary`,
   `a1-sql-injection`, `a1-xss-safe`, and `a1-agent-boundary`.
 - Each A1 probe declares positive, negative, timeout, and adapter-failure
   fixtures and uses the bounded restricted-process path.
-- These are fixture-level classifications only; they do not execute target
-  code or replace the seven target-code recipe sub-scopes.
+- The A2 descriptors bind the seven target-harness families to the pinned Node
+  Docker image, a fixed harness path, and a strict one-line verdict protocol.
+  One public SQL/NoSQL fixture has been run through that path.
+- A1 probes are fixture-level classifications only. The A2 path is an
+  implementation slice, not complete per-family target-code acceptance.
 - The A1 worker is a technical bounded worker, not an autonomous AI agent and
   not an OS/security isolation boundary.
-- The eight probes provide fixture-level input-shape coverage only. The other
-  target-code recipe work above is not to be represented as implemented until
-  its declarative recipes, fixtures, provenance, tests, and safe adapter
-  behavior exist.
+- The four roles remain controlled responsibilities, not autonomous AI agents.
+  Full declarative recipes, fixtures, provenance, tests, and safe-adapter
+  acceptance for each family are still required before HUNT-008 closes.
 - `HUNT-008..011` and dependent qualification rows remain the acceptance
   authority. This matrix does not close them.
 
