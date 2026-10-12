@@ -1,9 +1,15 @@
 # Verglos Final V1 — Scope, Hunt, Plans, and Business Decision
 
 **Decision date:** 2026-10-12  
-**Status:** design-freeze candidate; documentation only  
+**Status:** approved contract; documentation/implementation target  
 **Scope:** public CLI, private shipping tracker, shipping worktree, Web, and MCP  
 **Important:** this file does not claim that any capability is implemented or shipped.
+
+The approved execution goal is deliberately bounded to Points 1–5: synchronize
+this contract across the repositories, implement the real bounded Hunt/public
+CLI path, connect Web entitlements/Attest/Release Records, and qualify the npm
+package on public TypeScript/JavaScript repositories. Npm publication, held-out
+POC/experiments, and the final release decision are deferred to the next goal.
 
 This is the context document to read before creating the execution goal. It
 defines what Verglos is supposed to deliver, what remains missing, and what
@@ -296,4 +302,3 @@ must then execute, in order:
 
 No checkbox is closed because this design document exists. It is context for
 the next implementation goal, not evidence of implementation.
-

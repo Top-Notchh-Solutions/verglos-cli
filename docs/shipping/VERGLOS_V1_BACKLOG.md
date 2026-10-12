@@ -1,5 +1,41 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-12 · Approved contract synchronization
+
+The approved Final V1 contract is
+`FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`. The current goal
+executes Points 1–5 and stops after the public TypeScript/JavaScript npm
+qualification corpus. Publication, held-out POC/experiments, and the final
+release decision are deferred to the next goal.
+
+**Live score at synchronization:** 228 checked / 52 unchecked / 280 total
+(81.4%). No checkbox was changed by this documentation update. Every future
+checkbox still requires implementation, tests, real evidence, and the row's
+acceptance conditions.
+
+### Technical progress recorded — HUNT-008 through HUNT-011
+
+On shipping-worktree commit `04b9a2b333a7dab8370ab40ae26f46c6b10a0156`, the
+pinned Docker adversarial suite passed **60 / skipped 1 / failed 0** on Docker
+`29.7.2`, and the shared, CLI, and MCP Hunt test commands exited 0. Evidence:
+
+- `docs/shipping/evidence/hunt-docker-adversarial-2026-10-12.md`
+- `docs/shipping/evidence/hunt-cli-mcp-path-2026-10-12.md`
+
+This is repository-owned technical evidence only. HUNT-008 remains open for
+trusted/licensed recipe provenance and independent review; HUNT-009–011 and
+QUAL-CLI-004 remain downstream and unchecked. Score remains **228/52/280**.
+
+### Point-5 qualification progress — public npm package
+
+The locally packed `2.0.0-alpha.1` package passed the six-archive manifest and
+clean-consumer checks, then scanned one public JavaScript repository and one
+public TypeScript repository from an isolated HOME with complete coverage and
+exit 0. Evidence:
+`docs/shipping/evidence/point-5-public-npm-repository-qualification-2026-10-12.md`.
+This does not close Point 5 or any backlog checkbox; the remaining corpus,
+TopNotchh forks, plan paths, and final acceptance are still required.
+
 ## 2026-10-11 · QUAL-WEB-006 authenticated account recheck
 
 The current authenticated Production account shell passed desktop/mobile

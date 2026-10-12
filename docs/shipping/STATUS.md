@@ -1,5 +1,37 @@
 # Verglos V1 shipping status
 
+## 2026-10-12 · Approved contract and Point-5 goal boundary
+
+The approved Final V1 contract is
+`FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`. The active goal now
+ends after the public TypeScript/JavaScript npm-package qualification corpus.
+Npm publication, held-out experiments/POC, campaign execution, and the final
+release decision are deferred to the next goal. No checkbox changed in this
+sync.
+
+Current live private-tracker score: **228 checked / 52 unchecked / 280 total
+(81.4%)**. This score must be recalculated from the checklist after each
+accepted implementation batch.
+
+The exact shipping-worktree Docker Hunt adversarial run passed 60 checks with
+one documented macOS namespace skip and zero failures. It is recorded at
+`docs/shipping/evidence/hunt-docker-adversarial-2026-10-12.md`; it does not
+close HUNT-008, HUNT-011, or QUAL-CLI-004 because provenance, Linux coverage,
+and independent review remain required.
+
+The same exact commit's shared, CLI, and MCP test commands exited 0; the MCP
+suite included 29 passing Hunt/authority tests. This is recorded at
+`docs/shipping/evidence/hunt-cli-mcp-path-2026-10-12.md`. No backlog checkbox
+changed.
+
+Point 5 now has a packed-npm qualification batch for one public JavaScript and
+one public TypeScript repository. Both scans exited 0 with complete coverage;
+the clean consumer installed all six archives and the isolated-home run found
+no global `.cursor` findings. Evidence:
+`docs/shipping/evidence/point-5-public-npm-repository-qualification-2026-10-12.md`.
+This is partial Point-5 progress, not final corpus acceptance; score remains
+228/52/280.
+
 ## 2026-10-11 · QUAL-WEB-006 account recheck remains partial
 
 The authenticated Production account shell now has fresh desktop/mobile

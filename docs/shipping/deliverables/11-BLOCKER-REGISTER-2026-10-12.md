@@ -1,6 +1,15 @@
 
 # Verglos V1 blocker register
 
+## Contract boundary update — 2026-10-12
+
+The approved contract is
+`../FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`. This register
+continues to classify missing work; it does not close blockers or backlog
+checkboxes. The active goal stops after Point 5 (public TS/JS npm-package
+qualification). Npm publication, held-out POC/experiments, and final release
+decision are deferred.
+
 **Private working record — 2026-10-12**
 
 This register separates technical work Codex can complete from approvals or

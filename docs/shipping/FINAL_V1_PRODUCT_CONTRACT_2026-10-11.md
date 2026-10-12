@@ -1,5 +1,14 @@
 # Verglos Final V1 Product Contract
 
+> **2026-10-12 approved-contract notice:** The canonical approved contract is
+> [`FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`](FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md).
+> It supersedes this 2026-10-11 copy. This historical copy is retained for
+> traceability; do not use it to choose plan behavior or goal scope.
+
+The current execution goal stops after Point 5: public TypeScript/JavaScript
+npm-package qualification. Publication, held-out POC/experiments, and the
+final release decision are deferred to the next goal.
+
 **Decision date:** 2026-10-11  
 **Scope:** `verglos-cli`, private shipping tracker, CLI shipping worktree,
 and `verglos-web`  

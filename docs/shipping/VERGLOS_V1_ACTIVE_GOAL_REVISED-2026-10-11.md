@@ -1,10 +1,17 @@
-# Verglos V1 Active Goal Index — Final Product Contract and Whole-Backlog Shipping
+# Verglos V1 Active Goal Index — Approved Contract and Point-5 Qualification
+
+> **Current score:** 228 checked / 52 unchecked / 280 total (81.4%).
+>
+> **Current stop boundary:** complete Points 1–5 only, ending with the npm
+> package qualification corpus on public TypeScript/JavaScript repositories.
+> Do not publish npm, run the held-out POC/experiments, or record the final
+> release decision in this goal.
 
 > **Canonical goal:** use
 > `docs/shipping/VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-07.md`.
 >
 > The 10/07 file is the complete active goal (2,519 lines) and now contains
-> the 10/11 product-contract amendment at its top. This file is retained as a
+> the 10/12 approved-contract amendment at its top. This file is retained as a
 > readable contract/index summary only; it must not replace the comprehensive
 > goal or be treated as a second queue.
 
@@ -32,20 +39,20 @@ qualified.
 The authoritative contract is:
 
 ```text
-docs/shipping/FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md
+docs/shipping/FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md
 ```
 
-The goal is complete only when every required backlog checkbox is genuinely
-satisfied, the final acceptance/POC corpus is recorded, and the protected
-release is ready. A document edit, deployment, browser click, or local test
-does not check a box by itself. The existing backlog remains the queue; the
-contract change does not reorder it or authorize skipping an unchecked row.
+The goal is complete only when Points 1–5 are evidenced and every eligible
+backlog checkbox covered by those points is genuinely satisfied. A document
+edit, deployment, browser click, or local test does not check a box by itself.
+Publication, held-out POC/experiments, and the final release decision are
+explicitly deferred to the next goal.
 
 ## Starting checkpoint
 
 The private tracker currently reports:
 
-**223 checked / 57 unchecked / 280 total — 79.6%**
+**228 checked / 52 unchecked / 280 total — 81.4%**
 
 Recompute this from the live checkbox file after every substantial batch. Never
 reuse a stale score from an earlier conversation or goal attachment.

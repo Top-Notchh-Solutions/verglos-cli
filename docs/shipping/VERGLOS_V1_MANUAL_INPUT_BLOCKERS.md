@@ -1,5 +1,14 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-12 · Hunt technical evidence refreshed
+
+The exact shipping-worktree commit `04b9a2b333a7dab8370ab40ae26f46c6b10a0156`
+now has fresh repository-owned CLI/shared/MCP test evidence and a pinned Docker
+adversarial result of 60 passed, 1 documented macOS namespace skip, and 0
+failed. These runs strengthen the technical side but do not satisfy the
+external Hunt-content provenance, Linux namespace, or independent-review
+blockers. Keep HUNT-008 through HUNT-011 and QUAL-CLI-004 open.
+
 ## 2026-10-11 · QUAL-WEB-006 complete account-shell evidence; external remainder
 
 The authenticated Production account-shell recheck is complete for the

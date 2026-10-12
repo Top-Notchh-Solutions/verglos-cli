@@ -3,6 +3,13 @@
 
 **Private shipping document — 2026-10-12**
 
+**Contract status:** approved. This guide is an operational explanation of
+the approved contract at
+`FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`; it is not a second
+product plan. The current goal stops after Point 5, the public TS/JS npm
+qualification corpus. Publication, held-out POC/experiments, and the final
+release decision are next-goal work.
+
 This is the plain-English collection guide for the remaining Verglos V1
 shipping work. It explains what each deliverable is, who must provide it, what
 kind of thing it is, where it belongs, and how Codex can use it to qualify the
@@ -979,4 +986,3 @@ The shipping goal is genuinely complete only when:
 Until then, the product can be code-complete in many areas while remaining
 shipping-incomplete. That is why a test result, a deployment, or a drafted
 Markdown file may improve readiness without closing a checkbox by itself.
-

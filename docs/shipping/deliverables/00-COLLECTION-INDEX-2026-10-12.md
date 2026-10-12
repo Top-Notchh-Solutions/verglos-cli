@@ -3,6 +3,13 @@
 
 **Private tracker — 2026-10-12**
 
+**Approved contract:**
+`../FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`  
+**Current goal boundary:** Points 1–5, ending at public TS/JS npm-package
+qualification. Publication, held-out POC/experiments, and final release
+decision are next-goal work. This index collects deliverables; it does not
+close a backlog checkbox.
+
 ## Authorization boundary
 
 Founder statement recorded from Anurag Yadav:

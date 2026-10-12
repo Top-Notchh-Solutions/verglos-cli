@@ -1,8 +1,44 @@
-# Verglos V1 Active Shipping Goal — Complete Contract, Whole Backlog, Preview, Production, and Release
+# Verglos V1 Active Shipping Goal — Approved Contract, Implementation, and Point-5 Qualification
+
+## 2026-10-12 approved-contract execution boundary — current
+
+This section supersedes the older finish-line amendments below. The approved
+contract is
+`docs/shipping/FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md` and
+the synchronized contract notice is
+`docs/shipping/CONTRACT_SYNC_NOTICE_2026-10-12.md`.
+
+The current goal is executed in five ordered points:
+
+1. Freeze the approved Final V1 product/Hunt/plan contract.
+2. Synchronize the feature map, architecture blueprint, product contract,
+   backlog, execution ledger, status, active goal, CLI/Web/MCP registries,
+   pricing, and customer-facing copy.
+3. Implement the approved bounded Hunt recipes/roles and the public CLI path.
+4. Connect Web plan entitlements, prepaid billing behavior, Attest, and
+   portable Release Records.
+5. Test the npm package on authorized public TypeScript/JavaScript repositories
+   and TopNotchh-owned forks, including install, scan, clean result,
+   dependency/secret/provenance, Docker/Trivy, MCP, Hunt, records, plan
+   behavior, performance, failure handling, and no-source-upload checks.
+
+Stop when Point 5 has a complete evidence bundle and every eligible backlog row
+has been reconciled. Do not publish npm, run the held-out POC corpus, run
+campaign experiments, or record the final release decision in this goal. Those
+are the next goal. A document change, draft, local test, deployment, or
+browser click never checks a backlog row by itself.
+
+Current private tracker score: **228 checked / 52 unchecked / 280 total
+(81.4%)**. Recompute from the live checklist after each accepted batch; do not
+copy a stale historical score. Historical sections below remain evidence of
+prior decisions and are not a second queue.
 
 ## 2026-10-12 final qualification finish-line amendment
 
-This is the current operating direction for the same goal. Preserve the
+> **Superseded by the approved-contract execution boundary above.** Retained
+> for historical traceability; it is not the current stop condition.
+
+This is the historical operating direction for the same goal. Preserve the
 historical checkpoints and score snapshots below; the latest live backlog
 score and the latest evidence files are authoritative.
 

@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## Approved contract boundary — 2026-10-12
+
+The approved contract is
+`FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`. The active goal
+stops after Point 5 npm-package qualification on public TS/JS repositories.
+The release-gate inventory remains useful for recording missing evidence, but
+npm publication, held-out POC/experiments, and the final release decision are
+deferred to the next goal. No gate or checkbox is opened by this notice.
+
 ## 2026-10-11 · QUAL-WEB-006 account-shell qualification addendum
 
 The current authenticated account shell passed desktop/mobile Lighthouse
