@@ -7,13 +7,13 @@ import { join } from "node:path";
 import { test } from "node:test";
 
 const run = promisify(execFile);
-test("clean public pack contains six archives without compiled tests or CLI process fixtures", async () => {
+test("clean public pack contains seven archives without compiled tests or CLI process fixtures", async () => {
   const output = await mkdtemp(join(tmpdir(), "verglos-public-pack-"));
   try {
     const { stdout: expectedNotices } = await run(process.execPath, ["scripts/generate-third-party-notices.mjs"], { maxBuffer: 16 * 1024 * 1024 });
     await run(process.execPath, ["scripts/pack-public-packages.mjs", output], { maxBuffer: 8 * 1024 * 1024 });
     const archives = (await readdir(output)).filter((name) => name.endsWith(".tgz"));
-    assert.equal(archives.length, 6);
+    assert.equal(archives.length, 7);
     for (const archive of archives) {
       const { stdout } = await run("tar", ["-tzf", join(output, archive)]);
       assert.doesNotMatch(stdout, /(^|\/)[^/]*\.test\./u);

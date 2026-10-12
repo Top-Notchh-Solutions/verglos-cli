@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const run = promisify(execFile);
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const packageNames = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"];
+const packageNames = ["shared", "scanner", "reporter", "mcp", "entitlement", "hunt", "cli"];
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const npmOptions = { cwd: root, maxBuffer: 4 * 1024 * 1024, shell: process.platform === "win32" };
 const manifests = new Map();

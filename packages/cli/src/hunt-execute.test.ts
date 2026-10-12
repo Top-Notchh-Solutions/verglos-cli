@@ -9,8 +9,8 @@ import { executeHuntRecipe } from "./hunt-execute.js";
 import type { HuntRuntimeLoader } from "./hunt-runtime.js";
 
 const subjectId = `urn:verglos:subject:repository-tree:sha256:${"a".repeat(64)}`;
-// The Hunt runtime is intentionally not a public CLI dependency. The CLI test
-// task builds this private fixture explicitly before loading its dist output.
+// The Hunt runtime is a separately built public package. The CLI test task
+// builds it before loading the CLI execution path.
 const localHuntRuntime: HuntRuntimeLoader = () => import("../../hunt/dist/index.js");
 
 function recipe(inputs: Readonly<Record<string, string>> = { needle: "unsafe", value: "fixture contains unsafe" }): HuntRecipe {
@@ -118,7 +118,7 @@ test("HUNT-009 fails closed for binding drift and symlinked inputs", async () =>
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test("HUNT-009 rejects binding drift before loading the private runtime", async () => {
+test("HUNT-009 rejects binding drift before loading the public runtime", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-execute-preflight-"));
   try {
     let runtimeLoaded = false;
@@ -134,10 +134,10 @@ test("HUNT-009 rejects binding drift before loading the private runtime", async 
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test("HUNT-009 denies execution when the private runtime is unavailable", async () => {
+test("HUNT-009 denies execution when the public runtime is unavailable", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-runtime-missing-"));
   try {
-    const result = await run(root, { runtimeLoader: async () => { throw new Error("private runtime absent"); } });
+    const result = await run(root, { runtimeLoader: async () => { throw new Error("public runtime absent"); } });
     assert.equal(result.code, 78);
     assert.deepEqual(result.output, { status: "denied", reason: "hunt execution input or authorization is invalid" });
   } finally { await rm(root, { recursive: true, force: true }); }

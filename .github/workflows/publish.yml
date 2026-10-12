@@ -148,7 +148,7 @@ jobs:
 
       - name: Verify release checksums
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
-        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR" --require-six
+        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR" --require-seven
 
       - name: Upload release artifacts
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
@@ -241,6 +241,18 @@ jobs:
             exit 0
           fi
           npm publish "${RELEASE_DIR}/verglos-entitlement-${PKG_VER}.tgz" --access public --provenance --tag alpha
+
+      - name: Publish Hunt package
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: |
+          PKG_DIR=packages/hunt
+          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
+          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
+          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
+            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
+            exit 0
+          fi
+          npm publish "${RELEASE_DIR}/verglos-hunt-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish CLI package
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}

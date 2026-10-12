@@ -5,6 +5,7 @@ export const PUBLIC_PACKAGE_NAMES = Object.freeze([
   "@verglos/reporter",
   "@verglos/mcp",
   "@verglos/entitlement",
+  "@verglos/hunt",
 ]);
 
 const EXTERNAL_ENGINE_PACKAGES = /^(?:@aquasecurity\/)?trivy(?:-bin)?$/iu;

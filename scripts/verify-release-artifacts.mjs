@@ -8,7 +8,7 @@ const run = promisify(execFile);
 
 const root = resolve(process.argv[2] ?? "");
 if (!process.argv[2]) throw new Error("release artifact directory is required");
-const requireSixPublicPackages = process.argv.includes("--require-six");
+const requireSevenPublicPackages = process.argv.includes("--require-seven");
 const EXPECTED_PUBLIC_PACKAGES = new Set([
   "verglos",
   "@verglos/shared",
@@ -16,6 +16,7 @@ const EXPECTED_PUBLIC_PACKAGES = new Set([
   "@verglos/reporter",
   "@verglos/mcp",
   "@verglos/entitlement",
+  "@verglos/hunt",
 ]);
 
 const checksumsPath = join(root, "SHA256SUMS");
@@ -32,7 +33,7 @@ for (const line of checksums.split(/\r?\n/).filter(Boolean)) {
 const files = (await readdir(root)).filter((name) => name !== "SHA256SUMS").sort();
 const archives = files.filter((name) => name.endsWith(".tgz"));
 if (archives.length === 0) throw new Error("release artifact directory contains no npm archives");
-if (requireSixPublicPackages) {
+if (requireSevenPublicPackages) {
   if (archives.length !== EXPECTED_PUBLIC_PACKAGES.size) throw new Error(`strict release requires exactly ${EXPECTED_PUBLIC_PACKAGES.size} public npm archives`);
   const archiveManifests = [];
   for (const archive of archives) {
@@ -83,7 +84,7 @@ for (const name of requiredSidecars) {
       if (inventory.schemaId !== "urn:verglos:artifact:dependency-license-inventory" || !Array.isArray(inventory.packages) || !Array.isArray(inventory.bundledComponents)) throw new Error("dependency-license-inventory.json has an invalid shape");
       if (!Array.isArray(inventory.reviewBlockers) || inventory.reviewBlockers.length > 0) throw new Error("dependency-license-inventory.json contains unresolved redistribution blockers");
     }
-    if (name === "clean-consumer-verification.txt" && !/^clean consumer installed 6 archives and executed Verglos \d+\.\d+\.\d+/u.test(content.trim())) throw new Error("clean-consumer-verification.txt does not prove the six-package consumer flow");
+    if (name === "clean-consumer-verification.txt" && !/^clean consumer installed 7 archives and executed Verglos \d+\.\d+\.\d+/u.test(content.trim())) throw new Error("clean-consumer-verification.txt does not prove the seven-package consumer flow");
   } catch (error) {
     if (error instanceof SyntaxError) throw new Error(`${name} is not valid JSON`);
     throw error;
@@ -94,4 +95,4 @@ for (const archive of archives) {
   const { stdout: packagedNotices } = await run("tar", ["-xOf", join(root, archive), "package/THIRD_PARTY_NOTICES"], { encoding: "buffer", maxBuffer: 16 * 1024 * 1024 });
   if (!packagedNotices.equals(expectedNotices)) throw new Error(`THIRD_PARTY_NOTICES differs inside ${archive}`);
 }
-console.log(`verified ${files.length} release artifacts (${archives.length} npm archives, ${requiredSidecars.length} sidecars, and notices in every archive${requireSixPublicPackages ? "; strict six-package set" : ""})`);
+console.log(`verified ${files.length} release artifacts (${archives.length} npm archives, ${requiredSidecars.length} sidecars, and notices in every archive${requireSevenPublicPackages ? "; strict seven-package set" : ""})`);

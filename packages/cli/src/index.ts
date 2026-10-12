@@ -181,7 +181,7 @@ program
     `
 Command groups:
   Scan       scan, secrets, deps, score
-  Hunt       hunt — verify findings in a local sandbox (shell — v2.0.0-beta)
+  Hunt       hunt — verify findings with signed bounded recipes
   Attest     attest — retired compatibility shell; use record create/sign/verify
   Fix & CI   fix, ci, hook, precommit
   Session    login, whoami, activate
@@ -581,7 +581,7 @@ program
     "--verify-secrets",
     "Hit GitHub / Stripe APIs to prove matched keys are live (opt-in — makes network calls)",
   )
-  .option("--hunt", "After scanning, hand eligible findings to hunt (shell — v2.0.0-beta)")
+  .option("--hunt", "After scanning, hand eligible findings to the approved bounded Hunt path")
   .option(
     "--no-telemetry",
     "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
@@ -728,7 +728,7 @@ program
   .option("--record-manifest-digest <digest>", "Verified sha256 digest of the Release Record manifest")
   .option("--record-url <url>", "HTTPS URL for the verified Release Record")
   .option("--commit <sha>", "Repository commit bound to the Release Decision")
-  .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
+  .option("--hunt", "Gate on verified criticals only through the approved bounded Hunt path")
   .option(
     "--no-telemetry",
     "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
@@ -940,7 +940,7 @@ program
 
 const huntCommand = program
   .command("hunt")
-  .description("Verify findings in a local sandbox [Pro] (shell — v2.0.0-beta)")
+  .description("Run an approved signed Hunt recipe in a bounded local runtime [Pro]")
   .option("--severity <level>", "Severity filter to hunt (default: critical,high)")
   .option("--sandbox <adapter>", "Sandbox adapter: auto, docker")
   .option("--dry-run", "Parse options without running sandbox verification")

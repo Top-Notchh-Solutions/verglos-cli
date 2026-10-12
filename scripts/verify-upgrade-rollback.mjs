@@ -9,7 +9,7 @@ const archiveRoot = resolve(process.argv[2] ?? "");
 if (!process.argv[2]) throw new Error("release archive directory is required");
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const npmOptions = { shell: process.platform === "win32", timeout: 180_000, maxBuffer: 8 * 1024 * 1024 };
-const archiveNames = ["verglos-shared-2.0.0-alpha.1.tgz", "verglos-scanner-2.0.0-alpha.1.tgz", "verglos-reporter-2.0.0-alpha.1.tgz", "verglos-mcp-2.0.0-alpha.1.tgz", "verglos-entitlement-2.0.0-alpha.1.tgz", "verglos-2.0.0-alpha.1.tgz"];
+const archiveNames = ["verglos-shared-2.0.0-alpha.1.tgz", "verglos-scanner-2.0.0-alpha.1.tgz", "verglos-reporter-2.0.0-alpha.1.tgz", "verglos-mcp-2.0.0-alpha.1.tgz", "verglos-entitlement-2.0.0-alpha.1.tgz", "verglos-hunt-2.0.0-alpha.1.tgz", "verglos-2.0.0-alpha.1.tgz"];
 const archives = archiveNames.map((name) => join(archiveRoot, name));
 const consumer = await mkdtemp(join(tmpdir(), "verglos-upgrade-rollback-"));
 const cli = () => join(consumer, "node_modules", ".bin", process.platform === "win32" ? "verglos.cmd" : "verglos");
