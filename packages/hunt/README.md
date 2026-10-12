@@ -8,4 +8,11 @@ The alpha package includes the recipe/trust/approval binding, execution-free pla
 
 An A2 harness must print a final line such as `{"verglos":"hunt-result","verdict":"confirmed","summary":"bounded fixture reproduced"}` (or `not-reproduced` / `unsupported`) and exit with code `0`. The summary is bounded and redacted; it must not contain source, secrets, paths, or free-form command output. Missing, malformed, or non-zero-exit harnesses are reported as unsupported or environment failure rather than a security verdict.
 
+The public repository also contains seven sanitized deterministic reference
+harnesses under `fixtures/target-code/.verglos/hunt/`, one for each approved
+A2 family. They inspect embedded synthetic strings only: they do not scan
+customer source, access a database, make network requests, render a browser,
+or invoke tools. They are qualification fixtures and examples, not a claim
+that every customer repository has a supported target-code recipe.
+
 See [`docs/2.0.0-hunt-and-attest.md`](../../docs/2.0.0-hunt-and-attest.md).

@@ -2,8 +2,8 @@ import { huntRecipeDigest, parseHuntRecipe, type HuntRecipe } from "@verglos/sha
 import { HUNT_TARGET_HARNESS_IMAGE_DIGEST, TARGET_HARNESS_ASSERTION } from "./target-harness.js";
 
 /**
- * HUNT-008: deterministic first-party recipes currently eligible for the A1
- * adapter.
+ * HUNT-008: deterministic first-party A1 fixtures and A2 target-harness
+ * descriptors currently admitted by the bounded runtime.
  *
  * This is deliberately a catalog of contract metadata, not a remote recipe
  * feed and not permission to execute arbitrary commands. Callers still need

@@ -364,7 +364,7 @@ Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**.
 
 ## What's new in 2.0.0
 
-- Added the public bounded A1 Hunt fixture-probe catalog, seven signed A2 target-harness descriptors, and explicit signed execution path (`verglos hunt --execute`).
+- Added the public bounded A1 Hunt fixture-probe catalog, seven signed A2 target-harness descriptors, seven sanitized reference harness fixtures, and the explicit signed execution path (`verglos hunt --execute`).
 - Added the `scan --hunt` handoff; it never invents approvals or executes unsigned content.
 - Kept `verglos attest` as a compatibility shell; Release Record commands provide the supported portable evidence path.
 - Added `verified` on every finding (`null` until hunt runs).
