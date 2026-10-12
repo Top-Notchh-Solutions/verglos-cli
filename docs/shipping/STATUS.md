@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-12 · Point-5 public npm qualification batch 2
+
+The packed `2.0.0-alpha.1` CLI scanned three additional authorized public
+repositories with isolated HOME and telemetry disabled: the company MIT fork
+`TutorTrek` (TypeScript, 328 files, score 100), the company TypeScript
+repository `White-label-Appointment-Booking-Agent` (64 files, score 98, two
+findings), and the company JavaScript repository `full-stack-assessment` (17
+files, score 100, two findings). All native scans had complete coverage and
+exited 0.
+
+The Dockerized Trivy run on `TutorTrek` used Trivy `0.74.0`, a pinned image,
+network `none`, and `targetCodeExecuted=false`. It correctly returned an
+incomplete result (exit 3) because the offline vulnerability database is not
+qualified and two findings lacked safe bounded identity/location. This is
+fail-closed evidence, not a full vulnerability-coverage claim.
+
+Evidence:
+`docs/shipping/evidence/point-5-public-npm-repository-qualification-batch-2-2026-10-12.md`.
+No checkbox changed; the score remains **228 checked / 52 unchecked / 280
+total (81.4%)**.
+
 ## 2026-10-12 · Approved contract and Point-5 goal boundary
 
 The approved Final V1 contract is

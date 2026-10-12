@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-12 · Point-5 public npm qualification batch 2 and fail-closed Trivy result
+
+- **Source:** shipping worktree commit
+  `04b9a2b333a7dab8370ab40ae26f46c6b10a0156`; packed package version
+  `2.0.0-alpha.1`.
+- **Repositories:** public MIT-licensed company fork `TutorTrek` at
+  `49f0438c15eb37c0b0f11807024351fa330ff252`, company-owned TypeScript
+  `White-label-Appointment-Booking-Agent` at
+  `64ff07a30e21f0d3d12f4695b480abe7d1f257dd`, and company-owned JavaScript
+  `full-stack-assessment` at
+  `2d9a649196ab25199949574c99a5a44bb9a278c1`.
+- **Result:** all three packed-CLI scans exited 0 with complete coverage;
+  scores were 100, 98, and 100 respectively. Scans ran with isolated HOME
+  and telemetry disabled; no source upload occurred.
+- **Docker/Trivy:** Trivy `0.74.0` ran in a network-denied container with
+  target code execution false. The CLI correctly returned exit 3/incomplete
+  because the offline vulnerability database was not qualified and two
+  findings lacked safe bounded identity/location. Evidence:
+  `docs/shipping/evidence/point-5-public-npm-repository-qualification-batch-2-2026-10-12.md`.
+- **Disposition:** Point-5 progress only; no checkbox changed. Score remains
+  **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-12 · Approved Final V1 contract synchronized; Point 5 is the stop boundary
 
 - **Decision:** The approved contract is
