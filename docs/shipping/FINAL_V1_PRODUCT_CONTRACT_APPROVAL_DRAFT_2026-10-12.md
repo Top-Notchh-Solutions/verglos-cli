@@ -6,6 +6,13 @@
 **Native V1 languages:** TypeScript and JavaScript
 **Status:** approved product contract; canonical implementation target; does not close backlog items
 
+**Coverage authority:**
+`FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md` maps every feature in this
+contract to the existing backlog families, plan surfaces, current
+implementation truth, and acceptance evidence. It is an index only; this
+contract remains the product decision and the backlog remains the checkbox
+authority.
+
 This document is the approved product contract for Verglos Final V1. It
 replaces conflicting informal descriptions. It is a contract for what we will
 build and test, not proof that every capability is already implemented.

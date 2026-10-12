@@ -10,6 +10,12 @@ product plan. The current goal stops after Point 5, the public TS/JS npm
 qualification corpus. Publication, held-out POC/experiments, and the final
 release decision are next-goal work.
 
+**Feature map:**
+`FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md` is now the plain-language
+map of all company features to their existing backlog families and deliverable
+types. It prevents a recipe, plan capability, or evidence layer from being
+forgotten, but it does not turn a planned feature into a completed one.
+
 This is the plain-English collection guide for the remaining Verglos V1
 shipping work. It explains what each deliverable is, who must provide it, what
 kind of thing it is, where it belongs, and how Codex can use it to qualify the

@@ -9,6 +9,12 @@ The release-gate inventory remains useful for recording missing evidence, but
 npm publication, held-out POC/experiments, and the final release decision are
 deferred to the next goal. No gate or checkbox is opened by this notice.
 
+The feature-to-gate mapping is maintained in
+`FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`. A named gate in that matrix
+means the contract has an acceptance condition; it does not mean the gate is
+green. Current score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**.
+
 ## 2026-10-11 · QUAL-WEB-006 account-shell qualification addendum
 
 The current authenticated account shell passed desktop/mobile Lighthouse

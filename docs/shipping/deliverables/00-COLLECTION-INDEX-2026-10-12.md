@@ -10,6 +10,13 @@ qualification. Publication, held-out POC/experiments, and final release
 decision are next-goal work. This index collects deliverables; it does not
 close a backlog checkbox.
 
+The complete feature-to-deliverable cross-reference is
+`../FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`. Use it to see how the
+scanner domains, engines/Trivy, Hunt, MCP, Attest/Records, plans, billing,
+Web/SCM, Studio/Enterprise, distribution, and Point-5 corpus map to the
+existing packets below. The matrix does not replace this collection index or
+the backlog.
+
 ## Authorization boundary
 
 Founder statement recorded from Anurag Yadav:

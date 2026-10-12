@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Final V1 feature coverage synchronized
+
+The private tracker now has one cross-feature map at
+`docs/shipping/FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`. It covers the
+approved scanner/domain, supply-chain/Trivy, Hunt, MCP, Attest/Records, plan,
+billing, Web/SCM, Studio/Enterprise, distribution, and Point-5 acceptance and
+maps them to existing backlog families.
+
+This is documentation/traceability progress only. The current supported Hunt
+catalog remains A1 only; planned recipes and architecture roles are not being
+called implemented. No checkbox changed: **228 checked / 52 unchecked / 280
+total (81.4%)**. The goal remains bounded at Point 5.
+
 ## 2026-10-13 · TEAM-CLI-001 endpoint hardening merged (PR #95)
 
 Public PR #95 merged as

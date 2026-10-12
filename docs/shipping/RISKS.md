@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## 2026-10-13 · R-CONTRACT-COVERAGE-001 feature/implementation drift
+
+- **Risk:** The approved Final V1 contract could be mistaken for an inventory
+  of already implemented features, especially Hunt recipes, AI roles, plan
+  controls, Trivy, and hosted organization behavior.
+- **Mitigation:** The private matrix
+  `docs/shipping/FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md` maps every
+  contract surface to existing backlog families and states its current truth.
+  The backlog remains the checkbox authority.
+- **Current status:** Mitigated as a documentation risk; implementation and
+  acceptance rows remain open where the matrix says they are open.
+- **Residual risk:** Only A1 is currently in the supported Hunt catalog. No
+  independent reviewer, provider, customer, or legal evidence is invented by
+  this entry.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-11 · R-QUAL-WEB-006 account-shell evidence boundary
 
 - **Risk:** Automated accessibility and a clean lab trace could be mistaken

@@ -4,6 +4,16 @@
 **Date:** 2026-10-12
 **Audience:** private shipping tracker and implementation workspaces
 
+## 2026-10-13 feature coverage synchronization
+
+The complete feature-to-backlog map is
+`FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`. It covers the scanner,
+ten domains, engines and Trivy, Hunt roles and recipe sub-scopes, MCP,
+Attest/Release Records, all five plans, billing, Web, organization/SCM,
+Studio/Enterprise, distribution, and Point-5 acceptance. No row is considered
+implemented merely because the matrix names it. The live private score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**.
+
 The approved canonical contract is
 `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`. This notice is an
 index, not a second contract.

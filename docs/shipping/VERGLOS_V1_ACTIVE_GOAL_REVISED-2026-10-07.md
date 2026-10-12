@@ -1,5 +1,42 @@
 # Verglos V1 Active Shipping Goal — Approved Contract, Implementation, and Point-5 Qualification
 
+## 2026-10-13 final feature coverage synchronization — current operating rule
+
+The complete approved-contract feature map is now indexed in
+`docs/shipping/FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`. Read that
+matrix together with the contract before selecting work. It maps every Final
+V1 company feature to its existing backlog family, plan surface, current
+implementation truth, and required evidence.
+
+The implementation queue is therefore explicit:
+
+1. local TypeScript/JavaScript scanner, ten security domains, coverage
+   manifests, dependency/supply-chain engines, imports, Trivy boundary, and
+   artifact provenance;
+2. bounded Hunt roles and recipe sub-scopes owned by `HUNT-008` through
+   `HUNT-011` (the current supported catalog still contains only A1; planned
+   recipes are not to be claimed as implemented);
+3. MCP/AI controls, Attest, portable `.vgl` Release Records, and release
+   provenance;
+4. Free/Pro/Team/Studio/Enterprise entitlements, Cards-only prepaid billing,
+   manual renewal, Web control-plane behavior, and organization/SCM binding;
+5. distribution, qualification, accessibility/privacy/performance, acceptance,
+   and the Point-5 public TS/JS package corpus.
+
+This synchronization closes the scope/traceability gap; it does not close
+implementation or external-evidence gates. Work proceeds dependency-first. If
+an item is genuinely blocked, record the owner, missing artifact, safe next
+action, and review date in the private ledger, then select the next
+dependency-ready row. Do not rewrite the contract, repeat a completed probe,
+or mark a row from documentation alone.
+
+The public `verglos-cli` repository receives only public-safe implementation
+and sanitized usage material. Private backlog state, ledgers, evidence,
+consent, legal records, deployment details, credentials, and customer data
+remain in the private tracker. The live score remains **228 checked / 52
+unchecked / 280 total (81.4%)**; no checkbox changes in this documentation
+pass.
+
 ## 2026-10-12 approved-contract execution boundary — current
 
 This section supersedes the older finish-line amendments below. The approved

@@ -1,5 +1,39 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · Final V1 feature-to-backlog coverage synchronization
+
+The approved contract is now mapped in
+`docs/shipping/FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`. That matrix is
+the cross-reference for every company feature; this file remains the only
+source of checkbox state.
+
+The mapped feature families are: local JS/TS scanning and the ten security
+domains; dependency, provenance, SBOM, import, and Trivy evidence; bounded
+Hunt; MCP/AI controls; Attest and portable Release Records; Free, Pro, Team,
+Studio, and Enterprise entitlements; Cards-only prepaid billing/manual
+renewal; Web privacy/accessibility/performance; Verglos organization and
+GitHub/GitLab binding; Studio/Enterprise controls; package distribution and
+provenance; and final acceptance/Point-5 public TypeScript/JavaScript corpus.
+
+Hunt recipe sub-scopes `HUNT-008-R1` through `HUNT-008-R7` (injection,
+command, path/file, SSRF, agent/MCP, safe XSS, and authorization/tenant
+fixtures) are matrix sub-scopes owned by the existing HUNT rows, not extra
+counted checkboxes. The supported catalog currently contains only the signed
+first-party A1 recipe `a1-utf8-contains`; the remaining sub-scopes stay open
+until their recipes, provenance, fixtures, bounded adapters, and acceptance
+evidence exist. The four Hunt roles are architecture roles, not four already
+running autonomous AI agents.
+
+**Live score:** **228 checked / 52 unchecked / 280 total (81.4%)**. No
+checkbox changed in this documentation synchronization. Every later closure
+still requires the row's implementation, test, privacy boundary, exact
+commit/deployment, limitations, and complete acceptance evidence.
+
+**Private/public boundary:** private backlog, evidence, ledgers, consent,
+legal records, provider details, credentials, and customer data must never be
+copied into the public `verglos-cli` repository. Only public-safe code and
+sanitized documentation may be proposed there.
+
 ## 2026-10-13 · TEAM-CLI-001 organization-policy endpoint hardening merged (PR #95)
 
 Public CLI PR #95 merged as

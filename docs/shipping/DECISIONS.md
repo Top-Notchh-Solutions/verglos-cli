@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-13 · Make the feature coverage matrix the cross-reference
+
+- **Decision:** Keep the approved Final V1 contract, existing 280 counted
+  backlog rows, and Point-5 stop boundary. Add one private feature matrix to
+  map every product surface and plan to its existing rows and evidence.
+- **Reason:** The contract had been approved but the implementation queue did
+  not have one readable map for all scanner domains, engines, Hunt scopes,
+  records, plans, Web/SCM, and acceptance work. A matrix closes that
+  traceability gap without duplicating or inflating the backlog.
+- **Hunt truth:** Four Hunt roles are controlled architecture roles, not four
+  already-running AI agents. The supported catalog currently contains only
+  `a1-utf8-contains`; the other recipe sub-scopes remain open.
+- **Boundary:** No checkbox, entitlement, provider state, public-repository
+  content, or release state changed.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Authority:** `docs/shipping/FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`.
+
 ## 2026-10-11 · Keep QUAL-WEB-006 open after clean account recheck
 
 - **Decision:** Record the current account-shell accessibility/performance

@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Final V1 feature coverage and execution ledger baseline
+
+- **Contract:** `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`.
+- **Coverage map:**
+  `docs/shipping/FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`.
+- **Mapped surfaces:** local JS/TS scanner and ten domains; dependency,
+  provenance, SBOM/import, Trivy and artifact evidence; bounded Hunt and its
+  four controlled roles; MCP/AI; Attest and `.vgl` Release Records; Free,
+  Pro, Team, Studio, and Enterprise; Cards-only prepaid/manual renewal; Web;
+  Verglos organizations and GitHub/GitLab; Studio/Enterprise controls;
+  distribution; and Point-5 public TS/JS corpus acceptance.
+- **Current implementation truth:** only the A1 Hunt recipe is in the
+  supported catalog. The other recipe sub-scopes are planned contract work;
+  four Hunt roles describe controlled responsibilities, not autonomous agents
+  already deployed.
+- **Execution rule:** implement and qualify existing backlog rows in
+  dependency order. For a genuine blocker record owner, missing artifact,
+  safe next action, and review date, then move to the next dependency-ready
+  row. Do not close a row from this ledger entry.
+- **Boundary:** private records stay private; public PRs contain only
+  public-safe code or sanitized documentation. No provider, Production,
+  database, entitlement, npm, customer, or public-repository write occurred
+  in this documentation sync.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · TEAM-CLI-001 endpoint hardening merged (PR #95)
 
 - **Public merge:** PR #95 merged as

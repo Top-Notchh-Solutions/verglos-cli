@@ -12,6 +12,11 @@ decision are deferred.
 
 **Private working record — 2026-10-12**
 
+The 2026-10-13 feature coverage matrix is the cross-reference for the blocker
+groups in this register. It distinguishes a planned product feature from a
+missing proof artifact and from a genuinely external role. Adding the matrix
+does not clear a blocker or change the 228/52/280 score.
+
 This register separates technical work Codex can complete from approvals or
 external actions that must come from a real authorized person/provider.
 

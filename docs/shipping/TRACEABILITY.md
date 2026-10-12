@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## Final V1 feature coverage synchronization · 2026-10-13
+
+- **Contract:** `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`.
+- **Matrix:** `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`.
+- **Mapped feature families:** scanner/ten domains; engines, imports, Trivy,
+  SBOM and provenance; Hunt roles/recipes/sandbox; MCP; Attest/Records;
+  Free/Pro/Team/Studio/Enterprise; prepaid billing/manual renewal; Web;
+  Verglos organization and GitHub/GitLab binding; Studio/Enterprise;
+  distribution; and Point-5 public TS/JS qualification.
+- **Traceability rule:** every closure must link implementation, exact
+  commit/deployment, test output, limitations, privacy boundary, and the
+  backlog row's acceptance condition. The matrix names a feature but never
+  closes it.
+- **State:** documentation sync complete; no checkbox changed. Score remains
+  **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## TEAM-CLI-001 endpoint hardening · 2026-10-13
 
 - **Implementation:** Public CLI PR #95 merged at

@@ -1,5 +1,14 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-13 feature coverage reference
+
+Use `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md` to connect each manual
+blocker to the Final V1 feature it protects. The matrix separates implementation
+work from evidence that genuinely requires a provider, repository owner,
+recipient, legal approver, or independent reviewer. This inventory remains the
+place for named owners, missing artifacts, dates, and safe next actions; the
+feature matrix does not close any row.
+
 ## 2026-10-12 · Hunt technical evidence refreshed
 
 The exact shipping-worktree commit `04b9a2b333a7dab8370ab40ae26f46c6b10a0156`

@@ -1,5 +1,20 @@
 # Verglos V1 Active Goal Index — Approved Contract and Point-5 Qualification
 
+## 2026-10-13 feature coverage index
+
+The authoritative cross-feature map is
+`docs/shipping/FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`. It covers the
+scanner and ten domains, engines/Trivy/imports, Hunt roles and recipe
+sub-scopes, MCP, Attest/Release Records, all five plans, billing, Web,
+organizations/SCM, Studio, Enterprise, distribution, and Point-5 acceptance.
+It maps those features to existing counted backlog rows without inflating the
+score or claiming planned work is complete.
+
+Use the complete 10/07 goal as the only execution queue. The score is **228
+checked / 52 unchecked / 280 total (81.4%)**. The current goal stops after the
+public TypeScript/JavaScript package qualification corpus; npm publication,
+held-out POC/experiments, and the final release decision are next-goal work.
+
 > **Current score:** 228 checked / 52 unchecked / 280 total (81.4%).
 >
 > **Current stop boundary:** complete Points 1–5 only, ending with the npm

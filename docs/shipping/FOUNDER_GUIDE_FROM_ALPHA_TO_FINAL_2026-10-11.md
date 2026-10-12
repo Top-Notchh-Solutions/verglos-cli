@@ -17,6 +17,12 @@ Do not put passwords, database URLs, API keys, Vercel tokens, GitHub tokens,
 cookies, private repository source, or customer data in this document or in
 ChatGPT.
 
+The complete feature map is
+`FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`. It is the cross-reference
+for the scanner, ten domains, Trivy/imports, Hunt, MCP, Attest/Records, every
+plan, billing, Web/SCM, Studio, Enterprise, distribution, and Point-5 testing.
+The private backlog remains the only source of completion state.
+
 ## The short version
 
 Verglos is not at the beginning.
