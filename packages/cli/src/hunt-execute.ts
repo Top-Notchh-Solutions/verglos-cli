@@ -75,7 +75,7 @@ export async function runHuntRecipe(input: HuntRecipeExecutionInput): Promise<Hu
     if (recipe.targetSubjectId !== input.subjectId || recipe.ruleId !== input.ruleId) throw new Error("recipe subject/rule does not match the requested execution binding");
     const runtime = await loadHuntRuntime(input.runtimeLoader);
     const supported = runtime.validateSupportedHuntRecipe(recipe);
-    if (!supported.supported) throw new Error(`recipe is not in the supported A1 catalog (${supported.reason})`);
+    if (!supported.supported) throw new Error(`recipe is not in the supported bounded catalog (${supported.reason})`);
     const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: executionAt };
     const result = await runtime.runHunt(report, {
       adapter: new runtime.RestrictedProcessAdapter(recipe),
@@ -118,7 +118,7 @@ export async function executeHuntRecipe(
   const result = await runHuntRecipe(input);
   if (input.json) console.log(JSON.stringify(result.projection));
   else if (!input.quiet) {
-    if (result.code === 0) console.log(`Hunt executed ${Array.isArray(result.projection.outcomes) ? result.projection.outcomes.length : 0} finding(s) with the fixed A1 recipe.`);
+    if (result.code === 0) console.log(`Hunt executed ${Array.isArray(result.projection.outcomes) ? result.projection.outcomes.length : 0} finding(s) with the supported bounded recipe.`);
     else console.error("Hunt execution was not authorized or its bounded input was invalid.");
   }
   return result.code;

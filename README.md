@@ -208,7 +208,7 @@ verglos hunt --execute-report verglos-report.json \
   --json
 ```
 
-The shipped public runtime currently supports the fixed A1 pure probe. It does not execute arbitrary recipe commands, model-generated shell, or unsigned content. A confirmed result exits `1`; a clean supported result exits `0`; invalid or unauthorized input exits `78`.
+The shipped public runtime currently supports the bounded A1 fixture-probe catalog: UTF-8 containment, path-traversal shape, command-injection shape, private/local SSRF target classification, and tenant-boundary mismatch. These are deterministic fixture checks; they do not execute target code, make network requests, run model-generated shell, or accept unsigned content. A confirmed result exits `1`; a clean supported result exits `0`; invalid or unauthorized input exits `78`.
 
 ### `verglos attest` — signed evidence bundle `Studio`
 
@@ -344,7 +344,7 @@ jobs:
 | `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes | Yes |
 | Pre-commit hook | Yes | Yes | Yes | Yes | Yes |
 | `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes | Yes |
-| **Signed `verglos hunt` on Critical + High** | — | A1 bounded path | A1 bounded path | A1 bounded path | A1 bounded path |
+| **Signed `verglos hunt` on Critical + High** | — | A1 bounded fixture path | A1 bounded fixture path | A1 bounded fixture path | A1 bounded fixture path |
 | **`verglos hunt` on Medium** | — | — | — | Beta | Beta |
 | **MCP hunt tools** | — | Alpha shell | Alpha shell | Beta | Beta |
 | **`verglos fix`** | — | Yes | Yes | Yes | Yes |
@@ -364,7 +364,7 @@ Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**.
 
 ## What's new in 2.0.0
 
-- Added the public bounded A1 Hunt runtime and explicit signed execution path (`verglos hunt --execute`).
+- Added the public bounded A1 Hunt fixture-probe catalog and explicit signed execution path (`verglos hunt --execute`).
 - Added the `scan --hunt` handoff; it never invents approvals or executes unsigned content.
 - Kept `verglos attest` as a compatibility shell; Release Record commands provide the supported portable evidence path.
 - Added `verified` on every finding (`null` until hunt runs).
@@ -421,7 +421,7 @@ Full disclosure: **[verglos.com/account/docs#privacy](https://verglos.com/accoun
 
 ## Repo layout
 
-This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages are published under the `@verglos` scope plus the `verglos` bin. Hunt has a bounded A1 runtime with signed execution bindings; hosted trust, licensing, and acceptance gates remain separate. `attest` is a compatibility shell while Release Records are the supported evidence workflow.
+This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages are published under the `@verglos` scope plus the `verglos` bin. Hunt has a bounded A1 fixture-probe runtime with signed execution bindings; hosted trust, licensing, and acceptance gates remain separate. `attest` is a compatibility shell while Release Records are the supported evidence workflow.
 
 | Package | What it does |
 |---|---|
@@ -431,7 +431,7 @@ This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages a
 | **`packages/shared`** | Types, config schema, fingerprint, plan matrix |
 | **`packages/entitlement`** | License verification client, capability caching |
 | **`packages/mcp`** | Model Context Protocol server for AI coding agents |
-| **`packages/hunt`** | Bounded Hunt adapters, A1 catalog, trust/approval bindings, and execution runtime |
+| **`packages/hunt`** | Bounded Hunt adapters, A1 fixture-probe catalog, trust/approval bindings, and execution runtime |
 | **`packages/attest`** | Compatibility interfaces; supported portable evidence is implemented by CLI Release Record commands |
 
 The web app + billing lives in a separate repo (`verglos-web`). Docs and planning notes live in `Top-Notchh-Solutions/verglos-archive` (private).

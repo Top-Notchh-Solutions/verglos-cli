@@ -274,7 +274,7 @@ jobs:
 | `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes | Yes |
 | Pre-commit hook | Yes | Yes | Yes | Yes | Yes |
 | `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes | Yes |
-| **Signed `verglos hunt` on Critical + High** | No | A1 bounded path | A1 bounded path | A1 bounded path | A1 bounded path |
+| **Signed `verglos hunt` on Critical + High** | No | A1 bounded fixture path | A1 bounded fixture path | A1 bounded fixture path | A1 bounded fixture path |
 | **`verglos hunt` on Medium** | No | No | No | Beta | Beta |
 | **MCP hunt tools** | No | Alpha shell | Alpha shell | Beta | Beta |
 | **`verglos fix`** | No | Yes | Yes | Yes | Yes |
