@@ -3,6 +3,8 @@ import { buildDockerInvocation, validateDockerProjectRoot, type DockerInvocation
 import { runDockerInvocation, type DockerRunOptions } from "./docker-runner.js";
 import type { HuntFindingOutcome, SandboxAdapter } from "./types.js";
 
+const A2_LIMITATION = "A2 runs a signed recipe in a pinned Docker container with read-only project input, denied network, dropped capabilities, and bounded resources; host Docker daemon/VM policy and platform-specific kernel differences remain outside this result";
+
 export interface DockerSandboxAdapterOptions {
   readonly image: string;
   readonly imageDigest: string;
@@ -63,7 +65,27 @@ export class DockerSandboxAdapter implements SandboxAdapter {
       environmentError: result.status === "failed",
       timedOut: result.status === "timed-out",
     });
-    return { findingId: input.finding.id, verdict: assertionVerdict?.verdict ?? "not_attemptable", canonicalVerdict, reason: assertionVerdict?.reason ?? reason, durationMs: result.durationMs, evidenceDigest: result.evidenceDigest, outputBytes: result.outputBytes, truncated: result.truncated, redacted: true, executionStatus: result.status };
+    return {
+      findingId: input.finding.id,
+      verdict: assertionVerdict?.verdict ?? "not_attemptable",
+      canonicalVerdict,
+      reason: assertionVerdict?.reason ?? reason,
+      durationMs: result.durationMs,
+      evidenceDigest: result.evidenceDigest,
+      outputBytes: result.outputBytes,
+      truncated: result.truncated,
+      redacted: true,
+      executionStatus: result.status,
+      assurance: Object.freeze({
+        class: "A2",
+        isolation: "container",
+        securityBoundary: true,
+        sourceAccess: "read-only",
+        network: "denied",
+        processLimit: input.binding.limits.processes,
+        limitation: A2_LIMITATION,
+      }),
+    };
   }
 
   async cleanup(): Promise<void> {}
