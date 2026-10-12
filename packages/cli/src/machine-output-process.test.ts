@@ -395,7 +395,8 @@ test("scan --hunt emits a signed execution handoff without auto-executing", asyn
     const payload = JSON.parse(result.stdout) as { hunt?: { status?: string; reason?: string; reportPath?: string; command?: string } };
     assert.equal(payload.hunt?.status, "requires_execution_binding");
     assert.equal(payload.hunt?.reason, "signed_recipe_trust_store_and_approval_required");
-    assert.equal(payload.hunt?.reportPath, join(await realpath(root), "verglos-report.json"));
+    assert.ok(payload.hunt?.reportPath);
+    await assertSameFile(payload.hunt.reportPath, join(root, "verglos-report.json"));
     assert.match(payload.hunt?.command ?? "", /verglos hunt --execute-report/);
     assert.equal((payload.hunt?.command ?? "").includes("--execute-recipe <signed-recipe.json>"), true);
     assert.equal(result.files.includes("verglos-report.json"), true);
