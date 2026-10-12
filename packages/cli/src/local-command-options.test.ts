@@ -38,6 +38,7 @@ test("read-only commands expose their implemented output flags", async () => {
   assert.match(source, /command\("precommit"\)[\s\S]*?\.option\("-q, --quiet", "Suppress terminal output"\)/);
   assert.match(source, /command\("hunt"\)[\s\S]*?\.option\("--json", "Emit machine-readable JSON"\)/);
   assert.match(source, /command\("hunt"\)[\s\S]*?\.option\("--quiet", "Suppress human output"\)/);
+  assert.match(source, /option\("--hunt", "After scanning, print a signed Hunt execution handoff \(does not auto-approve or execute\)"\)/);
   assert.match(source, /huntCommand\s*\.command\("verify-recipe <recipePath>"\)[\s\S]*?\.requiredOption\("--trust-store <path>"[\s\S]*?\.option\("--json"[\s\S]*?\.option\("--quiet"/);
   for (const option of ["execute-report", "execute-recipe", "execute-trust-store", "execute-approval", "execute-rule-id", "execute-subject-id", "execute-observation-id"]) {
     assert.match(source, new RegExp(`command\\("hunt"\\)[\\s\\S]*?--${option}`));

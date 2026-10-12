@@ -86,6 +86,27 @@ export interface ScanCommandOptions {
   includeGitHistory?: boolean;
 }
 
+export interface HuntHandoff {
+  readonly status: "requires_execution_binding";
+  readonly reason: "signed_recipe_trust_store_and_approval_required";
+  readonly reportPath: string;
+  readonly command: string;
+}
+
+/**
+ * A scan cannot safely invent a recipe, trust root, approval, or observation
+ * binding. Keep the `--hunt` convenience flag useful by producing an
+ * explicit handoff to the already-shipped signed execution command.
+ */
+export function createHuntHandoff(reportPath: string): HuntHandoff {
+  return {
+    status: "requires_execution_binding",
+    reason: "signed_recipe_trust_store_and_approval_required",
+    reportPath,
+    command: `verglos hunt --execute-report ${JSON.stringify(reportPath)} --execute-recipe <signed-recipe.json> --execute-trust-store <trust-store.json> --execute-approval <approval.json> --execute-rule-id <rule-id> --execute-subject-id <subject-id> --execute-observation-id <observation-id>`,
+  };
+}
+
 export async function executeScan(
   options: ScanCommandOptions = {},
 ): Promise<number> {
@@ -177,14 +198,17 @@ export async function executeScan(
   const durationMs = Date.now() - startedAt;
   // The spinner is stopped in the lifecycle finally block above so both
   // successful and failed scans leave the terminal in a clean state.
-  await writeReports(result, projectRoot, options.outputDir ? resolve(projectRoot, options.outputDir) : projectRoot);
+  const reportPaths = await writeReports(result, projectRoot, options.outputDir ? resolve(projectRoot, options.outputDir) : projectRoot);
+  const huntHandoff = options.hunt && reportPaths.json ? createHuntHandoff(reportPaths.json) : undefined;
 
   if (options.json) {
-    console.log(JSON.stringify(result));
+    console.log(JSON.stringify(huntHandoff ? { ...result, hunt: huntHandoff } : result));
   } else if (!options.quiet) {
     printTerminalSummary(result);
-    if (options.hunt) {
-      console.log("  Hunt integration shipping in v2.0.0-beta");
+    if (huntHandoff) {
+      console.log("  Hunt handoff  signed recipe, trust store, approval, and exact binding are required");
+      console.log(`  Hunt report   ${huntHandoff.reportPath}`);
+      console.log(`  Hunt command  ${huntHandoff.command}`);
       console.log("");
     }
     // A single-detector score is not comparable to a full-scan

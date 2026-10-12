@@ -386,6 +386,22 @@ test("Scan JSON mode emits one parseable scan document", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("scan --hunt emits a signed execution handoff without auto-executing", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-process-scan-hunt-"));
+  try {
+    const result = await runCliFixture(process.execPath, ["--import", tsx, cliEntry, "scan", "--hunt", "--json", "--quiet", "--no-telemetry"], root, { env: { HOME: root, USERPROFILE: root, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_TELEMETRY: "0" } });
+    assert.equal(result.exitCode, 0);
+    assert.equal(result.stderr, "");
+    const payload = JSON.parse(result.stdout) as { hunt?: { status?: string; reason?: string; reportPath?: string; command?: string } };
+    assert.equal(payload.hunt?.status, "requires_execution_binding");
+    assert.equal(payload.hunt?.reason, "signed_recipe_trust_store_and_approval_required");
+    assert.equal(payload.hunt?.reportPath, join(await realpath(root), "verglos-report.json"));
+    assert.match(payload.hunt?.command ?? "", /verglos hunt --execute-report/);
+    assert.equal((payload.hunt?.command ?? "").includes("--execute-recipe <signed-recipe.json>"), true);
+    assert.equal(result.files.includes("verglos-report.json"), true);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("scan output path writes reports only to the explicitly selected directory", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-process-output-"));
   try {
