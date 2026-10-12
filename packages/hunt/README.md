@@ -15,6 +15,8 @@ customer source, access a database, make network requests, render a browser,
 or invoke tools. For fixture qualification, each accepts the bounded
 `positive`, `negative`, or `unsupported` case argument; timeout and execution
 failure are produced by the Docker adapter and never fabricated by a harness.
+Omitting the argument selects the positive case used by the admitted catalog
+command.
 They are qualification fixtures and examples, not a claim that every customer
 repository has a supported target-code recipe.
 
