@@ -1,6 +1,7 @@
 import { classifyHuntOutcome, type Finding, type HuntExecutionBinding } from "@verglos/shared";
 import { buildDockerInvocation, validateDockerProjectRoot, type DockerInvocationInput } from "./docker-adapter.js";
 import { runDockerInvocation, type DockerRunOptions } from "./docker-runner.js";
+import { parseTargetHarnessOutput, TARGET_HARNESS_ASSERTION } from "./target-harness.js";
 import type { HuntFindingOutcome, SandboxAdapter } from "./types.js";
 
 const A2_LIMITATION = "A2 runs a signed recipe in a pinned Docker container with read-only project input, denied network, dropped capabilities, and bounded resources; host Docker daemon/VM policy and platform-specific kernel differences remain outside this result";
@@ -15,7 +16,7 @@ export interface DockerSandboxAdapterOptions {
   readonly run?: DockerRunOptions["run"];
 }
 
-/** Policy-bound Docker adapter; assertion evaluation remains explicit until supported recipes exist. */
+/** Policy-bound Docker adapter for approved target-code harness recipes. */
 export class DockerSandboxAdapter implements SandboxAdapter {
   readonly id = "docker" as const;
   private readonly options: DockerSandboxAdapterOptions;
@@ -51,23 +52,36 @@ export class DockerSandboxAdapter implements SandboxAdapter {
       sensitivePaths: [input.projectRoot],
       run: this.options.run,
     });
+    const targetHarness = result.status === "completed" && result.exitCode === 0 && input.binding.assertions.length === 1 && input.binding.assertions[0] === TARGET_HARNESS_ASSERTION
+      ? parseTargetHarnessOutput(result.stdout)
+      : undefined;
     const reason = result.status === "completed"
-      ? "Docker probe completed, but recipe assertions are unsupported"
+      ? targetHarness?.summary ?? (targetHarness ? `Target harness returned ${targetHarness.verdict}` : "Docker probe completed, but recipe assertions are unsupported")
       : result.status === "timed-out"
         ? "Docker probe timed out before a supported verdict could be evaluated"
         : "Docker probe failed before a supported verdict could be evaluated";
     const assertionVerdict = result.status === "completed" ? evaluateExitCodeAssertions(input.binding.assertions, result.exitCode) : undefined;
-    const assertionsSupported = input.binding.assertions.length > 0 && input.binding.assertions.every((assertion) => /^exit code is (-?\d+)$/.test(assertion.trim()));
-    const canonicalVerdict = classifyHuntOutcome({
-      policyAllowed: true,
-      supported: assertionsSupported,
-      assertionMatched: assertionVerdict?.verdict === "true" ? true : assertionVerdict?.verdict === "false" ? false : undefined,
-      environmentError: result.status === "failed",
-      timedOut: result.status === "timed-out",
-    });
+    const assertionsSupported = targetHarness !== undefined || (input.binding.assertions.length > 0 && input.binding.assertions.every((assertion) => /^exit code is (-?\d+)$/.test(assertion.trim())));
+    const canonicalVerdict = targetHarness
+      ? targetHarness.verdict === "confirmed"
+        ? "confirmed" as const
+        : targetHarness.verdict === "not-reproduced"
+          ? "not-reproduced" as const
+          : "not-supported" as const
+      : classifyHuntOutcome({
+          policyAllowed: true,
+          supported: assertionsSupported,
+          assertionMatched: assertionVerdict?.verdict === "true" ? true : assertionVerdict?.verdict === "false" ? false : undefined,
+          environmentError: result.status === "failed",
+          timedOut: result.status === "timed-out",
+        });
     return {
       findingId: input.finding.id,
-      verdict: assertionVerdict?.verdict ?? "not_attemptable",
+      verdict: targetHarness?.verdict === "confirmed" || assertionVerdict?.verdict === "true"
+        ? "true"
+        : targetHarness?.verdict === "not-reproduced" || assertionVerdict?.verdict === "false"
+          ? "false"
+          : "not_attemptable",
       canonicalVerdict,
       reason: assertionVerdict?.reason ?? reason,
       durationMs: result.durationMs,

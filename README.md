@@ -208,7 +208,7 @@ verglos hunt --execute-report verglos-report.json \
   --json
 ```
 
-The shipped public runtime currently supports the bounded A1 fixture-probe catalog: UTF-8 containment, path-traversal shape, command-injection shape, private/local SSRF target classification, tenant-boundary mismatch, SQL/NoSQL injection shape, safe XSS shape, and agent/MCP tool-boundary mismatch. These are deterministic fixture checks; they do not execute target code, make network requests, run model-generated shell, or accept unsigned content. The separately exposed Docker adapter reports A2 assurance and its explicit host-daemon/platform limitation for container executions. A confirmed result exits `1`; a clean supported result exits `0`; invalid or unauthorized input exits `78`.
+The shipped public runtime supports the bounded A1 fixture-probe catalog: UTF-8 containment, path-traversal shape, command-injection shape, private/local SSRF target classification, tenant-boundary mismatch, SQL/NoSQL injection shape, safe XSS shape, and agent/MCP tool-boundary mismatch. It also admits the seven approved A2 target-harness families: SQL/NoSQL injection, command injection, path traversal, SSRF, Agent/MCP boundaries, XSS, and authorization/tenant checks. A2 runs only a signed recipe's exact `.verglos/hunt/<family>.mjs` entrypoint in a pinned Node container with read-only project input, denied network, dropped capabilities, and bounded resources. The harness must emit one bounded JSON result line; arbitrary model-generated shell and unsigned content are rejected. The Docker adapter reports A2 assurance and its explicit host-daemon/platform limitation. A confirmed result exits `1`; a clean supported result exits `0`; invalid or unauthorized input exits `78`.
 
 ### `verglos attest` — signed evidence bundle `Studio`
 
@@ -364,7 +364,7 @@ Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**.
 
 ## What's new in 2.0.0
 
-- Added the public bounded A1 Hunt fixture-probe catalog and explicit signed execution path (`verglos hunt --execute`).
+- Added the public bounded A1 Hunt fixture-probe catalog, seven signed A2 target-harness descriptors, and explicit signed execution path (`verglos hunt --execute`).
 - Added the `scan --hunt` handoff; it never invents approvals or executes unsigned content.
 - Kept `verglos attest` as a compatibility shell; Release Record commands provide the supported portable evidence path.
 - Added `verified` on every finding (`null` until hunt runs).
@@ -421,7 +421,7 @@ Full disclosure: **[verglos.com/account/docs#privacy](https://verglos.com/accoun
 
 ## Repo layout
 
-This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages are published under the `@verglos` scope plus the `verglos` bin. Hunt has a bounded A1 fixture-probe runtime with signed execution bindings; hosted trust, licensing, and acceptance gates remain separate. `attest` is a compatibility shell while Release Records are the supported evidence workflow.
+This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages are published under the `@verglos` scope plus the `verglos` bin. Hunt has bounded A1 fixture probes plus an approved A2 target-harness protocol with signed execution bindings; hosted trust, licensing, and acceptance gates remain separate. `attest` is a compatibility shell while Release Records are the supported evidence workflow.
 
 | Package | What it does |
 |---|---|
@@ -431,7 +431,7 @@ This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages a
 | **`packages/shared`** | Types, config schema, fingerprint, plan matrix |
 | **`packages/entitlement`** | License verification client, capability caching |
 | **`packages/mcp`** | Model Context Protocol server for AI coding agents |
-| **`packages/hunt`** | Bounded Hunt adapters, A1 fixture-probe catalog, trust/approval bindings, and execution runtime |
+| **`packages/hunt`** | Bounded Hunt adapters, A1 fixture probes, A2 target-harness catalog/protocol, trust/approval bindings, and execution runtime |
 | **`packages/attest`** | Compatibility interfaces; supported portable evidence is implemented by CLI Release Record commands |
 
 The web app + billing lives in a separate repo (`verglos-web`). Docs and planning notes live in `Top-Notchh-Solutions/verglos-archive` (private).

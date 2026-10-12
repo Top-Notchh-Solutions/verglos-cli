@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { parseHuntRecipe } from "@verglos/shared";
 import { SUPPORTED_HUNT_RECIPE_CATALOG, validateSupportedHuntRecipe } from "./supported-recipe-catalog.js";
+import { HUNT_TARGET_HARNESS_IMAGE_DIGEST } from "./target-harness.js";
 
 const recipe = () => parseHuntRecipe({
   schemaId: "urn:verglos:schema:hunt-recipe",
@@ -51,6 +52,9 @@ for (const descriptor of SUPPORTED_HUNT_RECIPE_CATALOG.slice(1)) {
       recipeId: descriptor.recipeId,
       ruleId: descriptor.ruleId,
       command: [...descriptor.command],
+      assertions: [...descriptor.assertions],
+      isolation: descriptor.adapter,
+      imageDigest: descriptor.adapter === "container" ? { algorithm: "sha256", value: HUNT_TARGET_HARNESS_IMAGE_DIGEST.slice("sha256:".length) } : recipe().imageDigest,
       inputs,
     });
     const result = validateSupportedHuntRecipe(value);
@@ -58,6 +62,13 @@ for (const descriptor of SUPPORTED_HUNT_RECIPE_CATALOG.slice(1)) {
     if (result.supported) assert.match(result.recipeDigest, /^sha256:[a-f0-9]{64}$/u);
   });
 }
+
+test("catalog includes the seven approved target-code recipe families", () => {
+  assert.deepEqual(
+    SUPPORTED_HUNT_RECIPE_CATALOG.filter((descriptor) => descriptor.adapter === "container").map((descriptor) => descriptor.recipeId),
+    ["a2-sql-nosql-injection-harness", "a2-command-injection-harness", "a2-path-traversal-harness", "a2-ssrf-harness", "a2-agent-mcp-harness", "a2-xss-harness", "a2-authorization-harness"],
+  );
+});
 
 for (const [name, patch, reason] of [
   ["unknown recipe", { recipeId: "a1-unknown" }, "recipe_not_in_catalog"],

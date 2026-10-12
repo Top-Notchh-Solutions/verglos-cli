@@ -1,4 +1,5 @@
 import { huntRecipeDigest, parseHuntRecipe, type HuntRecipe } from "@verglos/shared";
+import { HUNT_TARGET_HARNESS_IMAGE_DIGEST, TARGET_HARNESS_ASSERTION } from "./target-harness.js";
 
 /**
  * HUNT-008: deterministic first-party recipes currently eligible for the A1
@@ -123,6 +124,29 @@ export const SUPPORTED_HUNT_RECIPE_CATALOG = Object.freeze([
       { name: "adapter-failure", expected: "environment-error" },
     ]),
   },
+  ...([
+    ["a2-sql-nosql-injection-harness", "D1-001", "/workspace/.verglos/hunt/sql-nosql-injection.mjs"],
+    ["a2-command-injection-harness", "D1-003", "/workspace/.verglos/hunt/command-injection.mjs"],
+    ["a2-path-traversal-harness", "D1-006", "/workspace/.verglos/hunt/path-traversal.mjs"],
+    ["a2-ssrf-harness", "D9-002", "/workspace/.verglos/hunt/ssrf.mjs"],
+    ["a2-agent-mcp-harness", "AGENT-001", "/workspace/.verglos/hunt/agent-mcp.mjs"],
+    ["a2-xss-harness", "D1-004", "/workspace/.verglos/hunt/xss.mjs"],
+    ["a2-authorization-harness", "D3-001", "/workspace/.verglos/hunt/authorization.mjs"],
+  ] as const).map(([recipeId, ruleId, harnessPath]) => ({
+    recipeId,
+    ruleId,
+    adapter: "container" as const,
+    command: Object.freeze(["node", harnessPath]),
+    assertions: Object.freeze([TARGET_HARNESS_ASSERTION]),
+    requiredInputs: Object.freeze([] as string[]),
+    fixtures: Object.freeze([
+      { name: "positive", expected: "confirmed" },
+      { name: "negative", expected: "not-reproduced" },
+      { name: "timeout", expected: "inconclusive" },
+      { name: "adapter-failure", expected: "environment-error" },
+    ]),
+    imageDigest: HUNT_TARGET_HARNESS_IMAGE_DIGEST,
+  })),
 ] as const);
 
 export type SupportedHuntRecipe = (typeof SUPPORTED_HUNT_RECIPE_CATALOG)[number];
@@ -141,10 +165,11 @@ export type SupportedRecipeValidation = Readonly<{
     | "inputs_mismatch"
     | "network_not_denied"
     | "cleanup_not_unconditional"
-    | "redaction_not_required";
+    | "redaction_not_required"
+    | "image_mismatch";
 }>;
 
-/** Validate a parsed/signed recipe against the fixed A1 catalog. */
+/** Validate a parsed/signed recipe against the fixed public catalog. */
 export function validateSupportedHuntRecipe(value: unknown): SupportedRecipeValidation {
   let recipe: HuntRecipe;
   try {
@@ -161,6 +186,7 @@ export function validateSupportedHuntRecipe(value: unknown): SupportedRecipeVali
   if (recipe.network.mode !== "denied" || recipe.network.destinations.length !== 0 || recipe.limits.maxNetworkRequests !== 0) return { supported: false, reason: "network_not_denied" };
   if (recipe.cleanup !== "always") return { supported: false, reason: "cleanup_not_unconditional" };
   if (recipe.redaction !== "required") return { supported: false, reason: "redaction_not_required" };
+  if (descriptor.adapter === "container" && `${recipe.imageDigest.algorithm}:${recipe.imageDigest.value}` !== descriptor.imageDigest) return { supported: false, reason: "image_mismatch" };
   return { supported: true, descriptor, recipeDigest: huntRecipeDigest(recipe) };
 }
 
