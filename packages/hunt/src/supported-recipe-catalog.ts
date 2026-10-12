@@ -1,7 +1,8 @@
 import { huntRecipeDigest, parseHuntRecipe, type HuntRecipe } from "@verglos/shared";
 
 /**
- * HUNT-008: the only recipe surface currently eligible for the A1 adapter.
+ * HUNT-008: deterministic first-party recipes currently eligible for the A1
+ * adapter.
  *
  * This is deliberately a catalog of contract metadata, not a remote recipe
  * feed and not permission to execute arbitrary commands. Callers still need
@@ -17,6 +18,62 @@ export const SUPPORTED_HUNT_RECIPE_CATALOG = Object.freeze([
     command: Object.freeze(["verglos-probe", "utf8-contains"]),
     assertions: Object.freeze(["probe result is true"]),
     requiredInputs: Object.freeze(["needle", "value"]),
+    fixtures: Object.freeze([
+      { name: "positive", expected: "confirmed" },
+      { name: "negative", expected: "not-reproduced" },
+      { name: "timeout", expected: "inconclusive" },
+      { name: "adapter-failure", expected: "environment-error" },
+    ]),
+  },
+  {
+    recipeId: "a1-path-traversal",
+    ruleId: "hunt.a1.path-traversal",
+    adapter: "restricted-process",
+    command: Object.freeze(["verglos-probe", "path-traversal"]),
+    assertions: Object.freeze(["probe result is true"]),
+    requiredInputs: Object.freeze(["path"]),
+    fixtures: Object.freeze([
+      { name: "positive", expected: "confirmed" },
+      { name: "negative", expected: "not-reproduced" },
+      { name: "timeout", expected: "inconclusive" },
+      { name: "adapter-failure", expected: "environment-error" },
+    ]),
+  },
+  {
+    recipeId: "a1-command-injection",
+    ruleId: "hunt.a1.command-injection",
+    adapter: "restricted-process",
+    command: Object.freeze(["verglos-probe", "command-injection"]),
+    assertions: Object.freeze(["probe result is true"]),
+    requiredInputs: Object.freeze(["input"]),
+    fixtures: Object.freeze([
+      { name: "positive", expected: "confirmed" },
+      { name: "negative", expected: "not-reproduced" },
+      { name: "timeout", expected: "inconclusive" },
+      { name: "adapter-failure", expected: "environment-error" },
+    ]),
+  },
+  {
+    recipeId: "a1-ssrf-target",
+    ruleId: "hunt.a1.ssrf-target",
+    adapter: "restricted-process",
+    command: Object.freeze(["verglos-probe", "ssrf-target"]),
+    assertions: Object.freeze(["probe result is true"]),
+    requiredInputs: Object.freeze(["url"]),
+    fixtures: Object.freeze([
+      { name: "positive", expected: "confirmed" },
+      { name: "negative", expected: "not-reproduced" },
+      { name: "timeout", expected: "inconclusive" },
+      { name: "adapter-failure", expected: "environment-error" },
+    ]),
+  },
+  {
+    recipeId: "a1-tenant-boundary",
+    ruleId: "hunt.a1.tenant-boundary",
+    adapter: "restricted-process",
+    command: Object.freeze(["verglos-probe", "tenant-boundary"]),
+    assertions: Object.freeze(["probe result is true"]),
+    requiredInputs: Object.freeze(["authorizedTenant", "requestedTenant"]),
     fixtures: Object.freeze([
       { name: "positive", expected: "confirmed" },
       { name: "negative", expected: "not-reproduced" },

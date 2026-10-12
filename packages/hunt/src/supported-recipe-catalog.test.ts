@@ -33,6 +33,28 @@ test("catalog accepts the exact bounded A1 recipe and returns its digest", () =>
   if (result.supported) assert.match(result.recipeDigest, /^sha256:[a-f0-9]{64}$/u);
 });
 
+for (const descriptor of SUPPORTED_HUNT_RECIPE_CATALOG.slice(1)) {
+  test(`catalog accepts bounded ${descriptor.recipeId}`, () => {
+    const inputs = Object.fromEntries(descriptor.requiredInputs.map((name) => [name,
+      name === "path" ? "safe/file.txt" :
+        name === "input" ? "echo-safe" :
+          name === "url" ? "https://public.example.test/" :
+            name === "authorizedTenant" ? "tenant-a" :
+              name === "requestedTenant" ? "tenant-b" : "safe",
+    ]));
+    const value = parseHuntRecipe({
+      ...recipe(),
+      recipeId: descriptor.recipeId,
+      ruleId: descriptor.ruleId,
+      command: [...descriptor.command],
+      inputs,
+    });
+    const result = validateSupportedHuntRecipe(value);
+    assert.equal(result.supported, true);
+    if (result.supported) assert.match(result.recipeDigest, /^sha256:[a-f0-9]{64}$/u);
+  });
+}
+
 for (const [name, patch, reason] of [
   ["unknown recipe", { recipeId: "a1-unknown" }, "recipe_not_in_catalog"],
   ["arbitrary command", { command: ["/bin/sh", "-c", "echo unsafe"] }, "command_mismatch"],
