@@ -1,5 +1,66 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-12 · Approved Final V1 contract synchronized; Point 5 is the stop boundary
+
+- **Decision:** The approved contract is
+  `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`. It governs the
+  CLI, Web, shipping worktree, MCP, plan entitlements, Hunt, Attest, Release
+  Records, billing, SCM, and customer-facing claims.
+- **Execution points:** freeze/synchronize the contract; implement real Hunt
+  and public CLI; connect Web entitlements/Attest/Records; then qualify the
+  npm package on public TS/JS repositories. Stop there for this goal.
+- **Deferred:** npm publication, held-out experiments/POC, campaign work, and
+  the final release decision belong to the next goal.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**. No checkbox
+  changed in this documentation synchronization.
+- **Boundary:** no provider, database, entitlement, Production, npm, or
+  customer write occurred. Historical ledger entries remain unchanged.
+
+## 2026-10-12 · HUNT Docker adversarial qualification re-run
+
+- **Source:** shipping worktree commit
+  `04b9a2b333a7dab8370ab40ae26f46c6b10a0156`.
+- **Run:** Docker `29.7.2`, macOS arm64, Node `v26.4.0`, pinned
+  `postgres:15-alpine` digest
+  `sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a`.
+- **Result:** 60 passed / 1 documented macOS namespace skip / 0 failed;
+  process exit 0. Evidence:
+  `docs/shipping/evidence/hunt-docker-adversarial-2026-10-12.md`.
+- **Disposition:** technical progress only. Linux namespace coverage,
+  trusted/licensed recipe provenance, and independent AppSec review remain
+  open. No backlog checkbox changed; score remains 228/52/280.
+
+## 2026-10-12 · HUNT public CLI and MCP path qualification
+
+- **Source:** shipping worktree commit
+  `04b9a2b333a7dab8370ab40ae26f46c6b10a0156`.
+- **Commands:** `pnpm --filter @verglos/shared test`,
+  `pnpm --filter verglos test`, and `pnpm --filter @verglos/mcp test` all
+  exited 0. The MCP output included 29 passing Hunt/authority/entitlement
+  tests; the CLI path exercised the wired Hunt command and recipe
+  verification/execution tests.
+- **Evidence:** `docs/shipping/evidence/hunt-cli-mcp-path-2026-10-12.md`.
+- **Disposition:** Point-3 implementation evidence strengthened; no checkbox
+  changed. HUNT-008 remains gated by provenance and independent review, and
+  downstream HUNT-009/010/011 and QUAL-CLI-004 remain open.
+
+## 2026-10-12 · Point-5 packed npm qualification batch
+
+- **Package:** six local public archives, version `2.0.0-alpha.1`; packed
+  manifest and clean-consumer checks passed, including no external engine
+  installation.
+- **Targets:** public JavaScript `sahat/hackathon-starter` at
+  `574a99344855a2f18dac7181636e400bd55ab578` and public TypeScript
+  `ixartz/Next-js-Boilerplate` at
+  `b83157a8018f55b926a3c25a4b7a7e14b0dfbc35`.
+- **Result:** both packed-CLI scans exited 0 with complete coverage: JS 97
+  files/7 findings/score 86; TS 88 files/4 findings/score 90. Isolated HOME
+  produced zero global `.cursor` findings; telemetry was disabled.
+- **Evidence:** `docs/shipping/evidence/point-5-public-npm-repository-qualification-2026-10-12.md`.
+- **Disposition:** Point-5 progress only. Full corpus, TopNotchh forks,
+  hosted plan paths, and final acceptance remain open; no npm publication or
+  backlog checkbox changed.
+
 ## 2026-10-12 · Final V1 scope and Hunt design documented; no implementation yet
 
 - **Purpose:** Record the proposed product contract before creating the next
