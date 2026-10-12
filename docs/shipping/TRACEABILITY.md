@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 endpoint hardening · 2026-10-13
+
+- **Implementation:** Public CLI PR #95 merged at
+  `d989b88a1855adc3bf54c6f2856c5b90ddca41f2`; unsafe caller-supplied
+  organization-policy endpoints fail closed before credential attachment or
+  network access.
+- **Verification:** build 8/8, complete CLI test process, and the zero-request
+  external-endpoint regression passed.
+- **Acceptance:** This is transport hardening only. Hosted signer/trust-root,
+  authorized repository binding, canonical policy row, and live signed
+  fetch/cache/offline/cross-tenant evidence remain open.
+- **Boundary:** code/test files only in the public PR; no private shipping
+  records or credentials were added. No checkbox changed; score remains
+  **228/52/280 (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-endpoint-hardening-2026-10-13.md`.
+
 ## 2026-10-11 · QUAL-WEB-006 authenticated account recheck
 
 - **Mapped ID:** `QUAL-WEB-006`.

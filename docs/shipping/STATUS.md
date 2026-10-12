@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · TEAM-CLI-001 endpoint hardening merged (PR #95)
+
+Public PR #95 merged as
+`d989b88a1855adc3bf54c6f2856c5b90ddca41f2`. The organization-policy client
+rejects unsafe external endpoints before attaching credentials or making a
+request. Build 8/8 and the complete CLI process suite passed; the regression
+test observed zero requests on rejection.
+
+This is a code-side security improvement, not hosted acceptance. The hosted
+signer/trust root, authorized repository binding, canonical policy row, and
+live signed fetch/cache/offline/cross-tenant run remain open. The public PR
+contained only source and tests. No checkbox changed; score remains **228
+checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/team-cli-001-endpoint-hardening-2026-10-13.md`.
+
 ## 2026-10-13 · Four-case Hunt fixture evidence merged (PR #94)
 
 Public PR #94 merged at

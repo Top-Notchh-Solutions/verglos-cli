@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · TEAM-CLI-001 organization-policy endpoint hardening merged (PR #95)
+
+Public CLI PR #95 merged as
+`d989b88a1855adc3bf54c6f2856c5b90ddca41f2`. The organization-policy client
+now rejects external, protocol-relative, malformed, and oversized caller-
+supplied endpoints before attaching credentials or making a request. The
+complete CLI build/test process passed and the regression test observed zero
+requests on rejection.
+
+This is code-side transport hardening only. `TEAM-CLI-001` remains unchecked
+pending hosted signer/trust-root activation, a mapped tenant, authorized
+repository binding, a canonical policy row, and live signed fetch/cache/
+offline/cross-tenant evidence. No checkbox changed; score remains **228
+checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/team-cli-001-endpoint-hardening-2026-10-13.md`.
+
 ## 2026-10-13 · HUNT-008 four-case fixture verifier merged (PR #94)
 
 Public CLI PR #94 merged at

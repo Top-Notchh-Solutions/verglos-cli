@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · TEAM-CLI-001 endpoint hardening merged (PR #95)
+
+- **Public merge:** PR #95 merged as
+  `d989b88a1855adc3bf54c6f2856c5b90ddca41f2` from `bb0bd755`.
+- **Implemented:** organization-policy endpoint validation rejects external
+  origins and malformed caller-supplied paths before credentials or network
+  access are used.
+- **Verification:** build 8/8 and the complete CLI package test process passed;
+  the regression test made zero requests on unsafe input. The PR contained
+  only two public code/test files.
+- **Acceptance:** `TEAM-CLI-001` remains open for hosted signer/trust-root,
+  authorized repository binding, policy-row, and live signed fetch/cache/
+  offline/cross-tenant evidence.
+- **Boundary:** no production/provider/database/entitlement/repository/
+  customer write; no private shipping material entered the public PR.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-endpoint-hardening-2026-10-13.md`.
+
 ## 2026-10-13 · Four-case Hunt fixture evidence merged (PR #94)
 
 - **Public merge:** PR #94 merged to `main` at
