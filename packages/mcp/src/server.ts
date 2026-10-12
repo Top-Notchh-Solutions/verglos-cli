@@ -93,7 +93,7 @@ const APPROVAL_RECEIPT_PROPERTY = {
  *
  * Shipped pre-write, package, scan, and explanation tools route through shared
  * scanner, input-boundary, authority, entitlement, and failure contracts.
- * Hunt finding/report calls use an optional host-provided private runtime;
+ * Hunt finding/report calls use an optional host-provided bounded runtime;
  * before-write is a bounded preflight and never synthesizes arbitrary recipes.
  * Attest remains an explicit compatibility shell. Verdict explanation is
  * bounded and non-executing.
@@ -111,10 +111,10 @@ export type CheckBeforeWriteInput = ToolInput;
 export type CheckBeforeWriteResult = ToolResult;
 
 /**
- * Optional host-provided bridge to the private Hunt runtime. The public MCP
- * package only owns the authority/input boundary; it never imports private
- * recipe or sandbox code. A missing bridge is an explicit not-attemptable
- * result, never an implicit fallback to arbitrary process execution.
+ * Optional host-provided bridge to the bounded Hunt runtime. The public MCP
+ * package owns the authority/input boundary; the CLI host supplies the
+ * published @verglos/hunt runtime. A missing bridge is an explicit
+ * not-attemptable result, never an implicit fallback to arbitrary execution.
  */
 export interface HuntExecutionBinding {
   readonly recipePath?: string;
@@ -385,7 +385,7 @@ function huntExecutionUnavailable(name: "verglos_hunt_finding" | "verglos_hunt_r
     status: "not_attemptable" as const,
     execution: {
       attempted: false,
-      reason: "No host-provided private Hunt runtime and complete signed execution binding were supplied.",
+      reason: "No host-provided bounded Hunt runtime and complete signed execution binding were supplied.",
     },
     limitations: [
       "No process or sandbox was started.",
@@ -580,7 +580,7 @@ export function listAdvertisedTools() {
 export interface VerglosMcpServerOptions {
   /** Verified entitlement supplied by the host; omitted grants Free capabilities only. */
   readonly plan?: "free" | "pro" | "team" | "studio" | "enterprise";
-  /** Optional private-runtime bridge. The public MCP package never imports the private Hunt package. */
+  /** Optional bounded-runtime bridge. The CLI host supplies @verglos/hunt. */
   readonly huntExecutor?: VerglosMcpHuntExecutor;
 }
 

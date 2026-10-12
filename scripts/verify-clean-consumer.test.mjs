@@ -10,11 +10,11 @@ import { promisify } from "node:util";
 const run = promisify(execFile);
 const script = fileURLToPath(new URL("./verify-clean-consumer.mjs", import.meta.url));
 
-test("clean consumer verifier requires an explicit directory and all six package archives", async () => {
+test("clean consumer verifier requires an explicit directory and all seven package archives", async () => {
   await assert.rejects(run(process.execPath, [script]), /release archive directory is required/);
   const root = await mkdtemp(join(tmpdir(), "verglos-clean-consumer-test-"));
   try {
-    await assert.rejects(run(process.execPath, [script, root]), /expected 6 package archives/);
+    await assert.rejects(run(process.execPath, [script, root]), /expected 7 package archives/);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

@@ -6,7 +6,7 @@ import { test } from "node:test";
 const workflow = await readFile(join(process.cwd(), ".github", "workflows", "publish.yml"), "utf8");
 
 test("publish workflow verifies the same public artifact boundaries as release checks", () => {
-  for (const packageName of ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"]) {
+  for (const packageName of ["shared", "scanner", "reporter", "mcp", "entitlement", "hunt", "cli"]) {
     assert.match(workflow, new RegExp(`packages/${packageName}`), packageName);
   }
   assert.match(workflow, /check-package-contents\.mjs/u);

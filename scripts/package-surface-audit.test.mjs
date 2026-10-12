@@ -43,7 +43,7 @@ test("packed public surface rejects the internal CLI process-fixture helper", ()
   assert.equal(isForbiddenPublicPackagePath("dist/cli-fixture.js"), true);
 });
 
-test("public package set requires exactly the six reviewed package identities", () => {
+test("public package set requires exactly the seven reviewed package identities", () => {
   assert.deepEqual(auditPublicPackageSet([
     { name: "verglos" },
     { name: "@verglos/shared" },
@@ -51,6 +51,7 @@ test("public package set requires exactly the six reviewed package identities", 
     { name: "@verglos/reporter" },
     { name: "@verglos/mcp" },
     { name: "@verglos/entitlement" },
+    { name: "@verglos/hunt" },
   ]), []);
   assert.ok(auditPublicPackageSet([{ name: "verglos" }]).some((failure) => failure.includes("exactly one @verglos/shared")));
 });

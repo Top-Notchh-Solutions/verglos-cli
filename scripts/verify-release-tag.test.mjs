@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { test } from "node:test";
 import { parseReleaseTag, verifyReleaseTag } from "./verify-release-tag.mjs";
 
-const packageDirs = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"];
+const packageDirs = ["shared", "scanner", "reporter", "mcp", "entitlement", "hunt", "cli"];
 
 async function fixture(version = "2.0.0-alpha.1") {
   const root = await mkdtemp(join(tmpdir(), "verglos-release-tag-"));
@@ -27,7 +27,7 @@ test("release verification requires every public package to match the immutable 
   const root = await fixture();
   try {
     const result = await verifyReleaseTag(root, "v2.0.0-alpha.1");
-    assert.equal(result.packages.length, 6);
+    assert.equal(result.packages.length, 7);
     await writeFile(join(root, "packages", "cli", "package.json"), JSON.stringify({ name: "verglos", version: "2.0.0-alpha.2" }), "utf8");
     await assert.rejects(() => verifyReleaseTag(root, "v2.0.0-alpha.1"), /packages\/cli=2\.0\.0-alpha\.2/u);
   } finally {

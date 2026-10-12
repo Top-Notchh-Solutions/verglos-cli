@@ -26,11 +26,7 @@ export type HuntRuntime = Readonly<{
 
 export type HuntRuntimeLoader = () => Promise<unknown>;
 
-/**
- * The public CLI has a protocol boundary to the separately provisioned
- * private Hunt runtime. It must not package, import, or require that runtime
- * as a public workspace dependency.
- */
+/** Load the public bounded Hunt runtime shipped as a separately audited package. */
 export async function loadHuntRuntime(loader: HuntRuntimeLoader = () => import(HUNT_RUNTIME_PACKAGE)): Promise<HuntRuntime> {
   let candidate: unknown;
   try {

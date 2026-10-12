@@ -31,6 +31,7 @@ EXPECTED_PREFIXES = {
     "verglos-reporter-",
     "verglos-mcp-",
     "verglos-entitlement-",
+    "verglos-hunt-",
     "verglos-2.",
 }
 

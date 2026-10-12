@@ -15,6 +15,7 @@ if (!rootStat.isDirectory()) throw new Error("release archive path must be a dir
 const expectedPackages = [
   { name: "verglos", matches: (archive) => /^verglos-\d+\.\d+\.\d+[^/]*\.tgz$/.test(archive) },
   ...["shared", "scanner", "reporter", "mcp", "entitlement"].map((name) => ({ name: `@verglos/${name}`, matches: (archive) => archive.startsWith(`verglos-${name}-`) })),
+  { name: "@verglos/hunt", matches: (archive) => archive.startsWith("verglos-hunt-") },
 ];
 const archives = (await readdir(archiveRoot)).filter((name) => name.endsWith(".tgz")).sort();
 if (archives.length !== expectedPackages.length) throw new Error(`expected ${expectedPackages.length} package archives, received ${archives.length}`);
@@ -33,7 +34,7 @@ try {
   const cli = join(consumer, "node_modules", "verglos", "dist", "index.js");
   const result = await run(process.execPath, [cli, "--version"], { cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });
   if (!/^\d+\.\d+\.\d+[^\r\n]*\r?\n?$/.test(result.stdout.trim())) throw new Error("clean consumer CLI did not emit a version");
-  await run(process.execPath, ["--input-type=module", "-e", "await Promise.all(['@verglos/shared','@verglos/scanner','@verglos/reporter','@verglos/mcp','@verglos/entitlement'].map((name) => import(name)))"], { cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });
+  await run(process.execPath, ["--input-type=module", "-e", "await Promise.all(['@verglos/shared','@verglos/scanner','@verglos/reporter','@verglos/mcp','@verglos/entitlement','@verglos/hunt'].map((name) => import(name)))"], { cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });
   const engineCache = join(consumer, "engine-cache");
   const home = join(consumer, "home");
   const isolatedEnv = { ...process.env, VERGLOS_ENGINE_CACHE: engineCache, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", HOME: home, USERPROFILE: home };
