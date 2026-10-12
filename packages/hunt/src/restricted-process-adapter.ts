@@ -15,7 +15,7 @@ const BUILT_IN_ASSERTION = "probe result is true";
 const A1_LIMITATION = "A1 runs a trusted built-in pure fixture probe in a bounded worker harness; it does not execute target code and is not a security or OS isolation boundary";
 
 interface WorkerResult { readonly matched: boolean }
-type BuiltInProbe = "utf8-contains" | "path-traversal" | "command-injection" | "ssrf-target" | "tenant-boundary";
+type BuiltInProbe = "utf8-contains" | "path-traversal" | "command-injection" | "ssrf-target" | "tenant-boundary" | "sql-injection" | "xss-safe" | "agent-boundary";
 
 /**
  * A1 adapter for trusted, built-in pure probes only.
@@ -104,7 +104,7 @@ function validateBinding(recipe: HuntRecipe, binding: HuntExecutionBinding): voi
 }
 
 function isBuiltInProbe(value: string | undefined): value is BuiltInProbe {
-  return value === "utf8-contains" || value === "path-traversal" || value === "command-injection" || value === "ssrf-target" || value === "tenant-boundary";
+  return value === "utf8-contains" || value === "path-traversal" || value === "command-injection" || value === "ssrf-target" || value === "tenant-boundary" || value === "sql-injection" || value === "xss-safe" || value === "agent-boundary";
 }
 
 function requiredInputNames(probe: BuiltInProbe): readonly string[] {
@@ -114,6 +114,9 @@ function requiredInputNames(probe: BuiltInProbe): readonly string[] {
     case "command-injection": return ["input"];
     case "ssrf-target": return ["url"];
     case "tenant-boundary": return ["authorizedTenant", "requestedTenant"];
+    case "sql-injection": return ["input"];
+    case "xss-safe": return ["html"];
+    case "agent-boundary": return ["allowlist", "tool"];
   }
 }
 

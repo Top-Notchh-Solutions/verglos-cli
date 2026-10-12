@@ -208,7 +208,7 @@ verglos hunt --execute-report verglos-report.json \
   --json
 ```
 
-The shipped public runtime currently supports the bounded A1 fixture-probe catalog: UTF-8 containment, path-traversal shape, command-injection shape, private/local SSRF target classification, and tenant-boundary mismatch. These are deterministic fixture checks; they do not execute target code, make network requests, run model-generated shell, or accept unsigned content. A confirmed result exits `1`; a clean supported result exits `0`; invalid or unauthorized input exits `78`.
+The shipped public runtime currently supports the bounded A1 fixture-probe catalog: UTF-8 containment, path-traversal shape, command-injection shape, private/local SSRF target classification, tenant-boundary mismatch, SQL/NoSQL injection shape, safe XSS shape, and agent/MCP tool-boundary mismatch. These are deterministic fixture checks; they do not execute target code, make network requests, run model-generated shell, or accept unsigned content. A confirmed result exits `1`; a clean supported result exits `0`; invalid or unauthorized input exits `78`.
 
 ### `verglos attest` — signed evidence bundle `Studio`
 

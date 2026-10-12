@@ -5,7 +5,10 @@ type ProbeInput =
   | { readonly probe: "path-traversal"; readonly path: string }
   | { readonly probe: "command-injection"; readonly input: string }
   | { readonly probe: "ssrf-target"; readonly url: string }
-  | { readonly probe: "tenant-boundary"; readonly authorizedTenant: string; readonly requestedTenant: string };
+  | { readonly probe: "tenant-boundary"; readonly authorizedTenant: string; readonly requestedTenant: string }
+  | { readonly probe: "sql-injection"; readonly input: string }
+  | { readonly probe: "xss-safe"; readonly html: string }
+  | { readonly probe: "agent-boundary"; readonly allowlist: string; readonly tool: string };
 
 function parseInput(value: unknown): ProbeInput {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("invalid built-in probe input");
@@ -19,6 +22,12 @@ function parseInput(value: unknown): ProbeInput {
   if (probe === "path-traversal" && typeof input.path === "string") { bound(input.path); return { probe, path: input.path }; }
   if (probe === "command-injection" && typeof input.input === "string") { bound(input.input); return { probe, input: input.input }; }
   if (probe === "ssrf-target" && typeof input.url === "string") { bound(input.url); return { probe, url: input.url }; }
+  if (probe === "sql-injection" && typeof input.input === "string") { bound(input.input); return { probe, input: input.input }; }
+  if (probe === "xss-safe" && typeof input.html === "string") { bound(input.html); return { probe, html: input.html }; }
+  if (probe === "agent-boundary" && typeof input.allowlist === "string" && typeof input.tool === "string") {
+    bound(input.allowlist, input.tool);
+    return { probe, allowlist: input.allowlist, tool: input.tool };
+  }
   if (probe === "tenant-boundary" && typeof input.authorizedTenant === "string" && typeof input.requestedTenant === "string") {
     bound(input.authorizedTenant, input.requestedTenant);
     return { probe, authorizedTenant: input.authorizedTenant, requestedTenant: input.requestedTenant };
@@ -49,6 +58,9 @@ function runProbe(input: ProbeInput): boolean {
     case "command-injection": return /[;&|`$()<>\n\r]/u.test(input.input);
     case "ssrf-target": return isPrivateOrLocalTarget(input.url);
     case "tenant-boundary": return input.authorizedTenant !== input.requestedTenant;
+    case "sql-injection": return /(?:['"`]\s*(?:OR|AND)\s+['"`]?\w+['"`]?\s*=|--|\/\*)/iu.test(input.input);
+    case "xss-safe": return /<script\b|\bon[a-z]+\s*=|javascript\s*:/iu.test(input.html);
+    case "agent-boundary": return !input.allowlist.split(",").map((tool) => tool.trim()).filter(Boolean).includes(input.tool);
   }
 }
 

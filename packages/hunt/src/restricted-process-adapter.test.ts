@@ -68,7 +68,13 @@ test("A1 adapter runs the additional deterministic fixture probes", async () => 
     [fixtureRecipe("command-injection", { input: "safe; echo unsafe" }), true],
     [fixtureRecipe("ssrf-target", { url: "http://169.254.169.254/latest/meta-data" }), true],
     [fixtureRecipe("tenant-boundary", { authorizedTenant: "tenant-a", requestedTenant: "tenant-b" }), true],
+    [fixtureRecipe("sql-injection", { input: "' OR '1'='1" }), true],
+    [fixtureRecipe("xss-safe", { html: "<img src=x onerror=alert(1)>" }), true],
+    [fixtureRecipe("agent-boundary", { allowlist: "read,write", tool: "delete" }), true],
     [fixtureRecipe("path-traversal", { path: "safe/file.txt" }), false],
+    [fixtureRecipe("sql-injection", { input: "SELECT * FROM users WHERE id = $1" }), false],
+    [fixtureRecipe("xss-safe", { html: "<p>safe text</p>" }), false],
+    [fixtureRecipe("agent-boundary", { allowlist: "read,write", tool: "read" }), false],
   ] as const;
   for (const [selected, expected] of cases) {
     const result = await new RestrictedProcessAdapter(selected).execute({ finding, projectRoot: "/not-read", timeoutMs: 2_000, binding: binding(selected) });
