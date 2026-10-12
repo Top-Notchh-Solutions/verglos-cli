@@ -581,7 +581,7 @@ program
     "--verify-secrets",
     "Hit GitHub / Stripe APIs to prove matched keys are live (opt-in — makes network calls)",
   )
-  .option("--hunt", "After scanning, hand eligible findings to the approved bounded Hunt path")
+  .option("--hunt", "After scanning, print a signed Hunt execution handoff (does not auto-approve or execute)")
   .option(
     "--no-telemetry",
     "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
@@ -760,7 +760,7 @@ program
         const ok = await requireCapability("ci.hunt_gate", "`verglos ci --hunt`", {
           asPlan,
           extraLine:
-            "Verified-only CI gating ships in v2.0.0-beta. This alpha can still run standard CI.",
+            "Paid capability verified. A signed recipe, trust store, approval receipt, and exact binding are still required; use `verglos hunt --execute` for the bounded run.",
         });
         if (!ok) process.exit(1);
       }

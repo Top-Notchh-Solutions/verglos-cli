@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-  <strong>Verglos scans AI-assisted JavaScript and TypeScript locally today, with v2 hunt verification and signed evidence moving through the alpha and beta track.</strong><br>
-  <sub>Free scanner forever. Hunt and attest are v2 alpha shells until beta functionality lands.</sub>
+  <strong>Verglos scans AI-assisted JavaScript and TypeScript locally, then can verify selected findings with a signed, bounded Hunt recipe.</strong><br>
+  <sub>Free scanner forever. Pro Hunt execution requires an approved recipe, trusted feed, and exact execution binding.</sub>
 </p>
 
 <p align="center">
@@ -220,7 +220,7 @@ verglos attest --report verglos-report.json --sign
 verglos attest --verify-url https://verglos.com/verify
 ```
 
-In v2.0.0-alpha this is a shell and exits `78` for Studio users. Functional Ed25519 signing, portable JSON+HTML bundles, and public verify URLs ship in v2.0.0-beta.
+`attest` is retained as a compatibility shell. Use `record create`, `record sign`, `record verify`, and `record pack` for the supported portable evidence workflow.
 
 ### Utilities
 
@@ -274,14 +274,14 @@ jobs:
 | `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes | Yes |
 | Pre-commit hook | Yes | Yes | Yes | Yes | Yes |
 | `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes | Yes |
-| **`verglos hunt` on Critical + High** | No | Alpha shell | Alpha shell | Beta | Beta |
+| **Signed `verglos hunt` on Critical + High** | No | A1 bounded path | A1 bounded path | A1 bounded path | A1 bounded path |
 | **`verglos hunt` on Medium** | No | No | No | Beta | Beta |
 | **MCP hunt tools** | No | Alpha shell | Alpha shell | Beta | Beta |
 | **`verglos fix`** | No | Yes | Yes | Yes | Yes |
-| **`verglos ci --hunt`** | No | Alpha path | Alpha path | Beta | Beta |
+| **`verglos ci --hunt`** | No | Paid capability + explicit binding | Paid capability + explicit binding | Paid capability + explicit binding | Paid capability + explicit binding |
 | **CI score threshold** | No | Yes | Yes | Yes | Yes |
 | **Continuous CVE monitoring** | No | Yes | Yes | Yes | Yes |
-| **`verglos attest`** | No | No | No | Alpha shell | Beta |
+| **`verglos attest` compatibility shell** | No | No | No | Legacy shell | Legacy shell |
 | **Public verify URL** | No | No | No | Beta | Beta |
 | **White-label report** | No | No | No | Beta | Beta |
 | **Firecracker sandbox adapter** | No | No | No | Beta | Beta |
