@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Four-case Hunt fixture evidence merged (PR #94)
+
+Public PR #94 merged at
+`53448684f6c3004ee1490d40ea2cae74ee199af2`. The exact public `main` commit
+now has a normal-Node verifier for the first-party A1 recipe's positive,
+negative, timeout, and adapter-failure cases. The verifier passed locally
+after build and passed in self-scan, in-toto binding, and all macOS/Ubuntu/
+Windows × Node 20/22/24 jobs.
+
+This is durable technical fixture evidence only. It does not prove A1 is an
+OS/security boundary, does not replace Linux/Docker adversarial qualification,
+and does not create supported-rule, legal/release, hosted entitlement, or
+independent AppSec approval. HUNT-008 and its downstream rows remain open.
+No checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/hunt-a1-utf8-contains-fixtures-2026-10-13.md`.
+
 ## 2026-10-13 · Packed public consumer executes signed Hunt runtime (PR #93)
 
 Public PR #93 (`a667d568`) merged to `main` at

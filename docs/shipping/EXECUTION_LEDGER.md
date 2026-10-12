@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Four-case Hunt fixture evidence merged (PR #94)
+
+- **Public merge:** PR #94 merged to `main` at
+  `53448684f6c3004ee1490d40ea2cae74ee199af2`.
+- **Implemented:** `scripts/verify-hunt-fixtures.mjs` runs the first-party A1
+  recipe with exact signed trust and approval inputs and retains positive,
+  negative, timeout, and adapter-failure cases.
+- **Result:** `confirmed/completed`, `not-reproduced/completed`,
+  `inconclusive/timed-out`, and `environment-error` were reproduced. The
+  first three outcomes were redacted and carried the A1 limitation; the
+  adapter failure emitted only a generic environment error.
+- **Checks:** exact merged `main` passed build and the verifier locally;
+  protected self-scan, in-toto binding, and all nine macOS/Ubuntu/Windows ×
+  Node 20/22/24 jobs passed. CI retains the verifier log for 14 days.
+- **Boundary:** synthetic data only; no source/customer/provider/database/
+  Production/npm write. A1 is not an OS/security boundary, and this does not
+  replace Linux/Docker isolation or independent AppSec/legal review.
+- **Disposition:** direct fixture evidence is complete, but HUNT-008 remains
+  open for supported-rule approval and final release treatment; downstream
+  HUNT-009–011 and QUAL-CLI-004 remain open. No checkbox changed; score
+  remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a1-utf8-contains-fixtures-2026-10-13.md`.
+
 ## 2026-10-13 · Packed public consumer executes signed Hunt runtime (PR #93)
 
 - **Public merge:** PR #93 (`a667d568`) merged to `main` at
