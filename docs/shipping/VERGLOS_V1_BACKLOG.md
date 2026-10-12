@@ -13,6 +13,26 @@ release decision are deferred to the next goal.
 checkbox still requires implementation, tests, real evidence, and the row's
 acceptance conditions.
 
+### Public packed Hunt runtime qualification — 2026-10-12
+
+Public CLI commit `6762bf41` (PR #91) now ships the bounded
+`@verglos/hunt` package and wires the packed CLI/MCP path to the signed A1
+recipe executor. Seven public archives passed the package-surface, manifest,
+clean-consumer, and release-verifier checks. The exact packed CLI executed
+the signed A1 recipe with a temporary local Pro capability fixture: execution
+was authorized, network was denied, source access was none, and the expected
+confirmed fixture finding returned exit 1. Without the capability fixture,
+the same binary returned `CAPABILITY_REQUIRED`.
+
+Evidence: `docs/shipping/evidence/hunt-public-package-runtime-2026-10-12.md`.
+
+This is implementation and qualification progress only. The local fixture is
+not hosted entitlement evidence; its legal clearance is explicitly false and
+its A1 worker is not an OS/security isolation boundary. Licensed recipe
+provenance, Linux namespace coverage, independent AppSec review, and final
+release acceptance remain open. No checkbox changed; score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ### Technical progress recorded — HUNT-008 through HUNT-011
 
 On shipping-worktree commit `04b9a2b333a7dab8370ab40ae26f46c6b10a0156`, the

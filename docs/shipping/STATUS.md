@@ -1,5 +1,29 @@
 # Verglos V1 shipping status
 
+## 2026-10-12 · Public packed Hunt runtime qualification
+
+The public CLI commit `6762bf41` (PR #91) now includes the bounded
+`@verglos/hunt` package in the seven-archive public set. Shared, Hunt, MCP,
+and full CLI tests passed; the MCP suite reported 29 passing tests. Package
+surface/release tests passed 12/12, and the packed archives passed manifest
+and clean-consumer verification.
+
+The packed CLI executed the signed A1 recipe in an isolated clean consumer
+with a local-only Pro capability fixture. It produced an authorized,
+completed result with network denied, no source access, and the expected
+confirmed fixture verdict. Without the capability fixture, it correctly
+returned `CAPABILITY_REQUIRED`; this is not hosted entitlement evidence.
+
+The synthetic recipe feed explicitly has no legal clearance, A1 is not an
+OS/security boundary, and 16 Linux/Docker integration cases remain skipped
+on macOS. Licensed recipe provenance, Linux namespace coverage, independent
+AppSec review, hosted entitlement, and final release acceptance remain open.
+
+Evidence:
+`docs/shipping/evidence/hunt-public-package-runtime-2026-10-12.md`.
+No checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**.
+
 ## 2026-10-12 · Point-5 public npm qualification batch 2
 
 The packed `2.0.0-alpha.1` CLI scanned three additional authorized public

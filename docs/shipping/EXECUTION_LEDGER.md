@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-12 · Public packed Hunt runtime qualification
+
+- **Source:** public shipping-worktree commit `6762bf41`; PR #91; package
+  version `2.0.0-alpha.1`.
+- **Boundary:** `@verglos/hunt` is now part of the seven-package public set;
+  the CLI and MCP host bridge reach it only through signed recipe, trust,
+  approval, subject, observation, and capability bindings.
+- **Checks:** shared, Hunt, MCP, and full CLI suites exited 0; MCP reported
+  29 passing tests; package-surface/release tests passed 12/12; pack,
+  seven-archive manifest audit, and clean-consumer verification passed.
+- **Packed execution:** the clean consumer executed signed A1 with an
+  isolated local Pro capability fixture. Result was authorized/completed,
+  confirmed fixture verdict, network denied, source access none, one process;
+  exit 1 was expected for the confirmed fixture. Without the capability the
+  packed binary returned `CAPABILITY_REQUIRED`.
+- **Limitations:** this is not hosted entitlement or payment evidence. The
+  synthetic feed reports `legalClearance=false`; A1 is not an OS/security
+  isolation boundary; 16 Linux/Docker integration cases remain explicitly
+  skipped on macOS. Licensed provenance, independent review, Linux coverage,
+  and final release acceptance remain open.
+- **Disposition:** technical Point-3/Point-5 progress only; no checkbox
+  changed. Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-public-package-runtime-2026-10-12.md`.
+
 ## 2026-10-12 · Point-5 public npm qualification batch 2 and fail-closed Trivy result
 
 - **Source:** shipping worktree commit
