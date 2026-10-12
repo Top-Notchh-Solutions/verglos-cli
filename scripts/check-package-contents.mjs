@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePath } from "./package-surface-audit.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const packageDirs = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"].map((name) => join(root, "packages", name));
+const packageDirs = ["shared", "scanner", "reporter", "mcp", "entitlement", "hunt", "cli"].map((name) => join(root, "packages", name));
 const PRIVATE_KEY_MARKER = /-----BEGIN (?:[A-Z0-9]+ )?PRIVATE KEY-----/u;
 const MAX_AUDIT_FILE_BYTES = 8 * 1024 * 1024;
 
