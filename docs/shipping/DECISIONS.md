@@ -2509,3 +2509,27 @@ each observed method has lifecycle and reconciliation evidence.
   yields capture and complete payment/ledger/license reconciliation. Owner is
   the Verglos release owner with the Razorpay Test Mode account owner; review
   by 2026-10-17.
+
+## Final V1 scope and Hunt/business model decision candidate · 2026-10-12
+
+- **Decision candidate:** Verglos remains a local-first TypeScript/JavaScript
+  security decision and evidence layer. Free keeps a complete local scanner and
+  receives a limited safe Hunt starter pack; Pro receives the complete V1 Hunt
+  recipe catalogue, full MCP Hunt, CI Hunt, advanced rule packs, monitoring,
+  and signed `.vgl` Release Records. Team, Studio, and Enterprise add shared
+  policy/SCM, client evidence, and private governance respectively.
+- **Hunt boundary:** Planner/Scout, bounded Attack Worker, deterministic Proof
+  Adjudicator, and Release Auditor are controlled roles. No arbitrary
+  model-generated shell, public-internet exploitation, credential guessing, or
+  claim that one probe proves an application secure.
+- **Recipe candidate:** SQL/NoSQL injection, command injection, path traversal,
+  SSRF, XSS, mass assignment, authorization/tenant isolation, and Agent/MCP
+  boundary. The first implementation slice is SQL/NoSQL, command, path,
+  SSRF, and Agent/MCP; each needs positive, negative, timeout, failure,
+  cleanup, redaction, and limitation fixtures.
+- **Status:** Documentation only. This does not implement code, change plan
+  entitlements, or close a backlog item. It must be reviewed before the next
+  execution goal and then synchronized across the contract, feature map,
+  architecture, CLI/Web/MCP capabilities, backlog, and public claims.
+- **Context:** See
+  `docs/shipping/VERGLOS_FINAL_V1_SCOPE_AND_HUNT_DECISION_2026-10-12.md`.

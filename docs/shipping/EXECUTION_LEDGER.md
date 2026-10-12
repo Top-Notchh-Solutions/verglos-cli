@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-12 · Final V1 scope and Hunt design documented; no implementation yet
+
+- **Purpose:** Record the proposed product contract before creating the next
+  execution goal. The product is a local-first TS/JS security decision and
+  evidence layer, not only a scanner and not an unrestricted autonomous
+  pentester.
+- **Plan decision candidate:** Free retains the complete local scanner and a
+  limited safe Hunt starter pack; Pro gets the complete supported Hunt
+  catalogue, full MCP Hunt, CI Hunt, advanced rules, monitoring, and signed
+  Release Records; Team/Studio/Enterprise add organization, client, and
+  private-governance value.
+- **Hunt decision candidate:** Use a controlled Planner/Scout, bounded Attack
+  Worker, deterministic Proof Adjudicator, and Release Auditor. Initial recipe
+  slice: SQL/NoSQL injection, command injection, path traversal, SSRF, and the
+  Agent/MCP boundary. The current A1 text fixture remains plumbing evidence,
+  not customer-facing security value.
+- **Boundary:** No runtime code, entitlement, Web, provider, database, npm, or
+  Production change occurred. No backlog checkbox changed.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)** from the
+  checkbox file. Older 57-open text in historical goal entries is stale.
+- **Reference:**
+  `docs/shipping/VERGLOS_FINAL_V1_SCOPE_AND_HUNT_DECISION_2026-10-12.md`.
+
 ## 2026-10-11 · QUAL-WEB-006 authenticated account recheck
 
 - **Verification:** Production `/account` remained read-only. Desktop/mobile
