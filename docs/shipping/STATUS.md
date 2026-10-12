@@ -1,5 +1,31 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Public Hunt handoff merged (PR #92)
+
+Public PR #92 merged to `main` at
+`b49375b03435a77f363b5bfda49a303f491da098`. The public CLI now exposes a
+bounded, non-executing `scan --hunt` handoff: after a scan it prints the exact
+`verglos hunt --execute` command and binds the report path, rule, subject, and
+observation. It does not auto-approve, auto-execute, or bypass paid
+capability/trust/approval checks. The public terminal and CI guidance now
+describe this shipped path instead of calling Hunt an unavailable beta shell.
+
+Protected GitHub checks passed on macOS, Ubuntu, and Windows for Node 20, 22,
+and 24, including clean packed-consumer and upgrade/rollback qualification,
+the in-toto release binding, typecheck, and the full test suite. The local CLI
+suite also passed 45 process tests and all package tests. The Windows test
+path comparison was canonicalized so 8.3 temporary paths do not create a
+false failure.
+
+This records public implementation and release evidence only. It does not
+close a backlog checkbox: hosted entitlement, trusted/licensed Hunt recipe
+provenance, Linux/Docker isolation coverage, independent review, and final
+acceptance gates remain open. Score remains **228 checked / 52 unchecked /
+280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/hunt-public-handoff-2026-10-13.md`.
+
 ## 2026-10-13 · Point-5 packed public corpus provenance addendum
 
 The seven local `2.0.0-alpha.1` public archives were installed in a fresh

@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · Public Hunt handoff merged (PR #92)
+
+PR #92 merged the public `scan --hunt` handoff at
+`b49375b03435a77f363b5bfda49a303f491da098`. A scan can now produce the exact
+signed-input execution command for the bounded A1 runtime, while the CLI keeps
+entitlement, trust-store, approval, and exact finding bindings fail-closed.
+Protected cross-platform checks and packed-consumer qualification passed.
+
+This is implementation evidence, not automatic checklist completion. The
+remaining Hunt and Point-5 rows still require their own acceptance evidence,
+including hosted plan entitlement, approved/licensed recipe provenance,
+Linux/Docker isolation coverage, independent review, and final corpus
+acceptance. No checkbox changed; the live score remains **228 checked / 52
+unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/hunt-public-handoff-2026-10-13.md`.
+
 ## 2026-10-13 · Point-5 packed public corpus provenance addendum
 
 The packed seven-package `2.0.0-alpha.1` consumer now has provenance-enabled

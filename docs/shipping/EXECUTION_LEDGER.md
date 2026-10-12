@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Public Hunt handoff merged (PR #92)
+
+- **Public merge:** PR #92 merged to `main` at
+  `b49375b03435a77f363b5bfda49a303f491da098`.
+- **Implemented:** `verglos scan --hunt` now emits a signed execution
+  handoff containing the report path and exact rule/subject/observation
+  bindings. The handoff points to `verglos hunt --execute`; it never grants
+  entitlement, invents approval, or executes a recipe automatically.
+- **User-facing alignment:** terminal output, CI guidance, public README
+  documentation, and CLI README documentation now describe the public
+  bounded Hunt path and its required signed inputs.
+- **Verification:** protected macOS/Ubuntu/Windows Node 20/22/24 matrix
+  passed; in-toto release binding passed; clean packed consumer and
+  upgrade/rollback qualification passed; local full CLI/package tests passed,
+  including 45 process tests.
+- **Privacy/scope:** no provider, database, Production, npm, customer, or
+  source-upload write occurred. This is a public code/release qualification
+  result, not hosted entitlement or legal/provenance approval.
+- **Disposition:** technical Point-3/Point-5 progress only. No checkbox
+  changed; score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-public-handoff-2026-10-13.md`.
+
 ## 2026-10-13 · Point-5 packed public corpus provenance addendum
 
 - **Package:** seven local public archives, version `2.0.0-alpha.1`, packed
