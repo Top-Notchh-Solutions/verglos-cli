@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A2 Docker assurance disclosure merged (PR #98)
+
+Public PR #98 merged at
+`e6e3c0f12a31f9d6084cb772291dcb2abec02a05`. The Docker Hunt adapter now
+reports explicit A2 assurance metadata for container outcomes, including
+read-only input, denied network, dropped capabilities, bounded resources, and
+the host-daemon/platform limitation. Public README coverage and the focused
+adapter assertions were included.
+
+Protected macOS/Ubuntu/Windows Node 20/22/24 checks, self-scan, in-toto,
+build, Hunt tests, CLI tests, and typechecks passed. Sixteen Linux/Docker
+integration cases remain explicit skips pending their pinned integration image
+and Linux isolation run. This does not close HUNT-008 or claim target-code
+recipes/autonomous agents. No checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/hunt-a2-docker-assurance-pr98-2026-10-13.md`.
+
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · TEAM-CLI-001 hosted signer audit
 
 The linked Vercel project was inspected read-only by environment-variable name.

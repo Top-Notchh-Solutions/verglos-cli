@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## A2 Docker assurance disclosure · 2026-10-13
+
+- **Implementation:** Public CLI PR #98 merged at
+  `e6e3c0f12a31f9d6084cb772291dcb2abec02a05`.
+- **Surface:** Docker Hunt adapter and its public documentation now disclose
+  A2 assurance metadata and the host-daemon/platform limitation.
+- **Verification:** Hunt/CLI tests, typechecks, full build, self-scan,
+  in-toto, and protected macOS/Ubuntu/Windows Node 20/22/24 checks passed.
+- **Remaining proof:** sixteen Linux/Docker integration cases are still
+  explicit skips. Target-code recipe families, provenance/licensing,
+  entitlements, review, and final HUNT-008 acceptance remain open.
+- **State:** implementation slice merged; no checkbox changed; score remains
+  **228/52/280 (81.4%)**.
+- **Evidence:**
+  `hunt-a2-docker-assurance-pr98-2026-10-13.md`.
+
 ## TEAM-CLI-001 hosted signer audit · 2026-10-13
 
 - **Evidence:** `team-cli-001-hosted-signer-audit-2026-10-13.md`.

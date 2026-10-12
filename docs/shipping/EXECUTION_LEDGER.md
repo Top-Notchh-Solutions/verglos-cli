@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A2 Docker assurance disclosure merged (PR #98)
+
+- **Public merge:** PR #98 merged at
+  `e6e3c0f12a31f9d6084cb772291dcb2abec02a05`.
+- **Implemented:** Docker Hunt outcomes now disclose A2 assurance metadata:
+  read-only project input, denied network, dropped capabilities, bounded
+  process/resource settings, and the host-daemon/platform limitation.
+- **Verification:** Hunt typecheck/tests, full build, complete CLI tests,
+  self-scan, in-toto, and protected macOS/Ubuntu/Windows Node 20/22/24 checks
+  passed. Sixteen Linux/Docker integration cases remain explicit skips.
+- **Acceptance:** This public-safe slice is merged, but HUNT-008 remains open
+  for target-code recipes, provenance/licensing, supported-rule approval,
+  hosted entitlement, required isolation run, review evidence, and release
+  treatment. No checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a2-docker-assurance-pr98-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%).
+
 ## 2026-10-13 · TEAM-CLI-001 hosted signer audit
 
 - **Read-only result:** the linked Vercel project has no Preview or Production
