@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Point-5 packed public corpus provenance addendum
+
+- **Package:** seven local public archives, version `2.0.0-alpha.1`, packed
+  from qualified head `78251d1b`; public PR #91 is merged to `main` as
+  `13ee73b5dbe2d0e40ff3e47dab692ca3426f90ef`.
+- **Provenance-enabled runs:** NodeGoat
+  `c5cb68a7084e4ae7dcc60e6a98768720a81841e8` — 67 files, 25 findings, score
+  27, complete coverage, exit 0; Juice Shop
+  `1618a611b173b4bf114028e6e02549950606e29d` — 906 files, 39 findings, score
+  3, complete coverage, exit 0.
+- **Supplementary runs:** nodejs-goof
+  `add14ba59e98240d9e00a235dd7d42cd61ae9912` and DVNA
+  `9ba473add536f66ac9007966acb2a775dd31277a` also exited 0 from the packed
+  consumer; both intentionally used `--no-provenance`.
+- **Privacy boundary:** isolated HOME/USERPROFILE, telemetry disabled, no
+  `--verify-secrets`, temporary report directories outside the fixtures, no
+  source/report/finding upload, and no hosted account or npm registry write.
+- **Disposition:** stronger Point-5 evidence only. No checkbox changed;
+  score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/point-5-packed-public-corpus-addendum-2026-10-13.md`.
+
 ## 2026-10-12 · Public packed Hunt runtime qualification
 
 - **Source:** public shipping-worktree runtime commit `6762bf41`, qualified

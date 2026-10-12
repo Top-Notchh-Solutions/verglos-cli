@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Point-5 packed public corpus provenance addendum
+
+The seven local `2.0.0-alpha.1` public archives were installed in a fresh
+temporary npm consumer and used to scan public NodeGoat and Juice Shop
+fixtures from isolated HOME directories. Provenance-enabled scans completed
+with exit 0 and complete coverage: NodeGoat 67 files / 25 findings / score 27;
+Juice Shop 906 files / 39 findings / score 3. Two additional public fixtures
+(nodejs-goof and DVNA) also completed packed scans; those supplementary runs
+intentionally skipped provenance and are not represented as complete
+provenance evidence.
+
+No source, report, credential, or finding was uploaded. This strengthens
+Point 5 only. It does not close publication, hosted entitlement, SCM, Hunt
+provenance, Trivy, legal, independent-review, or final acceptance gates.
+No checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/point-5-packed-public-corpus-addendum-2026-10-13.md`.
+
 ## 2026-10-12 · Public packed Hunt runtime qualification
 
 The public CLI commits `6762bf41`, `9945c5a9`, and `78251d1b` (PR #91, merged

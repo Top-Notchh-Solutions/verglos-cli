@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · Point-5 packed public corpus provenance addendum
+
+The packed seven-package `2.0.0-alpha.1` consumer now has provenance-enabled
+scans for public NodeGoat and Juice Shop fixtures at exact recorded commits.
+Both exited 0 with complete coverage; supplementary packed scans also ran on
+nodejs-goof and DVNA with provenance intentionally disabled. No source or
+finding upload occurred. This strengthens Point 5 but does not satisfy its
+remaining corpus, plan, Hunt, Docker/Trivy, hosted, or acceptance conditions.
+No checkbox changed; the live score remains **228 checked / 52 unchecked /
+280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/point-5-packed-public-corpus-addendum-2026-10-13.md`.
+
 ## 2026-10-12 · Approved contract synchronization
 
 The approved Final V1 contract is
