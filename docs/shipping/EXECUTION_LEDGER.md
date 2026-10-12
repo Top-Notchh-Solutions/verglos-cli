@@ -1,5 +1,32 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Seven A2 reference harnesses merged (PR #100)
+
+- **Public merge:** PR #100 merged at
+  `5bf332fab894a21a61b798eb4c01fc000e84fe68` after all protected platform,
+  self-scan, and in-toto checks passed.
+- **Implemented:** one sanitized deterministic reference harness now exists
+  for each approved A2 family: SQL/NoSQL injection, command injection, path
+  traversal, SSRF, Agent/MCP boundary, safe XSS, and authorization/tenant
+  boundary. The shared test executes all seven through the strict result
+  parser.
+- **Verification:** all seven fixtures passed direct execution in the pinned
+  Docker boundary; CLI tests exited 0, Hunt typecheck passed, full build 8/8
+  passed, and the public protected matrix was green. Sixteen Linux-host
+  integration cases remain explicit skips on the macOS development host.
+- **Boundary:** the fixtures inspect synthetic strings only. They do not read
+  customer source, access a database, use a network, render a browser, invoke
+  tools, or execute arbitrary shell. This is not autonomous AI-agent
+  evidence.
+- **Acceptance:** HUNT-008 remains unchecked for complete per-family
+  qualification, provenance/licensing, supported-rule approval, hosted
+  entitlement, Linux/Docker adversarial evidence, independent review, and
+  final release treatment.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a2-reference-harnesses-pr100-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
 ## 2026-10-13 · A2 target-harness path merged (PR #99)
 
 - **Public merge:** PR #99 merged at

@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## A2 reference harnesses · 2026-10-13
+
+- **Implementation:** Public CLI PR #100 merged at
+  `5bf332fab894a21a61b798eb4c01fc000e84fe68`.
+- **Surface:** seven sanitized reference harness files now correspond to all
+  seven A2 catalog families, and the package test validates each strict
+  `hunt-result` output.
+- **Verification:** direct pinned-Docker execution passed for all seven; CLI
+  tests, Hunt typecheck, full build, self-scan, in-toto, and all protected
+  Ubuntu/macOS/Windows Node 20/22/24 checks passed.
+- **Boundary:** reference fixtures inspect embedded synthetic strings only;
+  no customer source, database, network, browser, tool, secret, or arbitrary
+  shell is involved. The result is not customer-code or autonomous-agent
+  acceptance.
+- **Remaining proof:** complete per-family positive/negative/timeout/failure
+  qualification, rule approval, provenance/licensing, hosted entitlement,
+  Linux/Docker adversarial qualification, independent review, and final
+  release treatment remain open.
+- **State:** implementation merged; no checkbox changed; score remains
+  **228/52/280 (81.4%)**.
+- **Evidence:** `hunt-a2-reference-harnesses-pr100-2026-10-13.md`.
+
 ## A2 target-harness implementation · 2026-10-13
 
 - **Implementation:** Public CLI PR #99 merged at

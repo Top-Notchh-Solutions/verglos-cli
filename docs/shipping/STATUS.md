@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Seven A2 reference harnesses merged (PR #100)
+
+Public PR #100 merged at
+`5bf332fab894a21a61b798eb4c01fc000e84fe68` after the protected Ubuntu,
+macOS, and Windows Node 20/22/24 matrix, self-scan, and in-toto release
+binding passed. Each of the seven approved A2 families now has a sanitized
+deterministic public reference harness, and the package test executes every
+one through the strict bounded result parser.
+
+All seven were also run directly through the pinned Docker boundary with
+network denial, read-only mounts, dropped capabilities, non-root execution,
+and bounded resources. This is safe fixture evidence, not customer-code
+qualification or an autonomous AI-agent claim. HUNT-008 remains open for
+per-family acceptance, provenance/licensing, hosted entitlement,
+Linux/Docker adversarial qualification, independent review, and release
+treatment. No checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/hunt-a2-reference-harnesses-pr100-2026-10-13.md`.
+
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · A2 target-harness path merged (PR #99)
 
 Public PR #99 merged at
