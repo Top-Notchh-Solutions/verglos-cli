@@ -2,8 +2,8 @@
 
 ## 2026-10-12 · Public packed Hunt runtime qualification
 
-- **Source:** public shipping-worktree commit `6762bf41`; PR #91; package
-  version `2.0.0-alpha.1`.
+- **Source:** public shipping-worktree runtime commit `6762bf41`, qualified
+  head `9945c5a9`; PR #91; package version `2.0.0-alpha.1`.
 - **Boundary:** `@verglos/hunt` is now part of the seven-package public set;
   the CLI and MCP host bridge reach it only through signed recipe, trust,
   approval, subject, observation, and capability bindings.

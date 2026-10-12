@@ -2,7 +2,8 @@
 
 **Evidence type:** repository-owned packed-package qualification
 **Status:** technical Point-3/Point-5 progress; not release acceptance
-**Public source commit:** `6762bf41` (`feat(cli): ship bounded Hunt runtime in public packages`)
+**Public runtime commit:** `6762bf41` (`feat(cli): ship bounded Hunt runtime in public packages`)
+**Qualified public head:** `9945c5a9` (`fix(release): audit the public Hunt package`)
 **Public PR:** `https://github.com/Top-Notchh-Solutions/verglos-cli/pull/91`
 **Package version:** `2.0.0-alpha.1`
 
@@ -16,7 +17,10 @@ supported signed recipe path; arbitrary model-generated shell is not exposed.
 
 ## Qualification
 
-The following checks exited `0` on the exact committed source:
+The runtime checks exited `0` on the runtime commit. The final package-content
+audit and release/package regression checks exited `0` again on qualified
+head `9945c5a9` after the self-scan caught and fixed the stale six-package
+audit list.
 
 ```text
 pnpm --filter @verglos/shared test
@@ -24,6 +28,7 @@ pnpm --filter @verglos/hunt test
 pnpm --filter @verglos/mcp test
 pnpm --filter verglos test
 node --test scripts/pack-public-packages.test.mjs scripts/verify-clean-consumer.test.mjs scripts/package-surface-audit.test.mjs scripts/verify-release-artifacts.test.mjs
+node scripts/check-package-contents.mjs
 pnpm pack:public
 node scripts/check-packed-manifests.mjs .artifacts/public-packages
 node scripts/verify-clean-consumer.mjs .artifacts/public-packages
