@@ -21,6 +21,9 @@ export type HuntRuntimeResult = Readonly<{
 export type HuntRuntime = Readonly<{
   validateSupportedHuntRecipe(value: unknown): Readonly<{ supported: true; recipeDigest: string }> | Readonly<{ supported: false; reason: string }>;
   RestrictedProcessAdapter: new (recipe: HuntRecipe) => unknown;
+  DockerSandboxAdapter: new (options: { readonly image: string; readonly imageDigest: string }) => unknown;
+  HUNT_TARGET_HARNESS_IMAGE: string;
+  HUNT_TARGET_HARNESS_IMAGE_DIGEST: string;
   runHunt(report: ScanResult, options: unknown): Promise<HuntRuntimeResult>;
 }>;
 
@@ -36,7 +39,7 @@ export async function loadHuntRuntime(loader: HuntRuntimeLoader = () => import(H
   }
   if (!candidate || typeof candidate !== "object") throw new Error("HUNT_RUNTIME_INVALID");
   const runtime = candidate as Record<string, unknown>;
-  if (typeof runtime.validateSupportedHuntRecipe !== "function" || typeof runtime.RestrictedProcessAdapter !== "function" || typeof runtime.runHunt !== "function") {
+  if (typeof runtime.validateSupportedHuntRecipe !== "function" || typeof runtime.RestrictedProcessAdapter !== "function" || typeof runtime.DockerSandboxAdapter !== "function" || typeof runtime.HUNT_TARGET_HARNESS_IMAGE !== "string" || typeof runtime.HUNT_TARGET_HARNESS_IMAGE_DIGEST !== "string" || typeof runtime.runHunt !== "function") {
     throw new Error("HUNT_RUNTIME_INVALID");
   }
   return runtime as unknown as HuntRuntime;

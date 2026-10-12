@@ -6,6 +6,7 @@ import { test } from "node:test";
 import { bindHuntExecution, createApprovalReceipt, HuntExecutionBindingSchema, parseHuntRecipe } from "@verglos/shared";
 import { DockerSandboxAdapter } from "./docker-sandbox-adapter.js";
 import { createHuntTestTrustStore, HUNT_TEST_TRUST_KEY_ID } from "./hunt-trust-test-support.js";
+import { TARGET_HARNESS_ASSERTION } from "./target-harness.js";
 
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
 const imageDigest = `sha256:${"b".repeat(64)}`;
@@ -74,6 +75,31 @@ test("Docker sandbox adapter classifies a supported non-zero exit assertion as f
     assert.equal(result.verdict, "false");
     assert.equal(result.canonicalVerdict, "not-reproduced");
     assert.match(result.reason, /exit code 7/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Docker sandbox adapter classifies a bounded target-code harness result", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-docker-target-harness-"));
+  try {
+    const bound = binding();
+    const targetBinding = { ...bound, command: ["node", "/workspace/.verglos/hunt/sql-nosql-injection.mjs"], assertions: [TARGET_HARNESS_ASSERTION] };
+    const adapter = new DockerSandboxAdapter({ image: "docker.io/library/node", imageDigest, run: async () => ({ stdout: '{"verglos":"hunt-result","verdict":"confirmed","summary":"bounded local harness reproduced the approved condition"}', stderr: "", exitCode: 0 }) });
+    const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: targetBinding });
+    assert.equal(result.verdict, "true");
+    assert.equal(result.canonicalVerdict, "confirmed");
+    assert.match(result.reason, /bounded local harness/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Docker sandbox adapter marks malformed target-code harness output unsupported", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-docker-target-harness-"));
+  try {
+    const bound = binding();
+    const targetBinding = { ...bound, command: ["node", "/workspace/.verglos/hunt/sql-nosql-injection.mjs"], assertions: [TARGET_HARNESS_ASSERTION] };
+    const adapter = new DockerSandboxAdapter({ image: "docker.io/library/node", imageDigest, run: async () => ({ stdout: "not-json", stderr: "", exitCode: 0 }) });
+    const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: targetBinding });
+    assert.equal(result.verdict, "not_attemptable");
+    assert.equal(result.canonicalVerdict, "not-supported");
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

@@ -3,6 +3,7 @@ import { ContentDigestSchema, SubjectIdSchema } from "./subject.js";
 import { StableContractIdSchema } from "./engine.js";
 
 const noControls = (value: string) => !/[\u0000-\u001f\u007f]/.test(value);
+const HuntRuleIdSchema = z.string().min(1).max(128).regex(/^[A-Za-z][A-Za-z0-9]*(?:[._:-][A-Za-z0-9]+)*$/u);
 
 function parseNetworkOrigin(value: string): URL | undefined {
   try { return new URL(value); } catch { return undefined; }
@@ -24,7 +25,9 @@ export const HuntRecipeSchema = z.object({
   schemaId: z.literal("urn:verglos:schema:hunt-recipe"),
   schemaVersion: z.literal("1.0.0"),
   recipeId: StableContractIdSchema,
-  ruleId: StableContractIdSchema,
+  // Scanner rule IDs are stable public identifiers but retain their
+  // human-readable uppercase form (for example D1-001 and AGENT-001).
+  ruleId: HuntRuleIdSchema,
   targetSubjectId: SubjectIdSchema,
   imageDigest: ContentDigestSchema,
   command: z.array(z.string().min(1).max(4096).refine(noControls, "command contains control characters")).min(1).max(32),

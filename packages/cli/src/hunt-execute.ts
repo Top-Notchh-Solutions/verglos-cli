@@ -77,9 +77,13 @@ export async function runHuntRecipe(input: HuntRecipeExecutionInput): Promise<Hu
     const supported = runtime.validateSupportedHuntRecipe(recipe);
     if (!supported.supported) throw new Error(`recipe is not in the supported bounded catalog (${supported.reason})`);
     const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: executionAt };
+    const isContainerRecipe = recipe.isolation === "container";
+    if (isContainerRecipe && `${recipe.imageDigest.algorithm}:${recipe.imageDigest.value}` !== runtime.HUNT_TARGET_HARNESS_IMAGE_DIGEST) throw new Error("target harness image digest is not the pinned public runtime image");
     const result = await runtime.runHunt(report, {
-      adapter: new runtime.RestrictedProcessAdapter(recipe),
-      sandbox: "restricted-process",
+      adapter: isContainerRecipe
+        ? new runtime.DockerSandboxAdapter({ image: runtime.HUNT_TARGET_HARNESS_IMAGE, imageDigest: runtime.HUNT_TARGET_HARNESS_IMAGE_DIGEST })
+        : new runtime.RestrictedProcessAdapter(recipe),
+      sandbox: isContainerRecipe ? "docker" : "restricted-process",
       findingId: input.findingId,
       execution,
       projectRoot: report.projectRoot,
