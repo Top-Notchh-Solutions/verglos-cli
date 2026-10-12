@@ -5,9 +5,11 @@
 
 ## What is already verified
 
-The existing CLI evidence describes a fixed A1 utf8-contains recipe catalog,
-with adapter, command, assertion, input, network, cleanup, redaction, and
-positive/negative/timeout/adapter-failure expectations.
+The current public CLI evidence describes an A1 fixture-probe catalog with
+five first-party deterministic probes. Each has an adapter, command,
+assertion, bounded input, denied network, cleanup, redaction, and
+positive/negative/timeout/adapter-failure expectations. These are still
+fixture-level checks; they are not target-code attack agents.
 
 Relevant existing evidence:
 
@@ -84,4 +86,3 @@ Reply with one line per enabled rule:
     If first-party: confirm Top Notchh Solutions authored it
 
 No commit SHA is needed from you. Codex will read it from Git.
-

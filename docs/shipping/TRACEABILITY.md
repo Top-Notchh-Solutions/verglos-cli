@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## A1 bounded fixture-probe catalog · 2026-10-13
+
+- **Implementation:** Public CLI PR #96 merged at
+  `9900ebb4f051595c202d11645f91a47f9bd85114`; the A1 catalog now contains
+  five deterministic built-in fixture probes with four declared fixture
+  outcomes each.
+- **Verification:** dependency-aware build 8/8, complete Hunt/CLI tests,
+  typechecks, self-scan, in-toto binding, and all macOS/Ubuntu/Windows Node
+  20/22/24 protected jobs passed.
+- **Boundary:** no target-source access, network request, arbitrary shell,
+  model-generated command, or unsigned recipe execution; A1 remains below the
+  OS/security-isolation boundary. Docker/Linux integration cases remain
+  opt-in/skipped pending a pinned integration image.
+- **Acceptance:** HUNT-008 remains open for target-code recipe families,
+  provenance/licensing, hosted entitlement, required Linux/Docker assurance,
+  independent review, and release treatment. No checkbox changed; score is
+  **228/52/280 (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a1-fixture-catalog-pr96-2026-10-13.md`.
+
 ## Final V1 feature coverage synchronization · 2026-10-13
 
 - **Contract:** `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`.

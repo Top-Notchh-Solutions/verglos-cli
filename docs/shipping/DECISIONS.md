@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-13 · Expand A1 with deterministic fixture probes
+
+- **Decision:** Keep the A1 execution family bounded and first-party while
+  adding five deterministic fixture probes: UTF-8 containment, path
+  traversal, command-injection shape, private/local SSRF classification, and
+  tenant-boundary mismatch.
+- **Reason:** This creates useful, testable Hunt coverage without pretending
+  that fixture classification is target-code attack execution or an autonomous
+  AI agent.
+- **Safety:** The worker remains no-network, no-source-access, one-process,
+  bounded, redacted, and restricted to the exact built-in command catalog.
+- **Disposition:** Public PR #96 merged; HUNT-008 remains open for the real
+  target-code recipe families and its external/release evidence gates. No
+  checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+  (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a1-fixture-catalog-pr96-2026-10-13.md`.
+
 ## 2026-10-13 · Make the feature coverage matrix the cross-reference
 
 - **Decision:** Keep the approved Final V1 contract, existing 280 counted

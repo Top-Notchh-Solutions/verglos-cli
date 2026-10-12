@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A1 bounded fixture-probe catalog merged (PR #96)
+
+Public PR #96 merged at
+`9900ebb4f051595c202d11645f91a47f9bd85114`. The existing A1 bounded worker
+now admits five deterministic first-party fixture probes: UTF-8 containment,
+path-traversal shape, command-injection shape, private/local SSRF target
+classification, and tenant-boundary mismatch. Each catalog entry declares
+positive, negative, timeout, and adapter-failure fixture outcomes.
+
+The full dependency-aware build, Hunt suite, CLI suite, typechecks, self-scan,
+in-toto binding, and macOS/Ubuntu/Windows Node 20/22/24 protected checks
+passed. These probes read no target source, make no network request, accept no
+arbitrary shell or model-generated command, and explicitly remain below the
+OS/security-isolation boundary. Docker/Linux integration cases remain
+opt-in/skipped pending their pinned integration image.
+
+This strengthens the A1 implementation surface but does not close HUNT-008 or
+downstream rows: target-code recipe families, provenance/licensing,
+hosted entitlement, required Linux/Docker assurance, independent review, and
+final acceptance remain open. No checkbox changed; score remains **228 checked
+/ 52 unchecked / 280 total (81.4%)**.
+
+Evidence:
+`docs/shipping/evidence/hunt-a1-fixture-catalog-pr96-2026-10-13.md`.
+
 ## 2026-10-13 · Final V1 feature coverage synchronized
 
 The private tracker now has one cross-feature map at

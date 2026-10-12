@@ -24,7 +24,7 @@ score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
 | Web account and hosted evidence | Optional/no account required | Private records/history | Organization control plane | Client workspaces/handoffs | Private governance | `PLAN-WEB-001..015`, `PRO-001..010`, `FINAL-WEB-001..008` | Web capability exists in code, but several hosted and final acceptance rows remain open. |
 | MCP and AI-assisted development | Basic checks/explanations | Full Hunt/MCP depth | Shared policy/approvals | Client-safe handoff | Private runners/policy | `AGENT-001..007`, `HUNT-010` | MCP must never silently approve, sign, publish, mutate source, or bypass Hunt controls. |
 | Attest and portable `.vgl` Release Records | Local verification/evidence | Signed local/private records | Shared approvals/audit | Public/client verification | Customer roots/KMS/HSM options | `RECORD-001..012`, `DIST-001..006` | Record contract is defined; end-to-end hosted and release evidence is not yet universally complete. |
-| Bounded Hunt verification | Safe starter | Full supported catalogue | Shared org policy | Client redaction/handoff | Private runners/custom recipes | `HUNT-001..011`, `QUAL-CLI-004` | Only A1 is currently in the supported catalog. Other recipes are contract scope, not silently completed. |
+| Bounded Hunt verification | Safe starter | Full supported catalogue | Shared org policy | Client redaction/handoff | Private runners/custom recipes | `HUNT-001..011`, `QUAL-CLI-004` | A1 currently contains five deterministic fixture probes. Actual target-code recipe families and their acceptance evidence remain open. |
 | SCM organization workflows | Local/no integration required | Personal/private projects where enabled | GitHub/GitLab org checks | Client repositories | Enterprise governance | `TEAM-CLI-001..002`, `TEAM-WEB-*`, `GITHUB-WEB-*` | Code-side hardening is merged; hosted signer, installation, binding, webhook, and removal evidence remain separate gates. |
 | Cards-only prepaid billing | Not required | One-time fixed term/manual renewal | Shared org entitlements | Client billing views | Contracted billing/governance | `PLAN-CLI-001..004`, `PLAN-WEB-001..015`, `PRO-*`, `ENT-*` | V1 does not promise automatic recurring renewal. Provider lifecycle acceptance remains evidence-driven. |
 
@@ -86,17 +86,21 @@ adversarial sandbox qualification.
 | --- | --- | --- | --- |
 | `HUNT-008-R1` | SQL/NoSQL injection | Deterministic local fixture, no external database, safe adapter, positive/negative/timeout/failure cases | Planned contract scope; not in current supported catalog. |
 | `HUNT-008-R2` | Command injection | Non-privileged fixture, no host shell escape, denied network, cleanup | Planned contract scope; not in current supported catalog. |
-| `HUNT-008-R3` | Path traversal/file boundary | Temporary fixture root, allowlisted files only, no host paths/devices | Planned contract scope; not in current supported catalog. |
-| `HUNT-008-R4` | SSRF | Local fake target only, network denied except declared fixture adapter | Planned contract scope; not in current supported catalog. |
+| `HUNT-008-R3` | Path traversal/file boundary | Temporary fixture root, allowlisted files only, no host paths/devices | A1 has fixture-level path-shape classification; target-code/file-boundary recipe remains open. |
+| `HUNT-008-R4` | SSRF | Local fake target only, network denied except declared fixture adapter | A1 has no-network private/local target classification; target-code/fixture-adapter recipe remains open. |
 | `HUNT-008-R5` | Agent/MCP tool boundary | Fake tools, no real credentials/network, approval and output redaction | Planned contract scope; not in current supported catalog. |
 | `HUNT-008-R6` | XSS where a deterministic safe fixture exists | No remote browser target, bounded fixture, redacted output | Planned contract scope; not in current supported catalog. |
 | `HUNT-008-R7` | Authorization/tenant/mass-assignment | In-memory or disposable fixture with explicit tenant identities | Planned contract scope; not in current supported catalog. |
 
 ### 4.3 Current Hunt implementation truth
 
-- The supported catalog currently contains **one** recipe: `a1-utf8-contains`.
-- A1 has positive, negative, timeout, and adapter-failure fixtures and a
-  bounded restricted-process path.
+- The supported catalog contains the A1 family with **five** deterministic
+  built-in fixture probes: `a1-utf8-contains`, `a1-path-traversal`,
+  `a1-command-injection`, `a1-ssrf-target`, and `a1-tenant-boundary`.
+- Each A1 probe declares positive, negative, timeout, and adapter-failure
+  fixtures and uses the bounded restricted-process path.
+- These are fixture-level classifications only; they do not execute target
+  code or replace the seven target-code recipe sub-scopes.
 - The A1 worker is a technical bounded worker, not an autonomous AI agent and
   not an OS/security isolation boundary.
 - The other seven recipe sub-scopes above are not to be represented as

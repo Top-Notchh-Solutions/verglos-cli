@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A1 bounded fixture-probe catalog merged (PR #96)
+
+- **Public merge:** PR #96 merged at
+  `9900ebb4f051595c202d11645f91a47f9bd85114` from branch commit `0cd1878c`.
+- **Implemented:** the supported A1 catalog now contains five deterministic
+  first-party fixture probes: UTF-8 containment, path-traversal shape,
+  command-injection shape, private/local SSRF target classification, and
+  tenant-boundary mismatch. Each declares positive, negative, timeout, and
+  adapter-failure fixtures.
+- **Verification:** dependency-aware build 8/8, Hunt tests, complete CLI
+  tests, CLI/Hunt typechecks, self-scan, in-toto binding, and all protected
+  macOS/Ubuntu/Windows Node 20/22/24 jobs passed.
+- **Boundary:** probes are no-network, no-source-access, deterministic worker
+  fixtures. They do not execute target code, arbitrary shell, or AI-generated
+  commands and are not an OS/security isolation boundary. Docker/Linux
+  integration cases remain opt-in/skipped pending the pinned integration image.
+- **Acceptance:** HUNT-008 remains open for actual target-code recipe families,
+  supported-rule approval, provenance/licensing, hosted entitlement,
+  Linux/Docker qualification where required, independent review, and release
+  treatment. No checkbox changed; score remains **228 checked / 52 unchecked /
+  280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a1-fixture-catalog-pr96-2026-10-13.md`.
+
 ## 2026-10-13 · Final V1 feature coverage and execution ledger baseline
 
 - **Contract:** `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`.
@@ -11,10 +35,10 @@
   Pro, Team, Studio, and Enterprise; Cards-only prepaid/manual renewal; Web;
   Verglos organizations and GitHub/GitLab; Studio/Enterprise controls;
   distribution; and Point-5 public TS/JS corpus acceptance.
-- **Current implementation truth:** only the A1 Hunt recipe is in the
-  supported catalog. The other recipe sub-scopes are planned contract work;
-  four Hunt roles describe controlled responsibilities, not autonomous agents
-  already deployed.
+- **Current implementation truth:** the supported catalog is the A1 Hunt
+  family with five deterministic built-in fixture probes. The other recipe
+  sub-scopes are planned target-code contract work; four Hunt roles describe
+  controlled responsibilities, not autonomous agents already deployed.
 - **Execution rule:** implement and qualify existing backlog rows in
   dependency order. For a genuine blocker record owner, missing artifact,
   safe next action, and review date, then move to the next dependency-ready

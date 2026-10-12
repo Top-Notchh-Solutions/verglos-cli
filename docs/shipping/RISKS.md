@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## 2026-10-13 · R-HUNT-FIXTURE-VS-TARGET-001 fixture catalog boundary
+
+- **Risk:** The expanded A1 fixture catalog could be mistaken for five
+  autonomous attack agents or for target-code vulnerability verification.
+- **Mitigation:** The public runtime and private evidence call these
+  deterministic fixture probes. They use no target source, no network, no
+  arbitrary shell, no model-generated command, and explicitly disclose that
+  they are not an OS/security isolation boundary. The seven target-code recipe
+  sub-scopes remain separate backlog work.
+- **Status:** Public PR #96 merged and all protected checks passed; no
+  acceptance checkbox is closed by this implementation alone.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a1-fixture-catalog-pr96-2026-10-13.md`.
+
 ## 2026-10-13 · R-CONTRACT-COVERAGE-001 feature/implementation drift
 
 - **Risk:** The approved Final V1 contract could be mistaken for an inventory
@@ -11,9 +25,9 @@
   The backlog remains the checkbox authority.
 - **Current status:** Mitigated as a documentation risk; implementation and
   acceptance rows remain open where the matrix says they are open.
-- **Residual risk:** Only A1 is currently in the supported Hunt catalog. No
-  independent reviewer, provider, customer, or legal evidence is invented by
-  this entry.
+- **Residual risk:** Only the A1 fixture family is currently supported; the
+  target-code recipe families remain open. No independent reviewer, provider,
+  customer, or legal evidence is invented by this entry.
 - **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**.
 
 ## 2026-10-11 · R-QUAL-WEB-006 account-shell evidence boundary

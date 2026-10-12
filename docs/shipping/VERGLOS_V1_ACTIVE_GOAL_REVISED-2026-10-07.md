@@ -14,8 +14,9 @@ The implementation queue is therefore explicit:
    manifests, dependency/supply-chain engines, imports, Trivy boundary, and
    artifact provenance;
 2. bounded Hunt roles and recipe sub-scopes owned by `HUNT-008` through
-   `HUNT-011` (the current supported catalog still contains only A1; planned
-   recipes are not to be claimed as implemented);
+   `HUNT-011` (the current supported catalog is the A1 family with five
+   deterministic fixture probes; target-code recipes are not to be claimed as
+   implemented);
 3. MCP/AI controls, Attest, portable `.vgl` Release Records, and release
    provenance;
 4. Free/Pro/Team/Studio/Enterprise entitlements, Cards-only prepaid billing,
