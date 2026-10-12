@@ -8960,3 +8960,24 @@ it was not sent and contains no credentials or customer data.
 - **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
   changed.
 - **Evidence:** `docs/shipping/evidence/hunt-a1-utf8-contains-fixtures-2026-10-12.md`.
+
+## 2026-10-13 · public repository boundary audit
+
+- **Scope:** Read-only inspection of the public CLI remote tree and remote
+  branch tips, plus local public CLI, shipping-worktree, and Web worktrees.
+- **Result:** Current public `origin/main` at `53448684` contains no
+  `docs/shipping/` tree. Two older public branches still contain 99 internal
+  shipping files each; they remain a cleanup item and were not altered.
+- **Security scan:** No literal Vercel, Razorpay, GitHub/GitLab token,
+  private-key, or credentialed Postgres marker was found in the live public
+  remote refs. The local public `.env` is ignored and untracked. The tracked
+  disclosure research file had no literal credential marker in the bounded
+  scan.
+- **Disposition:** Full shipping records remain private. No public file was
+  staged, committed, pushed, deleted, or rewritten. Do not use broad staging
+  commands in the public CLI worktree. Remote branch deletion requires an
+  explicit owner decision.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/public-repository-boundary-audit-2026-10-13.md`.

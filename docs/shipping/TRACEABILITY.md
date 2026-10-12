@@ -4420,6 +4420,17 @@ Lighthouse Accessibility/Best Practices were 100 on the observed surfaces.
 Human screen-reader, large-data, complete-route, and field/CrUX gates remain
 open. No checkbox changed. See
 `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
+
+## PUBLIC-BOUNDARY-001 public repository safety · 2026-10-13
+
+The current public CLI `origin/main` was inspected at `53448684`; the private
+shipping tree is absent from that tip. Two older public branches still carry
+internal shipping documentation and therefore remain a public-boundary
+cleanup item. A bounded scan found no literal provider/API token, private key,
+or credentialed Postgres URL in the live public remote refs. Local untracked
+shipping files and the ignored `.env` were not staged. No backlog checkbox
+changed. See
+`docs/shipping/evidence/public-repository-boundary-audit-2026-10-13.md`.
 ## Acceptance · 2026-10-10 · authoritative-source substrate verification
 
 - **Sources:** CLI `origin/main` `f5686b5c` and Web `51e07f5` were passed

@@ -1942,3 +1942,14 @@ available for the selected target. Owner: Verglos release owner with the
 Razorpay Test Mode account owner; review by 2026-10-17. Keep Gate 4 and
 Production billing fail-closed until a supported recurring-card fixture or
 provider control produces authorization/capture and reconciliation evidence.
+
+R-PUBLIC-BOUNDARY update (2026-10-13): The current public CLI `origin/main`
+does not contain the private shipping tree, and a bounded scan found no
+literal provider/API token, private key, or credentialed Postgres URL in the
+live public remote refs. However, two older public branches still expose 99
+internal shipping files each, and the public worktree contains many untracked
+private shipping documents plus an ignored local `.env`. Do not use broad
+staging or copy private evidence into the public repository. Historical branch
+cleanup is pending an explicit owner decision because remote branch deletion
+is destructive. Evidence:
+`docs/shipping/evidence/public-repository-boundary-audit-2026-10-13.md`.
