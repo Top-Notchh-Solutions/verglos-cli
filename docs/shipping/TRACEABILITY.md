@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## A2 target-harness implementation · 2026-10-13
+
+- **Implementation:** Public CLI PR #99 merged at
+  `8ff0e0cd2a236b107728e606e22f0364c4ddca8f`.
+- **Surface:** seven A2 target-harness recipe families, pinned Docker image
+  binding, strict result protocol, and Docker adapter classification; the
+  eight A1 fixture probes remain unchanged.
+- **Verification:** local pinned Docker fixture run, Hunt/CLI tests, shared
+  typecheck, full build, diff check, self-scan, in-toto, and all protected
+  Ubuntu/macOS/Windows Node 20/22/24 checks passed.
+- **Boundary:** deterministic bounded worker only. No arbitrary shell,
+  model-generated command, customer source, secret, network request, or
+  autonomous AI agent is implied. Host-daemon and Linux-host limitations are
+  disclosed.
+- **Remaining proof:** rule provenance/licensing and approval, hosted
+  entitlement, Linux/Docker adversarial qualification, independent review, and
+  final HUNT-008/HUNT-009/HUNT-011 acceptance remain open.
+- **State:** implementation merged; no checkbox changed; score remains
+  **228/52/280 (81.4%)**.
+- **Evidence:** `hunt-a2-target-harness-pr99-2026-10-13.md`.
+
 ## A2 Docker assurance disclosure · 2026-10-13
 
 - **Implementation:** Public CLI PR #98 merged at

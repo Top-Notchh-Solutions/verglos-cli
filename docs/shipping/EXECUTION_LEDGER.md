@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A2 target-harness path merged (PR #99)
+
+- **Public merge:** PR #99 merged at
+  `8ff0e0cd2a236b107728e606e22f0364c4ddca8f` after all protected platform,
+  self-scan, and in-toto checks passed.
+- **Implemented:** seven bounded A2 target-harness recipe families now have
+  catalog descriptors, stable rule IDs, a pinned Node image digest, a fixed
+  Docker command contract, and strict result parsing. The eight A1 fixture
+  probes remain available. The four Hunt roles remain controlled
+  responsibilities, not autonomous AI agents.
+- **Verification:** local pinned Docker execution produced a confirmed result;
+  Hunt tests, CLI tests (45 passed), shared typecheck, full build (8/8), and
+  `git diff --check` passed. Linux-host Docker integration cases remain
+  explicit skips where the macOS host cannot prove Linux namespace behavior.
+- **Acceptance:** implementation progress only. HUNT-008 remains unchecked for
+  provenance/licensing, supported-rule approval, hosted entitlement, required
+  Linux/Docker qualification, independent review, and final release treatment.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-a2-target-harness-pr99-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
 ## 2026-10-13 · A2 Docker assurance disclosure merged (PR #98)
 
 - **Public merge:** PR #98 merged at

@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A2 target-harness path merged (PR #99)
+
+Public PR #99 merged at
+`8ff0e0cd2a236b107728e606e22f0364c4ddca8f` after the protected Ubuntu,
+macOS, and Windows Node 20/22/24 matrix, self-scan, and in-toto release
+binding passed. The public CLI now has seven bounded A2 target-harness recipe
+families—SQL/NoSQL injection, command injection, path traversal, SSRF,
+Agent/MCP boundary, safe XSS, and authorization/tenant boundary—alongside the
+eight A1 fixture probes.
+
+The A2 path uses a pinned Node Docker image and strict one-line result protocol;
+invalid output, non-zero execution, and infrastructure failures cannot become
+security verdicts. A real local Docker run produced a confirmed result from the
+public SQL/NoSQL fixture. This is a bounded deterministic worker, not an
+autonomous AI agent.
+
+This does not close HUNT-008. Provenance/licensing, supported-rule approval,
+hosted entitlement, required Linux/Docker qualification, independent review,
+and final release treatment remain open. No checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/hunt-a2-target-harness-pr99-2026-10-13.md`.
+
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · A2 Docker assurance disclosure merged (PR #98)
 
 Public PR #98 merged at
