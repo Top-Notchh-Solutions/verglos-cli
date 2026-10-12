@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · TEAM-CLI-001 hosted signer audit
+
+- **Read-only result:** the linked Vercel project has no Preview or Production
+  environment variable names for `VERGLOS_ORGANIZATION_POLICY_PRIVATE_KEY`,
+  `VERGLOS_ORGANIZATION_POLICY_SIGNER_ID`, or
+  `VERGLOS_ORGANIZATION_POLICY_ISSUER`.
+- **Reconciled code:** `.env.example`, the Web signing route, and the CLI
+  verifier/cache path agree on the required signer contract and fail closed
+  when it is absent or partial.
+- **No mutation:** no secret values were printed or stored; no Vercel, Web,
+  database, SCM, or Production write occurred.
+- **Acceptance:** TEAM-CLI-001 remains unchecked pending isolated signer and
+  public trust-root configuration, policy-row/repository binding, and live
+  fetch/cache/offline/cross-tenant evidence.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-hosted-signer-audit-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
 ## 2026-10-13 · A1 recipe-family fixture catalog merged (PR #97)
 
 - **Public merge:** PR #97 merged at

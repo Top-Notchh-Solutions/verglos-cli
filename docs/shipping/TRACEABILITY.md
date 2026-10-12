@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 hosted signer audit · 2026-10-13
+
+- **Evidence:** `team-cli-001-hosted-signer-audit-2026-10-13.md`.
+- **Current truth:** the linked Vercel project has no hosted organization-
+  policy signer variable names in Preview or Production. The Web route and CLI
+  client are fail-closed when the signer/trust-root is absent.
+- **Required next proof:** isolated signer and public trust-root setup,
+  canonical published policy row, authorized repository binding, then live
+  remote/cache/offline/cross-tenant qualification.
+- **Closure:** no checkbox changed; TEAM-CLI-001 remains open.
+
 ## A1 recipe-family fixture catalog · 2026-10-13
 
 - **Implementation:** Public CLI PR #97 merged at

@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · TEAM-CLI-001 hosted signer audit
+
+The linked Vercel project was inspected read-only by environment-variable name.
+Neither Preview nor Production currently has
+`VERGLOS_ORGANIZATION_POLICY_PRIVATE_KEY`,
+`VERGLOS_ORGANIZATION_POLICY_SIGNER_ID`, or
+`VERGLOS_ORGANIZATION_POLICY_ISSUER`. The Web route and CLI verification/cache
+implementation remain fail-closed and code-complete, but no live signed policy
+fetch can be qualified until the isolated signer/trust-root, canonical policy
+row, and authorized repository binding exist. No secret value was printed, no
+hosted or database write occurred, and no checkbox changed.
+
+Evidence:
+`docs/shipping/evidence/team-cli-001-hosted-signer-audit-2026-10-13.md`.
+
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · A1 recipe-family fixture catalog merged (PR #97)
 
 Public PR #97 merged at
