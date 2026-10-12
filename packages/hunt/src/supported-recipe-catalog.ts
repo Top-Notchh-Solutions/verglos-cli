@@ -81,6 +81,48 @@ export const SUPPORTED_HUNT_RECIPE_CATALOG = Object.freeze([
       { name: "adapter-failure", expected: "environment-error" },
     ]),
   },
+  {
+    recipeId: "a1-sql-injection",
+    ruleId: "hunt.a1.sql-injection",
+    adapter: "restricted-process",
+    command: Object.freeze(["verglos-probe", "sql-injection"]),
+    assertions: Object.freeze(["probe result is true"]),
+    requiredInputs: Object.freeze(["input"]),
+    fixtures: Object.freeze([
+      { name: "positive", expected: "confirmed" },
+      { name: "negative", expected: "not-reproduced" },
+      { name: "timeout", expected: "inconclusive" },
+      { name: "adapter-failure", expected: "environment-error" },
+    ]),
+  },
+  {
+    recipeId: "a1-xss-safe",
+    ruleId: "hunt.a1.xss-safe",
+    adapter: "restricted-process",
+    command: Object.freeze(["verglos-probe", "xss-safe"]),
+    assertions: Object.freeze(["probe result is true"]),
+    requiredInputs: Object.freeze(["html"]),
+    fixtures: Object.freeze([
+      { name: "positive", expected: "confirmed" },
+      { name: "negative", expected: "not-reproduced" },
+      { name: "timeout", expected: "inconclusive" },
+      { name: "adapter-failure", expected: "environment-error" },
+    ]),
+  },
+  {
+    recipeId: "a1-agent-boundary",
+    ruleId: "hunt.a1.agent-boundary",
+    adapter: "restricted-process",
+    command: Object.freeze(["verglos-probe", "agent-boundary"]),
+    assertions: Object.freeze(["probe result is true"]),
+    requiredInputs: Object.freeze(["allowlist", "tool"]),
+    fixtures: Object.freeze([
+      { name: "positive", expected: "confirmed" },
+      { name: "negative", expected: "not-reproduced" },
+      { name: "timeout", expected: "inconclusive" },
+      { name: "adapter-failure", expected: "environment-error" },
+    ]),
+  },
 ] as const);
 
 export type SupportedHuntRecipe = (typeof SUPPORTED_HUNT_RECIPE_CATALOG)[number];

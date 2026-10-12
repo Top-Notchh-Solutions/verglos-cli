@@ -37,10 +37,14 @@ for (const descriptor of SUPPORTED_HUNT_RECIPE_CATALOG.slice(1)) {
   test(`catalog accepts bounded ${descriptor.recipeId}`, () => {
     const inputs = Object.fromEntries(descriptor.requiredInputs.map((name) => [name,
       name === "path" ? "safe/file.txt" :
-        name === "input" ? "echo-safe" :
+        name === "input" && descriptor.recipeId === "a1-sql-injection" ? "parameterized query" :
+          name === "input" ? "echo-safe" :
           name === "url" ? "https://public.example.test/" :
             name === "authorizedTenant" ? "tenant-a" :
-              name === "requestedTenant" ? "tenant-b" : "safe",
+              name === "requestedTenant" ? "tenant-b" :
+                name === "allowlist" ? "read,write" :
+                  name === "tool" ? "read" :
+                      name === "html" ? "safe text" : "safe",
     ]));
     const value = parseHuntRecipe({
       ...recipe(),
