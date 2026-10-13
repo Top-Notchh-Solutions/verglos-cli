@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · HUNT-008-R10 target-family checkpoint
+
+Public PR #112 merged normally into `main` as
+`14d82d6d58547844084320121d390b79e0274103` from
+`8eebc1d70c9ba30e304545907a72f99eec480fbb`. The sanitized Agent/MCP target
+fixture now binds an explicit capability receipt to tool/input scope and
+rejects replay of the same single-use receipt. Docker target qualification
+passed 4/4, CLI Hunt passed 6/6, and protected CI passed.
+Evidence: `docs/shipping/evidence/hunt-a2-r10-agent-replay-pr112-2026-10-13.md`.
+
+This is an implementation contribution, not complete HUNT-008 acceptance.
+No checkbox changed; the live score remains **228 checked / 52 unchecked / 280
+total (81.4%)**.
+
 ## 2026-10-13 · HUNT-008-R9 target-family checkpoint
 
 Public PR #111 merged normally into `main` as

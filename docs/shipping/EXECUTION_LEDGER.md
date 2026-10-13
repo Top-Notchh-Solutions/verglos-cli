@@ -1,5 +1,32 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT-008 R10 Agent/MCP receipt contribution merged (PR #112)
+
+- **Public contribution:** Extended the sanitized Agent/MCP target fixture with
+  a synthetic capability receipt bound to exact tool/input scope and a
+  single-use replay policy; a second use is rejected.
+- **Qualification:** Added the receipt/replay assertion to the target-harness
+  test, preserved the approval-bypass positive/negative outcomes, and kept the
+  fixture offline with no live MCP server, credentials, network, or arbitrary
+  command authority. Docker target qualification passed 4/4 and CLI Hunt
+  qualification passed 6/6.
+- **Identity:** PR #112 merged normally into public `main` as
+  `14d82d6d58547844084320121d390b79e0274103`, from source commit
+  `8eebc1d70c9ba30e304545907a72f99eec480fbb`; no squash or force-push.
+- **Protected verification:** Platform run `38366570622` and self-scan run
+  `38366570578` passed all eleven required checks.
+- **Boundary:** Owner/operator authorization covered this public-safe fixture
+  contribution. No customer source/data, live MCP server, real credential,
+  provider, entitlement, database, Production, npm, hosted target, external
+  network, or arbitrary shell was used. Authorization is not independent
+  review, provider confirmation, customer acceptance, legal clearance, or
+  final release approval.
+- **Disposition:** This is HUNT-008-R10 implementation evidence only. HUNT-008
+  remains unchecked pending complete real-target and release gates.
+- **Evidence:** `evidence/hunt-a2-r10-agent-replay-pr112-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT-008 R9 secret and supply-chain contribution merged (PR #111)
 
 - **Public contribution:** Added the signed `D4-001` secret/credential-use

@@ -102,7 +102,7 @@ adversarial sandbox qualification.
 | `HUNT-008-R7` | Authorization/tenant/mass-assignment | In-memory or disposable fixture with explicit tenant identities | A1 classifier plus A2 descriptor/protocol and sanitized authorization reference harness; complete target-code qualification remains open. |
 | `HUNT-008-R8` | Prototype pollution/unsafe deserialization/parser boundary | Version-pinned parser target, safe payloads, no host object or process access | PR #110 merged the bounded prototype-pollution target fixture/harness and `D1-008` mapping; unsafe-deserialization/parser coverage remains absent and complete per-family acceptance remains open. |
 | `HUNT-008-R9` | Secrets/credential-use and dependency/supply-chain behavior | Synthetic credentials, disposable package/image fixtures, no real credential validation | PR #111 merged signed `D4-001` and `D6-001` descriptors with synthetic in-memory credential-use and metadata-only supply-chain harnesses. Docker target integration 3/3 and CLI 6/6 passed; real credential/package/provider qualification and complete acceptance remain open. |
-| `HUNT-008-R10` | AI-agent/MCP tool boundary and approval bypass | Fake tools, explicit capability receipts, no real credentials/network, replay-safe proof | A1/A2 Agent/MCP foundations exist; real target workflow and complete proof acceptance remain open. |
+| `HUNT-008-R10` | AI-agent/MCP tool boundary and approval bypass | Fake tools, explicit capability receipts, no real credentials/network, replay-safe proof | PR #112 merged the sanitized Agent/MCP receipt fixture and replay-rejection assertion; no live MCP/customer-agent workflow is claimed and complete proof acceptance remains open. |
 
 ### 4.3 Current Hunt implementation truth
 

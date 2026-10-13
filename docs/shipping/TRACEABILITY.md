@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## HUNT-008 R10 Agent/MCP receipt contribution · 2026-10-13
+
+- **Public merge:** PR #112 merged normally as
+  `14d82d6d58547844084320121d390b79e0274103` from source commit
+  `8eebc1d70c9ba30e304545907a72f99eec480fbb`.
+- **Implementation mapping:** The sanitized Agent/MCP target family now
+  produces a synthetic capability receipt bound to exact tool/input scope and
+  rejects a replayed single-use receipt while retaining the approval-bypass
+  positive/negative fixture behavior.
+- **Verification mapping:** Docker target-harness qualification passed 4/4,
+  the public CLI Hunt path passed 6/6, build passed 7/7, typecheck passed
+  13/13, and all eleven protected PR checks passed.
+- **Boundary:** No live MCP server, customer agent, real credential,
+  provider/entitlement state, customer source/data, database, Production,
+  hosted target, external network, or arbitrary shell was used.
+- **Acceptance:** HUNT-008 remains unchecked for real authorized target
+  workflow, complete proof/retest, approved rule/provenance/licensing
+  treatment, hosted entitlement, required Linux/Docker adversarial proof,
+  independent review, and final release acceptance. Score remains
+  **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-a2-r10-agent-replay-pr112-2026-10-13.md`.
+
 ## HUNT-008 R9 target-family contribution · 2026-10-13
 
 - **Public merge:** PR #111 merged normally as

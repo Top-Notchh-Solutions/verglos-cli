@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT-008 R10 Agent/MCP receipt contribution merged (PR #112)
+
+Public PR #112 merged with a regular two-parent merge commit
+`14d82d6d58547844084320121d390b79e0274103`, preserving source commit
+`8eebc1d70c9ba30e304545907a72f99eec480fbb`; no squash or force-push was used.
+The sanitized Agent/MCP target fixture now emits an explicit capability receipt
+bound to tool/input scope and rejects replay of the same single-use receipt.
+The public target-harness and CLI paths continue to cover ten A2 families.
+
+Local Hunt, Docker, CLI, build, typecheck, full CLI test, and diff checks
+passed. Protected Linux/macOS/Windows Node 20/22/24, in-toto, and Verglos
+self-scan checks passed. Evidence:
+`evidence/hunt-a2-r10-agent-replay-pr112-2026-10-13.md`.
+
+This is an implementation and shipping contribution only. HUNT-008 remains
+open for real authorized target workflow, complete per-family proof/retest,
+supported-rule approval, trusted/licensed release treatment, hosted
+entitlement, required host qualification, independent review, and final
+release acceptance. No checkbox changed; the score remains **228 checked / 52
+unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT-008 R9 secret and supply-chain contribution merged (PR #111)
 
 Public PR #111 merged with a regular two-parent merge commit
