@@ -6,6 +6,7 @@ import { test } from "node:test";
 import { bindHuntExecution, createApprovalReceipt, HuntExecutionBindingSchema, parseHuntRecipe } from "@verglos/shared";
 import { DockerSandboxAdapter } from "./docker-sandbox-adapter.js";
 import { createHuntTestTrustStore, HUNT_TEST_TRUST_KEY_ID } from "./hunt-trust-test-support.js";
+import { SUPPORTED_HUNT_RECIPE_CATALOG } from "./supported-recipe-catalog.js";
 import { TARGET_HARNESS_ASSERTION } from "./target-harness.js";
 
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
@@ -124,5 +125,39 @@ test("Docker sandbox adapter distinguishes timeout and environment failure canon
     const failedAdapter = new DockerSandboxAdapter({ image: "ghcr.io/verglos/probe", imageDigest, run: async () => { throw new Error("daemon unavailable"); } });
     const failed = await failedAdapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: binding() });
     assert.equal(failed.canonicalVerdict, "environment-error");
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("Docker sandbox adapter classifies timeout and infrastructure failure for every A2 family", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-docker-a2-outcomes-"));
+  try {
+    const families = SUPPORTED_HUNT_RECIPE_CATALOG.filter((descriptor) => descriptor.adapter === "container");
+    assert.equal(families.length, 7);
+    for (const family of families) {
+      const targetBinding = { ...binding(), command: [...family.command], assertions: [...family.assertions] };
+      const timeoutAdapter = new DockerSandboxAdapter({
+        image: "docker.io/library/node",
+        imageDigest,
+        run: async () => {
+          const error = new Error(`${family.recipeId} timeout fixture`) as Error & { killed?: boolean };
+          error.killed = true;
+          throw error;
+        },
+      });
+      const timedOut = await timeoutAdapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: targetBinding });
+      assert.equal(timedOut.canonicalVerdict, "inconclusive", `${family.recipeId} timeout classification`);
+      assert.equal(timedOut.executionStatus, "timed-out", `${family.recipeId} timeout status`);
+      assert.equal(timedOut.verdict, "not_attemptable", `${family.recipeId} timeout verdict`);
+
+      const failedAdapter = new DockerSandboxAdapter({
+        image: "docker.io/library/node",
+        imageDigest,
+        run: async () => { throw new Error(`${family.recipeId} daemon failure fixture`); },
+      });
+      const failed = await failedAdapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: targetBinding });
+      assert.equal(failed.canonicalVerdict, "environment-error", `${family.recipeId} failure classification`);
+      assert.equal(failed.executionStatus, "failed", `${family.recipeId} failure status`);
+      assert.equal(failed.verdict, "not_attemptable", `${family.recipeId} failure verdict`);
+    }
   } finally { await rm(root, { recursive: true, force: true }); }
 });
