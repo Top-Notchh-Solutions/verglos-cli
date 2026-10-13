@@ -20,6 +20,7 @@ export const VERGLOS_SCHEMA_IDS = {
   redactionManifest: "urn:verglos:schema:redaction-manifest",
   huntTargetManifest: "urn:verglos:schema:hunt-target-manifest",
   huntAttackHypothesis: "urn:verglos:schema:hunt-attack-hypothesis",
+  huntReleaseEvidence: "urn:verglos:schema:hunt-release-evidence",
   failure: "urn:verglos:schema:failure",
 } as const;
 

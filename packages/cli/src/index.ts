@@ -31,6 +31,7 @@ import { executeHuntHypothesis } from "./hunt-hypothesis.js";
 import { executeHuntWorker } from "./hunt-worker.js";
 import { executeHuntProof } from "./hunt-proof.js";
 import { executeHuntRetest } from "./hunt-retest.js";
+import { executeHuntReleaseAudit } from "./hunt-release-audit.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -1089,6 +1090,18 @@ huntCommand
     });
     if (!executionAuthorized) process.exit(1);
     process.exit(await executeHuntRetest({ hypothesisPath, reportPath: opts.report, recipePath: opts.recipe, trustStorePath: opts.trustStore, approvalPath: opts.approval, remediationPath: opts.remediation, remediationApprovalPath: opts.remediationApproval, beforeSubjectId: opts.beforeSubjectId, observationId: opts.observationId, json: opts.json, quiet: opts.quiet }));
+  });
+
+huntCommand
+  .command("audit <evidencePath>")
+  .description("Audit a bounded Hunt proof/retest against an existing complete Release Record")
+  .requiredOption("--record-store <path>", "Complete Release Record store containing manifest.json and members")
+  .option("--record-manifest <path>", "Explicit Release Record manifest path")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (evidencePath: string, _opts: { recordStore: string; recordManifest?: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { recordStore: string; recordManifest?: string; json?: boolean; quiet?: boolean };
+    process.exit(await executeHuntReleaseAudit(evidencePath, opts.recordStore, opts.recordManifest, opts.json, opts.quiet));
   });
 
 huntCommand

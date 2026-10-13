@@ -10,6 +10,7 @@ import {
   parseRemediationProposal,
   parseHuntRecipeTrustPolicy,
   SubjectIdSchema,
+  HUNT_RELEASE_EVIDENCE_SCHEMA,
   type HuntAttackHypothesis,
   type HuntExecutionBinding,
   type HuntRecipe,
@@ -69,6 +70,9 @@ export type HuntAttackWorkerResult = Readonly<{
 }>;
 
 export type HuntAttackProofResult = Readonly<{
+  readonly schemaId: typeof HUNT_RELEASE_EVIDENCE_SCHEMA.id;
+  readonly schemaVersion: typeof HUNT_RELEASE_EVIDENCE_SCHEMA.version;
+  readonly kind: "proof";
   readonly status: "completed" | "not-attemptable";
   readonly executes: boolean;
   readonly hypothesisDigest: HuntAttackHypothesis["hypothesisDigest"];
@@ -88,6 +92,9 @@ export type HuntAttackProofResult = Readonly<{
 }>;
 
 export type HuntAttackRetestResult = Readonly<{
+  readonly schemaId: typeof HUNT_RELEASE_EVIDENCE_SCHEMA.id;
+  readonly schemaVersion: typeof HUNT_RELEASE_EVIDENCE_SCHEMA.version;
+  readonly kind: "retest";
   readonly status: "completed";
   readonly executes: true;
   readonly beforeSubjectId: string;
@@ -154,6 +161,9 @@ export async function runSupportedHuntProof(input: HuntAttackWorkerInput): Promi
   } as const;
   if (prepared.supported.descriptor.adapter !== "restricted-process" && prepared.supported.descriptor.adapter !== "container") {
     return Object.freeze({
+      schemaId: HUNT_RELEASE_EVIDENCE_SCHEMA.id,
+      schemaVersion: HUNT_RELEASE_EVIDENCE_SCHEMA.version,
+      kind: "proof" as const,
       status: "not-attemptable" as const,
       executes: false,
       ...base,
@@ -181,6 +191,9 @@ export async function runSupportedHuntProof(input: HuntAttackWorkerInput): Promi
         ? "not-reproduced"
         : "inconclusive";
   return Object.freeze({
+    schemaId: HUNT_RELEASE_EVIDENCE_SCHEMA.id,
+    schemaVersion: HUNT_RELEASE_EVIDENCE_SCHEMA.version,
+    kind: "proof" as const,
     status: "completed" as const,
     executes: true as const,
     ...base,
@@ -219,6 +232,9 @@ export async function runSupportedHuntRetest(input: HuntAttackRetestInput): Prom
         : "inconclusive" as const;
   const { decision: _decision, decidedBy: _decidedBy, decidedAt: _decidedAt, requestDigest: _requestDigest, ...request } = remediationApproval;
   return Object.freeze({
+    schemaId: HUNT_RELEASE_EVIDENCE_SCHEMA.id,
+    schemaVersion: HUNT_RELEASE_EVIDENCE_SCHEMA.version,
+    kind: "retest" as const,
     status: "completed" as const,
     executes: true as const,
     beforeSubjectId,
