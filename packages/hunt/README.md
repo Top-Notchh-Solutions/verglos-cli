@@ -8,7 +8,7 @@ The alpha package includes the recipe/trust/approval binding, execution-free pla
 
 An A2 harness must print a final line such as `{"verglos":"hunt-result","verdict":"confirmed","summary":"bounded fixture reproduced"}` (or `not-reproduced` / `unsupported`) and exit with code `0`. The summary is bounded and redacted; it must not contain source, secrets, paths, or free-form command output. Missing, malformed, or non-zero-exit harnesses are reported as unsupported or environment failure rather than a security verdict.
 
-The public repository also contains eight sanitized deterministic reference
+The public repository also contains ten sanitized deterministic reference
 harnesses under `fixtures/target-code/.verglos/hunt/`, one for each approved
 A2 family, plus local target-code modules under `fixtures/target-code/src/`.
 Each harness invokes only those local modules and evaluates the result in
@@ -20,6 +20,11 @@ Omitting the argument selects the positive case used by the admitted catalog
 command.
 They are qualification fixtures and examples, not a claim that every customer
 repository has a supported target-code recipe.
+
+The Agent/MCP fixture additionally emits a synthetic capability receipt bound
+to the exact tool/input scope and demonstrates that a second use of the same
+single-use receipt is rejected. This is a local replay-safety fixture, not a
+live MCP server, credential, network, or customer-agent qualification.
 
 The adapter test matrix also exercises timeout and infrastructure-failure
 classification for every A2 family, while keeping those outcomes separate from

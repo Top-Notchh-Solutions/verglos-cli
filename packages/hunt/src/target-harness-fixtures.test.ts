@@ -82,6 +82,25 @@ test("each public A2 reference harness exposes timeout and adapter-failure proce
   }
 });
 
+test("Agent/MCP harness binds an explicit capability receipt and rejects replay", async () => {
+  const fixture = fileURLToPath(new URL("../fixtures/target-code/.verglos/hunt/agent-mcp.mjs", import.meta.url));
+  const result = await execFileAsync(process.execPath, [fixture, "negative"], { encoding: "utf8" });
+  const output = JSON.parse(result.stdout.trim()) as { capabilityReceipt?: Record<string, unknown> };
+  assert.deepEqual(output.capabilityReceipt, {
+    version: 1,
+    receiptId: "fixture-receipt:get:user-input",
+    capability: "agent.tool.invoke",
+    action: "tool.call",
+    tool: "get",
+    target: "synthetic-fixture",
+    inputDigest: "fixture-input:get:user-input",
+    decision: "approved",
+    replayPolicy: "single-use",
+    firstApprovedCall: "get:user-input",
+    replay: "rejected",
+  });
+});
+
 test("each public A2 reference harness executes local target code in the pinned Docker boundary", { skip: process.env.VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION !== "1" ? "set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run target-code Docker qualification" : false }, async () => {
   const projectRoot = fileURLToPath(new URL("../fixtures/target-code/", import.meta.url));
   for (const name of fixtureNames) {
