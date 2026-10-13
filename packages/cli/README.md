@@ -199,12 +199,21 @@ verglos monitor register --webhook https://your.app/verglos-alerts
 
 ### `verglos mcp` — MCP server for AI agents
 
-Exposes Verglos tools (`scan`, `check_package`, `check_before_write`, `explain_finding`) to Cursor, Claude Code, Windsurf, and Cline.
+Exposes Verglos tools (`scan`, `check_package`, `check_before_write`, `explain_finding`, and approval-bound Hunt tools) to Cursor, Claude Code, Windsurf, and Cline.
 
 ```bash
 verglos mcp                    # start stdio server (agents call this)
 verglos mcp --print-config     # print the JSON to paste into your agent config
 ```
+
+Hunt execution requires a verified Pro-or-higher entitlement, an exact
+time-bounded approval receipt, a signed supported recipe, a trusted recipe
+store, and matching subject/rule/observation bindings. The finding/report
+tools never synthesize commands or widen scope. Completed results include the
+source-free execution digests and schema-validated verification attempts used
+by the CLI; unavailable or unattempted execution is explicit. A projection is
+not itself a signed `.vgl` Release Record and must not be treated as release
+evidence until attached to a complete record.
 
 ### `verglos hook` · `verglos precommit` — pre-commit gate
 

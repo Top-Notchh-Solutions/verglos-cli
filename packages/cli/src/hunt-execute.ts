@@ -1,7 +1,8 @@
 import { constants } from "node:fs";
+import { randomUUID } from "node:crypto";
 import { lstat, open } from "node:fs/promises";
-import { ApprovalReceiptSchema, huntRecipeTrustPolicyDigest, parseBoundedJson, parseHuntRecipe, parseHuntRecipeTrustPolicy, verifyHuntRecipe, type ApprovalReceipt, type ScanResult } from "@verglos/shared";
-import { loadHuntRuntime, type HuntRuntimeLoader } from "./hunt-runtime.js";
+import { ApprovalReceiptSchema, bindHuntExecution, createHuntVerificationAttempt, huntRecipeTrustPolicyDigest, parseBoundedJson, parseHuntRecipe, parseHuntRecipeTrustPolicy, verifyHuntRecipe, type ApprovalReceipt, type ScanResult, type VerificationAttemptDocument } from "@verglos/shared";
+import { loadHuntRuntime, type HuntRuntimeLoader, type HuntRuntimeOutcome } from "./hunt-runtime.js";
 
 const MAX_INPUT_BYTES = 8 * 1024 * 1024;
 const MAX_FINDINGS = 10_000;
@@ -73,10 +74,16 @@ export async function runHuntRecipe(input: HuntRecipeExecutionInput): Promise<Hu
     const trustVerification = verifyHuntRecipe(recipe, trust, executionAt);
     if (!trustVerification.trusted) throw new Error(`recipe trust verification failed: ${trustVerification.reason}`);
     if (recipe.targetSubjectId !== input.subjectId || recipe.ruleId !== input.ruleId) throw new Error("recipe subject/rule does not match the requested execution binding");
+    const selectedFindings = report.findings.filter((finding) =>
+      (finding.severity === "critical" || finding.severity === "high") && (!input.findingId || finding.id === input.findingId),
+    );
+    if (selectedFindings.length === 0) throw new Error("requested Hunt finding is absent or not eligible for execution");
+    if (selectedFindings.some((finding) => finding.rule !== input.ruleId)) throw new Error("report finding rule does not match the requested execution binding");
     const runtime = await loadHuntRuntime(input.runtimeLoader);
     const supported = runtime.validateSupportedHuntRecipe(recipe);
     if (!supported.supported) throw new Error(`recipe is not in the supported bounded catalog (${supported.reason})`);
     const execution = { recipe, trust, approval, ruleId: input.ruleId, subjectId: input.subjectId, observationId: input.observationId, at: executionAt };
+    const binding = bindHuntExecution(execution);
     const isContainerRecipe = recipe.isolation === "container";
     if (isContainerRecipe && `${recipe.imageDigest.algorithm}:${recipe.imageDigest.value}` !== runtime.HUNT_TARGET_HARNESS_IMAGE_DIGEST) throw new Error("target harness image digest is not the pinned public runtime image");
     const result = await runtime.runHunt(report, {
@@ -88,6 +95,18 @@ export async function runHuntRecipe(input: HuntRecipeExecutionInput): Promise<Hu
       execution,
       projectRoot: report.projectRoot,
     });
+    const verificationAttempts = result.outcomes.map((outcome) => createExecutionAttempt({
+      outcome,
+      recipe,
+      approval,
+      trustPolicyDigest: binding.trustPolicyDigest,
+      subjectId: input.subjectId,
+      observationId: input.observationId,
+      ruleId: input.ruleId,
+      startedAt: result.startedAt,
+      completedAt: result.completedAt,
+      sandbox: result.sandbox,
+    }));
     const projection = {
       status: "completed",
       executionAuthorized: true,
@@ -105,7 +124,16 @@ export async function runHuntRecipe(input: HuntRecipeExecutionInput): Promise<Hu
         limitation: trustVerification.limitation,
       },
       sandbox: result.sandbox,
-      outcomes: result.outcomes.map((outcome) => ({ findingId: outcome.findingId, verdict: outcome.verdict, canonicalVerdict: outcome.canonicalVerdict, reason: outcome.reason, durationMs: outcome.durationMs, evidenceDigest: outcome.evidenceDigest, executionStatus: outcome.executionStatus, assurance: outcome.assurance })),
+      execution: {
+        subjectId: input.subjectId,
+        observationId: input.observationId,
+        ruleId: input.ruleId,
+        recipeDigest: binding.recipeDigest,
+        trustPolicyDigest: binding.trustPolicyDigest,
+        approvalRequestDigest: binding.approvalRequestDigest,
+      },
+      outcomes: result.outcomes.map((outcome, index) => ({ findingId: outcome.findingId, verdict: outcome.verdict, canonicalVerdict: outcome.canonicalVerdict, reason: outcome.reason, durationMs: outcome.durationMs, evidenceDigest: outcome.evidenceDigest, executionStatus: outcome.executionStatus, assurance: outcome.assurance, verificationAttemptId: verificationAttempts[index]?.attemptId })),
+      verificationAttempts,
     };
     return {
       code: projection.outcomes.some((outcome) => outcome.canonicalVerdict === "confirmed") ? 1 : 0,
@@ -114,6 +142,73 @@ export async function runHuntRecipe(input: HuntRecipeExecutionInput): Promise<Hu
   } catch {
     return { code: 78, projection: { status: "denied", reason: "hunt execution input or authorization is invalid" } };
   }
+}
+
+function createExecutionAttempt(input: {
+  readonly outcome: HuntRuntimeOutcome;
+  readonly recipe: Parameters<typeof createHuntVerificationAttempt>[0]["recipe"];
+  readonly approval: ApprovalReceipt;
+  readonly trustPolicyDigest: string;
+  readonly subjectId: string;
+  readonly observationId: string;
+  readonly ruleId: string;
+  readonly startedAt: string;
+  readonly completedAt: string;
+  readonly sandbox: string;
+}): VerificationAttemptDocument {
+  const executed = input.outcome.reason !== "Hunt total duration expired before adapter execution";
+  const runtime = input.sandbox === "docker"
+    ? {
+        isolation: "container" as const,
+        runtime: "docker-container",
+        runtimeDigest: input.recipe.imageDigest,
+        filesystem: "ephemeral-write" as const,
+        nonRoot: true,
+        cleanup: "succeeded" as const,
+      }
+    : {
+        isolation: "restricted-process" as const,
+        runtime: "node-worker-thread",
+        filesystem: "ephemeral-write" as const,
+        nonRoot: process.getuid?.() !== 0,
+        cleanup: executed ? "succeeded" as const : "not-started" as const,
+      };
+  const usage = {
+    cpuMs: Math.min(input.outcome.usage?.cpuMs ?? 0, input.recipe.limits.cpuMs),
+    peakMemoryBytes: Math.min(input.outcome.usage?.peakMemoryBytes ?? 0, input.recipe.limits.memoryMb * 1024 * 1024),
+    diskBytes: Math.min(input.outcome.usage?.diskBytes ?? 0, input.recipe.limits.diskMb * 1024 * 1024),
+    processes: Math.min(input.outcome.usage?.processes ?? 0, input.recipe.limits.processes),
+    networkRequests: Math.min(input.outcome.usage?.networkRequests ?? 0, input.recipe.limits.maxNetworkRequests),
+  };
+  const limitations = [
+    "The MCP/CLI execution projection is not a complete signed Release Record; attach the attempt to a complete record before release use.",
+    ...(input.outcome.usage === undefined
+      ? ["The selected Hunt adapter did not report all resource counters; unavailable counters are recorded as zero and must not be read as measured consumption."]
+      : ["Network requests remain bounded by the recipe policy; adapter-specific disk and container counters may be unavailable."]),
+  ];
+  return createHuntVerificationAttempt({
+    attemptId: `urn:uuid:${randomUUID()}`,
+    subjectId: input.subjectId,
+    observationId: input.observationId,
+    findingId: input.outcome.findingId,
+    ruleId: input.ruleId,
+    recipe: input.recipe,
+    trustPolicyDigest: input.trustPolicyDigest,
+    approval: input.approval,
+    runtime,
+    startedAt: input.startedAt,
+    completedAt: input.completedAt,
+    usage,
+    executed,
+    outcome: {
+      canonicalVerdict: input.outcome.canonicalVerdict,
+      reason: input.outcome.reason,
+      durationMs: input.outcome.durationMs,
+      ...(input.outcome.evidenceDigest === undefined ? {} : { evidenceDigest: input.outcome.evidenceDigest }),
+      ...(input.outcome.outputBytes === undefined ? {} : { outputBytes: input.outcome.outputBytes }),
+    },
+    limitations,
+  });
 }
 
 export async function executeHuntRecipe(

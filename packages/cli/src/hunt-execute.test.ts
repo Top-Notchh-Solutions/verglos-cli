@@ -74,7 +74,7 @@ async function makeInputs(root: string, selected = recipe(), projectRoot = root)
   const approvalPath = join(root, "approval.json");
   const at = new Date().toISOString();
   const approval = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: subjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
-  await writeFile(reportPath, `${canonicalizeJson({ projectRoot, projectType: "node", scannedAt: at, durationMs: 1, findings: [{ id: "critical-1", severity: "critical", title: "fixture", description: "fixture" }] })}\n`);
+  await writeFile(reportPath, `${canonicalizeJson({ projectRoot, projectType: "node", scannedAt: at, durationMs: 1, findings: [{ id: "critical-1", detector: "hunt", rule: selected.ruleId, severity: "critical", title: "fixture", description: "fixture" }] })}\n`);
   await writeFile(recipePath, `${canonicalizeJson(selected)}\n`);
   await writeFile(trustStorePath, `${canonicalizeJson(createTestHuntTrustStore(selected, { at }))}\n`);
   await writeFile(approvalPath, `${canonicalizeJson(approval)}\n`);
@@ -110,6 +110,21 @@ test("HUNT-009 executes the fixed A1 recipe with exact trust and approval bindin
     assert.match(String((license.textDigest as Record<string, unknown>).value), /^[a-f0-9]{64}$/u);
     assert.doesNotMatch(JSON.stringify(result.output), /licenseText|Fixture license text/u);
     assert.deepEqual((result.output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.canonicalVerdict), ["confirmed"]);
+    const execution = result.output.execution as Record<string, unknown>;
+    assert.equal(execution.subjectId, subjectId);
+    assert.equal(execution.observationId, "urn:uuid:123e4567-e89b-12d3-a456-426614174000");
+    assert.equal(execution.ruleId, "hunt.a1.utf8-contains");
+    assert.match(String(execution.recipeDigest), /^sha256:[a-f0-9]{64}$/u);
+    assert.match(String(execution.trustPolicyDigest), /^sha256:[a-f0-9]{64}$/u);
+    assert.match(String(execution.approvalRequestDigest), /^sha256:[a-f0-9]{64}$/u);
+    const attempts = result.output.verificationAttempts as Array<Record<string, unknown>>;
+    assert.equal(attempts.length, 1);
+    assert.equal(attempts[0]?.subjectId, subjectId);
+    assert.equal(attempts[0]?.observationId, execution.observationId);
+    assert.equal(attempts[0]?.ruleId, execution.ruleId);
+    assert.equal(attempts[0]?.verdict, "confirmed");
+    assert.equal(attempts[0]?.executed, true);
+    assert.equal((result.output.outcomes as Array<Record<string, unknown>>)[0]?.verificationAttemptId, attempts[0]?.attemptId);
     assert.doesNotMatch(JSON.stringify(result.output), /unsafe|fixture contains/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -125,7 +140,9 @@ test("HUNT-009 preserves a negative probe as not-reproduced without leaking inpu
       const code = await executeHuntRecipe({ ...inputs, ruleId: "hunt.a1.utf8-contains", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", json: true, runtimeLoader: localHuntRuntime });
       assert.equal(code, 0);
     } finally { console.log = originalLog; }
-    assert.equal(JSON.parse(logs[0] ?? "{}").outcomes[0].canonicalVerdict, "not-reproduced");
+    const output = JSON.parse(logs[0] ?? "{}") as Record<string, unknown>;
+    assert.equal((output.outcomes as Array<Record<string, unknown>>)[0]?.canonicalVerdict, "not-reproduced");
+    assert.equal((output.verificationAttempts as Array<Record<string, unknown>>)[0]?.verdict, "not_reproduced");
     assert.doesNotMatch(logs.join("\n"), /sensitive-synthetic-canary/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -207,6 +224,36 @@ test("HUNT-009 rejects binding drift before loading the public runtime", async (
     assert.equal(result.code, 78);
     assert.equal(runtimeLoaded, false);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("HUNT-010 rejects a report finding whose rule would widen the approved recipe", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-mcp-hunt-binding-drift-"));
+  const logs: string[] = [];
+  const originalLog = console.log;
+  try {
+    const inputs = await makeInputs(root);
+    await writeFile(inputs.reportPath, `${canonicalizeJson({
+      projectRoot: root,
+      projectType: "node",
+      scannedAt: new Date().toISOString(),
+      durationMs: 1,
+      findings: [{ id: "critical-1", detector: "hunt", rule: "hunt.other-rule", severity: "critical", title: "fixture", description: "fixture" }],
+    })}\n`);
+    console.log = (...values: unknown[]) => logs.push(values.join(" "));
+    const code = await executeHuntRecipe({
+      ...inputs,
+      ruleId: "hunt.a1.utf8-contains",
+      subjectId,
+      observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+      json: true,
+      runtimeLoader: localHuntRuntime,
+    });
+    assert.equal(code, 78);
+    assert.deepEqual(JSON.parse(logs[0] ?? "{}"), { status: "denied", reason: "hunt execution input or authorization is invalid" });
+  } finally {
+    console.log = originalLog;
+    await rm(root, { recursive: true, force: true });
+  }
 });
 
 test("HUNT-009 denies execution when the public runtime is unavailable", async () => {

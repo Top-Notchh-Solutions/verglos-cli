@@ -6,17 +6,27 @@ const HUNT_RUNTIME_PACKAGE = "@verglos/hunt";
 export type HuntRuntimeOutcome = Readonly<{
   findingId: string;
   verdict: string;
-  canonicalVerdict?: string;
+  canonicalVerdict?: "confirmed" | "not-reproduced" | "inconclusive" | "not-supported" | "environment-error" | "policy-denied";
   reason: string;
   durationMs: number;
   evidenceDigest?: string;
-  executionStatus?: string;
+  outputBytes?: number;
+  executionStatus?: "completed" | "timed-out" | "failed";
   assurance?: unknown;
+  usage?: Readonly<{
+    cpuMs: number;
+    peakMemoryBytes: number;
+    diskBytes: number;
+    processes: number;
+    networkRequests: number;
+  }>;
 }>;
 
 export type HuntRuntimeResult = Readonly<{
   sandbox: string;
   outcomes: readonly HuntRuntimeOutcome[];
+  startedAt: string;
+  completedAt: string;
 }>;
 
 export type HuntRuntime = Readonly<{
