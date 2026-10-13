@@ -3,7 +3,7 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { createApprovalReceipt, createSubjectId, planHuntAttackHypothesis, parseHuntRecipe, type HuntTargetManifest, type ScanResult } from "@verglos/shared";
+import { createApprovalReceipt, createSubjectId, parseHuntReleaseEvidence, planHuntAttackHypothesis, parseHuntRecipe, type HuntTargetManifest, type ScanResult } from "@verglos/shared";
 import { createTestHuntTrustStore, TEST_HUNT_TRUST_KEY_ID } from "../../shared/src/hunt-trust-test-support.js";
 import type { HuntRuntimeLoader } from "./hunt-runtime.js";
 import { executeHuntWorker } from "./hunt-worker.js";
@@ -136,6 +136,7 @@ test("hunt proof replays the supported A1 fixture and emits a bounded counterexa
     assert.equal((output.proof as Record<string, unknown>).status, "confirmed");
     assert.equal((output.proof as Record<string, unknown>).negativeControl, "passed");
     assert.equal((output.counterexample as Record<string, unknown>).canonicalVerdict, "not-reproduced");
+    assert.equal(parseHuntReleaseEvidence(output).kind, "proof");
     assert.doesNotMatch(JSON.stringify(output), /fixture contains unsafe|tmp\/fixture-target/u);
   } finally {
     console.log = originalLog;

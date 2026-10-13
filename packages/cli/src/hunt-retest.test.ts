@@ -3,7 +3,7 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { createApprovalReceipt, createSubjectId, parseHuntRecipe, type ScanResult } from "@verglos/shared";
+import { createApprovalReceipt, createSubjectId, parseHuntReleaseEvidence, parseHuntRecipe, type ScanResult } from "@verglos/shared";
 import { createTestHuntTrustStore, TEST_HUNT_TRUST_KEY_ID } from "../../shared/src/hunt-trust-test-support.js";
 import { planSupportedHuntAttack } from "@verglos/hunt";
 import { executeHuntRetest } from "./hunt-retest.js";
@@ -63,6 +63,7 @@ test("public CLI retest binds mutate approval and reruns the same proof", async 
     assert.equal((output.retest as Record<string, unknown>).status, "cleared");
     assert.equal((output.retest as Record<string, unknown>).sameProof, true);
     assert.equal((output.proof as Record<string, unknown>).proof && ((output.proof as Record<string, unknown>).proof as Record<string, unknown>).status, "not-reproduced");
+    assert.equal(parseHuntReleaseEvidence(output).kind, "retest");
     assert.doesNotMatch(JSON.stringify(output), /safe fixture after remediation|tmp\/cli-retest-after/u);
   } finally {
     console.log = originalLog;
