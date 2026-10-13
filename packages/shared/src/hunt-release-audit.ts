@@ -13,7 +13,7 @@ import { assertCompleteReleaseRecord, assertCompleteReleaseRecordPayloads } from
 import { releaseRecordManifestDigest } from "./record-digest.js";
 import { parseReleaseDecision, type ReleaseDecisionDocument } from "./release-decision.js";
 import { parseSubject } from "./subject.js";
-import { parseVerificationAttempt, type VerificationAttemptDocument } from "./verification.js";
+import { parseVerificationAttempt, VerificationAttemptDocumentSchema, type VerificationAttemptDocument } from "./verification.js";
 import { ContentDigestSchema, SubjectIdSchema } from "./subject.js";
 import type { ReleaseRecordManifestDocument } from "./record-manifest.js";
 
@@ -32,6 +32,7 @@ const HuntOutcomeSchema = z.object({
   reason: SafeTextSchema,
   durationMs: z.number().int().nonnegative().safe(),
   evidenceDigest: DigestStringSchema.optional(),
+  outputBytes: z.number().int().nonnegative().safe().optional(),
   executionStatus: z.enum(["completed", "timed-out", "failed"]).optional(),
   assurance: z.object({
     class: z.enum(["A1", "A2", "A3", "A4"]),
@@ -44,7 +45,7 @@ const HuntOutcomeSchema = z.object({
   }).strict().optional(),
 }).strict();
 
-const HuntProofPayloadSchema = z.object({
+const HuntProofPayloadBaseSchema = z.object({
   status: z.enum(["completed", "not-attemptable"]),
   executes: z.boolean(),
   hypothesisDigest: ContentDigestSchema,
@@ -60,6 +61,7 @@ const HuntProofPayloadSchema = z.object({
   sandbox: SafeTextSchema,
   outcome: HuntOutcomeSchema.optional(),
   counterexample: HuntOutcomeSchema.optional(),
+  verificationAttempt: VerificationAttemptDocumentSchema.optional(),
   proof: z.object({
     status: z.enum(["confirmed", "not-reproduced", "inconclusive", "not-attemptable"]),
     negativeControl: z.enum(["passed", "failed", "not-run"]),
@@ -67,11 +69,21 @@ const HuntProofPayloadSchema = z.object({
   }).strict(),
 }).strict();
 
-const ProofEvidenceSchema = HuntProofPayloadSchema.extend({
+const HuntProofPayloadSchema = HuntProofPayloadBaseSchema.superRefine((value, context) => {
+  if (value.status === "completed" && value.executes && !value.verificationAttempt) {
+    context.addIssue({ code: z.ZodIssueCode.custom, path: ["verificationAttempt"], message: "completed Hunt proof must emit its record-native verification attempt" });
+  }
+});
+
+const ProofEvidenceSchema = HuntProofPayloadBaseSchema.extend({
   schemaId: z.literal(HUNT_RELEASE_EVIDENCE_SCHEMA.id),
   schemaVersion: z.string().refine((value) => parseSchemaVersion(value) !== null),
   kind: z.literal("proof"),
-}).strict();
+}).strict().superRefine((value, context) => {
+  if (value.status === "completed" && value.executes && !value.verificationAttempt) {
+    context.addIssue({ code: z.ZodIssueCode.custom, path: ["verificationAttempt"], message: "completed Hunt proof must emit its record-native verification attempt" });
+  }
+});
 
 const RetestEvidenceSchema = z.object({
   schemaId: z.literal(HUNT_RELEASE_EVIDENCE_SCHEMA.id),
@@ -212,6 +224,8 @@ export function auditHuntReleaseEvidence(input: {
   const matchedAttempts = attempts.filter((attempt) => matchesExecutionBinding(attempt, proof, subjectId, observationId, findingId, ruleId));
   if (matchedAttempts.length === 0) reasons.push("complete Release Record has no verification attempt with the exact Hunt recipe, trust policy, approval, finding, rule, subject, and observation binding");
   if (matchedAttempts.length > 1) reasons.push("complete Release Record has multiple verification attempts with the exact Hunt binding");
+  if (proof.verificationAttempt && !matchesExecutionBinding(proof.verificationAttempt, proof, subjectId, observationId, findingId, ruleId)) reasons.push("emitted Hunt verification attempt does not match the exact proof binding");
+  if (proof.verificationAttempt && !matchedAttempts.some((attempt) => attempt.attemptId === proof.verificationAttempt?.attemptId)) reasons.push("complete Release Record does not contain the emitted Hunt verification attempt");
 
   const limitations = [
     ...verifiedManifest.limitations,

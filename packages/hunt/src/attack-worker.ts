@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import {
   approvalRequestDigest,
   ApprovalReceiptSchema,
@@ -11,11 +11,13 @@ import {
   parseHuntRecipeTrustPolicy,
   SubjectIdSchema,
   HUNT_RELEASE_EVIDENCE_SCHEMA,
+  createHuntVerificationAttempt,
   type HuntAttackHypothesis,
   type HuntExecutionBinding,
   type HuntRecipe,
   type HuntRecipeTrustPolicy,
   type ScanResult,
+  type VerificationAttemptDocument,
 } from "@verglos/shared";
 import { DockerSandboxAdapter } from "./docker-sandbox-adapter.js";
 import { HUNT_TARGET_HARNESS_IMAGE, HUNT_TARGET_HARNESS_IMAGE_DIGEST } from "./target-harness.js";
@@ -49,7 +51,7 @@ export interface HuntAttackRetestInput extends HuntAttackWorkerInput {
   readonly remediationApproval: unknown;
 }
 
-export type HuntAttackWorkerOutcome = Readonly<Pick<HuntFindingOutcome, "findingId" | "verdict" | "canonicalVerdict" | "reason" | "durationMs" | "evidenceDigest" | "executionStatus" | "assurance">>;
+export type HuntAttackWorkerOutcome = Readonly<Pick<HuntFindingOutcome, "findingId" | "verdict" | "canonicalVerdict" | "reason" | "durationMs" | "evidenceDigest" | "outputBytes" | "executionStatus" | "assurance">>;
 
 export type HuntAttackWorkerResult = Readonly<{
   readonly status: "completed";
@@ -84,6 +86,7 @@ export type HuntAttackProofResult = Readonly<{
   readonly sandbox: string;
   readonly outcome?: HuntAttackWorkerOutcome;
   readonly counterexample?: HuntAttackWorkerOutcome;
+  readonly verificationAttempt?: VerificationAttemptDocument;
   readonly proof: Readonly<{
     readonly status: "confirmed" | "not-reproduced" | "inconclusive" | "not-attemptable";
     readonly negativeControl: "passed" | "failed" | "not-run";
@@ -182,6 +185,32 @@ export async function runSupportedHuntProof(input: HuntAttackWorkerInput): Promi
   if (!counterexample) throw new Error("Hunt proof returned no counterexample outcome for the bound finding");
   const projectedPrimary = projectOutcome(primary);
   const projectedCounterexample = projectOutcome(counterexample);
+  const verificationAttempt = createHuntVerificationAttempt({
+    attemptId: `urn:uuid:${randomUUID()}`,
+    subjectId: prepared.hypothesis.targetSubjectId,
+    observationId: prepared.input.observationId,
+    findingId: prepared.finding.id,
+    ruleId: prepared.hypothesis.finding.ruleId,
+    recipe: prepared.recipe,
+    trustPolicyDigest: prepared.binding.trustPolicyDigest,
+    approval: prepared.approval,
+    runtime: verificationRuntime(prepared),
+    startedAt: primaryResult.startedAt,
+    completedAt: primaryResult.completedAt,
+    usage: verificationUsage(primary, prepared.recipe.limits),
+    executed: true,
+    outcome: {
+      canonicalVerdict: projectedPrimary.canonicalVerdict,
+      reason: projectedPrimary.reason,
+      durationMs: projectedPrimary.durationMs,
+      ...(projectedPrimary.evidenceDigest === undefined ? {} : { evidenceDigest: projectedPrimary.evidenceDigest }),
+      ...(projectedPrimary.outputBytes === undefined ? {} : { outputBytes: projectedPrimary.outputBytes }),
+    },
+    limitations: [
+      prepared.supported.descriptor.adapter === "container" ? A2_PROOF_LIMITATION : A1_PROOF_LIMITATION,
+      ...verificationUsageLimitations(primary),
+    ],
+  });
   const negativeControl = projectedCounterexample.canonicalVerdict === "not-reproduced" ? "passed" : "failed";
   const proofStatus = negativeControl !== "passed"
     ? "inconclusive"
@@ -200,6 +229,7 @@ export async function runSupportedHuntProof(input: HuntAttackWorkerInput): Promi
     sandbox: primaryResult.sandbox,
     outcome: projectedPrimary,
     counterexample: projectedCounterexample,
+    verificationAttempt,
     proof: Object.freeze({ status: proofStatus as "confirmed" | "not-reproduced" | "inconclusive", negativeControl, limitation: prepared.supported.descriptor.adapter === "container" ? A2_PROOF_LIMITATION : A1_PROOF_LIMITATION }),
   });
 }
@@ -363,7 +393,30 @@ function projectOutcome(outcome: HuntFindingOutcome): HuntAttackWorkerOutcome {
     reason: outcome.reason,
     durationMs: outcome.durationMs,
     ...(outcome.evidenceDigest === undefined ? {} : { evidenceDigest: outcome.evidenceDigest }),
+    ...(outcome.outputBytes === undefined ? {} : { outputBytes: outcome.outputBytes }),
     ...(outcome.executionStatus === undefined ? {} : { executionStatus: outcome.executionStatus }),
     ...(outcome.assurance === undefined ? {} : { assurance: Object.freeze({ ...outcome.assurance }) }),
   });
+}
+
+function verificationRuntime(prepared: PreparedHuntAttack): Parameters<typeof createHuntVerificationAttempt>[0]["runtime"] {
+  return prepared.supported.descriptor.adapter === "container"
+    ? { isolation: "container", runtime: "docker-container", runtimeDigest: prepared.recipe.imageDigest, filesystem: "ephemeral-write", nonRoot: true, cleanup: "succeeded" }
+    : { isolation: "restricted-process", runtime: "node-worker-thread", filesystem: "ephemeral-write", nonRoot: process.getuid?.() !== 0, cleanup: "succeeded" };
+}
+
+function verificationUsage(outcome: HuntFindingOutcome, limits: HuntRecipe["limits"]): Parameters<typeof createHuntVerificationAttempt>[0]["usage"] {
+  return {
+    cpuMs: Math.min(outcome.usage?.cpuMs ?? 0, limits.cpuMs),
+    peakMemoryBytes: Math.min(outcome.usage?.peakMemoryBytes ?? 0, limits.memoryMb * 1024 * 1024),
+    diskBytes: Math.min(outcome.usage?.diskBytes ?? 0, limits.diskMb * 1024 * 1024),
+    processes: Math.min(outcome.usage?.processes ?? 0, limits.processes),
+    networkRequests: Math.min(outcome.usage?.networkRequests ?? 0, limits.maxNetworkRequests),
+  };
+}
+
+function verificationUsageLimitations(outcome: HuntFindingOutcome): readonly string[] {
+  return outcome.usage === undefined
+    ? ["The selected Hunt adapter did not report CPU, memory, disk, or process counters; unavailable counters are recorded as zero and must not be read as measured consumption."]
+    : ["Network requests are bounded by the denied recipe policy; A1 disk usage is a synthetic no-write counter and A2 runtime counters are not exposed by the Docker runner."];
 }

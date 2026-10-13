@@ -14,7 +14,11 @@ const BUILT_IN_COMMAND_PREFIX = "verglos-probe";
 const BUILT_IN_ASSERTION = "probe result is true";
 const A1_LIMITATION = "A1 runs a trusted built-in pure fixture probe in a bounded worker harness; it does not execute target code and is not a security or OS isolation boundary";
 
-interface WorkerResult { readonly matched: boolean }
+interface WorkerResult {
+  readonly matched: boolean;
+  readonly cpuMs: number;
+  readonly peakMemoryBytes: number;
+}
 type BuiltInProbe = "utf8-contains" | "path-traversal" | "command-injection" | "ssrf-target" | "tenant-boundary" | "sql-injection" | "xss-safe" | "agent-boundary";
 
 /**
@@ -68,6 +72,13 @@ export class RestrictedProcessAdapter implements SandboxAdapter {
       truncated: false,
       redacted: true,
       executionStatus: timedOut ? "timed-out" : "completed",
+      usage: timedOut ? undefined : {
+        cpuMs: Math.min(result.cpuMs, this.recipe.limits.cpuMs),
+        peakMemoryBytes: Math.min(result.peakMemoryBytes, this.recipe.limits.memoryMb * 1024 * 1024),
+        diskBytes: 0,
+        processes: 1,
+        networkRequests: 0,
+      },
       assurance: Object.freeze({
         class: "A1",
         isolation: "restricted-process",
@@ -155,11 +166,11 @@ async function runBuiltInProbe(workerData: { readonly probe: BuiltInProbe; reado
     worker.once("message", (value: unknown) => {
       finish(() => {
         void worker.terminate();
-        if (!value || typeof value !== "object" || Array.isArray(value) || typeof (value as Record<string, unknown>).matched !== "boolean") {
+        if (!value || typeof value !== "object" || Array.isArray(value) || typeof (value as Record<string, unknown>).matched !== "boolean" || !Number.isSafeInteger((value as Record<string, unknown>).cpuMs) || Number((value as Record<string, unknown>).cpuMs) < 0 || !Number.isSafeInteger((value as Record<string, unknown>).peakMemoryBytes) || Number((value as Record<string, unknown>).peakMemoryBytes) < 0) {
           reject(new Error("A1 built-in probe returned an invalid result"));
           return;
         }
-        resolve({ matched: (value as WorkerResult).matched, durationMs: Math.max(0, Date.now() - started) });
+        resolve({ matched: (value as WorkerResult).matched, cpuMs: (value as WorkerResult).cpuMs, peakMemoryBytes: (value as WorkerResult).peakMemoryBytes, durationMs: Math.max(0, Date.now() - started) });
       });
     });
     worker.once("error", () => finish(() => reject(new Error("A1 built-in probe failed"))));

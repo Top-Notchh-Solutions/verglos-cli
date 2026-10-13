@@ -98,6 +98,7 @@ export * from "./hunt-execution-gate.js";
 export * from "./hunt-execution-binding.js";
 export * from "./hunt-verdict.js";
 export * from "./hunt-release-audit.js";
+export * from "./hunt-verification-attempt.js";
 export * from "./hunt-redaction.js";
 export * from "./record-store.js";
 export * from "./record-assembly.js";

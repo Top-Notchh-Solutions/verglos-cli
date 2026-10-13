@@ -68,4 +68,10 @@ function runProbe(input: ProbeInput): boolean {
 // network, process-execution, VM, or module-loading API and never evaluates
 // recipe text as code or as a command line.
 const input = parseInput(workerData);
-parentPort?.postMessage({ matched: runProbe(input) });
+const matched = runProbe(input);
+const usage = process.resourceUsage();
+parentPort?.postMessage({
+  matched,
+  cpuMs: Math.max(0, Math.ceil((usage.userCPUTime + usage.systemCPUTime) / 1_000)),
+  peakMemoryBytes: Math.max(0, process.memoryUsage().rss),
+});

@@ -198,6 +198,11 @@ test("Attack Worker consumes the exact hypothesis and preserves proof/counterexa
   assert.equal(proof.counterexample?.canonicalVerdict, "not-reproduced");
   assert.equal(proof.proof.status, "confirmed");
   assert.equal(proof.proof.negativeControl, "passed");
+  assert.equal(proof.verificationAttempt?.subjectId, workerSubjectId);
+  assert.equal(proof.verificationAttempt?.observationId, "urn:uuid:22345678-1234-4123-8123-123456789abc");
+  assert.equal(proof.verificationAttempt?.findingId, finding.id);
+  assert.equal(proof.verificationAttempt?.verdict, "confirmed");
+  assert.equal(proof.verificationAttempt?.output.evidenceDigest?.value, proof.outcome?.evidenceDigest?.slice("sha256:".length));
   assert.doesNotMatch(JSON.stringify(proof), /fixture contains unsafe|tmp\/fixture-target/u);
 });
 
