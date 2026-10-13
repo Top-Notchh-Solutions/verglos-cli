@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A2 target-code qualification merged (PR #106)
+
+- **Public work:** PR #106 was squash-merged into public `main` as
+  `a413df2f567e377130b1d4d492bf8a610c8b6040`.
+- **Implemented:** seven public-safe A2 target modules and their harnesses now
+  run through the pinned Docker adapter with positive, negative, and
+  unsupported outcomes (21 family/case executions). Timeout and adapter
+  failure remain bounded runner outcomes.
+- **Verification:** self-scan `38331236288`, in-toto binding, and all nine
+  Ubuntu/macOS/Windows Node 20/22/24 protected cells passed. Windows Node
+  20/22 runner failures were rerun successfully before merge.
+- **Boundary:** no customer source, secrets, provider data, network,
+  database, browser, MCP server, or arbitrary shell was used.
+- **Acceptance:** HUNT-008 remains unchecked; this does not prove supported
+  rule approval, legal release treatment, hosted entitlement, independent
+  review, or final release acceptance.
+- **Evidence:** `evidence/hunt-a2-target-code-qualification-pr106-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
 ## 2026-10-13 · Hunt catalog provenance snapshot recorded
 
 - **Identity:** the merged public `main` catalog at

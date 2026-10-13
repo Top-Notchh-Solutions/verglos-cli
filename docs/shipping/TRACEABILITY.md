@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## A2 target-code qualification · 2026-10-13
+
+- **Public merge:** PR #106 merged into public `main` as
+  `a413df2f567e377130b1d4d492bf8a610c8b6040`.
+- **Coverage:** seven sanitized A2 target modules ran through the pinned
+  Docker adapter with positive, negative, and unsupported outcomes: 21
+  family/case executions. Timeout and adapter failure remain explicit runner
+  outcomes.
+- **Verification:** self-scan `38331236288`, in-toto binding, and all nine
+  Ubuntu/macOS/Windows Node 20/22/24 cells passed after rerunning unrelated
+  Windows runner failures.
+- **Boundary:** public-safe fixtures only; no customer source, secrets,
+  provider data, network, database, browser, MCP server, or arbitrary shell.
+- **Acceptance:** HUNT-008 remains open for supported-rule approval,
+  licensing/release treatment, hosted entitlement, independent review, and
+  final acceptance. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `hunt-a2-target-code-qualification-pr106-2026-10-13.md`.
+
 ## Hunt catalog provenance identity · 2026-10-13
 
 - **Source:** public `main` commit

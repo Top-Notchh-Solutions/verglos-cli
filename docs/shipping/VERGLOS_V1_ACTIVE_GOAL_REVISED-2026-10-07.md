@@ -76,6 +76,21 @@ Evidence: `docs/shipping/evidence/hunt-recipe-catalog-provenance-2026-10-13.md`.
 The score remains **228 checked / 52 unchecked / 280 total (81.4%)** until a
 backlog row's complete acceptance evidence exists.
 
+### 2026-10-13 implementation checkpoint — PR #106
+
+Public PR #106 is now merged into `main` as
+`a413df2f567e377130b1d4d492bf8a610c8b6040`. Its seven public-safe A2 target
+modules passed the pinned Docker positive/negative/unsupported matrix (21
+family/case executions), and the protected self-scan, in-toto binding, and
+all Ubuntu/macOS/Windows Node 20/22/24 cells passed. This advances the
+technical target-code qualification slice only. HUNT-008 still requires
+supported-rule approval, licensing/release treatment, hosted entitlement,
+independent review, and final acceptance. The score remains **228 checked /
+52 unchecked / 280 total (81.4%)**; no checkbox changed.
+
+Private evidence:
+`docs/shipping/evidence/hunt-a2-target-code-qualification-pr106-2026-10-13.md`.
+
 ## 2026-10-12 approved-contract execution boundary — current
 
 This section supersedes the older finish-line amendments below. The approved

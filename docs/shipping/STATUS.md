@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A2 target-code qualification merged (PR #106)
+
+Public PR #106 was squash-merged into `main` as
+`a413df2f567e377130b1d4d492bf8a610c8b6040`. The seven public-safe A2 target
+modules now run through the pinned Docker adapter with positive, negative, and
+unsupported cases (21 family/case executions), while timeout and adapter
+failure remain explicit bounded-runner outcomes. The protected self-scan,
+in-toto binding, and all Ubuntu/macOS/Windows Node 20/22/24 cells passed after
+rerunning unrelated Windows runner failures.
+
+Evidence:
+`docs/shipping/evidence/hunt-a2-target-code-qualification-pr106-2026-10-13.md`.
+
+This is technical fixture qualification, not customer-code acceptance,
+independent review, hosted entitlement proof, or final release evidence.
+HUNT-008 remains open and the score remains **228 checked / 52 unchecked /
+280 total (81.4%)**; no checkbox changed.
+
 ## 2026-10-13 · Hunt catalog provenance snapshot recorded
 
 The exact public `main` catalog identity is now recorded for all 15 current
