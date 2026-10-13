@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { validateContractFixture } from "./fixture-validator.js";
-import { planHuntAttackHypothesis, type HuntPlaybookDescriptor } from "./hunt-hypothesis.js";
+import { parseHuntAttackHypothesis, planHuntAttackHypothesis, type HuntPlaybookDescriptor } from "./hunt-hypothesis.js";
 import type { HuntTargetManifest } from "./hunt-target-manifest.js";
 
 const subjectId = `urn:verglos:subject:repository-tree:sha256:${"a".repeat(64)}`;
@@ -72,4 +72,9 @@ test("hypothesis digest is deterministic and registry commands are not caller-co
   assert.equal(first.hypothesisDigest.value, second.hypothesisDigest.value);
   assert.deepEqual(first.playbook?.command, playbook.command);
   assert.throws(() => planHuntAttackHypothesis({ manifest: manifest(), finding: { id: "finding-command", ruleId: "D1-003" }, playbooks: [{ ...playbook, command: ["node\u0000evil"] }] }), /command contains control characters/);
+});
+
+test("hypothesis parser rejects canonical-content tampering", () => {
+  const hypothesis = planHuntAttackHypothesis({ manifest: manifest(), finding: { id: "finding-command", ruleId: "D1-003" }, playbooks: [playbook] });
+  assert.throws(() => parseHuntAttackHypothesis({ ...hypothesis, reason: "tampered" }), /digest does not match/);
 });

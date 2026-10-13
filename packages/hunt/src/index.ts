@@ -9,6 +9,7 @@ export * from "./docker-sandbox-adapter.js";
 export * from "./restricted-process-adapter.js";
 export * from "./supported-recipe-catalog.js";
 export * from "./attack-hypothesis.js";
+export * from "./attack-worker.js";
 export * from "./target-harness.js";
 
 export async function runHunt(

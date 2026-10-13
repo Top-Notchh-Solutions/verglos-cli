@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { runHunt } from "./index.js";
-import { createApprovalReceipt, parseHuntRecipe, type ScanResult } from "@verglos/shared";
+import { createApprovalReceipt, parseHuntRecipe, type HuntTargetManifest, type ScanResult } from "@verglos/shared";
 import { createHuntTestTrustStore, HUNT_TEST_TRUST_KEY_ID } from "./hunt-trust-test-support.js";
+import { planSupportedHuntAttack } from "./attack-hypothesis.js";
+import { runSupportedHuntAttack } from "./attack-worker.js";
 
 const report = {
   projectRoot: "/tmp/project",
@@ -113,6 +115,88 @@ test("Hunt converts cleanup failure into an environment-error outcome", async ()
 test("Hunt refuses adapter execution without an exact trust and approval binding", async () => {
   const adapter = { id: "test-probe", async prepare() {}, async execute() { throw new Error("must not execute"); }, async cleanup() {} };
   await assert.rejects(() => runHunt(report, { adapter }), /execution requires/);
+});
+
+test("Attack Worker consumes the exact hypothesis and preserves proof/counterexample as not-run", async () => {
+  const workerSubjectId = `urn:verglos:subject:artifact:sha256:${"b".repeat(64)}`;
+  const manifest = {
+    schemaId: "urn:verglos:schema:hunt-target-manifest",
+    schemaVersion: "1.0.0",
+    targetSubjectId: workerSubjectId,
+    frameworks: ["express"],
+    entrypoints: [{ path: "app.js", kind: "source" }],
+    routes: [],
+    apis: [],
+    dependencyBoundaries: ["express"],
+    agentMcpTools: [],
+    candidateSinks: [],
+    coverage: { status: "complete", filesInspected: 1, bytesInspected: 10, limitations: [] },
+  } as const;
+  const finding = { id: "finding-worker", ruleId: "hunt.a1.utf8-contains", location: "app.js", severity: "high" as const };
+  const hypothesis = planSupportedHuntAttack({ manifest: manifest as unknown as HuntTargetManifest, finding });
+  const recipe = parseHuntRecipe({
+    schemaId: "urn:verglos:schema:hunt-recipe",
+    schemaVersion: "1.0.0",
+    recipeId: "a1-utf8-contains",
+    ruleId: finding.ruleId,
+    targetSubjectId: workerSubjectId,
+    imageDigest: { algorithm: "sha256", value: "c".repeat(64) },
+    command: ["verglos-probe", "utf8-contains"],
+    assertions: ["probe result is true"],
+    inputs: { needle: "unsafe", value: "fixture contains unsafe" },
+    isolation: "restricted-process",
+    limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 },
+    cleanup: "always",
+    network: { mode: "denied", destinations: [], reason: "A1 pure probe" },
+    redaction: "required",
+    signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID },
+  });
+  const at = "2026-01-01T00:02:00Z";
+  const approval = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: workerSubjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2026-01-01T01:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  const worker = await runSupportedHuntAttack({
+    hypothesis,
+    report: {
+      ...report,
+      projectRoot: "/tmp/fixture-target",
+      findings: [{ id: finding.id, detector: "injection", rule: finding.ruleId, severity: finding.severity, file: finding.location, line: 1, title: "fixture", description: "fixture", confidence: "high", category: "injection" }],
+    },
+    recipe,
+    trust: createHuntTestTrustStore(recipe),
+    approval,
+    entitlement: "hunt.critical",
+    observationId: "urn:uuid:22345678-1234-4123-8123-123456789abc",
+    at,
+  });
+  assert.equal(worker.status, "completed");
+  assert.equal(worker.executes, true);
+  assert.equal(worker.targetSubjectId, workerSubjectId);
+  assert.equal(worker.outcome.canonicalVerdict, "confirmed");
+  assert.equal(worker.proof.status, "not-run");
+  assert.equal(worker.proof.negativeControl, "not-run");
+  assert.match(worker.execution.recipeDigest, /^sha256:/u);
+  assert.doesNotMatch(JSON.stringify(worker), /fixture contains unsafe|tmp\/fixture-target/u);
+});
+
+test("Attack Worker refuses a report without the exact hypothesis finding", async () => {
+  const workerSubjectId = `urn:verglos:subject:artifact:sha256:${"d".repeat(64)}`;
+  const manifest = {
+    schemaId: "urn:verglos:schema:hunt-target-manifest",
+    schemaVersion: "1.0.0",
+    targetSubjectId: workerSubjectId,
+    frameworks: ["express"],
+    entrypoints: [{ path: "app.js", kind: "source" }],
+    routes: [], apis: [], dependencyBoundaries: [], agentMcpTools: [], candidateSinks: [],
+    coverage: { status: "complete", filesInspected: 1, bytesInspected: 1, limitations: [] },
+  } as const;
+  const hypothesis = planSupportedHuntAttack({ manifest: manifest as unknown as HuntTargetManifest, finding: { id: "finding-worker", ruleId: "hunt.a1.utf8-contains" } });
+  const recipe = parseHuntRecipe({
+    schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "a1-utf8-contains", ruleId: "hunt.a1.utf8-contains", targetSubjectId: workerSubjectId,
+    imageDigest: { algorithm: "sha256", value: "e".repeat(64) }, command: ["verglos-probe", "utf8-contains"], assertions: ["probe result is true"], inputs: { needle: "x", value: "x" }, isolation: "restricted-process",
+    limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID },
+  });
+  const at = "2026-01-01T00:02:00Z";
+  const approval = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: workerSubjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2026-01-01T01:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  await assert.rejects(() => runSupportedHuntAttack({ hypothesis, report, recipe, trust: createHuntTestTrustStore(recipe), approval, entitlement: "hunt.critical", observationId: "urn:uuid:32345678-1234-4123-8123-123456789abc", at }), /report does not contain/);
 });
 
 test("Hunt rejects an adapter result that widens the finding identity", async () => {

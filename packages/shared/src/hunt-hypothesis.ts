@@ -205,6 +205,9 @@ export function parseHuntAttackHypothesis(value: unknown): HuntAttackHypothesis 
   if (!parsed.success) throw new Error(`Invalid Hunt attack hypothesis: ${parsed.error.issues.map((issue) => issue.message).join("; ")}`);
   const compatibility = classifySchemaCompatibility(parsed.data.schemaVersion, HUNT_ATTACK_HYPOTHESIS_SCHEMA.version);
   if (compatibility === "upgrade-required" || compatibility === "incompatible") throw new Error(`Hunt attack hypothesis schema ${parsed.data.schemaVersion} requires an explicit reader upgrade or migration.`);
+  const { hypothesisDigest, ...unsigned } = parsed.data;
+  const expectedDigest = createHash("sha256").update(canonicalizeJson(unsigned), "utf8").digest("hex");
+  if (hypothesisDigest.algorithm !== "sha256" || hypothesisDigest.value !== expectedDigest) throw new Error("Hunt attack hypothesis digest does not match its canonical contents.");
   return parsed.data;
 }
 
