@@ -28,10 +28,13 @@ type BuiltInProbe = "utf8-contains" | "path-traversal" | "command-injection" | "
 export class RestrictedProcessAdapter implements SandboxAdapter {
   readonly id = "restricted-process" as const;
   private readonly recipe: HuntRecipe;
+  private readonly inputs: Readonly<Record<string, string>>;
 
-  constructor(recipe: HuntRecipe) {
+  constructor(recipe: HuntRecipe, options: { readonly inputs?: Readonly<Record<string, string>> } = {}) {
     this.recipe = parseHuntRecipe(recipe);
     validateRestrictedRecipe(this.recipe);
+    this.inputs = options.inputs ?? this.recipe.inputs ?? {};
+    validateRestrictedInputs(this.recipe.command[1] as BuiltInProbe, this.inputs);
   }
 
   async prepare(): Promise<void> {}
@@ -40,7 +43,7 @@ export class RestrictedProcessAdapter implements SandboxAdapter {
     validateBinding(this.recipe, input.binding);
     const timeoutMs = Math.min(input.timeoutMs, input.binding.limits.timeoutMs, input.binding.limits.cpuMs);
     const probe = this.recipe.command[1] as BuiltInProbe;
-    const result = await runBuiltInProbe({ probe, ...(this.recipe.inputs ?? {}) }, timeoutMs, input.binding.limits.memoryMb);
+    const result = await runBuiltInProbe({ probe, ...this.inputs }, timeoutMs, input.binding.limits.memoryMb);
     const timedOut = result === "timed-out";
     const matched = timedOut ? undefined : result.matched;
     const canonicalVerdict = classifyHuntOutcome({
@@ -89,9 +92,15 @@ function validateRestrictedRecipe(recipe: HuntRecipe): void {
   if (recipe.limits.memoryMb < 16) throw new Error("A1 adapter requires at least 16 MB for the bounded worker runtime");
   if (recipe.cleanup !== "always") throw new Error("A1 adapter requires unconditional cleanup");
   if (recipe.redaction !== "required") throw new Error("A1 adapter requires output redaction");
-  const requiredInputs = requiredInputNames(recipe.command[1] as BuiltInProbe);
-  const inputs = recipe.inputs;
-  if (!inputs || Object.keys(inputs).sort().join(",") !== [...requiredInputs].sort().join(",") || Object.values(inputs).some((value) => value.length === 0)) throw new Error("A1 built-in fixture probe requires its exact bounded inputs");
+  if (!recipe.inputs) throw new Error("A1 built-in fixture probe requires its exact bounded inputs");
+  validateRestrictedInputs(recipe.command[1] as BuiltInProbe, recipe.inputs);
+}
+
+function validateRestrictedInputs(probe: BuiltInProbe, inputs: Readonly<Record<string, string>>): void {
+  const requiredInputs = requiredInputNames(probe);
+  if (Object.keys(inputs).sort().join(",") !== [...requiredInputs].sort().join(",") || Object.values(inputs).some((value) => value.length === 0 || value.length > 4096 || /[\u0000-\u001f\u007f]/u.test(value))) {
+    throw new Error("A1 built-in fixture probe requires its exact bounded inputs");
+  }
 }
 
 function validateBinding(recipe: HuntRecipe, binding: HuntExecutionBinding): void {

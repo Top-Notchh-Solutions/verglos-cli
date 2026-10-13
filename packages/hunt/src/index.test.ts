@@ -4,7 +4,8 @@ import { runHunt } from "./index.js";
 import { createApprovalReceipt, parseHuntRecipe, type HuntTargetManifest, type ScanResult } from "@verglos/shared";
 import { createHuntTestTrustStore, HUNT_TEST_TRUST_KEY_ID } from "./hunt-trust-test-support.js";
 import { planSupportedHuntAttack } from "./attack-hypothesis.js";
-import { runSupportedHuntAttack } from "./attack-worker.js";
+import { runSupportedHuntAttack, runSupportedHuntProof } from "./attack-worker.js";
+import { SUPPORTED_HUNT_RECIPE_CATALOG } from "./supported-recipe-catalog.js";
 
 const report = {
   projectRoot: "/tmp/project",
@@ -175,6 +176,28 @@ test("Attack Worker consumes the exact hypothesis and preserves proof/counterexa
   assert.equal(worker.proof.negativeControl, "not-run");
   assert.match(worker.execution.recipeDigest, /^sha256:/u);
   assert.doesNotMatch(JSON.stringify(worker), /fixture contains unsafe|tmp\/fixture-target/u);
+
+  const proof = await runSupportedHuntProof({
+    hypothesis,
+    report: {
+      ...report,
+      projectRoot: "/tmp/fixture-target",
+      findings: [{ id: finding.id, detector: "injection", rule: finding.ruleId, severity: finding.severity, file: finding.location, line: 1, title: "fixture", description: "fixture", confidence: "high", category: "injection" }],
+    },
+    recipe,
+    trust: createHuntTestTrustStore(recipe),
+    approval,
+    entitlement: "hunt.critical",
+    observationId: "urn:uuid:22345678-1234-4123-8123-123456789abc",
+    at,
+  });
+  assert.equal(proof.status, "completed");
+  assert.equal(proof.executes, true);
+  assert.equal(proof.outcome?.canonicalVerdict, "confirmed");
+  assert.equal(proof.counterexample?.canonicalVerdict, "not-reproduced");
+  assert.equal(proof.proof.status, "confirmed");
+  assert.equal(proof.proof.negativeControl, "passed");
+  assert.doesNotMatch(JSON.stringify(proof), /fixture contains unsafe|tmp\/fixture-target/u);
 });
 
 test("Attack Worker refuses a report without the exact hypothesis finding", async () => {
@@ -197,6 +220,44 @@ test("Attack Worker refuses a report without the exact hypothesis finding", asyn
   const at = "2026-01-01T00:02:00Z";
   const approval = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: workerSubjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2026-01-01T01:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
   await assert.rejects(() => runSupportedHuntAttack({ hypothesis, report, recipe, trust: createHuntTestTrustStore(recipe), approval, entitlement: "hunt.critical", observationId: "urn:uuid:32345678-1234-4123-8123-123456789abc", at }), /report does not contain/);
+});
+
+test("Proof returns an explicit not-attemptable result for container recipes", async () => {
+  const descriptor = SUPPORTED_HUNT_RECIPE_CATALOG.find((candidate) => candidate.recipeId === "a2-sql-nosql-injection-harness");
+  assert.ok(descriptor && descriptor.adapter === "container" && descriptor.imageDigest);
+  const proofSubjectId = `urn:verglos:subject:artifact:sha256:${"e".repeat(64)}`;
+  const finding = { id: "finding-container-proof", ruleId: descriptor.ruleId, location: "app.js", line: 1, severity: "high" as const };
+  const hypothesis = planSupportedHuntAttack({
+    manifest: {
+      schemaId: "urn:verglos:schema:hunt-target-manifest",
+      schemaVersion: "1.0.0",
+      targetSubjectId: proofSubjectId,
+      frameworks: ["express"],
+      entrypoints: [{ path: "app.js", kind: "source" }],
+      routes: [{ method: "GET", path: "/fixture", file: "app.js" }], apis: [], dependencyBoundaries: [], agentMcpTools: [], candidateSinks: [],
+      coverage: { status: "complete", filesInspected: 1, bytesInspected: 1, limitations: [] },
+    } as unknown as HuntTargetManifest,
+    finding,
+  });
+  const recipe = parseHuntRecipe({
+    schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: descriptor.recipeId, ruleId: descriptor.ruleId, targetSubjectId: proofSubjectId,
+    imageDigest: { algorithm: "sha256", value: descriptor.imageDigest.slice("sha256:".length) }, command: [...descriptor.command], assertions: [...descriptor.assertions],
+    isolation: "container", limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 2, maxNetworkRequests: 0 }, cleanup: "always",
+    network: { mode: "denied", destinations: [], reason: "target harness proof" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID },
+  });
+  const proof = await runSupportedHuntProof({
+    hypothesis,
+    report: { ...report, findings: [{ id: finding.id, detector: "injection", rule: finding.ruleId, severity: finding.severity, file: finding.location, line: finding.line, title: "fixture", description: "fixture", confidence: "high", category: "injection" }] },
+    recipe,
+    trust: createHuntTestTrustStore(recipe),
+    approval: createApprovalReceipt({ requestId: "823e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: proofSubjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" }),
+    entitlement: "hunt.critical", observationId: "urn:uuid:42345678-1234-4123-8123-123456789abc", at: "2026-01-01T00:02:00Z",
+  });
+  assert.equal(proof.status, "not-attemptable");
+  assert.equal(proof.executes, false);
+  assert.equal(proof.proof.status, "not-attemptable");
+  assert.equal(proof.proof.negativeControl, "not-run");
+  assert.match(proof.proof.limitation, /container-backed|not attempted/u);
 });
 
 test("Hunt rejects an adapter result that widens the finding identity", async () => {

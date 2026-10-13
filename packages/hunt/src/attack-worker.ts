@@ -15,10 +15,12 @@ import { DockerSandboxAdapter } from "./docker-sandbox-adapter.js";
 import { HUNT_TARGET_HARNESS_IMAGE, HUNT_TARGET_HARNESS_IMAGE_DIGEST } from "./target-harness.js";
 import { RestrictedProcessAdapter } from "./restricted-process-adapter.js";
 import { SUPPORTED_HUNT_RECIPE_CATALOG, validateSupportedHuntRecipe } from "./supported-recipe-catalog.js";
-import type { HuntFindingOutcome } from "./types.js";
+import type { HuntExecutionContext, HuntFindingOutcome } from "./types.js";
 import { runHunt } from "./index.js";
 
 const WORKER_PROOF_LIMITATION = "Worker output is a candidate Hunt result; independent proof/counterexample and approved remediation retest were not run by this worker.";
+const A1_PROOF_LIMITATION = "Proof is bounded to a first-party A1 synthetic replay and deterministic negative control; it is not independent human review, target-code execution, or an approved remediation retest.";
+const CONTAINER_PROOF_LIMITATION = "Container-backed proof/counterexample was not attempted: this bounded slice requires the pinned target runtime and independent fixture review before it can claim proof.";
 
 export interface HuntAttackWorkerInput {
   readonly hypothesis: unknown;
@@ -51,6 +53,25 @@ export type HuntAttackWorkerResult = Readonly<{
   }>;
 }>;
 
+export type HuntAttackProofResult = Readonly<{
+  readonly status: "completed" | "not-attemptable";
+  readonly executes: boolean;
+  readonly hypothesisDigest: HuntAttackHypothesis["hypothesisDigest"];
+  readonly targetSubjectId: string;
+  readonly findingId: string;
+  readonly ruleId: string;
+  readonly observationId: string;
+  readonly execution: Readonly<Pick<HuntExecutionBinding, "recipeDigest" | "trustPolicyDigest" | "approvalRequestDigest">>;
+  readonly sandbox: string;
+  readonly outcome?: HuntAttackWorkerOutcome;
+  readonly counterexample?: HuntAttackWorkerOutcome;
+  readonly proof: Readonly<{
+    readonly status: "confirmed" | "not-reproduced" | "inconclusive" | "not-attemptable";
+    readonly negativeControl: "passed" | "failed" | "not-run";
+    readonly limitation: string;
+  }>;
+}>;
+
 /**
  * Execute one supported Attack-Hypothesis through the existing bounded Hunt
  * runtime. The hypothesis is only a declarative selector: execution still
@@ -58,6 +79,90 @@ export type HuntAttackWorkerResult = Readonly<{
  * observation binding. No caller-provided command or payload is accepted.
  */
 export async function runSupportedHuntAttack(input: HuntAttackWorkerInput): Promise<HuntAttackWorkerResult> {
+  const prepared = prepareSupportedHuntAttack(input);
+  const result = await executePreparedAttack(prepared);
+  const outcome = result.outcomes[0];
+  if (!outcome) throw new Error("Hunt worker returned no outcome for the bound finding");
+  return Object.freeze({
+    status: "completed" as const,
+    executes: true as const,
+    hypothesisDigest: Object.freeze({ ...prepared.hypothesis.hypothesisDigest }),
+    targetSubjectId: prepared.hypothesis.targetSubjectId,
+    findingId: prepared.finding.id,
+    ruleId: prepared.hypothesis.finding.ruleId,
+    observationId: prepared.input.observationId,
+    execution: projectExecution(prepared.binding),
+    sandbox: result.sandbox,
+    outcome: projectOutcome(outcome),
+    proof: Object.freeze({ status: "not-run" as const, negativeControl: "not-run" as const, limitation: WORKER_PROOF_LIMITATION }),
+  });
+}
+
+/**
+ * Replay one supported A1 fixture and a fixed safe control through the same
+ * signed execution binding. Container recipes intentionally remain explicit
+ * not-attemptable until their target runtime and review evidence are ready.
+ */
+export async function runSupportedHuntProof(input: HuntAttackWorkerInput): Promise<HuntAttackProofResult> {
+  const prepared = prepareSupportedHuntAttack(input);
+  const base = {
+    hypothesisDigest: Object.freeze({ ...prepared.hypothesis.hypothesisDigest }),
+    targetSubjectId: prepared.hypothesis.targetSubjectId,
+    findingId: prepared.finding.id,
+    ruleId: prepared.hypothesis.finding.ruleId,
+    observationId: prepared.input.observationId,
+    execution: projectExecution(prepared.binding),
+  } as const;
+  if (prepared.supported.descriptor.adapter !== "restricted-process") {
+    return Object.freeze({
+      status: "not-attemptable" as const,
+      executes: false,
+      ...base,
+      sandbox: "not-attemptable",
+      proof: Object.freeze({ status: "not-attemptable" as const, negativeControl: "not-run" as const, limitation: CONTAINER_PROOF_LIMITATION }),
+    });
+  }
+
+  const primaryResult = await executePreparedAttack(prepared);
+  const primary = primaryResult.outcomes[0];
+  if (!primary) throw new Error("Hunt proof returned no primary outcome for the bound finding");
+  const counterexampleResult = await executePreparedAttack(prepared, deriveNegativeControlInputs(prepared.recipe));
+  const counterexample = counterexampleResult.outcomes[0];
+  if (!counterexample) throw new Error("Hunt proof returned no counterexample outcome for the bound finding");
+  const projectedPrimary = projectOutcome(primary);
+  const projectedCounterexample = projectOutcome(counterexample);
+  const negativeControl = projectedCounterexample.canonicalVerdict === "not-reproduced" ? "passed" : "failed";
+  const proofStatus = negativeControl !== "passed"
+    ? "inconclusive"
+    : projectedPrimary.canonicalVerdict === "confirmed"
+      ? "confirmed"
+      : projectedPrimary.canonicalVerdict === "not-reproduced"
+        ? "not-reproduced"
+        : "inconclusive";
+  return Object.freeze({
+    status: "completed" as const,
+    executes: true as const,
+    ...base,
+    sandbox: primaryResult.sandbox,
+    outcome: projectedPrimary,
+    counterexample: projectedCounterexample,
+    proof: Object.freeze({ status: proofStatus as "confirmed" | "not-reproduced" | "inconclusive", negativeControl, limitation: A1_PROOF_LIMITATION }),
+  });
+}
+
+type PreparedHuntAttack = Readonly<{
+  input: HuntAttackWorkerInput;
+  hypothesis: HuntAttackHypothesis;
+  recipe: HuntRecipe;
+  trust: HuntRecipeTrustPolicy;
+  approval: ReturnType<typeof ApprovalReceiptSchema.parse>;
+  supported: Extract<ReturnType<typeof validateSupportedHuntRecipe>, { readonly supported: true }>;
+  finding: ScanResult["findings"][number];
+  binding: HuntExecutionBinding;
+  execution: HuntExecutionContext;
+}>;
+
+function prepareSupportedHuntAttack(input: HuntAttackWorkerInput): PreparedHuntAttack {
   if (input.entitlement !== "hunt.critical") throw new Error("Hunt worker entitlement is unavailable");
   const hypothesis = parseHuntAttackHypothesis(input.hypothesis);
   if (hypothesis.status !== "supported" || hypothesis.playbook === undefined) throw new Error("Hunt hypothesis is not executable");
@@ -77,38 +182,50 @@ export async function runSupportedHuntAttack(input: HuntAttackWorkerInput): Prom
   if (hypothesis.finding.severity !== undefined && finding.severity !== hypothesis.finding.severity) throw new Error("report finding severity does not match the hypothesis");
 
   const at = input.at ?? new Date().toISOString();
-  const binding = bindHuntExecution({ recipe, trust, approval, ruleId: hypothesis.finding.ruleId, subjectId: hypothesis.targetSubjectId, observationId: input.observationId, at });
-  const adapter = supported.descriptor.adapter === "restricted-process"
-    ? new RestrictedProcessAdapter(recipe)
-    : supported.descriptor.adapter === "container"
+  const execution: HuntExecutionContext = { recipe, trust, approval, ruleId: hypothesis.finding.ruleId, subjectId: hypothesis.targetSubjectId, observationId: input.observationId, at };
+  return Object.freeze({ input, hypothesis, recipe, trust, approval, supported, finding, binding: bindHuntExecution(execution), execution });
+}
+
+async function executePreparedAttack(prepared: PreparedHuntAttack, inputs?: Readonly<Record<string, string>>): Promise<Awaited<ReturnType<typeof runHunt>>> {
+  const adapter = prepared.supported.descriptor.adapter === "restricted-process"
+    ? new RestrictedProcessAdapter(prepared.recipe, inputs === undefined ? {} : { inputs })
+    : prepared.supported.descriptor.adapter === "container"
       ? new DockerSandboxAdapter({ image: HUNT_TARGET_HARNESS_IMAGE, imageDigest: HUNT_TARGET_HARNESS_IMAGE_DIGEST })
       : undefined;
   if (!adapter) throw new Error("supported Hunt adapter is unavailable");
-
-  const result = await runHunt(input.report, {
+  return runHunt(prepared.input.report, {
     adapter,
     sandbox: adapter.id,
-    findingId: finding.id,
-    severity: [finding.severity],
-    projectRoot: input.report.projectRoot,
-    maxDurationMs: Math.min(recipe.limits.timeoutMs, recipe.limits.cpuMs),
-    execution: { recipe, trust, approval, ruleId: hypothesis.finding.ruleId, subjectId: hypothesis.targetSubjectId, observationId: input.observationId, at },
+    findingId: prepared.finding.id,
+    severity: [prepared.finding.severity],
+    projectRoot: prepared.input.report.projectRoot,
+    maxDurationMs: Math.min(prepared.recipe.limits.timeoutMs, prepared.recipe.limits.cpuMs),
+    execution: prepared.execution,
   });
-  const outcome = result.outcomes[0];
-  if (!outcome) throw new Error("Hunt worker returned no outcome for the bound finding");
-  return Object.freeze({
-    status: "completed" as const,
-    executes: true as const,
-    hypothesisDigest: Object.freeze({ ...hypothesis.hypothesisDigest }),
-    targetSubjectId: hypothesis.targetSubjectId,
-    findingId: finding.id,
-    ruleId: hypothesis.finding.ruleId,
-    observationId: input.observationId,
-    execution: Object.freeze({ recipeDigest: binding.recipeDigest, trustPolicyDigest: binding.trustPolicyDigest, approvalRequestDigest: binding.approvalRequestDigest }),
-    sandbox: result.sandbox,
-    outcome: projectOutcome(outcome),
-    proof: Object.freeze({ status: "not-run" as const, negativeControl: "not-run" as const, limitation: WORKER_PROOF_LIMITATION }),
-  });
+}
+
+function deriveNegativeControlInputs(recipe: HuntRecipe): Readonly<Record<string, string>> {
+  const probe = recipe.command[1];
+  switch (probe) {
+    case "utf8-contains": {
+      const needle = recipe.inputs?.needle ?? "";
+      const value = [..."0123456789"].find((candidate) => !candidate.includes(needle));
+      if (!value) throw new Error("A1 utf8 negative control could not be bounded");
+      return Object.freeze({ needle, value });
+    }
+    case "path-traversal": return Object.freeze({ path: "safe/file.txt" });
+    case "command-injection": return Object.freeze({ input: "safe-input" });
+    case "ssrf-target": return Object.freeze({ url: "https://example.invalid/" });
+    case "tenant-boundary": return Object.freeze({ authorizedTenant: "tenant-a", requestedTenant: "tenant-a" });
+    case "sql-injection": return Object.freeze({ input: "SELECT id FROM records WHERE id = $1" });
+    case "xss-safe": return Object.freeze({ html: "<p>safe text</p>" });
+    case "agent-boundary": return Object.freeze({ allowlist: "read", tool: "read" });
+    default: throw new Error("A1 negative control is unavailable for this probe");
+  }
+}
+
+function projectExecution(binding: HuntExecutionBinding): Readonly<Pick<HuntExecutionBinding, "recipeDigest" | "trustPolicyDigest" | "approvalRequestDigest">> {
+  return Object.freeze({ recipeDigest: binding.recipeDigest, trustPolicyDigest: binding.trustPolicyDigest, approvalRequestDigest: binding.approvalRequestDigest });
 }
 
 function matchesPlaybookProjection(
