@@ -43,6 +43,7 @@ const A2_FAMILIES = [
   { recipeId: "a2-agent-mcp-harness", ruleId: "AGENT-001", harness: "agent-mcp" },
   { recipeId: "a2-xss-harness", ruleId: "D1-004", harness: "xss" },
   { recipeId: "a2-authorization-harness", ruleId: "D3-001", harness: "authorization" },
+  { recipeId: "a2-prototype-pollution-harness", ruleId: "D1-008", harness: "prototype-pollution" },
 ] as const;
 
 function a2Recipe(family: (typeof A2_FAMILIES)[number]): HuntRecipe {
