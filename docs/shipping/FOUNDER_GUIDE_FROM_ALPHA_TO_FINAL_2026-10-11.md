@@ -10,6 +10,11 @@ This guide remains the comprehensive founder explanation; its older
 recurring-card discussion is historical context and does not create a new
 blocking direction for V1.
 
+The current commercial and acceptance companion is
+`FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md`. It supersedes any older
+plan-value or pricing summary in this guide while preserving the historical
+explanations below.
+
 This is the plain-language explanation of where Verglos has reached and what
 is still needed before calling the new product a final V1 release.
 
@@ -39,7 +44,7 @@ Verglos is not at the beginning.
 
 The current private backlog score is:
 
-**223 checked / 57 open / 280 total — 79.6%**
+**228 checked / 52 open / 280 total — 81.4%**
 
 The open items are not all missing code. Many now require evidence or a
 decision that only an external provider, an authorized company owner, an

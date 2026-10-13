@@ -6,7 +6,7 @@
 **Status:** private product and implementation authority  
 **Canonical contract:** FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md  
 **Coverage matrix:** FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md  
-**Active goal:** VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-07.md
+**Active goal:** VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md
 
 This document answers a commercial question for every Final V1 surface:
 
@@ -609,4 +609,3 @@ position, but those words do not replace benchmark evidence.
 - [GitHub secret scanning](https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning)
 - [GitHub dependency review](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review)
 - [GitLab application security testing](https://docs.gitlab.com/user/application_security/)
-

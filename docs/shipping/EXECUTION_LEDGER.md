@@ -9,8 +9,9 @@
   IaC, Attest/records, MCP, Hunt, Web, organizations, SCM, Studio,
   Enterprise, billing, distribution, and quality.
 - **Contract link:** The canonical product contract now points to the blueprint
-  as its commercial and acceptance companion; the feature matrix and active
-  goal point to the same authority.
+  as its commercial and acceptance companion; the feature matrix and
+  `VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md` point to the same
+  authority.
 - **Disposition:** Documentation, research, and traceability only. No public
   source, secret, customer data, provider state, entitlement, database,
   Production, npm, or backlog checkbox changed.

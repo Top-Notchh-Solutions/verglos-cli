@@ -4,7 +4,7 @@
 **Status:** private implementation authority  
 **Date:** 2026-10-13  
 **Canonical contract:** `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`  
-**Canonical goal:** `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-07.md`
+**Canonical goal:** `VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md`
 **Competitive research:** `COMPETITIVE_PRODUCT_RESEARCH_2026-10-13.md`
 **Paying-value blueprint:** `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md`
 

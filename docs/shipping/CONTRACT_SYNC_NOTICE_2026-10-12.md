@@ -14,9 +14,18 @@ Studio/Enterprise, distribution, and Point-5 acceptance. No row is considered
 implemented merely because the matrix names it. The live private score remains
 **228 checked / 52 unchecked / 280 total (81.4%)**.
 
+The companion commercial authority is
+`FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md`. It defines the customer
+problem, paid outcome, plan boundary, cost guardrail, and acceptance metric for
+each surface. The backlog remains the only checkbox authority.
+
 The approved canonical contract is
 `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`. This notice is an
 index, not a second contract.
+
+The replacement execution authority is
+`VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md`. The older revised goal
+file is retained as historical traceability.
 
 ## What is now fixed
 

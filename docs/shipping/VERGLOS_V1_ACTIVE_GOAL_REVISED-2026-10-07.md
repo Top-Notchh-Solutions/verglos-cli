@@ -1,5 +1,9 @@
 # Verglos V1 Active Shipping Goal — Approved Contract, Implementation, and Point-5 Qualification
 
+> **Replacement:** The current execution authority is
+> `VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md`. This file is retained
+> for historical checkpoints and prior goal amendments.
+
 ## 2026-10-13 full-product paying-value amendment — current operating rule
 
 The product scope is now documented in the private

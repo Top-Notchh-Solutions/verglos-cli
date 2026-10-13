@@ -25,8 +25,8 @@
   paying-product surfaces, five Hunt roles, ten attack-verification families,
   scanner-to-Hunt graph, plan value, economic guardrails, and benchmark bar.
 - **Cross-document mapping:** `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`
-  and `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-07.md` now point to the same
-  requirements and explicitly preserve the current 228/52/280 score.
+  and `VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md` now point to the
+  same requirements and explicitly preserve the current 228/52/280 score.
 - **Implementation truth:** The public catalog's eight A1 probes and seven A2
   harness descriptors are foundations only; no claim of full autonomous
   real-target coverage is made.

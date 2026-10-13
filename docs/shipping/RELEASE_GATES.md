@@ -15,6 +15,12 @@ means the contract has an acceptance condition; it does not mean the gate is
 green. Current score remains **228 checked / 52 unchecked / 280 total
 (81.4%)**.
 
+The paying-value and commercial acceptance requirements for every plan and
+surface are maintained in
+`FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md`. It is a requirements
+companion, not a gate pass: implementation, runtime evidence, and the row's
+complete acceptance condition are still required.
+
 ## 2026-10-11 · QUAL-WEB-006 account-shell qualification addendum
 
 The current authenticated account shell passed desktop/mobile Lighthouse
