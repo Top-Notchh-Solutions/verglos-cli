@@ -3,7 +3,7 @@ import { ContentDigestSchema, SubjectIdSchema } from "./subject.js";
 import { StableContractIdSchema } from "./engine.js";
 
 const noControls = (value: string) => !/[\u0000-\u001f\u007f]/.test(value);
-const HuntRuleIdSchema = z.string().min(1).max(128).regex(/^[A-Za-z][A-Za-z0-9]*(?:[._:-][A-Za-z0-9]+)*$/u);
+export const HuntRuleIdSchema = z.string().min(1).max(128).regex(/^[A-Za-z][A-Za-z0-9]*(?:[._:-][A-Za-z0-9]+)*$/u);
 
 function parseNetworkOrigin(value: string): URL | undefined {
   try { return new URL(value); } catch { return undefined; }

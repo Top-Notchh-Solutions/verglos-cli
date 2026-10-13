@@ -2,9 +2,8 @@ import { z } from "zod";
 import { approvalRequestDigest, ApprovalReceiptSchema, type ApprovalReceipt } from "./approval-receipt.js";
 import { canExecuteHunt } from "./hunt-execution-gate.js";
 import { huntRecipeDigest, huntRecipeTrustPolicyDigest, parseHuntRecipeTrustPolicy, type HuntRecipeTrustPolicy } from "./hunt-recipe-trust.js";
-import { HuntResourceLimitsSchema, parseHuntRecipe, type HuntRecipe } from "./hunt-recipe.js";
+import { HuntResourceLimitsSchema, HuntRuleIdSchema, parseHuntRecipe, type HuntRecipe } from "./hunt-recipe.js";
 import { ObservationIdSchema } from "./observation.js";
-import { StableContractIdSchema } from "./engine.js";
 import { ContentDigestSchema, SubjectIdSchema } from "./subject.js";
 
 const ApprovalDigest = z.string().regex(/^sha256:[a-f0-9]{64}$/);
@@ -16,7 +15,7 @@ export const HuntExecutionBindingSchema = z.object({
   recipeDigest: DigestString,
   trustPolicyDigest: DigestString,
   approvalRequestDigest: ApprovalDigest,
-  ruleId: StableContractIdSchema,
+  ruleId: HuntRuleIdSchema,
   subjectId: SubjectIdSchema,
   observationId: ObservationIdSchema,
   imageDigest: ContentDigestSchema,
