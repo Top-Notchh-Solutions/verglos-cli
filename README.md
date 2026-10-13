@@ -223,6 +223,26 @@ An unsupported rule or incomplete target context is reported explicitly. A
 signed recipe, trusted feed, entitlement, approval, observation binding, and
 bounded worker are still required before any Hunt execution.
 
+Once those gates are independently available, execute one hypothesis through
+the bounded worker with the exact scanner report, signed recipe, trust store,
+approval receipt, and observation identity:
+
+```bash
+verglos hunt worker hypothesis.json \
+  --report report.json \
+  --recipe recipe.json \
+  --trust-store trust-store.json \
+  --approval approval.json \
+  --observation-id urn:uuid:12345678-1234-4123-8123-123456789abc \
+  --json
+```
+
+The worker rechecks the finding, subject, rule, catalog projection, signed
+recipe, entitlement, approval, and observation binding before selecting the
+declared restricted-process or pinned Docker adapter. Its result identifies a
+candidate worker outcome; independent proof/counterexample and approved
+remediation retest remain explicit subsequent gates.
+
 The no-argument command validates the Pro capability and explains the required binding. Execution is explicit and fail-closed:
 
 ```bash
