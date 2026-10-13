@@ -35,15 +35,25 @@ function recipe(inputs: Readonly<Record<string, string>> = { needle: "unsafe", v
   });
 }
 
-function a2SqlRecipe(): HuntRecipe {
+const A2_FAMILIES = [
+  { recipeId: "a2-sql-nosql-injection-harness", ruleId: "D1-001", harness: "sql-nosql-injection" },
+  { recipeId: "a2-command-injection-harness", ruleId: "D1-003", harness: "command-injection" },
+  { recipeId: "a2-path-traversal-harness", ruleId: "D1-006", harness: "path-traversal" },
+  { recipeId: "a2-ssrf-harness", ruleId: "D9-002", harness: "ssrf" },
+  { recipeId: "a2-agent-mcp-harness", ruleId: "AGENT-001", harness: "agent-mcp" },
+  { recipeId: "a2-xss-harness", ruleId: "D1-004", harness: "xss" },
+  { recipeId: "a2-authorization-harness", ruleId: "D3-001", harness: "authorization" },
+] as const;
+
+function a2Recipe(family: (typeof A2_FAMILIES)[number]): HuntRecipe {
   return parseHuntRecipe({
     schemaId: "urn:verglos:schema:hunt-recipe",
     schemaVersion: "1.0.0",
-    recipeId: "a2-sql-nosql-injection-harness",
-    ruleId: "D1-001",
+    recipeId: family.recipeId,
+    ruleId: family.ruleId,
     targetSubjectId: subjectId,
     imageDigest: { algorithm: "sha256", value: HUNT_TARGET_HARNESS_IMAGE_DIGEST.slice("sha256:".length) },
-    command: ["node", "/workspace/.verglos/hunt/sql-nosql-injection.mjs"],
+    command: ["node", `/workspace/.verglos/hunt/${family.harness}.mjs`],
     assertions: [TARGET_HARNESS_ASSERTION],
     isolation: "container",
     limits: { timeoutMs: 10_000, cpuMs: 9_000, memoryMb: 256, diskMb: 128, outputBytes: 16_384, processes: 8, maxNetworkRequests: 0 },
@@ -117,42 +127,44 @@ test("HUNT-009 preserves a negative probe as not-reproduced without leaking inpu
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test("HUNT-009 reaches the signed A2 target harness through the public CLI path", { skip: process.env.VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION !== "1" ? "set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run the A2 CLI Docker qualification" : false }, async () => {
+test("HUNT-009 reaches every signed A2 target harness through the public CLI path", { skip: process.env.VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION !== "1" ? "set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run the A2 CLI Docker qualification" : false }, async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-execute-a2-"));
   try {
     const targetRoot = fileURLToPath(new URL("../../hunt/fixtures/target-code/", import.meta.url));
-    const selected = a2SqlRecipe();
-    const inputs = await makeInputs(root, selected, targetRoot);
-    const logs: string[] = [];
-    const originalLog = console.log;
-    console.log = (...values: unknown[]) => logs.push(values.join(" "));
-    try {
-      const code = await executeHuntRecipe({
-        ...inputs,
-        ruleId: "D1-001",
-        subjectId,
-        observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
-        json: true,
-        runtimeLoader: localHuntRuntime,
-      });
-      assert.equal(code, 1);
-    } finally { console.log = originalLog; }
-    const output = JSON.parse(logs[0] ?? "{}") as Record<string, unknown>;
-    assert.equal(output.status, "completed");
-    assert.equal(output.executionAuthorized, true);
-    assert.equal(output.recipeId, "a2-sql-nosql-injection-harness");
-    assert.equal(output.sandbox, "docker");
-    assert.deepEqual((output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.canonicalVerdict), ["confirmed"]);
-    assert.deepEqual((output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.assurance), [{
-      class: "A2",
-      isolation: "container",
-      securityBoundary: true,
-      sourceAccess: "read-only",
-      network: "denied",
-      processLimit: 8,
-      limitation: "A2 runs a signed recipe in a pinned Docker container with read-only project input, denied network, dropped capabilities, and bounded resources; host Docker daemon/VM policy and platform-specific kernel differences remain outside this result",
-    }]);
-    assert.doesNotMatch(logs.join("\n"), /OR 1=1/u);
+    for (const family of A2_FAMILIES) {
+      const selected = a2Recipe(family);
+      const inputs = await makeInputs(root, selected, targetRoot);
+      const logs: string[] = [];
+      const originalLog = console.log;
+      console.log = (...values: unknown[]) => logs.push(values.join(" "));
+      try {
+        const code = await executeHuntRecipe({
+          ...inputs,
+          ruleId: family.ruleId,
+          subjectId,
+          observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+          json: true,
+          runtimeLoader: localHuntRuntime,
+        });
+        assert.equal(code, 1, family.recipeId);
+      } finally { console.log = originalLog; }
+      const output = JSON.parse(logs[0] ?? "{}") as Record<string, unknown>;
+      assert.equal(output.status, "completed", family.recipeId);
+      assert.equal(output.executionAuthorized, true, family.recipeId);
+      assert.equal(output.recipeId, family.recipeId);
+      assert.equal(output.sandbox, "docker", family.recipeId);
+      assert.deepEqual((output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.canonicalVerdict), ["confirmed"], family.recipeId);
+      assert.deepEqual((output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.assurance), [{
+        class: "A2",
+        isolation: "container",
+        securityBoundary: true,
+        sourceAccess: "read-only",
+        network: "denied",
+        processLimit: 8,
+        limitation: "A2 runs a signed recipe in a pinned Docker container with read-only project input, denied network, dropped capabilities, and bounded resources; host Docker daemon/VM policy and platform-specific kernel differences remain outside this result",
+      }], family.recipeId);
+      assert.doesNotMatch(logs.join("\n"), /OR 1=1/u, family.recipeId);
+    }
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
