@@ -1,5 +1,36 @@
 # Verglos V1 risk register
 
+## 2026-10-13 · R-HUNT-A2-CLI-002 all-family fixture evidence boundary
+
+- **Risk:** A green seven-family CLI matrix could be mistaken for complete
+  Hunt acceptance or for seven autonomous attacking agents.
+- **Mitigation:** Record the exact PR/merge and protected checks while stating
+  that the test uses sanitized reference harnesses, signed declarative
+  recipes, and a bounded Docker path. Keep HUNT-008–011 open for their
+  provenance, hosted, Linux/Docker, independent-review, and release gates.
+- **Status:** Technical slice merged in public PR #109; no acceptance
+  checkbox is closed.
+- **Evidence:** `evidence/hunt-a2-cli-all-families-pr109-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%).
+
+## 2026-10-13 · R-HUNT-DOC-001 stale maturity instructions
+
+- **Risk:** Public agent instructions could describe Hunt as only an alpha
+  shell even though bounded A1/A2 execution is now present, or could overstate
+  the reference harnesses as autonomous agents or complete customer-code
+  coverage.
+- **Mitigation:** Use the private feature matrix as the authority; align the
+  public CLI/Web instructions to say bounded A1/A2 implementation with
+  qualification gates still open. Keep the four controlled Hunt roles
+  distinct from autonomous AI services.
+- **Status:** Remediation is in public-safe documentation PRs. No private
+  tracker or evidence content is sent to the public repository.
+- **Residual risk:** HUNT-008..011 still require the acceptance artifacts
+  listed in the backlog, including provenance/licensing, hosted entitlement,
+  adversarial and independent-review evidence.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%).
+- **Evidence:** `evidence/hunt-a2-contract-alignment-2026-10-13.md`.
+
 ## 2026-10-13 · R-HUNT-FIXTURE-VS-TARGET-002 eight-probe catalog boundary
 
 - **Risk:** The eight-probe A1 catalog could be mistaken for eight attack

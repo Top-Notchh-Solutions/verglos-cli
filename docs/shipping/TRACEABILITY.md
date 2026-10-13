@@ -1,5 +1,40 @@
 # Verglos V1 traceability
 
+## A2 all-family public CLI execution · 2026-10-13
+
+- **Public merge:** PR #109 merged into public `main` as
+  `16fdafd814e0ee2d161243cf53d86a425075800e` from
+  `eec7174e7c2af2ec5e88511f8160052f75117822` with a regular merge commit.
+- **Implementation mapping:** `packages/cli/src/hunt-execute.test.ts` drives
+  all seven signed A2 reference families through the public bounded Docker
+  execution path.
+- **Verification mapping:** protected self-scan, in-toto binding, and all nine
+  Ubuntu/macOS/Windows Node 20/22/24 matrix cells passed; local focused
+  all-family execution passed.
+- **Boundary:** public sanitized references only. This does not prove
+  arbitrary customer-code acceptance, autonomous AI attackers, host/OS
+  isolation, or general remote DAST.
+- **Acceptance:** HUNT-008–011 remain unchecked; score remains **228/52/280
+  (81.4%)**.
+- **Evidence:** `evidence/hunt-a2-cli-all-families-pr109-2026-10-13.md`.
+
+## Hunt/A2 contract alignment · 2026-10-13
+
+- **Authority:** active goal plus
+  `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`.
+- **Implementation mapping:** public `main` `f4fe4987` contains eight A1
+  deterministic descriptors and seven A2 pinned-Docker descriptors. The
+  current public A2 path is a bounded reference-harness qualification slice,
+  not complete customer-code acceptance.
+- **Role mapping:** Planner/Scout, Attack Worker, Proof Adjudicator, and
+  Release Auditor are controlled responsibilities in one flow; no claim of
+  four autonomous AI agents is made.
+- **Documentation mapping:** public CLI/Web stale alpha-only instructions are
+  corrected in separate public-safe PRs; private state remains here.
+- **Acceptance:** HUNT-008..011 stay unchecked; score remains **228/52/280
+  (81.4%)**.
+- **Evidence:** `evidence/hunt-a2-contract-alignment-2026-10-13.md`.
+
 ## A2 public CLI execution path · 2026-10-13
 
 - **Public merge:** PR #107 merged into public `main` as

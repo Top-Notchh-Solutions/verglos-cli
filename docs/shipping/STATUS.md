@@ -1,5 +1,38 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A2 all-family public CLI qualification merged (PR #109)
+
+Public PR #109 is merged into `main` with regular merge commit
+`16fdafd814e0ee2d161243cf53d86a425075800e` from source commit
+`eec7174e7c2af2ec5e88511f8160052f75117822`. The public test now drives all
+seven signed A2 reference families through the bounded CLI/Docker path and
+asserts authorization, completion, confirmed verdicts, assurance metadata,
+and redaction. The protected self-scan, in-toto binding, and macOS/Ubuntu/
+Windows Node 20/22/24 matrix passed.
+
+This is technical implementation evidence only. HUNT-008 remains open for
+supported-rule approval, provenance/licensing, hosted entitlement, Linux/
+Docker host qualification, independent review, and final release evidence;
+HUNT-009 through HUNT-011 remain downstream or separately gated. Score stays
+**228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox changed.
+
+Evidence: `evidence/hunt-a2-cli-all-families-pr109-2026-10-13.md`.
+
+## 2026-10-13 · A2 contract/documentation alignment audit
+
+The active goal and `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md` are the
+operating authorities for the current Hunt/A2 work. The public CLI contains
+eight A1 descriptors and seven A2 descriptors with bounded Docker execution;
+the four Hunt roles are controlled responsibilities, not autonomous AI
+services. Stale alpha-only wording in the public CLI/Web agent instructions is
+being corrected in public-safe PRs.
+
+No checkbox changed. HUNT-008 through HUNT-011 remain open for their recorded
+acceptance, provenance, hosted-entitlement, adversarial, and independent-review
+requirements. Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence: `evidence/hunt-a2-contract-alignment-2026-10-13.md`.
+
 ## 2026-10-13 · A2 public CLI execution path merged (PR #107)
 
 Public PR #107 was squash-merged into `main` as

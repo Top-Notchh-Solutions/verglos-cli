@@ -1,5 +1,37 @@
 # Verglos shipping decisions
 
+## 2026-10-13 · Preserve the all-family A2 test as a separate public merge
+
+- **Decision:** Merge the all-family A2 CLI qualification test with a regular
+  merge commit and preserve its source commit; do not squash or rewrite the
+  public history.
+- **Reason:** The seven-family test is a substantive public implementation
+  and cross-platform qualification slice, and the project wants each logical
+  contribution visible in the repository history.
+- **Boundary:** This proves sanitized reference-harness execution only. It
+  does not create supported-rule approval, hosted entitlement, independent
+  review, legal clearance, or final release evidence.
+- **Disposition:** PR #109 merged as
+  `16fdafd814e0ee2d161243cf53d86a425075800e`; no checkbox or score change.
+- **Score:** **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-a2-cli-all-families-pr109-2026-10-13.md`.
+
+## 2026-10-13 · Keep A2 as the active Hunt track and correct stale instructions
+
+- **Decision:** Continue from the merged A2 implementation before selecting a
+  different product epic. Align public agent instructions with the approved
+  feature matrix, while keeping HUNT-008 through HUNT-011 open until their
+  complete acceptance evidence exists.
+- **Reason:** The public code has bounded A1/A2 technical paths, but the old
+  alpha-only wording made the implementation state appear absent. The matrix
+  distinguishes implementation progress from final acceptance.
+- **Boundary:** Four Hunt roles are controlled flow responsibilities, not
+  autonomous AI services. Do not claim general DAST, complete customer-code
+  coverage, or host/OS isolation from the current reference fixtures.
+- **Disposition:** Documentation alignment only; no checkbox or score change.
+- **Score:** 228/52/280 (81.4%).
+- **Evidence:** `evidence/hunt-a2-contract-alignment-2026-10-13.md`.
+
 ## 2026-10-13 · Cover all approved Hunt sub-scopes with bounded fixture probes
 
 - **Decision:** Extend the first-party A1 fixture catalog from five to eight

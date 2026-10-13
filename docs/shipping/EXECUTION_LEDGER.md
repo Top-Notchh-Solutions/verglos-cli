@@ -1,5 +1,45 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A2 all-family public CLI qualification merged (PR #109)
+
+- **Public work:** PR #109 merged into public `main` with regular merge
+  commit `16fdafd814e0ee2d161243cf53d86a425075800e` from source commit
+  `eec7174e7c2af2ec5e88511f8160052f75117822`. No squash or force-push was
+  used.
+- **Implemented:** the signed public CLI execution test now covers all seven
+  A2 reference families: SQL/NoSQL injection, command injection, path
+  traversal, SSRF, Agent/MCP boundary, safe XSS, and authorization/tenant
+  boundary.
+- **Verification:** each family completed through the pinned Docker path with
+  authorization, confirmed verdict, assurance metadata, and redaction
+  assertions. Protected self-scan, in-toto, and all macOS/Ubuntu/Windows
+  Node 20/22/24 cells passed.
+- **Boundary:** sanitized reference harnesses only; no customer source,
+  secret, provider, database, entitlement, Production, npm, or customer-data
+  write. This is not autonomous AI-agent or general DAST evidence.
+- **Acceptance:** HUNT-008 remains open for supported-rule approval,
+  provenance/licensing, hosted entitlement, Linux/Docker host qualification,
+  independent review, and final release evidence. HUNT-009–011 remain open.
+- **Evidence:** `evidence/hunt-a2-cli-all-families-pr109-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
+## 2026-10-13 · A2 contract/documentation alignment audit
+
+- **Authority:** active goal `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-07.md` and
+  private matrix `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`.
+- **Verified:** public `main` at `f4fe4987`; 15 public catalog descriptors
+  (eight A1 and seven A2), seven sanitized A2 harness families, and the
+  bounded signed CLI execution path are present. Hunt's four roles remain
+  controlled flow roles, not four autonomous AI agents.
+- **Documentation repair:** stale alpha-only CLI/Web instruction wording is
+  being replaced with the current bounded-runtime and qualification-gate
+  wording in public-safe PRs.
+- **Disposition:** no checkbox, score, entitlement, provider, database,
+  Production, npm, or customer state changed.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%).
+- **Evidence:** `evidence/hunt-a2-contract-alignment-2026-10-13.md`.
+
 ## 2026-10-13 · A2 public CLI execution path merged (PR #107)
 
 - **Public work:** PR #107 was squash-merged into public `main` as
