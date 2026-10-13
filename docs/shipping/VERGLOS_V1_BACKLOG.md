@@ -2,9 +2,11 @@
 
 ## 2026-10-13 · Current A2 and TEAM-CLI evidence checkpoint
 
-PR #102 (`e1060842`) adds positive, negative,
-and unsupported fixture outcomes to all seven A2 reference harnesses. Direct
-pinned-Docker execution passed all 21 combinations. Preview now has a
+PR #102 adds positive, negative, and unsupported fixture outcomes to all seven
+A2 reference harnesses, passed the attached self-scan/platform matrix, and
+was merged into public `main` as
+`17393d9e0f4deeac33517800460a8606682332a1`. Direct pinned-Docker execution
+passed all 21 combinations. Preview now has a
 signer-configured deployment, but its policy route correctly returns
 fail-closed 503 because the isolated database has no SCM installation or
 published policy row. These are implementation/evidence updates only;

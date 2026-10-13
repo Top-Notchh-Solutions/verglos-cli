@@ -43,8 +43,8 @@ pass.
 
 The seven A2 reference harnesses now have positive, negative, and unsupported
 fixture outcomes; all 21 direct runs passed in the pinned Docker boundary.
-The exact public head under validation is PR #102,
-`e1060842`. Preview-only organization-policy
+PR #102 passed the attached self-scan and platform matrix and is merged into
+public `main` as `17393d9e0f4deeac33517800460a8606682332a1`. Preview-only organization-policy
 signing is configured and deployed, but the isolated policy route returns the
 expected fail-closed 503 because no SCM installation or published policy row
 exists. These facts advance implementation evidence without closing HUNT-008

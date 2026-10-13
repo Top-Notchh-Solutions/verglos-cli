@@ -7,9 +7,9 @@ that accept positive, negative, and unsupported fixture cases. Direct pinned
 Docker execution passed all 21 family/case combinations with the expected
 canonical outcomes. Local Hunt, CLI, build, and diff checks passed.
 
-PR #102 is open at the exact head commit
-`e1060842`; its fresh repository-dispatched self-scan and platform matrix are
-still being observed. The private evidence
+PR #102 passed its attached self-scan and platform matrix and was squash-
+merged into public `main` as
+`17393d9e0f4deeac33517800460a8606682332a1`. The private evidence
 packet is
 `docs/shipping/evidence/hunt-a2-fixture-outcome-matrix-pr102-2026-10-13.md`.
 

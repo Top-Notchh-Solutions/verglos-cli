@@ -2,8 +2,9 @@
 
 ## A2 outcome matrix and hosted signer · 2026-10-13
 
-- **Public implementation:** PR #102 head `e1060842` adds positive, negative, and
-  unsupported outcomes to all seven A2 sanitized reference harnesses.
+- **Public implementation:** PR #102 adds positive, negative, and unsupported
+  outcomes to all seven A2 sanitized reference harnesses and is merged into
+  public `main` as `17393d9e0f4deeac33517800460a8606682332a1`.
 - **Evidence:** 21 direct pinned-Docker fixture runs passed; local Hunt/CLI/
   build/diff checks passed. Timeout and infrastructure failure remain
   adapter outcomes rather than fabricated harness verdicts.

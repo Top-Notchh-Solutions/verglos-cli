@@ -5,6 +5,7 @@ Public repository: `Top-Notchh-Solutions/verglos-cli`
 Pull request: `#102`  
 Head commit: `e1060842`
 Superseded draft head: `3801125f9486ccc2d4725b178766ac703dd8f762`
+Merged into public `main` as: `17393d9e0f4deeac33517800460a8606682332a1`
 
 ## What this records
 
@@ -54,14 +55,18 @@ occur.
 
 ## Public validation
 
-PR #102 is on the fresh branch
+PR #102 was on the fresh branch
 `codex/hunt-a2-outcome-matrix-2026-10-13`, based directly on current public
 `main`. The old branch history was replaced with `--force-with-lease` against
 the verified superseded head so the PR no longer carries duplicate squashed
-history. Fresh repository-dispatched self-scan and cross-platform runs were
-started for `e1060842`; their final conclusions and merge state must be
-recorded after GitHub finishes. A manually dispatched run is not silently
-treated as a protected pull-request check.
+history. The attached pull-request validations passed:
+
+- self-scan run `38325261454` — success;
+- platform matrix run `38325261474` — success, including in-toto and all
+  Ubuntu/macOS/Windows Node 20/22/24 jobs.
+
+The PR was then squash-merged normally; no failed-check or admin bypass was
+used.
 
 ## Limitations and acceptance state
 
