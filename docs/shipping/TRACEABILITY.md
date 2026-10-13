@@ -1,5 +1,37 @@
 # Verglos V1 traceability
 
+## HUNT remediation/retest contribution · 2026-10-13
+
+- **Public merge:** PR #118 merged normally as
+  `646bd9748910ebb16079ba8461ff7af6e2500799`, preserving source commits
+  `83560121f678bfe40a555a729994a4bb05e3c518` and
+  `7c3f0203a069972fb65b7e3ce5949c5b1f954f1e`; no squash or force-push was
+  used.
+- **Implementation mapping:** The remediation proposal and approval now bind
+  exact before subject, finding, relative file scope, policy effect, and no
+  network. `hunt retest` requires `hunt.critical`, the existing signed
+  recipe/trust/execute binding, a distinct post-remediation subject, and a
+  separate exact remediation mutate approval. It reruns the same proof and
+  counterexample path and projects an explicit limitation with `applied:false`.
+- **Verification mapping:** Build 8/8, typecheck 14/14, lint 6/6,
+  shared/Hunt/CLI package tests, focused retest assertions, and diff checks
+  passed. Protected self-scan `38382401345` and platform/in-toto run
+  `38382401289` passed all eleven required checks.
+- **Boundary:** The proof uses only first-party local synthetic/reference
+  fixtures. The retest does not mutate files, accept patch bytes, execute
+  arbitrary commands, upload source, or contact a provider. No customer data,
+  hosted target, credential, database, live MCP server, or Production system
+  was used. Owner authorization does not substitute for independent review,
+  provider confirmation, customer acceptance, legal clearance, or release
+  approval.
+- **Acceptance:** This advances HUNT-008/HUNT-009 remediation/retest wiring
+  only. Complete per-family authority/provenance, trusted/licensed roots,
+  hosted entitlement, provider confirmation, required isolation qualification,
+  independent adjudication, `.vgl` Release Record binding, and final release
+  acceptance remain open. HUNT-008/009 remain unchecked; HUNT-010/011 are
+  unchanged. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-retest-pr118-2026-10-13.md`.
+
 ## HUNT A2 Proof/Counterexample contribution · 2026-10-13
 
 - **Public merge:** PR #117 merged normally as

@@ -11,6 +11,25 @@
 
 ## 0.1 Current shipping checkpoint — 2026-10-13
 
+PR #118 merged normally as `646bd9748910ebb16079ba8461ff7af6e2500799` after
+self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 checks
+passed. It preserves source commits
+`83560121f678bfe40a555a729994a4bb05e3c518` and
+`7c3f0203a069972fb65b7e3ce5949c5b1f954f1e` and adds exact remediation-scope
+approval plus the bounded `hunt retest` path. Retest binds a non-mutating
+proposal to the before subject/finding/file/policy/no-network scope, requires
+separate execute approval for a distinct after subject, reruns the same proof
+and counterexample, and explicitly reports `applied:false`.
+
+This contribution advances HUNT-008/HUNT-009 remediation/retest
+implementation only; their counted rows remain open until every row-specific
+acceptance criterion passes. No `.vgl` Release Record was produced. Complete
+trusted/licensed provenance, hosted entitlement/provider confirmation,
+required isolation qualification, independent review, `.vgl` binding, and
+final release acceptance remain open. HUNT-010/011 are unchanged. Score
+remains **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/hunt-retest-pr118-2026-10-13.md`.
+
 PR #117 merged normally as `cd59d5633088934d01b6087966b6795a840ac21d` after
 self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 checks
 passed. It preserves source commits

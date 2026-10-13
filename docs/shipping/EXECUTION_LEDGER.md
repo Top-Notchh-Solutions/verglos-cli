@@ -1,5 +1,40 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT remediation/retest contribution merged (PR #118)
+
+- **Public contribution:** Added exact remediation approval binding and the
+  bounded `hunt retest` path. The proposal is non-mutating and bound to the
+  before subject, finding, exact relative file scope, policy effect, and no
+  network. Retest requires distinct before/after subjects, separate execute
+  approval for the after subject, and reruns the same registered proof and
+  negative control.
+- **Qualification:** Build 8/8, typecheck 14/14, lint 6/6, shared/Hunt/CLI
+  package suites, focused retest tests, and diff checks passed. Docker runtime
+  and target-code tests that require the environment-gated pinned integration
+  setup remained explicit skips; they were not counted as passes.
+- **Identity:** PR #118 merged normally into public `main` as
+  `646bd9748910ebb16079ba8461ff7af6e2500799`, with source commits
+  `83560121f678bfe40a555a729994a4bb05e3c518` and
+  `7c3f0203a069972fb65b7e3ce5949c5b1f954f1e` preserved separately.
+- **Protected verification:** Self-scan run `38382401345` and platform/in-toto
+  run `38382401289` passed all eleven required checks, including all
+  Ubuntu/macOS/Windows Node 20/22/24 cells.
+- **Boundary:** No files were mutated by retest, no patch bytes or arbitrary
+  command are accepted, and no customer source/data, provider state, hosted
+  target, credential, database, live MCP server, production system, source
+  upload, or npm publish was involved. Owner authorization is not independent
+  review, provider confirmation, customer acceptance, legal clearance, or
+  release approval.
+- **Disposition:** This advances HUNT-008/HUNT-009 remediation/retest wiring
+  only. The worker reports `applied: false`; no `.vgl` Release Record was
+  produced. Complete authority/provenance, trusted/licensed roots, hosted
+  entitlement, provider confirmation, required isolation, independent review,
+  `.vgl` binding, and final release acceptance remain open. HUNT-010/011 are
+  unchanged.
+- **Evidence:** `evidence/hunt-retest-pr118-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT A2 Proof/Counterexample contribution merged (PR #117)
 
 - **Public contribution:** Extended `runSupportedHuntProof` from the bounded

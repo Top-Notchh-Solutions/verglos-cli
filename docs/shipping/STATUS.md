@@ -1,5 +1,38 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT remediation/retest contribution merged (PR #118)
+
+Public PR #118 merged with a regular two-parent merge commit
+`646bd9748910ebb16079ba8461ff7af6e2500799`, preserving source commits
+`83560121f678bfe40a555a729994a4bb05e3c518` and
+`7c3f0203a069972fb65b7e3ce5949c5b1f954f1e`; no squash or force-push was
+used. The public shared contract now requires exact approved remediation
+scope: approved `mutate`, exact before subject, exact policy effect, empty
+network, and proposal-relative file subset. Unsafe absolute/traversal/path
+separator file scopes are rejected.
+
+The public Hunt runtime and CLI now expose `hunt retest`. It binds a
+non-mutating remediation proposal to the before subject and finding, requires
+separate execute approval for a distinct post-remediation subject, reruns the
+same registered proof/counterexample path, and reports cleared,
+still-reproduced, inconclusive, or not-attemptable. It never writes files or
+claims that the approved remediation was applied; the result records
+`applied: false` and the limitation.
+
+Local build 8/8, typecheck 14/14, lint 6/6, shared/Hunt/CLI package tests,
+focused retest assertions, and diff checks passed. Protected self-scan run
+`38382401345` and platform/in-toto run `38382401289` passed all eleven
+required checks, including Ubuntu/macOS/Windows Node 20/22/24. Evidence:
+`evidence/hunt-retest-pr118-2026-10-13.md`.
+
+This advances HUNT-008/HUNT-009 remediation/retest implementation only.
+HUNT-008 and HUNT-009 remain unchecked for complete per-family authority and
+provenance, trusted/licensed roots, hosted entitlement/provider confirmation,
+required isolation qualification, independent review, `.vgl` binding, and
+final release acceptance. HUNT-010 and HUNT-011 are unchanged. No `.vgl`
+record was produced and the score remains **228 checked / 52 unchecked / 280
+total (81.4%)**.
+
 ## 2026-10-13 · HUNT A2 Proof/Counterexample contribution merged (PR #117)
 
 Public PR #117 merged with a regular two-parent merge commit
