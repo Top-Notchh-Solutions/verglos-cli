@@ -1,5 +1,40 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT Docker adversarial-boundary contribution merged (PR #122)
+
+- **Public contribution:** Expanded the public Hunt Docker adversarial suite
+  with deny-by-default invocation assertions and pinned-runtime checks for
+  kernel devices, effective/bounding capabilities, no-new-privileges,
+  read-only rootfs, restrictive writable `/tmp`, output/timeout/process/CPU/
+  memory/PID bounds, and PID/IPC/mount/network/UTS namespace isolation where
+  the host supports it. The CPU check fails closed for an unbounded `max`
+  quota, and the Linux-only namespace limitation is explicit.
+- **Qualification:** Post-commit pinned Docker evidence on macOS arm64 with
+  Node `v26.4.0` and the exact Postgres harness digest recorded 94 passed,
+  3 skipped, and 0 failed; the adversarial group recorded 18 passed, 1
+  skipped, and 0 failed. Build 8/8, typecheck 14/14, lint 6/6, MCP 48/48,
+  complete CLI tests, and diff checks passed.
+- **Identity:** PR #122 merged normally as
+  `4d91c616b8744676220a48930034f20a7a64ee6a`, with contribution commit
+  `00fc6b29c29d054579985953acc824dd3fc741e1` preserved as a merge parent
+  alongside `95ecf1bad7ff1cee69cf49eee2d0a4946c15bb0b`. No squash, rebase, or
+  force-push was used.
+- **Protected verification:** Platform/in-toto run `38394513090` and
+  self-scan run `38394513092` passed all eleven required jobs. The initial
+  Ubuntu Node 20 clean-consumer timeout was the only failed attempt; rerun
+  job `115290052017` passed.
+- **Boundary:** Public-safe tests and a pinned synthetic/reference harness
+  only. No customer source/data, provider state, hosted target, credential,
+  database, live MCP server, production workload, npm publish, `.vgl` record,
+  or held-out experiment was used.
+- **Disposition:** This advances HUNT-011 implementation/qualification only.
+  Independent review, trusted/licensed recipe provenance, dependent row
+  acceptance, `.vgl` binding, and final release acceptance remain open.
+  HUNT-011 and HUNT-008/009/010 remain unchecked.
+- **Evidence:** `evidence/hunt-docker-adversarial-hardening-pr122-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT MCP/CLI execution-contract contribution merged (PR #121)
 
 - **Public contribution:** The CLI/MCP Hunt execution projection now carries

@@ -1,5 +1,27 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · HUNT Docker adversarial-boundary checkpoint (PR #122)
+
+Public PR #122 merged normally into `main` as
+`4d91c616b8744676220a48930034f20a7a64ee6a`, preserving contribution commit
+`00fc6b29c29d054579985953acc824dd3fc741e1` as the second merge parent. The
+public Hunt Docker qualification now asserts additional deny-by-default
+controls and pinned-runtime boundaries for kernel devices, Linux
+capabilities, restrictive writable scratch space, PID/CPU cgroups, and PID,
+IPC, mount, network, and UTS namespaces where the host supports them. The
+Linux-only namespace limitation remains explicit.
+
+Protected platform/in-toto run `38394513090` and self-scan run `38394513092`
+passed all eleven required checks after the sole Ubuntu Node 20 clean-consumer
+timeout was rerun successfully. Evidence:
+`docs/shipping/evidence/hunt-docker-adversarial-hardening-pr122-2026-10-13.md`.
+
+This is the dependency-ready HUNT-011 implementation/qualification slice, not
+complete HUNT-011 acceptance. Independent review, trusted/licensed recipe
+provenance, and dependent row acceptance remain open; HUNT-011 and dependent
+HUNT rows remain unchecked. The live score remains **228 checked / 52
+unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT MCP/CLI contract checkpoint (PR #121)
 
 Public PR #121 merged normally into `main` as

@@ -1,5 +1,31 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT Docker adversarial-boundary contribution merged (PR #122)
+
+Public PR #122 merged normally as
+`4d91c616b8744676220a48930034f20a7a64ee6a`, preserving contribution commit
+`00fc6b29c29d054579985953acc824dd3fc741e1` as the second parent; no squash,
+rebase, or force-push was used. The public Hunt Docker qualification now
+covers deny-by-default invocation flags plus pinned-runtime checks for kernel
+devices, effective/bounding capabilities, restrictive `/tmp`, PID/CPU cgroup
+ceilings, and PID/IPC/mount/network/UTS namespaces. Linux-only namespace
+coverage remains an explicit skip on non-Linux hosts.
+
+The post-commit local evidence recorded 94 passed, 3 skipped, and 0 failed,
+including 18 passed, 1 skipped, and 0 failed in the Docker adversarial group.
+Build 8/8, typecheck 14/14, lint 6/6, MCP tests 48/48, complete CLI tests,
+and diff checks passed. Protected platform/in-toto run `38394513090` and
+self-scan run `38394513092` passed all eleven required checks; the initial
+Ubuntu Node 20 clean-consumer timeout passed when its single failed job was
+rerun as `115290052017`.
+
+This advances HUNT-011 implementation/qualification only. HUNT-011 remains
+unchecked for independent review, trusted/licensed recipe provenance, and
+dependent acceptance; HUNT-008 through HUNT-010 remain unchanged. No `.vgl`
+record was produced and the score remains **228 checked / 52 unchecked / 280
+total (81.4%)**. Evidence:
+`evidence/hunt-docker-adversarial-hardening-pr122-2026-10-13.md`.
+
 ## 2026-10-13 · HUNT MCP/CLI execution-contract contribution merged (PR #121)
 
 Public PR #121 merged normally as

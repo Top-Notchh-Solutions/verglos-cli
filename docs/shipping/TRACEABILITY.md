@@ -1,5 +1,34 @@
 # Verglos V1 traceability
 
+## HUNT Docker adversarial-boundary contribution · 2026-10-13
+
+- **Public merge:** PR #122 merged normally as
+  `4d91c616b8744676220a48930034f20a7a64ee6a`, preserving contribution commit
+  `00fc6b29c29d054579985953acc824dd3fc741e1` as a merge parent; no squash,
+  rebase, or force-push.
+- **Implementation mapping:** Docker invocation tests assert read-only
+  rootfs, restrictive `/tmp`, dropped capabilities, and denied privileged,
+  device, and host-sharing flags. Pinned-runtime tests exercise device-node
+  denial, capability bounds, no-new-privileges, source write denial,
+  output/timeout/process/CPU/memory/PID bounds, restrictive scratch flags,
+  and PID/IPC/mount/network/UTS namespace separation with an explicit
+  Linux-only skip.
+- **Verification mapping:** Exact pinned Docker evidence bound to source
+  commit `00fc6b29c29d054579985953acc824dd3fc741e1` recorded 94 passed, 3
+  skipped, and 0 failed; the adversarial group recorded 18 passed, 1 skipped,
+  and 0 failed. Protected self-scan `38394513092` and platform/in-toto run
+  `38394513090` passed all eleven required jobs after rerun job
+  `115290052017` cleared the sole Ubuntu Node 20 clean-consumer timeout.
+- **Boundary:** This is local/CI qualification against a pinned synthetic
+  Postgres harness, not independent review or customer/production target
+  proof. No customer data, provider state, hosted target, credential, source
+  upload, npm publish, `.vgl` record, or production system was used.
+- **Acceptance:** HUNT-011 remains unchecked for independent review,
+  trusted/licensed recipe provenance, dependent acceptance, `.vgl` binding,
+  and final release acceptance. HUNT-008/009/010 remain unchanged. Score
+  remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-docker-adversarial-hardening-pr122-2026-10-13.md`.
+
 ## HUNT MCP/CLI execution-contract contribution · 2026-10-13
 
 - **Public merge:** PR #121 merged normally as

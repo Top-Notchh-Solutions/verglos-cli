@@ -11,6 +11,23 @@
 
 ## 0.1 Current shipping checkpoint — 2026-10-13
 
+PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after
+all eleven protected checks passed, preserving contribution commit
+`00fc6b29c29d054579985953acc824dd3fc741e1` as the second merge parent; no
+squash, rebase, or force-push was used. The public Hunt Docker qualification
+now asserts deny-by-default invocation flags and pinned-runtime controls for
+kernel devices, Linux capabilities, restrictive writable `/tmp`, PID/CPU
+cgroups, and PID/IPC/mount/network/UTS namespaces where supported. The
+post-commit local report recorded 94 passed, 3 skipped, and 0 failed, with 18
+passed, 1 skipped, and 0 failed in the adversarial group.
+
+This advances HUNT-011 implementation/qualification only; its counted row
+remains open for independent review, trusted/licensed recipe provenance, and
+dependent acceptance. HUNT-008 through HUNT-010 remain open, no `.vgl` record
+was produced, and the score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence:
+`evidence/hunt-docker-adversarial-hardening-pr122-2026-10-13.md`.
+
 PR #121 merged normally as `95ecf1bad7ff1cee69cf49eee2d0a4946c15bb0b` after
 self-scan, in-toto, and all Ubuntu/macOS/Windows Node 20/22/24 checks passed.
 It preserves contribution commits
