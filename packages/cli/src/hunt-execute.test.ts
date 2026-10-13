@@ -3,8 +3,10 @@ import { mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 import { canonicalizeJson, createApprovalReceipt, parseHuntRecipe, type HuntRecipe } from "@verglos/shared";
 import { createTestHuntTrustStore, TEST_HUNT_TRUST_KEY_ID } from "../../shared/src/hunt-trust-test-support.js";
+import { HUNT_TARGET_HARNESS_IMAGE_DIGEST, TARGET_HARNESS_ASSERTION } from "@verglos/hunt";
 import { executeHuntRecipe } from "./hunt-execute.js";
 import type { HuntRuntimeLoader } from "./hunt-runtime.js";
 
@@ -33,14 +35,33 @@ function recipe(inputs: Readonly<Record<string, string>> = { needle: "unsafe", v
   });
 }
 
-async function makeInputs(root: string, selected = recipe()): Promise<{ reportPath: string; recipePath: string; trustStorePath: string; approvalPath: string }> {
+function a2SqlRecipe(): HuntRecipe {
+  return parseHuntRecipe({
+    schemaId: "urn:verglos:schema:hunt-recipe",
+    schemaVersion: "1.0.0",
+    recipeId: "a2-sql-nosql-injection-harness",
+    ruleId: "D1-001",
+    targetSubjectId: subjectId,
+    imageDigest: { algorithm: "sha256", value: HUNT_TARGET_HARNESS_IMAGE_DIGEST.slice("sha256:".length) },
+    command: ["node", "/workspace/.verglos/hunt/sql-nosql-injection.mjs"],
+    assertions: [TARGET_HARNESS_ASSERTION],
+    isolation: "container",
+    limits: { timeoutMs: 10_000, cpuMs: 9_000, memoryMb: 256, diskMb: 128, outputBytes: 16_384, processes: 8, maxNetworkRequests: 0 },
+    cleanup: "always",
+    network: { mode: "denied", destinations: [], reason: "A2 local reference harness" },
+    redaction: "required",
+    signature: { status: "verified", signer: TEST_HUNT_TRUST_KEY_ID },
+  });
+}
+
+async function makeInputs(root: string, selected = recipe(), projectRoot = root): Promise<{ reportPath: string; recipePath: string; trustStorePath: string; approvalPath: string }> {
   const reportPath = join(root, "report.json");
   const recipePath = join(root, "recipe.json");
   const trustStorePath = join(root, "trust-store.json");
   const approvalPath = join(root, "approval.json");
   const at = new Date().toISOString();
   const approval = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: subjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
-  await writeFile(reportPath, `${canonicalizeJson({ projectRoot: root, projectType: "node", scannedAt: at, durationMs: 1, findings: [{ id: "critical-1", severity: "critical", title: "fixture", description: "fixture" }] })}\n`);
+  await writeFile(reportPath, `${canonicalizeJson({ projectRoot, projectType: "node", scannedAt: at, durationMs: 1, findings: [{ id: "critical-1", severity: "critical", title: "fixture", description: "fixture" }] })}\n`);
   await writeFile(recipePath, `${canonicalizeJson(selected)}\n`);
   await writeFile(trustStorePath, `${canonicalizeJson(createTestHuntTrustStore(selected, { at }))}\n`);
   await writeFile(approvalPath, `${canonicalizeJson(approval)}\n`);
@@ -93,6 +114,45 @@ test("HUNT-009 preserves a negative probe as not-reproduced without leaking inpu
     } finally { console.log = originalLog; }
     assert.equal(JSON.parse(logs[0] ?? "{}").outcomes[0].canonicalVerdict, "not-reproduced");
     assert.doesNotMatch(logs.join("\n"), /sensitive-synthetic-canary/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("HUNT-009 reaches the signed A2 target harness through the public CLI path", { skip: process.env.VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION !== "1" ? "set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run the A2 CLI Docker qualification" : false }, async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-execute-a2-"));
+  try {
+    const targetRoot = fileURLToPath(new URL("../../hunt/fixtures/target-code/", import.meta.url));
+    const selected = a2SqlRecipe();
+    const inputs = await makeInputs(root, selected, targetRoot);
+    const logs: string[] = [];
+    const originalLog = console.log;
+    console.log = (...values: unknown[]) => logs.push(values.join(" "));
+    try {
+      const code = await executeHuntRecipe({
+        ...inputs,
+        ruleId: "D1-001",
+        subjectId,
+        observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+        json: true,
+        runtimeLoader: localHuntRuntime,
+      });
+      assert.equal(code, 1);
+    } finally { console.log = originalLog; }
+    const output = JSON.parse(logs[0] ?? "{}") as Record<string, unknown>;
+    assert.equal(output.status, "completed");
+    assert.equal(output.executionAuthorized, true);
+    assert.equal(output.recipeId, "a2-sql-nosql-injection-harness");
+    assert.equal(output.sandbox, "docker");
+    assert.deepEqual((output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.canonicalVerdict), ["confirmed"]);
+    assert.deepEqual((output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.assurance), [{
+      class: "A2",
+      isolation: "container",
+      securityBoundary: true,
+      sourceAccess: "read-only",
+      network: "denied",
+      processLimit: 8,
+      limitation: "A2 runs a signed recipe in a pinned Docker container with read-only project input, denied network, dropped capabilities, and bounded resources; host Docker daemon/VM policy and platform-specific kernel differences remain outside this result",
+    }]);
+    assert.doesNotMatch(logs.join("\n"), /OR 1=1/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
