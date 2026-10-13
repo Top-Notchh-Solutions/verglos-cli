@@ -3,7 +3,7 @@
 ## 2026-10-13 · A2 outcome matrix and Preview signer progress
 
 - **Public work:** PR #102 is open at
-  `3801125f9486ccc2d4725b178766ac703dd8f762`. Seven A2 reference harnesses
+  `e1060842`. Seven A2 reference harnesses
   now cover positive, negative, and unsupported fixture cases.
 - **Verification:** all 21 family/case combinations passed directly in the
   pinned Docker boundary; local Hunt/CLI/build/diff checks passed. The

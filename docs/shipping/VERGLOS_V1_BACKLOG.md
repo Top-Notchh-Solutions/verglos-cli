@@ -2,7 +2,7 @@
 
 ## 2026-10-13 · Current A2 and TEAM-CLI evidence checkpoint
 
-PR #102 (`3801125f9486ccc2d4725b178766ac703dd8f762`) adds positive, negative,
+PR #102 (`e1060842`) adds positive, negative,
 and unsupported fixture outcomes to all seven A2 reference harnesses. Direct
 pinned-Docker execution passed all 21 combinations. Preview now has a
 signer-configured deployment, but its policy route correctly returns

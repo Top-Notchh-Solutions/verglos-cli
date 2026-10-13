@@ -3,8 +3,8 @@
 Date: 2026-10-13  
 Public repository: `Top-Notchh-Solutions/verglos-cli`  
 Pull request: `#102`  
-Head commit: `3801125f9486ccc2d4725b178766ac703dd8f762`  
-Implementation commits: `3c3b937c` and `3801125f`
+Head commit: `e1060842`
+Superseded draft head: `3801125f9486ccc2d4725b178766ac703dd8f762`
 
 ## What this records
 
@@ -54,10 +54,13 @@ occur.
 
 ## Public validation
 
-PR #102 was opened on the fresh branch `codex/hunt-a2-outcome-matrix-2026-10-13`.
-The repository-dispatched self-scan and cross-platform matrix were started for
-the exact head commit. Their final conclusions and merge state must be
-recorded after GitHub finishes; a manually dispatched run is not silently
+PR #102 is on the fresh branch
+`codex/hunt-a2-outcome-matrix-2026-10-13`, based directly on current public
+`main`. The old branch history was replaced with `--force-with-lease` against
+the verified superseded head so the PR no longer carries duplicate squashed
+history. Fresh repository-dispatched self-scan and cross-platform runs were
+started for `e1060842`; their final conclusions and merge state must be
+recorded after GitHub finishes. A manually dispatched run is not silently
 treated as a protected pull-request check.
 
 ## Limitations and acceptance state
