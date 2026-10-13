@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A2 public CLI execution path merged (PR #107)
+
+- **Public work:** PR #107 was squash-merged into public `main` as
+  `f4fe4987dc4f33c9617b5124574075419fc098a5` from source commit
+  `ca923c4aee0575ed9601366f82d92f2a56f2625f`.
+- **Implemented:** the opt-in public CLI test reaches a signed A2 SQL/NoSQL
+  target harness through the bounded Docker adapter. The execution binding
+  now accepts the uppercase scanner rule IDs already used by the catalogue.
+- **Verification:** focused A2 CLI test 1/1, affected public CLI package test
+  process exit 0, public build 8/8, typecheck 14/14, diff check, self-scan,
+  in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 protected cells
+  passed.
+- **Boundary:** public-safe fixture and test code only; no private source,
+  secret, provider, database, entitlement, Production, or customer-data write.
+- **Acceptance:** `HUNT-009` remains unchecked because HUNT-008 provenance,
+  hosted entitlement, Linux/Docker qualification where required, trusted
+  release treatment, and independent review remain open.
+- **Evidence:** `evidence/hunt-a2-cli-execution-pr107-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
 ## 2026-10-13 · A2 target-code qualification merged (PR #106)
 
 - **Public work:** PR #106 was squash-merged into public `main` as

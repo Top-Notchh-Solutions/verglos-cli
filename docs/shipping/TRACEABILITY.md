@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## A2 public CLI execution path · 2026-10-13
+
+- **Public merge:** PR #107 merged into public `main` as
+  `f4fe4987dc4f33c9617b5124574075419fc098a5` from source commit
+  `ca923c4aee0575ed9601366f82d92f2a56f2625f`.
+- **Implementation:** `packages/cli/src/hunt-execute.test.ts` qualifies the
+  signed A2 target-harness path; shared execution binding now uses the Hunt
+  rule-ID schema so scanner IDs such as `D1-001` remain valid.
+- **Coverage:** one opt-in signed A2 CLI execution passed; the affected CLI
+  package test process, build, typecheck, diff check, self-scan, in-toto, and
+  nine protected platform cells passed.
+- **Boundary:** public-safe fixture execution only; no arbitrary shell,
+  customer source, secret, provider, database, or Production authority.
+- **Acceptance:** HUNT-009 remains open for its HUNT-008 and hosted/external
+  dependencies. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `hunt-a2-cli-execution-pr107-2026-10-13.md`.
+
 ## A2 target-code qualification · 2026-10-13
 
 - **Public merge:** PR #106 merged into public `main` as

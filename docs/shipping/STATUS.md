@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A2 public CLI execution path merged (PR #107)
+
+Public PR #107 was squash-merged into `main` as
+`f4fe4987dc4f33c9617b5124574075419fc098a5`. The public CLI now has an
+opt-in qualification test that executes a signed A2 SQL/NoSQL target-harness
+recipe through the bounded Docker path. It also fixes the execution-binding
+schema mismatch that rejected the catalogue's uppercase scanner IDs.
+
+The focused test passed 1/1; the affected CLI package test process exited 0;
+build 8/8, typecheck 14/14, diff check, self-scan, in-toto, and all nine
+protected platform cells passed. Evidence:
+`docs/shipping/evidence/hunt-a2-cli-execution-pr107-2026-10-13.md`.
+
+This is technical implementation evidence, not complete Hunt acceptance.
+`HUNT-009` remains open for HUNT-008 provenance/licensing and supported-rule
+acceptance, hosted entitlement, Linux/Docker qualification where required,
+trusted release treatment, and independent review. Score remains **228
+checked / 52 unchecked / 280 total (81.4%)**; no checkbox changed.
+
 ## 2026-10-13 · A2 target-code qualification merged (PR #106)
 
 Public PR #106 was squash-merged into `main` as
