@@ -17,6 +17,7 @@ import { parseReleaseDecision } from "./release-decision.js";
 import { parseReleaseRecordManifest } from "./record-manifest.js";
 import { parseFailure } from "./failure.js";
 import { parseHuntTargetManifest } from "./hunt-target-manifest.js";
+import { parseHuntAttackHypothesis } from "./hunt-hypothesis.js";
 
 const PARSERS: Readonly<Record<string, (value: unknown) => unknown>> = {
   [VERGLOS_SCHEMA_IDS.subject]: parseSubject,
@@ -32,6 +33,7 @@ const PARSERS: Readonly<Record<string, (value: unknown) => unknown>> = {
   [VERGLOS_SCHEMA_IDS.releaseRecordManifest]: parseReleaseRecordManifest,
   [VERGLOS_SCHEMA_IDS.failure]: parseFailure,
   [VERGLOS_SCHEMA_IDS.huntTargetManifest]: parseHuntTargetManifest,
+  [VERGLOS_SCHEMA_IDS.huntAttackHypothesis]: parseHuntAttackHypothesis,
 };
 
 export type FixtureValidation =

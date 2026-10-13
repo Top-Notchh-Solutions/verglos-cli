@@ -12,6 +12,7 @@ test("public CLI Hunt runtime boundary fails closed when the public runtime is u
 test("public CLI loads the shipped bounded Hunt runtime", async () => {
   const runtime = await loadHuntRuntime();
   assert.equal(typeof runtime.runHunt, "function");
+  assert.equal(typeof runtime.planSupportedHuntAttack, "function");
   assert.equal(typeof runtime.validateSupportedHuntRecipe, "function");
   assert.equal(typeof runtime.RestrictedProcessAdapter, "function");
   assert.equal(typeof runtime.DockerSandboxAdapter, "function");
