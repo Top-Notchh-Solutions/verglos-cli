@@ -7,6 +7,7 @@ import { createApprovalReceipt, createSubjectId, planHuntAttackHypothesis, parse
 import { createTestHuntTrustStore, TEST_HUNT_TRUST_KEY_ID } from "../../shared/src/hunt-trust-test-support.js";
 import type { HuntRuntimeLoader } from "./hunt-runtime.js";
 import { executeHuntWorker } from "./hunt-worker.js";
+import { executeHuntProof } from "./hunt-proof.js";
 
 const subjectId = createSubjectId({ kind: "artifact", digest: { algorithm: "sha256", value: "f".repeat(64) }, size: 10, mediaType: "application/octet-stream" });
 const at = new Date().toISOString();
@@ -115,6 +116,27 @@ test("hunt worker fails closed on a report that does not contain the planned fin
     assert.equal(await executeHuntWorker({ ...paths, observationId: "urn:uuid:a2345678-1234-4123-8123-123456789abc", json: true, quiet: true, runtimeLoader }), 78);
     assert.equal(loaded, true);
     assert.deepEqual(JSON.parse(logs[0]!), { status: "denied", code: "HUNT_WORKER_DENIED", message: "hypothesis execution was not authorized or its bounded input was invalid" });
+  } finally {
+    console.log = originalLog;
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("hunt proof replays the supported A1 fixture and emits a bounded counterexample", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-cli-hunt-proof-"));
+  const logs: string[] = [];
+  const originalLog = console.log;
+  try {
+    const paths = await writeInputs(root);
+    console.log = (line?: unknown) => logs.push(String(line));
+    assert.equal(await executeHuntProof({ ...paths, observationId: "urn:uuid:b2345678-1234-4123-8123-123456789abc", json: true, quiet: true, runtimeLoader: localHuntRuntime }), 1);
+    const output = JSON.parse(logs[0]!) as Record<string, unknown>;
+    assert.equal(output.status, "completed");
+    assert.equal(output.executes, true);
+    assert.equal((output.proof as Record<string, unknown>).status, "confirmed");
+    assert.equal((output.proof as Record<string, unknown>).negativeControl, "passed");
+    assert.equal((output.counterexample as Record<string, unknown>).canonicalVerdict, "not-reproduced");
+    assert.doesNotMatch(JSON.stringify(output), /fixture contains unsafe|tmp\/fixture-target/u);
   } finally {
     console.log = originalLog;
     await rm(root, { recursive: true, force: true });

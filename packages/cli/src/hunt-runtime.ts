@@ -1,5 +1,5 @@
 import type { HuntAttackHypothesis, HuntRecipe, ScanResult } from "@verglos/shared";
-import type { HuntAttackWorkerResult } from "@verglos/hunt";
+import type { HuntAttackProofResult, HuntAttackWorkerResult } from "@verglos/hunt";
 
 const HUNT_RUNTIME_PACKAGE = "@verglos/hunt";
 
@@ -22,6 +22,7 @@ export type HuntRuntimeResult = Readonly<{
 export type HuntRuntime = Readonly<{
   planSupportedHuntAttack(input: unknown): HuntAttackHypothesis;
   runSupportedHuntAttack(input: unknown): Promise<HuntAttackWorkerResult>;
+  runSupportedHuntProof(input: unknown): Promise<HuntAttackProofResult>;
   validateSupportedHuntRecipe(value: unknown): Readonly<{ supported: true; recipeDigest: string }> | Readonly<{ supported: false; reason: string }>;
   RestrictedProcessAdapter: new (recipe: HuntRecipe) => unknown;
   DockerSandboxAdapter: new (options: { readonly image: string; readonly imageDigest: string }) => unknown;
@@ -42,7 +43,7 @@ export async function loadHuntRuntime(loader: HuntRuntimeLoader = () => import(H
   }
   if (!candidate || typeof candidate !== "object") throw new Error("HUNT_RUNTIME_INVALID");
   const runtime = candidate as Record<string, unknown>;
-  if (typeof runtime.planSupportedHuntAttack !== "function" || typeof runtime.runSupportedHuntAttack !== "function" || typeof runtime.validateSupportedHuntRecipe !== "function" || typeof runtime.RestrictedProcessAdapter !== "function" || typeof runtime.DockerSandboxAdapter !== "function" || typeof runtime.HUNT_TARGET_HARNESS_IMAGE !== "string" || typeof runtime.HUNT_TARGET_HARNESS_IMAGE_DIGEST !== "string" || typeof runtime.runHunt !== "function") {
+  if (typeof runtime.planSupportedHuntAttack !== "function" || typeof runtime.runSupportedHuntAttack !== "function" || typeof runtime.runSupportedHuntProof !== "function" || typeof runtime.validateSupportedHuntRecipe !== "function" || typeof runtime.RestrictedProcessAdapter !== "function" || typeof runtime.DockerSandboxAdapter !== "function" || typeof runtime.HUNT_TARGET_HARNESS_IMAGE !== "string" || typeof runtime.HUNT_TARGET_HARNESS_IMAGE_DIGEST !== "string" || typeof runtime.runHunt !== "function") {
     throw new Error("HUNT_RUNTIME_INVALID");
   }
   return runtime as unknown as HuntRuntime;
