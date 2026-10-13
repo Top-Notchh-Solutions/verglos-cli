@@ -26,12 +26,14 @@ const expectedSummaries = {
   authorization: "deterministic authorization and mass-assignment fixture",
 } as const;
 
-test("each public A2 reference harness emits the bounded result protocol", async () => {
+test("each public A2 reference harness emits positive, negative, and unsupported results", async () => {
   for (const name of fixtureNames) {
     const fixture = fileURLToPath(new URL(`../fixtures/target-code/.verglos/hunt/${name}.mjs`, import.meta.url));
-    const result = await execFileAsync(process.execPath, [fixture], { encoding: "utf8" });
-    assert.equal(result.stderr, "", `${name} emitted stderr`);
-    const parsed = parseTargetHarnessOutput(result.stdout);
-    assert.deepEqual(parsed, { verdict: "confirmed", summary: expectedSummaries[name] }, name);
+    for (const [fixtureCase, expectedVerdict] of [["positive", "confirmed"], ["negative", "not-reproduced"], ["unsupported", "unsupported"]] as const) {
+      const result = await execFileAsync(process.execPath, [fixture, fixtureCase], { encoding: "utf8" });
+      assert.equal(result.stderr, "", `${name}/${fixtureCase} emitted stderr`);
+      const parsed = parseTargetHarnessOutput(result.stdout);
+      assert.deepEqual(parsed, { verdict: expectedVerdict, summary: expectedSummaries[name] }, `${name}/${fixtureCase}`);
+    }
   }
 });
