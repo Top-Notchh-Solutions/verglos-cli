@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT-008 R9 secret and supply-chain contribution merged (PR #111)
+
+Public PR #111 merged with a regular two-parent merge commit
+`c560b6a728a248f5b3c7a8ed727e366134610ac0`, preserving source commit
+`8c1af9701296e8aaedd840c399f8b659469f91d9`; no squash or force-push was used.
+The contribution adds signed `D4-001` and `D6-001` catalog descriptors,
+synthetic in-memory credential-use coverage, disposable metadata-only
+supply-chain coverage, and positive/negative/unsupported/timeout/failure
+harness cases. The public catalog now covers ten A2 target-harness families.
+
+Local scanner, Hunt, build, typecheck, Docker, CLI, and diff checks passed.
+Protected Linux/macOS/Windows Node 20/22/24, in-toto, and Verglos self-scan
+checks passed. Evidence:
+`evidence/hunt-a2-r9-secret-supply-pr111-2026-10-13.md`.
+
+This is an implementation and shipping contribution only. HUNT-008 remains
+open for complete per-family acceptance, supported-rule approval,
+trusted/licensed release treatment, hosted entitlement, required host
+qualification, independent review, and final release acceptance. No checkbox
+changed; the score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT-008 prototype-pollution contribution merged (PR #110)
 
 Public PR #110 merged with a regular two-parent merge commit
@@ -47,7 +68,7 @@ adopted benchmark are recorded in
 `docs/shipping/COMPETITIVE_PRODUCT_RESEARCH_2026-10-13.md`.
 
 This is not implementation or acceptance evidence. The current eight A1 probes
-and seven A2 harness descriptors remain foundations; real target adapters,
+and ten A2 harness descriptors remain foundations; real target adapters,
 agent orchestration, scanner mappings, proof/retest, and benchmark evidence
 remain open. No checkbox changed; score remains **228 checked / 52 unchecked /
 280 total (81.4%)**.
@@ -88,7 +109,7 @@ Evidence: `evidence/hunt-a2-cli-all-families-pr109-2026-10-13.md`.
 
 The active goal and `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md` are the
 operating authorities for the current Hunt/A2 work. The public CLI contains
-eight A1 descriptors and seven A2 descriptors with bounded Docker execution;
+eight A1 descriptors and ten A2 descriptors with bounded Docker execution;
 the four Hunt roles are controlled responsibilities, not autonomous AI
 services. Stale alpha-only wording in the public CLI/Web agent instructions is
 being corrected in public-safe PRs.

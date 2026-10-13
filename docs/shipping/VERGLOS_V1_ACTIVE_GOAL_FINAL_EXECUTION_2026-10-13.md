@@ -181,7 +181,7 @@ unavailable behavior must be explicit and fail closed.
 
 ## 6. Hunt implementation contract
 
-The current eight A1 deterministic probes and seven A2 target-harness
+The current eight A1 deterministic probes and ten A2 target-harness
 descriptors are safety/regression foundations. They are not yet ten complete
 autonomous attacking agents or proof of complete customer-code coverage.
 
@@ -439,4 +439,3 @@ Implementation workspaces:
 Use the public repository only for public-safe implementation and sanitized
 customer documentation. Use the private tracker for restricted evidence,
 backlog state, operational records, and release truth.
-

@@ -564,7 +564,7 @@ position, but those words do not replace benchmark evidence.
 - Product contract and private matrix now define a competitive scanner-to-proof
   product rather than a fixture-only Hunt.
 - The public catalog currently contains eight A1 deterministic probes and
-  seven A2 target-harness descriptors. They are foundations, not ten complete
+  ten A2 target-harness descriptors. They are foundations, not ten complete
   autonomous attacking agents or full customer-code coverage.
 - Public A2 bounded CLI execution and reference harness evidence exists; real
   target discovery, scanner mappings, full proof/retest, hosted plan behavior,

@@ -31,7 +31,7 @@ authorities respectively.
 | Web account and hosted evidence | Optional/no account required | Private records/history | Organization control plane | Client workspaces/handoffs | Private governance | `PLAN-WEB-001..015`, `PRO-001..010`, `FINAL-WEB-001..008` | Web capability exists in code, but several hosted and final acceptance rows remain open. |
 | MCP and AI-assisted development | Basic checks/explanations | Full Hunt/MCP depth | Shared policy/approvals | Client-safe handoff | Private runners/policy | `AGENT-001..007`, `HUNT-010` | MCP must never silently approve, sign, publish, mutate source, or bypass Hunt controls. |
 | Attest and portable `.vgl` Release Records | Local verification/evidence | Signed local/private records | Shared approvals/audit | Public/client verification | Customer roots/KMS/HSM options | `RECORD-001..012`, `DIST-001..006` | Record contract is defined; end-to-end hosted and release evidence is not yet universally complete. |
-| Scanner-to-proof Hunt verification | Starter local playbooks | Full local code-to-proof workflow | Shared org policy, approvals, and private targets | Client campaigns, redacted handoff, retest evidence | Private runners/custom adapters/playbooks | `HUNT-001..011`, `QUAL-CLI-004`, `TARGET-*`, `GRAPH-*` | The catalog contains eight A1 deterministic fixture probes plus seven A2 target-harness descriptors with a pinned Docker execution path. Real target discovery, scanner-to-playbook mappings, remediation/retest, and complete per-family target-code acceptance remain open. |
+| Scanner-to-proof Hunt verification | Starter local playbooks | Full local code-to-proof workflow | Shared org policy, approvals, and private targets | Client campaigns, redacted handoff, retest evidence | Private runners/custom adapters/playbooks | `HUNT-001..011`, `QUAL-CLI-004`, `TARGET-*`, `GRAPH-*` | The catalog contains eight A1 deterministic fixture probes plus ten A2 target-harness descriptors with a pinned Docker execution path. Real target discovery, scanner-to-playbook mappings, remediation/retest, and complete per-family target-code acceptance remain open. |
 | SCM organization workflows | Local/no integration required | Personal/private projects where enabled | GitHub/GitLab org checks | Client repositories | Enterprise governance | `TEAM-CLI-001..002`, `TEAM-WEB-*`, `GITHUB-WEB-*` | Code-side hardening is merged; hosted signer, installation, binding, webhook, and removal evidence remain separate gates. |
 | Cards-only prepaid billing | Not required | One-time fixed term/manual renewal | Shared org entitlements | Client billing views | Contracted billing/governance | `PLAN-CLI-001..004`, `PLAN-WEB-001..015`, `PRO-*`, `ENT-*` | V1 does not promise automatic recurring renewal. Provider lifecycle acceptance remains evidence-driven. |
 
@@ -100,22 +100,22 @@ adversarial sandbox qualification.
 | `HUNT-008-R5` | Agent/MCP tool boundary | Fake tools, no real credentials/network, approval and output redaction | A1 classifier plus A2 descriptor/protocol and sanitized Agent/MCP reference harness; complete target-code qualification remains open. |
 | `HUNT-008-R6` | XSS where a deterministic safe fixture exists | No remote browser target, bounded fixture, redacted output | A1 classifier plus A2 descriptor/protocol and sanitized XSS reference harness; complete target-code qualification remains open. |
 | `HUNT-008-R7` | Authorization/tenant/mass-assignment | In-memory or disposable fixture with explicit tenant identities | A1 classifier plus A2 descriptor/protocol and sanitized authorization reference harness; complete target-code qualification remains open. |
-| `HUNT-008-R8` | Prototype pollution/unsafe deserialization/parser boundary | Version-pinned parser target, safe payloads, no host object or process access | Contract requirement; target adapter and fixture evidence are not implemented yet. |
-| `HUNT-008-R9` | Secrets/credential-use and dependency/supply-chain behavior | Synthetic credentials, disposable package/image fixtures, no real credential validation | Contract requirement; target adapter and fixture evidence are not implemented yet. |
+| `HUNT-008-R8` | Prototype pollution/unsafe deserialization/parser boundary | Version-pinned parser target, safe payloads, no host object or process access | PR #110 merged the bounded prototype-pollution target fixture/harness and `D1-008` mapping; unsafe-deserialization/parser coverage remains absent and complete per-family acceptance remains open. |
+| `HUNT-008-R9` | Secrets/credential-use and dependency/supply-chain behavior | Synthetic credentials, disposable package/image fixtures, no real credential validation | PR #111 merged signed `D4-001` and `D6-001` descriptors with synthetic in-memory credential-use and metadata-only supply-chain harnesses. Docker target integration 3/3 and CLI 6/6 passed; real credential/package/provider qualification and complete acceptance remain open. |
 | `HUNT-008-R10` | AI-agent/MCP tool boundary and approval bypass | Fake tools, explicit capability receipts, no real credentials/network, replay-safe proof | A1/A2 Agent/MCP foundations exist; real target workflow and complete proof acceptance remain open. |
 
 ### 4.3 Current Hunt implementation truth
 
 - The supported catalog contains eight A1 deterministic built-in fixture probes
-  and seven A2 target-harness descriptors. The A1 probes are
+  and ten A2 target-harness descriptors. The A1 probes are
   `a1-utf8-contains`, `a1-path-traversal`,
   `a1-command-injection`, `a1-ssrf-target`, `a1-tenant-boundary`,
   `a1-sql-injection`, `a1-xss-safe`, and `a1-agent-boundary`.
 - Each A1 probe declares positive, negative, timeout, and adapter-failure
   fixtures and uses the bounded restricted-process path.
-- The A2 descriptors bind the seven target-harness families to the pinned Node
+- The A2 descriptors bind the ten target-harness families to the pinned Node
   Docker image, a fixed harness path, and a strict one-line verdict protocol.
-  Sanitized public reference harnesses for all seven families have passed the
+  Sanitized public reference harnesses for all ten families have passed the
   local protocol test and direct pinned-Docker runs.
 - The expanded agentic workflow is not yet complete: target discovery,
   scanner-to-playbook mapping, real application adapters, remediation/retest,

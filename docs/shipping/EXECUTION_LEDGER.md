@@ -1,5 +1,34 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT-008 R9 secret and supply-chain contribution merged (PR #111)
+
+- **Public contribution:** Added the signed `D4-001` secret/credential-use
+  descriptor and `D6-001` supply-chain descriptor, with deterministic
+  in-memory and metadata-only target fixtures. Both harnesses cover positive,
+  negative, unsupported, timeout, and adapter-failure outcomes.
+- **Qualification:** Expanded the public catalog, target fixture matrix,
+  Docker adapter expectations, CLI all-family test, Hunt tests, README, build,
+  typecheck, and diff checks. The Docker target integration passed 3/3 and the
+  public CLI execution test passed 6/6. The catalog now covers ten A2 families.
+- **Identity:** PR #111 merged normally into public `main` as
+  `c560b6a728a248f5b3c7a8ed727e366134610ac0`, from source commit
+  `8c1af9701296e8aaedd840c399f8b659469f91d9`; no squash or force-push.
+- **Protected verification:** Platform run `38364718216` and self-scan run
+  `38364718213` passed all eleven required checks.
+- **Boundary:** Owner/operator authorization covered this public-safe
+  contribution. The fixtures used no customer source/data, real credential,
+  package install, lifecycle execution, registry/network, provider,
+  entitlement, database, Production, npm, or hosted target. Authorization is
+  not independent review, provider confirmation, customer acceptance, legal
+  clearance, or final release approval.
+- **Disposition:** This is HUNT-008-R9 implementation evidence only. HUNT-008
+  remains unchecked pending complete per-family acceptance, rule and
+  provenance/licensing approval, hosted entitlement, required isolation proof,
+  independent review, and release acceptance.
+- **Evidence:** `evidence/hunt-a2-r9-secret-supply-pr111-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT-008 prototype-pollution contribution merged (PR #110)
 
 - **Public contribution:** Added scanner rule `D1-008`, its explain-bank

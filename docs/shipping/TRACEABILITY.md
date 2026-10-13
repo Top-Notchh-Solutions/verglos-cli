@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## HUNT-008 R9 target-family contribution · 2026-10-13
+
+- **Public merge:** PR #111 merged normally as
+  `c560b6a728a248f5b3c7a8ed727e366134610ac0` from source commit
+  `8c1af9701296e8aaedd840c399f8b659469f91d9`.
+- **Implementation mapping:** Signed `D4-001` and `D6-001` descriptors now
+  bind deterministic synthetic credential-use and disposable supply-chain
+  metadata harnesses. Positive, negative, unsupported, timeout, and
+  adapter-failure outcomes are covered, and the public catalog contains ten
+  A2 target-harness families.
+- **Verification mapping:** Docker target integration passed 3/3, the public
+  CLI all-family test passed 6/6, build passed 7/7, typecheck passed 13/13,
+  and all eleven protected PR checks passed.
+- **Boundary:** No real credential validation, package installation,
+  lifecycle-hook execution, registry/network access, customer source/data,
+  provider state, entitlement, database, Production, or hosted target was
+  used.
+- **Acceptance:** HUNT-008 remains unchecked for complete per-family target
+  acceptance, approved rule/provenance/licensing treatment, hosted
+  entitlement, required Linux/Docker adversarial proof, independent review,
+  and final release acceptance. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-a2-r9-secret-supply-pr111-2026-10-13.md`.
+
 ## Full-product paying-value blueprint · 2026-10-13
 
 - **Authority:** `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md` is the
@@ -27,7 +50,7 @@
 - **Cross-document mapping:** `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md`
   and `VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md` now point to the
   same requirements and explicitly preserve the current 228/52/280 score.
-- **Implementation truth:** The public catalog's eight A1 probes and seven A2
+- **Implementation truth:** The public catalog's eight A1 probes and ten A2
   harness descriptors are foundations only; no claim of full autonomous
   real-target coverage is made.
 - **Disposition:** No checkbox or external state changed.

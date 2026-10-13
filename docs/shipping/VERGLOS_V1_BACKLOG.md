@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · HUNT-008-R9 target-family checkpoint
+
+Public PR #111 merged normally into `main` as
+`c560b6a728a248f5b3c7a8ed727e366134610ac0` from
+`8c1af9701296e8aaedd840c399f8b659469f91d9`. The contribution adds signed
+`D4-001` and `D6-001` descriptors plus synthetic credential-use and
+disposable metadata-only supply-chain harnesses. Docker target integration
+passed 3/3, the public CLI all-family test passed 6/6, and protected CI passed.
+Evidence: `docs/shipping/evidence/hunt-a2-r9-secret-supply-pr111-2026-10-13.md`.
+
+This is an implementation contribution, not complete HUNT-008 acceptance.
+No checkbox changed; the live score remains **228 checked / 52 unchecked / 280
+total (81.4%)**.
+
 ## 2026-10-13 · Full-product paying-value synchronization
 
 The private `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md` now documents the

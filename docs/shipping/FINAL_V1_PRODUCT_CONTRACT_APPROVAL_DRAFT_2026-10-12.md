@@ -258,7 +258,7 @@ hosted autonomous testing, source upload by default, or model-only release
 approval.
 
 This companion changes product clarity and cross-document traceability. It does
-not close a backlog row or claim that the current eight A1 probes and seven A2
+not close a backlog row or claim that the current eight A1 probes and ten A2
 descriptors are complete real-application coverage.
 
 ## 1. The product promise
@@ -877,7 +877,7 @@ results, but may not fabricate signatures, approvals, consent, or evidence.
 
 This contract does not claim that Final V1 is complete. At the current
 implementation checkpoint, the public catalog contains eight A1 deterministic
-fixture probes and seven A2 target-harness descriptors with bounded Docker
+fixture probes and ten A2 target-harness descriptors with bounded Docker
 execution. Those are valuable safety and regression foundations, but they are
 not yet the complete agentic real-application Hunt product required by this
 amendment. The current code does not yet prove the full Scout, hypothesis,
