@@ -1,5 +1,31 @@
 # Verglos V1 traceability
 
+## HUNT Release Auditor contribution · 2026-10-13
+
+- **Public merge:** PR #119 merged normally as
+  `88e95586e2e04a5d981e7dd928778d3c01468d3b` from contribution commit
+  `bd4d9071d71776fda1e590b5a7e950cee0241fb5`; no squash or force-push.
+- **Implementation mapping:** The shared Hunt release-evidence schema is
+  emitted by proof/retest and parsed by the read-only `hunt audit` command.
+  The auditor requires a complete Release Record and exact matching subject,
+  observation/rule, finding, recipe, trust-policy, approval, verdict, and
+  evidence digest bindings to an included verification attempt.
+- **Verification mapping:** Build, typecheck, lint, shared/Hunt/CLI tests,
+  focused proof/retest contract assertions, and diff checks passed. Protected
+  self-scan `38384523502` and platform/in-toto run `38384524000` passed all
+  eleven required jobs.
+- **Boundary:** Audit reads only an existing local record/evidence store and
+  never mutates it, creates a signature, changes a decision, uploads source,
+  contacts a provider, publishes npm, or executes a Hunt recipe. The tests use
+  public-safe synthetic/reference fixtures only.
+- **Acceptance:** This is Release Auditor implementation evidence for
+  HUNT-008/HUNT-009 only. Their rows remain unchecked for complete family
+  acceptance, supported-rule approval, trusted/licensed release treatment,
+  hosted entitlement/provider confirmation, required host qualification,
+  independent review, and final release acceptance. HUNT-010/011 are
+  unchanged. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-release-audit-pr119-2026-10-13.md`.
+
 ## HUNT remediation/retest contribution · 2026-10-13
 
 - **Public merge:** PR #118 merged normally as

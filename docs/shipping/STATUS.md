@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT Release Auditor contribution merged (PR #119)
+
+Public PR #119 merged normally as
+`88e95586e2e04a5d981e7dd928778d3c01468d3b`, preserving contribution commit
+`bd4d9071d71776fda1e590b5a7e950cee0241fb5` as the second merge parent; no
+squash or force-push was used. The public contract now gives Hunt proof and
+retest output a versioned release-evidence envelope and adds a read-only
+`verglos hunt audit <evidencePath> --record-store <path>` boundary. It binds
+the exact subject, observation, finding, rule, recipe, trust-policy, approval,
+and verification-attempt identities in a complete Release Record, and fails
+closed on drift or incomplete proof without changing the release decision.
+
+Protected platform/in-toto run `38384524000` and self-scan run `38384523502`
+passed all eleven required checks. Local build, typecheck, lint, shared/Hunt
+tests, focused CLI proof/retest tests, and diff checks passed. Evidence:
+`evidence/hunt-release-audit-pr119-2026-10-13.md`.
+
+This advances HUNT-008/HUNT-009 Release Auditor implementation only. The
+rows remain unchecked for complete per-family authorized target acceptance,
+supported-rule approval, trusted/licensed treatment, hosted entitlement and
+provider confirmation, required Linux/Docker qualification, independent
+review, and final release acceptance. HUNT-010/011 are unchanged. No `.vgl`
+record was produced, no npm state changed, and the score remains **228
+checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT remediation/retest contribution merged (PR #118)
 
 Public PR #118 merged with a regular two-parent merge commit

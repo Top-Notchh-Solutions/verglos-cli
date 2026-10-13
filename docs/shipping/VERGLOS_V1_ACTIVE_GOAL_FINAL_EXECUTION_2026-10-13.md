@@ -11,6 +11,24 @@
 
 ## 0.1 Current shipping checkpoint — 2026-10-13
 
+PR #119 merged normally as `88e95586e2e04a5d981e7dd928778d3c01468d3b` after
+the protected self-scan, in-toto, and Ubuntu/macOS/Windows Node 20/22/24
+checks passed. It preserves contribution commit
+`bd4d9071d71776fda1e590b5a7e950cee0241fb5` and adds the versioned Hunt
+release-evidence contract plus the read-only `verglos hunt audit` boundary.
+The auditor binds exact subject, observation, finding, rule, recipe,
+trust-policy, approval, and verification-attempt identities in a complete
+Release Record and fails closed without changing the release decision.
+
+This advances HUNT-008/HUNT-009 Release Auditor implementation only; their
+counted rows remain open until every row-specific acceptance criterion passes.
+Complete per-family target acceptance, supported-rule approval,
+trusted/licensed treatment, hosted entitlement/provider confirmation,
+required host qualification, independent review, `.vgl` binding, and final
+release acceptance remain open. HUNT-010/011 are unchanged. No `.vgl` record
+was produced and the score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence: `evidence/hunt-release-audit-pr119-2026-10-13.md`.
+
 PR #118 merged normally as `646bd9748910ebb16079ba8461ff7af6e2500799` after
 self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 checks
 passed. It preserves source commits

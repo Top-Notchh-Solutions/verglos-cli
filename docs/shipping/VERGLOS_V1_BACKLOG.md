@@ -1,5 +1,26 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · HUNT Release Auditor checkpoint (PR #119)
+
+Public PR #119 merged normally into `main` as
+`88e95586e2e04a5d981e7dd928778d3c01468d3b`, preserving contribution commit
+`bd4d9071d71776fda1e590b5a7e950cee0241fb5`. The public Hunt proof/retest
+outputs now carry a versioned release-evidence contract, and the read-only
+`verglos hunt audit` path binds exact subject, observation, finding, rule,
+recipe, trust-policy, approval, and verification-attempt identities in a
+complete Release Record. Protected checks passed.
+
+Evidence:
+`docs/shipping/evidence/hunt-release-audit-pr119-2026-10-13.md`.
+
+This is the dependency-ready Release Auditor implementation slice, not
+complete HUNT-008 or HUNT-009 acceptance. Both rows remain unchecked for
+complete per-family authorized target acceptance, supported-rule approval,
+trusted/licensed treatment, hosted entitlement/provider confirmation,
+required Linux/Docker qualification, independent review, and final release
+acceptance. HUNT-010/011 are unchanged. The live score remains **228 checked
+/ 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Attack Worker checkpoint (PR #115)
 
 Public PR #115 merged normally into `main` as

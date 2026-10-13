@@ -1,5 +1,34 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT Release Auditor contribution merged (PR #119)
+
+- **Public contribution:** Added the versioned Hunt release-evidence contract
+  and read-only audit boundary. Proof/retest output is now bound to exact
+  subject, observation, finding, rule, recipe digest, trust-policy digest,
+  approval request digest, and complete Release Record verification-attempt
+  payloads. The auditor never changes or approves the Release Record.
+- **Qualification:** `pnpm build`, `pnpm typecheck`, `pnpm lint`, shared/Hunt
+  tests, focused CLI proof/retest tests, and `git diff --check` passed. The
+  existing environment-gated Docker runtime/target-code cases remained
+  explicit skips and were not counted as passes.
+- **Identity:** PR #119 merged normally as
+  `88e95586e2e04a5d981e7dd928778d3c01468d3b`, with contribution commit
+  `bd4d9071d71776fda1e590b5a7e950cee0241fb5` preserved as a merge parent.
+- **Protected verification:** Platform/in-toto run `38384524000` and
+  self-scan run `38384523502` passed all eleven required jobs.
+- **Boundary:** Public-safe implementation and synthetic/reference fixtures
+  only. No customer source/data, provider state, hosted target, live MCP
+  server, credential, database, production system, source upload, npm
+  publish, or held-out experiment was used.
+- **Disposition:** HUNT-008/HUNT-009 advance only at the Release Auditor
+  implementation layer. Complete per-family acceptance, supported-rule
+  approval, trusted/licensed roots, hosted entitlement/provider confirmation,
+  required host qualification, independent review, `.vgl` release binding,
+  and final release acceptance remain open. HUNT-010/011 are unchanged.
+- **Evidence:** `evidence/hunt-release-audit-pr119-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT remediation/retest contribution merged (PR #118)
 
 - **Public contribution:** Added exact remediation approval binding and the
