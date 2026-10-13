@@ -61,7 +61,10 @@ export class DockerSandboxAdapter implements SandboxAdapter {
         ? "Docker probe timed out before a supported verdict could be evaluated"
         : "Docker probe failed before a supported verdict could be evaluated";
     const assertionVerdict = result.status === "completed" ? evaluateExitCodeAssertions(input.binding.assertions, result.exitCode) : undefined;
-    const assertionsSupported = targetHarness !== undefined || (input.binding.assertions.length > 0 && input.binding.assertions.every((assertion) => /^exit code is (-?\d+)$/.test(assertion.trim())));
+    // A timeout or infrastructure failure happens before the harness can
+    // produce a verdict. Preserve that operational outcome even when the
+    // completed-path assertion syntax is not an exit-code assertion.
+    const assertionsSupported = result.status !== "completed" || targetHarness !== undefined || (input.binding.assertions.length > 0 && input.binding.assertions.every((assertion) => /^exit code is (-?\d+)$/.test(assertion.trim())));
     const canonicalVerdict = targetHarness
       ? targetHarness.verdict === "confirmed"
         ? "confirmed" as const

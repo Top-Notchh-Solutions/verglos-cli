@@ -20,4 +20,8 @@ command.
 They are qualification fixtures and examples, not a claim that every customer
 repository has a supported target-code recipe.
 
+The adapter test matrix also exercises timeout and infrastructure-failure
+classification for every A2 family, while keeping those outcomes separate from
+harness verdicts.
+
 See [`docs/2.0.0-hunt-and-attest.md`](../../docs/2.0.0-hunt-and-attest.md).
