@@ -26,6 +26,7 @@ import { executeRecordAttest, SIGSTORE_NETWORK_ORIGINS } from "./record-sigstore
 import { executeHunt } from "./hunt.js";
 import { executeHuntRecipe, runHuntRecipe } from "./hunt-execute.js";
 import { executeHuntRecipeVerification } from "./hunt-recipe-verify.js";
+import { executeHuntScout } from "./hunt-scout.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -993,6 +994,16 @@ const huntCommand = program
       process.exit(code);
     },
   );
+
+huntCommand
+  .command("scout [project]")
+  .description("Build a bounded local target manifest without executing project code")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (project = ".", _opts: { json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { json?: boolean; quiet?: boolean };
+    process.exit(await executeHuntScout(project, opts.json, opts.quiet));
+  });
 
 huntCommand
   .command("verify-recipe <recipePath>")

@@ -195,6 +195,16 @@ verglos hunt --finding D4-004-1
 verglos hunt --dry-run
 ```
 
+For the Scout/Context phase, build a bounded local target manifest before
+planning a Hunt. Scout reads package metadata and source text statically,
+reports relative entrypoints, routes/API candidates, dependency boundaries,
+MCP tool names, and candidate sinks, and never executes project code or uploads
+source:
+
+```bash
+verglos hunt scout . --json
+```
+
 The no-argument command validates the Pro capability and explains the required binding. Execution is explicit and fail-closed:
 
 ```bash
@@ -208,7 +218,7 @@ verglos hunt --execute-report verglos-report.json \
   --json
 ```
 
-The shipped public runtime supports the bounded A1 fixture-probe catalog: UTF-8 containment, path-traversal shape, command-injection shape, private/local SSRF target classification, tenant-boundary mismatch, SQL/NoSQL injection shape, safe XSS shape, and agent/MCP tool-boundary mismatch. It also admits the seven approved A2 target-harness families: SQL/NoSQL injection, command injection, path traversal, SSRF, Agent/MCP boundaries, XSS, and authorization/tenant checks. A2 runs only a signed recipe's exact `.verglos/hunt/<family>.mjs` entrypoint in a pinned Node container with read-only project input, denied network, dropped capabilities, and bounded resources. The harness must emit one bounded JSON result line; arbitrary model-generated shell and unsigned content are rejected. The Docker adapter reports A2 assurance and its explicit host-daemon/platform limitation. A confirmed result exits `1`; a clean supported result exits `0`; invalid or unauthorized input exits `78`.
+The shipped public runtime supports the bounded A1 fixture-probe catalog: UTF-8 containment, path-traversal shape, command-injection shape, private/local SSRF target classification, tenant-boundary mismatch, SQL/NoSQL injection shape, safe XSS shape, and agent/MCP tool-boundary mismatch. It also admits the ten approved A2 target-harness families: SQL/NoSQL injection, command injection, path traversal, SSRF, Agent/MCP boundaries, XSS, authorization/tenant checks, prototype-pollution object merges, synthetic credential-use, and disposable supply-chain admission behavior. A2 runs only a signed recipe's exact `.verglos/hunt/<family>.mjs` entrypoint in a pinned Node container with read-only project input, denied network, dropped capabilities, and bounded resources. The harness must emit one bounded JSON result line; arbitrary model-generated shell and unsigned content are rejected. The Docker adapter reports A2 assurance and its explicit host-daemon/platform limitation. A confirmed result exits `1`; a clean supported result exits `0`; invalid or unauthorized input exits `78`.
 
 ### `verglos attest` — signed evidence bundle `Studio`
 
