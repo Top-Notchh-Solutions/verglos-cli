@@ -11,6 +11,27 @@
 
 ## 0.1 Current shipping checkpoint — 2026-10-13
 
+PR #117 merged normally as `cd59d5633088934d01b6087966b6795a840ac21d` after
+self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 checks
+passed. It preserves source commits
+`19b4ece56aaaa2fe21bde6bf6619eee2b3b8dead` and
+`ca2cffdbe696da939d6e2ba3d6b85070d46001d0` and extends the public Hunt proof
+path to fixed positive/negative cases of the registered A2 first-party target
+harness through the same signed execution binding. The direct public
+`verglos hunt proof` A2 test passed.
+
+This contribution advances HUNT-008/HUNT-009 implementation only; their
+counted rows remain open until every row-specific acceptance criterion passes.
+The A2 result is bounded reference-harness evidence, not independent review,
+customer-target proof, or an approved remediation retest. Trusted/licensed
+provenance, hosted entitlement/provider confirmation, required isolation
+qualification, remediation/retest, `.vgl` binding, and final release
+acceptance remain open. HUNT-010/011 are unchanged. Score remains **228
+checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/hunt-a2-proof-controls-pr117-2026-10-13.md`.
+
+## 0.2 Prior shipping checkpoint — 2026-10-13
+
 PR #116 merged normally as `870ffb52421abb3bf045ad224043cdc5e2605975` after
 self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 checks
 passed. It preserves source commits

@@ -1,5 +1,33 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT A2 Proof/Counterexample contribution merged (PR #117)
+
+Public PR #117 merged with a regular two-parent merge commit
+`cd59d5633088934d01b6087966b6795a840ac21d`, preserving source commits
+`19b4ece56aaaa2fe21bde6bf6619eee2b3b8dead` and
+`ca2cffdbe696da939d6e2ba3d6b85070d46001d0`; no squash or force-push was used.
+The public Hunt runtime now replays the registered A2 first-party target
+harness with fixed positive and negative cases through the same signed recipe,
+trust, approval, target, finding, and observation binding. The public
+`verglos hunt proof` path is covered directly, and the A2 limitation remains
+explicit: reference-harness evidence is not independent review, customer-target
+proof, or an approved remediation retest.
+
+Local build 8/8, typecheck 14/14, lint 6/6, full workspace tests 13/13, diff
+checks, Hunt core proof 21/21, Docker adapter tests 10/10, target-harness
+fixture tests 4/4, and the opted-in public CLI HUNT-009 matrix 6/6 passed. The
+direct public A2 `hunt proof` test passed. Protected self-scan run
+`38380150118`, in-toto binding, and all nine Ubuntu/macOS/Windows Node 20/22/24
+cells in run `38380150147` passed. Evidence:
+`evidence/hunt-a2-proof-controls-pr117-2026-10-13.md`.
+
+This advances the A2 Proof/Counterexample implementation slice only. HUNT-008
+and HUNT-009 remain unchecked for complete per-family authority and provenance,
+hosted entitlement/provider confirmation, required isolation qualification,
+independent review, remediation/retest, `.vgl` binding, and final release
+acceptance. HUNT-010 and HUNT-011 are unchanged. The score remains **228
+checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Proof/Counterexample contribution merged (PR #116)
 
 Public PR #116 merged with a regular two-parent merge commit

@@ -1,5 +1,40 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT A2 Proof/Counterexample contribution merged (PR #117)
+
+- **Public contribution:** Extended `runSupportedHuntProof` from the bounded
+  A1 slice to registered A2 container recipes. Primary and counterexample runs
+  select fixed positive/negative cases of the pinned first-party target
+  harness, after exact command/assertion validation, through the same signed
+  execution binding. Added direct public CLI `hunt proof` coverage.
+- **Qualification:** Build 8/8, typecheck 14/14, lint 6/6, full workspace
+  tests 13/13, and diff checks passed. Opted-in Hunt core 21/21, Docker adapter
+  10/10, target-harness fixtures 4/4, and public CLI HUNT-009 matrix 6/6
+  passed. The direct A2 proof test passed; environment-gated adversarial Docker
+  runtime tests remained explicit skips.
+- **Identity:** PR #117 merged normally into public `main` as
+  `cd59d5633088934d01b6087966b6795a840ac21d`, with parents
+  `870ffb52421abb3bf045ad224043cdc5e2605975` and
+  `ca2cffdbe696da939d6e2ba3d6b85070d46001d0`. Source commits
+  `19b4ece56aaaa2fe21bde6bf6619eee2b3b8dead` and
+  `ca2cffdbe696da939d6e2ba3d6b85070d46001d0` remain separate.
+- **Protected verification:** Self-scan run `38380150118` and matrix run
+  `38380150147` passed all eleven required checks, including in-toto and all
+  Ubuntu/macOS/Windows Node 20/22/24 cells.
+- **Boundary:** Only first-party local reference harnesses were used. No
+  customer source/data, provider state, hosted target, credential, database,
+  live MCP server, production system, arbitrary command, or source upload was
+  involved. Owner authorization is not independent review, provider
+  confirmation, customer acceptance, legal clearance, or release approval.
+- **Disposition:** This advances HUNT-008/HUNT-009 A2 proof plumbing only.
+  Reference-harness output is not customer-target proof or independent
+  adjudication. HUNT-008 and HUNT-009 remain unchecked for their complete
+  authority, provenance, entitlement, isolation, review, remediation/retest,
+  `.vgl`, and release criteria. HUNT-010/011 are unchanged.
+- **Evidence:** `evidence/hunt-a2-proof-controls-pr117-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT Proof/Counterexample contribution merged (PR #116)
 
 - **Public contribution:** Added `runSupportedHuntProof` and

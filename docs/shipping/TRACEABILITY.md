@@ -1,5 +1,39 @@
 # Verglos V1 traceability
 
+## HUNT A2 Proof/Counterexample contribution · 2026-10-13
+
+- **Public merge:** PR #117 merged normally as
+  `cd59d5633088934d01b6087966b6795a840ac21d`, from feature head
+  `ca2cffdbe696da939d6e2ba3d6b85070d46001d0`, with prior `main`
+  `870ffb52421abb3bf045ad224043cdc5e2605975` as the other parent. Source
+  commits `19b4ece56aaaa2fe21bde6bf6619eee2b3b8dead` and
+  `ca2cffdbe696da939d6e2ba3d6b85070d46001d0` remain separate; no squash or
+  force-push was used.
+- **Implementation mapping:** The Hunt proof runtime now recognizes the
+  registered container adapter, appends only fixed positive/negative fixture
+  selectors to an exact first-party target-harness command, and executes both
+  cases through the same recipe/trust/approval/target/finding/observation
+  binding. Unsupported adapters remain explicitly not-attemptable. The public
+  CLI path is covered directly.
+- **Verification mapping:** Build 8/8, typecheck 14/14, lint 6/6, full
+  workspace tests 13/13, diff checks, opted-in Hunt core 21/21, Docker adapter
+  10/10, target-harness fixtures 4/4, and public CLI HUNT-009 matrix 6/6
+  passed. Self-scan run `38380150118`, in-toto, and all nine platform cells in
+  run `38380150147` passed all eleven required PR checks.
+- **Boundary:** The proof used only first-party local reference harnesses in
+  the pinned Docker boundary. No customer target, customer data, provider
+  state, hosted service, source upload, arbitrary shell, credential, database,
+  live MCP server, or production system was used. The A2 result is not
+  independent human review, customer-target proof, or an approved remediation
+  retest. Owner authorization does not substitute for those controls.
+- **Acceptance:** This advances HUNT-008/HUNT-009 Proof/Counterexample wiring
+  only. Complete per-family authority/provenance, trusted/licensed roots,
+  hosted entitlement, provider confirmation, required isolation qualification,
+  independent adjudication, remediation/retest, `.vgl` Release Record binding,
+  and final release acceptance remain open. HUNT-008/009 remain unchecked;
+  HUNT-010/011 are unchanged. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-a2-proof-controls-pr117-2026-10-13.md`.
+
 ## HUNT Proof/Counterexample contribution · 2026-10-13
 
 - **Public merge:** PR #116 merged normally as
