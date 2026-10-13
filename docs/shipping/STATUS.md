@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT record-native verification-attempt contribution merged (PR #120)
+
+Public PR #120 merged normally as
+`fb3d35af0187d852d6bae5dd0795b9fb0d9a7cf7`, preserving contribution commit
+`5b0f1bacee00d4c5f72e22fa0eeedef782c939be` as the second merge parent; no
+squash or force-push was used. The public Hunt proof path now emits a
+schema-validated record-native verification attempt with exact subject,
+observation, finding, rule, recipe, trust, approval, runtime, bounded usage,
+verdict, and output-evidence bindings. The Release Auditor requires the
+embedded attempt and confirms the exact attempt ID is present in the complete
+Release Record.
+
+Protected platform/in-toto run `38390079021` and self-scan run `38390079002`
+passed all eleven required checks, including Ubuntu/macOS/Windows Node 20/22/24.
+Local build, typecheck, lint, shared/Hunt/CLI tests, and diff checks passed.
+Evidence: `evidence/hunt-verification-attempt-pr120-2026-10-13.md`.
+
+This advances HUNT-008/HUNT-009 producer and Release Record-binding
+implementation only. The rows remain unchecked for complete per-family
+authorized target acceptance, supported-rule approval, trusted/licensed
+treatment, hosted entitlement and provider confirmation, required Linux/Docker
+qualification, independent review, and final release acceptance. HUNT-010/011
+are unchanged. No `.vgl` record was produced and the score remains **228
+checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Release Auditor contribution merged (PR #119)
 
 Public PR #119 merged normally as

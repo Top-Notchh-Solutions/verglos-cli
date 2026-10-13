@@ -1,5 +1,31 @@
 # Verglos V1 traceability
 
+## HUNT record-native verification-attempt contribution · 2026-10-13
+
+- **Public merge:** PR #120 merged normally as
+  `fb3d35af0187d852d6bae5dd0795b9fb0d9a7cf7` from contribution commit
+  `5b0f1bacee00d4c5f72e22fa0eeedef782c939be`; no squash or force-push.
+- **Implementation mapping:** The shared Hunt producer emits a validated
+  `VerificationAttemptDocument` bound to the proof subject, observation,
+  finding, rule, recipe, trust policy, approval, runtime, bounded usage,
+  verdict, and output-evidence digest. The proof envelope carries the exact
+  attempt, and the auditor verifies its ID against the complete Release Record.
+- **Verification mapping:** Build 8/8, typecheck 14/14, lint 6/6,
+  shared/Hunt/CLI tests, and diff checks passed. Protected self-scan
+  `38390079002` and platform/in-toto run `38390079021` passed all eleven
+  required jobs.
+- **Boundary:** A1 telemetry is worker-derived; A2 unavailable resource
+  counters are explicit limitations. No customer data, hosted target,
+  provider state, credential, source upload, arbitrary command, production
+  system, npm publish, or private tracker entered the public contribution.
+- **Acceptance:** This advances HUNT-008/HUNT-009 producer and Release Record
+  binding only. Their rows remain unchecked for complete family acceptance,
+  supported-rule approval, trusted/licensed release treatment, hosted
+  entitlement/provider confirmation, required host qualification, independent
+  review, and final release acceptance. HUNT-010/011 are unchanged. Score
+  remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-verification-attempt-pr120-2026-10-13.md`.
+
 ## HUNT Release Auditor contribution · 2026-10-13
 
 - **Public merge:** PR #119 merged normally as

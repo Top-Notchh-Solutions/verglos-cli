@@ -1,5 +1,36 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT record-native verification-attempt contribution merged (PR #120)
+
+- **Public contribution:** Added a schema-validated shared producer for the
+  record-native `VerificationAttemptDocument`. Hunt proof now emits exact
+  subject, observation, finding, rule, recipe, trust, approval, runtime,
+  bounded usage, verdict, and output-evidence bindings; the Release Auditor
+  requires the embedded attempt and exact ID presence in the complete Release
+  Record.
+- **Qualification:** `pnpm build`, `pnpm typecheck`, `pnpm lint`, shared/Hunt/
+  CLI tests, and `git diff --check` passed. Existing environment-gated Docker
+  and loopback-listener cases remained explicit skips and were not counted as
+  passes.
+- **Identity:** PR #120 merged normally as
+  `fb3d35af0187d852d6bae5dd0795b9fb0d9a7cf7`, with contribution commit
+  `5b0f1bacee00d4c5f72e22fa0eeedef782c939be` preserved as a merge parent.
+- **Protected verification:** Platform/in-toto run `38390079021` and
+  self-scan run `38390079002` passed all eleven required jobs.
+- **Boundary:** Public-safe implementation and synthetic/reference fixtures
+  only. No customer source/data, provider state, hosted target, credential,
+  database, live MCP server, production system, source upload, npm publish, or
+  held-out experiment was used. A2 unavailable counters remain explicit.
+- **Disposition:** HUNT-008/HUNT-009 advance only at the producer and Release
+  Record-binding implementation layer. Complete per-family acceptance,
+  supported-rule approval, trusted/licensed roots, hosted entitlement/provider
+  confirmation, required host qualification, independent review, `.vgl`
+  binding, and final release acceptance remain open. HUNT-010/011 are
+  unchanged.
+- **Evidence:** `evidence/hunt-verification-attempt-pr120-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT Release Auditor contribution merged (PR #119)
 
 - **Public contribution:** Added the versioned Hunt release-evidence contract

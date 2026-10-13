@@ -11,6 +11,26 @@
 
 ## 0.1 Current shipping checkpoint — 2026-10-13
 
+PR #120 merged normally as `fb3d35af0187d852d6bae5dd0795b9fb0d9a7cf7` after
+self-scan, in-toto, and all Ubuntu/macOS/Windows Node 20/22/24 checks passed.
+It preserves contribution commit
+`5b0f1bacee00d4c5f72e22fa0eeedef782c939be` and adds a schema-validated,
+record-native verification-attempt producer to the Hunt proof path. The
+attempt binds exact subject, observation, finding, rule, recipe, trust,
+approval, runtime, bounded usage, verdict, and output-evidence identities;
+the Release Auditor requires that attempt and exact ID presence in the
+complete Release Record.
+
+This advances HUNT-008/HUNT-009 producer and Release Record-binding
+implementation only; their counted rows remain open until every row-specific
+acceptance criterion passes. A2 resource-counter limitations remain explicit.
+Complete per-family target acceptance, supported-rule approval,
+trusted/licensed treatment, hosted entitlement/provider confirmation, required
+host qualification, independent review, `.vgl` binding, and final release
+acceptance remain open. HUNT-010/011 are unchanged. No `.vgl` record was
+produced and the score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence: `evidence/hunt-verification-attempt-pr120-2026-10-13.md`.
+
 PR #119 merged normally as `88e95586e2e04a5d981e7dd928778d3c01468d3b` after
 the protected self-scan, in-toto, and Ubuntu/macOS/Windows Node 20/22/24
 checks passed. It preserves contribution commit
