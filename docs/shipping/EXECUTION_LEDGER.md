@@ -1,5 +1,42 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT MCP/CLI execution-contract contribution merged (PR #121)
+
+- **Public contribution:** The CLI/MCP Hunt execution projection now carries
+  exact subject, observation, rule, recipe, trust-policy, and approval
+  digests. Each bounded outcome emits a schema-validated record-native
+  verification attempt with an exact outcome-to-attempt ID binding, runtime
+  identity, bounded usage, verdict, and explicit limitations. Report findings
+  whose rule differs from the requested recipe are denied before runtime
+  loading.
+- **Qualification:** Build 8/8, typecheck 14/14, lint 6/6, MCP tests 48/48,
+  focused Hunt execution 6 passed with 1 explicit Docker skip, complete CLI
+  tests, clean-consumer verifier test, and diff checks passed. The initial
+  protected run caught the packed fixture's missing rule field; the separate
+  follow-up commit corrected it and the complete protected rerun passed.
+- **Identity:** PR #121 merged normally as
+  `95ecf1bad7ff1cee69cf49eee2d0a4946c15bb0b`, with contribution commits
+  `3eb4defecd8e76601619b276e0509c42a8e6299d` and
+  `d1b189e2458b10394fe956dc2cc84073d429fe1c` preserved through the
+  two-parent merge. No squash, rebase, or force-push was used.
+- **Protected verification:** Platform/in-toto run `38392822867` and
+  self-scan run `38392822885` passed all eleven required jobs.
+- **Boundary:** Public-safe source, synthetic/reference fixtures, and packed
+  consumer qualification only. No customer source/data, provider state,
+  hosted target, credential, database, live MCP server, production system,
+  source upload, npm publish, `.vgl` record, or held-out experiment was used.
+  A2 unavailable resource counters remain explicit limitations, and the
+  projection is not itself a signed Release Record.
+- **Disposition:** This advances HUNT-008/HUNT-009 execution-contract
+  implementation and HUNT-010 parity substrate only. Complete per-family
+  acceptance, supported-rule approval, trusted/licensed roots, hosted
+  entitlement/provider confirmation, required host qualification, independent
+  review, `.vgl` binding, and final release acceptance remain open.
+  HUNT-008/009/010/011 remain unchecked.
+- **Evidence:** `evidence/hunt-mcp-contract-pr121-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT record-native verification-attempt contribution merged (PR #120)
 
 - **Public contribution:** Added a schema-validated shared producer for the

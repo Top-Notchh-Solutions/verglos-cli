@@ -11,6 +11,27 @@
 
 ## 0.1 Current shipping checkpoint — 2026-10-13
 
+PR #121 merged normally as `95ecf1bad7ff1cee69cf49eee2d0a4946c15bb0b` after
+self-scan, in-toto, and all Ubuntu/macOS/Windows Node 20/22/24 checks passed.
+It preserves contribution commits
+`3eb4defecd8e76601619b276e0509c42a8e6299d` and
+`d1b189e2458b10394fe956dc2cc84073d429fe1c` through a two-parent merge; no
+squash, rebase, or force-push was used. The public CLI/MCP Hunt path now
+shares exact subject, observation, rule, recipe, trust-policy, and approval
+bindings, emits schema-validated record-native verification-attempt
+projections, and fails closed when a report finding rule would widen the
+approved recipe. The packed consumer fixture now carries the exact rule.
+
+This advances HUNT-008/HUNT-009 execution-contract implementation and HUNT-010
+MCP parity substrate only; their counted rows remain open until every
+row-specific acceptance criterion passes. Complete per-family target
+acceptance, supported-rule approval, trusted/licensed treatment, hosted
+entitlement/provider confirmation, required host qualification, independent
+review, `.vgl` binding, and final release acceptance remain open. No `.vgl`
+record was produced and the score remains **228 checked / 52 unchecked / 280
+total (81.4%)**. Evidence:
+`evidence/hunt-mcp-contract-pr121-2026-10-13.md`.
+
 PR #120 merged normally as `fb3d35af0187d852d6bae5dd0795b9fb0d9a7cf7` after
 self-scan, in-toto, and all Ubuntu/macOS/Windows Node 20/22/24 checks passed.
 It preserves contribution commit

@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT MCP/CLI execution-contract contribution merged (PR #121)
+
+Public PR #121 merged normally as
+`95ecf1bad7ff1cee69cf49eee2d0a4946c15bb0b`, preserving contribution commits
+`3eb4defecd8e76601619b276e0509c42a8e6299d` and
+`d1b189e2458b10394fe956dc2cc84073d429fe1c`; no squash, rebase, or force-push
+was used. The CLI and MCP Hunt path now exposes the same exact execution
+binding and schema-validated verification-attempt projection, and report
+finding rules are checked against the approved recipe before runtime loading.
+The packed consumer fixture was updated to preserve the exact binding under
+clean-consumer qualification.
+
+Protected platform/in-toto run `38392822867` and self-scan run `38392822885`
+passed all eleven required checks. Local build 8/8, typecheck 14/14, lint
+6/6, MCP tests 48/48, focused Hunt execution 6 passed with 1 explicit Docker
+skip, complete CLI tests, clean-consumer verifier test, and diff checks passed.
+Evidence: `evidence/hunt-mcp-contract-pr121-2026-10-13.md`.
+
+This advances the HUNT MCP/CLI contract implementation layer only. HUNT-008,
+HUNT-009, HUNT-010, and HUNT-011 remain unchecked for their complete
+row-specific acceptance criteria, including provider confirmation, full
+target qualification, independent review, `.vgl` binding, and final release
+acceptance. No `.vgl` record was produced and the score remains **228 checked /
+52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT record-native verification-attempt contribution merged (PR #120)
 
 Public PR #120 merged normally as

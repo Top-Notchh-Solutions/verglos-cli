@@ -1,5 +1,28 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · HUNT MCP/CLI contract checkpoint (PR #121)
+
+Public PR #121 merged normally into `main` as
+`95ecf1bad7ff1cee69cf49eee2d0a4946c15bb0b`, preserving the contribution
+commits `3eb4defecd8e76601619b276e0509c42a8e6299d` and
+`d1b189e2458b10394fe956dc2cc84073d429fe1c` through a two-parent merge. The
+MCP/CLI Hunt execution projection now carries exact subject, observation,
+rule, recipe, trust-policy, and approval bindings, emits schema-validated
+record-native verification-attempt projections, and fails closed when a
+report finding's rule would widen the approved recipe. The packed consumer
+fixture records the exact rule binding required by this contract.
+
+Evidence:
+`docs/shipping/evidence/hunt-mcp-contract-pr121-2026-10-13.md`.
+
+This is the dependency-ready MCP/CLI contract implementation slice, not
+complete HUNT-008, HUNT-009, HUNT-010, or HUNT-011 acceptance. The rows remain
+unchecked for complete per-family authorized target acceptance, supported-rule
+approval, trusted/licensed treatment, hosted entitlement/provider
+confirmation, required Linux/Docker qualification, independent review, `.vgl`
+binding, and final release acceptance. The live score remains **228 checked /
+52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Release Auditor checkpoint (PR #119)
 
 Public PR #119 merged normally into `main` as

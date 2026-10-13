@@ -1,5 +1,34 @@
 # Verglos V1 traceability
 
+## HUNT MCP/CLI execution-contract contribution · 2026-10-13
+
+- **Public merge:** PR #121 merged normally as
+  `95ecf1bad7ff1cee69cf49eee2d0a4946c15bb0b`, preserving contribution
+  commits `3eb4defecd8e76601619b276e0509c42a8e6299d` and
+  `d1b189e2458b10394fe956dc2cc84073d429fe1c`; no squash, rebase, or
+  force-push.
+- **Implementation mapping:** CLI and MCP Hunt results now share exact
+  subject, observation, rule, recipe, trust-policy, and approval digests.
+  Every bounded outcome points to a schema-validated
+  `VerificationAttemptDocument`; report finding rule drift is rejected before
+  runtime loading. The clean-consumer fixture carries the exact rule binding.
+- **Verification mapping:** Build 8/8, typecheck 14/14, lint 6/6, MCP tests
+  48/48, focused Hunt execution 6 passed with 1 Docker skip, complete CLI
+  tests, clean-consumer verifier test, and diff checks passed. Protected
+  self-scan `38392822885` and platform/in-toto run `38392822867` passed all
+  eleven required jobs.
+- **Boundary:** The projection is source-free and not itself a signed `.vgl`
+  Release Record. No customer data, provider state, hosted target,
+  credential, source upload, npm publish, or production system was used. A2
+  resource counters unavailable from the Docker adapter remain explicit.
+- **Acceptance:** This advances HUNT-008/HUNT-009 execution-contract wiring
+  and HUNT-010 MCP parity only. The rows remain unchecked for complete family
+  acceptance, supported-rule approval, trusted/licensed treatment, hosted
+  entitlement/provider confirmation, required Linux/Docker qualification,
+  independent review, `.vgl` binding, and final release acceptance. HUNT-011
+  is unchanged. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-mcp-contract-pr121-2026-10-13.md`.
+
 ## HUNT record-native verification-attempt contribution · 2026-10-13
 
 - **Public merge:** PR #120 merged normally as
