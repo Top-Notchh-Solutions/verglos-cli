@@ -44,6 +44,8 @@ const A2_FAMILIES = [
   { recipeId: "a2-xss-harness", ruleId: "D1-004", harness: "xss" },
   { recipeId: "a2-authorization-harness", ruleId: "D3-001", harness: "authorization" },
   { recipeId: "a2-prototype-pollution-harness", ruleId: "D1-008", harness: "prototype-pollution" },
+  { recipeId: "a2-secrets-credential-use-harness", ruleId: "D4-001", harness: "secret-credential-use" },
+  { recipeId: "a2-supply-chain-harness", ruleId: "D6-001", harness: "supply-chain" },
 ] as const;
 
 function a2Recipe(family: (typeof A2_FAMILIES)[number]): HuntRecipe {

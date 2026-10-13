@@ -132,7 +132,7 @@ test("Docker sandbox adapter classifies timeout and infrastructure failure for e
   const root = await mkdtemp(join(tmpdir(), "verglos-docker-a2-outcomes-"));
   try {
     const families = SUPPORTED_HUNT_RECIPE_CATALOG.filter((descriptor) => descriptor.adapter === "container");
-    assert.equal(families.length, 8);
+    assert.equal(families.length, 10);
     for (const family of families) {
       const targetBinding = { ...binding(), command: [...family.command], assertions: [...family.assertions] };
       const timeoutAdapter = new DockerSandboxAdapter({

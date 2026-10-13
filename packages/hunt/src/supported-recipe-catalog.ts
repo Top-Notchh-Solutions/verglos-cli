@@ -133,6 +133,8 @@ export const SUPPORTED_HUNT_RECIPE_CATALOG = Object.freeze([
     ["a2-xss-harness", "D1-004", "/workspace/.verglos/hunt/xss.mjs"],
     ["a2-authorization-harness", "D3-001", "/workspace/.verglos/hunt/authorization.mjs"],
     ["a2-prototype-pollution-harness", "D1-008", "/workspace/.verglos/hunt/prototype-pollution.mjs"],
+    ["a2-secrets-credential-use-harness", "D4-001", "/workspace/.verglos/hunt/secret-credential-use.mjs"],
+    ["a2-supply-chain-harness", "D6-001", "/workspace/.verglos/hunt/supply-chain.mjs"],
   ] as const).map(([recipeId, ruleId, harnessPath]) => ({
     recipeId,
     ruleId,

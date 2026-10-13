@@ -18,6 +18,8 @@ const fixtureNames = [
   "xss",
   "authorization",
   "prototype-pollution",
+  "secret-credential-use",
+  "supply-chain",
 ] as const;
 
 const expectedSummaries = {
@@ -29,6 +31,8 @@ const expectedSummaries = {
   xss: "deterministic safe-XSS fixture",
   authorization: "deterministic authorization and mass-assignment fixture",
   "prototype-pollution": "deterministic prototype-pollution fixture",
+  "secret-credential-use": "deterministic synthetic credential-use fixture",
+  "supply-chain": "deterministic disposable supply-chain fixture",
 } as const;
 
 type FixtureProcessResult = Readonly<{

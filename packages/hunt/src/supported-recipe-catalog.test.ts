@@ -63,10 +63,10 @@ for (const descriptor of SUPPORTED_HUNT_RECIPE_CATALOG.slice(1)) {
   });
 }
 
-test("catalog includes the eight approved target-code recipe families", () => {
+test("catalog includes the ten approved target-code recipe families", () => {
   assert.deepEqual(
     SUPPORTED_HUNT_RECIPE_CATALOG.filter((descriptor) => descriptor.adapter === "container").map((descriptor) => descriptor.recipeId),
-    ["a2-sql-nosql-injection-harness", "a2-command-injection-harness", "a2-path-traversal-harness", "a2-ssrf-harness", "a2-agent-mcp-harness", "a2-xss-harness", "a2-authorization-harness", "a2-prototype-pollution-harness"],
+    ["a2-sql-nosql-injection-harness", "a2-command-injection-harness", "a2-path-traversal-harness", "a2-ssrf-harness", "a2-agent-mcp-harness", "a2-xss-harness", "a2-authorization-harness", "a2-prototype-pollution-harness", "a2-secrets-credential-use-harness", "a2-supply-chain-harness"],
   );
 });
 
