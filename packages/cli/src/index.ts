@@ -30,6 +30,7 @@ import { executeHuntScout } from "./hunt-scout.js";
 import { executeHuntHypothesis } from "./hunt-hypothesis.js";
 import { executeHuntWorker } from "./hunt-worker.js";
 import { executeHuntProof } from "./hunt-proof.js";
+import { executeHuntRetest } from "./hunt-retest.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -1064,6 +1065,30 @@ huntCommand
     });
     if (!executionAuthorized) process.exit(1);
     process.exit(await executeHuntProof({ hypothesisPath, reportPath: opts.report, recipePath: opts.recipe, trustStorePath: opts.trustStore, approvalPath: opts.approval, observationId: opts.observationId, json: opts.json, quiet: opts.quiet }));
+  });
+
+huntCommand
+  .command("retest <hypothesisPath>")
+  .description("Re-run the same supported Hunt proof after an approved remediation scope")
+  .requiredOption("--report <path>", "Local post-remediation scanner report containing the exact finding")
+  .requiredOption("--recipe <path>", "Signed local Hunt recipe selected by the post-remediation hypothesis")
+  .requiredOption("--trust-store <path>", "Local Hunt trust store for the signed recipe")
+  .requiredOption("--approval <path>", "Approved Hunt execute receipt bound to the post-remediation target")
+  .requiredOption("--remediation <path>", "Non-mutating remediation proposal for the before subject")
+  .requiredOption("--remediation-approval <path>", "Approved mutate receipt bound to the proposal subject and files")
+  .requiredOption("--before-subject-id <id>", "Exact subject identity before the approved remediation scope")
+  .requiredOption("--observation-id <id>", "Observation identity for the retest binding")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (hypothesisPath: string, _opts: { report: string; recipe: string; trustStore: string; approval: string; remediation: string; remediationApproval: string; beforeSubjectId: string; observationId: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { report: string; recipe: string; trustStore: string; approval: string; remediation: string; remediationApproval: string; beforeSubjectId: string; observationId: string; json?: boolean; quiet?: boolean };
+    const executionAuthorized = await requireCapability("hunt.critical", "`verglos hunt retest`", {
+      asPlan: process.env.VERGLOS_AS_PLAN,
+      output: opts.json ? "json" : opts.quiet ? "quiet" : undefined,
+      extraLine: "Retest still requires a supported hypothesis, signed recipe, approved remediation scope, execute approval, and bounded runtime.",
+    });
+    if (!executionAuthorized) process.exit(1);
+    process.exit(await executeHuntRetest({ hypothesisPath, reportPath: opts.report, recipePath: opts.recipe, trustStorePath: opts.trustStore, approvalPath: opts.approval, remediationPath: opts.remediation, remediationApprovalPath: opts.remediationApproval, beforeSubjectId: opts.beforeSubjectId, observationId: opts.observationId, json: opts.json, quiet: opts.quiet }));
   });
 
 huntCommand

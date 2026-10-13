@@ -5,7 +5,7 @@ import { runHunt } from "./index.js";
 import { createApprovalReceipt, parseHuntRecipe, type HuntTargetManifest, type ScanResult } from "@verglos/shared";
 import { createHuntTestTrustStore, HUNT_TEST_TRUST_KEY_ID } from "./hunt-trust-test-support.js";
 import { planSupportedHuntAttack } from "./attack-hypothesis.js";
-import { runSupportedHuntAttack, runSupportedHuntProof } from "./attack-worker.js";
+import { runSupportedHuntAttack, runSupportedHuntProof, runSupportedHuntRetest } from "./attack-worker.js";
 import { SUPPORTED_HUNT_RECIPE_CATALOG } from "./supported-recipe-catalog.js";
 
 const report = {
@@ -221,6 +221,52 @@ test("Attack Worker refuses a report without the exact hypothesis finding", asyn
   const at = "2026-01-01T00:02:00Z";
   const approval = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: workerSubjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2026-01-01T01:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
   await assert.rejects(() => runSupportedHuntAttack({ hypothesis, report, recipe, trust: createHuntTestTrustStore(recipe), approval, entitlement: "hunt.critical", observationId: "urn:uuid:32345678-1234-4123-8123-123456789abc", at }), /report does not contain/);
+});
+
+test("Hunt retest binds an approved remediation scope and clears a fixed A1 subject", async () => {
+  const beforeSubjectId = `urn:verglos:subject:artifact:sha256:${"c".repeat(64)}`;
+  const afterSubjectId = `urn:verglos:subject:artifact:sha256:${"d".repeat(64)}`;
+  const at = "2026-01-01T00:02:00Z";
+  const finding = { id: "finding-retest", ruleId: "hunt.a1.utf8-contains", location: "app.js", line: 1, severity: "high" as const };
+  const hypothesis = planSupportedHuntAttack({
+    manifest: {
+      schemaId: "urn:verglos:schema:hunt-target-manifest", schemaVersion: "1.0.0", targetSubjectId: afterSubjectId,
+      frameworks: ["express"], entrypoints: [{ path: "app.js", kind: "source" }], routes: [], apis: [], dependencyBoundaries: [], agentMcpTools: [], candidateSinks: [],
+      coverage: { status: "complete", filesInspected: 1, bytesInspected: 10, limitations: [] },
+    } as unknown as HuntTargetManifest,
+    finding,
+  });
+  const afterRecipe = parseHuntRecipe({
+    schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "a1-utf8-contains", ruleId: finding.ruleId, targetSubjectId: afterSubjectId,
+    imageDigest: { algorithm: "sha256", value: "f".repeat(64) }, command: ["verglos-probe", "utf8-contains"], assertions: ["probe result is true"], inputs: { needle: "unsafe", value: "safe fixture after remediation" }, isolation: "restricted-process",
+    limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "A1 pure probe" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID },
+  });
+  const remediation = {
+    proposalId: "923e4567-e89b-12d3-a456-426614174000", findingId: finding.id, targetSubjectId: beforeSubjectId, files: ["app.js"], summary: "replace the unsafe input path", tests: ["Run the bounded security test"],
+    policyEffect: "clear hunt finding", uncertainty: "post-remediation subject must be retested", networkRequired: false, applied: false,
+  };
+  const remediationApproval = createApprovalReceipt({ requestId: "923e4567-e89b-12d3-a456-426614174001", action: "mutate", actor: "human", target: beforeSubjectId, files: ["app.js"], network: [], policyEffect: remediation.policyEffect, requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  const executeApproval = createApprovalReceipt({ requestId: "a2345678-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: afterSubjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
+  const result = await runSupportedHuntRetest({
+    hypothesis,
+    report: { ...report, projectRoot: "/tmp/fixture-target-after", findings: [{ id: finding.id, detector: "injection", rule: finding.ruleId, severity: finding.severity, file: finding.location, line: finding.line, title: "fixture", description: "fixture", confidence: "high", category: "injection" }] },
+    recipe: afterRecipe,
+    trust: createHuntTestTrustStore(afterRecipe),
+    approval: executeApproval,
+    entitlement: "hunt.critical",
+    observationId: "urn:uuid:b2345678-1234-4123-8123-123456789abc",
+    at,
+    beforeSubjectId,
+    remediation,
+    remediationApproval,
+  });
+  assert.equal(result.status, "completed");
+  assert.equal(result.remediation.approved, true);
+  assert.equal(result.remediation.applied, false);
+  assert.equal(result.proof.proof.status, "not-reproduced");
+  assert.equal(result.retest.status, "cleared");
+  assert.equal(result.retest.sameProof, true);
+  assert.doesNotMatch(JSON.stringify(result), /safe fixture after remediation|tmp\/fixture-target-after/u);
 });
 
 test("Proof replays a pinned container harness and its negative control", { skip: process.env.VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION !== "1" ? "set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run container proof qualification" : false }, async () => {
