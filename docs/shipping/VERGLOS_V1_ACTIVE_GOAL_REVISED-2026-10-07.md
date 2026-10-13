@@ -53,6 +53,13 @@ or TEAM-CLI-001. The corresponding private packets are:
 - `docs/shipping/evidence/hunt-a2-fixture-outcome-matrix-pr102-2026-10-13.md`;
 - `docs/shipping/evidence/team-cli-001-preview-signer-deployment-2026-10-13.md`.
 
+The next public implementation slice, PR #103, also passed its protected
+self-scan and platform matrix and is merged into public `main` as
+`6ff1bd1ee345c9b0f880bf1dfb85045a14be820f`. It preserves timeout and
+infrastructure-failure outcomes before assertion parsing for all seven A2
+families. This is a classification-hardening result, not completion of the
+HUNT-008 acceptance gates.
+
 The score remains **228 checked / 52 unchecked / 280 total (81.4%)** until a
 backlog row's complete acceptance evidence exists.
 

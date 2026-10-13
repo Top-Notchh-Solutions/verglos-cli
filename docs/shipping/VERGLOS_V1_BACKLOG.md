@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · Current A2 adapter-failure checkpoint
+
+Public PR #103 corrected the bounded Docker adapter's timeout and
+infrastructure-failure classification for all seven A2 families. The protected
+self-scan and platform matrix passed, and the change was squash-merged into
+public `main` as
+`6ff1bd1ee345c9b0f880bf1dfb85045a14be820f`. This advances technical evidence
+only; it does not satisfy HUNT-008's target-code, provenance, entitlement,
+Linux/Docker, review, or release gates.
+
+Evidence:
+
+- `docs/shipping/evidence/hunt-a2-adapter-failure-matrix-pr103-2026-10-13.md`
+
+The live score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+No checkbox changed.
+
 ## 2026-10-13 · Current A2 and TEAM-CLI evidence checkpoint
 
 PR #102 adds positive, negative, and unsupported fixture outcomes to all seven

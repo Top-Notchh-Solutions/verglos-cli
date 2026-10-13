@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## A2 adapter failure classification · 2026-10-13
+
+- **Implementation:** Public CLI PR #103 corrected Docker adapter precedence
+  and was merged into public `main` as
+  `6ff1bd1ee345c9b0f880bf1dfb85045a14be820f`.
+- **Coverage:** timeout and infrastructure-failure outcomes are tested for
+  each of the seven A2 recipe families; completed malformed output remains
+  `not-supported`.
+- **Verification:** protected self-scan `38326574697` and platform matrix
+  `38326574687` passed; local Hunt/CLI/build/diff checks passed.
+- **Boundary:** no new source, secret, network, arbitrary-command, or
+  autonomous-agent authority was added.
+- **Acceptance:** HUNT-008 remains open for complete target-code evidence,
+  provenance/licensing, supported-rule approval, hosted entitlement,
+  Linux/Docker adversarial proof, independent review, and release treatment.
+  Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `hunt-a2-adapter-failure-matrix-pr103-2026-10-13.md`.
+
 ## A2 outcome matrix and hosted signer · 2026-10-13
 
 - **Public implementation:** PR #102 adds positive, negative, and unsupported

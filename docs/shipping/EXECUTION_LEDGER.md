@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A2 adapter failure matrix merged (PR #103)
+
+- **Public work:** PR #103 was squash-merged into public `main` as
+  `6ff1bd1ee345c9b0f880bf1dfb85045a14be820f`.
+- **Implemented:** the bounded Docker adapter now classifies timeout and
+  infrastructure failure before assertion support, preventing operational
+  failures from becoming security verdicts. Regression coverage enumerates
+  timeout and infrastructure failure for all seven A2 families.
+- **Verification:** protected self-scan run `38326574697` and platform matrix
+  run `38326574687` passed. Local Hunt tests passed (46 passed, 16 explicit
+  Linux-host skips, 0 failed), CLI tests passed, build passed 8/8, and the
+  diff check passed.
+- **Acceptance:** HUNT-008 remains unchecked. This slice does not prove
+  target-code qualification, recipe provenance/licensing, hosted entitlement,
+  Linux/Docker adversarial execution, independent review, or final release
+  treatment.
+- **Evidence:**
+  `evidence/hunt-a2-adapter-failure-matrix-pr103-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
 ## 2026-10-13 · A2 outcome matrix and Preview signer progress
 
 - **Public work:** PR #102 was squash-merged into public `main` as

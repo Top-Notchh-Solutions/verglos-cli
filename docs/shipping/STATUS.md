@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A2 adapter failure classification merged (PR #103)
+
+The bounded Docker adapter now preserves operational failure state before
+interpreting recipe assertions. All seven approved A2 families have explicit
+timeout and infrastructure-failure regression coverage (14 assertions), while
+completed malformed output remains `not-supported`.
+
+PR #103 passed the attached self-scan and platform matrix and was squash-
+merged into public `main` as
+`6ff1bd1ee345c9b0f880bf1dfb85045a14be820f`. Protected runs were
+`38326574697` (self-scan) and `38326574687` (platform matrix). The private
+evidence packet is
+`docs/shipping/evidence/hunt-a2-adapter-failure-matrix-pr103-2026-10-13.md`.
+
+This is a technical classification fix. HUNT-008 remains open for target-code
+acceptance, provenance/licensing, supported-rule approval, hosted entitlement,
+Linux/Docker adversarial proof, independent review, and release treatment.
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+changed.
+
 ## 2026-10-13 · A2 three-outcome matrix on PR #102
 
 The seven approved A2 families now have public sanitized reference harnesses
