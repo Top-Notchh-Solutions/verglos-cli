@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Web Hunt/Attest contract copy merged (PR #174)
+
+- **Public work:** Web PR #174 merged with regular merge commit
+  `63de97be6b180c560ef06d9cbccb62eea20beb4a`, preserving its three
+  substantive source commits without squash.
+- **Implemented:** Web Hunt, Attest, 2.0.0 direction, homepage, `llms.txt`,
+  and agent instructions now describe the bounded A1/A2 runtime and the
+  remaining hosted qualification gates accurately.
+- **Verification:** local typecheck/build passed; protected typecheck/schema,
+  serial tests, boundary, database/migration, build, dependency/SBOM/license,
+  tracked-secret, GitGuardian, and Vercel checks passed.
+- **Disposition:** public copy alignment only; no checkbox, entitlement,
+  provider, database, Production, customer, or release state changed.
+- **Evidence:** `evidence/hunt-web-contract-alignment-pr174-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
 ## 2026-10-13 · A2 all-family public CLI qualification merged (PR #109)
 
 - **Public work:** PR #109 merged into public `main` with regular merge

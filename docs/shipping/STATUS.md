@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Web Hunt/Attest contract copy merged (PR #174)
+
+Web PR #174 is merged with regular merge commit
+`63de97be6b180c560ef06d9cbccb62eea20beb4a` after its protected typecheck/
+schema, serial, boundary, dependency, SBOM, license, secret, GitGuardian, and
+Vercel checks passed. The public Web copy now matches the bounded A1/A2 Hunt
+implementation and keeps hosted entitlement, signing, review, and final
+release claims qualification-gated.
+
+This is a copy/instruction alignment slice only. No checkbox changed; score
+remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
+Evidence: `evidence/hunt-web-contract-alignment-pr174-2026-10-13.md`.
+
 ## 2026-10-13 · A2 all-family public CLI qualification merged (PR #109)
 
 Public PR #109 is merged into `main` with regular merge commit

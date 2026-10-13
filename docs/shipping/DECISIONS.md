@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## 2026-10-13 · Preserve Web contract-alignment commits
+
+- **Decision:** Merge Web PR #174 with a regular merge commit and preserve
+  its three substantive commits; do not squash or rewrite history.
+- **Reason:** The Web public surfaces must stop describing the implemented
+  bounded Hunt path as an absent alpha shell while retaining honest hosted
+  qualification boundaries.
+- **Disposition:** PR #174 merged as
+  `63de97be6b180c560ef06d9cbccb62eea20beb4a`; no checkbox or score change.
+- **Evidence:** `evidence/hunt-web-contract-alignment-pr174-2026-10-13.md`.
+
 ## 2026-10-13 · Preserve the all-family A2 test as a separate public merge
 
 - **Decision:** Merge the all-family A2 CLI qualification test with a regular

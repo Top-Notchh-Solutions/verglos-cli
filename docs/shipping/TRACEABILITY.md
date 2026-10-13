@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## Web Hunt/Attest contract alignment · 2026-10-13
+
+- **Public merge:** Web PR #174 merged as
+  `63de97be6b180c560ef06d9cbccb62eea20beb4a`, preserving three substantive
+  source commits.
+- **Surface mapping:** homepage, `llms.txt`, Hunt docs, Attest docs, 2.0.0
+  direction, Web agent instructions, and Web Claude instructions now match
+  the bounded A1/A2 implementation and qualification boundaries.
+- **Acceptance:** hosted entitlement, provenance, signing, recipient/review,
+  and final release gates remain open; score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-web-contract-alignment-pr174-2026-10-13.md`.
+
 ## A2 all-family public CLI execution · 2026-10-13
 
 - **Public merge:** PR #109 merged into public `main` as

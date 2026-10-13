@@ -42,9 +42,9 @@ a private scaffold. That wording contradicted the approved matrix and the
 merged public A2 implementation. Public documentation alignment is being
 handled in separate public-safe PRs. CLI PR #108 is merged as
 `ae720bdf8b4d83cd34b0cb537c44a3dbcf3011e`, CLI PR #109 is merged as
-`16fdafd814e0ee2d161243cf53d86a425075800e`, and Web PR #174 is the current
-pending Web alignment PR. No private tracker, evidence, secrets, deployment
-data, or customer data is copied into those repositories.
+`16fdafd814e0ee2d161243cf53d86a425075800e`, and Web PR #174 is merged as
+`63de97be6b180c560ef06d9cbccb62eea20beb4a`. No private tracker, evidence,
+secrets, deployment data, or customer data is copied into those repositories.
 
 The corrected wording distinguishes:
 

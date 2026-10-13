@@ -1,5 +1,16 @@
 # Verglos V1 risk register
 
+## 2026-10-13 · R-HUNT-DOC-002 Web copy drift after A2 merge
+
+- **Risk:** Public Web copy could promise beta-only hosted Hunt/Attest
+  capabilities or understate the now-implemented bounded A1/A2 CLI path.
+- **Mitigation:** Merge the public-safe copy/instruction alignment and keep
+  hosted entitlement, provenance, signing, review, and release claims gated.
+- **Status:** PR #174 merged with all protected checks green; no acceptance
+  checkbox is closed by copy alone.
+- **Evidence:** `evidence/hunt-web-contract-alignment-pr174-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%).
+
 ## 2026-10-13 · R-HUNT-A2-CLI-002 all-family fixture evidence boundary
 
 - **Risk:** A green seven-family CLI matrix could be mistaken for complete
