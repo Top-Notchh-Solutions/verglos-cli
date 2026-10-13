@@ -14,6 +14,7 @@ test("public CLI loads the shipped bounded Hunt runtime", async () => {
   assert.equal(typeof runtime.runHunt, "function");
   assert.equal(typeof runtime.planSupportedHuntAttack, "function");
   assert.equal(typeof runtime.runSupportedHuntAttack, "function");
+  assert.equal(typeof runtime.runSupportedHuntProof, "function");
   assert.equal(typeof runtime.validateSupportedHuntRecipe, "function");
   assert.equal(typeof runtime.RestrictedProcessAdapter, "function");
   assert.equal(typeof runtime.DockerSandboxAdapter, "function");
