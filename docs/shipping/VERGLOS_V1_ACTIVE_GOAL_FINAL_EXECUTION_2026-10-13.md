@@ -11,21 +11,24 @@
 
 ## 0.1 Current shipping checkpoint — 2026-10-13
 
-PR #114 merged normally as `6ff8c6cb3157077b3eeb6b2ca5f9754cc1f9360e` after
+PR #115 merged normally as `e726dacce46fda46024f38e0c68005dcadcd5eb5` after
 self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 checks
-passed. It adds the bounded, deterministic Attack-Hypothesis planner over the
-PR #113 Scout/Context manifest and exposes
-`verglos hunt hypothesis <manifestPath>`. Exact findings are mapped only to
-the fixed public catalog and matching static target references; unsupported or
-incomplete context is explicit. The output is execution-free, source-free,
-trust/entitlement/approval-gated, and does not establish proof.
+passed. It preserves source commits
+`c24f3555c7533139cf2a050aa38760fa30d961b4` and
+`8ac34aa7baf9d0376731612de98339e296759826` and adds the bounded worker over
+the PR #114 Attack-Hypothesis output. The worker verifies canonical hypothesis
+integrity, exact finding/subject/rule/playbook identity, signed trust,
+entitlement, approval, observation, and bounded adapter selection; the CLI
+exposes `verglos hunt worker <hypothesisPath>` with privacy-limited structured
+output.
 
 This contribution advances HUNT-008/HUNT-009 implementation only; their
 counted rows remain open until every row-specific acceptance criterion passes.
-The next aligned dependency is the approved worker/proof path, which must
-preserve the same target identity and authority gates. Score remains **228
-checked / 52 unchecked / 280 total (81.4%)**. Evidence:
-`evidence/hunt-attack-hypothesis-pr114-2026-10-13.md`.
+The worker result is candidate-only: independent proof/counterexample,
+remediation/retest, trusted/licensed provenance, hosted entitlement, required
+isolation, independent review, and final release acceptance remain open. Score
+remains **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/hunt-attack-worker-pr115-2026-10-13.md`.
 
 ## 1. Objective
 

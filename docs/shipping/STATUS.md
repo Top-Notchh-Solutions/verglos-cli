@@ -1,5 +1,31 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT Attack Worker contribution merged (PR #115)
+
+Public PR #115 merged with a regular two-parent merge commit
+`e726dacce46fda46024f38e0c68005dcadcd5eb5`, preserving source commits
+`c24f3555c7533139cf2a050aa38760fa30d961b4` and
+`8ac34aa7baf9d0376731612de98339e296759826`; no squash or force-push was used.
+The public Hunt package now consumes a digest-verified supported
+Attack-Hypothesis through the exact report finding, fixed catalog playbook,
+signed recipe/trust, entitlement, approval, and observation binding, then
+selects only a registered bounded adapter. The CLI exposes
+`verglos hunt worker` with bounded JSON input and a privacy-limited candidate
+result.
+
+Local shared/Hunt/CLI suites, focused CLI worker/runtime/command tests 9/9,
+build 7/7, typecheck 13/13, and diff checks passed. Protected self-scan run
+`38373188747`, in-toto binding, and all nine Ubuntu/macOS/Windows Node 20/22/24
+cells in run `38373188782` passed. Evidence:
+`evidence/hunt-attack-worker-pr115-2026-10-13.md`.
+
+This advances the Attack Worker dependency slice only. The result explicitly
+leaves independent proof/counterexample, remediation/retest, trusted/licensed
+recipe acceptance, hosted entitlement, isolation qualification, independent
+review, and final release gates open. HUNT-008 and HUNT-009 remain unchecked;
+HUNT-010 and HUNT-011 are unchanged. The score remains **228 checked / 52
+unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Attack-Hypothesis planner contribution merged (PR #114)
 
 Public PR #114 merged with a regular two-parent merge commit

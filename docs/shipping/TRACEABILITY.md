@@ -1,5 +1,36 @@
 # Verglos V1 traceability
 
+## HUNT Attack Worker contribution · 2026-10-13
+
+- **Public merge:** PR #115 merged normally as
+  `e726dacce46fda46024f38e0c68005dcadcd5eb5`, from feature head
+  `8ac34aa7baf9d0376731612de98339e296759826`, with prior `main`
+  `6ff8c6cb3157077b3eeb6b2ca5f9754cc1f9360e` as the other parent. The two
+  source commits remain separate; no squash or force-push was used.
+- **Implementation mapping:** The shared hypothesis reader verifies canonical
+  content integrity. The Hunt worker binds exact finding, subject, rule,
+  catalog playbook, signed recipe/trust, entitlement, approval, and
+  observation identities before selecting a registered restricted-process or
+  pinned Docker adapter. The CLI reads bounded local JSON and projects only
+  privacy-limited candidate evidence.
+- **Verification mapping:** Full shared, Hunt, and CLI suites, focused CLI
+  worker/runtime/command tests 9/9, build 7/7, typecheck 13/13, and diff
+  checks passed. Protected self-scan `38373188747` and platform matrix
+  `38373188782` passed all eleven required checks.
+- **Boundary:** No arbitrary shell, caller command, source upload, customer
+  source/data, provider state, hosted target, live MCP server, credential,
+  database, or production system was used. The owner/operator authorization
+  is not independent review, provider confirmation, customer acceptance,
+  legal clearance, or release approval.
+- **Acceptance:** This advances HUNT-008/HUNT-009 Attack Worker wiring only.
+  The worker's result is explicitly candidate-only: proof/counterexample,
+  negative-control adjudication, remediation/retest, Release Record binding,
+  trusted/licensed roots, hosted entitlement, required isolation, independent
+  review, and final release acceptance remain open. HUNT-008 and HUNT-009
+  remain unchecked; HUNT-010/011 are unchanged. Score remains
+  **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-attack-worker-pr115-2026-10-13.md`.
+
 ## HUNT Attack-Hypothesis planner contribution · 2026-10-13
 
 - **Public merge:** PR #114 merged normally as

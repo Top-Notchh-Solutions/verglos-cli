@@ -1,5 +1,40 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT Attack Worker contribution merged (PR #115)
+
+- **Public contribution:** Added digest verification for canonical
+  Attack-Hypothesis content, a bounded worker that consumes the exact
+  hypothesis/report/catalog recipe, and a public CLI
+  `verglos hunt worker` command. Execution is still gated by the exact
+  entitlement, signed trust policy, approval receipt, observation identity,
+  target/finding identity, and registered adapter projection.
+- **Qualification:** Full shared, Hunt, and CLI suites passed; focused CLI
+  worker/runtime/command tests passed 9/9; build passed 7/7; typecheck passed
+  13/13; and `git diff --check` passed. The Hunt/CLI Docker integration tests
+  remained explicit environment-gated skips, not passes.
+- **Identity:** PR #115 merged normally into public `main` as
+  `e726dacce46fda46024f38e0c68005dcadcd5eb5`, with parents
+  `6ff8c6cb3157077b3eeb6b2ca5f9754cc1f9360e` and
+  `8ac34aa7baf9d0376731612de98339e296759826`. Source commits
+  `c24f3555c7533139cf2a050aa38760fa30d961b4` and
+  `8ac34aa7baf9d0376731612de98339e296759826` remain separate.
+- **Protected verification:** Self-scan run `38373188747` and matrix run
+  `38373188782` passed all eleven required checks, including in-toto and all
+  Ubuntu/macOS/Windows Node 20/22/24 cells.
+- **Boundary:** The public-safe worker accepts no arbitrary command, shell,
+  model-created recipe, source upload, customer data, provider state, live
+  target, or database write. Its result is a bounded candidate outcome and
+  explicitly records proof/counterexample and remediation/retest as not run.
+  Owner authorization is not independent review, provider confirmation,
+  customer acceptance, legal clearance, or final release approval.
+- **Disposition:** This advances the HUNT-008/HUNT-009 dependency chain to the
+  Attack Worker implementation slice. Both counted rows remain unchecked for
+  complete recipe/provenance, entitlement, target, proof/retest, isolation,
+  independent review, and release acceptance. HUNT-010/011 are unchanged.
+- **Evidence:** `evidence/hunt-attack-worker-pr115-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT Attack-Hypothesis planner contribution merged (PR #114)
 
 - **Public contribution:** Added the versioned

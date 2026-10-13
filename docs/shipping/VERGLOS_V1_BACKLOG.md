@@ -1,5 +1,27 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · HUNT Attack Worker checkpoint (PR #115)
+
+Public PR #115 merged normally into `main` as
+`e726dacce46fda46024f38e0c68005dcadcd5eb5`, preserving source commits
+`c24f3555c7533139cf2a050aa38760fa30d961b4` and
+`8ac34aa7baf9d0376731612de98339e296759826`. The contribution verifies the
+canonical hypothesis digest, consumes the exact report finding and fixed
+catalog playbook, enforces signed trust/entitlement/approval/observation
+bindings, selects only a registered bounded adapter, and exposes the
+privacy-limited `verglos hunt worker` CLI path. Protected self-scan, in-toto,
+and all nine platform cells passed.
+
+Evidence:
+`docs/shipping/evidence/hunt-attack-worker-pr115-2026-10-13.md`.
+
+This is the dependency-ready Attack Worker implementation slice, not complete
+HUNT-008 or HUNT-009 acceptance. The worker result explicitly leaves
+independent proof/counterexample, remediation/retest, trusted/licensed
+provenance, hosted entitlement, isolation qualification, independent review,
+and final release acceptance open. HUNT-008 through HUNT-011 remain unchecked;
+the live score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Attack-Hypothesis planner checkpoint (PR #114)
 
 Public PR #114 merged normally into `main` as
