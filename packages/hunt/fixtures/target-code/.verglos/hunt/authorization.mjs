@@ -1,6 +1,8 @@
 // Public deterministic reference fixture. It inspects an unsafe object-spread
 // update string only; it does not access a user store or cross a tenant.
 const fixtureCase = process.argv[2] ?? "positive";
+if (fixtureCase === "timeout") setInterval(() => {}, 1000);
+if (fixtureCase === "adapter-failure") { process.stderr.write("intentional adapter failure fixture\n"); process.exit(17); }
 const fixture = fixtureCase === "negative" ? "updateUser({ displayName: requestBody.displayName });" : "updateUser({ ...requestBody });";
 const reproduced = /updateUser\s*\(\s*\{\s*\.\.\.requestBody\s*\}\s*\)/u.test(fixture);
 const verdict = fixtureCase === "unsupported" ? "unsupported" : reproduced ? "confirmed" : "not-reproduced";
