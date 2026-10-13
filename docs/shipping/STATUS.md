@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Full-product paying-value blueprint
+
+The private product definition now covers the complete customer value chain:
+local CLI and ten-domain TS/JS analysis; dependencies, secrets, provenance,
+SBOM, Trivy, and IaC; MCP; scanner-connected Hunt; Attest and portable
+Release Records; Web history/monitoring; organizations and GitHub/GitLab;
+Studio custody; Enterprise private operations; cards-only entitlements;
+distribution; and quality/privacy. Each surface has a plan boundary and
+acceptance metric in `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md`.
+
+This is not an implementation completion. Current Hunt foundations remain
+foundations, commercial pricing remains a hypothesis, and the score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**. No checkbox changed.
+
 ## 2026-10-13 · Competitive-product contract and research amendment
 
 The canonical contract, private feature matrix, and active goal now reflect

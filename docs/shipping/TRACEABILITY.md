@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## Full-product paying-value blueprint · 2026-10-13
+
+- **Authority:** `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md` is the
+  commercial/acceptance companion to the product contract; the feature matrix
+  maps the surfaces to existing backlog families and the backlog remains the
+  only checkbox authority.
+- **Coverage:** The blueprint covers local CLI/npm, scanner/SAST, SCA,
+  secrets, supply-chain/provenance, Trivy/artifacts, IaC, MCP, Hunt, Attest,
+  `.vgl` records, Web, organizations, GitHub/GitLab, Studio, Enterprise,
+  billing, distribution, privacy, accessibility, performance, and support.
+- **Rule:** Every surface must show a customer outcome, supported path, plan
+  boundary, cost guardrail, acceptance metric, and limitation. A plan table or
+  product contract does not itself prove implementation.
+- **Disposition:** Documentation and cross-reference only; no checkbox or
+  external state changed. Score remains **228/52/280 (81.4%)**.
+
 ## Competitive-product contract amendment · 2026-10-13
 
 - **Research source:** Official product/documentation sources for XBOW,

@@ -6,6 +6,7 @@
 **Canonical contract:** `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`  
 **Canonical goal:** `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-07.md`
 **Competitive research:** `COMPETITIVE_PRODUCT_RESEARCH_2026-10-13.md`
+**Paying-value blueprint:** `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md`
 
 This matrix answers one question: **where is every promised Final V1 feature
 implemented, and what evidence is still required before its backlog row can be
@@ -15,6 +16,11 @@ claim.
 The private backlog remains the only source of checkbox state. This matrix does
 not add or remove counted checkboxes. At this synchronization point the live
 score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
+The paying-value blueprint is the companion authority for the customer problem,
+plan outcome, economic guardrail, and acceptance metric for every surface in
+this matrix. The contract and backlog remain the implementation and checkbox
+authorities respectively.
 
 ## 1. Product boundary
 

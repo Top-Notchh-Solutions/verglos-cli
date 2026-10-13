@@ -1,5 +1,30 @@
 # Verglos V1 Active Shipping Goal — Approved Contract, Implementation, and Point-5 Qualification
 
+## 2026-10-13 full-product paying-value amendment — current operating rule
+
+The product scope is now documented in the private
+`FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md`, alongside the canonical
+contract and feature matrix. It covers all plans and all promised surfaces:
+scanner/SAST, dependencies and secrets, supply-chain/provenance, Trivy and
+artifact evidence, IaC/configuration, MCP, Hunt, Attest and `.vgl` records,
+Web history/monitoring, Verglos organizations, GitHub/GitLab checks, Studio
+handoffs, Enterprise private operations, billing, package distribution, and
+quality/privacy.
+
+The working customer promise is a measurable scanner-to-proof-to-release
+loop. Each feature must have a customer outcome, supported implementation,
+plan boundary, cost guardrail, and acceptance metric. This prevents the
+implementation from optimizing for named agents or dashboard pages while
+leaving the actual paid outcome unproven.
+
+The current launch prices remain commercial hypotheses. Local work stays
+customer-run where possible; hosted models, runners, retention, public
+verification, and managed campaigns must be bounded or contracted. No
+superiority claim is allowed without the held-out TS/JS benchmark.
+
+This amendment expands product traceability but does not close a checkbox. The
+live score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 competitive-product contract amendment — current operating rule
 
 The canonical contract now includes the researched paying-product bar in
@@ -169,7 +194,8 @@ the synchronized contract notice is
 The current goal is executed in five ordered points:
 
 1. Freeze the approved Final V1 product/Hunt/plan contract.
-2. Synchronize the feature map, architecture blueprint, product contract,
+2. Synchronize the feature map, architecture blueprint, paying-value blueprint,
+   product contract,
    backlog, execution ledger, status, active goal, CLI/Web/MCP registries,
    pricing, and customer-facing copy.
 3. Implement the approved bounded Hunt recipes/roles and the public CLI path.

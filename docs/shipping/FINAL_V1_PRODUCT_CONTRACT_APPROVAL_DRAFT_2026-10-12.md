@@ -226,6 +226,41 @@ is changed by creating or approving this document. A capability becomes shipped
 only after code, tests, runtime evidence, and the applicable acceptance record
 are present in the private shipping tracker.
 
+### 0.6 Full-product paying-value authority — 2026-10-13
+
+The private `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md` is now the
+commercial and acceptance companion to this contract. It covers every Final V1
+surface, not only Hunt: local CLI/npm, ten-domain TS/JS analysis, SCA and
+secrets, supply-chain/provenance, Trivy and artifact evidence, IaC/configuration,
+Attest and `.vgl` records, MCP/AI controls, Hunt, Web history/monitoring,
+Verglos organizations, GitHub/GitLab workflows, Studio custody, Enterprise
+private operations, billing/entitlements, distribution, and quality/support.
+
+For each surface the blueprint records the customer problem, paid outcome,
+plan boundary, implementation backlog family, acceptance metric, cost guardrail,
+and limitation. This makes the product contract executable and prevents a
+dashboard, a fixture, a named agent, or a provider click from being mistaken
+for customer value.
+
+The binding commercial rule is:
+
+```text
+customer outcome -> supported capability -> evidence -> plan entitlement
+                  -> measurable acceptance -> stated limitation
+```
+
+The current launch prices remain hypotheses until commercial acceptance
+evidence exists. Local work may remain free because it runs on the customer's
+machine; hosted storage, models, runners, public verification, retention, and
+campaign work must have explicit allowances or contracted terms. No plan may
+promise unsupported language coverage, unrestricted remote DAST, unlimited
+hosted autonomous testing, source upload by default, or model-only release
+approval.
+
+This companion changes product clarity and cross-document traceability. It does
+not close a backlog row or claim that the current eight A1 probes and seven A2
+descriptors are complete real-application coverage.
+
 ## 1. The product promise
 
 Verglos is a security decision layer between code being changed and software

@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Full-product paying-value blueprint
+
+- **Research/definition:** Added the private paying-value blueprint covering
+  every plan and Final V1 surface, not only Hunt. It defines customer problem,
+  outcome, implementation family, plan boundary, economic guardrail, and
+  acceptance metric for scanner/SAST, SCA, secrets, supply chain, Trivy,
+  IaC, Attest/records, MCP, Hunt, Web, organizations, SCM, Studio,
+  Enterprise, billing, distribution, and quality.
+- **Contract link:** The canonical product contract now points to the blueprint
+  as its commercial and acceptance companion; the feature matrix and active
+  goal point to the same authority.
+- **Disposition:** Documentation, research, and traceability only. No public
+  source, secret, customer data, provider state, entitlement, database,
+  Production, npm, or backlog checkbox changed.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%).
+- **Source:** `docs/shipping/FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md`.
+
 ## 2026-10-13 · Competitive-product contract and research amendment
 
 - **Research:** Official XBOW, Aikido, Semgrep, Snyk, GitHub Code Security,

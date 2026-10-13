@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-13 · Make paying value explicit across every plan and surface
+
+- **Decision:** Adopt `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md` as the
+  commercial and acceptance companion to the Final V1 product contract.
+- **Reason:** Hunt alone is not a product. Customers pay for the complete loop
+  from a trustworthy finding through proof, remediation/retest, release
+  evidence, collaboration, and governance. The blueprint makes that outcome
+  explicit for Free, Pro, Team, Studio, and Enterprise.
+- **Required rule:** No named agent, fixture, dashboard, provider event, or
+  price table is treated as customer value without an implementation path,
+  acceptance metric, and limitation.
+- **Economic rule:** Local work remains customer-run where possible; hosted
+  models, runners, storage, retention, public verification, and campaigns use
+  explicit allowances or contracted terms.
+- **Disposition:** Contract/matrix/goal/backlog/ledger/traceability/status/
+  risks synchronized. No checkbox or score change.
+
 ## 2026-10-13 · Adopt the researched code-to-proof product bar
 
 - **Decision:** Expand the Final V1 implementation target from bounded fixture

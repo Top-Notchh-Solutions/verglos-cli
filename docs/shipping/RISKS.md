@@ -1,5 +1,24 @@
 # Verglos V1 risk register
 
+## 2026-10-13 · R-PRODUCT-VALUE-001 broad contract without delivered outcomes
+
+- **Risk:** A broad feature list could make Verglos look like a collection of
+  scanners, agents, dashboards, and plan labels instead of a product that
+  saves customer time and produces a defensible release decision.
+- **Mitigation:** The private paying-value blueprint requires every surface to
+  state the customer problem, outcome, supported implementation, plan boundary,
+  acceptance metric, cost guardrail, and limitation. It requires the same
+  evidence graph across CLI, MCP, Web, SCM, Attest, and Release Records.
+- **Commercial risk:** The current launch prices are hypotheses; hosted
+  autonomous testing, retention, model calls, public verification, and private
+  runners could erase margin.
+- **Mitigation:** Keep local work unmetered where customer-run; bound hosted
+  allowances and record cost per hosted operation; validate willingness to pay
+  and COGS in `ACCEPT-008`.
+- **Status:** Documentation/traceability mitigated; implementation and market
+  acceptance remain open. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `docs/shipping/FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md`.
+
 ## 2026-10-13 · R-CONTRACT-COMPETITIVE-001 expanded product bar
 
 - **Risk:** The contract could promise autonomous attack coverage, real-target

@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · Full-product paying-value synchronization
+
+The private `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md` now documents the
+customer outcome and acceptance bar for every Final V1 surface and plan. It
+cross-links local CLI/npm, TS/JS scanner domains, dependency and secret
+analysis, provenance/SBOM/Trivy, IaC, MCP, Hunt, Attest and `.vgl` records,
+Web, organizations, GitHub/GitLab, Studio, Enterprise, billing, distribution,
+and quality requirements to the existing backlog families.
+
+This is a cross-reference and commercial-clarity update only. It does not add,
+remove, or check a counted row. The live score remains **228 checked / 52
+unchecked / 280 total (81.4%)**. A row still requires its own implementation,
+test, privacy boundary, exact commit/deployment, limitations, and complete
+acceptance evidence.
+
 ## 2026-10-13 · A2 target-code qualification checkpoint
 
 Public PR #106 merged into `main` as
