@@ -1,5 +1,43 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT Proof/Counterexample contribution merged (PR #116)
+
+- **Public contribution:** Added `runSupportedHuntProof` and
+  `verglos hunt proof <hypothesisPath>`. Supported first-party A1 recipes run
+  the primary synthetic fixture and a fixed safe negative control under the
+  same digest/trust/approval/target/observation binding. The result projects
+  only bounded verdicts, digests, control status, and limitations. Container
+  proof returns explicit `not-attemptable` without execution.
+- **Qualification:** Hunt proof and container-boundary assertions passed;
+  workspace build passed 8/8 tasks, typecheck 14/14 tasks, full workspace
+  tests passed 13/13 tasks with zero failures, and diff checks passed. Existing
+  Docker qualification remains explicitly environment-gated and was not
+  counted as proof.
+- **Identity:** PR #116 merged normally into public `main` as
+  `870ffb52421abb3bf045ad224043cdc5e2605975`, with parents
+  `e726dacce46fda46024f38e0c68005dcadcd5eb5` and
+  `6a88e715a320819088e890d9ed1a0dc6e8f015ab`. Source commits
+  `77693919bf8c44a9a35f2ff2cd8dcfa05fa11cc6` and
+  `6a88e715a320819088e890d9ed1a0dc6e8f015ab` remain separate.
+- **Protected verification:** Self-scan run `38376762150` and matrix run
+  `38376762231` passed all eleven required checks, including in-toto and all
+  Ubuntu/macOS/Windows Node 20/22/24 cells.
+- **Boundary:** No target source, customer data, provider state, arbitrary
+  command, shell, credential, hosted target, database, live MCP server,
+  production system, or external target was used. A1 synthetic proof is not
+  target-code proof or an OS/security isolation boundary. Container proof is
+  explicitly not-attemptable. Owner authorization is not independent review,
+  provider confirmation, customer acceptance, legal clearance, or release
+  approval.
+- **Disposition:** This advances the HUNT-008/HUNT-009 Proof/Counterexample
+  implementation slice only. HUNT-008 and HUNT-009 remain unchecked for full
+  per-family acceptance, trust/licensing, hosted entitlement, target and
+  isolation qualification, independent adjudication, remediation/retest, and
+  release acceptance. HUNT-010/011 are unchanged.
+- **Evidence:** `evidence/hunt-proof-counterexample-pr116-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT Attack Worker contribution merged (PR #115)
 
 - **Public contribution:** Added digest verification for canonical

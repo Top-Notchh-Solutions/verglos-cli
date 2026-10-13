@@ -11,6 +11,24 @@
 
 ## 0.1 Current shipping checkpoint — 2026-10-13
 
+PR #116 merged normally as `870ffb52421abb3bf045ad224043cdc5e2605975` after
+self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 checks
+passed. It preserves source commits
+`77693919bf8c44a9a35f2ff2cd8dcfa05fa11cc6` and
+`6a88e715a320819088e890d9ed1a0dc6e8f015ab` and adds bounded A1
+Proof/Counterexample replay plus the public `verglos hunt proof` command.
+The primary and fixed safe negative control use the same signed binding;
+container-backed proof is explicitly `not-attemptable`.
+
+This contribution advances HUNT-008/HUNT-009 implementation only; their
+counted rows remain open until every row-specific acceptance criterion passes.
+The A1 result is synthetic, not target-code proof or an OS/security boundary;
+remediation/retest, `.vgl` Record binding, trusted/licensed provenance,
+hosted entitlement, independent adjudication, and final release acceptance
+remain open. HUNT-010/011 are unchanged. Score remains **228 checked / 52
+unchecked / 280 total (81.4%)**. Evidence:
+`evidence/hunt-proof-counterexample-pr116-2026-10-13.md`.
+
 PR #115 merged normally as `e726dacce46fda46024f38e0c68005dcadcd5eb5` after
 self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 checks
 passed. It preserves source commits

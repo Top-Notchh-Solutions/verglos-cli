@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT Proof/Counterexample contribution merged (PR #116)
+
+Public PR #116 merged with a regular two-parent merge commit
+`870ffb52421abb3bf045ad224043cdc5e2605975`, preserving source commits
+`77693919bf8c44a9a35f2ff2cd8dcfa05fa11cc6` and
+`6a88e715a320819088e890d9ed1a0dc6e8f015ab`; no squash or force-push was used.
+The public Hunt runtime now replays a supported first-party A1 fixture and a
+fixed safe negative control through the same signed execution binding, emits
+bounded primary/counterexample evidence, exposes `verglos hunt proof`, and
+returns explicit `not-attemptable` for container-backed proof until its pinned
+runtime and independent review prerequisites are available.
+
+Local Hunt proof assertions, workspace build 8/8, typecheck 14/14, full
+workspace tests 13/13, and diff checks passed. Protected self-scan run
+`38376762150`, in-toto binding, and all nine Ubuntu/macOS/Windows Node 20/22/24
+cells in run `38376762231` passed. Evidence:
+`evidence/hunt-proof-counterexample-pr116-2026-10-13.md`.
+
+This advances the Proof/Counterexample implementation slice only. A1 remains
+synthetic and not an OS/security boundary; A2/container proof is explicitly
+not-attemptable. Remediation/retest, `.vgl` Record binding, trusted/licensed
+roots, hosted entitlement, independent adjudication, and final release gates
+remain open. HUNT-008 and HUNT-009 remain unchecked; HUNT-010 and HUNT-011 are
+unchanged. The score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Attack Worker contribution merged (PR #115)
 
 Public PR #115 merged with a regular two-parent merge commit

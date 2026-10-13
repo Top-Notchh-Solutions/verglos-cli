@@ -1,5 +1,37 @@
 # Verglos V1 traceability
 
+## HUNT Proof/Counterexample contribution · 2026-10-13
+
+- **Public merge:** PR #116 merged normally as
+  `870ffb52421abb3bf045ad224043cdc5e2605975`, from feature head
+  `6a88e715a320819088e890d9ed1a0dc6e8f015ab`, with prior `main`
+  `e726dacce46fda46024f38e0c68005dcadcd5eb5` as the other parent. Source
+  commits `77693919bf8c44a9a35f2ff2cd8dcfa05fa11cc6` and `6a88e715` remain
+  separate; no squash or force-push was used.
+- **Implementation mapping:** The Hunt runtime now reuses exact hypothesis,
+  recipe, trust, approval, target/finding, and observation identities for a
+  bounded A1 primary replay plus a runtime-derived safe negative control. The
+  CLI exposes the same path behind `hunt.critical`; container-backed proof is
+  explicitly typed `not-attemptable` and never falls through to a false
+  verdict.
+- **Verification mapping:** Hunt proof assertions, workspace build 8/8,
+  typecheck 14/14, full workspace tests 13/13, and diff checks passed.
+  Protected self-scan `38376762150` and platform matrix `38376762231` passed
+  all eleven required checks.
+- **Boundary:** No target code, source upload, customer data, provider state,
+  credential, hosted target, external network target, database, live MCP
+  server, or Production system was used. A1 is synthetic and explicitly
+  `securityBoundary: false`; A2 proof is not-attemptable. Owner authorization
+  does not substitute for independent review, provider confirmation, customer
+  acceptance, legal clearance, or release approval.
+- **Acceptance:** This advances HUNT-008/HUNT-009 Proof/Counterexample
+  wiring only. Remediation/retest, generic verification-attempt publication,
+  `.vgl` Record binding, trusted/licensed roots, hosted entitlement,
+  independent adjudication, and final release acceptance remain open.
+  HUNT-008/009 remain unchecked; HUNT-010/011 are unchanged. Score remains
+  **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-proof-counterexample-pr116-2026-10-13.md`.
+
 ## HUNT Attack Worker contribution · 2026-10-13
 
 - **Public merge:** PR #115 merged normally as
