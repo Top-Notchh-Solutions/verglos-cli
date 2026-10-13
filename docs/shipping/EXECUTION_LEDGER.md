@@ -1,5 +1,39 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT Scout target manifest contribution merged (PR #113)
+
+- **Public contribution:** Added `verglos hunt scout <project> --json` and the
+  `urn:verglos:schema:hunt-target-manifest` contract. The bounded static
+  inventory binds to the exact resolved subject and reports frameworks,
+  entrypoints, route/API candidates, dependency boundaries, agent/MCP tool
+  candidates, candidate sinks, coverage, and limitations.
+- **Qualification:** The resolver is offline and read-only; project code and
+  lifecycle scripts are not executed, source is not uploaded, and the manifest
+  omits absolute roots and source bodies. Focused Scout tests passed 2/2 for
+  shared and 2/2 for CLI; local command-options plus Scout tests passed 6/6.
+  Final full shared and CLI test runs, build 7/7, typecheck 13/13, and diff
+  checks passed.
+- **Identity:** PR #113 merged normally into public `main` as
+  `a399d00317dc495613483b934bb01f30f3ec5bb8`, with parents
+  `14d82d6d58547844084320121d390b79e0274103` and
+  `3dae438e35d197d53c622495ec6718fabe8b53ae`; source commits `ee6dfa8d` and
+  `3dae438e` remain separate. No squash or force-push.
+- **Protected verification:** Self-scan run `38368762038` passed all steps;
+  matrix run `38368762158` passed in-toto and all nine Ubuntu/macOS/Windows
+  Node 20/22/24 cells, for all eleven required PR checks.
+- **Boundary:** Owner authorization covered this public-safe contribution. The
+  bounded fixture used no customer source/data, credentials, provider,
+  entitlement, database, Production, hosted target, or external network.
+  Authorization is not independent review, provider confirmation, customer
+  acceptance, legal clearance, or final release approval.
+- **Disposition:** This advances Scout/Context implementation for HUNT-008 and
+  HUNT-009 only. Both counted rows remain unchecked pending complete target
+  execution, proof/retest, trusted/licensed treatment, hosted entitlement,
+  isolation qualification, independent review, and final release acceptance.
+- **Evidence:** `evidence/hunt-scout-target-manifest-pr113-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT-008 R10 Agent/MCP receipt contribution merged (PR #112)
 
 - **Public contribution:** Extended the sanitized Agent/MCP target fixture with

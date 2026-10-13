@@ -1,5 +1,30 @@
 # Verglos V1 traceability
 
+## HUNT Scout target manifest contribution · 2026-10-13
+
+- **Public merge:** PR #113 merged normally as
+  `a399d00317dc495613483b934bb01f30f3ec5bb8`, from feature head
+  `3dae438e35d197d53c622495ec6718fabe8b53ae`, with prior `main`
+  `14d82d6d58547844084320121d390b79e0274103` as the other parent.
+- **Implementation mapping:** `verglos hunt scout <project> --json` now emits
+  a subject-bound static manifest for framework, entrypoint, route/API,
+  dependency, agent/MCP, and candidate-sink context. The output is bounded,
+  offline, read-only, source-free, and registered in the shared contract
+  fixture validator.
+- **Verification mapping:** Focused shared Scout 2/2, CLI Scout 2/2, and
+  local command-options plus Scout 6/6 passed. Full shared and CLI tests,
+  build 7/7, typecheck 13/13, diff check, self-scan run `38368762038`,
+  in-toto, and all nine platform matrix cells in run `38368762158` passed.
+- **Boundary:** No project code or lifecycle script execution, source upload,
+  external network, customer data, provider state, entitlement, hosted target,
+  database, or Production system was used. Static candidate inventory is not
+  reachability or vulnerability proof.
+- **Acceptance:** This advances HUNT-008/HUNT-009 Scout/Context mapping only.
+  Both rows remain unchecked for complete authorized execution, proof/retest,
+  trusted/licensed treatment, hosted entitlement, isolation, independent
+  review, and final release acceptance. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-scout-target-manifest-pr113-2026-10-13.md`.
+
 ## HUNT-008 R10 Agent/MCP receipt contribution · 2026-10-13
 
 - **Public merge:** PR #112 merged normally as

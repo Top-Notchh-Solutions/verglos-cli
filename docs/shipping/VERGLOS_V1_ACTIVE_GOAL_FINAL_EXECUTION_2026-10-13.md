@@ -9,6 +9,22 @@
 **Value authority:** FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md  
 **Coverage authority:** FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md
 
+## 0.1 Current shipping checkpoint — 2026-10-13
+
+PR #113 merged normally as `a399d00317dc495613483b934bb01f30f3ec5bb8` after
+self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node 20/22/24 checks
+passed. It ships the bounded offline Scout/Context target manifest behind
+`verglos hunt scout <project> --json`, bound to the resolved subject identity
+and limited to static frameworks, entrypoints, route/API candidates,
+dependency boundaries, MCP candidates, and candidate sinks. It does not run
+project code, upload source, execute an attack, or establish proof.
+
+This contribution advances HUNT-008/HUNT-009 implementation only; their
+counted rows remain open until every row-specific acceptance criterion passes.
+The next aligned dependency is attack-hypothesis/planner mapping over this
+manifest, with the same source-free and execution-free boundary. Score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 1. Objective
 
 Finish the approved Verglos Final V1 product implementation and qualification

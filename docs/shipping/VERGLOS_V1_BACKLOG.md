@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · HUNT Scout target manifest checkpoint (PR #113)
+
+Public PR #113 merged normally into `main` as
+`a399d00317dc495613483b934bb01f30f3ec5bb8`, preserving feature head
+`3dae438e35d197d53c622495ec6718fabe8b53ae` and prior `main`
+`14d82d6d58547844084320121d390b79e0274103`. The contribution adds a bounded
+offline `verglos hunt scout <project> --json` target manifest for subject
+identity, frameworks, entrypoints, route/API candidates, dependency
+boundaries, MCP candidates, and candidate sinks. Protected self-scan,
+in-toto, and all nine platform cells passed.
+
+Evidence:
+`docs/shipping/evidence/hunt-scout-target-manifest-pr113-2026-10-13.md`.
+
+This is a Scout/Context implementation contribution, not complete HUNT-008 or
+HUNT-009 acceptance. No checkbox changed; the live score remains **228 checked
+/ 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT-008-R10 target-family checkpoint
 
 Public PR #112 merged normally into `main` as

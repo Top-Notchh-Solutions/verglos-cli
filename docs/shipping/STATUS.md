@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT Scout target manifest contribution merged (PR #113)
+
+Public PR #113 merged with a regular two-parent merge commit
+`a399d00317dc495613483b934bb01f30f3ec5bb8`, preserving feature head
+`3dae438e35d197d53c622495ec6718fabe8b53ae` and prior `main`
+`14d82d6d58547844084320121d390b79e0274103`; no squash or force-push was used.
+The public CLI now has a bounded offline `verglos hunt scout <project> --json`
+path that emits a subject-bound static target manifest for frameworks,
+entrypoints, route/API candidates, dependency boundaries, MCP candidates, and
+candidate sinks without executing project code or uploading source.
+
+Local focused and full CLI/shared tests, build, typecheck, and diff checks
+passed. Protected self-scan run `38368762038`, in-toto binding, and all nine
+Ubuntu/macOS/Windows Node 20/22/24 cells in run `38368762158` passed. Evidence:
+`evidence/hunt-scout-target-manifest-pr113-2026-10-13.md`.
+
+This is a Scout/Context implementation contribution only. HUNT-008 and
+HUNT-009 remain open for complete target execution, proof/retest, supported
+rule and provenance treatment, hosted entitlement, isolation, independent
+review, and final release acceptance. No checkbox changed; the score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT-008 R10 Agent/MCP receipt contribution merged (PR #112)
 
 Public PR #112 merged with a regular two-parent merge commit
