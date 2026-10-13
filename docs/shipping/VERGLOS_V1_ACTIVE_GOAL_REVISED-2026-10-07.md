@@ -76,6 +76,36 @@ Evidence: `docs/shipping/evidence/hunt-recipe-catalog-provenance-2026-10-13.md`.
 The score remains **228 checked / 52 unchecked / 280 total (81.4%)** until a
 backlog row's complete acceptance evidence exists.
 
+### 2026-10-13 all-family A2 CLI checkpoint — PR #109
+
+Public PR #109 is merged into CLI `main` with regular merge commit
+`16fdafd814e0ee2d161243cf53d86a425075800e` from
+`eec7174e7c2af2ec5e88511f8160052f75117822`. Its focused test drives all seven
+signed A2 reference families through the bounded Docker CLI path and asserts
+completion, authorization, confirmed verdicts, assurance metadata, and
+redaction. Protected self-scan, in-toto, and all macOS/Ubuntu/Windows Node
+20/22/24 checks passed.
+
+This advances Point 3 implementation evidence only. It does not close
+HUNT-008 or HUNT-009: supported-rule approval, provenance/licensing, hosted
+entitlement, Linux/Docker host qualification, independent review, and final
+release evidence remain open. The score remains **228 checked / 52 unchecked /
+280 total (81.4%)** and no checkbox changed. Evidence:
+`docs/shipping/evidence/hunt-a2-cli-all-families-pr109-2026-10-13.md`.
+
+### 2026-10-13 A2 documentation-alignment checkpoint
+
+The public CLI/Web agent instructions are being synchronized with the
+authoritative feature matrix. They now distinguish the implemented bounded A1/
+A2 technical paths from the still-open HUNT-008 through HUNT-011 acceptance
+gates. The four Hunt roles remain controlled responsibilities in one flow, not
+four autonomous AI services. No claim of general remote DAST, complete
+customer-code coverage, or host/OS isolation is added.
+
+This is a documentation and traceability repair only. It does not close a
+backlog row or change the score. Evidence:
+`docs/shipping/evidence/hunt-a2-contract-alignment-2026-10-13.md`.
+
 ### 2026-10-13 implementation checkpoint — PR #106
 
 Public PR #106 is now merged into `main` as
