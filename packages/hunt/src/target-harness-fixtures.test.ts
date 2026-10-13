@@ -17,6 +17,7 @@ const fixtureNames = [
   "agent-mcp",
   "xss",
   "authorization",
+  "prototype-pollution",
 ] as const;
 
 const expectedSummaries = {
@@ -27,6 +28,7 @@ const expectedSummaries = {
   "agent-mcp": "deterministic Agent/MCP boundary fixture",
   xss: "deterministic safe-XSS fixture",
   authorization: "deterministic authorization and mass-assignment fixture",
+  "prototype-pollution": "deterministic prototype-pollution fixture",
 } as const;
 
 type FixtureProcessResult = Readonly<{
