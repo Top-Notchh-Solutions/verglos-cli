@@ -1,10 +1,15 @@
+import { createHash } from "node:crypto";
 import {
+  approvalRequestDigest,
   ApprovalReceiptSchema,
   bindHuntExecution,
+  canApplyRemediation,
   canonicalizeJson,
   parseHuntAttackHypothesis,
   parseHuntRecipe,
+  parseRemediationProposal,
   parseHuntRecipeTrustPolicy,
+  SubjectIdSchema,
   type HuntAttackHypothesis,
   type HuntExecutionBinding,
   type HuntRecipe,
@@ -32,6 +37,15 @@ export interface HuntAttackWorkerInput {
   readonly entitlement: "hunt.critical";
   readonly observationId: string;
   readonly at?: string;
+}
+
+export interface HuntAttackRetestInput extends HuntAttackWorkerInput {
+  /** The subject identity before the approved remediation scope was applied. */
+  readonly beforeSubjectId: string;
+  /** A non-mutating remediation proposal bound to beforeSubjectId and the finding. */
+  readonly remediation: unknown;
+  /** Separate mutate approval for the exact proposal file scope. */
+  readonly remediationApproval: unknown;
 }
 
 export type HuntAttackWorkerOutcome = Readonly<Pick<HuntFindingOutcome, "findingId" | "verdict" | "canonicalVerdict" | "reason" | "durationMs" | "evidenceDigest" | "executionStatus" | "assurance">>;
@@ -72,6 +86,30 @@ export type HuntAttackProofResult = Readonly<{
     readonly limitation: string;
   }>;
 }>;
+
+export type HuntAttackRetestResult = Readonly<{
+  readonly status: "completed";
+  readonly executes: true;
+  readonly beforeSubjectId: string;
+  readonly afterSubjectId: string;
+  readonly findingId: string;
+  readonly ruleId: string;
+  readonly remediation: Readonly<{
+    readonly proposalDigest: string;
+    readonly approvalRequestDigest: string;
+    readonly approved: true;
+    readonly applied: false;
+    readonly limitation: string;
+  }>;
+  readonly proof: HuntAttackProofResult;
+  readonly retest: Readonly<{
+    readonly status: "cleared" | "still-reproduced" | "inconclusive" | "not-attemptable";
+    readonly sameProof: true;
+    readonly limitation: string;
+  }>;
+}>;
+
+const RETEST_LIMITATION = "Retest reruns the same registered proof against the supplied post-remediation subject; this command does not mutate files or independently confirm that the approved remediation was applied.";
 
 /**
  * Execute one supported Attack-Hypothesis through the existing bounded Hunt
@@ -150,6 +188,52 @@ export async function runSupportedHuntProof(input: HuntAttackWorkerInput): Promi
     outcome: projectedPrimary,
     counterexample: projectedCounterexample,
     proof: Object.freeze({ status: proofStatus as "confirmed" | "not-reproduced" | "inconclusive", negativeControl, limitation: prepared.supported.descriptor.adapter === "container" ? A2_PROOF_LIMITATION : A1_PROOF_LIMITATION }),
+  });
+}
+
+/**
+ * Re-run the same bounded proof after an approved remediation scope. The
+ * retest accepts no patch bytes and never mutates the workspace: mutation
+ * approval is checked only to bind the proposed file scope, while execution
+ * still requires a separate exact approval for the post-remediation subject.
+ */
+export async function runSupportedHuntRetest(input: HuntAttackRetestInput): Promise<HuntAttackRetestResult> {
+  const hypothesis = parseHuntAttackHypothesis(input.hypothesis);
+  const proposal = parseRemediationProposal(input.remediation);
+  const remediationApproval = ApprovalReceiptSchema.parse(input.remediationApproval);
+  const beforeSubjectId = SubjectIdSchema.parse(input.beforeSubjectId);
+  const afterSubjectId = hypothesis.targetSubjectId;
+  const at = input.at ?? new Date().toISOString();
+  if (proposal.findingId !== hypothesis.finding.id) throw new Error("remediation proposal does not match the planned finding");
+  if (proposal.targetSubjectId !== beforeSubjectId) throw new Error("remediation proposal does not match the before subject");
+  if (beforeSubjectId === afterSubjectId) throw new Error("retest requires a distinct post-remediation subject");
+  if (!canApplyRemediation(proposal, remediationApproval, at)) throw new Error("remediation scope is not approved for the exact subject and files");
+
+  const proof = await runSupportedHuntProof(input);
+  const retestStatus = proof.status === "not-attemptable" || proof.proof.status === "not-attemptable"
+    ? "not-attemptable" as const
+    : proof.proof.status === "confirmed"
+      ? "still-reproduced" as const
+      : proof.proof.status === "not-reproduced"
+        ? "cleared" as const
+        : "inconclusive" as const;
+  const { decision: _decision, decidedBy: _decidedBy, decidedAt: _decidedAt, requestDigest: _requestDigest, ...request } = remediationApproval;
+  return Object.freeze({
+    status: "completed" as const,
+    executes: true as const,
+    beforeSubjectId,
+    afterSubjectId,
+    findingId: hypothesis.finding.id,
+    ruleId: hypothesis.finding.ruleId,
+    remediation: Object.freeze({
+      proposalDigest: `sha256:${createHash("sha256").update(canonicalizeJson(proposal), "utf8").digest("hex")}`,
+      approvalRequestDigest: approvalRequestDigest(request),
+      approved: true as const,
+      applied: false as const,
+      limitation: RETEST_LIMITATION,
+    }),
+    proof,
+    retest: Object.freeze({ status: retestStatus, sameProof: true as const, limitation: RETEST_LIMITATION }),
   });
 }
 
