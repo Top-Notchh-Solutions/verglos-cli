@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Competitive-product contract and research amendment
+
+- **Research:** Official XBOW, Aikido, Semgrep, Snyk, GitHub Code Security,
+  and StackHawk product/documentation pages were reviewed and recorded in
+  `COMPETITIVE_PRODUCT_RESEARCH_2026-10-13.md`.
+- **Contract:** The canonical product contract now requires a scanner-to-proof
+  graph, real authorized TS/JS target adapters, five controlled agent roles,
+  ten attack-verification families, remediation/retest, counterexample proof,
+  MCP/Web/SCM/Attest/Release Record continuity, plan-level outcomes, hosted
+  cost controls, and a held-out benchmark before any superiority claim.
+- **Synchronization:** The private feature matrix and active goal now use the
+  expanded contract. Existing eight A1 probes and seven A2 harness descriptors
+  remain implementation foundations; they are not represented as the final
+  autonomous product.
+- **Disposition:** Documentation and product-definition work only. No public
+  source, secret, customer data, provider state, entitlement, database,
+  Production, npm, or backlog checkbox changed.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%).
+- **Commit:** recorded in the private tracker after validation.
+
 ## 2026-10-13 · Web Hunt/Attest contract copy merged (PR #174)
 
 - **Public work:** Web PR #174 merged with regular merge commit

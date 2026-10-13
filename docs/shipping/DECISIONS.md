@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-13 · Adopt the researched code-to-proof product bar
+
+- **Decision:** Expand the Final V1 implementation target from bounded fixture
+  Hunt to a scanner-connected, agentic-but-controlled code-to-proof workflow
+  for authorized TypeScript/JavaScript applications.
+- **Required value:** Real target mapping, finding-guided attack hypotheses,
+  bounded workers, independent counterexamples, remediation/retest, portable
+  evidence, and release decisions across CLI, MCP, Web, and SCM.
+- **Plan rule:** Free provides useful local value; Pro provides the complete
+  local loop; Team adds shared policy/SCM/private targets; Studio adds client
+  campaigns/handoffs; Enterprise adds private governance and custom adapters.
+- **Economic rule:** Local work is not metered like hosted work; managed model,
+  runner, retention, public-verification, and campaign costs are explicit.
+- **Evidence rule:** No “better than competitors” claim without the held-out
+  benchmark defined in the research packet.
+- **Disposition:** Contract, matrix, goal, and private research packet updated;
+  no checkbox or score change.
+
 ## 2026-10-13 · Preserve Web contract-alignment commits
 
 - **Decision:** Merge Web PR #174 with a regular merge commit and preserve

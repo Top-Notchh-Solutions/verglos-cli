@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Competitive-product contract and research amendment
+
+The canonical contract, private feature matrix, and active goal now reflect
+the researched market bar: scanner-to-proof continuity, real authorized TS/JS
+target testing, five controlled Hunt roles, ten verification families,
+remediation/retest, MCP/Web/SCM/Attest/Release Record continuity, plan-level
+customer outcomes, and bounded hosted economics. Official sources and the
+adopted benchmark are recorded in
+`docs/shipping/COMPETITIVE_PRODUCT_RESEARCH_2026-10-13.md`.
+
+This is not implementation or acceptance evidence. The current eight A1 probes
+and seven A2 harness descriptors remain foundations; real target adapters,
+agent orchestration, scanner mappings, proof/retest, and benchmark evidence
+remain open. No checkbox changed; score remains **228 checked / 52 unchecked /
+280 total (81.4%)**.
+
 ## 2026-10-13 · Web Hunt/Attest contract copy merged (PR #174)
 
 Web PR #174 is merged with regular merge commit

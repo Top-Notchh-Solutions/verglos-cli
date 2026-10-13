@@ -1,5 +1,23 @@
 # Verglos V1 risk register
 
+## 2026-10-13 · R-CONTRACT-COMPETITIVE-001 expanded product bar
+
+- **Risk:** The contract could promise autonomous attack coverage, real-target
+  testing, or superiority before the scanner mappings, target adapters,
+  orchestration, proof/retest loop, and benchmark exist.
+- **Mitigation:** Keep the researched requirements explicit, label the current
+  eight A1/seven A2 implementation as foundation only, require the complete
+  scanner-to-proof loop and held-out benchmark, and keep backlog acceptance
+  separate from documentation approval.
+- **Commercial risk:** Unlimited hosted agentic testing at entry-level prices
+  could erase margin.
+- **Mitigation:** Include local execution in plans; meter or contract hosted
+  model calls, private runners, long retention, public verification, and
+  managed campaigns.
+- **Status:** Contract and traceability updated; implementation remains open.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%).
+- **Evidence:** `COMPETITIVE_PRODUCT_RESEARCH_2026-10-13.md`.
+
 ## 2026-10-13 · R-HUNT-DOC-002 Web copy drift after A2 merge
 
 - **Risk:** Public Web copy could promise beta-only hosted Hunt/Attest

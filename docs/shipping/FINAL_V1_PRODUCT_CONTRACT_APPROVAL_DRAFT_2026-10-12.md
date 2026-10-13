@@ -16,6 +16,11 @@ implementation truth, and acceptance evidence. It is an index only; this
 contract remains the product decision and the backlog remains the checkbox
 authority.
 
+**Competitive research authority:**
+`COMPETITIVE_PRODUCT_RESEARCH_2026-10-13.md` records the official competitor
+sources, commercial observations, adopted requirements, and benchmark bar used
+for this amendment. It is private planning evidence, not customer-facing copy.
+
 This document is the approved product contract for Verglos Final V1. It
 replaces conflicting informal descriptions. It is a contract for what we will
 build and test, not proof that every capability is already implemented.
@@ -188,6 +193,26 @@ No plan promises unrestricted internet exploitation, arbitrary customer-code
 execution, unlimited managed model calls, or silent source upload. The value
 comes from verified security decisions and evidence, not from exposing a
 dangerous shell to an AI agent.
+
+### 0.5 Competitive acceptance bar
+
+The final product is not accepted merely because the scanner finds patterns or
+because an AI agent returns a plausible explanation. For each supported
+family, acceptance requires the complete loop:
+
+```text
+finding -> target map -> bounded hypothesis -> approved execution
+  -> positive proof + negative control -> remediation proposal
+  -> approved retest -> signed Release Record -> policy/PR decision
+```
+
+The loop must be available from the supported public CLI and represented in
+MCP. Web and SCM add shared control, audit, and collaboration; they must not
+create a second finding or authorization model. The held-out benchmark must
+measure recall, verified-proof recall, false positives, route/target coverage,
+reproducibility, time-to-proof, remediation/retest success, network/source
+privacy, and cost. Verglos may claim a competitive advantage only for a metric
+where the benchmark provides evidence.
 
 The approved execution boundary for this goal is Points 1–5 in Section 14:
 freeze and synchronize the contract, implement the real Hunt/public CLI path,
@@ -815,10 +840,20 @@ results, but may not fabricate signatures, approvals, consent, or evidence.
 
 ## 15. Current implementation truth
 
-This draft does not claim that Final V1 is complete. Before approval, the
-current code contains partial foundations and legacy shells in several areas,
-including the public Hunt path, Attest command, plan registries, hosted
-organization workflows, and full engine/image integration.
+This contract does not claim that Final V1 is complete. At the current
+implementation checkpoint, the public catalog contains eight A1 deterministic
+fixture probes and seven A2 target-harness descriptors with bounded Docker
+execution. Those are valuable safety and regression foundations, but they are
+not yet the complete agentic real-application Hunt product required by this
+amendment. The current code does not yet prove the full Scout, hypothesis,
+target-discovery, remediation/retest, or held-out competitive loop.
+
+The current code also contains partial foundations and legacy shells in
+several areas, including the public Hunt path, Attest command, plan
+registries, hosted organization workflows, and full engine/image integration.
+The scanner-to-Hunt graph, real target adapters, autonomous orchestration,
+MCP parity, plan value, hosted controls, and Release Record continuity must be
+implemented and qualified together.
 
 Those gaps become implementation work under Points 2–5. The contract does not
 hide them and does not close their backlog items automatically.

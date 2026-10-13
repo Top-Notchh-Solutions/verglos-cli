@@ -1,5 +1,40 @@
 # Verglos V1 Active Shipping Goal — Approved Contract, Implementation, and Point-5 Qualification
 
+## 2026-10-13 competitive-product contract amendment — current operating rule
+
+The canonical contract now includes the researched paying-product bar in
+`FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md`, with private research
+in `COMPETITIVE_PRODUCT_RESEARCH_2026-10-13.md`. The implementation target is
+not a fixture-only Hunt or a disconnected set of plain rules. It is a
+scanner-to-proof security decision layer for TypeScript/JavaScript:
+
+```text
+scanner/SCA/secrets/provenance/Trivy finding
+  -> target map -> bounded attack hypothesis -> approved playbook
+  -> real authorized local/private target execution
+  -> positive proof + negative control -> remediation/retest
+  -> signed Release Record -> policy, MCP, Web, SCM, and release decision
+```
+
+The final Hunt contract has five controlled roles—Scout/Context,
+Attack-Hypothesis, Attack Worker Fleet, Proof/Counterexample, and Release
+Auditor—and ten required attack-verification families. The existing eight A1
+probes and seven A2 target harnesses remain safety foundations; they do not
+count as the complete autonomous real-target product until target discovery,
+scanner-to-playbook mapping, proof/retest, plan behavior, and the held-out
+benchmark are implemented and evidenced.
+
+The plan outcome is equally binding: Free must provide useful local scanning
+and starter proof; Pro must provide the complete local TS/JS code-to-proof
+loop; Team must provide shared policy/SCM/private-target workflows; Studio
+must provide client campaigns and handoffs; Enterprise must provide private
+execution, governance, identity, residency, and custom adapters. Local work is
+not charged like hosted work, while managed model/runner/retention costs are
+explicitly bounded.
+
+This amendment changes the implementation queue and acceptance bar only. It
+does not close any checkbox or change the live score.
+
 ## 2026-10-13 final feature coverage synchronization — current operating rule
 
 The complete approved-contract feature map is now indexed in
@@ -13,11 +48,11 @@ The implementation queue is therefore explicit:
 1. local TypeScript/JavaScript scanner, ten security domains, coverage
    manifests, dependency/supply-chain engines, imports, Trivy boundary, and
    artifact provenance;
-2. bounded Hunt roles and recipe sub-scopes owned by `HUNT-008` through
-   `HUNT-011` (the current public catalog contains eight A1 deterministic
-   fixture probes plus seven A2 target-harness descriptors and their bounded
-   Docker execution path; this is implementation progress, not complete
-   target-code recipe acceptance);
+2. scanner-to-Hunt mappings, five bounded/agentic roles, real local/private
+   TypeScript/JavaScript target adapters, and the ten-family playbook scope
+   owned by `HUNT-008` through `HUNT-011` (the current public catalog contains
+   eight A1 probes plus seven A2 harness descriptors; these are foundations,
+   not complete real-target coverage);
 3. MCP/AI controls, Attest, portable `.vgl` Release Records, and release
    provenance;
 4. Free/Pro/Team/Studio/Enterprise entitlements, Cards-only prepaid billing,
