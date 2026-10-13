@@ -3,7 +3,10 @@ import { execFile } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import { test } from "node:test";
+import { buildDockerInvocation } from "./docker-adapter.js";
+import { runDockerInvocation } from "./docker-runner.js";
 import { parseTargetHarnessOutput } from "./target-harness.js";
+import { HUNT_TARGET_HARNESS_IMAGE, HUNT_TARGET_HARNESS_IMAGE_DIGEST } from "./target-harness.js";
 
 const execFileAsync = promisify(execFile);
 const fixtureNames = [
@@ -70,5 +73,29 @@ test("each public A2 reference harness exposes timeout and adapter-failure proce
     assert.equal(failed.status, "failed", `${name}/adapter-failure`);
     assert.equal(failed.exitCode, 17, `${name}/adapter-failure exit code`);
     assert.match(failed.stderr, /intentional adapter failure fixture/u, `${name}/adapter-failure stderr`);
+  }
+});
+
+test("each public A2 reference harness executes local target code in the pinned Docker boundary", { skip: process.env.VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION !== "1" ? "set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run target-code Docker qualification" : false }, async () => {
+  const projectRoot = fileURLToPath(new URL("../fixtures/target-code/", import.meta.url));
+  for (const name of fixtureNames) {
+    const commandPath = `/workspace/.verglos/hunt/${name}.mjs`;
+    for (const [fixtureCase, expectedVerdict] of [["positive", "confirmed"], ["negative", "not-reproduced"], ["unsupported", "unsupported"]] as const) {
+      const args = buildDockerInvocation({
+        projectRoot,
+        image: HUNT_TARGET_HARNESS_IMAGE,
+        imageDigest: HUNT_TARGET_HARNESS_IMAGE_DIGEST,
+        command: ["node", commandPath, fixtureCase],
+        timeoutMs: 5_000,
+        memoryMb: 256,
+        maxProcesses: 16,
+        cpus: 1,
+        diskMb: 128,
+      });
+      const result = await runDockerInvocation(args, { timeoutMs: 5_000, maxOutputBytes: 4_096, sensitivePaths: [projectRoot] });
+      assert.equal(result.status, "completed", `${name}/${fixtureCase} Docker status`);
+      assert.equal(result.exitCode, 0, `${name}/${fixtureCase} Docker exit code`);
+      assert.deepEqual(parseTargetHarnessOutput(result.stdout), { verdict: expectedVerdict, summary: expectedSummaries[name] }, `${name}/${fixtureCase} Docker result`);
+    }
   }
 });
