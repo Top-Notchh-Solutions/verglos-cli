@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · A2 direct harness outcome matrix merged (PR #104)
+
+Each of the seven public A2 reference harnesses now has deterministic process
+fixtures for positive, negative, unsupported, timeout, and adapter-failure
+outcomes. PR #104 passed the protected self-scan, in-toto binding, and all
+Ubuntu/macOS/Windows Node 20/22/24 cells, then was squash-merged into public
+`main` as
+`1b1ea0b08ecad1b18cfd3736252fa81f0161aa49`. The private evidence packet is
+`docs/shipping/evidence/hunt-a2-direct-outcomes-pr104-2026-10-13.md`.
+
+This is direct fixture-process evidence, not customer-code qualification or
+autonomous-agent evidence. HUNT-008 remains open for provenance/licensing,
+supported-rule approval, hosted entitlement, Linux/Docker adversarial proof,
+independent review, and release treatment. Score remains **228 checked / 52
+unchecked / 280 total (81.4%)**; no checkbox changed.
+
 ## 2026-10-13 · A2 adapter failure classification merged (PR #103)
 
 The bounded Docker adapter now preserves operational failure state before

@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · A2 direct harness outcome matrix merged (PR #104)
+
+- **Public work:** PR #104 was squash-merged into public `main` as
+  `1b1ea0b08ecad1b18cfd3736252fa81f0161aa49`.
+- **Implemented:** every one of the seven A2 reference harnesses now has
+  direct process fixtures for positive, negative, unsupported, timeout, and
+  adapter-failure outcomes.
+- **Verification:** self-scan `38328450179`, in-toto binding, and all nine
+  Ubuntu/macOS/Windows Node 20/22/24 protected cells passed. Local Hunt tests
+  passed (66 passed, 16 explicit Linux-host skips, 0 failed), CLI tests passed,
+  build passed 8/8, and the diff check passed.
+- **Acceptance:** HUNT-008 remains unchecked because these are sanitized
+  reference harnesses; provenance/licensing, supported-rule approval, hosted
+  entitlement, Linux/Docker adversarial host evidence, independent review,
+  and final release treatment remain open.
+- **Evidence:** `evidence/hunt-a2-direct-outcomes-pr104-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
 ## 2026-10-13 · A2 adapter failure matrix merged (PR #103)
 
 - **Public work:** PR #103 was squash-merged into public `main` as

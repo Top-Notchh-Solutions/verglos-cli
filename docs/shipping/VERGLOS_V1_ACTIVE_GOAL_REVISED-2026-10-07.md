@@ -60,6 +60,12 @@ infrastructure-failure outcomes before assertion parsing for all seven A2
 families. This is a classification-hardening result, not completion of the
 HUNT-008 acceptance gates.
 
+PR #104 then added direct timeout and adapter-failure process fixtures to all
+seven A2 reference harnesses and merged into public `main` as
+`1b1ea0b08ecad1b18cfd3736252fa81f0161aa49` after the protected self-scan,
+in-toto binding, and all nine platform cells passed. This advances direct
+fixture-process evidence only; it does not close HUNT-008.
+
 The score remains **228 checked / 52 unchecked / 280 total (81.4%)** until a
 backlog row's complete acceptance evidence exists.
 

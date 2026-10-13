@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## A2 direct harness process outcomes · 2026-10-13
+
+- **Implementation:** Public CLI PR #104 added deterministic timeout and
+  adapter-failure process fixtures to all seven A2 reference harnesses and was
+  merged into public `main` as
+  `1b1ea0b08ecad1b18cfd3736252fa81f0161aa49`.
+- **Coverage:** each family now has direct positive, negative, unsupported,
+  timeout, and non-zero-failure process outcomes; no fixture uses network,
+  customer source, secrets, database/browser access, or arbitrary shell.
+- **Verification:** protected self-scan `38328450179`, in-toto binding, and
+  all nine platform cells passed; local Hunt/CLI/build/diff checks passed.
+- **Acceptance:** HUNT-008 remains open for target-code acceptance,
+  provenance/licensing, supported-rule approval, hosted entitlement,
+  Linux/Docker adversarial proof, independent review, and release treatment.
+  Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `hunt-a2-direct-outcomes-pr104-2026-10-13.md`.
+
 ## A2 adapter failure classification · 2026-10-13
 
 - **Implementation:** Public CLI PR #103 corrected Docker adapter precedence
