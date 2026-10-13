@@ -20,12 +20,16 @@ const input = {
 test("Docker invocation is pinned and deny-by-default", () => {
   const args = buildDockerInvocation(input);
   assert.deepEqual(args.slice(0, 8), ["run", "--rm", "--init", "--stop-timeout", "1", "--network", "none", "--ipc"]);
+  assert.ok(args.includes("--read-only"));
+  assert.deepEqual(args.slice(args.indexOf("--tmpfs"), args.indexOf("--tmpfs") + 2), ["--tmpfs", "/tmp:rw,noexec,nosuid,nodev,size=128m"]);
+  assert.deepEqual(args.slice(args.indexOf("--cap-drop"), args.indexOf("--cap-drop") + 2), ["--cap-drop", "ALL"]);
   assert.ok(args.includes("no-new-privileges"));
   assert.deepEqual(args.slice(args.indexOf("--ulimit"), args.indexOf("--ulimit") + 4), ["--ulimit", "nofile=1024:1024", "--ulimit", "core=0"]);
   assert.ok(args.includes("--pids-limit"));
   assert.deepEqual(args.slice(args.indexOf("--cpus"), args.indexOf("--cpus") + 2), ["--cpus", "2"]);
   assert.deepEqual(args.slice(args.indexOf("--user"), args.indexOf("--user") + 4), ["--user", "65532:65532", "--workdir", "/workspace"]);
   assert.ok(args.includes("--mount"));
+  assert.equal(args.some((arg) => arg === "--privileged" || arg === "--device" || arg === "--pid=host" || arg === "--uts=host" || arg === "--network=host"), false);
   assert.ok(args.includes(`${input.image}@${input.imageDigest}`));
   assert.ok(Object.isFrozen(args));
 });
