@@ -10,9 +10,10 @@ An A2 harness must print a final line such as `{"verglos":"hunt-result","verdict
 
 The public repository also contains seven sanitized deterministic reference
 harnesses under `fixtures/target-code/.verglos/hunt/`, one for each approved
-A2 family. They inspect embedded synthetic strings only: they do not scan
-customer source, access a database, make network requests, render a browser,
-or invoke tools. For fixture qualification, each accepts the bounded
+A2 family, plus local target-code modules under `fixtures/target-code/src/`.
+Each harness invokes only those local modules and evaluates the result in
+memory: they do not scan customer source, access a database, make network
+requests, render a browser, or invoke tools. For fixture qualification, each accepts the bounded
 `positive`, `negative`, or `unsupported` case argument; timeout and execution
 failure are produced by the Docker adapter and never fabricated by a harness.
 Omitting the argument selects the positive case used by the admitted catalog
