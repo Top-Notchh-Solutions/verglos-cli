@@ -66,6 +66,13 @@ seven A2 reference harnesses and merged into public `main` as
 in-toto binding, and all nine platform cells passed. This advances direct
 fixture-process evidence only; it does not close HUNT-008.
 
+The exact catalog identity is now captured privately for all 15 descriptors at
+that merged public head, including descriptor/source/harness digests and the
+pinned A2 image digest. This fills the source-identity collection step only;
+rule approval, legal release treatment, hosted entitlement, target-code,
+Linux/Docker host, independent-review, and final release gates remain open.
+Evidence: `docs/shipping/evidence/hunt-recipe-catalog-provenance-2026-10-13.md`.
+
 The score remains **228 checked / 52 unchecked / 280 total (81.4%)** until a
 backlog row's complete acceptance evidence exists.
 

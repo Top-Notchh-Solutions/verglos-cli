@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## Hunt catalog provenance identity · 2026-10-13
+
+- **Source:** public `main` commit
+  `1b1ea0b08ecad1b18cfd3736252fa81f0161aa49`, package version
+  `2.0.0-alpha.1`, catalog source digest, 15 descriptor digests, pinned A2
+  image digest, and seven harness file digests are recorded in the private
+  provenance snapshot.
+- **Boundary:** the snapshot contains hashes and public source identity only;
+  it contains no secret, customer source, private repository content, or
+  execution authority.
+- **Remaining proof:** supported-rule approval, licensing/modification/
+  redistribution treatment, target-code qualification, hosted entitlement,
+  Linux/Docker host evidence, independent review, and release treatment.
+- **State:** no checkbox changed; score remains **228/52/280 (81.4%)**.
+- **Evidence:** `hunt-recipe-catalog-provenance-2026-10-13.md`.
+
 ## A2 direct harness process outcomes · 2026-10-13
 
 - **Implementation:** Public CLI PR #104 added deterministic timeout and

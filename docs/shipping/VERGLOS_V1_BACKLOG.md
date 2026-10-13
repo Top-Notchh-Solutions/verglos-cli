@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · Hunt catalog identity checkpoint
+
+The exact public catalog identity for all 15 descriptors is now recorded at
+merged public head `1b1ea0b08ecad1b18cfd3736252fa81f0161aa49`, including source,
+descriptor, harness, and image digests. This closes only the source-identity
+collection subtask; HUNT-008 remains open for approval, legal release
+treatment, target-code qualification, hosted entitlement, isolation,
+independent review, and final acceptance.
+
+Evidence:
+
+- `docs/shipping/evidence/hunt-recipe-catalog-provenance-2026-10-13.md`
+
+The live score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+No checkbox changed.
+
 ## 2026-10-13 · Current A2 direct-outcome checkpoint
 
 Public PR #104 added direct timeout and adapter-failure process fixtures to

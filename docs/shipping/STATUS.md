@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · Hunt catalog provenance snapshot recorded
+
+The exact public `main` catalog identity is now recorded for all 15 current
+descriptors: source commit, package version/license metadata, catalog digest,
+descriptor digests, pinned A2 image digest, and seven public harness file
+digests. This fills the Codex-completable source-identity artifact only;
+supported-rule approval, legal release treatment, hosted entitlement,
+target-code qualification, independent review, and final release treatment
+remain open. Evidence:
+`docs/shipping/evidence/hunt-recipe-catalog-provenance-2026-10-13.md`.
+
+Score remains **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+changed.
+
 ## 2026-10-13 · A2 direct harness outcome matrix merged (PR #104)
 
 Each of the seven public A2 reference harnesses now has deterministic process

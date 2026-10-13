@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · Hunt catalog provenance snapshot recorded
+
+- **Identity:** the merged public `main` catalog at
+  `1b1ea0b08ecad1b18cfd3736252fa81f0161aa49` is recorded with package version,
+  SPDX metadata, catalog source digest, all 15 descriptor digests, the pinned
+  A2 image digest, and all seven public A2 harness file digests.
+- **Disposition:** this closes the Codex-completable identity collection
+  artifact only. Supported-rule approval, legal modification/redistribution
+  treatment, hosted entitlement, target-code qualification, Linux/Docker host
+  proof, independent review, and final release treatment remain open.
+- **Evidence:** `evidence/hunt-recipe-catalog-provenance-2026-10-13.md`.
+- **Score:** 228 checked / 52 unchecked / 280 total (81.4%); no checkbox
+  changed.
+
 ## 2026-10-13 · A2 direct harness outcome matrix merged (PR #104)
 
 - **Public work:** PR #104 was squash-merged into public `main` as
