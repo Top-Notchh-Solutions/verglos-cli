@@ -28,6 +28,7 @@ import { executeHuntRecipe, runHuntRecipe } from "./hunt-execute.js";
 import { executeHuntRecipeVerification } from "./hunt-recipe-verify.js";
 import { executeHuntScout } from "./hunt-scout.js";
 import { executeHuntHypothesis } from "./hunt-hypothesis.js";
+import { executeHuntWorker } from "./hunt-worker.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -1020,6 +1021,27 @@ huntCommand
   .action(async (manifestPath: string, _opts: { findingId: string; ruleId: string; subjectId: string; location?: string; line?: string; severity?: string; json?: boolean; quiet?: boolean }, command: Command) => {
     const opts = command.optsWithGlobals() as { findingId: string; ruleId: string; subjectId: string; location?: string; line?: string; severity?: string; json?: boolean; quiet?: boolean };
     process.exit(await executeHuntHypothesis({ manifestPath, ...opts }));
+  });
+
+huntCommand
+  .command("worker <hypothesisPath>")
+  .description("Execute one supported Attack-Hypothesis through the bounded Hunt worker")
+  .requiredOption("--report <path>", "Local scanner report containing the exact finding")
+  .requiredOption("--recipe <path>", "Signed local Hunt recipe selected by the hypothesis")
+  .requiredOption("--trust-store <path>", "Local Hunt trust store for the signed recipe")
+  .requiredOption("--approval <path>", "Approved Hunt receipt bound to the target")
+  .requiredOption("--observation-id <id>", "Observation identity for the execution binding")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (hypothesisPath: string, _opts: { report: string; recipe: string; trustStore: string; approval: string; observationId: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { report: string; recipe: string; trustStore: string; approval: string; observationId: string; json?: boolean; quiet?: boolean };
+    const executionAuthorized = await requireCapability("hunt.critical", "`verglos hunt worker`", {
+      asPlan: process.env.VERGLOS_AS_PLAN,
+      output: opts.json ? "json" : opts.quiet ? "quiet" : undefined,
+      extraLine: "Execution still requires a supported hypothesis, signed recipe, approved receipt, and bounded runtime.",
+    });
+    if (!executionAuthorized) process.exit(1);
+    process.exit(await executeHuntWorker({ hypothesisPath, reportPath: opts.report, recipePath: opts.recipe, trustStorePath: opts.trustStore, approvalPath: opts.approval, observationId: opts.observationId, json: opts.json, quiet: opts.quiet }));
   });
 
 huntCommand

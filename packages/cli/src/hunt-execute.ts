@@ -1,13 +1,13 @@
 import { constants } from "node:fs";
 import { lstat, open } from "node:fs/promises";
-import { ApprovalReceiptSchema, huntRecipeTrustPolicyDigest, parseHuntRecipe, parseHuntRecipeTrustPolicy, verifyHuntRecipe, type ApprovalReceipt, type ScanResult } from "@verglos/shared";
+import { ApprovalReceiptSchema, huntRecipeTrustPolicyDigest, parseBoundedJson, parseHuntRecipe, parseHuntRecipeTrustPolicy, verifyHuntRecipe, type ApprovalReceipt, type ScanResult } from "@verglos/shared";
 import { loadHuntRuntime, type HuntRuntimeLoader } from "./hunt-runtime.js";
 
 const MAX_INPUT_BYTES = 8 * 1024 * 1024;
 const MAX_FINDINGS = 10_000;
 const MAX_FINDING_TEXT = 16 * 1024;
 
-async function readJson(path: string, label: string): Promise<unknown> {
+export async function readHuntJson(path: string, label: string): Promise<unknown> {
   if (!path || path.length > 4096 || /[\u0000-\u001f\u007f]/u.test(path)) throw new Error(`${label} path is invalid`);
   const before = await lstat(path);
   if (!before.isFile() || before.size > MAX_INPUT_BYTES) throw new Error(`${label} must be a bounded regular file`);
@@ -16,7 +16,7 @@ async function readJson(path: string, label: string): Promise<unknown> {
     const stat = await handle.stat();
     if (!stat.isFile() || stat.size > MAX_INPUT_BYTES) throw new Error(`${label} must be a bounded regular file`);
     const bytes = await handle.readFile();
-    return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)) as unknown;
+    return parseBoundedJson(bytes, { limits: { maxBytes: MAX_INPUT_BYTES, maxDepth: 32, maxNodes: 100_000, maxObjectProperties: 100_000, maxArrayItems: 100_000 } });
   } catch {
     throw new Error(`${label} must contain valid bounded UTF-8 JSON`);
   } finally {
@@ -24,7 +24,7 @@ async function readJson(path: string, label: string): Promise<unknown> {
   }
 }
 
-function parseReport(value: unknown): ScanResult {
+export function parseHuntReport(value: unknown): ScanResult {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Hunt report is invalid");
   const report = value as Record<string, unknown>;
   if (typeof report.projectRoot !== "string" || report.projectRoot.length === 0 || report.projectRoot.length > 4096 || /[\u0000-\u001f\u007f]/u.test(report.projectRoot) || !Array.isArray(report.findings) || report.findings.length > MAX_FINDINGS) throw new Error("Hunt report is invalid");
@@ -59,13 +59,13 @@ export interface HuntRecipeExecutionResult {
 export async function runHuntRecipe(input: HuntRecipeExecutionInput): Promise<HuntRecipeExecutionResult> {
   try {
     const [reportValue, recipeValue, trustValue] = await Promise.all([
-      readJson(input.reportPath, "Hunt report"),
-      readJson(input.recipePath, "Hunt recipe"),
-      readJson(input.trustStorePath, "Hunt trust store"),
+      readHuntJson(input.reportPath, "Hunt report"),
+      readHuntJson(input.recipePath, "Hunt recipe"),
+      readHuntJson(input.trustStorePath, "Hunt trust store"),
     ]);
-    const approvalValue = input.approval ?? (input.approvalPath ? await readJson(input.approvalPath, "Hunt approval") : undefined);
+    const approvalValue = input.approval ?? (input.approvalPath ? await readHuntJson(input.approvalPath, "Hunt approval") : undefined);
     if (!approvalValue) throw new Error("Hunt approval is missing");
-    const report = parseReport(reportValue);
+    const report = parseHuntReport(reportValue);
     const recipe = parseHuntRecipe(recipeValue);
     const trust = parseHuntRecipeTrustPolicy(trustValue);
     const approval = ApprovalReceiptSchema.parse(approvalValue);
