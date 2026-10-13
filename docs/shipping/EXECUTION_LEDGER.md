@@ -1,5 +1,39 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT Attack-Hypothesis planner contribution merged (PR #114)
+
+- **Public contribution:** Added the versioned
+  `urn:verglos:schema:hunt-attack-hypothesis` contract, deterministic planner,
+  public catalog projection, Scout-context matching, and bounded CLI command
+  `verglos hunt hypothesis <manifestPath>`. Supported, unsupported, and
+  not-attemptable results are explicit; all planned sequence steps remain
+  `not-run`.
+- **Qualification:** Shared focused hypothesis tests passed 3/3, Hunt focused
+  tests 2/2, and CLI focused hypothesis/runtime/Scout/command tests 12/12.
+  Full shared, Hunt, and CLI suites passed; build passed 7/7, typecheck 13/13,
+  and diff checks passed. Documented Docker skips remained environment-gated.
+- **Identity:** PR #114 merged normally into public `main` as
+  `6ff8c6cb3157077b3eeb6b2ca5f9754cc1f9360e`, with parents
+  `a399d00317dc495613483b934bb01f30f3ec5bb8` and
+  `7063b21fa3da0285681e2ac6289180e45f29449c`. Source commits
+  `a2c71f8db3dcdc1c3cb44279385777163e62c470` and
+  `7063b21fa3da0285681e2ac6289180e45f29449c` remain separate.
+- **Protected verification:** Self-scan run `38371072308` and matrix run
+  `38371072552` passed all eleven required checks, including in-toto and all
+  Ubuntu/macOS/Windows Node 20/22/24 cells.
+- **Boundary:** The planner consumes a bounded local Scout manifest only. It
+  does not upload source, execute project code or a recipe, grant trust,
+  entitlement, or approval, contact a provider, access customer data, write a
+  database, or establish proof. Owner authorization is not independent
+  review, provider confirmation, customer acceptance, legal clearance, or
+  final release approval.
+- **Disposition:** This advances the HUNT-008/HUNT-009 dependency chain from
+  Scout/Context to Attack-Hypothesis planning. Both counted rows remain
+  unchecked pending their complete acceptance criteria.
+- **Evidence:** `evidence/hunt-attack-hypothesis-pr114-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · HUNT Scout target manifest contribution merged (PR #113)
 
 - **Public contribution:** Added `verglos hunt scout <project> --json` and the

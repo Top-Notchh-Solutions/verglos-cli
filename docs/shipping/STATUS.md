@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT Attack-Hypothesis planner contribution merged (PR #114)
+
+Public PR #114 merged with a regular two-parent merge commit
+`6ff8c6cb3157077b3eeb6b2ca5f9754cc1f9360e`, preserving source commits
+`a2c71f8db3dcdc1c3cb44279385777163e62c470` and
+`7063b21fa3da0285681e2ac6289180e45f29449c`; no squash or force-push was used.
+The public Hunt package now maps an exact Scout finding and static target
+context to a deterministic, versioned, execution-free Attack-Hypothesis
+document, and the CLI exposes `verglos hunt hypothesis <manifestPath>` with
+bounded JSON input and explicit fail-closed statuses.
+
+Local shared, Hunt, and CLI focused tests, full package suites, build 7/7,
+typecheck 13/13, and diff checks passed. Protected self-scan run
+`38371072308`, in-toto binding, and all nine Ubuntu/macOS/Windows Node 20/22/24
+cells in run `38371072552` passed. Evidence:
+`evidence/hunt-attack-hypothesis-pr114-2026-10-13.md`.
+
+This is a Scout-to-Attack-Hypothesis implementation contribution only.
+HUNT-008 and HUNT-009 remain open for complete execution, proof/retest,
+trusted/licensed provenance, hosted entitlement, isolation, independent
+review, and final release acceptance. No checkbox changed; the score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Scout target manifest contribution merged (PR #113)
 
 Public PR #113 merged with a regular two-parent merge commit

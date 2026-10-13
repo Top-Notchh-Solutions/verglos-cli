@@ -1,5 +1,25 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-13 · HUNT Attack-Hypothesis planner checkpoint (PR #114)
+
+Public PR #114 merged normally into `main` as
+`6ff8c6cb3157077b3eeb6b2ca5f9754cc1f9360e`, preserving source commits
+`a2c71f8db3dcdc1c3cb44279385777163e62c470` and
+`7063b21fa3da0285681e2ac6289180e45f29449c`. The contribution maps an exact
+finding and Scout manifest to a deterministic public-catalog hypothesis,
+exposes bounded `verglos hunt hypothesis` CLI input, and never executes a
+recipe or establishes proof. All protected checks passed.
+
+Evidence:
+`docs/shipping/evidence/hunt-attack-hypothesis-pr114-2026-10-13.md`.
+
+This is the dependency-ready Scout-to-Attack-Hypothesis implementation slice,
+not complete HUNT-008 or HUNT-009 acceptance. Their rows remain unchecked for
+trusted/licensed provenance, hosted entitlement, authorized target execution,
+positive/negative proof and retest, isolation qualification, independent
+review, and final release acceptance. No checkbox changed; the live score
+remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Scout target manifest checkpoint (PR #113)
 
 Public PR #113 merged normally into `main` as

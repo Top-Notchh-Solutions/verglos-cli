@@ -1,5 +1,35 @@
 # Verglos V1 traceability
 
+## HUNT Attack-Hypothesis planner contribution · 2026-10-13
+
+- **Public merge:** PR #114 merged normally as
+  `6ff8c6cb3157077b3eeb6b2ca5f9754cc1f9360e`, from feature head
+  `7063b21fa3da0285681e2ac6289180e45f29449c`, with prior `main`
+  `a399d00317dc495613483b934bb01f30f3ec5bb8` as the other parent. The two
+  source commits remain separate; no squash or force-push was used.
+- **Implementation mapping:** The shared contract and Hunt runtime now map an
+  exact finding plus Scout target manifest to a fixed public playbook
+  descriptor, matching static context, proposed non-payload bindings,
+  explicit authority gates, and a deterministic digest. The CLI adds bounded
+  `hunt hypothesis` input handling and refuses subject mismatches before
+  runtime loading.
+- **Verification mapping:** Shared focused hypothesis 3/3, Hunt focused 2/2,
+  and CLI focused hypothesis/runtime/Scout/command tests 12/12 passed. Full
+  shared, Hunt, and CLI suites, build 7/7, typecheck 13/13, and diff checks
+  passed. Protected self-scan `38371072308` and platform matrix
+  `38371072552` passed all eleven required checks.
+- **Boundary:** The output is a declarative execution-free hypothesis with
+  `executes: false`; it does not run code, upload source, create trust,
+  evaluate entitlement, request approval, contact a provider, or make a proof
+  claim. Only relative manifest references are emitted. Owner authorization
+  does not substitute for independent review, provider confirmation, customer
+  acceptance, legal clearance, or release approval.
+- **Acceptance:** This advances HUNT-008/HUNT-009 Attack-Hypothesis mapping
+  only. Both rows remain unchecked for complete target execution, proof/retest,
+  trusted/licensed treatment, hosted entitlement, isolation, independent
+  review, and final release acceptance. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-attack-hypothesis-pr114-2026-10-13.md`.
+
 ## HUNT Scout target manifest contribution · 2026-10-13
 
 - **Public merge:** PR #113 merged normally as
