@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-13 · HUNT-008 prototype-pollution contribution merged (PR #110)
+
+- **Public contribution:** Added scanner rule `D1-008`, its explain-bank
+  mapping, the signed `a2-prototype-pollution-harness` catalog descriptor, a
+  sanitized vulnerable/safe target fixture, and a bounded harness with
+  positive, negative, unsupported, timeout, and adapter-failure outcomes.
+- **Qualification:** Extended the public catalog, fixture matrix, Docker
+  adapter expectations, CLI all-family test, package tests, and README for the
+  eighth A2 target family. Local scanner, Hunt, Docker, CLI, build, typecheck,
+  and diff checks passed. Protected cross-platform CI, in-toto, and Verglos
+  self-scan passed after a recorded Windows Node 20 teardown retry.
+- **Identity:** PR #110 merged normally into public `main` as
+  `65cfd8940cd9e9b219bbe10198f5c65852689f43`, from source commit
+  `34ab084db269b07095a3fc957c9e8657f195bb93`; no squash or force-push.
+- **Boundary:** Top Notchh Solutions authorized the public-safe contribution
+  and local Docker qualification. The work used only sanitized deterministic
+  fixtures; no customer source/data, secret, provider, entitlement, database,
+  Production, npm, hosted target, or customer-data write occurred.
+- **Disposition:** This is technical implementation and shipping evidence,
+  not independent AppSec review, provider confirmation, customer acceptance,
+  legal clearance, hosted entitlement, or final release acceptance. HUNT-008
+  remains unchecked pending its complete per-family and release gates.
+- **Evidence:** `evidence/hunt-a2-prototype-pollution-pr110-2026-10-13.md`.
+- **Score:** **228 checked / 52 unchecked / 280 total (81.4%)**; no checkbox
+  changed.
+
 ## 2026-10-13 · Full-product paying-value blueprint
 
 - **Research/definition:** Added the private paying-value blueprint covering

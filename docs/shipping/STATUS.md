@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-13 · HUNT-008 prototype-pollution contribution merged (PR #110)
+
+Public PR #110 merged with a regular two-parent merge commit
+`65cfd8940cd9e9b219bbe10198f5c65852689f43`, preserving source commit
+`34ab084db269b07095a3fc957c9e8657f195bb93`; no squash or force-push was used.
+The contribution adds the bounded `D1-008` prototype-pollution detector and
+explain mapping, the signed `a2-prototype-pollution-harness` catalog entry, a
+sanitized target fixture, and positive/negative/unsupported/timeout/failure
+harness coverage. The local pinned-Docker and public CLI qualifications now
+exercise the eighth A2 family.
+
+Local scanner, Hunt, build, typecheck, Docker, CLI, and diff checks passed.
+Protected Linux/macOS/Windows Node 20/22/24, in-toto, and Verglos self-scan
+checks passed after an explicitly recorded Windows Node 20 teardown retry.
+Evidence: `evidence/hunt-a2-prototype-pollution-pr110-2026-10-13.md`.
+
+This is an implementation and shipping contribution only. HUNT-008 remains
+open for complete per-family acceptance, supported-rule approval,
+trusted/licensed release treatment, hosted entitlement, required host
+qualification, independent review, and final release acceptance. No checkbox
+changed; the score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · Full-product paying-value blueprint
 
 The private product definition now covers the complete customer value chain:
