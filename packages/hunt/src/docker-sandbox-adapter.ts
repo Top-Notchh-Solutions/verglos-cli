@@ -13,6 +13,8 @@ export interface DockerSandboxAdapterOptions {
   readonly maxProcesses?: number;
   readonly diskMb?: number;
   readonly maxOutputBytes?: number;
+  /** Internal proof control for the first-party target harness only. */
+  readonly fixtureCase?: "positive" | "negative";
   readonly run?: DockerRunOptions["run"];
 }
 
@@ -32,12 +34,16 @@ export class DockerSandboxAdapter implements SandboxAdapter {
     if (input.binding.isolation !== "container") throw new Error("Docker adapter requires a recipe declaring container isolation");
     if (input.binding.network.mode !== "denied") throw new Error("Docker adapter does not support allowlisted network execution");
     if (input.binding.limits.maxNetworkRequests !== 0) throw new Error("Docker adapter requires a zero network-request budget");
+    const fixtureCase = this.options.fixtureCase;
+    if (fixtureCase !== undefined && (!isTargetHarnessCommand(input.binding.command) || input.binding.assertions.length !== 1 || input.binding.assertions[0] !== TARGET_HARNESS_ASSERTION)) {
+      throw new Error("Docker proof fixture case requires the registered target harness command");
+    }
     const executionTimeoutMs = Math.min(input.timeoutMs, input.binding.limits.timeoutMs, input.binding.limits.cpuMs);
     const invocation = buildDockerInvocation({
       projectRoot: input.projectRoot,
       image: this.options.image,
       imageDigest: this.options.imageDigest,
-      command: input.binding.command,
+      command: fixtureCase === undefined ? input.binding.command : [...input.binding.command, fixtureCase],
       // The runner pins this container to one CPU; applying the recipe CPU-ms
       // budget as an equal-or-smaller wall timeout therefore cannot exceed it.
       timeoutMs: executionTimeoutMs,
@@ -106,6 +112,10 @@ export class DockerSandboxAdapter implements SandboxAdapter {
   }
 
   async cleanup(): Promise<void> {}
+}
+
+function isTargetHarnessCommand(command: readonly string[]): boolean {
+  return command.length === 2 && command[0] === "node" && /^\/workspace\/\.verglos\/hunt\/[A-Za-z0-9-]+\.mjs$/u.test(command[1] ?? "");
 }
 
 function evaluateExitCodeAssertions(assertions: readonly string[], exitCode: number | undefined): { readonly verdict: "true" | "false"; readonly reason: string } | undefined {
