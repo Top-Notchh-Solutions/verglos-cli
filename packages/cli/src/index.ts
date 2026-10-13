@@ -27,6 +27,7 @@ import { executeHunt } from "./hunt.js";
 import { executeHuntRecipe, runHuntRecipe } from "./hunt-execute.js";
 import { executeHuntRecipeVerification } from "./hunt-recipe-verify.js";
 import { executeHuntScout } from "./hunt-scout.js";
+import { executeHuntHypothesis } from "./hunt-hypothesis.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -1003,6 +1004,22 @@ huntCommand
   .action(async (project = ".", _opts: { json?: boolean; quiet?: boolean }, command: Command) => {
     const opts = command.optsWithGlobals() as { json?: boolean; quiet?: boolean };
     process.exit(await executeHuntScout(project, opts.json, opts.quiet));
+  });
+
+huntCommand
+  .command("hypothesis <manifestPath>")
+  .description("Map an exact finding and Scout manifest to a registered playbook without executing it")
+  .requiredOption("--finding-id <id>", "Finding identity to bind")
+  .requiredOption("--rule-id <id>", "Exact scanner rule identity")
+  .requiredOption("--subject-id <id>", "Exact subject identity from Scout")
+  .option("--location <path>", "Relative finding location")
+  .option("--line <number>", "Finding line number")
+  .option("--severity <level>", "Finding severity")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (manifestPath: string, _opts: { findingId: string; ruleId: string; subjectId: string; location?: string; line?: string; severity?: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { findingId: string; ruleId: string; subjectId: string; location?: string; line?: string; severity?: string; json?: boolean; quiet?: boolean };
+    process.exit(await executeHuntHypothesis({ manifestPath, ...opts }));
   });
 
 huntCommand

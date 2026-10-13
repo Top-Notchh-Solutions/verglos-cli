@@ -205,6 +205,24 @@ source:
 verglos hunt scout . --json
 ```
 
+Use the Scout envelope to create an execution-free Attack-Hypothesis plan for
+an exact finding. The planner selects only a registered public playbook and
+reports the target references, proposed bindings, and required trust,
+entitlement, and approval gates; it never executes a command or approves
+itself:
+
+```bash
+verglos hunt hypothesis scout.json \
+  --finding-id finding-123 \
+  --rule-id D1-003 \
+  --subject-id "$VERGLOS_SUBJECT_ID" \
+  --json
+```
+
+An unsupported rule or incomplete target context is reported explicitly. A
+signed recipe, trusted feed, entitlement, approval, observation binding, and
+bounded worker are still required before any Hunt execution.
+
 The no-argument command validates the Pro capability and explains the required binding. Execution is explicit and fail-closed:
 
 ```bash
