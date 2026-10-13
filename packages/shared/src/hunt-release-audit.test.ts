@@ -118,6 +118,7 @@ const evidence = {
   sandbox: "docker",
   outcome: { findingId, verdict: "true" as const, canonicalVerdict: "confirmed" as const, reason: "The finding reproduced.", durationMs: 1000, evidenceDigest: "sha256:" + "1".repeat(64), executionStatus: "completed" as const },
   counterexample: { findingId, verdict: "false" as const, canonicalVerdict: "not-reproduced" as const, reason: "The negative control did not reproduce.", durationMs: 1000, evidenceDigest: "sha256:" + "7".repeat(64), executionStatus: "completed" as const },
+  verificationAttempt: attempt,
   proof: { status: "confirmed" as const, negativeControl: "passed" as const, limitation: "Fixture proof is bounded to a deterministic control." },
 };
 
@@ -182,6 +183,10 @@ test("Hunt release evidence schema requires a typed proof envelope", () => {
     retest: { status: "cleared", sameProof: true, limitation: "Fixture retest only." },
   }).kind, "retest");
   assert.throws(() => parseHuntReleaseEvidence({ ...evidence, execution: { ...evidence.execution, approvalRequestDigest: "sha256:bad" } }), /validation failed/);
+  assert.throws(
+    () => parseHuntReleaseEvidence({ ...evidence, verificationAttempt: undefined }),
+    (error: unknown) => error instanceof Error && "issues" in error && Array.isArray((error as { issues?: unknown }).issues) && ((error as { issues: Array<{ path: string }> }).issues.some((issue) => issue.path === "verificationAttempt")),
+  );
 });
 
 test("Hunt release audit binds exact recipe, trust, approval, finding, rule, subject, and observation identities", () => {
@@ -195,4 +200,9 @@ test("Hunt release audit binds exact recipe, trust, approval, finding, rule, sub
   const denied = auditHuntReleaseEvidence({ evidence: tampered, manifest: record.manifest, payloads: record.payloads });
   assert.equal(denied.status, "not-auditable");
   assert.match(denied.reasons.join("\n"), /exact Hunt recipe, trust policy, approval/);
+
+  const detached = { ...evidence, verificationAttempt: { ...attempt, attemptId: "urn:uuid:72345678-1234-4123-8123-123456789abc" } };
+  const detachedResult = auditHuntReleaseEvidence({ evidence: detached, manifest: record.manifest, payloads: record.payloads });
+  assert.equal(detachedResult.status, "not-auditable");
+  assert.match(detachedResult.reasons.join("\n"), /does not contain the emitted Hunt verification attempt/);
 });

@@ -2,6 +2,14 @@ import type { ApprovalReceipt, Finding, HuntExecutionBinding, HuntRecipe, HuntRe
 
 export type HuntVerdict = "true" | "false" | "not_attemptable";
 
+export interface HuntExecutionUsage {
+  readonly cpuMs: number;
+  readonly peakMemoryBytes: number;
+  readonly diskBytes: number;
+  readonly processes: number;
+  readonly networkRequests: number;
+}
+
 export interface HuntFindingOutcome {
   findingId: string;
   verdict: HuntVerdict;
@@ -26,6 +34,8 @@ export interface HuntFindingOutcome {
     processLimit: number;
     limitation: string;
   }>;
+  /** Runtime-reported usage; unavailable counters remain explicitly bounded by the producer. */
+  usage?: Readonly<HuntExecutionUsage>;
 }
 
 export interface HuntResult {

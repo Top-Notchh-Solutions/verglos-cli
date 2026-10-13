@@ -136,6 +136,11 @@ test("hunt proof replays the supported A1 fixture and emits a bounded counterexa
     assert.equal((output.proof as Record<string, unknown>).status, "confirmed");
     assert.equal((output.proof as Record<string, unknown>).negativeControl, "passed");
     assert.equal((output.counterexample as Record<string, unknown>).canonicalVerdict, "not-reproduced");
+    const attempt = output.verificationAttempt as Record<string, unknown>;
+    assert.equal(attempt.subjectId, subjectId);
+    assert.equal(attempt.observationId, "urn:uuid:b2345678-1234-4123-8123-123456789abc");
+    assert.equal(attempt.findingId, finding.id);
+    assert.equal(attempt.verdict, "confirmed");
     assert.equal(parseHuntReleaseEvidence(output).kind, "proof");
     assert.doesNotMatch(JSON.stringify(output), /fixture contains unsafe|tmp\/fixture-target/u);
   } finally {
