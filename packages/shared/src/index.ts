@@ -90,6 +90,7 @@ export * from "./agent-input-bounds.js";
 export * from "./remediation-proposal.js";
 export * from "./remediation-approval.js";
 export * from "./hunt-recipe.js";
+export * from "./hunt-target-manifest.js";
 export * from "./hunt-recipe-trust.js";
 export * from "./hunt-planner.js";
 export * from "./hunt-execution-gate.js";
