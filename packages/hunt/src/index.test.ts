@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 import { runHunt } from "./index.js";
 import { createApprovalReceipt, parseHuntRecipe, type HuntTargetManifest, type ScanResult } from "@verglos/shared";
 import { createHuntTestTrustStore, HUNT_TEST_TRUST_KEY_ID } from "./hunt-trust-test-support.js";
@@ -222,7 +223,7 @@ test("Attack Worker refuses a report without the exact hypothesis finding", asyn
   await assert.rejects(() => runSupportedHuntAttack({ hypothesis, report, recipe, trust: createHuntTestTrustStore(recipe), approval, entitlement: "hunt.critical", observationId: "urn:uuid:32345678-1234-4123-8123-123456789abc", at }), /report does not contain/);
 });
 
-test("Proof returns an explicit not-attemptable result for container recipes", async () => {
+test("Proof replays a pinned container harness and its negative control", { skip: process.env.VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION !== "1" ? "set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run container proof qualification" : false }, async () => {
   const descriptor = SUPPORTED_HUNT_RECIPE_CATALOG.find((candidate) => candidate.recipeId === "a2-sql-nosql-injection-harness");
   assert.ok(descriptor && descriptor.adapter === "container" && descriptor.imageDigest);
   const proofSubjectId = `urn:verglos:subject:artifact:sha256:${"e".repeat(64)}`;
@@ -242,22 +243,25 @@ test("Proof returns an explicit not-attemptable result for container recipes", a
   const recipe = parseHuntRecipe({
     schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: descriptor.recipeId, ruleId: descriptor.ruleId, targetSubjectId: proofSubjectId,
     imageDigest: { algorithm: "sha256", value: descriptor.imageDigest.slice("sha256:".length) }, command: [...descriptor.command], assertions: [...descriptor.assertions],
-    isolation: "container", limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 2, maxNetworkRequests: 0 }, cleanup: "always",
+    isolation: "container", limits: { timeoutMs: 10_000, cpuMs: 9_000, memoryMb: 256, diskMb: 128, outputBytes: 16_384, processes: 8, maxNetworkRequests: 0 }, cleanup: "always",
     network: { mode: "denied", destinations: [], reason: "target harness proof" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID },
   });
   const proof = await runSupportedHuntProof({
     hypothesis,
-    report: { ...report, findings: [{ id: finding.id, detector: "injection", rule: finding.ruleId, severity: finding.severity, file: finding.location, line: finding.line, title: "fixture", description: "fixture", confidence: "high", category: "injection" }] },
+    report: { ...report, projectRoot: fileURLToPath(new URL("../fixtures/target-code/", import.meta.url)), findings: [{ id: finding.id, detector: "injection", rule: finding.ruleId, severity: finding.severity, file: finding.location, line: finding.line, title: "fixture", description: "fixture", confidence: "high", category: "injection" }] },
     recipe,
     trust: createHuntTestTrustStore(recipe),
     approval: createApprovalReceipt({ requestId: "823e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: proofSubjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" }),
     entitlement: "hunt.critical", observationId: "urn:uuid:42345678-1234-4123-8123-123456789abc", at: "2026-01-01T00:02:00Z",
   });
-  assert.equal(proof.status, "not-attemptable");
-  assert.equal(proof.executes, false);
-  assert.equal(proof.proof.status, "not-attemptable");
-  assert.equal(proof.proof.negativeControl, "not-run");
-  assert.match(proof.proof.limitation, /container-backed|not attempted/u);
+  assert.equal(proof.status, "completed");
+  assert.equal(proof.executes, true);
+  assert.equal(proof.sandbox, "docker");
+  assert.equal(proof.outcome?.canonicalVerdict, "confirmed");
+  assert.equal(proof.counterexample?.canonicalVerdict, "not-reproduced");
+  assert.equal(proof.proof.status, "confirmed");
+  assert.equal(proof.proof.negativeControl, "passed");
+  assert.match(proof.proof.limitation, /pinned Docker|synthetic/u);
 });
 
 test("Hunt rejects an adapter result that widens the finding identity", async () => {

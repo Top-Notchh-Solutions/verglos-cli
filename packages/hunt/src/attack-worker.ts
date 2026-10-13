@@ -20,7 +20,8 @@ import { runHunt } from "./index.js";
 
 const WORKER_PROOF_LIMITATION = "Worker output is a candidate Hunt result; independent proof/counterexample and approved remediation retest were not run by this worker.";
 const A1_PROOF_LIMITATION = "Proof is bounded to a first-party A1 synthetic replay and deterministic negative control; it is not independent human review, target-code execution, or an approved remediation retest.";
-const CONTAINER_PROOF_LIMITATION = "Container-backed proof/counterexample was not attempted: this bounded slice requires the pinned target runtime and independent fixture review before it can claim proof.";
+const A2_PROOF_LIMITATION = "Proof is bounded to a first-party A2 reference harness in the pinned Docker boundary with a deterministic negative control; it is not independent human review, customer-target proof, or an approved remediation retest.";
+const UNSUPPORTED_PROOF_LIMITATION = "Proof was not attempted because the registered recipe adapter is unavailable in the public bounded runtime.";
 
 export interface HuntAttackWorkerInput {
   readonly hypothesis: unknown;
@@ -99,9 +100,9 @@ export async function runSupportedHuntAttack(input: HuntAttackWorkerInput): Prom
 }
 
 /**
- * Replay one supported A1 fixture and a fixed safe control through the same
- * signed execution binding. Container recipes intentionally remain explicit
- * not-attemptable until their target runtime and review evidence are ready.
+ * Replay one supported fixture and a fixed safe control through the same
+ * signed execution binding. A1 uses pure inputs; A2 uses only the registered
+ * target harness with fixed positive/negative fixture cases.
  */
 export async function runSupportedHuntProof(input: HuntAttackWorkerInput): Promise<HuntAttackProofResult> {
   const prepared = prepareSupportedHuntAttack(input);
@@ -113,20 +114,22 @@ export async function runSupportedHuntProof(input: HuntAttackWorkerInput): Promi
     observationId: prepared.input.observationId,
     execution: projectExecution(prepared.binding),
   } as const;
-  if (prepared.supported.descriptor.adapter !== "restricted-process") {
+  if (prepared.supported.descriptor.adapter !== "restricted-process" && prepared.supported.descriptor.adapter !== "container") {
     return Object.freeze({
       status: "not-attemptable" as const,
       executes: false,
       ...base,
       sandbox: "not-attemptable",
-      proof: Object.freeze({ status: "not-attemptable" as const, negativeControl: "not-run" as const, limitation: CONTAINER_PROOF_LIMITATION }),
+      proof: Object.freeze({ status: "not-attemptable" as const, negativeControl: "not-run" as const, limitation: UNSUPPORTED_PROOF_LIMITATION }),
     });
   }
 
-  const primaryResult = await executePreparedAttack(prepared);
+  const primaryResult = await executePreparedAttack(prepared, prepared.supported.descriptor.adapter === "container" ? { fixtureCase: "positive" } : undefined);
   const primary = primaryResult.outcomes[0];
   if (!primary) throw new Error("Hunt proof returned no primary outcome for the bound finding");
-  const counterexampleResult = await executePreparedAttack(prepared, deriveNegativeControlInputs(prepared.recipe));
+  const counterexampleResult = await executePreparedAttack(prepared, prepared.supported.descriptor.adapter === "container"
+    ? { fixtureCase: "negative" }
+    : { inputs: deriveNegativeControlInputs(prepared.recipe) });
   const counterexample = counterexampleResult.outcomes[0];
   if (!counterexample) throw new Error("Hunt proof returned no counterexample outcome for the bound finding");
   const projectedPrimary = projectOutcome(primary);
@@ -146,7 +149,7 @@ export async function runSupportedHuntProof(input: HuntAttackWorkerInput): Promi
     sandbox: primaryResult.sandbox,
     outcome: projectedPrimary,
     counterexample: projectedCounterexample,
-    proof: Object.freeze({ status: proofStatus as "confirmed" | "not-reproduced" | "inconclusive", negativeControl, limitation: A1_PROOF_LIMITATION }),
+    proof: Object.freeze({ status: proofStatus as "confirmed" | "not-reproduced" | "inconclusive", negativeControl, limitation: prepared.supported.descriptor.adapter === "container" ? A2_PROOF_LIMITATION : A1_PROOF_LIMITATION }),
   });
 }
 
@@ -186,11 +189,16 @@ function prepareSupportedHuntAttack(input: HuntAttackWorkerInput): PreparedHuntA
   return Object.freeze({ input, hypothesis, recipe, trust, approval, supported, finding, binding: bindHuntExecution(execution), execution });
 }
 
-async function executePreparedAttack(prepared: PreparedHuntAttack, inputs?: Readonly<Record<string, string>>): Promise<Awaited<ReturnType<typeof runHunt>>> {
+type PreparedAttackOptions = Readonly<{
+  readonly inputs?: Readonly<Record<string, string>>;
+  readonly fixtureCase?: "positive" | "negative";
+}>;
+
+async function executePreparedAttack(prepared: PreparedHuntAttack, options: PreparedAttackOptions = {}): Promise<Awaited<ReturnType<typeof runHunt>>> {
   const adapter = prepared.supported.descriptor.adapter === "restricted-process"
-    ? new RestrictedProcessAdapter(prepared.recipe, inputs === undefined ? {} : { inputs })
+    ? new RestrictedProcessAdapter(prepared.recipe, options.inputs === undefined ? {} : { inputs: options.inputs })
     : prepared.supported.descriptor.adapter === "container"
-      ? new DockerSandboxAdapter({ image: HUNT_TARGET_HARNESS_IMAGE, imageDigest: HUNT_TARGET_HARNESS_IMAGE_DIGEST })
+      ? new DockerSandboxAdapter({ image: HUNT_TARGET_HARNESS_IMAGE, imageDigest: HUNT_TARGET_HARNESS_IMAGE_DIGEST, ...(options.fixtureCase === undefined ? {} : { fixtureCase: options.fixtureCase }) })
       : undefined;
   if (!adapter) throw new Error("supported Hunt adapter is unavailable");
   return runHunt(prepared.input.report, {

@@ -92,6 +92,21 @@ test("Docker sandbox adapter classifies a bounded target-code harness result", a
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("Docker proof selects only the fixed target-harness negative fixture", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-docker-proof-control-"));
+  try {
+    const bound = binding();
+    const targetBinding = { ...bound, command: ["node", "/workspace/.verglos/hunt/sql-nosql-injection.mjs"], assertions: [TARGET_HARNESS_ASSERTION] };
+    let argv: readonly string[] = [];
+    const adapter = new DockerSandboxAdapter({ image: "docker.io/library/node", imageDigest, fixtureCase: "negative", run: async (args) => { argv = args; return { stdout: '{"verglos":"hunt-result","verdict":"not-reproduced"}', stderr: "", exitCode: 0 }; } });
+    const result = await adapter.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: targetBinding });
+    assert.equal(result.canonicalVerdict, "not-reproduced");
+    assert.equal(argv.at(-1), "negative");
+    const invalid = new DockerSandboxAdapter({ image: "docker.io/library/node", imageDigest, fixtureCase: "negative", run: async () => ({ stdout: "", stderr: "", exitCode: 0 }) });
+    await assert.rejects(() => invalid.execute({ finding, projectRoot: root, timeoutMs: 1000, binding: bound }), /target harness command/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("Docker sandbox adapter marks malformed target-code harness output unsupported", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-docker-target-harness-"));
   try {
