@@ -86,7 +86,7 @@ function signedA1Fixture(at) {
     projectType: "node",
     scannedAt: at,
     durationMs: 1,
-    findings: [{ id: "critical-1", severity: "critical", title: "packed consumer fixture", description: "bounded synthetic fixture" }],
+    findings: [{ id: "critical-1", detector: "hunt", rule: "hunt.a1.utf8-contains", severity: "critical", title: "packed consumer fixture", description: "bounded synthetic fixture" }],
   };
   const approval = createApprovalReceipt({
     requestId: "523e4567-e89b-12d3-a456-426614174000",
