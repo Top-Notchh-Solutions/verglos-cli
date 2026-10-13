@@ -95,12 +95,14 @@ release evidence remain open. The score remains **228 checked / 52 unchecked /
 
 ### 2026-10-13 A2 documentation-alignment checkpoint
 
-The public CLI/Web agent instructions are being synchronized with the
-authoritative feature matrix. They now distinguish the implemented bounded A1/
-A2 technical paths from the still-open HUNT-008 through HUNT-011 acceptance
-gates. The four Hunt roles remain controlled responsibilities in one flow, not
-four autonomous AI services. No claim of general remote DAST, complete
-customer-code coverage, or host/OS isolation is added.
+The public CLI/Web agent instructions and customer-facing Web Hunt/Attest copy
+are synchronized with the authoritative feature matrix. CLI PR #108 merged as
+`ae720bdf8b4d83cd34b0cb537c44a3dbcf3011e`; Web PR #174 merged as
+`63de97be6b180c560ef06d9cbccb62eea20beb4a`. They distinguish the implemented
+bounded A1/A2 technical paths from the still-open HUNT-008 through HUNT-011
+acceptance gates. The four Hunt roles remain controlled responsibilities in
+one flow, not four autonomous AI services. No claim of general remote DAST,
+complete customer-code coverage, or host/OS isolation is added.
 
 This is a documentation and traceability repair only. It does not close a
 backlog row or change the score. Evidence:
