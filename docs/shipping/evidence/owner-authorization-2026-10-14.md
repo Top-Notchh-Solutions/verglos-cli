@@ -10,6 +10,9 @@ is closed by this record.
 - **Organization:** Top Notchh Solutions
 - **Role:** Owner
 - **Contact:** anuragyadav.work@gmail.com
+- **Company/legal review role:** Designated company/legal reviewer for
+  company-controlled Verglos shipping decisions. This is an owner/company
+  decision record, not an outside-lawyer opinion.
 
 ## Authorization scope
 
@@ -41,6 +44,13 @@ The owner authorization removes the need for additional setup questions from
 the owner. It does **not** substitute for an independent AppSec review, legal
 opinion, provider-generated event, customer/recipient observation, field
 performance observation, or participant/adjudication evidence.
+
+No additional reviewer, operator, provider, customer, or approval identity is
+required from the owner for this goal. The only separate human identity is the
+independent Hunt AppSec reviewer, which is intentionally scheduled last. A
+competent roommate may perform that review from a separate laptop against the
+exact unreleased public CLI commit if they did not implement the reviewed Hunt
+boundary.
 
 The only additional human identity currently needed from the owner for the
 next Hunt review is a genuinely independent AppSec/security reviewer. That

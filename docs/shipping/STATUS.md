@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · standing owner authority; AppSec-last execution sequence
+
+Anurag Yadav, Owner of Top Notchh Solutions and Verglos
+(`anuragyadav.work@gmail.com`), is the standing company decision-maker and
+designated legal/company reviewer for this goal. Owner-provided decisions and
+authorizations for company-controlled Preview, fixtures, runners, recipients,
+acceptance preparation, redistribution choices, and release operations are the
+authoritative company input. Do not ask for another reviewer, operator,
+provider, customer, or approval identity merely to continue this workflow.
+
+The only separate human review identity is the independent AppSec reviewer
+for Hunt. The planned roommate review may use a separate laptop and the exact
+unreleased public CLI commit, provided the person has suitable security
+competence and did not implement the reviewed Hunt boundary. Schedule that
+review last, after all dependency-ready rows that do not depend on AppSec.
+Owner authority does not auto-check a row: record real row-specific artifacts,
+and keep provider/customer/field observations open until actually observed.
+
+This sequencing rule changes who must be asked, not the acceptance contract or
+the score. The score remains **228 checked / 52 unchecked / 280 total
+(81.4%)** until complete row criteria pass.
+
 ## 2026-10-14 · LIC-002 current-head technical recheck
 
 The exact CLI merge head has a mechanical inventory of **250 package entries /

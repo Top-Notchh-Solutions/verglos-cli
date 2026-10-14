@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · standing owner authority and AppSec-last queue policy
+
+- **Authority:** Anurag Yadav, Owner of Top Notchh Solutions and Verglos,
+  `anuragyadav.work@gmail.com`, is the designated company/legal reviewer and
+  standing decision-maker for company-controlled work in this goal.
+- **Queue rule:** Do not ask for more reviewer, operator, provider, customer,
+  or approval identities. Use owner decisions and actual row evidence to
+  advance all dependency-ready non-AppSec rows.
+- **AppSec:** The only separate human identity is the independent Hunt
+  reviewer. A competent roommate may use a separate laptop and exact
+  unreleased public CLI commit if they did not implement the reviewed Hunt
+  boundary. Schedule this review last.
+- **Truth boundary:** This policy does not close rows by permission alone and
+  does not replace observed provider/customer/field results. Score remains
+  **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-14 · LIC-002 current-head technical recheck
 
 - **Source:** CLI merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` in a

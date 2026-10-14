@@ -29,6 +29,29 @@ the Hunt execution/Docker/Linux boundary, not the whole product, and does not
 require an npm publication. Unrelated rows may continue when their own
 acceptance conditions are met; Hunt rows depending on the review remain open.
 
+## 0.0a Standing authority and AppSec-last execution rule — 2026-10-14
+
+Anurag Yadav, Owner of Top Notchh Solutions and Verglos
+(`anuragyadav.work@gmail.com`), is the standing company decision-maker and
+designated legal/company reviewer for this goal. Treat owner-provided company
+decisions and authorizations for company-controlled Preview, fixtures,
+runners, recipients, acceptance preparation, redistribution choices, and
+release operations as authoritative. Do not ask for another reviewer,
+operator, provider, customer, or approval identity merely to continue.
+
+The only separate human identity is the independent AppSec reviewer for Hunt.
+The planned roommate review may use a separate laptop and the exact
+unreleased public CLI commit, provided the reviewer is suitably
+security-competent and did not implement the reviewed Hunt boundary. Schedule
+AppSec last, after all dependency-ready rows that do not depend on it. Close
+non-AppSec rows whenever their complete row-specific evidence passes; do not
+hold them for AppSec.
+
+Owner authority does not auto-check a row and does not replace an actual
+provider, customer, field, or independent-review observation. The active
+score remains **228 checked / 52 unchecked / 280 total (81.4%)** until each
+row's complete acceptance criteria pass.
+
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
 The next dependency-ready queue item after parked `LIC-002` was
@@ -179,9 +202,10 @@ License/notice/release-verifier tests passed **14/14**, and generated notices
 are 379,981 bytes with digest
 `sha256:f2b37e1d74dc6d7927c357daf1705a1a8ae0cd0dc3837e072710d123914b6e51`.
 
-`LIC-002` remains unchecked because the legal addendum still has no reviewer
-decision, signature/reference, scope, conditions, or date. `QUAL-CLI-006` is
-the next dependency-ready assessment. No checkbox changed; score remains
+`LIC-002` remains unchecked because the designated owner/company reviewer has
+not yet recorded the exact package-scope decision, conditions,
+signature/reference, and date in the legal addendum. `QUAL-CLI-006` is the
+next dependency-ready assessment. No checkbox changed; score remains
 **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
 `evidence/lic-002-current-head-technical-recheck-2026-10-14.md`.
 
@@ -656,6 +680,13 @@ If a row depends on a real provider, repository owner, legal approver,
 independent reviewer, customer, or field observation, record the blocker
 honestly and move to the next dependency-ready implementation row. Do not
 rewrite the requirement to make the checkbox closable.
+
+For this goal, do not request another human identity when the row is
+company-controlled: use the standing owner/company authority and proceed with
+the row's actual evidence. The only deliberately deferred human identity is
+the independent Hunt AppSec reviewer, which is scheduled last. AppSec must not
+be treated as a master dependency for unrelated Web, SCM, Studio, Enterprise,
+commercial, distribution, or other rows whose own criteria can be evidenced.
 
 ## 9. Public/private, contribution, and documentation boundary
 

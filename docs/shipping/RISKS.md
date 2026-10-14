@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## 2026-10-14 · R-GOVERNANCE-OWNER-AUTH-002 repeated setup requests
+
+- **Risk:** Repeatedly asking the owner for additional reviewer or approval
+  identities could interrupt dependency-ready work and incorrectly imply that
+  every backlog row needs AppSec.
+- **Mitigation:** Treat Anurag Yadav, Owner of Top Notchh Solutions and
+  Verglos, as the standing company/legal decision-maker for company-controlled
+  work. Do not ask for additional human identities. Sequence the independent
+  Hunt AppSec review last; a competent non-implementing roommate may perform
+  it from a separate laptop against the exact unreleased public CLI commit.
+- **Boundary:** Owner authorization still does not replace an actual provider,
+  customer, field, or independent-review artifact. Close non-AppSec rows when
+  their own complete evidence exists; do not manufacture passes.
+- **Status:** Execution sequencing corrected; score remains **228/52/280
+  (81.4%)**.
+
 ## 2026-10-14 · R-LIC-002 current release inventory still needs legal review
 
 - **Risk:** A green mechanical inventory or generated notice file could be

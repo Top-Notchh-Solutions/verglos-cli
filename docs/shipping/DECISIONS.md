@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-14 · make owner authority and AppSec-last sequencing explicit
+
+- **Decision:** Treat Anurag Yadav, Owner of Top Notchh Solutions and Verglos
+  (`anuragyadav.work@gmail.com`), as the standing company decision-maker and
+  designated legal/company reviewer for this goal.
+- **Operating rule:** Do not request additional reviewer, operator, provider,
+  customer, or approval identities. Owner decisions and authorizations cover
+  company-controlled non-AppSec work; record the actual row-specific result
+  before checking any row.
+- **AppSec sequence:** The only separate human identity is the independent
+  Hunt AppSec reviewer. A competent roommate using a separate laptop may
+  perform that review if they did not implement the reviewed boundary. Run it
+  last, after all dependency-ready work that does not depend on AppSec.
+- **Boundary:** This resolves the human-input/setup question, not the evidence
+  contract. It does not turn permission into provider, customer, field, or
+  independent-review evidence. No checkbox or score change.
+
 ## 2026-10-14 · Keep LIC-002 open after current-head inventory
 
 - **Decision:** Treat the current dependency and notice output as mechanical

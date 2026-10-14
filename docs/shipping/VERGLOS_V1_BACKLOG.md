@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-14 · owner authority and AppSec-last backlog sequencing
+
+Anurag Yadav, Owner of Top Notchh Solutions and Verglos
+(`anuragyadav.work@gmail.com`), is the designated company/legal reviewer and
+standing authority for company-controlled decisions in this backlog. Do not
+ask the owner for another reviewer, operator, provider, customer, or approval
+identity. Process and close every dependency-ready row whose own acceptance
+criteria pass, regardless of the AppSec status.
+
+The only separate human identity is the independent AppSec reviewer for
+Hunt-dependent rows. A suitably security-competent roommate may perform that
+review from a separate laptop against the exact unreleased public CLI commit
+if they did not implement the reviewed Hunt boundary. Schedule AppSec last.
+This is a sequencing rule, not permission to check rows without their actual
+evidence. Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-14 · LIC-002 current-head technical recheck
 
 The exact CLI head has a mechanical inventory of **250 package entries / 254

@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-14 · owner authority and AppSec-last sequencing rule
+
+Anurag Yadav, Owner of Top Notchh Solutions and Verglos
+(`anuragyadav.work@gmail.com`), is the designated company/legal reviewer and
+standing authority for company-controlled decisions in this goal. Do not ask
+for additional reviewer, operator, provider, customer, or approval identities.
+Use the owner’s written decision plus the actual row evidence for non-AppSec
+gates. The only separate human review is the independent AppSec review of the
+Hunt execution/Docker/Linux boundary, scheduled last against the exact
+unreleased public CLI commit; a separate roommate laptop is acceptable when
+the reviewer is competent and did not implement that boundary.
+
+This does not weaken any acceptance criterion or mark rows green by permission
+alone. Progress every dependency-ready non-AppSec row first, then run the
+independent Hunt review and close only rows whose complete criteria pass.
+Score remains **228/52/280 (81.4%)**.
+
 ## 2026-10-14 · LIC-002 current-head technical boundary
 
 The current mechanical dependency inventory and notice/release-verifier tests

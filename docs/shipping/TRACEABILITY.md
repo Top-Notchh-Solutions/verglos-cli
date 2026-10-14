@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## Owner authority and AppSec-last sequencing · 2026-10-14
+
+- **Company authority:** Anurag Yadav, Owner of Top Notchh Solutions and
+  Verglos, `anuragyadav.work@gmail.com`, is the designated company/legal
+  reviewer for company-controlled decisions and evidence.
+- **Human-input rule:** No additional reviewer, operator, provider, customer,
+  or approval identity is required to continue. The only separate human
+  identity is the independent Hunt AppSec reviewer.
+- **Review mapping:** The roommate may review from a separate laptop against
+  the exact unreleased public CLI commit if suitably security-competent and
+  not an implementer of the reviewed Hunt boundary. Schedule this last.
+- **Acceptance mapping:** Owner authority clears setup questions only. Each
+  row still needs its own actual technical/provider/customer/field artifact;
+  owner permission never becomes that artifact. Score remains
+  **228/52/280 (81.4%)**.
+
 ## LIC-002 current-head technical recheck · 2026-10-14
 
 - **Source mapping:** CLI merge
