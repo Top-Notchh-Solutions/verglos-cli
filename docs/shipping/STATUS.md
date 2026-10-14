@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · fresh-laptop Hunt AppSec reviewer runbook
+
+The private Hunt AppSec runbook now starts from a reformatted laptop. The
+authoritative path is Windows WSL2 with Ubuntu and Docker Desktop’s WSL2
+integration: install WSL, verify version 2, install Docker Desktop, enable
+Ubuntu integration, install Git/curl/build tools, install Node 22 and pnpm
+9.15.9, verify the Linux Docker server, then clone the exact public review
+commit and run the pinned Hunt suite. A MacBook path is documented only for
+preliminary inspection; it cannot alone establish Linux namespace
+qualification.
+
+No GitHub token, npm credential, Vercel access, repository secret, private
+tracker, customer data, or `.env` file is required. This is readiness evidence
+only: the independent AppSec gate remains open until the separate reviewer
+returns the dated report and generated artifacts. No checkbox changed; score
+remains **229 checked / 51 unchecked / 280 total (81.8%)**. Evidence:
+`evidence/hunt-appsec-reviewer-runbook-fresh-laptop-2026-10-14.md`.
+
 ## 2026-10-14 · QUAL-WEB-006 Preview organization-route revalidation
 
 Web PR #176 was merged normally as `20fd975c404b72fed4590f3ec2425dcdb74ca1cc`,

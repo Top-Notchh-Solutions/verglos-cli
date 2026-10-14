@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · fresh-laptop Hunt AppSec reviewer runbook
+
+- **Runbook:** Expanded the private reviewer runbook with a from-zero Windows
+  WSL2/Ubuntu setup for a reformatted laptop: WSL installation and version
+  verification, Docker Desktop WSL2 integration, Ubuntu tools, Node 22,
+  pnpm 9.15.9, runtime checks, and exact public-source review handoff.
+- **Platform boundary:** The MacBook path remains preliminary only; a
+  Mac-only run cannot establish Linux namespace qualification. No second
+  reviewer environment is required.
+- **Review inputs:** The runbook preserves CLI commit
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`, pnpm `9.15.9`, Node `22.x`,
+  and the pinned Postgres image digest. No secrets or private files are
+  requested.
+- **Disposition:** Readiness/runbook evidence only. The independent AppSec
+  gate remains open until the separate reviewer returns the required signed
+  or verifiable report and generated artifacts. No checkbox or score change;
+  **229 checked / 51 unchecked / 280 total (81.8%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-appsec-reviewer-runbook-fresh-laptop-2026-10-14.md`.
+
 ## 2026-10-14 · QUAL-WEB-006 Preview organization-route revalidation
 
 - **Source:** Web contributor commit `e555cd4b3accd569dd87549399fdfe6b6210b420`,

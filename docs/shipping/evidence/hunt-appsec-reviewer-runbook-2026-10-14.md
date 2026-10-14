@@ -37,25 +37,149 @@ certification, customer acceptance, or permission to run arbitrary commands.
 ### Preferred: Windows with WSL2/Ubuntu
 
 Use the Ubuntu terminal inside WSL2, not Windows PowerShell or Command Prompt.
-Docker Desktop must be running with its WSL2 engine and Ubuntu integration
-enabled. In the Ubuntu terminal, run:
+The following is the complete from-zero setup for a reformatted Windows
+laptop. Administrator permission is needed only for Windows/WSL and Docker
+installation; the review commands themselves run as the reviewer’s normal
+Ubuntu user.
+
+#### Windows setup — run once
+
+1. Open **PowerShell as Administrator** and run:
+
+```powershell
+wsl --install -d Ubuntu
+```
+
+Restart Windows when asked. On the first Ubuntu launch, choose a Linux
+username and password. These are local laptop credentials; do not send them
+to the shipping owner.
+
+2. Open Ubuntu and update WSL. If `wsl.exe` is not found inside Ubuntu, run
+`wsl --update` once from PowerShell instead:
+
+```bash
+set -euo pipefail
+wsl.exe --update
+```
+
+Verify from PowerShell:
+
+```powershell
+wsl.exe -l -v
+```
+
+The Ubuntu row must show version `2`. If it does not, run from PowerShell:
+
+```powershell
+wsl.exe --set-version Ubuntu 2
+wsl.exe --set-default-version 2
+```
+
+3. Install Docker Desktop for Windows. From **PowerShell as Administrator**,
+either run:
+
+```powershell
+winget install --id Docker.DockerDesktop --exact
+```
+
+or download Docker Desktop from Docker’s official website. Start Docker
+Desktop, keep **Use the WSL 2 based engine** enabled, then open
+**Settings → Resources → WSL Integration** and enable integration for
+**Ubuntu**. Docker Desktop must remain running during the review.
+
+Do not install a second Docker Engine inside Ubuntu. Docker Desktop’s WSL2
+integration supplies the Docker CLI and daemon to Ubuntu.
+
+4. Close PowerShell and use a new **Ubuntu** terminal for the rest of this
+runbook. Install the basic tools:
+
+```bash
+set -euo pipefail
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl git build-essential
+```
+
+5. Install Node.js 22 through `nvm`, then enable the repository’s locked
+package-manager version:
+
+```bash
+set -euo pipefail
+curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+. "$NVM_DIR/nvm.sh"
+nvm install 22
+nvm alias default 22
+nvm use 22
+node --version
+corepack enable
+corepack prepare pnpm@9.15.9 --activate
+pnpm --version
+```
+
+The output must show Node 22.x and pnpm 9.15.9. If the next Ubuntu terminal
+does not know `nvm`, run:
+
+```bash
+export NVM_DIR="$HOME/.nvm"
+. "$NVM_DIR/nvm.sh"
+```
+
+6. Verify the review runtime before cloning the source:
 
 ```bash
 uname -srm
 docker version
+docker info --format 'Docker server: {{.ServerVersion}}; OS: {{.OSType}}; arch: {{.Architecture}}'
 ```
 
-The first command must identify a Linux kernel and the second must show both a
-Docker client and a reachable server. Then run Steps 1–5 below in that same
-Ubuntu terminal. If WSL2 or Docker integration is not already installed,
-Windows setup may require administrator approval and a restart; use the
-official Microsoft/Docker setup for WSL2 rather than improvising a different
-runtime.
+The first command must identify a Linux kernel, `docker version` must show
+both a client and a reachable server, and `docker info` must report Linux as
+the server OS. If any check fails, stop and fix the laptop setup; do not
+create a passing report from a partial run.
+
+Then run Steps 1–5 below in that same Ubuntu terminal. No GitHub token,
+repository secret, Vercel account, npm account, or private tracker access is
+needed because the review source is public.
 
 ### MacBook
 
-The MacBook may be used for source inspection and a preliminary Docker run in
-its Terminal, but the generated report must record that macOS is being used.
+The MacBook is optional. It may be used for source inspection and a
+preliminary Docker run, but the generated report must record that macOS is
+being used. If the Windows laptop is available, use Windows WSL2 for the
+authoritative review instead.
+
+For a fresh Mac preliminary setup, in Terminal run:
+
+```bash
+set -euo pipefail
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+brew install git nvm
+mkdir -p "$HOME/.nvm"
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
+nvm install 22
+nvm alias default 22
+nvm use 22
+corepack enable
+corepack prepare pnpm@9.15.9 --activate
+brew install --cask docker
+open -a Docker
+```
+
+Wait until Docker Desktop reports that it is running, then verify:
+
+```bash
+uname -srm
+node --version
+pnpm --version
+docker version
+```
+
 The repository may explicitly skip Linux namespace assertions on macOS, so a
 Mac-only run cannot by itself establish the full Linux AppSec qualification.
 For a gate-ready review, use the Windows WSL2/Ubuntu environment or an Ubuntu
@@ -67,8 +191,8 @@ the authoritative run and record any separate Mac result only as a limitation.
 
 ## Step 1 — clone the exact public source
 
-Run these commands in a fresh terminal on the reviewer’s Linux laptop or
-Ubuntu VM:
+Run these commands in the prepared Ubuntu terminal on the reviewer’s Windows
+WSL2 environment or Ubuntu VM:
 
 ```bash
 set -euo pipefail
@@ -90,11 +214,9 @@ Stop if the final line is not exactly:
 ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a
 ```
 
-## Step 2 — install the locked toolchain and verify Docker
+## Step 2 — install the locked repository dependencies and verify Docker
 
 ```bash
-corepack enable
-corepack prepare pnpm@9.15.9 --activate
 pnpm install --frozen-lockfile
 
 node --version
