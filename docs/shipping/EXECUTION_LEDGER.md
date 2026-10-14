@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · DIST-001 current-head package-surface audit
+
+- **Source:** exact public CLI merge
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`, evaluated in a detached
+  disposable worktree.
+- **Verification:** `pnpm build` passed **8/8**; package-directory contents
+  passed for **7/7** public packages; package-surface contracts passed **5/5**.
+- **Limitation:** archive packing stopped at `pnpm licenses list --json` with
+  `ERR_PNPM_MISSING_PACKAGE_INDEX_FILE` for `turbo@2.10.6`; forced install and
+  fetch did not repair the disposable pnpm store index. No archive,
+  checksum, clean-consumer, registry, or publication result is claimed from
+  this run.
+- **Disposition:** `DIST-001` remains unchecked for its LOCAL/HUNT/RECORD and
+  final package/legal acceptance dependencies. Score remains **230 checked /
+  50 unchecked / 280 total (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-current-head-package-surface-2026-10-14.md`.
+
 ## 2026-10-14 · TEAM-CLI-002 command-wiring recheck
 
 - **Source:** exact public CLI merge

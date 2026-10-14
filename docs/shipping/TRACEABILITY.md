@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## DIST-001 current-head package-surface audit · 2026-10-14
+
+- **Source mapping:** public CLI merge
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`, selected in a detached
+  disposable worktree.
+- **Technical mapping:** build **8/8**, package-directory audit **7/7**, and
+  package-surface contracts **5/5**. The checks cover the reviewed package set,
+  bounded entrypoints, install-hook absence, no implicit Trivy dependency, and
+  exclusion of the internal CLI process fixture.
+- **Limitation mapping:** the archive packer could not generate notices because
+  `pnpm licenses list --json` reported
+  `ERR_PNPM_MISSING_PACKAGE_INDEX_FILE` for `turbo@2.10.6` in the disposable
+  pnpm store. No archive or clean-consumer result is inferred.
+- **Acceptance mapping:** `DIST-001` remains unchecked for LOCAL/HUNT/RECORD
+  dependencies and final package/legal qualification. Score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/dist-001-current-head-package-surface-2026-10-14.md`.
+
 ## TEAM-CLI-002 command-wiring recheck · 2026-10-14
 
 - **Source mapping:** public CLI merge

@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · DIST-001 current-head package-surface audit
+
+The exact public CLI merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` passed
+the monorepo build **8/8**, `check-package-contents.mjs` for **7/7** public
+packages, and the package-surface contract suite **5/5**. The audit confirmed
+the reviewed package set, bounded entrypoints, no install hooks, no implicit
+Trivy dependency, and no public CLI process-fixture helper.
+
+The disposable archive-pack step was not credited: `pnpm licenses list --json`
+failed with `ERR_PNPM_MISSING_PACKAGE_INDEX_FILE` for `turbo@2.10.6` even after
+a forced install/fetch, so no new archive, checksum, or clean-consumer result
+was claimed. No workaround or publication was used.
+
+`DIST-001` remains unchecked because its LOCAL/HUNT/RECORD dependencies and
+final package/legal qualification remain open. Score remains **230 checked /
+50 unchecked / 280 total (82.1%)**. Evidence:
+`evidence/dist-001-current-head-package-surface-2026-10-14.md`.
+
 ## 2026-10-14 · TEAM-CLI-002 command-wiring recheck
 
 The exact public CLI merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`
