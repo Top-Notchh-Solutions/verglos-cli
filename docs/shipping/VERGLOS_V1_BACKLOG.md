@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-15 · HUNT recipe fixture-contract PR #127 implementation checkpoint
+
+Public CLI PR #127 merged normally as
+`fa77496b43d040fe8be977315078502e9e85b947`, preserving contribution commits
+`165aefae0ebc2bc7586ecbaf8e379ab92013a8ec` and
+`2aaba53143865886e80334c4feb852fecbb58074`; the PR was assigned to
+`anuragyadav-git`. The supported Hunt recipe catalog now exposes all five
+shared fixture outcomes and validates their expected verdicts, while the CLI
+and shared playbooks declare the unsupported outcome.
+
+Hunt, CLI, shared, typecheck, public-boundary, diff, self-scan, in-toto, and
+all 11 platform checks passed. This is a dependency-ready implementation
+slice only. HUNT-008 through HUNT-011 and QUAL-CLI-004 remain unchecked for
+supported-rule approval, trusted/licensed provenance, hosted entitlement,
+authorized targets, independent AppSec review, `.vgl` binding, and final
+acceptance. The AppSec runbook now pins the exact merge commit. No checkbox
+changed; score remains **230 checked / 50 unchecked / 280 total (82.1%)**.
+Evidence: `docs/shipping/evidence/hunt-recipe-fixture-contract-pr127-2026-10-15.md`.
+
 ## 2026-10-14 · LIC-003 / DIST-001 public PR #126 implementation checkpoint
 
 Public CLI PR #126 merged normally as

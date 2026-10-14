@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-15 · HUNT recipe fixture-contract PR #127 merged normally
+
+- **Public change:** PR #127 in `Top-Notchh-Solutions/verglos-cli` merged as
+  `fa77496b43d040fe8be977315078502e9e85b947`, preserving substantive commits
+  `165aefae0ebc2bc7586ecbaf8e379ab92013a8ec` and
+  `2aaba53143865886e80334c4feb852fecbb58074`; assignee was
+  `anuragyadav-git`.
+- **Implementation:** the supported Hunt catalog now projects all five shared
+  fixture outcomes and rejects expectation drift with `fixtures_mismatch`;
+  CLI/shared playbooks declare the unsupported outcome.
+- **Verification:** Hunt, CLI, and shared tests; Hunt and CLI typechecks;
+  public-boundary audit; diff check; and all 11 hosted self-scan, in-toto,
+  and platform-matrix checks passed.
+- **Boundary:** no squash, rebase, force-push, empty/artificial contribution
+  commit, npm publication, tag, deployment, or production operation. The
+  independent AppSec runbook now pins the exact regular merge.
+- **Disposition:** implementation progress only. HUNT-008 through HUNT-011
+  and QUAL-CLI-004 remain unchecked for their external and independent review
+  criteria. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-recipe-fixture-contract-pr127-2026-10-15.md`.
+
 ## 2026-10-14 · LIC-003 / DIST-001 public PR #126 merged normally
 
 - **Public change:** PR #126 in `Top-Notchh-Solutions/verglos-cli` merged as

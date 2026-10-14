@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-15 · HUNT recipe fixture-contract PR #127 merged normally
+
+Public CLI PR #127 merged normally as
+`fa77496b43d040fe8be977315078502e9e85b947`, preserving the two substantive
+contribution commits `165aefae0ebc2bc7586ecbaf8e379ab92013a8ec` and
+`2aaba53143865886e80334c4feb852fecbb58074`; the PR was assigned to
+`anuragyadav-git`. The supported Hunt recipe catalog now exposes and validates
+all five shared fixture outcomes, including `unsupported` / `not-supported`.
+
+Local Hunt, CLI, shared tests, targeted typechecks, public-boundary audit, and
+diff checks passed. Hosted self-scan, in-toto, and all 11 Ubuntu/macOS/Windows
+Node 20/22/24 checks passed before the regular merge. The AppSec runbook now
+pins this exact merge commit for independent review. This is implementation
+evidence only: HUNT-008 through HUNT-011 and QUAL-CLI-004 remain open for
+their supported-rule, provenance, entitlement, target, independent-review,
+`.vgl`, and final-acceptance criteria. No checkbox changed; score remains
+**230 checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`evidence/hunt-recipe-fixture-contract-pr127-2026-10-15.md`.
+
 ## 2026-10-14 · LIC-003 / DIST-001 public PR #126 merged normally
 
 Public CLI PR #126 merged normally as

@@ -3,6 +3,8 @@
 ## What this does—and does not do
 
 This is the exact private runbook for the independent Hunt security review.
+The authoritative public source is the regular merge commit from Verglos CLI
+PR #127; review that commit exactly, not an earlier branch or release tag.
 The commands only obtain and exercise the public CLI source at the exact
 review commit. They do not require an npm publication, Vercel access,
 Preview secrets, customer repositories, or the private shipping tracker.
@@ -201,8 +203,8 @@ review_root="$(mktemp -d /tmp/verglos-appsec.XXXXXX)"
 git clone https://github.com/Top-Notchh-Solutions/verglos-cli.git "$review_root/verglos-cli"
 cd "$review_root/verglos-cli"
 
-git checkout --detach ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a
-test "$(git rev-parse HEAD)" = "ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a"
+git checkout --detach fa77496b43d040fe8be977315078502e9e85b947
+test "$(git rev-parse HEAD)" = "fa77496b43d040fe8be977315078502e9e85b947"
 
 printf 'Reviewed commit: '
 git rev-parse HEAD
@@ -211,7 +213,7 @@ git rev-parse HEAD
 Stop if the final line is not exactly:
 
 ```text
-ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a
+fa77496b43d040fe8be977315078502e9e85b947
 ```
 
 ## Step 2 — install the locked repository dependencies and verify Docker

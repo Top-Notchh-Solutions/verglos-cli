@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## HUNT recipe fixture-contract PR #127 merged normally · 2026-10-15
+
+- **Source mapping:** public CLI PR #127 merged at
+  `fa77496b43d040fe8be977315078502e9e85b947`, preserving implementation
+  commit `165aefae0ebc2bc7586ecbaf8e379ab92013a8ec` and test/playbook commit
+  `2aaba53143865886e80334c4feb852fecbb58074`; `anuragyadav-git` was assigned.
+- **Contract mapping:** every supported catalog descriptor now carries the
+  shared positive, negative, timeout, infrastructure-failure, and unsupported
+  fixture outcomes; validator mappings are exact and fail closed on drift.
+- **Verification mapping:** local Hunt/CLI/shared tests and targeted
+  typechecks passed; public-boundary and diff checks passed; hosted self-scan,
+  in-toto, and all 11 platform-matrix checks passed.
+- **Acceptance mapping:** this does not close HUNT-008 through HUNT-011 or
+  QUAL-CLI-004. Supported-rule approval, trusted/licensed provenance, hosted
+  entitlement, target evidence, independent AppSec, `.vgl` binding, and final
+  acceptance remain open. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/hunt-recipe-fixture-contract-pr127-2026-10-15.md`.
+
 ## LIC-003 / DIST-001 public PR #126 merged normally · 2026-10-14
 
 - **Source mapping:** public CLI PR #126 merged at
