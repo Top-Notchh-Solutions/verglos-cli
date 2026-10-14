@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · TEAM-CLI-001 repository-policy route hardening merged (Web PR #175)
+
+Web PR #175 merged normally as `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`,
+preserving contribution commit `aace29cf223f41532403fd4e03666b6f68ac3fb3`.
+The policy route now fails closed with private 503 output when database
+initialization fails. Focused route contracts passed 8/8; full Web passed 876
+with 24 explicit skips and 0 failures; TypeScript, build, hosted Verify
+`38538138834`, Vercel, GitGuardian, SBOM, license, public-boundary, and
+tracked-secret checks passed. No squash or artificial activity was used.
+
+This is implementation progress only. TEAM-CLI-001 remains open for hosted
+provider/repository binding and signed policy fetch/cache/offline evidence.
+No checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence:
+`evidence/team-cli-001-policy-route-initialization-hardening-2026-10-14.md`.
+
 ## 2026-10-14 · owner authorization recorded; independent Hunt review pending
 
 Anurag Yadav, Owner of Top Notchh Solutions

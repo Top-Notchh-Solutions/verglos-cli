@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 policy-route initialization hardening · 2026-10-14
+
+- **Public PR:** [#175](https://github.com/anuragyadav-git/verglos-web/pull/175)
+  merged normally as `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`, preserving
+  contribution commit `aace29cf223f41532403fd4e03666b6f68ac3fb3`.
+- **Implementation:** database initialization failure in the
+  repository-bound organization-policy route is now a private 503 fail-closed
+  result; SCM contract coverage asserts the full route boundary and no secret
+  projection/logging path.
+- **Verification:** focused route contracts 8/8; full Web 876 passed, 24
+  explicit skips, 0 failed; TypeScript, production build, hosted Verify
+  `38538138834`, Vercel, Preview Comments, GitGuardian, dependency/SBOM/
+  license/public-boundary/tracked-secret checks passed.
+- **Boundary:** code-side progress only. No provider installation, repository
+  binding, policy row, production database, credential, npm publication, or
+  production deployment changed.
+- **Acceptance:** TEAM-CLI-001 remains unchecked until its hosted signer,
+  trust-root, provider/binding, signed fetch/cache/offline/cross-tenant, and
+  remaining row criteria are evidenced. No squash, rebase, force-push, or
+  artificial contribution activity. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/team-cli-001-policy-route-initialization-hardening-2026-10-14.md`.
+
 ## Owner authorization and independent-review boundary · 2026-10-14
 
 - **Owner:** Anurag Yadav, Top Notchh Solutions, Owner,

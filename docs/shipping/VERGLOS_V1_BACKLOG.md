@@ -1,5 +1,28 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-14 · TEAM-CLI-001 repository-policy route hardening (Web PR #175)
+
+Public Web PR #175 merged normally as
+`a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`, preserving contribution commit
+`aace29cf223f41532403fd4e03666b6f68ac3fb3`; no squash, rebase, force-push,
+or artificial activity was used. The repository-bound organization-policy
+route now returns the documented private `503 policy unavailable` response
+when database initialization fails, and the SCM contract suite covers the
+complete auth, tenant, repository, policy, signer, digest, cache, and
+fail-closed boundary.
+
+Focused route contracts passed 8/8; the full Web suite passed 876 with 24
+explicit skips and 0 failures; TypeScript, production build, hosted Verify
+run `38538138834`, Vercel Preview, Preview Comments, GitGuardian, dependency,
+SBOM, license, public-boundary, and tracked-secret checks passed. Evidence:
+`docs/shipping/evidence/team-cli-001-policy-route-initialization-hardening-2026-10-14.md`.
+
+This is code-side TEAM-CLI-001 progress only. Provider installation and
+repository binding, published Preview policy, authenticated signed CLI
+fetch/cache/offline/cross-tenant evidence, and other row acceptance criteria
+remain open. No checkbox changed; score remains **228 checked / 52 unchecked /
+280 total (81.4%)**.
+
 ## 2026-10-14 · owner authorization and AppSec review scheduling boundary
 
 Anurag Yadav, Owner of Top Notchh Solutions, authorized the bounded shipping

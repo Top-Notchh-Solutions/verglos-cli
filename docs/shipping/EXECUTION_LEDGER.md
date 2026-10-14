@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · TEAM-CLI-001 repository-policy route hardening merged
+
+- **Public contribution:** Web PR #175 adds a fail-closed database
+  initialization boundary to the repository-bound organization-policy route
+  and expands the existing SCM contract test to cover auth, tenant, active
+  GitHub repository binding, canonical published policy, signer/digest
+  binding, private headers, and no secret/logging path.
+- **Identity:** contribution commit
+  `aace29cf223f41532403fd4e03666b6f68ac3fb3` was preserved in normal merge
+  commit `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`. No squash, rebase,
+  force-push, empty commit, or artificial contribution activity.
+- **Verification:** focused route contracts 8/8; full Web 876 passed, 24
+  explicit skips, 0 failed; TypeScript, production build, hosted Verify
+  `38538138834`, Vercel Preview, Preview Comments, GitGuardian, dependency,
+  SBOM, license, public-boundary, and tracked-secret checks passed.
+- **Boundary:** implementation/qualification only. No provider installation,
+  repository binding, policy row, production database, secret, npm publish,
+  or production deployment changed.
+- **Disposition:** TEAM-CLI-001 remains open for hosted provider and policy
+  evidence. No checkbox or score change; **228 checked / 52 unchecked / 280
+  total (81.4%)**.
+- **Evidence:** `evidence/team-cli-001-policy-route-initialization-hardening-2026-10-14.md`.
+
 ## 2026-10-14 · owner authorization and review boundary recorded
 
 - **Owner authorization:** Anurag Yadav, Owner of Top Notchh Solutions,
