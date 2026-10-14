@@ -129,6 +129,10 @@ function relativeEndpointFor(apiUrl: string, path: string): string {
   return `${apiUrl}${path}`;
 }
 
+function isAbortError(error: unknown): boolean {
+  return error instanceof Error && error.name === "AbortError";
+}
+
 function parseSourceFreeResult(value: unknown): PrivateRunnerResult {
   if (typeof value !== "object" || value === null || Array.isArray(value)) throw new Error("private runner result must be an object");
   const record = value as Record<string, unknown>;
@@ -175,47 +179,49 @@ export async function pollPrivateRunnerJob(input: Readonly<{
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), input.timeoutMs ?? DEFAULT_TIMEOUT_MS);
-  let response: Response;
   try {
-    response = await (input.fetchImpl ?? fetch)(endpoint, {
-      method: "GET",
-      headers: { Accept: "application/json", Authorization: `Bearer ${creds.licenseKey}` },
-      signal: controller.signal,
+    let response: Response;
+    try {
+      response = await (input.fetchImpl ?? fetch)(endpoint, {
+        method: "GET",
+        headers: { Accept: "application/json", Authorization: `Bearer ${creds.licenseKey}` },
+        signal: controller.signal,
+      });
+    } catch {
+      return { status: "error", endpoint, reason: "network" };
+    }
+    const contentLength = Number(response.headers.get("content-length") ?? "0");
+    if (Number.isFinite(contentLength) && contentLength > MAX_RESPONSE_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
+    let body: unknown;
+    try {
+      const bytes = await response.arrayBuffer();
+      if (bytes.byteLength > MAX_RESPONSE_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
+      body = JSON.parse(new TextDecoder().decode(bytes));
+    } catch (error) {
+      return { status: "error", endpoint, reason: isAbortError(error) ? "network" : "invalid_json" };
+    }
+    if (!response.ok) return { status: "error", endpoint, reason: "http" };
+    let job: PrivateRunnerJob | null;
+    try { job = parseJobResponse(body); } catch { return { status: "denied", endpoint, reason: "invalid_response" }; }
+    if (!job) return { status: "empty", endpoint };
+    if (!verifyPrivateRunnerJobSignature(job, trustedKey)) return { status: "denied", endpoint, reason: "invalid_signature" };
+    if (replay.jobIds.includes(job.jobId) || replay.nonces.includes(job.nonce)) return { status: "denied", endpoint, reason: "replayed_local" };
+    const admission = admitPrivateRunnerJob({
+      job,
+      tenantId: input.tenantId,
+      runnerId: input.runnerId,
+      now: input.now ?? new Date().toISOString(),
+      allowedTargets: new Set(input.allowedTargets),
+      trustedPublicKeyPem: trustedKey,
+      replayedJobIds: new Set(replay.jobIds),
     });
-  } catch {
-    return { status: "error", endpoint, reason: "network" };
+    if (!admission.admitted) return { status: "denied", endpoint, reason: admission.reason };
+    try { await writeReplay(input.replayPath ?? defaultReplayPath(), rememberReplay(replay, job)); }
+    catch { return { status: "error", endpoint, reason: "invalid_input" }; }
+    return { status: "ready", endpoint, job, jobDigest: privateRunnerJobDigest(job) };
   } finally {
     clearTimeout(timer);
   }
-  const contentLength = Number(response.headers.get("content-length") ?? "0");
-  if (Number.isFinite(contentLength) && contentLength > MAX_RESPONSE_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
-  let body: unknown;
-  try {
-    const bytes = await response.arrayBuffer();
-    if (bytes.byteLength > MAX_RESPONSE_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
-    body = JSON.parse(new TextDecoder().decode(bytes));
-  } catch {
-    return { status: "error", endpoint, reason: "invalid_json" };
-  }
-  if (!response.ok) return { status: "error", endpoint, reason: "http" };
-  let job: PrivateRunnerJob | null;
-  try { job = parseJobResponse(body); } catch { return { status: "denied", endpoint, reason: "invalid_response" }; }
-  if (!job) return { status: "empty", endpoint };
-  if (!verifyPrivateRunnerJobSignature(job, trustedKey)) return { status: "denied", endpoint, reason: "invalid_signature" };
-  if (replay.jobIds.includes(job.jobId) || replay.nonces.includes(job.nonce)) return { status: "denied", endpoint, reason: "replayed_local" };
-  const admission = admitPrivateRunnerJob({
-    job,
-    tenantId: input.tenantId,
-    runnerId: input.runnerId,
-    now: input.now ?? new Date().toISOString(),
-    allowedTargets: new Set(input.allowedTargets),
-    trustedPublicKeyPem: trustedKey,
-    replayedJobIds: new Set(replay.jobIds),
-  });
-  if (!admission.admitted) return { status: "denied", endpoint, reason: admission.reason };
-  try { await writeReplay(input.replayPath ?? defaultReplayPath(), rememberReplay(replay, job)); }
-  catch { return { status: "error", endpoint, reason: "invalid_input" }; }
-  return { status: "ready", endpoint, job, jobDigest: privateRunnerJobDigest(job) };
 }
 
 /** Upload only the shared least-evidence result projection; this function never uploads raw output. */
@@ -237,34 +243,36 @@ export async function uploadPrivateRunnerResult(input: Readonly<{
   if (Buffer.byteLength(body, "utf8") > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "invalid_input" };
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), input.timeoutMs ?? DEFAULT_TIMEOUT_MS);
-  let response: Response;
   try {
-    response = await (input.fetchImpl ?? fetch)(endpoint, {
-      method: "POST",
-      headers: { Accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${creds.licenseKey}` },
-      body,
-      signal: controller.signal,
-    });
-  } catch {
-    return { status: "error", endpoint, reason: "network" };
+    let response: Response;
+    try {
+      response = await (input.fetchImpl ?? fetch)(endpoint, {
+        method: "POST",
+        headers: { Accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${creds.licenseKey}` },
+        body,
+        signal: controller.signal,
+      });
+    } catch {
+      return { status: "error", endpoint, reason: "network" };
+    }
+    const contentLength = Number(response.headers.get("content-length") ?? "0");
+    if (Number.isFinite(contentLength) && contentLength > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
+    let value: unknown;
+    try {
+      const bytes = await response.arrayBuffer();
+      if (bytes.byteLength > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
+      value = JSON.parse(new TextDecoder().decode(bytes));
+    } catch (error) {
+      return { status: "error", endpoint, reason: isAbortError(error) ? "network" : "invalid_json" };
+    }
+    if (!response.ok || typeof value !== "object" || value === null || (value as Record<string, unknown>).ok !== true || typeof (value as Record<string, unknown>).resultDigest !== "string") {
+      return { status: "error", endpoint, reason: "http" };
+    }
+    const record = value as Record<string, unknown>;
+    return { status: "uploaded", endpoint, resultDigest: record.resultDigest as string, idempotent: record.idempotent === true };
   } finally {
     clearTimeout(timer);
   }
-  const contentLength = Number(response.headers.get("content-length") ?? "0");
-  if (Number.isFinite(contentLength) && contentLength > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
-  let value: unknown;
-  try {
-    const bytes = await response.arrayBuffer();
-    if (bytes.byteLength > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
-    value = JSON.parse(new TextDecoder().decode(bytes));
-  } catch {
-    return { status: "error", endpoint, reason: "invalid_json" };
-  }
-  if (!response.ok || typeof value !== "object" || value === null || (value as Record<string, unknown>).ok !== true || typeof (value as Record<string, unknown>).resultDigest !== "string") {
-    return { status: "error", endpoint, reason: "http" };
-  }
-  const record = value as Record<string, unknown>;
-  return { status: "uploaded", endpoint, resultDigest: record.resultDigest as string, idempotent: record.idempotent === true };
 }
 
 export function privateRunnerResultSummary(result: PrivateRunnerPollResult): unknown {

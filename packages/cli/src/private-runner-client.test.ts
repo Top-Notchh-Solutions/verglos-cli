@@ -27,6 +27,35 @@ function makeJob(privateKey: ReturnType<typeof generateKeyPairSync>["privateKey"
   return { ...unsigned, signature: sign(null, privateRunnerJobSigningBytes(unsigned), privateKey).toString("base64") };
 }
 
+function abortError(): Error {
+  const error = new Error("response body timed out");
+  error.name = "AbortError";
+  return error;
+}
+
+function responseThatWaitsForAbort(signal: AbortSignal): Response {
+  return {
+    ok: true,
+    headers: new Headers(),
+    arrayBuffer: async () => {
+      if (signal.aborted) throw abortError();
+      await new Promise<never>((_resolve, reject) => signal.addEventListener("abort", () => reject(abortError()), { once: true }));
+    },
+  } as unknown as Response;
+}
+
+async function withDeadline<T>(promise: Promise<T>, timeoutMs = 250): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise<T>((_resolve, reject) => { timer = setTimeout(() => reject(new Error("test deadline exceeded")), timeoutMs); }),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 test("private runner poll uses authenticated GET, verifies, admits, and persists only replay state", async () => {
   const keys = generateKeyPairSync("ed25519");
   const root = await mkdtemp(join(tmpdir(), "verglos-runner-fixture-"));
@@ -78,6 +107,17 @@ test("private runner poll rejects malformed signatures before admission", async 
   assert.equal(result.status === "denied" ? result.reason : "", "invalid_signature");
 });
 
+test("private runner poll keeps its timeout active while reading a response body", async () => {
+  const keys = generateKeyPairSync("ed25519");
+  const root = await mkdtemp(join(tmpdir(), "verglos-runner-body-timeout-"));
+  const keyPath = join(root, "runner-public.pem");
+  await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
+  await mkdir(join(home, ".verglos"), { recursive: true });
+  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
+  const result = await withDeadline(pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath: join(root, "replay.json"), timeoutMs: 10, fetchImpl: async (_input, init) => responseThatWaitsForAbort(init?.signal as AbortSignal) }));
+  assert.deepEqual(result, { status: "error", endpoint: "https://example.test/api/v1/private-runner/jobs?tenant_id=org_acme&runner_id=runner_1", reason: "network" });
+});
+
 test("private runner result upload uses authenticated POST and sends only the shared projection", async () => {
   const result = {
     protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
@@ -101,4 +141,13 @@ test("private runner result upload refuses malformed projections before network"
   const response = await uploadPrivateRunnerResult({ result: { protocolVersion: "1.0.0", jobId: "job_1", command: "rm -rf" }, fetchImpl: async () => { called = true; return new Response(); } });
   assert.deepEqual(response, { status: "error", reason: "invalid_result" });
   assert.equal(called, false);
+});
+
+test("private runner result upload keeps its timeout active while reading a response body", async () => {
+  const result = {
+    protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
+    startedAt: "2026-10-06T00:01:00.000Z", finishedAt: "2026-10-06T00:01:01.000Z", evidenceDigest: `sha256:${"b".repeat(64)}`, findingCount: 2, coverage: "complete",
+  } as const;
+  const response = await withDeadline(uploadPrivateRunnerResult({ result, timeoutMs: 10, fetchImpl: async (_input, init) => responseThatWaitsForAbort(init?.signal as AbortSignal) }));
+  assert.deepEqual(response, { status: "error", endpoint: "https://example.test/api/v1/private-runner/results", reason: "network" });
 });
