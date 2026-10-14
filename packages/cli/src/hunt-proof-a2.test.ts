@@ -13,6 +13,13 @@ import type { HuntRuntimeLoader } from "./hunt-runtime.js";
 
 const subjectId = `urn:verglos:subject:artifact:sha256:${"f".repeat(64)}`;
 const at = new Date().toISOString();
+const fixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "environment-error" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
 const finding = { id: "finding-proof-a2", ruleId: "D1-001", location: "app.js", line: 1, severity: "high" as const };
 const manifest: HuntTargetManifest = {
   schemaId: "urn:verglos:schema:hunt-target-manifest",
@@ -28,6 +35,7 @@ const hypothesis = planSupportedHuntAttack({ manifest, finding });
 const recipe = parseHuntRecipe({
   schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "a2-sql-nosql-injection-harness", ruleId: finding.ruleId, targetSubjectId: subjectId,
   imageDigest: { algorithm: "sha256", value: HUNT_TARGET_HARNESS_IMAGE_DIGEST.slice("sha256:".length) }, command: ["node", "/workspace/.verglos/hunt/sql-nosql-injection.mjs"], assertions: [TARGET_HARNESS_ASSERTION],
+  fixtures,
   isolation: "container", limits: { timeoutMs: 10_000, cpuMs: 9_000, memoryMb: 256, diskMb: 128, outputBytes: 16_384, processes: 8, maxNetworkRequests: 0 }, cleanup: "always",
   network: { mode: "denied", destinations: [], reason: "A2 local reference harness" }, redaction: "required", signature: { status: "verified", signer: TEST_HUNT_TRUST_KEY_ID },
 });

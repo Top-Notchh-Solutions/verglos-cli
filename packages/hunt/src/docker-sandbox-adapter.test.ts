@@ -12,9 +12,16 @@ import { TARGET_HARNESS_ASSERTION } from "./target-harness.js";
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
 const imageDigest = `sha256:${"b".repeat(64)}`;
 const finding = { id: "critical-1", severity: "critical", title: "critical", description: "x", detector: "deep-auth", confidence: "certain", category: "auth" } as never;
+const fixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "environment-error" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
 
 function binding() {
-  const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "docker-adapter", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10000, processes: 32, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID } });
+  const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "docker-adapter", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], fixtures, isolation: "container", limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10000, processes: 32, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID } });
   const approval = createApprovalReceipt({ requestId: "623e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: subjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
   return bindHuntExecution({ recipe, trust: createHuntTestTrustStore(recipe), approval, ruleId: "d1-1", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", at: "2026-01-01T00:02:00Z" });
 }

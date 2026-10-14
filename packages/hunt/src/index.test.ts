@@ -22,7 +22,14 @@ const report = {
 } as unknown as ScanResult;
 
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
-const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-runner", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], isolation: "container", limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10000, processes: 32, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID } });
+const fixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "environment-error" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
+const recipe = parseHuntRecipe({ schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "hunt-runner", ruleId: "d1-1", targetSubjectId: subjectId, imageDigest: { algorithm: "sha256", value: "b".repeat(64) }, command: ["/probe"], assertions: ["exit code is 0"], fixtures, isolation: "container", limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10000, processes: 32, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID } });
 const execution = {
   recipe,
   trust: createHuntTestTrustStore(recipe),
@@ -145,6 +152,7 @@ test("Attack Worker consumes the exact hypothesis and preserves proof/counterexa
     imageDigest: { algorithm: "sha256", value: "c".repeat(64) },
     command: ["verglos-probe", "utf8-contains"],
     assertions: ["probe result is true"],
+    fixtures,
     inputs: { needle: "unsafe", value: "fixture contains unsafe" },
     isolation: "restricted-process",
     limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 },
@@ -220,7 +228,7 @@ test("Attack Worker refuses a report without the exact hypothesis finding", asyn
   const hypothesis = planSupportedHuntAttack({ manifest: manifest as unknown as HuntTargetManifest, finding: { id: "finding-worker", ruleId: "hunt.a1.utf8-contains" } });
   const recipe = parseHuntRecipe({
     schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "a1-utf8-contains", ruleId: "hunt.a1.utf8-contains", targetSubjectId: workerSubjectId,
-    imageDigest: { algorithm: "sha256", value: "e".repeat(64) }, command: ["verglos-probe", "utf8-contains"], assertions: ["probe result is true"], inputs: { needle: "x", value: "x" }, isolation: "restricted-process",
+  imageDigest: { algorithm: "sha256", value: "e".repeat(64) }, command: ["verglos-probe", "utf8-contains"], assertions: ["probe result is true"], fixtures, inputs: { needle: "x", value: "x" }, isolation: "restricted-process",
     limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "fixture" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID },
   });
   const at = "2026-01-01T00:02:00Z";
@@ -243,7 +251,7 @@ test("Hunt retest binds an approved remediation scope and clears a fixed A1 subj
   });
   const afterRecipe = parseHuntRecipe({
     schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "a1-utf8-contains", ruleId: finding.ruleId, targetSubjectId: afterSubjectId,
-    imageDigest: { algorithm: "sha256", value: "f".repeat(64) }, command: ["verglos-probe", "utf8-contains"], assertions: ["probe result is true"], inputs: { needle: "unsafe", value: "safe fixture after remediation" }, isolation: "restricted-process",
+  imageDigest: { algorithm: "sha256", value: "f".repeat(64) }, command: ["verglos-probe", "utf8-contains"], assertions: ["probe result is true"], fixtures, inputs: { needle: "unsafe", value: "safe fixture after remediation" }, isolation: "restricted-process",
     limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "A1 pure probe" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID },
   });
   const remediation = {
@@ -293,7 +301,7 @@ test("Proof replays a pinned container harness and its negative control", { skip
   });
   const recipe = parseHuntRecipe({
     schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: descriptor.recipeId, ruleId: descriptor.ruleId, targetSubjectId: proofSubjectId,
-    imageDigest: { algorithm: "sha256", value: descriptor.imageDigest.slice("sha256:".length) }, command: [...descriptor.command], assertions: [...descriptor.assertions],
+    imageDigest: { algorithm: "sha256", value: descriptor.imageDigest.slice("sha256:".length) }, command: [...descriptor.command], assertions: [...descriptor.assertions], fixtures,
     isolation: "container", limits: { timeoutMs: 10_000, cpuMs: 9_000, memoryMb: 256, diskMb: 128, outputBytes: 16_384, processes: 8, maxNetworkRequests: 0 }, cleanup: "always",
     network: { mode: "denied", destinations: [], reason: "target harness proof" }, redaction: "required", signature: { status: "verified", signer: HUNT_TEST_TRUST_KEY_ID },
   });

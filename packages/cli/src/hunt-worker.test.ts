@@ -12,6 +12,13 @@ import { executeHuntProof } from "./hunt-proof.js";
 const subjectId = createSubjectId({ kind: "artifact", digest: { algorithm: "sha256", value: "f".repeat(64) }, size: 10, mediaType: "application/octet-stream" });
 const at = new Date().toISOString();
 const localHuntRuntime: HuntRuntimeLoader = () => import("../../hunt/dist/index.js");
+const recipeFixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "environment-error" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
 const manifest: HuntTargetManifest = {
   schemaId: "urn:verglos:schema:hunt-target-manifest",
   schemaVersion: "1.0.0",
@@ -49,6 +56,7 @@ const recipe = parseHuntRecipe({
   imageDigest: { algorithm: "sha256", value: "a".repeat(64) },
   command: ["verglos-probe", "utf8-contains"],
   assertions: ["probe result is true"],
+  fixtures: recipeFixtures,
   inputs: { needle: "unsafe", value: "fixture contains unsafe" },
   isolation: "restricted-process",
   limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 },

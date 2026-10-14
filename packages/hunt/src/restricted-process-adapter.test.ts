@@ -6,6 +6,13 @@ import { createHuntTestTrustStore, HUNT_TEST_TRUST_KEY_ID } from "./hunt-trust-t
 
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
 const finding = { id: "critical-1", severity: "critical", title: "critical", description: "fixture", detector: "deep-auth", confidence: "certain", category: "auth" } as never;
+const fixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "environment-error" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
 
 function recipe(inputs: Readonly<Record<string, string>> = { value: "synthetic-safe-value", needle: "safe" }): HuntRecipe {
   return parseHuntRecipe({
@@ -17,6 +24,7 @@ function recipe(inputs: Readonly<Record<string, string>> = { value: "synthetic-s
     imageDigest: { algorithm: "sha256", value: "b".repeat(64) },
     command: ["verglos-probe", "utf8-contains"],
     assertions: ["probe result is true"],
+    fixtures,
     inputs,
     isolation: "restricted-process",
     limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 1, outputBytes: 128, processes: 1, maxNetworkRequests: 0 },
