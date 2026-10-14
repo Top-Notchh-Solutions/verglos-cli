@@ -157,7 +157,21 @@ The independent AppSec reviewer remains a separate Hunt-only gate. Owner
 authorization does not substitute for that review, and the review is not
 needed to create the GitHub App or qualify the unrelated SCM contract.
 
-## 0.7 Previous shipping checkpoint — 2026-10-13
+## 0.7 Current STUDIO-CLI-001 code-side checkpoint — 2026-10-14
+
+The exact CLI/Web merged heads passed shared client projection **4/4**, CLI
+projection/record-project **5/5**, the full CLI package test command (exit 0),
+Web client/tenant/receipt/Studio contracts **62 pass / 1 explicit database
+skip / 0 fail**, and Web typecheck. This confirms the local allowlist,
+tenant/workspace/record/digest/approval binding and fail-closed refusal paths.
+
+`STUDIO-CLI-001` remains unchecked because hosted recipient-side redaction and
+authorized Studio customer acceptance have not been observed. `LIC-002` is the
+next dependency-ready assessment. No checkbox changed; score remains **228
+checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/studio-cli-001-current-head-recheck-2026-10-14.md`.
+
+## 0.8 Previous shipping checkpoint — 2026-10-13
 
 PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after
 all eleven protected checks passed, preserving contribution commit

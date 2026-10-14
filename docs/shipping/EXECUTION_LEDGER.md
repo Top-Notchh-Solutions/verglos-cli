@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · STUDIO-CLI-001 current merged-head recheck
+
+- **Sources:** CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`, both in disposable worktrees.
+- **Verification:** shared projection **4/4**; CLI projection/record-project
+  **5/5**; full CLI package command exit **0**; Web Studio/tenant/receipt
+  contracts **62 pass / 1 explicit database skip / 0 fail**; Web typecheck
+  passed.
+- **Disposition:** code-side evidence only. `STUDIO-CLI-001` remains open for
+  independent hosted-recipient redaction proof and authorized recipient/
+  customer acceptance. `LIC-002` is the next dependency-ready item. No
+  checkbox or score change; **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-current-head-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · TEAM-CLI-001 Preview provider-readiness audit
 
 - **Source:** Web merge `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`; linked

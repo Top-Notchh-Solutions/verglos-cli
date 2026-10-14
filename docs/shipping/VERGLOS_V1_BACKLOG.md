@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-14 · STUDIO-CLI-001 current merged-head recheck
+
+The exact current CLI/Web heads pass the shared projection **4/4**, CLI
+projection/record-project **5/5**, full CLI package command, Web
+client/tenant/receipt/Studio contracts **62 pass / 1 explicit database skip /
+0 fail**, and Web typecheck. `STUDIO-CLI-001` remains unchecked for
+independent hosted-recipient redaction proof and authorized recipient/customer
+acceptance. `LIC-002` is the next dependency-ready row; no checkbox changed and
+the score remains **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-current-head-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · TEAM-CLI-001 Preview provider-readiness audit
 
 The read-only Vercel/GitHub audit confirms Preview signer/test-auth key names

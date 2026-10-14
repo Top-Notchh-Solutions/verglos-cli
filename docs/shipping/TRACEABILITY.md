@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 current merged-head recheck · 2026-10-14
+
+- **Source mapping:** CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`, selected in disposable
+  worktrees.
+- **Implementation mapping:** the CLI allowlisted projection and exact
+  approval/digest binding, plus the Web tenant-scoped receipt projection,
+  remain present at the current heads.
+- **Verification mapping:** shared **4/4**, CLI **5/5**, full CLI package exit
+  0, Web **62 pass / 1 explicit database skip / 0 fail**, and Web typecheck
+  passed.
+- **Acceptance mapping:** recipient-side redaction observation and authorized
+  customer acceptance are still missing. `STUDIO-CLI-001` remains unchecked;
+  `LIC-002` is next. Score remains **228/52/280 (81.4%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-current-head-recheck-2026-10-14.md`.
+
 ## TEAM-CLI-001 Preview provider-readiness audit · 2026-10-14
 
 - **Source mapping:** Web merge

@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · STUDIO-CLI-001 current merged-head recheck
+
+The exact merged heads passed shared client projection **4/4**, CLI projection
+and record-project **5/5**, the full CLI package command (exit 0), Web
+client/tenant/receipt/Studio contracts **62 passed / 1 explicit database skip /
+0 failed**, and Web typecheck. The projection remains allowlisted,
+tenant/workspace/record/digest/approval bound, and fail-closed for private,
+cross-tenant, unknown, nested, drifted, and expired inputs.
+
+This is code-side evidence only. `STUDIO-CLI-001` remains open for independent
+hosted-recipient redaction proof and a real authorized Studio recipient/customer
+acceptance run. `LIC-002` is next after this parked external item. No checkbox
+changed; score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+Evidence: `evidence/studio-cli-001-current-head-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · TEAM-CLI-001 Preview provider-readiness audit
 
 The read-only Vercel/GitHub audit against Web merge

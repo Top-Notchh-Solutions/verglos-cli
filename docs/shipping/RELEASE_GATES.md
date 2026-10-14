@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-14 · STUDIO-CLI-001 current-head boundary
+
+Current exact CLI/Web heads pass the local projection, receipt, Studio
+contract, and typecheck suites, but this does not establish what an external
+recipient receives. Keep `STUDIO-CLI-001` open for independent hosted-redaction
+proof and authorized customer acceptance. The strict queue now moves to
+`LIC-002` for its separate legal/provenance assessment. Score remains
+**228/52/280 (81.4%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-current-head-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · TEAM-CLI-001 Preview provider-readiness boundary
 
 The read-only Vercel/GitHub audit found the Preview policy signer and test-auth

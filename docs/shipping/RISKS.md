@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## 2026-10-14 · R-STUDIO-CLI-001 recipient boundary remains unobserved
+
+- **Risk:** A passing local projection/receipt contract could be mistaken for
+  proof that the external Studio recipient receives only the approved fields.
+- **Mitigation:** Keep the row unchecked until an authorized synthetic or real
+  recipient receives the hosted projection, the observed redacted payload is
+  reviewed independently, and customer acceptance is recorded. Do not upload
+  source or edit custody rows directly.
+- **Status:** Code-side revalidated; hosted/customer gate open. `LIC-002` is
+  the next dependency-ready assessment. Score remains **228/52/280 (81.4%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-current-head-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · R-TEAM-CLI-001 Preview provider installation absent
 
 - **Risk:** Preview signer configuration could be mistaken for a live SCM

@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-14 · Keep STUDIO-CLI-001 open after current-head recheck
+
+- **Decision:** Treat the projection and receipt tests as implementation
+  evidence only; do not convert them into recipient/customer acceptance.
+- **Reason:** The local contract proves the allowlist, tenant/workspace/record
+  binding, approval binding, and digest integrity, but only a recipient-side
+  observation can prove the hosted redaction boundary.
+- **Next:** Park `STUDIO-CLI-001` with its missing recipient/customer artifact
+  and assess `LIC-002` independently. No hosted or customer write occurred.
+- **Disposition:** No checkbox or score change; **228/52/280 (81.4%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-current-head-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · Keep TEAM-CLI-001 open after Preview provider audit
 
 - **Decision:** Treat the missing dedicated GitHub App configuration and
