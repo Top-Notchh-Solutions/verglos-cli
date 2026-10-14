@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-14 · ACCEPT-002 current merged-head substrate verification
+
+The private twelve-story verifier passed against CLI
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+`a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`: CLI **291 pass / 2 explicit
+skips**, Web **920 pass / 30 explicit skips**, and composed
+Team/Studio/Enterprise/quality substrates **74/74**, with zero failures.
+
+This advances the acceptance substrate only. It does not pass ACCEPT-002 or
+ACCEPT-003: hosted/provider lifecycle, customer/recipient, independent review,
+human browser/field-CWV, and account-deletion evidence remain open. No
+external or Production operation occurred; score remains **228/52/280
+(81.4%)**. Evidence:
+`docs/shipping/evidence/accept-002-current-head-substrate-2026-10-14.md`.
+
 ## Owner authorization checkpoint — 2026-10-14
 
 Top Notchh Solutions owner Anurag Yadav authorized the bounded Preview,

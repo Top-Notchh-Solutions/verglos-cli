@@ -99,7 +99,25 @@ unrelated browser tabs were not touched. No checkbox changed; score remains
 **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
 `evidence/qual-web-006-current-head-2026-10-14.md`.
 
-## 0.4 Previous shipping checkpoint — 2026-10-13
+## 0.4 Current ACCEPT-002 substrate checkpoint — 2026-10-14
+
+The next dependency-ready row after the open Web qualification boundary was
+`ACCEPT-002`. The private twelve-story verifier passed against CLI
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+`a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`: CLI **291/293** with two
+environment-gated skips, Web **920/950** with 30 environment-gated skips, and
+composed Team/Studio/Enterprise/quality substrates **74/74**. All commands
+exited 0 and exact output hashes are retained in the machine-readable result.
+
+This is repository-owned substrate/regression evidence only. `ACCEPT-002` and
+`ACCEPT-003` remain unchecked for hosted/provider lifecycle,
+customer/recipient, independent-review, human browser/field-CWV, and
+account-deletion evidence. No external or Production operation occurred; no
+checkbox changed and score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence:
+`evidence/accept-002-current-head-substrate-2026-10-14.md`.
+
+## 0.5 Previous shipping checkpoint — 2026-10-13
 
 PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after
 all eleven protected checks passed, preserving contribution commit

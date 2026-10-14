@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · ACCEPT-002 current merged-head substrate verification
+
+- **Sources:** CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`, both in disposable worktrees.
+- **Command:** `VERGLOS_CLI_ROOT=/private/tmp/verglos-cli-qual-006
+  VERGLOS_WEB_ROOT=/private/tmp/verglos-web-qual-006 pnpm --silent
+  acceptance:stories:verify`.
+- **Verification:** CLI **291 pass / 2 explicit skips / 0 fail**; Web **920
+  pass / 30 explicit skips / 0 fail**; composed Team/Studio/Enterprise/
+  quality substrates **74/74**; all commands exited 0. Output hashes and
+  twelve-story status map are retained in the JSON evidence artifact.
+- **Disposition:** substrate/regression evidence only. `ACCEPT-002` and
+  `ACCEPT-003` remain unchecked for hosted/provider/customer/recipient,
+  independent-review, human browser/field-CWV, and account-deletion evidence.
+  No checkbox or score change; **228 checked / 52 unchecked / 280 total
+  (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-current-head-substrate-2026-10-14.md`.
+
 ## 2026-10-14 · QUAL-WEB-006 current merged-head qualification
 
 - **Source:** exact public Web merge commit

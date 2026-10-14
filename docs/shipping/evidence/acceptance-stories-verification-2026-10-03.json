@@ -1,10 +1,10 @@
 {
   "schema": "verglos.private.acceptance-stories-verification.v1",
-  "verifiedAt": "2026-10-11T05:59:36.979Z",
-  "cliRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-cli-shipping-worktree",
-  "webRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
-  "cliCommit": "0ef96caab27474d3495b9d4ac0a77851059eb873",
-  "webCommit": "d4dd7f91243748f745e4adcefaa9796f0f0224db",
+  "verifiedAt": "2026-10-14T10:13:25.855Z",
+  "cliRoot": "/private/tmp/verglos-cli-qual-006",
+  "webRoot": "/private/tmp/verglos-web-qual-006",
+  "cliCommit": "ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a",
+  "webCommit": "a54d70dfacfaf9506b1336b788d9cd86c9ca74d7",
   "stories": [
     {
       "id": "free-scan",
@@ -101,45 +101,45 @@
   "results": [
     {
       "label": "cli-package-suite",
-      "cwd": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-cli-shipping-worktree",
+      "cwd": "/private/tmp/verglos-cli-qual-006",
       "args": [
         "--filter",
         "verglos",
         "test"
       ],
-      "startedAt": "2026-10-11T05:58:32.218Z",
-      "finishedAt": "2026-10-11T05:59:33.047Z",
+      "startedAt": "2026-10-14T10:12:14.540Z",
+      "finishedAt": "2026-10-14T10:13:21.970Z",
       "exitCode": 0,
       "summary": {
-        "tests": 274,
-        "pass": 274,
+        "tests": 293,
+        "pass": 291,
         "fail": 0,
         "cancelled": 0,
-        "skipped": 0
+        "skipped": 2
       },
-      "outputSha256": "50a26d088b887b0c2706cef90c100fb961b20374c046038206725d0ccfd580dc"
+      "outputSha256": "d3f69c9546986bb42e9401fa2a604b153379a7500b90a9e1d2b09f1cc1f10620"
     },
     {
       "label": "web-full-suite",
-      "cwd": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
+      "cwd": "/private/tmp/verglos-web-qual-006",
       "args": [
         "test"
       ],
-      "startedAt": "2026-10-11T05:59:33.047Z",
-      "finishedAt": "2026-10-11T05:59:36.398Z",
+      "startedAt": "2026-10-14T10:13:21.970Z",
+      "finishedAt": "2026-10-14T10:13:25.309Z",
       "exitCode": 0,
       "summary": {
-        "tests": 953,
-        "pass": 923,
+        "tests": 950,
+        "pass": 920,
         "fail": 0,
         "cancelled": 0,
         "skipped": 30
       },
-      "outputSha256": "740b380f1558e274fcafeee46b3e07c521565e0e7d39ba3b8cf49b7597563cbf"
+      "outputSha256": "65d47fe07bbfafba9737b0b3b5eacec83b16362d8b85768a81aec44c6e6d90bb"
     },
     {
       "label": "web-composed-acceptance-substrates",
-      "cwd": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web",
+      "cwd": "/private/tmp/verglos-web-qual-006",
       "args": [
         "exec",
         "node",
@@ -152,8 +152,8 @@
         "src/lib/organizations/team-e2e.test.ts",
         "src/lib/qual/qual-web-suites.test.ts"
       ],
-      "startedAt": "2026-10-11T05:59:36.398Z",
-      "finishedAt": "2026-10-11T05:59:36.979Z",
+      "startedAt": "2026-10-14T10:13:25.309Z",
+      "finishedAt": "2026-10-14T10:13:25.855Z",
       "exitCode": 0,
       "summary": {
         "tests": 74,
@@ -162,7 +162,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "f18b5e99d245ad83b7610d61b25a9ec27762bf9ced8021dc0f6f982f1258a43f"
+      "outputSha256": "d465637c78a9fd16106f6b96598db13b9309c26f23415a20a98099591c802ac0"
     }
   ],
   "allCommandsPassed": true,

@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-14 · ACCEPT-002 current merged-head substrate verification
+
+The private twelve-story acceptance verifier passed against CLI
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+`a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`: CLI **291/293** with 2 explicit
+skips, Web **920/950** with 30 explicit skips, and composed
+Team/Studio/Enterprise/quality substrates **74/74**, all with zero failures.
+This is repository-owned substrate/regression progress only. `ACCEPT-002` and
+`ACCEPT-003` remain unchecked for hosted/provider, customer/recipient,
+independent-review, human browser/field-CWV, and account-deletion evidence.
+No checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence:
+`docs/shipping/evidence/accept-002-current-head-substrate-2026-10-14.md`.
+
 ## 2026-10-14 · HUNT-008 recipe fixture-contract implementation checkpoint (CLI PR #125)
 
 Public CLI PR #125 merged normally as

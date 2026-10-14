@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## ACCEPT-002 current merged-head substrate verification · 2026-10-14
+
+- **Source mapping:** CLI
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`, selected explicitly in
+  disposable worktrees.
+- **Verification mapping:** `acceptance:stories:verify` ran the CLI package
+  suite (**291/293**, 2 explicit skips), Web suite (**920/950**, 30 explicit
+  skips), and composed Team/Studio/Enterprise/quality substrates (**74/74**);
+  all exited 0. The JSON record stores exact commands, commits, timestamps,
+  parsed totals, and output hashes.
+- **Boundary:** the twelve-story map remains explicit about
+  substrate-covered versus hosted/customer/reviewer/browser/deletion-open
+  stories. This run does not create external observations. `ACCEPT-002` and
+  `ACCEPT-003` remain unchecked; score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/accept-002-current-head-substrate-2026-10-14.md`.
+
 ## QUAL-WEB-006 current merged-head qualification · 2026-10-14
 
 - **Source:** Web merge commit

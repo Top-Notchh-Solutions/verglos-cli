@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · ACCEPT-002 current merged-head substrate verification
+
+The private twelve-story verifier was rerun against CLI
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+`a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` in disposable worktrees. The CLI
+package suite passed **291/293** with **2 explicit skips**, the Web suite passed
+**920/950** with **30 explicit skips**, and the composed Team/Studio/Enterprise/
+quality substrates passed **74/74**; all commands exited 0.
+
+This is repository-owned substrate/regression evidence only. `ACCEPT-002` and
+`ACCEPT-003` remain unchecked for hosted/provider, customer/recipient,
+independent-review, human browser/field-CWV, and account-deletion evidence.
+No provider, database, migration, payment, entitlement, customer, deployment,
+npm, or production operation occurred. No checkbox changed; score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/accept-002-current-head-substrate-2026-10-14.md` and the retained
+machine-readable verifier result.
+
 ## 2026-10-14 · QUAL-WEB-006 current merged-head qualification
 
 The exact Web merge head `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` passed
