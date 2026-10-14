@@ -490,8 +490,9 @@ For each next dependency-ready row:
 7. Recompute the score from the live backlog checklist.
 8. Check the row only when every acceptance condition is met.
 9. Commit substantive work in logical commits, push a reviewable branch/PR,
-   preserve commit history, merge with a regular merge commit, and verify the
-   merged head. Do not squash or fabricate empty contribution commits.
+   preserve every contributor's commit, merge with a regular non-squash merge
+   commit, and verify the merged head. Do not squash, rebase away, force-push,
+   or fabricate empty contribution commits.
 10. Reconcile the next row only after the current one is genuinely complete or
     explicitly parked with owner, missing artifact, safe next action, and date.
 
@@ -500,10 +501,19 @@ independent reviewer, customer, or field observation, record the blocker
 honestly and move to the next dependency-ready implementation row. Do not
 rewrite the requirement to make the checkbox closable.
 
-## 9. Public/private and security boundary
+## 9. Public/private, contribution, and documentation boundary
 
 The public verglos-cli repository may receive only public-safe code, tests,
 sanitized docs, non-sensitive schemas, and truthful customer instructions.
+
+Do not add irrelevant Markdown, planning copies, private shipping checklists,
+founder/owner records, blocker registers, execution ledgers, internal review
+packets, or generated evidence artifacts to the public repository. Add a public
+document only when it is required for the shipped product, developer use,
+public contract, or public-safe troubleshooting. Keep private goal, backlog,
+evidence, legal, consent, and release-governance material in the private
+shipping tracker. Before every public push, run the public-boundary audit and
+remove unrelated documentation or generated files.
 
 Never push private backlog state, execution ledgers, consent, legal packets,
 raw findings, raw provider payloads, credentials, private keys, database URLs,
@@ -515,13 +525,20 @@ the test requires it, but Docker alone is not a claim of universal host/OS
 isolation. Keep cleanup, limits, egress denial, and explicit skip/failure
 states in evidence.
 
-## 10. Commit and publication discipline
+## 10. Commit, contribution, and publication discipline
 
-- Make substantive, reviewable commits.
-- Preserve separate logical commits and regular merge commits.
-- Never squash or force-rewrite existing work merely to alter contribution
-  counts.
-- Never make empty commits for graph activity.
+- Make substantive, reviewable commits that advance the actual shipping goal;
+  green CI must come from real implementation, tests, or evidence.
+- Preserve separate logical commits and every genuine contributor's history;
+  use regular non-squash merge commits.
+- Never squash, rebase away, force-rewrite, or delete existing contribution
+  commits merely to simplify history or alter contribution counts.
+- Never make empty, duplicate, documentation-only, or artificial commits for
+  graph activity. Avoid work that spends tokens or time without advancing a
+  dependency-ready acceptance slice.
+- Keep documentation changes minimal and authoritative: update the canonical
+  file when evidence or contract truth changes, do not create parallel or
+  irrelevant Markdown files.
 - Public changes must be based on clean public main and pass the public boundary
   audit before push.
 - Private tracker evidence stays private and must never be pushed to the public
