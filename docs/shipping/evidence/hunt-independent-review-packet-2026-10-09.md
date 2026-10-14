@@ -1,28 +1,28 @@
-# Hunt independent review packet · review-ready template refreshed 2026-10-14
+# Hunt independent AppSec review packet · current target refreshed 2026-10-14
 
-This packet supersedes the 2026-10-02 and 2026-10-09 packets. It is a private
-review request, not a security certification and not a reviewer sign-off. It
-is supplied to an independent reviewer when the Hunt implementation is
-review-ready; an npm publication is not required.
+This packet supersedes the historical 2026-10-02 and 2026-10-09 packets. It is
+a private review request, not a security certification and not a reviewer
+sign-off. The copy-paste laptop procedure is in
+`hunt-appsec-reviewer-runbook-2026-10-14.md`; an npm publication is not
+required.
 
 ## Exact review target
 
 - Repository: `verglos-cli`
-- Exact review commit: `4d91c616b8744676220a48930034f20a7a64ee6a`
-- Review target status: public `main` at the PR #122 merge. Refresh this
-  commit and the evidence references if another public contribution is merged
-  before the review begins.
+- Exact review commit: `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`
+- Review target status: public `main` at the current CLI merge. The reviewer
+  must use this exact commit; do not substitute a later local working tree.
 - Current public branch: `main`
-- Current hosted self-scan: GitHub Actions run `38394513092`
-- Hosted platform/in-toto run: GitHub Actions run `38394513090`
-- Hosted self-scan URL: `https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/38394513092`
+- Current hosted qualification: GitHub Actions run `38550747564`
+- Hosted run URL: `https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/38550747564`
 - Hosted runner: `ubuntu-latest`
 - Pinned adversarial image: `postgres:15-alpine`
 - Pinned image digest: `sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a`
 
 The reviewer must verify that the checked-out commit is exactly the commit
 above before interpreting any result. Do not use a later local working tree,
-uncommitted files, or a different image digest as a substitute.
+uncommitted files, or a different image digest as a substitute. Follow the
+runbook for the full sequence and report template.
 
 ## Scope presented for review
 
@@ -44,12 +44,12 @@ become a positive exploitability verdict.
 
 ## Supplied evidence
 
-- Current exact-head local requalification: **94 pass / 3 documented macOS
-  skips / 0 fail**, exit 0; the adversarial group is **18 pass / 1 Linux-only
-  namespace skip / 0 fail** on the recorded macOS host.
-- The protected runs `38394513090` and `38394513092` completed successfully
-  after the recorded Ubuntu Node 20 clean-consumer rerun and include the
-  pinned Hunt Docker adversarial suite on Ubuntu.
+- Current exact-head local requalification records the baseline Hunt package
+  test as **78 pass / 19 explicit environment skips / 0 fail**, direct enabled
+  runtime checks as **18 pass / 1 macOS namespace skip / 0 fail**, and the
+  ten-family target harness as **4/4 groups pass / 0 fail**.
+- The protected run `38550747564` completed successfully across the hosted
+  platform matrix and retained the current technical artifacts.
 - The local run used the repository's pinned image and digest. The macOS skip
   is not Linux namespace evidence; the reviewer must independently verify the
   Linux behavior.
@@ -63,8 +63,7 @@ The reviewer must independently:
 
 1. Clone or otherwise obtain the public repository without receiving private tracker
    files, credentials, customer source, or browser session data.
-2. Check out exactly `4d91c616b8744676220a48930034f20a7a64ee6a` (or the
-   replacement exact commit written at review scheduling).
+2. Check out exactly `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`.
 3. Verify the pinned image digest before running the tests.
 4. Run the Linux/Docker adversarial suite and retain the exact command, image
    digest, runtime versions, pass/skip/fail totals, and relevant transcript.
@@ -101,8 +100,10 @@ Hunt/release rows remain open.
 
 The reviewer reviews the source workspace, not an npm registry package. From a
 Linux host or Ubuntu VM, the reviewer checks out the exact commit, installs
-the lockfile-pinned workspace, verifies the image digest, and runs the same
-bounded evidence command used by the repository-owned qualification:
+the lockfile-pinned workspace, verifies the image digest, and follows the
+copy-paste procedure in
+`hunt-appsec-reviewer-runbook-2026-10-14.md`, including this bounded evidence
+command:
 
 ```text
 VERGLOS_HUNT_DOCKER_INTEGRATION=1 \
