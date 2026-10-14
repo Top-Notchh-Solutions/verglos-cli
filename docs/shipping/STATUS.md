@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · HUNT-008 recipe fixture-contract contribution merged (CLI PR #125)
+
+Public CLI PR #125 merged normally as
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`, preserving contribution commits
+`677233e57e514390afc44a5dd17222f156ca1b41` and
+`b01f1a9d50063fe545cef11f46163033e2eb434b`. Hunt recipes now require explicit
+positive, negative, timeout, infrastructure-failure, and unsupported fixture
+references, with unique IDs and fixed expected verdict mappings. The public
+release-verification and clean-consumer scripts use the same contract.
+
+The local CLI suite, shared and Hunt suites, 8/8 workspace build, fixture
+verifier, public-boundary audit, protected matrix/in-toto run `38545037960`,
+and self-scan `38545037969` passed. No squash, rebase, force-push, empty
+commit, or artificial contribution activity was used.
+
+This is implementation and fixture-qualification progress only. HUNT-008
+remains unchecked for supported-rule approval, trusted/licensed provenance,
+authorized target/corpus evidence, host qualification, independent AppSec
+review, dependent acceptance, `.vgl` binding, and final release criteria. No
+checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence:
+`evidence/hunt-recipe-fixture-contract-pr125-2026-10-14.md`.
+
 ## 2026-10-14 · TEAM-CLI-001 policy-cache boundary hardening merged (CLI PR #124)
 
 CLI PR #124 merged normally as `4642f7d43141e23f0d73b7a245767393bb63d644`,

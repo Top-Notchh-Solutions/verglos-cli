@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · HUNT-008 recipe fixture contract merged (CLI PR #125)
+
+- **Public contribution:** Hunt recipe parsing now requires explicit positive,
+  negative, timeout, infrastructure-failure, and unsupported fixture
+  references, and the public release/consumer verification scripts exercise
+  that contract.
+- **Identity:** contribution commits
+  `677233e57e514390afc44a5dd17222f156ca1b41` and
+  `b01f1a9d50063fe545cef11f46163033e2eb434b` were preserved in normal merge
+  commit `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`. No squash, rebase,
+  force-push, empty commit, or artificial contribution activity.
+- **Verification:** local CLI/shared/Hunt suites, workspace build 8/8, Hunt
+  fixture verifier, public-boundary audit, protected matrix/in-toto run
+  `38545037960`, and self-scan `38545037969` passed. Docker/Linux integration
+  requirements remain explicit skips when not enabled.
+- **Disposition:** Implementation and fixture qualification only. HUNT-008
+  remains unchecked for provenance/licensing, supported-rule and target
+  acceptance, independent AppSec review, dependent `.vgl`/release evidence,
+  and other row criteria. No checkbox or score change; **228 checked / 52
+  unchecked / 280 total (81.4%)**.
+- **Evidence:** `docs/shipping/evidence/hunt-recipe-fixture-contract-pr125-2026-10-14.md`.
+
 ## 2026-10-14 · TEAM-CLI-001 policy-cache boundary hardening merged
 
 - **Public contribution:** CLI PR #124 adds mode-0700 enforcement for the

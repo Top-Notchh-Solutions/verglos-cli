@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## HUNT-008 recipe fixture contract · 2026-10-14
+
+- **Public PR:** [CLI #125](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/125)
+  merged normally as `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`, preserving
+  contribution commits `677233e57e514390afc44a5dd17222f156ca1b41` and
+  `b01f1a9d50063fe545cef11f46163033e2eb434b`.
+- **Implementation mapping:** `HuntRecipeSchema` now binds five named fixture
+  references with unique IDs and fixed verdict mappings. Release and clean-
+  consumer fixture builders were updated to satisfy the same public schema.
+- **Verification:** CLI/shared/Hunt tests, workspace build 8/8, the public
+  fixture verifier, public-boundary audit, protected run `38545037960`, and
+  self-scan `38545037969` passed. Hunt's Docker integration cases remain
+  explicit environment-gated skips where the required pinned Linux setup is
+  absent.
+- **Boundary:** This proves recipe-shape and local/public qualification only.
+  It does not prove authorized customer targets, full Hunt family acceptance,
+  trusted/licensed release provenance, independent AppSec review, hosted
+  entitlement/provider state, `.vgl` binding, or final release acceptance.
+- **Acceptance:** HUNT-008 remains unchecked; score remains **228/52/280
+  (81.4%)**. No squash, rebase, force-push, empty commit, or artificial
+  contribution activity was used.
+- **Evidence:** `evidence/hunt-recipe-fixture-contract-pr125-2026-10-14.md`.
+
 ## TEAM-CLI-001 organization-policy cache boundary hardening · 2026-10-14
 
 - **Public PR:** [CLI #124](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/124)

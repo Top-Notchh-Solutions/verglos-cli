@@ -29,7 +29,32 @@ the Hunt execution/Docker/Linux boundary, not the whole product, and does not
 require an npm publication. Unrelated rows may continue when their own
 acceptance conditions are met; Hunt rows depending on the review remain open.
 
-## 0.1 Current shipping checkpoint — 2026-10-13
+## 0.1 Current shipping checkpoint — 2026-10-14
+
+CLI PR #125 merged normally as `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`,
+preserving contribution commits `677233e57e514390afc44a5dd17222f156ca1b41`
+and `b01f1a9d50063fe545cef11f46163033e2eb434b`. Hunt recipes now require
+explicit positive, negative, timeout, infrastructure-failure, and unsupported
+fixture references with unique IDs and fixed expected verdict mappings. The
+public release-verification and clean-consumer scripts use this same contract.
+
+The local CLI/shared/Hunt checks, 8/8 workspace build, fixture verifier,
+public-boundary audit, protected run `38545037960`, and self-scan
+`38545037969` passed. This advances HUNT-008 implementation and qualification
+only; HUNT-008 remains open for supported-rule approval, trusted/licensed
+provenance, authorized target/corpus and host evidence, independent AppSec
+review, dependent acceptance, `.vgl` binding, and final release criteria.
+No checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence:
+`evidence/hunt-recipe-fixture-contract-pr125-2026-10-14.md`.
+
+All shipping contributions in this goal use regular merge commits. Squash,
+rebase, force-push, empty, duplicate, documentation-only, and artificial
+contribution commits are prohibited. Public repositories receive only
+public-safe code/tests and minimal authoritative public documentation; private
+shipping evidence stays in this tracker.
+
+## 0.2 Previous shipping checkpoint — 2026-10-13
 
 PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after
 all eleven protected checks passed, preserving contribution commit
