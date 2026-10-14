@@ -702,6 +702,15 @@ evidence, legal, consent, and release-governance material in the private
 shipping tracker. Before every public push, run the public-boundary audit and
 remove unrelated documentation or generated files.
 
+## 9.1 Browser and tooling boundary
+
+Do not open new Chrome windows or tabs. If the existing Verglos Chrome tab is
+available, use only that tab and do not navigate unrelated tabs. If it is not
+available, use the CLI/API or local test evidence; do not open a replacement
+browser session and do not touch unrelated browser pages. Use Vercel CLI for
+read-only Preview/deployment checks where possible, without exposing secrets
+or bypassing Preview protection.
+
 Never push private backlog state, execution ledgers, consent, legal packets,
 raw findings, raw provider payloads, credentials, private keys, database URLs,
 browser cookies, deployment bypasses, customer source, or internal deployment
