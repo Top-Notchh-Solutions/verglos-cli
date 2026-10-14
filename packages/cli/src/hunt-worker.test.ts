@@ -45,6 +45,7 @@ const hypothesis = planHuntAttackHypothesis({ manifest, finding, playbooks: [{
     { name: "negative", expected: "not-reproduced" },
     { name: "timeout", expected: "inconclusive" },
     { name: "adapter-failure", expected: "environment-error" },
+    { name: "unsupported", expected: "not-supported" },
   ],
 }] });
 const recipe = parseHuntRecipe({

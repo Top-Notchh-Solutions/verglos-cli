@@ -11,7 +11,7 @@ import { HUNT_TARGET_HARNESS_IMAGE_DIGEST, TARGET_HARNESS_ASSERTION } from "./ta
  * binding. Keeping the catalog here lets the command fail closed when a
  * detector has no evidence-backed recipe rather than guessing one.
  */
-export const SUPPORTED_HUNT_RECIPE_CATALOG = Object.freeze([
+const BASE_SUPPORTED_HUNT_RECIPE_CATALOG = Object.freeze([
   {
     recipeId: "a1-utf8-contains",
     ruleId: "hunt.a1.utf8-contains",
@@ -152,6 +152,21 @@ export const SUPPORTED_HUNT_RECIPE_CATALOG = Object.freeze([
   })),
 ] as const);
 
+/**
+ * Keep the catalog's fixture projection aligned with HuntRecipeSchema. The
+ * schema requires an explicit unsupported outcome even when a descriptor's
+ * adapter does not exercise it during the positive/negative harness run.
+ */
+export const SUPPORTED_HUNT_RECIPE_CATALOG = Object.freeze(
+  BASE_SUPPORTED_HUNT_RECIPE_CATALOG.map((descriptor) => ({
+    ...descriptor,
+    fixtures: Object.freeze([
+      ...descriptor.fixtures,
+      { name: "unsupported" as const, expected: "not-supported" as const },
+    ]),
+  })),
+);
+
 export type SupportedHuntRecipe = (typeof SUPPORTED_HUNT_RECIPE_CATALOG)[number];
 
 export type SupportedRecipeValidation = Readonly<{
@@ -166,6 +181,7 @@ export type SupportedRecipeValidation = Readonly<{
     | "command_mismatch"
     | "assertion_mismatch"
     | "inputs_mismatch"
+    | "fixtures_mismatch"
     | "network_not_denied"
     | "cleanup_not_unconditional"
     | "redaction_not_required"
@@ -186,6 +202,16 @@ export function validateSupportedHuntRecipe(value: unknown): SupportedRecipeVali
   if (!same(descriptor.command, recipe.command)) return { supported: false, reason: "command_mismatch" };
   if (!same(descriptor.assertions, recipe.assertions)) return { supported: false, reason: "assertion_mismatch" };
   if (Object.keys(recipe.inputs ?? {}).sort().join(",") !== descriptor.requiredInputs.join(",")) return { supported: false, reason: "inputs_mismatch" };
+  const fixturePairs = [
+    ["positive", "positive"],
+    ["negative", "negative"],
+    ["timeout", "timeout"],
+    ["infrastructureFailure", "adapter-failure"],
+    ["unsupported", "unsupported"],
+  ] as const;
+  if (fixturePairs.some(([recipeKey, descriptorName]) => descriptor.fixtures.find((fixture) => fixture.name === descriptorName)?.expected !== recipe.fixtures[recipeKey].expectedVerdict)) {
+    return { supported: false, reason: "fixtures_mismatch" };
+  }
   if (recipe.network.mode !== "denied" || recipe.network.destinations.length !== 0 || recipe.limits.maxNetworkRequests !== 0) return { supported: false, reason: "network_not_denied" };
   if (recipe.cleanup !== "always") return { supported: false, reason: "cleanup_not_unconditional" };
   if (recipe.redaction !== "required") return { supported: false, reason: "redaction_not_required" };
