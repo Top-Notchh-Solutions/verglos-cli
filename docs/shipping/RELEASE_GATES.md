@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-14 · HUNT-008 current merged-head Docker qualification
+
+The exact CLI merge head `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` passed the
+direct pinned Docker runtime checks (**18 pass / 1 explicit macOS namespace
+skip**) and the ten-family target-harness groups (**4/4 pass**). The baseline
+Hunt package command passed **78** with **19 explicit environment-gated skips**
+and zero failures.
+
+This is technical qualification progress only. HUNT-008 remains open for
+supported-rule approval, trusted/licensed provenance, hosted entitlement,
+authorized target evidence, independent AppSec review, `.vgl` binding, and
+final acceptance. Score remains **228/52/280 (81.4%)**. Evidence:
+`docs/shipping/evidence/hunt-008-current-head-docker-qualification-2026-10-14.md`.
+
 ## 2026-10-14 · ACCEPT-002 current merged-head substrate verification
 
 The private twelve-story verifier passed against CLI

@@ -99,7 +99,23 @@ unrelated browser tabs were not touched. No checkbox changed; score remains
 **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
 `evidence/qual-web-006-current-head-2026-10-14.md`.
 
-## 0.4 Current ACCEPT-002 substrate checkpoint — 2026-10-14
+## 0.4 Current HUNT-008 Docker qualification checkpoint — 2026-10-14
+
+The exact CLI merge head `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` passed
+direct pinned Docker runtime qualification with **18 checks passed and one
+explicit macOS namespace skip**, plus the ten-family target-harness groups
+**4/4 passed**. The baseline Hunt package test passed **78** with 19 explicit
+environment-gated skips and zero failures. The image was pinned to
+`docker.io/library/node@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402`.
+
+This is local technical qualification only. `HUNT-008` remains unchecked for
+supported-rule approval, trusted/licensed provenance, authorized targets,
+hosted entitlement, independent AppSec review, `.vgl` binding, and final
+acceptance. No checkbox changed; score remains **228 checked / 52 unchecked /
+280 total (81.4%)**. Evidence:
+`evidence/hunt-008-current-head-docker-qualification-2026-10-14.md`.
+
+## 0.5 Current ACCEPT-002 substrate checkpoint — 2026-10-14
 
 The next dependency-ready row after the open Web qualification boundary was
 `ACCEPT-002`. The private twelve-story verifier passed against CLI
@@ -117,7 +133,7 @@ checkbox changed and score remains **228 checked / 52 unchecked / 280 total
 (81.4%)**. Evidence:
 `evidence/accept-002-current-head-substrate-2026-10-14.md`.
 
-## 0.5 Previous shipping checkpoint — 2026-10-13
+## 0.6 Previous shipping checkpoint — 2026-10-13
 
 PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after
 all eleven protected checks passed, preserving contribution commit

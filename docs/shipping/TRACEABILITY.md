@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## HUNT-008 current merged-head Docker qualification · 2026-10-14
+
+- **Source mapping:** CLI merge
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`; pinned image
+  `docker.io/library/node@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402`.
+- **Verification mapping:** baseline package tests **78 pass / 19 explicit
+  skips / 0 fail**; direct bounded runtime checks **18 pass / 1 macOS
+  namespace skip**; target-harness checks **4/4 groups pass**, covering all
+  ten A2 families and their declared outcomes.
+- **Boundary:** this is local Docker technical evidence, not Linux/host
+  universality, hosted entitlement, trusted/licensed provenance, independent
+  AppSec review, authorized customer-target proof, or final release evidence.
+  HUNT-008 remains unchecked; score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/hunt-008-current-head-docker-qualification-2026-10-14.md`.
+
 ## ACCEPT-002 current merged-head substrate verification · 2026-10-14
 
 - **Source mapping:** CLI
