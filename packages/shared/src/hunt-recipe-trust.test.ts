@@ -22,6 +22,7 @@ function makeRecipe(overrides: Partial<HuntRecipe> = {}): HuntRecipe {
     imageDigest: { algorithm: "sha256", value: "b".repeat(64) },
     command: ["node", "check.js"],
     assertions: ["exit code is 0"],
+    fixtures: { positive: { fixtureId: "positive", expectedVerdict: "confirmed" }, negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" }, timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" }, infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" }, unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" } },
     isolation: "container",
     limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10000, processes: 32, maxNetworkRequests: 0 },
     cleanup: "always",

@@ -11,6 +11,13 @@ const validRecipe = {
   imageDigest: { algorithm: "sha256", value: "b".repeat(64) },
   command: ["node", "check.js"],
   assertions: ["exit code is 0"],
+  fixtures: {
+    positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+    negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+    timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" },
+    infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+    unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+  },
   inputs: { fixture: "synthetic" },
   isolation: "container",
   limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10_000, processes: 32, maxNetworkRequests: 0 },
@@ -29,6 +36,7 @@ test("Hunt recipe schema binds every declared recipe dimension", () => {
   assert.deepEqual(recipe.imageDigest, validRecipe.imageDigest);
   assert.deepEqual(recipe.command, ["node", "check.js"]);
   assert.deepEqual(recipe.assertions, ["exit code is 0"]);
+  assert.deepEqual(recipe.fixtures, validRecipe.fixtures);
   assert.deepEqual(recipe.inputs, { fixture: "synthetic" });
   assert.equal(recipe.isolation, "container");
   assert.deepEqual(recipe.limits, validRecipe.limits);
@@ -39,7 +47,7 @@ test("Hunt recipe schema binds every declared recipe dimension", () => {
 });
 
 test("Hunt recipe schema requires each top-level field and rejects unknown fields or versions", () => {
-  const required = ["schemaId", "schemaVersion", "recipeId", "ruleId", "targetSubjectId", "imageDigest", "command", "assertions", "isolation", "limits", "cleanup", "network", "redaction", "signature"];
+  const required = ["schemaId", "schemaVersion", "recipeId", "ruleId", "targetSubjectId", "imageDigest", "command", "assertions", "fixtures", "isolation", "limits", "cleanup", "network", "redaction", "signature"];
   for (const field of required) {
     const incomplete = { ...validRecipe } as Record<string, unknown>;
     delete incomplete[field];
@@ -48,6 +56,13 @@ test("Hunt recipe schema requires each top-level field and rejects unknown field
   assert.throws(() => parseHuntRecipe({ ...validRecipe, schemaVersion: "2.0.0" }));
   assert.throws(() => parseHuntRecipe({ ...validRecipe, unrecognized: true }));
   assert.throws(() => parseHuntRecipe({ ...validRecipe, signature: { status: "verified" } }));
+});
+
+test("Hunt fixture contracts require distinct controls and safe expected verdicts", () => {
+  assert.throws(() => parseHuntRecipe({ ...validRecipe, fixtures: { ...validRecipe.fixtures, negative: validRecipe.fixtures.positive } }));
+  assert.throws(() => parseHuntRecipe({ ...validRecipe, fixtures: { ...validRecipe.fixtures, timeout: { ...validRecipe.fixtures.timeout, expectedVerdict: "confirmed" } } }));
+  assert.throws(() => parseHuntRecipe({ ...validRecipe, fixtures: { ...validRecipe.fixtures, unsupported: { ...validRecipe.fixtures.unsupported, expectedVerdict: "inconclusive" } } }));
+  assert.throws(() => parseHuntRecipe({ ...validRecipe, fixtures: { ...validRecipe.fixtures, positive: { ...validRecipe.fixtures.positive, fixtureId: "bad\u0000fixture" } } }));
 });
 
 test("Hunt recipes are bounded and deny arbitrary network by default", () => {

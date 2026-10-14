@@ -9,6 +9,14 @@ import { createTestHuntTrustStore, TEST_HUNT_TRUST_KEY_ID } from "../../shared/s
 import { executeHuntRecipeVerification } from "./hunt-recipe-verify.js";
 import { runCliFixture } from "./cli-fixture.js";
 
+const fixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
+
 function recipe(): HuntRecipe {
   return parseHuntRecipe({
     schemaId: "urn:verglos:schema:hunt-recipe",
@@ -19,6 +27,7 @@ function recipe(): HuntRecipe {
     imageDigest: { algorithm: "sha256", value: "b".repeat(64) },
     command: ["fixture-probe"],
     assertions: ["exit code is 0"],
+    fixtures,
     isolation: "container",
     limits: { timeoutMs: 1000, cpuMs: 900, memoryMb: 256, diskMb: 128, outputBytes: 10000, processes: 32, maxNetworkRequests: 0 },
     cleanup: "always",

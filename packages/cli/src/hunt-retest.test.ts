@@ -13,6 +13,13 @@ const beforeSubjectId = createSubjectId({ kind: "artifact", digest: { algorithm:
 const afterSubjectId = createSubjectId({ kind: "artifact", digest: { algorithm: "sha256", value: "b".repeat(64) }, size: 11, mediaType: "application/octet-stream" });
 const at = new Date().toISOString();
 const finding = { id: "finding-cli-retest", ruleId: "hunt.a1.utf8-contains", location: "app.js", line: 1, severity: "high" as const };
+const fixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
 const hypothesis = planSupportedHuntAttack({
   manifest: {
     schemaId: "urn:verglos:schema:hunt-target-manifest", schemaVersion: "1.0.0", targetSubjectId: afterSubjectId,
@@ -24,6 +31,7 @@ const hypothesis = planSupportedHuntAttack({
 const recipe = parseHuntRecipe({
   schemaId: "urn:verglos:schema:hunt-recipe", schemaVersion: "1.0.0", recipeId: "a1-utf8-contains", ruleId: finding.ruleId, targetSubjectId: afterSubjectId,
   imageDigest: { algorithm: "sha256", value: "c".repeat(64) }, command: ["verglos-probe", "utf8-contains"], assertions: ["probe result is true"], inputs: { needle: "unsafe", value: "safe fixture after remediation" }, isolation: "restricted-process",
+  fixtures,
   limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 }, cleanup: "always", network: { mode: "denied", destinations: [], reason: "A1 pure probe" }, redaction: "required", signature: { status: "verified", signer: TEST_HUNT_TRUST_KEY_ID },
 });
 const report: ScanResult = {

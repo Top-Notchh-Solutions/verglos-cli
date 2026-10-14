@@ -4,6 +4,14 @@ import { parseHuntRecipe } from "@verglos/shared";
 import { SUPPORTED_HUNT_RECIPE_CATALOG, validateSupportedHuntRecipe } from "./supported-recipe-catalog.js";
 import { HUNT_TARGET_HARNESS_IMAGE_DIGEST } from "./target-harness.js";
 
+const fixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
+
 const recipe = () => parseHuntRecipe({
   schemaId: "urn:verglos:schema:hunt-recipe",
   schemaVersion: "1.0.0",
@@ -13,6 +21,7 @@ const recipe = () => parseHuntRecipe({
   imageDigest: { algorithm: "sha256", value: "b".repeat(64) },
   command: ["verglos-probe", "utf8-contains"],
   assertions: ["probe result is true"],
+  fixtures,
   inputs: { needle: "unsafe", value: "fixture contains unsafe" },
   isolation: "restricted-process",
   limits: { timeoutMs: 1_000, cpuMs: 900, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 },
@@ -53,6 +62,7 @@ for (const descriptor of SUPPORTED_HUNT_RECIPE_CATALOG.slice(1)) {
       ruleId: descriptor.ruleId,
       command: [...descriptor.command],
       assertions: [...descriptor.assertions],
+      fixtures,
       isolation: descriptor.adapter,
       imageDigest: descriptor.adapter === "container" ? { algorithm: "sha256", value: HUNT_TARGET_HARNESS_IMAGE_DIGEST.slice("sha256:".length) } : recipe().imageDigest,
       inputs,

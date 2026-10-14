@@ -41,6 +41,13 @@ function signedA1Fixture(at) {
     imageDigest: { algorithm: "sha256", value: "b".repeat(64) },
     command: ["verglos-probe", "utf8-contains"],
     assertions: ["probe result is true"],
+    fixtures: {
+      positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+      negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+      timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" },
+      infrastructureFailure: { fixtureId: "adapter-failure", expectedVerdict: "environment-error" },
+      unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+    },
     inputs: { needle: "packed-consumer-canary", value: "fixture contains packed-consumer-canary" },
     isolation: "restricted-process",
     limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 },
