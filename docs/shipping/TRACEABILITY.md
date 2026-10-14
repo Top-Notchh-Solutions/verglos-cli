@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## LIC-002 upstream source provenance recheck · 2026-10-14
+
+- **Source mapping:** exact versions from the seven-blocker inventory at CLI
+  merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`, mapped to tagged upstream
+  source pages and canonical Blue Oak 1.0.0 references.
+- **Verification mapping:** five BlueOak license pages and the nested
+  `benchmark@1.0.0` package metadata were observed; the
+  `minipass-flush@1.0.7` page was not retrievable and is explicitly left
+  unverified.
+- **Boundary mapping:** no legal, redistribution, notice, trademark, source,
+  modification, fixture, recipe, engine, or release conclusion is inferred.
+- **Acceptance mapping:** `LIC-002` remains unchecked; score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/lic-002-upstream-source-provenance-2026-10-14.md`.
+
 ## ACCEPT-003 evidence-bundle rerun · 2026-10-14
 
 - **Command mapping:** `pnpm --silent acceptance:evidence:bundle`.

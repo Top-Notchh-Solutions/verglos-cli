@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · LIC-002 upstream source provenance recheck
+
+The seven automated LIC-002 blockers were mapped to exact upstream version
+URLs. Tagged license pages were observed for `glob@13.0.6`,
+`lru-cache@11.5.2`, `minimatch@10.2.6`, `minipass@7.1.3`, and
+`path-scurry@2.0.2`; the exact nested `benchmark@1.0.0` metadata under
+`fast-uri@3.1.7` was also observed. The `minipass-flush@1.0.7` source URL is
+recorded but was not retrievable in this recheck and remains unverified.
+
+This adds provenance only. It does not decide redistribution, notices,
+modification, trademark, nested-component, engine, fixture, or recipe rights.
+`LIC-002` remains unchecked because the legal addendum still lacks an
+authorized decision, scope, conditions, signature/verifiable reference, and
+date. No package or release state changed. Score remains **230 checked / 50
+unchecked / 280 total (82.1%)**. Evidence:
+`evidence/lic-002-upstream-source-provenance-2026-10-14.md`.
+
 ## 2026-10-14 · ACCEPT-003 evidence-bundle rerun
 
 `pnpm --silent acceptance:evidence:bundle` passed its secret-like material

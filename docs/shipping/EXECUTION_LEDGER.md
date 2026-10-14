@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · LIC-002 upstream source provenance recheck
+
+- **Source mapping:** seven automated blockers from CLI merge
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` were mapped to exact tagged
+  upstream URLs and the canonical Blue Oak 1.0.0 page.
+- **Verification:** tagged license pages were observed for five BlueOak
+  packages; exact nested `benchmark@1.0.0` metadata under `fast-uri@3.1.7`
+  was observed; `minipass-flush@1.0.7` remains unverified because its source
+  page was not retrievable in this recheck.
+- **Boundary:** source provenance is not legal clearance and does not decide
+  redistribution, notice, modification, trademark, engine, fixture, recipe,
+  or nested-component treatment.
+- **Disposition:** `LIC-002` remains unchecked; score remains **230 checked /
+  50 unchecked / 280 total (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/lic-002-upstream-source-provenance-2026-10-14.md`.
+
 ## 2026-10-14 · ACCEPT-003 evidence-bundle rerun
 
 - **Command:** `pnpm --silent acceptance:evidence:bundle`.
