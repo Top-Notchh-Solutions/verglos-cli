@@ -22,6 +22,18 @@ plan outcome, economic guardrail, and acceptance metric for every surface in
 this matrix. The contract and backlog remain the implementation and checkbox
 authorities respectively.
 
+## 0.1 Owner authorization checkpoint — 2026-10-14
+
+The owner has authorized the bounded Preview, disposable-runner, SCM-test,
+synthetic-recipient, protected-dry-run, legal/company-review, and acceptance-
+preparation operations recorded in
+`evidence/owner-authorization-2026-10-14.md`. This removes setup questions;
+it does not satisfy the evidence column for any row. The independent AppSec
+review remains a Hunt-specific human review against an exact unreleased CLI
+commit, not a whole-product audit or npm-release requirement. Other surfaces
+retain their own provider, legal, recipient, field, commercial, and release
+acceptance conditions.
+
 ## 1. Product boundary
 
 | Contract surface | Free | Pro | Team | Studio | Enterprise | Backlog anchors | Current truth / acceptance boundary |

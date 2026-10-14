@@ -18,6 +18,23 @@ capability below is already implemented. The private backlog remains the only
 source of checkbox state. At this revision the live score remains **228
 checked / 52 unchecked / 280 total (81.4%)**.
 
+## 0.1 Owner authorization and independent-review boundary — 2026-10-14
+
+Top Notchh Solutions owner Anurag Yadav authorized the bounded Preview,
+disposable-runner, protected-dry-run, legal/company-packet, and acceptance-
+preparation operations recorded in
+`evidence/owner-authorization-2026-10-14.md`. This is execution authorization,
+not proof that the corresponding customer, provider, legal, field, or release
+acceptance artifacts exist.
+
+The remaining independent human input for the Hunt is a separate AppSec
+reviewer. That reviewer will inspect the exact public CLI source commit and
+run the Hunt/Docker review packet before HUNT-011 and QUAL-CLI-004, and their
+dependent Hunt/release claims, can be accepted. The reviewer does not need a
+published npm version. This blueprint must not describe AppSec as the only
+remaining acceptance condition for the entire product; unrelated rows retain
+their own evidence requirements.
+
 ## 1. Product thesis
 
 Verglos is a security decision layer between a code change and a release:

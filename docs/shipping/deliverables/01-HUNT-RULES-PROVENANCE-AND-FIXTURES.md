@@ -23,9 +23,10 @@ The current local CLI head observed on 2026-10-12 is:
 
     74fd6cdc595ae6911792d0afb444dbbb5ca5985f
 
-The Hunt independent-review packet intentionally targets a different
-qualification head, 8bea4be2fa18533eafd088122be769e942965626. The reviewer
-must use the packet's exact head unless a refreshed packet is created.
+The refreshed Hunt independent-review packet targets the public qualification
+head `4d91c616b8744676220a48930034f20a7a64ee6a` until a newer review-ready
+public contribution is merged. The reviewer must use the packet's exact head
+unless the packet is refreshed again.
 
 ## What still has to be decided
 

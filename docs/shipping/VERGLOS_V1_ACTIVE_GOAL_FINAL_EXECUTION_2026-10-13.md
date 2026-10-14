@@ -9,6 +9,26 @@
 **Value authority:** FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md  
 **Coverage authority:** FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md
 
+## 0.0 Owner authorization checkpoint — 2026-10-14
+
+Anurag Yadav, Owner of Top Notchh Solutions
+(`anuragyadav.work@gmail.com`), authorized Codex to continue the bounded
+shipping workflow using the existing public-safe repositories, Preview
+deployment, Preview policy signer, Preview SCM test scope, disposable runner,
+synthetic Studio recipient, protected dry-runs, legal/company packets, and
+acceptance preparation. The authorization is recorded in
+`evidence/owner-authorization-2026-10-14.md`; no secret values are stored.
+
+This removes additional setup questions from the owner. It does not close a
+backlog row or convert owner permission into independent AppSec review, legal
+opinion, provider event, customer/recipient observation, field-performance
+observation, or acceptance evidence. The independent AppSec reviewer remains
+the only additional human identity to supply for the Hunt review. The review
+must be scheduled against the exact review-ready Hunt commit; it is scoped to
+the Hunt execution/Docker/Linux boundary, not the whole product, and does not
+require an npm publication. Unrelated rows may continue when their own
+acceptance conditions are met; Hunt rows depending on the review remain open.
+
 ## 0.1 Current shipping checkpoint — 2026-10-13
 
 PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after

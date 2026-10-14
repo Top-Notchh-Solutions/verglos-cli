@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-14 · record owner authorization without collapsing acceptance gates
+
+- **Decision:** Record Anurag Yadav, Owner of Top Notchh Solutions, as the
+  authorized owner for bounded Preview/SCM tests, disposable-runner tests,
+  synthetic Studio technical qualification, protected dry-runs, legal/company
+  packets, and acceptance preparation.
+- **Independent-review rule:** The only additional human identity needed for
+  the Hunt review is a separate AppSec/security reviewer who did not implement
+  the reviewed Hunt boundary. The reviewer receives an exact source commit
+  and packet; an npm release is not required.
+- **Non-collapse rule:** Owner authorization removes setup questions but does
+  not become a provider event, legal opinion, customer consent, field
+  observation, or independent signature. Unrelated backlog rows remain
+  governed by their own evidence.
+- **Disposition:** `evidence/owner-authorization-2026-10-14.md` is the
+  private authorization record. No checkbox or score change.
+
 ## 2026-10-13 · Make paying value explicit across every plan and surface
 
 - **Decision:** Adopt `FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md` as the

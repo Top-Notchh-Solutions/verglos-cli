@@ -1,5 +1,25 @@
 # Verglos V1 · Manual-input blocker inventory (private)
 
+## 2026-10-14 · owner authorization and remaining human-input boundary
+
+Anurag Yadav, Owner of Top Notchh Solutions
+(`anuragyadav.work@gmail.com`), authorized the bounded Preview, SCM-test,
+disposable-runner, synthetic-recipient, protected-dry-run, legal/company-
+packet, and acceptance-preparation operations. See
+`docs/shipping/evidence/owner-authorization-2026-10-14.md`.
+
+This means Codex should not ask for these setup choices again. The only
+additional human identity to be supplied for the Hunt review is an independent
+AppSec/security reviewer. The review is against the exact public CLI source
+commit and Hunt execution/Docker/Linux boundary, not the whole product, and
+does not require an npm release. The reviewer packet is prepared but must be
+refreshed if a newer public commit is selected.
+
+This does not make AppSec the only remaining acceptance artifact. Provider,
+legal, recipient, runner, accessibility, field-CWV, commercial, customer,
+release-provenance, and final-acceptance rows retain their own evidence. No
+backlog checkbox changed; score remains **228/52/280 (81.4%)**.
+
 ## 2026-10-13 feature coverage reference
 
 Use `FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md` to connect each manual

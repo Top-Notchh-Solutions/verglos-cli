@@ -12,7 +12,8 @@ Use:
 It targets:
 
 - repository: verglos-cli;
-- exact commit: 8bea4be2fa18533eafd088122be769e942965626;
+- exact review commit: 4d91c616b8744676220a48930034f20a7a64ee6a until a newer
+  review-ready public contribution is merged;
 - pinned Docker image and digest in the packet;
 - Linux/Docker adversarial tests.
 
@@ -49,10 +50,11 @@ Store the completed report privately at:
     docs/shipping/evidence/hunt-independent-review-<date>.md
 
 Codex can prepare the packet, compare the report with the implementation, and
-record limitations. Codex cannot sign as the independent reviewer.
+record limitations. Codex cannot sign as the independent reviewer. The
+reviewer clones the public source and runs the source workspace directly; a
+published npm package is not required.
 
 ## Current status
 
 Engineering evidence exists. The missing deliverable is the real independent
 run and signed report. No commit information is required from the founder.
-

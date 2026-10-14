@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-14 · owner authorization and AppSec review scheduling boundary
+
+Anurag Yadav, Owner of Top Notchh Solutions, authorized the bounded shipping
+operations recorded in
+`docs/shipping/evidence/owner-authorization-2026-10-14.md`. Codex may continue
+dependency-ready implementation, Preview/fixture/runner qualification, and
+private evidence work without asking for the same setup choices again.
+
+The independent AppSec reviewer is the only additional human identity still
+needed for the Hunt review. The review targets the exact public CLI source
+commit and Hunt execution/Docker/Linux boundary; it does not require a
+published npm package or a whole-product audit. Until the signed report
+exists, HUNT-011, QUAL-CLI-004, and dependent Hunt/release claims remain
+unchecked. This does **not** make AppSec a master dependency for unrelated
+rows: each non-Hunt row still requires its own provider, legal, customer,
+field, commercial, or release evidence. No checkbox or score changed.
+
+Live score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Docker adversarial-boundary checkpoint (PR #122)
 
 Public PR #122 merged normally into `main` as

@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · owner authorization recorded; independent Hunt review pending
+
+Anurag Yadav, Owner of Top Notchh Solutions
+(`anuragyadav.work@gmail.com`), authorized the bounded Preview, SCM-test,
+disposable-runner, synthetic-recipient, protected-dry-run, legal/company-
+packet, and acceptance-preparation operations recorded in
+`evidence/owner-authorization-2026-10-14.md`. No secret values were recorded.
+
+This clears owner setup/input questions, not acceptance evidence. The only
+additional human identity needed for the Hunt review is an independent AppSec
+reviewer. The reviewer will receive the public CLI source at one exact
+review-ready commit and review only the Hunt execution/Docker/Linux boundary;
+no npm publication is needed. HUNT-011 and QUAL-CLI-004, plus dependent Hunt
+claims, remain open until the signed report exists. Unrelated rows may proceed
+against their own acceptance criteria. Score remains **228 checked / 52
+unchecked / 280 total (81.4%)**.
+
 ## 2026-10-13 · HUNT Docker adversarial-boundary contribution merged (PR #122)
 
 Public PR #122 merged normally as

@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## Owner authorization checkpoint — 2026-10-14
+
+Top Notchh Solutions owner Anurag Yadav authorized the bounded Preview,
+SCM-test, disposable-runner, synthetic-recipient, protected-dry-run,
+legal/company-review, and acceptance-preparation operations recorded in
+`evidence/owner-authorization-2026-10-14.md`.
+
+This opens execution access, not a gate pass. The independent AppSec reviewer
+remains required for the Hunt execution/Docker/Linux boundary and will review
+the exact unreleased public CLI commit; no npm publication is required. The
+AppSec gate affects Hunt and dependent release/acceptance claims, but it is
+not a master dependency for unrelated Web, legal, SCM, Studio, Enterprise,
+commercial, or distribution rows. Those rows still require their own real
+artifacts. No gate, checkbox, or score changed.
+
 ## Approved contract boundary — 2026-10-12
 
 The approved contract is

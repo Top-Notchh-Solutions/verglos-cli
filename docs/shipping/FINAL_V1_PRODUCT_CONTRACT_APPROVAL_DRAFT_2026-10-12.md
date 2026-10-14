@@ -25,6 +25,18 @@ This document is the approved product contract for Verglos Final V1. It
 replaces conflicting informal descriptions. It is a contract for what we will
 build and test, not proof that every capability is already implemented.
 
+## 0.1 Owner authorization checkpoint — 2026-10-14
+
+The owner authorization in
+`evidence/owner-authorization-2026-10-14.md` permits Codex to continue the
+bounded implementation and qualification workflow. It does not amend the
+contract's requirement for truthful provider, legal, customer, field,
+acceptance, or independent-review evidence. The independent AppSec review is
+scoped to the Hunt execution/Docker/Linux boundary and is performed against an
+exact unreleased source commit; it is not a whole-product audit and does not
+require an npm publication. Backlog checkboxes remain governed by their full
+acceptance criteria.
+
 ## 0. Competitive-product amendment — 2026-10-13
 
 The original contract described the safety substrate for Hunt, but it did not

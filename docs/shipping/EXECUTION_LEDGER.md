@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · owner authorization and review boundary recorded
+
+- **Owner authorization:** Anurag Yadav, Owner of Top Notchh Solutions,
+  `anuragyadav.work@gmail.com`, authorized bounded Preview/SCM tests,
+  disposable-runner tests, synthetic Studio technical qualification,
+  protected dry-runs, legal/company packets, and acceptance preparation.
+- **Evidence:** `evidence/owner-authorization-2026-10-14.md`.
+- **Independent review:** The remaining additional human identity for the
+  Hunt review is a separate AppSec/security reviewer who did not implement the
+  reviewed boundary. The review is limited to the exact public CLI source
+  commit and Hunt execution/Docker/Linux isolation; no npm publication is
+  needed.
+- **Disposition:** Owner authorization removes setup questions but does not
+  close provider, legal, customer, field, commercial, release, or independent
+  review evidence. Unrelated rows may continue when their own criteria pass;
+  Hunt rows depending on the report remain open. No checkbox or score change.
+
 ## 2026-10-13 · HUNT Docker adversarial-boundary contribution merged (PR #122)
 
 - **Public contribution:** Expanded the public Hunt Docker adversarial suite

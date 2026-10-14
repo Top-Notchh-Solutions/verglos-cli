@@ -1,16 +1,21 @@
-# Hunt independent review packet · 2026-10-09
+# Hunt independent review packet · review-ready template refreshed 2026-10-14
 
-This packet supersedes the 2026-10-02 packet for the current review target.
-It is a private review request, not a security certification and not a
-reviewer sign-off.
+This packet supersedes the 2026-10-02 and 2026-10-09 packets. It is a private
+review request, not a security certification and not a reviewer sign-off. It
+is supplied to an independent reviewer when the Hunt implementation is
+review-ready; an npm publication is not required.
 
 ## Exact review target
 
 - Repository: `verglos-cli`
-- Exact current CLI commit: `8bea4be2fa18533eafd088122be769e942965626`
+- Exact review commit: `4d91c616b8744676220a48930034f20a7a64ee6a`
+- Review target status: public `main` at the PR #122 merge. Refresh this
+  commit and the evidence references if another public contribution is merged
+  before the review begins.
 - Current public branch: `main`
-- Current hosted self-scan: GitHub Actions run `37827269372`
-- Hosted run URL: `https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/37827269372`
+- Current hosted self-scan: GitHub Actions run `38394513092`
+- Hosted platform/in-toto run: GitHub Actions run `38394513090`
+- Hosted self-scan URL: `https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/38394513092`
 - Hosted runner: `ubuntu-latest`
 - Pinned adversarial image: `postgres:15-alpine`
 - Pinned image digest: `sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a`
@@ -39,11 +44,12 @@ become a positive exploitability verdict.
 
 ## Supplied evidence
 
-- Current exact-head local requalification: **60 pass / 1 documented macOS
-  namespace skip / 0 fail**, exit 0.
-- The hosted self-scan at run `37827269372` completed successfully and ran the
-  pinned Hunt Docker adversarial suite on Ubuntu, then uploaded the adversarial
-  evidence artifact.
+- Current exact-head local requalification: **94 pass / 3 documented macOS
+  skips / 0 fail**, exit 0; the adversarial group is **18 pass / 1 Linux-only
+  namespace skip / 0 fail** on the recorded macOS host.
+- The protected runs `38394513090` and `38394513092` completed successfully
+  after the recorded Ubuntu Node 20 clean-consumer rerun and include the
+  pinned Hunt Docker adversarial suite on Ubuntu.
 - The local run used the repository's pinned image and digest. The macOS skip
   is not Linux namespace evidence; the reviewer must independently verify the
   Linux behavior.
@@ -55,9 +61,10 @@ become a positive exploitability verdict.
 
 The reviewer must independently:
 
-1. Clone or otherwise obtain the repository without receiving private tracker
+1. Clone or otherwise obtain the public repository without receiving private tracker
    files, credentials, customer source, or browser session data.
-2. Check out exactly `8bea4be2fa18533eafd088122be769e942965626`.
+2. Check out exactly `4d91c616b8744676220a48930034f20a7a64ee6a` (or the
+   replacement exact commit written at review scheduling).
 3. Verify the pinned image digest before running the tests.
 4. Run the Linux/Docker adversarial suite and retain the exact command, image
    digest, runtime versions, pass/skip/fail totals, and relevant transcript.
@@ -89,3 +96,22 @@ independent review evidence.
 Return the completed report privately under `docs/shipping/evidence/`.
 Until the signed report exists, `HUNT-011`, `QUAL-CLI-004`, and dependent
 Hunt/release rows remain open.
+
+## How the unreleased source is run
+
+The reviewer reviews the source workspace, not an npm registry package. From a
+Linux host or Ubuntu VM, the reviewer checks out the exact commit, installs
+the lockfile-pinned workspace, verifies the image digest, and runs the same
+bounded evidence command used by the repository-owned qualification:
+
+```text
+VERGLOS_HUNT_DOCKER_INTEGRATION=1 \
+VERGLOS_HUNT_TEST_IMAGE=postgres:15-alpine \
+VERGLOS_HUNT_TEST_DIGEST=sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a \
+node scripts/hunt-adversarial-evidence.mjs /tmp/verglos-hunt-review
+```
+
+The reviewer records the actual commands and environment used rather than
+copying the repository-owned result. A Mac-only Docker Desktop run may keep
+the Linux namespace checks as skips and therefore cannot by itself establish
+the full Linux qualification.

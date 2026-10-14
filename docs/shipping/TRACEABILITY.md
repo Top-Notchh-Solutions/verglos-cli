@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## Owner authorization and independent-review boundary · 2026-10-14
+
+- **Owner:** Anurag Yadav, Top Notchh Solutions, Owner,
+  `anuragyadav.work@gmail.com`.
+- **Evidence:** `evidence/owner-authorization-2026-10-14.md`.
+- **Authorized scope:** bounded Preview/SCM tests, disposable runner,
+  synthetic Studio recipient, protected dry-runs, legal/company packets, and
+  acceptance preparation. No secrets are recorded.
+- **Review scope:** an independent AppSec reviewer will inspect the exact
+  public CLI source commit and Hunt execution/Docker/Linux boundary. This is
+  not a whole-product audit and does not require npm publication.
+- **Acceptance boundary:** owner authorization removes setup questions only.
+  It does not close provider, legal, customer, field, commercial, release, or
+  independent-review rows. Hunt rows depending on AppSec remain unchecked;
+  unrelated rows retain their own acceptance criteria. Score remains
+  **228/52/280 (81.4%)**.
+
 ## HUNT Docker adversarial-boundary contribution · 2026-10-13
 
 - **Public merge:** PR #122 merged normally as

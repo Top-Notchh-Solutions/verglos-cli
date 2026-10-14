@@ -31,6 +31,17 @@ Do not copy this file into the public verglos-cli repository. Do not paste
 passwords, database URLs, API keys, GitHub tokens, private keys, browser
 cookies, customer source, or raw private findings into ChatGPT.
 
+## 2026-10-14 owner-authorization checkpoint
+
+The owner authorization is recorded in
+`evidence/owner-authorization-2026-10-14.md`. It authorizes bounded execution
+and removes setup questions; it does not create a legal opinion, provider
+event, customer observation, or independent AppSec signature. The AppSec
+reviewer, when selected, reviews the exact public CLI source commit and the
+Hunt execution/Docker/Linux boundary from the source tree; a published npm
+package is not required. Keep the remaining deliverable groups and their
+acceptance artifacts unchanged.
+
 ## The one-sentence explanation
 
 Verglos has a lot of code already. The remaining work is mostly proving that
@@ -65,8 +76,9 @@ event, or successful test.
 - The browser check on 2026-10-12 showed that the authenticated GitHub
   Developer Settings page currently says **No GitHub Apps**. Therefore the
   live Verglos GitHub App installation evidence does not exist yet.
-- The current Hunt packet targets CLI commit
-  8bea4be2fa18533eafd088122be769e942965626.
+- The refreshed Hunt packet targets CLI commit
+  4d91c616b8744676220a48930034f20a7a64ee6a until a newer review-ready public
+  contribution is merged.
 - The current final payment contract is **one-time prepaid card billing with
   manual user-initiated renewal**. Automatic recurring renewal and other
   Razorpay methods are not V1 promises unless the contract is deliberately

@@ -6,6 +6,20 @@ This is the simple checklist for finishing the external parts of Verglos V1.
 You do not need to send passwords, database URLs, API keys, customer source
 code, or tokens in ChatGPT.
 
+## 2026-10-14 owner authorization checkpoint
+
+Anurag Yadav, Owner of Top Notchh Solutions
+(`anuragyadav.work@gmail.com`), has authorized the bounded Preview, SCM-test,
+disposable-runner, synthetic-recipient, protected-dry-run, legal/company-
+packet, and acceptance-preparation operations. The record is
+`docs/shipping/evidence/owner-authorization-2026-10-14.md`.
+
+This removes setup questions but does not create an independent AppSec report,
+legal opinion, provider event, customer observation, or field evidence. The
+AppSec review is Hunt-specific and uses the source tree at one exact commit;
+it does not require an npm publication or a whole-product audit. Other
+deliverable groups retain their own acceptance conditions.
+
 ## Current 2026-10-09 position
 
 The separate Neon test database, Preview isolation marker, Docker PostgreSQL
@@ -189,8 +203,9 @@ Give the reviewer this private packet:
 docs/shipping/evidence/hunt-independent-review-packet-2026-10-09.md
 ```
 
-The 2026-10-02 packet is historical. The current packet targets CLI
-`8bea4be2fa18533eafd088122be769e942965626` and must be used for the review.
+The 2026-10-02 and 2026-10-09 targets are historical. The refreshed packet
+currently targets CLI `4d91c616b8744676220a48930034f20a7a64ee6a`; it must be
+refreshed again if a newer public contribution is merged before the review.
 
 The reviewer must:
 

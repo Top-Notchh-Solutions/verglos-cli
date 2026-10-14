@@ -17,6 +17,22 @@ groups in this register. It distinguishes a planned product feature from a
 missing proof artifact and from a genuinely external role. Adding the matrix
 does not clear a blocker or change the 228/52/280 score.
 
+## 2026-10-14 · owner authorization recorded
+
+Anurag Yadav, Owner of Top Notchh Solutions
+(`anuragyadav.work@gmail.com`), authorized the bounded Preview, SCM-test,
+disposable-runner, synthetic-recipient, protected-dry-run, legal/company-
+packet, and acceptance-preparation operations. See
+`../evidence/owner-authorization-2026-10-14.md`.
+
+The only additional human identity still needed for the Hunt review is an
+independent AppSec/security reviewer. The reviewer will receive the public
+source at an exact review-ready commit and review only the Hunt
+execution/Docker/Linux boundary; an npm release is not required. This record
+removes setup questions, but does not close the independent review or the
+other groups' actual provider, legal, recipient, runner, field, customer,
+commercial, release, and final-acceptance artifacts. No checkbox changed.
+
 This register separates technical work Codex can complete from approvals or
 external actions that must come from a real authorized person/provider.
 

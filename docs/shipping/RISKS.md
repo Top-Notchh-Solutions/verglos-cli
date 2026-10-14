@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## 2026-10-14 · R-GOVERNANCE-OWNER-AUTH-001 authorization mistaken for closure
+
+- **Risk:** Owner authorization could be mistaken for an independent AppSec
+  report or for completion of provider, legal, customer, field, commercial,
+  or release evidence.
+- **Mitigation:** Keep the authorization in
+  `evidence/owner-authorization-2026-10-14.md`; scope the independent review
+  to the exact Hunt execution/Docker/Linux boundary; refresh the packet to the
+  exact source commit; require the reviewer's own commands, results,
+  limitations, and signed recommendation; retain all unrelated acceptance
+  conditions.
+- **Status:** Controlled for execution; independent Hunt review and the other
+  rows' own artifacts remain open. Score remains **228/52/280 (81.4%)**.
+- **Gate:** Gate 0/2/5/6.
+
 ## 2026-10-13 · R-PRODUCT-VALUE-001 broad contract without delivered outcomes
 
 - **Risk:** A broad feature list could make Verglos look like a collection of
