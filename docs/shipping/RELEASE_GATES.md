@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-14 · QUAL-WEB-006 Preview organization-route boundary
+
+Web PR #176 passed all protected checks and merged normally as
+`20fd975c404b72fed4590f3ec2425dcdb74ca1cc`, preserving contributor commit
+`e555cd4b3accd569dd87549399fdfe6b6210b420`. Ready Preview deployment
+`dpl_7QutnWvsqKg1KmTU8sYDEtUkTaoE` accepted the bounded synthetic Preview
+identity at `GET /api/v1/organizations` and returned HTTP 200 with a
+`private, no-store` response. The Preview test secret was rotated to a
+generated Vercel Secret because the prior value did not meet the code's
+minimum length; no value was recorded.
+
+This advances one hosted route observation only. Keep `QUAL-WEB-006` open for
+complete browser, dashboard, human, paid/organization, large-data,
+supported-environment, and field-CWV acceptance. No checkbox changed; score
+remains **229/51/280 (81.8%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-preview-org-route-2026-10-14.md`.
+
 ## 2026-10-14 · QUAL-CLI-006 hosted matrix boundary
 
 The exact public CLI merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`
