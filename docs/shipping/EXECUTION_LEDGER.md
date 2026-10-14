@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · ACCEPT-003 evidence-bundle rerun
+
+- **Command:** `pnpm --silent acceptance:evidence:bundle`.
+- **Verification:** secret-like material scan passed; the reproducibility
+  manifest hashes **12** bounded private evidence files and refreshes the
+  current ACCEPT-002 result reference.
+- **Boundary:** provider lifecycle, customer consent, independent review,
+  authenticated browser, field-CWV, and account deletion remain explicitly
+  open. No reviewer sign-off is present in the bundle.
+- **Disposition:** `ACCEPT-003` remains unchecked; score remains **230
+  checked / 50 unchecked / 280 total (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/accept-003-bundle-rerun-2026-10-14.md`.
+
 ## 2026-10-14 · ACCEPT-002 current-head substrate rerun
 
 - **Sources:** clean detached worktrees at CLI

@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-09T21:58:45.965Z",
+  "generatedAt": "2026-10-14T14:25:58.714Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -14,8 +14,8 @@
     },
     {
       "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json",
-      "sha256": "71c2292e416afe09a40a66020a22aa8833242b388e1e13db579c622214a12d2c",
-      "bytes": 4440
+      "sha256": "d3ab97f3a966d820c35f06f8358d4751e8e896b23ddedf06d02e33dac905492d",
+      "bytes": 4348
     },
     {
       "path": "docs/shipping/evidence/acceptance-story-map-2026-10-03.json",

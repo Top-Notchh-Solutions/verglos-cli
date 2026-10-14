@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · ACCEPT-003 evidence-bundle rerun
+
+`pnpm --silent acceptance:evidence:bundle` passed its secret-like material
+scan and refreshed the reproducibility manifest over **12** bounded private
+evidence files. The manifest records the current ACCEPT-002 result hash and
+preserves explicit open status for provider lifecycle, customer consent,
+independent review, authenticated browser, field-CWV, and account deletion.
+
+This is packaging and limitation evidence only. `ACCEPT-003` remains
+unchecked because reviewer sign-off and the external/hosted observations are
+missing. No provider, payment, database, migration, deployment, npm,
+production, customer, or reviewer operation occurred. Score remains **230
+checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`evidence/accept-003-bundle-rerun-2026-10-14.md`.
+
 ## 2026-10-14 · ACCEPT-002 current-head substrate rerun
 
 The private verifier ran from clean detached worktrees at CLI

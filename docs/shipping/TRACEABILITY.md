@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 evidence-bundle rerun · 2026-10-14
+
+- **Command mapping:** `pnpm --silent acceptance:evidence:bundle`.
+- **Artifact mapping:** the manifest hashes **12** bounded private evidence
+  files, passes its secret-like scan, and records the refreshed ACCEPT-002
+  result.
+- **Open-gate mapping:** provider lifecycle, customer consent, independent
+  review, authenticated browser, field-CWV, and account deletion remain open;
+  no reviewer sign-off is asserted.
+- **Acceptance mapping:** `ACCEPT-003` remains unchecked; score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/accept-003-bundle-rerun-2026-10-14.md`.
+
 ## ACCEPT-002 current-head substrate rerun · 2026-10-14
 
 - **Source mapping:** clean detached public CLI and Web worktrees at
