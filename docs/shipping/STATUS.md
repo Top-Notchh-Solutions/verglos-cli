@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · QUAL-WEB-006 Preview organization-route revalidation
+
+Web PR #176 was merged normally as `20fd975c404b72fed4590f3ec2425dcdb74ca1cc`,
+preserving contributor commit `e555cd4b3accd569dd87549399fdfe6b6210b420`.
+The Ready Preview deployment `dpl_7QutnWvsqKg1KmTU8sYDEtUkTaoE` was
+rechecked through Vercel CLI using the bounded synthetic Preview identity;
+`GET /api/v1/organizations` returned HTTP 200 with `private, no-store` and the
+synthetic organization projection. A too-short pre-existing Preview test
+secret was replaced with a generated Vercel Secret; its value was never
+recorded and its temporary local copy was deleted.
+
+This is route-specific hosted Preview evidence only. `QUAL-WEB-006` remains
+open for the complete browser, authenticated dashboard, paid/organization,
+large-data, supported-environment, human screen-reader, and field-CWV
+criteria. No score checkbox changed; score remains **229 checked / 51
+unchecked / 280 total (81.8%)**. Evidence:
+`evidence/qual-web-006-preview-org-route-2026-10-14.md`.
+
 ## 2026-10-14 · QUAL-CLI-006 hosted platform matrix
 
 The public CLI `Platform matrix` workflow completed successfully at exact

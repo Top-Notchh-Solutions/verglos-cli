@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 Preview organization-route revalidation · 2026-10-14
+
+- **Source mapping:** Web contributor commit
+  `e555cd4b3accd569dd87549399fdfe6b6210b420`, merged by PR #176 as regular
+  merge `20fd975c404b72fed4590f3ec2425dcdb74ca1cc`.
+- **Hosted mapping:** Ready Vercel Preview
+  `dpl_7QutnWvsqKg1KmTU8sYDEtUkTaoE`; protected `vercel curl` reached
+  `GET /api/v1/organizations` with the bounded synthetic identity and returned
+  HTTP 200 with a no-store response.
+- **Boundary:** this is one hosted route observation. It does not satisfy the
+  complete `QUAL-WEB-006` browser/dashboard/human/paid/large-data/field-CWV
+  contract, and it does not satisfy SCM, legal, Production, npm, or AppSec
+  gates. No checkbox changed; score remains **229/51/280 (81.8%)**.
+- **Evidence:** `evidence/qual-web-006-preview-org-route-2026-10-14.md`.
+
 ## QUAL-CLI-006 hosted platform matrix · 2026-10-14
 
 - **Source mapping:** public CLI `main` merge
