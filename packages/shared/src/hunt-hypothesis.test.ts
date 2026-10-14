@@ -18,6 +18,7 @@ const playbook: HuntPlaybookDescriptor = {
     { name: "negative", expected: "not-reproduced" },
     { name: "timeout", expected: "inconclusive" },
     { name: "adapter-failure", expected: "environment-error" },
+    { name: "unsupported", expected: "not-supported" },
   ],
   imageDigest: `sha256:${"b".repeat(64)}`,
 };

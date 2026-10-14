@@ -31,10 +31,21 @@ const recipe = () => parseHuntRecipe({
   signature: { status: "verified", signer: "fixture-signer" },
 });
 
-test("catalog exposes explicit positive, negative, timeout, and failure fixtures", () => {
+test("catalog exposes all five required fixture outcomes", () => {
   const descriptor = SUPPORTED_HUNT_RECIPE_CATALOG[0];
-  assert.deepEqual(descriptor.fixtures.map((fixture) => fixture.name), ["positive", "negative", "timeout", "adapter-failure"]);
-  assert.deepEqual(descriptor.fixtures.map((fixture) => fixture.expected), ["confirmed", "not-reproduced", "inconclusive", "environment-error"]);
+  assert.ok(descriptor);
+  assert.deepEqual(descriptor.fixtures.map((fixture) => fixture.name), ["positive", "negative", "timeout", "adapter-failure", "unsupported"]);
+  assert.deepEqual(descriptor.fixtures.map((fixture) => fixture.expected), ["confirmed", "not-reproduced", "inconclusive", "environment-error", "not-supported"]);
+});
+
+test("every catalog family preserves the five shared fixture expectations", () => {
+  for (const descriptor of SUPPORTED_HUNT_RECIPE_CATALOG) {
+    assert.deepEqual(
+      descriptor.fixtures.map((fixture) => [fixture.name, fixture.expected]),
+      [["positive", "confirmed"], ["negative", "not-reproduced"], ["timeout", "inconclusive"], ["adapter-failure", "environment-error"], ["unsupported", "not-supported"]],
+      descriptor.recipeId,
+    );
+  }
 });
 
 test("catalog accepts the exact bounded A1 recipe and returns its digest", () => {
