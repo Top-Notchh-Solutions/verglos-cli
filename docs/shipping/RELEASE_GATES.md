@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-14 · TEAM-CLI-001 Preview provider-readiness boundary
+
+The read-only Vercel/GitHub audit found the Preview policy signer and test-auth
+key names, but no GitHub App configuration and no dedicated Verglos SCM App
+installation in the Top Notchh Solutions organization. The row remains open;
+the next safe action is a least-privilege App install on one authorized
+non-Production repository, followed by Preview binding, policy publication,
+and authenticated signed CLI fetch/cache/offline/cross-tenant evidence.
+
+No provider, database, Production, browser, npm, or public-repository state
+changed. Score remains **228/52/280 (81.4%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-preview-provider-readiness-2026-10-14.md`.
+
 ## 2026-10-14 · HUNT-008 current merged-head Docker qualification
 
 The exact CLI merge head `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` passed the

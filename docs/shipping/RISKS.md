@@ -1,5 +1,23 @@
 # Verglos V1 risk register
 
+## 2026-10-14 · R-TEAM-CLI-001 Preview provider installation absent
+
+- **Risk:** Preview signer configuration could be mistaken for a live SCM
+  trust path even though no dedicated Verglos GitHub App is configured or
+  installed.
+- **Impact:** Hosted repository binding, canonical policy publication, and
+  signed CLI fetch/cache/offline/cross-tenant acceptance cannot be claimed.
+- **Mitigation:** Keep the row and dependent SCM claims unchecked. Install one
+  dedicated least-privilege App only through the authorized non-Production
+  provider path, verify provider-authoritative IDs and permissions, bind the
+  repository/project through the application route, publish the policy, and
+  capture the complete signed-fetch trace. Never write installation or policy
+  rows directly to the database.
+- **Status:** Open external provider prerequisite; code-side route contracts
+  remain qualified. Score remains **228/52/280 (81.4%)**.
+- **Evidence:**
+  `evidence/team-cli-001-preview-provider-readiness-2026-10-14.md`.
+
 ## 2026-10-14 · R-GOVERNANCE-OWNER-AUTH-001 authorization mistaken for closure
 
 - **Risk:** Owner authorization could be mistaken for an independent AppSec

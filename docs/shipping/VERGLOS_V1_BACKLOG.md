@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-14 · TEAM-CLI-001 Preview provider-readiness audit
+
+The read-only Vercel/GitHub audit confirms Preview signer/test-auth key names
+but no `VERGLOS_GITHUB_*` App configuration, and no dedicated Verglos SCM App
+installation in the Top Notchh Solutions organization. `TEAM-CLI-001` remains
+unchecked for its provider installation, repository/project binding, published
+Preview policy, and authenticated signed CLI fetch/cache/offline/cross-tenant
+evidence. No checkbox changed; score remains **228 checked / 52 unchecked /
+280 total (81.4%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-preview-provider-readiness-2026-10-14.md`.
+
 ## 2026-10-14 · HUNT-008 current merged-head Docker qualification
 
 The exact public CLI merge head `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`

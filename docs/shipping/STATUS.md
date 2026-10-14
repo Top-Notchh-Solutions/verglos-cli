@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · TEAM-CLI-001 Preview provider-readiness audit
+
+The read-only Vercel/GitHub audit against Web merge
+`a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` confirms that Preview has the
+organization-policy signer and bounded test-auth variables, but no
+`VERGLOS_GITHUB_APP_ID`, `VERGLOS_GITHUB_APP_PRIVATE_KEY`, or
+`VERGLOS_GITHUB_WEBHOOK_SECRET`. The Top Notchh Solutions organization has
+only the Vercel and Neon installations; no dedicated Verglos SCM App is
+installed. No values were printed and no state changed.
+
+`TEAM-CLI-001` remains unchecked. Its remaining hosted prerequisites are a
+least-privilege GitHub App installation, repository/project binding, published
+canonical Preview policy, and authenticated signed CLI
+fetch/cache/offline/cross-tenant evidence. This audit is not a gate pass and
+does not change the score: **228 checked / 52 unchecked / 280 total (81.4%)**.
+Evidence: `evidence/team-cli-001-preview-provider-readiness-2026-10-14.md`.
+
 ## 2026-10-14 · HUNT-008 current merged-head Docker qualification
 
 The exact CLI merge head `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` was

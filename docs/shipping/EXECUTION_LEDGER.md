@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · TEAM-CLI-001 Preview provider-readiness audit
+
+- **Source:** Web merge `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`; linked
+  Vercel Preview project; Vercel CLI `59.25.4`; GitHub CLI `2.89.0`.
+- **Read-only results:** Preview signer/test-auth environment-key names are
+  present, but all three `VERGLOS_GITHUB_*` App keys are absent. The Top
+  Notchh Solutions GitHub organization exposes only Vercel installation
+  `135902108` and Neon installation `161075107`; no dedicated Verglos SCM App
+  is installed.
+- **Disposition:** `TEAM-CLI-001` remains open for the dedicated
+  least-privilege App installation, repository/project binding, published
+  Preview policy, and authenticated signed CLI fetch/cache/offline/
+  cross-tenant trace. No database/provider/Production/browser/npm state
+  changed; **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-preview-provider-readiness-2026-10-14.md`.
+
 ## 2026-10-14 · HUNT-008 current merged-head Docker qualification
 
 - **Source:** CLI merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` in

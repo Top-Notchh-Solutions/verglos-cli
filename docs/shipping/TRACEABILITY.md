@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 Preview provider-readiness audit · 2026-10-14
+
+- **Source mapping:** Web merge
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`; linked Vercel Preview; no
+  public files changed.
+- **Operational mapping:** the Preview policy signer and bounded test-auth
+  key names are configured, while `VERGLOS_GITHUB_APP_ID`,
+  `VERGLOS_GITHUB_APP_PRIVATE_KEY`, and `VERGLOS_GITHUB_WEBHOOK_SECRET` are
+  absent. The Top Notchh organization has no dedicated Verglos SCM App
+  installation.
+- **Acceptance mapping:** code-side route contracts are qualified, but
+  provider exchange, repository/project binding, published policy, and live
+  signed CLI fetch/cache/offline/cross-tenant evidence are not present.
+  `TEAM-CLI-001` remains unchecked; score remains **228/52/280 (81.4%)**.
+- **Evidence:**
+  `evidence/team-cli-001-preview-provider-readiness-2026-10-14.md`.
+
 ## HUNT-008 current merged-head Docker qualification · 2026-10-14
 
 - **Source mapping:** CLI merge

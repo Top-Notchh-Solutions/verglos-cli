@@ -133,7 +133,31 @@ checkbox changed and score remains **228 checked / 52 unchecked / 280 total
 (81.4%)**. Evidence:
 `evidence/accept-002-current-head-substrate-2026-10-14.md`.
 
-## 0.6 Previous shipping checkpoint — 2026-10-13
+## 0.6 Current TEAM-CLI-001 Preview provider-readiness checkpoint — 2026-10-14
+
+The read-only Vercel/GitHub audit against Web merge
+`a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` confirms that Preview has the
+organization-policy signer and bounded test-auth key names, but no
+`VERGLOS_GITHUB_APP_ID`, `VERGLOS_GITHUB_APP_PRIVATE_KEY`, or
+`VERGLOS_GITHUB_WEBHOOK_SECRET`. The Top Notchh Solutions GitHub organization
+has only the Vercel and Neon installations; no dedicated Verglos SCM App is
+installed. No values were printed and no state changed.
+
+`TEAM-CLI-001` remains unchecked for a least-privilege GitHub App
+installation, repository/project binding, published canonical Preview policy,
+and authenticated signed CLI fetch/cache/offline/cross-tenant evidence. The
+next safe action is to install one authorized non-Production repository with a
+dedicated App, configure its three server-held Preview secrets, and run the
+bounded hosted qualification. This is an external provider prerequisite, not
+a reason to fabricate a row pass. No checkbox changed; score remains **228
+checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/team-cli-001-preview-provider-readiness-2026-10-14.md`.
+
+The independent AppSec reviewer remains a separate Hunt-only gate. Owner
+authorization does not substitute for that review, and the review is not
+needed to create the GitHub App or qualify the unrelated SCM contract.
+
+## 0.7 Previous shipping checkpoint — 2026-10-13
 
 PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after
 all eleven protected checks passed, preserving contribution commit

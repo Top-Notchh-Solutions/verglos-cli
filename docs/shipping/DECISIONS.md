@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-14 · Keep TEAM-CLI-001 open after Preview provider audit
+
+- **Decision:** Treat the missing dedicated GitHub App configuration and
+  installation as a genuine external prerequisite; do not synthesize SCM rows
+  or claim a live policy fetch from signer-only configuration.
+- **Reason:** Preview has the policy signer and bounded test-auth variables,
+  but no `VERGLOS_GITHUB_*` App keys, and the Top Notchh organization exposes
+  no dedicated Verglos SCM App installation. The route contract requires
+  provider-authoritative installation identity, repository/project binding, a
+  published policy, and an authenticated signed fetch trace.
+- **Next:** Install one least-privilege App only on an authorized
+  non-Production repository, configure its server-held Preview secrets, and
+  run the bounded application/provider flow. No browser tab, public
+  repository, Production, database, npm, or customer state changes in this
+  audit.
+- **Disposition:** `TEAM-CLI-001` remains unchecked; score remains
+  **228/52/280 (81.4%)**.
+- **Evidence:**
+  `evidence/team-cli-001-preview-provider-readiness-2026-10-14.md`.
+
 ## 2026-10-14 · record owner authorization without collapsing acceptance gates
 
 - **Decision:** Record Anurag Yadav, Owner of Top Notchh Solutions, as the
