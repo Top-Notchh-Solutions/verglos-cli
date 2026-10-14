@@ -29,7 +29,30 @@ the Hunt execution/Docker/Linux boundary, not the whole product, and does not
 require an npm publication. Unrelated rows may continue when their own
 acceptance conditions are met; Hunt rows depending on the review remain open.
 
-## 0.1 Current shipping checkpoint — 2026-10-14
+## 0.1 Current qualification checkpoint — 2026-10-14
+
+The next dependency-ready queue item after parked `LIC-002` was
+`QUAL-CLI-006`. The exact merged CLI head
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` passed typecheck **14/14**, build
+**8/8**, package tests **13/13** with zero failures, release-contract tests
+**26/26**, seven-archive package/manifest qualification, clean-consumer
+install/import, upgrade/rollback `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`, official
+`in-toto==3.0.0` exact-archive binding, and public-boundary/diff checks.
+Mechanical license inventory passed after the temporary CI platform-entry
+setup, but the current inventory still reports seven redistribution/legal
+review blockers. Docker/Linux environment-gated cases remain explicit skips
+on the macOS host.
+
+This is implementation and artifact qualification progress only;
+`QUAL-CLI-006` remains unchecked for trusted keyless Sigstore/Fulcio/Rekor
+identity, protected publication, legal clearance, independent review, hosted
+supported-platform evidence for the final release candidate, and final
+acceptance. No npm/registry publication, tag, deployment, provider, database,
+entitlement, account, customer, or release-approval state changed. Score
+remains **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/qual-cli-006-current-head-2026-10-14.md`.
+
+## 0.2 Current Hunt fixture-contract checkpoint — 2026-10-14
 
 CLI PR #125 merged normally as `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`,
 preserving contribution commits `677233e57e514390afc44a5dd17222f156ca1b41`
@@ -54,7 +77,7 @@ contribution commits are prohibited. Public repositories receive only
 public-safe code/tests and minimal authoritative public documentation; private
 shipping evidence stays in this tracker.
 
-## 0.2 Previous shipping checkpoint — 2026-10-13
+## 0.3 Previous shipping checkpoint — 2026-10-13
 
 PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after
 all eleven protected checks passed, preserving contribution commit

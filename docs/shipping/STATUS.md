@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · QUAL-CLI-006 current merged-head qualification
+
+The exact merged CLI head `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` passed
+typecheck **14/14**, build **8/8**, full package tests **13/13** with zero
+failures, release-contract tests **26/26**, seven-archive package/manifest
+qualification, clean-consumer install/import, upgrade/rollback
+`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`, official `in-toto==3.0.0` binding, and
+public-boundary/diff checks. Mechanical license inventory passed after the
+same temporary platform-entry setup used by CI, but it still reports seven
+redistribution/legal review blockers. Docker/Linux environment-gated cases
+remain explicit skips on the macOS qualification host.
+
+This is current-head qualification progress only. `QUAL-CLI-006` remains
+unchecked for trusted keyless Sigstore/Fulcio/Rekor identity, protected
+publication, legal clearance, independent review, hosted cross-platform
+release evidence, and final acceptance. No publication, deployment, provider,
+database, entitlement, account, customer, or release-approval state changed;
+score remains **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/qual-cli-006-current-head-2026-10-14.md`.
+
 ## 2026-10-14 · HUNT-008 recipe fixture-contract contribution merged (CLI PR #125)
 
 Public CLI PR #125 merged normally as

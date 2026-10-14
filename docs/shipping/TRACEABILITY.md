@@ -1,5 +1,31 @@
 # Verglos V1 traceability
 
+## QUAL-CLI-006 current merged-head qualification · 2026-10-14
+
+- **Source:** exact public CLI merge commit
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` in disposable detached
+  worktree `/private/tmp/verglos-cli-qual-006`.
+- **Implementation mapping:** current public package archives and release
+  verification scripts include the Hunt fixture contract merged by CLI PR
+  #125; no public file was added by this qualification run.
+- **Verification:** typecheck **14/14**, build **8/8**, package tests
+  **13/13** with zero failures, release-contract tests **26/26**, seven
+  archives and packed manifests, clean consumer, upgrade/rollback,
+  official `in-toto==3.0.0`, public-boundary, and diff checks passed.
+- **Boundary:** local macOS arm64/Node 26 evidence is supplementary; the
+  hosted supported-platform matrix, trusted keyless release identity,
+  protected publication, legal clearance, independent review, and final
+  acceptance remain open. The license inventory mechanically passed but
+  records seven redistribution/legal review blockers. Docker/Linux gated
+  cases remain explicit skips.
+- **Acceptance:** `QUAL-CLI-006` remains unchecked; score remains
+  **228/52/280 (81.4%)**. No publication, deployment, provider, database,
+  entitlement, account, customer, or release-approval state changed. No
+  squash, rebase, force-push, empty, duplicate, or artificial contribution
+  activity was used.
+- **Evidence:**
+  `evidence/qual-cli-006-current-head-2026-10-14.md`.
+
 ## HUNT-008 recipe fixture contract · 2026-10-14
 
 - **Public PR:** [CLI #125](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/125)

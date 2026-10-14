@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · QUAL-CLI-006 current merged-head qualification
+
+- **Source:** exact public CLI merge commit
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` in disposable worktree
+  `/private/tmp/verglos-cli-qual-006`.
+- **Verification:** frozen install; typecheck **14/14**; build **8/8**;
+  package tests **13/13** with zero failures; release-contract tests
+  **26/26**; seven-archive pack and manifest audit; clean consumer;
+  upgrade/rollback `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`; official
+  `in-toto==3.0.0` exact-archive binding; public-boundary and diff checks.
+- **License boundary:** mechanical inventory passed with **254 lockfile
+  versions**, **250 package entries**, one bundled component, and seven
+  review blockers. This is not legal clearance.
+- **Disposition:** implementation and artifact qualification only.
+  `QUAL-CLI-006` remains unchecked for trusted keyless release identity,
+  protected publication, legal clearance, independent review, hosted
+  cross-platform release evidence, and final acceptance. Docker/Linux
+  environment-gated tests remain explicit skips on macOS. No checkbox or
+  score change; **228 checked / 52 unchecked / 280 total (81.4%)**.
+- **Boundary:** no npm/registry publication, tag, deployment, provider,
+  database, migration, entitlement, account, customer, or release-approval
+  state changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-current-head-2026-10-14.md`.
+
 ## 2026-10-14 · HUNT-008 recipe fixture contract merged (CLI PR #125)
 
 - **Public contribution:** Hunt recipe parsing now requires explicit positive,
