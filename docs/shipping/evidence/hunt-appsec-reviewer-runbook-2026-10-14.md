@@ -32,6 +32,39 @@ certification, customer acceptance, or permission to run arbitrary commands.
 - Do not receive or request repository secrets, `.env` files, customer data,
   browser sessions, or private tracker files.
 
+## Choose the available laptop
+
+### Preferred: Windows with WSL2/Ubuntu
+
+Use the Ubuntu terminal inside WSL2, not Windows PowerShell or Command Prompt.
+Docker Desktop must be running with its WSL2 engine and Ubuntu integration
+enabled. In the Ubuntu terminal, run:
+
+```bash
+uname -srm
+docker version
+```
+
+The first command must identify a Linux kernel and the second must show both a
+Docker client and a reachable server. Then run Steps 1–5 below in that same
+Ubuntu terminal. If WSL2 or Docker integration is not already installed,
+Windows setup may require administrator approval and a restart; use the
+official Microsoft/Docker setup for WSL2 rather than improvising a different
+runtime.
+
+### MacBook
+
+The MacBook may be used for source inspection and a preliminary Docker run in
+its Terminal, but the generated report must record that macOS is being used.
+The repository may explicitly skip Linux namespace assertions on macOS, so a
+Mac-only run cannot by itself establish the full Linux AppSec qualification.
+For a gate-ready review, use the Windows WSL2/Ubuntu environment or an Ubuntu
+VM instead. Do not claim the macOS skip as a Linux pass.
+
+Only one reviewer environment is needed. Do not run the review on both
+laptops just to create extra activity; use the Linux-capable environment for
+the authoritative run and record any separate Mac result only as a limitation.
+
 ## Step 1 — clone the exact public source
 
 Run these commands in a fresh terminal on the reviewer’s Linux laptop or
