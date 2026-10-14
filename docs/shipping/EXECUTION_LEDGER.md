@@ -13,9 +13,9 @@
   and fail-closed license-text handling.
 - **Verification:** focused release tests **12/12**, license inventory
   **250/254/1/7**, packed manifests **7/7**, and clean consumer all passed.
-  Hosted in-toto, self-scan, and completed Ubuntu/macOS matrix checks passed;
-  Windows Node 20/22/24 were still in progress at merge and are not credited
-  as passed.
+  Hosted in-toto, self-scan, and all nine Ubuntu/macOS/Windows Node 20/22/24
+  matrix checks subsequently completed successfully; Windows was still in
+  progress at the instant of merge but completed afterward.
 - **Boundary:** no squash/rebase/force-push or artificial contribution commit;
   no npm publication, tag, deployment, or production operation. `LIC-003` and
   `DIST-001` remain unchecked for their legal, dependency, and final release

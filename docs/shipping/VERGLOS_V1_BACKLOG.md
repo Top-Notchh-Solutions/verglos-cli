@@ -17,9 +17,10 @@ bounded signed Hunt fixture.
 This is a dependency-ready implementation slice only. `LIC-003` remains open
 for LIC-002 legal/content decisions and final release qualification;
 `DIST-001` remains open for LOCAL/HUNT/RECORD dependencies and complete final
-package acceptance. Hosted in-toto, self-scan, and completed Ubuntu/macOS
-checks passed; Windows Node 20/22/24 were still in progress at merge and are
-not credited as passed. No squash, rebase, force-push, empty/artificial
+package acceptance. Hosted in-toto, self-scan, and all nine
+Ubuntu/macOS/Windows Node 20/22/24 checks subsequently completed successfully;
+Windows was still in progress at the instant of merge but completed afterward.
+No squash, rebase, force-push, empty/artificial
 contribution commit, npm publication, tag, deployment, or production operation
 was used. Score remains **230 checked / 50 unchecked / 280 total (82.1%)**.
 Evidence: `docs/shipping/evidence/lic-003-dist-001-public-pr126-2026-10-14.md`.

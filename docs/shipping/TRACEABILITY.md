@@ -11,9 +11,9 @@
   versions, source metadata, nested components, or fail-closed license text.
 - **Verification mapping:** focused release suite **12/12**, inventory
   **250 packages / 254 versions / 1 bundled / 7 blockers**, packed manifests
-  **7/7**, and clean consumer passed. Hosted in-toto, self-scan, and completed
-  Ubuntu/macOS jobs passed; Windows Node 20/22/24 were still in progress at
-  merge and are not claimed as passed.
+  **7/7**, and clean consumer passed. Hosted in-toto, self-scan, and all nine
+  Ubuntu/macOS/Windows Node 20/22/24 jobs subsequently completed successfully;
+  Windows was still in progress at the instant of merge but completed afterward.
 - **Boundary mapping:** no squash, rebase, force-push, empty/artificial commit,
   npm publication, tag, deployment, or production operation. This is bounded
   implementation evidence only.

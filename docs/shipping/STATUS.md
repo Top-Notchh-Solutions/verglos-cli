@@ -15,9 +15,10 @@ The focused release suite passed **12/12**, the license inventory check
 reported **250 packages / 254 versions / 1 bundled component / 7 review
 blockers**, the packed manifest audit passed **7/7**, and the clean consumer
 installed all seven archives and executed the bounded signed Hunt fixture.
-The hosted in-toto, self-scan, and completed Ubuntu/macOS matrix checks passed;
-the three Windows matrix jobs were still in progress at merge and are not
-claimed as passed. This is implementation and bounded release evidence only:
+The hosted in-toto, self-scan, and all nine Ubuntu/macOS/Windows Node 20/22/24
+matrix checks subsequently completed successfully; the Windows jobs were still
+running at the instant of merge but are now recorded as passed. This is
+implementation and bounded release evidence only:
 `LIC-003` remains open for LIC-002/legal and final release qualification, and
 `DIST-001` remains open for LOCAL/HUNT/RECORD and complete package acceptance.
 No npm publication, tag, deployment, or production state changed. Score
