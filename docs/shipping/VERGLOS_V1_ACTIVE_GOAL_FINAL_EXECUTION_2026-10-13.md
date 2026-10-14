@@ -58,6 +58,19 @@ Evidence: `evidence/owner-authorization-2026-10-14.md`.
 
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
+The hosted continuation completed successfully in GitHub Actions run
+`38550747564` at the same exact CLI merge
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`. Ubuntu, macOS, and Windows on
+Node 20/22/24 passed **9/9**, and the separate Ubuntu Node 24 in-toto
+release-binding job passed. The run retained 28 non-expired artifacts.
+
+This closes the hosted technical subtask, not the backlog row:
+`QUAL-CLI-006` remains unchecked for trusted keyless Sigstore/Fulcio/Rekor
+identity, protected publication, legal clearance, independent AppSec review,
+and final acceptance. Score remains **229 checked / 51 unchecked / 280 total
+(81.8%)**. Evidence:
+`evidence/qual-cli-006-hosted-matrix-2026-10-14.md`.
+
 The next dependency-ready queue item after parked `LIC-002` was
 `QUAL-CLI-006`. The exact merged CLI head
 `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` passed typecheck **14/14**, build
@@ -68,15 +81,15 @@ install/import, upgrade/rollback `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`, official
 Mechanical license inventory passed after the temporary CI platform-entry
 setup, but the current inventory still reports seven redistribution/legal
 review blockers. Docker/Linux environment-gated cases remain explicit skips
-on the macOS host.
+on the macOS host; the hosted matrix now supplies the separate
+cross-platform qualification evidence above.
 
 This is implementation and artifact qualification progress only;
 `QUAL-CLI-006` remains unchecked for trusted keyless Sigstore/Fulcio/Rekor
-identity, protected publication, legal clearance, independent review, hosted
-supported-platform evidence for the final release candidate, and final
+identity, protected publication, legal clearance, independent review, and final
 acceptance. No npm/registry publication, tag, deployment, provider, database,
 entitlement, account, customer, or release-approval state changed. Score
-remains **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+remains **229 checked / 51 unchecked / 280 total (81.8%)**. Evidence:
 `evidence/qual-cli-006-current-head-2026-10-14.md`.
 
 ## 0.2 Current Hunt fixture-contract checkpoint — 2026-10-14

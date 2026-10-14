@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · QUAL-CLI-006 hosted platform matrix
+
+The public CLI `Platform matrix` workflow completed successfully at exact
+merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`: Ubuntu, macOS, and Windows
+on Node 20, 22, and 24 all passed, and the separate Ubuntu Node 24 in-toto
+release-binding job passed. This is hosted technical qualification progress;
+`QUAL-CLI-006` remains unchecked for trusted keyless publication identity,
+protected publication, legal clearance, independent AppSec review, and final
+acceptance. Score remains **229 checked / 51 unchecked / 280 total (81.8%)**.
+Evidence: `evidence/qual-cli-006-hosted-matrix-2026-10-14.md`.
+
+
 ## 2026-10-14 · standing owner authority; AppSec-last execution sequence
 
 Anurag Yadav, Owner of Top Notchh Solutions and Verglos

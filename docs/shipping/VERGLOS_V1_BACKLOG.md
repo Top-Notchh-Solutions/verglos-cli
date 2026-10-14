@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-14 · QUAL-CLI-006 hosted platform matrix
+
+The public CLI `Platform matrix` run `38550747564` passed at exact merge
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`: all nine Ubuntu/macOS/Windows ×
+Node 20/22/24 jobs passed, as did the separate in-toto release-binding job.
+This is hosted technical evidence only. `QUAL-CLI-006` remains unchecked for
+trusted keyless publication identity, protected publication, legal clearance,
+independent AppSec review, and final acceptance. No checkbox changed; score
+remains **229 checked / 51 unchecked / 280 total (81.8%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-hosted-matrix-2026-10-14.md`.
+
 ## 2026-10-14 · owner authority and AppSec-last backlog sequencing
 
 Anurag Yadav, Owner of Top Notchh Solutions and Verglos

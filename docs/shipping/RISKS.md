@@ -2158,3 +2158,12 @@ staging or copy private evidence into the public repository. Historical branch
 cleanup is pending an explicit owner decision because remote branch deletion
 is destructive. Evidence:
 `docs/shipping/evidence/public-repository-boundary-audit-2026-10-13.md`.
+## 2026-10-14 · hosted CLI matrix recorded
+
+The hosted public CLI matrix passed at exact merge
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` in run `38550747564`: Ubuntu,
+macOS, and Windows on Node 20/22/24 passed, plus the separate in-toto
+binding. This reduces platform qualification risk but does not resolve
+trusted keyless publication, legal, AppSec, or final-acceptance risk.
+`QUAL-CLI-006` remains open and the live score is **229/51/280 (81.8%)**.
+Evidence: `evidence/qual-cli-006-hosted-matrix-2026-10-14.md`.

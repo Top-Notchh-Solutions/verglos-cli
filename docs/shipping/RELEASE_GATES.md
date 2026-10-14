@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-14 · QUAL-CLI-006 hosted matrix boundary
+
+The exact public CLI merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`
+passed GitHub Actions run `38550747564`: all nine Ubuntu/macOS/Windows ×
+Node 20/22/24 jobs and the separate in-toto binding job succeeded. This
+advances hosted technical evidence only. `QUAL-CLI-006` remains open for
+trusted keyless identity, protected publication, legal clearance, independent
+AppSec review, and final acceptance. Score remains **229/51/280 (81.8%)**.
+Evidence: `docs/shipping/evidence/qual-cli-006-hosted-matrix-2026-10-14.md`.
+
 ## 2026-10-14 · owner authority and AppSec-last sequencing rule
 
 Anurag Yadav, Owner of Top Notchh Solutions and Verglos

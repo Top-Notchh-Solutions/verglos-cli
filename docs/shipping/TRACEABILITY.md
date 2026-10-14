@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## QUAL-CLI-006 hosted platform matrix · 2026-10-14
+
+- **Source mapping:** public CLI `main` merge
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and GitHub Actions run
+  `38550747564`.
+- **Verification mapping:** Ubuntu, macOS, and Windows on Node 20/22/24
+  passed **9/9**; separate Ubuntu Node 24 in-toto release binding passed;
+  28 non-expired run artifacts were retained.
+- **Acceptance mapping:** this proves hosted build/test/fixture/
+  consumer/upgrade technical coverage only. Trusted keyless publication,
+  protected publication, legal clearance, independent AppSec review, and
+  final acceptance remain open. `QUAL-CLI-006` remains unchecked; score is
+  **229/51/280 (81.8%)**.
+- **Evidence:** `evidence/qual-cli-006-hosted-matrix-2026-10-14.md`.
+
 ## Owner authority and AppSec-last sequencing · 2026-10-14
 
 - **Company authority:** Anurag Yadav, Owner of Top Notchh Solutions and
