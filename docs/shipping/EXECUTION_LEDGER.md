@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · non-GA commercial boundary audit
+
+- **Sources:** exact public CLI ref
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web ref
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`.
+- **Verification:** tracked-file `git grep` returned zero matches for
+  `generally available`, `available now`, or `GA` in both refs. CLI labels
+  Team/Studio/Enterprise roadmap; Web’s catalog labels Team/Studio inactive,
+  Enterprise contracted, and all three non-purchasable/unverified. The Web
+  truth registry removes unverified prices and unqualified preview or
+  unshipped capability claims.
+- **Disposition:** the non-commit no-general-availability-claim row is
+  complete. No tier was activated or released, and no implementation,
+  provider, checkout, npm, deployment, customer, field, legal, or AppSec
+  gate was inferred. Score is **230 checked / 50 unchecked / 280 total
+  (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/non-ga-commercial-boundary-2026-10-14.md`.
+
 ## 2026-10-14 · fresh-laptop Hunt AppSec reviewer runbook
 
 - **Runbook:** Expanded the private reviewer runbook with a from-zero Windows

@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## Non-GA commercial boundary audit · 2026-10-14
+
+- **Source mapping:** CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`, read from exact public Git
+  refs.
+- **Claim mapping:** both refs have zero tracked-file matches for general
+  availability language. CLI keeps Team/Studio/Enterprise roadmap; Web keeps
+  Team/Studio inactive and Enterprise contracted, with all three unavailable
+  for purchase until their separate gates pass.
+- **Fail-closed mapping:** Web’s truth registry removes unverified plan prices,
+  corrects unqualified preview claims, and removes not-shipped capability
+  claims.
+- **Acceptance mapping:** only the non-commit “do not claim Team/Studio/
+  Enterprise generally available” row is checked. No product-tier,
+  AppSec/legal/provider/customer/field/final-acceptance claim is made. Score
+  is **230/50/280 (82.1%)**.
+- **Evidence:** `evidence/non-ga-commercial-boundary-2026-10-14.md`.
+
 ## QUAL-WEB-006 Preview organization-route revalidation · 2026-10-14
 
 - **Source mapping:** Web contributor commit

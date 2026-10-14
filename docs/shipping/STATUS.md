@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · non-GA commercial boundary audit
+
+The exact public CLI ref `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+ref `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` have zero tracked-file matches
+for `generally available`, `available now`, or `GA`. CLI plan limits keep Team,
+Studio, and Enterprise on the roadmap; Web keeps Team and Studio inactive and
+non-purchasable and Enterprise contracted and non-purchasable, while its truth
+registry removes unverified prices and unqualified or unshipped capability
+claims.
+
+This closes only the non-commit policy row prohibiting general-availability
+claims. It does not qualify or release those tiers and does not affect the open
+Hunt/AppSec, legal, provider, customer, field, or final-acceptance gates.
+Score is **230 checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`evidence/non-ga-commercial-boundary-2026-10-14.md`.
+
 ## 2026-10-14 · fresh-laptop Hunt AppSec reviewer runbook
 
 The private Hunt AppSec runbook now starts from a reformatted laptop. The
