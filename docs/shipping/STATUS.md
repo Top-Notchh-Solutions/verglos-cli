@@ -1,5 +1,29 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · LIC-003 / DIST-001 public PR #126 merged normally
+
+Public CLI PR #126 merged normally as
+`f1cd8269e642e5e24755e12e4308a2d6e3f349bc`, preserving the two substantive
+contribution commits `b9541157f9d46662ef9a170cc92f106eccf27ea3` and
+`575275d8f7e0b487c8141fe11a4c3a44d4675dae`. The release notice generator now
+falls back to installed pnpm virtual-store manifests when the global pnpm
+license index is unavailable; its deterministic regression test covers that
+path. PR #126 was assigned to `anuragyadav-git` and used no squash, rebase,
+force-push, empty commit, or artificial contribution activity.
+
+The focused release suite passed **12/12**, the license inventory check
+reported **250 packages / 254 versions / 1 bundled component / 7 review
+blockers**, the packed manifest audit passed **7/7**, and the clean consumer
+installed all seven archives and executed the bounded signed Hunt fixture.
+The hosted in-toto, self-scan, and completed Ubuntu/macOS matrix checks passed;
+the three Windows matrix jobs were still in progress at merge and are not
+claimed as passed. This is implementation and bounded release evidence only:
+`LIC-003` remains open for LIC-002/legal and final release qualification, and
+`DIST-001` remains open for LOCAL/HUNT/RECORD and complete package acceptance.
+No npm publication, tag, deployment, or production state changed. Score
+remains **230 checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`evidence/lic-003-dist-001-public-pr126-2026-10-14.md`.
+
 ## 2026-10-14 · LIC-002 upstream source provenance recheck
 
 The seven automated LIC-002 blockers were mapped to exact upstream version

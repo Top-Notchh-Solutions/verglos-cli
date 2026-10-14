@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · LIC-003 / DIST-001 public PR #126 merged normally
+
+- **Public change:** PR #126 in `Top-Notchh-Solutions/verglos-cli` merged as
+  `f1cd8269e642e5e24755e12e4308a2d6e3f349bc`, preserving substantive commits
+  `b9541157f9d46662ef9a170cc92f106eccf27ea3` and
+  `575275d8f7e0b487c8141fe11a4c3a44d4675dae`; assignee was
+  `anuragyadav-git`.
+- **Implementation:** notice generation falls back from an unavailable pnpm
+  global license index to installed virtual-store manifests while retaining
+  identity, versions, source metadata, deterministic grouping, nested lookup,
+  and fail-closed license-text handling.
+- **Verification:** focused release tests **12/12**, license inventory
+  **250/254/1/7**, packed manifests **7/7**, and clean consumer all passed.
+  Hosted in-toto, self-scan, and completed Ubuntu/macOS matrix checks passed;
+  Windows Node 20/22/24 were still in progress at merge and are not credited
+  as passed.
+- **Boundary:** no squash/rebase/force-push or artificial contribution commit;
+  no npm publication, tag, deployment, or production operation. `LIC-003` and
+  `DIST-001` remain unchecked for their legal, dependency, and final release
+  acceptance criteria. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/lic-003-dist-001-public-pr126-2026-10-14.md`.
+
 ## 2026-10-14 · LIC-002 upstream source provenance recheck
 
 - **Source mapping:** seven automated blockers from CLI merge
