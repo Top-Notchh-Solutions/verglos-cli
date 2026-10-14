@@ -171,7 +171,21 @@ next dependency-ready assessment. No checkbox changed; score remains **228
 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
 `evidence/studio-cli-001-current-head-recheck-2026-10-14.md`.
 
-## 0.8 Previous shipping checkpoint — 2026-10-13
+## 0.8 Current LIC-002 technical checkpoint — 2026-10-14
+
+The exact CLI merged head has a mechanical inventory of **250 package entries
+and 254 versions**, one nested component, and **7 unresolved review blockers**.
+License/notice/release-verifier tests passed **14/14**, and generated notices
+are 379,981 bytes with digest
+`sha256:f2b37e1d74dc6d7927c357daf1705a1a8ae0cd0dc3837e072710d123914b6e51`.
+
+`LIC-002` remains unchecked because the legal addendum still has no reviewer
+decision, signature/reference, scope, conditions, or date. `QUAL-CLI-006` is
+the next dependency-ready assessment. No checkbox changed; score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/lic-002-current-head-technical-recheck-2026-10-14.md`.
+
+## 0.9 Previous shipping checkpoint — 2026-10-13
 
 PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after
 all eleven protected checks passed, preserving contribution commit

@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## LIC-002 current-head technical recheck · 2026-10-14
+
+- **Source mapping:** CLI merge
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` in a disposable worktree.
+- **Technical mapping:** the deterministic inventory covers 250 package entries
+  and 254 resolved versions, retains one nested component, and surfaces seven
+  review blockers; notice and release-verifier tests pass 14/14.
+- **Boundary:** the inventory does not grant redistribution, trademark,
+  fixture, engine, image, database, recipe, or copied-standard permission.
+  The legal addendum remains unsigned and undecided. `LIC-002` remains
+  unchecked; `QUAL-CLI-006` is next; score remains **228/52/280 (81.4%)**.
+- **Evidence:**
+  `evidence/lic-002-current-head-technical-recheck-2026-10-14.md`.
+
 ## STUDIO-CLI-001 current merged-head recheck · 2026-10-14
 
 - **Source mapping:** CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web

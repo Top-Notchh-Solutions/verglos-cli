@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## 2026-10-14 · LIC-002 current-head technical boundary
+
+The current mechanical dependency inventory and notice/release-verifier tests
+are green, but seven review blockers remain and the legal addendum has no
+authorized decision or signature. Keep `LIC-002` open; the strict queue moves
+to `QUAL-CLI-006` while legal review remains a release prerequisite. Score
+remains **228/52/280 (81.4%)**. Evidence:
+`docs/shipping/evidence/lic-002-current-head-technical-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · STUDIO-CLI-001 current-head boundary
 
 Current exact CLI/Web heads pass the local projection, receipt, Studio

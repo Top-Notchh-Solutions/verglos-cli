@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · LIC-002 current-head technical recheck
+
+The exact CLI merge head has a mechanical inventory of **250 package entries /
+254 versions**, one nested bundled component, and **7 unresolved review
+blockers**: the nested `benchmark` license conflict plus six BlueOak package
+reviews. License/notice/release-verifier tests passed **14/14**; generated
+notices are **379,981 bytes** with SHA-256
+`f2b37e1d74dc6d7927c357daf1705a1a8ae0cd0dc3837e072710d123914b6e51`.
+
+This is not legal approval. The addendum still has no reviewer decision,
+signature/reference, scope, conditions, or date. `LIC-002` remains unchecked;
+`QUAL-CLI-006` is next. No checkbox changed; score remains **228 checked / 52
+unchecked / 280 total (81.4%)**. Evidence:
+`evidence/lic-002-current-head-technical-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · STUDIO-CLI-001 current merged-head recheck
 
 The exact merged heads passed shared client projection **4/4**, CLI projection

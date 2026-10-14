@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-14 · LIC-002 current-head technical recheck
+
+The exact CLI head has a mechanical inventory of **250 package entries / 254
+versions**, one nested component, and **7 unresolved review blockers**. The
+license/notice/release-verifier tests passed **14/14** and generated notices
+are digest-bound, but the legal addendum remains unsigned and undecided.
+`LIC-002` remains unchecked; `QUAL-CLI-006` is next. No checkbox changed and
+the score remains **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`docs/shipping/evidence/lic-002-current-head-technical-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · STUDIO-CLI-001 current merged-head recheck
 
 The exact current CLI/Web heads pass the shared projection **4/4**, CLI

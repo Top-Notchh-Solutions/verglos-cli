@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## 2026-10-14 · R-LIC-002 current release inventory still needs legal review
+
+- **Risk:** A green mechanical inventory or generated notice file could be
+  mistaken for permission to redistribute dependencies, images, databases,
+  fixtures, recipes, or trademarks.
+- **Mitigation:** Keep `LIC-002` and release rows open; retain the seven
+  blocker identities, review the exact package/archive/image/fixture scope,
+  and require an authorized written legal/company decision with conditions and
+  verifiable approval reference before publication.
+- **Status:** Technical inventory revalidated; legal gate open. The next
+  dependency-ready assessment is `QUAL-CLI-006`. Score remains **228/52/280
+  (81.4%)**.
+- **Evidence:**
+  `evidence/lic-002-current-head-technical-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · R-STUDIO-CLI-001 recipient boundary remains unobserved
 
 - **Risk:** A passing local projection/receipt contract could be mistaken for

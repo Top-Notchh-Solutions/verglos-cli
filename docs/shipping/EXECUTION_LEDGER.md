@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · LIC-002 current-head technical recheck
+
+- **Source:** CLI merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` in a
+  disposable worktree.
+- **Inventory:** 250 package entries / 254 versions, one nested component, and
+  7 unresolved mechanical review blockers (nested `benchmark` conflict plus
+  six BlueOak entries).
+- **Verification:** license/notice/release-verifier tests **14/14**; generated
+  notice output 379,981 bytes with digest
+  `sha256:f2b37e1d74dc6d7927c357daf1705a1a8ae0cd0dc3837e072710d123914b6e51`.
+- **Disposition:** technical evidence only. The legal packet has no decision,
+  signature/reference, scope, conditions, or date. `LIC-002` remains open;
+  `QUAL-CLI-006` is next. No checkbox or score change; **228 checked / 52
+  unchecked / 280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/lic-002-current-head-technical-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · STUDIO-CLI-001 current merged-head recheck
 
 - **Sources:** CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web

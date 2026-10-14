@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-14 · Keep LIC-002 open after current-head inventory
+
+- **Decision:** Treat the current dependency and notice output as mechanical
+  evidence, not as legal clearance.
+- **Reason:** Seven review blockers remain and the legal packet has no
+  reviewer decision, signature/reference, scope, conditions, or date. Owner
+  authorization cannot substitute for that artifact.
+- **Next:** Move to `QUAL-CLI-006` while retaining legal review as a release
+  prerequisite; resolve the exact blockers against the exact release artifact
+  before any publication or redistribution claim.
+- **Disposition:** No checkbox or score change; **228/52/280 (81.4%)**.
+- **Evidence:**
+  `evidence/lic-002-current-head-technical-recheck-2026-10-14.md`.
+
 ## 2026-10-14 · Keep STUDIO-CLI-001 open after current-head recheck
 
 - **Decision:** Treat the projection and receipt tests as implementation
