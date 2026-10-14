@@ -42,7 +42,7 @@ export const HuntFixtureContractSchema = z.object({
   const expected = {
     positive: "confirmed",
     negative: "not-reproduced",
-    timeout: "environment-error",
+    timeout: "inconclusive",
     infrastructureFailure: "environment-error",
     unsupported: "not-supported",
   } as const;

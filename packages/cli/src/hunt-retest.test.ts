@@ -16,7 +16,7 @@ const finding = { id: "finding-cli-retest", ruleId: "hunt.a1.utf8-contains", loc
 const fixtures = {
   positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
   negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
-  timeout: { fixtureId: "timeout", expectedVerdict: "environment-error" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" },
   infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
   unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
 } as const;

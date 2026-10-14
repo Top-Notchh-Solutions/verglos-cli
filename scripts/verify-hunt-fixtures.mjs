@@ -33,6 +33,13 @@ function recipe(inputs, timeoutMs = 2_000) {
     imageDigest: { algorithm: "sha256", value: "b".repeat(64) },
     command: ["verglos-probe", "utf8-contains"],
     assertions: ["probe result is true"],
+    fixtures: {
+      positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+      negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+      timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" },
+      infrastructureFailure: { fixtureId: "adapter-failure", expectedVerdict: "environment-error" },
+      unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+    },
     inputs,
     isolation: "restricted-process",
     limits: { timeoutMs, cpuMs: Math.max(1, timeoutMs - 1), memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 },
