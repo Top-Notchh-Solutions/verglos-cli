@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · ACCEPT-002 current-head substrate rerun
+
+- **Sources:** clean detached worktrees at CLI
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`.
+- **Verification:** CLI **290/293** with three explicit skips, Web **920/950**
+  with 30 explicit skips, and composed Team/Studio/Enterprise/quality
+  substrates **74/74**; every verifier command exited 0.
+- **Boundary:** this is repository-owned substrate/regression evidence. It
+  does not create hosted/provider/customer/reviewer/browser-human/field-CWV
+  or account-deletion evidence. The lower CLI pass count is retained as three
+  explicit skips.
+- **Disposition:** `ACCEPT-002` remains unchecked; score remains **230
+  checked / 50 unchecked / 280 total (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-current-head-substrate-rerun-2026-10-14.md`.
+
 ## 2026-10-14 · DIST-001 current-head package-surface audit
 
 - **Source:** exact public CLI merge

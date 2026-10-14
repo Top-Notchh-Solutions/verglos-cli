@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · ACCEPT-002 current-head substrate rerun
+
+The private verifier ran from clean detached worktrees at CLI
+`ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web
+`a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`. The CLI package suite passed
+**290/293** with three explicit skips, the Web suite passed **920/950** with
+30 explicit skips, and the composed Team/Studio/Enterprise/quality substrates
+passed **74/74**. All commands exited 0; output hashes are retained in the
+machine-readable result.
+
+This is repository-owned substrate evidence only. `ACCEPT-002` remains
+unchecked for hosted/provider, customer/recipient, independent-review,
+human-browser/field-CWV, and account-deletion evidence. The three CLI skips
+are recorded, not reclassified. No provider, payment, database, migration,
+deployment, npm, production, customer, or reviewer operation occurred. Score
+remains **230 checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`evidence/accept-002-current-head-substrate-rerun-2026-10-14.md`.
+
 ## 2026-10-14 · DIST-001 current-head package-surface audit
 
 The exact public CLI merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` passed

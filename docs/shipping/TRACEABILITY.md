@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## ACCEPT-002 current-head substrate rerun · 2026-10-14
+
+- **Source mapping:** clean detached public CLI and Web worktrees at
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`.
+- **Verification mapping:** CLI **290/293** with three explicit skips, Web
+  **920/950** with 30 explicit skips, composed substrates **74/74**, and all
+  commands exited 0. The individual output hashes are in the retained JSON.
+- **Boundary mapping:** the private verifier executes repository-owned tests
+  only and does not create provider, customer, reviewer, browser-human,
+  field-CWV, payment, migration, or production observations.
+- **Acceptance mapping:** `ACCEPT-002` remains unchecked for the external and
+  hosted story criteria; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/accept-002-current-head-substrate-rerun-2026-10-14.md`.
+
 ## DIST-001 current-head package-surface audit · 2026-10-14
 
 - **Source mapping:** public CLI merge
