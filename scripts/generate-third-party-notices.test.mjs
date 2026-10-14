@@ -22,6 +22,16 @@ test("third-party notices are deterministic and contain provenance disclaimers",
   assert.doesNotMatch(first, /node_modules[\\/]/);
 });
 
+test("third-party notices remain deterministic when pnpm license indexes are unavailable", async () => {
+  const env = { ...process.env, VERGLOS_NOTICE_FORCE_LOCAL_SCAN: "1" };
+  const first = (await run("node", ["scripts/generate-third-party-notices.mjs"], { env, maxBuffer: 16 * 1024 * 1024 })).stdout;
+  const second = (await run("node", ["scripts/generate-third-party-notices.mjs"], { env, maxBuffer: 16 * 1024 * 1024 })).stdout;
+  assert.equal(first, second);
+  assert.match(first, /^THIRD-PARTY NOTICES\n/);
+  assert.match(first, /benchmark \(1\.0\.0\)[\s\S]*?Bundled by: fast-uri@3\.1\.7/u);
+  assert.match(first, /Review blocker: nested-license-conflicts-with-container/u);
+});
+
 test("license text collection retains separate LICENSE and NOTICE files", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-package-license-"));
   try {
