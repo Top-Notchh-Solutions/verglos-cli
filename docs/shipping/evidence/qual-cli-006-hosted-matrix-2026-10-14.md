@@ -39,4 +39,3 @@ require trusted keyless Sigstore/Fulcio/Rekor identity, protected publication,
 legal/redistribution clearance, independent AppSec review, and final release
 acceptance. No npm publication, tag, deployment, provider, database,
 entitlement, customer, or release-approval state changed.
-
