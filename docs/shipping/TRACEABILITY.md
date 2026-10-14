@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 organization-policy cache boundary hardening · 2026-10-14
+
+- **Public PR:** [CLI #124](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/124)
+  merged normally as `4642f7d43141e23f0d73b7a245767393bb63d644`, preserving
+  contribution commit `cc27a121a13025977a78521d59192279e93799cb`.
+- **Implementation mapping:** The cache parent directory is enforced at
+  mode 0700 before each atomic mode-0600 replacement. A response-body stall
+  after headers is tested to resolve from a still-valid verified cache.
+- **Verification:** Focused tests 7/7; full CLI suite zero failures; CLI
+  typecheck/build, `git diff --check`, public-boundary audit, protected
+  platform/in-toto run `38542000125`, and self-scan `38542000081` passed.
+- **Boundary:** This is code-side TEAM-CLI-001 progress. Hosted signer,
+  trust-root, provider/repository binding, published policy, and authenticated
+  live signed fetch/cache/offline/cross-tenant evidence remain open. The row
+  remains unchecked; score remains **228/52/280 (81.4%)**.
+- **Acceptance:** No squash, rebase, force-push, or artificial contribution
+  activity. No private material, credentials, provider state, database,
+  publication, production deployment, or customer source was used.
+- **Evidence:**
+  `evidence/team-cli-001-policy-cache-boundary-2026-10-14.md`.
+
 ## ENT-CLI-001 private-runner response-body timeout hardening · 2026-10-14
 
 - **Public PR:** [CLI #123](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/123)

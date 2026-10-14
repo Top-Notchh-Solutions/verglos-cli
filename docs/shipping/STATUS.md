@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · TEAM-CLI-001 policy-cache boundary hardening merged (CLI PR #124)
+
+CLI PR #124 merged normally as `4642f7d43141e23f0d73b7a245767393bb63d644`,
+preserving contribution commit `cc27a121a13025977a78521d59192279e93799cb`.
+The organization-policy cache now protects its parent directory at mode 0700
+before atomic mode-0600 replacement, and the fetch tests cover a response-body
+stall after headers with verified-cache fallback. Focused tests passed 7/7;
+the full CLI suite, typecheck, build, public-boundary audit, protected run
+`38542000125`, and self-scan `38542000081` passed. No squash, rebase,
+force-push, or artificial activity was used.
+
+This remains implementation progress. TEAM-CLI-001 is still open for hosted
+signer/trust-root activation, provider/repository binding, published policy,
+and authenticated live signed fetch/cache/offline/cross-tenant evidence. No
+checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence:
+`evidence/team-cli-001-policy-cache-boundary-2026-10-14.md`.
+
 ## 2026-10-14 · ENT-CLI-001 private-runner response-body timeout hardening merged (CLI PR #123)
 
 CLI PR #123 merged normally as

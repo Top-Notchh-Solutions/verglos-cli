@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · TEAM-CLI-001 policy-cache boundary hardening merged
+
+- **Public contribution:** CLI PR #124 adds mode-0700 enforcement for the
+  organization-policy cache parent directory before atomic mode-0600 file
+  replacement and a response-body timeout regression proving fallback to a
+  verified cache after headers arrive.
+- **Identity:** contribution commit `cc27a121a13025977a78521d59192279e93799cb`
+  was preserved in normal merge commit
+  `4642f7d43141e23f0d73b7a245767393bb63d644`. No squash, rebase, force-push,
+  empty commit, or artificial contribution activity.
+- **Verification:** focused policy cache/fetch tests 7/7; full CLI suite zero
+  failures; CLI typecheck/build, public-boundary audit, protected
+  platform/in-toto run `38542000125`, and self-scan `38542000081` passed.
+- **Disposition:** Code-side TEAM-CLI-001 progress only. Hosted signer/
+  trust-root activation, provider/repository binding, published policy, and
+  authenticated live signed fetch/cache/offline/cross-tenant evidence remain
+  open. No checkbox or score change; **228 checked / 52 unchecked / 280 total
+  (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-policy-cache-boundary-2026-10-14.md`.
+
 ## 2026-10-14 · TEAM-CLI-001 repository-policy route hardening merged
 
 - **Public contribution:** Web PR #175 adds a fail-closed database
