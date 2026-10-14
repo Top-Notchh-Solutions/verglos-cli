@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · ENT-CLI-001 private-runner response-body timeout hardening merged (CLI PR #123)
+
+CLI PR #123 merged normally as
+`e863307590f7bbecb8a2cb24b994f1825e1391d5`, preserving contribution commit
+`dec59b6905208250fc288bf212725e6590596ff5`. The private-runner poll and
+upload client now bounds response-body reads and maps body-read aborts to a
+bounded network failure. Focused tests passed 7/7; the full CLI suite passed
+with zero failures, build 8/8, typecheck 14/14, protected platform/in-toto
+run `38539111651`, and self-scan `38539111751` passed. Evidence:
+`evidence/ent-cli-001-private-runner-response-timeout-2026-10-14.md`.
+
+ENT-CLI-001 remains open for operational enrollment/execution and result
+reconciliation, cross-platform operational evidence, and independent review.
+No checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. No private material was pushed to the public repository.
+
 ## 2026-10-14 · TEAM-CLI-001 repository-policy route hardening merged (Web PR #175)
 
 Web PR #175 merged normally as `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`,

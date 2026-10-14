@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 private-runner response-body timeout hardening · 2026-10-14
+
+- **Public PR:** [CLI #123](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/123)
+  merged normally as `e863307590f7bbecb8a2cb24b994f1825e1391d5`, preserving
+  contribution commit `dec59b6905208250fc288bf212725e6590596ff5`.
+- **Implementation:** The GET poll and POST result-upload deadlines remain
+  active through response-body reads. A stalled body is bounded and reported
+  as a network failure; no source or raw response is projected.
+- **Verification:** Focused tests 7/7; full CLI suite zero failures; build
+  8/8; typecheck 14/14; protected platform/in-toto run `38539111651`; public
+  self-scan `38539111751`. The rerun Windows Node 20 job was
+  `115772734817`.
+- **Boundary:** This does not evidence operational enrollment credentials,
+  approved isolated runner execution/result reconciliation, customer target
+  qualification, or independent review. ENT-CLI-001 remains unchecked.
+- **Acceptance:** No squash, rebase, force-push, or artificial contribution
+  activity. Score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/ent-cli-001-private-runner-response-timeout-2026-10-14.md`.
+
 ## TEAM-CLI-001 policy-route initialization hardening · 2026-10-14
 
 - **Public PR:** [#175](https://github.com/anuragyadav-git/verglos-web/pull/175)
