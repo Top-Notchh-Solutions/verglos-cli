@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · QUAL-WEB-006 current merged-head qualification
+
+The exact Web merge head `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` passed
+frozen install, typecheck, focused qualification tests **20/20**, the configured
+Web suite (**876 passed / 24 explicit skips / 0 failed**), and the Next build
+with **47/47** generated pages. The local Chrome accessibility snapshot exposed
+named navigation, main content, headings, controls, lists, tables, and FAQ
+content; the source carries explicit reduced-motion rules and fail-closed
+qualification thresholds. Existing protected Preview `/`, `/detectors`,
+`/docs`, and `/checkout` header checks returned HTTP 200.
+
+This is implementation and read-only qualification progress only.
+`QUAL-WEB-006` remains unchecked because the Verglos browser tab closed before
+the continuation Lighthouse/performance run, and the required human
+screen-reader, complete authenticated dashboard, paid/organization large-data,
+supported-environment browser, and field-CWV evidence remain open. No
+unrelated browser tabs were touched. No checkbox changed; score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/qual-web-006-current-head-2026-10-14.md`.
+
 ## 2026-10-14 · QUAL-CLI-006 current merged-head qualification
 
 The exact merged CLI head `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` passed

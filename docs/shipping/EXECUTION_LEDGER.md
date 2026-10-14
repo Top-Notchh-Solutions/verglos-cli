@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · QUAL-WEB-006 current merged-head qualification
+
+- **Source:** exact public Web merge commit
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` in disposable worktree
+  `/private/tmp/verglos-web-qual-006`; existing Preview deployment
+  `dpl_CWUzbJ2myRqkXRMSu4KgVcS7zYi`.
+- **Verification:** frozen install; typecheck; focused Web qualification
+  **20/20**; configured suite **876 passed / 24 explicit skips / 0 failed**;
+  Next build **47/47** pages; local a11y-tree snapshot; protected Preview
+  header checks for `/`, `/detectors`, `/docs`, and `/checkout` all HTTP 200.
+- **Runtime boundary:** host Node `26.4.0` was outside the package's declared
+  Node `22.x` engine. The local browser page closed before Lighthouse and
+  performance continuation; no unrelated tab was navigated and no hosted
+  browser metric was inferred from `vercel curl`.
+- **Disposition:** code-side and read-only qualification progress only.
+  `QUAL-WEB-006` remains unchecked for human screen-reader, complete
+  authenticated dashboard, large-data, supported-browser performance, and
+  field-CWV evidence. No checkbox or score change; **228 checked / 52
+  unchecked / 280 total (81.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-current-head-2026-10-14.md`.
+
 ## 2026-10-14 · QUAL-CLI-006 current merged-head qualification
 
 - **Source:** exact public CLI merge commit

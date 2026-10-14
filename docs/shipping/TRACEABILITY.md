@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 current merged-head qualification · 2026-10-14
+
+- **Source:** Web merge commit
+  `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7`; existing Ready Preview
+  `dpl_CWUzbJ2myRqkXRMSu4KgVcS7zYi`.
+- **Implementation mapping:** the current Web tree contains the fail-closed
+  qualification classifier, desktop-tier CWV thresholds, keyboard and
+  screen-reader-landmark requirements, and explicit reduced-motion CSS for
+  public and organization surfaces.
+- **Verification:** typecheck; focused qualification tests **20/20**; Web
+  suite **876 passed / 24 explicit skips / 0 failed**; build **47/47**;
+  local accessibility-tree observation; protected Preview route headers
+  **200** for `/`, `/detectors`, `/docs`, and `/checkout`.
+- **Boundary:** Node `26.4.0`/macOS is supplementary against the declared
+  Node `22.x` engine. No new Lighthouse/performance trace, human
+  screen-reader review, large-dataset run, or field-CWV result is claimed
+  because the existing Verglos tab closed before that continuation. The row
+  remains unchecked; score remains **228/52/280 (81.4%)**.
+- **Evidence:** `evidence/qual-web-006-current-head-2026-10-14.md`.
+
 ## QUAL-CLI-006 current merged-head qualification · 2026-10-14
 
 - **Source:** exact public CLI merge commit

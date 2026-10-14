@@ -2586,6 +2586,21 @@ checkbox changed; score remains **218 checked / 62 unchecked / 280 total
 
 The first implementation task after the founder's command is `TRUTH-001`. It is the correct start because every later schema, plan, migration, public claim, and compatibility decision depends on knowing precisely what is already shipped and must be retained.
 
+### QUAL-WEB-006 evidence addendum · 2026-10-14 · current Web merge head
+
+Web merge `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` passed typecheck,
+focused qualification **20/20**, the configured Web suite **876 passed / 24
+explicit skips / 0 failed**, and build **47/47**. A local accessibility-tree
+snapshot exposed named navigation/main content, controls, headings, lists,
+tables, and FAQ content. The existing protected Preview returned HTTP 200 for
+`/`, `/detectors`, `/docs`, and `/checkout`. This is qualification progress
+only: the browser tab closed before the continuation Lighthouse/performance
+run, and human screen-reader, complete authenticated dashboard, large-data,
+supported-environment browser, and field-CWV evidence remain open. No
+checkbox changed; score remains **228 checked / 52 unchecked / 280 total
+(81.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-current-head-2026-10-14.md`.
+
 ### QUAL-WEB-006 evidence addendum · 2026-10-07 · PR #151
 
 Web PR #151 head `07788c0` merged as `c1bca533` after hosted run

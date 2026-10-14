@@ -77,7 +77,29 @@ contribution commits are prohibited. Public repositories receive only
 public-safe code/tests and minimal authoritative public documentation; private
 shipping evidence stays in this tracker.
 
-## 0.3 Previous shipping checkpoint — 2026-10-13
+## 0.3 Current Web qualification checkpoint — 2026-10-14
+
+The next dependency-ready assessment after the CLI qualification checkpoint
+was `QUAL-WEB-006`. The exact Web merge head
+`a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` passed frozen install, typecheck,
+focused qualification tests **20/20**, the configured Web suite (**876 passed
+/ 24 explicit skips / 0 failed**), and the Next build with **47/47** generated
+pages. The local Chrome accessibility snapshot exposed named navigation and
+main content, headings, controls, lists, tables, and FAQ content. The current
+Web source includes reduced-motion CSS and fail-closed accessibility/CWV
+threshold evaluation. The existing protected Vercel Preview returned HTTP 200
+for `/`, `/detectors`, `/docs`, and `/checkout` through read-only CLI checks.
+
+This is implementation and read-only qualification progress only.
+`QUAL-WEB-006` remains unchecked: the existing Verglos Chrome tab closed before
+the continuation Lighthouse/performance run, and human screen-reader,
+complete authenticated dashboard, paid/organization large-data,
+supported-environment browser, and field-CWV evidence remain open. The
+unrelated browser tabs were not touched. No checkbox changed; score remains
+**228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
+`evidence/qual-web-006-current-head-2026-10-14.md`.
+
+## 0.4 Previous shipping checkpoint — 2026-10-13
 
 PR #122 merged normally as `4d91c616b8744676220a48930034f20a7a64ee6a` after
 all eleven protected checks passed, preserving contribution commit
