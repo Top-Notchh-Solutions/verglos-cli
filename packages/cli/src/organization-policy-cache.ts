@@ -1,4 +1,4 @@
-import { lstat, mkdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
+import { chmod, lstat, mkdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
 import { constants } from "node:fs";
 import { dirname } from "node:path";
 import { randomUUID } from "node:crypto";
@@ -37,7 +37,9 @@ export async function writeOrganizationPolicyCache(path: string, entry: Organiza
   const parsed = parseCache(entry, entry);
   const bytes = Buffer.from(`${canonicalizeJson(parsed)}\n`, "utf8");
   if (bytes.byteLength > MAX_CACHE_BYTES) throw new Error("organization policy cache exceeds the size limit");
-  await mkdir(dirname(path), { recursive: true, mode: 0o700 });
+  const parent = dirname(path);
+  await mkdir(parent, { recursive: true, mode: 0o700 });
+  await chmod(parent, 0o700);
   try {
     const existing = await lstat(path);
     if (existing.isSymbolicLink() || !existing.isFile()) throw new Error("organization policy cache target must be a regular file");
