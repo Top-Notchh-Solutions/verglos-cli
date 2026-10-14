@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-14 · TEAM-CLI-002 command-wiring recheck
+
+The exact public CLI merge `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`
+already wires `verglos ci --check-payload` with required manifest-digest,
+HTTPS-record-URL, and commit inputs. The bounded command projects only the
+source-free subject, decision, policy, record, commit, summary, and payload
+digest; invalid identities, unsafe URLs, symlinked decisions, and digest
+mismatches fail closed. The focused CLI coverage includes success, invalid
+input, and process-wiring cases.
+
+This corrects stale backlog wording only. `TEAM-CLI-002` remains unchecked for
+the signed `TEAM-CLI-001` policy dependency, live SCM/provider integration,
+and complete end-to-end acceptance. No provider request, source upload,
+deployment, npm operation, or production state changed. Score remains
+**230 checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`evidence/team-cli-002-command-wiring-current-head-2026-10-14.md`.
+
 ## 2026-10-14 · non-GA commercial boundary audit
 
 The exact public CLI ref `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web

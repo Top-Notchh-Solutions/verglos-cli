@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-002 command-wiring recheck · 2026-10-14
+
+- **Source mapping:** public CLI merge
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`.
+- **Implementation mapping:** `ci --check-payload` is wired in the CLI
+  entrypoint to the bounded source-free payload projector; shared validation
+  preserves exact subject, decision, policy, record, commit, and payload
+  digest identity.
+- **Boundary mapping:** malformed inputs, unsafe record URLs, symlinked
+  decisions, and subject/evaluation digest mismatches fail closed. No provider
+  call or source upload occurs.
+- **Acceptance mapping:** code-side command wiring is evidenced, but the row
+  remains unchecked for signed organization-policy activation, live SCM/provider
+  integration, and complete end-to-end acceptance. Score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/team-cli-002-command-wiring-current-head-2026-10-14.md`.
+
 ## Non-GA commercial boundary audit · 2026-10-14
 
 - **Source mapping:** CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web

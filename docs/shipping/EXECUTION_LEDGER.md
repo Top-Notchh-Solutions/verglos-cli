@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-14 · TEAM-CLI-002 command-wiring recheck
+
+- **Source:** exact public CLI merge
+  `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`.
+- **Verification:** `packages/cli/src/index.ts` wires
+  `ci --check-payload` and required source-free inputs to the bounded
+  projection; shared validation binds the primary subject/evaluation digest,
+  policy identity, record digest/HTTPS URL, commit, and payload digest. The
+  focused CLI file covers successful projection, invalid/symlink input, and
+  process wiring.
+- **Disposition:** stale “CLI command wiring” wording was corrected in the
+  private backlog. `TEAM-CLI-002` remains open for the signed organization
+  policy dependency, live SCM/provider integration, and complete acceptance.
+  Score remains **230 checked / 50 unchecked / 280 total (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-002-command-wiring-current-head-2026-10-14.md`.
+
 ## 2026-10-14 · non-GA commercial boundary audit
 
 - **Sources:** exact public CLI ref
