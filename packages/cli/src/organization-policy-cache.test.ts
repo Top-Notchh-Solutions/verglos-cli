@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, symlink, writeFile } from "node:fs/promises";
+import { chmod, mkdir, mkdtemp, stat, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -14,6 +14,23 @@ test("organization policy cache writes atomically and reads a validated entry", 
   const path = join(root, "org", "repo.json");
   await writeOrganizationPolicyCache(path, entry);
   assert.deepEqual(await readOrganizationPolicyCache(path, entry), entry);
+  if (process.platform !== "win32") {
+    const directory = await stat(join(root, "org"));
+    const file = await stat(path);
+    assert.equal(directory.mode & 0o777, 0o700);
+    assert.equal(file.mode & 0o777, 0o600);
+  }
+});
+
+test("organization policy cache repairs an existing parent directory before atomic replacement", async () => {
+  if (process.platform === "win32") return;
+  const root = await mkdtemp(join(tmpdir(), "verglos-policy-cache-parent-"));
+  const directory = join(root, "org");
+  const path = join(directory, "repo.json");
+  await mkdir(directory, { mode: 0o755 });
+  await chmod(directory, 0o755);
+  await writeOrganizationPolicyCache(path, entry);
+  assert.equal((await stat(directory)).mode & 0o777, 0o700);
 });
 
 test("organization policy cache refuses scope/digest tampering and symlink targets", async () => {

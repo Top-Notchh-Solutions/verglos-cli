@@ -32,6 +32,43 @@ test("falls back to a verified cache when the remote is unavailable", async () =
   assert.equal(second.resolved, true); assert.equal(second.source, "cache");
 });
 
+test("falls back to a verified cache when response headers arrive but the body times out", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-body-timeout-"));
+  const fixtureData = fixture();
+  const cachePath = join(root, "policy.json");
+  const first = await fetchOrganizationPolicy({ organizationId: "org_acme", repositoryId: "repo_app", trustedKeys: fixtureData.trustedKeys, cachePath, apiUrl: "https://example.test", licenseKey: "secret", now: "2026-10-06T00:00:00.000Z", fetchImpl: async () => new Response(JSON.stringify(fixtureData.envelope), { status: 200 }) });
+  assert.equal(first.resolved, true);
+
+  const second = await fetchOrganizationPolicy({
+    organizationId: "org_acme",
+    repositoryId: "repo_app",
+    trustedKeys: fixtureData.trustedKeys,
+    cachePath,
+    apiUrl: "https://example.test",
+    licenseKey: "secret",
+    now: "2026-10-06T01:00:00.000Z",
+    timeoutMs: 10,
+    fetchImpl: async (_url, init) => ({
+      ok: true,
+      status: 200,
+      headers: new Headers(),
+      arrayBuffer: () => new Promise<ArrayBuffer>((_resolve, reject) => {
+        const signal = init?.signal;
+        if (signal?.aborted) {
+          reject(new DOMException("The operation was aborted", "AbortError"));
+          return;
+        }
+        signal?.addEventListener("abort", () => reject(new DOMException("The operation was aborted", "AbortError")), { once: true });
+      }),
+    }) as Response,
+  });
+
+  assert.equal(second.resolved, true);
+  assert.equal(second.source, "cache");
+  assert.equal(second.status, 200);
+  assert.equal(second.entry?.policyDigest, policyDocumentDigest(policy));
+});
+
 test("rejects an external policy endpoint before attaching credentials or making a request", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-endpoint-"));
   const fixtureData = fixture();
