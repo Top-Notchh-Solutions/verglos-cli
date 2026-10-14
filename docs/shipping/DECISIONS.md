@@ -49,7 +49,7 @@
 
 ## 2026-10-14 · record owner authorization without collapsing acceptance gates
 
-- **Decision:** Record Anurag Yadav, Owner of Top Notchh Solutions, as the
+- **Decision:** Record Anurag Yadav, Owner of Top Notchh Solutions and Verglos, as the
   authorized owner for bounded Preview/SCM tests, disposable-runner tests,
   synthetic Studio technical qualification, protected dry-runs, legal/company
   packets, and acceptance preparation.

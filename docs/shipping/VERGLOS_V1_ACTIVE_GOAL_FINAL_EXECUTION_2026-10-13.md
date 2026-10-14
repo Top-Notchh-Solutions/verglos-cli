@@ -11,7 +11,7 @@
 
 ## 0.0 Owner authorization checkpoint — 2026-10-14
 
-Anurag Yadav, Owner of Top Notchh Solutions
+Anurag Yadav, Owner of Top Notchh Solutions and Verglos
 (`anuragyadav.work@gmail.com`), authorized Codex to continue the bounded
 shipping workflow using the existing public-safe repositories, Preview
 deployment, Preview policy signer, Preview SCM test scope, disposable runner,

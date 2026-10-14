@@ -200,7 +200,7 @@
 
 ## 2026-10-14 · owner authorization and review boundary recorded
 
-- **Owner authorization:** Anurag Yadav, Owner of Top Notchh Solutions,
+- **Owner authorization:** Anurag Yadav, Owner of Top Notchh Solutions and Verglos,
   `anuragyadav.work@gmail.com`, authorized bounded Preview/SCM tests,
   disposable-runner tests, synthetic Studio technical qualification,
   protected dry-runs, legal/company packets, and acceptance preparation.

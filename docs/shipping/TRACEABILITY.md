@@ -213,7 +213,8 @@
 
 ## Owner authorization and independent-review boundary · 2026-10-14
 
-- **Owner:** Anurag Yadav, Top Notchh Solutions, Owner,
+- **Owner:** Anurag Yadav, Owner of Top Notchh Solutions and Verglos,
+  Top Notchh Solutions, Owner,
   `anuragyadav.work@gmail.com`.
 - **Evidence:** `evidence/owner-authorization-2026-10-14.md`.
 - **Authorized scope:** bounded Preview/SCM tests, disposable runner,

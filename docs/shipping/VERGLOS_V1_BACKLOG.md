@@ -144,7 +144,7 @@ remain open. No checkbox changed; score remains **228 checked / 52 unchecked /
 
 ## 2026-10-14 · owner authorization and AppSec review scheduling boundary
 
-Anurag Yadav, Owner of Top Notchh Solutions, authorized the bounded shipping
+Anurag Yadav, Owner of Top Notchh Solutions and Verglos, authorized the bounded shipping
 operations recorded in
 `docs/shipping/evidence/owner-authorization-2026-10-14.md`. Codex may continue
 dependency-ready implementation, Preview/fixture/runner qualification, and

@@ -197,7 +197,7 @@ No checkbox changed; score remains **228 checked / 52 unchecked / 280 total
 
 ## 2026-10-14 · owner authorization recorded; independent Hunt review pending
 
-Anurag Yadav, Owner of Top Notchh Solutions
+Anurag Yadav, Owner of Top Notchh Solutions and Verglos
 (`anuragyadav.work@gmail.com`), authorized the bounded Preview, SCM-test,
 disposable-runner, synthetic-recipient, protected-dry-run, legal/company-
 packet, and acceptance-preparation operations recorded in

@@ -63,7 +63,7 @@ external or Production operation occurred; score remains **228/52/280
 
 ## Owner authorization checkpoint — 2026-10-14
 
-Top Notchh Solutions owner Anurag Yadav authorized the bounded Preview,
+Top Notchh Solutions and Verglos owner Anurag Yadav authorized the bounded Preview,
 SCM-test, disposable-runner, synthetic-recipient, protected-dry-run,
 legal/company-review, and acceptance-preparation operations recorded in
 `evidence/owner-authorization-2026-10-14.md`.

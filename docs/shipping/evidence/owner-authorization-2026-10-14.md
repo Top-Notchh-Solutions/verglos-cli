@@ -6,6 +6,7 @@ is closed by this record.
 ## Authorizing owner
 
 - **Name:** Anurag Yadav
+- **Ownership:** Owner of Top Notchh Solutions and Verglos
 - **Organization:** Top Notchh Solutions
 - **Role:** Owner
 - **Contact:** anuragyadav.work@gmail.com
