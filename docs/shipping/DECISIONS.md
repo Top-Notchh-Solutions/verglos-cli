@@ -17,6 +17,15 @@
   contract. It does not turn permission into provider, customer, field, or
   independent-review evidence. No checkbox or score change.
 
+## 2026-10-14 · no networked Hunt exceptions approved
+
+- **Decision:** Approve no networked Hunt recipe exceptions for this goal;
+  default network policy remains deny.
+- **Evidence:** `evidence/owner-authorization-2026-10-14.md`.
+- **Disposition:** The corresponding non-commit gate is checked. Hunt
+  implementation and AppSec-dependent rows remain unchanged. Score is
+  **229/51/280 (81.8%)**.
+
 ## 2026-10-14 · Keep LIC-002 open after current-head inventory
 
 - **Decision:** Treat the current dependency and notice output as mechanical

@@ -15,7 +15,8 @@ the reviewer is competent and did not implement that boundary.
 This does not weaken any acceptance criterion or mark rows green by permission
 alone. Progress every dependency-ready non-AppSec row first, then run the
 independent Hunt review and close only rows whose complete criteria pass.
-Score remains **228/52/280 (81.4%)**.
+The owner has also recorded no networked Hunt exceptions; default deny remains
+in force. Score is **229/51/280 (81.8%)**.
 
 ## 2026-10-14 · LIC-002 current-head technical boundary
 

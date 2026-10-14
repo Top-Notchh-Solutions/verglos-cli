@@ -49,8 +49,12 @@ hold them for AppSec.
 
 Owner authority does not auto-check a row and does not replace an actual
 provider, customer, field, or independent-review observation. The active
-score remains **228 checked / 52 unchecked / 280 total (81.4%)** until each
-row's complete acceptance criteria pass.
+score is **229 checked / 51 unchecked / 280 total (81.8%)** after recording
+one explicit owner decision: no networked Hunt recipe exception is approved;
+default deny remains in force. Each implementation row still requires its
+complete acceptance criteria.
+
+Evidence: `evidence/owner-authorization-2026-10-14.md`.
 
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
@@ -766,7 +770,7 @@ agent.
 The authoritative score must be recomputed from the live checklist after every
 accepted batch. At replacement time it is:
 
-    228 checked / 52 open / 280 total / 81.4 percent
+    229 checked / 51 open / 280 total / 81.8 percent
 
 Every progress update must state:
 

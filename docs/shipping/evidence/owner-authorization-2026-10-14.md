@@ -34,6 +34,12 @@ bounded non-production environments:
 - prepare and execute protected dry-runs, legal/company review packets, and
   acceptance-study preparation within the current goal boundary.
 
+## Explicit Hunt network decision
+
+No networked Hunt recipe exception is approved for this goal. The default
+network policy remains deny; any future exception would require a separately
+recorded owner decision tied to a named recipe, target, scope, and window.
+
 Default Hunt network policy remains deny. No customer source, production
 database, production migration, npm publication, campaign, held-out POC, or
 final public release decision is authorized by this record.
@@ -69,8 +75,8 @@ AppSec/security competence and can independently run and report the review.
 This record authorizes execution; it does not assert that execution happened.
 Provider, legal, recipient, runner, accessibility, field-CWV, customer,
 commercial, release-provenance, and final-acceptance rows remain open until
-their own acceptance artifacts exist. The live score remains **228 checked /
-52 unchecked / 280 total (81.4%)**.
+their own acceptance artifacts exist. The live score is **229 checked / 51
+unchecked / 280 total (81.8%)** after the explicit no-network decision.
 
 ## Reviewer workflow without an npm release
 

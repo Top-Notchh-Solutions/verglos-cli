@@ -16,6 +16,13 @@ if they did not implement the reviewed Hunt boundary. Schedule AppSec last.
 This is a sequencing rule, not permission to check rows without their actual
 evidence. Score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
 
+## 2026-10-14 · explicit no-network Hunt decision
+
+The owner decision record confirms that no networked Hunt recipe exception is
+approved for this goal; the default remains deny. The corresponding non-commit
+gate is checked. No Hunt implementation row is changed by this decision.
+Score is **229 checked / 51 unchecked / 280 total (81.8%)**.
+
 ## 2026-10-14 · LIC-002 current-head technical recheck
 
 The exact CLI head has a mechanical inventory of **250 package entries / 254
@@ -2627,7 +2634,7 @@ assumes the legacy `licenses` table. No checkbox changed; backlog remains
 - [ ] Select/approve queue and object-storage provider only after the Phase 0 cost/constraint decision.
 - [ ] Obtain legal review for premium content license, contributor terms, trademarks, privacy, terms, and enterprise obligations.
 - [ ] Approve any external engine/fixture redistribution with unresolved license or NOTICE status.
-- [ ] Approve networked Hunt recipe exceptions individually; default remains no network.
+- [x] Approve networked Hunt recipe exceptions individually; none approved for this goal, default remains no network. Evidence: `docs/shipping/evidence/owner-authorization-2026-10-14.md`.
 - [ ] Arrange independent Hunt isolation/security review.
 - [ ] Supply authorized customer fixtures/repositories and consent for external acceptance.
 - [ ] Authorize external conversations, paid pilots, checkout tests, campaign, publish, deploy, npm release, tags, pushes, and production migrations separately.

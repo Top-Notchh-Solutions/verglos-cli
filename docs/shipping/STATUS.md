@@ -19,8 +19,12 @@ Owner authority does not auto-check a row: record real row-specific artifacts,
 and keep provider/customer/field observations open until actually observed.
 
 This sequencing rule changes who must be asked, not the acceptance contract or
-the score. The score remains **228 checked / 52 unchecked / 280 total
-(81.4%)** until complete row criteria pass.
+the score. One non-commit owner decision is now recorded: no networked Hunt
+exception is approved and the default remains deny. Score is **229 checked /
+51 unchecked / 280 total (81.8%)**; implementation rows still require their
+complete acceptance criteria.
+
+Evidence: `evidence/owner-authorization-2026-10-14.md`.
 
 ## 2026-10-14 · LIC-002 current-head technical recheck
 

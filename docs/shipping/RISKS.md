@@ -13,8 +13,8 @@
 - **Boundary:** Owner authorization still does not replace an actual provider,
   customer, field, or independent-review artifact. Close non-AppSec rows when
   their own complete evidence exists; do not manufacture passes.
-- **Status:** Execution sequencing corrected; score remains **228/52/280
-  (81.4%)**.
+- **Status:** Execution sequencing corrected; the no-network owner decision is
+  recorded. Score is **229/51/280 (81.8%)**.
 
 ## 2026-10-14 · R-LIC-002 current release inventory still needs legal review
 

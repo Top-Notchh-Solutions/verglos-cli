@@ -14,7 +14,10 @@
 - **Acceptance mapping:** Owner authority clears setup questions only. Each
   row still needs its own actual technical/provider/customer/field artifact;
   owner permission never becomes that artifact. Score remains
-  **228/52/280 (81.4%)**.
+  **229/51/280 (81.8%)** after the explicit no-network Hunt decision; the
+  corresponding non-commit gate is checked.
+- **Network mapping:** No networked Hunt exception is approved for this goal;
+  default deny is recorded in `evidence/owner-authorization-2026-10-14.md`.
 
 ## LIC-002 current-head technical recheck · 2026-10-14
 

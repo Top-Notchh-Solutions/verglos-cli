@@ -14,7 +14,11 @@
   boundary. Schedule this review last.
 - **Truth boundary:** This policy does not close rows by permission alone and
   does not replace observed provider/customer/field results. Score remains
-  **228 checked / 52 unchecked / 280 total (81.4%)**.
+  **229 checked / 51 unchecked / 280 total (81.8%)** after the explicit
+  no-network Hunt decision; implementation rows remain governed by their own
+  criteria.
+- **Network decision:** No networked Hunt recipe exception is approved for
+  this goal; default deny remains in force.
 
 ## 2026-10-14 · LIC-002 current-head technical recheck
 
