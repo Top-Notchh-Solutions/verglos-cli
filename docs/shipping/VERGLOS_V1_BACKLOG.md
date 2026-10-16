@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-16 · Hunt AppSec pinned Linux technical pass
+
+The reviewer’s fresh Linux checkout at exact PR #127 merge
+`fa77496b43d040fe8be977315078502e9e85b947` completed the pinned adversarial
+suite with **96 pass / 2 skip / 0 fail** and exit `0`, using Node `v22.23.3`
+and the required Postgres digest. The two skip names/reasons must be copied
+from `run.log` into the independent report.
+
+This is technical qualification only. The independent AppSec gate remains
+open until the reviewer supplies organization, security role/experience,
+explicit non-implementer confirmation, findings/limitations, a recommendation,
+and verifiable sign-off. No checkbox changed; score remains **230 checked / 50
+unchecked / 280 total (82.1%)**. Evidence:
+`docs/shipping/evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## 2026-10-16 · Hunt AppSec setup failure recorded
 
 The first Step 4 attempt from fresh clone `/tmp/verglos-appsec.nBJjp0/verglos-cli`

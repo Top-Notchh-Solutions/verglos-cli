@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## Hunt AppSec pinned Linux suite pass · 2026-10-16
+
+- **Source mapping:** exact PR #127 merge
+  `fa77496b43d040fe8be977315078502e9e85b947`.
+- **Runtime mapping:** Linux `x64`, Node `v22.23.3`, `postgres:15-alpine`,
+  and the required pinned digest.
+- **Result mapping:** **96 pass / 2 skip / 0 fail**, exit `0`.
+- **Acceptance mapping:** technical qualification passed, but the two skips
+  require exact report-level explanation and the independent reviewer report
+  still lacks identity/independence, findings, recommendation, and sign-off.
+  No checkbox or score changed; **230/50/280 (82.1%)** remains current.
+- **Evidence:**
+  `evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## Hunt AppSec suite setup attempt · 2026-10-16
 
 - **Execution mapping:** the exact pinned commit was used from fresh clone

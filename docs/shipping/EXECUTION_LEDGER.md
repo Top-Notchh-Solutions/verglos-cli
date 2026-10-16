@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-16 · Hunt AppSec pinned Linux suite pass
+
+- **Source/runtime:** fresh checkout at exact PR #127 merge
+  `fa77496b43d040fe8be977315078502e9e85b947`, Linux `x64`, Node `v22.23.3`,
+  pinned Postgres digest.
+- **Result:** **96 pass / 2 skip / 0 fail**, exit `0`.
+- **Boundary:** this is repository-owned technical suite evidence. The two
+  skipped tests must be identified from `run.log`; no independent security
+  recommendation is inferred.
+- **Open evidence:** reviewer organization/role/experience,
+  non-implementer statement, findings, limitations, recommendation, and
+  verifiable sign-off.
+- **Disposition:** no checkbox or score change; **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## 2026-10-16 · Hunt AppSec suite setup attempt
 
 - **Attempt:** the fresh clone at `/tmp/verglos-appsec.nBJjp0/verglos-cli`

@@ -120,3 +120,26 @@ The reviewer must install the locked dependencies in the current
 `nBJjp0` checkout, rerun Step 4 into a new output directory, and retain the
 new `report.json`, `run.log`, and terminal log. The AppSec gate and score are
 unchanged.
+
+## Step 4 technical run — 2026-10-16 13:25:33Z
+
+The reviewer reran the suite from fresh checkout
+`/tmp/verglos-appsec.Y91Fot/verglos-cli` after installing the frozen
+dependencies. The generated report records:
+
+- exact source commit `fa77496b43d040fe8be977315078502e9e85b947`;
+- Linux `x64`, Node `v22.23.3`;
+- image `postgres:15-alpine` and digest
+  `sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a`;
+- **96 passed / 2 skipped / 0 failed**; and
+- exit code `0`.
+
+This establishes successful pinned Linux technical qualification for the
+repository-owned adversarial suite. The two skipped tests must be named from
+`run.log` in the reviewer report. The report’s own limitation correctly says
+that this suite is not an independent security review.
+
+The AppSec gate remains pending the reviewer’s completed report: organization,
+security role/experience, explicit non-implementer confirmation, findings,
+residual risks, exact skipped-test explanation, recommendation, and verifiable
+sign-off. No checkbox or score changed.

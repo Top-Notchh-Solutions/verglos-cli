@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-16 · Hunt AppSec pinned Linux suite passed
+
+From fresh checkout at exact PR #127 merge
+`fa77496b43d040fe8be977315078502e9e85b947`, the reviewer’s pinned Linux run
+completed with **96 passed / 2 skipped / 0 failed**, exit code `0`, Node
+`v22.23.3`, and the required Postgres image digest. This supersedes the prior
+missing-dependency setup attempt as the current technical result. The two
+skips still need their exact names/reasons recorded from `run.log`.
+
+This remains repository-owned technical evidence, not the independent AppSec
+conclusion. Vaibhav must still provide the reviewer identity/role,
+non-implementer statement, findings, limitations, recommendation, and
+verifiable sign-off. No checkbox or score changed; score remains **230 checked
+/ 50 unchecked / 280 total (82.1%)**. Evidence:
+`evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## 2026-10-16 · Hunt AppSec suite setup attempt recorded
 
 The reviewer’s first Step 4 attempt from fresh clone
