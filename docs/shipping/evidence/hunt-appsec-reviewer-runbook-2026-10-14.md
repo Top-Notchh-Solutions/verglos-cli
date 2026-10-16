@@ -56,11 +56,9 @@ Restart Windows when asked. On the first Ubuntu launch, choose a Linux
 username and password. These are local laptop credentials; do not send them
 to the shipping owner.
 
-2. Open Ubuntu and update WSL. If `wsl.exe` is not found inside Ubuntu, run
-`wsl --update` once from PowerShell instead:
+2. Update WSL from **PowerShell**, not from the Ubuntu shell:
 
-```bash
-set -euo pipefail
+```powershell
 wsl.exe --update
 ```
 
@@ -218,24 +216,63 @@ fa77496b43d040fe8be977315078502e9e85b947
 
 ## Step 2 — install the locked repository dependencies and verify Docker
 
+Run this step from the same Ubuntu terminal in the checked-out repository.
+Do not run `cd ..`; the prompt should end in:
+
+```text
+/tmp/verglos-appsec.XXXXXX/verglos-cli
+```
+
+Run the commands one at a time or paste the complete block. Do not include the
+Markdown fence characters. This step intentionally does **not** use
+`docker image inspect`: that command can terminate an Ubuntu/WSL terminal when
+Docker Desktop’s WSL integration has an image-metadata problem. The pull log
+and the digest listing provide the same pinned-image evidence without that
+failure-prone call.
+
 ```bash
+set -euo pipefail
+
 pnpm install --frozen-lockfile
 
 node --version
 pnpm --version
 docker version
 
-docker pull postgres:15-alpine@sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a
-docker_digest="$(docker image inspect postgres:15-alpine --format '{{index .RepoDigests 0}}')"
-printf 'Resolved image reference: %s\n' "$docker_digest"
-case "$docker_digest" in
-  *"@sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a") ;;
-  *) echo 'Pinned image digest mismatch; stop and report it.' >&2; exit 1 ;;
-esac
+docker_pull_log=/tmp/verglos-postgres-pull.log
+docker pull postgres:15-alpine@sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a 2>&1 \
+  | tee "$docker_pull_log"
+grep -Fqx 'Digest: sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a' \
+  "$docker_pull_log"
+
+docker image ls --digests postgres:15-alpine
+docker image ls --digests --format '{{.Digest}}' postgres:15-alpine \
+  | grep -Fx 'sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a' \
+  >/dev/null
+
+printf 'Pinned image reference verified: docker.io/library/postgres:15-alpine@sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a\n'
 ```
 
 Record the OS, architecture, kernel, Docker version, Node version, pnpm
-version, and the resolved image reference in the report.
+version, the complete `docker image ls --digests` output, and the pull-log
+digest line in the report. Keep `/tmp/verglos-postgres-pull.log` with the
+review evidence until the report is complete.
+
+If Ubuntu closes during this step, do not repeat the full block immediately.
+Reopen Docker Desktop first, then open a new Ubuntu terminal and run:
+
+```bash
+cd /tmp/verglos-appsec.XXXXXX/verglos-cli
+docker info
+docker image ls --digests postgres:15-alpine
+```
+
+If `docker info` fails, Docker Desktop is not reachable through WSL2; enable
+Ubuntu under **Docker Desktop → Settings → Resources → WSL Integration**, keep
+Docker Desktop running, and retry. If `docker info` works but the digest
+listing fails, stop and record the exact error as an infrastructure limitation;
+do not create a passing AppSec result. The digest must be visible and must
+match the pinned value before continuing to Step 3.
 
 ## Step 3 — inspect the review surface before running it
 
