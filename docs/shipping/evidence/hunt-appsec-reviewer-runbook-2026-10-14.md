@@ -277,20 +277,55 @@ passing AppSec result.
 
 ## Step 3 — inspect the review surface before running it
 
-Read these files at the checked-out commit:
+The paths below are a review list, not commands. Do **not** paste the paths by
+themselves into the shell: the shell will try to execute the first path and a
+`set -e` session may close. Paste this complete read-only block instead. It
+creates one numbered source-surface transcript and opens it in the `less`
+viewer. Press `Space` to advance and `q` to quit. Do not edit the files.
 
-```text
-packages/hunt/README.md
-packages/hunt/src/docker-adapter.ts
-packages/hunt/src/docker-runner.ts
-packages/hunt/src/docker-sandbox-adapter.ts
-packages/hunt/src/docker-runtime-adversarial.test.ts
-packages/hunt/src/restricted-process-adapter.ts
-packages/hunt/src/attack-worker.ts
-packages/hunt/src/types.ts
-scripts/hunt-adversarial-evidence.mjs
-.github/workflows/self-scan.yml
+```bash
+set +e
+review_surface=/tmp/verglos-hunt-review-surface.txt
+: > "$review_surface"
+
+for file in \
+  packages/hunt/README.md \
+  packages/hunt/src/docker-adapter.ts \
+  packages/hunt/src/docker-runner.ts \
+  packages/hunt/src/docker-sandbox-adapter.ts \
+  packages/hunt/src/docker-runtime-adversarial.test.ts \
+  packages/hunt/src/restricted-process-adapter.ts \
+  packages/hunt/src/attack-worker.ts \
+  packages/hunt/src/types.ts \
+  scripts/hunt-adversarial-evidence.mjs \
+  .github/workflows/self-scan.yml
+do
+  printf '\\n===== %s =====\\n' "$file" >> "$review_surface"
+  if [ -f "$file" ]; then
+    nl -ba "$file" >> "$review_surface"
+  else
+    printf 'MISSING FILE: %s\\n' "$file" >> "$review_surface"
+  fi
+done
+
+printf 'Review transcript: %s\\n' "$review_surface"
+less -N "$review_surface"
+viewer_status=$?
+set -e
+test "$viewer_status" -eq 0
 ```
+
+If `less` is unavailable, install it once and rerun the block:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y less
+```
+
+The independent reviewer must actually inspect the transcript and record the
+source files reviewed in the report. The assistant may inspect the same public
+commit separately, but that does not replace the reviewer’s independent
+inspection.
 
 Check the implementation and tests against these questions:
 
