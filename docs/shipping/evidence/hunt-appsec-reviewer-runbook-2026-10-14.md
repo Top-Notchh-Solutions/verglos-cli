@@ -353,22 +353,54 @@ found`, or `spawn ENOENT`, stop: that is an incomplete setup, not a Hunt
 security result. Run `pnpm install --frozen-lockfile` in the current checkout
 and create a new output directory before retrying.
 
+Run Step 4 one command at a time. Do not paste the commands as one block and
+do not press `Ctrl+C` while the suite is running. The suite starts Docker
+fixtures and may take several minutes. `Ctrl+C` cancels the run and produces
+an incomplete result; it does not open the gate.
+
+1. Disable fail-fast behavior for this interactive review shell:
+
+```bash
+set +e
+```
+
+2. Create a new output directory and print its path:
+
 ```bash
 review_output="$(mktemp -d /tmp/verglos-hunt-review.XXXXXX)"
+printf 'Review output: %s\n' "$review_output"
+```
 
-set +e
-VERGLOS_HUNT_DOCKER_INTEGRATION=1 \
-VERGLOS_HUNT_TEST_IMAGE=postgres:15-alpine \
-VERGLOS_HUNT_TEST_DIGEST=sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a \
-node scripts/hunt-adversarial-evidence.mjs "$review_output" 2>&1 \
-  | tee "$review_output/reviewer-terminal.log"
+3. Run the suite as one command. Wait until it returns to the prompt:
+
+```bash
+VERGLOS_HUNT_DOCKER_INTEGRATION=1 VERGLOS_HUNT_TEST_IMAGE=postgres:15-alpine VERGLOS_HUNT_TEST_DIGEST=sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a node scripts/hunt-adversarial-evidence.mjs "$review_output" 2>&1 | tee "$review_output/reviewer-terminal.log"
+```
+
+4. Immediately after the command returns, capture the script status. Do not
+run another command before this one because `PIPESTATUS` is transient:
+
+```bash
 run_status="${PIPESTATUS[0]}"
-set -e
-
 printf 'Suite exit code: %s\n' "$run_status"
-test "$run_status" -eq 0
+```
+
+5. Read the generated report without using `test` or re-enabling `set -e`:
+
+```bash
 cat "$review_output/report.json"
 ```
+
+6. If the exit code is nonzero, also read the log and send both outputs to the
+shipping owner:
+
+```bash
+sed -n '1,260p' "$review_output/run.log"
+```
+
+The script writes `report.json`, `run.log`, and the terminal transcript. A
+nonzero result must be classified from those artifacts; do not rerun blindly
+and do not claim a pass.
 
 The script runs the repository’s `@verglos/hunt` test package with the pinned
 Docker integration settings and writes `report.json` and `run.log`. Preserve
