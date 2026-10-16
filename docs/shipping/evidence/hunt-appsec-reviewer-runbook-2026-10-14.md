@@ -300,15 +300,15 @@ for file in \
   scripts/hunt-adversarial-evidence.mjs \
   .github/workflows/self-scan.yml
 do
-  printf '\\n===== %s =====\\n' "$file" >> "$review_surface"
+  printf '\n===== %s =====\n' "$file" >> "$review_surface"
   if [ -f "$file" ]; then
     nl -ba "$file" >> "$review_surface"
   else
-    printf 'MISSING FILE: %s\\n' "$file" >> "$review_surface"
+    printf 'MISSING FILE: %s\n' "$file" >> "$review_surface"
   fi
 done
 
-printf 'Review transcript: %s\\n' "$review_surface"
+printf 'Review transcript: %s\n' "$review_surface"
 less -N "$review_surface"
 viewer_status=$?
 set -e
