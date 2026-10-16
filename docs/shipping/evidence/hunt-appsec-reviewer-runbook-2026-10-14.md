@@ -262,7 +262,10 @@ If Ubuntu closes during this step, do not repeat the full block immediately.
 Reopen Docker Desktop first, then open a new Ubuntu terminal and run:
 
 ```bash
-cd /tmp/verglos-appsec.XXXXXX/verglos-cli
+set -euo pipefail
+review_repo="$(find /tmp -maxdepth 2 -type d -path '/tmp/verglos-appsec.*/verglos-cli' -print -quit)"
+test -n "$review_repo"
+cd "$review_repo"
 docker info
 docker image ls --digests postgres:15-alpine
 ```
