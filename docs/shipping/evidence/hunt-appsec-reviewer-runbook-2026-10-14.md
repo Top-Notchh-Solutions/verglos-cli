@@ -227,8 +227,8 @@ Run the commands one at a time or paste the complete block. Do not include the
 Markdown fence characters. This step intentionally does **not** use
 `docker image inspect`: that command can terminate an Ubuntu/WSL terminal when
 Docker Desktop’s WSL integration has an image-metadata problem. The pull log
-and the digest listing provide the same pinned-image evidence without that
-failure-prone call.
+provides the pinned-image evidence without image metadata inspection or
+listing calls.
 
 ```bash
 set -euo pipefail
@@ -245,18 +245,15 @@ docker pull postgres:15-alpine@sha256:2bf082886c059b4cf5af3f9e8d3a8916c356990628
 grep -Fqx 'Digest: sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a' \
   "$docker_pull_log"
 
-docker image ls --digests postgres:15-alpine
-docker image ls --digests --format '{{.Digest}}' postgres:15-alpine \
-  | grep -Fx 'sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a' \
-  >/dev/null
-
 printf 'Pinned image reference verified: docker.io/library/postgres:15-alpine@sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a\n'
 ```
 
 Record the OS, architecture, kernel, Docker version, Node version, pnpm
-version, the complete `docker image ls --digests` output, and the pull-log
-digest line in the report. Keep `/tmp/verglos-postgres-pull.log` with the
-review evidence until the report is complete.
+version, and the pull-log digest line in the report. Keep
+`/tmp/verglos-postgres-pull.log` with the review evidence until the report is
+complete. The exact `Digest:` line from `docker pull` is the required image
+pin evidence; do not run an additional image inspection or digest-listing
+command.
 
 If Ubuntu closes during this step, do not repeat the full block immediately.
 Reopen Docker Desktop first, then open a new Ubuntu terminal and run:
@@ -267,15 +264,16 @@ review_repo="$(find /tmp -maxdepth 2 -type d -path '/tmp/verglos-appsec.*/verglo
 test -n "$review_repo"
 cd "$review_repo"
 docker info
-docker image ls --digests postgres:15-alpine
 ```
 
 If `docker info` fails, Docker Desktop is not reachable through WSL2; enable
 Ubuntu under **Docker Desktop → Settings → Resources → WSL Integration**, keep
-Docker Desktop running, and retry. If `docker info` works but the digest
-listing fails, stop and record the exact error as an infrastructure limitation;
-do not create a passing AppSec result. The digest must be visible and must
-match the pinned value before continuing to Step 3.
+Docker Desktop running, and retry. If `docker info` works, do not retry the
+unstable image-listing command. The digest already verified in
+`/tmp/verglos-postgres-pull.log` must match the pinned value before continuing
+to Step 3. If the `docker pull` command itself fails or closes Ubuntu, stop and
+record the exact error as an infrastructure limitation; do not create a
+passing AppSec result.
 
 ## Step 3 — inspect the review surface before running it
 
