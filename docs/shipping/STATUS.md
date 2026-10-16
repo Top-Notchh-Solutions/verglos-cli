@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-16 · Hunt AppSec reviewer source inspection recorded
+
+Vaibhav J’s pasted Gmail transcript records the independent-reviewer
+environment checking out exact public CLI PR #127 merge
+`fa77496b43d040fe8be977315078502e9e85b947`, installing the frozen workspace,
+and inspecting all ten required Hunt/Docker source surfaces. Node `v22.23.3`,
+pnpm `9.15.9`, Docker Desktop `4.95.0` / Engine `29.8.2`, Linux `amd64`, and
+the pinned Postgres digest were recorded. The pull digest assertion passed.
+
+This is partial AppSec evidence only. The reviewer has not yet supplied the
+security role/experience, organization, explicit non-implementer statement,
+Step 4 `report.json`/`run.log`/terminal log, findings and limitations,
+recommendation, or verifiable sign-off. The AppSec gate and dependent rows
+remain open; no checkbox or score changed. Score remains **230 checked / 50
+unchecked / 280 total (82.1%)**. Evidence:
+`evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## 2026-10-15 · HUNT recipe fixture-contract PR #127 merged normally
 
 Public CLI PR #127 merged normally as

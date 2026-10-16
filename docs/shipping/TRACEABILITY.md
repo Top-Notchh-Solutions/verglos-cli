@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## Hunt AppSec source-inspection checkpoint · 2026-10-16
+
+- **Source mapping:** the reviewer transcript records exact public CLI merge
+  `fa77496b43d040fe8be977315078502e9e85b947` from PR #127.
+- **Environment mapping:** frozen install passed on `Vaibhav-PC` Ubuntu/WSL2;
+  Node `22.23.3`, pnpm `9.15.9`, Docker Desktop `4.95.0` / Engine `29.8.2`,
+  Linux `amd64`, and the pinned Postgres digest were recorded.
+- **Inspection mapping:** all ten required Hunt/Docker source surfaces were
+  included in the numbered transcript.
+- **Acceptance mapping:** source inspection and image-pin evidence are
+  recorded, but no independent recommendation or sign-off is inferred. The
+  Step 4 artifacts, reviewer security identity/independence fields, and
+  findings/limitations remain required. HUNT-011, QUAL-CLI-004, and dependent
+  Hunt rows remain unchecked; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## HUNT recipe fixture-contract PR #127 merged normally · 2026-10-15
 
 - **Source mapping:** public CLI PR #127 merged at

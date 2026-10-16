@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-16 · Hunt AppSec source-inspection checkpoint
+
+- **Reviewer evidence:** Vaibhav J’s pasted Gmail transcript records source
+  inspection from `Vaibhav-PC` Ubuntu/WSL2 at the exact public PR #127 merge
+  `fa77496b43d040fe8be977315078502e9e85b947`.
+- **Runtime evidence:** frozen install passed; Node `22.23.3`, pnpm `9.15.9`,
+  Docker Desktop `4.95.0` / Engine `29.8.2`, Linux `amd64`, and the pinned
+  Postgres digest were recorded. The pull digest assertion passed.
+- **Source evidence:** all ten runbook review surfaces were present in the
+  numbered transcript. The transcript is source inspection, not a security
+  recommendation.
+- **Open evidence:** reviewer role/experience, organization, independence
+  statement, Step 4 generated artifacts, findings/limitations, recommendation,
+  and verifiable sign-off are still missing.
+- **Disposition:** no checkbox or score change; **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## 2026-10-15 · HUNT recipe fixture-contract PR #127 merged normally
 
 - **Public change:** PR #127 in `Top-Notchh-Solutions/verglos-cli` merged as

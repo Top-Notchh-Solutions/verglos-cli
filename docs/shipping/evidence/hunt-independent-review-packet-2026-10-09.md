@@ -1,4 +1,4 @@
-# Hunt independent AppSec review packet · current target refreshed 2026-10-14
+# Hunt independent AppSec review packet · current target refreshed 2026-10-16
 
 This packet supersedes the historical 2026-10-02 and 2026-10-09 packets. It is
 a private review request, not a security certification and not a reviewer
@@ -9,13 +9,11 @@ required.
 ## Exact review target
 
 - Repository: `verglos-cli`
-- Exact review commit: `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`
-- Review target status: public `main` at the current CLI merge. The reviewer
+- Exact review commit: `fa77496b43d040fe8be977315078502e9e85b947`
+- Review target status: public `main` at the regular PR #127 merge. The reviewer
   must use this exact commit; do not substitute a later local working tree.
 - Current public branch: `main`
-- Current hosted qualification: GitHub Actions run `38550747564`
-- Hosted run URL: `https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/38550747564`
-- Hosted runner: `ubuntu-latest`
+- Public PR: `https://github.com/Top-Notchh-Solutions/verglos-cli/pull/127`
 - Pinned adversarial image: `postgres:15-alpine`
 - Pinned image digest: `sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a`
 
@@ -44,15 +42,17 @@ become a positive exploitability verdict.
 
 ## Supplied evidence
 
-- Current exact-head local requalification records the baseline Hunt package
-  test as **78 pass / 19 explicit environment skips / 0 fail**, direct enabled
-  runtime checks as **18 pass / 1 macOS namespace skip / 0 fail**, and the
-  ten-family target harness as **4/4 groups pass / 0 fail**.
-- The protected run `38550747564` completed successfully across the hosted
-  platform matrix and retained the current technical artifacts.
-- The local run used the repository's pinned image and digest. The macOS skip
-  is not Linux namespace evidence; the reviewer must independently verify the
-  Linux behavior.
+- The 2026-10-16 reviewer transcript records a frozen install at the exact
+  PR #127 merge, Node `22.23.3`, pnpm `9.15.9`, Docker Desktop `4.95.0` /
+  Engine `29.8.2`, Linux `amd64`, and the pinned image pull digest.
+- The same transcript contains numbered source inspection for all ten required
+  Hunt/Docker surfaces. This is partial independent-review evidence only; it
+  does not include a recommendation or sign-off.
+- PR #127’s hosted technical checks passed, but hosted CI is repository-owned
+  evidence and does not replace the reviewer’s own Step 4 run.
+- Prior local technical qualification and any macOS namespace skip remain
+  supporting technical evidence only; they are not the independent Linux
+  AppSec conclusion for this review.
 - The supplied evidence does not establish trusted/licensed recipe
   provenance, arbitrary-command safety, Firecracker isolation, customer
   repository authorization, or production tenant safety.
@@ -63,7 +63,7 @@ The reviewer must independently:
 
 1. Clone or otherwise obtain the public repository without receiving private tracker
    files, credentials, customer source, or browser session data.
-2. Check out exactly `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a`.
+2. Check out exactly `fa77496b43d040fe8be977315078502e9e85b947`.
 3. Verify the pinned image digest before running the tests.
 4. Run the Linux/Docker adversarial suite and retain the exact command, image
    digest, runtime versions, pass/skip/fail totals, and relevant transcript.

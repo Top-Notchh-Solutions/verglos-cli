@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-16 · Hunt AppSec source-inspection evidence checkpoint
+
+Vaibhav J’s reviewer transcript records the exact PR #127 merge
+`fa77496b43d040fe8be977315078502e9e85b947`, successful frozen dependency
+installation, the Linux/WSL2 Docker runtime, the pinned Postgres pull digest,
+and inspection of all ten required Hunt/Docker source surfaces.
+
+This does not satisfy the independent AppSec gate yet. The reviewer still must
+provide organization, security role/experience, explicit non-implementer
+confirmation, Step 4 `report.json`/`run.log`/terminal evidence, findings,
+limitations, a recommendation, and a verifiable sign-off. HUNT-011,
+QUAL-CLI-004, and dependent Hunt rows remain unchecked. No checkbox changed;
+score remains **230 checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`docs/shipping/evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## 2026-10-15 · HUNT recipe fixture-contract PR #127 implementation checkpoint
 
 Public CLI PR #127 merged normally as
