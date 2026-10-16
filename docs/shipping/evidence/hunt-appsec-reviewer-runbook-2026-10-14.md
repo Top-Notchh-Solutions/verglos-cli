@@ -245,15 +245,24 @@ docker pull postgres:15-alpine@sha256:2bf082886c059b4cf5af3f9e8d3a8916c356990628
 grep -Fqx 'Digest: sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a' \
   "$docker_pull_log"
 
+docker_target_pull_log=/tmp/verglos-node-target-pull.log
+docker pull docker.io/library/node@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402 2>&1 \
+  | tee "$docker_target_pull_log"
+grep -Fqx 'Digest: sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402' \
+  "$docker_target_pull_log"
+
 printf 'Pinned image reference verified: docker.io/library/postgres:15-alpine@sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a\n'
+printf 'Pinned target image reference verified: docker.io/library/node@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402\n'
 ```
 
 Record the OS, architecture, kernel, Docker version, Node version, pnpm
-version, and the pull-log digest line in the report. Keep
-`/tmp/verglos-postgres-pull.log` with the review evidence until the report is
-complete. The exact `Digest:` line from `docker pull` is the required image
-pin evidence; do not run an additional image inspection or digest-listing
-command.
+version, and both pull-log digest lines in the report. Keep
+`/tmp/verglos-postgres-pull.log` and `/tmp/verglos-node-target-pull.log` with
+the review evidence until the report is complete. The exact `Digest:` lines
+from `docker pull` are the required image-pin evidence; do not run an
+additional image inspection or digest-listing command. Pulling the target
+Node image before Step 4 prevents the bounded target proof from spending its
+execution timeout on a first-use image fetch.
 
 If Ubuntu closes during this step, do not repeat the full block immediately.
 Reopen Docker Desktop first, then open a new Ubuntu terminal and run:
@@ -270,10 +279,10 @@ If `docker info` fails, Docker Desktop is not reachable through WSL2; enable
 Ubuntu under **Docker Desktop → Settings → Resources → WSL Integration**, keep
 Docker Desktop running, and retry. If `docker info` works, do not retry the
 unstable image-listing command. The digest already verified in
-`/tmp/verglos-postgres-pull.log` must match the pinned value before continuing
-to Step 3. If the `docker pull` command itself fails or closes Ubuntu, stop and
-record the exact error as an infrastructure limitation; do not create a
-passing AppSec result.
+`/tmp/verglos-postgres-pull.log` and `/tmp/verglos-node-target-pull.log` must
+match their pinned values before continuing to Step 3. If either `docker pull`
+command itself fails or closes Ubuntu, stop and record the exact error as an
+infrastructure limitation; do not create a passing AppSec result.
 
 ## Step 3 — inspect the review surface before running it
 

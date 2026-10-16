@@ -155,3 +155,36 @@ The AppSec gate remains pending the reviewer’s completed report: organization,
 security role/experience, explicit non-implementer confirmation, findings,
 residual risks, exact skipped-test explanation, recommendation, and verifiable
 sign-off. No checkbox or score changed.
+
+## Target-code qualification attempt — 2026-10-16 14:01:32Z
+
+The reviewer enabled `VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1` from the same
+Linux checkout and created a fresh output directory
+`/tmp/verglos-hunt-review.pz9PGy`. The generated report records the exact
+review commit, Linux `x64`, Node `v22.23.3`, the pinned Postgres image, and:
+
+- **65 passed / 0 skipped / 1 failed**;
+- exit code `1`; and
+- a 22-test package run with 21 passing tests and one failing test.
+
+The failing test was `Proof replays a pinned container harness and its negative
+control`. It expected the primary target-harness result to be `confirmed`, but
+received `inconclusive`; the assertion ran for approximately 18.1 seconds.
+This is not a passing AppSec result and does not open the gate. The test output
+does not expose the underlying Docker stderr, so the cause is not declared as
+proven here. A cold pull/start of the separately pinned Node target image is a
+plausible environment cause because the earlier Step 2 only pulled Postgres;
+the runbook now requires the Node image pull and exact digest assertion before
+the next attempt.
+
+The failed artifacts are retained at:
+
+- `/tmp/verglos-hunt-review.pz9PGy/report.json`
+- `/tmp/verglos-hunt-review.pz9PGy/run.log`
+- `/tmp/verglos-hunt-review.pz9PGy/reviewer-terminal.log`
+
+No checkbox or score changed. The AppSec gate remains pending the completed
+independent report and a successful or explicitly dispositioned target-code
+qualification. Next action: pull the pinned Node image using the updated
+runbook, then rerun the target-enabled suite from the same checkout into a new
+output directory.

@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## Hunt target-code qualification attempt failed · 2026-10-16
+
+- **Source mapping:** exact PR #127 merge
+  `fa77496b43d040fe8be977315078502e9e85b947`.
+- **Execution mapping:** Linux `x64`, Node `v22.23.3`, with
+  `VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1`.
+- **Result mapping:** **65 pass / 0 skip / 1 fail**, exit `1`; the A2 proof
+  test returned `inconclusive` instead of `confirmed` for its primary run.
+- **Acceptance mapping:** this is a failed technical attempt, not an AppSec
+  recommendation and not a checkbox closure. The runbook now requires an
+  explicit pull and digest assertion for the separately pinned Node target
+  image before the next bounded run. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## Hunt AppSec pinned Linux suite pass · 2026-10-16
 
 - **Source mapping:** exact PR #127 merge

@@ -56,6 +56,27 @@ complete acceptance criteria.
 
 Evidence: `evidence/owner-authorization-2026-10-14.md`.
 
+## 0.0b Contribution and AppSec execution rule — 2026-10-16
+
+The repository contribution policy is **no squash commits**. Preserve
+substantive implementation and test commits, use normal merge history, assign
+applicable pull requests to `anuragyadav-git`, and do not create empty or
+artificial commits merely to increase contribution activity. Keep the work
+focused on shipping; contribution history must not consume material time or
+tokens or deviate from the active backlog.
+
+The target-enabled Hunt AppSec attempt at exact PR #127 merge
+`fa77496b43d040fe8be977315078502e9e85b947` failed with **65 pass / 0 skip / 1
+fail**, because the pinned target proof returned `inconclusive` instead of
+`confirmed`. This is recorded as a failed technical attempt, not as an open
+gate or a waived result. Pull the separately pinned Node target image and
+repeat the bounded qualification before requesting the independent reviewer’s
+final recommendation. Non-AppSec rows with complete evidence continue on their
+own contracts; no unrelated gate is reopened.
+
+The current private ledger score remains **230 checked / 50 unchecked / 280
+total (82.1%)**; the replacement-time score above is historical.
+
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
 The hosted continuation completed successfully in GitHub Actions run

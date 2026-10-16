@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-16 · Hunt target-code qualification attempt failed
+
+The reviewer enabled `VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1` at exact PR
+#127 merge `fa77496b43d040fe8be977315078502e9e85b947`. The target-enabled run
+recorded **65 passed / 0 skipped / 1 failed**, exit code `1`; the failing proof
+test returned `inconclusive` where `confirmed` was expected. This is not an
+AppSec pass and does not open the gate. The underlying Docker stderr was not
+exposed by the assertion, so the cause is not yet declared; the runbook now
+requires pulling and digest-checking the separately pinned Node target image
+before retrying, avoiding a first-use image fetch inside the bounded proof
+timeout. Artifacts are in `/tmp/verglos-hunt-review.pz9PGy/` on the reviewer
+host. No checkbox or score changed; score remains **230 checked / 50 unchecked /
+280 total (82.1%)**. Evidence:
+`evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## 2026-10-16 · Hunt AppSec pinned Linux suite passed
 
 From fresh checkout at exact PR #127 merge

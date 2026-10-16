@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-16 · Hunt target-code qualification attempt failed
+
+- **Source/runtime:** exact PR #127 merge
+  `fa77496b43d040fe8be977315078502e9e85b947`, Linux `x64`, Node `v22.23.3`,
+  target integration enabled.
+- **Result:** **65 pass / 0 skip / 1 fail**, exit `1`; 21 of 22 package tests
+  passed.
+- **Failure:** `Proof replays a pinned container harness and its negative
+  control` received `inconclusive` instead of the expected `confirmed` primary
+  verdict. The captured assertion does not expose Docker stderr, so the cause
+  is unproven. The separately pinned Node target image had not been explicitly
+  pulled before this attempt; this is the next environment check, not a
+  waived failure.
+- **Disposition:** failed technical attempt; AppSec gate remains closed and no
+  checkbox or score changed. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`;
+  reviewer artifacts under `/tmp/verglos-hunt-review.pz9PGy/`.
+
 ## 2026-10-16 · Hunt AppSec pinned Linux suite pass
 
 - **Source/runtime:** fresh checkout at exact PR #127 merge
