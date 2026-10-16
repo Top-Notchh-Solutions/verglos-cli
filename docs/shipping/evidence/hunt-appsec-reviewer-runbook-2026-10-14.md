@@ -346,6 +346,13 @@ not a substitute for source inspection.
 
 ## Step 4 — run the exact pinned adversarial suite
 
+Run Step 2 in this same checkout before Step 4. A new `review_root` creates a
+new disposable clone, so dependencies installed in an earlier `/tmp` clone do
+not carry over. If the Step 4 log says `node_modules missing`, `tsc: not
+found`, or `spawn ENOENT`, stop: that is an incomplete setup, not a Hunt
+security result. Run `pnpm install --frozen-lockfile` in the current checkout
+and create a new output directory before retrying.
+
 ```bash
 review_output="$(mktemp -d /tmp/verglos-hunt-review.XXXXXX)"
 

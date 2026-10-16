@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## Hunt AppSec suite setup attempt · 2026-10-16
+
+- **Execution mapping:** the exact pinned commit was used from fresh clone
+  `/tmp/verglos-appsec.nBJjp0/verglos-cli`.
+- **Failure mapping:** Step 4 exited before tests because the new clone had no
+  `node_modules`; `tsc` was missing and pnpm returned `spawn ENOENT`. The
+  report had **0 pass / 0 skip / 0 fail**.
+- **Acceptance mapping:** this is an environment setup failure, not a Hunt
+  verdict or AppSec finding. Install the locked dependencies in the current
+  clone and rerun Step 4. No checkbox or score changed; score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## Hunt AppSec source-inspection checkpoint · 2026-10-16
 
 - **Source mapping:** the reviewer transcript records exact public CLI merge

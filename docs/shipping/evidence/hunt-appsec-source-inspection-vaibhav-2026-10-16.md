@@ -100,3 +100,23 @@ The reviewer must then send the owner:
 Only after those artifacts and the recommendation are reviewed against the
 row contracts may the owner reconsider HUNT-011, QUAL-CLI-004, and dependent
 Hunt rows. This partial source-inspection event does not close them.
+
+## Step 4 setup attempt — 2026-10-16 13:02:32Z
+
+The reviewer then attempted the adversarial suite from a new disposable clone
+at `/tmp/verglos-appsec.nBJjp0/verglos-cli`. The generated report retained the
+correct source commit, Linux `x64`, Node `v22.23.3`, image name, and pinned
+digest, but recorded `pass: 0`, `skipped: 0`, `failed: 0`, and `exitCode: 1`.
+
+The log shows that `pnpm install --frozen-lockfile` had not been run in this
+new clone: workspace `node_modules` was missing, `tsc` was not found, and the
+shared build exited with `spawn ENOENT`. No Hunt test executed, so this is an
+incomplete environment setup rather than an AppSec finding or a failed
+security control. The failed output directory was
+`/tmp/verglos-hunt-review.TQYwgK`; it must be preserved as a failed setup
+attempt and not used as a passing report.
+
+The reviewer must install the locked dependencies in the current
+`nBJjp0` checkout, rerun Step 4 into a new output directory, and retain the
+new `report.json`, `run.log`, and terminal log. The AppSec gate and score are
+unchanged.

@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-16 · Hunt AppSec setup failure recorded
+
+The first Step 4 attempt from fresh clone `/tmp/verglos-appsec.nBJjp0/verglos-cli`
+did not run tests: `node_modules` was missing, `tsc` was not found, and pnpm
+returned `spawn ENOENT`. The generated report was **0 pass / 0 skip / 0 fail**
+with exit `1`, so it is not a security result and cannot open or fail the
+AppSec gate. Install the frozen dependencies in this fresh clone and rerun
+Step 4 into a new output directory. No checkbox changed; score remains **230
+checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`docs/shipping/evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## 2026-10-16 · Hunt AppSec source-inspection evidence checkpoint
 
 Vaibhav J’s reviewer transcript records the exact PR #127 merge

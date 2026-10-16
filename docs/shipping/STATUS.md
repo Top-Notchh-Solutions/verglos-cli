@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-16 · Hunt AppSec suite setup attempt recorded
+
+The reviewer’s first Step 4 attempt from fresh clone
+`/tmp/verglos-appsec.nBJjp0/verglos-cli` exited `1` before tests ran because
+that new clone had no installed `node_modules`: `tsc: not found` and `spawn
+ENOENT` were recorded. The report correctly identifies the exact commit,
+Linux runtime, Node, image, and digest, but has **0 pass / 0 skip / 0 fail** and
+is not a security result. Dependencies must be installed again in each fresh
+clone before rerunning the suite. Evidence:
+`evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
+No checkbox or score changed; score remains **230 checked / 50 unchecked / 280
+total (82.1%)**.
+
 ## 2026-10-16 · Hunt AppSec reviewer source inspection recorded
 
 Vaibhav J’s pasted Gmail transcript records the independent-reviewer

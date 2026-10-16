@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-16 · Hunt AppSec suite setup attempt
+
+- **Attempt:** the fresh clone at `/tmp/verglos-appsec.nBJjp0/verglos-cli`
+  ran the pinned evidence script at exact commit
+  `fa77496b43d040fe8be977315078502e9e85b947`.
+- **Result:** exit `1` before tests; `node_modules` was absent, `tsc` was not
+  found, and pnpm reported `spawn ENOENT`. The generated report was
+  **0 pass / 0 skip / 0 fail**, so no security conclusion is inferred.
+- **Disposition:** setup/infrastructure failure only. Install dependencies in
+  this fresh clone and rerun Step 4 into a new output directory. Score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
+
 ## 2026-10-16 · Hunt AppSec source-inspection checkpoint
 
 - **Reviewer evidence:** Vaibhav J’s pasted Gmail transcript records source
