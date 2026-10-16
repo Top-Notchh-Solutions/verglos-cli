@@ -7,8 +7,9 @@
   pinned Postgres digest.
 - **Result:** **96 pass / 2 skip / 0 fail**, exit `0`.
 - **Boundary:** this is repository-owned technical suite evidence. The two
-  skipped tests must be identified from `run.log`; no independent security
-  recommendation is inferred.
+  skips are the A2 target-code Docker checks; a gate-ready rerun sets
+  `VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1` and records the separately pinned
+  Node harness image. No independent security recommendation is inferred.
 - **Open evidence:** reviewer organization/role/experience,
   non-implementer statement, findings, limitations, recommendation, and
   verifiable sign-off.

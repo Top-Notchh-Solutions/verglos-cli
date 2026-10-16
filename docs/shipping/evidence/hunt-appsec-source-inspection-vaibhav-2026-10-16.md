@@ -139,6 +139,18 @@ repository-owned adversarial suite. The two skipped tests must be named from
 `run.log` in the reviewer report. The report’s own limitation correctly says
 that this suite is not an independent security review.
 
+The two explicit skips are:
+
+1. `Proof replays a pinned container harness and its negative control`.
+2. `each public A2 reference harness executes local target code in the pinned
+   Docker boundary`.
+
+Both are gated by `VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1`. The ordinary
+adversarial checks use the pinned Postgres image; the target-code checks use
+the public source’s separately pinned Node image
+`docker.io/library/node@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402`.
+The gate-ready rerun should enable that flag and record both image references.
+
 The AppSec gate remains pending the reviewer’s completed report: organization,
 security role/experience, explicit non-implementer confirmation, findings,
 residual risks, exact skipped-test explanation, recommendation, and verifiable

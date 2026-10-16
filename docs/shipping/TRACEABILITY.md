@@ -7,8 +7,9 @@
 - **Runtime mapping:** Linux `x64`, Node `v22.23.3`, `postgres:15-alpine`,
   and the required pinned digest.
 - **Result mapping:** **96 pass / 2 skip / 0 fail**, exit `0`.
-- **Acceptance mapping:** technical qualification passed, but the two skips
-  require exact report-level explanation and the independent reviewer report
+- **Acceptance mapping:** technical qualification passed; the two skips are
+  the A2 target-code Docker checks and the gate-ready rerun enables them with
+  `VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1`. The independent reviewer report
   still lacks identity/independence, findings, recommendation, and sign-off.
   No checkbox or score changed; **230/50/280 (82.1%)** remains current.
 - **Evidence:**

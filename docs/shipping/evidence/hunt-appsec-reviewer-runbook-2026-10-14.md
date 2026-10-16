@@ -358,26 +358,38 @@ do not press `Ctrl+C` while the suite is running. The suite starts Docker
 fixtures and may take several minutes. `Ctrl+C` cancels the run and produces
 an incomplete result; it does not open the gate.
 
+The gate-ready run enables the two A2 target-code Docker checks that otherwise
+appear as explicit skips. The ordinary adversarial checks use the pinned
+Postgres image below. The target-code checks use the additional image pinned
+in the public source: `docker.io/library/node@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402`.
+Record both image references in the reviewer report.
+
 1. Disable fail-fast behavior for this interactive review shell:
 
 ```bash
 set +e
 ```
 
-2. Create a new output directory and print its path:
+2. Enable the target-code Docker qualification checks:
+
+```bash
+export VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1
+```
+
+3. Create a new output directory and print its path:
 
 ```bash
 review_output="$(mktemp -d /tmp/verglos-hunt-review.XXXXXX)"
 printf 'Review output: %s\n' "$review_output"
 ```
 
-3. Run the suite as one command. Wait until it returns to the prompt:
+4. Run the suite as one command. Wait until it returns to the prompt:
 
 ```bash
 VERGLOS_HUNT_DOCKER_INTEGRATION=1 VERGLOS_HUNT_TEST_IMAGE=postgres:15-alpine VERGLOS_HUNT_TEST_DIGEST=sha256:2bf082886c059b4cf5af3f9e8d3a8916c35699062899061c13bc32d5921c631a node scripts/hunt-adversarial-evidence.mjs "$review_output" 2>&1 | tee "$review_output/reviewer-terminal.log"
 ```
 
-4. Immediately after the command returns, capture the script status. Do not
+5. Immediately after the command returns, capture the script status. Do not
 run another command before this one because `PIPESTATUS` is transient:
 
 ```bash
@@ -385,13 +397,13 @@ run_status="${PIPESTATUS[0]}"
 printf 'Suite exit code: %s\n' "$run_status"
 ```
 
-5. Read the generated report without using `test` or re-enabling `set -e`:
+6. Read the generated report without using `test` or re-enabling `set -e`:
 
 ```bash
 cat "$review_output/report.json"
 ```
 
-6. If the exit code is nonzero, also read the log and send both outputs to the
+7. If the exit code is nonzero, also read the log and send both outputs to the
 shipping owner:
 
 ```bash

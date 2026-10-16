@@ -12,8 +12,11 @@ skips still need their exact names/reasons recorded from `run.log`.
 This remains repository-owned technical evidence, not the independent AppSec
 conclusion. Vaibhav must still provide the reviewer identity/role,
 non-implementer statement, findings, limitations, recommendation, and
-verifiable sign-off. No checkbox or score changed; score remains **230 checked
-/ 50 unchecked / 280 total (82.1%)**. Evidence:
+verifiable sign-off. The two skips are the A2 target-code Docker checks and
+can be exercised by setting `VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1`; the
+target harness uses its separately pinned Node image. No checkbox or score
+changed; score remains **230 checked / 50 unchecked / 280 total (82.1%)**.
+Evidence:
 `evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
 
 ## 2026-10-16 · Hunt AppSec suite setup attempt recorded

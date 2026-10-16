@@ -11,8 +11,10 @@ from `run.log` into the independent report.
 This is technical qualification only. The independent AppSec gate remains
 open until the reviewer supplies organization, security role/experience,
 explicit non-implementer confirmation, findings/limitations, a recommendation,
-and verifiable sign-off. No checkbox changed; score remains **230 checked / 50
-unchecked / 280 total (82.1%)**. Evidence:
+and verifiable sign-off. The two skips are the A2 target-code Docker checks;
+the gate-ready rerun enables them with
+`VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1`. No checkbox changed; score remains
+**230 checked / 50 unchecked / 280 total (82.1%)**. Evidence:
 `docs/shipping/evidence/hunt-appsec-source-inspection-vaibhav-2026-10-16.md`.
 
 ## 2026-10-16 · Hunt AppSec setup failure recorded
