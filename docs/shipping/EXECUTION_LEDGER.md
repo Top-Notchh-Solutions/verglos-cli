@@ -24,6 +24,20 @@
 - **Evidence:**
   `docs/shipping/evidence/final-web-004-public-docs-truth-2026-10-17.md`.
 
+## 2026-10-17 · FINAL-WEB-003 catalog-terms implementation slice
+
+- **Public change:** Web PR #177 commit `fa01830` projects canonical plan
+  allowances and billing/state terms into the homepage and docs.
+- **Truth boundary:** unset catalog allowances render as “Not set in public
+  catalog”; the public surface does not invent unlimited usage or an overage
+  schedule.
+- **Verification:** truth tests **29/29**, typecheck, and production build
+  **47/47** pages passed.
+- **Disposition:** implementation progress only; FINAL-WEB-003 remains open
+  for dependent acceptance. No checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-003-canonical-plan-matrix-2026-10-17.md`.
+
 ## 2026-10-17 · FINAL-WEB-004 public docs truth implementation slice
 
 - **Public change:** Web PR #177 commit `7a56141`, assigned to

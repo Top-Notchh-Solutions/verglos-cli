@@ -135,6 +135,17 @@ because of AppSec. The live score therefore remains **230 checked / 50 open /
 independent reviewer report satisfies their contracts; unrelated rows continue
 on their own evidence.
 
+## 0.0g Current public catalog-terms implementation slice — 2026-10-17
+
+Web PR #177 adds commit `fa01830`, assigned to `anuragyadav-git`, projecting
+canonical plan allowances into the homepage and docs: billing/state, seats,
+applications, records per month, client workspaces, hosted retention, and the
+absence of a published overage schedule. The public projection treats
+`unset` as “Not set in public catalog,” never as unlimited. Truth tests pass
+**29/29**, typecheck passes, and the production build generates **47/47**
+pages. FINAL-WEB-003 remains open for dependent acceptance; no checkbox
+changed and the score remains **230 checked / 50 open / 280 total (82.1%)**.
+
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
 The hosted continuation completed successfully in GitHub Actions run

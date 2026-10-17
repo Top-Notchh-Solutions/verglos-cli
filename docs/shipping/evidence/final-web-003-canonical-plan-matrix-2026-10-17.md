@@ -43,3 +43,19 @@ overages, and dependent acceptance evidence still require their own recorded
 criteria. The private shipping score remains **230 checked / 50 unchecked /
 280 total (82.1%)**. The Hunt AppSec/security review remains the only closed
 gate and is still scheduled last.
+
+## Catalog-terms implementation slice
+
+Web PR #177 commit `fa01830` extends the plan matrix implementation with a
+canonical `publicPlanTerms()` projection. The homepage and docs now render
+billing/state, seats, applications, records per month, client workspaces,
+hosted retention, and overage status for every catalog plan. `unset` values
+render as `Not set in public catalog`; they are not treated as unlimited, and
+the public surface states `No overage schedule published` rather than
+inventing commercial terms.
+
+Verification: truth-registry tests **29/29**, typecheck, diff check, and the
+production build with **47/47** static pages passed. The commit is a separate
+substantive contribution assigned to `anuragyadav-git`; no squash, rebase,
+force-push, empty, duplicate, or artificial commit was used. The row remains
+open for dependent acceptance evidence.

@@ -22,6 +22,18 @@
 - **Acceptance mapping:** implementation progress only; FINAL-WEB-004 remains
   unchecked for its complete command/docs truth scope.
 
+## FINAL-WEB-003 catalog-terms implementation slice · 2026-10-17
+
+- **Source mapping:** Web PR #177, commit `fa01830`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** homepage and docs project canonical billing,
+  state, allowances, hosted retention, and the absence of a published overage
+  schedule; unset values are not rendered as unlimited.
+- **Verification mapping:** truth tests **29/29**, typecheck, and build
+  **47/47** pages passed.
+- **Acceptance mapping:** implementation progress only; FINAL-WEB-003 remains
+  unchecked for dependent acceptance evidence.
+
 ## FINAL-WEB-004 public docs truth implementation slice · 2026-10-17
 
 - **Source mapping:** Web PR #177, commit `7a56141`, assigned to

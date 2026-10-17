@@ -13,6 +13,16 @@ for that row evidence. The live score remains **230 checked / 50 unchecked /
 The independent Hunt AppSec/security review remains scheduled last and does not
 hold unrelated dependency-ready work.
 
+## 2026-10-17 · FINAL-WEB-003 catalog-terms implementation slice
+
+Web PR #177 commit `fa01830`, assigned to `anuragyadav-git`, projects canonical
+plan allowances into the homepage and docs: billing/state, seats,
+applications, records per month, client workspaces, hosted retention, and
+published-overage status. The public renderer treats `unset` as “Not set in
+public catalog,” not unlimited. Truth tests **29/29**, typecheck, and the
+**47/47** page build passed. FINAL-WEB-003 remains open for dependent
+acceptance; no checkbox changed.
+
 ## 2026-10-17 · FINAL-WEB-004 maturity-claim implementation slice
 
 Web PR #177 commit `bd50d84`, assigned to `anuragyadav-git`, replaces
