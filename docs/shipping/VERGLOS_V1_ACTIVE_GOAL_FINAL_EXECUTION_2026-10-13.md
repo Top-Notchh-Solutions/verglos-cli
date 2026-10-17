@@ -77,6 +77,22 @@ own contracts; no unrelated gate is reopened.
 The current private ledger score remains **230 checked / 50 unchecked / 280
 total (82.1%)**; the replacement-time score above is historical.
 
+## 0.0c Owner routing directive for this continuation — 2026-10-17
+
+For the current continuation, Anurag Yadav directs that all previously
+recorded non-AppSec evidence and company approvals are accepted for workflow
+routing. Do not ask again for legal/company, provider/entitlement,
+authorized-target, `.vgl`, or final-acceptance authority merely to continue
+shipping. Keep the independent Hunt AppSec/security review as the one closed
+gate and schedule it last after the reviewer’s target qualification and signed
+report are complete.
+
+This directive does not turn an implementation or release-record row into a
+checkbox without its already-recorded row evidence. Use existing evidence for
+non-AppSec rows, continue dependency-ready implementation work, and keep any
+ genuinely missing artifact explicit. Do not reopen unrelated gates because the
+AppSec run is still pending.
+
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
 The hosted continuation completed successfully in GitHub Actions run

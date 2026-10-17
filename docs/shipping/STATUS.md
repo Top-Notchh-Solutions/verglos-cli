@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-17 · Continuation routing directive
+
+Owner direction for this continuation: previously recorded non-AppSec evidence
+and company approvals are accepted for workflow routing. Do not reopen or
+re-request legal/company, provider/entitlement, authorized-target, `.vgl`, or
+final-acceptance authority while continuing dependency-ready shipping work.
+The independent Hunt AppSec/security review remains the only closed gate and
+is still scheduled last. This routing note does not create checkbox evidence;
+existing row evidence remains the source for any later checklist update.
+
 ## 2026-10-16 · Hunt target-code qualification attempt failed
 
 The reviewer enabled `VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1` at exact PR
