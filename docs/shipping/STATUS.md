@@ -23,10 +23,11 @@ A private `Verglos Preview SCM` GitHub App registration was created with
 Checks write and Metadata read. The first installation was on the separate
 `topnotchhsolutions-apa` account with installation `172504338` and **All
 repositories** selected, not the authorized `anuragyadav-git/verglos-web`
-scope. It was queued for uninstall. No private key or webhook secret was
-printed/stored, and no provider, policy, webhook, check, customer, or
-Production result was claimed. TEAM-CLI-001 remains open; this is not an
-AppSec hold. Evidence:
+scope. It was queued for uninstall, and the unused App registration was then
+deleted; GitHub showed no remaining `Verglos Preview SCM` App for that
+account. No private key or webhook secret was printed/stored, and no
+provider, policy, webhook, check, customer, or Production result was claimed.
+TEAM-CLI-001 remains open; this is not an AppSec hold. Evidence:
 `evidence/team-cli-001-provider-app-scope-mismatch-2026-10-18.md`.
 
 ## 2026-10-18 · FINAL-WEB-004 production security-layer stamp

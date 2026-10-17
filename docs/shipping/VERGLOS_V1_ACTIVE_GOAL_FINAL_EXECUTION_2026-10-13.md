@@ -933,9 +933,10 @@ The provider installation attempt must not be counted as live evidence: the
 existing GitHub tab showed the App installed on the separate
 `topnotchhsolutions-apa` account with **All repositories**, not the authorized
 `anuragyadav-git/verglos-web` scope. That mismatched installation was queued
-for uninstall and is not a TEAM-CLI-001 result. Keep TEAM-CLI-001 open until
-the correct account/repository binding and the live policy/provider matrix
-are evidenced. Keep Hunt AppSec last.
+for uninstall, and the unused App registration was then deleted; it is not a
+TEAM-CLI-001 result. Keep TEAM-CLI-001 open until the correct
+account/repository binding and the live policy/provider matrix are evidenced.
+Keep Hunt AppSec last.
 
 ## 1. Objective
 

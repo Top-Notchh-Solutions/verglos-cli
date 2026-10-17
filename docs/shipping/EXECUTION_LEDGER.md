@@ -8,9 +8,11 @@
   with **All repositories** selected.
 - **Disposition:** this did not match the authorized
   `anuragyadav-git/verglos-web` target or least-privilege scope. The
-  installation was queued for uninstall. No private key or webhook secret was
-  printed/stored, and no hosted credential, policy fetch, webhook, check, or
-  customer/Production state was claimed. TEAM-CLI-001 remains open.
+  installation was queued for uninstall, and the unused App registration was
+  subsequently deleted; GitHub showed no remaining App for that account. No
+  private key or webhook secret was printed/stored, and no hosted credential,
+  policy fetch, webhook, check, or customer/Production state was claimed.
+  TEAM-CLI-001 remains open.
 - **Boundary:** no checkbox changed; score remains **230/50/280 (82.1%)**.
 - **Evidence:**
   `docs/shipping/evidence/team-cli-001-provider-app-scope-mismatch-2026-10-18.md`.

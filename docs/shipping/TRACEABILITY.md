@@ -9,9 +9,10 @@
   repositories** selected; it was not the authorized
   `anuragyadav-git/verglos-web` target.
 - **Cleanup mapping:** the mismatched installation was queued for uninstall;
-  no private key or webhook secret was printed or stored, and no Vercel
-  Preview credentials, customer state, Production state, policy fetch,
-  webhook delivery, or SCM check was claimed.
+  the unused App registration was then deleted and GitHub showed no remaining
+  `Verglos Preview SCM` App for that account. No private key or webhook secret
+  was printed or stored, and no Vercel Preview credentials, customer state,
+  Production state, policy fetch, webhook delivery, or SCM check was claimed.
 - **Acceptance mapping:** this is blocker/cleanup evidence only. TEAM-CLI-001
   remains open for the correct account/repository installation, server-held
   Preview credentials, and live signed policy/provider qualification. No

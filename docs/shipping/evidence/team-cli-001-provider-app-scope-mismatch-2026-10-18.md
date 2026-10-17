@@ -17,9 +17,11 @@ The first installation was not a valid TEAM-CLI-001 qualification:
   selected scope.
 
 The installation therefore did not match the authorized target or least-
-privilege requirement. It was queued for uninstall and is not counted as a
-provider success, policy fetch, webhook delivery, or SCM check result. No
-Vercel Preview credentials were added and no customer or Production state was
+privilege requirement. It was queued for uninstall, and the unused App
+registration was subsequently deleted; GitHub then showed no remaining
+`Verglos Preview SCM` App for that account. This is not counted as a provider
+success, policy fetch, webhook delivery, or SCM check result. No Vercel
+Preview credentials were added and no customer or Production state was
 changed.
 
 ## Boundary
