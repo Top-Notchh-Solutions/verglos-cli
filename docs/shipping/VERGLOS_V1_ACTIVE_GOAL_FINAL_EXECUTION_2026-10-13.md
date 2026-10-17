@@ -6,8 +6,37 @@
 **Status:** replacement active goal for execution  
 **Backlog authority:** VERGLOS_V1_BACKLOG.md  
 **Contract authority:** FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md  
-**Value authority:** FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md  
+**Value authority:** FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md
 **Coverage authority:** FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md
+
+## 0.0v Current stable SCM webhook implementation checkpoint — 2026-10-18
+
+The next eligible implementation slice is complete in the public Web PR #186,
+assigned to `anuragyadav-git`: a stable app-level
+`/api/v1/webhooks/scm/github` POST entrypoint now extracts a bounded GitHub
+installation ID and delegates the original raw request to the existing
+installation-bound signed handler. Implementation commit `75f0a87` and
+contract-test commit `c2f92f9` are substantive, granular commits; the branch
+head is `c2f92f96ba2b7389589c37ddd5043e3f860b0837`. No squash, rebase,
+force-push, empty, duplicate, artificial, or irrelevant public-doc commit was
+used.
+
+Focused route tests passed **8/8**; typecheck, build **47/47**, public-boundary
+audit, and diff check passed locally. GitGuardian, Vercel Preview Comments,
+and Vercel passed. Hosted `typecheck-and-schema` run `39066991842` / job
+`117496612635` was still in progress at capture, so no merge or hosted green
+claim is made. Local Node/pnpm versions differed from the repository’s normal
+Node 22/pnpm 9.15.9 expectation; hosted CI remains canonical.
+
+This advances implementation of `TEAM-WEB-006` only. The PR remains open and
+the row stays unchecked until provider installation, hosted credentials,
+signed live delivery, and reconciliation evidence exist. `TEAM-CLI-001` also
+remains open for its separate provider activation contract. Hunt/AppSec rows
+remain parked for the independent AppSec gate; that gate is not changed by
+this implementation. No legal, customer, release, or final-acceptance row is
+closed by this checkpoint. Live score remains **230 checked / 50 open / 280
+total (82.1%)**. Evidence:
+`evidence/team-web-006-stable-github-webhook-pr186-2026-10-18.md`.
 
 ## 0.0t Current public machine-readable surface checkpoint — 2026-10-18
 
