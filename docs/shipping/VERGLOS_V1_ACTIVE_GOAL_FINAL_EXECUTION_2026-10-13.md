@@ -308,6 +308,86 @@ implementation slice; do not mark TEAM-CLI-001 or its dependents green until
 the signer/provider artifacts above exist. Keep the independent Hunt AppSec
 review last.
 
+## 0.0l Restart protocol for the next top-to-bottom shipping loop — 2026-10-18
+
+The next goal-loop run must resume from the live backlog, not from this
+document's historical notes. The current authoritative starting score is
+**230 checked / 50 open / 280 total (82.1%)**. Recompute it from the checklist
+before reporting progress and after every real accepted row.
+
+Use this order exactly:
+
+1. Read the first unchecked row in `VERGLOS_V1_BACKLOG.md`, its dependencies,
+   acceptance contract, and linked private evidence.
+2. Park the AppSec hold set immediately and do not modify it during this pass:
+   `HUNT-008`, `HUNT-009`, `HUNT-010`, `HUNT-011`, `QUAL-CLI-004`, and any row
+   whose own contract directly requires the independent Hunt AppSec report.
+   Do not rerun, weaken, or relabel that gate while shipping unrelated work.
+3. Continue downward in backlog order. For every non-AppSec row, use existing
+   owner/company decisions and recorded evidence without asking the owner to
+   repeat them. If the row's complete implementation, evidence, dependencies,
+   and acceptance text are already satisfied, check it and record the exact
+   evidence mapping. If it is not satisfied, name the precise missing artifact
+   and continue to the next dependency-ready row.
+4. For the next dependency-ready implementation row, ship the smallest real
+   product slice: code, focused tests, schemas/configuration, workflows, or a
+   reproducible private artifact as required by that row. A progress note,
+   owner assertion, generated checklist, or documentation-only change is not
+   a substitute for implementation or acceptance evidence.
+5. Run the relevant focused tests plus package/build/typecheck, boundary,
+   hosted, provider, browser, Docker, or artifact checks required by the row.
+   Preserve exact source commit, PR/merge/deployment/run/artifact identifiers,
+   command, result, digest/version, limitations, and privacy boundary in the
+   existing private evidence structure. Do not create an irrelevant public
+   Markdown file.
+6. Reconcile the canonical private backlog, status, execution ledger, and
+   traceability only after the evidence is real. Check a row only when its
+   full acceptance contract passes. Do not convert a green code-side slice
+   into a complete row when a provider, legal, customer, field, or final
+   acceptance artifact is still absent.
+
+The current top-to-bottom routing is therefore:
+
+- `HUNT-008` through `HUNT-011` and `QUAL-CLI-004`: AppSec hold; leave
+  unchanged until the independent reviewer report and applicable evidence
+  satisfy their contracts.
+- `TEAM-CLI-001`: implementation is revalidated, but do not repeat the code
+  work; close only after the recorded signer/trust-root, hosted fetch/cache/
+  offline/cross-tenant, and authorized SCM/provider artifacts exist.
+- `TEAM-CLI-002` and `TEAM-WEB-006`: continue only after their policy/provider
+  dependency is evidenced.
+- `STUDIO-CLI-001` and `ENT-CLI-001`: continue only with their required
+  recipient/customer or operational runner evidence; owner authorization is
+  already recorded for routing and must not be requested again.
+- `LIC-002`: keep the legal decision record truthful; do not fill or sign a
+  legal addendum by inference. Its exact unresolved decisions remain the
+  dependency for downstream notices and distribution rows.
+- `LIC-003`, `DIST-001` through `DIST-006`, `QUAL-CLI-006`, and later Web,
+  acceptance, final-public, and GitHub rows: use their existing implementation
+  slices, then close only when each row's own downstream, provider, field,
+  customer, legal, or final-acceptance artifacts are present. Do not hold an
+  otherwise eligible row merely because AppSec is pending, and do not call a
+  genuinely missing non-AppSec artifact AppSec.
+
+Every loop update must state: implementation rows, newly checked rows, rows
+parked for AppSec, rows still open with the exact reason and next action,
+exact commits/PRs/deployments/artifacts, commands and results, public/private
+boundary, next backlog row, and the recalculated score. If the current row is
+blocked by an external artifact, record it once and keep walking downward; do
+not stop the entire shipping pass.
+
+Contribution discipline remains mandatory: no squash commits, no rebase-away
+of real history, no force-push, no empty/duplicate/artificial activity, and no
+irrelevant Markdown. Keep substantive implementation and test commits
+granular, assign public PRs to `anuragyadav-git`, use regular non-squash merge
+commits, and spend time/tokens only on a real dependency-ready shipping slice
+or the private evidence needed to record it. Do not open new Chrome windows or
+tabs; use the existing Verglos tab only when browser evidence is genuinely
+required, otherwise use CLI/API or local evidence.
+
+This section is an execution instruction for the next loop; it changes no
+checkbox by itself.
+
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
 The hosted continuation completed successfully in GitHub Actions run
