@@ -9,8 +9,9 @@ security-layer positioning. Local truth-registry **32/32**, typecheck,
 public-boundary audit, build **47/47**, and diff check passed. Hosted run
 `39065760180` / job `117492959847`, GitGuardian, Vercel, and Preview Comments
 passed. The post-merge Production deployment `dpl_FChRVgaChsGaKDbuKhzTW7Pg6MQK`
-was still building when recorded, so no post-merge live content-type claim is
-made yet.
+reached READY; the existing Verglos tab verified `/llms.txt` status 200,
+`text/markdown; charset=utf-8`, the factual H1/security-layer positioning,
+and absence of the stale “security evidence layer” phrase.
 
 This is implementation/qualification progress only. `QUAL-WEB-006` and
 `FINAL-WEB-005` remain open; no checkbox or score changed. Evidence:

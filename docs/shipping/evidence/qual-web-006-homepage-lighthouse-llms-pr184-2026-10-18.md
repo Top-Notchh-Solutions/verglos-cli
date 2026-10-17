@@ -38,9 +38,10 @@ Hosted PR run `39065760180`, job `117492959847`, passed
 `typecheck-and-schema`, GitGuardian, Vercel Preview, and Preview Comments.
 
 The post-merge Production deployment `dpl_FChRVgaChsGaKDbuKhzTW7Pg6MQK`
-was still `BUILDING` at the time this packet was recorded. The prior
-Production alias therefore still returned `text/plain`; no post-merge live
-content-type claim is made until that deployment reaches `READY`.
+reached `READY`. The existing Verglos browser tab then verified a live
+`/llms.txt` response with status `200`, content type
+`text/markdown; charset=utf-8`, a factual `# Verglos` H1, current
+security-layer positioning, and no stale “security evidence layer” phrase.
 
 ## Acceptance boundary
 

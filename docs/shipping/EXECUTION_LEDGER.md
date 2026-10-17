@@ -9,7 +9,9 @@
   public-boundary audit, build **47/47**, and diff check passed. Hosted run
   `39065760180` / job `117492959847`, GitGuardian, Vercel, and Preview
   Comments passed. The post-merge Production deployment
-  `dpl_FChRVgaChsGaKDbuKhzTW7Pg6MQK` was still `BUILDING` when recorded.
+  `dpl_FChRVgaChsGaKDbuKhzTW7Pg6MQK` reached READY; the existing browser tab
+  verified the live `/llms.txt` status 200, Markdown content type, factual
+  H1/security-layer positioning, and absence of the stale phrase.
 - **Disposition:** partial qualification progress only. `QUAL-WEB-006` and
   `FINAL-WEB-005` remain open; no checkbox changed and score remains
   **230/50/280 (82.1%)**. No squash, rebase, force-push, empty, duplicate,

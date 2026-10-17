@@ -13,7 +13,9 @@
   public-boundary audit, build **47/47**, and diff check passed; hosted run
   `39065760180` / job `117492959847`, GitGuardian, Vercel, and Preview
   Comments passed. Production deployment `dpl_FChRVgaChsGaKDbuKhzTW7Pg6MQK`
-  was still building at record time.
+  reached READY; the existing browser tab verified `/llms.txt` status 200,
+  `text/markdown; charset=utf-8`, the factual H1/security-layer positioning,
+  and absence of the stale phrase.
 - **Acceptance mapping:** this is partial public-surface qualification only;
   `QUAL-WEB-006` and `FINAL-WEB-005` remain unchecked for their complete
   contracts. No AppSec, provider, legal, customer, release, or final-
