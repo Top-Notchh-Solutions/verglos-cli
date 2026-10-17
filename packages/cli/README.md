@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Top-Notchh-Solutions/verglos-cli/main/.github/assets/hero.svg" alt="Verglos — security scanning for AI-generated code" width="100%">
+  <img src="https://raw.githubusercontent.com/Top-Notchh-Solutions/verglos-cli/main/.github/assets/hero.svg" alt="Verglos — the security decision layer for AI-generated code" width="100%">
 </p>
 
 <p align="center">
@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-  <strong>Verglos scans AI-assisted JavaScript and TypeScript locally, then can verify selected findings with a signed, bounded Hunt recipe.</strong><br>
-  <sub>Free scanner forever. Pro Hunt execution requires an approved recipe, trusted feed, and exact execution binding.</sub>
+  <strong>Verglos is the local-first security decision layer between AI-assisted code changes and release.</strong><br>
+  <sub>Scan JavaScript and TypeScript locally, then verify selected findings only through approved, trusted, bounded Hunt recipes.</sub>
 </p>
 
 <p align="center">

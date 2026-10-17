@@ -1,7 +1,7 @@
 {
   "name": "verglos",
   "version": "2.0.0-alpha.1",
-  "description": "Verglos hunts what AI agents shipped, verifies each finding locally, and signs the evidence.",
+  "description": "Local-first security decision layer between code changes and release. Scan AI-assisted JS/TS repositories and produce bounded evidence without uploading source.",
   "type": "module",
   "bin": {
     "verglos": "./dist/index.js"
