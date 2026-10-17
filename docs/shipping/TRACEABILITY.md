@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-002 landing flow implementation slice · 2026-10-18
+
+- **Source mapping:** Web PR #178, public commit `f8febea`, regular merge
+  `1c15a4861ee09bb1d5968424c3f553f310bb9ebd`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** the landing flow now has explicit Inspect,
+  Decide, Prove, and Monitor stages; homepage proof cards and audience copy
+  describe only the local and qualification-gated product boundaries recorded
+  by the public truth surfaces.
+- **Verification mapping:** local truth-registry **29/29**, typecheck, build
+  **47/47**, diff check, and public-boundary audit passed; hosted run
+  `39058985826`, GitGuardian, Vercel, and Preview Comments passed.
+- **Acceptance mapping:** implementation evidence is complete for this slice,
+  but FINAL-WEB-002 remains unchecked because FINAL-WEB-001 and final
+  acceptance dependencies remain open. No AppSec-held row changed. Score
+  remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-002-flow-pr178-2026-10-18.md`.
+
 ## PR #177 CI mirror repair and regular merge · 2026-10-17
 
 - **Source mapping:** Web PR #177, public commit `34e6010`, regular merge

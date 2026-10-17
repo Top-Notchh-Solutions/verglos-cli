@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · FINAL-WEB-002 landing flow implementation slice
+
+Web PR #178, assigned to `anuragyadav-git`, merged normally as
+`1c15a4861ee09bb1d5968424c3f553f310bb9ebd` after public commit `f8febea`
+aligned the landing promise with the four-stage **Inspect → Decide → Prove →
+Monitor** journey. The public flow now states local execution, bounded
+assurance, and hosted qualification boundaries; unsupported hourly monitoring,
+CVE-alert, and named-agent claims were removed. Local truth-registry tests
+passed **29/29**, typecheck passed, the production build generated **47/47**
+pages, and the public-boundary audit passed. Hosted run `39058985826` passed
+the complete Web verification job; GitGuardian, Vercel, and Preview Comments
+also passed.
+
+This is implementation evidence only. FINAL-WEB-002 remains unchecked because
+its FINAL-WEB-001 dependency and final acceptance contract remain open. No
+AppSec-held row changed. The score remains **230 checked / 50 unchecked / 280
+total (82.1%)**. Evidence:
+`docs/shipping/evidence/final-web-002-flow-pr178-2026-10-18.md`.
+
 ## 2026-10-17 · PR #177 CI mirror repair and regular merge
 
 Web PR #177, assigned to `anuragyadav-git`, merged normally as
@@ -2711,7 +2730,7 @@ Evidence/problem: external validation is deliberately last. It validates the com
 HOLD: do not start these tasks until the founder explicitly says the product truth is frozen and authorizes the final web pass. No blog work is included.
 
 - [ ] **FINAL-WEB-001** · capability-driven public copy map · deps: ACCEPT-009/010 + founder command · Map homepage/docs/pricing/meta claims to truth registry and server plan catalog; remove stale alpha language only for verified capabilities. Commit(s): Web PR #101 merged as `c3e6668e` after rebased hosted run `36972830161`; ships the pure `public-claim-registry` decision surface and dedicated hosted test step, but does not yet wire every public surface or authorize copy changes. Acceptance remains gated on ACCEPT-009/010 and founder command.
-- [ ] **FINAL-WEB-002** · homepage product promise/flow · deps: FINAL-WEB-001 · Update landing content to Inspect -> Decide -> Prove -> Monitor using real product evidence and no unsupported benchmarks/customers. Commit(s): —
+- [ ] **FINAL-WEB-002** · homepage product promise/flow · deps: FINAL-WEB-001 · Update landing content to Inspect -> Decide -> Prove -> Monitor using real product evidence and no unsupported benchmarks/customers. Commit(s): Web PR #178, commit `f8febea`, merged normally as `1c15a486`; implementation and hosted verification are recorded, but FINAL-WEB-001 and final acceptance remain open. Evidence: `docs/shipping/evidence/final-web-002-flow-pr178-2026-10-18.md`.
 - [ ] **FINAL-WEB-003** · plan/pricing presentation · deps: FINAL-WEB-001 · Render Free/Pro/Team/Studio/Enterprise from canonical catalog with exact allowances, status, billing terms, and explicit overages. Commit(s): Web PR #177 commits `b2b3d4a`, `4aa3310`, and `fa01830` add the Team card, align the public capability matrix, cover the Team price/state in truth tests, and project exact catalog terms without inventing overages; dependent acceptance evidence remains open.
 - [ ] **FINAL-WEB-004** · public product/docs truth pass · deps: FINAL-WEB-001 · Align command docs, language coverage, engine attribution, signing limitations, Hunt assurance, and dashboard capabilities with shipped behavior. Commit(s): Web PR #177 commits `7a56141` and `bd50d84` align the docs plan matrix with the catalog, add Team, correct stale price/attestation wording, and replace unsupported public maturity labels with qualification-gated language; the complete command/docs truth scope remains open.
 - [ ] **FINAL-WEB-005** · metadata/structured data/llms truth pass · deps: FINAL-WEB-001 · Update only factual metadata and machine-readable surfaces; no invented GEO/SEO claims. Commit(s): —

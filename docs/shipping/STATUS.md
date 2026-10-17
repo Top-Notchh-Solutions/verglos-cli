@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · FINAL-WEB-002 landing flow implementation slice
+
+Web PR #178, assigned to `anuragyadav-git`, merged normally as
+`1c15a4861ee09bb1d5968424c3f553f310bb9ebd` from public commit `f8febea`.
+The landing flow now presents Inspect → Decide → Prove → Monitor and makes
+local execution, bounded assurance, and hosted qualification boundaries
+explicit. Unsupported hourly monitoring, CVE-alert, and named-agent claims
+were removed. Local truth-registry tests passed **29/29**, typecheck passed,
+the build generated **47/47** pages, and the public-boundary audit passed.
+Hosted run `39058985826`, GitGuardian, Vercel, and Preview Comments passed.
+
+No checkbox changed: FINAL-WEB-002 remains open for its FINAL-WEB-001 and final
+acceptance dependencies. AppSec-held rows were untouched. Score remains
+**230 checked / 50 open / 280 total (82.1%)**. Evidence:
+`evidence/final-web-002-flow-pr178-2026-10-18.md`.
+
 ## 2026-10-17 · PR #177 CI mirror repair and regular merge
 
 Web PR #177, assigned to `anuragyadav-git`, merged normally as

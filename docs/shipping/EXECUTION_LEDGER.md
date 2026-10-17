@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · FINAL-WEB-002 landing flow implementation slice
+
+- **Public change:** Web PR #178, assigned to `anuragyadav-git`, merged
+  normally as `1c15a486`; commit `f8febea` aligns the landing page with the
+  Inspect → Decide → Prove → Monitor journey and removes unsupported hosted or
+  customer claims.
+- **Verification:** local truth-registry **29/29**, typecheck, production
+  build **47/47**, `git diff --check`, and public-boundary audit passed;
+  hosted run `39058985826`, GitGuardian, Vercel, and Preview Comments passed.
+- **History:** no squash, rebase, force-push, empty, duplicate, or artificial
+  contribution commit was used.
+- **Disposition:** implementation progress only. FINAL-WEB-002 remains open
+  for FINAL-WEB-001 and final acceptance dependencies; no AppSec-held row was
+  changed. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-002-flow-pr178-2026-10-18.md`.
+
 ## 2026-10-17 · PR #177 CI mirror repair and regular merge
 
 - **Public change:** Web commit `34e6010` changes the Postgres service image
