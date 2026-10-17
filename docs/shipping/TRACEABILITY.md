@@ -1,5 +1,45 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 provider App scope mismatch and cleanup · 2026-10-18
+
+- **Provider mapping:** a private `Verglos Preview SCM` GitHub App
+  registration was created with Checks write and Metadata read (App ID
+  `5361183`). The first installation was on the separate
+  `topnotchhsolutions-apa` account, installation `172504338`, with **All
+  repositories** selected; it was not the authorized
+  `anuragyadav-git/verglos-web` target.
+- **Cleanup mapping:** the mismatched installation was queued for uninstall;
+  no private key or webhook secret was printed or stored, and no Vercel
+  Preview credentials, customer state, Production state, policy fetch,
+  webhook delivery, or SCM check was claimed.
+- **Acceptance mapping:** this is blocker/cleanup evidence only. TEAM-CLI-001
+  remains open for the correct account/repository installation, server-held
+  Preview credentials, and live signed policy/provider qualification. No
+  AppSec-held row changed; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/team-cli-001-provider-app-scope-mismatch-2026-10-18.md`.
+
+## FINAL-WEB-004 legacy security-layer thesis · 2026-10-18
+
+- **Source mapping:** Web PR #183, implementation
+  `d0b2d52423ab906d841f2152eb5a27bfd7272465`, normal merge
+  `7f7957b70b3daf0c382f9a0d7475701b67a48927`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** the remaining legacy homepage thesis card now
+  calls Verglos the security decision layer and describes bounded evidence for
+  handoff; the existing journal slug was preserved.
+- **Verification mapping:** local truth-registry **31/31**, build **47/47**,
+  typecheck, public-boundary, diff check, and stale-phrase search passed;
+  hosted run `39063404606` / job `117485921279`, GitGuardian, Vercel, and
+  Preview Comments passed. Production deployment
+  `dpl_2AWaKPp2GLE7U2t8Nd4E8cocPR7Y` reached READY; the existing browser tab
+  confirmed the new thesis and absence of the old phrase.
+- **Acceptance mapping:** FINAL-WEB-004 remains unchecked for complete
+  dependency and final-acceptance requirements. No AppSec-held or provider
+  row changed; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-004-security-layer-legacy-thesis-pr183-2026-10-18.md`.
+
 ## FINAL-WEB-004 production security-layer stamp · 2026-10-18
 
 - **Source mapping:** Web PR #182, implementation

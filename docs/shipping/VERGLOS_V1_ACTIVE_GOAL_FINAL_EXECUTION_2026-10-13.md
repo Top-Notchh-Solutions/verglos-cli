@@ -907,6 +907,36 @@ Next backlog action remains `TEAM-CLI-001`: do not repeat its code work; wait
 for the dedicated provider installation and live policy qualification before
 advancing TEAM-CLI-002 or TEAM-WEB-006. Keep Hunt AppSec last.
 
+## 0.0s Current FINAL-WEB-004 legacy-thesis checkpoint — 2026-10-18
+
+Web PR #183, assigned to `anuragyadav-git`, merged normally as
+`7f7957b70b3daf0c382f9a0d7475701b67a48927` from implementation commit
+`d0b2d52423ab906d841f2152eb5a27bfd7272465`. It corrected the remaining
+legacy homepage thesis card from “security evidence layer” to “security
+decision layer” while preserving the existing journal slug and keeping the
+bounded-evidence explanation factual. Local truth-registry 31/31, build
+47/47, typecheck, public-boundary, diff check, and the stale-phrase search
+passed. Hosted run `39063404606` / job `117485921279`, GitGuardian, Vercel,
+and Preview Comments passed. Production deployment
+`dpl_2AWaKPp2GLE7U2t8Nd4E8cocPR7Y` reached READY; the existing Verglos browser
+tab verified the decision-layer thesis and absence of the old phrase.
+
+This is implementation and rollout evidence only. FINAL-WEB-004 remains
+unchecked for its complete dependency and final-acceptance contract; no
+AppSec, provider, customer, legal, release, or other checkbox changed. The
+score remains **230 checked / 50 open / 280 total (82.1%)**. No squash,
+rebase, force-push, empty, duplicate, artificial, or irrelevant
+documentation-only contribution commit was used. Evidence:
+`evidence/final-web-004-security-layer-legacy-thesis-pr183-2026-10-18.md`.
+
+The provider installation attempt must not be counted as live evidence: the
+existing GitHub tab showed the App installed on the separate
+`topnotchhsolutions-apa` account with **All repositories**, not the authorized
+`anuragyadav-git/verglos-web` scope. That mismatched installation was queued
+for uninstall and is not a TEAM-CLI-001 result. Keep TEAM-CLI-001 open until
+the correct account/repository binding and the live policy/provider matrix
+are evidenced. Keep Hunt AppSec last.
+
 ## 1. Objective
 
 Finish the approved Verglos Final V1 product implementation and qualification

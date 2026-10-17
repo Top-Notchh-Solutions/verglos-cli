@@ -1,5 +1,34 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · FINAL-WEB-004 legacy security-layer thesis
+
+Web PR #183, assigned to `anuragyadav-git`, merged normally as `7f7957b7` from
+implementation `d0b2d52`. The remaining legacy homepage thesis card now calls
+Verglos the security decision layer and describes bounded evidence for handoff
+without changing its existing URL slug. Local truth-registry **31/31**, build
+**47/47**, typecheck, public-boundary, diff check, and stale-phrase search
+passed. Hosted run `39063404606` / job `117485921279`, GitGuardian, Vercel,
+and Preview Comments passed. Production deployment
+`dpl_2AWaKPp2GLE7U2t8Nd4E8cocPR7Y` reached READY; the existing Verglos tab
+verified the new thesis and absence of the old phrase.
+
+FINAL-WEB-004 remains open for its complete dependency and final-acceptance
+contract. No checkbox changed. Score remains **230 checked / 50 open / 280
+total (82.1%)**. Evidence:
+`evidence/final-web-004-security-layer-legacy-thesis-pr183-2026-10-18.md`.
+
+## 2026-10-18 · TEAM-CLI-001 provider App scope mismatch and cleanup
+
+A private `Verglos Preview SCM` GitHub App registration was created with
+Checks write and Metadata read. The first installation was on the separate
+`topnotchhsolutions-apa` account with installation `172504338` and **All
+repositories** selected, not the authorized `anuragyadav-git/verglos-web`
+scope. It was queued for uninstall. No private key or webhook secret was
+printed/stored, and no provider, policy, webhook, check, customer, or
+Production result was claimed. TEAM-CLI-001 remains open; this is not an
+AppSec hold. Evidence:
+`evidence/team-cli-001-provider-app-scope-mismatch-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-004 production security-layer stamp
 
 Web PR #182, assigned to `anuragyadav-git`, merged normally as `48156976` from

@@ -1,5 +1,41 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 provider App scope mismatch and cleanup
+
+- **Provider action:** a private `Verglos Preview SCM` GitHub App registration
+  (App ID `5361183`) requested only Checks write and Metadata read. The first
+  installation was on `topnotchhsolutions-apa`, installation `172504338`,
+  with **All repositories** selected.
+- **Disposition:** this did not match the authorized
+  `anuragyadav-git/verglos-web` target or least-privilege scope. The
+  installation was queued for uninstall. No private key or webhook secret was
+  printed/stored, and no hosted credential, policy fetch, webhook, check, or
+  customer/Production state was claimed. TEAM-CLI-001 remains open.
+- **Boundary:** no checkbox changed; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-provider-app-scope-mismatch-2026-10-18.md`.
+
+## 2026-10-18 · FINAL-WEB-004 legacy security-layer thesis
+
+- **Public change:** Web PR #183, assigned to `anuragyadav-git`, merged
+  normally as `7f7957b7`; implementation `d0b2d52` changes the remaining
+  legacy thesis card from “security evidence layer” to “security decision
+  layer” without changing its URL slug.
+- **Verification:** local truth-registry **31/31**, build **47/47**,
+  typecheck, public-boundary, diff check, and stale-phrase search passed.
+  Hosted run `39063404606` / job `117485921279`, GitGuardian, Vercel, and
+  Preview Comments passed. Production deployment
+  `dpl_2AWaKPp2GLE7U2t8Nd4E8cocPR7Y` reached READY and the existing browser tab
+  verified the new thesis and absence of the old phrase.
+- **Disposition:** implementation/rollout progress only. FINAL-WEB-004 remains
+  open for dependency and final acceptance; no AppSec-held or provider row
+  changed. Score remains **230/50/280 (82.1%)**.
+- **History:** one substantive implementation commit plus a normal merge; no
+  squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
+  documentation-only contribution commit.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-004-security-layer-legacy-thesis-pr183-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-004 production security-layer stamp
 
 - **Public change:** Web PR #182, assigned to `anuragyadav-git`, merged
