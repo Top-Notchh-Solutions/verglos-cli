@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-004 public docs truth implementation slice · 2026-10-17
+
+- **Source mapping:** Web PR #177, commit `7a56141`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** the docs plan matrix now uses canonical price
+  and status functions, includes Team, and describes attestation/white-label
+  features as qualification-gated rather than planned delivery.
+- **Verification mapping:** typecheck, diff check, and build **47/47** pages
+  passed; truth-registry tests remain **28/28**.
+- **Acceptance mapping:** this is implementation evidence only. FINAL-WEB-004
+  remains unchecked for its complete public product/docs truth scope; score
+  remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-004-public-docs-truth-2026-10-17.md`.
+
 ## PR #177 regular merge-base repair · 2026-10-17
 
 - **Source mapping:** Web PR #177, regular merge commit `609faa0`, assigned to

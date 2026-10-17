@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-17 · FINAL-WEB-004 public docs truth implementation slice
+
+- **Public change:** Web PR #177 commit `7a56141`, assigned to
+  `anuragyadav-git`, binds the docs plan matrix to the canonical catalog,
+  adds Team, and removes stale paid-tier price/planned-attestation claims.
+- **Verification:** typecheck, diff check, and production build **47/47**
+  pages passed; the existing truth suite remains **28/28**.
+- **Boundary:** one substantive public code commit; no unrelated Markdown,
+  deployment, publication, database operation, or browser-session change.
+- **Disposition:** implementation progress only. FINAL-WEB-004 remains open
+  for its complete command/docs truth scope and acceptance evidence. Score
+  remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-004-public-docs-truth-2026-10-17.md`.
+
 ## 2026-10-17 · PR #177 regular merge-base repair
 
 - **Public state:** Web PR #177, assigned to `anuragyadav-git`, is

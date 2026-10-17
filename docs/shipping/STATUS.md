@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-17 · FINAL-WEB-004 public docs truth implementation slice
+
+Public Web PR #177 adds commit `7a56141`, assigned to `anuragyadav-git`,
+binding the docs plan matrix to the canonical catalog. The docs now include
+Team, derive price/status values from the catalog, and replace stale paid-tier
+prices and planned-attestation wording with qualification-gated language.
+Typecheck, diff check, and the production build with **47/47** generated pages
+passed. This is a public implementation slice only; no checkbox changed.
+
+The live score remains **230 checked / 50 unchecked / 280 total (82.1%)**.
+Evidence: `evidence/final-web-004-public-docs-truth-2026-10-17.md`.
+
 ## 2026-10-17 · PR #177 regular merge-base repair
 
 Public Web PR #177 remains assigned to `anuragyadav-git` and is now

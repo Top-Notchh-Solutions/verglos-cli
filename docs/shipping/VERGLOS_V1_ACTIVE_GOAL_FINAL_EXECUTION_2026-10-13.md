@@ -97,16 +97,26 @@ AppSec run is still pending.
 
 Public Web PR #177 remains assigned to `anuragyadav-git` and is now
 `MERGEABLE` after regular merge commit `609faa0` incorporated the advanced
-public `main` head. The three substantive implementation commits remain
-intact; no squash, rebase, force-push, empty, duplicate, or artificial commit
-was used. Focused truth tests remain **28/28**, typecheck and build remain
-passing with **47/47** generated pages, and GitHub checks are running again on
-the merged head.
+public `main` head. The four substantive public implementation commits remain
+intact, followed by that regular merge; no squash, rebase, force-push, empty,
+duplicate, or artificial commit was used. Focused truth tests remain **28/28**,
+typecheck and build remain passing with **47/47** generated pages, and GitHub
+checks are running again on the merged head.
 
 The live private backlog count is **230 checked / 50 open / 280 total (82.1%)**.
 No checkbox changed in this continuation. FINAL-WEB-003 remains open for its
 full acceptance criteria; the independent Hunt AppSec/security review remains
 the only intentionally closed gate and stays scheduled last.
+
+## 0.0e Current public-docs truth slice — 2026-10-17
+
+Web PR #177 adds commit `7a56141`, which binds the public docs plan matrix to
+the canonical catalog, adds Team, exposes catalog-derived price/status values,
+and replaces stale paid-tier prices and planned-attestation wording with
+qualification-gated language. This is a public implementation slice for
+FINAL-WEB-004; its broader command, language, engine, signing, Hunt, and
+dashboard acceptance remains open. No checkbox changed; the live score remains
+**230 checked / 50 open / 280 total (82.1%)**.
 
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
