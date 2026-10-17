@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-17 · FINAL-WEB-003 canonical plan matrix implementation slice
+
+- **Public change:** Web PR #177, commits `b2b3d4a` and `4aa3310`, assigned to
+  `anuragyadav-git`, add the Team plan card and align the visible
+  Free/Pro/Team/Studio/Enterprise capability matrix with the canonical plan
+  catalog.
+- **Machine-readable surface:** `/llms.txt` now includes Team with its
+  inactive `Not purchasable` state; truth-registry tests assert Team price and
+  `Validation` status.
+- **Verification:** `pnpm test:truth-registry` **28/28**, typecheck, diff check,
+  and production build **47/47** passed. The existing Node 22.x engine warning
+  under local Node 26 did not fail a check.
+- **Boundary:** normal granular non-squash history; no deployment,
+  publication, database operation, browser-session change, or unrelated docs.
+- **Disposition:** implementation progress only. FINAL-WEB-003 remains open for
+  exact allowances, billing terms, overages, and dependent acceptance
+  evidence. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-003-canonical-plan-matrix-2026-10-17.md`.
+
 ## 2026-10-17 · FINAL-WEB-001 public truth-registry implementation slice
 
 - **Public change:** Web PR #177, commit `5ada115`, assigned to

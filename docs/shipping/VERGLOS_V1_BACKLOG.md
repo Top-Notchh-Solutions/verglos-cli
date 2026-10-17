@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-17 · FINAL-WEB-003 canonical plan matrix implementation slice
+
+Web PR #177, commits `b2b3d4a` and `4aa3310`, assigned to
+`anuragyadav-git`, add the Team plan card and align the public
+Free/Pro/Team/Studio/Enterprise capability matrix with the canonical catalog.
+`/llms.txt` and the truth-registry tests record Team as inactive and
+`Not purchasable`. Truth tests passed **28/28**, typecheck passed, and the
+production build generated **47/47** static pages. This is implementation
+progress only; no checkbox changed and score remains **230 checked / 50
+unchecked / 280 total (82.1%)**. Evidence:
+`docs/shipping/evidence/final-web-003-canonical-plan-matrix-2026-10-17.md`.
+
 ## 2026-10-17 · FINAL-WEB-001 public truth-registry implementation slice
 
 Web PR #177, commit `5ada115`, assigned to `anuragyadav-git`, wires homepage
@@ -2646,7 +2658,7 @@ HOLD: do not start these tasks until the founder explicitly says the product tru
 
 - [ ] **FINAL-WEB-001** · capability-driven public copy map · deps: ACCEPT-009/010 + founder command · Map homepage/docs/pricing/meta claims to truth registry and server plan catalog; remove stale alpha language only for verified capabilities. Commit(s): Web PR #101 merged as `c3e6668e` after rebased hosted run `36972830161`; ships the pure `public-claim-registry` decision surface and dedicated hosted test step, but does not yet wire every public surface or authorize copy changes. Acceptance remains gated on ACCEPT-009/010 and founder command.
 - [ ] **FINAL-WEB-002** · homepage product promise/flow · deps: FINAL-WEB-001 · Update landing content to Inspect -> Decide -> Prove -> Monitor using real product evidence and no unsupported benchmarks/customers. Commit(s): —
-- [ ] **FINAL-WEB-003** · plan/pricing presentation · deps: FINAL-WEB-001 · Render Free/Pro/Team/Studio/Enterprise from canonical catalog with exact allowances, status, billing terms, and explicit overages. Commit(s): —
+- [ ] **FINAL-WEB-003** · plan/pricing presentation · deps: FINAL-WEB-001 · Render Free/Pro/Team/Studio/Enterprise from canonical catalog with exact allowances, status, billing terms, and explicit overages. Commit(s): Web PR #177 commits `b2b3d4a` + `4aa3310` add the Team card, align the public capability matrix, and cover the Team price/state in truth tests; exact allowances, billing terms, overages, and dependent acceptance evidence remain open.
 - [ ] **FINAL-WEB-004** · public product/docs truth pass · deps: FINAL-WEB-001 · Align command docs, language coverage, engine attribution, signing limitations, Hunt assurance, and dashboard capabilities with shipped behavior. Commit(s): —
 - [ ] **FINAL-WEB-005** · metadata/structured data/llms truth pass · deps: FINAL-WEB-001 · Update only factual metadata and machine-readable surfaces; no invented GEO/SEO claims. Commit(s): —
 - [ ] **FINAL-WEB-006** · public proof assets · deps: ACCEPT-003/009 · Use sanitized real records/screenshots/flows with date, version, demo/real label, alt text, and no private evidence. Commit(s): —

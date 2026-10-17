@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-17 · FINAL-WEB-003 canonical plan matrix implementation slice
+
+Public Web PR #177 now includes commits `b2b3d4a` and `4aa3310`, assigned to
+`anuragyadav-git`, adding the canonical Team plan card and aligning the
+Free/Pro/Team/Studio/Enterprise capability matrix with the public catalog.
+The machine-readable `/llms.txt` plan matrix and truth-registry tests cover
+Team’s inactive `Not purchasable` price and `Validation` state. Truth tests
+passed **28/28**, typecheck passed, and the production build generated
+**47/47** static pages. History remains normal and non-squashed.
+
+This is implementation progress only; FINAL-WEB-003 remains open for exact
+allowances, billing terms, overages, and its dependent acceptance gates. No
+checkbox or score changed. The live score remains **230 checked / 50 unchecked
+/ 280 total (82.1%)**. Evidence:
+`evidence/final-web-003-canonical-plan-matrix-2026-10-17.md`.
+
 ## 2026-10-17 · FINAL-WEB-001 public truth-registry implementation slice
 
 Public Web PR #177, commit `5ada115`, wires homepage plan copy, root metadata,

@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-003 canonical plan matrix implementation slice · 2026-10-17
+
+- **Source mapping:** Web PR #177, commits `b2b3d4a` and `4aa3310`, branch
+  `feat/final-web-001-truth-registry-20261017`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** the homepage renders Free/Pro/Team/Studio/
+  Enterprise plan cards and capability columns; `/llms.txt` exposes Team’s
+  inactive catalog state; tests assert the canonical Team price/state.
+- **Verification mapping:** truth-registry tests **28/28**, typecheck, diff
+  check, and build **47/47** static pages passed.
+- **Acceptance mapping:** this is implementation evidence only. FINAL-WEB-003
+  remains unchecked for exact allowances, billing terms, overages, and
+  dependent acceptance evidence; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-003-canonical-plan-matrix-2026-10-17.md`.
+
 ## FINAL-WEB-001 public truth-registry implementation slice · 2026-10-17
 
 - **Source mapping:** Web PR #177, commit `5ada115`, branch
