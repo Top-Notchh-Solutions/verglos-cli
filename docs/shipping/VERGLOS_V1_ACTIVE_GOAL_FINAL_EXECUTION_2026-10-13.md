@@ -850,10 +850,14 @@ final-acceptance row changed. The live score remains **230 checked / 50 open /
 artificial, or irrelevant public-doc contribution commit was used. Evidence:
 `evidence/final-web-004-public-identity-pr181-2026-10-18.md`.
 
-Next backlog action: continue at the next eligible non-AppSec row in file
-order. Leave rows open when their own provider, customer, legal, hosted,
-field, release, or final-acceptance artifact is missing; keep the independent
-Hunt AppSec review last.
+Next backlog row in file order is `TEAM-CLI-001`. Its code-side policy
+implementation is current and revalidated, but it still needs production
+signer/trust-root activation, live hosted fetch/cache/offline/cross-tenant
+observation, policy-row reconciliation, and the authorized SCM/provider event.
+`TEAM-CLI-002` and `TEAM-WEB-006` remain dependent on that evidence. Continue
+through those rows only when their own provider/hosted artifacts exist; leave
+provider, customer, legal, field, release, and final-acceptance rows open when
+their own evidence is missing. Keep the independent Hunt AppSec review last.
 
 ## 1. Objective
 
