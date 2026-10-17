@@ -9,6 +9,36 @@
 **Value authority:** FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md  
 **Coverage authority:** FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md
 
+## 0.0t Current public machine-readable surface checkpoint — 2026-10-18
+
+The next eligible non-AppSec slice after the provider dependency was a real
+public Web compatibility fix. Web PR #184, assigned to `anuragyadav-git`,
+merged normally as `696de5bf594fd315b26f76f1c9f72b245f61f026` from substantive
+implementation commit `96701ae8729f16ee28a83586409a32c848fe6172`. The
+`/llms.txt` route now declares `text/markdown; charset=utf-8` and has a
+contract test requiring the factual `# Verglos` H1 and current security-layer
+positioning.
+
+Verification passed locally: truth-registry **32/32**, typecheck,
+public-boundary audit, build **47/47**, and `git diff --check`. Hosted run
+`39065760180` / job `117492959847`, GitGuardian, Vercel, and Preview Comments
+passed. Production deployment `dpl_FChRVgaChsGaKDbuKhzTW7Pg6MQK` reached
+READY; the existing Verglos browser tab verified `/llms.txt` status 200, the
+Markdown content type, the factual H1/security-layer positioning, and absence
+of the stale “security evidence layer” phrase. Production homepage Lighthouse
+navigation also scored Accessibility, Best Practices, and SEO **100/100/100**
+on both mobile and desktop; the separate agentic `llms-txt` heuristic is
+retained as a limitation because direct fetch evidence proves the H1 exists.
+
+This advances `QUAL-WEB-006` and `FINAL-WEB-005` evidence only; their complete
+acceptance contracts remain open, and no checkbox changed. The live score is
+still **230 checked / 50 open / 280 total (82.1%)**. No AppSec, provider,
+legal, customer, release, or final-acceptance gate was waived. The public
+history retains one substantive implementation commit plus a normal merge;
+there was no squash, rebase, force-push, empty, duplicate, artificial, or
+irrelevant public-doc contribution. Evidence:
+`evidence/qual-web-006-homepage-lighthouse-llms-pr184-2026-10-18.md`.
+
 ## 0.0 Owner authorization checkpoint — 2026-10-14
 
 Anurag Yadav, Owner of Top Notchh Solutions and Verglos
