@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 / FINAL-WEB-005 llms.txt link qualification · 2026-10-18
+
+- **Source mapping:** Web PR #185, implementation
+  `d9505cacf5a89db5eb23cb71cfa924f3186a99d4`, normal merge
+  `c2210cde0fce81e344da4399865734635a035b99`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** important-page entries in `/llms.txt` now use
+  Markdown links rather than bare URLs.
+- **Verification mapping:** local truth-registry **32/32**, typecheck,
+  public-boundary audit, build **47/47**, and diff check passed; hosted run
+  `39066317123` / job `117494634418`, GitGuardian, Vercel, and Preview
+  Comments passed. Production deployment `dpl_AR8Vyh9zkHte9FeNidZkaRhyFDu2`
+  reached READY. Existing-tab Lighthouse passed with zero failures on mobile
+  (**60/60**) and desktop (**61/61**); all four reported categories scored
+  **100** on both devices.
+- **Acceptance mapping:** this closes the public machine-readable compatibility
+  sub-slice only. `QUAL-WEB-006` and `FINAL-WEB-005` remain unchecked for
+  their complete contracts; no AppSec, provider, legal, customer, release,
+  or final-acceptance gate changed. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/qual-web-006-homepage-lighthouse-llms-pr184-2026-10-18.md`.
+
 ## QUAL-WEB-006 / FINAL-WEB-005 llms.txt compatibility · 2026-10-18
 
 - **Source mapping:** Web PR #184, implementation

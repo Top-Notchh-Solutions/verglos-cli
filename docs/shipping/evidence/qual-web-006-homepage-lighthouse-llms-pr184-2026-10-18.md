@@ -26,6 +26,12 @@ Web PR #184, assigned to `anuragyadav-git`, contains implementation commit
 `text/markdown; charset=utf-8` and adds a contract test requiring the factual
 H1 and security-layer positioning.
 
+The follow-up Web PR #185, assigned to `anuragyadav-git`, contains
+implementation commit `d9505cacf5a89db5eb23cb71cfa924f3186a99d4` and merged
+normally as `c2210cde0fce81e344da4399865734635a035b99`. It changes the
+important-page entries from bare URLs to Markdown links, addressing the
+Lighthouse `llms-txt` finding.
+
 Local checks passed:
 
 - `pnpm test:truth-registry`: **32/32**, zero failures/skips;
@@ -42,6 +48,11 @@ reached `READY`. The existing Verglos browser tab then verified a live
 `/llms.txt` response with status `200`, content type
 `text/markdown; charset=utf-8`, a factual `# Verglos` H1, current
 security-layer positioning, and no stale “security evidence layer” phrase.
+
+After PR #185 reached Production READY, the same existing tab verified seven
+Markdown links in the response. Lighthouse navigation then passed with zero
+failures on both devices: mobile **60/60**, desktop **61/61**; Accessibility,
+Best Practices, SEO, and Agentic Browsing each scored **100** on both runs.
 
 ## Acceptance boundary
 

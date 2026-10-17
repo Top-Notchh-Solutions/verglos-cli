@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · public llms.txt link qualification complete
+
+Web PR #185, assigned to `anuragyadav-git`, merged normally as `c2210cde`
+from implementation `d9505ca`. It converts all important-page entries in the
+machine-readable `/llms.txt` surface to Markdown links after Lighthouse
+identified bare URLs as the remaining consumer-compatibility issue. Local
+truth-registry **32/32**, typecheck, public-boundary audit, build **47/47**,
+and diff check passed; hosted run `39066317123` / job `117494634418`,
+GitGuardian, Vercel, and Preview Comments passed. Production deployment
+`dpl_AR8Vyh9zkHte9FeNidZkaRhyFDu2` reached READY. Existing-tab Lighthouse
+navigation passed with **0 failures**: mobile 60/60 and desktop 61/61, with
+Accessibility, Best Practices, SEO, and Agentic Browsing at **100** on both.
+
+`QUAL-WEB-006` and `FINAL-WEB-005` remain open for their broader dependency
+and acceptance contracts; no checkbox or score changed. Evidence:
+`evidence/qual-web-006-homepage-lighthouse-llms-pr184-2026-10-18.md`.
+
 ## 2026-10-18 · public llms.txt Markdown compatibility
 
 Web PR #184, assigned to `anuragyadav-git`, merged normally as `696de5bf`

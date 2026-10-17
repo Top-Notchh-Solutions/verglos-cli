@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · public llms.txt link qualification complete
+
+- **Public change:** Web PR #185, assigned to `anuragyadav-git`, merged
+  normally as `c2210cde`; implementation `d9505ca` converts all important-page
+  entries in `/llms.txt` to Markdown links.
+- **Verification:** local truth-registry **32/32**, typecheck,
+  public-boundary audit, build **47/47**, and diff check passed. Hosted run
+  `39066317123` / job `117494634418`, GitGuardian, Vercel, and Preview
+  Comments passed. Production deployment `dpl_AR8Vyh9zkHte9FeNidZkaRhyFDu2`
+  reached READY; existing-tab Lighthouse passed with zero failures, mobile
+  60/60 and desktop 61/61, all four categories at 100.
+- **Disposition:** public-surface qualification progress only.
+  `QUAL-WEB-006` and `FINAL-WEB-005` remain open; no checkbox changed and
+  score remains **230/50/280 (82.1%)**. No squash, rebase, force-push, empty,
+  duplicate, artificial, or irrelevant public-doc commit was used.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-homepage-lighthouse-llms-pr184-2026-10-18.md`.
+
 ## 2026-10-18 · public llms.txt Markdown compatibility
 
 - **Public change:** Web PR #184, assigned to `anuragyadav-git`, merged

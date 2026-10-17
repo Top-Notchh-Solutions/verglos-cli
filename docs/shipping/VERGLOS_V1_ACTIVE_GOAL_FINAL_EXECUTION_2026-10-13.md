@@ -39,6 +39,32 @@ there was no squash, rebase, force-push, empty, duplicate, artificial, or
 irrelevant public-doc contribution. Evidence:
 `evidence/qual-web-006-homepage-lighthouse-llms-pr184-2026-10-18.md`.
 
+## 0.0u Current public llms.txt qualification checkpoint — 2026-10-18
+
+The public machine-readable compatibility slice is now fully verified through
+Production. Web PR #185, assigned to `anuragyadav-git`, merged normally as
+`c2210cde0fce81e344da4399865734635a035b99` from implementation `d9505ca`. It
+converts all important-page entries in `/llms.txt` to Markdown links after
+the production Lighthouse audit identified bare URLs.
+
+Local truth-registry **32/32**, typecheck, public-boundary audit, build
+**47/47**, and diff check passed. Hosted run `39066317123` / job
+`117494634418`, GitGuardian, Vercel, and Preview Comments passed. Production
+deployment `dpl_AR8Vyh9zkHte9FeNidZkaRhyFDu2` reached READY. The existing
+Verglos browser tab verified status 200, Markdown content type, the factual
+H1/security-layer positioning, seven Markdown links, and no stale phrase;
+Lighthouse passed with zero failures on mobile **60/60** and desktop **61/61**,
+with Accessibility, Best Practices, SEO, and Agentic Browsing all **100**.
+
+This advances `QUAL-WEB-006` and `FINAL-WEB-005` evidence only. Their broader
+acceptance contracts remain open, no checkbox changed, and the score remains
+**230 checked / 50 open / 280 total (82.1%)**. No AppSec, provider, legal,
+customer, release, or final-acceptance gate was waived. The public history
+preserves substantive commits and normal merges; no squash, rebase,
+force-push, empty, duplicate, artificial, or irrelevant public-doc commit
+was used. Evidence:
+`evidence/qual-web-006-homepage-lighthouse-llms-pr184-2026-10-18.md`.
+
 ## 0.0 Owner authorization checkpoint — 2026-10-14
 
 Anurag Yadav, Owner of Top Notchh Solutions and Verglos
