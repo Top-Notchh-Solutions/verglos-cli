@@ -594,6 +594,7 @@ test("CLI help is deterministic and side-effect free", async () => {
     assert.equal(result.exitCode, 0);
     assert.equal(result.stderr, "");
     assert.match(result.stdout, /Usage: verglos/);
+    assert.match(result.stdout, /Local-first security decision layer between code changes and release/u);
     assert.match(result.stdout, /Command groups:/);
     assert.deepEqual(result.files, []);
   } finally { await rm(root, { recursive: true, force: true }); }

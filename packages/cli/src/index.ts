@@ -170,7 +170,7 @@ if (args.includes("--update")) {
 
 program
   .name("verglos")
-  .description("The evidence agent for AI-generated code")
+  .description("Local-first security decision layer between code changes and release")
   .version(version, "-v, --version", "Print installed CLI version")
   .option("--update", "Update Verglos CLI to the latest npm version")
   .option(
