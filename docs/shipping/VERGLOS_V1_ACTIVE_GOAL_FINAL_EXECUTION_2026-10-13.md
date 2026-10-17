@@ -276,6 +276,38 @@ Next backlog action: continue downward from the next eligible non-AppSec row,
 leaving provider, customer, legal, release, field, and final-acceptance rows
 open until their own artifacts exist; keep the Hunt AppSec review last.
 
+## 0.0k Current TEAM-CLI-001 revalidation checkpoint — 2026-10-18
+
+The top-to-bottom pass reached TEAM-CLI-001 after parking HUNT-008 through
+HUNT-011. The exact public CLI head
+`fa77496b43d040fe8be977315078502e9e85b947` was checked out in a clean
+disposable worktree. After frozen dependency installation, the workspace build
+passed **8/8**, CLI typecheck passed, the shared/CLI organization-policy tests
+passed **10/10** with zero failures or skips, and `git diff --check` passed.
+
+This confirms the real code-side implementation: signed schema and active-key
+verification, organization/repository and digest binding, bounded fetch,
+atomic mode-0600 cache, verified offline fallback, tamper/symlink refusal, and
+credential-safe endpoint handling. It does not create the missing external
+artifacts. TEAM-CLI-001 remains unchecked for:
+
+- production/Preview signer and trust-root activation with the approved policy
+  row;
+- authenticated hosted fetch/cache/offline/cross-tenant qualification and
+  policy-row reconciliation; and
+- the authorized GitHub App/SCM provider installation and live provider event.
+
+TEAM-CLI-002 and TEAM-WEB-006 remain dependency-blocked by this provider/policy
+activation. This is not an AppSec blocker. No checkbox changed, no public code
+was changed, and the score remains **230 checked / 50 open / 280 total
+(82.1%)**. Evidence:
+`evidence/team-cli-001-policy-current-head-revalidation-2026-10-18.md`.
+
+Next safe action: continue downward only with a genuinely dependency-ready
+implementation slice; do not mark TEAM-CLI-001 or its dependents green until
+the signer/provider artifacts above exist. Keep the independent Hunt AppSec
+review last.
+
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
 The hosted continuation completed successfully in GitHub Actions run
