@@ -224,6 +224,24 @@ backlog row, and the recalculated `checked / open / total` score. The current
 starting score for this protocol is **230 checked / 50 open / 280 total
 (82.1%)**; adding this protocol changes no checkbox.
 
+## 0.0i Current Web merged-head checkpoint — 2026-10-17
+
+Web PR #177, assigned to `anuragyadav-git`, merged normally as
+`0674dacef52d35d1a2c8b103c3c3983e349ad339` after public commit `34e6010`
+switched the verification workflow from the rate-limited Public ECR source to
+the digest-preserving `mirror.gcr.io` Postgres cache. Hosted run
+`39058598234` passed the complete Web verification job, including container
+initialization, frozen install, typecheck, tests, database/schema checks,
+build, public-boundary, dependency/SBOM/license checks, and secret guard;
+GitGuardian, Vercel, and Preview Comments also passed. No squash, rebase,
+force-push, empty, duplicate, or artificial commit was used.
+
+This is a real merged implementation/CI artifact, not final-Web acceptance.
+`FINAL-WEB-001`, `FINAL-WEB-003`, and `FINAL-WEB-004` remain open until their
+complete row-specific contracts pass. The live score remains **230 checked /
+50 open / 280 total (82.1%)**. Evidence:
+`evidence/final-web-001-pr177-ci-mirror-2026-10-17.md`.
+
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
 The hosted continuation completed successfully in GitHub Actions run
