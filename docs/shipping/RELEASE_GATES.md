@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 current provider-readiness boundary
+
+A fresh read-only audit of the current public CLI/Web heads, the Vercel
+`verglos-web` Preview environment-key names, and Top Notchh Solutions GitHub
+installations confirms that Preview organization-policy signer keys exist, but
+no dedicated Verglos SCM App is installed and no GitHub App ID, private-key, or
+webhook-secret keys exist in Preview. Only Vercel and Neon installations are
+present. No secret values were printed or stored.
+
+Keep `TEAM-CLI-001` open for the least-privilege App/repository binding,
+provider credentials, policy-row reconciliation, and authenticated signed
+fetch/cache/offline/cross-tenant qualification. This is a provider/hosted
+boundary, not the Hunt AppSec gate. `TEAM-CLI-002` and `TEAM-WEB-006` remain
+dependent. Score remains **230/50/280 (82.1%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-provider-readiness-audit-2026-10-18.md`.
+
 ## 2026-10-14 · QUAL-WEB-006 Preview organization-route boundary
 
 Web PR #176 passed all protected checks and merged normally as

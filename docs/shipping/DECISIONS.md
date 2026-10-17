@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · keep TEAM-CLI-001 open after current provider audit
+
+- **Decision:** Treat the missing dedicated Verglos SCM App installation and
+  Preview GitHub App credentials as a genuine provider prerequisite; do not
+  synthesize a live policy fetch or close the row from signer-only evidence.
+- **Reason:** The current read-only audit found only Vercel and Neon
+  installations in the Top Notchh Solutions organization. Preview has the
+  organization-policy signer keys, but no `VERGLOS_GITHUB_APP_ID`,
+  `VERGLOS_GITHUB_APP_PRIVATE_KEY`, or `VERGLOS_GITHUB_WEBHOOK_SECRET` keys.
+- **Next:** Install one least-privilege App on the authorized non-Production
+  test repository, configure the three server-held Preview values, publish the
+  bound policy, and run the authenticated fetch/cache/offline/cross-tenant
+  qualification. No browser, provider, database, Production, npm, or
+  customer state changed in the audit.
+- **Disposition:** `TEAM-CLI-001`, `TEAM-CLI-002`, and `TEAM-WEB-006` remain
+  open; this is not an AppSec hold. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/team-cli-001-provider-readiness-audit-2026-10-18.md`.
+
 ## 2026-10-14 · Keep QUAL-CLI-006 open after hosted matrix
 
 - **Decision:** Record the hosted platform matrix as valid technical evidence
