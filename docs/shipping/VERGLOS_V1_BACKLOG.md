@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-17 · PR #177 CI mirror repair and regular merge
+
+Web PR #177, assigned to `anuragyadav-git`, merged normally as
+`0674dacef52d35d1a2c8b103c3c3983e349ad339` after public commit `34e6010`
+switched the verification workflow from the rate-limited Public ECR mirror to
+the digest-preserving `mirror.gcr.io/library/postgres:15-alpine` cache. The
+unchanged image-index digest is
+`sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81`.
+The new hosted run `39058598234` passed the complete Web verification job;
+GitGuardian, Vercel, and Preview Comments also passed. No checkbox changed:
+FINAL-WEB-001/003/004 remain open for their full acceptance contracts and the
+score remains **230 checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`docs/shipping/evidence/final-web-001-pr177-ci-mirror-2026-10-17.md`.
+
 ## 2026-10-17 · Non-AppSec checklist reconciliation
 
 The current audit found no fully satisfied non-AppSec row left open only

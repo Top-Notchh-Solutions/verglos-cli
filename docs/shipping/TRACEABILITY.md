@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## PR #177 CI mirror repair and regular merge · 2026-10-17
+
+- **Source mapping:** Web PR #177, public commit `34e6010`, regular merge
+  `0674dacef52d35d1a2c8b103c3c3983e349ad339`, assigned to `anuragyadav-git`.
+- **Implementation mapping:** the Web verification workflow uses the
+  digest-preserving `mirror.gcr.io` Postgres cache after the prior Public ECR
+  data-limit failure.
+- **Verification mapping:** hosted run `39058598234` passed the full
+  typecheck/schema job and all listed security, Vercel, build, test, SBOM,
+  license, and boundary checks.
+- **Acceptance mapping:** CI reliability and merge evidence are complete for
+  this slice, but no backlog checkbox changed; FINAL-WEB-001/003/004 retain
+  their full acceptance requirements. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-001-pr177-ci-mirror-2026-10-17.md`.
+
 ## Non-AppSec checklist reconciliation · 2026-10-17
 
 - **Routing:** AppSec is not a substitute reason to leave a complete

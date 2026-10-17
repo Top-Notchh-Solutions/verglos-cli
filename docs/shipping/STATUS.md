@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-17 · PR #177 CI mirror repair and regular merge
+
+Web PR #177, assigned to `anuragyadav-git`, merged normally as
+`0674dacef52d35d1a2c8b103c3c3983e349ad339` after public commit `34e6010`
+replaced the rate-limited Public ECR Postgres source with the
+digest-preserving `mirror.gcr.io` cache. Hosted run `39058598234` passed
+container initialization, frozen install, typecheck, serial tests, private
+runner E2E, negative-boundary/truth tests, database/schema checks, build,
+public-boundary, dependency/SBOM/license checks, and secret guard. GitGuardian,
+Vercel, and Preview Comments passed. No checkbox changed; FINAL-WEB-001/003/004
+remain open for their complete acceptance contracts. Score remains **230
+checked / 50 unchecked / 280 total (82.1%)**. Evidence:
+`evidence/final-web-001-pr177-ci-mirror-2026-10-17.md`.
+
 ## 2026-10-17 · Non-AppSec checklist reconciliation
 
 The current open-row audit found no row that is complete and open only because

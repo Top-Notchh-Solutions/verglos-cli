@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-17 · PR #177 CI mirror repair and regular merge
+
+- **Public change:** Web commit `34e6010` changes the Postgres service image
+  source from rate-limited Public ECR to `mirror.gcr.io` while preserving the
+  official image-index digest.
+- **Verification:** GitHub Actions run `39058598234` passed the complete Web
+  verification job; GitGuardian, Vercel, and Preview Comments passed.
+- **History:** PR #177 merged normally as `0674dace`; no squash, rebase,
+  force-push, empty, duplicate, or artificial commit was used. The PR remains
+  assigned to `anuragyadav-git`.
+- **Disposition:** This repairs CI infrastructure and records a merged public
+  implementation head. It does not close FINAL-WEB-001/003/004 or any other
+  row; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-001-pr177-ci-mirror-2026-10-17.md`.
+
 ## 2026-10-17 · Non-AppSec checklist reconciliation
 
 - **Audit:** no currently open row was found to be fully satisfied and waiting
