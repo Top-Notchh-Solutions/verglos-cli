@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-17 · Non-AppSec checklist reconciliation
+
+The current audit found no fully satisfied non-AppSec row left open only
+because the independent Hunt AppSec review is pending. Close each non-AppSec
+row when its own complete implementation, evidence, and acceptance contract
+passes; if a provider, customer, legal, release, field, or final-acceptance
+artifact is genuinely missing, keep that row open with the exact artifact
+named. Owner authorization does not substitute for row evidence. No checkbox
+changed; score remains **230 checked / 50 unchecked / 280 total (82.1%)**.
+
 ## 2026-10-17 · FINAL-WEB-004 public docs truth implementation slice
 
 Web PR #177 commit `7a56141`, assigned to `anuragyadav-git`, binds the public
@@ -2680,7 +2690,7 @@ HOLD: do not start these tasks until the founder explicitly says the product tru
 - [ ] **FINAL-WEB-001** · capability-driven public copy map · deps: ACCEPT-009/010 + founder command · Map homepage/docs/pricing/meta claims to truth registry and server plan catalog; remove stale alpha language only for verified capabilities. Commit(s): Web PR #101 merged as `c3e6668e` after rebased hosted run `36972830161`; ships the pure `public-claim-registry` decision surface and dedicated hosted test step, but does not yet wire every public surface or authorize copy changes. Acceptance remains gated on ACCEPT-009/010 and founder command.
 - [ ] **FINAL-WEB-002** · homepage product promise/flow · deps: FINAL-WEB-001 · Update landing content to Inspect -> Decide -> Prove -> Monitor using real product evidence and no unsupported benchmarks/customers. Commit(s): —
 - [ ] **FINAL-WEB-003** · plan/pricing presentation · deps: FINAL-WEB-001 · Render Free/Pro/Team/Studio/Enterprise from canonical catalog with exact allowances, status, billing terms, and explicit overages. Commit(s): Web PR #177 commits `b2b3d4a` + `4aa3310` add the Team card, align the public capability matrix, and cover the Team price/state in truth tests; exact allowances, billing terms, overages, and dependent acceptance evidence remain open.
-- [ ] **FINAL-WEB-004** · public product/docs truth pass · deps: FINAL-WEB-001 · Align command docs, language coverage, engine attribution, signing limitations, Hunt assurance, and dashboard capabilities with shipped behavior. Commit(s): Web PR #177 commit `7a56141` aligns the docs plan matrix with the catalog, adds Team, and corrects stale price/attestation wording; the complete command/docs truth scope remains open.
+- [ ] **FINAL-WEB-004** · public product/docs truth pass · deps: FINAL-WEB-001 · Align command docs, language coverage, engine attribution, signing limitations, Hunt assurance, and dashboard capabilities with shipped behavior. Commit(s): Web PR #177 commits `7a56141` and `bd50d84` align the docs plan matrix with the catalog, add Team, correct stale price/attestation wording, and replace unsupported public maturity labels with qualification-gated language; the complete command/docs truth scope remains open.
 - [ ] **FINAL-WEB-005** · metadata/structured data/llms truth pass · deps: FINAL-WEB-001 · Update only factual metadata and machine-readable surfaces; no invented GEO/SEO claims. Commit(s): —
 - [ ] **FINAL-WEB-006** · public proof assets · deps: ACCEPT-003/009 · Use sanitized real records/screenshots/flows with date, version, demo/real label, alt text, and no private evidence. Commit(s): —
 - [ ] **FINAL-WEB-007** · landing accessibility/performance/responsive verification · deps: FINAL-WEB-002-006 · Test primary journey, mobile, keyboard, screen reader, contrast, reduced motion, metadata, crawlability, and real-user performance budgets. Commit(s): —

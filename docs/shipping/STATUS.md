@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-17 · Non-AppSec checklist reconciliation
+
+The current open-row audit found no row that is complete and open only because
+the Hunt AppSec review is pending. A non-AppSec row closes when its own
+implementation, evidence, and acceptance contract are complete; otherwise its
+specific missing provider, customer, legal, release, field, or acceptance
+artifact remains named. Owner authorization routes work but does not substitute
+for that row evidence. The live score remains **230 checked / 50 unchecked /
+280 total (82.1%)**.
+
+The independent Hunt AppSec/security review remains scheduled last and does not
+hold unrelated dependency-ready work.
+
+## 2026-10-17 · FINAL-WEB-004 maturity-claim implementation slice
+
+Web PR #177 commit `bd50d84`, assigned to `anuragyadav-git`, replaces
+unsupported public `Beta` maturity labels with `Qualification-gated` wording
+for attest/public verify, white-label, Firecracker, agency dashboard, and
+related capability rows; the docs tier table also derives from the canonical
+catalog. Truth tests **28/28**, typecheck, diff check, and the **47/47** page
+build passed. This is implementation progress only; FINAL-WEB-004 remains
+open for the complete command/docs truth scope. No checkbox changed.
+
 ## 2026-10-17 · FINAL-WEB-004 public docs truth implementation slice
 
 Public Web PR #177 adds commit `7a56141`, assigned to `anuragyadav-git`,

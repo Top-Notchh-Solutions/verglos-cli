@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-17 · Non-AppSec checklist reconciliation
+
+- **Audit:** no currently open row was found to be fully satisfied and waiting
+  only on the independent Hunt AppSec gate.
+- **Rule:** close a non-AppSec row when its complete row-specific
+  implementation, evidence, and acceptance criteria pass; keep it open only
+  with its exact remaining artifact named. Do not turn owner authority into
+  provider, customer, legal, release, field, or acceptance evidence.
+- **Disposition:** no checkbox changed. Score remains **230/280 (82.1%)**
+  with **50** open; AppSec remains scheduled last and does not hold unrelated
+  work.
+
+## 2026-10-17 · FINAL-WEB-004 maturity-claim implementation slice
+
+- **Public change:** Web PR #177 commit `bd50d84` replaces unsupported public
+  `Beta` labels with `Qualification-gated` wording and derives the docs tier
+  table from the canonical catalog.
+- **Verification:** truth-registry **28/28**, typecheck, diff check, and
+  production build **47/47** pages passed.
+- **Disposition:** implementation progress only; FINAL-WEB-004 remains open
+  for its complete command/docs truth scope. No checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-004-public-docs-truth-2026-10-17.md`.
+
 ## 2026-10-17 · FINAL-WEB-004 public docs truth implementation slice
 
 - **Public change:** Web PR #177 commit `7a56141`, assigned to

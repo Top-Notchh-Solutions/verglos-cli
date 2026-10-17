@@ -110,13 +110,30 @@ the only intentionally closed gate and stays scheduled last.
 
 ## 0.0e Current public-docs truth slice — 2026-10-17
 
-Web PR #177 adds commit `7a56141`, which binds the public docs plan matrix to
-the canonical catalog, adds Team, exposes catalog-derived price/status values,
-and replaces stale paid-tier prices and planned-attestation wording with
+Web PR #177 adds commits `7a56141` and `bd50d84`, which bind the public docs
+plan matrix to the canonical catalog, add Team, expose catalog-derived
+price/status values, replace stale paid-tier prices and planned-attestation
+wording, and replace unsupported public maturity labels with
 qualification-gated language. This is a public implementation slice for
 FINAL-WEB-004; its broader command, language, engine, signing, Hunt, and
 dashboard acceptance remains open. No checkbox changed; the live score remains
 **230 checked / 50 open / 280 total (82.1%)**.
+
+## 0.0f Non-AppSec checklist reconciliation rule — 2026-10-17
+
+Do not leave a row unchecked merely because the independent Hunt AppSec gate
+is pending. If a non-AppSec row has all of its own implementation, evidence,
+and acceptance criteria satisfied, close that row and record the evidence. If
+its own provider, customer, legal, release, field, or final-acceptance
+artifact is missing, keep it open and name that exact artifact; do not relabel
+the missing artifact as AppSec. Owner authority is routing authority and does
+not fabricate evidence or waive a row-specific acceptance contract.
+
+The current audit found no fully satisfied non-AppSec row that was open only
+because of AppSec. The live score therefore remains **230 checked / 50 open /
+280 total (82.1%)**. Hunt/AppSec-dependent rows remain open until the
+independent reviewer report satisfies their contracts; unrelated rows continue
+on their own evidence.
 
 ## 0.1 Current qualification checkpoint — 2026-10-14
 

@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## Non-AppSec checklist reconciliation · 2026-10-17
+
+- **Routing:** AppSec is not a substitute reason to leave a complete
+  non-AppSec row unchecked.
+- **Closure rule:** a row closes only when its own implementation, evidence,
+  and acceptance contract pass. Any genuinely missing provider, customer,
+  legal, release, field, or final-acceptance artifact remains explicit.
+- **Audit result:** no fully satisfied non-AppSec row was found to be waiting
+  only on AppSec; no checkbox changed. Score remains **230/50/280 (82.1%)**.
+
+## FINAL-WEB-004 maturity-claim implementation slice · 2026-10-17
+
+- **Source mapping:** Web PR #177, commit `bd50d84`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** unsupported public `Beta` maturity labels are
+  now qualification-gated, and the docs tier table derives from the canonical
+  catalog.
+- **Verification mapping:** truth-registry **28/28**, typecheck, diff check,
+  and build **47/47** pages passed.
+- **Acceptance mapping:** implementation progress only; FINAL-WEB-004 remains
+  unchecked for its complete command/docs truth scope.
+
 ## FINAL-WEB-004 public docs truth implementation slice · 2026-10-17
 
 - **Source mapping:** Web PR #177, commit `7a56141`, assigned to

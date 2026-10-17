@@ -34,6 +34,22 @@ complete.
 - Local runtime warning: repository requests Node 22.x; this machine used
   Node 26.4.0 and pnpm 10.34.5. Checks passed despite that warning.
 
+## Additional maturity-claim slice
+
+Web PR #177 commit `bd50d84` extends the same public truth correction. It
+changes unsupported public `Beta` labels for attest/public verify, white-label,
+Firecracker, agency dashboard, and related capability rows to
+`Qualification-gated`; it derives the docs tier table from the canonical
+catalog and removes stale `$29`/`$199` tier values from that surface. The
+commit is a separate substantive commit after the regular merge, assigned to
+`anuragyadav-git`; no squash, rebase, force-push, empty, duplicate, or
+artificial commit was used.
+
+Verification for the clean commit included truth-registry **28/28**,
+typecheck, diff check, and a **47/47** generated-page production build.
+Qualification-gated wording is deliberately not represented as shipped
+capability or final release acceptance.
+
 ## Remaining acceptance boundary
 
 FINAL-WEB-004 remains unchecked for the complete command documentation,
