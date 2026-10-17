@@ -1,5 +1,28 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · FINAL-WEB-004 security-layer demo truth implementation
+
+Web PR #180, assigned to `anuragyadav-git`, merged normally as
+`71278209a3715080655135b5668d968b1494ac3c` from substantive implementation
+commit `e8ccfd2`. The public README now positions Verglos as the local-first
+security decision layer between AI-generated code and release. The terminal
+hero now demonstrates local scan evidence, an explicit policy decision,
+qualification-gated Hunt, bounded evidence handoff, and zero source upload;
+it no longer invents verified exploit findings or unsupported preview claims.
+
+The clean disposable worktree passed truth-registry tests **31/31**, typecheck,
+production build **47/47** pages, public-boundary audit, and `git diff --check`.
+Hosted Actions run `39061642513` / job `117480656644`, Vercel deployment
+`AavTFzJyMUoD8hiC76YkmbBJr3RC`, GitGuardian, and Preview Comments passed.
+
+This is a real public implementation slice, not final acceptance. FINAL-WEB-004
+remains unchecked for its complete command/docs truth and acceptance contract;
+no AppSec, provider, customer, legal, hosted, field, release, or final-
+acceptance row changed. Score remains **230 checked / 50 unchecked / 280 total
+(82.1%)**. No squash, rebase, force-push, empty, duplicate, artificial, or
+irrelevant public-document contribution commit was used. Evidence:
+`docs/shipping/evidence/final-web-004-security-layer-demo-pr180-2026-10-18.md`.
+
 ## 2026-10-18 · CLI security-layer positioning implementation
 
 CLI PR #128, assigned to `anuragyadav-git`, merged normally as

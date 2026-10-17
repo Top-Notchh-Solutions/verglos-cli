@@ -782,6 +782,44 @@ leaving rows with missing provider, customer, legal, hosted, field, release,
 or final-acceptance artifacts open; keep the independent Hunt AppSec review
 last.
 
+## 0.0o Current FINAL-WEB-004 security-layer demo checkpoint — 2026-10-18
+
+The top-to-bottom loop continued with the next public Web implementation slice
+after parking the AppSec hold set. Web PR #180, assigned to `anuragyadav-git`,
+merged normally as `71278209a3715080655135b5668d968b1494ac3c` from substantive
+commit `e8ccfd226fb01f1cea31a0778ff5e8b105bc95f8`. The public README and
+terminal hero now position Verglos as the local-first security decision layer:
+the demo shows local scan evidence, an explicit policy decision,
+qualification-gated Hunt, bounded evidence handoff, and zero source upload.
+It no longer invents verified exploit findings or unsupported preview claims.
+
+Verification passed in `/tmp/verglos-web-docs.p91MX0`:
+
+- `pnpm test:truth-registry`: **31/31 passed**, zero failed/skipped;
+- `pnpm typecheck`: passed;
+- `pnpm build`: passed with **47/47** pages generated;
+- `node scripts/check-public-boundary.mjs`: passed;
+- `git diff --check`: passed.
+
+Hosted PR evidence: Actions run `39061642513`, job `117480656644`, passed;
+Vercel deployment `AavTFzJyMUoD8hiC76YkmbBJr3RC`, GitGuardian, and Preview
+Comments passed. The local Node `v26.4.0` / pnpm `10.34.5` engine warning is
+retained in the evidence packet; it does not replace the hosted check.
+
+This is implementation progress only. FINAL-WEB-004 remains unchecked for its
+complete command/docs truth and final-acceptance contract. No AppSec, provider,
+customer, legal, hosted, field, release, or final-acceptance row changed. The
+live score remains **230 checked / 50 open / 280 total (82.1%)**. No squash,
+rebase, force-push, empty, duplicate, artificial, or irrelevant public-doc
+contribution commit was used. Evidence:
+`evidence/final-web-004-security-layer-demo-pr180-2026-10-18.md`.
+
+Next backlog action: continue downward from the next eligible non-AppSec row,
+leaving rows open when their own provider, customer, legal, hosted, field,
+release, or final-acceptance artifact is missing. Keep the independent Hunt
+AppSec review last and do not treat this implementation slice as a checkbox
+substitute.
+
 ## 1. Objective
 
 Finish the approved Verglos Final V1 product implementation and qualification

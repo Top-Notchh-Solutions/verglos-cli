@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-004 security-layer demo truth implementation · 2026-10-18
+
+- **Source mapping:** Web PR #180, implementation
+  `e8ccfd226fb01f1cea31a0778ff5e8b105bc95f8`, normal merge
+  `71278209a3715080655135b5668d968b1494ac3c`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** `README.md` and
+  `src/components/terminal-hero.tsx` position Verglos as the local-first
+  security decision layer and show only local evidence, explicit policy,
+  qualification-gated Hunt, bounded handoff, and zero source upload.
+- **Verification mapping:** truth-registry **31/31**, typecheck, build
+  **47/47**, public-boundary audit, and diff check passed; hosted run
+  `39061642513` / job `117480656644`, Vercel deployment
+  `AavTFzJyMUoD8hiC76YkmbBJr3RC`, GitGuardian, and Preview Comments passed.
+- **Acceptance mapping:** implementation evidence is complete for this slice,
+  but FINAL-WEB-004 remains unchecked for its full command/docs truth and
+  final-acceptance dependencies. No AppSec-held row changed; score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-004-security-layer-demo-pr180-2026-10-18.md`.
+
 ## CLI security-layer positioning implementation · 2026-10-18
 
 - **Source mapping:** CLI PR #128, implementation `8da4617d`, normal merge
