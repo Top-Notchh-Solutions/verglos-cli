@@ -90,8 +90,23 @@ report are complete.
 This directive does not turn an implementation or release-record row into a
 checkbox without its already-recorded row evidence. Use existing evidence for
 non-AppSec rows, continue dependency-ready implementation work, and keep any
- genuinely missing artifact explicit. Do not reopen unrelated gates because the
+genuinely missing artifact explicit. Do not reopen unrelated gates because the
 AppSec run is still pending.
+
+## 0.0d Current continuation checkpoint — 2026-10-17
+
+Public Web PR #177 remains assigned to `anuragyadav-git` and is now
+`MERGEABLE` after regular merge commit `609faa0` incorporated the advanced
+public `main` head. The three substantive implementation commits remain
+intact; no squash, rebase, force-push, empty, duplicate, or artificial commit
+was used. Focused truth tests remain **28/28**, typecheck and build remain
+passing with **47/47** generated pages, and GitHub checks are running again on
+the merged head.
+
+The live private backlog count is **230 checked / 50 open / 280 total (82.1%)**.
+No checkbox changed in this continuation. FINAL-WEB-003 remains open for its
+full acceptance criteria; the independent Hunt AppSec/security review remains
+the only intentionally closed gate and stays scheduled last.
 
 ## 0.1 Current qualification checkpoint — 2026-10-14
 

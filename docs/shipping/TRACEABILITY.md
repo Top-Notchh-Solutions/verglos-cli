@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## PR #177 regular merge-base repair · 2026-10-17
+
+- **Source mapping:** Web PR #177, regular merge commit `609faa0`, assigned to
+  `anuragyadav-git`; the branch incorporates the advanced public `main` head.
+- **History mapping:** existing substantive commits remain individually
+  reviewable; no squash, rebase, force-push, empty, duplicate, or artificial
+  commit was used.
+- **Verification mapping:** clean merged worktree truth tests **28/28**,
+  typecheck, diff check, and build **47/47** pages passed; GitHub checks are
+  rerunning on the merged head.
+- **Acceptance mapping:** no row or score changed. Score remains
+  **230/50/280 (82.1%)**; AppSec remains the only closed gate.
+
 ## FINAL-WEB-003 canonical plan matrix implementation slice · 2026-10-17
 
 - **Source mapping:** Web PR #177, commits `b2b3d4a` and `4aa3310`, branch

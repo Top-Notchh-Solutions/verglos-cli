@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-17 · PR #177 regular merge-base repair
+
+- **Public state:** Web PR #177, assigned to `anuragyadav-git`, is
+  `MERGEABLE` at regular merge commit `609faa0`; the branch now includes the
+  advanced public `main` head.
+- **History boundary:** the three substantive implementation commits remain
+  intact. No squash, rebase, force-push, empty, duplicate, or artificial
+  contribution commit was used.
+- **Verification:** the clean merged worktree passed truth-registry tests
+  **28/28**, typecheck, diff check, and production build **47/47** pages.
+  GitHub security/Preview checks restarted on the merged head.
+- **Disposition:** mergeability repair only; no checkbox or score change.
+  Score remains **230/50/280 (82.1%)** and AppSec remains the only closed
+  gate.
+
 ## 2026-10-17 · FINAL-WEB-003 canonical plan matrix implementation slice
 
 - **Public change:** Web PR #177, commits `b2b3d4a` and `4aa3310`, assigned to

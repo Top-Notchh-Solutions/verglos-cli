@@ -11,9 +11,14 @@ qualification, legal approval, or production deployment.
 - Repository: `anuragyadav-git/verglos-web`
 - Pull request: `https://github.com/anuragyadav-git/verglos-web/pull/177`
 - Branch: `feat/final-web-001-truth-registry-20261017`
-- Commits: `b2b3d4a`, `4aa3310`
+- Commits: `b2b3d4a`, `4aa3310`, regular merge `609faa0`
 - Assignee: `anuragyadav-git`
-- History: normal granular commits; no squash commit
+- History: normal granular commits and a regular merge; no squash, rebase,
+  force-push, empty, duplicate, or artificial commit
+
+The merge commit incorporated the advanced public `main` head and resolved
+only the homepage/`/llms.txt` overlap while retaining the catalog-derived
+plan data, Team column, and fail-closed truth assertion.
 
 ## Implemented
 

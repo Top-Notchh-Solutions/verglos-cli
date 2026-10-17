@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-17 · PR #177 regular merge-base repair
+
+Public Web PR #177 remains assigned to `anuragyadav-git` and is now
+`MERGEABLE` after regular merge commit `609faa0` incorporated the advanced
+public `main` head. The three substantive implementation commits remain
+intact; no squash, rebase, force-push, empty, duplicate, or artificial commit
+was used. The clean merge worktree re-ran truth tests **28/28**, typecheck, and
+the production build with **47/47** generated pages. GitHub security/Preview
+checks restarted on the merged head.
+
+No checkbox changed. The live score remains **230 checked / 50 unchecked / 280
+total (82.1%)**. The independent Hunt AppSec/security review remains the only
+closed gate and is still scheduled last. Evidence is the public PR and the
+implementation record below.
+
 ## 2026-10-17 · FINAL-WEB-003 canonical plan matrix implementation slice
 
 Public Web PR #177 now includes commits `b2b3d4a` and `4aa3310`, assigned to
