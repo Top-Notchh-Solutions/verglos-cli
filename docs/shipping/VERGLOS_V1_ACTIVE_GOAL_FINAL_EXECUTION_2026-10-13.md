@@ -146,6 +146,84 @@ absence of a published overage schedule. The public projection treats
 pages. FINAL-WEB-003 remains open for dependent acceptance; no checkbox
 changed and the score remains **230 checked / 50 open / 280 total (82.1%)**.
 
+## 0.0h Top-to-bottom backlog closure protocol — 2026-10-17
+
+The next goal-loop pass is a controlled backlog reconciliation and shipping
+pass. It must begin at the first unchecked row in
+`docs/shipping/VERGLOS_V1_BACKLOG.md` and proceed downward in file order. Do
+not jump directly to a later attractive row, and do not spend the pass
+rechecking already accepted rows.
+
+For each unchecked row, use this exact sequence:
+
+1. Read the complete row, its dependencies, acceptance text, and every
+   referenced evidence packet. Classify the row before changing code or its
+   checkbox.
+2. If the row or a required dependency explicitly needs the independent Hunt
+   AppSec/security review, put it in the **AppSec hold set**. The current hold
+   set is `HUNT-008`, `HUNT-009`, `HUNT-010`, `HUNT-011`, `QUAL-CLI-004`, and
+   any downstream row whose own acceptance text directly requires that review
+   or its result. Do not alter its checkbox, claim its gate is open, or invent
+   a substitute. Record the exact missing reviewer artifact and continue to
+   the next row whose own work is not AppSec-dependent.
+3. For a non-AppSec row that is dependency-ready, implement the smallest real
+   product slice required by the row. Include production code, focused tests,
+   schemas/configuration, workflows, or reproducible artifacts as applicable.
+   A placeholder, claim-only change, generated progress note, or owner
+   assertion is not an implementation.
+4. Run the row’s focused tests and all relevant typecheck/build/boundary,
+   hosted, provider, Docker, browser, or artifact commands. Preserve exact
+   commit/deployment/artifact identifiers, exit status, version/configuration,
+   output digest, limitations, and privacy scope in the existing private
+   evidence structure. Do not create an irrelevant public Markdown file.
+5. Reconcile `STATUS.md`, `EXECUTION_LEDGER.md`, `TRACEABILITY.md`, and the
+   backlog only when the evidence packet is complete. Check the row only when
+   every condition in its acceptance text and every non-held dependency is
+   evidenced. If one condition is missing, leave it unchecked and name the
+   exact artifact, owner, next safe action, and release impact.
+6. Recompute the live score after each accepted row or deliberate batch. A
+   row cannot be checked merely because its code-side portion is green, an
+   owner authorized it, another gate is green, or AppSec is the only remaining
+   item elsewhere. Existing owner authorization is sufficient for
+   company-controlled decisions already recorded in the tracker; it does not
+   fabricate provider, customer, field, legal, independent-review, or final
+   acceptance evidence.
+7. Commit each substantive logical implementation or evidence reconciliation
+   as a reviewable granular commit, assign public PRs to `anuragyadav-git`,
+   preserve all contributor commits, and merge normally. **Never squash,
+   rebase, force-push, or manufacture empty, duplicate, artificial, or
+   documentation-only contribution commits.** Granularity is for reviewable
+   shipping history, not for inflating activity; stop a slice when its real
+   acceptance work is complete.
+
+The first pass must therefore park the Hunt/AppSec rows in their existing
+backlog positions and then take the next eligible row in order. Continue
+through `TEAM-CLI-001`, `TEAM-CLI-002`, `TEAM-WEB-006`, `STUDIO-CLI-001`,
+`ENT-CLI-001`, licensing/distribution, qualification, acceptance, final Web,
+and GitHub/provider rows only when each row’s own dependencies and evidence
+are ready. `FINAL-WEB-001`, `FINAL-WEB-002`, and `FINAL-WEB-003` must be
+resolved in that dependency order before later final-Web rows are closed;
+the existing `FINAL-WEB-003` implementation is progress, not a checkbox by
+itself. External actions such as provider installation, legal decisions,
+customer/recipient observation, or production/release operations must remain
+explicitly blocked until their recorded authority and artifact exist; do not
+replace them with local tests.
+
+The independent Hunt AppSec review remains deliberately last. This means
+non-AppSec work continues now; it does not mean AppSec-dependent rows are
+silently checked or that the entire backlog is treated as blocked. Do not
+ask again for the already recorded company-owner authority merely to route
+work. Use the existing Verglos Chrome tab only when browser evidence is
+actually required; do not open another Chrome window or tab, and use CLI/API
+or local commands for everything else.
+
+Every loop progress report must state: rows implemented, rows newly checked,
+rows still open with the exact reason, AppSec-held rows, exact commits/PRs/
+deployments/artifacts, commands and results, public/private boundary, next
+backlog row, and the recalculated `checked / open / total` score. The current
+starting score for this protocol is **230 checked / 50 open / 280 total
+(82.1%)**; adding this protocol changes no checkbox.
+
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
 The hosted continuation completed successfully in GitHub Actions run
