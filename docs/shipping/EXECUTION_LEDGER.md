@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · FINAL-WEB-004 production security-layer stamp
+
+- **Public change:** Web PR #182, assigned to `anuragyadav-git`, merged
+  normally as `48156976`; implementation `5b7c067` changes the operating
+  stamp to the security decision-layer identity.
+- **Verification:** local truth-registry **31/31**, build **47/47**, typecheck,
+  public-boundary, and diff checks passed. Hosted run `39062679409` / job
+  `117483721832`, GitGuardian, Vercel, and Preview Comments passed. Production
+  deployment `dpl_BTrgtXeTf6zARSUPVXmKMUrMBPpx` reached READY and was verified
+  in the existing Verglos browser tab.
+- **Disposition:** implementation/rollout progress only. FINAL-WEB-004 remains
+  open for dependency and final acceptance; no AppSec-held or provider row
+  changed. Score remains **230/50/280 (82.1%)**.
+- **History:** one substantive implementation commit plus a normal merge; no
+  squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
+  documentation-only contribution commit.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-004-security-layer-stamp-pr182-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 provider-readiness audit
 
 - **Audit:** read-only Vercel environment-key projection and GitHub

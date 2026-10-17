@@ -882,6 +882,31 @@ install it only on the authorized non-Production repository, configure the
 three server-held Preview credentials, and run the bounded policy/provider
 qualification. Do not claim a live provider result from owner authority alone.
 
+## 0.0r Current FINAL-WEB-004 production identity checkpoint — 2026-10-18
+
+Web PR #182, assigned to `anuragyadav-git`, merged normally as
+`48156976c311f61b379bef7cbb08de4d88753b9a` from implementation commit
+`5b7c067b7b7bc7f3e09e70bcb65c1f1772bf2d2d`. It aligns the final operating-stamp
+sentence with the security decision-layer identity. Local truth-registry
+31/31, build 47/47, typecheck, public-boundary, and diff checks passed. Hosted
+run `39062679409` / job `117483721832`, GitGuardian, Vercel, and Preview
+Comments passed. Production deployment
+`dpl_BTrgtXeTf6zARSUPVXmKMUrMBPpx` reached READY; the existing Verglos browser
+tab verified the production title, new security-layer stamp, and absence of
+the old stamp and old agent title.
+
+This is implementation and rollout evidence only. FINAL-WEB-004 remains
+unchecked for its complete dependency and final-acceptance contract; no
+AppSec, provider, customer, legal, release, or other checkbox changed. The
+score remains **230 checked / 50 open / 280 total (82.1%)**. No squash,
+rebase, force-push, empty, duplicate, artificial, or irrelevant
+documentation-only contribution commit was used. Evidence:
+`evidence/final-web-004-security-layer-stamp-pr182-2026-10-18.md`.
+
+Next backlog action remains `TEAM-CLI-001`: do not repeat its code work; wait
+for the dedicated provider installation and live policy qualification before
+advancing TEAM-CLI-002 or TEAM-WEB-006. Keep Hunt AppSec last.
+
 ## 1. Objective
 
 Finish the approved Verglos Final V1 product implementation and qualification

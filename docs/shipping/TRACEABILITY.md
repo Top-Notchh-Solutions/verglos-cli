@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-004 production security-layer stamp · 2026-10-18
+
+- **Source mapping:** Web PR #182, implementation
+  `5b7c067b7b7bc7f3e09e70bcb65c1f1772bf2d2d`, normal merge
+  `48156976c311f61b379bef7cbb08de4d88753b9a`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** the public operating-stamp sentence now calls
+  Verglos the security decision-layer product.
+- **Verification mapping:** local truth-registry **31/31**, build **47/47**,
+  typecheck, public-boundary, and diff check passed; hosted run `39062679409`
+  / job `117483721832`, GitGuardian, Vercel, and Preview Comments passed.
+  Production deployment `dpl_BTrgtXeTf6zARSUPVXmKMUrMBPpx` reached READY;
+  the existing browser tab verified the production title and corrected copy.
+- **Acceptance mapping:** FINAL-WEB-004 remains unchecked for complete
+  dependency and final-acceptance requirements. No AppSec-held or provider
+  row changed; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-004-security-layer-stamp-pr182-2026-10-18.md`.
+
 ## TEAM-CLI-001 provider-readiness audit · 2026-10-18
 
 - **Source mapping:** current public CLI `main` is

@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · FINAL-WEB-004 production security-layer stamp
+
+Web PR #182, assigned to `anuragyadav-git`, merged normally as `48156976` from
+implementation `5b7c067`. The public operating stamp now calls Verglos the
+security decision-layer product. Local truth-registry **31/31**, build
+**47/47**, typecheck, public-boundary, and diff checks passed. Hosted run
+`39062679409` / job `117483721832`, GitGuardian, Vercel, and Preview Comments
+passed. Production deployment `dpl_BTrgtXeTf6zARSUPVXmKMUrMBPpx` reached
+READY, and the existing Verglos tab verified the corrected production text,
+security-layer title, and absence of the old stamp/agent title.
+
+FINAL-WEB-004 remains open for its complete dependency and final-acceptance
+contract. No AppSec-held or provider row changed. Score remains **230 checked /
+50 open / 280 total (82.1%)**. Evidence:
+`evidence/final-web-004-security-layer-stamp-pr182-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 provider-readiness audit
 
 A fresh read-only audit of the current public heads, Vercel `verglos-web`
