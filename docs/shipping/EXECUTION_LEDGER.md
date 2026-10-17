@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 current-head policy revalidation
+
+- **Verification:** exact public CLI head `fa77496b` in a clean disposable
+  worktree passed workspace build **8/8**, CLI typecheck, focused shared/CLI
+  policy tests **10/10**, and `git diff --check`.
+- **Boundary:** this proves code-side policy validation and cache behavior only;
+  no signer activation, hosted/provider event, or production state changed.
+- **Disposition:** TEAM-CLI-001 remains open for signer/trust-root activation,
+  hosted fetch/cache/offline/cross-tenant evidence, policy-row reconciliation,
+  and SCM/provider evidence. TEAM-CLI-002 and TEAM-WEB-006 remain dependent;
+  this is not AppSec-held. No checkbox changed; score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-policy-current-head-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-002 landing flow implementation slice
 
 - **Public change:** Web PR #178, assigned to `anuragyadav-git`, merged

@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 current-head policy revalidation · 2026-10-18
+
+- **Source mapping:** public CLI `origin/main` at
+  `fa77496b43d040fe8be977315078502e9e85b947`.
+- **Implementation mapping:** the existing shared/CLI policy client binds
+  organization/repository scope, active signer, policy digest, bounded remote
+  fetch, atomic cache, and verified offline fallback.
+- **Verification mapping:** workspace build **8/8**, CLI typecheck, focused
+  policy tests **10/10**, and `git diff --check` passed in a clean disposable
+  worktree.
+- **Acceptance mapping:** implementation evidence is current, but
+  TEAM-CLI-001 remains unchecked for signer/trust-root activation, live hosted
+  fetch/cache/offline/cross-tenant observation, policy-row reconciliation, and
+  SCM/provider evidence. TEAM-CLI-002 and TEAM-WEB-006 remain dependent. No
+  AppSec-held row changed; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/team-cli-001-policy-current-head-revalidation-2026-10-18.md`.
+
 ## FINAL-WEB-002 landing flow implementation slice · 2026-10-18
 
 - **Source mapping:** Web PR #178, public commit `f8febea`, regular merge

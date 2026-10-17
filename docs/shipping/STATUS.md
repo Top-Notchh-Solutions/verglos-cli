@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 current-head policy revalidation
+
+The clean exact-head CLI worktree at `fa77496b43d040fe8be977315078502e9e85b947`
+passed the workspace build **8/8**, CLI typecheck, focused organization-policy
+tests **10/10**, and `git diff --check`. This confirms implementation behavior
+only. TEAM-CLI-001 remains open for signer/trust-root activation, live hosted
+fetch/cache/offline/cross-tenant evidence, policy-row reconciliation, and the
+authorized SCM/provider event. TEAM-CLI-002 and TEAM-WEB-006 remain blocked by
+that dependency; this is not AppSec-held. No checkbox changed; score remains
+**230 checked / 50 open / 280 total (82.1%)**. Evidence:
+`evidence/team-cli-001-policy-current-head-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-002 landing flow implementation slice
 
 Web PR #178, assigned to `anuragyadav-git`, merged normally as
