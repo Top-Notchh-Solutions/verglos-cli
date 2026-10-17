@@ -18,6 +18,7 @@ It does not change any AppSec/Hunt disposition.
 - Contract-test commit: `c2f92f96ba2b7389589c37ddd5043e3f860b0837`.
 - Branch head at capture: `c2f92f96ba2b7389589c37ddd5043e3f860b0837`.
 - Public base at branch creation: `c2210cde0fce81e344da4399865734635a035b99`.
+- Normal merge commit: `79be2683c05d87e27a1c2d935d906050630dcf5c`.
 
 ## Implemented behavior
 
@@ -49,22 +50,23 @@ The local shell used Node `v26.4.0` and pnpm `10.34.5`, while the repository
 normally expects Node 22 and pnpm 9.15.9. This is recorded as a local-runtime
 limitation; hosted CI is the canonical compatibility check.
 
-At the latest PR observation, GitGuardian Security Checks and Vercel Preview
-Comments were successful, the Vercel deployment was successful, and hosted
-`typecheck-and-schema` run `39066991842` / job `117496612635` was still in
-progress. PR #186 was open and no merge commit had been claimed.
+Hosted `typecheck-and-schema` run `39066991842` / job `117496612635`,
+GitGuardian Security Checks, Vercel, and Vercel Preview Comments all passed.
+PR #186 then merged normally as `79be2683c05d87e27a1c2d935d906050630dcf5c`;
+the public history retains both substantive implementation commits and no
+squash merge was used. A Production deployment and live provider delivery
+have not been claimed by this packet.
 
 ## Gate disposition
 
-This is implementation progress for the SCM Web surface only. `TEAM-WEB-006`
-remains open because its contract requires the provider-side installation,
-hosted credential configuration, signed live delivery, and reconciliation
-evidence. `TEAM-CLI-001` remains open for the separate provider activation and
-policy/provider qualification. Hunt/AppSec rows remain parked for independent
-AppSec evidence. No backlog checkbox changed.
+This is implementation and hosted-CI progress for the SCM Web surface only.
+`TEAM-WEB-006` remains open because its contract requires the provider-side
+installation, hosted credential configuration, signed live delivery, and
+reconciliation evidence. `TEAM-CLI-001` remains open for the separate
+provider activation and policy/provider qualification. Hunt/AppSec rows remain
+parked for independent AppSec evidence. No backlog checkbox changed.
 
 Live score at capture: **230 checked / 50 open / 280 total (82.1%)**.
 
 No credentials, private keys, webhook secrets, customer data, or private
 provider values were stored in this packet.
-

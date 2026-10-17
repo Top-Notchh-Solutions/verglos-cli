@@ -3,7 +3,8 @@
 ## TEAM-WEB-006 stable GitHub App webhook entrypoint · 2026-10-18
 
 - **Source mapping:** Web PR #186, implementation commit `75f0a87`, route
-  contract commit `c2f92f9`, branch head
+  contract commit `c2f92f9`, normal merge
+  `79be2683c05d87e27a1c2d935d906050630dcf5c`, branch head
   `c2f92f96ba2b7389589c37ddd5043e3f860b0837`, assigned to
   `anuragyadav-git`.
 - **Implementation mapping:** stable app-level
@@ -13,12 +14,12 @@
   tenant/repository binding, idempotency, redaction, and persistence.
 - **Verification mapping:** focused route tests **8/8**, typecheck, build
   **47/47**, public-boundary audit, and diff check passed locally. GitGuardian,
-  Vercel Preview Comments, and Vercel passed; hosted
-  `typecheck-and-schema` run `39066991842` / job `117496612635` was still in
-  progress at capture.
-- **Acceptance mapping:** PR #186 remains open. This is implementation
-  progress only; provider installation, hosted credentials, signed live
-  delivery, and reconciliation evidence are still required by `TEAM-WEB-006`.
+  Vercel Preview Comments, Vercel, and hosted `typecheck-and-schema` run
+  `39066991842` / job `117496612635` passed.
+- **Acceptance mapping:** PR #186 merged normally, but this is implementation
+  and hosted-CI progress only; provider installation, hosted credentials,
+  signed live delivery, and reconciliation evidence are still required by
+  `TEAM-WEB-006`.
   `TEAM-CLI-001` remains separately open. No AppSec, legal, customer,
   release, or final-acceptance gate changed; score remains
   **230/50/280 (82.1%)**.

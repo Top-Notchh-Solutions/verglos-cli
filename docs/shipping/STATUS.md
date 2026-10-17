@@ -1,6 +1,6 @@
 # Verglos V1 shipping status
 
-## 2026-10-18 · stable GitHub App webhook implementation in PR #186
+## 2026-10-18 · stable GitHub App webhook merged normally as PR #186
 
 Web PR #186, assigned to `anuragyadav-git`, adds the stable app-level
 `/api/v1/webhooks/scm/github` POST entrypoint. Implementation commit
@@ -9,15 +9,17 @@ existing signed installation-bound handler; `c2f92f9` adds the route contract
 coverage. Local focused tests **8/8**, typecheck, build **47/47**,
 public-boundary audit, and diff check passed. The PR is open; GitGuardian,
 Vercel Preview Comments, and the Vercel deployment passed, while hosted
-`typecheck-and-schema` run `39066991842` / job `117496612635` was still in
-progress at capture. No merge was claimed.
+`typecheck-and-schema` run `39066991842` / job `117496612635`, GitGuardian,
+Vercel, and Preview Comments passed. The PR then merged normally as
+`79be2683c05d87e27a1c2d935d906050630dcf5c`; no squash merge was used.
 
-This advances the SCM Web implementation surface only. `TEAM-WEB-006` remains
-open for provider installation, hosted credentials, signed live delivery, and
-reconciliation evidence; `TEAM-CLI-001` remains open for its separate provider
-activation contract. No AppSec/Hunt, legal, customer, release, or final-
-acceptance gate changed. Score remains **230 checked / 50 open / 280 total
-(82.1%)**. Evidence:
+This advances the SCM Web implementation and hosted-CI surface only.
+`TEAM-WEB-006` remains open for provider installation, hosted credentials,
+signed live delivery, and reconciliation evidence; `TEAM-CLI-001` remains open
+for its separate provider activation contract. Production rollout and live
+provider delivery are not claimed here. No AppSec/Hunt, legal, customer,
+release, or final-acceptance gate changed. Score remains **230 checked / 50 open
+/ 280 total (82.1%)**. Evidence:
 `evidence/team-web-006-stable-github-webhook-pr186-2026-10-18.md`.
 
 ## 2026-10-18 · public llms.txt link qualification complete

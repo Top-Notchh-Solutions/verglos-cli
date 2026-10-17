@@ -1,6 +1,6 @@
 # Verglos V1 Execution Ledger
 
-## 2026-10-18 · stable GitHub App webhook implementation in PR #186
+## 2026-10-18 · stable GitHub App webhook merged normally as PR #186
 
 - **Public change:** Web PR #186, assigned to `anuragyadav-git`, contains
   implementation `75f0a87` and contract coverage `c2f92f9` for the stable
@@ -10,12 +10,14 @@
 - **Verification:** focused SCM route tests **8/8**, typecheck, build
   **47/47**, public-boundary audit, and diff check passed locally. GitGuardian,
   Vercel Preview Comments, and the Vercel deployment passed; hosted
-  `typecheck-and-schema` run `39066991842` / job `117496612635` was still in
-  progress at capture.
-- **Disposition:** PR remains open and no merge is claimed. This is code-side
-  progress only; provider installation, hosted credentials, signed live
-  delivery, and reconciliation evidence remain open for `TEAM-WEB-006` and
-  `TEAM-CLI-001`. No checkbox changed; score remains **230/50/280 (82.1%)**.
+  `typecheck-and-schema` run `39066991842` / job `117496612635`, GitGuardian,
+  Vercel, and Vercel Preview Comments passed. The PR merged normally as
+  `79be2683c05d87e27a1c2d935d906050630dcf5c`.
+- **Disposition:** This is implementation and hosted-CI progress only;
+  provider installation, hosted credentials, signed live delivery, and
+  reconciliation evidence remain open for `TEAM-WEB-006` and `TEAM-CLI-001`.
+  Production rollout and live provider delivery are not claimed. No checkbox
+  changed; score remains **230/50/280 (82.1%)**.
   No squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
   public-doc contribution commit was used.
 - **Evidence:**

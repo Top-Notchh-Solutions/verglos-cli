@@ -11,8 +11,9 @@
 
 ## 0.0v Current stable SCM webhook implementation checkpoint — 2026-10-18
 
-The next eligible implementation slice is complete in the public Web PR #186,
-assigned to `anuragyadav-git`: a stable app-level
+The next eligible implementation slice is complete in public Web PR #186,
+assigned to `anuragyadav-git`, which merged normally as
+`79be2683c05d87e27a1c2d935d906050630dcf5c`: a stable app-level
 `/api/v1/webhooks/scm/github` POST entrypoint now extracts a bounded GitHub
 installation ID and delegates the original raw request to the existing
 installation-bound signed handler. Implementation commit `75f0a87` and
@@ -24,12 +25,13 @@ used.
 Focused route tests passed **8/8**; typecheck, build **47/47**, public-boundary
 audit, and diff check passed locally. GitGuardian, Vercel Preview Comments,
 and Vercel passed. Hosted `typecheck-and-schema` run `39066991842` / job
-`117496612635` was still in progress at capture, so no merge or hosted green
-claim is made. Local Node/pnpm versions differed from the repository’s normal
-Node 22/pnpm 9.15.9 expectation; hosted CI remains canonical.
+`117496612635`, GitGuardian, Vercel Preview Comments, and Vercel passed. The
+public history preserves the two substantive commits and a normal merge; no
+squash was used. Local Node/pnpm versions differed from the repository’s normal
+Node 22/pnpm 9.15.9 expectation, so hosted CI was used as the canonical check.
 
-This advances implementation of `TEAM-WEB-006` only. The PR remains open and
-the row stays unchecked until provider installation, hosted credentials,
+This advances implementation and hosted-CI qualification of `TEAM-WEB-006`
+only. The row stays unchecked until provider installation, hosted credentials,
 signed live delivery, and reconciliation evidence exist. `TEAM-CLI-001` also
 remains open for its separate provider activation contract. Hunt/AppSec rows
 remain parked for the independent AppSec gate; that gate is not changed by
