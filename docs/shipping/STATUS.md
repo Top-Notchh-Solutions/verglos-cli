@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · FINAL-WEB-001 security-layer truth implementation
+
+Web PR #179, assigned to `anuragyadav-git`, merged normally as `a85d6f3` with
+implementation commit `8a630d1`. The public surface now consistently positions
+Verglos as the local-first security layer between AI-generated code and
+release. Homepage copy, root/Open Graph/Twitter metadata, JSON-LD, and
+`/llms.txt` consume the same positioning and truth-registry outputs; plan
+states and machine-readable claims are checked fail-closed against the
+canonical catalog.
+
+Local truth-registry tests passed **31/31**, typecheck and `git diff --check`
+passed, the production build generated **47/47** pages, and the
+public-boundary audit passed. Hosted Verify run `39059883830`, Vercel,
+GitGuardian, and Preview Comments passed. This implementation preserves
+qualification-gated Hunt/Attest wording.
+
+FINAL-WEB-001 and FINAL-WEB-005 remain open because the backlog still requires
+ACCEPT-009/010, the founder command, and dependency completion. No AppSec-held
+row changed. No squash, rebase, force-push, empty, duplicate, artificial, or
+irrelevant public-doc commit was used. Score remains **230 checked / 50 open /
+280 total (82.1%)**. Evidence:
+`evidence/final-web-001-security-layer-truth-pr179-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 current-head policy revalidation
 
 The clean exact-head CLI worktree at `fa77496b43d040fe8be977315078502e9e85b947`

@@ -18,6 +18,24 @@
 - **Evidence:**
   `evidence/team-cli-001-policy-current-head-revalidation-2026-10-18.md`.
 
+# 2026-10-18 · FINAL-WEB-001 security-layer truth implementation
+
+- **Source mapping:** Web PR #179, implementation `8a630d1`, normal merge
+  `a85d6f360791baf09365b3308e34ea4fb1e2996c`, assigned to `anuragyadav-git`.
+- **Implementation mapping:** the public positioning, metadata, JSON-LD, and
+  `/llms.txt` now share the canonical local-first security-layer message;
+  `plan_state` and the expanded machine-readable claim set are evaluated
+  against the server catalog.
+- **Verification mapping:** truth-registry **31/31**, typecheck, build
+  **47/47**, diff check, and public-boundary audit passed; hosted run
+  `39059883830`, Vercel, GitGuardian, and Preview Comments passed.
+- **Acceptance mapping:** implementation is merged, but FINAL-WEB-001 and
+  FINAL-WEB-005 remain unchecked for ACCEPT-009/010, founder command, and
+  dependency contracts. No AppSec-held row changed; score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-001-security-layer-truth-pr179-2026-10-18.md`.
+
 ## FINAL-WEB-002 landing flow implementation slice · 2026-10-18
 
 - **Source mapping:** Web PR #178, public commit `f8febea`, regular merge

@@ -713,6 +713,45 @@ isolation, independent review, and final release acceptance remain open. Score
 remains **228 checked / 52 unchecked / 280 total (81.4%)**. Evidence:
 `evidence/hunt-attack-worker-pr115-2026-10-13.md`.
 
+## 0.0m Current FINAL-WEB-001 security-layer truth checkpoint — 2026-10-18
+
+The top-to-bottom loop continued after parking the AppSec hold set. Public Web
+PR #179, assigned to `anuragyadav-git`, merged normally as
+`a85d6f360791baf09365b3308e34ea4fb1e2996c` from implementation commit
+`8a630d1`. This is the requested product-positioning slice: Verglos is now
+presented as the local-first security layer between AI-generated code and
+release, and the homepage, root/social metadata, JSON-LD, and `/llms.txt`
+consume the same centralized positioning and truth-registry outputs.
+
+The public claim registry now also checks plan states and the expanded
+machine-readable plan, command, capability-maturity, and metric claims against
+the canonical catalog. Hunt and Attest remain explicitly qualification-gated;
+no AppSec, hosted entitlement, provider, customer, legal, or release claim was
+promoted.
+
+Verification completed:
+
+- local `pnpm test:truth-registry`: **31/31 passed**;
+- local `pnpm typecheck`: passed;
+- local `pnpm build`: passed with **47/47** pages generated;
+- local `node scripts/check-public-boundary.mjs`: passed;
+- local `git diff --check`: passed;
+- hosted Verify run `39059883830`, Vercel, GitGuardian, and Preview Comments:
+  passed.
+
+The implementation is merged, but FINAL-WEB-001 and FINAL-WEB-005 remain
+unchecked because the backlog explicitly requires ACCEPT-009/010, the founder
+command, and dependency completion. This evidence does not close those
+acceptance contracts. No squash, rebase, force-push, empty, duplicate,
+artificial, or irrelevant public-doc contribution commit was used. The live
+score remains **230 checked / 50 open / 280 total (82.1%)**. Evidence:
+`evidence/final-web-001-security-layer-truth-pr179-2026-10-18.md`.
+
+Next backlog action: continue top-to-bottom at the next eligible non-AppSec
+row; keep provider, customer, legal, field, release, and final-acceptance rows
+open until their own exact artifacts exist, and keep the independent Hunt
+AppSec review last.
+
 ## 1. Objective
 
 Finish the approved Verglos Final V1 product implementation and qualification

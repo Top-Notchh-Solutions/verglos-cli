@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · FINAL-WEB-001 security-layer truth implementation
+
+- **Public change:** Web PR #179, assigned to `anuragyadav-git`, merged
+  normally as `a85d6f3`; implementation commit `8a630d1` centralizes the
+  local-first security-layer positioning and its public truth consumers.
+- **Implementation:** homepage hero, root/Open Graph/Twitter metadata,
+  SoftwareApplication JSON-LD, and `/llms.txt` use the same positioning and
+  catalog-backed truth surface; plan states and machine-readable claims are
+  fail-closed.
+- **Verification:** truth-registry **31/31**, typecheck, diff check, build
+  **47/47**, and public-boundary audit passed; hosted run `39059883830`,
+  Vercel, GitGuardian, and Preview Comments passed.
+- **History:** one substantive feature commit plus a normal merge; no squash,
+  rebase, force-push, empty, duplicate, artificial, or irrelevant public-doc
+  contribution commit.
+- **Disposition:** implementation evidence only. FINAL-WEB-001 and FINAL-WEB-005
+  remain open for their dependency and final-acceptance contracts; no
+  AppSec-held row changed. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-001-security-layer-truth-pr179-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 current-head policy revalidation
 
 - **Verification:** exact public CLI head `fa77496b` in a clean disposable
