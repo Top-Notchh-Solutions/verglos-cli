@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · CLI security-layer positioning implementation
+
+CLI PR #128, assigned to `anuragyadav-git`, merged normally as `50bcab42` from
+implementation commit `8da4617d`. CLI help, package metadata, and public
+READMEs now consistently describe Verglos as the local-first security
+decision layer between code changes and release.
+
+Frozen install, workspace build **8/8**, typecheck **14/14**, CLI tests with
+exit code 0, public-boundary audit, and `git diff --check` passed in a clean
+disposable worktree. Hosted run `39060504633` passed self-scan, in-toto,
+Ubuntu/macOS, and Windows Node 22/24; Windows Node 20 remained in progress at
+merge and is not claimed as green.
+
+No checkbox changed. FINAL-WEB-004 and all external/AppSec-dependent rows
+remain open under their own contracts. Score remains **230 checked / 50 open /
+280 total (82.1%)**. Evidence:
+`evidence/cli-security-layer-positioning-pr128-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-001 security-layer truth implementation
 
 Web PR #179, assigned to `anuragyadav-git`, merged normally as `a85d6f3` with

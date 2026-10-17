@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## CLI security-layer positioning implementation · 2026-10-18
+
+- **Source mapping:** CLI PR #128, implementation `8da4617d`, normal merge
+  `50bcab42eadfa8796d86d1f7a8aaee3010c65647`, assigned to `anuragyadav-git`.
+- **Implementation mapping:** CLI root help, package metadata, root README,
+  and package README use the local-first security-decision-layer positioning;
+  source privacy and qualification-gated Hunt boundaries remain explicit.
+- **Verification mapping:** frozen install, workspace build **8/8**, typecheck
+  **14/14**, CLI tests exit **0**, public-boundary audit, and diff check passed.
+  Hosted run `39060504633` passed self-scan, in-toto, Ubuntu/macOS, and Windows
+  Node 22/24; Windows Node 20 was still in progress at merge.
+- **Acceptance mapping:** this implementation slice does not complete
+  FINAL-WEB-004 or any external/AppSec/provider/customer/legal/hosted/field/
+  release/final-acceptance contract. No checkbox changed; score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:** `evidence/cli-security-layer-positioning-pr128-2026-10-18.md`.
+
 ## TEAM-CLI-001 current-head policy revalidation · 2026-10-18
 
 - **Source mapping:** public CLI `origin/main` at

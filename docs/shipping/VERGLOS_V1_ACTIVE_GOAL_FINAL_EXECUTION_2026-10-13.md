@@ -752,6 +752,36 @@ row; keep provider, customer, legal, field, release, and final-acceptance rows
 open until their own exact artifacts exist, and keep the independent Hunt
 AppSec review last.
 
+## 0.0n Current CLI security-layer positioning checkpoint — 2026-10-18
+
+The top-to-bottom loop continued with the public CLI positioning slice after
+parking the AppSec hold set. CLI PR #128, assigned to `anuragyadav-git`, merged
+normally as `50bcab42eadfa8796d86d1f7a8aaee3010c65647` from implementation
+commit `8da4617d`. CLI root help, package metadata, root README, and package
+README now consistently position Verglos as the local-first security decision
+layer between code changes and release. The public wording keeps source
+privacy and explicit approved/trusted/bounded, qualification-gated Hunt
+execution visible.
+
+Verification passed in a clean disposable worktree: frozen install, workspace
+build **8/8**, typecheck **14/14**, `pnpm --filter verglos test` exit **0**,
+public-boundary audit, and `git diff --check`. Hosted run `39060504633`
+passed self-scan, in-toto, Ubuntu/macOS, and Windows Node 22/24; Windows Node
+20 was still in progress at merge and is not recorded as green.
+
+This is implementation progress, not a checkbox substitute. FINAL-WEB-004
+remains open for its complete command/docs truth contract, and no AppSec,
+provider, customer, legal, hosted, field, release, or final-acceptance row
+changed. The live score remains **230 checked / 50 open / 280 total (82.1%)**.
+No squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
+public-doc contribution commit was used. Evidence:
+`evidence/cli-security-layer-positioning-pr128-2026-10-18.md`.
+
+Next backlog action: continue downward from the next eligible non-AppSec row,
+leaving rows with missing provider, customer, legal, hosted, field, release,
+or final-acceptance artifacts open; keep the independent Hunt AppSec review
+last.
+
 ## 1. Objective
 
 Finish the approved Verglos Final V1 product implementation and qualification

@@ -1,5 +1,27 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · CLI security-layer positioning implementation
+
+CLI PR #128, assigned to `anuragyadav-git`, merged normally as
+`50bcab42eadfa8796d86d1f7a8aaee3010c65647` from implementation commit
+`8da4617d`. The public CLI root help, package metadata, root README, and
+package README now position Verglos as the local-first security decision layer
+between code changes and release, while retaining source privacy and explicit
+qualification-gated Hunt wording.
+
+The clean disposable worktree passed frozen install, workspace build **8/8**,
+typecheck **14/14**, `pnpm --filter verglos test` with exit code 0,
+public-boundary audit, and `git diff --check`. Hosted run `39060504633`
+passed self-scan, in-toto, Ubuntu/macOS, and Windows Node 22/24; Windows Node
+20 was still in progress at merge and is not claimed as green.
+
+This is implementation evidence only. It advances the public truth work but
+does not check FINAL-WEB-004 or any AppSec, provider, customer, legal, hosted,
+field, release, or final-acceptance row. Score remains **230 checked / 50
+unchecked / 280 total (82.1%)**. No squash, rebase, force-push, empty,
+duplicate, artificial, or irrelevant public-doc contribution commit was used.
+Evidence: `docs/shipping/evidence/cli-security-layer-positioning-pr128-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-001 security-layer truth implementation
 
 Web PR #179, assigned to `anuragyadav-git`, merged normally as
@@ -2772,7 +2794,7 @@ HOLD: do not start these tasks until the founder explicitly says the product tru
 - [ ] **FINAL-WEB-001** · capability-driven public copy map · deps: ACCEPT-009/010 + founder command · Map homepage/docs/pricing/meta claims to truth registry and server plan catalog; remove stale alpha language only for verified capabilities. Commit(s): Web PR #101 merged as `c3e6668e` established the pure decision surface; Web PR #179, implementation `8a630d1`, merged normally as `a85d6f3`, wires the security-layer positioning, metadata, JSON-LD, `/llms.txt`, plan states, and expanded machine-readable public claims to that surface. Acceptance remains gated on ACCEPT-009/010 and founder command.
 - [ ] **FINAL-WEB-002** · homepage product promise/flow · deps: FINAL-WEB-001 · Update landing content to Inspect -> Decide -> Prove -> Monitor using real product evidence and no unsupported benchmarks/customers. Commit(s): Web PR #178, commit `f8febea`, merged normally as `1c15a486`; implementation and hosted verification are recorded, but FINAL-WEB-001 and final acceptance remain open. Evidence: `docs/shipping/evidence/final-web-002-flow-pr178-2026-10-18.md`.
 - [ ] **FINAL-WEB-003** · plan/pricing presentation · deps: FINAL-WEB-001 · Render Free/Pro/Team/Studio/Enterprise from canonical catalog with exact allowances, status, billing terms, and explicit overages. Commit(s): Web PR #177 commits `b2b3d4a`, `4aa3310`, and `fa01830` add the Team card, align the public capability matrix, cover the Team price/state in truth tests, and project exact catalog terms without inventing overages; dependent acceptance evidence remains open.
-- [ ] **FINAL-WEB-004** · public product/docs truth pass · deps: FINAL-WEB-001 · Align command docs, language coverage, engine attribution, signing limitations, Hunt assurance, and dashboard capabilities with shipped behavior. Commit(s): Web PR #177 commits `7a56141` and `bd50d84` align the docs plan matrix with the catalog, add Team, correct stale price/attestation wording, and replace unsupported public maturity labels with qualification-gated language; the complete command/docs truth scope remains open.
+- [ ] **FINAL-WEB-004** · public product/docs truth pass · deps: FINAL-WEB-001 · Align command docs, language coverage, engine attribution, signing limitations, Hunt assurance, and dashboard capabilities with shipped behavior. Commit(s): Web PR #177 commits `7a56141` and `bd50d84` align the docs plan matrix with the catalog, add Team, correct stale price/attestation wording, and replace unsupported public maturity labels with qualification-gated language; CLI PR #128 commit `8da4617d`, merged as `50bcab42`, aligns CLI help, package metadata, and public README positioning with the security-layer identity. The complete command/docs truth scope remains open.
 - [ ] **FINAL-WEB-005** · metadata/structured data/llms truth pass · deps: FINAL-WEB-001 · Update only factual metadata and machine-readable surfaces; no invented GEO/SEO claims. Commit(s): Web PR #179, implementation `8a630d1`, merged normally as `a85d6f3`, centralizes factual metadata, SoftwareApplication JSON-LD, and `/llms.txt` lines and guards them against the public truth snapshot. The row remains dependency-bound to FINAL-WEB-001 acceptance.
 - [ ] **FINAL-WEB-006** · public proof assets · deps: ACCEPT-003/009 · Use sanitized real records/screenshots/flows with date, version, demo/real label, alt text, and no private evidence. Commit(s): —
 - [ ] **FINAL-WEB-007** · landing accessibility/performance/responsive verification · deps: FINAL-WEB-002-006 · Test primary journey, mobile, keyboard, screen reader, contrast, reduced motion, metadata, crawlability, and real-user performance budgets. Commit(s): —

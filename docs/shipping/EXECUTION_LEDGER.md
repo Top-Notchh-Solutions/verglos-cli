@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · CLI security-layer positioning implementation
+
+- **Public change:** CLI PR #128, assigned to `anuragyadav-git`, merged
+  normally as `50bcab42`; implementation commit `8da4617d` aligns CLI help,
+  package metadata, and public READMEs with the local-first security-layer
+  product identity.
+- **Verification:** frozen install, workspace build **8/8**, typecheck
+  **14/14**, CLI tests exit **0**, public-boundary audit, and diff check passed.
+  Hosted run `39060504633` passed self-scan, in-toto, Ubuntu/macOS, and Windows
+  Node 22/24; Windows Node 20 remained in progress at merge.
+- **Disposition:** implementation progress only. FINAL-WEB-004 and all
+  external/AppSec-dependent rows remain open; score remains **230/50/280
+  (82.1%)**.
+- **History:** one substantive public feature commit plus a normal merge; no
+  squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
+  public-doc contribution commit.
+- **Evidence:**
+  `docs/shipping/evidence/cli-security-layer-positioning-pr128-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-001 security-layer truth implementation
 
 - **Public change:** Web PR #179, assigned to `anuragyadav-git`, merged
