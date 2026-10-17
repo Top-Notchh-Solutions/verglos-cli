@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-17 · FINAL-WEB-001 public truth-registry implementation slice
+
+Public Web PR #177, commit `5ada115`, wires homepage plan copy, root metadata,
+and `/llms.txt` to the canonical entitlement catalog and adds a fail-closed
+homepage claim check. Focused truth tests passed **28/28**, typecheck passed,
+and the production build generated **47/47** static pages. The PR is assigned
+to `anuragyadav-git` and preserves normal non-squash history.
+
+This advances implementation only; the full FINAL-WEB-001 claim map and its
+remaining acceptance artifacts are not inferred from this slice. No checkbox
+or score changed. The live score remains **230 checked / 50 unchecked / 280
+total (82.1%)**. Evidence:
+`evidence/final-web-001-public-truth-registry-2026-10-17.md`.
+
 ## 2026-10-17 · Continuation routing directive
 
 Owner direction for this continuation: previously recorded non-AppSec evidence

@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-001 public truth-registry implementation slice · 2026-10-17
+
+- **Source mapping:** Web PR #177, commit `5ada115`, branch
+  `feat/final-web-001-truth-registry-20261017`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** homepage plan prices/status, root metadata, and
+  `/llms.txt` now reuse the canonical entitlement catalog; homepage claims are
+  checked fail closed against the public truth snapshot.
+- **Verification mapping:** truth-registry tests **28/28**, typecheck, build
+  **47/47** static pages, and diff check passed.
+- **Acceptance mapping:** this advances implementation only. The full
+  FINAL-WEB-001 public claim map and remaining acceptance artifacts are still
+  required; no checkbox changed and the score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-001-public-truth-registry-2026-10-17.md`.
+
 ## Hunt target-code qualification attempt failed · 2026-10-16
 
 - **Source mapping:** exact PR #127 merge

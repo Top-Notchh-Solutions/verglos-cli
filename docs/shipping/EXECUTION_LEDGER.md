@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-17 · FINAL-WEB-001 public truth-registry implementation slice
+
+- **Public change:** Web PR #177, commit `5ada115`, assigned to
+  `anuragyadav-git`, wires homepage plan copy, root metadata, and `/llms.txt`
+  to the canonical entitlement catalog and adds a fail-closed homepage claim
+  check.
+- **Verification:** `pnpm test:truth-registry` **28/28**, `pnpm typecheck`,
+  `pnpm build` with **47/47** static pages, and diff check passed.
+- **Boundary:** normal non-squash contribution history; no deployment,
+  publication, database operation, browser-session change, or unrelated docs.
+- **Disposition:** implementation progress only. FINAL-WEB-001 remains open for
+  its complete public claim map and remaining acceptance artifacts. Score
+  remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-001-public-truth-registry-2026-10-17.md`.
+
 ## 2026-10-16 · Hunt target-code qualification attempt failed
 
 - **Source/runtime:** exact PR #127 merge

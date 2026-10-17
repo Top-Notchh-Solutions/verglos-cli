@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-17 · FINAL-WEB-001 public truth-registry implementation slice
+
+Web PR #177, commit `5ada115`, assigned to `anuragyadav-git`, wires homepage
+plan copy, root metadata, and `/llms.txt` to the canonical entitlement catalog
+and adds a fail-closed homepage claim check. Truth tests passed **28/28**,
+typecheck passed, and the production build generated **47/47** static pages.
+This is implementation progress only; FINAL-WEB-001 remains open for the
+complete public claim map and remaining acceptance artifacts. No checkbox
+changed; score remains **230 checked / 50 unchecked / 280 total (82.1%)**.
+Evidence:
+`docs/shipping/evidence/final-web-001-public-truth-registry-2026-10-17.md`.
+
 ## 2026-10-16 · Hunt AppSec pinned Linux technical pass
 
 The reviewer’s fresh Linux checkout at exact PR #127 merge
