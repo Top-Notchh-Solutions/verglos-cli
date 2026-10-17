@@ -820,6 +820,41 @@ release, or final-acceptance artifact is missing. Keep the independent Hunt
 AppSec review last and do not treat this implementation slice as a checkbox
 substitute.
 
+## 0.0p Current FINAL-WEB-004 public identity checkpoint — 2026-10-18
+
+The next bounded Web truth slice is complete on the public merged head. Web
+PR #181, assigned to `anuragyadav-git`, merged normally as
+`9dd2ab30c83a31dc4769ac3818ed881595b54924` from implementation commit
+`9895a94edd4cb6fa1fbe6573efe16fe4d9624e49`. Public project notes, root
+metadata keywords, the legacy verification footer, and the 2.0 direction page
+now position Verglos as the local-first security decision layer between
+AI-generated code and release. Hunt/Attest qualification wording remains
+explicit; no hosted or independent-review claim was added.
+
+Verification passed in `/tmp/verglos-web-docs.p91MX0`:
+
+- `pnpm test:truth-registry`: **31/31 passed**, zero failed/skipped;
+- `pnpm build`: **47/47** static pages generated;
+- `pnpm typecheck`: passed sequentially after the build;
+- `node scripts/check-public-boundary.mjs`: passed;
+- `git diff --check`: passed, and no stale “security evidence agent for
+  AI-generated code” phrase remained in public notes, `src`, or `README.md`.
+
+Hosted PR evidence: Actions run `39062039573`, job `117481808455`, passed;
+Vercel deployment `FqSTwTR7tqWRrvweofVsyMfxKyZZ`, GitGuardian, and Preview
+Comments passed. This is implementation progress only. FINAL-WEB-004 remains
+unchecked for its complete command/docs truth and final-acceptance contract;
+no AppSec, provider, customer, legal, hosted, field, release, or
+final-acceptance row changed. The live score remains **230 checked / 50 open /
+280 total (82.1%)**. No squash, rebase, force-push, empty, duplicate,
+artificial, or irrelevant public-doc contribution commit was used. Evidence:
+`evidence/final-web-004-public-identity-pr181-2026-10-18.md`.
+
+Next backlog action: continue at the next eligible non-AppSec row in file
+order. Leave rows open when their own provider, customer, legal, hosted,
+field, release, or final-acceptance artifact is missing; keep the independent
+Hunt AppSec review last.
+
 ## 1. Objective
 
 Finish the approved Verglos Final V1 product implementation and qualification

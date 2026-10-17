@@ -1,5 +1,29 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · FINAL-WEB-004 public identity alignment
+
+Web PR #181, assigned to `anuragyadav-git`, merged normally as
+`9dd2ab30c83a31dc4769ac3818ed881595b54924` from implementation commit
+`9895a94`. The remaining public identity surfaces now describe Verglos as the
+local-first security decision layer between AI-generated code and release:
+project notes, the root metadata keyword set, the legacy verification footer,
+and the 2.0 direction page were aligned while Hunt/Attest qualification
+wording remained explicit.
+
+The clean disposable worktree passed truth-registry tests **31/31**, build
+**47/47** pages, sequential typecheck, public-boundary audit, and
+`git diff --check`. Hosted Actions run `39062039573` / job `117481808455`,
+Vercel deployment `FqSTwTR7tqWRrvweofVsyMfxKyZZ`, GitGuardian, and Preview
+Comments passed.
+
+This is a real public implementation slice, not final acceptance. FINAL-WEB-004
+remains unchecked for its complete command/docs truth and acceptance contract;
+no AppSec, provider, customer, legal, hosted, field, release, or final-
+acceptance row changed. Score remains **230 checked / 50 unchecked / 280 total
+(82.1%)**. No squash, rebase, force-push, empty, duplicate, artificial, or
+irrelevant public-document contribution commit was used. Evidence:
+`docs/shipping/evidence/final-web-004-public-identity-pr181-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-004 security-layer demo truth implementation
 
 Web PR #180, assigned to `anuragyadav-git`, merged normally as

@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · FINAL-WEB-004 public identity alignment
+
+- **Public change:** Web PR #181, assigned to `anuragyadav-git`, merged
+  normally as `9dd2ab30`; implementation commit `9895a94` aligns project
+  notes, root metadata keywords, the legacy verify footer, and the 2.0
+  direction page with the local-first security-layer identity.
+- **Truth boundary:** Hunt and Attest remain qualification-gated; the change
+  removes stale identity wording without implying hosted signing, public
+  verification, or general customer-code coverage.
+- **Verification:** truth-registry **31/31**, build **47/47**, sequential
+  typecheck, public-boundary audit, and diff check passed. Hosted run
+  `39062039573` / job `117481808455`, Vercel deployment
+  `FqSTwTR7tqWRrvweofVsyMfxKyZZ`, GitGuardian, and Preview Comments passed.
+- **Disposition:** implementation progress only. FINAL-WEB-004 remains open
+  for the complete command/docs truth and final-acceptance contract; no
+  AppSec-held row changed. Score remains **230/50/280 (82.1%)**.
+- **History:** one substantive implementation commit plus a normal merge; no
+  squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
+  public-document contribution commit.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-004-public-identity-pr181-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-004 security-layer demo truth implementation
 
 - **Public change:** Web PR #180, assigned to `anuragyadav-git`, merged

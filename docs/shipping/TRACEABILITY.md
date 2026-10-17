@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-004 public identity alignment · 2026-10-18
+
+- **Source mapping:** Web PR #181, implementation
+  `9895a94edd4cb6fa1fbe6573efe16fe4d9624e49`, normal merge
+  `9dd2ab30c83a31dc4769ac3818ed881595b54924`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** public project notes, root metadata keywords,
+  the legacy verify footer, and the 2.0 direction page now use the
+  local-first security decision-layer identity; Hunt/Attest remain explicitly
+  qualification-gated.
+- **Verification mapping:** truth-registry **31/31**, build **47/47**,
+  sequential typecheck, public-boundary audit, and diff check passed; hosted
+  run `39062039573` / job `117481808455`, Vercel deployment
+  `FqSTwTR7tqWRrvweofVsyMfxKyZZ`, GitGuardian, and Preview Comments passed.
+- **Acceptance mapping:** implementation evidence is complete for this slice,
+  but FINAL-WEB-004 remains unchecked for its full command/docs truth and
+  final-acceptance dependencies. No AppSec-held row changed; score remains
+  **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/final-web-004-public-identity-pr181-2026-10-18.md`.
+
 ## FINAL-WEB-004 security-layer demo truth implementation · 2026-10-18
 
 - **Source mapping:** Web PR #180, implementation
