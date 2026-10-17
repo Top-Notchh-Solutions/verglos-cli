@@ -859,6 +859,29 @@ through those rows only when their own provider/hosted artifacts exist; leave
 provider, customer, legal, field, release, and final-acceptance rows open when
 their own evidence is missing. Keep the independent Hunt AppSec review last.
 
+## 0.0q Current TEAM-CLI-001 provider-readiness audit — 2026-10-18
+
+A fresh read-only audit checked the current public CLI/Web heads, the Vercel
+`verglos-web` Preview environment-key surface, and the Top Notchh Solutions
+GitHub organization installations. The organization still has only the
+`vercel` and `neon-postgres` installations; no dedicated Verglos SCM App is
+installed. Preview has the organization-policy signer keys but no
+`VERGLOS_GITHUB_APP_ID`, `VERGLOS_GITHUB_APP_PRIVATE_KEY`, or
+`VERGLOS_GITHUB_WEBHOOK_SECRET` keys. No values were printed or stored.
+
+Therefore `TEAM-CLI-001` remains unchecked for the authorized least-privilege
+SCM App/repository binding, server-held provider credentials, published policy
+row, and authenticated signed fetch/cache/offline/cross-tenant qualification.
+This is a provider/hosted dependency, not AppSec. `TEAM-CLI-002` and
+`TEAM-WEB-006` remain dependent; no checkbox or score changed. The live score
+remains **230 checked / 50 open / 280 total (82.1%)**. Evidence:
+`evidence/team-cli-001-provider-readiness-audit-2026-10-18.md`.
+
+Next safe action: create or select the dedicated least-privilege SCM App,
+install it only on the authorized non-Production repository, configure the
+three server-held Preview credentials, and run the bounded policy/provider
+qualification. Do not claim a live provider result from owner authority alone.
+
 ## 1. Objective
 
 Finish the approved Verglos Final V1 product implementation and qualification

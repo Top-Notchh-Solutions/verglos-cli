@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 provider-readiness audit
+
+A fresh read-only audit of the current public heads, Vercel `verglos-web`
+Preview environment-key names, and Top Notchh Solutions GitHub installations
+found the Preview organization-policy signer keys, but no dedicated Verglos
+SCM App installation and no `VERGLOS_GITHUB_APP_ID`,
+`VERGLOS_GITHUB_APP_PRIVATE_KEY`, or `VERGLOS_GITHUB_WEBHOOK_SECRET` Preview
+keys. Only Vercel and Neon installations are present. No values were printed
+or stored, and no browser, repository, Vercel, GitHub, database, billing, npm,
+or customer state changed.
+
+TEAM-CLI-001 remains unchecked for provider activation, repository binding,
+policy-row reconciliation, and authenticated signed fetch/cache/offline/
+cross-tenant qualification. TEAM-CLI-002 and TEAM-WEB-006 remain dependent.
+This is not an AppSec hold. The score remains **230 checked / 50 open / 280
+total (82.1%)**. Evidence:
+`evidence/team-cli-001-provider-readiness-audit-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-004 public identity alignment
 
 Web PR #181, assigned to `anuragyadav-git`, merged normally as `9dd2ab30` from

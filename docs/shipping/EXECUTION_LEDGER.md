@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 provider-readiness audit
+
+- **Audit:** read-only Vercel environment-key projection and GitHub
+  organization-installation query, using the current public CLI/Web heads.
+- **Result:** Preview organization-policy signer keys are present; no
+  dedicated Verglos SCM App installation or GitHub App credential keys are
+  present. Only Vercel and Neon installations are recorded.
+- **Disposition:** TEAM-CLI-001 remains open for provider activation,
+  repository binding, policy-row reconciliation, and live signed
+  fetch/cache/offline/cross-tenant evidence. TEAM-CLI-002 and TEAM-WEB-006
+  remain dependent. No checkbox changed; score remains **230/50/280 (82.1%)**.
+- **Boundary:** no secret values were printed or stored; no browser, public
+  repository, Vercel state, GitHub installation, database, billing, npm, or
+  customer state changed. This is not an AppSec result.
+- **Evidence:**
+  `docs/shipping/evidence/team-cli-001-provider-readiness-audit-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-004 public identity alignment
 
 - **Public change:** Web PR #181, assigned to `anuragyadav-git`, merged

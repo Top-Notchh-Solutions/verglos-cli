@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 provider-readiness audit · 2026-10-18
+
+- **Source mapping:** current public CLI `main` is
+  `50bcab42eadfa8796d86d1f7a8aaee3010c65647`; current public Web `main` is
+  `9dd2ab30c83a31dc4769ac3818ed881595b54924`.
+- **Provider mapping:** the Top Notchh Solutions organization has only the
+  Vercel and Neon installations; no dedicated Verglos SCM App is installed.
+  Preview has the organization-policy signer keys but no GitHub App ID,
+  private-key, or webhook-secret environment keys.
+- **Acceptance mapping:** provider activation, repository binding, published
+  policy reconciliation, and live signed CLI fetch/cache/offline/cross-tenant
+  evidence are missing. TEAM-CLI-001, TEAM-CLI-002, and TEAM-WEB-006 remain
+  open; this is not AppSec-held. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/team-cli-001-provider-readiness-audit-2026-10-18.md`.
+
 ## FINAL-WEB-004 public identity alignment · 2026-10-18
 
 - **Source mapping:** Web PR #181, implementation
