@@ -242,6 +242,40 @@ complete row-specific contracts pass. The live score remains **230 checked /
 50 open / 280 total (82.1%)**. Evidence:
 `evidence/final-web-001-pr177-ci-mirror-2026-10-17.md`.
 
+## 0.0j Current FINAL-WEB-002 implementation checkpoint — 2026-10-18
+
+The top-to-bottom pass parked the AppSec hold set and continued with the next
+eligible public Web slice. Web PR #178, assigned to `anuragyadav-git`, merged
+normally as `1c15a4861ee09bb1d5968424c3f553f310bb9ebd` from public commit
+`f8febead03d2fcd28d57dc07969b2bfe12e1ceea`. The landing flow now presents
+Inspect → Decide → Prove → Monitor; the homepage copy states local execution,
+bounded assurance, and hosted qualification boundaries, and removes
+unsupported hourly monitoring, CVE-alert, and named-agent claims.
+
+Evidence and verification:
+
+- Local `pnpm test:truth-registry`: **29/29 passed**.
+- Local `pnpm typecheck`: passed.
+- Local `pnpm build`: passed with **47/47** pages generated.
+- Local `node scripts/check-public-boundary.mjs`: passed.
+- Hosted Web run `39058985826`: passed the full typecheck/schema workflow,
+  including serial tests, private-runner E2E, negative-boundary and truth
+  tests, database/schema checks, build, public-boundary, dependency/SBOM/
+  license checks, and tracked-secret guard; GitGuardian, Vercel, and Preview
+  Comments also passed.
+
+This is a real implementation and hosted-verification slice, not a checkbox
+substitute. FINAL-WEB-002 remains unchecked because FINAL-WEB-001 and final
+acceptance dependencies remain open. No AppSec-held row changed. No squash,
+rebase, force-push, empty, duplicate, artificial, or irrelevant public-doc
+commit was used. The live score remains **230 checked / 50 open / 280 total
+(82.1%)**. Evidence:
+`docs/shipping/evidence/final-web-002-flow-pr178-2026-10-18.md`.
+
+Next backlog action: continue downward from the next eligible non-AppSec row,
+leaving provider, customer, legal, release, field, and final-acceptance rows
+open until their own artifacts exist; keep the Hunt AppSec review last.
+
 ## 0.1 Current qualification checkpoint — 2026-10-14
 
 The hosted continuation completed successfully in GitHub Actions run
