@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 / FINAL-WEB-005 llms.txt compatibility · 2026-10-18
+
+- **Source mapping:** Web PR #184, implementation
+  `96701ae8729f16ee28a83586409a32c848fe6172`, normal merge
+  `696de5bf594fd315b26f76f1c9f72b245f61f026`, assigned to
+  `anuragyadav-git`.
+- **Implementation mapping:** the public `/llms.txt` route declares a Markdown
+  content type and a contract test requires the factual `# Verglos` H1 and
+  security-layer positioning.
+- **Verification mapping:** local truth-registry **32/32**, typecheck,
+  public-boundary audit, build **47/47**, and diff check passed; hosted run
+  `39065760180` / job `117492959847`, GitGuardian, Vercel, and Preview
+  Comments passed. Production deployment `dpl_FChRVgaChsGaKDbuKhzTW7Pg6MQK`
+  was still building at record time.
+- **Acceptance mapping:** this is partial public-surface qualification only;
+  `QUAL-WEB-006` and `FINAL-WEB-005` remain unchecked for their complete
+  contracts. No AppSec, provider, legal, customer, release, or final-
+  acceptance gate changed; score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/qual-web-006-homepage-lighthouse-llms-pr184-2026-10-18.md`.
+
 ## TEAM-CLI-001 provider App scope mismatch and cleanup · 2026-10-18
 
 - **Provider mapping:** a private `Verglos Preview SCM` GitHub App

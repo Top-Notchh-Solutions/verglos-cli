@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · public llms.txt Markdown compatibility
+
+- **Public change:** Web PR #184, assigned to `anuragyadav-git`, merged
+  normally as `696de5bf`; implementation `96701ae` serves `/llms.txt` as
+  Markdown and adds a factual H1/security-layer contract test.
+- **Verification:** local truth-registry **32/32**, typecheck,
+  public-boundary audit, build **47/47**, and diff check passed. Hosted run
+  `39065760180` / job `117492959847`, GitGuardian, Vercel, and Preview
+  Comments passed. The post-merge Production deployment
+  `dpl_FChRVgaChsGaKDbuKhzTW7Pg6MQK` was still `BUILDING` when recorded.
+- **Disposition:** partial qualification progress only. `QUAL-WEB-006` and
+  `FINAL-WEB-005` remain open; no checkbox changed and score remains
+  **230/50/280 (82.1%)**. No squash, rebase, force-push, empty, duplicate,
+  artificial, or irrelevant public-doc commit was used.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-homepage-lighthouse-llms-pr184-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 provider App scope mismatch and cleanup
 
 - **Provider action:** a private `Verglos Preview SCM` GitHub App registration

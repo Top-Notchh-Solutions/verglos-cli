@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · public llms.txt Markdown compatibility
+
+Web PR #184, assigned to `anuragyadav-git`, merged normally as `696de5bf`
+from implementation `96701ae`. The factual `/llms.txt` route now declares
+`text/markdown; charset=utf-8` and has a contract test requiring its H1 and
+security-layer positioning. Local truth-registry **32/32**, typecheck,
+public-boundary audit, build **47/47**, and diff check passed. Hosted run
+`39065760180` / job `117492959847`, GitGuardian, Vercel, and Preview Comments
+passed. The post-merge Production deployment `dpl_FChRVgaChsGaKDbuKhzTW7Pg6MQK`
+was still building when recorded, so no post-merge live content-type claim is
+made yet.
+
+This is implementation/qualification progress only. `QUAL-WEB-006` and
+`FINAL-WEB-005` remain open; no checkbox or score changed. Evidence:
+`evidence/qual-web-006-homepage-lighthouse-llms-pr184-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-004 legacy security-layer thesis
 
 Web PR #183, assigned to `anuragyadav-git`, merged normally as `7f7957b7` from
