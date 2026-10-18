@@ -1,5 +1,29 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 organization-owner policy authorization fix
+
+Web PR #192, assigned to `anuragyadav-git`, preserves two substantive commits:
+implementation `4579c27` and regression coverage `f8b420e`. The repository
+policy endpoint now authorizes a license bearer against the exact requested
+organization's active owner membership instead of requiring a legacy
+user-to-primary-tenant migration mapping. It remains fail-closed for missing
+ownership and database errors.
+
+Focused SCM/tenant contract tests passed **22/22**, typecheck and diff checks
+passed, and READY Preview deployment `dpl_7DhQxht5dgG655VBqU1a1NnzZj21`
+generated **47/47** pages. GitGuardian and Vercel Preview Comments passed;
+the hosted typecheck/schema check was still running at packet time.
+
+This is implementation and hosted-build progress only. `TEAM-CLI-001` remains
+unchecked for the authorized SCM provider installation, server-held provider
+credentials, published signed policy, authenticated live fetch/cache/offline/
+cross-tenant observation, and reconciliation evidence. No Production,
+customer, billing, registry, provider, or AppSec state changed. No squash,
+rebase, force-push, empty, duplicate, artificial, or irrelevant
+documentation-only contribution was used. Score remains **232 checked / 48
+open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-005 hosted Preview deletion execution
 
 The current Web source was deployed to an isolated READY Preview with a fresh

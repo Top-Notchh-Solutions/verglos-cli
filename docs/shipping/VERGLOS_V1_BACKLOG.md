@@ -1,5 +1,26 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-001 organization-owner policy authorization fix
+
+Web PR #192, assigned to `anuragyadav-git`, preserves implementation commit
+`4579c27` and regression-test commit `f8b420e` in a normal reviewable branch.
+The repository policy endpoint now authorizes a license bearer against the
+exact requested organization's active owner membership; it no longer requires
+a legacy migration mapping for an organization created through the current
+organization API. Focused SCM/tenant tests passed **22/22**, typecheck and
+diff checks passed, and READY Preview deployment
+`dpl_7DhQxht5dgG655VBqU1a1NnzZj21` built **47/47** pages.
+
+This advances implementation only. `TEAM-CLI-001` remains unchecked for the
+authorized SCM provider installation, provider credentials, published signed
+policy, authenticated live CLI fetch/cache/offline/cross-tenant evidence, and
+reconciliation. `TEAM-CLI-002` and `TEAM-WEB-006` remain dependent. No
+AppSec, provider, customer, legal, release, or final-acceptance row changed;
+score remains **232 checked / 48 open / 280 total (82.9%)**. No squash,
+rebase, force-push, empty, duplicate, artificial, or irrelevant public-document
+commit was used. Evidence:
+`docs/shipping/evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 authenticated account-state qualification
 
 The existing authenticated Verglos browser page was inspected read-only at

@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-CLI-001 after organization-owner policy fix
+
+- **Decision:** Accept the organization-owner authorization correction as
+  implementation evidence, but keep `TEAM-CLI-001` unchecked.
+- **Observed:** The policy route now binds the license user to the exact
+  requested active organization and owner role. Missing ownership remains a
+  bounded unavailable response; database failures remain unavailable rather
+  than leaking details.
+- **Verification:** Web PR #192 preserves implementation `4579c27` and test
+  `f8b420e`; focused SCM/tenant tests passed **22/22**; typecheck, diff check,
+  and READY Preview build **47/47** passed. GitGuardian and Preview Comments
+  passed; hosted typecheck/schema was still running at packet time.
+- **Reason:** This corrects a code-side blocker but does not create a provider
+  installation, configure provider credentials, publish a live policy, or
+  prove CLI fetch/cache/offline/cross-tenant behavior.
+- **Disposition:** Keep `TEAM-CLI-001`, its dependent TEAM rows, and all
+  customer/provider acceptance rows open. This is not an AppSec hold. Score
+  remains **232/48/280 (82.9%)**.
+- **Boundary:** No Production, customer, billing, registry, provider, or
+  AppSec state changed. No squash merge was used.
+- **Evidence:** `evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · retain QUAL-WEB-005 after hosted synthetic deletion
 
 - **Decision:** Accept the isolated Preview deletion execution as qualification
