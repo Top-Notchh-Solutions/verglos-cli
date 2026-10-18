@@ -1,5 +1,35 @@
 const MAX_JSON_RESPONSE_BYTES = 1 * 1024 * 1024;
 
+export interface FetchJsonResponseOptions {
+  readonly timeoutMs: number;
+  readonly maxBytes?: number;
+  readonly fetchImpl?: typeof fetch;
+}
+
+/** Fetch and consume one bounded JSON response under one end-to-end deadline. */
+export async function fetchJsonResponse(
+  input: string | URL | Request,
+  init: RequestInit,
+  options: FetchJsonResponseOptions,
+): Promise<{ readonly response: Response; readonly json: unknown | null }> {
+  if (!Number.isSafeInteger(options.timeoutMs) || options.timeoutMs <= 0 || options.timeoutMs > 60_000) {
+    throw new Error("HTTP response timeout is out of bounds");
+  }
+  const maxBytes = options.maxBytes ?? MAX_JSON_RESPONSE_BYTES;
+  if (!Number.isSafeInteger(maxBytes) || maxBytes <= 0 || maxBytes > 16 * 1024 * 1024) {
+    throw new Error("HTTP response body limit is out of bounds");
+  }
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), options.timeoutMs);
+  const fetchImpl = options.fetchImpl ?? fetch;
+  try {
+    const response = await fetchImpl(input, { ...init, redirect: "error", signal: controller.signal });
+    return { response, json: await readJsonResponse(response, maxBytes) };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function readJsonResponse(response: Response, maxBytes = MAX_JSON_RESPONSE_BYTES): Promise<unknown | null> {
   if (!Number.isSafeInteger(maxBytes) || maxBytes <= 0) return null;
   const bytes = await readBoundedResponse(response, maxBytes);

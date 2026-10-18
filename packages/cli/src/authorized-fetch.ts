@@ -1,5 +1,5 @@
 import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
-import { readJsonResponse } from "./http-response.js";
+import { fetchJsonResponse } from "./http-response.js";
 
 /**
  * Shared license-authenticated fetch used by every CLI command that
@@ -48,16 +48,14 @@ export async function authorizedFetch(
   }
   const url = new URL(path, `${apiOrigin}/`).toString();
   try {
-    const res = await fetch(url, {
+    const { response: res, json } = await fetchJsonResponse(url, {
       method: init.method,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${creds.licenseKey}`,
       },
       body: init.body === undefined ? undefined : JSON.stringify(init.body),
-      redirect: "error",
-    });
-    const json = await readJsonResponse(res);
+    }, { timeoutMs: 8000 });
     if (res.status === 401 || res.status === 402) {
       return { ok: false, status: res.status, json, reason: "unauthorized" };
     }
