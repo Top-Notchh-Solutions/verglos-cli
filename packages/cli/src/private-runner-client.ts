@@ -185,6 +185,7 @@ export async function pollPrivateRunnerJob(input: Readonly<{
       response = await (input.fetchImpl ?? fetch)(endpoint, {
         method: "GET",
         headers: { Accept: "application/json", Authorization: `Bearer ${creds.licenseKey}` },
+        redirect: "error",
         signal: controller.signal,
       });
     } catch {
@@ -250,6 +251,7 @@ export async function uploadPrivateRunnerResult(input: Readonly<{
         method: "POST",
         headers: { Accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${creds.licenseKey}` },
         body,
+        redirect: "error",
         signal: controller.signal,
       });
     } catch {
