@@ -132,11 +132,16 @@ async function writeCache(entry: CachedCapabilities): Promise<void> {
 async function fetchWithTimeout(
   url: string,
   init: RequestInit,
-): Promise<Response> {
+  consume: (response: Response) => Promise<CapabilitiesResponse | null>,
+): Promise<CapabilitiesResponse | null> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   try {
-    return await fetch(url, { ...init, redirect: "error", signal: controller.signal });
+    const response = await fetch(url, { ...init, redirect: "error", signal: controller.signal });
+    // Keep the deadline active until the bounded response reader has consumed
+    // the body. Headers arriving is not completion of an authenticated
+    // capability response.
+    return await consume(response);
   } finally {
     clearTimeout(timer);
   }
@@ -154,14 +159,15 @@ async function fetchFromServer(
   if (asPlan) url.searchParams.set("as_plan", asPlan);
 
   try {
-    const res = await fetchWithTimeout(url.toString(), {
+    return await fetchWithTimeout(url.toString(), {
       method: "GET",
       headers: licenseKey
         ? { authorization: `Bearer ${licenseKey}` }
         : {},
+    }, async (response) => {
+      if (!response.ok) return null;
+      return parseCapabilitiesResponse(await readJsonResponse(response, MAX_CAPABILITIES_RESPONSE_BYTES));
     });
-    if (!res.ok) return null;
-    return parseCapabilitiesResponse(await readJsonResponse(res, MAX_CAPABILITIES_RESPONSE_BYTES));
   } catch {
     return null;
   }

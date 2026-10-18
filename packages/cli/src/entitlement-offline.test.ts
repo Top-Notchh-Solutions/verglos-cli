@@ -49,6 +49,34 @@ function withOfflineFetch<T>(fn: () => Promise<T>): Promise<T> {
   });
 }
 
+function responseThatWaitsForAbort(signal: AbortSignal): Response {
+  return new Response(new ReadableStream<Uint8Array>({
+    pull(controller) {
+      if (signal.aborted) {
+        controller.error(new DOMException("The operation was aborted", "AbortError"));
+        return;
+      }
+      signal.addEventListener("abort", () => {
+        controller.error(new DOMException("The operation was aborted", "AbortError"));
+      }, { once: true });
+    },
+  }), { status: 200 });
+}
+
+async function withDeadline<T>(promise: Promise<T>, timeoutMs = 250): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise<T>((_resolve, reject) => {
+        timer = setTimeout(() => reject(new Error("test deadline exceeded")), timeoutMs);
+      }),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 test("loadCapabilities: honours a paid cache within 7-day grace when server is unreachable", async () => {
   const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
   seedCache(threeDaysAgo, "pro", ["scan", "fix", "monitor_register"]);
@@ -176,6 +204,19 @@ test("loadCapabilities: drops to Free when no cache exists and server is unreach
 
   assert.equal(caps.plan, "free");
   assert.equal(caps.stale, undefined);
+});
+
+test("loadCapabilities: keeps the request deadline active while reading a streamed response body", async () => {
+  seedCache(new Date(Date.now() - 10 * 24 * 60 * 60 * 1000), "pro", ["scan", "fix"]);
+  const originalFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = (async (_input, init) => responseThatWaitsForAbort(init?.signal as AbortSignal)) as typeof fetch;
+    const caps = await withDeadline(mod.loadCapabilities({ forceRefresh: true }), 6_000);
+    assert.equal(caps.plan, "free");
+    assert.equal(caps.source, "free");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test("_absoluteMaxStaleMs: matches the 7-day JWT offline grace window", () => {
