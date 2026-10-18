@@ -65,14 +65,15 @@ test("private runner poll uses authenticated GET, verifies, admits, and persists
   await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
   await mkdir(join(home, ".verglos"), { recursive: true });
   await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
-  const calls: Array<{ url: string; method: string | undefined; authorization: string | null }> = [];
+  const calls: Array<{ url: string; method: string | undefined; authorization: string | null; redirect: string | undefined }> = [];
   const result = await pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath, now: "2026-10-06T00:01:00.000Z", fetchImpl: async (input, init) => {
-    calls.push({ url: String(input), method: init?.method, authorization: new Headers(init?.headers).get("authorization") });
+    calls.push({ url: String(input), method: init?.method, authorization: new Headers(init?.headers).get("authorization"), redirect: init?.redirect });
     return new Response(JSON.stringify({ job: makeJob(keys.privateKey) }), { status: 200 });
   } });
   assert.equal(result.status, "ready");
   assert.equal(calls[0]?.method, "GET");
   assert.equal(calls[0]?.authorization, "Bearer license-sentinel");
+  assert.equal(calls[0]?.redirect, "error");
   assert.equal((await readFile(replayPath, "utf8")).includes("job_1"), true);
   await assertPrivateMode(root, 0o700);
   await assertPrivateMode(replayPath, 0o600);
@@ -127,6 +128,7 @@ test("private runner result upload uses authenticated POST and sends only the sh
   const response = await uploadPrivateRunnerResult({ result, fetchImpl: async (input, init) => {
     assert.equal(String(input), "https://example.test/api/v1/private-runner/results");
     assert.equal(init?.method, "POST");
+    assert.equal(init?.redirect, "error");
     assert.equal(new Headers(init?.headers).get("authorization"), "Bearer license-sentinel");
     requestBody = String(init?.body);
     return new Response(JSON.stringify({ ok: true, resultDigest: `sha256:${"c".repeat(64)}`, idempotent: false }), { status: 201 });
