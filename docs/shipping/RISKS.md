@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-LIC-002 scoped company disposition
+
+- **Risk:** A company disposition with conditions could be mistaken for
+  unrestricted redistribution or final release clearance.
+- **Mitigation:** The owner decision explicitly limits the current scope to
+  the non-published package/source boundary, keeps Trivy and detect-secrets
+  operator-only, excludes premium feeds and customer claims, requires notices
+  and attribution, and triggers re-review on dependency, package, fixture,
+  recipe, image, or trademark changes.
+- **Status:** LIC-002 company decision recorded and row checked. LIC-003,
+  distribution, trusted publication, independent Hunt AppSec, provider,
+  customer, and final-acceptance risks remain open. Score is **231/49/280
+  (82.5%)**.
+- **Evidence:** `docs/shipping/legal/legal-company-decision-2026-10-18.md`.
+
 ## 2026-10-14 · R-GOVERNANCE-OWNER-AUTH-002 repeated setup requests
 
 - **Risk:** Repeatedly asking the owner for additional reviewer or approval

@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## LIC-002 company disposition · 2026-10-18
+
+- **Source mapping:** The owner disposition is bound to the qualified CLI
+  package surface at `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and the later
+  positioning-only merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`; the
+  latter changes only package description text and not the lockfile/archive
+  surface.
+- **Decision mapping:** The exact company treatment is recorded for Trivy,
+  detect-secrets, fixtures, Hunt recipes, modification/redistribution,
+  trademarks, notices, and release exclusions. It is explicitly an owner
+  company decision, not an outside-lawyer opinion or independent AppSec
+  review.
+- **Acceptance mapping:** The technical inventory, exact-source recheck,
+  package qualification, and owner authorization are now reconciled with the
+  required decision artifact. LIC-002 is checked. Downstream LIC-003,
+  distribution, trusted publication, provider, customer, AppSec, and final
+  acceptance rows remain open. Score is **231/49/280 (82.5%)**.
+- **Evidence:** `docs/shipping/legal/legal-company-decision-2026-10-18.md`.
+
 ## LIC-002 upstream exact-source recheck · 2026-10-18
 
 - **Source mapping:** Immutable upstream tag `minipass-flush@1.0.7` and

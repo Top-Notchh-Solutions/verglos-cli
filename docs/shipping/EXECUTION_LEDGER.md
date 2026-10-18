@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · LIC-002 company disposition
+
+- **Decision:** Anurag Yadav, Owner of Top Notchh Solutions and Verglos and
+  the designated company/legal reviewer, approved the exact current
+  licensing/redistribution treatment with conditions. The disposition covers
+  the operator-only Trivy and detect-secrets boundaries, sanitized fixtures,
+  first-party bounded Hunt catalog, required notices/attribution, and
+  descriptive trademark use; it excludes publication, premium-feed
+  distribution, customer acceptance, and AppSec conclusions.
+- **Evidence:** `docs/shipping/legal/legal-company-decision-2026-10-18.md`.
+- **Disposition:** LIC-002 is checked. LIC-003, distribution, trusted
+  publication, provider, customer, independent AppSec, and final-acceptance
+  rows remain open under their own contracts. Score is **231/49/280 (82.5%)**.
+- **Boundary:** No public repository, package registry, provider, database,
+  customer, browser, or Production state changed. No squash, rebase,
+  force-push, empty, duplicate, artificial, or irrelevant contribution was
+  used.
+
 ## 2026-10-18 · LIC-002 upstream exact-source recheck
 
 - **Verification:** The exact `minipass-flush@1.0.7` upstream `LICENSE.md`

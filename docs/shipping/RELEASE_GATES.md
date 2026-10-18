@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · LIC-002 company disposition reconciled
+
+The authorized owner/company reviewer recorded the required exact-scope
+licensing and redistribution disposition as **approved with conditions**.
+The conditions preserve the operator-only external-engine boundary, sanitized
+fixture scope, first-party bounded Hunt content, notices/attribution, and
+descriptive trademark treatment; they exclude npm publication, premium-feed
+distribution, customer acceptance, and any independent AppSec conclusion.
+
+`LIC-002` is checked. `LIC-003`, `DIST-001`–`DIST-003`, trusted publication,
+provider, customer, AppSec, and final-acceptance gates remain open for their
+own evidence and are not waived by the company disposition. Score is
+**231/49/280 (82.5%)**. Evidence:
+`docs/shipping/legal/legal-company-decision-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 current provider-readiness boundary
 
 A fresh read-only audit of the current public CLI/Web heads, the Vercel

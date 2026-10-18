@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · close LIC-002 with scoped company conditions
+
+- **Decision:** Record the owner/company licensing disposition as
+  **approved with conditions** for the exact current non-published package
+  and source boundary.
+- **Reason:** The existing technical inventory, exact upstream-source
+  rechecks, package qualification, and owner authorization now have a single
+  per-area decision covering external engines, fixtures, Hunt content,
+  notices, redistribution, and trademark restrictions. The treatment keeps
+  unresolved mechanical classifications visible and does not authorize
+  publication.
+- **Disposition:** Check `LIC-002`. Keep `LIC-003`, distribution, trusted
+  publication, provider, customer, independent AppSec, and final-acceptance
+  rows open until their own criteria pass. Score is **231/49/280 (82.5%)**.
+- **Evidence:** `docs/shipping/legal/legal-company-decision-2026-10-18.md`.
+
 ## 2026-10-18 · retain LIC-002 after exact upstream source recheck
 
 - **Decision:** Accept the exact-source observation for

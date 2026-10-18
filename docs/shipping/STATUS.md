@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · LIC-002 company disposition recorded
+
+The authorized owner/company reviewer, Anurag Yadav of Top Notchh Solutions
+and Verglos, recorded an exact-scope licensing and redistribution disposition
+as **approved with conditions**. The decision covers the existing operator-only
+Trivy and detect-secrets boundaries, sanitized fixtures, first-party bounded
+Hunt catalog, upstream notices/attribution, trademark wording, and the exact
+non-published package qualification surface. It explicitly excludes npm
+publication, premium-feed distribution, customer acceptance, and any AppSec
+conclusion. LIC-002 is now checked; LIC-003, distribution, trusted
+publication, provider, customer, independent AppSec, and final-acceptance rows
+retain their own contracts. Score is **231 checked / 49 open / 280 total
+(82.5%)**. Evidence:
+`docs/shipping/legal/legal-company-decision-2026-10-18.md`.
+
 ## 2026-10-18 · LIC-002 upstream source verification
 
 The exact tagged upstream `minipass-flush@1.0.7` license source is now
