@@ -54,8 +54,12 @@ Hosted `typecheck-and-schema` run `39066991842` / job `117496612635`,
 GitGuardian Security Checks, Vercel, and Vercel Preview Comments all passed.
 PR #186 then merged normally as `79be2683c05d87e27a1c2d935d906050630dcf5c`;
 the public history retains both substantive implementation commits and no
-squash merge was used. A Production deployment and live provider delivery
-have not been claimed by this packet.
+squash merge was used. Post-merge Vercel inspection shows deployment
+`dpl_DpfbkEJw8DiGKXkXNBCQrarRU4yh` in `READY` state for the merged commit,
+aliased to `verglos.com` and `www.verglos.com`; its build output includes both
+`api/v1/webhooks/scm/[provider]` and
+`api/v1/webhooks/scm/[provider]/[installationId]`. This proves deployment
+availability only, not a signed provider delivery or repository binding.
 
 ## Gate disposition
 

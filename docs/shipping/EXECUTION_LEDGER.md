@@ -16,7 +16,9 @@
 - **Disposition:** This is implementation and hosted-CI progress only;
   provider installation, hosted credentials, signed live delivery, and
   reconciliation evidence remain open for `TEAM-WEB-006` and `TEAM-CLI-001`.
-  Production rollout and live provider delivery are not claimed. No checkbox
+  Vercel deployment `dpl_DpfbkEJw8DiGKXkXNBCQrarRU4yh` is READY for the
+  merged commit and aliases `verglos.com`/`www.verglos.com`; this proves
+  deployment availability only, not live provider delivery. No checkbox
   changed; score remains **230/50/280 (82.1%)**.
   No squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
   public-doc contribution commit was used.

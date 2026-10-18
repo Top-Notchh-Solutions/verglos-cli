@@ -19,7 +19,10 @@
 - **Acceptance mapping:** PR #186 merged normally, but this is implementation
   and hosted-CI progress only; provider installation, hosted credentials,
   signed live delivery, and reconciliation evidence are still required by
-  `TEAM-WEB-006`.
+  `TEAM-WEB-006`. Vercel deployment
+  `dpl_DpfbkEJw8DiGKXkXNBCQrarRU4yh` is READY for the merged commit and
+  aliases `verglos.com`/`www.verglos.com`; deployment availability does not
+  prove provider delivery or repository binding.
   `TEAM-CLI-001` remains separately open. No AppSec, legal, customer,
   release, or final-acceptance gate changed; score remains
   **230/50/280 (82.1%)**.

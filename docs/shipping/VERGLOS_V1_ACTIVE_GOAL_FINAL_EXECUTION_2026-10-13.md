@@ -30,6 +30,13 @@ public history preserves the two substantive commits and a normal merge; no
 squash was used. Local Node/pnpm versions differed from the repository’s normal
 Node 22/pnpm 9.15.9 expectation, so hosted CI was used as the canonical check.
 
+Post-merge Vercel inspection shows deployment
+`dpl_DpfbkEJw8DiGKXkXNBCQrarRU4yh` in `READY` state for the merged commit,
+aliased to `verglos.com` and `www.verglos.com`; the build output contains both
+the stable provider route and the installation-bound route. This records
+deployment availability only. It does not prove signed provider delivery,
+repository binding, or reconciliation evidence.
+
 This advances implementation and hosted-CI qualification of `TEAM-WEB-006`
 only. The row stays unchecked until provider installation, hosted credentials,
 signed live delivery, and reconciliation evidence exist. `TEAM-CLI-001` also

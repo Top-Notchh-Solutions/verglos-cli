@@ -15,8 +15,10 @@ Vercel, and Preview Comments passed. The PR then merged normally as
 This advances the SCM Web implementation and hosted-CI surface only.
 `TEAM-WEB-006` remains open for provider installation, hosted credentials,
 signed live delivery, and reconciliation evidence; `TEAM-CLI-001` remains open
-for its separate provider activation contract. Production rollout and live
-provider delivery are not claimed here. No AppSec/Hunt, legal, customer,
+for its separate provider activation contract. Post-merge Vercel deployment
+`dpl_DpfbkEJw8DiGKXkXNBCQrarRU4yh` is READY for the merged commit and aliases
+`verglos.com`/`www.verglos.com`; this does not satisfy provider delivery or
+repository-binding evidence. No AppSec/Hunt, legal, customer,
 release, or final-acceptance gate changed. Score remains **230 checked / 50 open
 / 280 total (82.1%)**. Evidence:
 `evidence/team-web-006-stable-github-webhook-pr186-2026-10-18.md`.
