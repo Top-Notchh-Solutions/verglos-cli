@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · DIST-002/003 release-workflow contract revalidation
+
+- **Source:** CLI normal merge `9eba5102`; disposable clean worktree.
+- **Results:** release/publishing/platform-matrix/package-surface contracts
+  **11/11**, package contents audit for 7 public packages, public-boundary
+  audit, and diff check all passed.
+- **Boundary:** No npm publish, tag, registry access, OIDC claim, protected
+  environment approval, or attestation occurred.
+- **Disposition:** `DIST-002` and `DIST-003` remain open for trusted protected
+  publication, immutable artifacts/attestation, legal release clearance, and
+  final acceptance.
+- **Evidence:** `evidence/dist-002-003-current-cli-workflow-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-001 current CLI package requalification
 
 - **Source:** CLI normal merge `9eba5102`; disposable worktree; no public

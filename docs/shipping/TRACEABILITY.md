@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## DIST-002/003 release-workflow contract revalidation · 2026-10-18
+
+- **Source mapping:** CLI normal merge `9eba5102`.
+- **Verification mapping:** Publishing, platform-matrix, release-artifact,
+  and package-surface contracts passed **11/11**; 7-package contents and
+  public-boundary audits passed.
+- **Acceptance mapping:** Implementation-side checks pass, but protected
+  trusted publication, immutable attestation, legal release clearance, and
+  final acceptance remain absent. `DIST-002`/`DIST-003` stay unchecked.
+- **Evidence:** `evidence/dist-002-003-current-cli-workflow-revalidation-2026-10-18.md`.
+
 ## DIST-001 current CLI package requalification · 2026-10-18
 
 - **Source mapping:** CLI normal merge `9eba5102` after PR #129; no temporary

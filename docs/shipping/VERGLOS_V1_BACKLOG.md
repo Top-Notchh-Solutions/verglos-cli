@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · DIST-002/003 current release-workflow revalidation
+
+On CLI merge `9eba5102`, the release/publishing/platform-matrix/package-surface
+contract suite passed **11/11** with zero failures or skips. The 7-package
+contents audit and public-boundary audit also passed. This validates the
+workflow checks without publishing npm, creating a tag, or claiming trusted
+keyless attestation.
+
+`DIST-002` and `DIST-003` remain unchecked for protected environment approval,
+trusted OIDC/keyless publication identity, immutable publication/attestation,
+release-note/checksum delivery, legal release clearance, and final acceptance.
+No checkbox changed; score remains **232 checked / 48 open / 280 total
+(82.9%)**. Evidence:
+`docs/shipping/evidence/dist-002-003-current-cli-workflow-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-001 current CLI package requalification
 
 The current CLI normal merge `9eba5102a1c0f9d7ee13b28bb2cc28bb50766eae` was

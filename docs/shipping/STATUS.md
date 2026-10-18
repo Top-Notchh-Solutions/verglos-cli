@@ -1,5 +1,13 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · DIST-002/003 release-workflow contract revalidation
+
+On CLI merge `9eba5102`, release/publishing/platform-matrix/package-surface
+contracts passed **11/11**; the 7-package contents audit and public-boundary
+audit passed. No npm publication, tag, registry, or attestation occurred.
+Protected environment, trusted keyless identity, immutable artifact
+publication, legal release clearance, and final acceptance remain open.
+
 ## 2026-10-18 · DIST-001 current CLI package requalification
 
 The current CLI merge `9eba5102` was qualified in a disposable worktree:

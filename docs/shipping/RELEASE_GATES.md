@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · DIST-002/003 release-workflow contracts
+
+The current CLI merge `9eba5102` passed **11/11** release/publishing/
+platform-matrix/package-surface contract tests, plus 7-package contents and
+public-boundary audits. This is preparatory evidence only. Keep `DIST-002` and
+`DIST-003` open for protected trusted publication, immutable attestation,
+legal release clearance, and final acceptance. Score remains **232/48/280
+(82.9%)**. Evidence:
+`evidence/dist-002-003-current-cli-workflow-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-001 current package-surface requalification
 
 The current CLI merge `9eba5102` passed the disposable 7-archive pack,
