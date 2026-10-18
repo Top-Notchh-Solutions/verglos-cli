@@ -23,6 +23,29 @@ test("fetches, verifies, and persists a remote policy without exposing credentia
   assert.equal(result.resolved, true); assert.equal(result.source, "remote"); assert.equal(result.entry?.policyDigest, policyDocumentDigest(policy));
 });
 
+test("sends the bearer only to the exact tenant/repository policy route", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-route-binding-"));
+  const fixtureData = fixture();
+  let seenUrl = "";
+  let seenAuthorization = "";
+  const result = await fetchOrganizationPolicy({
+    organizationId: "org_acme",
+    repositoryId: "repo_app",
+    trustedKeys: fixtureData.trustedKeys,
+    cachePath: join(root, "policy.json"),
+    apiUrl: "https://example.test",
+    licenseKey: "synthetic-license",
+    fetchImpl: async (url, init) => {
+      seenUrl = String(url);
+      seenAuthorization = new Headers(init?.headers).get("authorization") ?? "";
+      return new Response(JSON.stringify(fixtureData.envelope), { status: 200 });
+    },
+  });
+  assert.equal(result.resolved, true);
+  assert.equal(seenUrl, "https://example.test/api/v1/organizations/org_acme/repositories/repo_app/policy");
+  assert.equal(seenAuthorization, "Bearer synthetic-license");
+});
+
 test("falls back to a verified cache when the remote is unavailable", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-cache-"));
   const fixtureData = fixture();
@@ -144,6 +167,27 @@ test("rejects an external policy endpoint before attaching credentials or making
     apiUrl: "https://example.test",
     licenseKey: "secret-not-output",
     endpoint: "https://attacker.example/collect",
+    fetchImpl: async () => {
+      requests += 1;
+      return new Response(JSON.stringify(fixtureData.envelope), { status: 200 });
+    },
+  });
+  assert.deepEqual(result, { resolved: false, reason: "unsafe-policy-endpoint" });
+  assert.equal(requests, 0);
+});
+
+test("rejects a same-origin policy endpoint that is not bound to the requested scope", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-route-widening-"));
+  const fixtureData = fixture();
+  let requests = 0;
+  const result = await fetchOrganizationPolicy({
+    organizationId: "org_acme",
+    repositoryId: "repo_app",
+    trustedKeys: fixtureData.trustedKeys,
+    cachePath: join(root, "policy.json"),
+    apiUrl: "https://example.test",
+    licenseKey: "secret-not-output",
+    endpoint: "/api/v1/organizations/org_acme/repositories/repo_other/policy",
     fetchImpl: async () => {
       requests += 1;
       return new Response(JSON.stringify(fixtureData.envelope), { status: 200 });
