@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · FINAL-WEB-004 public product-truth implementation merged normally as PR #187
+
+- **Public change:** Web PR #187, assigned to `anuragyadav-git`, contains
+  implementation commit `3061de0` and verification commit `11ef21a` for the
+  canonical public docs/truth pass. The public 2.0 direction page now derives
+  plans and capabilities from the truth registry; docs expose the actual local
+  `record create|sign|verify|pack` workflow; `attest` is compatibility-only;
+  hosted/provider/Hunt qualification boundaries remain visible.
+- **Verification:** local truth-registry **34/34**, focused truth tests
+  **7/7**, typecheck, build **47/47**, public-boundary audit, and diff check
+  passed. Hosted `typecheck-and-schema` run `39115971551` / job
+  `117641706961`, GitGuardian, Vercel, and Preview Comments passed. Preview
+  deployment `7152743216` completed successfully.
+- **Disposition:** normal merge commit
+  `832b357f5fa8809c5876ed00f0d1b2abb8f5c453` preserves both substantive
+  commits; no squash, rebase, force-push, empty, duplicate, artificial, or
+  irrelevant public-document contribution commit was used. This is
+  implementation evidence only. `FINAL-WEB-004` remains unchecked for its
+  full dependency and final-acceptance contract. No production deployment,
+  provider event, legal/customer/field evidence, or AppSec result was claimed.
+  Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-004-public-truth-pr187-2026-10-18.md`.
+
 ## 2026-10-18 · stable GitHub App webhook merged normally as PR #186
 
 - **Public change:** Web PR #186, assigned to `anuragyadav-git`, contains

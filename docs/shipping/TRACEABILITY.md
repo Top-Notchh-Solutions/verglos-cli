@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-004 public product-truth implementation · 2026-10-18
+
+- **Source mapping:** Web PR #187, assigned to `anuragyadav-git`, preserves
+  implementation `3061de0518827a30f3ebae9291402b98c70c30ce` and verification
+  `11ef21a5003667b8fbc4f09348aa14173206b722` under normal merge
+  `832b357f5fa8809c5876ed00f0d1b2abb8f5c453`.
+- **Implementation mapping:** public docs now consume canonical plan and
+  capability truth, document the real local Release Record command shapes,
+  keep `attest` as a compatibility shell, and preserve hosted/provider/Hunt
+  qualification boundaries. The public repository received no private
+  tracker, credential, customer, legal, or generated-evidence file.
+- **Verification mapping:** local truth-registry **34/34**, focused tests
+  **7/7**, typecheck, build **47/47**, public-boundary audit, and diff check
+  passed. Hosted run `39115971551` / job `117641706961`, GitGuardian, Vercel,
+  and Preview Comments passed; Preview deployment `7152743216` completed.
+- **Acceptance mapping:** this is implementation and hosted-CI progress only.
+  `FINAL-WEB-004` remains unchecked for complete dependency and final
+  acceptance evidence. No AppSec-held, provider, legal, customer, release, or
+  other checkbox changed; score remains **230/50/280 (82.1%)**.
+- **History:** no squash, rebase, force-push, empty, duplicate, artificial,
+  or irrelevant documentation-only contribution commit.
+- **Evidence:** `evidence/final-web-004-public-truth-pr187-2026-10-18.md`.
+
 ## TEAM-WEB-006 stable GitHub App webhook entrypoint · 2026-10-18
 
 - **Source mapping:** Web PR #186, implementation commit `75f0a87`, route

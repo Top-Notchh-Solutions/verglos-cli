@@ -9,6 +9,52 @@
 **Value authority:** FINAL_V1_PAYING_VALUE_BLUEPRINT_2026-10-13.md
 **Coverage authority:** FINAL_V1_FEATURE_COVERAGE_MATRIX_2026-10-13.md
 
+## 0.0w Current FINAL-WEB-004 public product-truth checkpoint — 2026-10-18
+
+The next dependency-ready public Web slice is complete. PR #187, assigned to
+`anuragyadav-git`, merged normally as
+`832b357f5fa8809c5876ed00f0d1b2abb8f5c453` from two substantive commits:
+implementation `3061de0518827a30f3ebae9291402b98c70c30ce` and verification
+`11ef21a5003667b8fbc4f09348aa14173206b722`. No squash, rebase, force-push,
+empty, duplicate, artificial, or irrelevant public-document contribution
+commit was used.
+
+The public 2.0 direction page now derives plan and capability projection from
+the canonical truth registry. The public docs document the real local
+`record create`, `record sign`, `record verify`, and `record pack` command
+shapes; `attest` is explicitly a compatibility shell. The public surface
+states JavaScript/TypeScript coverage, bounded Hunt assurance, hosted/provider
+qualification boundaries, and no bundled third-party engine attribution claim.
+The new contract tests protect these truth boundaries without adding private
+shipping material to the public repository.
+
+Verification passed:
+
+- local `pnpm test:truth-registry`: **34/34**;
+- focused truth tests: **7/7**;
+- `pnpm typecheck`;
+- `pnpm build`: **47/47** pages;
+- `node scripts/check-public-boundary.mjs`;
+- `git diff --check`;
+- hosted `typecheck-and-schema` run `39115971551` / job `117641706961`;
+- GitGuardian, Vercel, and Vercel Preview Comments;
+- Preview deployment `7152743216` completed successfully.
+
+This is implementation and hosted-CI progress only. `FINAL-WEB-004` remains
+unchecked because its full dependency and final-acceptance contract is not
+complete. No post-merge Production deployment for `832b357f` was claimed at
+packet time. No AppSec, provider, legal, customer, release, field, or other
+checkbox changed. The live score remains **230 checked / 50 open / 280 total
+(82.1%)**. Evidence:
+`evidence/final-web-004-public-truth-pr187-2026-10-18.md`.
+
+The next backlog row in file order remains `TEAM-CLI-001`. Its code-side
+implementation is revalidated, but its separate signer/trust-root activation,
+authorized SCM provider installation, hosted policy/fetch/cache/offline/
+cross-tenant observation, and reconciliation artifacts are still missing.
+`TEAM-CLI-002` and `TEAM-WEB-006` remain dependent. The independent Hunt
+AppSec review remains last and unchanged.
+
 ## 0.0v Current stable SCM webhook implementation checkpoint — 2026-10-18
 
 The next eligible implementation slice is complete in public Web PR #186,

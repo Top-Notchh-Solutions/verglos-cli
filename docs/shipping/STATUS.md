@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · public product-truth docs merged normally as PR #187
+
+Web PR #187, assigned to `anuragyadav-git`, adds the next real FINAL-WEB-004
+implementation slice: public docs now derive plan/capability truth from the
+canonical registry, document the actual local Release Record command shapes,
+keep `attest` compatibility-only, and preserve hosted/provider/Hunt
+qualification boundaries. Implementation commit `3061de0` and verification
+commit `11ef21a` remain intact under normal merge commit
+`832b357f5fa8809c5876ed00f0d1b2abb8f5c453`; no squash merge was used.
+
+Local truth-registry tests passed **34/34**, focused truth tests **7/7**,
+typecheck, build **47/47**, public-boundary audit, and diff check passed.
+Hosted `typecheck-and-schema` run `39115971551` / job `117641706961`,
+GitGuardian, Vercel, and Preview Comments passed. Preview deployment
+`7152743216` completed successfully. No post-merge Production deployment for
+the new merge was claimed at packet time.
+
+This advances implementation evidence for `FINAL-WEB-004` only. The row
+remains unchecked for its complete dependency and final-acceptance contract;
+no AppSec, provider, legal, customer, release, or other checkbox changed.
+Score remains **230 checked / 50 open / 280 total (82.1%)**. Evidence:
+`evidence/final-web-004-public-truth-pr187-2026-10-18.md`.
+
 ## 2026-10-18 · stable GitHub App webhook merged normally as PR #186
 
 Web PR #186, assigned to `anuragyadav-git`, adds the stable app-level
