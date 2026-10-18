@@ -110,6 +110,48 @@ test("client projection upload rejects a server digest that does not match the p
   }
 });
 
+test("client projection upload binds a caller-supplied endpoint to the organization project route", async () => {
+  const files = await fixture();
+  let called = false;
+  try {
+    const result = await uploadClientProjection({
+      projectionPath: files.projectionPath,
+      approvalPath: files.approvalPath,
+      organizationId: projection.organizationId,
+      projectId: "project_1",
+      apiUrl: "https://verglos.test",
+      licenseKey: "license-sentinel",
+      endpoint: "/api/v1/organizations/org_acme/projects/project_1/client-projections?redirect=https://attacker.test",
+      fetchImpl: async () => {
+        called = true;
+        return new Response(JSON.stringify({ projectionDigest: approval.projectionDigest, idempotent: false }), { status: 201 });
+      },
+    });
+    assert.deepEqual(result, { status: "error", reason: "invalid_input" });
+    assert.equal(called, false);
+  } finally {
+    await import("node:fs/promises").then(({ rm }) => rm(files.root, { recursive: true, force: true }));
+  }
+});
+
+test("client projection upload rejects an unsafe or unbounded server identifier", async () => {
+  const files = await fixture();
+  try {
+    const result = await uploadClientProjection({
+      projectionPath: files.projectionPath,
+      approvalPath: files.approvalPath,
+      organizationId: projection.organizationId,
+      projectId: "project_1",
+      apiUrl: "https://verglos.test",
+      licenseKey: "license-sentinel",
+      fetchImpl: async () => new Response(JSON.stringify({ id: "custody_1\nleak", projectionDigest: approval.projectionDigest, idempotent: false }), { status: 201 }),
+    });
+    assert.deepEqual(result, { status: "error", endpoint: "https://verglos.test/api/v1/organizations/org_acme/projects/project_1/client-projections", reason: "invalid_response" });
+  } finally {
+    await import("node:fs/promises").then(({ rm }) => rm(files.root, { recursive: true, force: true }));
+  }
+});
+
 test("client projection upload cancels an oversized streamed response", async () => {
   const files = await fixture();
   let cancelled = false;
