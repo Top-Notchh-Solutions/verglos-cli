@@ -7,6 +7,7 @@ import { promisify } from "node:util";
 
 const defaultRun = promisify(execFile);
 const MAX_ARTIFACT_BYTES = 16 * 1024 * 1024;
+const MAX_TOOL_BYTES = 128 * 1024 * 1024;
 const MAX_TOOL_OUTPUT_BYTES = 128 * 1024;
 const MAX_TOOL_TIMEOUT_MS = 120_000;
 const JSON_ARTIFACTS = new Map([
@@ -137,7 +138,7 @@ async function validateSpdx(artifact, root, jar, run) {
   const jarPath = resolve(jar);
   try {
     const entry = await lstat(jarPath);
-    if (entry.isSymbolicLink() || !entry.isFile() || entry.size > MAX_ARTIFACT_BYTES) return { ...base, status: "failed", reason: "invalid-spdx-tool" };
+    if (entry.isSymbolicLink() || !entry.isFile() || entry.size > MAX_TOOL_BYTES) return { ...base, status: "failed", reason: "invalid-spdx-tool" };
   } catch (error) {
     return error?.code === "ENOENT" ? { ...base, status: "not-supported", reason: "official-spdx-tool-not-installed" } : { ...base, status: "failed", reason: "invalid-spdx-tool" };
   }
@@ -234,4 +235,4 @@ async function main() {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await main();
 
-export const STANDARD_VALIDATION_LIMITS = Object.freeze({ MAX_ARTIFACT_BYTES, MAX_TOOL_OUTPUT_BYTES, MAX_TOOL_TIMEOUT_MS });
+export const STANDARD_VALIDATION_LIMITS = Object.freeze({ MAX_ARTIFACT_BYTES, MAX_TOOL_BYTES, MAX_TOOL_OUTPUT_BYTES, MAX_TOOL_TIMEOUT_MS });

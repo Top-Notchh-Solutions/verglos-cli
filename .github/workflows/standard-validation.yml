@@ -60,7 +60,18 @@ jobs:
         run: npm install --global @microsoft/sarif-multitool@5.8.0
 
       - name: Install official CycloneDX validator
-        run: npm install --global @cdxgen/cdxgen@13.4.0 --omit=optional --ignore-scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          cyclonedx="$RUNNER_TEMP/cyclonedx"
+          curl --fail --silent --show-error --location \
+            https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.33.1/cyclonedx-linux-x64 \
+            --output "$cyclonedx"
+          printf '%s  %s\n' \
+            bfc8b2538da86fe239bc53658bbb63c1c8c510a293c1e6891aa5bea5d3c58746 \
+            "$cyclonedx" | sha256sum --check --strict
+          chmod 0755 "$cyclonedx"
+          printf 'CycloneDX CLI: %s\n' "$cyclonedx" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Install official SPDX validator
         shell: bash
@@ -94,13 +105,15 @@ jobs:
             cd "$artifact_root"
             COSIGN_PASSWORD='' cosign generate-key-pair
             COSIGN_PASSWORD='' cosign sign-blob --key cosign.key --bundle sigstore.bundle.json --tlog-upload=false sigstore.payload
+            mv cosign.pub sigstore.pub
+            rm -f cosign.key
           )
 
       - name: Run official standard validators
         shell: bash
         env:
           VERGLOS_SARIF_MULTITOOL: sarif-multitool
-          VERGLOS_CYCLONEDX_CLI: cdx-validate
+          VERGLOS_CYCLONEDX_CLI: ${{ runner.temp }}/cyclonedx
           VERGLOS_SPDX_TOOL_JAR: ${{ runner.temp }}/tools-java-2.0.7-jar-with-dependencies.jar
         run: |
           set -euo pipefail

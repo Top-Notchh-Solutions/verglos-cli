@@ -9,7 +9,8 @@ const runner = await readFile(join(process.cwd(), "scripts", "verify-standard-va
 test("standard-validation workflow installs pinned official validators", () => {
   assert.match(workflow, /@microsoft\/sarif-multitool@5\.8\.0/u);
   assert.match(workflow, /VERGLOS_SARIF_MULTITOOL: sarif-multitool/u);
-  assert.match(workflow, /@cdxgen\/cdxgen@13\.4\.0/u);
+  assert.match(workflow, /cyclonedx-cli\/releases\/download\/v0\.33\.1\/cyclonedx-linux-x64/u);
+  assert.match(workflow, /bfc8b2538da86fe239bc53658bbb63c1c8c510a293c1e6891aa5bea5d3c58746/u);
   assert.match(workflow, /tools-java-2\.0\.7-jar-with-dependencies\.jar/u);
   assert.match(workflow, /bf99a8b2ffbea238c1451c6b4be568870f18b4aac93d0dbff755f2b0b7ce43f3/u);
   assert.match(workflow, /sigstore\/cosign-installer@v4\.1\.2/u);
@@ -27,6 +28,7 @@ test("standard-validation workflow qualifies all release evidence formats and up
   assert.match(workflow, /upload-artifact@v4/u);
   assert.match(workflow, /standard-validation\.json/u);
   assert.match(workflow, /sigstore\.bundle\.json/u);
+  assert.match(workflow, /mv cosign\.pub sigstore\.pub/u);
 });
 
 test("standard-validation runner uses argv execution and redacts validator output", () => {
