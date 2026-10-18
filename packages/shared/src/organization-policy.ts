@@ -40,6 +40,11 @@ export type OrganizationPolicyCacheEntry = Readonly<{
   repositoryId: string;
   policy: PolicyDocument;
   policyDigest: string;
+  /** The signed envelope fields are retained so offline cache use remains authenticated. */
+  keyId: string;
+  signature: string;
+  signer: Readonly<{ id: string; issuer: string }>;
+  signedAt: string;
   cachedAt: string;
   expiresAt: string;
   source: "remote" | "cache";
@@ -100,13 +105,26 @@ export function resolveOrganizationPolicy(input: Readonly<{
     const verified = verifyOrganizationPolicy(input.remote, input, input.trustedKeys);
     if (!verified.verified) return { resolved: false, reason: verified.reason };
     const cachedAt = new Date(nowMs).toISOString();
-    return { resolved: true, entry: Object.freeze({ organizationId: input.organizationId, repositoryId: input.repositoryId, policy: verified.envelope.policy, policyDigest: verified.policyDigest, cachedAt, expiresAt: new Date(nowMs + input.cacheTtlMs).toISOString(), source: "remote" }) };
+    return { resolved: true, entry: Object.freeze({ organizationId: input.organizationId, repositoryId: input.repositoryId, policy: verified.envelope.policy, policyDigest: verified.policyDigest, keyId: verified.envelope.keyId, signature: verified.envelope.signature, signer: Object.freeze({ ...verified.envelope.signer }), signedAt: verified.envelope.signedAt, cachedAt, expiresAt: new Date(nowMs + input.cacheTtlMs).toISOString(), source: "remote" }) };
   }
   const cached = input.cached;
   if (!cached) return { resolved: false, reason: input.offline ? "offline-unavailable" : "invalid-envelope" };
   if (cached.organizationId !== input.organizationId) return { resolved: false, reason: "organization-mismatch" };
   if (cached.repositoryId !== input.repositoryId) return { resolved: false, reason: "repository-mismatch" };
   if (cached.policyDigest !== policyDocumentDigest(cached.policy)) return { resolved: false, reason: "policy-digest-mismatch" };
+  const cachedVerification = verifyOrganizationPolicy({
+    schemaId: ORGANIZATION_POLICY_SCHEMA.id,
+    schemaVersion: ORGANIZATION_POLICY_SCHEMA.version,
+    organizationId: cached.organizationId,
+    repositoryId: cached.repositoryId,
+    policy: cached.policy,
+    policyDigest: cached.policyDigest,
+    keyId: cached.keyId,
+    signer: cached.signer,
+    signedAt: cached.signedAt,
+    signature: cached.signature,
+  }, input, input.trustedKeys);
+  if (!cachedVerification.verified) return { resolved: false, reason: cachedVerification.reason };
   if (Date.parse(cached.expiresAt) <= nowMs) return { resolved: false, reason: "cache-expired" };
   return { resolved: true, entry: Object.freeze({ ...cached, source: "cache" }) };
 }
