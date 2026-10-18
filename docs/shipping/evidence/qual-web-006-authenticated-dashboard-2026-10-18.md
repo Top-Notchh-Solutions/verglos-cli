@@ -26,6 +26,10 @@ The existing authenticated owner page was reused; no tab or window was opened.
   **100**, Agentic Browsing **100**; **52 passed / 0 failed**.
 - Mobile Lighthouse: Accessibility **100**, Best Practices **100**, SEO
   **100**, Agentic Browsing **100**; **52 passed / 0 failed**.
+- After Web PR #198, the authenticated policy route at
+  `https://verglos.com/orgs/top-notchh-solutions/policy` also passed desktop
+  and mobile Lighthouse with Accessibility, Best Practices, SEO, and Agentic
+  Browsing all **100**; **54 passed / 0 failed** on each run.
 - Production desktop performance trace on Fast 4G, CPU 1x: LCP **506 ms**,
   CLS **0.00**; field/CrUX data unavailable for this page.
 - The pre-fix authenticated audit had SEO 92 solely because the canonical link
@@ -35,6 +39,8 @@ The browser tool retained raw reports in its temporary paths:
 
 - Desktop Lighthouse: `/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/chrome-devtools-mcp-r2cwnY/report.json`
 - Mobile Lighthouse: `/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/chrome-devtools-mcp-RSp9O0/report.json`
+- Policy desktop Lighthouse: `/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/chrome-devtools-mcp-hRu2yi/report.json`
+- Policy mobile Lighthouse: `/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/chrome-devtools-mcp-d9Dd85/report.json`
 
 ## Gate disposition
 

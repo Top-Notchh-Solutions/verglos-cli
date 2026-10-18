@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · QUAL-WEB-006 authenticated dashboard section recheck
+
+Web PR #198, `Canonicalize authenticated dashboard sections`, merged normally
+as `27b6f73414e2df0499a268898474b774dc45a550` after the full hosted Web gate
+passed. The bounded canonical helper now covers every organization dashboard
+section, including policy, while traversal-shaped and oversized values fall
+back to `/orgs`. The existing authenticated owner tab rechecked the policy
+route at the Ready Production deployment and Lighthouse passed **54/54** with
+zero failures on desktop and mobile: Accessibility, Best Practices, SEO, and
+Agentic Browsing each scored **100**.
+
+This closes the observed canonical metadata defect only. `QUAL-WEB-006`
+remains unchecked for human screen-reader, large-dataset, complete field-CWV,
+and final acceptance evidence. Score remains **232 checked / 48 open / 280
+total (82.9%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-authenticated-dashboard-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 post-merge Preview policy/provider recheck
 
 Web PR #195, `Bound GitHub App provider requests`, merged normally with merge
