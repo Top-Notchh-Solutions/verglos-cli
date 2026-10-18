@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-19 · TEAM-CLI-001 exact organization-policy route binding
+
+CLI PR #147 merged normally as `5bf7ae70`, preserving implementation commit
+`b761dee4` and regression-test commit `e28d831a`. The organization-policy
+fetcher now requires the exact tenant/repository policy route and rejects a
+same-origin alternate route before attaching bearer authorization. Focused
+policy tests **10/10**, workspace build **8/8**, CLI typecheck, full CLI tests,
+public-boundary audit, and all **12/12** protected PR checks passed.
+
+This advances implementation only; the `TEAM-CLI-001` checkbox remains open
+for valid mapped paid/non-production entitlement, authenticated signed hosted
+fetch/cache/offline/expiry/cross-tenant/reconciliation evidence, and provider
+delivery/reconciliation. No AppSec state changed; score remains **232 checked /
+48 open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-exact-policy-route-pr147-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-CLI-001 / STUDIO-CLI-001 Studio projection upload hardening
 
 CLI PR #146 merged normally as
