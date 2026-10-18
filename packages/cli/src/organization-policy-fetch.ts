@@ -73,6 +73,7 @@ export async function fetchOrganizationPolicy(input: Readonly<{
       const response = await (input.fetchImpl ?? fetch)(`${apiUrl}${endpoint}`, {
         method: "GET",
         headers: { Accept: "application/json", Authorization: `Bearer ${licenseKey}` },
+        redirect: "error",
         signal: controller.signal,
       });
       status = response.status;
