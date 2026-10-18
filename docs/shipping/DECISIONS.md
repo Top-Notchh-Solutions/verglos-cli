@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-CLI-001 after isolated Preview fixture attempt
+
+- **Decision:** Do not treat the isolated Preview test-auth organization as a
+  substitute for the real organization-policy entitlement. Keep
+  `TEAM-CLI-001` unchecked.
+- **Reason:** The fixture organization had no project or policy row, while
+  the real organization was denied by tenant authorization and the valid
+  founder license was not mapped to the requested policy binding. The route's
+  HTTP 404 `policy unavailable` is the correct fail-closed result.
+- **Next action:** Use an authorized paid/non-production fixture or approved
+  isolated Test Mode entitlement path, then capture the signed CLI fetch,
+  visible digest, cache/offline/expiry, cross-tenant denial, and
+  reconciliation matrix. Do not bypass the license or change Production.
+- **Boundary:** This decision is unrelated to the held Hunt AppSec review and
+  does not reopen any other gate. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-preview-fixture-scope-2026-10-18.md`.
+
 ## 2026-10-18 · accept organization App token/scope read-back as provider evidence
 
 - **Decision:** Accept the signed App identity and installation repository

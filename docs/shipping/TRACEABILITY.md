@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 isolated Preview fixture scope · 2026-10-18
+
+- **Source/deployment mapping:** Web commit
+  `f8b420e012b69c9d8b6052c9da16c1633582b4c7`, Preview deployment
+  `dpl_GKL8suKuzpUNBXnCf275vHfw4AGE`, READY, 47/47 generated pages.
+- **Hosted mapping:** The isolated Preview test-auth organization returned
+  HTTP 200 but no projects; the real organization returned HTTP 403 and the
+  production policy route returned HTTP 404 `policy unavailable` without a
+  valid mapped policy entitlement. No cross-tenant data was returned.
+- **Acceptance mapping:** This proves fixture isolation and fail-closed tenant
+  authorization only. It does not prove a signed policy fetch, cache/offline
+  behavior, or provider delivery. `TEAM-CLI-001` remains unchecked; its
+  dependent TEAM rows remain open. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-preview-fixture-scope-2026-10-18.md`.
+
 ## QUAL-WEB-006 CLI authorization status announcements · 2026-10-18
 
 - **Source mapping:** Web PR #191 merged normally as

@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-TEAM-CLI-001 isolated Preview fixture cannot qualify entitlement
+
+- **Risk:** A successful Preview test-auth organization listing could be
+  mistaken for a live organization-policy entitlement and signed CLI fetch.
+- **Mitigation:** The isolated deployment was checked directly: the fixture
+  organization had no projects/policies, the real organization returned HTTP
+  403, and the valid founder license returned HTTP 404 `policy unavailable`
+  for the unbound policy route. No license or tenant check was bypassed.
+- **Status:** `TEAM-CLI-001` remains open for an authorized mapped license and
+  the remote/cache/offline/expiry/cross-tenant/reconciliation matrix.
+  Dependent TEAM rows remain open; this is separate from the held AppSec gate.
+  Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-preview-fixture-scope-2026-10-18.md`.
+
 ## 2026-10-18 · R-ENT-CLI-001 current runner implementation requalified
 
 - **Risk:** Passing bounded protocol tests could be mistaken for proof that an

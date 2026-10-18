@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 isolated Preview entitlement boundary
+
+The READY Preview deployment `dpl_GKL8suKuzpUNBXnCf275vHfw4AGE` confirmed
+that the test-auth organization is isolated and contains no project/policy
+row. The real organization was denied with HTTP 403, and the valid founder
+license produced HTTP 404 `policy unavailable` for the unbound policy route.
+This preserves the provider/entitlement gate rather than bypassing it.
+
+Keep `TEAM-CLI-001`, `TEAM-CLI-002`, and `TEAM-WEB-006` open until a valid
+mapped license and the authenticated signed policy fetch/cache/offline/
+cross-tenant/provider reconciliation evidence exist. This is a non-AppSec
+provider/entitlement boundary. Score remains **232 checked / 48 open / 280
+total (82.9%)**. Evidence:
+`evidence/team-cli-001-preview-fixture-scope-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 CLI authorization result announcements requalified
 
 Web PR #191 merged normally as `ed7febf0340a7d238fbc47bd53bc5a4a7f84bfb9`,

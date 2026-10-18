@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 isolated Preview fixture scope
+
+The fresh hidden-auth Preview deployment `dpl_GKL8suKuzpUNBXnCf275vHfw4AGE`
+from Web commit `f8b420e012b69c9d8b6052c9da16c1633582b4c7` reached READY with
+47/47 generated pages. Its test-auth organization was isolated, returned no
+projects, and therefore had no policy row to sign or fetch. Requests for the
+real production organization were denied with HTTP 403, while the existing
+founder license status was valid but the production policy route correctly
+returned HTTP 404 because no license-to-organization/repository policy binding
+was available. The existing Verglos Chrome page was restored without sign-in,
+checkout, or any new window/tab.
+
+This is honest tenant/fixture-boundary evidence, not `TEAM-CLI-001`
+acceptance. The row remains open for a valid mapped license and the CLI
+signed fetch/cache/offline/cross-tenant/reconciliation matrix. Score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-preview-fixture-scope-2026-10-18.md`.
+
 ## 2026-10-18 · organization SCM App token/scope read-back
 
 The App identity endpoint returned HTTP `200`, the signed installation-token

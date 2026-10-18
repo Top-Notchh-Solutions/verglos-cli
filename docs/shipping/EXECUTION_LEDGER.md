@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 isolated Preview fixture scope
+
+- **Deployment:** Web commit `f8b420e012b69c9d8b6052c9da16c1633582b4c7`
+  deployed as READY Preview `dpl_GKL8suKuzpUNBXnCf275vHfw4AGE`; the build
+  generated 47/47 pages.
+- **Hosted result:** The Preview-only test-auth organization was visible, but
+  it had no projects or policy rows. The real production organization was
+  denied with HTTP 403. The valid founder license did not produce a policy
+  envelope because the production route returned HTTP 404 `policy unavailable`
+  for the absent organization/repository binding.
+- **Browser boundary:** The existing Verglos page 3 was restored to the
+  account page after Vercel Protection redirected a Preview checkout attempt
+  to login. No sign-in, checkout, new tab/window, or external write occurred.
+- **Disposition:** Keep `TEAM-CLI-001` unchecked. The next artifact is a
+  valid mapped license plus the authenticated CLI fetch/cache/offline/
+  cross-tenant/reconciliation matrix. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `docs/shipping/evidence/team-cli-001-preview-fixture-scope-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 CLI authorization status announcements
 
 - **Implementation:** Web PR #191 adds polite live-region semantics for a
