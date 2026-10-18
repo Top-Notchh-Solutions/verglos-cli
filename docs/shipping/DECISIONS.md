@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-CLI-001 after organization entitlement observation
+
+- **Decision:** Treat the authenticated organization Billing view as the
+  authoritative current entitlement observation and keep `TEAM-CLI-001`
+  unchecked.
+- **Observed:** `Top Notchh Solutions` is owned by the session, but its
+  effective plan is `free`, no active paid license exists, checkout is not
+  purchasable, and hosted records have no configured allowance. The two
+  Preview projects are visible; the Policy page does not show a visible
+  published version/list.
+- **Reason:** Owner authority permits company decisions but does not fabricate
+  a paid entitlement or a signed CLI policy-fetch observation. Do not bypass
+  the route or alter billing merely to satisfy the row.
+- **Next action:** Use an already authorized paid/non-production entitlement
+  fixture if one exists, then run and retain the complete CLI fetch/cache/
+  offline/expiry/cross-tenant/provider matrix.
+- **Evidence:** `evidence/team-cli-001-organization-entitlement-browser-observation-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-CLI-001 after isolated Preview fixture attempt
 
 - **Decision:** Do not treat the isolated Preview test-auth organization as a

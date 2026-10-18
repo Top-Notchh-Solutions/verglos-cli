@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 organization entitlement remains unqualified
+
+The authenticated owner organization page showed `Top Notchh Solutions` on
+the `free` plan with no active paid license, no purchasable checkout state,
+and no configured hosted-record allowance. Two Preview applications were
+visible, but the Policy page did not display a visible policy version/list.
+This is a real provider/entitlement boundary, not an AppSec hold.
+
+Keep `TEAM-CLI-001` and its dependent TEAM rows open until a valid mapped
+paid/non-production entitlement and the authenticated signed CLI fetch/cache/
+offline/expiry/cross-tenant/provider reconciliation evidence are recorded.
+Score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-organization-entitlement-browser-observation-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 isolated Preview entitlement boundary
 
 The READY Preview deployment `dpl_GKL8suKuzpUNBXnCf275vHfw4AGE` confirmed

@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 organization entitlement browser observation · 2026-10-18
+
+- **Hosted mapping:** The existing owner session showed the real
+  `Top Notchh Solutions` organization, effective plan `free`, no active paid
+  license, and no configured hosted-record allowance. It also showed the two
+  active Preview projects. The Policy page did not display a visible policy
+  version/list.
+- **Acceptance mapping:** This is direct entitlement/organization evidence,
+  not signed CLI fetch evidence. `TEAM-CLI-001` remains unchecked until a
+  valid mapped paid/non-production entitlement and the complete remote/cache/
+  offline/expiry/cross-tenant/provider matrix exist. Score remains
+  **232/48/280 (82.9%)**.
+- **Boundary:** Existing Chrome page 3 only; restored to `/account`; no
+  checkout, billing, provider, database, or public-repository write.
+- **Evidence:** `evidence/team-cli-001-organization-entitlement-browser-observation-2026-10-18.md`.
+
 ## TEAM-CLI-001 isolated Preview fixture scope · 2026-10-18
 
 - **Source/deployment mapping:** Web commit

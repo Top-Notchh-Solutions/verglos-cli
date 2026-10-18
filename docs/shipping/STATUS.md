@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 organization entitlement browser observation
+
+The existing authenticated Verglos page 3 identified `Top Notchh Solutions`
+as `Owner`. Its read-only Billing view showed effective plan `free`, no active
+paid license, no checkout/purchase state, and no configured hosted-record
+allowance. Its Applications view showed the two active Preview projects, while
+the Policy view displayed the lifecycle contract without a visible policy
+version/list. Page 3 was restored to `/account`; no new tab/window or billing
+write occurred.
+
+This is direct hosted entitlement evidence and keeps `TEAM-CLI-001` open. A
+valid mapped paid/non-production entitlement and the authenticated CLI
+signed-fetch/cache/offline/expiry/cross-tenant/provider matrix are still
+missing. Score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-organization-entitlement-browser-observation-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 isolated Preview fixture scope
 
 The fresh hidden-auth Preview deployment `dpl_GKL8suKuzpUNBXnCf275vHfw4AGE`

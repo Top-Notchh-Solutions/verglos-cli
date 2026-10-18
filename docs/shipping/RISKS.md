@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-TEAM-CLI-001 organization is not entitled for hosted policy
+
+- **Risk:** Organization ownership and visible Preview applications could be
+  mistaken for a paid Team entitlement and a usable signed policy fetch.
+- **Mitigation:** The authenticated Billing view showed `free`, no active paid
+  license, no checkout/purchase state, and no configured hosted-record
+  allowance; the Policy view showed no visible policy version/list. The row
+  remains open rather than using owner authority as a substitute.
+- **Status:** `TEAM-CLI-001` needs a valid mapped paid/non-production
+  entitlement and the complete signed CLI fetch/cache/offline/expiry/
+  cross-tenant/provider matrix. This is separate from AppSec.
+- **Evidence:** `evidence/team-cli-001-organization-entitlement-browser-observation-2026-10-18.md`.
+
 ## 2026-10-18 · R-TEAM-CLI-001 isolated Preview fixture cannot qualify entitlement
 
 - **Risk:** A successful Preview test-auth organization listing could be

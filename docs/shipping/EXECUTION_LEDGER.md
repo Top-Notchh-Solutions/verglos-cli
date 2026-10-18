@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 organization entitlement browser observation
+
+- **Session:** Existing Chrome page 3, authenticated to `Top Notchh Solutions`
+  as `Owner`; no new window or tab was opened.
+- **Billing:** The hosted view showed `free`, no active paid license, no
+  checkout/purchase state, and no configured hosted-record allowance.
+- **Organization:** The Applications view showed the active Preview
+  qualification and Web projects. The Policy view showed the lifecycle
+  explainer but no visible policy version/list.
+- **Disposition:** Keep `TEAM-CLI-001` open. A valid mapped paid/non-production
+  entitlement and the authenticated CLI signed-fetch/cache/offline/expiry/
+  cross-tenant/provider matrix remain required. Page 3 was restored to
+  `/account`; no billing or provider state changed.
+- **Evidence:** `docs/shipping/evidence/team-cli-001-organization-entitlement-browser-observation-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 isolated Preview fixture scope
 
 - **Deployment:** Web commit `f8b420e012b69c9d8b6052c9da16c1633582b4c7`
