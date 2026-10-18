@@ -64,6 +64,7 @@ export async function authorizedFetch(
         Authorization: `Bearer ${creds.licenseKey}`,
       },
       body: init.body === undefined ? undefined : JSON.stringify(init.body),
+      redirect: "error",
     });
     const json = await readBoundedJson(res);
     if (res.status === 401 || res.status === 402) {
