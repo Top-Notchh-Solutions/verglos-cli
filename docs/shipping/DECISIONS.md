@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-CLI-001 open after current-head revalidation
+
+- **Decision:** Accept the exact current-merge policy tests as code-side
+  evidence, but do not check `TEAM-CLI-001`.
+- **Reason:** The required provider installation and live hosted observation
+  cannot be established by local tests. The existing read-only provider audit
+  found no dedicated Verglos SCM App installation or Preview GitHub App
+  credential surface.
+- **Disposition:** Keep `TEAM-CLI-001`, dependent TEAM rows, and downstream
+  provider/customer acceptance rows open. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-policy-current-merge-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · retain DIST-001 open after current archive requalification
 
 - **Decision:** Accept the current merged-head package/archive result as

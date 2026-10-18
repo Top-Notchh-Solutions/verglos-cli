@@ -1,5 +1,17 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-TEAM-CLI-001 current policy client revalidated
+
+- **Risk:** Passing local policy tests could be mistaken for a live SCM/provider
+  installation and hosted organization-policy observation.
+- **Mitigation:** The exact merged head passed build, typecheck, focused policy
+  tests, and diff checks, while the evidence explicitly retains the provider
+  event and hosted fetch/cache/offline/cross-tenant requirements.
+- **Status:** Code-side risk revalidated; `TEAM-CLI-001` remains open for the
+  provider and hosted artifacts. Dependent TEAM rows, customer, AppSec, and
+  final-acceptance risks remain open. Score is **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-policy-current-merge-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · R-DIST-001 current archive boundary requalified
 
 - **Risk:** A passing archive and clean-consumer audit could be mistaken for

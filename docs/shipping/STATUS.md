@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 current merged-head policy revalidation
+
+The exact public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed
+workspace build **8/8**, CLI typecheck, focused organization-policy tests
+**10/10**, and `git diff --check`. This updates the code-side evidence to the
+current merged head. `TEAM-CLI-001` remains unchecked because the dedicated
+SCM provider installation, live signer/provider binding, canonical policy row,
+and authenticated hosted fetch/cache/offline/cross-tenant observation remain
+absent. Score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-policy-current-merge-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-001 current merged-head archive qualification
 
 The exact public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed

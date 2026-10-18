@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 current merged-head policy revalidation
+
+- **Verification:** The exact public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`
+  passed workspace build **8/8**, CLI typecheck, focused policy tests
+  **10/10**, and `git diff --check`.
+- **Disposition:** This refreshes code-side evidence only. `TEAM-CLI-001`
+  remains unchecked for the SCM provider installation, live signer/provider
+  binding, canonical policy row, and authenticated hosted qualification. Its
+  dependent TEAM rows remain open. Score remains **232/48/280 (82.9%)**.
+- **Boundary:** No provider, Vercel, database, registry, customer, deployment,
+  or Production state changed. No squash, rebase, force-push, empty, duplicate,
+  artificial, or irrelevant contribution was used.
+- **Evidence:** `docs/shipping/evidence/team-cli-001-policy-current-merge-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-001 current merged-head archive qualification
 
 - **Verification:** At public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`,

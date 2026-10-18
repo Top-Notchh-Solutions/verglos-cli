@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 current policy client revalidated
+
+The exact public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed
+workspace build **8/8**, CLI typecheck, focused organization-policy tests
+**10/10**, and diff check. This is code-side evidence only. The dedicated SCM
+provider installation, live signer/provider binding, canonical policy row, and
+authenticated hosted fetch/cache/offline/cross-tenant observation remain
+required, so `TEAM-CLI-001` and its dependent TEAM rows remain open. Score is
+**232/48/280 (82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-policy-current-merge-revalidation-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-001 current archive boundary requalified
 
 The exact public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed

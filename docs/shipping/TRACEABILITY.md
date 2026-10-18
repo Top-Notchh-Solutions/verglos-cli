@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 current merged-head policy revalidation · 2026-10-18
+
+- **Source mapping:** CLI implementation `8da4617d34196be2c9fcd86c166259ef82984f28`
+  is preserved by normal merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`.
+- **Verification mapping:** Workspace build **8/8**, CLI typecheck, the
+  organization-policy/cache/fetch suite **10/10**, and diff check passed.
+- **Acceptance mapping:** Code-side policy behavior is current-head verified,
+  but the SCM provider event, live signer/provider binding, canonical hosted
+  policy row, and hosted fetch/cache/offline/cross-tenant observation remain
+  missing. `TEAM-CLI-001` stays open; score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-policy-current-merge-revalidation-2026-10-18.md`.
+
 ## DIST-001 current merged-head archive qualification · 2026-10-18
 
 - **Source mapping:** Public CLI implementation `8da4617d34196be2c9fcd86c166259ef82984f28`
