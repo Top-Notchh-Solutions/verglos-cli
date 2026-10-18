@@ -1,6 +1,25 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0w Current authenticated account-state qualification checkpoint — 2026-10-18
+
+The existing authenticated Verglos Chrome page was used read-only at
+`https://verglos.com/account`; no new Chrome window or tab was opened. The
+observed state was the free-tier empty account state (`No license key yet`),
+not a populated customer dashboard. Lighthouse snapshot audits passed
+**28/28** with Accessibility, Best Practices, SEO, and Agentic Browsing at
+**100/100** on both desktop and mobile.
+
+This is only partial `QUAL-WEB-006` evidence. It does not prove paid/org
+dashboard behavior, customer acceptance, human screen-reader review,
+large-dataset behavior, complete-state coverage, or field CWV. No checkbox
+changed. The score remains **230 checked / 50 open / 280 total (82.1%)**.
+Evidence: `evidence/qual-web-006-account-state-lighthouse-2026-10-18.md`.
+The next dependency-ready work remains the next non-AppSec backlog row with
+its own missing artifact; provider, legal, customer, release, field, and
+final-acceptance rows stay open until their own contracts pass. Hunt/AppSec
+remains last and unchanged.
+
 **Owner:** Top Notchh Solutions  
 **Date:** 2026-10-13  
 **Status:** replacement active goal for execution  

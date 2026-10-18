@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · QUAL-WEB-006 authenticated account-state qualification
+
+The existing authenticated Verglos browser page was inspected read-only at
+`/account`; no new Chrome window or tab was opened. Lighthouse snapshot
+qualification passed **28/28** audits with Accessibility, Best Practices, SEO,
+and Agentic Browsing at **100/100** on both desktop and mobile. The observed
+page is the free-tier empty account state, not a populated customer dashboard.
+
+This is partial evidence for `QUAL-WEB-006`, not a row closure. Paid/org
+dashboard, customer acceptance, human screen-reader, large-dataset,
+complete-state, and field-CWV requirements remain open. Score remains **230
+checked / 50 unchecked / 280 total (82.1%)**. No AppSec, provider, legal,
+customer, release, or final-acceptance gate changed. Evidence:
+`docs/shipping/evidence/qual-web-006-account-state-lighthouse-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-004 public identity alignment
 
 Web PR #181, assigned to `anuragyadav-git`, merged normally as

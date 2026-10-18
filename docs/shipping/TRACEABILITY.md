@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 authenticated account-state qualification · 2026-10-18
+
+- **Source mapping:** Existing authenticated Verglos Chrome page at
+  `https://verglos.com/account`; read-only snapshot audit, with no new window
+  or tab and no account mutation.
+- **Observed state:** Free-tier empty account state (`No license key yet`),
+  not a populated customer dashboard.
+- **Verification mapping:** Lighthouse snapshot passed **28/28** audits with
+  Accessibility, Best Practices, SEO, and Agentic Browsing at **100/100** on
+  desktop and mobile. Raw reports are retained under
+  `evidence/qual-web-006-account-state-lighthouse-2026-10-18/` with hashes in
+  the evidence note.
+- **Acceptance mapping:** This advances only a partial `QUAL-WEB-006`
+  browser-state check. Paid/org dashboard, customer acceptance, human
+  screen-reader, large-data, complete-state, and field-CWV requirements remain
+  open; no checkbox changed. Score remains **230/50/280 (82.1%)**. No
+  AppSec, provider, legal, customer, release, or final-acceptance gate was
+  waived.
+- **Evidence:**
+  `evidence/qual-web-006-account-state-lighthouse-2026-10-18.md`.
+
 ## FINAL-WEB-004 public product-truth implementation · 2026-10-18
 
 - **Source mapping:** Web PR #187, assigned to `anuragyadav-git`, preserves

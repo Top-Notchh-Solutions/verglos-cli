@@ -10714,3 +10714,23 @@ it was not sent and contains no credentials or customer data.
   changed.
 - **Evidence:**
   `docs/shipping/evidence/public-repository-boundary-audit-2026-10-13.md`.
+# 2026-10-18 — QUAL-WEB-006 authenticated account-state browser qualification
+
+- **Scope:** Read-only Lighthouse snapshot of the existing authenticated
+  Verglos `/account` page. No new Chrome window or tab was opened and no
+  account, billing, organization, database, provider, or Production state was
+  changed.
+- **Observed state:** The page rendered the free-tier empty account state
+  (`No license key yet`) rather than a populated customer dashboard.
+- **Verification:** Desktop and mobile snapshot audits each passed **28/28**
+  with Accessibility, Best Practices, SEO, and Agentic Browsing at **100/100**
+  and zero failures. Raw reports and hashes are retained in the corresponding
+  private evidence directory.
+- **Boundary:** This advances only the empty-account-state evidence for
+  `QUAL-WEB-006`. Paid/org dashboard, customer acceptance, human
+  screen-reader, large-dataset, complete-state, and field-CWV evidence remain
+  open. No checkbox changed; score remains **230 checked / 50 open / 280 total
+  (82.1%)**. This is not AppSec, provider, legal, customer, release, or final-
+  acceptance evidence.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-account-state-lighthouse-2026-10-18.md`.

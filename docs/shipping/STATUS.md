@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · authenticated account-state browser qualification
+
+Using the existing authenticated Verglos Chrome page only, a read-only
+Lighthouse snapshot of `https://verglos.com/account` passed Accessibility,
+Best Practices, SEO, and Agentic Browsing at **100/100** on both desktop and
+mobile, with **28/28** audits passing and zero failures on each device. The
+observed state was the free-tier empty account state (`No license key yet`),
+not a populated customer dashboard.
+
+This advances only the empty-account-state portion of `QUAL-WEB-006`. It does
+not prove paid activation, dashboard workflows, customer acceptance,
+large-dataset behavior, screen-reader acceptance, complete-state coverage, or
+field CWV. No checkbox or score changed. The score remains **230 checked / 50
+open / 280 total (82.1%)**. Evidence:
+`evidence/qual-web-006-account-state-lighthouse-2026-10-18.md`.
+
 ## 2026-10-18 · public home browser qualification
 
 Using the existing Verglos Chrome page only, a fresh navigation audit of
