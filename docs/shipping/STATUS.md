@@ -7,8 +7,7 @@ Web PR #186, assigned to `anuragyadav-git`, adds the stable app-level
 `75f0a87` adds bounded installation-envelope extraction and delegation to the
 existing signed installation-bound handler; `c2f92f9` adds the route contract
 coverage. Local focused tests **8/8**, typecheck, build **47/47**,
-public-boundary audit, and diff check passed. The PR is open; GitGuardian,
-Vercel Preview Comments, and the Vercel deployment passed, while hosted
+public-boundary audit, and diff check passed. Hosted
 `typecheck-and-schema` run `39066991842` / job `117496612635`, GitGuardian,
 Vercel, and Preview Comments passed. The PR then merged normally as
 `79be2683c05d87e27a1c2d935d906050630dcf5c`; no squash merge was used.
