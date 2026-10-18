@@ -9,6 +9,7 @@ import {
   getTrustedApiOrigin,
   loadCredentials,
 } from "./credentials.js";
+import { readJsonResponse } from "./http-response.js";
 import { normalizeTier, type Tier } from "./tier-defaults.js";
 
 /**
@@ -160,11 +161,7 @@ async function fetchFromServer(
         : {},
     });
     if (!res.ok) return null;
-    const length = Number(res.headers.get("content-length") ?? "0");
-    if (Number.isFinite(length) && length > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
-    const bytes = await res.arrayBuffer();
-    if (bytes.byteLength > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
-    return parseCapabilitiesResponse(JSON.parse(new TextDecoder().decode(bytes)));
+    return parseCapabilitiesResponse(await readJsonResponse(res, MAX_CAPABILITIES_RESPONSE_BYTES));
   } catch {
     return null;
   }
