@@ -39,9 +39,10 @@ Production redeploy after that configuration reached READY as
 Security Layer homepage with HTTP 200 from `https://verglos.com/`.
 
 This advances the authorized provider installation, server-held configuration,
-and production rollout evidence only. `TEAM-CLI-001` remains unchecked until
-the signed policy is published and the authenticated CLI fetch/cache/offline/
-cross-tenant matrix plus reconciliation are observed. No AppSec, customer,
+and production rollout evidence; the separate 0.0zc checkpoint now records the
+published Preview policy. `TEAM-CLI-001` remains unchecked until the
+authenticated CLI fetch/cache/offline/cross-tenant matrix and reconciliation
+are observed. No AppSec, customer,
 legal, registry, billing, or final-acceptance checkbox changed. Keep Hunt/AppSec
 last. Score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
 `evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.

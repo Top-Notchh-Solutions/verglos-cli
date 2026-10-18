@@ -26,10 +26,10 @@ clean redeploy after the configuration reached READY as
 `dpl_8joQ1Xg3cXmk9UWs1DQyjSigQC9Z`; the Production homepage smoke returned
 HTTP 200 with the factual Security Layer title.
 
-This is provider-installation, hosted-configuration, and rollout evidence; it
-does not prove the signed policy publication or authenticated CLI
-fetch/cache/offline/cross-tenant/reconciliation matrix. `TEAM-CLI-001` remains
-unchecked, as do its dependent rows. No AppSec, customer, legal, registry,
+This is provider-installation, hosted-configuration, and rollout evidence; the
+separate hosted qualification checkpoint records the published Preview policy.
+Authenticated CLI fetch/cache/offline/cross-tenant/reconciliation evidence is
+still missing. `TEAM-CLI-001` remains unchecked, as do its dependent rows. No AppSec, customer, legal, registry,
 billing, or final-acceptance row changed. Score remains **232 checked / 48 open
 / 280 total (82.9%)**. No squash, rebase, force-push, empty, duplicate,
 artificial, or irrelevant documentation-only contribution was used. Evidence:

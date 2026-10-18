@@ -26,9 +26,10 @@ deployment `dpl_8joQ1Xg3cXmk9UWs1DQyjSigQC9Z` is READY; the public smoke check
 returned HTTP 200.
 
 This is real provider-installation and production-configuration progress, not
-a row closure. `TEAM-CLI-001` still needs the signed policy publication,
-authenticated CLI fetch/cache/offline/cross-tenant observations, and
-reconciliation. No AppSec or dependent checkbox changed. Score remains
+a row closure. The separate hosted qualification checkpoint records the
+published Preview policy; `TEAM-CLI-001` still needs authenticated CLI
+fetch/cache/offline/cross-tenant observations and reconciliation. No AppSec or
+dependent checkbox changed. Score remains
 **232 checked / 48 open / 280 total (82.9%)**. No squash, rebase, force-push,
 empty, duplicate, artificial, or irrelevant public-document commit was used.
 Evidence:
