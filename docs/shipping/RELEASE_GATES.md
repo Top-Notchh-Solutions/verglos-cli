@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · QUAL-WEB-006 authenticated dashboard evidence advanced
+
+The existing authenticated organization dashboard passed desktop and mobile
+Lighthouse snapshots at **100/100/100/100** for Accessibility, Best Practices,
+SEO, and Agentic Browsing, with **32/32** audits passing on each device. A
+desktop reload trace measured lab LCP **853 ms** and CLS **0.00**. CrUX has no
+field data for this authenticated route.
+
+This is partial qualification only. Keep `QUAL-WEB-006` open for human
+screen-reader, large-dataset, field-CWV, and independent/customer acceptance.
+No AppSec status changed. Evidence:
+`evidence/qual-web-006-authenticated-org-lighthouse-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 policy identity visible in owner dashboard
 
 The existing authenticated owner session now visibly renders the published

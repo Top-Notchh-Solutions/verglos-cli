@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · QUAL-WEB-006 authenticated organization dashboard qualification
+
+The existing authenticated Chrome page 3 was qualified read-only at
+`/orgs/top-notchh-solutions/home`. Lighthouse desktop and mobile snapshots
+each scored Accessibility/Best Practices/SEO/Agentic Browsing **100/100/100/100**
+with **32 passed / 0 failed**. A desktop reload performance trace measured lab
+LCP **853 ms** and CLS **0.00**; CrUX has no field data for this authenticated
+route.
+
+This advances `QUAL-WEB-006` only. Human screen-reader testing, large-dataset
+interaction, field CWV, and independent/customer acceptance remain open. No
+AppSec or other gate changed. Evidence:
+`evidence/qual-web-006-authenticated-org-lighthouse-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 authenticated policy-dashboard recheck
 
 The existing authenticated owner session now renders the organization Policy

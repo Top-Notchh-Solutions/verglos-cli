@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · QUAL-WEB-006 authenticated organization dashboard qualification
+
+- **Browser qualification:** Existing authenticated Chrome page 3, read-only
+  `/orgs/top-notchh-solutions/home`; no new tab/window or application,
+  billing, provider, database, or Production write.
+- **Results:** Lighthouse desktop and mobile each passed **32/32** with
+  Accessibility, Best Practices, SEO, and Agentic Browsing at **100/100/100/100**.
+  A desktop reload trace measured lab LCP **853 ms** and CLS **0.00**.
+- **Limitations:** CrUX has no field data for the authenticated route;
+  human screen-reader, large-dataset, and independent/customer acceptance
+  evidence remain open.
+- **Disposition:** Advance `QUAL-WEB-006` without checking it. No AppSec or
+  other gate changed.
+- **Evidence:** `evidence/qual-web-006-authenticated-org-lighthouse-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 authenticated policy-dashboard recheck
 
 - **Browser observation:** The existing authenticated Chrome page 3 rendered

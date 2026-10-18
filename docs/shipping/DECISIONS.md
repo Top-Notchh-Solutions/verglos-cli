@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · accept authenticated dashboard Lighthouse qualification as partial
+
+- **Decision:** Accept the existing authenticated organization-dashboard
+  Lighthouse and lab-performance results as partial `QUAL-WEB-006` evidence.
+- **Observed:** Desktop/mobile Lighthouse each passed 32/32 at
+  Accessibility/Best Practices/SEO/Agentic Browsing **100/100/100/100**;
+  desktop reload LCP was **853 ms** and CLS **0.00**.
+- **Boundary:** No field data exists for the route. This does not substitute
+  for human screen-reader testing, large-dataset interaction, or independent/
+  customer acceptance. Keep the row unchecked.
+- **Disposition:** No AppSec or other gate changed. Evidence remains private.
+- **Evidence:** `evidence/qual-web-006-authenticated-org-lighthouse-2026-10-18.md`.
+
 ## 2026-10-18 · accept visible policy identity while retaining entitlement hold
 
 - **Decision:** Accept the existing authenticated owner-session Policy page

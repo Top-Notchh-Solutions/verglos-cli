@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 authenticated organization dashboard qualification · 2026-10-18
+
+- **Surface:** Existing authenticated Chrome page 3 at the organization home
+  route; no new tab/window or state-changing request.
+- **Verification:** Desktop and mobile Lighthouse snapshots each passed 32/32
+  with Accessibility/Best Practices/SEO/Agentic Browsing **100/100/100/100**.
+  Desktop reload trace measured lab LCP **853 ms** and CLS **0.00**.
+- **Boundary:** CrUX has no field data for this authenticated route. Human
+  screen-reader, large-dataset, and independent/customer acceptance remain
+  required. `QUAL-WEB-006` stays unchecked and no AppSec row changed.
+- **Evidence:** `evidence/qual-web-006-authenticated-org-lighthouse-2026-10-18.md`.
+
 ## TEAM-CLI-001 authenticated policy-dashboard recheck · 2026-10-18
 
 - **Hosted mapping:** Existing authenticated Chrome page 3 rendered the
