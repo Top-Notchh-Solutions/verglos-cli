@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain STUDIO-CLI-001 after hosted recipient qualification
+
+- **Decision:** Keep `STUDIO-CLI-001` open after exercising the real Preview
+  custody boundary.
+- **Reason:** The hosted receipt route correctly rejects a forbidden `source`
+  field and denies cross-organization reads, but the fresh owner fixture has a
+  founder/enterprise-style `contracted` records allowance. The route therefore
+  refuses a valid receipt with `allowance_not_configured`; no recipient/customer
+  acceptance state was created.
+- **Disposition:** Do not weaken the allowance guard or check the row. Unblock
+  with an existing isolated paid/non-production fixture or the supported
+  Preview payment/migration qualification and then rerun the recipient flow.
+- **Boundary:** No Production, customer, registry, billing, database, or
+  AppSec state changed. No undocumented database connection was used. No
+  squash merge was used. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/studio-cli-001-hosted-recipient-qualification-2026-10-18.md`.
+
 ## 2026-10-18 · retain ENT-CLI-001 open after current-head requalification
 
 - **Decision:** Accept the current merged-head runner protocol tests as

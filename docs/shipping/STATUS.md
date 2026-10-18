@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · STUDIO-CLI-001 hosted recipient qualification boundary
+
+The real Preview organization/project receipt routes were exercised on the
+READY deployment. The empty receipt list returned HTTP 200 with no private
+fields; a valid redacted projection was denied with
+`hosted record allowance is not configured`; a projection carrying a forbidden
+`source` field was rejected with HTTP 400 before persistence; and a different
+organization ID was denied with HTTP 403. The fresh owner fixture is on the
+founder/enterprise-style plan whose `recordsPerMonth` allowance is
+`contracted`, so the numeric hosted-record admission required for recipient
+acceptance is not available. `STUDIO-CLI-001` remains unchecked; no checkbox or
+score changed. Evidence:
+`evidence/studio-cli-001-hosted-recipient-qualification-2026-10-18.md`.
+
+The next action is an existing isolated paid Studio/Pro fixture or the approved
+Preview payment/migration qualification with explicit dry-run and reconciliation.
+No database URL was exposed and no undocumented database write was attempted.
+
 ## 2026-10-18 · QUAL-WEB-006 CLI authorization status announcements
 
 Web PR #191, assigned to `anuragyadav-git`, merged normally as

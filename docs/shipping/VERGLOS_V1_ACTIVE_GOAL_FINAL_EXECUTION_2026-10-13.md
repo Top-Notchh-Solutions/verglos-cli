@@ -1,6 +1,27 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0x Current STUDIO-CLI-001 hosted recipient qualification boundary — 2026-10-18
+
+The real Preview receipt custody routes were exercised directly through the
+existing terminal/Vercel CLI deployment. The tenant-scoped empty list returned
+HTTP 200; a valid redacted projection was denied with
+`hosted record allowance is not configured`; adding a forbidden `source` field
+returned HTTP 400 before persistence; and a different organization ID returned
+HTTP 403. The fixture is the founder/enterprise-style owner identity, whose
+`recordsPerMonth` is intentionally `contracted`, so no numeric hosted-record
+allowance exists for recipient acceptance. `STUDIO-CLI-001` remains unchecked.
+
+This is a real hosted entitlement/customer-acceptance boundary, not an AppSec
+result. Do not weaken the guard or create a direct database mapping. The next
+unblock is an existing isolated paid/non-production Studio/Pro fixture or the
+supported Preview payment/migration qualification with explicit dry-run and
+reconciliation. Evidence:
+`evidence/studio-cli-001-hosted-recipient-qualification-2026-10-18.md`.
+
+No checkbox or score changed. The current score remains **232 checked / 48 open
+/ 280 total (82.9%)**. Hunt/AppSec rows remain held for the independent review.
+
 ## 0.0w Current authenticated account-state qualification checkpoint — 2026-10-18
 
 The existing authenticated Verglos Chrome page was used read-only at
