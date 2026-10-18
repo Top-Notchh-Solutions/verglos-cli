@@ -71,6 +71,26 @@ test("rejects an unbounded policy-fetch timeout before making a request", async 
   assert.equal(requests, 0);
 });
 
+test("rejects invalid organization and repository scopes before reading credentials or making a request", async () => {
+  let requests = 0;
+  for (const [organizationId, repositoryId] of [["org/acme?", "repo_app"], ["org_acme", "repo\napp"]] as const) {
+    const result = await fetchOrganizationPolicy({
+      organizationId,
+      repositoryId,
+      trustedKeys: [],
+      cachePath: "/tmp/verglos-invalid-policy-scope.json",
+      apiUrl: "https://example.test",
+      licenseKey: "secret-not-output",
+      fetchImpl: async () => {
+        requests += 1;
+        return new Response("{}", { status: 200 });
+      },
+    });
+    assert.deepEqual(result, { resolved: false, reason: "invalid-scope" });
+  }
+  assert.equal(requests, 0);
+});
+
 test("falls back to a verified cache when response headers arrive but the body times out", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-body-timeout-"));
   const fixtureData = fixture();
