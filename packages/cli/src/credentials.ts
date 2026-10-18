@@ -159,6 +159,7 @@ export async function refreshUnlockToken(
         fingerprint,
         machineId: getMachineId(),
       }),
+      redirect: "error",
     });
 
     if (!res.ok) return false;

@@ -13,14 +13,14 @@ test("account score sync uses a separate authenticated allowlisted request", asy
   const oldHome = process.env.HOME;
   const oldUserProfile = process.env.USERPROFILE;
   const oldFetch = globalThis.fetch;
-  const requests: Array<{ url: string; headers: Headers; body: string }> = [];
+  const requests: Array<{ url: string; headers: Headers; body: string; redirect: string | undefined }> = [];
   try {
     process.env.HOME = home;
     process.env.USERPROFILE = home;
     await writeFile(join(project, "package.json"), JSON.stringify({ name: "PRIVATE_PROJECT_NAME", version: "1.2.3" }));
     await saveCredentials({ apiUrl: "https://verglos.com", licenseKey: "LICENSE_SECRET_SENTINEL" });
     globalThis.fetch = async (input, init = {}) => {
-      requests.push({ url: String(input), headers: new Headers(init.headers), body: String(init.body ?? "") });
+      requests.push({ url: String(input), headers: new Headers(init.headers), body: String(init.body ?? ""), redirect: init.redirect });
       return new Response(null, { status: 200 });
     };
     const result = {
@@ -34,6 +34,7 @@ test("account score sync uses a separate authenticated allowlisted request", asy
     const request = requests[0]!;
     assert.equal(request.url, "https://verglos.com/api/v1/account/scan-sync");
     assert.equal(request.headers.get("authorization"), "Bearer LICENSE_SECRET_SENTINEL");
+    assert.equal(request.redirect, "error");
     const body = JSON.parse(request.body) as Record<string, unknown>;
     assert.deepEqual(Object.keys(body).sort(), ["cli_version", "event_id", "finding_critical", "finding_high", "project_fingerprint", "score"]);
     assert.match(String(body.project_fingerprint), /^[a-f0-9]{64}$/u);
