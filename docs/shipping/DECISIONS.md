@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-CLI-001 after policy redirect hardening
+
+- **Decision:** Accept CLI PR #132 as a bounded implementation advance and
+  keep `TEAM-CLI-001` unchecked.
+- **Observed:** The organization-policy client refuses redirects on
+  bearer-authenticated requests. The normal PR branch preserves implementation
+  `39950bb6`, test `d7db7159`, and portability correction `e03f9582` as three
+  separate commits. Local build **8/8**, typecheck **14/14**, and focused tests
+  **8/8** passed; hosted checks were queued at capture.
+- **Reason:** This protects credential routing but does not establish the
+  mapped entitlement, authenticated CLI fetch/cache/offline/expiry/cross-tenant
+  matrix, provider delivery, reconciliation, or complete acceptance.
+- **Disposition:** No checkbox or AppSec state changes. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-policy-redirect-boundary-pr132-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-CLI-001 after hosted CLI-auth recheck
 
 - **Decision:** Treat the hosted device-code redirect to checkout as a real
