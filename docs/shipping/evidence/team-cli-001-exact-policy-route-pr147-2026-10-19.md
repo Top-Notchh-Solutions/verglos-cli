@@ -40,3 +40,13 @@ keys, customer source, or policy document were recorded here.
 
 Score remains **232 checked / 48 open / 280 total (82.9%)**. AppSec/Hunt
 holds remain unchanged.
+
+## Current owner-session entitlement recheck
+
+Using the already-open authenticated owner page only, the account overview
+still reports `FREE` and “No license key yet”; the account billing path is not
+implemented (`404`). The existing checkout page exposes a Pro Razorpay payment
+flow, but no payment or entitlement mutation was initiated. The browser was
+restored to the organization policy page after this read-only check. This
+confirms the remaining blocker is real hosted entitlement state, not a missing
+CLI route implementation.
