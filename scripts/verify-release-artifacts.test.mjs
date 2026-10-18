@@ -25,6 +25,7 @@ async function writeReleaseFixture(root) {
   await writeFile(join(root, "SBOM.cdx.json"), JSON.stringify({ bomFormat: "CycloneDX", components: [{ name: "x" }] }));
   await writeFile(join(root, "SBOM.spdx.json"), JSON.stringify({ spdxVersion: "SPDX-2.3", packages: [{ name: "x" }] }));
   await writeFile(join(root, "dependency-license-inventory.json"), JSON.stringify({ schemaId: "urn:verglos:artifact:dependency-license-inventory", packages: [{ name: "x" }], bundledComponents: [], reviewBlockers: [] }));
+  await writeFile(join(root, "external-license-records.json"), await readFile(join(process.cwd(), "licenses", "external-content-records.json")));
   await writeFile(join(root, "clean-consumer-verification.txt"), "clean consumer installed 7 archives and executed Verglos 2.0.0-alpha.1\n");
   await writeChecksums(root);
 }
@@ -38,7 +39,7 @@ async function writeChecksums(root) {
 test("release verifier requires checksums for package archives and every release sidecar", async () => {
   await withFixture(async (root) => {
     const result = await run(process.execPath, [script, root]);
-    assert.match(result.stdout, /verified 6 release artifacts \(1 npm archives, 5 sidecars, and notices in every archive\)/u);
+    assert.match(result.stdout, /verified 7 release artifacts \(1 npm archives, 6 sidecars, and notices in every archive\)/u);
     await writeFile(join(root, "THIRD_PARTY_NOTICES"), "changed after checksumming");
     await assert.rejects(run(process.execPath, [script, root]), /checksum mismatch: THIRD_PARTY_NOTICES/u);
   });
@@ -66,6 +67,14 @@ test("release verifier validates SBOM shape and refuses unresolved license block
     await writeFile(join(root, "dependency-license-inventory.json"), JSON.stringify({ schemaId: "urn:verglos:artifact:dependency-license-inventory", packages: [{ name: "x" }], bundledComponents: [], reviewBlockers: [{ name: "x" }] }));
     await writeChecksums(root);
     await assert.rejects(run(process.execPath, [script, root]), /unresolved redistribution blockers/);
+  });
+});
+
+test("release verifier refuses incomplete external license records", async () => {
+  await withFixture(async (root) => {
+    await writeFile(join(root, "external-license-records.json"), JSON.stringify({ schemaId: "urn:verglos:artifact:external-license-records" }));
+    await writeChecksums(root);
+    await assert.rejects(run(process.execPath, [script, root]), /external-license-records\.json is invalid/u);
   });
 });
 

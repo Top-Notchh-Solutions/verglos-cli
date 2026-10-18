@@ -55,6 +55,11 @@ jobs:
       - name: Test dependency license inventory and SBOM coverage
         run: node --test scripts/license-inventory.test.mjs
 
+      - name: Validate external engine and content license records
+        run: |
+          node scripts/validate-external-license-records.mjs
+          node --test scripts/external-license-records.test.mjs
+
       - name: Check third-party notices drift
         run: |
           node scripts/generate-third-party-notices.mjs > generated-third-party-notices
@@ -81,6 +86,7 @@ jobs:
             generated-third-party-notices
             generated-sbom.json
             generated-spdx.json
+            licenses/external-content-records.json
           if-no-files-found: error
           retention-days: 14
 
