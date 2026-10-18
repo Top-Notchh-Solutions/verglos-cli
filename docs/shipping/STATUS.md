@@ -17,6 +17,13 @@ bundle and its `ACCEPT-003`/`ACCEPT-009` dependencies. No AppSec state changed.
 Score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
 `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
 
+Web PR #202 then merged normally as `6496814c`, preserving focused commit
+`36a7e5e`. It renders each proof card's canonical accessible description for
+assistive technology. Hosted run `39150481039`, Vercel, Preview Comments,
+GitGuardian, local focused tests **4/4**, typecheck, and build passed. This is
+still implementation progress only; `FINAL-WEB-006` remains unchecked and
+the score is unchanged.
+
 ## 2026-10-18 · TEAM-CLI-001 policy redirect boundary
 
 CLI PR #132 preserves three separate commits: implementation `39950bb6`,

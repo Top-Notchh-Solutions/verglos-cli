@@ -15,6 +15,19 @@
   changed; score remains **232/48/280 (82.9%)**.
 - **Evidence:** `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
 
+## FINAL-WEB-006 proof-description accessibility follow-up · 2026-10-18
+
+- **Source mapping:** Web PR #202 normal merge `6496814c`, focused commit
+  `36a7e5e`.
+- **Contract mapping:** Proof-card accessible descriptions are rendered from
+  the same bounded registry field used by the route contract.
+- **Verification mapping:** Focused tests **4/4**, typecheck, build, hosted
+  run `39150481039`, Vercel, Preview Comments, and GitGuardian passed.
+- **Acceptance mapping:** `FINAL-WEB-006` remains unchecked for external
+  acceptance dependencies. No AppSec row changed; score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
+
 ## TEAM-CLI-001 policy redirect boundary · 2026-10-18
 
 - **Source mapping:** CLI PR #132, implementation `39950bb6`, regression test

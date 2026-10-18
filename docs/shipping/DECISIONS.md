@@ -14,6 +14,17 @@
   **232/48/280 (82.9%)**.
 - **Evidence:** `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
 
+## 2026-10-18 · retain FINAL-WEB-006 after accessibility follow-up
+
+- **Decision:** Accept Web PR #202 as a focused accessibility correction while
+  keeping `FINAL-WEB-006` unchecked.
+- **Observed:** Normal merge `6496814c` renders the registry `altText` through
+  the public proof-card markup; local and hosted verification passed.
+- **Disposition:** The acceptance bundle and external dependencies remain
+  outstanding. No checkbox or AppSec state changes. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-CLI-001 after policy redirect hardening
 
 - **Decision:** Accept CLI PR #132 as a bounded implementation advance and

@@ -14,6 +14,16 @@ acceptance bundle and `ACCEPT-003`/`ACCEPT-009` dependencies. Score remains
 **232 checked / 48 open / 280 total (82.9%)**. No AppSec state changed.
 Evidence: `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
 
+## 2026-10-18 · FINAL-WEB-006 proof-description accessibility follow-up
+
+Web PR #202 merged normally as `6496814c`, preserving focused commit
+`36a7e5e`. The public proof cards now render their canonical accessible
+descriptions. Focused tests **4/4**, typecheck, build, hosted verification,
+Vercel, Preview Comments, and GitGuardian passed. `FINAL-WEB-006` remains
+unchecked for acceptance dependencies; score remains **232 checked / 48 open /
+280 total (82.9%)**. No AppSec state changed. Evidence:
+`evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 policy redirect boundary
 
 CLI PR #132 merged normally as `2682874c`, preserving implementation

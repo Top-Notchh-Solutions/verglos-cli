@@ -49,6 +49,14 @@ Hosted verification:
 - Vercel deployment and Preview Comments — passed.
 - GitGuardian — passed.
 
+The follow-up accessibility correction was shipped separately as Web PR
+[#202](https://github.com/anuragyadav-git/verglos-web/pull/202), normal merge
+`6496814c910ecabb976ba7aaad9948dc280a0f7f`, commit `36a7e5e`.
+The canonical `altText` is now also rendered as assistive-technology text for
+each visual proof card. Local focused tests remained **4/4**, typecheck and
+build passed, and hosted run `39150481039`, Vercel, Preview Comments, and
+GitGuardian passed.
+
 ## Acceptance mapping and remaining work
 
 This advances only the public implementation portion of `FINAL-WEB-006`.

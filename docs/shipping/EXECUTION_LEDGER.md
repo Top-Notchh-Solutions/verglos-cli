@@ -17,6 +17,19 @@
   score remains **232/48/280 (82.9%)**.
 - **Evidence:** `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
 
+## 2026-10-18 · FINAL-WEB-006 proof-description accessibility follow-up
+
+- **Public merge:** Web PR #202 merged normally as `6496814c`, preserving
+  focused commit `36a7e5e`.
+- **Implementation:** The `/proof` visual cards now render each registry
+  `altText` as assistive-technology text; the route contract test covers the
+  description.
+- **Verification:** Focused tests **4/4**, typecheck, build, hosted run
+  `39150481039`, Vercel, Preview Comments, and GitGuardian passed.
+- **Disposition:** `FINAL-WEB-006` remains unchecked; no AppSec state or
+  checkbox changed, and score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 policy redirect boundary
 
 - **Public PR:** CLI PR #132 was pushed as a normal three-commit branch with
