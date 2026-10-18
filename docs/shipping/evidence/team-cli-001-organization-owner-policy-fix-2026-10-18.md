@@ -118,6 +118,24 @@ fail-closed authorization evidence. It does not close `TEAM-CLI-001`, because
 the row still requires an active mapped license bearer, authenticated CLI
 fetch/cache/offline/cross-tenant observations, and reconciliation.
 
+The source-free SCM check path was then exercised against the same bound
+non-Production repository using synthetic commit, subject, artifact, and
+record identities:
+
+- First enqueue: HTTP `201`, delivery ID
+  `0787981d-e42e-41bc-804e-ab769b9f00e4`, provider status `queued`, payload
+  digest `sha256:d6b8743611f1469f7626559bcec7329132f59dbd96f88f4b981a3a2be6f27d5f`.
+- Identical retry: HTTP `200`, the same delivery ID and payload digest, with
+  `deliveryDecision: noop`.
+- Same external identity with a conflicting decision payload: HTTP `409`,
+  `SCM external key already binds different payload`.
+
+This proves hosted admission, source-free payload composition, persistence,
+and idempotent/conflict behavior only. It does not claim provider check
+publication or delivery completion: the queued row requires the protected
+server-side cron credential and provider token exchange. No provider response,
+token, or raw payload was recorded.
+
 ## Boundary and disposition
 
 This is code, hosted-build, authorized least-privilege provider-installation,

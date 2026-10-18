@@ -1,6 +1,26 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0zd Current TEAM-CLI-002/TEAM-WEB-006 hosted SCM check substrate — 2026-10-18
+
+Against the same disposable Preview project and organization-bound
+`verglos-archive` installation, the hosted source-free check endpoint admitted
+one synthetic release decision: HTTP `201`, delivery
+`0787981d-e42e-41bc-804e-ab769b9f00e4`, status `queued`, and payload digest
+`sha256:d6b8743611f1469f7626559bcec7329132f59dbd96f88f4b981a3a2be6f27d5f`.
+An identical retry returned HTTP `200` with `deliveryDecision: noop`; a
+conflicting payload for the same external identity returned HTTP `409` with
+the bounded external-key conflict reason.
+
+This is real hosted admission, persistence, idempotency, and conflict evidence
+for the dependent SCM rows. It does not claim provider check publication or
+delivery completion because the queued row still requires the protected cron
+credential and provider token exchange. `TEAM-CLI-001`, `TEAM-CLI-002`, and
+`TEAM-WEB-006` remain unchecked; score remains **232 checked / 48 open / 280
+total (82.9%)**. No provider token, response body, or raw payload was recorded.
+Hunt/AppSec remains parked last. Evidence:
+`evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 0.0zb Current TEAM-CLI-001 organization SCM activation and production configuration — 2026-10-18
 
 The organization-owned `Verglos Organization SCM Checks` GitHub App is now

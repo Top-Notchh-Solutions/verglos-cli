@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · hosted SCM check admission and idempotency
+
+The bound Preview project admitted a source-free synthetic release decision
+with HTTP `201` as delivery `0787981d-e42e-41bc-804e-ab769b9f00e4` in
+`queued` state. An identical retry returned `noop`, and a conflicting payload
+for the same external identity returned bounded HTTP `409` without replacing
+the stored payload.
+
+This is hosted admission and idempotency evidence, not a row closure: provider
+check publication and delivery completion still require the protected cron
+credential and provider token exchange. `TEAM-CLI-001`, `TEAM-CLI-002`, and
+`TEAM-WEB-006` remain unchecked; score remains **232 checked / 48 open / 280
+total (82.9%)**. Hunt/AppSec remains parked. Evidence:
+`docs/shipping/evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 organization SCM activation and production configuration
 
 The organization-owned SCM App is installed on `Top-Notchh-Solutions` as

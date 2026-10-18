@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM rows after hosted SCM check admission
+
+- **Decision:** Accept the source-free SCM check admission, persistence,
+  idempotent retry, and conflicting-payload refusal as real hosted evidence;
+  keep `TEAM-CLI-001`, `TEAM-CLI-002`, and `TEAM-WEB-006` unchecked.
+- **Observed:** Delivery `0787981d-e42e-41bc-804e-ab769b9f00e4` was queued by
+  HTTP `201`; the identical retry returned `noop`; a conflicting payload for
+  the same external identity returned HTTP `409` without overwriting it.
+- **Reason:** The provider check has not been published and the queued row has
+  not completed provider delivery. Completion requires the protected cron
+  credential and provider token exchange, while the CLI policy matrix still
+  lacks a valid license bearer.
+- **Disposition:** Record this as hosted substrate only. Do not mark a row
+  green from enqueue evidence, and do not bypass server-held credentials or
+  entitlement checks. Score remains **232/48/280 (82.9%)**; keep Hunt/AppSec
+  last.
+- **Boundary:** Synthetic source-free identifiers only; no customer source,
+  provider token, provider response, billing operation, or Production
+  repository access was used. No squash merge or artificial documentation-only
+  contribution was used.
+- **Evidence:** `evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · keep TEAM-CLI-001 open after organization SCM activation
 
 - **Decision:** Record the organization SCM installation and server-held

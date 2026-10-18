@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · hosted SCM check admission and idempotency
+
+The bound Preview project admitted one source-free synthetic release decision
+with HTTP `201` and delivery `0787981d-e42e-41bc-804e-ab769b9f00e4` in
+`queued` state. Repeating the identical request returned HTTP `200` and
+`deliveryDecision: noop`; changing the decision for the same external identity
+returned bounded HTTP `409` rather than overwriting the stored payload.
+
+This proves hosted admission, persistence, idempotency, and conflict handling,
+not provider check publication or delivery completion. The queued row still
+needs the protected cron credential and provider token exchange. The dependent
+TEAM rows remain unchecked and the score remains **232 checked / 48 open / 280
+total (82.9%)**. Evidence:
+`evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 organization SCM activation and production configuration
 
 The organization-owned `Verglos Organization SCM Checks` App is installed as
