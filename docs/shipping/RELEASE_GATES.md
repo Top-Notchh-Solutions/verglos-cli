@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 hosted CLI-auth entitlement boundary
+
+The existing authenticated owner session's hosted device-code verification
+redirected to checkout because no active license was present. No credential was
+returned and no payment was submitted. Keep `TEAM-CLI-001` and dependent Team
+rows open for the mapped entitlement and authenticated signed
+fetch/cache/offline/expiry/cross-tenant/provider reconciliation. This is not
+an AppSec hold.
+
+Evidence: `evidence/team-cli-001-cli-auth-entitlement-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 authenticated dashboard evidence advanced
 
 The existing authenticated organization dashboard passed desktop and mobile

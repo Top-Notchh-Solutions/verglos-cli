@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-CLI-001 after hosted CLI-auth recheck
+
+- **Decision:** Treat the hosted device-code redirect to checkout as a real
+  entitlement boundary and keep the Team policy-fetch row unchecked.
+- **Observed:** The existing authenticated owner session had no active license;
+  no authorization success or credential response was produced. No payment was
+  attempted.
+- **Disposition:** The next required artifact is an approved mapped
+  paid/non-production entitlement, followed by the complete signed CLI
+  fetch/cache/offline/expiry/cross-tenant/provider matrix. This does not alter
+  the independent Hunt/AppSec hold set.
+- **Evidence:** `evidence/team-cli-001-cli-auth-entitlement-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · accept authenticated dashboard Lighthouse qualification as partial
 
 - **Decision:** Accept the existing authenticated organization-dashboard

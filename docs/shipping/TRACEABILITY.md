@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 hosted CLI-auth entitlement recheck · 2026-10-18
+
+- **Hosted mapping:** Device-code start returned a bounded challenge; the
+  existing authenticated owner session's verification URL redirected to
+  checkout because no active license was available.
+- **Acceptance mapping:** No authorization success or CLI credential was
+  returned. The Free/no-allowance account state remains the exact missing
+  entitlement artifact; signed fetch/cache/offline/expiry/cross-tenant/
+  provider evidence remains absent. Team dependent rows stay open.
+- **Boundary:** No code, payment, provider, database, Production, or browser
+  state-changing action occurred; secret values were withheld.
+- **Evidence:** `evidence/team-cli-001-cli-auth-entitlement-recheck-2026-10-18.md`.
+
 ## QUAL-WEB-006 authenticated organization dashboard qualification · 2026-10-18
 
 - **Surface:** Existing authenticated Chrome page 3 at the organization home

@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 hosted CLI-auth entitlement recheck
+
+The public device-code start endpoint returned a bounded challenge. Opening
+the verification URL in the existing authenticated owner Chrome session
+redirected to hosted checkout because the session had no active license. No
+authorization succeeded, no license key was returned or recorded, and no
+payment control was submitted. The account remained Free with no hosted-record
+allowance.
+
+This confirms the current entitlement boundary and keeps `TEAM-CLI-001`,
+`TEAM-CLI-002`, and `TEAM-WEB-006` open. It is not an AppSec hold. Evidence:
+`evidence/team-cli-001-cli-auth-entitlement-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 authenticated organization dashboard qualification
 
 The existing authenticated Chrome page 3 was qualified read-only at

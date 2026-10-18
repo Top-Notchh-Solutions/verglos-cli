@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-001 hosted CLI-auth entitlement recheck
+
+The hosted device-code start endpoint returned a bounded challenge. Opening
+the verification URL in the existing authenticated owner session redirected to
+checkout because no active license was present. No authorization succeeded, no
+license key or code was recorded, and no payment control was submitted. The
+account remained Free with no hosted-record allowance.
+
+This is direct non-AppSec entitlement evidence and keeps `TEAM-CLI-001`,
+`TEAM-CLI-002`, and `TEAM-WEB-006` unchecked. The mapped paid/non-production
+entitlement and authenticated signed CLI fetch/cache/offline/expiry/
+cross-tenant/provider matrix remain the next required artifacts. Score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-cli-auth-entitlement-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 Preview dashboard auth correction
 
 The first Preview deployment of the policy dashboard exposed a real route
