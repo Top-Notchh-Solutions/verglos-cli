@@ -1,6 +1,25 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0y Current ENT-CLI-001 hosted private-runner lifecycle qualification — 2026-10-18
+
+The real isolated Preview lifecycle now provides operational evidence for the
+private-runner row: fresh synthetic auth/license validation, organization and
+runner enrollment, initial outbound activation poll, bounded signed-job issue
+and claim, local Ed25519 signature verification with mutated-target rejection,
+source-free result reconciliation, exact replay idempotency, final empty poll,
+and negative refusal for an unallowlisted target, an out-of-scope target, and
+a malformed result. The deployment was READY at source commit
+`25adc4abb5a7d989c8349eb7a288f7011143f5b7`.
+
+This does not close `ENT-CLI-001`: cross-platform operational evidence,
+independent runner/Hunt review, and authorized enterprise acceptance remain
+required. Keep the row unchecked. Continue the backlog top-to-bottom with the
+next dependency-ready non-AppSec item; do not reopen or silently check Hunt or
+AppSec-dependent rows. Score remains **232 checked / 48 open / 280 total
+(82.9%)**. Evidence:
+`evidence/ent-cli-001-hosted-runner-qualification-2026-10-18.md`.
+
 ## 0.0x Current STUDIO-CLI-001 hosted recipient qualification boundary — 2026-10-18
 
 The real Preview receipt custody routes were exercised directly through the

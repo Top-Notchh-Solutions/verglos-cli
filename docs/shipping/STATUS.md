@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · ENT-CLI-001 hosted private-runner lifecycle qualification
+
+The current Web source was deployed to an isolated READY Preview with fresh
+Preview-only runner signing, enrollment, and license-fixture configuration.
+The real lifecycle then completed: synthetic CLI authorization and license
+validation, organization creation (HTTP 201), one-time runner enrollment
+(HTTP 201), initial outbound activation poll, bounded signed-job issuance and
+claim, local Ed25519 signature verification with mutated-target rejection,
+source-free completed-result upload, exact replay idempotency, and final empty
+poll. Negative requests for an unallowlisted target, an out-of-runner-scope
+target, and a malformed result all failed closed.
+
+This is operational evidence for `ENT-CLI-001`, not enterprise acceptance or
+independent AppSec evidence. Cross-platform operational qualification,
+independent review, and authorized enterprise acceptance remain open, so the
+row remains unchecked. Score remains **232 checked / 48 open / 280 total
+(82.9%)**. Evidence:
+`evidence/ent-cli-001-hosted-runner-qualification-2026-10-18.md`.
+
+No Production, customer, registry, billing, or AppSec state changed. No
+squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
+documentation-only contribution was used.
+
 ## 2026-10-18 · STUDIO-CLI-001 hosted recipient qualification boundary
 
 The real Preview organization/project receipt routes were exercised on the

@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain ENT-CLI-001 after hosted runner lifecycle
+
+- **Decision:** Accept the real isolated Preview lifecycle as operational
+  evidence, but keep `ENT-CLI-001` unchecked.
+- **Observed:** Fresh synthetic auth/license validation, enrollment, outbound
+  activation poll, bounded signed job, local signature verification and
+  mutation rejection, source-free result reconciliation, exact replay
+  idempotency, final empty poll, and fail-closed negative target/schema paths
+  all passed.
+- **Reason:** The row still requires cross-platform operational evidence,
+  independent review of the runner/Hunt boundary, and authorized enterprise
+  acceptance. Owner authorization does not replace those row-specific
+  artifacts.
+- **Disposition:** Keep `ENT-CLI-001` open; continue with the next eligible
+  non-AppSec row and leave Hunt/AppSec-dependent rows untouched.
+- **Boundary:** Preview-only synthetic state was used. No Production,
+  customer, registry, billing, or AppSec state changed. No secret, enrollment
+  token, license bearer, private key, or raw result was recorded. No squash
+  merge was used. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/ent-cli-001-hosted-runner-qualification-2026-10-18.md`.
+
 ## 2026-10-18 · retain STUDIO-CLI-001 after hosted recipient qualification
 
 - **Decision:** Keep `STUDIO-CLI-001` open after exercising the real Preview
