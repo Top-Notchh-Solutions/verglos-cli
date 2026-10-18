@@ -98,6 +98,10 @@ jobs:
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-third-party-notices.test.mjs scripts/license-inventory.test.mjs scripts/package-surface-audit.test.mjs
 
+      - name: Verify release rollback/revocation rehearsal
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
+        run: node scripts/verify-release-rollback-rehearsal.mjs
+
       - name: Audit package contents
         if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/check-package-contents.mjs
