@@ -41,3 +41,14 @@ test("remote resolution returns a bounded cache entry and offline mode uses only
   const expired = resolveOrganizationPolicy({ organizationId: "org_acme", repositoryId: "repo_acme_app", now: "2026-10-04T00:00:00.001Z", offline: true, cached: remote.entry, trustedKeys: keys, cacheTtlMs: 86_400_000 });
   assert.deepEqual(expired, { resolved: false, reason: "cache-expired" });
 });
+
+test("offline resolution rejects a cache whose policy and digest were replaced without the signer", () => {
+  const value = envelope();
+  const keys = [{ keyId: activeKeyId, publicKeyPem, status: "active" as const }];
+  const remote = resolveOrganizationPolicy({ organizationId: "org_acme", repositoryId: "repo_acme_app", now: "2026-10-03T00:00:00.000Z", offline: false, remote: value, trustedKeys: keys, cacheTtlMs: 86_400_000 });
+  assert.equal(remote.resolved, true);
+  if (!remote.resolved) return;
+  const replacedPolicy = { ...policy, policyId: "verglos.policy.replaced" } satisfies PolicyDocument;
+  const tamperedCache = { ...remote.entry, policy: replacedPolicy, policyDigest: policyDocumentDigest(replacedPolicy) };
+  assert.deepEqual(resolveOrganizationPolicy({ organizationId: "org_acme", repositoryId: "repo_acme_app", now: "2026-10-03T12:00:00.000Z", offline: true, cached: tamperedCache, trustedKeys: keys, cacheTtlMs: 86_400_000 }), { resolved: false, reason: "invalid-signature" });
+});

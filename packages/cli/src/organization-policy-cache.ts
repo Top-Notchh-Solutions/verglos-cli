@@ -16,10 +16,16 @@ function parseCache(value: unknown, scope: Readonly<{ organizationId: string; re
   if (typeof candidate.organizationId !== "string" || !validScope(candidate.organizationId) || typeof candidate.repositoryId !== "string" || !validScope(candidate.repositoryId)) throw new Error("organization policy cache scope is invalid");
   if (candidate.source !== "remote" && candidate.source !== "cache") throw new Error("organization policy cache source is invalid");
   if (typeof candidate.policyDigest !== "string" || !/^sha256:[a-f0-9]{64}$/u.test(candidate.policyDigest)) throw new Error("organization policy cache digest is invalid");
+  if (typeof candidate.keyId !== "string" || !/^sha256:[a-f0-9]{64}$/u.test(candidate.keyId)) throw new Error("organization policy cache key id is invalid");
+  if (typeof candidate.signature !== "string" || !/^[A-Za-z0-9+/]+={0,2}$/u.test(candidate.signature) || candidate.signature.length > 8192) throw new Error("organization policy cache signature is invalid");
+  if (!candidate.signer || typeof candidate.signer !== "object" || Array.isArray(candidate.signer)) throw new Error("organization policy cache signer is invalid");
+  const signer = candidate.signer as Record<string, unknown>;
+  if (typeof signer.id !== "string" || signer.id.length === 0 || signer.id.length > 512 || /[\u0000-\u001f\u007f]/u.test(signer.id) || typeof signer.issuer !== "string" || signer.issuer.length > 512 || !/^https:\/\/[^\s]+$/u.test(signer.issuer)) throw new Error("organization policy cache signer is invalid");
+  if (typeof candidate.signedAt !== "string" || !Number.isFinite(Date.parse(candidate.signedAt))) throw new Error("organization policy cache signed timestamp is invalid");
   if (typeof candidate.cachedAt !== "string" || !Number.isFinite(Date.parse(candidate.cachedAt)) || typeof candidate.expiresAt !== "string" || !Number.isFinite(Date.parse(candidate.expiresAt))) throw new Error("organization policy cache timestamps are invalid");
   const policy = parsePolicyDocument(candidate.policy) as PolicyDocument;
   if (policyDocumentDigest(policy) !== candidate.policyDigest) throw new Error("organization policy cache digest does not match policy");
-  return Object.freeze({ organizationId: candidate.organizationId, repositoryId: candidate.repositoryId, policy, policyDigest: candidate.policyDigest, cachedAt: candidate.cachedAt, expiresAt: candidate.expiresAt, source: candidate.source });
+  return Object.freeze({ organizationId: candidate.organizationId, repositoryId: candidate.repositoryId, policy, policyDigest: candidate.policyDigest, keyId: candidate.keyId, signature: candidate.signature, signer: Object.freeze({ id: signer.id, issuer: signer.issuer }), signedAt: candidate.signedAt, cachedAt: candidate.cachedAt, expiresAt: candidate.expiresAt, source: candidate.source });
 }
 
 export async function readOrganizationPolicyCache(path: string, scope: Readonly<{ organizationId: string; repositoryId: string }>): Promise<OrganizationPolicyCacheEntry | null> {
