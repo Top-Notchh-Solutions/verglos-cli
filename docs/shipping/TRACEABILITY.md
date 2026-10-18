@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 CLI authorization label fix · 2026-10-18
+
+- **Source mapping:** Web PR #190 merged normally as
+  `e91dc73146a9da093b6f5d85b1863ca73ed4f1e1`, preserving implementation
+  `aa00b6c` and test `268df49`; the CLI authorization user-code control now has
+  an explicit accessible name.
+- **Verification mapping:** Focused CLI-auth test **1/1**, local typecheck and
+  diff check, hosted typecheck/schema, Vercel, Preview Comments, and GitGuardian
+  all passed. The PR was assigned to `anuragyadav-git`.
+- **Acceptance mapping:** This advances the security-layer handoff's technical
+  accessibility only. `QUAL-WEB-006` remains unchecked for human
+  screen-reader, paid/customer-state, large-dataset, field-CWV, and independent
+  acceptance evidence. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/qual-web-006-cli-auth-label-pr190-2026-10-18.md`.
+
 ## QUAL-WEB-006 privacy confirmation label fix · 2026-10-18
 
 - **Source mapping:** Web PR #189 merged normally as

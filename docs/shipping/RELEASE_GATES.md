@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · QUAL-WEB-006 CLI authorization handoff label requalified
+
+Web PR #190 merged normally as `e91dc73146a9da093b6f5d85b1863ca73ed4f1e1`,
+preserving implementation `aa00b6c` and regression test `268df49`. The CLI
+authorization user-code input now has an explicit accessible name, with focused
+test **1/1**, local typecheck/diff check, and all hosted PR checks passing.
+This does not open the accessibility qualification gate: human screen-reader,
+paid/customer-state, large-dataset, field-CWV, provider, and independent
+acceptance evidence remain separate requirements. Keep QUAL-WEB-006 unchecked.
+Score remains **232/48/280 (82.9%)**. Evidence:
+`evidence/qual-web-006-cli-auth-label-pr190-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 privacy control association requalified
 
 Web PR #189 merged normally as `f7e2a1ccb308a69ecf85308a0c953a4a93dabc36`,

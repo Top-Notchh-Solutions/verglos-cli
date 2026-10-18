@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · QUAL-WEB-006 CLI authorization label fix
+
+- **Implementation:** Web PR #190 adds the explicit accessible name for the
+  existing CLI authorization user-code input and a source-contract regression
+  test.
+- **History:** Normal merge `e91dc73146a9da093b6f5d85b1863ca73ed4f1e1`
+  preserves `aa00b6c` and `268df49`; the PR was assigned to
+  `anuragyadav-git`.
+- **Verification:** Focused test **1/1**, local typecheck, diff check, hosted
+  typecheck/schema, Vercel, Preview Comments, and GitGuardian passed.
+- **Disposition:** This is technical progress only. Keep QUAL-WEB-006
+  unchecked for its remaining runtime and independent acceptance contracts.
+  Score remains **232/48/280 (82.9%)**.
+- **Boundary:** No production, provider, registry, database, customer,
+  payment, entitlement, or account state changed. No squash, rebase,
+  force-push, empty, duplicate, artificial, or irrelevant contribution was
+  used.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-cli-auth-label-pr190-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 privacy confirmation label fix
 
 - **Implementation:** Web PR #189 adds the explicit accessible association for
