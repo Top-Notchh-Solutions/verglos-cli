@@ -6055,3 +6055,19 @@ changed. See
 - **Owner/next action:** Verglos release owner with the Razorpay Test Mode
   account owner; obtain a supported fixture/control and rerun only the missing
   cases. Review by 2026-10-17. No checkbox changed.
+# 2026-10-18 · QUAL-WEB-006 public home browser qualification
+
+- **Source mapping:** Existing Verglos Chrome page at
+  `https://verglos.com/`; no new browser window or tab was opened.
+- **Verification:** Lighthouse navigation audit passed Accessibility, Best
+  Practices, SEO, and Agentic Browsing at **100/100** on desktop and mobile,
+  with **61/61** and **60/60** audits passing and zero failures. A cold-reload
+  lab trace measured LCP **334 ms** and CLS **0.00**. CrUX had no field data.
+- **Acceptance mapping:** This qualifies the public home route only.
+  `QUAL-WEB-006` remains unchecked for authenticated dashboard, human
+  screen-reader, large-dataset, complete state, and field-CWV evidence. No
+  AppSec, provider, legal, customer, release, or final-acceptance gate
+  changed. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/qual-web-006-public-home-lighthouse-2026-10-18.md` and the two
+  retained raw reports beside it.

@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · public home browser qualification
+
+- **Surface:** Existing Verglos Chrome page, `https://verglos.com/`, navigation
+  mode on desktop and mobile. No new Chrome window or tab was opened, and no
+  credentials or private data were entered.
+- **Results:** Lighthouse reported Accessibility, Best Practices, SEO, and
+  Agentic Browsing **100/100** on both devices; desktop **61/61** and mobile
+  **60/60** audits passed with zero failures. A cold-reload performance trace
+  measured lab LCP **334 ms**, TTFB **111 ms**, render delay **223 ms**, and
+  CLS **0.00**. CrUX field data was unavailable. One unattributed 61 ms forced
+  reflow was observed with no estimated metric savings.
+- **Disposition:** This is public-route qualification evidence only.
+  `QUAL-WEB-006` remains unchecked for authenticated dashboard, human
+  screen-reader, large-dataset, complete state, and field-CWV evidence. No
+  checkbox changed; score remains **230/50/280 (82.1%)**. No provider, legal,
+  customer, release, or AppSec result was claimed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-public-home-lighthouse-2026-10-18.md`
+  and its two hashed raw JSON reports.
+
 ## 2026-10-18 · FINAL-WEB-004 public product-truth implementation merged normally as PR #187
 
 - **Public change:** Web PR #187, assigned to `anuragyadav-git`, contains

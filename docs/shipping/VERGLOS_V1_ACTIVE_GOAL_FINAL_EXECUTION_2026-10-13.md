@@ -1078,6 +1078,23 @@ TEAM-CLI-001 result. Keep TEAM-CLI-001 open until the correct
 account/repository binding and the live policy/provider matrix are evidenced.
 Keep Hunt AppSec last.
 
+## 0.0t Current QUAL-WEB-006 public home browser qualification — 2026-10-18
+
+The existing Verglos Chrome tab qualified `https://verglos.com/` on 2026-10-18:
+desktop and mobile Lighthouse Accessibility, Best Practices, SEO, and Agentic
+Browsing all scored 100/100, with 61/61 and 60/60 audits passing and zero
+failures. A cold-reload lab trace measured LCP 334 ms and CLS 0.00; CrUX had
+no field data. Raw reports and hashes are retained in
+`evidence/qual-web-006-public-home-lighthouse-2026-10-18/`.
+
+This advances only the public-route portion of `QUAL-WEB-006`; the row remains
+unchecked for authenticated dashboard, human screen-reader, large-dataset,
+complete state, and field-CWV evidence. No provider, legal, customer,
+release, final-acceptance, or AppSec row changed. Score remains **230 checked /
+50 open / 280 total (82.1%)**. Keep the independent Hunt AppSec review last.
+No squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
+public-document commit is allowed.
+
 ## 1. Objective
 
 Finish the approved Verglos Final V1 product implementation and qualification

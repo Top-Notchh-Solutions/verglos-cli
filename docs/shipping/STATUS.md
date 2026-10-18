@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · public home browser qualification
+
+Using the existing Verglos Chrome page only, a fresh navigation audit of
+`https://verglos.com/` passed Lighthouse Accessibility, Best Practices, SEO,
+and Agentic Browsing at **100/100** on both desktop and mobile, with **61/61**
+and **60/60** audits passing and zero failures. The cold-reload performance
+trace measured lab LCP **334 ms** and CLS **0.00**; CrUX had no field data for
+the page. The raw reports are retained with SHA-256 hashes in
+`evidence/qual-web-006-public-home-lighthouse-2026-10-18/`.
+
+This advances only the public-route portion of `QUAL-WEB-006`. Authenticated
+dashboard, human screen-reader, large-dataset, complete state, and field-CWV
+requirements remain open; no checkbox or score changed. The score remains
+**230 checked / 50 open / 280 total (82.1%)**. This is not provider, legal,
+customer, final-acceptance, or AppSec evidence. Evidence:
+`evidence/qual-web-006-public-home-lighthouse-2026-10-18.md`.
+
 ## 2026-10-18 · public product-truth docs merged normally as PR #187
 
 Web PR #187, assigned to `anuragyadav-git`, adds the next real FINAL-WEB-004
