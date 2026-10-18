@@ -1,0 +1,44 @@
+{
+  "operations": [
+    {
+      "id": "npm",
+      "current": { "kind": "npm-package", "identity": "verglos@bad", "immutableRef": "v2.0.0-alpha.1" },
+      "target": { "kind": "npm-package", "identity": "verglos@good", "immutableRef": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" },
+      "reason": "bad npm release",
+      "approved": true
+    },
+    {
+      "id": "engine",
+      "current": { "kind": "engine-manifest", "identity": "trivy@bad", "immutableRef": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" },
+      "target": { "kind": "engine-manifest", "identity": "trivy@good", "immutableRef": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" },
+      "reason": "bad engine manifest",
+      "approved": true
+    },
+    {
+      "id": "hunt",
+      "current": { "kind": "hunt-feed", "identity": "feed-bad", "immutableRef": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" },
+      "target": { "kind": "hunt-feed", "identity": "feed-good", "immutableRef": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" },
+      "reason": "bad recipe feed",
+      "approved": true
+    },
+    {
+      "id": "signing",
+      "current": { "kind": "signing-identity", "identity": "key-old", "immutableRef": "sha256:1111111111111111111111111111111111111111111111111111111111111111" },
+      "target": { "kind": "signing-identity", "identity": "key-revoked", "immutableRef": "sha256:2222222222222222222222222222222222222222222222222222222222222222" },
+      "replacement": { "kind": "signing-identity", "identity": "key-new", "immutableRef": "sha256:3333333333333333333333333333333333333333333333333333333333333333" },
+      "reason": "signing identity compromise",
+      "approved": true
+    },
+    {
+      "id": "web",
+      "current": { "kind": "web-deployment", "identity": "verglos.com", "immutableRef": "sha256:4444444444444444444444444444444444444444444444444444444444444444" },
+      "target": { "kind": "web-deployment", "identity": "verglos.com-previous", "immutableRef": "sha256:5555555555555555555555555555555555555555555555555555555555555555" },
+      "reason": "bad web deployment",
+      "approved": true
+    }
+  ],
+  "historicalRecords": [
+    { "id": "record-pass", "digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666" },
+    { "id": "record-review", "digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777" }
+  ]
+}

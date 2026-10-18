@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import { executeReleaseRollbackPlan, executeReleaseRollbackRehearsal } from "./release-rollback-plan.js";
 
@@ -102,4 +103,22 @@ test("rollback-rehearsal rejects an incomplete or duplicated provider-boundary s
     console.log = original;
   }
   assert.deepEqual(JSON.parse(lines[0]!), { status: "invalid-input", historicalRecordsPreserved: false });
+});
+
+test("canonical release rollback rehearsal covers every provider boundary", async () => {
+  const manifestPath = join(dirname(fileURLToPath(import.meta.url)), "../../../scripts/fixtures/release-rollback-rehearsal.json");
+  const lines: string[] = [];
+  const original = console.log;
+  console.log = (value?: unknown) => lines.push(String(value));
+  try {
+    assert.equal(await executeReleaseRollbackRehearsal({ manifestPath, json: true, quiet: true }), 0);
+  } finally {
+    console.log = original;
+  }
+  const report = JSON.parse(lines[0]!) as { status: string; operationCount: number; historicalRecordCount: number; historicalRecordsPreserved: boolean; operations: Array<{ id: string; action: string }> };
+  assert.equal(report.status, "passed");
+  assert.equal(report.operationCount, 5);
+  assert.equal(report.historicalRecordCount, 2);
+  assert.equal(report.historicalRecordsPreserved, true);
+  assert.deepEqual(report.operations.map((operation) => [operation.id, operation.action]), [["npm", "rollback"], ["engine", "rollback"], ["hunt", "rollback"], ["signing", "revoke"], ["web", "rollback"]]);
 });
