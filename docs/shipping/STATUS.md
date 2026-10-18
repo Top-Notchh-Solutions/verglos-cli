@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · TEAM-CLI-001 / STUDIO-CLI-001 Studio projection upload hardening
+
+CLI PR #146 merged normally as `2f27f71c`, preserving implementation commit
+`a55c1c66` and regression-test commit `ae40cdb4`. The Studio projection upload
+client now binds requests to the exact organization/project route and rejects
+query, fragment, backslash, control-character, and overlong endpoint input.
+Response record identifiers are bounded and reject unsafe values before being
+returned. Workspace build **8/8**, focused upload tests **6/6**, CLI typecheck,
+full CLI tests, diff check, and all **12/12** protected PR checks passed.
+
+This is code-side hardening only. `TEAM-CLI-001`, `TEAM-CLI-002`, and
+`STUDIO-CLI-001` remain unchecked for hosted entitlement, provider delivery,
+reconciliation, numeric paid/non-production allowance, and authorized
+customer acceptance. AppSec/Hunt state is unchanged; score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-studio-cli-001-projection-upload-pr146-2026-10-19.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 SCM repository-scope reconciliation
 
 Web PR #204 merged normally as `a32f1589`, preserving four substantive source
