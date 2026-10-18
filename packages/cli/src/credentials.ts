@@ -2,6 +2,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { homedir, hostname, userInfo } from "node:os";
 import { dirname, join } from "node:path";
 import { access, chmod, lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
+import { readJsonResponse } from "./http-response.js";
 
 export interface Credentials {
   licenseKey?: string;
@@ -50,14 +51,6 @@ async function writePrivateJson(path: string, value: unknown): Promise<void> {
     if (handle) await handle.close().catch(() => undefined);
     await unlink(temporary).catch(() => undefined);
   }
-}
-
-async function readBoundedJson(response: Response): Promise<unknown> {
-  const length = Number(response.headers.get("content-length") ?? "0");
-  if (Number.isFinite(length) && length > MAX_UNLOCK_RESPONSE_BYTES) return null;
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength > MAX_UNLOCK_RESPONSE_BYTES) return null;
-  try { return JSON.parse(new TextDecoder().decode(bytes)); } catch { return null; }
 }
 
 async function readLocalJson(path: string, maxBytes: number): Promise<string> {
@@ -164,7 +157,7 @@ export async function refreshUnlockToken(
 
     if (!res.ok) return false;
 
-    const data = (await readBoundedJson(res)) as {
+    const data = (await readJsonResponse(res, MAX_UNLOCK_RESPONSE_BYTES)) as {
       token: string;
       expiresAt: string;
     };
