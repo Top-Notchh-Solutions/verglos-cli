@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 visible policy-digest dashboard slice
+
+- **Public merge:** Web PR #193 merged normally as `104d236f`; implementation
+  `9c34a5f` and test `9513caa` remain separate.
+- **Implementation:** The organization Policy App Router page uses
+  `requireDashboardOrganization`, the organization tenant predicate, and a
+  same-organization project join. It renders policy ID/version/status,
+  digest/algorithm, effective time, binding, and repository without rendering
+  the policy document.
+- **Verification:** Focused policy tests 16/16, typecheck, diff check, build
+  47/47 pages, hosted typecheck/schema, GitGuardian, and Preview Comments
+  passed. Vercel Preview `dpl_8xTcsqGpsJd81CSgoJepWng6TP7G` is READY.
+- **Disposition:** Keep `TEAM-CLI-001` open. Entitlement and authenticated
+  CLI signed fetch/cache/offline/expiry/cross-tenant/provider reconciliation
+  remain unqualified. No checkbox or AppSec status changed.
+- **Evidence:** `docs/shipping/evidence/team-cli-001-policy-dashboard-digest-pr193-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 organization entitlement browser observation
 
 - **Session:** Existing Chrome page 3, authenticated to `Top Notchh Solutions`

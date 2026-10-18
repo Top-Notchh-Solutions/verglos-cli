@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · ship visible policy digest without claiming entitlement
+
+- **Decision:** Accept Web PR #193 as the next real implementation slice for
+  `TEAM-CLI-001`; preserve its separate implementation and test commits and
+  regular merge.
+- **Result:** The authenticated organization Policy page now exposes exact
+  policy identity/digest through the existing tenant authorization path and
+  excludes policy documents. Local and hosted verification passed.
+- **Boundary:** Do not check `TEAM-CLI-001`. The current owner account still
+  lacks the mapped paid/non-production entitlement and live CLI
+  fetch/cache/offline/expiry/cross-tenant/provider reconciliation evidence.
+  This is not an AppSec substitute or waiver.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-digest-pr193-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-CLI-001 after organization entitlement observation
 
 - **Decision:** Treat the authenticated organization Billing view as the

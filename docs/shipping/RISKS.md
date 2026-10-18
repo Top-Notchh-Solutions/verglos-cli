@@ -1,5 +1,18 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-TEAM-CLI-001 digest projection does not prove entitlement
+
+- **Risk:** A visible policy digest in the authenticated organization
+  dashboard could be mistaken for a valid paid/non-production entitlement or
+  a completed CLI policy-fetch/cache/offline qualification.
+- **Mitigation:** The dashboard implementation is tenant-scoped, shows only
+  bounded policy identity, and does not render policy documents. It was
+  verified locally and in a READY Preview deployment, while the missing
+  entitlement and live CLI matrix remain explicit.
+- **Status:** `TEAM-CLI-001` remains open at **232/48/280 (82.9%)**; dependent
+  Team rows remain open. This risk is separate from the held AppSec gate.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-digest-pr193-2026-10-18.md`.
+
 ## 2026-10-18 · R-TEAM-CLI-001 organization is not entitled for hosted policy
 
 - **Risk:** Organization ownership and visible Preview applications could be

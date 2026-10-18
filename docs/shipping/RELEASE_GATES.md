@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 digest projection implemented; gate remains open
+
+Web PR #193 merged normally as `104d236f`, with separate implementation and
+test commits. The READY Preview deployment
+`dpl_8xTcsqGpsJd81CSgoJepWng6TP7G` contains the tenant-scoped organization
+Policy dashboard and exact policy digest projection. Focused tests, typecheck,
+build, hosted checks, GitGuardian, and Preview Comments passed.
+
+This does not pass the Team policy-fetch gate. Keep `TEAM-CLI-001` and its
+dependents open until the mapped entitlement and authenticated CLI
+fetch/cache/offline/expiry/cross-tenant/provider reconciliation evidence are
+recorded. Score remains **232 checked / 48 open / 280 total (82.9%)**.
+Evidence: `evidence/team-cli-001-policy-dashboard-digest-pr193-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 organization entitlement remains unqualified
 
 The authenticated owner organization page showed `Top Notchh Solutions` on

@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 visible policy-digest dashboard slice
+
+Web PR #193 merged normally as
+`104d236f328170165f1f43867a0556994504000e`, preserving public commits
+`9c34a5f` and `9513caa`. The authenticated organization Policy page now shows
+bounded policy identity and the exact digest under the existing tenant access
+resolver; policy documents remain excluded. Focused tests passed **16/16**,
+typecheck and diff checks passed, the build generated **47/47** pages, hosted
+checks passed, and Preview deployment
+`dpl_8xTcsqGpsJd81CSgoJepWng6TP7G` is READY.
+
+This is implementation progress, not row closure. The mapped entitlement and
+authenticated CLI fetch/cache/offline/expiry/cross-tenant/provider matrix are
+still missing. Score remains **232 checked / 48 open / 280 total (82.9%)**.
+Evidence:
+`evidence/team-cli-001-policy-dashboard-digest-pr193-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 organization entitlement browser observation
 
 The existing authenticated Verglos page 3 identified `Top Notchh Solutions`

@@ -1,5 +1,30 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-001 visible policy-digest dashboard slice
+
+Web PR #193, assigned to `anuragyadav-git`, merged normally as
+`104d236f328170165f1f43867a0556994504000e`, preserving implementation commit
+`9c34a5f` and regression-test commit `9513caa`. The organization Policy page
+now uses the authenticated organization resolver and tenant predicate, and
+renders bounded policy identity including policy ID, version, status, exact
+digest, digest algorithm, effective time, project binding, and repository. It
+does not render the policy document.
+
+The clean worktree passed the focused policy suite **16/16**, typecheck,
+`git diff --check`, and a production build with **47/47** generated pages.
+Hosted Actions run `39128023770` / job `117677152225`, GitGuardian, Vercel
+Preview Comments, and Preview deployment
+`dpl_8xTcsqGpsJd81CSgoJepWng6TP7G` passed; the deployment is READY at
+`https://verglos-kyocl1q7s-anuragyadav20062002s-projects.vercel.app`.
+
+This advances the visible-digest and tenant-scoped dashboard portion only.
+`TEAM-CLI-001` remains unchecked for a valid mapped paid/non-production
+entitlement, authenticated signed CLI fetch/cache/offline/expiry/cross-tenant
+observations, and provider delivery/reconciliation. `TEAM-CLI-002` and
+`TEAM-WEB-006` remain dependent. No checkbox changed; score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-policy-dashboard-digest-pr193-2026-10-18.md`.
+
 ## 2026-10-18 · organization SCM App token/scope read-back
 
 The organization App identity and signed installation-token exchange were

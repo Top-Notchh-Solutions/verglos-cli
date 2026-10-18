@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 visible policy-digest dashboard slice · 2026-10-18
+
+- **Source mapping:** Web PR #193; implementation `9c34a5f`, regression test
+  `9513caa`, normal merge `104d236f`.
+- **Product mapping:** The organization Policy page now exposes bounded
+  policy identity and exact digest using the authenticated organization
+  resolver and tenant-scoped policy/project query; policy documents are not
+  rendered.
+- **Qualification mapping:** Focused policy tests **16/16**, typecheck, diff
+  check, build **47/47**, hosted typecheck/schema, GitGuardian, and Preview
+  Comments passed. Preview deployment `dpl_8xTcsqGpsJd81CSgoJepWng6TP7G` is
+  READY.
+- **Acceptance mapping:** This advances visible digest and tenant-scoped
+  dashboard implementation. `TEAM-CLI-001` remains unchecked for mapped
+  entitlement, authenticated CLI/cache/offline/expiry/cross-tenant/provider
+  evidence. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-digest-pr193-2026-10-18.md`.
+
 ## TEAM-CLI-001 organization entitlement browser observation · 2026-10-18
 
 - **Hosted mapping:** The existing owner session showed the real
