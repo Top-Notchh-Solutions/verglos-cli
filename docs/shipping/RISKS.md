@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-ENT-CLI-001 current runner implementation requalified
+
+- **Risk:** Passing bounded protocol tests could be mistaken for proof that an
+  authorized private runner was enrolled, executed a job, and reconciled a
+  result in an operational environment.
+- **Mitigation:** The current CLI merge passed shared **457/457**, CLI
+  **291/293** with **2 explicit skips / 0 failures**, focused runner tests
+  **5/5 + 7/7**, build, typecheck, and diff checks. The source-free, outbound,
+  signed, replay-bounded contract remains explicit.
+- **Status:** Code-side risk revalidated; `ENT-CLI-001` remains open for
+  operational enrollment/execution, cross-platform operational evidence,
+  independent review, and enterprise acceptance. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/ent-cli-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · R-STUDIO-CLI-001 custody implementation requalified
 
 - **Risk:** Passing local route and contract tests could be mistaken for proof

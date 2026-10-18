@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain ENT-CLI-001 open after current-head requalification
+
+- **Decision:** Accept the current merged-head runner protocol tests as
+  implementation evidence, but do not check `ENT-CLI-001`.
+- **Reason:** Shared/CLI suites, focused runner tests, build, typecheck, and
+  diff check pass. The required operational enrollment credential exchange,
+  approved runner execution/result reconciliation, cross-platform operational
+  evidence, independent review, and enterprise acceptance are not established
+  by local tests.
+- **Disposition:** Keep the row open and leave AppSec-held and dependent rows
+  untouched. Score remains **232/48/280 (82.9%)**.
+- **Boundary:** No production, customer, provider, registry, account, database,
+  or deployment state changed. No squash merge was used.
+- **Evidence:** `evidence/ent-cli-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · retain STUDIO-CLI-001 open after custody merge
 
 - **Decision:** Accept Web PR #188 as current code-side implementation evidence;

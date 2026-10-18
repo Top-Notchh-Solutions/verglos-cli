@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 current merged-head runner requalification · 2026-10-18
+
+- **Source mapping:** CLI current merge
+  `50bcab42eadfa8796d86d1f7a8aaee3010c65647` retains the signed private-runner
+  protocol/client; Web current merge is
+  `a94ff8e352f29f75860340fab69fb472af25924f`.
+- **Verification mapping:** Shared full suite **457/457**, CLI full suite
+  **291 passed / 2 explicit skips / 0 failed**, focused runner protocol
+  **5/5 + 7/7**, build **8/8**, typecheck **14/14**, and diff check passed.
+- **Acceptance mapping:** This proves the current source and bounded local/CI
+  contract only. Operational enrollment/execution/result reconciliation,
+  cross-platform runner qualification, independent review, and enterprise
+  acceptance remain missing. `ENT-CLI-001` stays unchecked; score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/ent-cli-001-current-merge-requalification-2026-10-18.md`.
+
 ## STUDIO-CLI-001 hosted custody implementation · 2026-10-18
 
 - **Source mapping:** Web PR #188 adds the custody route, bounded projection

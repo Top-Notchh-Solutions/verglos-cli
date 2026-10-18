@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · ENT-CLI-001 current merged-head runner requalification
+
+- **Verification:** CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed
+  shared **457/457**, CLI **291/293** with **2 explicit skips and 0 failures**,
+  focused runner protocol **5/5 + 7/7**, workspace build **8/8**, workspace
+  typecheck **14/14**, and diff check.
+- **Disposition:** This refreshes the current code-side evidence only. Keep
+  `ENT-CLI-001` unchecked for operational enrollment credentials, approved
+  runner execution/result reconciliation, cross-platform operational evidence,
+  independent review, and enterprise acceptance. Score remains
+  **232/48/280 (82.9%)**.
+- **Boundary:** The tests cover signed short-lived jobs, tenant/runner/target
+  binding, GET-only polling, replay protection, bounded result projection, and
+  timeout/refusal paths. No production, customer, provider, registry, account,
+  database, or deployment state changed. No squash, rebase, force-push, empty,
+  duplicate, artificial, or irrelevant contribution was used.
+- **Evidence:** `docs/shipping/evidence/ent-cli-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · STUDIO-CLI-001 hosted custody implementation merged
 
 - **Implementation:** Web PR #188 added the bounded client-projection contract,

@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · ENT-CLI-001 current merged-head runner requalification
+
+The exact current CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed
+the shared full suite **457/457**, CLI full suite **291/293** with **2 explicit
+skips and 0 failures**, focused runner protocol **5/5 + 7/7**, workspace build
+**8/8**, workspace typecheck **14/14**, and `git diff --check`. The private
+runner implementation remains code-side qualified, but `ENT-CLI-001` stays
+unchecked for operational enrollment, approved runner execution/result
+reconciliation, cross-platform operational evidence, independent review, and
+enterprise acceptance. Score remains **232 checked / 48 open / 280 total
+(82.9%)**. Evidence:
+`evidence/ent-cli-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · STUDIO-CLI-001 hosted custody implementation merged
 
 Web PR #188 added the tenant/project-scoped client-projection custody path and

@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · ENT-CLI-001 current runner implementation requalified
+
+The current CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed shared
+**457/457**, CLI **291/293** with **2 explicit skips / 0 failures**, focused
+runner protocol **5/5 + 7/7**, build **8/8**, typecheck **14/14**, and diff
+check. The bounded signed job, outbound poll, replay state, source-free result
+projection, and timeout/refusal paths are current-head qualified. This does not
+open the row: operational enrollment, approved runner execution/result
+reconciliation, cross-platform operational evidence, independent review, and
+enterprise acceptance remain required. Keep `ENT-CLI-001` unchecked. Score
+remains **232/48/280 (82.9%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · STUDIO-CLI-001 hosted custody implementation requalified
 
 Web PR #188 merged normally as `a94ff8e352f29f75860340fab69fb472af25924f`,
