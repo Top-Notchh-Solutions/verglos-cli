@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-WEB-006 tenant-scoped SCM dashboard
+
+- **Public merge:** Web PR #203 merged normally as `5ee6fb28`, preserving
+  implementation `2db69ed` and regression test `d154a65`.
+- **Implementation:** Added the read-only organization SCM dashboard route;
+  its loader applies the organization tenant predicate, protects project joins,
+  and selects no webhook/provider token or raw payload fields.
+- **Verification:** Focused test **1/1**, typecheck, build, hosted
+  typecheck/schema, Vercel, Preview Comments, and GitGuardian passed.
+- **Disposition:** Keep `TEAM-WEB-006`/`GITHUB-WEB-001` unchecked for live
+  provider delivery, retry/reconciliation, and acceptance. No AppSec state
+  changed; score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-scm-dashboard-pr203-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 GitHub App webhook configuration
 
 - **Observed:** Personal Preview App ID `5367509` has an active SSL-verified

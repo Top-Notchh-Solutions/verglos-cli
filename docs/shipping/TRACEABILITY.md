@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## TEAM-WEB-006 tenant-scoped SCM dashboard · 2026-10-18
+
+- **Source mapping:** Web PR #203 normal merge `5ee6fb28`, preserving
+  implementation `2db69ed` and regression `d154a65`.
+- **Contract mapping:** `/orgs/[organizationSlug]/scm` renders bounded provider,
+  account, repository, project, status, and lifecycle metadata; token and
+  webhook secret columns are not selected.
+- **Verification mapping:** Focused test **1/1**, typecheck, build, hosted
+  typecheck/schema, Vercel, Preview Comments, and GitGuardian passed.
+- **Acceptance mapping:** Delivery, retry/reconciliation, and complete
+  acceptance remain open. No AppSec row changed; score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-scm-dashboard-pr203-2026-10-18.md`.
+
 ## TEAM-WEB-006 GitHub App webhook configuration · 2026-10-18
 
 - **Provider mapping:** Personal Preview App ID `5367509` points its active

@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-WEB-006 tenant-scoped SCM dashboard
+
+Web PR #203 merged normally as `5ee6fb28`, preserving implementation
+`2db69ed` and regression test `d154a65`. The organization dashboard now
+provides a read-only tenant-scoped SCM installation view with bounded provider,
+account, repository, project, status, and lifecycle metadata; encrypted
+secret/token fields and raw provider payloads are not selected. Focused test
+**1/1**, typecheck, build, hosted typecheck/schema, Vercel, Preview Comments,
+and GitGuardian passed. This is implementation progress only:
+`TEAM-WEB-006`/`GITHUB-WEB-001` remain unchecked for live provider delivery,
+retries/reconciliation, and acceptance. No AppSec state changed; score
+remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-web-006-scm-dashboard-pr203-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 GitHub App webhook configuration
 
 The personal Preview App ID `5367509` has an active SSL-verified webhook at

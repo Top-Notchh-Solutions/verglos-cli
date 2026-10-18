@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-WEB-006 after SCM dashboard implementation
+
+- **Decision:** Accept Web PR #203 as a substantive implementation advance
+  while retaining `TEAM-WEB-006` and `GITHUB-WEB-001` unchecked.
+- **Observed:** The tenant-scoped SCM dashboard exposes bounded installation
+  identity/lifecycle metadata and excludes encrypted secret/token fields and
+  raw provider payloads. Normal merge, focused test, build, and hosted checks
+  passed.
+- **Reason:** A dashboard projection does not establish live provider
+  delivery, retries, reconciliation, or customer acceptance.
+- **Disposition:** No checkbox or AppSec state changes. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-scm-dashboard-pr203-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-WEB-006 after webhook configuration check
 
 - **Decision:** Accept the owner-visible App configuration as provider
