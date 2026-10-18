@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## DIST-006 rollback/revocation rehearsal · 2026-10-18
+
+- **Source mapping:** CLI normal merge `9eba5102`.
+- **Verification mapping:** Shared rollback decisions **6/6** and CLI
+  rollback-plan/rehearsal **5/5** passed; five provider boundaries and
+  historical-record preservation are covered.
+- **Acceptance mapping:** Local rehearsal passes, but authenticated external
+  rollback/revocation and final acceptance are absent. `DIST-006` stays
+  unchecked.
+- **Evidence:** `evidence/dist-006-current-cli-rollback-rehearsal-2026-10-18.md`.
+
 ## DIST-002/003 release-workflow contract revalidation · 2026-10-18
 
 - **Source mapping:** CLI normal merge `9eba5102`.

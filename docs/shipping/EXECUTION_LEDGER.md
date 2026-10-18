@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · DIST-006 rollback/revocation rehearsal
+
+- **Source:** CLI normal merge `9eba5102`; disposable worktree.
+- **Results:** shared rollback decision tests **6/6** and CLI rollback-plan/
+  rehearsal tests **5/5**, covering five provider boundaries and preserving
+  historical records.
+- **Boundary:** No provider, registry, signing, deployment, tag, or release
+  state was changed.
+- **Disposition:** Keep `DIST-006` open for authenticated external rollback/
+  revocation and final release acceptance.
+- **Evidence:** `evidence/dist-006-current-cli-rollback-rehearsal-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-002/003 release-workflow contract revalidation
 
 - **Source:** CLI normal merge `9eba5102`; disposable clean worktree.

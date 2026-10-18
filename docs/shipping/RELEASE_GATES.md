@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · DIST-006 rollback/revocation rehearsal
+
+CLI merge `9eba5102` passed shared rollback **6/6** and CLI plan/rehearsal
+**5/5** tests across npm, engine, Hunt-feed, signing, and Web-deployment
+boundaries. This is local fail-closed rehearsal only; keep `DIST-006` open
+for authenticated external rollback/revocation and final acceptance. Score
+remains **232/48/280 (82.9%)**. Evidence:
+`evidence/dist-006-current-cli-rollback-rehearsal-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-002/003 release-workflow contracts
 
 The current CLI merge `9eba5102` passed **11/11** release/publishing/

@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · DIST-006 current rollback/revocation rehearsal
+
+On CLI merge `9eba5102`, the shared rollback decision tests passed **6/6** and
+the CLI rollback-plan/rehearsal tests passed **5/5**. The bounded rehearsal
+covers npm, engine-manifest, Hunt-feed, signing-identity, and Web-deployment
+boundaries, preserves historical records, and fails closed on missing approval
+or invalid references.
+
+This is local implementation/rehearsal evidence only. `DIST-006` remains
+unchecked because no authenticated provider/registry/engine/feed/signing/
+deployment rollback or revocation was executed and final release acceptance
+remains open. No checkbox changed; score remains **232 checked / 48 open / 280
+total (82.9%)**. Evidence:
+`docs/shipping/evidence/dist-006-current-cli-rollback-rehearsal-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-002/003 current release-workflow revalidation
 
 On CLI merge `9eba5102`, the release/publishing/platform-matrix/package-surface

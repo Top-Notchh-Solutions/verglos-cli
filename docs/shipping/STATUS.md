@@ -1,5 +1,13 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · DIST-006 rollback/revocation rehearsal
+
+The current CLI merge passed shared rollback tests **6/6** and CLI
+rollback-plan/rehearsal tests **5/5**. All five provider boundaries are
+covered, historical records remain preserved, and approval/reference failures
+are fail-closed. This is local rehearsal only; no registry, provider, signing,
+or deployment state changed, so `DIST-006` remains open.
+
 ## 2026-10-18 · DIST-002/003 release-workflow contract revalidation
 
 On CLI merge `9eba5102`, release/publishing/platform-matrix/package-surface
