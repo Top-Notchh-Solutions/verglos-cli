@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · TEAM-CLI-002 hosted CLI check-payload/provider qualification
+
+TEAM-CLI-002 is checked after the actual `verglos ci --check-payload` command
+projected a bounded source-free Release Decision containing the exact subject
+digest, PASS decision, policy identity/digest, record-manifest digest, HTTPS
+record URL, commit, and deterministic payload digest. The exact policy digest
+was the signed Preview policy qualified under TEAM-CLI-001. The protected
+Preview SCM route admitted the payload, the delivery worker returned
+`claimed=1, delivered=1, retried=0, failed=0, leaseLost=0`, identical replay
+returned `providerStatus=delivered` with `deliveryDecision=noop`, and GitHub
+read back one completed successful `Verglos / release decision` check at the
+TEAM-CLI-002 record URL. No source or credentials crossed the boundary.
+
+Score: **234 checked / 46 open / 280 total (83.6%)**. AppSec/Hunt remains a
+separate independent gate and was not changed. Evidence:
+`evidence/team-cli-002-hosted-check-payload-provider-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-CLI-001 hosted policy/provider qualification
 
 TEAM-CLI-001 is checked after the approved isolated Preview qualification:

@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · TEAM-CLI-002 hosted CLI check-payload/provider qualification
+
+- **Public implementation:** CLI PR #147 merged normally as
+  `5bf7ae70a0e8169f169750cfc188baf4d13685db`; the existing
+  `ci --check-payload` path was rebuilt and executed successfully.
+- **CLI payload:** The source-free output bound decision `PASS`, subject
+  digest `sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`,
+  policy `verglos.policy.team@1.0.0` with digest
+  `sha256:055bd90bca9822faa7219224aeba42ed4c201ab9ed81df9ca9efa167a9ad8a02`,
+  record-manifest digest ending in `0003`, the HTTPS TEAM-CLI-002 record URL,
+  commit `5bf7ae70a0e8169f169750cfc188baf4d13685db`, and CLI payload digest
+  `sha256:4b2e28bfe306b49958b9f965a4279ac7599765c339125dfae828ee75dee3d4be`.
+- **Provider:** Preview delivery
+  `2b0bf9db-02e2-4f9e-a66b-373baa2cad04` was admitted with provider payload
+  digest `sha256:749537ee0402dde616913209277fcca4d3f2b7d82014f8c324ffad174ce700a7`,
+  the protected cron returned `claimed=1, delivered=1, retried=0, failed=0,
+  leaseLost=0`, and identical replay returned `providerStatus=delivered` and
+  `deliveryDecision=noop`. GitHub check ID `117825133730` was completed with
+  conclusion `success` and the exact TEAM-CLI-002 record URL.
+- **Disposition:** Check `TEAM-CLI-002`. Score is now **234/46/280
+  (83.6%)**. This is approved isolated Preview qualification evidence;
+  Production, payment, customer data, and archive state were untouched.
+  AppSec/Hunt state remains separate and unchanged.
+- **Evidence:** `evidence/team-cli-002-hosted-check-payload-provider-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-CLI-001 hosted policy/provider qualification
 
 - **Public implementation:** CLI PR #147 merged normally as
