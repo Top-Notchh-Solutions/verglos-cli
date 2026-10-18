@@ -111,13 +111,17 @@ test("falls back to a verified cache when response headers arrive but the body t
       ok: true,
       status: 200,
       headers: new Headers(),
-      arrayBuffer: () => new Promise<ArrayBuffer>((_resolve, reject) => {
-        const signal = init?.signal;
-        if (signal?.aborted) {
-          reject(new DOMException("The operation was aborted", "AbortError"));
-          return;
-        }
-        signal?.addEventListener("abort", () => reject(new DOMException("The operation was aborted", "AbortError")), { once: true });
+      body: new ReadableStream<Uint8Array>({
+        pull() {
+          return new Promise<void>((_resolve, reject) => {
+            const signal = init?.signal;
+            if (signal?.aborted) {
+              reject(new DOMException("The operation was aborted", "AbortError"));
+              return;
+            }
+            signal?.addEventListener("abort", () => reject(new DOMException("The operation was aborted", "AbortError")), { once: true });
+          });
+        },
       }),
     }) as Response,
   });
