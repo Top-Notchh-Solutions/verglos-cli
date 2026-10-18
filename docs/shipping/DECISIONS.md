@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-WEB-006 after personal App scope verification
+
+- **Decision:** Accept the personal-account scope observation as a provider
+  configuration advance while retaining `TEAM-WEB-006` and `GITHUB-WEB-001`
+  unchecked.
+- **Observed:** Installation `172664847` owned by `anuragyadav-git` selects
+  only `anuragyadav-git/verglos-web`; its metadata/check permissions match the
+  organization installation's least-privilege boundary.
+- **Reason:** Correct scope is necessary but does not establish live webhook or
+  check delivery, retry/reconciliation, or acceptance.
+- **Disposition:** No checkbox or AppSec state changes. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-github-app-personal-scope-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-WEB-006 after GitHub App scope correction
 
 - **Decision:** Accept the organization installation scope correction as

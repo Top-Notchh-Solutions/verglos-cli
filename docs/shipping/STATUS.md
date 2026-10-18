@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-WEB-006 personal GitHub App scope
+
+The existing personal-account installation was verified in the owner session:
+`Verglos Preview SCM Checks`, installation `172664847`, owned by
+`anuragyadav-git`, has only `anuragyadav-git/verglos-web` selected. It retains
+read metadata and read/write checks permissions, with no pending scope change.
+Together with the organization installation packet, the two working repos now
+have separate least-privilege installations matching their actual owners.
+
+This advances provider configuration only. Live webhook/check delivery,
+retry/reconciliation, and complete `TEAM-WEB-006`/`GITHUB-WEB-001` acceptance
+remain open. No AppSec state changed; score remains **232 checked / 48 open /
+280 total (82.9%)**. Evidence:
+`evidence/team-web-006-github-app-personal-scope-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 GitHub App scope recheck
 
 The existing GitHub organization installation was corrected in the owner

@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-WEB-006 personal GitHub App scope
+
+The existing personal installation `172664847` for `anuragyadav-git` was
+verified with only `anuragyadav-git/verglos-web` selected and with read
+metadata/read-write checks permissions. The organization installation
+`172686102` separately selects only `Top-Notchh-Solutions/verglos-cli`; the
+obsolete archive scope is removed. This maps both working repositories to
+owner-correct least-privilege installations. It remains provider
+configuration evidence only: `TEAM-WEB-006` and `GITHUB-WEB-001` stay
+unchecked for live delivery, check publication, reconciliation, and complete
+acceptance. No AppSec state changed; score remains **232 checked / 48 open /
+280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-web-006-github-app-personal-scope-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 GitHub App scope recheck
 
 The existing `Top-Notchh-Solutions` installation for Verglos Organization SCM

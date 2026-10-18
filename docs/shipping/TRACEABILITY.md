@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## TEAM-WEB-006 personal GitHub App scope · 2026-10-18
+
+- **Provider mapping:** Personal installation `172664847` owned by
+  `anuragyadav-git` selects only `anuragyadav-git/verglos-web`.
+- **Permission mapping:** Read metadata and read/write checks remain the
+  observed least-privilege permissions.
+- **Cross-owner mapping:** Organization installation `172686102` selects only
+  `Top-Notchh-Solutions/verglos-cli`; the working repos are not conflated.
+- **Acceptance mapping:** This does not prove live delivery, publication,
+  retry/reconciliation, or final acceptance. `TEAM-WEB-006` and `GITHUB-WEB-001`
+  remain unchecked; no AppSec row changed and score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-github-app-personal-scope-2026-10-18.md`.
+
 ## TEAM-WEB-006 GitHub App scope recheck · 2026-10-18
 
 - **Provider mapping:** GitHub App installation `172686102` for

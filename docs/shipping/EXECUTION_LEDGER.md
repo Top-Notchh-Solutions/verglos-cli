@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-WEB-006 personal GitHub App scope
+
+- **Observed:** Personal installation `172664847` for `anuragyadav-git` is
+  `Verglos Preview SCM Checks` with only `anuragyadav-git/verglos-web`
+  selected. Read metadata and read/write checks permissions are retained and
+  the Save control is disabled.
+- **Boundary:** The personal installation covers the working Web repository;
+  the organization installation separately covers only the working CLI
+  repository. The obsolete archive scope is not part of the working setup.
+- **Disposition:** Provider configuration is now mapped to both working repo
+  owners, but `TEAM-WEB-006` and `GITHUB-WEB-001` remain unchecked for live
+  delivery, check publication, reconciliation, and acceptance. No AppSec state
+  changed; score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-github-app-personal-scope-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 GitHub App scope recheck
 
 - **Observed:** The existing `Top-Notchh-Solutions` installation for

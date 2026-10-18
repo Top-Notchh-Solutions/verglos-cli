@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-WEB-006 personal GitHub App scope
+
+The existing personal installation `172664847` for `anuragyadav-git` was
+verified with only `anuragyadav-git/verglos-web` selected. It retains read
+metadata and read/write checks permissions. The organization installation
+`172686102` separately selects only `Top-Notchh-Solutions/verglos-cli`, so the
+two working repositories have owner-correct, least-privilege scope.
+
+This is provider configuration evidence only. Keep `TEAM-WEB-006` and
+`GITHUB-WEB-001` open for live delivery/publication, reconciliation, and
+acceptance. No AppSec state changed; score remains **232 checked / 48 open /
+280 total (82.9%)**. Evidence:
+`evidence/team-web-006-github-app-personal-scope-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 GitHub App scope recheck
 
 The existing `Top-Notchh-Solutions` GitHub App installation was updated
