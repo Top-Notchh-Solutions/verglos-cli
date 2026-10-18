@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · TEAM-WEB-006 hosted GitHub check-delivery qualification
+
+TEAM-WEB-006 is checked after the implemented Web SCM integration was
+qualified through the owner-authorized isolated Preview GitHub installation.
+The source-free CLI check was admitted to the tenant-bound Web route, the
+durable worker delivered it successfully, identical replay returned a no-op,
+and GitHub read back one completed successful `Verglos / release decision`
+check bound to the exact repository, commit, subject/artifact digest, and
+record URL. Existing Web route/provider/worker coverage passed with zero
+failures or skips. GitLab remains code/test-qualified but was not exercised
+live because no authorized GitLab installation is in scope; the dependent
+GitHub lifecycle rows remain separate. AppSec/Hunt was not changed.
+
+Score: **235 checked / 45 open / 280 total (83.9%)**. Evidence:
+`evidence/team-web-006-hosted-github-check-delivery-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-CLI-002 hosted CLI check-payload/provider qualification
 
 TEAM-CLI-002 is checked after the actual `verglos ci --check-payload` command

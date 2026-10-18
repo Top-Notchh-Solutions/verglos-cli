@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · TEAM-WEB-006 hosted GitHub check-delivery qualification
+
+- **Implementation:** Web PRs #129–#137 delivered the tenant-bound GitHub/
+  GitLab installation, redaction, idempotency, lease/retry, provider, and
+  cron substrate; PRs #216–#218 repaired the Preview Neon delivery claim and
+  lease-finish timestamp serialization. Existing focused SCM/provider/runner
+  coverage passed with zero failures or skips, including the accepted **22/22**
+  combined suite.
+- **Live Preview:** Installation `172686102` bound account `287223982` and
+  repository ID `1310272752` (`Top-Notchh-Solutions/verglos-cli`) to the
+  qualification organization. Delivery
+  `2b0bf9db-02e2-4f9e-a66b-373baa2cad04` was admitted with provider payload
+  digest `sha256:749537ee0402dde616913209277fcca4d3f2b7d82014f8c324ffad174ce700a7`;
+  the protected worker returned `claimed=1, delivered=1, retried=0, failed=0,
+  leaseLost=0`; identical replay returned `providerStatus=delivered` and
+  `deliveryDecision=noop`.
+- **Provider read-back:** GitHub check ID `117825133730` was completed with
+  conclusion `success`, exact commit binding, and the TEAM-CLI-002 record URL.
+  The check output contained only bounded decision/subject/artifact identity.
+- **Disposition:** Check `TEAM-WEB-006`. Score is now **235/45/280
+  (83.9%)**. GitLab was not live-qualified because no authorized GitLab
+  installation is in scope; its adapter remains covered by code tests.
+  `GITHUB-WEB-001`–`004` remain separate. AppSec/Hunt is unchanged.
+- **Evidence:** `evidence/team-web-006-hosted-github-check-delivery-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-CLI-002 hosted CLI check-payload/provider qualification
 
 - **Public implementation:** CLI PR #147 merged normally as
