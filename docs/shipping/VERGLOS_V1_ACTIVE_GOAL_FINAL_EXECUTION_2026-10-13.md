@@ -4,8 +4,10 @@
 ## 0.0za Current TEAM-CLI-001 organization-owner policy authorization fix — 2026-10-18
 
 The next non-AppSec implementation slice is complete in Web PR #192, assigned
-to `anuragyadav-git`. Implementation `4579c27` and regression-test commit
-`f8b420e` are preserved as separate substantive commits. The repository policy
+to `anuragyadav-git`, merged normally as
+`188b4b01fd9d6c7c4292d8cdf55a3b348954e9d4`. Implementation `4579c27` and
+regression-test commit `f8b420e` are preserved as separate substantive commits.
+The repository policy
 endpoint now authorizes a license bearer against the exact requested active
 organization owner membership, while missing ownership and database failures
 remain fail-closed.
@@ -13,7 +15,7 @@ remain fail-closed.
 Focused SCM/tenant tests passed **22/22**, typecheck and diff checks passed,
 and READY Preview deployment `dpl_7DhQxht5dgG655VBqU1a1NnzZj21` built
 **47/47** pages. GitGuardian and Preview Comments passed; the hosted
-typecheck/schema check was still running at packet time.
+typecheck/schema check passed.
 
 This is implementation and hosted-build evidence only. `TEAM-CLI-001` remains
 unchecked for provider installation/credentials, published signed policy,

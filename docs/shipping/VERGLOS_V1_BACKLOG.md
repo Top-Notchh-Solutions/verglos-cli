@@ -2,8 +2,9 @@
 
 ## 2026-10-18 · TEAM-CLI-001 organization-owner policy authorization fix
 
-Web PR #192, assigned to `anuragyadav-git`, preserves implementation commit
-`4579c27` and regression-test commit `f8b420e` in a normal reviewable branch.
+Web PR #192, assigned to `anuragyadav-git`, merged normally as
+`188b4b01fd9d6c7c4292d8cdf55a3b348954e9d4`, preserving implementation commit
+`4579c27` and regression-test commit `f8b420e`.
 The repository policy endpoint now authorizes a license bearer against the
 exact requested organization's active owner membership; it no longer requires
 a legacy migration mapping for an organization created through the current

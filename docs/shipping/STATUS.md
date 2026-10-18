@@ -2,8 +2,9 @@
 
 ## 2026-10-18 · TEAM-CLI-001 organization-owner policy authorization fix
 
-Web PR #192, assigned to `anuragyadav-git`, preserves two substantive commits:
-implementation `4579c27` and regression coverage `f8b420e`. The repository
+Web PR #192, assigned to `anuragyadav-git`, merged normally as
+`188b4b01fd9d6c7c4292d8cdf55a3b348954e9d4`, preserving two substantive
+commits: implementation `4579c27` and regression coverage `f8b420e`. The repository
 policy endpoint now authorizes a license bearer against the exact requested
 organization's active owner membership instead of requiring a legacy
 user-to-primary-tenant migration mapping. It remains fail-closed for missing
@@ -11,8 +12,8 @@ ownership and database errors.
 
 Focused SCM/tenant contract tests passed **22/22**, typecheck and diff checks
 passed, and READY Preview deployment `dpl_7DhQxht5dgG655VBqU1a1NnzZj21`
-generated **47/47** pages. GitGuardian and Vercel Preview Comments passed;
-the hosted typecheck/schema check was still running at packet time.
+generated **47/47** pages. GitGuardian, Vercel Preview Comments, and hosted
+typecheck/schema all passed.
 
 This is implementation and hosted-build progress only. `TEAM-CLI-001` remains
 unchecked for the authorized SCM provider installation, server-held provider

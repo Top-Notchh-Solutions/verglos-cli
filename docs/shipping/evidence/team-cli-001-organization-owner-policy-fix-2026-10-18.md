@@ -23,6 +23,9 @@ resolver remains unchanged for the v2 entitlement path.
 - Implementation commit: `4579c27`
 - Regression-test commit: `f8b420e`
 - Branch head: `f8b420e012b69c9d8b6052c9da16c1633582b4c7`
+- Normal merge commit: `188b4b01fd9d6c7c4292d8cdf55a3b348954e9d4`
+- Merge state: PR merged normally into `main` on 2026-10-18; both substantive
+  commits remain in the first-parent merge history.
 - Merge policy: regular reviewable history; no squash, rebase, force-push,
   empty, duplicate, or artificial commit
 
@@ -36,9 +39,8 @@ resolver remains unchanged for the v2 entitlement path.
 - Preview URL:
   `https://verglos-ew4flng1y-anuragyadav20062002s-projects.vercel.app`.
 - Hosted build generated **47/47** pages and included the policy route.
-- GitGuardian and Vercel Preview Comments: passed at packet time.
-- Hosted `typecheck-and-schema`: still running at packet time; no green result
-  is claimed until GitHub reports it.
+- GitGuardian, Vercel Preview Comments, and hosted `typecheck-and-schema`:
+  passed.
 
 ## Boundary and disposition
 

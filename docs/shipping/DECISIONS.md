@@ -8,10 +8,11 @@
   requested active organization and owner role. Missing ownership remains a
   bounded unavailable response; database failures remain unavailable rather
   than leaking details.
-- **Verification:** Web PR #192 preserves implementation `4579c27` and test
-  `f8b420e`; focused SCM/tenant tests passed **22/22**; typecheck, diff check,
-  and READY Preview build **47/47** passed. GitGuardian and Preview Comments
-  passed; hosted typecheck/schema was still running at packet time.
+- **Verification:** Web PR #192 merged normally as
+  `188b4b01fd9d6c7c4292d8cdf55a3b348954e9d4`, preserving implementation
+  `4579c27` and test `f8b420e`. Focused SCM/tenant tests passed **22/22**;
+  typecheck, diff check, READY Preview build **47/47**, GitGuardian, Preview
+  Comments, and hosted typecheck/schema all passed.
 - **Reason:** This corrects a code-side blocker but does not create a provider
   installation, configure provider credentials, publish a live policy, or
   prove CLI fetch/cache/offline/cross-tenant behavior.
