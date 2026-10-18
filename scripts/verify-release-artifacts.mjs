@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { lstat, readFile, readdir } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
 import { promisify } from "node:util";
+import { validateExternalLicenseRecords } from "./external-license-records.mjs";
 
 const run = promisify(execFile);
 
@@ -51,7 +52,7 @@ if (requireSevenPublicPackages) {
   const versions = new Set(archiveManifests.map((manifest) => manifest.version));
   if (versions.size !== 1 || [...versions][0] === undefined) throw new Error("strict release packages must share one version");
 }
-const requiredSidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "clean-consumer-verification.txt"];
+const requiredSidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "external-license-records.json", "clean-consumer-verification.txt"];
 for (const name of requiredSidecars) if (!files.includes(name)) throw new Error(`release artifact directory is missing ${name}`);
 if (files.some((name) => !name.endsWith(".tgz") && !requiredSidecars.includes(name))) throw new Error("release artifact directory contains an unexpected file");
 for (const name of files) {
@@ -83,6 +84,10 @@ for (const name of requiredSidecars) {
       const inventory = JSON.parse(content);
       if (inventory.schemaId !== "urn:verglos:artifact:dependency-license-inventory" || !Array.isArray(inventory.packages) || !Array.isArray(inventory.bundledComponents)) throw new Error("dependency-license-inventory.json has an invalid shape");
       if (!Array.isArray(inventory.reviewBlockers) || inventory.reviewBlockers.length > 0) throw new Error("dependency-license-inventory.json contains unresolved redistribution blockers");
+    }
+    if (name === "external-license-records.json") {
+      const failures = validateExternalLicenseRecords(JSON.parse(content));
+      if (failures.length > 0) throw new Error(`external-license-records.json is invalid: ${failures.join("; ")}`);
     }
     if (name === "clean-consumer-verification.txt" && !/^clean consumer installed 7 archives and executed Verglos \d+\.\d+\.\d+/u.test(content.trim())) throw new Error("clean-consumer-verification.txt does not prove the seven-package consumer flow");
   } catch (error) {

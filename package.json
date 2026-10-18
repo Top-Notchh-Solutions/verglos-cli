@@ -8,6 +8,7 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "licenses:inventory": "node scripts/license-inventory.mjs --check",
+    "licenses:external": "node scripts/validate-external-license-records.mjs",
     "licenses:notices": "node scripts/generate-third-party-notices.mjs --write",
     "sbom:cyclonedx": "node scripts/generate-sbom.mjs --write",
     "sbom:spdx": "node scripts/generate-spdx.mjs --write",
