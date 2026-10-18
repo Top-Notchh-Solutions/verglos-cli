@@ -1,6 +1,6 @@
 import { execFile } from "node:child_process";
 import { constants } from "node:fs";
-import { lstat, open, readFile } from "node:fs/promises";
+import { lstat, open } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
@@ -69,27 +69,37 @@ async function validateArtifactRoot(value) {
 
 async function inspectArtifact(root, name, format) {
   const path = join(root, name);
+  let handle;
   try {
     const before = await lstat(path);
     if (before.isSymbolicLink() || !before.isFile() || before.size > MAX_ARTIFACT_BYTES) {
       return { name, path, status: "failed", reason: "invalid-artifact-file" };
     }
-    const handle = await open(path, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
-    try {
-      const opened = await handle.stat();
-      if (opened.isSymbolicLink() || !opened.isFile() || opened.size !== before.size || opened.size > MAX_ARTIFACT_BYTES) {
-        return { name, path, status: "failed", reason: "artifact-changed-or-unbounded" };
-      }
-    } finally {
-      await handle.close();
+    handle = await open(path, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
+    const opened = await handle.stat();
+    if (opened.isSymbolicLink() || !opened.isFile() || opened.size !== before.size || opened.size > MAX_ARTIFACT_BYTES) {
+      return { name, path, status: "failed", reason: "artifact-changed-or-unbounded" };
     }
-    const content = await readFile(path, "utf8");
-    JSON.parse(content);
+    const chunks = [];
+    let total = 0;
+    const buffer = Buffer.alloc(Math.min(64 * 1024, MAX_ARTIFACT_BYTES + 1));
+    while (total <= MAX_ARTIFACT_BYTES) {
+      const length = Math.min(buffer.byteLength, MAX_ARTIFACT_BYTES + 1 - total);
+      const { bytesRead } = await handle.read(buffer, 0, length, total);
+      if (bytesRead === 0) break;
+      total += bytesRead;
+      if (total > MAX_ARTIFACT_BYTES) return { name, path, status: "failed", reason: "artifact-changed-or-unbounded" };
+      chunks.push(Buffer.from(buffer.subarray(0, bytesRead)));
+    }
+    if ((await handle.stat()).size !== total || total !== before.size) return { name, path, status: "failed", reason: "artifact-changed-or-unbounded" };
+    JSON.parse(Buffer.concat(chunks, total).toString("utf8"));
     return { name, path, status: "ready", format };
   } catch (error) {
     if (error?.code === "ENOENT") return { name, path, status: "failed", reason: "missing-artifact" };
     if (error instanceof SyntaxError) return { name, path, status: "failed", reason: "invalid-json" };
     return { name, path, status: "failed", reason: "unreadable-artifact" };
+  } finally {
+    if (handle) await handle.close().catch(() => undefined);
   }
 }
 
