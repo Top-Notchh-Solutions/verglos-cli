@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-002 bounded CI record-link implementation
+
+- **Public merge:** CLI PR #130 merged normally as
+  `efa64f5cf1ec9f6ff960c48f06f7bc3c1e239a0d`; implementation
+  `d5c44155c3b3e601ae9fff60cad3ab12255a3f6f` and regression test
+  `81c885f6a2f30956cc1de572f8a3c6f0a11a0f21` remain separate.
+- **Implementation:** Source-free CI check record links reject query strings,
+  control characters, credentials, fragments, and values over 2,048
+  characters.
+- **Verification:** Workspace build **8/8**; shared payload tests **3/3**;
+  CLI payload tests **3/3**; protected cross-platform matrix, self-scan, and
+  in-toto binding all passed.
+- **Disposition:** Keep `TEAM-CLI-002` open for TEAM-CLI-001's mapped
+  entitlement, authenticated policy/cache matrix, live SCM/provider delivery,
+  and reconciliation. No checkbox or AppSec state changed.
+- **Evidence:** `evidence/team-cli-002-ci-record-link-boundary-pr130-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-006 rollback/revocation rehearsal
 
 - **Source:** CLI normal merge `9eba5102`; disposable worktree.

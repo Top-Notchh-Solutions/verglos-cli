@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-002 bounded CI record-link implementation
+
+CLI PR #130 merged normally as
+`efa64f5cf1ec9f6ff960c48f06f7bc3c1e239a0d`, preserving implementation commit
+`d5c44155c3b3e601ae9fff60cad3ab12255a3f6f` and regression-test commit
+`81c885f6a2f30956cc1de572f8a3c6f0a11a0f21`. The source-free CI check payload
+now rejects record links containing query strings, control characters, user
+info, fragments, or more than 2,048 characters while retaining HTTPS and exact
+identity binding. Workspace build passed **8/8**, shared payload tests passed
+**3/3**, CLI payload tests passed **3/3**, and all protected cross-platform,
+self-scan, and in-toto checks passed.
+
+This advances only the TEAM-CLI-002 implementation boundary. `TEAM-CLI-002`
+remains unchecked because `TEAM-CLI-001` entitlement, authenticated policy
+fetch/cache/offline/expiry/cross-tenant evidence, live provider delivery, and
+reconciliation remain open. No checkbox changed; score remains **232 checked /
+48 open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-002-ci-record-link-boundary-pr130-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-006 current rollback/revocation rehearsal
 
 On CLI merge `9eba5102`, the shared rollback decision tests passed **6/6** and

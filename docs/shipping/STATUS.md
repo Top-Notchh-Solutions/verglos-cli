@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-002 bounded CI record-link implementation
+
+CLI PR #130 merged normally as `efa64f5c`, retaining implementation commit
+`d5c44155` and regression-test commit `81c885f6`. Source-free CI check record
+links now have a 2 KiB, control-free HTTPS boundary and reject query strings,
+credentials, and fragments. Build passed **8/8**, shared and CLI focused tests
+passed **3/3** each, and protected Ubuntu/macOS/Windows, self-scan, and
+in-toto checks passed. `TEAM-CLI-002` remains open for its TEAM-CLI-001
+entitlement and live SCM/provider acceptance dependencies.
+
+Evidence: `evidence/team-cli-002-ci-record-link-boundary-pr130-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-006 rollback/revocation rehearsal
 
 The current CLI merge passed shared rollback tests **6/6** and CLI

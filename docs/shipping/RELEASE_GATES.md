@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-002 bounded CI record-link boundary
+
+CLI PR #130 merged normally as `efa64f5c`, preserving separate implementation
+and test commits. The source-free check payload now rejects query-bearing,
+control-bearing, credential-bearing, fragment-bearing, or overlong record
+links. Build **8/8**, shared/CLI payload tests **3/3** each, and protected
+cross-platform, self-scan, and in-toto checks passed.
+
+This is implementation progress only. Keep `TEAM-CLI-002` open until its
+TEAM-CLI-001 entitlement, authenticated policy fetch/cache/offline/
+cross-tenant evidence, live SCM/provider delivery, and reconciliation are
+accepted. Score remains **232 checked / 48 open / 280 total (82.9%)**.
+Evidence: `evidence/team-cli-002-ci-record-link-boundary-pr130-2026-10-18.md`.
+
 ## 2026-10-18 · DIST-006 rollback/revocation rehearsal
 
 CLI merge `9eba5102` passed shared rollback **6/6** and CLI plan/rehearsal

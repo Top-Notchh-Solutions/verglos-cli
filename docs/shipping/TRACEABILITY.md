@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-002 bounded CI record-link implementation · 2026-10-18
+
+- **Source mapping:** CLI PR #130 normal merge
+  `efa64f5cf1ec9f6ff960c48f06f7bc3c1e239a0d`, preserving implementation
+  `d5c44155c3b3e601ae9fff60cad3ab12255a3f6f` and test
+  `81c885f6a2f30956cc1de572f8a3c6f0a11a0f21`.
+- **Contract mapping:** Source-free CI check record links are HTTPS-only,
+  bounded to 2,048 characters, and reject control characters, credentials,
+  fragments, and query strings.
+- **Verification mapping:** Build **8/8**, shared payload tests **3/3**, CLI
+  payload tests **3/3**, and all protected platform/self-scan/in-toto checks
+  passed.
+- **Acceptance mapping:** The row stays unchecked because TEAM-CLI-001
+  entitlement, authenticated policy/cache/offline/cross-tenant/provider
+  evidence, and live reconciliation remain absent. No AppSec row changed.
+- **Evidence:** `evidence/team-cli-002-ci-record-link-boundary-pr130-2026-10-18.md`.
+
 ## DIST-006 rollback/revocation rehearsal · 2026-10-18
 
 - **Source mapping:** CLI normal merge `9eba5102`.
