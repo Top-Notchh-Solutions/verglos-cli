@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain DIST-001 open after current archive requalification
+
+- **Decision:** Accept the current merged-head package/archive result as
+  technical evidence, but do not check `DIST-001`.
+- **Reason:** Seven archives, packed manifests, clean-consumer imports, the
+  no-implicit-engine behavior, and bounded signed A1 execution all pass. The
+  row still requires the LOCAL/HUNT/RECORD product surfaces and final-release
+  acceptance; archive evidence alone cannot waive those dependencies.
+- **Disposition:** Keep `DIST-001` and dependent `DIST-002`/`DIST-003` open.
+  AppSec-held Hunt rows remain untouched. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/dist-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · close LIC-003 notice contract
 
 - **Decision:** Accept the deterministic `THIRD_PARTY_NOTICES` generator and

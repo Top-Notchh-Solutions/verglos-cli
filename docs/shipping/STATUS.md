@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · DIST-001 current merged-head archive qualification
+
+The exact public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed
+the current package boundary requalification: seven archives were packed,
+packed manifests passed, and the clean consumer installed/imported all seven,
+ran Verglos `2.0.0-alpha.1`, confirmed no implicit external-engine install,
+and executed the signed A1 fixture through the bounded restricted-process
+runtime. `DIST-001` remains unchecked because LOCAL/HUNT/RECORD product
+surfaces and final-release acceptance remain incomplete. Score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/dist-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · LIC-003 deterministic notice qualification
 
 The current public CLI package surface passed the combined notice, inventory,

@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-DIST-001 current archive boundary requalified
+
+- **Risk:** A passing archive and clean-consumer audit could be mistaken for
+  complete product or release qualification.
+- **Mitigation:** The current merged head was requalified across all seven
+  archives, packed manifests, clean-consumer imports, optional-engine behavior,
+  and bounded signed A1 execution. The evidence explicitly retains the
+  LOCAL/HUNT/RECORD and final-release dependencies and does not authorize
+  publication.
+- **Status:** Technical package evidence passed; `DIST-001` remains open.
+  `DIST-002`/`DIST-003`, provider, customer, AppSec, and final-acceptance
+  risks remain open. Score is **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/dist-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · R-LIC-003 notice generation qualified
 
 - **Risk:** A generated notice could hide an unresolved dependency or imply

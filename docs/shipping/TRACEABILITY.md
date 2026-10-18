@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## DIST-001 current merged-head archive qualification · 2026-10-18
+
+- **Source mapping:** Public CLI implementation `8da4617d34196be2c9fcd86c166259ef82984f28`
+  is preserved by normal merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`.
+- **Verification mapping:** The exact merged-head packer created seven archives;
+  packed-manifest checks passed; and the clean consumer installed/imported all
+  seven, ran Verglos `2.0.0-alpha.1`, confirmed no implicit external-engine
+  installation, and executed the signed A1 fixture through the bounded
+  restricted-process runtime.
+- **Acceptance mapping:** This qualifies the current archive boundary only.
+  `DIST-001` remains unchecked pending LOCAL/HUNT/RECORD product surfaces and
+  final-release acceptance. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/dist-001-current-merge-requalification-2026-10-18.md`.
+
 ## LIC-003 deterministic notices · 2026-10-18
 
 - **Source mapping:** Public CLI implementation commit

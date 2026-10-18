@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · DIST-001 current archive boundary requalified
+
+The exact public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed
+the seven-archive pack, packed-manifest, and clean-consumer qualification. The
+consumer imported all seven packages, ran Verglos `2.0.0-alpha.1`, confirmed no
+implicit external-engine installation, and executed the signed A1 fixture in
+the bounded restricted-process runtime.
+
+This is not final release approval. `DIST-001` remains open for LOCAL/HUNT/
+RECORD product surfaces and final-release acceptance; `DIST-002` and
+`DIST-003` remain dependent. Score remains **232/48/280 (82.9%)**. Evidence:
+`docs/shipping/evidence/dist-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · LIC-003 notice contract reconciled
 
 The current package surface passed the combined notice/inventory/package/

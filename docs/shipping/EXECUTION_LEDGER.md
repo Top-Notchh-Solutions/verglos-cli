@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · DIST-001 current merged-head archive qualification
+
+- **Verification:** At public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`,
+  the disposable archive run created seven packages, passed the packed-manifest
+  audit, and passed clean-consumer installation/import and bounded signed A1
+  execution.
+- **Acceptance:** The consumer confirmed Verglos `2.0.0-alpha.1` and no
+  implicit external-engine installation. The seven archive hashes are retained
+  in the evidence artifact.
+- **Disposition:** `DIST-001` remains unchecked because LOCAL/HUNT/RECORD and
+  final-release acceptance remain open. Score remains **232/48/280 (82.9%)**.
+- **Boundary:** The cross-platform package metadata selection was temporary and
+  disposable, then removed. No public source, registry, provider, customer,
+  deployment, or Production state changed. No squash, rebase, force-push,
+  empty, duplicate, artificial, or irrelevant contribution was used.
+- **Evidence:** `docs/shipping/evidence/dist-001-current-merge-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · LIC-003 deterministic notices qualified
 
 - **Verification:** On the public CLI positioning worktree, the combined
