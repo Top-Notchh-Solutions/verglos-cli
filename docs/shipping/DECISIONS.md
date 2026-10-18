@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain LIC-002 after exact upstream source recheck
+
+- **Decision:** Accept the exact-source observation for
+  `minipass-flush@1.0.7` and the nested `fast-uri@3.1.7` benchmark metadata
+  as technical provenance evidence only.
+- **Reason:** The `minipass-flush` license now matches the installed digest and
+  declares Blue Oak Model License 1.0.0; the benchmark metadata explicitly
+  marks the nested package private. Neither observation decides the
+  distributed package surface or the company/legal release disposition.
+- **Disposition:** Keep `LIC-002` unchecked. The remaining license, notice,
+  source-offer, trademark, exact-archive, and authorized company/legal
+  decisions remain required before downstream licensing/distribution rows can
+  close. Score remains **230/50/280 (82.1%)**.
+- **Evidence:**
+  `evidence/lic-002-upstream-exact-source-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · keep TEAM-CLI-001 open after current provider audit
 
 - **Decision:** Treat the missing dedicated Verglos SCM App installation and

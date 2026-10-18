@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · LIC-002 upstream exact-source recheck
+
+- **Verification:** The exact `minipass-flush@1.0.7` upstream `LICENSE.md`
+  was fetched from its immutable tag and declares Blue Oak Model License
+  1.0.0; its SHA-256 matches the installed license-file digest already held
+  in the transitive review packet. The nested `fast-uri@3.1.7` benchmark
+  metadata was also fetched from its exact tag and declares `private: true`,
+  version `1.0.0`, and `ISC`.
+- **Disposition:** This removes one factual provenance gap only. It does not
+  decide whether the nested component is part of the distributed surface,
+  grant redistribution permission, resolve the remaining six Blue Oak review
+  entries, or replace the authorized company/legal decision. `LIC-002`
+  remains unchecked; score remains **230/50/280 (82.1%)**.
+- **Boundary:** No package, registry, provider, database, Production,
+  customer, browser, or release state changed. No squash, rebase, force-push,
+  empty, duplicate, artificial, or irrelevant contribution commit was used.
+- **Evidence:**
+  `docs/shipping/evidence/lic-002-upstream-exact-source-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · public home browser qualification
 
 - **Surface:** Existing Verglos Chrome page, `https://verglos.com/`, navigation

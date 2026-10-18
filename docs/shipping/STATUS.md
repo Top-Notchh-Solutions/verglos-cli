@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · LIC-002 upstream source verification
+
+The exact tagged upstream `minipass-flush@1.0.7` license source is now
+verified as Blue Oak Model License 1.0.0 and matches the installed
+license-file digest. The nested `fast-uri@3.1.7` benchmark metadata is
+confirmed `private: true` with `ISC` licensing.
+
+This is a provenance correction only. The exact package-surface decision,
+remaining automated review entries, notice/source obligations, trademark
+restrictions, and authorized company/legal disposition remain open, so
+`LIC-002` is not checked. Score remains **230 checked / 50 open / 280 total
+(82.1%)**. Evidence:
+`evidence/lic-002-upstream-exact-source-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · authenticated account-state browser qualification
 
 Using the existing authenticated Verglos Chrome page only, a read-only

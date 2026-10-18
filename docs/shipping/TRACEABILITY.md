@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## LIC-002 upstream exact-source recheck · 2026-10-18
+
+- **Source mapping:** Immutable upstream tag `minipass-flush@1.0.7` and
+  `fast-uri@3.1.7` benchmark metadata were fetched from their official raw
+  sources; the Blue Oak Model License 1.0.0 canonical text was checked at the
+  Blue Oak Council URL.
+- **Verification mapping:** `minipass-flush` now matches the installed
+  license-file digest; the nested benchmark is explicitly `private: true` and
+  `ISC`. The official Blue Oak text confirms the notice/link and trademark
+  wording that must be handled by the legal decision.
+- **Acceptance mapping:** One factual provenance gap is corrected, but this
+  does not grant redistribution permission or resolve the exact archive,
+  nested-component, remaining license, trademark, or company/legal decision
+  requirements. `LIC-002` remains unchecked; score remains **230/50/280
+  (82.1%)**.
+- **Evidence:**
+  `evidence/lic-002-upstream-exact-source-recheck-2026-10-18.md`.
+
 ## QUAL-WEB-006 authenticated account-state qualification · 2026-10-18
 
 - **Source mapping:** Existing authenticated Verglos Chrome page at
