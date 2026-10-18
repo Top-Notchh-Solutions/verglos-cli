@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · organization SCM App token/scope read-back
+
+The organization App identity and signed installation-token exchange were
+verified without recording either token. GitHub returned exactly one private
+installation repository, `Top-Notchh-Solutions/verglos-archive` (ID
+`1305731597`), and no write operation used the token. This strengthens
+provider identity/scope evidence but does not close a row. Score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · hosted SCM check admission and idempotency
 
 The bound Preview project admitted a source-free synthetic release decision

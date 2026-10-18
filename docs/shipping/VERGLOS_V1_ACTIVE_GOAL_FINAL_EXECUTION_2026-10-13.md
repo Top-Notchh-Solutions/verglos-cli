@@ -1,6 +1,18 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0ze Current organization SCM App token/scope read-back — 2026-10-18
+
+The organization App’s signed GitHub installation-token exchange was verified
+without exposing or recording the JWT or token: GitHub `/app` returned HTTP
+`200`, the installation-token exchange returned HTTP `201`, and the resulting
+installation repository listing returned exactly one private repository,
+`Top-Notchh-Solutions/verglos-archive` (ID `1305731597`). No write operation
+was performed with the token. This strengthens provider identity and
+least-privilege evidence only; no checkbox changed. Score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 0.0zd Current TEAM-CLI-002/TEAM-WEB-006 hosted SCM check substrate — 2026-10-18
 
 Against the same disposable Preview project and organization-bound

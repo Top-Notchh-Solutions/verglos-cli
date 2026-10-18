@@ -66,6 +66,13 @@ window. GitHub API read-back confirmed:
 - Webhook endpoint configured on the App:
   `https://verglos.com/api/v1/webhooks/scm/github`.
 
+The App’s signed installation-token exchange was independently read back from
+GitHub without recording the JWT or installation token: `/app` returned HTTP
+`200` for App ID `5368230`; the installation-token exchange returned HTTP
+`201`; and the installation repository listing returned exactly one private
+repository, ID `1305731597`, `Top-Notchh-Solutions/verglos-archive`. No write
+operation was made with that token.
+
 The server-held Vercel configuration was rotated in both Preview and
 Production to this organization App. The configured variable names are
 `VERGLOS_GITHUB_APP_ID`, `VERGLOS_GITHUB_APP_PRIVATE_KEY`, and

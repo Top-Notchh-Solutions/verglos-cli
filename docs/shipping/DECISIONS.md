@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · accept organization App token/scope read-back as provider evidence
+
+- **Decision:** Accept the signed App identity and installation repository
+  read-back as provider evidence without treating it as live check delivery.
+- **Observed:** GitHub `/app` returned HTTP `200`; the installation-token
+  exchange returned HTTP `201`; and the installation listed exactly one private
+  repository, `Top-Notchh-Solutions/verglos-archive` (`1305731597`). No write
+  operation used the token and no token value was recorded.
+- **Disposition:** Keep `TEAM-CLI-001`, `TEAM-CLI-002`, and `TEAM-WEB-006`
+  open until their remaining fetch, reconciliation, provider-delivery, and
+  acceptance contracts pass. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM rows after hosted SCM check admission
 
 - **Decision:** Accept the source-free SCM check admission, persistence,

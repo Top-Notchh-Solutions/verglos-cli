@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · organization SCM App token/scope read-back
+
+The App identity endpoint returned HTTP `200`, the signed installation-token
+exchange returned HTTP `201`, and the installation repository listing returned
+exactly one private repository: `Top-Notchh-Solutions/verglos-archive` (ID
+`1305731597`). The JWT and installation token were not recorded, and no write
+operation used the token. This is provider identity/scope evidence only; score
+remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · hosted SCM check admission and idempotency
 
 The bound Preview project admitted one source-free synthetic release decision
