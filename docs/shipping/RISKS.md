@@ -1,5 +1,20 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-TEAM-CLI-001 Preview auth failure corrected
+
+- **Risk:** Preview test-auth deployments could throw a 500 before the
+  tenant-scoped policy dashboard reached its login boundary.
+- **Cause:** The middleware intentionally bypassed Clerk for Preview fixture
+  auth, while the shared request context still selected Clerk for anonymous
+  requests when a publishable key was present.
+- **Mitigation:** PR #194 makes the provider selection aware of the complete
+  Preview fixture configuration and adds regression coverage. The corrected
+  route returns 307 to login and produces no error log.
+- **Status:** Implementation risk resolved; `TEAM-CLI-001` remains open for
+  entitlement and live CLI/provider evidence. Score remains **232/48/280
+  (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-auth-fix-pr194-2026-10-18.md`.
+
 ## 2026-10-18 · R-TEAM-CLI-001 digest projection does not prove entitlement
 
 - **Risk:** A visible policy digest in the authenticated organization

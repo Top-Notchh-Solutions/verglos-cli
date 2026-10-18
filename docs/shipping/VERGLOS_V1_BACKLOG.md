@@ -1,5 +1,30 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-001 Preview dashboard auth correction
+
+The first Preview deployment of the policy dashboard exposed a real route
+failure: an unauthenticated request returned HTTP `500` because the Preview
+test-auth configuration bypassed Clerk middleware while the request context
+still called Clerk `auth()`. Web PR #194, assigned to `anuragyadav-git`,
+merged normally as `7e78ec8414564f313a69f83fb8789550a1f0caba`, preserves
+implementation commit `e84643b` and regression-test commit `74a6cea`.
+
+The shared request-auth seam now selects the bounded Preview identity only
+when its complete configuration and header are valid, and otherwise returns an
+anonymous identity without calling Clerk. The focused auth/policy suite passed
+**21/21**, typecheck and diff checks passed, and the build generated **47/47**
+pages. Hosted Actions run `39128474400` / job `117678523046`, GitGuardian,
+and Preview Comments passed. Corrected Preview deployment
+`dpl_2Nv1PZPEX4mf6fHdDgu3Ksa4nPpT` is READY; the protected policy route now
+returns HTTP `307` to login and produces no Vercel error log.
+
+This corrects the implementation failure and advances `TEAM-CLI-001`; it does
+not close the row. A mapped paid/non-production entitlement, authenticated
+signed CLI fetch/cache/offline/expiry/cross-tenant observations, and provider
+delivery/reconciliation remain open. No checkbox changed; score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-policy-dashboard-auth-fix-pr194-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 visible policy-digest dashboard slice
 
 Web PR #193, assigned to `anuragyadav-git`, merged normally as

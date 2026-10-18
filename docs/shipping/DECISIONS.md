@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · correct Preview auth failure before accepting dashboard evidence
+
+- **Decision:** Treat the first HTTP 500 as a real implementation defect and
+  fix it before relying on the policy-dashboard Preview evidence.
+- **Result:** Preview test-auth no longer invokes Clerk when its middleware is
+  intentionally bypassed. The corrected protected route returns 307 to login
+  without an error log; the complete auth/policy tests and hosted checks pass.
+- **Boundary:** This correction does not create an entitlement, policy row,
+  provider delivery, or authenticated CLI matrix. Keep `TEAM-CLI-001`
+  unchecked.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-auth-fix-pr194-2026-10-18.md`.
+
 ## 2026-10-18 · ship visible policy digest without claiming entitlement
 
 - **Decision:** Accept Web PR #193 as the next real implementation slice for

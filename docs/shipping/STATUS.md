@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 Preview dashboard auth correction
+
+The first policy-dashboard Preview route check exposed HTTP 500 from Clerk
+being called while Preview test middleware was intentionally bypassed. Web PR
+#194 merged normally as `7e78ec84`, preserving separate implementation and
+test commits. The shared request-auth seam now fails closed to anonymous/login
+for unauthenticated Preview requests. Focused auth/policy tests passed 21/21,
+typecheck/build passed with 47/47 pages, hosted checks passed, and corrected
+Preview deployment `dpl_2Nv1PZPEX4mf6fHdDgu3Ksa4nPpT` returns HTTP 307 to login
+with no route error log.
+
+This is a corrected implementation slice, not row closure. Entitlement and
+authenticated CLI/provider evidence remain open. Score remains **232 checked /
+48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-policy-dashboard-auth-fix-pr194-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 visible policy-digest dashboard slice
 
 Web PR #193 merged normally as

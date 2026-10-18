@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 Preview route failure corrected
+
+The initial policy-dashboard Preview check returned HTTP 500 because the
+Preview auth seam bypassed Clerk middleware but still called Clerk `auth()`.
+Web PR #194 merged normally as `7e78ec84` and the corrected READY deployment
+`dpl_2Nv1PZPEX4mf6fHdDgu3Ksa4nPpT` now returns HTTP 307 to login with no Vercel
+route error. Focused tests, typecheck, build, and hosted checks passed.
+
+The Team policy-fetch gate remains open for mapped entitlement and
+authenticated CLI fetch/cache/offline/expiry/cross-tenant/provider
+reconciliation. Score remains **232 checked / 48 open / 280 total (82.9%)**.
+Evidence: `evidence/team-cli-001-policy-dashboard-auth-fix-pr194-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 digest projection implemented; gate remains open
 
 Web PR #193 merged normally as `104d236f`, with separate implementation and

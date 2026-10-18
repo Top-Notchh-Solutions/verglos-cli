@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 Preview dashboard auth correction
+
+- **Failure observed:** The first Preview policy route returned HTTP 500; Vercel
+  logs showed Clerk `auth()` without active Clerk middleware.
+- **Fix:** Web PR #194 merged normally as `7e78ec84`, with implementation
+  `e84643b` and test `74a6cea` kept separate. Preview fixture auth now avoids
+  Clerk when middleware is intentionally bypassed.
+- **Verification:** Focused auth/policy tests 21/21, typecheck, diff check,
+  build 47/47 pages, hosted typecheck/schema, GitGuardian, and Preview
+  Comments passed. Preview `dpl_2Nv1PZPEX4mf6fHdDgu3Ksa4nPpT` is READY; the
+  unauthenticated route returns 307 to login and emits no error log.
+- **Disposition:** Keep `TEAM-CLI-001` open for entitlement and authenticated
+  CLI/cache/offline/expiry/cross-tenant/provider evidence. No checkbox or
+  AppSec status changed.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-auth-fix-pr194-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 visible policy-digest dashboard slice
 
 - **Public merge:** Web PR #193 merged normally as `104d236f`; implementation

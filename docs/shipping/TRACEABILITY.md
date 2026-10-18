@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 Preview dashboard auth correction · 2026-10-18
+
+- **Failure mapping:** Preview test-auth disabled Clerk middleware, but the
+  shared request context called Clerk for an unauthenticated dashboard route,
+  producing HTTP 500.
+- **Source mapping:** Web PR #194; implementation `e84643b`, regression test
+  `74a6cea`, normal merge `7e78ec84`.
+- **Qualification mapping:** Focused auth/policy tests **21/21**, typecheck,
+  diff check, build **47/47**, hosted typecheck/schema, GitGuardian, and
+  Preview Comments passed. Corrected Preview `dpl_2Nv1PZPEX4mf6fHdDgu3Ksa4nPpT`
+  returns 307 to login with no error log.
+- **Acceptance mapping:** This removes the Preview route infrastructure
+  failure but does not establish entitlement or authenticated CLI/provider
+  evidence. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-auth-fix-pr194-2026-10-18.md`.
+
 ## TEAM-CLI-001 visible policy-digest dashboard slice · 2026-10-18
 
 - **Source mapping:** Web PR #193; implementation `9c34a5f`, regression test
