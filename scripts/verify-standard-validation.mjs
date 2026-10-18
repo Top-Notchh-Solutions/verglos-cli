@@ -165,7 +165,9 @@ async function validateSigstore(root, configured, tool, run) {
     if (typeof identity !== "string" || !identity || typeof issuer !== "string" || !issuer) return { ...names, status: "failed", reason: "sigstore-identity-policy-missing" };
     args.push("--trusted-root", trustedRootPath, "--certificate-identity", identity, "--certificate-oidc-issuer", issuer);
   } else {
-    args.push("--key", keyPath);
+    // The qualification fixture is intentionally offline and does not submit
+    // a public Rekor entry. Keep the verification explicit about that scope.
+    args.push("--insecure-ignore-tlog", "--key", keyPath);
   }
   args.push(payloadPath);
   return runExternalTool({ ...names, tool, args, cwd: root, run });

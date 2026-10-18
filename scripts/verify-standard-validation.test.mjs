@@ -47,7 +47,7 @@ test("standard validation runs each official validator with bounded argv and red
     assert.deepEqual(calls[0].args, ["validate", join(root, "report.sarif")]);
     assert.deepEqual(calls[1].args, ["validate", "--input-file", join(root, "SBOM.cdx.json"), "--fail-on-errors"]);
     assert.deepEqual(calls[2].args, ["-jar", join(root, "spdx-tools.jar"), "Verify", join(root, "SBOM.spdx.json")]);
-    assert.deepEqual(calls[3].args, ["verify-blob", "--bundle", join(root, "sigstore.bundle.json"), "--offline=true", "--key", join(root, "sigstore.pub"), join(root, "sigstore.payload")]);
+    assert.deepEqual(calls[3].args, ["verify-blob", "--bundle", join(root, "sigstore.bundle.json"), "--offline=true", "--insecure-ignore-tlog", "--key", join(root, "sigstore.pub"), join(root, "sigstore.payload")]);
     assert.equal(JSON.stringify(result).includes("SECRET_VALIDATOR"), false);
     assert.equal(JSON.stringify(result).includes(root), false);
   });
