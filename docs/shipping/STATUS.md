@@ -1,5 +1,43 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 organization SCM activation and production configuration
+
+The organization-owned `Verglos Organization SCM Checks` App is installed as
+GitHub installation `172686102` on `Top-Notchh-Solutions`, restricted to the
+single non-Production repository `Top-Notchh-Solutions/verglos-archive`. Its
+permissions are metadata read and checks write. The three server-held Vercel
+variables are configured in Preview and Production with hidden values, and a
+clean redeploy after the configuration reached READY as
+`dpl_8joQ1Xg3cXmk9UWs1DQyjSigQC9Z`; the Production homepage smoke returned
+HTTP 200 with the factual Security Layer title.
+
+This is provider-installation, hosted-configuration, and rollout evidence; it
+does not prove the signed policy publication or authenticated CLI
+fetch/cache/offline/cross-tenant/reconciliation matrix. `TEAM-CLI-001` remains
+unchecked, as do its dependent rows. No AppSec, customer, legal, registry,
+billing, or final-acceptance row changed. Score remains **232 checked / 48 open
+/ 280 total (82.9%)**. No squash, rebase, force-push, empty, duplicate,
+artificial, or irrelevant documentation-only contribution was used. Evidence:
+`evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
+## 2026-10-18 · TEAM-CLI-001 hosted Preview SCM/policy qualification
+
+The existing authenticated owner session created Preview-only project
+`verglos-scm-qualification-20261018` (`821854d4-afe0-414b-a630-28bfecb064f2`)
+and bound it to the active organization GitHub installation for
+`Top-Notchh-Solutions/verglos-archive`. The hosted policy lifecycle created,
+reviewed, and published policy row `95f44933-cb7c-4cb3-87ae-51ed02d866da`
+with canonical digest
+`sha256:c7327a70ded22a0e051b9da420c012e2ae5d105c430ebe665b82d1ac9399b698`.
+
+The policy enforcement route was exercised without a license bearer and
+returned bounded HTTP `401 invalid authorization`. The account is Free and has
+no license key, so authenticated CLI fetch/cache/offline/cross-tenant and
+reconciliation evidence is still missing. No billing operation or bypass was
+attempted. `TEAM-CLI-001` remains unchecked and the score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 organization-owner policy authorization fix
 
 Web PR #192, assigned to `anuragyadav-git`, merged normally as

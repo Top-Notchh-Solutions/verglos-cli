@@ -1,6 +1,51 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0zb Current TEAM-CLI-001 organization SCM activation and production configuration — 2026-10-18
+
+The organization-owned `Verglos Organization SCM Checks` GitHub App is now
+installed on `Top-Notchh-Solutions` as installation `172686102`, with App ID
+`5368230`, selected-repository scope limited to the non-Production
+`Top-Notchh-Solutions/verglos-archive`, and only metadata-read/checks-write
+permissions. The existing authenticated `anuragyadav-git` browser session was
+used; no additional Chrome window or tab was opened. The webhook endpoint is
+`https://verglos.com/api/v1/webhooks/scm/github`.
+
+The three server-held Vercel variables are configured in both Preview and
+Production, with values hidden: `VERGLOS_GITHUB_APP_ID`,
+`VERGLOS_GITHUB_APP_PRIVATE_KEY`, and `VERGLOS_GITHUB_WEBHOOK_SECRET`. A clean
+Production redeploy after that configuration reached READY as
+`dpl_8joQ1Xg3cXmk9UWs1DQyjSigQC9Z`, generated **47/47** pages, and served the
+Security Layer homepage with HTTP 200 from `https://verglos.com/`.
+
+This advances the authorized provider installation, server-held configuration,
+and production rollout evidence only. `TEAM-CLI-001` remains unchecked until
+the signed policy is published and the authenticated CLI fetch/cache/offline/
+cross-tenant matrix plus reconciliation are observed. No AppSec, customer,
+legal, registry, billing, or final-acceptance checkbox changed. Keep Hunt/AppSec
+last. Score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
+## 0.0zc Current TEAM-CLI-001 hosted Preview SCM/policy qualification — 2026-10-18
+
+The existing authenticated owner session created the disposable Preview
+project `verglos-scm-qualification-20261018` (`821854d4-afe0-414b-a630-28bfecb064f2`)
+and bound it to the active organization GitHub installation for
+`Top-Notchh-Solutions/verglos-archive` (`066a654c-9208-49ed-952c-7cf241f9636d`).
+The hosted policy API then created, reviewed, and published policy row
+`95f44933-cb7c-4cb3-87ae-51ed02d866da`, version `1.0.0`, with canonical digest
+`sha256:c7327a70ded22a0e051b9da420c012e2ae5d105c430ebe665b82d1ac9399b698`.
+
+The enforcement endpoint was exercised without a license bearer and correctly
+returned bounded HTTP `401 invalid authorization`. The authenticated account
+is Free and has no license key. Therefore the signed-policy publication and
+fail-closed authorization behavior are now evidenced, but the authenticated
+CLI fetch/cache/offline/cross-tenant matrix and reconciliation are not claimed.
+No billing operation or guard bypass was attempted. `TEAM-CLI-001` remains
+unchecked; score remains **232 checked / 48 open / 280 total (82.9%)**. Keep
+Hunt/AppSec last and do not change unrelated checkboxes. Evidence:
+`evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 0.0za Current TEAM-CLI-001 organization-owner policy authorization fix — 2026-10-18
 
 The next non-AppSec implementation slice is complete in Web PR #192, assigned

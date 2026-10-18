@@ -1,5 +1,43 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-001 organization SCM activation and production configuration
+
+The organization-owned SCM App is installed on `Top-Notchh-Solutions` as
+installation `172686102`, with selected-repository scope limited to
+`Top-Notchh-Solutions/verglos-archive` and metadata-read/checks-write
+permissions. Vercel Preview and Production now hold the three provider
+variables as hidden server-side secrets, and the post-configuration Production
+deployment `dpl_8joQ1Xg3cXmk9UWs1DQyjSigQC9Z` is READY; the public smoke check
+returned HTTP 200.
+
+This is real provider-installation and production-configuration progress, not
+a row closure. `TEAM-CLI-001` still needs the signed policy publication,
+authenticated CLI fetch/cache/offline/cross-tenant observations, and
+reconciliation. No AppSec or dependent checkbox changed. Score remains
+**232 checked / 48 open / 280 total (82.9%)**. No squash, rebase, force-push,
+empty, duplicate, artificial, or irrelevant public-document commit was used.
+Evidence:
+`docs/shipping/evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
+## 2026-10-18 · TEAM-CLI-001 hosted Preview SCM/policy qualification
+
+The disposable Preview project `verglos-scm-qualification-20261018` was
+created and bound to the active organization GitHub installation for the
+non-Production `verglos-archive` repository. A canonical policy was created,
+reviewed, and published with row ID
+`95f44933-cb7c-4cb3-87ae-51ed02d866da` and digest
+`sha256:c7327a70ded22a0e051b9da420c012e2ae5d105c430ebe665b82d1ac9399b698`.
+The enforcement route returned the expected bounded `401 invalid
+authorization` without a license bearer. The current account is Free and has
+no license key; no billing or guard bypass was attempted.
+
+This is hosted lifecycle and fail-closed authorization evidence, not a row
+closure. Authenticated CLI fetch/cache/offline/cross-tenant observations and
+reconciliation remain open. `TEAM-CLI-001` and dependents remain unchecked;
+score remains **232 checked / 48 open / 280 total (82.9%)**. Hunt/AppSec remains
+parked for the independent review. Evidence:
+`docs/shipping/evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 organization-owner policy authorization fix
 
 Web PR #192, assigned to `anuragyadav-git`, merged normally as

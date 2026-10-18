@@ -1,5 +1,50 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · keep TEAM-CLI-001 open after organization SCM activation
+
+- **Decision:** Record the organization SCM installation and server-held
+  production configuration as real provider evidence, but keep
+  `TEAM-CLI-001` unchecked.
+- **Observed:** GitHub installation `172686102` belongs to
+  `Top-Notchh-Solutions`, selects only `verglos-archive`, and grants metadata
+  read/checks write. Vercel Production and Preview contain the three hidden
+  provider variables, and deployment `dpl_8joQ1Xg3cXmk9UWs1DQyjSigQC9Z`
+  reached READY with a successful Production smoke response.
+- **Reason:** Installation and configuration do not by themselves prove the
+  signed policy publication, authenticated CLI fetch/cache/offline/
+  cross-tenant behavior, or reconciliation.
+- **Disposition:** Continue with the bounded hosted CLI qualification before
+  advancing dependent rows. Keep Hunt/AppSec last and unchanged. Score remains
+  **232/48/280 (82.9%)**.
+- **Boundary:** No Production repository was granted App access; no customer,
+  billing, registry, database, or AppSec state changed. No squash merge or
+  artificial documentation-only contribution was used.
+- **Evidence:** `evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
+## 2026-10-18 · retain TEAM-CLI-001 after hosted Preview policy publication
+
+- **Decision:** Accept the real Preview SCM binding, policy lifecycle, and
+  fail-closed authorization response as qualification evidence, but keep
+  `TEAM-CLI-001` unchecked.
+- **Observed:** Project `verglos-scm-qualification-20261018` is bound to the
+  active organization installation for `Top-Notchh-Solutions/verglos-archive`.
+  Policy row `95f44933-cb7c-4cb3-87ae-51ed02d866da` reached `published` with
+  canonical digest
+  `sha256:c7327a70ded22a0e051b9da420c012e2ae5d105c430ebe665b82d1ac9399b698`.
+  The enforcement request without a license bearer returned HTTP `401
+  invalid authorization`.
+- **Reason:** The authenticated account is Free and has no license key. The
+  signed policy and provider binding do not establish authenticated CLI
+  fetch/cache/offline/cross-tenant behavior or reconciliation.
+- **Disposition:** Do not bypass the license guard or create billing state for
+  qualification. Continue only with a valid authorized license fixture or
+  retain the row open. Keep Hunt/AppSec last. Score remains
+  **232/48/280 (82.9%)**.
+- **Boundary:** No Production repository access, billing operation, customer
+  data, registry state, database migration, or AppSec state changed. No squash
+  merge or artificial documentation-only contribution was used.
+- **Evidence:** `evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-CLI-001 after organization-owner policy fix
 
 - **Decision:** Accept the organization-owner authorization correction as
