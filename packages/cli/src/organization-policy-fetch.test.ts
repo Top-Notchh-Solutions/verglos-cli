@@ -152,7 +152,7 @@ test("rejects an external policy endpoint before attaching credentials or making
 test("refuses redirect-following for bearer-authenticated policy requests", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-redirect-"));
   const fixtureData = fixture();
-  let redirectMode: RequestRedirect | undefined;
+  let redirectMode: string | undefined;
   const result = await fetchOrganizationPolicy({
     organizationId: "org_acme",
     repositoryId: "repo_app",
