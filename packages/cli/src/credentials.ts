@@ -2,7 +2,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { homedir, hostname, userInfo } from "node:os";
 import { dirname, join } from "node:path";
 import { access, chmod, lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
-import { readJsonResponse } from "./http-response.js";
+import { fetchJsonResponse } from "./http-response.js";
 
 export interface Credentials {
   licenseKey?: string;
@@ -144,7 +144,7 @@ export async function refreshUnlockToken(
   });
 
   try {
-    const res = await fetch(`${apiOrigin}/api/license/unlock`, {
+    const { response: res, json } = await fetchJsonResponse(`${apiOrigin}/api/license/unlock`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -152,12 +152,11 @@ export async function refreshUnlockToken(
         fingerprint,
         machineId: getMachineId(),
       }),
-      redirect: "error",
-    });
+    }, { timeoutMs: 8000, maxBytes: MAX_UNLOCK_RESPONSE_BYTES });
 
     if (!res.ok) return false;
 
-    const data = (await readJsonResponse(res, MAX_UNLOCK_RESPONSE_BYTES)) as {
+    const data = json as {
       token: string;
       expiresAt: string;
     };

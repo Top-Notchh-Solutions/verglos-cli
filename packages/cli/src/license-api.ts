@@ -1,5 +1,5 @@
 import { DEFAULT_API_URL, getTrustedApiOrigin } from "./credentials.js";
-import { readJsonResponse } from "./http-response.js";
+import { fetchJsonResponse } from "./http-response.js";
 
 /**
  * Thin fetch wrappers for the v1 license endpoints. Kept separate
@@ -61,33 +61,20 @@ const MAX_ENTITLEMENT_TOKEN_CHARS = 128_000;
 
 async function fetchV2EntitlementToken(licenseKey: string, apiUrl: string): Promise<string | undefined> {
   try {
-    const res = await fetchWithTimeout(`${apiUrl}/api/v2/entitlement/token`, {
+    const { response: res, json: body } = await fetchJsonResponse(`${apiUrl}/api/v2/entitlement/token`, {
       method: "POST",
       headers: { authorization: `Bearer ${licenseKey}` },
-    });
+    }, { timeoutMs: REQUEST_TIMEOUT_MS });
     if (!res.ok) return undefined;
-    const body = await readJsonResponse(res) as { ok?: unknown; token_version?: unknown; entitlement_token?: unknown } | null;
-    if (body?.ok !== true || body.token_version !== 2 || typeof body.entitlement_token !== "string"
-      || body.entitlement_token.length > MAX_ENTITLEMENT_TOKEN_CHARS
-      || body.entitlement_token.split(".").length !== 3) return undefined;
-    return body.entitlement_token;
+    const typedBody = body as { ok?: unknown; token_version?: unknown; entitlement_token?: unknown } | null;
+    if (typedBody?.ok !== true || typedBody.token_version !== 2 || typeof typedBody.entitlement_token !== "string"
+      || typedBody.entitlement_token.length > MAX_ENTITLEMENT_TOKEN_CHARS
+      || typedBody.entitlement_token.split(".").length !== 3) return undefined;
+    return typedBody.entitlement_token;
   } catch {
     // V1 validation remains the compatibility path when v2 issuance is
     // unavailable (for example, before a tenant mapping is provisioned).
     return undefined;
-  }
-}
-
-async function fetchWithTimeout(
-  url: string,
-  init: RequestInit,
-): Promise<Response> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-  try {
-    return await fetch(url, { ...init, redirect: "error", signal: controller.signal });
-  } finally {
-    clearTimeout(timer);
   }
 }
 
@@ -99,12 +86,12 @@ export async function validateLicense(
   if (!apiOrigin) return { valid: false, reason: "network" };
 
   try {
-    const res = await fetchWithTimeout(`${apiOrigin}/api/v1/license/validate`, {
+    const { response: res, json: body } = await fetchJsonResponse(`${apiOrigin}/api/v1/license/validate`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ license_key: licenseKey }),
-    });
-    const body = ((await readJsonResponse(res)) ?? {}) as {
+    }, { timeoutMs: REQUEST_TIMEOUT_MS });
+    const typedBody = (body ?? {}) as {
       valid?: boolean;
       reason?: ValidateResult extends { valid: false }
         ? ValidateResult["reason"]
@@ -114,17 +101,17 @@ export async function validateLicense(
       entitlement_token?: string;
     };
 
-    if (body.valid === true && body.plan) {
-      const legacyToken = typeof body.entitlement_token === "string"
-        && body.entitlement_token.length <= MAX_ENTITLEMENT_TOKEN_CHARS
-        && body.entitlement_token.split(".").length === 3
-        ? body.entitlement_token
+    if (typedBody.valid === true && typedBody.plan) {
+      const legacyToken = typeof typedBody.entitlement_token === "string"
+        && typedBody.entitlement_token.length <= MAX_ENTITLEMENT_TOKEN_CHARS
+        && typedBody.entitlement_token.split(".").length === 3
+        ? typedBody.entitlement_token
         : undefined;
       const v2Token = await fetchV2EntitlementToken(licenseKey, apiOrigin);
       return {
         valid: true,
-        plan: body.plan,
-        expiresAt: body.expires_at ?? null,
+        plan: typedBody.plan,
+        expiresAt: typedBody.expires_at ?? null,
         active: true,
         entitlementToken: v2Token ?? legacyToken,
       };
@@ -141,14 +128,14 @@ export async function validateLicense(
     }
 
     const reason =
-      body.reason === "expired" || body.reason === "inactive"
-        ? body.reason
+      typedBody.reason === "expired" || typedBody.reason === "inactive"
+        ? typedBody.reason
         : "not_found";
     return {
       valid: false,
       reason: reason as "expired" | "inactive" | "not_found",
-      plan: body.plan,
-      expiresAt: body.expires_at ?? null,
+      plan: typedBody.plan,
+      expiresAt: typedBody.expires_at ?? null,
       httpStatus: res.status,
     };
   } catch {
@@ -164,21 +151,21 @@ export async function fetchLicenseStatus(
   if (!apiOrigin) return { ok: false, reason: "network" };
 
   try {
-    const res = await fetchWithTimeout(`${apiOrigin}/api/v1/license/status`, {
+    const { response: res, json: body } = await fetchJsonResponse(`${apiOrigin}/api/v1/license/status`, {
       method: "GET",
       headers: { authorization: `Bearer ${licenseKey}` },
-    });
+    }, { timeoutMs: REQUEST_TIMEOUT_MS });
     if (!res.ok) {
-      const body = ((await readJsonResponse(res)) ?? {}) as {
+      const typedBody = (body ?? {}) as {
         reason?: StatusError["reason"];
       };
       return {
         ok: false,
-        reason: body.reason ?? "unknown",
+        reason: typedBody.reason ?? "unknown",
         httpStatus: res.status,
       };
     }
-    const body = (await readJsonResponse(res)) as {
+    const typedBody = body as {
       ok: boolean;
       email?: string | null;
       plan?: string;
@@ -192,15 +179,15 @@ export async function fetchLicenseStatus(
         last_seen_at: string;
       }[];
     };
-    if (!body || typeof body !== "object") return { ok: false, reason: "unknown", httpStatus: res.status };
+    if (!typedBody || typeof typedBody !== "object") return { ok: false, reason: "unknown", httpStatus: res.status };
     return {
       ok: true,
-      email: body.email ?? null,
-      plan: body.plan ?? "pro",
-      licenseKey: body.license_key ?? licenseKey,
-      expiresAt: body.expires_at ?? null,
-      active: body.active !== false,
-      machines: (body.machines ?? []).map((m) => ({
+      email: typedBody.email ?? null,
+      plan: typedBody.plan ?? "pro",
+      licenseKey: typedBody.license_key ?? licenseKey,
+      expiresAt: typedBody.expires_at ?? null,
+      active: typedBody.active !== false,
+      machines: (typedBody.machines ?? []).map((m) => ({
         fingerprint: m.fingerprint,
         machineId: m.machine_id,
         projectName: m.project_name,
