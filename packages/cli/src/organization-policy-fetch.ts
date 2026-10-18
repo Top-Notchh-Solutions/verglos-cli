@@ -78,8 +78,6 @@ export async function fetchOrganizationPolicy(input: Readonly<{
         signal: controller.signal,
       });
       status = response.status;
-      const length = Number(response.headers.get("content-length") ?? "0");
-      if (Number.isFinite(length) && length > MAX_RESPONSE_BYTES) return { resolved: false, reason: "response-too-large", status };
       const bytes = await readBoundedResponse(response, MAX_RESPONSE_BYTES);
       if (bytes === undefined) return { resolved: false, reason: "response-too-large", status };
       if (response.ok) {

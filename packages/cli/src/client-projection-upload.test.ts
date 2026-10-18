@@ -109,3 +109,26 @@ test("client projection upload rejects a server digest that does not match the p
     await import("node:fs/promises").then(({ rm }) => rm(files.root, { recursive: true, force: true }));
   }
 });
+
+test("client projection upload cancels an oversized streamed response", async () => {
+  const files = await fixture();
+  let cancelled = false;
+  try {
+    const result = await uploadClientProjection({
+      projectionPath: files.projectionPath,
+      approvalPath: files.approvalPath,
+      organizationId: projection.organizationId,
+      projectId: "project_1",
+      apiUrl: "https://verglos.test",
+      licenseKey: "license-sentinel",
+      fetchImpl: async () => new Response(new ReadableStream<Uint8Array>({
+        pull(controller) { controller.enqueue(new Uint8Array(64 * 1024 + 1)); },
+        cancel() { cancelled = true; },
+      }), { status: 201 }),
+    });
+    assert.deepEqual(result, { status: "error", endpoint: "https://verglos.test/api/v1/organizations/org_acme/projects/project_1/client-projections", reason: "response_too_large" });
+    assert.equal(cancelled, true);
+  } finally {
+    await import("node:fs/promises").then(({ rm }) => rm(files.root, { recursive: true, force: true }));
+  }
+});
