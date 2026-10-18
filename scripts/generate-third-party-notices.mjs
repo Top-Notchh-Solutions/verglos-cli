@@ -3,10 +3,12 @@ import { promisify } from "node:util";
 import { readFile, readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateExternalLicenseRecordsFile } from "./external-license-records.mjs";
 import { readPackageLicenseTexts } from "./package-license-text.mjs";
 
 const run = promisify(execFile);
 const root = fileURLToPath(new URL("..", import.meta.url));
+const externalLicenseRecords = await validateExternalLicenseRecordsFile(process.env.VERGLOS_EXTERNAL_LICENSE_RECORDS_PATH);
 // Windows exposes pnpm through a .cmd shim; Node's direct child-process
 // launcher does not resolve that shim when given the bare command name.
 // Keep the invocation explicit so release packaging works on every supported
@@ -175,6 +177,30 @@ for (const entry of entries) {
     lines.push(text.text);
     lines.push("");
   }
+  lines.push("");
+}
+lines.push("EXTERNAL ENGINE AND CONTENT RECORDS");
+lines.push("");
+lines.push("This section records bounded provenance and public-distribution facts for external engines, imported formats, fixtures, and signed recipe content. It does not assert legal clearance or reproduce upstream license text.");
+lines.push(`Legal clearance: ${externalLicenseRecords.legalClearance}`);
+lines.push(`External engines bundled: ${externalLicenseRecords.distributionPolicy.externalEnginesBundled ? "yes" : "no"}`);
+lines.push(`Runtime downloads: ${externalLicenseRecords.distributionPolicy.runtimeDownloads ? "yes" : "no"}`);
+lines.push(`Recipe content bundled in npm: ${externalLicenseRecords.distributionPolicy.recipeContentBundledInNpm ? "yes" : "no"}`);
+lines.push("");
+for (const record of externalLicenseRecords.records) {
+  lines.push("================================================================================");
+  lines.push(`${record.id} — ${record.identity}`);
+  lines.push(`Kind: ${record.kind}`);
+  lines.push(`Version policy: ${record.versionPolicy}`);
+  lines.push(`License: ${record.license.spdxId}`);
+  lines.push(`License source: ${record.license.licenseUrl}`);
+  lines.push(`Source: ${record.sourceUrl}`);
+  if (record.sourcePath) lines.push(`Source path: ${record.sourcePath}`);
+  if (record.immutableReference) lines.push(`Immutable reference: ${record.immutableReference}`);
+  lines.push(`Modification: ${record.modification}`);
+  lines.push(`Public distribution: ${record.publicDistribution}`);
+  lines.push(`Trademark: ${record.trademarkNotice}`);
+  lines.push(`Legal review: ${record.legalReview}`);
   lines.push("");
 }
 const output = `${lines.join("\n").replaceAll(/[ \t]+\n/g, "\n").trimEnd()}\n`;
