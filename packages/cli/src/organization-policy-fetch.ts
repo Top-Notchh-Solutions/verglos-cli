@@ -1,4 +1,5 @@
 import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
+import { readBoundedResponse } from "./http-response.js";
 import { readOrganizationPolicyCache, writeOrganizationPolicyCache } from "./organization-policy-cache.js";
 import { resolveOrganizationPolicy, type OrganizationPolicyCacheEntry, type OrganizationPolicyPublicKey } from "@verglos/shared";
 
@@ -79,7 +80,7 @@ export async function fetchOrganizationPolicy(input: Readonly<{
       status = response.status;
       const length = Number(response.headers.get("content-length") ?? "0");
       if (Number.isFinite(length) && length > MAX_RESPONSE_BYTES) return { resolved: false, reason: "response-too-large", status };
-      const bytes = await readBoundedResponse(response);
+      const bytes = await readBoundedResponse(response, MAX_RESPONSE_BYTES);
       if (bytes === undefined) return { resolved: false, reason: "response-too-large", status };
       if (response.ok) {
         try { remote = JSON.parse(new TextDecoder().decode(bytes)); }
@@ -105,35 +106,4 @@ export async function fetchOrganizationPolicy(input: Readonly<{
     catch (error) { return { resolved: false, reason: error instanceof Error ? error.message : "cache-write-failed", status }; }
   }
   return { resolved: true, source: resolution.entry.source, entry: resolution.entry, status };
-}
-
-/** Read a provider response without materializing more than the policy cap. */
-async function readBoundedResponse(response: Response): Promise<Uint8Array | undefined> {
-  if (response.body === null) return new Uint8Array();
-  const reader = response.body.getReader();
-  const chunks: Uint8Array[] = [];
-  let total = 0;
-  try {
-    while (true) {
-      const next = await reader.read();
-      if (next.done) break;
-      const chunk = next.value;
-      if (!(chunk instanceof Uint8Array)) return undefined;
-      total += chunk.byteLength;
-      if (total > MAX_RESPONSE_BYTES) {
-        await reader.cancel();
-        return undefined;
-      }
-      chunks.push(chunk);
-    }
-  } finally {
-    reader.releaseLock();
-  }
-  const bytes = new Uint8Array(total);
-  let offset = 0;
-  for (const chunk of chunks) {
-    bytes.set(chunk, offset);
-    offset += chunk.byteLength;
-  }
-  return bytes;
 }

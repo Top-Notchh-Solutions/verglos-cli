@@ -7,12 +7,13 @@ export async function readJsonResponse(response: Response, maxBytes = MAX_JSON_R
     await cancelBody(response);
     return null;
   }
-  const bytes = await readBoundedBytes(response, maxBytes);
+  const bytes = await readBoundedResponse(response, maxBytes);
   if (bytes === undefined) return null;
   try { return JSON.parse(new TextDecoder().decode(bytes)); } catch { return null; }
 }
 
-async function readBoundedBytes(response: Response, maxBytes: number): Promise<Uint8Array | undefined> {
+/** Read a provider body without retaining more than the caller's byte cap. */
+export async function readBoundedResponse(response: Response, maxBytes: number): Promise<Uint8Array | undefined> {
   if (response.body === null) return new Uint8Array();
   const reader = response.body.getReader();
   const chunks: Uint8Array[] = [];
