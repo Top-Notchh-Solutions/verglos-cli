@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-WEB-006 GitHub App webhook configuration
+
+- **Observed:** Personal Preview App ID `5367509` has an active SSL-verified
+  webhook at `https://verglos.com/api/v1/webhooks/scm/github`; the secret is
+  configured but was not exposed. Checks are read/write, Metadata is mandatory
+  read-only, and only Check Run/Check Suite events are selected.
+- **Cross-check:** Recent merged CLI and Web commits showed GitHub Actions
+  checks only; no provider check run from this App was observed through the
+  read-only GitHub check-runs API.
+- **Disposition:** Keep `TEAM-WEB-006` and `GITHUB-WEB-002/003` unchecked for
+  actual delivery, retry/reconciliation, and acceptance. No AppSec state
+  changed; score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-github-app-webhook-config-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 personal GitHub App scope
 
 - **Observed:** Personal installation `172664847` for `anuragyadav-git` is

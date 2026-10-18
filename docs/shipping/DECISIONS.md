@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-WEB-006 after webhook configuration check
+
+- **Decision:** Accept the owner-visible App configuration as provider
+  readiness evidence, but keep `TEAM-WEB-006` and GitHub lifecycle/delivery
+  rows unchecked.
+- **Observed:** App ID `5367509` has the active SSL-verified production webhook,
+  Checks write/Metadata read permissions, and Check Run/Check Suite events. A
+  configured secret was not exposed. Recent merge check-runs showed GitHub
+  Actions only, not a provider check from this App.
+- **Reason:** Configuration is not a delivered check, retry, or reconciliation
+  record.
+- **Disposition:** No checkbox or AppSec state changes. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-github-app-webhook-config-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-WEB-006 after personal App scope verification
 
 - **Decision:** Accept the personal-account scope observation as a provider

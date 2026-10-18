@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## TEAM-WEB-006 GitHub App webhook configuration · 2026-10-18
+
+- **Provider mapping:** Personal Preview App ID `5367509` points its active
+  SSL-verified webhook to the production SCM webhook route.
+- **Permission/event mapping:** Checks are read/write, Metadata is mandatory
+  read-only, and Check Run/Check Suite are the selected events; the secret was
+  not read or recorded.
+- **Observation mapping:** Recent merge check-runs showed GitHub Actions only,
+  with no provider check run from this App.
+- **Acceptance mapping:** Configuration does not prove delivery or
+  reconciliation. `TEAM-WEB-006` and `GITHUB-WEB-002/003` remain unchecked; no
+  AppSec row changed and score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-github-app-webhook-config-2026-10-18.md`.
+
 ## TEAM-WEB-006 personal GitHub App scope · 2026-10-18
 
 - **Provider mapping:** Personal installation `172664847` owned by

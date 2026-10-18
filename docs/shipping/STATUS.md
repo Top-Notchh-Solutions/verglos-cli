@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-WEB-006 GitHub App webhook configuration
+
+The personal `Verglos Preview SCM Checks` App (`5367509`) is configured with
+an active SSL-verified webhook at
+`https://verglos.com/api/v1/webhooks/scm/github`. The owner-visible contract
+is Checks read/write, mandatory Metadata read-only, and Check Run/Check Suite
+events only; a webhook secret is configured but was not exposed. Read-only
+inspection of recent CLI/Web merge commits found GitHub Actions checks only,
+not a provider check run from this App.
+
+This is configuration evidence, not delivery evidence. Keep `TEAM-WEB-006`
+and the GitHub lifecycle/delivery rows open for authorized live delivery,
+retry/reconciliation, and acceptance. No AppSec state changed; score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-web-006-github-app-webhook-config-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 personal GitHub App scope
 
 The existing personal-account installation was verified in the owner session:
