@@ -63,8 +63,11 @@ jobs:
       - name: Check third-party notices drift
         run: |
           node scripts/generate-third-party-notices.mjs > generated-third-party-notices
+          node --test scripts/generate-third-party-notices.test.mjs
           test -s generated-third-party-notices
           grep -q '^THIRD-PARTY NOTICES$' generated-third-party-notices
+          grep -q '^EXTERNAL ENGINE AND CONTENT RECORDS$' generated-third-party-notices
+          grep -q '^engine\.trivy — Trivy$' generated-third-party-notices
 
       - name: Check CycloneDX SBOM drift
         run: |
