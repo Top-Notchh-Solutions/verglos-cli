@@ -1,6 +1,24 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0z Current QUAL-WEB-005 hosted Preview deletion execution — 2026-10-18
+
+The isolated READY Preview now has a real hosted privacy execution: a
+synthetic owner registered a customer-held `signed_vgl` digest, submitted an
+explicit same-origin `record_receipt` deletion request, and the real worker
+completed it with one examined/one completed job and zero blocked, retry,
+dead-letter, lease-loss, busy, or malformed outcomes. Authenticated history
+showed `completed`, the held digest remained unchanged, and a replay examined
+zero jobs. Cross-origin and malformed confirmation requests were refused.
+
+This is hosted non-production evidence only. `QUAL-WEB-005` remains unchecked
+for legal/consent and customer-held-record disposition, full inventory
+reconciliation, restore/rollback acceptance, production migration
+authorization, and independent end-to-end acceptance. Continue to the next
+eligible non-AppSec row; do not check this row by inference. Score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/qual-web-005-hosted-preview-deletion-2026-10-18.md`.
+
 ## 0.0y Current ENT-CLI-001 hosted private-runner lifecycle qualification — 2026-10-18
 
 The real isolated Preview lifecycle now provides operational evidence for the

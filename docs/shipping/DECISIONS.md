@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain QUAL-WEB-005 after hosted synthetic deletion
+
+- **Decision:** Accept the isolated Preview deletion execution as qualification
+  evidence, but keep `QUAL-WEB-005` unchecked.
+- **Observed:** A same-origin synthetic `record_receipt` request completed
+  through the real hosted worker; the customer-held signed-record digest stayed
+  unchanged; the worker replay was empty; cross-origin and malformed
+  confirmation requests failed closed.
+- **Reason:** This narrow hosted run does not establish the legal/consent and
+  customer-held-record disposition, full inventory reconciliation,
+  restore/rollback acceptance, production migration authorization, or
+  independent end-to-end acceptance required by the row.
+- **Disposition:** Keep the row open and continue with the next eligible
+  non-AppSec item. Do not interpret this as production deletion authority.
+- **Boundary:** Preview-only synthetic state was used. No Production,
+  customer, payment, provider, registry, or AppSec state changed. No squash
+  merge was used. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/qual-web-005-hosted-preview-deletion-2026-10-18.md`.
+
 ## 2026-10-18 · retain ENT-CLI-001 after hosted runner lifecycle
 
 - **Decision:** Accept the real isolated Preview lifecycle as operational

@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · QUAL-WEB-005 hosted Preview deletion execution
+
+The current Web source was deployed to an isolated READY Preview with a fresh
+Preview-only cron credential. A synthetic owner registered a customer-held
+signed-record digest, submitted an explicit same-origin `record_receipt`
+deletion request, and the real hosted worker completed it: **examined 1,
+completed 1, blocked 0, retries 0, dead-lettered 0, lease-lost 0**. The
+completed request was visible through authenticated history, the held digest
+remained unchanged, and a worker replay examined zero jobs. Cross-origin and
+malformed-confirmation requests were refused.
+
+This is hosted non-production execution evidence only. Legal/consent and
+customer-held-record disposition, full inventory reconciliation, restore/
+rollback acceptance, production migration authorization, and independent
+end-to-end acceptance remain open, so `QUAL-WEB-005` remains unchecked. Score
+remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/qual-web-005-hosted-preview-deletion-2026-10-18.md`.
+
+No Production, customer, payment, provider, registry, or AppSec state changed.
+No squash, rebase, force-push, empty, duplicate, artificial, or irrelevant
+documentation-only contribution was used.
+
 ## 2026-10-18 · ENT-CLI-001 hosted private-runner lifecycle qualification
 
 The current Web source was deployed to an isolated READY Preview with fresh
