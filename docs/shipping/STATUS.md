@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 bounded policy response implementation
+
+CLI PR #129 merged normally as `9eba5102`, retaining implementation commit
+`36fb82f3` and test commit `9d064603`. The organization-policy client now
+rejects timeout values above ten seconds and streams responses through a
+one-MiB cap with early cancellation. Workspace build **8/8**, focused policy
+tests **9/9**, and the full CLI package test command passed with no failures.
+This is code-side progress only; mapped entitlement and authenticated hosted
+fetch/cache/offline/expiry/cross-tenant/provider reconciliation remain open.
+
+## 2026-10-18 · TEAM-WEB-006 bounded SCM provider transport implementation
+
+Web PR #199 merged normally as `dd5f3883`, retaining implementation commit
+`a7fe6b7` and test commit `a259277`. Provider requests now use bounded
+timeout/cancellation, redirect refusal, response-body cancellation, and
+bounded metadata projection. Typecheck, provider tests **7/7**, and SCM
+route/runner/worker tests **14/14** passed; the merged main commit is READY in
+Production. Live provider delivery and operational cutover/reconciliation
+remain open.
+
 ## 2026-10-18 · TEAM-CLI-001 hosted CLI-auth entitlement recheck
 
 The public device-code start endpoint returned a bounded challenge. Opening
