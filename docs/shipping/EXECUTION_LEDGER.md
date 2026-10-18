@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · FINAL-WEB-006 public proof assets
+
+- **Public merge:** Web PR #201 merged normally as `72cff9bf`, preserving
+  implementation `4bcada6`, route `49d7157`, and regression `625afe9` as
+  three separate commits.
+- **Implementation:** Added a static `/proof` route backed by a canonical
+  source-free registry. Each public asset carries an exact date/version,
+  `real` or `demo` label, public evidence URL, accessible description, and
+  explicit limitation; the homepage evidence section links to the route.
+- **Verification:** Focused proof/navigation tests **4/4**, typecheck, build,
+  diff check, hosted Web verification, Vercel, Preview Comments, and
+  GitGuardian passed.
+- **Disposition:** Keep `FINAL-WEB-006` open for the acceptance bundle and
+  `ACCEPT-003`/`ACCEPT-009` dependencies. No AppSec state or checkbox changed;
+  score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 policy redirect boundary
 
 - **Public PR:** CLI PR #132 was pushed as a normal three-commit branch with

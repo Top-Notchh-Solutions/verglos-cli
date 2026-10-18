@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-006 public proof assets · 2026-10-18
+
+- **Source mapping:** Web PR #201 normal merge `72cff9bf`, preserving
+  implementation `4bcada6`, route `49d7157`, and regression `625afe9`.
+- **Contract mapping:** The static `/proof` surface publishes only bounded
+  public implementation/demo cards with date, version, label, public URL,
+  accessible description, and limitation; no customer or private evidence is
+  rendered.
+- **Verification mapping:** Focused tests **4/4**, typecheck, build, hosted
+  verification, Vercel, Preview Comments, and GitGuardian passed.
+- **Acceptance mapping:** `FINAL-WEB-006` remains unchecked for its
+  acceptance bundle and `ACCEPT-003`/`ACCEPT-009` dependencies. No AppSec row
+  changed; score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
+
 ## TEAM-CLI-001 policy redirect boundary · 2026-10-18
 
 - **Source mapping:** CLI PR #132, implementation `39950bb6`, regression test

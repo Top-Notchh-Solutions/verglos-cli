@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · FINAL-WEB-006 public proof assets
+
+Web PR #201 merged normally as `72cff9bf`, preserving implementation
+`4bcada6`, route `49d7157`, and regression `625afe9` as three separate
+commits. The static `/proof` route publishes bounded public `real`/`demo`
+assets with exact date/version, evidence URL, accessible description, and
+explicit limitation. Focused tests **4/4**, typecheck, build, all hosted Web
+verification, Vercel, Preview Comments, and GitGuardian checks passed.
+
+This is implementation progress only. Keep `FINAL-WEB-006` open for the
+acceptance bundle and `ACCEPT-003`/`ACCEPT-009` dependencies. Score remains
+**232 checked / 48 open / 280 total (82.9%)**. No AppSec state changed.
+Evidence: `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 policy redirect boundary
 
 CLI PR #132 merged normally as `2682874c`, preserving implementation

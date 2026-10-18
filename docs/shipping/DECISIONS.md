@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain FINAL-WEB-006 after public proof implementation
+
+- **Decision:** Accept Web PR #201 as a bounded public proof-surface
+  implementation advance while keeping `FINAL-WEB-006` unchecked.
+- **Observed:** Normal merge `72cff9bf` preserves three commits; the static
+  `/proof` route renders source-free `real`/`demo` assets with exact
+  date/version, public URL, accessible description, and limitation. Local and
+  hosted verification passed.
+- **Reason:** The route does not create customer acceptance, private-record
+  evidence, or the required `ACCEPT-003`/`ACCEPT-009` acceptance state.
+- **Disposition:** No checkbox or AppSec state changes. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/final-web-006-public-proof-assets-pr201-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-CLI-001 after policy redirect hardening
 
 - **Decision:** Accept CLI PR #132 as a bounded implementation advance and
