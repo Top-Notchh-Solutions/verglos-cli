@@ -1,5 +1,31 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-001 post-merge Preview policy/provider recheck
+
+Web PR #195, `Bound GitHub App provider requests`, merged normally with merge
+commit `8362bba7529ff888c6c3742638078845d6c97f91`; all required PR checks
+passed. The merged Web source now bounds each GitHub App request to ten
+seconds and tests the abort-signal contract. A fresh protected Preview
+deployment `dpl_4eTQjNJUwjuU2PM9S8hg8GWTdXDX` reached READY and generated
+47/47 pages.
+
+Using the existing owner-authorized Preview test identity, the isolated
+fixture organization returned its published policy with digest
+`sha256:055bd90bca9822faa7219224aeba42ed4c201ab9ed81df9ca9efa167a9ad8a02`.
+The exact GitHub installation/repository request then returned bounded
+`GitHub App installation exchange unavailable`; the follow-up installation
+list remained empty. No provider token was recorded and no Production state
+changed.
+
+This advances the policy substrate and makes provider failure bounded, but it
+does not close `TEAM-CLI-001`: the mapped paid/non-production entitlement,
+authenticated signed CLI fetch/cache/offline/expiry/cross-tenant matrix, and
+provider delivery/reconciliation are still missing. `TEAM-CLI-002` and
+`TEAM-WEB-006` remain dependent. Hunt/AppSec-held rows remain parked for the
+independent review. Score remains **232 checked / 48 open / 280 total
+(82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-preview-policy-provisioning-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 hosted CLI-auth entitlement recheck
 
 The hosted device-code start endpoint returned a bounded challenge. Opening
