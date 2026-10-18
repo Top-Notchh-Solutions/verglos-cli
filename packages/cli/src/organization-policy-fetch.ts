@@ -4,6 +4,7 @@ import { resolveOrganizationPolicy, type OrganizationPolicyCacheEntry, type Orga
 
 const MAX_RESPONSE_BYTES = 1 * 1024 * 1024;
 const DEFAULT_TIMEOUT_MS = 8_000;
+const MAX_TIMEOUT_MS = 10_000;
 
 function isSafePolicyEndpoint(value: string): boolean {
   return value.length > 0
@@ -38,6 +39,10 @@ export async function fetchOrganizationPolicy(input: Readonly<{
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
 }>): Promise<OrganizationPolicyFetchResult> {
+  const timeoutMs = input.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0 || timeoutMs > MAX_TIMEOUT_MS) {
+    return { resolved: false, reason: "timeout-out-of-bounds" };
+  }
   const now = input.now ?? new Date().toISOString();
   const scope = { organizationId: input.organizationId, repositoryId: input.repositoryId };
   let cached: OrganizationPolicyCacheEntry | undefined;
@@ -55,7 +60,7 @@ export async function fetchOrganizationPolicy(input: Readonly<{
     const endpoint = input.endpoint ?? `/api/v1/organizations/${encodeURIComponent(input.organizationId)}/repositories/${encodeURIComponent(input.repositoryId)}/policy`;
     if (!isSafePolicyEndpoint(endpoint)) return { resolved: false, reason: "unsafe-policy-endpoint" };
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), input.timeoutMs ?? DEFAULT_TIMEOUT_MS);
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
       const response = await (input.fetchImpl ?? fetch)(`${apiUrl}${endpoint}`, {
         method: "GET",
@@ -65,8 +70,8 @@ export async function fetchOrganizationPolicy(input: Readonly<{
       status = response.status;
       const length = Number(response.headers.get("content-length") ?? "0");
       if (Number.isFinite(length) && length > MAX_RESPONSE_BYTES) return { resolved: false, reason: "response-too-large", status };
-      const bytes = await response.arrayBuffer();
-      if (bytes.byteLength > MAX_RESPONSE_BYTES) return { resolved: false, reason: "response-too-large", status };
+      const bytes = await readBoundedResponse(response);
+      if (bytes === undefined) return { resolved: false, reason: "response-too-large", status };
       if (response.ok) {
         try { remote = JSON.parse(new TextDecoder().decode(bytes)); }
         catch { return { resolved: false, reason: "response-invalid-json", status }; }
@@ -91,4 +96,35 @@ export async function fetchOrganizationPolicy(input: Readonly<{
     catch (error) { return { resolved: false, reason: error instanceof Error ? error.message : "cache-write-failed", status }; }
   }
   return { resolved: true, source: resolution.entry.source, entry: resolution.entry, status };
+}
+
+/** Read a provider response without materializing more than the policy cap. */
+async function readBoundedResponse(response: Response): Promise<Uint8Array | undefined> {
+  if (response.body === null) return new Uint8Array();
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  try {
+    while (true) {
+      const next = await reader.read();
+      if (next.done) break;
+      const chunk = next.value;
+      if (!(chunk instanceof Uint8Array)) return undefined;
+      total += chunk.byteLength;
+      if (total > MAX_RESPONSE_BYTES) {
+        await reader.cancel();
+        return undefined;
+      }
+      chunks.push(chunk);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const bytes = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return bytes;
 }
