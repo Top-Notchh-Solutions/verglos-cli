@@ -12,6 +12,7 @@
     "licenses:notices": "node scripts/generate-third-party-notices.mjs --write",
     "sbom:cyclonedx": "node scripts/generate-sbom.mjs --write",
     "sbom:spdx": "node scripts/generate-spdx.mjs --write",
+    "qualify:standards": "node scripts/verify-standard-validation.mjs",
     "pack:public": "node scripts/pack-public-packages.mjs .artifacts/public-packages"
   },
   "devDependencies": {
