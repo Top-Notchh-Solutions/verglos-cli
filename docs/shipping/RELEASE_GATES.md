@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 policy redirect boundary
+
+CLI PR #132 merged normally as `2682874c`, preserving implementation
+`39950bb6`, regression test `d7db7159`, and portability correction `e03f9582`
+as three separate commits. Bearer-authenticated organization-policy requests
+now refuse redirects. Workspace build **8/8**, typecheck **14/14**, focused
+policy-fetch tests **8/8**, and all 11 protected hosted checks passed across
+Ubuntu/macOS/Windows Node 20/22/24, self-scan, and in-toto.
+
+This is code-side progress only. Keep `TEAM-CLI-001` open for mapped
+entitlement, authenticated signed policy/cache/offline/expiry/cross-tenant
+evidence, provider delivery, reconciliation, and complete acceptance. Score
+remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-policy-redirect-boundary-pr132-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 policy scope input boundary
 
 CLI PR #131 merged normally as `234c7641`, preserving separate implementation

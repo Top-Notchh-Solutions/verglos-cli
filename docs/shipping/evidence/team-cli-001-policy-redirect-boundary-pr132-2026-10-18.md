@@ -41,9 +41,10 @@ The new regression test verifies that the bearer-authenticated request is
 constructed with redirect refusal. No credential or policy document is stored
 in this packet.
 
-At evidence capture, the 11 protected GitHub checks on PR #132 were queued;
-their eventual result must be recorded separately before treating hosted CI as
-passed.
+The 11 protected GitHub checks passed on PR #132: Ubuntu Node 20/22/24,
+macOS Node 20/22/24, Windows Node 20/22/24, Verglos self-scan, and in-toto
+release binding. The PR merged normally as `2682874c78dfc2d6ef1f4470e6a68f3085330c75`;
+the three source commits remain separate in the merge history.
 
 ## Acceptance mapping and remaining work
 

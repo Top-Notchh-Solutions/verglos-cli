@@ -12,8 +12,10 @@
 - **Verification:** `pnpm build` passed **8/8**; `pnpm typecheck` passed
   **14/14**; focused policy-fetch tests passed **8/8**; `git diff --check`
   passed.
-- **Hosted state:** The 11 protected PR checks were queued at capture and are
-  not counted as passed here.
+- **Hosted verification:** All 11 protected PR checks passed: Ubuntu,
+  macOS, and Windows Node 20/22/24, Verglos self-scan, and in-toto release
+  binding. PR #132 merged normally as `2682874c78dfc2d6ef1f4470e6a68f3085330c75`;
+  the three source commits remain separate.
 - **Disposition:** Keep `TEAM-CLI-001` open for mapped entitlement,
   authenticated policy/cache/offline/expiry/cross-tenant observations,
   provider delivery, reconciliation, and complete acceptance. No checkbox or

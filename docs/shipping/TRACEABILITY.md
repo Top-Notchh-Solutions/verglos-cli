@@ -9,8 +9,10 @@
   preserving the trusted-origin and endpoint boundary before any credential
   can be forwarded to another location.
 - **Verification mapping:** Workspace build **8/8**, typecheck **14/14**,
-  focused policy-fetch tests **8/8**, and diff check passed. Hosted checks were
-  queued at capture and are not claimed as passed.
+  focused policy-fetch tests **8/8**, and diff check passed. All 11 protected
+  hosted checks passed across Ubuntu/macOS/Windows Node 20/22/24, self-scan,
+  and in-toto; normal merge commit `2682874c` preserved the three source
+  commits.
 - **Acceptance mapping:** `TEAM-CLI-001` remains unchecked for entitlement,
   authenticated signed policy/cache/offline/expiry/cross-tenant evidence,
   provider delivery, reconciliation, and complete acceptance. No AppSec row

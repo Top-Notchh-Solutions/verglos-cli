@@ -8,7 +8,8 @@
   bearer-authenticated requests. The normal PR branch preserves implementation
   `39950bb6`, test `d7db7159`, and portability correction `e03f9582` as three
   separate commits. Local build **8/8**, typecheck **14/14**, and focused tests
-  **8/8** passed; hosted checks were queued at capture.
+  **8/8** passed. All 11 protected hosted checks passed, and the normal merge
+  commit is `2682874c`.
 - **Reason:** This protects credential routing but does not establish the
   mapped entitlement, authenticated CLI fetch/cache/offline/expiry/cross-tenant
   matrix, provider delivery, reconciliation, or complete acceptance.
