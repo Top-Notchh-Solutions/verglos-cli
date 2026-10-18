@@ -12,8 +12,14 @@ function isValidPolicyScopeId(value: string): boolean {
   return POLICY_SCOPE_ID.test(value);
 }
 
-function isSafePolicyEndpoint(value: string): boolean {
-  return value.length > 0
+function expectedPolicyEndpoint(organizationId: string, repositoryId: string): string {
+  return `/api/v1/organizations/${encodeURIComponent(organizationId)}/repositories/${encodeURIComponent(repositoryId)}/policy`;
+}
+
+function isSafePolicyEndpoint(value: unknown, expected: string): value is string {
+  return typeof value === "string"
+    && value === expected
+    && value.length > 0
     && value.length <= 2048
     && value.startsWith("/")
     && !value.startsWith("//")
@@ -66,8 +72,13 @@ export async function fetchOrganizationPolicy(input: Readonly<{
     if (!apiUrl) return { resolved: false, reason: "unsafe-api-url" };
     const licenseKey = input.licenseKey ?? creds.licenseKey;
     if (!licenseKey) return { resolved: false, reason: "no-license" };
-    const endpoint = input.endpoint ?? `/api/v1/organizations/${encodeURIComponent(input.organizationId)}/repositories/${encodeURIComponent(input.repositoryId)}/policy`;
-    if (!isSafePolicyEndpoint(endpoint)) return { resolved: false, reason: "unsafe-policy-endpoint" };
+    const expectedEndpoint = expectedPolicyEndpoint(input.organizationId, input.repositoryId);
+    const endpoint = input.endpoint ?? expectedEndpoint;
+    // The endpoint override is retained for test/self-hosted routing, but it
+    // must remain the exact bound organization/repository policy route. A
+    // same-origin alternate path could otherwise receive the bearer token or
+    // return a policy for a different server-side contract.
+    if (!isSafePolicyEndpoint(endpoint, expectedEndpoint)) return { resolved: false, reason: "unsafe-policy-endpoint" };
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
