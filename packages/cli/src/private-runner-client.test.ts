@@ -34,14 +34,17 @@ function abortError(): Error {
 }
 
 function responseThatWaitsForAbort(signal: AbortSignal): Response {
-  return {
-    ok: true,
-    headers: new Headers(),
-    arrayBuffer: async () => {
-      if (signal.aborted) throw abortError();
-      await new Promise<never>((_resolve, reject) => signal.addEventListener("abort", () => reject(abortError()), { once: true }));
+  return new Response(new ReadableStream<Uint8Array>({
+    pull() {
+      return new Promise<void>((_resolve, reject) => {
+        if (signal.aborted) {
+          reject(abortError());
+          return;
+        }
+        signal.addEventListener("abort", () => reject(abortError()), { once: true });
+      });
     },
-  } as unknown as Response;
+  }), { status: 200 });
 }
 
 async function withDeadline<T>(promise: Promise<T>, timeoutMs = 250): Promise<T> {
