@@ -15,6 +15,7 @@ test("standard-validation workflow installs pinned official validators", () => {
   assert.match(workflow, /sigstore\/cosign-installer@v4\.1\.2/u);
   assert.match(workflow, /cosign-release: v2\.6\.0/u);
   assert.match(workflow, /in-toto==3\.0\.0/u);
+  assert.match(workflow, /Configure cross-platform license evidence/u);
 });
 
 test("standard-validation workflow qualifies all release evidence formats and uploads bounded evidence", () => {

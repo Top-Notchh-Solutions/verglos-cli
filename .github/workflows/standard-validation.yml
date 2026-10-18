@@ -43,6 +43,13 @@ jobs:
           distribution: temurin
           java-version: "17"
 
+      # Generate the complete supported-platform dependency inventory before
+      # producing release SBOMs, matching the existing release qualification
+      # jobs rather than silently validating only Ubuntu's optional packages.
+      - name: Configure cross-platform license evidence
+        shell: bash
+        run: node -e 'const fs=require("node:fs"); const p=JSON.parse(fs.readFileSync("package.json","utf8")); p.pnpm={...(p.pnpm||{}),supportedArchitectures:{os:["current","aix","android","darwin","freebsd","linux","netbsd","openbsd","openharmony","sunos","win32"],cpu:["current","arm","arm64","ia32","loong64","mips64el","ppc64","riscv64","s390x","x64"]}}; fs.writeFileSync("package.json",JSON.stringify(p,null,2)+"\n");'
+
       - name: Install repository dependencies
         run: pnpm install --frozen-lockfile
 
