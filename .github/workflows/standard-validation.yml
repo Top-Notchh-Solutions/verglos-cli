@@ -1,0 +1,127 @@
+name: Standard validation
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: standard-validation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Official standard and provenance validators
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 9.15.9
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install repository dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build release packages
+        run: pnpm build
+
+      - name: Install official SARIF validator
+        run: npm install --global @microsoft/sarif-multitool@5.8.0
+
+      - name: Install official CycloneDX validator
+        run: npm install --global @cdxgen/cdxgen@13.4.0 --omit=optional --ignore-scripts
+
+      - name: Install official SPDX validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          spdx_tool="$RUNNER_TEMP/tools-java-2.0.7-jar-with-dependencies.jar"
+          curl --fail --silent --show-error --location \
+            https://repo1.maven.org/maven2/org/spdx/tools-java/2.0.7/tools-java-2.0.7-jar-with-dependencies.jar \
+            --output "$spdx_tool"
+          printf '%s  %s\n' \
+            bf99a8b2ffbea238c1451c6b4be568870f18b4aac93d0dbff755f2b0b7ce43f3 \
+            "$spdx_tool" | sha256sum --check --strict
+          printf 'SPDX tool: %s\n' "$spdx_tool" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Install official Cosign
+        uses: sigstore/cosign-installer@v4.1.2
+        with:
+          cosign-release: v2.6.0
+
+      - name: Build standard-validation fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          artifact_root=.artifacts/standard-validation
+          mkdir -p "$artifact_root"
+          node scripts/generate-sbom.mjs > "$artifact_root/SBOM.cdx.json"
+          node scripts/generate-spdx.mjs > "$artifact_root/SBOM.spdx.json"
+          cp scripts/fixtures/standard-validation/report.sarif "$artifact_root/report.sarif"
+          printf 'official validator qualification payload\n' > "$artifact_root/sigstore.payload"
+          (
+            cd "$artifact_root"
+            COSIGN_PASSWORD='' cosign generate-key-pair
+            COSIGN_PASSWORD='' cosign sign-blob --key cosign.key --bundle sigstore.bundle.json --tlog-upload=false sigstore.payload
+          )
+
+      - name: Run official standard validators
+        shell: bash
+        env:
+          VERGLOS_CYCLONEDX_CLI: cdx-validate
+          VERGLOS_SPDX_TOOL_JAR: ${{ runner.temp }}/tools-java-2.0.7-jar-with-dependencies.jar
+        run: |
+          set -euo pipefail
+          node scripts/verify-standard-validation.mjs .artifacts/standard-validation --strict --json \
+            | tee standard-validation.json
+
+      - name: Bind release archives with official in-toto verifier
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --no-warn-script-location in-toto==3.0.0
+          node scripts/pack-public-packages.mjs .artifacts/public-packages
+          python scripts/verify-in-toto-release.py .artifacts/public-packages \
+            | tee in-toto-release-binding.log
+
+      - name: Upload standard validation evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: standard-validation-${{ github.sha }}
+          path: |
+            standard-validation.json
+            in-toto-release-binding.log
+            .artifacts/standard-validation/SBOM.cdx.json
+            .artifacts/standard-validation/SBOM.spdx.json
+            .artifacts/standard-validation/report.sarif
+            .artifacts/standard-validation/sigstore.payload
+            .artifacts/standard-validation/sigstore.bundle.json
+            .artifacts/standard-validation/sigstore.pub
+            .artifacts/public-packages/*.tgz
+          if-no-files-found: error
+          retention-days: 14
