@@ -32,6 +32,45 @@ test("falls back to a verified cache when the remote is unavailable", async () =
   assert.equal(second.resolved, true); assert.equal(second.source, "cache");
 });
 
+test("rejects a streamed policy response when it crosses the bounded body limit", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-large-response-"));
+  const result = await fetchOrganizationPolicy({
+    organizationId: "org_acme",
+    repositoryId: "repo_app",
+    trustedKeys: [],
+    cachePath: join(root, "policy.json"),
+    apiUrl: "https://example.test",
+    licenseKey: "secret",
+    fetchImpl: async () => new Response(new ReadableStream<Uint8Array>({
+      pull(controller) {
+        controller.enqueue(new Uint8Array(1_048_577));
+        controller.close();
+      },
+    }), { status: 200 }),
+  });
+  assert.deepEqual(result, { resolved: false, reason: "response-too-large", status: 200 });
+});
+
+test("rejects an unbounded policy-fetch timeout before making a request", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-timeout-"));
+  let requests = 0;
+  const result = await fetchOrganizationPolicy({
+    organizationId: "org_acme",
+    repositoryId: "repo_app",
+    trustedKeys: [],
+    cachePath: join(root, "policy.json"),
+    apiUrl: "https://example.test",
+    licenseKey: "secret",
+    timeoutMs: 10_001,
+    fetchImpl: async () => {
+      requests += 1;
+      return new Response("{}", { status: 200 });
+    },
+  });
+  assert.deepEqual(result, { resolved: false, reason: "timeout-out-of-bounds" });
+  assert.equal(requests, 0);
+});
+
 test("falls back to a verified cache when response headers arrive but the body times out", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-body-timeout-"));
   const fixtureData = fixture();
