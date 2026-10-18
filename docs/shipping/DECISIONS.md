@@ -12,15 +12,17 @@
   `188b4b01fd9d6c7c4292d8cdf55a3b348954e9d4`, preserving implementation
   `4579c27` and test `f8b420e`. Focused SCM/tenant tests passed **22/22**;
   typecheck, diff check, READY Preview build **47/47**, GitGuardian, Preview
-  Comments, and hosted typecheck/schema all passed.
+  Comments, and hosted typecheck/schema all passed. Vercel then deployed the
+  normal merge to Production as `dpl_6v94AE2iXisCWHKxQfrjKyD81NZ8`; the
+  public `verglos.com` smoke request returned HTTP 200.
 - **Reason:** This corrects a code-side blocker but does not create a provider
   installation, configure provider credentials, publish a live policy, or
   prove CLI fetch/cache/offline/cross-tenant behavior.
 - **Disposition:** Keep `TEAM-CLI-001`, its dependent TEAM rows, and all
   customer/provider acceptance rows open. This is not an AppSec hold. Score
   remains **232/48/280 (82.9%)**.
-- **Boundary:** No Production, customer, billing, registry, provider, or
-  AppSec state changed. No squash merge was used.
+- **Boundary:** Only the Web deployment target changed. No customer, billing,
+  registry, provider, or AppSec state changed. No squash merge was used.
 - **Evidence:** `evidence/team-cli-001-organization-owner-policy-fix-2026-10-18.md`.
 
 ## 2026-10-18 · retain QUAL-WEB-005 after hosted synthetic deletion

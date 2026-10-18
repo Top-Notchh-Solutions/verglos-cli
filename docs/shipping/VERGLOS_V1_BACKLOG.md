@@ -11,8 +11,12 @@ a legacy migration mapping for an organization created through the current
 organization API. Focused SCM/tenant tests passed **22/22**, typecheck and
 diff checks passed, and READY Preview deployment
 `dpl_7DhQxht5dgG655VBqU1a1NnzZj21` built **47/47** pages.
+The connected Vercel project then deployed the normal merge commit to
+Production as `dpl_6v94AE2iXisCWHKxQfrjKyD81NZ8`; a read-only request to
+`https://verglos.com/` returned HTTP 200 and the factual Security Layer title.
 
-This advances implementation only. `TEAM-CLI-001` remains unchecked for the
+This advances implementation and authorized Production deployment only.
+`TEAM-CLI-001` remains unchecked for the
 authorized SCM provider installation, provider credentials, published signed
 policy, authenticated live CLI fetch/cache/offline/cross-tenant evidence, and
 reconciliation. `TEAM-CLI-002` and `TEAM-WEB-006` remain dependent. No

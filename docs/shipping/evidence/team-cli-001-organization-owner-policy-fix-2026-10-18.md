@@ -41,13 +41,23 @@ resolver remains unchanged for the v2 entitlement path.
 - Hosted build generated **47/47** pages and included the policy route.
 - GitGuardian, Vercel Preview Comments, and hosted `typecheck-and-schema`:
   passed.
+- After the normal merge, the connected Vercel project automatically deployed
+  merge commit `188b4b01fd9d6c7c4292d8cdf55a3b348954e9d4` to Production as
+  deployment `dpl_6v94AE2iXisCWHKxQfrjKyD81NZ8`.
+- `vercel inspect` reported target `production`, status `Ready`, and aliases
+  `https://verglos.com`, `https://www.verglos.com`, and
+  `https://verglos-web.vercel.app`.
+- A read-only public smoke request to `https://verglos.com/` returned HTTP
+  `200`, `content-type: text/html`, and the factual title
+  `Verglos — The Security Layer for AI-Generated Code`.
 
 ## Boundary and disposition
 
-This is code and hosted-build evidence only. No Production, customer,
-provider installation, billing, npm registry, database migration, or AppSec
-state was changed. No credentials, private keys, license bearers, raw
-provider payloads, or customer source are recorded.
+This is code, hosted-build, and authorized Production deployment evidence.
+The deployment changed only the Web deployment target; no customer,
+provider installation, billing, npm registry, or database migration state was
+changed. No credentials, private keys, license bearers, raw provider payloads,
+or customer source are recorded.
 
 `TEAM-CLI-001` remains unchecked. The row still requires the authorized SCM
 provider installation, server-held provider credentials, a published signed

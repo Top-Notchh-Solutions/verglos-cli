@@ -13,13 +13,17 @@ ownership and database errors.
 Focused SCM/tenant contract tests passed **22/22**, typecheck and diff checks
 passed, and READY Preview deployment `dpl_7DhQxht5dgG655VBqU1a1NnzZj21`
 generated **47/47** pages. GitGuardian, Vercel Preview Comments, and hosted
-typecheck/schema all passed.
+typecheck/schema all passed. After merge, Vercel automatically deployed
+`188b4b01fd9d6c7c4292d8cdf55a3b348954e9d4` to Production as
+`dpl_6v94AE2iXisCWHKxQfrjKyD81NZ8`; `https://verglos.com/` returned HTTP 200
+and exposed the factual Security Layer title.
 
-This is implementation and hosted-build progress only. `TEAM-CLI-001` remains
+This is implementation, hosted-build, and Production deployment progress only.
+`TEAM-CLI-001` remains
 unchecked for the authorized SCM provider installation, server-held provider
 credentials, published signed policy, authenticated live fetch/cache/offline/
-cross-tenant observation, and reconciliation evidence. No Production,
-customer, billing, registry, provider, or AppSec state changed. No squash,
+cross-tenant observation, and reconciliation evidence. No customer, billing,
+registry, provider, or AppSec state changed. No squash,
 rebase, force-push, empty, duplicate, artificial, or irrelevant
 documentation-only contribution was used. Score remains **232 checked / 48
 open / 280 total (82.9%)**. Evidence:
