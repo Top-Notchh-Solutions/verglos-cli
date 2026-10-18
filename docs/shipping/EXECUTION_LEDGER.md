@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 signed offline-cache authenticity
+
+- **Public merge:** CLI PR #133 merged normally as
+  `4aa62286e31cc7e9fcbeef0eebc5a383b4d6a0fc`, preserving implementation
+  `df615be38fb6e3409ca601781e594e39fd438803` and regression test
+  `77de3ab5ff3349d3766b58ccdbf26b6b02d49efd`.
+- **Implementation:** The organization-policy cache retains key ID, signature,
+  signer, and signed timestamp, and offline resolution re-verifies the complete
+  envelope against the active trusted key. Unsigned replacement of policy JSON
+  and digest fails closed.
+- **Verification:** Shared/CLI builds, CLI typecheck, focused policy/cache/fetch
+  tests **15/15**, and `git diff --check` passed. All 11 hosted protected checks
+  passed across Ubuntu/macOS/Windows Node 20/22/24, self-scan, and in-toto.
+- **Disposition:** Keep `TEAM-CLI-001` unchecked for entitlement, hosted signed
+  fetch/cache/offline/expiry/cross-tenant evidence, provider delivery,
+  reconciliation, and complete acceptance. No AppSec state changed; score
+  remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-signed-offline-cache-pr133-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-006 public proof assets
 
 - **Public merge:** Web PR #201 merged normally as `72cff9bf`, preserving

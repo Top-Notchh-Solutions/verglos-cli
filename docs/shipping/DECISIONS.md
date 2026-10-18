@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-CLI-001 after signed offline-cache hardening
+
+- **Decision:** Accept CLI PR #133 as a bounded implementation advance and keep
+  `TEAM-CLI-001` unchecked.
+- **Observed:** The normal merge `4aa62286` preserves implementation
+  `df615be3` and regression test `77de3ab5`; offline cache use now re-verifies
+  the original signed envelope. Local focused tests **15/15** and all 11 hosted
+  protected checks passed.
+- **Reason:** This closes a cache-authenticity code gap but does not establish
+  the mapped entitlement, authenticated hosted policy matrix, provider delivery,
+  reconciliation, or complete acceptance. Billing/provider observation remains
+  free/no active paid license/no hosted-record allowance.
+- **Disposition:** No checkbox or AppSec state changes. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-signed-offline-cache-pr133-2026-10-18.md`.
+
 ## 2026-10-18 · retain FINAL-WEB-006 after public proof implementation
 
 - **Decision:** Accept Web PR #201 as a bounded public proof-surface

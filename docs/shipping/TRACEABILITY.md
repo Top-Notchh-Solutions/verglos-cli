@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 signed offline-cache authenticity · 2026-10-18
+
+- **Source mapping:** CLI PR #133 normal merge
+  `4aa62286e31cc7e9fcbeef0eebc5a383b4d6a0fc`, preserving implementation
+  `df615be38fb6e3409ca601781e594e39fd438803` and regression test
+  `77de3ab5ff3349d3766b58ccdbf26b6b02d49efd`.
+- **Contract mapping:** Offline cache entries retain the signed organization
+  policy envelope fields and are re-verified against the active trusted key;
+  changing policy JSON and digest without the signer returns `invalid-signature`.
+- **Verification mapping:** Shared/CLI builds, CLI typecheck, focused policy,
+  cache, and fetch tests **15/15**, diff check, and all 11 hosted platform,
+  self-scan, and in-toto checks passed.
+- **Acceptance mapping:** `TEAM-CLI-001` remains unchecked for entitlement,
+  authenticated hosted fetch/cache/offline/expiry/cross-tenant evidence,
+  provider delivery, reconciliation, and complete acceptance. No AppSec row
+  changed; score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-cli-001-signed-offline-cache-pr133-2026-10-18.md`.
+
 ## FINAL-WEB-006 public proof assets · 2026-10-18
 
 - **Source mapping:** Web PR #201 normal merge `72cff9bf`, preserving

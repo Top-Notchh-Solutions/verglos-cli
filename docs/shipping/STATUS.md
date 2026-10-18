@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 signed offline-cache authenticity
+
+CLI PR #133 merged normally as `4aa62286`, preserving implementation
+`df615be3` and regression test `77de3ab5`. Offline organization-policy cache
+entries now retain and cryptographically re-verify the signed envelope before
+use; a replacement policy plus replacement digest without the signer returns
+`invalid-signature`. Local builds/typecheck, focused tests **15/15**, diff check,
+and all 11 protected hosted checks passed.
+
+This is implementation progress only. The entitlement, authenticated hosted
+fetch/cache/offline/expiry/cross-tenant, provider delivery, reconciliation, and
+complete acceptance conditions remain open. No checkbox or AppSec state changed.
+Score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-signed-offline-cache-pr133-2026-10-18.md`.
+
 ## 2026-10-18 · FINAL-WEB-006 public proof assets
 
 Web PR #201 merged normally as `72cff9bf`, preserving implementation

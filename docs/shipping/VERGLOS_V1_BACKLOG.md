@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-001 signed offline-cache authenticity
+
+CLI PR #133 merged normally as `4aa62286e31cc7e9fcbeef0eebc5a383b4d6a0fc`,
+preserving implementation `df615be38fb6e3409ca601781e594e39fd438803` and
+regression test `77de3ab5ff3349d3766b58ccdbf26b6b02d49efd`. The organization
+policy cache now retains and re-verifies the signed envelope identity before
+offline use, so replacing policy JSON and its digest without the trusted signer
+fails closed. Local shared/CLI builds, CLI typecheck, focused cache/fetch/shared
+policy tests **15/15**, diff check, and all 11 protected hosted checks passed.
+This is implementation progress only: `TEAM-CLI-001` remains unchecked for
+entitlement, authenticated hosted fetch/cache/offline/expiry/cross-tenant
+evidence, provider delivery, reconciliation, and complete acceptance. No
+checkbox changed; score remains **232 checked / 48 open / 280 total (82.9%)**.
+Evidence: `docs/shipping/evidence/team-cli-001-signed-offline-cache-pr133-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 policy scope input boundary
 
 CLI PR #131 merged normally as
