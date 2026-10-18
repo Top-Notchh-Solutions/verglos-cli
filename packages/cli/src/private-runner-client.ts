@@ -14,6 +14,7 @@ import {
   type PrivateRunnerResultInput,
 } from "@verglos/shared";
 import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
+import { readBoundedResponse } from "./http-response.js";
 
 const MAX_KEY_BYTES = 16 * 1024;
 const MAX_RESPONSE_BYTES = 1 * 1024 * 1024;
@@ -191,12 +192,10 @@ export async function pollPrivateRunnerJob(input: Readonly<{
     } catch {
       return { status: "error", endpoint, reason: "network" };
     }
-    const contentLength = Number(response.headers.get("content-length") ?? "0");
-    if (Number.isFinite(contentLength) && contentLength > MAX_RESPONSE_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
     let body: unknown;
     try {
-      const bytes = await response.arrayBuffer();
-      if (bytes.byteLength > MAX_RESPONSE_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
+      const bytes = await readBoundedResponse(response, MAX_RESPONSE_BYTES);
+      if (bytes === undefined) return { status: "error", endpoint, reason: "response_too_large" };
       body = JSON.parse(new TextDecoder().decode(bytes));
     } catch (error) {
       return { status: "error", endpoint, reason: isAbortError(error) ? "network" : "invalid_json" };
@@ -257,12 +256,10 @@ export async function uploadPrivateRunnerResult(input: Readonly<{
     } catch {
       return { status: "error", endpoint, reason: "network" };
     }
-    const contentLength = Number(response.headers.get("content-length") ?? "0");
-    if (Number.isFinite(contentLength) && contentLength > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
     let value: unknown;
     try {
-      const bytes = await response.arrayBuffer();
-      if (bytes.byteLength > MAX_RESULT_BYTES) return { status: "error", endpoint, reason: "response_too_large" };
+      const bytes = await readBoundedResponse(response, MAX_RESULT_BYTES);
+      if (bytes === undefined) return { status: "error", endpoint, reason: "response_too_large" };
       value = JSON.parse(new TextDecoder().decode(bytes));
     } catch (error) {
       return { status: "error", endpoint, reason: isAbortError(error) ? "network" : "invalid_json" };

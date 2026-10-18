@@ -2,11 +2,6 @@ const MAX_JSON_RESPONSE_BYTES = 1 * 1024 * 1024;
 
 export async function readJsonResponse(response: Response, maxBytes = MAX_JSON_RESPONSE_BYTES): Promise<unknown | null> {
   if (!Number.isSafeInteger(maxBytes) || maxBytes <= 0) return null;
-  const length = Number(response.headers.get("content-length") ?? "0");
-  if (Number.isFinite(length) && length > maxBytes) {
-    await cancelBody(response);
-    return null;
-  }
   const bytes = await readBoundedResponse(response, maxBytes);
   if (bytes === undefined) return null;
   try { return JSON.parse(new TextDecoder().decode(bytes)); } catch { return null; }
@@ -14,6 +9,12 @@ export async function readJsonResponse(response: Response, maxBytes = MAX_JSON_R
 
 /** Read a provider body without retaining more than the caller's byte cap. */
 export async function readBoundedResponse(response: Response, maxBytes: number): Promise<Uint8Array | undefined> {
+  if (!Number.isSafeInteger(maxBytes) || maxBytes <= 0) return undefined;
+  const length = Number(response.headers.get("content-length") ?? "0");
+  if (Number.isFinite(length) && length > maxBytes) {
+    await cancelBody(response);
+    return undefined;
+  }
   if (response.body === null) return new Uint8Array();
   const reader = response.body.getReader();
   const chunks: Uint8Array[] = [];

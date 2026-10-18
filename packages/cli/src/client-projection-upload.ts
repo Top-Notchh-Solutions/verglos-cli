@@ -5,6 +5,7 @@ import {
   type ClientUploadApproval,
 } from "@verglos/shared";
 import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
+import { readBoundedResponse } from "./http-response.js";
 
 const MAX_FILE_BYTES = 256 * 1024;
 const MAX_RESPONSE_BYTES = 64 * 1024;
@@ -70,10 +71,8 @@ function isAbortError(error: unknown): boolean {
 }
 
 async function readResponse(response: Response): Promise<unknown> {
-  const length = Number(response.headers.get("content-length") ?? "0");
-  if (Number.isFinite(length) && length > MAX_RESPONSE_BYTES) throw new Error("response_too_large");
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength > MAX_RESPONSE_BYTES) throw new Error("response_too_large");
+  const bytes = await readBoundedResponse(response, MAX_RESPONSE_BYTES);
+  if (bytes === undefined) throw new Error("response_too_large");
   try {
     return JSON.parse(new TextDecoder().decode(bytes));
   } catch {
