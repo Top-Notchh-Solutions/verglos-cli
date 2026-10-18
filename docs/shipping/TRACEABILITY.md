@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 policy redirect boundary · 2026-10-18
+
+- **Source mapping:** CLI PR #132, implementation `39950bb6`, regression test
+  `d7db7159`, portability correction `e03f9582`; three commits remain
+  separate in the normal PR branch.
+- **Contract mapping:** Organization-policy bearer requests refuse redirects,
+  preserving the trusted-origin and endpoint boundary before any credential
+  can be forwarded to another location.
+- **Verification mapping:** Workspace build **8/8**, typecheck **14/14**,
+  focused policy-fetch tests **8/8**, and diff check passed. Hosted checks were
+  queued at capture and are not claimed as passed.
+- **Acceptance mapping:** `TEAM-CLI-001` remains unchecked for entitlement,
+  authenticated signed policy/cache/offline/expiry/cross-tenant evidence,
+  provider delivery, reconciliation, and complete acceptance. No AppSec row
+  changed.
+- **Evidence:** `evidence/team-cli-001-policy-redirect-boundary-pr132-2026-10-18.md`.
+
 ## TEAM-CLI-001 policy scope input boundary · 2026-10-18
 
 - **Source mapping:** CLI PR #131 normal merge

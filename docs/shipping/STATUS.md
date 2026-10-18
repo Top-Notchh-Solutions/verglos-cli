@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 policy redirect boundary
+
+CLI PR #132 preserves three separate commits: implementation `39950bb6`,
+regression test `d7db7159`, and test portability correction `e03f9582`.
+Bearer-authenticated organization-policy requests now refuse redirects. Local
+workspace build passed **8/8**, typecheck passed **14/14**, focused policy-fetch
+tests passed **8/8**, and diff check passed. Protected hosted checks were
+queued at capture and are not treated as passed.
+
+This is code-side progress only. Entitlement, authenticated hosted policy
+fetch/cache/offline/expiry/cross-tenant evidence, provider delivery,
+reconciliation, and complete acceptance remain open. No checkbox or AppSec
+state changed.
+
+Evidence: `evidence/team-cli-001-policy-redirect-boundary-pr132-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 policy scope input boundary
 
 CLI PR #131 merged normally as `234c7641`, retaining implementation commit

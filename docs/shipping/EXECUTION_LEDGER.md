@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 policy redirect boundary
+
+- **Public PR:** CLI PR #132 was pushed as a normal three-commit branch with
+  implementation `39950bb6`, regression test `d7db7159`, and portability
+  correction `e03f9582`. No squash, rebase, force-push, empty, duplicate,
+  artificial, or irrelevant documentation-only commit was used.
+- **Implementation:** Bearer-authenticated organization-policy fetches set
+  `redirect: "error"`, preventing a redirect from forwarding the credential
+  to another location.
+- **Verification:** `pnpm build` passed **8/8**; `pnpm typecheck` passed
+  **14/14**; focused policy-fetch tests passed **8/8**; `git diff --check`
+  passed.
+- **Hosted state:** The 11 protected PR checks were queued at capture and are
+  not counted as passed here.
+- **Disposition:** Keep `TEAM-CLI-001` open for mapped entitlement,
+  authenticated policy/cache/offline/expiry/cross-tenant observations,
+  provider delivery, reconciliation, and complete acceptance. No checkbox or
+  AppSec state changed.
+- **Evidence:** `evidence/team-cli-001-policy-redirect-boundary-pr132-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 policy scope input boundary
 
 - **Public merge:** CLI PR #131 merged normally as
