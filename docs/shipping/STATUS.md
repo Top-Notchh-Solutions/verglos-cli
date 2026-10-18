@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · TEAM-CLI-001 hosted policy/provider qualification
+
+TEAM-CLI-001 is checked after the approved isolated Preview qualification:
+the mapped founder entitlement returned `has_license_key: true`, the exact
+tenant/repository policy route returned a signed envelope, the CLI matrix
+proved remote/cache/offline/expiry/cross-tenant behavior, and the source-free
+SCM delivery was reconciled through GitHub with a successful
+`Verglos / release decision` check. Web PRs #216, #217, and #218 merged
+normally as `e2fc3f9`, `358dc3c0`, and `390fd3f8`; final Preview deployment
+`dpl_CENtuqYXgX4mMrFbdzH4BbQkDtoX` returned `claimed: 1, delivered: 1`.
+
+Score: **233 checked / 47 open / 280 total (83.2%)**. AppSec/Hunt remains a
+separate independent gate and was not changed. Evidence:
+`evidence/team-cli-001-hosted-cli-policy-provider-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-CLI-001 exact organization-policy route binding
 
 CLI PR #147 merged normally as `5bf7ae70`, preserving implementation commit

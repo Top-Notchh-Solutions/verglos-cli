@@ -1,5 +1,35 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · TEAM-CLI-001 hosted policy/provider qualification
+
+- **Public implementation:** CLI PR #147 merged normally as
+  `5bf7ae70a0e8169f169750cfc188baf4d13685db`. Web PRs #216, #217, and #218
+  merged normally as `e2fc3f9`, `358dc3c`, and `390fd3f8`, preserving separate
+  implementation and regression commits for the SCM claim join and Neon raw
+  SQL timestamp serialization fixes.
+- **Hosted policy:** The protected Preview owner fixture returned founder
+  entitlement with `has_license_key: true`. The exact organization/repository
+  policy route returned a signed envelope for organization
+  `bca7f024-3053-4f56-af0a-207bf0138862` and repository `1310272752`, with
+  digest `sha256:055bd90bca9822faa7219224aeba42ed4c201ab9ed81df9ca9efa167a9ad8a02`
+  and signer key ID
+  `sha256:bb9443f7dc2f2325704ad3ef650e0b73b3582dbfee9f6e03affcf93ab6260c14`.
+- **CLI matrix:** The bounded fetch/cache matrix recorded remote, cache,
+  cache-expired, and organization-mismatch outcomes; cache mode was `0600`
+  and two authenticated requests were observed. No license value or private
+  key was recorded.
+- **Provider:** Final Preview deployment
+  `dpl_CENtuqYXgX4mMrFbdzH4BbQkDtoX` returned
+  `claimed=1, delivered=1, retried=0, failed=0, leaseLost=0`. Delivery
+  `d99ff23b-8428-41c8-b45d-434d5805ad88` read back `providerStatus=delivered`
+  and identical replay `noop`; GitHub check ID `117824403843` was completed
+  with conclusion `success`.
+- **Disposition:** Check `TEAM-CLI-001`. Score is now **233/47/280
+  (83.2%)**. This is approved non-production qualification evidence;
+  Production, payment, customer data, and archive state were untouched.
+  AppSec/Hunt state remains separate and unchanged.
+- **Evidence:** `evidence/team-cli-001-hosted-cli-policy-provider-qualification-2026-10-19.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 SCM repository-scope reconciliation
 
 - **Public merge:** Web PR #204 merged normally as
