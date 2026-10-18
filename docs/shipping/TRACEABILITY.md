@@ -9,8 +9,8 @@
 - **Contract mapping:** Organization and repository scope identifiers are
   bounded and rejected before cache, credential, endpoint, or network work.
 - **Verification mapping:** Build **8/8**, focused policy tests **10/10**,
-  self-scan/in-toto/Ubuntu/macOS checks passed at merge; Windows jobs were
-  still in progress.
+  self-scan and in-toto passed, and all nine Ubuntu/macOS/Windows Node 20/22/24
+  platform jobs passed.
 - **Acceptance mapping:** The row stays unchecked for entitlement,
   authenticated signed policy/cache/offline/expiry/cross-tenant evidence,
   provider delivery, reconciliation, and complete acceptance. No AppSec row

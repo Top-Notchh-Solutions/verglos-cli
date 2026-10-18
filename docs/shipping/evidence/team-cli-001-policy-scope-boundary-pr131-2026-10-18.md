@@ -34,9 +34,11 @@ scope grammar remains bounded and compatible with the cache scope contract.
 - Full `pnpm --filter verglos test` completed with no failures; its two
   A2 Docker target-qualification tests remained explicit skips because target
   integration was not enabled for this policy-only change.
-- At merge, in-toto, self-scan, Ubuntu Node 20/22/24, and macOS Node 20/22/24
-  checks were successful. Windows Node 20/22/24 jobs were still in progress
-  after the merge and are not counted as completed evidence here.
+- The completed run passed in-toto, self-scan, and the full Ubuntu/macOS/
+  Windows Node 20/22/24 matrix: **9/9 platform jobs passed**.
+- GitHub annotations recorded only runner/tooling notices about Node 20 action
+  deprecation, the Ubuntu label migration, and macOS arm64 queue capacity;
+  there were no test failures.
 
 ## Acceptance mapping
 

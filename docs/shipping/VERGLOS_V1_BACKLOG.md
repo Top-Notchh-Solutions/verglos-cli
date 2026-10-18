@@ -12,11 +12,12 @@ focused policy cache/fetch tests passed **10/10**. Self-scan, in-toto, Ubuntu
 Node 20/22/24, and macOS Node 20/22/24 were successful at merge; Windows
 Node 20/22/24 remained in progress and are not counted as completed evidence.
 
-This advances only the input-boundary portion of `TEAM-CLI-001`, which remains
-unchecked for entitlement, authenticated policy/cache/offline/expiry/
-cross-tenant evidence, provider delivery, reconciliation, and complete
-acceptance. No checkbox changed; score remains **232 checked / 48 open / 280
-total (82.9%)**. Evidence:
+The completed hosted run passed self-scan, in-toto, and all nine Ubuntu,
+macOS, and Windows Node 20/22/24 platform jobs. This advances only the
+input-boundary portion of `TEAM-CLI-001`, which remains unchecked for
+entitlement, authenticated policy/cache/offline/expiry/cross-tenant evidence,
+provider delivery, reconciliation, and complete acceptance. No checkbox
+changed; score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
 `docs/shipping/evidence/team-cli-001-policy-scope-boundary-pr131-2026-10-18.md`.
 
 ## 2026-10-18 · TEAM-WEB-006 bounded provider response metadata

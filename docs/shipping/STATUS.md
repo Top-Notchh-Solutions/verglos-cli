@@ -7,8 +7,8 @@ CLI PR #131 merged normally as `234c7641`, retaining implementation commit
 repository policy scopes are rejected before cache, credential, endpoint, or
 network work. Workspace build **8/8** and focused policy tests **10/10**
 passed. Self-scan, in-toto, Ubuntu Node 20/22/24, and macOS Node 20/22/24
-passed at merge; Windows Node 20/22/24 were still in progress. This is code
-side progress only; entitlement and hosted/provider acceptance remain open.
+passed. This is code-side progress only; entitlement and hosted/provider
+acceptance remain open.
 Evidence: `evidence/team-cli-001-policy-scope-boundary-pr131-2026-10-18.md`.
 
 ## 2026-10-18 · TEAM-WEB-006 bounded provider response metadata

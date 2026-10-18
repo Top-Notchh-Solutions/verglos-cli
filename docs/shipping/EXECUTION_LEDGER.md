@@ -10,9 +10,9 @@
   rejected before cache, credential, endpoint, or network work.
 - **Verification:** Workspace build **8/8**; focused policy cache/fetch tests
   **10/10**; full CLI tests had no failures and two explicit A2 skips.
-- **Hosted checks:** Self-scan, in-toto, Ubuntu Node 20/22/24, and macOS Node
-  20/22/24 passed at merge. Windows Node 20/22/24 were still in progress and
-  are deliberately not represented as completed evidence.
+- **Hosted checks:** Self-scan, in-toto, and all nine Ubuntu/macOS/Windows Node
+  20/22/24 platform jobs passed. GitHub emitted only runner/tooling notices;
+  no test failures occurred.
 - **Disposition:** Keep `TEAM-CLI-001` open for entitlement, authenticated
   policy/cache/offline/expiry/cross-tenant, provider, reconciliation, and
   complete acceptance. No checkbox or AppSec state changed.

@@ -5,8 +5,8 @@
 CLI PR #131 merged normally as `234c7641`, preserving separate implementation
 and test commits. Invalid organization/repository policy scopes now fail closed
 before cache, credential, endpoint, or network work. Build **8/8**, focused
-policy tests **10/10**, self-scan, in-toto, Ubuntu, and macOS checks passed at
-merge; Windows jobs were still in progress.
+policy tests **10/10**, self-scan, in-toto, and all nine Ubuntu/macOS/Windows
+Node 20/22/24 platform jobs passed.
 
 This is implementation progress only. Keep `TEAM-CLI-001` open for mapped
 entitlement, authenticated signed policy/cache/offline/expiry/cross-tenant
