@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 authenticated policy-dashboard recheck · 2026-10-18
+
+- **Hosted mapping:** Existing authenticated Chrome page 3 rendered the
+  tenant's published policy identity and repository binding. The exact
+  digest is `sha256:c7327a70ded22a0e051b9da420c012e2ae5d105c430ebe665b82d1ac9399b698`.
+- **Bounded projection:** The page exposes ID/version/status/digest/algorithm/
+  effective time/project/repository and excludes the policy document.
+- **Entitlement mapping:** The same owner session remains Free with no active
+  paid license and no hosted-record allowance, so this does not prove a
+  mapped CLI entitlement or signed remote fetch/cache/offline/expiry/
+  cross-tenant/provider completion.
+- **Disposition:** `TEAM-CLI-001` remains unchecked; score remains
+  **232/48/280 (82.9%)**. No AppSec state changed.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-browser-recheck-2026-10-18.md`.
+
 ## TEAM-CLI-001 Preview dashboard auth correction · 2026-10-18
 
 - **Failure mapping:** Preview test-auth disabled Clerk middleware, but the

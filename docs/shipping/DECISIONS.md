@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · accept visible policy identity while retaining entitlement hold
+
+- **Decision:** Accept the existing authenticated owner-session Policy page
+  as real evidence for the bounded policy identity and repository-binding
+  portion of `TEAM-CLI-001`.
+- **Observed:** Published policy `verglos.policy.scm-qualification-20261018`
+  version `1.0.0` rendered digest
+  `sha256:c7327a70ded22a0e051b9da420c012e2ae5d105c430ebe665b82d1ac9399b698`
+  with canonical-json-v1, effective time, project, and repository binding.
+- **Boundary:** The same Billing view remains Free with no active paid license
+  and no hosted-record allowance. Do not convert this dashboard observation
+  into a paid entitlement or a CLI fetch/cache/offline/provider pass.
+- **Disposition:** Keep `TEAM-CLI-001`, its dependent TEAM rows, and all
+  AppSec-held rows unchanged. No public or Production state changed.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-browser-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · correct Preview auth failure before accepting dashboard evidence
 
 - **Decision:** Treat the first HTTP 500 as a real implementation defect and

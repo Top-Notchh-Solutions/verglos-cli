@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 authenticated policy-dashboard recheck
+
+- **Browser observation:** The existing authenticated Chrome page 3 rendered
+  the Top Notchh Solutions Policy page with the published policy ID,
+  version `1.0.0`, status, exact digest
+  `sha256:c7327a70ded22a0e051b9da420c012e2ae5d105c430ebe665b82d1ac9399b698`,
+  canonical-json-v1, effective/created time, project binding, and repository.
+- **Privacy boundary:** The policy document and source were not rendered or
+  recorded. No new tab/window, checkout, billing, provider, database, or
+  Production write occurred.
+- **Remaining acceptance:** Billing still reports `free`, no active paid
+  license, and no hosted-record allowance. Keep `TEAM-CLI-001` open for the
+  mapped entitlement, authenticated CLI fetch/cache/offline/expiry/
+  cross-tenant matrix, and provider reconciliation.
+- **Evidence:** `evidence/team-cli-001-policy-dashboard-browser-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 Preview dashboard auth correction
 
 - **Failure observed:** The first Preview policy route returned HTTP 500; Vercel

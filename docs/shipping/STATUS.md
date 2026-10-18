@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-CLI-001 authenticated policy-dashboard recheck
+
+The existing authenticated owner session now renders the organization Policy
+page with the published `verglos.policy.scm-qualification-20261018` version
+`1.0.0`, exact digest
+`sha256:c7327a70ded22a0e051b9da420c012e2ae5d105c430ebe665b82d1ac9399b698`,
+`canonical-json-v1`, effective time, `Verglos SCM Qualification` project
+binding, and the `verglos-archive` repository. The page exposes bounded policy
+identity and does not render the policy document. The same session's Billing
+page still shows `free`, no active paid license, and no hosted-record
+allowance. This advances visible policy binding but does not create the
+mapped entitlement or authenticated CLI/provider matrix needed to close
+`TEAM-CLI-001`. Score remains **232 checked / 48 open / 280 total (82.9%)**.
+Evidence: `evidence/team-cli-001-policy-dashboard-browser-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 Preview dashboard auth correction
 
 The first policy-dashboard Preview route check exposed HTTP 500 from Clerk

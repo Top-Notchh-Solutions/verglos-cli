@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 policy identity visible in owner dashboard
+
+The existing authenticated owner session now visibly renders the published
+organization policy identity, exact canonical-json-v1 digest, effective time,
+project binding, and repository on the Policy route without exposing the
+policy document. Billing still reports `free`, no active paid license, and no
+hosted-record allowance. This advances the dashboard projection only; the
+Team policy-fetch gate remains open for mapped entitlement, authenticated CLI
+fetch/cache/offline/expiry/cross-tenant behavior, and provider delivery/
+reconciliation. Score remains **232/48/280 (82.9%)**.
+
+Evidence: `evidence/team-cli-001-policy-dashboard-browser-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 Preview route failure corrected
 
 The initial policy-dashboard Preview check returned HTTP 500 because the
