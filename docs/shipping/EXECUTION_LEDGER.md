@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · QUAL-WEB-006 CLI authorization status announcements
+
+- **Implementation:** Web PR #191 adds polite live-region semantics for a
+  successful CLI authorization result, alert semantics for failures, and a
+  focused source-contract regression test.
+- **History:** Normal merge `ed7febf0340a7d238fbc47bd53bc5a4a7f84bfb9`
+  preserves `356cd31` and `038f2a9`; the PR was assigned to
+  `anuragyadav-git`.
+- **Verification:** Focused tests **2/2**, local typecheck, diff check, hosted
+  typecheck/schema, Vercel, Preview Comments, and GitGuardian passed.
+- **Disposition:** This is technical progress only. Keep QUAL-WEB-006
+  unchecked for its remaining runtime and independent acceptance contracts.
+  Score remains **232/48/280 (82.9%)**.
+- **Boundary:** No production, provider, registry, database, customer,
+  payment, entitlement, or account state changed. No squash, rebase,
+  force-push, empty, duplicate, artificial, or irrelevant contribution was
+  used.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-cli-auth-status-pr191-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 CLI authorization label fix
 
 - **Implementation:** Web PR #190 adds the explicit accessible name for the

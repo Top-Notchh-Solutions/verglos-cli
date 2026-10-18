@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 CLI authorization status announcements · 2026-10-18
+
+- **Source mapping:** Web PR #191 merged normally as
+  `ed7febf0340a7d238fbc47bd53bc5a4a7f84bfb9`, preserving implementation
+  `356cd31` and test `038f2a9`; success and failure results in the CLI
+  authorization handoff now have explicit live-region semantics.
+- **Verification mapping:** Focused tests **2/2**, local typecheck/diff check,
+  hosted typecheck/schema, Vercel, Preview Comments, and GitGuardian all
+  passed. The PR was assigned to `anuragyadav-git`.
+- **Acceptance mapping:** This advances assistive-technology announcement
+  behavior only. `QUAL-WEB-006` remains unchecked for human screen-reader,
+  paid/customer-state, large-dataset, field-CWV, and independent acceptance
+  evidence. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/qual-web-006-cli-auth-status-pr191-2026-10-18.md`.
+
 ## QUAL-WEB-006 CLI authorization label fix · 2026-10-18
 
 - **Source mapping:** Web PR #190 merged normally as

@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · QUAL-WEB-006 CLI authorization status announcements
+
+Web PR #191, assigned to `anuragyadav-git`, merged normally as
+`ed7febf0340a7d238fbc47bd53bc5a4a7f84bfb9`, preserving implementation commit
+`356cd31` and regression-test commit `038f2a9`. Successful and failed CLI
+authorization results now use explicit assistive-technology live-region
+semantics. Focused tests passed **2/2**, local typecheck/diff check passed,
+and hosted typecheck/schema, Vercel, Preview Comments, and GitGuardian passed.
+This is technical progress only; `QUAL-WEB-006` remains unchecked for broader
+runtime, screen-reader, customer-state, and independent acceptance evidence.
+Score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/qual-web-006-cli-auth-status-pr191-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 CLI authorization label fix
 
 Web PR #190, assigned to `anuragyadav-git`, merged normally as
