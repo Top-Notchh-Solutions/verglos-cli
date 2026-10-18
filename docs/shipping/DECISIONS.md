@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-WEB-006 after GitHub App scope correction
+
+- **Decision:** Accept the organization installation scope correction as
+  provider-readiness progress, but keep `TEAM-WEB-006` unchecked.
+- **Observed:** The owner session saved a successful update leaving only
+  `Top-Notchh-Solutions/verglos-cli` selected, removing the stale archive, and
+  retaining least-privilege metadata/check permissions. `verglos-web` was not
+  offered by the organization picker.
+- **Reason:** Scope configuration does not prove delivery to the working web
+  repository, which is not available under this organization installation.
+  Cutover, reconciliation, and complete acceptance remain open.
+- **Disposition:** No checkbox or AppSec state changes. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-github-app-scope-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-CLI-001 after signed offline-cache hardening
 
 - **Decision:** Accept CLI PR #133 as a bounded implementation advance and keep

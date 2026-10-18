@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-WEB-006 GitHub App scope recheck
+
+The existing `Top-Notchh-Solutions` installation for Verglos Organization SCM
+Checks was updated successfully in the owner session. The final selected
+scope is only `Top-Notchh-Solutions/verglos-cli`; the obsolete
+`verglos-archive` selection was removed. Permissions remain read metadata and
+read/write checks. The organization picker returned no `verglos-web`
+repository, so this installation cannot establish delivery to that working
+repository. This is provider-scope evidence only: `TEAM-WEB-006` remains
+unchecked for working-repository delivery, cutover/reconciliation, and
+complete acceptance. No AppSec state changed; score remains **232 checked / 48
+open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-web-006-github-app-scope-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 signed offline-cache authenticity
 
 CLI PR #133 merged normally as `4aa62286e31cc7e9fcbeef0eebc5a383b4d6a0fc`,

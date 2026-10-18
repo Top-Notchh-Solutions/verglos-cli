@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-WEB-006 GitHub App scope recheck
+
+- **Observed:** The existing `Top-Notchh-Solutions` installation for
+  `Verglos Organization SCM Checks` was updated successfully in the owner
+  session. The final selected scope is only `Top-Notchh-Solutions/verglos-cli`;
+  the obsolete `verglos-archive` scope was removed. Read metadata and
+  read/write checks permissions were unchanged.
+- **Boundary:** The organization picker returned no repository for
+  `verglos-web`. This is a provider/account ownership mismatch, not evidence
+  that the web repository receives checks.
+- **Disposition:** Keep `TEAM-WEB-006` unchecked for working-repository
+  delivery, cutover/reconciliation, and acceptance. No AppSec state changed;
+  score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-github-app-scope-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 signed offline-cache authenticity
 
 - **Public merge:** CLI PR #133 merged normally as

@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-WEB-006 GitHub App scope recheck
+
+The existing `Top-Notchh-Solutions` GitHub App installation was updated
+successfully. Only `Top-Notchh-Solutions/verglos-cli` remains selected;
+`verglos-archive` was removed. The installation retains read metadata and
+read/write checks permissions. The organization picker returned no
+`verglos-web` repository.
+
+This is provider-scope evidence only. Keep `TEAM-WEB-006` open for delivery
+to the working repository, cutover/reconciliation, and complete acceptance.
+No AppSec state changed; score remains **232 checked / 48 open / 280 total
+(82.9%)**. Evidence:
+`evidence/team-web-006-github-app-scope-recheck-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 signed offline-cache authenticity
 
 CLI PR #133 merged normally as `4aa62286`, preserving implementation

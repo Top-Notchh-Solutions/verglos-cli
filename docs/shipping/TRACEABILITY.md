@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## TEAM-WEB-006 GitHub App scope recheck · 2026-10-18
+
+- **Provider mapping:** GitHub App installation `172686102` for
+  `Top-Notchh-Solutions` was updated successfully; only `verglos-cli` is
+  selected and the stale `verglos-archive` selection is gone.
+- **Permission mapping:** Read metadata and read/write checks remain the only
+  observed permissions.
+- **Gap mapping:** The organization picker returned no `verglos-web`
+  repository. No working-repository delivery or webhook/check observation was
+  inferred from the scope update.
+- **Acceptance mapping:** `TEAM-WEB-006` remains unchecked for delivery,
+  cutover/reconciliation, and complete acceptance. No AppSec row changed;
+  score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-github-app-scope-recheck-2026-10-18.md`.
+
 ## TEAM-CLI-001 signed offline-cache authenticity · 2026-10-18
 
 - **Source mapping:** CLI PR #133 normal merge
