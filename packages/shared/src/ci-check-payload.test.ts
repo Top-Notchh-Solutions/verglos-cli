@@ -44,6 +44,9 @@ test("CI payload rejects malformed commit, manifest, and unsafe record links", (
   assert.deepEqual(composeCiCheckPayload({ ...base, recordManifestDigest: "sha256:bad" }), { ok: false, reason: "manifest_digest_invalid" });
   assert.deepEqual(composeCiCheckPayload({ ...base, recordUrl: "http://evil.example" }), { ok: false, reason: "record_url_invalid" });
   assert.deepEqual(composeCiCheckPayload({ ...base, recordUrl: "https://evil.example/#secret" }), { ok: false, reason: "record_url_invalid" });
+  assert.deepEqual(composeCiCheckPayload({ ...base, recordUrl: "https://verglos.com/verify/record-123?token=secret" }), { ok: false, reason: "record_url_invalid" });
+  assert.deepEqual(composeCiCheckPayload({ ...base, recordUrl: `https://verglos.com/${"a".repeat(2048)}` }), { ok: false, reason: "record_url_invalid" });
+  assert.deepEqual(composeCiCheckPayload({ ...base, recordUrl: "https://verglos.com/verify/record-123\nsecret" }), { ok: false, reason: "record_url_invalid" });
 });
 
 test("CI delivery is idempotent by payload digest", () => {
