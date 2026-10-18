@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · QUAL-WEB-006 privacy control association requalified
+
+Web PR #189 merged normally as `f7e2a1ccb308a69ecf85308a0c953a4a93dabc36`,
+preserving implementation `bd33089d` and regression test `83f3b80`. The
+authenticated privacy deletion confirmation is now label-associated, with
+focused tests **2/2**, local typecheck/diff check, and all hosted PR checks
+passing. This does not open the privacy/deletion or accessibility qualification
+gates: paid/customer-state, human screen-reader, large-dataset, field-CWV,
+legal/customer-held-record, production, and independent acceptance evidence
+remain required. Keep QUAL-WEB-005 and QUAL-WEB-006 unchecked. Score remains
+**232/48/280 (82.9%)**. Evidence:
+`evidence/qual-web-006-privacy-confirmation-label-pr189-2026-10-18.md`.
+
 ## 2026-10-18 · ENT-CLI-001 current runner implementation requalified
 
 The current CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed shared

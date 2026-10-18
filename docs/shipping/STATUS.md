@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · QUAL-WEB-006 privacy confirmation label fix
+
+Web PR #189, assigned to `anuragyadav-git`, merged normally as
+`f7e2a1ccb308a69ecf85308a0c953a4a93dabc36`, preserving implementation commit
+`bd33089d` and regression-test commit `83f3b80`. The authenticated account
+privacy deletion confirmation now has an explicit label/control association.
+Focused privacy tests passed **2/2**, local typecheck and diff check passed,
+and hosted typecheck/schema, Vercel, Preview Comments, and GitGuardian checks
+passed. This is technical progress only: privacy/deletion acceptance,
+screen-reader/customer-state qualification, and final independent acceptance
+remain open. Score remains **232 checked / 48 open / 280 total (82.9%)**.
+Evidence: `evidence/qual-web-006-privacy-confirmation-label-pr189-2026-10-18.md`.
+
 ## 2026-10-18 · ENT-CLI-001 current merged-head runner requalification
 
 The exact current CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed

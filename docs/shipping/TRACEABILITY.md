@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 privacy confirmation label fix · 2026-10-18
+
+- **Source mapping:** Web PR #189 merged normally as
+  `f7e2a1ccb308a69ecf85308a0c953a4a93dabc36`, preserving implementation
+  `bd33089d` and test `83f3b80`; the account privacy checkbox now has an
+  explicit `label`/`input` association.
+- **Verification mapping:** Focused privacy tests **2/2**, local typecheck,
+  diff check, hosted typecheck/schema, Vercel, Preview Comments, and
+  GitGuardian all passed. The PR was assigned to `anuragyadav-git`.
+- **Acceptance mapping:** This advances the accessible technical surface only.
+  `QUAL-WEB-005` and `QUAL-WEB-006` remain unchecked for their separate
+  deletion/legal/customer, paid-state, screen-reader, large-dataset, field-CWV,
+  and independent-acceptance requirements. Score remains **232/48/280
+  (82.9%)**.
+- **Evidence:** `evidence/qual-web-006-privacy-confirmation-label-pr189-2026-10-18.md`.
+
 ## ENT-CLI-001 current merged-head runner requalification · 2026-10-18
 
 - **Source mapping:** CLI current merge

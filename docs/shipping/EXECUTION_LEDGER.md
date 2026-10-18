@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · QUAL-WEB-006 privacy confirmation label fix
+
+- **Implementation:** Web PR #189 adds the explicit accessible association for
+  the authenticated account privacy deletion confirmation and a source-contract
+  regression test.
+- **History:** Normal merge `f7e2a1ccb308a69ecf85308a0c953a4a93dabc36`
+  preserves `bd33089d` and `83f3b80`; the PR was assigned to
+  `anuragyadav-git`.
+- **Verification:** Focused tests **2/2**, local typecheck, diff check, hosted
+  typecheck/schema, Vercel, Preview Comments, and GitGuardian passed.
+- **Disposition:** This is technical progress only. Keep QUAL-WEB-005 and
+  QUAL-WEB-006 unchecked for their remaining external/runtime and independent
+  acceptance contracts. Score remains **232/48/280 (82.9%)**.
+- **Boundary:** No production, provider, registry, database, customer,
+  payment, entitlement, or account state changed. No squash, rebase,
+  force-push, empty, duplicate, artificial, or irrelevant contribution was
+  used.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-privacy-confirmation-label-pr189-2026-10-18.md`.
+
 ## 2026-10-18 · ENT-CLI-001 current merged-head runner requalification
 
 - **Verification:** CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed
