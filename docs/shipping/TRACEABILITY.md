@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## DIST-001 current CLI package requalification · 2026-10-18
+
+- **Source mapping:** CLI normal merge `9eba5102` after PR #129; no temporary
+  platform-selection change was retained.
+- **Artifact mapping:** 7 public archives passed packed-manifest inspection;
+  the clean consumer imported all packages, ran `2.0.0-alpha.1`, avoided
+  implicit engine installation, and executed signed bounded A1.
+- **Acceptance mapping:** Package-surface evidence advances, but LOCAL/HUNT/
+  RECORD dependencies and final legal/release qualification keep the row
+  unchecked. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/dist-001-current-cli-pr129-requalification-2026-10-18.md`.
+
 ## TEAM-CLI-001 bounded policy response implementation · 2026-10-18
 
 - **Source mapping:** CLI PR #129 normal merge

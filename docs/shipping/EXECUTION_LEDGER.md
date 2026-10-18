@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · DIST-001 current CLI package requalification
+
+- **Source:** CLI normal merge `9eba5102`; disposable worktree; no public
+  source change retained.
+- **Results:** 7 archives created; packed manifests passed; clean consumer
+  installed/imported all 7 packages, executed `2.0.0-alpha.1`, confirmed no
+  implicit engine installation, and executed signed bounded A1.
+- **Environment boundary:** Node 26 Mac initially lacked optional platform
+  metadata; the documented temporary pnpm platform selection enabled the
+  rerun and was removed before cleanup.
+- **Disposition:** `DIST-001` remains unchecked for LOCAL/HUNT/RECORD and
+  final release dependencies. No npm, registry, deployment, or AppSec state
+  changed.
+- **Evidence:** `evidence/dist-001-current-cli-pr129-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 bounded policy response implementation
 
 - **Public merge:** CLI PR #129 merged normally as `9eba5102`; implementation

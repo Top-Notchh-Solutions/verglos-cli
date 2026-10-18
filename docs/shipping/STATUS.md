@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · DIST-001 current CLI package requalification
+
+The current CLI merge `9eba5102` was qualified in a disposable worktree:
+7 public archives packed, manifest audit passed, clean consumer installation
+and imports passed, no implicit external engine was installed, and the signed
+bounded A1 fixture executed. The temporary cross-platform pnpm metadata
+selection required by the Node 26 Mac environment was removed before cleanup.
+This advances package evidence only; LOCAL/HUNT/RECORD dependencies and final
+release qualification remain open, so `DIST-001` stays unchecked.
+
+
 ## 2026-10-18 · TEAM-CLI-001 bounded policy response implementation
 
 CLI PR #129 merged normally as `9eba5102`, retaining implementation commit

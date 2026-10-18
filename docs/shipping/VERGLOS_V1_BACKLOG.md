@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · DIST-001 current CLI package requalification
+
+The current CLI normal merge `9eba5102a1c0f9d7ee13b28bb2cc28bb50766eae` was
+requalified in a disposable worktree. The public package packer created **7
+archives**, the packed-manifest audit passed, and the clean consumer installed
+and imported all 7 packages, executed `2.0.0-alpha.1`, confirmed no implicit
+external-engine installation, and executed the signed bounded A1 fixture.
+Archive digests are retained in the private evidence packet. The temporary
+cross-platform pnpm metadata selection needed on the Node 26 Mac was removed
+before the worktree was closed.
+
+This advances package-surface evidence only. `DIST-001` remains unchecked for
+LOCAL/HUNT/RECORD dependency acceptance and final legal/release qualification;
+no checkbox changed. Score remains **232 checked / 48 open / 280 total
+(82.9%)**. Evidence:
+`docs/shipping/evidence/dist-001-current-cli-pr129-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 bounded policy response implementation
 
 CLI PR #129 merged normally as

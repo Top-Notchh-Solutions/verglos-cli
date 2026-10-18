@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · DIST-001 current package-surface requalification
+
+The current CLI merge `9eba5102` passed the disposable 7-archive pack,
+manifest, and clean-consumer qualification, including signed bounded A1
+execution and no implicit external-engine installation. Keep `DIST-001` open
+for LOCAL/HUNT/RECORD dependencies and final release qualification. Score
+remains **232/48/280 (82.9%)**. Evidence:
+`evidence/dist-001-current-cli-pr129-requalification-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 bounded policy response boundary
 
 CLI PR #129 merged normally as `9eba5102`, preserving separate implementation
