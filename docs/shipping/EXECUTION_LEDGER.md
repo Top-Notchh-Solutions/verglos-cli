@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · STUDIO-CLI-001 hosted custody implementation merged
+
+- **Implementation:** Web PR #188 added the bounded client-projection contract,
+  tenant/project-scoped GET/POST custody route, migration `0039`, schema and
+  migration-audit wiring, and access-audit regression coverage.
+- **History:** Normal merge `a94ff8e352f29f75860340fab69fb472af25924f` preserves
+  implementation `112d7a9` and test `877665e` as separate commits. The PR was
+  assigned to `anuragyadav-git`.
+- **Verification:** Full Web tests passed **878/902** with **24 explicit skips
+  and 0 failures**; build, typecheck, Drizzle check, 40-migration check,
+  migration-audit **6/6**, focused projection **2/2**, pinned-PostgreSQL route
+  integration **1/1**, public-boundary audit, and hosted PR checks passed.
+- **Disposition:** Accept code-side evidence only. Keep `STUDIO-CLI-001`
+  unchecked for independent hosted-recipient redaction proof and authorized
+  Studio recipient/customer acceptance. Score remains **232/48/280 (82.9%)**.
+- **Boundary:** No production, customer, provider, registry, account, database,
+  or deployment state changed. No squash, rebase, force-push, empty, duplicate,
+  artificial, or irrelevant contribution was used.
+- **Evidence:** `docs/shipping/evidence/studio-cli-001-hosted-custody-implementation-pr-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 current merged-head policy revalidation
 
 - **Verification:** The exact public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`

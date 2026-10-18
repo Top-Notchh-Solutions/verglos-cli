@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain STUDIO-CLI-001 open after custody merge
+
+- **Decision:** Accept Web PR #188 as current code-side implementation evidence;
+  do not check `STUDIO-CLI-001`.
+- **Reason:** The normal merge `a94ff8e352f29f75860340fab69fb472af25924f`
+  preserves implementation `112d7a9` and test `877665e`, and the route,
+  migration, contract, local integration, and hosted checks pass. That does not
+  establish an independent observation of the deployed recipient boundary or a
+  real authorized Studio recipient/customer acceptance run.
+- **Disposition:** Keep the row open and leave AppSec-held and dependent rows
+  untouched. Score remains **232/48/280 (82.9%)**.
+- **Boundary:** No production, customer, provider, registry, account, database,
+  or deployment state changed. No squash merge was used.
+- **Evidence:** `evidence/studio-cli-001-hosted-custody-implementation-pr-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-CLI-001 open after current-head revalidation
 
 - **Decision:** Accept the exact current-merge policy tests as code-side

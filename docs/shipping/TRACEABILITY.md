@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 hosted custody implementation · 2026-10-18
+
+- **Source mapping:** Web PR #188 adds the custody route, bounded projection
+  contract, migration `0039_client_projection_custody`, schema/audit wiring,
+  and access-audit regression coverage. Normal merge is
+  `a94ff8e352f29f75860340fab69fb472af25924f`, preserving implementation
+  `112d7a9` and test `877665e` separately.
+- **Verification mapping:** Full Web suite **878 passed / 24 explicit skips / 0
+  failed**, build, typecheck, Drizzle check, ordered migration check **40/40**,
+  migration audit **6/6**, focused projection **2/2**, pinned-PostgreSQL route
+  integration **1/1**, public-boundary audit, and hosted PR checks passed.
+- **Acceptance mapping:** This establishes the current public code path only.
+  Independent hosted-recipient redaction observation and authorized Studio
+  recipient/customer acceptance remain missing, so `STUDIO-CLI-001` stays
+  unchecked. Score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/studio-cli-001-hosted-custody-implementation-pr-2026-10-18.md`.
+
 ## TEAM-CLI-001 current merged-head policy revalidation · 2026-10-18
 
 - **Source mapping:** CLI implementation `8da4617d34196be2c9fcd86c166259ef82984f28`

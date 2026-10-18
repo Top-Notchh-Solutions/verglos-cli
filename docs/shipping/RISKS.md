@@ -1,5 +1,21 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-STUDIO-CLI-001 custody implementation requalified
+
+- **Risk:** Passing local route and contract tests could be mistaken for proof
+  of what an independently authorized external recipient receives from the
+  deployed hosted environment.
+- **Mitigation:** Web PR #188 merged normally as
+  `a94ff8e352f29f75860340fab69fb472af25924f`, preserving implementation
+  `112d7a9` and test `877665e`. The bounded projection, tenant/project custody
+  route, migration, full Web suite, pinned-PostgreSQL route integration, public
+  boundary, and hosted PR checks all pass.
+- **Status:** Code-side implementation is current and qualified;
+  `STUDIO-CLI-001` remains open for independent hosted-recipient redaction
+  observation and authorized Studio recipient/customer acceptance. Score remains
+  **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/studio-cli-001-hosted-custody-implementation-pr-2026-10-18.md`.
+
 ## 2026-10-18 · R-TEAM-CLI-001 current policy client revalidated
 
 - **Risk:** Passing local policy tests could be mistaken for a live SCM/provider

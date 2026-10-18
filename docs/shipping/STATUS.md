@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · STUDIO-CLI-001 hosted custody implementation merged
+
+Web PR #188 added the tenant/project-scoped client-projection custody path and
+merged normally as `a94ff8e352f29f75860340fab69fb472af25924f`. The implementation
+and access-audit commits remain separate: `112d7a9` and `877665e`. Full Web
+qualification passed **878/902** with **24 explicit skips and 0 failures**;
+build, typecheck, Drizzle check, 40-migration check, migration-audit **6/6**,
+focused projection **2/2**, pinned-PostgreSQL route integration **1/1**,
+public-boundary audit, and hosted PR checks passed. `STUDIO-CLI-001` remains
+unchecked because independent hosted-recipient redaction proof and authorized
+Studio recipient/customer acceptance are still missing. Score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/studio-cli-001-hosted-custody-implementation-pr-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 current merged-head policy revalidation
 
 The exact public CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed
