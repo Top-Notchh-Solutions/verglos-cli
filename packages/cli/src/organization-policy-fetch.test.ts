@@ -148,3 +148,24 @@ test("rejects an external policy endpoint before attaching credentials or making
   assert.deepEqual(result, { resolved: false, reason: "unsafe-policy-endpoint" });
   assert.equal(requests, 0);
 });
+
+test("refuses redirect-following for bearer-authenticated policy requests", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-org-policy-redirect-"));
+  const fixtureData = fixture();
+  let redirectMode: string | undefined;
+  const result = await fetchOrganizationPolicy({
+    organizationId: "org_acme",
+    repositoryId: "repo_app",
+    trustedKeys: fixtureData.trustedKeys,
+    cachePath: join(root, "policy.json"),
+    apiUrl: "https://example.test",
+    licenseKey: "secret-not-output",
+    fetchImpl: async (_url, init) => {
+      redirectMode = init?.redirect;
+      return new Response(JSON.stringify(fixtureData.envelope), { status: 200 });
+    },
+  });
+
+  assert.equal(result.resolved, true);
+  assert.equal(redirectMode, "error");
+});
