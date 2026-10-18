@@ -84,6 +84,7 @@ import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordCreate } from "./record-create.js";
 import { executeRecordProject } from "./record-project.js";
+import { executeClientProjectionUpload } from "./client-projection-upload.js";
 import { executeRecordSign } from "./record-sign.js";
 import { executeConfigInspect } from "./config-inspect.js";
 import { executeRecordHeader } from "./record-header.js";
@@ -476,6 +477,15 @@ record.command("project-client <projectionPath> <approvalPath>")
   .option("--quiet", "Suppress human output")
   .action(async (projectionPath: string, approvalPath: string, opts: { organization: string; json?: boolean; quiet?: boolean }) => {
     process.exit(await executeClientProjection(projectionPath, approvalPath, opts.organization, opts.json, opts.quiet));
+  });
+record.command("upload-client <projectionPath> <approvalPath>")
+  .description("Upload an approved redacted client projection without source or raw record bytes")
+  .requiredOption("--organization <id>", "Actor organization identifier")
+  .requiredOption("--project <id>", "Hosted project identifier")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (projectionPath: string, approvalPath: string, opts: { organization: string; project: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeClientProjectionUpload(projectionPath, approvalPath, opts.organization, opts.project, opts.json, opts.quiet));
   });
 record.command("header <storeRoot> <manifestPath>")
   .description("Show the verified decision-first Release Record header")
