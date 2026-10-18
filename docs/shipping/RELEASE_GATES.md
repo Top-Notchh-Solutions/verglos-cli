@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-WEB-006 SCM repository-scope reconciliation
+
+Web PR #204 merged normally as `a32f1589`, and exact `origin/main` deployed to
+production as `dpl_7vfLaPXRcjVPkRUVNKAazS8qBbtH`. The owner-authorized project
+binding was corrected to `Top-Notchh-Solutions/verglos-cli`; reconciliation
+created the active repository ID `1310272752` and revoked stale archive ID
+`1305731597`. The production SCM dashboard confirmed the postcondition.
+
+This records implementation and live cutover, not complete provider delivery
+or acceptance. Keep `TEAM-WEB-006` and `GITHUB-WEB-001` open for provider check
+delivery, retry behavior, delivery evidence, and acceptance. No AppSec state
+changed; score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-web-006-scm-reconciliation-pr204-production-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 tenant-scoped SCM dashboard
 
 Web PR #203 merged normally as `5ee6fb28`, retaining separate implementation

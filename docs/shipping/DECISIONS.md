@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · retain TEAM-WEB-006 after live SCM reconciliation
+
+- **Decision:** Accept Web PR #204 and the production repository cutover as a
+  substantive implementation advance, while retaining the parent row open.
+- **Observed:** The qualification project now points to
+  `Top-Notchh-Solutions/verglos-cli`. The owner-authorized reconciliation
+  returned one created active binding and one revoked stale archive binding.
+  The production dashboard shows the active CLI binding and revoked archive
+  record without secrets or raw payloads.
+- **Reason:** Reconciliation is necessary but does not prove provider check
+  delivery, retry behavior, delivery evidence, or customer acceptance.
+- **Disposition:** `TEAM-WEB-006` and `GITHUB-WEB-001` remain unchecked. No
+  AppSec state changed; score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-scm-reconciliation-pr204-production-2026-10-18.md`.
+
 ## 2026-10-18 · retain TEAM-WEB-006 after SCM dashboard implementation
 
 - **Decision:** Accept Web PR #203 as a substantive implementation advance

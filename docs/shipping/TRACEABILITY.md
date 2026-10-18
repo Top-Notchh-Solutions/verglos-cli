@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## TEAM-WEB-006 SCM repository-scope reconciliation · 2026-10-18
+
+- **Source mapping:** Web PR #204 normal merge
+  `a32f1589cd11c0f1b7fb6f0d12b2268ed8aec9b8`, with four preserved
+  implementation/test/fix commits.
+- **Contract mapping:** The tenant-scoped PUT reconciles the stored GitHub
+  repository set with the provider App grant, revokes stale active bindings,
+  binds selected repositories to active tenant projects, and returns only
+  bounded counts.
+- **Deployment mapping:** Exact `origin/main` commit deployed as
+  `dpl_7vfLaPXRcjVPkRUVNKAazS8qBbtH` and aliased to `https://verglos.com`.
+- **Observation mapping:** Project repository URL corrected to the working CLI
+  repo; active binding is repository ID `1310272752`; archive ID `1305731597`
+  is revoked; production dashboard shows both bounded statuses.
+- **Acceptance mapping:** This proves implementation and live cutover only.
+  Provider delivery, retry evidence, and final acceptance remain open; no
+  AppSec row changed and score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-scm-reconciliation-pr204-production-2026-10-18.md`.
+
 ## TEAM-WEB-006 tenant-scoped SCM dashboard · 2026-10-18
 
 - **Source mapping:** Web PR #203 normal merge `5ee6fb28`, preserving

@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-WEB-006 SCM repository-scope reconciliation
+
+Web PR #204 merged normally as `a32f1589`, preserving four substantive source
+commits. The production organization project now points to the working
+`Top-Notchh-Solutions/verglos-cli` repository, and the owner-authorized
+reconciliation endpoint recorded one created active binding and one revoked
+stale archive binding. The production SCM page now renders the active CLI
+binding and explicitly revoked archive record. Local focused tests **26/26**,
+typecheck, protected hosted typecheck/schema, Vercel, Preview Comments, and
+GitGuardian passed. Deployment `dpl_7vfLaPXRcjVPkRUVNKAazS8qBbtH` reached
+`READY` and was aliased to `https://verglos.com`.
+
+This closes the implementation and live cutover portion of reconciliation only.
+`TEAM-WEB-006` and `GITHUB-WEB-001` remain unchecked for provider delivery,
+retry behavior, delivery evidence, and acceptance. No AppSec state changed;
+score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-web-006-scm-reconciliation-pr204-production-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 tenant-scoped SCM dashboard
 
 Web PR #203 merged normally as `5ee6fb28`, preserving implementation

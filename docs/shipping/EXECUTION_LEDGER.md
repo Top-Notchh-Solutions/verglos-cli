@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-WEB-006 SCM repository-scope reconciliation
+
+- **Public merge:** Web PR #204 merged normally as
+  `a32f1589cd11c0f1b7fb6f0d12b2268ed8aec9b8`, preserving implementation,
+  transactional fix, regression, and scoped-transaction commits.
+- **Production deployment:** Exact `origin/main` was deployed as
+  `dpl_7vfLaPXRcjVPkRUVNKAazS8qBbtH`, reached `READY`, and was aliased to
+  `https://verglos.com`.
+- **Owner-authorized cutover:** The qualification project was rebound to
+  `Top-Notchh-Solutions/verglos-cli`; reconciliation returned HTTP 200 with
+  `createdCount=1`, `refreshedCount=0`, `revokedCount=1`, and
+  `activeCount=1`.
+- **Postcondition:** The active API/dashboard binding is repository ID
+  `1310272752` (`verglos-cli`). The old archive repository ID `1305731597` is
+  explicitly revoked. No credentials or raw provider payloads were recorded.
+- **Verification:** Local focused tests **26/26**, typecheck, protected hosted
+  typecheck/schema, Vercel, Preview Comments, and GitGuardian passed.
+- **Disposition:** Reconciliation implementation and live cutover are
+  evidenced, but `TEAM-WEB-006`/`GITHUB-WEB-001` remain open for provider
+  delivery, retries, delivery observation, and acceptance. No AppSec state
+  changed; score remains **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/team-web-006-scm-reconciliation-pr204-production-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 tenant-scoped SCM dashboard
 
 - **Public merge:** Web PR #203 merged normally as `5ee6fb28`, preserving
