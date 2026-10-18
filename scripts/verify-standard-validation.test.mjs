@@ -64,6 +64,19 @@ test("non-strict validation reports unavailable official tools without claiming 
   });
 });
 
+test("CycloneDX cdx-validate uses its official input flag", async () => {
+  await withArtifacts(async (root) => {
+    const calls = [];
+    const result = await validateStandardArtifacts({
+      artifactRoot: root,
+      tools: { cyclonedx: "cdx-validate", spdxJavaJar: join(root, "spdx-tools.jar") },
+      run: passingRunner(calls),
+    });
+    assert.equal(result.result, "passed");
+    assert.deepEqual(calls[1].args, ["-i", join(root, "SBOM.cdx.json")]);
+  });
+});
+
 test("strict validation fails when a validator is missing or rejects an artifact", async () => {
   await withArtifacts(async (root) => {
     let count = 0;

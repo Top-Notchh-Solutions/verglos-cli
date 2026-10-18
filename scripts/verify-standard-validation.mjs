@@ -33,7 +33,7 @@ export async function validateStandardArtifacts(input) {
     artifacts.set(name, artifact);
   }
 
-  checks.push(await validateSarif(artifacts.get("report.sarif"), root, tools.sarif ?? process.env.VERGLOS_SARIF_MULTITOOL ?? "Sarif.Multitool", run));
+  checks.push(await validateSarif(artifacts.get("report.sarif"), root, tools.sarif ?? process.env.VERGLOS_SARIF_MULTITOOL ?? "sarif-multitool", run));
   checks.push(await validateCycloneDx(artifacts.get("SBOM.cdx.json"), root, tools.cyclonedx ?? process.env.VERGLOS_CYCLONEDX_CLI ?? "cyclonedx", run));
   checks.push(await validateSpdx(artifacts.get("SBOM.spdx.json"), root, tools.spdxJavaJar ?? process.env.VERGLOS_SPDX_TOOL_JAR, run));
   checks.push(await validateSigstore(root, input.sigstore, tools.cosign ?? process.env.VERGLOS_COSIGN ?? "cosign", run));

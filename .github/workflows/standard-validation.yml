@@ -92,6 +92,7 @@ jobs:
       - name: Run official standard validators
         shell: bash
         env:
+          VERGLOS_SARIF_MULTITOOL: sarif-multitool
           VERGLOS_CYCLONEDX_CLI: cdx-validate
           VERGLOS_SPDX_TOOL_JAR: ${{ runner.temp }}/tools-java-2.0.7-jar-with-dependencies.jar
         run: |
