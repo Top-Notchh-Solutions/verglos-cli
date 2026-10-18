@@ -1,5 +1,34 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 bounded policy response implementation
+
+- **Public merge:** CLI PR #129 merged normally as `9eba5102`; implementation
+  `36fb82f3` and regression test `9d064603` remain separate.
+- **Implementation:** Organization-policy fetch timeout input is capped at ten
+  seconds and response bodies are streamed through a one-MiB cap with reader
+  cancellation before JSON parsing.
+- **Verification:** Workspace build **8/8**, focused policy tests **9/9**, and
+  full `pnpm --filter verglos test` passed with no failures.
+- **Disposition:** Keep `TEAM-CLI-001` open for entitlement, authenticated
+  signed CLI/cache/offline/expiry/cross-tenant, provider, and reconciliation
+  evidence. No checkbox or AppSec state changed.
+- **Evidence:** `evidence/team-cli-001-policy-response-boundary-pr129-2026-10-18.md`.
+
+## 2026-10-18 · TEAM-WEB-006 bounded SCM provider transport implementation
+
+- **Public merge:** Web PR #199 merged normally as `dd5f3883`; implementation
+  `a7fe6b7` and regression test `a259277` remain separate.
+- **Implementation:** SCM provider transport now bounds timeout, relays caller
+  abort, refuses redirects, cancels response bodies, and projects only bounded
+  delivery metadata. The cron route uses this transport boundary.
+- **Verification:** Typecheck passed; provider tests **7/7** and SCM
+  route/runner/worker tests **14/14** passed. Vercel reports the merged main
+  commit READY in Production at `verglos-jsuhywoaf-anuragyadav20062002s-projects.vercel.app`.
+- **Disposition:** Keep `TEAM-WEB-006` open for live provider delivery,
+  operational cutover/reconciliation, and complete acceptance. No checkbox or
+  AppSec state changed.
+- **Evidence:** `evidence/team-web-006-scm-provider-timeout-pr199-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 hosted CLI-auth entitlement recheck
 
 - **Flow:** The hosted device-code start endpoint returned a bounded challenge;

@@ -1,5 +1,39 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-001 bounded policy response implementation
+
+CLI PR #129 merged normally as
+`9eba5102a1c0f9d7ee13b28bb2cc28bb50766eae`, preserving implementation commit
+`36fb82f3` and regression-test commit `9d064603`. The organization policy
+client now bounds timeout input at ten seconds and streams policy responses
+with a one-MiB cap, cancelling an oversized body before JSON parsing. The
+workspace build passed **8/8**, focused policy tests passed **9/9**, and the
+full `pnpm --filter verglos test` command passed with no failures.
+
+This advances only the bounded client implementation. `TEAM-CLI-001` remains
+unchecked for mapped paid/non-production entitlement, authenticated signed
+CLI fetch/cache/offline/expiry/cross-tenant observations, and provider
+delivery/reconciliation. No checkbox changed; score remains **232 checked / 48
+open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-policy-response-boundary-pr129-2026-10-18.md`.
+
+## 2026-10-18 · TEAM-WEB-006 bounded SCM provider transport implementation
+
+Web PR #199 merged normally as
+`dd5f3883f1e06027a8c14c8b1afcd1742bd87a29`, preserving implementation commit
+`a7fe6b7` and regression-test commit `a259277`. Provider delivery now uses a
+ten-second timeout, caller cancellation, redirect refusal, response-body
+cancellation, and bounded metadata projection. Typecheck passed, focused
+transport tests passed **7/7**, and SCM route/runner/worker contract tests
+passed **14/14**. The merged commit has a READY Production deployment at
+`verglos-jsuhywoaf-anuragyadav20062002s-projects.vercel.app`.
+
+This advances only the transport implementation. `TEAM-WEB-006` remains
+unchecked for live provider delivery, operational cutover/reconciliation, and
+complete row acceptance; its upstream Team CLI rows remain open. No checkbox
+changed; score remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-web-006-scm-provider-timeout-pr199-2026-10-18.md`.
+
 ## 2026-10-18 · QUAL-WEB-006 authenticated dashboard section recheck
 
 Web PR #198, `Canonicalize authenticated dashboard sections`, merged normally

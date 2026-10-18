@@ -1,5 +1,26 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 bounded policy response boundary
+
+CLI PR #129 merged normally as `9eba5102`, preserving separate implementation
+and test commits. The policy client now rejects timeout values above ten
+seconds and caps streamed response bodies at one MiB before JSON parsing.
+Build and policy tests passed. This is implementation progress only; keep the
+Team policy gate open for mapped entitlement and authenticated hosted/provider
+fetch/cache/offline/expiry/cross-tenant reconciliation. Score remains
+**232/48/280 (82.9%)**. Evidence:
+`evidence/team-cli-001-policy-response-boundary-pr129-2026-10-18.md`.
+
+## 2026-10-18 · TEAM-WEB-006 bounded SCM provider transport boundary
+
+Web PR #199 merged normally as `dd5f3883`, preserving separate implementation
+and test commits. Provider transport now enforces bounded timeout/cancellation,
+redirect refusal, body cancellation, and bounded metadata projection; the
+merged main commit is READY in Production. Keep `TEAM-WEB-006` open for live
+provider delivery and operational cutover/reconciliation. Score remains
+**232/48/280 (82.9%)**. Evidence:
+`evidence/team-web-006-scm-provider-timeout-pr199-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-001 hosted CLI-auth entitlement boundary
 
 The existing authenticated owner session's hosted device-code verification

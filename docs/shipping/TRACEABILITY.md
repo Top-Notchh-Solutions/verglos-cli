@@ -1,5 +1,33 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 bounded policy response implementation · 2026-10-18
+
+- **Source mapping:** CLI PR #129 normal merge
+  `9eba5102a1c0f9d7ee13b28bb2cc28bb50766eae`, preserving `36fb82f3` and
+  `9d064603`.
+- **Contract mapping:** Fetch timeout is bounded to ten seconds and response
+  body accumulation is capped at one MiB with early reader cancellation.
+- **Verification mapping:** Workspace build **8/8**, focused policy tests
+  **9/9**, and full `pnpm --filter verglos test` passed with no failures.
+- **Acceptance mapping:** Code-side boundary advances, but the row remains
+  unchecked for mapped entitlement and authenticated hosted/provider matrix.
+- **Evidence:** `evidence/team-cli-001-policy-response-boundary-pr129-2026-10-18.md`.
+
+## TEAM-WEB-006 bounded SCM provider transport implementation · 2026-10-18
+
+- **Source mapping:** Web PR #199 normal merge
+  `dd5f3883f1e06027a8c14c8b1afcd1742bd87a29`, preserving `a7fe6b7` and
+  `a259277`.
+- **Contract mapping:** Provider requests have bounded timeout/cancellation,
+  redirect refusal, response-body cancellation, and bounded metadata output;
+  the cron route delegates to this boundary.
+- **Verification mapping:** Typecheck passed; focused provider tests **7/7**
+  and SCM route/runner/worker tests **14/14** passed. Production deployment
+  for the merged main commit is READY.
+- **Acceptance mapping:** The row remains unchecked for live provider delivery,
+  operational cutover/reconciliation, and complete acceptance.
+- **Evidence:** `evidence/team-web-006-scm-provider-timeout-pr199-2026-10-18.md`.
+
 ## TEAM-CLI-001 hosted CLI-auth entitlement recheck · 2026-10-18
 
 - **Hosted mapping:** Device-code start returned a bounded challenge; the
