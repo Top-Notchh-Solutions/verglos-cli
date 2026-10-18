@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-WEB-006 bounded provider response metadata
+
+Web PR #200 merged normally as
+`ad8c988e061748e4786a0235cbeeaf354e5bea41`, preserving implementation commit
+`d5e66d1532cb9e9129761b7377d12ca8c42522c6` and regression-test commit
+`f944939538559f04c284b457ee77b6ce0eddaa06`. The SCM provider transport now
+normalizes impossible response statuses, drops control-bearing or overlong
+request IDs, cancels response bodies, and caps `Retry-After`. Typecheck passed,
+provider tests passed **8/8**, combined SCM provider/route/runner/worker tests
+passed **22/22**, and protected checks passed. Production is READY at the
+deployment bound to the normal merge commit.
+
+This advances only the bounded response portion of `TEAM-WEB-006`.
+`TEAM-WEB-006` remains unchecked for live provider delivery, operational
+cutover/reconciliation, and complete acceptance. `TEAM-CLI-001` and
+`TEAM-CLI-002` dependencies remain open. No checkbox changed; score remains
+**232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-web-006-response-metadata-pr200-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-002 bounded CI record-link implementation
 
 CLI PR #130 merged normally as

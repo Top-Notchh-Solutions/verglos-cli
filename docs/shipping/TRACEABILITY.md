@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## TEAM-WEB-006 bounded provider response metadata · 2026-10-18
+
+- **Source mapping:** Web PR #200 normal merge
+  `ad8c988e061748e4786a0235cbeeaf354e5bea41`, preserving implementation
+  `d5e66d1532cb9e9129761b7377d12ca8c42522c6` and test
+  `f944939538559f04c284b457ee77b6ce0eddaa06`.
+- **Contract mapping:** Provider status and request ID metadata are bounded;
+  response bodies are cancelled and `Retry-After` is capped.
+- **Verification mapping:** Typecheck passed; provider tests **8/8**;
+  combined SCM provider/route/runner/worker tests **22/22**; protected checks
+  passed; Production is READY on the merge commit.
+- **Acceptance mapping:** The row remains unchecked for live provider
+  delivery, operational cutover/reconciliation, and complete acceptance.
+  `TEAM-CLI-001` and `TEAM-CLI-002` remain dependencies. No AppSec row
+  changed.
+- **Evidence:** `evidence/team-web-006-response-metadata-pr200-2026-10-18.md`.
+
 ## TEAM-CLI-002 bounded CI record-link implementation · 2026-10-18
 
 - **Source mapping:** CLI PR #130 normal merge

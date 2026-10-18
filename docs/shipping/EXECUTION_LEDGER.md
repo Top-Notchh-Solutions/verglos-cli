@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-WEB-006 bounded provider response metadata
+
+- **Public merge:** Web PR #200 merged normally as
+  `ad8c988e061748e4786a0235cbeeaf354e5bea41`; implementation
+  `d5e66d1532cb9e9129761b7377d12ca8c42522c6` and regression test
+  `f944939538559f04c284b457ee77b6ce0eddaa06` remain separate.
+- **Implementation:** Impossible provider statuses are normalized, unsafe or
+  overlong request IDs are dropped, response bodies are cancelled, and
+  `Retry-After` is bounded.
+- **Verification:** Typecheck passed; provider tests **8/8**; combined SCM
+  provider/route/runner/worker tests **22/22**; protected typecheck/schema,
+  Vercel, Preview Comments, and GitGuardian checks passed.
+- **Deployment:** Merge-bound Production deployment is `READY`.
+- **Disposition:** Keep `TEAM-WEB-006` open for live provider delivery,
+  operational cutover/reconciliation, and complete acceptance. No checkbox or
+  AppSec state changed.
+- **Evidence:** `evidence/team-web-006-response-metadata-pr200-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-002 bounded CI record-link implementation
 
 - **Public merge:** CLI PR #130 merged normally as

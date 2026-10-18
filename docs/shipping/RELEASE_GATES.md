@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-WEB-006 bounded provider response metadata
+
+Web PR #200 merged normally as `ad8c988e`, preserving separate implementation
+and test commits. Provider response statuses and request IDs are bounded,
+response bodies are cancelled, and `Retry-After` is capped. Typecheck,
+provider tests **8/8**, combined SCM tests **22/22**, protected checks, and
+the merge-bound Production deployment passed.
+
+This is implementation progress only. Keep `TEAM-WEB-006` open for live
+provider delivery, operational cutover/reconciliation, and complete
+acceptance. Its `TEAM-CLI-001`/`TEAM-CLI-002` dependencies remain open. Score
+remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-web-006-response-metadata-pr200-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-002 bounded CI record-link boundary
 
 CLI PR #130 merged normally as `efa64f5c`, preserving separate implementation

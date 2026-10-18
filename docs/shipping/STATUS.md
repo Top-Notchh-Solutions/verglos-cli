@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · TEAM-WEB-006 bounded provider response metadata
+
+Web PR #200 merged normally as `ad8c988e`, retaining implementation commit
+`d5e66d15` and regression-test commit `f9449395`. Impossible provider statuses
+are bounded, unsafe/overlong request IDs are dropped, response bodies are
+cancelled, and `Retry-After` is capped. Typecheck passed, provider tests
+passed **8/8**, combined SCM tests passed **22/22**, protected checks passed,
+and the merge-bound Production deployment is READY. This is code-side
+progress only; live provider delivery, cutover/reconciliation, and complete
+acceptance remain open. Evidence:
+`evidence/team-web-006-response-metadata-pr200-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-CLI-002 bounded CI record-link implementation
 
 CLI PR #130 merged normally as `efa64f5c`, retaining implementation commit
