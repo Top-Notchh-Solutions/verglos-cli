@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · TEAM-CLI-001 policy scope input boundary
+
+CLI PR #131 merged normally as `234c7641`, preserving separate implementation
+and test commits. Invalid organization/repository policy scopes now fail closed
+before cache, credential, endpoint, or network work. Build **8/8**, focused
+policy tests **10/10**, self-scan, in-toto, Ubuntu, and macOS checks passed at
+merge; Windows jobs were still in progress.
+
+This is implementation progress only. Keep `TEAM-CLI-001` open for mapped
+entitlement, authenticated signed policy/cache/offline/expiry/cross-tenant
+evidence, provider delivery, reconciliation, and complete acceptance. Score
+remains **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/team-cli-001-policy-scope-boundary-pr131-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 bounded provider response metadata
 
 Web PR #200 merged normally as `ad8c988e`, preserving separate implementation

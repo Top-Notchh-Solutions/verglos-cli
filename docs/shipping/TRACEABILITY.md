@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 policy scope input boundary · 2026-10-18
+
+- **Source mapping:** CLI PR #131 normal merge
+  `234c7641cce2bbc33ffdb62fd83e1fe9b72e3beb`, preserving implementation
+  `e91e792582416fc28050ddbc2c6753357e155f1d` and test
+  `ec237f5339c4f937da5366039315c8bf3e5c5679`.
+- **Contract mapping:** Organization and repository scope identifiers are
+  bounded and rejected before cache, credential, endpoint, or network work.
+- **Verification mapping:** Build **8/8**, focused policy tests **10/10**,
+  self-scan/in-toto/Ubuntu/macOS checks passed at merge; Windows jobs were
+  still in progress.
+- **Acceptance mapping:** The row stays unchecked for entitlement,
+  authenticated signed policy/cache/offline/expiry/cross-tenant evidence,
+  provider delivery, reconciliation, and complete acceptance. No AppSec row
+  changed.
+- **Evidence:** `evidence/team-cli-001-policy-scope-boundary-pr131-2026-10-18.md`.
+
 ## TEAM-WEB-006 bounded provider response metadata · 2026-10-18
 
 - **Source mapping:** Web PR #200 normal merge

@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · TEAM-CLI-001 policy scope input boundary
+
+- **Public merge:** CLI PR #131 merged normally as
+  `234c7641cce2bbc33ffdb62fd83e1fe9b72e3beb`; implementation
+  `e91e792582416fc28050ddbc2c6753357e155f1d` and regression test
+  `ec237f5339c4f937da5366039315c8bf3e5c5679` remain separate.
+- **Implementation:** Invalid organization/repository policy scope IDs are
+  rejected before cache, credential, endpoint, or network work.
+- **Verification:** Workspace build **8/8**; focused policy cache/fetch tests
+  **10/10**; full CLI tests had no failures and two explicit A2 skips.
+- **Hosted checks:** Self-scan, in-toto, Ubuntu Node 20/22/24, and macOS Node
+  20/22/24 passed at merge. Windows Node 20/22/24 were still in progress and
+  are deliberately not represented as completed evidence.
+- **Disposition:** Keep `TEAM-CLI-001` open for entitlement, authenticated
+  policy/cache/offline/expiry/cross-tenant, provider, reconciliation, and
+  complete acceptance. No checkbox or AppSec state changed.
+- **Evidence:** `evidence/team-cli-001-policy-scope-boundary-pr131-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 bounded provider response metadata
 
 - **Public merge:** Web PR #200 merged normally as

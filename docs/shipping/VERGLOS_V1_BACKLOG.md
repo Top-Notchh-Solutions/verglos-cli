@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-18 · TEAM-CLI-001 policy scope input boundary
+
+CLI PR #131 merged normally as
+`234c7641cce2bbc33ffdb62fd83e1fe9b72e3beb`, preserving implementation commit
+`e91e792582416fc28050ddbc2c6753357e155f1d` and regression-test commit
+`ec237f5339c4f937da5366039315c8bf3e5c5679`. The organization-policy fetcher
+now rejects malformed organization/repository scope identifiers before cache,
+credential, endpoint, or network work. Workspace build passed **8/8** and
+focused policy cache/fetch tests passed **10/10**. Self-scan, in-toto, Ubuntu
+Node 20/22/24, and macOS Node 20/22/24 were successful at merge; Windows
+Node 20/22/24 remained in progress and are not counted as completed evidence.
+
+This advances only the input-boundary portion of `TEAM-CLI-001`, which remains
+unchecked for entitlement, authenticated policy/cache/offline/expiry/
+cross-tenant evidence, provider delivery, reconciliation, and complete
+acceptance. No checkbox changed; score remains **232 checked / 48 open / 280
+total (82.9%)**. Evidence:
+`docs/shipping/evidence/team-cli-001-policy-scope-boundary-pr131-2026-10-18.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 bounded provider response metadata
 
 Web PR #200 merged normally as
