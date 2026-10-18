@@ -11,6 +11,7 @@ const MAX_FILE_BYTES = 256 * 1024;
 const MAX_RESPONSE_BYTES = 64 * 1024;
 const DEFAULT_TIMEOUT_MS = 8_000;
 const ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$/u;
+const RESPONSE_ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$/u;
 type ClientProjectionRejection = Extract<ClientProjectionDecision, { readonly ok: false }>["reason"];
 
 export type ClientProjectionUploadResult = Readonly<
@@ -59,9 +60,10 @@ async function readJsonFile(path: string): Promise<unknown> {
 }
 
 function relativeEndpoint(apiUrl: string, organizationId: string, projectId: string, endpoint?: string): string {
-  const path = endpoint ?? `/api/v1/organizations/${encodeURIComponent(organizationId)}/projects/${encodeURIComponent(projectId)}/client-projections`;
-  if (!path.startsWith("/") || path.startsWith("//") || /[\u0000-\u001f\u007f]/u.test(path) || path.length > 2048) {
-    throw new Error("client projection endpoint must be a bounded relative API path");
+  const expected = `/api/v1/organizations/${encodeURIComponent(organizationId)}/projects/${encodeURIComponent(projectId)}/client-projections`;
+  const path = endpoint ?? expected;
+  if (path !== expected || !path.startsWith("/") || path.startsWith("//") || /[\\?#\u0000-\u001f\u007f]/u.test(path) || path.length > 2048) {
+    throw new Error("client projection endpoint must be the bound organization/project route");
   }
   return `${apiUrl}${path}`;
 }
@@ -145,7 +147,7 @@ export async function uploadClientProjection(input: UploadInput): Promise<Client
     if (!response.ok) return { status: "error", endpoint, reason: "http" };
     if (typeof value !== "object" || value === null || Array.isArray(value)) return { status: "error", endpoint, reason: "invalid_response" };
     const record = value as Record<string, unknown>;
-    if (typeof record.projectionDigest !== "string" || record.projectionDigest !== admission.projectionDigest || typeof record.idempotent !== "boolean") {
+    if (typeof record.projectionDigest !== "string" || record.projectionDigest !== admission.projectionDigest || typeof record.idempotent !== "boolean" || (record.id !== undefined && (typeof record.id !== "string" || !RESPONSE_ID.test(record.id)))) {
       return { status: "error", endpoint, reason: "invalid_response" };
     }
     return {
