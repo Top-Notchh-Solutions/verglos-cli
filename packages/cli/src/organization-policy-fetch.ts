@@ -5,6 +5,11 @@ import { resolveOrganizationPolicy, type OrganizationPolicyCacheEntry, type Orga
 const MAX_RESPONSE_BYTES = 1 * 1024 * 1024;
 const DEFAULT_TIMEOUT_MS = 8_000;
 const MAX_TIMEOUT_MS = 10_000;
+const POLICY_SCOPE_ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$/u;
+
+function isValidPolicyScopeId(value: string): boolean {
+  return POLICY_SCOPE_ID.test(value);
+}
 
 function isSafePolicyEndpoint(value: string): boolean {
   return value.length > 0
@@ -39,6 +44,9 @@ export async function fetchOrganizationPolicy(input: Readonly<{
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
 }>): Promise<OrganizationPolicyFetchResult> {
+  if (!isValidPolicyScopeId(input.organizationId) || !isValidPolicyScopeId(input.repositoryId)) {
+    return { resolved: false, reason: "invalid-scope" };
+  }
   const timeoutMs = input.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0 || timeoutMs > MAX_TIMEOUT_MS) {
     return { resolved: false, reason: "timeout-out-of-bounds" };
