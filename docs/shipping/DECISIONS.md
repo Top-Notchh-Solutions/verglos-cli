@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-18 · close LIC-003 notice contract
+
+- **Decision:** Accept the deterministic `THIRD_PARTY_NOTICES` generator and
+  its fail-closed review-marker behavior for the current package surface.
+- **Reason:** The combined release-contract suite passed **18/18** and the
+  generated output retains upstream identity, available license/NOTICE text,
+  non-endorsement wording, missing-text warnings, the nested component
+  blocker, and all Blue Oak review entries.
+- **Disposition:** Check `LIC-003`. The notice result does not authorize
+  publication or close DIST-001–003, trusted provenance, provider, customer,
+  independent AppSec, or final-acceptance rows. Score is **232/48/280
+  (82.9%)**.
+- **Evidence:** `evidence/lic-003-notice-qualification-2026-10-18.md`.
+
 ## 2026-10-18 · close LIC-002 with scoped company conditions
 
 - **Decision:** Record the owner/company licensing disposition as

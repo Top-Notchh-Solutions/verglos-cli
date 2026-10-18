@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-18 · LIC-003 deterministic notices qualified
+
+- **Verification:** On the public CLI positioning worktree, the combined
+  notice/inventory/package/release contract suite passed **18/18**. Notice
+  generation exited 0 with **393,143 bytes** and SHA-256
+  `e0e492c2a5f418d19a87feb68b8dea2b91483a93a6da848c1eda9c1549416371`.
+- **Acceptance:** The output preserves upstream identity, available license
+  text, non-endorsement wording, missing-text warnings, the nested
+  `benchmark` blocker, and all six Blue Oak review entries. The inventory
+  retains all **7** blockers; no blocker was suppressed.
+- **Disposition:** LIC-003 is checked for its notice-generation contract.
+  Distribution, trusted publication, provider, customer, AppSec, and final
+  acceptance rows remain open. Score is **232/48/280 (82.9%)**.
+- **Boundary:** The cross-platform package setup was temporary and disposable.
+  No public source, registry, provider, database, customer, or Production
+  state changed. No squash, rebase, force-push, empty, duplicate, artificial,
+  or irrelevant contribution was used.
+- **Evidence:** `docs/shipping/evidence/lic-003-notice-qualification-2026-10-18.md`.
+
 ## 2026-10-18 · LIC-002 company disposition
 
 - **Decision:** Anurag Yadav, Owner of Top Notchh Solutions and Verglos and

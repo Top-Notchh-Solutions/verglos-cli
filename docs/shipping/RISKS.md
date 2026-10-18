@@ -1,5 +1,19 @@
 # Verglos V1 risk register
 
+## 2026-10-18 · R-LIC-003 notice generation qualified
+
+- **Risk:** A generated notice could hide an unresolved dependency or imply
+  endorsement, legal clearance, or final publication approval.
+- **Mitigation:** The qualified generator retains upstream identity and
+  available license/NOTICE text, emits missing-text warnings and a
+  non-endorsement disclaimer, and preserves all seven inventory blockers.
+  Release verification continues to fail closed when required blockers are
+  unresolved.
+- **Status:** LIC-003 notice contract checked. Distribution, trusted
+  publication, provider, customer, independent AppSec, and final-acceptance
+  risks remain open. Score is **232/48/280 (82.9%)**.
+- **Evidence:** `evidence/lic-003-notice-qualification-2026-10-18.md`.
+
 ## 2026-10-18 · R-LIC-002 scoped company disposition
 
 - **Risk:** A company disposition with conditions could be mistaken for

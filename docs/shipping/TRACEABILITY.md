@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## LIC-003 deterministic notices · 2026-10-18
+
+- **Source mapping:** Public CLI implementation commit
+  `8da4617d34196be2c9fcd86c166259ef82984f28` is preserved by normal merge
+  `50bcab42eadfa8796d86d1f7a8aaee3010c65647`; the package/lockfile surface
+  is the qualified release surface.
+- **Verification mapping:** Combined release tests passed **18/18**;
+  inventory exited 0 with **250 package entries / 254 versions / 7 retained
+  blockers**; deterministic notice output is **393,143 bytes** with digest
+  `sha256:e0e492c2a5f418d19a87feb68b8dea2b91483a93a6da848c1eda9c1549416371`.
+- **Acceptance mapping:** Notices retain applicable upstream identity and
+  available text, explicitly warn on missing text, preserve review blockers,
+  and do not imply endorsement. LIC-003 is checked. DIST rows, trusted
+  publication, provider, customer, AppSec, and final acceptance remain open.
+- **Evidence:** `evidence/lic-003-notice-qualification-2026-10-18.md`.
+
 ## LIC-002 company disposition · 2026-10-18
 
 - **Source mapping:** The owner disposition is bound to the qualified CLI

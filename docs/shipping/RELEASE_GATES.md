@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-18 · LIC-003 notice contract reconciled
+
+The current package surface passed the combined notice/inventory/package/
+release contract suite **18/18**. The generated notice is deterministic,
+retains upstream identity and available text, carries the non-endorsement
+disclaimer, and preserves all seven review blockers rather than suppressing
+them. `LIC-003` is checked for notice generation. Distribution, trusted
+publication, provider, customer, AppSec, and final-acceptance gates remain
+open. Score is **232/48/280 (82.9%)**. Evidence:
+`docs/shipping/evidence/lic-003-notice-qualification-2026-10-18.md`.
+
 ## 2026-10-18 · LIC-002 company disposition reconciled
 
 The authorized owner/company reviewer recorded the required exact-scope

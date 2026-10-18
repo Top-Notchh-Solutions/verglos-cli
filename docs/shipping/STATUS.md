@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-18 · LIC-003 deterministic notice qualification
+
+The current public CLI package surface passed the combined notice, inventory,
+packing, clean-consumer, and release-verifier contract suite at **18/18**.
+The generated `THIRD_PARTY_NOTICES` output is deterministic (**393,143 bytes**,
+SHA-256 `e0e492c2a5f418d19a87feb68b8dea2b91483a93a6da848c1eda9c1549416371`),
+retains upstream identity and available license text, marks missing text for
+follow-up, and preserves all seven review blockers. LIC-003 is checked for
+its notice contract; distribution/publication/final-acceptance conditions
+remain open. Score is **232 checked / 48 open / 280 total (82.9%)**. Evidence:
+`evidence/lic-003-notice-qualification-2026-10-18.md`.
+
 ## 2026-10-18 · LIC-002 company disposition recorded
 
 The authorized owner/company reviewer, Anurag Yadav of Top Notchh Solutions
