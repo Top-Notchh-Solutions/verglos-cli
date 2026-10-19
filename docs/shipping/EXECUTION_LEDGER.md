@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · FINAL-WEB-007 existing-tab landing audit
+
+- **Observation:** The existing Chrome tab qualified `https://verglos.com/`
+  read-only. Desktop Lighthouse passed **61/61** and mobile passed **60/60**;
+  both scored 100 for Accessibility, Best Practices, SEO, and Agentic
+  Browsing. Desktop/mobile traces measured LCP **272/269 ms** and CLS
+  **0.00**; no CrUX field data was available.
+- **Boundary:** The accessibility tree exposed the named public navigation,
+  main landmark, product flow, scope, and qualification language. The only
+  render-blocking CSS cost 5–8 ms with zero estimated savings. No deployment,
+  provider, billing, account, customer, or database write occurred.
+- **Acceptance mapping:** This advances `FINAL-WEB-007` browser/lab evidence
+  only. Human screen-reader, supported-environment, large-data, field-CWV,
+  dependency, and independent/final acceptance remain open. No checkbox
+  changed. Score remains **239/41/280 (85.4%)**; AppSec/Hunt remains held.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-007-existing-tab-landing-audit-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 production entitlement recheck
 
 - **Observation:** The already-open owner-authenticated production billing

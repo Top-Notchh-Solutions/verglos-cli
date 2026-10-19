@@ -2,6 +2,22 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · FINAL-WEB-007 existing-tab landing audit
+
+The existing Chrome tab qualified the public landing surface read-only.
+Desktop Lighthouse passed 61/61 and mobile passed 60/60, with Accessibility,
+Best Practices, SEO, and Agentic Browsing at 100/100/100/100 in both modes.
+Cold traces measured LCP 272 ms desktop and 269 ms mobile with CLS 0.00; no
+CrUX field data was available.
+
+This is browser/lab qualification only. Human screen-reader, supported
+environment, large-data, field-CWV, dependency, and independent/final
+acceptance requirements remain open. No production or provider write occurred
+and no checkbox changed. Score remains **239 checked / 41 open / 280 total
+(85.4%)**; AppSec/Hunt remains held.
+
+Evidence: `evidence/final-web-007-existing-tab-landing-audit-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 production entitlement recheck
 
 The already-open owner-authenticated production billing surface rendered the

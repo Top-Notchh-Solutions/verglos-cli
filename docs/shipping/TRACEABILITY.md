@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007 existing-tab landing audit · 2026-10-19
+
+- **Observation mapping:** Existing-tab desktop and mobile Lighthouse runs
+  passed **61/61** and **60/60**, respectively, with 100/100/100/100 category
+  scores. Cold traces measured LCP **272/269 ms** and CLS **0.00**; field data
+  was unavailable.
+- **Runtime mapping:** The public accessibility tree exposed named navigation,
+  main content, controls, headings, product flow, JS/TS scope, and explicit
+  qualification boundaries. The CSS render-blocking request had zero
+  estimated FCP/LCP savings; no high-impact network defect was found.
+- **Acceptance mapping:** This advances browser/lab qualification only.
+  Human screen-reader, supported-environment, large-data, field-CWV,
+  dependency, and independent/final acceptance remain open. No checkbox
+  changed; score remains **239/41/280 (85.4%)** and AppSec/Hunt remains held.
+- **Evidence:**
+  `evidence/final-web-007-existing-tab-landing-audit-2026-10-19.md`.
+
 ## STUDIO-CLI-001 production entitlement recheck · 2026-10-19
 
 - **Observation mapping:** The existing owner-authenticated production billing

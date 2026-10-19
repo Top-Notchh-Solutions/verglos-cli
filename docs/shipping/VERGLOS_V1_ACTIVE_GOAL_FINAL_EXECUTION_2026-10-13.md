@@ -1,6 +1,22 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0zj FINAL-WEB-007 landing qualification advance · 2026-10-19
+
+The existing Verglos Chrome tab qualified the public landing surface without
+opening a tab or performing a write. Desktop Lighthouse passed **61/61** and
+mobile passed **60/60**, with Accessibility, Best Practices, SEO, and Agentic
+Browsing at 100/100/100/100 in both modes. Cold traces measured LCP **272 ms**
+desktop and **269 ms** mobile with CLS **0.00**; CrUX field data was
+unavailable.
+
+This is partial `FINAL-WEB-007` evidence only. Human screen-reader,
+supported-environment, large-data, field-CWV, dependency, and
+independent/final acceptance remain open. No checkbox changed. Score remains
+**239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt remains held.
+Evidence:
+`docs/shipping/evidence/final-web-007-existing-tab-landing-audit-2026-10-19.md`.
+
 ## 0.0zi STUDIO-CLI-001 production entitlement recheck · 2026-10-19
 
 The existing owner-authenticated production billing surface was checked
