@@ -12,6 +12,8 @@ const paths = [
   "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
   "docs/shipping/evidence/acceptance-corpus-2026-10-03.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json",
+  "docs/shipping/evidence/acceptance-stories-verification-2026-10-19.json",
+  "docs/shipping/evidence/acceptance-stories-verification-2026-10-19.md",
   "docs/shipping/evidence/acceptance-story-map-2026-10-03.json",
   "docs/shipping/evidence/acceptance-story-tests-2026-10-03.md",
   "docs/shipping/acceptance/external-workflow-protocol.md",
