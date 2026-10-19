@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ACCEPT-008 original commercial evidence validator shipped
+
+- **Source:** Private implementation `64c1a477` and regression `f986f80c`; no
+  squash, rebase, force-push, or artificial contribution was used.
+- **Original logic:** `scripts/validate-commercial-acceptance.mjs` binds
+  commercial evidence to an exact catalog, requires numeric allowances and a
+  bounded founder approval window, validates all seven evidence kinds and two
+  distinct repeat-use records, and rejects catalog/checkout/allowance drift.
+  Support, hosted-cost, and recipient-value facts are bounded and digest
+  bound. The report keeps `acceptanceStatus: open` and requires independent
+  review.
+- **Verification:** Combined acceptance/comprehension/commercial contracts
+  **10/10**, external-workflow protocol validation, study-protocol validation,
+  and diff check passed.
+- **Disposition:** This closes the validator implementation gap only. No
+  checkout, provider, customer, support, billing, Production, or AppSec
+  operation occurred and no commercial result was fabricated. `ACCEPT-008`
+  remains unchecked for actual commercial evidence and final acceptance. Score
+  remains **239/41/280 (85.4%)**; AppSec/Hunt remains held.
+- **Evidence:**
+  `docs/shipping/evidence/accept-008-commercial-validator-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-006 original comprehension scorer shipped
 
 - **Source:** Private implementation commit `6430a38` and regression commit

@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## ACCEPT-008 commercial evidence validator · 2026-10-19
+
+- **Source mapping:** Private implementation `64c1a477` and regression
+  `f986f80c`, preserved as separate commits.
+- **Implementation mapping:** `scripts/validate-commercial-acceptance.mjs`
+  validates exact catalog/price/currency/allowances, founder approval expiry,
+  all seven commercial evidence kinds, distinct repeat use, checkout and
+  allowance consistency, bounded support/cost/recipient facts, and digest-only
+  output. Acceptance remains explicitly open.
+- **Verification mapping:** Combined acceptance/comprehension/commercial
+  contracts **10/10**, external-workflow protocol validation,
+  study-protocol validation, and diff check passed.
+- **Acceptance mapping:** `ACCEPT-008` remains open for actual commercial
+  evidence and final acceptance. No AppSec-held checkbox changed; score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/accept-008-commercial-validator-2026-10-19.md`.
+
 ## ACCEPT-006 comprehension scorer · 2026-10-19
 
 - **Source mapping:** Private implementation `6430a38` and regression

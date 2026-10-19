@@ -97,6 +97,22 @@ redacted aggregate evidence, and independent scoring review. Score remains
 **239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt remains held.
 Evidence: `docs/shipping/evidence/accept-006-comprehension-scorer-2026-10-19.md`.
 
+## 2026-10-19 · ACCEPT-008 original commercial evidence validator shipped
+
+Private commits `64c1a477` (implementation) and `f986f80c` (regression) add
+the real commercial validator. It requires exact catalog/price/currency,
+numeric allowances, bounded founder approval/expiry, all seven digest-bound
+evidence kinds, two distinct repeat-use records, and consistent checkout,
+agreement, allowance, support, hosted-cost, and recipient-value facts. The
+combined acceptance/comprehension/commercial contracts pass **10/10**.
+
+This is validator implementation evidence only. No commercial result is
+fabricated; `ACCEPT-008` remains unchecked pending actual plan/checkout,
+repeat-use, support, hosted-cost, recipient-value, allowance, and final
+acceptance evidence. Score remains **239 checked / 41 open / 280 total
+(85.4%)**; AppSec/Hunt remains held. Evidence:
+`docs/shipping/evidence/accept-008-commercial-validator-2026-10-19.md`.
+
 ## 2026-10-19 · ENT-CLI-001 original enrollment exchange shipped
 
 Web PR #225 and CLI PR #152 now provide the original one-time runner

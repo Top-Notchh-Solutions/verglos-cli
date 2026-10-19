@@ -2,6 +2,27 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · ACCEPT-008 original commercial evidence validator shipped
+
+Private commits `64c1a477` (implementation) and `f986f80c` (regression) add
+the real commercial acceptance validator. It requires exact catalog
+version/plan/currency/price, numeric allowances, bounded founder approval and
+expiry, all seven digest-bound evidence kinds, two distinct repeat-use
+observations, catalog-consistent checkout/agreement/allowance facts,
+positive support minutes, currency-bound hosted cost, and a digest-bound
+recipient outcome. It emits only bounded facts and digests and preserves
+`acceptanceStatus: open` until independent review.
+
+The combined acceptance/comprehension/commercial contracts passed **10/10**;
+existing acceptance protocol checks and diff check passed. No checkout,
+provider, customer, support, billing, Production, or AppSec operation was
+performed and no commercial result was fabricated. `ACCEPT-008` remains
+unchecked pending actual commercial evidence and final acceptance. Score
+remains **239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt remains
+held.
+
+Evidence: `evidence/accept-008-commercial-validator-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-006 original comprehension scorer shipped
 
 The private shipping ledger now contains a real bounded scorer for the
