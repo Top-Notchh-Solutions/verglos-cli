@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · GITHUB-WEB-001 installation identity checked
+
+The exact Web merge `0719074d` passed the focused GitHub identity and
+reconciliation suite **25/25**, with zero failures or skips. Read-only
+inspection of the existing owner-controlled GitHub organization installation
+confirmed installation `172686102`, account `287223982`, selected repository
+`Top-Notchh-Solutions/verglos-cli` / `1310272752`, and metadata-read plus
+checks-read/write permissions.
+
+`GITHUB-WEB-001` is now checked. GITHUB-WEB-002 remains open for provider
+token/lifecycle observation, GITHUB-WEB-003 for live delivery/replay/
+reconciliation, and GITHUB-WEB-004 for complete organization cutover and
+recovery. No new browser page or mutation occurred; Hunt/AppSec state is
+unchanged. Score is now **236 checked / 44 open / 280 total (84.3%)**.
+
+Evidence: `evidence/github-web-001-installation-identity-2026-10-19.md`.
+
 ## 2026-10-19 · ENT-CLI-001 current CLI requalification
 
 The exact CLI `origin/main` merge `0823b513` was requalified in a disposable

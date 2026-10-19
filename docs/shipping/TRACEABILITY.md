@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## GITHUB-WEB-001 installation identity checked · 2026-10-19
+
+- **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
+  was exercised from a disposable clean worktree.
+- **Verification mapping:** Immutable identity, least-privilege permission,
+  multi-repository, provider-exchange, stale-scope reconciliation, and route
+  contract tests passed **25/25**. Existing GitHub organization installation
+  `172686102` binds account `287223982` and selected repository `1310272752`.
+- **Acceptance mapping:** `GITHUB-WEB-001` is checked. GITHUB-WEB-002–004
+  remain open for lifecycle, live delivery/replay/reconciliation, complete
+  cutover, and recovery evidence. No AppSec-held checkbox changed. Score is
+  **236/44/280 (84.3%)**.
+- **Evidence:**
+  `evidence/github-web-001-installation-identity-2026-10-19.md` and its
+  preserved test log.
+
 ## ENT-CLI-001 current CLI requalification · 2026-10-19
 
 - **Source mapping:** CLI `origin/main` merge

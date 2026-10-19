@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · GITHUB-WEB-001 installation identity checked
+
+- **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` from a
+  disposable clean worktree.
+- **Verification:** Focused immutable-identity, permission, reconciliation,
+  route, and provider-contract suite passed **25/25** with zero failures or
+  skips. Existing owner-controlled GitHub installation `172686102` visibly
+  binds account `287223982` to selected repository `1310272752` with metadata
+  read and checks read/write permissions.
+- **Disposition:** `GITHUB-WEB-001` is checked. Keep GITHUB-WEB-002–004 open
+  for provider lifecycle, live delivery/replay/reconciliation, and complete
+  cutover/recovery acceptance. No new browser page or mutation occurred; no
+  AppSec/Hunt state changed.
+- **Evidence:**
+  `docs/shipping/evidence/github-web-001-installation-identity-2026-10-19.md`
+  and its preserved test log.
+- **Score:** **236 checked / 44 open / 280 total (84.3%)**.
+
 ## 2026-10-19 · ENT-CLI-001 current CLI requalification
 
 - **Source:** CLI `origin/main` at
