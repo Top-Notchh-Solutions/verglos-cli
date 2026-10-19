@@ -9,7 +9,10 @@
 - **Verification mapping:** `admitPolicyCreation` and the policy create route
   now force draft-first creation and keep `effectiveFrom` on the publish
   transition path. Focused policy/tenant/negative-boundary/SCM contracts
-  passed **45/45**; typecheck and the 48-page build passed.
+  passed **45/45**; typecheck and the 48-page build passed. PR #223 hosted
+  checks passed after the isolated PostgreSQL job was rerun following an ECR
+  `toomanyrequests: Data limit exceeded` pull failure; Verify web run
+  `39244909659` also passed.
 - **Acceptance mapping:** `TEAM-WEB-003` was already checked, so this is a
   hardening addendum with no score change. It does not provide the external
   allowance, customer, provider, legal, release, or AppSec evidence required

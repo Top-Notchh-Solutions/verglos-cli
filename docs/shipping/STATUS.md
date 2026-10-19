@@ -16,6 +16,12 @@ an implementation hardening addendum to already-checked `TEAM-WEB-003`; no
 checkbox changed. Score remains **239 checked / 41 open / 280 total (85.4%)**.
 No production, provider, customer, billing, npm, or AppSec state changed.
 
+PR #223 hosted verification is now green. Its first isolated PostgreSQL
+attempt stopped before tests on the GitHub Actions ECR `toomanyrequests: Data
+limit exceeded` provider limit; rerun job `118035241202` passed, as did Verify
+web run `39244909659` and the remaining PR checks. This is hosted CI evidence,
+not a new product acceptance or checkbox closure.
+
 Evidence: `evidence/team-web-003-draft-first-policy-creation-2026-10-19.md`.
 
 ## 2026-10-19 · FINAL-WEB-007/008 public-surface qualification

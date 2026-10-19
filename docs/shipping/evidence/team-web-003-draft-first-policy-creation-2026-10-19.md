@@ -43,6 +43,12 @@ Results:
 - diff check: passed;
 - runtime reported Node `v26.4.0` / pnpm `10.34.5`; the package requests
   Node `22.x`, so this environment warning is retained.
+- Hosted PR verification passed after one provider-side retry: the first
+  isolated-PostgreSQL attempt failed before tests because GitHub Actions could
+  not pull the pinned service image from ECR (`toomanyrequests: Data limit
+  exceeded`); rerun job `118035241202` passed. Verify-web run `39244909659`
+  and PR checks passed for typecheck/schema, Ubuntu/macOS/Windows protocol,
+  Vercel, Preview Comments, GitGuardian, and isolated PostgreSQL.
 
 ## Disposition
 

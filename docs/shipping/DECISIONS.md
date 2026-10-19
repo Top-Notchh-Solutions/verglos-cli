@@ -8,6 +8,9 @@
   insertion and creation-time `effectiveFrom`; the existing transition route
   remains the only publish/effective-date path. The focused contracts passed
   45/45, typecheck passed, and the production build generated 48/48 pages.
+  PR #223 hosted checks passed after the isolated PostgreSQL job was rerun;
+  the first attempt failed before tests on the GitHub Actions ECR data-limit
+  response `toomanyrequests: Data limit exceeded`.
 - **Reason:** `TEAM-WEB-003` was already checked, and this change does not
   produce numeric hosted entitlement, recipient/customer, provider, legal,
   release, field, or independent AppSec evidence.

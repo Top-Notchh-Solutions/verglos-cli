@@ -14,6 +14,10 @@
 - **Verification:** Focused policy/tenant/negative-boundary/SCM contracts
   passed **45/45**, typecheck passed, the optimized Next build generated
   **48/48** pages, and `git diff --check` passed.
+- **Hosted verification:** PR #223 checks passed after rerunning the isolated
+  PostgreSQL job. The first attempt failed before tests on the GitHub Actions
+  ECR pull with `toomanyrequests: Data limit exceeded`; rerun job
+  `118035241202` passed. Verify-web run `39244909659` and all PR checks passed.
 - **Disposition:** `TEAM-WEB-003` was already checked; this is a substantive
   hardening addendum, not a new checkbox closure. Score remains **239/41/280
   (85.4%)**. No production, database, provider, billing, npm, customer, or
