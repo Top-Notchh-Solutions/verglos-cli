@@ -2,6 +2,35 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · QUAL-CLI-006 current origin/main package qualification
+
+- **Source:** Disposable clean CLI worktree at
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`, using the original release
+  packer, package entrypoints, consumer install, and bounded Hunt runtime.
+- **Verification:** Release-contract tests passed **23/23** with zero failures
+  or skips. The real packer produced seven public archives; packed-manifest
+  audit passed; clean consumer install/import passed; no implicit external
+  engine was installed; and signed `a1-utf8-contains` executed through the
+  bounded `restricted-process` runtime. License/notices/external-record tests
+  passed **16/16**.
+- **Boundary:** The first local contract attempt exposed the expected
+  cross-platform inventory prerequisite. Applying the existing CI
+  `supportedArchitectures` setup only in the disposable worktree and
+  reinstalling with the frozen lockfile made the same qualification pass.
+  The worktree was restored clean; no source change was made.
+- **Disposition:** `QUAL-CLI-006` remains unchecked. The actual inventory has
+  254 lockfile package IDs, 250 package entries, one bundled component, and
+  seven explicit legal-review blockers; `pnpm licenses:inventory
+  --require-clear` exits 2. Existing hosted official-validator and matrix
+  packets remain necessary, as do trusted keyless publication, legal,
+  independent AppSec, and final acceptance. No AppSec/Hunt state changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-current-origin-main-package-qualification-2026-10-19.md`.
+- **Score:** **239 checked / 41 open / 280 total (85.4%)**.
+- **Next classification:** `STUDIO-CLI-001` remains open for numeric hosted
+  allowance and authorized recipient/customer acceptance; the next
+  top-to-bottom qualification target is `QUAL-WEB-005`.
+
 ## 2026-10-19 · STUDIO-CLI-001 current Web handoff qualification
 
 - **Source:** Clean Web worktree at merge

@@ -2,6 +2,31 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · QUAL-CLI-006 current origin/main package qualification
+
+The original CLI release logic was qualified from clean `origin/main`
+`0823b513f2b1810ad9f6afcb8806ba46f61feedb` in a disposable Darwin arm64
+worktree. The release-contract suite passed **23/23** with zero failures or
+skips; the real packer produced seven public archives; packed-manifest audit
+passed; and the clean consumer installed/imported all seven packages, emitted
+`2.0.0-alpha.1`, created no implicit external-engine cache, and executed a
+signed A1 Hunt recipe through the bounded restricted-process runtime.
+
+This is real original-logic qualification evidence, not a placeholder or
+checkbox claim. The license inventory also ran against the cross-platform
+lockfile set and correctly remains fail-closed: `--require-clear` exits 2 for
+seven explicit legal-review blockers. `QUAL-CLI-006` therefore remains
+unchecked pending its legal, trusted-publication, independent AppSec, hosted
+matrix, and final-acceptance contracts. Score remains **239 checked / 41 open
+/ 280 total (85.4%)**. AppSec/Hunt state was not changed.
+
+Evidence: `evidence/qual-cli-006-current-origin-main-package-qualification-2026-10-19.md`.
+
+The numeric hosted allowance/customer acceptance required by `STUDIO-CLI-001`
+is still not present, so that row remains open. The next top-to-bottom
+qualification target after this boundary is `QUAL-WEB-005`; classify its own
+remaining contract before checking anything.
+
 ## 2026-10-19 · STUDIO-CLI-001 current Web handoff qualification
 
 The current Web `origin/main` implementation was qualified from a clean

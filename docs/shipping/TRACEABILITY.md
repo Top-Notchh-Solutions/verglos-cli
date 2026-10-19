@@ -2,6 +2,29 @@
 
 ## Active continuation state · 2026-10-19
 
+## QUAL-CLI-006 current origin/main package qualification · 2026-10-19
+
+- **Source mapping:** CLI `origin/main`
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`, exercised in a disposable clean
+  worktree with the original package/release logic.
+- **Verification mapping:** The release-contract set passed **23/23**; seven
+  public archives were produced and audited; the clean consumer imported all
+  seven packages, confirmed no implicit external engine, and executed signed
+  A1 Hunt through the bounded restricted-process runtime. License/notices/
+  external-record contracts passed **16/16**.
+- **Acceptance mapping:** `QUAL-CLI-006` remains unchecked. The current
+  mechanical inventory has seven explicit legal-review blockers and
+  `--require-clear` exits 2. Trusted keyless publication, protected release,
+  hosted official-validator/matrix evidence, independent AppSec review, and
+  final acceptance remain separate row requirements. Score remains
+  **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/qual-cli-006-current-origin-main-package-qualification-2026-10-19.md`.
+
+The prior `STUDIO-CLI-001` qualification remains valid but its numeric hosted
+allowance and authorized recipient/customer acceptance are still absent. The
+next top-to-bottom qualification target is `QUAL-WEB-005`.
+
 ## STUDIO-CLI-001 current Web handoff qualification · 2026-10-19
 
 - **Source mapping:** Web `origin/main` merge
