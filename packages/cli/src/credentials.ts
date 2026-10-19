@@ -23,6 +23,12 @@ export interface Credentials {
    * working. See docs/architecture/entitlement.md for the flow.
    */
   entitlementToken?: string;
+  privateRunner?: {
+    tenantId: string;
+    runnerId: string;
+    credential: string;
+    credentialExpiresAt: string;
+  };
 }
 
 // Resolve the active home at operation time. CI, embedded callers, and

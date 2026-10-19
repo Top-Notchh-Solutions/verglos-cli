@@ -1,7 +1,7 @@
 import { lstat, readFile, readdir } from "node:fs/promises";
 import { isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePath } from "./package-surface-audit.mjs";
+import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePath, isSafePackageFileDeclaration } from "./package-surface-audit.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const packageDirs = ["shared", "scanner", "reporter", "mcp", "entitlement", "hunt", "cli"].map((name) => join(root, "packages", name));
@@ -28,8 +28,8 @@ for (const packageDir of packageDirs) {
   const files = Array.isArray(packageJson.files) ? packageJson.files : [];
   const includedFiles = [];
   for (const included of files) {
-    if (typeof included !== "string" || included.length === 0 || isAbsolute(included)) {
-      failures.push(`${packageJson.name}: package path must be a non-empty relative string: ${String(included)}`);
+    if (!isSafePackageFileDeclaration(included) || isAbsolute(included)) {
+      failures.push(`${packageJson.name}: package path must be a bounded exact relative path: ${String(included)}`);
       continue;
     }
     const includedPath = resolve(packageDir, included);

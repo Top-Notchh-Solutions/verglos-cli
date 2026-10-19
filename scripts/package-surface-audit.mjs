@@ -12,6 +12,16 @@ const EXTERNAL_ENGINE_PACKAGES = /^(?:@aquasecurity\/)?trivy(?:-bin)?$/iu;
 const INSTALL_HOOKS = new Set(["preinstall", "install", "postinstall"]);
 const FORBIDDEN_PUBLIC_PATH = /(?:^|\/)(?:docs\/shipping|\.env(?:\.|$)|.*\.(?:pem|key|p12|pfx)|(?:id_rsa|id_ed25519)|__tests__|tests?|cli-fixture\.[^/]+)(?:$|\/)|\.(?:test|spec)\.[cm]?[jt]sx?$/iu;
 
+/** Public package allowlists must name exact, bounded relative paths. */
+export function isSafePackageFileDeclaration(value) {
+  if (typeof value !== "string" || value.length === 0 || value.length > 256) return false;
+  const normalized = value.replaceAll("\\", "/");
+  if (/^[A-Za-z]:\//u.test(normalized) || normalized.startsWith("/") || /[\u0000-\u001f\u007f]/u.test(normalized)) return false;
+  if (/[?*\[\]{}!]/u.test(normalized)) return false;
+  const segments = normalized.split("/");
+  return segments.every((segment) => segment.length > 0 && segment !== "." && segment !== "..");
+}
+
 export function isForbiddenPublicPackagePath(path) {
   return FORBIDDEN_PUBLIC_PATH.test(path.replaceAll("\\", "/"));
 }
@@ -51,6 +61,15 @@ export function auditPackageSurface(manifest, fileNames) {
   const files = new Set(fileNames.map((name) => name.replaceAll("\\", "/").replace(/^package\//u, "").replace(/\/$/u, "")));
   if (!PUBLIC_PACKAGE_NAMES.includes(manifest?.name)) failures.push(`unexpected public package name: ${String(manifest?.name)}`);
   if (!Array.isArray(manifest?.files) || !manifest.files.includes("dist")) failures.push(`${manifest?.name}: package files must include dist`);
+  if (Array.isArray(manifest?.files)) {
+    const declared = new Set();
+    for (const value of manifest.files) {
+      if (!isSafePackageFileDeclaration(value)) failures.push(`${manifest.name}: package path must be a bounded exact relative path: ${String(value)}`);
+      const normalized = typeof value === "string" ? value.replaceAll("\\", "/") : String(value);
+      if (declared.has(normalized)) failures.push(`${manifest.name}: package path is declared more than once: ${normalized}`);
+      declared.add(normalized);
+    }
+  }
   for (const hook of INSTALL_HOOKS) {
     if (manifest?.scripts?.[hook]) failures.push(`${manifest.name}: install-time hook '${hook}' is not allowed`);
   }
