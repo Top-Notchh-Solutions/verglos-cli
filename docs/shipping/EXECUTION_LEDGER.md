@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · STUDIO-CLI-001 client handoff and portfolio implementation
+
+- **Implementation:** Web PRs #207–#211 merged normally, preserving separate
+  implementation and regression commits. The public Web now has tenant-scoped
+  client workspaces, auditable handoff receipts, recipient acknowledgement,
+  role-gated handoff controls, and a bounded client portfolio projection.
+- **Verification:** Each PR passed hosted Web typecheck/schema, Vercel Preview
+  Comments, and GitGuardian checks. Route, tenant-scope, negative-boundary,
+  handoff-receipt, acknowledgement, control, portfolio, and page-contract
+  tests were added in the preserved test commits.
+- **Disposition:** This is a real implementation advance, not row closure.
+  Keep STUDIO-CLI-001 unchecked pending an approved numeric paid/non-production
+  hosted-record allowance and an authorized recipient/customer acceptance
+  observation. The existing Preview path correctly fails closed with
+  `allowance_not_configured` when the allowance is absent. TEAM-CLI-001 is
+  checked; AppSec/Hunt state is unchanged.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-client-handoff-portfolio-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · QUAL-CLI-006 cross-platform rollback matrix
 
 - **Implementation:** CLI PR #151 merged normally as `07cb117e`, preserving

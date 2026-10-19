@@ -1,5 +1,29 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 client handoff and portfolio implementation · 2026-10-19
+
+- **Source mapping:** Web PRs #207–#211 merged normally as
+  `6a748d42fd90fcb0c72b9a29246ff8eab9934893`,
+  `c166dd14fe8be3f5686c8d0f369dfb0db31027da`,
+  `b54fd332bc8d1edbe246a00c8816c05e80aaf59c`,
+  `853e088f7427197dd08f2238d3b63f1d563910d2`, and
+  `e112126bfcaeafbe2290727f8015191b260fd51d`; no squash, rebase, or
+  force-push was used.
+- **Contract mapping:** The five PRs implement tenant-scoped client workspace
+  lifecycle, auditable handoff receipt persistence, recipient acknowledgement,
+  role-gated handoff controls, and a bounded client portfolio projection.
+- **Verification mapping:** Hosted Web typecheck/schema, Vercel Preview
+  Comments, and GitGuardian passed for each PR. Preserved regression commits
+  cover tenant scope, negative authorization, handoff routes, acknowledgement,
+  controls, portfolio projection, and page contracts.
+- **Acceptance mapping:** This qualifies the public code path only.
+  STUDIO-CLI-001 remains unchecked pending a numeric paid/non-production
+  allowance and authorized recipient/customer acceptance. TEAM-CLI-001 is
+  checked; no AppSec-held checkbox changed. Score remains **235/45/280
+  (83.9%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-client-handoff-portfolio-2026-10-19.md`.
+
 ## QUAL-CLI-006 cross-platform rollback matrix · 2026-10-19
 
 - **Source mapping:** CLI implementation commit `562ea84e` merged normally in
