@@ -18,6 +18,19 @@ using the active `verglos-web`, `verglos-cli`, and private shipping ledger
 repositories only; preserve normal granular substantive commits and do not
 squash.
 
+## 2026-10-19 · TEAM-WEB-003 original policy lifecycle hardening
+
+Web PR #223 preserves implementation commit `9489fb6` and regression commit
+`75de374` separately. The original policy create route now forces every new
+version through `draft`; direct `published`/`retired` creation and creation-
+time `effectiveFrom` are rejected so publish timing remains on the audited
+transition path. Focused policy/tenant/negative-boundary/SCM contracts passed
+**45/45**, typecheck passed, and the optimized build generated **48/48**
+pages. `TEAM-WEB-003` was already checked, so this is a hardening addendum
+with no checkbox change. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. AppSec/Hunt and all external acceptance blockers remain unchanged.
+Evidence: `docs/shipping/evidence/team-web-003-draft-first-policy-creation-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-002 twelve-story execution coverage enforcement
 
 Private commit `2c24069b` adds a machine-checked execution plan for all twelve
