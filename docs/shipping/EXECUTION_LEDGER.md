@@ -105,9 +105,9 @@
 
 ## 2026-10-19 · STUDIO-CLI-001 hosted usage release hardening
 
-- **Source:** Web qualification worktree based on merge
-  `2c07237845f0e52061dc52c99c21212615390177`; implementation `c9dd749` and
-  regression `f26213c` remain separate local substantive commits.
+- **Source:** Web base `2c07237845f0e52061dc52c99c21212615390177`; implementation
+  `c9dd749` and regression `f26213c` remain separate substantive commits in
+  normal PR #226 merge `c8dc05a57a77d2332856085c70833ceced0599f6`.
 - **Implementation:** The original receipt and client-projection custody
   routes now use a scoped transaction for persistence. A failed insert rolls
   back and invokes the deterministic hosted-record usage release transition;

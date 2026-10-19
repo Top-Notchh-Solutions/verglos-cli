@@ -13,8 +13,9 @@ recipient/customer acceptance observation.
 - Qualification worktree base: Web `2c07237845f0e52061dc52c99c21212615390177`
 - Implementation commit: `c9dd749` — `fix(web): release hosted usage after custody failure`
 - Regression commit: `f26213c` — `test(web): cover hosted usage rollback`
-- History: two substantive commits; no squash, rebase, force-push, empty, or
-  contribution-count-only commit.
+- Normal merge commit: `c8dc05a57a77d2332856085c70833ceced0599f6` (PR #226)
+- History: two substantive commits preserved through a regular merge; no
+  squash, rebase, force-push, empty, or contribution-count-only commit.
 
 ## Original logic implemented
 
@@ -47,8 +48,8 @@ still a future placeholder.
 
 No Production, billing, provider, customer, npm, registry, or AppSec state was
 changed. The PostgreSQL container was disposable and removed after testing.
-The implementation commits are local qualification commits and are not being
-represented as a public merge or as hosted/customer acceptance.
+The merged Web head is public implementation evidence, not hosted/customer
+acceptance.
 
 `STUDIO-CLI-001` remains unchecked. Score remains **239 checked / 41 open /
 280 total (85.4%)**. Hunt/AppSec rows remain held separately and were not

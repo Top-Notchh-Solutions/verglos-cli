@@ -129,7 +129,8 @@ Evidence: `evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
 ## 2026-10-19 · STUDIO-CLI-001 hosted usage release hardening
 
 The next original-logic gap in the same custody path is now closed in the
-qualification branch. Web commits `c9dd749` and `f26213c` add a deterministic
+Web commits `c9dd749` and `f26213c` were preserved through normal PR #226
+merge `c8dc05a57a77d2332856085c70833ceced0599f6`; they add a deterministic
 usage-release transition and place both receipt and client-projection custody
 in a scoped transaction boundary. A failed insert now rolls back before the
 reserved `hosted.ingestion.records` unit is released; raced scope conflicts

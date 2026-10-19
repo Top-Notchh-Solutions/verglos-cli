@@ -2,7 +2,8 @@
 
 ## 2026-10-19 · STUDIO-CLI-001 hosted usage release hardening
 
-Web qualification commits `c9dd749` and `f26213c` add the original scoped
+Web commits `c9dd749` and `f26213c` were preserved by normal PR #226 merge
+`c8dc05a57a77d2332856085c70833ceced0599f6`; they add the original scoped
 transaction and deterministic usage-release behavior for failed receipt and
 client-projection custody writes. Full tests passed **894/918** with 24 skips
 and zero failures; both route integrations passed **1/1**, typecheck, the

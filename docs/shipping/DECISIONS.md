@@ -119,7 +119,8 @@
 
 ## 2026-10-19 · retain STUDIO-CLI-001 after hosted usage release hardening
 
-- **Decision:** Accept Web commits `c9dd749` and `f26213c` as substantive
+- **Decision:** Accept Web commits `c9dd749` and `f26213c`, preserved by normal
+  PR #226 merge `c8dc05a57a77d2332856085c70833ceced0599f6`, as substantive
   original-logic progress; retain the existing row state and score.
 - **Observed:** Receipt and client-projection custody now have a scoped
   transaction boundary and deterministic hosted-record usage release on
