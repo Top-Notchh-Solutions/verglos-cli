@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-19 · FINAL-WEB-007 landing qualification substrate
+
+Web PR #227 adds separate implementation/regression commits `d5a3f8f` and
+`330280d`. The landing verifier requires a real versioned capture covering
+desktop and mobile for the six public journey routes, then applies the shared
+CWV/accessibility checks plus responsive, canonical-metadata, and crawlability
+checks. Its workflow contract passed **4/4**; truth registry **34/34**, public
+smoke **22/22 claims / 0 issues**, public smoke tests **2/2**, typecheck, and
+the **49/49** page build also passed.
+
+Keep `FINAL-WEB-007` unchecked: no browser capture or final acceptance was
+invented, and no AppSec state changed. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/final-web-007-landing-release-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 hosted usage release hardening
 
 Web commits `c9dd749` and `f26213c` were preserved by normal PR #226 merge

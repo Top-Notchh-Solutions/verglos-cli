@@ -2,6 +2,25 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · FINAL-WEB-007 landing release qualification substrate
+
+Web PR #227 contains separate substantive commits `d5a3f8f` and `330280d`.
+The original landing-release verifier now requires real desktop and mobile
+captures for every public journey route, reuses the CWV/accessibility decision
+surface, and fails closed on missing responsive, canonical-metadata,
+crawlability, keyboard, landmark, reduced-motion, duplicate, or malformed
+evidence. The verification workflow runs its **4/4** regression contract.
+
+Local qualification passed: truth registry **34/34**, public smoke **22/22
+publishable claims with 0 issues**, public smoke tests **2/2**, typecheck,
+build **49/49 pages**, and diff check. This is code-side evidence only: no
+browser capture, deployment, customer, provider, billing, publication, or
+AppSec state changed. `FINAL-WEB-007` remains unchecked for real browser
+evidence and its acceptance dependencies. Score remains **239 checked / 41
+open / 280 total (85.4%)**.
+
+Evidence: `evidence/final-web-007-landing-release-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-002/003 current-head substrate and bundle
 
 The private twelve-story verifier ran against CLI

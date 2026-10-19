@@ -2,6 +2,25 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · FINAL-WEB-007 landing release qualification substrate
+
+- **Source:** Web PR #227 from base merge
+  `c8dc05a57a77d2332856085c70833ceced0599f6`; implementation `d5a3f8f` and
+  regression/CI wiring `330280d` remain separate substantive commits.
+- **Original logic:** The landing qualification parser accepts only a bounded,
+  versioned capture document. The decision requires desktop/mobile coverage for
+  `/`, `/docs`, `/detectors`, `/proof`, `/verify`, and `/checkout`; duplicates,
+  unexpected routes, missing views, CWV/a11y failures, responsive failures,
+  canonical metadata failures, and crawlability failures fail closed.
+- **Verification:** Landing qualification **4/4**, truth registry **34/34**,
+  public smoke **22/22 claims / 0 issues**, public smoke tests **2/2**,
+  typecheck, optimized build **49/49 pages**, and diff check passed.
+- **Disposition:** This is implementation substrate, not a browser or customer
+  acceptance result. Keep `FINAL-WEB-007` unchecked until a real browser capture
+  and dependency acceptance are supplied. Score remains **239/41/280 (85.4%)**;
+  AppSec/Hunt-held state is unchanged.
+- **Evidence:** `docs/shipping/evidence/final-web-007-landing-release-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-002/003 current-head substrate and bundle
 
 - **Source:** CLI `11734a45740a893c307606e8f3d3f316711abd9e` and Web

@@ -2,6 +2,25 @@
 
 ## Active continuation state · 2026-10-19
 
+## FINAL-WEB-007 landing release qualification substrate · 2026-10-19
+
+- **Source mapping:** Web PR #227; implementation `d5a3f8f`, regression/CI
+  wiring `330280d`, based on normal main merge
+  `c8dc05a57a77d2332856085c70833ceced0599f6`.
+- **Implementation mapping:** `qualifyLandingRelease` composes the existing
+  CWV/a11y decision surface with required desktop/mobile route coverage,
+  responsive-layout, canonical-metadata, crawlability, duplicate, and strict
+  capture-schema checks. The source audit inspects the actual landing route,
+  checkout, layout, proof, and CSS files.
+- **Verification mapping:** Landing contract **4/4**, truth registry **34/34**,
+  public smoke **22/22 claims with 0 issues**, public smoke tests **2/2**,
+  typecheck, **49/49** page build, and diff check passed.
+- **Acceptance mapping:** `FINAL-WEB-007` remains unchecked because the
+  implementation intentionally requires a real browser-produced capture and
+  the row remains dependency-bound to public flow/claim acceptance. No
+  AppSec-held checkbox changed; score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-landing-release-qualification-2026-10-19.md`.
+
 ## ACCEPT-002/003 current-head substrate and bundle · 2026-10-19
 
 - **Source mapping:** CLI
