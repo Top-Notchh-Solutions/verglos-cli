@@ -122,6 +122,23 @@ test("private runner poll keeps its timeout active while reading a response body
   assert.deepEqual(result, { status: "error", endpoint: "https://example.test/api/v1/private-runner/jobs?tenant_id=org_acme&runner_id=runner_1", reason: "network" });
 });
 
+test("private runner poll refuses a same-origin route override before reading credentials", async () => {
+  let called = false;
+  const result = await pollPrivateRunnerJob({
+    tenantId: "org_acme",
+    runnerId: "runner_1",
+    trustedKeyPath: "/tmp/not-read",
+    allowedTargets: ["subject_app"],
+    endpoint: "/api/license/unlock",
+    fetchImpl: async () => {
+      called = true;
+      return new Response();
+    },
+  });
+  assert.deepEqual(result, { status: "error", reason: "invalid_input" });
+  assert.equal(called, false);
+});
+
 test("private runner result upload uses authenticated POST and sends only the shared projection", async () => {
   const result = {
     protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
@@ -155,4 +172,16 @@ test("private runner result upload keeps its timeout active while reading a resp
   } as const;
   const response = await withDeadline(uploadPrivateRunnerResult({ result, timeoutMs: 10, fetchImpl: async (_input, init) => responseThatWaitsForAbort(init?.signal as AbortSignal) }));
   assert.deepEqual(response, { status: "error", endpoint: "https://example.test/api/v1/private-runner/results", reason: "network" });
+});
+
+test("private runner result upload refuses a same-origin route override before network access", async () => {
+  const result = await uploadPrivateRunnerResult({
+    result: {
+      protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
+      startedAt: "2026-10-06T00:01:00.000Z", finishedAt: "2026-10-06T00:01:01.000Z", evidenceDigest: `sha256:${"b".repeat(64)}`, findingCount: 2, coverage: "complete",
+    },
+    endpoint: "/api/license/unlock",
+    fetchImpl: async () => { throw new Error("network must not be reached"); },
+  });
+  assert.deepEqual(result, { status: "error", reason: "invalid_input" });
 });
