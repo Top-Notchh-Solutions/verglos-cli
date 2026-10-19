@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePath } from "./package-surface-audit.mjs";
+import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePath, isSafePackageFileDeclaration } from "./package-surface-audit.mjs";
 
 const files = ["dist/index.js", "dist/index.d.ts", "dist/server.js", "dist/server.d.ts"];
 const base = {
@@ -54,4 +54,13 @@ test("public package set requires exactly the seven reviewed package identities"
     { name: "@verglos/hunt" },
   ]), []);
   assert.ok(auditPublicPackageSet([{ name: "verglos" }]).some((failure) => failure.includes("exactly one @verglos/shared")));
+});
+
+test("package file allowlists reject traversal, glob, control-character, and duplicate declarations", () => {
+  for (const value of ["dist/../private", "dist/*.js", "dist//index.js", "./dist", "dist/\u0000.js"]) {
+    assert.equal(isSafePackageFileDeclaration(value), false, value);
+  }
+  assert.equal(isSafePackageFileDeclaration("dist"), true);
+  assert.ok(auditPackageSurface({ ...base, files: ["dist", "dist/../private"] }, files).some((failure) => failure.includes("bounded exact relative path")));
+  assert.ok(auditPackageSurface({ ...base, files: ["dist", "dist"] }, files).some((failure) => failure.includes("declared more than once")));
 });
