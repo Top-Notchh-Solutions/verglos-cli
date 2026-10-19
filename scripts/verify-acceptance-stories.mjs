@@ -12,6 +12,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { buildAcceptanceStoryCoverage } from "./acceptance-story-plan.mjs";
 
 const privateRoot = resolve(import.meta.dirname, "..");
 const workspaceRoot = process.env.VERGLOS_WORKSPACE_ROOT ?? resolve(privateRoot, "..");
@@ -65,6 +66,11 @@ const results = [
   run("web-composed-acceptance-substrates", webRoot, ["exec", "node", "--import", "tsx", "--test", "--test-concurrency=1", "src/lib/organizations/studio-e2e.test.ts", "src/lib/organizations/enterprise-e2e.test.ts", "src/lib/organizations/team-e2e.test.ts", "src/lib/qual/qual-web-suites.test.ts"]),
 ];
 
+const storyCoverage = buildAcceptanceStoryCoverage(
+  storyMap.stories,
+  new Set(results.map((entry) => entry.label)),
+);
+
 const result = {
   schema: "verglos.private.acceptance-stories-verification.v1",
   verifiedAt: new Date().toISOString(),
@@ -73,7 +79,9 @@ const result = {
   cliCommit: execFileSync("git", ["-C", cliRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   webCommit: execFileSync("git", ["-C", webRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   stories: storyMap.stories,
+  storyCoverage,
   results,
+  storyCoverageComplete: storyCoverage.length === storyMap.stories.length,
   allCommandsPassed: results.every((entry) => entry.exitCode === 0),
   note: "Substrate/regression evidence only. No hosted HTTP, provider, customer, reviewer, browser-human, field-CWV, migration, or production acceptance is claimed.",
 };
