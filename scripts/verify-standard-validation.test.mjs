@@ -77,6 +77,28 @@ test("CycloneDX cdx-validate uses its official input flag", async () => {
   });
 });
 
+test("standard validation refuses Sigstore fixtures outside the artifact root", async () => {
+  await withArtifacts(async (root) => {
+    const outside = await mkdtemp(join(tmpdir(), "verglos-standard-outside-"));
+    try {
+      const calls = [];
+      const result = await validateStandardArtifacts({
+        artifactRoot: root,
+        sigstore: {
+          payloadPath: join(outside, "sigstore.payload"),
+        },
+        run: passingRunner(calls),
+      });
+      const sigstore = result.checks.find((check) => check.id === "sigstore");
+      assert.equal(sigstore?.status, "failed");
+      assert.equal(sigstore?.reason, "sigstore-fixture-outside-root");
+      assert.equal(calls.length, 2);
+    } finally {
+      await rm(outside, { recursive: true, force: true });
+    }
+  });
+});
+
 test("strict validation fails when a validator is missing or rejects an artifact", async () => {
   await withArtifacts(async (root) => {
     let count = 0;

@@ -96,7 +96,7 @@ import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
 import { executeClientProjection } from "./client-projection.js";
 import { executeReleaseRollbackPlan, executeReleaseRollbackRehearsal } from "./release-rollback-plan.js";
 import { executeCiCheckPayload } from "./ci-check-payload.js";
-import { pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
+import { enrollPrivateRunner, pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -277,6 +277,17 @@ organizationPolicy.command("fetch <organizationId> <repositoryId>")
   });
 
 const privateRunner = program.command("runner").description("Poll a bounded private runner without executing remote commands");
+privateRunner.command("enroll <tenantId> <runnerId> <enrollmentToken>")
+  .description("Redeem a one-time private-runner enrollment secret into a runner-only credential")
+  .option("--endpoint <path>", "Relative API path override for the enrollment endpoint")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (tenantId: string, runnerId: string, enrollmentToken: string, opts: { endpoint?: string; json?: boolean; quiet?: boolean }) => {
+    const result = await enrollPrivateRunner({ tenantId, runnerId, enrollmentToken, endpoint: opts.endpoint });
+    if (opts.json) console.log(JSON.stringify(result));
+    else if (!opts.quiet) console.log(result.status === "enrolled" ? `Private runner enrolled: ${result.runnerId}` : `Private runner enrollment ${result.status}: ${result.reason}`);
+    if (result.status === "error") process.exitCode = 78;
+  });
 privateRunner.command("poll <tenantId> <runnerId>")
   .description("Poll one signed, short-lived private-runner job; never executes or uploads results")
   .requiredOption("--trusted-key <path>", "Ed25519 public key used to verify the job signature")

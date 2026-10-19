@@ -4,6 +4,7 @@ import { mkdtemp, readdir, rm, writeFile, lstat, mkdir } from "node:fs/promises"
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
+import { cleanConsumerInstallTimeoutMs } from "./clean-consumer-runtime.mjs";
 // The fixture builder uses the repository's built shared contract helpers;
 // execution below is performed only by the packed consumer installation.
 import { canonicalizeJson, createApprovalReceipt, huntRecipeDigest, parseHuntRecipe } from "../packages/shared/dist/index.js";
@@ -181,7 +182,7 @@ const consumer = await mkdtemp(join(tmpdir(), "verglos-clean-consumer-"));
 try {
   await writeFile(join(consumer, "package.json"), JSON.stringify({ name: "verglos-release-consumer", private: true, version: "1.0.0" }));
   const paths = archives.map((name) => join(archiveRoot, name));
-  await run(npmCommand, ["install", "--ignore-scripts", "--no-audit", "--no-fund", "--no-package-lock", ...paths], { ...npmOptions, cwd: consumer, timeout: 180_000, maxBuffer: 8 * 1024 * 1024 });
+  await run(npmCommand, ["install", "--ignore-scripts", "--no-audit", "--no-fund", "--no-package-lock", ...paths], { ...npmOptions, cwd: consumer, timeout: cleanConsumerInstallTimeoutMs(process.platform), maxBuffer: 8 * 1024 * 1024 });
   const cli = join(consumer, "node_modules", "verglos", "dist", "index.js");
   const result = await run(process.execPath, [cli, "--version"], { cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });
   if (!/^\d+\.\d+\.\d+[^\r\n]*\r?\n?$/.test(result.stdout.trim())) throw new Error("clean consumer CLI did not emit a version");
