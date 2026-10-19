@@ -1,19 +1,23 @@
 # Verglos shipping decisions
 
-## 2026-10-19 · retain FINAL-WEB-008 after public receipt qualification
+## 2026-10-19 · retain FINAL-WEB-007/008 after public-surface qualification
 
-- **Decision:** Accept Web PR #222 as a substantive public release-surface
-  advance, while retaining `FINAL-WEB-008` unchecked.
+- **Decision:** Accept Web PR #222 as a substantive public release and
+  accessibility-surface advance, while retaining `FINAL-WEB-007` and
+  `FINAL-WEB-008` unchecked.
 - **Observed:** The public Release Record receipt route now has explicit
-  no-index metadata and is covered by the public release-smoke manifest.
-  Focused route/smoke tests passed **6/6**, command smoke reported 16 routes,
+  no-index metadata and is covered by the public release-smoke manifest. The
+  global stylesheet now honors reduced-motion preferences. Focused
+  route/smoke/motion tests passed **7/7**, command smoke reported 16 routes,
   22/22 publishable claims, 2 proof assets, and 0 issues; typecheck and diff
   check passed.
-- **Reason:** This proves code-side route truth and crawl-boundary behavior,
-  not hosted/customer acceptance, legal/release approval, final acceptance,
-  or a production release decision.
-- **Disposition:** Keep `FINAL-WEB-008` and its dependent final rows open. No
-  AppSec/Hunt state changed; score remains **239/41/280 (85.4%)**.
+- **Reason:** This proves code-side route truth, crawl-boundary behavior, and
+  reduced-motion handling, not human/browser/field acceptance,
+  hosted/customer acceptance, legal/release approval, final acceptance, or a
+  production release decision.
+- **Disposition:** Keep `FINAL-WEB-007`, `FINAL-WEB-008`, and dependent final
+  rows open. No AppSec/Hunt state changed; score remains **239/41/280
+  (85.4%)**.
 - **Evidence:**
   `evidence/final-web-008-public-record-route-qualification-2026-10-19.md`.
 

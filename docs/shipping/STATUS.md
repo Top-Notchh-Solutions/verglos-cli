@@ -2,23 +2,27 @@
 
 ## Overall continuation state · 2026-10-19
 
-## 2026-10-19 · FINAL-WEB-008 public Release Record route qualification
+## 2026-10-19 · FINAL-WEB-007/008 public-surface qualification
 
 The original Web public Release Record verification route now has explicit
 bounded title/description metadata and `noindex,nofollow` behavior. The route
 is also registered in the public release-smoke manifest, so its existing
 receipt-identity validation and content-digest verification remain part of the
-public surface audit. Implementation `37c3f36` and regression `5b2ddad` remain
-separate in Web PR #222.
+public surface audit. The global stylesheet now honors `prefers-reduced-motion`
+for animations, transitions, and scroll behavior across the public journey.
+Implementation commits `37c3f36` and `caa8ac0`, plus regression commits
+`5b2ddad` and `bfda33e`, remain separate in Web PR #222.
 
-Focused public-release and receipt-route tests passed **6/6**, the public
+The combined focused public-release, receipt-route, and motion tests passed
+**7/7**, the public
 release smoke passed with **16 routes, 22/22 publishable claims, 2 proof
 assets, and 0 issues**, typecheck passed, and diff check passed. The local
 runtime was Node `v26.4.0` / pnpm `10.34.5` while the package requests Node
 `22.x`.
 
-`FINAL-WEB-008` remains unchecked because final acceptance, hosted/customer
-qualification, legal/release approval, and dependent final rows remain open.
+`FINAL-WEB-007` and `FINAL-WEB-008` remain unchecked because human/browser/
+field acceptance, hosted/customer qualification, legal/release approval, and
+dependent final rows remain open.
 Score remains **239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt state
 was not changed.
 
