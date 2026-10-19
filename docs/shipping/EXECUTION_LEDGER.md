@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · STUDIO-CLI-001 Preview allowance requalification
+
+- **Source/deployment:** Current Web source commit
+  `390fd3f82b2a59003e30e2362ab593ef1db4b982` was deployed to the disposable
+  Preview deployment `verglos-nwk48v7ww-anuragyadav20062002s-projects.vercel.app`
+  (inspect identifier `56a1dDZnB81oMqpYJWtndLC1PEYN`). This was Preview-only;
+  no Production alias or production state was changed.
+- **Hosted observations:** The owner-authorized organization route returned the
+  exact qualification organization and its active repository-bound project.
+  Capabilities resolved to active `free` with `recordsPerMonth=unset`. The
+  receipt list returned `200` with no rows; a schema-valid redacted receipt
+  returned `403 hosted record allowance is not configured`; a cross-tenant read
+  returned `403 organization access denied`.
+- **Boundary:** No receipt was admitted, no hosted database write occurred,
+  no credential value was recorded, and no raw source or customer data was
+  submitted. The temporary local Vercel environment file was removed after
+  qualification.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked. This closes no checkbox;
+  the remaining non-AppSec requirements are an approved numeric paid,
+  non-production allowance and an authorized Studio recipient/customer
+  acceptance observation. TEAM-CLI-001 remains checked, AppSec/Hunt remains
+  unchanged, and the score remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-preview-allowance-requalification-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-WEB-006 hosted GitHub check-delivery qualification
 
 - **Implementation:** Web PRs #129–#137 delivered the tenant-bound GitHub/

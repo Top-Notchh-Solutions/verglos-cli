@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · STUDIO-CLI-001 Preview allowance requalification
+
+The current owner-authorized Preview qualification reached the exact
+organization/project and confirmed the hosted custody boundary is fail-closed:
+the fixture is active `free` with `recordsPerMonth=unset`, an empty receipt
+list returns HTTP `200`, a schema-valid redacted receipt is rejected with
+HTTP `403 hosted record allowance is not configured`, and a cross-organization
+read is rejected with HTTP `403 organization access denied`. No receipt was
+persisted and no Production state changed.
+
+`STUDIO-CLI-001` remains unchecked pending an approved numeric paid,
+non-production allowance and authorized Studio recipient/customer acceptance.
+TEAM-CLI-001 remains checked; AppSec/Hunt is unchanged. Score remains
+**235 checked / 45 open / 280 total (83.9%)**. Evidence:
+`evidence/studio-cli-001-preview-allowance-requalification-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-WEB-006 hosted GitHub check-delivery qualification
 
 TEAM-WEB-006 is checked after the implemented Web SCM integration was
