@@ -120,14 +120,15 @@ function parseJobResponse(value: unknown): PrivateRunnerJob | null {
 }
 
 function endpointFor(apiUrl: string, tenantId: string, runnerId: string, endpoint?: string): string {
-  const path = endpoint ?? `/api/v1/private-runner/jobs?tenant_id=${encodeURIComponent(tenantId)}&runner_id=${encodeURIComponent(runnerId)}`;
-  if (!path.startsWith("/") || path.startsWith("//") || /[\u0000-\u001f\u007f]/u.test(path)) throw new Error("runner endpoint must be a relative API path");
-  return `${apiUrl}${path}`;
+  const expected = `/api/v1/private-runner/jobs?tenant_id=${encodeURIComponent(tenantId)}&runner_id=${encodeURIComponent(runnerId)}`;
+  if (endpoint !== undefined && endpoint !== expected) throw new Error("runner poll endpoint must be the bound tenant/runner route");
+  return `${apiUrl}${expected}`;
 }
 
 function relativeEndpointFor(apiUrl: string, path: string): string {
-  if (!path.startsWith("/") || path.startsWith("//") || /[\u0000-\u001f\u007f]/u.test(path)) throw new Error("runner endpoint must be a relative API path");
-  return `${apiUrl}${path}`;
+  const expected = "/api/v1/private-runner/results";
+  if (path !== expected) throw new Error("runner result endpoint must be the fixed result route");
+  return `${apiUrl}${expected}`;
 }
 
 function isAbortError(error: unknown): boolean {
