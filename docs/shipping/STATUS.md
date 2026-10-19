@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · QUAL-WEB-006 dashboard boundary qualification advance
+
+Web PR #220 merged normally as `96a6228`, preserving implementation commit
+`61d40ed`. The organization dashboard now provides accessible loading and
+failure boundaries: progress is announced without private data, and runtime
+error details are withheld behind a bounded retryable alert. Focused tests
+passed **2/2**, typecheck passed, and an isolated clean-root build generated
+**48/48** pages. Hosted matrix, isolated PostgreSQL, typecheck/schema, Vercel,
+Preview Comments, and GitGuardian all passed.
+
+`QUAL-WEB-006` remains unchecked for human screen-reader verification,
+complete authenticated/large-dataset coverage, field-CWV evidence, and final
+acceptance. Evidence:
+`evidence/qual-web-006-dashboard-boundaries-2026-10-19.md`. Score remains
+**235 checked / 45 open / 280 total (83.9%)**; no AppSec, provider, customer,
+or Production state changed.
+
 ## 2026-10-19 · ENT-CLI-001 cross-platform qualification advance
 
 Web PR #219 was merged normally as `bbe70d4f`, preserving implementation

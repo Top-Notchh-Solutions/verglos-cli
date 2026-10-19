@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 dashboard failure boundaries · 2026-10-19
+
+- **Source mapping:** Web implementation commit `61d40ed` was merged normally
+  in PR #220 as `96a6228`; no squash merge was used.
+- **Contract mapping:** `/orgs/[organizationSlug]/*` now has an announced
+  loading state and a bounded retryable error state that does not render
+  runtime error details or private evidence.
+- **Result mapping:** Focused boundary tests passed 2/2, typecheck passed, the
+  isolated build generated 48/48 pages, and hosted matrix/PostgreSQL/
+  typecheck-schema/Vercel/Preview/GitGuardian checks passed.
+- **Acceptance mapping:** This is a qualification substrate advance only;
+  human screen-reader, complete authenticated/large-dataset, field-CWV, and
+  final acceptance conditions remain open. `QUAL-WEB-006` remains unchecked;
+  score remains **235/45/280 (83.9%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-boundaries-2026-10-19.md`.
+
 ## ENT-CLI-001 cross-platform qualification · 2026-10-19
 
 - **Source mapping:** Web implementation commit `61d4ff7` was merged normally

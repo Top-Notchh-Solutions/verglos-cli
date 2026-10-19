@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · QUAL-WEB-006 dashboard boundary qualification
+
+- **Implementation:** Web PR #220 merged normally as `96a6228`, preserving
+  implementation commit `61d40ed`. The tenant dashboard now has accessible
+  loading and error boundaries with bounded, source-free messaging and retry.
+- **Results:** Focused boundary tests passed **2/2**, typecheck passed, the
+  isolated clean-root build generated **48/48** pages, and the public-boundary
+  audit/diff check passed. Hosted CI passed Ubuntu, macOS, Windows, isolated
+  PostgreSQL, typecheck/schema, Vercel, Preview Comments, and GitGuardian.
+- **Disposition:** This advances QUAL-WEB-006 implementation only. Keep the
+  row unchecked pending human screen-reader, complete authenticated and
+  large-dataset, field-CWV, and final acceptance evidence. The existing dirty
+  parent Web checkout was not edited or cleaned. AppSec/Hunt remains unchanged.
+- **Evidence:** `docs/shipping/evidence/qual-web-006-dashboard-boundaries-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · ENT-CLI-001 cross-platform implementation qualification
 
 - **Implementation:** Web PR #219 was merged normally as `bbe70d4f`, preserving

@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain QUAL-WEB-006 after dashboard boundary implementation
+
+- **Decision:** Accept Web PR #220 as a substantive accessibility and failure
+  state implementation advance; retain the backlog row open.
+- **Observed:** Normal merge `96a6228` preserves `61d40ed`. Focused tests 2/2,
+  typecheck, isolated 48/48-page build, public-boundary audit, hosted
+  cross-platform matrix, isolated PostgreSQL, typecheck/schema, Vercel,
+  Preview Comments, and GitGuardian passed.
+- **Reason:** These checks do not replace human screen-reader verification,
+  complete authenticated/large-dataset coverage, field-CWV observation, or
+  final acceptance.
+- **Disposition:** Keep `QUAL-WEB-006` unchecked. AppSec/Hunt remains held;
+  score remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/qual-web-006-dashboard-boundaries-2026-10-19.md`.
+
 ## 2026-10-19 · retain ENT-CLI-001 after cross-platform qualification
 
 - **Decision:** Accept Web PR #219 as a substantive implementation and
