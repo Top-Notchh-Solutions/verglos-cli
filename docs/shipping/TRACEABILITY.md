@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## DIST-002/003 current release-contract qualification · 2026-10-19
+
+- **Source mapping:** CLI `origin/main` at
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb` was exercised from a disposable
+  worktree; no public source changed.
+- **Contract mapping:** The trusted-publishing/release-verifier suite passed
+  **8/8**, covering OIDC/provenance, protected environment, immutable tag,
+  serialization, seven-package boundaries, checksums, and bypass refusal.
+- **Blocker mapping:** Actual sidecar generation and strict verification failed
+  closed on seven unresolved dependency-license review blockers, so no
+  publication or release claim is made.
+- **Acceptance mapping:** `DIST-002`/`DIST-003` remain unchecked for protected
+  publisher/legal approval and a zero-blocker release artifact set. No
+  AppSec-held checkbox changed; `TEAM-CLI-001` remains checked. Score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/dist-002-003-current-release-contract-2026-10-19.md`.
+
+## DIST-001 current origin/main package qualification · 2026-10-19
 ## DIST-001 current origin/main package qualification · 2026-10-19
 
 - **Source mapping:** CLI `origin/main` at

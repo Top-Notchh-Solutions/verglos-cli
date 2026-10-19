@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · DIST-002/003 current release-contract qualification
+
+- **Source:** CLI `origin/main` at
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`, exercised in the disposable
+  current-head worktree.
+- **Verification:** Trusted-publishing/release-verifier contracts passed
+  **8/8**. Seven archives and six sidecars plus checksums were generated, but
+  strict release verification failed closed on seven unresolved dependency
+  license review blockers.
+- **Disposition:** `DIST-002`/`DIST-003` remain unchecked for protected
+  trusted-publisher approval, legal/license decisions, and a zero-blocker
+  release artifact set. No npm, provider, customer, Production, payment, or
+  AppSec/Hunt state changed; `TEAM-CLI-001` remains checked.
+- **Evidence:**
+  `docs/shipping/evidence/dist-002-003-current-release-contract-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · DIST-001 current origin/main package qualification
 
 - **Source:** CLI `origin/main` at

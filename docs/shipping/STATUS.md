@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · DIST-002/003 current release-contract qualification
+
+The latest CLI merge passed the trusted-publishing and release-verifier
+contract suite **8/8**. It confirmed OIDC provenance, the protected release
+environment, immutable-tag verification, serialized publication, no
+long-lived-token/manual bypass, seven-package coverage, and pre-publish clean
+consumer ordering. Local release preparation then failed closed at the strict
+verifier because seven dependency-license review blockers remain unresolved.
+
+`DIST-002` and `DIST-003` remain unchecked for protected publisher/legal
+approval and a zero-blocker release artifact set. No npm, provider, customer,
+Production, payment, or AppSec/Hunt state changed. `TEAM-CLI-001` remains
+checked.
+
+Evidence: `evidence/dist-002-003-current-release-contract-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · DIST-001 current origin/main package qualification
 
 The exact CLI merge `0823b513` produced seven public archives in a disposable
