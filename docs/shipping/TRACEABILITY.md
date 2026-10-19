@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## DIST-006 rollback/revocation evidence generator · 2026-10-19
+
+- **Source mapping:** CLI implementation commit `5dda94f0` merged normally in
+  PR #150 as `31b10613`; no squash or rebase was used.
+- **Contract mapping:** `release:rollback-evidence` executes the canonical
+  local five-boundary fixture through the existing immutable decision contract,
+  records npm-package, engine-manifest, Hunt-feed, signing-identity, and
+  web-deployment actions, and checks that historical references are unchanged.
+- **Verification mapping:** The new generator test passed **1/1**; the full
+  CLI package test passed with the existing single explicit Hunt A2 skip and no
+  failures. Hosted matrix run `39183406848`, in-toto binding job
+  `117840752558`, official validators `39183406856`, and self-scan
+  `39183406983` all passed.
+- **Acceptance mapping:** This is local decision-contract and evidence
+  generation only. `DIST-006` remains unchecked for authenticated provider,
+  registry, engine/feed, signing, and Web deployment rollback/revocation
+  acceptance and final release mapping. No AppSec-held checkbox changed; score
+  remains **235/45/280 (83.9%)**.
+- **Evidence:** `evidence/dist-006-rollback-rehearsal-evidence-2026-10-19.md`.
+
 ## DIST-003 release artifact contract hardening · 2026-10-19
 
 - **Source mapping:** CLI implementation commit `8542ab7f` merged normally in

@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · DIST-006 rollback/revocation evidence generator
+
+- **Implementation:** CLI PR #150 merged normally as `31b10613`, preserving
+  implementation commit `5dda94f0`. The public CLI now exposes a bounded
+  `release:rollback-evidence` command that runs the canonical five-operation
+  fixture and writes a source-free report with operation actions and historical
+  record preservation.
+- **Verification:** The new generator test passed **1/1**; the canonical local
+  report passed with five operations, two historical records, and
+  `historicalRecordsPreserved: true`. The full CLI package test passed with the
+  existing single explicit Hunt A2 skip and no failures. Hosted matrix run
+  `39183406848`, self-scan `39183406983`, official validators `39183406856`,
+  and in-toto job `117840752558` passed.
+- **Disposition:** This is a substantive implementation and evidence advance,
+  not row closure. Keep `DIST-006` unchecked pending authenticated provider,
+  registry, engine/feed, signing, and Web deployment rollback/revocation
+  acceptance plus final release mapping. No provider, customer, Production, or
+  AppSec/Hunt state changed.
+- **Evidence:**
+  `docs/shipping/evidence/dist-006-rollback-rehearsal-evidence-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · DIST-003 release artifact contract hardening
 
 - **Implementation:** CLI PR #149 merged normally as `5abf451f`, preserving

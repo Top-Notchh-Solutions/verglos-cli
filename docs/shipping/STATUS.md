@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · DIST-006 rollback/revocation evidence generator
+
+CLI PR #150 merged normally as `31b10613`, preserving implementation commit
+`5dda94f0`. The CLI now exposes a bounded `release:rollback-evidence` command
+that runs the canonical five-boundary rollback/revocation fixture and writes a
+source-free report proving five operations and preservation of two historical
+record references. It performs no npm, registry, signing, Hunt-feed, Vercel,
+or Production write.
+
+The new generator test passed **1/1**; the full CLI package test passed with
+the existing single explicit Hunt A2 skip and no failures. Hosted Ubuntu/
+macOS/Windows Node 20/22/24, in-toto release binding, official
+standard/provenance validators, and self-scan all passed. `DIST-006` remains
+unchecked pending authenticated rollback/revocation acceptance and final
+release mapping. No provider, customer, Production, or AppSec state changed.
+
+Evidence: `evidence/dist-006-rollback-rehearsal-evidence-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · DIST-003 release artifact contract hardening
 
 CLI PR #149 merged normally as `5abf451f`, preserving implementation commit
