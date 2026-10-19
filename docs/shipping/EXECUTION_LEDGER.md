@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · DIST-002 npm preflight hardening merged
+
+- **Source:** CLI PR #155 merged normally as
+  `abf41a0068936927010dab626b21a4e3087de10f`, preserving implementation
+  `0e05ec44` and regression `3abae6d8`. No squash, rebase, force-push, or
+  artificial contribution was used.
+- **Original logic:** `scripts/publish-public-package.mjs` validates each
+  archive manifest and exact registry/package identity, skips only on an exact
+  version HTTP 200, invokes the real `npm publish --access public
+  --provenance --tag alpha` only on HTTP 404, and fails closed on redirects,
+  other HTTP statuses, timeouts, and network failures. All seven workflow
+  publication steps use the helper.
+- **Verification:** Focused contracts **11/11**, relevant release batch
+  **30/30**, locked install, build **8/8**, YAML parse, and diff check passed.
+  Hosted matrix `39258180496` passed **12/12**; standard/provenance
+  `39258181018` and self-scan `39258180412` passed.
+- **Disposition:** This closes the identified registry-preflight defect only.
+  `DIST-002` remains unchecked for protected publisher approval, trusted
+  keyless npm/OIDC configuration, legal/release clearance, actual immutable
+  publication/attestation, and final acceptance. No npm/provider/Production
+  write occurred. Score remains **239/41/280 (85.4%)**; AppSec/Hunt remains
+  held.
+- **Evidence:**
+  `docs/shipping/evidence/dist-002-npm-preflight-pr155-2026-10-19.md`.
+
 ## 2026-10-19 · overall shipping continuation remains active
 
 ## 2026-10-19 · ENT-CLI-001 private-runner endpoint binding merged

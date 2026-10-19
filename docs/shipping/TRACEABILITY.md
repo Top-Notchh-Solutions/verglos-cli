@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## DIST-002 npm publication preflight hardening · 2026-10-19
+
+- **Source mapping:** CLI PR #155 merged normally as
+  `abf41a0068936927010dab626b21a4e3087de10f`, preserving implementation
+  `0e05ec44` and regression `3abae6d8`.
+- **Implementation mapping:** `scripts/publish-public-package.mjs` is used
+  by all seven public package publication steps in
+  `.github/workflows/publish.yml`. It validates archive identity and performs
+  a bounded exact-version preflight: 200 skips, 404 publishes through the
+  real npm command with provenance, and every other/failed response aborts.
+- **Verification mapping:** Focused publisher/workflow/artifact/tag tests
+  **11/11**, relevant release batch **30/30**, locked install, build **8/8**,
+  YAML parse, and diff check passed. Hosted matrix `39258180496` passed
+  **12/12**; standard/provenance `39258181018` and self-scan `39258180412`
+  passed.
+- **Acceptance mapping:** `DIST-002` remains open for protected publisher
+  approval, trusted keyless npm/OIDC configuration, legal/release clearance,
+  actual immutable publication/attestation, and final acceptance. Score
+  remains **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/dist-002-npm-preflight-pr155-2026-10-19.md`.
+
 ## Active continuation state · 2026-10-19
 
 ## ENT-CLI-001 private-runner endpoint binding · 2026-10-19

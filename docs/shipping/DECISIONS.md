@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain DIST-002 after npm preflight hardening
+
+- **Decision:** Accept CLI PR #155 as substantive original-logic progress and
+  retain `DIST-002` unchecked.
+- **Observed:** Separate implementation `0e05ec44` and regression
+  `3abae6d8` merged normally as `abf41a0068936927010dab626b21a4e3087de10f`.
+  The publisher now distinguishes exact-version HTTP 200, exact-version
+  HTTP 404, and all other/failed registry responses. The latter fail closed.
+- **Verification:** Focused **11/11**, full release batch **30/30**, build
+  **8/8**, locked install, YAML parse, and diff check passed. Hosted matrix
+  `39258180496` passed **12/12**; standard/provenance `39258181018` and
+  self-scan `39258180412` passed.
+- **Reason:** This hardens the real publication path but does not prove
+  protected approval, trusted keyless publisher configuration, legal release
+  clearance, immutable npm publication/attestation, or final acceptance.
+- **Disposition:** Keep `DIST-002` unchecked. Score remains
+  **239/41/280 (85.4%)**; AppSec/Hunt and all unrelated external gates remain
+  unchanged.
+- **Evidence:**
+  `evidence/dist-002-npm-preflight-pr155-2026-10-19.md`.
+
 ## 2026-10-19 · retain ENT-CLI-001 after endpoint-binding merge
 
 - **Decision:** Accept CLI PR #153 as substantive original-logic progress and

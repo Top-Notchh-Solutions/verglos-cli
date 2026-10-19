@@ -2,6 +2,31 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · DIST-002 npm preflight hardening merged
+
+CLI PR #155 merged normally as `abf41a0068936927010dab626b21a4e3087de10f`,
+preserving separate original-logic implementation `0e05ec44` and regression
+coverage `3abae6d8`. The seven public package publication steps now validate
+the archive manifest and exact registry/package identity, skip only when the
+exact version returns HTTP 200, publish only on HTTP 404, and fail closed on
+redirects, other registry statuses, timeouts, and network errors. The real
+publish command retains `--provenance` and the existing OIDC release boundary.
+
+Local focused contracts passed **11/11**; the full relevant release batch
+passed **30/30**; install, build **8/8**, YAML parse, and diff checks passed.
+Hosted platform matrix `39258180496` passed **12/12** across Ubuntu/macOS/
+Windows Node 20/22/24 plus in-toto. Standard/provenance `39258181018` and
+self-scan `39258180412` passed.
+
+This is original implementation and qualification evidence, not full
+publication acceptance. `DIST-002` remains unchecked for protected publisher
+approval, trusted keyless npm/OIDC configuration, legal/release clearance,
+actual immutable publication/attestation, and final acceptance. No npm,
+provider, Production, entitlement, or customer write occurred. Score remains
+**239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt remains held.
+
+Evidence: `evidence/dist-002-npm-preflight-pr155-2026-10-19.md`.
+
 ## 2026-10-19 · ENT-CLI-001 endpoint binding merged
 
 CLI PR #153 merged normally as `eb08f3533594458703cd4ee6143b8cbca105bcaf`,
