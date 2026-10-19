@@ -2,6 +2,22 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · STUDIO-CLI-001 production entitlement observation
+
+- **Read-only production observation:** The existing authenticated owner session
+  at `https://verglos.com/orgs/top-notchh-solutions/billing` reports effective
+  plan `free`, license state `no active paid license`, new purchase state
+  `not purchasable`, no provider subscription/payment rows, and hosted records
+  `Allowance is not configured; this is not unlimited.`
+- **Interpretation:** The original upload authorization path is implemented and
+  merged, but this production state does not supply the numeric paid/non-
+  production hosted-record allowance or authorized Studio recipient/customer
+  acceptance required by `STUDIO-CLI-001`. No checkbox is changed and no
+  AppSec/Hunt state is changed.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-production-entitlement-observation-2026-10-19.md`.
+- **Score:** **239 checked / 41 open / 280 total (85.4%)**.
+
 ## 2026-10-19 · STUDIO-CLI-001 original production upload authorization
 
 - **Source:** Web PR #228 merged normally as
