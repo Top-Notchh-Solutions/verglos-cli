@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ACCEPT-003 current evidence bundle
+
+- **Implementation:** The private bundle generator now includes the current
+  `acceptance-stories-verification-2026-10-19.json` result and its bounded
+  report, so the reproducibility manifest cannot silently omit the latest
+  substrate run.
+- **Verification:** `node scripts/build-acceptance-evidence-bundle.mjs` with
+  `VERGLOS_ACCEPTANCE_BUNDLE_OUTPUT=docs/shipping/evidence/acceptance-evidence-bundle-2026-10-19.json`
+  hashed **14 files** and passed the secret-like material scan.
+- **Boundary:** The bundle contains hashes and bounded evidence references,
+  not source, credentials, customer data, provider captures, or reviewer
+  sign-off. It explicitly records provider lifecycle, customer consent,
+  independent review, authenticated browser, field CWV, and account deletion
+  as open.
+- **Disposition:** Keep `ACCEPT-003` unchecked; this is evidence-bundle
+  integrity progress only. No AppSec state or checkbox changed; score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/acceptance-evidence-bundle-2026-10-19.json` and
+  `docs/shipping/evidence/accept-003-current-evidence-bundle-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-002 current-source substrate verification
 
 - **Source:** The frozen acceptance verifier ran against CLI merge

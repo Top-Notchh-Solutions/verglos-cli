@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · ACCEPT-003 current evidence bundle
+
+The private evidence-bundle generator now includes the current ACCEPT-002
+verifier JSON and bounded report. The fresh manifest hashed **14 files** and
+passed the secret-like material scan. It records hashes and sizes only and
+keeps provider lifecycle, customer consent, independent review, authenticated
+browser, field CWV, and account deletion explicitly open.
+
+`ACCEPT-003` remains unchecked because the required reviewer sign-off and
+external/hosted evidence are not present. No AppSec state changed; score
+remains **235 checked / 45 open / 280 total (83.9%)**. Evidence:
+`evidence/acceptance-evidence-bundle-2026-10-19.json` and
+`evidence/accept-003-current-evidence-bundle-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-002 current-source substrate verification
 
 The private twelve-story verifier ran against CLI `50bcab42` and Web

@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-19 · ACCEPT-003 current evidence bundle
+
+The private evidence-bundle generator now includes the current ACCEPT-002
+verifier JSON and bounded report. The generated manifest hashed **14 files**
+and passed its secret-like material scan; it records hashes/sizes only and
+does not contain source, credentials, customer data, provider captures, or
+reviewer sign-off.
+
+`ACCEPT-003` remains unchecked for required reviewer sign-off and the mapped
+external/hosted evidence. No AppSec state changed. Score remains **235 checked
+ / 45 open / 280 total (83.9%)**. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-19.json` and
+`docs/shipping/evidence/accept-003-current-evidence-bundle-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-002 current-source substrate verification
 
 The current frozen acceptance verifier passed against CLI merge
