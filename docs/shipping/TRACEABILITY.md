@@ -2,6 +2,22 @@
 
 ## Active continuation state · 2026-10-19
 
+## QUAL-CLI-006 standard-validation fixture confinement · 2026-10-19
+
+- **Source mapping:** CLI `origin/main`
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`; implementation `23280174` and
+  regression `cbb07472` are separate commits in PR #154.
+- **Verification mapping:** Standard-validation inputs for Sigstore are
+  confined to the artifact root, including resolved symlink checks. The
+  standard-validation and contract suite passed **10/10** with zero failures
+  or skips.
+- **Acceptance mapping:** `QUAL-CLI-006` remains unchecked for trusted
+  keyless publication, protected release, legal clearance, independent AppSec
+  review, and final acceptance. Score remains **239/41/280 (85.4%)**; no
+  AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/qual-cli-006-standard-fixture-root-2026-10-19.md`.
+
 ## ENT-CLI-001 private-runner route binding · 2026-10-19
 
 - **Source mapping:** CLI `origin/main`

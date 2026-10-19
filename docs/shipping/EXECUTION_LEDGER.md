@@ -2,6 +2,24 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · QUAL-CLI-006 standard-validation fixture confinement
+
+- **Source:** CLI `origin/main` `0823b513f2b1810ad9f6afcb8806ba46f61feedb`,
+  with implementation `23280174` and regression `cbb07472` in separate
+  commits on PR #154.
+- **Implementation:** Configured Sigstore fixture paths are now confined to
+  the declared artifact root by lexical and resolved-path checks. Outside-root
+  and symlink-escape inputs fail closed before external validator execution;
+  bounded file, argv, timeout, output, and redacted-result behavior remains.
+- **Verification:** Standard-validation and contract tests **10/10**, zero
+  failures/skips; `git diff --check` passed.
+- **Disposition:** `QUAL-CLI-006` remains unchecked for trusted keyless
+  publication, protected release, legal clearance, independent AppSec review,
+  and final acceptance. Score remains **239/41/280 (85.4%)**. No provider,
+  npm, production, customer, or AppSec state changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-standard-fixture-root-2026-10-19.md`.
+
 ## 2026-10-19 · ENT-CLI-001 private-runner route binding
 
 - **Source:** CLI `origin/main` `0823b513f2b1810ad9f6afcb8806ba46f61feedb`,

@@ -2,6 +2,22 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · QUAL-CLI-006 standard-validation fixture confinement
+
+The original standard-validation runner now confines configured Sigstore
+payload, bundle, key, and trusted-root fixtures to the declared artifact root,
+including resolved symlink checks, before invoking external validators.
+Implementation and regression commits `23280174` and `cbb07472` remain
+separate in PR #154.
+
+The standard-validation and contract suite passed **10/10**, with zero
+failures or skips. `QUAL-CLI-006` remains unchecked for trusted keyless
+publication identity, protected publication, legal clearance, independent
+AppSec review, and final acceptance. Score remains **239 checked / 41 open /
+280 total (85.4%)**; AppSec/Hunt state was not changed.
+
+Evidence: `evidence/qual-cli-006-standard-fixture-root-2026-10-19.md`.
+
 ## 2026-10-19 · ENT-CLI-001 private-runner route binding
 
 The original CLI private-runner client now reconstructs the exact tenant/
