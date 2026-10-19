@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · GITHUB-WEB-002 provider lifecycle checked
+
+- **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` from a
+  disposable clean qualification worktree.
+- **Verification:** The focused App/JWT exchange, immutable provider identity,
+  permission, expiry/refresh, lifecycle, and fail-closed reauthorization
+  contracts passed **25/25**, with zero failures or skips. Existing GitHub
+  installation `172686102` was suspended and then unsuspended through the
+  authenticated organization UI; GitHub confirmed restoration and preserved
+  the selected `Top-Notchh-Solutions/verglos-cli` scope plus metadata-read and
+  checks-read/write permissions.
+- **Disposition:** `GITHUB-WEB-002` is checked. Keep GITHUB-WEB-003 open for
+  live delivery/replay/reconciliation and GITHUB-WEB-004 open for complete
+  organization cutover, uninstall, and recovery. No production, customer,
+  payment, npm, or AppSec/Hunt state changed.
+- **Evidence:**
+  `docs/shipping/evidence/github-web-002-provider-lifecycle-2026-10-19.md`
+  and the preserved contract log under the GITHUB-WEB-001 artifact directory.
+- **Score:** **237 checked / 43 open / 280 total (84.6%)**.
+
 ## 2026-10-19 · GITHUB-WEB-001 installation identity checked
 
 - **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` from a

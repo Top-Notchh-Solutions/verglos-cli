@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · GITHUB-WEB-002 provider lifecycle checked
+
+The current Web merge `0719074d` passed the focused App/JWT exchange,
+permission, expiry/refresh, lifecycle, and fail-closed reauthorization suite
+**25/25**, with zero failures or skips. In the existing authenticated Chrome
+page, the owner-controlled GitHub installation `172686102` was suspended and
+then unsuspended; GitHub confirmed restoration and preserved the selected
+`Top-Notchh-Solutions/verglos-cli` repository plus metadata-read and
+checks-read/write permissions.
+
+`GITHUB-WEB-002` is now checked. GITHUB-WEB-003 remains open for live
+delivery/replay/reconciliation, and GITHUB-WEB-004 remains open for complete
+organization cutover, uninstall, and recovery. No new browser page or window
+was created, and Hunt/AppSec state is unchanged. Score is now **237 checked /
+43 open / 280 total (84.6%)**.
+
+Evidence: `evidence/github-web-002-provider-lifecycle-2026-10-19.md`.
+
 ## 2026-10-19 · GITHUB-WEB-001 installation identity checked
 
 The exact Web merge `0719074d` passed the focused GitHub identity and

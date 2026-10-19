@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## GITHUB-WEB-002 provider lifecycle checked · 2026-10-19
+
+- **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
+  was exercised from a disposable clean worktree.
+- **Verification mapping:** App/JWT exchange, immutable provider identity,
+  least-privilege permission checks, expiry/refresh, lifecycle transitions,
+  and fail-closed reauthorization passed **25/25**. Existing installation
+  `172686102` was suspended and unsuspended in the authenticated GitHub
+  organization UI, with repository scope and permissions preserved.
+- **Acceptance mapping:** `GITHUB-WEB-002` is checked. GITHUB-WEB-003 remains
+  open for live delivery/replay/reconciliation, and GITHUB-WEB-004 remains
+  open for complete cutover, uninstall, and recovery. No AppSec-held checkbox
+  changed. Score is **237/43/280 (84.6%)**.
+- **Evidence:**
+  `evidence/github-web-002-provider-lifecycle-2026-10-19.md` and the
+  preserved contract log under `evidence/artifacts/github-web-001-2026-10-19/`.
+
 ## GITHUB-WEB-001 installation identity checked · 2026-10-19
 
 - **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
