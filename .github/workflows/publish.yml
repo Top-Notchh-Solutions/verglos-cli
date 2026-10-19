@@ -57,7 +57,7 @@ jobs:
         run: pnpm test
 
       - name: Test release artifact verifier
-        run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-third-party-notices.test.mjs scripts/license-inventory.test.mjs scripts/package-surface-audit.test.mjs scripts/external-license-records.test.mjs
+        run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-third-party-notices.test.mjs scripts/license-inventory.test.mjs scripts/package-surface-audit.test.mjs scripts/external-license-records.test.mjs scripts/publish-public-package.test.mjs
 
       - name: Verify release rollback/revocation rehearsal
         run: node scripts/verify-release-rollback-rehearsal.mjs
@@ -135,85 +135,34 @@ jobs:
       # a public repository." Visibility toggle:
       # https://github.com/Top-Notchh-Solutions/verglos-cli/settings.
       #
-      # Each publish step is idempotent: if the exact package@version
-      # is already on npm, the step logs a notice and exits 0. This
-      # protects against re-runs after a tag move / re-push and
-      # against partial-failure recovery (e.g. shared already
-      # published, scanner still needed).
+      # Each publish step is idempotent: the bounded preflight skips only an
+      # explicit registry 200 for the exact package@version. Registry errors
+      # fail closed instead of being mistaken for an unpublished version.
 
       - name: Publish shared package
         run: |
-          PKG_DIR=packages/shared
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-shared-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-shared-$(node -p "require('./packages/shared/package.json').version").tgz" alpha
 
       - name: Publish scanner package
         run: |
-          PKG_DIR=packages/scanner
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-scanner-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-scanner-$(node -p "require('./packages/scanner/package.json').version").tgz" alpha
 
       - name: Publish reporter package
         run: |
-          PKG_DIR=packages/reporter
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-reporter-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-reporter-$(node -p "require('./packages/reporter/package.json').version").tgz" alpha
 
       - name: Publish mcp package
         run: |
-          PKG_DIR=packages/mcp
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-mcp-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-mcp-$(node -p "require('./packages/mcp/package.json').version").tgz" alpha
 
       - name: Publish entitlement package
         run: |
-          PKG_DIR=packages/entitlement
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-entitlement-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-entitlement-$(node -p "require('./packages/entitlement/package.json').version").tgz" alpha
 
       - name: Publish Hunt package
         run: |
-          PKG_DIR=packages/hunt
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-hunt-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-hunt-$(node -p "require('./packages/hunt/package.json').version").tgz" alpha
 
       - name: Publish CLI package
         run: |
-          PKG_DIR=packages/cli
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-$(node -p "require('./packages/cli/package.json').version").tgz" alpha
