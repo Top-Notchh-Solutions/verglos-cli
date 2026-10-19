@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-19 · FINAL-WEB-008 merged public release smoke
+
+The merged Web head `47518c774a339e81ba66968e9cd6dbe0249b5e2d` passed the
+public-release smoke: **15 routes**, **22/22 publishable claims**, **2 proof
+assets**, **0 issues**, and regression **2/2**. The hosted PR checks were
+**8/8** green and the workflow uploads the report artifact.
+
+Keep `FINAL-WEB-008` unchecked for final truth-registry and acceptance
+dependencies. No AppSec state changed; score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/final-web-008-public-release-smoke-2026-10-19.md`.
+
 ## 2026-10-19 · FINAL-WEB-007 landing qualification substrate
 
 Web PR #227 merged normally as `47518c774a339e81ba66968e9cd6dbe0249b5e2`,

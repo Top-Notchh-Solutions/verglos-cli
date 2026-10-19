@@ -2,6 +2,19 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · FINAL-WEB-008 public release smoke
+
+- **Source:** Merged Web head `47518c774a339e81ba66968e9cd6dbe0249b5e2d`;
+  `scripts/public-release-smoke.ts` and its regression suite are wired into
+  the hosted verification workflow.
+- **Verification:** Public smoke audited **15 routes**, **22/22 publishable
+  claims**, **2 proof assets**, and **0 issues**. Regression tests passed
+  **2/2**; hosted PR checks passed **8/8**.
+- **Disposition:** Keep `FINAL-WEB-008` unchecked because this smoke is not
+  final acceptance or an independent browser/customer/field-CWV result. Score
+  remains **239/41/280 (85.4%)**; AppSec/Hunt-held state is unchanged.
+- **Evidence:** `docs/shipping/evidence/final-web-008-public-release-smoke-2026-10-19.md`.
+
 ## 2026-10-19 · FINAL-WEB-007 landing release qualification substrate
 
 - **Source:** Web PR #227 merged normally as

@@ -2,6 +2,21 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · FINAL-WEB-008 public release smoke
+
+The merged Web head `47518c774a339e81ba66968e9cd6dbe0249b5e2d` passed the
+existing public-release smoke against the actual public source manifest:
+**15 routes**, **22/22 publishable claims**, **2 proof assets**, and **0
+issues**. Its regression suite passed **2/2**, and PR #227 hosted checks were
+**8/8** green. The smoke is wired into `.github/workflows/verify.yml` with an
+uploaded report artifact.
+
+This is merged-head public-surface evidence only. `FINAL-WEB-008` remains
+unchecked for its final truth-registry/acceptance dependencies; score remains
+**239 checked / 41 open / 280 total (85.4%)** and AppSec/Hunt is unchanged.
+
+Evidence: `evidence/final-web-008-public-release-smoke-2026-10-19.md`.
+
 ## 2026-10-19 · FINAL-WEB-007 landing release qualification substrate
 
 Web PR #227 merged normally as `47518c774a339e81ba66968e9cd6dbe0249b5e2`,

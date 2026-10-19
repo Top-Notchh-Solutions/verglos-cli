@@ -2,6 +2,21 @@
 
 ## Active continuation state · 2026-10-19
 
+## FINAL-WEB-008 public release smoke · 2026-10-19
+
+- **Source mapping:** Web normal merge
+  `47518c774a339e81ba66968e9cd6dbe0249b5e2d`; smoke implementation and tests
+  are `scripts/public-release-smoke.ts` and
+  `scripts/public-release-smoke.test.ts`.
+- **Verification mapping:** The actual public source manifest covered **15
+  routes**; truth registry reported **22/22 publishable claims**, proof assets
+  **2**, and issues **0**. Regression tests passed **2/2** and hosted checks
+  passed **8/8**.
+- **Acceptance mapping:** `FINAL-WEB-008` remains unchecked because the local
+  and hosted smoke does not replace final truth-registry, customer, browser,
+  field-CWV, or release acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-public-release-smoke-2026-10-19.md`.
+
 ## FINAL-WEB-007 landing release qualification substrate · 2026-10-19
 
 - **Source mapping:** Web PR #227 merged normally as

@@ -1,47 +1,53 @@
-# FINAL-WEB-008 public release smoke · 2026-10-19
+# FINAL-WEB-008 public release smoke evidence
 
-**Disposition:** public truth/release-smoke qualification only;
-`FINAL-WEB-008` remains unchecked because its dependent final claim and
-acceptance rows are not complete.
+Date: 2026-10-19
 
-## Exact qualification
+## Source and scope
 
-- **Repository:** `anuragyadav-git/verglos-web`
-- **Source commit:** `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
-- **Worktree:** disposable clean qualification worktree
-  `/private/tmp/verglos-web-qual-web-005-route-e2e-20261019`
-- **Runtime:** macOS Darwin arm64; Node `v26.4.0`; pnpm `10.34.5`
-- **Scope:** source-level public route manifest, truth registry, public proof
-  asset contract, and stale-claim guard. No deploy, provider write, payment,
-  customer data, or AppSec/Hunt execution occurred.
+- Repository: `anuragyadav-git/verglos-web`
+- Verified tree: Web `origin/main` normal merge
+  `47518c774a339e81ba66968e9cd6dbe0249b5e2d` (`git diff --quiet origin/main`
+  from the qualification worktree).
+- Existing public-smoke implementation: `scripts/public-release-smoke.ts`
+  and `scripts/public-release-smoke.test.ts`.
+- Hosted workflow: `.github/workflows/verify.yml` runs the smoke and uploads
+  its report; PR #227 hosted checks passed **8/8**.
 
-## Commands and results
+## Original logic and observed result
 
-```text
-pnpm test:public-release-smoke       PASS: 2/2, 0 failed, 0 skipped
-pnpm public:release-smoke            PASS: exit 0
-```
+The smoke reads the actual public route/source manifest, requires each mapped
+source surface and its truth-registry wiring, rejects stale prices and
+unsupported claims, validates the public truth snapshot and proof assets, and
+returns a versioned report. It does not claim that final acceptance or browser
+field performance has occurred.
 
-The generated report returned schema
-`urn:verglos:public-release-smoke:v1`, status `passed`, 15 public routes, 22
-total truth claims, 22 publishable claims, 2 bounded public proof assets, and
-an empty issue list. The regression test also injected a stale `$29/mo` claim
-into a temporary copy and verified that the smoke guard rejected it.
+Observed report:
 
-## Evidence integrity
+- Schema: `urn:verglos:public-release-smoke:v1`
+- Status: `passed`
+- Public routes audited: **15**
+- Homepage claims: **7**
+- Machine-readable claims: **15**
+- Total claims: **22**
+- Publishable claims: **22**
+- Proof assets: **2**
+- Issues: **0**
+- Regression tests: **2/2 pass, 0 fail**
 
-- Test terminal log SHA-256:
-  `2e94168cef036f0c09b25eed6791655070ce96b6d7b8c450c9866890f475eff8`
-- Smoke terminal log SHA-256:
-  `5251365730983e9b6c2a14d0a38d658c72d35aad5046fc21d2fb00419fe89e66`
-- No raw source, private evidence, credentials, or customer data was copied
-  into this ledger.
+Commands:
 
-## Acceptance boundary
+- `pnpm public:release-smoke`
+- `pnpm test:public-release-smoke`
 
-This qualifies the source-level public claim sweep and release smoke only. It
-does not close `FINAL-WEB-008`, which remains dependent on FINAL-WEB-001–007,
-ACCEPT-003/009, hosted/field acceptance, and the final release decision.
-`TEAM-CLI-001` remains checked; AppSec/Hunt rows were not changed.
+The command output is retained at `/tmp/verglos-public-release-smoke-20261019.json`
+for the local run; the hosted workflow artifact remains the authoritative CI
+copy.
 
-**Score:** **235 checked / 45 open / 280 total (83.9%)**.
+## Disposition
+
+This is substantive public-surface implementation and merged-head smoke
+evidence. `FINAL-WEB-008` remains unchecked because its row is downstream of
+final truth-registry/acceptance sequencing and does not permit a local smoke
+pass to substitute for final acceptance. No production, customer, provider,
+billing, publication, credential, or AppSec state changed. Score remains
+**239 checked / 41 open / 280 total (85.4%)**.

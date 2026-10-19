@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain FINAL-WEB-008 after merged public smoke
+
+- **Decision:** Accept the merged public smoke as substantive release-surface
+  evidence while retaining `FINAL-WEB-008` unchecked.
+- **Observed:** Web merge `47518c774a339e81ba66968e9cd6dbe0249b5e2d` audited 15
+  routes, 22/22 publishable claims, 2 proof assets, and 0 issues; its tests
+  passed 2/2 and hosted checks passed 8/8.
+- **Reason:** A public source smoke is not final acceptance, a browser human
+  review, field-CWV observation, customer acceptance, or AppSec evidence.
+- **Disposition:** Keep the row open; score remains **239/41/280 (85.4%)** and
+  AppSec/Hunt state is unchanged.
+- **Evidence:** `evidence/final-web-008-public-release-smoke-2026-10-19.md`.
+
 ## 2026-10-19 · retain FINAL-WEB-007 after qualification-substrate implementation
 
 - **Decision:** Accept Web PR #227, merged normally as
