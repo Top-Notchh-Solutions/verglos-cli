@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-19T00:09:12.274Z",
+  "generatedAt": "2026-10-19T00:12:43.711Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -36,6 +36,11 @@
       "path": "docs/shipping/evidence/acceptance-story-tests-2026-10-03.md",
       "sha256": "d7e6a78ded7532396f0b0110d63a15c8812623a342dd4cddf5ec622d1b4af708",
       "bytes": 3749
+    },
+    {
+      "path": "docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md",
+      "sha256": "d4b40965439ce75593441fb7edb2fdd71defb5da931506883479b9f9251e1686",
+      "bytes": 3850
     },
     {
       "path": "docs/shipping/acceptance/external-workflow-protocol.md",

@@ -1,13 +1,14 @@
 # ACCEPT-003 current evidence bundle — 2026-10-19
 
 The private bundle generator was updated to include the current ACCEPT-002
-verifier JSON and its bounded report, then run with:
+verifier JSON/report and the bounded first-party ACCEPT-005 qualification
+record, then run with:
 
 ```text
 VERGLOS_ACCEPTANCE_BUNDLE_OUTPUT=docs/shipping/evidence/acceptance-evidence-bundle-2026-10-19.json node scripts/build-acceptance-evidence-bundle.mjs
 ```
 
-Result: **14 files hashed**, secret-like material scan **passed**, and the
+Result: **15 files hashed**, secret-like material scan **passed**, and the
 bundle was generated successfully. The manifest records hashes and sizes only;
 it contains no source, credentials, customer data, or reviewer sign-off.
 
