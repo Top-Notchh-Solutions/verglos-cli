@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## GITHUB-WEB-004 cutover readiness boundary · 2026-10-19
+
+- **Observation mapping:** The active owner-controlled installation `172686102`
+  remains installed with the exact selected repository and least-privilege
+  permissions; App settings exposes its recovery installation entry point.
+- **Safety mapping:** GitHub displayed an irreversible uninstall confirmation
+  for one repository. It was dismissed, so no uninstall or recovery claim is
+  made.
+- **Acceptance mapping:** `GITHUB-WEB-004` remains open for authorized
+  uninstall/recovery and post-recovery webhook/check evidence. GITHUB-WEB-001–003
+  are checked; no AppSec-held checkbox changed. Score is **238/42/280
+  (85.0%)**.
+- **Evidence:** `evidence/github-web-004-cutover-readiness-2026-10-19.md`.
+
 ## GITHUB-WEB-003 delivery and reconciliation checked · 2026-10-19
 
 - **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`

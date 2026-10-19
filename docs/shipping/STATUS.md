@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · GITHUB-WEB-004 cutover readiness boundary
+
+The active GitHub installation `172686102` remains bound to
+`Top-Notchh-Solutions/verglos-cli` with metadata-read and checks-read/write
+permissions. The existing App settings page exposes the recovery installation
+entry point. Opening the owner-controlled uninstall action displayed GitHub's
+irreversible confirmation for one repository; it was dismissed and no
+provider, webhook, repository, or Production state changed.
+
+`GITHUB-WEB-004` remains unchecked until authorized uninstall/recovery and
+post-recovery delivery/check-publication evidence exists. GITHUB-WEB-001–003
+are checked, AppSec/Hunt is unchanged, and the score remains **238 checked /
+42 open / 280 total (85.0%)**.
+
+Evidence: `evidence/github-web-004-cutover-readiness-2026-10-19.md`.
+
 ## 2026-10-19 · GITHUB-WEB-003 delivery and reconciliation checked
 
 The current Web implementation and protected Preview qualification proved the

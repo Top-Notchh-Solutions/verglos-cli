@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · GITHUB-WEB-004 cutover readiness boundary recorded
+
+- **Observation:** The existing GitHub App settings page shows the owner
+  organization as `Installed` and exposes installation-settings entry point
+  `172686102` for the active `verglos-cli` scope.
+- **Safety boundary:** Opening the owner-controlled uninstall action displayed
+  GitHub's irreversible-action confirmation for one repository. The dialog was
+  dismissed; no uninstall, revocation, webhook change, or production state
+  change occurred.
+- **Disposition:** `GITHUB-WEB-004` remains unchecked until the authorized
+  uninstall/recovery and post-recovery delivery/check-publication evidence is
+  completed. This is a precise blocker record, not a cutover result. No
+  AppSec/Hunt state changed; score remains **238 checked / 42 open / 280
+  total (85.0%)**.
+- **Evidence:**
+  `docs/shipping/evidence/github-web-004-cutover-readiness-2026-10-19.md`.
+
 ## 2026-10-19 · GITHUB-WEB-003 delivery and reconciliation checked
 
 - **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`, with the
