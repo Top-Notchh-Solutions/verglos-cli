@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## DIST-003 release artifact contract hardening · 2026-10-19
+
+- **Source mapping:** CLI implementation commit `8542ab7f` merged normally in
+  PR #149 as `5abf451f`; no squash or rebase was used.
+- **Contract mapping:** The release workflow contract requires every generated
+  checksum, notices, CycloneDX/SPDX SBOM, external-license, dependency-license,
+  and clean-consumer sidecar to be uploaded with `if-no-files-found: error`
+  before the first `npm publish`; release-artifact verification must precede
+  upload.
+- **Verification mapping:** Focused local contract test passed **1/1** and the
+  diff check passed. Hosted platform matrix run `39182478465`, in-toto binding
+  job `117837979585`, official validators `39182478551`, and self-scan
+  `39182478499` all passed.
+- **Acceptance mapping:** This advances the code-side evidence contract only.
+  `DIST-003` remains unchecked for real immutable publication/attestation,
+  release-note and license-clearance evidence, trusted-publishing review, and
+  final acceptance. No AppSec-held checkbox changed; score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:** `evidence/dist-003-release-artifact-contract-2026-10-19.md`.
+
 ## DIST-002 trusted publishing workflow hardening · 2026-10-19
 
 - **Source mapping:** CLI implementation commit `35faf977` merged normally in

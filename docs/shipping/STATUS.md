@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · DIST-003 release artifact contract hardening
+
+CLI PR #149 merged normally as `5abf451f`, preserving implementation commit
+`8542ab7f`. The release-workflow contract now requires checksum, notices,
+CycloneDX/SPDX SBOM, external-license, dependency-license, and clean-consumer
+evidence sidecars to be uploaded with `if-no-files-found: error` before the
+first `npm publish`, and requires release-artifact verification before upload.
+
+The focused local contract test passed **1/1** and `git diff --check` passed.
+Hosted Ubuntu/macOS/Windows Node 20/22/24, in-toto release binding, official
+standard/provenance validators, and self-scan all passed. This is an
+implementation advance only: `DIST-003` remains unchecked pending actual
+immutable publication/attestation, release-note and license-clearance
+evidence, trusted-publishing review, and final acceptance. No npm, provider,
+customer, Production, or AppSec state changed.
+
+Evidence: `evidence/dist-003-release-artifact-contract-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · DIST-002 trusted publishing hardening
 
 CLI PR #148 merged normally as `0823b513f`, preserving implementation commit

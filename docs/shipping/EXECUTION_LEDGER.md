@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · DIST-003 release artifact contract hardening
+
+- **Implementation:** CLI PR #149 merged normally as `5abf451f`, preserving
+  implementation commit `8542ab7f`. The release-workflow contract now requires
+  all generated checksum, notices, SBOM, external-license, dependency-license,
+  and clean-consumer sidecars to be uploaded with `if-no-files-found: error`
+  before publication. It also requires release-artifact verification before
+  the upload step.
+- **Verification:** Focused local workflow-contract test passed **1/1** and
+  `git diff --check` passed. Hosted run `39182478465` passed all nine
+  Ubuntu/macOS/Windows Node 20/22/24 jobs; self-scan `39182478499`, official
+  standard/provenance validators `39182478551`, and in-toto job
+  `117837979585` passed.
+- **Disposition:** This is a substantive implementation advance, not row
+  closure. Keep `DIST-003` unchecked pending actual immutable publication and
+  attestation, release-note and license-clearance evidence, trusted-publishing
+  review, and final acceptance. No npm, provider, customer, Production, or
+  AppSec/Hunt state changed.
+- **Evidence:**
+  `docs/shipping/evidence/dist-003-release-artifact-contract-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · DIST-002 trusted publishing workflow hardening
 
 - **Implementation:** CLI PR #148 merged normally as `0823b513f`, preserving
