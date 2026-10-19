@@ -9,8 +9,8 @@
   no-index metadata and is covered by the public release-smoke manifest. The
   global stylesheet now honors reduced-motion preferences. Focused
   route/smoke/motion tests passed **7/7**, command smoke reported 16 routes,
-  22/22 publishable claims, 2 proof assets, and 0 issues; typecheck and diff
-  check passed.
+  22/22 publishable claims, 2 proof assets, and 0 issues; typecheck, the
+  optimized 48-page build, and diff check passed.
 - **Reason:** This proves code-side route truth, crawl-boundary behavior, and
   reduced-motion handling, not human/browser/field acceptance,
   hosted/customer acceptance, legal/release approval, final acceptance, or a

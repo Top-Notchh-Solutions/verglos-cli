@@ -35,6 +35,7 @@ transitions across the public journey.
   claims / 22 publishable**, **2 proof assets**, **0 issues**.
 - `pnpm typecheck`: passed. The repository engine warning was recorded:
   local Node `v26.4.0` / pnpm `10.34.5`; package requests Node `22.x`.
+- `pnpm build`: passed; Next.js compiled and generated all **48 pages**.
 - `git diff --check`: passed.
 
 ## Acceptance boundary

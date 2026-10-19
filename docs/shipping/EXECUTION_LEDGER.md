@@ -14,8 +14,8 @@
   stylesheet now disables animation, transition, and smooth-scroll behavior
   when the user prefers reduced motion.
 - **Verification:** Focused tests **7/7**, public release smoke **16 routes,
-  22/22 publishable claims, 2 proof assets, 0 issues**, typecheck pass, and
-  `git diff --check` pass.
+  22/22 publishable claims, 2 proof assets, 0 issues**, typecheck pass, the
+  optimized 48-page build pass, and `git diff --check` pass.
 - **Disposition:** `FINAL-WEB-007` and `FINAL-WEB-008` remain unchecked for
   human/browser/field acceptance and dependent hosted/customer/legal/release
   evidence. Score remains **239/41/280 (85.4%)**. No production, provider,

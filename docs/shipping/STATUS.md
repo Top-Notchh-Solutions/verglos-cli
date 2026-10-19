@@ -16,7 +16,8 @@ Implementation commits `37c3f36` and `caa8ac0`, plus regression commits
 The combined focused public-release, receipt-route, and motion tests passed
 **7/7**, the public
 release smoke passed with **16 routes, 22/22 publishable claims, 2 proof
-assets, and 0 issues**, typecheck passed, and diff check passed. The local
+assets, and 0 issues**, typecheck passed, the optimized Next.js build
+generated **48 pages**, and diff check passed. The local
 runtime was Node `v26.4.0` / pnpm `10.34.5` while the package requests Node
 `22.x`.
 
