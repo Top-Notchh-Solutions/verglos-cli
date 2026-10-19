@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-19 · STUDIO-CLI-001 entitlement and recipient-evidence implementation
+
+Web commits `38d6eb0` and `62a54b5` add the real server-side Studio
+`white_label_report` entitlement gate to client-workspace creation, handoff
+issuance, and client-projection upload, plus a deterministic audit-backed
+recipient acknowledgement evidence digest. Focused post-commit qualification
+passed **35/35**; full Web tests passed **903/903 executed** with **24
+explicit skips**, typecheck and diff check passed. The production build was
+not accepted because the worktree's Next invocation discovered unresolved
+conflict markers in the unrelated dirty parent checkout's `package.json`.
+
+This is implementation evidence, not fabricated commercial or customer
+acceptance. Keep `STUDIO-CLI-001` unchecked pending an approved isolated
+Studio entitlement and an actual authorized recipient/customer acknowledgement
+with the resulting hosted/audit evidence. Score remains **239 checked / 41
+open / 280 total (85.4%)**; AppSec/Hunt remains held separately. Evidence:
+`docs/shipping/evidence/studio-cli-001-entitlement-recipient-implementation-2026-10-19.md`.
+
 ## 2026-10-19 · active continuation after authorized GitHub recovery
 
 The overall shipping goal remains active; the completed GitHub cutover was a

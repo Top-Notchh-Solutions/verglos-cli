@@ -1,5 +1,30 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain STUDIO-CLI-001 after entitlement and receipt-evidence implementation
+
+- **Decision:** Accept Web commits `38d6eb0` and `62a54b5` as substantive,
+  separate original-logic implementation progress; retain the row unchecked.
+- **Observed:** Hosted client-workspace creation, client-handoff issuance, and
+  client-projection upload now require the server-resolved active Studio
+  entitlement and `white_label_report` capability. Recipient acknowledgement
+  emits and audits a bounded digest tied to the exact handoff, issuance,
+  artifact, normalized recipient, and server timestamp.
+- **Verification:** Post-commit focused qualification **35/35**, full Web
+  tests **903 pass / 24 skipped / 0 fail**, typecheck passed, and diff check
+  passed. The production build was not accepted from this worktree because
+  Next resolved the dirty parent checkout's invalid conflict-marked
+  `package.json`; the parent checkout was not changed.
+- **Reason:** This is code-side entitlement and evidence progress. No paid or
+  isolated non-production entitlement was activated, and no authorized
+  external recipient/customer acknowledgement was observed. Local tests cannot
+  substitute for that row-specific acceptance artifact.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked. Score remains **239/41/280
+  (85.4%)**; AppSec/Hunt and unrelated external gates remain unchanged. No
+  Production, provider, payment, database, customer-source, credential, or
+  customer write occurred.
+- **Evidence:**
+  `evidence/studio-cli-001-entitlement-recipient-implementation-2026-10-19.md`.
+
 ## 2026-10-19 · retain DIST-006 after rollback manifest binding
 
 - **Decision:** Accept CLI PR #157 as substantive original-logic progress and
