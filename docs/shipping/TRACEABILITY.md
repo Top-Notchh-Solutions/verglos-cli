@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## DIST-001 current origin/main package qualification · 2026-10-19
+
+- **Source mapping:** CLI `origin/main` at
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb` was exercised in a disposable
+  worktree; the temporary cross-platform dependency metadata selection was
+  removed before final diff check.
+- **Artifact mapping:** Seven public archives were generated and passed the
+  packed-manifest audit. The clean consumer imported every library, executed
+  Verglos, confirmed no implicit external-engine installation, and ran signed
+  A1 through the bounded restricted-process runtime.
+- **Acceptance mapping:** `DIST-001` remains unchecked for dependent
+  LOCAL/HUNT/RECORD product surfaces and final legal/release qualification.
+  No AppSec-held checkbox changed; `TEAM-CLI-001` remains checked. Score
+  remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/dist-001-current-origin-main-qualification-2026-10-19.md`.
+
+## STUDIO-CLI-001 latest CLI upload-binding qualification · 2026-10-19
 ## STUDIO-CLI-001 latest CLI upload-binding qualification · 2026-10-19
 
 - **Source mapping:** CLI `origin/main` at

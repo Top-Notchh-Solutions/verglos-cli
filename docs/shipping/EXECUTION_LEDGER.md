@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · DIST-001 current origin/main package qualification
+
+- **Source:** CLI `origin/main` at
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`, exercised in a disposable clean
+  worktree with no public source change.
+- **Verification:** Seven public archives were created; packed-manifest audit
+  passed **7/7**; clean consumer imported all libraries, executed Verglos,
+  confirmed no implicit external-engine installation, and executed signed A1
+  through the bounded restricted-process runtime. Temporary cross-platform
+  dependency metadata was removed before final diff check.
+- **Disposition:** Package/archive evidence only. Keep `DIST-001` unchecked
+  for LOCAL/HUNT/RECORD dependencies and final legal/release qualification.
+  No npm, provider, customer, Production, payment, or AppSec/Hunt state
+  changed; `TEAM-CLI-001` remains checked.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-current-origin-main-qualification-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · STUDIO-CLI-001 latest CLI upload-binding qualification
 
 - **Source:** CLI `origin/main` at

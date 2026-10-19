@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · DIST-001 current origin/main package qualification
+
+The exact CLI merge `0823b513` produced seven public archives in a disposable
+worktree. The packed-manifest audit passed **7/7**; the clean consumer
+installed and imported all seven libraries, executed Verglos, confirmed no
+implicit external-engine installation, and executed signed A1 through the
+bounded restricted-process runtime. The temporary cross-platform dependency
+metadata setup was removed before the worktree was checked clean.
+
+This is package/archive evidence only. `DIST-001` remains unchecked pending
+the dependent LOCAL/HUNT/RECORD product surfaces and final legal/release
+qualification. No public repository, npm, provider, customer, Production,
+payment, or AppSec/Hunt state changed. `TEAM-CLI-001` remains checked.
+
+Evidence: `evidence/dist-001-current-origin-main-qualification-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · STUDIO-CLI-001 latest CLI upload-binding qualification
 
 The latest CLI merge `0823b513` was exercised in a disposable clean
