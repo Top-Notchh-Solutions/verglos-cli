@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain DIST-003 after release-origin binding
+
+- **Decision:** Accept CLI PR #156 as substantive original-logic progress and
+  retain `DIST-003` unchecked.
+- **Observed:** Separate implementation `d8d76c36` and regression `02a23684`
+  merged normally as `72190acae81b454a4a88a0ea8d222c8981ac9a3f`. The real
+  release bundle now records and verifies exact source/tag/package origin and
+  every archive/sidecar digest before upload.
+- **Verification:** Focused **8/8**, broader release batch **32/32**,
+  typecheck **14/14**, build **8/8**, locked install, and diff check passed.
+  Hosted matrix `39260151443` passed **12/12**; standard/provenance
+  `39260151409` and self-scan `39260151534` passed.
+- **Reason:** The manifest proves bundle origin and integrity but does not
+  prove immutable npm publication/attestation, release-note or legal/license
+  clearance, trusted-publishing review, or final acceptance.
+- **Disposition:** Keep `DIST-003` unchecked. Score remains
+  **239/41/280 (85.4%)**; AppSec/Hunt and all unrelated external gates remain
+  unchanged.
+- **Evidence:**
+  `evidence/dist-003-release-origin-pr156-2026-10-19.md`.
+
 ## 2026-10-19 · retain DIST-002 after npm preflight hardening
 
 - **Decision:** Accept CLI PR #155 as substantive original-logic progress and

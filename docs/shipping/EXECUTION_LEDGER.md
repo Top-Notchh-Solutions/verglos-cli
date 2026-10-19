@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · DIST-003 release-origin manifest merged
+
+- **Source:** CLI PR #156 merged normally as
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`, preserving implementation
+  `d8d76c36` and regression `02a23684`. No squash, rebase, force-push, or
+  artificial contribution was used.
+- **Original logic:** The release workflow generates `RELEASE_METADATA.json`
+  from the seven packed public archives and release sidecars. It binds the
+  repository, exact source commit, immutable tag, package version, package
+  identities, and SHA-256 digests. The verifier requires the complete set,
+  recomputes every digest, checks archive manifests, and runs before upload;
+  `SHA256SUMS` includes the origin manifest.
+- **Verification:** Focused contracts **8/8**, broader release batch **32/32**,
+  typecheck **14/14**, build **8/8**, locked install, and diff check passed.
+  Hosted matrix `39260151443` passed **12/12**; standard/provenance
+  `39260151409` and self-scan `39260151534` passed.
+- **Disposition:** This closes the identified release-origin binding defect
+  only. `DIST-003` remains unchecked for actual immutable publication and
+  attestation, release-note and license-clearance evidence, trusted-publishing
+  review, and final acceptance. No npm/provider/Production write occurred.
+  Score remains **239/41/280 (85.4%)**; AppSec/Hunt remains held.
+- **Evidence:**
+  `docs/shipping/evidence/dist-003-release-origin-pr156-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-002 npm preflight hardening merged
 
 - **Source:** CLI PR #155 merged normally as

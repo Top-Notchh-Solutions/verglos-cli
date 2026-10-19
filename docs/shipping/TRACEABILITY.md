@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## DIST-003 release-origin manifest · 2026-10-19
+
+- **Source mapping:** CLI PR #156 merged normally as
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`, preserving implementation
+  `d8d76c36` and regression `02a23684`.
+- **Implementation mapping:** `scripts/generate-release-origin.mjs` creates
+  `RELEASE_METADATA.json` from the seven public archives and six release
+  sidecars. `.github/workflows/publish.yml` generates it after licensing and
+  clean-consumer qualification, includes it in `SHA256SUMS` and the upload,
+  and invokes `verify-release-artifacts.mjs` before publication. The verifier
+  checks exact source/tag/package origin and every digest.
+- **Verification mapping:** Focused contracts **8/8**, broader release batch
+  **32/32**, typecheck **14/14**, build **8/8**, locked install, and diff check
+  passed. Hosted matrix `39260151443` passed **12/12**; standard/provenance
+  `39260151409` and self-scan `39260151534` passed.
+- **Acceptance mapping:** `DIST-003` remains open for actual immutable
+  publication/attestation, release-note and license-clearance evidence,
+  trusted-publishing review, and final acceptance. Score remains
+  **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/dist-003-release-origin-pr156-2026-10-19.md`.
+
 ## DIST-002 npm publication preflight hardening · 2026-10-19
 
 - **Source mapping:** CLI PR #155 merged normally as

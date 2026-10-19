@@ -2,6 +2,32 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · DIST-003 release-origin manifest merged
+
+CLI PR #156 merged normally as `72190acae81b454a4a88a0ea8d222c8981ac9a3f`,
+preserving separate original-logic implementation `d8d76c36` and regression
+coverage `02a23684`. The real release workflow now writes
+`RELEASE_METADATA.json` for the seven public archives and release sidecars,
+binding every artifact digest to the exact source commit, immutable tag,
+repository, and shared package version. The release verifier recomputes and
+checks this complete origin set before upload, and `SHA256SUMS` covers the
+manifest too.
+
+Focused contracts passed **8/8**; the broader release batch passed **32/32**;
+typecheck **14/14**, build **8/8**, locked install, and diff check passed.
+Hosted platform matrix `39260151443` passed **12/12** across
+Ubuntu/macOS/Windows Node 20/22/24 plus in-toto. Standard/provenance
+`39260151409` and self-scan `39260151534` passed.
+
+This is original implementation and qualification evidence, not full release
+acceptance. `DIST-003` remains unchecked for actual immutable publication and
+attestation, release-note and license-clearance evidence, trusted-publishing
+review, and final acceptance. No npm, provider, Production, entitlement, or
+customer write occurred. Score remains **239 checked / 41 open / 280 total
+(85.4%)**; AppSec/Hunt remains held.
+
+Evidence: `evidence/dist-003-release-origin-pr156-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-002 npm preflight hardening merged
 
 CLI PR #155 merged normally as `abf41a0068936927010dab626b21a4e3087de10f`,
