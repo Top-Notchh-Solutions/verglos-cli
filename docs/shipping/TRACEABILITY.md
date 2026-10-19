@@ -2,6 +2,28 @@
 
 ## Active continuation state · 2026-10-19
 
+## QUAL-CLI-006 Windows consumer qualification repair · 2026-10-19
+
+- **Source mapping:** CLI PR #154 merged normally as
+  `ab30be78cacce4cdb161a91cce70ca7cd0e46666`, with separate implementation
+  `ebe061dca685fa8718bf1af02a1e0156c5e9fe17` and regression
+  `bd0b46af8160cd816ecbba2024ba85836a658481`.
+- **Implementation mapping:** `scripts/clean-consumer-runtime.mjs` provides
+  the bounded platform timeout; `scripts/verify-clean-consumer.mjs` uses it
+  for the existing seven-archive clean consumer install; the contract test
+  covers Linux, macOS, and Windows selections.
+- **Verification mapping:** Local focused contracts **13/13**, typecheck
+  **14/14**, and diff check passed. Hosted run `39254555360` passed **10/10**
+  platform cells, including Windows Node 22; standard/provenance
+  `39254555279`, self-scan `39254555454`, and in-toto binding job
+  `118066430746` passed.
+- **Acceptance mapping:** This closes the identified Windows qualification
+  defect only. `QUAL-CLI-006` remains open for trusted keyless publication,
+  protected approval, legal clearance, independent AppSec, and final
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/qual-cli-006-windows-consumer-timeout-pr154-2026-10-19.md`.
+
 ## STUDIO-CLI-001 original production upload authorization · 2026-10-19
 
 - **Source mapping:** Web PR #228 normal merge

@@ -2,6 +2,25 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · QUAL-CLI-006 Windows consumer qualification repair
+
+CLI PR #154 merged normally as `ab30be78cacce4cdb161a91cce70ca7cd0e46666`,
+preserving separate implementation and regression commits. The clean public
+consumer qualification now uses a bounded 300-second install timeout on
+Windows and 180 seconds on Linux/macOS, preserving the same seven-archive
+install and verification logic. Local focused contracts passed **13/13**,
+typecheck **14/14**, and diff check passed. Hosted run `39254555360` passed
+all **10/10** Ubuntu/macOS/Windows Node 20/22/24 jobs, including the prior
+Windows Node 22 failure; standard/provenance `39254555279`, self-scan
+`39254555454`, and in-toto binding job `118066430746` also passed.
+
+This is code-side qualification evidence, not full release acceptance.
+`QUAL-CLI-006` remains unchecked for trusted keyless publication identity,
+protected approval, legal clearance, independent AppSec review, and final
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/qual-cli-006-windows-consumer-timeout-pr154-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 original upload authorization shipped
 
 Web PR #228 merged normally as

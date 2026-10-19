@@ -2,6 +2,30 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · QUAL-CLI-006 Windows consumer qualification repair
+
+- **Source:** CLI PR #154 merged normally as
+  `ab30be78cacce4cdb161a91cce70ca7cd0e46666`, preserving separate
+  implementation `ebe061dca685fa8718bf1af02a1e0156c5e9fe17` and regression
+  `bd0b46af8160cd816ecbba2024ba85836a658481`.
+- **Original logic:** The clean consumer qualification retains the same seven
+  public archives and bounded install flow, but now allows Windows `npm.cmd`
+  300 seconds while keeping Linux/macOS at 180 seconds. A focused test covers
+  all platform selections.
+- **Verification:** Local focused contracts **13/13**, typecheck **14/14**,
+  and diff check passed. Hosted platform matrix `39254555360` passed all
+  **10/10** Ubuntu/macOS/Windows Node 20/22/24 jobs, including the formerly
+  failing Windows Node 22 consumer qualification. Standard/provenance run
+  `39254555279`, self-scan `39254555454`, and in-toto job `118066430746`
+  passed.
+- **Disposition:** This closes the identified code-side Windows qualification
+  defect, not the full `QUAL-CLI-006` row. Trusted keyless publication,
+  protected approval, legal clearance, independent AppSec, and final
+  acceptance remain required. No checkbox changes; score remains **239/41/280
+  (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-windows-consumer-timeout-pr154-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 production entitlement observation
 
 - **Read-only production observation:** The existing authenticated owner session

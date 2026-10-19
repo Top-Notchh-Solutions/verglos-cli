@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain QUAL-CLI-006 after Windows consumer repair
+
+- **Decision:** Accept CLI PR #154 as substantive original-logic progress and
+  retain `QUAL-CLI-006` unchecked.
+- **Observed:** Separate implementation and regression commits
+  `ebe061dca685fa8718bf1af02a1e0156c5e9fe17` and
+  `bd0b46af8160cd816ecbba2024ba85836a658481` merged normally as
+  `ab30be78cacce4cdb161a91cce70ca7cd0e46666`. The bounded clean-consumer
+  timeout is now platform-appropriate, resolving the prior Windows Node 22
+  timeout without changing the archive or install boundary.
+- **Verification:** Local focused contracts **13/13**, typecheck **14/14**, and
+  diff check passed. Hosted platform matrix `39254555360` passed **10/10**;
+  standard/provenance `39254555279`, self-scan `39254555454`, and in-toto
+  binding job `118066430746` passed.
+- **Reason:** This is code-side qualification evidence only. It does not
+  establish trusted keyless publication identity, protected publisher
+  approval, legal clearance, independent AppSec review, or final acceptance.
+- **Disposition:** Keep `QUAL-CLI-006` unchecked. Score remains
+  **239/41/280 (85.4%)**; no AppSec/Hunt checkbox changed.
+- **Evidence:**
+  `evidence/qual-cli-006-windows-consumer-timeout-pr154-2026-10-19.md`.
+
 ## 2026-10-19 · retain STUDIO-CLI-001 after original upload authorization
 
 - **Decision:** Accept Web PR #228 as substantive original-logic progress;
