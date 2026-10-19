@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ACCEPT-005 packed first-party qualification
+
+- **Implementation/evidence:** Seven public package archives were generated
+  with `pnpm pack:public`, passed the packed-manifest verifier, and passed the
+  clean-consumer verifier. The consumer imported all libraries and executed
+  the bounded signed A1 fixture. The packed CLI scanned the authorized CLI
+  merge `07cb117e…` with exit 0, 557 files, 78 findings, score 67/high; it
+  scanned the authorized Web merge `0719074d…` with exit 0, 493 files, 22
+  findings, score 73/medium.
+- **Evidence integrity:** The addendum records all seven archive hashes, both
+  target commits, report/HTML/terminal hashes, Node `v22.23.3`, pnpm `9.15.9`,
+  and the temporary setup-only supported-architecture correction. No raw scan
+  output or secrets were copied into the private ledger.
+- **Disposition:** This is packed first-party qualification only. Keep
+  `ACCEPT-005` unchecked for consented-team workflow, recipient/customer
+  acceptance, full coverage, retention/deletion evidence, and applicable
+  independent review. Provenance was deliberately skipped. No public
+  repository, npm, provider, customer, Production, payment, or AppSec state
+  changed; TEAM-CLI-001 remains checked.
+- **Evidence:**
+  `docs/shipping/evidence/accept-005-packed-first-party-qualification-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · STUDIO-CLI-001 client handoff and portfolio implementation
 
 - **Implementation:** Web PRs #207–#211 merged normally, preserving separate

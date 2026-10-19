@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-19T00:33:25.020Z",
+  "generatedAt": "2026-10-19T01:39:40.752Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -24,8 +24,8 @@
     },
     {
       "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-19.md",
-      "sha256": "7eeba4722bb19b45ad4373d4cac87561f66880bf738d32a18995117c07195298",
-      "bytes": 1713
+      "sha256": "c8d8d5dc8c740c07bc34f1c7ae764b369d751f8213b3d1686c937f9329976a92",
+      "bytes": 2162
     },
     {
       "path": "docs/shipping/evidence/acceptance-story-map-2026-10-03.json",
@@ -41,6 +41,11 @@
       "path": "docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md",
       "sha256": "d4b40965439ce75593441fb7edb2fdd71defb5da931506883479b9f9251e1686",
       "bytes": 3850
+    },
+    {
+      "path": "docs/shipping/evidence/accept-005-packed-first-party-qualification-2026-10-19.md",
+      "sha256": "db8f3ff8d54487ce66372c85e31e877268b821ab1d4366cbfc095b1e19b74202",
+      "bytes": 4915
     },
     {
       "path": "docs/shipping/acceptance/external-workflow-protocol.md",
