@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain STUDIO-CLI-001 after allowance enforcement
+
+- **Decision:** Accept Web PR #224 as substantive original-logic progress;
+  retain the existing score and row state.
+- **Observed:** Hosted client projection custody now reserves and commits the
+  existing monthly record allowance with projection-digest idempotency and
+  fail-closed 403/429/503 outcomes. Local 24/24 focused tests, disposable SQL
+  route integration 1/1, typecheck, 48-page build, and all hosted checks pass.
+  The initial PostgreSQL hosted attempt failed before tests on an ECR data-limit
+  response; rerun job `118039169321` passed.
+- **Reason:** Code-side allowance enforcement does not supply the row's required
+  numeric paid/non-production entitlement or authorized Studio recipient/
+  customer acceptance.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked. Score remains **239/41/280
+  (85.4%)**; AppSec/Hunt rows and unrelated external gates remain unchanged.
+- **Evidence:**
+  `evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+
 ## 2026-10-19 · retain score after draft-first policy creation hardening
 
 - **Decision:** Accept Web PR #223 as substantive original-logic hardening;

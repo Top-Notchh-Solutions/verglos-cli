@@ -2,6 +2,24 @@
 
 ## Active continuation state · 2026-10-19
 
+## STUDIO-CLI-001 hosted projection allowance hardening · 2026-10-19
+
+- **Source mapping:** Web PR #224, implementation `e3a62aa` and regression
+  `6f5f29c`, based on Web `origin/main` `a1854ad1cc5ba6fcb97d5784045ddd5e7ee7e001`;
+  normal merge `ec1a0ecb4127470bd0dab47aa1de6913b3c72574`.
+- **Verification mapping:** The client-projection custody POST now calls the
+  canonical hosted record usage provider before its tenant-scoped insert and
+  binds the reservation to the projection digest. Local focused tests passed
+  24/24, disposable PostgreSQL route integration 1/1, typecheck/build/diff
+  passed, and hosted Verify plus every PR check passed after the PostgreSQL
+  ECR pull rerun job `118039169321`.
+- **Acceptance mapping:** This advances implementation only. The row remains
+  unchecked for numeric paid/non-production hosted allowance and authorized
+  Studio recipient/customer acceptance. Score remains **239/41/280 (85.4%)**;
+  no AppSec-held state changed.
+- **Evidence:**
+  `evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+
 ## TEAM-WEB-003 draft-first policy creation hardening · 2026-10-19
 
 - **Source mapping:** Web PR #223, implementation `9489fb6` and regression

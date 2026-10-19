@@ -2,6 +2,28 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · STUDIO-CLI-001 hosted projection allowance hardening
+
+- **Source:** Web PR #224 from `origin/main`
+  `a1854ad1cc5ba6fcb97d5784045ddd5e7ee7e001`; implementation `e3a62aa` and
+  regression `6f5f29c` remain separate. Normal merge:
+  `ec1a0ecb4127470bd0dab47aa1de6913b3c72574`.
+- **Implementation:** Client-projection custody now reserves and commits the
+  canonical `hosted.ingestion.records` allowance before persistence, keyed by
+  projection digest. Exact retries remain idempotent; missing allowance,
+  exhausted quota, and ledger failure fail closed without a write.
+- **Verification:** Projection/usage/Studio allowance tests **24/24**,
+  disposable PostgreSQL route integration **1/1**, typecheck, 48-page build,
+  and diff check passed. Hosted Verify run `39246014511` and all PR checks
+  passed. The first PostgreSQL job stopped before tests on GitHub ECR's
+  `toomanyrequests: Data limit exceeded`; rerun job `118039169321` passed.
+- **Disposition:** `STUDIO-CLI-001` remains unchecked for numeric paid or
+  non-production allowance and authorized Studio recipient/customer acceptance.
+  Score remains **239/41/280 (85.4%)**. No AppSec, production, billing,
+  provider, customer, npm, or release state changed.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-WEB-003 draft-first policy creation hardening
 
 - **Source:** Web clean branch `codex/policy-creation-state-20261019` from

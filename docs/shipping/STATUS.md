@@ -2,6 +2,30 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · STUDIO-CLI-001 original allowance logic
+
+Web PR #224 preserves two substantive commits: `e3a62aa` adds hosted
+projection custody admission through the canonical monthly record-usage
+ledger, while `6f5f29c` adds the SQL-backed quota, idempotency, redaction, and
+tenant-scope regression coverage. The reservation is bound to the canonical
+projection digest, so an exact retry cannot double-consume allowance.
+
+Projection/usage/Studio allowance tests passed **24/24**, the disposable
+PostgreSQL route integration passed **1/1**, typecheck passed, and the
+optimized build generated **48/48** pages. Hosted Verify run `39246014511` and
+all PR checks passed after rerunning the isolated PostgreSQL job
+`118039169321`; the first attempt failed before tests on the GitHub ECR data
+limit, not in source or test execution. The normal merge is
+`ec1a0ecb4127470bd0dab47aa1de6913b3c72574`.
+
+This is real implementation progress, not a checkbox closure. `STUDIO-CLI-001`
+remains unchecked for a numeric paid/non-production allowance and authorized
+Studio recipient/customer acceptance. Score remains **239 checked / 41 open /
+280 total (85.4%)**; AppSec/Hunt rows remain held and unrelated external gates
+were not changed.
+
+Evidence: `evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-WEB-003 original policy lifecycle hardening
 
 Web PR #223 preserves two substantive commits: `9489fb6` adds the
