@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## DIST-002 trusted publishing workflow hardening · 2026-10-19
+
+- **Source mapping:** CLI implementation commit `35faf977` merged normally in
+  PR #148 as `0823b513f`; no squash or rebase was used.
+- **Contract mapping:** `publish.yml` is tag-only, verifies the exact release
+  tag/version before publication, uses the protected `release` environment and
+  OIDC permission, serializes registry mutation, and publishes with
+  `--provenance`. Manual latest promotion and long-lived npm-token paths are
+  absent.
+- **Verification mapping:** Local release/workflow/artifact/tag checks passed
+  8/8; typecheck 14/14; build 8/8; full package test graph 13/13 Turbo tasks;
+  public-boundary and diff checks passed. Hosted platform matrix, in-toto,
+  official standard/provenance, and self-scan checks passed.
+- **Acceptance mapping:** This closes the identified code-side bypass defect
+  only. DIST-002 remains unchecked for protected-environment approval, trusted
+  publisher enrollment, legal/release clearance, and actual immutable npm
+  publication/attestation. No AppSec-held checkbox changed; score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:** `evidence/dist-002-trusted-publishing-hardening-2026-10-19.md`.
+
 ## ACCEPT-002 twelve-story execution coverage · 2026-10-19
 
 - **Implementation mapping:** Private commit `2c24069b` adds the explicit

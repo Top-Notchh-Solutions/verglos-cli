@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · DIST-002 trusted publishing workflow hardening
+
+- **Implementation:** CLI PR #148 merged normally as `0823b513f`, preserving
+  implementation commit `35faf977`. The public publish workflow is now
+  tag-only: the manual `workflow_dispatch`/`promote_latest` path, mutable npm
+  dist-tag mutation, and `NPM_TOKEN`/`NODE_AUTH_TOKEN` dependency were removed.
+  OIDC permission, protected `release` environment, immutable tag/version
+  preflight, serialized publication, and `--provenance` remain enforced.
+- **Verification:** Local release/workflow/artifact/tag checks passed **8/8**;
+  typecheck passed **14/14** tasks; build passed **8/8**; the full package test
+  graph passed **13/13** Turbo tasks with existing Hunt A2 skips explicit; and
+  public-boundary/diff checks passed. Hosted PR #148 passed the nine-cell
+  Ubuntu/macOS/Windows Node 20/22/24 matrix, in-toto binding, official
+  standard/provenance validators, and Verglos self-scan.
+- **Disposition:** This is a real DIST-002 implementation advance, not row
+  closure. Keep DIST-002 unchecked pending protected-environment approval,
+  trusted npm publisher enrollment, legal/release clearance, and actual
+  immutable publication/attestation. DIST-003/006 and AppSec/Hunt remain
+  unchanged. No registry, provider, customer, Production, or AppSec state
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/dist-002-trusted-publishing-hardening-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · ACCEPT-002 execution-plan implementation
 
 - **Implementation:** Private commit `2c24069b` adds

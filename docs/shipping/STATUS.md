@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · DIST-002 trusted publishing hardening
+
+CLI PR #148 merged normally as `0823b513f`, preserving implementation commit
+`35faf977`. The public npm workflow is now reachable only from immutable `v*`
+tags. The manual latest-promotion path and its long-lived npm token dependency
+were removed; the protected `release` environment, OIDC permission, version/tag
+preflight, serialized publication, and npm provenance flags remain enforced.
+
+Local release-contract checks passed **8/8**, typecheck **14/14**, build **8/8**,
+and the full package test graph **13/13** Turbo tasks. Hosted Ubuntu/macOS/
+Windows Node 20/22/24, in-toto, official provenance validators, and self-scan
+checks all passed. This advances implementation only. `DIST-002` remains
+unchecked pending trusted-publisher enrollment, protected approval,
+legal/release clearance, and actual immutable publication/attestation. No npm,
+provider, customer, Production, or AppSec state changed.
+
+Evidence: `evidence/dist-002-trusted-publishing-hardening-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · ACCEPT-002 twelve-story coverage enforcement
 
 Private commit `2c24069b` adds and tests the explicit execution plan for all
