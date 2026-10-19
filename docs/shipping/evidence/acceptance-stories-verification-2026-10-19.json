@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-stories-verification.v1",
-  "verifiedAt": "2026-10-19T00:08:17.224Z",
+  "verifiedAt": "2026-10-19T00:33:22.666Z",
   "cliRoot": "/tmp/verglos-dist-qual-20261019",
   "webRoot": "/tmp/verglos-web-team-cli-qual-20261019",
   "cliCommit": "50bcab42eadfa8796d86d1f7a8aaee3010c65647",
@@ -98,6 +98,161 @@
       ]
     }
   ],
+  "storyCoverage": [
+    {
+      "id": "free-scan",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "acceptance-corpus-verification-2026-10-03-v3.json"
+      ]
+    },
+    {
+      "id": "ci-decision",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "TEAM-CLI-002"
+      ]
+    },
+    {
+      "id": "trivy-import",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "QUAL-CLI-005"
+      ]
+    },
+    {
+      "id": "multi-tool-dedup",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "mismatch-incomplete",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "exception-register",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "hunt-isolation",
+      "acceptanceStatus": "qualification-open",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "cli-package-suite",
+        "hunt-docker-adversarial-2026-10-02.md"
+      ]
+    },
+    {
+      "id": "offline-record",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "modified-cli",
+      "acceptanceStatus": "runtime-qualification-open",
+      "requiredSurfaces": [
+        "web-full-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "QUAL-WEB-001",
+        "web-full-suite"
+      ]
+    },
+    {
+      "id": "studio-recipient",
+      "acceptanceStatus": "customer-acceptance-open",
+      "requiredSurfaces": [
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "enterprise-runner",
+      "acceptanceStatus": "provider-qualification-open",
+      "requiredSurfaces": [
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "account-deletion",
+      "acceptanceStatus": "qualification-open",
+      "requiredSurfaces": [
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "qual-web-005-privacy-deletion-2026-10-10"
+      ]
+    }
+  ],
   "results": [
     {
       "label": "cli-package-suite",
@@ -107,8 +262,8 @@
         "verglos",
         "test"
       ],
-      "startedAt": "2026-10-19T00:07:01.810Z",
-      "finishedAt": "2026-10-19T00:08:11.337Z",
+      "startedAt": "2026-10-19T00:32:09.957Z",
+      "finishedAt": "2026-10-19T00:33:18.417Z",
       "exitCode": 0,
       "summary": {
         "tests": 293,
@@ -117,7 +272,7 @@
         "cancelled": 0,
         "skipped": 2
       },
-      "outputSha256": "458958c17997ea07330c4b0e04a8673010ee65232f39c7bf3f102b0a15baf7a7"
+      "outputSha256": "59f7d03664644565c888029c28eaa5f09277008f0b7ecc7421ec6fae8bab43bb"
     },
     {
       "label": "web-full-suite",
@@ -125,8 +280,8 @@
       "args": [
         "test"
       ],
-      "startedAt": "2026-10-19T00:08:11.337Z",
-      "finishedAt": "2026-10-19T00:08:16.600Z",
+      "startedAt": "2026-10-19T00:33:18.418Z",
+      "finishedAt": "2026-10-19T00:33:22.001Z",
       "exitCode": 0,
       "summary": {
         "tests": 975,
@@ -135,7 +290,7 @@
         "cancelled": 0,
         "skipped": 30
       },
-      "outputSha256": "5ed72c6286e04940ba7661d147654d5abf75e059d4c1cc819281def126008d79"
+      "outputSha256": "516d5945c03c12d952d2306dbcd3ce91e9f3d35a19420728ff5ef5a7b5cba5cc"
     },
     {
       "label": "web-composed-acceptance-substrates",
@@ -152,8 +307,8 @@
         "src/lib/organizations/team-e2e.test.ts",
         "src/lib/qual/qual-web-suites.test.ts"
       ],
-      "startedAt": "2026-10-19T00:08:16.600Z",
-      "finishedAt": "2026-10-19T00:08:17.224Z",
+      "startedAt": "2026-10-19T00:33:22.002Z",
+      "finishedAt": "2026-10-19T00:33:22.666Z",
       "exitCode": 0,
       "summary": {
         "tests": 74,
@@ -162,9 +317,10 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "bc476f06614066706bab768adeb467ba90c6aa84c3459700aa39a57be111ae6f"
+      "outputSha256": "78d92bd204187007973ecde88b905458cb0836d4e1307bd2b2fa1f02046beae1"
     }
   ],
+  "storyCoverageComplete": true,
   "allCommandsPassed": true,
   "note": "Substrate/regression evidence only. No hosted HTTP, provider, customer, reviewer, browser-human, field-CWV, migration, or production acceptance is claimed."
 }

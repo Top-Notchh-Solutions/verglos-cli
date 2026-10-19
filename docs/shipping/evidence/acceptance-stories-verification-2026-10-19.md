@@ -26,6 +26,13 @@ The verifier returned `allCommandsPassed: true`. The two CLI skips and thirty
 Web skips are the repository’s explicit environment-gated skips; no failure
 was converted into a skip.
 
+The verifier now also enforces a twelve-entry execution plan in private
+commit `2c24069b`. All 12 stories have `substrateExecuted: true` and the
+generated result records `storyCoverageComplete: true`. Open statuses remain
+explicit for Hunt isolation, modified-CLI runtime, Studio recipient,
+Enterprise runner, and account deletion; this field is coverage accounting,
+not acceptance or security sign-off. The new plan regression tests pass **3/3**.
+
 ## Disposition
 
 This advances current-source regression evidence for ACCEPT-002/003 only.

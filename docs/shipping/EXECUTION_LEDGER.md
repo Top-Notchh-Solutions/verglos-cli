@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ACCEPT-002 execution-plan implementation
+
+- **Implementation:** Private commit `2c24069b` adds
+  `scripts/acceptance-story-plan.mjs` and its **3/3** regression suite. The
+  verifier now requires every one of the twelve frozen stories to map to an
+  executed command surface and preserves each story’s open/covered status.
+- **Results:** The clean pinned-source run passed CLI **291/293** with 2
+  explicit skips, Web **945/975** with 30 explicit skips, and composed
+  substrates **74/74**. All commands exited 0; `storyCoverageComplete` is
+  true for all 12 stories.
+- **Disposition:** This is a real ACCEPT-002 verifier implementation
+  advance, not acceptance closure. Hosted/provider/customer/reviewer,
+  browser-human, field-CWV, deletion, and AppSec requirements remain open or
+  held as recorded. No public repository, provider, customer, Production,
+  payment, migration, or AppSec state changed.
+- **Evidence:**
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-19.json`,
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-19.md`, and
+  `docs/shipping/evidence/acceptance-evidence-bundle-2026-10-19.json`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · QUAL-WEB-006 dashboard boundary qualification
 
 - **Implementation:** Web PR #220 merged normally as `96a6228`, preserving

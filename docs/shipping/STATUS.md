@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · ACCEPT-002 twelve-story coverage enforcement
+
+Private commit `2c24069b` adds and tests the explicit execution plan for all
+twelve frozen acceptance stories. The current clean-source run passed CLI
+**291/293** with 2 explicit skips, Web **945/975** with 30 explicit skips,
+and composed substrates **74/74**; every command exited 0 and the generated
+JSON records `storyCoverageComplete: true` with all 12 stories executed at
+the substrate level. Open story statuses remain unchanged, so ACCEPT-002 and
+ACCEPT-003 stay unchecked for hosted/provider/customer/reviewer evidence.
+Score remains **235 checked / 45 open / 280 total (83.9%)**. AppSec/Hunt is
+still the held security set. Evidence:
+`evidence/acceptance-stories-verification-2026-10-19.md` and
+`evidence/acceptance-stories-verification-2026-10-19.json`.
+
 ## 2026-10-19 · QUAL-WEB-006 dashboard boundary qualification advance
 
 Web PR #220 merged normally as `96a6228`, preserving implementation commit

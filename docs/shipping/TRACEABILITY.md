@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## ACCEPT-002 twelve-story execution coverage · 2026-10-19
+
+- **Implementation mapping:** Private commit `2c24069b` adds the explicit
+  twelve-story execution plan and regression tests, then binds it into
+  `scripts/verify-acceptance-stories.mjs`.
+- **Contract mapping:** Every frozen story must have an executed verifier
+  surface. The output distinguishes `substrateExecuted` from the preserved
+  `acceptanceStatus` and marks `qualificationRequired` for every story that
+  is not fully substrate-covered.
+- **Verification mapping:** Plan tests pass **3/3**. The current clean-source
+  verifier passes CLI **291/293** (2 explicit skips), Web **945/975** (30
+  explicit skips), and composed substrates **74/74**, with
+  `storyCoverageComplete: true` and zero command failures.
+- **Acceptance mapping:** This is repository-owned automation evidence only.
+  ACCEPT-002/003 remain unchecked for hosted/provider/customer/reviewer
+  evidence and the open story statuses; no AppSec-held checkbox changed.
+  Score remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/acceptance-stories-verification-2026-10-19.md` and
+  `evidence/acceptance-stories-verification-2026-10-19.json`.
+
 ## QUAL-WEB-006 dashboard failure boundaries · 2026-10-19
 
 - **Source mapping:** Web implementation commit `61d40ed` was merged normally
