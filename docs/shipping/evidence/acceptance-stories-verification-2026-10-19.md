@@ -6,20 +6,24 @@ migration, or production acceptance.
 
 ## Inputs and command
 
-- CLI source: `50bcab42eadfa8796d86d1f7a8aaee3010c65647`
-- Web source: `390fd3f82b2a59003e30e2362ab593ef1db4b982`
-- CLI root: `/tmp/verglos-dist-qual-20261019`
-- Web root: `/tmp/verglos-web-team-cli-qual-20261019`
+- CLI source: `0823b513f2b1810ad9f6afcb8806ba46f61feedb`
+- Web source: `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
+- CLI root: `/private/tmp/verglos-cli-studio-upload-20261019`
+- Web root: `/private/tmp/verglos-web-qual-web-005-route-e2e-20261019`
 - Command: `VERGLOS_CLI_ROOT=... VERGLOS_WEB_ROOT=... VERGLOS_ACCEPTANCE_STORIES_OUTPUT=... node scripts/verify-acceptance-stories.mjs`
-- Environment: macOS Darwin 25.5.0 arm64, Node `v26.4.0`, pnpm `9.15.9`
+- Environment: macOS Darwin 25.5.0 arm64, Node `v26.4.0`, CLI pnpm `9.15.9`, Web pnpm `10.34.5`
 - Generated result: `acceptance-stories-verification-2026-10-19.json`
+- Result SHA-256: `3e8707d4224fa2dfbfd509707b44b67e82ea51533574588766ee78f7a60127ce`
+- Terminal log SHA-256: `863cf587ef15745caab0670644b8e3d00bb5ba0a1811798230811119def63bec`
+- Acceptance evidence bundle rerun: 17 files, secret scan passed; bundle
+  SHA-256 `a45de0bac980edde20c610892c16b9617808b646e4ae06b1f23654891310d7c8`.
 
 ## Results
 
 | Surface | Tests | Passed | Skipped | Failed | Exit |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| CLI package suite | 293 | 291 | 2 | 0 | 0 |
-| Web full suite | 975 | 945 | 30 | 0 | 0 |
+| CLI package suite | 309 | 307 | 2 | 0 | 0 |
+| Web full suite | 977 | 947 | 30 | 0 | 0 |
 | Composed Team/Studio/Enterprise/quality substrates | 74 | 74 | 0 | 0 | 0 |
 
 The verifier returned `allCommandsPassed: true`. The two CLI skips and thirty

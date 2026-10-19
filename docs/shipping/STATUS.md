@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · ACCEPT-002/003 current-head substrate revalidation
+
+The machine-checked twelve-story verifier was rerun against CLI merge
+`0823b513` and Web merge `0719074d` from clean qualification worktrees. CLI
+passed **307/309** with two explicit skips, Web passed **947/977** with thirty
+explicit skips, and the composed Studio/Enterprise/Team/quality substrates
+passed **74/74**. All commands exited 0 and all twelve story mappings executed.
+
+This refreshes substrate/regression evidence only. Hunt isolation, modified-CLI
+runtime, Studio recipient, Enterprise runner, account deletion, provider,
+customer, reviewer, browser-human, field-CWV, migration, and Production
+acceptance statuses remain explicitly open. `ACCEPT-002` and `ACCEPT-003` are
+unchecked; `TEAM-CLI-001` remains checked and AppSec/Hunt state is unchanged.
+
+Evidence: `evidence/acceptance-stories-verification-2026-10-19.md` and the
+generated JSON beside it. Score remains **235 checked / 45 open / 280 total
+(83.9%)**.
+
 ## 2026-10-19 · DIST-002/003 current release-contract qualification
 
 The latest CLI merge passed the trusted-publishing and release-verifier

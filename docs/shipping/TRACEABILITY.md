@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## ACCEPT-002/003 current-head substrate revalidation · 2026-10-19
+
+- **Source mapping:** CLI `0823b513f2b1810ad9f6afcb8806ba46f61feedb` and Web
+  `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` were exercised from clean
+  disposable worktrees.
+- **Verification mapping:** CLI passed **307/309** with 2 explicit skips; Web
+  passed **947/977** with 30 explicit skips; composed Studio/Enterprise/Team/
+  quality substrates passed **74/74**. All commands exited 0 and story
+  coverage was complete for all twelve mapped stories.
+- **Acceptance mapping:** This advances `ACCEPT-002`/`ACCEPT-003` substrate
+  evidence only. Hosted/provider/customer/reviewer, Hunt isolation,
+  modified-CLI runtime, Studio recipient, Enterprise runner, account deletion,
+  browser-human, field-CWV, migration, and Production acceptance remain open.
+  No AppSec-held checkbox changed; `TEAM-CLI-001` remains checked. Score
+  remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/acceptance-stories-verification-2026-10-19.md` and the generated
+  JSON beside it.
+
+## DIST-002/003 current release-contract qualification · 2026-10-19
 ## DIST-002/003 current release-contract qualification · 2026-10-19
 
 - **Source mapping:** CLI `origin/main` at

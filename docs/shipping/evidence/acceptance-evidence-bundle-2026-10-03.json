@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-14T14:25:58.714Z",
+  "generatedAt": "2026-10-19T01:54:28.271Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -18,6 +18,16 @@
       "bytes": 4348
     },
     {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-19.json",
+      "sha256": "3e8707d4224fa2dfbfd509707b44b67e82ea51533574588766ee78f7a60127ce",
+      "bytes": 8393
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-19.md",
+      "sha256": "3fa4a3311e5e2ca93152fcdac5183bdd2ffecc05a1cc08cbbfae6ee84a81ff94",
+      "bytes": 2395
+    },
+    {
       "path": "docs/shipping/evidence/acceptance-story-map-2026-10-03.json",
       "sha256": "4e05ffec3baa08974033e5d3ec4bdf3ec3d37236ad32e420fa2b7189a86a9776",
       "bytes": 1762
@@ -26,6 +36,21 @@
       "path": "docs/shipping/evidence/acceptance-story-tests-2026-10-03.md",
       "sha256": "d7e6a78ded7532396f0b0110d63a15c8812623a342dd4cddf5ec622d1b4af708",
       "bytes": 3749
+    },
+    {
+      "path": "docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md",
+      "sha256": "d4b40965439ce75593441fb7edb2fdd71defb5da931506883479b9f9251e1686",
+      "bytes": 3850
+    },
+    {
+      "path": "docs/shipping/evidence/accept-005-packed-first-party-qualification-2026-10-19.md",
+      "sha256": "db8f3ff8d54487ce66372c85e31e877268b821ab1d4366cbfc095b1e19b74202",
+      "bytes": 4915
+    },
+    {
+      "path": "docs/shipping/evidence/qual-web-005-authenticated-route-e2e-2026-10-19.md",
+      "sha256": "dfebe4f67ecd78d17e52f7ac17ae729e0f737a7f564250f788ab684d475ff345",
+      "bytes": 3369
     },
     {
       "path": "docs/shipping/acceptance/external-workflow-protocol.md",

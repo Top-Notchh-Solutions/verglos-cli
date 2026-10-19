@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ACCEPT-002/003 current-head substrate revalidation
+
+- **Source:** CLI `0823b513f2b1810ad9f6afcb8806ba46f61feedb` and Web
+  `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`, both exercised from clean
+  qualification worktrees.
+- **Verification:** CLI **307/309** with 2 explicit skips; Web **947/977**
+  with 30 explicit skips; composed Studio/Enterprise/Team/quality substrates
+  **74/74**. All three commands exited 0 and the twelve-entry story coverage
+  was complete.
+- **Disposition:** Substrate/regression evidence only. Keep `ACCEPT-002` and
+  `ACCEPT-003` unchecked for hosted/provider/customer/reviewer acceptance and
+  their open story statuses. No production, payment, publication, or
+  AppSec/Hunt state changed; `TEAM-CLI-001` remains checked.
+- **Evidence:**
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-19.md` and
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-19.json`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · DIST-002/003 current release-contract qualification
 
 - **Source:** CLI `origin/main` at
