@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · FINAL-WEB-008 public release smoke
+
+The current Web merge `0719074d` passed the public release-smoke regression
+suite **2/2** and the executable smoke report with exit 0. The report covered
+15 public routes, 22 truth claims, 22 publishable claims, two bounded proof
+assets, and zero issues; the negative test rejected an injected stale `$29/mo`
+claim. `FINAL-WEB-008` remains unchecked because FINAL-WEB-001–007 and final
+acceptance dependencies remain open. No deploy, provider, payment, customer,
+or AppSec/Hunt state changed; `TEAM-CLI-001` remains checked.
+
+Evidence: `evidence/final-web-008-public-release-smoke-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · ACCEPT-002/003 current-head substrate revalidation
 
 The machine-checked twelve-story verifier was rerun against CLI merge

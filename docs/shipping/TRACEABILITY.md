@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-008 public release smoke · 2026-10-19
+
+- **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
+  was exercised from a clean disposable qualification worktree.
+- **Verification mapping:** Public release smoke passed **2/2** and the
+  executable report exited 0 with 15 routes, 22 total/publishable truth
+  claims, two bounded proof assets, and zero issues. Its negative test rejected
+  an injected stale price claim.
+- **Acceptance mapping:** This is source-level public truth qualification;
+  `FINAL-WEB-008` remains unchecked for FINAL-WEB-001–007 and final acceptance.
+  No AppSec-held checkbox changed; `TEAM-CLI-001` remains checked. Score
+  remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/final-web-008-public-release-smoke-2026-10-19.md`.
+
 ## ACCEPT-002/003 current-head substrate revalidation · 2026-10-19
 
 - **Source mapping:** CLI `0823b513f2b1810ad9f6afcb8806ba46f61feedb` and Web

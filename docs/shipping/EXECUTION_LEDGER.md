@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · FINAL-WEB-008 public release smoke
+
+- **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` from a
+  clean disposable qualification worktree; Node `v26.4.0`, pnpm `10.34.5`.
+- **Verification:** `test:public-release-smoke` passed **2/2** and
+  `public:release-smoke` exited 0. The report covered 15 routes, 22 total and
+  publishable truth claims, two public proof assets, and zero issues; the
+  negative test rejected an injected stale price claim.
+- **Disposition:** Source-level public truth qualification only. Keep
+  `FINAL-WEB-008` unchecked for dependent FINAL-WEB rows and final acceptance.
+  No deploy, provider, payment, customer, or AppSec/Hunt state changed;
+  `TEAM-CLI-001` remains checked.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-008-public-release-smoke-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · ACCEPT-002/003 current-head substrate revalidation
 
 - **Source:** CLI `0823b513f2b1810ad9f6afcb8806ba46f61feedb` and Web
