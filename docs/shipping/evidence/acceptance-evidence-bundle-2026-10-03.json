@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-19T01:54:28.271Z",
+  "generatedAt": "2026-10-19T01:58:48.975Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -24,8 +24,8 @@
     },
     {
       "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-19.md",
-      "sha256": "3fa4a3311e5e2ca93152fcdac5183bdd2ffecc05a1cc08cbbfae6ee84a81ff94",
-      "bytes": 2395
+      "sha256": "34918a5ca18d7c304492ec5b6efb3cdbf6741e696e3a627808d83013ae03757e",
+      "bytes": 2546
     },
     {
       "path": "docs/shipping/evidence/acceptance-story-map-2026-10-03.json",
@@ -44,8 +44,8 @@
     },
     {
       "path": "docs/shipping/evidence/accept-005-packed-first-party-qualification-2026-10-19.md",
-      "sha256": "db8f3ff8d54487ce66372c85e31e877268b821ab1d4366cbfc095b1e19b74202",
-      "bytes": 4915
+      "sha256": "4a84ed7d26b14aa3c85c668222e7d319cac350c7685be9e69bc05778251a8f6c",
+      "bytes": 5464
     },
     {
       "path": "docs/shipping/evidence/qual-web-005-authenticated-route-e2e-2026-10-19.md",

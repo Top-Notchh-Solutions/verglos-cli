@@ -122,14 +122,14 @@
 
 ## ACCEPT-005 packed first-party qualification · 2026-10-19
 
-- **Source mapping:** Packed CLI qualification used implementation commit
-  `562ea84e`, merged normally as CLI PR #151 `07cb117e…`; target scans used
-  the authorized CLI merge `07cb117e…` and Web merge `0719074d…`. No squash,
-  rebase, or force-push was used.
-- **Artifact mapping:** `pnpm pack:public` produced seven archives;
-  `check-packed-manifests` and `verify-clean-consumer` passed. The clean
-  consumer imported all libraries and executed the bounded signed A1 fixture.
-- **Result mapping:** Packed CLI scan exited 0 with 557 files, 78 findings,
+- **Source mapping:** Packed CLI qualification used current CLI merge
+  `0823b513…`; target scans used the authorized CLI merge `0823b513…` and Web
+  merge `0719074d…`. The source history remains normally merged without
+  squash, rebase, or force-push.
+- **Artifact mapping:** Seven current archives were installed by a clean
+  consumer, which imported all six libraries and reported CLI version
+  `2.0.0-alpha.1`.
+- **Result mapping:** Packed CLI scan exited 0 with 555 files, 78 findings,
   score 67/high. Packed Web scan exited 0 with 493 files, 22 findings, score
   73/medium. Both runs used `--no-provenance`; coverage is therefore recorded
   as incomplete and no provenance claim is made.

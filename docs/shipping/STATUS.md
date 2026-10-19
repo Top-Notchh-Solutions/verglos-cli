@@ -113,12 +113,13 @@ Score remains **235 checked / 45 open / 280 total (83.9%)**.
 ## 2026-10-19 · ACCEPT-005 packed first-party qualification
 
 The seven public package archives were produced from the disposable CLI
-qualification worktree, manifest-checked, and installed by the clean consumer
-verifier. The packed CLI then scanned the authorized first-party CLI merge
-`07cb117e…` with exit 0 (78 findings, score 67/high); the same packed CLI
-scanned the authorized first-party Web merge `0719074d…` with exit 0 (22
-findings, score 73/medium). Archive hashes, report hashes, runtime, and the
-setup-only optional-platform correction are recorded in the addendum.
+qualification worktree, manifest-checked, and installed by a clean consumer.
+The packed CLI then scanned the authorized first-party CLI merge
+`0823b513…` with exit 0 (555 files, 78 findings, score 67/high); the same
+packed CLI scanned the authorized first-party Web merge `0719074d…` with exit
+0 (493 files, 22 findings, score 73/medium). Archive hashes, report hashes,
+runtime, and the setup-only optional-platform correction are recorded in the
+addendum.
 
 This is a real packed-artifact qualification advance, not acceptance closure.
 `ACCEPT-005` remains unchecked for consented-team workflow, recipient/customer

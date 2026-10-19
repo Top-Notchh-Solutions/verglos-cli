@@ -111,15 +111,14 @@
 
 ## 2026-10-19 · ACCEPT-005 packed first-party qualification
 
-- **Implementation/evidence:** Seven public package archives were generated
-  with `pnpm pack:public`, passed the packed-manifest verifier, and passed the
-  clean-consumer verifier. The consumer imported all libraries and executed
-  the bounded signed A1 fixture. The packed CLI scanned the authorized CLI
-  merge `07cb117e…` with exit 0, 557 files, 78 findings, score 67/high; it
-  scanned the authorized Web merge `0719074d…` with exit 0, 493 files, 22
-  findings, score 73/medium.
+- **Implementation/evidence:** Seven current public package archives were
+  generated, installed by a clean consumer, and imported through the packed
+  CLI front door. The consumer reported version `2.0.0-alpha.1`. The packed
+  CLI scanned the authorized CLI merge `0823b513…` with exit 0, 555 files, 78
+  findings, score 67/high; it scanned the authorized Web merge `0719074d…`
+  with exit 0, 493 files, 22 findings, score 73/medium.
 - **Evidence integrity:** The addendum records all seven archive hashes, both
-  target commits, report/HTML/terminal hashes, Node `v22.23.3`, pnpm `9.15.9`,
+  target commits, report/HTML/terminal hashes, Node `v26.4.0`, pnpm `9.15.9`,
   and the temporary setup-only supported-architecture correction. No raw scan
   output or secrets were copied into the private ledger.
 - **Disposition:** This is packed first-party qualification only. Keep
