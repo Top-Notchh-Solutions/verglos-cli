@@ -2,6 +2,33 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · ENT-CLI-001 private-runner endpoint binding merged
+
+- **Source:** CLI PR #153 merged normally as
+  `eb08f3533594458703cd4ee6143b8cbca105bcaf`, preserving implementation
+  `0d8f2c94df42e045aad18ccee70ba299821cb338`, regression
+  `1ce91a1a7ecf8cdeec54feeeeab800819e717c74`, and feature-branch conflict
+  resolution `8349311ea37486469d01a72dc352da9e7e4d659e`. No squash, rebase,
+  force-push, or artificial contribution was used.
+- **Original logic:** The private-runner client reconstructs the tenant/runner
+  poll route and fixes result-upload and enrollment routes. Caller-supplied
+  route overrides fail before credential use or network access. Existing
+  runner-specific credentials, redirect refusal, bounded response/timeouts,
+  signed admission, replay persistence, and source-free result projection
+  remain enforced.
+- **Verification:** Focused client tests **10/10**, CLI build, and full CLI
+  package test exit `0` passed locally. Hosted matrix `39256317283` passed
+  **12/12** required checks across Ubuntu/macOS/Windows Node 20/22/24 plus
+  in-toto; standard/provenance `39256317277` and self-scan `39256317254`
+  passed.
+- **Disposition:** This closes the endpoint-binding implementation defect only.
+  `ENT-CLI-001` remains unchecked for authorized deployed enrollment, approved
+  runner execution/result reconciliation, operational evidence, independent
+  review, and enterprise acceptance. AppSec/Hunt remains held. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/ent-cli-001-private-runner-endpoint-binding-pr153-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-CLI-006 Windows consumer qualification repair
 
 - **Source:** CLI PR #154 merged normally as

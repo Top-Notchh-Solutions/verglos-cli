@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain ENT-CLI-001 after endpoint-binding merge
+
+- **Decision:** Accept CLI PR #153 as substantive original-logic progress and
+  retain the row unchecked.
+- **Observed:** Implementation `0d8f2c94`, regression `1ce91a1a`, and normal
+  feature-branch merge `8349311e` reached `main` through regular merge commit
+  `eb08f353`; no squash, rebase, force-push, or artificial activity was used.
+- **Verification:** Focused client tests **10/10**, CLI build, full CLI package
+  test exit `0`, hosted matrix `39256317283` (**12/12**), standard/provenance
+  `39256317277`, and self-scan `39256317254` passed.
+- **Reason:** The client-side endpoint binding is now implemented and tested,
+  but no deployed operational enrollment, approved isolated execution/result
+  reconciliation, enterprise operational evidence, independent review, or
+  enterprise acceptance was established.
+- **Disposition:** Keep `ENT-CLI-001` unchecked. Score remains
+  **239/41/280 (85.4%)**; AppSec/Hunt is unchanged.
+- **Evidence:**
+  `evidence/ent-cli-001-private-runner-endpoint-binding-pr153-2026-10-19.md`.
+
 ## 2026-10-19 · retain QUAL-CLI-006 after Windows consumer repair
 
 - **Decision:** Accept CLI PR #154 as substantive original-logic progress and

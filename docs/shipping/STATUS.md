@@ -2,6 +2,28 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · ENT-CLI-001 endpoint binding merged
+
+CLI PR #153 merged normally as `eb08f3533594458703cd4ee6143b8cbca105bcaf`,
+preserving separate implementation, regression, and normal feature-branch
+merge history. The client now binds polling to the exact tenant/runner route
+and fixes result-upload and enrollment routes, rejecting overrides before
+credential or network use while preserving signed admission, replay,
+timeout, bounded-response, and source-free projection logic.
+
+Focused client tests passed **10/10**; the CLI build and full CLI package test
+exited `0`. Hosted matrix `39256317283` passed **12/12** required checks across
+Ubuntu/macOS/Windows Node 20/22/24 plus in-toto; standard/provenance
+`39256317277` and self-scan `39256317254` passed.
+
+This is implementation evidence, not full row acceptance. `ENT-CLI-001`
+remains unchecked for deployed enrollment, approved runner execution/result
+reconciliation, cross-platform operational evidence, independent review, and
+enterprise acceptance. AppSec/Hunt remains held. Score remains **239 checked /
+41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/ent-cli-001-private-runner-endpoint-binding-pr153-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-CLI-006 Windows consumer qualification repair
 
 CLI PR #154 merged normally as `ab30be78cacce4cdb161a91cce70ca7cd0e46666`,
