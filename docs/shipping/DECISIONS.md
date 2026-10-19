@@ -1,5 +1,31 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain DIST-006 after rollback manifest binding
+
+- **Decision:** Accept CLI PR #157 as substantive original-logic progress and
+  retain `DIST-006` unchecked.
+- **Observed:** Separate implementation `b9cc1e12` and regression/evidence
+  `167c344b` merged normally as `7c24535c55e2672b188cddb6219511c0910983ff`.
+  The CLI now binds rollback-rehearsal output to the exact manifest bytes it
+  evaluates, and the evidence generator independently verifies that binding.
+- **Verification:** Locked install, build **8/8**, rollback plan tests **6/6**,
+  evidence-generator test **1/1**, full CLI package test exit `0`, and diff
+  check passed. Hosted matrix `39262149777` passed **12/12**; official
+  validators `39262149790`, self-scan `39262149671`, and in-toto job
+  `118092298436` passed. Five boundary decisions passed, two historical
+  records were preserved, and the manifest digest matched
+  `sha256:664f70df2f2a0c063d43c767e602266b1adc1709a498dae7ef71825291b960b7`.
+- **Reason:** This proves local decision/evidence integrity only. It does not
+  prove authenticated npm/registry, engine, Hunt-feed, signing-provider, or
+  web-deployment rollback/revocation, protected release approval, or final
+  acceptance.
+- **Disposition:** Keep `DIST-006` unchecked. No provider, registry, signing,
+  Hunt-feed, Vercel, Production, entitlement, or customer write occurred.
+  AppSec/Hunt and all unrelated external gates remain unchanged. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/dist-006-rollback-manifest-digest-pr157-2026-10-19.md`.
+
 ## 2026-10-19 · retain DIST-003 after release-origin binding
 
 - **Decision:** Accept CLI PR #156 as substantive original-logic progress and

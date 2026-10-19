@@ -2,6 +2,33 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · DIST-006 rollback manifest binding merged
+
+CLI PR #157 merged normally as
+`7c24535c55e2672b188cddb6219511c0910983ff`, preserving separate original-logic
+implementation `b9cc1e12` and regression/evidence commit `167c344b`. The real
+`release rollback-rehearsal` command now emits the SHA-256 digest of the exact
+bounded manifest bytes it evaluates, including denied-operation results. The
+evidence generator independently recomputes that digest and fails closed on a
+mismatch.
+
+Local verification passed: locked install, workspace build **8/8**, rollback
+plan tests **6/6**, evidence-generator test **1/1**, full CLI package test exit
+`0`, and diff check. Hosted matrix `39262149777` passed **12/12** across
+Ubuntu/macOS/Windows Node 20/22/24; official validators `39262149790`,
+self-scan `39262149671`, and in-toto job `118092298436` passed.
+
+The generated report passed five boundary decisions, preserved two historical
+records, and matched manifest digest
+`sha256:664f70df2f2a0c063d43c767e602266b1adc1709a498dae7ef71825291b960b7`.
+This is original implementation/evidence only: no provider, registry,
+signing, Hunt-feed, Vercel, Production, entitlement, or customer write was
+performed. `DIST-006` remains unchecked for authenticated rollback/revocation
+acceptance and final release mapping. Score remains **239 checked / 41 open /
+280 total (85.4%)**; AppSec/Hunt remains held.
+
+Evidence: `evidence/dist-006-rollback-manifest-digest-pr157-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-003 release-origin manifest merged
 
 CLI PR #156 merged normally as `72190acae81b454a4a88a0ea8d222c8981ac9a3f`,

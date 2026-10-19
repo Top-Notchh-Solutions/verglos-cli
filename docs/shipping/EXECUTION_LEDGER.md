@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · DIST-006 rollback manifest binding merged
+
+- **Source:** CLI PR #157 merged normally as
+  `7c24535c55e2672b188cddb6219511c0910983ff`, preserving implementation
+  `b9cc1e12` and regression/evidence `167c344b`. No squash, rebase,
+  force-push, or artificial contribution was used.
+- **Original logic:** The actual CLI rollback-rehearsal command hashes the
+  exact bounded manifest bytes before parsing, evaluates the shared rollback
+  decision contract, and includes the digest in successful and denied JSON
+  results. The evidence generator independently recomputes the fixture digest
+  and fails closed unless the emitted digest matches.
+- **Verification:** Locked install, build **8/8**, rollback plan tests **6/6**,
+  evidence-generator test **1/1**, full CLI package test exit `0`, and diff
+  check passed. Hosted matrix `39262149777` passed **12/12**; official
+  validators `39262149790`, self-scan `39262149671`, and in-toto job
+  `118092298436` passed. The report covered five operations, preserved two
+  historical records, and matched manifest digest
+  `sha256:664f70df2f2a0c063d43c767e602266b1adc1709a498dae7ef71825291b960b7`.
+- **Disposition:** This closes the identified manifest-integrity gap only.
+  `DIST-006` remains unchecked for authenticated provider/registry/engine/feed/
+  signing/deployment rollback or revocation acceptance and final release
+  mapping. No provider, registry, Production, entitlement, or customer write
+  occurred. Score remains **239/41/280 (85.4%)**; AppSec/Hunt remains held.
+- **Evidence:**
+  `docs/shipping/evidence/dist-006-rollback-manifest-digest-pr157-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-003 release-origin manifest merged
 
 - **Source:** CLI PR #156 merged normally as

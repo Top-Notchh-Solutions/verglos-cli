@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## DIST-006 rollback/revocation manifest binding · 2026-10-19
+
+- **Source mapping:** CLI PR #157 merged normally as
+  `7c24535c55e2672b188cddb6219511c0910983ff`, preserving implementation
+  `b9cc1e12` and regression/evidence `167c344b`.
+- **Implementation mapping:** `packages/cli/src/release-rollback-plan.ts`
+  hashes the exact bounded manifest bytes and includes the digest in the
+  rollback-rehearsal JSON result. `scripts/release-rollback-evidence.mjs`
+  independently hashes the same fixture and rejects mismatched CLI output.
+- **Verification mapping:** Build **8/8**, rollback plan tests **6/6**,
+  evidence-generator test **1/1**, full CLI package test exit `0`, and diff
+  check passed. Hosted matrix `39262149777` passed **12/12**; official
+  validators `39262149790`, self-scan `39262149671`, and in-toto job
+  `118092298436` passed. The report passed all five boundaries, preserved two
+  historical records, and matched manifest digest
+  `sha256:664f70df2f2a0c063d43c767e602266b1adc1709a498dae7ef71825291b960b7`.
+- **Acceptance mapping:** Keep `DIST-006` unchecked. The implementation does
+  not establish live authenticated rollback/revocation, provider-side audit,
+  or final release acceptance. No AppSec-held checkbox changed; score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/dist-006-rollback-manifest-digest-pr157-2026-10-19.md`.
+
 ## DIST-003 release-origin manifest · 2026-10-19
 
 - **Source mapping:** CLI PR #156 merged normally as
