@@ -17,6 +17,20 @@ test("publish workflow verifies the same public artifact boundaries as release c
   assert.ok(workflow.indexOf("verify-clean-consumer.mjs") < workflow.indexOf("npm publish"), "clean consumer install must pass before any package publish");
   assert.match(workflow, /--require-clear/u);
   assert.match(workflow, /sha256sum \.\/\*\.tgz \.\/THIRD_PARTY_NOTICES \.\/SBOM\.cdx\.json \.\/SBOM\.spdx\.json \.\/dependency-license-inventory\.json \.\/external-license-records\.json \.\/clean-consumer-verification\.txt > SHA256SUMS/u);
+  for (const artifact of [
+    "SHA256SUMS",
+    "THIRD_PARTY_NOTICES",
+    "SBOM.cdx.json",
+    "SBOM.spdx.json",
+    "external-license-records.json",
+    "clean-consumer-verification.txt",
+    "dependency-license-inventory.json",
+  ]) {
+    assert.match(workflow, new RegExp(`RELEASE_DIR\\s*\\}\\}/${artifact.replaceAll(".", "[.]")}`, "u"), artifact);
+  }
+  assert.match(workflow, /if-no-files-found: error/u, "release evidence upload must fail closed when a sidecar is absent");
+  assert.ok(workflow.indexOf("verify-release-artifacts.mjs \"$RELEASE_DIR\"") < workflow.indexOf("Upload release artifacts"), "release artifacts must be verified before upload");
+  assert.ok(workflow.indexOf("Upload release artifacts") < workflow.indexOf("npm publish"), "release evidence must be uploaded before publication");
   assert.match(workflow, /generate-third-party-notices\.mjs/u);
   assert.match(workflow, /generate-sbom\.mjs/u);
   assert.match(workflow, /generate-spdx\.mjs/u);
