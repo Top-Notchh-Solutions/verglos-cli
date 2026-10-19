@@ -52,7 +52,7 @@ if (requireSevenPublicPackages) {
   const versions = new Set(archiveManifests.map((manifest) => manifest.version));
   if (versions.size !== 1 || [...versions][0] === undefined) throw new Error("strict release packages must share one version");
 }
-const requiredSidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "external-license-records.json", "clean-consumer-verification.txt"];
+const requiredSidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "external-license-records.json", "clean-consumer-verification.txt", "RELEASE_METADATA.json"];
 for (const name of requiredSidecars) if (!files.includes(name)) throw new Error(`release artifact directory is missing ${name}`);
 if (files.some((name) => !name.endsWith(".tgz") && !requiredSidecars.includes(name))) throw new Error("release artifact directory contains an unexpected file");
 for (const name of files) {
@@ -65,6 +65,32 @@ for (const name of files) {
   const digest = createHash("sha256").update(await readFile(join(root, name))).digest("hex");
   if (digest !== expected.get(name)) throw new Error(`checksum mismatch: ${basename(name)}`);
 }
+const originPath = join(root, "RELEASE_METADATA.json");
+let origin;
+try { origin = JSON.parse(await readFile(originPath, "utf8")); }
+catch (error) { if (error instanceof SyntaxError) throw new Error("RELEASE_METADATA.json is not valid JSON"); throw error; }
+if (origin.schemaId !== "urn:verglos:artifact:release-origin" || origin.schemaVersion !== 1) throw new Error("RELEASE_METADATA.json has an invalid schema");
+if (origin.repository !== "https://github.com/Top-Notchh-Solutions/verglos-cli") throw new Error("RELEASE_METADATA.json has an invalid repository origin");
+if (!origin.source || !/^[0-9a-f]{40}$/u.test(origin.source.commit ?? "") || !/^v\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u.test(origin.source.tag ?? "")) throw new Error("RELEASE_METADATA.json has an invalid source binding");
+if (origin.releaseVersion !== origin.source.tag.slice(1)) throw new Error("RELEASE_METADATA.json release version does not match its tag");
+if (!Array.isArray(origin.artifacts) || origin.artifacts.length !== files.length - 1) throw new Error("RELEASE_METADATA.json does not describe the complete artifact set");
+const originNames = new Set();
+for (const artifact of origin.artifacts) {
+  if (!artifact || typeof artifact !== "object" || typeof artifact.name !== "string" || !/^[a-f0-9]{64}$/u.test(artifact.sha256) || !["npm-archive", "release-sidecar"].includes(artifact.kind)) throw new Error("RELEASE_METADATA.json contains an invalid artifact entry");
+  if (artifact.name === "RELEASE_METADATA.json" || originNames.has(artifact.name) || !files.includes(artifact.name)) throw new Error("RELEASE_METADATA.json contains an invalid artifact name");
+  originNames.add(artifact.name);
+  const digest = createHash("sha256").update(await readFile(join(root, artifact.name))).digest("hex");
+  if (digest !== artifact.sha256) throw new Error(`release origin digest mismatch: ${artifact.name}`);
+  if (artifact.kind === "npm-archive") {
+    let manifest;
+    try {
+      const { stdout } = await run("tar", ["-xOf", join(root, artifact.name), "package/package.json"], { encoding: "utf8", maxBuffer: 1024 * 1024 });
+      manifest = JSON.parse(stdout);
+    } catch { throw new Error(`release origin archive has no valid package manifest: ${artifact.name}`); }
+    if (manifest.name !== artifact.packageName || manifest.version !== artifact.packageVersion || manifest.version !== origin.releaseVersion) throw new Error(`release origin package binding mismatch: ${artifact.name}`);
+  }
+}
+if ([...files].filter((name) => name !== "RELEASE_METADATA.json").some((name) => !originNames.has(name))) throw new Error("RELEASE_METADATA.json omits a release artifact");
 for (const name of requiredSidecars) {
   const path = join(root, name);
   try {
@@ -90,6 +116,7 @@ for (const name of requiredSidecars) {
       if (failures.length > 0) throw new Error(`external-license-records.json is invalid: ${failures.join("; ")}`);
     }
     if (name === "clean-consumer-verification.txt" && !/^clean consumer installed 7 archives and executed Verglos \d+\.\d+\.\d+/u.test(content.trim())) throw new Error("clean-consumer-verification.txt does not prove the seven-package consumer flow");
+    if (name === "RELEASE_METADATA.json" && content.length === 0) throw new Error("RELEASE_METADATA.json must not be empty");
   } catch (error) {
     if (error instanceof SyntaxError) throw new Error(`${name} is not valid JSON`);
     throw error;
