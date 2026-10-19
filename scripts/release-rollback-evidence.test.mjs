@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -15,6 +16,10 @@ test("release rollback evidence generator records all five boundaries without pr
     const report = JSON.parse(await readFile(join(output, "report.json"), "utf8"));
     assert.equal(result.stderr, "");
     assert.equal(report.status, "passed");
+    const manifest = await readFile("scripts/fixtures/release-rollback-rehearsal.json");
+    const expectedManifestDigest = `sha256:${createHash("sha256").update(manifest).digest("hex")}`;
+    assert.equal(report.manifestDigest, expectedManifestDigest);
+    assert.equal(report.manifestDigestMatchesFixture, true);
     assert.equal(report.operationCount, 5);
     assert.equal(report.historicalRecordCount, 2);
     assert.equal(report.historicalRecordsPreserved, true);
