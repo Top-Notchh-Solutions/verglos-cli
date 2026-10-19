@@ -77,4 +77,3 @@ revocation result.
 `GITHUB-WEB-004` is checked after the authorized uninstall/reinstall and
 post-recovery delivery qualification. GITHUB-WEB-001, GITHUB-WEB-002, and
 GITHUB-WEB-003 remain checked. No AppSec/Hunt row changed.
-
