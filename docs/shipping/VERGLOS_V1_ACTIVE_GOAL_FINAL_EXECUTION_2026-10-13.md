@@ -31,6 +31,23 @@ must preserve the same distinction: ship original code and qualification
 substrates, record evidence, and check only rows whose full contracts are
 actually satisfied.
 
+## 0.0zh Acceptance substrate continuation — 2026-10-19
+
+The next non-AppSec acceptance contracts are now implemented in the private
+shipping ledger without inventing external results:
+
+- `ACCEPT-006`: `6430a38` + `423daecc` implement and test the six-question
+  comprehension scorer; **7/7** contracts pass.
+- `ACCEPT-008`: `64c1a477` + `f986f80c` implement and test the exact commercial
+  evidence validator; combined acceptance/comprehension/commercial contracts
+  pass **10/10**.
+
+Both rows remain unchecked because their actual participant/commercial
+evidence and independent/final acceptance are not created by a local test.
+`ACCEPT-007` is the next backlog row but is explicitly Hunt/AppSec-dependent;
+leave it parked and do not let it block unrelated implementation already
+qualified. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+
 ## 0.0zf Current STUDIO-CLI-001 original production upload authorization — 2026-10-19
 
 Web PR #228 merged normally as
