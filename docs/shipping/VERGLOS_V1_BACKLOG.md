@@ -30,6 +30,24 @@ and independent/customer acceptance evidence. Score remains **239 checked / 41
 open / 280 total (85.4%)**; AppSec/Hunt remains held separately.
 Evidence: `docs/shipping/evidence/qual-web-005-006-current-merged-head-2026-10-19.md`.
 
+## 2026-10-19 · ACCEPT-002/003 current-head substrate and bundle
+
+The private twelve-story verifier ran against CLI
+`11734a45740a893c307606e8f3d3f316711abd9e` and Web
+`2c07237845f0e52061dc52c99c21212615390177`: CLI **310/312** with 2 skips,
+Web **949/979** with 30 skips, and composed Studio/Enterprise/Team/quality
+substrates **74/74**, all exit `0`. All twelve story mappings executed and the
+private 17-file evidence bundle passed its secret-like material scan.
+
+This is real substrate qualification, not deliberate checkbox closure.
+`ACCEPT-002` remains open for the full hosted/provider/customer story run and
+`ACCEPT-003` remains open for reviewer sign-off plus mapped external/hosted
+evidence. The verifier keeps Hunt, modified-client runtime, Studio recipient,
+Enterprise runner, and account-deletion qualification states explicit. Score
+remains **239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt remains
+held separately. Evidence:
+`docs/shipping/evidence/accept-002-003-current-head-substrate-bundle-2026-10-19.md`.
+
 Owner approvals route work but do not replace row-specific implementation,
 provider, customer, legal, field, release, or acceptance evidence. Continue
 using the active `verglos-web`, `verglos-cli`, and private shipping ledger

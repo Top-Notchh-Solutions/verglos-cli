@@ -2,6 +2,26 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · ACCEPT-002/003 current-head substrate and bundle
+
+- **Source:** CLI `11734a45740a893c307606e8f3d3f316711abd9e` and Web
+  `2c07237845f0e52061dc52c99c21212615390177`, selected through explicit clean
+  disposable worktree roots.
+- **Verification:** The twelve-story verifier exited `0`: CLI **310/312**
+  with 2 skips, Web **949/979** with 30 skips, and composed Web
+  Studio/Enterprise/Team/quality substrates **74/74**. Every frozen story
+  mapping executed and `storyCoverageComplete` is `true`.
+- **Evidence bundle:** The private bundle generator exited `0`, hashed **17
+  files**, and passed its secret-like material scan. Generated JSON retains
+  provider, customer, reviewer, browser, field-CWV, and account-deletion gates
+  as open.
+- **Disposition:** `ACCEPT-002` and `ACCEPT-003` remain unchecked because
+  repository substrate evidence is not the required hosted/provider/customer
+  acceptance or reviewer sign-off. Score remains **239/41/280 (85.4%)**; no
+  AppSec-held state changed.
+- **Evidence:**
+  `docs/shipping/evidence/accept-002-003-current-head-substrate-bundle-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-005/006 current merged-head qualification
 
 - **Source:** Web PR #225 normal merge

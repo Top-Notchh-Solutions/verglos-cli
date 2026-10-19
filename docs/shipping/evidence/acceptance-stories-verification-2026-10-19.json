@@ -1,10 +1,10 @@
 {
   "schema": "verglos.private.acceptance-stories-verification.v1",
-  "verifiedAt": "2026-10-19T01:53:59.371Z",
-  "cliRoot": "/private/tmp/verglos-cli-studio-upload-20261019",
-  "webRoot": "/private/tmp/verglos-web-qual-web-005-route-e2e-20261019",
-  "cliCommit": "0823b513f2b1810ad9f6afcb8806ba46f61feedb",
-  "webCommit": "0719074d5a6f83198f5e36c0eeb064f2a12e1b1b",
+  "verifiedAt": "2026-10-19T12:06:45.492Z",
+  "cliRoot": "/tmp/verglos-cli-current-release-20261019",
+  "webRoot": "/tmp/verglos-web-current-20261019",
+  "cliCommit": "11734a45740a893c307606e8f3d3f316711abd9e",
+  "webCommit": "2c07237845f0e52061dc52c99c21212615390177",
   "stories": [
     {
       "id": "free-scan",
@@ -256,45 +256,45 @@
   "results": [
     {
       "label": "cli-package-suite",
-      "cwd": "/private/tmp/verglos-cli-studio-upload-20261019",
+      "cwd": "/tmp/verglos-cli-current-release-20261019",
       "args": [
         "--filter",
         "verglos",
         "test"
       ],
-      "startedAt": "2026-10-19T01:52:38.125Z",
-      "finishedAt": "2026-10-19T01:53:53.812Z",
+      "startedAt": "2026-10-19T12:05:30.215Z",
+      "finishedAt": "2026-10-19T12:06:41.310Z",
       "exitCode": 0,
       "summary": {
-        "tests": 309,
-        "pass": 307,
+        "tests": 312,
+        "pass": 310,
         "fail": 0,
         "cancelled": 0,
         "skipped": 2
       },
-      "outputSha256": "3631822e4d27b7939d08b28290f8ac1c4d7d4f896de334f68a81f2554a47efc5"
+      "outputSha256": "104d00f8089d02bf2717b464bd9cb3452c43a68d09e0a3591f0375de6fa7e316"
     },
     {
       "label": "web-full-suite",
-      "cwd": "/private/tmp/verglos-web-qual-web-005-route-e2e-20261019",
+      "cwd": "/tmp/verglos-web-current-20261019",
       "args": [
         "test"
       ],
-      "startedAt": "2026-10-19T01:53:53.813Z",
-      "finishedAt": "2026-10-19T01:53:58.730Z",
+      "startedAt": "2026-10-19T12:06:41.310Z",
+      "finishedAt": "2026-10-19T12:06:44.904Z",
       "exitCode": 0,
       "summary": {
-        "tests": 977,
-        "pass": 947,
+        "tests": 979,
+        "pass": 949,
         "fail": 0,
         "cancelled": 0,
         "skipped": 30
       },
-      "outputSha256": "b0795f4e49f7a5b322d83fb580c69d54fb49961981904ab5a136327e06becaeb"
+      "outputSha256": "2753e4b1ff60d6540fe7c4f390fd00b97ce34d5e828069ecb49afeeb8a1314cf"
     },
     {
       "label": "web-composed-acceptance-substrates",
-      "cwd": "/private/tmp/verglos-web-qual-web-005-route-e2e-20261019",
+      "cwd": "/tmp/verglos-web-current-20261019",
       "args": [
         "exec",
         "node",
@@ -307,8 +307,8 @@
         "src/lib/organizations/team-e2e.test.ts",
         "src/lib/qual/qual-web-suites.test.ts"
       ],
-      "startedAt": "2026-10-19T01:53:58.730Z",
-      "finishedAt": "2026-10-19T01:53:59.371Z",
+      "startedAt": "2026-10-19T12:06:44.904Z",
+      "finishedAt": "2026-10-19T12:06:45.492Z",
       "exitCode": 0,
       "summary": {
         "tests": 74,
@@ -317,7 +317,7 @@
         "cancelled": 0,
         "skipped": 0
       },
-      "outputSha256": "0a60532ced3c026e66258c688130394bfa31469061c9f2c16c4989f3fa130843"
+      "outputSha256": "3322b12774ffc68fee0312a6459c629719d47ac58a05a15a82512ecd8395e1af"
     }
   ],
   "storyCoverageComplete": true,

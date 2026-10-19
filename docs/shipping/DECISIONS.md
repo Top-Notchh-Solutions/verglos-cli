@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain ACCEPT-002/003 after current-head substrate run
+
+- **Decision:** Accept the current twelve-story verifier and private bundle as
+  substantive product-contract evidence while retaining ACCEPT-002 and
+  ACCEPT-003 open.
+- **Observed:** CLI **310/312** with 2 skips, Web **949/979** with 30 skips,
+  composed Web substrates **74/74**, all exit `0`; all twelve mappings
+  executed; the 17-file bundle secret scan passed.
+- **Reason:** The harness explicitly proves substrate execution only. It does
+  not create hosted/provider/customer execution, reviewer sign-off, browser-
+  human or field-CWV evidence, or AppSec qualification.
+- **Disposition:** Keep ACCEPT-002/003 unchecked. Score remains **239/41/280
+  (85.4%)**; AppSec/Hunt state and all external gates are unchanged.
+- **Evidence:**
+  `evidence/accept-002-003-current-head-substrate-bundle-2026-10-19.md`.
+
 ## 2026-10-19 · retain QUAL-WEB-005/006 after current-head qualification
 
 - **Decision:** Accept the clean current Web-head qualification as substantive

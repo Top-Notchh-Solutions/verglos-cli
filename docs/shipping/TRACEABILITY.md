@@ -2,6 +2,25 @@
 
 ## Active continuation state · 2026-10-19
 
+## ACCEPT-002/003 current-head substrate and bundle · 2026-10-19
+
+- **Source mapping:** CLI
+  `11734a45740a893c307606e8f3d3f316711abd9e`; Web
+  `2c07237845f0e52061dc52c99c21212615390177`.
+- **Verification mapping:** The private verifier ran the CLI package suite
+  **310/312** with 2 skips, Web full suite **949/979** with 30 skips, and
+  composed Web substrates **74/74** with zero failures. All twelve story
+  mappings executed; output hashes are retained in the generated JSON.
+- **Bundle mapping:** The private evidence-bundle command hashed 17 files and
+  passed the secret-like material scan; open provider/customer/reviewer/
+  browser/field-CWV/account-deletion states remain explicit.
+- **Acceptance mapping:** ACCEPT-002 remains open for the complete
+  hosted/provider/customer story run. ACCEPT-003 remains open for reviewer
+  sign-off and mapped external/hosted evidence. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:**
+  `evidence/accept-002-003-current-head-substrate-bundle-2026-10-19.md`.
+
 ## QUAL-WEB-005/006 current merged-head qualification · 2026-10-19
 
 - **Source mapping:** Web PR #225 merged normally at

@@ -2,6 +2,24 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · ACCEPT-002/003 current-head substrate and bundle
+
+The private twelve-story verifier ran against CLI
+`11734a45740a893c307606e8f3d3f316711abd9e` and Web
+`2c07237845f0e52061dc52c99c21212615390177`: CLI **310/312** with 2 skips,
+Web **949/979** with 30 skips, and composed Studio/Enterprise/Team/quality
+substrates **74/74**, all exit `0`. All twelve story mappings executed and the
+generated 17-file private evidence bundle passed its secret-like material scan.
+The verifier correctly retained open statuses for Hunt, modified-client
+runtime, Studio recipient, Enterprise runner, and account-deletion
+qualification.
+
+`ACCEPT-002` and `ACCEPT-003` remain unchecked for their hosted/provider/
+customer execution and reviewer sign-off requirements. Score remains **239
+checked / 41 open / 280 total (85.4%)**; AppSec/Hunt is unchanged.
+
+Evidence: `evidence/accept-002-003-current-head-substrate-bundle-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-005/006 current merged-head qualification
 
 The clean Web merge `2c07237845f0e52061dc52c99c21212615390177` passed the
