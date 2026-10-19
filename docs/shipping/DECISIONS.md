@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain QUAL-WEB-005/006 after current-head qualification
+
+- **Decision:** Accept the clean current Web-head qualification as substantive
+  original-logic evidence while retaining both qualification rows open.
+- **Observed:** Private-runner contracts passed **24/24**; privacy/deletion/
+  retention contracts passed **46/46**; typecheck, 43-migration ordering,
+  49-page production build, and diff check passed.
+- **Boundary:** The run used a disposable worktree and synthetic/local
+  fixtures. The package requested Node `22.x`, while this local run used Node
+  `v26.4.0`; hosted supported-runtime checks remain separate. No Production,
+  provider, customer, credential, or source-upload state changed.
+- **Reason:** Code qualification does not supply QUAL-WEB-005 legal/consent,
+  production migration/deletion, restore/rollback, reconciliation, or
+  independent acceptance; nor QUAL-WEB-006 human screen-reader, complete
+  authenticated paid/org, large-data, supported-browser, field-CWV, or
+  independent/customer evidence.
+- **Disposition:** Keep both rows unchecked. Score remains **239/41/280
+  (85.4%)**; AppSec/Hunt state is unchanged.
+- **Evidence:**
+  `evidence/qual-web-005-006-current-merged-head-2026-10-19.md`.
+
 ## 2026-10-19 · retain QUAL-CLI-006 after current-head qualification
 
 - **Decision:** Accept the current merged-head qualification as substantive

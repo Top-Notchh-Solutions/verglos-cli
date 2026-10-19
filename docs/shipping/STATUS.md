@@ -2,6 +2,26 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · QUAL-WEB-005/006 current merged-head qualification
+
+The clean Web merge `2c07237845f0e52061dc52c99c21212615390177` passed the
+original privacy/deletion/retention contracts **46/46**, private-runner
+contracts **24/24**, typecheck, the **43**-migration ordering audit, and the
+optimized Next build with **49/49** pages. `git diff --check` also passed. The
+qualification used only a disposable worktree and synthetic/local fixtures;
+no Production, provider, customer, credential, or source-upload state
+changed.
+
+`QUAL-WEB-005` and `QUAL-WEB-006` remain unchecked. QUAL-WEB-005 still needs
+legal/consent, authorized production deletion/migration, restore/rollback,
+reconciliation, and independent acceptance artifacts. QUAL-WEB-006 still needs
+human screen-reader, complete authenticated paid/organization, large-data,
+supported-browser, field-CWV, and independent/customer acceptance evidence.
+Score remains **239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt is
+unchanged and remains held separately.
+
+Evidence: `evidence/qual-web-005-006-current-merged-head-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-CLI-006 current merged-head qualification
 
 CLI PR #152’s exact merge `11734a45740a893c307606e8f3d3f316711abd9e` passed

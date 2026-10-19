@@ -12,6 +12,24 @@ top-to-bottom with the next dependency-ready non-AppSec row. The next active
 non-AppSec row is `STUDIO-CLI-001`; its remaining contract is the numeric
 hosted allowance and authorized Studio recipient/customer acceptance.
 
+## 2026-10-19 · QUAL-WEB-005/006 current merged-head qualification
+
+The clean Web merge `2c07237845f0e52061dc52c99c21212615390177` passed the
+original privacy/deletion/retention contracts **46/46**, private-runner
+contracts **24/24**, typecheck, the **43**-migration ordering audit, and the
+optimized Next build with **49/49** pages; `git diff --check` passed. The run
+used only a disposable worktree and synthetic/local fixtures and made no
+Production, provider, customer, credential, or source-upload write.
+
+This is qualification progress, not deliberate checkbox closure.
+`QUAL-WEB-005` remains open for legal/consent, authorized production
+deletion/migration, restore/rollback, reconciliation, and independent
+acceptance. `QUAL-WEB-006` remains open for human screen-reader, complete
+authenticated paid/organization, large-dataset, supported-browser, field-CWV,
+and independent/customer acceptance evidence. Score remains **239 checked / 41
+open / 280 total (85.4%)**; AppSec/Hunt remains held separately.
+Evidence: `docs/shipping/evidence/qual-web-005-006-current-merged-head-2026-10-19.md`.
+
 Owner approvals route work but do not replace row-specific implementation,
 provider, customer, legal, field, release, or acceptance evidence. Continue
 using the active `verglos-web`, `verglos-cli`, and private shipping ledger

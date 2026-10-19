@@ -2,6 +2,26 @@
 
 ## Active continuation state · 2026-10-19
 
+## QUAL-WEB-005/006 current merged-head qualification · 2026-10-19
+
+- **Source mapping:** Web PR #225 merged normally at
+  `2c07237845f0e52061dc52c99c21212615390177`.
+- **Implementation mapping:** The exact merge retains the original
+  privacy/deletion/retention and private-runner production paths. The tests
+  exercise real route/module contracts, durable holds, customer-held digest
+  protection, digest-only runner credentials, tenant/runner binding, and
+  expiry rather than placeholder responses.
+- **Verification mapping:** Private-runner **24/24**, privacy/deletion/
+  retention **46/46**, typecheck, 43 ordered migrations, 49-page optimized
+  build, and diff check all passed.
+- **Acceptance mapping:** QUAL-WEB-005 remains open for legal/consent,
+  production authorization, restore/rollback, reconciliation, and independent
+  acceptance. QUAL-WEB-006 remains open for human screen-reader, complete
+  authenticated paid/org, large-data, supported-browser, field-CWV, and
+  independent/customer evidence. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/qual-web-005-006-current-merged-head-2026-10-19.md`.
+
 ## QUAL-CLI-006 current merged-head qualification · 2026-10-19
 
 - **Source mapping:** CLI PR #152 merged normally at

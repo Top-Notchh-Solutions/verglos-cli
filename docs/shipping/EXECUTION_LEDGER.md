@@ -2,6 +2,28 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · QUAL-WEB-005/006 current merged-head qualification
+
+- **Source:** Web PR #225 normal merge
+  `2c07237845f0e52061dc52c99c21212615390177` in a clean detached worktree.
+- **Original logic:** The real privacy/deletion/retention, durable hold,
+  customer-held digest, Studio retention, and private-runner authorization
+  modules were exercised; no placeholder or synthetic route replaced the
+  product path.
+- **Verification:** Private-runner tests **24/24**, privacy/deletion/retention
+  tests **46/46**, typecheck, ordered migration audit **43/43**, optimized
+  build **49/49 pages**, and `git diff --check` passed.
+- **Boundary:** Local Node `v26.4.0` / pnpm `10.34.5` produced the warning that
+  the package requests Node `22.x`; hosted checks supply supported-runtime
+  coverage. No Production, provider, customer, credential, or source-upload
+  state changed.
+- **Disposition:** `QUAL-WEB-005` and `QUAL-WEB-006` remain unchecked for
+  their exact legal, production, human/field, customer, and independent
+  acceptance requirements. Score remains **239/41/280 (85.4%)**; no
+  AppSec-held state changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-006-current-merged-head-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-CLI-006 current merged-head qualification
 
 - **Source:** CLI PR #152 normal merge at
