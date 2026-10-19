@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · TEAM-CLI-001 closure and next-row reconciliation
+
+- **Verification:** The authoritative backlog contains `TEAM-CLI-001` as
+  checked. Its closure packet remains
+  `docs/shipping/evidence/team-cli-001-hosted-cli-policy-provider-qualification-2026-10-19.md`.
+  The current count was independently recomputed from all 280 backlog boxes:
+  **235 checked / 45 open / 280 total (83.9%)**.
+- **Next row:** `STUDIO-CLI-001` is the next top-to-bottom eligible row. Its
+  implementation and route tests are complete, but the owner-controlled
+  Billing page currently reports `free`, no hosted-record allowance, and no
+  checkout. The existing hosted route correctly returns
+  `allowance_not_configured`; no receipt was persisted.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked pending a supported
+  numeric paid/non-production allowance and an actual authorized recipient
+  acceptance observation. Do not activate the inactive Studio catalog or
+  bypass the allowance provider. AppSec/Hunt remains unchanged.
+- **Boundary:** This reconciliation changed only the private shipping ledger;
+  no public repository, provider configuration, billing state, production
+  state, customer data, or AppSec-held checkbox changed.
+
 ## 2026-10-19 · ACCEPT-005 first-party owned-repository qualification
 
 - **Authorization:** Owner authorization was applied only to the two

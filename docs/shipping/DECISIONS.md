@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain STUDIO-CLI-001 after TEAM-CLI-001 closure
+
+- **Decision:** Confirm `TEAM-CLI-001` checked and advance the strict queue to
+  `STUDIO-CLI-001`.
+- **Observed:** The existing owner-controlled Billing page reports the
+  organization as `free`, with no active paid license, no numeric hosted-record
+  allowance, and no checkout. The hosted custody route rejects a valid
+  redacted receipt with `allowance_not_configured` before persistence.
+- **Reason:** A code-side implementation pass or owner assertion cannot replace
+  a supported non-production entitlement and an actual recipient acceptance
+  observation. Activating inactive Studio or bypassing the provider would make
+  the evidence false.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked. AppSec/Hunt remains the
+  explicit hold set. Score is **235/45/280 (83.9%)**; no public, billing,
+  Production, customer, or AppSec state changed.
+- **Evidence:** Existing Studio qualification packet plus the owner-session
+  Billing observation retained in the current private shipping record.
+
 ## 2026-10-18 · retain TEAM-WEB-006 after live SCM reconciliation
 
 - **Decision:** Accept Web PR #204 and the production repository cutover as a

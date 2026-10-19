@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · TEAM-CLI-001 verified; STUDIO-CLI-001 is next
+
+`TEAM-CLI-001` is checked in the authoritative backlog and its hosted
+qualification packet is retained. Recomputing every backlog checkbox gives
+**235 checked / 45 open / 280 total (83.9%)**.
+
+The next row is `STUDIO-CLI-001`. The implementation is present, but the
+existing owner-controlled Billing page is `free` with no numeric hosted-record
+allowance and no supported checkout. The hosted custody route therefore
+fails closed with `allowance_not_configured`; no write occurred. Keep the row
+open until a supported numeric non-production allowance and actual authorized
+recipient acceptance are observed. No public or Production state changed, and
+the AppSec/Hunt hold set remains untouched.
+
 ## 2026-10-19 · ACCEPT-005 first-party owned-repository qualification
 
 The exact detached CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`

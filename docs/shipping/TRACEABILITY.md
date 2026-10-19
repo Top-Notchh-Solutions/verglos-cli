@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## TEAM-CLI-001 closure reconciliation · 2026-10-19
+
+- **Backlog mapping:** `TEAM-CLI-001` is checked. The exact closure evidence
+  is `evidence/team-cli-001-hosted-cli-policy-provider-qualification-2026-10-19.md`.
+- **Score mapping:** A fresh count of the 280 checkbox rows is **235 checked /
+  45 open / 280 total (83.9%)**.
+- **Next-row mapping:** `STUDIO-CLI-001` remains open. The implementation and
+  route qualification are recorded, but the authenticated owner Billing
+  surface has no supported checkout and no numeric hosted-record allowance;
+  the receipt route correctly refuses admission before persistence.
+- **Boundary mapping:** No AppSec-held row, public source, provider state,
+  billing state, Production state, or customer data changed.
+
 ## ACCEPT-005 first-party qualification · 2026-10-19
 
 - **Source mapping:** CLI merge
