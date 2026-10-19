@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · GITHUB-WEB-004 authorized cutover and recovery checked
+
+The owner-authorized existing Chrome session removed GitHub App installation
+`172686102` from exactly `Top-Notchh-Solutions/verglos-cli` and reinstalled the
+App with only that repository selected. GitHub returned installation
+`172988022` with metadata-read and checks-read/write permissions.
+
+Protected Preview at Web commit `0719074d` reconciled the recovered
+installation, delivered one source-free PASS check (`claimed=1,
+delivered=1`), and returned an identical replay as `noop`. GitHub read back
+check `118014567306` as completed and successful for the qualification commit.
+
+`GITHUB-WEB-004` is now checked. The isolated Preview fixture retains the
+historical `172686102` row as a recorded installation-ID reconciliation
+limitation; it is not live provider state. AppSec/Hunt state is unchanged.
+Score is now **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/github-web-004-cutover-recovery-2026-10-19.md`.
+
 ## 2026-10-19 · GITHUB-WEB-004 cutover readiness boundary
 
 The active GitHub installation `172686102` remains bound to

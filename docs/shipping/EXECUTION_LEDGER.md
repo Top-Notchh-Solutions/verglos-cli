@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · GITHUB-WEB-004 authorized cutover and recovery checked
+
+- **Observation:** The owner-authorized existing Chrome session uninstalled
+  GitHub App installation `172686102` from exactly
+  `Top-Notchh-Solutions/verglos-cli`; GitHub queued the uninstall and the
+  installation disappeared. Reinstallation selected only that repository and
+  returned installation `172988022` with metadata-read and checks-read/write
+  permissions.
+- **Verification:** Web commit `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
+  deployed to protected Preview. The recovered installation reconciled with
+  `createdCount=1`; a source-free PASS check was queued, the delivery worker
+  returned `claimed=1, delivered=1, retried=0, failed=0`, identical replay
+  returned `noop`, and GitHub read back check `118014567306` as completed and
+  successful for the qualification commit.
+- **Disposition:** `GITHUB-WEB-004` is checked. The isolated Preview fixture
+  retains its historical `172686102` row as active because reconciliation is
+  keyed by installation ID; this is recorded as a fixture limitation and is
+  not claimed as live provider state. No AppSec/Hunt state changed.
+- **Evidence:**
+  `docs/shipping/evidence/github-web-004-cutover-recovery-2026-10-19.md`.
+- **Score:** **239 checked / 41 open / 280 total (85.4%)**.
+
 ## 2026-10-19 · GITHUB-WEB-004 cutover readiness boundary recorded
 
 - **Observation:** The existing GitHub App settings page shows the owner
