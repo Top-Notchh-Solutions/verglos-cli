@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · FINAL-WEB-007 public-home browser qualification
+
+- **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`; existing
+  authenticated Chrome owner session; no new tab/window or state-changing
+  request.
+- **Verification:** Lighthouse navigation on `https://verglos.com/` passed
+  desktop **61/61** and mobile **60/60**, with Accessibility, Best Practices,
+  SEO, and Agentic Browsing at **100/100** and zero failed audits.
+- **Disposition:** Current browser evidence only. Keep `FINAL-WEB-007`
+  unchecked for field-CWV, human screen-reader, large-dataset, and final
+  acceptance requirements. No provider, payment, customer, Production, or
+  AppSec/Hunt state changed; `TEAM-CLI-001` remains checked.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-007-public-home-lighthouse-2026-10-19.md`
+  and its preserved JSON/HTML report directory.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · FINAL-WEB-008 public release smoke
 
 - **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` from a

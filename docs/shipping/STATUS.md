@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · FINAL-WEB-007 public-home browser qualification
+
+The existing authenticated Chrome owner session performed a read-only
+Lighthouse navigation audit of `https://verglos.com/` at Web merge `0719074d`.
+Desktop passed 61/61 and mobile passed 60/60; Accessibility, Best Practices,
+SEO, and Agentic Browsing were each 100 with zero failed audits. The tab was
+restored to the owner billing page and no state-changing request occurred.
+
+This advances current browser evidence only. `FINAL-WEB-007` remains unchecked
+for field-CWV, human screen-reader, large-dataset, and final acceptance
+requirements. `TEAM-CLI-001` remains checked and AppSec/Hunt rows were not
+changed.
+
+Evidence: `evidence/final-web-007-public-home-lighthouse-2026-10-19.md` and
+the preserved JSON/HTML reports beneath its artifact directory. Score remains
+**235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · FINAL-WEB-008 public release smoke
 
 The current Web merge `0719074d` passed the public release-smoke regression

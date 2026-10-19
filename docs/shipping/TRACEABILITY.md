@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007 public-home browser qualification · 2026-10-19
+
+- **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
+  was audited in the existing authenticated Chrome owner session without
+  creating a tab or issuing a state-changing request.
+- **Verification mapping:** Public-home Lighthouse navigation passed desktop
+  61/61 and mobile 60/60. Accessibility, Best Practices, SEO, and Agentic
+  Browsing were 100/100 on both devices with zero failures.
+- **Acceptance mapping:** This advances browser qualification only;
+  `FINAL-WEB-007` remains unchecked for field-CWV, human screen-reader,
+  large-dataset, and final acceptance evidence. No AppSec-held checkbox
+  changed; `TEAM-CLI-001` remains checked. Score remains **235/45/280
+  (83.9%)**.
+- **Evidence:**
+  `evidence/final-web-007-public-home-lighthouse-2026-10-19.md` and its
+  preserved JSON/HTML reports.
+
 ## FINAL-WEB-008 public release smoke · 2026-10-19
 
 - **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
