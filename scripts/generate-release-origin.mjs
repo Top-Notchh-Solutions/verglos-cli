@@ -41,7 +41,7 @@ if (archives.length !== EXPECTED_PACKAGES.size) throw new Error(`release origin 
 for (const sidecar of REQUIRED_SIDECARS) {
   if (!files.includes(sidecar)) throw new Error(`release origin is missing ${sidecar}`);
 }
-const unexpected = files.filter((name) => !name.endsWith(".tgz") && !REQUIRED_SIDECARS.includes(name));
+const unexpected = files.filter((name) => !name.endsWith(".tgz") && !REQUIRED_SIDECARS.includes(name) && name !== MANIFEST_NAME && name !== "SHA256SUMS");
 if (unexpected.length > 0) throw new Error(`release origin contains unexpected files: ${unexpected.join(", ")}`);
 for (const name of [...archives, ...REQUIRED_SIDECARS]) {
   if (!(await lstat(join(root, name))).isFile()) throw new Error(`release artifact is not a regular file: ${name}`);
