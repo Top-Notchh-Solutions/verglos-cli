@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · STUDIO-CLI-001 latest CLI upload-binding qualification
+
+The latest CLI merge `0823b513` was exercised in a disposable clean
+worktree. A forced workspace build passed **8/8** packages, the focused Studio
+projection/upload suite passed **7/7**, typecheck passed, and `git diff --check`
+passed. The suite covered exact approval-bound redacted upload, private-field
+refusal before network access, server digest mismatch, organization/project
+endpoint binding, unsafe identifier rejection, and bounded streamed-response
+cancellation.
+
+This is implementation-side qualification only. `STUDIO-CLI-001` remains
+unchecked pending an approved numeric paid/non-production hosted-record
+allowance, successful hosted custody, and authorized recipient/customer
+acceptance. No provider, billing, customer, Production, npm, or AppSec/Hunt
+state changed. `TEAM-CLI-001` remains checked.
+
+Evidence: `evidence/studio-cli-001-cli-upload-binding-qualification-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · QUAL-WEB-006 current-head revalidation
 
 The exact Web merge `0719074d` passed the focused accessibility/performance,

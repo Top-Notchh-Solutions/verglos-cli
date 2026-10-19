@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 latest CLI upload-binding qualification · 2026-10-19
+
+- **Source mapping:** CLI `origin/main` at
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`, with implementation `a55c1c66`
+  and regression test `ae40cdb4` retained through normal merge history.
+- **Verification mapping:** Forced workspace build passed **8/8** packages;
+  focused projection/upload tests passed **7/7** with zero failures/skips;
+  typecheck and diff check passed in a clean disposable worktree.
+- **Boundary mapping:** The tested path admits only the exact redacted,
+  organization/workspace/record/approval-bound projection; it rejects private
+  fields before network access, mismatched server digests, unsafe identifiers,
+  and oversized streamed responses.
+- **Acceptance mapping:** `STUDIO-CLI-001` remains unchecked for an approved
+  numeric paid/non-production hosted allowance, successful hosted custody, and
+  authorized recipient/customer acceptance. No AppSec-held checkbox changed;
+  `TEAM-CLI-001` remains checked. Score remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-cli-upload-binding-qualification-2026-10-19.md`.
+
 ## QUAL-WEB-006 current-head revalidation · 2026-10-19
 
 - **Source mapping:** Web merge

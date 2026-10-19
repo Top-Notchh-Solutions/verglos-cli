@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · STUDIO-CLI-001 latest CLI upload-binding qualification
+
+- **Source:** CLI `origin/main` at
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`; relevant implementation
+  `a55c1c66` and regression test `ae40cdb4` are preserved through normal PR
+  history. Qualification worktree was disposable and clean.
+- **Verification:** Forced workspace build passed **8/8** packages; focused
+  projection/upload tests passed **7/7** with zero failures/skips; typecheck
+  and diff check passed. Node `v26.4.0`, pnpm `9.15.9`, Darwin 25.5.0 arm64.
+- **Disposition:** This qualifies the CLI upload boundary only. Keep
+  `STUDIO-CLI-001` unchecked for numeric paid/non-production hosted allowance,
+  successful hosted custody, and authorized recipient/customer acceptance. No
+  provider, billing, customer, Production, npm, or AppSec/Hunt state changed;
+  `TEAM-CLI-001` remains checked.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-cli-upload-binding-qualification-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · QUAL-WEB-006 current-head revalidation
 
 - **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`, exercised
