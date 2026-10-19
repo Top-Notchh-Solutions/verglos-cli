@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ENT-CLI-001 private-runner protocol requalification
+
+- **Verification:** The runner implementation commits `723f655` and `68772d7`
+  are ancestors of CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`.
+  Shared protocol tests passed **5/5**, CLI client tests passed **3/3**, and
+  both package typechecks passed with no skips or failures.
+- **Coverage:** The run exercised signed-job verification, tenant/runner/target
+  binding, expiry and replay refusal, network/limit bounds, malformed nested
+  JSON refusal, GET-only polling, local replay persistence, and least-evidence
+  result projection. No arbitrary shell or general remote-command field is
+  present in the protocol.
+- **Boundary:** This was code-side qualification only. No operational runner
+  credential was exchanged, no customer or Production runner executed, and no
+  external provider or database state changed.
+- **Disposition:** Keep `ENT-CLI-001` unchecked pending operational enrollment
+  credential exchange, approved isolated execution/result reconciliation,
+  cross-platform operational evidence, independent review, and authorized
+  enterprise acceptance. AppSec/Hunt is unchanged; score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/ent-cli-001-protocol-requalification-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 Preview allowance requalification
 
 - **Source/deployment:** Current Web source commit

@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · ENT-CLI-001 private-runner protocol requalification
+
+The current private-runner implementation was rechecked through the bounded
+shared protocol and CLI client suites: **5/5** and **3/3** passed, with shared
+and CLI typechecks passing and no skips or failures. The checks cover signed
+job verification, tenant/runner/target binding, expiry/replay refusal,
+GET-only polling, malformed-job refusal, local replay persistence, and
+least-evidence result projection.
+
+This is code-side evidence only. `ENT-CLI-001` remains unchecked pending
+operational enrollment credential exchange, approved isolated runner
+execution/result reconciliation, cross-platform operational evidence,
+independent review, and enterprise acceptance. No AppSec state changed. Score
+remains **235 checked / 45 open / 280 total (83.9%)**. Evidence:
+`evidence/ent-cli-001-protocol-requalification-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 Preview allowance requalification
 
 The current owner-authorized Preview qualification reached the exact
