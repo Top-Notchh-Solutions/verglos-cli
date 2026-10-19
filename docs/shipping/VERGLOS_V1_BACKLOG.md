@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-19 · active continuation after authorized GitHub recovery
+
+The overall shipping goal remains active; the completed GitHub cutover was a
+subtask, not final-goal completion. The current score is **239 checked / 41
+open / 280 total (85.4%)**. The independent Hunt AppSec hold set remains
+`HUNT-008`–`HUNT-011` and `QUAL-CLI-004`, plus rows that explicitly depend on
+their independent review. Do not hold unrelated rows for AppSec: classify the
+first unchecked row, park only the AppSec-dependent portion, and continue
+top-to-bottom with the next dependency-ready non-AppSec row. The next active
+non-AppSec row is `STUDIO-CLI-001`; its remaining contract is the numeric
+hosted allowance and authorized Studio recipient/customer acceptance.
+
+Owner approvals route work but do not replace row-specific implementation,
+provider, customer, legal, field, release, or acceptance evidence. Continue
+using the active `verglos-web`, `verglos-cli`, and private shipping ledger
+repositories only; preserve normal granular substantive commits and do not
+squash.
+
 ## 2026-10-19 · ACCEPT-002 twelve-story execution coverage enforcement
 
 Private commit `2c24069b` adds a machine-checked execution plan for all twelve

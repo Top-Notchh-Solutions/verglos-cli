@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## Overall continuation state · 2026-10-19
+
+The GitHub cutover/recovery entry is complete, but the overall shipping goal
+is not complete. Score: **239 checked / 41 open / 280 total (85.4%)**. Hold
+only the Hunt/AppSec rows and explicit downstream dependencies; continue
+top-to-bottom with non-AppSec rows under their own acceptance contracts. The
+next active row is `STUDIO-CLI-001`, which still needs a numeric hosted
+allowance and authorized Studio recipient/customer acceptance.
+
 ## 2026-10-19 · GITHUB-WEB-004 authorized cutover and recovery checked
 
 The owner-authorized existing Chrome session removed GitHub App installation

@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · overall shipping continuation remains active
+
+- **State:** The authorized GitHub cutover/recovery was a completed subtask,
+  not completion of the overall shipping goal. The private ledger is now
+  **239 checked / 41 open / 280 total (85.4%)**.
+- **AppSec boundary:** Keep `HUNT-008`–`HUNT-011`, `QUAL-CLI-004`, the
+  independent Hunt review, and explicit downstream dependencies held. Do not
+  use that hold to stop unrelated backlog work.
+- **Next row:** Continue from the first dependency-ready non-AppSec row,
+  `STUDIO-CLI-001`, and close it only after its numeric hosted allowance and
+  authorized Studio recipient/customer evidence are real and recorded.
+- **Working rule:** Use `verglos-web`, `verglos-cli`, and this private ledger;
+  preserve granular substantive commits with no squash or artificial
+  contribution commits.
+
 ## 2026-10-19 · GITHUB-WEB-004 authorized cutover and recovery checked
 
 - **Observation:** The owner-authorized existing Chrome session uninstalled

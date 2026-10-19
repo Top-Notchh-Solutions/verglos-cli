@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## Active continuation state · 2026-10-19
+
+The GitHub cutover/recovery subtask is complete, but the overall shipping goal
+remains active at **239 checked / 41 open / 280 total (85.4%)**. The direct
+Hunt/AppSec hold set is `HUNT-008`–`HUNT-011` and `QUAL-CLI-004`, together with
+the separate independent Hunt review and explicit downstream dependencies.
+Unrelated rows remain actionable under their own contracts. The next
+dependency-ready non-AppSec row is `STUDIO-CLI-001`.
+
+Evidence for the completed provider subtask:
+`evidence/github-web-004-cutover-recovery-2026-10-19.md`.
+
 ## GITHUB-WEB-004 cutover readiness boundary · 2026-10-19
 
 - **Observation mapping:** The active owner-controlled installation `172686102`
