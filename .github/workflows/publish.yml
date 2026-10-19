@@ -1,13 +1,6 @@
 name: Publish
 
 on:
-  workflow_dispatch:
-    inputs:
-      promote_latest:
-        description: "Move npm latest dist-tags to the package.json versions"
-        required: false
-        default: false
-        type: boolean
   push:
     tags:
       - "v*"
@@ -21,9 +14,7 @@ jobs:
     name: Publish npm packages
     runs-on: ubuntu-latest
     # The repository's `release` environment must require an explicit
-    # reviewer before any registry mutation.  Keeping this at the job level
-    # places the gate in front of both tag-triggered publication and the
-    # deliberate dist-tag promotion workflow.
+    # reviewer before any registry mutation.
     environment:
       name: release
     concurrency:
@@ -35,7 +26,6 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Verify immutable release tag
-        if: ${{ github.event_name == 'push' }}
         run: node scripts/verify-release-tag.mjs "$GITHUB_REF_NAME"
 
       - name: Setup pnpm
@@ -52,66 +42,33 @@ jobs:
 
       # Install all platform-specific lock entries for license evidence; this does not declare them as supported product targets.
       - name: Configure cross-platform license evidence
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node -e 'const fs=require("node:fs"); const p=JSON.parse(fs.readFileSync("package.json","utf8")); p.pnpm={...(p.pnpm||{}),supportedArchitectures:{os:["current","aix","android","darwin","freebsd","linux","netbsd","openbsd","openharmony","sunos","win32"],cpu:["current","arm","arm64","ia32","loong64","mips64el","ppc64","riscv64","s390x","x64"]}}; fs.writeFileSync("package.json",JSON.stringify(p,null,2)+"\n");'
 
-      - name: Promote package versions to npm latest
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.promote_latest }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
-            echo "::error::NPM_TOKEN repository secret is required to move npm dist-tags."
-            exit 1
-          fi
-
-          for PKG_DIR in \
-            packages/shared \
-            packages/scanner \
-            packages/reporter \
-            packages/mcp \
-            packages/entitlement \
-            packages/cli
-          do
-            PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-            PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-            npm dist-tag add "${PKG_NAME}@${PKG_VER}" latest
-          done
-
       - name: Install dependencies
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm build
 
       - name: Typecheck
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm typecheck
 
       - name: Test
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm test
 
       - name: Test release artifact verifier
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-third-party-notices.test.mjs scripts/license-inventory.test.mjs scripts/package-surface-audit.test.mjs scripts/external-license-records.test.mjs
 
       - name: Verify release rollback/revocation rehearsal
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/verify-release-rollback-rehearsal.mjs
 
       - name: Audit package contents
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/check-package-contents.mjs
 
       - name: Audit public boundary
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/check-public-boundary.mjs
 
       - name: Pack smoke test
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           set -euo pipefail
           AUDIT_DIR=$(mktemp -d)
@@ -126,7 +83,6 @@ jobs:
           node scripts/check-packed-manifests.mjs "$AUDIT_DIR"
 
       - name: Prepare release packages and licensing evidence
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           set -euo pipefail
           RELEASE_DIR=$(mktemp -d)
@@ -140,24 +96,20 @@ jobs:
           cp licenses/external-content-records.json "$RELEASE_DIR/external-license-records.json"
 
       - name: Verify clean consumer install
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           node --test scripts/verify-clean-consumer.test.mjs
           node scripts/verify-clean-consumer.mjs "$RELEASE_DIR" > "$RELEASE_DIR/clean-consumer-verification.txt"
 
       - name: Prepare release checksums
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           set -euo pipefail
           cd "$RELEASE_DIR"
           sha256sum ./*.tgz ./THIRD_PARTY_NOTICES ./SBOM.cdx.json ./SBOM.spdx.json ./dependency-license-inventory.json ./external-license-records.json ./clean-consumer-verification.txt > SHA256SUMS
 
       - name: Verify release checksums
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR" --require-seven
 
       - name: Upload release artifacts
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         uses: actions/upload-artifact@v4
         with:
           name: verglos-npm-artifacts-${{ github.sha }}
@@ -190,7 +142,6 @@ jobs:
       # published, scanner still needed).
 
       - name: Publish shared package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/shared
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -202,7 +153,6 @@ jobs:
           npm publish "${RELEASE_DIR}/verglos-shared-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish scanner package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/scanner
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -214,7 +164,6 @@ jobs:
           npm publish "${RELEASE_DIR}/verglos-scanner-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish reporter package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/reporter
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -226,7 +175,6 @@ jobs:
           npm publish "${RELEASE_DIR}/verglos-reporter-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish mcp package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/mcp
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -238,7 +186,6 @@ jobs:
           npm publish "${RELEASE_DIR}/verglos-mcp-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish entitlement package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/entitlement
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -250,7 +197,6 @@ jobs:
           npm publish "${RELEASE_DIR}/verglos-entitlement-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish Hunt package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/hunt
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
@@ -262,7 +208,6 @@ jobs:
           npm publish "${RELEASE_DIR}/verglos-hunt-${PKG_VER}.tgz" --access public --provenance --tag alpha
 
       - name: Publish CLI package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           PKG_DIR=packages/cli
           PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
