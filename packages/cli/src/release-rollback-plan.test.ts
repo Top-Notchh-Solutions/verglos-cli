@@ -48,8 +48,9 @@ test("rollback-rehearsal covers every provider boundary and preserves historical
   } finally {
     console.log = original;
   }
-  const report = JSON.parse(lines[0]!) as { status: string; operationCount: number; historicalRecordCount: number; historicalRecordsPreserved: boolean; operations: Array<{ id: string; action: string }> };
+  const report = JSON.parse(lines[0]!) as { status: string; manifestDigest: string; operationCount: number; historicalRecordCount: number; historicalRecordsPreserved: boolean; operations: Array<{ id: string; action: string }> };
   assert.equal(report.status, "passed");
+  assert.match(report.manifestDigest, /^sha256:[a-f0-9]{64}$/u);
   assert.equal(report.operationCount, 5);
   assert.equal(report.historicalRecordCount, 2);
   assert.equal(report.historicalRecordsPreserved, true);
@@ -77,7 +78,13 @@ test("rollback-rehearsal fails closed when one operation is not approved", async
   } finally {
     console.log = original;
   }
-  assert.deepEqual(JSON.parse(lines[0]!), { status: "failed", failedOperation: "npm", reason: "approval-required", operations: [], historicalRecordsPreserved: true });
+  const report = JSON.parse(lines[0]!) as { status: string; manifestDigest: string; failedOperation: string; reason: string; operations: unknown[]; historicalRecordsPreserved: boolean };
+  assert.equal(report.status, "failed");
+  assert.match(report.manifestDigest, /^sha256:[a-f0-9]{64}$/u);
+  assert.equal(report.failedOperation, "npm");
+  assert.equal(report.reason, "approval-required");
+  assert.deepEqual(report.operations, []);
+  assert.equal(report.historicalRecordsPreserved, true);
 });
 
 test("rollback-rehearsal rejects an incomplete or duplicated provider-boundary set", async () => {
