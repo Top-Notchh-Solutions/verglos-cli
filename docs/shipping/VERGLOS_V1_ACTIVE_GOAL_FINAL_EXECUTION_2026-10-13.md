@@ -1,6 +1,36 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0zg Active continuation — original logic only · 2026-10-19
+
+The shipping goal remains active at **239 checked / 41 open / 280 total
+(85.4%)**. Hunt/AppSec rows remain explicitly held; no unrelated row is held
+for AppSec. Work continues top-to-bottom across the real `verglos-web`,
+`verglos-cli`, and private shipping ledger repositories with normal granular
+commits and no squash/rebase/force-push history.
+
+Since the previous checkpoint, the following original logic is merged or
+qualified without changing a checkbox:
+
+- Web PR #222 merged normally as
+  `8e06f6d43a35ed123c2a9ef169238beca202ff68`; public Release Record
+  no-index/content-digest verification and dashboard qualification contracts
+  pass **6/6** focused tests, typecheck, diff check, and **8/8** hosted checks.
+- CLI PR #157 merged normally as
+  `7c24535c55e2672b188cddb6219511c0910983ff`; rollback rehearsal now binds
+  evidence to the exact manifest digest, with build/tests and hosted checks
+  recorded in the private ledger.
+- Private ACCEPT-006 commits `6430a38` and `423daecc` add and test the real
+  six-question comprehension scorer. It refuses secret-like/raw answer
+  leakage and caller-supplied correctness flags, but keeps acceptance open
+  until the real consenting participant run and independent review.
+
+No participant, customer, provider, billing, Production, or AppSec evidence
+is invented by this continuation. The next non-AppSec implementation work
+must preserve the same distinction: ship original code and qualification
+substrates, record evidence, and check only rows whose full contracts are
+actually satisfied.
+
 ## 0.0zf Current STUDIO-CLI-001 original production upload authorization — 2026-10-19
 
 Web PR #228 merged normally as
