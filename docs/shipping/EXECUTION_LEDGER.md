@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · QUAL-CLI-006 cross-platform rollback matrix
+
+- **Implementation:** CLI PR #151 merged normally as `07cb117e`, preserving
+  implementation commit `562ea84e`. The platform matrix now executes and
+  uploads the bounded rollback/revocation rehearsal for all Ubuntu/macOS/
+  Windows Node 20/22/24 cells; the workflow contract test requires both
+  execution and fail-closed upload.
+- **Verification:** Local platform-contract and rollback-generator tests passed
+  **2/2**, with diff check passed. Hosted matrix run `39184280350` passed on
+  rerun attempt 2 across all nine cells, including full tests; self-scan
+  `39184280327`, official validators `39184280479`, and in-toto job
+  `117846346587` passed. The first attempt's non-diagnostic Windows Node 24
+  aggregate-test failure passed on rerun without source changes.
+- **Disposition:** This is a substantive implementation and qualification
+  advance, not row closure. Keep QUAL-CLI-006 and DIST-006 unchecked pending
+  trusted keyless/protected publication, authenticated provider rollback/
+  revocation, legal/license clearance, independent review, and final
+  acceptance. TEAM-CLI-001 is already checked; AppSec/Hunt state is unchanged.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-rollback-matrix-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · QUAL-WEB-005 account-deletion scheduler
 
 - **Implementation:** Web PR #221 merged normally as `0719074d`, preserving

@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## QUAL-CLI-006 cross-platform rollback matrix · 2026-10-19
+
+- **Source mapping:** CLI implementation commit `562ea84e` merged normally in
+  PR #151 as `07cb117e3796b693c71c3f937d5935e0e2abb694`; no squash, rebase, or
+  force-push was used.
+- **Workflow mapping:** `.github/workflows/platform-matrix.yml` runs the
+  bounded rollback/revocation evidence generator and uploads its report/log
+  with fail-closed artifact presence for each Ubuntu/macOS/Windows Node
+  20/22/24 cell. The platform contract test enforces both steps.
+- **Verification mapping:** Local contract/generator tests pass **2/2** and
+  diff check passes. Hosted matrix `39184280350` passes on rerun attempt 2 for
+  all nine cells; self-scan `39184280327`, official validators `39184280479`,
+  and in-toto job `117846346587` pass. The first Windows Node 24 aggregate-test
+  failure was rerun without source changes and passed.
+- **Acceptance mapping:** This qualifies code-side cross-platform evidence
+  only. QUAL-CLI-006 and DIST-006 remain unchecked for trusted keyless identity,
+  protected publication, authenticated provider rollback/revocation, legal/
+  license clearance, independent review, and final acceptance. TEAM-CLI-001 is
+  checked; no AppSec-held checkbox changed. Score remains **235/45/280
+  (83.9%)**.
+- **Evidence:** `evidence/qual-cli-006-rollback-matrix-2026-10-19.md`.
+
 ## QUAL-WEB-005 account-deletion scheduler · 2026-10-19
 
 - **Source mapping:** Web commits `80a95ba` and `6dfab4e` merged normally in
