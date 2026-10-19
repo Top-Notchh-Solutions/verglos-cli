@@ -13,7 +13,7 @@ import {
   type PrivateRunnerResult,
   type PrivateRunnerResultInput,
 } from "@verglos/shared";
-import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
+import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials, saveCredentials } from "./credentials.js";
 import { readBoundedResponse } from "./http-response.js";
 
 const MAX_KEY_BYTES = 16 * 1024;
@@ -28,12 +28,17 @@ export type PrivateRunnerPollResult = Readonly<
   | { status: "empty"; endpoint: string }
   | { status: "ready"; endpoint: string; job: PrivateRunnerJob; jobDigest: string }
   | { status: "denied"; endpoint: string; reason: PrivateRunnerAdmissionFailure | "invalid_response" | "invalid_signature" | "replayed_local" }
-  | { status: "error"; endpoint?: string; reason: "no_license" | "network" | "http" | "response_too_large" | "invalid_json" | "invalid_input" }
+  | { status: "error"; endpoint?: string; reason: "no_runner_credential" | "network" | "http" | "response_too_large" | "invalid_json" | "invalid_input" }
 >;
 
 export type PrivateRunnerUploadResult = Readonly<
   | { status: "uploaded"; endpoint: string; resultDigest: string; idempotent: boolean }
-  | { status: "error"; endpoint?: string; reason: "no_license" | "network" | "http" | "response_too_large" | "invalid_json" | "invalid_result" | "invalid_input" }
+  | { status: "error"; endpoint?: string; reason: "no_runner_credential" | "network" | "http" | "response_too_large" | "invalid_json" | "invalid_result" | "invalid_input" }
+>;
+
+export type PrivateRunnerEnrollmentResult = Readonly<
+  | { status: "enrolled"; endpoint: string; tenantId: string; runnerId: string; credentialExpiresAt: string }
+  | { status: "error"; endpoint?: string; reason: "network" | "http" | "response_too_large" | "invalid_json" | "invalid_input" | "storage" }
 >;
 
 type ReplayState = Readonly<{ jobIds: readonly string[]; nonces: readonly string[] }>;
@@ -131,6 +136,19 @@ function relativeEndpointFor(apiUrl: string, path: string): string {
   return `${apiUrl}${expected}`;
 }
 
+function enrollmentEndpointFor(apiUrl: string, path?: string): string {
+  const expected = "/api/v1/private-runner/enroll";
+  if (path !== undefined && path !== expected) throw new Error("runner enrollment endpoint must be the fixed enrollment route");
+  return `${apiUrl}${expected}`;
+}
+
+function storedRunnerCredential(credentials: Awaited<ReturnType<typeof loadCredentials>>, tenantId: string, runnerId: string): string | undefined {
+  const runner = credentials.privateRunner;
+  if (!runner || runner.tenantId !== tenantId || runner.runnerId !== runnerId || typeof runner.credential !== "string" || !/^prc_[A-Za-z0-9_-]{43}$/u.test(runner.credential)) return undefined;
+  if (typeof runner.credentialExpiresAt !== "string" || new Date(runner.credentialExpiresAt).getTime() <= Date.now()) return undefined;
+  return runner.credential;
+}
+
 function isAbortError(error: unknown): boolean {
   return error instanceof Error && error.name === "AbortError";
 }
@@ -166,7 +184,8 @@ export async function pollPrivateRunnerJob(input: Readonly<{
 }>): Promise<PrivateRunnerPollResult> {
   if (!validId(input.tenantId) || !validId(input.runnerId) || input.allowedTargets.length === 0 || input.allowedTargets.some((target) => !validId(target))) return { status: "error", reason: "invalid_input" };
   const creds = await loadCredentials();
-  if (!creds.licenseKey) return { status: "error", reason: "no_license" };
+  const runnerCredential = storedRunnerCredential(creds, input.tenantId, input.runnerId);
+  if (!runnerCredential) return { status: "error", reason: "no_runner_credential" };
   const apiOrigin = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
   if (!apiOrigin) return { status: "error", reason: "invalid_input" };
   let endpoint: string;
@@ -186,7 +205,7 @@ export async function pollPrivateRunnerJob(input: Readonly<{
     try {
       response = await (input.fetchImpl ?? fetch)(endpoint, {
         method: "GET",
-        headers: { Accept: "application/json", Authorization: `Bearer ${creds.licenseKey}` },
+        headers: { Accept: "application/json", Authorization: `Bearer ${runnerCredential}` },
         redirect: "error",
         signal: controller.signal,
       });
@@ -235,7 +254,8 @@ export async function uploadPrivateRunnerResult(input: Readonly<{
   let result: PrivateRunnerResult;
   try { result = parseSourceFreeResult(input.result); } catch { return { status: "error", reason: "invalid_result" }; }
   const creds = await loadCredentials();
-  if (!creds.licenseKey) return { status: "error", reason: "no_license" };
+  const runnerCredential = storedRunnerCredential(creds, result.tenantId, result.runnerId);
+  if (!runnerCredential) return { status: "error", reason: "no_runner_credential" };
   const apiOrigin = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
   if (!apiOrigin) return { status: "error", reason: "invalid_input" };
   let endpoint: string;
@@ -249,7 +269,7 @@ export async function uploadPrivateRunnerResult(input: Readonly<{
     try {
       response = await (input.fetchImpl ?? fetch)(endpoint, {
         method: "POST",
-        headers: { Accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${creds.licenseKey}` },
+        headers: { Accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${runnerCredential}` },
         body,
         redirect: "error",
         signal: controller.signal,
@@ -270,6 +290,56 @@ export async function uploadPrivateRunnerResult(input: Readonly<{
     }
     const record = value as Record<string, unknown>;
     return { status: "uploaded", endpoint, resultDigest: record.resultDigest as string, idempotent: record.idempotent === true };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/** Redeem a one-time enrollment secret and persist only the resulting runner credential. */
+export async function enrollPrivateRunner(input: Readonly<{
+  tenantId: string;
+  runnerId: string;
+  enrollmentToken: string;
+  endpoint?: string;
+  timeoutMs?: number;
+  fetchImpl?: typeof fetch;
+}>): Promise<PrivateRunnerEnrollmentResult> {
+  if (!validId(input.tenantId) || !validId(input.runnerId) || !/^pr_[A-Za-z0-9_-]{43}$/u.test(input.enrollmentToken)) return { status: "error", reason: "invalid_input" };
+  const creds = await loadCredentials();
+  const apiOrigin = getTrustedApiOrigin(creds.apiUrl ?? DEFAULT_API_URL);
+  if (!apiOrigin) return { status: "error", reason: "invalid_input" };
+  let endpoint: string;
+  try { endpoint = enrollmentEndpointFor(apiOrigin, input.endpoint); } catch { return { status: "error", reason: "invalid_input" }; }
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), input.timeoutMs ?? DEFAULT_TIMEOUT_MS);
+  try {
+    let response: Response;
+    try {
+      response = await (input.fetchImpl ?? fetch)(endpoint, {
+        method: "POST",
+        headers: { Accept: "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify({ tenantId: input.tenantId, runnerId: input.runnerId, enrollmentToken: input.enrollmentToken }),
+        redirect: "error",
+        signal: controller.signal,
+      });
+    } catch { return { status: "error", endpoint, reason: "network" }; }
+    let value: unknown;
+    try {
+      const bytes = await readBoundedResponse(response, 64 * 1024);
+      if (bytes === undefined) return { status: "error", endpoint, reason: "response_too_large" };
+      value = JSON.parse(new TextDecoder().decode(bytes));
+    } catch (error) {
+      return { status: "error", endpoint, reason: isAbortError(error) ? "network" : "invalid_json" };
+    }
+    if (!response.ok || typeof value !== "object" || value === null) return { status: "error", endpoint, reason: "http" };
+    const record = value as Record<string, unknown>;
+    if (record.ok !== true || record.tenantId !== input.tenantId || record.runnerId !== input.runnerId || typeof record.runnerCredential !== "string" || !/^prc_[A-Za-z0-9_-]{43}$/u.test(record.runnerCredential) || typeof record.credentialExpiresAt !== "string" || !Number.isFinite(new Date(record.credentialExpiresAt).getTime())) {
+      return { status: "error", endpoint, reason: "http" };
+    }
+    await saveCredentials({ ...creds, privateRunner: { tenantId: input.tenantId, runnerId: input.runnerId, credential: record.runnerCredential, credentialExpiresAt: record.credentialExpiresAt } });
+    const stored = await loadCredentials();
+    if (stored.privateRunner?.tenantId !== input.tenantId || stored.privateRunner.runnerId !== input.runnerId || stored.privateRunner.credential !== record.runnerCredential) return { status: "error", endpoint, reason: "storage" };
+    return { status: "enrolled", endpoint, tenantId: input.tenantId, runnerId: input.runnerId, credentialExpiresAt: record.credentialExpiresAt };
   } finally {
     clearTimeout(timer);
   }
