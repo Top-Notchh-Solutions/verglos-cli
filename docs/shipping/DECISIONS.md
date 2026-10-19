@@ -2,12 +2,15 @@
 
 ## 2026-10-19 · retain FINAL-WEB-007 after qualification-substrate implementation
 
-- **Decision:** Accept Web PR #227 as substantive original implementation and
-  regression evidence, while retaining `FINAL-WEB-007` unchecked.
+- **Decision:** Accept Web PR #227, merged normally as
+  `47518c774a339e81ba66968e9cd6dbe0249b5e2`, as substantive original
+  implementation and regression evidence, while retaining `FINAL-WEB-007`
+  unchecked.
 - **Observed:** Separate commits `d5a3f8f` and `330280d` add strict capture
   parsing and desktop/mobile landing qualification. Landing tests **4/4**,
   truth registry **34/34**, public smoke **22/22 claims / 0 issues**, public
-  smoke tests **2/2**, typecheck, build **49/49**, and diff check passed.
+  smoke tests **2/2**, typecheck, build **49/49**, diff check, and hosted PR
+  checks **8/8** passed.
 - **Reason:** Code and local fixture tests do not supply the real browser,
   screen-reader, field-CWV, customer, or final-acceptance evidence required by
   the row. The CLI deliberately fails closed until that capture exists.

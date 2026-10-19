@@ -2,13 +2,14 @@
 
 ## 2026-10-19 · FINAL-WEB-007 landing qualification substrate
 
-Web PR #227 adds separate implementation/regression commits `d5a3f8f` and
-`330280d`. The landing verifier requires a real versioned capture covering
+Web PR #227 merged normally as `47518c774a339e81ba66968e9cd6dbe0249b5e2`,
+preserving separate implementation/regression commits `d5a3f8f` and `330280d`.
+The landing verifier requires a real versioned capture covering
 desktop and mobile for the six public journey routes, then applies the shared
 CWV/accessibility checks plus responsive, canonical-metadata, and crawlability
 checks. Its workflow contract passed **4/4**; truth registry **34/34**, public
 smoke **22/22 claims / 0 issues**, public smoke tests **2/2**, typecheck, and
-the **49/49** page build also passed.
+  the **49/49** page build, and hosted PR checks **8/8** also passed.
 
 Keep `FINAL-WEB-007` unchecked: no browser capture or final acceptance was
 invented, and no AppSec state changed. Score remains **239 checked / 41 open /

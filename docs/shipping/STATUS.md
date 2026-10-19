@@ -4,7 +4,8 @@
 
 ## 2026-10-19 · FINAL-WEB-007 landing release qualification substrate
 
-Web PR #227 contains separate substantive commits `d5a3f8f` and `330280d`.
+Web PR #227 merged normally as `47518c774a339e81ba66968e9cd6dbe0249b5e2`,
+preserving separate substantive commits `d5a3f8f` and `330280d`.
 The original landing-release verifier now requires real desktop and mobile
 captures for every public journey route, reuses the CWV/accessibility decision
 surface, and fails closed on missing responsive, canonical-metadata,
@@ -13,7 +14,7 @@ evidence. The verification workflow runs its **4/4** regression contract.
 
 Local qualification passed: truth registry **34/34**, public smoke **22/22
 publishable claims with 0 issues**, public smoke tests **2/2**, typecheck,
-build **49/49 pages**, and diff check. This is code-side evidence only: no
+build **49/49 pages**, diff check, and hosted PR checks **8/8**. This is code-side evidence only: no
 browser capture, deployment, customer, provider, billing, publication, or
 AppSec state changed. `FINAL-WEB-007` remains unchecked for real browser
 evidence and its acceptance dependencies. Score remains **239 checked / 41

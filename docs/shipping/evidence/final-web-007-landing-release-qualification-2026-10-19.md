@@ -14,7 +14,9 @@ qualification contract. It is not a browser sign-off and does not close
 - Base: normal Web main merge `c8dc05a57a77d2332856085c70833ceced0599f6`
 - Implementation: `d5a3f8f` (`feat(web): qualify landing release captures`)
 - Regression/CI wiring: `330280d` (`test(web): enforce landing release qualification`)
-- Pull request: #227, `https://github.com/anuragyadav-git/verglos-web/pull/227`
+- Pull request: #227, merged normally as
+  `47518c774a339e81ba66968e9cd6dbe0249b5e2d`,
+  `https://github.com/anuragyadav-git/verglos-web/pull/227`
 - No squash or history rewrite was used.
 
 ## Original logic implemented
@@ -43,6 +45,9 @@ qualification contract. It is not a browser sign-off and does not close
 - `pnpm typecheck`: pass.
 - `pnpm build`: pass; **49/49** static pages generated.
 - `git diff --check`: pass.
+- Hosted PR #227 checks: **8/8 passed** — typecheck/schema, three protocol
+  matrix cells, isolated PostgreSQL lifecycle, Vercel, Preview Comments, and
+  GitGuardian.
 
 The local runtime was Node `v26.4.0` / pnpm `10.34.5`; the package requests
 Node `22.x`, so the local engine warning is retained rather than hidden.

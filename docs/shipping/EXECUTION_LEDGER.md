@@ -4,7 +4,8 @@
 
 ## 2026-10-19 · FINAL-WEB-007 landing release qualification substrate
 
-- **Source:** Web PR #227 from base merge
+- **Source:** Web PR #227 merged normally as
+  `47518c774a339e81ba66968e9cd6dbe0249b5e2d` from base merge
   `c8dc05a57a77d2332856085c70833ceced0599f6`; implementation `d5a3f8f` and
   regression/CI wiring `330280d` remain separate substantive commits.
 - **Original logic:** The landing qualification parser accepts only a bounded,
@@ -14,7 +15,8 @@
   canonical metadata failures, and crawlability failures fail closed.
 - **Verification:** Landing qualification **4/4**, truth registry **34/34**,
   public smoke **22/22 claims / 0 issues**, public smoke tests **2/2**,
-  typecheck, optimized build **49/49 pages**, and diff check passed.
+  typecheck, optimized build **49/49 pages**, diff check, and hosted PR checks
+  **8/8** passed.
 - **Disposition:** This is implementation substrate, not a browser or customer
   acceptance result. Keep `FINAL-WEB-007` unchecked until a real browser capture
   and dependency acceptance are supplied. Score remains **239/41/280 (85.4%)**;

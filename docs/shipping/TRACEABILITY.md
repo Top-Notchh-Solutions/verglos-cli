@@ -4,8 +4,9 @@
 
 ## FINAL-WEB-007 landing release qualification substrate · 2026-10-19
 
-- **Source mapping:** Web PR #227; implementation `d5a3f8f`, regression/CI
-  wiring `330280d`, based on normal main merge
+- **Source mapping:** Web PR #227 merged normally as
+  `47518c774a339e81ba66968e9cd6dbe0249b5e2d`; implementation `d5a3f8f`,
+  regression/CI wiring `330280d`, based on normal main merge
   `c8dc05a57a77d2332856085c70833ceced0599f6`.
 - **Implementation mapping:** `qualifyLandingRelease` composes the existing
   CWV/a11y decision surface with required desktop/mobile route coverage,
@@ -14,7 +15,7 @@
   checkout, layout, proof, and CSS files.
 - **Verification mapping:** Landing contract **4/4**, truth registry **34/34**,
   public smoke **22/22 claims with 0 issues**, public smoke tests **2/2**,
-  typecheck, **49/49** page build, and diff check passed.
+  typecheck, **49/49** page build, diff check, and hosted PR checks **8/8** passed.
 - **Acceptance mapping:** `FINAL-WEB-007` remains unchecked because the
   implementation intentionally requires a real browser-produced capture and
   the row remains dependency-bound to public flow/claim acceptance. No
