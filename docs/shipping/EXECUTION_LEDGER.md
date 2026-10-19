@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · GITHUB-WEB-003 delivery and reconciliation checked
+
+- **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`, with the
+  existing accepted SCM delivery/reconciliation merges preserved normally.
+- **Verification:** Focused identity/lifecycle and SCM contract coverage passed
+  with zero failures/skips. The protected Preview qualification delivered a
+  source-free check through installation `172686102`, completed the durable
+  worker path, read back one successful GitHub check, and returned an identical
+  replay as `noop`. The run also reconciled the stale archive binding to revoked
+  and retained one active CLI binding.
+- **Disposition:** `GITHUB-WEB-003` is checked. Keep GITHUB-WEB-004 open for
+  the separate authorized organization cutover, uninstall, and recovery
+  exercise. No production, customer, payment, npm, or AppSec/Hunt state
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/github-web-003-delivery-reconciliation-2026-10-19.md`
+  and the referenced hosted SCM qualification packet.
+- **Score:** **238 checked / 42 open / 280 total (85.0%)**.
+
 ## 2026-10-19 · GITHUB-WEB-002 provider lifecycle checked
 
 - **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` from a

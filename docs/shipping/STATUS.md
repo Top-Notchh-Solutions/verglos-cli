@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · GITHUB-WEB-003 delivery and reconciliation checked
+
+The current Web implementation and protected Preview qualification proved the
+installation/repository/commit/artifact binding, durable delivery, provider
+read-back, duplicate replay idempotency, retry/lease handling, and
+cross-tenant refusal contract. Installation `172686102` delivered one
+source-free check for the bound `verglos-cli` commit; the worker returned
+`claimed=1, delivered=1`, GitHub returned one completed successful check, and
+an identical enqueue returned `noop`. The stale archive binding was also
+reconciled to revoked while the CLI binding remained active.
+
+`GITHUB-WEB-003` is now checked. GITHUB-WEB-004 remains open for the separate
+authorized organization cutover, uninstall, and recovery evidence. No new
+browser page or window was created, and Hunt/AppSec state is unchanged. Score
+is now **238 checked / 42 open / 280 total (85.0%)**.
+
+Evidence: `evidence/github-web-003-delivery-reconciliation-2026-10-19.md`.
+
 ## 2026-10-19 · GITHUB-WEB-002 provider lifecycle checked
 
 The current Web merge `0719074d` passed the focused App/JWT exchange,

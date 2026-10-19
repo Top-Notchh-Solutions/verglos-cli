@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## GITHUB-WEB-003 delivery and reconciliation checked · 2026-10-19
+
+- **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
+  and the accepted SCM delivery/reconciliation merges were exercised with
+  their normal history preserved.
+- **Verification mapping:** Protected Preview delivered one source-free check
+  through installation `172686102`, read back one completed successful GitHub
+  check, returned `claimed=1, delivered=1`, and proved identical replay as
+  `noop`; focused retry/lease, tenant, and cross-tenant refusal contracts
+  passed.
+- **Acceptance mapping:** `GITHUB-WEB-003` is checked. GITHUB-WEB-004 remains
+  open for the separate complete cutover, uninstall, and recovery evidence. No
+  AppSec-held checkbox changed. Score is **238/42/280 (85.0%)**.
+- **Evidence:**
+  `evidence/github-web-003-delivery-reconciliation-2026-10-19.md` and the
+  referenced hosted SCM delivery/reconciliation packet.
+
 ## GITHUB-WEB-002 provider lifecycle checked · 2026-10-19
 
 - **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
