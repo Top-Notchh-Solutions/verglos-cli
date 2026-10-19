@@ -11,6 +11,9 @@ test("platform matrix binds the actual public archives with the official in-toto
   assert.match(workflow, /in-toto==3\.0\.0/u);
   assert.match(workflow, /pack-public-packages\.mjs \.artifacts\/public-packages/u);
   assert.match(workflow, /verify-in-toto-release\.py \.artifacts\/public-packages/u);
+  assert.match(workflow, /release-rollback-evidence\.mjs/u);
+  assert.match(workflow, /release-rollback-\$\{\{ matrix\.os \}\}-node-\$\{\{ matrix\.node \}\}\.log/u);
+  assert.match(workflow, /Upload release rollback and revocation evidence/u);
   assert.match(workflow, /upload-artifact@v4/u);
   assert.match(verifier, /EXPECTED_PREFIXES/u);
   assert.match(verifier, /sha256/u);
