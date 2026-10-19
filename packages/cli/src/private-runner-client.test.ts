@@ -5,10 +5,16 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { privateRunnerJobSigningBytes, type PrivateRunnerJob } from "@verglos/shared";
-import { pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
+import { enrollPrivateRunner, pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
 
 const home = await mkdtemp(join(tmpdir(), "verglos-private-runner-client-"));
 process.env.HOME = home;
+const runnerCredential = `prc_${"a".repeat(43)}`;
+
+async function writeRunnerCredentials(): Promise<void> {
+  await mkdir(join(home, ".verglos"), { recursive: true });
+  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "owner-license-sentinel", privateRunner: { tenantId: "org_acme", runnerId: "runner_1", credential: runnerCredential, credentialExpiresAt: "2099-01-01T00:00:00.000Z" } }));
+}
 
 async function assertPrivateMode(path: string, expected: number): Promise<void> {
   const actual = (await lstat(path)).mode & 0o777;
@@ -66,8 +72,7 @@ test("private runner poll uses authenticated GET, verifies, admits, and persists
   const replayPath = join(root, "replay.json");
   await chmod(root, 0o755);
   await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
-  await mkdir(join(home, ".verglos"), { recursive: true });
-  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
+  await writeRunnerCredentials();
   const calls: Array<{ url: string; method: string | undefined; authorization: string | null; redirect: string | undefined }> = [];
   const result = await pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath, now: "2026-10-06T00:01:00.000Z", fetchImpl: async (input, init) => {
     calls.push({ url: String(input), method: init?.method, authorization: new Headers(init?.headers).get("authorization"), redirect: init?.redirect });
@@ -75,7 +80,7 @@ test("private runner poll uses authenticated GET, verifies, admits, and persists
   } });
   assert.equal(result.status, "ready");
   assert.equal(calls[0]?.method, "GET");
-  assert.equal(calls[0]?.authorization, "Bearer license-sentinel");
+  assert.equal(calls[0]?.authorization, `Bearer ${runnerCredential}`);
   assert.equal(calls[0]?.redirect, "error");
   assert.equal((await readFile(replayPath, "utf8")).includes("job_1"), true);
   await assertPrivateMode(root, 0o700);
@@ -92,8 +97,7 @@ test("private runner poll refuses a locally replayed job and never executes it",
   const replayPath = join(root, "replay.json");
   await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
   await writeFile(replayPath, JSON.stringify({ jobIds: ["job_1"], nonces: ["nonce_123456789012"] }));
-  await mkdir(join(home, ".verglos"), { recursive: true });
-  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
+  await writeRunnerCredentials();
   const result = await pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath, now: "2026-10-06T00:01:00.000Z", fetchImpl: async () => new Response(JSON.stringify({ job: makeJob(keys.privateKey) }), { status: 200 }) });
   assert.deepEqual(result, { status: "denied", endpoint: "https://example.test/api/v1/private-runner/jobs?tenant_id=org_acme&runner_id=runner_1", reason: "replayed_local" });
 });
@@ -103,8 +107,7 @@ test("private runner poll rejects malformed signatures before admission", async 
   const root = await mkdtemp(join(tmpdir(), "verglos-runner-signature-"));
   const keyPath = join(root, "runner-public.pem");
   await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
-  await mkdir(join(home, ".verglos"), { recursive: true });
-  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
+  await writeRunnerCredentials();
   const job = makeJob(keys.privateKey);
   const result = await pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath: join(root, "replay.json"), now: "2026-10-06T00:01:00.000Z", fetchImpl: async () => new Response(JSON.stringify({ job: { ...job, targetSubjectId: "subject_other" } }), { status: 200 }) });
   assert.equal(result.status, "denied");
@@ -116,8 +119,7 @@ test("private runner poll keeps its timeout active while reading a response body
   const root = await mkdtemp(join(tmpdir(), "verglos-runner-body-timeout-"));
   const keyPath = join(root, "runner-public.pem");
   await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
-  await mkdir(join(home, ".verglos"), { recursive: true });
-  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
+  await writeRunnerCredentials();
   const result = await withDeadline(pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath: join(root, "replay.json"), timeoutMs: 10, fetchImpl: async (_input, init) => responseThatWaitsForAbort(init?.signal as AbortSignal) }));
   assert.deepEqual(result, { status: "error", endpoint: "https://example.test/api/v1/private-runner/jobs?tenant_id=org_acme&runner_id=runner_1", reason: "network" });
 });
@@ -149,7 +151,7 @@ test("private runner result upload uses authenticated POST and sends only the sh
     assert.equal(String(input), "https://example.test/api/v1/private-runner/results");
     assert.equal(init?.method, "POST");
     assert.equal(init?.redirect, "error");
-    assert.equal(new Headers(init?.headers).get("authorization"), "Bearer license-sentinel");
+    assert.equal(new Headers(init?.headers).get("authorization"), `Bearer ${runnerCredential}`);
     requestBody = String(init?.body);
     return new Response(JSON.stringify({ ok: true, resultDigest: `sha256:${"c".repeat(64)}`, idempotent: false }), { status: 201 });
   } });
@@ -184,4 +186,20 @@ test("private runner result upload refuses a same-origin route override before n
     fetchImpl: async () => { throw new Error("network must not be reached"); },
   });
   assert.deepEqual(result, { status: "error", reason: "invalid_input" });
+});
+
+test("private runner enrollment redeems once, stores the runner credential, and never sends the owner license", async () => {
+  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "owner-license-sentinel" }));
+  const credential = `prc_${"b".repeat(43)}`;
+  const result = await enrollPrivateRunner({ tenantId: "org_acme", runnerId: "runner_1", enrollmentToken: `pr_${"c".repeat(43)}`, fetchImpl: async (input, init) => {
+    assert.equal(String(input), "https://example.test/api/v1/private-runner/enroll");
+    assert.equal(init?.method, "POST");
+    assert.equal(new Headers(init?.headers).get("authorization"), null);
+    assert.equal(JSON.parse(String(init?.body)).enrollmentToken, `pr_${"c".repeat(43)}`);
+    return new Response(JSON.stringify({ ok: true, tenantId: "org_acme", runnerId: "runner_1", runnerCredential: credential, credentialExpiresAt: "2099-01-01T00:00:00.000Z" }), { status: 201 });
+  } });
+  assert.deepEqual(result, { status: "enrolled", endpoint: "https://example.test/api/v1/private-runner/enroll", tenantId: "org_acme", runnerId: "runner_1", credentialExpiresAt: "2099-01-01T00:00:00.000Z" });
+  const stored = JSON.parse(await readFile(join(home, ".verglos", "credentials.json"), "utf8")) as { licenseKey: string; privateRunner: { credential: string } };
+  assert.equal(stored.licenseKey, "owner-license-sentinel");
+  assert.equal(stored.privateRunner.credential, credential);
 });
