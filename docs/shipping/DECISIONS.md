@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain QUAL-CLI-006 after current-head qualification
+
+- **Decision:** Accept the current merged-head qualification as substantive
+  evidence while retaining `QUAL-CLI-006` unchecked.
+- **Observed:** CLI merge `11734a45740a893c307606e8f3d3f316711abd9e` passed
+  build **8/8**, release/package contracts **15/15**, rollback rehearsal, and
+  all **12/12** hosted checks covering the nine platform cells, official
+  standard/provenance validation, in-toto binding, and self-scan.
+- **Boundary:** No npm publish, tag, registry mutation, provider/signing
+  operation, customer source use, or production write occurred.
+- **Reason:** The row still requires trusted keyless publication identity,
+  protected publisher approval, legal clearance, independent AppSec review,
+  and final acceptance.
+- **Disposition:** Score remains **239/41/280 (85.4%)**; no AppSec-held state
+  changed.
+- **Evidence:**
+  `evidence/qual-cli-006-current-merged-head-2026-10-19.md`.
+
 ## 2026-10-19 · retain distribution rows after current-head qualification
 
 - **Decision:** Accept the current-head release-contract qualification as

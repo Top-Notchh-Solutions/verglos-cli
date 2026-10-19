@@ -2,6 +2,21 @@
 
 ## Active continuation state · 2026-10-19
 
+## QUAL-CLI-006 current merged-head qualification · 2026-10-19
+
+- **Source mapping:** CLI PR #152 merged normally at
+  `11734a45740a893c307606e8f3d3f316711abd9e`.
+- **Verification mapping:** Locked install, build **8/8**, release/package
+  contracts **15/15**, rollback exit `0`, and diff check passed. Hosted run
+  `39247182521` passed all nine platform cells; official validators run
+  `39247182276`, self-scan `39247182292`, and in-toto binding all passed.
+- **Acceptance mapping:** `QUAL-CLI-006` remains unchecked for trusted
+  keyless publication identity, protected publisher approval, legal clearance,
+  independent AppSec review, and final acceptance. Score remains
+  **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/qual-cli-006-current-merged-head-2026-10-19.md`.
+
 ## Distribution current-head release contracts · 2026-10-19
 
 - **Source mapping:** CLI exact merged head

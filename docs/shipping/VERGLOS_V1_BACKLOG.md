@@ -56,6 +56,21 @@ authenticated rollback/revocation acceptance. Score remains **239 checked / 41
 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-current-head-release-contracts-2026-10-19.md`.
 
+## 2026-10-19 · QUAL-CLI-006 current merged-head qualification
+
+CLI PR #152’s exact merge `11734a45740a893c307606e8f3d3f316711abd9e` passed
+locked installation, build **8/8**, release/package contracts **15/15**, and
+rollback rehearsal. Hosted checks were **12/12 SUCCESS** across all nine
+Ubuntu/macOS/Windows Node 20/22/24 cells plus official standard/provenance,
+in-toto, and self-scan checks. No npm, tag, registry, provider, signing, or
+production write occurred.
+
+This advances `QUAL-CLI-006` evidence only. The checkbox remains open for
+trusted keyless publication identity, protected publisher approval, legal
+clearance, independent AppSec review, and final acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-current-merged-head-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-WEB-003 original policy lifecycle hardening
 
 Web PR #223 preserves implementation commit `9489fb6` and regression commit

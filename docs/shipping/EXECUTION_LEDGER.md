@@ -2,6 +2,23 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · QUAL-CLI-006 current merged-head qualification
+
+- **Source:** CLI PR #152 normal merge at
+  `11734a45740a893c307606e8f3d3f316711abd9e`.
+- **Verification:** Clean locked install, build **8/8**, release/package
+  contract suite **15/15**, rollback rehearsal exit `0`, and diff check passed.
+  Hosted PR checks are **12/12 SUCCESS** across Ubuntu/macOS/Windows Node
+  20/22/24, official standard/provenance validators, in-toto binding, and
+  self-scan (`39247182521`, `39247182276`, `39247182292`).
+- **Boundary:** No npm publication, tag, registry, customer, production,
+  provider, or signing write occurred.
+- **Disposition:** `QUAL-CLI-006` remains unchecked for trusted keyless
+  release identity, protected publisher approval, legal clearance, independent
+  AppSec review, and final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-cli-006-current-merged-head-2026-10-19.md`.
+
 ## 2026-10-19 · distribution current-head release-contract qualification
 
 - **Source:** Exact merged CLI head

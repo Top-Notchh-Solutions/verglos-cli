@@ -2,6 +2,21 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · QUAL-CLI-006 current merged-head qualification
+
+CLI PR #152’s exact merge `11734a45740a893c307606e8f3d3f316711abd9e` passed
+clean locked installation, **8/8** build tasks, **15/15** release/package
+contract tests, and rollback rehearsal. Hosted checks are **12/12 SUCCESS**
+across Ubuntu/macOS/Windows Node 20/22/24, official standard/provenance,
+in-toto, and self-scan jobs. No npm, tag, registry, provider, signing, or
+production write occurred.
+
+`QUAL-CLI-006` remains unchecked for trusted keyless publication identity,
+protected publisher approval, legal clearance, independent AppSec review, and
+final acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/qual-cli-006-current-merged-head-2026-10-19.md`.
+
 ## 2026-10-19 · distribution current-head qualification
 
 The exact merged CLI head `11734a45740a893c307606e8f3d3f316711abd9e` was
