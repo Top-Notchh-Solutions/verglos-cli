@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 current-head revalidation · 2026-10-19
+
+- **Source mapping:** Web merge
+  `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` was exercised from a clean
+  disposable worktree; no public source changed during the run.
+- **Verification mapping:** Focused accessibility/performance,
+  dashboard-boundary, and privacy-page contracts passed **24/24** with zero
+  failures or skips. Typecheck and diff check passed.
+- **Boundary mapping:** The run revalidated fail-closed Core Web Vital and
+  accessibility thresholds, keyboard/landmark/reduced-motion behavior,
+  announced loading, bounded retryable errors, and the explicit privacy flow.
+  No browser, provider, Production, customer, or account state was touched.
+- **Acceptance mapping:** `QUAL-WEB-006` remains unchecked for human
+  screen-reader evidence, complete authenticated paid/organization state,
+  populated large-dataset behavior, field-CWV observation, and final
+  acceptance. No AppSec-held checkbox changed; `TEAM-CLI-001` remains checked.
+  Score remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/qual-web-006-current-head-revalidation-2026-10-19.md`.
+
 ## QUAL-WEB-005 authenticated deletion route E2E · 2026-10-19
 
 - **Source mapping:** Web merge

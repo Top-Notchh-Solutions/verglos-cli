@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · QUAL-WEB-006 current-head revalidation
+
+The exact Web merge `0719074d` passed the focused accessibility/performance,
+dashboard-boundary, and privacy-state suite **24/24**, with zero failures or
+skips. Typecheck and diff check also passed. The run revalidated fail-closed
+Core Web Vital/accessibility thresholds, keyboard/landmark/reduced-motion
+contracts, announced loading and bounded retryable error states, and the
+explicit account-privacy flow without touching browser, provider, Production,
+customer, or account state.
+
+This is current-head qualification evidence only. `QUAL-WEB-006` remains
+unchecked pending human screen-reader evidence, complete authenticated
+paid/organization state, populated large-dataset behavior, field-CWV
+observation, and final acceptance. TEAM-CLI-001 remains checked; AppSec/Hunt
+is unchanged.
+
+Evidence: `evidence/qual-web-006-current-head-revalidation-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · QUAL-WEB-005 authenticated deletion route E2E
 
 The exact Web merge `0719074d` was exercised in a disposable worktree against

@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · QUAL-WEB-006 current-head revalidation
+
+- **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`, exercised
+  from a clean disposable worktree with Node `v22.23.3` and pnpm `10.34.5`.
+- **Verification:** Focused accessibility/performance, dashboard-boundary,
+  and privacy-page contracts passed **24/24** with zero failures or skips;
+  typecheck and diff check also passed.
+- **Disposition:** This revalidates the current code-side qualification
+  substrate only. Keep `QUAL-WEB-006` unchecked pending human screen-reader,
+  complete authenticated paid/organization state, populated large-data,
+  field-CWV, and final-acceptance evidence. No browser, provider, Production,
+  customer, account, or AppSec/Hunt state changed; TEAM-CLI-001 remains
+  checked.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-current-head-revalidation-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · QUAL-WEB-005 authenticated deletion route E2E
 
 - **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`, exercised
