@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 current CLI requalification · 2026-10-19
+
+- **Source mapping:** CLI `origin/main` merge
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb` was exercised from a disposable
+  clean worktree.
+- **Verification mapping:** CLI tests passed 307/309 with two explicit A2
+  Docker-target skips and zero failures; typecheck passed; all seven focused
+  private-runner tests passed for signature, binding, replay, timeout, and
+  source-free result projection behavior.
+- **Acceptance mapping:** This advances ENT-CLI-001 implementation evidence
+  only. Operational enrollment, approved runner/result reconciliation,
+  cross-platform operations, independent review, and enterprise acceptance
+  remain open. No AppSec-held checkbox changed; `TEAM-CLI-001` remains
+  checked. Score remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/ent-cli-001-current-cli-requalification-2026-10-19.md` and its
+  preserved logs.
+
 ## FINAL-WEB-007 public-home browser qualification · 2026-10-19
 
 - **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`

@@ -1,0 +1,874 @@
+
+> verglos@2.0.0-alpha.1 test /private/tmp/verglos-cli-studio-upload-20261019/packages/cli
+> pnpm --filter @verglos/hunt build && node ../../scripts/run-package-tests.mjs src
+
+
+> @verglos/hunt@2.0.0-alpha.1 build /private/tmp/verglos-cli-studio-upload-20261019/packages/hunt
+> tsc -p tsconfig.json
+
+✔ account score sync uses a separate authenticated allowlisted request (33.771292ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 150.571791
+✔ attest rejects malformed options before entitlement lookup (0.713542ms)
+✔ attest rejects control-character report paths (0.076875ms)
+✔ legacy attest returns fixed retirement metadata without echoing local paths or URLs (0.157667ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.120792
+✔ CI check payload command emits only source-free release identity (6.151541ms)
+✔ CI check payload command fails closed on missing fields, unsafe URL and symlink decision (1.512125ms)
+✔ verglos ci wires the projection into a bounded machine-readable process (309.016167ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 434.009083
+✔ CLI fixture captures process output and unexpected file creation (34.137084ms)
+✔ CLI fixture terminates bounded subprocesses and reports timeout (54.552917ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 155.757084
+✔ client projection upload sends only the exact approved redacted projection (17.490458ms)
+✔ client projection upload refuses private fields before network access (2.027541ms)
+✔ client projection upload rejects a server digest that does not match the preview (1.1325ms)
+✔ client projection upload binds a caller-supplied endpoint to the organization project route (0.901083ms)
+✔ client projection upload rejects an unsafe or unbounded server identifier (1.052167ms)
+✔ client projection upload cancels an oversized streamed response (1.504375ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 139.59525
+✔ client projection command admits an exact approval-bound projection (6.279458ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 122.162834
+{"status":"legacy","warnings":[{"id":"legacy-plan","message":"plan is legacy metadata and is not an entitlement authority; use verified license state."},{"id":"inactive-section","message":"hunt settings are validated for migration only; they do not execute recipes or enable the unsupported Hunt command."}]}
+✔ config inspect reports migration warnings without mutating input (6.745417ms)
+{"status":"invalid","warnings":[{"id":"obsolete-sandbox","message":"hunt.sandbox=firecracker is obsolete; select a supported adapter explicitly when Hunt execution is shipped."},{"id":"inactive-section","message":"hunt settings are validated for migration only; they do not execute recipes or enable the unsupported Hunt command."}]}
+✔ config inspect fails closed on obsolete sandbox defaults with migration guidance (1.492125ms)
+✔ config inspect warns on legacy JavaScript without evaluating or modifying it (0.872916ms)
+{"status":"invalid","warnings":[{"id":"invalid-config","message":"config inspection failed"}]}
+✔ config inspect rejects malformed JSON and oversized files (0.725041ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 121.83825
+✔ pre-commit installation preserves and chains an existing hook (4.860792ms)
+✔ pre-commit installation refuses symlink hooks (1.069208ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 107.293209
+✔ getTrustedApiOrigin accepts and canonicalizes a bare HTTPS origin (0.368292ms)
+✔ getTrustedApiOrigin rejects non-origin or non-HTTPS values (0.085083ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 71.057375
+{"status":"error","message":"snapshot diff failed"}
+✔ diff command rejects malformed snapshots with usage exit (6.23375ms)
+{"status":"error","message":"snapshot diff failed"}
+✔ diff command rejects snapshots with excessive observation collections (15.790083ms)
+{"status":"error","message":"snapshot diff failed"}
+✔ diff command rejects symlink snapshot inputs before parsing (1.036459ms)
+✔ diff command exposes digest-verified change and action projections in JSON (9.943042ms)
+✔ diff command renders validated evidence attribution, digest, confidence, run time, and engine health (4.790875ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 153.993708
+✔ missing Trivy preserves imported evidence, honest policy state, and historical records (2072.072333ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2189.497625
+Engine install requires engine id, version, artifact path, and digest.
+✔ engine install rejects malformed arguments before reading artifacts (0.751875ms)
+✔ engine install requires a receipt before reading the artifact (0.066334ms)
+Installed trivy@1.0.0 at /var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-install-audit-8VibOn/cache/trivy/1.0.0/engine.bin
+Compatibility: not evaluated (signed engine manifest not provided)
+✔ engine install persists the approved receipt when an audit store is configured (9.789125ms)
+Engine installation requires explicit approval (--approve).
+✔ engine install rejects an incorrect digest (0.391834ms)
+✔ engine install requires approval and emits bounded JSON after approval (1.354334ms)
+✔ quiet engine failures do not write diagnostics (0.098333ms)
+✔ JSON engine failures are bounded and process-safe (0.067417ms)
+✔ engine update and rollback label approved JSON mutations (2.261875ms)
+✔ engine install validates a matching compatibility manifest (2.012292ms)
+✔ engine install fails closed when a supplied manifest signature is invalid (2.596208ms)
+✔ engine install reports verified for a valid Ed25519 manifest (2.437667ms)
+✔ engine install rejects a manifest key without a manifest (0.658917ms)
+Engine artifact must be a regular file.
+✔ engine install rejects symlink artifacts before reading (0.722916ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 142.166208
+✔ engine status formatting is deterministic for human and JSON output (0.355291ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 70.927958
+✔ engine cache status is consumable by CLI callers (6.075166ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 121.23875
+✔ capability cache follows the license and endpoint across fresh and offline reuse (26.936083ms)
+✔ legacy, future-dated, and over-age caches cannot bypass refresh through a future expiry (6.649792ms)
+✔ resolveEntitlement: signed v2 catalog is the only paid fallback when REST and cache are unavailable (2.462334ms)
+✔ resolveEntitlement: newer signed v2 catalog supersedes an older stale cache (1.033791ms)
+✔ resolveEntitlement: fresh Free server response overrides a valid paid v2 token (4.58875ms)
+✔ PLAN-CLI-004: frozen server catalog fixtures remain opaque and round-trip across supported plans (17.949834ms)
+✔ PLAN-CLI-001: stale cache from another founder simulation is not reused offline (0.712458ms)
+✔ PLAN-CLI-001: malformed catalog version fails closed without accepting paid capabilities (0.601083ms)
+✔ PLAN-CLI-004: malformed catalog fixtures fail safely to Free without stale paid reuse (2.118042ms)
+✔ PLAN-CLI-004: supported-version fixture matrix migrates v1 validation to v2 and keeps legacy offline state safe (1.742834ms)
+✔ resolveEntitlement: no JWT + REST unreachable + no cache → Free (0.407458ms)
+✔ resolveEntitlement: legacy paid tier token without server catalog fails safely to Free (0.760666ms)
+✔ resolveEntitlement: JWT tier overrides REST cache plan (Studio JWT + Pro cache → plan=studio) (0.884667ms)
+✔ resolveEntitlement: JWT with unpinned signing key → treated as no JWT (falls to Free) (0.886375ms)
+✔ getVerifiedLicense: returns null when no JWT is stored (0.329625ms)
+✔ getVerifiedLicense: returns tier + expiresAt for a valid JWT (0.731459ms)
+✔ getVerifiedLicense: rejects a signed token bound to a different local license key (0.666083ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 149.781333
+✔ loadCapabilities: honours a paid cache within 7-day grace when server is unreachable (3.756208ms)
+✔ resolveEntitlement: normalizes a legacy compliance cache to enterprise (1.119792ms)
+✔ resolveEntitlement: current server plan overrides a still-valid signed plan (0.098125ms)
+✔ resolveEntitlement: online revocation response defeats a still-valid signed Pro token (18.935625ms)
+✔ loadCapabilities: rejects malformed cached capability shapes (0.733625ms)
+✔ loadCapabilities: rejects unknown plans before accepting capabilities (0.633083ms)
+✔ loadCapabilities: rejects unknown real_plan metadata before accepting capabilities (0.524875ms)
+✔ loadCapabilities: rejects control characters in capability names (0.468042ms)
+✔ loadCapabilities: drops to Free when cache is past the 7-day absolute-stale window (0.512542ms)
+✔ loadCapabilities: drops to Free when no cache exists and server is unreachable (0.532667ms)
+✔ loadCapabilities: keeps the request deadline active while reading a streamed response body (5003.709083ms)
+✔ _absoluteMaxStaleMs: matches the 7-day JWT offline grace window (0.46875ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5120.4935
+✔ cli entitlement module: exposes the public helpers the CLI depends on (0.320625ms)
+✔ cli entitlement module: printUpgradeCta writes to stderr and does not throw (0.221ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 80.966917
+✔ evidence transfer reports bounded metadata and refuses overwrite (6.238708ms)
+✔ evidence transfer rejects symlinks and oversized files before parsing (4.34125ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 153.556375
+✔ explain rejects bounded-invalid rule IDs in JSON mode (0.648292ms)
+✔ explain rejects oversized rule IDs without output in quiet mode (0.063416ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 121.504958
+✔ fix approval requires mutate authority and exact planned file scope (9.015333ms)
+  ✓ Created /var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-fix-audit-l1TyGR/src/verglos-security-headers.ts
+
+    Wire it in with:
+      import { verglosSecurityHeadersExpress } from './verglos-security-headers';
+      app.use(verglosSecurityHeadersExpress);
+✔ header fix persists its approved receipt when an audit store is configured (7.697375ms)
+✔ approved Next.js header patch atomically replaces its regular config (19.244083ms)
+✔ NEXT_CONFIG_DECL: matches bare `const nextConfig = {` (JS shape) (0.139334ms)
+✔ NEXT_CONFIG_DECL: matches typed `const nextConfig: NextConfig = {` (TS default) (0.049916ms)
+✔ NEXT_CONFIG_DECL: matches generic type arg `const nextConfig: NextConfig<Options> = {` (0.036916ms)
+✔ NEXT_CONFIG_DECL: matches `let nextConfig = {` (rare, still legal) (0.035708ms)
+✔ NEXT_CONFIG_DECL: matches `satisfies NextConfig` clause (0.031583ms)
+✔ NEXT_CONFIG_DECL: matches with generic + preserves in replace (0.052667ms)
+✔ NEXT_CONFIG_DECL: rejects unrelated `= {` on the same file (0.073167ms)
+✔ NEXT_CONFIG_DECL: does NOT match `const nextConfigured = {` (identifier boundary) (0.058792ms)
+✔ NEXT_CONFIG_DECL: does NOT match `const nextConfig` followed by non-object (0.0325ms)
+✔ NEXT_CONFIG_DECL: replace()-then-append produces valid patched output (0.052ms)
+✔ fix planning identifies a bounded Next.js patch without mutating (5.842959ms)
+✔ fix CLI JSON dry-run is process-safe and does not mutate the project (970.858959ms)
+✔ selected Node tests require exact execute approval and bind file bytes (208.512916ms)
+✔ selected test planning rejects path escape and symlink entrypoints (2.186083ms)
+✔ selected test runner stops at its bounded output limit (138.523333ms)
+✔ selected test runner terminates timed-out Node test processes (57.454958ms)
+✔ fix CLI reports a selected-test failure and restores the approved mutation (637.73625ms)
+✔ failed approved selected tests roll back the applied fix (83.807666ms)
+✔ fix CLI approved JSON mutation uses the exact receipt and reports the write (1015.265583ms)
+✔ fix refuses to mutate or execute tests when the configured approval audit store fails (330.344125ms)
+✔ fix CLI rejects a receipt approved for a different workspace before mutation (329.915917ms)
+✔ failed post-fix rescan restores prior files and removes newly created fixes (6.732916ms)
+✔ rollback replaces a raced-in symlink without changing its external target (5.028792ms)
+✔ header fix does not follow a symlinked src directory outside its workspace (1.508792ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4020.298166
+✔ bounded response reader parses valid JSON (11.44825ms)
+✔ bounded response reader rejects malformed and oversized payloads (0.704709ms)
+✔ bounded response reader cancels a streamed body at the cap (0.338042ms)
+✔ fetch JSON keeps its deadline active after headers arrive (11.208708ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98.508375
+✔ HUNT-009 executes the fixed A1 recipe with exact trust and approval bindings (55.542834ms)
+✔ HUNT-009 preserves a negative probe as not-reproduced without leaking input (41.346917ms)
+﹣ HUNT-009 reaches every signed A2 target harness through the public CLI path (0.095208ms) # set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run the A2 CLI Docker qualification
+✔ HUNT-009 fails closed for binding drift and symlinked inputs (3.744708ms)
+✔ HUNT-009 rejects binding drift before loading the public runtime (2.249917ms)
+✔ HUNT-010 rejects a report finding whose rule would widen the approved recipe (1.899417ms)
+✔ HUNT-009 denies execution when the public runtime is unavailable (1.982666ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 247.83075
+✔ hunt hypothesis consumes a Scout envelope and emits a bounded execution-free plan (15.439333ms)
+✔ hunt hypothesis returns a typed not-attemptable result when target context is absent (1.5685ms)
+✔ hunt hypothesis rejects invalid or mismatched inputs before loading the runtime (0.4225ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 140.511334
+✔ hunt rejects malformed options before entitlement lookup (0.9515ms)
+✔ hunt rejects unsupported sandbox and control-character finding values (0.128625ms)
+✔ hunt help advertises only supported sandbox adapters (3.297875ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 127.445875
+﹣ hunt proof reaches the pinned A2 target harness through the public CLI surface (0.307208ms) # set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run the public CLI A2 proof qualification
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 139.367709
+✔ local recipe verification reports exact trust provenance without license text or execution authority (11.664625ms)
+✔ local recipe verification rejects recipe tampering and reports an invalid trust result (2.390708ms)
+✔ local recipe verification rejects symlinked trust-store inputs (1.556709ms)
+✔ hunt verify-recipe CLI emits one bounded machine result and does not execute the recipe (341.465625ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 484.287833
+✔ public CLI retest binds mutate approval and reruns the same proof (90.90375ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 227.205208
+✔ public CLI Hunt runtime boundary fails closed when the public runtime is unavailable (0.518916ms)
+✔ public CLI loads the shipped bounded Hunt runtime (56.844459ms)
+✔ public CLI Hunt runtime boundary rejects malformed public runtimes (0.223791ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 133.741792
+✔ hunt scout emits a bounded manifest for a local package without running its scripts (21.077375ms)
+✔ hunt scout rejects control characters before touching a target (0.165333ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 140.3285
+✔ hunt worker executes a supported hypothesis and emits only bounded candidate evidence (57.896542ms)
+✔ hunt worker fails closed on a report that does not contain the planned finding (4.010375ms)
+✔ hunt proof replays the supported A1 fixture and emits a bounded counterexample (82.253208ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 282.629084
+✔ init JSON refuses interactive mode and does not mutate (3.259459ms)
+✔ init JSON with yes writes config and never installs a hook (1.461875ms)
+✔ init preserves legacy JavaScript config and avoids ambiguous dual configs (0.92275ms)
+✔ init JSON bounds filesystem failures (0.699541ms)
+✔ init quiet refuses interactive mode without mutation (0.381584ms)
+✔ init quiet with yes writes config without output (0.670083ms)
+✔ init quiet process mode has no stdout, stderr, or prompt (453.765916ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 546.058542
+✔ license validation prefers a bounded v2 token and keeps v1 validation compatibility (25.775125ms)
+✔ license validation retains the legacy token when v2 issuance is unavailable or malformed (0.65975ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 196.196292
+✔ read-only commands expose their implemented output flags (9.690375ms)
+✔ nested command groups are fully registered before Commander parses (0.897625ms)
+✔ scan routes progress only to the interactive spinner (0.708542ms)
+✔ scan analytics eligibility follows explicit consent and quiet/machine mode (0.654125ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 129.360709
+✔ local boundary journey composes diff, header, and viewer without hosted dependencies (2.882625ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 185.821
+✔ login JSON network failure is one bounded machine-safe error (391.464084ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 469.129417
+✔ record sign approval preflight is one bounded JSON response (348.138167ms)
+✔ engine install approval preflight is one bounded JSON response (342.405417ms)
+✔ evidence import failure is one bounded JSON response (372.030833ms)
+✔ target inspect preflight is one bounded JSON response (351.453208ms)
+✔ config inspect failure is one bounded JSON response (339.425833ms)
+✔ config migration process reports unsupported settings without rewriting the file (343.147167ms)
+✔ config migration process never evaluates legacy JavaScript (353.123625ms)
+✔ record header failure is one bounded JSON response (359.786541ms)
+✔ MCP print-config quiet mode emits JSON without setup prose (354.886334ms)
+✔ Hunt denied plan emits one bounded JSON response (1276.729875ms)
+✔ Hunt recipe execution cannot bypass paid capability enforcement (325.781125ms)
+✔ Attest denied plan emits one bounded JSON response (968.766583ms)
+✔ Explain JSON mode emits one parseable document (322.851833ms)
+✔ Score configuration failure emits one bounded JSON response (312.281ms)
+✔ Secrets JSON mode emits one parseable scan document (358.18575ms)
+✔ Dependency JSON mode emits one parseable scan document (316.709ms)
+✔ CI JSON mode emits one bounded decision document (1073.747917ms)
+✔ precommit configuration failure is one bounded JSON response (336.483708ms)
+✔ scan-family configuration failures are bounded across full and focused scans (1867.445291ms)
+✔ scan report output failures use infrastructure exit without a stack trace (955.727542ms)
+✔ diff input failure is one bounded JSON response (317.57925ms)
+✔ policy check input failure is one bounded JSON response (305.888416ms)
+✔ policy exception projection failure is one bounded JSON response (335.846292ms)
+✔ policy exception command exposes the approval-bound export projection (311.631333ms)
+✔ engine status JSON is one bounded document (310.208208ms)
+✔ precommit success is one bounded JSON response (317.876125ms)
+✔ Scan JSON mode emits one parseable scan document (985.527541ms)
+✔ scan --hunt emits a signed execution handoff without auto-executing (1099.950792ms)
+✔ scan output path writes reports only to the explicitly selected directory (807.283375ms)
+✔ scan snapshot opt-in imports bounded SARIF and refuses to overwrite the snapshot (1274.931667ms)
+✔ engine inspection uses only an explicit binary and refuses non-Trivy executables (370.017542ms)
+✔ scan policy option and legacy alias use the same evaluator path (616.719583ms)
+✔ Badge JSON mode emits one bounded document (349.712916ms)
+✔ Whoami JSON mode emits the offline Free contract (315.423333ms)
+✔ activate network failure is one bounded JSON response (309.619709ms)
+✔ activate refuses an insecure configured API origin before network (309.598458ms)
+✔ monitor status without credentials is one bounded JSON response (884.57625ms)
+✔ hook outside Git reports a bounded skipped result (331.148708ms)
+✔ hook inside Git reports an installed bounded result (313.9065ms)
+✔ CLI version is deterministic and side-effect free (344.856542ms)
+✔ CLI help is deterministic and side-effect free (314.490375ms)
+✔ CLI usage failures have deterministic exits and value-free JSON (960.326ms)
+✔ every public command leaf provides side-effect-free help (12819.387958ms)
+✔ init JSON mode writes only the bounded project config (313.090917ms)
+✔ fix JSON mode refuses mutation without explicit approval (312.000291ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 36343.931
+✔ monitor status: bails with a helpful message when no license key is stored (4.294333ms)
+✔ monitor status: refuses an unsafe saved API base before sending a bearer (1.871958ms)
+✔ monitor status: reports 'no projects' cleanly on an empty list (10.454083ms)
+✔ monitor status: prints each project with fingerprint prefix + channels (0.764625ms)
+✔ monitor status: reports 'not yet shipped' on server 501 without failing the command (0.584041ms)
+✔ monitor status: emits bounded JSON without human prose (0.812792ms)
+✔ monitor register: emits bounded JSON without channel secrets (18.018125ms)
+✔ monitor unregister: sends DELETE to /api/v1/monitor/registration/:fp (0.617667ms)
+✔ monitor unregister: reports 401 as 'license required' (0.533916ms)
+✔ monitor unregister: emits machine-safe JSON (0.511417ms)
+✔ monitor test-alert: POSTs { projectFingerprint } to /api/v1/monitor/test-alert (0.578167ms)
+✔ monitor test-alert: emits machine-safe JSON without prose (0.498709ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 166.703834
+✔ organization policy cache writes atomically and reads a validated entry (6.458917ms)
+✔ organization policy cache repairs an existing parent directory before atomic replacement (1.014084ms)
+✔ organization policy cache refuses scope/digest tampering and symlink targets (1.002875ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 127.259458
+✔ fetches, verifies, and persists a remote policy without exposing credentials (46.549542ms)
+✔ sends the bearer only to the exact tenant/repository policy route (2.289917ms)
+✔ falls back to a verified cache when the remote is unavailable (2.245083ms)
+✔ rejects a streamed policy response when it crosses the bounded body limit (2.364459ms)
+✔ rejects an unbounded policy-fetch timeout before making a request (1.217667ms)
+✔ rejects invalid organization and repository scopes before reading credentials or making a request (0.339875ms)
+✔ falls back to a verified cache when response headers arrive but the body times out (16.997667ms)
+✔ rejects an external policy endpoint before attaching credentials or making a request (0.5975ms)
+✔ rejects a same-origin policy endpoint that is not bound to the requested scope (0.484542ms)
+✔ refuses redirect-following for bearer-authenticated policy requests (1.329666ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 192.920166
+{"status":"error","code":"POLICY_CHECK_INPUT","message":"policy check failed"}
+✔ policy check returns usage exit for invalid input without mutation (6.306292ms)
+✔ policy check rejects record and snapshot inputs with a stable JSON error (1.295875ms)
+{"decision":"PASS","subjectId":"urn:verglos:subject:filesystem:sha256:cf3cf05abe23e5aa53252cc3dbf040efaff298970cb2f1a508f7e7cadfb6898d","policy":{"id":"verglos.policy.local-default","version":"1.0.0","digest":"sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},"limitations":["Preparatory fixture."],"reasons":[{"code":"requirements-satisfied","detail":"All recorded policy checks are satisfied with current evidence for the exact subject.","owner":"policy-owner","nextAction":"Preserve the evaluation and its evidence bindings."}]}
+✔ policy check verifies a record store and evaluates its policy member (5.124375ms)
+{"status":"error","code":"POLICY_CHECK_INPUT","message":"policy check failed"}
+✔ policy check rejects oversized inputs before parsing (6.199542ms)
+{"decision":"PASS","subjectId":"urn:verglos:subject:filesystem:sha256:cf3cf05abe23e5aa53252cc3dbf040efaff298970cb2f1a508f7e7cadfb6898d","policy":{"id":"verglos.policy.local-default","version":"1.0.0","digest":"sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},"limitations":["Preparatory fixture."],"reasons":[{"code":"requirements-satisfied","detail":"All recorded policy checks are satisfied with current evidence for the exact subject.","owner":"policy-owner","nextAction":"Preserve the evaluation and its evidence bindings."}]}
+✔ policy check accepts an evaluator named with snapshot text (1.106958ms)
+{"decision":"INCOMPLETE","subjectId":"urn:verglos:subject:filesystem:sha256:cf3cf05abe23e5aa53252cc3dbf040efaff298970cb2f1a508f7e7cadfb6898d","policy":{"id":"verglos.policy.snapshot-unresolved","version":"1.0.0","digest":"sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},"limitations":["Snapshot policy inputs are present, but no evaluated decision is recorded."],"reasons":[{"code":"required-check-unsupported","detail":"The snapshot contains frozen policy inputs but no policy evaluation.","owner":"policy-owner","nextAction":"Run policy evaluation and preserve its evidence in the release record.","checkId":"verglos.check.snapshot-policy-evaluation"}]}
+✔ policy check returns INCOMPLETE for a snapshot without an evaluated decision (1.172958ms)
+✔ policy check quiet mode emits no human output on success (0.790625ms)
+✔ policy check quiet mode suppresses input errors (0.551209ms)
+{"decision":"BLOCK","subjectId":"urn:verglos:subject:filesystem:sha256:cf3cf05abe23e5aa53252cc3dbf040efaff298970cb2f1a508f7e7cadfb6898d","policy":{"id":"verglos.policy.local-default","version":"1.0.0","digest":"sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},"limitations":["Preparatory fixture."],"reasons":[{"code":"check-failed-block","detail":"Evidence is current.","owner":"security","nextAction":"Preserve the evidence.","checkId":"verglos.check.native-sast"}]}
+{"decision":"INCOMPLETE","subjectId":"urn:verglos:subject:filesystem:sha256:cf3cf05abe23e5aa53252cc3dbf040efaff298970cb2f1a508f7e7cadfb6898d","policy":{"id":"verglos.policy.local-default","version":"1.0.0","digest":"sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},"limitations":["Preparatory fixture."],"reasons":[{"code":"required-check-stale","detail":"Evidence is current.","owner":"security","nextAction":"Preserve the evidence.","checkId":"verglos.check.native-sast"}]}
+✔ policy check preserves BLOCK and INCOMPLETE exit codes (1.393417ms)
+{"status":"error","code":"POLICY_CHECK_INPUT","message":"policy check failed"}
+✔ policy check rejects directory inputs before parsing (0.366083ms)
+{"status":"error","code":"POLICY_CHECK_INPUT","message":"policy check failed"}
+✔ policy check rejects symlink inputs before parsing (0.708041ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 144.423458
+✔ policy exception command emits the complete bounded JSON projection (19.225584ms)
+✔ policy exception command presents control, approval, expiry, and unavailable format reasons (1.462292ms)
+{"status":"error","code":"POLICY_EXCEPTION_INPUT","message":"policy exception projection failed"}
+{"status":"error","code":"POLICY_EXCEPTION_INPUT","message":"policy exception projection failed"}
+✔ policy exception command rejects symlink and oversized documents (1.899708ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 142.4615
+✔ privacy telemetry commands preview, record versioned consent, and revoke it (1883.445584ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1952.066375
+✔ credential and score caches are private and atomically readable (11.204166ms)
+✔ capability cache is private after a successful server refresh (14.0105ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 106.728041
+✔ private runner poll uses authenticated GET, verifies, admits, and persists only replay state (23.557541ms)
+✔ private runner poll refuses a locally replayed job and never executes it (1.858833ms)
+✔ private runner poll rejects malformed signatures before admission (1.114083ms)
+✔ private runner poll keeps its timeout active while reading a response body (11.580459ms)
+✔ private runner result upload uses authenticated POST and sends only the shared projection (0.597583ms)
+✔ private runner result upload refuses malformed projections before network (0.091292ms)
+✔ private runner result upload keeps its timeout active while reading a response body (12.5635ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 171.671
+{"outputRoot":"/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-record-create-Em3SD7/output","manifestPath":"/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-record-create-Em3SD7/output/manifest.json","members":1,"paths":["decision.json"]}
+✔ record create materializes verified members and a canonical manifest (8.93675ms)
+{"status":"error","code":"RECORD_CREATE_INPUT","message":"record creation failed"}
+✔ record create rejects a symlinked output root (1.544583ms)
+{"status":"error","code":"RECORD_CREATE_INPUT","message":"record creation failed"}
+✔ record create prevalidates all members before publishing (1.558875ms)
+{"status":"error","code":"RECORD_CREATE_INPUT","message":"record creation failed"}
+✔ record create rejects an existing manifest before publishing new blobs (1.464416ms)
+{"status":"error","code":"RECORD_CREATE_INPUT","message":"record creation failed"}
+✔ record create complete mode enforces the graph gate (1.149917ms)
+{"verified":true,"manifestDigest":"sha256:df199177ba189f706234c6eaeb7bbf8446f27d326eda4c8f20aed5e20020c012","members":14,"paths":["exceptions/approval.json","exceptions/fixture.json","lineage.json","observations/fixture.json","policy-evaluation.json","policy.json","provenance/buildkit.json","provenance/github.json","provenance/npm.json","redaction-manifest.json","release-decision.json","runs/fixture.json","subjects/0001.json","verification/fixture.json"],"decision":"PASS","policyDigest":"sha256:07437b8e4633d2ec98e7d5b1473ee1c652d8aec10ec2b568babdb5dc461e47e4"}
+{"verified":true,"manifestDigest":"sha256:df199177ba189f706234c6eaeb7bbf8446f27d326eda4c8f20aed5e20020c012","members":14,"paths":["exceptions/approval.json","exceptions/fixture.json","lineage.json","observations/fixture.json","policy-evaluation.json","policy.json","provenance/buildkit.json","provenance/github.json","provenance/npm.json","redaction-manifest.json","release-decision.json","runs/fixture.json","subjects/0001.json","verification/fixture.json"],"decision":"PASS","policyDigest":"sha256:07437b8e4633d2ec98e7d5b1473ee1c652d8aec10ec2b568babdb5dc461e47e4"}
+{"exported":true,"format":"in-toto-statement-v1","manifestDigest":"sha256:df199177ba189f706234c6eaeb7bbf8446f27d326eda4c8f20aed5e20020c012","subjects":1,"bytes":905}
+{"verified":true,"manifestDigest":"sha256:df199177ba189f706234c6eaeb7bbf8446f27d326eda4c8f20aed5e20020c012","members":14,"paths":["exceptions/approval.json","exceptions/fixture.json","lineage.json","observations/fixture.json","policy-evaluation.json","policy.json","provenance/buildkit.json","provenance/github.json","provenance/npm.json","redaction-manifest.json","release-decision.json","runs/fixture.json","subjects/0001.json","verification/fixture.json"],"decision":"PASS","policyDigest":"sha256:07437b8e4633d2ec98e7d5b1473ee1c652d8aec10ec2b568babdb5dc461e47e4","package":{"transport":"directory-v1","viewer":"verified","export":"verified","sigstoreIncluded":false}}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"packaged":true,"transport":"directory-v1","outputPath":"/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-record-create-complete-valid-Gg8fyb/release-again.vgl","manifestDigest":"sha256:df199177ba189f706234c6eaeb7bbf8446f27d326eda4c8f20aed5e20020c012","members":14,"bytes":23775,"signature":"not-included","sigstore":"not-included","uploadPerformed":false,"includesNonOmittedEvidence":true}
+{"status":"error","code":"RECORD_PACKAGE_INPUT","message":"record package creation failed"}
+{"status":"error","code":"RECORD_PACKAGE_INPUT","message":"record package creation failed"}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"status":"error","code":"RECORD_PACKAGE_INPUT","message":"record package creation failed"}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+{"verified":true,"manifestDigest":"sha256:df199177ba189f706234c6eaeb7bbf8446f27d326eda4c8f20aed5e20020c012","members":14,"paths":["exceptions/approval.json","exceptions/fixture.json","lineage.json","observations/fixture.json","policy-evaluation.json","policy.json","provenance/buildkit.json","provenance/github.json","provenance/npm.json","redaction-manifest.json","release-decision.json","runs/fixture.json","subjects/0001.json","verification/fixture.json"],"decision":"PASS","policyDigest":"sha256:07437b8e4633d2ec98e7d5b1473ee1c652d8aec10ec2b568babdb5dc461e47e4","package":{"transport":"directory-v1","viewer":"verified","export":"verified","sigstoreIncluded":false}}
+{"status":"error","code":"RECORD_EXPORT_INPUT","message":"record export failed"}
+{"status":"error","code":"RECORD_EXPORT_INPUT","message":"record export failed"}
+✔ complete record create, verify, and export preserve canonical policy and subject bindings (5380.933208ms)
+✔ record create JSON success is process-safe (313.914375ms)
+✔ record create JSON failures are process-safe (0.406166ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6088.455541
+{"outputRoot":"/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-record-header-9uWpib/output","manifestPath":"/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-record-header-9uWpib/output/manifest.json","members":9,"paths":["decision.json","lineage.json","subject-0.json","subject-1.json","subject-2.json","subject-3.json","subject-4.json","subject-5.json","subject-6.json"]}
+✔ record header verifies the store and emits decision-first JSON (30.135584ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 149.703875
+✔ record project fails closed before parsing a missing manifest (2.483583ms)
+{"status":"error","code":"RECORD_PROJECT_INPUT","message":"record projection failed"}
+✔ record project rejects non-JSON manifest input (1.718041ms)
+✔ record project JSON error is process-safe (347.46025ms)
+✔ record project CLI output withholds free-form limitation, path, source, tenant, and policy canaries (7.453625ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 561.557084
+✔ record import-provenance writes a private canonical record member without overwriting (618.912166ms)
+✔ record import-provenance rejects a symlink input before writing output (306.584792ms)
+✔ record import-provenance rejects malformed expected digest without creating a member (315.491875ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1309.950375
+{"status":"error","code":"RECORD_SIGN_INPUT","message":"record signing failed"}
+✔ record sign requires explicit approval before reading the key (3.404084ms)
+{"status":"error","code":"RECORD_SIGN_INPUT","message":"record signing failed"}
+✔ record sign requires a scoped receipt before reading the manifest (0.637709ms)
+{"signaturePath":"/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-record-sign-valid-Po4vix/sig.json","manifestDigest":"sha256:1776275249b9770c3ece0cb9d51807aae85f22a09915cdc4b0089194c15b08a7","keyId":"sha256:c1c87d79a1af42aa3220568ac6326c0e5ae9cbfff0e012ec9bd630dcdb1f9313","signer":{"id":"signer","issuer":"issuer"},"algorithm":"ed25519"}
+✔ record sign writes a bounded envelope (8.842375ms)
+{"signaturePath":"/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-record-sign-audit-R7uL4I/sig.json","manifestDigest":"sha256:1776275249b9770c3ece0cb9d51807aae85f22a09915cdc4b0089194c15b08a7","keyId":"sha256:5cabbba3ad2dc36e5c7bb36aec00135c929595e2daebde6b64809e79029fea1a","signer":{"id":"signer","issuer":"issuer"},"algorithm":"ed25519"}
+✔ record sign persists the approved receipt when an audit store is configured (2.811959ms)
+{"status":"error","code":"RECORD_SIGN_INPUT","message":"record signing failed"}
+{"signaturePath":"/var/folders/5x/jdz3zj4s12d4yllcvg17qq540000gn/T/verglos-record-sign-negative-yUdCOy/sig.json","manifestDigest":"sha256:1776275249b9770c3ece0cb9d51807aae85f22a09915cdc4b0089194c15b08a7","keyId":"sha256:00d4b0bf6b223faf2927dc9c93d77279174d2606bbb0964b1405d293b55278da","signer":{"id":"signer","issuer":"issuer"},"algorithm":"ed25519"}
+{"status":"error","code":"RECORD_SIGN_INPUT","message":"record signing failed"}
+✔ record sign rejects invalid keys and refuses to overwrite an envelope (2.775542ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 137.219542
+✔ Sigstore offline verifier checks a real v0.3 DSSE bundle and exact signer policy (10.686458ms)
+✔ Sigstore verifier rejects payload substitution, identity/issuer mismatch, and legacy bundles (7.667958ms)
+✔ Sigstore verifier rejects tampered signature and trusted root bytes (3.799583ms)
+✔ bounded Sigstore input reader rejects symlinks and enforces the byte cap (2.99025ms)
+✔ keyless attestation requires explicit sign/network approval before reading paths or token (0.350084ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 230.421416
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+✔ record verify checks content-addressed members and emits JSON (8.963291ms)
+{"status":"error","code":"RECORD_VERIFY_INPUT","message":"record verification failed"}
+✔ record verify rejects a missing or tampered member (0.618666ms)
+✔ record verify JSON error is process-safe and does not create files (304.638625ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 515.88225
+✔ rollback-plan emits an admitted immutable transition only with approval (4.039917ms)
+{"allowed":false,"reason":"approval-required"}
+✔ rollback-plan fails closed without approval (2.727458ms)
+✔ rollback-rehearsal covers every provider boundary and preserves historical records (1.184083ms)
+✔ rollback-rehearsal fails closed when one operation is not approved (0.53625ms)
+✔ rollback-rehearsal rejects an incomplete or duplicated provider-boundary set (0.550042ms)
+✔ canonical release rollback rehearsal covers every provider boundary (0.870542ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 127.872125
+✔ report view preparation validates JSON projections and escapes content (4.252833ms)
+✔ report view rejects contradictory lineage summary counts (1.116791ms)
+✔ report view preparation rejects HTML, records, malformed, and oversized inputs (0.904ms)
+✔ report view preparation handles host-native spaces and Unicode paths (1.033333ms)
+✔ report view preparation rejects symlink inputs before parsing (0.646375ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.22
+✔ ordinary scan does not execute fixture install hooks or upload target material (779.619709ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 848.188833
+Target: package .
+Coverage: incomplete
+Subject: urn:verglos:subject:package:sha256:b6dab4d6b46c38789369fad717a52e1a28ef189d9cd258a0e1a747c3cde55f44
+Limitations: no supported lockfile was found
+✔ target inspect returns typed incomplete for an unqualified package (4.113542ms)
+✔ target inspect quiet mode suppresses human output (2.606584ms)
+✔ target inspect resolves a local OCI layout without network access (2.873042ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 126.58875
+✔ analytics preference requires affirmative versioned consent and revocation is durable (12.816292ms)
+✔ consent reader fails closed on unsupported versions and symlinks (1.581167ms)
+✔ coarse telemetry event excludes project identity and raw scan data (0.284375ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 89.458834
+✔ normalizeTier: canonicalizes known plan names and preserves legacy aliases (0.326292ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 70.077625
+✔ update reports the current and latest versions without installing when current (0.678542ms)
+✔ update reports a successful installation without leaking progress prose into the result (0.082375ms)
+✔ update fails closed on registry and installer failures with stable error codes (0.116417ms)
+✔ update JSON process uses the injected registry and installer without leaking subprocess output (681.926333ms)
+✔ historic update alias preserves human output and quiet suppression (650.25875ms)
+✔ update JSON and quiet process failures have stable exits and bounded output (637.620666ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2045.253125
+✔ local viewer renderer escapes dynamic text and emits semantic script-free markup (0.445209ms)
+✔ local viewer shows all subject digests and does not claim unproven coverage (0.101125ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 71.624083
+✔ viewer session binds loopback, uses an unpredictable token, and denies other routes (16.810375ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108.811041
+✔ whoami emits machine-safe free-tier JSON without prose (2.424875ms)
+✔ whoami quiet mode suppresses free-tier output (0.873583ms)
+✔ offline whoami distinguishes effective Free from cached paid license and redacts short keys (8.159958ms)
+✔ offline signed entitlement displays catalog, allowances and token expiry in both formats (17.141667ms)
+✔ online whoami uses current capability plan when the license status reports a different plan (21.192833ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 161.669959

@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · ENT-CLI-001 current CLI requalification
+
+The exact CLI `origin/main` merge `0823b513` was requalified in a disposable
+clean worktree. The CLI package tests passed **307/309** with two explicit A2
+Docker-target skips and zero failures; typecheck passed. All seven focused
+private-runner tests passed, covering signed outbound polling, tenant/runner/
+target admission, replay refusal, bounded timeouts, least-evidence result
+upload, and malformed-result refusal before network.
+
+This advances implementation-side evidence only. `ENT-CLI-001` remains
+unchecked pending operational enrollment credentials, an approved runner
+execution/result reconciliation, cross-platform operational evidence,
+independent review, and authorized enterprise acceptance. `TEAM-CLI-001`
+remains checked; Hunt/AppSec rows were not changed. Score remains **235
+checked / 45 open / 280 total (83.9%)**.
+
+Evidence: `evidence/ent-cli-001-current-cli-requalification-2026-10-19.md`.
+
 ## 2026-10-19 · FINAL-WEB-007 public-home browser qualification
 
 The existing authenticated Chrome owner session performed a read-only

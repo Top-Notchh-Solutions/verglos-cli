@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ENT-CLI-001 current CLI requalification
+
+- **Source:** CLI `origin/main` at
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`, exercised from a disposable
+  clean worktree on Darwin arm64 with Node `v26.4.0` and pnpm `9.15.9`.
+- **Verification:** `pnpm --filter verglos test` passed **307/309** with two
+  explicit A2 Docker-target skips and zero failures; typecheck passed. All
+  seven focused private-runner tests passed for signed GET polling, bounded
+  admission/replay, and least-evidence result upload.
+- **Disposition:** Implementation-side qualification only. Keep `ENT-CLI-001`
+  unchecked for operational enrollment credentials, approved runner/result
+  reconciliation, cross-platform operational evidence, independent review,
+  and enterprise acceptance. No provider, customer, Production, payment, or
+  AppSec/Hunt state changed; `TEAM-CLI-001` remains checked.
+- **Evidence:**
+  `docs/shipping/evidence/ent-cli-001-current-cli-requalification-2026-10-19.md`
+  and its preserved logs.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · FINAL-WEB-007 public-home browser qualification
 
 - **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`; existing
