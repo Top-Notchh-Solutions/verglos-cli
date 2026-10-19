@@ -2,6 +2,29 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · DIST-001 package allowlist hardening
+
+- **Source:** CLI `origin/main` `0823b513f2b1810ad9f6afcb8806ba46f61feedb`
+  with implementation `d3069413` and regression `656397eb`, preserved as
+  separate commits in PR #152.
+- **Implementation:** The original public package audit now requires exact,
+  bounded relative `files` declarations and rejects traversal, glob,
+  control-character, overlong, and duplicate entries before contents
+  traversal. Existing package entrypoints, `dist`/`fixtures` allowlists,
+  optional-engine refusal, and install-hook refusal remain unchanged.
+- **Verification:** Focused surface tests **6/6**, seven-package contents
+  audit pass, forced CLI test/typecheck/build graph **23/23 tasks**, seven
+  clean archives, and packed-manifest audit pass.
+- **Disposition:** `DIST-001` remains unchecked for LOCAL/HUNT/RECORD
+  dependencies and final legal/release acceptance. No provider, npm,
+  production, customer, or AppSec state changed. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-package-allowlist-hardening-2026-10-19.md`.
+- **Next classification:** `STUDIO-CLI-001` and `ENT-CLI-001` remain open
+  with their exact external acceptance blockers; continue to `DIST-002` after
+  those classifications without changing their checkboxes.
+
 ## 2026-10-19 · QUAL-WEB-006 responsive dashboard controls qualification
 
 - **Source:** Web `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` in

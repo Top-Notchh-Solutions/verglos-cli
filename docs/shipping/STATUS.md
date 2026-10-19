@@ -2,6 +2,27 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · DIST-001 package allowlist hardening
+
+The original CLI package-boundary logic now rejects absolute, traversal,
+glob, control-character, overlong, and duplicate `files` declarations before
+the public package contents walker resolves or reads them. Implementation and
+regression commits `d3069413` and `656397eb` remain separate and are published
+in PR #152.
+
+The focused package-surface suite passed **6/6**, the seven-package contents
+audit passed, the full forced CLI graph completed **23/23 tasks**, and clean
+packing produced seven archives with a packed-manifest audit pass. `DIST-001`
+remains unchecked because its LOCAL/HUNT/RECORD dependencies and final
+legal/release acceptance are not all complete. Score remains **239 checked /
+41 open / 280 total (85.4%)**; AppSec/Hunt state was not changed.
+
+Evidence: `evidence/dist-001-package-allowlist-hardening-2026-10-19.md`.
+
+The next top-to-bottom open rows remain `STUDIO-CLI-001` and `ENT-CLI-001`
+with their previously recorded numeric hosted/customer and operational
+acceptance blockers; the next distribution classification is `DIST-002`.
+
 ## 2026-10-19 · QUAL-WEB-006 responsive dashboard controls qualification
 
 The original authenticated organization dashboard now collapses the remaining

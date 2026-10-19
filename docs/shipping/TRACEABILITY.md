@@ -2,6 +2,21 @@
 
 ## Active continuation state · 2026-10-19
 
+## DIST-001 package allowlist hardening · 2026-10-19
+
+- **Source mapping:** CLI `origin/main`
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`; implementation `d3069413` and
+  regression `656397eb` are separate commits in PR #152.
+- **Verification mapping:** Exact public package `files` declarations are
+  validated before traversal. The focused surface contract passed **6/6**;
+  the seven-package contents audit, forced 23-task test/typecheck/build graph,
+  seven-archive pack, and packed-manifest audit passed.
+- **Acceptance mapping:** `DIST-001` remains unchecked because its
+  LOCAL/HUNT/RECORD dependencies and final legal/release acceptance are still
+  open. No AppSec-held checkbox changed; score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/dist-001-package-allowlist-hardening-2026-10-19.md`.
+
 ## QUAL-WEB-006 responsive dashboard controls qualification · 2026-10-19
 
 - **Source mapping:** Web `origin/main`
