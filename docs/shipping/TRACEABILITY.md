@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 production entitlement recheck · 2026-10-19
+
+- **Observation mapping:** The existing owner-authenticated production billing
+  route for `Top Notchh Solutions` displayed `free`, `no active paid license`,
+  and an explicitly unconfigured hosted-record allowance. No provider payment
+  or subscription row was displayed.
+- **Privacy/safety mapping:** The observation used the already-open Chrome
+  page and was read-only. No production mutation, checkout, payment,
+  entitlement grant, receipt upload, customer contact, or source transfer was
+  performed; session details were not retained.
+- **Acceptance mapping:** This proves the intended fail-closed behavior but
+  does not provide the numeric paid/non-production allowance or authorized
+  Studio recipient/customer acceptance required by `STUDIO-CLI-001`. Keep the
+  row unchecked. Score remains **239/41/280 (85.4%)**; AppSec/Hunt remains
+  held.
+- **Evidence:**
+  `evidence/studio-cli-001-production-entitlement-recheck-2026-10-19.md`.
+
 ## ACCEPT-008 commercial evidence validator · 2026-10-19
 
 - **Source mapping:** Private implementation `64c1a477` and regression

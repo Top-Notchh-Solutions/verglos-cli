@@ -2,6 +2,22 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · STUDIO-CLI-001 production entitlement recheck
+
+The already-open owner-authenticated production billing surface rendered the
+organization as `free` with no active paid license. Hosted records were
+explicitly shown as not configured, and no provider payment or subscription
+row was stored. This is the real fail-closed state; it is not a numeric paid
+or non-production allowance.
+
+No production mutation, checkout, payment, entitlement grant, receipt upload,
+customer contact, or source transfer occurred. `STUDIO-CLI-001` remains
+unchecked pending an explicitly approved non-production numeric allowance and
+authorized Studio recipient/customer acceptance. Score remains **239 checked
+/ 41 open / 280 total (85.4%)**; AppSec/Hunt remains held.
+
+Evidence: `evidence/studio-cli-001-production-entitlement-recheck-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-008 original commercial evidence validator shipped
 
 Private commits `64c1a477` (implementation) and `f986f80c` (regression) add

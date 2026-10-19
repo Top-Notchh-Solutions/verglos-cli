@@ -1,6 +1,21 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0zi STUDIO-CLI-001 production entitlement recheck · 2026-10-19
+
+The existing owner-authenticated production billing surface was checked
+read-only. It showed `Top Notchh Solutions` on `free`, with no active paid
+license and hosted records explicitly not configured. No production mutation,
+checkout, payment, entitlement grant, receipt upload, customer contact, or
+source transfer occurred.
+
+This is truthful fail-closed evidence, not a closure: `STUDIO-CLI-001` still
+requires an explicitly approved numeric paid/non-production allowance and an
+authorized Studio recipient/customer acceptance event. Preserve the row as
+open. The live score remains **239 checked / 41 open / 280 total (85.4%)**;
+AppSec/Hunt remains held. Evidence:
+`docs/shipping/evidence/studio-cli-001-production-entitlement-recheck-2026-10-19.md`.
+
 ## 0.0zg Active continuation — original logic only · 2026-10-19
 
 The shipping goal remains active at **239 checked / 41 open / 280 total

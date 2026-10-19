@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · STUDIO-CLI-001 production entitlement recheck
+
+- **Observation:** The already-open owner-authenticated production billing
+  surface rendered `Top Notchh Solutions` as `free` with `no active paid
+  license`; hosted records were explicitly `Allowance is not configured; this
+  is not unlimited.` No provider payment or subscription row was stored.
+- **Boundary:** This was a read-only Chrome observation. No production
+  mutation, checkout, payment, entitlement grant, receipt upload, customer
+  contact, or source transfer occurred; session details and provider payloads
+  were not retained.
+- **Acceptance mapping:** This confirms the fail-closed missing-entitlement
+  state but does not satisfy the numeric paid/non-production allowance or
+  authorized Studio recipient/customer acceptance. Keep `STUDIO-CLI-001`
+  unchecked. Score remains **239/41/280 (85.4%)**; AppSec/Hunt remains held.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-production-entitlement-recheck-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-008 original commercial evidence validator shipped
 
 - **Source:** Private implementation `64c1a477` and regression `f986f80c`; no
