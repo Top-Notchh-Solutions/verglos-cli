@@ -2,6 +2,23 @@
 
 ## Active continuation state · 2026-10-19
 
+## ENT-CLI-001 private-runner route binding · 2026-10-19
+
+- **Source mapping:** CLI `origin/main`
+  `0823b513f2b1810ad9f6afcb8806ba46f61feedb`; implementation `0d8f2c94` and
+  regression `1ce91a1a` are separate commits in PR #153.
+- **Verification mapping:** The original client reconstructs the exact
+  tenant/runner poll route and fixed result-upload route. The focused protocol
+  suite passed **9/9**, the forced workspace build passed **8/8**, and the
+  route-override tests prove rejection before credential/network use.
+- **Acceptance mapping:** `ENT-CLI-001` remains unchecked because operational
+  enrollment credential exchange, approved runner execution/result
+  reconciliation, cross-platform evidence, independent review, and enterprise
+  acceptance are still open. Score remains **239/41/280 (85.4%)**; no
+  AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/ent-cli-001-private-runner-route-binding-2026-10-19.md`.
+
 ## DIST-001 package allowlist hardening · 2026-10-19
 
 - **Source mapping:** CLI `origin/main`

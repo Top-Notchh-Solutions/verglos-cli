@@ -2,6 +2,27 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · ENT-CLI-001 private-runner route binding
+
+- **Source:** CLI `origin/main` `0823b513f2b1810ad9f6afcb8806ba46f61feedb`,
+  with implementation `0d8f2c94` and regression `1ce91a1a` in separate commits
+  on PR #153.
+- **Implementation:** Poll requests now reconstruct the exact tenant/runner
+  route; result uploads use only the fixed result route. Caller-supplied
+  same-origin route overrides are rejected before credentials or network use.
+  Signed-job verification, target allowlisting, replay persistence, bounded
+  response handling, and source-free result projection remain unchanged.
+- **Verification:** Private-runner focused tests **9/9**, forced workspace
+  build **8/8**, and `git diff --check` passed. Existing CLI baseline is
+  **291/293 with 2 explicit Hunt A2 skips and 0 failures**.
+- **Disposition:** `ENT-CLI-001` remains unchecked for operational enrollment,
+  approved runner execution/result reconciliation, cross-platform operational
+  evidence, independent review, and enterprise acceptance. Score remains
+  **239/41/280 (85.4%)**. No AppSec, provider, production, or customer state
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/ent-cli-001-private-runner-route-binding-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-001 package allowlist hardening
 
 - **Source:** CLI `origin/main` `0823b513f2b1810ad9f6afcb8806ba46f61feedb`

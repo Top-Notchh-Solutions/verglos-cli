@@ -2,6 +2,25 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · ENT-CLI-001 private-runner route binding
+
+The original CLI private-runner client now reconstructs the exact tenant/
+runner poll route and fixed result-upload route. Same-origin endpoint
+overrides are rejected before credential or network use, closing a real
+protocol-boundary gap without changing the signed-job, target, replay, timeout,
+or source-free result logic. Implementation and regression commits `0d8f2c94`
+and `1ce91a1a` remain separate in PR #153.
+
+The focused private-runner suite passed **9/9**, the forced workspace build
+passed **8/8**, and the existing CLI baseline remains **291/293 with 2
+explicit Hunt A2 skips and 0 failures**. `ENT-CLI-001` remains unchecked for
+operational enrollment credential exchange, approved runner execution/result
+reconciliation, cross-platform operational evidence, independent review, and
+enterprise acceptance. Score remains **239 checked / 41 open / 280 total
+(85.4%)**; AppSec/Hunt state was not changed.
+
+Evidence: `evidence/ent-cli-001-private-runner-route-binding-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-001 package allowlist hardening
 
 The original CLI package-boundary logic now rejects absolute, traversal,
