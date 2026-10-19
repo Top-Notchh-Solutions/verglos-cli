@@ -1,5 +1,29 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain STUDIO-CLI-001 after original upload authorization
+
+- **Decision:** Accept Web PR #228 as substantive original-logic progress;
+  retain the existing row state and score.
+- **Observed:** Separate implementation and regression commits
+  `3cc4e077850f3e19794549906ec3c3fce7a6feea` and
+  `7f5556ee14af265f754d30f41ab75f53b01a98cc` merged normally as
+  `f321695c385dc5427696f1187b73cf033c400b26`. The real CLI bearer upload
+  path now binds an active license to the exact active organization owner,
+  resolves external organization/project identifiers, and returns a scoped
+  tenant database before persistence.
+- **Verification:** Local Web tests **897 passed / 24 skipped / 0 failed**,
+  typecheck, 49-page build, and diff check passed. Hosted workflow runs
+  `39253319662` and `39253319842` passed the cross-platform, PostgreSQL,
+  security, preview, and typecheck/schema checks.
+- **Reason:** This implementation does not create the required numeric
+  paid/non-production hosted allowance or authorized Studio recipient/customer
+  acceptance observation.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked. Score remains
+  **239/41/280 (85.4%)**; AppSec/Hunt and unrelated external gates remain
+  unchanged.
+- **Evidence:**
+  `evidence/studio-cli-001-production-upload-auth-pr228-2026-10-19.md`.
+
 ## 2026-10-19 · retain FINAL-WEB-008 after merged public smoke
 
 - **Decision:** Accept the merged public smoke as substantive release-surface

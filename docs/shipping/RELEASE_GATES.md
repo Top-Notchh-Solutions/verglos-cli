@@ -1,5 +1,27 @@
 # Verglos V1 release gates
 
+## 2026-10-19 · STUDIO-CLI-001 original production upload authorization
+
+Web PR #228 merged normally as
+`f321695c385dc5427696f1187b73cf033c400b26`, preserving implementation
+`3cc4e077850f3e19794549906ec3c3fce7a6feea` and regression
+`7f5556ee14af265f754d30f41ab75f53b01a98cc`. The client-projection upload now
+uses the real active-license/active-organization-owner path, resolves the
+stable external organization/project identifiers emitted by the CLI, and
+returns a tenant/project-scoped database before admission or persistence.
+The existing UUID/Clerk dashboard path remains separate and malformed bearer
+requests cannot bypass it.
+
+Local Web tests passed **897/921** with 24 explicit skips and zero failures;
+typecheck, the 49-page build, and diff check passed. Hosted workflow runs
+`39253319662` and `39253319842` passed the cross-platform protocol/client,
+isolated PostgreSQL, GitGuardian, Vercel Preview, and typecheck/schema checks.
+
+Keep `STUDIO-CLI-001` unchecked for its numeric paid/non-production allowance
+and authorized Studio recipient/customer acceptance. Score remains **239
+checked / 41 open / 280 total (85.4%)**. No AppSec/Hunt state changed. Evidence:
+`evidence/studio-cli-001-production-upload-auth-pr228-2026-10-19.md`.
+
 ## 2026-10-19 · FINAL-WEB-008 merged public release smoke
 
 The merged Web head `47518c774a339e81ba66968e9cd6dbe0249b5e2d` passed the

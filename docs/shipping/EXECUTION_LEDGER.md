@@ -2,6 +2,33 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · STUDIO-CLI-001 original production upload authorization
+
+- **Source:** Web PR #228 merged normally as
+  `f321695c385dc5427696f1187b73cf033c400b26`; implementation
+  `3cc4e077850f3e19794549906ec3c3fce7a6feea` and regression
+  `7f5556ee14af265f754d30f41ab75f53b01a98cc` remain separate substantive
+  commits.
+- **Implementation:** The client-projection upload now uses the real bearer
+  path: active license lookup, exact active organization-owner binding,
+  stable external organization/project resolution, least-privilege
+  `publish_record` authorization, and a tenant/project-scoped database before
+  body admission or hosted-record usage reservation. The existing UUID/Clerk
+  dashboard path remains intact; malformed bearer input cannot fall through to
+  it.
+- **Verification:** Local Web tests passed **897/921** with 24 explicit skips
+  and zero failures; typecheck passed; the optimized build generated **49/49**
+  pages; and `git diff --check` passed. Hosted workflow runs
+  `39253319662` and `39253319842` passed the cross-platform protocol/client,
+  isolated PostgreSQL, GitGuardian, Vercel Preview, and typecheck/schema jobs.
+- **Disposition:** This is implementation and hosted-CI evidence only.
+  `STUDIO-CLI-001` remains unchecked for its numeric paid/non-production
+  allowance and authorized Studio recipient/customer acceptance. Score remains
+  **239 checked / 41 open / 280 total (85.4%)**. No AppSec/Hunt or unrelated
+  external gate changed.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-production-upload-auth-pr228-2026-10-19.md`.
+
 ## 2026-10-19 · FINAL-WEB-008 public release smoke
 
 - **Source:** Merged Web head `47518c774a339e81ba66968e9cd6dbe0249b5e2d`;

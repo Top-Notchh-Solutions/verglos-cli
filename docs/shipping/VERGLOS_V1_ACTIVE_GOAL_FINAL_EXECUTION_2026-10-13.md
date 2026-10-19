@@ -1,6 +1,33 @@
 
 # Verglos V1 Final Execution Goal — Paying Product to Point-5 Qualification
 
+## 0.0zf Current STUDIO-CLI-001 original production upload authorization — 2026-10-19
+
+Web PR #228 merged normally as
+`f321695c385dc5427696f1187b73cf033c400b26`, preserving implementation
+`3cc4e077850f3e19794549906ec3c3fce7a6feea` and regression
+`7f5556ee14af265f754d30f41ab75f53b01a98cc`. The shipped client-projection
+upload now uses the original production bearer path: active license lookup,
+exact active organization-owner binding, stable external organization/project
+resolution, least-privilege `publish_record` authorization, and a scoped
+tenant/project database before admission or custody persistence. The existing
+UUID/Clerk dashboard path remains intact; malformed bearer requests cannot
+fall through to it.
+
+Local Web verification passed **897/921** with 24 explicit skips and zero
+failures, plus typecheck, a 49-page optimized build, and diff check. Hosted
+workflow runs `39253319662` and `39253319842` passed cross-platform
+protocol/client, isolated PostgreSQL, GitGuardian, Vercel Preview, and
+typecheck/schema checks. No production promotion or customer-source upload
+was performed for this qualification.
+
+This is substantive implementation evidence, not a checkbox closure.
+`STUDIO-CLI-001` remains unchecked for its numeric paid/non-production hosted
+allowance and authorized recipient/customer acceptance. AppSec/Hunt remains
+held separately. The live private score is **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-production-upload-auth-pr228-2026-10-19.md`.
+
 ## 0.0ze Current organization SCM App token/scope read-back — 2026-10-18
 
 The organization App’s signed GitHub installation-token exchange was verified
@@ -1682,7 +1709,7 @@ agent.
 The authoritative score must be recomputed from the live checklist after every
 accepted batch. At replacement time it is:
 
-    229 checked / 51 open / 280 total / 81.8 percent
+    239 checked / 41 open / 280 total / 85.4 percent
 
 Every progress update must state:
 

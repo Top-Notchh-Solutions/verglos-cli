@@ -2,6 +2,26 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · STUDIO-CLI-001 original upload authorization shipped
+
+Web PR #228 merged normally as
+`f321695c385dc5427696f1187b73cf033c400b26`, preserving the separate
+implementation and regression commits. The real CLI client-projection upload
+now authenticates through the active license, binds to the active organization
+owner, resolves external organization/project identifiers, and scopes the
+tenant database before hosted custody admission. Local Web verification passed
+**897/921** with 24 explicit skips and zero failures, plus typecheck, a 49-page
+build, and diff check. Hosted cross-platform, PostgreSQL, GitGuardian, Vercel,
+and typecheck/schema checks passed in runs `39253319662` and `39253319842`.
+
+This is code-side and hosted-CI evidence only. `STUDIO-CLI-001` remains
+unchecked for its numeric paid/non-production allowance and authorized
+recipient/customer acceptance. Score remains **239 checked / 41 open / 280
+total (85.4%)**. AppSec/Hunt remains held separately; no unrelated gate was
+changed.
+
+Evidence: `evidence/studio-cli-001-production-upload-auth-pr228-2026-10-19.md`.
+
 ## 2026-10-19 · FINAL-WEB-008 public release smoke
 
 The merged Web head `47518c774a339e81ba66968e9cd6dbe0249b5e2d` passed the

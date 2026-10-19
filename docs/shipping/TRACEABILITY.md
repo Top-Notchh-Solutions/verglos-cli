@@ -2,6 +2,28 @@
 
 ## Active continuation state · 2026-10-19
 
+## STUDIO-CLI-001 original production upload authorization · 2026-10-19
+
+- **Source mapping:** Web PR #228 normal merge
+  `f321695c385dc5427696f1187b73cf033c400b26`, preserving implementation
+  `3cc4e077850f3e19794549906ec3c3fce7a6feea` and regression
+  `7f5556ee14af265f754d30f41ab75f53b01a98cc`.
+- **Implementation mapping:** The upload bearer is resolved through the
+  active license and exact active organization-owner membership. Stable
+  external organization/project identifiers resolve into internal records,
+  and the returned database is tenant/project scoped before upload body,
+  allowance, or custody work. The UUID/Clerk dashboard path remains intact.
+- **Verification mapping:** Local Web tests **897/921** with 24 explicit
+  skips and zero failures, typecheck, 49-page build, and diff check passed.
+  Hosted runs `39253319662` and `39253319842` passed the cross-platform,
+  isolated PostgreSQL, GitGuardian, Vercel Preview, and typecheck/schema jobs.
+- **Acceptance mapping:** This does not create the numeric paid/non-production
+  allowance or authorized Studio recipient/customer acceptance required by
+  `STUDIO-CLI-001`; keep the row unchecked. Score remains
+  **239/41/280 (85.4%)** and AppSec/Hunt remains held separately.
+- **Evidence:**
+  `evidence/studio-cli-001-production-upload-auth-pr228-2026-10-19.md`.
+
 ## FINAL-WEB-008 public release smoke · 2026-10-19
 
 - **Source mapping:** Web normal merge
