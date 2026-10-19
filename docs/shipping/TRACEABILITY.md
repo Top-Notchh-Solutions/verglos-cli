@@ -8,10 +8,12 @@
   45 open / 280 total (83.9%)**.
 - **Next-row mapping:** `STUDIO-CLI-001` remains open. The implementation and
   route qualification are recorded, but the authenticated owner Billing
-  surface has no supported checkout and no numeric hosted-record allowance;
-  the receipt route correctly refuses admission before persistence.
+  surface has no supported Studio checkout and no numeric hosted-record
+  allowance. The read-only checkout route offers only Pro at ₹2,809.43/month
+  with Cards; the receipt route correctly refuses admission before persistence.
 - **Boundary mapping:** No AppSec-held row, public source, provider state,
   billing state, Production state, or customer data changed.
+- **Evidence:** `evidence/studio-cli-001-checkout-boundary-2026-10-19.md`.
 
 ## ACCEPT-005 first-party qualification · 2026-10-19
 

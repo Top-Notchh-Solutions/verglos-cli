@@ -10,8 +10,9 @@
 - **Next row:** `STUDIO-CLI-001` is the next top-to-bottom eligible row. Its
   implementation and route tests are complete, but the owner-controlled
   Billing page currently reports `free`, no hosted-record allowance, and no
-  checkout. The existing hosted route correctly returns
-  `allowance_not_configured`; no receipt was persisted.
+  checkout. The read-only checkout route offers only Pro at ₹2,809.43/month
+  with Cards; it offers no Studio/Test Mode path. The existing hosted route
+  correctly returns `allowance_not_configured`; no receipt was persisted.
 - **Disposition:** Keep `STUDIO-CLI-001` unchecked pending a supported
   numeric paid/non-production allowance and an actual authorized recipient
   acceptance observation. Do not activate the inactive Studio catalog or
@@ -19,6 +20,8 @@
 - **Boundary:** This reconciliation changed only the private shipping ledger;
   no public repository, provider configuration, billing state, production
   state, customer data, or AppSec-held checkbox changed.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-checkout-boundary-2026-10-19.md`.
 
 ## 2026-10-19 · ACCEPT-005 first-party owned-repository qualification
 

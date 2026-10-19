@@ -6,8 +6,10 @@
   `STUDIO-CLI-001`.
 - **Observed:** The existing owner-controlled Billing page reports the
   organization as `free`, with no active paid license, no numeric hosted-record
-  allowance, and no checkout. The hosted custody route rejects a valid
-  redacted receipt with `allowance_not_configured` before persistence.
+  allowance, and no supported Studio checkout. The read-only checkout route
+  offers only Pro at ₹2,809.43/month with Cards and no Test Mode control. The
+  hosted custody route rejects a valid redacted receipt with
+  `allowance_not_configured` before persistence.
 - **Reason:** A code-side implementation pass or owner assertion cannot replace
   a supported non-production entitlement and an actual recipient acceptance
   observation. Activating inactive Studio or bypassing the provider would make
@@ -16,7 +18,8 @@
   explicit hold set. Score is **235/45/280 (83.9%)**; no public, billing,
   Production, customer, or AppSec state changed.
 - **Evidence:** Existing Studio qualification packet plus the owner-session
-  Billing observation retained in the current private shipping record.
+  Billing/checkout observation in
+  `evidence/studio-cli-001-checkout-boundary-2026-10-19.md`.
 
 ## 2026-10-18 · retain TEAM-WEB-006 after live SCM reconciliation
 

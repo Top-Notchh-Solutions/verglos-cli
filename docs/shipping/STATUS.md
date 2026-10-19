@@ -8,11 +8,14 @@ qualification packet is retained. Recomputing every backlog checkbox gives
 
 The next row is `STUDIO-CLI-001`. The implementation is present, but the
 existing owner-controlled Billing page is `free` with no numeric hosted-record
-allowance and no supported checkout. The hosted custody route therefore
-fails closed with `allowance_not_configured`; no write occurred. Keep the row
-open until a supported numeric non-production allowance and actual authorized
-recipient acceptance are observed. No public or Production state changed, and
-the AppSec/Hunt hold set remains untouched.
+allowance and no supported Studio checkout. The read-only checkout route
+offers only Pro at ₹2,809.43/month with Cards; no Test Mode/Studio path was
+available. The hosted custody route therefore fails closed with
+`allowance_not_configured`; no write occurred. Keep the row open until a
+supported numeric non-production allowance and actual authorized recipient
+acceptance are observed. Evidence:
+`evidence/studio-cli-001-checkout-boundary-2026-10-19.md`. No public or
+Production state changed, and the AppSec/Hunt hold set remains untouched.
 
 ## 2026-10-19 · ACCEPT-005 first-party owned-repository qualification
 
