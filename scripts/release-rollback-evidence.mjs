@@ -1,4 +1,5 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
@@ -8,6 +9,7 @@ const execFileAsync = promisify(execFile);
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outputDirectory = process.argv[2] ?? join(repositoryRoot, ".artifacts", "release-rollback");
 const manifestPath = join(repositoryRoot, "scripts", "fixtures", "release-rollback-rehearsal.json");
+const manifestDigest = `sha256:${createHash("sha256").update(await readFile(manifestPath)).digest("hex")}`;
 const command = [
   join(repositoryRoot, "packages", "cli", "dist", "index.js"),
   "release",
@@ -56,6 +58,8 @@ const report = {
   node: process.version,
   exitCode: typeof execution.code === "number" ? execution.code : 0,
   status: rehearsal?.status ?? "invalid-output",
+  manifestDigest: typeof rehearsal?.manifestDigest === "string" ? rehearsal.manifestDigest : null,
+  manifestDigestMatchesFixture: rehearsal?.manifestDigest === manifestDigest,
   operationCount: rehearsal?.operationCount ?? 0,
   historicalRecordCount: rehearsal?.historicalRecordCount ?? 0,
   historicalRecordsPreserved: rehearsal?.historicalRecordsPreserved === true,
@@ -75,6 +79,8 @@ await writeFile(join(outputDirectory, "run.log"), `${stdout}${stderr ? `\n${stde
 
 const passed = report.exitCode === 0
   && report.status === "passed"
+  && report.manifestDigest === manifestDigest
+  && report.manifestDigestMatchesFixture
   && report.operationCount === 5
   && report.historicalRecordsPreserved;
 if (!passed) {

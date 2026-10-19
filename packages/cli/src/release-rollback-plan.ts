@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { lstat, readFile } from "node:fs/promises";
 import { decideReleaseRollback, type ReleaseReference } from "@verglos/shared";
 
@@ -13,6 +14,10 @@ const REQUIRED_REHEARSAL_KINDS = new Set([
   "signing-identity",
   "web-deployment",
 ] as const);
+
+function sha256(value: string | Buffer): string {
+  return `sha256:${createHash("sha256").update(value).digest("hex")}`;
+}
 
 type RollbackRehearsalOperation = Readonly<{
   id: string;
@@ -127,7 +132,9 @@ export async function executeReleaseRollbackRehearsal(input: Readonly<{
   try {
     const entry = await lstat(input.manifestPath);
     if (!entry.isFile() || entry.size > MAX_BYTES) throw new Error("rollback rehearsal manifest must be a bounded regular file");
-    const manifest = parseRehearsalManifest(JSON.parse(await readFile(input.manifestPath, "utf8")));
+    const manifestBytes = await readFile(input.manifestPath);
+    const manifestDigest = sha256(manifestBytes);
+    const manifest = parseRehearsalManifest(JSON.parse(manifestBytes.toString("utf8")));
     const historicalBefore = manifest.historicalRecords.map((record) => `${record.id}:${record.digest}`);
     const operations: Array<Record<string, unknown>> = [];
     for (const operation of manifest.operations) {
@@ -140,7 +147,7 @@ export async function executeReleaseRollbackRehearsal(input: Readonly<{
         preserveHistoricalRecords: true,
       });
       if (!decision.allowed) {
-        const report = { status: "failed", failedOperation: operation.id, reason: decision.reason, operations, historicalRecordsPreserved: true };
+        const report = { status: "failed", manifestDigest, failedOperation: operation.id, reason: decision.reason, operations, historicalRecordsPreserved: true };
         if (input.json) console.log(JSON.stringify(report));
         else if (!input.quiet) console.error(`Rollback rehearsal denied: ${decision.reason}.`);
         return 78;
@@ -149,7 +156,7 @@ export async function executeReleaseRollbackRehearsal(input: Readonly<{
     }
     const historicalAfter = manifest.historicalRecords.map((record) => `${record.id}:${record.digest}`);
     const historicalRecordsPreserved = JSON.stringify(historicalBefore) === JSON.stringify(historicalAfter);
-    const report = { status: historicalRecordsPreserved ? "passed" : "failed", operationCount: operations.length, operations, historicalRecordCount: manifest.historicalRecords.length, historicalRecordsPreserved };
+    const report = { status: historicalRecordsPreserved ? "passed" : "failed", manifestDigest, operationCount: operations.length, operations, historicalRecordCount: manifest.historicalRecords.length, historicalRecordsPreserved };
     if (input.json) console.log(JSON.stringify(report));
     else if (!input.quiet) console.log(historicalRecordsPreserved ? `Rollback rehearsal passed for ${operations.length} operations. Historical records preserved.` : "Rollback rehearsal failed: historical records changed.");
     return historicalRecordsPreserved ? 0 : 78;
