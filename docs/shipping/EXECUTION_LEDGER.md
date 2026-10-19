@@ -2,6 +2,26 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · TEAM-WEB-003 draft-first policy creation hardening
+
+- **Source:** Web clean branch `codex/policy-creation-state-20261019` from
+  `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`; implementation
+  `9489fb6` and regression `75de374` remain separate in PR #223.
+- **Implementation:** The original policy create route now admits only a
+  `draft` first write. Caller-supplied `published`/`retired` states and
+  `effectiveFrom` are refused; publishing and its effective timestamp remain
+  explicit audited transitions through the existing lifecycle endpoint.
+- **Verification:** Focused policy/tenant/negative-boundary/SCM contracts
+  passed **45/45**, typecheck passed, the optimized Next build generated
+  **48/48** pages, and `git diff --check` passed.
+- **Disposition:** `TEAM-WEB-003` was already checked; this is a substantive
+  hardening addendum, not a new checkbox closure. Score remains **239/41/280
+  (85.4%)**. No production, database, provider, billing, npm, customer, or
+  AppSec state changed. The Hunt/AppSec hold set remains `HUNT-008`–`HUNT-011`
+  and `QUAL-CLI-004`, plus their explicit dependents.
+- **Evidence:**
+  `docs/shipping/evidence/team-web-003-draft-first-policy-creation-2026-10-19.md`.
+
 ## 2026-10-19 · FINAL-WEB-007/008 public-surface qualification
 
 - **Source:** Web `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`,

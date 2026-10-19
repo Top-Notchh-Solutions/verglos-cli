@@ -2,6 +2,22 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · TEAM-WEB-003 original policy lifecycle hardening
+
+Web PR #223 preserves two substantive commits: `9489fb6` adds the
+draft-first policy creation admission and route wiring, while `75de374` adds
+the pure and route-contract regression tests. A new policy version can no
+longer enter directly as `published`/`retired` or carry `effectiveFrom`; those
+effects must pass through the existing audited transition route.
+
+The focused policy/tenant/negative-boundary/SCM contracts passed **45/45**,
+typecheck passed, and the optimized build generated **48/48** pages. This is
+an implementation hardening addendum to already-checked `TEAM-WEB-003`; no
+checkbox changed. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+No production, provider, customer, billing, npm, or AppSec state changed.
+
+Evidence: `evidence/team-web-003-draft-first-policy-creation-2026-10-19.md`.
+
 ## 2026-10-19 · FINAL-WEB-007/008 public-surface qualification
 
 The original Web public Release Record verification route now has explicit

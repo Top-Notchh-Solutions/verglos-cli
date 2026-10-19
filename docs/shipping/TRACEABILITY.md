@@ -2,6 +2,21 @@
 
 ## Active continuation state · 2026-10-19
 
+## TEAM-WEB-003 draft-first policy creation hardening · 2026-10-19
+
+- **Source mapping:** Web PR #223, implementation `9489fb6` and regression
+  `75de374`, based on `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`.
+- **Verification mapping:** `admitPolicyCreation` and the policy create route
+  now force draft-first creation and keep `effectiveFrom` on the publish
+  transition path. Focused policy/tenant/negative-boundary/SCM contracts
+  passed **45/45**; typecheck and the 48-page build passed.
+- **Acceptance mapping:** `TEAM-WEB-003` was already checked, so this is a
+  hardening addendum with no score change. It does not provide the external
+  allowance, customer, provider, legal, release, or AppSec evidence required
+  by the remaining open rows. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/team-web-003-draft-first-policy-creation-2026-10-19.md`.
+
 ## FINAL-WEB-007/008 public-surface qualification · 2026-10-19
 
 - **Source mapping:** Web `origin/main`

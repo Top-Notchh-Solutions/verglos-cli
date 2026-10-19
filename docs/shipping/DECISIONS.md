@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain score after draft-first policy creation hardening
+
+- **Decision:** Accept Web PR #223 as substantive original-logic hardening;
+  retain the existing score and all row states.
+- **Observed:** Policy creation now refuses direct `published`/`retired`
+  insertion and creation-time `effectiveFrom`; the existing transition route
+  remains the only publish/effective-date path. The focused contracts passed
+  45/45, typecheck passed, and the production build generated 48/48 pages.
+- **Reason:** `TEAM-WEB-003` was already checked, and this change does not
+  produce numeric hosted entitlement, recipient/customer, provider, legal,
+  release, field, or independent AppSec evidence.
+- **Disposition:** No checkbox changes. Score remains **239/41/280 (85.4%)**;
+  Hunt/AppSec rows remain held, while Studio/Enterprise/distribution and
+  acceptance rows retain their exact external blockers.
+- **Evidence:**
+  `evidence/team-web-003-draft-first-policy-creation-2026-10-19.md`.
+
 ## 2026-10-19 · retain FINAL-WEB-007/008 after public-surface qualification
 
 - **Decision:** Accept Web PR #222 as a substantive public release and
