@@ -18,6 +18,27 @@ using the active `verglos-web`, `verglos-cli`, and private shipping ledger
 repositories only; preserve normal granular substantive commits and do not
 squash.
 
+## 2026-10-19 · ENT-CLI-001 original enrollment exchange shipped
+
+Web PR #225 and CLI PR #152 now provide the original one-time runner
+credential exchange. Web redeems the owner-issued enrollment token atomically,
+stores only a digest of the bounded runner credential, enforces expiry and
+tenant/runner binding, and rejects owner-license authentication on runner poll
+and result routes. CLI enrolls through the fixed route, persists the credential
+using the existing credentials store, and uses it for poll/upload. Focused Web
+contracts passed **24/24**, disposable PostgreSQL lifecycle **1/1**, and CLI
+focused tests **10/10**; typecheck/build/migration and all required hosted
+checks passed. Normal merge commits are Web
+`2c07237845f0e52061dc52c99c21212615390177` and CLI
+`11734a45740a893c307606e8f3d3f316711abd9e`.
+
+This is implementation progress, not a deliberate checkbox closure.
+`ENT-CLI-001` remains unchecked until authorized deployed enrollment, approved
+execution/result reconciliation, operational evidence, independent review, and
+enterprise acceptance exist. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. AppSec/Hunt remains held separately. Evidence:
+`docs/shipping/evidence/ent-cli-001-runner-credential-exchange-pr152-pr225-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-WEB-003 original policy lifecycle hardening
 
 Web PR #223 preserves implementation commit `9489fb6` and regression commit

@@ -2,6 +2,32 @@
 
 ## Active continuation state · 2026-10-19
 
+## ENT-CLI-001 original runner credential exchange · 2026-10-19
+
+- **Source mapping:** Web PR #225 merged normally as
+  `2c07237845f0e52061dc52c99c21212615390177`; implementation `1b4df17` and
+  regression `eb4f011` remain separate. CLI PR #152 merged normally as
+  `11734a45740a893c307606e8f3d3f316711abd9e`; implementation `aed92de` and
+  regression `b36e2bad` remain separate.
+- **Implementation mapping:** Web migration `0042` stores only the runner
+  credential digest and expiry. The enrollment route atomically consumes the
+  owner-issued one-time token and returns a single bounded `prc_` credential.
+  Runner poll/result routes require the exact active tenant/runner credential;
+  CLI enrollment persists and reuses that credential through the existing
+  credentials store. Fixed route binding and signed-job/target/replay controls
+  remain in force.
+- **Verification mapping:** Web focused contracts **24/24**, disposable SQL
+  lifecycle **1/1**, 43-migration audit, typecheck, 49-page build, and diff
+  check passed. CLI focused tests **10/10**, typecheck, build, and diff check
+  passed. All required hosted checks for both merged PRs passed, including
+  Ubuntu/macOS/Windows Node 20/22/24 for CLI and Web protocol cells.
+- **Acceptance mapping:** `ENT-CLI-001` remains unchecked for authorized
+  deployed enrollment, approved execution/result reconciliation, operational
+  evidence, independent review, and enterprise acceptance. Score remains
+  **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/ent-cli-001-runner-credential-exchange-pr152-pr225-2026-10-19.md`.
+
 ## STUDIO-CLI-001 hosted projection allowance hardening · 2026-10-19
 
 - **Source mapping:** Web PR #224, implementation `e3a62aa` and regression

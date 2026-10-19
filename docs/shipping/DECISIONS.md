@@ -1,5 +1,28 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain ENT-CLI-001 after original credential exchange ships
+
+- **Decision:** Accept Web PR #225 and CLI PR #152 as substantive original
+  runner-enrollment implementation; retain the existing row state and score.
+- **Observed:** Web now performs one-time token redemption, digest-only
+  credential persistence, exact tenant/runner binding, expiry, and runner-only
+  poll/result authentication. CLI now enrolls through the fixed route and uses
+  the persisted runner bearer. Web passed 24/24 focused contracts and SQL
+  lifecycle 1/1; CLI passed 10/10 focused tests; both hosted matrices and
+  required security/provenance/release checks passed.
+- **Shipping:** The PRs merged normally without squash as
+  `2c07237845f0e52061dc52c99c21212615390177` (Web) and
+  `11734a45740a893c307606e8f3d3f316711abd9e` (CLI).
+- **Reason:** Repository code and CI cannot by themselves provide an
+  authorized deployed-tenant enrollment, approved runner execution/result
+  reconciliation, enterprise acceptance, or independent review. No production
+  credential or customer runner was used.
+- **Disposition:** Keep `ENT-CLI-001` unchecked. Score remains **239/41/280
+  (85.4%)**. AppSec/Hunt remains the independent held set; this decision does
+  not waive it or close unrelated external rows.
+- **Evidence:**
+  `evidence/ent-cli-001-runner-credential-exchange-pr152-pr225-2026-10-19.md`.
+
 ## 2026-10-19 · retain STUDIO-CLI-001 after allowance enforcement
 
 - **Decision:** Accept Web PR #224 as substantive original-logic progress;

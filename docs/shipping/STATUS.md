@@ -2,6 +2,35 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · ENT-CLI-001 original runner credential exchange
+
+The original private-runner flow now has a real one-time enrollment exchange
+across Web and CLI. Web PR #225 merged normally as
+`2c07237845f0e52061dc52c99c21212615390177`; CLI PR #152 merged normally as
+`11734a45740a893c307606e8f3d3f316711abd9e`. Web now redeems the owner-issued
+enrollment token once, stores only an HMAC digest of a bounded `prc_` runner
+credential, activates the exact tenant/runner binding, and expires the
+credential after 30 days. Poll and result routes accept only that runner
+credential, not the owner license bearer. CLI enrollment uses the fixed API
+route and persists the credential through the existing credentials store; poll
+and upload use the persisted runner bearer.
+
+Web focused contracts passed **24/24**, disposable PostgreSQL lifecycle passed
+**1/1**, migration audit verified **43** ordered migrations, typecheck/build
+passed with **49/49** pages, and diff check passed. CLI focused client tests
+passed **10/10**, typecheck/build passed, and diff check passed. Hosted Web
+PR #225 and CLI PR #152 passed their database, cross-platform, type/schema,
+security, provenance, self-scan, and release-binding checks.
+
+This is substantive original-logic progress, not a checkbox closure.
+`ENT-CLI-001` remains unchecked for authorized deployed enrollment, approved
+runner execution/result reconciliation, operational cross-platform evidence,
+independent review, and enterprise acceptance. Score remains **239 checked / 41
+open / 280 total (85.4%)**. AppSec/Hunt remains held separately; no other
+external gate is waived by this code qualification.
+
+Evidence: `evidence/ent-cli-001-runner-credential-exchange-pr152-pr225-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 original allowance logic
 
 Web PR #224 preserves two substantive commits: `e3a62aa` adds hosted
