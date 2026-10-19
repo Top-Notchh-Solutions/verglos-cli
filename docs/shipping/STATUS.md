@@ -2,6 +2,22 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · QUAL-WEB-006 responsive dashboard controls qualification
+
+The original authenticated organization dashboard now collapses the remaining
+fixed multi-column member, client-workspace, handoff, and client-portfolio
+summary controls to one bounded column at the mobile breakpoint. The focused
+dashboard/accessibility contracts passed **13/13**, typecheck passed, and the
+optimized production build generated **48 pages**. Implementation `8098393`
+and regression `04533dc` remain separate granular commits.
+
+`QUAL-WEB-006` remains unchecked for human screen-reader operation, complete
+paid/org runtime, large-dataset, field-CWV, supported-environment browser, and
+independent/customer acceptance. Score remains **239 checked / 41 open / 280
+total (85.4%)**; AppSec/Hunt state was not changed.
+
+Evidence: `evidence/qual-web-006-dashboard-responsive-controls-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-006 current Home accessibility qualification
 
 The original authenticated organization Home surface now uses a responsive

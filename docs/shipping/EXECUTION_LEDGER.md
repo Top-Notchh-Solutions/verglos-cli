@@ -2,6 +2,24 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · QUAL-WEB-006 responsive dashboard controls qualification
+
+- **Source:** Web `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` in
+  the clean disposable qualification worktree, with implementation `8098393`
+  and regression `04533dc` as separate commits.
+- **Implementation:** Existing member, client-workspace, handoff, and client
+  portfolio logic is preserved. Fixed desktop grid tracks now collapse through
+  a shared mobile stylesheet at `720px`, preventing control/fact overflow.
+- **Verification:** Focused dashboard/accessibility contracts **13/13**,
+  typecheck, and optimized production build (**48 pages**) passed.
+- **Disposition:** `QUAL-WEB-006` remains unchecked for human screen-reader,
+  complete paid/org runtime, large-dataset, field-CWV, supported-environment
+  browser, and independent/customer acceptance. No production/provider/
+  payment/database/deployment/AppSec state changed. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-dashboard-responsive-controls-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-006 current Home accessibility qualification
 
 - **Source:** Web `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` in

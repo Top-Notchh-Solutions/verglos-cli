@@ -3449,6 +3449,21 @@ No AppSec state changed. Score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `docs/shipping/evidence/qual-web-006-current-home-accessibility-qualification-2026-10-19.md`.
 
+### QUAL-WEB-006 responsive dashboard controls qualification · 2026-10-19
+
+The original authenticated organization dashboard now collapses fixed desktop
+grid tracks for member rows, client-workspace creation, handoff expiry/message
+controls, and client portfolio summary facts to one bounded column at the
+mobile breakpoint. Focused dashboard/accessibility contracts pass **13/13**
+with zero failures/skips; typecheck and the optimized production build also
+pass, generating 48 pages. Implementation `8098393` and regression `04533dc`
+remain separate granular commits in the clean Web qualification worktree.
+`QUAL-WEB-006` remains unchecked for human screen-reader, complete paid/org
+runtime, large-dataset, field-CWV, supported-environment browser, and
+independent/customer acceptance. No AppSec state changed. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-responsive-controls-2026-10-19.md`.
+
 ### QUAL-WEB-006 evidence addendum · 2026-10-18
 
 The existing authenticated organization dashboard was qualified in Chrome
