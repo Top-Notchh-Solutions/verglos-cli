@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · ENT-CLI-001 cross-platform qualification advance
+
+Web PR #219 was merged normally as `bbe70d4f`, preserving implementation
+commit `61d4ff7`. Its public-safe workflow now tests the private-runner
+protocol/client on Ubuntu, macOS, and Windows and runs an isolated pinned
+PostgreSQL lifecycle. Hosted CI passed all four jobs, the existing Web
+typecheck/schema check, Vercel, Preview Comments, and GitGuardian. Local clean
+qualification passed private-runner **24/24**, typecheck, boundary audit, and
+isolated E2E **1/1**.
+
+This is implementation and qualification progress only. `ENT-CLI-001` remains
+unchecked pending operational enrollment, approved enterprise execution and
+result reconciliation, independent review where required, and enterprise
+acceptance. Evidence:
+`evidence/ent-cli-001-cross-platform-qualification-2026-10-19.md`.
+The score remains **235 checked / 45 open / 280 total (83.9%)**; no AppSec,
+provider, customer, or Production state changed.
+
 ## 2026-10-19 · TEAM-CLI-001 verified; STUDIO-CLI-001 is next
 
 `TEAM-CLI-001` is checked in the authoritative backlog and its hosted

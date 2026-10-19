@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 cross-platform qualification · 2026-10-19
+
+- **Source mapping:** Web implementation commit `61d4ff7` was merged normally
+  in PR #219 as `bbe70d4f`; no squash merge was used.
+- **Workflow mapping:** `.github/workflows/private-runner-qualification.yml`
+  qualifies the protocol/client on Ubuntu, macOS, and Windows and runs the
+  isolated PostgreSQL lifecycle against a pinned public image.
+- **Result mapping:** Hosted CI passed the three-host matrix and isolated
+  PostgreSQL job. The existing typecheck/schema, Vercel, Preview Comments, and
+  GitGuardian checks also passed. Local qualification passed 24/24 private
+  runner tests and 1/1 isolated E2E.
+- **Contract mapping:** The workflow proves a reproducible cross-platform
+  qualification substrate, but not operational enrollment, enterprise runner
+  execution/result reconciliation, independent review, or authorized
+  enterprise acceptance. `ENT-CLI-001` remains unchecked; score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:** `evidence/ent-cli-001-cross-platform-qualification-2026-10-19.md`.
+
 ## TEAM-CLI-001 closure reconciliation · 2026-10-19
 
 - **Backlog mapping:** `TEAM-CLI-001` is checked. The exact closure evidence

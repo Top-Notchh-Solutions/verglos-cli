@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain ENT-CLI-001 after cross-platform qualification
+
+- **Decision:** Accept Web PR #219 as a substantive implementation and
+  qualification advance; preserve the row as open.
+- **Observed:** Normal merge `bbe70d4f` preserves implementation `61d4ff7`.
+  Hosted CI passed Ubuntu, macOS, Windows, isolated PostgreSQL, existing Web
+  typecheck/schema, Vercel, Preview Comments, and GitGuardian. Local clean
+  qualification passed 24/24 private-runner tests, typecheck, boundary audit,
+  and isolated E2E 1/1.
+- **Reason:** A reproducible CI matrix does not prove operational enrollment,
+  approved enterprise execution and result reconciliation, independent review,
+  or authorized enterprise acceptance. No credential or customer/Production
+  runner was used.
+- **Disposition:** Keep `ENT-CLI-001` unchecked. AppSec/Hunt remains held;
+  score remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/ent-cli-001-cross-platform-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · retain STUDIO-CLI-001 after TEAM-CLI-001 closure
 
 - **Decision:** Confirm `TEAM-CLI-001` checked and advance the strict queue to

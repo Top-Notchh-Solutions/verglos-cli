@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ENT-CLI-001 cross-platform implementation qualification
+
+- **Implementation:** Web PR #219 was merged normally as `bbe70d4f`, preserving
+  implementation commit `61d4ff7`. The public workflow now qualifies the
+  private-runner protocol on Ubuntu, macOS, and Windows and runs an isolated
+  pinned-PostgreSQL lifecycle job.
+- **Results:** Hosted CI passed the three-host protocol/client matrix, isolated
+  PostgreSQL lifecycle, existing Web typecheck/schema, Vercel deployment,
+  Preview Comments, and GitGuardian checks. The clean-worktree local run also
+  passed private-runner **24/24**, typecheck, public-boundary audit, and the
+  isolated E2E **1/1**.
+- **Disposition:** This is a substantive ENT-CLI-001 implementation and
+  qualification advance, not row closure. Keep the row unchecked pending
+  operational enrollment, approved enterprise runner execution/result
+  reconciliation, independent review where required, and authorized
+  enterprise acceptance. No credentials, customer source, provider state, or
+  Production runner were used.
+- **Evidence:** `docs/shipping/evidence/ent-cli-001-cross-platform-qualification-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**. AppSec/Hunt hold
+  set remains unchanged.
+
 ## 2026-10-19 · TEAM-CLI-001 closure and next-row reconciliation
 
 - **Verification:** The authoritative backlog contains `TEAM-CLI-001` as
