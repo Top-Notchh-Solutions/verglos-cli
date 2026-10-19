@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ACCEPT-005 first-party owned-repository qualification
+
+- **Authorization:** Owner authorization was applied only to the two
+  first-party working repositories; no customer or external-team consent was
+  inferred. The exact detached sources were CLI
+  `50bcab42eadfa8796d86d1f7a8aaee3010c65647` and Web
+  `390fd3f82b2a59003e30e2362ab593ef1db4b982`.
+- **Execution:** The qualified CLI scanner ran locally with
+  `VERGLOS_TELEMETRY=0` and `--no-provenance`; no hosted write, publication,
+  customer source, credential, or production state was used.
+- **Results:** CLI report: 78 findings, score 67/high. Web report: 22
+  findings, score 73/medium. Both reports were valid but incomplete because
+  provenance was explicitly skipped. A zsh wrapper variable-name error made
+  the Web shell exit capture unusable; it is not recorded as a passing exit.
+- **Boundary:** Raw reports/logs contained scanner finding detail and were
+  temporary only. The private evidence retains bounded counts, limitations,
+  and SHA-256 digests; the temporary clones and raw outputs are deleted after
+  reconciliation.
+- **Disposition:** Keep `ACCEPT-005` unchecked. This does not satisfy the
+  required consented-team/recipient workflow, full-coverage reconciliation,
+  deletion/expiry record, or independent AppSec review. No score or AppSec
+  state changed: **235/45/280 (83.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-003 current evidence bundle
 
 - **Implementation:** The private bundle generator now includes the current
@@ -8,7 +33,8 @@
   substrate run.
 - **Verification:** `node scripts/build-acceptance-evidence-bundle.mjs` with
   `VERGLOS_ACCEPTANCE_BUNDLE_OUTPUT=docs/shipping/evidence/acceptance-evidence-bundle-2026-10-19.json`
-  hashed **14 files** and passed the secret-like material scan.
+  hashed **15 files** and passed the secret-like material scan, including the
+  bounded ACCEPT-005 qualification record.
 - **Boundary:** The bundle contains hashes and bounded evidence references,
   not source, credentials, customer data, provider captures, or reviewer
   sign-off. It explicitly records provider lifecycle, customer consent,

@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## ACCEPT-005 first-party qualification · 2026-10-19
+
+- **Source mapping:** CLI merge
+  `50bcab42eadfa8796d86d1f7a8aaee3010c65647`; Web merge
+  `390fd3f82b2a59003e30e2362ab593ef1db4b982`, both evaluated from clean
+  detached worktrees.
+- **Command mapping:** The qualified local CLI scanner ran with telemetry and
+  provenance disabled and wrote temporary JSON/HTML reports for each exact
+  source.
+- **Result mapping:** CLI produced 78 findings at score 67/high; Web produced
+  22 findings at score 73/medium. Both reports explicitly marked provenance
+  coverage incomplete. Raw finding content was not promoted to evidence.
+- **Acceptance mapping:** This is first-party owned-repository technical
+  qualification only. It does not prove external consented-team workflow,
+  recipient comprehension, provider reconciliation, deletion/expiry, or
+  independent AppSec review. `ACCEPT-005` remains unchecked; score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:** `evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`.
+
 ## TEAM-WEB-006 SCM repository-scope reconciliation · 2026-10-18
 
 - **Source mapping:** Web PR #204 normal merge

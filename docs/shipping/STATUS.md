@@ -1,9 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · ACCEPT-005 first-party owned-repository qualification
+
+The exact detached CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`
+and Web merge `390fd3f82b2a59003e30e2362ab593ef1db4b982` were scanned from
+clean disposable worktrees with telemetry and provenance disabled. The CLI
+report contained 78 findings with score 67/high; the Web report contained 22
+findings with score 73/medium. Both reports had incomplete coverage because
+provenance was explicitly skipped. Only bounded counts and artifact digests
+were retained; raw reports, snippets, and temporary clones are not evidence.
+
+This is first-party Top Notchh qualification only. It is not external
+customer/recipient acceptance, a provider event, a full-coverage release
+reconciliation, or an AppSec review. `ACCEPT-005` remains unchecked and the
+score remains **235 checked / 45 open / 280 total (83.9%)**. Evidence:
+`evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-003 current evidence bundle
 
 The private evidence-bundle generator now includes the current ACCEPT-002
-verifier JSON and bounded report. The fresh manifest hashed **14 files** and
+verifier JSON, bounded report, and first-party ACCEPT-005 qualification
+record. The fresh manifest hashed **15 files** and
 passed the secret-like material scan. It records hashes and sizes only and
 keeps provider lifecycle, customer consent, independent review, authenticated
 browser, field CWV, and account deletion explicitly open.

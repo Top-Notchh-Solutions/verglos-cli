@@ -1,10 +1,26 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-19 · ACCEPT-005 first-party owned-repository qualification
+
+The exact detached CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647`
+and Web merge `390fd3f82b2a59003e30e2362ab593ef1db4b982` produced bounded
+first-party scan reports. CLI recorded 78 findings at score 67/high; Web
+recorded 22 findings at score 73/medium. Provenance was disabled, so both
+reports are explicitly incomplete. Raw reports and temporary source clones
+were not retained in the private evidence.
+
+This does not satisfy the row's external consented-team/recipient workflow,
+full release reconciliation, deletion/expiry record, or independent review.
+`ACCEPT-005` stays unchecked. No AppSec state changed. Score remains
+**235 checked / 45 open / 280 total (83.9%)**. Evidence:
+`docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · ACCEPT-003 current evidence bundle
 
 The private evidence-bundle generator now includes the current ACCEPT-002
-verifier JSON and bounded report. The generated manifest hashed **14 files**
-and passed its secret-like material scan; it records hashes/sizes only and
+verifier JSON, bounded report, and first-party ACCEPT-005 qualification
+record. The generated manifest hashed **15 files** and passed its
+secret-like material scan; it records hashes/sizes only and
 does not contain source, credentials, customer data, provider captures, or
 reviewer sign-off.
 
@@ -3413,7 +3429,7 @@ Evidence/problem: external validation is deliberately last. It validates the com
 - [ ] **ACCEPT-002** · automate 12 acceptance stories · deps: ACCEPT-001 · Run Free, CI, Trivy import, multi-tool dedup, mismatch/incomplete, exception, Hunt, offline record, modified CLI, Studio recipient, Enterprise runner, and account deletion stories. Commit(s): Private `8f18b81` adds `acceptance:stories:verify`; Web `e310c57` repairs the tenant-scope audit and stable payment-method-unavailable error contract. The current exact-head verifier passes CLI 290/293 with 3 explicit skips, Web 920/950 with 30 explicit skips, and composed Studio/Enterprise/Team/quality substrates 74/74. This remains substrate/regression progress only; the full 12-story external/hosted/provider/customer run remains open. Evidence: `docs/shipping/evidence/accept-002-current-head-substrate-rerun-2026-10-14.md` and `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json`.
 - [ ] **ACCEPT-003** · acceptance evidence bundle · deps: ACCEPT-002 · Store commands, configurations, versions, digests, results, failures, limitations, and reviewer sign-off in a reproducible internal package. Commit(s): Private `8f18b81` writes `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json` with exact source commits, command arguments, exit codes, parsed totals, and output hashes; the current `acceptance:evidence:bundle` rerun hashes 12 bounded evidence files and passes its secret scan. Reviewer sign-off and external/hosted evidence remain open. Evidence: `docs/shipping/evidence/accept-003-bundle-rerun-2026-10-14.md`.
 - [x] **ACCEPT-004** · external authorized workflow protocol · deps: ACCEPT-003 · Freeze recruitment/questions/consent/data handling/success criteria for qualified teams without scraping or bulk outreach. No external contact without authorization. Commit(s): Private `454a0cf` adds the frozen protocol, per-repository consent-record template, and `pnpm acceptance:protocol:check` validator. It requires named owner consent, exact commit/scope, bounded network/data handling, expiry/revocation, founder approval, redacted evidence, and deletion/expiry recording. No external contact was performed; ACCEPT-005 onward remain open.
-- [ ] **ACCEPT-005** · run authorized external repository workflows · deps: ACCEPT-004 + founder authorization · Validate real release reconciliation without publishing findings; record product failures separately from requested scope. Commit(s): —
+- [ ] **ACCEPT-005** · run authorized external repository workflows · deps: ACCEPT-004 + founder authorization · Validate real release reconciliation without publishing findings; record product failures separately from requested scope. First-party qualification evidence exists, but it is not external consented-team/recipient acceptance and does not close this row. Commit(s): Private `pending` · `docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`
 - [ ] **ACCEPT-006** · report comprehension test · deps: ACCEPT-003/005 · Developers/leads/recipients answer exact artifact, decision, change, remaining risk, authenticity, and limitations within the defined gate. Commit(s): —
 - [ ] **ACCEPT-007** · Hunt adjudication study · deps: ACCEPT-001/003 · Evaluate at least 100 independently adjudicated findings with preregistered methodology; separate false confirmation, not reproduced, and environment failure. Commit(s): —
 - [ ] **ACCEPT-008** · commercial acceptance/COGS evidence · deps: technical acceptance + founder authorization · Test actual plan agreements/checkout, repeat use, support minutes, hosted cost, recipient value, and explicit allowances; hypotheses remain hypotheses otherwise. Commit(s): —
