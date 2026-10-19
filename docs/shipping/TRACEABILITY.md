@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 account-deletion scheduler · 2026-10-19
+
+- **Source mapping:** Web commits `80a95ba` and `6dfab4e` merged normally in
+  PR #221 as `0719074d`; no squash or rebase was used.
+- **Contract mapping:** `.github/workflows/account-deletion-cron.yml` invokes
+  the existing authenticated account-deletion route every 15 minutes with
+  serialized concurrency, HTTPS-only origin validation, a bounded timeout,
+  no redirects, and explicit success-response validation.
+- **Verification mapping:** Local typecheck and the focused contract test
+  passed 1/1. Hosted Web matrix, typecheck/schema, isolated PostgreSQL rerun,
+  Vercel, Preview Comments, and GitGuardian passed. The first PostgreSQL
+  attempt's public ECR data-limit failure was an infrastructure event and was
+  re-run successfully without source changes.
+- **Acceptance mapping:** This qualifies the missing scheduler only.
+  `QUAL-WEB-005` remains unchecked for authenticated deletion E2E,
+  legal/customer-held-record and consent decisions, Production migration
+  authorization, restore/rollback acceptance, reconciliation, and independent
+  end-to-end acceptance. No AppSec-held checkbox changed; score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:** `evidence/qual-web-005-account-deletion-cron-2026-10-19.md`.
+
 ## DIST-006 rollback/revocation evidence generator · 2026-10-19
 
 - **Source mapping:** CLI implementation commit `5dda94f0` merged normally in

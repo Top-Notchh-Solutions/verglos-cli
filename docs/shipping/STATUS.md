@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · QUAL-WEB-005 account-deletion scheduler
+
+Web PR #221 merged normally as `0719074d`, preserving implementation commits
+`80a95ba` and `6dfab4e`. The existing bounded account-deletion worker now has a
+15-minute production GitHub Actions trigger with serialized concurrency,
+HTTPS-only base URL validation, bearer authentication, no redirect following,
+300-second request timeout, and fail-closed HTTP/JSON response handling. The
+contract test passed **1/1**, typecheck passed, and hosted Web matrix,
+typecheck/schema, isolated PostgreSQL rerun, Vercel, Preview Comments, and
+GitGuardian checks passed. The first PostgreSQL attempt failed only on the
+hosted public ECR data-limit pull and passed on rerun without source changes.
+
+This advances the code-side QUAL-WEB-005 implementation but does not close the
+row: authenticated non-production deletion E2E, legal/customer-held-record
+decisions, consent inventory, Production migration authorization,
+restore/rollback acceptance, reconciliation, and independent acceptance remain
+open. No Production, provider, customer, payment, or AppSec state changed.
+
+Evidence: `evidence/qual-web-005-account-deletion-cron-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · DIST-006 rollback/revocation evidence generator
 
 CLI PR #150 merged normally as `31b10613`, preserving implementation commit

@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · QUAL-WEB-005 account-deletion scheduler
+
+- **Implementation:** Web PR #221 merged normally as `0719074d`, preserving
+  implementation commits `80a95ba` and `6dfab4e`. The existing account-deletion
+  worker now has a 15-minute GitHub Actions trigger with serialized
+  concurrency, HTTPS-only base URL validation, bearer authentication, no
+  redirect following, bounded timeout, and fail-closed HTTP/JSON response
+  handling.
+- **Verification:** Local `pnpm install --frozen-lockfile`, typecheck,
+  `pnpm test:account-deletion-cron` (**1/1**), and diff check passed. Hosted
+  Web verify run `39184660990`, protocol matrix run `39184661099` rerun attempt
+  2, isolated PostgreSQL job `117845082816`, Vercel, Preview Comments, and
+  GitGuardian passed. The first PostgreSQL attempt failed at the hosted image
+  pull with an external ECR data-limit error and passed on rerun.
+- **Disposition:** This is a substantive implementation advance, not row
+  closure. Keep `QUAL-WEB-005` unchecked pending authenticated non-production
+  deletion E2E, legal/customer-held-record decisions, consent inventory,
+  Production migration authorization, restore/rollback acceptance,
+  reconciliation, and independent end-to-end acceptance. No Production,
+  provider, customer, payment, or AppSec/Hunt state changed.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-account-deletion-cron-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · DIST-006 rollback/revocation evidence generator
 
 - **Implementation:** CLI PR #150 merged normally as `31b10613`, preserving
