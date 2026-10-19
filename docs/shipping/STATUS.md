@@ -126,6 +126,29 @@ were not changed.
 
 Evidence: `evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
 
+## 2026-10-19 · STUDIO-CLI-001 hosted usage release hardening
+
+The next original-logic gap in the same custody path is now closed in the
+qualification branch. Web commits `c9dd749` and `f26213c` add a deterministic
+usage-release transition and place both receipt and client-projection custody
+in a scoped transaction boundary. A failed insert now rolls back before the
+reserved `hosted.ingestion.records` unit is released; raced scope conflicts
+also release, while ambiguous release fails closed as admission unavailable.
+No placeholder route or synthetic production adapter was introduced.
+
+`pnpm test` passed **894/918** with **24 explicit skips / 0 failures**;
+receipt integration passed **1/1**, client-projection integration passed
+**1/1** against the pinned disposable PostgreSQL 15 Alpine image, typecheck
+passed, the optimized build generated **49/49** pages, and diff check passed.
+
+This is substantive implementation evidence, not a checkbox closure.
+`STUDIO-CLI-001` remains unchecked for its numeric paid/non-production hosted
+allowance and authorized Studio recipient/customer acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt and unrelated
+external gates are unchanged.
+
+Evidence: `evidence/studio-cli-001-hosted-usage-release-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-WEB-003 original policy lifecycle hardening
 
 Web PR #223 preserves two substantive commits: `9489fb6` adds the

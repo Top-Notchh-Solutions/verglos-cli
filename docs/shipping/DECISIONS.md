@@ -115,7 +115,26 @@
 - **Disposition:** Keep `STUDIO-CLI-001` unchecked. Score remains **239/41/280
   (85.4%)**; AppSec/Hunt rows and unrelated external gates remain unchanged.
 - **Evidence:**
-  `evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+`evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+
+## 2026-10-19 · retain STUDIO-CLI-001 after hosted usage release hardening
+
+- **Decision:** Accept Web commits `c9dd749` and `f26213c` as substantive
+  original-logic progress; retain the existing row state and score.
+- **Observed:** Receipt and client-projection custody now have a scoped
+  transaction boundary and deterministic hosted-record usage release on
+  persistence failure or raced scope conflict. Full Web tests passed
+  **894/918** with 24 skips and zero failures; both route integrations passed
+  **1/1** against the pinned disposable PostgreSQL image; typecheck, 49-page
+  build, and diff check passed.
+- **Reason:** The implementation does not create the row's numeric
+  paid/non-production entitlement or authorized Studio recipient/customer
+  acceptance observation.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked. Score remains
+  **239/41/280 (85.4%)**; AppSec/Hunt rows and unrelated external gates remain
+  unchanged.
+- **Evidence:**
+  `evidence/studio-cli-001-hosted-usage-release-2026-10-19.md`.
 
 ## 2026-10-19 · retain score after draft-first policy creation hardening
 

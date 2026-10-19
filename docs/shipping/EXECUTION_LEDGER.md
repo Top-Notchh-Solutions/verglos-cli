@@ -101,7 +101,28 @@
   Score remains **239/41/280 (85.4%)**. No AppSec, production, billing,
   provider, customer, npm, or release state changed.
 - **Evidence:**
-  `docs/shipping/evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+`docs/shipping/evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+
+## 2026-10-19 · STUDIO-CLI-001 hosted usage release hardening
+
+- **Source:** Web qualification worktree based on merge
+  `2c07237845f0e52061dc52c99c21212615390177`; implementation `c9dd749` and
+  regression `f26213c` remain separate local substantive commits.
+- **Implementation:** The original receipt and client-projection custody
+  routes now use a scoped transaction for persistence. A failed insert rolls
+  back and invokes the deterministic hosted-record usage release transition;
+  raced scope conflicts release too, and ambiguous release fails closed.
+- **Verification:** Full Web test command passed **894/918** with 24 skips and
+  zero failures; receipt route integration **1/1** and client-projection route
+  integration **1/1** passed against the pinned disposable PostgreSQL 15 Alpine
+  image; typecheck, 49-page build, and diff check passed.
+- **Disposition:** This is implementation progress only. Keep
+  `STUDIO-CLI-001` unchecked for its numeric paid/non-production allowance and
+  authorized Studio recipient/customer acceptance. Score remains
+  **239/41/280 (85.4%)**; no AppSec-held checkbox or unrelated external gate
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-hosted-usage-release-2026-10-19.md`.
 
 ## 2026-10-19 · TEAM-WEB-003 draft-first policy creation hardening
 

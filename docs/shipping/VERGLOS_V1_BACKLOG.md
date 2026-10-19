@@ -12,6 +12,13 @@ top-to-bottom with the next dependency-ready non-AppSec row. The next active
 non-AppSec row is `STUDIO-CLI-001`; its remaining contract is the numeric
 hosted allowance and authorized Studio recipient/customer acceptance.
 
+The current Web implementation also hardens that custody boundary: commits
+`c9dd749` and `f26213c` add scoped persistence rollback and deterministic usage
+release for failed receipt/client-projection inserts. This is substantive
+code-side progress only; `STUDIO-CLI-001` remains unchecked until its numeric
+hosted allowance and authorized recipient/customer acceptance are observed.
+Evidence: `docs/shipping/evidence/studio-cli-001-hosted-usage-release-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-005/006 current merged-head qualification
 
 The clean Web merge `2c07237845f0e52061dc52c99c21212615390177` passed the

@@ -118,7 +118,27 @@
   Studio recipient/customer acceptance. Score remains **239/41/280 (85.4%)**;
   no AppSec-held state changed.
 - **Evidence:**
-  `evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+`evidence/studio-cli-001-projection-allowance-pr224-2026-10-19.md`.
+
+## STUDIO-CLI-001 hosted usage release hardening · 2026-10-19
+
+- **Source mapping:** Web qualification worktree based on
+  `2c07237845f0e52061dc52c99c21212615390177`; implementation `c9dd749` and
+  regression `f26213c` are separate commits.
+- **Implementation mapping:** Receipt and client-projection custody now
+  persist inside the scoped transaction boundary. Failed persistence releases
+  its deterministic canonical hosted-record reservation; a raced scope
+  conflict releases before returning 409, and release ambiguity returns a
+  bounded admission error.
+- **Verification mapping:** Full Web tests passed **894/918** with 24 skips
+  and zero failures; receipt integration **1/1**, client-projection integration
+  **1/1**, typecheck, 49-page build, and diff check passed.
+- **Acceptance mapping:** This is code-side progress only. The row remains
+  unchecked for numeric paid/non-production hosted allowance and authorized
+  Studio recipient/customer acceptance. Score remains **239/41/280 (85.4%)**;
+  no AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/studio-cli-001-hosted-usage-release-2026-10-19.md`.
 
 ## TEAM-WEB-003 draft-first policy creation hardening · 2026-10-19
 

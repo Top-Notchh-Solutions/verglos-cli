@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-19 · STUDIO-CLI-001 hosted usage release hardening
+
+Web qualification commits `c9dd749` and `f26213c` add the original scoped
+transaction and deterministic usage-release behavior for failed receipt and
+client-projection custody writes. Full tests passed **894/918** with 24 skips
+and zero failures; both route integrations passed **1/1**, typecheck, the
+49-page build, and diff check passed.
+
+This is implementation evidence only. Keep `STUDIO-CLI-001` unchecked for its
+numeric paid/non-production allowance and authorized Studio recipient/customer
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**; no
+AppSec-held state changed. Evidence:
+`evidence/studio-cli-001-hosted-usage-release-2026-10-19.md`.
+
 ## 2026-10-18 · TEAM-WEB-006 SCM repository-scope reconciliation
 
 Web PR #204 merged normally as `a32f1589`, and exact `origin/main` deployed to
