@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · ACCEPT-002 current-source substrate verification
+
+The private twelve-story verifier ran against CLI `50bcab42` and Web
+`390fd3f8` in clean disposable worktrees. CLI passed **291/293** with **2
+explicit skips**; Web passed **945/975** with **30 explicit skips**; composed
+Team/Studio/Enterprise/quality substrates passed **74/74**. Every command
+exited `0` and no failure was converted into a skip.
+
+This is current-source regression evidence only. Hunt isolation, modified-CLI
+runtime, Studio recipient, Enterprise runner, and account-deletion stories
+remain open for their required qualification/provider/customer/reviewer
+observations. ACCEPT-002/003 remain unchecked; no AppSec state changed and
+the score remains **235 checked / 45 open / 280 total (83.9%)**. Evidence:
+`evidence/acceptance-stories-verification-2026-10-19.json` and
+`evidence/acceptance-stories-verification-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-001 exact-merge package qualification
 
 The exact CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed the

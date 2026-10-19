@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ACCEPT-002 current-source substrate verification
+
+- **Source:** The frozen acceptance verifier ran against CLI merge
+  `50bcab42eadfa8796d86d1f7a8aaee3010c65647` and Web source
+  `390fd3f82b2a59003e30e2362ab593ef1db4b982` in disposable clean worktrees.
+- **Results:** CLI package suite **291/293 passed**, **2 skipped**, **0 failed**;
+  Web full suite **945/975 passed**, **30 skipped**, **0 failed**; composed
+  Team/Studio/Enterprise/quality substrates **74/74 passed** with no skips or
+  failures. All three commands exited `0`.
+- **Environment:** macOS Darwin 25.5.0 arm64, Node `v26.4.0`, pnpm
+  `9.15.9`. This is supplementary current-source evidence, not a replacement
+  for the repository's pinned cross-platform qualification.
+- **Boundary:** The verifier captured repository-owned regression/substrate
+  results only. It did not perform hosted HTTP, provider, customer,
+  reviewer, browser-human, field-CWV, migration, or Production acceptance.
+- **Disposition:** Keep `ACCEPT-002` and `ACCEPT-003` unchecked. The story map
+  still marks Hunt isolation, modified-CLI runtime, Studio recipient,
+  Enterprise runner, and account deletion as open qualification/provider/
+  customer stories. No AppSec state or checkbox changed; score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-19.json` and
+  `docs/shipping/evidence/acceptance-stories-verification-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-001 exact-merge package qualification
 
 - **Source:** Exact CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` was

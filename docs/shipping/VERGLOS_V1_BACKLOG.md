@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-19 · ACCEPT-002 current-source substrate verification
+
+The current frozen acceptance verifier passed against CLI merge
+`50bcab42eadfa8796d86d1f7a8aaee3010c65647` and Web source
+`390fd3f82b2a59003e30e2362ab593ef1db4b982`: CLI **291/293** with 2 explicit
+skips, Web **945/975** with 30 explicit skips, and composed
+Team/Studio/Enterprise/quality substrates **74/74**, all with zero failures
+and exit code `0`.
+
+This advances repository-owned substrate evidence only. `ACCEPT-002` and
+`ACCEPT-003` remain unchecked for the mapped hosted/provider/customer/
+reviewer stories; no AppSec state changed. Score remains **235 checked / 45
+open / 280 total (83.9%)**. Evidence:
+`docs/shipping/evidence/acceptance-stories-verification-2026-10-19.json` and
+`docs/shipping/evidence/acceptance-stories-verification-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-001 exact-merge package qualification
 
 The exact CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed the
