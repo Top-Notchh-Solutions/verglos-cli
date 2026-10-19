@@ -2,6 +2,22 @@
 
 ## Active continuation state · 2026-10-19
 
+## FINAL-WEB-008 public Release Record route qualification · 2026-10-19
+
+- **Source mapping:** Web `origin/main`
+  `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`; implementation `37c3f36` and
+  regression `5b2ddad` are separate commits in PR #222.
+- **Verification mapping:** `/record/verify/[receiptId]` now carries bounded
+  no-index metadata and is included in the public release-smoke manifest. The
+  focused route/smoke tests passed **6/6**; the command smoke passed with 16
+  routes, 22/22 publishable claims, 2 proof assets, and 0 issues; typecheck
+  and diff check passed.
+- **Acceptance mapping:** `FINAL-WEB-008` remains unchecked for its dependent
+  acceptance, hosted/customer, legal/release, and final-go/no-go evidence.
+  Score remains **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/final-web-008-public-record-route-qualification-2026-10-19.md`.
+
 ## QUAL-CLI-006 standard-validation fixture confinement · 2026-10-19
 
 - **Source mapping:** CLI `origin/main`

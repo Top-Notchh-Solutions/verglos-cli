@@ -2,6 +2,25 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · FINAL-WEB-008 public Release Record route qualification
+
+- **Source:** Web `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`,
+  with implementation `37c3f36` and regression `5b2ddad` in separate commits
+  on PR #222.
+- **Implementation:** The canonical public receipt page now declares bounded
+  no-index metadata and is included in the public release-smoke route/source
+  manifest. Existing URL-bound receipt lookup and content-digest verification
+  remain the authority; no raw receipt or source data was added.
+- **Verification:** Focused tests **6/6**, public release smoke **16 routes,
+  22/22 publishable claims, 2 proof assets, 0 issues**, typecheck pass, and
+  `git diff --check` pass.
+- **Disposition:** `FINAL-WEB-008` remains unchecked for final acceptance and
+  dependent hosted/customer/legal/release evidence. Score remains
+  **239/41/280 (85.4%)**. No production, provider, customer, or AppSec state
+  changed.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-008-public-record-route-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-CLI-006 standard-validation fixture confinement
 
 - **Source:** CLI `origin/main` `0823b513f2b1810ad9f6afcb8806ba46f61feedb`,
