@@ -2,6 +2,23 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · QUAL-WEB-006 current Home accessibility qualification
+
+The original authenticated organization Home surface now uses a responsive
+single-column layout at the dashboard mobile breakpoint and gives each of its
+five summary sections an explicit accessible heading relationship. Focused
+dashboard/accessibility contracts passed **12/12**, typecheck passed, and the
+optimized production build generated **48 pages**. Implementation commit
+`4faab2a` and regression commit `7ef00d0` were created separately in the
+disposable Web qualification worktree.
+
+`QUAL-WEB-006` remains unchecked for human screen-reader operation, complete
+paid/org runtime, large-dataset, field-CWV, supported-environment browser, and
+independent/customer acceptance. Score remains **239 checked / 41 open / 280
+total (85.4%)**; AppSec/Hunt state was not changed.
+
+Evidence: `evidence/qual-web-006-current-home-accessibility-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-005 current deletion/retention qualification
 
 The original Web deletion, hold, customer-held-digest, retention/export, and

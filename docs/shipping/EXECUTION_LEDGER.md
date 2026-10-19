@@ -2,6 +2,25 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · QUAL-WEB-006 current Home accessibility qualification
+
+- **Source:** Web `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` in
+  a clean disposable worktree, with implementation `4faab2a` and regression
+  contract `7ef00d0` kept as separate commits.
+- **Implementation:** The original organization Home data and server logic are
+  unchanged. Its summary layout now collapses to one column at the mobile
+  breakpoint, and all five summary sections have explicit accessible heading
+  relationships.
+- **Verification:** Focused dashboard/accessibility contracts **12/12**,
+  typecheck, and optimized production build (**48 pages**) passed.
+- **Disposition:** `QUAL-WEB-006` remains unchecked for human screen-reader,
+  complete paid/org runtime, large-dataset, field-CWV, supported-environment
+  browser, and independent/customer acceptance. No production/provider/
+  payment/database/deployment/AppSec state changed. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-006-current-home-accessibility-qualification-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-005 current deletion/retention qualification
 
 - **Source:** Web `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`

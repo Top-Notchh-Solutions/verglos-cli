@@ -2,6 +2,23 @@
 
 ## Active continuation state · 2026-10-19
 
+## QUAL-WEB-006 current Home accessibility qualification · 2026-10-19
+
+- **Source mapping:** Web `origin/main`
+  `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`; implementation `4faab2a` and
+  regression `7ef00d0` are separate commits.
+- **Verification mapping:** Existing Home server data/tenant logic remains in
+  place. The dashboard summary switches to one column at the mobile
+  breakpoint and exposes five explicit heading/section relationships. Focused
+  contracts passed **12/12**, with typecheck and the 48-page production build
+  passing.
+- **Acceptance mapping:** `QUAL-WEB-006` remains unchecked for human
+  screen-reader, complete paid/org runtime, large-dataset, field-CWV,
+  supported-environment browser, and independent/customer acceptance. Score
+  remains **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/qual-web-006-current-home-accessibility-qualification-2026-10-19.md`.
+
 ## QUAL-WEB-005 current deletion/retention qualification · 2026-10-19
 
 - **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
