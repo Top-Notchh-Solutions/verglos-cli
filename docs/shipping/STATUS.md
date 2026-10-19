@@ -2,6 +2,29 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · QUAL-WEB-005 current deletion/retention qualification
+
+The original Web deletion, hold, customer-held-digest, retention/export, and
+migration logic was qualified from the current Web merge plus two granular
+qualification commits `0ff9ded` and `9c2587c`. The focused suite completed
+**52/52** with zero failures or skips after the two database-gated tests ran
+against a disposable migrated Postgres 15 database. Typecheck, production
+build, 42-migration ordering, and the exact-count read-only migration audit
+passed.
+
+The audit run found and fixed a real defect: historical Drizzle timestamps are
+not monotonic, so ordering migration history by timestamp falsely reported
+drift. The original audit now compares canonical application `id` order and
+reports 42/42 current migrations with zero missing tables. `QUAL-WEB-005`
+remains unchecked for legal/consent, production migration authorization,
+restore/rollback, reconciliation, and independent acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt state was not
+changed.
+
+Evidence: `evidence/qual-web-005-current-deletion-qualification-2026-10-19.md`.
+
+The next top-to-bottom qualification target is `QUAL-WEB-006`.
+
 ## 2026-10-19 · QUAL-CLI-006 current origin/main package qualification
 
 The original CLI release logic was qualified from clean `origin/main`

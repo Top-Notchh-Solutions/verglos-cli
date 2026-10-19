@@ -2,6 +2,27 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · QUAL-WEB-005 current deletion/retention qualification
+
+- **Source:** Web `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
+  plus granular qualification commits `0ff9ded` and `9c2587c` in a clean
+  disposable worktree.
+- **Verification:** Privacy/deletion/retention/hold/route coverage completed
+  **52/52**, zero failures or skips after the authenticated route and job
+  migration tests ran against an isolated Postgres 15 `verglos_test` database.
+  Typecheck, build, migration ordering, and exact-count read-only audit passed.
+- **Defect correction:** The migration audit previously sorted history by
+  non-monotonic `created_at`, producing false drift at migration `0029`.
+  It now sorts by Drizzle application `id`; the regression test passed and the
+  fresh 42-migration audit reports `current`, zero missing tables, and exit 0.
+- **Disposition:** `QUAL-WEB-005` remains unchecked for legal/consent,
+  production migration authorization, restore/rollback, reconciliation, and
+  independent acceptance. No production/provider/customer/payment/AppSec
+  state changed. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-current-deletion-qualification-2026-10-19.md`.
+- **Next classification:** Continue to `QUAL-WEB-006`.
+
 ## 2026-10-19 · QUAL-CLI-006 current origin/main package qualification
 
 - **Source:** Disposable clean CLI worktree at

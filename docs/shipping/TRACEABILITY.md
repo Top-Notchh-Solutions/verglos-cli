@@ -2,6 +2,28 @@
 
 ## Active continuation state · 2026-10-19
 
+## QUAL-WEB-005 current deletion/retention qualification · 2026-10-19
+
+- **Source mapping:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`
+  with qualification commits `0ff9ded` and `9c2587c`.
+- **Verification mapping:** Original authenticated deletion routes,
+  customer-held digest custody, hold authority/release, bounded worker,
+  retention/export decisions, and migration contracts completed **52/52** with
+  zero failures/skips using an isolated migrated Postgres database. Typecheck,
+  build, 42-migration ordering, and exact-count audit passed.
+- **Correction mapping:** Migration audit history is compared by canonical
+  Drizzle application `id`; historical timestamps are not treated as an
+  ordering key. The fresh audit reached `current` with 42/42 migrations and
+  zero missing tables.
+- **Acceptance mapping:** `QUAL-WEB-005` remains unchecked for
+  legal/consent, production authorization, restore/rollback, reconciliation,
+  and independent acceptance. Score remains **239/41/280 (85.4%)**; no
+  AppSec-held checkbox changed.
+- **Evidence:**
+  `evidence/qual-web-005-current-deletion-qualification-2026-10-19.md`.
+
+The next top-to-bottom qualification target is `QUAL-WEB-006`.
+
 ## QUAL-CLI-006 current origin/main package qualification · 2026-10-19
 
 - **Source mapping:** CLI `origin/main`
