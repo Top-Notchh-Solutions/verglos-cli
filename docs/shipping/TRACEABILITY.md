@@ -2,6 +2,26 @@
 
 ## Active continuation state · 2026-10-19
 
+## Distribution current-head release contracts · 2026-10-19
+
+- **Source mapping:** CLI exact merged head
+  `11734a45740a893c307606e8f3d3f316711abd9e` in a clean detached worktree.
+- **Verification mapping:** Locked install and `pnpm build` passed **8/8**;
+  publish workflow, release-tag, artifact, package-surface, and rollback
+  contract tests passed **15/15** with zero failures/skips. Rollback evidence
+  exited `0`, recorded five bounded operations, and preserved two historical
+  records.
+- **Privacy mapping:** The qualification used only public source and synthetic
+  fixture identifiers. It made no npm, registry, signing, Hunt-provider,
+  Vercel, production, or customer-data write.
+- **Acceptance mapping:** `DIST-001`, `DIST-002`, `DIST-003`, and `DIST-006`
+  remain unchecked for their explicit dependency, protected publication,
+  legal/release, actual attestation, and authenticated rollback/revocation
+  requirements. Score remains **239/41/280 (85.4%)**; no AppSec-held
+  checkbox changed.
+- **Evidence:**
+  `evidence/dist-current-head-release-contracts-2026-10-19.md`.
+
 ## ENT-CLI-001 original runner credential exchange · 2026-10-19
 
 - **Source mapping:** Web PR #225 merged normally as

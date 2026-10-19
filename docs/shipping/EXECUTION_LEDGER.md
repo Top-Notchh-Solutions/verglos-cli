@@ -2,6 +2,26 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · distribution current-head release-contract qualification
+
+- **Source:** Exact merged CLI head
+  `11734a45740a893c307606e8f3d3f316711abd9e` in a clean detached worktree.
+- **Verification:** Locked install completed; `pnpm build` passed **8/8**;
+  publish workflow, release-tag, artifact, package-surface, and rollback
+  contract tests passed **15/15** with zero failures/skips. The local rollback
+  evidence command exited `0`, reported five bounded operations, and preserved
+  two historical records. `git diff --check` passed.
+- **Boundary:** No npm publish, registry mutation, tag, signing provider,
+  Hunt feed provider, Vercel deployment, or production rollback occurred.
+  The first test invocation before build failed only because generated CLI
+  `dist` was absent; rerunning after the required build passed 15/15.
+- **Disposition:** `DIST-001`, `DIST-002`, `DIST-003`, and `DIST-006` remain
+  unchecked for their dependency, protected-publisher/legal/release, actual
+  publication/attestation, and authenticated rollback/revocation conditions.
+  Score remains **239/41/280 (85.4%)**; no AppSec-held state changed.
+- **Evidence:**
+  `docs/shipping/evidence/dist-current-head-release-contracts-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 hosted projection allowance hardening
 
 - **Source:** Web PR #224 from `origin/main`

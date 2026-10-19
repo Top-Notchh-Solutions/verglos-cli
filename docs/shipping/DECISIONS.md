@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain distribution rows after current-head qualification
+
+- **Decision:** Accept the current-head release-contract qualification as
+  substantive distribution evidence; retain `DIST-001`, `DIST-002`,
+  `DIST-003`, and `DIST-006` unchecked.
+- **Observed:** Exact merged CLI head `11734a45740a893c307606e8f3d3f316711abd9e`
+  passed locked install, **8/8** build tasks, and **15/15** publish,
+  release-tag, artifact, package-surface, and rollback contract tests. The
+  local rollback rehearsal covered five boundaries and preserved two historical
+  records with exit `0`.
+- **Boundary:** No npm/registry publication, tag, signing provider, Hunt feed,
+  Vercel deployment, or production rollback was performed. The pre-build test
+  failure was an incomplete local setup and passed after the required build.
+- **Reason:** Code-side qualification does not create protected publisher
+  approval, legal/release clearance, immutable publication/attestation, or
+  authenticated rollback/revocation acceptance.
+- **Disposition:** Score remains **239/41/280 (85.4%)**; no AppSec-held state
+  changed.
+- **Evidence:**
+  `evidence/dist-current-head-release-contracts-2026-10-19.md`.
+
 ## 2026-10-19 · retain ENT-CLI-001 after original credential exchange ships
 
 - **Decision:** Accept Web PR #225 and CLI PR #152 as substantive original

@@ -39,6 +39,23 @@ enterprise acceptance exist. Score remains **239 checked / 41 open / 280 total
 (85.4%)**. AppSec/Hunt remains held separately. Evidence:
 `docs/shipping/evidence/ent-cli-001-runner-credential-exchange-pr152-pr225-2026-10-19.md`.
 
+## 2026-10-19 · distribution current-head qualification
+
+The exact merged CLI head `11734a45740a893c307606e8f3d3f316711abd9e` was
+requalified in a clean worktree. Locked install completed; the workspace build
+passed **8/8**; publish workflow, release-tag, artifact, package-surface, and
+rollback contract tests passed **15/15** with zero failures/skips. The bounded
+rollback rehearsal exited `0`, covered five release boundaries, and preserved
+two historical records. No npm, registry, signing, Hunt-provider, Vercel, or
+production state changed.
+
+This advances `DIST-001`, `DIST-002`, `DIST-003`, and `DIST-006` evidence only;
+their checkboxes remain open for dependency completion, protected publisher and
+legal/release approval, actual immutable publication/attestation, and
+authenticated rollback/revocation acceptance. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-current-head-release-contracts-2026-10-19.md`.
+
 ## 2026-10-19 · TEAM-WEB-003 original policy lifecycle hardening
 
 Web PR #223 preserves implementation commit `9489fb6` and regression commit

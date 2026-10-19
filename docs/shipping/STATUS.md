@@ -2,6 +2,24 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · distribution current-head qualification
+
+The exact merged CLI head `11734a45740a893c307606e8f3d3f316711abd9e` was
+requalified in a clean detached worktree. The locked install completed, the
+workspace build passed **8/8**, and the publish workflow, release-tag,
+artifact, package-surface, and rollback contract suite passed **15/15** with
+zero failures/skips. The bounded rollback rehearsal exited `0`, covered five
+release boundaries, and preserved two historical records. No registry,
+provider, signing, deployment, or production state changed.
+
+`DIST-001`, `DIST-002`, `DIST-003`, and `DIST-006` remain unchecked because
+their remaining requirements are dependency completion, protected publisher
+and legal/release approval, actual immutable publication/attestation, and
+authenticated rollback/revocation acceptance. Score remains **239 checked / 41
+open / 280 total (85.4%)**; AppSec/Hunt remains held separately.
+
+Evidence: `evidence/dist-current-head-release-contracts-2026-10-19.md`.
+
 ## 2026-10-19 · ENT-CLI-001 original runner credential exchange
 
 The original private-runner flow now has a real one-time enrollment exchange
