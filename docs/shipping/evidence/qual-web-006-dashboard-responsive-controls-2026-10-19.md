@@ -17,6 +17,9 @@ field-CWV, complete paid/org runtime, or independent/customer acceptance.
   portfolio summary facts.
 - Regression contract: `04533dc` — guards the mobile breakpoint and every
   migrated surface.
+- Focus correction: `127b735` — adds a scoped high-contrast `:focus-visible`
+  ring for dashboard links, buttons, form controls, and expandable summaries.
+- Focus regression: `929898a` — guards the focus-visible selector contract.
 - Worktree: disposable clean `/tmp/verglos-web-qual.mzoZfw/web`
 
 ## Implementation correction
@@ -26,11 +29,13 @@ authorization logic are unchanged. Their fixed desktop grid tracks now use a
 shared responsive stylesheet and collapse to one bounded column at `720px`.
 This prevents controls and digest/owner facts from being compressed or
 overflowing on narrow screens without changing server behavior, tenant scope,
-or product claims.
+or product claims. The shared dashboard shell also gives all interactive
+controls an explicit visible focus ring without changing the existing
+navigation or reduced-motion behavior.
 
 ## Verification
 
-- Focused dashboard/accessibility contracts: **13 pass, 0 fail, 0 skip**.
+- Focused dashboard/accessibility contracts: **14 pass, 0 fail, 0 skip**.
 - `pnpm typecheck`: pass.
 - `pnpm build`: pass; optimized build generated **48 pages**.
 - Environment: Node `v26.4.0`, pnpm `10.34.5` (repository requests Node

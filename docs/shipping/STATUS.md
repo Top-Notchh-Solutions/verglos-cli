@@ -6,10 +6,12 @@
 
 The original authenticated organization dashboard now collapses the remaining
 fixed multi-column member, client-workspace, handoff, and client-portfolio
-summary controls to one bounded column at the mobile breakpoint. The focused
-dashboard/accessibility contracts passed **13/13**, typecheck passed, and the
-optimized production build generated **48 pages**. Implementation `8098393`
-and regression `04533dc` remain separate granular commits.
+summary controls to one bounded column at the mobile breakpoint. The shared
+shell also exposes an explicit high-contrast focus ring for dashboard
+controls. The focused dashboard/accessibility contracts passed **14/14**,
+typecheck passed, and the optimized production build generated **48 pages**.
+Implementation commits `8098393` and `127b735`, plus regression commits
+`04533dc` and `929898a`, remain separate granular commits.
 
 `QUAL-WEB-006` remains unchecked for human screen-reader operation, complete
 paid/org runtime, large-dataset, field-CWV, supported-environment browser, and

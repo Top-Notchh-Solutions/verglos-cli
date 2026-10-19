@@ -3454,10 +3454,12 @@ No AppSec state changed. Score remains **239 checked / 41 open / 280 total
 The original authenticated organization dashboard now collapses fixed desktop
 grid tracks for member rows, client-workspace creation, handoff expiry/message
 controls, and client portfolio summary facts to one bounded column at the
-mobile breakpoint. Focused dashboard/accessibility contracts pass **13/13**
+mobile breakpoint. Focused dashboard/accessibility contracts pass **14/14**
 with zero failures/skips; typecheck and the optimized production build also
 pass, generating 48 pages. Implementation `8098393` and regression `04533dc`
-remain separate granular commits in the clean Web qualification worktree.
+remain separate granular commits in the clean Web qualification worktree. The
+shared dashboard shell also exposes a visible focus ring for links, buttons,
+form controls, and summaries through `127b735`, guarded by `929898a`.
 `QUAL-WEB-006` remains unchecked for human screen-reader, complete paid/org
 runtime, large-dataset, field-CWV, supported-environment browser, and
 independent/customer acceptance. No AppSec state changed. Score remains

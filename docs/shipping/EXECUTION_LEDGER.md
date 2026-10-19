@@ -5,12 +5,15 @@
 ## 2026-10-19 · QUAL-WEB-006 responsive dashboard controls qualification
 
 - **Source:** Web `origin/main` `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` in
-  the clean disposable qualification worktree, with implementation `8098393`
-  and regression `04533dc` as separate commits.
+  the clean disposable qualification worktree, with implementation commits
+  `8098393` and `127b735`, and regression commits `04533dc` and `929898a` as
+  separate commits.
 - **Implementation:** Existing member, client-workspace, handoff, and client
   portfolio logic is preserved. Fixed desktop grid tracks now collapse through
-  a shared mobile stylesheet at `720px`, preventing control/fact overflow.
-- **Verification:** Focused dashboard/accessibility contracts **13/13**,
+  a shared mobile stylesheet at `720px`, preventing control/fact overflow. The
+  shell also gives dashboard links, buttons, form controls, and summaries an
+  explicit visible focus ring.
+- **Verification:** Focused dashboard/accessibility contracts **14/14**,
   typecheck, and optimized production build (**48 pages**) passed.
 - **Disposition:** `QUAL-WEB-006` remains unchecked for human screen-reader,
   complete paid/org runtime, large-dataset, field-CWV, supported-environment
