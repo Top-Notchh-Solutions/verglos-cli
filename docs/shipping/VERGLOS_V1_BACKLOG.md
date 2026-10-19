@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-19 · DIST-001 packed-files allowlist hardening
+
+CLI commits `48a2baa0` and `edfb5ec0` add and qualify the missing public
+archive-boundary check: every packed member must be covered by the exact
+manifest `files` allowlist, apart from bounded npm metadata. Post-commit
+qualification passed **9/9**, workspace build **8/8**, packed-manifest audit
+for **7** archives, and clean-consumer install/import/CLI/bounded-fixture
+execution. The temporary cross-platform install setting used for local license
+qualification was removed before commit.
+
+This is implementation evidence only. Keep `DIST-001` unchecked for its
+LOCAL/HUNT/RECORD dependencies, trusted publication, legal/release approval,
+attestation, and final acceptance. Score remains **239 checked / 41 open / 280
+total (85.4%)**; AppSec/Hunt remains held separately. Evidence:
+`docs/shipping/evidence/dist-001-packed-files-allowlist-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 entitlement and recipient-evidence implementation
 
 Web commits `38d6eb0` and `62a54b5` add the real server-side Studio

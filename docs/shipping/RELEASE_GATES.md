@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-19 · DIST-001 packed-files allowlist hardening
+
+CLI commits `48a2baa0` and `edfb5ec0` now make the package archive audit fail
+closed on any archive member outside the exact manifest `files` allowlist,
+while preserving bounded npm metadata. Post-commit qualification passed **9/9**;
+the workspace build passed **8/8**, all **7** public archives passed the packed
+manifest audit, and the clean consumer installed/imported/executed the full
+bounded package set successfully.
+
+Keep `DIST-001` unchecked. This does not perform trusted publication, legal or
+protected release approval, immutable attestation, rollback acceptance, or
+final customer acceptance. Score remains **239 checked / 41 open / 280 total
+(85.4%)**; no AppSec/Hunt state changed. Evidence:
+`evidence/dist-001-packed-files-allowlist-2026-10-19.md`.
+
 ## 2026-10-19 · STUDIO-CLI-001 entitlement and recipient evidence implementation
 
 Web commits `38d6eb0` and `62a54b5` now enforce the active Studio

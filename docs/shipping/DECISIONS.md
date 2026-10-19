@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-19 · retain DIST-001 after packed-files allowlist hardening
+
+- **Decision:** Accept CLI commits `48a2baa0` and `edfb5ec0` as substantive,
+  separate original-logic package-boundary progress; retain `DIST-001`
+  unchecked.
+- **Observed:** The packed archive audit now rejects undeclared archive members
+  instead of checking only forbidden names and entrypoints. The regression
+  covers an unexpected private file while the real pack path remains bounded.
+- **Verification:** Workspace build **8/8**, package-surface/pack regression
+  **9/9**, seven public archives, packed-manifest audit, clean-consumer
+  install/import/CLI execution, bounded signed fixture, and diff check passed.
+- **Reason:** This qualifies the package contents boundary only. Trusted npm
+  publication, legal/trusted-publishing review, immutable attestation,
+  protected release approval, rollback acceptance, and final dependencies are
+  not established by a local archive run.
+- **Disposition:** Keep `DIST-001` unchecked. Score remains **239/41/280
+  (85.4%)**; AppSec/Hunt and unrelated external gates remain unchanged. No
+  registry, provider, signing, deployment, customer, or Production state
+  changed.
+- **Evidence:**
+  `evidence/dist-001-packed-files-allowlist-2026-10-19.md`.
+
 ## 2026-10-19 · retain STUDIO-CLI-001 after entitlement and receipt-evidence implementation
 
 - **Decision:** Accept Web commits `38d6eb0` and `62a54b5` as substantive,
