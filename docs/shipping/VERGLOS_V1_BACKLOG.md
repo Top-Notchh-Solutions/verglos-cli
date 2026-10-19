@@ -82,6 +82,21 @@ using the active `verglos-web`, `verglos-cli`, and private shipping ledger
 repositories only; preserve normal granular substantive commits and do not
 squash.
 
+## 2026-10-19 · ACCEPT-006 original comprehension scorer shipped
+
+Private commits `6430a38` (implementation) and `423daecc` (regression) add
+the real six-question scorer. It binds answers to an exact artifact digest and
+rubric, validates the participant consent window and six unique questions,
+detects critical hallucinations, refuses secret-like answer material, ignores
+caller-provided correctness flags, and emits only digests. Contracts pass
+**7/7**, with existing acceptance protocol checks and diff check passing.
+
+This is implementation evidence only. No participant run is fabricated;
+`ACCEPT-006` remains unchecked pending real consenting participant responses,
+redacted aggregate evidence, and independent scoring review. Score remains
+**239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt remains held.
+Evidence: `docs/shipping/evidence/accept-006-comprehension-scorer-2026-10-19.md`.
+
 ## 2026-10-19 · ENT-CLI-001 original enrollment exchange shipped
 
 Web PR #225 and CLI PR #152 now provide the original one-time runner

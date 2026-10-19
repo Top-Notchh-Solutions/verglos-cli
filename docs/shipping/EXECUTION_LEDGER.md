@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · ACCEPT-006 original comprehension scorer shipped
+
+- **Source:** Private implementation commit `6430a38` and regression commit
+  `423daecc`; no squash, rebase, force-push, or artificial contribution was
+  used.
+- **Original logic:** `scripts/score-comprehension-test.mjs` scores the exact
+  six-question rubric against an artifact digest, validates digest-only
+  participant identity and the consent window, refuses duplicate/missing or
+  secret-like answers, detects forbidden critical claims, and emits bounded
+  answer digests rather than raw responses. It cannot close the acceptance
+  status from local input; independent review remains explicitly required.
+- **Verification:** Scorer and acceptance-plan contracts **7/7**, external
+  workflow protocol validation, study-protocol validation, and diff check
+  passed.
+- **Disposition:** This closes the implementation gap only. No participant
+  run was fabricated. `ACCEPT-006` remains unchecked for real consenting
+  developer/lead/recipient responses, redacted aggregate evidence, and
+  independent scoring review. No customer/provider/Production/AppSec state
+  changed. Score remains **239/41/280 (85.4%)**; AppSec/Hunt remains held.
+- **Evidence:**
+  `docs/shipping/evidence/accept-006-comprehension-scorer-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-005/006 public Release Record qualification merged
 
 - **Source:** Web PR #222 merged normally as

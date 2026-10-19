@@ -2,6 +2,26 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · ACCEPT-006 original comprehension scorer shipped
+
+The private shipping ledger now contains a real bounded scorer for the
+pre-registered six-question comprehension protocol. Implementation commit
+`6430a38` and regression commit `423daecc` remain separate. The scorer binds
+answers to an exact artifact digest and rubric, requires all unique answers
+inside a valid consent window, detects critical hallucinations, refuses
+secret-like answer material, ignores caller-supplied correctness flags, and
+emits only participant/answer digests. Its output preserves
+`acceptanceStatus: open` and requires independent review.
+
+The scorer and acceptance-plan contracts passed **7/7**; external-workflow and
+study-protocol validation passed; diff check passed. No participant run was
+invented and no customer, provider, Production, or AppSec state changed.
+`ACCEPT-006` remains unchecked pending the real consenting participant run,
+redacted aggregate evidence, and independent scoring review. Score remains
+**239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt remains held.
+
+Evidence: `evidence/accept-006-comprehension-scorer-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-005/006 public Release Record qualification merged
 
 Web PR #222 merged normally as

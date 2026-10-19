@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## ACCEPT-006 comprehension scorer · 2026-10-19
+
+- **Source mapping:** Private implementation `6430a38` and regression
+  `423daecc`, preserved as separate commits.
+- **Implementation mapping:** `scripts/score-comprehension-test.mjs` binds a
+  six-question run to an exact artifact digest/rubric, validates consent and
+  bounded digest-only identity, scores terms without trusting caller flags,
+  detects critical hallucinations and secret-like answers, and emits no raw
+  participant answers.
+- **Verification mapping:** Scorer and acceptance-plan contracts **7/7**,
+  external-workflow protocol validation, study-protocol validation, and diff
+  check passed.
+- **Acceptance mapping:** `ACCEPT-006` remains open for the real consenting
+  participant run, aggregate evidence, and independent scoring review. No
+  AppSec-held checkbox changed; score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/accept-006-comprehension-scorer-2026-10-19.md`.
+
 ## QUAL-WEB-005/006 public Release Record qualification · 2026-10-19
 
 - **Source mapping:** Web PR #222 merged normally as
