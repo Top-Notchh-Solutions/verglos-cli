@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-19 · DIST-001 exact-merge package qualification
+
+The exact CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` passed the
+documented clean package qualification after the cross-platform CI setup was
+applied in the disposable worktree: build **8/8**, **7** public archives,
+packed manifest/public-surface audit passed, and clean-consumer installation,
+imports, no-implicit-engine check, and signed bounded A1 execution passed.
+
+This is package qualification evidence only. `DIST-001` remains unchecked
+because its declared LOCAL/HUNT/RECORD and final legal/release dependencies
+are not all closed. No package was published; AppSec/Hunt is unchanged. Score
+remains **235 checked / 45 open / 280 total (83.9%)**. Evidence:
+`docs/shipping/evidence/dist-001-current-merge-requalification-2026-10-19.md`.
+
 ## 2026-10-19 · ENT-CLI-001 private-runner protocol requalification
 
 The current private-runner implementation was rechecked through the bounded

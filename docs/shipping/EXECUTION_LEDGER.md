@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · DIST-001 exact-merge package qualification
+
+- **Source:** Exact CLI merge `50bcab42eadfa8796d86d1f7a8aaee3010c65647` was
+  qualified in a disposable detached worktree. The documented protected-CI
+  cross-platform optional-package setup was applied before installation.
+- **Results:** Workspace build **8/8** passed; public packing produced **7**
+  archives; packed manifest/public-surface audit passed for all 7; the clean
+  consumer installed/imported all public packages, emitted the expected CLI
+  version, created no implicit external-engine cache, and executed signed A1
+  through the bounded restricted-process runtime. `git diff --check` passed.
+- **Boundary:** The first setup-only attempt stopped before archive creation
+  because optional platform metadata was absent. The corrected qualification
+  completed successfully. No npm publication, provider action, or Production
+  state change occurred.
+- **Disposition:** Keep `DIST-001` unchecked because its declared
+  LOCAL/HUNT/RECORD and final legal/release dependencies remain open.
+  AppSec/Hunt is unchanged; score remains **235/45/280 (83.9%)**.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-current-merge-requalification-2026-10-19.md`.
+
 ## 2026-10-19 · ENT-CLI-001 private-runner protocol requalification
 
 - **Verification:** The runner implementation commits `723f655` and `68772d7`
