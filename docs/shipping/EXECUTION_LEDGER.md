@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · QUAL-WEB-005/006 public Release Record qualification merged
+
+- **Source:** Web PR #222 merged normally as
+  `8e06f6d43a35ed123c2a9ef169238beca202ff68` from
+  `codex/qual-web-005-20261019`; separate implementation and regression
+  commits were preserved. No squash, rebase, force-push, or artificial
+  contribution was used.
+- **Original logic:** The public Release Record receipt route now declares
+  explicit no-index metadata and the real public release-smoke manifest
+  checks that route's bounded content-digest contract. The existing dashboard
+  uses real responsive, landmark, focus-visible, reduced-motion, and
+  application-order migration behavior with focused regression coverage.
+- **Verification:** In a clean merged-head worktree, locked install, focused
+  Release Record/receipt tests **6/6**, typecheck, and diff check passed.
+  Hosted PR checks were **8/8 successful**.
+- **Disposition:** This advances implementation and qualification only.
+  `QUAL-WEB-005` and `QUAL-WEB-006` remain unchecked for their external
+  deletion/legal, authenticated browser/field-CWV, customer, and independent
+  acceptance contracts. No Production, provider, billing, customer,
+  deletion, or AppSec state changed. Score remains **239/41/280 (85.4%)**;
+  AppSec/Hunt remains held.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-006-public-release-smoke-pr222-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-006 rollback manifest binding merged
 
 - **Source:** CLI PR #157 merged normally as

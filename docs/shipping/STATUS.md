@@ -2,6 +2,26 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · QUAL-WEB-005/006 public Release Record qualification merged
+
+Web PR #222 merged normally as
+`8e06f6d43a35ed123c2a9ef169238beca202ff68`, preserving separate substantive
+implementation and regression commits. The real public Release Record
+surface now has explicit no-index metadata and is included in the public
+release-smoke manifest with bounded content-digest verification. The same PR
+also preserves real organization-dashboard responsive, landmark, focus, and
+reduced-motion behavior plus application-order migration auditing.
+
+Clean merged-head verification passed: focused Release Record/receipt tests
+**6/6**, typecheck, and diff check. Hosted PR checks were **8/8 successful**.
+No Production, provider, billing, customer, deletion, or AppSec state changed.
+This is implementation and qualification evidence only; `QUAL-WEB-005` and
+`QUAL-WEB-006` remain unchecked for their external deletion, legal, browser,
+field-CWV, customer, and acceptance contracts. Score remains **239 checked /
+41 open / 280 total (85.4%)**; AppSec/Hunt remains held.
+
+Evidence: `evidence/qual-web-005-006-public-release-smoke-pr222-2026-10-19.md`.
+
 ## 2026-10-19 · DIST-006 rollback manifest binding merged
 
 CLI PR #157 merged normally as

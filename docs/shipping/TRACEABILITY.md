@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005/006 public Release Record qualification · 2026-10-19
+
+- **Source mapping:** Web PR #222 merged normally as
+  `8e06f6d43a35ed123c2a9ef169238beca202ff68` from
+  `codex/qual-web-005-20261019`, preserving separate implementation and
+  regression commits.
+- **Implementation mapping:** The public Release Record verification page
+  emits explicit no-index metadata; `scripts/public-release-smoke.ts` and
+  its regression surface include the receipt route and bounded content-digest
+  verification. The same merge carries real dashboard responsive,
+  landmark, focus-visible, reduced-motion, and migration-order contracts.
+- **Verification mapping:** Clean merged-head focused tests **6/6**, typecheck,
+  and diff check passed. Hosted PR checks were **8/8 successful**.
+- **Acceptance mapping:** `QUAL-WEB-005` and `QUAL-WEB-006` remain open for
+  their external deletion/legal, authenticated browser/field-CWV, customer,
+  and independent acceptance requirements. No AppSec-held checkbox changed;
+  score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/qual-web-005-006-public-release-smoke-pr222-2026-10-19.md`.
+
 ## DIST-006 rollback/revocation manifest binding · 2026-10-19
 
 - **Source mapping:** CLI PR #157 merged normally as

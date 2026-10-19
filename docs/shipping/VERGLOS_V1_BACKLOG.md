@@ -21,6 +21,25 @@ unchecked until its numeric hosted allowance and authorized recipient/customer
 acceptance are observed.
 Evidence: `docs/shipping/evidence/studio-cli-001-hosted-usage-release-2026-10-19.md`.
 
+## 2026-10-19 · QUAL-WEB-005/006 public Release Record qualification merged
+
+Web PR #222 merged normally as
+`8e06f6d43a35ed123c2a9ef169238beca202ff68`, preserving separate substantive
+implementation and regression commits. The original public Release Record
+surface now declares explicit no-index metadata and is covered by the real
+public release-smoke manifest with bounded content-digest verification. The
+same merge preserves responsive, landmark, focus-visible, reduced-motion, and
+application-order migration contracts for the organization dashboard.
+
+Clean merged-head focused tests passed **6/6**, with typecheck and diff check
+passing; hosted PR checks were **8/8 successful**. This advances
+`QUAL-WEB-005` and `QUAL-WEB-006` implementation evidence only. Their
+checkboxes remain unchecked for external deletion/legal, authenticated
+browser/field-CWV, customer, and independent acceptance requirements. Score
+remains **239 checked / 41 open / 280 total (85.4%)**; AppSec/Hunt remains
+held. Evidence:
+`docs/shipping/evidence/qual-web-005-006-public-release-smoke-pr222-2026-10-19.md`.
+
 ## 2026-10-19 · QUAL-WEB-005/006 current merged-head qualification
 
 The clean Web merge `2c07237845f0e52061dc52c99c21212615390177` passed the
