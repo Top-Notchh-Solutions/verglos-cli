@@ -12,7 +12,8 @@
   passed **45/45**; typecheck and the 48-page build passed. PR #223 hosted
   checks passed after the isolated PostgreSQL job was rerun following an ECR
   `toomanyrequests: Data limit exceeded` pull failure; Verify web run
-  `39244909659` also passed.
+  `39244909659` also passed. PR #223 merged normally as
+  `a1854ad1cc5ba6fcb97d5784045ddd5e7ee7e001`.
 - **Acceptance mapping:** `TEAM-WEB-003` was already checked, so this is a
   hardening addendum with no score change. It does not provide the external
   allowance, customer, provider, legal, release, or AppSec evidence required

@@ -21,6 +21,8 @@ attempt stopped before tests on the GitHub Actions ECR `toomanyrequests: Data
 limit exceeded` provider limit; rerun job `118035241202` passed, as did Verify
 web run `39244909659` and the remaining PR checks. This is hosted CI evidence,
 not a new product acceptance or checkbox closure.
+The PR then merged normally, without squash, as
+`a1854ad1cc5ba6fcb97d5784045ddd5e7ee7e001`.
 
 Evidence: `evidence/team-web-003-draft-first-policy-creation-2026-10-19.md`.
 

@@ -18,6 +18,8 @@
   PostgreSQL job. The first attempt failed before tests on the GitHub Actions
   ECR pull with `toomanyrequests: Data limit exceeded`; rerun job
   `118035241202` passed. Verify-web run `39244909659` and all PR checks passed.
+- **Shipping:** PR #223 merged normally, without squash, as
+  `a1854ad1cc5ba6fcb97d5784045ddd5e7ee7e001`.
 - **Disposition:** `TEAM-WEB-003` was already checked; this is a substantive
   hardening addendum, not a new checkbox closure. Score remains **239/41/280
   (85.4%)**. No production, database, provider, billing, npm, customer, or

@@ -11,6 +11,8 @@
   PR #223 hosted checks passed after the isolated PostgreSQL job was rerun;
   the first attempt failed before tests on the GitHub Actions ECR data-limit
   response `toomanyrequests: Data limit exceeded`.
+- **Shipping:** Merge PR #223 normally, without squash, as
+  `a1854ad1cc5ba6fcb97d5784045ddd5e7ee7e001` after all required checks passed.
 - **Reason:** `TEAM-WEB-003` was already checked, and this change does not
   produce numeric hosted entitlement, recipient/customer, provider, legal,
   release, field, or independent AppSec evidence.
