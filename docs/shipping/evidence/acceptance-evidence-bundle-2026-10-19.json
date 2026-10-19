@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-19T01:39:40.752Z",
+  "generatedAt": "2026-10-19T01:46:13.661Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -46,6 +46,11 @@
       "path": "docs/shipping/evidence/accept-005-packed-first-party-qualification-2026-10-19.md",
       "sha256": "db8f3ff8d54487ce66372c85e31e877268b821ab1d4366cbfc095b1e19b74202",
       "bytes": 4915
+    },
+    {
+      "path": "docs/shipping/evidence/qual-web-005-authenticated-route-e2e-2026-10-19.md",
+      "sha256": "dfebe4f67ecd78d17e52f7ac17ae729e0f737a7f564250f788ab684d475ff345",
+      "bytes": 3369
     },
     {
       "path": "docs/shipping/acceptance/external-workflow-protocol.md",

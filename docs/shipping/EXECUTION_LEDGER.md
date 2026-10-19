@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-19 · QUAL-WEB-005 authenticated deletion route E2E
+
+- **Source:** Web merge `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`, exercised
+  from a clean disposable worktree with Node `v22.23.3` and pnpm `10.34.5`.
+- **Runtime:** Docker Desktop client/server `29.7.2`, Linux arm64, pinned
+  PostgreSQL image digest
+  `sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81`.
+  The local container was removed after the run.
+- **Verification:** Reviewed bootstrap plus 42 ordered migrations; focused
+  authenticated route/worker/cron suite **5/5**, typecheck, Drizzle schema
+  check, migration-order check, and diff check passed.
+- **Disposition:** This advances QUAL-WEB-005 implementation and isolated E2E
+  evidence only. Keep the checkbox open for legal/customer-held-record and
+  consent decisions, Production migration authorization, restore/rollback
+  acceptance, reconciliation, and independent end-to-end acceptance. No
+  Production, provider, customer, payment, or AppSec/Hunt state changed;
+  TEAM-CLI-001 remains checked.
+- **Evidence:**
+  `docs/shipping/evidence/qual-web-005-authenticated-route-e2e-2026-10-19.md`.
+- **Score:** **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · ACCEPT-005 packed first-party qualification
 
 - **Implementation/evidence:** Seven public package archives were generated

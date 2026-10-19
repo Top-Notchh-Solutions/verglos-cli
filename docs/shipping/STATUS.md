@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-19 · QUAL-WEB-005 authenticated deletion route E2E
+
+The exact Web merge `0719074d` was exercised in a disposable worktree against
+the pinned local PostgreSQL image. The reviewed empty-database bootstrap and
+42 ordered migrations completed; the authenticated deletion route, held-digest
+registration, idempotent request path, bounded worker, lease/hold/rollback
+controls, and cron contract passed **5/5** with zero skips or failures. Node
+22.23.3, pnpm 10.34.5, typecheck, Drizzle schema check, migration-order check,
+and cleanup all passed.
+
+This is code-side and isolated E2E evidence only. `QUAL-WEB-005` remains
+unchecked pending the authorized legal/customer-held-record and consent
+decisions, Production migration authorization, restore/rollback acceptance,
+reconciliation, and independent end-to-end acceptance. No Production,
+provider, customer, payment, or AppSec/Hunt state changed. TEAM-CLI-001 remains
+checked.
+
+Evidence: `evidence/qual-web-005-authenticated-route-e2e-2026-10-19.md`.
+Score remains **235 checked / 45 open / 280 total (83.9%)**.
+
 ## 2026-10-19 · ACCEPT-005 packed first-party qualification
 
 The seven public package archives were produced from the disposable CLI

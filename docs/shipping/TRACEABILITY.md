@@ -1,5 +1,29 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 authenticated deletion route E2E · 2026-10-19
+
+- **Source mapping:** Web merge
+  `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b` was exercised from a clean
+  disposable worktree; no public source was changed by this qualification.
+- **Runtime mapping:** Docker Desktop `29.7.2` Linux arm64 ran the pinned
+  PostgreSQL 15 Alpine image at digest
+  `sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81`.
+  The reviewed local bootstrap applied 42 ordered migrations and the named
+  disposable container was removed afterward.
+- **Verification mapping:** Authenticated deletion route, customer-held
+  digest registration, idempotency, bounded worker completion, held-digest
+  preservation, lease/hold/approval/rollback controls, and cron contract
+  passed **5/5** with zero skips or failures. Typecheck, Drizzle schema check,
+  migration-order check, and diff check also passed.
+- **Acceptance mapping:** This is isolated code-side qualification only.
+  `QUAL-WEB-005` remains unchecked for legal/customer-held-record and consent
+  decisions, Production migration authorization, restore/rollback acceptance,
+  reconciliation, and independent end-to-end acceptance. No AppSec-held
+  checkbox changed; `TEAM-CLI-001` is checked. Score remains
+  **235/45/280 (83.9%)**.
+- **Evidence:**
+  `evidence/qual-web-005-authenticated-route-e2e-2026-10-19.md`.
+
 ## ACCEPT-005 packed first-party qualification · 2026-10-19
 
 - **Source mapping:** Packed CLI qualification used implementation commit

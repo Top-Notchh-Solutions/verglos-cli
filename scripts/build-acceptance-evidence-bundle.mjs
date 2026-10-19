@@ -18,6 +18,7 @@ const paths = [
   "docs/shipping/evidence/acceptance-story-tests-2026-10-03.md",
   "docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md",
   "docs/shipping/evidence/accept-005-packed-first-party-qualification-2026-10-19.md",
+  "docs/shipping/evidence/qual-web-005-authenticated-route-e2e-2026-10-19.md",
   "docs/shipping/acceptance/external-workflow-protocol.md",
   "docs/shipping/acceptance/consent-record.template.md",
   "docs/shipping/acceptance/comprehension-test-protocol.md",
