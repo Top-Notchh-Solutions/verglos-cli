@@ -1,7 +1,7 @@
 import { execFile } from "node:child_process";
 import { constants } from "node:fs";
-import { lstat, open } from "node:fs/promises";
-import { basename, join, resolve } from "node:path";
+import { lstat, open, realpath } from "node:fs/promises";
+import { basename, isAbsolute, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
@@ -147,13 +147,16 @@ async function validateSpdx(artifact, root, jar, run) {
 
 async function validateSigstore(root, configured, tool, run) {
   const config = configured ?? {};
-  const payloadPath = resolve(config.payloadPath ?? join(root, "sigstore.payload"));
-  const bundlePath = resolve(config.bundlePath ?? join(root, "sigstore.bundle.json"));
-  const keyPath = config.keyPath === undefined ? resolve(join(root, "sigstore.pub")) : resolve(config.keyPath);
-  const trustedRootPath = config.trustedRootPath === undefined ? undefined : resolve(config.trustedRootPath);
+  const payloadPath = await resolveArtifactPath(root, config.payloadPath, "sigstore.payload");
+  const bundlePath = await resolveArtifactPath(root, config.bundlePath, "sigstore.bundle.json");
+  const keyPath = await resolveArtifactPath(root, config.keyPath, "sigstore.pub");
+  const trustedRootPath = config.trustedRootPath === undefined ? undefined : await resolveArtifactPath(root, config.trustedRootPath, "sigstore.trusted-root.json");
   const identity = config.identity;
   const issuer = config.issuer;
-  const names = { id: "sigstore", format: "Sigstore bundle", artifact: basename(payloadPath) };
+  const names = { id: "sigstore", format: "Sigstore bundle", artifact: "sigstore.bundle.json" };
+  if (!payloadPath || !bundlePath || !keyPath || (config.trustedRootPath !== undefined && !trustedRootPath)) {
+    return { ...names, status: "failed", reason: "sigstore-fixture-outside-root" };
+  }
   const paths = [payloadPath, bundlePath, trustedRootPath ?? keyPath];
   const states = await Promise.all(paths.map((path) => boundedPathState(path)));
   const anyPresent = states.some((state) => state === "present");
@@ -171,6 +174,23 @@ async function validateSigstore(root, configured, tool, run) {
   }
   args.push(payloadPath);
   return runExternalTool({ ...names, tool, args, cwd: root, run });
+}
+
+/** Keep configured qualification inputs inside the declared artifact root. */
+async function resolveArtifactPath(root, configured, fallbackName) {
+  if (configured !== undefined && typeof configured !== "string") return null;
+  const candidate = resolve(configured ?? join(root, fallbackName));
+  const lexical = relative(root, candidate);
+  const separator = process.platform === "win32" ? "\\" : "/";
+  if (lexical === ".." || lexical.startsWith(`..${separator}`) || isAbsolute(lexical)) return null;
+  try {
+    const [rootReal, candidateReal] = await Promise.all([realpath(root), realpath(candidate)]);
+    const actual = relative(rootReal, candidateReal);
+    if (actual === ".." || actual.startsWith(`..${separator}`) || isAbsolute(actual)) return null;
+  } catch (error) {
+    if (error?.code !== "ENOENT") return null;
+  }
+  return candidate;
 }
 
 async function boundedPathState(path) {
