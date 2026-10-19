@@ -13,6 +13,7 @@
     "sbom:cyclonedx": "node scripts/generate-sbom.mjs --write",
     "sbom:spdx": "node scripts/generate-spdx.mjs --write",
     "qualify:standards": "node scripts/verify-standard-validation.mjs",
+    "release:rollback-evidence": "node scripts/release-rollback-evidence.mjs",
     "pack:public": "node scripts/pack-public-packages.mjs .artifacts/public-packages"
   },
   "devDependencies": {
