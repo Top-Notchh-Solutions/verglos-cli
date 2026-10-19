@@ -2,6 +2,22 @@
 
 ## Overall continuation state · 2026-10-19
 
+## 2026-10-19 · STUDIO-CLI-001 current Web handoff qualification
+
+The current Web `origin/main` implementation was qualified from a clean
+disposable worktree at `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`. The focused
+handoff/Studio suite passed **70/70**, the negative-boundary suite **8/8**,
+typecheck passed, and **42 ordered migrations** verified. The implementation
+uses the original production authorization and tenant logic; recipient
+acknowledgement uses its intended one-time proof rather than a placeholder.
+
+This is implementation and qualification evidence only. `STUDIO-CLI-001`
+remains unchecked pending the numeric paid/non-production hosted allowance and
+authorized recipient/customer acceptance. No AppSec/Hunt state changed. Score
+remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/studio-cli-001-current-web-handoff-qualification-2026-10-19.md`.
+
 The GitHub cutover/recovery entry is complete, but the overall shipping goal
 is not complete. Score: **239 checked / 41 open / 280 total (85.4%)**. Hold
 only the Hunt/AppSec rows and explicit downstream dependencies; continue

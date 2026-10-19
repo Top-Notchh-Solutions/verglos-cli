@@ -2,6 +2,27 @@
 
 ## 2026-10-19 · overall shipping continuation remains active
 
+## 2026-10-19 · STUDIO-CLI-001 current Web handoff qualification
+
+- **Source:** Clean Web worktree at merge
+  `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`, including the persisted
+  handoff-receipt lifecycle and current Studio custody implementation.
+- **Logic boundary:** The organization routes use the original production
+  authorization and tenant predicates. Recipient acknowledgement is the
+  intended public one-time proof flow and stores only a token digest; it is not
+  a placeholder login or fixture bypass.
+- **Verification:** Focused handoff/Studio tests passed **70/70**; negative
+  boundary tests passed **8/8**; typecheck passed; migration verification
+  confirmed **42 ordered migrations**. No failures or skips occurred in these
+  focused checks.
+- **Disposition:** Implementation evidence is recorded, but
+  `STUDIO-CLI-001` remains unchecked pending the numeric paid/non-production
+  hosted allowance and authorized Studio recipient/customer acceptance. No
+  AppSec/Hunt row changed; no production/provider/customer state changed.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-current-web-handoff-qualification-2026-10-19.md`.
+- **Score:** **239 checked / 41 open / 280 total (85.4%)**.
+
 - **State:** The authorized GitHub cutover/recovery was a completed subtask,
   not completion of the overall shipping goal. The private ledger is now
   **239 checked / 41 open / 280 total (85.4%)**.

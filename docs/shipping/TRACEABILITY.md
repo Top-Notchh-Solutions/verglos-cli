@@ -2,6 +2,23 @@
 
 ## Active continuation state · 2026-10-19
 
+## STUDIO-CLI-001 current Web handoff qualification · 2026-10-19
+
+- **Source mapping:** Web `origin/main` merge
+  `0719074d5a6f83198f5e36c0eeb064f2a12e1b1b`, with the persisted handoff
+  lifecycle and current Studio custody implementation.
+- **Verification mapping:** Original production authorization and tenant
+  predicates, digest-only token custody, recipient proof, replay refusal,
+  revocation guards, leakage controls, and Studio E2E lifecycle were covered
+  by 70/70 focused passes; negative-boundary coverage passed 8/8; typecheck and
+  42-migration verification passed.
+- **Acceptance mapping:** `STUDIO-CLI-001` remains unchecked because numeric
+  paid/non-production hosted allowance and authorized recipient/customer
+  acceptance are still external row requirements. No AppSec-held checkbox
+  changed. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-current-web-handoff-qualification-2026-10-19.md`.
+
 The GitHub cutover/recovery subtask is complete, but the overall shipping goal
 remains active at **239 checked / 41 open / 280 total (85.4%)**. The direct
 Hunt/AppSec hold set is `HUNT-008`–`HUNT-011` and `QUAL-CLI-004`, together with
