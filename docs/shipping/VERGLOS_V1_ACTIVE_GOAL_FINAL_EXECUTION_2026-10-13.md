@@ -142,6 +142,19 @@ checkbox changed; score remains **239 checked / 41 open / 280 total (85.4%)**.
 Evidence:
 `docs/shipping/evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
 
+**QUAL-CLI-006 contract qualification result (2026-10-21):** Clean CLI
+`origin/main` `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the focused
+standard-validation suite **7/7** and `pnpm typecheck` **14/14**. The suite
+covers bounded official-tool invocation, redaction, unavailable-tool handling,
+artifact-root confinement, and fail-closed malformed/symlinked/oversized
+artifacts. The direct qualification command correctly rejected a missing
+artifact-root argument; no official-validator or release acceptance pass was
+claimed. `QUAL-CLI-006` remains open for the approved artifact bundle, trusted
+keyless publication, legal/protected release, independent review, hosted
+platform evidence, and final acceptance. No checkbox changed; score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 **Current-source browser qualification result (2026-10-21):** The clean Web
 commit `70f69de` was served locally and rechecked in the existing Chrome page
 across the same six routes at desktop `1440x900` and mobile `390x844`, Fast 4G,

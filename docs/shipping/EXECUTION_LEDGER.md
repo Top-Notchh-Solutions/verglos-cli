@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · QUAL-CLI-006 standard-validation contract requalification
+
+- **Source:** Clean detached CLI `origin/main`
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`.
+- **Verification:** `node --test scripts/verify-standard-validation.test.mjs`
+  passed **7/7**; `pnpm typecheck` passed **14/14** Turbo tasks. The suite
+  covers bounded official-tool invocation, redaction, unavailable-tool
+  handling, artifact-root confinement, and fail-closed malformed/symlinked/
+  oversized inputs.
+- **Boundary:** `pnpm qualify:standards` without its required artifact-root
+  argument correctly exited **1** with usage. No official validator or release
+  artifact bundle was claimed by this run.
+- **Disposition:** Keep `QUAL-CLI-006` unchecked for the actual approved
+  artifact-root validator run, trusted keyless release identity, protected
+  publication, legal clearance, independent review, hosted platform evidence,
+  and final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007 local current-source browser qualification
 
 - **Source/runtime:** Clean Web commit `70f69de`, served locally at

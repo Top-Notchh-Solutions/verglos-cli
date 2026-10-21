@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · QUAL-CLI-006 standard-validation contract requalification
+
+Clean CLI `origin/main` `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the
+focused standard-validation suite **7/7** and `pnpm typecheck` **14/14**. The
+suite verifies bounded official-tool argv/redaction, unavailable-tool handling,
+artifact-root confinement, and fail-closed malformed/symlinked/oversized
+artifacts. The direct qualification command correctly refused without its
+required artifact-root argument; no official validator or release bundle was
+claimed. `QUAL-CLI-006` remains open for trusted keyless publication, legal,
+protected release, independent review, hosted platform, and final acceptance.
+No checkbox changed; score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007 local current-source browser qualification
 
 Clean Web commit `70f69de` was served locally and checked in the existing Chrome

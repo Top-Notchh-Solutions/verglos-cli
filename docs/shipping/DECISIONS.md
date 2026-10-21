@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain QUAL-CLI-006 after standard-validation contract run
+
+- **Decision:** Accept the focused validation-runner qualification as
+  implementation evidence; retain `QUAL-CLI-006` unchecked.
+- **Observed:** CLI `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the focused
+  suite **7/7** and typecheck **14/14**. The direct qualification command
+  correctly rejected a missing artifact-root argument.
+- **Reason:** Contract tests and usage validation do not substitute for an
+  approved release artifact bundle, actual official validators, trusted
+  keyless release identity, legal/protected publication, independent review,
+  hosted platform evidence, or final acceptance.
+- **Disposition:** No checkbox changed; score remains **239/41/280 (85.4%)**.
+  Evidence: `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## 2026-10-21 · retain FINAL-WEB-007 after local current-source browser qualification
 
 - **Decision:** Accept the local browser run as additional current-source

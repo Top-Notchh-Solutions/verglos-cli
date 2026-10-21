@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## QUAL-CLI-006 standard-validation contract requalification · 2026-10-21
+
+- **Source mapping:** Clean detached CLI `origin/main`
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`.
+- **Qualification mapping:** `node --test scripts/verify-standard-validation.test.mjs`
+  passed **7/7**; `pnpm typecheck` passed **14/14** Turbo tasks. The contract
+  test covers bounded validator arguments, redaction, unavailable tools,
+  artifact-root confinement, and fail-closed artifact handling.
+- **Acceptance mapping:** No actual artifact-root official-validator run was
+  claimed. Keep QUAL-CLI-006 unchecked for trusted keyless identity, protected
+  publication, legal clearance, independent review, hosted platform evidence,
+  and final acceptance; score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## FINAL-WEB-007 local current-source browser qualification · 2026-10-21
 
 - **Source/runtime mapping:** Clean Web commit `70f69de` was served locally

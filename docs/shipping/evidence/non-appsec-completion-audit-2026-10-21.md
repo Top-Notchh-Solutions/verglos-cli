@@ -1,5 +1,18 @@
 # Verglos V1 non-AppSec completion audit — 2026-10-21
 
+## Current qualification addendum · QUAL-CLI-006 · 2026-10-21
+
+Clean CLI `origin/main` `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the
+focused standard-validation contract suite **7/7** and `pnpm typecheck`
+**14/14**. The direct qualification command correctly refused without its
+required artifact-root argument; no official validator, release bundle, or
+publication was claimed. This strengthens implementation evidence only.
+`QUAL-CLI-006` remains open for its approved artifact-root validator run,
+trusted keyless identity, protected publication, legal clearance, independent
+review, hosted platform evidence, and final acceptance. No checkbox changed;
+score remains **239/41/280 (85.4%)**. Evidence:
+`evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## Current reconciliation addendum · 2026-10-21
 
 The clean Web source commit `70f69de` was rechecked through the existing Chrome

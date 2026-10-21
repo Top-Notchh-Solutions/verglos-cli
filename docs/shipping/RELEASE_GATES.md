@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · QUAL-CLI-006 standard-validation contract gate
+
+The clean CLI merged head `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed
+the focused standard-validation contract suite **7/7** and typecheck **14/14**.
+The direct qualification command correctly exits with usage when no artifact
+root is supplied; no official validator or release bundle was claimed.
+
+Keep QUAL-CLI-006 unchecked for the actual artifact-root official-validator
+run, trusted keyless release identity, protected publication, legal clearance,
+independent review, hosted platform evidence, and final acceptance. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007 local current-source browser gate
 
 Clean Web commit `70f69de` was served locally and rechecked across all six
