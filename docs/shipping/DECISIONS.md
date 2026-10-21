@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain DIST-001 after current origin/main package qualification
+
+- **Decision:** Accept the current merged-head package qualification as
+  substantive distribution evidence; retain `DIST-001` unchecked.
+- **Observed:** CLI `origin/main` at
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed build **8/8**, focused
+  package tests **8/8**, seven-package contents and packed-manifest audits,
+  clean-consumer installation/import/execution, and the forced **23/23** task
+  graph with no failures.
+- **Reason:** The package boundary is qualified, but LOCAL/HUNT/RECORD
+  dependencies and final legal/release acceptance remain unresolved. Explicit
+  Docker/A2 integration skips are not independent Hunt evidence.
+- **Disposition:** No checkbox changed; score remains **239/41/280 (85.4%)**.
+  No registry, Production, provider, customer, legal, or AppSec state changed.
+  Evidence:
+  `evidence/dist-001-current-origin-main-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · retain ENT-CLI-001 after current Preview runner qualification
 
 - **Decision:** Accept the current deployed Preview lifecycle as substantive

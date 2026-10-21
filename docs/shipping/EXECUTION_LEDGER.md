@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · DIST-001 current origin/main package qualification
+
+- **Source:** Clean detached CLI worktree at merged `origin/main`
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`; the CI-only cross-platform
+  optional-package setup was applied ephemerally and not committed.
+- **Verification:** Build **8/8**; package-surface/packer tests **8/8**;
+  package contents **7/7**; packed-manifest audit **7/7**; clean-consumer
+  verifier tests **2/2** plus successful installation/import/execution of all
+  **7** archives; forced workspace test/typecheck/build graph **23/23** Turbo
+  tasks with no failures; diff check passed.
+- **Artifact:** All seven archives are version `2.0.0-alpha.1`. The consumer
+  performed no external-engine installation and executed the signed
+  `a1-utf8-contains` fixture through bounded `restricted-process` with an
+  isolated Pro capability fixture.
+- **Acceptance mapping:** This is current-head package-boundary evidence only.
+  Keep `DIST-001` unchecked for LOCAL/HUNT/RECORD dependencies and final
+  legal/release acceptance. Docker/A2 integration tests remain explicit
+  environment-gated skips. Score remains **239/41/280 (85.4%)**; no registry,
+  Production, provider, customer, legal, or AppSec state changed.
+- **Evidence:**
+  `docs/shipping/evidence/dist-001-current-origin-main-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · ENT-CLI-001 current Preview runner lifecycle qualification
 
 - **Source/deployment:** Clean Web source `a3819c1` deployed as

@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## DIST-001 current origin/main package qualification · 2026-10-21
+
+- **Source mapping:** CLI merged `origin/main`
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`, checked from a clean detached
+  worktree. Cross-platform optional packages were materialized with the
+  documented ephemeral CI setup and the source worktree was restored clean.
+- **Package mapping:** Seven public archives passed the package-surface,
+  contents, packed-manifest, and clean-consumer boundaries. The consumer
+  imported all libraries, ran `verglos 2.0.0-alpha.1`, did not install an
+  external engine, and executed the bounded signed A1 fixture.
+- **Verification mapping:** Build **8/8**, focused package tests **8/8**,
+  clean-consumer tests **2/2**, full forced graph **23/23** Turbo tasks, and
+  diff check passed. Docker/A2 tests remained explicit environment-gated
+  skips.
+- **Acceptance mapping:** This advances package implementation evidence only.
+  `DIST-001` remains unchecked for LOCAL/HUNT/RECORD dependencies and final
+  legal/release acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/dist-001-current-origin-main-qualification-2026-10-21.md`.
+
 ## ENT-CLI-001 current Preview runner lifecycle qualification · 2026-10-21
 
 - **Source mapping:** Web commit `a3819c1`; clean Ready Preview deployment

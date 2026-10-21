@@ -59,6 +59,20 @@ legal, or AppSec state changed. The score remains **239 checked / 41 open /
 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`.
 
+**Next continuation result (2026-10-21):** `DIST-001` was requalified from
+the exact merged CLI source `origin/main`
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f` in a clean detached worktree.
+With the documented ephemeral cross-platform optional-package setup, build
+passed **8/8**, focused package tests **8/8**, package contents/packed
+manifests and clean-consumer checks passed for **7/7** archives, and the forced
+workspace graph completed **23/23** Turbo tasks with no failures. The row
+remains unchecked because LOCAL/HUNT/RECORD dependencies and final
+legal/release acceptance remain open; Docker/A2 integration tests are explicit
+environment-gated skips. No registry, Production, provider, customer, legal,
+or AppSec state changed. The score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-current-origin-main-qualification-2026-10-21.md`.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

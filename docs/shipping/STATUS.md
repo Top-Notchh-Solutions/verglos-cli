@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · DIST-001 current origin/main package qualification
+
+The merged CLI source `72190acae81b454a4a88a0ea8d222c8981ac9a3f` was
+requalified from a clean detached worktree. The documented cross-platform
+optional-package setup was applied only for qualification and then removed.
+Build passed **8/8**; package-surface/packer tests passed **8/8**; package
+contents, packed manifests, and clean-consumer checks passed for **7/7** public
+archives; and the forced workspace graph completed **23/23** Turbo tasks with
+no failures. The clean consumer imported all seven libraries, ran
+`verglos 2.0.0-alpha.1`, performed no external-engine installation, and ran the
+bounded signed A1 fixture.
+
+This advances current-head package evidence only. `DIST-001` remains open for
+LOCAL/HUNT/RECORD dependencies and final legal/release acceptance. Explicit
+Docker/A2 integration tests remain environment-gated skips. No registry,
+Production, provider, customer, legal, or AppSec state changed. The score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/dist-001-current-origin-main-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · ENT-CLI-001 current Preview runner lifecycle qualification
 
 The current Web source `a3819c1` was deployed to a clean Ready Preview as

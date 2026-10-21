@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · DIST-001 current origin/main package gate
+
+CLI `origin/main` commit `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed
+the current package gate from a clean detached worktree: build **8/8**,
+focused package tests **8/8**, seven-package contents and packed-manifest
+audits, clean-consumer installation/import/execution, and forced workspace
+graph **23/23** with no failures. The seven archives are all
+`2.0.0-alpha.1`; the consumer performed no external-engine installation.
+
+Keep `DIST-001` unchecked. This qualifies the package boundary only; its
+LOCAL/HUNT/RECORD dependencies and final legal/release acceptance remain open.
+Docker/A2 integration tests remain explicit environment-gated skips. No
+registry, Production, provider, customer, legal, or AppSec state changed.
+Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/dist-001-current-origin-main-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · ENT-CLI-001 current Preview runner lifecycle gate
 
 The current Web source `a3819c1` reached Ready in clean Preview deployment

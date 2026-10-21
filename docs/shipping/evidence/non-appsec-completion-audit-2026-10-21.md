@@ -27,6 +27,20 @@ acceptance, complete cross-platform operational acceptance, or independent
 runner/Hunt review. The score remains **239 checked / 41 open / 280 total
 (85.4%)**. See `evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`.
 
+## Continuation addendum · DIST-001 · 2026-10-21
+
+The next non-AppSec implementation boundary was requalified from merged CLI
+`origin/main` commit `72190acae81b454a4a88a0ea8d222c8981ac9a3f` in a clean
+detached worktree. Build **8/8**, focused package tests **8/8**, seven-package
+contents and packed-manifest audits, clean-consumer installation/import/
+execution, and the forced **23/23** Turbo task graph passed with no failures.
+The documented CI-only cross-platform optional-package setup was applied
+ephemerally and removed afterward. This strengthens current-head package
+evidence but does not satisfy DIST-001's LOCAL/HUNT/RECORD dependencies or
+final legal/release acceptance. The score remains **239 checked / 41 open /
+280 total (85.4%)**. See
+`evidence/dist-001-current-origin-main-qualification-2026-10-21.md`.
+
 ## Result
 
 The live private backlog contains **239 checked / 41 open / 280 total
@@ -77,10 +91,11 @@ Hunt packets; they are not an independent review result.
   `evidence/ent-cli-001-hosted-runner-qualification-2026-10-18.md`,
   `evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`, and
   `evidence/ent-cli-001-cross-platform-qualification-2026-10-19.md`.
-- `DIST-001`, `DIST-002`, `DIST-003`, and `DIST-006`: package implementation
-  and dry-run/rehearsal evidence exist, but LOCAL/HUNT/RECORD dependencies,
-  protected trusted publication, legal/license clearance, immutable
-  attestation, and authenticated rollback/revocation acceptance remain open.
+- `DIST-001`, `DIST-002`, `DIST-003`, and `DIST-006`: package implementation,
+  current-head DIST-001 qualification, and dry-run/rehearsal evidence exist,
+  but LOCAL/HUNT/RECORD dependencies, protected trusted publication,
+  legal/license clearance, immutable attestation, and authenticated
+  rollback/revocation acceptance remain open.
 - `QUAL-CLI-006`: official validator and cross-platform package evidence
   exists, but trusted keyless release identity, protected publication,
   legal clearance, independent review, and final release acceptance remain
@@ -123,9 +138,9 @@ pushes, and Production migrations.
 
 No satisfiable non-AppSec checkbox is silently treated as complete. The next
 file-order item is `HUNT-008`; the next non-AppSec product row after the now
-qualified ENT batch is `DIST-001`, whose package implementation exists but
-still needs its LOCAL/HUNT/RECORD dependencies, protected trusted publication,
-legal/license clearance, and final release acceptance. The next AppSec action
-is an independent review of the exact Hunt/runner source and isolation packet.
+qualified DIST-001 package boundary is `DIST-002`, which remains dependency-
+blocked by DIST-001 and still needs protected trusted publication, legal/release
+clearance, and immutable publication/attestation. The next AppSec action is an
+independent review of the exact Hunt/runner source and isolation packet.
 No provider, customer, legal, payment, Production, registry, deployment, or
 AppSec state changed.
