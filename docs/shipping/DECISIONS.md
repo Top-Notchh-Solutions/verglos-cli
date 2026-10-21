@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain FINAL-WEB-007 after local current-source browser qualification
+
+- **Decision:** Accept the local browser run as additional current-source
+  implementation evidence; retain FINAL-WEB-007 and FINAL-WEB-008 unchecked.
+- **Observed:** Web commit `70f69de` was served through the existing Chrome
+  page across six public paths at desktop/mobile Fast 4G and 4× CPU. All
+  traces recorded CLS **0.00**; desktop LCP was **428–657 ms** and mobile LCP
+  **623–1002 ms**. Direct DOM checks confirmed metadata/canonicals, docs table
+  headers, proof contrast, checkout noindex, and no pre-interaction Razorpay
+  script. No console errors or warnings appeared.
+- **Reason:** Local source evidence cannot establish deployed exact-head
+  requalification, field INP/CWV, human/supported-environment acceptance, or
+  final release acceptance. The Lighthouse wrapper's contradictory local
+  metadata warning is retained for recheck and is not promoted to a source
+  defect because direct DOM inspection passed.
+- **Disposition:** No checkbox changed; score remains **239/41/280 (85.4%)**.
+  No deployment, Production, provider, payment, customer, legal, or AppSec
+  state changed. Evidence:
+  `evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · retain DIST-002 after Sigstore 5 remediation check
 
 - **Observed:** Disposable exact-`sigstore@5.0.0` qualification built the
