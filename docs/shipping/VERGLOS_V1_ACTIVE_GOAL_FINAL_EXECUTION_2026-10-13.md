@@ -32,6 +32,25 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Latest continuation result (2026-10-21):** `STUDIO-CLI-001` received a
+current-head Web tenant-boundary repair in commit
+`cb2302179533a7bc73eccbcb17b0c350685cc5cc`. The client-workspace route no
+longer imports raw `getDb()` for a separate commercial lookup; the centralized
+authorized capability result carries the typed plan, and the route uses its
+Studio allowance while failing closed with `503` when that plan is unavailable.
+The focused Studio/auth/tenant suite passed **41/41**; the full Web suite
+passed **893/893** with **24 explicit skips** and no failures; typecheck,
+Drizzle schema check, **43** ordered migrations, diff check, and a fresh
+detached Next build generating **49/49** pages all passed. The exact current
+source had exposed the defect as one failed tenant-boundary contract before
+the repair, so this is substantive implementation progress. The row remains
+unchecked for the approved numeric paid/non-production hosted allowance and
+authorized Studio recipient/customer acknowledgement with hosted/audit
+evidence. No deployment, provider, payment, database, customer, legal,
+registry, or AppSec state changed. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-current-head-tenant-scope-repair-2026-10-21.md`.
+
 **Latest continuation result (2026-10-21):** `QUAL-CLI-006` was requalified
 from clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` after a fresh
 build and package. Build **8/8**, typecheck **14/14**, official in-toto 3.0.0

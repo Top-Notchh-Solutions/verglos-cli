@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 current-head tenant-boundary repair · 2026-10-21
+
+- **Source mapping:** Web commit
+  `cb2302179533a7bc73eccbcb17b0c350685cc5cc`, qualified from a fresh
+  detached worktree at the same commit.
+- **Implementation mapping:** The centralized capability guard returns the
+  authorized commercial plan to the tenant route. The route uses the plan's
+  Studio allowance, fails closed when it is unavailable, and has no raw
+  `getDb()` import or unscoped commercial lookup.
+- **Qualification mapping:** Focused suite **41/41**; full suite **893/893**
+  with **24 explicit skips** and no failures; typecheck; clean Next build
+  **49/49** pages; Drizzle schema check; **43** ordered migrations; and diff
+  check all passed.
+- **Acceptance mapping:** Keep `STUDIO-CLI-001` unchecked for the approved
+  numeric paid/non-production hosted allowance and authorized recipient/
+  customer acknowledgement with hosted/audit evidence. No deployment or
+  external state changed. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-current-head-tenant-scope-repair-2026-10-21.md`.
+
 ## QUAL-CLI-006 current-head archive/provenance qualification · 2026-10-21
 
 - **Source mapping:** Clean detached CLI merge

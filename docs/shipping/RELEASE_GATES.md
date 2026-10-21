@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · STUDIO-CLI-001 current-head tenant-boundary gate
+
+Web commit `cb2302179533a7bc73eccbcb17b0c350685cc5cc` repairs the real
+tenant-boundary failure in the Studio client-workspace route. The route now
+uses the authorized capability plan for its allowance, fails closed when that
+plan is unavailable, and does not import raw `getDb()`. Focused tests passed
+**41/41**; full tests passed **893/893** with **24 explicit skips**; typecheck,
+schema/migration checks, diff check, and a fresh detached build generating
+**49/49** pages passed.
+
+Keep `STUDIO-CLI-001` unchecked: the approved numeric paid/non-production
+hosted allowance and authorized recipient/customer acceptance with hosted/audit
+evidence remain missing. No deployment or external state changed. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/studio-cli-001-current-head-tenant-scope-repair-2026-10-21.md`.
+
 ## 2026-10-21 · QUAL-CLI-006 current-head archive/provenance gate
 
 Clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed build **8/8**,

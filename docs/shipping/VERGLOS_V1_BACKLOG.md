@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-21 · STUDIO-CLI-001 current-head tenant-boundary repair
+
+Web commit `cb2302179533a7bc73eccbcb17b0c350685cc5cc` repairs the real
+tenant-boundary defect found in the Studio client-workspace route. The
+centralized authorized capability result now carries the commercial plan; the
+route consumes its numeric Studio allowance, fails closed when the plan is
+unavailable, and no longer imports raw `getDb()`. Focused tests passed **41/41**;
+the full suite passed **893/893** with **24 explicit skips**; typecheck,
+schema/migration checks, diff check, and a fresh detached build generating
+**49/49** pages passed.
+
+This is implementation qualification only. Keep `STUDIO-CLI-001` unchecked
+for the approved numeric paid/non-production hosted allowance and authorized
+recipient/customer acceptance with hosted/audit evidence. No checkbox changed;
+score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-current-head-tenant-scope-repair-2026-10-21.md`.
+
 ## 2026-10-21 · QUAL-CLI-006 current-head archive/provenance qualification
 
 Clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` was freshly built

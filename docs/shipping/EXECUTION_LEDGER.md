@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · STUDIO-CLI-001 current-head tenant-boundary repair
+
+- **Source:** Web commit
+  `cb2302179533a7bc73eccbcb17b0c350685cc5cc` from the real implementation
+  worktree; qualification was repeated from a fresh detached worktree at the
+  same commit.
+- **Repair:** The Studio client-workspace route no longer imports raw `getDb()`
+  or performs an unscoped commercial lookup. The centralized authorized
+  capability result carries the typed commercial plan; the route consumes its
+  numeric allowance and returns `503` when that plan is unavailable.
+- **Verification:** Focused Studio/auth/tenant tests **41/41**; full Web
+  `pnpm test` **893/893** with **24 explicit skips** and no failures; typecheck;
+  `pnpm build` with **49/49** generated pages; Drizzle schema check; **43**
+  ordered migrations; and diff check all passed.
+- **Disposition:** This is substantive implementation progress, not a row
+  closure. Keep `STUDIO-CLI-001` open for the approved numeric paid/non-
+  production hosted allowance and authorized Studio recipient/customer
+  acceptance with hosted/audit evidence. No deployment or external state
+  changed. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-current-head-tenant-scope-repair-2026-10-21.md`.
+
 ## 2026-10-21 · QUAL-CLI-006 current-head archive/provenance qualification
 
 - **Source:** Clean detached CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f`.

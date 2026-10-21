@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain STUDIO-CLI-001 after current-head tenant repair
+
+- **Observed:** The current Web source failed one tenant-boundary contract
+  because the Studio client-workspace route used raw `getDb()` to resolve the
+  commercial plan. The failure was repaired in Web commit
+  `cb2302179533a7bc73eccbcb17b0c350685cc5cc` by returning the authorized plan
+  from the centralized capability guard and consuming it in the tenant route.
+- **Verification:** Focused tests passed **41/41**; the full Web suite passed
+  **893/893** with **24 explicit skips**; typecheck, schema/migration checks,
+  diff check, and a fresh detached **49/49** page build passed.
+- **Decision:** Accept this as code-side Studio implementation and
+  qualification evidence, but retain `STUDIO-CLI-001` unchecked. The approved
+  numeric paid/non-production hosted allowance and authorized recipient/
+  customer acceptance with hosted/audit evidence are still absent.
+- **Boundary:** No deployment, provider, payment, database, customer, legal,
+  registry, or AppSec state changed. Score remains **239 checked / 41 open /
+  280 total (85.4%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-current-head-tenant-scope-repair-2026-10-21.md`.
+
 ## 2026-10-21 · retain QUAL-CLI-006 after current-head provenance run
 
 - **Observed:** CLI `72190acae81b454a4a88a0ea8d222c8981ac9a3f` built **8/8**,
