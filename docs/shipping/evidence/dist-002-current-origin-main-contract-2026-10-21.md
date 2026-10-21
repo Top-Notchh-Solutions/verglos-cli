@@ -54,6 +54,22 @@ the latest listed runs created in August 2026; no current `origin/main`
 immutable-tag publication was initiated or inferred. No workflow, environment,
 registry, provider, customer, Production, or legal state was changed.
 
+## Read-only technical remediation check
+
+The seven blockers were traced without changing the source worktree. `pnpm
+why` shows the six BlueOak packages arriving transitively through the CLI's
+`sigstore@4.1.1` → `@sigstore/sign`/`@sigstore/tuf` →
+`make-fetch-happen@15.0.6` → npm cache dependency chain; the separate
+`benchmark@1.0.0` component is bundled by `fast-uri@3.1.7`. Read-only registry
+metadata checks on 2026-10-21 report the current latest versions as
+`sigstore@5.0.0`, `make-fetch-happen@16.0.1`, `cacache@21.0.1`, and
+`glob@13.0.6`; the latest declared license for each of `glob`, `lru-cache`,
+`minimatch`, `minipass`, `minipass-flush`, and `path-scurry` remains
+`BlueOak-1.0.0` (`minipass-flush` latest is `2.0.1`). This does not provide
+legal clearance and does not justify broadening the inventory's permissive
+license allowlist or bypassing `--require-clear`. No dependency, lockfile,
+workflow, registry, or publication state changed.
+
 ## Disposition
 
 `DIST-002` remains unchecked because DIST-001 is still open, the protected
