@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 current Preview runner lifecycle qualification · 2026-10-21
+
+- **Source mapping:** Web commit `a3819c1`; clean Ready Preview deployment
+  `dpl_ETFtQmHWA9m5EL77n4rDBX254icz` generated **49/49** static pages.
+- **Runtime mapping:** Synthetic Preview runner enrollment and one-time
+  redemption succeeded, followed by activation, tenant/runner/target-bound
+  bounded job delivery, source-free result persistence, exact replay
+  idempotency, malformed-input refusal, cross-tenant refusal, and final empty
+  poll. Result digest:
+  `sha256:0e101c9809e69c6bba0a501ec41a3131016206a443a4ce7fb0ab4fee34cc8eab`.
+- **Privacy mapping:** The projection contained no source, findings, command
+  text, credentials, or customer data. Raw enrollment and runner credentials
+  are not recorded.
+- **Acceptance mapping:** This is owner-authorized synthetic Preview evidence,
+  not enterprise acceptance, complete cross-platform operational acceptance,
+  or independent runner/Hunt review. `ENT-CLI-001` remains unchecked and the
+  score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`.
+
 ## STUDIO-CLI-001 Preview Studio fixture qualification · 2026-10-21
 
 - **Source mapping:** Web commits `938dd7e` and `a3819c1`; final clean

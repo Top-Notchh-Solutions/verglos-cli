@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · ENT-CLI-001 current Preview runner lifecycle gate
+
+The current Web source `a3819c1` reached Ready in clean Preview deployment
+`dpl_ETFtQmHWA9m5EL77n4rDBX254icz` with **49/49** static pages. The synthetic
+runner lifecycle qualified enrollment, one-time redemption, activation,
+bounded tenant/runner/target-bound job delivery, source-free result upload,
+exact replay idempotency, malformed-result refusal, cross-tenant refusal, and
+final empty poll.
+
+Keep `ENT-CLI-001` unchecked. This is owner-authorized synthetic Preview
+evidence, not authorized enterprise acceptance, complete cross-platform
+operational acceptance, or independent runner/Hunt isolation review. No raw
+credentials, customer data, Production, provider, legal, or AppSec state was
+recorded or changed. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 Preview Studio implementation gate
 
 Web commits `938dd7e` and `a3819c1` provide a Preview-only, exact-identity

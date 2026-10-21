@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain ENT-CLI-001 after current Preview runner qualification
+
+- **Decision:** Accept the current deployed Preview lifecycle as substantive
+  operational evidence; retain `ENT-CLI-001` unchecked.
+- **Observed:** Web source `a3819c1` deployed cleanly as
+  `dpl_ETFtQmHWA9m5EL77n4rDBX254icz` with **49/49** pages. The synthetic
+  runner completed enrollment, one-time redemption, activation, bounded
+  tenant/runner/target-bound job delivery, source-free result upload, exact
+  replay idempotency, malformed-result refusal, cross-tenant refusal, and
+  final empty poll.
+- **Reason:** The fixture is owner-controlled Preview state. It does not
+  establish authorized enterprise acceptance, complete cross-platform
+  operational acceptance, or independent runner/Hunt isolation review.
+- **Disposition:** No checkbox changed; score remains **239/41/280 (85.4%)**.
+  No raw credentials, customer data, Production, provider, legal, or AppSec
+  state was recorded or changed. Evidence:
+  `evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · retain STUDIO-CLI-001 after Preview Studio fixture qualification
 
 - **Decision:** Accept the deployed Preview fixture as substantive

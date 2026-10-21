@@ -45,6 +45,20 @@ unchecked because the recipient is owner-controlled synthetic evidence rather
 than independent customer/recipient acceptance. No Production or AppSec state
 changed. The score remains **239 checked / 41 open / 280 total (85.4%)**.
 
+**Next continuation result (2026-10-21):** `ENT-CLI-001` received a fresh
+owner-authorized synthetic Preview lifecycle qualification from the clean Web
+source `a3819c1`. Deployment `dpl_ETFtQmHWA9m5EL77n4rDBX254icz` reached Ready
+with **49/49** static pages. The runner completed enrollment, one-time
+redemption, activation, bounded tenant/runner/target-bound job delivery,
+source-free result upload, exact replay idempotency, malformed-result refusal,
+cross-tenant refusal, and final empty poll. This advances deployed operational
+evidence only; the row remains unchecked for authorized enterprise acceptance,
+complete cross-platform operational acceptance, and independent runner/Hunt
+isolation review. No raw credentials, customer data, Production, provider,
+legal, or AppSec state changed. The score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

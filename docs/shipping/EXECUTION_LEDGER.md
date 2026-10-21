@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · ENT-CLI-001 current Preview runner lifecycle qualification
+
+- **Source/deployment:** Clean Web source `a3819c1` deployed as
+  `dpl_ETFtQmHWA9m5EL77n4rDBX254icz`; Vercel reached Ready and generated
+  **49/49** static pages.
+- **Hosted lifecycle:** Synthetic Preview organization
+  `bca7f024-3053-4f56-af0a-207bf0138862` completed owner-authenticated
+  enrollment (`201`), one-time redemption (`201`), activation poll, bounded
+  job issue/claim, source-free result upload (`201`), exact replay (`200`,
+  idempotent), malformed result refusal (`400`), cross-tenant poll refusal
+  (`401`), and final empty poll. The result digest was
+  `sha256:0e101c9809e69c6bba0a501ec41a3131016206a443a4ce7fb0ab4fee34cc8eab`.
+- **Boundary:** The job was bound to the exact tenant, runner, and target;
+  network mode was denied and limits were bounded. No raw credentials,
+  source, findings, command text, or customer data was retained.
+- **Acceptance mapping:** This advances deployed operational evidence only.
+  Keep `ENT-CLI-001` unchecked for authorized enterprise acceptance, complete
+  cross-platform operational acceptance, and independent runner/Hunt review.
+  Score remains **239/41/280 (85.4%)**; no Production, provider, legal,
+  customer, or AppSec state changed.
+- **Evidence:**
+  `docs/shipping/evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 Preview Studio fixture qualification
 
 - **Source:** Web commits `938dd7e` and `a3819c1` in the isolated Studio

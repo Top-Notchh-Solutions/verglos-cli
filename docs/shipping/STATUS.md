@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · ENT-CLI-001 current Preview runner lifecycle qualification
+
+The current Web source `a3819c1` was deployed to a clean Ready Preview as
+`dpl_ETFtQmHWA9m5EL77n4rDBX254icz`, generating **49/49** static pages. An
+owner-controlled synthetic Preview runner completed enrollment, one-time
+credential redemption, activation poll, bounded signed-job delivery, source-
+free result upload, exact replay idempotency, malformed-result refusal, and
+cross-tenant access refusal. The observed result digest was
+`sha256:0e101c9809e69c6bba0a501ec41a3131016206a443a4ce7fb0ab4fee34cc8eab`.
+
+This is bounded operational Preview evidence only. `ENT-CLI-001` remains open
+for authorized enterprise acceptance, complete cross-platform operational
+acceptance, and independent runner/Hunt isolation review. No raw credentials,
+customer data, Production, provider, legal, or AppSec state was recorded or
+changed. The score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 Preview Studio fixture qualification
 
 The Web Preview Studio fixture and hosted client-recipient path now qualify on
