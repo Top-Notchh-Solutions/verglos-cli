@@ -592,7 +592,9 @@ position, but those words do not replace benchmark evidence.
   backlog work unless their evidence says otherwise.
 - The current launch price is a hypothesis with guardrails, not validated
   market fit.
-- The live backlog score is unchanged at **228/52/280 (81.4%)**.
+- At the 2026-10-13 document revision, the backlog score was **228/52/280
+  (81.4%)**; the live score is now **239/41/280 (85.4%)** as reconciled in
+  the private backlog and execution ledger.
 - This blueprint changes product clarity and traceability only. It does not
   close a checkbox, grant an entitlement, publish npm, alter Production, or
   fabricate customer, legal, provider, or independent-review evidence.
