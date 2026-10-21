@@ -3,6 +3,11 @@
 **Owner:** Anurag Yadav, owner of Top Notchh Solutions and Verglos
 **Updated:** 2026-10-21
 **Status:** active; this is the single authoritative continuation goal
+**Continuation authorization:** On 2026-10-21 the owner authorized repository
+implementation and bounded Preview qualification to resume. This authorizes
+code, tests, configuration, and private evidence work within the stated scope;
+it does not turn a synthetic result into customer, legal, provider,
+field-performance, or independent-review evidence.
 **Backlog authority:** `docs/shipping/VERGLOS_V1_BACKLOG.md`
 **Evidence authority:** `docs/shipping/EXECUTION_LEDGER.md` and
 `docs/shipping/evidence/`
