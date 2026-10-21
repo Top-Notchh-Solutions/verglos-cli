@@ -15,8 +15,11 @@ This document answers a commercial question for every Final V1 surface:
 
 It is a requirements and acceptance blueprint. It is not a claim that every
 capability below is already implemented. The private backlog remains the only
-source of checkbox state. At this revision the live score remains **228
-checked / 52 unchecked / 280 total (81.4%)**.
+source of checkbox state. At this document revision the recorded score was
+**228 checked / 52 unchecked / 280 total (81.4%)**. The live private backlog
+has since been reconciled at **239 checked / 41 open / 280 total (85.4%)** on
+2026-10-21; the backlog and execution ledger are authoritative for current
+checkbox state.
 
 ## 0.1 Owner authorization and independent-review boundary — 2026-10-14
 

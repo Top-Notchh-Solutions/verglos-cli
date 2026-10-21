@@ -14,8 +14,11 @@ checked?** It is a cross-reference, not a second backlog and not a release
 claim.
 
 The private backlog remains the only source of checkbox state. This matrix does
-not add or remove counted checkboxes. At this synchronization point the live
-score remains **228 checked / 52 unchecked / 280 total (81.4%)**.
+not add or remove counted checkboxes. At this document revision the recorded
+score was **228 checked / 52 unchecked / 280 total (81.4%)**. The live private
+backlog has since been reconciled at **239 checked / 41 open / 280 total
+(85.4%)** on 2026-10-21; the backlog and execution ledger are authoritative
+for current checkbox state.
 
 The paying-value blueprint is the companion authority for the customer problem,
 plan outcome, economic guardrail, and acceptance metric for every surface in
