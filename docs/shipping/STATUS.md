@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · STUDIO-CLI-001 Preview Studio fixture qualification
+
+The Web Preview Studio fixture and hosted client-recipient path now qualify on
+the real deployed routes. Web commits `938dd7e` and `a3819c1` add the
+fail-closed Preview-only numeric Studio entitlement, workspace admission, safe
+projection custody, usage commit, tenant isolation, private-field rejection,
+and bounded handoff acknowledgement path. The final clean Preview deployment
+`dpl_FZpAVi1Hbj8iQhpuyyvb9gUSucoe` reached Ready and generated **49/49** static
+pages. The qualification run created a synthetic Preview workspace, uploaded
+and read back a safe projection, rejected a private field, rejected a
+cross-tenant read, and recorded an acknowledged synthetic handoff.
+
+This is owner-authorized synthetic Preview evidence only. It is not independent
+customer/recipient acceptance, provider payment, Production entitlement, or
+AppSec/Hunt evidence. `STUDIO-CLI-001` remains open and the score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/studio-cli-001-preview-studio-fixture-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 live Preview catalog recheck
 
 The current READY Preview deployment returned the free fixture with

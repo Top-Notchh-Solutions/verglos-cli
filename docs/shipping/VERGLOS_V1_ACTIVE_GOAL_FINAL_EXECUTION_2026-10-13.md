@@ -32,6 +32,19 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Latest continuation result (2026-10-21):** `STUDIO-CLI-001` received
+substantive Web implementation and bounded hosted Preview qualification. Web
+commits `938dd7e` and `a3819c1` add and correct the fail-closed Preview Studio
+numeric fixture, safe client-projection custody, usage admission, tenant
+isolation, and handoff acknowledgement path. The final clean Preview deploy
+`dpl_FZpAVi1Hbj8iQhpuyyvb9gUSucoe` reached Ready with **49/49** static pages;
+focused tests passed **27/27** and typecheck/diff checks passed. A synthetic
+Preview workspace, projection, privacy rejection, cross-tenant refusal, and
+handoff acknowledgement were observed through real routes. The row remains
+unchecked because the recipient is owner-controlled synthetic evidence rather
+than independent customer/recipient acceptance. No Production or AppSec state
+changed. The score remains **239 checked / 41 open / 280 total (85.4%)**.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain STUDIO-CLI-001 after Preview Studio fixture qualification
+
+- **Decision:** Accept the deployed Preview fixture as substantive
+  implementation and bounded hosted-route evidence; keep `STUDIO-CLI-001`
+  unchecked.
+- **Observed:** The exact Web source commits `938dd7e` and `a3819c1` passed
+  focused tests **27/27**, typecheck, diff check, and a clean Ready Vercel
+  build with **49/49** pages. The real Preview routes admitted the numeric
+  Studio fixture, created a client workspace, committed a safe projection,
+  rejected a private field and cross-tenant read, and recorded a synthetic
+  handoff acknowledgement.
+- **Reason:** The hosted identity and recipient are owner-controlled synthetic
+  fixtures. They do not establish independent customer/recipient acceptance,
+  provider payment, Production entitlement, or final release acceptance.
+- **Disposition:** Preserve the inactive/non-purchasable public Studio catalog
+  and the Preview-only fixture guard. No checkbox changed; score remains
+  **239/41/280 (85.4%)**. Temporary migration helper deployments were removed;
+  no Production database or deployment was touched. AppSec/Hunt remains held.
+- **Evidence:**
+  `evidence/studio-cli-001-preview-studio-fixture-2026-10-21.md`.
+
 ## 2026-10-21 · retain STUDIO-CLI-001 after live Preview catalog recheck
 
 - **Decision:** Keep `STUDIO-CLI-001` open; do not activate or override the

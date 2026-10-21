@@ -1,5 +1,34 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · STUDIO-CLI-001 Preview Studio fixture qualification
+
+- **Source:** Web commits `938dd7e` and `a3819c1` in the isolated Studio
+  worktree. The final clean Preview deployment was
+  `dpl_FZpAVi1Hbj8iQhpuyyvb9gUSucoe`; its remote build compiled successfully
+  and generated **49/49** static pages.
+- **Implementation:** A fail-closed Preview-only Studio fixture requires the
+  exact synthetic identity, active license, explicit flag, and canonical
+  numeric `2000` allowance. The hosted path admits only safe client projection
+  fields, commits record usage, enforces tenant scope, rejects private fields,
+  and records bounded handoff acknowledgement evidence.
+- **Hosted observations:** Preview migration repair applied reviewed `0040`,
+  `0041`, and `0042` only to the Preview database. Workspace creation returned
+  `201`; projection upload returned `201` with `usageState=committed`; readback
+  returned the same digest; private-field input returned `400 private_field`;
+  cross-tenant read returned `403`; synthetic handoff read back as
+  `acknowledged`.
+- **Verification:** Focused regression **27/27**, typecheck, diff check, and
+  final Vercel build passed. Temporary migration deployments were removed and
+  the final deployment contains no migration helper.
+- **Acceptance mapping:** This advances the real implementation and bounded
+  hosted Preview evidence only. The recipient was an owner-controlled
+  synthetic fixture, not an independent customer/recipient; no customer
+  source, provider payment, Production entitlement, legal acceptance, or
+  AppSec/Hunt state was created. Keep `STUDIO-CLI-001` unchecked. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-preview-studio-fixture-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 live Preview catalog recheck
 
 - **Observation:** The READY Preview deployment `dpl_GGagEm4UQ56vYNEua74ButkaP1eh`

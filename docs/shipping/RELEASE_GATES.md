@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · STUDIO-CLI-001 Preview Studio implementation gate
+
+Web commits `938dd7e` and `a3819c1` provide a Preview-only, exact-identity
+numeric Studio entitlement fixture and qualify the real hosted client
+workspace/projection/handoff path. The clean final Preview deployment
+`dpl_FZpAVi1Hbj8iQhpuyyvb9gUSucoe` is Ready with **49/49** static pages.
+Focused tests passed **27/27**; the route run committed usage, read back the
+safe projection, rejected `source: private`, rejected a cross-tenant read, and
+read back an acknowledged synthetic handoff.
+
+Keep `STUDIO-CLI-001` unchecked. This is owner-authorized synthetic Preview
+evidence, not independent customer/recipient acceptance, provider payment,
+Production entitlement, or final acceptance. The score remains **239 checked /
+41 open / 280 total (85.4%)**; AppSec/Hunt remains held. Evidence:
+`evidence/studio-cli-001-preview-studio-fixture-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 live Preview catalog gate
 
 The current READY Preview catalog still resolves the fixture to free. Pro is

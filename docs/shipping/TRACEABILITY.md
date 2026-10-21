@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 Preview Studio fixture qualification · 2026-10-21
+
+- **Source mapping:** Web commits `938dd7e` and `a3819c1`; final clean
+  Preview deployment `dpl_FZpAVi1Hbj8iQhpuyyvb9gUSucoe` reached Ready and
+  generated **49/49** static pages.
+- **Runtime mapping:** Preview-only exact-identity Studio fixture admitted the
+  numeric `2000` allowance. The real workspace, safe projection, usage, tenant
+  boundary, private-field refusal, handoff, and acknowledgement routes were
+  exercised. The reviewed `0040`–`0042` migrations were applied only to the
+  Preview database through a temporary auth-gated runner, then its deployments
+  were removed.
+- **Verification mapping:** Focused tests **27/27**, typecheck, diff check,
+  hosted projection readback, `400 private_field`, cross-tenant `403`, and
+  acknowledged handoff readback passed.
+- **Acceptance mapping:** This is owner-authorized synthetic Preview evidence;
+  it does not establish independent customer/recipient acceptance, provider
+  payment, Production entitlement, or final acceptance. Keep the row
+  unchecked. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/studio-cli-001-preview-studio-fixture-2026-10-21.md`.
+
 ## STUDIO-CLI-001 live Preview catalog recheck · 2026-10-21
 
 - **Runtime mapping:** READY Preview returned the free fixture and the
