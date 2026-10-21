@@ -1,5 +1,18 @@
 # Verglos V1 non-AppSec completion audit — 2026-10-21
 
+## Continuation addendum · DIST-002 · 2026-10-21
+
+A disposable exact-`sigstore@5.0.0` experiment against CLI merge
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the workspace build **8/8**
+and license inventory tests **6/6** after cross-platform dependency
+materialization. The strict gate still exited **2** for the bundled
+benchmark/fast-uri conflict and six BlueOak reviews. Sigstore 5 also requires
+Node `^22.22.2 || ^24.15.0 || >=26.0.0`, so it does not preserve the current
+Node `>=20` contract. The experiment was discarded without source or lockfile
+changes. `DIST-002` remains open for legal/license clearance, protected trusted
+publication, and immutable publication/attestation. See
+`evidence/dist-002-sigstore5-remediation-check-2026-10-21.md`.
+
 ## Continuation addendum · FINAL-WEB-007/008 · 2026-10-21
 
 The current continuation audited six public Production paths in the existing

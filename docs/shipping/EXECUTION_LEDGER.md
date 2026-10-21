@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · DIST-002 latest Sigstore remediation check
+
+- **Experiment:** Disposable detached CLI worktree at merged source
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f` temporarily used exact
+  `sigstore@5.0.0`; the worktree was removed afterward.
+- **Qualification:** Cross-platform install and forced workspace build passed
+  **8/8**; `scripts/license-inventory.test.mjs` passed **6/6**; complete
+  inventory contained **258** lockfile package versions.
+- **Strict gate:** `node scripts/license-inventory.mjs --require-clear` still
+  exited **2** for the bundled benchmark/fast-uri conflict and six BlueOak
+  review entries. Sigstore 5 requires Node `^22.22.2 || ^24.15.0 || >=26.0.0`,
+  narrowing the repository's Node `>=20` contract.
+- **Disposition:** Do not merge the experiment or weaken the gate. No source,
+  lockfile, registry, publication, legal, provider, customer, Production, or
+  AppSec state changed. Keep `DIST-002` open.
+- **Evidence:**
+  `evidence/dist-002-sigstore5-remediation-check-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007 six-path audit and source remediation
 
 - **Production observation:** Existing Chrome tab, public production, read-only

@@ -115,6 +115,16 @@ FINAL-WEB-007 remains open for the six-path capture, human/field evidence,
 and final acceptance. Evidence:
 `docs/shipping/evidence/final-web-007-production-browser-audit-2026-10-21.md`.
 
+**DIST-002 dependency-remediation result (2026-10-21):** A disposable exact
+`sigstore@5.0.0` CLI experiment against merged source
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed workspace build **8/8** and
+license inventory tests **6/6**, but the strict license gate still exited **2**
+for seven blockers. Sigstore 5 requires Node `^22.22.2 || ^24.15.0 ||
+>=26.0.0`, which narrows the current Node `>=20` contract; the experiment was
+discarded. No source, lockfile, publication, legal, provider, customer,
+Production, or AppSec state changed. `DIST-002` remains open. Evidence:
+`docs/shipping/evidence/dist-002-sigstore5-remediation-check-2026-10-21.md`.
+
 **Six-path audit and source remediation result (2026-10-21):** The same
 read-only browser procedure covered `/`, `/docs`, `/detectors`, `/proof`,
 `/verify`, and `/checkout` at desktop/mobile throttled conditions and found

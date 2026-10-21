@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · DIST-002 latest dependency-remediation gate
+
+The disposable Sigstore 5 experiment passed the workspace build **8/8** and
+license inventory tests **6/6**, but `--require-clear` still exited **2** for
+the benchmark/fast-uri conflict and six BlueOak packages. Sigstore 5 also
+requires Node `^22.22.2 || ^24.15.0 || >=26.0.0`, so it cannot replace the
+current dependency without narrowing the Node `>=20` product contract.
+
+Keep `DIST-002` unchecked. Legal/license clearance, protected trusted
+publisher approval, DIST-001 completion, and immutable publication/attestation
+remain open. Evidence:
+`evidence/dist-002-sigstore5-remediation-check-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007 six-path source-remediation gate
 
 Production six-path browser auditing found concrete deployed failures, and Web

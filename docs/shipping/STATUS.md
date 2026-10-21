@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · DIST-002 latest Sigstore remediation check
+
+A disposable exact-`sigstore@5.0.0` CLI experiment was built against CLI
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f`. The workspace build passed **8/8**
+and license inventory tests passed **6/6**, but the strict license gate still
+exited **2** for the same seven blockers. Sigstore 5 also requires Node
+`^22.22.2 || ^24.15.0 || >=26.0.0`, which is incompatible with the current
+Node `>=20` support contract. The experiment was discarded; no source,
+lockfile, publication, or license gate changed. `DIST-002` remains open for
+legal/license clearance, protected trusted publication, and immutable
+attestation. Evidence:
+`evidence/dist-002-sigstore5-remediation-check-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007 six-path audit and source remediation
 
 The read-only six-path production audit found concrete deployed-surface gaps:

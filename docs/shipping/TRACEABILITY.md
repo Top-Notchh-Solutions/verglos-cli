@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## DIST-002 latest Sigstore remediation check · 2026-10-21
+
+- **Source mapping:** Disposable detached experiment from CLI merge
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`; no implementation commit was
+  retained.
+- **Qualification mapping:** Exact Sigstore 5 install/build passed **8/8**;
+  license inventory tests passed **6/6**; inventory covered **258** lockfile
+  package versions.
+- **Gate mapping:** The strict gate still exited **2** for seven blockers,
+  while Sigstore 5's Node engine excludes the repository's Node `>=20` floor.
+  Keep `DIST-002` unchecked for legal/license clearance, protected publisher
+  approval, and immutable publication/attestation. Evidence:
+  `evidence/dist-002-sigstore5-remediation-check-2026-10-21.md`.
+
 ## FINAL-WEB-007 six-path audit and source remediation · 2026-10-21
 
 - **Runtime mapping:** The existing Chrome tab audited public Production

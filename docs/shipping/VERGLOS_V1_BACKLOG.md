@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-21 · DIST-002 latest Sigstore remediation check
+
+A disposable exact-`sigstore@5.0.0` experiment against CLI merge
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the workspace build **8/8**
+and license inventory tests **6/6** after the documented cross-platform
+install. The strict `--require-clear` gate still exited **2** for the bundled
+benchmark/fast-uri conflict and six BlueOak reviews. Sigstore 5 requires Node
+`^22.22.2 || ^24.15.0 || >=26.0.0`, which does not preserve the current Node
+`>=20` contract. The experiment was discarded; no checkbox changed. Keep
+`DIST-002` open for legal/license clearance, protected trusted publication,
+DIST-001, and immutable publication/attestation. Evidence:
+`docs/shipping/evidence/dist-002-sigstore5-remediation-check-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007 six-path audit and source remediation
 
 The read-only six-path production browser audit found concrete deployed public

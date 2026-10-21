@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain DIST-002 after Sigstore 5 remediation check
+
+- **Observed:** Disposable exact-`sigstore@5.0.0` qualification built the
+  workspace **8/8** and passed license inventory tests **6/6**, but the strict
+  gate still exited **2** for seven blockers.
+- **Decision:** Do not merge the upgrade. Its Node engine requires
+  `^22.22.2 || ^24.15.0 || >=26.0.0`, which does not preserve the repository's
+  Node `>=20` contract; it also leaves the legal BlueOak and bundled-license
+  decisions unresolved.
+- **Disposition:** Keep `DIST-002` unchecked. No source, lockfile, registry,
+  publication, or license gate changed. Evidence:
+  `evidence/dist-002-sigstore5-remediation-check-2026-10-21.md`.
+
 ## 2026-10-21 · retain FINAL-WEB-007/008 after six-path audit and source remediation
 
 - **Observed:** Production browser auditing found real public-surface defects
