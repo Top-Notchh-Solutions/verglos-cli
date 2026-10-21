@@ -1,5 +1,38 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · QUAL-CLI-006 current-head archive/provenance qualification
+
+- **Source:** Clean detached CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f`.
+- **Build/package:** `pnpm build` **8/8**; `pnpm typecheck` **14/14**;
+  seven `2.0.0-alpha.1` public archives packed.
+- **Provenance/consumer:** Official `in-toto==3.0.0` verified exact products
+  for **7/7** archives; clean consumer passed all seven installs/imports,
+  bounded signed A1 execution, and no implicit engine installation; upgrade /
+  rollback passed `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`.
+- **Boundary:** Local current-head evidence with ephemeral in-toto keys only.
+  Hosted exact-head matrix, trusted keyless identity, protected publication,
+  legal clearance, independent review, and final acceptance remain open.
+  Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
+## 2026-10-21 · QUAL-CLI-006 official SPDX validator qualification
+
+- **Source:** Clean detached CLI `origin/main`
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`, using the existing disposable
+  generated artifact root.
+- **Tooling:** Temporary Temurin OpenJDK JRE **17.0.20.1** and workflow-pinned
+  SPDX Tools **2.0.7** JAR; the JAR SHA-256 matched the pinned
+  `bf99a8b2ffbea238c1451c6b4be568870f18b4aac93d0dbff755f2b0b7ce43f3`.
+- **Verification:** Strict `node scripts/verify-standard-validation.mjs
+  /private/tmp/verglos-qual-cli006.jqKooc/artifacts --strict --json` passed
+  **4/4**, exit **0**. SARIF, CycloneDX, SPDX, and offline Cosign all returned
+  `passed`.
+- **Boundary:** The artifact root and Cosign key were disposable local inputs;
+  no keyless Fulcio/Rekor identity, registry/publication, legal, customer, or
+  independent-review state changed. Keep `QUAL-CLI-006` unchecked for those
+  remaining gates and final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## 2026-10-21 · QUAL-CLI-006 standard-validation contract requalification
 
 - **Source:** Clean detached CLI `origin/main`

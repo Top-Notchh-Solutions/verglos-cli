@@ -32,6 +32,31 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Latest continuation result (2026-10-21):** `QUAL-CLI-006` was requalified
+from clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` after a fresh
+build and package. Build **8/8**, typecheck **14/14**, official in-toto 3.0.0
+verification **7/7** exact archive products, clean-consumer installation, and
+upgrade/rollback `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` all passed. The in-toto
+keys were ephemeral and the run was local, so hosted exact-head matrix,
+trusted keyless identity, protected publication, legal clearance, independent
+review, customer evidence, and final acceptance remain open. No checkbox or
+external state changed. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
+**Latest continuation result (2026-10-21):** `QUAL-CLI-006` completed the
+local official-validator/tool-integration slice from clean CLI merge
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f`. A temporary Temurin OpenJDK JRE
+17.0.20.1 and the workflow-pinned SPDX Tools 2.0.7 JAR enabled strict
+artifact-root validation to pass **4/4**, exit **0**: SARIF, CycloneDX, SPDX,
+and offline Cosign all passed. The artifact root and Cosign key were
+disposable; this is not keyless Fulcio/Rekor release trust. The row remains
+unchecked for trusted keyless identity, protected publication, legal
+clearance, independent review, hosted/customer evidence, and final acceptance.
+No checkbox or external state changed. The score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 **Latest continuation result (2026-10-21):** `QUAL-CLI-006` was exercised
 against a disposable generated artifact root from clean CLI merge
 `72190acae81b454a4a88a0ea8d222c8981ac9a3f`. Official Microsoft SARIF Multitool

@@ -1,5 +1,34 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain QUAL-CLI-006 after current-head provenance run
+
+- **Observed:** CLI `72190acae81b454a4a88a0ea8d222c8981ac9a3f` built **8/8**,
+  typechecked **14/14**, packed seven public archives, and passed official
+  in-toto 3.0.0 exact-product verification **7/7**. Clean consumer and
+  `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` upgrade/rollback also passed.
+- **Decision:** Accept this as current-head local archive/provenance and
+  transition evidence; retain QUAL-CLI-006 unchecked because the provenance
+  keys were ephemeral and the run was not a hosted release.
+- **Disposition:** Hosted exact-head matrix, trusted keyless publication,
+  legal, independent review, customer evidence, and final acceptance remain
+  open. Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
+## 2026-10-21 · retain QUAL-CLI-006 after complete local standard validation
+
+- **Observed:** With temporary Temurin OpenJDK JRE 17.0.20.1 and the pinned
+  SPDX Tools 2.0.7 JAR, the disposable artifact-root runner passed strict
+  validation **4/4**, exit **0**. SARIF, CycloneDX, SPDX, and offline Cosign
+  all passed.
+- **Decision:** Accept the result as complete local official-validator/tool
+  integration evidence, but retain `QUAL-CLI-006` unchecked. The generated
+  root and Cosign key were disposable; this is not keyless release trust or
+  publication evidence.
+- **Disposition:** No checkbox changed; trusted identity, protected/legal
+  publication, independent review, hosted/customer evidence, and final
+  acceptance remain open. Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## 2026-10-21 · retain QUAL-CLI-006 after standard-validation contract run
 
 - **Decision:** Accept the focused validation-runner qualification as

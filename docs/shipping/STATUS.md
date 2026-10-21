@@ -1,5 +1,31 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · QUAL-CLI-006 current-head archive/provenance qualification
+
+Clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` was freshly built
+and packaged: build **8/8**, typecheck **14/14**, official in-toto 3.0.0
+verified **7/7** archive SHA-256 products, the clean consumer passed, and the
+upgrade/rollback transition `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` passed. This is
+local current-head evidence with ephemeral provenance keys; it does not prove
+hosted matrix, keyless identity, publication, legal, independent-review,
+customer, or final acceptance. `QUAL-CLI-006` remains unchecked; score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
+## 2026-10-21 · QUAL-CLI-006 official SPDX validator qualification
+
+The disposable artifact-root qualification was rerun with temporary Temurin
+OpenJDK JRE **17.0.20.1** and the workflow-pinned SPDX Tools 2.0.7 JAR whose
+SHA-256 matched the repository pin. Strict validation passed **4/4** with exit
+**0** for SARIF, CycloneDX, SPDX, and the offline Cosign bundle. This completes
+the local official-validator/tool-integration slice only; the artifact root
+and signing key were disposable and no keyless release identity or publication
+was claimed. `QUAL-CLI-006` remains open for trusted keyless publication,
+legal, protected release, independent review, hosted platform, customer, and
+final acceptance. No checkbox changed; score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## 2026-10-21 · QUAL-CLI-006 standard-validation contract requalification
 
 Clean CLI `origin/main` `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the

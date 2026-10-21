@@ -1,5 +1,35 @@
 # Verglos V1 traceability
 
+## QUAL-CLI-006 current-head archive/provenance qualification · 2026-10-21
+
+- **Source mapping:** Clean detached CLI merge
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`.
+- **Artifact mapping:** Build **8/8**, typecheck **14/14**, seven public
+  `2.0.0-alpha.1` archives, and official in-toto 3.0.0 exact-product
+  verification **7/7**.
+- **Transition mapping:** Clean consumer and signed bounded A1 execution
+  passed; upgrade/rollback passed `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`.
+- **Acceptance mapping:** Ephemeral local provenance keys do not establish
+  hosted matrix, trusted keyless identity, protected publication, legal,
+  independent-review, customer, or final acceptance. Keep QUAL-CLI-006 open;
+  score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
+## QUAL-CLI-006 official SPDX validator qualification · 2026-10-21
+
+- **Source mapping:** Clean detached CLI `origin/main`
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f` and the same disposable
+  artifact-root fixture.
+- **Tool mapping:** Temporary Temurin OpenJDK JRE **17.0.20.1** plus the
+  workflow-pinned SPDX Tools 2.0.7 JAR passed the repository SHA-256 pin.
+- **Qualification mapping:** Strict standard validation passed **4/4**, exit
+  **0**, covering SARIF, CycloneDX, SPDX, and offline Cosign verification.
+- **Acceptance mapping:** This proves local official-validator integration,
+  not release trust. Keep QUAL-CLI-006 unchecked for keyless identity,
+  protected publication, legal clearance, independent review, hosted/customer
+  evidence, and final acceptance; score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## QUAL-CLI-006 standard-validation contract requalification · 2026-10-21
 
 - **Source mapping:** Clean detached CLI `origin/main`

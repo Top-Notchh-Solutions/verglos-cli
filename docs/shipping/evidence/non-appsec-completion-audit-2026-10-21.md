@@ -1,5 +1,26 @@
 # Verglos V1 non-AppSec completion audit — 2026-10-21
 
+## Current qualification addendum · QUAL-CLI-006 current-head archive/provenance run · 2026-10-21
+
+Clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` was freshly built
+and packaged. Build **8/8**, typecheck **14/14**, official in-toto 3.0.0
+verification **7/7**, clean consumer, and upgrade/rollback all passed. This is
+local current-head evidence with ephemeral keys; hosted exact-head matrix,
+trusted identity, protected publication, legal, independent-review, customer,
+and final acceptance artifacts remain open. `QUAL-CLI-006` remains unchecked.
+Evidence: `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
+## Current qualification addendum · QUAL-CLI-006 complete local validator run · 2026-10-21
+
+The disposable artifact-root run for clean CLI merge
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f` was rerun with temporary Temurin
+OpenJDK JRE 17.0.20.1 and the workflow-pinned SPDX Tools 2.0.7 JAR. Strict
+validation passed **4/4**, exit **0**, covering SARIF, CycloneDX, SPDX, and
+offline Cosign. The root and signing key were disposable; no keyless release
+identity, publication, legal, customer, or independent-review evidence was
+created. `QUAL-CLI-006` remains open for those release and acceptance gates.
+Evidence: `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## Current qualification addendum · QUAL-CLI-006 artifact-root run · 2026-10-21
 
 The clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` was exercised

@@ -1,5 +1,31 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · QUAL-CLI-006 current-head archive/provenance gate
+
+Clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed build **8/8**,
+typecheck **14/14**, official in-toto 3.0.0 exact-product verification **7/7**,
+clean-consumer installation, and upgrade/rollback `1.8.3 -> 2.0.0-alpha.1 ->
+1.8.3`. The in-toto keys were ephemeral and the run was local.
+
+Keep QUAL-CLI-006 unchecked for hosted exact-head matrix evidence, trusted
+keyless identity, protected publication, legal clearance, independent review,
+customer evidence, and final acceptance. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
+## 2026-10-21 · QUAL-CLI-006 complete local official-validator gate
+
+The disposable artifact-root run was rerun with temporary Temurin OpenJDK JRE
+17.0.20.1 and the workflow-pinned SPDX Tools 2.0.7 JAR. Strict validation
+passed **4/4** with exit **0** for SARIF, CycloneDX, SPDX, and offline Cosign.
+This closes the local tool-integration slice only. The artifact root and key
+were disposable, so no keyless release identity or publication was established.
+
+Keep QUAL-CLI-006 unchecked for trusted keyless identity, protected publication,
+legal clearance, independent review, hosted/customer evidence, and final
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## 2026-10-21 · QUAL-CLI-006 standard-validation contract gate
 
 The clean CLI merged head `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed

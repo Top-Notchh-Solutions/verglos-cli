@@ -1,5 +1,30 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-21 · QUAL-CLI-006 current-head archive/provenance qualification
+
+Clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` was freshly built
+and packaged. Build **8/8**, typecheck **14/14**, official in-toto 3.0.0
+verification **7/7**, clean-consumer installation, and upgrade/rollback
+`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` passed. This is local evidence with
+ephemeral provenance keys; hosted exact-head matrix, trusted keyless identity,
+protected publication, legal, independent review, customer evidence, and final
+acceptance remain open. No checkbox changed; score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
+## 2026-10-21 · QUAL-CLI-006 local official-validator qualification
+
+The clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` was rerun
+against the disposable standard-validation artifact root with temporary
+Temurin OpenJDK JRE 17.0.20.1 and the workflow-pinned SPDX Tools 2.0.7 JAR.
+Strict validation passed **4/4**, exit **0**, for SARIF, CycloneDX, SPDX, and
+offline Cosign. The local tool-integration slice is complete, but the row
+remains unchecked for trusted keyless release identity, protected publication,
+legal clearance, independent review, hosted/customer evidence, and final
+acceptance. No checkbox changed; the live score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 latest Sigstore remediation check
 
 A disposable exact-`sigstore@5.0.0` experiment against CLI merge
