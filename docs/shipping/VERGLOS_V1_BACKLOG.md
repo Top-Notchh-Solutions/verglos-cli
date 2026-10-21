@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-21 · FINAL-WEB-007 six-path audit and source remediation
+
+The read-only six-path production browser audit found concrete deployed public
+surface issues on `/docs`, `/proof`, `/verify`, and `/checkout`. Web commit
+`70f69de` repairs the source contracts for accessible table headers, contrast,
+checkout metadata/noindex, and interaction-deferred Razorpay loading, with a
+focused regression test. Current-source qualification passed truth-registry
+**35/35**, landing **4/4**, public-release-smoke **2/2**, actual smoke **16
+routes / 22/22 claims / 2 assets / 0 issues**, typecheck, and diff check. The
+build was not accepted because Next encountered pre-existing unresolved merge
+markers in the unrelated dirty parent `package.json`.
+
+Do not check FINAL-WEB-007: no deployment was initiated; exact Preview,
+deployed requalification, actual INP/field-CWV, human/supported-environment,
+and final acceptance evidence remain open. Keep FINAL-WEB-008 open for its
+dependent release gates. No checkbox changed; score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007/008 current-source qualification
 
 The clean Web source `a3819c1` passed truth-registry **34/34**, landing-release

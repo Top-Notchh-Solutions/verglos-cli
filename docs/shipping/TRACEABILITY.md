@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007 six-path audit and source remediation · 2026-10-21
+
+- **Runtime mapping:** The existing Chrome tab audited public Production
+  read-only across `/`, `/docs`, `/detectors`, `/proof`, `/verify`, and
+  `/checkout` at desktop/mobile throttled conditions. The exact protected
+  Preview redirected to Vercel login and was not bypassed.
+- **Source mapping:** Web commit `70f69de` repairs table semantics, proof
+  contrast, checkout metadata/noindex, and eager provider loading, with a
+  regression contract in `src/app/docs/truth-contract.test.ts`.
+- **Qualification mapping:** Truth-registry **35/35**, landing **4/4**,
+  public smoke contract **2/2**, actual smoke **16 routes / 22/22 claims / 2
+  assets / 0 issues**, typecheck, and diff check passed. The build was blocked
+  by unresolved merge markers in the unrelated dirty parent `package.json`.
+- **Acceptance mapping:** Source fixes are not a Production deployment. Keep
+  FINAL-WEB-007 unchecked for deployed requalification, actual INP/field-CWV,
+  human/supported-environment evidence, and final acceptance; keep
+  FINAL-WEB-008 unchecked for its dependent release gates. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
+
 ## FINAL-WEB-007/008 current-source qualification · 2026-10-21
 
 - **Source mapping:** Web clean worktree at `a3819c1`.

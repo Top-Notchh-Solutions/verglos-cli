@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain FINAL-WEB-007/008 after six-path audit and source remediation
+
+- **Observed:** Production browser auditing found real public-surface defects
+  on `/docs`, `/proof`, `/verify`, and `/checkout`; the exact details and
+  route metrics are private evidence, not a source-only pass claim.
+- **Implemented:** Web commit `70f69de` repairs the table header contract,
+  proof contrast, checkout metadata/noindex, and interaction-deferred hosted
+  provider loading, with focused regression coverage. Current-source tests,
+  smoke, typecheck, and diff checks pass.
+- **Decision:** Do not check FINAL-WEB-007 or FINAL-WEB-008. No deployment was
+  authorized or performed, the exact Preview remains protected, INP/CrUX and
+  human/field evidence are absent, and final acceptance/release gates remain
+  outstanding. The intentional `/checkout` robots boundary is preserved.
+- **Score:** **239 checked / 41 open / 280 total (85.4%)**; no checkbox changed.
+- **Evidence:**
+  `evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
+
 ## 2026-10-21 · retain FINAL-WEB-007/008 after current-source qualification
 
 - **Decision:** Accept the current Web source qualification as substantive

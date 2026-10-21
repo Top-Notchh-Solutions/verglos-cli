@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · FINAL-WEB-007 six-path audit and source remediation
+
+- **Production observation:** Existing Chrome tab, public production, read-only
+  six-path audit (`/`, `/docs`, `/detectors`, `/proof`, `/verify`, and
+  `/checkout`) at desktop/mobile Fast 4G and 4× CPU. The audit recorded route
+  metrics and concrete Lighthouse failures without production writes.
+- **Source implementation:** Web commit `70f69de` adds explicit docs table
+  headers/caption, raises the proof Boundary contrast, adds checkout
+  metadata/canonical/noindex, and defers the hosted Razorpay script until
+  explicit payment interaction. A focused truth-contract regression test
+  covers these boundaries.
+- **Qualification:** Truth-registry **35/35**, landing-release **4/4**,
+  public-release-smoke **2/2**, actual public smoke **16 routes / 22/22 claims
+  / 2 proof assets / 0 issues**, typecheck, and diff check passed. Build was
+  not accepted because Next inferred the dirty parent checkout and encountered
+  its pre-existing unresolved `package.json` merge markers.
+- **Acceptance mapping:** No deployment or production mutation occurred.
+  Keep FINAL-WEB-007 open for deployed exact-head requalification, actual
+  INP/field-CWV, human screen-reader/keyboard, supported environment, and
+  final acceptance evidence; keep FINAL-WEB-008 open for its release gates.
+  Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007/008 current-source qualification
 
 - **Source:** Clean Web worktree at `a3819c1`; Node `v26.4.0`, pnpm

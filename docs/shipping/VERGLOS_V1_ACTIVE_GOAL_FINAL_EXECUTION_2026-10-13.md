@@ -115,6 +115,22 @@ FINAL-WEB-007 remains open for the six-path capture, human/field evidence,
 and final acceptance. Evidence:
 `docs/shipping/evidence/final-web-007-production-browser-audit-2026-10-21.md`.
 
+**Six-path audit and source remediation result (2026-10-21):** The same
+read-only browser procedure covered `/`, `/docs`, `/detectors`, `/proof`,
+`/verify`, and `/checkout` at desktop/mobile throttled conditions and found
+concrete deployed audit failures: table headers, proof contrast, verify
+metadata drift, and checkout metadata/provider-loading issues. Web commit
+`70f69de` repairs the source contracts and adds regression coverage. Current
+source qualification passed truth-registry **35/35**, landing **4/4**, public
+smoke **2/2**, actual smoke **16 routes / 22/22 claims / 2 assets / 0 issues**,
+typecheck, and diff check. The source build was not accepted because Next
+encountered pre-existing unresolved merge markers in the unrelated dirty
+parent `package.json`. No deployment or Production mutation occurred; the
+exact Preview remains protected, INP/CrUX and human/field evidence remain
+absent, and FINAL-WEB-007/008 stay open. No checkbox changed; score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

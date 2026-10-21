@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · FINAL-WEB-007 six-path source-remediation gate
+
+Production six-path browser auditing found concrete deployed failures, and Web
+commit `70f69de` repairs the source-level table, contrast, checkout metadata,
+and deferred-provider contracts. Current-source checks pass truth-registry
+**35/35**, landing **4/4**, public smoke **2/2**, actual smoke **16 routes /
+22/22 claims / 2 assets / 0 issues**, typecheck, and diff check. The exact
+Preview was protected and no deployment was initiated.
+
+Keep FINAL-WEB-007 unchecked for deployed requalification, actual INP/field
+CWV, human/supported-environment evidence, and final acceptance. Keep
+FINAL-WEB-008 unchecked for its dependent release gates. The intentional
+checkout noindex boundary remains. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
+
 ## 2026-10-21 · FINAL-WEB-007/008 current-source gate
 
 The current Web source `a3819c1` passed truth-registry **34/34**, landing

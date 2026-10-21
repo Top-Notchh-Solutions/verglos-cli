@@ -1,5 +1,26 @@
 # Verglos V1 non-AppSec completion audit — 2026-10-21
 
+## Continuation addendum · FINAL-WEB-007/008 · 2026-10-21
+
+The current continuation audited six public Production paths in the existing
+Chrome tab at desktop/mobile throttled conditions. It found concrete deployed
+failures on `/docs` (table headers), `/proof` (contrast), `/verify` (metadata
+drift), and `/checkout` (metadata and eager hosted-provider loading, plus the
+intentional noindex boundary). Web commit `70f69de` repairs the source
+contracts and adds regression coverage. Current-source qualification passed
+truth-registry **35/35**, landing **4/4**, public-release-smoke **2/2**, actual
+smoke **16 routes / 22/22 claims / 2 assets / 0 issues**, typecheck, and diff
+check. The build was not accepted because Next inferred the dirty parent
+checkout and encountered pre-existing unresolved merge markers in its
+unrelated `package.json`.
+
+No deployment, Production, provider, customer, legal, or AppSec state changed.
+The exact Preview redirected to Vercel login and was not bypassed; INP/CrUX,
+human/field, supported-environment, and final acceptance evidence remain
+open. No checkbox changed; score remains **239 checked / 41 open / 280 total
+(85.4%)**. See
+`evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
+
 ## Continuation addendum · 2026-10-21
 
 After this audit, owner authorization was used for a bounded Preview-only
