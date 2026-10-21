@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · FINAL-WEB-007 local current-source browser gate
+
+Clean Web commit `70f69de` was served locally and rechecked across all six
+public paths at desktop/mobile Fast 4G and 4× CPU. CLS was **0.00** on every
+route; desktop LCP was **428–657 ms** and mobile LCP **623–1002 ms**. Direct
+browser checks verified the repaired table semantics, proof contrast class,
+route metadata/canonicals, checkout noindex boundary, and zero
+pre-interaction Razorpay scripts. No console errors or warnings appeared.
+
+Keep FINAL-WEB-007 unchecked: this is not deployed exact-head evidence and
+does not provide INP/field-CWV, human/supported-environment, or final
+acceptance evidence. No checkbox changed; score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 latest dependency-remediation gate
 
 The disposable Sigstore 5 experiment passed the workspace build **8/8** and

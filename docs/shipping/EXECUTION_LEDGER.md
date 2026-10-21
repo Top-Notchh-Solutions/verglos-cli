@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · FINAL-WEB-007 local current-source browser qualification
+
+- **Source/runtime:** Clean Web commit `70f69de`, served locally at
+  `127.0.0.1:3010`; existing Chrome DevTools page 3 only, with no new tab,
+  Production write, provider action, payment interaction, or Preview bypass.
+- **Browser qualification:** Six paths (`/`, `/docs`, `/detectors`, `/proof`,
+  `/verify`, `/checkout`) were cold-traced at desktop `1440x900` and mobile
+  `390x844` under Fast 4G and 4× CPU. CLS was **0.00** on every route;
+  desktop LCP was **428–657 ms** and mobile LCP was **623–1002 ms**.
+- **Contract checks:** Direct DOM checks found route title/description/
+  canonical/heading metadata, scoped `/docs` headers, the repaired `/proof`
+  Boundary class, intentional checkout `noindex, nofollow`, and zero
+  pre-interaction Razorpay scripts. No console errors or warnings were found.
+- **Disposition:** This advances current-source browser evidence only. Keep
+  FINAL-WEB-007 open for deployed exact-head requalification, actual INP/field
+  CWV, human/supported-environment evidence, and final acceptance. No checkbox
+  changed; score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 latest Sigstore remediation check
 
 - **Experiment:** Disposable detached CLI worktree at merged source

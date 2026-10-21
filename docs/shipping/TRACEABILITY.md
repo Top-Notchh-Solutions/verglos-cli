@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007 local current-source browser qualification · 2026-10-21
+
+- **Source/runtime mapping:** Clean Web commit `70f69de` was served locally
+  and tested through the existing Chrome DevTools page across the six public
+  paths at desktop/mobile throttled conditions.
+- **Performance mapping:** Chrome traces measured CLS **0.00** on all routes;
+  desktop LCP **428–657 ms** and mobile LCP **623–1002 ms**. No console errors
+  or warnings were observed.
+- **Contract mapping:** Direct DOM inspection verified route metadata and
+  canonicals, scoped docs table headers, proof Boundary contrast class, and
+  checkout noindex/deferred provider behavior.
+- **Acceptance mapping:** This is local source evidence only. Keep
+  FINAL-WEB-007 unchecked for deployed exact-head requalification, actual
+  INP/field-CWV, human/supported-environment evidence, and final acceptance;
+  score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
+
 ## DIST-002 latest Sigstore remediation check · 2026-10-21
 
 - **Source mapping:** Disposable detached experiment from CLI merge

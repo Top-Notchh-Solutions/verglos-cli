@@ -142,6 +142,21 @@ checkbox changed; score remains **239 checked / 41 open / 280 total (85.4%)**.
 Evidence:
 `docs/shipping/evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
 
+**Current-source browser qualification result (2026-10-21):** The clean Web
+commit `70f69de` was served locally and rechecked in the existing Chrome page
+across the same six routes at desktop `1440x900` and mobile `390x844`, Fast 4G,
+and 4× CPU. Chrome performance traces recorded **CLS 0.00** on every route;
+desktop LCP was **428–657 ms** and mobile LCP was **623–1002 ms**. Direct DOM
+checks confirmed titles/descriptions/canonicals, the scoped `/docs` table
+headers, the strengthened `/proof` Boundary class, and `/checkout`'s
+intentional `noindex, nofollow` plus zero pre-interaction Razorpay scripts.
+All six paths had no console errors or warnings. This advances current-source
+browser evidence only: no deployment or Production mutation occurred, and the
+Lighthouse wrapper's contradictory local metadata warning is retained for
+recheck rather than treated as a defect. No checkbox changed; score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

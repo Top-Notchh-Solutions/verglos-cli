@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · FINAL-WEB-007 local current-source browser qualification
+
+Clean Web commit `70f69de` was served locally and checked in the existing Chrome
+page across `/`, `/docs`, `/detectors`, `/proof`, `/verify`, and `/checkout` at
+desktop/mobile Fast 4G and 4× CPU. Performance traces recorded CLS **0.00** on
+all routes, with desktop LCP **428–657 ms** and mobile LCP **623–1002 ms**.
+Direct DOM checks confirmed route metadata/canonicals, the repaired docs table
+headers, proof Boundary contrast class, checkout noindex boundary, and no
+pre-interaction Razorpay script. No console errors or warnings appeared. This
+is current-source evidence only; no deployment or Production mutation occurred.
+No checkbox changed; score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 latest Sigstore remediation check
 
 A disposable exact-`sigstore@5.0.0` CLI experiment was built against CLI
