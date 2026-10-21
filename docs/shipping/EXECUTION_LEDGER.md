@@ -1,5 +1,15 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · non-AppSec completion audit
+
+The live checklist was re-read and recomputed at **239 checked / 41 open /
+280 total (85.4%)**. The private audit classifies every open row and the seven
+unchecked founder/external gates without changing checkbox state. `STUDIO-CLI-001`
+remains the first non-AppSec row with a missing numeric hosted allowance and
+authorized recipient/customer observation; `HUNT-008` remains the next
+file-order row and the independent-review hold root. Evidence:
+`evidence/non-appsec-completion-audit-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 clean-head qualification
 
 - **Source:** Web commit `62a54b52043143758fe01c6d5854c5204c17c549` in a

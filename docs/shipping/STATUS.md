@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · non-AppSec completion boundary audit
+
+The live private checklist remains **239 checked / 41 open / 280 total
+(85.4%)**. All 41 open checklist entries and seven unchecked founder/external
+gates were classified against their current acceptance contracts. No row was
+checked: the first non-AppSec row, `STUDIO-CLI-001`, still lacks an approved
+numeric hosted allowance and authorized recipient/customer observation, while
+later rows retain their own provider, legal, customer, field, acceptance, or
+independent-review requirements. Evidence:
+`evidence/non-appsec-completion-audit-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 clean-head qualification
 
 The current Web Studio custody and recipient implementation was requalified

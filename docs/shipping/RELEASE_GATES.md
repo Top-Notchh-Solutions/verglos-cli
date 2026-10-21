@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · non-AppSec completion boundary audit
+
+The checklist remains **239 checked / 41 open / 280 total (85.4%)**. The
+remaining rows are classified by their actual acceptance contracts; no
+implementation-only result, owner assertion, synthetic fixture, or local
+qualification is promoted to a release gate. The next file-order row is
+`HUNT-008`; the next non-AppSec row is `STUDIO-CLI-001`, still missing its
+numeric non-production allowance and authorized hosted recipient/customer
+evidence. Evidence: `evidence/non-appsec-completion-audit-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 clean-head qualification
 
 The exact Web commit `62a54b52043143758fe01c6d5854c5204c17c549` passed the

@@ -1,5 +1,13 @@
 # Verglos V1 traceability
 
+## Non-AppSec completion audit · 2026-10-21
+
+The current backlog recount is **239 checked / 41 open / 280 total (85.4%)**.
+The audit maps each open row to its exact missing external, dependency, or
+independent-review artifact and confirms that existing implementation evidence
+has not been promoted to acceptance. No checkbox changed. Evidence:
+`evidence/non-appsec-completion-audit-2026-10-21.md`.
+
 ## STUDIO-CLI-001 clean-head qualification · 2026-10-21
 
 - **Source mapping:** Web commit `62a54b52043143758fe01c6d5854c5204c17c549`

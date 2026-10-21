@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain all remaining open rows after completion audit
+
+- **Decision:** Do not check any remaining row based on local, synthetic,
+  Preview, or implementation-only evidence.
+- **Observed:** The live checklist is **239/41/280 (85.4%)**. Studio lacks an
+  approved numeric hosted allowance and recipient/customer observation; later
+  rows retain their stated provider, legal, customer, field, acceptance, and
+  independent-review gates.
+- **Disposition:** Preserve the explicit Hunt/AppSec hold roots and continue
+  to the next eligible external artifact when it becomes available. No
+  production, provider, payment, customer, legal, registry, deployment, or
+  AppSec state changed. Evidence:
+  `evidence/non-appsec-completion-audit-2026-10-21.md`.
+
 ## 2026-10-21 · retain STUDIO-CLI-001 after clean-head qualification
 
 - **Decision:** Accept the clean-head Web qualification as substantive
