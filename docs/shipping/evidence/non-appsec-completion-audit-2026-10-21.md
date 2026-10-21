@@ -10,7 +10,7 @@ artifact or independent-review condition that would permit a checkbox.
 The audit was based on private shipping head `cd683b4c`, after the Studio
 qualification and canonical score-reference reconciliation. Product source
 repositories were not modified by this audit; this packet and its ledger
-reconciliation are the only changes in this batch.
+reconciliation are the only private-tracker changes in this batch.
 
 ## AppSec hold roots
 
@@ -37,6 +37,10 @@ Hunt packets; they are not an independent review result.
   evidence. The catalog intentionally keeps Studio inactive; no Preview
   override or Production mutation is authorized. Evidence:
   `evidence/studio-cli-001-clean-head-qualification-2026-10-21.md`.
+  A live Preview catalog recheck independently confirms the fixture is
+  `free`, Studio is inactive/non-purchasable despite its catalog value of
+  `2000`, and Enterprise is contracted. Evidence:
+  `evidence/studio-cli-001-preview-catalog-recheck-2026-10-21.md`.
 - `ENT-CLI-001`: current implementation, hosted lifecycle, and cross-platform
   transport evidence exist. The current row still requires an exact-head
   deployed credential/execution/reconciliation observation, authorized

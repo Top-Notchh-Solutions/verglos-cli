@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · STUDIO-CLI-001 live Preview catalog gate
+
+The current READY Preview catalog still resolves the fixture to free. Pro is
+the only active purchasable numeric tier and lacks `white_label_report`; Studio
+is inactive/non-purchasable with a catalog value of 2000, while Enterprise is
+contracted. Keep `STUDIO-CLI-001` unchecked pending an approved numeric
+non-production entitlement and hosted recipient/customer acknowledgement.
+Evidence: `evidence/studio-cli-001-preview-catalog-recheck-2026-10-21.md`.
+
 ## 2026-10-21 · non-AppSec completion boundary audit
 
 The checklist remains **239 checked / 41 open / 280 total (85.4%)**. The

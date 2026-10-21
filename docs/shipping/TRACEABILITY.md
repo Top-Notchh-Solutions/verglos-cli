@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 live Preview catalog recheck · 2026-10-21
+
+- **Runtime mapping:** READY Preview returned the free fixture and the
+  canonical catalog states: Pro active/numeric but without
+  `white_label_report`; Studio inactive/non-purchasable with 2000 in the
+  inactive catalog row; Enterprise contracted.
+- **Acceptance mapping:** No supported numeric Studio entitlement or hosted
+  recipient/customer acceptance exists. The row remains unchecked. Evidence:
+  `evidence/studio-cli-001-preview-catalog-recheck-2026-10-21.md`.
+
 ## Non-AppSec completion audit · 2026-10-21
 
 The current backlog recount is **239 checked / 41 open / 280 total (85.4%)**.

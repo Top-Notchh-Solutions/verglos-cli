@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · STUDIO-CLI-001 live Preview catalog recheck
+
+The current READY Preview deployment returned the free fixture with
+`simulated=false`. Pro is active and numeric at 100 records/month but lacks
+`white_label_report`; Studio is inactive/non-purchasable despite its 2000
+catalog value; Enterprise is contracted. `STUDIO-CLI-001` remains open for an
+approved numeric non-production entitlement and hosted recipient/customer
+acknowledgement. Evidence:
+`evidence/studio-cli-001-preview-catalog-recheck-2026-10-21.md`.
+
 ## 2026-10-21 · non-AppSec completion boundary audit
 
 The live private checklist remains **239 checked / 41 open / 280 total

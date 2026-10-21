@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain STUDIO-CLI-001 after live Preview catalog recheck
+
+- **Decision:** Keep `STUDIO-CLI-001` open; do not activate or override the
+  inactive Studio catalog solely to manufacture qualification.
+- **Observed:** The current READY Preview fixture is free. Pro is active with
+  a numeric 100-record allowance but does not provide client custody; Studio
+  is inactive/non-purchasable; Enterprise exposes contracted, not numeric,
+  capacity.
+- **Disposition:** Require an approved isolated entitlement fixture or
+  supported payment/migration qualification before attempting hosted receipt
+  and recipient acknowledgement. Evidence:
+  `evidence/studio-cli-001-preview-catalog-recheck-2026-10-21.md`.
+
 ## 2026-10-21 · retain all remaining open rows after completion audit
 
 - **Decision:** Do not check any remaining row based on local, synthetic,

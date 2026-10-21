@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · STUDIO-CLI-001 live Preview catalog recheck
+
+- **Observation:** The READY Preview deployment `dpl_GGagEm4UQ56vYNEua74ButkaP1eh`
+  returned `plan=free`, `real_plan=free`, and `simulated=false`. Pro is active
+  with 100 records/month but lacks `white_label_report`; Studio is inactive and
+  non-purchasable despite its 2000-record catalog value; Enterprise is
+  contracted rather than numeric.
+- **Disposition:** This strengthens the missing numeric Studio entitlement
+  artifact but does not close `STUDIO-CLI-001`. The read-only Vercel check made
+  no deployment, environment, billing, database, customer, recipient,
+  Production, or AppSec change. Evidence:
+  `evidence/studio-cli-001-preview-catalog-recheck-2026-10-21.md`.
+
 ## 2026-10-21 · non-AppSec completion audit
 
 The live checklist was re-read and recomputed at **239 checked / 41 open /
