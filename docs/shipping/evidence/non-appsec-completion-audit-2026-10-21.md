@@ -13,6 +13,20 @@ but does not replace independent customer/recipient acceptance. The score is
 still **239 checked / 41 open / 280 total (85.4%)**; the row remains open.
 See `evidence/studio-cli-001-preview-studio-fixture-2026-10-21.md`.
 
+## Continuation addendum · ENT-CLI-001 · 2026-10-21
+
+The next dependency-ready non-AppSec batch qualified the current Web source
+`a3819c1` in clean Ready Preview deployment
+`dpl_ETFtQmHWA9m5EL77n4rDBX254icz` with **49/49** static pages. An
+owner-controlled synthetic runner completed enrollment, one-time redemption,
+activation, bounded tenant/runner/target-bound job delivery, source-free result
+upload, exact replay idempotency, malformed-result refusal, cross-tenant
+refusal, and final empty poll. This closes the audit's previously missing
+exact-head deployed lifecycle observation, but not authorized enterprise
+acceptance, complete cross-platform operational acceptance, or independent
+runner/Hunt review. The score remains **239 checked / 41 open / 280 total
+(85.4%)**. See `evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`.
+
 ## Result
 
 The live private backlog contains **239 checked / 41 open / 280 total
@@ -54,12 +68,14 @@ Hunt packets; they are not an independent review result.
   `free`, Studio is inactive/non-purchasable despite its catalog value of
   `2000`, and Enterprise is contracted. Evidence:
   `evidence/studio-cli-001-preview-catalog-recheck-2026-10-21.md`.
-- `ENT-CLI-001`: current implementation, hosted lifecycle, and cross-platform
-  transport evidence exist. The current row still requires an exact-head
-  deployed credential/execution/reconciliation observation, authorized
-  enterprise acceptance, and the independent runner/Hunt review. Evidence:
+- `ENT-CLI-001`: current implementation, cross-platform transport evidence,
+  and the exact-head deployed Preview lifecycle now exist. The row still
+  requires authorized enterprise acceptance, complete cross-platform
+  operational acceptance as a release gate, and the independent runner/Hunt
+  review. Evidence:
   `evidence/ent-cli-001-current-merge-requalification-2026-10-18.md`,
-  `evidence/ent-cli-001-hosted-runner-qualification-2026-10-18.md`, and
+  `evidence/ent-cli-001-hosted-runner-qualification-2026-10-18.md`,
+  `evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`, and
   `evidence/ent-cli-001-cross-platform-qualification-2026-10-19.md`.
 - `DIST-001`, `DIST-002`, `DIST-003`, and `DIST-006`: package implementation
   and dry-run/rehearsal evidence exist, but LOCAL/HUNT/RECORD dependencies,
@@ -106,9 +122,10 @@ pushes, and Production migrations.
 ## Disposition and next action
 
 No satisfiable non-AppSec checkbox is silently treated as complete. The next
-file-order item is `HUNT-008`; the next non-AppSec product row is
-`STUDIO-CLI-001`, whose exact missing artifact is the approved numeric
-non-production allowance plus authorized hosted recipient/customer evidence.
-The next AppSec action is an independent review of the exact Hunt/runner
-source and isolation packet. No provider, customer, legal, payment,
-Production, registry, deployment, or AppSec state changed.
+file-order item is `HUNT-008`; the next non-AppSec product row after the now
+qualified ENT batch is `DIST-001`, whose package implementation exists but
+still needs its LOCAL/HUNT/RECORD dependencies, protected trusted publication,
+legal/license clearance, and final release acceptance. The next AppSec action
+is an independent review of the exact Hunt/runner source and isolation packet.
+No provider, customer, legal, payment, Production, registry, deployment, or
+AppSec state changed.
