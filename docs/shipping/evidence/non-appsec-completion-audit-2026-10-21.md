@@ -31,8 +31,8 @@ No checkbox changed. The live score remains **239 checked / 41 open / 280 total
 (85.4%)**. The next file-order item remains `HUNT-008`; its exact independent
 review dependency is unchanged, and the next non-AppSec product rows remain
 blocked by their recorded customer, legal, provider, publication, human/field,
-or final-acceptance artifacts. The private tracker reconciliation is now
-`1db6f7fb`. Evidence:
+or final-acceptance artifacts. This addendum is reconciled in the current
+private shipping head. Evidence:
 `evidence/final-web-007-local-source-browser-qualification-2026-10-21.md` and
 the current ledger/decision entries.
 
