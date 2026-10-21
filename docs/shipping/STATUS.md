@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · DIST-002 release-environment state recheck
+
+A read-only GitHub API check confirms the `release` environment has a required
+reviewer protection rule for `anuragyadav-git` and a branch-policy rule. This
+proves configuration only; it does not prove reviewer approval, trusted npm
+publisher enrollment, or immutable publication. The latest listed Publish
+runs are historical August 2026 runs, and no workflow or registry action was
+triggered. `DIST-002` remains open; score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 current origin/main release-contract qualification
 
 The current merged CLI source `72190acae81b454a4a88a0ea8d222c8981ac9a3f`

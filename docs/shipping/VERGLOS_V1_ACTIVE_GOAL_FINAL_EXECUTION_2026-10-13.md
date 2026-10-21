@@ -84,6 +84,15 @@ provider, customer, legal, or AppSec state changed. The score remains **239
 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
 
+**Current external-state result (2026-10-21):** A read-only GitHub check
+confirmed the protected `release` environment has a required reviewer rule for
+`anuragyadav-git` and a branch-policy rule. This is configuration evidence
+only; no reviewer approval, trusted npm publisher enrollment, immutable
+publication, workflow run, or registry mutation was inferred or initiated.
+`DIST-002` remains unchecked and the score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

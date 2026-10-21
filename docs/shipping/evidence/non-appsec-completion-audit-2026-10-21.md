@@ -60,10 +60,11 @@ The live private backlog contains **239 checked / 41 open / 280 total
 first unchecked row and separates implementation evidence from the external
 artifact or independent-review condition that would permit a checkbox.
 
-The audit was based on private shipping head `cd683b4c`, after the Studio
-qualification and canonical score-reference reconciliation. Product source
-repositories were not modified by this audit; this packet and its ledger
-reconciliation are the only private-tracker changes in this batch.
+The original audit was based on private shipping head `cd683b4c`; its current
+continuation reconciliation is now at private shipping head `b146a1a1` after
+the Studio, ENT, DIST-001, and DIST-002 qualification packets. Product source
+repositories were not modified by this audit; the packets and their ledger
+reconciliations are private-tracker changes only.
 
 ## AppSec hold roots
 

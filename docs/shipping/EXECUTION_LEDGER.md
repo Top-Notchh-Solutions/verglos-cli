@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · DIST-002 release-environment state recheck
+
+- **Read-only observation:** GitHub `release` environment configuration has a
+  required reviewer rule for `anuragyadav-git` and a branch-policy rule; no
+  wait timer is configured.
+- **Boundary:** Configuration is not reviewer approval, trusted npm publisher
+  enrollment, or immutable publication. Historical Publish runs were listed,
+  but no current immutable-tag run was initiated or inferred.
+- **Disposition:** Keep `DIST-002` open. No workflow, environment, registry,
+  provider, customer, Production, legal, or AppSec state changed. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 current origin/main release-contract qualification
 
 - **Source:** CLI `origin/main`

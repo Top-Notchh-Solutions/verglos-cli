@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · DIST-002 release-environment state gate
+
+The read-only GitHub state confirms the `release` environment has a required
+reviewer rule for `anuragyadav-git` and a branch-policy rule. This is a
+protection configuration check only; it does not establish reviewer approval,
+trusted npm publisher enrollment, or immutable publication. No workflow or
+registry action was triggered.
+
+Keep `DIST-002` unchecked. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 current origin/main release-contract gate
 
 The current CLI source `origin/main`

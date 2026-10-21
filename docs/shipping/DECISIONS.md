@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain DIST-002 after release-environment state recheck
+
+- **Decision:** Treat the protected-environment configuration as supporting
+  evidence only; retain `DIST-002` unchecked.
+- **Observed:** GitHub reports required reviewer `anuragyadav-git` and a branch
+  policy on `release`; the latest listed Publish runs are historical and no
+  current immutable-tag run was started.
+- **Disposition:** Configuration does not establish approval, trusted npm
+  publisher enrollment, legal clearance, or attestation. No workflow,
+  registry, Production, provider, customer, legal, or AppSec state changed.
+  Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2026-10-21 · retain DIST-002 after current release-contract qualification
 
 - **Decision:** Accept the current merged-head release workflow contract as

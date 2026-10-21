@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## DIST-002 release-environment state recheck · 2026-10-21
+
+- **External mapping:** Read-only GitHub API observation found the protected
+  `release` environment with required reviewer `anuragyadav-git` and a branch
+  policy. No workflow or registry action was initiated.
+- **Acceptance mapping:** This proves protection configuration only, not
+  approval, trusted publisher enrollment, or immutable publication. The row
+  remains unchecked; score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## DIST-002 current origin/main release-contract qualification · 2026-10-21
 
 - **Source mapping:** CLI merged `origin/main`

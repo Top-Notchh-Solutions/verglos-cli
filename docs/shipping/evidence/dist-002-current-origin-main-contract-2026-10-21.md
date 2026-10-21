@@ -41,6 +41,19 @@ current inventory identifies:
 The strict release verifier must refuse this unresolved inventory; the entries
 are not silently waived or relabeled.
 
+## Read-only external configuration check
+
+Using the authenticated GitHub CLI, the repository's `release` environment was
+read without mutation. It currently has a required reviewer protection rule
+for `anuragyadav-git` and a branch-policy rule, with no wait timer. This proves
+the protection configuration exists; it does not prove reviewer approval,
+trusted npm publisher enrollment, or a successful current immutable release.
+
+The read-only Publish workflow history contained older manual/tag runs, with
+the latest listed runs created in August 2026; no current `origin/main`
+immutable-tag publication was initiated or inferred. No workflow, environment,
+registry, provider, customer, Production, or legal state was changed.
+
 ## Disposition
 
 `DIST-002` remains unchecked because DIST-001 is still open, the protected
