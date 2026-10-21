@@ -73,6 +73,17 @@ or AppSec state changed. The score remains **239 checked / 41 open / 280
 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-001-current-origin-main-qualification-2026-10-21.md`.
 
+**Next continuation result (2026-10-21):** `DIST-002` current release
+workflow contracts were requalified from CLI `origin/main`
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f`: workflow/artifact/tag/origin tests
+passed **10/10** with zero failures/skips. The strict license gate correctly
+exited **2** for seven unresolved review entries. The row remains unchecked
+for DIST-001, protected publisher/environment approval, legal/license
+clearance, and actual immutable publication/attestation. No npm, Production,
+provider, customer, legal, or AppSec state changed. The score remains **239
+checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

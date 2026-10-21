@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · DIST-002 current origin/main release-contract qualification
+
+The current merged CLI source `72190acae81b454a4a88a0ea8d222c8981ac9a3f`
+passed the release workflow/artifact/tag contract suite **10/10** with zero
+failures or skips. The suite covers OIDC provenance, protected environment,
+immutable tags, serialized publication, required sidecars/checksums,
+pre-publication verification, clean-consumer ordering, and rejection of
+manual, mutable-dist-tag, and long-lived-token bypasses.
+
+The strict license gate correctly exited **2** for **7** unresolved review
+entries: the `fast-uri` bundled `benchmark` conflict plus BlueOak review for
+`glob`, `lru-cache`, `minimatch`, `minipass`, `minipass-flush`, and
+`path-scurry`. `DIST-002` remains open for DIST-001, protected publisher/
+environment decisions, legal/license clearance, and immutable publication/
+attestation. No npm, Production, provider, customer, legal, or AppSec state
+changed. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-001 current origin/main package qualification
 
 The merged CLI source `72190acae81b454a4a88a0ea8d222c8981ac9a3f` was

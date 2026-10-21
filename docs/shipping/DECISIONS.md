@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain DIST-002 after current release-contract qualification
+
+- **Decision:** Accept the current merged-head release workflow contract as
+  substantive implementation evidence; retain `DIST-002` unchecked.
+- **Observed:** CLI `origin/main`
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the release
+  workflow/artifact/tag/origin suite **10/10**. The strict license gate
+  refused **7** unresolved review entries.
+- **Reason:** Contract tests cannot substitute for DIST-001 dependency,
+  protected publisher/environment approval, legal/license clearance, or actual
+  immutable publication/attestation.
+- **Disposition:** No checkbox changed; score remains **239/41/280 (85.4%)**.
+  No npm, Production, provider, customer, legal, or AppSec state changed.
+  Evidence: `evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2026-10-21 · retain DIST-001 after current origin/main package qualification
 
 - **Decision:** Accept the current merged-head package qualification as

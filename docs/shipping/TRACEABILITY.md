@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## DIST-002 current origin/main release-contract qualification · 2026-10-21
+
+- **Source mapping:** CLI merged `origin/main`
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f` from a clean detached worktree.
+- **Contract mapping:** Workflow checks preserve OIDC provenance, protected
+  release approval, immutable tag/version identity, serialized publication,
+  pre-publish artifact verification, required sidecars/checksums, and refusal
+  of manual/mutable-token bypasses.
+- **Verification mapping:** Release workflow/artifact/tag/origin tests passed
+  **10/10** with zero failures/skips. The strict license gate exited **2** for
+  seven explicit unresolved review entries.
+- **Acceptance mapping:** `DIST-002` remains unchecked for DIST-001,
+  protected publisher/environment approval, legal/license clearance, and an
+  actual immutable publication/attestation. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## DIST-001 current origin/main package qualification · 2026-10-21
 
 - **Source mapping:** CLI merged `origin/main`

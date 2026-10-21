@@ -41,6 +41,18 @@ final legal/release acceptance. The score remains **239 checked / 41 open /
 280 total (85.4%)**. See
 `evidence/dist-001-current-origin-main-qualification-2026-10-21.md`.
 
+## Continuation addendum · DIST-002 · 2026-10-21
+
+The current merged CLI source `origin/main`
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the release
+workflow/artifact/tag/origin contract suite **10/10** with zero failures or
+skips. The strict license gate exited **2** for seven explicit unresolved
+review entries. This advances the code-side release boundary, but DIST-002
+still requires DIST-001, protected publisher/environment approval,
+legal/license clearance, and an actual immutable publication/attestation. The
+score remains **239 checked / 41 open / 280 total (85.4%)**. See
+`evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## Result
 
 The live private backlog contains **239 checked / 41 open / 280 total
@@ -92,10 +104,11 @@ Hunt packets; they are not an independent review result.
   `evidence/ent-cli-001-hosted-runner-qualification-2026-10-21.md`, and
   `evidence/ent-cli-001-cross-platform-qualification-2026-10-19.md`.
 - `DIST-001`, `DIST-002`, `DIST-003`, and `DIST-006`: package implementation,
-  current-head DIST-001 qualification, and dry-run/rehearsal evidence exist,
-  but LOCAL/HUNT/RECORD dependencies, protected trusted publication,
+  current-head DIST-001/DIST-002 qualification, and dry-run/rehearsal evidence
+  exist, but LOCAL/HUNT/RECORD dependencies, protected trusted publication,
   legal/license clearance, immutable attestation, and authenticated
-  rollback/revocation acceptance remain open.
+  rollback/revocation acceptance remain open. The current strict license gate
+  explicitly refuses seven unresolved review entries.
 - `QUAL-CLI-006`: official validator and cross-platform package evidence
   exists, but trusted keyless release identity, protected publication,
   legal clearance, independent review, and final release acceptance remain

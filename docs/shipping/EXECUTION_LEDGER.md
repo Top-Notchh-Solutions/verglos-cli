@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · DIST-002 current origin/main release-contract qualification
+
+- **Source:** CLI `origin/main`
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`, checked from the clean detached
+  qualification worktree.
+- **Verification:** Release workflow/artifact/tag/origin contract suite
+  **10/10**, zero failures/skips. The contract covers OIDC, protected release
+  environment, immutable tag/version binding, serialized publication,
+  required sidecars/checksums, pre-publish verification, clean-consumer order,
+  and rejection of manual/mutable-token bypasses.
+- **Strict gate:** `node scripts/license-inventory.mjs --require-clear` exited
+  **2** for seven explicit unresolved review entries: the bundled
+  `benchmark@1.0.0`/`fast-uri@3.1.7` conflict and BlueOak review for six
+  packages. The refusal is preserved rather than waived.
+- **Acceptance mapping:** This is code-side release-contract evidence only.
+  Keep `DIST-002` unchecked for DIST-001, protected publisher/environment
+  approval, legal/license clearance, and immutable publication/attestation.
+  Score remains **239/41/280 (85.4%)**; no npm, Production, provider,
+  customer, legal, or AppSec state changed.
+- **Evidence:**
+  `docs/shipping/evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-001 current origin/main package qualification
 
 - **Source:** Clean detached CLI worktree at merged `origin/main`

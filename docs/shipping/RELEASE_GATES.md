@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · DIST-002 current origin/main release-contract gate
+
+The current CLI source `origin/main`
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the release
+workflow/artifact/tag/origin contract suite **10/10** with zero failures or
+skips. It preserves OIDC provenance, protected release approval, immutable
+tag/version binding, serialized publication, required sidecars/checksums, and
+pre-publication verification while refusing manual, mutable-dist-tag, and
+long-lived-token bypasses.
+
+Keep `DIST-002` unchecked. The strict license gate exits **2** for seven
+unresolved review entries, and DIST-001, protected publisher/environment
+approval, legal/license clearance, and actual immutable publication/
+attestation remain open. No npm, Production, provider, customer, legal, or
+AppSec state changed. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-001 current origin/main package gate
 
 CLI `origin/main` commit `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed
