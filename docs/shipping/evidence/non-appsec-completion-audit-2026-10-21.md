@@ -82,8 +82,9 @@ first unchecked row and separates implementation evidence from the external
 artifact or independent-review condition that would permit a checkbox.
 
 The original audit was based on private shipping head `cd683b4c`; its current
-continuation reconciliation is now at private shipping head `c36ea00a` after
-the Studio, ENT, DIST-001, and DIST-002 qualification packets. Product source
+continuation reconciliation is now at private shipping head `2824e7c0` after
+the Studio, ENT, DIST-001, DIST-002, and six-path Web qualification packets.
+Product source
 repositories were not modified by this audit; the packets and their ledger
 reconciliations are private-tracker changes only.
 
