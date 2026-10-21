@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain STUDIO-CLI-001 after clean-head qualification
+
+- **Decision:** Accept the clean-head Web qualification as substantive
+  implementation evidence; retain `STUDIO-CLI-001` unchecked.
+- **Observed:** Exact commit `62a54b52043143758fe01c6d5854c5204c17c549`
+  passed the focused Studio custody/handoff/entitlement suite **99/99**,
+  typecheck, isolated **49/49** page build, schema check, **43/43** ordered
+  migrations, and diff check.
+- **Reason:** Local qualification does not create the required numeric
+  paid/non-production hosted allowance or an authorized Studio
+  recipient/customer acknowledgement in the hosted audit path.
+- **Disposition:** No checkbox changed. Score remains **239/41/280 (85.4%)**.
+  The next action is an explicitly approved isolated entitlement fixture or
+  supported Preview payment/migration qualification, followed by the real
+  redacted handoff and authorized acknowledgement. Do not alter Production or
+  weaken the inactive Studio catalog guard. AppSec/Hunt remains unchanged.
+- **Evidence:** `evidence/studio-cli-001-clean-head-qualification-2026-10-21.md`.
+
 ## 2026-10-19 · retain DIST-001 after packed-files allowlist hardening
 
 - **Decision:** Accept CLI commits `48a2baa0` and `edfb5ec0` as substantive,

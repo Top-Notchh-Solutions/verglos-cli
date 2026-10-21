@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · STUDIO-CLI-001 clean-head qualification
+
+The current Web Studio custody and recipient implementation was requalified
+from exact commit `62a54b52043143758fe01c6d5854c5204c17c549` in an isolated
+clean worktree. Focused custody/handoff/entitlement tests passed **99/99**;
+typecheck, **49/49** page build, schema check, **43/43** migration ordering,
+and diff check passed.
+
+This is code-side evidence only. The row remains open for an approved numeric
+paid/non-production hosted-record allowance and authorized Studio
+recipient/customer acknowledgement with hosted/audit evidence. No Production,
+provider, payment, entitlement, customer, recipient, database, or AppSec state
+changed. Score remains **239 checked / 41 open / 280 total (85.4%)**; the
+AppSec/Hunt hold set remains explicit.
+
+Evidence: `evidence/studio-cli-001-clean-head-qualification-2026-10-21.md`.
+
 ## Overall continuation state · 2026-10-19
 
 ## 2026-10-19 · FINAL-WEB-007 existing-tab landing audit

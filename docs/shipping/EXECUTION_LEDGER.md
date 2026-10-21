@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · STUDIO-CLI-001 clean-head qualification
+
+- **Source:** Web commit `62a54b52043143758fe01c6d5854c5204c17c549` in a
+  detached clean worktree; no product files changed in this batch.
+- **Verification:** Locked install, focused Studio custody/handoff/entitlement
+  qualification **99/99**, typecheck, isolated Next build **49/49** pages,
+  Drizzle schema check, ordered migration check **43/43**, and diff check
+  passed. Node `v26.4.0` / pnpm `10.34.5` was used while the package declares
+  Node `22.x`.
+- **Acceptance mapping:** The run strengthens code-side evidence only. The
+  prior disposable PostgreSQL route evidence remains separate; this run does
+  not claim hosted acceptance. `STUDIO-CLI-001` stays unchecked for the
+  numeric paid/non-production allowance and authorized Studio
+  recipient/customer acknowledgement with hosted/audit evidence.
+- **Boundary:** No Production, provider, payment, entitlement, customer,
+  recipient, database, credential, source, or AppSec state changed. Score
+  remains **239/41/280 (85.4%)**; HUNT-008–011 and QUAL-CLI-004 remain the
+  independent-review hold set.
+- **Evidence:** `evidence/studio-cli-001-clean-head-qualification-2026-10-21.md`.
+
 ## 2026-10-19 · FINAL-WEB-007 existing-tab landing audit
 
 - **Observation:** The existing Chrome tab qualified `https://verglos.com/`

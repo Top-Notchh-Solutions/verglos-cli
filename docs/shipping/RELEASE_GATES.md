@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · STUDIO-CLI-001 clean-head qualification
+
+The exact Web commit `62a54b52043143758fe01c6d5854c5204c17c549` passed the
+focused Studio custody/handoff/entitlement suite **99/99**, typecheck, an
+isolated **49/49** page build, Drizzle schema check, **43/43** ordered
+migrations, and diff check. The prior disposable PostgreSQL route packet
+continues to carry the database-bound evidence.
+
+Keep `STUDIO-CLI-001` unchecked. The numeric paid/non-production hosted-record
+allowance and authorized Studio recipient/customer acknowledgement with
+hosted/audit evidence are still absent. No Production, provider, billing,
+customer, or AppSec state changed; score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`evidence/studio-cli-001-clean-head-qualification-2026-10-21.md`.
+
 ## 2026-10-19 · DIST-001 packed-files allowlist hardening
 
 CLI commits `48a2baa0` and `edfb5ec0` now make the package archive audit fail

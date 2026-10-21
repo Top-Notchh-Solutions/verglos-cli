@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 clean-head qualification · 2026-10-21
+
+- **Source mapping:** Web commit `62a54b52043143758fe01c6d5854c5204c17c549`
+  was checked from a detached clean worktree; no source change was made by
+  this qualification batch.
+- **Implementation mapping:** The active Studio capability gate covers client
+  workspace creation, handoff issuance, and client-projection upload. The
+  allowlisted projection digest, hosted-record reservation/release, tenant
+  scope, recipient proof, replay refusal, and acknowledgement digest paths
+  are represented by the focused tests.
+- **Verification mapping:** Focused suite **99/99**, typecheck, isolated
+  **49/49** page build, schema check, **43/43** ordered migrations, and diff
+  check passed. Hosted PostgreSQL route evidence remains the prior packet.
+- **Acceptance mapping:** Numeric paid/non-production hosted allowance and
+  authorized Studio recipient/customer acknowledgement remain missing; no
+  checkbox changed. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/studio-cli-001-clean-head-qualification-2026-10-21.md`.
+
 ## FINAL-WEB-007 existing-tab landing audit · 2026-10-19
 
 - **Observation mapping:** Existing-tab desktop and mobile Lighthouse runs

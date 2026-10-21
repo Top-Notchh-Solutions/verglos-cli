@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-21 · STUDIO-CLI-001 clean-head qualification
+
+The exact Web commit `62a54b52043143758fe01c6d5854c5204c17c549` was
+requalified from a detached clean worktree. The focused Studio custody,
+handoff, entitlement, usage, and tenant-boundary suites passed **99/99**;
+typecheck, isolated **49/49** page build, Drizzle schema check, ordered
+**43/43** migration check, and diff check passed. The earlier disposable
+PostgreSQL route evidence remains separately recorded.
+
+This is implementation qualification only. `STUDIO-CLI-001` remains
+unchecked because the approved numeric paid/non-production hosted-record
+allowance and authorized Studio recipient/customer acknowledgement with
+hosted/audit evidence are still absent. The current score remains **239
+checked / 41 open / 280 total (85.4%)**. No AppSec/Hunt row changed. Evidence:
+`docs/shipping/evidence/studio-cli-001-clean-head-qualification-2026-10-21.md`.
+
 ## 2026-10-19 · DIST-001 packed-files allowlist hardening
 
 CLI commits `48a2baa0` and `edfb5ec0` add and qualify the missing public
