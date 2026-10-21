@@ -103,6 +103,24 @@ replace the hosted Ubuntu/macOS/Windows matrix for this exact release
 candidate, trusted keyless identity, protected publication, legal clearance,
 independent review, or final acceptance.
 
+## Current-head rollback/revocation rehearsal
+
+The exact source head also ran:
+
+`node scripts/release-rollback-evidence.mjs /private/tmp/verglos-qual-cli006.jqKooc/release-rollback`
+
+The command exited **0** with schema
+`urn:verglos:evidence:release-rollback-rehearsal:v1`, source commit
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f`, five bounded operations, and two
+historical records preserved. The exercised domains were npm package,
+engine manifest, Hunt feed, signing identity revocation, and Web deployment.
+The related platform/publish/rollback contract tests passed **3/3**.
+
+This is a local decision-contract rehearsal: it called no npm registry,
+signing provider, Hunt feed provider, or Vercel deployment, and its identifiers
+are synthetic immutable fixtures. Authenticated rollback/revocation acceptance
+and protected release operations remain open.
+
 ## Disposition
 
 This completes the local official-validator contract but does not close the

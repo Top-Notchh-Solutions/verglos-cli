@@ -40,7 +40,9 @@ upgrade/rollback `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` all passed. The in-toto
 keys were ephemeral and the run was local, so hosted exact-head matrix,
 trusted keyless identity, protected publication, legal clearance, independent
 review, customer evidence, and final acceptance remain open. No checkbox or
-external state changed. Score remains **239 checked / 41 open / 280 total
+external state changed. The local rollback/revocation rehearsal also passed
+exit **0** across five bounded operations with two historical records
+preserved; no provider or registry call occurred. Score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `docs/shipping/evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
 

@@ -8,7 +8,9 @@ verification **7/7**, clean-consumer installation, and upgrade/rollback
 `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` passed. This is local evidence with
 ephemeral provenance keys; hosted exact-head matrix, trusted keyless identity,
 protected publication, legal, independent review, customer evidence, and final
-acceptance remain open. No checkbox changed; score remains **239 checked / 41
+acceptance remain open. The local rollback/revocation rehearsal passed exit
+**0** across five bounded operations and preserved two historical records; no
+provider or registry call occurred. No checkbox changed; score remains **239 checked / 41
 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
 

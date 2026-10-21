@@ -9,6 +9,10 @@
   for **7/7** archives; clean consumer passed all seven installs/imports,
   bounded signed A1 execution, and no implicit engine installation; upgrade /
   rollback passed `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`.
+- **Rollback rehearsal:** `node scripts/release-rollback-evidence.mjs` exited
+  **0** with five bounded npm/engine/Hunt/signing/Web operations and two
+  historical records preserved; related platform/publish/rollback contract
+  tests passed **3/3**. No provider or registry call occurred.
 - **Boundary:** Local current-head evidence with ephemeral in-toto keys only.
   Hosted exact-head matrix, trusted keyless identity, protected publication,
   legal clearance, independent review, and final acceptance remain open.

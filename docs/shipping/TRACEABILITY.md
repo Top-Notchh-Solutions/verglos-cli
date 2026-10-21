@@ -9,6 +9,8 @@
   verification **7/7**.
 - **Transition mapping:** Clean consumer and signed bounded A1 execution
   passed; upgrade/rollback passed `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`.
+  The rollback/revocation rehearsal passed exit **0** across five bounded
+  domains and preserved two historical records; contract tests passed **3/3**.
 - **Acceptance mapping:** Ephemeral local provenance keys do not establish
   hosted matrix, trusted keyless identity, protected publication, legal,
   independent-review, customer, or final acceptance. Keep QUAL-CLI-006 open;

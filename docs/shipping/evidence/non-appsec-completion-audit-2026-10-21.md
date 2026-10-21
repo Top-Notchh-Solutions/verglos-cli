@@ -7,7 +7,9 @@ and packaged. Build **8/8**, typecheck **14/14**, official in-toto 3.0.0
 verification **7/7**, clean consumer, and upgrade/rollback all passed. This is
 local current-head evidence with ephemeral keys; hosted exact-head matrix,
 trusted identity, protected publication, legal, independent-review, customer,
-and final acceptance artifacts remain open. `QUAL-CLI-006` remains unchecked.
+and final acceptance artifacts remain open. The local rollback/revocation
+rehearsal also passed exit **0** across five bounded operations and preserved
+two historical records without provider calls. `QUAL-CLI-006` remains unchecked.
 Evidence: `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
 
 ## Current qualification addendum · QUAL-CLI-006 complete local validator run · 2026-10-21

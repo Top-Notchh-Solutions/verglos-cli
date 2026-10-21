@@ -5,7 +5,9 @@
 Clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed build **8/8**,
 typecheck **14/14**, official in-toto 3.0.0 exact-product verification **7/7**,
 clean-consumer installation, and upgrade/rollback `1.8.3 -> 2.0.0-alpha.1 ->
-1.8.3`. The in-toto keys were ephemeral and the run was local.
+1.8.3`. The local rollback/revocation rehearsal also passed exit **0** across
+five bounded operations with two historical records preserved. The in-toto
+keys were ephemeral and the run was local.
 
 Keep QUAL-CLI-006 unchecked for hosted exact-head matrix evidence, trusted
 keyless identity, protected publication, legal clearance, independent review,

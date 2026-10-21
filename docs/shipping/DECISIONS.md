@@ -5,7 +5,9 @@
 - **Observed:** CLI `72190acae81b454a4a88a0ea8d222c8981ac9a3f` built **8/8**,
   typechecked **14/14**, packed seven public archives, and passed official
   in-toto 3.0.0 exact-product verification **7/7**. Clean consumer and
-  `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` upgrade/rollback also passed.
+  `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` upgrade/rollback also passed. The local
+  rollback/revocation rehearsal exited **0** across five bounded operations and
+  preserved two historical records; its contract tests passed **3/3**.
 - **Decision:** Accept this as current-head local archive/provenance and
   transition evidence; retain QUAL-CLI-006 unchecked because the provenance
   keys were ephemeral and the run was not a hosted release.

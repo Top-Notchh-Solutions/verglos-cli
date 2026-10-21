@@ -8,7 +8,9 @@ verified **7/7** archive SHA-256 products, the clean consumer passed, and the
 upgrade/rollback transition `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` passed. This is
 local current-head evidence with ephemeral provenance keys; it does not prove
 hosted matrix, keyless identity, publication, legal, independent-review,
-customer, or final acceptance. `QUAL-CLI-006` remains unchecked; score remains
+customer, or final acceptance. The release rollback/revocation rehearsal also
+passed exit **0** with five bounded operations and two historical records
+preserved; it made no provider calls. `QUAL-CLI-006` remains unchecked; score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
 
