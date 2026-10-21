@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007/008 current-source qualification · 2026-10-21
+
+- **Source mapping:** Web clean worktree at `a3819c1`.
+- **Contract mapping:** Truth-registry **34/34**, landing-release **4/4**, and
+  public-release-smoke **2/2** tests passed; the actual smoke report covered
+  **16 routes**, **22/22** publishable claims, **2** proof assets, and **0**
+  issues.
+- **Acceptance mapping:** This proves source-level public-truth and smoke
+  behavior only. FINAL-WEB-007 still needs browser-produced, human, supported-
+  environment, and field-CWV evidence; FINAL-WEB-008 still depends on the
+  final acceptance/release gates. No checkbox changed; score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
+
 ## DIST-002 release-environment state recheck · 2026-10-21
 
 - **External mapping:** Read-only GitHub API observation found the protected

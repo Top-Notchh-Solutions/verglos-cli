@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-21 · FINAL-WEB-007/008 current-source gate
+
+The current Web source `a3819c1` passed truth-registry **34/34**, landing
+qualification contract **4/4**, public-release-smoke contract **2/2**, and
+the actual public smoke report (**16 routes, 22/22 claims, 2 proof assets,
+0 issues**). Keep FINAL-WEB-007 unchecked for browser-produced capture,
+human screen-reader, supported-environment, and field-CWV evidence. Keep
+FINAL-WEB-008 unchecked for its final acceptance/release dependencies. No
+checkbox changed; score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 release-environment state gate
 
 The read-only GitHub state confirms the `release` environment has a required

@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-21 · FINAL-WEB-007/008 current-source qualification
+
+- **Source:** Clean Web worktree at `a3819c1`; Node `v26.4.0`, pnpm
+  `10.34.5` (engine warning only).
+- **Verification:** Truth-registry **34/34**, landing-release contract **4/4**,
+  public-release-smoke contract **2/2**, and actual public smoke **16 routes /
+  22/22 claims / 2 proof assets / 0 issues**; diff check passed.
+- **Acceptance mapping:** This is current-source evidence only. Keep
+  FINAL-WEB-007 open for browser capture, human screen-reader, supported
+  environment, and field-CWV evidence; keep FINAL-WEB-008 open for its final
+  acceptance/release dependencies. No checkbox changed; score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 release-environment state recheck
 
 - **Read-only observation:** GitHub `release` environment configuration has a

@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-21 · FINAL-WEB-007/008 current-source qualification
+
+The clean Web source `a3819c1` passed truth-registry **34/34**, landing-release
+contract **4/4**, public-release-smoke contract **2/2**, and actual public
+smoke **16 routes / 22/22 publishable claims / 2 proof assets / 0 issues**.
+This is implementation and source qualification only. Keep `FINAL-WEB-007`
+unchecked for browser-produced capture, human screen-reader, supported
+environment, and field-CWV evidence; keep `FINAL-WEB-008` unchecked for its
+FINAL-WEB/ACCEPT final-release dependencies. No checkbox changed. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 clean-head qualification
 
 The exact Web commit `62a54b52043143758fe01c6d5854c5204c17c549` was

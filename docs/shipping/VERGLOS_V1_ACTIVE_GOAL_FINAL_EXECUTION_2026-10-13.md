@@ -93,6 +93,17 @@ publication, workflow run, or registry mutation was inferred or initiated.
 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
 
+**Current continuation result (2026-10-21):** Current Web source `a3819c1`
+passed truth-registry tests **34/34**, landing-release contract tests **4/4**,
+public-release-smoke contract tests **2/2**, and the actual source smoke report
+with **16 routes**, **22/22** publishable claims, **2** proof assets, and **0**
+issues. This advances FINAL-WEB-007/008 code-side evidence only:
+FINAL-WEB-007 still lacks a browser-produced capture, human screen-reader,
+supported-environment, and field-CWV evidence, while FINAL-WEB-008 remains
+dependent on the final acceptance/release gates. No checkbox changed; the
+score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

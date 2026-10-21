@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-21 · FINAL-WEB-007/008 current-source qualification
+
+Current Web source `a3819c1` passed truth-registry **34/34**, landing-release
+contract **4/4**, and public-release-smoke contract **2/2** tests. The actual
+public smoke report passed with **16 routes**, **22/22** publishable claims,
+**2** proof assets, and **0** issues. This is source qualification only;
+FINAL-WEB-007 remains open for browser capture, human screen-reader, supported
+environment, and field-CWV evidence, and FINAL-WEB-008 remains dependent on
+the final acceptance/release gates. No checkbox changed; score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 release-environment state recheck
 
 A read-only GitHub API check confirms the `release` environment has a required

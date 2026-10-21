@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-21 · retain FINAL-WEB-007/008 after current-source qualification
+
+- **Decision:** Accept the current Web source qualification as substantive
+  implementation evidence; retain both rows unchecked.
+- **Observed:** `a3819c1` passed truth-registry **34/34**, landing-release
+  contract **4/4**, public-release-smoke contract **2/2**, and actual smoke
+  **16 routes / 22/22 claims / 2 proof assets / 0 issues**.
+- **Reason:** Contract and source-smoke results do not create a browser capture,
+  human screen-reader operation, field-CWV measurement, customer acceptance,
+  or the dependent final release decision.
+- **Disposition:** No checkbox changed; score remains **239/41/280 (85.4%)**.
+  Evidence:
+  `evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
+
 ## 2026-10-21 · retain DIST-002 after release-environment state recheck
 
 - **Decision:** Treat the protected-environment configuration as supporting
