@@ -1,5 +1,18 @@
 # Verglos V1 non-AppSec completion audit — 2026-10-21
 
+## Continuation addendum · 2026-10-21
+
+After this audit, owner authorization was used for a bounded Preview-only
+qualification batch. Web commits `938dd7e` and `a3819c1` added and corrected a
+fail-closed numeric Studio fixture; final clean Preview deployment
+`dpl_FZpAVi1Hbj8iQhpuyyvb9gUSucoe` reached Ready with **49/49** static pages.
+The real Preview routes created a workspace, committed a safe projection,
+rejected a private field and cross-tenant read, and recorded an acknowledged
+synthetic handoff. This advances implementation and bounded hosted evidence,
+but does not replace independent customer/recipient acceptance. The score is
+still **239 checked / 41 open / 280 total (85.4%)**; the row remains open.
+See `evidence/studio-cli-001-preview-studio-fixture-2026-10-21.md`.
+
 ## Result
 
 The live private backlog contains **239 checked / 41 open / 280 total
