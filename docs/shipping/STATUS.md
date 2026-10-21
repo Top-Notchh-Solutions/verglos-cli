@@ -10,11 +10,12 @@ source contracts: explicit table headers/caption, contrast `4.5:1`-safe
 Boundary text, checkout metadata/noindex, and interaction-deferred Razorpay
 loading, with regression coverage. Current-source qualification passed truth
 registry **35/35**, landing tests **4/4**, public-release tests **2/2**, public
-smoke **16 routes / 22/22 claims / 2 assets / 0 issues**, typecheck, and diff
-check. No deployment was initiated, so production requalification remains
-open; the exact Preview was protected, INP/CrUX were unavailable, and human,
-field, and final acceptance evidence remain open. No checkbox changed; score
-remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+smoke **16 routes / 22/22 claims / 2 assets / 0 issues**, typecheck, diff
+check, and a fresh detached build generated **49/49** static pages. No
+deployment was initiated, so production requalification remains open; the
+exact Preview was protected, INP/CrUX were unavailable, and human, field, and
+final acceptance evidence remain open. No checkbox changed; score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `evidence/final-web-007-six-path-browser-audit-2026-10-21.md`.
 
 ## 2026-10-21 · FINAL-WEB-007/008 current-source qualification

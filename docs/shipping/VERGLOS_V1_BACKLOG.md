@@ -8,9 +8,11 @@ surface issues on `/docs`, `/proof`, `/verify`, and `/checkout`. Web commit
 checkout metadata/noindex, and interaction-deferred Razorpay loading, with a
 focused regression test. Current-source qualification passed truth-registry
 **35/35**, landing **4/4**, public-release-smoke **2/2**, actual smoke **16
-routes / 22/22 claims / 2 assets / 0 issues**, typecheck, and diff check. The
-build was not accepted because Next encountered pre-existing unresolved merge
-markers in the unrelated dirty parent `package.json`.
+routes / 22/22 claims / 2 assets / 0 issues**, typecheck, and diff check. A
+fresh detached worktree build also passed with successful compilation,
+lint/type validation, and **49/49** static pages. The earlier source-worktree
+build failure was limited to Next workspace-root inference through the
+unrelated dirty parent `package.json`.
 
 Do not check FINAL-WEB-007: no deployment was initiated; exact Preview,
 deployed requalification, actual INP/field-CWV, human/supported-environment,

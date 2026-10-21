@@ -8,7 +8,8 @@
 - **Implemented:** Web commit `70f69de` repairs the table header contract,
   proof contrast, checkout metadata/noindex, and interaction-deferred hosted
   provider loading, with focused regression coverage. Current-source tests,
-  smoke, typecheck, and diff checks pass.
+  smoke, typecheck, diff checks, and a fresh detached **49/49** page build
+  pass.
 - **Decision:** Do not check FINAL-WEB-007 or FINAL-WEB-008. No deployment was
   authorized or performed, the exact Preview remains protected, INP/CrUX and
   human/field evidence are absent, and final acceptance/release gates remain

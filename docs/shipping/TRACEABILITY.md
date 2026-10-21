@@ -11,8 +11,10 @@
   regression contract in `src/app/docs/truth-contract.test.ts`.
 - **Qualification mapping:** Truth-registry **35/35**, landing **4/4**,
   public smoke contract **2/2**, actual smoke **16 routes / 22/22 claims / 2
-  assets / 0 issues**, typecheck, and diff check passed. The build was blocked
-  by unresolved merge markers in the unrelated dirty parent `package.json`.
+  assets / 0 issues**, typecheck, and diff check passed. A fresh detached
+  worktree at `70f69de` passed `pnpm build`, including successful compilation,
+  lint/type validation, and **49/49** static pages. The earlier build failure
+  was limited to workspace-root inference through the unrelated dirty parent.
 - **Acceptance mapping:** Source fixes are not a Production deployment. Keep
   FINAL-WEB-007 unchecked for deployed requalification, actual INP/field-CWV,
   human/supported-environment evidence, and final acceptance; keep

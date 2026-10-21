@@ -10,9 +10,10 @@ intentional noindex boundary). Web commit `70f69de` repairs the source
 contracts and adds regression coverage. Current-source qualification passed
 truth-registry **35/35**, landing **4/4**, public-release-smoke **2/2**, actual
 smoke **16 routes / 22/22 claims / 2 assets / 0 issues**, typecheck, and diff
-check. The build was not accepted because Next inferred the dirty parent
-checkout and encountered pre-existing unresolved merge markers in its
-unrelated `package.json`.
+check. A fresh detached Web worktree at `70f69de` passed `pnpm build`,
+including successful compilation, lint/type validation, and **49/49** static
+pages. The earlier source-worktree failure was limited to Next workspace-root
+inference through the unrelated dirty parent `package.json`.
 
 No deployment, Production, provider, customer, legal, or AppSec state changed.
 The exact Preview redirected to Vercel login and was not bypassed; INP/CrUX,

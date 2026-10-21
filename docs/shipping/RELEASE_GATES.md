@@ -6,8 +6,9 @@ Production six-path browser auditing found concrete deployed failures, and Web
 commit `70f69de` repairs the source-level table, contrast, checkout metadata,
 and deferred-provider contracts. Current-source checks pass truth-registry
 **35/35**, landing **4/4**, public smoke **2/2**, actual smoke **16 routes /
-22/22 claims / 2 assets / 0 issues**, typecheck, and diff check. The exact
-Preview was protected and no deployment was initiated.
+22/22 claims / 2 assets / 0 issues**, typecheck, diff check, and a fresh
+detached **49/49** page build. The exact Preview was protected and no
+deployment was initiated.
 
 Keep FINAL-WEB-007 unchecked for deployed requalification, actual INP/field
 CWV, human/supported-environment evidence, and final acceptance. Keep

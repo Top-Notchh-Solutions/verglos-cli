@@ -58,10 +58,11 @@ From the clean Web worktree at `70f69de`:
   assets, 0 issues.
 - `pnpm exec next typegen && pnpm typecheck`: **passed**.
 - `git diff --check`: **passed**.
-- `pnpm build`: **not accepted**. The worktree's Next invocation inferred
-  the dirty parent checkout as workspace root and encountered pre-existing
-  unresolved merge markers in the unrelated parent `package.json`. The
-  parent checkout was not modified.
+- `pnpm build`: **passed** from a fresh detached worktree at `70f69de`
+  outside the conflicted parent checkout. Next compiled successfully, linted
+  and type-checked, and generated **49/49** static pages. The original source
+  worktree's failed build was an environment/layout artifact caused by the
+  unrelated parent `package.json`; the parent checkout was not modified.
 
 ## Disposition
 
