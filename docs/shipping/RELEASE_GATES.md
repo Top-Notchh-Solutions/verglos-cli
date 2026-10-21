@@ -11,6 +11,16 @@ FINAL-WEB-008 unchecked for its final acceptance/release dependencies. No
 checkbox changed; score remains **239 checked / 41 open / 280 total (85.4%)**.
 Evidence: `evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
 
+## 2026-10-21 · FINAL-WEB-007 production browser lab gate
+
+The existing Chrome tab audited public production read-only. Lighthouse passed
+desktop **61/61** and mobile **60/60**, with Accessibility, Best Practices,
+SEO, and Agentic Browsing at **100/100** in both modes. Cold Fast-4G/4×CPU
+traces measured LCP **727/594 ms** and CLS **0.00/0.00**. Keep the row
+unchecked: exact Preview access is protected, CrUX is unavailable, and the
+required six-path, human/field, and final-acceptance evidence is incomplete.
+Evidence: `evidence/final-web-007-production-browser-audit-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 release-environment state gate
 
 The read-only GitHub state confirms the `release` environment has a required

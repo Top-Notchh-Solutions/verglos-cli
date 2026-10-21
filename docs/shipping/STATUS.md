@@ -12,6 +12,17 @@ the final acceptance/release gates. No checkbox changed; score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
 
+## 2026-10-21 · FINAL-WEB-007 read-only production browser audit
+
+The existing Chrome tab audited public `https://verglos.com/` without writes.
+Desktop Lighthouse passed **61/61** and mobile **60/60**, with Accessibility,
+Best Practices, SEO, and Agentic Browsing at **100/100** in both modes. Cold
+Fast-4G/4×CPU traces measured LCP **727 ms** desktop, **594 ms** mobile, and
+CLS **0.00** in both. The protected Preview redirected to Vercel login and
+was not bypassed. This is lab evidence only; the row remains open for the
+required six-path capture, human/field evidence, and acceptance. Evidence:
+`evidence/final-web-007-production-browser-audit-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 release-environment state recheck
 
 A read-only GitHub API check confirms the `release` environment has a required

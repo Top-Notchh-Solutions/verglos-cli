@@ -12,6 +12,16 @@ FINAL-WEB/ACCEPT final-release dependencies. No checkbox changed. Score
 remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
 
+## 2026-10-21 · FINAL-WEB-007 production browser lab audit
+
+The existing Chrome tab audited public production read-only. Lighthouse passed
+desktop **61/61** and mobile **60/60**, all four audited categories were
+**100/100**, and cold Fast-4G/4×CPU traces measured LCP **727/594 ms** with
+CLS **0.00/0.00**. Keep `FINAL-WEB-007` unchecked: the exact Preview is
+protected, CrUX is unavailable, and the six-path browser capture, human/field
+evidence, and final acceptance remain open. Evidence:
+`docs/shipping/evidence/final-web-007-production-browser-audit-2026-10-21.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 clean-head qualification
 
 The exact Web commit `62a54b52043143758fe01c6d5854c5204c17c549` was

@@ -15,6 +15,19 @@
 - **Evidence:**
   `evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
 
+## 2026-10-21 · FINAL-WEB-007 read-only production browser audit
+
+- **Browser:** Existing Chrome tab, public `https://verglos.com/`; no writes,
+  new tab, or Preview-protection bypass.
+- **Verification:** Lighthouse desktop **61/61** and mobile **60/60**, all
+  four audited categories **100/100** in both modes; cold Fast-4G/4×CPU
+  traces measured LCP **727 ms / 594 ms** and CLS **0.00 / 0.00**.
+- **Boundary:** CrUX field data was unavailable; this is production lab
+  evidence, not exact Preview-source identity, human screen-reader operation,
+  six-path capture, or customer acceptance. Keep FINAL-WEB-007 unchecked.
+- **Evidence:**
+  `evidence/final-web-007-production-browser-audit-2026-10-21.md`.
+
 ## 2026-10-21 · DIST-002 release-environment state recheck
 
 - **Read-only observation:** GitHub `release` environment configuration has a

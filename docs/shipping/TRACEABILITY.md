@@ -15,6 +15,20 @@
 - **Evidence:**
   `evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
 
+## FINAL-WEB-007 read-only production browser audit · 2026-10-21
+
+- **Runtime mapping:** Existing Chrome tab audited public `https://verglos.com/`
+  read-only. Lighthouse passed desktop **61/61** and mobile **60/60** with
+  all four audited categories at **100/100**.
+- **Performance mapping:** Cold Fast-4G/4×CPU traces measured desktop/mobile
+  LCP **727/594 ms** and CLS **0.00/0.00**; CrUX field data was unavailable.
+- **Acceptance mapping:** This is production lab evidence only. The exact
+  protected Preview was not bypassed, and the six-path capture, human/field
+  evidence, and final acceptance remain open. No checkbox changed; score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/final-web-007-production-browser-audit-2026-10-21.md`.
+
 ## DIST-002 release-environment state recheck · 2026-10-21
 
 - **External mapping:** Read-only GitHub API observation found the protected

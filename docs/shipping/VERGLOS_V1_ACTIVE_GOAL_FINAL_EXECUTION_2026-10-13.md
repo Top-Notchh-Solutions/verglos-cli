@@ -104,6 +104,17 @@ dependent on the final acceptance/release gates. No checkbox changed; the
 score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
 
+**Browser qualification result (2026-10-21):** The existing authenticated
+Chrome tab performed a read-only audit of public `https://verglos.com/`.
+Desktop Lighthouse passed **61/61** and mobile **60/60**; Accessibility, Best
+Practices, SEO, and Agentic Browsing scored **100/100** in both modes. Cold
+Fast-4G/4×CPU traces measured desktop LCP **727 ms**, mobile LCP **594 ms**,
+and CLS **0.00** in both modes. The protected exact Preview redirected to
+Vercel login and was not bypassed. This is production lab evidence only;
+FINAL-WEB-007 remains open for the six-path capture, human/field evidence,
+and final acceptance. Evidence:
+`docs/shipping/evidence/final-web-007-production-browser-audit-2026-10-21.md`.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

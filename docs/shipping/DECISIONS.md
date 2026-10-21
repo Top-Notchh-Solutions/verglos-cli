@@ -14,6 +14,19 @@
   Evidence:
   `evidence/final-web-007-008-current-source-qualification-2026-10-21.md`.
 
+## 2026-10-21 · retain FINAL-WEB-007 after production browser audit
+
+- **Decision:** Accept the read-only production browser result as additional
+  lab evidence; retain FINAL-WEB-007 unchecked.
+- **Observed:** Desktop/mobile Lighthouse passed **61/61** and **60/60**;
+  all four audited categories scored **100/100**; LCP was **727/594 ms** and
+  CLS **0.00/0.00** under cold Fast-4G/4×CPU traces.
+- **Reason:** The exact Preview is protected, CrUX is unavailable, and the
+  six-path capture, human screen-reader, field, and final acceptance artifacts
+  are still absent.
+- **Disposition:** No checkbox changed; score remains **239/41/280 (85.4%)**.
+  Evidence: `evidence/final-web-007-production-browser-audit-2026-10-21.md`.
+
 ## 2026-10-21 · retain DIST-002 after release-environment state recheck
 
 - **Decision:** Treat the protected-environment configuration as supporting
