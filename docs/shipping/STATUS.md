@@ -7,9 +7,14 @@ focused standard-validation suite **7/7** and `pnpm typecheck` **14/14**. The
 suite verifies bounded official-tool argv/redaction, unavailable-tool handling,
 artifact-root confinement, and fail-closed malformed/symlinked/oversized
 artifacts. The direct qualification command correctly refused without its
-required artifact-root argument; no official validator or release bundle was
-claimed. `QUAL-CLI-006` remains open for trusted keyless publication, legal,
-protected release, independent review, hosted platform, and final acceptance.
+required artifact-root argument. A disposable artifact-root run then validated
+SARIF with Microsoft SARIF Multitool 5.8.0, CycloneDX with CLI 0.33.1, and an
+offline Sigstore bundle with Cosign 2.6.0: **3 passed / 1 unsupported / 0
+failed**. SPDX was unsupported because this host has no Java runtime; strict
+mode correctly exited **1**. No release bundle, keyless identity, or
+publication was claimed. `QUAL-CLI-006` remains open for official SPDX
+validation, trusted keyless publication, legal, protected release,
+independent review, hosted platform, and final acceptance.
 No checkbox changed; score remains **239 checked / 41 open / 280 total (85.4%)**.
 Evidence: `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
 

@@ -9,9 +9,16 @@
   covers bounded official-tool invocation, redaction, unavailable-tool
   handling, artifact-root confinement, and fail-closed malformed/symlinked/
   oversized inputs.
+- **Artifact-root qualification:** A disposable generated root produced
+  **3 passed / 1 unsupported / 0 failed** in non-strict mode: official SARIF
+  Multitool 5.8.0, CycloneDX 0.33.1, and Cosign 2.6.0 passed; SPDX was
+  unsupported because Java is unavailable on the host. Strict mode exited
+  **1** as designed for unsupported SPDX validation. Cosign used only an
+  ephemeral offline key; no keyless release identity was asserted.
 - **Boundary:** `pnpm qualify:standards` without its required artifact-root
-  argument correctly exited **1** with usage. No official validator or release
-  artifact bundle was claimed by this run.
+  argument correctly exited **1** with usage. The disposable artifact root is
+  not a release artifact bundle and no registry, publication, or provider
+  action occurred.
 - **Disposition:** Keep `QUAL-CLI-006` unchecked for the actual approved
   artifact-root validator run, trusted keyless release identity, protected
   publication, legal clearance, independent review, hosted platform evidence,

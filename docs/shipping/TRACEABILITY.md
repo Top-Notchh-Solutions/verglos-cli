@@ -8,10 +8,16 @@
   passed **7/7**; `pnpm typecheck` passed **14/14** Turbo tasks. The contract
   test covers bounded validator arguments, redaction, unavailable tools,
   artifact-root confinement, and fail-closed artifact handling.
+- **Artifact mapping:** A disposable generated artifact root produced **3
+  passed / 1 unsupported / 0 failed** in non-strict mode using official SARIF
+  Multitool 5.8.0, CycloneDX 0.33.1, and Cosign 2.6.0. SPDX was unsupported
+  because Java was unavailable; strict mode exited **1**. The offline Cosign
+  key was ephemeral and does not map to release trust.
 - **Acceptance mapping:** No actual artifact-root official-validator run was
-  claimed. Keep QUAL-CLI-006 unchecked for trusted keyless identity, protected
-  publication, legal clearance, independent review, hosted platform evidence,
-  and final acceptance; score remains **239/41/280 (85.4%)**.
+  claimed as complete. Keep QUAL-CLI-006 unchecked for official SPDX
+  validation, trusted keyless identity, protected publication, legal clearance,
+  independent review, hosted platform evidence, and final acceptance; score
+  remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
 
 ## FINAL-WEB-007 local current-source browser qualification · 2026-10-21

@@ -1,5 +1,18 @@
 # Verglos V1 non-AppSec completion audit — 2026-10-21
 
+## Current qualification addendum · QUAL-CLI-006 artifact-root run · 2026-10-21
+
+The clean CLI merge `72190acae81b454a4a88a0ea8d222c8981ac9a3f` was exercised
+against a disposable generated artifact root. Official SARIF Multitool 5.8.0,
+CycloneDX CLI 0.33.1, and Cosign 2.6.0 passed; SPDX was unsupported because
+the host has no Java runtime. The non-strict result was **3 passed / 1
+unsupported / 0 failed** and the strict runner exited **1** as required for
+unsupported validation. Cosign used an ephemeral offline key, not keyless
+release trust. No checkbox changed; `QUAL-CLI-006` remains open for official
+SPDX validation, trusted identity, protected publication, legal clearance,
+independent review, hosted platform evidence, and final acceptance. Evidence:
+`evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 ## Current qualification addendum · QUAL-CLI-006 · 2026-10-21
 
 Clean CLI `origin/main` `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the
@@ -131,12 +144,11 @@ The live private backlog contains **239 checked / 41 open / 280 total
 first unchecked row and separates implementation evidence from the external
 artifact or independent-review condition that would permit a checkbox.
 
-The original audit was based on private shipping head `cd683b4c`; its current
-continuation reconciliation is now at private shipping head `1db6f7fb` after
-the Studio, ENT, DIST-001, DIST-002, and six-path Web qualification packets.
-Product source
-repositories were not modified by this audit; the packets and their ledger
-reconciliations are private-tracker changes only.
+The original audit was based on private shipping head `cd683b4c`; its Studio,
+ENT, DIST-001, DIST-002, six-path Web, and current CLI qualification
+continuations are reconciled in the current private shipping head. Product
+source repositories were not modified by this audit; the packets and their
+ledger reconciliations are private-tracker changes only.
 
 ## AppSec hold roots
 

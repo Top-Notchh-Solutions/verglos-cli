@@ -32,6 +32,20 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Latest continuation result (2026-10-21):** `QUAL-CLI-006` was exercised
+against a disposable generated artifact root from clean CLI merge
+`72190acae81b454a4a88a0ea8d222c8981ac9a3f`. Official Microsoft SARIF Multitool
+5.8.0, CycloneDX CLI 0.33.1, and Cosign 2.6.0 passed their checks: **3
+passed / 1 unsupported / 0 failed**. SPDX was unsupported because the host
+has no Java runtime; strict mode correctly exited **1**. The Cosign check used
+an ephemeral offline key and is not keyless release trust. This advances real
+artifact-root/tool integration evidence, but the row remains unchecked for
+official SPDX validation, trusted keyless identity, protected publication,
+legal clearance, independent review, hosted supported-platform evidence, and
+final acceptance. No checkbox or external state changed. The score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
+
 **Latest continuation result (2026-10-21):** `STUDIO-CLI-001` received
 substantive Web implementation and bounded hosted Preview qualification. Web
 commits `938dd7e` and `a3819c1` add and correct the fail-closed Preview Studio

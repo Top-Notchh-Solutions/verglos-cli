@@ -6,11 +6,15 @@
   implementation evidence; retain `QUAL-CLI-006` unchecked.
 - **Observed:** CLI `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed the focused
   suite **7/7** and typecheck **14/14**. The direct qualification command
-  correctly rejected a missing artifact-root argument.
-- **Reason:** Contract tests and usage validation do not substitute for an
-  approved release artifact bundle, actual official validators, trusted
-  keyless release identity, legal/protected publication, independent review,
-  hosted platform evidence, or final acceptance.
+  correctly rejected a missing artifact-root argument. A disposable generated
+  artifact root produced **3 passed / 1 unsupported / 0 failed** in non-strict
+  mode: SARIF Multitool 5.8.0, CycloneDX 0.33.1, and Cosign 2.6.0 passed;
+  SPDX was unsupported because Java was unavailable. Strict mode exited **1**.
+- **Reason:** This is useful implementation and tool-integration evidence, but
+  the unsupported SPDX check and ephemeral offline Cosign key do not
+  substitute for a complete approved release artifact bundle, trusted keyless
+  release identity, legal/protected publication, independent review, hosted
+  platform evidence, or final acceptance.
 - **Disposition:** No checkbox changed; score remains **239/41/280 (85.4%)**.
   Evidence: `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
 

@@ -5,12 +5,16 @@
 The clean CLI merged head `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed
 the focused standard-validation contract suite **7/7** and typecheck **14/14**.
 The direct qualification command correctly exits with usage when no artifact
-root is supplied; no official validator or release bundle was claimed.
+root is supplied. A disposable generated artifact root then produced **3
+passed / 1 unsupported / 0 failed** in non-strict mode: SARIF Multitool 5.8.0,
+CycloneDX 0.33.1, and Cosign 2.6.0 passed; SPDX was unsupported because this
+host has no Java runtime. Strict mode exited **1**. The local Cosign key was
+ephemeral and offline, not a release identity.
 
 Keep QUAL-CLI-006 unchecked for the actual artifact-root official-validator
-run, trusted keyless release identity, protected publication, legal clearance,
-independent review, hosted platform evidence, and final acceptance. Score
-remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+run including SPDX, trusted keyless release identity, protected publication,
+legal clearance, independent review, hosted platform evidence, and final
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `evidence/qual-cli-006-standard-validation-contract-2026-10-21.md`.
 
 ## 2026-10-21 · FINAL-WEB-007 local current-source browser gate
