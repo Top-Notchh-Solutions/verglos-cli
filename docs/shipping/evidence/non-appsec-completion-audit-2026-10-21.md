@@ -1,5 +1,28 @@
 # Verglos V1 non-AppSec completion audit — 2026-10-21
 
+## Current reconciliation addendum · 2026-10-21
+
+The clean Web source commit `70f69de` was rechecked through the existing Chrome
+page across `/`, `/docs`, `/detectors`, `/proof`, `/verify`, and `/checkout` at
+desktop/mobile Fast 4G and 4× CPU. Chrome traces recorded CLS **0.00** on all
+routes, with desktop LCP **428–657 ms** and mobile LCP **623–1002 ms**. Direct
+DOM checks verified route metadata/canonicals, scoped docs table headers, the
+proof Boundary contrast class, checkout `noindex, nofollow`, and zero
+pre-interaction Razorpay scripts; no console errors or warnings appeared.
+This remains local current-source evidence only. The authoritative merged CLI
+head `72190acae81b454a4a88a0ea8d222c8981ac9a3f` also passed `pnpm typecheck`
+with **14/14** Turbo tasks. A stale local CLI checkout has pre-existing user
+changes and was not modified or used for shipping conclusions.
+
+No checkbox changed. The live score remains **239 checked / 41 open / 280 total
+(85.4%)**. The next file-order item remains `HUNT-008`; its exact independent
+review dependency is unchanged, and the next non-AppSec product rows remain
+blocked by their recorded customer, legal, provider, publication, human/field,
+or final-acceptance artifacts. The private tracker reconciliation is now
+`1db6f7fb`. Evidence:
+`evidence/final-web-007-local-source-browser-qualification-2026-10-21.md` and
+the current ledger/decision entries.
+
 ## Continuation addendum · DIST-002 · 2026-10-21
 
 A disposable exact-`sigstore@5.0.0` experiment against CLI merge
@@ -96,7 +119,7 @@ first unchecked row and separates implementation evidence from the external
 artifact or independent-review condition that would permit a checkbox.
 
 The original audit was based on private shipping head `cd683b4c`; its current
-continuation reconciliation is now at private shipping head `602ab79b` after
+continuation reconciliation is now at private shipping head `1db6f7fb` after
 the Studio, ENT, DIST-001, DIST-002, and six-path Web qualification packets.
 Product source
 repositories were not modified by this audit; the packets and their ledger
