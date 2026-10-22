@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 table semantics implementation · 2026-10-22
+
+- **Source mapping:** Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103`
+  promoted through PR #232 and merged normally as
+  `4ad87bd9e0f954bef1a238755aa8f1fbba54970c`; source branch preserved.
+- **Implementation mapping:** Selected account, dashboard, landing, and docs
+  tables now have captions and explicit header scopes; the landing capability
+  comparison uses a row header; a contract test protects the structure.
+- **Qualification mapping:** Focused contracts **9/9**; full Web suite
+  **893 passed / 24 explicit skips / 0 failures** across **917 tests**;
+  typecheck, diff check, Verify `39771570775`, and Private runner
+  qualification `39771570791` passed.
+- **Safety mapping:** No database was connected or modified. No file, branch,
+  record, or deployment was deleted.
+- **Acceptance mapping:** Keep `QUAL-WEB-006` unchecked for human
+  screen-reader, paid/organization, large-dataset, supported-browser,
+  field-performance, and independent/customer acceptance. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-table-semantics-pr232-2026-10-22.md`.
+
 ## QUAL-WEB-005 digest-inventory preflight repair · 2026-10-22
 
 - **Source mapping:** Web commit `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1`

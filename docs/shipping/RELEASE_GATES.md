@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · QUAL-WEB-006 table semantics implementation gate
+
+Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103` adds captions, explicit
+column scopes, and a capability row header across the selected account,
+dashboard, landing, and docs tables. PR #232 merged normally as
+`4ad87bd9e0f954bef1a238755aa8f1fbba54970c`. Focused accessibility contracts
+passed **9/9**; full Web passed **893 passed / 24 explicit skips / 0 failures**
+across **917 tests**; typecheck, diff check, Verify `39771570775`, and Private
+runner qualification `39771570791` passed. No database was connected or
+modified; no file, branch, record, or deployment was deleted.
+
+Keep `QUAL-WEB-006` unchecked for human screen-reader, paid/organization,
+large-dataset, supported-browser, field-performance, and
+independent/customer acceptance. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`evidence/qual-web-006-table-semantics-pr232-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 digest-inventory preflight gate
 
 Web commit `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1` merged through PR #231 as

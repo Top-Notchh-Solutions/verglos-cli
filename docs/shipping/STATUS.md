@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · QUAL-WEB-006 table semantics implementation and merge
+
+Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103` adds explicit captions,
+column scopes, and a capability row header across the selected account,
+dashboard, landing, and docs tables. PR #232 merged normally as
+`4ad87bd9e0f954bef1a238755aa8f1fbba54970c`; the source branch remains
+preserved. Focused accessibility contracts passed **9/9**; the full Web suite
+passed **893 passed / 24 explicit skips / 0 failures** across **917 tests**;
+typecheck, diff check, Verify `39771570775`, and Private runner
+qualification `39771570791` passed. No database was connected or modified;
+no file, branch, record, or deployment was deleted. `QUAL-WEB-006` remains
+open for its non-code acceptance gates. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/qual-web-006-table-semantics-pr232-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 digest-inventory preflight repair and merge
 
 Web commit `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1` makes malformed

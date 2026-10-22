@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-WEB-006 table semantics implementation and merge
+
+- **Implementation:** Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103`
+  adds captions and explicit header scopes to the selected account, dashboard,
+  landing, and docs tables, including a capability row header, plus a contract
+  test.
+- **Promotion:** PR #232 merged normally as
+  `4ad87bd9e0f954bef1a238755aa8f1fbba54970c`; source branch preserved.
+- **Verification:** Focused accessibility contracts **9/9**; full Web suite
+  **893 passed / 24 explicit skips / 0 failures** across **917 tests**;
+  typecheck, diff check, Verify `39771570775`, and Private runner
+  qualification `39771570791` passed.
+- **Safety boundary:** No database was connected or modified. No file, branch,
+  record, or deployment was deleted.
+- **Disposition:** `QUAL-WEB-006` remains unchecked for human screen-reader,
+  paid/organization, large-dataset, supported-browser, field-performance, and
+  independent/customer acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-table-semantics-pr232-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 digest-inventory preflight repair
 
 - **Implementation:** Web commit `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1`

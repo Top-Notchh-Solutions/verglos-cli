@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · make QUAL-WEB-006 table semantics explicit
+
+- **Decision:** Add captions and explicit header scopes to the selected Web
+  tables, and expose the landing capability label as a row header, so table
+  relationships are available to assistive technology and protected by a
+  contract test.
+- **Implementation:** Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103`
+  merged through PR #232 as normal merge commit
+  `4ad87bd9e0f954bef1a238755aa8f1fbba54970c`.
+- **Verification:** Focused contracts **9/9**; full Web suite **893 passed / 24
+  explicit skips / 0 failures** across **917 tests**; typecheck, diff check,
+  Verify `39771570775`, and Private runner qualification `39771570791` passed.
+- **Safety boundary:** No database was connected or modified. No file, branch,
+  record, or deployment was deleted.
+- **Disposition:** This closes the code-side table-semantics gap only. Keep
+  `QUAL-WEB-006` unchecked for human screen-reader, paid/organization,
+  large-dataset, supported-browser, field-performance, and
+  independent/customer acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-table-semantics-pr232-2026-10-22.md`.
+
 ## 2026-10-22 · preflight QUAL-WEB-005 digest inventory before deletion
 
 - **Decision:** Validate the customer-held digest snapshot before any

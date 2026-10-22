@@ -32,6 +32,23 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current implementation batch (2026-10-22):** `QUAL-WEB-006` received a
+substantive accessibility implementation in Web commit
+`e05bcdc26f5332d4806f0c286b9233b406a19103`. The account, dashboard, landing,
+and docs comparison tables now have explicit captions and header scope
+semantics, including a capability row header, with a contract test covering
+the selected surfaces. Focused accessibility contracts passed **9/9**; the
+full Web suite passed **893 passed / 24 explicit skips / 0 failures** across
+**917 tests**; typecheck and diff check passed. PR #232 merged normally as
+`4ad87bd9e0f954bef1a238755aa8f1fbba54970c`; Verify web run `39771570775` and
+Private runner qualification `39771570791` passed. The source branch remains
+preserved. No database was connected or modified, and no file, branch, record,
+or deployment was deleted. `QUAL-WEB-006` remains unchecked for human
+screen-reader, paid/organization, large-dataset, supported-browser,
+field-performance, and independent/customer acceptance gates. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-table-semantics-pr232-2026-10-22.md`.
+
 **Current continuation patch (2026-10-22):** Web commit
 `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1` adds a preflight validation to the
 QUAL-WEB-005 reviewed deletion worker: malformed customer-held digest
