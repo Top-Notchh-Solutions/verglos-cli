@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 merged-head focused recheck · 2026-10-22
+
+- **Source mapping:** CLI `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web
+  `67f8f89be193dff7053d0abd946b288301bf2b87`.
+- **Qualification mapping:** CLI projection admission **5/5**, CLI upload
+  **6/6**, and Web projection/route/tenant-leakage/Studio E2E scenarios green.
+  The database route integration is an explicit isolated-database skip.
+- **Acceptance mapping:** Repository-owned implementation is requalified;
+  keep the row open for independent recipient/customer acceptance and its
+  hosted/audit artifact. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/studio-cli-001-merged-head-focused-recheck-2026-10-22.md`.
+
 ## FINAL-WEB-007 landing viewport boundary · 2026-10-22
 
 - **Source mapping:** Web commit `5a22c46`; PR #238 merged normally as

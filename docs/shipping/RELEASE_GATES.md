@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · STUDIO-CLI-001 focused implementation gate
+
+The current merged CLI/Web heads pass the repository-owned projection, route,
+tenant-leakage, and Studio E2E contracts. CLI admission is **5/5** and upload
+is **6/6**. The PostgreSQL route integration is explicitly skipped without an
+isolated `TEST_DATABASE_URL`; no remote Neon database or external acceptance
+was used. Keep `STUDIO-CLI-001` unchecked for independent recipient/customer
+acceptance and hosted/audit evidence. Score remains **239/41/280 (85.4%)**.
+Evidence: `evidence/studio-cli-001-merged-head-focused-recheck-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-007 landing viewport gate
 
 Web commit `5a22c46` repairs the landing qualifier's valid desktop/mobile

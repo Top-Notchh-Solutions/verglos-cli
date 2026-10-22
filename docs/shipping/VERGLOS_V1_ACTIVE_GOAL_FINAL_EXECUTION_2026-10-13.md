@@ -14,6 +14,20 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · STUDIO-CLI-001 focused recheck
+
+The current merged CLI/Web heads requalified the repository-owned Studio
+projection/custody path. CLI projection admission passed **5/5**, CLI upload
+passed **6/6**, and Web projection, route-contract, tenant-leakage, and Studio
+E2E scenarios passed with zero failures. The PostgreSQL route integration was
+explicitly skipped with `TEST_DATABASE_URL` removed; the remote Neon value in
+`.env.test.local` was not used. No customer, recipient, provider, legal,
+reviewer, Production, deployment, database, or release operation occurred and
+nothing was deleted. Keep `STUDIO-CLI-001` unchecked for authorized independent
+recipient/customer acceptance and hosted/audit evidence. Score remains **239
+checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-merged-head-focused-recheck-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · FINAL-WEB-007
 
 The hosted landing qualification defect was repaired in Web commit `5a22c46`:

@@ -35,6 +35,7 @@ const paths = [
   "docs/shipping/evidence/accept-002-003-current-head-pr160-pr234-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr160-pr161-pr234.json",
   "docs/shipping/evidence/studio-cli-001-approval-shape-pr161-2026-10-22.md",
+  "docs/shipping/evidence/studio-cli-001-merged-head-focused-recheck-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr161-pr162-pr234.json",
   "docs/shipping/evidence/ent-cli-001-reconciliation-pr162-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr162-pr163-pr234.json",

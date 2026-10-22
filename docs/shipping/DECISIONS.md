@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain STUDIO-CLI-001 after merged-head focused recheck
+
+- **Decision:** Accept the current focused regression result as stronger
+  repository-owned implementation evidence; do not check the row.
+- **Observed:** CLI projection admission **5/5**, CLI upload **6/6**, and Web
+  projection, route, tenant-leakage, and Studio E2E scenarios passed. The
+  PostgreSQL route integration was skipped without `TEST_DATABASE_URL` so the
+  remote Neon database was not touched.
+- **Reason:** Independent authorized recipient/customer acceptance and the
+  corresponding hosted/audit artifact remain absent. No owner-controlled
+  synthetic result is promoted to acceptance.
+- **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/studio-cli-001-merged-head-focused-recheck-2026-10-22.md`.
+
 ## 2026-10-22 · retain FINAL-WEB-007 after PR #238 landing repair
 
 - **Decision:** Promote the repository-owned landing viewport repair and retain

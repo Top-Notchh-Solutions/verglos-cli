@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · STUDIO-CLI-001 merged-head focused recheck
+
+- **Verification:** Current merged CLI/Web heads passed the Studio projection,
+  route-contract, tenant-leakage, and Studio E2E contracts. CLI admission was
+  **5/5** and CLI upload was **6/6**; Web scenarios passed with zero failures.
+- **Boundary:** The PostgreSQL route integration was explicitly skipped with
+  `TEST_DATABASE_URL` removed. The remote Neon URL was not used; no provider,
+  customer, recipient, legal, reviewer, Production, deployment, or database
+  operation occurred. Nothing was deleted or changed.
+- **Disposition:** Keep `STUDIO-CLI-001` open for authorized independent
+  recipient/customer acceptance and hosted/audit evidence. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/studio-cli-001-merged-head-focused-recheck-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-007 landing viewport boundary and PR #238
 
 - **Defect:** The hosted landing contract failed because the generic
