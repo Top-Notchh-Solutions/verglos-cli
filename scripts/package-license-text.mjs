@@ -1,5 +1,6 @@
-import { lstat, readFile } from "node:fs/promises";
+import { lstat } from "node:fs/promises";
 import { join } from "node:path";
+import { readBoundedRegularFile } from "./release-artifact-files.mjs";
 
 const MAX_LICENSE_TEXT_BYTES = 512 * 1024;
 const FILE_GROUPS = Object.freeze([
@@ -34,7 +35,7 @@ export async function readPackageLicenseTexts(packagePaths) {
           break;
         }
         let bytes;
-        try { bytes = await readFile(path); }
+        try { bytes = await readBoundedRegularFile(path, MAX_LICENSE_TEXT_BYTES, `${group.kind} source`); }
         catch {
           output.push({ kind: group.kind, file: name, text: `[not included: ${group.kind} source could not be read; review required]` });
           break;
