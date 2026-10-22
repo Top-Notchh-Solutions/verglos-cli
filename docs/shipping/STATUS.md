@@ -4,7 +4,7 @@
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web evidence while preserving historical entries. The
-current-head run hashed **106** bounded evidence files, including **31** dated
+current-head run hashed **107** bounded evidence files, including **32** dated
 2026-10-23, and passed its secret-like material scan. Evidence:
 `evidence/accept-003-current-head-bundle-2026-10-23.md`.
 
@@ -12,6 +12,20 @@ This does not close reviewer, hosted/provider, customer,
 authenticated-browser/field, account-deletion, AppSec/Hunt, or final-release
 gates. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
 Nothing was deleted.
+
+## 2026-10-23 · ACCEPT-009 release-gate reconciler implemented
+
+The private toolchain now exposes `acceptance:release:reconcile` through
+`scripts/reconcile-release-gates.mjs`. It validates candidate commits, row
+states, evidence digests/paths, open gates, correction/rollback work, and
+requested decisions, and rejects a recorded `go` while any required state is
+open. Focused and adjacent acceptance tests passed **11/11**. Evidence:
+`evidence/accept-009-release-reconciler-2026-10-23.md`.
+
+This is implementation progress only; hosted/provider, customer,
+independent-review, AppSec/Hunt, and final-release gates remain open. The live
+score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted.
 
 ## 2026-10-23 · Web landing qualification runtime boundary fixed
 

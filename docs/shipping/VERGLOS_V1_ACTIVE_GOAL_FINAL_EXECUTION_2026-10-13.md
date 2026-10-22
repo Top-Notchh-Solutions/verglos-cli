@@ -103,8 +103,8 @@ still **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web execution evidence while preserving all historical
-entries. Its current-head run hashed **106** bounded evidence files, including
-**31** current 2026-10-23 entries, and passed the secret-like material scan.
+entries. Its current-head run hashed **107** bounded evidence files, including
+**32** current 2026-10-23 entries, and passed the secret-like material scan.
 The output was written to `/tmp` for verification; no tracked historical
 bundle was overwritten. Evidence:
 `docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.
@@ -113,6 +113,22 @@ This is implementation and reproducibility progress for `ACCEPT-003`, not
 reviewer, hosted/provider, customer, authenticated-browser/field, or final
 release acceptance. No checkbox changed. The live score remains **244 checked
 / 36 open / 280 total (87.1%)**. Nothing was deleted.
+
+## Latest continuation result · 2026-10-23 · ACCEPT-009 release reconciler
+
+The private shipping toolchain now includes
+`scripts/reconcile-release-gates.mjs` and the package command
+`acceptance:release:reconcile`. The fail-closed contract validates candidate
+commits, row states, evidence digests/paths, open gates, correction/rollback
+work, and requested decisions. It distinguishes shipped/partial/planned rows
+and rejects a recorded `go` while any required state remains open. The focused
+and adjacent acceptance tests passed **11/11**. Evidence:
+`docs/shipping/evidence/accept-009-release-reconciler-2026-10-23.md`.
+
+This closes the reconciler implementation gap only; it does not create hosted,
+provider, customer, independent-review, or final-release evidence. No checkbox
+changed. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted.
 
 ## Latest continuation result · 2026-10-23 · merged Web public metadata and landing qualification
 
