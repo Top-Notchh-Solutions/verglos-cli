@@ -1695,3 +1695,26 @@ customer, database, or release-sign-off state changed; nothing was deleted.
 The 13 AppSec-held rows remain unchanged. Score remains **239 checked / 41
 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-001-packed-manifest-read-binding-pr173-2026-10-23.md`.
+
+# 2026-10-23 · FINAL-WEB-008 App Router page-extension inventory
+
+Web PR #250 commit `ba90f98d0b339086be02e2af86c0d2d1fd899e1d` closes a
+release-smoke blind spot: App Router discovery now inventories `page.tsx`,
+`page.ts`, `page.jsx`, and `page.js`, so a new public page in any supported
+extension must be classified or the smoke fails closed. Regression coverage
+now includes public and private non-TSX page sources.
+
+Local public-release tests passed **8/8**; executable public smoke passed
+**18 routes / 32 claims / 2 proof assets / 0 issues**; typecheck, build
+**49/49 routes**, and `git diff --check` passed. Verify Web run
+`39856987895` failed before repository steps with no runner and zero steps.
+Private qualification run `39856987938` had Ubuntu, Windows, and isolated
+PostgreSQL zero-step failures while macOS remained queued at capture. PR #250
+remains open; no rerun, bypass, merge-around, deployment, provider, database,
+customer, Production, publication, or release-sign-off action occurred.
+
+Keep `FINAL-WEB-008` unchecked for ACCEPT-003/009/010, hosted/independent
+evidence, truth freeze, and final release acceptance. Nothing was deleted. The
+13 AppSec-held rows remain unchanged. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md`.

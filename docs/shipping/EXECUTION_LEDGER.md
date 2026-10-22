@@ -14289,3 +14289,24 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   archive/consumer checks and fixture-backed audit passed. No external state
   changed and nothing was deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/dist-001-packed-manifest-read-binding-pr173-2026-10-23.md`.
+
+## 2026-10-23 · FINAL-WEB-008 App Router page-extension inventory
+
+- **Source:** Web PR #250 commit `ba90f98d0b339086be02e2af86c0d2d1fd899e1d`.
+- **Implementation:** Public release smoke now discovers all supported Next
+  App Router page extensions (`page.tsx`, `page.ts`, `page.jsx`, `page.js`)
+  before applying the public/private classification. Regression coverage
+  includes public and private non-TSX page sources.
+- **Verification:** Public-release tests **8/8**, executable smoke **18 routes /
+  32 claims / 2 proof assets / 0 issues**, typecheck, build **49/49**, and diff
+  check passed.
+- **Hosted boundary:** Verify `39856987895` failed before repository steps
+  with no runner and zero steps. Private qualification `39856987938` had
+  Ubuntu, Windows, and PostgreSQL zero-step failures while macOS remained
+  queued at capture. Vercel Preview Comments and GitGuardian passed; Vercel
+  remained pending. No rerun, bypass, merge-around, or external state change
+  occurred; nothing was deleted.
+- **Disposition:** Keep `FINAL-WEB-008` open for ACCEPT-003/009/010,
+  hosted/independent evidence, truth freeze, and final acceptance. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md`.

@@ -56,6 +56,24 @@ checked / 41 open / 280 total (85.4%)**.
 
 Evidence: `evidence/dist-001-packed-manifest-read-binding-pr173-2026-10-23.md`.
 
+## 2026-10-23 · FINAL-WEB-008 App Router page-extension inventory
+
+Web PR #250 commit `ba90f98d0b339086be02e2af86c0d2d1fd899e1d` makes the public
+release smoke discover `page.tsx`, `page.ts`, `page.jsx`, and `page.js` App
+Router pages before classification, with regression coverage for public and
+private non-TSX pages. Public-release tests passed **8/8**, executable smoke
+passed **18 routes / 32 claims / 2 proof assets / 0 issues**, typecheck and
+build **49/49** passed, and diff check passed.
+
+Verify run `39856987895` failed before repository steps with no runner and zero
+steps. Private run `39856987938` had Ubuntu, Windows, and PostgreSQL zero-step
+failures while macOS remained queued at capture. PR #250 remains open and was
+not bypassed or merged around. No deployment, provider, database, customer,
+Production, publication, or release-sign-off state changed; nothing was
+deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 strict measurement types
 
 Web PR #249 source `f01717a` makes the accessibility/performance qualifier
