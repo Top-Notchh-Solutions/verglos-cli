@@ -72,6 +72,31 @@ or requalify completed non-AppSec targets merely because that artifact arrives.
 Only a concrete regression or shared integration dependency may justify a
 targeted follow-up change, and that change must be recorded separately.
 
+## Latest continuation result · 2026-10-23 · merged Web public metadata and landing qualification
+
+Web PR #245 merged normally as `0a70eecb6aa96344240f44ad1e216d9936b931f1`,
+PR #251 as `4e721997754a8496138077f056e24e9788e92278`, and PR #252 as
+`29e2ba4f088a9ddbc195338d68de9fa1e337e823`. Web `origin/main` is now at the
+last merge commit; no squash merge or branch deletion was used.
+
+The implementation now includes strict emitted sitemap/robots and
+machine-readable catalog-term validation, production-like Playwright/Axe
+desktop/mobile landing capture, fail-closed CWV/accessibility/canonical/
+responsive/crawlability qualification, and deterministic serial test
+execution. Local production build, focused tests, typecheck, and a real
+six-path × two-viewport capture passed: **12/12 measurements**, qualification
+`status: passed`, `decision.ok: true`, and zero source issues. Evidence:
+`docs/shipping/evidence/final-web-007-008-public-metadata-landing-2026-10-23.md`.
+
+This advances code-side implementation for `QUAL-WEB-005`, `QUAL-WEB-006`,
+`FINAL-WEB-003`, `FINAL-WEB-005`, `FINAL-WEB-006`, `FINAL-WEB-007`, and
+`FINAL-WEB-008`; no checkbox changed. PR #252 hosted runs failed before
+repository steps with no runner and zero steps, so hosted qualification is not
+claimed. Keep the affected rows open for their remaining hosted/browser/field,
+independent, acceptance, dependency, and final-release contracts. AppSec/Hunt
+and final go/no-go state are unchanged. The live score remains **244 checked /
+36 open / 280 total (87.1%)**. Nothing was deleted.
+
 ## Owner execution directive · implementation-first closeout · 2026-10-23
 
 The owner has clarified the shipping mode for the remaining **36** open

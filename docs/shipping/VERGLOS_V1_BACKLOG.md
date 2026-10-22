@@ -1,5 +1,27 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · merged Web public metadata and landing implementation
+
+Web PR #245 merged normally as `0a70eecb6aa96344240f44ad1e216d9936b931f1`,
+PR #251 as `4e721997754a8496138077f056e24e9788e92278`, and PR #252 as
+`29e2ba4f088a9ddbc195338d68de9fa1e337e823`. The current Web `origin/main` is
+at the last merge commit; no squash merge or branch deletion was used.
+
+The merged code implements the public sitemap/robots boundary,
+machine-readable catalog-term validation, Playwright/Axe landing capture at
+desktop and mobile, strict CWV/accessibility/canonical/responsive/crawlability
+qualification, and serial test execution. Local build, focused tests,
+typecheck, and a real **12/12-measurement** browser capture passed; the
+qualification decision passed with zero source issues. Evidence:
+`docs/shipping/evidence/final-web-007-008-public-metadata-landing-2026-10-23.md`.
+
+This is implementation evidence only. Keep the affected rows open for their
+remaining hosted/browser/field, independent, acceptance, dependency, and
+final-release contracts. The hosted PR #252 runs failed before repository
+steps with no runner and zero steps. AppSec/Hunt and final go/no-go state are
+unchanged. No checkbox changed; the live score remains **244 checked / 36 open
+/ 280 total (87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · owner authorization refresh
 
 Anurag Yadav, owner of Top Notchh Solutions and Verglos, gave direct written

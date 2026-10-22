@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · merged Web public-metadata and landing implementation
+
+- **Implementation:** Web PR #245 merged normally as
+  `0a70eecb6aa96344240f44ad1e216d9936b931f1`; PR #251 as
+  `4e721997754a8496138077f056e24e9788e92278`; and PR #252 as
+  `29e2ba4f088a9ddbc195338d68de9fa1e337e823`. No squash merge or branch
+  deletion was used.
+- **Code outcome:** The current Web main contains strict public sitemap/robots
+  and machine-readable catalog-term validation, Playwright/Axe desktop/mobile
+  landing capture, fail-closed CWV/accessibility/canonical/responsive/
+  crawlability qualification, and deterministic serial test execution.
+- **Verification:** Production build, focused tests, typecheck, and a real
+  local browser capture passed. The capture covered six required paths at two
+  viewports (**12/12 measurements**) and qualification returned passed with
+  `decision.ok: true` and zero source issues. Evidence:
+  `evidence/final-web-007-008-public-metadata-landing-2026-10-23.md`.
+- **Disposition:** This advances the code-side implementation for
+  `QUAL-WEB-005`, `QUAL-WEB-006`, `FINAL-WEB-003`, `FINAL-WEB-005`,
+  `FINAL-WEB-006`, `FINAL-WEB-007`, and `FINAL-WEB-008`; their checkboxes stay
+  open for hosted/browser/field, independent, acceptance, dependency, and
+  final-release requirements. PR #252 hosted runs failed before repository
+  steps with no runner and zero steps. AppSec/Hunt and final go/no-go state are
+  unchanged. Score remains **244/36/280 (87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · merged Web non-AppSec implementation slice
 
 - **Implementation:** Web PR #248 (deletion-input fail-closed boundary) merged

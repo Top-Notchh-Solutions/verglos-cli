@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · merged Web public-metadata and landing implementation
+
+Web PR #245 merged normally as `0a70eecb6aa96344240f44ad1e216d9936b931f1`,
+PR #251 as `4e721997754a8496138077f056e24e9788e92278`, and PR #252 as
+`29e2ba4f088a9ddbc195338d68de9fa1e337e823`. The current Web `origin/main` is
+at `29e2ba4f088a9ddbc195338d68de9fa1e337e823`; no squash merge or branch
+deletion was used.
+
+These merges implement the public sitemap/robots boundary, machine-readable
+catalog-term validation, Playwright/Axe desktop/mobile landing capture, strict
+CWV/accessibility/canonical/responsive/crawlability qualification, and serial
+test execution. Local production build, focused tests, typecheck, and a real
+12-measurement browser capture all passed. The capture qualification returned
+`status: passed`, `decision.ok: true`, and zero source issues. Evidence:
+`evidence/final-web-007-008-public-metadata-landing-2026-10-23.md`.
+
+The hosted PR #252 runs failed before repository steps with no runner and zero
+steps; they are not claimed as hosted qualification. Keep the affected rows
+open for their remaining hosted/browser/field, independent, acceptance,
+dependency, and final-release contracts. AppSec/Hunt and final go/no-go state
+are unchanged. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · merged Web non-AppSec implementation slice
 
 Web PR #248 merged normally as `db22cee939080f91d5715d00a3446c69480a1960`,
