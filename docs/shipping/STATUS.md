@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · workspace gate-artifact inventory
+
+The whole TopNotchh workspace was searched, including the four implementation
+repositories, `.local-evidence`, `.local`, and the public/internal fixture
+trees. See `evidence/gate-artifact-inventory-2026-10-23.md` for the exact
+paths and classification.
+
+The search found an owner-approved implementation/product-contract baseline,
+bounded Preview/local authorization, technical license inventories, public and
+synthetic fixture permissions, and AppSec review preparation. It did not find
+completed legal/redistribution clearance, final commercial-hypothesis
+acceptance, Production/provider authorization, external customer/recipient
+consent, a completed independent Hunt/AppSec report, or a final go/no-go
+sign-off. The found fixture authorizations explicitly disclaim customer
+consent/endorsement, and the owner authorization explicitly excludes
+Production/publication/final release actions.
+
+No checkbox changed. The live private score remains **239 checked / 41 open /
+280 total (85.4%)**. Continue implementation on the 28-target queue; keep the
+13 AppSec-held entries and the six external gate follow-ups explicit. Nothing
+was deleted.
+
 ## 2026-10-23 · FINAL-WEB-006 public proof origin boundary
 
 Web PR #250 exact pushed head `cb7d0952253c5dbccae54fc956c85795d344737d`

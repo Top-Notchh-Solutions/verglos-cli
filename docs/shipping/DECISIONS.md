@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · classify workspace gate artifacts without closing rows
+
+- **Decision:** Record the whole-workspace gate-artifact inventory and retain
+  every unchecked row. Do not treat preparation, owner authorization,
+  synthetic fixtures, technical license scans, or self-review as external
+  acceptance.
+- **Found:** The product contract and launch price anchors are approved by the
+  owner for implementation/Point-5 qualification; bounded Preview/local work
+  is authorized; public and internal fixture authorization files exist; and
+  Hunt/AppSec review packets and technical observations exist.
+- **Not found:** Completed legal/redistribution clearance, final commercial
+  pricing-hypothesis acceptance, Production/provider authorization, external
+  customer/recipient consent, a completed independent Hunt/AppSec report, or
+  final go/no-go/release sign-off.
+- **Disposition:** Continue the implementation-first 28-target queue. Keep
+  the 13 AppSec-held entries and six external gate follow-ups explicit. Score
+  remains **239 checked / 41 open / 280 total (85.4%)**.
+- **Boundary:** No checkbox, external provider, Production, customer,
+  publication, database, or release state changed. Nothing was deleted.
+- **Evidence:** `evidence/gate-artifact-inventory-2026-10-23.md`.
+
 ## 2026-10-23 · preserve normal merge integration for FINAL-WEB-007/008
 
 - **Decision:** Preserve the normal merge commits for PR #245 and PR #246 in
