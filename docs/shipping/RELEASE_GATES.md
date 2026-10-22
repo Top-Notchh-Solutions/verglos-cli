@@ -11,6 +11,17 @@ final acceptance artifacts. Score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+## 2026-10-22 · Web PR #241 public-proof code gate
+
+PR #241 merged normally as `02f5aba95c4172255cc522730c6ffecc1598cbda` after
+hosted checks **8/8** passed. URL-boundary tests, public smoke, typecheck, and
+build passed; the exact merged-head scan no longer reports AUTH-003 or D5-004.
+This clears code-side implementation gaps only. FINAL-WEB-006, QUAL-WEB-006,
+and ACCEPT-005 remain open for external/customer, human/field, independent,
+and final acceptance artifacts. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-005 current-head technical gate
 
 Current clean merged CLI/Web scans exited **0**, reporting CLI **78 findings /
@@ -31,7 +42,7 @@ record exist. Adjacent current-head truth checks pass **35/35**, **4/4**, and
 
 ## 2026-10-22 · ACCEPT-003 current-head bundle gate
 
-The current private acceptance manifest contains **54** hashed files and
+The current private acceptance manifest contains **55** hashed files and
 passes its secret scan. Keep `ACCEPT-003` unchecked for reviewer sign-off and
 external/hosted evidence. Score remains **239/41/280 (85.4%)**. Evidence:
 `evidence/accept-003-current-head-pr239-2026-10-22.md`.

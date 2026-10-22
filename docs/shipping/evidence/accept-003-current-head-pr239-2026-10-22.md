@@ -1,7 +1,7 @@
 # ACCEPT-003 current-head evidence bundle · 2026-10-22
 
-The private acceptance bundle was regenerated after the merged Web PR #239,
-Web PR #240, and the current ACCEPT-002 verifier. The manifest contains **54** hashed
+The private acceptance bundle was regenerated after the merged Web PRs #239,
+#240, and #241 and the current ACCEPT-002 verifier. The manifest contains **55** hashed
 evidence files and its secret scan passed. The bundle records exact source
 commits, command results, output hashes, limitations, and the open gate
 boundary without embedding credentials, source, customer data, or reviewer

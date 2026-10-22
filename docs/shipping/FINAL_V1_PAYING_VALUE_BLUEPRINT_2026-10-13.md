@@ -30,6 +30,11 @@ provider acceptance, or final release acceptance. The live backlog remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+Web PR #241 further tightened the public proof URL boundary. This supports the
+public-proof implementation but does not establish customer value, field
+performance, provider acceptance, or final release acceptance. Evidence:
+`evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 ## 0.1 Owner authorization and independent-review boundary — 2026-10-14
 
 Top Notchh Solutions owner Anurag Yadav authorized the bounded Preview,

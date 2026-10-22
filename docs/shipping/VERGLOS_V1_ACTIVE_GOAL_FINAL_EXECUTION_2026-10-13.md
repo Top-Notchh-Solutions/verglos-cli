@@ -29,6 +29,20 @@ human, field, and independent gates. Score remains **239 checked / 41 open /
 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+## Latest continuation result · 2026-10-22 · Web PR #241 public-proof URL boundary
+
+Web PR #241 tightened the public proof URL validator with explicit value
+identity checks and direct rejection tests for non-HTTPS, credentialed, and
+query URLs. PR checks passed **8/8**, local URL tests **3/3**, public release
+smoke **4/4**, typecheck, and build (**49/49** pages/routes). At exact merged
+head `02f5aba95c4172255cc522730c6ffecc1598cbda`, the owner-controlled Web scan
+exited **0** with **20 findings / score 81 medium**; AUTH-003 and D5-004 are
+absent. This is code-side qualification only; no checkbox changed. Keep
+FINAL-WEB-006, QUAL-WEB-006, and ACCEPT-005 open for their external, human,
+field, independent, and final gates. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · ACCEPT-005 current-head run
 
 Current clean merged CLI/Web heads completed the owner-controlled scan with
@@ -53,7 +67,7 @@ passed **35/35**, **4/4**, and **4/4**. Keep ACCEPT-005 open; score remains
 
 ## Latest continuation result · 2026-10-22 · ACCEPT-003 bundle
 
-The private acceptance manifest now contains **54** hashed evidence files and
+The private acceptance manifest now contains **55** hashed evidence files and
 passes its secret scan. Keep `ACCEPT-003` unchecked for reviewer sign-off and
 the external/hosted evidence required by its contract. Score remains **239
 checked / 41 open / 280 total (85.4%)**. Evidence:

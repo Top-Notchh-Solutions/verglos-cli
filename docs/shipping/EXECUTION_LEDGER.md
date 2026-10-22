@@ -18,6 +18,23 @@
   (85.4%)**.
 - **Evidence:** `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+## 2026-10-22 · Web PR #241 public-proof URL boundary
+
+- **Implementation:** Web commits `ff50b24` and `d7f4ce7` tighten the public
+  proof URL validator and add direct boundary tests; PR #241 merged normally as
+  `02f5aba95c4172255cc522730c6ffecc1598cbda`. The source branch remains
+  preserved.
+- **Verification:** URL tests **3/3**, public release smoke **4/4**, typecheck,
+  production build **49/49**, and hosted checks **8/8** passed. The exact
+  merged-head Web scan exited 0 with 20 findings, score 81/medium, and no
+  AUTH-003 or D5-004 finding.
+- **Boundary:** Owner-controlled code-side qualification only; no provider,
+  customer, Production, legal, field, or independent-review operation occurred.
+  Nothing was deleted.
+- **Disposition:** Keep FINAL-WEB-006, QUAL-WEB-006, and ACCEPT-005 unchecked
+  for their remaining acceptance gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-005 current-head first-party qualification
 
 - **Verification:** Clean CLI `1d7844bd` and Web `ba00d5d` scans exited **0**.
@@ -50,7 +67,7 @@
 
 ## 2026-10-22 · ACCEPT-003 current-head evidence bundle
 
-- **Verification:** The private acceptance manifest contains **54** hashed
+- **Verification:** The private acceptance manifest contains **55** hashed
   files and passed its secret scan after the current merged-head refresh.
 - **Boundary:** It records commands, source identities, results, hashes,
   limitations, and open gates without credentials, source, customer data, or

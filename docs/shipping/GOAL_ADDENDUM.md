@@ -16,6 +16,18 @@ external, human, field, or final gates. The live backlog remains **239 checked /
 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
 `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+## Web PR #241 implementation continuation · 2026-10-22
+
+The public proof URL boundary was tightened and merged normally in PR #241 as
+`02f5aba95c4172255cc522730c6ffecc1598cbda`. URL tests, public smoke,
+typecheck/build, and all 8 hosted checks passed; the exact merged-head scan
+exited 0 with AUTH-003 and D5-004 absent. This is code-side progress only. No
+checkbox is checked because FINAL-WEB-006, QUAL-WEB-006, and ACCEPT-005 still
+require their external, human, field, independent, or final gates. The live
+backlog remains **239 checked / 41 open / 280 total (85.4%)**. Nothing was
+deleted. Evidence:
+`evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 ## QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
 
 Read-only Chrome DevTools inspection of a separate production checkout tab

@@ -12,6 +12,18 @@ implementation only; ACCEPT-005 and QUAL-WEB-006 remain open. Score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+## 2026-10-22 · Web PR #241 public-proof URL boundary
+
+Web PR #241 merged normally as `02f5aba95c4172255cc522730c6ffecc1598cbda`
+with explicit URL-boundary validation and direct regression coverage. URL
+tests **3/3**, public release smoke **4/4**, typecheck, build (**49/49**), and
+hosted checks **8/8** passed. The exact merged-head owner-controlled scan
+exited **0** with 20 findings, score 81/medium, and no AUTH-003 or D5-004.
+This advances code-side implementation only; FINAL-WEB-006, QUAL-WEB-006, and
+ACCEPT-005 remain open. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-005 current-head first-party qualification
 
 Current clean merged heads passed the owner-controlled scan command with CLI
@@ -34,7 +46,7 @@ pass: **35/35**, **4/4**, and **4/4**. Score remains **239 checked / 41 open /
 
 ## 2026-10-22 · ACCEPT-003 current-head evidence bundle
 
-The private acceptance bundle now contains **54** hashed evidence files and
+The private acceptance bundle now contains **55** hashed evidence files and
 passes its secret scan. Keep `ACCEPT-003` open for reviewer sign-off and the
 external/hosted evidence required by the row. Score remains **239 checked / 41
 open / 280 total (85.4%)**. Evidence:

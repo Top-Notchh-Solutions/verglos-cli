@@ -12,6 +12,19 @@ external, field, customer, independent, and final gates. Score remains **239
 checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
 `docs/shipping/evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+## 2026-10-22 · Web PR #241 public-proof URL boundary
+
+Web PR #241 merged normally as `02f5aba95c4172255cc522730c6ffecc1598cbda`
+with explicit public proof URL validation and direct regression coverage. URL
+tests **3/3**, public release smoke **4/4**, typecheck, build (**49/49**), and
+hosted checks **8/8** passed. The exact merged-head owner-controlled scan
+exited 0 with 20 findings, score 81/medium, and no AUTH-003 or D5-004 finding.
+This is code-side progress only; keep FINAL-WEB-006, QUAL-WEB-006, and ACCEPT-005
+open for their stated human, external, field, customer, independent, and final
+gates. Score remains **239 checked / 41 open / 280 total (85.4%)**. Nothing was
+deleted. Evidence:
+`docs/shipping/evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 local isolated qualification
 
 Web merged head `67f8f89` passed deletion request/worker integrations **2/2**,

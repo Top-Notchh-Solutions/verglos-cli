@@ -13,6 +13,18 @@
   independent gates. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+## Web PR #241 public-proof URL boundary · 2026-10-22
+
+- **Source mapping:** Web implementation `ff50b24`, regression `d7f4ce7`, and
+  normal merge head `02f5aba95c4172255cc522730c6ffecc1598cbda`.
+- **Qualification mapping:** URL tests **3/3**, public smoke **4/4**,
+  typecheck/build **49/49**, hosted checks **8/8**, and exact merged-head scan
+  exit 0 with no AUTH-003 or D5-004 finding.
+- **Acceptance mapping:** Code-side implementation is advanced, but no row is
+  checked; FINAL-WEB-006, QUAL-WEB-006, and ACCEPT-005 retain their
+  external/human/field/independent gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 ## ACCEPT-005 current-head first-party qualification · 2026-10-22
 
 - **Source mapping:** CLI `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web
@@ -38,7 +50,7 @@
 
 ## ACCEPT-003 current-head evidence bundle · 2026-10-22
 
-- **Bundle mapping:** 54 hashed evidence files; secret scan passed.
+- **Bundle mapping:** 55 hashed evidence files; secret scan passed.
 - **Acceptance mapping:** Keep `ACCEPT-003` open for reviewer sign-off and
   external/hosted evidence. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/accept-003-current-head-pr239-2026-10-22.md` and the

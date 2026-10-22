@@ -24,6 +24,10 @@ contract's acceptance boundaries or the private backlog score (**239 checked /
 41 open / 280 total, 85.4%**). Evidence:
 `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+The subsequent Web PR #241 merged normally and tightened the public proof URL
+boundary without changing the product contract or its acceptance gates.
+Evidence: `evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 This document replaces conflicting informal descriptions of the final V1
 scope. It is a product contract, not proof that every capability is already
 implemented. A capability becomes shipped only after its code, tests, runtime

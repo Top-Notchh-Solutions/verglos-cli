@@ -14,7 +14,23 @@
   operation occurred and nothing was deleted.
 - **Disposition:** Keep ACCEPT-005 and QUAL-WEB-006 open for their own contracts.
   Score remains **239/41/280 (85.4%)**. Evidence:
-  `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+`evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
+## 2026-10-22 · retain open gates after Web PR #241
+
+- **Decision:** Merge the public proof URL-boundary implementation normally,
+  preserve both commits and the source branch, and retain all affected backlog
+  checkboxes as open.
+- **Evidence:** PR #241 merged as
+  `02f5aba95c4172255cc522730c6ffecc1598cbda`; URL tests **3/3**, public smoke
+  **4/4**, typecheck/build, hosted checks **8/8**, and the exact merged-head
+  scan exited 0 with no AUTH-003 or D5-004 finding.
+- **Boundary:** This is code-side implementation evidence, not customer,
+  provider, legal, field, independent AppSec, or final release evidence. No
+  external or Production operation occurred and nothing was deleted.
+- **Disposition:** Keep FINAL-WEB-006, QUAL-WEB-006, and ACCEPT-005 open. Score
+  remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
 
 ## 2026-10-22 · retain ACCEPT-005 after current-head first-party run
 

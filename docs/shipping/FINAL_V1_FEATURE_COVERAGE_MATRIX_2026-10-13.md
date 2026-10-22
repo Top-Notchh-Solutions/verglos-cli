@@ -35,6 +35,11 @@ dependent row. The live score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
 
+The follow-up Web PR #241 tightens the public proof URL validator and adds
+direct boundary tests. This advances FINAL-WEB-006 code coverage only; the row
+and dependent acceptance rows remain unchecked. Evidence:
+`evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md`.
+
 ## 0.1 Owner authorization checkpoint — 2026-10-14
 
 The owner has authorized the bounded Preview, disposable-runner, SCM-test,
