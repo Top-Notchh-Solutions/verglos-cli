@@ -4834,3 +4834,20 @@ each observed method has lifecycle and reconciliation evidence.
   **239/41/280 (85.4%)**.
 - **Evidence:**
   `evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## 2026-10-22 · retain FINAL-WEB-008 after sitemap boundary guard
+
+- **Decision:** Accept the sitemap private-route guard as code-side progress,
+  but keep the backlog row open and keep PR #245 unmerged until its required
+  hosted checks can execute successfully.
+- **Observed:** The public smoke rejects private-route tokens in the sitemap;
+  the focused negative regression and local public/type checks pass.
+- **Reason:** GitHub Verify runs `39827008774` and `39827008777` were blocked
+  before execution by the account payments/spending-limit failure. Vercel,
+  Preview Comments, and GitGuardian passed, but those do not replace the
+  required hosted matrix/type-schema gates.
+- **Boundary:** No billing repair, provider, customer, legal, Production,
+  database, publication, independent-review, or release-sign-off action was
+  taken. No files, branches, deployments, or records were deleted. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.

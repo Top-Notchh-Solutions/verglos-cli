@@ -4748,3 +4748,21 @@ and final release sign-off. No external state changed and nothing was deleted.
 Score remains **239/41/280 (85.4%)**.
 
 Evidence: `evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## 2026-10-22 · FINAL-WEB-008 sitemap private-route guard gate
+
+Web PR #245 adds and locally qualifies a fail-closed sitemap boundary:
+private-route tokens in `src/app/sitemap.ts` are rejected, with a focused
+negative regression for `/reports`. Local focused smoke **8/8**, public smoke
+**18 routes / 22 claims / 2 assets / 0 issues**, typecheck, and diff check
+passed.
+
+The required hosted Verify matrix `39827008774` and type/schema run
+`39827008777` did not start because GitHub reported failed recent account
+payments or a spending-limit requirement. Vercel deployment
+`CmmH1SuX9v6HjwbfRugnyjmQ9WXQ`, Preview Comments, and GitGuardian passed. Keep
+PR #245 open and `FINAL-WEB-008` unchecked until billing is repaired and the
+hosted checks execute. No external state changed; nothing was deleted. Score
+remains **239/41/280 (85.4%)**.
+
+Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.

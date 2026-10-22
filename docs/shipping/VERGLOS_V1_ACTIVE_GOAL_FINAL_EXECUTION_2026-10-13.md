@@ -1182,3 +1182,21 @@ operational evidence, independent review, enterprise acceptance, and final
 release sign-off are actually evidenced. No external state changed; nothing was
 deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+# 2026-10-22 · FINAL-WEB-008 sitemap private-route guard implementation
+
+Web source commit `caecce539d3e18704af86f73b40730a1ad1076fb` adds a
+fail-closed public release-smoke invariant for private sitemap routes and a
+negative regression test. Local focused smoke **8/8**, public smoke **18
+routes / 22 claims / 2 proof assets / 0 issues**, typecheck, and diff check
+passed. PR #245 is open on the preserved branch
+`codex/public-sitemap-private-route-guard-20261022`.
+
+The hosted Verify matrix `39827008774` and type/schema run `39827008777` were
+blocked before any repository step by GitHub's account payments/spending-limit
+notice; Vercel `CmmH1SuX9v6HjwbfRugnyjmQ9WXQ`, Preview Comments, and GitGuardian
+passed. This is an account billing gate, not an AppSec or local-code failure;
+do not bypass the required hosted checks. `FINAL-WEB-008` remains unchecked,
+the backlog remains **239 checked / 41 open / 280 total (85.4%)**, and nothing
+was deleted. Evidence:
+`docs/shipping/evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.

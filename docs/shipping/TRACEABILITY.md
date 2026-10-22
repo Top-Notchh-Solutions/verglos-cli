@@ -8743,3 +8743,22 @@ changed. See
   release sign-off. Score remains **239/41/280 (85.4%)**.
 - **Evidence:**
   `evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## FINAL-WEB-008 sitemap private-route guard · 2026-10-22
+
+- **Source mapping:** Web PR #245, source commit
+  `caecce539d3e18704af86f73b40730a1ad1076fb`; branch
+  `codex/public-sitemap-private-route-guard-20261022` remains preserved.
+- **Contract mapping:** Public release smoke rejects `/account`, `/checkout`,
+  `/login`, `/activate`, `/cli-auth`, `/handoff`, and `/reports` tokens in
+  `src/app/sitemap.ts`; a temporary-copy negative test proves the guard.
+- **Verification mapping:** Focused smoke **8/8**, public smoke **18 routes /
+  22 claims / 2 assets / 0 issues**, typecheck, and diff check passed locally.
+- **Hosted boundary:** Verify matrix `39827008774` and type/schema
+  `39827008777` were blocked before job start by the GitHub account
+  payments/spending-limit notice; Vercel `CmmH1SuX9v6HjwbfRugnyjmQ9WXQ`,
+  Preview Comments, and GitGuardian passed.
+- **Acceptance mapping:** PR #245 is open and `FINAL-WEB-008` remains
+  unchecked for hosted qualification, truth freeze, acceptance, and release
+  sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
+- **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.

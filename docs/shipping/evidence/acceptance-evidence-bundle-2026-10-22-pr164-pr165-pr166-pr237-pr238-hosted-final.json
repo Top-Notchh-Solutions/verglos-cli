@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-22T17:53:22.788Z",
+  "generatedAt": "2026-10-22T18:01:59.212Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -321,6 +321,11 @@
       "path": "docs/shipping/evidence/final-web-008-robots-guard-pr244-2026-10-22.md",
       "sha256": "f5a40c31c38d12a1a5e52c49c06393d0dff9152f8156ef9ab3f392074b2f2589",
       "bytes": 2512
+    },
+    {
+      "path": "docs/shipping/evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md",
+      "sha256": "4f270afb9badb158f462dd7fa61d606e3367aed60f7c9bb34513a9a4b1d49221",
+      "bytes": 2163
     },
     {
       "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr164-pr165-pr166-pr237-pr238.json",

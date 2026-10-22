@@ -10997,3 +10997,27 @@ enterprise acceptance, and final release sign-off. Score remains **239 checked /
 41 open / 280 total (85.4%)**.
 
 Evidence: `evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## 2026-10-22 · FINAL-WEB-008 sitemap private-route guard
+
+Web PR #245 adds a release-smoke invariant that rejects private-route tokens
+in `src/app/sitemap.ts` and a negative regression test that adds `/reports` to
+a temporary sitemap source copy. The source commit is
+`caecce539d3e18704af86f73b40730a1ad1076fb` on the preserved branch
+`codex/public-sitemap-private-route-guard-20261022`.
+
+Local verification passed focused smoke **8/8**, public smoke **18 routes / 22
+claims / 2 proof assets / 0 issues**, typecheck, and `git diff --check`. PR
+#245 is not merged: hosted Verify matrix `39827008774` and type/schema
+`39827008777` were not started because GitHub reported failed recent account
+payments or an increased spending limit requirement; the jobs had no runner or
+steps. Vercel deployment `CmmH1SuX9v6HjwbfRugnyjmQ9WXQ`, Preview Comments,
+and GitGuardian passed. Do not bypass or merge until billing is repaired and
+the required hosted checks are rerun.
+
+`FINAL-WEB-008` remains unchecked. No customer, legal, provider, Production,
+database, publication, independent-review, or final sign-off state changed;
+nothing was deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**.
+
+Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
