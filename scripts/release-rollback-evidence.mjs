@@ -1,15 +1,21 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
+import { MAX_RELEASE_ARTIFACT_BYTES, readBoundedRegularFile } from "./release-artifact-files.mjs";
 
 const execFileAsync = promisify(execFile);
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outputDirectory = process.argv[2] ?? join(repositoryRoot, ".artifacts", "release-rollback");
 const manifestPath = join(repositoryRoot, "scripts", "fixtures", "release-rollback-rehearsal.json");
-const manifestDigest = `sha256:${createHash("sha256").update(await readFile(manifestPath)).digest("hex")}`;
+const manifestBytes = await readBoundedRegularFile(
+  manifestPath,
+  MAX_RELEASE_ARTIFACT_BYTES,
+  "release rollback rehearsal manifest",
+);
+const manifestDigest = `sha256:${createHash("sha256").update(manifestBytes).digest("hex")}`;
 const command = [
   join(repositoryRoot, "packages", "cli", "dist", "index.js"),
   "release",
