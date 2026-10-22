@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-008 complete route-inventory enforcement · 2026-10-22
+
+- **Source mapping:** Web PR #243 source `c8e68e5` merged normally as
+  `619c31b9719c5284f6e90a9a1133c8515e015ed9`.
+- **Contract mapping:** The release smoke recursively discovers App Router
+  pages and requires each page to be in the public manifest or an explicit
+  authenticated/API exclusion.
+- **Verification mapping:** Exact merged head passed focused smoke **6/6**,
+  public smoke **18 routes / 22 claims / 2 assets / 0 issues**, and typecheck;
+  hosted checks passed.
+- **Acceptance mapping:** FINAL-WEB-008 remains unchecked for ACCEPT-003/009/
+  010, founder truth-freeze, and final release acceptance. Score remains
+  **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Boundary:** No provider, customer, legal, database, Production, or
+  deployment state changed. Nothing was deleted.
+- **Evidence:** `evidence/final-web-008-public-route-coverage-pr243-2026-10-22.md`.
+
+
 ## FINAL-WEB-008 public route-index boundary implementation · 2026-10-22
 
 - **Source mapping:** Web PR #242 source `f135805` merged normally as

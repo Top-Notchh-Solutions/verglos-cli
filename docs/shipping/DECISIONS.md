@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain FINAL-WEB-008 after route-coverage enforcement
+
+- **Decision:** Accept PR #243 as code-side release-smoke hardening without
+  checking FINAL-WEB-008.
+- **Observed:** Every App Router page is now discovered and must be reviewed
+  or explicitly classified as authenticated/API-only; the current exact head
+  passes **6/6** focused smoke and **0** public-release issues.
+- **Reason:** Automated route coverage strengthens the final sweep but does
+  not replace ACCEPT-003/009/010, founder truth-freeze, or final acceptance.
+- **Boundary:** No external provider, customer, legal, database, Production,
+  or independent-review claim was made. Nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-public-route-coverage-pr243-2026-10-22.md`.
+
 ## 2026-10-22 · retain FINAL-WEB-008 after public route boundary hardening
 
 - **Decision:** Treat PR #242 as accepted code-side implementation and hosted

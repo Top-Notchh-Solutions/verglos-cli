@@ -1112,3 +1112,15 @@ passed. This is code-side progress only. FINAL-WEB-008 remains unchecked for
 ACCEPT-003/009/010, founder truth-freeze, and final acceptance. Nothing was
 deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-008-public-route-index-boundary-pr242-2026-10-22.md`.
+# 2026-10-22 · FINAL-WEB-008 complete route-inventory enforcement
+
+Web PR #243 merged normally as `619c31b9719c5284f6e90a9a1133c8515e015ed9`.
+The public release smoke now discovers every App Router page and rejects any
+unclassified public page, while requiring explicit authenticated/API
+classification. Exact merged-head smoke passed **6/6**, public smoke passed
+**18 routes / 22 claims / 2 assets / 0 issues**, and typecheck passed; hosted
+checks passed. This is code-side progress only. FINAL-WEB-008 remains
+unchecked for ACCEPT-003/009/010, founder truth-freeze, and final acceptance.
+Nothing was deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-008-public-route-coverage-pr243-2026-10-22.md`.

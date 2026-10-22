@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · FINAL-WEB-008 complete route-inventory enforcement
+
+- **Implementation:** Web PR #243 source `c8e68e5` merged normally as
+  `619c31b9719c5284f6e90a9a1133c8515e015ed9`. The release smoke discovers
+  every App Router page and requires explicit public or authenticated/API
+  classification.
+- **Verification:** Exact merged head passed focused smoke **6/6**, public
+  smoke **18 routes / 22 claims / 2 assets / 0 issues**, and typecheck;
+  hosted matrix, PostgreSQL, type/schema/build, Vercel, Preview Comments, and
+  GitGuardian checks passed.
+- **Disposition:** Keep FINAL-WEB-008 unchecked for ACCEPT-003/009/010,
+  founder truth-freeze, and final acceptance. Score remains **239/41/280
+  (85.4%)**.
+- **Boundary:** No provider, database, migration, customer, Production, or
+  deployment state changed. Nothing was deleted.
+- **Evidence:** `evidence/final-web-008-public-route-coverage-pr243-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-008 public route-index boundary implementation
 
 - **Implementation:** Web PR #242 merged normally as

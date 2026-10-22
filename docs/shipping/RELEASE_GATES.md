@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · FINAL-WEB-008 route-coverage enforcement gate
+
+Web PR #243 merged normally as `619c31b9719c5284f6e90a9a1133c8515e015ed9`.
+The public release smoke now discovers every App Router page, rejects
+unclassified public pages, and preserves explicit authenticated/API exclusions.
+Exact merged-head smoke passed **6/6**, public smoke passed **18 routes / 22
+claims / 2 assets / 0 issues**, and typecheck passed; hosted checks all passed.
+Keep FINAL-WEB-008 open for ACCEPT-003/009/010, founder truth-freeze, and final
+acceptance. No external state changed and nothing was deleted. Score remains
+**239/41/280 (85.4%)**. Evidence:
+`evidence/final-web-008-public-route-coverage-pr243-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-008 public route-index boundary gate
 
 Web PR #242 merged normally as `c4b7313e803dce980cf6ac3a7bc68f73927d456c`.

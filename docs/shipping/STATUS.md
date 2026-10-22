@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · FINAL-WEB-008 complete route-inventory enforcement
+
+Web PR #243 merged normally as `619c31b9719c5284f6e90a9a1133c8515e015ed9`.
+Public release smoke now discovers every App Router page and fails on any
+unclassified public page; authenticated account/organization and API prefixes
+are explicit exclusions. Exact merged-head qualification passed focused smoke
+**6/6**, public smoke **18 routes / 22 of 22 claims / 2 proof assets / 0
+issues**, and typecheck. Hosted matrix, PostgreSQL, type/schema/build, Vercel,
+Preview Comments, and GitGuardian checks passed. FINAL-WEB-008 remains open
+for ACCEPT-003/009/010, founder truth-freeze, and final acceptance. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted.
+Evidence: `evidence/final-web-008-public-route-coverage-pr243-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-008 public route-index boundary implementation
 
 Web PR #242 merged normally as `c4b7313e803dce980cf6ac3a7bc68f73927d456c`.
