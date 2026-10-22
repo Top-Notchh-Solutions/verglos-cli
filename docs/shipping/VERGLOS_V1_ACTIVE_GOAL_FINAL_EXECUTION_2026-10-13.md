@@ -14,6 +14,28 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · ENT-CLI-001
+
+The private-runner lifetime boundary was implemented in CLI commit
+`1965e3eb` and Web commit `bafac8a`; both enforce the hosted 30-minute maximum
+for signed jobs and include overlong-expiry regression coverage. CLI PR #166
+merged normally as `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web PR #237
+merged normally as `baf59ca9b6cb12bffa44eca53bc4645fba92ced3`; both source
+branches remain preserved. CLI typecheck passed **14/14**, full CLI tests
+**13/13**, build **8/8**; Web focused transport tests passed **4/4**,
+typecheck passed, and direct Web tests passed **895/919** with 24 skips and 0
+failures. The clean merged-head verifier passed CLI **311/313** with 2 skips,
+Web **951/981** with 30 skips, composed substrates **75/75**, and all **12/12**
+stories with zero failures. Hosted jobs were queued/in progress at final
+status read and are not claimed as passed. `TEST_DATABASE_URL` was removed;
+the remote `.env.test.local` value was not used. No database, provider,
+publication, deployment, customer, legal, independent-review, browser-human,
+field-CWV, or final-release operation occurred, and nothing was deleted. Keep
+`ENT-CLI-001` unchecked for provider qualification, customer/recipient
+acceptance, independent review, and final release sign-off. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-private-runner-lifetime-pr166-pr237-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · DIST-003
 
 The release-origin metadata output boundary was repaired in CLI commit

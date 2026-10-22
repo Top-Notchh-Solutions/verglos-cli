@@ -1,5 +1,32 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ENT-CLI-001 private-runner lifetime boundary and PRs #166/#237
+
+- **Implementation:** CLI commit `1965e3eb` and Web commit `bafac8a` enforce a
+  30-minute maximum signed private-runner job lifetime in shared admission and
+  Web transport validation, with overlong-expiry regression tests.
+- **Promotion:** CLI PR [#166](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/166)
+  merged normally as `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web PR
+  [#237](https://github.com/anuragyadav-git/verglos-web/pull/237) merged
+  normally as `baf59ca9b6cb12bffa44eca53bc4645fba92ced3`. Both source branches
+  were preserved. No squash, rebase, or deletion occurred.
+- **Verification:** CLI typecheck **14/14**, full CLI graph **13/13**, build
+  **8/8**, Web focused transport tests **4/4**, Web typecheck, direct Web
+  **895/919** with 24 skips and 0 failures. Merged-head verifier CLI
+  **311/313** with 2 skips, Web **951/981** with 30 skips, composed **75/75**,
+  all **12/12** stories, zero failures.
+- **Hosted boundary:** Checks were queued/in progress at final status read and
+  are not claimed as passed. `env -u TEST_DATABASE_URL` was used; the remote
+  value in `.env.test.local` was not used. No provider, database, publication,
+  deployment, customer, legal, independent-review, or final-release operation
+  occurred. No file, branch, record, deployment, provider, customer,
+  database, or release artifact was deleted or changed.
+- **Disposition:** Keep `ENT-CLI-001` unchecked for provider qualification,
+  customer/recipient acceptance, independent review, and final release
+  sign-off. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/ent-cli-001-private-runner-lifetime-pr166-pr237-2026-10-22.md`
+  and `evidence/acceptance-stories-verification-2026-10-22-pr164-pr165-pr166-pr237.json`.
+
 ## 2026-10-22 · DIST-003 release-origin output boundary and PR #165
 
 - **Implementation:** CLI commit `7ef8f1f0d4b29766d75623884b00cd524e3d29e1`

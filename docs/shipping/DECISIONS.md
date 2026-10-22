@@ -1,5 +1,28 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain ENT-CLI-001 after PRs #166/#237 lifetime repair
+
+- **Decision:** Promote the repository-owned private-runner lifetime repair and
+  retain `ENT-CLI-001` unchecked because provider qualification,
+  customer/recipient acceptance, independent review, and final release
+  sign-off remain open.
+- **Implementation:** CLI commit `1965e3eb` and Web commit `bafac8a` reject
+  signed jobs whose lifetime exceeds 30 minutes. CLI PR #166 merged normally
+  as `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web PR #237 merged normally
+  as `baf59ca9b6cb12bffa44eca53bc4645fba92ced3`; source branches preserved.
+- **Verification:** CLI typecheck **14/14**, full tests **13/13**, build **8/8**;
+  Web focused **4/4**, typecheck, direct **895/919** with 24 skips and 0
+  failures; merged verifier CLI **311/313**, Web **951/981**, composed
+  **75/75**, all **12/12**, zero failures. Hosted jobs were queued/in progress
+  at final status read and are not claimed as passed.
+- **Boundary:** `env -u TEST_DATABASE_URL`; the remote test value was not used.
+  No database/provider/customer/legal/publication/deployment/independent-review
+  action occurred. No file, branch, record, deployment, provider, customer,
+  database, or release artifact was deleted or changed.
+- **Disposition:** Keep the score at **239/41/280 (85.4%)** and preserve the
+  additive evidence bundle.
+- **Evidence:** `evidence/ent-cli-001-private-runner-lifetime-pr166-pr237-2026-10-22.md`.
+
 ## 2026-10-22 · retain DIST-003 after PR #165 origin-output repair
 
 - **Decision:** Promote the repository-owned release-origin output repair and

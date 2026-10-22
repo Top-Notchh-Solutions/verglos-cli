@@ -45,6 +45,7 @@ const paths = [
   "docs/shipping/evidence/qual-web-006-measurement-boundary-pr236-2026-10-22.md",
   "docs/shipping/evidence/qual-cli-006-trusted-root-sigstore-pr164-2026-10-22.md",
   "docs/shipping/evidence/dist-003-origin-manifest-boundary-pr165-2026-10-22.md",
+  "docs/shipping/evidence/ent-cli-001-private-runner-lifetime-pr166-pr237-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22.json",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr159-pr233.json",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr158-pr159-pr233.json",

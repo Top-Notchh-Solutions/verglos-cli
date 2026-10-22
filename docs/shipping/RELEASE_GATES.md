@@ -1,5 +1,26 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · ENT-CLI-001 private-runner lifetime gate
+
+CLI commit `1965e3eb` and Web commit `bafac8a` enforce the 30-minute maximum
+signed private-runner job lifetime at shared admission and transport-schema
+boundaries. PR #166 merged normally as
+`1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; PR #237 merged normally as
+`baf59ca9b6cb12bffa44eca53bc4645fba92ced3`; source branches remain preserved.
+CLI typecheck **14/14**, full tests **13/13**, build **8/8**, Web focused
+transport tests **4/4**, typecheck, direct tests **895/919** with 24 skips and
+0 failures, and merged-head substrates CLI **311/313**, Web **951/981**,
+composed **75/75**, all **12/12** stories passed. Hosted jobs were queued or
+in progress at final status read and are not claimed as passed.
+
+No database URL or external operation was used. No provider qualification,
+customer/recipient acceptance, trusted publication, legal/license clearance,
+independent review, browser-human, field-CWV, or final release approval was
+claimed. No file, branch, record, deployment, provider, customer, database,
+or release artifact was deleted or changed. Keep `ENT-CLI-001` unchecked and
+keep the score at **239/41/280 (85.4%)**. Evidence:
+`evidence/ent-cli-001-private-runner-lifetime-pr166-pr237-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-003 release-origin metadata output gate
 
 CLI commit `7ef8f1f0d4b29766d75623884b00cd524e3d29e1` makes release-origin

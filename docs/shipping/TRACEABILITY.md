@@ -1,5 +1,29 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 private-runner lifetime boundary · 2026-10-22
+
+- **Source mapping:** CLI commit `1965e3eb`; PR #166 merged normally as
+  `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`. Web commit `bafac8a`; PR #237
+  merged normally as `baf59ca9b6cb12bffa44eca53bc4645fba92ced3`. Both source
+  branches remain preserved.
+- **Implementation mapping:** Shared CLI admission and Web transport schema
+  reject signed jobs whose expiry exceeds the 30-minute hosted ceiling.
+- **Qualification mapping:** CLI typecheck **14/14**, full tests **13/13**,
+  build **8/8**; Web focused **4/4**, typecheck, direct **895/919** with 24
+  skips and 0 failures; merged verifier CLI **311/313**, Web **951/981**,
+  composed **75/75**, all **12/12** stories, zero failures.
+- **Safety mapping:** `env -u TEST_DATABASE_URL`; the remote `.env.test.local`
+  database value was not used. No provider, database, publication, deployment,
+  customer, legal, independent-review, browser-human, field-CWV, or final
+  release operation occurred. No file, branch, record, deployment, provider,
+  customer, database, or release artifact was deleted or changed.
+- **Acceptance mapping:** Keep `ENT-CLI-001` open for provider qualification,
+  customer/recipient acceptance, independent review, and final release
+  sign-off. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/ent-cli-001-private-runner-lifetime-pr166-pr237-2026-10-22.md`;
+  merged-head output is
+  `evidence/acceptance-stories-verification-2026-10-22-pr164-pr165-pr166-pr237.json`.
+
 ## DIST-003 release-origin metadata output boundary · 2026-10-22
 
 - **Source mapping:** CLI commit `7ef8f1f0d4b29766d75623884b00cd524e3d29e1`;

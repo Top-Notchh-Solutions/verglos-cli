@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · ENT-CLI-001 private-runner lifetime implementation
+
+CLI commit `1965e3eb` and Web commit `bafac8a` enforce the hosted 30-minute
+maximum signed private-runner job lifetime at shared admission and transport
+schema boundaries. PR #166 merged normally as
+`1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; PR #237 merged normally as
+`baf59ca9b6cb12bffa44eca53bc4645fba92ced3`; source branches remain preserved.
+CLI typecheck **14/14**, full tests **13/13**, build **8/8**, Web focused
+transport **4/4**, typecheck, direct Web **895/919** with 24 skips and 0
+failures; merged verifier CLI **311/313**, Web **951/981**, composed **75/75**,
+all **12/12** stories, zero failures. Hosted checks were queued/in progress at
+final status read and are not claimed as passed. This advances code-side
+implementation only; keep the `ENT-CLI-001` checkbox unchanged for provider
+qualification, customer/recipient acceptance, independent review, and final
+release sign-off. `TEST_DATABASE_URL` was not used; no file, branch, record,
+deployment, provider, customer, database, or release artifact was deleted or
+changed. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-private-runner-lifetime-pr166-pr237-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-003 release-origin metadata output implementation
 
 CLI commit `7ef8f1f0d4b29766d75623884b00cd524e3d29e1` makes release-origin
