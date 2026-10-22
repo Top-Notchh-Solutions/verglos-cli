@@ -2,16 +2,18 @@
 
 ## 2026-10-23 · exact transitive-license disposition and release artifacts
 
-CLI commit `2db1139337d60543fd59ec0b7e3130983d40e0a3` now records exact
+CLI candidate commit `d2211a674e7d097d9ff6bca335edf7078411bb14` now records exact
 owner-reviewed decisions for the six BlueOak package tuples and the nested
 `benchmark@1.0.0|fast-uri@3.1.7` tuple. The strict inventory remains complete
 and transparent: **254** lockfile package IDs, **250** package entries, one
 nested component, and **0** unresolved review blockers. No general BlueOak
 allowlist or nested suppression was introduced.
 
-The local release set verified **7 npm archives + 5 sidecars**, with identical
-notices in every archive; clean-consumer installation/import and upgrade/
-rollback passed. Evidence:
+PR #181 merged these two commits normally to CLI `main` as
+`74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5`. The local release set verified
+**7 npm archives + 7 sidecars**, with identical notices in every archive;
+clean-consumer installation/import, signed bounded Hunt execution, and
+upgrade/rollback passed. Evidence:
 `evidence/dist-002-license-owner-disposition-2026-10-23.md` and
 `legal/transitive-license-owner-disposition-2026-10-23.md`.
 

@@ -10,8 +10,9 @@ independent AppSec/Hunt review, or final release/go-no-go sign-off.
 
 ## Scope
 
-This disposition applies only to the dependency graph at CLI commit
-`2db1139337d60543fd59ec0b7e3130983d40e0a3`, with lockfile SHA-256
+This disposition applies only to the dependency graph at CLI candidate commit
+`d2211a674e7d097d9ff6bca335edf7078411bb14`, merged normally to `main` by PR
+#181 as `74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5`, with lockfile SHA-256
 `549740faff4c1adc7983d1267030a0fa82d7b86ce790916d9e49c3f87507b9f4`, and
 the exact package/version/license/source tuples below. The implementation
 records the decision in `scripts/license-review-decisions.mjs`; any mismatch
@@ -55,4 +56,3 @@ AppSec/Hunt review, or final release approval.
 
 **Owner authorization date:** 2026-10-23 (IST), recorded at the owner's
 direction in the current execution session.
-

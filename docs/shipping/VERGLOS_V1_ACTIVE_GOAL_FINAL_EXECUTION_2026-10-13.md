@@ -181,18 +181,22 @@ The current tracker reconciliation is **244 checked / 36 open / 280 total
 (87.1%)**. The next work is the 23-target implementation queue, using the
 execution-input manifest above. Nothing was deleted.
 
-## Latest continuation result · 2026-10-23 · exact license disposition and release artifacts
+## Latest continuation result · 2026-10-23 · merged exact license disposition and release artifacts
 
-CLI commit `2db1139337d60543fd59ec0b7e3130983d40e0a3` implements exact
+CLI candidate commits `d10c96fbbdc5ec905d701db86161461d225b5249` and
+`d2211a674e7d097d9ff6bca335edf7078411bb14` implement exact
 owner-reviewed decisions for the six BlueOak package tuples and nested
 `benchmark@1.0.0|fast-uri@3.1.7` tuple. The inventory still reports every
 component and remains fail-closed for any metadata mismatch; it does not use a
 general BlueOak allowlist or suppress the nested component.
 
-Focused release/license tests passed **17/17**, strict inventory passed with
-**0** blockers, the seven-package release verifier passed **12 artifacts**
-(seven archives and five sidecars), notices matched in every archive, the
-clean consumer passed, and upgrade/rollback passed
+PR #181 merged normally to CLI `main` as
+`74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5`, without squashing either commit.
+Focused release/license tests passed **24/24**, build passed **8/8**, strict
+inventory passed with **0** blockers, the seven-package release verifier passed
+**14 artifacts** (seven archives and seven sidecars), notices matched in every
+archive, the clean consumer passed with signed bounded Hunt execution, and
+upgrade/rollback passed
 (`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`). Evidence:
 `docs/shipping/legal/transitive-license-owner-disposition-2026-10-23.md` and
 `docs/shipping/evidence/dist-002-license-owner-disposition-2026-10-23.md`.

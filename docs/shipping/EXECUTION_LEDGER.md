@@ -1,17 +1,22 @@
 # Verglos V1 Execution Ledger
 
-## 2026-10-23 · exact transitive-license disposition and release artifact execution
+## 2026-10-23 · exact transitive-license disposition and merged release artifact execution
 
-- **Implementation:** CLI commit `2db1139337d60543fd59ec0b7e3130983d40e0a3`
-  adds exact owner-reviewed license decisions for the six BlueOak package
+- **Implementation:** CLI candidate commits `d10c96fbbdc5ec905d701db86161461d225b5249`
+  and `d2211a674e7d097d9ff6bca335edf7078411bb14` add exact owner-reviewed license decisions for the six BlueOak package
   tuples and the nested `benchmark@1.0.0|fast-uri@3.1.7` tuple. Mismatched
   name/version/license/source/parent metadata remains fail-closed; no broad
   allowlist or nested-component suppression was added.
-- **Verification:** Focused release/license tests passed **17/17**; strict
+- **Integration:** PR #181 merged normally into CLI `main` as
+  `74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5`, preserving both commits without
+  squash.
+- **Verification:** Focused release/license tests passed **24/24**, the build
+  passed **8/8**, and strict
   inventory reported **254** lockfile package IDs, **250** package entries,
   one nested component, and **0** review blockers. Local release verification
-  passed for **7 npm archives + 5 sidecars**, matching notices in every archive;
-  clean consumer and `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` rollback both passed.
+  passed for **7 npm archives + 7 sidecars**, matching notices in every archive;
+  clean consumer with signed bounded Hunt execution and
+  `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3` rollback both passed.
 - **Evidence:** `legal/transitive-license-owner-disposition-2026-10-23.md`
   and `evidence/dist-002-license-owner-disposition-2026-10-23.md`.
 - **Disposition:** This advances the code-side DIST-002/DIST-003 release
