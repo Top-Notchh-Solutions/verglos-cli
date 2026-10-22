@@ -8783,6 +8783,20 @@ changed. See
   Score remains **239/41/280 (85.4%)**. Nothing was deleted.
 - **Evidence:** `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
 
+## DIST-002 publish permission hardening merged · 2026-10-22
+
+- **Promotion mapping:** CLI PR #168 source
+  `4bcb4d26364bd8541678acf93d3388095d7c96c0` merged normally as
+  `c1f5e9b72d54467fc606da00735b704ada74f24c`; source branch preserved.
+- **Hosted mapping:** Self-scan `39828880395`, standard validation
+  `39828880653`, in-toto binding, and all nine platform matrix cells in
+  `39828880497` passed.
+- **Acceptance mapping:** Code and hosted qualification are green, but keep
+  `DIST-002` open for license/legal clearance, protected/trusted publication,
+  immutable npm publication/attestation, and final acceptance. Score remains
+  **239/41/280 (85.4%)**. Nothing was deleted.
+- **Evidence:** `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
+
 ## FINAL-WEB-008 sitemap completeness follow-up · 2026-10-22
 
 - **Source mapping:** PR #245 latest `d9519e32bfbadb98ca4c06158de83f0b7bdf2450`,

@@ -1218,6 +1218,22 @@ state changed; nothing was deleted. Score remains **239 checked / 41 open /
 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
 
+# 2026-10-22 · DIST-002 publish permission hardening merged
+
+CLI PR #168 source `4bcb4d26364bd8541678acf93d3388095d7c96c0` merged normally
+as `c1f5e9b72d54467fc606da00735b704ada74f24c`, preserving the source branch.
+Hosted self-scan `39828880395`, standard validation `39828880653`, in-toto
+binding, and all nine Ubuntu/macOS/Windows × Node 20/22/24 platform cells in
+`39828880497` passed. No manual rerun, npm publication, or registry mutation
+occurred.
+
+This is merged implementation/qualification progress only. `DIST-002` remains
+unchecked for legal/license clearance, protected/trusted publication approval,
+immutable npm publication/attestation, and final acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**, and nothing was deleted.
+Evidence:
+`docs/shipping/evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
+
 # 2026-10-22 · FINAL-WEB-008 sitemap completeness follow-up
 
 Web PR #245 latest commit `d9519e32bfbadb98ca4c06158de83f0b7bdf2450`

@@ -4870,6 +4870,22 @@ each observed method has lifecycle and reconciliation evidence.
   (85.4%)**.
 - **Evidence:** `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
 
+## 2026-10-22 · retain DIST-002 after hosted merge
+
+- **Decision:** Accept the explicit least-privilege publish workflow and its
+  hosted qualification as merged code-side progress; retain `DIST-002`
+  unchecked until the real non-code release gates are evidenced.
+- **Observed:** PR #168 merged normally as
+  `c1f5e9b72d54467fc606da00735b704ada74f24c`; self-scan, standard validation,
+  in-toto, and all nine platform cells passed.
+- **Reason:** The seven license-review blockers, legal decision, protected
+  environment approval, npm trusted-publisher configuration, immutable
+  registry receipt/attestation, and final acceptance remain absent.
+- **Boundary:** No registry publication, provider, Production, database,
+  customer, or legal operation occurred. Nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
+
 ## 2026-10-22 · retain FINAL-WEB-008 after sitemap completeness follow-up
 
 - **Decision:** Accept the complete-indexable-sitemap invariant as additional

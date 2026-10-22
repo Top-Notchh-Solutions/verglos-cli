@@ -12,6 +12,7 @@ sign-off.
 
 - Implementation repository: public `verglos-cli`.
 - Source commit: `4bcb4d26364bd8541678acf93d3388095d7c96c0`.
+- Normal merge commit: `c1f5e9b72d54467fc606da00735b704ada74f24c`.
 - Branch: `codex/dist-002-explicit-workflow-permissions-20261022`.
 - Pull request: CLI PR #168,
   `https://github.com/Top-Notchh-Solutions/verglos-cli/pull/168`.
@@ -32,10 +33,11 @@ sign-off.
 
 ## Hosted and publication boundary
 
-CLI PR #168 was pushed normally and automatic hosted qualification was
-observed running under self-scan `39828880395`, standard validation
-`39828880653`, and platform matrix `39828880497`. Their final conclusions
-were not available when this packet was written; no manual rerun was issued.
+CLI PR #168 was merged normally after automatic hosted qualification passed:
+self-scan `39828880395`, standard validation `39828880653`, in-toto release
+binding in platform matrix `39828880497`, and all nine Ubuntu/macOS/Windows ×
+Node 20/22/24 cells passed. No manual rerun was issued and the source branch
+was preserved.
 
 No npm tag, registry publication, trusted-publisher configuration change,
 legal decision, provider action, Production mutation, database operation,

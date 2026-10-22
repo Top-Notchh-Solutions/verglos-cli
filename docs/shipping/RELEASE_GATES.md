@@ -4783,6 +4783,21 @@ state changed and nothing was deleted. Score remains **239/41/280 (85.4%)**.
 
 Evidence: `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
 
+## 2026-10-22 · DIST-002 publish permission hardening merged gate
+
+CLI PR #168 merged normally as
+`c1f5e9b72d54467fc606da00735b704ada74f24c` after self-scan
+`39828880395`, standard validation `39828880653`, in-toto binding, and all
+nine Ubuntu/macOS/Windows × Node 20/22/24 cells in `39828880497` passed.
+The explicit workflow permission policy is now on `main`.
+
+Keep `DIST-002` unchecked for license/legal clearance, protected/trusted
+publication approval, immutable npm publication/attestation, and final
+acceptance. No registry/provider/Production state changed; nothing was
+deleted. Score remains **239/41/280 (85.4%)**.
+
+Evidence: `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-008 sitemap completeness follow-up gate
 
 Latest PR #245 head `d9519e32bfbadb98ca4c06158de83f0b7bdf2450` extends the
