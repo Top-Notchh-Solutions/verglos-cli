@@ -44,6 +44,30 @@ provider/customer/reviewer gates. Score remains **239 checked / 41 open / 280
 total (85.4%)**. Evidence:
 `docs/shipping/evidence/accept-002-003-current-head-pr160-pr234-2026-10-22.md`.
 
+**Current implementation batch (2026-10-22):** `STUDIO-CLI-001` received
+approval-shape hardening in CLI commit `0d566b8`, promoted by PR #161 and
+merged normally as `613eb22b5601eaead153105cc9de7ebbb7802fff`; its source
+branch remains preserved. The shared client-projection boundary now validates
+runtime approval JSON before property access and fails closed for malformed
+approval values. Focused approval/projection coverage passed **5/5**; the
+forced CLI workspace graph passed **23/23**; hosted PR #161 checks passed
+**12/12** after the Windows/Node 24 rerun; and the current-head private
+verifier passed CLI **310/312** with 2 explicit skips, Web **950/980** with 30
+explicit skips, composed substrates **74/74**, and all **12/12** stories with
+exit 0. No `TEST_DATABASE_URL` or external operation was used. Keep
+`STUDIO-CLI-001` unchecked for the numeric paid/non-production hosted
+allowance and authorized Studio recipient/customer acceptance with hosted/audit
+evidence. No file, branch, record, deployment, provider, customer, database,
+or release artifact was deleted or changed. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-approval-shape-pr161-2026-10-22.md`.
+
+The additive bundle
+`acceptance-evidence-bundle-2026-10-22-pr160-pr161-pr234-final.json` includes
+the current-head verifier output and this implementation evidence, contains
+**33** hashed files, and passed its secret scan; prior bundles remain
+preserved.
+
 **Current implementation batch (2026-10-22):** `FINAL-WEB-007` received a
 source-level landing accessibility implementation in Web commit `e1b20ac`:
 keyboard skip-to-content, focusable main target, labelled primary navigation,

@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · STUDIO-CLI-001 approval-shape implementation gate
+
+CLI commit `0d566b8017ff9b576e3551a7528cc89ac1e91265` hardens the
+client-projection approval boundary against malformed runtime JSON. PR #161
+merged normally as `613eb22b5601eaead153105cc9de7ebbb7802fff`; the source
+branch remains preserved. Focused coverage **5/5**, forced workspace graph
+**23/23**, hosted checks **12/12**, and current-head private substrates
+CLI **310/312**, Web **950/980**, composed **74/74**, all **12/12** stories
+passed with zero failures.
+
+No `TEST_DATABASE_URL` or external operation was used. No file, branch,
+record, deployment, provider, customer, database, or release artifact was
+deleted or changed. Keep `STUDIO-CLI-001` unchecked for the numeric
+paid/non-production hosted allowance and authorized Studio recipient/customer
+acceptance with hosted/audit evidence. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/studio-cli-001-approval-shape-pr161-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 latest merged-head substrate gate
 
 The verifier ran against clean CLI `6ae6a2a5` / PR #160 merge `56b3535a` and

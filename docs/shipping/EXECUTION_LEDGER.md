@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · STUDIO-CLI-001 approval-shape hardening and PR #161
+
+- **Implementation:** CLI commit `0d566b8017ff9b576e3551a7528cc89ac1e91265`
+  validates runtime approval JSON before property access and adds malformed
+  approval regression coverage.
+- **Promotion:** PR [#161](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/161)
+  merged normally as `613eb22b5601eaead153105cc9de7ebbb7802fff`; source branch
+  preserved.
+- **Verification:** Focused **5/5**; forced CLI workspace graph **23/23**;
+  hosted checks **12/12**; current-head verifier CLI **310/312**, Web
+  **950/980**, composed substrates **74/74**, all **12/12** stories, exit 0.
+- **Safety boundary:** No `TEST_DATABASE_URL` was supplied. No hosted HTTP,
+  provider, customer, reviewer, browser-human, field-CWV, migration, or
+  Production operation occurred. No file, branch, record, deployment,
+  provider, customer, database, or release artifact was deleted or changed.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked for the numeric
+  paid/non-production hosted allowance and authorized Studio recipient/customer
+  acceptance with hosted/audit evidence. Score remains **239/41/280 (85.4%)**.
+- **Bundle:** Additive
+  `acceptance-evidence-bundle-2026-10-22-pr160-pr161-pr234-final.json` includes
+  the current-head verifier and this evidence; prior bundles remain preserved.
+- **Evidence:** `evidence/studio-cli-001-approval-shape-pr161-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 latest merged-head substrate refresh
 
 - **Source mapping:** Clean CLI `6ae6a2a5` / PR #160 merge `56b3535a` and Web

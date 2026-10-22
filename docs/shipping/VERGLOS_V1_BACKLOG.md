@@ -1,5 +1,25 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · STUDIO-CLI-001 approval-shape implementation
+
+CLI commit `0d566b8017ff9b576e3551a7528cc89ac1e91265` adds a fail-closed
+approval-shape guard to client-projection upload admission and regression
+coverage for malformed approval JSON. PR #161 merged normally as
+`613eb22b5601eaead153105cc9de7ebbb7802fff`; the source branch remains
+preserved. Focused coverage passed **5/5**, the forced CLI workspace graph
+passed **23/23**, hosted checks passed **12/12**, and the current-head private
+verifier passed CLI **310/312**, Web **950/980**, composed substrates **74/74**,
+and all **12/12** stories with zero failures.
+
+This advances code-side implementation only; keep the `STUDIO-CLI-001`
+checkbox unchanged for the numeric paid/non-production hosted allowance and
+authorized Studio recipient/customer acceptance with hosted/audit evidence. No
+`TEST_DATABASE_URL` or external operation was used, and no file, branch,
+record, deployment, provider, customer, database, or release artifact was
+deleted or changed. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-approval-shape-pr161-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 latest merged-head substrate refresh
 
 The frozen verifier ran against clean CLI `6ae6a2a5` / PR #160 merge

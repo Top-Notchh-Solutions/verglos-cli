@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · harden STUDIO-CLI-001 approval shape and merge PR #161
+
+- **Decision:** Validate client-projection approval JSON before property access
+  and preserve bounded fail-closed reasons for absent or malformed approvals.
+- **Implementation:** CLI commit `0d566b8017ff9b576e3551a7528cc89ac1e91265`;
+  PR #161 merged normally as
+  `613eb22b5601eaead153105cc9de7ebbb7802fff`; source branch preserved.
+- **Verification:** Focused **5/5**; forced workspace graph **23/23**; hosted
+  checks **12/12**; private current-head CLI **310/312**, Web **950/980**,
+  composed substrates **74/74**, all **12/12** stories, exit 0.
+- **Safety boundary:** No `TEST_DATABASE_URL` or external operation was used.
+  No file, branch, record, deployment, provider, customer, database, or
+  release artifact was deleted or changed.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked for the numeric
+  paid/non-production hosted allowance and authorized Studio recipient/customer
+  acceptance with hosted/audit evidence. Score remains **239/41/280 (85.4%)**.
+- **Bundle:** Additive
+  `acceptance-evidence-bundle-2026-10-22-pr160-pr161-pr234-final.json`; prior
+  bundles remain preserved.
+- **Evidence:** `evidence/studio-cli-001-approval-shape-pr161-2026-10-22.md`.
+
 ## 2026-10-22 · refresh ACCEPT-002/003 at the latest merged heads
 
 - **Decision:** Re-run the frozen twelve-story repository verifier after PR

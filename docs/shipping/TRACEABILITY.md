@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 approval-shape hardening and PR #161 · 2026-10-22
+
+- **Source mapping:** CLI commit `0d566b8017ff9b576e3551a7528cc89ac1e91265`;
+  PR #161 merged normally as
+  `613eb22b5601eaead153105cc9de7ebbb7802fff`; source branch preserved.
+- **Implementation mapping:** Client-projection admission validates approval
+  JSON shape before reading fields and returns bounded denial reasons for
+  absent or malformed approvals.
+- **Qualification mapping:** Focused **5/5**; forced workspace graph
+  **23/23**; hosted checks **12/12**; private current-head CLI **310/312**,
+  Web **950/980**, composed substrates **74/74**, all **12/12** stories,
+  exit 0.
+- **Safety mapping:** No `TEST_DATABASE_URL`, hosted HTTP, provider,
+  customer, reviewer, browser-human, field-CWV, migration, or Production
+  operation was used. No file, branch, record, deployment, provider,
+  customer, database, or release artifact was deleted or changed.
+- **Acceptance mapping:** Keep `STUDIO-CLI-001` open for the numeric
+  paid/non-production hosted allowance and authorized Studio recipient/customer
+  acceptance with hosted/audit evidence. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/studio-cli-001-approval-shape-pr161-2026-10-22.md`.
+
 ## ACCEPT-002/003 latest merged-head substrate refresh · 2026-10-22
 
 - **Source mapping:** CLI `6ae6a2a5` / PR #160 merge `56b3535a`; Web
