@@ -60,6 +60,17 @@ function run(label, cwd, args) {
   return { label, cwd, args, startedAt, finishedAt: new Date().toISOString(), exitCode, summary: totals, outputSha256: createHash("sha256").update(text).digest("hex") };
 }
 
+function sourceStatus(root, label) {
+  if (!existsSync(root)) throw new Error(`${label} source root does not exist: ${root}`);
+  const commit = execFileSync("git", ["-C", root, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+  const status = execFileSync("git", ["-C", root, "status", "--porcelain=v1"], { encoding: "utf8" });
+  if (status.trim() !== "") throw new Error(`${label} source root must be clean; set an explicit clean ${label} worktree`);
+  return { commit, status: "clean" };
+}
+
+const cliSource = sourceStatus(cliRoot, "CLI");
+const webSource = sourceStatus(webRoot, "Web");
+
 const results = [
   run("cli-package-suite", cliRoot, ["--filter", "verglos", "test"]),
   run("web-full-suite", webRoot, ["test"]),
@@ -76,8 +87,9 @@ const result = {
   verifiedAt: new Date().toISOString(),
   cliRoot,
   webRoot,
-  cliCommit: execFileSync("git", ["-C", cliRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
-  webCommit: execFileSync("git", ["-C", webRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+  cliCommit: cliSource.commit,
+  webCommit: webSource.commit,
+  sourceStatus: { cli: cliSource.status, web: webSource.status },
   stories: storyMap.stories,
   storyCoverage,
   results,

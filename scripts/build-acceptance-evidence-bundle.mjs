@@ -29,6 +29,7 @@ const paths = [
   "docs/shipping/evidence/ent-cli-001-current-head-qualification-2026-10-22.md",
   "docs/shipping/evidence/studio-cli-001-current-head-preview-2026-10-22.md",
   "docs/shipping/evidence/dist-003-current-head-checksum-generation-2026-10-22.md",
+  "docs/shipping/evidence/acceptance-stories-verification-2026-10-22.json",
 ];
 
 const forbidden = [

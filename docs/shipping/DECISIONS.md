@@ -1,5 +1,14 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · require clean source roots for acceptance execution
+
+- **Decision:** `ACCEPT-002/003` verification must use explicitly selected
+  clean CLI/Web worktrees; dirty parent checkouts are rejected.
+- **Observed:** CLI passed **310/312** with 2 skips; Web **949/979** with 30
+  skips; composed substrates **74/74**; all 12 stories executed. The bundle
+  now contains **21** hashed files with a passed secret scan.
+- **Evidence:** `evidence/accept-002-003-clean-head-verification-2026-10-22.md`.
+
 ## 2026-10-22 · refresh ACCEPT-003 with current qualification artifacts
 
 - **Decision:** Keep the acceptance bundle generator synchronized with the

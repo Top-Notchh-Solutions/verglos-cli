@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ACCEPT-002/003 clean-head story verification
+
+- **Implementation:** Private verifier hardening requires clean explicitly
+  selected CLI/Web worktrees and records their exact commits/status.
+- **Verification:** CLI **310/312** with 2 skips and 0 failures; Web
+  **949/979** with 30 skips and 0 failures; composed substrates **74/74**;
+  all **12/12** stories mapped and process exit **0**.
+- **Bundle:** The refreshed acceptance bundle contains **21** hashed files and
+  passed its secret scan.
+- **Evidence:** `evidence/accept-002-003-clean-head-verification-2026-10-22.md`
+  and `evidence/acceptance-stories-verification-2026-10-22.json`.
+
 ## 2026-10-22 · ACCEPT-003 evidence-bundle refresh
 
 - **Commit:** Private `c4e3da67` updates

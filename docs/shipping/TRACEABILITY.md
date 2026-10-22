@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## ACCEPT-002/003 clean-head story verification · 2026-10-22
+
+- **Source mapping:** CLI `5072204f` and Web `cb23021`, both from clean
+  explicitly selected worktrees.
+- **Execution mapping:** CLI **310/312** with 2 skips, Web **949/979** with
+  30 skips, composed substrates **74/74**, and all **12/12** stories mapped.
+- **Evidence mapping:** Acceptance bundle refreshed to **21** hashed files;
+  secret scan passed.
+- **Evidence:** `evidence/accept-002-003-clean-head-verification-2026-10-22.md`.
+
 ## ACCEPT-003 current evidence-bundle refresh · 2026-10-22
 
 - **Source mapping:** Private commit `c4e3da67`.

@@ -3956,6 +3956,16 @@ packets. `pnpm acceptance:evidence:bundle` regenerated the bundle with **20**
 hashed files and a passed secret scan. Score remains **239 checked / 41 open /
 280 total (85.4%)**.
 
+### ACCEPT-002/003 clean-head verification addendum · 2026-10-22
+
+Private verifier hardening now rejects dirty source roots and records exact
+clean commits/status. CLI `5072204f` passed **310/312** with 2 skips and 0
+failures; Web `cb23021` passed **949/979** with 30 skips and 0 failures;
+composed substrates passed **74/74**; all **12/12** stories executed. The
+bundle now contains **21** hashed files with a passed secret scan. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/accept-002-003-clean-head-verification-2026-10-22.md`.
+
 ### QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
 
 Read-only Chrome DevTools inspection of a separate production checkout tab

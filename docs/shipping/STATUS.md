@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · ACCEPT-002/003 clean-head story verification
+
+The acceptance story verifier now fails closed on dirty source roots and
+records exact clean source commits. Against CLI `5072204f` it passed **310/312**
+with 2 skips and 0 failures; Web `cb23021` passed **949/979** with 30 skips
+and 0 failures; composed substrates passed **74/74**; all 12 story mappings
+executed. The evidence bundle now hashes **21** files and its secret scan
+passed. Evidence: `evidence/accept-002-003-clean-head-verification-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-003 evidence-bundle refresh
 
 The private acceptance bundle now includes the current ENT runner, Studio

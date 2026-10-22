@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · ACCEPT-002/003 clean-source execution gate
+
+The private story verifier now rejects dirty source roots and records exact
+commits/status. CLI passed **310/312** with 2 skips, Web **949/979** with 30
+skips, composed substrates **74/74**, and all 12 mappings executed. The
+acceptance bundle contains **21** hashed files with a passed secret scan.
+Evidence: `evidence/accept-002-003-clean-head-verification-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-003 evidence-bundle implementation gate
 
 Private commit `c4e3da67` adds the current ENT runner, Studio Preview, and

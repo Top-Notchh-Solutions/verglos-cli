@@ -51,6 +51,15 @@ open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/ent-cli-001-current-head-qualification-2026-10-22.md`
 and `docs/shipping/evidence/studio-cli-001-current-head-preview-2026-10-22.md`.
 
+**Current implementation batch (2026-10-22):** `ACCEPT-002/003` now runs
+only against explicitly selected clean source worktrees and records exact
+source status. CLI `5072204f` passed **310/312** with 2 skips and 0 failures;
+Web `cb23021` passed **949/979** with 30 skips and 0 failures; composed
+Studio/Enterprise/Team/quality substrates passed **74/74**; all **12/12**
+story mappings executed. The refreshed evidence bundle contains **21** hashed
+files with a passed secret scan. Evidence:
+`docs/shipping/evidence/accept-002-003-clean-head-verification-2026-10-22.md`.
+
 **Current implementation batch (2026-10-22):** `DIST-003` received a
 repository-side implementation commit `5072204f` (`feat(release): make
 checksum generation reproducible`). The publish workflow now calls the tested
