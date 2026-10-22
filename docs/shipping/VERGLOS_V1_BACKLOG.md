@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · QUAL-WEB-005 deletion-input boundary
+
+Web PR #248 source `fdaed89` makes the account-deletion qualifier fail closed
+on unknown/duplicate requested kinds and negative, non-integer, or unsafe
+hosted inventory counts. Focused deletion/worker contracts passed **31/31**,
+full serial Web verification passed **899 / 24 / 0**, typecheck passed, and
+build generated **49/49 routes**. Required hosted runs `39847046177` and
+`39847046152` failed before repository steps with no runner and no steps; no
+rerun, bypass, or merge-around was attempted. This is implementation progress
+only: keep `QUAL-WEB-005` unchecked for authenticated deletion E2E,
+legal/customer-held record decisions, Production migration/restore/rollback
+acceptance, reconciliation, independent review, and final acceptance. No
+customer, database, Production, provider, or deletion action occurred; nothing
+was deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `docs/shipping/evidence/qual-web-005-deletion-input-boundary-pr248-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 publication archive snapshot boundary
 
 CLI PR #170 hardens the npm publication preflight with bounded regular-file

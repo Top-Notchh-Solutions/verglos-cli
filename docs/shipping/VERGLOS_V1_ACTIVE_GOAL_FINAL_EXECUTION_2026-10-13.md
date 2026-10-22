@@ -114,6 +114,21 @@ acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
 Nothing was deleted. Evidence:
 `docs/shipping/evidence/dist-002-003-publication-archive-snapshot-pr170-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · QUAL-WEB-005 deletion-input boundary
+
+Web PR #248 source `fdaed89` hardens the account-deletion qualifier so unknown
+or duplicate requested kinds and negative/non-integer/unsafe hosted inventory
+counts fail closed before deletion can qualify. Focused deletion/worker tests
+passed **31/31**, the full serial Web suite passed **899 / 24 / 0**, typecheck
+passed, and build generated **49/49 routes**. Hosted runs
+`39847046177` and `39847046152` failed before repository steps with no runner
+and no steps; no rerun, bypass, or merge-around was attempted. Keep
+`QUAL-WEB-005` unchecked for authenticated deletion E2E, legal/customer-held
+record decisions, Production migration/restore/rollback acceptance,
+reconciliation, independent review, and final acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/qual-web-005-deletion-input-boundary-pr248-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · FINAL-WEB-007/008 public release integration
 
 Web PR #247 head `d02ac18` now preserves normal merge commits for PR #245

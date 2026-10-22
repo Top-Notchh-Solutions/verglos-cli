@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · QUAL-WEB-005 deletion-input boundary
+
+- **Implementation:** Web PR #248 source `fdaed89` makes the account-deletion
+  qualifier reject unknown/duplicate requested kinds and malformed hosted
+  inventory counts before deletion can qualify.
+- **Verification:** Focused deletion/worker tests **31/31**, full serial Web
+  suite **899 / 24 / 0**, typecheck, and build **49/49 routes** passed locally.
+- **Hosted boundary:** Runs `39847046177` and `39847046152` failed before
+  repository steps with no runner and no steps. GitGuardian and Vercel Preview
+  Comments passed; no hosted repository qualification is claimed.
+- **Disposition:** Keep `QUAL-WEB-005` unchecked for authenticated deletion
+  E2E, legal/customer-held record decisions, Production migration/restore/
+  rollback acceptance, reconciliation, independent review, and final
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Boundary:** No rerun, bypass, merge-around, customer, database,
+  Production, provider, or deletion action occurred. Nothing was deleted.
+- **Evidence:** `evidence/qual-web-005-deletion-input-boundary-pr248-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 publication archive snapshot boundary
 
 - **Implementation:** CLI PR #170 validates bounded regular release archives
