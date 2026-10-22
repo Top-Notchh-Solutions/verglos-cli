@@ -1273,3 +1273,26 @@ Production, customer, publication, tag, or release-sign-off state changed;
 nothing was deleted. Score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md`.
+
+# 2026-10-23 · FINAL-WEB-008 emitted metadata validation implementation
+
+Web commit `e4699b790137c5a6f2922a39e6fcb9bc1c910cc1` on PR #246 extends the
+public release smoke from source-token checks to execution of the actual Next
+`sitemap()` and `robots()` metadata functions. The smoke now requires the
+exact eight public sitemap URLs, rejects unexpected/private sitemap URLs,
+requires all six private-route crawler exclusions, and requires the canonical
+sitemap URL. Focused smoke passed **8/8**, public smoke passed with **18
+routes / 22 claims / 2 proof assets / 0 issues**, typecheck passed, and the
+production build generated **49/49** routes. The source branch is preserved;
+PR #246 is open.
+
+The private acceptance evidence bundle was regenerated with **76** hashed
+files and a passed secret scan.
+
+Hosted Web checks again failed before runner steps under the GitHub account
+payments/spending-limit condition; GitGuardian passed and Vercel was pending
+at capture. This is code-side FINAL-WEB-008 progress only. Keep the row
+unchecked for ACCEPT-003/009/010, founder truth-freeze, required hosted
+checks, and final acceptance. No external state changed, nothing was deleted,
+and the score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.

@@ -74,6 +74,7 @@ const paths = [
   "docs/shipping/evidence/final-web-008-public-route-coverage-pr243-2026-10-22.md",
   "docs/shipping/evidence/final-web-008-robots-guard-pr244-2026-10-22.md",
   "docs/shipping/evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md",
+  "docs/shipping/evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md",
   "docs/shipping/evidence/dist-002-publish-permissions-pr168-2026-10-22.md",
   "docs/shipping/evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr164-pr165-pr166-pr237-pr238.json",

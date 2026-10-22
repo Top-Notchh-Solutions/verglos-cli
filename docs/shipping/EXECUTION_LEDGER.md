@@ -13965,3 +13965,25 @@ it was not sent and contains no credentials or customer data.
   **239/41/280 (85.4%)**.
 - **Evidence:**
   `docs/shipping/evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md`.
+
+## 2026-10-23 · FINAL-WEB-008 emitted metadata validation
+
+- **Implementation:** Web commit `e4699b790137c5a6f2922a39e6fcb9bc1c910cc1`
+  on PR #246 executes the real Next `sitemap()` and `robots()` metadata
+  functions in the public release smoke. The contract now requires the exact
+  eight public sitemap URLs, rejects unexpected/private sitemap URLs, requires
+  all six private crawler exclusions, and requires the canonical sitemap URL.
+- **Verification:** Focused smoke **8/8**, public smoke **18 routes / 22
+  claims / 2 proof assets / 0 issues**, typecheck passed, and production build
+  generated **49/49** routes.
+- **Bundle:** The private acceptance evidence bundle was regenerated with
+  **76** hashed files and a passed secret scan.
+- **Hosted state:** Web hosted checks failed before runner allocation under the
+  GitHub account payments/spending-limit condition; GitGuardian passed and
+  Vercel was pending at capture. No rerun or bypass was used.
+- **Disposition:** This advances code-side FINAL-WEB-008 only. Keep the row
+  unchecked for ACCEPT-003/009/010, founder truth-freeze, required hosted
+  checks, and final acceptance. No external state changed and nothing was
+  deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
