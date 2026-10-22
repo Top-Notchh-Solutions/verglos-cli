@@ -1,5 +1,24 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-002/003 publication archive snapshot boundary
+
+CLI PR #170 hardens npm publication preflight: bounded regular archives are
+validated through an opened handle with identity/size rechecks, manifests are
+extracted from the validated bytes, and npm receives a private snapshot of
+those exact bytes. Symlink/non-regular archives fail closed before registry
+access. Focused publication/workflow tests passed **7/7**, the full monorepo
+test/typecheck/build graph passed **23/23 tasks**, and all **12/12** hosted
+checks passed across standard/provenance, self-scan, in-toto, and
+Ubuntu/macOS/Windows Node 20/22/24. PR #170 merged normally as
+`7dca4d00c7a4fd2b4288b1f6aa0a1d226806a87f` from source `18d5bc29`.
+`DIST-002` and `DIST-003` remain unchecked for protected/trusted publication,
+immutable attestation, legal/license clearance, provider action, independent
+review, and final acceptance. No npm, registry, provider, Production,
+customer, database, publication, or release-sign-off state changed; nothing
+was deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/dist-002-003-publication-archive-snapshot-pr170-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 rollback-input hardening
 
 CLI PR #169 adds bounded rollback-plan and rollback-rehearsal input handling:

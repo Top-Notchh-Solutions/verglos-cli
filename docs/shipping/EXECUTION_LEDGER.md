@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-002/003 publication archive snapshot boundary
+
+- **Implementation:** CLI PR #170 validates bounded regular release archives
+  through an opened handle with identity/size rechecks, extracts manifests from
+  validated bytes, and publishes a private temporary snapshot of those exact
+  bytes. Symlink/non-regular archives fail before registry access. Source
+  `18d5bc29` merged normally as `7dca4d00c7a4fd2b4288b1f6aa0a1d226806a87f`.
+- **Verification:** Focused publication/workflow tests **7/7**, full monorepo
+  test/typecheck/build graph **23/23**, and hosted checks **12/12** passed,
+  including standard/provenance, self-scan, in-toto, and all Ubuntu/macOS/
+  Windows Node 20/22/24 cells.
+- **Disposition:** Keep `DIST-002` and `DIST-003` unchecked for protected and
+  trusted publication, immutable attestation, legal/license clearance,
+  provider action, independent review, and final acceptance. Score remains
+  **239/41/280 (85.4%)**.
+- **Boundary:** No npm publication, registry, provider, Production, customer,
+  database, deployment, or release-sign-off state changed. No squash, force
+  push, branch deletion, or data deletion occurred.
+- **Evidence:** `evidence/dist-002-003-publication-archive-snapshot-pr170-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 rollback-input hardening
 
 - **Implementation:** CLI PR #169 hardens rollback-plan and

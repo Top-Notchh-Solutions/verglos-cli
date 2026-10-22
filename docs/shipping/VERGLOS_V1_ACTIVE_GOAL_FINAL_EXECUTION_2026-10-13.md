@@ -96,6 +96,24 @@ operational review, acceptance, and final release mapping. Score remains
 **239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
 `docs/shipping/evidence/dist-006-rollback-input-hardening-pr169-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · DIST-002/003 publication archive snapshot
+
+CLI PR #170 added substantive publication-path hardening: bounded regular
+archives are validated through an opened handle with identity/size rechecks,
+the package manifest is extracted from the validated bytes, and npm receives a
+private temporary snapshot of exactly those bytes. Symlink/non-regular
+archives fail before registry access. Focused publication/workflow tests passed
+**7/7**, the full monorepo test/typecheck/build graph passed **23/23 tasks**,
+and all **12/12** hosted checks passed, including standard/provenance,
+self-scan, in-toto, and Ubuntu/macOS/Windows Node 20/22/24. PR #170 merged
+normally as `7dca4d00c7a4fd2b4288b1f6aa0a1d226806a87f` from source `18d5bc29`;
+no squash, force, or deletion was used. Keep `DIST-002` and `DIST-003`
+unchecked for protected/trusted publication, immutable attestation,
+legal/license clearance, provider action, independent review, and final
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Nothing was deleted. Evidence:
+`docs/shipping/evidence/dist-002-003-publication-archive-snapshot-pr170-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · FINAL-WEB-007/008 public release integration
 
 Web PR #247 head `d02ac18` now preserves normal merge commits for PR #245
