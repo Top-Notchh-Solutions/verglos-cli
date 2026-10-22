@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-WEB-006 exact-head contract requalification
+
+- **Verification:** Web `02f5aba` passed accessibility/performance/truth
+  contracts **66/66**; source public-release smoke passed **16 routes**,
+  **22/22 claims**, **2 proof assets**, and **0 issues**.
+- **Boundary:** The landing qualifier correctly refused missing browser
+  capture input; no browser, field-CWV, or human screen-reader result was
+  invented. No database, provider, Production, or customer state changed.
+  Nothing was deleted.
+- **Disposition:** Keep `QUAL-WEB-006` open for supported-browser capture,
+  human screen-reader, large/complete states, field CWV, independent review,
+  and final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 exact-head requalification
 
 - **Verification:** Web `02f5aba` focused privacy/deletion/retention suite

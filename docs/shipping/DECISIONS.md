@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain QUAL-WEB-006 after exact-head qualification
+
+- **Decision:** Accept the current Web accessibility/performance/truth
+  qualification as repository evidence; retain the checkbox as open.
+- **Observed:** Contract set **66/66** and public-release smoke **16 routes /
+  22 claims / 2 proof assets / 0 issues** passed. The direct landing qualifier
+  refused missing browser capture input as designed.
+- **Reason:** Supported-browser capture, human screen-reader, large/complete
+  states, field CWV, independent review, and final acceptance remain absent.
+- **Boundary:** No database, provider, Production, or customer operation
+  occurred. Nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · retain QUAL-WEB-005 after exact-head requalification
 
 - **Decision:** Accept the current Web deletion/retention qualification as

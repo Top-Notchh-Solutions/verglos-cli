@@ -60,6 +60,7 @@ const paths = [
   "docs/shipping/evidence/dist-006-current-head-requalification-pr167-2026-10-22.md",
   "docs/shipping/evidence/qual-cli-006-current-head-requalification-pr167-2026-10-22.md",
   "docs/shipping/evidence/qual-web-005-current-head-requalification-2026-10-22.md",
+  "docs/shipping/evidence/qual-web-006-current-head-requalification-2026-10-22.md",
   "docs/shipping/evidence/qual-web-005-local-isolated-qualification-2026-10-22.md",
   "docs/shipping/evidence/qual-cli-006-trusted-root-sigstore-pr164-2026-10-22.md",
   "docs/shipping/evidence/dist-003-origin-manifest-boundary-pr165-2026-10-22.md",

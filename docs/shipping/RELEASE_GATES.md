@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · QUAL-WEB-006 exact-head gate
+
+Web `02f5aba` passes accessibility/performance/truth contracts **66/66** and
+source public-release smoke (**16 routes / 22 of 22 claims / 2 proof assets /
+0 issues**). The landing qualifier correctly refused missing browser-capture
+input; no browser, field-CWV, or human screen-reader gate is inferred. Keep
+QUAL-WEB-006 open for supported-browser capture, human screen-reader,
+large/complete states, field CWV, independent review, and final acceptance. No
+database, provider, Production, or customer state changed; nothing was
+deleted. Score remains **239/41/280 (85.4%)**. Evidence:
+`evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 exact-head gate
 
 Web `02f5aba` passes the focused privacy/deletion/retention suite **74/74**,

@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 exact-head contract requalification · 2026-10-22
+
+- **Source mapping:** Web exact merged head
+  `02f5aba95c4172255cc522730c6ffecc1598cbda`.
+- **Qualification mapping:** Accessibility/performance/truth contracts
+  **66/66**; public-release smoke **16 routes / 22 of 22 claims / 2 assets / 0
+  issues**.
+- **Boundary mapping:** The landing qualifier refused missing browser capture
+  input; no browser, field-CWV, or human screen-reader evidence was claimed.
+  Nothing was deleted.
+- **Acceptance mapping:** Keep QUAL-WEB-006 open for supported-browser
+  capture, human screen-reader, large/complete states, field CWV, independent
+  review, and final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## QUAL-WEB-005 exact-head requalification · 2026-10-22
 
 - **Source mapping:** Web exact merged head

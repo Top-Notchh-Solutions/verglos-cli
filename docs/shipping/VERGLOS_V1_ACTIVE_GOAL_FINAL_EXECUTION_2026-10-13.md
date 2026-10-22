@@ -822,6 +822,18 @@ recheck rather than treated as a defect. No checkbox changed; score remains
 `docs/shipping/evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
 
 **Current continuation result (2026-10-22):** Exact merged Web `02f5aba` passed
+the accessibility/performance/truth contract set **66/66** and the source
+public-release smoke (**16 routes / 22 of 22 claims / 2 proof assets / 0
+issues**). The direct landing qualifier correctly refused missing browser
+capture input, so no browser, field-CWV, or human screen-reader evidence is
+claimed. No database, provider, Production, or customer state changed;
+nothing was deleted. Keep QUAL-WEB-006 open for supported-browser capture,
+human screen-reader, large/complete states, field CWV, independent review,
+and final acceptance. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
+**Previous continuation result (2026-10-22):** Exact merged Web `02f5aba` passed
 the focused QUAL-WEB-005 privacy/deletion/retention suite **74/74** and
 typecheck; the fresh isolated PostgreSQL serial qualification passed **919**
 with **2 documented skips / 0 failures**. The remote `.env.test.local`

@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · QUAL-WEB-006 exact-head contract requalification
+
+Exact Web `02f5aba` passed the accessibility/performance/truth contract set
+**66/66**. The actual source public-release smoke passed **16 routes**,
+**22/22 publishable claims**, **2 proof assets**, and **0 issues**. The direct
+landing qualifier correctly refused missing browser-capture input and is not
+claimed as browser evidence. QUAL-WEB-006 remains open for supported-browser
+capture, human screen-reader, large/complete states, field CWV, independent
+review, and final acceptance. No database, provider, Production, customer,
+or AppSec state changed. Nothing was deleted. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 exact-head requalification
 
 Exact merged Web `02f5aba` passed the focused privacy/deletion/retention suite
