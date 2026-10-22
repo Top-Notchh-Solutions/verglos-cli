@@ -3,6 +3,7 @@ import { promisify } from "node:util";
 import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { readBoundedRegularFile, MAX_RELEASE_ARTIFACT_BYTES } from "./release-artifact-files.mjs";
 
 const run = promisify(execFile);
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
@@ -10,7 +11,11 @@ const packageNames = ["shared", "scanner", "reporter", "mcp", "entitlement", "hu
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const npmOptions = { cwd: root, maxBuffer: 4 * 1024 * 1024, shell: process.platform === "win32" };
 const manifests = new Map();
-for (const name of packageNames) manifests.set(name, JSON.parse(await readFile(join(root, "packages", name, "package.json"), "utf8")));
+for (const name of packageNames) {
+  const manifestPath = join(root, "packages", name, "package.json");
+  const manifestBytes = await readBoundedRegularFile(manifestPath, MAX_RELEASE_ARTIFACT_BYTES, `package ${name} manifest`);
+  manifests.set(name, JSON.parse(manifestBytes.toString("utf8")));
+}
 const versions = new Map([...manifests.values()].map((manifest) => [manifest.name, manifest.version]));
 const privateWorkspacePackages = new Set([...manifests.values()].filter((manifest) => manifest.private === true).map((manifest) => manifest.name));
 const destination = resolve(process.argv[2] ?? "");
