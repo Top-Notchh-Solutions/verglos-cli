@@ -1,6 +1,6 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readBoundedRegularFile, MAX_RELEASE_ARTIFACT_BYTES } from "./release-artifact-files.mjs";
@@ -37,7 +37,7 @@ try {
     // Each npm archive is independently redistributable. Package-local terms
     // take precedence; otherwise carry the repository's Apache license into
     // the staged archive instead of relying on the source checkout.
-    try { await readFile(join(stage, "LICENSE")); }
+    try { await readBoundedRegularFile(join(stage, "LICENSE"), MAX_RELEASE_ARTIFACT_BYTES, `staged ${name} license`); }
     catch { await cp(join(root, "LICENSE"), join(stage, "LICENSE")); }
     await writeFile(join(stage, "THIRD_PARTY_NOTICES"), thirdPartyNotices, { encoding: "utf8", mode: 0o644 });
     const manifest = manifests.get(name);

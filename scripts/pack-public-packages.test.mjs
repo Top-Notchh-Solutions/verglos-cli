@@ -44,3 +44,9 @@ test("public packer binds source manifest reads to bounded regular-file handles"
   assert.match(source, /readBoundedRegularFile\(manifestPath, MAX_RELEASE_ARTIFACT_BYTES/u);
   assert.doesNotMatch(source, /readFile\(join\(root, "packages", name, "package\.json"\)/u);
 });
+
+test("public packer binds staged license reads to bounded regular-file handles", async () => {
+  const source = await readFile("scripts/pack-public-packages.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(join\(stage, "LICENSE"\), MAX_RELEASE_ARTIFACT_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(join\(stage, "LICENSE"\)\)/u);
+});

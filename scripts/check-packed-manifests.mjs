@@ -1,5 +1,5 @@
 import { gunzipSync } from "node:zlib";
-import { lstat, readFile, readdir } from "node:fs/promises";
+import { lstat, readdir } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { posix } from "node:path";
@@ -29,7 +29,7 @@ function readTarEntries(archiveBytes) {
   }
   return entries;
 }
-const authoritativeLicense = await readFile(join(repositoryRoot, "LICENSE"));
+const authoritativeLicense = await readBoundedRegularFile(join(repositoryRoot, "LICENSE"), MAX_RELEASE_ARTIFACT_BYTES, "repository license");
 if (!process.argv[2]) throw new Error("packed artifact directory is required");
 if (!(await lstat(root)).isDirectory()) throw new Error("packed artifact root must be a directory");
 const archives = (await readdir(root)).filter((name) => name.endsWith(".tgz")).sort();
