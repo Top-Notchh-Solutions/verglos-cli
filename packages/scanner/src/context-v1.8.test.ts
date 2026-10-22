@@ -144,6 +144,36 @@ test("v1.8: D8-001 no longer fires on bare `key` / `token` prose", async () => {
   }
 });
 
+test("v1.8: D8-001 ignores fixed privacy notices but keeps dynamic logs", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-v18-d8-static-"));
+  try {
+    await mkdir(join(root, "src"), { recursive: true });
+    await writeFile(
+      join(root, "src", "telemetry.ts"),
+      [
+        'console.log("Excluded: project identity and credentials are never transmitted.");',
+        "console.log('credentials:', credentials);",
+      ].join("\n"),
+      "utf8",
+    );
+
+    const result = await runScan({
+      projectRoot: root,
+      unlocked: true,
+      detectors: ["misconfig"],
+      noProvenance: true,
+    });
+
+    const findings = result.findings.filter(
+      (f) => f.rule === "D8-001" && f.file?.endsWith("telemetry.ts"),
+    );
+    assert.equal(findings.length, 1);
+    assert.equal(findings[0]?.line, 2);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test("v1.8: misconfig line-scan skips .json / .xml / .svg / .html / .csv", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-v18-skipext-"));
   try {
