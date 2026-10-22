@@ -149,12 +149,14 @@ async function validateSigstore(root, configured, tool, run) {
   const config = configured ?? {};
   const payloadPath = await resolveArtifactPath(root, config.payloadPath, "sigstore.payload");
   const bundlePath = await resolveArtifactPath(root, config.bundlePath, "sigstore.bundle.json");
-  const keyPath = await resolveArtifactPath(root, config.keyPath, "sigstore.pub");
   const trustedRootPath = config.trustedRootPath === undefined ? undefined : await resolveArtifactPath(root, config.trustedRootPath, "sigstore.trusted-root.json");
+  const keyPath = trustedRootPath === undefined
+    ? await resolveArtifactPath(root, config.keyPath, "sigstore.pub")
+    : undefined;
   const identity = config.identity;
   const issuer = config.issuer;
   const names = { id: "sigstore", format: "Sigstore bundle", artifact: "sigstore.bundle.json" };
-  if (!payloadPath || !bundlePath || !keyPath || (config.trustedRootPath !== undefined && !trustedRootPath)) {
+  if (!payloadPath || !bundlePath || (trustedRootPath === undefined && !keyPath) || (config.trustedRootPath !== undefined && !trustedRootPath)) {
     return { ...names, status: "failed", reason: "sigstore-fixture-outside-root" };
   }
   const paths = [payloadPath, bundlePath, trustedRootPath ?? keyPath];
