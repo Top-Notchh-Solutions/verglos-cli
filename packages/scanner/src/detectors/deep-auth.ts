@@ -57,6 +57,13 @@ const JWT_DECODE_AS_AUTH =
 const PWD_STRICT_EQ =
   /\b(password|passwd|pwd|hash|passHash|passwordHash|storedHash|passwordDigest)\b\s*===?\s*\S|\S\s*===?\s*\b(password|passwd|pwd|hash|passHash|passwordHash|storedHash|passwordDigest)\b/i;
 
+// URL validation commonly checks that parsed credential/hash components are
+// empty. Those are structural URL-safety checks, not password comparisons.
+// Keep the exemption narrow so direct `password === input` comparisons still
+// remain actionable.
+const SAFE_URL_COMPONENT_EMPTY_CHECK =
+  /\b(?:url|uri|parsed|destination)\.(?:password|hash)\s*===?\s*["']["']/i;
+
 const TIMING_SAFE_HINT =
   /bcrypt|argon2|scrypt\.timingSafeEqual|crypto\.timingSafeEqual|timingSafeEqual/;
 
@@ -167,7 +174,11 @@ export const deepAuthDetector: Detector = {
         }
 
         // AUTH-003 — password compare with === / == (no timingSafe/bcrypt/argon2 in file)
-        if (PWD_STRICT_EQ.test(line) && !usesTimingSafe) {
+        if (
+          PWD_STRICT_EQ.test(line) &&
+          !SAFE_URL_COMPONENT_EMPTY_CHECK.test(line) &&
+          !usesTimingSafe
+        ) {
           findings.push({
             id: randomUUID(),
             detector: "deep-auth",
