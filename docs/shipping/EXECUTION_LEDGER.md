@@ -14209,3 +14209,21 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   dependency, hosted/independent evidence, and final acceptance. No external
   state changed and nothing was deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-005-machine-readable-plan-terms-pr250-2026-10-23.md`.
+
+## 2026-10-23 · FINAL-WEB-008 machine-readable release-smoke enforcement
+
+- **Source:** Web PR #250 commit `37c55a50fa09b4d761319f566d75ec5258c3312d`.
+- **Implementation:** Release smoke now compares every catalog-derived
+  `/llms.txt` plan line and homepage JSON-LD property against all billing,
+  status, allowance, and no-overage terms; stale-term mutation is covered by
+  a negative regression.
+- **Verification:** Public-release tests **8/8**, executable smoke **18 routes /
+  32 claims / 2 assets / 0 issues**, typecheck, build **49/49**, serial Web
+  **897 passed / 24 explicit skips / 0 failed**, and diff check passed.
+- **Hosted boundary:** Verify run `39851784662` and private runner run
+  `39851784544` failed before repository steps; all required jobs reported
+  zero steps. GitGuardian and Preview Comments passed; Vercel was pending.
+- **Disposition:** Keep `FINAL-WEB-008` unchecked for FINAL-WEB-001–007,
+  hosted/field/acceptance evidence, and final release sign-off. No external
+  state changed and nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-machine-readable-release-smoke-pr250-2026-10-23.md`.

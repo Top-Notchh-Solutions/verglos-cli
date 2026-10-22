@@ -11228,6 +11228,26 @@ hosted/independent evidence, and final acceptance. Score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-005-machine-readable-plan-terms-pr250-2026-10-23.md`.
 
+## 2026-10-23 · FINAL-WEB-008 machine-readable release-smoke enforcement
+
+Web PR #250 commit `37c55a50fa09b4d761319f566d75ec5258c3312d` adds a
+fail-closed release-smoke comparison for every catalog-derived `/llms.txt`
+plan line and homepage JSON-LD property, covering billing, status, all
+allowance dimensions, and explicit no-overage wording. The stale-term
+negative regression is included.
+
+Exact-head public-release tests passed **8/8**, executable smoke passed
+**18 routes / 32 claims / 2 proof assets / 0 issues**, typecheck passed, build
+passed with **49/49 routes**, and serial Web passed **897 / 24 explicit skips /
+0 failures**. Fresh Verify run `39851784662` and private runner run
+`39851784544` failed before repository steps with zero-step required jobs;
+GitGuardian and Preview Comments passed and Vercel was pending. No rerun,
+bypass, merge-around, external state, or deletion occurred. `FINAL-WEB-008`
+remains unchecked for its dependencies, hosted/field/acceptance evidence,
+and final release sign-off. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-008-machine-readable-release-smoke-pr250-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-003 release artifact read binding
 
 CLI PR #171 merged normally as

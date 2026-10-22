@@ -1594,3 +1594,32 @@ This is code-side FINAL-WEB-005 progress only. Keep `FINAL-WEB-005`
 unchecked for FINAL-WEB-001, hosted/independent evidence, and final
 acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
 Evidence: `docs/shipping/evidence/final-web-005-machine-readable-plan-terms-pr250-2026-10-23.md`.
+
+# 2026-10-23 · FINAL-WEB-008 machine-readable release-smoke enforcement
+
+Web commit `37c55a50fa09b4d761319f566d75ec5258c3312d` on PR #250 extends the
+public release smoke to independently validate every canonical plan's
+`/llms.txt` line and homepage JSON-LD property against catalog-derived
+billing, status, all allowance dimensions, and explicit no-overage wording.
+The negative regression mutates a plan line and requires the smoke to reject
+the stale output.
+
+Exact-head verification passed **8/8** public-release tests, executable public
+smoke **18 routes / 32 claims / 2 proof assets / 0 issues**, typecheck, build
+**49/49 routes**, serial Web **897 / 24 explicit skips / 0 failures**, and
+`git diff --check`. Local Node 26.4.0 emitted only the package's expected
+Node 22.x engine warning.
+
+Fresh hosted runs `39851784662` (Verify Web) and `39851784544` (Private runner
+qualification) failed before repository steps with zero-step jobs across
+type/schema, Ubuntu, macOS, Windows, and isolated PostgreSQL. GitGuardian and
+Preview Comments passed; Vercel was pending at capture. No rerun, bypass,
+merge-around, deployment, provider, database, customer, legal, Production,
+or release-sign-off action occurred; nothing was deleted. PR #250 remains
+open.
+
+This is code-side FINAL-WEB-008 progress only. Keep `FINAL-WEB-008`
+unchecked for FINAL-WEB-001–007 dependencies, hosted/field/acceptance
+evidence, and final release sign-off. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-008-machine-readable-release-smoke-pr250-2026-10-23.md`.
