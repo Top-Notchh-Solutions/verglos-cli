@@ -14201,8 +14201,8 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
 - **Verification:** Truth registry **37/37**, public-release tests **7/7**,
   executable smoke **18 routes / 32 claims / 2 assets / 0 issues**, typecheck,
   build **49/49**, and serial Web **897 passed / 24 explicit skips / 0 failed**.
-- **Hosted boundary:** Verify run `39850836465` failed before repository steps
-  with zero-step type/schema; private runner run `39850836344` had zero-step
+- **Hosted boundary:** Verify run `39851369885` failed before repository steps
+  with zero-step type/schema; private runner run `39851370000` had zero-step
   Ubuntu/Windows/PostgreSQL failures and macOS queued at capture. GitGuardian
   and Preview Comments passed; Vercel was pending.
 - **Disposition:** Keep `FINAL-WEB-005` unchecked for its FINAL-WEB-001

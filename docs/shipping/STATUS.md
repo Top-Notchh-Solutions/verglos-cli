@@ -11219,8 +11219,8 @@ Truth registry passed **37/37**, public-release tests **7/7**, executable
 public smoke passed **18 routes / 32 claims / 2 proof assets / 0 issues**,
 typecheck passed, build passed with **49/49 routes**, and serial Web passed
 **897 / 24 explicit skips / 0 failures**. Required Verify run
-`39850836465` failed before repository steps with a zero-step type/schema job;
-private runner run `39850836344` had zero-step Ubuntu/Windows/PostgreSQL
+`39851369885` failed before repository steps with a zero-step type/schema job;
+private runner run `39851370000` had zero-step Ubuntu/Windows/PostgreSQL
 failures and macOS queued at capture. GitGuardian and Preview Comments
 passed; Vercel was pending. No rerun, bypass, merge-around, external state,
 or deletion occurred. `FINAL-WEB-005` remains unchecked for FINAL-WEB-001,
