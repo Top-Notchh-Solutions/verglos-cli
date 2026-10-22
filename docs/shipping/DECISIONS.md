@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain DIST-003 after PR #165 origin-output repair
+
+- **Decision:** Promote the repository-owned release-origin output repair and
+  retain `DIST-003` unchecked because trusted publication, immutable
+  attestation, legal/license, independent-review, and final-acceptance gates
+  remain open.
+- **Implementation:** CLI commit `7ef8f1f0d4b29766d75623884b00cd524e3d29e1`
+  rejects symlinked/non-regular `RELEASE_METADATA.json` and uses no-follow
+  output opening where supported. PR #165 merged normally as
+  `ecda0aec8441b0afe21f9e12a476bb964bc36ccc`; source branch preserved.
+- **Verification:** Focused contracts **13/13**, typecheck **14/14**, build
+  **8/8**, full CLI tests **13/13**, merged verifier CLI **311/313**, Web
+  **951/981**, composed **75/75**, all **12/12**, zero failures. GitHub jobs
+  were queued at final status read.
+- **Boundary:** `env -u TEST_DATABASE_URL`; no database/provider/publication/
+  deployment/customer/legal/independent-review operation and no file, branch,
+  record, deployment, provider, customer, database, or release artifact
+  deletion or change.
+- **Disposition:** Keep the score at **239/41/280 (85.4%)** and preserve the
+  additive evidence bundle.
+
 ## 2026-10-22 · retain QUAL-CLI-006 after PR #164 trusted-root repair
 
 - **Decision:** Promote the repository-owned Sigstore validator repair and

@@ -14,6 +14,24 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · DIST-003
+
+The release-origin metadata output boundary was repaired in CLI commit
+`7ef8f1f0d4b29766d75623884b00cd524e3d29e1`; PR #165 merged normally as
+`ecda0aec8441b0afe21f9e12a476bb964bc36ccc`, with the source branch preserved.
+`RELEASE_METADATA.json` symlinks/non-regular outputs now fail closed and the
+metadata output uses no-follow semantics where supported. Focused release
+contracts passed **13/13**, typecheck **14/14**, build **8/8**, and full CLI
+tests **13/13**. The clean merged-head verifier passed CLI **311/313** with 2
+explicit skips, Web **951/981** with 30 explicit skips, composed substrates
+**75/75**, and all **12/12** stories with zero failures. GitHub jobs were
+queued at final status read and are not claimed as passed. `TEST_DATABASE_URL`
+was removed; no database, provider, publication, deployment, customer, legal,
+independent-review, or final-release operation occurred, and nothing was
+deleted. Keep `DIST-003` unchecked for its external release gates. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-003-origin-manifest-boundary-pr165-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · QUAL-CLI-006
 
 The CLI trusted-root Sigstore validation boundary was repaired in commit

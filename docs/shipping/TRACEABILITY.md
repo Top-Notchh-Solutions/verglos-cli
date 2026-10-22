@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## DIST-003 release-origin metadata output boundary · 2026-10-22
+
+- **Source mapping:** CLI commit `7ef8f1f0d4b29766d75623884b00cd524e3d29e1`;
+  PR #165 merged normally as
+  `ecda0aec8441b0afe21f9e12a476bb964bc36ccc`; source branch preserved.
+- **Implementation mapping:** Release-origin generation rejects an existing
+  symlink/non-regular metadata output and uses no-follow output opening where
+  supported; the regression proves the symlink target is unchanged.
+- **Qualification mapping:** Focused contracts **13/13**, typecheck **14/14**,
+  build **8/8**, full CLI graph **13/13**. Merged-head verifier CLI **311/313**,
+  Web **951/981**, composed **75/75**, all **12/12** stories, zero failures.
+  GitHub jobs were queued at final status read.
+- **Safety mapping:** `TEST_DATABASE_URL` was removed from the environment.
+  No external provider, database, publication, deployment, customer, legal,
+  independent-review, or final-release operation occurred; no file, branch,
+  record, deployment, provider, customer, database, or release artifact was
+  deleted or changed.
+- **Acceptance mapping:** Keep `DIST-003` open for trusted publication,
+  immutable attestation, legal/license clearance, independent review, and final
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-003-origin-manifest-boundary-pr165-2026-10-22.md`.
+
 ## QUAL-CLI-006 trusted-root Sigstore boundary · 2026-10-22
 
 - **Source mapping:** CLI commit `b115446dc670d2d2dbfca803a51a7d908615020c`;

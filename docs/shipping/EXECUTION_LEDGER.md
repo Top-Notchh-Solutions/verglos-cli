@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · DIST-003 release-origin output boundary and PR #165
+
+- **Implementation:** CLI commit `7ef8f1f0d4b29766d75623884b00cd524e3d29e1`
+  rejects a symlinked/non-regular `RELEASE_METADATA.json` and opens the
+  metadata output with no-follow semantics where supported, preventing an
+  unsafe target overwrite.
+- **Promotion:** PR [#165](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/165)
+  merged normally as `ecda0aec8441b0afe21f9e12a476bb964bc36ccc`; source branch
+  preserved. No squash, rebase, or deletion occurred.
+- **Verification:** Focused release contracts **13/13**, typecheck **14/14**,
+  build **8/8**, full CLI test graph **13/13**. Merged-head verifier CLI
+  **311/313** with 2 skips, Web **951/981** with 30 skips, composed substrates
+  **75/75**, all **12/12** stories, zero failures. GitHub jobs were queued at
+  merge/status read and are not claimed as passed.
+- **Safety boundary:** `env -u TEST_DATABASE_URL` was used. No provider,
+  database, publication, deployment, customer, legal, independent-review,
+  trusted-publication, or final-release operation occurred. No file, branch,
+  record, deployment, provider, customer, database, or release artifact was
+  deleted or changed.
+- **Disposition:** Keep `DIST-003` unchecked for trusted publication,
+  immutable attestation, legal/license clearance, independent review, and final
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-003-origin-manifest-boundary-pr165-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-CLI-006 trusted-root Sigstore boundary and PR #164
 
 - **Implementation:** CLI commit `b115446dc670d2d2dbfca803a51a7d908615020c`

@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-003 release-origin output boundary and PR #165
+
+CLI commit `7ef8f1f0d4b29766d75623884b00cd524e3d29e1` makes release-origin
+generation reject a symlinked `RELEASE_METADATA.json` and uses a no-follow
+metadata output open where supported. PR #165 merged normally as
+`ecda0aec8441b0afe21f9e12a476bb964bc36ccc`; the source branch remains
+preserved. Focused release contracts passed **13/13**, typecheck **14/14**,
+build **8/8**, and full CLI tests **13/13**. The merged-head verifier passed
+CLI **311/313** with 2 skips, Web **951/981** with 30 skips, composed
+substrates **75/75**, and all **12/12** stories with zero failures. GitHub
+jobs were queued at merge/status read and are not claimed as passed. Keep
+`DIST-003` open for trusted publication, immutable attestation, legal/license
+clearance, independent review, and final acceptance. No `TEST_DATABASE_URL` was
+used and no file, branch, record, deployment, provider, customer, database,
+or release artifact was deleted or changed. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`evidence/dist-003-origin-manifest-boundary-pr165-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-CLI-006 trusted-root Sigstore boundary and PR #164
 
 CLI commit `b115446dc670d2d2dbfca803a51a7d908615020c` corrects the standard

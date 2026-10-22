@@ -1,5 +1,25 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · DIST-003 release-origin metadata output gate
+
+CLI commit `7ef8f1f0d4b29766d75623884b00cd524e3d29e1` makes release-origin
+generation fail closed on an existing symlinked/non-regular
+`RELEASE_METADATA.json` and opens the output with no-follow semantics where
+supported. PR #165 merged normally as
+`ecda0aec8441b0afe21f9e12a476bb964bc36ccc`; source branch preserved. Focused
+contracts **13/13**, typecheck **14/14**, build **8/8**, full CLI graph **13/13**,
+and merged-head private substrates CLI **311/313**, Web **951/981**, composed
+**75/75**, all **12/12** passed with zero failures. GitHub jobs were queued at
+merge/status read and are not claimed as passed.
+
+No database URL or external operation was used. No trusted publication,
+immutable attestation, legal/license clearance, provider action, independent
+review, customer acceptance, or final release approval was claimed. No file,
+branch, record, deployment, provider, customer, database, or release artifact
+was deleted or changed. Keep `DIST-003` unchecked and keep the score at
+**239/41/280 (85.4%)**. Evidence:
+`evidence/dist-003-origin-manifest-boundary-pr165-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-CLI-006 trusted-root Sigstore validation gate
 
 CLI commit `b115446dc670d2d2dbfca803a51a7d908615020c` fixes the validator
