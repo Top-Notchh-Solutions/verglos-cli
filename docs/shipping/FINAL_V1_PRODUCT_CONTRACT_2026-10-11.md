@@ -15,6 +15,15 @@ and `verglos-web`
 **Status:** authoritative product direction; implementation and acceptance are
 still required
 
+## Current implementation note · 2026-10-22
+
+The Web merged head now applies the route-wide security-header baseline and
+passes its regression contract; PR #240 merged normally with all hosted checks
+green. This updates implementation coverage only and does not change the
+contract's acceptance boundaries or the private backlog score (**239 checked /
+41 open / 280 total, 85.4%**). Evidence:
+`evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
 This document replaces conflicting informal descriptions of the final V1
 scope. It is a product contract, not proof that every capability is already
 implemented. A capability becomes shipped only after its code, tests, runtime

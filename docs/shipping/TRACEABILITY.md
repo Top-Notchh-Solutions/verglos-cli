@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## Web PR #240 security-header implementation · 2026-10-22
+
+- **Source mapping:** Web implementation `7df61c0`, regression `4d28d52`, and
+  normal merge head `f20dc426e310557a7693d1e2e18f693663943ce5`.
+- **Qualification mapping:** Header contract **2/2**, typecheck, build
+  **49/49**, truth registry **35/35**, public smoke **4/4**, landing contract
+  **4/4**, hosted checks **8/8**, and owner-controlled scan exit 0 with no
+  D5-004 finding.
+- **Acceptance mapping:** Code-side implementation is advanced, but no row is
+  checked; ACCEPT-005 and QUAL-WEB-006 retain their external/human/field/
+  independent gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
 ## ACCEPT-005 current-head first-party qualification · 2026-10-22
 
 - **Source mapping:** CLI `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web
@@ -25,7 +38,7 @@
 
 ## ACCEPT-003 current-head evidence bundle · 2026-10-22
 
-- **Bundle mapping:** 53 hashed evidence files; secret scan passed.
+- **Bundle mapping:** 54 hashed evidence files; secret scan passed.
 - **Acceptance mapping:** Keep `ACCEPT-003` open for reviewer sign-off and
   external/hosted evidence. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/accept-003-current-head-pr239-2026-10-22.md` and the

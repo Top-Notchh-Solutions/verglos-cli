@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · Web PR #240 security-header implementation
+
+Web PR #240 merged normally as `f20dc426e310557a7693d1e2e18f693663943ce5`
+with the global security-header baseline and regression contract. Local
+typecheck, build (**49/49** pages/routes), truth registry **35/35**, public
+release smoke **4/4**, landing contract **4/4**, and hosted checks **8/8**
+passed. The merged-head owner-controlled Web scan exited **0** with 21
+findings, score 75/medium, and no D5-004 finding. This advances code-side
+implementation only; ACCEPT-005 and QUAL-WEB-006 remain open. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-005 current-head first-party qualification
 
 Current clean merged heads passed the owner-controlled scan command with CLI
@@ -22,7 +34,7 @@ pass: **35/35**, **4/4**, and **4/4**. Score remains **239 checked / 41 open /
 
 ## 2026-10-22 · ACCEPT-003 current-head evidence bundle
 
-The private acceptance bundle now contains **53** hashed evidence files and
+The private acceptance bundle now contains **54** hashed evidence files and
 passes its secret scan. Keep `ACCEPT-003` open for reviewer sign-off and the
 external/hosted evidence required by the row. Score remains **239 checked / 41
 open / 280 total (85.4%)**. Evidence:

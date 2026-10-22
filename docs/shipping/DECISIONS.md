@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain open gates after Web PR #240
+
+- **Decision:** Merge the Web security-header implementation through the normal
+  PR path, preserve both commits and the source branch, and retain all affected
+  backlog checkboxes as open.
+- **Evidence:** PR #240 merged as
+  `f20dc426e310557a7693d1e2e18f693663943ce5`; local header contract **2/2**,
+  typecheck/build, public contracts, hosted checks **8/8**, and merged-head
+  owner-controlled scan exit 0 with no D5-004 finding.
+- **Boundary:** A fixed code gap is not customer, provider, legal, field,
+  independent AppSec, or final release evidence. No external or Production
+  operation occurred and nothing was deleted.
+- **Disposition:** Keep ACCEPT-005 and QUAL-WEB-006 open for their own contracts.
+  Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
 ## 2026-10-22 · retain ACCEPT-005 after current-head first-party run
 
 - **Decision:** Accept the current-head scan as updated first-party technical

@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · Web PR #240 security-header code gate
+
+PR #240 merged normally as `f20dc426e310557a7693d1e2e18f693663943ce5` after
+hosted checks **8/8** passed. The route-wide security-header contract passed
+locally and the merged-head owner-controlled scan no longer reports D5-004.
+This clears the identified code-side implementation gap only. ACCEPT-005 and
+QUAL-WEB-006 remain open for external/customer, human/field, independent, and
+final acceptance artifacts. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-005 current-head technical gate
 
 Current clean merged CLI/Web scans exited **0**, reporting CLI **78 findings /
@@ -20,7 +31,7 @@ record exist. Adjacent current-head truth checks pass **35/35**, **4/4**, and
 
 ## 2026-10-22 · ACCEPT-003 current-head bundle gate
 
-The current private acceptance manifest contains **53** hashed files and
+The current private acceptance manifest contains **54** hashed files and
 passes its secret scan. Keep `ACCEPT-003` unchecked for reviewer sign-off and
 external/hosted evidence. Score remains **239/41/280 (85.4%)**. Evidence:
 `evidence/accept-003-current-head-pr239-2026-10-22.md`.

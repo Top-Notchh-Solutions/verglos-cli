@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · Web PR #240 security-header implementation
+
+- **Implementation:** Web commits `7df61c0` and `4d28d52` add the global
+  security-header baseline and its regression contract; PR #240 merged normally
+  as `f20dc426e310557a7693d1e2e18f693663943ce5`. The source branch remains
+  preserved.
+- **Verification:** Header contract **2/2**, typecheck, production build
+  **49/49**, truth registry **35/35**, public release smoke **4/4**, landing
+  contract **4/4**, and hosted checks **8/8** passed. The merged-head Web scan
+  exited 0 with 21 findings, score 75/medium, and no D5-004 finding.
+- **Boundary:** This is owner-controlled code-side qualification. No provider,
+  customer, Production, legal, field, or independent-review operation occurred.
+  Nothing was deleted.
+- **Disposition:** Keep ACCEPT-005 and QUAL-WEB-006 unchecked for their stated
+  external, human, field, and independent gates. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-005 current-head first-party qualification
 
 - **Verification:** Clean CLI `1d7844bd` and Web `ba00d5d` scans exited **0**.
@@ -32,7 +50,7 @@
 
 ## 2026-10-22 · ACCEPT-003 current-head evidence bundle
 
-- **Verification:** The private acceptance manifest contains **51** hashed
+- **Verification:** The private acceptance manifest contains **54** hashed
   files and passed its secret scan after the current merged-head refresh.
 - **Boundary:** It records commands, source identities, results, hashes,
   limitations, and open gates without credentials, source, customer data, or

@@ -25,6 +25,16 @@ plan outcome, economic guardrail, and acceptance metric for every surface in
 this matrix. The contract and backlog remain the implementation and checkbox
 authorities respectively.
 
+## 0.2 Current implementation update · 2026-10-22
+
+The Web D5 secure-default implementation gap identified by the owner-controlled
+scan is now covered by the merged security-header baseline in PR #240, with a
+route-wide regression contract and green hosted checks. This advances the D5 /
+Web implementation mapping but does not check QUAL-WEB-006, ACCEPT-005, or any
+dependent row. The live score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
 ## 0.1 Owner authorization checkpoint — 2026-10-14
 
 The owner has authorized the bounded Preview, disposable-runner, SCM-test,

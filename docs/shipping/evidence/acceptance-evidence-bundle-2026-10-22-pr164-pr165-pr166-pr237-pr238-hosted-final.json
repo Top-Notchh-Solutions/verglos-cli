@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-22T15:46:49.914Z",
+  "generatedAt": "2026-10-22T15:57:41.057Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -189,8 +189,8 @@
     },
     {
       "path": "docs/shipping/evidence/accept-003-current-head-pr239-2026-10-22.md",
-      "sha256": "aaed02fee69120aed8febe9640c3f19d33b80d55f4b4e102c6d0d8cb13bb7da2",
-      "bytes": 889
+      "sha256": "47d51c7049e724a28c8484fc38c33ad7689f221f2df68cb1e94cf1453e8d9aca",
+      "bytes": 903
     },
     {
       "path": "docs/shipping/evidence/accept-005-current-blocker-audit-2026-10-22.md",
@@ -201,6 +201,11 @@
       "path": "docs/shipping/evidence/accept-005-current-head-first-party-qualification-2026-10-22.md",
       "sha256": "8160ba3fd11b03e1388c719dd29af41571e15bd48eb1f4efe827dff36e04de33",
       "bytes": 1847
+    },
+    {
+      "path": "docs/shipping/evidence/accept-005-web-security-headers-pr240-2026-10-22.md",
+      "sha256": "ee6f07362851a87c3791ea840c74280e667a40fc132d2a21ad617d472600d1d8",
+      "bytes": 2669
     },
     {
       "path": "docs/shipping/evidence/qual-web-005-local-isolated-qualification-2026-10-22.md",

@@ -5,6 +5,17 @@
 > `FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md` and
 > `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-11.md` for current execution.
 
+## Web PR #240 implementation continuation · 2026-10-22
+
+The Web security-header gap was implemented and merged normally in PR #240 as
+`f20dc426e310557a7693d1e2e18f693663943ce5`. Header contract, typecheck/build,
+public contracts, and all 8 hosted checks passed; the merged-head scan exited
+0 and no longer reports D5-004. This is code-side progress only. No checkbox is
+checked because ACCEPT-005 and QUAL-WEB-006 still require their independent,
+external, human, field, or final gates. The live backlog remains **239 checked /
+41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
 ## QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
 
 Read-only Chrome DevTools inspection of a separate production checkout tab

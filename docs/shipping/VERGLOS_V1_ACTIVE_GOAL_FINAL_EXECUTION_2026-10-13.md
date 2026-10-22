@@ -14,6 +14,21 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · Web PR #240 security-header gap
+
+Web PR #240 added the route-wide security-header baseline: scoped CSP for the
+current Clerk/Razorpay integrations, framing/MIME/transport/referrer headers,
+and a permissions policy, with a regression contract in the serial suite. Local
+typecheck, production build (**49/49** pages/routes), truth registry **35/35**,
+public release smoke **4/4**, landing contract **4/4**, and hosted PR checks
+**8/8** passed. At merged head `f20dc426e310557a7693d1e2e18f693663943ce5`,
+the owner-controlled Web scan exited **0** with **21 findings / score 75
+medium** and no D5-004 finding. This is code-side qualification only; no
+checkbox changed. Keep ACCEPT-005 and QUAL-WEB-006 open for their external,
+human, field, and independent gates. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/accept-005-web-security-headers-pr240-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · ACCEPT-005 current-head run
 
 Current clean merged CLI/Web heads completed the owner-controlled scan with
@@ -38,7 +53,7 @@ passed **35/35**, **4/4**, and **4/4**. Keep ACCEPT-005 open; score remains
 
 ## Latest continuation result · 2026-10-22 · ACCEPT-003 bundle
 
-The private acceptance manifest now contains **53** hashed evidence files and
+The private acceptance manifest now contains **54** hashed evidence files and
 passes its secret scan. Keep `ACCEPT-003` unchecked for reviewer sign-off and
 the external/hosted evidence required by its contract. Score remains **239
 checked / 41 open / 280 total (85.4%)**. Evidence:
