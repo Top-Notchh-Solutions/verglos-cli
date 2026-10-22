@@ -40,6 +40,16 @@ test("release checksum generation rejects symlink artifacts", async () => {
   });
 });
 
+test("release checksum generation refuses a symlinked checksum output", async () => {
+  await withFixture(async (root) => {
+    const sentinel = join(root, "checksum-target.txt");
+    await writeFile(sentinel, "do not overwrite\n");
+    await symlink(sentinel, join(root, "SHA256SUMS"));
+    await assert.rejects(run(process.execPath, [script, root]), /release checksum output must be a regular file/u);
+    assert.equal(await readFile(sentinel, "utf8"), "do not overwrite\n");
+  });
+});
+
 test("release checksum generation fails closed for an empty artifact directory", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-release-checksums-empty-"));
   try {
