@@ -14,6 +14,26 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-23 · FINAL-WEB-007 browser capture implementation
+
+Web PR #247 source `9fcd1031a559a67563124fbaab3e5fa6dd0ed96d` adds a real
+Playwright Chromium desktop/mobile capture and fail-closed qualification for
+the six public release surfaces, plus fixes discovered mobile overflow and
+keyboard-scroll accessibility defects. Browser capture/qualification passed
+**12/12** with zero page failures and zero gaps; landing qualification passed
+**4/4**, public smoke passed **18 routes / 22 claims / 2 proof assets / 0
+issues**, typecheck passed, build generated **49/49** routes, migrations and
+license tests passed, and the isolated serial PostgreSQL suite passed **919
+tests / 2 documented skips / 0 failures**. A parallel `pnpm test` attempt is
+not claimed green because three integration cases collided while concurrently
+creating temporary PostgreSQL types; the serial suite remains the authoritative
+local database qualification. Hosted PR jobs remain unavailable before
+repository steps under the account payments/spending-limit condition. Keep
+FINAL-WEB-007 unchecked for human screen-reader, supported-browser/field
+performance, acceptance dependencies, hosted completion, and final sign-off.
+Score remains **239 checked / 41 open / 280 total (85.4%)**. Nothing was
+deleted. Evidence: `docs/shipping/evidence/final-web-007-browser-qualification-pr247-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-22 · ENT-CLI-001 exact-head requalification
 
 The current merged CLI `db351035` and Web `02f5aba` private-runner surfaces
