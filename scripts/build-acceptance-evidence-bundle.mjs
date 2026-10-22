@@ -26,6 +26,9 @@ const paths = [
   "docs/shipping/evidence/razorpay-sandbox-qr-2026-10-03.md",
   "docs/shipping/evidence/current-source-verification-2026-10-03.md",
   "docs/shipping/evidence/hunt-docker-adversarial-2026-10-02.md",
+  "docs/shipping/evidence/ent-cli-001-current-head-qualification-2026-10-22.md",
+  "docs/shipping/evidence/studio-cli-001-current-head-preview-2026-10-22.md",
+  "docs/shipping/evidence/dist-003-current-head-checksum-generation-2026-10-22.md",
 ];
 
 const forbidden = [
