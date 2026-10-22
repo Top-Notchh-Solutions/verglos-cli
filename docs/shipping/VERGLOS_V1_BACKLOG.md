@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · QUAL-WEB-005 digest-registration/deletion lock repair
+
+Web commit `bac88808473cf90730810347d5ced0c2df8b4699` and PR #230 merged
+normally as `38635e52bb2ce9db5b1804986c12ef9d7b897f15`. Customer-held digest
+registration and deletion-request creation now share the user-scoped advisory
+lock used by the reviewed worker; duplicate registrations remain idempotent,
+while new digest mutations are rejected once deletion is pending. Focused
+privacy/deletion contracts passed **15/15**; the full Web suite passed
+**893/893** with **24 explicit skips**; typecheck, diff check, Verify run
+`39767070146`, and Private runner qualification run `39767070242` passed. The
+remote Neon URL in the owner-provided test environment was refused as not an
+isolated `verglos_test` target, so no destructive integration test or database
+write was performed. Keep `QUAL-WEB-005` unchecked for its remaining
+legal/consent, production authorization, restore/rollback, reconciliation, and
+independent acceptance gates. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-digest-registration-deletion-lock-pr230-2026-10-22.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 current-head tenant-boundary repair
 
 Web commit `cb2302179533a7bc73eccbcb17b0c350685cc5cc` repairs the real

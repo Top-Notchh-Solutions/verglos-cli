@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-WEB-005 digest-registration/deletion lock repair
+
+- **Implementation:** Web commit `bac88808473cf90730810347d5ced0c2df8b4699`
+  makes customer-held digest registration and deletion-request creation share
+  the reviewed worker's user-scoped advisory lock. Duplicate registration is
+  still idempotent; new registration is refused after deletion is pending.
+- **Promotion:** PR #230 merged normally as
+  `38635e52bb2ce9db5b1804986c12ef9d7b897f15`; source branch preserved.
+- **Verification:** Focused privacy/deletion checks **15/15**; full Web suite
+  **893/893** with **24 skips** and no failures; typecheck and diff check
+  passed; hosted Verify `39767070146` and Private runner qualification
+  `39767070242` passed.
+- **Safety boundary:** The provided test URL resolved to remote Neon and was
+  refused as not an isolated `verglos_test` target. No destructive integration
+  test, database connection, or database write was performed.
+- **Disposition:** `QUAL-WEB-005` remains unchecked for legal/consent,
+  production authorization, restore/rollback, reconciliation, and independent
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-digest-registration-deletion-lock-pr230-2026-10-22.md`.
+
 ## 2026-10-22 · GitHub promotion and normal merge qualification
 
 - **CLI:** PR #158 merged as `145ff5d902289ecfb670a397c9e87860eb06309d` from

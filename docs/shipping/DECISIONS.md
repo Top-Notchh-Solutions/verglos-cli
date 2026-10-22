@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · serialize QUAL-WEB-005 digest registration with deletion
+
+- **Decision:** Put customer-held digest registration and deletion-request
+  creation behind the same user-scoped advisory transaction lock used by the
+  reviewed deletion worker. Preserve idempotent duplicate registration, but
+  refuse new digest mutations after a deletion request is pending.
+- **Implementation:** Web commit `bac88808473cf90730810347d5ced0c2df8b4699`
+  merged through PR #230 as
+  normal merge commit `38635e52bb2ce9db5b1804986c12ef9d7b897f15`.
+- **Verification:** Focused privacy/deletion checks **15/15**; full Web suite
+  **893/893** with **24 explicit skips**; typecheck, diff check, hosted Verify
+  `39767070146`, and Private runner qualification `39767070242` passed.
+- **Safety boundary:** The provided test URL resolved to remote Neon, not an
+  isolated `verglos_test` target, so it was refused. No deletion integration or
+  database write was performed.
+- **Disposition:** This closes the code-side race only. Keep `QUAL-WEB-005`
+  unchecked for legal/consent, production authorization, restore/rollback,
+  reconciliation, and independent acceptance. Score remains **239 checked /
+  41 open / 280 total (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-digest-registration-deletion-lock-pr230-2026-10-22.md`.
+
 ## 2026-10-22 · promote implementation through normal GitHub merges
 
 - **Decision:** Publish the clean CLI/Web implementation branches to GitHub,

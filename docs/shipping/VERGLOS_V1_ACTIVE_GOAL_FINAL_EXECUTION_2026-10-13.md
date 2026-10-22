@@ -32,6 +32,24 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current implementation batch (2026-10-22):** `QUAL-WEB-005` received a
+substantive deletion-boundary repair in Web commit
+`bac88808473cf90730810347d5ced0c2df8b4699`. Customer-held digest registration
+and deletion-request creation now share the user-scoped advisory lock used by
+the reviewed worker; duplicate registrations remain idempotent and new digest
+mutations are rejected once deletion is pending. Focused privacy/deletion
+contracts passed **15/15**; the full Web suite passed **893/893** with **24
+explicit skips**; typecheck and diff check passed; hosted Verify
+`39767070146` and Private runner qualification `39767070242` passed. PR #230
+merged normally as `38635e52bb2ce9db5b1804986c12ef9d7b897f15`, with the source
+branch preserved. The owner-provided test URL was remote Neon rather than an
+isolated `verglos_test` database, so the destructive deletion integration test
+was not run and no database was touched. `QUAL-WEB-005` remains unchecked for
+legal/consent, production authorization, restore/rollback, reconciliation, and
+independent acceptance. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-digest-registration-deletion-lock-pr230-2026-10-22.md`.
+
 **Current GitHub execution batch (2026-10-22):** The real CLI branch was
 promoted as PR #158 and merged normally as `145ff5d9`; its Platform matrix,
 Self-scan, and Standard validation workflows all passed. The real Web branch

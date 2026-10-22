@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · QUAL-WEB-005 deletion-boundary race repair and merge
+
+Web commit `bac88808473cf90730810347d5ced0c2df8b4699` adds the shared
+user-scoped advisory-lock boundary between customer-held digest registration,
+deletion-request creation, and the reviewed worker. New digest mutations are
+refused after deletion becomes pending while duplicate registration remains
+idempotent. PR #230 merged normally as
+`38635e52bb2ce9db5b1804986c12ef9d7b897f15`; the source branch was preserved.
+Focused privacy/deletion checks passed **15/15**; the full Web suite passed
+**893/893** with **24 explicit skips**; typecheck, diff check, Verify
+`39767070146`, and Private runner qualification `39767070242` passed. The
+remote Neon test URL was not used, so no deletion integration or database write
+was performed. `QUAL-WEB-005` remains open for its non-code acceptance gates;
+score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-005-digest-registration-deletion-lock-pr230-2026-10-22.md`.
+
 ## 2026-10-22 · GitHub promotion, hosted repair, and normal merges
 
 CLI PR [#158](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/158)

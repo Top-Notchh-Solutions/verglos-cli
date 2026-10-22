@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · QUAL-WEB-005 digest-registration/deletion lock gate
+
+Web commit `bac88808473cf90730810347d5ced0c2df8b4699` merged through PR #230 as
+`38635e52bb2ce9db5b1804986c12ef9d7b897f15`. Customer-held digest registration
+and deletion-request creation now share the reviewed worker's user-scoped
+advisory lock; duplicate registration remains idempotent and new digest
+mutations are refused after deletion is pending. Focused checks passed **15/15**;
+full Web passed **893/893** with **24 explicit skips**; typecheck, diff check,
+hosted Verify `39767070146`, and Private runner qualification `39767070242`
+passed. The remote Neon test target was refused as non-isolated, so no
+deletion integration or database write was performed.
+
+Keep `QUAL-WEB-005` unchecked for legal/consent, production authorization,
+restore/rollback, reconciliation, and independent acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-005-digest-registration-deletion-lock-pr230-2026-10-22.md`.
+
 ## 2026-10-22 · GitHub merge and hosted qualification gate
 
 CLI PR #158 merged normally as `145ff5d9` after Platform matrix, Self-scan,

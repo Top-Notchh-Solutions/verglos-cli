@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 digest-registration/deletion lock repair · 2026-10-22
+
+- **Source mapping:** Web commit `bac88808473cf90730810347d5ced0c2df8b4699`
+  promoted through PR #230 and merged normally as
+  `38635e52bb2ce9db5b1804986c12ef9d7b897f15`; source branch preserved.
+- **Implementation mapping:** Digest registration and deletion-request
+  creation use the same user-scoped advisory transaction lock as the reviewed
+  deletion worker. Existing duplicate registration remains idempotent; a new
+  digest is refused once a pending deletion exists.
+- **Qualification mapping:** Focused privacy/deletion contracts **15/15**;
+  full Web suite **893/893** with **24 explicit skips**; typecheck and diff
+  check passed; hosted Verify `39767070146` and Private runner qualification
+  `39767070242` passed.
+- **Safety mapping:** Remote Neon test URL was refused as non-isolated; no
+  deletion integration or database write was performed.
+- **Acceptance mapping:** Keep `QUAL-WEB-005` unchecked for legal/consent,
+  production authorization, restore/rollback, reconciliation, and independent
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-digest-registration-deletion-lock-pr230-2026-10-22.md`.
+
 ## GitHub promotion and normal merge qualification · 2026-10-22
 
 - **Source mapping:** CLI PR #158 merged as `145ff5d9`; Web PR #229 merged as
