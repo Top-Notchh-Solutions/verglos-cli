@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · refresh ACCEPT-003 with current qualification artifacts
+
+- **Decision:** Keep the acceptance bundle generator synchronized with the
+  active implementation queue instead of leaving current qualification packets
+  outside the reproducible bundle.
+- **Implementation:** Private commit `c4e3da67`; regenerated bundle contains
+  **20** hashed files and the secret scan passed.
+- **Disposition:** Accept as ACCEPT-003 implementation progress; score remains
+  **239 checked / 41 open / 280 total (85.4%)**.
+
 ## 2026-10-22 · implement DIST-003 checksum generation in-repository
 
 - **Decision:** Move release checksum generation from inline workflow shell to

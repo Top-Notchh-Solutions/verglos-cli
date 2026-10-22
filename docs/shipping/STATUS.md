@@ -1,5 +1,13 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · ACCEPT-003 evidence-bundle refresh
+
+The private acceptance bundle now includes the current ENT runner, Studio
+Preview, and DIST-003 qualification packets. Commit `c4e3da67` updates the
+bundle generator and regenerated the evidence JSON with **20** hashed files;
+the secret scan passed. Score remains **239 checked / 41 open / 280 total
+(85.4%)**.
+
 ## 2026-10-22 · DIST-003 checksum-generation implementation
 
 CLI commit `5072204f` replaces inline publish-workflow checksum generation with

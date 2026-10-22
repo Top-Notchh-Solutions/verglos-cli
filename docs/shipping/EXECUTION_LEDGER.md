@@ -1,5 +1,15 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ACCEPT-003 evidence-bundle refresh
+
+- **Commit:** Private `c4e3da67` updates
+  `scripts/build-acceptance-evidence-bundle.mjs` to include the current ENT,
+  Studio Preview, and DIST-003 evidence packets.
+- **Verification:** `pnpm acceptance:evidence:bundle` regenerated the JSON
+  bundle with **20** hashed evidence files and `secretScan: passed`.
+- **Disposition:** Acceptance evidence coverage advanced; score remains
+  **239/41/280 (85.4%)**.
+
 ## 2026-10-22 · DIST-003 checksum-generation implementation
 
 - **Commit:** CLI `5072204f` adds the tested

@@ -3948,6 +3948,14 @@ release-origin, release-verifier, workflow-contract, and checksum suite passed
 the score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
 
+### ACCEPT-003 current evidence-bundle addendum · 2026-10-22
+
+Private commit `c4e3da67` updates the acceptance evidence-bundle generator to
+include the current ENT runner, Studio Preview, and DIST-003 qualification
+packets. `pnpm acceptance:evidence:bundle` regenerated the bundle with **20**
+hashed files and a passed secret scan. Score remains **239 checked / 41 open /
+280 total (85.4%)**.
+
 ### QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
 
 Read-only Chrome DevTools inspection of a separate production checkout tab

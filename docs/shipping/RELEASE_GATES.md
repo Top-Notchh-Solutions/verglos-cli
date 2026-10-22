@@ -1,5 +1,12 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · ACCEPT-003 evidence-bundle implementation gate
+
+Private commit `c4e3da67` adds the current ENT runner, Studio Preview, and
+DIST-003 qualification packets to the reproducible acceptance bundle. The
+bundle command emitted **20** hashed files and passed its secret scan. Score
+remains **239 checked / 41 open / 280 total (85.4%)**.
+
 ## 2026-10-22 · DIST-003 checksum-generation implementation gate
 
 CLI commit `5072204f` adds the deterministic, fail-closed checksum-generation

@@ -60,6 +60,14 @@ implementation queue without changing registry, publication, provider,
 Production, customer, legal, or AppSec state. Evidence:
 `docs/shipping/evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
 
+**Current implementation batch (2026-10-22):** `ACCEPT-003` evidence-bundle
+generation now includes the current ENT runner, Studio Preview, and DIST-003
+qualification packets. Commit `c4e3da67` updates the private bundle generator
+and regenerated `acceptance-evidence-bundle-2026-10-03.json`; the command
+reported **20** hashed evidence files and a passed secret scan. Evidence
+coverage advances with the implementation queue; score remains **239 checked /
+41 open / 280 total (85.4%)**.
+
 **Latest continuation result (2026-10-21):** `STUDIO-CLI-001` received a
 current-head Web tenant-boundary repair in commit
 `cb2302179533a7bc73eccbcb17b0c350685cc5cc`. The client-workspace route no

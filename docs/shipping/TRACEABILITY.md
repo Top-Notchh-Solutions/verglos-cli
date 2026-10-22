@@ -1,5 +1,14 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 current evidence-bundle refresh · 2026-10-22
+
+- **Source mapping:** Private commit `c4e3da67`.
+- **Implementation mapping:** The bundle generator now includes the current
+  ENT runner, Studio Preview, and DIST-003 qualification packets.
+- **Qualification mapping:** `pnpm acceptance:evidence:bundle` emitted a
+  20-file hashed bundle with a passed secret scan.
+- **Disposition:** Score remains **239/41/280 (85.4%)**.
+
 ## DIST-003 current-head checksum-generation implementation · 2026-10-22
 
 - **Source mapping:** CLI commit `5072204f` on the clean detached current-head
