@@ -1,5 +1,13 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain ACCEPT-003 after current-head bundle refresh
+
+- **Decision:** Accept the 51-file secret-scanned manifest as current
+  reproducibility evidence; do not check the row.
+- **Reason:** Reviewer sign-off and external/hosted evidence remain absent.
+- **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/accept-003-current-head-pr239-2026-10-22.md`.
+
 ## 2026-10-22 · retain ACCEPT-002 after current-head verifier
 
 - **Decision:** Accept the current merged-head story verifier as substantive

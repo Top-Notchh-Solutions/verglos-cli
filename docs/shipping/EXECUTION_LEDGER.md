@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ACCEPT-003 current-head evidence bundle
+
+- **Verification:** The private acceptance manifest contains **51** hashed
+  files and passed its secret scan after the current merged-head refresh.
+- **Boundary:** It records commands, source identities, results, hashes,
+  limitations, and open gates without credentials, source, customer data, or
+  reviewer sign-off.
+- **Disposition:** Keep `ACCEPT-003` unchecked for reviewer sign-off and the
+  external/hosted evidence required by the row. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/accept-003-current-head-pr239-2026-10-22.md` and
+  `evidence/acceptance-evidence-bundle-2026-10-22-pr164-pr165-pr166-pr237-pr238-hosted-final.json`.
+
 ## 2026-10-22 · ACCEPT-002 current-head verifier
 
 - **Verification:** Clean merged CLI `1d7844bd` and Web `ba00d5d` sources ran

@@ -1,5 +1,13 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 current-head evidence bundle · 2026-10-22
+
+- **Bundle mapping:** 51 hashed evidence files; secret scan passed.
+- **Acceptance mapping:** Keep `ACCEPT-003` open for reviewer sign-off and
+  external/hosted evidence. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-003-current-head-pr239-2026-10-22.md` and the
+  generated bundle manifest.
+
 ## ACCEPT-002 current-head verifier · 2026-10-22
 
 - **Source mapping:** CLI `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web

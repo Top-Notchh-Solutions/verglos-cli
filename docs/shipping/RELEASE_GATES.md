@@ -1,5 +1,12 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · ACCEPT-003 current-head bundle gate
+
+The current private acceptance manifest contains **51** hashed files and
+passes its secret scan. Keep `ACCEPT-003` unchecked for reviewer sign-off and
+external/hosted evidence. Score remains **239/41/280 (85.4%)**. Evidence:
+`evidence/accept-003-current-head-pr239-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002 current-head substrate gate
 
 Clean merged CLI/Web sources passed the private twelve-story verifier: CLI
