@@ -12,6 +12,16 @@ if (!rootStat.isDirectory() || rootStat.isSymbolicLink()) {
   throw new Error("release artifact directory must be a regular directory");
 }
 
+const outputPath = join(root, "SHA256SUMS");
+try {
+  const outputStat = await lstat(outputPath);
+  if (!outputStat.isFile() || outputStat.isSymbolicLink()) {
+    throw new Error("release checksum output must be a regular file");
+  }
+} catch (error) {
+  if (error?.code !== "ENOENT") throw error;
+}
+
 const names = (await readdir(root)).filter((name) => name !== "SHA256SUMS").sort();
 if (names.length === 0) throw new Error("release artifact directory is empty");
 
@@ -27,5 +37,5 @@ for (const name of names) {
 }
 
 const output = `${lines.join("\n")}\n`;
-await writeFile(join(root, "SHA256SUMS"), output, { encoding: "utf8", mode: 0o644 });
+await writeFile(outputPath, output, { encoding: "utf8", mode: 0o644 });
 process.stdout.write(`wrote SHA256SUMS for ${names.length} release artifacts\n`);

@@ -33,5 +33,8 @@ try {
   }
   console.log(`upgrade/rollback transition passed: ${before} -> ${upgraded} -> ${rolledBack}`);
 } finally {
-  await rm(consumer, { recursive: true, force: true });
+  // npm/Node can briefly retain a Windows file handle after the CLI exits.
+  // Retry bounded cleanup so a completed qualification is not reported as a
+  // transition failure solely because the temporary consumer is still busy.
+  await rm(consumer, { recursive: true, force: true, maxRetries: 12, retryDelay: 250 });
 }
