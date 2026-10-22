@@ -10970,3 +10970,17 @@ ACCEPT-003/009/010, founder truth-freeze, and final acceptance. Nothing was
 deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**.
 
 Evidence: `evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.
+
+## 2026-10-22 · STUDIO-CLI-001 current-head requalification
+
+The exact merged CLI head `db3510356ecd6c6e430d7dcb3b9354e514d777ee` passed
+shared client-projection **5/5** and CLI projection/upload **7/7**. The exact
+merged Web head `8ece40eca79586c75a301751edf9c6b473ff295d` passed the current
+Studio custody/handoff contract set **46/46**, in addition to the release
+smoke and typecheck already recorded above. This confirms the code-owned
+projection, approval, tenant/workspace/record binding, and bounded handoff
+contracts. `STUDIO-CLI-001` remains unchecked for authorized independent
+recipient/customer acceptance and the hosted/audit artifact. Score remains
+**239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.

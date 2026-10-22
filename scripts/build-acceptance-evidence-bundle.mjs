@@ -46,6 +46,7 @@ const paths = [
   "docs/shipping/evidence/qual-web-006-measurement-boundary-pr236-2026-10-22.md",
   "docs/shipping/evidence/qual-web-006-current-head-requalification-2026-10-22.md",
   "docs/shipping/evidence/studio-cli-001-current-head-requalification-pr167-pr241-2026-10-22.md",
+  "docs/shipping/evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md",
   "docs/shipping/evidence/accept-002-current-head-pr239-2026-10-22.md",
   "docs/shipping/evidence/accept-003-current-head-pr239-2026-10-22.md",
   "docs/shipping/evidence/accept-005-current-blocker-audit-2026-10-22.md",

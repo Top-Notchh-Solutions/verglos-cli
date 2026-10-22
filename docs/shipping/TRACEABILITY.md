@@ -8717,3 +8717,16 @@ changed. See
   acceptance remain open. Score remains **239/41/280 (85.4%)**.
 - **Evidence:**
   `evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.
+
+## STUDIO-CLI-001 current-head requalification · 2026-10-22
+
+- **Source:** CLI `db3510356ecd6c6e430d7dcb3b9354e514d777ee`; Web
+  `8ece40eca79586c75a301751edf9c6b473ff295d`.
+- **Implementation contract:** CLI shared projection admission **5/5** and
+  upload/command **7/7**; Web custody, route, leakage, handoff, and Studio
+  E2E contracts **46/46**.
+- **Acceptance mapping:** The code-owned contract is green, but the row
+  remains open for authorized independent recipient/customer acceptance and
+  hosted/audit evidence. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.

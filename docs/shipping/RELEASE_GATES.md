@@ -4717,3 +4717,18 @@ really evidenced. No customer, provider, Production, database, legal, or
 release-sign-off state changed. Score remains **239/41/280 (85.4%)**.
 
 Evidence: `evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.
+
+## 2026-10-22 · STUDIO-CLI-001 current-head contract gate
+
+The exact CLI head passed shared client-projection **5/5** and projection /
+upload **7/7**. The exact Web head passed the custody, route, leakage,
+handoff, and Studio E2E contract set **46/46**. The code-owned gate is green:
+projection fields are bounded, approval and digest bindings are enforced, and
+tenant/workspace/record and recipient handoff boundaries are covered.
+
+Keep `STUDIO-CLI-001` unchecked for authorized independent recipient/customer
+acceptance and the hosted/audit artifact. No customer, recipient, provider,
+Production, database, legal, or release-sign-off state changed. Score remains
+**239/41/280 (85.4%)**.
+
+Evidence: `evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.

@@ -1147,3 +1147,20 @@ acceptance. No customer, provider, Production, database, legal, publication,
 or release-sign-off state changed; nothing was deleted. Score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.
+
+# 2026-10-22 · STUDIO-CLI-001 current-head requalification
+
+The exact merged CLI head `db3510356ecd6c6e430d7dcb3b9354e514d777ee` passed
+shared client-projection **5/5** and CLI projection/upload **7/7**. The exact
+merged Web head `8ece40eca79586c75a301751edf9c6b473ff295d` passed the focused
+Studio custody, route, leakage, handoff, and Studio E2E contract set **46/46**.
+This confirms the code-owned projection, approval, digest binding,
+tenant/workspace/record boundary, and bounded recipient handoff behavior.
+
+This remains qualification progress, not row completion: `STUDIO-CLI-001`
+stays unchecked until authorized independent recipient/customer acceptance and
+the hosted/audit artifact exist. No remote DB URL, provider, customer,
+recipient, Production, publication, or release-sign-off state changed; nothing
+was deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence:
+`docs/shipping/evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.

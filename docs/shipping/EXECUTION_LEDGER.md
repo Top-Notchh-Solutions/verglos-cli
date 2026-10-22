@@ -13913,3 +13913,18 @@ it was not sent and contains no credentials or customer data.
   **239/41/280 (85.4%)**.
 - **Evidence:**
   `docs/shipping/evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.
+
+## 2026-10-22 · STUDIO-CLI-001 current-head requalification
+
+- **CLI:** Exact merged head `db3510356ecd6c6e430d7dcb3b9354e514d777ee`
+  passed shared client-projection **5/5** and projection/upload **7/7**.
+- **Web:** Exact merged head `8ece40eca79586c75a301751edf9c6b473ff295d`
+  passed the focused Studio custody/handoff contract set **46/46**.
+- **Disposition:** The repository-owned projection, approval, tenant/
+  workspace/record binding, and bounded handoff implementation is green. Keep
+  `STUDIO-CLI-001` unchecked until authorized independent recipient/customer
+  acceptance and the hosted/audit artifact exist. No remote DB URL, provider,
+  customer, recipient, Production, publication, or release-sign-off state
+  changed. Nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.

@@ -4805,3 +4805,17 @@ each observed method has lifecycle and reconciliation evidence.
   deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:**
   `evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.
+
+## STUDIO-CLI-001 current-head requalification · 2026-10-22
+
+- **Decision:** Treat the CLI/Web client-projection, approval, digest-binding,
+  tenant boundary, and bounded handoff contracts as implemented and green at
+  the current merged heads.
+- **Verification:** CLI shared **5/5**, CLI projection/upload **7/7**, and Web
+  custody/handoff/Studio contracts **46/46** passed.
+- **Disposition:** Do not mark the row checked. The authorized independent
+  recipient/customer acceptance and hosted/audit artifact remain required;
+  synthetic/local qualification cannot substitute for them. No external state
+  changed and nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.
