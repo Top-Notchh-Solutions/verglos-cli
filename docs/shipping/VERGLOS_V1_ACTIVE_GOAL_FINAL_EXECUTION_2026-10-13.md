@@ -60,11 +60,21 @@ evidence inputs for this goal are indexed in
 is the runbook source for the current goal and names the exact workspace files
 without copying secrets or database URLs.
 
-The first currently open non-AppSec implementation target is
-`STUDIO-CLI-001`. Run order is: inspect the real source contract, implement
-the missing behavior, add regression coverage, run focused and full local
-verification, record exact evidence, use a normal PR/merge, and reconcile the
-private tracker before selecting the next target.
+The initial source audit of `STUDIO-CLI-001` and the current Web targets found
+their code-side implementation present in the merged CLI/Web heads; those
+rows remain open for their declared acceptance, hosted, field, provider, or
+final-release artifacts. Web PR #253 is the latest executable workflow fix,
+and no Web implementation PR remains open. The only open CLI implementation
+PR is #179, which maps to held `DIST-001` and is intentionally not selected
+while the AppSec-dependent set is held.
+
+For the remaining non-AppSec queue, continue in this order: inspect the real
+source contract, implement any genuinely missing behavior, add regression
+coverage, run focused and full local verification, record exact evidence, use
+a normal PR/merge, and reconcile the private tracker before selecting the
+next target. If the source contract is already implemented, record the exact
+remaining external artifact and move to the next target; do not rework it just
+to manufacture a checkbox change.
 
 When the separately held review artifact is later supplied, use it only to
 unblock and reconcile the held 13-target set. Do not pause, rewrite, reopen,
