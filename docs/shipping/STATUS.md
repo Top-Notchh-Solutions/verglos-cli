@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · QUAL-WEB-005 exact-head requalification
+
+Exact merged Web `02f5aba` passed the focused privacy/deletion/retention suite
+**74/74** and typecheck; the fresh isolated local PostgreSQL serial run for
+the same head passed **919** with **2 documented skips / 0 failures**. The
+remote `.env.test.local` database was not sourced for mutation tests. This is
+repository-owned evidence only; QUAL-WEB-005 remains open for legal/customer-
+held disposition, authorized destructive acceptance, reconciliation,
+restore/rollback, independent review, and final acceptance. Nothing was
+deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-005-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 exact-head qualification
 
 Exact merged CLI `db351035` passed the artifact contract set **23/23**, the

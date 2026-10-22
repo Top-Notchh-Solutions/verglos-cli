@@ -821,7 +821,18 @@ recheck rather than treated as a defect. No checkbox changed; score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
 
-**Current continuation result (2026-10-22):** Exact merged CLI
+**Current continuation result (2026-10-22):** Exact merged Web `02f5aba` passed
+the focused QUAL-WEB-005 privacy/deletion/retention suite **74/74** and
+typecheck; the fresh isolated PostgreSQL serial qualification passed **919**
+with **2 documented skips / 0 failures**. The remote `.env.test.local`
+database was not sourced for mutation tests. No Production, customer,
+provider, migration, or deletion state changed; nothing was deleted. Keep
+QUAL-WEB-005 open for legal/customer-held disposition, authorized destructive
+acceptance, reconciliation/restore, independent review, and final acceptance.
+Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-current-head-requalification-2026-10-22.md`.
+
+**Previous continuation result (2026-10-22):** Exact merged CLI
 `db3510356ecd6c6e430d7dcb3b9354e514d777ee` passed artifact contracts **23/23**,
 the five-boundary rollback evidence generator and focused regression, and
 standard-validation contracts **12/12**. The strict release license gate

@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 exact-head requalification · 2026-10-22
+
+- **Source mapping:** Web exact merged head
+  `02f5aba95c4172255cc522730c6ffecc1598cbda`.
+- **Qualification mapping:** Focused privacy/deletion/retention suite **74/74**,
+  typecheck, and fresh isolated PostgreSQL serial **919 passed / 2 skips / 0
+  failures**.
+- **Boundary mapping:** Remote `.env.test.local` was not sourced for mutation
+  tests; no Production, customer, provider, migration, or deletion state
+  changed. Nothing was deleted.
+- **Acceptance mapping:** Keep QUAL-WEB-005 open for legal/customer-held
+  disposition, authorized destructive acceptance, reconciliation,
+  restore/rollback, independent review, and final acceptance. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-current-head-requalification-2026-10-22.md`.
+
 ## DIST-003/DIST-006/QUAL-CLI-006 exact-head qualification · 2026-10-22
 
 - **Source mapping:** Public CLI exact merged head

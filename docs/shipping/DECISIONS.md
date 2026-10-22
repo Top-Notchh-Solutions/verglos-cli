@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain QUAL-WEB-005 after exact-head requalification
+
+- **Decision:** Accept the current Web deletion/retention qualification as
+  repository evidence; retain the checkbox as open.
+- **Observed:** Focused suite **74/74**, typecheck, and isolated PostgreSQL
+  serial **919 passed / 2 skips / 0 failures**.
+- **Reason:** Legal/customer-held disposition, authorized destructive
+  acceptance, reconciliation/restore, independent review, and final
+  acceptance remain absent.
+- **Boundary:** The remote `.env.test.local` database was not used for
+  mutation tests. No Production, customer, provider, migration, or deletion
+  state changed. Nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · retain DIST-003/DIST-006/QUAL-CLI-006 after exact-head qualification
 
 - **Decision:** Accept the current artifact, rollback, and standard-validation

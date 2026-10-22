@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-22T16:50:56.771Z",
+  "generatedAt": "2026-10-22T16:52:04.948Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -251,6 +251,11 @@
       "path": "docs/shipping/evidence/qual-cli-006-current-head-requalification-pr167-2026-10-22.md",
       "sha256": "f331cf24791cd1a5fa93e93edd2da3109fadc518c5ee791b93b889b2d496f794",
       "bytes": 1160
+    },
+    {
+      "path": "docs/shipping/evidence/qual-web-005-current-head-requalification-2026-10-22.md",
+      "sha256": "c6e8a5111e4ac643ff7712dc7b7f373e47706472c49ec58fdadba78127eec47a",
+      "bytes": 1285
     },
     {
       "path": "docs/shipping/evidence/qual-web-005-local-isolated-qualification-2026-10-22.md",
