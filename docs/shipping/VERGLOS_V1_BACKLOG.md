@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · QUAL-WEB-006 strict measurement types
+
+Web PR #249 source `f01717a` makes the accessibility/performance qualifier
+require literal booleans for keyboard operability, screen-reader landmarks,
+and reduced-motion support; truthy malformed runtime values fail closed.
+Focused quality tests passed **23/23**, full serial Web verification passed
+**898 / 24 / 0**, typecheck passed, and build generated **49/49 routes**.
+Hosted runs `39847435687` and `39847435658` failed before repository steps
+with no runner and no steps; no rerun, bypass, or merge-around was attempted.
+This is implementation progress only: keep `QUAL-WEB-006` unchecked for human
+screen-reader review, supported-browser/field-CWV evidence, large-dataset
+qualification, independent review, acceptance, and final release sign-off. No
+database, provider, customer, Production, or deployment action occurred;
+nothing was deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-boolean-measurement-boundary-pr249-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-005 deletion-input boundary
 
 Web PR #248 source `fdaed89` makes the account-deletion qualifier fail closed

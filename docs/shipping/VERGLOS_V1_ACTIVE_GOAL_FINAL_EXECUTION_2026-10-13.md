@@ -129,6 +129,21 @@ reconciliation, independent review, and final acceptance. Score remains
 **239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
 `docs/shipping/evidence/qual-web-005-deletion-input-boundary-pr248-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · QUAL-WEB-006 strict measurement types
+
+Web PR #249 source `f01717a` makes the accessibility/performance qualifier
+require literal booleans for keyboard operability, screen-reader landmarks,
+and reduced-motion support; truthy malformed runtime values now fail closed.
+Focused quality tests passed **23/23**, the full serial Web suite passed
+**898 / 24 / 0**, typecheck passed, and build generated **49/49 routes**.
+Hosted runs `39847435687` and `39847435658` failed before repository steps
+with no runner and no steps; no rerun, bypass, or merge-around was attempted.
+Keep `QUAL-WEB-006` unchecked for human screen-reader review,
+supported-browser/field-CWV evidence, large-dataset qualification,
+independent review, acceptance, and final release sign-off. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/qual-web-006-boolean-measurement-boundary-pr249-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · FINAL-WEB-007/008 public release integration
 
 Web PR #247 head `d02ac18` now preserves normal merge commits for PR #245

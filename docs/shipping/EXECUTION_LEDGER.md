@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · QUAL-WEB-006 strict measurement types
+
+- **Implementation:** Web PR #249 source `f01717a` makes accessibility/
+  performance qualification reject truthy non-boolean keyboard, landmark, and
+  reduced-motion runtime values.
+- **Verification:** Focused quality tests **23/23**, full serial Web suite
+  **898 / 24 / 0**, typecheck, and build **49/49 routes** passed locally.
+- **Hosted boundary:** Runs `39847435687` and `39847435658` failed before
+  repository steps with no runner and no steps; macOS/Vercel were pending at
+  capture, while GitGuardian and Preview Comments passed. No hosted repository
+  qualification is claimed.
+- **Disposition:** Keep `QUAL-WEB-006` unchecked for human screen-reader,
+  supported-browser/field-CWV, large-dataset, independent-review, acceptance,
+  and final release evidence. Score remains **239/41/280 (85.4%)**.
+- **Boundary:** No rerun, bypass, merge-around, database, provider, customer,
+  Production, or deployment action occurred. Nothing was deleted.
+- **Evidence:** `evidence/qual-web-006-boolean-measurement-boundary-pr249-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-005 deletion-input boundary
 
 - **Implementation:** Web PR #248 source `fdaed89` makes the account-deletion
