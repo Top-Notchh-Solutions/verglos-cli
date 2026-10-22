@@ -12,12 +12,24 @@ const PUBLIC_PACKAGE_DIRS = [
   "packages/hunt",
   "packages/cli",
 ];
+const COMMIT = /^[a-f0-9]{40}$/iu;
 
 export function parseReleaseTag(value) {
   if (typeof value !== "string" || !/^v\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u.test(value)) {
     throw new Error("release tag must be an exact vMAJOR.MINOR.PATCH[(-prerelease)] tag");
   }
   return value.slice(1);
+}
+
+/** Bind the GitHub tag event to the exact commit resolved by checkout. */
+export function verifyReleaseCommitBinding(sourceCommit, resolvedTagCommit) {
+  if (typeof sourceCommit !== "string" || typeof resolvedTagCommit !== "string" || !COMMIT.test(sourceCommit) || !COMMIT.test(resolvedTagCommit)) {
+    throw new Error("release source and tag commits must be 40-character hexadecimal SHAs");
+  }
+  const source = sourceCommit.toLowerCase();
+  const tag = resolvedTagCommit.toLowerCase();
+  if (source !== tag) throw new Error(`release tag resolves to ${tag}, but GitHub dispatched ${source}`);
+  return Object.freeze({ sourceCommit: source, resolvedTagCommit: tag });
 }
 
 export async function verifyReleaseTag(root, tag) {
@@ -38,6 +50,12 @@ export async function verifyReleaseTag(root, tag) {
 if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   const tag = process.argv[2] ?? process.env.GITHUB_REF_NAME;
   if (!tag) throw new Error("release tag is required (pass it or set GITHUB_REF_NAME)");
+  const sourceCommit = process.argv[3] ?? process.env.GITHUB_SHA;
+  const resolvedTagCommit = process.argv[4] ?? process.env.GITHUB_TAG_COMMIT;
+  if (sourceCommit !== undefined || resolvedTagCommit !== undefined) {
+    if (sourceCommit === undefined || resolvedTagCommit === undefined) throw new Error("release source and tag commits are both required");
+    verifyReleaseCommitBinding(sourceCommit, resolvedTagCommit);
+  }
   const result = await verifyReleaseTag(process.cwd(), tag);
   console.log(`release tag ${result.tag} matches ${result.packages.length} public package versions (${result.version})`);
 }

@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { parseReleaseTag, verifyReleaseTag } from "./verify-release-tag.mjs";
+import { parseReleaseTag, verifyReleaseCommitBinding, verifyReleaseTag } from "./verify-release-tag.mjs";
 
 const packageDirs = ["shared", "scanner", "reporter", "mcp", "entitlement", "hunt", "cli"];
 
@@ -33,4 +33,11 @@ test("release verification requires every public package to match the immutable 
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test("release verification binds the dispatched commit to the resolved tag commit", () => {
+  const sha = "a".repeat(40);
+  assert.deepEqual(verifyReleaseCommitBinding(sha.toUpperCase(), sha), { sourceCommit: sha, resolvedTagCommit: sha });
+  assert.throws(() => verifyReleaseCommitBinding(sha, "b".repeat(40)), /resolves to/u);
+  assert.throws(() => verifyReleaseCommitBinding("not-a-sha", sha), /40-character hexadecimal/u);
 });
