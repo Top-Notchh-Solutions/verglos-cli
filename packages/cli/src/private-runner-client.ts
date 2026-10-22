@@ -22,6 +22,7 @@ const MAX_REPLAY_BYTES = 256 * 1024;
 const MAX_REPLAY_ENTRIES = 4096;
 const DEFAULT_TIMEOUT_MS = 8_000;
 const ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$/u;
+const SHA256_DIGEST = /^sha256:[a-f0-9]{64}$/u;
 const MAX_RESULT_BYTES = 64 * 1024;
 
 export type PrivateRunnerPollResult = Readonly<
@@ -285,11 +286,11 @@ export async function uploadPrivateRunnerResult(input: Readonly<{
     } catch (error) {
       return { status: "error", endpoint, reason: isAbortError(error) ? "network" : "invalid_json" };
     }
-    if (!response.ok || typeof value !== "object" || value === null || (value as Record<string, unknown>).ok !== true || typeof (value as Record<string, unknown>).resultDigest !== "string") {
+    if (!response.ok || typeof value !== "object" || value === null || (value as Record<string, unknown>).ok !== true || typeof (value as Record<string, unknown>).resultDigest !== "string" || !SHA256_DIGEST.test((value as Record<string, unknown>).resultDigest as string) || typeof (value as Record<string, unknown>).idempotent !== "boolean") {
       return { status: "error", endpoint, reason: "http" };
     }
     const record = value as Record<string, unknown>;
-    return { status: "uploaded", endpoint, resultDigest: record.resultDigest as string, idempotent: record.idempotent === true };
+    return { status: "uploaded", endpoint, resultDigest: record.resultDigest as string, idempotent: record.idempotent as boolean };
   } finally {
     clearTimeout(timer);
   }
