@@ -14,6 +14,71 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Owner execution directive · implementation-first closeout · 2026-10-23
+
+The owner has clarified the shipping mode for the remaining **41** unchecked
+backlog entries: implementation in the real Web/CLI product repositories is
+the work product. Do not spend a continuation on a qualification-only batch
+when the source contract is already implemented; move to the next
+implementation target. Tests, builds, and qualification commands are run
+after a substantive source/configuration/workflow change to prove that change
+and preserve its evidence. They are not a substitute for implementation.
+
+The live 41-entry checklist is partitioned below so no row is silently
+discarded. The AppSec hold contains **13 entries**: twelve named backlog rows
+whose contract directly carries Hunt/AppSec content or review dependency, and
+the independent-review gate that is not a product-code task.
+
+### 13 AppSec-dependent hold entries
+
+1. `HUNT-008`
+2. `HUNT-009`
+3. `HUNT-010`
+4. `HUNT-011`
+5. `QUAL-CLI-004`
+6. `QUAL-CLI-006` (trusted release validation still requires the independent
+   review portion of its contract)
+7. `ENT-CLI-001` (runner/Hunt isolation review)
+8. `DIST-001` (LOCAL/HUNT/RECORD product dependency)
+9. `ACCEPT-002` (complete story set includes the Hunt story)
+10. `ACCEPT-007` (independent Hunt adjudication study)
+11. `ACCEPT-013` (direct dependency on `QUAL-CLI-004/006`)
+12. `FINAL-WEB-004` (public Hunt-assurance truth remains bounded by the held
+    review)
+13. Non-commit gate: **arrange independent Hunt isolation/security review**.
+
+These entries remain explicitly held. No local test, owner assertion, or
+synthetic fixture can close them. The missing artifact is the independent
+Hunt/AppSec review and its exact-source/provenance decision where the row
+requires it.
+
+### 28 non-AppSec implementation-first targets
+
+Implement and reconcile these targets in order, closing each row only after
+its own complete non-AppSec contract is satisfied:
+
+- `STUDIO-CLI-001`
+- `DIST-002`, `DIST-003`, `DIST-006`
+- `QUAL-WEB-005`, `QUAL-WEB-006`
+- `ACCEPT-003`, `ACCEPT-005`, `ACCEPT-006`, `ACCEPT-008`, `ACCEPT-009`,
+  `ACCEPT-010`, `ACCEPT-011`, `ACCEPT-012`, `ACCEPT-014`
+- `FINAL-WEB-001`, `FINAL-WEB-002`, `FINAL-WEB-003`, `FINAL-WEB-005`,
+  `FINAL-WEB-006`, `FINAL-WEB-007`, `FINAL-WEB-008`
+- Non-commit gates: final plan hypotheses; queue/object-storage selection;
+  legal review; unresolved engine/fixture redistribution approval; authorized
+  customer fixtures and consent; and separate authorization for external
+  conversations, paid pilots, checkout, campaign, publication, deployment,
+  npm release, tags, pushes, and Production migrations.
+
+For these 28 targets, inspect the real source contract first and implement
+missing production logic, schema/migration/workflow/artifact behavior,
+regression coverage, and privacy/authorization boundaries in `verglos-web`
+or `verglos-cli`. Do not close an external gate by rewriting a checkbox or
+calling synthetic evidence a customer, legal, provider, field, or release
+decision. If implementation is complete but an external artifact is still
+required, record that exact artifact and immediately continue implementing the
+next target.
+
 ## Latest continuation result · 2026-10-23 · FINAL-WEB-007/008 public release integration
 
 Web PR #247 head `d02ac18` now preserves normal merge commits for PR #245
@@ -983,6 +1048,13 @@ The explicit hold roots are:
 - `QUAL-CLI-004`; and
 - every later row whose own acceptance contract directly requires the
   independent Hunt isolation review or its result.
+
+For this implementation-first closeout, the owner-directed **13-entry
+partition at the top of this file is the routing list**: it names the held
+rows and the independent-review gate that must remain at the boundary. The
+remaining **28-entry partition is the implementation queue**. This routing
+clarification does not waive any row's own external acceptance contract or
+turn an implementation defect into an AppSec dependency.
 
 Classify dependencies row by row. Do not hold unrelated Studio, Enterprise,
 distribution, Web, acceptance, final-copy, or provider work merely because
