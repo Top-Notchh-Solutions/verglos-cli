@@ -1296,3 +1296,16 @@ unchecked for ACCEPT-003/009/010, founder truth-freeze, required hosted
 checks, and final acceptance. No external state changed, nothing was deleted,
 and the score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
+
+# 2026-10-23 · FINAL-WEB-008 hosted gate billing audit
+
+GitHub API inspection confirms repository Actions are enabled with
+`allowed_actions: all`, while `anuragyadav-git/verglos-web` has zero
+self-hosted runners. Required PR #246 runs `39833500399` and `39833500374`
+completed with failure, `runner_id: 0`, empty runner names, and no repository
+steps. This is an account payment/spending-limit gate, not a workflow or
+source failure. No rerun, billing change, bypass, deployment, provider action,
+or Production mutation was performed; nothing was deleted. FINAL-WEB-008
+remains unchecked and the score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-008-hosted-gate-billing-audit-2026-10-23.md`.

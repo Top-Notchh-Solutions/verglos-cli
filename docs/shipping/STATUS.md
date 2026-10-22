@@ -17,6 +17,16 @@ final sign-off, and the score remains **239 checked / 41 open / 280 total
 (85.4%)**. Nothing was deleted. Evidence:
 `evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
 
+## 2026-10-23 · FINAL-WEB-008 hosted gate billing audit
+
+GitHub API confirms Web Actions are enabled, but the repository has zero
+self-hosted runners. Required PR #246 runs `39833500399` and `39833500374`
+failed with `runner_id: 0`, empty runner names, and no repository steps. This
+is the account payments/spending-limit gate; no rerun or bypass was attempted.
+FINAL-WEB-008 remains unchecked and score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`evidence/final-web-008-hosted-gate-billing-audit-2026-10-23.md`.
+
 ## 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 exact merged-main requalification
 
 Exact merged CLI `c1f5e9b72d54467fc606da00735b704ada74f24c` passed typecheck

@@ -15,6 +15,20 @@
   Nothing was deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
 
+## 2026-10-23 · retain FINAL-WEB-008 after hosted gate audit
+
+- **Decision:** Do not rerun, bypass, or merge around the required Web checks.
+- **Observed:** Actions are enabled, but the Web repository has zero
+  self-hosted runners; PR #246 required jobs failed with `runner_id: 0` before
+  repository steps.
+- **Reason:** The account payment/spending-limit gate must be repaired before
+  hosted qualification can be claimed. Local green checks cannot substitute
+  for the required hosted jobs.
+- **Boundary:** No billing change, deployment, provider, customer, legal,
+  Production, or publication action occurred. Nothing was deleted. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-hosted-gate-billing-audit-2026-10-23.md`.
+
 ## 2026-10-22 · retain FINAL-WEB-008 after route-coverage enforcement
 
 - **Decision:** Accept PR #243 as code-side release-smoke hardening without

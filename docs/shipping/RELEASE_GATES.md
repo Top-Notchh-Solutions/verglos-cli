@@ -14,6 +14,17 @@ truth freeze, and final sign-off. Score remains **239/41/280 (85.4%)**.
 Nothing was deleted. Evidence:
 `evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
 
+## 2026-10-23 · FINAL-WEB-008 hosted gate billing audit
+
+Web PR #246 required runs `39833500399` and `39833500374` failed before any
+repository step. GitHub API confirms Actions are enabled but the repository
+has zero self-hosted runners; every required job reports `runner_id: 0` and an
+empty runner name. Keep FINAL-WEB-008 open until the account payment/
+spending-limit issue is repaired and the required hosted checks pass. No
+rerun, bypass, deployment, provider, or Production action occurred; nothing
+was deleted. Score remains **239/41/280 (85.4%)**. Evidence:
+`evidence/final-web-008-hosted-gate-billing-audit-2026-10-23.md`.
+
 ## 2026-10-22 · FINAL-WEB-008 route-coverage enforcement gate
 
 Web PR #243 merged normally as `619c31b9719c5284f6e90a9a1133c8515e015ed9`.

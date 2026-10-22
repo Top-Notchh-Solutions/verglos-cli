@@ -18,6 +18,18 @@
   Score remains **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
 - **Evidence:** `evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
 
+## FINAL-WEB-008 hosted gate billing audit · 2026-10-23
+
+- **External mapping:** Web PR #246 required runs `39833500399` and
+  `39833500374`.
+- **API mapping:** Actions permissions are enabled (`allowed_actions: all`),
+  but the repository reports zero self-hosted runners. Every required job has
+  `runner_id: 0`, an empty runner name, and no repository steps.
+- **Acceptance mapping:** This is an account billing/spending-limit blocker;
+  keep FINAL-WEB-008 unchecked until the account owner repairs billing and the
+  required checks execute successfully. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-hosted-gate-billing-audit-2026-10-23.md`.
+
 ## FINAL-WEB-008 complete route-inventory enforcement · 2026-10-22
 
 - **Source mapping:** Web PR #243 source `c8e68e5` merged normally as
