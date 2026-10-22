@@ -14,6 +14,20 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · CLI scanner precision PR #167
+
+The CLI scanner precision fix was implemented in public `verglos-cli` and
+merged normally as `db3510356ecd6c6e430d7dcb3b9354e514d777ee` through PR #167.
+Production commit `062a5f41` narrows AUTH-003 to exclude only empty parsed URL
+password/hash component checks; regression commit `7ccfe683` covers that
+boundary and fixed one-argument telemetry privacy notices while preserving
+real direct password comparisons and dynamic sensitive logs. Scanner and CLI
+tests, typechecks, builds, and the merged-head-equivalent self-scan passed;
+the self-scan exited 0 with 77 findings and score 81/medium, with the targeted
+false positives absent. No backlog checkbox changed. Score remains **239
+checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/qual-cli-scanner-false-positive-precision-pr167-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · Web fresh isolated PostgreSQL serial qualification
 
 The exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda` ran

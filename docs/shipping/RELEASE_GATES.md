@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · CLI scanner precision code gate
+
+CLI PR #167 merged normally as `db3510356ecd6c6e430d7dcb3b9354e514d777ee`
+after the observed public verification path. The scanner/CLI tests,
+typechecks, builds, and merged-head-equivalent self-scan passed; the scan
+exited 0 with 77 findings and score 81/medium, with the targeted safe-URL and
+static privacy-notice false positives absent. This clears code-side detector
+precision only. No backlog row is checked; `STUDIO-CLI-001` remains open for
+independent recipient/customer acceptance and hosted/audit evidence. Score
+remains **239/41/280 (85.4%)**. Nothing was deleted. Evidence:
+`evidence/qual-cli-scanner-false-positive-precision-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · Web fresh isolated PostgreSQL serial gate
 
 Exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda` passed the

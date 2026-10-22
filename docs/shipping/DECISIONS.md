@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain open gates after CLI scanner PR #167
+
+- **Decision:** Merge the scanner precision implementation through the normal
+  public PR path with separate production and regression commits; retain the
+  backlog checkboxes as open.
+- **Evidence:** PR #167 merged as
+  `db3510356ecd6c6e430d7dcb3b9354e514d777ee`; scanner/CLI tests, typechecks,
+  builds, and merged-head-equivalent self-scan passed with 77 findings and
+  score 81/medium. The targeted false positives were absent.
+- **Boundary:** This is code-side evidence, not customer, provider, legal,
+  field, independent AppSec, or final release evidence. Nothing was deleted.
+- **Disposition:** Keep `STUDIO-CLI-001` open for authorized independent
+  recipient/customer acceptance and hosted/audit evidence. Score remains
+  **239/41/280 (85.4%)**. Evidence:
+  `evidence/qual-cli-scanner-false-positive-precision-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · qualify Web merged head on fresh local PostgreSQL
 
 - **Decision:** Use a newly created local PostgreSQL 15 `verglos_test`

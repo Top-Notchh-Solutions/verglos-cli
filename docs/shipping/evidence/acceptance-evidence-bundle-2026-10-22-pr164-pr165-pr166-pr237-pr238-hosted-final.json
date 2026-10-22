@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-22T16:15:24.419Z",
+  "generatedAt": "2026-10-22T16:37:11.822Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -216,6 +216,11 @@
       "path": "docs/shipping/evidence/qual-web-serial-fresh-postgres-2026-10-22.md",
       "sha256": "13889757ed0cb4e84b56b725d1a38a7cee0242625c81dffe787accb0b843a89f",
       "bytes": 1833
+    },
+    {
+      "path": "docs/shipping/evidence/qual-cli-scanner-false-positive-precision-pr167-2026-10-22.md",
+      "sha256": "cd25dabdaaf386707e5c39f293345815c7317afdae7e8e9591d56820dfa71ce8",
+      "bytes": 1879
     },
     {
       "path": "docs/shipping/evidence/qual-web-005-local-isolated-qualification-2026-10-22.md",

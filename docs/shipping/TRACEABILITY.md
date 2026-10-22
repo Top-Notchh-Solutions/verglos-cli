@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## CLI scanner false-positive precision · 2026-10-22
+
+- **Source mapping:** CLI production `062a5f41`, regression `7ccfe683`, and
+  normal PR #167 merge `db3510356ecd6c6e430d7dcb3b9354e514d777ee`.
+- **Qualification mapping:** Scanner/CLI tests, typechecks, builds, and
+  merged-head-equivalent self-scan passed; self-scan exit 0, 77 findings,
+  score 81/medium, targeted AUTH-003/D8-001 false positives absent.
+- **Acceptance mapping:** Code-side only; no row checked. `STUDIO-CLI-001`
+  remains open for authorized independent recipient/customer acceptance and
+  hosted/audit evidence. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-scanner-false-positive-precision-pr167-2026-10-22.md`.
+
 ## Web fresh isolated PostgreSQL serial qualification · 2026-10-22
 
 - **Source mapping:** Web exact merged head

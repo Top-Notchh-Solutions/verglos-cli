@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · CLI scanner precision PR #167
+
+CLI PR #167 merged normally as `db3510356ecd6c6e430d7dcb3b9354e514d777ee`
+with production commit `062a5f41` and regression commit `7ccfe683`. Scanner/
+CLI tests, typechecks, builds, and merged-head-equivalent self-scan passed;
+the self-scan exited 0 with 77 findings, score 81/medium, and no targeted
+AUTH-003 URL false positives or production telemetry D8-001 false positive.
+This is code-side implementation only. No row was checked; `STUDIO-CLI-001`
+remains the next dependency-ready non-AppSec row and is open for authorized
+independent recipient/customer acceptance and hosted/audit evidence. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted.
+Evidence: `evidence/qual-cli-scanner-false-positive-precision-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · Web fresh isolated PostgreSQL serial qualification
 
 Exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda` passed the

@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · CLI scanner false-positive precision and PR #167
+
+- **Implementation:** Public CLI commits `062a5f41` and `7ccfe683` narrow the
+  AUTH-003 URL-component boundary and the D8-001 static privacy-notice
+  boundary, with direct regression coverage. PR #167 merged normally as
+  `db3510356ecd6c6e430d7dcb3b9354e514d777ee`; source branch preserved.
+- **Verification:** Scanner/CLI tests, typechecks, builds, and the
+  merged-head-equivalent self-scan passed. The self-scan exited 0 with 77
+  findings and score 81/medium; the targeted false positives were absent.
+- **Boundary:** Public code-side qualification only. No provider, Production,
+  customer, recipient, legal, field, independent-review, or AppSec operation
+  occurred. Nothing was deleted.
+- **Disposition:** No checkbox changed. `STUDIO-CLI-001` remains next in
+  dependency-ready file order, open for authorized independent
+  recipient/customer acceptance and hosted/audit evidence. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-scanner-false-positive-precision-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · Web fresh isolated PostgreSQL serial qualification
 
 - **Source:** Exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda`.
