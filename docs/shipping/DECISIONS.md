@@ -4790,3 +4790,18 @@ each observed method has lifecycle and reconciliation evidence.
   architecture, CLI/Web/MCP capabilities, backlog, and public claims.
 - **Context:** See
   `docs/shipping/VERGLOS_FINAL_V1_SCOPE_AND_HUNT_DECISION_2026-10-12.md`.
+
+## FINAL-WEB-008 robots protection guard · 2026-10-22
+
+- **Decision:** Treat the private `/reports` crawler rule as a release-smoke
+  invariant. Require the source token and maintain a negative regression test
+  so removal cannot silently pass public-surface qualification.
+- **Dependency decision:** Upgrade Next.js to `15.5.28`, the first patched
+  version for the hosted high-severity advisories observed on the prior
+  `15.5.25` resolution.
+- **Disposition:** Merge normally and preserve the source branch. Do not mark
+  `FINAL-WEB-008` checked: its acceptance, truth-freeze, and release-sign-off
+  dependencies remain open. No external state changed and nothing was
+  deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.

@@ -4700,3 +4700,20 @@ authorization and capture followed by exactly-once payment, ledger, license,
 and access reconciliation. Owner: Verglos release owner plus Razorpay Test
 Mode account owner. Review by 2026-10-17. Release decision: keep Gate 4,
 `PLAN-WEB-014`, and Production billing fail-closed until the artifact exists.
+
+## 2026-10-22 · FINAL-WEB-008 private reports crawler guard
+
+The release smoke now requires `/reports` in the private-route protection
+contract for `src/app/robots.ts`, and its test rejects a temporary source copy
+that removes the token. Next.js is patched to `15.5.28`; the merged head
+passed focused smoke **7/7**, public smoke **18 routes / 22 claims / 2 proof
+assets / 0 issues**, typecheck, and the high-severity audit gate. Hosted
+type/schema, isolated PostgreSQL/protocol matrix, Vercel, Preview Comments,
+and GitGuardian passed.
+
+This gate is implementation evidence only. Keep `FINAL-WEB-008` unchecked
+until ACCEPT-003/009/010, founder truth-freeze, and final acceptance are
+really evidenced. No customer, provider, Production, database, legal, or
+release-sign-off state changed. Score remains **239/41/280 (85.4%)**.
+
+Evidence: `evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.

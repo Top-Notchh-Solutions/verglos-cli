@@ -10953,3 +10953,20 @@ authorization/capture and the exact payment → ledger → license reconciliatio
 The owner is the Verglos release owner with the Razorpay Test Mode account
 owner, review by 2026-10-17. Score: **219 checked / 61 unchecked / 280 total
 (78.2%)**; no checkbox changed.
+
+## 2026-10-22 · FINAL-WEB-008 robots protection guard
+
+Web PR #244 merged normally as `8ece40eca79586c75a301751edf9c6b473ff295d`,
+with source branch preserved. The public release smoke now requires the
+private `/reports` robots protection token and has a regression test that
+fails when the token is removed. The same PR patched Next.js from `15.5.25`
+to `15.5.28` after the hosted high-severity dependency gate identified the
+vulnerable range. Exact merged-head verification passed focused smoke **7/7**,
+public smoke **18 routes / 22 claims / 2 proof assets / 0 issues**, typecheck,
+and the high-severity audit gate. Hosted type/schema, isolated PostgreSQL and
+three-platform protocol matrix, Vercel, Preview Comments, and GitGuardian
+passed. This is code-side progress only; `FINAL-WEB-008` remains unchecked for
+ACCEPT-003/009/010, founder truth-freeze, and final acceptance. Nothing was
+deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.

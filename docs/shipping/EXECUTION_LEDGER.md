@@ -13890,3 +13890,26 @@ it was not sent and contains no credentials or customer data.
   acceptance evidence.
 - **Evidence:**
   `docs/shipping/evidence/qual-web-006-account-state-lighthouse-2026-10-18.md`.
+
+## 2026-10-22 · FINAL-WEB-008 robots protection guard
+
+- **Implementation:** Web PR #244 adds `/reports` to the required
+  `src/app/robots.ts` private-route protection tokens and adds a temporary-copy
+  regression test proving the public smoke rejects removal of that token.
+  Next.js is patched from `15.5.25` to `15.5.28` to clear the hosted
+  high-severity dependency gate.
+- **Promotion:** Source commits `bb39370` and `8a3c3af` were promoted by a
+  normal merge as `8ece40eca79586c75a301751edf9c6b473ff295d`; the source branch
+  remains preserved.
+- **Qualification:** Exact merged-head focused smoke **7/7**, public smoke
+  **18 routes / 22 claims / 2 proof assets / 0 issues**, typecheck, and
+  `pnpm audit --audit-level=high` exit **0**. Hosted type/schema,
+  isolated PostgreSQL, macOS/Ubuntu/Windows protocol, Vercel, Preview
+  Comments, and GitGuardian passed.
+- **Disposition:** This is code-side FINAL-WEB-008 progress only. Keep the row
+  unchecked for ACCEPT-003/009/010, founder truth-freeze, and final
+  acceptance. No provider, Production, database, customer, legal, or release
+  sign-off state changed. Nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.

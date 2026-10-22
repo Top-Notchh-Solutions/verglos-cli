@@ -1124,3 +1124,26 @@ unchecked for ACCEPT-003/009/010, founder truth-freeze, and final acceptance.
 Nothing was deleted. Score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-008-public-route-coverage-pr243-2026-10-22.md`.
+
+# 2026-10-22 · FINAL-WEB-008 private reports crawler-protection guard
+
+Web PR #244 added a release-smoke invariant for the private `/reports` route:
+`src/app/robots.ts` must retain the `/reports` protection token, and a focused
+negative test now fails when a temporary source copy removes it. The same PR
+patched Next.js from `15.5.25` to `15.5.28` after the hosted high-severity
+dependency audit identified the vulnerable range.
+
+Source commits `bb39370` and `8a3c3af` were merged normally as
+`8ece40eca79586c75a301751edf9c6b473ff295d`; the source branch was preserved.
+Exact merged-head verification passed focused smoke **7/7**, public smoke
+**18 routes / 22 claims / 2 proof assets / 0 issues**, typecheck, and
+`pnpm audit --audit-level=high` exit **0**. Hosted type/schema,
+isolated PostgreSQL, macOS/Ubuntu/Windows protocol, Vercel, Preview Comments,
+and GitGuardian passed.
+
+This is implementation and qualification progress only. `FINAL-WEB-008`
+remains unchecked for ACCEPT-003/009/010, founder truth-freeze, and final
+acceptance. No customer, provider, Production, database, legal, publication,
+or release-sign-off state changed; nothing was deleted. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.

@@ -4537,3 +4537,5 @@ large-dataset, complete-route, and field/CrUX gates remain open. No checkbox
 changed. Evidence:
 `docs/shipping/evidence/qual-web-006-production-browser-2026-10-08.md`.
 s
+
+**FINAL-WEB-008 robots-protection addendum (2026-10-22; not a checkbox):** Web PR #244 merged normally as `8ece40eca79586c75a301751edf9c6b473ff295d` from source commits `bb39370` and `8a3c3af`. The release smoke now requires `/reports` in the private `robots.ts` protection contract and rejects a temporary source copy that removes it. Next.js was patched to `15.5.28` for the hosted high-severity dependency gate. Exact merged-head focused smoke passed **7/7**, public smoke passed **18 routes / 22 claims / 2 proof assets / 0 issues**, typecheck passed, and `pnpm audit --audit-level=high` exited 0. Hosted type/schema, isolated PostgreSQL/protocol matrix, Vercel, Preview Comments, and GitGuardian passed. Keep FINAL-WEB-008 unchecked for ACCEPT-003/009/010, founder truth-freeze, and final acceptance. Nothing was deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence: `docs/shipping/evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.

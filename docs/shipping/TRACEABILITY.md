@@ -8700,3 +8700,20 @@ changed. See
 - **Boundary:** No public source, lockfile, registry, provider, Production,
   database, customer, legal, or AppSec state changed. Nothing was deleted.
 - **Evidence:** `evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md`.
+
+## FINAL-WEB-008 robots protection guard · 2026-10-22
+
+- **Source:** Web PR #244, source `bb39370` plus dependency patch `8a3c3af`,
+  merged normally as `8ece40eca79586c75a301751edf9c6b473ff295d`.
+- **Contract:** Public release smoke requires the private `/reports` robots
+  boundary and tests the negative case in a temporary source copy; Next.js is
+  pinned to patched `15.5.28`.
+- **Verification:** Focused smoke **7/7**, public smoke **18/22 claims /
+  2 assets / 0 issues**, typecheck, and high-severity audit gate passed;
+  hosted type/schema, isolated PostgreSQL/protocol matrix, Vercel,
+  Preview Comments, and GitGuardian passed.
+- **Acceptance mapping:** Implementation evidence does not close
+  `FINAL-WEB-008`; ACCEPT-003/009/010, founder truth-freeze, and final
+  acceptance remain open. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/final-web-008-robots-guard-pr244-2026-10-22.md`.

@@ -70,6 +70,7 @@ const paths = [
   "docs/shipping/evidence/final-web-007-landing-viewport-boundary-pr238-2026-10-22.md",
   "docs/shipping/evidence/final-web-008-public-route-index-boundary-pr242-2026-10-22.md",
   "docs/shipping/evidence/final-web-008-public-route-coverage-pr243-2026-10-22.md",
+  "docs/shipping/evidence/final-web-008-robots-guard-pr244-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr164-pr165-pr166-pr237-pr238.json",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22.json",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr159-pr233.json",
