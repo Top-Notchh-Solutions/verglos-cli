@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 current-head requalification · 2026-10-22
+
+- **Source mapping:** Web merged head
+  `67f8f89be193dff7053d0abd946b288301bf2b87`.
+- **Qualification mapping:** Focused accessibility/dashboard/portfolio/
+  recipient contracts **41/41**, typecheck, 43 ordered migrations, isolated
+  large-dataset PostgreSQL integration **1/1**, and clean top-level build with
+  **49/49** generated pages/routes passed.
+- **Acceptance mapping:** Keep the row open for human screen-reader,
+  supported-browser/paid-org runtime, field-CWV, and independent/customer
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-current-head-requalification-2026-10-22.md`;
+  current bundle contains 49 hashed files and passed its secret scan.
+
 ## QUAL-WEB-005 local isolated deletion qualification · 2026-10-22
 
 - **Source mapping:** Web merged head `67f8f89be193dff7053d0abd946b288301bf2b87`.

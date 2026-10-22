@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-WEB-006 current-head requalification
+
+- **Verification:** Web merged head `67f8f89` passed focused
+  accessibility/dashboard/portfolio/recipient contracts **41/41**, typecheck,
+  43 ordered migrations, and the current-head large-dataset PostgreSQL
+  integration **1/1**. A top-level isolated build compiled and generated
+  **49/49** pages/routes.
+- **Build boundary:** The nested worktree build initially failed before
+  compilation because Next.js inferred the unrelated parent workspace root,
+  whose manifest contains merge-conflict markers. The exact same source was
+  built successfully from `/private/tmp/verglos-web-build-20261022`; no source
+  or parent-workspace file was edited.
+- **Boundary:** Only the local PostgreSQL 15 `verglos_test` fixture was used;
+  the remote `.env.test.local` value was not sourced. The container was stopped
+  without removal. No browser-human, field-CWV, customer, provider, legal,
+  Production, deployment, publication, or independent-review action occurred.
+  Nothing was deleted or changed.
+- **Disposition:** Keep `QUAL-WEB-006` unchecked for human screen-reader,
+  supported-browser/paid-org runtime, field-CWV, and independent/customer
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-current-head-requalification-2026-10-22.md`;
+  bundle regenerated with **49** hashed files and a passing secret scan.
+
 ## 2026-10-22 · QUAL-WEB-005 local isolated deletion qualification
 
 - **Verification:** Web merged head `67f8f89` passed deletion request/worker

@@ -14,6 +14,21 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · QUAL-WEB-006 requalification
+
+Web merged head `67f8f89` passed focused accessibility/dashboard/portfolio/
+recipient contracts **41/41**, typecheck, 43 ordered migration verification,
+and the current-head large-dataset PostgreSQL integration **1/1**. The exact
+head built successfully from a top-level isolated worktree with **49/49**
+pages/routes generated. A nested-worktree build was blocked before compilation
+only by the unrelated parent workspace manifest's merge-conflict markers; no
+source or parent file was edited. The local PostgreSQL container was stopped
+without removal, the remote `.env.test.local` value was not used, and nothing
+was deleted. Keep `QUAL-WEB-006` unchecked for human screen-reader,
+supported-browser/paid-org runtime, field-CWV, and independent/customer
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `docs/shipping/evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · QUAL-WEB-005 local qualification
 
 Web merged head `67f8f89` passed deletion request/worker integrations **2/2**,

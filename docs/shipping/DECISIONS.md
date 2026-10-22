@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain QUAL-WEB-006 after current-head requalification
+
+- **Decision:** Accept the current merged-head test, large-data integration,
+  and isolated build results as substantive implementation evidence; do not
+  check the row.
+- **Observed:** Focused contracts **41/41**, typecheck, migration ordering
+  **43/43**, large-dataset PostgreSQL **1/1**, and clean build **49/49** pages
+  passed.
+- **Reason:** Human screen-reader review, supported paid/organization browser
+  runtime, field-CWV observation, and independent/customer acceptance remain
+  absent. The nested build failure was a parent-workspace manifest issue and
+  was reproduced successfully from a top-level isolated worktree.
+- **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · retain QUAL-WEB-005 after local isolated qualification
 
 - **Decision:** Accept the local deletion qualification as substantive

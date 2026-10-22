@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · QUAL-WEB-006 current-head requalification
+
+Web merged head `67f8f89` passed the focused accessibility/dashboard contracts
+**41/41**, typecheck, 43-migration ordering, and the isolated large-dataset
+PostgreSQL integration **1/1**. A top-level isolated worktree build passed
+with **49/49** pages/routes generated; the nested worktree's first build was
+blocked only by the unrelated malformed parent workspace manifest. The local
+PostgreSQL container was stopped without removal and the remote `.env.test.local`
+value was not used. Keep `QUAL-WEB-006` open for human screen-reader,
+supported-browser/paid-org runtime, field-CWV, and independent/customer
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 local isolated deletion qualification
 
 Current Web head `67f8f89` passed the local deletion qualification: deletion

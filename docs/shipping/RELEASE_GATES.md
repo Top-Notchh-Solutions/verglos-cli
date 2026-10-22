@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · QUAL-WEB-006 current-head implementation gate
+
+Web merged head `67f8f89` passed focused accessibility/dashboard contracts
+**41/41**, typecheck, 43 ordered migrations, large-dataset PostgreSQL **1/1**,
+and a clean isolated production build generating **49/49** pages/routes. The
+remote test value was not used; the local PostgreSQL container was stopped
+without removal. Keep `QUAL-WEB-006` unchecked for human screen-reader,
+supported paid/organization browser runtime, field-CWV, and independent/
+customer acceptance. Score remains **239/41/280 (85.4%)**. Evidence:
+`evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 isolated implementation gate
 
 Web merged head `67f8f89` passed deletion request/worker integrations **2/2**,
