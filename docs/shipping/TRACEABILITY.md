@@ -15,6 +15,20 @@
   acceptance. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-007-public-release-integration-pr247-2026-10-23.md`.
 
+## FINAL-WEB-007 integrated-head hosted gate audit · 2026-10-23
+
+- **Source mapping:** Web PR #247 exact head
+  `d02ac18f16a3fad386446460ef6dad2b053e8438`.
+- **API mapping:** Actions are enabled with `allowed_actions: all`; required
+  runs `39839618641` and `39839618656` completed before repository steps with
+  `runner_id: 0`, empty runner names, and no steps. Vercel, Preview Comments,
+  and GitGuardian passed.
+- **Acceptance mapping:** Keep FINAL-WEB-007 unchecked for hosted Node 22,
+  human screen-reader, supported-browser/field performance,
+  customer/recipient acceptance, independent review, and final sign-off.
+  Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-hosted-gate-billing-audit-d02ac18-2026-10-23.md`.
+
 ## FINAL-WEB-007 current-head hosted gate audit · 2026-10-23
 
 - **External mapping:** Web PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a`;

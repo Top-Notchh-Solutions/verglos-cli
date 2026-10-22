@@ -14,6 +14,21 @@
   **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-007-public-release-integration-pr247-2026-10-23.md`.
 
+## 2026-10-23 · retain FINAL-WEB-007 after integrated-head hosted audit
+
+- **Decision:** Retain FINAL-WEB-007 unchecked; do not rerun, bypass, or
+  merge around the required hosted jobs.
+- **Observed:** PR #247 exact head `d02ac18f16a3fad386446460ef6dad2b053e8438`
+  has Actions enabled (`allowed_actions: all`). Runs `39839618641` and
+  `39839618656` failed before repository steps with `runner_id: 0`, empty
+  runner names, and no steps; Vercel, Preview Comments, and GitGuardian pass.
+- **Reason:** The account payments/spending-limit condition prevents the
+  required hosted execution. Local green results do not substitute for it.
+- **Boundary:** No billing change, hosted rerun, bypass, customer, provider,
+  Production, publication, or release-sign-off action occurred. Nothing was
+  deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-hosted-gate-billing-audit-d02ac18-2026-10-23.md`.
+
 ## 2026-10-23 · retain FINAL-WEB-007 after current-head hosted audit
 
 - **Decision:** Do not rerun, bypass, or merge around PR #247’s required

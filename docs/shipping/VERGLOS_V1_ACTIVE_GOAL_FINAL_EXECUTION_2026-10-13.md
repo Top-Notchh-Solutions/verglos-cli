@@ -27,6 +27,19 @@ and final sign-off. Score remains **239 checked / 41 open / 280 total (85.4%)**.
 Nothing was deleted. Evidence:
 `docs/shipping/evidence/final-web-007-public-release-integration-pr247-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · FINAL-WEB-007 integrated-head hosted audit
+
+PR #247 exact head is `d02ac18f16a3fad386446460ef6dad2b053e8438`. GitHub
+Actions are enabled with `allowed_actions: all`; required runs
+`39839618641` and `39839618656` failed before repository steps, with every
+job reporting `runner_id: 0`, an empty runner name, and no steps. Vercel,
+Preview Comments, and GitGuardian pass. This remains the account Actions
+payments/spending-limit boundary. No rerun, bypass, or merge-around was
+attempted. FINAL-WEB-007 remains unchecked for hosted Node 22, human/field,
+acceptance, independent-review, and final-sign-off evidence. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/final-web-007-hosted-gate-billing-audit-d02ac18-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · FINAL-WEB-007 current-head hosted audit
 
 PR #247 current head `b29b7108177a482dea27c41de833fcce7a0ea38a` has completed

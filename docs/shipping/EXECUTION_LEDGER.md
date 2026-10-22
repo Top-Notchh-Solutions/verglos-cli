@@ -16,6 +16,21 @@
   publication, or release-sign-off state changed. Nothing was deleted.
 - **Evidence:** `evidence/final-web-007-public-release-integration-pr247-2026-10-23.md`.
 
+## 2026-10-23 · FINAL-WEB-007 integrated-head hosted gate audit
+
+- **External state:** PR #247 head is
+  `d02ac18f16a3fad386446460ef6dad2b053e8438`; Actions are enabled with
+  `allowed_actions: all`.
+- **Hosted result:** Exact-head runs `39839618641` and `39839618656` failed
+  before repository steps. Every required job has `runner_id: 0`, an empty
+  runner name, and no steps. Vercel, Preview Comments, and GitGuardian pass.
+- **Disposition:** Retain FINAL-WEB-007 unchecked for hosted Node 22,
+  human/field, acceptance, independent-review, and final sign-off evidence.
+  Score remains **239/41/280 (85.4%)**.
+- **Boundary:** No rerun, bypass, billing, provider, Production, customer,
+  publication, or release-sign-off state changed. Nothing was deleted.
+- **Evidence:** `evidence/final-web-007-hosted-gate-billing-audit-d02ac18-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007 current-head hosted gate audit
 
 - **External state:** PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a`

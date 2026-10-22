@@ -81,6 +81,7 @@ const paths = [
   "docs/shipping/evidence/final-web-007-browser-qualification-pr247-2026-10-23.json",
   "docs/shipping/evidence/final-web-007-test-worker-serialization-pr247-2026-10-23.md",
   "docs/shipping/evidence/final-web-007-hosted-gate-billing-audit-pr247-2026-10-23.md",
+  "docs/shipping/evidence/final-web-007-hosted-gate-billing-audit-d02ac18-2026-10-23.md",
   "docs/shipping/evidence/final-web-007-public-release-integration-pr247-2026-10-23.md",
   "docs/shipping/evidence/dist-002-publish-permissions-pr168-2026-10-22.md",
   "docs/shipping/evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md",
