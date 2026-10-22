@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · FINAL-WEB-006 public proof origin boundary
+
+Web PR #250 exact pushed head `cb7d0952253c5dbccae54fc956c85795d344737d`
+restricts public proof evidence URLs to approved public `github.com` and
+`verglos.com` origins, retaining HTTPS, credential, and query-string
+rejection. The hostile lookalike-host regression passed. Proof/page tests
+passed **5/5**, public-release smoke **8/8**, executable smoke **18 routes /
+32 claims / 2 proof assets / 0 issues**, typecheck, build **49/49**, and
+serial Web **897 / 24 / 0**.
+
+Hosted runs `39852377777` and `39852377869` failed before repository steps;
+all jobs reported runner id 0 and zero steps. `FINAL-WEB-006` remains
+unchecked for ACCEPT-003/009, the acceptance bundle, and final acceptance.
+No external state changed and nothing was deleted. Score remains **239
+checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 strict measurement types
 
 Web PR #249 source `f01717a` makes the accessibility/performance qualifier

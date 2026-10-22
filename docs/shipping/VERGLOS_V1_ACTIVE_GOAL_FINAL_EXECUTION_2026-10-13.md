@@ -1623,3 +1623,26 @@ unchecked for FINAL-WEB-001–007 dependencies, hosted/field/acceptance
 evidence, and final release sign-off. Score remains **239 checked / 41 open /
 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-008-machine-readable-release-smoke-pr250-2026-10-23.md`.
+
+# 2026-10-23 · FINAL-WEB-006 public proof origin boundary
+
+Web PR #250 exact pushed head `cb7d0952253c5dbccae54fc956c85795d344737d`
+tightens the public proof-asset contract: proof links now fail closed unless
+their origin is the approved public `github.com` or `verglos.com` origin, in
+addition to the existing HTTPS, credential, and query-string restrictions.
+The hostile lookalike-host regression is explicit.
+
+Proof/page tests passed **5/5**, public-release tests **8/8**, executable
+public smoke **18 routes / 32 claims / 2 proof assets / 0 issues**, typecheck,
+build **49/49 routes**, serial Web **897 / 24 explicit skips / 0 failures**,
+and `git diff --check` passed. Local Node 26.4.0 emitted only the expected
+Node 22.x engine warning.
+
+Fresh hosted runs `39852377777` and `39852377869` failed before repository
+steps; all jobs reported runner id `0` and zero steps. PR #250 remains open.
+No rerun, bypass, merge-around, deployment, provider, database, customer,
+legal, Production, publication, or release-sign-off action occurred; nothing
+was deleted. Keep `FINAL-WEB-006` unchecked for ACCEPT-003/009, the acceptance
+bundle, and final acceptance. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md`.

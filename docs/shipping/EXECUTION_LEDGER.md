@@ -14227,3 +14227,25 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   hosted/field/acceptance evidence, and final release sign-off. No external
   state changed and nothing was deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-008-machine-readable-release-smoke-pr250-2026-10-23.md`.
+
+## 2026-10-23 · FINAL-WEB-006 public proof origin boundary
+
+- **Source:** Web PR #250 exact pushed head
+  `cb7d0952253c5dbccae54fc956c85795d344737d`.
+- **Implementation:** Public proof asset links now fail closed unless their
+  origin is the approved public `github.com` or `verglos.com` origin, while
+  retaining HTTPS, credential, and query-string rejection. A hostile
+  lookalike host is covered by regression test.
+- **Verification:** Proof/page tests **5/5**, public-release tests **8/8**,
+  executable smoke **18 routes / 32 claims / 2 proof assets / 0 issues**,
+  typecheck, build **49/49**, serial Web **897 passed / 24 explicit skips / 0
+  failed**, and diff check passed.
+- **Hosted boundary:** Verify `39852377777` and private runner
+  `39852377869` failed before repository steps; all jobs reported runner id 0
+  and zero steps. No rerun, bypass, merge-around, deployment, provider,
+  database, customer, legal, Production, publication, or sign-off action
+  occurred; nothing was deleted.
+- **Disposition:** Code-side FINAL-WEB-006 progress only. Keep the row
+  unchecked for ACCEPT-003/009, the acceptance bundle, and final acceptance.
+  Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md`.
