@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · Web landing qualification runtime boundary fixed
+
+Web PR #253 merged normally as
+`16ceddc9855e75e04f10ddd276fae16c7ef09e01`, preserving source `ccd77d6`.
+The hosted landing-browser job now starts its built server in isolated Preview
+mode with hosted payment methods empty, avoiding production secrets, payment
+provider contact, Clerk, and remote database state for this local-only browser
+qualification. Production runtime validation remains strict. The workflow
+contract test passed **12/12** and typecheck passed. Evidence:
+`docs/shipping/evidence/final-web-007-qualification-runtime-pr253-2026-10-23.md`.
+
+This is implementation evidence only; no checkbox changed. Hosted/browser/
+field acceptance, independent AppSec/Hunt review, customer acceptance, and
+final go/no-go remain open. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · merged Web public metadata and landing implementation
 
 Web PR #245 merged normally as `0a70eecb6aa96344240f44ad1e216d9936b931f1`,
