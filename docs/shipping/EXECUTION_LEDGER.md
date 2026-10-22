@@ -1,6 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ACCEPT-002/003 exact-head substrate refresh for PR #159/#233
+
+- **Source mapping:** Clean CLI `9fba66ac386605174a98bea856b9f04ceda8cfa8`
+  and Web `d32da250d5c2427dcfa36f560421a2506bb8a659`.
+- **Verification:** CLI **310/312** with 2 explicit skips and 0 failures; Web
+  **949/979** with 30 explicit skips and 0 failures; composed substrates
+  **74/74**; all **12/12** story mappings executed; exit 0.
+- **Bundle:** New `acceptance-evidence-bundle-2026-10-22.json` contains **25**
+  hashed files; secret scan passed.
+- **Safety boundary:** No `TEST_DATABASE_URL` was supplied. No database,
+  provider, customer, reviewer, browser-human, migration, or production
+  operation occurred. No previous bundle was removed or overwritten.
+- **Disposition:** Keep `ACCEPT-002/003` unchecked for external/hosted/provider/
+  customer/reviewer gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-002-003-current-head-pr159-pr233-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-002 exact release-tag binding and merge
+
 
 - **Implementation:** CLI commit `9fba66ac386605174a98bea856b9f04ceda8cfa8`
   binds the GitHub event SHA to the exact commit resolved from the pushed tag
@@ -22,7 +39,6 @@
 - **Evidence:** `evidence/dist-002-tag-commit-binding-pr159-2026-10-22.md`.
 
 ## 2026-10-22 · FINAL-WEB-008 public truth smoke hardening and merge
-## 2026-10-22 · FINAL-WEB-008 public truth smoke hardening and merge
 
 - **Implementation:** Web commit `d32da250d5c2427dcfa36f560421a2506bb8a659`
   includes the public `robots.ts` and `sitemap.ts` sources in the truth sweep,
@@ -42,7 +58,6 @@
   (85.4%)**.
 - **Evidence:** `evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md`.
 
-## 2026-10-22 · QUAL-WEB-006 table semantics implementation and merge
 ## 2026-10-22 · QUAL-WEB-006 table semantics implementation and merge
 
 - **Implementation:** Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103`

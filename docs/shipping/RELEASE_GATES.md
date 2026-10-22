@@ -1,6 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · ACCEPT-002/003 exact-head substrate gate
+
+The private verifier ran against clean CLI
+`9fba66ac386605174a98bea856b9f04ceda8cfa8` and Web
+`d32da250d5c2427dcfa36f560421a2506bb8a659`: CLI **310/312** with 2 explicit
+skips and 0 failures, Web **949/979** with 30 explicit skips and 0 failures,
+composed substrates **74/74**, and all **12/12** stories executed with exit 0.
+The new bundle contains **25** hashed files and passed its secret scan. No
+database URL or external operation was used; no previous bundle was removed or
+overwritten.
+
+Keep `ACCEPT-002/003` unchecked for external/hosted/provider/customer/reviewer
+gates. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/accept-002-003-current-head-pr159-pr233-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-002 exact release-tag binding gate
+
 
 CLI commit `9fba66ac386605174a98bea856b9f04ceda8cfa8` makes the publish
 workflow resolve `GITHUB_REF` to a commit and require equality with
@@ -20,7 +36,6 @@ total (85.4%)**. Evidence:
 
 ## 2026-10-22 · FINAL-WEB-008 public truth smoke implementation gate
 
-## 2026-10-22 · FINAL-WEB-008 public truth smoke implementation gate
 
 Web commit `d32da250d5c2427dcfa36f560421a2506bb8a659` adds `robots.ts` and
 `sitemap.ts` to the public truth source inventory, validates required tokens,
@@ -40,7 +55,6 @@ total (85.4%)**. Evidence:
 
 ## 2026-10-22 · QUAL-WEB-006 table semantics implementation gate
 
-## 2026-10-22 · QUAL-WEB-006 table semantics implementation gate
 
 Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103` adds captions, explicit
 column scopes, and a capability row header across the selected account,

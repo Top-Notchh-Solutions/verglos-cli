@@ -1,6 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · refresh ACCEPT-002/003 at the current merged implementation heads
+
+- **Decision:** Rerun the private twelve-story substrate verifier against clean
+  exact CLI/Web heads and add a new bundle without replacing historical
+  evidence.
+- **Observed:** CLI **310/312** with 2 explicit skips and 0 failures, Web
+  **949/979** with 30 explicit skips and 0 failures, composed substrates
+  **74/74**, all 12 stories executed, exit 0; the new bundle hashes **25** files
+  and passes its secret scan.
+- **Safety boundary:** No database URL was supplied and no database, provider,
+  customer, reviewer, browser-human, migration, or production operation was
+  used. No previous bundle was removed or overwritten.
+- **Disposition:** Keep `ACCEPT-002/003` unchecked for external/hosted/provider/
+  customer/reviewer gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-002-003-current-head-pr159-pr233-2026-10-22.md`.
+
 ## 2026-10-22 · bind DIST-002 publication to the immutable tag commit
+
 
 - **Decision:** Require the commit resolved from the pushed Git tag to equal
   the GitHub event SHA before any release artifact preparation or registry
@@ -22,7 +39,6 @@
 - **Evidence:** `evidence/dist-002-tag-commit-binding-pr159-2026-10-22.md`.
 
 ## 2026-10-22 · harden FINAL-WEB-008 public truth smoke evidence
-## 2026-10-22 · harden FINAL-WEB-008 public truth smoke evidence
 
 - **Decision:** Treat the public `robots.ts` and `sitemap.ts` outputs as part
   of the release truth surface, reject ambiguous route manifests, and suppress
@@ -41,7 +57,6 @@
   reconciliation/go-no-go evidence. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md`.
 
-## 2026-10-22 · make QUAL-WEB-006 table semantics explicit
 ## 2026-10-22 · make QUAL-WEB-006 table semantics explicit
 
 - **Decision:** Add captions and explicit header scopes to the selected Web

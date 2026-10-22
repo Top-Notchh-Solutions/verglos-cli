@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · ACCEPT-002/003 exact-head substrate refresh for PR #159/#233
+
+The private verifier reran against clean CLI commit
+`9fba66ac386605174a98bea856b9f04ceda8cfa8` and Web commit
+`d32da250d5c2427dcfa36f560421a2506bb8a659`. CLI passed **310/312** with **2
+explicit skips / 0 failures**, Web passed **949/979** with **30 explicit skips /
+0 failures**, and composed Studio/Enterprise/Team/quality substrates passed
+**74/74**; all **12/12** stories executed, exit 0. The new private bundle hashes
+**25** evidence files and its secret scan passed. No database URL was supplied;
+no database/provider/customer/production operation occurred; no previous bundle
+was removed or overwritten. Keep `ACCEPT-002` and `ACCEPT-003` unchecked for
+external/hosted/provider/customer/reviewer gates. Score remains **239 checked /
+41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/accept-002-003-current-head-pr159-pr233-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-002 exact release-tag commit binding
 
 CLI commit `9fba66ac386605174a98bea856b9f04ceda8cfa8` and PR #159 merged
@@ -19,7 +34,6 @@ event. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-002-tag-commit-binding-pr159-2026-10-22.md`.
 
 ## 2026-10-22 · FINAL-WEB-008 public truth and release smoke hardening
-## 2026-10-22 · FINAL-WEB-008 public truth and release smoke hardening
 
 Web commit `d32da250d5c2427dcfa36f560421a2506bb8a659` and PR #233 merged
 normally as `065c84510df147dc72955310a599413cf375be63`. The public release
@@ -36,7 +50,6 @@ release-gate reconciliation/go-no-go evidence. Score remains **239 checked / 41
 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md`.
 
-## 2026-10-22 · QUAL-WEB-006 table semantics implementation
 ## 2026-10-22 · QUAL-WEB-006 table semantics implementation
 
 Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103` and PR #232 merged

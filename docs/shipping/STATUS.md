@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · ACCEPT-002/003 exact-head substrate refresh
+
+The private verifier used clean CLI `9fba66ac386605174a98bea856b9f04ceda8cfa8`
+and Web `d32da250d5c2427dcfa36f560421a2506bb8a659`: CLI **310/312** with 2
+explicit skips and 0 failures, Web **949/979** with 30 skips and 0 failures,
+composed substrates **74/74**, all 12 stories mapped, exit 0. The new bundle
+contains **25** hashed files and passed its secret scan. No database URL was
+supplied, no external state was changed, and no prior bundle was removed or
+overwritten. `ACCEPT-002/003` remain open for external/hosted/provider/
+customer/reviewer gates. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/accept-002-003-current-head-pr159-pr233-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-002 exact release-tag binding and merge
 
 CLI commit `9fba66ac386605174a98bea856b9f04ceda8cfa8` binds the release event
@@ -17,7 +30,6 @@ Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `evidence/dist-002-tag-commit-binding-pr159-2026-10-22.md`.
 
 ## 2026-10-22 · FINAL-WEB-008 public truth smoke hardening and merge
-## 2026-10-22 · FINAL-WEB-008 public truth smoke hardening and merge
 
 Web commit `d32da250d5c2427dcfa36f560421a2506bb8a659` adds `robots.ts` and
 `sitemap.ts` to the public truth inventory, validates their required tokens,
@@ -33,7 +45,6 @@ deleted. `FINAL-WEB-008` remains open for final acceptance and release-gate
 reconciliation. Score remains **239 checked / 41 open / 280 total (85.4%)**.
 Evidence: `evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md`.
 
-## 2026-10-22 · QUAL-WEB-006 table semantics implementation and merge
 ## 2026-10-22 · QUAL-WEB-006 table semantics implementation and merge
 
 Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103` adds explicit captions,
