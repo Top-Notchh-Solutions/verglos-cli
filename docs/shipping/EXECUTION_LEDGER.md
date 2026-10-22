@@ -14147,3 +14147,23 @@ it was not sent and contains no credentials or customer data.
   deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:**
   `docs/shipping/evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
+
+## 2026-10-23 · DIST-003 release artifact read binding
+
+CLI PR #171 source `03a5ab69dd0bd0cda1a7197e5f9d61f6eb6ab200` hardened
+release-origin and release-artifact verification so bounded regular-file
+handles are used for archive and sidecar reads, with identity/size rechecks
+and byte-bound archive-member extraction. Focused release contracts passed
+**9/9**; full local test/typecheck/build passed **23/23** tasks with zero
+failures. Hosted self-scan `39847979574`, standard validation `39847979657`,
+in-toto binding, and all nine OS/Node platform cells in `39847979758` passed.
+PR #171 merged normally as
+`72b2f8f64d34d3dec339501be2d9738d2427984a`; source branch preserved.
+
+This is code-side DIST-003 progress only. The row remains unchecked for
+legal/license, trusted publication, immutable attestation, independent/hosted
+evidence where required, and final acceptance. No external publication or
+provider/Production/customer state changed; nothing was deleted. Score remains
+**239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/dist-003-artifact-read-binding-pr171-2026-10-23.md`.

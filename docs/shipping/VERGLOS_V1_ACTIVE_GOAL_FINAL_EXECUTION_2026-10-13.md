@@ -1517,3 +1517,26 @@ or Production mutation was performed; nothing was deleted. FINAL-WEB-008
 remains unchecked and the score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-008-hosted-gate-billing-audit-2026-10-23.md`.
+
+# 2026-10-23 · DIST-003 release artifact read binding merged
+
+CLI source commit `03a5ab69dd0bd0cda1a7197e5f9d61f6eb6ab200` on PR #171
+hardens release-origin generation and release-artifact verification around
+bounded regular-file handles with identity/size rechecks. Archive manifests
+and packaged notices are extracted from the validated bytes, and symlinked
+release archives are rejected before extraction. Final focused release
+contracts passed **9/9**; the full local CLI test/typecheck/build gate passed
+**23/23** tasks with zero failures. Hosted self-scan `39847979574`, standard
+validation `39847979657`, and platform matrix `39847979758` passed, including
+all nine Ubuntu/macOS/Windows × Node 20/22/24 cells and in-toto binding.
+
+PR #171 merged normally as
+`72b2f8f64d34d3dec339501be2d9738d2427984a`; the source branch remains
+preserved. This is implementation and hosted verification progress only.
+Keep `DIST-003` unchecked for legal/license disposition, protected/trusted
+publication, immutable attestation, independent/hosted evidence where
+required, and final acceptance. No publication, registry/provider,
+Production, customer/recipient, or release-sign-off state changed; nothing
+was deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence:
+`docs/shipping/evidence/dist-003-artifact-read-binding-pr171-2026-10-23.md`.

@@ -11206,6 +11206,26 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · DIST-003 release artifact read binding
+
+CLI PR #171 merged normally as
+`72b2f8f64d34d3dec339501be2d9738d2427984a` from source
+`03a5ab69dd0bd0cda1a7197e5f9d61f6eb6ab200`. The implementation binds release
+archive/sidecar reads to bounded regular-file handles, rechecks identity and
+size, extracts archive members from validated bytes, and rejects symlinked
+archives. Focused release contracts passed **9/9**; local full CLI
+test/typecheck/build passed **23/23** tasks with zero failures. Hosted runs
+`39847979574`, `39847979657`, and `39847979758` passed, including all nine
+Ubuntu/macOS/Windows × Node 20/22/24 cells.
+
+`DIST-003` remains unchecked for legal/license disposition, protected/trusted
+publication, immutable attestation, independent/hosted evidence where
+required, and final acceptance. No publication, provider, Production,
+customer, recipient, or release-sign-off state changed; nothing was deleted.
+Score remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/dist-003-artifact-read-binding-pr171-2026-10-23.md`.
+
 ## 2026-10-22 · DIST-002 publish workflow permission hardening
 
 CLI PR #168 source commit `4bcb4d26364bd8541678acf93d3388095d7c96c0` makes
