@@ -11022,6 +11022,28 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-22 · DIST-002 publish workflow permission hardening
+
+CLI PR #168 source commit `4bcb4d26364bd8541678acf93d3388095d7c96c0` makes
+the publish workflow's GitHub token permissions explicit: only `actions: read`,
+`contents: read`, and `id-token: write` are enabled; listed mutation scopes
+are explicitly disabled. Its regression contract prevents non-OIDC write
+permissions from being introduced.
+
+Local focused release contracts passed **13/13**, typecheck passed **14/14**
+Turbo tasks, the full CLI test pipeline passed **13/13** tasks with the two
+documented Hunt Docker skips, build passed **8/8**, and diff check passed.
+Hosted self-scan `39828880395`, standard validation `39828880653`, and platform
+matrix `39828880497` were running at capture; no manual rerun was issued.
+
+`DIST-002` remains unchecked for the seven license-review blockers, legal and
+protected/trusted-publisher approval, immutable npm publication/attestation,
+and final acceptance. No registry, provider, Production, database, customer,
+or release-sign-off state changed; nothing was deleted. Score remains **239
+checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-008 sitemap completeness follow-up
 
 Web PR #245 now points to latest source commit

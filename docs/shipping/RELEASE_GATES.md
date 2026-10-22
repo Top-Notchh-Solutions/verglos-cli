@@ -4767,6 +4767,22 @@ remains **239/41/280 (85.4%)**.
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-22 · DIST-002 publish permission hardening gate
+
+CLI PR #168 source `4bcb4d26364bd8541678acf93d3388095d7c96c0` makes the
+publish workflow's GitHub permissions explicit: `actions: read`,
+`contents: read`, `id-token: write`, and all listed mutation scopes `none`.
+The regression contract, focused release suite **13/13**, typecheck **14/14**,
+full tests **13/13** tasks, build **8/8**, and diff check passed locally.
+
+Hosted self-scan `39828880395`, standard validation `39828880653`, and platform
+matrix `39828880497` were running at capture. Keep `DIST-002` unchecked for
+license/legal clearance, protected/trusted publication approval, immutable
+publication/attestation, and final acceptance. No registry/provider/Production
+state changed and nothing was deleted. Score remains **239/41/280 (85.4%)**.
+
+Evidence: `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-008 sitemap completeness follow-up gate
 
 Latest PR #245 head `d9519e32bfbadb98ca4c06158de83f0b7bdf2450` extends the

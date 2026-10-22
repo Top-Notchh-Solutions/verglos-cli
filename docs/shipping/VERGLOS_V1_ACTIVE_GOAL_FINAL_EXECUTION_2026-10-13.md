@@ -1201,6 +1201,23 @@ the backlog remains **239 checked / 41 open / 280 total (85.4%)**, and nothing
 was deleted. Evidence:
 `docs/shipping/evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+# 2026-10-22 · DIST-002 publish permission hardening
+
+CLI PR #168 commit `4bcb4d26364bd8541678acf93d3388095d7c96c0` makes the npm
+publish workflow's GitHub token policy explicit: read-only action/content
+access and OIDC identity-token write, with listed mutation scopes disabled.
+The focused release contract passes **13/13**, typecheck **14/14**, full test
+tasks **13/13** with two documented Hunt Docker skips, build **8/8**, and diff
+check passes. Hosted self-scan `39828880395`, standard validation
+`39828880653`, and platform matrix `39828880497` were running at capture.
+
+This advances implementation only. `DIST-002` remains unchecked for legal/
+license clearance, protected/trusted publication approval, immutable npm
+publication/attestation, and final acceptance. No publication or external
+state changed; nothing was deleted. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
+
 # 2026-10-22 · FINAL-WEB-008 sitemap completeness follow-up
 
 Web PR #245 latest commit `d9519e32bfbadb98ca4c06158de83f0b7bdf2450`

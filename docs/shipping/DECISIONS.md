@@ -4852,6 +4852,24 @@ each observed method has lifecycle and reconciliation evidence.
   remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-22 · retain DIST-002 after publish permission hardening
+
+- **Decision:** Accept the explicit least-privilege publish workflow as
+  code-side progress; retain `DIST-002` unchecked until the real legal,
+  protected-environment, trusted-publisher, immutable-publication, and final
+  acceptance artifacts exist.
+- **Observed:** CLI PR #168 source `4bcb4d2` passes focused release contracts
+  **13/13**, full local test tasks **13/13**, typecheck **14/14**, and build
+  **8/8**. Only OIDC identity-token write remains enabled among write scopes.
+- **Reason:** Local code cannot substitute for license decisions, GitHub
+  environment approval, npm trusted-publisher configuration, an actual
+  immutable registry receipt/attestation, or final sign-off.
+- **Boundary:** Hosted runs `39828880395`, `39828880653`, and `39828880497`
+  were running at capture. No registry/provider/Production/database/customer
+  operation occurred and nothing was deleted. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
+
 ## 2026-10-22 · retain FINAL-WEB-008 after sitemap completeness follow-up
 
 - **Decision:** Accept the complete-indexable-sitemap invariant as additional

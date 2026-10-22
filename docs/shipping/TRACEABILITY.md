@@ -8763,6 +8763,26 @@ changed. See
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## DIST-002 publish workflow permission hardening · 2026-10-22
+
+- **Source mapping:** CLI PR #168, commit
+  `4bcb4d26364bd8541678acf93d3388095d7c96c0` on
+  `codex/dist-002-explicit-workflow-permissions-20261022`.
+- **Contract mapping:** Publish workflow grants read-only action/content
+  access and OIDC identity-token write; all listed registry/repository
+  mutation permissions are explicitly disabled. A contract test guards the
+  policy.
+- **Verification mapping:** Focused release contracts **13/13**, typecheck
+  **14/14**, full test pipeline **13/13** tasks with two documented Hunt
+  Docker skips, build **8/8**, and diff check passed locally.
+- **Hosted boundary:** Self-scan `39828880395`, standard validation
+  `39828880653`, and platform matrix `39828880497` were running at capture;
+  no manual rerun or publication was performed.
+- **Acceptance mapping:** Keep `DIST-002` open for license/legal clearance,
+  protected/trusted publication, immutable attestation, and final acceptance.
+  Score remains **239/41/280 (85.4%)**. Nothing was deleted.
+- **Evidence:** `evidence/dist-002-publish-permissions-pr168-2026-10-22.md`.
+
 ## FINAL-WEB-008 sitemap completeness follow-up · 2026-10-22
 
 - **Source mapping:** PR #245 latest `d9519e32bfbadb98ca4c06158de83f0b7bdf2450`,
