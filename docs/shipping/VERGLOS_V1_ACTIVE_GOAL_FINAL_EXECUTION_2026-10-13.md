@@ -103,8 +103,8 @@ still **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web execution evidence while preserving all historical
-entries. Its current-head run hashed **108** bounded evidence files, including
-**33** current 2026-10-23 entries, and passed the secret-like material scan.
+entries. Its current-head run hashed **109** bounded evidence files, including
+**34** current 2026-10-23 entries, and passed the secret-like material scan.
 The output was written to `/tmp` for verification; no tracked historical
 bundle was overwritten. Evidence:
 `docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.
@@ -128,6 +128,22 @@ This closes the candidate-freeze implementation gap only; it does not create
 trusted publication/provenance, provider, customer, independent-review, or
 final-release evidence. No checkbox changed. The live score remains **244
 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
+
+## Latest continuation result · 2026-10-23 · ACCEPT-012 public OSS triage
+
+The private toolchain now exposes `acceptance:corpus:triage`. Against the exact
+six-fixture verification manifest it classified **207** observations into
+**19** rule-level feedback groups with **0** coverage gaps. Every observation
+is explicitly unadjudicated and requires reproduce/review before product
+change; output contains digests and bounded metadata only. The focused triage
+suite passed **3/3**. Evidence:
+`docs/shipping/evidence/accept-012-public-oss-triage-2026-10-23.md`.
+
+This advances the reproducible triage implementation only; `ACCEPT-012`
+remains open for its `ACCEPT-011`/`QUAL-CLI-006` dependencies, held-out
+correction/acceptance work, and final review. No checkbox changed. The live
+score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted.
 
 ## Latest continuation result · 2026-10-23 · ACCEPT-009 release reconciler
 

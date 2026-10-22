@@ -5,8 +5,8 @@
 - **Implementation:** `scripts/build-acceptance-evidence-bundle.mjs` now
   includes the current merged CLI/Web evidence in addition to the preserved
   historical entries.
-- **Verification:** The current-head run hashed **108** bounded evidence files,
-  including **33** current 2026-10-23 entries; the secret-like material scan
+- **Verification:** The current-head run hashed **109** bounded evidence files,
+  including **34** current 2026-10-23 entries; the secret-like material scan
   passed. The verification output was written to `/tmp`, leaving tracked
   historical bundles unchanged.
 - **Evidence:** `evidence/accept-003-current-head-bundle-2026-10-23.md`.
@@ -32,6 +32,21 @@
   actual critical acceptance evidence, trusted publication/provenance,
   independent review, and final release decision. Score remains
   **244/36/280 (87.1%)**. Nothing was deleted.
+
+## 2026-10-23 · ACCEPT-012 public OSS triage implemented
+
+- **Implementation:** Added `scripts/triage-public-oss-corpus.mjs` and the
+  `acceptance:corpus:triage` package command. It consumes the exact public-OSS
+  verification manifest and emits digest-only finding observations, rule-level
+  product-feedback groups, and coverage-gap statuses.
+- **Verification:** The six-fixture manifest produced **207** observations,
+  **19** rule groups, and **0** coverage gaps. The focused triage suite passed
+  **3/3**; syntax and diff checks passed. Evidence:
+  `evidence/accept-012-public-oss-triage-2026-10-23.md`.
+- **Disposition:** All findings remain unadjudicated and require
+  reproduce/review before product change. `ACCEPT-012` remains open for its
+  dependency, held-out correction/acceptance, independent review, and final
+  release. Score remains **244/36/280 (87.1%)**. Nothing was deleted.
 
 ## 2026-10-23 · ACCEPT-009 release-gate reconciler implemented
 

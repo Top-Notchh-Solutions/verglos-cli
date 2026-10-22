@@ -4,7 +4,7 @@
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web evidence while preserving historical entries. The
-current-head run hashed **108** bounded evidence files, including **33** dated
+current-head run hashed **109** bounded evidence files, including **34** dated
 2026-10-23, and passed its secret-like material scan. Evidence:
 `evidence/accept-003-current-head-bundle-2026-10-23.md`.
 
@@ -25,6 +25,20 @@ adjacent acceptance tests passed **15/15**. Evidence:
 This is implementation progress only; trusted publication/provenance,
 provider, customer, independent-review, AppSec/Hunt, and final-release gates
 remain open. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted.
+
+## 2026-10-23 · ACCEPT-012 public OSS triage implemented
+
+The private `acceptance:corpus:triage` command classified the exact six-fixture
+verification manifest into **207** observations and **19** rule-level feedback
+groups with **0** coverage gaps. Findings remain explicitly unadjudicated;
+the output contains digests and bounded metadata only. The focused triage
+suite passed **3/3**. Evidence:
+`evidence/accept-012-public-oss-triage-2026-10-23.md`.
+
+This is implementation progress only; `ACCEPT-011`/`QUAL-CLI-006`
+dependencies, held-out correction/acceptance, independent review, and final
+release remain open. The live score remains **244 checked / 36 open / 280 total
 (87.1%)**. Nothing was deleted.
 
 ## 2026-10-23 · ACCEPT-009 release-gate reconciler implemented
