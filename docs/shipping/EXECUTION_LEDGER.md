@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · owner authorization refresh
+
+- **Owner:** Anurag Yadav, owner of Top Notchh Solutions and Verglos.
+- **Authorization:** Direct written owner instruction authorizes all non-AppSec
+  shipping execution, including implementation, normal GitHub flow,
+  provider/Production/deployment/publication actions, checkout/pilot/campaign
+  work, and owner-controlled fixtures.
+- **Decisions:** Team `$99/month`, Studio `$249/month`, OPS-001 Neon
+  PostgreSQL, and the existing company licensing/redistribution disposition
+  with conditions are reaffirmed.
+- **Benchmark authorization:** Local analysis of public open-source JS/TS
+  repositories at exact commits is authorized under their licenses/terms, with
+  redacted reports, no live-target attack, and no endorsement claims.
+- **Evidence:** `evidence/owner-authorization-2026-10-23.md`.
+- **Disposition:** Five owner-side non-commit gates are now checked. External
+  external POC recipient acceptance remains separate from the authorized public
+  benchmark path, and the final release decision remains open; the separately
+  held security-review track is unchanged. Score is **244/36/280 (87.1%)**.
+- **Boundary:** Authorization records permission to act; it does not claim
+  that an external provider event, customer acknowledgement, or release has
+  already occurred. Nothing was deleted.
+
 ## 2026-10-23 · workspace gate-artifact inventory
 
 - **Scope:** Searched `verglos-cli`, `verglos-cli-private-shipping`,

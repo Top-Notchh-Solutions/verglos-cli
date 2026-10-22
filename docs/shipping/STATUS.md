@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · owner authorization refresh
+
+Anurag Yadav, owner of Top Notchh Solutions and Verglos, has given direct
+written authorization for all non-AppSec shipping execution. The authorization
+record is `evidence/owner-authorization-2026-10-23.md`; no further owner-edited
+MD or permission request is needed.
+
+Owner-side plan/pricing, queue/object-storage, company licensing/redistribution,
+and provider/Production/publication/deployment authorization gates are now
+recorded. Owner-controlled fixtures are authorized; external recipient
+acceptance is only required for a claimed external POC, while the local
+public-open-source JS/TS benchmark path is authorized at exact commits with
+license/terms compliance, redacted reports, and no endorsement claims. The
+final release decision remains a separate evidence gate.
+
+The live private score is **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted.
+
 ## 2026-10-23 · workspace gate-artifact inventory
 
 The whole TopNotchh workspace was searched, including the four implementation

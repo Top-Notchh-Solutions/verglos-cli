@@ -1,5 +1,29 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · record owner authorization for non-AppSec execution
+
+- **Decision:** Record Anurag Yadav's direct owner authorization for all
+  non-AppSec shipping execution as the current owner-side authorization
+  artifact; no additional owner-edited Markdown or permission request is
+  required.
+- **Scope:** Implementation, normal commits/PRs/merges/pushes/tags, provider
+  and Production actions, deployment, checkout/pilots/campaign, publication/
+  npm preparation, and owner-controlled fixtures.
+- **Reaffirmed:** Team `$99/month`, Studio `$249/month`, OPS-001 Neon
+  PostgreSQL, and the existing company licensing/redistribution disposition
+  with its conditions.
+- **Benchmark:** Authorize local analysis of public open-source JS/TS
+  repositories at exact commits under their licenses/terms, with redacted
+  reports and no endorsement claims. This is a benchmark path, not customer
+  acceptance.
+- **Evidence:** `evidence/owner-authorization-2026-10-23.md`.
+- **Disposition:** Check the five owner-side non-commit gates in the backlog.
+  Keep any external POC recipient/customer acceptance and final release
+  decision open; the public benchmark path is authorized. The separately held
+  security-review track is unchanged. Score is **244/36/280 (87.1%)**.
+- **Boundary:** This authorizes execution but does not fabricate provider,
+  customer, or release outcomes. Nothing was deleted.
+
 ## 2026-10-23 · classify workspace gate artifacts without closing rows
 
 - **Decision:** Record the whole-workspace gate-artifact inventory and retain

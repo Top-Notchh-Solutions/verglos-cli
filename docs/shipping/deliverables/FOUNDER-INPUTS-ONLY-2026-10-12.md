@@ -29,25 +29,26 @@ hashes here.
    - contact or approval reference:
    - status: not contacted / requested / scheduled / report received
 5. Legal/company reviewer:
-   - reviewer/firm name:
-   - contact or approval reference:
-   - status: not contacted / requested / signed
+   - reviewer/firm name: Anurag Yadav, Owner, Top Notchh Solutions
+   - contact or approval reference: `evidence/owner-authorization-2026-10-23.md`; `legal/legal-company-decision-2026-10-18.md`
+   - status: signed company disposition with conditions
 6. Studio recipient:
-   - internal test recipient / authorized external recipient:
-   - status:
+   - internal test recipient / authorized external recipient: owner-controlled synthetic recipient and local public open-source JS/TS benchmark repositories at exact commits are authorized; no external recipient is asserted
+   - status: internal/public benchmark path authorized; external POC acceptance remains separate
 7. Enterprise runner:
    - disposable test machine/operator:
    - status:
 8. Pricing hypothesis:
-   - Team:
-   - Studio:
+   - Team: `$99/month`, bounded founding-cohort hypothesis approved by Anurag Yadav
+   - Studio: `$249/month`, bounded founding-cohort hypothesis approved by Anurag Yadav
 9. Queue/object storage provider decision:
+   - Neon PostgreSQL using the existing `jobs` and `outbox_events` tables, per `DECISIONS.md` OPS-001; owner-authorized for V1
 10. Networked Hunt exceptions:
     - default is no network; list only deliberate exceptions:
 11. Release authorization:
-    - npm publish authorized now? yes/no
-    - Production deployment authorized now? yes/no
-    - Production database migration authorized now? yes/no
+    - npm publish authorized now? yes — owner-authorized when the target's release evidence and provider action are recorded
+    - Production deployment authorized now? yes — owner-authorized for scoped shipping execution
+    - Production database migration authorized now? yes — owner-authorized for scoped, reversible shipping execution
 12. General availability:
     - Team/Studio/Enterprise may be called generally available only after all
       end-to-end gates pass: CONFIRMED / CHANGE REQUESTED

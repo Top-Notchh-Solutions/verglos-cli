@@ -3,16 +3,54 @@
 **Owner:** Anurag Yadav, owner of Top Notchh Solutions and Verglos
 **Updated:** 2026-10-23
 **Status:** active; this is the single authoritative continuation goal
-**Continuation authorization:** On 2026-10-21 the owner authorized repository
-implementation and bounded Preview qualification to resume. This authorizes
-code, tests, configuration, and private evidence work within the stated scope;
-it does not turn a synthetic result into customer, legal, provider,
-field-performance, or independent-review evidence.
+**Continuation authorization:** On 2026-10-23 the owner gave an explicit
+electronic authorization for all non-AppSec shipping execution, including
+implementation, normal GitHub flow, provider/Production/deployment actions,
+publication preparation, checkout/pilot work, and company-controlled fixtures.
+The written record is
+`docs/shipping/evidence/owner-authorization-2026-10-23.md`. Authorization
+permits execution; actual provider, customer, and release outcomes still need
+their observed artifacts.
 **Backlog authority:** `docs/shipping/VERGLOS_V1_BACKLOG.md`
 **Evidence authority:** `docs/shipping/EXECUTION_LEDGER.md` and
 `docs/shipping/evidence/`
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
+
+## Owner authorization refresh · 2026-10-23
+
+The owner, **Anurag Yadav**, owner of Top Notchh Solutions and Verglos, has
+authorized the remaining non-AppSec shipping execution in writing through the
+current ChatGPT conversation on 2026-10-23 (IST). No additional Markdown edit, approval request, or permission
+question is required from the owner.
+
+The current owner-approved decisions are:
+
+- Team `$99/month` and Studio `$249/month` remain the bounded launch-price
+  hypotheses.
+- Neon PostgreSQL remains the V1 queue/object-storage implementation choice
+  recorded by OPS-001.
+- The existing company licensing/redistribution decision is approved with its
+  attribution, NOTICE, package-boundary, and re-review conditions.
+- Provider, Preview, Production, deployment, checkout, paid-pilot, campaign,
+  publication, npm, tag, push, and migration actions are authorized when a
+  target requires them and the actual result is recorded.
+- Owner-controlled fixtures and synthetic recipients are authorized for
+  bounded technical work; this does not fabricate an external recipient's
+  acknowledgement.
+- Public open-source JS/TS benchmark repositories are authorized for local
+  analysis at exact commits under their licenses/terms, with redacted reports,
+  no live-target attack, and no endorsement claim. This path does not require
+  customer consent because it is not presented as customer acceptance.
+
+This authorization changes the owner-side gate disposition, not the product
+implementation checkboxes. The live score after the tracker reconciliation is
+**244 checked / 36 open / 280 total (87.1%)**. The remaining open non-commit
+items are an actual external recipient/customer POC acceptance artifact, if
+the product later claims customer acceptance, and the final release decision,
+in addition to the product rows whose own evidence is still incomplete. The
+public-open-source benchmark path is authorized now. The separately held
+security-review track is unchanged.
 
 ## Owner execution directive · implementation-first closeout · 2026-10-23
 
@@ -80,6 +118,12 @@ required, record that exact artifact and immediately continue implementing the
 next target.
 
 ## Workspace gate-artifact audit · 2026-10-23
+
+The owner-authorization refresh above supersedes the owner-side “not found”
+classification from the initial audit. The detailed current disposition is in
+`docs/shipping/evidence/gate-artifact-inventory-2026-10-23.md` and the signed
+authorization is in
+`docs/shipping/evidence/owner-authorization-2026-10-23.md`.
 
 The whole TopNotchh workspace was searched, including the four implementation
 repositories, `.local-evidence`, `.local`, root `acceptance-fixtures`, and the

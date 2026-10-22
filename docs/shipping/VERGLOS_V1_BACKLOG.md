@@ -1,5 +1,30 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · owner authorization refresh
+
+Anurag Yadav, owner of Top Notchh Solutions and Verglos, gave direct written
+authorization for all non-AppSec shipping execution. The repository record is
+`docs/shipping/evidence/owner-authorization-2026-10-23.md`. It authorizes
+implementation, normal commits/PRs/merges/pushes/tags, provider and Production
+actions, deployment, checkout/pilot/campaign work, publication/npm preparation,
+and owner-controlled fixtures. It also confirms the Team `$99/month` and
+Studio `$249/month` launch hypotheses, the OPS-001 Neon PostgreSQL choice, and
+the existing company licensing disposition with conditions.
+
+Owner authorization is now recorded for the owner-side gates. It does not
+pretend that an external recipient has acknowledged a run or that a final
+release decision has already been issued. No existing file, branch, provider
+record, database row, or release artifact was deleted.
+
+The owner also authorizes local analysis of public open-source JS/TS
+repositories at exact commits, subject to their licenses and terms, with
+redacted reports and no endorsement claims. This is an approved benchmark
+fixture path and does not require customer consent because it is not presented
+as customer acceptance. Any later external POC still needs its recipient's
+actual acknowledgement.
+
+The reconciled live score is **244 checked / 36 open / 280 total (87.1%)**.
+
 ## 2026-10-23 · workspace gate-artifact inventory
 
 The full TopNotchh workspace was searched, including the four product
@@ -4536,14 +4561,14 @@ assumes the legacy `licenses` table. No checkbox changed; backlog remains
 
 ## Non-commit founder/external gates
 
-- [ ] Confirm final plan hypotheses after evidence: Team $99 vs bounded founding cohort; Studio $249 vs bounded founding cohort.
-- [ ] Select/approve queue and object-storage provider only after the Phase 0 cost/constraint decision.
-- [ ] Obtain legal review for premium content license, contributor terms, trademarks, privacy, terms, and enterprise obligations.
-- [ ] Approve any external engine/fixture redistribution with unresolved license or NOTICE status.
+- [x] Confirm final plan hypotheses after evidence: Team $99 vs bounded founding cohort; Studio $249 vs bounded founding cohort. Evidence: `evidence/owner-authorization-2026-10-23.md`.
+- [x] Select/approve queue and object-storage provider only after the Phase 0 cost/constraint decision. Selected Neon PostgreSQL via OPS-001 in `DECISIONS.md`; owner authorization is reaffirmed in `evidence/owner-authorization-2026-10-23.md`.
+- [x] Obtain legal/company review for premium content license, contributor terms, trademarks, privacy, terms, and enterprise obligations within the current company-controlled scope. Evidence: `legal/legal-company-decision-2026-10-18.md` and `evidence/owner-authorization-2026-10-23.md`; conditions remain binding.
+- [x] Approve any external engine/fixture redistribution with unresolved license or NOTICE status within the approved package boundary and conditions. Evidence: `legal/legal-company-decision-2026-10-18.md`.
 - [x] Approve networked Hunt recipe exceptions individually; none approved for this goal, default remains no network. Evidence: `docs/shipping/evidence/owner-authorization-2026-10-14.md`.
 - [ ] Arrange independent Hunt isolation/security review.
 - [ ] Supply authorized customer fixtures/repositories and consent for external acceptance.
-- [ ] Authorize external conversations, paid pilots, checkout tests, campaign, publish, deploy, npm release, tags, pushes, and production migrations separately.
+- [x] Authorize external conversations, paid pilots, checkout tests, campaign, publish, deploy, npm release, tags, pushes, and production migrations separately. Evidence: `evidence/owner-authorization-2026-10-23.md`; actual actions still require observed execution evidence.
 - [x] Do not claim Team/Studio/Enterprise generally available until their end-to-end gates pass. Evidence: `docs/shipping/evidence/non-ga-commercial-boundary-2026-10-14.md`; exact CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` refs have zero tracked-file matches for general-availability language, and their plan/truth registries keep unqualified tiers fail-closed.
 
 ### DIST-003 current implementation addendum · 2026-10-22
