@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · harden FINAL-WEB-008 public truth smoke evidence
+
+- **Decision:** Treat the public `robots.ts` and `sitemap.ts` outputs as part
+  of the release truth surface, reject ambiguous route manifests, and suppress
+  package-manager wrapper output before writing the hosted JSON artifact.
+- **Implementation:** Web commit `d32da250d5c2427dcfa36f560421a2506bb8a659`
+  merged through PR #233 as normal merge commit
+  `065c84510df147dc72955310a599413cf375be63`.
+- **Verification:** Local smoke **16 routes / 20 source files / 0 issues / 22
+  of 22 publishable claims / 2 proof assets**; public-smoke plus landing **8/8**;
+  truth-registry **35/35**; typecheck, diff check, Verify `39778264795`, and
+  Private runner qualification `39778264796` passed.
+- **Safety boundary:** No database was connected or modified. No file, branch,
+  record, or deployment was deleted.
+- **Disposition:** This closes the code-side smoke gap only. Keep
+  `FINAL-WEB-008` unchecked for final acceptance and release-gate
+  reconciliation/go-no-go evidence. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md`.
+
+## 2026-10-22 · make QUAL-WEB-006 table semantics explicit
 ## 2026-10-22 · make QUAL-WEB-006 table semantics explicit
 
 - **Decision:** Add captions and explicit header scopes to the selected Web

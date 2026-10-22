@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · FINAL-WEB-008 public truth smoke hardening and merge
+
+- **Implementation:** Web commit `d32da250d5c2427dcfa36f560421a2506bb8a659`
+  includes the public `robots.ts` and `sitemap.ts` sources in the truth sweep,
+  validates their tokens, rejects ambiguous route manifests, and uses
+  `pnpm --silent` for valid hosted JSON evidence.
+- **Promotion:** PR #233 merged normally as
+  `065c84510df147dc72955310a599413cf375be63`; source branch preserved.
+- **Verification:** Local smoke **16 routes / 20 source files / 0 issues / 22
+  of 22 publishable claims / 2 proof assets**; public-smoke plus landing
+  qualification **8/8**; truth-registry **35/35**; typecheck and diff check
+  passed; Verify `39778264795` and Private runner qualification `39778264796`
+  passed.
+- **Safety boundary:** No database was connected or modified. No file, branch,
+  record, or deployment was deleted.
+- **Disposition:** `FINAL-WEB-008` remains unchecked for final acceptance and
+  release-gate reconciliation/go-no-go evidence. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md`.
+
+## 2026-10-22 · QUAL-WEB-006 table semantics implementation and merge
 ## 2026-10-22 · QUAL-WEB-006 table semantics implementation and merge
 
 - **Implementation:** Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103`

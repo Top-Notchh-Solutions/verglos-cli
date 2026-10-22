@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-008 public truth and release smoke hardening · 2026-10-22
+
+- **Source mapping:** Web commit `d32da250d5c2427dcfa36f560421a2506bb8a659`
+  promoted through PR #233 and merged normally as
+  `065c84510df147dc72955310a599413cf375be63`; source branch preserved.
+- **Implementation mapping:** The public smoke source inventory includes
+  `robots.ts` and `sitemap.ts`, validates their required tokens, rejects
+  duplicate/malformed route-manifest entries, and emits clean JSON evidence in
+  hosted Verify.
+- **Qualification mapping:** Local smoke **16 routes / 20 source files / 0
+  issues / 22 of 22 publishable claims / 2 proof assets**; public-smoke plus
+  landing **8/8**; truth-registry **35/35**; typecheck, diff check, Verify
+  `39778264795`, and Private runner qualification `39778264796` passed.
+- **Safety mapping:** No database was connected or modified. No file, branch,
+  record, or deployment was deleted.
+- **Acceptance mapping:** Keep `FINAL-WEB-008` unchecked for final acceptance
+  and release-gate reconciliation/go-no-go evidence. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md`.
+
+## QUAL-WEB-006 table semantics implementation · 2026-10-22
 ## QUAL-WEB-006 table semantics implementation · 2026-10-22
 
 - **Source mapping:** Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103`

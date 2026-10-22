@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · FINAL-WEB-008 public truth and release smoke hardening
+
+Web commit `d32da250d5c2427dcfa36f560421a2506bb8a659` and PR #233 merged
+normally as `065c84510df147dc72955310a599413cf375be63`. The public release
+smoke now covers `robots.ts` and `sitemap.ts`, validates required machine
+readable tokens, rejects duplicate/malformed route-manifest entries, and
+uploads valid JSON by using `pnpm --silent` in Verify. Local smoke passed with
+**16 routes / 20 source files / 0 issues / 22 of 22 publishable claims / 2
+proof assets**; public-smoke plus landing qualification passed **8/8**;
+truth-registry passed **35/35**; typecheck, diff check, Verify web
+`39778264795`, and Private runner qualification `39778264796` passed. No
+database was connected or modified, and no file, branch, record, or deployment
+was deleted. Keep `FINAL-WEB-008` unchecked for final acceptance and
+release-gate reconciliation/go-no-go evidence. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md`.
+
+## 2026-10-22 · QUAL-WEB-006 table semantics implementation
 ## 2026-10-22 · QUAL-WEB-006 table semantics implementation
 
 Web commit `e05bcdc26f5332d4806f0c286b9233b406a19103` and PR #232 merged
