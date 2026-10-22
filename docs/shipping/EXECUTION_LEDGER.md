@@ -14349,3 +14349,22 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   state changed and nothing was deleted. Score remains **239/41/280
   (85.4%)**.
 - **Evidence:** `evidence/dist-003-checksum-read-binding-pr175-2026-10-23.md`.
+
+## 2026-10-23 · DIST-006 rollback-evidence manifest read binding merged
+
+- **Source:** CLI PR #176, implementation commit
+  `09e68dbe12abb40c36a009542418b618910a0594`; normal merge commit
+  `fe7ea848c7e9e5b5ec12245c288ce44b7cc4a793`.
+- **Implementation:** Rollback rehearsal manifest hashing now reads the fixed
+  fixture through the bounded regular-file helper before computing its
+  digest, with a source regression against pathname-bound reads.
+- **Verification:** Focused rollback-evidence/rollback-plan contracts **2/2**,
+  forced CLI Turbo graph **23/23**, and diff check passed. Hosted Standard
+  `39860531289`, self-scan `39860531105`, and platform/in-toto matrix
+  `39860530997` passed all nine platform cells and in-toto binding.
+- **Boundary:** Keep DIST-006 open for authenticated provider/registry,
+  engine-feed, signing-identity, and Web-deployment rollback/revocation,
+  operational review, legal/license clearance, independent evidence, and
+  final acceptance. No external state changed and nothing was deleted. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-006-rollback-evidence-read-binding-pr176-2026-10-23.md`.

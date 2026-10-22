@@ -1765,3 +1765,25 @@ and final acceptance. No external state changed; nothing was deleted. The 13
 AppSec-held entries remain unchanged. Score remains **239 checked / 41 open /
 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-003-checksum-read-binding-pr175-2026-10-23.md`.
+
+# 2026-10-23 · DIST-006 rollback-evidence manifest read binding merged
+
+CLI PR #176 implementation commit `09e68dbe12abb40c36a009542418b618910a0594`
+binds the rollback rehearsal manifest digest to the bounded regular-file
+helper before hashing. The source regression rejects a return to
+pathname-bound `readFile(manifestPath)` access. Focused rollback-evidence and
+rollback-plan contracts passed **2/2**; the forced CLI Turbo graph passed
+**23/23 tasks**; and `git diff --check` passed.
+
+Hosted Standard validation `39860531289`, self-scan `39860531105`, and the
+platform/in-toto matrix `39860530997` passed, including Ubuntu/macOS/Windows
+Node 20/22/24 and in-toto release binding. PR #176 merged normally without
+squash as `fe7ea848c7e9e5b5ec12245c288ce44b7cc4a793`.
+
+This is implementation progress only. Keep `DIST-006` unchecked for
+authenticated provider/registry/engine-feed/signing/deployment rollback or
+revocation, operational review, legal/license clearance, independent
+evidence, and final acceptance. No external state changed; nothing was
+deleted. The 13 AppSec-held entries remain unchanged. Score remains **239
+checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-006-rollback-evidence-read-binding-pr176-2026-10-23.md`.
