@@ -35,3 +35,10 @@ test("release rollback evidence generator records all five boundaries without pr
     await rm(output, { recursive: true, force: true });
   }
 });
+
+test("release rollback evidence binds its fixture digest to a bounded regular-file read", async () => {
+  const source = await readFile("scripts/release-rollback-evidence.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(/u);
+  assert.match(source, /MAX_RELEASE_ARTIFACT_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(manifestPath\)/u);
+});
