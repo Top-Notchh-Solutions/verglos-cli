@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
-import { lstat, readFile, readdir, writeFile } from "node:fs/promises";
+import { constants } from "node:fs";
+import { lstat, open, readFile, readdir } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -35,6 +36,13 @@ const releaseVersion = parseReleaseTag(releaseTag);
 
 const entry = await lstat(root);
 if (!entry.isDirectory()) throw new Error("release artifact root must be a directory");
+const manifestPath = join(root, MANIFEST_NAME);
+try {
+  const manifestEntry = await lstat(manifestPath);
+  if (!manifestEntry.isFile() || manifestEntry.isSymbolicLink()) throw new Error("release origin manifest output must be a regular file");
+} catch (error) {
+  if (error?.code !== "ENOENT") throw error;
+}
 const files = (await readdir(root)).sort();
 const archives = files.filter((name) => name.endsWith(".tgz"));
 if (archives.length !== EXPECTED_PACKAGES.size) throw new Error(`release origin requires exactly ${EXPECTED_PACKAGES.size} npm archives`);
@@ -83,7 +91,12 @@ const metadata = {
   artifacts: [...archiveEntries, ...sidecarEntries].sort((left, right) => left.name.localeCompare(right.name)),
   ...(process.env.GITHUB_RUN_ID && /^\d+$/u.test(process.env.GITHUB_RUN_ID) ? { workflowRunId: process.env.GITHUB_RUN_ID } : {}),
 };
-await writeFile(join(root, MANIFEST_NAME), `${JSON.stringify(metadata, null, 2)}\n`, { encoding: "utf8", mode: 0o644 });
+const outputHandle = await open(manifestPath, constants.O_WRONLY | constants.O_CREAT | constants.O_TRUNC | (constants.O_NOFOLLOW ?? 0), 0o644);
+try {
+  await outputHandle.writeFile(`${JSON.stringify(metadata, null, 2)}\n`, "utf8");
+} finally {
+  await outputHandle.close();
+}
 console.log(`wrote ${MANIFEST_NAME} for ${releaseTag} at ${sourceCommit}`);
 
 function option(name) {
