@@ -328,6 +328,26 @@ truth freeze, and final acceptance. Nothing was deleted. Score remains **239
 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md`.
 
+## 2026-10-23 · DIST-001 public-pack manifest read binding
+
+CLI PR #174 hardens the public package packer so all seven source manifests are
+read through the bounded regular-file helper before dependency normalization
+and `npm pack`. Targeted source/archive boundary contracts passed **14**, the
+full CLI Turbo graph passed **23/23**, and diff check passed. Hosted Standard
+`39857515194`, self-scan `39857515335`, and platform/in-toto matrix
+`39857515411` passed all nine platform cells. Source commit
+`516731340a9df4b39e574c1143fe9c6df8d1f6e5` merged normally, without squash,
+as `34d84bbe63a34ce41c3425b478eba03ef241d7c2`.
+
+Keep `DIST-001` open for LOCAL/HUNT/RECORD, legal/license,
+trusted/protected publication, immutable attestation, and final acceptance.
+The direct local public-pack fixture was not claimed as green because the
+worktree lacks cross-platform optional `@esbuild/*` license metadata; hosted
+packaging/consumer checks passed. No external publication, provider,
+Production, customer, database, or release-sign-off state changed; nothing was
+deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-pack-manifest-read-binding-pr174-2026-10-23.md`.
+
 ## 2026-10-22 · ENT-CLI-001 result-acknowledgement implementation
 
 CLI commit `e72e83f40ce0b1137795c945c35ea8c5354e2645` hardens private-runner

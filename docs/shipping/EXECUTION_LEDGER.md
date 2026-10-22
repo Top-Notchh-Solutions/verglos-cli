@@ -14310,3 +14310,23 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   hosted/independent evidence, truth freeze, and final acceptance. Score
   remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md`.
+
+## 2026-10-23 · DIST-001 public-pack manifest read binding merged
+
+- **Source:** CLI PR #174, implementation commit
+  `516731340a9df4b39e574c1143fe9c6df8d1f6e5`; normal merge commit
+  `34d84bbe63a34ce41c3425b478eba03ef241d7c2`.
+- **Implementation:** All seven public source manifests are now read through
+  the bounded regular-file helper before dependency normalization and `npm
+  pack`; the source regression rejects the old pathname read.
+- **Verification:** Targeted source/archive contracts **14 passed**, full CLI
+  Turbo graph **23/23**, and diff check passed. Hosted Standard
+  `39857515194`, self-scan `39857515335`, and platform/in-toto
+  `39857515411` passed all nine platform cells.
+- **Boundary:** The direct local public-pack fixture was not claimed as green
+  because the worktree lacks cross-platform optional `@esbuild/*` license
+  metadata; hosted packaging/consumer checks passed. Keep `DIST-001` open for
+  LOCAL/HUNT/RECORD, legal/license, trusted/protected publication, immutable
+  attestation, and final acceptance. No external state changed and nothing was
+  deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-001-pack-manifest-read-binding-pr174-2026-10-23.md`.

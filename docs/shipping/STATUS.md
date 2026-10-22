@@ -74,6 +74,27 @@ deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**.
 
 Evidence: `evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md`.
 
+## 2026-10-23 · DIST-001 public-pack manifest read binding merged
+
+CLI PR #174 source `516731340a9df4b39e574c1143fe9c6df8d1f6e5` binds all seven
+public package manifest reads to the bounded regular-file helper before
+dependency normalization and packaging. Targeted source/archive contracts
+passed **14**, the full CLI graph passed **23/23**, and diff check passed.
+Hosted Standard `39857515194`, self-scan `39857515335`, and platform/in-toto
+`39857515411` passed all nine Ubuntu/macOS/Windows × Node 20/22/24 cells.
+
+PR #174 merged normally, without squash, as
+`34d84bbe63a34ce41c3425b478eba03ef241d7c2`. `DIST-001` remains open for
+LOCAL/HUNT/RECORD, legal/license, trusted/protected publication, immutable
+attestation, and final acceptance. The local public-pack fixture was not
+claimed as green because cross-platform optional `@esbuild/*` license metadata
+is absent in this worktree; hosted packaging/consumer checks passed. No
+publication, provider, Production, customer, database, or release-sign-off
+state changed; nothing was deleted. Score remains **239 checked / 41 open /
+280 total (85.4%)**.
+
+Evidence: `evidence/dist-001-pack-manifest-read-binding-pr174-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 strict measurement types
 
 Web PR #249 source `f01717a` makes the accessibility/performance qualifier

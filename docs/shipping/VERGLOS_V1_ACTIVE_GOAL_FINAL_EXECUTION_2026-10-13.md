@@ -1718,3 +1718,28 @@ evidence, truth freeze, and final release acceptance. Nothing was deleted. The
 13 AppSec-held rows remain unchanged. Score remains **239 checked / 41 open /
 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md`.
+
+# 2026-10-23 · DIST-001 public-pack manifest read binding merged
+
+CLI PR #174 commit `516731340a9df4b39e574c1143fe9c6df8d1f6e5` hardens the
+public package packer: all seven source `package.json` files are now read
+through the bounded regular-file helper before dependency normalization and
+`npm pack`, with a regression against pathname manifest reads. Targeted
+source/archive boundary contracts passed **14**, the full CLI Turbo graph
+passed **23/23**, and `git diff --check` passed.
+
+Hosted Standard validation `39857515194`, self-scan `39857515335`, and
+platform/in-toto matrix `39857515411` passed, including all Ubuntu/macOS/
+Windows Node 20/22/24 cells. PR #174 merged normally, without squash, as
+`34d84bbe63a34ce41c3425b478eba03ef241d7c2`.
+
+The direct local public-pack fixture was not claimed as green because the
+worktree's dependency-license inventory lacks cross-platform optional
+`@esbuild/*` metadata; the hosted cross-platform workflow passed the packaging
+and consumer path. This is implementation progress only; `DIST-001` remains
+unchecked for LOCAL/HUNT/RECORD, legal/license, trusted/protected publication,
+immutable attestation, and final release acceptance. No npm publication,
+provider, Production, customer, database, or release-sign-off state changed;
+nothing was deleted. The 13 AppSec-held rows remain unchanged. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-pack-manifest-read-binding-pr174-2026-10-23.md`.
