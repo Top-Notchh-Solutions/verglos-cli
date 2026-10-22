@@ -60,7 +60,7 @@ function getSource(manifest, sourceOverrides) {
   return "";
 }
 
-export function createLicenseInventory({ lockedPackages, manifests, bundledManifests = [], directDependencies, sourceOverrides = {} }) {
+export function createLicenseInventory({ lockedPackages, manifests, bundledManifests = [], directDependencies, sourceOverrides = {}, reviewDecisions = {} }) {
   const byNameVersion = new Map();
   for (const manifest of manifests) {
     if (!manifest || typeof manifest.name !== "string" || typeof manifest.version !== "string") continue;
@@ -87,9 +87,15 @@ export function createLicenseInventory({ lockedPackages, manifests, bundledManif
   const blockers = [];
   for (const record of byNameVersion.values()) {
     const license = record.license || "UNKNOWN";
-    const redistributionClass = PERMISSIVE.test(license) ? "permissive" : COPYLEFT.test(license) ? "copyleft" : "unknown";
+    const decision = reviewDecisions.packages?.[`${record.name}@${record.version}`];
+    const decisionMatches = decision
+      && decision.name === record.name
+      && decision.version === record.version
+      && decision.license === license
+      && decision.source === record.source;
+    const redistributionClass = decisionMatches ? "owner-reviewed" : PERMISSIVE.test(license) ? "permissive" : COPYLEFT.test(license) ? "copyleft" : "unknown";
     const scope = directDependencies.has(record.name) ? "direct" : "transitive";
-    const reviewBlocker = redistributionClass !== "permissive" || !record.source;
+    const reviewBlocker = !decisionMatches && (redistributionClass !== "permissive" || !record.source);
     const groupKey = JSON.stringify([record.name, scope, license, record.source, redistributionClass]);
     const entry = grouped.get(groupKey) ?? {
       name: record.name,
@@ -100,8 +106,9 @@ export function createLicenseInventory({ lockedPackages, manifests, bundledManif
       detectionMethod: "package-manifest-license-field",
       source: record.source || undefined,
       redistributionClass,
-      noticeObligation: redistributionClass === "permissive" ? "retain-license-and-notice" : "review-required",
+      noticeObligation: decisionMatches ? decision.noticeObligation : redistributionClass === "permissive" ? "retain-license-and-notice" : "review-required",
       reviewBlocker,
+      ...(decisionMatches ? { reviewDecision: decision.id } : {}),
     };
     entry.versions.push(record.version);
     grouped.set(groupKey, entry);
@@ -121,11 +128,19 @@ export function createLicenseInventory({ lockedPackages, manifests, bundledManif
     const ownSource = getSource(manifest);
     const source = ownSource || parent?.source || "";
     const license = typeof manifest.license === "string" && manifest.license.trim() ? manifest.license.trim() : "UNKNOWN";
-    const redistributionClass = PERMISSIVE.test(license) ? "permissive" : COPYLEFT.test(license) ? "copyleft" : "unknown";
     const parentDeclaredLicense = parent?.license || "UNKNOWN";
+    const decision = reviewDecisions.bundled?.[`${manifest.name}@${manifest.version}|${item.bundledBy}`];
+    const decisionMatches = decision
+      && decision.name === manifest.name
+      && decision.version === manifest.version
+      && decision.bundledBy === item.bundledBy
+      && decision.license === license
+      && decision.parentLicense === parentDeclaredLicense
+      && decision.source === source;
+    const redistributionClass = decisionMatches ? "owner-reviewed" : PERMISSIVE.test(license) ? "permissive" : COPYLEFT.test(license) ? "copyleft" : "unknown";
     const licenseConflict = parentDeclaredLicense !== "UNKNOWN" && license !== parentDeclaredLicense;
-    const reviewBlocker = redistributionClass !== "permissive" || !source || licenseConflict;
-    const reviewReason = redistributionClass !== "permissive" ? "license-review-required" : !source ? "source-missing" : licenseConflict ? "nested-license-conflicts-with-container" : undefined;
+    const reviewBlocker = !decisionMatches && (redistributionClass !== "permissive" || !source || licenseConflict);
+    const reviewReason = decisionMatches ? undefined : redistributionClass !== "permissive" ? "license-review-required" : !source ? "source-missing" : licenseConflict ? "nested-license-conflicts-with-container" : undefined;
     const record = {
       name: manifest.name,
       version: manifest.version,
@@ -138,8 +153,9 @@ export function createLicenseInventory({ lockedPackages, manifests, bundledManif
       source: source || undefined,
       sourceBasis: ownSource ? "nested-package-manifest" : source ? "containing-package-repository" : "missing",
       redistributionClass,
-      noticeObligation: reviewBlocker ? "review-required" : "retain-license-and-notice",
+      noticeObligation: decisionMatches ? decision.noticeObligation : reviewBlocker ? "review-required" : "retain-license-and-notice",
       reviewBlocker,
+      ...(decisionMatches ? { reviewDecision: decision.id } : {}),
       ...(reviewReason ? { reviewReason } : {}),
     };
     const previous = bundled.get(key);

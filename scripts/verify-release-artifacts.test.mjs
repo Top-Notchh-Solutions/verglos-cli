@@ -25,7 +25,7 @@ async function writeReleaseFixture(root) {
   await writeFile(join(root, "SBOM.cdx.json"), JSON.stringify({ bomFormat: "CycloneDX", components: [{ name: "x" }] }));
   await writeFile(join(root, "SBOM.spdx.json"), JSON.stringify({ spdxVersion: "SPDX-2.3", packages: [{ name: "x" }] }));
   await writeFile(join(root, "dependency-license-inventory.json"), JSON.stringify({ schemaId: "urn:verglos:artifact:dependency-license-inventory", packages: [{ name: "x" }], bundledComponents: [], reviewBlockers: [] }));
-  await writeFile(join(root, "clean-consumer-verification.txt"), "clean consumer installed 7 archives and executed Verglos 2.0.0-alpha.1\n");
+  await writeFile(join(root, "clean-consumer-verification.txt"), "clean consumer installed 7 archives, imported all libraries, executed Verglos 2.0.0-alpha.1, and confirmed no external engine installation\n");
   await writeChecksums(root);
 }
 

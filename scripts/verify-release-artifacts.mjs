@@ -84,7 +84,7 @@ for (const name of requiredSidecars) {
       if (inventory.schemaId !== "urn:verglos:artifact:dependency-license-inventory" || !Array.isArray(inventory.packages) || !Array.isArray(inventory.bundledComponents)) throw new Error("dependency-license-inventory.json has an invalid shape");
       if (!Array.isArray(inventory.reviewBlockers) || inventory.reviewBlockers.length > 0) throw new Error("dependency-license-inventory.json contains unresolved redistribution blockers");
     }
-    if (name === "clean-consumer-verification.txt" && !/^clean consumer installed 7 archives and executed Verglos \d+\.\d+\.\d+/u.test(content.trim())) throw new Error("clean-consumer-verification.txt does not prove the seven-package consumer flow");
+    if (name === "clean-consumer-verification.txt" && !/^clean consumer installed 7 archives, imported all libraries, executed Verglos \d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?, and confirmed no external engine installation$/u.test(content.trim())) throw new Error("clean-consumer-verification.txt does not prove the seven-package consumer flow");
   } catch (error) {
     if (error instanceof SyntaxError) throw new Error(`${name} is not valid JSON`);
     throw error;
