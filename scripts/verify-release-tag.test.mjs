@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -40,4 +40,11 @@ test("release verification binds the dispatched commit to the resolved tag commi
   assert.deepEqual(verifyReleaseCommitBinding(sha.toUpperCase(), sha), { sourceCommit: sha, resolvedTagCommit: sha });
   assert.throws(() => verifyReleaseCommitBinding(sha, "b".repeat(40)), /resolves to/u);
   assert.throws(() => verifyReleaseCommitBinding("not-a-sha", sha), /40-character hexadecimal/u);
+});
+
+test("release verification binds package manifests to bounded regular-file reads", async () => {
+  const source = await readFile("scripts/verify-release-tag.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(/u);
+  assert.match(source, /MAX_RELEASE_ARTIFACT_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(join\(root/u);
 });

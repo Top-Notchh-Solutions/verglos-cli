@@ -1,7 +1,7 @@
-import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { resolve } from "node:path";
+import { MAX_RELEASE_ARTIFACT_BYTES, readBoundedRegularFile } from "./release-artifact-files.mjs";
 
 const PUBLIC_PACKAGE_DIRS = [
   "packages/shared",
@@ -32,11 +32,20 @@ export function verifyReleaseCommitBinding(sourceCommit, resolvedTagCommit) {
   return Object.freeze({ sourceCommit: source, resolvedTagCommit: tag });
 }
 
+async function readPackageManifest(root, directory) {
+  const bytes = await readBoundedRegularFile(
+    join(root, directory, "package.json"),
+    MAX_RELEASE_ARTIFACT_BYTES,
+    `${directory} package manifest`,
+  );
+  return JSON.parse(bytes.toString("utf8"));
+}
+
 export async function verifyReleaseTag(root, tag) {
   const version = parseReleaseTag(tag);
   const versions = [];
   for (const directory of PUBLIC_PACKAGE_DIRS) {
-    const packageJson = JSON.parse(await readFile(join(root, directory, "package.json"), "utf8"));
+    const packageJson = await readPackageManifest(root, directory);
     if (typeof packageJson.version !== "string") throw new Error(`${directory} has no package version`);
     versions.push({ directory, version: packageJson.version });
   }
