@@ -1566,7 +1566,8 @@ total (85.4%)**. Evidence:
 
 # 2026-10-23 · FINAL-WEB-005 machine-readable plan terms
 
-Web commit `00996a657510d958e4840ebe40065dbef838edc4` on PR #250 extends the
+Web commits `00996a657510d958e4840ebe40065dbef838edc4` and
+`40b62e326db7a8b7d8a4b2ea800fafe8fbb7d55c` on PR #250 extend the
 catalog-bound public truth implementation to the machine-readable surfaces.
 `publicPlanTerms` now includes monthly and annual billing when they differ;
 `/llms.txt` emits each canonical plan's status, billing, all seven allowance
@@ -1575,8 +1576,8 @@ dimensions, capability summary, and explicit no-overage wording; homepage
 `PropertyValue` entries. Inactive and contracted plans remain explicitly
 unavailable/contracted, and no overage or unverified price is invented.
 
-Truth registry passed **36/36**, public-release smoke tests passed **7/7**,
-executable public smoke passed **18 routes / 22 claims / 2 proof assets / 0
+Truth registry passed **37/37**, public-release smoke tests passed **7/7**,
+executable public smoke passed **18 routes / 32 claims / 2 proof assets / 0
 issues**, typecheck passed, the production build generated **49/49** routes,
 and serial Web passed **897 / 24 explicit skips / 0 failures**. Local Node
 26.4.0 emitted the package's expected Node 22.x engine warning only.

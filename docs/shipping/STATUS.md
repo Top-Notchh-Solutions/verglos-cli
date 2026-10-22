@@ -11208,14 +11208,15 @@ Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
 ## 2026-10-23 · FINAL-WEB-005 machine-readable plan terms
 
-Web PR #250 latest commit `00996a657510d958e4840ebe40065dbef838edc4` binds
+Web PR #250 commits `00996a657510d958e4840ebe40065dbef838edc4` and latest
+`40b62e326db7a8b7d8a4b2ea800fafe8fbb7d55c` bind
 `/llms.txt` plan lines and homepage JSON-LD structured properties to the
 canonical catalog. Monthly/annual billing, status, all seven allowance
 dimensions, capability summary, and explicit no-overage wording are now
 derived from the same source; inactive and contracted plans remain bounded.
 
-Truth registry passed **36/36**, public-release tests **7/7**, executable
-public smoke passed **18 routes / 22 claims / 2 proof assets / 0 issues**,
+Truth registry passed **37/37**, public-release tests **7/7**, executable
+public smoke passed **18 routes / 32 claims / 2 proof assets / 0 issues**,
 typecheck passed, build passed with **49/49 routes**, and serial Web passed
 **897 / 24 explicit skips / 0 failures**. Required Verify run
 `39850836465` failed before repository steps with a zero-step type/schema job;
