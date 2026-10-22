@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { lstat, readFile } from "node:fs/promises";
+import { lstat, open } from "node:fs/promises";
 import { decideReleaseRollback, type ReleaseReference } from "@verglos/shared";
 
 const MAX_BYTES = 64 * 1024;
@@ -40,6 +40,24 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function parseReference(value: unknown): ReleaseReference {
   if (!isRecord(value)) throw new Error("rollback reference must be an object");
   return value as unknown as ReleaseReference;
+}
+
+async function readBoundedRegularFile(path: string, message: string): Promise<Buffer> {
+  const entry = await lstat(path);
+  if (!entry.isFile() || entry.size > MAX_BYTES) throw new Error(message);
+  const handle = await open(path, "r");
+  try {
+    const opened = await handle.stat();
+    if (!opened.isFile() || (entry.ino !== 0 && opened.ino !== 0 && (entry.dev !== opened.dev || entry.ino !== opened.ino))) {
+      throw new Error(`${message} changed during validation`);
+    }
+    if (opened.size > MAX_BYTES) throw new Error(message);
+    const bytes = await handle.readFile();
+    if (bytes.byteLength > MAX_BYTES) throw new Error(message);
+    return bytes;
+  } finally {
+    await handle.close();
+  }
 }
 
 function parseRehearsalManifest(value: unknown): RollbackRehearsalManifest {
@@ -88,9 +106,7 @@ function parseRehearsalManifest(value: unknown): RollbackRehearsalManifest {
 }
 
 async function readReference(path: string): Promise<ReleaseReference> {
-  const entry = await lstat(path);
-  if (!entry.isFile() || entry.size > MAX_BYTES) throw new Error("release reference must be a bounded regular file");
-  const value: unknown = JSON.parse(await readFile(path, "utf8"));
+  const value: unknown = JSON.parse((await readBoundedRegularFile(path, "release reference must be a bounded regular file")).toString("utf8"));
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("release reference must be a JSON object");
   return value as ReleaseReference;
 }
@@ -130,9 +146,7 @@ export async function executeReleaseRollbackRehearsal(input: Readonly<{
   quiet?: boolean;
 }>): Promise<number> {
   try {
-    const entry = await lstat(input.manifestPath);
-    if (!entry.isFile() || entry.size > MAX_BYTES) throw new Error("rollback rehearsal manifest must be a bounded regular file");
-    const manifestBytes = await readFile(input.manifestPath);
+    const manifestBytes = await readBoundedRegularFile(input.manifestPath, "rollback rehearsal manifest must be a bounded regular file");
     const manifestDigest = sha256(manifestBytes);
     const manifest = parseRehearsalManifest(JSON.parse(manifestBytes.toString("utf8")));
     const historicalBefore = manifest.historicalRecords.map((record) => `${record.id}:${record.digest}`);

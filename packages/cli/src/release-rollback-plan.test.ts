@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, writeFile } from "node:fs/promises";
+import { mkdtemp, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -21,6 +21,32 @@ test("rollback-plan fails closed without approval", async () => {
   const ref = JSON.stringify({ kind: "web-deployment", identity: "verglos.com", immutableRef: "https://vercel.com/deployments/abc" });
   await writeFile(join(root, "current.json"), ref); await writeFile(join(root, "target.json"), JSON.stringify({ kind: "web-deployment", identity: "verglos.com", immutableRef: "https://vercel.com/deployments/def" }));
   assert.equal(await executeReleaseRollbackPlan({ currentPath: join(root, "current.json"), targetPath: join(root, "target.json"), reason: "operator review", approved: false, json: true, quiet: true }), 78);
+});
+
+test("rollback inputs refuse symlinked references and rehearsal manifests", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-rollback-symlink-"));
+  const reference = join(root, "reference.json");
+  const target = join(root, "target.json");
+  const linkedReference = join(root, "linked-reference.json");
+  const manifest = join(root, "manifest.json");
+  const linkedManifest = join(root, "linked-manifest.json");
+  await writeFile(reference, JSON.stringify({ kind: "npm-package", identity: "verglos", immutableRef: "v2.0.0-alpha.1" }));
+  await writeFile(target, JSON.stringify({ kind: "npm-package", identity: "verglos", immutableRef: `sha256:${"a".repeat(64)}` }));
+  await writeFile(manifest, JSON.stringify({ operations: [], historicalRecords: [] }));
+  await symlink(reference, linkedReference);
+  await symlink(manifest, linkedManifest);
+
+  const lines: string[] = [];
+  const original = console.log;
+  console.log = (value?: unknown) => lines.push(String(value));
+  try {
+    assert.equal(await executeReleaseRollbackPlan({ currentPath: linkedReference, targetPath: target, reason: "operator review", approved: true, json: true, quiet: true }), 78);
+    assert.deepEqual(JSON.parse(lines[0]!), { allowed: false, reason: "invalid-input" });
+    assert.equal(await executeReleaseRollbackRehearsal({ manifestPath: linkedManifest, json: true, quiet: true }), 78);
+    assert.deepEqual(JSON.parse(lines[1]!), { status: "invalid-input", historicalRecordsPreserved: false });
+  } finally {
+    console.log = original;
+  }
 });
 
 test("rollback-rehearsal covers every provider boundary and preserves historical records", async () => {
