@@ -14,6 +14,25 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · QUAL-CLI-006
+
+The CLI trusted-root Sigstore validation boundary was repaired in commit
+`b115446dc670d2d2dbfca803a51a7d908615020c`; PR #164 merged normally as
+`84a72398d584b8c4522868e65a15f716d08363b3`, with the source branch preserved.
+Trusted-root mode no longer requires an unrelated `sigstore.pub` fixture;
+offline key mode remains unchanged. Focused release contracts passed **18/18**,
+typecheck **14/14**, build **8/8**, and full CLI tests **13/13**. The clean
+merged-head verifier passed CLI **311/313** with 2 explicit skips, Web
+**951/981** with 30 explicit skips, composed substrates **75/75**, and all
+**12/12** stories with zero failures. GitHub macOS Node 22 passed; remaining
+hosted jobs were queued/in progress at final status read and are not claimed as
+passed. `TEST_DATABASE_URL` was removed; no database, provider, publication,
+deployment, customer, legal, independent-review, or final-release operation
+occurred, and nothing was deleted. Keep `QUAL-CLI-006` unchecked for its
+external trust/publication/legal/review/acceptance gates. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-cli-006-trusted-root-sigstore-pr164-2026-10-22.md`.
+
 ## 1. Objective
 
 Starting at the first unchecked backlog item, finish every item that does not

@@ -1,5 +1,29 @@
 # Verglos V1 traceability
 
+## QUAL-CLI-006 trusted-root Sigstore boundary · 2026-10-22
+
+- **Source mapping:** CLI commit `b115446dc670d2d2dbfca803a51a7d908615020c`;
+  PR #164 merged normally as
+  `84a72398d584b8c4522868e65a15f716d08363b3`; source branch preserved.
+- **Implementation mapping:** Trusted-root Sigstore validation no longer
+  requires the unrelated offline public-key fixture. Key mode retains the
+  public-key requirement; trusted-root mode binds the trusted root, certificate
+  identity, and issuer while remaining artifact-root confined.
+- **Qualification mapping:** Focused release contracts **18/18**, typecheck
+  **14/14**, build **8/8**, full CLI graph **13/13**. Merged-head verifier CLI
+  **311/313**, Web **951/981**, composed **75/75**, all **12/12** stories,
+  zero failures. GitHub macOS Node 22 passed; remaining hosted jobs were
+  queued/in progress at final status read.
+- **Safety mapping:** `TEST_DATABASE_URL` was removed from the environment.
+  No external provider, database, publication, deployment, customer, legal,
+  independent-review, or keyless-trust operation occurred; no file, branch,
+  record, deployment, provider, customer, database, or release artifact was
+  deleted or changed.
+- **Acceptance mapping:** Keep `QUAL-CLI-006` open for trusted keyless
+  identity, protected publication, legal/license clearance, independent review,
+  and final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-006-trusted-root-sigstore-pr164-2026-10-22.md`.
+
 ## QUAL-WEB-006 measurement-boundary hardening and PR #236 · 2026-10-22
 
 - **Source mapping:** Web commit `ad05d2f7e9ce846c1f036740adf3b6fe4a4a7b21`;

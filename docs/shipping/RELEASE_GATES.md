@@ -1,5 +1,26 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · QUAL-CLI-006 trusted-root Sigstore validation gate
+
+CLI commit `b115446dc670d2d2dbfca803a51a7d908615020c` fixes the validator
+mode boundary: trusted-root verification requires the trusted root,
+certificate identity, and issuer, while offline key verification requires the
+public-key fixture. PR #164 merged normally as
+`84a72398d584b8c4522868e65a15f716d08363b3`; source branch preserved.
+Focused contracts **18/18**, typecheck **14/14**, build **8/8**, full CLI test
+graph **13/13**, and merged-head private substrates CLI **311/313**, Web
+**951/981**, composed **75/75**, all **12/12** passed with zero failures.
+GitHub macOS Node 22 passed; remaining hosted jobs were queued/in progress at
+the merge/status read and are not claimed as passed.
+
+No database URL or external operation was used. No trusted keyless Fulcio/Rekor
+identity, protected publication, legal/license clearance, provider action,
+independent review, customer acceptance, or final release approval was
+claimed. No file, branch, record, deployment, provider, customer, database, or
+release artifact was deleted or changed. Keep `QUAL-CLI-006` unchecked and
+keep the score at **239/41/280 (85.4%)**. Evidence:
+`evidence/qual-cli-006-trusted-root-sigstore-pr164-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 measurement-boundary implementation gate
 
 Web commit `ad05d2f7e9ce846c1f036740adf3b6fe4a4a7b21` makes the shared

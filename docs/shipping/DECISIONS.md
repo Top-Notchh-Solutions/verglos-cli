@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain QUAL-CLI-006 after PR #164 trusted-root repair
+
+- **Decision:** Promote the repository-owned Sigstore validator repair and
+  retain `QUAL-CLI-006` unchecked because trusted keyless identity, protected
+  publication, legal/license, independent-review, and final-acceptance gates
+  remain open.
+- **Implementation:** CLI commit `b115446dc670d2d2dbfca803a51a7d908615020c`
+  selects the fixture required by verification mode: trusted-root mode no
+  longer requires `sigstore.pub`, while offline key mode still does. PR #164
+  merged normally as `84a72398d584b8c4522868e65a15f716d08363b3`; source branch
+  preserved.
+- **Verification:** Focused contracts **18/18**, typecheck **14/14**, build
+  **8/8**, full CLI tests **13/13**, merged verifier CLI **311/313**, Web
+  **951/981**, composed **75/75**, all **12/12**, zero failures. GitHub macOS
+  Node 22 passed; remaining hosted jobs were queued/in progress at final read.
+- **Boundary:** `env -u TEST_DATABASE_URL`; no database/provider/publication/
+  deployment/customer/legal/independent-review operation and no file, branch,
+  record, deployment, provider, customer, database, or release artifact
+  deletion or change.
+- **Disposition:** Keep the score at **239/41/280 (85.4%)** and preserve the
+  additive evidence bundle.
+
 ## 2026-10-22 · retain QUAL-WEB-006 after PR #236 measurement hardening
 
 - **Decision:** Promote the runtime browser-evidence boundary repair and retain

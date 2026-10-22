@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-CLI-006 trusted-root Sigstore boundary and PR #164
+
+- **Implementation:** CLI commit `b115446dc670d2d2dbfca803a51a7d908615020c`
+  makes trusted-root Sigstore verification independent of the offline
+  `sigstore.pub` fixture while preserving the public-key requirement for key
+  mode. The regression binds the trusted-root, certificate-identity, and
+  issuer arguments inside the artifact root.
+- **Promotion:** PR [#164](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/164)
+  merged normally as `84a72398d584b8c4522868e65a15f716d08363b3`; source branch
+  preserved. No squash, rebase, or deletion occurred.
+- **Verification:** Focused release contracts **18/18**, typecheck **14/14**,
+  build **8/8**, full CLI test graph **13/13**. Merged-head verifier CLI
+  **311/313** with 2 skips, Web **951/981** with 30 skips, composed substrates
+  **75/75**, all **12/12** stories, zero failures. GitHub macOS Node 22 passed;
+  remaining hosted jobs were queued/in progress at final status read.
+- **Safety boundary:** `env -u TEST_DATABASE_URL` was used. No provider,
+  database, publication, deployment, customer, legal, independent-review, or
+  trusted keyless release operation occurred. No file, branch, record,
+  deployment, provider, customer, database, or release artifact was deleted or
+  changed.
+- **Disposition:** Keep `QUAL-CLI-006` unchecked for trusted keyless identity,
+  protected publication, legal/license clearance, independent review, and final
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-cli-006-trusted-root-sigstore-pr164-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 measurement-boundary hardening and PR #236
 
 - **Implementation:** Web commit `ad05d2f7e9ce846c1f036740adf3b6fe4a4a7b21`
