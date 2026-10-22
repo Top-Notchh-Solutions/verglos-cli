@@ -51,3 +51,15 @@ test("publish workflow verifies the same public artifact boundaries as release c
   assert.doesNotMatch(workflow, /workflow_dispatch/u, "publication must not expose a manual bypass path");
   assert.doesNotMatch(workflow, /promote_latest|dist-tag\s+add|NPM_TOKEN|NODE_AUTH_TOKEN/u, "publication must not depend on a long-lived npm token or mutable dist-tag promotion");
 });
+
+test("publish workflow makes its GitHub token permissions explicit", () => {
+  const permissions = workflow.match(/^permissions:\n(?<block>(?:  [^\n]+\n)+)/mu)?.groups?.block ?? "";
+  assert.notEqual(permissions, "", "publish workflow must declare a top-level permission block");
+  assert.match(permissions, /^  actions: read$/mu);
+  assert.match(permissions, /^  contents: read$/mu);
+  assert.match(permissions, /^  id-token: write(?:\s+#.*)?$/mu);
+  for (const permission of ["attestations", "checks", "deployments", "discussions", "issues", "packages", "pages", "pull-requests", "security-events", "statuses"]) {
+    assert.match(permissions, new RegExp(`^  ${permission}: none$`, "mu"), `${permission} must remain disabled`);
+  }
+  assert.doesNotMatch(permissions, /(?:contents|actions): write/u, "no permission other than OIDC may write");
+});
