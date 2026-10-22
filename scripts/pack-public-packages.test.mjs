@@ -38,3 +38,9 @@ test("public packer fails closed for private workspace dependencies", async () =
   assert.match(source, /privateWorkspacePackages/);
   assert.match(source, /cannot depend on private workspace package/);
 });
+
+test("public packer binds source manifest reads to bounded regular-file handles", async () => {
+  const source = await readFile("scripts/pack-public-packages.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(manifestPath, MAX_RELEASE_ARTIFACT_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(join\(root, "packages", name, "package\.json"\)/u);
+});
