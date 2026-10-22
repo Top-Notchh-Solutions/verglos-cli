@@ -1646,3 +1646,26 @@ was deleted. Keep `FINAL-WEB-006` unchecked for ACCEPT-003/009, the acceptance
 bundle, and final acceptance. Score remains **239 checked / 41 open / 280
 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md`.
+
+# 2026-10-23 · DIST-001 package-audit read binding merged
+
+CLI PR #172 implemented the next code-owned `DIST-001` slice. Commit
+`bab641c96df3332ae8a8fee7fb885e7bb27273c4` binds package manifests and
+private-key audit inputs to bounded regular-file reads, with symlink rejection
+and identity/size rechecks. The source regression test keeps the audit on this
+handle-bound path. PR #172 passed hosted Standard validation
+`39852985092`, hosted self-scan `39852984822`, and platform/in-toto matrix
+`39852984879` across all Ubuntu/macOS/Windows Node 20/22/24 cells. It merged
+normally, without squash, as
+`451e1dda3d21c1d87dcfb017f3e7cab8d2ffb711`.
+
+Local verification passed package-surface **8/8**, package-contents audit for
+**7 public packages**, release contracts **30/30**, the full CLI Turbo graph
+**23/23**, and `git diff --check`. This is implementation progress only;
+`DIST-001` remains unchecked for LOCAL/HUNT/RECORD dependencies,
+legal/license clearance, trusted/protected publication, immutable attestation,
+and final release acceptance. No npm publication, provider, Production,
+customer, database, or release-sign-off state changed; nothing was deleted.
+The 13 AppSec-held rows remain unchanged. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md`.

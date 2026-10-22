@@ -266,6 +266,27 @@ was deleted or changed. Score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-001-package-contents-boundary-pr163-2026-10-22.md`.
 
+## 2026-10-23 · DIST-001 package-audit read binding
+
+CLI PR #172 implemented and merged the next package-boundary hardening slice:
+`scripts/check-package-contents.mjs` now reads package manifests and
+private-key audit inputs through bounded regular-file handles with symlink,
+identity, and size checks. The package-surface regression passed **8/8**;
+package contents passed for **7 public packages**; release contracts passed
+**30/30**; and the full CLI Turbo graph passed **23/23**. Hosted Standard
+validation `39852985092`, self-scan `39852984822`, and platform/in-toto matrix
+`39852984879` passed. Source commit
+`bab641c96df3332ae8a8fee7fb885e7bb27273c4` merged normally, without squash,
+as `451e1dda3d21c1d87dcfb017f3e7cab8d2ffb711`.
+
+This advances implementation only. Keep `DIST-001` open for LOCAL/HUNT/RECORD
+dependencies, legal/license clearance, trusted/protected publication,
+immutable attestation, and final release acceptance. No external publication,
+provider, Production, customer, database, or release-sign-off state changed;
+nothing was deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md`.
+
 ## 2026-10-22 · ENT-CLI-001 result-acknowledgement implementation
 
 CLI commit `e72e83f40ce0b1137795c945c35ea8c5354e2645` hardens private-runner

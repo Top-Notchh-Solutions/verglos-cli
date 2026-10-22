@@ -18,6 +18,25 @@ checked / 41 open / 280 total (85.4%)**.
 
 Evidence: `evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md`.
 
+## 2026-10-23 · DIST-001 package-audit read binding merged
+
+CLI PR #172 source commit `bab641c96df3332ae8a8fee7fb885e7bb27273c4` binds
+package manifest and private-key audit reads to bounded regular-file handles,
+with symlink rejection and identity/size rechecks. Package-surface tests
+passed **8/8**, the audit passed for **7 public packages**, release contracts
+passed **30/30**, and the full CLI graph passed **23/23**. Hosted Standard
+`39852985092`, self-scan `39852984822`, and platform/in-toto
+`39852984879` passed all nine Ubuntu/macOS/Windows × Node 20/22/24 cells.
+
+PR #172 merged normally, without squash, as
+`451e1dda3d21c1d87dcfb017f3e7cab8d2ffb711`. `DIST-001` remains open for
+LOCAL/HUNT/RECORD, legal/license, trusted/protected publication, immutable
+attestation, and final acceptance. No publication, provider, Production,
+customer, database, or release-sign-off state changed; nothing was deleted.
+Score remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 strict measurement types
 
 Web PR #249 source `f01717a` makes the accessibility/performance qualifier

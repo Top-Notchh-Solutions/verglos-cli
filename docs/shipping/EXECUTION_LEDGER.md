@@ -14249,3 +14249,22 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   unchecked for ACCEPT-003/009, the acceptance bundle, and final acceptance.
   Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md`.
+
+## 2026-10-23 · DIST-001 package-audit read binding merged
+
+- **Source:** CLI PR #172, implementation commit
+  `bab641c96df3332ae8a8fee7fb885e7bb27273c4`; normal merge commit
+  `451e1dda3d21c1d87dcfb017f3e7cab8d2ffb711`.
+- **Implementation:** Package manifests and private-key audit files now use
+  bounded regular-file reads with symlink rejection and identity/size
+  rechecks. The source regression prevents path-based unbounded reads from
+  returning to the package-contents audit.
+- **Verification:** Package-surface **8/8**, seven-package contents audit,
+  release contracts **30/30**, full CLI Turbo graph **23/23**, and diff check
+  passed. Hosted Standard `39852985092`, self-scan `39852984822`, and
+  platform/in-toto `39852984879` passed, including all nine platform cells.
+- **Disposition:** Keep `DIST-001` open for LOCAL/HUNT/RECORD, legal/license,
+  trusted/protected publication, immutable attestation, and final acceptance.
+  No external state changed and nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md`.
