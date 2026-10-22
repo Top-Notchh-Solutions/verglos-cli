@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain FINAL-WEB-007 after PR #238 landing repair
+
+- **Decision:** Promote the repository-owned landing viewport repair and retain
+  `FINAL-WEB-007` unchecked because browser-produced six-path capture, human
+  screen-reader, supported-environment/field-CWV, and final acceptance remain
+  open.
+- **Implementation:** Web commit `5a22c46` evaluates desktop/mobile landing
+  measurements independently while retaining strict landing duplicate and
+  coverage checks. PR #238 merged normally as
+  `67f8f89be193dff7053d0abd946b288301bf2b87`; source branch preserved.
+- **Verification:** Landing **4/4**, typecheck, direct Web **895/919** with 24
+  skips and 0 failures; merged verifier CLI **311/313**, Web **951/981**,
+  composed **75/75**, all **12/12**, zero failures. Hosted jobs were queued or
+  in progress at final read and are not claimed as passed.
+- **Boundary:** `env -u TEST_DATABASE_URL`; no database/provider/customer/
+  legal/publication/deployment/independent-review action occurred. No file,
+  branch, record, deployment, provider, customer, database, or release
+  artifact was deleted or changed.
+- **Disposition:** Keep the score at **239/41/280 (85.4%)** and preserve the
+  additive evidence bundle.
+- **Evidence:** `evidence/final-web-007-landing-viewport-boundary-pr238-2026-10-22.md`.
+
 ## 2026-10-22 · retain ENT-CLI-001 after PRs #166/#237 lifetime repair
 
 - **Decision:** Promote the repository-owned private-runner lifetime repair and

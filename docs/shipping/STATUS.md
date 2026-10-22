@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · FINAL-WEB-007 landing viewport boundary and PR #238
+
+Web commit `5a22c46` fixes the landing release qualifier exposed by hosted PR
+#237: desktop and mobile measurements for one path are now evaluated
+independently, while landing-specific duplicate path/viewport and coverage
+checks remain fail-closed. PR #238 merged normally as
+`67f8f89be193dff7053d0abd946b288301bf2b87`; the source branch remains
+preserved. Landing qualification passed **4/4**, typecheck passed, direct Web
+tests passed **895/919** with 24 skips and 0 failures. The merged-head
+verifier passed CLI **311/313** with 2 skips, Web **951/981** with 30 skips,
+composed substrates **75/75**, and all **12/12** stories with zero failures.
+PR #238 hosted jobs were queued/in progress at final status read and are not
+claimed as passed. Keep `FINAL-WEB-007` open for browser-produced six-path
+capture, human screen-reader, supported-environment/field-CWV, and final
+acceptance evidence. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. No database URL or external operation was used; no file, branch,
+record, deployment, provider, customer, database, or release artifact was
+deleted or changed. Evidence:
+`evidence/final-web-007-landing-viewport-boundary-pr238-2026-10-22.md`.
+
 ## 2026-10-22 · ENT-CLI-001 private-runner lifetime boundary and PRs #166/#237
 
 CLI commit `1965e3eb` and Web commit `bafac8a` enforce the hosted 30-minute

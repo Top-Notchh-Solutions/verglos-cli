@@ -14,6 +14,26 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · FINAL-WEB-007
+
+The hosted landing qualification defect was repaired in Web commit `5a22c46`:
+desktop and mobile measurements for one landing path are now evaluated
+independently while landing-specific duplicate path/viewport and coverage
+checks remain strict. PR #238 merged normally as
+`67f8f89be193dff7053d0abd946b288301bf2b87`; the source branch remains
+preserved. Landing qualification passed **4/4**, typecheck passed, direct Web
+tests passed **895/919** with 24 skips and 0 failures, and the clean
+merged-head verifier passed CLI **311/313** with 2 skips, Web **951/981** with
+30 skips, composed substrates **75/75**, and all **12/12** stories with zero
+failures. PR #238 hosted jobs were queued/in progress at final status read and
+are not claimed as passed. `TEST_DATABASE_URL` was removed; no database,
+provider, publication, deployment, browser-human, field-CWV, customer, legal,
+independent-review, or final-release operation occurred, and nothing was
+deleted. Keep `FINAL-WEB-007` unchecked for browser capture, human/field
+evidence, and final acceptance. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-007-landing-viewport-boundary-pr238-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · ENT-CLI-001
 
 The private-runner lifetime boundary was implemented in CLI commit

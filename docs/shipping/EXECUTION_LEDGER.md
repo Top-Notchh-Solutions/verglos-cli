@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · FINAL-WEB-007 landing viewport boundary and PR #238
+
+- **Defect:** The hosted landing contract failed because the generic
+  path-uniqueness guard treated valid desktop/mobile measurements for the same
+  landing path as duplicates.
+- **Implementation:** Web commit `5a22c46` qualifies landing measurements one
+  at a time and retains landing-specific duplicate path/viewport and coverage
+  checks. PR [#238](https://github.com/anuragyadav-git/verglos-web/pull/238)
+  merged normally as `67f8f89be193dff7053d0abd946b288301bf2b87`; source branch
+  preserved. No squash, rebase, or deletion occurred.
+- **Verification:** Landing contract **4/4**, typecheck, direct Web
+  **895/919** with 24 skips and 0 failures. Merged-head verifier CLI
+  **311/313** with 2 skips, Web **951/981** with 30 skips, composed **75/75**,
+  all **12/12** stories, zero failures. PR #238 hosted jobs were queued or in
+  progress at final status read.
+- **Boundary:** `env -u TEST_DATABASE_URL`; no database, provider, customer,
+  publication, deployment, browser-human, field-CWV, legal,
+  independent-review, or final-release operation occurred. No file, branch,
+  record, deployment, provider, customer, database, or release artifact was
+  deleted or changed.
+- **Disposition:** Keep `FINAL-WEB-007` unchecked for browser-produced
+  six-path capture, human screen-reader, supported-environment/field-CWV, and
+  final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-landing-viewport-boundary-pr238-2026-10-22.md`
+  and `evidence/acceptance-stories-verification-2026-10-22-pr164-pr165-pr166-pr237-pr238.json`.
+
 ## 2026-10-22 · ENT-CLI-001 private-runner lifetime boundary and PRs #166/#237
 
 - **Implementation:** CLI commit `1965e3eb` and Web commit `bafac8a` enforce a

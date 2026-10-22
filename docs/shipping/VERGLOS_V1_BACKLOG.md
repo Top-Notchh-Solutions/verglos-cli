@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · FINAL-WEB-007 landing viewport implementation
+
+Web commit `5a22c46` fixes the landing qualifier's valid desktop/mobile
+pairing boundary by evaluating each measurement independently while retaining
+strict duplicate path/viewport and coverage checks. PR #238 merged normally as
+`67f8f89be193dff7053d0abd946b288301bf2b87`; source branch remains preserved.
+Landing qualification **4/4**, typecheck, direct Web **895/919** with 24 skips
+and 0 failures; merged verifier CLI **311/313**, Web **951/981**, composed
+**75/75**, all **12/12** stories, zero failures. Hosted checks were
+queued/in progress at final status read and are not claimed as passed. This
+advances code-side implementation only; keep the `FINAL-WEB-007` checkbox
+unchanged for browser-produced six-path capture, human screen-reader,
+supported-environment/field-CWV, and final acceptance. `TEST_DATABASE_URL`
+was not used; no file, branch, record, deployment, provider, customer,
+database, or release artifact was deleted or changed. Score remains **239
+checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-007-landing-viewport-boundary-pr238-2026-10-22.md`.
+
 ## 2026-10-22 · ENT-CLI-001 private-runner lifetime implementation
 
 CLI commit `1965e3eb` and Web commit `bafac8a` enforce the hosted 30-minute

@@ -1,5 +1,24 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · FINAL-WEB-007 landing viewport gate
+
+Web commit `5a22c46` repairs the landing qualifier's valid desktop/mobile
+pairing boundary and keeps duplicate path/viewport and coverage checks
+fail-closed. PR #238 merged normally as
+`67f8f89be193dff7053d0abd946b288301bf2b87`; source branch preserved. Landing
+qualification **4/4**, typecheck, direct Web **895/919** with 24 skips and 0
+failures, and merged-head substrates CLI **311/313**, Web **951/981**,
+composed **75/75**, all **12/12** stories passed. Hosted PR #238 jobs were
+queued/in progress at final status read and are not claimed as passed.
+
+No database URL or external operation was used. No browser-produced capture,
+human screen-reader, supported-environment/field-CWV, customer, provider,
+legal, independent-review, or final release approval was claimed. No file,
+branch, record, deployment, provider, customer, database, or release artifact
+was deleted or changed. Keep `FINAL-WEB-007` unchecked and keep the score at
+**239/41/280 (85.4%)**. Evidence:
+`evidence/final-web-007-landing-viewport-boundary-pr238-2026-10-22.md`.
+
 ## 2026-10-22 · ENT-CLI-001 private-runner lifetime gate
 
 CLI commit `1965e3eb` and Web commit `bafac8a` enforce the 30-minute maximum

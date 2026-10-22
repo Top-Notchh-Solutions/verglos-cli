@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007 landing viewport boundary · 2026-10-22
+
+- **Source mapping:** Web commit `5a22c46`; PR #238 merged normally as
+  `67f8f89be193dff7053d0abd946b288301bf2b87`; source branch preserved.
+- **Implementation mapping:** Landing desktop/mobile measurements are
+  qualified independently; landing-specific path/viewport duplicate and
+  required coverage checks remain strict.
+- **Qualification mapping:** Landing **4/4**, typecheck, direct Web
+  **895/919** with 24 skips and 0 failures; merged verifier CLI **311/313**,
+  Web **951/981**, composed **75/75**, all **12/12** stories, zero failures.
+  PR #238 hosted jobs were queued/in progress at final read.
+- **Safety mapping:** `env -u TEST_DATABASE_URL`; no database, provider,
+  customer, publication, deployment, browser-human, field-CWV, legal,
+  independent-review, or final-release operation occurred. No file, branch,
+  record, deployment, provider, customer, database, or release artifact was
+  deleted or changed.
+- **Acceptance mapping:** Keep `FINAL-WEB-007` open for browser-produced
+  six-path capture, human screen-reader, supported-environment/field-CWV, and
+  final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-landing-viewport-boundary-pr238-2026-10-22.md`;
+  merged-head output is
+  `evidence/acceptance-stories-verification-2026-10-22-pr164-pr165-pr166-pr237-pr238.json`.
+
 ## ENT-CLI-001 private-runner lifetime boundary · 2026-10-22
 
 - **Source mapping:** CLI commit `1965e3eb`; PR #166 merged normally as
