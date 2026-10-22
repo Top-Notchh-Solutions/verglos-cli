@@ -45,6 +45,8 @@ test("publish workflow verifies the same public artifact boundaries as release c
   assert.match(workflow, /environment:\s*\n\s+name: release/u, "publication must be protected by the release environment");
   assert.match(workflow, /concurrency:\s*\n\s+group: verglos-release-publication/u, "publication must serialize registry mutations");
   assert.match(workflow, /verify-release-tag\.mjs "[$]GITHUB_REF_NAME"/u);
+  assert.match(workflow, /TAG_COMMIT="\$\(git rev-list -n 1 "\$GITHUB_REF"\)"/u, "publication must resolve the exact tag commit");
+  assert.match(workflow, /verify-release-tag\.mjs "[$]GITHUB_REF_NAME" "[$]GITHUB_SHA" "[$]TAG_COMMIT"/u, "publication must bind the event SHA to the resolved tag SHA");
   assert.ok(workflow.indexOf("verify-release-tag.mjs") < workflow.indexOf("publish-public-package.mjs"), "tag/version integrity must pass before publication");
   assert.doesNotMatch(workflow, /workflow_dispatch/u, "publication must not expose a manual bypass path");
   assert.doesNotMatch(workflow, /promote_latest|dist-tag\s+add|NPM_TOKEN|NODE_AUTH_TOKEN/u, "publication must not depend on a long-lived npm token or mutable dist-tag promotion");
