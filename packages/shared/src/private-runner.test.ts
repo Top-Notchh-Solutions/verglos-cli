@@ -36,6 +36,17 @@ test("private runner refuses tenant, replay, expiry, target, and network widenin
   assert.equal(reason(admitPrivateRunnerJob({ job: { ...job, network: { mode: "denied", destinations: ["https://example.test"] } }, tenantId: "org_acme", runnerId: "runner_1", now: "2026-10-06T00:01:00.000Z", allowedTargets: new Set(["subject_app"]) })), "network_not_bounded");
 });
 
+test("private runner refuses a signed job whose lifetime exceeds the hosted ceiling", () => {
+  const result = admitPrivateRunnerJob({
+    job: { ...job, expiresAt: "2026-10-06T00:31:00.000Z" },
+    tenantId: "org_acme",
+    runnerId: "runner_1",
+    now: "2026-10-06T00:01:00.000Z",
+    allowedTargets: new Set(["subject_app"]),
+  });
+  assert.deepEqual(result, { admitted: false, reason: "invalid_job" });
+});
+
 test("private runner result is least-evidence and deterministically digestible", () => {
   const result = projectPrivateRunnerResult({ jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed", startedAt: "2026-10-06T00:01:00.000Z", finishedAt: "2026-10-06T00:01:01.000Z", evidenceDigest: `sha256:${"b".repeat(64)}`, findingCount: 2, coverage: "complete" });
   assert.equal(Object.prototype.hasOwnProperty.call(result, "rawOutput"), false);
