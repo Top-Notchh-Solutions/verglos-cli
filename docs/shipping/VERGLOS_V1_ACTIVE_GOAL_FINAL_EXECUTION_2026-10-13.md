@@ -18,10 +18,11 @@ field-performance, or independent-review evidence.
 
 The current merged CLI/Web heads requalified the repository-owned Studio
 projection/custody path. CLI projection admission passed **5/5**, CLI upload
-passed **6/6**, and Web projection, route-contract, tenant-leakage, and Studio
-E2E scenarios passed with zero failures. The PostgreSQL route integration was
-explicitly skipped with `TEST_DATABASE_URL` removed; the remote Neon value in
-`.env.test.local` was not used. No customer, recipient, provider, legal,
+passed **6/6**, Web projection, route-contract, tenant-leakage, and Studio E2E
+scenarios passed with zero failures, and the isolated PostgreSQL route
+integration passed **1/1** on local PostgreSQL 15 `verglos_test`. The remote
+Neon value in `.env.test.local` was not used; the local qualification
+container was stopped without removal. No customer, recipient, provider, legal,
 reviewer, Production, deployment, database, or release operation occurred and
 nothing was deleted. Keep `STUDIO-CLI-001` unchecked for authorized independent
 recipient/customer acceptance and hosted/audit evidence. Score remains **239

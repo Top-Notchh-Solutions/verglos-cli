@@ -5,8 +5,8 @@
 - **Source mapping:** CLI `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web
   `67f8f89be193dff7053d0abd946b288301bf2b87`.
 - **Qualification mapping:** CLI projection admission **5/5**, CLI upload
-  **6/6**, and Web projection/route/tenant-leakage/Studio E2E scenarios green.
-  The database route integration is an explicit isolated-database skip.
+  **6/6**, Web projection/route/tenant-leakage/Studio E2E scenarios green,
+  and the isolated PostgreSQL route integration **1/1** on local `verglos_test`.
 - **Acceptance mapping:** Repository-owned implementation is requalified;
   keep the row open for independent recipient/customer acceptance and its
   hosted/audit artifact. Score remains **239/41/280 (85.4%)**.

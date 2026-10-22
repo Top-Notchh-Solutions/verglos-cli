@@ -4,10 +4,10 @@
 
 - **Decision:** Accept the current focused regression result as stronger
   repository-owned implementation evidence; do not check the row.
-- **Observed:** CLI projection admission **5/5**, CLI upload **6/6**, and Web
-  projection, route, tenant-leakage, and Studio E2E scenarios passed. The
-  PostgreSQL route integration was skipped without `TEST_DATABASE_URL` so the
-  remote Neon database was not touched.
+- **Observed:** CLI projection admission **5/5**, CLI upload **6/6**, Web
+  projection, route, tenant-leakage, and Studio E2E scenarios passed, and the
+  isolated PostgreSQL route integration passed **1/1** against local
+  PostgreSQL 15 `verglos_test`. The remote Neon database was not touched.
 - **Reason:** Independent authorized recipient/customer acceptance and the
   corresponding hosted/audit artifact remain absent. No owner-controlled
   synthetic result is promoted to acceptance.

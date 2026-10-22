@@ -22,11 +22,16 @@ an external audit artifact.
   completed successfully with no failures; the listed Studio scenarios all
   passed, including redaction, cross-tenant refusal, allowance, handoff, and
   offline-record boundaries.
-- The Web PostgreSQL route integration test was not run against the remote
-  `.env.test.local` URL. With `TEST_DATABASE_URL` removed, it remained an
-  explicit isolated-database skip.
+- The Web PostgreSQL route integration reported **1/1** against a newly
+  started local PostgreSQL 15 container with database `verglos_test`, using
+  the wildcard path `src/app/api/v1/organizations/*/projects/*/client-projections/route.integration.test.ts`.
+  The container was stopped after the run and not removed.
 
-Commands were run with `env -u TEST_DATABASE_URL`. No remote database,
+Commands were run with `env -u TEST_DATABASE_URL` except the explicitly
+selected local `TEST_DATABASE_URL` for the isolated integration test. The
+remote Neon URL from `.env.test.local` was never used. An initial
+misconfigured container was left stopped and untouched; the correctly
+configured qualification container was also stopped without removal. No remote database,
 deployment, provider, payment, customer, recipient, legal, reviewer, or
 Production operation occurred. No file, branch, record, deployment, provider,
 customer, database, or release artifact was deleted or changed.

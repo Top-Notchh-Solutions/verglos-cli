@@ -3,11 +3,12 @@
 ## 2026-10-22 · STUDIO-CLI-001 merged-head focused recheck
 
 The current merged CLI/Web heads requalified the repository-owned Studio
-projection/custody contract: CLI admission **5/5**, CLI upload **6/6**, and
-Web projection, route-contract, tenant-leakage, and Studio E2E scenarios all
-passed with zero failures. The PostgreSQL route integration was explicitly
-skipped because `TEST_DATABASE_URL` was removed; the remote Neon URL was not
-used. Keep the `STUDIO-CLI-001` checkbox unchanged for authorized independent
+projection/custody contract: CLI admission **5/5**, CLI upload **6/6**, Web
+projection, route-contract, tenant-leakage, and Studio E2E scenarios all
+passed with zero failures, and the isolated PostgreSQL route integration
+passed **1/1** on local PostgreSQL 15 `verglos_test`. The remote Neon URL was
+not used; the local qualification container was stopped without removal. Keep
+the `STUDIO-CLI-001` checkbox unchanged for authorized independent
 recipient/customer acceptance and hosted/audit evidence. Score remains **239
 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/studio-cli-001-merged-head-focused-recheck-2026-10-22.md`.

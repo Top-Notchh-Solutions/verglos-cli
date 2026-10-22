@@ -5,9 +5,10 @@
 The current merged CLI/Web heads passed the repository-owned Studio projection,
 route-contract, tenant-leakage, and Studio E2E checks. CLI projection admission
 reported **5/5** and CLI upload reported **6/6**; the Web listed Studio
-scenarios passed with zero failures. The PostgreSQL route integration remained
-an explicit skip because `TEST_DATABASE_URL` was removed; the remote Neon URL
-was not used. Keep `STUDIO-CLI-001` open for authorized independent
+scenarios passed with zero failures. The isolated PostgreSQL route integration
+also passed **1/1** against local `verglos_test` on PostgreSQL 15. The remote
+Neon URL was not used; the local qualification container was stopped without
+removal. Keep `STUDIO-CLI-001` open for authorized independent
 recipient/customer acceptance and hosted/audit evidence. Score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `evidence/studio-cli-001-merged-head-focused-recheck-2026-10-22.md`.

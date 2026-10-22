@@ -4,11 +4,13 @@
 
 - **Verification:** Current merged CLI/Web heads passed the Studio projection,
   route-contract, tenant-leakage, and Studio E2E contracts. CLI admission was
-  **5/5** and CLI upload was **6/6**; Web scenarios passed with zero failures.
-- **Boundary:** The PostgreSQL route integration was explicitly skipped with
-  `TEST_DATABASE_URL` removed. The remote Neon URL was not used; no provider,
-  customer, recipient, legal, reviewer, Production, deployment, or database
-  operation occurred. Nothing was deleted or changed.
+  **5/5**, CLI upload was **6/6**, Web scenarios passed with zero failures,
+  and the isolated PostgreSQL route integration passed **1/1** on local
+  PostgreSQL 15 `verglos_test`.
+- **Boundary:** The remote Neon URL was not used. The local qualification
+  container was stopped without removal; no provider, customer, recipient,
+  legal, reviewer, Production, deployment, or remote database operation
+  occurred. Nothing was deleted or changed.
 - **Disposition:** Keep `STUDIO-CLI-001` open for authorized independent
   recipient/customer acceptance and hosted/audit evidence. Score remains
   **239/41/280 (85.4%)**.
