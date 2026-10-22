@@ -181,6 +181,30 @@ The current tracker reconciliation is **244 checked / 36 open / 280 total
 (87.1%)**. The next work is the 23-target implementation queue, using the
 execution-input manifest above. Nothing was deleted.
 
+## Latest continuation result · 2026-10-23 · exact license disposition and release artifacts
+
+CLI commit `2db1139337d60543fd59ec0b7e3130983d40e0a3` implements exact
+owner-reviewed decisions for the six BlueOak package tuples and nested
+`benchmark@1.0.0|fast-uri@3.1.7` tuple. The inventory still reports every
+component and remains fail-closed for any metadata mismatch; it does not use a
+general BlueOak allowlist or suppress the nested component.
+
+Focused release/license tests passed **17/17**, strict inventory passed with
+**0** blockers, the seven-package release verifier passed **12 artifacts**
+(seven archives and five sidecars), notices matched in every archive, the
+clean consumer passed, and upgrade/rollback passed
+(`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`). Evidence:
+`docs/shipping/legal/transitive-license-owner-disposition-2026-10-23.md` and
+`docs/shipping/evidence/dist-002-license-owner-disposition-2026-10-23.md`.
+
+This completes the code-side license/release-artifact implementation slice;
+it does not claim trusted publication, provider/Production execution,
+independent review, customer acceptance, AppSec/Hunt review, or final
+go/no-go. Keep `DIST-002`, `DIST-003`, `DIST-006`, and the separately held
+review-dependent rows open until their own contracts are observed. The live
+score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted.
+
 ## Latest continuation result · 2026-10-23 · DIST-006 rollback-input hardening
 
 CLI PR #169 added real bounded rollback-input hardening: validated regular
