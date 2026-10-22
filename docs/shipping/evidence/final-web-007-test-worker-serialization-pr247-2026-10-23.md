@@ -22,6 +22,10 @@
   present exactly once.
 - `git diff --check` — passed.
 
+The local shell reports the repository's existing engine warning because it is
+running Node `v26.4.0` while the package declares Node `22.x`; the required
+hosted Node 22 execution remains unavailable under the Actions runner gate.
+
 The database was the newly created local Docker PostgreSQL 15
 `verglos_test` database. No remote database or Production state was mutated.
 

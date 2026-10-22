@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-22T19:20:27.982Z",
+  "generatedAt": "2026-10-22T19:21:10.101Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -354,8 +354,8 @@
     },
     {
       "path": "docs/shipping/evidence/final-web-007-test-worker-serialization-pr247-2026-10-23.md",
-      "sha256": "8d703729a375091473120f959d028ef238156b05495399b3d081ef39afa4219a",
-      "bytes": 1553
+      "sha256": "e7b31e02ed04efad57974739e7bc7792f959f5230e1be7c734c6b579a8505151",
+      "bytes": 1785
     },
     {
       "path": "docs/shipping/evidence/final-web-007-hosted-gate-billing-audit-pr247-2026-10-23.md",
