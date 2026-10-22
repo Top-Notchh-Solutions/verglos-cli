@@ -14368,3 +14368,22 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   final acceptance. No external state changed and nothing was deleted. Score
   remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/dist-006-rollback-evidence-read-binding-pr176-2026-10-23.md`.
+
+## 2026-10-23 · DIST-002 release-tag manifest read binding merged
+
+- **Source:** CLI PR #177, implementation commit
+  `d6bb2851d869a32246222e003d9e6d3898cedb56`; normal merge commit
+  `a21938b951497a4b47536afa84951f94306aa50d`.
+- **Implementation:** Release tag verification now reads all seven public
+  package manifests through the bounded regular-file helper before comparing
+  versions, with a source regression against pathname-bound reads.
+- **Verification:** Focused release contracts **11/11**, forced CLI Turbo
+  graph **23/23**, and diff check passed. Hosted Standard `39861975912`,
+  self-scan `39861975908`, and platform/in-toto matrix `39861975924` passed
+  all nine platform cells and in-toto binding.
+- **Boundary:** Keep DIST-002/003 open for trusted/protected publication,
+  immutable attestation, legal/license clearance, provider/Production action,
+  independent evidence where required, and final acceptance. No external
+  state changed and nothing was deleted. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/dist-002-release-tag-read-binding-pr177-2026-10-23.md`.

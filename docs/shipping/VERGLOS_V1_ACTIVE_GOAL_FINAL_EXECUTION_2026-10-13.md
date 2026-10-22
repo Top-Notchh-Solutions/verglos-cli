@@ -1787,3 +1787,25 @@ evidence, and final acceptance. No external state changed; nothing was
 deleted. The 13 AppSec-held entries remain unchanged. Score remains **239
 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-006-rollback-evidence-read-binding-pr176-2026-10-23.md`.
+
+# 2026-10-23 · DIST-002 release-tag manifest read binding merged
+
+CLI PR #177 implementation commit `d6bb2851d869a32246222e003d9e6d3898cedb56`
+binds all seven public package manifests in release tag verification to the
+bounded regular-file helper before version comparison. The source regression
+rejects a return to pathname-bound manifest reads. Focused release contracts
+passed **11/11**; the forced CLI Turbo graph passed **23/23 tasks**; and
+`git diff --check` passed.
+
+Hosted Standard validation `39861975912`, self-scan `39861975908`, and the
+platform/in-toto matrix `39861975924` passed, including Ubuntu/macOS/Windows
+Node 20/22/24 and in-toto release binding. PR #177 merged normally without
+squash as `a21938b951497a4b47536afa84951f94306aa50d`.
+
+This is implementation progress only. Keep `DIST-002`/`DIST-003` unchecked
+for trusted/protected publication, immutable attestation, legal/license
+clearance, provider/Production action, independent evidence where required,
+and final acceptance. No external state changed; nothing was deleted. The 13
+AppSec-held entries remain unchanged. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-002-release-tag-read-binding-pr177-2026-10-23.md`.
