@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · retain FINAL-WEB-007 after test worker serialization
+
+- **Decision:** Accept PR #247 follow-up `b29b710` as code-side test-harness
+  hardening; retain FINAL-WEB-007 unchecked.
+- **Observed:** The default `pnpm test` path now passes **919 tests / 2
+  documented skips / 0 failures** against isolated local PostgreSQL after
+  removing the shared-fixture concurrency race.
+- **Reason:** Human screen-reader, supported-browser/field performance,
+  acceptance dependencies, hosted completion, and final sign-off remain
+  independently required evidence.
+- **Boundary:** No remote database, hosted rerun, bypass, customer, provider,
+  legal, Production, publication, or release-sign-off action occurred.
+  Nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-test-worker-serialization-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · retain FINAL-WEB-007 after browser qualification
 
 - **Decision:** Accept PR #247 as code-side browser qualification and

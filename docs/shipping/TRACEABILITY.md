@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007 default test worker serialization follow-up · 2026-10-23
+
+- **Source mapping:** Web PR #247 follow-up commit `b29b710` on the preserved
+  branch `codex/final-web-007-release-audit-20261023`.
+- **Contract mapping:** The default test path explicitly serializes tests that
+  share disposable PostgreSQL fixtures; the serial wrapper preserves one
+  worker without duplicating a configured flag.
+- **Verification mapping:** Full default test **919/2/0**, typecheck,
+  package/test-runner contract, and diff checks passed.
+- **Acceptance mapping:** FINAL-WEB-007 remains open for human screen-reader,
+  supported-browser/field performance, acceptance dependencies, hosted
+  completion, and final release acceptance. Score remains **239/41/280
+  (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:** `evidence/final-web-007-test-worker-serialization-pr247-2026-10-23.md`.
+
 ## FINAL-WEB-007 browser capture implementation · 2026-10-23
 
 - **Source mapping:** Web PR #247, commit

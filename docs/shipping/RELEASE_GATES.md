@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · FINAL-WEB-007 default test worker serialization gate
+
+Web PR #247 follow-up commit `b29b710` serializes the normal PostgreSQL-backed
+test path and prevents the serial wrapper from duplicating its concurrency
+flag. The default suite passes **919 tests / 2 documented skips / 0 failures**
+against isolated local PostgreSQL; typecheck and runner-contract checks pass.
+Keep FINAL-WEB-007 open for human screen-reader, supported-browser/field
+performance, acceptance dependencies, hosted completion, and final sign-off.
+Score remains **239/41/280 (85.4%)**. Nothing was deleted. Evidence:
+`evidence/final-web-007-test-worker-serialization-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007 browser capture gate
 
 Web PR #247 source `9fcd1031a559a67563124fbaab3e5fa6dd0ed96d` adds the real

@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · FINAL-WEB-007 default test worker serialization follow-up
+
+- **Implementation:** Web PR #247 follow-up commit `b29b710` makes the normal
+  `pnpm test` path use one worker for shared disposable PostgreSQL fixtures;
+  the serial wrapper detects an existing concurrency flag and does not add a
+  duplicate.
+- **Verification:** Full default `pnpm test` passed **919 / 2 / 0** (tests /
+  documented skips / failures) against isolated local PostgreSQL. Typecheck,
+  package/test-runner contract, and diff checks passed.
+- **Disposition:** Keep FINAL-WEB-007 unchecked for human screen-reader,
+  supported-browser/field performance, acceptance dependencies, hosted
+  completion, and final sign-off. Score remains **239/41/280 (85.4%)**.
+- **Boundary:** This fixes a local shared-fixture race only. No remote
+  database, customer, provider, Production, or release-sign-off state
+  changed. Nothing was deleted.
+- **Evidence:** `evidence/final-web-007-test-worker-serialization-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007 browser capture implementation
 
 - **Implementation:** Web PR #247 source `9fcd1031a559a67563124fbaab3e5fa6dd0ed96d`
