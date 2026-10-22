@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · FINAL-WEB-008 emitted metadata validation
+
+Web PR #246 source commit `e4699b790137c5a6f2922a39e6fcb9bc1c910cc1` adds
+runtime evaluation of the actual Next `sitemap()` and `robots()` metadata
+functions to the public release smoke. It requires the exact eight public
+sitemap URLs, rejects unexpected/private URLs, and requires the six private
+crawler exclusions plus the canonical sitemap URL. Focused smoke passed
+**8/8**, public smoke passed **18 routes / 22 claims / 2 proof assets / 0
+issues**, typecheck passed, and the build generated **49/49** routes. The
+private bundle now contains **76** hashed files with a passed secret scan.
+Hosted Web jobs failed before runner allocation under the account
+payments/spending-limit condition; GitGuardian and Vercel passed. PR #246
+remains open, FINAL-WEB-008 remains unchecked for acceptance dependencies and
+final sign-off, and the score remains **239 checked / 41 open / 280 total
+(85.4%)**. Nothing was deleted. Evidence:
+`evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
+
 ## 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 exact merged-main requalification
 
 Exact merged CLI `c1f5e9b72d54467fc606da00735b704ada74f24c` passed typecheck

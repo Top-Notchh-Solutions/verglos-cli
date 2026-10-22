@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · FINAL-WEB-008 emitted metadata validation gate
+
+Web PR #246 commit `e4699b790137c5a6f2922a39e6fcb9bc1c910cc1` makes the
+public release smoke execute the actual sitemap/robots metadata functions.
+It requires eight exact public sitemap URLs, rejects private/unexpected URLs,
+and requires six private-route exclusions plus the canonical sitemap URL.
+Focused smoke **8/8**, public smoke **18 routes / 22 claims / 2 assets / 0
+issues**, typecheck, and build **49/49** passed. Required hosted jobs failed
+before runner allocation under the account payments/spending-limit condition;
+GitGuardian and Vercel passed. Keep FINAL-WEB-008 open for hosted acceptance,
+truth freeze, and final sign-off. Score remains **239/41/280 (85.4%)**.
+Nothing was deleted. Evidence:
+`evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
+
 ## 2026-10-22 · FINAL-WEB-008 route-coverage enforcement gate
 
 Web PR #243 merged normally as `619c31b9719c5284f6e90a9a1133c8515e015ed9`.

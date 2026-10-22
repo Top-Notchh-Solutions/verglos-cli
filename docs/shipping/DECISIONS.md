@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · retain FINAL-WEB-008 after emitted metadata validation
+
+- **Decision:** Accept PR #246 as additional code-side release-smoke
+  implementation; retain FINAL-WEB-008 unchecked.
+- **Observed:** The smoke now evaluates the emitted Next sitemap and robots
+  metadata rather than relying only on source tokens. Local focused smoke,
+  public smoke, typecheck, and the 49-route production build pass.
+- **Reason:** Required Web hosted jobs failed before runner allocation under
+  the GitHub account payments/spending-limit condition. ACCEPT-003/009/010,
+  founder truth-freeze, and final acceptance remain absent.
+- **Boundary:** No hosted rerun, bypass, provider, customer, legal,
+  Production, database, publication, or release-sign-off action occurred.
+  Nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
+
 ## 2026-10-22 · retain FINAL-WEB-008 after route-coverage enforcement
 
 - **Decision:** Accept PR #243 as code-side release-smoke hardening without

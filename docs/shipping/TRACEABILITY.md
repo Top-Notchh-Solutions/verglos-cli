@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-008 emitted metadata validation · 2026-10-23
+
+- **Source mapping:** Web PR #246, commit
+  `e4699b790137c5a6f2922a39e6fcb9bc1c910cc1` on the preserved branch
+  `codex/final-public-surface-smoke-20261023`.
+- **Contract mapping:** The public release smoke executes the actual Next
+  sitemap/robots metadata functions, requires the exact eight public URLs,
+  rejects unexpected/private URLs, and requires the six private crawler
+  exclusions plus the canonical sitemap URL.
+- **Verification mapping:** Focused smoke **8/8**, public smoke **18 routes /
+  22 claims / 2 assets / 0 issues**, typecheck passed, and build **49/49**.
+- **Hosted boundary:** Required Web jobs failed before runner allocation under
+  the account payments/spending-limit condition; GitGuardian and Vercel passed.
+- **Acceptance mapping:** Keep FINAL-WEB-008 unchecked for ACCEPT-003/009/010,
+  founder truth-freeze, required hosted checks, and final release acceptance.
+  Score remains **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:** `evidence/final-web-008-emitted-metadata-pr246-2026-10-23.md`.
+
 ## FINAL-WEB-008 complete route-inventory enforcement · 2026-10-22
 
 - **Source mapping:** Web PR #243 source `c8e68e5` merged normally as
