@@ -14,6 +14,18 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-23 · FINAL-WEB-007 current-head hosted audit
+
+PR #247 current head `b29b7108177a482dea27c41de833fcce7a0ea38a` has completed
+Vercel deployment, Vercel Preview Comments, and GitGuardian checks. Required
+runs `39838896933` and `39838896940` fail before repository steps; every job
+reports `runner_id: 0` and an empty runner name. This is the account Actions
+payments/spending-limit condition. No rerun, bypass, or merge-around was
+attempted. Local source qualification remains green, but FINAL-WEB-007 stays
+unchecked for hosted completion and its other acceptance evidence. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted.
+Evidence: `docs/shipping/evidence/final-web-007-hosted-gate-billing-audit-pr247-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · FINAL-WEB-007 test-worker serialization follow-up
 
 Web PR #247 follow-up commit `b29b710` makes the normal `pnpm test` command

@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007 current-head hosted gate audit · 2026-10-23
+
+- **External mapping:** Web PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a`;
+  required runs `39838896933` and `39838896940`.
+- **API mapping:** All required jobs failed before repository steps with
+  `runner_id: 0` and empty runner names. Vercel, Preview Comments, and
+  GitGuardian passed.
+- **Acceptance mapping:** Keep FINAL-WEB-007 open for hosted completion,
+  human screen-reader, supported-browser/field performance, acceptance
+  dependencies, and final release acceptance. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/final-web-007-hosted-gate-billing-audit-pr247-2026-10-23.md`.
+
 ## FINAL-WEB-007 default test worker serialization follow-up · 2026-10-23
 
 - **Source mapping:** Web PR #247 follow-up commit `b29b710` on the preserved

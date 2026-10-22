@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · FINAL-WEB-007 current-head hosted gate audit
+
+- **External state:** PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a`
+  has completed Vercel, Vercel Preview Comments, and GitGuardian checks.
+- **Hosted boundary:** Required runs `39838896933` and `39838896940` fail
+  before repository steps; all jobs report `runner_id: 0` and an empty runner
+  name. This is the account Actions payments/spending-limit condition.
+- **Disposition:** Do not rerun, bypass, or merge around the required jobs.
+  Keep FINAL-WEB-007 unchecked; score remains **239/41/280 (85.4%)**.
+- **Boundary:** No billing, provider, Production, customer, or release-signoff
+  state changed. Nothing was deleted.
+- **Evidence:** `evidence/final-web-007-hosted-gate-billing-audit-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007 default test worker serialization follow-up
 
 - **Implementation:** Web PR #247 follow-up commit `b29b710` makes the normal

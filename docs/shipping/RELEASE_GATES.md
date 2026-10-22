@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · FINAL-WEB-007 current-head hosted gate
+
+Web PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a` has completed
+Vercel, Preview Comments, and GitGuardian checks. Required runs
+`39838896933` and `39838896940` fail before repository steps with
+`runner_id: 0` and empty runner names under the account payments/spending-limit
+condition. Keep FINAL-WEB-007 open; no rerun or bypass was attempted. Score
+remains **239/41/280 (85.4%)**. Nothing was deleted. Evidence:
+`evidence/final-web-007-hosted-gate-billing-audit-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007 default test worker serialization gate
 
 Web PR #247 follow-up commit `b29b710` serializes the normal PostgreSQL-backed

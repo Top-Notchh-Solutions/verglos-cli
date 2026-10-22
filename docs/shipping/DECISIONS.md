@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · retain FINAL-WEB-007 after current-head hosted audit
+
+- **Decision:** Do not rerun, bypass, or merge around PR #247’s required
+  hosted jobs; retain FINAL-WEB-007 unchecked.
+- **Observed:** At head `b29b7108177a482dea27c41de833fcce7a0ea38a`, Vercel,
+  Preview Comments, and GitGuardian pass, while required runs
+  `39838896933`/`39838896940` fail before repository steps with `runner_id: 0`.
+- **Reason:** The account payments/spending-limit condition prevents hosted
+  execution. Local green tests cannot substitute for that required gate.
+- **Boundary:** No billing change, hosted rerun, bypass, customer, provider,
+  Production, publication, or release-sign-off action occurred. Nothing was
+  deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-hosted-gate-billing-audit-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · retain FINAL-WEB-007 after test worker serialization
 
 - **Decision:** Accept PR #247 follow-up `b29b710` as code-side test-harness

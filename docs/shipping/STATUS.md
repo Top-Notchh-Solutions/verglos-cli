@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · FINAL-WEB-007 current-head hosted gate audit
+
+Web PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a` has a completed
+Vercel deployment, passing Vercel Preview Comments, and passing GitGuardian.
+Required runs `39838896933` and `39838896940` fail before repository steps;
+every job reports `runner_id: 0` and an empty runner name. This is the account
+Actions payments/spending-limit boundary. No rerun, bypass, or merge-around
+was attempted. FINAL-WEB-007 remains unchecked and score remains **239
+checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`evidence/final-web-007-hosted-gate-billing-audit-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007 default test worker serialization follow-up
 
 Web PR #247 follow-up commit `b29b710` makes the normal `pnpm test` command
