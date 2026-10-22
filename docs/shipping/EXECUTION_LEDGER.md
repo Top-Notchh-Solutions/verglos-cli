@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · DIST-001/DIST-002 exact merged-head requalification
+
+- **Verification:** CLI `db351035` passed forced build **8/8**, packed seven
+  public archives, packed-manifest audit, and clean-consumer install/import,
+  no implicit engine installation, and bounded signed A1 execution. The
+  release workflow contract set passed **19/19**; rollback rehearsal passed
+  **5** bounded operations and preserved **2** historical records.
+- **Strict gate:** `license-inventory.mjs --require-clear` exited **2** for
+  seven unresolved dependency review entries. This remains an explicit
+  license/release blocker and was not waived.
+- **Disposition:** Keep `DIST-001` and `DIST-002` unchecked for their
+  declared dependencies, protected/trusted publication, legal/license
+  clearance, immutable publication/attestation, and final acceptance. Score
+  remains **239/41/280 (85.4%)**.
+- **Boundary:** No tag, registry, provider, Production, database, customer,
+  or legal operation occurred. Nothing was deleted.
+- **Evidence:** `evidence/dist-001-current-head-requalification-pr167-2026-10-22.md`;
+  `evidence/dist-002-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · ENT-CLI-001 exact-head requalification
 
 - **Verification:** Exact merged CLI `db351035` and Web `02f5aba` passed

@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## DIST-001/DIST-002 exact merged-head requalification · 2026-10-22
+
+- **Source mapping:** Public CLI exact merged head
+  `db3510356ecd6c6e430d7dcb3b9354e514d777ee`.
+- **Qualification mapping:** Package build **8/8**, seven packed archives,
+  packed-manifest audit, clean consumer with seven imports/no implicit engine
+  install/bounded signed A1, release contracts **19/19**, and rollback
+  rehearsal **5 operations / 2 preserved historical records**.
+- **Blocker mapping:** Strict license clearance exited **2** for seven named
+  dependency review entries. Protected/trusted publication, legal clearance,
+  immutable publication/attestation, and final acceptance remain unperformed.
+- **Acceptance mapping:** No checkbox changed; score remains **239/41/280
+  (85.4%)**. Nothing was deleted.
+- **Evidence:** `evidence/dist-001-current-head-requalification-pr167-2026-10-22.md`;
+  `evidence/dist-002-current-head-requalification-pr167-2026-10-22.md`.
+
 ## ENT-CLI-001 exact-head requalification · 2026-10-22
 
 - **Source mapping:** CLI `db3510356ecd6c6e430d7dcb3b9354e514d777ee`; Web

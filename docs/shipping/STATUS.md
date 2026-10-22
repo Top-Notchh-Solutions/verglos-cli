@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-001/DIST-002 exact merged-head requalification
+
+Exact merged CLI `db351035` passed the current package front-door audit:
+forced build **8/8**, seven packed public archives, packed-manifest audit, and
+clean-consumer verification with all seven imports, no implicit engine
+installation, and bounded signed A1 execution. The exact release workflow
+contract set passed **19/19**; rollback rehearsal passed **5 operations** with
+**2 historical records preserved**. The strict license gate correctly exited
+**2** for seven unresolved dependency review entries. `DIST-001` and
+`DIST-002` remain open for their declared LOCAL/HUNT/RECORD, protected/trusted
+publication, legal/license, immutable attestation, and final acceptance gates.
+No tag, registry, provider, Production, database, customer, or legal action
+occurred. Nothing was deleted. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`evidence/dist-001-current-head-requalification-pr167-2026-10-22.md` and
+`evidence/dist-002-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · ENT-CLI-001 exact-head requalification
 
 Exact merged CLI `db351035` and Web `02f5aba` private-runner surfaces passed

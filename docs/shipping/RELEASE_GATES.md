@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · DIST-001/DIST-002 exact merged-head release gate
+
+The exact merged CLI `db351035` passes the repository-owned package gate:
+build **8/8**, seven archives, packed-manifest audit, and clean-consumer
+verification with no implicit engine install and bounded signed A1 execution.
+The release contract suite passes **19/19** and the rollback rehearsal passes
+**5/5** with **2** historical records preserved. The strict license check
+still exits **2** for seven unresolved review entries. Keep both rows open for
+the declared dependencies, protected/trusted publication, legal/license
+clearance, immutable publication/attestation, and final acceptance. No tag,
+registry, provider, Production, database, customer, or legal state changed;
+nothing was deleted. Score remains **239/41/280 (85.4%)**. Evidence:
+`evidence/dist-001-current-head-requalification-pr167-2026-10-22.md` and
+`evidence/dist-002-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · ENT-CLI-001 exact-head protocol gate
 
 Exact merged CLI `db351035` and Web `02f5aba` passed shared **460/460**, CLI

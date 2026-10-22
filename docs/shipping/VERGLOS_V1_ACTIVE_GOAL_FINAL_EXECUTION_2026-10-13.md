@@ -821,6 +821,23 @@ recheck rather than treated as a defect. No checkbox changed; score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
 
+**Current continuation result (2026-10-22):** Exact merged CLI
+`db3510356ecd6c6e430d7dcb3b9354e514d777ee` passed the current DIST-001
+package qualification: forced build **8/8**, seven packed public archives,
+packed-manifest audit, and clean-consumer verification with all imports, no
+implicit engine installation, and bounded signed A1 execution. The same head
+passed the DIST-002 release contract suite **19/19** and rollback rehearsal
+with **5** bounded operations and **2** historical records preserved. The
+strict license gate correctly exited **2** for seven unresolved dependency
+review entries. No tag, registry, provider, Production, database, customer,
+legal, or AppSec state changed; nothing was deleted. Keep `DIST-001` and
+`DIST-002` unchecked for their declared dependencies, protected/trusted
+publication, legal/license clearance, immutable publication/attestation, and
+final acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence:
+`docs/shipping/evidence/dist-001-current-head-requalification-pr167-2026-10-22.md`
+and `docs/shipping/evidence/dist-002-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2. Authority and scope
 
 Owner-provided company authorization and previously recorded evidence are

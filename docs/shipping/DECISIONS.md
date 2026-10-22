@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain DIST-001/DIST-002 after exact-head qualification
+
+- **Decision:** Accept the current CLI package/release qualification as
+  repository evidence and keep both checkboxes open.
+- **Observed:** Build **8/8**, seven packed archives, packed-manifest and
+  clean-consumer pass, release contracts **19/19**, and rollback rehearsal
+  **5/5** with **2** historical records preserved.
+- **Reason:** The strict license gate reports seven unresolved review entries;
+  protected/trusted publisher execution, legal clearance, immutable
+  publication/attestation, and final acceptance are still absent.
+- **Boundary:** No tag, registry, provider, Production, database, customer,
+  or legal operation occurred. Nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-001-current-head-requalification-pr167-2026-10-22.md`;
+  `evidence/dist-002-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · retain ENT-CLI-001 after exact-head requalification
 
 - **Decision:** Accept the current merged-head protocol qualification as
