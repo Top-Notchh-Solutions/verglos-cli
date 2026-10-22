@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFile } from "node:child_process";
@@ -54,6 +54,22 @@ test("release origin refuses an invalid source binding and mismatched package ta
   try {
     await assert.rejects(run(process.execPath, [script, root, "--source-commit", "not-a-commit", "--release-tag", "v2.0.0-alpha.1"]), /40-character hexadecimal SHA/u);
     await assert.rejects(run(process.execPath, [script, root, "--source-commit", "c".repeat(40), "--release-tag", "v2.0.0"]), /version does not match/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("release origin refuses a symlinked metadata output without changing its target", async () => {
+  const root = await fixture();
+  try {
+    const sentinel = join(root, "metadata-target.txt");
+    await writeFile(sentinel, "do not overwrite\n");
+    await symlink("metadata-target.txt", join(root, "RELEASE_METADATA.json"));
+    await assert.rejects(
+      run(process.execPath, [script, root, "--source-commit", "d".repeat(40), "--release-tag", "v2.0.0-alpha.1"]),
+      /release origin manifest output must be a regular file/u,
+    );
+    assert.equal(await readFile(sentinel, "utf8"), "do not overwrite\n");
   } finally {
     await rm(root, { recursive: true, force: true });
   }
