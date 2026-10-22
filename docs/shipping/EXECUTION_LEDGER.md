@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · FINAL-WEB-007 landing accessibility implementation and PR #234
+
+- **Implementation:** Web `e1b20ac864ff4f6e005382e8792f3abe0aadbf2a` adds a
+  homepage skip link/main target, labelled primary navigation, and global
+  focus-visible styling with a source contract.
+- **Promotion:** PR [#234](https://github.com/anuragyadav-git/verglos-web/pull/234)
+  merged normally as `b640b7fb8492bdf851dbde339be5841e7fdd7232`; source branch
+  preserved.
+- **Verification:** Focused **26/26**; serial Web **894/918** with 24 explicit
+  skips and 0 failures; typecheck; landing **4/4**; public smoke **16 routes /
+  22/22 claims / 2 proof assets / 0 issues**; hosted typecheck/schema/build
+  `39786209955`; isolated PostgreSQL/protocol run `39786210113`; all three
+  protocol platforms, GitGuardian, and Vercel Preview passed.
+- **Safety boundary:** No Production, customer, payment, provider, or remote
+  database state changed. No file, branch, record, deployment, or release
+  artifact was deleted.
+- **Bundle:** Additive `acceptance-evidence-bundle-2026-10-22-pr234-final.json`
+  contains **29** hashed files and passed its secret scan; prior bundles remain
+  preserved.
+- **Disposition:** Keep `FINAL-WEB-007` unchecked for browser-produced
+  six-path capture, human screen-reader review, supported-environment/
+  field-CWV evidence, and final acceptance. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/final-web-007-landing-accessibility-pr234-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-003 checksum-output portability and PR #160 merge
 
 - **Implementation:** CLI commits `97dead55b7fa9ce94da6e85662b719d0ad623dca`

@@ -32,6 +32,26 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current implementation batch (2026-10-22):** `FINAL-WEB-007` received a
+source-level landing accessibility implementation in Web commit `e1b20ac`:
+keyboard skip-to-content, focusable main target, labelled primary navigation,
+and consistent focus-visible styling, protected by a regression contract. The
+focused suite passed **26/26**; serial Web passed **894/918** with **24 explicit
+skips / 0 failures**; typecheck, landing **4/4**, public smoke (**16 routes /
+22/22 claims / 2 proof assets / 0 issues**), hosted typecheck/schema/build
+`39786209955`, isolated PostgreSQL/protocol run `39786210113`, all three
+protocol platforms, GitGuardian, and Vercel Preview passed. PR #234 merged
+normally as `b640b7fb8492bdf851dbde339be5841e7fdd7232`; its source branch
+remains preserved. `FINAL-WEB-007` remains unchecked for browser-produced
+six-path capture, human screen-reader, supported-environment/field-CWV, and
+final acceptance. No Production, customer, payment, provider, or remote
+database state changed; no file, branch, record, deployment, or release
+artifact was deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-007-landing-accessibility-pr234-2026-10-22.md`.
+The additive acceptance bundle contains **29** hashed files and passed its
+secret scan; prior bundles remain preserved.
+
 **Current implementation batch (2026-10-22):** `DIST-003` received two
 granular CLI portability fixes: commit `97dead55` refuses an existing symlink
 at the `SHA256SUMS` output path without touching its target, and commit

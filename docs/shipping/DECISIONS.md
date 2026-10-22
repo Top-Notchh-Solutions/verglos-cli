@@ -1,5 +1,29 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · harden FINAL-WEB-007 landing keyboard access and merge PR #234
+
+- **Decision:** Add a skip-to-content path, explicit primary-nav label, and
+  visible keyboard focus treatment to the public homepage, with a regression
+  contract in the repository.
+- **Implementation:** Web commit `e1b20ac864ff4f6e005382e8792f3abe0aadbf2a`;
+  PR #234 merged normally as `b640b7fb8492bdf851dbde339be5841e7fdd7232` and
+  preserved the source branch.
+- **Verification:** Focused **26/26**; serial Web **894/918** with 24 skips and
+  0 failures; typecheck; landing **4/4**; public smoke **16 routes / 22/22
+  claims / 2 assets / 0 issues**; hosted typecheck/schema/build `39786209955`,
+  isolated PostgreSQL/protocol `39786210113`, three protocol platforms,
+  GitGuardian, and Vercel Preview passed.
+- **Evidence bundle:** Additive `acceptance-evidence-bundle-2026-10-22-pr234-final.json`
+  contains **29** hashed files and passes its secret scan; prior bundles remain
+  preserved.
+- **Disposition:** This closes the source implementation slice only. Keep
+  `FINAL-WEB-007` unchecked for browser-produced capture, human screen-reader,
+  supported-environment/field-CWV, and final acceptance. No Production,
+  customer, payment, provider, or remote database state changed; no file,
+  branch, record, deployment, or release artifact was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-landing-accessibility-pr234-2026-10-22.md`.
+
 ## 2026-10-22 · harden DIST-003 checksum output and merge PR #160
 
 - **Decision:** Treat an existing `SHA256SUMS` symlink as an unsafe output
