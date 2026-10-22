@@ -4,7 +4,7 @@
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web evidence while preserving historical entries. The
-current-head run hashed **107** bounded evidence files, including **32** dated
+current-head run hashed **108** bounded evidence files, including **33** dated
 2026-10-23, and passed its secret-like material scan. Evidence:
 `evidence/accept-003-current-head-bundle-2026-10-23.md`.
 
@@ -12,6 +12,20 @@ This does not close reviewer, hosted/provider, customer,
 authenticated-browser/field, account-deletion, AppSec/Hunt, or final-release
 gates. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
 Nothing was deleted.
+
+## 2026-10-23 · ACCEPT-010 candidate-freeze contract implemented
+
+The private toolchain now exposes `acceptance:release:freeze` through
+`scripts/freeze-release-candidate.mjs`. It binds exact CLI/Web commits and
+version to a digest-only artifact manifest, lists missing artifacts/open gates,
+and rejects a recorded `go` while the candidate is incomplete. Focused and
+adjacent acceptance tests passed **15/15**. Evidence:
+`evidence/accept-010-candidate-freeze-2026-10-23.md`.
+
+This is implementation progress only; trusted publication/provenance,
+provider, customer, independent-review, AppSec/Hunt, and final-release gates
+remain open. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted.
 
 ## 2026-10-23 · ACCEPT-009 release-gate reconciler implemented
 

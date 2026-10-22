@@ -5,8 +5,8 @@
 - **Implementation:** `scripts/build-acceptance-evidence-bundle.mjs` now
   includes the current merged CLI/Web evidence in addition to the preserved
   historical entries.
-- **Verification:** The current-head run hashed **106** bounded evidence files,
-  including **32** current 2026-10-23 entries; the secret-like material scan
+- **Verification:** The current-head run hashed **108** bounded evidence files,
+  including **33** current 2026-10-23 entries; the secret-like material scan
   passed. The verification output was written to `/tmp`, leaving tracked
   historical bundles unchanged.
 - **Evidence:** `evidence/accept-003-current-head-bundle-2026-10-23.md`.
@@ -14,6 +14,24 @@
   external/hosted/provider/customer evidence. Authenticated browser/field,
   AppSec/Hunt, account-deletion, and final-release states are unchanged.
   Score remains **244/36/280 (87.1%)**. Nothing was deleted.
+
+## 2026-10-23 · ACCEPT-010 candidate-freeze contract implemented
+
+- **Implementation:** Added `scripts/freeze-release-candidate.mjs` and the
+  `acceptance:release:freeze` package command. It binds exact CLI/Web commits,
+  version, and a digest-only artifact manifest, with explicit critical-gate
+  states and missing-artifact reporting.
+- **Fail-closed behavior:** A recorded `go` is rejected while required
+  artifacts or critical gates remain open; a clear input is only reported as
+  `ready-for-signoff`.
+- **Verification:** Focused freeze/reconciliation plus comprehension and
+  commercial tests passed **15/15**; study-protocol validation, syntax
+  validation, and diff check passed. Evidence:
+  `evidence/accept-010-candidate-freeze-2026-10-23.md`.
+- **Disposition:** This is implementation only. `ACCEPT-010` remains open for
+  actual critical acceptance evidence, trusted publication/provenance,
+  independent review, and final release decision. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted.
 
 ## 2026-10-23 · ACCEPT-009 release-gate reconciler implemented
 
