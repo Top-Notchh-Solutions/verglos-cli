@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · merged Web non-AppSec implementation slice
+
+Web PR #248 merged normally as `db22cee939080f91d5715d00a3446c69480a1960`,
+PR #249 as `7a37853ce0b3f763f84b4ec20931dc7b5b5c465a`, and PR #250 as
+`43001015571484659810e6d952cd125c43bf8286`. The current Web `origin/main`
+is at `43001015571484659810e6d952cd125c43bf8286`.
+
+These merges integrate the deletion-input boundary, strict measurement types,
+catalog allowance terms, machine-readable public truth, proof-origin
+restrictions, and page-extension inventory implementation. Hosted runner,
+browser/field, independent acceptance, and final-release evidence remain
+open; AppSec/Hunt state is unchanged. No checkbox changed. The live score
+remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · exact transitive-license disposition and release artifacts
 
 CLI candidate commit `d2211a674e7d097d9ff6bca335edf7078411bb14` now records exact

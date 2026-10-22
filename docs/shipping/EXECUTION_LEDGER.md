@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · merged Web non-AppSec implementation slice
+
+- **Implementation:** Web PR #248 (deletion-input fail-closed boundary) merged
+  normally as `db22cee939080f91d5715d00a3446c69480a1960`; PR #249 (strict
+  boolean accessibility/performance measurement types) merged normally as
+  `7a37853ce0b3f763f84b4ec20931dc7b5b5c465a`; and PR #250 (catalog allowance
+  terms, machine-readable plan truth, proof-origin restrictions, and page
+  extension inventory) merged normally as
+  `43001015571484659810e6d952cd125c43bf8286`.
+- **Integration:** `verglos-web` `origin/main` is now at
+  `43001015571484659810e6d952cd125c43bf8286`; all three merges preserved
+  their individual commits and used no squash or branch deletion.
+- **Disposition:** This advances the code-side implementation for
+  `QUAL-WEB-005`, `QUAL-WEB-006`, `FINAL-WEB-003`, `FINAL-WEB-005`,
+  `FINAL-WEB-006`, `FINAL-WEB-007`, and `FINAL-WEB-008`. Hosted runner,
+  browser/field, independent, acceptance, and final-release requirements
+  remain separate and are not claimed here. AppSec/Hunt state is unchanged.
+  Score remains **244/36/280 (87.1%)**. Nothing was deleted.
+- **Evidence:** existing row packets in `evidence/` plus the merged PR
+  records at `github.com/anuragyadav-git/verglos-web/pull/248`, `/249`, and
+  `/250`.
+
 ## 2026-10-23 · exact transitive-license disposition and merged release artifact execution
 
 - **Implementation:** CLI candidate commits `d10c96fbbdc5ec905d701db86161461d225b5249`

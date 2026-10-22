@@ -181,6 +181,24 @@ The current tracker reconciliation is **244 checked / 36 open / 280 total
 (87.1%)**. The next work is the 23-target implementation queue, using the
 execution-input manifest above. Nothing was deleted.
 
+## Latest continuation result · 2026-10-23 · merged Web non-AppSec implementation slice
+
+Web PR #248 (deletion-input fail-closed boundary) merged normally as
+`db22cee939080f91d5715d00a3446c69480a1960`; PR #249 (strict boolean
+accessibility/performance measurement types) merged normally as
+`7a37853ce0b3f763f84b4ec20931dc7b5b5c465a`; and PR #250 (catalog allowance
+terms, machine-readable public truth, proof-origin restrictions, and page
+extension inventory) merged normally as
+`43001015571484659810e6d952cd125c43bf8286`. Web `origin/main` is now at the
+last merge commit. No squash or branch deletion was used.
+
+This integrates the code-side implementation for `QUAL-WEB-005`,
+`QUAL-WEB-006`, `FINAL-WEB-003`, `FINAL-WEB-005`, `FINAL-WEB-006`,
+`FINAL-WEB-007`, and `FINAL-WEB-008`. Keep those rows open for their declared
+hosted/browser/field, independent, acceptance, dependency, and final-release
+contracts. AppSec/Hunt state is unchanged. The score remains **244 checked /
+36 open / 280 total (87.1%)**. Nothing was deleted.
+
 ## Latest continuation result · 2026-10-23 · merged exact license disposition and release artifacts
 
 CLI candidate commits `d10c96fbbdc5ec905d701db86161461d225b5249` and
