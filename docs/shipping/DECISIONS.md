@@ -4851,3 +4851,21 @@ each observed method has lifecycle and reconciliation evidence.
   taken. No files, branches, deployments, or records were deleted. Score
   remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
+
+## 2026-10-22 · retain FINAL-WEB-008 after sitemap completeness follow-up
+
+- **Decision:** Accept the complete-indexable-sitemap invariant as additional
+  code-side progress on PR #245; retain the row open and do not merge until
+  required hosted checks can execute.
+- **Observed:** Latest head `d9519e3` passes the 9/9 focused smoke, public
+  smoke, typecheck, and diff check. The smoke now catches both private-route
+  additions and intended-public-route removals.
+- **Reason:** Fresh Verify runs `39828119421` and `39828119618` were again
+  rejected before runner allocation by the GitHub account payments/spending-
+  limit condition. Passing Vercel, Preview Comments, and GitGuardian cannot
+  replace those required checks.
+- **Boundary:** No billing repair, provider, customer, legal, Production,
+  database, publication, independent-review, or release-sign-off action was
+  taken. No files, branches, deployments, or records were deleted. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.

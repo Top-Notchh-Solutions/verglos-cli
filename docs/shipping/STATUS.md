@@ -11021,3 +11021,22 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 (85.4%)**.
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
+
+## 2026-10-22 · FINAL-WEB-008 sitemap completeness follow-up
+
+Web PR #245 now points to latest source commit
+`d9519e32bfbadb98ca4c06158de83f0b7bdf2450`, preserving the prior guard
+commit `caecce539d3e18704af86f73b40730a1ad1076fb`. The public release smoke
+requires all eight intended indexable sitemap entries and retains the
+private-route denial list; the negative regression set is now **9/9**.
+
+Local public smoke remains **18 routes / 22 claims / 2 proof assets / 0
+issues**, with typecheck and diff check passing. Fresh hosted Verify matrix
+`39828119421` and type/schema run `39828119618` again failed before any
+repository step with `runner_id: 0` because GitHub reported failed account
+payments or a spending-limit requirement. Vercel, Preview Comments, and
+GitGuardian passed. PR #245 remains open and unmerged; no workflow rerun or
+bypass was attempted. `FINAL-WEB-008` remains unchecked, nothing was deleted,
+and score remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.

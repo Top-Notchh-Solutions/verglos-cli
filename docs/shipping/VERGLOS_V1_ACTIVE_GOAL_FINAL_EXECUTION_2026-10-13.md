@@ -1200,3 +1200,19 @@ do not bypass the required hosted checks. `FINAL-WEB-008` remains unchecked,
 the backlog remains **239 checked / 41 open / 280 total (85.4%)**, and nothing
 was deleted. Evidence:
 `docs/shipping/evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
+
+# 2026-10-22 · FINAL-WEB-008 sitemap completeness follow-up
+
+Web PR #245 latest commit `d9519e32bfbadb98ca4c06158de83f0b7bdf2450`
+extends the public release smoke to require all eight intended indexable
+sitemap entries while retaining private-route rejection. The focused suite
+passes **9/9**; public smoke passes **18 routes / 22 claims / 2 proof assets /
+0 issues**, with typecheck and diff check passing.
+
+Fresh hosted runs `39828119421` and `39828119618` failed before runner
+allocation with GitHub's failed-payments/spending-limit annotation. This is
+still an account billing gate, not an AppSec or local-code failure. PR #245
+remains open and unmerged; `FINAL-WEB-008` remains unchecked, the score is
+**239 checked / 41 open / 280 total (85.4%)**, and nothing was deleted.
+Evidence:
+`docs/shipping/evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.

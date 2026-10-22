@@ -10,18 +10,21 @@ action, field performance, independent review, or final sign-off.
 ## Source and implementation
 
 - Web branch: `codex/public-sitemap-private-route-guard-20261022`.
-- Source commit: `caecce539d3e18704af86f73b40730a1ad1076fb`.
+- Source commits: `caecce539d3e18704af86f73b40730a1ad1076fb` and latest
+  `d9519e32bfbadb98ca4c06158de83f0b7bdf2450`.
 - Pull request: Web PR #245,
   `https://github.com/anuragyadav-git/verglos-web/pull/245`.
 - `scripts/public-release-smoke.ts` now rejects private-route tokens in
   `src/app/sitemap.ts` for `/account`, `/checkout`, `/login`, `/activate`,
-  `/cli-auth`, `/handoff`, and `/reports`.
+  `/cli-auth`, `/handoff`, and `/reports`, and requires all eight intended
+  indexable sitemap entries.
 - `scripts/public-release-smoke.test.ts` proves that adding `/reports` to a
-  temporary sitemap source copy fails the audit.
+  temporary sitemap source copy fails the audit and that removing
+  `/docs/hunt` fails the audit.
 
 ## Local verification
 
-- `node --import tsx --test scripts/public-release-smoke.test.ts`: **8/8**.
+- `node --import tsx --test scripts/public-release-smoke.test.ts`: **9/9**.
 - `pnpm public:release-smoke`: **18 routes / 22 claims / 2 proof assets /
   0 issues**.
 - `pnpm typecheck`: passed.
@@ -29,13 +32,14 @@ action, field performance, independent review, or final sign-off.
 
 ## Hosted boundary
 
-PR #245 was not merged. Hosted Verify matrix run `39827008774` and
-type/schema run `39827008777` did not execute repository steps: GitHub
+PR #245 was not merged. Hosted Verify matrix run `39828119421` and
+type/schema run `39828119618` did not execute repository steps: GitHub
 annotations report that the jobs were not started because recent account
-payments failed or the spending limit must be increased. The jobs had
-`runner_id: 0`, empty runner names, and zero steps. Vercel deployment
-`CmmH1SuX9v6HjwbfRugnyjmQ9WXQ`, Vercel Preview Comments, and GitGuardian
-completed successfully.
+payments failed or the spending limit must be increased. Every job had
+`runner_id: 0`, an empty runner name, and zero steps. The earlier runs
+`39827008774` and `39827008777` were blocked by the same condition. Vercel
+deployment `CmmH1SuX9v6HjwbfRugnyjmQ9WXQ`, Vercel Preview Comments, and
+GitGuardian completed successfully.
 
 The failed hosted jobs are an account-billing gate, not a code/test failure.
 Do not merge or bypass the hosted checks. After the owner repairs GitHub

@@ -8762,3 +8762,22 @@ changed. See
   unchecked for hosted qualification, truth freeze, acceptance, and release
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
+
+## FINAL-WEB-008 sitemap completeness follow-up · 2026-10-22
+
+- **Source mapping:** PR #245 latest `d9519e32bfbadb98ca4c06158de83f0b7bdf2450`,
+  preceded by `caecce539d3e18704af86f73b40730a1ad1076fb`.
+- **Contract mapping:** The public smoke requires the eight intended
+  indexable sitemap entries, rejects private `/account`, `/checkout`,
+  `/login`, `/activate`, `/cli-auth`, `/handoff`, and `/reports` tokens, and
+  tests both missing-public and private-route regressions.
+- **Verification mapping:** Focused smoke **9/9**, public smoke **18 routes /
+  22 claims / 2 assets / 0 issues**, typecheck, and diff check passed locally.
+- **Hosted boundary:** Fresh Verify matrix `39828119421` and type/schema
+  `39828119618` failed before steps with `runner_id: 0` under the account
+  payments/spending-limit annotation; Vercel, Preview Comments, and
+  GitGuardian passed.
+- **Acceptance mapping:** PR #245 remains open and `FINAL-WEB-008` remains
+  unchecked for hosted qualification, truth freeze, acceptance, and release
+  sign-off. Score remains **239/41/280 (85.4%)**. Nothing was deleted.
+- **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.

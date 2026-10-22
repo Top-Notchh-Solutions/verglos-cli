@@ -4766,3 +4766,20 @@ hosted checks execute. No external state changed; nothing was deleted. Score
 remains **239/41/280 (85.4%)**.
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
+
+## 2026-10-22 · FINAL-WEB-008 sitemap completeness follow-up gate
+
+Latest PR #245 head `d9519e32bfbadb98ca4c06158de83f0b7bdf2450` extends the
+fail-closed public sitemap contract: all eight intended indexable entries are
+required and private-route entries remain forbidden. Focused smoke **9/9**,
+public smoke **18 routes / 22 claims / 2 assets / 0 issues**, typecheck, and
+diff check passed locally.
+
+Fresh hosted Verify matrix `39828119421` and type/schema run `39828119618`
+were blocked before any repository step by the account payments/spending-limit
+condition (`runner_id: 0`, zero steps). Vercel, Preview Comments, and
+GitGuardian passed. Keep PR #245 open and `FINAL-WEB-008` unchecked; do not
+bypass the hosted gates. No external state changed and nothing was deleted.
+Score remains **239/41/280 (85.4%)**.
+
+Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
