@@ -99,6 +99,21 @@ changed. Hosted/browser/field acceptance, independent AppSec/Hunt review,
 customer acceptance, and final go/no-go remain separate. The live score is
 still **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-003 evidence-bundle reconciliation
+
+The private `acceptance:evidence:bundle` implementation now includes the
+current merged CLI/Web execution evidence while preserving all historical
+entries. Its current-head run hashed **106** bounded evidence files, including
+**31** current 2026-10-23 entries, and passed the secret-like material scan.
+The output was written to `/tmp` for verification; no tracked historical
+bundle was overwritten. Evidence:
+`docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.
+
+This is implementation and reproducibility progress for `ACCEPT-003`, not
+reviewer, hosted/provider, customer, authenticated-browser/field, or final
+release acceptance. No checkbox changed. The live score remains **244 checked
+/ 36 open / 280 total (87.1%)**. Nothing was deleted.
+
 ## Latest continuation result · 2026-10-23 · merged Web public metadata and landing qualification
 
 Web PR #245 merged normally as `0a70eecb6aa96344240f44ad1e216d9936b931f1`,

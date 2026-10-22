@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-003 current-head evidence bundle reconciled
+
+The private `acceptance:evidence:bundle` implementation now includes the
+current merged CLI/Web evidence while preserving historical entries. The
+current-head run hashed **106** bounded evidence files, including **31** dated
+2026-10-23, and passed its secret-like material scan. Evidence:
+`evidence/accept-003-current-head-bundle-2026-10-23.md`.
+
+This does not close reviewer, hosted/provider, customer,
+authenticated-browser/field, account-deletion, AppSec/Hunt, or final-release
+gates. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted.
+
 ## 2026-10-23 · Web landing qualification runtime boundary fixed
 
 Web PR #253 merged normally as `16ceddc9855e75e04f10ddd276fae16c7ef09e01`,

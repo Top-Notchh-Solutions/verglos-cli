@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-003 current-head evidence bundle reconciled
+
+- **Implementation:** `scripts/build-acceptance-evidence-bundle.mjs` now
+  includes the current merged CLI/Web evidence in addition to the preserved
+  historical entries.
+- **Verification:** The current-head run hashed **106** bounded evidence files,
+  including **31** current 2026-10-23 entries; the secret-like material scan
+  passed. The verification output was written to `/tmp`, leaving tracked
+  historical bundles unchanged.
+- **Evidence:** `evidence/accept-003-current-head-bundle-2026-10-23.md`.
+- **Disposition:** `ACCEPT-003` remains open for reviewer sign-off and mapped
+  external/hosted/provider/customer evidence. Authenticated browser/field,
+  AppSec/Hunt, account-deletion, and final-release states are unchanged.
+  Score remains **244/36/280 (87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · Web landing qualification runtime boundary fixed
 
 - **Implementation:** Web PR #253 merged normally as

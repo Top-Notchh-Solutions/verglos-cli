@@ -93,6 +93,31 @@ const paths = [
   "docs/shipping/evidence/qual-web-006-table-semantics-pr232-2026-10-22.md",
   "docs/shipping/evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md",
   "docs/shipping/evidence/dist-002-tag-commit-binding-pr159-2026-10-22.md",
+  // Current 2026-10-23 execution evidence. Keep the historical entries above
+  // so older acceptance runs remain reproducible, while making the default
+  // bundle useful for the current merged CLI/Web heads as well.
+  "docs/shipping/evidence/acceptance-public-oss-corpus-2026-10-23.md",
+  "docs/shipping/evidence/owner-authorization-2026-10-23.md",
+  "docs/shipping/evidence/gate-artifact-inventory-2026-10-23.md",
+  "docs/shipping/evidence/dist-001-pack-manifest-read-binding-pr174-2026-10-23.md",
+  "docs/shipping/evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md",
+  "docs/shipping/evidence/dist-001-packed-manifest-read-binding-pr173-2026-10-23.md",
+  "docs/shipping/evidence/dist-002-003-publication-archive-snapshot-pr170-2026-10-23.md",
+  "docs/shipping/evidence/dist-002-license-owner-disposition-2026-10-23.md",
+  "docs/shipping/evidence/dist-002-release-tag-read-binding-pr177-2026-10-23.md",
+  "docs/shipping/evidence/dist-003-artifact-read-binding-pr171-2026-10-23.md",
+  "docs/shipping/evidence/dist-003-checksum-read-binding-pr175-2026-10-23.md",
+  "docs/shipping/evidence/dist-006-rollback-evidence-read-binding-pr176-2026-10-23.md",
+  "docs/shipping/evidence/dist-006-rollback-input-hardening-pr169-2026-10-23.md",
+  "docs/shipping/evidence/qual-web-005-deletion-input-boundary-pr248-2026-10-23.md",
+  "docs/shipping/evidence/qual-web-006-boolean-measurement-boundary-pr249-2026-10-23.md",
+  "docs/shipping/evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md",
+  "docs/shipping/evidence/final-web-005-machine-readable-plan-terms-pr250-2026-10-23.md",
+  "docs/shipping/evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md",
+  "docs/shipping/evidence/final-web-007-008-public-metadata-landing-2026-10-23.md",
+  "docs/shipping/evidence/final-web-007-qualification-runtime-pr253-2026-10-23.md",
+  "docs/shipping/evidence/final-web-008-machine-readable-release-smoke-pr250-2026-10-23.md",
+  "docs/shipping/evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md",
 ];
 
 const forbidden = [
