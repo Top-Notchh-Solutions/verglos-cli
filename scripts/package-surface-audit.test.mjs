@@ -64,3 +64,8 @@ test("package file allowlists reject traversal, glob, control-character, and dup
   assert.ok(auditPackageSurface({ ...base, files: ["dist", "dist/../private"] }, files).some((failure) => failure.includes("bounded exact relative path")));
   assert.ok(auditPackageSurface({ ...base, files: ["dist", "dist"] }, files).some((failure) => failure.includes("declared more than once")));
 });
+
+test("package file allowlists reject a declared path absent from the packed archive", () => {
+  const failures = auditPackageSurface({ ...base, files: ["dist", "fixtures"] }, files);
+  assert.ok(failures.some((failure) => failure.includes("missing from the packed archive: fixtures")));
+});

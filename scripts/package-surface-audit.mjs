@@ -68,6 +68,9 @@ export function auditPackageSurface(manifest, fileNames) {
       const normalized = typeof value === "string" ? value.replaceAll("\\", "/") : String(value);
       if (declared.has(normalized)) failures.push(`${manifest.name}: package path is declared more than once: ${normalized}`);
       declared.add(normalized);
+      if (isSafePackageFileDeclaration(value) && !files.has(normalized) && ![...files].some((file) => file.startsWith(`${normalized}/`))) {
+        failures.push(`${manifest.name}: package files declaration is missing from the packed archive: ${normalized}`);
+      }
     }
   }
   for (const hook of INSTALL_HOOKS) {

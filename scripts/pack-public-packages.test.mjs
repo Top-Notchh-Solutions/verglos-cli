@@ -19,6 +19,11 @@ test("clean public pack contains seven archives without compiled tests or CLI pr
       assert.doesNotMatch(stdout, /(^|\/)[^/]*\.test\./u);
       assert.doesNotMatch(stdout, /(^|\/)cli-fixture\./u);
       assert.doesNotMatch(stdout, /workspace:/);
+      if (archive.startsWith("verglos-shared-")) {
+        const { stdout: manifestText } = await run("tar", ["-xOf", join(output, archive), "package/package.json"]);
+        assert.deepEqual(JSON.parse(manifestText).files, ["dist", "THIRD_PARTY_NOTICES"]);
+        assert.doesNotMatch(stdout, /(^|\/)fixtures\//u);
+      }
       const { stdout: license } = await run("tar", ["-xOf", join(output, archive), "package/LICENSE"], { encoding: "buffer" });
       assert.deepEqual(license, await readFile("LICENSE"), `${archive} must carry the repository license byte-for-byte`);
       const { stdout: notices } = await run("tar", ["-xOf", join(output, archive), "package/THIRD_PARTY_NOTICES"], { encoding: "buffer", maxBuffer: 16 * 1024 * 1024 });
