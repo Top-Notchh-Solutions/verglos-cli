@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-006 rollback-input hardening
+
+CLI PR #169 added bounded regular-file handling for rollback-plan and
+rollback-rehearsal inputs, including opened-handle identity/size rechecks and
+symlink/non-regular input rejection. Focused rollback tests passed **7/7**,
+CLI typecheck passed, the full CLI package test exited **0**, monorepo build
+passed **8/8**, and all **12/12** required hosted checks passed across
+Ubuntu/macOS/Windows Node 20/22/24, official validators, self-scan, and
+in-toto. PR #169 merged normally as
+`50073bdf557a1e649352148c55e15b48037bb7fa` from source
+`4e06080904df4f4382f3de8b5d9af19839786010`. This is implementation progress
+only: keep `DIST-006` unchecked for authenticated provider/registry,
+engine-feed, signing-identity, and Web-deployment rollback/revocation,
+operational review, acceptance, and final release mapping. No external write
+or deletion occurred. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/dist-006-rollback-input-hardening-pr169-2026-10-23.md`.
+
 ## 2026-10-22 · Web PR #240 security-header implementation
 
 Web PR #240 merged normally as `f20dc426e310557a7693d1e2e18f693663943ce5`

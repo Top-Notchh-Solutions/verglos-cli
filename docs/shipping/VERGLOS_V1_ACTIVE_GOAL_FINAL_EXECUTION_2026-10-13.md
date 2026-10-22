@@ -79,6 +79,23 @@ decision. If implementation is complete but an external artifact is still
 required, record that exact artifact and immediately continue implementing the
 next target.
 
+## Latest continuation result · 2026-10-23 · DIST-006 rollback-input hardening
+
+CLI PR #169 added real bounded rollback-input hardening: validated regular
+files are opened and rechecked through the opened handle, file identity and
+size are verified, and symlink/non-regular rollback references and rehearsal
+manifests are rejected. Focused rollback tests passed **7/7**, CLI typecheck
+passed, the full CLI package test exited **0**, monorepo build passed **8/8**,
+and all **12/12** hosted PR checks passed across Ubuntu/macOS/Windows Node
+20/22/24, official validators, self-scan, and in-toto binding. PR #169 merged
+normally as `50073bdf557a1e649352148c55e15b48037bb7fa` from source
+`4e06080904df4f4382f3de8b5d9af19839786010`; no squash, force, or deletion was
+used. Keep `DIST-006` unchecked for authenticated provider/registry,
+engine-feed, signing-identity, and Web-deployment rollback/revocation,
+operational review, acceptance, and final release mapping. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/dist-006-rollback-input-hardening-pr169-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · FINAL-WEB-007/008 public release integration
 
 Web PR #247 head `d02ac18` now preserves normal merge commits for PR #245

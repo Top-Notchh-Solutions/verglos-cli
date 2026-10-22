@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-006 rollback-input hardening
+
+- **Implementation:** CLI PR #169 hardens rollback-plan and
+  rollback-rehearsal reads with bounded regular-file opening, opened-handle
+  identity/size rechecks, and symlink/non-regular input rejection. Source
+  commit `4e06080904df4f4382f3de8b5d9af19839786010` merged normally as
+  `50073bdf557a1e649352148c55e15b48037bb7fa`.
+- **Verification:** Focused rollback tests **7/7**, CLI typecheck, full CLI
+  package tests exit **0**, monorepo build **8/8**, and required hosted checks
+  **12/12** passed across Ubuntu/macOS/Windows Node 20/22/24, official
+  validators, self-scan, and in-toto.
+- **Disposition:** Keep `DIST-006` unchecked for authenticated provider,
+  registry, engine-feed, signing-identity, and Web-deployment
+  rollback/revocation, operational review, acceptance, and final release
+  mapping. Score remains **239/41/280 (85.4%)**.
+- **Boundary:** No provider, registry, signing, deployment, Production,
+  customer, or release-sign-off state changed. No squash, force push, branch
+  deletion, or data deletion occurred.
+- **Evidence:** `evidence/dist-006-rollback-input-hardening-pr169-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007/008 public release integration qualification
 
 - **Implementation:** Web PR #247 head `d02ac18` integrates PR #245 through
