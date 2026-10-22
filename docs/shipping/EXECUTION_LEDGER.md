@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-002/003 npm publication observation
+
+- **Implementation:** Added `scripts/verify-npm-publication.mjs` and the
+  `acceptance:release:npm-observe` command. It verifies the seven-package
+  registry set, tarball integrity, SLSA subject, repository/workflow identity,
+  exact source commit, and Actions invocation without registry credentials or
+  writes.
+- **Verification:** Focused tests passed **4/4** and `git diff --check` passed.
+  The read-only observation of `2.0.0-alpha.1` against current public CLI
+  `74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5` accepted **0/7**. Six packages
+  point to historical commit `207bef93b5b67c611052243f28f3993af6b720bd` in
+  Actions run `32725815493`; `@verglos/hunt` is absent. Report SHA-256:
+  `5df12f780be5a1c2f0dafac91cae7d9bb2ff843293acc781a62816e03060dbea`.
+- **Disposition:** Keep `DIST-002`/`DIST-003` open until the complete current
+  candidate is immutably published with matching provenance and remaining
+  release/acceptance conditions. No provider, Production, customer, database,
+  or release-sign-off write occurred. Score remains **244/36/280 (87.1%)**.
+  Nothing was deleted. Evidence:
+  `evidence/dist-002-003-npm-publication-observation-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-005 authorized workflow contract implemented
 
 - **Implementation:** Added `scripts/validate-authorized-workflow.mjs` and

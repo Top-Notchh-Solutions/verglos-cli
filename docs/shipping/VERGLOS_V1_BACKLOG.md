@@ -1,5 +1,27 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-002/003 npm publication observation
+
+The private shipping toolchain now exposes `acceptance:release:npm-observe`.
+Its fail-closed verifier checks all seven package identities, npm tarball
+integrity, SLSA subject digests, the expected GitHub repository/workflow, exact
+source commit, and Actions invocation without writing to npm. Focused tests
+passed **4/4** and `git diff --check` passed.
+
+A read-only observation of version `2.0.0-alpha.1` against current public CLI
+`origin/main` commit `74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5` accepted **0/7**:
+six packages have historical provenance for commit
+`207bef93b5b67c611052243f28f3993af6b720bd` in Actions run `32725815493`, and
+`@verglos/hunt` is absent. Report SHA-256 is
+`5df12f780be5a1c2f0dafac91cae7d9bb2ff843293acc781a62816e03060dbea`.
+Evidence: `docs/shipping/evidence/dist-002-003-npm-publication-observation-2026-10-23.md`.
+
+This does not close `DIST-002` or `DIST-003`; keep both open for the complete
+current-candidate immutable publication, matching provenance, and remaining
+release/acceptance conditions. No provider, Production, customer, database, or
+release-sign-off write occurred. Nothing was deleted. The live score remains
+**244 checked / 36 open / 280 total (87.1%)**.
+
 ## 2026-10-23 · ACCEPT-005 authorized workflow contract implemented
 
 The private toolchain now exposes `acceptance:workflow:validate`. It binds

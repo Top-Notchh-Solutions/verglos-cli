@@ -82,6 +82,35 @@ or requalify completed non-AppSec targets merely because that artifact arrives.
 Only a concrete regression or shared integration dependency may justify a
 targeted follow-up change, and that change must be recorded separately.
 
+## Latest continuation result · 2026-10-23 · DIST-002/003 npm publication observation
+
+The private shipping toolchain now exposes
+`acceptance:release:npm-observe` through
+`scripts/verify-npm-publication.mjs`. It checks the complete seven-package
+registry set, npm tarball integrity, SLSA subject digest, GitHub repository and
+workflow identity, exact source commit, and the GitHub Actions invocation. It
+fails closed and records only bounded metadata/digests; it performs no registry
+write and never claims customer acceptance. Focused tests passed **4/4**;
+`git diff --check` passed.
+
+The read-only npm observation requested version `2.0.0-alpha.1` against the
+current public CLI `origin/main` commit
+`74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5`. It accepted **0/7** packages:
+six published packages carry provenance for historical commit
+`207bef93b5b67c611052243f28f3993af6b720bd` from Actions run `32725815493`,
+while `@verglos/hunt` is absent from the registry. Report SHA-256:
+`5df12f780be5a1c2f0dafac91cae7d9bb2ff843293acc781a62816e03060dbea`.
+Evidence:
+`docs/shipping/evidence/dist-002-003-npm-publication-observation-2026-10-23.md`.
+
+This is stronger provider-state evidence but not a current-candidate release.
+Keep `DIST-002` and `DIST-003` unchecked until one immutable tag publishes all
+seven packages with matching current-source provenance and its release/legal/
+acceptance conditions are observed. No provider, Production, database,
+customer, or release-sign-off write occurred. The 13 AppSec-held rows remain
+unchanged. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-011 architecture corpus
 
 The `ACCEPT-011` implementation input is now expanded from six to eight exact

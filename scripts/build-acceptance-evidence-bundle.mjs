@@ -125,6 +125,8 @@ const paths = [
   "docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md",
   "docs/shipping/evidence/accept-014-final-regression-contract-2026-10-23.md",
   "docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md",
+  "docs/shipping/evidence/dist-002-003-npm-publication-observation-2026-10-23.md",
+  "docs/shipping/evidence/dist-002-003-npm-publication-observation-2026-10-23.json",
 ];
 
 const forbidden = [

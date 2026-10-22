@@ -8,19 +8,19 @@ historical evidence entries. The source change is in
 ## Reproduction
 
 ```text
-VERGLOS_ACCEPTANCE_BUNDLE_OUTPUT=/tmp/verglos-acceptance-evidence-bundle-2026-10-23.json node scripts/build-acceptance-evidence-bundle.mjs
+VERGLOS_ACCEPTANCE_BUNDLE_OUTPUT=/tmp/verglos-acceptance-evidence-bundle-2026-10-23-dist002.json node scripts/build-acceptance-evidence-bundle.mjs
 ```
 
 The run produced schema
-`verglos.private.acceptance-evidence-bundle.v1` with **113** hashed evidence
-files, including **38** current 2026-10-23 entries. The secret-like material
+`verglos.private.acceptance-evidence-bundle.v1` with **115** hashed evidence
+files, including **40** current 2026-10-23 entries. The secret-like material
 scan passed. The bounded output was written to `/tmp` and did not overwrite a
 tracked historical bundle.
 
 Bundle SHA-256:
 
 ```text
-5ae8bad03d19da93a8ec87ba6914274e3f48d64b48bd6bb52b56e91dfe75c98c  verglos-acceptance-evidence-bundle-2026-10-23-accept005.json
+bf4a0500be2ad809f5853fd651d812d7851b7f5a3af31650035320c214e0e59a  verglos-acceptance-evidence-bundle-2026-10-23-dist002-final.json
 ```
 
 ## Explicit boundary
@@ -36,5 +36,6 @@ The generated manifest keeps these states open:
 The bundle contains hashes and bounded evidence references only. It contains
 no source, credentials, customer data, provider captures, or reviewer
 sign-off. `ACCEPT-003` therefore remains unchecked for its reviewer and
-external/hosted evidence requirements. No provider, Production, customer, or
+external/hosted evidence requirements. The npm observation remains a
+read-only historical registry check; no provider, Production, customer, or
 final-release action occurred, and nothing was deleted.

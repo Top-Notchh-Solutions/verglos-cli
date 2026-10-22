@@ -23,7 +23,8 @@
     "acceptance:study-protocols:check": "node scripts/validate-acceptance-study-protocols.mjs",
     "acceptance:release:reconcile": "node scripts/reconcile-release-gates.mjs",
     "acceptance:release:freeze": "node scripts/freeze-release-candidate.mjs",
-    "acceptance:release:regress": "node scripts/run-final-regression.mjs"
+    "acceptance:release:regress": "node scripts/run-final-regression.mjs",
+    "acceptance:release:npm-observe": "node scripts/verify-npm-publication.mjs"
   },
   "devDependencies": {
     "turbo": "^2.5.4",
