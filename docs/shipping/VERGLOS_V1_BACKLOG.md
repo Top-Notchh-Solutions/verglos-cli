@@ -8,8 +8,10 @@ strict duplicate path/viewport and coverage checks. PR #238 merged normally as
 `67f8f89be193dff7053d0abd946b288301bf2b87`; source branch remains preserved.
 Landing qualification **4/4**, typecheck, direct Web **895/919** with 24 skips
 and 0 failures; merged verifier CLI **311/313**, Web **951/981**, composed
-**75/75**, all **12/12** stories, zero failures. Hosted checks were
-queued/in progress at final status read and are not claimed as passed. This
+**75/75**, all **12/12** stories, zero failures. The merge-time read was
+queued/in progress; a subsequent 2026-10-22 poll reports all Protocol/client
+Ubuntu/macOS/Windows, typecheck-and-schema, isolated PostgreSQL, GitGuardian,
+and Vercel checks successful. This
 advances code-side implementation only; keep the `FINAL-WEB-007` checkbox
 unchanged for browser-produced six-path capture, human screen-reader,
 supported-environment/field-CWV, and final acceptance. `TEST_DATABASE_URL`
@@ -28,8 +30,10 @@ schema boundaries. PR #166 merged normally as
 CLI typecheck **14/14**, full tests **13/13**, build **8/8**, Web focused
 transport **4/4**, typecheck, direct Web **895/919** with 24 skips and 0
 failures; merged verifier CLI **311/313**, Web **951/981**, composed **75/75**,
-all **12/12** stories, zero failures. Hosted checks were queued/in progress at
-final status read and are not claimed as passed. This advances code-side
+all **12/12** stories, zero failures. The merge-time read was
+queued/in progress; a subsequent 2026-10-22 poll reports all PR #166 checks
+successful across Ubuntu/macOS/Windows × Node 20/22/24, Verglos self-scan,
+official validators, and in-toto release binding. This advances code-side
 implementation only; keep the `ENT-CLI-001` checkbox unchanged for provider
 qualification, customer/recipient acceptance, independent review, and final
 release sign-off. `TEST_DATABASE_URL` was not used; no file, branch, record,

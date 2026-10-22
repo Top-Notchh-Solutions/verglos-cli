@@ -14,8 +14,10 @@
   and 0 failures. Merged-head verification at Web merge `67f8f89b…` passed
   CLI **311/313** with 2 skips, Web **951/981** with 30 skips, composed
   substrates **75/75**, and all **12/12** stories with zero failures.
-- **Hosted status:** PR #238 checks were queued or in progress at the final
-  status read and are not claimed as passed here.
+- **Hosted status:** The merge-time read was queued/in progress. A subsequent
+  2026-10-22 post-merge poll now reports every PR #238 check successful:
+  Protocol/client Ubuntu/macOS/Windows, typecheck-and-schema, isolated
+  PostgreSQL runner lifecycle, GitGuardian, and Vercel Preview Comments.
 - **Boundary:** `env -u TEST_DATABASE_URL` was used. No database, provider,
   customer, publication, deployment, browser-human, field-CWV, legal,
   independent-review, or final-release operation occurred. No file, branch,
@@ -27,4 +29,3 @@
   acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
 - **Merged-head evidence:**
   `evidence/acceptance-stories-verification-2026-10-22-pr164-pr165-pr166-pr237-pr238.json`.
-

@@ -11,11 +11,13 @@ preserved. Landing qualification passed **4/4**, typecheck passed, direct Web
 tests passed **895/919** with 24 skips and 0 failures. The merged-head
 verifier passed CLI **311/313** with 2 skips, Web **951/981** with 30 skips,
 composed substrates **75/75**, and all **12/12** stories with zero failures.
-PR #238 hosted jobs were queued/in progress at final status read and are not
-claimed as passed. Keep `FINAL-WEB-007` open for browser-produced six-path
-capture, human screen-reader, supported-environment/field-CWV, and final
-acceptance evidence. Score remains **239 checked / 41 open / 280 total
-(85.4%)**. No database URL or external operation was used; no file, branch,
+The merge-time PR #238 read was queued/in progress; a subsequent 2026-10-22
+post-merge poll reports all Protocol/client Ubuntu/macOS/Windows,
+typecheck-and-schema, isolated PostgreSQL runner lifecycle, GitGuardian, and
+Vercel Preview Comments checks successful. Keep `FINAL-WEB-007` open for
+browser-produced six-path capture, human screen-reader,
+supported-environment/field-CWV, and final acceptance evidence. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. No database URL or external operation was used; no file, branch,
 record, deployment, provider, customer, database, or release artifact was
 deleted or changed. Evidence:
 `evidence/final-web-007-landing-viewport-boundary-pr238-2026-10-22.md`.
@@ -32,8 +34,10 @@ preserved. CLI typecheck passed **14/14**, full CLI tests **13/13**, build
 direct Web tests passed **895/919** with 24 skips and 0 failures. The merged
 head verifier passed CLI **311/313** with 2 skips, Web **951/981** with 30
 skips, composed substrates **75/75**, and all **12/12** stories with zero
-failures. Hosted jobs were queued/in progress at final status read and are not
-claimed as passed. Keep `ENT-CLI-001` open for provider qualification,
+failures. The merge-time read was queued/in progress; a subsequent 2026-10-22
+post-merge poll reports all PR #166 checks successful across
+Ubuntu/macOS/Windows × Node 20/22/24, Verglos self-scan, official validators,
+and in-toto release binding. Keep `ENT-CLI-001` open for provider qualification,
 customer/recipient acceptance, independent review, and final release
 sign-off. Score remains **239 checked / 41 open / 280 total (85.4%)**. The
 remote test URL in `.env.test.local` was not used; no file, branch, record,

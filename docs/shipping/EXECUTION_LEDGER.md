@@ -13,8 +13,10 @@
 - **Verification:** Landing contract **4/4**, typecheck, direct Web
   **895/919** with 24 skips and 0 failures. Merged-head verifier CLI
   **311/313** with 2 skips, Web **951/981** with 30 skips, composed **75/75**,
-  all **12/12** stories, zero failures. PR #238 hosted jobs were queued or in
-  progress at final status read.
+  all **12/12** stories, zero failures. The merge-time PR #238 read was queued
+  or in progress; a subsequent 2026-10-22 poll reports all Protocol/client
+  Ubuntu/macOS/Windows, typecheck-and-schema, isolated PostgreSQL,
+  GitGuardian, and Vercel checks successful.
 - **Boundary:** `env -u TEST_DATABASE_URL`; no database, provider, customer,
   publication, deployment, browser-human, field-CWV, legal,
   independent-review, or final-release operation occurred. No file, branch,
@@ -41,8 +43,11 @@
   **895/919** with 24 skips and 0 failures. Merged-head verifier CLI
   **311/313** with 2 skips, Web **951/981** with 30 skips, composed **75/75**,
   all **12/12** stories, zero failures.
-- **Hosted boundary:** Checks were queued/in progress at final status read and
-  are not claimed as passed. `env -u TEST_DATABASE_URL` was used; the remote
+- **Hosted boundary:** The merge-time read was queued/in progress; a
+  subsequent 2026-10-22 poll reports all PR #166 checks successful across
+  Ubuntu/macOS/Windows × Node 20/22/24, Verglos self-scan, official
+  validators, and in-toto release binding. `env -u TEST_DATABASE_URL` was
+  used; the remote
   value in `.env.test.local` was not used. No provider, database, publication,
   deployment, customer, legal, independent-review, or final-release operation
   occurred. No file, branch, record, deployment, provider, customer,

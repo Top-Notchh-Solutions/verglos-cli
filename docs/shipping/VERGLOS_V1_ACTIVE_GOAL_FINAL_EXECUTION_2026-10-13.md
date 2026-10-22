@@ -25,8 +25,10 @@ preserved. Landing qualification passed **4/4**, typecheck passed, direct Web
 tests passed **895/919** with 24 skips and 0 failures, and the clean
 merged-head verifier passed CLI **311/313** with 2 skips, Web **951/981** with
 30 skips, composed substrates **75/75**, and all **12/12** stories with zero
-failures. PR #238 hosted jobs were queued/in progress at final status read and
-are not claimed as passed. `TEST_DATABASE_URL` was removed; no database,
+failures. The merge-time PR #238 read was queued/in progress; a subsequent
+2026-10-22 poll reports all Protocol/client Ubuntu/macOS/Windows,
+typecheck-and-schema, isolated PostgreSQL, GitGuardian, and Vercel checks
+successful. `TEST_DATABASE_URL` was removed; no database,
 provider, publication, deployment, browser-human, field-CWV, customer, legal,
 independent-review, or final-release operation occurred, and nothing was
 deleted. Keep `FINAL-WEB-007` unchecked for browser capture, human/field
@@ -46,8 +48,10 @@ branches remain preserved. CLI typecheck passed **14/14**, full CLI tests
 typecheck passed, and direct Web tests passed **895/919** with 24 skips and 0
 failures. The clean merged-head verifier passed CLI **311/313** with 2 skips,
 Web **951/981** with 30 skips, composed substrates **75/75**, and all **12/12**
-stories with zero failures. Hosted jobs were queued/in progress at final
-status read and are not claimed as passed. `TEST_DATABASE_URL` was removed;
+stories with zero failures. The merge-time read was queued/in progress; a
+subsequent 2026-10-22 poll reports all PR #166 checks successful across
+Ubuntu/macOS/Windows × Node 20/22/24, Verglos self-scan, official validators,
+and in-toto release binding. `TEST_DATABASE_URL` was removed;
 the remote `.env.test.local` value was not used. No database, provider,
 publication, deployment, customer, legal, independent-review, browser-human,
 field-CWV, or final-release operation occurred, and nothing was deleted. Keep

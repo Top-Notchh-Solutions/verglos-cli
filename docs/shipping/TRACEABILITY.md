@@ -10,7 +10,10 @@
 - **Qualification mapping:** Landing **4/4**, typecheck, direct Web
   **895/919** with 24 skips and 0 failures; merged verifier CLI **311/313**,
   Web **951/981**, composed **75/75**, all **12/12** stories, zero failures.
-  PR #238 hosted jobs were queued/in progress at final read.
+  The merge-time PR #238 read was queued/in progress; a subsequent 2026-10-22
+  poll reports all Protocol/client Ubuntu/macOS/Windows,
+  typecheck-and-schema, isolated PostgreSQL, GitGuardian, and Vercel checks
+  successful.
 - **Safety mapping:** `env -u TEST_DATABASE_URL`; no database, provider,
   customer, publication, deployment, browser-human, field-CWV, legal,
   independent-review, or final-release operation occurred. No file, branch,
@@ -34,7 +37,10 @@
 - **Qualification mapping:** CLI typecheck **14/14**, full tests **13/13**,
   build **8/8**; Web focused **4/4**, typecheck, direct **895/919** with 24
   skips and 0 failures; merged verifier CLI **311/313**, Web **951/981**,
-  composed **75/75**, all **12/12** stories, zero failures.
+  composed **75/75**, all **12/12** stories, zero failures. The merge-time
+  read was queued/in progress; a subsequent 2026-10-22 poll reports all PR
+  #166 checks successful across Ubuntu/macOS/Windows × Node 20/22/24, Verglos
+  self-scan, official validators, and in-toto release binding.
 - **Safety mapping:** `env -u TEST_DATABASE_URL`; the remote `.env.test.local`
   database value was not used. No provider, database, publication, deployment,
   customer, legal, independent-review, browser-human, field-CWV, or final

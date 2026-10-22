@@ -8,8 +8,10 @@ fail-closed. PR #238 merged normally as
 `67f8f89be193dff7053d0abd946b288301bf2b87`; source branch preserved. Landing
 qualification **4/4**, typecheck, direct Web **895/919** with 24 skips and 0
 failures, and merged-head substrates CLI **311/313**, Web **951/981**,
-composed **75/75**, all **12/12** stories passed. Hosted PR #238 jobs were
-queued/in progress at final status read and are not claimed as passed.
+composed **75/75**, all **12/12** stories passed. The merge-time PR #238 read
+was queued/in progress; a subsequent 2026-10-22 poll reports all
+Protocol/client Ubuntu/macOS/Windows, typecheck-and-schema, isolated
+PostgreSQL, GitGuardian, and Vercel checks successful.
 
 No database URL or external operation was used. No browser-produced capture,
 human screen-reader, supported-environment/field-CWV, customer, provider,
@@ -29,8 +31,10 @@ boundaries. PR #166 merged normally as
 CLI typecheck **14/14**, full tests **13/13**, build **8/8**, Web focused
 transport tests **4/4**, typecheck, direct tests **895/919** with 24 skips and
 0 failures, and merged-head substrates CLI **311/313**, Web **951/981**,
-composed **75/75**, all **12/12** stories passed. Hosted jobs were queued or
-in progress at final status read and are not claimed as passed.
+composed **75/75**, all **12/12** stories passed. The merge-time read was
+queued/in progress; a subsequent 2026-10-22 poll reports all PR #166 checks
+successful across Ubuntu/macOS/Windows × Node 20/22/24, Verglos self-scan,
+official validators, and in-toto release binding.
 
 No database URL or external operation was used. No provider qualification,
 customer/recipient acceptance, trusted publication, legal/license clearance,

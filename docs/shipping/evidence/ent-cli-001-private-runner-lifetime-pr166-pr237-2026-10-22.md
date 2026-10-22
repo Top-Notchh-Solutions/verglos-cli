@@ -17,8 +17,10 @@
   verification against the two merge commits passed CLI **311/313** with 2
   skips, Web **951/981** with 30 skips, composed substrates **75/75**, and
   all **12/12** stories with zero failures.
-- **Hosted status:** PR checks were queued or in progress at the merge/status
-  read and are not claimed as passed here.
+- **Hosted status:** The merge-time read was queued/in progress. A subsequent
+  2026-10-22 post-merge poll now reports every PR #166 check successful:
+  Ubuntu/macOS/Windows × Node 20/22/24, Verglos self-scan, official
+  standard/provenance validators, and the in-toto release binding.
 - **Boundary:** `env -u TEST_DATABASE_URL` was used for local verification.
   The remote value in `verglos-web/.env.test.local` was not used. No database,
   provider, customer, publication, deployment, legal, independent-review,
@@ -31,4 +33,3 @@
   **239 checked / 41 open / 280 total (85.4%)**.
 - **Merged-head evidence:**
   `evidence/acceptance-stories-verification-2026-10-22-pr164-pr165-pr166-pr237.json`.
-

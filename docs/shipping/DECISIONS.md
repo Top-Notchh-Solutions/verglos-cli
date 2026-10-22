@@ -12,8 +12,10 @@
   `67f8f89be193dff7053d0abd946b288301bf2b87`; source branch preserved.
 - **Verification:** Landing **4/4**, typecheck, direct Web **895/919** with 24
   skips and 0 failures; merged verifier CLI **311/313**, Web **951/981**,
-  composed **75/75**, all **12/12**, zero failures. Hosted jobs were queued or
-  in progress at final read and are not claimed as passed.
+  composed **75/75**, all **12/12**, zero failures. The merge-time read was
+  queued/in progress; a subsequent 2026-10-22 poll reports all PR #238 checks
+  successful across Protocol/client Ubuntu/macOS/Windows,
+  typecheck-and-schema, isolated PostgreSQL, GitGuardian, and Vercel.
 - **Boundary:** `env -u TEST_DATABASE_URL`; no database/provider/customer/
   legal/publication/deployment/independent-review action occurred. No file,
   branch, record, deployment, provider, customer, database, or release
@@ -35,8 +37,10 @@
 - **Verification:** CLI typecheck **14/14**, full tests **13/13**, build **8/8**;
   Web focused **4/4**, typecheck, direct **895/919** with 24 skips and 0
   failures; merged verifier CLI **311/313**, Web **951/981**, composed
-  **75/75**, all **12/12**, zero failures. Hosted jobs were queued/in progress
-  at final status read and are not claimed as passed.
+  **75/75**, all **12/12**, zero failures. The merge-time read was
+  queued/in progress; a subsequent 2026-10-22 poll reports all PR #166 checks
+  successful across Ubuntu/macOS/Windows × Node 20/22/24, Verglos self-scan,
+  official validators, and in-toto release binding.
 - **Boundary:** `env -u TEST_DATABASE_URL`; the remote test value was not used.
   No database/provider/customer/legal/publication/deployment/independent-review
   action occurred. No file, branch, record, deployment, provider, customer,
