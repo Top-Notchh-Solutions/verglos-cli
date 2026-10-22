@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · Web fresh isolated PostgreSQL serial qualification
+
+Exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda` passed the
+full serial suite against a newly created local PostgreSQL 15 `verglos_test`
+database: **919 passed, 0 failed, 2 documented skips**, exit 0. The remote
+workspace `TEST_DATABASE_URL` was not used for mutation tests; the repository
+guard correctly requires a local isolated target. This is repository-owned
+qualification only; ACCEPT-002/003 and dependent rows remain open for their
+external/provider/customer/human/field/independent/final gates. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`evidence/qual-web-serial-fresh-postgres-2026-10-22.md`.
+
 ## 2026-10-22 · Web PR #240 security-header implementation
 
 Web PR #240 merged normally as `f20dc426e310557a7693d1e2e18f693663943ce5`

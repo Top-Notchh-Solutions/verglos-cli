@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · Web fresh isolated PostgreSQL serial qualification
+
+- **Source:** Exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda`.
+- **Verification:** `pnpm test:serial` against a newly created local
+  PostgreSQL 15 `verglos_test` database passed **919/919**, with **2
+  documented skips**, exit 0. This includes the database-backed writer,
+  queue, worker-crash, tenant, usage, deletion, webhook, and dashboard tests.
+- **Boundary:** The remote workspace `TEST_DATABASE_URL` was not used for
+  mutation tests; the local repository guard rejects non-isolated targets.
+  No provider, Production, customer, legal, field, or independent-review
+  operation occurred. Nothing was deleted.
+- **Disposition:** Repository-owned qualification only; keep ACCEPT-002/003
+  and dependent rows open for their remaining gates. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/qual-web-serial-fresh-postgres-2026-10-22.md`.
+
 ## 2026-10-22 · Web PR #240 security-header implementation
 
 - **Implementation:** Web commits `7df61c0` and `4d28d52` add the global

@@ -5,6 +5,18 @@
 > `FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md` and
 > `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-11.md` for current execution.
 
+## Web fresh isolated PostgreSQL serial qualification · 2026-10-22
+
+The exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda` passed
+the full `pnpm test:serial` suite against a newly created local PostgreSQL 15
+`verglos_test` database: **919 passed, 0 failed, 2 documented skips**, exit 0.
+The remote workspace test URL was not used for mutation tests because the
+repository guard correctly requires a local isolated target. This is
+repository-owned qualification only; no checkbox changed, and no source,
+container, or external record was deleted. Live score remains **239 checked /
+41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-serial-fresh-postgres-2026-10-22.md`.
+
 ## Web PR #240 implementation continuation · 2026-10-22
 
 The Web security-header gap was implemented and merged normally in PR #240 as

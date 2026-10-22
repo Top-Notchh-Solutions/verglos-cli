@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · qualify Web merged head on fresh local PostgreSQL
+
+- **Decision:** Use a newly created local PostgreSQL 15 `verglos_test`
+  database for the full serial qualification; preserve the existing database
+  and all stopped containers.
+- **Observed:** Web exact merged head
+  `02f5aba95c4172255cc522730c6ffecc1598cbda` passed **919/919**, with 2
+  documented skips and exit 0. The remote `.env.test.local` database was not
+  used for mutation tests because the local-target guard rejects it.
+- **Boundary:** This is repository-owned evidence only. No source change,
+  external/provider/Production/customer/legal/field/independent operation,
+  or deletion occurred.
+- **Disposition:** Keep ACCEPT-002/003 and dependent rows open for their
+  stated gates. Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/qual-web-serial-fresh-postgres-2026-10-22.md`.
+
 ## 2026-10-22 · retain open gates after Web PR #240
 
 - **Decision:** Merge the Web security-header implementation through the normal

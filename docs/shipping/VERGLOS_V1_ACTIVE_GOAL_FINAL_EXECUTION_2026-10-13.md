@@ -14,6 +14,20 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · Web fresh isolated PostgreSQL serial qualification
+
+The exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda` ran
+`pnpm test:serial` against a newly created local PostgreSQL 15
+`verglos_test` database: **919 passed, 0 failed, 2 documented skips**, exit 0.
+The remote `TEST_DATABASE_URL` from `.env.test.local` was not used for
+mutation tests because the repository correctly rejects non-local targets.
+This is repository-owned qualification evidence only; no checkbox changed and
+no file, container, or external record was deleted. Keep ACCEPT-002/003 and
+the related rows open for their external, provider, customer, human, field,
+independent, and final gates. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-serial-fresh-postgres-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · Web PR #240 security-header gap
 
 Web PR #240 added the route-wide security-header baseline: scoped CSP for the

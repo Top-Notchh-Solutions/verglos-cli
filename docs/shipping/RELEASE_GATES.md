@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · Web fresh isolated PostgreSQL serial gate
+
+Exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda` passed the
+full serial suite against a newly created local PostgreSQL 15 `verglos_test`
+database: **919 passed, 0 failed, 2 documented skips**, exit 0. The remote
+workspace test URL was not used for mutation tests because the repository
+guard correctly rejects non-isolated targets. This clears repository-owned
+qualification only; ACCEPT-002/003 and dependent rows remain open for
+external/provider/customer/human/field/independent/final evidence. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-serial-fresh-postgres-2026-10-22.md`.
+
 ## 2026-10-22 · Web PR #240 security-header code gate
 
 PR #240 merged normally as `f20dc426e310557a7693d1e2e18f693663943ce5` after

@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## Web fresh isolated PostgreSQL serial qualification · 2026-10-22
+
+- **Source mapping:** Web exact merged head
+  `02f5aba95c4172255cc522730c6ffecc1598cbda`.
+- **Qualification mapping:** Fresh local PostgreSQL 15 `verglos_test` run;
+  `pnpm test:serial` passed **919**, failed **0**, skipped **2**, exit 0.
+- **Boundary mapping:** Remote `.env.test.local` database was not used for
+  mutation tests; no external/provider/customer/Production/human/field/
+  independent operation occurred and nothing was deleted.
+- **Acceptance mapping:** No row checked. ACCEPT-002/003 and dependent rows
+  retain their explicit external/provider/customer/human/field/independent/
+  final gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-serial-fresh-postgres-2026-10-22.md`.
+
 ## Web PR #240 security-header implementation · 2026-10-22
 
 - **Source mapping:** Web implementation `7df61c0`, regression `4d28d52`, and
