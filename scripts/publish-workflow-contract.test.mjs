@@ -13,12 +13,13 @@ test("publish workflow verifies the same public artifact boundaries as release c
   assert.match(workflow, /check-packed-manifests\.mjs/u);
   assert.match(workflow, /verify-release-artifacts\.mjs/u);
   assert.match(workflow, /generate-release-origin\.mjs/u);
+  assert.match(workflow, /generate-release-checksums\.mjs/u);
   assert.match(workflow, /publish-public-package\.mjs/u);
   assert.match(workflow, /package-surface-audit\.test\.mjs/u);
   assert.match(workflow, /verify-clean-consumer\.mjs/u);
   assert.ok(workflow.indexOf("verify-clean-consumer.mjs") < workflow.indexOf("publish-public-package.mjs"), "clean consumer install must pass before any package publish");
   assert.match(workflow, /--require-clear/u);
-  assert.match(workflow, /sha256sum \.\/\*\.tgz \.\/THIRD_PARTY_NOTICES \.\/SBOM\.cdx\.json \.\/SBOM\.spdx\.json \.\/dependency-license-inventory\.json \.\/external-license-records\.json \.\/clean-consumer-verification\.txt \.\/RELEASE_METADATA\.json > SHA256SUMS/u);
+  assert.doesNotMatch(workflow, /sha256sum \.\/\*\.tgz/u, "checksum generation must use the tested repository script");
   for (const artifact of [
     "SHA256SUMS",
     "THIRD_PARTY_NOTICES",
