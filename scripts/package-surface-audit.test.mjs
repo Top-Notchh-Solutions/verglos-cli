@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePath, isSafePackageFileDeclaration } from "./package-surface-audit.mjs";
 
@@ -68,4 +69,12 @@ test("package file allowlists reject traversal, glob, control-character, and dup
 test("package file allowlists reject a declared path absent from the packed archive", () => {
   const failures = auditPackageSurface({ ...base, files: ["dist", "fixtures"] }, files);
   assert.ok(failures.some((failure) => failure.includes("missing from the packed archive: fixtures")));
+});
+
+test("source package contents audit binds private-key inspection to bounded regular-file reads", async () => {
+  const source = await readFile(new URL("./check-package-contents.mjs", import.meta.url), "utf8");
+  assert.match(source, /readBoundedRegularFile/u);
+  assert.match(source, /MAX_AUDIT_FILE_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(file, "utf8"\)/u);
+  assert.doesNotMatch(source, /readFile\(includedPath, "utf8"\)/u);
 });
