@@ -8763,6 +8763,25 @@ changed. See
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## DIST-003 / DIST-006 / QUAL-CLI-006 exact merged-main requalification · 2026-10-22
+
+- **Source mapping:** Exact merged CLI `c1f5e9b72d54467fc606da00735b704ada74f24c`.
+- **Contract mapping:** Release-origin/checksum/package boundaries, five
+  provider-boundary rollback decisions, seven-package public distribution,
+  official SARIF/CycloneDX/SPDX/Sigstore validation, and in-toto archive
+  binding were qualified from the exact merged source.
+- **Verification mapping:** Typecheck **14/14**, build **8/8**, full tests
+  **13/13** tasks with two explicit Hunt A2 Docker skips, artifact contracts
+  **43/43**, packed archives **7/7**, clean consumer, rollback rehearsal,
+  standard validation **4/4**, and in-toto **7/7** passed.
+- **Acceptance mapping:** Strict license inventory remains exit **2** with
+  seven review blockers. Keep all three rows open for legal/trusted
+  publication, immutable attestation, live rollback/revocation where
+  required, independent/hosted evidence, and final acceptance. No checkbox or
+  external state changed; nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md`.
+
 ## DIST-002 publish workflow permission hardening · 2026-10-22
 
 - **Source mapping:** CLI PR #168, commit

@@ -13945,3 +13945,23 @@ it was not sent and contains no credentials or customer data.
   nothing was deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:**
   `docs/shipping/evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 exact merged-main requalification
+
+- **Source:** Exact merged `verglos-cli` `c1f5e9b72d54467fc606da00735b704ada74f24c`.
+- **Qualification:** Typecheck **14/14** tasks, build **8/8**, full tests
+  **13/13** tasks with **0 failures** and two explicit Hunt A2 Docker skips,
+  release/artifact contracts **43/43**, seven public archives with packed
+  manifests, clean consumer **2/2**, rollback evidence/rehearsal passed with
+  five bounded boundaries and two historical records preserved, in-toto
+  **7/7**, official standard validation **4/4**, and diff check passed.
+- **License boundary:** Strict inventory exited **2** with seven review
+  blockers across 254 lockfile packages and one bundled component.
+- **Disposition:** Code-owned qualification is green, but all three rows stay
+  unchecked for their legal/trusted-publication, immutable-attestation,
+  live rollback/revocation, independent, hosted, and final-acceptance gates.
+  No database, registry, provider, Production, customer, publication, or
+  release state changed; nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md`.

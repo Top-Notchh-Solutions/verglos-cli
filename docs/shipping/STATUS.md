@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 exact merged-main requalification
+
+Exact merged CLI `c1f5e9b72d54467fc606da00735b704ada74f24c` passed typecheck
+**14/14** Turbo tasks, build **8/8**, full tests **13/13** tasks with **0
+failures** and two explicit Hunt A2 Docker skips, release/artifact contracts
+**43/43**, seven-package packing and packed-manifest audit, clean consumer
+qualification, rollback evidence/rehearsal, strict official standard
+validation **4/4**, in-toto **7/7**, and diff check. The strict license gate
+still exits **2** for seven review blockers. `DIST-003`, `DIST-006`, and
+`QUAL-CLI-006` remain unchecked for their legal/trusted-publication,
+immutable-attestation, live rollback/revocation, independent, hosted, and
+final-acceptance gates. No database, registry, provider, Production,
+customer, publication, or release state changed; nothing was deleted. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-008 complete route-inventory enforcement
 
 Web PR #243 merged normally as `619c31b9719c5284f6e90a9a1133c8515e015ed9`.

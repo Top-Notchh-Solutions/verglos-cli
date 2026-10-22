@@ -4767,6 +4767,25 @@ remains **239/41/280 (85.4%)**.
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 merged-main gate requalification
+
+Exact merged CLI `c1f5e9b72d54467fc606da00735b704ada74f24c` passed the code-owned
+release qualification: typecheck **14/14**, build **8/8**, full tests **13/13**
+tasks with two explicit Hunt A2 Docker skips, release contracts **43/43**,
+seven public archives and packed manifests, clean consumer, rollback across
+five boundaries with two historical records preserved, in-toto **7/7**, and
+strict official validation **4/4**. The strict license inventory remains
+exit **2** for seven review blockers.
+
+Keep `DIST-003`, `DIST-006`, and `QUAL-CLI-006` open. The missing gates are
+legal/license clearance, protected/trusted publication, immutable attestation,
+live provider/registry rollback or revocation where required, independent or
+hosted evidence, and final acceptance. No registry, provider, Production,
+database, customer, publication, or release-sign-off state changed; nothing
+was deleted. Score remains **239/41/280 (85.4%)**.
+
+Evidence: `evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-002 publish permission hardening gate
 
 CLI PR #168 source `4bcb4d26364bd8541678acf93d3388095d7c96c0` makes the

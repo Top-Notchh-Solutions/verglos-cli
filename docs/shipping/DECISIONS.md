@@ -4852,6 +4852,24 @@ each observed method has lifecycle and reconciliation evidence.
   remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-22 · retain DIST-003/DIST-006/QUAL-CLI-006 after merged-main qualification
+
+- **Decision:** Accept the exact merged CLI release/package/rollback and
+  official-validator results as code-side qualification; do not check any of
+  the three rows.
+- **Observed:** `c1f5e9b` passed typecheck **14/14**, build **8/8**, full
+  tests **13/13** tasks, artifact contracts **43/43**, seven-archive packing,
+  clean consumer, rollback (five operations, two historical records),
+  in-toto **7/7**, and strict standard validation **4/4**.
+- **Reason:** The strict license inventory still exits **2** for seven review
+  blockers. Legal/license clearance, protected/trusted publication, immutable
+  attestation, live provider rollback/revocation where applicable,
+  independent/hosted evidence, and final acceptance are not present.
+- **Boundary:** No registry, provider, Production, database, customer,
+  publication, tag, signing-service, or release-sign-off operation occurred;
+  nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · retain DIST-002 after publish permission hardening
 
 - **Decision:** Accept the explicit least-privilege publish workflow as

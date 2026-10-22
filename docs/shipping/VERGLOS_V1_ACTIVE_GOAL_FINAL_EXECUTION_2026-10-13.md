@@ -1,7 +1,7 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
 **Owner:** Anurag Yadav, owner of Top Notchh Solutions and Verglos
-**Updated:** 2026-10-22
+**Updated:** 2026-10-23
 **Status:** active; this is the single authoritative continuation goal
 **Continuation authorization:** On 2026-10-21 the owner authorized repository
 implementation and bounded Preview qualification to resume. This authorizes
@@ -1249,3 +1249,27 @@ remains open and unmerged; `FINAL-WEB-008` remains unchecked, the score is
 **239 checked / 41 open / 280 total (85.4%)**, and nothing was deleted.
 Evidence:
 `docs/shipping/evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
+
+# 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 exact merged-main requalification
+
+The exact merged CLI head `c1f5e9b72d54467fc606da00735b704ada74f24c` was
+requalified in a clean detached worktree. Typecheck passed **14/14** Turbo
+tasks, build **8/8**, full tests **13/13** tasks with **0 failures** and two
+explicit Hunt A2 Docker skips, release/artifact contracts **43/43**, public
+package packing and packed-manifest audit **7/7**, clean-consumer
+qualification, rollback evidence/rehearsal across five bounded boundaries
+with two historical records preserved, in-toto archive binding **7/7**, and
+strict official standard validation **4/4** (SARIF, CycloneDX, SPDX, and
+offline Cosign). `git diff --check` passed.
+
+The strict license gate correctly exits **2** for seven unresolved review
+blockers across 254 lockfile packages and one bundled component. This is
+repository-owned code and artifact qualification only. Keep `DIST-003`,
+`DIST-006`, and `QUAL-CLI-006` unchecked for legal/license clearance,
+protected/trusted publication, immutable attestation, live rollback/revocation
+where required, independent/hosted evidence, and final acceptance. No
+database URL or `.env.test.local` value was used; no registry, provider,
+Production, customer, publication, tag, or release-sign-off state changed;
+nothing was deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/dist-003-dist-006-qual-cli-006-merged-main-requalification-2026-10-22.md`.
