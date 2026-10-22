@@ -1,5 +1,49 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · DIST-001 package-contents boundary implementation gate
+
+CLI commit `78b41f80bb10e133ad7540b5104397186260cd48` removes the source-only
+shared-package `fixtures` path from the public allowlist and validates declared
+safe paths against the packed archive. PR #163 merged normally as
+`06c7897525caf499f5128ef0d98f866c17387018`; the source branch remains
+preserved. Focused contracts passed **14/14**, release contracts **40/40**,
+seven-package contents and public-boundary audits passed, rollback rehearsal
+passed across **5** boundaries with **2** historical records preserved, and
+the forced CLI graph passed **23/23**. The merged-head verifier passed CLI
+**311/313**, Web **950/980**, composed **74/74**, all **12/12** stories, and
+zero failures. Hosted PR #163 checks were queued at the final status read and
+are not claimed as passed.
+
+No test database URL was sourced. No npm publication, registry/provider,
+Production, customer/recipient, legal/license, trusted publication,
+immutable-attestation, or final-release operation occurred. No file, branch,
+record, deployment, provider, customer, database, or release artifact was
+deleted or changed. Keep `DIST-001` unchecked for remaining LOCAL/HUNT/RECORD
+dependencies, trusted/protected publication, immutable attestation,
+legal/license clearance, and final acceptance. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-package-contents-boundary-pr163-2026-10-22.md`.
+
+## 2026-10-22 · ENT-CLI-001 result-acknowledgement implementation gate
+
+CLI commit `e72e83f40ce0b1137795c945c35ea8c5354e2645` validates the canonical
+digest and boolean idempotency fields returned by private-runner result upload.
+PR #162 merged normally as `a6ca411c012e319e434e667d5d50c384455f53ff`; the
+source branch remains preserved. Focused coverage passed **11/11**, the forced
+CLI graph passed **23/23**, the merged-head verifier passed CLI **311/313**
+with 2 explicit skips, Web **950/980** with 30 explicit skips, composed
+substrates **74/74**, and all **12/12** stories with zero failures. The hosted
+Platform Matrix workflow concluded successfully.
+
+No `TEST_DATABASE_URL` or external operation was used; the supplied Web test
+env file was not sourced. No file, branch, record, deployment, provider,
+customer, database, or release artifact was deleted or changed. Keep
+`ENT-CLI-001` unchecked for operational enrollment credential exchange,
+approved enterprise runner execution/result reconciliation, cross-platform
+operational acceptance, independent review, and enterprise acceptance. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/ent-cli-001-reconciliation-pr162-2026-10-22.md`.
+
 ## 2026-10-22 · STUDIO-CLI-001 approval-shape implementation gate
 
 CLI commit `0d566b8017ff9b576e3551a7528cc89ac1e91265` hardens the

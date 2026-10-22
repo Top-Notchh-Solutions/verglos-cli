@@ -1,5 +1,53 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain DIST-001 after PR #163 package-boundary hardening
+
+- **Decision:** Promote the concrete public package-contents boundary repair
+  and retain `DIST-001` unchecked because its publication, legal, attestation,
+  and final-acceptance gates remain open.
+- **Implementation:** CLI commit `78b41f80bb10e133ad7540b5104397186260cd48`
+  removes the source-only shared `fixtures` path from the public package
+  allowlist and checks declared paths against the packed archive. PR #163
+  merged normally as `06c7897525caf499f5128ef0d98f866c17387018`; source branch
+  preserved.
+- **Verification:** Focused **14/14**, release contracts **40/40**, seven
+  package contents audit, public-boundary audit, rollback rehearsal across 5
+  boundaries preserving 2 historical records, forced graph **23/23**, and
+  merged-head verifier CLI **311/313**, Web **950/980**, composed **74/74**,
+  all **12/12** stories, exit 0. Hosted PR #163 checks were queued at the
+  final status read.
+- **Boundary:** The supplied Web `.env.test.local` was not sourced. No npm,
+  provider, Production, customer, legal, trusted-publication, attestation, or
+  final-release operation occurred. No file, branch, record, deployment,
+  provider, customer, database, or release artifact was deleted or changed.
+- **Disposition:** Keep `DIST-001` open for LOCAL/HUNT/RECORD dependencies,
+  trusted/protected publication, immutable attestation, legal/license
+  clearance, and final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-001-package-contents-boundary-pr163-2026-10-22.md`.
+
+## 2026-10-22 · retain ENT-CLI-001 after PR #162 result reconciliation hardening
+
+- **Decision:** Promote the next concrete ENT-CLI-001 code-side hardening to
+  the public CLI and retain the row unchecked.
+- **Implementation:** CLI commit `e72e83f40ce0b1137795c945c35ea8c5354e2645`
+  validates canonical result digests and boolean idempotency in upload
+  acknowledgements. PR #162 merged normally as
+  `a6ca411c012e319e434e667d5d50c384455f53ff`; source branch preserved.
+- **Verification:** Focused **11/11**, forced CLI graph **23/23**, merged-head
+  verifier CLI **311/313**, Web **950/980**, composed substrates **74/74**, all
+  **12/12** stories, exit 0; hosted Platform Matrix workflow concluded
+  successfully.
+- **Boundary:** The supplied `.env.test.local` contains a test database URL,
+  but it was not sourced into this verifier and no database/provider/customer/
+  Production operation occurred. No file, branch, record, deployment, or
+  release artifact was deleted or changed.
+- **Disposition:** Keep `ENT-CLI-001` open for operational enrollment,
+  approved enterprise runner execution/result reconciliation, cross-platform
+  operational acceptance, independent review, and enterprise acceptance. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/ent-cli-001-reconciliation-pr162-2026-10-22.md` and
+  the additive verifier output for PR #162/#234.
+
 ## 2026-10-22 · harden STUDIO-CLI-001 approval shape and merge PR #161
 
 - **Decision:** Validate client-projection approval JSON before property access

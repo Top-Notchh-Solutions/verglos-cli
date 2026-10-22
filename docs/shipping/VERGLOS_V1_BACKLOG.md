@@ -1,5 +1,50 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · DIST-001 package-contents boundary implementation
+
+CLI commit `78b41f80bb10e133ad7540b5104397186260cd48` removes the source-only
+`fixtures` path from the `@verglos/shared` public package allowlist and makes
+the package-surface audit require each declared safe path to be present in the
+packed archive. PR #163 merged normally as
+`06c7897525caf499f5128ef0d98f866c17387018`; its source branch remains
+preserved. Focused contracts passed **14/14**, release contracts **40/40**,
+seven-package contents and public-boundary audits passed, rollback rehearsal
+passed across **5** boundaries preserving **2** historical records, and the
+forced CLI graph passed **23/23**. The merged-head verifier passed CLI
+**311/313**, Web **950/980**, composed substrates **74/74**, and all **12/12**
+stories with zero failures. Hosted PR #163 checks were queued at the final
+status read and are not claimed as passed.
+
+This advances code-side implementation only; keep the `DIST-001` checkbox
+unchanged for remaining LOCAL/HUNT/RECORD dependencies, trusted/protected
+publication, immutable attestation, legal/license clearance, and final
+acceptance. No test database URL or external operation was used, and no file,
+branch, record, deployment, provider, customer, database, or release artifact
+was deleted or changed. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-package-contents-boundary-pr163-2026-10-22.md`.
+
+## 2026-10-22 · ENT-CLI-001 result-acknowledgement implementation
+
+CLI commit `e72e83f40ce0b1137795c945c35ea8c5354e2645` hardens private-runner
+upload response validation for canonical result digests and boolean
+idempotency, with a malformed-response regression test. PR #162 merged
+normally as `a6ca411c012e319e434e667d5d50c384455f53ff`; its source branch
+remains preserved. Focused coverage passed **11/11**; the forced CLI workspace
+graph passed **23/23**; the merged-head verifier passed CLI **311/313** with 2
+explicit skips, Web **950/980** with 30 explicit skips, composed substrates
+**74/74**, and all **12/12** stories with zero failures. The hosted Platform
+Matrix workflow concluded successfully.
+
+This advances code-side implementation only; keep the `ENT-CLI-001` checkbox
+unchanged for operational enrollment credential exchange, approved enterprise
+runner execution/result reconciliation, cross-platform operational acceptance,
+independent review, and enterprise acceptance. No database URL or external
+operation was used, and no file, branch, record, deployment, provider,
+customer, database, or release artifact was deleted or changed. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-reconciliation-pr162-2026-10-22.md`.
+
 ## 2026-10-22 · STUDIO-CLI-001 approval-shape implementation
 
 CLI commit `0d566b8017ff9b576e3551a7528cc89ac1e91265` adds a fail-closed

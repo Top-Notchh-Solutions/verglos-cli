@@ -32,6 +32,47 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current implementation batch (2026-10-22):** `DIST-001` received public
+package-contents boundary hardening in CLI commit
+`78b41f80bb10e133ad7540b5104397186260cd48`, promoted by PR #163 and merged
+normally as `06c7897525caf499f5128ef0d98f866c17387018`; its source branch
+remains preserved. The shared public package no longer advertises the
+source-only `fixtures` path, and the package-surface audit now verifies that
+every declared safe path exists in the packed archive. Focused contracts passed
+**14/14**, release contracts **40/40**, the seven-package contents audit and
+public-boundary audit passed, rollback rehearsal passed across **5** boundaries
+with **2** historical records preserved, and the forced CLI graph passed
+**23/23**. The merged-head verifier passed CLI **311/313** with 2 explicit
+skips, Web **950/980** with 30 explicit skips, composed substrates **74/74**,
+and all **12/12** stories with zero failures. Hosted PR #163 checks were
+queued at the final status read and are not claimed as passed. No test database
+URL or external operation was used; no file, branch, record, deployment,
+provider, customer, database, or release artifact was deleted or changed.
+Keep `DIST-001` unchecked for remaining LOCAL/HUNT/RECORD dependencies,
+trusted/protected publication, immutable attestation, legal/license clearance,
+and final acceptance. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-package-contents-boundary-pr163-2026-10-22.md`.
+
+**Current implementation batch (2026-10-22):** `ENT-CLI-001` received
+private-runner result-acknowledgement hardening in CLI commit `e72e83f4`,
+promoted by PR #162 and merged normally as
+`a6ca411c012e319e434e667d5d50c384455f53ff`; its source branch remains
+preserved. The client now rejects successful-looking upload responses with a
+non-canonical result digest or non-boolean idempotency flag. Focused coverage
+passed **11/11**; the forced CLI graph passed **23/23**; the merged-head
+verifier passed CLI **311/313** with 2 explicit skips, Web **950/980** with 30
+explicit skips, composed substrates **74/74**, and all **12/12** stories with
+exit 0. The hosted Platform Matrix workflow concluded successfully. Keep
+`ENT-CLI-001` unchecked for operational enrollment credential exchange,
+approved enterprise runner execution/result reconciliation, cross-platform
+operational acceptance, independent review, and enterprise acceptance. No
+database URL was passed to the verifier, the supplied Web test env file was
+not sourced, and no file, branch, record, deployment, provider, customer,
+database, or release artifact was deleted or changed. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-reconciliation-pr162-2026-10-22.md`.
+
 **Current acceptance refresh (2026-10-22):** The frozen twelve-story verifier
 ran against clean CLI `6ae6a2a5` / PR #160 merge `56b3535a` and Web `e1b20ac`
 / PR #234 merge `b640b7fb`. CLI passed **310/312** with 2 explicit skips and 0

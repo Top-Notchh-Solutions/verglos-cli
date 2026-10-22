@@ -1,5 +1,47 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-001 package-contents boundary hardening and PR #163
+
+CLI commit `78b41f80bb10e133ad7540b5104397186260cd48` removes the source-only
+`fixtures` path from the `@verglos/shared` public package allowlist and makes
+the package-surface audit verify that every declared safe path exists in the
+packed archive. PR #163 merged normally as
+`06c7897525caf499f5128ef0d98f866c17387018`; the source branch remains
+preserved. Focused package/release contracts passed **14/14**, release
+contracts **40/40**, the seven-package contents audit and public-boundary audit
+passed, rollback rehearsal passed across **5** boundaries with **2** historical
+records preserved, and the forced CLI graph passed **23/23**. The merged-head
+verifier passed CLI **311/313** with 2 explicit skips, Web **950/980** with 30
+explicit skips, composed substrates **74/74**, and all **12/12** stories with
+zero failures. Hosted PR #163 checks were queued at the final status read and
+are not claimed as passed. Keep `DIST-001` open for its remaining
+LOCAL/HUNT/RECORD dependencies, trusted/protected publication,
+immutable attestation, legal/license clearance, and final acceptance. No test
+database URL was sourced, no external operation occurred, and no file,
+branch, record, deployment, provider, customer, database, or release artifact
+was deleted or changed. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/dist-001-package-contents-boundary-pr163-2026-10-22.md`.
+
+## 2026-10-22 · ENT-CLI-001 result-acknowledgement hardening and PR #162
+
+CLI commit `e72e83f40ce0b1137795c945c35ea8c5354e2645` validates canonical
+private-runner upload result digests and boolean idempotency, with malformed
+response regression coverage. PR #162 merged normally as
+`a6ca411c012e319e434e667d5d50c384455f53ff`; the source branch remains
+preserved. Focused coverage passed **11/11**, the forced CLI workspace graph
+passed **23/23**, and the merged-head verifier passed CLI **311/313** with 2
+explicit skips, Web **950/980** with 30 explicit skips, composed substrates
+**74/74**, and all **12/12** stories with zero failures. The hosted Platform
+Matrix workflow concluded successfully. Keep `ENT-CLI-001` open for
+operational enrollment, approved enterprise runner execution/result
+reconciliation, cross-platform operational acceptance, independent review,
+and enterprise acceptance. No database URL was passed to the verifier, the
+supplied Web test env file was not sourced, and no file, branch, record,
+deployment, provider, customer, database, or release artifact was deleted or
+changed. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/ent-cli-001-reconciliation-pr162-2026-10-22.md`.
+
 ## 2026-10-22 · STUDIO-CLI-001 approval-shape hardening and PR #161
 
 CLI commit `0d566b8017ff9b576e3551a7528cc89ac1e91265` validates runtime client

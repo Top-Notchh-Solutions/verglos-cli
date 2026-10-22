@@ -1,5 +1,61 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · DIST-001 package-contents boundary hardening and PR #163
+
+- **Implementation:** CLI commit `78b41f80bb10e133ad7540b5104397186260cd48`
+  removes the source-only `fixtures` path from the shared public package
+  allowlist and makes the package-surface audit require every declared safe
+  path to be present in the packed archive.
+- **Promotion:** PR [#163](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/163)
+  merged normally as `06c7897525caf499f5128ef0d98f866c17387018`; source branch
+  preserved.
+- **Verification:** Focused package/release contracts **14/14**, release
+  contracts **40/40**, seven-package contents audit passed, public-boundary
+  audit passed, rollback rehearsal passed across **5** boundaries with **2**
+  historical records preserved, forced CLI graph **23/23**, and merged-head
+  verifier CLI **311/313**, Web **950/980**, composed substrates **74/74**,
+  all **12/12** stories, exit 0. PR #163 hosted checks were queued at the
+  final status read and are not claimed as passed.
+- **Safety boundary:** The supplied Web `.env.test.local` was not sourced and
+  no test database URL, npm publication, registry/provider action, Production
+  operation, customer/recipient acceptance, legal/license clearance, trusted
+  publication, immutable attestation, or final release sign-off occurred. No
+  file, branch, record, deployment, provider, customer, database, or release
+  artifact was deleted or changed.
+- **Disposition:** Keep `DIST-001` unchecked for remaining LOCAL/HUNT/RECORD
+  dependencies, trusted/protected publication, immutable attestation,
+  legal/license clearance, and final acceptance. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/dist-001-package-contents-boundary-pr163-2026-10-22.md`
+  and additive verifier output
+  `evidence/acceptance-stories-verification-2026-10-22-pr162-pr163-pr234.json`.
+
+## 2026-10-22 · ENT-CLI-001 result-acknowledgement hardening and PR #162
+
+- **Implementation:** CLI commit `e72e83f40ce0b1137795c945c35ea8c5354e2645`
+  validates canonical result digests and the boolean idempotency flag in
+  private-runner upload acknowledgements, with a malformed-response regression
+  test.
+- **Promotion:** PR [#162](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/162)
+  merged normally as `a6ca411c012e319e434e667d5d50c384455f53ff`; source branch
+  preserved.
+- **Verification:** Focused **11/11**; forced CLI graph **23/23**; merged-head
+  verifier CLI **311/313**, Web **950/980**, composed substrates **74/74**, all
+  **12/12** stories, exit 0. The hosted Platform Matrix run concluded
+  successfully; the final PR status read had one Windows/Node 22 check still
+  reporting in-progress despite its completed workflow steps.
+- **Safety boundary:** The verifier did not receive `TEST_DATABASE_URL`. The
+  supplied Web test env file was not sourced. No hosted HTTP, provider,
+  customer, reviewer, browser-human, field-CWV, migration, or Production
+  operation occurred. No file, branch, record, deployment, provider,
+  customer, database, or release artifact was deleted or changed.
+- **Disposition:** Keep `ENT-CLI-001` unchecked for operational enrollment,
+  approved enterprise runner execution/result reconciliation, cross-platform
+  operational acceptance, independent review, and enterprise acceptance. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/ent-cli-001-reconciliation-pr162-2026-10-22.md` and
+  additive verifier output `evidence/acceptance-stories-verification-2026-10-22-pr161-pr162-pr234.json`.
+
 ## 2026-10-22 · STUDIO-CLI-001 approval-shape hardening and PR #161
 
 - **Implementation:** CLI commit `0d566b8017ff9b576e3551a7528cc89ac1e91265`
