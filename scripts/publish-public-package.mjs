@@ -1,7 +1,9 @@
 import { execFile } from "node:child_process";
-import { lstat } from "node:fs/promises";
+import { constants } from "node:fs";
+import { lstat, mkdtemp, open, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { resolve } from "node:path";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
@@ -29,17 +31,39 @@ export function publicationDecision(status) {
   throw new Error(`npm registry preflight returned unexpected HTTP status ${status}`);
 }
 
-async function readArchiveManifest(archivePath, run) {
+async function readBoundedArchive(archivePath) {
   const entry = await lstat(archivePath);
   if (!entry.isFile() || entry.size <= 0 || entry.size > MAX_ARCHIVE_BYTES) {
     throw new Error("npm publication archive must be a bounded regular file");
   }
+  const handle = await open(archivePath, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
+  try {
+    const opened = await handle.stat();
+    if (!opened.isFile() || !sameFile(entry, opened)) throw new Error("npm publication archive changed during validation");
+    const bytes = await handle.readFile();
+    const final = await handle.stat();
+    if (!sameFile(opened, final) || final.size !== bytes.length || final.size > MAX_ARCHIVE_BYTES) {
+      throw new Error("npm publication archive changed during read");
+    }
+    return bytes;
+  } finally {
+    await handle.close();
+  }
+}
+
+async function readArchiveManifest(archivePath, injectedRun) {
+  const archiveBytes = await readBoundedArchive(archivePath);
   let stdout;
   try {
-    ({ stdout } = await run("tar", ["-xOf", archivePath, "package/package.json"], {
-      encoding: "utf8",
-      maxBuffer: 1024 * 1024,
-    }));
+    if (injectedRun) {
+      ({ stdout } = await injectedRun("tar", ["-xOf", "-", "package/package.json"], {
+        input: archiveBytes,
+        encoding: "utf8",
+        maxBuffer: 1024 * 1024,
+      }));
+    } else {
+      stdout = await extractManifestFromBytes(archiveBytes);
+    }
   } catch {
     throw new Error("npm publication archive has no readable package manifest");
   }
@@ -48,15 +72,16 @@ async function readArchiveManifest(archivePath, run) {
   if (typeof manifest !== "object" || manifest === null || Array.isArray(manifest) || !PACKAGE_NAME.test(manifest.name) || !VERSION.test(manifest.version)) {
     throw new Error("npm publication archive manifest has an invalid package identity");
   }
-  return { name: manifest.name, version: manifest.version };
+  return { archiveBytes, name: manifest.name, version: manifest.version };
 }
 
 export async function publishPublicPackage(options) {
-  const run = options.run ?? execFileAsync;
+  const injectedRun = options.run;
+  const run = injectedRun ?? execFileAsync;
   const fetchImpl = options.fetchImpl ?? fetch;
   const tag = options.tag ?? "alpha";
   if (typeof options.archivePath !== "string" || !options.archivePath || !TAG.test(tag)) throw new Error("npm publication input is invalid");
-  const manifest = await readArchiveManifest(options.archivePath, run);
+  const manifest = await readArchiveManifest(options.archivePath, options.tarRun);
   const registry = options.registry ?? DEFAULT_NPM_REGISTRY;
   const endpoint = packageVersionUrl(registry, manifest.name, manifest.version);
   const controller = new AbortController();
@@ -76,11 +101,55 @@ export async function publishPublicPackage(options) {
     console.log(`::notice::${manifest.name}@${manifest.version} already published — skipping`);
     return Object.freeze({ status: decision, packageName: manifest.name, version: manifest.version, endpoint });
   }
-  await run(process.platform === "win32" ? "npm.cmd" : "npm", ["publish", options.archivePath, "--access", "public", "--provenance", "--tag", tag], {
-    encoding: "utf8",
-    maxBuffer: 4 * 1024 * 1024,
-  });
+  const snapshotDirectory = await mkdtemp(join(tmpdir(), "verglos-public-package-"));
+  const snapshotPath = join(snapshotDirectory, `${basename(options.archivePath) || "release"}.tgz`);
+  try {
+    await writeFile(snapshotPath, manifest.archiveBytes, { mode: 0o600 });
+    await run(process.platform === "win32" ? "npm.cmd" : "npm", ["publish", snapshotPath, "--access", "public", "--provenance", "--tag", tag], {
+      encoding: "utf8",
+      maxBuffer: 4 * 1024 * 1024,
+    });
+  } finally {
+    await rm(snapshotDirectory, { recursive: true, force: true });
+  }
   return Object.freeze({ status: "published", packageName: manifest.name, version: manifest.version, endpoint });
+}
+
+async function extractManifestFromBytes(bytes) {
+  const { spawn } = await import("node:child_process");
+  return await new Promise((resolveOutput, reject) => {
+    const child = spawn("tar", ["-xOf", "-", "package/package.json"], { stdio: ["pipe", "pipe", "pipe"] });
+    const chunks = [];
+    let total = 0;
+    let stderr = "";
+    let settled = false;
+    const fail = (error) => {
+      if (settled) return;
+      settled = true;
+      child.kill();
+      reject(error);
+    };
+    child.stdout.on("data", (chunk) => {
+      total += chunk.length;
+      if (total > 1024 * 1024) return fail(new Error("npm publication package manifest is too large"));
+      chunks.push(chunk);
+    });
+    child.stderr.on("data", (chunk) => { stderr += chunk.toString("utf8").slice(0, 4096); });
+    child.on("error", fail);
+    child.on("close", (code) => {
+      if (settled) return;
+      settled = true;
+      if (code !== 0) reject(new Error(`tar could not read package manifest${stderr ? `: ${stderr}` : ""}`));
+      else resolveOutput(Buffer.concat(chunks).toString("utf8"));
+    });
+    child.stdin.on("error", fail);
+    child.stdin.end(bytes);
+  });
+}
+
+function sameFile(left, right) {
+  return (left.dev === 0 || right.dev === 0 || left.dev === right.dev)
+    && (left.ino === 0 || right.ino === 0 || left.ino === right.ino);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
