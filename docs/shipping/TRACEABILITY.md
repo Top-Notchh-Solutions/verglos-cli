@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## ACCEPT-002/003 latest merged-head substrate refresh · 2026-10-22
+
+- **Source mapping:** CLI `6ae6a2a5` / PR #160 merge `56b3535a`; Web
+  `e1b20ac` / PR #234 merge `b640b7fb`; both source roots clean.
+- **Execution mapping:** CLI **310/312** with 2 explicit skips, Web **950/980**
+  with 30 explicit skips, composed substrates **74/74**, all **12/12** stories,
+  exit 0.
+- **Evidence mapping:** Additive final bundle contains **31** hashed files and
+  passed its secret scan; prior bundles remain preserved.
+- **Acceptance mapping:** Keep `ACCEPT-002/003` open for external/hosted/
+  provider/customer/reviewer gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-002-003-current-head-pr160-pr234-2026-10-22.md`.
+
 ## FINAL-WEB-007 landing accessibility implementation and PR #234 · 2026-10-22
 
 - **Source mapping:** Web `e1b20ac864ff4f6e005382e8792f3abe0aadbf2a`; PR #234

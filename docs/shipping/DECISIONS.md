@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · refresh ACCEPT-002/003 at the latest merged heads
+
+- **Decision:** Re-run the frozen twelve-story repository verifier after PR
+  #160 and #234, add evidence without replacing prior bundles, and preserve
+  the external acceptance boundary.
+- **Observed:** CLI **310/312** with 2 explicit skips and 0 failures; Web
+  **950/980** with 30 explicit skips and 0 failures; composed substrates
+  **74/74**; all **12/12** stories; exit 0.
+- **Bundle:** Additive `acceptance-evidence-bundle-2026-10-22-pr160-pr234-final.json`
+  contains **31** hashed files and passes its secret scan.
+- **Disposition:** No `TEST_DATABASE_URL` or external operation was used.
+  Keep `ACCEPT-002/003` unchecked for external/hosted/provider/customer/
+  reviewer gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-002-003-current-head-pr160-pr234-2026-10-22.md`.
+
 ## 2026-10-22 · harden FINAL-WEB-007 landing keyboard access and merge PR #234
 
 - **Decision:** Add a skip-to-content path, explicit primary-nav label, and

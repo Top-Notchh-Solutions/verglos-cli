@@ -31,6 +31,8 @@ const paths = [
   "docs/shipping/evidence/dist-003-current-head-checksum-generation-2026-10-22.md",
   "docs/shipping/evidence/dist-003-checksum-output-portability-pr160-2026-10-22.md",
   "docs/shipping/evidence/final-web-007-landing-accessibility-pr234-2026-10-22.md",
+  "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr160-pr234.json",
+  "docs/shipping/evidence/accept-002-003-current-head-pr160-pr234-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22.json",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr159-pr233.json",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr158-pr159-pr233.json",

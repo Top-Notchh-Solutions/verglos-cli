@@ -32,6 +32,18 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current acceptance refresh (2026-10-22):** The frozen twelve-story verifier
+ran against clean CLI `6ae6a2a5` / PR #160 merge `56b3535a` and Web `e1b20ac`
+/ PR #234 merge `b640b7fb`. CLI passed **310/312** with 2 explicit skips and 0
+failures; Web passed **950/980** with 30 explicit skips and 0 failures;
+composed substrates passed **74/74**; all **12/12** stories executed; exit 0.
+No `TEST_DATABASE_URL` or external operation was used. The additive final
+bundle contains **31** hashed files and passed its secret scan; prior bundles
+remain preserved. `ACCEPT-002/003` remain unchecked for external/hosted/
+provider/customer/reviewer gates. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`docs/shipping/evidence/accept-002-003-current-head-pr160-pr234-2026-10-22.md`.
+
 **Current implementation batch (2026-10-22):** `FINAL-WEB-007` received a
 source-level landing accessibility implementation in Web commit `e1b20ac`:
 keyboard skip-to-content, focusable main target, labelled primary navigation,

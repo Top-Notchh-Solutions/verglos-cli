@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · ACCEPT-002/003 latest merged-head substrate gate
+
+The verifier ran against clean CLI `6ae6a2a5` / PR #160 merge `56b3535a` and
+Web `e1b20ac` / PR #234 merge `b640b7fb`: CLI **310/312** with 2 explicit
+skips, Web **950/980** with 30 explicit skips, composed substrates **74/74**,
+all **12/12** stories, exit 0. No `TEST_DATABASE_URL` or external operation
+was used. The additive final bundle contains **31** hashed files and passed
+its secret scan; previous bundles remain preserved.
+
+Keep `ACCEPT-002/003` unchecked for external/hosted/provider/customer/reviewer
+gates. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/accept-002-003-current-head-pr160-pr234-2026-10-22.md`.
+
 ## 2026-10-22 · FINAL-WEB-007 landing accessibility implementation gate
 
 Web commit `e1b20ac` adds the homepage skip link/main target, labelled primary
