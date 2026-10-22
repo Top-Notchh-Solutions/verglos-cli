@@ -82,6 +82,36 @@ or requalify completed non-AppSec targets merely because that artifact arrives.
 Only a concrete regression or shared integration dependency may justify a
 targeted follow-up change, and that change must be recorded separately.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-011 architecture corpus
+
+The `ACCEPT-011` implementation input is now expanded from six to eight exact
+commit, full non-shallow public JS/TS fixtures. Payload CMS is pinned to
+`57f39097aa17d0ee4db728e393a47409ee24e586` under MIT; Vendure is pinned to
+`b6653518cd342f803469a394eff6beb0f7a13a12` under GPL-3.0-only for local
+analysis only, with no redistribution. The expanded corpus covers the four
+required architecture shapes: small, multi-user, multi-tenant/team, and
+enterprise-like.
+
+The corrected scans walked **13,494** files and produced **354** bounded
+observations with complete coverage and zero scanner limitations. All fixtures
+met the 90% JS/TS code-share requirement. Verifier SHA-256:
+`8d4c3de593cd07010d8959a4bd31cfaf8e8c5f07b6064e4a55be3c9e314186e7`.
+Evidence:
+`docs/shipping/evidence/accept-011-architecture-corpus-2026-10-23.md`.
+
+The expanded `ACCEPT-012` triage run classified the 354 observations into 23
+rule groups with zero coverage gaps; all observations remain unadjudicated,
+customer acceptance is not claimed, and independent review is required. Triage
+SHA-256:
+`d5d6050ccf876aedbf68fe7da4f74899569d76878d4a8ee0215feb43d9ced6d4`.
+Evidence:
+`docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
+
+This advances the implementation and reproducibility path for `ACCEPT-011`
+and `ACCEPT-012`; it does not close either row or the held review/final-release
+gates. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted.
+
 ## Latest continuation result · 2026-10-23 · landing qualification runtime boundary
 
 Web PR #253 merged normally as
@@ -103,8 +133,8 @@ still **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web execution evidence while preserving all historical
-entries. Its current-head run hashed **109** bounded evidence files, including
-**34** current 2026-10-23 entries, and passed the secret-like material scan.
+entries. Its current-head run hashed **111** bounded evidence files, including
+**36** current 2026-10-23 entries, and passed the secret-like material scan.
 The output was written to `/tmp` for verification; no tracked historical
 bundle was overwritten. Evidence:
 `docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.

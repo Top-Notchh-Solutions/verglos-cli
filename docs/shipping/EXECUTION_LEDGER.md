@@ -1,12 +1,34 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-011 architecture-shaped corpus expanded
+
+- **Implementation:** Expanded the private public-OSS manifest to eight exact
+  commit, full non-shallow JS/TS fixtures. Payload is pinned to
+  `57f39097aa17d0ee4db728e393a47409ee24e586` under MIT; Vendure is pinned to
+  `b6653518cd342f803469a394eff6beb0f7a13a12` under GPL-3.0-only for local
+  analysis only.
+- **Coverage:** Small, multi-user, multi-tenant/team, and enterprise-like
+  architecture shapes are all present. Corrected scans walked **13,494** files,
+  produced **354** observations, and reported complete coverage with zero
+  scanner limitations. Verifier digest:
+  `8d4c3de593cd07010d8959a4bd31cfaf8e8c5f07b6064e4a55be3c9e314186e7`.
+- **Triage:** The expanded bounded triage produced **23** rule groups and **0**
+  coverage gaps. All observations remain unadjudicated; customer acceptance is
+  not claimed and independent review is required. Evidence:
+  `evidence/accept-011-architecture-corpus-2026-10-23.md` and
+  `evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
+- **Disposition:** This is implementation/reproducibility progress only.
+  `ACCEPT-011`/`ACCEPT-012`, held-out correction, independent review, and final
+  release remain open. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted.
+
 ## 2026-10-23 · ACCEPT-003 current-head evidence bundle reconciled
 
 - **Implementation:** `scripts/build-acceptance-evidence-bundle.mjs` now
   includes the current merged CLI/Web evidence in addition to the preserved
   historical entries.
-- **Verification:** The current-head run hashed **109** bounded evidence files,
-  including **34** current 2026-10-23 entries; the secret-like material scan
+- **Verification:** The current-head run hashed **111** bounded evidence files,
+  including **36** current 2026-10-23 entries; the secret-like material scan
   passed. The verification output was written to `/tmp`, leaving tracked
   historical bundles unchanged.
 - **Evidence:** `evidence/accept-003-current-head-bundle-2026-10-23.md`.

@@ -1,10 +1,28 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-011 architecture-shaped corpus expanded
+
+The private execution path now covers **8** exact-commit, full non-shallow
+public JS/TS fixtures spanning small, multi-user, multi-tenant/team, and
+enterprise-like architecture shapes. Payload is pinned to
+`57f39097aa17d0ee4db728e393a47409ee24e586` under MIT; Vendure is pinned to
+`b6653518cd342f803469a394eff6beb0f7a13a12` under GPL-3.0-only for local-only
+analysis. Corrected scans walked **13,494** files and produced **354** bounded
+observations with complete coverage and zero scanner limitations. Evidence:
+`docs/shipping/evidence/accept-011-architecture-corpus-2026-10-23.md`.
+
+The expanded `ACCEPT-012` triage produced **23** rule groups and **0** coverage
+gaps. Findings remain unadjudicated, customer acceptance is not claimed, and
+independent review is required. Evidence:
+`docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
+No checkbox changed; the live score remains **244 checked / 36 open / 280
+total (87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · ACCEPT-003 current-head evidence bundle reconciliation
 
 The private `acceptance:evidence:bundle` implementation now includes current
 merged CLI/Web execution evidence while preserving the historical evidence
-entries. The current-head run hashed **109** bounded files, including **34**
+entries. The current-head run hashed **111** bounded files, including **36**
 current 2026-10-23 entries, and passed the secret-like material scan. Evidence:
 `docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.
 
@@ -4540,7 +4558,7 @@ Evidence/problem: external validation is deliberately last. It validates the com
 - **ACCEPT-002 current-head verifier addendum (2026-10-22):** Clean merged CLI `1d7844bd` and Web `ba00d5d` sources passed the private verifier with CLI **311/313** (2 documented skips), Web **952/982** (30 documented skips), composed substrates **76/76**, and all **12/12** mappings executed with zero failures. This is substrate evidence only; keep the row unchecked for the full external/hosted/provider/customer acceptance run. Evidence: `docs/shipping/evidence/accept-002-current-head-pr239-2026-10-22.md` and `docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr239.json`.
 - [ ] **ACCEPT-003** · acceptance evidence bundle · deps: ACCEPT-002 · Store commands, configurations, versions, digests, results, failures, limitations, and reviewer sign-off in a reproducible internal package. Commit(s): Private `8f18b81` writes `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json` with exact source commits, command arguments, exit codes, parsed totals, and output hashes; the current `acceptance:evidence:bundle` rerun hashes 12 bounded evidence files and passes its secret scan. Reviewer sign-off and external/hosted evidence remain open. Evidence: `docs/shipping/evidence/accept-003-bundle-rerun-2026-10-14.md`.
 - **ACCEPT-003 current-head bundle addendum (2026-10-22):** The private acceptance manifest now contains **54** hashed evidence files and passes its secret scan after merged PRs #239/#240 and the current ACCEPT-002 verifier refresh. Keep the row unchecked for reviewer sign-off and external/hosted evidence. Evidence: `docs/shipping/evidence/accept-003-current-head-pr239-2026-10-22.md`.
-- **ACCEPT-003 current-head bundle addendum (2026-10-23):** The bundle generator now preserves those historical entries and adds the current merged CLI/Web evidence. The current-head run hashed **109** bounded evidence files, including **34** current-day entries, and passed its secret-like material scan. Keep the row unchecked for reviewer sign-off and external/hosted/provider/customer evidence. Evidence: `docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.
+- **ACCEPT-003 current-head bundle addendum (2026-10-23):** The bundle generator now preserves those historical entries and adds the current merged CLI/Web evidence. The current-head run hashed **111** bounded evidence files, including **36** current-day entries, and passed its secret-like material scan. Keep the row unchecked for reviewer sign-off and external/hosted/provider/customer evidence. Evidence: `docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.
 - [x] **ACCEPT-004** · external authorized workflow protocol · deps: ACCEPT-003 · Freeze recruitment/questions/consent/data handling/success criteria for qualified teams without scraping or bulk outreach. No external contact without authorization. Commit(s): Private `454a0cf` adds the frozen protocol, per-repository consent-record template, and `pnpm acceptance:protocol:check` validator. It requires named owner consent, exact commit/scope, bounded network/data handling, expiry/revocation, founder approval, redacted evidence, and deletion/expiry recording. No external contact was performed; ACCEPT-005 onward remain open.
 - [ ] **ACCEPT-005** · run authorized external repository workflows · deps: ACCEPT-004 + founder authorization · Validate real release reconciliation without publishing findings; record product failures separately from requested scope. First-party qualification evidence exists, but it is not external consented-team/recipient acceptance and does not close this row. Commit(s): Private `pending` · `docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`
 - **ACCEPT-005 blocker addendum (2026-10-22):** The protocol validator passes, but reports `externalContact: not-performed` and `customerAcceptance: open`. The row still requires a named external owner's consent record, exact founder authorization, reproducible redacted release reconciliation, and fixture/evidence expiry or deletion proof. Adjacent merged-head truth checks pass **35/35**, **4/4**, and **4/4**; no checkbox changed. Evidence: `docs/shipping/evidence/accept-005-current-blocker-audit-2026-10-22.md`.
@@ -4658,8 +4676,8 @@ lifecycle, all-enabled-method, and production reconciliation evidence. Fresh
 database migration bootstrap remains a separate risk because migration `0000`
 assumes the legacy `licenses` table. No checkbox changed; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**.
-- [ ] **ACCEPT-011** · private architecture-shaped TypeScript/JavaScript corpus · deps: ACCEPT-001, ACCEPT-010, all implementation/qualification gates through Epic 18, legal/license inventory · Only after the shipping candidate is complete, freeze full non-shallow public repositories spanning small, multi-user, multi-tenant/team, and enterprise-like architecture shapes; record commit, license, scope, and reproducible configuration privately. Commit(s): —. Public-fixture execution input now exists at `docs/shipping/evidence/acceptance-public-oss-corpus-2026-10-23.md` for six exact full-clone JS/TS fixtures; row remains open for its declared dependency/freeze and final acceptance conditions.
-- [ ] **ACCEPT-012** · reproducible full-clone analysis and feedback triage · deps: ACCEPT-011, QUAL-CLI-006 · Run the current unreleased CLI source against each fixture, retain private reports/hashes, classify findings and coverage gaps, and record actionable product feedback without customer claims. Commit(s): —. The 2026-10-23 public-fixture run completed six exact-commit scans with complete coverage and zero scanner limitations; row remains open for ACCEPT-011/QUAL-CLI-006 and its remaining triage/acceptance contract.
+- [ ] **ACCEPT-011** · private architecture-shaped TypeScript/JavaScript corpus · deps: ACCEPT-001, ACCEPT-010, all implementation/qualification gates through Epic 18, legal/license inventory · Only after the shipping candidate is complete, freeze full non-shallow public repositories spanning small, multi-user, multi-tenant/team, and enterprise-like architecture shapes; record commit, license, scope, and reproducible configuration privately. Commit(s): —. The private input now contains eight exact full-clone JS/TS fixtures covering all four required architecture shapes, including Payload and Vendure; evidence is `docs/shipping/evidence/accept-011-architecture-corpus-2026-10-23.md`. Row remains open for its declared dependency/freeze and final acceptance conditions.
+- [ ] **ACCEPT-012** · reproducible full-clone analysis and feedback triage · deps: ACCEPT-011, QUAL-CLI-006 · Run the current unreleased CLI source against each fixture, retain private reports/hashes, classify findings and coverage gaps, and record actionable product feedback without customer claims. Commit(s): —. The expanded 2026-10-23 run completed eight exact-commit scans, walked 13,494 files, produced 354 bounded observations across 23 rule groups, and found zero coverage gaps; evidence is `docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md`. Row remains open for ACCEPT-011/QUAL-CLI-006 and its remaining correction/review/acceptance contract.
 - **ACCEPT-012 implementation addendum (2026-10-23):** The private
   `acceptance:corpus:triage` command now emits bounded rule-level feedback and
   coverage-gap statuses from the exact verification manifest. It classified

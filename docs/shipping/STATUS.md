@@ -1,10 +1,31 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-011 architecture-shaped corpus expanded
+
+The private execution path now covers **8** exact-commit, full non-shallow
+public JS/TS fixtures spanning small, multi-user, multi-tenant/team, and
+enterprise-like architecture shapes. Payload is pinned to
+`57f39097aa17d0ee4db728e393a47409ee24e586` under MIT; Vendure is pinned to
+`b6653518cd342f803469a394eff6beb0f7a13a12` under GPL-3.0-only for local-only
+analysis. Corrected scans walked **13,494** files and produced **354** bounded
+observations with complete coverage and zero scanner limitations. Evidence:
+`evidence/accept-011-architecture-corpus-2026-10-23.md`.
+
+The expanded triage classified the observations into **23** rule groups with
+**0** coverage gaps. Findings remain unadjudicated, customer acceptance is not
+claimed, and independent review is required. Evidence:
+`evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
+
+This is implementation/reproducibility progress only; `ACCEPT-011` and
+`ACCEPT-012` remain open for their declared dependencies, held-out correction,
+independent review, and final release. The live score remains **244 checked /
+36 open / 280 total (87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · ACCEPT-003 current-head evidence bundle reconciled
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web evidence while preserving historical entries. The
-current-head run hashed **109** bounded evidence files, including **34** dated
+current-head run hashed **111** bounded evidence files, including **36** dated
 2026-10-23, and passed its secret-like material scan. Evidence:
 `evidence/accept-003-current-head-bundle-2026-10-23.md`.
 
