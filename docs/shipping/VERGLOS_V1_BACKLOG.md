@@ -1,5 +1,27 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · QUAL-WEB-006 measurement-boundary implementation
+
+Web commit `ad05d2f7e9ce846c1f036740adf3b6fe4a4a7b21` makes the shared
+accessibility/performance qualifier reject invalid or duplicate page paths and
+malformed runtime accessibility findings. PR #236 merged normally as
+`dc8f4442df294558eb4d4cbcc1e9f39abeedcb16`; its source branch remains
+preserved. Focused coverage passed **21/21**, typecheck passed, direct Web
+tests passed **895/919** with 24 explicit skips and 0 failures, and the merged
+verifier passed CLI **311/313**, Web **951/981**, composed substrates **75/75**,
+and all **12/12** stories with zero failures. Vercel Preview Comments and
+GitGuardian passed; required Web workflow jobs were queued at the final
+merge/status read and are not claimed as passed.
+
+This advances code-side implementation only; keep the `QUAL-WEB-006` checkbox
+unchanged for authenticated dashboard runtime, human screen-reader review,
+large-dataset qualification, complete field-CWV evidence, independent review,
+and final acceptance. No database URL or external operation was used, and no
+file, branch, record, deployment, provider, customer, database, or release
+artifact was deleted or changed. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-measurement-boundary-pr236-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 deletion-worker boundary implementation
 
 Web commit `5fa3b6dbb277e71df5e1560e445c086fd044e830` validates runtime

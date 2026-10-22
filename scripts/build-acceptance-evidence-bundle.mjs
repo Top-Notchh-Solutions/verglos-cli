@@ -41,6 +41,8 @@ const paths = [
   "docs/shipping/evidence/dist-001-package-contents-boundary-pr163-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr163-pr235.json",
   "docs/shipping/evidence/qual-web-005-worker-kind-boundary-pr235-2026-10-22.md",
+  "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr163-pr235-pr236.json",
+  "docs/shipping/evidence/qual-web-006-measurement-boundary-pr236-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22.json",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr159-pr233.json",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr158-pr159-pr233.json",

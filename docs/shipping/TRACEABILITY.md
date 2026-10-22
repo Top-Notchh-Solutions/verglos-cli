@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 measurement-boundary hardening and PR #236 · 2026-10-22
+
+- **Source mapping:** Web commit `ad05d2f7e9ce846c1f036740adf3b6fe4a4a7b21`;
+  PR #236 merged normally as
+  `dc8f4442df294558eb4d4cbcc1e9f39abeedcb16`; source branch preserved.
+- **Implementation mapping:** Accessibility/performance qualification rejects
+  invalid/duplicate page paths and malformed runtime finding shapes.
+- **Qualification mapping:** Focused **21/21**, typecheck, direct Web
+  **895/919** with 24 skips and 0 failures, merged verifier CLI **311/313**,
+  Web **951/981**, composed **75/75**, all **12/12** stories, exit 0.
+  Vercel Preview Comments/GitGuardian passed; required Web workflow jobs were
+  queued at final read.
+- **Safety mapping:** No database URL or external operation was used. No
+  browser-human, field-CWV, customer, provider, Production, legal,
+  trusted-publication, or independent-review acceptance was claimed. No file,
+  branch, record, deployment, provider, customer, database, or release artifact
+  was deleted or changed.
+- **Acceptance mapping:** Keep `QUAL-WEB-006` open for authenticated dashboard
+  runtime, human screen-reader, large-dataset, field-CWV, independent-review,
+  and final-acceptance evidence. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-measurement-boundary-pr236-2026-10-22.md`
+  and `evidence/acceptance-stories-verification-2026-10-22-pr163-pr235-pr236.json`.
+
 ## QUAL-WEB-005 deletion-worker boundary hardening and PR #235 · 2026-10-22
 
 - **Source mapping:** Web commit `5fa3b6dbb277e71df5e1560e445c086fd044e830`;

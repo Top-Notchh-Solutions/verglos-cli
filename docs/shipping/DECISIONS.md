@@ -1,5 +1,29 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain QUAL-WEB-006 after PR #236 measurement hardening
+
+- **Decision:** Promote the runtime browser-evidence boundary repair and retain
+  `QUAL-WEB-006` unchecked because authenticated dashboard, human, field-CWV,
+  independent-review, and final-acceptance gates remain open.
+- **Implementation:** Web commit `ad05d2f7e9ce846c1f036740adf3b6fe4a4a7b21`
+  rejects invalid/duplicate page paths and malformed accessibility findings.
+  PR #236 merged normally as
+  `dc8f4442df294558eb4d4cbcc1e9f39abeedcb16`; source branch preserved.
+- **Verification:** Focused **21/21**, typecheck, direct Web **895/919** with
+  24 skips and 0 failures, merged verifier CLI **311/313**, Web **951/981**,
+  composed **75/75**, all **12/12** stories, exit 0. Vercel Preview
+  Comments/GitGuardian passed; required Web workflow jobs were queued at final
+  read.
+- **Boundary:** No database URL or external operation was used. No
+  browser-human, field-CWV, customer, provider, Production, legal,
+  trusted-publication, or independent-review acceptance was claimed. No file,
+  branch, record, deployment, provider, customer, database, or release artifact
+  was deleted or changed.
+- **Disposition:** Keep `QUAL-WEB-006` open for authenticated dashboard
+  runtime, human screen-reader, large-dataset, field-CWV, independent-review,
+  and final-acceptance evidence. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-measurement-boundary-pr236-2026-10-22.md`.
+
 ## 2026-10-22 · retain QUAL-WEB-005 after PR #235 worker-kind hardening
 
 - **Decision:** Promote the runtime account-deletion kind admission repair and

@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-WEB-006 measurement-boundary hardening and PR #236
+
+- **Implementation:** Web commit `ad05d2f7e9ce846c1f036740adf3b6fe4a4a7b21`
+  makes accessibility/performance qualification fail closed for invalid or
+  duplicate page paths and malformed runtime accessibility findings.
+- **Promotion:** PR [#236](https://github.com/anuragyadav-git/verglos-web/pull/236)
+  merged normally as `dc8f4442df294558eb4d4cbcc1e9f39abeedcb16`; source branch
+  preserved.
+- **Verification:** Focused **21/21**, typecheck, direct Web test **895/919**
+  with 24 skips and 0 failures; Vercel Preview Comments/GitGuardian passed.
+  Merged-head verifier CLI **311/313**, Web **951/981**, composed substrates
+  **75/75**, all **12/12** stories, exit 0. Required Web workflow jobs were
+  queued at final merge/status read and are not claimed as passed.
+- **Safety boundary:** No database URL or external operation was used. No
+  browser-human, field-CWV, customer, provider, Production, legal,
+  trusted-publication, or independent-review acceptance was claimed. No file,
+  branch, record, deployment, provider, customer, database, or release
+  artifact was deleted or changed.
+- **Disposition:** Keep `QUAL-WEB-006` unchecked for authenticated dashboard
+  runtime, human screen-reader review, large-dataset qualification, complete
+  field-CWV evidence, independent review, and final acceptance. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-measurement-boundary-pr236-2026-10-22.md`
+  and additive verifier output
+  `evidence/acceptance-stories-verification-2026-10-22-pr163-pr235-pr236.json`.
+
 ## 2026-10-22 · QUAL-WEB-005 deletion-worker boundary hardening and PR #235
 
 - **Implementation:** Web commit `5fa3b6dbb277e71df5e1560e445c086fd044e830`
