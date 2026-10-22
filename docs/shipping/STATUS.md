@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · QUAL-WEB-005 digest-inventory preflight repair and merge
+
+Web commit `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1` makes malformed
+customer-held digest inventory block before any deletion adapter call. PR #231
+merged normally as `f61f15e8046969952bb7f700ea934683bf6b4281`; the source
+branch remains preserved. Focused worker/deletion checks passed **16/16**; the
+full Web suite passed **893/893** with **24 explicit skips**; typecheck, diff
+check, and hosted checks passed. No database was connected or modified.
+`QUAL-WEB-005` remains open for its non-code acceptance gates; score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-005-digest-inventory-preflight-pr231-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 deletion-boundary race repair and merge
 
 Web commit `bac88808473cf90730810347d5ced0c2df8b4699` adds the shared

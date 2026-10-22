@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · preflight QUAL-WEB-005 digest inventory before deletion
+
+- **Decision:** Validate the customer-held digest snapshot before any
+  destructive adapter call and block malformed inventory as
+  `inventory_unqualified`.
+- **Implementation:** Web commit `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1`
+  merged through PR #231 as normal merge commit
+  `f61f15e8046969952bb7f700ea934683bf6b4281`.
+- **Verification:** Focused worker/deletion checks **16/16**; full Web suite
+  **893/893** with **24 explicit skips**; typecheck, diff check, and hosted
+  checks passed.
+- **Safety boundary:** No database was connected or modified.
+- **Disposition:** This closes a code-side fail-closed gap only. Keep
+  `QUAL-WEB-005` unchecked for legal/consent, production authorization,
+  restore/rollback, reconciliation, and independent acceptance. Score remains
+  **239 checked / 41 open / 280 total (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-digest-inventory-preflight-pr231-2026-10-22.md`.
+
 ## 2026-10-22 · serialize QUAL-WEB-005 digest registration with deletion
 
 - **Decision:** Put customer-held digest registration and deletion-request

@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · QUAL-WEB-005 digest-inventory preflight gate
+
+Web commit `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1` merged through PR #231 as
+`f61f15e8046969952bb7f700ea934683bf6b4281`. The reviewed deletion worker now
+validates customer-held digest inventory before any destructive adapter call;
+malformed inventory blocks as `inventory_unqualified`. Focused checks passed
+**16/16**; full Web passed **893/893** with **24 explicit skips**; typecheck,
+diff check, and hosted checks passed. No database was connected or modified.
+
+Keep `QUAL-WEB-005` unchecked for legal/consent, production authorization,
+restore/rollback, reconciliation, and independent acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-005-digest-inventory-preflight-pr231-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 digest-registration/deletion lock gate
 
 Web commit `bac88808473cf90730810347d5ced0c2df8b4699` merged through PR #230 as

@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-WEB-005 digest-inventory preflight repair
+
+- **Implementation:** Web commit `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1`
+  validates customer-held digest inventory before any destructive deletion
+  adapter call and blocks malformed snapshots as `inventory_unqualified`.
+- **Promotion:** PR #231 merged normally as
+  `f61f15e8046969952bb7f700ea934683bf6b4281`; source branch preserved.
+- **Verification:** Focused worker/deletion checks **16/16**; full Web suite
+  **893/893** with **24 skips** and no failures; typecheck, diff check, and all
+  named hosted checks passed.
+- **Safety boundary:** No database was connected or modified.
+- **Disposition:** `QUAL-WEB-005` remains unchecked for legal/consent,
+  production authorization, restore/rollback, reconciliation, and independent
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-digest-inventory-preflight-pr231-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-005 digest-registration/deletion lock repair
 
 - **Implementation:** Web commit `bac88808473cf90730810347d5ced0c2df8b4699`

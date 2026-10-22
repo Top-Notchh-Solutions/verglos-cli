@@ -32,6 +32,20 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current continuation patch (2026-10-22):** Web commit
+`2b4e202b303d74129342ffdd4622f3d9c4c7c7f1` adds a preflight validation to the
+QUAL-WEB-005 reviewed deletion worker: malformed customer-held digest
+inventory now blocks before any destructive adapter call. The focused worker
+suite passed **16/16**; the full Web suite passed **893/893** with **24
+explicit skips**; typecheck and diff check passed; all named hosted checks
+passed. PR #231 merged normally as
+`f61f15e8046969952bb7f700ea934683bf6b4281`, preserving the source branch. No
+database was connected or modified. `QUAL-WEB-005` remains unchecked for
+legal/consent, production authorization, restore/rollback, reconciliation, and
+independent acceptance. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-digest-inventory-preflight-pr231-2026-10-22.md`.
+
 **Current implementation batch (2026-10-22):** `QUAL-WEB-005` received a
 substantive deletion-boundary repair in Web commit
 `bac88808473cf90730810347d5ced0c2df8b4699`. Customer-held digest registration

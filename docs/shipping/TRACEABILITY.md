@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 digest-inventory preflight repair · 2026-10-22
+
+- **Source mapping:** Web commit `2b4e202b303d74129342ffdd4622f3d9c4c7c7f1`
+  promoted through PR #231 and merged normally as
+  `f61f15e8046969952bb7f700ea934683bf6b4281`; source branch preserved.
+- **Implementation mapping:** The deletion worker validates the customer-held
+  digest snapshot before calling supporting-data or hosted-kind destructive
+  adapters and blocks malformed inventory as `inventory_unqualified`.
+- **Qualification mapping:** Focused checks **16/16**; full Web suite
+  **893/893** with **24 explicit skips**; typecheck, diff check, and hosted
+  checks passed.
+- **Safety mapping:** No database was connected or modified.
+- **Acceptance mapping:** Keep `QUAL-WEB-005` unchecked for legal/consent,
+  production authorization, restore/rollback, reconciliation, and independent
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-digest-inventory-preflight-pr231-2026-10-22.md`.
+
 ## QUAL-WEB-005 digest-registration/deletion lock repair · 2026-10-22
 
 - **Source mapping:** Web commit `bac88808473cf90730810347d5ced0c2df8b4699`
