@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · refresh ACCEPT-002/003 after merged PR #158
+
+- **Decision:** Re-run the twelve-story verifier after the normal PR #158
+  merge and retain a separate additive bundle.
+- **Observed:** CLI **310/312** with 2 explicit skips and 0 failures, Web
+  **949/979** with 30 explicit skips and 0 failures, composed substrates
+  **74/74**, all 12 stories executed, exit 0; the final bundle hashes **27**
+  files and passes its secret scan.
+- **Safety boundary:** No database URL was supplied and no database, provider,
+  customer, reviewer, browser-human, migration, or production operation was
+  used. No previous bundle was removed or overwritten.
+- **Disposition:** Keep `ACCEPT-002/003` unchecked for external/hosted/provider/
+  customer/reviewer gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-002-003-current-head-pr158-pr159-pr233-2026-10-22.md`.
+
 ## 2026-10-22 · refresh ACCEPT-002/003 at the current merged implementation heads
 
 - **Decision:** Rerun the private twelve-story substrate verifier against clean

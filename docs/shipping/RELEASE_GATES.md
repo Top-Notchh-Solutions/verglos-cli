@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · ACCEPT-002/003 post-PR #158 substrate gate
+
+The verifier reran against the PR #158 merged CLI tree and current Web tree:
+CLI **310/312** with 2 explicit skips and 0 failures, Web **949/979** with 30
+explicit skips and 0 failures, composed substrates **74/74**, and all **12/12**
+stories executed with exit 0. The additive final bundle contains **27** hashed files
+and passed its secret scan. No database URL or external operation was used; no
+previous bundle was removed or overwritten.
+
+Keep `ACCEPT-002/003` unchecked for external/hosted/provider/customer/reviewer
+gates. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/accept-002-003-current-head-pr158-pr159-pr233-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 exact-head substrate gate
 
 The private verifier ran against clean CLI

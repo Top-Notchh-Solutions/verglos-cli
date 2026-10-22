@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## ACCEPT-002/003 post-PR #158 substrate refresh · 2026-10-22
+
+- **Source mapping:** CLI `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`, PR #158
+  merge `145ff5d902289ecfb670a397c9e87860eb06309d`, and Web
+  `d32da250d5c2427dcfa36f560421a2506bb8a659`.
+- **Execution mapping:** CLI **310/312** with 2 explicit skips, Web **949/979**
+  with 30 explicit skips, composed substrates **74/74**, all **12/12** stories
+  executed, exit 0.
+- **Evidence mapping:** Additive PR #158 final bundle contains **27** hashed files
+  with a passing secret scan; prior bundles remain preserved.
+- **Acceptance mapping:** Keep `ACCEPT-002/003` unchecked for external,
+  hosted, provider, customer, and reviewer gates. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-002-003-current-head-pr158-pr159-pr233-2026-10-22.md`.
+
 ## ACCEPT-002/003 exact-head substrate refresh · 2026-10-22
 
 - **Source mapping:** Clean CLI `9fba66ac386605174a98bea856b9f04ceda8cfa8`

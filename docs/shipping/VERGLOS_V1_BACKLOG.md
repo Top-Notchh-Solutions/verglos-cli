@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · ACCEPT-002/003 refresh after merged PR #158
+
+The verifier reran against the clean PR #158 implementation tree
+`e44ce8a673fb1d9119a3231f896d0f86a00cdc3c` (merged normally as
+`145ff5d902289ecfb670a397c9e87860eb06309d`) and Web
+`d32da250d5c2427dcfa36f560421a2506bb8a659`. CLI passed **310/312** with 2
+explicit skips / 0 failures, Web passed **949/979** with 30 explicit skips / 0
+failures, composed substrates passed **74/74**, and all **12/12** story mappings
+executed. The additive final bundle hashes **27** evidence files and passes its secret
+scan. No database URL or external operation was used; previous bundles remain
+preserved. Keep `ACCEPT-002/003` unchecked for external/hosted/provider/
+customer/reviewer gates. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/accept-002-003-current-head-pr158-pr159-pr233-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 exact-head substrate refresh for PR #159/#233
 
 The private verifier reran against clean CLI commit

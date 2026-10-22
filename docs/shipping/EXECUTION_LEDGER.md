@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ACCEPT-002/003 refresh after merged PR #158
+
+- **Source mapping:** CLI source `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`,
+  promoted by PR #158 merge `145ff5d902289ecfb670a397c9e87860eb06309d`, and Web
+  `d32da250d5c2427dcfa36f560421a2506bb8a659`.
+- **Verification:** CLI **310/312** with 2 explicit skips and 0 failures; Web
+  **949/979** with 30 explicit skips and 0 failures; composed substrates
+  **74/74**; all **12/12** story mappings executed; exit 0.
+- **Bundle:** Additive `acceptance-evidence-bundle-2026-10-22-pr158-final.json`
+  contains **27** hashed files; secret scan passed.
+- **Safety boundary:** No `TEST_DATABASE_URL` was supplied. No database,
+  provider, customer, reviewer, browser-human, migration, or production
+  operation occurred. No previous bundle was removed or overwritten.
+- **Disposition:** Keep `ACCEPT-002/003` unchecked for external/hosted/provider/
+  customer/reviewer gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-002-003-current-head-pr158-pr159-pr233-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 exact-head substrate refresh for PR #159/#233
 
 - **Source mapping:** Clean CLI `9fba66ac386605174a98bea856b9f04ceda8cfa8`

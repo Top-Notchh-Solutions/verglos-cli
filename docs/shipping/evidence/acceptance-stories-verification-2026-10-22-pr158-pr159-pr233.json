@@ -1,0 +1,330 @@
+{
+  "schema": "verglos.private.acceptance-stories-verification.v1",
+  "verifiedAt": "2026-10-22T12:50:02.363Z",
+  "cliRoot": "/private/tmp/verglos-cli-ent-current-20261022",
+  "webRoot": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web/.worktrees/studio-entitlement-recipient-20261019",
+  "cliCommit": "e44ce8a673fb1d9119a3231f896d0f86a00cdc3c",
+  "webCommit": "d32da250d5c2427dcfa36f560421a2506bb8a659",
+  "sourceStatus": {
+    "cli": "clean",
+    "web": "clean"
+  },
+  "stories": [
+    {
+      "id": "free-scan",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "acceptance-corpus-verification-2026-10-03-v3.json"
+      ]
+    },
+    {
+      "id": "ci-decision",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "TEAM-CLI-002"
+      ]
+    },
+    {
+      "id": "trivy-import",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "QUAL-CLI-005"
+      ]
+    },
+    {
+      "id": "multi-tool-dedup",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "mismatch-incomplete",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "exception-register",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "hunt-isolation",
+      "status": "qualification-open",
+      "evidence": [
+        "cli-package-suite",
+        "hunt-docker-adversarial-2026-10-02.md"
+      ]
+    },
+    {
+      "id": "offline-record",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "modified-cli",
+      "status": "runtime-qualification-open",
+      "evidence": [
+        "QUAL-WEB-001",
+        "web-full-suite"
+      ]
+    },
+    {
+      "id": "studio-recipient",
+      "status": "customer-acceptance-open",
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "enterprise-runner",
+      "status": "provider-qualification-open",
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "account-deletion",
+      "status": "qualification-open",
+      "evidence": [
+        "qual-web-005-privacy-deletion-2026-10-10"
+      ]
+    }
+  ],
+  "storyCoverage": [
+    {
+      "id": "free-scan",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "acceptance-corpus-verification-2026-10-03-v3.json"
+      ]
+    },
+    {
+      "id": "ci-decision",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "TEAM-CLI-002"
+      ]
+    },
+    {
+      "id": "trivy-import",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "QUAL-CLI-005"
+      ]
+    },
+    {
+      "id": "multi-tool-dedup",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "mismatch-incomplete",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "exception-register",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "hunt-isolation",
+      "acceptanceStatus": "qualification-open",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "cli-package-suite",
+        "hunt-docker-adversarial-2026-10-02.md"
+      ]
+    },
+    {
+      "id": "offline-record",
+      "acceptanceStatus": "substrate-covered",
+      "requiredSurfaces": [
+        "cli-package-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": false,
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "modified-cli",
+      "acceptanceStatus": "runtime-qualification-open",
+      "requiredSurfaces": [
+        "web-full-suite"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "QUAL-WEB-001",
+        "web-full-suite"
+      ]
+    },
+    {
+      "id": "studio-recipient",
+      "acceptanceStatus": "customer-acceptance-open",
+      "requiredSurfaces": [
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "enterprise-runner",
+      "acceptanceStatus": "provider-qualification-open",
+      "requiredSurfaces": [
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "account-deletion",
+      "acceptanceStatus": "qualification-open",
+      "requiredSurfaces": [
+        "web-composed-acceptance-substrates"
+      ],
+      "substrateExecuted": true,
+      "qualificationRequired": true,
+      "evidence": [
+        "qual-web-005-privacy-deletion-2026-10-10"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "label": "cli-package-suite",
+      "cwd": "/private/tmp/verglos-cli-ent-current-20261022",
+      "args": [
+        "--filter",
+        "verglos",
+        "test"
+      ],
+      "startedAt": "2026-10-22T12:48:48.409Z",
+      "finishedAt": "2026-10-22T12:49:58.479Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 312,
+        "pass": 310,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 2
+      },
+      "outputSha256": "683992638757c3e8cb2055a45337c8838dac3331c39cdffc0671c050c1e9e31f"
+    },
+    {
+      "label": "web-full-suite",
+      "cwd": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web/.worktrees/studio-entitlement-recipient-20261019",
+      "args": [
+        "test"
+      ],
+      "startedAt": "2026-10-22T12:49:58.479Z",
+      "finishedAt": "2026-10-22T12:50:01.835Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 979,
+        "pass": 949,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 30
+      },
+      "outputSha256": "7a181785731fc8667d7ca59ea2686cb591d6ce813ed103bf15e6c7523509b4da"
+    },
+    {
+      "label": "web-composed-acceptance-substrates",
+      "cwd": "/Users/anuragyadav/Developer/TopNotchh-Workspace/verglos-web/.worktrees/studio-entitlement-recipient-20261019",
+      "args": [
+        "exec",
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "src/lib/organizations/studio-e2e.test.ts",
+        "src/lib/organizations/enterprise-e2e.test.ts",
+        "src/lib/organizations/team-e2e.test.ts",
+        "src/lib/qual/qual-web-suites.test.ts"
+      ],
+      "startedAt": "2026-10-22T12:50:01.835Z",
+      "finishedAt": "2026-10-22T12:50:02.363Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 74,
+        "pass": 74,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "outputSha256": "9a52bbd1207072fc6ad14ec5bd6b4de2168bfc5ca979a0961dc1aed9ef0c77af"
+    }
+  ],
+  "storyCoverageComplete": true,
+  "allCommandsPassed": true,
+  "note": "Substrate/regression evidence only. No hosted HTTP, provider, customer, reviewer, browser-human, field-CWV, migration, or production acceptance is claimed."
+}

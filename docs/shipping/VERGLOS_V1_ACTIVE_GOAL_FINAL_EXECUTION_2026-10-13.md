@@ -32,6 +32,21 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current-head acceptance refresh after merged PR #158 (2026-10-22):** The
+private verifier ran against clean CLI source
+`e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`, promoted by normal PR #158 merge
+`145ff5d902289ecfb670a397c9e87860eb06309d`, and Web
+`d32da250d5c2427dcfa36f560421a2506bb8a659`. CLI passed **310/312** with **2
+explicit skips / 0 failures**, Web passed **949/979** with **30 explicit skips /
+0 failures**, composed substrates passed **74/74**, and all **12/12** stories
+executed. The additive final bundle contains **27** hashed files and passes its secret
+scan. No `TEST_DATABASE_URL` was supplied, no database/provider/customer/
+production operation occurred, and no previous bundle was removed or
+overwritten. `ACCEPT-002/003` remain unchecked for external/hosted/provider/
+customer/reviewer gates. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/accept-002-003-current-head-pr158-pr159-pr233-2026-10-22.md`.
+
 **Current acceptance-substrate refresh (2026-10-22):** The private
 `ACCEPT-002/003` verifier was rerun against clean exact heads CLI
 `9fba66ac386605174a98bea856b9f04ceda8cfa8` and Web
