@@ -32,6 +32,24 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current implementation batch (2026-10-22):** `DIST-002` received an exact
+release-event binding in CLI commit `9fba66ac386605174a98bea856b9f04ceda8cfa8`.
+The publish workflow now resolves the pushed tag commit and requires it to
+match `GITHUB_SHA` before preparing or publishing artifacts; malformed and
+mismatched SHA cases are covered by tests. Focused release contracts passed
+**12/12**; workspace typecheck **14/14 tasks**; workspace tests **13/13
+tasks**; workspace build **8/8 tasks**; hosted Platform matrix
+`39778965080` passed **9/9**; self-scan `39778965079`, in-toto binding
+`39778965080`, and standard/provenance validation `39778965118` passed. PR
+#159 merged normally as `285193a58be2c431fd5da865829d0fde08a9eb04`; the source
+branch remains preserved. No npm publication, registry/provider state,
+database, customer, or deployment was changed, and no file, branch, record, or
+deployment was deleted. `DIST-002` remains unchecked for protected environment
+authorization, legal/license clearance, trusted-publisher review, and an
+actual immutable publication/attestation event. Score remains **239 checked /
+41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-002-tag-commit-binding-pr159-2026-10-22.md`.
+
 **Current implementation batch (2026-10-22):** `FINAL-WEB-008` received a
 production-path public-truth smoke hardening in Web commit
 `d32da250d5c2427dcfa36f560421a2506bb8a659`. The audit now includes the public

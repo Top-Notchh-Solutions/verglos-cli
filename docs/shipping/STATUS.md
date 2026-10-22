@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-002 exact release-tag binding and merge
+
+CLI commit `9fba66ac386605174a98bea856b9f04ceda8cfa8` binds the release event
+SHA to the commit resolved from the pushed tag before publication. PR #159
+merged normally as `285193a58be2c431fd5da865829d0fde08a9eb04`; the source branch
+remains preserved. Focused release contracts passed **12/12**; workspace
+typecheck **14/14 tasks**; tests **13/13 tasks**; build **8/8 tasks**; hosted
+Platform matrix **9/9** at `39778965080`, self-scan `39778965079`, in-toto
+binding `39778965080`, and standard/provenance validation `39778965118` passed.
+No npm publication, registry/provider state, database, customer, or
+deployment state changed; no file, branch, record, or deployment was deleted.
+`DIST-002` remains open for protected environment authorization, legal/license
+clearance, trusted-publisher review, and an actual immutable publication event.
+Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/dist-002-tag-commit-binding-pr159-2026-10-22.md`.
+
+## 2026-10-22 · FINAL-WEB-008 public truth smoke hardening and merge
 ## 2026-10-22 · FINAL-WEB-008 public truth smoke hardening and merge
 
 Web commit `d32da250d5c2427dcfa36f560421a2506bb8a659` adds `robots.ts` and

@@ -1,5 +1,27 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · bind DIST-002 publication to the immutable tag commit
+
+- **Decision:** Require the commit resolved from the pushed Git tag to equal
+  the GitHub event SHA before any release artifact preparation or registry
+  publication.
+- **Implementation:** CLI commit `9fba66ac386605174a98bea856b9f04ceda8cfa8`
+  merged through PR #159 as normal merge commit
+  `285193a58be2c431fd5da865829d0fde08a9eb04`.
+- **Verification:** Focused contracts **12/12**; workspace typecheck **14/14
+  tasks**; tests **13/13 tasks**; build **8/8 tasks**; hosted Platform matrix
+  **9/9** `39778965080`; self-scan `39778965079`; in-toto `39778965080`; and
+  standard/provenance `39778965118` passed.
+- **Safety boundary:** No npm publication, registry/provider state, database,
+  customer, or deployment state changed. No file, branch, record, or
+  deployment was deleted.
+- **Disposition:** This closes a code-side release-boundary gap only. Keep
+  `DIST-002` unchecked for protected environment authorization, legal/license
+  clearance, trusted-publisher review, and an actual immutable
+  publication/attestation event. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-002-tag-commit-binding-pr159-2026-10-22.md`.
+
+## 2026-10-22 · harden FINAL-WEB-008 public truth smoke evidence
 ## 2026-10-22 · harden FINAL-WEB-008 public truth smoke evidence
 
 - **Decision:** Treat the public `robots.ts` and `sitemap.ts` outputs as part
