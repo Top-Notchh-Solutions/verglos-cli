@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · authorized public JS/TS corpus execution
+
+- **Run:** The built CLI at commit `78251d1ba47e505380b25ee146f1ca420f1e61a6`
+  scanned six full-clone public technical fixtures at exact commits under
+  their declared ISC, MIT, or Apache-2.0 licenses.
+- **Result:** `buggy-node`, `juice-shop`, `nodegoat`, `dvna`, `nodejs-goof`,
+  and `damm-vulnerable-node` all completed with complete coverage and zero
+  scanner limitations. Telemetry and live-secret verification were disabled.
+- **Data boundary:** Only derived JSON/HTML reports were written to the
+  private `.local-evidence/public-oss-corpus-2026-10-23/` directory; the
+  private ledger stores bounded metadata and hashes only. No source or report
+  was uploaded, and no customer or upstream endorsement is claimed.
+- **Disposition:** This advances the authorized public-fixture execution path
+  for `ACCEPT-011`/`ACCEPT-012`; it does not close external customer,
+  recipient, commercial, or release-sign-off gates. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted.
+- **Evidence:** `evidence/acceptance-public-oss-corpus-2026-10-23.md`.
+
 ## 2026-10-23 · owner authorization refresh
 
 - **Owner:** Anurag Yadav, owner of Top Notchh Solutions and Verglos.

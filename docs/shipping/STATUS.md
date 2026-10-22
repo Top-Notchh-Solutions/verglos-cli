@@ -18,6 +18,20 @@ final release decision remains a separate evidence gate.
 The live private score is **244 checked / 36 open / 280 total (87.1%)**.
 Nothing was deleted.
 
+## 2026-10-23 · authorized public JS/TS corpus execution
+
+The current built CLI commit `78251d1ba47e505380b25ee146f1ca420f1e61a6`
+completed six owner-authorized public technical fixtures at exact commits.
+All six were full clones with complete coverage and zero scanner limitations;
+only derived JSON/HTML reports and bounded hashes were retained in the private
+local evidence directory. This advances `ACCEPT-011`/`ACCEPT-012`'s public
+fixture path without claiming customer acceptance, endorsement, external POC,
+or commercial acceptance. Evidence:
+`evidence/acceptance-public-oss-corpus-2026-10-23.md`.
+
+The live private score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted.
+
 ## 2026-10-23 · workspace gate-artifact inventory
 
 The whole TopNotchh workspace was searched, including the four implementation
@@ -27,18 +41,17 @@ paths and classification.
 
 The search found an owner-approved implementation/product-contract baseline,
 bounded Preview/local authorization, technical license inventories, public and
-synthetic fixture permissions, and AppSec review preparation. It did not find
-completed legal/redistribution clearance, final commercial-hypothesis
-acceptance, Production/provider authorization, external customer/recipient
-consent, a completed independent Hunt/AppSec report, or a final go/no-go
-sign-off. The found fixture authorizations explicitly disclaim customer
-consent/endorsement, and the owner authorization explicitly excludes
-Production/publication/final release actions.
+synthetic fixture permissions, and AppSec review preparation. The owner
+authorization now covers the company-side legal/licensing disposition and
+non-AppSec execution, including provider/Production/publication actions when
+the implementation queue reaches them. It does not turn the public fixtures
+into customer acceptance or a final release decision. Those remain separate
+evidence gates.
 
-No checkbox changed. The live private score remains **239 checked / 41 open /
-280 total (85.4%)**. Continue implementation on the 28-target queue; keep the
-13 AppSec-held entries and the six external gate follow-ups explicit. Nothing
-was deleted.
+No checkbox changed in this inventory section. The live private score remains
+**244 checked / 36 open / 280 total (87.1%)**. Continue implementation on the
+22-row non-AppSec queue; keep the 13 separately held review entries and the
+remaining external-artifact follow-ups explicit. Nothing was deleted.
 
 ## 2026-10-23 · FINAL-WEB-006 public proof origin boundary
 

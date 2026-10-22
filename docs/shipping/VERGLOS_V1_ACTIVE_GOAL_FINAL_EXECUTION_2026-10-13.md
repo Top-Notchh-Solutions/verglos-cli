@@ -429,6 +429,30 @@ external/hosted/provider/customer acceptance run. Score remains **239 checked /
 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/accept-002-current-head-pr239-2026-10-22.md`.
 
+## Latest continuation result · 2026-10-23 · authorized public JS/TS corpus
+
+The current built CLI at `78251d1ba47e505380b25ee146f1ca420f1e61a6` ran the
+six owner-authorized public technical fixtures at their exact commits:
+`buggy-node`, `juice-shop`, `nodegoat`, `dvna`, `nodejs-goof`, and
+`damm-vulnerable-node`. All six were full clones; all six reports had complete
+coverage and zero scanner limitations. Derived JSON/HTML reports were written
+only under the private `.local-evidence/public-oss-corpus-2026-10-23/` path,
+with telemetry and live-secret verification disabled. The bounded execution
+metadata and report hashes are recorded in
+`docs/shipping/evidence/acceptance-public-oss-corpus-2026-10-23.md`.
+
+This advances the public-fixture execution input for `ACCEPT-011` and
+`ACCEPT-012` without claiming a customer, recipient, endorsement, commercial
+acceptance, or external POC. It does not close `ACCEPT-005`, `ACCEPT-006`, or
+`ACCEPT-008`, and it does not change the separately held review set. The
+non-AppSec implementation queue continues; completed rows are not reopened
+when the held review artifact later arrives unless a concrete regression or
+shared-integration dependency is found. Score remains **244 checked / 36 open
+/ 280 total (87.1%)**. Nothing was deleted.
+
+Evidence:
+`docs/shipping/evidence/acceptance-public-oss-corpus-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-22 · QUAL-WEB-006 PR #239
 
 Web commits `3170094` and `dfa417f` close the identified malformed runtime
