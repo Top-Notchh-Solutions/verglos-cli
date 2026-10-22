@@ -7,7 +7,7 @@ after adding the route-wide security-header baseline. This is owner-controlled
 first-party technical evidence only. It is not independent AppSec review,
 customer/recipient acceptance, provider acceptance, or a Production release.
 
-- Web source: `/private/tmp/verglos-web-acceptance-20261022`
+- Web source: `/private/tmp/verglos-web-security-merged-20261022`
 - Web merged commit: `f20dc426e310557a7693d1e2e18f693663943ce5`
 - PR: [#240](https://github.com/anuragyadav-git/verglos-web/pull/240)
 - Implementation commit: `7df61c0253751587a7a41b700773ab5e1abca12a`
@@ -36,7 +36,7 @@ The fresh owner-controlled Web scan exited **0**:
 
 | Target | Findings | Score | Risk | Coverage | Report SHA-256 | Terminal SHA-256 |
 | --- | ---: | ---: | --- | --- | --- | --- |
-| Web | 21 | 75 | medium | incomplete | `2934834abdec36dd2598aa3293f51ff24c0413858bfa2710907c4fa7a1606752` | `9598e931f2fa879bb3620eba847cfcb3bf5018c4622ad621b257549ca583ddbe` |
+| Web | 21 | 75 | medium | incomplete | `0d3f8b9a4154b2521fb6d7e981184b53d3673a6529352cbb909d03312610a9ed` | `2aef46e446c7ed70f200e0336036d73a9fd58296201d6567178ec1d1795a6856` |
 
 The prior Web scan had 22 findings and reported D5-004. The merged-head scan
 has no D5-004 finding. The scan still records incomplete coverage because
