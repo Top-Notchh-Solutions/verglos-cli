@@ -1,8 +1,19 @@
 # Verglos V1 traceability
 
+## ACCEPT-005 exact blocker audit · 2026-10-22
+
+- **Protocol mapping:** Validator passed; protocol/template present, external
+  contact not performed, customer acceptance open.
+- **Adjacent qualification:** Public truth **35/35**, release smoke **4/4**,
+  landing contract **4/4**.
+- **Acceptance mapping:** Keep ACCEPT-005 open for named external consent,
+  exact founder authorization, reproducible redacted reconciliation, and
+  expiry/deletion evidence. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-005-current-blocker-audit-2026-10-22.md`.
+
 ## ACCEPT-003 current-head evidence bundle · 2026-10-22
 
-- **Bundle mapping:** 51 hashed evidence files; secret scan passed.
+- **Bundle mapping:** 52 hashed evidence files; secret scan passed.
 - **Acceptance mapping:** Keep `ACCEPT-003` open for reviewer sign-off and
   external/hosted evidence. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/accept-003-current-head-pr239-2026-10-22.md` and the

@@ -1,8 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · ACCEPT-005 external workflow gate
+
+The protocol validator passes, but no external contact or customer acceptance
+has occurred. Keep ACCEPT-005 unchecked until the named-owner consent record,
+founder authorization, redacted reconciliation result, and expiry/deletion
+record exist. Adjacent current-head truth checks pass **35/35**, **4/4**, and
+**4/4**. Score remains **239/41/280 (85.4%)**. Evidence:
+`evidence/accept-005-current-blocker-audit-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-003 current-head bundle gate
 
-The current private acceptance manifest contains **51** hashed files and
+The current private acceptance manifest contains **52** hashed files and
 passes its secret scan. Keep `ACCEPT-003` unchecked for reviewer sign-off and
 external/hosted evidence. Score remains **239/41/280 (85.4%)**. Evidence:
 `evidence/accept-003-current-head-pr239-2026-10-22.md`.

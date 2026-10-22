@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ACCEPT-005 exact blocker audit
+
+- **Verification:** `acceptance:protocol:check` passed with protocol/template
+  present, `externalContact: not-performed`, and `customerAcceptance: open`.
+  Current merged Web public-truth safeguards passed **35/35**, public-release
+  smoke **4/4**, and landing contract **4/4**.
+- **Missing artifact:** A named external owner's completed consent record and
+  exact founder authorization, followed by the bounded workflow's redacted
+  reconciliation result and fixture/evidence expiry or deletion record.
+- **Disposition:** Keep `ACCEPT-005` unchecked. The first-party qualification
+  is not external consented-team/recipient acceptance; later comprehension,
+  commercial, truth-lock, and release-freeze rows remain dependency-bound.
+  Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-005-current-blocker-audit-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-003 current-head evidence bundle
 
 - **Verification:** The private acceptance manifest contains **51** hashed

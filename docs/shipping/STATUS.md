@@ -1,8 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · ACCEPT-005 exact blocker audit
+
+The acceptance protocol validator passes, but reports
+`externalContact: not-performed` and `customerAcceptance: open`. ACCEPT-005
+still needs a named external owner's consent record, exact founder
+authorization, reproducible redacted workflow/reconciliation evidence, and
+fixture/evidence expiry or deletion proof. Adjacent merged-head truth checks
+pass: **35/35**, **4/4**, and **4/4**. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`evidence/accept-005-current-blocker-audit-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-003 current-head evidence bundle
 
-The private acceptance bundle now contains **51** hashed evidence files and
+The private acceptance bundle now contains **52** hashed evidence files and
 passes its secret scan. Keep `ACCEPT-003` open for reviewer sign-off and the
 external/hosted evidence required by the row. Score remains **239 checked / 41
 open / 280 total (85.4%)**. Evidence:

@@ -1,8 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain ACCEPT-005 after blocker audit
+
+- **Decision:** Keep ACCEPT-005 open; do not treat first-party qualification or
+  local public-truth tests as external acceptance.
+- **Observed:** Protocol validation passes, but external contact is not
+  performed and customer acceptance remains open.
+- **Required next action:** Obtain a named owner's consent record and exact
+  founder authorization, then run and reconcile the bounded workflow with
+  expiry/deletion evidence.
+- **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/accept-005-current-blocker-audit-2026-10-22.md`.
+
 ## 2026-10-22 · retain ACCEPT-003 after current-head bundle refresh
 
-- **Decision:** Accept the 51-file secret-scanned manifest as current
+- **Decision:** Accept the 52-file secret-scanned manifest as current
   reproducibility evidence; do not check the row.
 - **Reason:** Reviewer sign-off and external/hosted evidence remain absent.
 - **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:

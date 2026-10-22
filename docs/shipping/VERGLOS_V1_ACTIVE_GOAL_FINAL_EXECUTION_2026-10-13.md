@@ -14,9 +14,20 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · ACCEPT-005 blocker audit
+
+The acceptance protocol validator passed, but reports external contact not
+performed and customer acceptance open. The exact missing artifacts are a
+named external owner's consent record, founder authorization for the exact
+repository/commit/scope, reproducible redacted release reconciliation, and
+fixture/evidence expiry or deletion proof. Adjacent merged-head truth checks
+passed **35/35**, **4/4**, and **4/4**. Keep ACCEPT-005 open; score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/accept-005-current-blocker-audit-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · ACCEPT-003 bundle
 
-The private acceptance manifest now contains **51** hashed evidence files and
+The private acceptance manifest now contains **52** hashed evidence files and
 passes its secret scan. Keep `ACCEPT-003` unchecked for reviewer sign-off and
 the external/hosted evidence required by its contract. Score remains **239
 checked / 41 open / 280 total (85.4%)**. Evidence:
