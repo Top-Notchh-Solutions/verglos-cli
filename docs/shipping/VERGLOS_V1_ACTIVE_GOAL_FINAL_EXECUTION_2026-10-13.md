@@ -14,6 +14,21 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · ENT-CLI-001 exact-head requalification
+
+The current merged CLI `db351035` and Web `02f5aba` private-runner surfaces
+were requalified. Shared tests passed **460/460**, CLI passed **311/313** with
+2 documented skips and 0 failures, Web private-runner contracts passed
+**26/26**, and CLI/Web typecheck/build checks passed. The implementation
+already covers signed short-lived jobs, tenant/runner/target binding,
+GET-only polling, replay protection, least-evidence projection, bounded
+transport, and fail-closed result acknowledgement. `ENT-CLI-001` remains
+unchecked for operational enrollment, approved enterprise/recipient runner
+execution and reconciliation, operational acceptance, any required
+independent review, and enterprise acceptance. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/ent-cli-001-current-head-requalification-pr167-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · CLI scanner precision PR #167
 
 The CLI scanner precision fix was implemented in public `verglos-cli` and

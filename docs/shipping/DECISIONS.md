@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain ENT-CLI-001 after exact-head requalification
+
+- **Decision:** Accept the current merged-head protocol qualification as
+  repository evidence; do not check `ENT-CLI-001`.
+- **Observed:** Shared **460/460**, CLI **311/313** with 2 documented skips,
+  Web private-runner **26/26**, CLI typecheck/build, and Web typecheck passed.
+- **Reason:** Operational enrollment credential exchange, approved enterprise
+  runner execution/result reconciliation, operational acceptance, required
+  independent review, and enterprise acceptance remain absent.
+- **Disposition:** Continue with `DIST-001`. Score remains **239/41/280
+  (85.4%)**. No provider, customer, Production, or credential operation was
+  performed; nothing was deleted. Evidence:
+  `evidence/ent-cli-001-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · retain open gates after CLI scanner PR #167
 
 - **Decision:** Merge the scanner precision implementation through the normal

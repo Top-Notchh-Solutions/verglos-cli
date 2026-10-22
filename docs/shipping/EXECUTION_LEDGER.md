@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ENT-CLI-001 exact-head requalification
+
+- **Verification:** Exact merged CLI `db351035` and Web `02f5aba` passed
+  shared **460/460**, CLI **311/313** with 2 documented skips and 0 failures,
+  Web private-runner contracts **26/26**, CLI typecheck/build, and Web
+  typecheck.
+- **Implementation boundary:** The existing protocol covers signed
+  short-lived jobs, tenant/runner/target binding, GET-only polling, replay
+  protection, least-evidence results, bounded transport, and fail-closed
+  result acknowledgement. No new public source change was needed in this
+  requalification.
+- **Disposition:** Keep `ENT-CLI-001` unchecked for operational enrollment,
+  approved enterprise/recipient runner execution and reconciliation,
+  operational acceptance, any required independent review, and enterprise
+  acceptance. The next implementation audit is `DIST-001`. Score remains
+  **239/41/280 (85.4%)**.
+- **Boundary:** No provider, Production, customer, database, deployment, or
+  credential operation occurred. Nothing was deleted.
+- **Evidence:** `evidence/ent-cli-001-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · CLI scanner false-positive precision and PR #167
 
 - **Implementation:** Public CLI commits `062a5f41` and `7ccfe683` narrow the

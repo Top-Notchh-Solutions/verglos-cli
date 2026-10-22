@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## ENT-CLI-001 exact-head requalification · 2026-10-22
+
+- **Source mapping:** CLI `db3510356ecd6c6e430d7dcb3b9354e514d777ee`; Web
+  `02f5aba95c4172255cc522730c6ffecc1598cbda`.
+- **Qualification mapping:** Shared **460/460**, CLI **311/313** with 2
+  documented skips and 0 failures, Web private-runner **26/26**, CLI
+  typecheck/build, and Web typecheck passed.
+- **Acceptance mapping:** Keep `ENT-CLI-001` open for operational enrollment,
+  approved runner execution/reconciliation, operational acceptance, required
+  independent review, and enterprise acceptance. Next implementation audit:
+  `DIST-001`. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/ent-cli-001-current-head-requalification-pr167-2026-10-22.md`.
+
 ## CLI scanner false-positive precision · 2026-10-22
 
 - **Source mapping:** CLI production `062a5f41`, regression `7ccfe683`, and

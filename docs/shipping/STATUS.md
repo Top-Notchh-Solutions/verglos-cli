@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · ENT-CLI-001 exact-head requalification
+
+Exact merged CLI `db351035` and Web `02f5aba` private-runner surfaces passed
+shared **460/460**, CLI **311/313** with 2 documented skips and 0 failures,
+Web private-runner **26/26**, CLI typecheck/build, and Web typecheck. This is
+repository-owned protocol evidence only; `ENT-CLI-001` remains open for
+operational enrollment credential exchange, approved enterprise/recipient
+runner execution and reconciliation, operational acceptance, any required
+independent review, and enterprise acceptance. The next implementation audit
+is `DIST-001`. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Nothing was deleted. Evidence:
+`evidence/ent-cli-001-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · CLI scanner precision PR #167
 
 CLI PR #167 merged normally as `db3510356ecd6c6e430d7dcb3b9354e514d777ee`

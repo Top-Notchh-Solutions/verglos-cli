@@ -53,6 +53,7 @@ const paths = [
   "docs/shipping/evidence/accept-005-web-public-proof-url-pr241-2026-10-22.md",
   "docs/shipping/evidence/qual-web-serial-fresh-postgres-2026-10-22.md",
   "docs/shipping/evidence/qual-cli-scanner-false-positive-precision-pr167-2026-10-22.md",
+  "docs/shipping/evidence/ent-cli-001-current-head-requalification-pr167-2026-10-22.md",
   "docs/shipping/evidence/qual-web-005-local-isolated-qualification-2026-10-22.md",
   "docs/shipping/evidence/qual-cli-006-trusted-root-sigstore-pr164-2026-10-22.md",
   "docs/shipping/evidence/dist-003-origin-manifest-boundary-pr165-2026-10-22.md",
