@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## ACCEPT-005 current-head first-party qualification · 2026-10-22
+
+- **Source mapping:** CLI `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web
+  `ba00d5d86fdbcaeeee817c2c66b86f0b3de01987`.
+- **Qualification mapping:** CLI exit 0, 78 findings, score 67/high; Web exit
+  0, 22 findings, score 73/medium; both coverage states incomplete because
+  provenance was skipped.
+- **Acceptance mapping:** Keep ACCEPT-005 open for external consent,
+  authorization, reconciliation, and expiry/deletion evidence. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-005-current-head-first-party-qualification-2026-10-22.md`.
+
 ## ACCEPT-005 exact blocker audit · 2026-10-22
 
 - **Protocol mapping:** Validator passed; protocol/template present, external
@@ -13,7 +25,7 @@
 
 ## ACCEPT-003 current-head evidence bundle · 2026-10-22
 
-- **Bundle mapping:** 52 hashed evidence files; secret scan passed.
+- **Bundle mapping:** 53 hashed evidence files; secret scan passed.
 - **Acceptance mapping:** Keep `ACCEPT-003` open for reviewer sign-off and
   external/hosted evidence. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/accept-003-current-head-pr239-2026-10-22.md` and the

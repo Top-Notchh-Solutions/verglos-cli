@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain ACCEPT-005 after current-head first-party run
+
+- **Decision:** Accept the current-head scan as updated first-party technical
+  evidence; do not check ACCEPT-005.
+- **Observed:** CLI exit 0 with 78 findings/score 67 high; Web exit 0 with 22
+  findings/score 73 medium; both coverage incomplete because provenance was
+  skipped.
+- **Reason:** The required external consented-team workflow and independent
+  acceptance artifacts remain absent.
+- **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/accept-005-current-head-first-party-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · retain ACCEPT-005 after blocker audit
 
 - **Decision:** Keep ACCEPT-005 open; do not treat first-party qualification or
@@ -14,7 +26,7 @@
 
 ## 2026-10-22 · retain ACCEPT-003 after current-head bundle refresh
 
-- **Decision:** Accept the 52-file secret-scanned manifest as current
+- **Decision:** Accept the 53-file secret-scanned manifest as current
   reproducibility evidence; do not check the row.
 - **Reason:** Reviewer sign-off and external/hosted evidence remain absent.
 - **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:

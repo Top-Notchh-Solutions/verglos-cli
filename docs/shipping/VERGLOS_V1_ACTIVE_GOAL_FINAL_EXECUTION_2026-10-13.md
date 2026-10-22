@@ -14,6 +14,17 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · ACCEPT-005 current-head run
+
+Current clean merged CLI/Web heads completed the owner-controlled scan with
+CLI exit **0** and **78 findings / score 67 high**, and Web exit **0** and **22
+findings / score 73 medium**. Both reports mark coverage incomplete because
+provenance was skipped. This is updated first-party qualification only; keep
+ACCEPT-005 open for external consent, exact authorization, reconciliation, and
+expiry/deletion evidence. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/accept-005-current-head-first-party-qualification-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · ACCEPT-005 blocker audit
 
 The acceptance protocol validator passed, but reports external contact not
@@ -27,7 +38,7 @@ passed **35/35**, **4/4**, and **4/4**. Keep ACCEPT-005 open; score remains
 
 ## Latest continuation result · 2026-10-22 · ACCEPT-003 bundle
 
-The private acceptance manifest now contains **52** hashed evidence files and
+The private acceptance manifest now contains **53** hashed evidence files and
 passes its secret scan. Keep `ACCEPT-003` unchecked for reviewer sign-off and
 the external/hosted evidence required by its contract. Score remains **239
 checked / 41 open / 280 total (85.4%)**. Evidence:

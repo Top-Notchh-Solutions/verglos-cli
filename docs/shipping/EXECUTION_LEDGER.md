@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ACCEPT-005 current-head first-party qualification
+
+- **Verification:** Clean CLI `1d7844bd` and Web `ba00d5d` scans exited **0**.
+  CLI reported 78 findings with score 67/high; Web reported 22 findings with
+  score 73/medium. Both explicitly report incomplete coverage because
+  provenance was skipped.
+- **Boundary:** Owner-controlled first-party source only; no external
+  repository, customer data, provider, Production, deployment, or independent
+  AppSec action occurred. Raw reports remain outside the ledger.
+- **Disposition:** Keep ACCEPT-005 unchecked; this refresh cannot replace a
+  named external owner's consent, exact founder authorization, real external
+  reconciliation, or expiry/deletion evidence. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/accept-005-current-head-first-party-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-005 exact blocker audit
 
 - **Verification:** `acceptance:protocol:check` passed with protocol/template

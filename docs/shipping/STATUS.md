@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · ACCEPT-005 current-head first-party qualification
+
+Current clean merged heads passed the owner-controlled scan command with CLI
+exit **0** (78 findings, score 67/high) and Web exit **0** (22 findings, score
+73/medium). Both reports explicitly mark coverage incomplete because provenance
+was skipped. This does not satisfy external acceptance or independent AppSec.
+Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/accept-005-current-head-first-party-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-005 exact blocker audit
 
 The acceptance protocol validator passes, but reports
@@ -13,7 +22,7 @@ pass: **35/35**, **4/4**, and **4/4**. Score remains **239 checked / 41 open /
 
 ## 2026-10-22 · ACCEPT-003 current-head evidence bundle
 
-The private acceptance bundle now contains **52** hashed evidence files and
+The private acceptance bundle now contains **53** hashed evidence files and
 passes its secret scan. Keep `ACCEPT-003` open for reviewer sign-off and the
 external/hosted evidence required by the row. Score remains **239 checked / 41
 open / 280 total (85.4%)**. Evidence:
