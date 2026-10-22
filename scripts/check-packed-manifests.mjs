@@ -4,6 +4,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { posix } from "node:path";
 import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePath } from "./package-surface-audit.mjs";
+import { MAX_RELEASE_ARTIFACT_BYTES, readBoundedRegularFile } from "./release-artifact-files.mjs";
 
 const root = resolve(process.argv[2] ?? "");
 const repositoryRoot = fileURLToPath(new URL("..", import.meta.url));
@@ -39,7 +40,7 @@ const failures = [];
 for (const name of archives) {
   const archive = join(root, name);
   if (!(await lstat(archive)).isFile()) throw new Error(`packed artifact is not a regular file: ${name}`);
-  const entries = readTarEntries(await readFile(archive));
+  const entries = readTarEntries(await readBoundedRegularFile(archive, MAX_RELEASE_ARTIFACT_BYTES, `packed artifact ${name}`));
   let manifest;
   try {
     const packageManifest = entries.find((entry) => entry.name === "package/package.json");

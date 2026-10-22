@@ -70,3 +70,9 @@ test("packed manifest audit rejects a declared path absent from the archive", as
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("packed manifest audit binds archive reads to bounded regular-file handles", async () => {
+  const source = await readFile("scripts/check-packed-manifests.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(archive, MAX_RELEASE_ARTIFACT_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(archive\)/u);
+});
