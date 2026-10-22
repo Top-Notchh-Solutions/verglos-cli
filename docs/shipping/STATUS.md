@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-002 dependency-license remediation boundary
+
+The exact CLI merged head `db351035` was checked for a safe dependency-only
+remediation of the strict release license gate. The current graph contains
+seven review blockers: the bundled `benchmark@1.0.0`/`fast-uri@3.1.7` nested
+license conflict plus BlueOak review for `glob`, `lru-cache`, `minimatch`,
+`minipass`, `minipass-flush`, and `path-scurry`. Fast-uri patch-level package
+checks retain the bundled benchmark; changing the Sigstore fetch/cache chain
+would either leave the path-scurry review or alter the supported Node/runtime
+contract. No safe source or lockfile change was applied. `DIST-002` remains
+open for legal/license decision, protected/trusted publication, immutable
+attestation, and final acceptance. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Nothing was deleted. Evidence:
+`evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · STUDIO-CLI-001 exact-head requalification
 
 Current CLI `db351035` projection/approval/upload contracts passed **15/15**;

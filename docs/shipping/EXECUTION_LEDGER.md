@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · DIST-002 dependency-license remediation boundary
+
+- **Verification:** On CLI merged head `db351035`, the strict inventory reports
+  **254** lockfile packages, one bundled component, and **7** review blockers.
+  `pnpm why` traced them to `fast-uri@3.1.7`/bundled `benchmark@1.0.0` and the
+  Sigstore npm fetch/cache chain.
+- **Decision:** Do not add speculative pnpm overrides or downgrade the
+  Sigstore runtime. Fast-uri patch releases retain the benchmark files, and
+  the candidate fetch/cache changes do not clear every review path while
+  preserving the current Node floor.
+- **Disposition:** Keep `DIST-002` unchecked for legal/license clearance,
+  protected/trusted publisher execution, immutable publication/attestation,
+  and final acceptance. Score remains **239/41/280 (85.4%)**.
+- **Boundary:** No public source, lockfile, registry, provider, Production,
+  database, customer, legal, or AppSec state changed. Nothing was deleted.
+- **Evidence:** `evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · STUDIO-CLI-001 exact-head requalification
 
 - **Verification:** CLI current head passed projection/approval/upload tests

@@ -8648,3 +8648,18 @@ changed. See
 - **Evidence:**
   `evidence/qual-web-006-public-home-lighthouse-2026-10-18.md` and the two
   retained raw reports beside it.
+# DIST-002 dependency-license remediation boundary · 2026-10-22
+
+- **Source mapping:** Exact CLI merged head `db3510356ecd6c6e430d7dcb3b9354e514d777ee`.
+- **Dependency mapping:** `fast-uri@3.1.7` bundles `benchmark@1.0.0`; the
+  Sigstore fetch/cache chain reaches the six BlueOak review entries.
+- **Verification mapping:** License inventory reports **254** lockfile
+  packages, one bundled component, and **7** review blockers. Checked fast-uri
+  patch versions retain the bundled benchmark.
+- **Acceptance mapping:** No safe source/lockfile remediation was applied.
+  `DIST-002` remains open for legal/license clearance, protected/trusted
+  publication, immutable attestation, and final acceptance. Score remains
+  **239/41/280 (85.4%)**. No AppSec-held checkbox changed.
+- **Boundary:** No public source, lockfile, registry, provider, Production,
+  database, customer, legal, or AppSec state changed. Nothing was deleted.
+- **Evidence:** `evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md`.

@@ -57,6 +57,7 @@ const paths = [
   "docs/shipping/evidence/ent-cli-001-current-head-requalification-pr167-2026-10-22.md",
   "docs/shipping/evidence/dist-001-current-head-requalification-pr167-2026-10-22.md",
   "docs/shipping/evidence/dist-002-current-head-requalification-pr167-2026-10-22.md",
+  "docs/shipping/evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md",
   "docs/shipping/evidence/dist-003-current-head-requalification-pr167-2026-10-22.md",
   "docs/shipping/evidence/dist-006-current-head-requalification-pr167-2026-10-22.md",
   "docs/shipping/evidence/qual-cli-006-current-head-requalification-pr167-2026-10-22.md",

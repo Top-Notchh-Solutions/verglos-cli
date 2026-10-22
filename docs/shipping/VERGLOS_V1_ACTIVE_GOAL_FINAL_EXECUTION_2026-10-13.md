@@ -1085,3 +1085,18 @@ Read before changing backlog state:
 Implement only in the current `verglos-web` and `verglos-cli` repositories or
 their clean worktrees. Keep this file as the single active goal and keep the
 private ledger as the authoritative evidence and backlog record.
+# 2026-10-22 · DIST-002 dependency-license remediation boundary
+
+The exact merged CLI head `db351035` was checked for a safe dependency-only
+fix to the strict release license gate. The live graph still contains seven
+review blockers: the `benchmark@1.0.0` bundle inside `fast-uri@3.1.7` and
+BlueOak review for `glob@13.0.6`, `lru-cache@11.5.2`, `minimatch@10.2.6`,
+`minipass@7.1.3`, `minipass-flush@1.0.7`, and `path-scurry@2.0.2`.
+Patch-level fast-uri packages retain the benchmark files. Speculative
+fetch/cache downgrades do not clear all blockers while preserving the current
+Node/runtime contract, so no public source or lockfile change was made.
+`DIST-002` remains open for the real legal/license decision,
+protected/trusted publication, immutable attestation, and final acceptance.
+No files were deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`docs/shipping/evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md`.

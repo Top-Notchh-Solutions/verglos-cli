@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain DIST-002 after dependency remediation audit
+
+- **Decision:** Do not make an unverified dependency override or package
+  downgrade solely to silence the strict license gate.
+- **Observed:** The exact merged CLI head has seven explicit review entries;
+  fast-uri patch releases retain the bundled benchmark, while changing the
+  Sigstore fetch/cache chain either leaves `path-scurry` in the graph or
+  changes the supported runtime contract.
+- **Reason:** Clearing a legal/license review gate requires a real legal
+  decision or an upstream-supported dependency change with full regression
+  qualification, not a speculative lockfile substitution.
+- **Disposition:** Keep `DIST-002` open for legal/license clearance,
+  protected/trusted publication, immutable attestation, and final acceptance.
+  Score remains **239/41/280 (85.4%)**. Nothing was deleted.
+- **Evidence:** `evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · retain STUDIO-CLI-001 after exact-head requalification
 
 - **Decision:** Accept the current CLI/Web Studio contract qualification as
