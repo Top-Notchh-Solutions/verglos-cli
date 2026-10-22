@@ -167,6 +167,15 @@ test("private runner result upload refuses malformed projections before network"
   assert.equal(called, false);
 });
 
+test("private runner result upload refuses a malformed successful response", async () => {
+  const result = {
+    protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
+    startedAt: "2026-10-06T00:01:00.000Z", finishedAt: "2026-10-06T00:01:01.000Z", evidenceDigest: `sha256:${"b".repeat(64)}`, findingCount: 2, coverage: "complete",
+  } as const;
+  const response = await uploadPrivateRunnerResult({ result, fetchImpl: async () => new Response(JSON.stringify({ ok: true, resultDigest: "not-a-digest", idempotent: false }), { status: 201 }) });
+  assert.deepEqual(response, { status: "error", endpoint: "https://example.test/api/v1/private-runner/results", reason: "http" });
+});
+
 test("private runner result upload keeps its timeout active while reading a response body", async () => {
   const result = {
     protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
