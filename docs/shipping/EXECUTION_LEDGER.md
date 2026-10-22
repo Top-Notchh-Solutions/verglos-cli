@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · DIST-003 checksum-output portability and PR #160 merge
+
+- **Implementation:** CLI commits `97dead55b7fa9ce94da6e85662b719d0ad623dca`
+  and `6ae6a2a525ecc061e6fef99b91a44fc00504214f` refuse symlinked
+  `SHA256SUMS` output and retry bounded Windows temporary-consumer cleanup.
+- **Promotion:** PR [#160](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/160)
+  merged normally as `56b3535a1feffdac74a202259433d8f8536890e7`; source branch
+  preserved.
+- **Verification:** Focused release qualification **16/16**; forced workspace
+  test/typecheck/build graph **23/23**; hosted matrix **9/9** at
+  `39783743149`; self-scan `39783742975`; standard/provenance
+  `39783742882`; and in-toto job `119841347844` passed. Diff check passed.
+- **Safety boundary:** No database URL, provider, customer, reviewer,
+  publication, deployment, or production operation was used. No file, branch,
+  record, deployment, or release artifact was deleted or overwritten.
+- **Disposition:** Keep `DIST-003` unchecked for trusted/protected publication,
+  immutable attestation, legal/license clearance, and final release acceptance.
+  Score remains **239/41/280 (85.4%)**.
+- **Bundle:** Additive `acceptance-evidence-bundle-2026-10-22-pr160-final.json`
+  contains **28** hashed files and passed its secret scan; prior bundles remain
+  preserved.
+- **Evidence:** `evidence/dist-003-checksum-output-portability-pr160-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 refresh after merged PR #158
 
 - **Source mapping:** CLI source `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`,

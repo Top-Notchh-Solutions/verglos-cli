@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## DIST-003 checksum-output portability and PR #160 · 2026-10-22
+
+- **Source mapping:** CLI commits `97dead55b7fa9ce94da6e85662b719d0ad623dca`
+  and `6ae6a2a525ecc061e6fef99b91a44fc00504214f`; PR #160 merged normally as
+  `56b3535a1feffdac74a202259433d8f8536890e7`; source branch preserved.
+- **Implementation mapping:** `SHA256SUMS` refuses an existing symlink output;
+  Windows qualification retries bounded cleanup after transient npm/Node file
+  handles.
+- **Qualification mapping:** Focused release **16/16**, forced workspace
+  graph **23/23**, hosted matrix **9/9** `39783743149`, self-scan
+  `39783742975`, standard/provenance `39783742882`, and in-toto
+  `119841347844` passed; diff check passed.
+- **Evidence mapping:** Additive final acceptance bundle contains **28** hashed
+  files and passed its secret scan; prior bundles remain preserved.
+- **Acceptance mapping:** Keep `DIST-003` open for protected/trusted
+  publication, immutable attestation, legal/license clearance, provider action,
+  and final release acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-003-checksum-output-portability-pr160-2026-10-22.md`.
+
 ## ACCEPT-002/003 post-PR #158 substrate refresh · 2026-10-22
 
 - **Source mapping:** CLI `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`, PR #158

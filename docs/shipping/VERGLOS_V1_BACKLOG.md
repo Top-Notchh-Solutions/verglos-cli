@@ -4067,6 +4067,25 @@ release-origin, release-verifier, workflow-contract, and checksum suite passed
 the score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
 
+### DIST-003 checksum-output portability and PR #160 addendum · 2026-10-22
+
+CLI commits `97dead55` and `6ae6a2a5` refuse an existing symlink at the
+`SHA256SUMS` output path and make Windows qualification cleanup retryable when
+a temporary consumer is briefly busy. PR #160 merged normally as
+`56b3535a1feffdac74a202259433d8f8536890e7`; the source branch remains
+preserved. Focused release qualification passed **16/16**; the forced
+workspace test/typecheck/build graph passed **23/23**; hosted matrix
+`39783743149` passed **9/9**; self-scan `39783742975`, standard/provenance
+`39783742882`, and in-toto `119841347844` passed. This advances code-side
+implementation only; keep `DIST-003` unchecked for protected/trusted
+publication, immutable attestation, legal/license clearance, provider action,
+and final acceptance. No file, branch, record, deployment, or release artifact
+was deleted or overwritten. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Additive acceptance bundle
+`acceptance-evidence-bundle-2026-10-22-pr160-final.json` contains **28** hashed
+files and passed its secret scan; prior bundles remain preserved. Evidence:
+`docs/shipping/evidence/dist-003-checksum-output-portability-pr160-2026-10-22.md`.
+
 ### ACCEPT-003 current evidence-bundle addendum · 2026-10-22
 
 Private commit `c4e3da67` updates the acceptance evidence-bundle generator to

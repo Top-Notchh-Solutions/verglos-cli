@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-003 checksum-output portability and PR #160 merge
+
+CLI commits `97dead55` and `6ae6a2a5` make checksum output refuse an existing
+symlink and make Windows upgrade/rollback qualification retry bounded cleanup
+when a temporary consumer is briefly busy. PR #160 merged normally as
+`56b3535a1feffdac74a202259433d8f8536890e7`; its source branch remains
+preserved. Focused release qualification passed **16/16**; the forced workspace
+test/typecheck/build graph passed **23/23** tasks; hosted matrix
+`39783743149` passed **9/9**, self-scan `39783742975`, standard/provenance
+`39783742882`, and in-toto job `119841347844` passed. No database URL was
+used and no file, branch, record, deployment, provider, publication, or
+customer state was changed or deleted. `DIST-003` remains open for trusted
+publication, immutable attestation, legal/license clearance, and final
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+The additive acceptance bundle `acceptance-evidence-bundle-2026-10-22-pr160-final.json`
+contains **28** hashed files and passed its secret scan; prior bundles remain
+preserved. Evidence: `evidence/dist-003-checksum-output-portability-pr160-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 refresh after merged PR #158
 
 The private verifier reran against clean CLI source `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`, the PR #158 tree merged as `145ff5d902289ecfb670a397c9e87860eb06309d`, and Web `d32da250d5c2427dcfa36f560421a2506bb8a659`. CLI passed **310/312** with 2 explicit skips and 0 failures, Web passed **949/979** with 30 explicit skips and 0 failures, composed substrates passed **74/74**, and all **12/12** stories executed. The additive PR #158 final bundle contains **27** hashed files and passed its secret scan. No database URL was supplied; no external state changed. `ACCEPT-002/003` remain open for external/hosted/provider/customer/reviewer gates. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence: `evidence/accept-002-003-current-head-pr158-pr159-pr233-2026-10-22.md`.

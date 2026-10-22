@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · DIST-003 checksum-output portability gate
+
+CLI commits `97dead55` and `6ae6a2a5` refuse symlinked checksum output and make
+Windows qualification cleanup bounded and retryable. PR #160 merged normally
+as `56b3535a1feffdac74a202259433d8f8536890e7` after focused **16/16**, forced
+workspace **23/23**, hosted matrix **9/9** (`39783743149`), self-scan
+(`39783742975`), standard/provenance (`39783742882`), and in-toto
+(`119841347844`) passed. The source branch remains preserved; no external
+state or release artifact was deleted or changed.
+
+Keep `DIST-003` unchecked for protected/trusted publication, immutable
+attestation, legal/license clearance, provider action, and final release
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+The additive final acceptance bundle contains **28** hashed files and passed
+its secret scan; prior bundles remain preserved. Evidence:
+`evidence/dist-003-checksum-output-portability-pr160-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 post-PR #158 substrate gate
 
 The verifier reran against the PR #158 merged CLI tree and current Web tree:

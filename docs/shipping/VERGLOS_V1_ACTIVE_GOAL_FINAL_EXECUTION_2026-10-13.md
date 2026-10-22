@@ -32,6 +32,25 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current implementation batch (2026-10-22):** `DIST-003` received two
+granular CLI portability fixes: commit `97dead55` refuses an existing symlink
+at the `SHA256SUMS` output path without touching its target, and commit
+`6ae6a2a5` retries bounded Windows temporary-consumer cleanup after transient
+Node/npm file-handle contention. Focused release qualification passed **16/16**;
+the forced workspace test/typecheck/build graph passed **23/23**; hosted matrix
+`39783743149` passed **9/9**, self-scan `39783742975`, standard/provenance
+`39783742882`, and in-toto job `119841347844` passed. PR #160 merged normally
+as `56b3535a1feffdac74a202259433d8f8536890e7`; its source branch remains
+preserved. No file, branch, record, deployment, provider, publication,
+customer, or database state was deleted or changed. `DIST-003` remains
+unchecked for trusted/protected publication, immutable attestation,
+legal/license clearance, and final acceptance. Score remains **239 checked /
+41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-003-checksum-output-portability-pr160-2026-10-22.md`.
+The additive acceptance bundle `acceptance-evidence-bundle-2026-10-22-pr160-final.json`
+contains **28** hashed files and passed its secret scan; prior bundles remain
+preserved.
+
 **Current-head acceptance refresh after merged PR #158 (2026-10-22):** The
 private verifier ran against clean CLI source
 `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`, promoted by normal PR #158 merge

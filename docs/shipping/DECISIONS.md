@@ -1,5 +1,28 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · harden DIST-003 checksum output and merge PR #160
+
+- **Decision:** Treat an existing `SHA256SUMS` symlink as an unsafe output
+  boundary and make Windows temporary-consumer cleanup bounded/retryable so a
+  completed qualification is not reported as a transition failure solely due
+  to a transient file handle.
+- **Implementation:** CLI commits `97dead55b7fa9ce94da6e85662b719d0ad623dca`
+  and `6ae6a2a525ecc061e6fef99b91a44fc00504214f`; PR #160 merged normally as
+  `56b3535a1feffdac74a202259433d8f8536890e7` with its source branch preserved.
+- **Verification:** Focused release **16/16**, forced workspace graph
+  **23/23**, hosted matrix **9/9** `39783743149`, self-scan `39783742975`,
+  standard/provenance `39783742882`, and in-toto `119841347844` passed.
+- **Evidence bundle:** Additive `acceptance-evidence-bundle-2026-10-22-pr160-final.json`
+  contains **28** hashed files and passes its secret scan; prior bundles remain
+  preserved.
+- **Disposition:** This closes the code-side portability slice only. Keep
+  `DIST-003` unchecked for protected/trusted publication, immutable
+  attestation, legal/license clearance, provider action, and final acceptance.
+  No file, branch, record, deployment, provider, customer, database, or
+  release artifact was deleted or changed. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/dist-003-checksum-output-portability-pr160-2026-10-22.md`.
+
 ## 2026-10-22 · refresh ACCEPT-002/003 after merged PR #158
 
 - **Decision:** Re-run the twelve-story verifier after the normal PR #158
