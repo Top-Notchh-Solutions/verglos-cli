@@ -99,6 +99,40 @@ test("standard validation refuses Sigstore fixtures outside the artifact root", 
   });
 });
 
+test("trusted-root Sigstore validation does not require an unrelated public key", async () => {
+  await withArtifacts(async (root) => {
+    await rm(join(root, "sigstore.pub"));
+    await writeFile(join(root, "sigstore.trusted-root.json"), "trusted root fixture");
+    const calls = [];
+    const result = await validateStandardArtifacts({
+      artifactRoot: root,
+      sigstore: {
+        trustedRootPath: join(root, "sigstore.trusted-root.json"),
+        identity: "https://github.com/Top-Notchh-Solutions/verglos-cli/.github/workflows/release.yml@refs/heads/main",
+        issuer: "https://token.actions.githubusercontent.com",
+      },
+      tools: { spdxJavaJar: join(root, "spdx-tools.jar") },
+      run: passingRunner(calls),
+    });
+    const sigstore = result.checks.find((check) => check.id === "sigstore");
+    assert.equal(sigstore?.status, "passed");
+    assert.equal(calls.length, 4);
+    assert.deepEqual(calls[3].args, [
+      "verify-blob",
+      "--bundle",
+      join(root, "sigstore.bundle.json"),
+      "--offline=true",
+      "--trusted-root",
+      join(root, "sigstore.trusted-root.json"),
+      "--certificate-identity",
+      "https://github.com/Top-Notchh-Solutions/verglos-cli/.github/workflows/release.yml@refs/heads/main",
+      "--certificate-oidc-issuer",
+      "https://token.actions.githubusercontent.com",
+      join(root, "sigstore.payload"),
+    ]);
+  });
+});
+
 test("strict validation fails when a validator is missing or rejects an artifact", async () => {
   await withArtifacts(async (root) => {
     let count = 0;
