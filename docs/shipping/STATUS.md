@@ -1,5 +1,40 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-003 checksum-generation implementation
+
+CLI commit `5072204f` replaces inline publish-workflow checksum generation with
+the tested `generate-release-checksums.mjs` script. It creates deterministic
+sorted `SHA256SUMS` output and refuses empty or symlink-containing artifact
+directories. Release-origin, verifier, workflow, and checksum tests passed
+**11/11** with zero failures/skips; diff check passed. This advances the
+implementation queue; score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
+
+## 2026-10-22 · ENT-CLI-001 current-head implementation qualification
+
+The next selected implementation row was `ENT-CLI-001`. Clean detached CLI
+source `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed frozen-lockfile
+installation, workspace build **8/8**, workspace typecheck **14/14**, package
+typecheck, package tests with exit **0**, and diff check. This is current-head
+implementation evidence, not enterprise acceptance. The row remains open for
+operational enrollment, authorized runner execution/result reconciliation,
+cross-platform operational evidence, independent review, and enterprise
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `evidence/ent-cli-001-current-head-qualification-2026-10-22.md`.
+
+## 2026-10-22 · STUDIO-CLI-001 exact-head Preview boundary check
+
+Web commit `cb2302179533a7bc73eccbcb17b0c350685cc5cc` deployed to Preview
+`dpl_49e1epaupXTR86hPjocf5m6Dkx4h` and reached Ready with **49/49** generated
+pages. Public capabilities reported Free active, Pro active/purchasable,
+Studio inactive, and Enterprise contracted; the client-workspace route
+required authentication and protected `/orgs` was not bypassed. This confirms
+the boundary but does not create a Studio entitlement or customer acceptance,
+so `STUDIO-CLI-001` remains open. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`evidence/studio-cli-001-current-head-preview-2026-10-22.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 current-head tenant-boundary repair
 
 The exact current Web source exposed a real tenant-boundary defect in the

@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## DIST-003 current-head checksum-generation implementation · 2026-10-22
+
+- **Source mapping:** CLI commit `5072204f` on the clean detached current-head
+  worktree.
+- **Implementation mapping:** `scripts/generate-release-checksums.mjs` now
+  owns deterministic `SHA256SUMS` generation and the publish workflow calls it
+  instead of an inline shell command.
+- **Qualification mapping:** Checksum, release-origin, release-verifier, and
+  publish-workflow contract tests passed **11/11** with zero failures/skips;
+  diff check passed.
+- **Acceptance mapping:** This records the implementation slice only; the
+  broader release acceptance contract remains open. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
+
 ## STUDIO-CLI-001 current-head tenant-boundary repair · 2026-10-21
 
 - **Source mapping:** Web commit

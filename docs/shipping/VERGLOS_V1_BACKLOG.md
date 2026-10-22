@@ -3937,6 +3937,17 @@ assumes the legacy `licenses` table. No checkbox changed; backlog remains
 - [ ] Authorize external conversations, paid pilots, checkout tests, campaign, publish, deploy, npm release, tags, pushes, and production migrations separately.
 - [x] Do not claim Team/Studio/Enterprise generally available until their end-to-end gates pass. Evidence: `docs/shipping/evidence/non-ga-commercial-boundary-2026-10-14.md`; exact CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` refs have zero tracked-file matches for general-availability language, and their plan/truth registries keep unqualified tiers fail-closed.
 
+### DIST-003 current implementation addendum · 2026-10-22
+
+CLI commit `5072204f` adds the tested `generate-release-checksums.mjs`
+implementation and replaces the publish workflow's inline checksum shell with
+that repository script. It emits sorted deterministic `SHA256SUMS` output and
+fails closed on empty or symlink-containing artifact directories. The focused
+release-origin, release-verifier, workflow-contract, and checksum suite passed
+**11/11** with zero failures/skips. This advances the implementation queue;
+the score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
+
 ### QUAL-WEB-006 / PLAN-WEB-015 production checkout/browser recheck · 2026-10-09
 
 Read-only Chrome DevTools inspection of a separate production checkout tab

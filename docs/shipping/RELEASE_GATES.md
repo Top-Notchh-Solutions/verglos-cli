@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · DIST-003 checksum-generation implementation gate
+
+CLI commit `5072204f` adds the deterministic, fail-closed checksum-generation
+script and wires the publish workflow to it. Release-origin, release-verifier,
+workflow-contract, and checksum tests passed **11/11**; diff check passed.
+This advances the implementation slice without changing release or registry
+state. Evidence:
+`evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 current-head tenant-boundary gate
 
 Web commit `cb2302179533a7bc73eccbcb17b0c350685cc5cc` repairs the real

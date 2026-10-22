@@ -1,5 +1,50 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · DIST-003 checksum-generation implementation
+
+- **Commit:** CLI `5072204f` adds the tested
+  `scripts/generate-release-checksums.mjs` implementation and wires
+  `.github/workflows/publish.yml` to use it.
+- **Behavior:** Sorted deterministic checksums, exact artifact enumeration,
+  regular-file enforcement, empty-directory refusal, and symlink refusal.
+- **Verification:** Release-origin, release-verifier, workflow-contract, and
+  checksum tests passed **11/11**; `git diff --check` passed.
+- **Disposition:** Implementation slice advanced; broader `DIST-003` release
+  acceptance remains tracked in the backlog. No registry, publication,
+  provider, Production, customer, legal, or AppSec state changed. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
+
+## 2026-10-22 · ENT-CLI-001 current-head implementation qualification
+
+- **Source:** Clean detached CLI worktree at
+  `72190acae81b454a4a88a0ea8d222c8981ac9a3f`.
+- **Verification:** Frozen-lockfile install, forced workspace build **8/8**,
+  forced workspace typecheck **14/14**, package typecheck, package test
+  process exit **0**, and `git diff --check` passed; the worktree remained
+  clean.
+- **Disposition:** The repository-side implementation is requalified, but
+  `ENT-CLI-001` remains unchecked for operational enrollment credential
+  exchange, authorized enterprise execution/result reconciliation,
+  cross-platform operational evidence, independent review, and enterprise
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/ent-cli-001-current-head-qualification-2026-10-22.md`.
+
+## 2026-10-22 · STUDIO-CLI-001 exact-head Preview boundary check
+
+- **Source/deployment:** Web commit
+  `cb2302179533a7bc73eccbcb17b0c350685cc5cc`, Preview deployment
+  `dpl_49e1epaupXTR86hPjocf5m6Dkx4h`, Ready with **49/49** generated pages.
+- **Read-only observations:** Public capability catalog returned Free active,
+  Pro active/purchasable, Studio inactive, and Enterprise contracted. The
+  client-workspace route required authentication; protected `/orgs` reached
+  the protection boundary without bypass.
+- **Disposition:** No approved numeric Studio entitlement or recipient/customer
+  acceptance was established. Keep `STUDIO-CLI-001` unchecked. No provider,
+  payment, customer, Production, database, legal, registry, or AppSec state
+  changed. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/studio-cli-001-current-head-preview-2026-10-22.md`.
+
 ## 2026-10-21 · STUDIO-CLI-001 current-head tenant-boundary repair
 
 - **Source:** Web commit

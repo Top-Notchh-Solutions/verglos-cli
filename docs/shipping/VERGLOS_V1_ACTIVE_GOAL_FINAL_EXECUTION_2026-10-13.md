@@ -32,6 +32,34 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current continuation result (2026-10-22):** The next implementation row is
+`ENT-CLI-001`, selected because its repository-side private-runner contract is
+fully testable in a clean current-head CLI worktree. CLI `72190aca` passed
+frozen-lockfile installation, workspace build **8/8**, workspace typecheck
+**14/14**, package typecheck, package tests with exit **0**, and diff check.
+The row is not checked because its complete contract still requires
+operational enrollment credential exchange, an authorized enterprise runner
+execution/result reconciliation, cross-platform operational evidence,
+independent review, and enterprise acceptance. The exact Web Preview at
+`cb2302179533a7bc73eccbcb17b0c350685cc5cc` also reached Ready with **49/49**
+pages, but its public catalog has Studio inactive and the authenticated
+client-workspace route correctly requires authentication. The implementation
+queue continues across every eligible non-AppSec row; those acceptance
+conditions stay recorded in the evidence ledger while code, tests, workflows,
+and qualification artifacts are completed. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-current-head-qualification-2026-10-22.md`
+and `docs/shipping/evidence/studio-cli-001-current-head-preview-2026-10-22.md`.
+
+**Current implementation batch (2026-10-22):** `DIST-003` received a
+repository-side implementation commit `5072204f` (`feat(release): make
+checksum generation reproducible`). The publish workflow now calls the tested
+`generate-release-checksums.mjs` script; its focused release contract suite
+passed **11/11** and `git diff --check` passed. This advances the eligible
+implementation queue without changing registry, publication, provider,
+Production, customer, legal, or AppSec state. Evidence:
+`docs/shipping/evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
+
 **Latest continuation result (2026-10-21):** `STUDIO-CLI-001` received a
 current-head Web tenant-boundary repair in commit
 `cb2302179533a7bc73eccbcb17b0c350685cc5cc`. The client-workspace route no

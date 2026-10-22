@@ -1,5 +1,36 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · implement DIST-003 checksum generation in-repository
+
+- **Decision:** Move release checksum generation from inline workflow shell to
+  a tested repository script so the artifact contract is executable and
+  reviewable in the same source tree as its verifier.
+- **Implementation:** CLI commit `5072204f` adds deterministic sorted output,
+  regular-file checks, and fail-closed empty/symlink handling; the focused
+  release suite passed **11/11**.
+- **Disposition:** Accept the implementation batch as progress in the
+  non-AppSec queue. No checkbox was changed and no registry, publication,
+  provider, Production, customer, legal, or AppSec state changed. Score
+  remains **239 checked / 41 open / 280 total (85.4%)**.
+- **Evidence:** `evidence/dist-003-current-head-checksum-generation-2026-10-22.md`.
+
+## 2026-10-22 · select ENT-CLI-001, retain it unchecked
+
+- **Decision:** Select `ENT-CLI-001` as the next implementation row because
+  the repository-side private-runner contract can be qualified completely in
+  a clean current-head CLI worktree. Do not check it yet.
+- **Observed:** CLI `72190acae81b454a4a88a0ea8d222c8981ac9a3f` passed build
+  **8/8**, typecheck **14/14**, package typecheck, package tests exit **0**,
+  and diff check.
+- **Reason:** The complete row still requires operational enrollment,
+  authorized enterprise execution/result reconciliation, cross-platform
+  operational evidence, independent review, and enterprise acceptance.
+- **Boundary:** No remaining open row is fully closable by implementation
+  alone; each retains an external, legal, provider, customer, human/field,
+  independent-review, or founder/release gate. Score remains **239 checked /
+  41 open / 280 total (85.4%)**.
+- **Evidence:** `evidence/ent-cli-001-current-head-qualification-2026-10-22.md`.
+
 ## 2026-10-21 · retain STUDIO-CLI-001 after current-head tenant repair
 
 - **Observed:** The current Web source failed one tenant-boundary contract
