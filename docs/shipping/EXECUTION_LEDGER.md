@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-005 authorized workflow contract implemented
+
+- **Implementation:** Added `scripts/validate-authorized-workflow.mjs` and
+  `acceptance:workflow:validate`. It binds exact repository/commit scope,
+  approvals, expiry/revocation, permitted paths/commands/network, preflight,
+  digest-only evidence, and deletion/expiry reconciliation.
+- **Fail-closed behavior:** Unsafe scope, denied-network use, expired consent,
+  raw retention, secret-like material, incomplete preflight, or missing
+  deletion/expiry evidence cannot become an accepted workflow. The result keeps
+  `customerAcceptance` as `not-claimed`.
+- **Verification:** Focused tests passed **4/4**; syntax and diff checks passed.
+  Evidence: `evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
+- **Disposition:** No external repository was contacted or scanned. The actual
+  consented workflow, redacted result, and deletion/expiry artifact remain
+  open. Score remains **244/36/280 (87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · ACCEPT-014 final regression contract implemented
 
 - **Implementation:** Added `scripts/run-final-regression.mjs` and the
@@ -43,8 +59,8 @@
 - **Implementation:** `scripts/build-acceptance-evidence-bundle.mjs` now
   includes the current merged CLI/Web evidence in addition to the preserved
   historical entries.
-- **Verification:** The current-head run hashed **112** bounded evidence files,
-  including **37** current 2026-10-23 entries; the secret-like material scan
+- **Verification:** The current-head run hashed **113** bounded evidence files,
+  including **38** current 2026-10-23 entries; the secret-like material scan
   passed. The verification output was written to `/tmp`, leaving tracked
   historical bundles unchanged.
 - **Evidence:** `evidence/accept-003-current-head-bundle-2026-10-23.md`.

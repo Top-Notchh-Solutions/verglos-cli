@@ -112,6 +112,26 @@ and `ACCEPT-012`; it does not close either row or the held review/final-release
 gates. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
 Nothing was deleted.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-005 authorized workflow contract
+
+The private toolchain now exposes `acceptance:workflow:validate` through
+`scripts/validate-authorized-workflow.mjs`. It binds a consented external
+repository URL and exact commit to the permitted paths, commands, network
+policy, owner/founder approvals, expiry/revocation state, redaction preflight,
+bounded report digests, and deletion/expiry record.
+
+The validator rejects scope or commit mismatches, denied-network violations,
+expired/revoked consent, raw retention, secret-like material, incomplete
+preflight, and missing deletion/expiry evidence. A valid record still emits
+`customerAcceptance: not-claimed`. Focused tests passed **4/4**, with syntax
+and diff checks passing. Evidence:
+`docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
+
+This advances `ACCEPT-005` implementation only; no external repository was
+contacted or scanned. The actual consented workflow, redacted result, and
+deletion/expiry artifact remain open. The live score remains **244 checked / 36
+open / 280 total (87.1%)**. Nothing was deleted.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-014 final regression contract
 
 The private shipping toolchain now exposes `acceptance:release:regress` through
@@ -153,8 +173,8 @@ still **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web execution evidence while preserving all historical
-entries. Its current-head run hashed **112** bounded evidence files, including
-**37** current 2026-10-23 entries, and passed the secret-like material scan.
+entries. Its current-head run hashed **113** bounded evidence files, including
+**38** current 2026-10-23 entries, and passed the secret-like material scan.
 The output was written to `/tmp` for verification; no tracked historical
 bundle was overwritten. Evidence:
 `docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.

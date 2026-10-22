@@ -12,15 +12,15 @@ VERGLOS_ACCEPTANCE_BUNDLE_OUTPUT=/tmp/verglos-acceptance-evidence-bundle-2026-10
 ```
 
 The run produced schema
-`verglos.private.acceptance-evidence-bundle.v1` with **112** hashed evidence
-files, including **37** current 2026-10-23 entries. The secret-like material
+`verglos.private.acceptance-evidence-bundle.v1` with **113** hashed evidence
+files, including **38** current 2026-10-23 entries. The secret-like material
 scan passed. The bounded output was written to `/tmp` and did not overwrite a
 tracked historical bundle.
 
 Bundle SHA-256:
 
 ```text
-b955c6a1ef5c00bbb3a4f46564b16f6eb419b5030b6044dacdba87f1473639fc  verglos-acceptance-evidence-bundle-2026-10-23-accept014-final.json
+5ae8bad03d19da93a8ec87ba6914274e3f48d64b48bd6bb52b56e91dfe75c98c  verglos-acceptance-evidence-bundle-2026-10-23-accept005.json
 ```
 
 ## Explicit boundary

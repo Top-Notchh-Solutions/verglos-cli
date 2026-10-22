@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-005 authorized workflow contract implemented
+
+The private toolchain now exposes `acceptance:workflow:validate` through
+`scripts/validate-authorized-workflow.mjs`. It binds exact repository/commit
+scope, consent approvals and expiry, network/command policy, redaction
+preflight, digest-only evidence, and deletion/expiry reconciliation. It fails
+closed on unsafe scope or retention and never claims customer acceptance.
+Focused tests passed **4/4**. Evidence:
+`evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
+
+This is implementation progress only; no external repository was contacted or
+scanned. The actual consented workflow and redacted/deletion evidence remain
+open. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted.
+
 ## 2026-10-23 · ACCEPT-014 final regression contract implemented
 
 The private toolchain now exposes `acceptance:release:regress` through
@@ -40,7 +55,7 @@ independent review, and final release. The live score remains **244 checked /
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web evidence while preserving historical entries. The
-current-head run hashed **112** bounded evidence files, including **37** dated
+current-head run hashed **113** bounded evidence files, including **38** dated
 2026-10-23, and passed its secret-like material scan. Evidence:
 `evidence/accept-003-current-head-bundle-2026-10-23.md`.
 
