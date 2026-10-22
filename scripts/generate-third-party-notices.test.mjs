@@ -103,3 +103,9 @@ test("license text collection refuses non-files and files above the size bound",
     ]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("license text collection binds validated reads to bounded regular-file handles", async () => {
+  const source = await readFile("scripts/package-license-text.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(/u);
+  assert.doesNotMatch(source, /readFile\(path\)/u);
+});
