@@ -10984,3 +10984,16 @@ recipient/customer acceptance and the hosted/audit artifact. Score remains
 **239 checked / 41 open / 280 total (85.4%)**.
 
 Evidence: `evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## 2026-10-22 · ENT-CLI-001 current-head requalification
+
+The exact merged CLI head passed private-runner shared contracts **6/6** and
+client contracts **11/11**. The exact merged Web head passed private-runner
+route, migration, job/result, transport, enrollment, lease, result-upload,
+heartbeat, state, and qualification contracts **26/26**. The code-owned
+protocol is green. Keep `ENT-CLI-001` unchecked for operational enrollment and
+result reconciliation, cross-platform operational evidence, independent review,
+enterprise acceptance, and final release sign-off. Score remains **239 checked /
+41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.

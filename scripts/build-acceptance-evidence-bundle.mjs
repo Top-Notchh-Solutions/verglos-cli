@@ -56,6 +56,7 @@ const paths = [
   "docs/shipping/evidence/qual-web-serial-fresh-postgres-2026-10-22.md",
   "docs/shipping/evidence/qual-cli-scanner-false-positive-precision-pr167-2026-10-22.md",
   "docs/shipping/evidence/ent-cli-001-current-head-requalification-pr167-2026-10-22.md",
+  "docs/shipping/evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md",
   "docs/shipping/evidence/dist-001-current-head-requalification-pr167-2026-10-22.md",
   "docs/shipping/evidence/dist-002-current-head-requalification-pr167-2026-10-22.md",
   "docs/shipping/evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md",

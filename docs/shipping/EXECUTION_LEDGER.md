@@ -13928,3 +13928,20 @@ it was not sent and contains no credentials or customer data.
   changed. Nothing was deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:**
   `docs/shipping/evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## 2026-10-22 · ENT-CLI-001 current-head requalification
+
+- **CLI:** Exact merged head passed shared private-runner **6/6** and client
+  **11/11**.
+- **Web:** Exact merged head passed private-runner route, migration,
+  transport, enrollment, lease, result, heartbeat, state, and qualification
+  contracts **26/26**.
+- **Disposition:** The code-owned signed short-lived job, tenant/runner/target
+  binding, GET-only poll, replay protection, bounded response, least-evidence
+  result, scoped lease, and fail-closed malformed-input protocol is green.
+  Keep `ENT-CLI-001` unchecked for operational enrollment/result reconciliation,
+  cross-platform operational evidence, independent review, enterprise
+  acceptance, and final release sign-off. No external state changed and
+  nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `docs/shipping/evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.

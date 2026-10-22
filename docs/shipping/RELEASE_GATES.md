@@ -4732,3 +4732,19 @@ Production, database, legal, or release-sign-off state changed. Score remains
 **239/41/280 (85.4%)**.
 
 Evidence: `evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## 2026-10-22 · ENT-CLI-001 current-head protocol gate
+
+The exact CLI head passed private-runner shared **6/6** and client **11/11**;
+the exact Web head passed private-runner route, migration, transport,
+enrollment, lease, result, heartbeat, state, and qualification contracts
+**26/26**. The signed short-lived job, tenant/runner/target binding,
+GET-only polling, replay protection, bounded result, and least-evidence
+projection are code-owned and green.
+
+Keep `ENT-CLI-001` unchecked for operational enrollment/result reconciliation,
+cross-platform operational evidence, independent review, enterprise acceptance,
+and final release sign-off. No external state changed and nothing was deleted.
+Score remains **239/41/280 (85.4%)**.
+
+Evidence: `evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.

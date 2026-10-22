@@ -8730,3 +8730,16 @@ changed. See
   hosted/audit evidence. Score remains **239/41/280 (85.4%)**.
 - **Evidence:**
   `evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## ENT-CLI-001 current-head requalification · 2026-10-22
+
+- **Source:** CLI `db3510356ecd6c6e430d7dcb3b9354e514d777ee`; Web
+  `8ece40eca79586c75a301751edf9c6b473ff295d`.
+- **Implementation contract:** CLI shared **6/6**, CLI client **11/11**, and
+  Web private-runner contracts **26/26**.
+- **Acceptance mapping:** Code-owned protocol is green, but the row remains
+  open for operational enrollment/result reconciliation, cross-platform
+  operational evidence, independent review, enterprise acceptance, and final
+  release sign-off. Score remains **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.

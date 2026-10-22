@@ -1164,3 +1164,21 @@ recipient, Production, publication, or release-sign-off state changed; nothing
 was deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**.
 Evidence:
 `docs/shipping/evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+# 2026-10-22 · ENT-CLI-001 current-head requalification
+
+The exact merged CLI head `db3510356ecd6c6e430d7dcb3b9354e514d777ee` passed
+private-runner shared **6/6** and client **11/11**. The exact merged Web head
+`8ece40eca79586c75a301751edf9c6b473ff295d` passed the private-runner route,
+migration, transport, enrollment, lease, result, heartbeat, state, and
+qualification contracts **26/26**. This confirms the code-owned signed
+short-lived job, tenant/runner/target binding, GET-only poll, replay protection,
+bounded response, least-evidence result, scoped lease, and fail-closed
+malformed-input protocol.
+
+This remains qualification progress, not row completion: `ENT-CLI-001` stays
+unchecked until operational enrollment/result reconciliation, cross-platform
+operational evidence, independent review, enterprise acceptance, and final
+release sign-off are actually evidenced. No external state changed; nothing was
+deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.

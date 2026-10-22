@@ -4819,3 +4819,18 @@ each observed method has lifecycle and reconciliation evidence.
   changed and nothing was deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:**
   `evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md`.
+
+## ENT-CLI-001 current-head requalification · 2026-10-22
+
+- **Decision:** Treat the signed private-runner job, scope binding, GET-only
+  poll, replay protection, least-evidence result, and bounded transport as
+  implemented and green at the current merged heads.
+- **Verification:** CLI shared **6/6**, CLI client **11/11**, and Web
+  private-runner contracts **26/26** passed.
+- **Disposition:** Do not mark the row checked. Operational enrollment/result
+  reconciliation, cross-platform operational evidence, independent review,
+  enterprise acceptance, and final release sign-off remain required. No
+  external state changed and nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:**
+  `evidence/ent-cli-001-current-head-requalification-pr244-2026-10-22.md`.
