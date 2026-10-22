@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007/008 public release integration qualification · 2026-10-23
+
+- **Source mapping:** Web PR #247 head `d02ac18`; normal merge commits
+  `edc7ad0` (PR #245) and `d02ac18` (PR #246 integration).
+- **Contract mapping:** The combined source candidate covers public route
+  inventory, private sitemap/robots boundaries, emitted metadata validation,
+  landing browser capture, and serialized PostgreSQL qualification.
+- **Verification mapping:** Public smoke **10/10**, landing **4/4**, full
+  suite **919/2/0**, typecheck, schema check, build **49/49**, and browser
+  capture **12/12** passed locally.
+- **Acceptance mapping:** Keep FINAL-WEB-007/008 open for hosted Node 22,
+  human screen-reader, field CWV, acceptance dependencies, and final release
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-public-release-integration-pr247-2026-10-23.md`.
+
 ## FINAL-WEB-007 current-head hosted gate audit · 2026-10-23
 
 - **External mapping:** Web PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a`;

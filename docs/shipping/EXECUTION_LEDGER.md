@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · FINAL-WEB-007/008 public release integration qualification
+
+- **Implementation:** Web PR #247 head `d02ac18` integrates PR #245 through
+  merge commit `edc7ad0` and PR #246 through merge commit `d02ac18`, preserving
+  normal non-squash history alongside the browser qualification.
+- **Verification:** Combined public smoke **10/10**, landing qualification
+  **4/4**, full suite **919 / 2 / 0**, typecheck, Drizzle schema check, and
+  build **49/49** passed locally. Existing Chromium + axe capture remains
+  **12/12** with zero gaps and zero page failures.
+- **Disposition:** Keep FINAL-WEB-007 and FINAL-WEB-008 unchecked for hosted
+  Node 22 execution, human/field evidence, acceptance dependencies, and final
+  sign-off. Score remains **239/41/280 (85.4%)**.
+- **Boundary:** No hosted rerun, bypass, customer, provider, Production,
+  publication, or release-sign-off state changed. Nothing was deleted.
+- **Evidence:** `evidence/final-web-007-public-release-integration-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007 current-head hosted gate audit
 
 - **External state:** PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a`

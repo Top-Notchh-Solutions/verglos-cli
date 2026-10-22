@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · FINAL-WEB-007/008 public release integration qualification
+
+Web PR #247 head `d02ac18` now contains normal merge commits for PR #245
+(private sitemap route guard) and PR #246 (emitted sitemap/robots validation),
+alongside the browser qualification. Combined local verification passed public
+release smoke **10/10**, landing qualification **4/4**, full suite **919
+passed / 2 documented skips / 0 failures**, typecheck, schema check, and build
+**49/49**. FINAL-WEB-007/008 remain unchecked for hosted Node 22 execution,
+human/field evidence, acceptance dependencies, and final sign-off. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Nothing was deleted.
+Evidence: `evidence/final-web-007-public-release-integration-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007 current-head hosted gate audit
 
 Web PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a` has a completed

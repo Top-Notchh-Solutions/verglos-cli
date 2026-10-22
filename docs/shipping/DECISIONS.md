@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · preserve normal merge integration for FINAL-WEB-007/008
+
+- **Decision:** Preserve the normal merge commits for PR #245 and PR #246 in
+  the PR #247 release candidate; do not squash or force-push.
+- **Observed:** Combined local public smoke **10/10**, landing **4/4**, full
+  suite **919/2/0**, typecheck, schema check, and build **49/49** pass.
+- **Reason:** The candidate now tests the public route, sitemap/robots,
+  emitted metadata, and browser qualification together; hosted Node 22 and
+  external acceptance gates remain separate.
+- **Boundary:** No hosted bypass, customer, provider, Production, publication,
+  or release-sign-off action occurred. Nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-public-release-integration-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · retain FINAL-WEB-007 after current-head hosted audit
 
 - **Decision:** Do not rerun, bypass, or merge around PR #247’s required

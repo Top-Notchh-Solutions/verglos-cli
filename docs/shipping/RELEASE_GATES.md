@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · FINAL-WEB-007/008 public release integration gate
+
+PR #247 head `d02ac18` preserves normal merge commits for PR #245 and PR #246
+alongside the browser qualification. Combined local public smoke **10/10**,
+landing **4/4**, full suite **919 passed / 2 skips / 0 failures**, typecheck,
+schema check, and build **49/49** passed; browser capture remains **12/12**.
+Keep FINAL-WEB-007/008 open for hosted Node 22 execution, human/field
+evidence, acceptance dependencies, and final sign-off. Score remains **239/41/
+280 (85.4%)**. Nothing was deleted. Evidence:
+`evidence/final-web-007-public-release-integration-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007 current-head hosted gate
 
 Web PR #247 head `b29b7108177a482dea27c41de833fcce7a0ea38a` has completed
