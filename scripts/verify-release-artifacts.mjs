@@ -104,7 +104,7 @@ for (const name of requiredSidecars) {
       const failures = validateExternalLicenseRecords(JSON.parse(content));
       if (failures.length > 0) throw new Error(`external-license-records.json is invalid: ${failures.join("; ")}`);
     }
-    if (name === "clean-consumer-verification.txt" && !/^clean consumer installed 7 archives and executed Verglos \d+\.\d+\.\d+/u.test(content.trim())) throw new Error("clean-consumer-verification.txt does not prove the seven-package consumer flow");
+    if (name === "clean-consumer-verification.txt" && !/^clean consumer installed 7 archives, imported all libraries, executed Verglos \d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?, and confirmed no external engine installation$/u.test(content.trim())) throw new Error("clean-consumer-verification.txt does not prove the seven-package consumer flow");
     if (name === "RELEASE_METADATA.json" && content.length === 0) throw new Error("RELEASE_METADATA.json must not be empty");
   } catch (error) {
     if (error instanceof SyntaxError) throw new Error(`${name} is not valid JSON`);

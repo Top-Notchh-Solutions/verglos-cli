@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import { promisify } from "node:util";
 import { test } from "node:test";
 import { createLicenseInventory, parsePnpmLockPackageIds } from "./license-inventory-core.mjs";
+import { LICENSE_REVIEW_DECISIONS } from "./license-review-decisions.mjs";
 import { LICENSE_SOURCE_OVERRIDES } from "./license-source-overrides.mjs";
 
 const run = promisify(execFile);
@@ -24,20 +25,24 @@ test("dependency license inventory is deterministic and review-safe", async () =
   assert.ok(first.packages.every((entry) => typeof entry.declaredLicense === "string" && typeof entry.detectedLicense === "string" && typeof entry.detectionMethod === "string" && (typeof entry.source === "string" || entry.reviewBlocker) && typeof entry.reviewBlocker === "boolean"));
   assert.deepEqual(first.packages.filter((entry) => !entry.source).map((entry) => `${entry.name}@${entry.versions.join(",")}`).sort(), []);
   assert.equal(first.packages.find((entry) => entry.name === "minipass-pipeline")?.source, LICENSE_SOURCE_OVERRIDES["minipass-pipeline@1.2.4"]);
-  const blockerIds = first.reviewBlockers.map((entry) => `${entry.name}@${entry.version}${entry.bundledBy ? ` bundled by ${entry.bundledBy}` : ""}: ${entry.reason}`).sort();
-  assert.deepEqual(blockerIds, [
-    "benchmark@1.0.0 bundled by fast-uri@3.1.7: nested-license-conflicts-with-container",
-    "glob@13.0.6: license-review-required",
-    "lru-cache@11.5.2: license-review-required",
-    "minimatch@10.2.6: license-review-required",
-    "minipass-flush@1.0.7: license-review-required",
-    "minipass@7.1.3: license-review-required",
-    "path-scurry@2.0.2: license-review-required",
-  ]);
-  assert.equal(first.bundledComponents.find((entry) => entry.name === "benchmark")?.parentDeclaredLicense, "BSD-3-Clause");
-  assert.equal(first.bundledComponents.find((entry) => entry.name === "benchmark")?.parentDeclaredLicense, "BSD-3-Clause");
-  assert.equal((await run("node", ["scripts/license-inventory.mjs", "--check"], { maxBuffer: 16 * 1024 * 1024 })).stdout.length > 0, true, "complete evidence remains usable while an explicit review blocker is recorded");
-  await assert.rejects(run("node", ["scripts/license-inventory.mjs", "--require-clear"], { maxBuffer: 16 * 1024 * 1024 }), /Command failed/u);
+  assert.deepEqual(first.reviewBlockers, []);
+  for (const packageName of Object.keys(LICENSE_REVIEW_DECISIONS.packages)) {
+    const separator = packageName.lastIndexOf("@");
+    const name = packageName.slice(0, separator);
+    const version = packageName.slice(separator + 1);
+    const entry = first.packages.find((candidate) => candidate.name === name && candidate.versions.includes(version));
+    assert.equal(entry?.redistributionClass, "owner-reviewed", `${packageName} must use the exact owner decision`);
+    assert.equal(entry?.reviewDecision, LICENSE_REVIEW_DECISIONS.packages[packageName].id);
+    assert.equal(entry?.noticeObligation, LICENSE_REVIEW_DECISIONS.packages[packageName].noticeObligation);
+  }
+  const benchmark = first.bundledComponents.find((entry) => entry.name === "benchmark" && entry.version === "1.0.0");
+  assert.equal(benchmark?.bundledBy, "fast-uri@3.1.7");
+  assert.equal(benchmark?.parentDeclaredLicense, "BSD-3-Clause");
+  assert.equal(benchmark?.redistributionClass, "owner-reviewed");
+  assert.equal(benchmark?.reviewDecision, LICENSE_REVIEW_DECISIONS.bundled["benchmark@1.0.0|fast-uri@3.1.7"].id);
+  assert.equal(benchmark?.noticeObligation, LICENSE_REVIEW_DECISIONS.bundled["benchmark@1.0.0|fast-uri@3.1.7"].noticeObligation);
+  assert.equal((await run("node", ["scripts/license-inventory.mjs", "--check"], { maxBuffer: 16 * 1024 * 1024 })).stdout.length > 0, true, "complete evidence remains usable after exact owner decisions");
+  assert.equal((await run("node", ["scripts/license-inventory.mjs", "--require-clear"], { maxBuffer: 16 * 1024 * 1024 })).stdout.length > 0, true, "the exact owner decisions clear the current release inventory");
 });
 
 test("pnpm v9 package IDs parse scoped, quoted, and unquoted names without reading snapshots", () => {

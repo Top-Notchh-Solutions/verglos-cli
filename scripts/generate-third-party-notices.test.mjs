@@ -17,7 +17,9 @@ test("third-party notices are deterministic and contain provenance disclaimers",
   assert.match(first, /preserves upstream identity/);
   assert.match(first, /License:/);
   assert.match(first, /Bundled by: fast-uri@3\.1\.7/u);
-  assert.match(first, /Review blocker: nested-license-conflicts-with-container/u);
+  assert.doesNotMatch(first, /Review blocker: nested-license-conflicts-with-container/u);
+  assert.match(first, /Containing package declares: BSD-3-Clause/u);
+  assert.match(first, /Source: https:\/\/github\.com\/fastify\/fast-uri/u);
   assert.match(first, /License text was not present in the installed package; consult the upstream source before redistribution\./u);
   assert.match(first, /EXTERNAL ENGINE AND CONTENT RECORDS/u);
   assert.match(first, /engine\.trivy — Trivy/u);
@@ -39,7 +41,8 @@ test("third-party notices remain deterministic when pnpm license indexes are una
   assert.equal(first, second);
   assert.match(first, /^THIRD-PARTY NOTICES\n/);
   assert.match(first, /benchmark \(1\.0\.0\)[\s\S]*?Bundled by: fast-uri@3\.1\.7/u);
-  assert.match(first, /Review blocker: nested-license-conflicts-with-container/u);
+  assert.doesNotMatch(first, /Review blocker: nested-license-conflicts-with-container/u);
+  assert.match(first, /Containing package declares: BSD-3-Clause/u);
   assert.match(first, /EXTERNAL ENGINE AND CONTENT RECORDS/u);
   assert.match(first, /tool\.in-toto-verifier — in-toto release verifier/u);
 });
