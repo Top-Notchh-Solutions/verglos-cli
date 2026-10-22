@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · DIST-001 packed archive-member hardening
+
+- **Implementation:** CLI commit `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`
+  makes `scripts/check-packed-manifests.mjs` fail closed on non-regular tar
+  members and adds `scripts/check-packed-manifests.test.mjs`; self-scan and
+  publish workflow test commands now execute the regression.
+- **Verification:** Build **8/8**, focused archive/package suite **9/9**,
+  broader release contracts **37/37**, and `git diff --check` passed. The
+  real packer produced **7** public archives; packed-manifest audit passed;
+  clean consumer installed/imported all packages, ran the CLI, created no
+  implicit engine cache, and completed signed bounded A1 execution.
+- **Disposition:** Code-side `DIST-001` evidence advanced; no checkbox changed.
+  LOCAL/HUNT/RECORD dependencies and final legal/release qualification remain
+  open. No npm, provider, Production, database, entitlement, customer,
+  recipient, legal, or AppSec state changed. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/dist-001-current-head-archive-member-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 clean-head story verification
 
 - **Implementation:** Private verifier hardening requires clean explicitly

@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · harden DIST-001 against non-regular archive members
+
+- **Decision:** Treat every npm tar member as a typed archive boundary. Allow
+  directories and regular files only; reject symlinks, hard links, devices,
+  FIFOs, and other non-regular members before package-surface evaluation.
+- **Implementation:** CLI commit `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`
+  adds the audit and regression fixture and wires the test into self-scan and
+  publish workflows.
+- **Verification:** Focused tests **9/9**, broader release contracts **37/37**,
+  build **8/8**, seven packed archives, packed-manifest audit, and clean
+  consumer runtime all passed.
+- **Disposition:** Record as implementation progress; retain `DIST-001`
+  unchecked for LOCAL/HUNT/RECORD dependencies and final legal/release
+  qualification. No external state changed. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/dist-001-current-head-archive-member-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · require clean source roots for acceptance execution
 
 - **Decision:** `ACCEPT-002/003` verification must use explicitly selected

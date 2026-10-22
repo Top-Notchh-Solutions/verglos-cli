@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-001 packed archive-member hardening
+
+CLI commit `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c` makes the packed public
+manifest audit reject non-regular tar members and adds a symlink regression
+fixture. The focused suite passed **9/9**; the broader release contracts passed
+**37/37**; build passed **8/8**; seven public archives passed the packed
+manifest audit and clean-consumer install/runtime qualification. No checkbox
+changed: `DIST-001` remains open for LOCAL/HUNT/RECORD dependencies and final
+legal/release qualification. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/dist-001-current-head-archive-member-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 clean-head story verification
 
 The acceptance story verifier now fails closed on dirty source roots and

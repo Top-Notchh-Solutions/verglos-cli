@@ -1,7 +1,7 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
 **Owner:** Anurag Yadav, owner of Top Notchh Solutions and Verglos
-**Updated:** 2026-10-21
+**Updated:** 2026-10-22
 **Status:** active; this is the single authoritative continuation goal
 **Continuation authorization:** On 2026-10-21 the owner authorized repository
 implementation and bounded Preview qualification to resume. This authorizes
@@ -31,6 +31,19 @@ independent review is complete.
 The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
+
+**Current implementation batch (2026-10-22):** `DIST-001` received a real
+CLI archive-boundary hardening commit `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`.
+The packed-manifest audit now rejects non-regular tar members such as symlinks
+and hard links, and the regression is wired into both self-scan and publish
+workflow test commands. The focused suite passed **9/9**; the broader release
+contract suite passed **37/37**; build passed **8/8**; clean packing produced
+**7/7** public archives; packed-manifest and clean-consumer qualification
+passed, including signed bounded A1 execution and no implicit engine install.
+This advances the code-side queue only, so `DIST-001` remains unchecked for
+LOCAL/HUNT/RECORD dependencies and final legal/release qualification. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-current-head-archive-member-qualification-2026-10-22.md`.
 
 **Current continuation result (2026-10-22):** The next implementation row is
 `ENT-CLI-001`, selected because its repository-side private-runner contract is

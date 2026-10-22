@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · DIST-001 packed archive-member gate
+
+CLI `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c` makes the packed-manifest
+release boundary fail closed for non-regular tar members and wires the
+regression into both self-scan and publish checks. Focused tests passed **9/9**,
+broader release contracts **37/37**, build **8/8**, and clean seven-archive
+consumer qualification passed. Keep `DIST-001` unchecked for LOCAL/HUNT/RECORD
+dependencies and final legal/release qualification. Score remains **239 checked /
+41 open / 280 total (85.4%)**. Evidence:
+`evidence/dist-001-current-head-archive-member-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · ACCEPT-002/003 clean-source execution gate
 
 The private story verifier now rejects dirty source roots and records exact

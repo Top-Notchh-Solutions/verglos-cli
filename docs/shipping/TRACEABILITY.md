@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## DIST-001 current-head archive-member qualification · 2026-10-22
+
+- **Source mapping:** CLI branch `codex/dist-003-checksum-generation-20261022`,
+  commit `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`.
+- **Implementation mapping:** `check-packed-manifests.mjs` now rejects every
+  non-directory, non-regular tar member; the regression fixture covers a
+  symlink and seven regular public archive identities. Workflow test commands
+  include the new regression.
+- **Qualification mapping:** Focused suite **9/9**, broader release suite
+  **37/37**, build **8/8**, seven archives packed, packed-manifest audit passed,
+  and clean consumer imported all libraries, ran the CLI, avoided implicit
+  engine installation, and completed signed bounded A1 execution.
+- **Acceptance mapping:** This is code-side package-boundary qualification;
+  retain `DIST-001` unchecked for LOCAL/HUNT/RECORD dependencies and final
+  legal/release acceptance. No external state changed. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-001-current-head-archive-member-qualification-2026-10-22.md`.
+
 ## ACCEPT-002/003 clean-head story verification · 2026-10-22
 
 - **Source mapping:** CLI `5072204f` and Web `cb23021`, both from clean
