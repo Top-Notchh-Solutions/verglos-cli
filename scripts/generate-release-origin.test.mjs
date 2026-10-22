@@ -74,3 +74,17 @@ test("release origin refuses a symlinked metadata output without changing its ta
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("release origin refuses a symlinked archive before reading it", async () => {
+  const root = await fixture();
+  try {
+    await rm(join(root, "verglos.tgz"));
+    await symlink("verglos-shared.tgz", join(root, "verglos.tgz"));
+    await assert.rejects(
+      run(process.execPath, [script, root, "--source-commit", "e".repeat(40), "--release-tag", "v2.0.0-alpha.1"]),
+      /release artifact is not a regular file: verglos\.tgz/u,
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});

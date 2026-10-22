@@ -1,12 +1,10 @@
 import { createHash } from "node:crypto";
 import { constants } from "node:fs";
-import { lstat, open, readFile, readdir } from "node:fs/promises";
+import { lstat, open, readdir } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
+import { MAX_RELEASE_ARTIFACT_BYTES, readArchiveManifest, readBoundedRegularFile } from "./release-artifact-files.mjs";
 import { parseReleaseTag } from "./verify-release-tag.mjs";
 
-const run = promisify(execFile);
 const EXPECTED_PACKAGES = new Set([
   "verglos",
   "@verglos/shared",
@@ -57,13 +55,7 @@ for (const name of [...archives, ...REQUIRED_SIDECARS]) {
 
 const archiveEntries = [];
 for (const archive of archives) {
-  let manifest;
-  try {
-    const { stdout } = await run("tar", ["-xOf", join(root, archive), "package/package.json"], { encoding: "utf8", maxBuffer: 1024 * 1024 });
-    manifest = JSON.parse(stdout);
-  } catch {
-    throw new Error(`release archive has no valid package manifest: ${archive}`);
-  }
+  const { manifest } = await readArchiveManifest(join(root, archive), `release archive ${archive}`);
   if (typeof manifest.name !== "string" || !EXPECTED_PACKAGES.has(manifest.name)) throw new Error(`release archive contains an unexpected package: ${archive}`);
   if (manifest.version !== releaseVersion) throw new Error(`release archive version does not match ${releaseTag}: ${archive}`);
   if (archiveEntries.some((entry) => entry.packageName === manifest.name)) throw new Error(`release contains a duplicate package archive: ${manifest.name}`);
@@ -105,5 +97,5 @@ function option(name) {
 }
 
 async function sha256(path) {
-  return createHash("sha256").update(await readFile(path)).digest("hex");
+  return createHash("sha256").update(await readBoundedRegularFile(path, MAX_RELEASE_ARTIFACT_BYTES, `release artifact ${path}`)).digest("hex");
 }

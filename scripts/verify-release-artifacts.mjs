@@ -1,11 +1,8 @@
-import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
-import { lstat, readFile, readdir } from "node:fs/promises";
+import { lstat, readdir } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
-import { promisify } from "node:util";
 import { validateExternalLicenseRecords } from "./external-license-records.mjs";
-
-const run = promisify(execFile);
+import { extractArchiveMemberFromBytes, MAX_RELEASE_ARTIFACT_BYTES, readArchiveManifest, readBoundedRegularFile } from "./release-artifact-files.mjs";
 
 const root = resolve(process.argv[2] ?? "");
 if (!process.argv[2]) throw new Error("release artifact directory is required");
@@ -23,7 +20,7 @@ const EXPECTED_PUBLIC_PACKAGES = new Set([
 const checksumsPath = join(root, "SHA256SUMS");
 if (!(await lstat(root)).isDirectory()) throw new Error("release artifact root must be a directory");
 if (!(await lstat(checksumsPath)).isFile()) throw new Error("SHA256SUMS must be a regular file");
-const checksums = await readFile(checksumsPath, "utf8");
+const checksums = (await readBoundedRegularFile(checksumsPath, MAX_RELEASE_ARTIFACT_BYTES, "SHA256SUMS")).toString("utf8");
 const expected = new Map();
 for (const line of checksums.split(/\r?\n/).filter(Boolean)) {
   const match = /^(?<digest>[a-f0-9]{64})  \*?(?:\.\/)?(?<name>[A-Za-z0-9._-]+)$/.exec(line);
@@ -38,12 +35,7 @@ if (requireSevenPublicPackages) {
   if (archives.length !== EXPECTED_PUBLIC_PACKAGES.size) throw new Error(`strict release requires exactly ${EXPECTED_PUBLIC_PACKAGES.size} public npm archives`);
   const archiveManifests = [];
   for (const archive of archives) {
-    try {
-      const { stdout } = await run("tar", ["-xOf", join(root, archive), "package/package.json"], { encoding: "utf8", maxBuffer: 1024 * 1024 });
-      archiveManifests.push(JSON.parse(stdout));
-    } catch {
-      throw new Error(`release archive has no valid package manifest: ${archive}`);
-    }
+    archiveManifests.push((await readArchiveManifest(join(root, archive), `release archive ${archive}`)).manifest);
   }
   const names = new Set(archiveManifests.map((manifest) => manifest.name));
   const missing = [...EXPECTED_PUBLIC_PACKAGES].filter((name) => !names.has(name));
@@ -62,12 +54,12 @@ if (expected.size !== files.length || files.some((name) => !expected.has(name)))
   throw new Error("SHA256SUMS does not describe exactly the release artifacts");
 }
 for (const name of files) {
-  const digest = createHash("sha256").update(await readFile(join(root, name))).digest("hex");
+  const digest = createHash("sha256").update(await readBoundedRegularFile(join(root, name), MAX_RELEASE_ARTIFACT_BYTES, `release artifact ${name}`)).digest("hex");
   if (digest !== expected.get(name)) throw new Error(`checksum mismatch: ${basename(name)}`);
 }
 const originPath = join(root, "RELEASE_METADATA.json");
 let origin;
-try { origin = JSON.parse(await readFile(originPath, "utf8")); }
+try { origin = JSON.parse((await readBoundedRegularFile(originPath, MAX_RELEASE_ARTIFACT_BYTES, "RELEASE_METADATA.json")).toString("utf8")); }
 catch (error) { if (error instanceof SyntaxError) throw new Error("RELEASE_METADATA.json is not valid JSON"); throw error; }
 if (origin.schemaId !== "urn:verglos:artifact:release-origin" || origin.schemaVersion !== 1) throw new Error("RELEASE_METADATA.json has an invalid schema");
 if (origin.repository !== "https://github.com/Top-Notchh-Solutions/verglos-cli") throw new Error("RELEASE_METADATA.json has an invalid repository origin");
@@ -79,14 +71,11 @@ for (const artifact of origin.artifacts) {
   if (!artifact || typeof artifact !== "object" || typeof artifact.name !== "string" || !/^[a-f0-9]{64}$/u.test(artifact.sha256) || !["npm-archive", "release-sidecar"].includes(artifact.kind)) throw new Error("RELEASE_METADATA.json contains an invalid artifact entry");
   if (artifact.name === "RELEASE_METADATA.json" || originNames.has(artifact.name) || !files.includes(artifact.name)) throw new Error("RELEASE_METADATA.json contains an invalid artifact name");
   originNames.add(artifact.name);
-  const digest = createHash("sha256").update(await readFile(join(root, artifact.name))).digest("hex");
+  const artifactBytes = await readBoundedRegularFile(join(root, artifact.name), MAX_RELEASE_ARTIFACT_BYTES, `release artifact ${artifact.name}`);
+  const digest = createHash("sha256").update(artifactBytes).digest("hex");
   if (digest !== artifact.sha256) throw new Error(`release origin digest mismatch: ${artifact.name}`);
   if (artifact.kind === "npm-archive") {
-    let manifest;
-    try {
-      const { stdout } = await run("tar", ["-xOf", join(root, artifact.name), "package/package.json"], { encoding: "utf8", maxBuffer: 1024 * 1024 });
-      manifest = JSON.parse(stdout);
-    } catch { throw new Error(`release origin archive has no valid package manifest: ${artifact.name}`); }
+    const { manifest } = await readArchiveManifest(join(root, artifact.name), `release origin archive ${artifact.name}`);
     if (manifest.name !== artifact.packageName || manifest.version !== artifact.packageVersion || manifest.version !== origin.releaseVersion) throw new Error(`release origin package binding mismatch: ${artifact.name}`);
   }
 }
@@ -95,7 +84,7 @@ for (const name of requiredSidecars) {
   const path = join(root, name);
   try {
     if (!(await lstat(path)).isFile()) throw new Error(`${name} must be a regular file`);
-    const content = await readFile(path, "utf8");
+    const content = (await readBoundedRegularFile(path, MAX_RELEASE_ARTIFACT_BYTES, name)).toString("utf8");
     if (content.length === 0) throw new Error(`${name} must not be empty`);
     if (name === "THIRD_PARTY_NOTICES" && !content.startsWith("THIRD-PARTY NOTICES\n")) throw new Error("THIRD_PARTY_NOTICES has an invalid header");
     if (name === "SBOM.cdx.json") {
@@ -122,9 +111,10 @@ for (const name of requiredSidecars) {
     throw error;
   }
 }
-const expectedNotices = await readFile(join(root, "THIRD_PARTY_NOTICES"));
+const expectedNotices = await readBoundedRegularFile(join(root, "THIRD_PARTY_NOTICES"), MAX_RELEASE_ARTIFACT_BYTES, "THIRD_PARTY_NOTICES");
 for (const archive of archives) {
-  const { stdout: packagedNotices } = await run("tar", ["-xOf", join(root, archive), "package/THIRD_PARTY_NOTICES"], { encoding: "buffer", maxBuffer: 16 * 1024 * 1024 });
+  const archiveBytes = await readBoundedRegularFile(join(root, archive), MAX_RELEASE_ARTIFACT_BYTES, `release archive ${archive}`);
+  const packagedNotices = await extractArchiveMemberFromBytes(archiveBytes, "package/THIRD_PARTY_NOTICES", `release archive ${archive}`, 16 * 1024 * 1024);
   if (!packagedNotices.equals(expectedNotices)) throw new Error(`THIRD_PARTY_NOTICES differs inside ${archive}`);
 }
 console.log(`verified ${files.length} release artifacts (${archives.length} npm archives, ${requiredSidecars.length} sidecars, and notices in every archive${requireSevenPublicPackages ? "; strict seven-package set" : ""})`);
