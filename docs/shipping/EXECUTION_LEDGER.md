@@ -14330,3 +14330,22 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   attestation, and final acceptance. No external state changed and nothing was
   deleted. Score remains **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/dist-001-pack-manifest-read-binding-pr174-2026-10-23.md`.
+
+## 2026-10-23 · DIST-003 checksum read binding merged
+
+- **Source:** CLI PR #175, implementation commit
+  `18b6dd7d569bebcd6a20dc397376d8795d8e714b`; normal merge commit
+  `268dc53987132f02b3daead16ac5ba07aaefdbe7`.
+- **Implementation:** Release checksum generation now reads every artifact
+  through the bounded regular-file helper before hashing, with a source
+  regression against pathname-bound reads.
+- **Verification:** Focused checksum/release contracts **26/26**, forced CLI
+  Turbo graph **23/23**, and diff check passed. Hosted Standard
+  `39859012857`, self-scan `39859013103`, and platform/in-toto matrix
+  `39859013466` passed all nine platform cells and in-toto binding.
+- **Boundary:** Keep DIST-003 open for trusted/protected publication,
+  immutable attestation, legal/license clearance, provider/Production action,
+  independent evidence where required, and final acceptance. No external
+  state changed and nothing was deleted. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/dist-003-checksum-read-binding-pr175-2026-10-23.md`.

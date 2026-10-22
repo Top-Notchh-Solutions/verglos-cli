@@ -1743,3 +1743,25 @@ provider, Production, customer, database, or release-sign-off state changed;
 nothing was deleted. The 13 AppSec-held rows remain unchanged. Score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-001-pack-manifest-read-binding-pr174-2026-10-23.md`.
+
+# 2026-10-23 · DIST-003 checksum read binding merged
+
+CLI PR #175 implementation commit `18b6dd7d569bebcd6a20dc397376d8795d8e714b`
+binds every release checksum input to the bounded regular-file helper before
+hashing. The source regression rejects a return to pathname-bound
+`readFile(path)` access. Focused checksum/release contracts passed **26/26**;
+the forced CLI Turbo graph passed **23/23 tasks**; and `git diff --check`
+passed.
+
+Hosted Standard validation `39859012857`, self-scan `39859013103`, and the
+platform/in-toto matrix `39859013466` passed, including Ubuntu/macOS/Windows
+Node 20/22/24 and in-toto release binding. PR #175 merged normally without
+squash as `268dc53987132f02b3daead16ac5ba07aaefdbe7`.
+
+This is implementation progress only. Keep `DIST-003` unchecked for
+protected/trusted publication, immutable attestation, legal/license
+clearance, provider/Production action, independent evidence where required,
+and final acceptance. No external state changed; nothing was deleted. The 13
+AppSec-held entries remain unchanged. Score remains **239 checked / 41 open /
+280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-003-checksum-read-binding-pr175-2026-10-23.md`.

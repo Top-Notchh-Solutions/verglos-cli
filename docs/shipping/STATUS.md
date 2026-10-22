@@ -11301,6 +11301,22 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · DIST-003 checksum read binding merged
+
+CLI PR #175 merged normally as `268dc53987132f02b3daead16ac5ba07aaefdbe7`
+from source `18b6dd7d569bebcd6a20dc397376d8795d8e714b`. Release checksum
+generation now uses bounded regular-file reads for every artifact, with a
+regression against pathname-bound reads. Focused contracts passed **26/26**;
+the forced CLI graph passed **23/23**; and hosted Standard
+`39859012857`, self-scan `39859013103`, and platform/in-toto matrix
+`39859013466` passed all required cells. DIST-003 remains open for trusted
+publication, immutable attestation, legal/license clearance, provider action,
+independent evidence, and final acceptance. No external state changed and
+nothing was deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**.
+
+Evidence: `evidence/dist-003-checksum-read-binding-pr175-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-005 machine-readable plan terms
 
 Web PR #250 commits `00996a657510d958e4840ebe40065dbef838edc4` and latest
