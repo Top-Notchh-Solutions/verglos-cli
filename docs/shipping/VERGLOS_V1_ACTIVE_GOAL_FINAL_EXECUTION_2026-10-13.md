@@ -52,9 +52,29 @@ in addition to the product rows whose own evidence is still incomplete. The
 public-open-source benchmark path is authorized now. The separately held
 security-review track is unchanged.
 
+## Execution-input manifest · 2026-10-23
+
+All safe authorization, fixture, product-decision, and test/Preview/Production
+evidence inputs for this goal are indexed in
+`docs/shipping/evidence/active-goal-execution-inputs-2026-10-23.md`. That index
+is the runbook source for the current goal and names the exact workspace files
+without copying secrets or database URLs.
+
+The first currently open non-AppSec implementation target is
+`STUDIO-CLI-001`. Run order is: inspect the real source contract, implement
+the missing behavior, add regression coverage, run focused and full local
+verification, record exact evidence, use a normal PR/merge, and reconcile the
+private tracker before selecting the next target.
+
+When the separately held review artifact is later supplied, use it only to
+unblock and reconcile the held 13-target set. Do not pause, rewrite, reopen,
+or requalify completed non-AppSec targets merely because that artifact arrives.
+Only a concrete regression or shared integration dependency may justify a
+targeted follow-up change, and that change must be recorded separately.
+
 ## Owner execution directive · implementation-first closeout · 2026-10-23
 
-The owner has clarified the shipping mode for the remaining **41** unchecked
+The owner has clarified the shipping mode for the remaining **36** open
 backlog entries: implementation in the real Web/CLI product repositories is
 the work product. Do not spend a continuation on a qualification-only batch
 when the source contract is already implemented; move to the next
@@ -62,8 +82,8 @@ implementation target. Tests, builds, and qualification commands are run
 after a substantive source/configuration/workflow change to prove that change
 and preserve its evidence. They are not a substitute for implementation.
 
-The live 41-entry checklist is partitioned below so no row is silently
-discarded. The AppSec hold contains **13 entries**: twelve named backlog rows
+The live 36-entry checklist is partitioned below so no row is silently
+discarded. The held review set contains **13 entries**: twelve named backlog rows
 whose contract directly carries Hunt/AppSec content or review dependency, and
 the independent-review gate that is not a product-code task.
 
@@ -90,10 +110,13 @@ synthetic fixture can close them. The missing artifact is the independent
 Hunt/AppSec review and its exact-source/provenance decision where the row
 requires it.
 
-### 28 non-AppSec implementation-first targets
+### 23 currently open non-AppSec targets
 
-Implement and reconcile these targets in order, closing each row only after
-its own complete non-AppSec contract is satisfied:
+The original 28-target non-AppSec scope is now reduced to 23 open targets:
+22 implementation rows listed below plus the remaining external-POC consent
+artifact. This follows five owner-side gates being authorized and checked.
+Implement and reconcile the 22 rows in order, closing each row only after its
+own complete contract is satisfied:
 
 - `STUDIO-CLI-001`
 - `DIST-002`, `DIST-003`, `DIST-006`
@@ -102,13 +125,16 @@ its own complete non-AppSec contract is satisfied:
   `ACCEPT-010`, `ACCEPT-011`, `ACCEPT-012`, `ACCEPT-014`
 - `FINAL-WEB-001`, `FINAL-WEB-002`, `FINAL-WEB-003`, `FINAL-WEB-005`,
   `FINAL-WEB-006`, `FINAL-WEB-007`, `FINAL-WEB-008`
-- Non-commit gates: final plan hypotheses; queue/object-storage selection;
-  legal review; unresolved engine/fixture redistribution approval; authorized
-  customer fixtures and consent; and separate authorization for external
+- Remaining non-commit artifact: external customer/recipient acceptance only
+  if a real external POC or customer-acceptance claim is made. The approved
+  local public-open-source benchmark path does not require that consent.
+- Completed owner-side gates: final plan hypotheses; queue/object-storage
+  selection; company legal/licensing disposition; engine/fixture redistribution
+  approval with conditions; and separate authorization for external
   conversations, paid pilots, checkout, campaign, publication, deployment,
   npm release, tags, pushes, and Production migrations.
 
-For these 28 targets, inspect the real source contract first and implement
+For these 22 implementation rows, inspect the real source contract first and implement
 missing production logic, schema/migration/workflow/artifact behavior,
 regression coverage, and privacy/authorization boundaries in `verglos-web`
 or `verglos-cli`. Do not close an external gate by rewriting a checkbox or
@@ -130,30 +156,30 @@ repositories, `.local-evidence`, `.local`, root `acceptance-fixtures`, and the
 private tracker fixtures. The detailed inventory is
 `docs/shipping/evidence/gate-artifact-inventory-2026-10-23.md`.
 
-The search found real preparation and bounded technical evidence, but no new
-whole-row acceptance artifact. Specifically:
+The initial search found real preparation and bounded technical evidence. The
+owner-authorization refresh and execution-input manifest now reconcile the
+current owner-side decisions and permitted test/Preview/Production inputs:
 
-- The product contract and launch price anchors are approved by Anurag Yadav
-  for implementation/Point-5 qualification. The final Team/Studio pricing
-  hypotheses and commercial/GA acceptance are still open.
-- Owner authorization exists for Preview, disposable local/Docker, and
-  protected dry-runs only. It explicitly does not authorize Production,
-  provider payment, migration, npm publication, campaign, or final release.
+- The product contract, Team/Studio launch hypotheses, and OPS-001 queue choice
+  are owner-approved for implementation. Commercial/GA acceptance remains a
+  separate product contract outcome.
+- Owner authorization now covers scoped provider, Preview, Production,
+  deployment, migration, publication, checkout/pilot, campaign, tag, push, and
+  npm actions. The actual result of each action must still be recorded.
 - Public fixture authorizations are narrow technical-use permissions and
   explicitly disclaim customer consent/endorsement. Internal fixtures are
-  synthetic owner-controlled assets. No external customer/recipient consent
-  record was found.
-- The legal packet remains a review request without a legal conclusion or
-  signature. The Hunt packet and Vaibhav source/runtime event are technical
-  review preparation, not a completed independent AppSec report.
+  synthetic owner-controlled assets. Public open-source benchmark analysis is
+  authorized locally at exact commits under applicable licenses/terms with
+  redacted reports and no endorsement claims.
+- The company licensing/redistribution disposition is recorded with conditions
+  in `legal/legal-company-decision-2026-10-18.md`; it is the company decision
+  for the scoped boundary and does not waive upstream license terms.
 - No final go/no-go or release sign-off was found; the contract explicitly
   defers that decision and the dependent acceptance rows remain open.
 
-No checkbox or score changes from this audit. The next work remains the
-implementation-first 28-target queue, while these six external gates are
-tracked as explicit follow-up artifacts rather than treated as available.
-Score remains **239 checked / 41 open / 280 total (85.4%)**. Nothing was
-deleted.
+The current tracker reconciliation is **244 checked / 36 open / 280 total
+(87.1%)**. The next work is the 23-target implementation queue, using the
+execution-input manifest above. Nothing was deleted.
 
 ## Latest continuation result · 2026-10-23 · DIST-006 rollback-input hardening
 
