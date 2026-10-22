@@ -821,7 +821,18 @@ recheck rather than treated as a defect. No checkbox changed; score remains
 **239 checked / 41 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
 
-**Current continuation result (2026-10-22):** Exact merged Web `02f5aba` passed
+**Current continuation result (2026-10-22):** Current CLI `db351035` passed
+Studio projection/approval/upload contracts **15/15**, and current Web
+`02f5aba` passed projection, tenant, handoff, allowance, Preview, and Studio
+E2E contracts **107/107**. The production implementation is qualified, but
+STUDIO-CLI-001 remains open for approved numeric non-production allowance and
+independent authorized recipient/customer acceptance with hosted/audit
+evidence. No database, provider, customer, Production, legal, or AppSec state
+changed; nothing was deleted. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-current-head-requalification-pr167-pr241-2026-10-22.md`.
+
+**Previous continuation result (2026-10-22):** Exact merged Web `02f5aba` passed
 the accessibility/performance/truth contract set **66/66** and the source
 public-release smoke (**16 routes / 22 of 22 claims / 2 proof assets / 0
 issues**). The direct landing qualifier correctly refused missing browser

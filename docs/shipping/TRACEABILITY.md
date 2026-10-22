@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## STUDIO-CLI-001 exact-head requalification · 2026-10-22
+
+- **Source mapping:** CLI `db3510356ecd6c6e430d7dcb3b9354e514d777ee`; Web
+  `02f5aba95c4172255cc522730c6ffecc1598cbda`.
+- **Qualification mapping:** CLI projection/approval/upload **15/15**; Web
+  projection/tenant/handoff/allowance/Preview/Studio E2E **107/107**.
+- **Acceptance mapping:** Keep STUDIO-CLI-001 open for approved numeric
+  non-production allowance and independent authorized recipient/customer
+  acceptance with hosted/audit evidence. No customer or Production state was
+  changed; nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/studio-cli-001-current-head-requalification-pr167-pr241-2026-10-22.md`.
+
 ## QUAL-WEB-006 exact-head contract requalification · 2026-10-22
 
 - **Source mapping:** Web exact merged head

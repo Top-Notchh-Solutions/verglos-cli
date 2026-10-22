@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain STUDIO-CLI-001 after exact-head requalification
+
+- **Decision:** Accept the current CLI/Web Studio contract qualification as
+  repository evidence; retain the checkbox as open.
+- **Observed:** CLI **15/15** and Web **107/107** passed across projection,
+  approval, upload, tenant isolation, handoff, allowance, Preview, and Studio
+  E2E boundaries.
+- **Reason:** Approved numeric non-production allowance and independent
+  authorized recipient/customer acceptance with hosted/audit evidence remain
+  absent; synthetic owner-controlled Preview evidence cannot substitute.
+- **Boundary:** No database, provider, customer, Production, legal, or AppSec
+  operation occurred. Nothing was deleted. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/studio-cli-001-current-head-requalification-pr167-pr241-2026-10-22.md`.
+
 ## 2026-10-22 · retain QUAL-WEB-006 after exact-head qualification
 
 - **Decision:** Accept the current Web accessibility/performance/truth

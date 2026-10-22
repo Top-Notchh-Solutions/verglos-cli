@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · STUDIO-CLI-001 exact-head requalification
+
+- **Verification:** CLI current head passed projection/approval/upload tests
+  **15/15**; Web current head passed projection, tenant, handoff, allowance,
+  Preview, and Studio E2E contracts **107/107**.
+- **Acceptance mapping:** Exact digest binding, redacted-field allowlist,
+  malformed/replayed input refusal, tenant/workspace/record scope, and
+  allowance/recipient lifecycle boundaries are qualified. Keep the row open
+  for approved numeric non-production allowance and independent authorized
+  recipient/customer acceptance with hosted/audit evidence.
+- **Boundary:** No database, provider, customer, Production, legal, or AppSec
+  operation occurred. Nothing was deleted. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/studio-cli-001-current-head-requalification-pr167-pr241-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 exact-head contract requalification
 
 - **Verification:** Web `02f5aba` passed accessibility/performance/truth

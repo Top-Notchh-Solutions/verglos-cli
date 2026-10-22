@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · STUDIO-CLI-001 exact-head requalification
+
+Current CLI `db351035` projection/approval/upload contracts passed **15/15**;
+current Web `02f5aba` client-projection, tenant, handoff, allowance, Preview,
+and Studio E2E contracts passed **107/107**. This confirms the production code
+and regression boundaries at the current merged heads. STUDIO-CLI-001 remains
+open only for the approved numeric non-production allowance and independent
+authorized recipient/customer acceptance with hosted/audit evidence. No
+database, provider, customer, Production, legal, or AppSec state changed.
+Nothing was deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/studio-cli-001-current-head-requalification-pr167-pr241-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 exact-head contract requalification
 
 Exact Web `02f5aba` passed the accessibility/performance/truth contract set

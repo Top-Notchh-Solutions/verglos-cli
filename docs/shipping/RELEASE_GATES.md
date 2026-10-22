@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · STUDIO-CLI-001 exact-head gate
+
+CLI `db351035` passes projection/approval/upload tests **15/15** and Web
+`02f5aba` passes projection/tenant/handoff/allowance/Preview/Studio E2E
+contracts **107/107**. Keep the row open for the approved numeric
+non-production allowance and independent authorized recipient/customer
+acceptance with hosted/audit evidence. No database, provider, customer,
+Production, legal, or AppSec state changed; nothing was deleted. Score remains
+**239/41/280 (85.4%)**. Evidence:
+`evidence/studio-cli-001-current-head-requalification-pr167-pr241-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 exact-head gate
 
 Web `02f5aba` passes accessibility/performance/truth contracts **66/66** and
