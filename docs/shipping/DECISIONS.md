@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain DIST-003/DIST-006/QUAL-CLI-006 after exact-head qualification
+
+- **Decision:** Accept the current artifact, rollback, and standard-validation
+  results as repository evidence; retain all three checkboxes as open.
+- **Observed:** Artifact contracts **23/23**, rollback five boundaries with
+  two historical records preserved, and standard-validation contracts
+  **12/12** passed. Strict license clearance still exits **2** for seven
+  review entries.
+- **Reason:** Live trusted keyless attestation, legal/protected publication,
+  authenticated provider rollback/revocation, independent review, and final
+  acceptance are absent.
+- **Boundary:** No registry, provider, Production, database, customer, or
+  AppSec operation occurred. Nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-003-current-head-requalification-pr167-2026-10-22.md`;
+  `evidence/dist-006-current-head-requalification-pr167-2026-10-22.md`;
+  `evidence/qual-cli-006-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · retain DIST-001/DIST-002 after exact-head qualification
 
 - **Decision:** Accept the current CLI package/release qualification as

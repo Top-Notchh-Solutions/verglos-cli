@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## DIST-003/DIST-006/QUAL-CLI-006 exact-head qualification · 2026-10-22
+
+- **Source mapping:** Public CLI exact merged head
+  `db3510356ecd6c6e430d7dcb3b9354e514d777ee`.
+- **Qualification mapping:** Artifact contracts **23/23**, rollback evidence
+  and focused regression passed, and standard-validation contracts **12/12**;
+  rollback covered five boundaries and preserved two historical records.
+- **Blocker mapping:** Strict license clearance remains exit **2** for seven
+  review entries; live trusted keyless attestation, authenticated provider
+  rollback, legal clearance, independent review, and final acceptance remain
+  unperformed.
+- **Acceptance mapping:** No checkbox changed; score remains **239/41/280
+  (85.4%)**. Nothing was deleted.
+- **Evidence:** `evidence/dist-003-current-head-requalification-pr167-2026-10-22.md`;
+  `evidence/dist-006-current-head-requalification-pr167-2026-10-22.md`;
+  `evidence/qual-cli-006-current-head-requalification-pr167-2026-10-22.md`.
+
 ## DIST-001/DIST-002 exact merged-head requalification · 2026-10-22
 
 - **Source mapping:** Public CLI exact merged head

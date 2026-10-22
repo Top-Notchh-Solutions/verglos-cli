@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 exact-head gate
+
+The exact merged CLI `db351035` passes artifact contracts **23/23**, the
+five-boundary local rollback rehearsal with two historical records preserved,
+and standard-validation contracts **12/12**. The strict license gate remains
+fail-closed with exit **2** for seven unresolved review entries. Keep these
+rows open for trusted/legal release identity, authenticated rollback/revocation,
+independent review, and final acceptance. No registry, provider, Production,
+database, customer, or AppSec state changed; nothing was deleted. Score
+remains **239/41/280 (85.4%)**. Evidence:
+`evidence/dist-003-current-head-requalification-pr167-2026-10-22.md`,
+`evidence/dist-006-current-head-requalification-pr167-2026-10-22.md`, and
+`evidence/qual-cli-006-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-001/DIST-002 exact merged-head release gate
 
 The exact merged CLI `db351035` passes the repository-owned package gate:

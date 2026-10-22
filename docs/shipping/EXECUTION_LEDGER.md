@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 exact-head qualification
+
+- **Verification:** Exact CLI `db351035` passed artifact contracts **23/23**,
+  rollback evidence plus focused regression, and standard-validation
+  contracts **12/12**. The rollback fixture covered npm, engine, Hunt,
+  signing, and Web boundaries and preserved **2** historical records.
+- **Strict boundary:** The release license gate remains fail-closed with exit
+  **2** for seven unresolved dependency review entries. Local fixture tests do
+  not claim live keyless attestation or legal approval.
+- **Disposition:** Keep `DIST-003`, `DIST-006`, and `QUAL-CLI-006` unchecked
+  for their external/trusted/legal/independent/final gates. Score remains
+  **239/41/280 (85.4%)**.
+- **Boundary:** No registry, provider, Production, database, customer, or
+  AppSec operation occurred. Nothing was deleted.
+- **Evidence:** `evidence/dist-003-current-head-requalification-pr167-2026-10-22.md`;
+  `evidence/dist-006-current-head-requalification-pr167-2026-10-22.md`;
+  `evidence/qual-cli-006-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-001/DIST-002 exact merged-head requalification
 
 - **Verification:** CLI `db351035` passed forced build **8/8**, packed seven

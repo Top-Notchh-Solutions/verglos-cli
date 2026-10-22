@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · DIST-003/DIST-006/QUAL-CLI-006 exact-head qualification
+
+Exact merged CLI `db351035` passed the artifact contract set **23/23**, the
+rollback evidence generator plus focused regression, and the standard
+validation contract set **12/12**. Rollback covered five bounded boundaries
+and preserved two historical records. The strict release license gate still
+exits **2** for seven unresolved review entries. These are repository-owned
+qualifications only; `DIST-003`, `DIST-006`, and `QUAL-CLI-006` remain open for
+trusted/legal/independent/external release gates and final acceptance. No
+registry, provider, Production, database, customer, or AppSec state changed.
+Nothing was deleted. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/dist-003-current-head-requalification-pr167-2026-10-22.md`,
+`evidence/dist-006-current-head-requalification-pr167-2026-10-22.md`, and
+`evidence/qual-cli-006-current-head-requalification-pr167-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-001/DIST-002 exact merged-head requalification
 
 Exact merged CLI `db351035` passed the current package front-door audit:

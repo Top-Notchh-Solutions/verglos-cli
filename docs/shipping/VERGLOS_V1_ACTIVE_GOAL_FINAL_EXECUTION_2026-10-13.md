@@ -822,6 +822,19 @@ recheck rather than treated as a defect. No checkbox changed; score remains
 `docs/shipping/evidence/final-web-007-local-source-browser-qualification-2026-10-21.md`.
 
 **Current continuation result (2026-10-22):** Exact merged CLI
+`db3510356ecd6c6e430d7dcb3b9354e514d777ee` passed artifact contracts **23/23**,
+the five-boundary rollback evidence generator and focused regression, and
+standard-validation contracts **12/12**. The strict release license gate
+remains fail-closed with exit **2** for seven unresolved review entries. No
+registry, provider, Production, database, customer, or AppSec state changed;
+nothing was deleted. Keep `DIST-003`, `DIST-006`, and `QUAL-CLI-006` unchecked
+for their trusted/legal/independent/external gates and final acceptance. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-003-current-head-requalification-pr167-2026-10-22.md`,
+`docs/shipping/evidence/dist-006-current-head-requalification-pr167-2026-10-22.md`,
+and `docs/shipping/evidence/qual-cli-006-current-head-requalification-pr167-2026-10-22.md`.
+
+**Previous continuation result (2026-10-22):** Exact merged CLI
 `db3510356ecd6c6e430d7dcb3b9354e514d777ee` passed the current DIST-001
 package qualification: forced build **8/8**, seven packed public archives,
 packed-manifest audit, and clean-consumer verification with all imports, no
