@@ -11226,6 +11226,26 @@ Score remains **239 checked / 41 open / 280 total (85.4%)**.
 
 Evidence: `evidence/dist-003-artifact-read-binding-pr171-2026-10-23.md`.
 
+## 2026-10-23 · FINAL-WEB-003 catalog allowance display
+
+Web PR #250 source `2b3084f` completes the canonical public plan-term
+projection for public verification requests/month and managed execution
+runs/month in the homepage and docs catalog tables. Truth registry **35/35**,
+public release smoke **7/7**, executable smoke **18 routes / 22 claims / 2
+proof assets / 0 issues**, typecheck, build **49/49**, and serial Web
+**897 passed / 24 explicit skips / 0 failures** passed locally.
+
+Hosted runs `39849797930` and `39849797894` failed before repository steps
+with `runner_id: null` and zero steps for the protocol/PostgreSQL/type-schema
+jobs. GitGuardian and Preview Comments passed; Vercel was pending at capture.
+PR #250 remains open and was not bypassed or merged around. No database,
+provider, customer, Production, or deployment state changed; nothing was
+deleted. `FINAL-WEB-003` remains unchecked for its FINAL-WEB-001 dependency,
+hosted/independent evidence where required, and final acceptance. Score
+remains **239 checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`.
+
 ## 2026-10-22 · DIST-002 publish workflow permission hardening
 
 CLI PR #168 source commit `4bcb4d26364bd8541678acf93d3388095d7c96c0` makes

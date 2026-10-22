@@ -14167,3 +14167,25 @@ provider/Production/customer state changed; nothing was deleted. Score remains
 **239 checked / 41 open / 280 total (85.4%)**.
 
 Evidence: `evidence/dist-003-artifact-read-binding-pr171-2026-10-23.md`.
+
+## 2026-10-23 · FINAL-WEB-003 catalog allowance display
+
+Web PR #250 source `2b3084f` completes the canonical public plan-term
+projection by exposing public verification requests/month and managed
+execution runs/month in the shared truth type, homepage plan cards, and docs
+catalog table. Truth registry passed **35/35**, public-release smoke **7/7**,
+executable smoke **18 routes / 22 claims / 2 proof assets / 0 issues**,
+typecheck passed, build generated **49/49 routes**, and serial Web passed
+**897 / 24 / 0**.
+
+Required hosted run `39849797930` failed before repository steps for
+PostgreSQL and all protocol cells, and `39849797894` failed before repository
+steps for type/schema; jobs had no runner and zero steps. GitGuardian and
+Preview Comments passed; Vercel was pending at capture. PR #250 remains open
+and was not bypassed or merged around. No database, provider, customer,
+Production, or deployment state changed; nothing was deleted. Keep
+`FINAL-WEB-003` unchecked for its FINAL-WEB-001 dependency, hosted/independent
+evidence where required, and final acceptance. Score remains **239 checked /
+41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`.
