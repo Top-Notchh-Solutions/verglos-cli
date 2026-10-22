@@ -1,5 +1,30 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain QUAL-WEB-005 after PR #235 worker-kind hardening
+
+- **Decision:** Promote the runtime account-deletion kind admission repair and
+  retain `QUAL-WEB-005` unchecked because authenticated isolated E2E, legal,
+  retention, migration, independent-review, and final-acceptance gates remain
+  open.
+- **Implementation:** Web commit `5fa3b6dbb277e71df5e1560e445c086fd044e830`
+  validates runtime requested kinds against the fixed hosted inventory before
+  store claim. PR #235 merged normally as
+  `d0f8749f4365e2d07c4484f20adc91acc76baa8a`; source branch preserved.
+- **Verification:** Focused **21/21**, typecheck, Web **950/980** with 30
+  skips and 0 failures, Vercel Preview/GitGuardian passed, merged-head CLI
+  **311/313**, Web **950/980**, composed **74/74**, all **12/12** stories,
+  exit 0. Required Web workflow jobs were queued at final read.
+- **Boundary:** The supplied remote test DB was not used because the harness
+  requires isolated local/CI `verglos_test`; it failed closed before connecting.
+  No remote database, Production, provider, customer, legal, or deletion
+  operation occurred. No file, branch, record, deployment, provider,
+  customer, database, or release artifact was deleted or changed.
+- **Disposition:** Keep `QUAL-WEB-005` open for isolated authenticated
+  deletion E2E, legal/customer-held-record decisions, consent/retention,
+  migration, restore/rollback, independent review, and final acceptance. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-worker-kind-boundary-pr235-2026-10-22.md`.
+
 ## 2026-10-22 · retain DIST-001 after PR #163 package-boundary hardening
 
 - **Decision:** Promote the concrete public package-contents boundary repair

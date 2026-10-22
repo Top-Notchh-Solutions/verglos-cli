@@ -1,5 +1,33 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-WEB-005 deletion-worker boundary hardening and PR #235
+
+- **Implementation:** Web commit `5fa3b6dbb277e71df5e1560e445c086fd044e830`
+  validates runtime deletion `requestedKinds` against the fixed hosted
+  inventory before claiming a job, with a regression proving unsupported kinds
+  cannot reach the store.
+- **Promotion:** PR [#235](https://github.com/anuragyadav-git/verglos-web/pull/235)
+  merged normally as `d0f8749f4365e2d07c4484f20adc91acc76baa8a`; source branch
+  preserved.
+- **Verification:** Focused **21/21**, typecheck passed, full Web suite
+  **950/980** with 30 skips and 0 failures; Vercel Preview and GitGuardian
+  passed. Merged-head verifier CLI **311/313**, Web **950/980**, composed
+  substrates **74/74**, all **12/12** stories, exit 0. Required Web workflow
+  jobs were queued at final merge/status read and are not claimed as passed.
+- **Safety boundary:** The remote Neon value in `.env.test.local` was not
+  used; the integration harness rejected it before connecting because it is not
+  an isolated local/CI `verglos_test` target. No remote database, Production,
+  provider, customer, legal, browser-human, field-CWV, or independent-review
+  operation occurred. No file, branch, record, deployment, provider,
+  customer, database, or release artifact was deleted or changed.
+- **Disposition:** Keep `QUAL-WEB-005` unchecked for isolated authenticated
+  deletion E2E, legal/customer-held-record decisions, consent/retention,
+  migration, restore/rollback, independent review, and final acceptance. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-worker-kind-boundary-pr235-2026-10-22.md`
+  and additive verifier output
+  `evidence/acceptance-stories-verification-2026-10-22-pr163-pr235.json`.
+
 ## 2026-10-22 · DIST-001 package-contents boundary hardening and PR #163
 
 - **Implementation:** CLI commit `78b41f80bb10e133ad7540b5104397186260cd48`

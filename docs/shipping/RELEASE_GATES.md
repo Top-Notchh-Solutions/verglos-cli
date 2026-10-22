@@ -1,5 +1,29 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · QUAL-WEB-005 deletion-worker implementation gate
+
+Web commit `5fa3b6dbb277e71df5e1560e445c086fd044e830` validates runtime
+account-deletion kinds against the fixed hosted inventory before claiming a
+job. PR #235 merged normally as
+`d0f8749f4365e2d07c4484f20adc91acc76baa8a`; the source branch remains
+preserved. Focused privacy/deletion coverage **21/21**, typecheck, full Web
+suite **950/980** with 30 skips and 0 failures, Vercel Preview, GitGuardian,
+and merged-head substrates CLI **311/313**, Web **950/980**, composed **74/74**,
+all **12/12** stories passed. Required Web workflow jobs were queued at final
+merge/status read and are not claimed as passed.
+
+The supplied remote test database was not used: the integration harness
+requires an isolated local/CI `verglos_test` database and failed closed before
+connecting. No remote database, Production, provider, customer, legal,
+browser-human, field-CWV, or independent-review operation occurred. No file,
+branch, record, deployment, provider, customer, database, or release artifact
+was deleted or changed. Keep `QUAL-WEB-005` unchecked for isolated
+authenticated deletion E2E, legal/customer-held-record decisions,
+consent/retention, migration, restore/rollback, independent review, and final
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence:
+`docs/shipping/evidence/qual-web-005-worker-kind-boundary-pr235-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-001 package-contents boundary implementation gate
 
 CLI commit `78b41f80bb10e133ad7540b5104397186260cd48` removes the source-only

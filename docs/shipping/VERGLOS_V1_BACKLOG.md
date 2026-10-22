@@ -1,5 +1,29 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · QUAL-WEB-005 deletion-worker boundary implementation
+
+Web commit `5fa3b6dbb277e71df5e1560e445c086fd044e830` validates runtime
+account-deletion `requestedKinds` against the fixed hosted inventory before a
+job is claimed. PR #235 merged normally as
+`d0f8749f4365e2d07c4484f20adc91acc76baa8a`; its source branch remains
+preserved. Focused coverage passed **21/21**, typecheck passed, and the full
+Web suite passed **950/980** with 30 explicit skips and 0 failures. Vercel
+Preview and GitGuardian passed; required Web workflow jobs were queued at the
+final merge/status read and are not claimed as passed. The merged-head verifier
+passed CLI **311/313**, Web **950/980**, composed substrates **74/74**, and all
+**12/12** stories with zero failures.
+
+This advances code-side implementation only; keep the `QUAL-WEB-005` checkbox
+unchanged for isolated authenticated deletion E2E, legal/customer-held-record
+decisions, consent/retention, migration, restore/rollback, independent review,
+and final acceptance. The supplied remote test DB URL was not used because the
+integration harness requires isolated local/CI `verglos_test`; it failed closed
+before connecting. No remote database, Production, provider, customer, legal,
+or deletion operation occurred, and no file, branch, record, deployment,
+provider, customer, database, or release artifact was deleted or changed.
+Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-worker-kind-boundary-pr235-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-001 package-contents boundary implementation
 
 CLI commit `78b41f80bb10e133ad7540b5104397186260cd48` removes the source-only

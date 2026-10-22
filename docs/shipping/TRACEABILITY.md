@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 deletion-worker boundary hardening and PR #235 · 2026-10-22
+
+- **Source mapping:** Web commit `5fa3b6dbb277e71df5e1560e445c086fd044e830`;
+  PR #235 merged normally as
+  `d0f8749f4365e2d07c4484f20adc91acc76baa8a`; source branch preserved.
+- **Implementation mapping:** Runtime account-deletion worker admission now
+  rejects unsupported hosted kinds before store claim or destructive work.
+- **Qualification mapping:** Focused **21/21**, typecheck, Web **950/980** with
+  30 skips and 0 failures, Vercel Preview/GitGuardian passed, and merged-head
+  verifier CLI **311/313**, Web **950/980**, composed **74/74**, all **12/12**
+  stories, exit 0. Required Web workflow jobs were queued at final read.
+- **Safety mapping:** The supplied remote test DB was not used because the
+  integration harness requires isolated local/CI `verglos_test`; no remote
+  database, Production, provider, customer, legal, or deletion operation was
+  performed. No file, branch, record, deployment, provider, customer,
+  database, or release artifact was deleted or changed.
+- **Acceptance mapping:** Keep `QUAL-WEB-005` open for isolated authenticated
+  deletion E2E, legal/customer-held-record decisions, consent/retention,
+  migration, restore/rollback, independent review, and final acceptance. Score
+  remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-worker-kind-boundary-pr235-2026-10-22.md`
+  and `evidence/acceptance-stories-verification-2026-10-22-pr163-pr235.json`.
+
 ## DIST-001 package-contents boundary hardening and PR #163 · 2026-10-22
 
 - **Source mapping:** CLI commit `78b41f80bb10e133ad7540b5104397186260cd48`;
