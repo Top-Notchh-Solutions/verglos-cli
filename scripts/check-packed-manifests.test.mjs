@@ -19,7 +19,7 @@ const packages = [
   ["@verglos/hunt", "verglos-hunt.tgz"],
 ];
 
-async function writeFixture(root, { symlinked = false } = {}) {
+async function writeFixture(root, { symlinked = false, missingDeclaredPath = false } = {}) {
   const license = await readFile(join(process.cwd(), "LICENSE"));
   for (const [name, archive] of packages) {
     const packageRoot = await mkdtemp(join(root, "package-"));
@@ -29,7 +29,7 @@ async function writeFixture(root, { symlinked = false } = {}) {
       name,
       version: "2.0.0-alpha.1",
       license: "Apache-2.0",
-      files: ["dist"],
+      files: ["dist", ...(missingDeclaredPath ? ["fixtures"] : [])],
       ...(name === "verglos" ? { bin: { verglos: "./dist/index.js" }, main: "./dist/index.js" } : { main: "./dist/index.js" }),
     }));
     await writeFile(join(packageDir, "LICENSE"), license);
@@ -56,6 +56,16 @@ test("packed manifest audit accepts the seven regular public archives", async ()
     await writeFixture(root);
     const result = await run(process.execPath, [script, root]);
     assert.match(result.stdout, /packed manifest audit passed for 7 npm archives/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("packed manifest audit rejects a declared path absent from the archive", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-packed-manifests-"));
+  try {
+    await writeFixture(root, { missingDeclaredPath: true });
+    await assert.rejects(run(process.execPath, [script, root]), /missing from the packed archive: fixtures/u);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
