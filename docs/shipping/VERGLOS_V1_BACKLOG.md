@@ -287,6 +287,27 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md`.
 
+## 2026-10-23 · DIST-001/DIST-003 packed-manifest read binding
+
+CLI PR #173 implemented the next archive-boundary hardening slice. The packed
+npm manifest audit now reads each archive through the bounded regular-file
+handle helper before parsing tar members, and a source regression prevents the
+old pathname read from returning. Focused packed-manifest/package-surface
+tests passed **12/12**, the full CLI Turbo graph passed **23/23**, and
+`git diff --check` passed. Hosted Standard `39855141041`, self-scan
+`39855140860`, and platform/in-toto matrix `39855140881` passed all nine
+platform cells. Source commit
+`50f0e31ee73f8c1623bc63bea9528e3d0f67c0bc` merged normally, without squash,
+as `13c75a09e46e8882ed8c6b07b149ec76cc1909eb`.
+
+This advances implementation only. Keep `DIST-001`/`DIST-003` open for their
+declared local/Hunt/record or protected/trusted publication, legal/license,
+immutable attestation, provider, operational, and final acceptance gates. No
+external publication, provider, Production, customer, database, or
+release-sign-off state changed; nothing was deleted. Score remains **239
+checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-packed-manifest-read-binding-pr173-2026-10-23.md`.
+
 ## 2026-10-22 · ENT-CLI-001 result-acknowledgement implementation
 
 CLI commit `e72e83f40ce0b1137795c945c35ea8c5354e2645` hardens private-runner

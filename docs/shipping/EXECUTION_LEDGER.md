@@ -14268,3 +14268,24 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   No external state changed and nothing was deleted. Score remains
   **239/41/280 (85.4%)**.
 - **Evidence:** `evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md`.
+
+## 2026-10-23 · DIST-001/DIST-003 packed-manifest read binding merged
+
+- **Source:** CLI PR #173, implementation commit
+  `50f0e31ee73f8c1623bc63bea9528e3d0f67c0bc`; normal merge commit
+  `13c75a09e46e8882ed8c6b07b149ec76cc1909eb`.
+- **Implementation:** The packed npm manifest audit now binds archive reads to
+  bounded regular-file handles before parsing tar members. A source regression
+  rejects the old pathname read.
+- **Verification:** Focused packed-manifest/package-surface tests **12/12**,
+  full CLI Turbo test/typecheck/build graph **23/23**, and diff check passed.
+  Hosted Standard `39855141041`, self-scan `39855140860`, and
+  platform/in-toto `39855140881` passed, including all nine platform cells.
+- **Boundary:** Keep `DIST-001`/`DIST-003` open for their declared
+  local/Hunt/record or protected/trusted publication, legal/license, immutable
+  attestation, provider, operational, and final acceptance gates. The local
+  direct public-pack attempt was not claimed because the pre-existing license
+  inventory environment lacks optional `@esbuild/*` lockfile metadata; hosted
+  archive/consumer checks and fixture-backed audit passed. No external state
+  changed and nothing was deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/dist-001-packed-manifest-read-binding-pr173-2026-10-23.md`.

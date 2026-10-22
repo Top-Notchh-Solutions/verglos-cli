@@ -1669,3 +1669,29 @@ customer, database, or release-sign-off state changed; nothing was deleted.
 The 13 AppSec-held rows remain unchanged. Score remains **239 checked / 41
 open / 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md`.
+
+# 2026-10-23 · DIST-001/DIST-003 packed-manifest read binding merged
+
+CLI PR #173 implemented the next archive-boundary slice. Commit
+`50f0e31ee73f8c1623bc63bea9528e3d0f67c0bc` changes the packed npm manifest
+audit to read each archive through the bounded regular-file handle helper
+before parsing tar members; the source regression rejects a return to the
+pathname read. Focused packed-manifest/package-surface tests passed **12/12**,
+the full CLI Turbo graph passed **23/23**, and `git diff --check` passed.
+
+Hosted Standard validation `39855141041`, self-scan `39855140860`, and
+platform/in-toto matrix `39855140881` passed, including all Ubuntu/macOS/
+Windows Node 20/22/24 cells. PR #173 merged normally, without squash, as
+`13c75a09e46e8882ed8c6b07b149ec76cc1909eb`.
+
+This advances `DIST-001`/`DIST-003` implementation only. Keep both rows open
+for their declared LOCAL/HUNT/RECORD or protected/trusted publication,
+legal/license, immutable attestation, provider, operational, and final
+acceptance gates. A local direct public-pack attempt was not used as release
+evidence because this worktree's pre-existing license-inventory environment
+lacks optional `@esbuild/*` lockfile metadata; hosted archive/consumer checks
+and fixture-backed audit passed. No npm publication, provider, Production,
+customer, database, or release-sign-off state changed; nothing was deleted.
+The 13 AppSec-held rows remain unchanged. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/dist-001-packed-manifest-read-binding-pr173-2026-10-23.md`.

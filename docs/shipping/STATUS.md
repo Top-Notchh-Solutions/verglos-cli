@@ -37,6 +37,25 @@ Score remains **239 checked / 41 open / 280 total (85.4%)**.
 
 Evidence: `evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md`.
 
+## 2026-10-23 · DIST-001/DIST-003 packed-manifest read binding merged
+
+CLI PR #173 source `50f0e31ee73f8c1623bc63bea9528e3d0f67c0bc` binds packed npm
+archive reads to bounded regular-file handles before tar parsing, with a
+regression against pathname reads. Focused package-boundary tests passed
+**12/12**, the full CLI graph passed **23/23**, and diff check passed. Hosted
+Standard `39855141041`, self-scan `39855140860`, and platform/in-toto
+`39855140881` passed all nine Ubuntu/macOS/Windows × Node 20/22/24 cells.
+
+PR #173 merged normally, without squash, as
+`13c75a09e46e8882ed8c6b07b149ec76cc1909eb`. `DIST-001`/`DIST-003` remain open
+for their declared local/Hunt/record or protected/trusted publication,
+legal/license, immutable attestation, provider, operational, and final
+acceptance gates. No publication, provider, Production, customer, database,
+or release-sign-off state changed; nothing was deleted. Score remains **239
+checked / 41 open / 280 total (85.4%)**.
+
+Evidence: `evidence/dist-001-packed-manifest-read-binding-pr173-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 strict measurement types
 
 Web PR #249 source `f01717a` makes the accessibility/performance qualifier
