@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · retain FINAL-WEB-007 after browser qualification
+
+- **Decision:** Accept PR #247 as code-side browser qualification and
+  accessibility/performance instrumentation; retain FINAL-WEB-007 unchecked.
+- **Observed:** Real local Chromium capture passed **12/12** across six public
+  surfaces at desktop/mobile widths. Landing **4/4**, public smoke, typecheck,
+  build **49/49**, and isolated serial PostgreSQL **919 passed / 2 skips / 0
+  failures** passed. The parallel test attempt exposed three concurrent
+  temporary-schema collisions and is not treated as a green full-suite run.
+- **Reason:** Human screen-reader, supported-browser/field performance,
+  acceptance dependencies, hosted completion, and final sign-off remain
+  external or independently required evidence.
+- **Boundary:** No hosted rerun, bypass, customer, provider, legal,
+  Production, publication, or release-sign-off action occurred. Nothing was
+  deleted. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-007-browser-qualification-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · retain FINAL-WEB-008 after emitted metadata validation
 
 - **Decision:** Accept PR #246 as additional code-side release-smoke

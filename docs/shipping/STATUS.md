@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · FINAL-WEB-007 browser capture implementation
+
+Web PR #247 source commit `9fcd1031a559a67563124fbaab3e5fa6dd0ed96d` adds a
+real Playwright Chromium capture for the six public release surfaces at
+desktop and mobile widths, including fail-closed LCP/INP/CLS/FCP/TTFB,
+axe, keyboard, landmarks, reduced-motion, responsive-overflow, canonical,
+robots, and interactive-control checks. The capture and qualification passed
+**12/12 measurements with 0 page failures and 0 gaps**. Typecheck, landing
+qualification **4/4**, public smoke **18 routes / 22 claims / 2 proof assets /
+0 issues**, build **49/49**, migrations, licenses, and the isolated serial
+suite **919 passed / 2 documented skips / 0 failures** passed locally. The
+parallel `pnpm test` attempt was not accepted as green because three temporary
+PostgreSQL schema-collision failures occurred under concurrent test workers;
+the serial suite is the authoritative database qualification for this run.
+Required hosted PR jobs remain unavailable before repository steps under the
+account payments/spending-limit condition. FINAL-WEB-007 remains unchecked
+for human screen-reader, supported-browser/field performance, acceptance
+dependencies, and final sign-off. Score remains **239 checked / 41 open / 280
+total (85.4%)**. Nothing was deleted. Evidence:
+`evidence/final-web-007-browser-qualification-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-008 emitted metadata validation
 
 Web PR #246 source commit `e4699b790137c5a6f2922a39e6fcb9bc1c910cc1` adds

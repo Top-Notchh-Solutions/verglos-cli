@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · FINAL-WEB-007 browser capture gate
+
+Web PR #247 source `9fcd1031a559a67563124fbaab3e5fa6dd0ed96d` adds the real
+Chromium desktop/mobile capture and fail-closed qualification for six public
+surfaces. Capture/qualification passed **12/12**, landing tests **4/4**,
+public smoke **18 routes / 22 claims / 2 proof assets / 0 issues**, typecheck,
+build **49/49**, and isolated serial PostgreSQL **919 passed / 2 skips / 0
+failures**. Keep FINAL-WEB-007 open for human screen-reader,
+supported-browser/field performance, acceptance dependencies, hosted
+completion, and final sign-off. The parallel suite had three temporary
+PostgreSQL schema collisions and is not claimed green. Required hosted jobs
+remain blocked before repository steps by the account payments/spending-limit
+condition. Score remains **239/41/280 (85.4%)**. Nothing was deleted.
+Evidence: `evidence/final-web-007-browser-qualification-pr247-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-008 emitted metadata validation gate
 
 Web PR #246 commit `e4699b790137c5a6f2922a39e6fcb9bc1c910cc1` makes the

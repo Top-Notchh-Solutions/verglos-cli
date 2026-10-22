@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · FINAL-WEB-007 browser capture implementation
+
+- **Implementation:** Web PR #247 source `9fcd1031a559a67563124fbaab3e5fa6dd0ed96d`
+  adds a real Playwright Chromium desktop/mobile capture and fail-closed
+  landing-release qualification for the six public release surfaces. It also
+  fixes narrow-screen showcase overflow and makes the capability comparison
+  table keyboard-scrollable with an accessible label.
+- **Verification:** Browser capture/qualification passed **12/12**; landing
+  qualification **4/4**, public smoke **18 routes / 22 claims / 2 proof assets /
+  0 issues**, typecheck, build **49/49**, migrations, licenses, and isolated
+  serial PostgreSQL qualification **919 passed / 2 skips / 0 failures** passed.
+  A parallel `pnpm test` attempt had three temporary PostgreSQL schema
+  collisions under concurrent workers and is not reported as green.
+- **Disposition:** Keep FINAL-WEB-007 unchecked for human screen-reader,
+  supported-browser/field performance, acceptance dependencies, required
+  hosted completion, and final sign-off. Score remains **239/41/280 (85.4%)**.
+- **Boundary:** Hosted jobs failed before repository steps under the account
+  payments/spending-limit condition; no rerun or bypass was attempted. No
+  customer, provider, Production, legal, or release-sign-off state changed.
+  Nothing was deleted.
+- **Evidence:** `evidence/final-web-007-browser-qualification-pr247-2026-10-23.md`;
+  raw capture and qualification JSON are included in the evidence bundle.
+
 ## 2026-10-22 · FINAL-WEB-008 complete route-inventory enforcement
 
 - **Implementation:** Web PR #243 source `c8e68e5` merged normally as

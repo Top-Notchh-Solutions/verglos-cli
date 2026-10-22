@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-007 browser capture implementation · 2026-10-23
+
+- **Source mapping:** Web PR #247, commit
+  `9fcd1031a559a67563124fbaab3e5fa6dd0ed96d` on the preserved branch
+  `codex/final-web-007-release-audit-20261023`.
+- **Contract mapping:** Playwright Chromium captures `/`, `/docs`,
+  `/detectors`, `/proof`, `/verify`, and `/checkout` at desktop/mobile widths;
+  the qualification requires valid fail-closed vitals, axe, keyboard,
+  landmarks, reduced-motion, overflow, canonical, robots, and control evidence.
+- **Verification mapping:** Capture/qualification **12/12**, landing tests
+  **4/4**, public smoke **18 routes / 22 claims / 2 assets / 0 issues**,
+  typecheck, build **49/49**, and isolated serial PostgreSQL **919/2/0**.
+  Parallel `pnpm test` is not claimed green because of three concurrent
+  temporary-schema collisions.
+- **Acceptance mapping:** Keep FINAL-WEB-007 open for human screen-reader,
+  supported-browser/field performance, acceptance dependencies, hosted
+  completion, and final release acceptance. Score remains **239/41/280
+  (85.4%)**; no AppSec-held checkbox changed.
+- **Evidence:** `evidence/final-web-007-browser-qualification-pr247-2026-10-23.md`;
+  raw JSON capture and qualification artifacts are bundled.
+
 ## FINAL-WEB-008 emitted metadata validation · 2026-10-23
 
 - **Source mapping:** Web PR #246, commit

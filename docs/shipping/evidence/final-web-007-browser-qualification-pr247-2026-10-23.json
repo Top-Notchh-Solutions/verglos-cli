@@ -1,0 +1,188 @@
+{
+  "schema": "urn:verglos:landing-release-qualification:v1",
+  "status": "passed",
+  "capture": {
+    "schema": "urn:verglos:landing-release-capture:v2",
+    "capturedAt": "2026-10-22T19:03:49.501Z",
+    "source": "playwright-chromium-axe-local-production-like",
+    "measurementCount": 12
+  },
+  "sourceFiles": [
+    "src/app/page.tsx",
+    "src/app/docs/page.tsx",
+    "src/app/detectors/page.tsx",
+    "src/app/proof/page.tsx",
+    "src/app/verify/page.tsx",
+    "src/app/checkout/page.tsx",
+    "src/app/checkout/checkout-client.tsx",
+    "src/app/layout.tsx",
+    "src/app/globals.css"
+  ],
+  "sourceIssues": [],
+  "decision": {
+    "ok": true,
+    "requiredPaths": [
+      "/",
+      "/docs",
+      "/detectors",
+      "/proof",
+      "/verify",
+      "/checkout"
+    ],
+    "coverage": [
+      {
+        "path": "/",
+        "desktop": true,
+        "mobile": true
+      },
+      {
+        "path": "/docs",
+        "desktop": true,
+        "mobile": true
+      },
+      {
+        "path": "/detectors",
+        "desktop": true,
+        "mobile": true
+      },
+      {
+        "path": "/proof",
+        "desktop": true,
+        "mobile": true
+      },
+      {
+        "path": "/verify",
+        "desktop": true,
+        "mobile": true
+      },
+      {
+        "path": "/checkout",
+        "desktop": true,
+        "mobile": true
+      }
+    ],
+    "pageResults": [
+      {
+        "path": "/",
+        "viewport": "desktop",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/",
+        "viewport": "mobile",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/docs",
+        "viewport": "desktop",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/docs",
+        "viewport": "mobile",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/detectors",
+        "viewport": "desktop",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/detectors",
+        "viewport": "mobile",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/proof",
+        "viewport": "desktop",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/proof",
+        "viewport": "mobile",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/verify",
+        "viewport": "desktop",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/verify",
+        "viewport": "mobile",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/checkout",
+        "viewport": "desktop",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      },
+      {
+        "path": "/checkout",
+        "viewport": "mobile",
+        "perfPass": true,
+        "a11yPass": true,
+        "responsivePass": true,
+        "metadataPass": true,
+        "crawlabilityPass": true,
+        "failures": []
+      }
+    ],
+    "gaps": []
+  }
+}
