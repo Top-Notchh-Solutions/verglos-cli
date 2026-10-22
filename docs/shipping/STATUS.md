@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-014 final regression contract implemented
+
+The private toolchain now exposes `acceptance:release:regress` through
+`scripts/run-final-regression.mjs`. It validates a digest-bound frozen corpus,
+candidate CLI/Web commits, all five product plans, five organization roles,
+single/multi-tenant modes, every fixture, and bounded baseline/candidate
+finding/file-count/duration deltas. Open gates or regressions produce `no-go`,
+and a requested `go` fails closed. Focused tests passed **4/4**. Evidence:
+`evidence/accept-014-final-regression-contract-2026-10-23.md`.
+
+This is implementation progress only; the actual final corpus rerun,
+held-out correction, provider gates, independent review, and final release
+decision remain open. The live score remains **244 checked / 36 open / 280
+total (87.1%)**. Nothing was deleted.
+
 ## 2026-10-23 · ACCEPT-011 architecture-shaped corpus expanded
 
 The private execution path now covers **8** exact-commit, full non-shallow
@@ -25,7 +40,7 @@ independent review, and final release. The live score remains **244 checked /
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web evidence while preserving historical entries. The
-current-head run hashed **111** bounded evidence files, including **36** dated
+current-head run hashed **112** bounded evidence files, including **37** dated
 2026-10-23, and passed its secret-like material scan. Evidence:
 `evidence/accept-003-current-head-bundle-2026-10-23.md`.
 

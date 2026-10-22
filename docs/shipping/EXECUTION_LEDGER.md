@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-014 final regression contract implemented
+
+- **Implementation:** Added `scripts/run-final-regression.mjs` and the
+  `acceptance:release:regress` package command. It binds a frozen corpus and
+  candidate CLI/Web commits, validates plan/user/tenant matrix coverage, and
+  compares bounded baseline/candidate measurements.
+- **Fail-closed behavior:** Failed runs, incomplete coverage, performance or
+  finding regressions, and open truth/risk/correction/provider/release gates
+  produce `no-go`; a requested `go` is rejected until the candidate is clean.
+- **Verification:** Focused tests passed **4/4**; syntax and diff checks passed.
+  Evidence: `evidence/accept-014-final-regression-contract-2026-10-23.md`.
+- **Disposition:** This is implementation only. The actual final corpus rerun,
+  held-out correction, provider evidence, independent review, and final release
+  decision remain open. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted.
+
 ## 2026-10-23 · ACCEPT-011 architecture-shaped corpus expanded
 
 - **Implementation:** Expanded the private public-OSS manifest to eight exact
@@ -27,8 +43,8 @@
 - **Implementation:** `scripts/build-acceptance-evidence-bundle.mjs` now
   includes the current merged CLI/Web evidence in addition to the preserved
   historical entries.
-- **Verification:** The current-head run hashed **111** bounded evidence files,
-  including **36** current 2026-10-23 entries; the secret-like material scan
+- **Verification:** The current-head run hashed **112** bounded evidence files,
+  including **37** current 2026-10-23 entries; the secret-like material scan
   passed. The verification output was written to `/tmp`, leaving tracked
   historical bundles unchanged.
 - **Evidence:** `evidence/accept-003-current-head-bundle-2026-10-23.md`.

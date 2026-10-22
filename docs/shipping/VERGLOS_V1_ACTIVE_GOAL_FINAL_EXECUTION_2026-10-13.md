@@ -112,6 +112,26 @@ and `ACCEPT-012`; it does not close either row or the held review/final-release
 gates. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
 Nothing was deleted.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-014 final regression contract
+
+The private shipping toolchain now exposes `acceptance:release:regress` through
+`scripts/run-final-regression.mjs`. It binds every scenario to the frozen
+corpus manifest and candidate CLI/Web commits, requires all five canonical
+plans, five organization roles, both single/multi-tenant modes, and every
+fixture, then reports bounded finding/file-count/duration deltas.
+
+The contract is fail-closed: failed runs, incomplete matrix coverage,
+performance regressions, finding increases, or open truth/risk/correction/
+provider/release gates produce `no-go`; a requested `go` is rejected until all
+are clear. Focused tests passed **4/4**, with syntax and diff checks passing.
+Evidence:
+`docs/shipping/evidence/accept-014-final-regression-contract-2026-10-23.md`.
+
+This advances `ACCEPT-014` implementation only. No final regression decision,
+provider action, customer acceptance, independent review, or final release
+sign-off was claimed. The live score remains **244 checked / 36 open / 280
+total (87.1%)**. Nothing was deleted.
+
 ## Latest continuation result · 2026-10-23 · landing qualification runtime boundary
 
 Web PR #253 merged normally as
@@ -133,8 +153,8 @@ still **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
 
 The private `acceptance:evidence:bundle` implementation now includes the
 current merged CLI/Web execution evidence while preserving all historical
-entries. Its current-head run hashed **111** bounded evidence files, including
-**36** current 2026-10-23 entries, and passed the secret-like material scan.
+entries. Its current-head run hashed **112** bounded evidence files, including
+**37** current 2026-10-23 entries, and passed the secret-like material scan.
 The output was written to `/tmp` for verification; no tracked historical
 bundle was overwritten. Evidence:
 `docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.

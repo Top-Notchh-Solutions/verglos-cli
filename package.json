@@ -21,7 +21,8 @@
     "acceptance:evidence:bundle": "node scripts/build-acceptance-evidence-bundle.mjs",
     "acceptance:study-protocols:check": "node scripts/validate-acceptance-study-protocols.mjs",
     "acceptance:release:reconcile": "node scripts/reconcile-release-gates.mjs",
-    "acceptance:release:freeze": "node scripts/freeze-release-candidate.mjs"
+    "acceptance:release:freeze": "node scripts/freeze-release-candidate.mjs",
+    "acceptance:release:regress": "node scripts/run-final-regression.mjs"
   },
   "devDependencies": {
     "turbo": "^2.5.4",
