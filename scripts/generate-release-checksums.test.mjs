@@ -58,3 +58,9 @@ test("release checksum generation fails closed for an empty artifact directory",
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("release checksum generation binds artifact reads to bounded regular-file handles", async () => {
+  const source = await readFile("scripts/generate-release-checksums.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(path, MAX_RELEASE_ARTIFACT_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(path\)/u);
+});

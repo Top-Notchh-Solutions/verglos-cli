@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
-import { lstat, readFile, readdir, writeFile } from "node:fs/promises";
+import { lstat, readdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
+import { MAX_RELEASE_ARTIFACT_BYTES, readBoundedRegularFile } from "./release-artifact-files.mjs";
 
 const root = resolve(process.argv[2] ?? "");
 if (!process.argv[2]) throw new Error("release artifact directory is required");
@@ -32,7 +33,7 @@ for (const name of names) {
   if (!stat.isFile() || stat.isSymbolicLink()) {
     throw new Error(`release artifact is not a regular file: ${name}`);
   }
-  const digest = createHash("sha256").update(await readFile(path)).digest("hex");
+  const digest = createHash("sha256").update(await readBoundedRegularFile(path, MAX_RELEASE_ARTIFACT_BYTES, `release artifact ${name}`)).digest("hex");
   lines.push(`${digest}  ${name}`);
 }
 
