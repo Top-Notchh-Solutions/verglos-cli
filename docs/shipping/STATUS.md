@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · ACCEPT-002 current-head verifier
+
+The clean merged CLI/Web heads ran the private twelve-story verifier with CLI
+**311/313** (2 documented skips, 0 failures), Web **952/982** (30 documented
+skips, 0 failures), composed substrates **76/76**, and all **12/12** story
+mappings executed with exit 0. Keep `ACCEPT-002` open for its full
+external/hosted/provider/customer acceptance run. Score remains **239 checked /
+41 open / 280 total (85.4%)**. Evidence:
+`evidence/accept-002-current-head-pr239-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 malformed runtime boundary repair and PR #239
 
 Web commits `3170094` and `dfa417f` make the accessibility/performance

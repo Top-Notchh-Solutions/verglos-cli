@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · ACCEPT-002 current-head substrate gate
+
+Clean merged CLI/Web sources passed the private twelve-story verifier: CLI
+**311/313**, Web **952/982**, composed **76/76**, all **12/12** mappings, and
+zero failures. Keep `ACCEPT-002` unchecked for the full
+external/hosted/provider/customer run. Score remains **239/41/280 (85.4%)**.
+Evidence: `evidence/accept-002-current-head-pr239-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 malformed runtime boundary gate
 
 Web commits `3170094` and `dfa417f` make missing measurement arrays and

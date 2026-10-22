@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · ACCEPT-002 current-head verifier
+
+- **Verification:** Clean merged CLI `1d7844bd` and Web `ba00d5d` sources ran
+  the private twelve-story verifier. CLI passed **311/313** with 2 documented
+  skips, Web passed **952/982** with 30 documented skips, composed substrates
+  passed **76/76**, and all **12/12** story mappings executed with exit 0.
+- **Boundary:** This is repository-owned substrate/regression evidence only.
+  No hosted HTTP, provider, customer, reviewer, browser-human, field-CWV,
+  migration, or Production acceptance was claimed.
+- **Disposition:** Keep `ACCEPT-002` unchecked for the full
+  external/hosted/provider/customer run. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-002-current-head-pr239-2026-10-22.md` and
+  `evidence/acceptance-stories-verification-2026-10-22-pr239.json`.
+
 ## 2026-10-22 · QUAL-WEB-006 malformed runtime boundary repair and PR #239
 
 - **Implementation:** Web commits `3170094` and `dfa417f` make the shared

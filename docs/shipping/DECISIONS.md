@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain ACCEPT-002 after current-head verifier
+
+- **Decision:** Accept the current merged-head story verifier as substantive
+  substrate evidence; do not check `ACCEPT-002`.
+- **Observed:** CLI **311/313**, Web **952/982**, composed **76/76**, all
+  **12/12** story mappings executed, zero failures.
+- **Reason:** The row's external/hosted/provider/customer acceptance run is
+  not represented by owner-controlled repository tests.
+- **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/accept-002-current-head-pr239-2026-10-22.md`.
+
 ## 2026-10-22 · retain QUAL-WEB-006 after PR #239
 
 - **Decision:** Promote the malformed runtime-payload repair through the normal

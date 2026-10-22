@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## ACCEPT-002 current-head verifier · 2026-10-22
+
+- **Source mapping:** CLI `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web
+  `ba00d5d86fdbcaeeee817c2c66b86f0b3de01987`; both clean.
+- **Qualification mapping:** CLI **311/313**, Web **952/982**, composed
+  substrates **76/76**, all **12/12** story mappings executed, zero failures.
+- **Acceptance mapping:** Keep `ACCEPT-002` open for the full
+  external/hosted/provider/customer run. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/accept-002-current-head-pr239-2026-10-22.md` and
+  `evidence/acceptance-stories-verification-2026-10-22-pr239.json`.
+
 ## QUAL-WEB-006 malformed runtime boundary repair · 2026-10-22
 
 - **Source mapping:** Web commits `3170094` and `dfa417f`; PR #239 merged
