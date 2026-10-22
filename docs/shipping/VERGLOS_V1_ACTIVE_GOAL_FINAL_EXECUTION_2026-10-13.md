@@ -1563,3 +1563,33 @@ unchecked for its FINAL-WEB-001 dependency, hosted/independent evidence where
 required, and final acceptance. Score remains **239 checked / 41 open / 280
 total (85.4%)**. Evidence:
 `docs/shipping/evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`.
+
+# 2026-10-23 · FINAL-WEB-005 machine-readable plan terms
+
+Web commit `00996a657510d958e4840ebe40065dbef838edc4` on PR #250 extends the
+catalog-bound public truth implementation to the machine-readable surfaces.
+`publicPlanTerms` now includes monthly and annual billing when they differ;
+`/llms.txt` emits each canonical plan's status, billing, all seven allowance
+dimensions, capability summary, and explicit no-overage wording; homepage
+`SoftwareApplication` JSON-LD carries the same terms as bounded structured
+`PropertyValue` entries. Inactive and contracted plans remain explicitly
+unavailable/contracted, and no overage or unverified price is invented.
+
+Truth registry passed **36/36**, public-release smoke tests passed **7/7**,
+executable public smoke passed **18 routes / 22 claims / 2 proof assets / 0
+issues**, typecheck passed, the production build generated **49/49** routes,
+and serial Web passed **897 / 24 explicit skips / 0 failures**. Local Node
+26.4.0 emitted the package's expected Node 22.x engine warning only.
+
+After push, Verify run `39850836465` failed before repository steps with a
+zero-step `typecheck-and-schema` job. Private runner run `39850836344` had
+zero-step Ubuntu, Windows, and PostgreSQL failures while macOS remained
+queued at capture. GitGuardian and Preview Comments passed; Vercel was
+pending. No rerun, bypass, merge-around, deployment, provider, database,
+customer, legal, Production, or release-sign-off action occurred; nothing
+was deleted. PR #250 remains open.
+
+This is code-side FINAL-WEB-005 progress only. Keep `FINAL-WEB-005`
+unchecked for FINAL-WEB-001, hosted/independent evidence, and final
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `docs/shipping/evidence/final-web-005-machine-readable-plan-terms-pr250-2026-10-23.md`.

@@ -11206,6 +11206,27 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · FINAL-WEB-005 machine-readable plan terms
+
+Web PR #250 latest commit `00996a657510d958e4840ebe40065dbef838edc4` binds
+`/llms.txt` plan lines and homepage JSON-LD structured properties to the
+canonical catalog. Monthly/annual billing, status, all seven allowance
+dimensions, capability summary, and explicit no-overage wording are now
+derived from the same source; inactive and contracted plans remain bounded.
+
+Truth registry passed **36/36**, public-release tests **7/7**, executable
+public smoke passed **18 routes / 22 claims / 2 proof assets / 0 issues**,
+typecheck passed, build passed with **49/49 routes**, and serial Web passed
+**897 / 24 explicit skips / 0 failures**. Required Verify run
+`39850836465` failed before repository steps with a zero-step type/schema job;
+private runner run `39850836344` had zero-step Ubuntu/Windows/PostgreSQL
+failures and macOS queued at capture. GitGuardian and Preview Comments
+passed; Vercel was pending. No rerun, bypass, merge-around, external state,
+or deletion occurred. `FINAL-WEB-005` remains unchecked for FINAL-WEB-001,
+hosted/independent evidence, and final acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-005-machine-readable-plan-terms-pr250-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-003 release artifact read binding
 
 CLI PR #171 merged normally as
