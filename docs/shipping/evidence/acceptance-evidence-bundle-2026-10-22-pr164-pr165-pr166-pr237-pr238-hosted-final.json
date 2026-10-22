@@ -1,6 +1,6 @@
 {
   "schema": "verglos.private.acceptance-evidence-bundle.v1",
-  "generatedAt": "2026-10-22T15:22:49.528Z",
+  "generatedAt": "2026-10-22T15:25:27.186Z",
   "files": [
     {
       "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
@@ -176,6 +176,11 @@
       "path": "docs/shipping/evidence/qual-web-006-measurement-boundary-pr236-2026-10-22.md",
       "sha256": "e688a160839c23dc6c823298fb14fa56f2f12a0d0aca118af06740ed1b6bd503",
       "bytes": 2111
+    },
+    {
+      "path": "docs/shipping/evidence/qual-web-005-local-isolated-qualification-2026-10-22.md",
+      "sha256": "7b4af67954a5985626514391faf75077427a08e18a1b98e449bdb7cdf6f9a690",
+      "bytes": 2877
     },
     {
       "path": "docs/shipping/evidence/qual-cli-006-trusted-root-sigstore-pr164-2026-10-22.md",

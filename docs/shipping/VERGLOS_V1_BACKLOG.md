@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-22 · QUAL-WEB-005 local isolated qualification
+
+Web merged head `67f8f89` passed deletion request/worker integrations **2/2**,
+adjacent tenant/receipt PostgreSQL integrations **2/2**, 43 ordered
+migrations, Drizzle schema check, and typecheck against local PostgreSQL 15
+`verglos_test`. The remote Neon URL was not used; the local container was
+stopped without removal. Keep the `QUAL-WEB-005` checkbox unchanged for
+legal/consent, customer-held-record, Production migration,
+restore/rollback, reconciliation, and independent acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-local-isolated-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · STUDIO-CLI-001 merged-head focused recheck
 
 The current merged CLI/Web heads requalified the repository-owned Studio

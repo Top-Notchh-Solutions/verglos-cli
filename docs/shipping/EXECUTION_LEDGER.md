@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-WEB-005 local isolated deletion qualification
+
+- **Verification:** Web merged head `67f8f89` passed deletion request/worker
+  integrations **2/2**, adjacent tenant/receipt PostgreSQL integrations
+  **2/2**, 43 ordered migrations, Drizzle schema check, and typecheck.
+- **Boundary:** Qualification used only a local PostgreSQL 15 `verglos_test`
+  container. The remote Neon URL was not used; the container was stopped
+  without removal. No Production, legal, consent, customer-held-record,
+  restore/rollback, provider, or reviewer action occurred. Nothing was
+  deleted or changed.
+- **Disposition:** Keep `QUAL-WEB-005` open for its legal/consent,
+  Production migration, restore/rollback, reconciliation, and independent
+  acceptance gates. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-local-isolated-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · STUDIO-CLI-001 merged-head focused recheck
 
 - **Verification:** Current merged CLI/Web heads passed the Studio projection,

@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 local isolated deletion qualification · 2026-10-22
+
+- **Source mapping:** Web merged head `67f8f89be193dff7053d0abd946b288301bf2b87`.
+- **Qualification mapping:** Deletion integrations **2/2**, adjacent tenant/
+  receipt PostgreSQL integrations **2/2**, 43 ordered migrations, Drizzle
+  schema check, and typecheck passed against local `verglos_test`.
+- **Acceptance mapping:** Keep the row open for legal/consent,
+  customer-held-record, Production migration, restore/rollback,
+  reconciliation, and independent end-to-end acceptance. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-005-local-isolated-qualification-2026-10-22.md`.
+
 ## STUDIO-CLI-001 merged-head focused recheck · 2026-10-22
 
 - **Source mapping:** CLI `1d7844bd0fcfa4415e2c9462f9b5fb5293326915`; Web

@@ -14,6 +14,20 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · QUAL-WEB-005 local qualification
+
+Web merged head `67f8f89` passed deletion request/worker integrations **2/2**,
+adjacent tenant/receipt PostgreSQL integrations **2/2**, 43 ordered
+migrations, Drizzle schema check, and typecheck against a local PostgreSQL 15
+`verglos_test` database. The remote Neon value in `.env.test.local` was not
+used; the local container was stopped without removal. No Production, legal,
+consent, customer-held-record, restore/rollback, provider, reviewer, or
+customer operation occurred and nothing was deleted. Keep `QUAL-WEB-005`
+unchecked for its remaining legal/consent, Production migration,
+restore/rollback, reconciliation, and independent acceptance gates. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-local-isolated-qualification-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · STUDIO-CLI-001 focused recheck
 
 The current merged CLI/Web heads requalified the repository-owned Studio

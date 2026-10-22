@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain QUAL-WEB-005 after local isolated qualification
+
+- **Decision:** Accept the local deletion qualification as substantive
+  implementation evidence; do not check the row.
+- **Observed:** Deletion integrations **2/2**, adjacent tenant/receipt
+  PostgreSQL integrations **2/2**, 43 migration-order checks, Drizzle schema
+  check, and typecheck passed on local PostgreSQL 15 `verglos_test`.
+- **Reason:** Legal/consent decisions, customer-held-record disposition,
+  Production migration authorization, restore/rollback, reconciliation, and
+  independent end-to-end acceptance remain absent. The remote Neon URL was
+  not used.
+- **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/qual-web-005-local-isolated-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · retain STUDIO-CLI-001 after merged-head focused recheck
 
 - **Decision:** Accept the current focused regression result as stronger

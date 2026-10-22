@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · QUAL-WEB-005 local isolated deletion qualification
+
+Current Web head `67f8f89` passed the local deletion qualification: deletion
+request/worker integrations **2/2**, adjacent tenant/receipt PostgreSQL
+integrations **2/2**, 43 ordered migrations, Drizzle schema check, and
+typecheck. The remote Neon URL was not used; the local PostgreSQL 15
+`verglos_test` container was stopped without removal. Keep `QUAL-WEB-005` open
+for legal/consent, customer-held-record, Production migration,
+restore/rollback, reconciliation, and independent acceptance evidence. Score
+remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-005-local-isolated-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · STUDIO-CLI-001 merged-head focused recheck
 
 The current merged CLI/Web heads passed the repository-owned Studio projection,
