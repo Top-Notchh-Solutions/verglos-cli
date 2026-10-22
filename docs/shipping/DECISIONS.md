@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain FINAL-WEB-008 after public route boundary hardening
+
+- **Decision:** Treat PR #242 as accepted code-side implementation and hosted
+  qualification for the public claim/release-smoke boundary, but do not check
+  the backlog row.
+- **Observed:** The merged Web head inventories handoff and report routes,
+  fails closed on stale public claims, marks private reports noindex/nofollow,
+  and disallows `/reports` to crawlers. Local and hosted checks passed.
+- **Reason:** The row still depends on the complete ACCEPT-003/009/010 truth
+  freeze, founder command, and final release acceptance; code-side smoke is
+  not those external artifacts.
+- **Boundary:** No provider, customer, legal, database, Production, or
+  independent-review claim was made. Nothing was deleted. Score remains
+  **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/final-web-008-public-route-index-boundary-pr242-2026-10-22.md`.
+
 ## 2026-10-22 · retain DIST-002 after dependency remediation audit
 
 - **Decision:** Do not make an unverified dependency override or package

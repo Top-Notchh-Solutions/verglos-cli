@@ -1100,3 +1100,15 @@ protected/trusted publication, immutable attestation, and final acceptance.
 No files were deleted. Score remains **239 checked / 41 open / 280 total
 (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md`.
+# 2026-10-22 · FINAL-WEB-008 public route-index boundary implementation
+
+Web PR #242 merged normally as `c4b7313e803dce980cf6ac3a7bc68f73927d456c`.
+The release smoke now includes the recipient handoff and authenticated report
+source routes, private reports emit `noindex,nofollow`, and `/reports` is
+disallowed in `robots.txt`. Exact merged-head smoke passed **5/5**, public
+release smoke passed **18 routes / 22 claims / 2 proof assets / 0 issues**,
+typecheck passed, and build generated **49/49** routes; the hosted PR checks
+passed. This is code-side progress only. FINAL-WEB-008 remains unchecked for
+ACCEPT-003/009/010, founder truth-freeze, and final acceptance. Nothing was
+deleted. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`docs/shipping/evidence/final-web-008-public-route-index-boundary-pr242-2026-10-22.md`.

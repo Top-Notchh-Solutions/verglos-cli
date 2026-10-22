@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · FINAL-WEB-008 public route-index boundary gate
+
+Web PR #242 merged normally as `c4b7313e803dce980cf6ac3a7bc68f73927d456c`.
+The exact merged head passes focused smoke **5/5**, public-release smoke
+**18 routes / 22 claims / 2 proof assets / 0 issues**, typecheck, and **49/49**
+build routes; all hosted PR checks passed. The implementation now covers the
+recipient handoff and authenticated report source surfaces, with explicit
+private-report noindex/nofollow and `/reports` robots protection. Keep
+FINAL-WEB-008 open for ACCEPT-003/009/010, founder truth-freeze, and final
+acceptance. No external state changed and nothing was deleted. Score remains
+**239/41/280 (85.4%)**. Evidence:
+`evidence/final-web-008-public-route-index-boundary-pr242-2026-10-22.md`.
+
 ## 2026-10-22 · STUDIO-CLI-001 exact-head gate
 
 CLI `db351035` passes projection/approval/upload tests **15/15** and Web

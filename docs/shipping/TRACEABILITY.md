@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## FINAL-WEB-008 public route-index boundary implementation · 2026-10-22
+
+- **Source mapping:** Web PR #242 source `f135805` merged normally as
+  `c4b7313e803dce980cf6ac3a7bc68f73927d456c`.
+- **Contract mapping:** Release smoke inventories the recipient handoff and
+  authenticated report routes; report metadata is `noindex,nofollow`, and
+  `/reports` is disallowed in `robots.txt`.
+- **Verification mapping:** Exact merged head passed focused smoke **5/5**,
+  public smoke **18 routes / 22 claims / 2 assets / 0 issues**, typecheck, and
+  **49/49** build routes. Full source suite was **897/24/0** and hosted PR
+  checks passed.
+- **Acceptance mapping:** FINAL-WEB-008 remains unchecked for ACCEPT-003/009/
+  010, founder truth-freeze, and final release acceptance. Score remains
+  **239/41/280 (85.4%)**; no AppSec-held checkbox changed.
+- **Boundary:** No provider, customer, legal, database, Production, or
+  independent-review state changed. Nothing was deleted.
+- **Evidence:** `evidence/final-web-008-public-route-index-boundary-pr242-2026-10-22.md`.
+
+
 ## STUDIO-CLI-001 exact-head requalification · 2026-10-22
 
 - **Source mapping:** CLI `db3510356ecd6c6e430d7dcb3b9354e514d777ee`; Web

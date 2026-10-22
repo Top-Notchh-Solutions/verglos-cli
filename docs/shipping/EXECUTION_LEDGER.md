@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · FINAL-WEB-008 public route-index boundary implementation
+
+- **Implementation:** Web PR #242 merged normally as
+  `c4b7313e803dce980cf6ac3a7bc68f73927d456c` from source `f135805`. Release
+  smoke now inventories recipient handoff and authenticated report routes;
+  reports are explicitly no-index/no-follow and `/reports` is disallowed.
+- **Verification:** Exact merged head passed smoke tests **5/5**, public smoke
+  **18 routes / 22 claims / 2 proof assets / 0 issues**, typecheck, and
+  **49/49** build routes. Full source-tree Web suite was **897 passed / 24
+  documented skips / 0 failures**; hosted PR checks passed.
+- **Disposition:** This is code-side FINAL-WEB-008 progress only. Keep the row
+  unchecked for ACCEPT-003/009/010, founder truth-freeze, and final acceptance.
+  Score remains **239/41/280 (85.4%)**.
+- **Boundary:** No provider, database, migration, customer, Production, or
+  credential state changed. Nothing was deleted.
+- **Evidence:** `evidence/final-web-008-public-route-index-boundary-pr242-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-002 dependency-license remediation boundary
 
 - **Verification:** On CLI merged head `db351035`, the strict inventory reports

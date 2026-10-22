@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · FINAL-WEB-008 public route-index boundary implementation
+
+Web PR #242 merged normally as `c4b7313e803dce980cf6ac3a7bc68f73927d456c`.
+The release inventory now covers the recipient handoff and authenticated
+report routes; private reports emit explicit `noindex,nofollow` metadata and
+`/reports` is disallowed in robots.txt. Exact merged-head qualification passed
+release smoke **18 routes / 22 of 22 claims / 2 proof assets / 0 issues**, the
+focused smoke tests **5/5**, typecheck, and build **49/49**. The PR's hosted
+matrix, PostgreSQL lifecycle, type/schema, Vercel, Preview Comments, and
+GitGuardian checks passed. FINAL-WEB-008 remains open for ACCEPT-003/009/010,
+founder truth-freeze, and final acceptance. Score remains **239 checked / 41
+open / 280 total (85.4%)**. Nothing was deleted. Evidence:
+`evidence/final-web-008-public-route-index-boundary-pr242-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-002 dependency-license remediation boundary
 
 The exact CLI merged head `db351035` was checked for a safe dependency-only
