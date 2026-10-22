@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · QUAL-WEB-006 malformed runtime boundary repair and PR #239
+
+- **Implementation:** Web commits `3170094` and `dfa417f` make the shared
+  accessibility/performance qualifier fail closed on a missing/non-array
+  measurement payload and null/non-object page entries, with regression
+  coverage.
+- **Promotion:** PR [#239](https://github.com/anuragyadav-git/verglos-web/pull/239)
+  merged normally as `ba00d5d86fdbcaeeee817c2c66b86f0b3de01987`; source branch
+  preserved. No squash, rebase, force-push, or deletion occurred.
+- **Verification:** Focused qualifier tests **22/22**, typecheck, diff check,
+  and hosted checks **8/8** passed: Ubuntu/macOS/Windows protocol/client,
+  typecheck/schema, isolated PostgreSQL, Vercel, GitGuardian, and Preview
+  Comments.
+- **Disposition:** This closes the identified code-side malformed-payload gap
+  but does not check `QUAL-WEB-006`; human screen-reader, supported-browser/
+  paid-org runtime, field-CWV, and independent/customer acceptance remain
+  open. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 current-head requalification
 
 - **Verification:** Web merged head `67f8f89` passed focused

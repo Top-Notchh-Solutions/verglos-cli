@@ -14,6 +14,18 @@ field-performance, or independent-review evidence.
 **Implementation repositories:** `verglos-web` and `verglos-cli`
 **Private tracker:** `verglos-cli-private-shipping`
 
+## Latest continuation result · 2026-10-22 · QUAL-WEB-006 PR #239
+
+Web commits `3170094` and `dfa417f` close the identified malformed runtime
+payload gap: missing measurement arrays and null page entries now fail closed
+with explicit invalid-boundary results. Focused tests passed **22/22**. PR
+#239 merged normally as `ba00d5d86fdbcaeeee817c2c66b86f0b3de01987`; hosted
+checks passed **8/8**, and the source branch remains preserved. This is code
+completion only; keep `QUAL-WEB-006` unchecked for human screen-reader,
+supported-browser/paid-org runtime, field-CWV, and independent/customer
+acceptance. Score remains **239 checked / 41 open / 280 total (85.4%)**.
+Evidence: `docs/shipping/evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## Latest continuation result · 2026-10-22 · QUAL-WEB-006 requalification
 
 Web merged head `67f8f89` passed focused accessibility/dashboard/portfolio/

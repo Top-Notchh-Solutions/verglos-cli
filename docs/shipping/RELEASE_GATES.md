@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · QUAL-WEB-006 malformed runtime boundary gate
+
+Web commits `3170094` and `dfa417f` make missing measurement arrays and
+null/non-object page entries fail closed. Focused tests **22/22** and hosted
+PR #239 checks **8/8** passed; PR #239 merged normally as `ba00d5d`, with the
+source branch preserved. Keep `QUAL-WEB-006` unchecked for human
+screen-reader, supported paid/organization browser runtime, field-CWV, and
+independent/customer acceptance. Score remains **239/41/280 (85.4%)**. Evidence:
+`evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 current-head implementation gate
 
 Web merged head `67f8f89` passed focused accessibility/dashboard contracts

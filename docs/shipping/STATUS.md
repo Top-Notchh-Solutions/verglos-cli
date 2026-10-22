@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · QUAL-WEB-006 malformed runtime boundary repair and PR #239
+
+Web commits `3170094` and `dfa417f` make the accessibility/performance
+qualifier fail closed for missing measurement arrays and null page entries,
+with focused contracts **22/22**. PR #239 merged normally as `ba00d5d`; all
+8 hosted checks passed and the source branch remains preserved. Keep
+`QUAL-WEB-006` open for human screen-reader, supported-browser/paid-org
+runtime, field-CWV, and independent/customer acceptance. Score remains
+**239 checked / 41 open / 280 total (85.4%)**. Evidence:
+`evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · QUAL-WEB-006 current-head requalification
 
 Web merged head `67f8f89` passed the focused accessibility/dashboard contracts

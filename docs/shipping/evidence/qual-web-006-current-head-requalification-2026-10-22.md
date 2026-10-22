@@ -8,7 +8,11 @@ does not claim human screen-reader, field Core Web Vitals, customer, provider,
 or independent acceptance.
 
 - Repository: `verglos-web`
-- Exact merged source: `67f8f89be193dff7053d0abd946b288301bf2b87`
+- Qualification source: `67f8f89be193dff7053d0abd946b288301bf2b87`
+- Implementation commits: `3170094` and `dfa417f`
+- Promotion: PR #239 merged normally as
+  `ba00d5d86fdbcaeeee817c2c66b86f0b3de01987`; the source branch remains
+  preserved.
 - Qualification worktree: `/private/tmp/verglos-web-build-20261022`
 - Runtime: Node 22 package baseline; PostgreSQL 15 local fixture
 - Database: local-only `verglos_test`; the remote value in `.env.test.local`
@@ -26,6 +30,9 @@ or independent acceptance.
 - Large-dataset PostgreSQL integration: **1/1** passed. The current head
   preserved same-tenant monitoring freshness and excluded foreign inventory
   against the preserved local fixture.
+- Hosted PR #239 checks: **8/8** successful, including Ubuntu/macOS/Windows
+  protocol/client, typecheck/schema, isolated PostgreSQL, Vercel,
+  GitGuardian, and Preview Comments.
 
 The nested source worktree build was first attempted and failed before
 compilation because Next.js inferred the dirty parent workspace root, whose

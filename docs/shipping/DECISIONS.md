@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · retain QUAL-WEB-006 after PR #239
+
+- **Decision:** Promote the malformed runtime-payload repair through the normal
+  Web merge path and retain the row unchecked.
+- **Implementation:** Commits `3170094` and `dfa417f` add fail-closed handling
+  and regression coverage; PR #239 merged as `ba00d5d` with **8/8** hosted
+  checks successful.
+- **Reason:** Human screen-reader, supported paid/organization browser runtime,
+  field-CWV, and independent/customer acceptance remain absent.
+- **Disposition:** Score remains **239/41/280 (85.4%)**. Evidence:
+  `evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## 2026-10-22 · retain QUAL-WEB-006 after current-head requalification
 
 - **Decision:** Accept the current merged-head test, large-data integration,

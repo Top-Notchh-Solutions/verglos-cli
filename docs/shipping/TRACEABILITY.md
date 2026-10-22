@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 malformed runtime boundary repair · 2026-10-22
+
+- **Source mapping:** Web commits `3170094` and `dfa417f`; PR #239 merged
+  normally as `ba00d5d86fdbcaeeee817c2c66b86f0b3de01987`; source branch
+  preserved.
+- **Implementation mapping:** Missing measurement arrays and null/non-object
+  page entries now fail closed with explicit invalid-boundary results.
+- **Qualification mapping:** Focused tests **22/22** and hosted checks **8/8**
+  passed.
+- **Acceptance mapping:** Keep `QUAL-WEB-006` open for human screen-reader,
+  supported-browser/paid-org runtime, field-CWV, and independent/customer
+  acceptance. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
+
 ## QUAL-WEB-006 current-head requalification · 2026-10-22
 
 - **Source mapping:** Web merged head
