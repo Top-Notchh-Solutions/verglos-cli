@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-22 · GitHub merge and hosted qualification gate
+
+CLI PR #158 merged normally as `145ff5d9` after Platform matrix, Self-scan,
+and Standard validation passed. Web PR #229 merged normally as `939ea4c2`
+after Verify web `39757724439` and Private runner qualification
+`39757724442` passed. The hosted PostgreSQL image and high dependency audit
+failures were repaired before merge. This establishes real source promotion
+and hosted CI, not final distribution, recipient, enterprise, legal, provider,
+or customer acceptance. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/github-pr-158-229-merge-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-001 packed archive-member gate
 
 CLI `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c` makes the packed-manifest

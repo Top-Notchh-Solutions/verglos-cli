@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-22 · GitHub promotion, hosted repair, and normal merges
+
+CLI PR [#158](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/158)
+merged normally as `145ff5d9`; Platform matrix, Self-scan, and Standard
+validation all passed at `e44ce8a6`. Web PR
+[#229](https://github.com/anuragyadav-git/verglos-web/pull/229) merged normally
+as `939ea4c2`. Web Verify `39757724439` and Private runner qualification
+`39757724442` passed at `08750cb`, including PostgreSQL, all three protocol
+platforms, typecheck/schema, build, and dependency checks. The hosted ECR
+container-start failure and two high `follow-redirects` findings were fixed
+before merge. No checkbox changed: implementation PRs do not substitute for
+the remaining row contracts. Score remains **239 checked / 41 open / 280 total
+(85.4%)**. Evidence:
+`evidence/github-pr-158-229-merge-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-001 packed archive-member hardening
 
 CLI commit `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c` makes the packed public

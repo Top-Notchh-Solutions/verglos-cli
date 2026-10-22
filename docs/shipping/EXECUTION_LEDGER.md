@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-22 · GitHub promotion and normal merge qualification
+
+- **CLI:** PR #158 merged as `145ff5d902289ecfb670a397c9e87860eb06309d` from
+  granular commits `5072204f` and `e44ce8a6`; hosted Platform matrix,
+  Self-scan, and Standard validation all passed.
+- **Web:** PR #229 merged as `939ea4c29e4518dcd9564705e8341b0ef7e7234c`.
+  Commit `08750cb` repaired the ECR-backed PostgreSQL qualification image and
+  the high follow-redirects audit finding. Verify web `39757724439` and
+  Private runner qualification `39757724442` passed.
+- **Disposition:** GitHub now contains the real implementation and normal
+  merge history. `DIST-001`, `DIST-002`, `DIST-003`, `STUDIO-CLI-001`, and
+  `ENT-CLI-001` remain unchecked because their complete row contracts still
+  require recorded dependencies or external acceptance. No provider,
+  Production, customer, publication, database, entitlement, legal, or AppSec
+  state changed. Score remains **239/41/280 (85.4%)**.
+- **Evidence:** `evidence/github-pr-158-229-merge-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · DIST-001 packed archive-member hardening
 
 - **Implementation:** CLI commit `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`

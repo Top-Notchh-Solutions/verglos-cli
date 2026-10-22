@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## GitHub promotion and normal merge qualification · 2026-10-22
+
+- **Source mapping:** CLI PR #158 merged as `145ff5d9`; Web PR #229 merged as
+  `939ea4c2`; neither branch was squashed.
+- **Hosted mapping:** CLI Platform matrix, Self-scan, and Standard validation
+  passed at `e44ce8a6`. Web Verify `39757724439` and Private runner
+  qualification `39757724442` passed at `08750cb`.
+- **Repair mapping:** Web commit `81904e8` moved the isolated PostgreSQL
+  service to the pinned Google mirror after the public-ECR initialization
+  failure; `08750cb` added the lockfile `follow-redirects` security override.
+- **Acceptance mapping:** GitHub visibility and hosted qualification are now
+  real, but implementation PR merge is not row acceptance. Keep the affected
+  distribution, Studio, and Enterprise rows at their declared score until
+  their remaining contracts are evidenced. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/github-pr-158-229-merge-qualification-2026-10-22.md`.
+
 ## DIST-001 current-head archive-member qualification · 2026-10-22
 
 - **Source mapping:** CLI branch `codex/dist-003-checksum-generation-20261022`,

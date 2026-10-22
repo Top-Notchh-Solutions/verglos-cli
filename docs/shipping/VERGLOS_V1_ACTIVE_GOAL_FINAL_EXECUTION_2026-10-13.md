@@ -32,6 +32,19 @@ The current recorded baseline is **239 checked / 41 open / 280 total
 (85.4%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
+**Current GitHub execution batch (2026-10-22):** The real CLI branch was
+promoted as PR #158 and merged normally as `145ff5d9`; its Platform matrix,
+Self-scan, and Standard validation workflows all passed. The real Web branch
+was promoted as PR #229 and merged normally as `939ea4c2`. A concrete hosted
+failure was repaired before merge: the private-runner PostgreSQL service now
+uses the pinned Google mirror rather than the failing public-ECR path, and the
+Web dependency audit is clear of high/critical findings after the locked
+`follow-redirects` override. Verify web and Private runner qualification both
+passed at `08750cb`. This makes the implementation visible on GitHub without
+changing any backlog checkbox; the complete row contracts still determine the
+score. Evidence:
+`docs/shipping/evidence/github-pr-158-229-merge-qualification-2026-10-22.md`.
+
 **Current implementation batch (2026-10-22):** `DIST-001` received a real
 CLI archive-boundary hardening commit `e44ce8a673fb1d9119a3231f896d0f86a00cdc3c`.
 The packed-manifest audit now rejects non-regular tar members such as symlinks

@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-22 · promote implementation through normal GitHub merges
+
+- **Decision:** Publish the clean CLI/Web implementation branches to GitHub,
+  open normal PRs, and use normal merge commits; do not squash or force-push.
+- **Observed:** CLI PR #158 merged as `145ff5d9` after Platform matrix,
+  Self-scan, and Standard validation passed. Web PR #229 merged as `939ea4c2`
+  after Verify web `39757724439` and Private runner qualification
+  `39757724442` passed.
+- **Repair:** The Web hosted PostgreSQL initialization failure was fixed by
+  switching from public ECR to the pinned Google mirror. The dependency audit
+  high findings were fixed with the locked `follow-redirects >=1.16.1`
+  override.
+- **Disposition:** GitHub merge state is now reconciled, but no backlog row is
+  checked merely because its code merged. Score remains **239/41/280
+  (85.4%)**.
+- **Evidence:** `evidence/github-pr-158-229-merge-qualification-2026-10-22.md`.
+
 ## 2026-10-22 · harden DIST-001 against non-regular archive members
 
 - **Decision:** Treat every npm tar member as a typed archive boundary. Allow
