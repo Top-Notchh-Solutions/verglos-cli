@@ -1,12 +1,12 @@
 import { createHash } from "node:crypto";
 import { writeFile } from "node:fs/promises";
-import { readBoundedJsonFileWithDigest } from "./read-bounded-json.mjs";
+import { readBoundedJsonFile, readBoundedJsonFileWithDigest } from "./read-bounded-json.mjs";
 
 const INPUT_SCHEMA = "verglos.private.public-oss-corpus-verification.v1";
 const OUTPUT_SCHEMA = "verglos.private.public-oss-corpus-triage.v1";
 const SEVERITIES = new Set(["critical", "high", "medium", "low", "info", "unknown"]);
 const COMMIT = /^[a-f0-9]{7,64}$/u;
-const SHA256 = /^sha256:[a-f0-9]{64}$/u;
+const SHA256 = /^[a-f0-9]{64}$/u;
 const MAX_FIXTURES = 64;
 const MAX_FINDINGS = 100_000;
 
@@ -28,7 +28,7 @@ export async function triagePublicOssCorpus(input) {
       throw new Error(`fixture report integrity metadata is invalid: ${fixture.name}`);
     }
     const reportResult = await readBoundedJsonFileWithDigest(fixture.reportJson.path, `${fixture.name} report`);
-    if (reportResult.bytes !== fixture.reportJson.bytes || reportResult.sha256 !== fixture.reportJson.sha256) {
+    if (reportResult.bytes !== fixture.reportJson.bytes || reportResult.sha256 !== `sha256:${fixture.reportJson.sha256}`) {
       throw new Error(`fixture report integrity mismatch: ${fixture.name}`);
     }
     const report = reportResult.value;

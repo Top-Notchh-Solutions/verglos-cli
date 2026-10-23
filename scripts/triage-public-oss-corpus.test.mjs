@@ -5,7 +5,7 @@ import { readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { triagePublicOssCorpus } from "./triage-public-oss-corpus.mjs";
+import { triagePublicOssCorpus, triagePublicOssCorpusFile } from "./triage-public-oss-corpus.mjs";
 
 async function fixtureReport(coverage = { status: "complete", limitations: [], filesWalked: 3 }) {
   const root = await mkdtemp(join(tmpdir(), "verglos-public-oss-triage-"));
@@ -24,7 +24,7 @@ function input(reportPath, overrides = {}) {
     verifiedAt: "2026-10-23T12:00:00.000Z",
     cliCommit: "78251d1ba47e505380b25ee146f1ca420f1e61a6",
     fixtureCount: 1,
-    fixtures: [{ name: "fixture", commit: "abc1234", reportJson: { path: reportPath, bytes: reportBytes.byteLength, sha256: `sha256:${createHash("sha256").update(reportBytes).digest("hex")}` } }],
+    fixtures: [{ name: "fixture", commit: "abc1234", reportJson: { path: reportPath, bytes: reportBytes.byteLength, sha256: createHash("sha256").update(reportBytes).digest("hex") } }],
     ...overrides,
   };
 }
@@ -64,7 +64,7 @@ test("triage rejects a report whose verified digest or size changed", async () =
   const { root, reportPath } = await fixtureReport();
   try {
     const source = input(reportPath);
-    source.fixtures[0].reportJson.sha256 = `sha256:${"f".repeat(64)}`;
+    source.fixtures[0].reportJson.sha256 = "f".repeat(64);
     await assert.rejects(triagePublicOssCorpus(source), /integrity mismatch/u);
 
     const resized = input(reportPath);
@@ -79,6 +79,20 @@ test("triage rejects a manifest fixture-count mismatch", async () => {
   const { root, reportPath } = await fixtureReport();
   try {
     await assert.rejects(triagePublicOssCorpus(input(reportPath, { fixtureCount: 2 })), /fixture count is invalid/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("triage file wrapper reads the manifest and writes a bounded report", async () => {
+  const { root, reportPath } = await fixtureReport();
+  const inputPath = join(root, "verification.json");
+  const outputPath = join(root, "triage.json");
+  try {
+    await writeFile(inputPath, `${JSON.stringify(input(reportPath))}\n`, "utf8");
+    const report = await triagePublicOssCorpusFile(inputPath, outputPath);
+    assert.equal(report.schema, "verglos.private.public-oss-corpus-triage.v1");
+    assert.equal(JSON.parse(readFileSync(outputPath, "utf8")).summary.findingCount, 2);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
