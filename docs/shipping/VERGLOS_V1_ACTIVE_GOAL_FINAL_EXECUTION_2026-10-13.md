@@ -932,6 +932,22 @@ customer acceptance, provider action, or final release. No checkbox changed,
 no provider/Production/publication state changed, and nothing was deleted. The
 live score remains **244 checked / 36 open / 280 total (87.1%)**.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-012 exact rerun
+
+The actual retained six-fixture verification manifest was rerun through the
+strict digest-bound command after private commit `5b270197` repaired the CLI
+wrapper and aligned raw-hex report hashes. The run produced **207** findings,
+**19** rule groups, **0** coverage gaps, `classificationStatus: complete`,
+`adjudicationStatus: open`, `customerAcceptance: not-claimed`, and
+`independentReview: required`. Output SHA-256:
+`83b429554405298592249132ec79dcba7a32d8324f629d70df3c951ea1b977af`.
+
+Evidence: `docs/shipping/evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md`.
+This advances implementation and reproducibility only; no checkbox, provider,
+Production, publication, customer, recipient, or release state changed, and
+nothing was deleted. The live score remains **244 checked / 36 open / 280
+total (87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-009 future-date boundary
 
 Private commit `f1b74154` hardens `acceptance:release:reconcile` so a report

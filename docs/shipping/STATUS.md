@@ -12016,6 +12016,18 @@ No external state changed and nothing was deleted. Score remains **244 checked /
 36 open / 280 total (87.1%)**. Evidence:
 `evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.
 
+## 2026-10-23 · ACCEPT-012 exact digest-bound rerun
+
+After private commit `5b270197` repaired the strict triage command wrapper and
+aligned report hashes with the raw-hex verification manifest, the actual
+six-fixture run completed with **207** findings, **19** rule groups, and **0**
+coverage gaps. Output SHA-256:
+`83b429554405298592249132ec79dcba7a32d8324f629d70df3c951ea1b977af`.
+`ACCEPT-012` remains open for its dependencies, correction, independent
+review, and final acceptance. No external state changed and nothing was
+deleted. Score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009 future-date reconciliation boundary
 
 Private commit `f1b74154` rejects a release reconciliation whose `completedAt`

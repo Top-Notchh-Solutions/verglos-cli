@@ -15251,6 +15251,20 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   deleted. Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.
 
+## ACCEPT-012 exact digest-bound rerun · 2026-10-23
+
+- **Source:** Private wrapper/schema correction `5b270197`.
+- **Execution mapping:** The retained exact six-fixture verification manifest
+  completed through the strict CLI wrapper with report size/SHA-256 binding.
+- **Result:** **207** observations, **19** rule groups, **0** coverage gaps;
+  classification complete, adjudication open, customer acceptance not claimed,
+  and independent review required. Output SHA-256:
+  `83b429554405298592249132ec79dcba7a32d8324f629d70df3c951ea1b977af`.
+- **Boundary:** Keep `ACCEPT-012` open for dependencies, held-out
+  correction, independent review, and final acceptance. No external state
+  changed and nothing was deleted. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source:** Private implementation commit `f1b74154`.

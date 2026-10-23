@@ -9377,6 +9377,21 @@ changed. See
   Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.
 
+## ACCEPT-012 exact digest-bound rerun · 2026-10-23
+
+- **Source mapping:** Private wrapper/schema correction `5b270197`.
+- **Execution mapping:** The authoritative six-fixture verification manifest
+  was consumed through the repaired strict CLI wrapper; each report's raw-hex
+  manifest digest and byte count matched the opened bytes.
+- **Verification mapping:** **207** findings, **19** rule groups, and **0**
+  coverage gaps; output SHA-256
+  `83b429554405298592249132ec79dcba7a32d8324f629d70df3c951ea1b977af`.
+- **Acceptance mapping:** This does not close `ACCEPT-012`; dependencies,
+  correction, independent review, and final acceptance remain open. No
+  checkbox or external state changed; nothing was deleted. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source mapping:** Private commit `f1b74154`.
