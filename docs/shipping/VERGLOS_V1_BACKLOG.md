@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current Production landing browser qualification
+
+The READY Production deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` passed the
+real Playwright Chromium/Axe capture for all six required public paths at
+desktop/mobile (**12/12**). Axe, keyboard, responsive, and reduced-motion
+checks reported zero failures; robots and sitemap returned 200; observed
+maximum LCP/INP/FCP/TTFB/CLS were **792 ms / 48 ms / 792 ms / 271.4 ms / 0**.
+This advances automated hosted implementation evidence for FINAL-WEB-007/008,
+not human/field-CWV, independent, customer, AppSec/Hunt, or final-release
+acceptance. No checkbox changed. Score remains **245 checked / 35 open / 280
+total (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open.
+Evidence: `docs/shipping/evidence/vercel-production-landing-browser-qualification-2026-10-24-v2.md`.
+The additive bundle v12 verifies **238/238** files with zero mismatches,
+passes secret scanning, and has manifest
+`sha256:6008914d5e13ca4079804219593680504d0c8d2221ea83873a83894243fbb831`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-landing-v12.json`.
+
 ## 2026-10-24 · alpha.4 public-OSS POC rerun
 
 Current alpha.4 CLI `aad2c74395a5c381c955ab9dfab7462295564840` built **8/8**

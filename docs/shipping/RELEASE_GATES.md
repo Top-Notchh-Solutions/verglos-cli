@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current Production landing browser qualification
+
+The READY Production deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` passed
+automated Chromium/Axe coverage for all six required public paths at
+desktop/mobile (**12/12**) with zero Axe, keyboard, responsive, or reduced-motion
+failures. Robots/sitemap returned 200 and the observed metrics were within the
+existing thresholds. This advances FINAL-WEB-007/008 hosted implementation
+evidence only; human/field-CWV, independent, provider/customer, AppSec/Hunt,
+and final-release gates remain open. Score remains **245/35/280 (87.5%)**.
+Evidence: `evidence/vercel-production-landing-browser-qualification-2026-10-24-v2.md`.
+Additive bundle v12 verifies **238/238** files with zero mismatches and
+manifest `sha256:6008914d5e13ca4079804219593680504d0c8d2221ea83873a83894243fbb831`.
+
 ## 2026-10-24 · alpha.4 public-OSS POC rerun
 
 The current alpha.4 CLI candidate `aad2c743` built **8/8** packages and passed

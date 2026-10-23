@@ -249,6 +249,7 @@ const paths = [
   "docs/shipping/evidence/vercel-production-migration-and-smoke-2026-10-24.md",
   "docs/shipping/evidence/vercel-order-attempted-processing-fix-2026-10-24.md",
   "docs/shipping/evidence/vercel-order-attempted-processing-production-ready-2026-10-24.md",
+  "docs/shipping/evidence/vercel-production-landing-browser-qualification-2026-10-24-v2.md",
   "THIRD_PARTY_NOTICES",
 ];
 

@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current Production landing qualification
+
+The current READY Vercel deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` at
+`https://verglos.com` passed the real Playwright Chromium/Axe landing harness:
+all six required public paths at desktop/mobile (**12/12**), zero Axe findings,
+zero keyboard/responsive/reduced-motion failures, and robots/sitemap HTTP 200.
+Maximum observed LCP was **792 ms**, INP **48 ms**, FCP **792 ms**, TTFB
+**271.4 ms**, and CLS **0**. Evidence:
+`docs/shipping/evidence/vercel-production-landing-browser-qualification-2026-10-24-v2.md`.
+
+This is fresh automated hosted implementation evidence for FINAL-WEB-007/008;
+it does not replace human screen-reader or field-CWV evidence, independent
+review, provider/customer acceptance, AppSec/Hunt, or final release sign-off.
+No checkbox changed. The score remains **245 checked / 35 open / 280 total
+(87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
+Additive bundle v12 verifies **238/238** files with zero mismatches, passes
+secret scanning, and has manifest
+`sha256:6008914d5e13ca4079804219593680504d0c8d2221ea83873a83894243fbb831`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-landing-v12.json`.
+
 ## Latest continuation result · 2026-10-24 · alpha.4 public-OSS POC rerun
 
 The current alpha.4 CLI candidate `aad2c74395a5c381c955ab9dfab7462295564840`

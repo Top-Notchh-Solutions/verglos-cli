@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Current Production landing browser qualification · 2026-10-24
+
+- **Deployment:** `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` at `https://verglos.com`.
+- **Verification:** Playwright Chromium/Axe covered six required public paths
+  at desktop/mobile (**12/12**), with zero Axe, keyboard, responsive, or
+  reduced-motion failures; robots/sitemap returned 200.
+- **Metrics:** Maximum LCP **792 ms**, INP **48 ms**, FCP **792 ms**, TTFB
+  **271.4 ms**, CLS **0**.
+- **Disposition:** Current automated hosted implementation evidence only;
+  human/field-CWV, independent, provider/customer, AppSec/Hunt, and final
+  release gates remain open. No checkbox changed; score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-production-landing-browser-qualification-2026-10-24-v2.md`.
+- **Bundle:** Additive v12 contains 238 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:6008914d5e13ca4079804219593680504d0c8d2221ea83873a83894243fbb831`.
+
 ## Alpha.4 public-OSS POC rerun · 2026-10-24
 
 - **Implementation:** Current CLI candidate `aad2c743` built successfully in
