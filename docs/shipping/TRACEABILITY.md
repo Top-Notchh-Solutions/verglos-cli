@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## ACCEPT-005 authorized workflow byte binding · 2026-10-23
+
+- **Source mapping:** Private authorized-workflow and bounded-reader file
+  runners.
+- **Contract mapping:** Execution report/evidence and deletion/expiry evidence
+  are verified against bounded regular-file bytes under an explicit root; CLI
+  mode requires all paths and retains no-follow, identity, size, and exclusive
+  output protections.
+- **Verification mapping:** Focused workflow/release/bounded-reader contracts
+  **30/30**; real temporary-root match/mismatch/missing-path cases passed;
+  syntax and diff checks passed.
+- **Artifact mapping:** 167 hashed bundle files; manifest SHA-256
+  `sha256:c77c851a1799459c0cae420fe52edca9b378ed38e85fde7d4aad7ecabf8a42a7`;
+  bundle file SHA-256
+  `aeef9074565b51d56f87d7faccf638691c16ddffb797477a7a4ada9a68050b6b`;
+  secret scan passed.
+- **Acceptance mapping:** ACCEPT-005 remains open for the actual authorized
+  external workflow, customer/recipient acceptance, provider/independent
+  review gates, and final release decision. Score remains **244/36/280
+  (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/accept-005-authorized-workflow-byte-binding-2026-10-23.md`.
+
 ## ACCEPT-014 regression byte binding · 2026-10-23
 
 - **Source mapping:** Private final-regression and bounded-reader file runners.

@@ -1,5 +1,6 @@
 import { writeFile } from "node:fs/promises";
-import { readBoundedJsonFile } from "./read-bounded-json.mjs";
+import { resolve } from "node:path";
+import { readBoundedFileWithDigest, readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const INPUT_SCHEMA = "verglos.private.authorized-workflow.v1";
 const OUTPUT_SCHEMA = "verglos.private.authorized-workflow-result.v1";
@@ -82,11 +83,33 @@ export function validateAuthorizedWorkflow(input, { now = new Date() } = {}) {
   });
 }
 
-export async function validateAuthorizedWorkflowFile(inputPath, outputPath, options = {}) {
+export async function validateAuthorizedWorkflowFile(inputPath, outputPath, { evidenceRoot, requireEvidenceFiles = false, ...options } = {}) {
   const input = await readBoundedJsonFile(inputPath, "authorized workflow input");
   const report = validateAuthorizedWorkflow(input, options);
+  await verifyEvidenceBytes(input, { evidenceRoot, requireEvidenceFiles });
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;
+}
+
+async function verifyEvidenceBytes(input, { evidenceRoot, requireEvidenceFiles }) {
+  if (evidenceRoot === undefined) return;
+  if (typeof evidenceRoot !== "string" || evidenceRoot.length === 0) throw new Error("workflow evidence root is invalid");
+  const root = resolve(evidenceRoot);
+  const references = [
+    [input.execution?.reportPath, input.execution?.reportDigest, "workflow report"],
+    [input.execution?.evidencePath, input.execution?.evidenceDigest, "workflow evidence"],
+    [input.deletion?.evidencePath, input.deletion?.evidenceDigest, "workflow deletion evidence"],
+  ];
+  for (const [path, expectedDigest, label] of references) {
+    if (typeof path !== "string") {
+      if (requireEvidenceFiles) throw new Error(`${label} path is required`);
+      continue;
+    }
+    const absolute = resolve(root, path);
+    if (absolute !== root && !absolute.startsWith(`${root}/`)) throw new Error(`${label} path escapes evidence root: ${path}`);
+    const result = await readBoundedFileWithDigest(absolute, label);
+    if (result.sha256 !== expectedDigest) throw new Error(`${label} digest does not match bytes: ${path}`);
+  }
 }
 
 function validateConsent(input, now) {
@@ -116,6 +139,8 @@ function validateExecution(input, consent, now) {
   if (typeof input.cliCommit !== "string" || !COMMIT.test(input.cliCommit)) throw new Error("authorized workflow CLI commit is invalid");
   if (typeof input.version !== "string" || !VERSION.test(input.version)) throw new Error("authorized workflow version is invalid");
   if (!SHA256.test(input.cloneDigest) || !SHA256.test(input.reportDigest) || !SHA256.test(input.evidenceDigest)) throw new Error("authorized workflow digest is invalid");
+  if (input.reportPath !== undefined && (typeof input.reportPath !== "string" || !SAFE_PATH.test(input.reportPath))) throw new Error("authorized workflow report path is invalid");
+  if (input.evidencePath !== undefined && (typeof input.evidencePath !== "string" || !SAFE_PATH.test(input.evidencePath))) throw new Error("authorized workflow evidence path is invalid");
   const requestedPaths = relativePaths(input.requestedPaths, "requested paths");
   for (const path of requestedPaths) if (!consent.permittedPaths.includes(path) && !consent.permittedPaths.includes(".")) throw new Error(`requested path is outside consent: ${path}`);
   const commands = boundedStrings(input.commands, "executed commands", 64);
@@ -131,7 +156,7 @@ function validateExecution(input, consent, now) {
   if (!input.preflight || typeof input.preflight !== "object") throw new Error("workflow preflight is required");
   for (const key of ["secretScan", "personalDataScan", "scopeCheck", "redactionCheck"]) if (input.preflight[key] !== "passed" && input.preflight[key] !== "failed") throw new Error(`workflow preflight state is invalid: ${key}`);
   if (typeof input.ownerSummaryDelivered !== "boolean") throw new Error("owner summary delivery state is required");
-  return { repositoryUrl: consent.repositoryUrl, exactCommit: consent.exactCommit, completedAt, cliCommit: input.cliCommit, version: input.version, cloneDigest: input.cloneDigest, requestedPaths, commands, networkDestinations, sourceUpload: input.sourceUpload, retentionMode: input.retentionMode, outcome: input.outcome, exitCode: input.exitCode, coverage: input.coverage, limitations: input.limitations, findingCount: input.findingCount, filesWalked: input.filesWalked, preflight: input.preflight, ownerSummaryDelivered: input.ownerSummaryDelivered, reportDigest: input.reportDigest, evidenceDigest: input.evidenceDigest };
+  return { repositoryUrl: consent.repositoryUrl, exactCommit: consent.exactCommit, completedAt, cliCommit: input.cliCommit, version: input.version, cloneDigest: input.cloneDigest, requestedPaths, commands, networkDestinations, sourceUpload: input.sourceUpload, retentionMode: input.retentionMode, outcome: input.outcome, exitCode: input.exitCode, coverage: input.coverage, limitations: input.limitations, findingCount: input.findingCount, filesWalked: input.filesWalked, preflight: input.preflight, ownerSummaryDelivered: input.ownerSummaryDelivered, reportDigest: input.reportDigest, evidenceDigest: input.evidenceDigest, reportPath: input.reportPath, evidencePath: input.evidencePath };
 }
 
 function validateDeletion(input, completedAt, now) {
@@ -139,7 +164,8 @@ function validateDeletion(input, completedAt, now) {
   const recordedAt = validDate(input.recordedAt, "deletion/expiry record time");
   if (recordedAt < completedAt || recordedAt > now) throw new Error("deletion/expiry record time is invalid");
   if (!SHA256.test(input.evidenceDigest)) throw new Error("deletion/expiry evidence digest is invalid");
-  return { disposition: input.disposition, status: input.status, recordedAt, evidenceDigest: input.evidenceDigest };
+  if (input.evidencePath !== undefined && (typeof input.evidencePath !== "string" || !SAFE_PATH.test(input.evidencePath))) throw new Error("deletion/expiry evidence path is invalid");
+  return { disposition: input.disposition, status: input.status, recordedAt, evidenceDigest: input.evidenceDigest, evidencePath: input.evidencePath };
 }
 
 function validRepositoryUrl(value) {
@@ -184,6 +210,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const inputPath = process.argv[2];
   const outputPath = process.argv[3];
   if (!inputPath || !outputPath) throw new Error("usage: node scripts/validate-authorized-workflow.mjs INPUT.json OUTPUT.json");
-  const report = await validateAuthorizedWorkflowFile(inputPath, outputPath);
+  const report = await validateAuthorizedWorkflowFile(inputPath, outputPath, { evidenceRoot: process.env.VERGLOS_WORKFLOW_EVIDENCE_ROOT ?? process.cwd(), requireEvidenceFiles: true });
   process.stdout.write(`${JSON.stringify({ schema: report.schema, workflowStatus: report.gate.workflowStatus, customerAcceptance: report.gate.customerAcceptance, failureCount: report.summary.failureCount })}\n`);
 }

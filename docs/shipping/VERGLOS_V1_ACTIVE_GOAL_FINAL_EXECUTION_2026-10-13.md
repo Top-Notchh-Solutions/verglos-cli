@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-005 authorized workflow byte binding
+
+The authorized-workflow file runner now verifies execution-report,
+execution-evidence, and deletion/expiry-evidence digests against actual
+bounded regular-file bytes under an explicit root. CLI mode requires all three
+paths; path escapes, missing paths, symlinks, changed files, and mismatches
+fail closed. Focused workflow/release/bounded-reader contracts passed
+**30/30**, including real temporary-root matches and rejection cases; syntax
+and diff checks passed.
+
+This advances ACCEPT-005 implementation only. No external repository was
+contacted and no customer/recipient, provider, independent-review, AppSec/Hunt,
+publication, or final-release acceptance was claimed. No checkbox or external
+state changed, and nothing was deleted or overwritten. The additive bundle
+contains **167 hashed files** with manifest
+`sha256:c77c851a1799459c0cae420fe52edca9b378ed38e85fde7d4aad7ecabf8a42a7`
+and file SHA-256
+`aeef9074565b51d56f87d7faccf638691c16ddffb797477a7a4ada9a68050b6b`.
+The live score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-005-authorized-workflow-byte-binding-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-014 regression byte binding
 
 The final-regression file runner now verifies every declared corpus report and

@@ -177,6 +177,7 @@ const paths = [
   "docs/shipping/evidence/dist-001-003-public-packer-read-binding-private-2026-10-23.md",
   "docs/shipping/evidence/accept-009-010-release-byte-binding-2026-10-23.md",
   "docs/shipping/evidence/accept-014-regression-byte-binding-2026-10-23.md",
+  "docs/shipping/evidence/accept-005-authorized-workflow-byte-binding-2026-10-23.md",
   "THIRD_PARTY_NOTICES",
 ];
 

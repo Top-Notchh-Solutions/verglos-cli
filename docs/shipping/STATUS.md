@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-005 authorized workflow byte binding
+
+The authorized-workflow file runner now binds execution-report,
+execution-evidence, and deletion/expiry-evidence digests to actual bounded
+regular-file bytes. CLI mode requires all paths and fails closed on escapes,
+missing paths, symlinks, changed files, and mismatches. Focused contracts
+passed **30/30**, including real temporary-root cases; syntax and diff checks
+passed. The additive 167-file bundle has manifest
+`sha256:c77c851a1799459c0cae420fe52edca9b378ed38e85fde7d4aad7ecabf8a42a7`
+and file SHA-256
+`aeef9074565b51d56f87d7faccf638691c16ddffb797477a7a4ada9a68050b6b`.
+No external repository or customer action occurred. Score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten.
+Evidence:
+`evidence/accept-005-authorized-workflow-byte-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-014 regression byte binding
 
 The final-regression file runner now verifies corpus reports and scenario

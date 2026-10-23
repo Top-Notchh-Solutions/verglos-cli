@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-005 authorized workflow byte binding
+
+The authorized-workflow runner now verifies execution and deletion/expiry
+evidence digests against actual bounded regular-file bytes, requiring all
+paths in CLI mode. Focused contracts passed **30/30**; syntax and diff checks
+passed. No checkbox changed. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. The additive bundle contains 167 hashed files with manifest
+`sha256:c77c851a1799459c0cae420fe52edca9b378ed38e85fde7d4aad7ecabf8a42a7`
+and file SHA-256
+`aeef9074565b51d56f87d7faccf638691c16ddffb797477a7a4ada9a68050b6b`.
+Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/accept-005-authorized-workflow-byte-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-014 regression byte binding
 
 The final-regression runner now verifies corpus reports and scenario evidence

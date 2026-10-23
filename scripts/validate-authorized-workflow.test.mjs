@@ -1,10 +1,15 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import test from "node:test";
-import { validateAuthorizedWorkflow } from "./validate-authorized-workflow.mjs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { validateAuthorizedWorkflow, validateAuthorizedWorkflowFile } from "./validate-authorized-workflow.mjs";
 
 const SHA = `sha256:${"a".repeat(64)}`;
 const COMMIT = "2db1139337d60543fd59ec0b7e3130983d40e0a3";
 const REPO = "https://github.com/example/authorized-repository";
+const bytesDigest = (value) => `sha256:${createHash("sha256").update(value).digest("hex")}`;
 
 function input(overrides = {}) {
   return {
@@ -91,4 +96,49 @@ test("authorized workflow rejects a malformed CLI version", () => {
 
 test("authorized workflow rejects non-string approval dates instead of coercing them", () => {
   assert.throws(() => validateAuthorizedWorkflow(input({ consent: { ...input().consent, approvedAt: null } }), { now: "2026-10-23T12:00:00.000Z" }), /owner approval time is invalid/u);
+});
+
+test("authorized workflow file binds execution and deletion evidence to actual bytes", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-workflow-bindings-"));
+  const report = "workflow report\n";
+  const evidence = "workflow evidence\n";
+  const deletion = "deletion evidence\n";
+  await writeFile(join(directory, "report.json"), report, "utf8");
+  await writeFile(join(directory, "evidence.json"), evidence, "utf8");
+  await writeFile(join(directory, "deletion.json"), deletion, "utf8");
+  const source = input({
+    execution: {
+      ...input().execution,
+      reportDigest: bytesDigest(report),
+      evidenceDigest: bytesDigest(evidence),
+      reportPath: "report.json",
+      evidencePath: "evidence.json",
+    },
+    deletion: { ...input().deletion, evidenceDigest: bytesDigest(deletion), evidencePath: "deletion.json" },
+  });
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "output.json");
+  await writeFile(inputPath, `${JSON.stringify(source)}\n`, "utf8");
+  try {
+    const result = await validateAuthorizedWorkflowFile(inputPath, outputPath, { now: "2026-10-23T12:00:00.000Z", evidenceRoot: directory, requireEvidenceFiles: true });
+    assert.equal(result.summary.accepted, true);
+
+    const mismatchInput = join(directory, "mismatch-input.json");
+    const mismatchOutput = join(directory, "mismatch-output.json");
+    await writeFile(mismatchInput, `${JSON.stringify({ ...source, execution: { ...source.execution, evidenceDigest: bytesDigest("wrong") } })}\n`, "utf8");
+    await assert.rejects(
+      validateAuthorizedWorkflowFile(mismatchInput, mismatchOutput, { now: "2026-10-23T12:00:00.000Z", evidenceRoot: directory, requireEvidenceFiles: true }),
+      /workflow evidence digest does not match bytes/u,
+    );
+
+    const missingInput = join(directory, "missing-input.json");
+    const missingOutput = join(directory, "missing-output.json");
+    await writeFile(missingInput, `${JSON.stringify(input())}\n`, "utf8");
+    await assert.rejects(
+      validateAuthorizedWorkflowFile(missingInput, missingOutput, { now: "2026-10-23T12:00:00.000Z", evidenceRoot: directory, requireEvidenceFiles: true }),
+      /workflow report path is required/u,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });
