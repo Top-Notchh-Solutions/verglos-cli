@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## Live Production provider recheck · 2026-10-24
+
+- **Provider receipt:** Vercel inspection reported a `READY` Production
+  deployment on the live `verglos.com` aliases.
+- **Verification:** Read-only requests to `/`, `/proof`, `/llms.txt`,
+  `/robots.txt`, and `/sitemap.xml` returned expected HTTP 200 responses;
+  bounded body hashes are retained in the evidence artifact.
+- **Disposition:** This is current provider/runtime evidence only. No provider
+  write, customer/account/database/payment/release-publication write, or
+  backlog checkbox change occurred. Score remains **245/35/280 (87.5%)**;
+  13 AppSec-dependent and 22 non-AppSec rows remain open.
+- **Evidence:** `evidence/vercel-live-production-recheck-2026-10-24.md`.
+
 ## QUAL-WEB-005 isolated deletion E2E · 2026-10-24
 
 - **Execution:** Web `791500d4` ran the route and worker integration against a

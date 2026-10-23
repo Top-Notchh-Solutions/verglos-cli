@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · live Production provider gate recheck
+
+Vercel inspection reported a `READY` Production deployment on the live
+`verglos.com` aliases. Five bounded read-only routes returned HTTP 200 with
+their expected content types and recorded body hashes. This opens fresh
+provider/runtime surface evidence only. It does not open customer/recipient,
+authenticated deletion, commercial, human/field-CWV, independent-review,
+AppSec/Hunt, or final go/no-go gates. Score remains **245/35/280 (87.5%)**.
+Evidence: `evidence/vercel-live-production-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-005 isolated deletion gate evidence
 
 Web `791500d4` passed the authenticated deletion route and worker integration

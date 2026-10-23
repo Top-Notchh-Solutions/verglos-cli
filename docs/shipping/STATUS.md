@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · live Production provider recheck
+
+Vercel inspection confirmed a `READY` Production deployment for the live
+`verglos.com` aliases. Five bounded read-only public routes returned HTTP 200
+with the recorded content types, sizes, and body hashes. No provider write or
+customer/account/database/payment/release state changed. This is fresh
+provider/runtime evidence only; score remains **245/35/280 (87.5%)**, with 13
+AppSec-dependent and 22 open non-AppSec rows. Evidence:
+`evidence/vercel-live-production-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-005 isolated deletion E2E
 
 Web head `791500d4` passed the authenticated deletion route and worker tests

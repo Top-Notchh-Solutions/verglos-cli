@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · live Production provider recheck
+
+Vercel inspection reported the live `verglos-web` Production deployment
+`READY`. Read-only requests to `/`, `/proof`, `/llms.txt`, `/robots.txt`, and
+`/sitemap.xml` returned the expected HTTP 200 responses; bounded body hashes
+and the provider receipt are recorded in
+`docs/shipping/evidence/vercel-live-production-recheck-2026-10-24.md`.
+This advances provider/runtime evidence only. No customer, recipient,
+authenticated deletion, commercial, human/field, independent-review,
+AppSec/Hunt, or final-release claim is made. No checkbox changed. The
+authoritative score remains **245 checked / 35 open / 280 total (87.5%)**,
+partitioned as **13 AppSec-dependent / 22 open non-AppSec** rows.
+
 ## 2026-10-24 · QUAL-WEB-005 fresh isolated deletion E2E
 
 Current Web head `791500d4` passed the authenticated deletion route and worker

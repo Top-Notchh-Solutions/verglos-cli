@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · live Production provider recheck
+
+Vercel inspection confirmed the live `verglos-web` Production deployment is
+`READY` on the `verglos.com` aliases. A read-only recheck at
+`2026-10-23T21:42:42Z` returned HTTP 200 for `/`, `/proof`, `/llms.txt`,
+`/robots.txt`, and `/sitemap.xml`, with bounded response hashes recorded in the
+new evidence artifact. No deployment, alias, environment, database, payment,
+account, customer, or release-publication write occurred in this recheck.
+
+This advances current provider/runtime evidence for the relevant Web surfaces;
+it does not create customer/recipient acceptance, authenticated deletion,
+commercial acceptance, human/field evidence, independent review, AppSec/Hunt
+evidence, or final release approval. No checkbox changed. The authoritative
+score remains **245 checked / 35 open / 280 total (87.5%)**, partitioned as
+**13 AppSec-dependent / 22 open non-AppSec** rows. Evidence:
+`docs/shipping/evidence/vercel-live-production-recheck-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-005 isolated deletion E2E
 
 The current merged Web head `791500d4` was exercised against a fresh local
