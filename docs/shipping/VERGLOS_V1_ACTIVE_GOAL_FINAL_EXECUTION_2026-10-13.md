@@ -80,6 +80,18 @@ package version was created. `DIST-002`/`DIST-003` remain open, the score is
 Evidence:
 `docs/shipping/evidence/dist-002-pr185-prerelease-publication-block-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · PR #185 merged
+
+PR #185 merged normally into CLI `main` as `f6f47dc2`, without squash or branch
+deletion. The merged workflow contains the stable-only publication guard, so
+prerelease tags cannot reach npm. Local contract tests were **2/2**;
+standard/provenance and in-toto checks were green at observation, while
+platform/self-scan jobs remained pending. No tag, release workflow, npm write,
+deployment, or package version was created. `DIST-002`/`DIST-003` remain open,
+the score is **244 checked / 36 open / 280 total (87.1%)**, and nothing was
+deleted. Evidence:
+`docs/shipping/evidence/dist-002-pr185-merge-2026-10-23.md`.
+
 ## Execution-input manifest · 2026-10-23
 
 All safe authorization, fixture, product-decision, and test/Preview/Production

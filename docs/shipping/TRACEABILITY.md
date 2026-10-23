@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## DIST-002 PR #185 merge · 2026-10-23
+
+- **Source mapping:** PR #185 merged normally into CLI `main` as
+  `f6f47dc2a4e86930b4ba8f5b73e5fcda97577997`.
+- **Contract mapping:** The merged publish job is stable-only and cannot run
+  for prerelease tags; OIDC, protected environment, immutable tag binding, and
+  no-long-lived-token controls remain present.
+- **Verification mapping:** Local contract tests **2/2**; standard/provenance
+  and in-toto checks green at observation; platform/self-scan checks pending.
+  No registry write occurred.
+- **Acceptance mapping:** `DIST-002`/`DIST-003` remain open for complete
+  final publication/provenance. Score remains **244/36/280 (87.1%)**; nothing
+  was deleted.
+- **Evidence:** `evidence/dist-002-pr185-merge-2026-10-23.md`.
+
 ## DIST-002 prerelease-publication block · 2026-10-23
 
 - **Source mapping:** CLI PR #185, commit `4890a1c7`, modifies the protected

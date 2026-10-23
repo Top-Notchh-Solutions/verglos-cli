@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-002 PR #185 merged
+
+- **Merge:** PR #185 merged normally into CLI `main` at `f6f47dc2`; no squash,
+  branch deletion, tag, or release event occurred.
+- **Result:** The merged publication workflow contains the stable-only guard,
+  preventing prerelease tags from reaching npm. Local contract tests were
+  **2/2**; standard/provenance and in-toto checks were green at observation,
+  while platform/self-scan jobs remained pending.
+- **Disposition:** Keep `DIST-002`/`DIST-003` open for complete final
+  publication/provenance. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted. Evidence: `evidence/dist-002-pr185-merge-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 prerelease-publication block implemented
 
 - **Implementation:** CLI PR #185, commit `4890a1c7`, makes the protected

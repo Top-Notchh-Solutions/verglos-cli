@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-002 PR #185 merged
+
+PR #185 merged normally into CLI `main` as `f6f47dc2`, preserving the
+stable-only publication guard. Local contract tests were **2/2**; standard/
+provenance and in-toto checks were green at observation, while platform and
+self-scan jobs remained pending. No tag or registry write occurred. No
+checkbox changed; the live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/dist-002-pr185-merge-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 prerelease-publication block implemented
 
 CLI PR #185, commit `4890a1c7`, makes the protected npm publication job
