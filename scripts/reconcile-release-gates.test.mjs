@@ -10,7 +10,7 @@ const digest = (value) => `sha256:${value.repeat(64).slice(0, 64)}`;
 function run(overrides = {}) {
   return {
     schema: "verglos.private.release-gate-reconciliation.v1",
-    completedAt: "2026-10-23T12:00:00.000Z",
+    completedAt: "2026-10-22T12:00:00.000Z",
     candidate: { cliCommit: "74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5", webCommit: "16ceddc9855e75e04f10ddd276fae16c7ef09e01", version: "2.0.0-alpha.1" },
     rows: [
       { id: "FINAL-WEB-007", state: "partial", evidence: [{ path: "docs/shipping/evidence/web.md", sha256: digest("a") }] },
@@ -36,6 +36,13 @@ test("reconciler reports open gates and never upgrades partial/planned rows", ()
 
 test("recorded GO fails closed while any gate or correction remains", () => {
   assert.throws(() => reconcileReleaseGates(run({ decision: { result: "go", status: "recorded" } })), /recorded GO is not eligible/u);
+});
+
+test("reconciliation rejects a future completion timestamp", () => {
+  assert.throws(
+    () => reconcileReleaseGates(run({ completedAt: "2026-10-24T12:00:00.000Z" }), { now: "2026-10-23T12:00:00.000Z" }),
+    /completedAt cannot be in the future/u,
+  );
 });
 
 test("a fully evidenced candidate can be marked ready for final sign-off", () => {

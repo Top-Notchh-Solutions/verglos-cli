@@ -30,6 +30,7 @@ export function reconcileReleaseGates(input, { now = new Date() } = {}) {
   const completedAt = parseDate(run.completedAt, "completedAt");
   const currentTime = now instanceof Date ? now : new Date(now);
   if (!Number.isFinite(currentTime.getTime())) throw new Error("now must be a valid date");
+  if (completedAt > currentTime) throw new Error("completedAt cannot be in the future");
   const rows = run.rows.map(validateRow);
   const ids = new Set();
   for (const row of rows) {
