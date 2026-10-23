@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Razorpay Test-Mode provider attempt
+
+The synthetic QR-create request reached the Test-Mode provider boundary but
+was rejected with HTTP **401** `BAD_REQUEST_ERROR` / `Authentication failed`.
+No QR, payment, refund, webhook, database, Production, or customer state was
+created, and no money was charged. Provider lifecycle evidence therefore stays
+closed pending a valid Test-Mode key/secret pair. Score remains **245/35/280
+(87.5%)**. Evidence:
+`evidence/razorpay-testmode-qr-attempt-2026-10-24.md`.
+
 ## 2026-10-24 · current-head implementation gate recheck
 
 CLI build/typecheck/full tests, Web serial/public/truth/typecheck, and the

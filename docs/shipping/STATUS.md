@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Razorpay Test-Mode QR attempt
+
+The bounded synthetic QR-create attempt used the local Test-Mode key pair and
+the current Pro monthly binding, but Razorpay rejected the first request with
+HTTP **401** `BAD_REQUEST_ERROR` / `Authentication failed`. No provider QR was
+created, no payment or webhook was attempted, no application or Production
+state changed, and no money was charged. The local Test-Mode credential pair
+needs replacement before a provider lifecycle receipt can be captured. Score
+remains **245/35/280 (87.5%)**, with 13 AppSec-dependent and 22 non-AppSec
+rows open. Evidence:
+`evidence/razorpay-testmode-qr-attempt-2026-10-24.md`.
+
 ## 2026-10-24 · current-head non-AppSec implementation regression
 
 CLI current head passed build **8/8**, typecheck **14/14**, and full Turbo

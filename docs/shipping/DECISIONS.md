@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain provider rows after rejected Test-Mode QR attempt
+
+- **Decision:** Exercise one synthetic Razorpay QR create request with the
+  current Pro catalog binding, then stop immediately on provider rejection.
+- **Verification:** Razorpay Test Mode returned HTTP **401**
+  `BAD_REQUEST_ERROR` / `Authentication failed`; no provider resource ID was
+  returned.
+- **Disposition:** Do not manufacture a lifecycle receipt and do not use live
+  credentials. No payment, refund, webhook, application database, Production,
+  customer, or GitHub Actions state changed; no money was charged. Replace the
+  Test-Mode key/secret pair before retrying. Score remains **245/35/280
+  (87.5%)**, with 13 AppSec-dependent and 22 non-AppSec rows open.
+- **Evidence:** `evidence/razorpay-testmode-qr-attempt-2026-10-24.md`.
+
 ## 2026-10-24 · retain non-AppSec rows after current-head regression
 
 - **Decision:** Record the fresh local regression as current implementation

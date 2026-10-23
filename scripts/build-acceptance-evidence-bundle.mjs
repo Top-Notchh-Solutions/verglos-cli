@@ -100,6 +100,7 @@ const paths = [
   "docs/shipping/evidence/acceptance-public-oss-corpus-2026-10-23.md",
   "docs/shipping/evidence/owner-authorization-2026-10-23.md",
   "docs/shipping/evidence/owner-controlled-human-review-2026-10-24.md",
+  "docs/shipping/evidence/razorpay-testmode-qr-attempt-2026-10-24.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-24-local-current.json",
   "docs/shipping/evidence/vercel-web-production-proof-route-fix-2026-10-24.md",
   "docs/shipping/evidence/vercel-web-production-cli-auth-route-fix-2026-10-24.md",
