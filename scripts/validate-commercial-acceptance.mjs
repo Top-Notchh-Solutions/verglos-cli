@@ -157,6 +157,7 @@ function validateEvent(input, catalog, completedAt) {
       }
       break;
   }
+  if (input.evidenceDigest !== digestEventPayload(input)) throw new Error(`commercial ${input.kind} evidence digest does not match event payload`);
   return Object.freeze({ kind: input.kind, evidenceDigest: input.evidenceDigest, subjectDigest: input.subjectDigest, facts: Object.freeze({ ...input.facts }) });
 }
 
@@ -170,6 +171,10 @@ function parseDate(value, label) {
   const date = new Date(value);
   if (!Number.isFinite(date.getTime())) throw new Error(`${label} is invalid`);
   return date;
+}
+
+function digestEventPayload(input) {
+  return `sha256:${createHash("sha256").update(JSON.stringify({ kind: input.kind, subjectDigest: input.subjectDigest, observedAt: input.observedAt, facts: input.facts }), "utf8").digest("hex")}`;
 }
 
 function rejectSecretLike(input) {

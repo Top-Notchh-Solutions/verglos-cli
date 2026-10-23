@@ -16,13 +16,13 @@ const catalog = {
 };
 
 function event(kind, index, facts) {
-  return {
+  const source = {
     kind,
-    evidenceDigest: digest(String.fromCharCode(97 + index)),
     subjectDigest: digestCommercialSubject(`subject-${index}`),
     observedAt: "2026-10-19T10:00:00.000Z",
     facts,
   };
+  return { ...source, evidenceDigest: digest(JSON.stringify(source)) };
 }
 
 function run(overrides = {}) {
@@ -69,7 +69,7 @@ test("fails closed on missing evidence, checkout drift, and duplicate repeat-use
   assert.throws(() => validateCommercialAcceptance(drift), /does not match the catalog/u);
 
   const duplicate = run();
-  duplicate.events[3].evidenceDigest = duplicate.events[2].evidenceDigest;
+  duplicate.events[3] = { ...duplicate.events[2] };
   assert.throws(() => validateCommercialAcceptance(duplicate), /distinct evidence digests/u);
 });
 
@@ -100,10 +100,10 @@ test("rejects future completion timestamps", () => {
   assert.throws(() => validateCommercialAcceptance(run({ completedAt: "2026-10-20T12:00:00.000Z" }), { now: "2026-10-19T12:01:00.000Z" }), /completedAt is in the future/u);
 });
 
-test("requires distinct evidence records across commercial event kinds", () => {
+test("rejects commercial event fact tampering without a matching evidence digest", () => {
   const source = run();
-  source.events[1].evidenceDigest = source.events[0].evidenceDigest;
-  assert.throws(() => validateCommercialAcceptance(source), /evidence records must have distinct evidence digests/u);
+  source.events[4].facts.minutes = 31;
+  assert.throws(() => validateCommercialAcceptance(source), /evidence digest does not match event payload/u);
 });
 
 test("rejects secret-like commercial input before producing a report", () => {
