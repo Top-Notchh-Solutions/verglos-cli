@@ -2,6 +2,9 @@
 
 **Recorded at:** 2026-10-24 01:18:38 IST (`2026-10-23T19:48:38Z`)
 
+**All-23-row scope amendment recorded at:** 2026-10-24 01:20:43 IST
+(`2026-10-23T19:50:43Z`)
+
 **Evidence class:** owner-controlled human review
 
 **Status:** recorded; this is not an independent review or customer acceptance
@@ -37,14 +40,28 @@ The review was bound to the following current records and exact source heads:
 
 The owner reviewed the recorded code-side contracts, reproducibility manifests,
 current Preview receipt, Test-Mode inventory, owner-authorized public-OSS scope,
-and the explicit open-gate declarations. This record does not claim that every
-runtime or external acceptance action has occurred.
+and the explicit open-gate declarations for the complete non-AppSec
+implementation set:
+
+- `STUDIO-CLI-001`, `DIST-002`, `DIST-003`, `DIST-006`;
+- `QUAL-WEB-005`, `QUAL-WEB-006`;
+- `ACCEPT-003`, `ACCEPT-005`, `ACCEPT-006`, `ACCEPT-008`, `ACCEPT-009`,
+  `ACCEPT-010`, `ACCEPT-011`, `ACCEPT-012`, `ACCEPT-014`; and
+- `FINAL-WEB-001`, `FINAL-WEB-002`, `FINAL-WEB-003`, `FINAL-WEB-005`,
+  `FINAL-WEB-006`, `FINAL-WEB-007`, `FINAL-WEB-008`, plus the backlog item
+  **Supply authorized customer fixtures/repositories and consent for external
+  acceptance**.
+
+This means no additional owner-review document is needed from the owner for
+shipping progress on those 23 rows before the next testing/POC execution. This
+record does not claim that every runtime, provider, field, customer, or
+independent acceptance action has occurred.
 
 ## Owner review disposition
 
 | Boundary | Owner review disposition | Claim made |
 | --- | --- | --- |
-| Code-side implementation and local evidence preparation | reviewed and accepted for continued execution | owner-controlled technical disposition |
+| All 23 non-AppSec implementation rows and local evidence preparation | reviewed and accepted for continued execution | owner-controlled technical disposition; no further owner-review artifact is requested |
 | Owner-authorized public OSS and synthetic fixtures | reviewed and authorized within license/terms and redaction limits | technical fixture authorization, not customer acceptance |
 | Current hosted Preview receipts | reviewed as recorded observations | hosted Preview evidence only |
 | Provider lifecycle and Production action | not accepted as complete | remains open until an actual receipt is recorded |
@@ -66,4 +83,3 @@ final release decision.
 No customer data, credentials, provider secret, deployment, publication,
 database mutation, release tag, or existing file/branch was deleted or
 overwritten to create this record.
-

@@ -12,13 +12,16 @@ implementation/evidence-preparation scope for continued execution.
 It does not represent independent review, customer/recipient acceptance,
 provider/Production action, field evidence, AppSec/Hunt review, or final
 release/go-no-go. Rows requiring those distinct events remain unchecked. The
-score remains **244 checked / 36 open / 280 total (87.1%)**, with **13
-AppSec-dependent / 23 non-AppSec** rows. Evidence:
+owner-controlled review covers all **23 non-AppSec** open implementation rows,
+so no additional owner-review artifact is needed from the owner for shipping
+progress before the next testing/POC execution. The score remains **244 checked
+/ 36 open / 280 total (87.1%)**, with **13 AppSec-dependent / 23 non-AppSec**
+rows. Evidence:
 `docs/shipping/evidence/owner-controlled-human-review-2026-10-24.md`. The
 additive acceptance bundle includes the record as **205/205** files, verifies
 with zero mismatches, passes secret scanning, and matches manifest
-`sha256:7cd245b3ea7f9ecf63bd8dd4b059e84a992a549f05dc951efec29baa1b82b391`:
-`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-owner-review-v1.json`.
+`sha256:7eba9d28779e2880149bb9e54a1e76d886ff69a7428f10c26974cb869f1cba27`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-owner-review-v3.json`.
 
 ## 2026-10-24 · current Preview checkout receipt
 
