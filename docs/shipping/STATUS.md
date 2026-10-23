@@ -5,12 +5,14 @@
 CLI `main` is `c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web `main` is
 `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`, read from the authoritative
 GitHub commit APIs. Both repositories have zero open PRs, so no merge remains
-pending. The current additive `ACCEPT-003` bundle contains **175** hashed
-files, manifest `sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00`,
-and a passed secret scan. `ACCEPT-003` remains open for reviewer,
+pending. The current additive `ACCEPT-003` bundle contains **176** hashed
+files, manifest `sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
+and a passed secret scan; a read-only verifier confirmed **176/176** file
+digests and byte counts. `ACCEPT-003` remains open for reviewer,
 hosted, and external acceptance artifacts. Score remains **244 checked / 36
 open / 280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
-`evidence/source-queue-audit-after-merged-prs-2026-10-23.md`.
+`evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
+`evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
 
 ## 2026-10-23 · STUDIO-CLI-001 reservation race merged
 

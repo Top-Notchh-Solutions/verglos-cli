@@ -6,12 +6,14 @@ Authoritative GitHub reads show CLI `main` at
 `c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web `main` at
 `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; both repositories have zero open
 PRs. The next non-AppSec queue entry is `ACCEPT-003`. Its current additive
-bundle contains **175** hashed files, manifest
-`sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00`,
-and a passed secret scan. No checkbox changed: `ACCEPT-003` remains open for
+bundle contains **176** hashed files, manifest
+`sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
+and a passed secret scan; read-only verification confirmed **176/176** file
+digests and byte counts. No checkbox changed: `ACCEPT-003` remains open for
 reviewer, hosted, and external acceptance artifacts. Score remains **244
 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten.
-Evidence: `docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md`.
+Evidence: `docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
+`docs/shipping/evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
 
 ## 2026-10-23 · STUDIO-CLI-001 reservation race merged
 
@@ -5300,6 +5302,13 @@ Evidence/problem: external validation is deliberately last. It validates the com
   customer evidence. Score remains **244 checked / 36 open / 280 total
   (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-003-bundle-symlink-boundary-2026-10-23.md`.
+- **ACCEPT-003 integrity-verification addendum (2026-10-23):** The current
+  additive bundle contains **176/176** byte- and digest-verified evidence
+  files with manifest
+  `sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`;
+  bundle-builder secret scan passed. This strengthens reproducibility only;
+  reviewer sign-off and hosted/external acceptance remain open. Evidence:
+  `docs/shipping/evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
 - [x] **ACCEPT-004** · external authorized workflow protocol · deps: ACCEPT-003 · Freeze recruitment/questions/consent/data handling/success criteria for qualified teams without scraping or bulk outreach. No external contact without authorization. Commit(s): Private `454a0cf` adds the frozen protocol, per-repository consent-record template, and `pnpm acceptance:protocol:check` validator. It requires named owner consent, exact commit/scope, bounded network/data handling, expiry/revocation, founder approval, redacted evidence, and deletion/expiry recording. No external contact was performed; ACCEPT-005 onward remain open.
 - [ ] **ACCEPT-005** · run authorized external repository workflows · deps: ACCEPT-004 + founder authorization · Validate real release reconciliation without publishing findings; record product failures separately from requested scope. Private `acceptance:workflow:validate` now implements the exact consent/scope/redaction/deletion contract; focused tests pass **4/4**. First-party/public-fixture qualification is not external consented-team/recipient acceptance and does not close this row. Evidence: `docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md` and `docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`. Row remains open for the actual named-owner workflow and expiry/deletion record.
 - **ACCEPT-005 validator boundary addendum (2026-10-23):** Private `10e39268` rejects non-string consent/execution dates; focused workflow tests pass **5/5**. The external named-owner workflow and deletion/expiry record remain open. Evidence: `docs/shipping/evidence/accept-005-authorized-workflow-date-boundary-2026-10-23.md`.

@@ -169,6 +169,7 @@ const paths = [
   "docs/shipping/evidence/studio-cli-001-projection-race-pr254-2026-10-23.md",
   "docs/shipping/evidence/studio-cli-001-projection-race-pr254-merge-2026-10-23.md",
   "docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md",
+  "docs/shipping/evidence/accept-003-bundle-integrity-verification-2026-10-23.md",
   "docs/shipping/evidence/dist-002-registry-response-boundary-pr193-2026-10-23.md",
   "docs/shipping/evidence/dist-002-registry-response-boundary-pr193-merge-2026-10-23.md",
   "docs/shipping/evidence/qual-web-005-store-scope-pr255-merge-2026-10-23.md",

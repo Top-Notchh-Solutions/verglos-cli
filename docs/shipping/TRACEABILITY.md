@@ -9,14 +9,16 @@
 - **Acceptance mapping:** The next non-AppSec queue entry is `ACCEPT-003`.
   Its bounded implementation is present, but the row remains open for the
   required reviewer, hosted, and external acceptance artifacts.
-- **Artifact mapping:** Current additive bundle has 175 hashed files,
+- **Artifact mapping:** Current additive bundle has 176 hashed files,
   manifest SHA-256
-  `sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00`,
-  and a passed secret scan.
+  `sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
+  and a passed secret scan; a read-only verifier confirmed 176/176 file
+  digests and byte counts.
 - **Disposition:** No pending merge, squash, branch deletion, tag,
   publication, provider, Production, customer, or final-release action.
   Score remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
-- **Evidence:** `evidence/source-queue-audit-after-merged-prs-2026-10-23.md`.
+- **Evidence:** `evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
+  `evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
 
 ## STUDIO-CLI-001 reservation race merged · 2026-10-23
 

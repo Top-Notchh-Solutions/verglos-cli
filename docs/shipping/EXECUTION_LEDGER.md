@@ -7,13 +7,15 @@
   `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; no open PRs in either repo.
 - **Next queue entry:** `ACCEPT-003`; its bounded evidence-bundle code is
   present, but its reviewer/hosted/external acceptance artifacts are missing.
-- **Bundle:** 175 hashed files; manifest
-  `sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00`;
-  secret scan passed.
+- **Bundle:** 176 hashed files; manifest
+  `sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`;
+  secret scan passed; read-only verification confirmed 176/176 file digests
+  and byte counts.
 - **Disposition:** No row checked and no publication/provider/Production,
   customer, tag, or release action occurred. Score remains **244/36/280
   (87.1%)**. Nothing was deleted or overwritten.
-- **Evidence:** `evidence/source-queue-audit-after-merged-prs-2026-10-23.md`.
+- **Evidence:** `evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
+  `evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
 
 ## STUDIO-CLI-001 reservation race merged · 2026-10-23
 

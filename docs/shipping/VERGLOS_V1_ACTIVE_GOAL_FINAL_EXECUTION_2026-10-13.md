@@ -11,13 +11,15 @@ branch deletion, tag, publication, provider, Production, customer, or final
 release action occurred.
 
 The next non-AppSec queue entry is `ACCEPT-003`. Its bounded bundle
-implementation is present, and the current additive bundle now contains **175
+implementation is present, and the current additive bundle now contains **176
 hashed files** with manifest
-`sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00`;
-secret scan passed. `ACCEPT-003` remains open for its complete reviewer,
-hosted, and external acceptance artifacts. The score remains **244 checked /
-36 open / 280 total (87.1%)**. Evidence:
-`docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md`.
+`sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`;
+secret scan passed. A read-only verifier confirmed **176/176** listed file
+digests and byte counts plus the manifest digest. `ACCEPT-003` remains open
+for its complete reviewer, hosted, and external acceptance artifacts. The
+score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
+`docs/shipping/evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
 
 ## Latest continuation result · 2026-10-23 · STUDIO-CLI-001 reservation race merged
 

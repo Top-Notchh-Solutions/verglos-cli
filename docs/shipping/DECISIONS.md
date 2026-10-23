@@ -11,10 +11,10 @@
 - **Next action:** Continue with `ACCEPT-003` evidence/reconciliation. Its
   implementation substrate is present, but its reviewer/hosted/external
   acceptance artifacts are not fabricated by this audit.
-- **Evidence:** Current bundle has 175 hashed files, manifest
-  `sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00`,
-  and a passed secret scan. Score remains **244/36/280 (87.1%)**. Nothing was
-  deleted or overwritten.
+- **Evidence:** Current bundle has 176 hashed files, manifest
+  `sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
+  passed secret scan, and passed read-only 176/176 file-integrity verification.
+  Score remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
 
 ## 2026-10-23 · merge STUDIO-CLI-001 reservation race hardening
 

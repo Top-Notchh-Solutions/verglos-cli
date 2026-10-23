@@ -5,13 +5,15 @@
 CLI `main` is `c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web `main` is
 `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; both repositories have no open
 PRs. The next non-AppSec queue entry is `ACCEPT-003`. Its current additive
-bundle contains 175 hashed files with manifest
-`sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00` and
-passed secret scan. This does not satisfy the reviewer, hosted, or external
+bundle contains 176 hashed files with manifest
+`sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
+passed secret scan, and passed read-only 176/176 file-integrity verification.
+This does not satisfy the reviewer, hosted, or external
 acceptance gates, so no row or release gate is checked. Score remains
 **244/36/280 (87.1%)**. No publication, provider, Production, customer, tag,
 or release action occurred. Nothing was deleted or overwritten. Evidence:
-`evidence/source-queue-audit-after-merged-prs-2026-10-23.md`.
+`evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
+`evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
 
 ## 2026-10-23 · STUDIO-CLI-001 reservation race merged
 
