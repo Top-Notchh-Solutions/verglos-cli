@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · customer-consent scope disposition
+
+The current V1 launch contract is explicitly limited to owner-authorized public
+OSS JavaScript/TypeScript repositories at exact commits. The local path follows
+repository licenses and terms, uses redacted reports, does not attack live
+targets, and makes no endorsement or real-customer acceptance claim. Under that
+scope, the customer/recipient-consent backlog row is **not applicable** and is
+now closed as a recorded scope disposition. It must be reopened if the launch
+contract later claims acceptance by a real external customer or recipient.
+
+This is not synthetic consent and it does not waive provider lifecycle,
+human/field, independent-review, AppSec/Hunt, or final go/no-go requirements.
+The authoritative score is now **245 checked / 35 open / 280 total (87.5%)**,
+with **13 AppSec-dependent** and **22 open non-AppSec implementation** rows.
+Evidence: `docs/shipping/evidence/customer-acceptance-scope-disposition-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · current CLI public-OSS execution
 
 The owner-authorized public-OSS path ran the eight exact-commit full clones
@@ -11,8 +27,9 @@ private local derived artifacts and no customer or recipient claim is made.
 
 This materially advances ACCEPT-011/012 POC inputs but does not close their
 dependency, adjudication, independent-review, AppSec/Hunt, or final-acceptance
-contracts, and does not close ACCEPT-005/006/008. No checkbox changed; score
-remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+contracts, and does not close ACCEPT-005/006/008. The customer-consent row is
+separately closed as not applicable to the current owner-authorized public-OSS
+scope; score is now **245 checked / 35 open / 280 total (87.5%)**. Evidence:
 `docs/shipping/evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md`.
 
 ## Latest continuation result · 2026-10-24 · Production public-surface recheck

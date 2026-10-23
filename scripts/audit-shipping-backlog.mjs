@@ -93,9 +93,9 @@ export function auditShippingBacklog(text) {
       nonAppSecCount: nonAppSecOpen.length,
       unmappedCount: unmappedOpen.length,
       expectedAppSecDependentCount: 13,
-      expectedNonAppSecCount: 23,
+      expectedNonAppSecCount: 22,
     },
-    status: rows.length === 280 && checked === 244 && openRows.length === 36 && appSecOpen.length === 13 && nonAppSecOpen.length === 23 && unmappedOpen.length === 0 ? "passed" : "failed",
+    status: rows.length === 280 && checked === 245 && openRows.length === 35 && appSecOpen.length === 13 && nonAppSecOpen.length === 22 && unmappedOpen.length === 0 ? "passed" : "failed",
   };
   return report;
 }

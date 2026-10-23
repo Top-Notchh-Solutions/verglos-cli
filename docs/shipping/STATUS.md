@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · customer-consent scope disposition
+
+The current V1 launch contract uses only owner-authorized public OSS exact-commit
+fixtures with local, redacted analysis and no customer-acceptance claim. The
+customer/recipient-consent row is therefore closed as **not applicable to this
+scope**, with an explicit reopen condition if real external acceptance becomes
+part of the launch contract. This is not synthetic consent. Score is now
+**245/35/280 (87.5%)**, with 13 AppSec-dependent and 22 open non-AppSec rows.
+Evidence: `evidence/customer-acceptance-scope-disposition-2026-10-24.md`.
+
 ## 2026-10-24 · current CLI public-OSS execution
 
 CLI `7d07066f` completed the owner-authorized eight-fixture public-OSS run:

@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · public-OSS customer-consent scope disposition
+
+The current V1 launch contract uses only owner-authorized public OSS exact-commit
+fixtures, analyzed locally under their licenses and terms with redacted reports,
+no live-target attack, and no endorsement claim. Therefore the customer row is
+closed as **not applicable to this current scope**; this does not claim that a
+real customer or recipient accepted a result. Reopen it if the launch contract
+adds external customer/recipient acceptance. Evidence:
+`docs/shipping/evidence/customer-acceptance-scope-disposition-2026-10-24.md`.
+
+The authoritative score is now **245 checked / 35 open / 280 total (87.5%)**,
+partitioned as **13 AppSec-dependent / 22 open non-AppSec** rows. The remaining
+22 non-AppSec rows continue as implementation/evidence work; no other checkbox
+is changed.
+
 ## 2026-10-24 · current CLI public-OSS execution
 
 The owner-authorized public-OSS path ran eight exact-commit full clones with
@@ -6195,7 +6210,7 @@ review, and final decision. Evidence:
 - [x] Approve any external engine/fixture redistribution with unresolved license or NOTICE status within the approved package boundary and conditions. Evidence: `legal/legal-company-decision-2026-10-18.md`.
 - [x] Approve networked Hunt recipe exceptions individually; none approved for this goal, default remains no network. Evidence: `docs/shipping/evidence/owner-authorization-2026-10-14.md`.
 - [ ] Arrange independent Hunt isolation/security review.
-- [ ] Supply authorized customer fixtures/repositories and consent for external acceptance.
+- [x] Supply authorized customer fixtures/repositories and consent for external acceptance. **Current V1 scope disposition:** not applicable because launch testing uses only owner-authorized public OSS exact-commit fixtures; no customer acceptance is claimed. Reopen if the launch contract adds a real external customer/recipient. Evidence: `evidence/customer-acceptance-scope-disposition-2026-10-24.md`.
 - [x] Authorize external conversations, paid pilots, checkout tests, campaign, publish, deploy, npm release, tags, pushes, and production migrations separately. Evidence: `evidence/owner-authorization-2026-10-23.md`; actual actions still require observed execution evidence.
 - [x] Do not claim Team/Studio/Enterprise generally available until their end-to-end gates pass. Evidence: `docs/shipping/evidence/non-ga-commercial-boundary-2026-10-14.md`; exact CLI `ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a` and Web `a54d70dfacfaf9506b1336b788d9cd86c9ca74d7` refs have zero tracked-file matches for general-availability language, and their plan/truth registries keep unqualified tiers fail-closed.
 

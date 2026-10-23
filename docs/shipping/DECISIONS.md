@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · close customer-consent row for current public-OSS scope
+
+- **Decision:** The current V1 launch contract uses only owner-authorized,
+  exact-commit public OSS fixtures and does not claim that a real customer or
+  recipient accepted a result. Close the customer-consent row as not applicable
+  to this scope, with an explicit reopen condition if the launch contract
+  changes.
+- **Boundary:** This is a scope disposition, not synthetic consent. It does
+  not waive provider lifecycle, human/field, independent-review, AppSec/Hunt,
+  or final go/no-go requirements.
+- **Result:** **245/35/280 (87.5%)**, partitioned as 13 AppSec-dependent and 22
+  open non-AppSec rows.
+- **Evidence:** `evidence/customer-acceptance-scope-disposition-2026-10-24.md`.
+
 ## 2026-10-24 · record current CLI public-OSS execution
 
 - **Decision:** Run the owner-authorized public-OSS POC path against the

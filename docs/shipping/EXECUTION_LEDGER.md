@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## Customer/recipient-consent scope disposition · 2026-10-24
+
+- **Decision:** Close the customer/recipient-consent row as not applicable to
+  the current V1 launch contract, which is limited to owner-authorized public
+  OSS exact-commit fixtures analyzed locally under their licenses and terms.
+- **Boundary:** No real customer acceptance is claimed and no synthetic
+  consent is fabricated. Reopen the row if a real external customer or
+  recipient becomes part of the launch contract.
+- **Result:** **245 checked / 35 open / 280 total (87.5%)**; 13 AppSec-dependent
+  rows and 22 open non-AppSec implementation rows remain.
+- **Evidence:** `evidence/customer-acceptance-scope-disposition-2026-10-24.md`.
+
 ## ACCEPT-011/012 current CLI public-OSS execution · 2026-10-24
 
 - **Execution:** CLI `7d07066f967a2e7899aca6b51f04f306b7071013` scanned eight
