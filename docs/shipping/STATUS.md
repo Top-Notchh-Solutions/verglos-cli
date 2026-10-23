@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · QUAL-WEB-005 isolated current-head integration
+
+The authoritative Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` passed
+the focused privacy/deletion suite **47/47**, with **0 skips / 0 failures**,
+after all **43** migrations were applied to a fresh local Docker
+`verglos_test` database. `pnpm typecheck` and `git diff --check` passed, and
+the fixture-user cleanup count was zero. The remote Neon test URL was not used.
+This strengthens QUAL-WEB-005 implementation evidence only; its Production,
+retention/legal, customer-held, reconciliation, independent-review, and final
+acceptance conditions remain open. Score remains **244/36/280 (87.1%)**.
+Evidence: `evidence/qual-web-005-local-isolated-integration-2026-10-23.md`.
+
 ## 2026-10-23 · clean 12-story substrate run
 
 Clean exact merged CLI/Web heads completed the private acceptance harness:

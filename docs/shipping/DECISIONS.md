@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · run QUAL-WEB-005 against an isolated local database
+
+- **Decision:** Use a fresh local Docker `verglos_test` database for the
+  database-backed deletion tests; do not use the owner-provided remote Neon
+  URL for destructive test activity.
+- **Result:** Web `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; all **43** current
+  migrations applied; focused privacy/deletion suite **47/47 passed**, zero
+  skips/failures; typecheck/diff check passed; fixture cleanup count 0.
+- **Disposition:** QUAL-WEB-005 implementation evidence only. No Production,
+  provider, customer, legal, independent-review, or final release decision
+  was made. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/qual-web-005-local-isolated-integration-2026-10-23.md`.
+
 ## 2026-10-23 · run clean current-head acceptance stories
 
 - **Decision:** Re-run the twelve-story private substrate harness against

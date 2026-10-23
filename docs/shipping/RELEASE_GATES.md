@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · QUAL-WEB-005 isolated implementation evidence
+
+Web `main` `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` passed the focused
+privacy/deletion suite **47/47** with zero skips/failures after **43** current
+migrations were applied to a fresh local Docker `verglos_test` database.
+Typecheck and diff check passed, and the fixture-user cleanup count was zero.
+This does not open the QUAL-WEB-005 release gate: Production migration and
+rollback, legal/retention/customer-held disposition, reconciliation,
+independent review, and final acceptance remain open. Score remains
+**244/36/280 (87.1%)**. Evidence:
+`evidence/qual-web-005-local-isolated-integration-2026-10-23.md`.
+
 ## 2026-10-23 · clean 12-story substrate run
 
 Clean exact merged CLI/Web heads completed the private twelve-story harness:

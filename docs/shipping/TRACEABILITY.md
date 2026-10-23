@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 isolated current-head integration · 2026-10-23
+
+- **Source mapping:** Web `main`
+  `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`.
+- **Execution mapping:** Fresh local Docker `verglos_test` database with all
+  **43** current migrations; remote Neon test URL not used.
+- **Verification mapping:** Focused privacy/deletion suite **47/47**, zero
+  skips/failures; typecheck and diff check passed; fixture cleanup count 0.
+- **Acceptance mapping:** Strengthens QUAL-WEB-005 implementation only. The
+  Production, legal/retention, customer-held, reconciliation,
+  independent-review, and final-acceptance gates remain open; score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/qual-web-005-local-isolated-integration-2026-10-23.md`.
+
 ## Clean 12-story substrate run · 2026-10-23
 
 - **Source mapping:** Clean CLI `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`

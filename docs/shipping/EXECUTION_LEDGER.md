@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-005 isolated current-head integration · 2026-10-23
+
+- **Source:** Web `main` `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` in a clean
+  detached worktree.
+- **Database:** Fresh local Docker `postgres:16-alpine`, local
+  `verglos_test`, all **43** current migrations applied. The remote Neon test
+  URL was not used.
+- **Verification:** Focused privacy/deletion suite **47/47 passed / 0 skipped /
+  0 failed**; typecheck and diff check passed; post-run fixture-user count 0.
+- **Disposition:** Implementation evidence only; no row checked. QUAL-WEB-005
+  remains open for Production migration/rollback, legal-retention and
+  customer-held disposition, reconciliation, independent review, and final
+  acceptance. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/qual-web-005-local-isolated-integration-2026-10-23.md`.
+
 ## Clean 12-story substrate run · 2026-10-23
 
 - **Sources:** clean CLI `c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web
