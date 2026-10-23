@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-008 commercial validator boundaries
+
+- **Implementation:** Private commit `6af3fbb7` hardens the validator against
+  future completion, secret-like input, and cross-kind evidence-digest reuse.
+- **Verification:** Focused commercial suite **7/7**; combined current bounded
+  suite **36/36**; syntax and diff checks passed.
+- **Artifact:** Regenerated private bundle contains **136 unique files** with
+  content-manifest SHA-256
+  `sha256:24c0d8caafa194c8ab03e3d65413ae711399429e3b289f1bfacad467571f2c5d`;
+  secret scan passed.
+- **Disposition:** ACCEPT-008 remains open for actual commercial evidence and
+  independent/final acceptance. Score remains **244/36/280 (87.1%)**. Nothing
+  was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-008-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-006 comprehension scorer boundaries
 
 - **Implementation:** Private commit `e8a551d1` hardens the scorer against

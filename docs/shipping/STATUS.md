@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-008 commercial validator boundaries
+
+Private commit `6af3fbb7` hardens the validator against future completion,
+secret-like input, and cross-kind evidence-digest reuse. The focused
+commercial suite passes **7/7** and the combined current bounded suite passes
+**36/36**. The regenerated bundle has **136 unique files**, content-manifest
+SHA-256
+`24c0d8caafa194c8ab03e3d65413ae711399429e3b289f1bfacad467571f2c5d`, and a
+passing secret scan. ACCEPT-008 remains open for actual commercial evidence
+and independent/final acceptance. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-evidence-bundle-accept-008-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-006 comprehension scorer boundaries
 
 Private commit `e8a551d1` hardens the scorer against future completion,

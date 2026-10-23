@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## ACCEPT-008 commercial validator boundaries · 2026-10-23
+
+- **Source mapping:** Private commit `6af3fbb7` and
+  `scripts/validate-commercial-acceptance.mjs`.
+- **Contract mapping:** Future completion, secret-like input, and cross-kind
+  evidence-digest reuse now fail closed; catalog/approval/allowance checks
+  remain enforced.
+- **Verification mapping:** Focused commercial suite **7/7**; combined current
+  bounded suite **36/36**; syntax and diff checks passed.
+- **Artifact mapping:** 136 unique bundle files; content-manifest SHA-256
+  `sha256:24c0d8caafa194c8ab03e3d65413ae711399429e3b289f1bfacad467571f2c5d`;
+  secret scan passed.
+- **Acceptance mapping:** ACCEPT-008 remains open for actual commercial
+  evidence and independent/final acceptance. Score remains **244/36/280
+  (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-008-boundary-2026-10-23.md`.
+
 ## ACCEPT-006 comprehension scorer boundaries · 2026-10-23
 
 - **Source mapping:** Private commit `e8a551d1` and

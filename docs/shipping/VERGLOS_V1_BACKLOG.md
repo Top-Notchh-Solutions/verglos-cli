@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-008 commercial validator boundaries
+
+Private commit `6af3fbb7` hardens the commercial-evidence validator against
+future completion timestamps, secret-like input, and reuse of one evidence
+digest across commercial event kinds. The focused ACCEPT-008 suite passes
+**7/7**; the combined current bounded suite passes **36/36**. The regenerated
+private bundle contains **136 unique hashed files** with content-manifest
+SHA-256
+`sha256:24c0d8caafa194c8ab03e3d65413ae711399429e3b289f1bfacad467571f2c5d`;
+secret scan passed. ACCEPT-008 remains open for actual commercial evidence and
+independent/final acceptance. No checkbox changed; score remains **244 checked /
+36 open / 280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-accept-008-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-006 comprehension scorer boundaries
 
 Private commit `e8a551d1` hardens the comprehension scorer against future
@@ -5022,6 +5036,7 @@ Evidence/problem: external validation is deliberately last. It validates the com
 - **ACCEPT-006 scorer boundary addendum (2026-10-23):** Private `e8a551d1` rejects future completion, duplicate participant digests, and secret-like artifact/input material; focused scorer tests pass **8/8**. The participant run and independent review remain open. Evidence: `docs/shipping/evidence/accept-006-comprehension-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-007** · Hunt adjudication study · deps: ACCEPT-001/003 · Evaluate at least 100 independently adjudicated findings with preregistered methodology; separate false confirmation, not reproduced, and environment failure. Commit(s): —
 - [ ] **ACCEPT-008** · commercial acceptance/COGS evidence · deps: technical acceptance + founder authorization · Test actual plan agreements/checkout, repeat use, support minutes, hosted cost, recipient value, and explicit allowances; hypotheses remain hypotheses otherwise. Commit(s): private `64c1a477` adds the bounded commercial-evidence validator and `f986f80c` adds its regression coverage. Implementation substrate is complete; the row remains open for actual agreement/checkout/repeat-use/support/cost/recipient evidence and independent/final acceptance. Evidence: `docs/shipping/evidence/accept-008-commercial-validator-2026-10-19.md`.
+- **ACCEPT-008 validator boundary addendum (2026-10-23):** Private `6af3fbb7` rejects future completion, secret-like input, and cross-kind evidence-digest reuse; focused commercial tests pass **7/7**. Actual commercial evidence and independent/final acceptance remain open. Evidence: `docs/shipping/evidence/accept-008-commercial-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-009** · truth registry/release-gate reconciliation · deps: ACCEPT-002-008 · Update shipped/partial/planned labels strictly from evidence, list failed gates and rollback/correction work, and make a documented go/no-go. Commit(s): —
 - **ACCEPT-009 implementation addendum (2026-10-23):** Private
   `scripts/reconcile-release-gates.mjs` now validates candidate commits,
