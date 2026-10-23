@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Production landing browser qualification passed
+
+Web PR #265 merged normally as `c72c08f`; its capture harness retries one real
+interaction when Chromium delays the INP observer and still fails closed when
+INP is absent. Focused landing tests passed **4/4**, typecheck and diff checks
+passed. The hardened harness ran against `https://verglos.com` with Chromium/
+Axe across six required paths at desktop/mobile: **12/12** passed, with all
+performance, accessibility, keyboard, responsive, metadata, and crawlability
+checks green. This is automated browser evidence only, not human screen-reader
+or field-CWV evidence. FINAL-WEB-007/008 remain open for their declared
+dependencies and acceptance gates. Score remains **244/36/280 (87.1%)**.
+Evidence: `evidence/final-web-007-production-browser-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · Production receipt API route boundary verified
 
 Web PR #264 merged normally as `9985f1f`, and the merged `main` Vercel

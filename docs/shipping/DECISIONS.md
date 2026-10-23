@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · reconcile Production landing browser qualification
+
+- **Decision:** Merge the delayed-INP-observation harness fix and record the
+  live browser result without treating automated Chromium as human or field
+  evidence.
+- **Implementation:** Web commit `0856d8f`; PR #265 merged normally as
+  `c72c08f1fc1d198de3ec28ed735c40f9a27f2a46`.
+- **Verification:** Focused landing tests **4/4**, typecheck, and diff checks
+  passed. Live Playwright Chromium/Axe capture passed **12/12** required
+  desktop/mobile route measurements with no failures or gaps.
+- **Disposition:** FINAL-WEB-007/008 remain open for human/field, dependency,
+  independent-review, and final-release gates. No external/customer or
+  Production write occurred; score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/final-web-007-production-browser-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · reconcile Production receipt API route fix
 
 - **Decision:** Promote the Web public receipt API matcher correction through

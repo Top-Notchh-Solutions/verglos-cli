@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Production landing browser evidence
+
+Web PR #265 merged normally as `c72c08f`; the capture harness retains a
+fail-closed INP requirement while retrying a delayed real interaction. Focused
+landing tests **4/4**, typecheck, and diff checks passed. Live Chromium/Axe
+capture against `https://verglos.com` passed all six required paths at desktop
+and mobile (**12/12**) with all performance, accessibility, responsive,
+metadata, and crawlability checks green. This opens automated browser evidence
+only; human screen-reader, supported-browser/field-CWV, customer,
+independent-review, and final-release gates remain closed. Score remains
+**244/36/280 (87.1%)**. Evidence:
+`evidence/final-web-007-production-browser-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · Production receipt API boundary
 
 Web PR #264 merged normally as `9985f1f`; its Vercel `main` Production
