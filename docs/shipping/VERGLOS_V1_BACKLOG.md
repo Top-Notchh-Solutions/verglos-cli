@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-003 deterministic bundle manifest
+
+Private commit `97bf5989` hardens the evidence-bundle builder to reject
+duplicate/escaping paths, sort entries, reject secret-like evidence, and emit
+a deterministic content-manifest digest. Focused bundle-builder,
+correction-loop, corpus-triage, and final-regression contracts pass **16/16**.
+The regenerated bundle contains **133 unique hashed files**, with content
+manifest SHA-256
+`sha256:12c47c5b3221150691d9947d668eb9376ea195a6f403cbf75d6b390b6b260e27`
+and a passing secret scan. ACCEPT-003 remains open for reviewer sign-off and
+external/hosted/provider/customer evidence. No checkbox changed; score remains
+**244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-accept-003-deterministic-final-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 bundle after ACCEPT-013 boundary fix
 
 The additive private evidence bundle after the protocol date-boundary fix now
@@ -4967,6 +4982,7 @@ Evidence/problem: external validation is deliberately last. It validates the com
 - [ ] **ACCEPT-003** · acceptance evidence bundle · deps: ACCEPT-002 · Store commands, configurations, versions, digests, results, failures, limitations, and reviewer sign-off in a reproducible internal package. Commit(s): Private `8f18b81` writes `docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json` with exact source commits, command arguments, exit codes, parsed totals, and output hashes; the current `acceptance:evidence:bundle` rerun hashes 12 bounded evidence files and passes its secret scan. Reviewer sign-off and external/hosted evidence remain open. Evidence: `docs/shipping/evidence/accept-003-bundle-rerun-2026-10-14.md`.
 - **ACCEPT-003 current-head bundle addendum (2026-10-22):** The private acceptance manifest now contains **54** hashed evidence files and passes its secret scan after merged PRs #239/#240 and the current ACCEPT-002 verifier refresh. Keep the row unchecked for reviewer sign-off and external/hosted evidence. Evidence: `docs/shipping/evidence/accept-003-current-head-pr239-2026-10-22.md`.
 - **ACCEPT-003 current-head bundle addendum (2026-10-23):** The bundle generator now preserves those historical entries and adds the current merged CLI/Web evidence. The current-head run hashed **113** bounded evidence files, including **38** current-day entries, and passed its secret-like material scan. Keep the row unchecked for reviewer sign-off and external/hosted/provider/customer evidence. Evidence: `docs/shipping/evidence/accept-003-current-head-bundle-2026-10-23.md`.
+- **ACCEPT-003 deterministic bundle addendum (2026-10-23):** Private `97bf5989` adds duplicate/path-boundary/secret-content checks, sorted entries, and a deterministic content-manifest digest. The regenerated bundle contains **133 unique files** and passes its secret scan; focused bundle-builder coverage is **3/3**. Keep the row unchecked for reviewer sign-off and external/hosted/provider/customer evidence. Evidence: `docs/shipping/evidence/acceptance-evidence-bundle-accept-003-deterministic-2026-10-23.md`.
 - [x] **ACCEPT-004** · external authorized workflow protocol · deps: ACCEPT-003 · Freeze recruitment/questions/consent/data handling/success criteria for qualified teams without scraping or bulk outreach. No external contact without authorization. Commit(s): Private `454a0cf` adds the frozen protocol, per-repository consent-record template, and `pnpm acceptance:protocol:check` validator. It requires named owner consent, exact commit/scope, bounded network/data handling, expiry/revocation, founder approval, redacted evidence, and deletion/expiry recording. No external contact was performed; ACCEPT-005 onward remain open.
 - [ ] **ACCEPT-005** · run authorized external repository workflows · deps: ACCEPT-004 + founder authorization · Validate real release reconciliation without publishing findings; record product failures separately from requested scope. Private `acceptance:workflow:validate` now implements the exact consent/scope/redaction/deletion contract; focused tests pass **4/4**. First-party/public-fixture qualification is not external consented-team/recipient acceptance and does not close this row. Evidence: `docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md` and `docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`. Row remains open for the actual named-owner workflow and expiry/deletion record.
 - **ACCEPT-005 blocker addendum (2026-10-22):** The protocol validator passes, but reports `externalContact: not-performed` and `customerAcceptance: open`. The row still requires a named external owner's consent record, exact founder authorization, reproducible redacted release reconciliation, and fixture/evidence expiry or deletion proof. Adjacent merged-head truth checks pass **35/35**, **4/4**, and **4/4**; no checkbox changed. Evidence: `docs/shipping/evidence/accept-005-current-blocker-audit-2026-10-22.md`.

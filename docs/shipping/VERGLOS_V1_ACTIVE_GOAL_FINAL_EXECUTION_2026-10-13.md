@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-003 deterministic bundle manifest
+
+Private commit `97bf5989` hardens the evidence-bundle builder to reject
+duplicate/escaping paths, sort entries, reject secret-like evidence, and emit
+a deterministic content-manifest digest. Focused bundle-builder,
+correction-loop, corpus-triage, and final-regression contracts pass **16/16**.
+The regenerated bundle contains **133 unique hashed files**, with content
+manifest SHA-256
+`sha256:12c47c5b3221150691d9947d668eb9376ea195a6f403cbf75d6b390b6b260e27`
+and a passing secret scan. ACCEPT-003 remains open for reviewer sign-off and
+external/hosted/provider/customer evidence. The live score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten.
+Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-accept-003-deterministic-final-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-003 bundle after ACCEPT-013 boundary fix
 
 The additive private evidence bundle after the protocol date-boundary fix now

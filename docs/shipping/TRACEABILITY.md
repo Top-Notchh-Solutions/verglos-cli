@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 deterministic bundle manifest · 2026-10-23
+
+- **Source mapping:** Private commit `97bf5989` and
+  `scripts/build-acceptance-evidence-bundle.mjs`.
+- **Contract mapping:** Duplicate/escaping paths and secret-like content fail
+  closed; entries are sorted and the unique file metadata receives a
+  deterministic `manifestSha256`.
+- **Verification mapping:** Bundle-builder plus adjacent correction-loop,
+  corpus-triage, and final-regression contracts pass **16/16**.
+- **Artifact mapping:** 133 unique hashed files; content manifest SHA-256
+  `sha256:12c47c5b3221150691d9947d668eb9376ea195a6f403cbf75d6b390b6b260e27`;
+  secret scan passed.
+- **Acceptance mapping:** ACCEPT-003 remains open for reviewer and
+  external/hosted/provider/customer evidence. Score remains **244/36/280
+  (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-003-deterministic-final-2026-10-23.md`.
+
 ## ACCEPT-003 bundle after ACCEPT-013 boundary fix · 2026-10-23
 
 - **Artifact mapping:** Additive private bundle contains 133 hashed files;

@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-003 deterministic bundle manifest
+
+- **Implementation:** Private commit `97bf5989` hardens the evidence-bundle
+  builder against duplicate/escaping paths and secret-like content, sorts
+  entries, and emits a deterministic content-manifest digest.
+- **Verification:** Bundle-builder plus adjacent correction-loop,
+  corpus-triage, and final-regression contracts pass **16/16**.
+- **Artifact:** Regenerated bundle contains **133 unique files** with content
+  manifest SHA-256
+  `sha256:12c47c5b3221150691d9947d668eb9376ea195a6f403cbf75d6b390b6b260e27`;
+  secret scan passed.
+- **Disposition:** ACCEPT-003 remains open for reviewer and
+  external/hosted/provider/customer evidence. Score remains **244/36/280
+  (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-003-deterministic-final-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 bundle after ACCEPT-013 boundary fix
 
 - **Artifact:** Additive private bundle with **133** hashed evidence files.
