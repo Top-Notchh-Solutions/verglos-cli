@@ -23,6 +23,7 @@
     "acceptance:hunt:validate": "node scripts/validate-hunt-adjudication.mjs",
     "acceptance:evidence:bundle": "node scripts/build-acceptance-evidence-bundle.mjs",
     "acceptance:evidence:verify": "node scripts/verify-acceptance-evidence-bundle.mjs",
+    "shipping:backlog:audit": "node scripts/audit-shipping-backlog.mjs",
     "acceptance:study-protocols:check": "node scripts/validate-acceptance-study-protocols.mjs",
     "acceptance:release:reconcile": "node scripts/reconcile-release-gates.mjs",
     "acceptance:release:freeze": "node scripts/freeze-release-candidate.mjs",

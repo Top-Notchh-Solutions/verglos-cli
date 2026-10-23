@@ -1,5 +1,27 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · machine-checked backlog partition
+
+The checked-in `pnpm shipping:backlog:audit` command confirms the live
+backlog at **244 checked / 36 open / 280 total (87.1%)**. The 36 open entries
+are partitioned into **13 AppSec-dependent** entries and **23 non-AppSec**
+entries, with **0 unmapped** rows. No checkbox was changed by this audit. The
+result is recorded in
+`docs/shipping/evidence/backlog-audit-13-23-current-2026-10-23.md`.
+
+The additive acceptance bundle v7 contains **183 files** and passed the
+checked-in verifier with **0 mismatches** and secret scanning passed. Its
+manifest is
+`sha256:5f9203418fec346b9ec9c052e9a63efa30f29ced02002c9e636605c1614373d7`
+and its bundle-file SHA-256 is
+`8772edf3c1d3a5c4d9d562fe18483b34f2cb26cd49d0ffbd2945f2314ec707bc`.
+
+The 23 non-AppSec entries are 22 implementation rows plus the external
+customer/recipient acceptance gate. Owner-controlled and synthetic fixtures
+remain valid implementation evidence, but they do not assert external
+customer consent. The AppSec-dependent 13 remain held for the independent Hunt
+review and dependent rows.
+
 ## Latest continuation result · 2026-10-23 · clean 12-story substrate run
 
 The private acceptance harness ran against clean exact merged heads CLI
