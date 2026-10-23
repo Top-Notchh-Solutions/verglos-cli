@@ -45,6 +45,13 @@ test("reconciliation rejects a future completion timestamp", () => {
   );
 });
 
+test("reconciliation rejects a malformed candidate version", () => {
+  assert.throws(
+    () => reconcileReleaseGates(run({ candidate: { ...run().candidate, version: "candidate-latest" } })),
+    /candidate version is invalid/u,
+  );
+});
+
 test("a fully evidenced candidate can be marked ready for final sign-off", () => {
   const report = reconcileReleaseGates(run({
     rows: [{ id: "FINAL-WEB-007", state: "shipped", evidence: [{ path: "docs/shipping/evidence/web.md", sha256: digest("b") }] }],

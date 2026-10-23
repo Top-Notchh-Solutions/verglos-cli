@@ -4,6 +4,7 @@ import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 const SCHEMA = "verglos.private.release-candidate-freeze.v1";
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const COMMIT = /^[a-f0-9]{7,64}$/u;
+const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u;
 const GATE_STATES = new Set(["open", "passed"]);
 const DECISIONS = new Set(["open", "go", "no-go"]);
 const REQUIRED_ARTIFACT_KINDS = Object.freeze([
@@ -89,7 +90,7 @@ function validateRun(input) {
   if (!input.candidate || typeof input.candidate !== "object") throw new Error("candidate is required");
   if (typeof input.candidate.cliCommit !== "string" || !COMMIT.test(input.candidate.cliCommit)) throw new Error("candidate cliCommit is invalid");
   if (typeof input.candidate.webCommit !== "string" || !COMMIT.test(input.candidate.webCommit)) throw new Error("candidate webCommit is invalid");
-  if (typeof input.candidate.version !== "string" || input.candidate.version.length === 0 || input.candidate.version.length > 128) throw new Error("candidate version is invalid");
+  if (typeof input.candidate.version !== "string" || !VERSION.test(input.candidate.version)) throw new Error("candidate version is invalid");
   if (!Array.isArray(input.artifacts) || input.artifacts.length === 0 || input.artifacts.length > 1024) throw new Error("artifacts are invalid");
   if (!input.gates || typeof input.gates !== "object") throw new Error("gates are required");
   if (!DECISIONS.has(input.decision)) throw new Error("decision is invalid");

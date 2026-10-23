@@ -36,6 +36,13 @@ test("recorded GO fails closed while the candidate is incomplete", () => {
   assert.throws(() => freezeReleaseCandidate(run({ decision: "go" })), /GO cannot freeze/u);
 });
 
+test("freeze rejects a malformed candidate version", () => {
+  assert.throws(
+    () => freezeReleaseCandidate(run({ candidate: { ...run().candidate, version: "candidate-latest" } })),
+    /candidate version is invalid/u,
+  );
+});
+
 test("all artifacts and gates passed produce a ready-for-signoff manifest", () => {
   const report = freezeReleaseCandidate(run({
     artifacts: completeArtifacts(),

@@ -71,6 +71,13 @@ test("final regression produces a go recommendation only for clean evidence and 
   assert.equal(report.release.status, "ready-for-signoff");
 });
 
+test("final regression rejects a malformed candidate version", () => {
+  assert.throws(
+    () => runFinalRegression(input({ candidate: { ...input().candidate, version: "candidate-latest" } })),
+    /candidate version is invalid/u,
+  );
+});
+
 test("final regression records performance and finding deltas without hiding them", () => {
   const source = input({
     runs: input().runs.map((run, index) => index === 0

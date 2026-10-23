@@ -5,6 +5,7 @@ const INPUT_SCHEMA = "verglos.private.final-regression.v1";
 const OUTPUT_SCHEMA = "verglos.private.final-regression-result.v1";
 const VERIFICATION_SCHEMA = "verglos.private.public-oss-corpus-verification.v1";
 const COMMIT = /^[a-f0-9]{7,64}$/u;
+const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u;
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const SAFE_PATH = /^(?!\/)(?!.*\.\.)[^\u0000-\u001f]{1,512}$/u;
 const STATUS = new Set(["passed", "failed"]);
@@ -138,7 +139,7 @@ function validateInput(input) {
   for (const key of ["cliCommit", "webCommit"]) {
     if (typeof input.candidate[key] !== "string" || !COMMIT.test(input.candidate[key])) throw new Error(`candidate ${key} is invalid`);
   }
-  if (typeof input.candidate.version !== "string" || input.candidate.version.length === 0 || input.candidate.version.length > 128) throw new Error("candidate version is invalid");
+  if (typeof input.candidate.version !== "string" || !VERSION.test(input.candidate.version)) throw new Error("candidate version is invalid");
   if (!input.corpus || typeof input.corpus !== "object") throw new Error("corpus is required");
   if (!Array.isArray(input.runs) || input.runs.length === 0 || input.runs.length > MAX_RUNS) throw new Error("regression runs are invalid");
   if (!input.thresholds || typeof input.thresholds !== "object") throw new Error("thresholds are required");

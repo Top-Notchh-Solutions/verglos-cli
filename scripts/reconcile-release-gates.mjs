@@ -4,6 +4,7 @@ import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 const SCHEMA = "verglos.private.release-gate-reconciliation.v1";
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const COMMIT = /^[a-f0-9]{7,64}$/u;
+const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u;
 const ROW_ID = /^[A-Z0-9]+(?:-[A-Z0-9]+)*$/u;
 const STATES = new Set(["shipped", "partial", "planned"]);
 const GATE_STATES = new Set(["open", "passed"]);
@@ -107,6 +108,7 @@ function validateRun(input) {
     }
   }
   if (!COMMIT.test(input.candidate.cliCommit) || !COMMIT.test(input.candidate.webCommit)) throw new Error("candidate commits are invalid");
+  if (!VERSION.test(input.candidate.version)) throw new Error("candidate version is invalid");
   if (!Array.isArray(input.rows) || input.rows.length === 0 || input.rows.length > 512) throw new Error("rows are invalid");
   if (!input.gates || typeof input.gates !== "object") throw new Error("gates are required");
   if (!input.decision || typeof input.decision !== "object") throw new Error("decision is required");
