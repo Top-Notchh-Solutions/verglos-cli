@@ -14,6 +14,7 @@
     "pack:public": "node scripts/pack-public-packages.mjs .artifacts/public-packages",
     "acceptance:corpus:verify": "node scripts/verify-acceptance-corpus.mjs",
     "acceptance:corpus:triage": "node scripts/triage-public-oss-corpus.mjs",
+    "acceptance:correction:run": "node scripts/run-acceptance-correction-loop.mjs",
     "acceptance:stories:verify": "node scripts/verify-acceptance-stories.mjs",
     "acceptance:protocol:check": "node scripts/validate-acceptance-protocol.mjs",
     "acceptance:comprehension:score": "node scripts/score-comprehension-test.mjs",
