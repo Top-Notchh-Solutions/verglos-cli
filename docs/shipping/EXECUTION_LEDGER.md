@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## npm alpha.4 publication observation · 2026-10-24
+
+- **Candidate:** CLI `aad2c74395a5c381c955ab9dfab7462295564840`, version
+  `2.0.0-alpha.4`.
+- **Observation:** Read-only verifier accepted **0/7** packages. `verglos` and
+  `@verglos/hunt` returned 404; the other five scoped package attestations
+  bound to older commit `ed318f06b97771f45cc6970f745868fb1aa09404`.
+- **Boundary:** No npm token, tag, Actions workflow, registry write, or final
+  release sign-off was used.
+- **Disposition:** Trusted complete publication/provenance remains open; no
+  checkbox changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md`.
+- **Bundle:** Additive v19 contains **244** hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:0ac911d9fb9d3280b57d51eb69a34d4dd9cd2573f00b108f24a88f3a8094013a`.
+
 ## QUAL-WEB-006 dashboard contract recheck · 2026-10-24
 
 - **Source:** Web `9005d5ed5182b1d29159c0bb65c8ac696928baed`.

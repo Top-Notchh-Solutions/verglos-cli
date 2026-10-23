@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · npm alpha.4 publication observation
+
+The read-only registry verifier accepted **0/7** packages for candidate
+`2.0.0-alpha.4` at CLI `aad2c743`. Two packages are absent and five have
+attestations bound to an older commit. This confirms the trusted-publication
+and immutable-provenance gate is still open; no npm write, tag, Actions run, or
+release approval occurred. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md`.
+The additive bundle v19 verifies **244/244** files with zero mismatches and
+manifest `sha256:0ac911d9fb9d3280b57d51eb69a34d4dd9cd2573f00b108f24a88f3a8094013a`.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard contract recheck
 
 Current Web `9005d5e` passed the fail-closed dashboard qualification contract

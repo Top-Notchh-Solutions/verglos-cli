@@ -1,5 +1,24 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · npm alpha.4 publication observation
+
+The read-only npm verifier checked the seven-package `2.0.0-alpha.4`
+candidate from CLI `aad2c74395a5c381c955ab9dfab7462295564840` and accepted
+**0/7**. `verglos` and `@verglos/hunt` are HTTP 404; the other five scoped
+package records exist but their SLSA attestations bind to older commit
+`ed318f06b97771f45cc6970f745868fb1aa09404`, not the current candidate.
+Evidence:
+`docs/shipping/evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md`.
+
+No npm token, tag, Actions workflow, registry write, or final release
+sign-off was used. This establishes the exact remaining trusted-publication
+boundary; no checkbox changed. The score remains **245 checked / 35 open / 280
+total (87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
+The additive bundle v19 verifies **244/244** files with zero mismatches,
+passes secret scanning, and matches manifest
+`sha256:0ac911d9fb9d3280b57d51eb69a34d4dd9cd2573f00b108f24a88f3a8094013a`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-npm-observation-v19.json`.
+
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-006 dashboard contract recheck
 
 Current Web `9005d5ed5182b1d29159c0bb65c8ac696928baed` passed the fail-closed

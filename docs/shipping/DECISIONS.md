@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record npm alpha.4 publication observation
+
+- **Decision:** Record the registry state without attempting publication.
+- **Result:** Candidate CLI `aad2c743` accepted **0/7** packages. `verglos`
+  and `@verglos/hunt` are absent; five scoped package attestations bind to
+  older commit `ed318f06`.
+- **Boundary:** No token, tag, Actions workflow, registry write, or final
+  release sign-off was used.
+- **Disposition:** Keep `DIST-002/003/006` open for complete trusted
+  publication and immutable provenance. Score remains **245/35/280 (87.5%)**.
+- **Evidence file:** `evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md`.
+- **Bundle:** Additive v19 contains **244** hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:0ac911d9fb9d3280b57d51eb69a34d4dd9cd2573f00b108f24a88f3a8094013a`.
+
 ## 2026-10-24 · record QUAL-WEB-006 dashboard contract recheck
 
 - **Decision:** Record the current Web dashboard qualification contract as

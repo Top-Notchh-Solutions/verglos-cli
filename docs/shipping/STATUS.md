@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · npm alpha.4 publication observation
+
+The read-only npm verifier accepted **0/7** packages for candidate
+`2.0.0-alpha.4` from CLI `aad2c743`: `verglos` and `@verglos/hunt` are 404;
+the other five scoped packages have provenance bound to older commit
+`ed318f06`, not this candidate. No registry write or release action occurred.
+Score remains **245/35/280 (87.5%)** and no checkbox changed. Evidence:
+`evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md`.
+The additive bundle v19 verifies **244/244** files with zero mismatches and
+manifest `sha256:0ac911d9fb9d3280b57d51eb69a34d4dd9cd2573f00b108f24a88f3a8094013a`.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard contract recheck
 
 Current Web `9005d5e` passed the fail-closed dashboard contract **4/4** and
