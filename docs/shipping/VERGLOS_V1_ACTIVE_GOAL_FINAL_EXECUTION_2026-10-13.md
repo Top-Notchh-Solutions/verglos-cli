@@ -2995,3 +2995,22 @@ and file SHA-256
 Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/accept-005-authorized-workflow-version-binding-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · ACCEPT-013 correction-loop version binding
+
+Private shipping commit `068f12e6` now binds the ACCEPT-013 held-out
+correction-loop candidate to the bounded SemVer contract. The malformed
+candidate regression passed, the adjacent acceptance/release suite passed
+**60/60**, study-protocol validation passed, syntax checks passed, and
+`git diff --check` passed.
+
+This is protocol-integrity evidence only. `ACCEPT-013` remains unchecked for
+the actual frozen-corpus run, independent adjudication, required
+customer/recipient acceptance, provider/hosted evidence, and final release
+decision. No external state changed and nothing was deleted or overwritten.
+The additive bundle contains **151** files with manifest
+`sha256:44a5baea01b1a3ca37e8f13ac61d242b3957e97bf2986c470938a5823d7c159f`
+and file SHA-256
+`58542ed8c80d1ce6c9a4d7af388551bd2405cdec2b239de560d8ee824713829b`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-013-correction-loop-version-binding-2026-10-23.md`.

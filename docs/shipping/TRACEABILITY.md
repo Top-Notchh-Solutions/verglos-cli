@@ -9437,6 +9437,20 @@ changed. See
   was deleted or overwritten.
 - **Evidence:** `evidence/accept-005-authorized-workflow-version-binding-2026-10-23.md`.
 
+## ACCEPT-013 correction-loop version binding · 2026-10-23
+
+- **Source mapping:** Private shipping commit `068f12e6`.
+- **Contract mapping:** The held-out correction-loop validator rejects
+  candidate versions outside the bounded SemVer contract.
+- **Verification mapping:** Adjacent acceptance/release contracts **60/60**,
+  study-protocol validation, syntax checks, and diff check passed.
+- **Acceptance mapping:** This is protocol-integrity evidence only. Keep
+  `ACCEPT-013` unchecked for the actual frozen-corpus run, independent
+  adjudication, required customer/recipient acceptance, provider/hosted
+  evidence, and final release decision. Score remains **244/36/280 (87.1%)**.
+  Nothing was deleted or overwritten.
+- **Evidence:** `evidence/accept-013-correction-loop-version-binding-2026-10-23.md`.
+
 ## ACCEPT-012 triage integrity boundary · 2026-10-23
 
 - **Source mapping:** Private commit `c46bbdfd`.

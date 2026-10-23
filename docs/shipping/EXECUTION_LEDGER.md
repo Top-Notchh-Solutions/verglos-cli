@@ -15429,3 +15429,19 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-005-authorized-workflow-version-binding-2026-10-23.md`;
   additive bundle manifest `sha256:043dd10fe81dcddcf80318e9ed71da0bc48075b20e147d68fa4c55412a23eef9`.
+
+## ACCEPT-013 correction-loop version binding · 2026-10-23
+
+- **Source mapping:** Private shipping implementation commit `068f12e6`.
+- **Contract mapping:** The held-out correction-loop validator now requires a
+  bounded SemVer candidate version and rejects malformed identity before
+  evaluating observations or adjudications.
+- **Verification mapping:** Adjacent acceptance/release contracts **60/60**,
+  study-protocol validation, syntax checks, and `git diff --check` passed.
+- **Acceptance mapping:** Keep `ACCEPT-013` open for the actual frozen-corpus
+  run, independent adjudication, required customer/recipient acceptance,
+  provider/hosted evidence, and final release decision. No external state
+  changed and nothing was deleted or overwritten. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-013-correction-loop-version-binding-2026-10-23.md`;
+  additive bundle manifest `sha256:44a5baea01b1a3ca37e8f13ac61d242b3957e97bf2986c470938a5823d7c159f`.
