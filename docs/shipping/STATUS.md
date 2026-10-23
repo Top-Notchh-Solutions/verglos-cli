@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-006 rollback no-follow hardening merged
+
+CLI PR #189 merged normally into `main` as `6ad18792` from source
+`3d4bca1f`. Rollback reference and rehearsal-manifest reads now use
+`O_RDONLY | O_NOFOLLOW` when available, while retaining bounded regular-file,
+opened-handle identity, and size checks. Local package tests, typecheck, build,
+and diff check passed; the full hosted validator, self-scan, in-toto, and
+Ubuntu/macOS/Windows Node 20/22/24 set passed on retry attempt 2 after a
+Windows Node 24 post-cleanup failure on attempt 1. `DIST-006` remains open for
+authenticated provider/registry/engine-feed/signing/deployment rollback or
+revocation and final acceptance. Score remains **244 checked / 36 open / 280
+total (87.1%)**. No provider, Production, customer, publication, tag, or
+release-sign-off state changed. Nothing was deleted. Evidence:
+`evidence/dist-006-no-follow-pr189-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-003 release-notes sidecar merged
 
 PR #188 merged normally into CLI `main` at `1369384f` after the full

@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · DIST-006 rollback no-follow hardening merged
+
+CLI PR #189 merged normally as `6ad18792` from `3d4bca1f`. Rollback input
+reads now use `O_NOFOLLOW` when available in addition to bounded regular-file
+and opened-handle identity/size validation. Local tests, typecheck, build,
+diff check, official validators, Verglos scan, in-toto, and all Ubuntu/macOS/
+Windows Node 20/22/24 checks passed; the Windows Node 24 post-cleanup failure
+on the first attempt cleared on retry attempt 2. This advances DIST-006's code
+side only. Keep DIST-006 open for authenticated provider rollback/revocation,
+operational evidence, acceptance, and final release mapping. Score is
+**244/36/280 (87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-006-no-follow-pr189-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-003 release-notes sidecar merged
 
 PR #188 merged normally at `1369384f` after the complete hosted check set

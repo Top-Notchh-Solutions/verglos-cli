@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## DIST-006 rollback no-follow hardening · 2026-10-23
+
+- **Source mapping:** CLI PR #189 source `3d4bca1f` merged normally into
+  `main` as `6ad18792ae94a1ac3e610554246e2fefc2cc26d1`.
+- **Contract mapping:** Rollback reference and rehearsal-manifest reads use
+  `O_RDONLY | O_NOFOLLOW` when available after bounded regular-file validation;
+  opened-handle identity and size checks remain in force.
+- **Verification mapping:** Local tests, typecheck, build, diff check, official
+  validators, Verglos self-scan, in-toto, and Ubuntu/macOS/Windows Node 20/22/
+  24 checks passed on retry attempt 2.
+- **Acceptance mapping:** No authenticated provider rollback/revocation or
+  final acceptance occurred. DIST-006 remains unchecked; score remains
+  **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/dist-006-no-follow-pr189-2026-10-23.md`.
+
 ## DIST-003 release-notes sidecar · 2026-10-23
 
 - **Source mapping:** CLI PR #188 source `51b60b8d` merged normally into

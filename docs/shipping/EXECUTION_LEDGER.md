@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-006 rollback no-follow hardening merged
+
+- **Implementation:** CLI PR #189 adds `O_NOFOLLOW` to rollback reference and
+  rehearsal-manifest opens when available, preserving bounded regular-file,
+  opened-handle identity, and size validation.
+- **Merge:** PR #189 merged normally from `3d4bca1f` as
+  `6ad18792ae94a1ac3e610554246e2fefc2cc26d1`; no squash, force push, branch
+  deletion, or file deletion occurred.
+- **Verification:** Local package tests, typecheck, build, and diff check
+  passed. Hosted official validators, Verglos self-scan, in-toto, and the
+  complete Ubuntu/macOS/Windows Node 20/22/24 matrix passed on retry attempt
+  2; the first Windows Node 24 attempt failed only during post-cleanup after
+  its test step passed.
+- **Boundary:** Keep DIST-006 unchecked for authenticated provider/registry,
+  engine-feed, signing-identity, and Web-deployment rollback/revocation,
+  operational review, acceptance, and final release mapping. No external
+  provider, Production, customer, publication, tag, or release-sign-off state
+  changed. Score remains **244/36/280 (87.1%)**. Nothing was deleted.
+- **Evidence:** `evidence/dist-006-no-follow-pr189-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-003 release-notes sidecar merged
 
 - **Implementation:** Added `scripts/generate-release-notes.mjs` and its

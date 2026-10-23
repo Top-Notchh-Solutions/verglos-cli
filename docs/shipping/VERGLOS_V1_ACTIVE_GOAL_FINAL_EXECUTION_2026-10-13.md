@@ -52,6 +52,27 @@ in addition to the product rows whose own evidence is still incomplete. The
 public-open-source benchmark path is authorized now. The separately held
 security-review track is unchanged.
 
+## Latest continuation result · 2026-10-23 · DIST-006 rollback no-follow hardening
+
+CLI PR #189 merged normally into `main` as
+`6ad18792ae94a1ac3e610554246e2fefc2cc26d1` from source
+`3d4bca1f3d306a2d69798d0af58f1361cec69620`. Rollback reference and
+rehearsal-manifest reads now open validated regular files with
+`O_RDONLY | O_NOFOLLOW` when available, retaining bounded-size, opened-handle
+identity, and regular-file checks. Local package tests, typecheck, build, and
+diff check passed. The full hosted validator, Verglos scan, in-toto, and
+Ubuntu/macOS/Windows Node 20/22/24 check set passed on retry attempt 2 after a
+Windows Node 24 post-cleanup failure on attempt 1.
+
+This closes the code-side hardening slice only; it does not close DIST-006.
+Authenticated provider/registry/engine-feed/signing/deployment rollback or
+revocation, operational evidence, and final acceptance remain open. No
+provider, Production, customer, publication, tag, or final release action
+occurred, and `VERGLOS_FINAL_RELEASE_READY` remains unset. The live score is
+still **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
+Evidence:
+`docs/shipping/evidence/dist-006-no-follow-pr189-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · npm CI secret rotation
 
 The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`

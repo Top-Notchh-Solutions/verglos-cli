@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · DIST-006 rollback input race hardening
+
+- **Decision:** Adopt the merged CLI `O_NOFOLLOW` open flag for rollback
+  references and rehearsal manifests where the host platform exposes it.
+- **Reason:** Preserve the fail-closed bounded-file contract across the
+  validation-to-read boundary and reduce pathname-following race exposure.
+- **Verification:** PR #189 merged normally as `6ad18792`; local and complete
+  hosted verification passed on retry attempt 2.
+- **Disposition:** This records implementation progress only. It does not
+  authorize or claim authenticated provider rollback/revocation, Production,
+  customer, publication, or final release state. DIST-006 remains open and
+  the score remains **244/36/280 (87.1%)**. Nothing was deleted.
+- **Evidence:** `evidence/dist-006-no-follow-pr189-2026-10-23.md`.
+
 ## 2026-10-23 · record owner authorization for non-AppSec execution
 
 - **Decision:** Record Anurag Yadav's direct owner authorization for all

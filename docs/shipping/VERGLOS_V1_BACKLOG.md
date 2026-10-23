@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-006 rollback no-follow hardening merged
+
+CLI PR #189 merged normally as `6ad18792` from `3d4bca1f`. Rollback input
+reads now use `O_NOFOLLOW` when available while retaining bounded regular-file
+and opened-handle identity/size checks. Local and hosted verification passed
+on retry attempt 2. This is implementation progress only: DIST-006 remains
+open for authenticated provider rollback/revocation and final acceptance. No
+checkbox changed; the live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/dist-006-no-follow-pr189-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-003 release-notes sidecar merged
 
 CLI PR #188 merged normally into `main` at `1369384f` after all hosted
