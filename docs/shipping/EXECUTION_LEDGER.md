@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## Current implementation continuation · 2026-10-23
+
+- **QUAL-WEB-006:** Web PR #259 merged as `42fe33e`; bounded no-follow
+  dashboard capture reads and identity/size rechecks are covered by focused
+  tests **4/4**. The serial Web suite passed **904/928** with 24 designed
+  skips and 0 failures.
+- **DIST-002/003/006:** CLI head `7d07066f` passed build **8/8**, typecheck
+  **14/14**, full Turbo test **13/13**, and focused release contracts **45/45**.
+- **Hosted limitation:** Web runs `39992347692` and `39992347755` failed with
+  zero executed steps in every job; no hosted result is claimed.
+- **Disposition:** Score remains **244/36/280 (87.1%)**. No provider,
+  Production, publication, customer-data, deletion, or release action
+  occurred. Evidence:
+  `evidence/qual-web-006-dashboard-capture-read-boundary-pr259-2026-10-23.md`
+  and `evidence/dist-002-003-006-current-main-requalification-2026-10-23.md`.
+
 ## Web Vercel Production and Preview receipts · 2026-10-23
 
 - **Production:** Vercel deployment `dpl_Cij5ABETkTpdRz2hmAs7Yfhtxz3Y` is
