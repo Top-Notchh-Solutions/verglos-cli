@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current CLI public-OSS mapping
+
+- **Implementation mapping:** CLI commit `7d07066f967a2e7899aca6b51f04f306b7071013`
+  maps the owner-authorized POC run to the frozen eight-fixture corpus.
+- **Execution mapping:** Eight exact-commit full clones completed with
+  **13,494 files walked**, **351 bounded observations**, **23 rule groups**,
+  all four required architecture shapes, and **0 coverage gaps**.
+- **Acceptance mapping:** This advances ACCEPT-011/012 technical POC inputs
+  only; it does not prove customer/recipient acceptance, adjudication,
+  independent review, AppSec/Hunt, or final release. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md`.
+
 ## 2026-10-24 · Production public-surface mapping
 
 - **Provider mapping:** Vercel deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL`

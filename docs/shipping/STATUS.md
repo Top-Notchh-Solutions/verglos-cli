@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current CLI public-OSS execution
+
+CLI `7d07066f` completed the owner-authorized eight-fixture public-OSS run:
+**13,494 files walked**, **351 bounded observations**, all four architecture
+shapes covered, and **0 coverage gaps**. Telemetry and source upload were
+disabled; reports remain private local derived artifacts. This advances
+ACCEPT-011/012 POC inputs but is not customer acceptance, independent review,
+AppSec/Hunt evidence, or final release approval. Score remains
+**244/36/280 (87.1%)**. Evidence:
+`evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md`.
+
 ## 2026-10-24 · Production public-surface recheck
 
 Vercel Production deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` is READY.

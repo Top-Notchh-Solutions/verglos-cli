@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current CLI public-OSS execution
+
+- **Decision:** Run the owner-authorized public-OSS POC path against the
+  frozen eight-fixture exact-commit corpus using the current CLI; retain only
+  bounded metadata and hashes in the shipping repository.
+- **Verification:** CLI `7d07066f` completed **8 fixtures / 13,494 files / 351
+  findings / 23 rule groups / 0 coverage gaps** with telemetry and source
+  upload disabled.
+- **Disposition:** This is authorized technical POC input, not customer or
+  recipient acceptance. ACCEPT-011/012 dependencies, adjudication,
+  independent review, AppSec/Hunt, and final release remain open. No checkbox
+  changed; score remains **244/36/280 (87.1%)**. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md`.
+
 ## 2026-10-24 · record Production public-surface recheck
 
 - **Decision:** Record the current Vercel Production route result as bounded
