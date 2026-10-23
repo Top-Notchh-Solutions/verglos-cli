@@ -150,6 +150,7 @@ const paths = [
   "docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md",
   "docs/shipping/evidence/accept-005-public-oss-workflow-contract-2026-10-24.md",
   "docs/shipping/evidence/accept-005-public-oss-workflow-bundle-2026-10-24.md",
+  "docs/shipping/evidence/accept-006-participant-provenance-2026-10-24.md",
   "docs/shipping/evidence/acceptance-input-read-boundaries-2026-10-23.md",
   "docs/shipping/evidence/acceptance-evidence-writer-boundaries-2026-10-23.md",
   "docs/shipping/evidence/acceptance-stories-current-head-2026-10-23.md",

@@ -12,6 +12,7 @@ export const COMPREHENSION_QUESTION_IDS = Object.freeze([
 ]);
 
 const PARTICIPANT_ROLES = new Set(["developer", "lead", "recipient"]);
+const PARTICIPANT_KINDS = new Set(["consenting-participant", "owner-controlled-synthetic"]);
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const MAX_ANSWER_BYTES = 4096;
 const MAX_TERM_BYTES = 160;
@@ -37,6 +38,7 @@ export function scoreComprehensionRun(input, { now = new Date() } = {}) {
 
   const artifact = validateArtifact(run.artifact);
   const participants = run.participants.map((participant) => scoreParticipant(participant, artifact, completedAt));
+  const participantKinds = [...new Set(participants.map((participant) => participant.participantKind))];
   const criticalHallucinations = participants.reduce((total, participant) => total + participant.criticalHallucinations, 0);
   const failedParticipants = participants.filter((participant) => !participant.passed).length;
   const passed = criticalHallucinations === 0 && failedParticipants === 0;
@@ -58,11 +60,13 @@ export function scoreComprehensionRun(input, { now = new Date() } = {}) {
       criticalHallucinations,
       requiredCorrectPerParticipant: 5,
       questionCount: COMPREHENSION_QUESTION_IDS.length,
+      participantKinds: Object.freeze(participantKinds),
     }),
     gate: Object.freeze({
       participantRun: passed ? "passed" : "failed",
       independentReview: "required",
       acceptanceStatus: "open",
+      evidenceClass: participantKinds.length === 1 ? participantKinds[0] : "mixed-participant-sources",
     }),
   });
 }
@@ -115,6 +119,7 @@ function scoreParticipant(input, artifact, completedAt) {
   if (!input || typeof input !== "object") throw new Error("participant is invalid");
   if (typeof input.participantDigest !== "string" || !SHA256.test(input.participantDigest)) throw new Error("participant identity must be a digest");
   if (typeof input.role !== "string" || !PARTICIPANT_ROLES.has(input.role)) throw new Error("participant role is invalid");
+  if (typeof input.participantKind !== "string" || !PARTICIPANT_KINDS.has(input.participantKind)) throw new Error("participant kind is invalid");
   const consentedAt = parseDate(input.consentedAt, "participant consentedAt");
   const expiresAt = parseDate(input.expiresAt, "participant expiresAt");
   if (consentedAt > completedAt || expiresAt <= completedAt || expiresAt <= consentedAt) {
@@ -161,6 +166,7 @@ function scoreParticipant(input, artifact, completedAt) {
   return Object.freeze({
     participantDigest: input.participantDigest,
     role: input.role,
+    participantKind: input.participantKind,
     correctAnswers: correctCount,
     questionCount: scored.length,
     criticalHallucinations,

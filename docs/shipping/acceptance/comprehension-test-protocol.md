@@ -11,6 +11,9 @@ Verglos evidence artifact without coaching or marketing language.
 ## Participant and procedure
 
 - Recruit only named, consenting participants; no scraping or bulk outreach.
+- Every recorded participant must declare `participantKind:
+  consenting-participant`; `owner-controlled-synthetic` is permitted only for
+  engineering contract fixtures and is never participant acceptance.
 - Use the same redacted artifact and task instructions for every participant.
 - Do not show the answer key, product copy, or implementation source before
   responses are recorded.

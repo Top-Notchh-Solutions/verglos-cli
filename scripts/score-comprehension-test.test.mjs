@@ -47,6 +47,7 @@ function run(overrides = {}) {
     participants: [{
       participantDigest,
       role: "developer",
+      participantKind: "consenting-participant",
       consentedAt: "2026-10-19T10:00:00.000Z",
       expiresAt: "2026-10-20T10:00:00.000Z",
       answers: answers(),
@@ -123,4 +124,20 @@ test("rejects secret-like material in the artifact or protocol input", () => {
 test("rejects a rubric changed without updating the artifact digest", () => {
   const source = run({ artifact: { ...artifact, rubric: { ...artifact.rubric, "remaining-risk": [["provider"], ["acceptance", "hidden"]] } } });
   assert.throws(() => scoreComprehensionRun(source), /artifact digest does not match rubric payload/u);
+});
+
+test("classifies owner-controlled synthetic runs without upgrading acceptance", () => {
+  const source = run({ participants: [{ ...run().participants[0], participantKind: "owner-controlled-synthetic" }] });
+  const report = scoreComprehensionRun(source, { now: new Date("2026-10-19T12:01:00.000Z") });
+  assert.equal(report.gate.participantRun, "passed");
+  assert.equal(report.gate.evidenceClass, "owner-controlled-synthetic");
+  assert.deepEqual(report.aggregate.participantKinds, ["owner-controlled-synthetic"]);
+  assert.equal(report.gate.acceptanceStatus, "open");
+});
+
+test("rejects missing or unknown participant provenance", () => {
+  const missing = run();
+  delete missing.participants[0].participantKind;
+  assert.throws(() => scoreComprehensionRun(missing), /participant kind is invalid/u);
+  assert.throws(() => scoreComprehensionRun(run({ participants: [{ ...run().participants[0], participantKind: "synthetic-customer" }] })), /participant kind is invalid/u);
 });
