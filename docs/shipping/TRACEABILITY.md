@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 deletion scope boundary merged · 2026-10-23
+
+- **Source mapping:** Web PR #255 merged normally as
+  `5c48971efdc3aeb55f1fc391a9db5f9a78b84bb4`, preserving source commit
+  `17517f80c48689d19501de64e9d63755e15b9872`.
+- **Contract mapping:** The PostgreSQL deletion store rejects a supported
+  hosted kind unless it is present in the claimed job scope, before opening a
+  transaction; the regression proves no database call occurs.
+- **Verification mapping:** Focused deletion contracts **24/24**; typecheck;
+  build **49/49** routes; and diff checks passed. Required hosted runs failed
+  with zero steps and no runner, so no hosted result is claimed.
+- **Artifact mapping:** 172 hashed bundle files; manifest SHA-256
+  `sha256:5ffbbd8dfb57c278b69e211bf916361e0bd27e339a1a47bfd57fee80fc40e89e`;
+  bundle file SHA-256
+  `fcbb0e1f97bc3d573802c8650ed3983bd8d924fcf714669b04be869acf15593c`;
+  secret scan passed.
+- **Acceptance mapping:** QUAL-WEB-005 remains open for authenticated
+  deletion E2E, legal/retention/customer-held decisions, hosted/browser/field
+  evidence, independent review, and final acceptance. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/qual-web-005-store-scope-pr255-merge-2026-10-23.md`.
+
 ## DIST-002 registry response boundary merged · 2026-10-23
 
 - **Source mapping:** CLI PR #193 merged normally as

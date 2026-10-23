@@ -1,5 +1,29 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-005 deletion scope boundary merged · 2026-10-23
+
+- **Source mapping:** Web PR #255 merged normally as
+  `5c48971efdc3aeb55f1fc391a9db5f9a78b84bb4`, preserving source commit
+  `17517f80c48689d19501de64e9d63755e15b9872`.
+- **Contract mapping:** The deletion store rejects an out-of-scope hosted
+  kind before any database transaction is opened; the regression asserts the
+  fail-closed adapter boundary.
+- **Verification mapping:** Focused contracts **24/24**; typecheck; build
+  **49/49** routes; and diff checks passed. Required hosted jobs failed with
+  zero steps and no runner, so no hosted source result is claimed.
+- **Artifact mapping:** Additive bundle contains 172 hashed files with
+  manifest SHA-256
+  `sha256:5ffbbd8dfb57c278b69e211bf916361e0bd27e339a1a47bfd57fee80fc40e89e`
+  and bundle file SHA-256
+  `fcbb0e1f97bc3d573802c8650ed3983bd8d924fcf714669b04be869acf15593c`;
+  secret scan passed.
+- **Acceptance mapping:** No database, customer, provider, Production,
+  deployment, or deletion operation occurred. QUAL-WEB-005 remains open for
+  its remaining external/hosted/browser/field/independent/final gates. No
+  checkbox or external state changed; nothing was deleted or overwritten.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/qual-web-005-store-scope-pr255-merge-2026-10-23.md`.
+
 ## DIST-002 registry response boundary merged · 2026-10-23
 
 - **Source mapping:** CLI PR #193 merged normally as

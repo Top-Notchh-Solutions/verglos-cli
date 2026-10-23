@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · merge QUAL-WEB-005 deletion scope boundary
+
+- **Decision:** Promote Web PR #255's requested-kind scope guard through the
+  normal merge path. A direct store caller cannot delete a valid hosted kind
+  outside the claimed job scope before the adapter opens a transaction.
+- **Implementation:** Merge commit
+  `5c48971efdc3aeb55f1fc391a9db5f9a78b84bb4` preserves source commit
+  `17517f80c48689d19501de64e9d63755e15b9872`.
+- **Verification:** Focused deletion contracts **24/24**, typecheck, and
+  **49/49** route build passed. Required hosted jobs failed with zero steps and
+  no runner; no hosted source result is claimed.
+- **Disposition:** This is implementation progress only. QUAL-WEB-005 stays
+  open for deletion E2E, legal/retention/customer-held decisions,
+  hosted/browser/field evidence, independent review, and final acceptance.
+  No database, customer, provider, Production, deployment, or deletion
+  operation occurred. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/qual-web-005-store-scope-pr255-merge-2026-10-23.md`.
+
 ## 2026-10-23 · merge DIST-002 registry response boundary
 
 - **Decision:** Promote CLI PR #193's bounded npm registry metadata

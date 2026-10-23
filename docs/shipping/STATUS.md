@@ -1,5 +1,26 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · QUAL-WEB-005 deletion scope boundary merged
+
+Web PR #255 merged normally as `5c48971efdc3aeb55f1fc391a9db5f9a78b84bb4`,
+preserving source commit `17517f80c48689d19501de64e9d63755e15b9872`. The
+account-deletion store rejects an out-of-scope hosted kind before opening a
+database transaction. Focused contracts passed **24/24**; typecheck passed;
+build generated **49/49** routes; and diff checks passed. Required hosted jobs
+`39976992891` and `39976992591` failed before repository execution with zero
+steps and no runner; GitGuardian and Vercel Preview Comments passed, so hosted
+source qualification is not claimed. No database, customer, provider,
+Production, deployment, or deletion operation occurred. QUAL-WEB-005 remains
+open for deletion E2E, legal/retention, hosted/browser/field,
+independent-review, and acceptance gates. The additive 172-file bundle has
+manifest
+`sha256:5ffbbd8dfb57c278b69e211bf916361e0bd27e339a1a47bfd57fee80fc40e89e`
+and file SHA-256
+`fcbb0e1f97bc3d573802c8650ed3983bd8d924fcf714669b04be869acf15593c`;
+secret scan passed. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/qual-web-005-store-scope-pr255-merge-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 registry response boundary merged
 
 CLI PR #193 merged normally into `main` as
