@@ -1,5 +1,25 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · owner-controlled human review recorded
+
+At **2026-10-24 01:18:38 IST** (`2026-10-23T19:48:38Z`), Anurag Yadav,
+owner of Top Notchh Solutions and Verglos, recorded an owner-controlled human
+review of the current backlog, implementation evidence, and acceptance boundary.
+The owner states that he is the only human currently working on Verglos and
+personally performed the review. This records human review of the technical
+implementation/evidence-preparation scope for continued execution.
+
+It does not represent independent review, customer/recipient acceptance,
+provider/Production action, field evidence, AppSec/Hunt review, or final
+release/go-no-go. Rows requiring those distinct events remain unchecked. The
+score remains **244 checked / 36 open / 280 total (87.1%)**, with **13
+AppSec-dependent / 23 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/owner-controlled-human-review-2026-10-24.md`. The
+additive acceptance bundle includes the record as **205/205** files, verifies
+with zero mismatches, passes secret scanning, and matches manifest
+`sha256:7cd245b3ea7f9ecf63bd8dd4b059e84a992a549f05dc951efec29baa1b82b391`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-owner-review-v1.json`.
+
 ## 2026-10-24 · current Preview checkout receipt
 
 The current Web Preview deployment served `/checkout` with HTTP **200**, the
