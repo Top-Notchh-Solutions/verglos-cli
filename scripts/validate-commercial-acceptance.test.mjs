@@ -95,3 +95,17 @@ test("commercial acceptance file refuses to overwrite an existing report", async
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("rejects future completion timestamps", () => {
+  assert.throws(() => validateCommercialAcceptance(run({ completedAt: "2026-10-20T12:00:00.000Z" }), { now: "2026-10-19T12:01:00.000Z" }), /completedAt is in the future/u);
+});
+
+test("requires distinct evidence records across commercial event kinds", () => {
+  const source = run();
+  source.events[1].evidenceDigest = source.events[0].evidenceDigest;
+  assert.throws(() => validateCommercialAcceptance(source), /evidence records must have distinct evidence digests/u);
+});
+
+test("rejects secret-like commercial input before producing a report", () => {
+  assert.throws(() => validateCommercialAcceptance(run({ catalog: { ...catalog, version: "DATABASE_URL=must-not-be-recorded" } })), /secret-like material/u);
+});

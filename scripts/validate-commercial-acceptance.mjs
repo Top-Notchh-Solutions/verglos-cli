@@ -17,6 +17,11 @@ const PLAN_IDS = new Set(["free", "pro", "team", "studio", "enterprise"]);
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const MAX_EVENTS = 256;
 const MAX_DIGESTS = 256;
+const SECRET_LIKE = [
+  /-----BEGIN [A-Z ]*PRIVATE KEY-----/u,
+  /(?:DATABASE_URL|CLERK_SECRET_KEY|RAZORPAY_KEY_SECRET|NPM_TOKEN|NODE_AUTH_TOKEN)\s*=/iu,
+  /\b(?:rzp|sk|whsec|ghp|github_pat)_(?:live|test)?_[A-Za-z0-9_-]{8,}\b/u,
+];
 
 /**
  * Validate commercial acceptance evidence without accepting free-form claims
@@ -24,10 +29,11 @@ const MAX_DIGESTS = 256;
  * never stores agreements, support notes, customer identity, or payment data.
  */
 export function validateCommercialAcceptance(input, { now = new Date() } = {}) {
+  rejectSecretLike(input);
   const run = validateRun(input);
   const completedAt = parseDate(run.completedAt, "completedAt");
-  const currentTime = now instanceof Date ? now : new Date(now);
-  if (!Number.isFinite(currentTime.getTime())) throw new Error("now must be a valid date");
+  const currentTime = now instanceof Date ? now : parseDate(now, "now");
+  if (completedAt > currentTime) throw new Error("completedAt is in the future");
   const catalog = validateCatalog(run.catalog);
   const approval = validateApproval(run.founderApproval, completedAt);
   const events = run.events.map((event) => validateEvent(event, catalog, completedAt));
@@ -42,6 +48,7 @@ export function validateCommercialAcceptance(input, { now = new Date() } = {}) {
   if (repeatDigests.size !== repeatUse.length) throw new Error("repeat-use observations must have distinct evidence digests");
 
   const uniqueEvidence = new Set(events.map((event) => event.evidenceDigest));
+  if (uniqueEvidence.size !== events.length) throw new Error("commercial evidence records must have distinct evidence digests");
   if (uniqueEvidence.size > MAX_DIGESTS) throw new Error("commercial evidence contains too many distinct records");
   const recipient = byKind.get("recipient-value")?.[0];
   const cost = byKind.get("hosted-cost")?.[0];
@@ -163,6 +170,10 @@ function parseDate(value, label) {
   const date = new Date(value);
   if (!Number.isFinite(date.getTime())) throw new Error(`${label} is invalid`);
   return date;
+}
+
+function rejectSecretLike(input) {
+  if (SECRET_LIKE.some((pattern) => pattern.test(JSON.stringify(input)))) throw new Error("commercial acceptance input contains secret-like material");
 }
 
 export function digestCommercialSubject(value) {
