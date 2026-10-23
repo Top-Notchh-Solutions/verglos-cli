@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## Acceptance artifact overwrite boundaries · 2026-10-23
+
+- **Source mapping:** Freeze, release-gate reconciliation, comprehension, and
+  commercial acceptance writers now use exclusive output creation.
+- **Verification mapping:** Combined contracts passed **23/23**, with syntax,
+  study-protocol, and diff checks passing.
+- **Acceptance mapping:** Existing reports are preserved on a second-write
+  attempt, but no participant, commercial, provider, independent-review, or
+  final-release artifact was created. ACCEPT-006/008/009/010 remain open;
+  score remains **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/acceptance-artifact-write-boundaries-2026-10-23.md`.
+
 ## ACCEPT-010 freeze artifact overwrite hardening · 2026-10-23
 
 - **Source mapping:** Private shipping toolchain freeze output now uses

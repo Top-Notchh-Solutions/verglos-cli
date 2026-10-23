@@ -118,6 +118,20 @@ publication/provenance, independent review, and final release decision. Score
 remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
 Evidence: `docs/shipping/evidence/accept-010-candidate-freeze-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · acceptance artifact write boundaries
+
+Freeze, release-gate reconciliation, comprehension-score, and commercial-
+acceptance writers now use exclusive output creation and fail closed rather
+than replacing an existing report. The combined contract suite passed
+**23/23**, with syntax, study-protocol, and diff checks passing; each new
+regression confirmed the original output remained unchanged.
+
+This advances the implementation substrate for ACCEPT-006/008/009/010 only.
+Their actual participant, commercial, release, independent-review, and final
+decision artifacts remain open. The live score remains **244 checked / 36 open
+/ 280 total (87.1%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/acceptance-artifact-write-boundaries-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · npm CI secret rotation
 
 The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`

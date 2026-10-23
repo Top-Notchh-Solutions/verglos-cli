@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { test } from "node:test";
-import { COMMERCIAL_EVIDENCE_KINDS, digestCommercialSubject, validateCommercialAcceptance } from "./validate-commercial-acceptance.mjs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { COMMERCIAL_EVIDENCE_KINDS, digestCommercialSubject, validateCommercialAcceptance, validateCommercialAcceptanceFile } from "./validate-commercial-acceptance.mjs";
 
 const digest = (value) => `sha256:${createHash("sha256").update(value, "utf8").digest("hex")}`;
 const catalog = {
@@ -77,4 +80,18 @@ test("requires explicit numeric allowances and a bounded approval window", () =>
   const expired = run();
   expired.founderApproval.expiresAt = "2026-10-19T11:59:59.000Z";
   assert.throws(() => validateCommercialAcceptance(expired), /does not cover/u);
+});
+
+test("commercial acceptance file refuses to overwrite an existing report", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-commercial-output-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "commercial.json");
+  await writeFile(inputPath, `${JSON.stringify(run())}\n`, "utf8");
+  await writeFile(outputPath, "existing-commercial\n", "utf8");
+  try {
+    await assert.rejects(validateCommercialAcceptanceFile(inputPath, outputPath), (error) => error?.code === "EEXIST");
+    assert.equal(await readFile(outputPath, "utf8"), "existing-commercial\n");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });

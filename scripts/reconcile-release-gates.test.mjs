@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import test from "node:test";
-import { reconcileReleaseGates } from "./reconcile-release-gates.mjs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { reconcileReleaseGates, reconcileReleaseGatesFile } from "./reconcile-release-gates.mjs";
 
 const digest = (value) => `sha256:${value.repeat(64).slice(0, 64)}`;
 
@@ -51,4 +54,18 @@ test("a fully evidenced candidate can be marked ready for final sign-off", () =>
 test("unsafe evidence references and unsupported shipped rows are rejected", () => {
   assert.throws(() => reconcileReleaseGates(run({ rows: [{ id: "FINAL-WEB-007", state: "shipped", evidence: [] }] })), /shipped row has no evidence/u);
   assert.throws(() => reconcileReleaseGates(run({ rows: [{ id: "FINAL-WEB-007", state: "partial", evidence: [{ path: "../secret.md", sha256: digest("c") }] }] })), /unsafe or duplicated/u);
+});
+
+test("reconciliation file refuses to overwrite an existing report", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-reconcile-output-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "reconciliation.json");
+  await writeFile(inputPath, `${JSON.stringify(run())}\n`, "utf8");
+  await writeFile(outputPath, "existing-reconciliation\n", "utf8");
+  try {
+    await assert.rejects(reconcileReleaseGatesFile(inputPath, outputPath), (error) => error?.code === "EEXIST");
+    assert.equal(await readFile(outputPath, "utf8"), "existing-reconciliation\n");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });

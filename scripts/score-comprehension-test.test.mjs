@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
 import { test } from "node:test";
-import { COMPREHENSION_QUESTION_IDS, scoreComprehensionRun } from "./score-comprehension-test.mjs";
+import { COMPREHENSION_QUESTION_IDS, scoreComprehensionFile, scoreComprehensionRun } from "./score-comprehension-test.mjs";
 
 const participantDigest = `sha256:${"a".repeat(64)}`;
 const artifact = {
@@ -86,4 +89,18 @@ test("rejects raw secret-like participant answers before scoring", () => {
   const input = run();
   input.participants[0].answers[0].answer = "DATABASE_URL=should-never-be-recorded";
   assert.throws(() => scoreComprehensionRun(input), /secret-like material/u);
+});
+
+test("comprehension score file refuses to overwrite an existing report", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-comprehension-output-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "score.json");
+  await writeFile(inputPath, `${JSON.stringify(run())}\n`, "utf8");
+  await writeFile(outputPath, "existing-comprehension\n", "utf8");
+  try {
+    await assert.rejects(scoreComprehensionFile(inputPath, outputPath), (error) => error?.code === "EEXIST");
+    assert.equal(await readFile(outputPath, "utf8"), "existing-comprehension\n");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });

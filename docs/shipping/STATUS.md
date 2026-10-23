@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · acceptance artifact overwrite boundaries
+
+The private freeze, release-gate reconciliation, comprehension-score, and
+commercial-acceptance writers now use exclusive output creation and refuse
+`EEXIST` rather than replacing existing reports. The expanded contract suite
+passed **23/23**, with syntax, study-protocol, and diff checks also passing.
+ACCEPT-006/008/009/010 remain open for their actual participant, commercial,
+release, independent-review, and final-decision artifacts. Score remains
+**244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted. Evidence:
+`evidence/acceptance-artifact-write-boundaries-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-010 freeze artifact overwrite hardening
 
 The private release-candidate freeze writer now creates its output with

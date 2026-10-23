@@ -68,7 +68,7 @@ export function scoreComprehensionRun(input, { now = new Date() } = {}) {
 export async function scoreComprehensionFile(inputPath, outputPath, options = {}) {
   const input = JSON.parse(await readFile(inputPath, "utf8"));
   const report = scoreComprehensionRun(input, options);
-  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;
 }
 

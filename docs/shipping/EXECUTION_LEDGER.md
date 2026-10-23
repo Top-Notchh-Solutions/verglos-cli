@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · acceptance artifact overwrite boundaries
+
+- **Implementation:** Freeze, release-gate reconciliation, comprehension
+  scoring, and commercial acceptance output writers now use exclusive `wx`
+  creation and refuse to replace an existing report.
+- **Verification:** The combined contract suite passed **23/23**; syntax,
+  study-protocol, and diff checks passed. Each new regression confirmed the
+  existing output remained unchanged after overwrite refusal.
+- **Disposition:** This is code-side progress only. Keep ACCEPT-006/008/009/010
+  open for actual participant, commercial, release, independent-review, and
+  final-decision artifacts. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted.
+- **Evidence:** `evidence/acceptance-artifact-write-boundaries-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-010 freeze artifact overwrite hardening
 
 - **Implementation:** `scripts/freeze-release-candidate.mjs` now writes

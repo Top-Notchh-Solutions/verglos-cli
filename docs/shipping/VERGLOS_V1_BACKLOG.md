@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · acceptance artifact overwrite boundaries
+
+Freeze, release-gate reconciliation, comprehension-score, and commercial-
+acceptance output writers now refuse to overwrite existing reports. The
+combined contract suite passed **23/23**, with syntax, study-protocol, and
+diff checks passing. This is implementation progress only; ACCEPT-006/008/
+009/010 remain open for their actual evidence and final decisions. No checkbox
+changed; the live score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted. Evidence:
+`docs/shipping/evidence/acceptance-artifact-write-boundaries-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-010 freeze artifact overwrite hardening
 
 The private release-candidate freeze writer now uses exclusive `wx` output
