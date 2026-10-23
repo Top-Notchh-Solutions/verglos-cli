@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { promisify } from "node:util";
-import { packageVersionUrl, publicationDecision, publishPublicPackage } from "./publish-public-package.mjs";
+import { packageVersionUrl, publicationDecision, publishPublicPackage, validatePublishedMetadata } from "./publish-public-package.mjs";
 
 const execFileAsync = promisify(execFile);
 
@@ -73,12 +73,38 @@ test("npm publication preflight skips an existing version and fails closed on re
       publishCalls += 1;
       return { stdout: "published" };
     };
-    const existing = await publishPublicPackage({ archivePath: archive, run, tarRun: run, fetchImpl: async () => new Response(null, { status: 200 }) });
+    const existing = await publishPublicPackage({
+      archivePath: archive,
+      run,
+      tarRun: run,
+      fetchImpl: async () => new Response(JSON.stringify({ name: "@verglos/shared", version: "2.0.0-alpha.1" }), { status: 200 }),
+    });
     assert.equal(existing.status, "already-published");
     assert.equal(publishCalls, 0);
     await assert.rejects(publishPublicPackage({ archivePath: archive, run, tarRun: run, fetchImpl: async () => new Response(null, { status: 503 }) }), /unexpected HTTP status 503/u);
     assert.equal(publicationDecision(404), "publish");
     assert.equal(publicationDecision(200), "already-published");
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("npm publication preflight rejects a 200 response with a mismatched registry identity", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-publish-preflight-"));
+  try {
+    const archive = join(root, "shared.tgz");
+    await writeFile(archive, "fixture");
+    const tarRun = async () => ({ stdout: JSON.stringify({ name: "@verglos/shared", version: "2.0.0-alpha.1" }) });
+    await assert.rejects(
+      publishPublicPackage({
+        archivePath: archive,
+        tarRun,
+        fetchImpl: async () => new Response(JSON.stringify({ name: "@verglos/hunt", version: "2.0.0-alpha.1" }), { status: 200 }),
+      }),
+      /identity does not match/u,
+    );
+    await assert.rejects(
+      validatePublishedMetadata(new Response("not-json", { status: 200 }), "@verglos/shared", "2.0.0-alpha.1"),
+      /invalid package metadata/u,
+    );
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
