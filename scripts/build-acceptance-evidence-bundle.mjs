@@ -161,6 +161,7 @@ const paths = [
   "docs/shipping/evidence/dist-002-npm-preflight-identity-boundary-merge-pr190-2026-10-23.md",
   "docs/shipping/evidence/dist-006-rollback-handle-recheck-pr191-2026-10-23.md",
   "docs/shipping/evidence/accept-009-010-014-version-binding-2026-10-23.md",
+  "docs/shipping/evidence/accept-005-authorized-workflow-version-binding-2026-10-23.md",
 ];
 
 const FORBIDDEN = [

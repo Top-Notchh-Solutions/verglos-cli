@@ -2974,3 +2974,24 @@ and file SHA-256
 Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/accept-009-010-014-version-binding-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · ACCEPT-005 authorized-workflow version binding
+
+Private shipping commit `040aee22` now binds authorized external-workflow
+execution records to the bounded SemVer contract. The malformed-version
+regression passed, the adjacent acceptance/release suite passed **59/59**,
+study-protocol validation passed, syntax checks passed, and `git diff --check`
+passed.
+
+This is implementation evidence only. `ACCEPT-005` remains unchecked for an
+actual authorized external-repository workflow, required recipient/customer
+acceptance, independent review, provider/hosted evidence, and final release
+decision. No external repository, provider, Production, customer,
+deployment, publication, or release-sign-off state changed. The additive
+bundle contains **150** files with manifest
+`sha256:043dd10fe81dcddcf80318e9ed71da0bc48075b20e147d68fa4c55412a23eef9`
+and file SHA-256
+`67883521c26d7cf130d598c7ec2fab4070ab1e2c5c46a58377e536974411a2a3`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/accept-005-authorized-workflow-version-binding-2026-10-23.md`.

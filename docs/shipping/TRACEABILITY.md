@@ -9423,6 +9423,20 @@ changed. See
   or overwritten.
 - **Evidence:** `evidence/accept-009-010-014-version-binding-2026-10-23.md`.
 
+## ACCEPT-005 authorized-workflow version binding · 2026-10-23
+
+- **Source mapping:** Private shipping commit `040aee22`.
+- **Contract mapping:** Authorized workflow records reject execution versions
+  outside the bounded SemVer contract.
+- **Verification mapping:** Adjacent acceptance/release contracts **59/59**,
+  study-protocol validation, syntax checks, and diff check passed.
+- **Acceptance mapping:** This is code-side evidence only. Keep `ACCEPT-005`
+  unchecked for actual authorized workflow execution, required
+  recipient/customer acceptance, independent review, provider/hosted evidence,
+  and final release decision. Score remains **244/36/280 (87.1%)**. Nothing
+  was deleted or overwritten.
+- **Evidence:** `evidence/accept-005-authorized-workflow-version-binding-2026-10-23.md`.
+
 ## ACCEPT-012 triage integrity boundary · 2026-10-23
 
 - **Source mapping:** Private commit `c46bbdfd`.

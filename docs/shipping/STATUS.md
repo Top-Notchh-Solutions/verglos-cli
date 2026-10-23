@@ -12053,6 +12053,20 @@ changed and nothing was deleted or overwritten. Score remains **244 checked /
 36 open / 280 total (87.1%)**. Evidence:
 `evidence/accept-009-010-014-version-binding-2026-10-23.md`.
 
+## 2026-10-23 · ACCEPT-005 authorized-workflow version binding
+
+Private shipping commit `040aee22` now requires a bounded SemVer version in
+authorized external-workflow execution records. The adjacent acceptance/
+release contracts passed **59/59**; study-protocol validation, syntax checks,
+and `git diff --check` passed.
+
+This does not close `ACCEPT-005`: an actual authorized external-repository
+workflow, required recipient/customer acceptance, independent review,
+provider/hosted evidence, and final release decision remain open. No external
+state changed and nothing was deleted or overwritten. Score remains **244
+checked / 36 open / 280 total (87.1%)**. Evidence:
+`evidence/accept-005-authorized-workflow-version-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-012 triage report integrity binding
 
 Private commit `c46bbdfd` binds public-OSS triage to the exact report bytes

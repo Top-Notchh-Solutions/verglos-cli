@@ -15413,3 +15413,19 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   overwritten. Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-009-010-014-version-binding-2026-10-23.md`;
   additive bundle manifest `sha256:c02346be7c586a6db044f8c66f64a017b85ac079f5cf113ef54a168e7c842eeb`.
+
+## ACCEPT-005 authorized-workflow version binding · 2026-10-23
+
+- **Source mapping:** Private shipping implementation commit `040aee22`.
+- **Contract mapping:** Authorized external-workflow execution records now
+  require the bounded SemVer version; a malformed-version regression is
+  covered.
+- **Verification mapping:** Adjacent acceptance/release contracts **59/59**,
+  study-protocol validation, syntax checks, and `git diff --check` passed.
+- **Acceptance mapping:** Keep `ACCEPT-005` open for an actual authorized
+  external-repository workflow, required recipient/customer acceptance,
+  independent review, provider/hosted evidence, and final release decision.
+  No external state changed and nothing was deleted or overwritten. Score
+  remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-005-authorized-workflow-version-binding-2026-10-23.md`;
+  additive bundle manifest `sha256:043dd10fe81dcddcf80318e9ed71da0bc48075b20e147d68fa4c55412a23eef9`.
