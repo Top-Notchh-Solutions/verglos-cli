@@ -15520,3 +15520,27 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   `sha256:89e26d4786b8b22d30217c8366484ce7339f5e75b64f13276313cd49d30c8149`;
   bundle file SHA-256
   `1aca87069c115597e11ca251313266f920a18f72cc56fe5b86dba8be83cc9b53`.
+
+## ACCEPT-011/012 bounded corpus read binding · 2026-10-23
+
+- **Source mapping:** Private shipping implementation in
+  `scripts/verify-acceptance-corpus.mjs` and
+  `scripts/verify-public-oss-corpus.mjs`.
+- **Contract mapping:** Corpus authorization, architecture-evidence,
+  JSON/HTML report, and contract-artifact reads are bound to bounded opened
+  regular-file handles with `O_NOFOLLOW`, identity checks, and post-read
+  size/identity checks.
+- **Verification mapping:** Acceptance verification **12 fixtures**; public
+  OSS verification **8 exact-commit fixtures / 4 architecture shapes**; public
+  triage **354 findings / 23 rule groups / 0 coverage gaps**; combined
+  acceptance contracts **60/60**; syntax and diff checks passed.
+- **Acceptance mapping:** Keep ACCEPT-011/012 unchecked for their declared
+  dependencies, held-out correction, independent review, and final
+  acceptance. No provider, customer, Production, deployment, publication,
+  tag, or release action occurred. Nothing was deleted or overwritten. Score
+  remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-011-012-bounded-corpus-read-binding-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:b2447059c18ccbbe88566d7119181d6de8e7fd45f899681b497923697c5c70dc`;
+  bundle file SHA-256
+  `8537953e40d47242a43bcf9d508d285ce2820eda77824966ed290d8d185e525e`.

@@ -9409,6 +9409,25 @@ changed. See
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## ACCEPT-011/012 bounded corpus read binding · 2026-10-23
+
+- **Source mapping:** Private shipping implementation in
+  `scripts/verify-acceptance-corpus.mjs` and
+  `scripts/verify-public-oss-corpus.mjs`.
+- **Contract mapping:** Authorization, architecture-evidence, JSON/HTML
+  report, and contract-artifact reads use bounded opened regular-file handles
+  with `O_NOFOLLOW`, identity checks, and post-read size/identity checks.
+- **Verification mapping:** Acceptance verification **12 fixtures**; public
+  OSS verification **8 exact-commit fixtures / 4 architecture shapes**; public
+  triage **354 findings / 23 rule groups / 0 coverage gaps**; combined
+  acceptance contracts **60/60**; syntax and diff checks passed.
+- **Acceptance mapping:** Keep ACCEPT-011/012 open for dependencies,
+  held-out correction, independent review, and final acceptance. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/accept-011-012-bounded-corpus-read-binding-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:b2447059c18ccbbe88566d7119181d6de8e7fd45f899681b497923697c5c70dc`.
+
 ## STUDIO-CLI-001 projection reservation race · 2026-10-23
 
 - **Source mapping:** Web PR #254 implementation commit `c290c9f`; source

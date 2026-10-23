@@ -2,8 +2,9 @@
 
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { existsSync, lstatSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, lstatSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { readBoundedFile } from "./read-bounded-json.mjs";
 
 const workspace = resolve(process.env.TOP_NOTCHH_WORKSPACE ?? "/Users/anuragyadav/Developer/TopNotchh-Workspace");
 const fixtureRoot = resolve(process.env.VERGLOS_PUBLIC_OSS_FIXTURE_ROOT ?? join(workspace, "acceptance-fixtures"));
@@ -23,8 +24,17 @@ const fixtures = [
 
 const requiredArchitectureShapes = ["small", "multi-user", "multi-tenant-team", "enterprise-like"];
 
-function sha256(path) {
-  return createHash("sha256").update(readFileSync(path)).digest("hex");
+async function readFileWithDigest(path, label) {
+  const bytes = await readBoundedFile(path, label);
+  return { bytes, sha256: createHash("sha256").update(bytes).digest("hex") };
+}
+
+function decodeUtf8(bytes, label) {
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  } catch {
+    throw new Error(`${label} must contain valid bounded UTF-8`);
+  }
 }
 
 function git(root, args) {
@@ -35,7 +45,7 @@ function regularFile(path, label) {
   if (!existsSync(path) || !lstatSync(path).isFile()) throw new Error(`${label} must be a regular file`);
 }
 
-function verifyFixture(fixture) {
+async function verifyFixture(fixture) {
   const root = join(fixtureRoot, fixture.name);
   const reportRoot = join(evidenceRoot, fixture.evidenceDir ?? fixture.name);
   if (!existsSync(join(root, ".git"))) throw new Error(`${fixture.name}: missing full-clone git metadata`);
@@ -44,17 +54,23 @@ function verifyFixture(fixture) {
 
   const authorizationPath = join(root, "AUTHORIZATION.md");
   regularFile(authorizationPath, `${fixture.name} authorization`);
-  const authorization = readFileSync(authorizationPath, "utf8");
+  const authorization = decodeUtf8((await readFileWithDigest(authorizationPath, `${fixture.name} authorization`)).bytes, `${fixture.name} authorization`);
   for (const required of [/public technical fixture/i, /not an authorized customer/i, /permitted (test )?scope/i, /findings may be stored/i, /expiry/i]) {
     if (!required.test(authorization)) throw new Error(`${fixture.name}: authorization notice is incomplete`);
   }
-  for (const evidencePath of fixture.architectureEvidence) regularFile(join(root, evidencePath), `${fixture.name} architecture evidence`);
+  for (const evidencePath of fixture.architectureEvidence) {
+    const path = join(root, evidencePath);
+    regularFile(path, `${fixture.name} architecture evidence`);
+    await readBoundedFile(path, `${fixture.name} architecture evidence`);
+  }
 
   const reportJsonPath = join(reportRoot, "verglos-report.json");
   const reportHtmlPath = join(reportRoot, "verglos-report.html");
   regularFile(reportJsonPath, `${fixture.name} JSON report`);
   regularFile(reportHtmlPath, `${fixture.name} HTML report`);
-  const report = JSON.parse(readFileSync(reportJsonPath, "utf8"));
+  const reportJson = await readFileWithDigest(reportJsonPath, `${fixture.name} JSON report`);
+  const reportHtml = await readFileWithDigest(reportHtmlPath, `${fixture.name} HTML report`);
+  const report = JSON.parse(decodeUtf8(reportJson.bytes, `${fixture.name} JSON report`));
   if (report.coverage?.status !== "complete") throw new Error(`${fixture.name}: coverage is not complete`);
   if (!Array.isArray(report.coverage?.limitations) || report.coverage.limitations.length !== 0) throw new Error(`${fixture.name}: report has coverage limitations`);
   if (!Number.isInteger(report.coverage?.filesWalked) || report.coverage.filesWalked <= 0) throw new Error(`${fixture.name}: invalid filesWalked`);
@@ -80,8 +96,8 @@ function verifyFixture(fixture) {
     findings: report.findings.length,
     score: report.score,
     coverage: report.coverage,
-    reportJson: { path: reportJsonPath, bytes: readFileSync(reportJsonPath).byteLength, sha256: sha256(reportJsonPath) },
-    reportHtml: { path: reportHtmlPath, bytes: readFileSync(reportHtmlPath).byteLength, sha256: sha256(reportHtmlPath) },
+    reportJson: { path: reportJsonPath, bytes: reportJson.bytes.byteLength, sha256: reportJson.sha256 },
+    reportHtml: { path: reportHtmlPath, bytes: reportHtml.bytes.byteLength, sha256: reportHtml.sha256 },
   };
 }
 
@@ -99,7 +115,7 @@ const result = {
   },
   fixtureCount: fixtures.length,
   requiredArchitectureShapes,
-  fixtures: fixtures.map(verifyFixture),
+  fixtures: await Promise.all(fixtures.map(verifyFixture)),
 };
 result.architectureShapes = [...new Set(result.fixtures.flatMap((fixture) => fixture.architectureShapes))].sort();
 result.missingArchitectureShapes = requiredArchitectureShapes.filter((shape) => !result.architectureShapes.includes(shape));

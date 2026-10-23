@@ -12039,6 +12039,25 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · ACCEPT-011/012 bounded corpus read binding
+
+The acceptance corpus verifiers now use bounded regular-file handles with
+`O_NOFOLLOW`, opened-handle identity checks, and post-read size/identity checks
+for authorization, architecture evidence, JSON/HTML reports, and contract
+artifacts. Acceptance verification passed for **12 fixtures**; public OSS
+verification passed for **8 exact-commit fixtures** covering all four required
+architecture shapes; public triage reported **354 findings / 23 rule groups /
+0 coverage gaps**. The combined acceptance contracts passed **60/60**, with
+syntax and diff checks clean.
+
+`ACCEPT-011` and `ACCEPT-012` remain unchecked for their dependencies,
+held-out correction, independent review, and final acceptance. No provider,
+customer, Production, deployment, publication, tag, or release action
+occurred; nothing was deleted or overwritten. Score remains **244 checked / 36
+open / 280 total (87.1%)**.
+
+Evidence: `evidence/accept-011-012-bounded-corpus-read-binding-2026-10-23.md`.
+
 ## 2026-10-23 · STUDIO-CLI-001 projection reservation race
 
 Web PR #254 source `c290c9f` fixes a custody race where the losing identical

@@ -3095,3 +3095,26 @@ and file SHA-256
 Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · ACCEPT-011/012 bounded corpus read binding
+
+The acceptance corpus verifiers now bind authorization, architecture-evidence,
+JSON/HTML report, and contract-artifact reads to bounded regular-file handles
+with `O_NOFOLLOW`, opened-handle identity checks, and post-read size/identity
+checks. `scripts/verify-acceptance-corpus.mjs` verifies **12 fixtures** with
+complete coverage and intact artifacts; `scripts/verify-public-oss-corpus.mjs`
+verifies **8 exact-commit fixtures** across all four architecture shapes; and
+public triage reports **354 findings / 23 rule groups / 0 coverage gaps**.
+
+The combined acceptance contract suite passed **60/60**; syntax and diff
+checks passed. This is implementation evidence only. Keep `ACCEPT-011` and
+`ACCEPT-012` unchecked for their declared dependencies, held-out correction,
+independent review, and final acceptance conditions. No provider, customer,
+Production, deployment, publication, tag, or release action occurred. The
+additive bundle contains **155** files with manifest
+`sha256:b2447059c18ccbbe88566d7119181d6de8e7fd45f899681b497923697c5c70dc`
+and file SHA-256
+`8537953e40d47242a43bcf9d508d285ce2820eda77824966ed290d8d185e525e`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/accept-011-012-bounded-corpus-read-binding-2026-10-23.md`.

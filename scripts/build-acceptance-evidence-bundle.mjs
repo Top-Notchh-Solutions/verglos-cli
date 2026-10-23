@@ -166,6 +166,7 @@ const paths = [
   "docs/shipping/evidence/dist-001-license-read-binding-pr179-2026-10-23.md",
   "docs/shipping/evidence/ent-cli-001-runner-read-binding-pr192-2026-10-23.md",
   "docs/shipping/evidence/studio-cli-001-projection-race-pr254-2026-10-23.md",
+  "docs/shipping/evidence/accept-011-012-bounded-corpus-read-binding-2026-10-23.md",
 ];
 
 const FORBIDDEN = [
