@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · repair acceptance bundle v11 integrity
+
+- **Decision:** Retain v10 for historical traceability and add v11 after its
+  stale CLI evidence byte binding was detected.
+- **Verification:** v11 contains **187 files**, has **0 mismatches**, matches
+  manifest `sha256:339afa1e60b7280fe65f4188c515c019cb2844c0f976dc13da9dcf7d50cb5e0c`,
+  and passes secret scanning; builder/verifier tests pass **9/9**.
+- **Disposition:** Evidence integrity only. No row checkbox or score change;
+  provider, customer, reviewer, browser, field, deletion, and release gates
+  remain open. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-dashboard-command-v11-2026-10-23.md`.
+
 ## 2026-10-23 · merge QUAL-WEB-006 dashboard capture command
 
 - **Decision:** Promote Web PR #257's strict dashboard capture parser and

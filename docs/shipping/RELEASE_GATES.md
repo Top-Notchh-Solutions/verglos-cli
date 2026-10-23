@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · acceptance bundle v11 integrity repair
+
+The retained v10 bundle had one stale CLI evidence byte binding. Additive v11
+was generated with the current evidence and dashboard-command artifact: **187
+files**, **0 mismatches**, manifest
+`sha256:339afa1e60b7280fe65f4188c515c019cb2844c0f976dc13da9dcf7d50cb5e0c`,
+secret scan passed. This repairs the evidence packet only; provider lifecycle,
+customer consent, independent review, authenticated browser, field CWV, and
+account-deletion gates remain open. Score remains **244/36/280 (87.1%)**.
+Evidence: `evidence/acceptance-evidence-bundle-dashboard-command-v11-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 dashboard capture command
 
 Web PR #257 merged normally at `bfb3413516e8f11e6dcef04040387b3dbb130c8b`,
