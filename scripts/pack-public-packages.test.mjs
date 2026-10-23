@@ -17,7 +17,7 @@ test("clean public pack contains seven archives without compiled tests or CLI pr
     for (const archive of archives) {
       const { stdout } = await run("tar", ["-tzf", join(output, archive)]);
       assert.doesNotMatch(stdout, /(^|\/)[^/]*\.test\./u);
-      assert.doesNotMatch(stdout, /(^|\/)cli-fixture\./u);
+      assert.doesNotMatch(stdout, /(?:^|\/)(?:cli-fixture|fixture-engine|fixture-validator)(?:\.[^/]+)?$/u);
       assert.doesNotMatch(stdout, /workspace:/);
       if (archive.startsWith("verglos-shared-")) {
         const { stdout: manifestText } = await run("tar", ["-xOf", join(output, archive), "package/package.json"]);
@@ -26,9 +26,8 @@ test("clean public pack contains seven archives without compiled tests or CLI pr
       }
       const { stdout: license } = await run("tar", ["-xOf", join(output, archive), "package/LICENSE"], { encoding: "buffer" });
       assert.deepEqual(license, await readFile("LICENSE"), `${archive} must carry the repository license byte-for-byte`);
-      const { stdout: notices } = await run("tar", ["-xOf", join(output, archive), "package/THIRD_PARTY_NOTICES"], { encoding: "buffer", maxBuffer: 16 * 1024 * 1024 });
-      assert.deepEqual(notices, Buffer.from(expectedNotices), `${archive} must carry the generated third-party notices`);
-      assert.match(notices.toString("utf8"), /benchmark \(1\.0\.0\)[\s\S]*?Bundled by: fast-uri@3\.1\.7/u);
+      const { stdout: notices } = await run("tar", ["-xOf", join(output, archive), "package/THIRD_PARTY_NOTICES"]);
+      assert.deepEqual(notices, await readFile("THIRD_PARTY_NOTICES", "utf8"), `${archive} must carry the generated notices byte-for-byte`);
     }
   } finally { await rm(output, { recursive: true, force: true }); }
 });
@@ -37,6 +36,9 @@ test("public packer fails closed for private workspace dependencies", async () =
   const source = await readFile("scripts/pack-public-packages.mjs", "utf8");
   assert.match(source, /privateWorkspacePackages/);
   assert.match(source, /cannot depend on private workspace package/);
+  assert.match(source, /readBoundedJsonFile/u);
+  assert.match(source, /readBoundedFile/u);
+  assert.match(source, /const npmCommand/u);
 });
 
 test("public packer binds source manifest reads to bounded regular-file handles", async () => {

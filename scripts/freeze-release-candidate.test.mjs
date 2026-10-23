@@ -1,0 +1,113 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import test from "node:test";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { freezeReleaseCandidate, freezeReleaseCandidateFile } from "./freeze-release-candidate.mjs";
+
+const digest = (value) => `sha256:${value.repeat(64).slice(0, 64)}`;
+const bytesDigest = (value) => `sha256:${createHash("sha256").update(value).digest("hex")}`;
+const gates = { providerLifecycle: "open", customerConsent: "open", independentReview: "open", authenticatedBrowser: "passed", fieldCwv: "open", accountDeletion: "open", finalRelease: "open" };
+const artifactKinds = ["version", "schema", "migration", "manifest", "plan-catalog", "compatibility", "docs", "runbook", "notice", "sbom", "provenance", "rollback"];
+
+function completeArtifacts() {
+  return artifactKinds.map((kind, index) => ({ path: `release/${kind}.json`, kind, sha256: digest(String.fromCharCode(97 + (index % 6))), required: true, present: true }));
+}
+
+function run(overrides = {}) {
+  return {
+    schema: "verglos.private.release-candidate-freeze.v1",
+    candidate: { cliCommit: "74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5", webCommit: "16ceddc9855e75e04f10ddd276fae16c7ef09e01", version: "2.0.0-alpha.1" },
+    artifacts: [{ path: "release/SHA256SUMS", kind: "checksum", sha256: digest("a"), required: true, present: true }, { path: "release/provenance.json", kind: "provenance", sha256: digest("b"), required: true, present: false }],
+    gates,
+    decision: "open",
+    ...overrides,
+  };
+}
+
+test("freeze stays blocked and lists open gates and missing artifacts", () => {
+  const report = freezeReleaseCandidate(run());
+  assert.equal(report.freeze.status, "blocked");
+  assert.equal(report.summary.openGateCount, 6);
+  assert.deepEqual(report.missingArtifacts, ["release/provenance.json"]);
+  assert.deepEqual(report.missingArtifactKinds, artifactKinds);
+});
+
+test("recorded GO fails closed while the candidate is incomplete", () => {
+  assert.throws(() => freezeReleaseCandidate(run({ decision: "go" })), /GO cannot freeze/u);
+});
+
+test("freeze rejects a malformed candidate version", () => {
+  assert.throws(
+    () => freezeReleaseCandidate(run({ candidate: { ...run().candidate, version: "candidate-latest" } })),
+    /candidate version is invalid/u,
+  );
+});
+
+test("all artifacts and gates passed produce a ready-for-signoff manifest", () => {
+  const report = freezeReleaseCandidate(run({
+    artifacts: completeArtifacts(),
+    gates: Object.fromEntries(Object.keys(gates).map((name) => [name, "passed"])),
+  }));
+  assert.equal(report.freeze.status, "ready-for-signoff");
+  assert.equal(report.freeze.goEligible, true);
+});
+
+test("freeze stays blocked when a required artifact category is absent", () => {
+  const report = freezeReleaseCandidate(run({
+    artifacts: [{ path: "release/SHA256SUMS", kind: "manifest", sha256: digest("c"), required: true, present: true }],
+    gates: Object.fromEntries(Object.keys(gates).map((name) => [name, "passed"])),
+  }));
+  assert.equal(report.freeze.status, "blocked");
+  assert.equal(report.summary.missingArtifactKindCount, artifactKinds.length - 1);
+  assert.equal(report.missingArtifactKinds.includes("manifest"), false);
+  assert.equal(report.missingArtifactKinds.includes("provenance"), true);
+});
+
+test("unsafe paths and invalid digests are rejected", () => {
+  assert.throws(() => freezeReleaseCandidate(run({ artifacts: [{ path: "../secrets", kind: "other", sha256: digest("d"), required: false, present: true }] })), /unsafe freeze artifact path/u);
+  assert.throws(() => freezeReleaseCandidate(run({ artifacts: [{ path: "release/out", kind: "other", sha256: "sha256:not-a-digest", required: false, present: true }] })), /digest is invalid/u);
+});
+
+test("freeze file refuses to overwrite an existing candidate artifact", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-freeze-output-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "freeze.json");
+  await writeFile(inputPath, `${JSON.stringify(run())}\n`, "utf8");
+  await writeFile(outputPath, "existing-freeze\n", "utf8");
+  try {
+    await assert.rejects(
+      freezeReleaseCandidateFile(inputPath, outputPath),
+      (error) => error?.code === "EEXIST",
+    );
+    assert.equal(await readFile(outputPath, "utf8"), "existing-freeze\n");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("freeze file binds present artifact claims to bytes under the artifact root", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-freeze-bindings-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "freeze.json");
+  const artifactPath = join(directory, "release", "version.json");
+  const contents = "{\"version\":\"2.0.0-alpha.1\"}\n";
+  await mkdir(join(directory, "release"), { recursive: true });
+  await writeFile(artifactPath, contents, "utf8");
+  await writeFile(inputPath, `${JSON.stringify(run({ artifacts: [{ path: "release/version.json", kind: "version", sha256: bytesDigest(contents), required: true, present: true }] }))}\n`, "utf8");
+  try {
+    const report = await freezeReleaseCandidateFile(inputPath, outputPath, { artifactRoot: directory });
+    assert.equal(report.artifacts[0].sha256, bytesDigest(contents));
+
+    const mismatchInput = join(directory, "mismatch-input.json");
+    const mismatchOutput = join(directory, "mismatch-freeze.json");
+    await writeFile(mismatchInput, `${JSON.stringify(run({ artifacts: [{ path: "release/version.json", kind: "version", sha256: digest("f"), required: true, present: true }] }))}\n`, "utf8");
+    await assert.rejects(
+      freezeReleaseCandidateFile(mismatchInput, mismatchOutput, { artifactRoot: directory }),
+      /artifact digest does not match bytes/u,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

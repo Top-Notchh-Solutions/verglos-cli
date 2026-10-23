@@ -1,0 +1,170 @@
+{
+  "schema": "verglos.private.acceptance-stories-verification.v1",
+  "verifiedAt": "2026-10-14T14:25:23.269Z",
+  "cliRoot": "/tmp/verglos-dist-001-20261014",
+  "webRoot": "/tmp/verglos-web-accept-20261014",
+  "cliCommit": "ba6c75b4e1d11b59f1e6e7bf13edc3c4be02b13a",
+  "webCommit": "a54d70dfacfaf9506b1336b788d9cd86c9ca74d7",
+  "stories": [
+    {
+      "id": "free-scan",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "acceptance-corpus-verification-2026-10-03-v3.json"
+      ]
+    },
+    {
+      "id": "ci-decision",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "TEAM-CLI-002"
+      ]
+    },
+    {
+      "id": "trivy-import",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "QUAL-CLI-005"
+      ]
+    },
+    {
+      "id": "multi-tool-dedup",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "mismatch-incomplete",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "exception-register",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite",
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "hunt-isolation",
+      "status": "qualification-open",
+      "evidence": [
+        "cli-package-suite",
+        "hunt-docker-adversarial-2026-10-02.md"
+      ]
+    },
+    {
+      "id": "offline-record",
+      "status": "substrate-covered",
+      "evidence": [
+        "cli-package-suite"
+      ]
+    },
+    {
+      "id": "modified-cli",
+      "status": "runtime-qualification-open",
+      "evidence": [
+        "QUAL-WEB-001",
+        "web-full-suite"
+      ]
+    },
+    {
+      "id": "studio-recipient",
+      "status": "customer-acceptance-open",
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "enterprise-runner",
+      "status": "provider-qualification-open",
+      "evidence": [
+        "web-composed-acceptance-substrates"
+      ]
+    },
+    {
+      "id": "account-deletion",
+      "status": "qualification-open",
+      "evidence": [
+        "qual-web-005-privacy-deletion-2026-10-10"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "label": "cli-package-suite",
+      "cwd": "/tmp/verglos-dist-001-20261014",
+      "args": [
+        "--filter",
+        "verglos",
+        "test"
+      ],
+      "startedAt": "2026-10-14T14:24:15.032Z",
+      "finishedAt": "2026-10-14T14:25:17.661Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 293,
+        "pass": 290,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 3
+      },
+      "outputSha256": "f0fb913bcca4d1478e21e107395e22580137d51575bf03d1cc48817ed046f7d0"
+    },
+    {
+      "label": "web-full-suite",
+      "cwd": "/tmp/verglos-web-accept-20261014",
+      "args": [
+        "test"
+      ],
+      "startedAt": "2026-10-14T14:25:17.661Z",
+      "finishedAt": "2026-10-14T14:25:22.712Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 950,
+        "pass": 920,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 30
+      },
+      "outputSha256": "b3bcef147ed4566f92cba3294c931cc42d7ef01a00322059616db1ecb5d5670c"
+    },
+    {
+      "label": "web-composed-acceptance-substrates",
+      "cwd": "/tmp/verglos-web-accept-20261014",
+      "args": [
+        "exec",
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "src/lib/organizations/studio-e2e.test.ts",
+        "src/lib/organizations/enterprise-e2e.test.ts",
+        "src/lib/organizations/team-e2e.test.ts",
+        "src/lib/qual/qual-web-suites.test.ts"
+      ],
+      "startedAt": "2026-10-14T14:25:22.712Z",
+      "finishedAt": "2026-10-14T14:25:23.269Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 74,
+        "pass": 74,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "outputSha256": "afb8ab9a769abb1831c1c2c4fb0f61402a0e8113e606266537d478975ef52684"
+    }
+  ],
+  "allCommandsPassed": true,
+  "note": "Substrate/regression evidence only. No hosted HTTP, provider, customer, reviewer, browser-human, field-CWV, migration, or production acceptance is claimed."
+}

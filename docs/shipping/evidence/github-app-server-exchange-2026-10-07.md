@@ -1,0 +1,68 @@
+# GitHub App server-side exchange qualification — 2026-10-07
+
+## Implementation
+
+Web PR #154 implementation exact head `742a16707642715bdac96f2761135c33513a8ed0`,
+subsequently reconciled and merged at exact head
+`9032bda8dc8e916d38151136479699ef7e7641d4`
+(implementation `096de93` plus follow-up `742a167`) changes the
+GitHub installation route so the browser submits only an installation ID and
+bounded repository/project selections. The server now signs a short-lived App
+JWT from `VERGLOS_GITHUB_APP_ID` and
+`VERGLOS_GITHUB_APP_PRIVATE_KEY`, exchanges it with GitHub, derives account,
+least-privilege permissions, and repository identities from provider responses,
+and encrypts the returned installation token with its expiry. GitHub delivery
+refreshes expired or unknown-expiry tokens through the same exchange and
+persists the encrypted replacement. The GitHub webhook secret is now also
+server-only via `VERGLOS_GITHUB_WEBHOOK_SECRET`; GitLab keeps its existing
+provider-token/secret path.
+
+## Verification
+
+- Focused SCM/GitHub tests: **24/24**.
+- Full Web test command: **846 passed / 22 environment-gated skips / 0 failed**.
+- Typecheck, `pnpm db:check`, 29-migration ordering, negative-boundary **2/2**,
+  production build **38/38 pages**, and `git diff --check`: pass.
+- Hosted Verify runs **37643258692** and final-head **37643938665**: success.
+- Vercel Preview Comments: success.
+
+The exact head was reverified after the adjacent migration-guard work: the
+full serial Web suite passed **846/868** with **22** explicit skips and zero
+failures; focused SCM/GitHub tests passed **19/19**; typecheck, `db:check`, and
+29-migration ordering passed. No source change was made in this recheck.
+
+## Limits and disposition
+
+This is implementation and local/hosted CI evidence. No GitHub App credential,
+authorized organization installation, live webhook delivery, provider token
+refresh against GitHub, deployment cutover, or independent review was performed.
+TEAM-WEB-006, GITHUB-WEB-001..004, and the related hosted/acceptance gates remain
+open. No checkbox changed; the authoritative count remains **218 checked / 62
+unchecked / 280 total (77.9%)**.
+
+No production, provider, payment, database, migration, deployment, credential,
+customer-state, or browser-state write occurred.
+
+## Base reconciliation revalidation
+
+After Web main advanced through PR #149 merge `8b843da`, PR #154 was reconciled
+and pushed at exact head `25b4470`. The merged candidate retains the same
+server-side App exchange scope. Focused SCM tests passed **33/33**; serial Web
+tests passed **855/878** with **23** explicit skips and zero failures; typecheck,
+schema, 31-migration ordering, build, and diff checks passed. Hosted checks for
+the reconciled head restarted. Live App installation, authorized organization,
+webhook, deployment cutover, and independent acceptance remain open.
+
+After PR #153 merged as `2e86514`, PR #154 was reconciled again and pushed at
+exact head `9032bda` against that main. The final reconciled branch passed
+focused SCM/deletion contracts **46/46**, serial Web **857/880** with **23**
+explicit skips and zero failures, typecheck, build, schema, 37-migration
+ordering, and diff checks. Hosted typecheck/schema, Vercel, and Preview
+Comments passed for `9032bda`; the PR merged as `1498837`.
+
+## Limits and disposition after merge
+
+The merge is code-side implementation evidence only. No authorized GitHub App
+organization installation, live delivery/lifecycle/cutover, or independent
+acceptance was performed. GITHUB-WEB-001..004 remain open and no production
+provider/database/deployment/customer-state write occurred.

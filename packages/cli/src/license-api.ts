@@ -107,7 +107,7 @@ export async function validateLicense(
         && typedBody.entitlement_token.split(".").length === 3
         ? typedBody.entitlement_token
         : undefined;
-      const v2Token = await fetchV2EntitlementToken(licenseKey, apiOrigin);
+      const v2Token = await fetchV2EntitlementToken(licenseKey, apiUrl);
       return {
         valid: true,
         plan: typedBody.plan,

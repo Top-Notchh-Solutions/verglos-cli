@@ -1,0 +1,33 @@
+✔ SCM dashboard projection is tenant-scoped and source-free (3.896042ms)
+✔ normalizes immutable account, installation, and multi-repository identity (0.964125ms)
+✔ rejects owner-name-only or cross-account repository binding (0.09275ms)
+✔ requires the least-privilege Checks and metadata permission set (0.08525ms)
+✔ models install, suspend, reauthorization, and uninstall lifecycle fail-closed (0.097917ms)
+✔ creates a bounded signed App JWT and a multi-repository token request (70.780209ms)
+✔ exchanges a server-held App identity and derives immutable installation scope from GitHub (59.586542ms)
+✔ fails closed when the provider returns a broad App permission set (39.905667ms)
+✔ bounds GitHub App response bodies before parsing them (19.085291ms)
+✔ keeps the provider timeout active while the response body is read (24.134375ms)
+✔ refreshes expiring tokens and rejects unsafe token responses (0.17575ms)
+✔ binds delivery replay identity to installation, account, repository, commit, and artifact (0.156667ms)
+✔ reconciliation revokes stale active repositories and selects the provider-approved repository (0.824083ms)
+✔ reconciliation refreshes an existing selected binding without duplicating it (0.089542ms)
+✔ reconciliation rejects a repository outside the current provider grant and duplicate selection (0.208ms)
+✔ SCM routes authorize first, cap raw JSON bodies, and never project webhook secrets (3.720875ms)
+✔ SCM migration is additive and contains only the bounded new tables (0.854792ms)
+✔ GitHub App installation admission requires immutable IDs and accepts bounded multi-repository scope (0.992417ms)
+✔ GitHub App scope reconciliation revokes stale bindings and refreshes selected identity atomically (0.811ms)
+✔ SCM delivery refreshes expiring GitHub installation tokens through the App exchange (0.401917ms)
+✔ SCM repository policy binding is explicit, same-organization, and nullable until qualified (0.726875ms)
+✔ repository policy fetch fails closed across auth, tenant, SCM, database, and signer boundaries (0.475125ms)
+✔ SCM delivery cron authenticates, uses the durable runner, and never returns credentials (0.400209ms)
+✔ SCM delivery claims retain the provider check resource ID for idempotent retries (0.346958ms)
+✔ SCM webhook intake authenticates raw bytes, caps payloads, and queues only redacted trigger metadata (0.834125ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 363.09825

@@ -1,0 +1,75 @@
+{
+  "schema": "verglos.private.release-gate-reconciliation.v1",
+  "completedAt": "2026-10-23T02:53:28.582Z",
+  "candidate": {
+    "cliCommit": "3d4bca1f3d306a2d69798d0af58f1361cec69620",
+    "webCommit": "16ceddc9855e75e04f10ddd276fae16c7ef09e01",
+    "version": "2.0.0-alpha.4"
+  },
+  "summary": {
+    "rowCount": 22,
+    "shippedCount": 0,
+    "partialCount": 22,
+    "plannedCount": 0,
+    "openGateCount": 7,
+    "correctionCount": 6,
+    "rollbackCount": 1
+  },
+  "shippedRows": [],
+  "partialRows": [
+    "STUDIO-CLI-001",
+    "DIST-002",
+    "DIST-003",
+    "DIST-006",
+    "QUAL-WEB-005",
+    "QUAL-WEB-006",
+    "ACCEPT-003",
+    "ACCEPT-005",
+    "ACCEPT-006",
+    "ACCEPT-008",
+    "ACCEPT-009",
+    "ACCEPT-010",
+    "ACCEPT-011",
+    "ACCEPT-012",
+    "ACCEPT-014",
+    "FINAL-WEB-001",
+    "FINAL-WEB-002",
+    "FINAL-WEB-003",
+    "FINAL-WEB-005",
+    "FINAL-WEB-006",
+    "FINAL-WEB-007",
+    "FINAL-WEB-008"
+  ],
+  "plannedRows": [],
+  "openGates": [
+    "providerLifecycle",
+    "customerConsent",
+    "independentReview",
+    "authenticatedBrowser",
+    "fieldCwv",
+    "accountDeletion",
+    "finalRelease"
+  ],
+  "correctionIds": [
+    "DIST-002",
+    "DIST-003",
+    "QUAL-WEB-005",
+    "FINAL-WEB-007",
+    "ACCEPT-002",
+    "ACCEPT-014"
+  ],
+  "rollbackIds": [
+    "DIST-006"
+  ],
+  "decision": {
+    "requested": "no-go",
+    "status": "open",
+    "goEligible": false,
+    "recommendation": "no-go"
+  },
+  "gate": {
+    "reconciliationStatus": "complete",
+    "finalReleaseStatus": "open",
+    "acceptanceStatus": "open"
+  }
+}

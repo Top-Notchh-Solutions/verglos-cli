@@ -1,0 +1,484 @@
+{
+  "schema": "verglos.private.acceptance-corpus-verification.v1",
+  "verifiedAt": "2026-10-03T09:53:51.890Z",
+  "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
+  "fixtureCount": 6,
+  "allFullClones": true,
+  "allCompleteCoverage": true,
+  "fixtures": [
+    {
+      "name": "juice-shop",
+      "upstream": "https://github.com/juice-shop/juice-shop",
+      "commit": "1618a611b173b4bf114028e6e02549950606e29d",
+      "license": "MIT",
+      "shallow": false,
+      "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
+      "scannedAt": "2026-10-03T09:41:35.927Z",
+      "projectType": "express",
+      "filesWalked": 906,
+      "findings": 55,
+      "score": {
+        "value": 0,
+        "riskLevel": "critical",
+        "counts": {
+          "critical": 16,
+          "high": 12,
+          "medium": 18,
+          "low": 0,
+          "info": 9
+        },
+        "testFileFindings": {
+          "total": 7,
+          "included": false,
+          "note": "These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures."
+        }
+      },
+      "provenance": {
+        "aiAuthoredPercent": 36,
+        "findingDensityAI": 0,
+        "findingDensityHuman": 0.9,
+        "densityRatio": 0,
+        "criticalsInAIFiles": 0,
+        "criticalsTotal": 16,
+        "confidence": "high",
+        "method": "agent-artifacts, agent-artifacts, git-trailer, code-shape (sampled 300/649 files for speed)"
+      },
+      "coverage": {
+        "status": "complete",
+        "filesWalked": 906,
+        "requestedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth",
+          "git-history"
+        ],
+        "executedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "git-history",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth"
+        ],
+        "limitations": []
+      },
+      "reportJson": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/juice-shop-cli-9554125-provenance/verglos-report.json",
+        "sha256": "d4909137067071200ca6fb0aecd5efc7ff86595d44431fcd1e72278da156e478",
+        "bytes": 67781
+      },
+      "reportHtml": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/juice-shop-cli-9554125-provenance/verglos-report.html",
+        "sha256": "3ea373ce2e697b51a1f676087b55d417c69335cf697ae5cfe70b204f1bbee02d",
+        "bytes": 73043
+      }
+    },
+    {
+      "name": "nodegoat",
+      "upstream": "https://github.com/OWASP/NodeGoat",
+      "commit": "c5cb68a7084e4ae7dcc60e6a98768720a81841e8",
+      "license": "Apache-2.0",
+      "shallow": false,
+      "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
+      "scannedAt": "2026-10-03T09:44:58.861Z",
+      "projectType": "express",
+      "filesWalked": 67,
+      "findings": 31,
+      "score": {
+        "value": 0,
+        "riskLevel": "critical",
+        "counts": {
+          "critical": 1,
+          "high": 15,
+          "medium": 9,
+          "low": 1,
+          "info": 5
+        },
+        "testFileFindings": {
+          "total": 0,
+          "included": false,
+          "note": "These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures."
+        }
+      },
+      "provenance": {
+        "aiAuthoredPercent": 32.9,
+        "findingDensityAI": 3.3,
+        "findingDensityHuman": 0,
+        "densityRatio": null,
+        "criticalsInAIFiles": 0,
+        "criticalsTotal": 1,
+        "confidence": "medium",
+        "method": "commit-shape"
+      },
+      "coverage": {
+        "status": "complete",
+        "filesWalked": 67,
+        "requestedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth",
+          "git-history"
+        ],
+        "executedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "git-history",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth"
+        ],
+        "limitations": []
+      },
+      "reportJson": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/nodegoat-cli-9554125/verglos-report.json",
+        "sha256": "5155a141b35bb878ef4fa47479f09ebf483ceded251965a4c1cfb5aa41e4f33d",
+        "bytes": 28531
+      },
+      "reportHtml": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/nodegoat-cli-9554125/verglos-report.html",
+        "sha256": "43303699f2d932b4a7f5d8888a6d561b16146cf7753497a29ecb27f65ca2f46d",
+        "bytes": 40708
+      }
+    },
+    {
+      "name": "dvna",
+      "upstream": "https://github.com/appsecco/dvna",
+      "commit": "9ba473add536f66ac9007966acb2a775dd31277a",
+      "license": "MIT",
+      "shallow": false,
+      "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
+      "scannedAt": "2026-10-03T09:45:00.981Z",
+      "projectType": "express",
+      "filesWalked": 35,
+      "findings": 17,
+      "score": {
+        "value": 34,
+        "riskLevel": "critical",
+        "counts": {
+          "critical": 2,
+          "high": 4,
+          "medium": 6,
+          "low": 0,
+          "info": 5
+        },
+        "testFileFindings": {
+          "total": 0,
+          "included": false,
+          "note": "These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures."
+        }
+      },
+      "provenance": {
+        "aiAuthoredPercent": 0,
+        "findingDensityAI": 0,
+        "findingDensityHuman": 0,
+        "densityRatio": null,
+        "criticalsInAIFiles": 0,
+        "criticalsTotal": 2,
+        "confidence": "low",
+        "method": "no signals fired"
+      },
+      "coverage": {
+        "status": "complete",
+        "filesWalked": 35,
+        "requestedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth",
+          "git-history"
+        ],
+        "executedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "git-history",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth"
+        ],
+        "limitations": []
+      },
+      "reportJson": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/dvna-cli-9554125/verglos-report.json",
+        "sha256": "1265db347cbbaf45640a4f47509f22714de9e9aaf03ad61042396582b3ebe433",
+        "bytes": 19079
+      },
+      "reportHtml": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/dvna-cli-9554125/verglos-report.html",
+        "sha256": "51cb1610928a09f91684d0f2d0b63d9b3c1e3aaa8dc6689ac51a58c71376bd30",
+        "bytes": 32127
+      }
+    },
+    {
+      "name": "nodejs-goof",
+      "upstream": "https://github.com/snyk-labs/nodejs-goof",
+      "commit": "add14ba59e98240d9e00a235dd7d42cd61ae9912",
+      "license": "Apache-2.0",
+      "shallow": false,
+      "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
+      "scannedAt": "2026-10-03T09:49:37.304Z",
+      "projectType": "express",
+      "filesWalked": 25,
+      "findings": 29,
+      "score": {
+        "value": 9,
+        "riskLevel": "critical",
+        "counts": {
+          "critical": 1,
+          "high": 13,
+          "medium": 15,
+          "low": 0,
+          "info": 0
+        },
+        "testFileFindings": {
+          "total": 0,
+          "included": false,
+          "note": "These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures."
+        }
+      },
+      "provenance": {
+        "aiAuthoredPercent": 44.3,
+        "findingDensityAI": 17,
+        "findingDensityHuman": 0,
+        "densityRatio": null,
+        "criticalsInAIFiles": 0,
+        "criticalsTotal": 1,
+        "confidence": "medium",
+        "method": "commit-shape"
+      },
+      "coverage": {
+        "status": "complete",
+        "filesWalked": 25,
+        "requestedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth",
+          "git-history"
+        ],
+        "executedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "git-history",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth"
+        ],
+        "limitations": []
+      },
+      "reportJson": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/nodejs-goof-cli-9554125/verglos-report.json",
+        "sha256": "34231e5b1e416658715ac2e109c1cbaea7448a432579fa11f9a992c785ace0bf",
+        "bytes": 29135
+      },
+      "reportHtml": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/nodejs-goof-cli-9554125/verglos-report.html",
+        "sha256": "4508cadb8da324b29e68fac7484320309d92e63281b5deafb577cfbfe1fbd6c2",
+        "bytes": 38135
+      }
+    },
+    {
+      "name": "damm-vulnerable-node",
+      "upstream": "https://github.com/rdurlo/Damm-Vulnerable-Node-Application",
+      "commit": "1946570b36bf8e6dcac48142f072f40ee9cee160",
+      "license": "MIT",
+      "shallow": false,
+      "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
+      "scannedAt": "2026-10-03T09:51:36.974Z",
+      "projectType": "express",
+      "filesWalked": 38,
+      "findings": 17,
+      "score": {
+        "value": 34,
+        "riskLevel": "critical",
+        "counts": {
+          "critical": 2,
+          "high": 4,
+          "medium": 6,
+          "low": 0,
+          "info": 5
+        },
+        "testFileFindings": {
+          "total": 0,
+          "included": false,
+          "note": "These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures."
+        }
+      },
+      "provenance": {
+        "aiAuthoredPercent": 0,
+        "findingDensityAI": 0,
+        "findingDensityHuman": 0,
+        "densityRatio": null,
+        "criticalsInAIFiles": 0,
+        "criticalsTotal": 2,
+        "confidence": "low",
+        "method": "no signals fired"
+      },
+      "coverage": {
+        "status": "complete",
+        "filesWalked": 38,
+        "requestedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth",
+          "git-history"
+        ],
+        "executedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "git-history",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth"
+        ],
+        "limitations": []
+      },
+      "reportJson": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/damm-vulnerable-node-cli-9554125/verglos-report.json",
+        "sha256": "50fd847d6b3cc9372d8008a3fa9b717a7c77487d13044e5e8d55b2b093b9d51e",
+        "bytes": 19094
+      },
+      "reportHtml": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/damm-vulnerable-node-cli-9554125/verglos-report.html",
+        "sha256": "c5d3329d2ba4fab8bf0e65e59f9c6274069456c5565096c46ba0868d679c736e",
+        "bytes": 32126
+      }
+    },
+    {
+      "name": "buggy-node",
+      "upstream": "https://github.com/UtkarshGupta-CS/buggy-node",
+      "commit": "b1b9cbc8b86f81a1ecb0b142190d4fa4698518da",
+      "license": "ISC",
+      "shallow": false,
+      "cliCommit": "955412516b96cc09393e78c43bf7d02b9abd05d9",
+      "scannedAt": "2026-10-03T09:51:39.150Z",
+      "projectType": "express",
+      "filesWalked": 8,
+      "findings": 57,
+      "score": {
+        "value": 10,
+        "riskLevel": "critical",
+        "counts": {
+          "critical": 2,
+          "high": 22,
+          "medium": 29,
+          "low": 4,
+          "info": 0
+        },
+        "testFileFindings": {
+          "total": 0,
+          "included": false,
+          "note": "These findings are in test files and excluded from the score. Review manually to confirm they are test fixtures."
+        }
+      },
+      "provenance": {
+        "aiAuthoredPercent": 0,
+        "findingDensityAI": 0,
+        "findingDensityHuman": 0,
+        "densityRatio": null,
+        "criticalsInAIFiles": 0,
+        "criticalsTotal": 2,
+        "confidence": "low",
+        "method": "no signals fired"
+      },
+      "coverage": {
+        "status": "complete",
+        "filesWalked": 8,
+        "requestedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth",
+          "git-history"
+        ],
+        "executedDetectors": [
+          "secrets",
+          "dependencies",
+          "misconfig",
+          "injection",
+          "git-history",
+          "ai-patterns",
+          "slopsquat",
+          "vendored-cves",
+          "agent-surface",
+          "api-hardening",
+          "deep-auth"
+        ],
+        "limitations": []
+      },
+      "reportJson": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/buggy-node-cli-9554125/verglos-report.json",
+        "sha256": "3e6a807e04ef8a08c4e4ff0811798e89e5f85e13e8cb1e8717fcd3826236374e",
+        "bytes": 49834
+      },
+      "reportHtml": {
+        "path": "/Users/anuragyadav/Developer/TopNotchh-Workspace/.local-evidence/buggy-node-cli-9554125/verglos-report.html",
+        "sha256": "e4b9c256bd2ab2ef2b221031c1c62dc0f8dff7e89cb1c18ee7ef20928b3e690b",
+        "bytes": 52341
+      }
+    }
+  ]
+}

@@ -204,7 +204,7 @@ test("fix CLI JSON dry-run is process-safe and does not mutate the project", asy
     await mkdir(join(root, "test"));
     await writeFile(join(root, "test", "selected.test.js"), "assert.ok(true);\n");
     await mkdir(join(home, ".verglos"), { recursive: true });
-    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["https://api.example.test", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, credentialScope: createHash("sha256").update(JSON.stringify(["https://api.example.test", null])).digest("hex"), fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
     const result = await runCliFixture(process.execPath, ["--import", fileURLToPath(import.meta.resolve("tsx")), join(process.cwd(), "src", "index.ts"), "fix", "--json", "--dry-run", "--test-file", "test/selected.test.js"], root, { env: { HOME: home, VERGLOS_DEV_SKIP_UPDATE_CHECK: "1", VERGLOS_API_URL: "https://api.example.test" } });
     assert.equal(result.exitCode, 0, `${result.stdout}\n${result.stderr}`);
     const output = JSON.parse(result.stdout) as { planned: readonly { action: string; diff: string }[]; testExecution: { action: string; policyEffect: string; warning: string } };
@@ -323,7 +323,7 @@ test("fix CLI approved JSON mutation uses the exact receipt and reports the writ
     await mkdir(join(root, "test"));
     await writeFile(join(root, "test", "verification.test.js"), 'import assert from "node:assert/strict"; assert.ok(true);\n');
     await mkdir(join(home, ".verglos"), { recursive: true });
-    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ credentialScope: createHash("sha256").update(JSON.stringify(["https://api.example.test", null])).digest("hex"), plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
+    await writeFile(join(home, ".verglos", "capabilities.json"), JSON.stringify({ plan: "pro", capabilities: ["fix"], cache_ttl_seconds: 60, simulated: false, active: true, credentialScope: createHash("sha256").update(JSON.stringify(["https://api.example.test", null])).digest("hex"), fetchedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 60_000).toISOString() }));
     const receipt = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174099", action: "mutate", actor: "human", target: await headerFixWorkspaceTarget(root), files: ["next.config.js"], network: [], policyEffect: "security headers", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
     const receiptPath = join(root, "approval.json");
     await writeFile(receiptPath, JSON.stringify(receipt));

@@ -59,6 +59,7 @@ const CACHE_FILE = join(homedir(), ".verglos", "entitlement.json");
 const HEADER_B64 = base64UrlEncode(
   Buffer.from('{"alg":"EdDSA","typ":"JWT"}', "utf8"),
 );
+const PINNED_KEY_IDS = ["legacy-v1", "successor-v1"] as const;
 const V2_CLAIM_KEYS = ["userId", "tenantId", "role", "plan", "capabilities", "allowances", "catalogVersion", "tokenId"] as const;
 
 /** Key IDs are immutable wire identities, not array positions. */
@@ -82,6 +83,22 @@ export interface VerifyOptions {
   pinnedKeys?: readonly string[];
   /** Test/rotation seam: override the immutable key-id map. */
   pinnedKeysById?: Readonly<Record<string, string>>;
+}
+
+type HeaderKeySelection =
+  | { readonly kind: "legacy" }
+  | { readonly kind: "key-id"; readonly slot: number };
+
+function headerKeySelection(headerB64: string): HeaderKeySelection | null {
+  if (headerB64 === HEADER_B64) return { kind: "legacy" };
+  try {
+    const header = JSON.parse(base64UrlDecode(headerB64).toString("utf8")) as Record<string, unknown>;
+    if (header.alg !== "EdDSA" || header.typ !== "JWT" || typeof header.kid !== "string") return null;
+    const slot = PINNED_KEY_IDS.indexOf(header.kid as (typeof PINNED_KEY_IDS)[number]);
+    return slot === -1 ? null : { kind: "key-id", slot };
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -138,8 +155,9 @@ export async function verifyEntitlement(
   // so downstream packages can test the full sign→verify pipeline
   // without threading VerifyOptions through every call site.
   const envKey = process.env.VERGLOS_TEST_PUBKEY_B64URL;
+  const keySlot = keyId === undefined ? -1 : PINNED_KEY_IDS.indexOf(keyId as (typeof PINNED_KEY_IDS)[number]);
   const pinned = keyId
-    ? [options.pinnedKeysById?.[keyId] ?? PINNED_PUBLIC_KEYS_BY_ID[keyId]].filter((key): key is string => typeof key === "string")
+    ? [options.pinnedKeysById?.[keyId] ?? (keySlot >= 0 ? options.pinnedKeys?.[keySlot] : undefined) ?? PINNED_PUBLIC_KEYS_BY_ID[keyId]].filter((key): key is string => typeof key === "string")
     : options.pinnedKeys ?? (envKey ? [envKey] : PINNED_PUBLIC_KEYS_B64URL);
   const sigOk = pinned.some((keyB64) => {
     try {

@@ -1,0 +1,112 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import test from "node:test";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { reconcileReleaseGates, reconcileReleaseGatesFile } from "./reconcile-release-gates.mjs";
+
+const digest = (value) => `sha256:${value.repeat(64).slice(0, 64)}`;
+const bytesDigest = (value) => `sha256:${createHash("sha256").update(value).digest("hex")}`;
+
+function run(overrides = {}) {
+  return {
+    schema: "verglos.private.release-gate-reconciliation.v1",
+    completedAt: "2026-10-22T12:00:00.000Z",
+    candidate: { cliCommit: "74c9b4ff79c4b8f80e022c8f25f1d321357f9cf5", webCommit: "16ceddc9855e75e04f10ddd276fae16c7ef09e01", version: "2.0.0-alpha.1" },
+    rows: [
+      { id: "FINAL-WEB-007", state: "partial", evidence: [{ path: "docs/shipping/evidence/web.md", sha256: digest("a") }] },
+      { id: "FINAL-WEB-008", state: "planned", evidence: [] },
+    ],
+    gates: { providerLifecycle: "open", customerConsent: "open", independentReview: "open", authenticatedBrowser: "passed", fieldCwv: "open", accountDeletion: "open", finalRelease: "open" },
+    corrections: [{ id: "FINAL-WEB-007", action: "obtain hosted and field evidence" }],
+    rollback: [],
+    decision: { result: "no-go", status: "open" },
+    ...overrides,
+  };
+}
+
+test("reconciler reports open gates and never upgrades partial/planned rows", () => {
+  const report = reconcileReleaseGates(run());
+  assert.equal(report.schema, "verglos.private.release-gate-reconciliation.v1");
+  assert.equal(report.summary.rowCount, 2);
+  assert.deepEqual(report.partialRows, ["FINAL-WEB-007"]);
+  assert.deepEqual(report.plannedRows, ["FINAL-WEB-008"]);
+  assert.equal(report.decision.recommendation, "no-go");
+  assert.equal(report.gate.acceptanceStatus, "open");
+});
+
+test("recorded GO fails closed while any gate or correction remains", () => {
+  assert.throws(() => reconcileReleaseGates(run({ decision: { result: "go", status: "recorded" } })), /recorded GO is not eligible/u);
+});
+
+test("reconciliation rejects a future completion timestamp", () => {
+  assert.throws(
+    () => reconcileReleaseGates(run({ completedAt: "2026-10-24T12:00:00.000Z" }), { now: "2026-10-23T12:00:00.000Z" }),
+    /completedAt cannot be in the future/u,
+  );
+});
+
+test("reconciliation rejects a malformed candidate version", () => {
+  assert.throws(
+    () => reconcileReleaseGates(run({ candidate: { ...run().candidate, version: "candidate-latest" } })),
+    /candidate version is invalid/u,
+  );
+});
+
+test("a fully evidenced candidate can be marked ready for final sign-off", () => {
+  const report = reconcileReleaseGates(run({
+    rows: [{ id: "FINAL-WEB-007", state: "shipped", evidence: [{ path: "docs/shipping/evidence/web.md", sha256: digest("b") }] }],
+    gates: { providerLifecycle: "passed", customerConsent: "passed", independentReview: "passed", authenticatedBrowser: "passed", fieldCwv: "passed", accountDeletion: "passed", finalRelease: "passed" },
+    corrections: [],
+    rollback: [],
+    decision: { result: "no-go", status: "open" },
+  }));
+  assert.equal(report.decision.goEligible, true);
+  assert.equal(report.decision.recommendation, "go");
+  assert.equal(report.gate.acceptanceStatus, "ready-for-signoff");
+});
+
+test("unsafe evidence references and unsupported shipped rows are rejected", () => {
+  assert.throws(() => reconcileReleaseGates(run({ rows: [{ id: "FINAL-WEB-007", state: "shipped", evidence: [] }] })), /shipped row has no evidence/u);
+  assert.throws(() => reconcileReleaseGates(run({ rows: [{ id: "FINAL-WEB-007", state: "partial", evidence: [{ path: "../secret.md", sha256: digest("c") }] }] })), /unsafe or duplicated/u);
+});
+
+test("reconciliation file refuses to overwrite an existing report", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-reconcile-output-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "reconciliation.json");
+  await writeFile(inputPath, `${JSON.stringify(run())}\n`, "utf8");
+  await writeFile(outputPath, "existing-reconciliation\n", "utf8");
+  try {
+    await assert.rejects(reconcileReleaseGatesFile(inputPath, outputPath), (error) => error?.code === "EEXIST");
+    assert.equal(await readFile(outputPath, "utf8"), "existing-reconciliation\n");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("reconciliation file binds evidence claims to bytes under the evidence root", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-reconcile-bindings-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "reconciliation.json");
+  const evidencePath = join(directory, "evidence.md");
+  const contents = "bounded evidence\n";
+  await writeFile(evidencePath, contents, "utf8");
+  const input = run({ rows: [{ id: "FINAL-WEB-007", state: "partial", evidence: [{ path: "evidence.md", sha256: bytesDigest(contents) }] }] });
+  await writeFile(inputPath, `${JSON.stringify(input)}\n`, "utf8");
+  try {
+    const report = await reconcileReleaseGatesFile(inputPath, outputPath, { evidenceRoot: directory });
+    assert.equal(report.summary.rowCount, 1);
+
+    const mismatchInput = join(directory, "mismatch-input.json");
+    const mismatchOutput = join(directory, "mismatch-reconciliation.json");
+    await writeFile(mismatchInput, `${JSON.stringify(run({ rows: [{ id: "FINAL-WEB-007", state: "partial", evidence: [{ path: "evidence.md", sha256: digest("f") }] }] }))}\n`, "utf8");
+    await assert.rejects(
+      reconcileReleaseGatesFile(mismatchInput, mismatchOutput, { evidenceRoot: directory }),
+      /evidence digest does not match bytes/u,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

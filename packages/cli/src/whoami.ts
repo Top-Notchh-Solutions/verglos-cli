@@ -78,7 +78,7 @@ async function entitlementSummary(): Promise<EntitlementSummary> {
   }
 }
 
-function printEntitlement(entitlement: Awaited<ReturnType<typeof entitlementSummary>>) {
+function printEntitlement(entitlement: EntitlementSummary): void {
   console.log(`  ${chalk.bold("Authority:")} ${entitlement.source}${entitlement.stale ? chalk.yellow(" (stale)") : ""}`);
   console.log(`  ${chalk.bold("Access:")}    ${entitlement.capabilityCount} capabilities`);
   if (entitlement.catalogVersion) console.log(`  ${chalk.bold("Catalog:")}   ${entitlement.catalogVersion}`);
@@ -195,7 +195,7 @@ export async function executeWhoami(options: WhoamiOptions = {}): Promise<number
       expiresAt: status.expiresAt,
       machine: thisMachine,
       machines: status.machines,
-      ...entitlement,
+      ...(entitlement ?? {}),
     }));
     return status.active ? 0 : 1;
   }

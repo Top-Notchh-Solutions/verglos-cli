@@ -1,0 +1,182 @@
+{
+  "schema": "verglos.private.acceptance-evidence-bundle.v1",
+  "generatedAt": "2026-10-22T13:57:11.675Z",
+  "files": [
+    {
+      "path": "docs/shipping/evidence/acceptance-corpus-verification-2026-10-03-v3.json",
+      "sha256": "1a8414740518faee01f6a2ce65c41ba3b1f8aaa38f7e35f83b0b69a636ca648d",
+      "bytes": 20579
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-corpus-2026-10-03.md",
+      "sha256": "0aff6998585c7fd9300e4442deb74e0128d663bbc3feccd188a5a5cc0f208435",
+      "bytes": 4466
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json",
+      "sha256": "d3ab97f3a966d820c35f06f8358d4751e8e896b23ddedf06d02e33dac905492d",
+      "bytes": 4348
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-19.json",
+      "sha256": "ad57b49f127269d422608952d8cb31ff2e8c2e1713d16bd6d00780df3be34fe8",
+      "bytes": 8312
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-19.md",
+      "sha256": "34918a5ca18d7c304492ec5b6efb3cdbf6741e696e3a627808d83013ae03757e",
+      "bytes": 2546
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-story-map-2026-10-03.json",
+      "sha256": "4e05ffec3baa08974033e5d3ec4bdf3ec3d37236ad32e420fa2b7189a86a9776",
+      "bytes": 1762
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-story-tests-2026-10-03.md",
+      "sha256": "d7e6a78ded7532396f0b0110d63a15c8812623a342dd4cddf5ec622d1b4af708",
+      "bytes": 3749
+    },
+    {
+      "path": "docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md",
+      "sha256": "d4b40965439ce75593441fb7edb2fdd71defb5da931506883479b9f9251e1686",
+      "bytes": 3850
+    },
+    {
+      "path": "docs/shipping/evidence/accept-005-packed-first-party-qualification-2026-10-19.md",
+      "sha256": "4a84ed7d26b14aa3c85c668222e7d319cac350c7685be9e69bc05778251a8f6c",
+      "bytes": 5464
+    },
+    {
+      "path": "docs/shipping/evidence/qual-web-005-authenticated-route-e2e-2026-10-19.md",
+      "sha256": "dfebe4f67ecd78d17e52f7ac17ae729e0f737a7f564250f788ab684d475ff345",
+      "bytes": 3369
+    },
+    {
+      "path": "docs/shipping/acceptance/external-workflow-protocol.md",
+      "sha256": "cb715484f12ca1ea09daf964e726f6694e90b767d846f99d9019d4f8655d78d3",
+      "bytes": 4395
+    },
+    {
+      "path": "docs/shipping/acceptance/consent-record.template.md",
+      "sha256": "b9d92183eb341969c2dbb6072b58ff1e3a00955e29d481a5643b9db706abb8bb",
+      "bytes": 856
+    },
+    {
+      "path": "docs/shipping/acceptance/comprehension-test-protocol.md",
+      "sha256": "49095f8c308cd57cc54a1a4b8b70028b78043c1ec8edddf42983d6a239a7eab5",
+      "bytes": 1853
+    },
+    {
+      "path": "docs/shipping/acceptance/hunt-adjudication-protocol.md",
+      "sha256": "757a65c9ba21fcdf0bde047dcfee44ba278f96771068b2177c1ba90f090fc463",
+      "bytes": 2121
+    },
+    {
+      "path": "docs/shipping/evidence/razorpay-sandbox-qr-2026-10-03.md",
+      "sha256": "c2c1f7b02697f9be3b4ee46128e2aafd55a8b12a2eb969d9b2eb04b409a2cde8",
+      "bytes": 1590
+    },
+    {
+      "path": "docs/shipping/evidence/current-source-verification-2026-10-03.md",
+      "sha256": "475f3a5feeb74cb8477a66a6bb00528e3061114d6dda206b032c5dc02acaf95e",
+      "bytes": 1619
+    },
+    {
+      "path": "docs/shipping/evidence/hunt-docker-adversarial-2026-10-02.md",
+      "sha256": "84d905e620ea19d517a30bb68cc5bb18e7121231cc10cf0442263613a861e378",
+      "bytes": 1711
+    },
+    {
+      "path": "docs/shipping/evidence/ent-cli-001-current-head-qualification-2026-10-22.md",
+      "sha256": "402ba4bc7b2003114bd0d1e53a97b161884150053d2a9d910d94cc28bae5f9cb",
+      "bytes": 1599
+    },
+    {
+      "path": "docs/shipping/evidence/studio-cli-001-current-head-preview-2026-10-22.md",
+      "sha256": "7ded31615076e99f718b1af01b16b1f146af1dd3164284097f5ca87c4069c0a4",
+      "bytes": 1668
+    },
+    {
+      "path": "docs/shipping/evidence/dist-003-current-head-checksum-generation-2026-10-22.md",
+      "sha256": "16ea5cb939d77e19ffbf7a20810c407508ebbb7d27560999617c6296e42e22ee",
+      "bytes": 1109
+    },
+    {
+      "path": "docs/shipping/evidence/dist-003-checksum-output-portability-pr160-2026-10-22.md",
+      "sha256": "d66e537647e70d5879057984c82e026df356856f4ccde0172f41f5e02d96c8b8",
+      "bytes": 1643
+    },
+    {
+      "path": "docs/shipping/evidence/final-web-007-landing-accessibility-pr234-2026-10-22.md",
+      "sha256": "48cd98f58de9c2daa85943a1a9aaba232e6a368fd3ac9b8a1d658d4771bfc62a",
+      "bytes": 1810
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr160-pr234.json",
+      "sha256": "0450a0420d1c4e546f45b91cf6f23e010bffc64cff5d9e2967dc40c2dbc06abb",
+      "bytes": 8612
+    },
+    {
+      "path": "docs/shipping/evidence/accept-002-003-current-head-pr160-pr234-2026-10-22.md",
+      "sha256": "dfce29daa36ea269298b6fc052d25f1b3f40dbf51747a8736dfe91e2e0c2344d",
+      "bytes": 1503
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr160-pr161-pr234.json",
+      "sha256": "525083402f114fcba45da5b9f6c5a26143fe0d818915bcb29bf52bf2e5728bd7",
+      "bytes": 8612
+    },
+    {
+      "path": "docs/shipping/evidence/studio-cli-001-approval-shape-pr161-2026-10-22.md",
+      "sha256": "2fec8113f2d77239165230e6f31d209daad6c0ed4adb6a8500e619f7a80a7d8b",
+      "bytes": 2557
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-22.json",
+      "sha256": "60e31050744ec4965f854e75c858f5640b9d022a340a0c83a225c222db5cc821",
+      "bytes": 8612
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr159-pr233.json",
+      "sha256": "3d1183ed160ac3bf335776a873043d088f6e6d9a2d1ca20884c90caa2a5702c2",
+      "bytes": 8612
+    },
+    {
+      "path": "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr158-pr159-pr233.json",
+      "sha256": "10a920390e8d1d3780b9b8477117f0b8ab2ed3b5b85d87d8314d1232a0a21164",
+      "bytes": 8612
+    },
+    {
+      "path": "docs/shipping/evidence/accept-002-003-current-head-pr158-pr159-pr233-2026-10-22.md",
+      "sha256": "85a1c260429b72841132382d22ea49c9fe732057fda3a882c7ec694b8edbec4d",
+      "bytes": 2262
+    },
+    {
+      "path": "docs/shipping/evidence/qual-web-006-table-semantics-pr232-2026-10-22.md",
+      "sha256": "b91badc5a1883e202116ec1cf8da48eff7f50f74e17c2fc3a483f0927c7dfffd",
+      "bytes": 1870
+    },
+    {
+      "path": "docs/shipping/evidence/final-web-008-public-truth-smoke-pr233-2026-10-22.md",
+      "sha256": "2b7f92c90c9128ecfdcc3af31115baad998c6902fd38399757a98bf243ab2a28",
+      "bytes": 2138
+    },
+    {
+      "path": "docs/shipping/evidence/dist-002-tag-commit-binding-pr159-2026-10-22.md",
+      "sha256": "ddcde9a215aba446da5f93fb70e5bfb0c67dc2cdbb987d7fd9d3aeb472b91e46",
+      "bytes": 1890
+    }
+  ],
+  "gateBoundary": {
+    "technicalCorpus": "verified",
+    "substrateRegression": "verified",
+    "providerLifecycle": "open",
+    "customerConsent": "open",
+    "independentReview": "open",
+    "authenticatedBrowser": "open",
+    "fieldCwv": "open",
+    "accountDeletion": "open"
+  },
+  "note": "Private reproducibility manifest. It contains hashes and bounded evidence references, not source, credentials, customer data, or reviewer sign-off."
+}

@@ -3,6 +3,7 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
+import { stageBoundedArchives } from "./stage-bounded-archives.mjs";
 
 const run = promisify(execFile);
 const archiveRoot = resolve(process.argv[2] ?? "");
@@ -24,9 +25,10 @@ async function version() {
 }
 try {
   await writeFile(join(consumer, "package.json"), JSON.stringify({ name: "verglos-transition-consumer", private: true, version: "1.0.0" }));
+  const stagedArchives = await stageBoundedArchives(archives, join(consumer, "release-archives"));
   await install("verglos@1.8.3");
   const before = await version();
-  await install(...archives);
+  await install(...stagedArchives);
   const upgraded = await version();
   await install("verglos@1.8.3");
   const rolledBack = await version();

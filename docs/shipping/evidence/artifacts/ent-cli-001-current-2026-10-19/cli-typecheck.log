@@ -1,0 +1,4 @@
+
+> verglos@2.0.0-alpha.1 typecheck /private/tmp/verglos-cli-studio-upload-20261019/packages/cli
+> tsc -p tsconfig.json --noEmit
+

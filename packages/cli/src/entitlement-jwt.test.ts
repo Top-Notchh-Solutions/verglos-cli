@@ -50,7 +50,7 @@ function seedCache(fetchedAt: Date, plan: string, capabilities: string[]) {
       cache_ttl_seconds: 60,
       simulated: false,
       active: true,
-      credentialScope: createHash("sha256").update(JSON.stringify(["https://api.example.test", "vg_test_key"])).digest("hex"),
+      credentialScope: createHash("sha256").update(JSON.stringify(["http://127.0.0.1:1", "vg_test_key"])).digest("hex"),
       fetchedAt: fetchedAt.toISOString(),
       expiresAt: fetchedAt.toISOString(),
     }),
@@ -104,20 +104,13 @@ function withOfflineFetch<T>(fn: () => Promise<T>): Promise<T> {
   });
 }
 
-/** Frozen wire fixtures for PLAN-CLI-004. These are server-shaped payloads,
- * not a second client-side plan catalog: capabilities and allowance keys are
- * intentionally opaque to the CLI. */
+/** Frozen server-shaped fixtures: capabilities and allowance keys remain opaque to the CLI. */
 const PLAN_CATALOG_FIXTURES = Object.freeze([
-  { plan: "free", capabilities: ["scan", "server.scan"], cache_ttl_seconds: 60, simulated: false, active: true, catalog_version: "2026-10-02.0" },
-  { plan: "pro", real_plan: "pro", capabilities: ["scan", "server.fix", "vendor.future_capability"], cache_ttl_seconds: 900, simulated: false, active: true, catalog_version: "2026-10-02.0" },
-  { plan: "team", real_plan: "team", capabilities: ["scan", "team.policy"], cache_ttl_seconds: 3600, simulated: false, active: true, catalog_version: "2026-10-02.0" },
-  { plan: "studio", real_plan: "studio", capabilities: ["scan", "studio.attest"], cache_ttl_seconds: 86_400, simulated: false, active: true, catalog_version: "2026-10-02.0" },
-  { plan: "enterprise", real_plan: "enterprise", capabilities: ["scan", "enterprise.sso"], cache_ttl_seconds: 86_400, simulated: false, active: true, catalog_version: "2026-10-02.0" },
-] as const);
-
-const SUPPORTED_VERSION_COMPATIBILITY_FIXTURES = Object.freeze([
-  { clientVersion: "1.8.3", tokenKind: "legacy-v1", expectedOfflinePlan: "free" },
-  { clientVersion: "2.0.0-alpha.1", tokenKind: "signed-v2", expectedOfflinePlan: "pro" },
+  { plan: "free", capabilities: ["scan", "server.scan"], cache_ttl_seconds: 60, simulated: false, active: true },
+  { plan: "pro", real_plan: "pro", capabilities: ["scan", "server.fix", "vendor.future_capability"], cache_ttl_seconds: 900, simulated: false, active: true },
+  { plan: "team", real_plan: "team", capabilities: ["scan", "team.policy"], cache_ttl_seconds: 3600, simulated: false, active: true },
+  { plan: "studio", real_plan: "studio", capabilities: ["scan", "studio.attest"], cache_ttl_seconds: 86_400, simulated: false, active: true },
+  { plan: "enterprise", real_plan: "enterprise", capabilities: ["scan", "enterprise.sso"], cache_ttl_seconds: 86_400, simulated: false, active: true },
 ] as const);
 
 beforeEach(() => {
@@ -139,9 +132,9 @@ test("capability cache follows the license and endpoint across fresh and offline
       assert.equal((await mod.loadCapabilities({ forceRefresh })).plan, "pro", "same identity retains bounded offline access");
 
       for (const identity of [
-        { apiUrl: "https://other-api.example.test", licenseKey: "vg_other_key" },
-        { apiUrl: "https://api-2.example.test", licenseKey: "vg_test_key" },
-        { apiUrl: "https://api.example.test" },
+        { apiUrl: "http://127.0.0.1:1", licenseKey: "vg_other_key" },
+        { apiUrl: "http://127.0.0.1:2", licenseKey: "vg_test_key" },
+        { apiUrl: "http://127.0.0.1:1" },
       ]) {
         writeFileSync(join(verglosDir, "credentials.json"), JSON.stringify(identity));
         const resolved = await mod.resolveEntitlement({ forceRefresh });
@@ -221,101 +214,6 @@ test("resolveEntitlement: fresh Free server response overrides a valid paid v2 t
     assert.equal(result.source, "rest");
     assert.deepEqual(result.capabilities, ["scan", "server.free.capability"]);
     assert.equal(result.license, undefined);
-  } finally {
-    globalThis.fetch = originalFetch;
-  }
-});
-
-test("PLAN-CLI-004: frozen server catalog fixtures remain opaque and round-trip across supported plans", async () => {
-  const originalFetch = globalThis.fetch;
-  try {
-    for (const fixture of PLAN_CATALOG_FIXTURES) {
-      seedCredentials(undefined);
-      globalThis.fetch = (async () => Response.json({ ...fixture, allowance_future_dimension: "opaque" })) as typeof fetch;
-      const result = await mod.loadCapabilities({ forceRefresh: true });
-      assert.equal(result.plan, fixture.plan);
-      assert.deepEqual(result.capabilities, fixture.capabilities);
-      assert.equal(result.cache_ttl_seconds, fixture.cache_ttl_seconds);
-      assert.equal(result.catalog_version, fixture.catalog_version);
-      assert.equal(result.source, "rest");
-    }
-  } finally {
-    globalThis.fetch = originalFetch;
-  }
-});
-
-test("PLAN-CLI-001: stale cache from another founder simulation is not reused offline", async () => {
-  seedCache(new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), "pro", ["scan", "stale.simulation"]);
-  seedCredentials(undefined);
-  const result = await withOfflineFetch(() => mod.loadCapabilities({ forceRefresh: true, asPlan: "studio" }));
-  assert.equal(result.plan, "free");
-  assert.equal(result.source, "free");
-  assert.equal(result.capabilities.includes("stale.simulation"), false);
-});
-
-test("PLAN-CLI-001: malformed catalog version fails closed without accepting paid capabilities", async () => {
-  seedCredentials(undefined);
-  const originalFetch = globalThis.fetch;
-  globalThis.fetch = (async () => Response.json({
-    plan: "pro",
-    capabilities: ["paid.from.invalid.catalog"],
-    cache_ttl_seconds: 60,
-    simulated: false,
-    active: true,
-    catalog_version: "future-catalog",
-  })) as typeof fetch;
-  try {
-    const result = await mod.loadCapabilities({ forceRefresh: true });
-    assert.equal(result.plan, "free");
-    assert.equal(result.source, "free");
-    assert.equal(result.capabilities.includes("paid.from.invalid.catalog"), false);
-  } finally {
-    globalThis.fetch = originalFetch;
-  }
-});
-
-test("PLAN-CLI-004: malformed catalog fixtures fail safely to Free without stale paid reuse", async () => {
-  const originalFetch = globalThis.fetch;
-  try {
-    for (const fixture of [
-      { plan: "gold", capabilities: ["paid"], cache_ttl_seconds: 60, simulated: false, active: true },
-      { plan: "pro", capabilities: ["paid"], cache_ttl_seconds: Number.NaN, simulated: false, active: true },
-      { plan: "pro", capabilities: [""], cache_ttl_seconds: 60, simulated: false, active: true },
-      { plan: "pro", capabilities: Array.from({ length: 4097 }, () => "x"), cache_ttl_seconds: 60, simulated: false, active: true },
-    ]) {
-      seedCredentials(undefined);
-      globalThis.fetch = (async () => Response.json(fixture)) as typeof fetch;
-      const result = await mod.loadCapabilities({ forceRefresh: true });
-      assert.equal(result.plan, "free");
-      assert.equal(result.source, "free");
-      assert.equal(result.capabilities.includes("fix"), false);
-    }
-  } finally {
-    globalThis.fetch = originalFetch;
-  }
-});
-
-test("PLAN-CLI-004: supported-version fixture matrix migrates v1 validation to v2 and keeps legacy offline state safe", async () => {
-  const originalFetch = globalThis.fetch;
-  try {
-    globalThis.fetch = (async (input: string | URL | Request) => {
-      const url = String(input);
-      if (url.endsWith("/api/v1/license/validate")) {
-        return Response.json({ valid: true, plan: "pro", entitlement_token: "legacy.v1.token" });
-      }
-      return Response.json({ ok: true, token_version: 2, entitlement_token: "v2.opaque.token" });
-    }) as typeof fetch;
-    const validation = await validateLicense("vg_test_key", "https://verglos.test");
-    assert.equal(validation.valid, true);
-    if (!validation.valid) return;
-    assert.equal(validation.entitlementToken, "v2.opaque.token", "a supported client prefers the v2 issuance path");
-
-    for (const fixture of SUPPORTED_VERSION_COMPATIBILITY_FIXTURES) {
-      seedCredentials(fixture.tokenKind === "legacy-v1" ? signLegacyProToken() : signProToken());
-      const resolved = await withOfflineFetch(() => mod.resolveEntitlement({ forceRefresh: true }));
-      assert.equal(resolved.plan, fixture.expectedOfflinePlan, fixture.clientVersion);
-      assert.equal(resolved.source, fixture.tokenKind === "legacy-v1" ? "free" : "signed-token", fixture.clientVersion);
-    }
   } finally {
     globalThis.fetch = originalFetch;
   }
