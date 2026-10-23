@@ -1,8 +1,9 @@
 import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
-import { lstat, readFile, readdir } from "node:fs/promises";
+import { lstat, readdir } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
 import { promisify } from "node:util";
+import { readBoundedFile } from "./read-bounded-json.mjs";
 
 const run = promisify(execFile);
 
@@ -20,8 +21,7 @@ const EXPECTED_PUBLIC_PACKAGES = new Set([
 
 const checksumsPath = join(root, "SHA256SUMS");
 if (!(await lstat(root)).isDirectory()) throw new Error("release artifact root must be a directory");
-if (!(await lstat(checksumsPath)).isFile()) throw new Error("SHA256SUMS must be a regular file");
-const checksums = await readFile(checksumsPath, "utf8");
+const checksums = decodeUtf8(await readBoundedFile(checksumsPath, "SHA256SUMS"), "SHA256SUMS");
 const expected = new Map();
 for (const line of checksums.split(/\r?\n/).filter(Boolean)) {
   const match = /^(?<digest>[a-f0-9]{64})  \*?(?:\.\/)?(?<name>[A-Za-z0-9._-]+)$/.exec(line);
@@ -53,21 +53,20 @@ if (requireSixPublicPackages) {
 const requiredSidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "clean-consumer-verification.txt"];
 for (const name of requiredSidecars) if (!files.includes(name)) throw new Error(`release artifact directory is missing ${name}`);
 if (files.some((name) => !name.endsWith(".tgz") && !requiredSidecars.includes(name))) throw new Error("release artifact directory contains an unexpected file");
+const artifactBytes = new Map();
 for (const name of files) {
-  if (!(await lstat(join(root, name))).isFile()) throw new Error(`release artifact is not a regular file: ${name}`);
+  artifactBytes.set(name, await readBoundedFile(join(root, name), `release artifact ${name}`));
 }
 if (expected.size !== files.length || files.some((name) => !expected.has(name))) {
   throw new Error("SHA256SUMS does not describe exactly the release artifacts");
 }
 for (const name of files) {
-  const digest = createHash("sha256").update(await readFile(join(root, name))).digest("hex");
+  const digest = createHash("sha256").update(artifactBytes.get(name)).digest("hex");
   if (digest !== expected.get(name)) throw new Error(`checksum mismatch: ${basename(name)}`);
 }
 for (const name of requiredSidecars) {
-  const path = join(root, name);
   try {
-    if (!(await lstat(path)).isFile()) throw new Error(`${name} must be a regular file`);
-    const content = await readFile(path, "utf8");
+    const content = decodeUtf8(artifactBytes.get(name), name);
     if (content.length === 0) throw new Error(`${name} must not be empty`);
     if (name === "THIRD_PARTY_NOTICES" && !content.startsWith("THIRD-PARTY NOTICES\n")) throw new Error("THIRD_PARTY_NOTICES has an invalid header");
     if (name === "SBOM.cdx.json") {
@@ -89,9 +88,17 @@ for (const name of requiredSidecars) {
     throw error;
   }
 }
-const expectedNotices = await readFile(join(root, "THIRD_PARTY_NOTICES"));
+const expectedNotices = artifactBytes.get("THIRD_PARTY_NOTICES");
 for (const archive of archives) {
   const { stdout: packagedNotices } = await run("tar", ["-xOf", join(root, archive), "package/THIRD_PARTY_NOTICES"], { encoding: "buffer", maxBuffer: 16 * 1024 * 1024 });
   if (!packagedNotices.equals(expectedNotices)) throw new Error(`THIRD_PARTY_NOTICES differs inside ${archive}`);
 }
 console.log(`verified ${files.length} release artifacts (${archives.length} npm archives, ${requiredSidecars.length} sidecars, and notices in every archive${requireSixPublicPackages ? "; strict six-package set" : ""})`);
+
+function decodeUtf8(bytes, label) {
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  } catch {
+    throw new Error(`${label} must contain valid bounded UTF-8 text`);
+  }
+}

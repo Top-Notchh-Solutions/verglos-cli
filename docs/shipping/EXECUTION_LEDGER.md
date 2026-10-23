@@ -15564,3 +15564,25 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   `sha256:dba14550e33335c99d5b44936d5df3a0ded53a9ea0835ac6e95c404cd797488d`;
   bundle file SHA-256
   `4ae7d2984fe1ec21d01450e1f3cece2511bcb094403e3d78a47befa11382e551`.
+
+## DIST-003 release-artifact read binding · 2026-10-23
+
+- **Source mapping:** Private `scripts/verify-release-artifacts.mjs` now
+  reads `SHA256SUMS`, every release archive, and every required sidecar through
+  bounded regular-file handles.
+- **Contract mapping:** The verifier hashes and validates exact opened bytes,
+  rejects symlinked or changed artifacts, and applies fatal UTF-8 validation
+  before release decisions.
+- **Verification mapping:** Release-artifact, bounded-reader, and release-tag
+  contracts **9/9**, including archive, checksum-manifest, and sidecar
+  symlink regressions; syntax and diff checks passed.
+- **Acceptance mapping:** Keep DIST-003 unchecked for trusted publication,
+  immutable attestation, provider action, independent review, and final
+  acceptance. No npm publication, provider, Production, customer, deployment,
+  tag, or release-sign-off action occurred. Nothing was deleted or overwritten.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-003-release-artifact-read-binding-private-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:e2adf0e7ebf9def36e4432ca97db3b712ccb3cc4cdeb76cdd98e8d9116fbdccc`;
+  bundle file SHA-256
+  `326012076c9d37c6d5fe3e3177d73b1ffb3e38d53933ff986a958f1081d98d92`.

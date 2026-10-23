@@ -3138,3 +3138,25 @@ and file SHA-256
 Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/dist-002-release-tag-read-binding-private-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-003 release-artifact read binding
+
+The private release-artifact verifier now reads `SHA256SUMS`, every release
+archive, and every required sidecar through bounded regular-file handles. It
+hashes and validates the exact opened bytes, rejects symlinked or changed
+artifacts, and applies fatal UTF-8 validation before checksum, SBOM, license,
+notice, or clean-consumer decisions.
+
+Release-artifact, bounded-reader, and release-tag contracts passed **9/9**,
+including archive, checksum-manifest, and sidecar symlink regressions; syntax
+and `git diff --check` passed. This is DIST-003 verifier implementation
+evidence only. No npm publication, provider, Production, customer,
+deployment, tag, immutable attestation, or release-sign-off action occurred.
+Keep `DIST-003` unchecked for those external/release gates and final
+acceptance. The additive bundle contains **157** files with manifest
+`sha256:e2adf0e7ebf9def36e4432ca97db3b712ccb3cc4cdeb76cdd98e8d9116fbdccc`
+and file SHA-256
+`326012076c9d37c6d5fe3e3177d73b1ffb3e38d53933ff986a958f1081d98d92`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-003-release-artifact-read-binding-private-2026-10-23.md`.

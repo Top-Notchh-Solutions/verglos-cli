@@ -9409,6 +9409,24 @@ changed. See
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## DIST-003 release-artifact read binding · 2026-10-23
+
+- **Source mapping:** Private `scripts/verify-release-artifacts.mjs` now
+  reads the checksum manifest, release archives, and required sidecars through
+  the bounded regular-file reader.
+- **Contract mapping:** Hashes and validation use the exact opened bytes;
+  symlinked or changed artifacts are rejected before release decisions.
+- **Verification mapping:** Release-artifact, bounded-reader, and release-tag
+  contracts **9/9**, including archive, checksum-manifest, and sidecar
+  symlink regressions; syntax and diff checks passed.
+- **Acceptance mapping:** Keep DIST-003 open for trusted publication,
+  immutable attestation, provider action, independent review, and final
+  acceptance. Score remains **244/36/280 (87.1%)**; nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/dist-003-release-artifact-read-binding-private-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:e2adf0e7ebf9def36e4432ca97db3b712ccb3cc4cdeb76cdd98e8d9116fbdccc`.
+
 ## DIST-002 release-tag read binding · 2026-10-23
 
 - **Source mapping:** Private `scripts/verify-release-tag.mjs` now uses the

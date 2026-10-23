@@ -12039,6 +12039,24 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · DIST-003 release-artifact read binding
+
+The private release-artifact verifier now reads `SHA256SUMS`, every release
+archive, and every required sidecar through bounded regular-file handles. It
+hashes and validates the exact opened bytes and rejects symlinked or changed
+artifacts before release decisions. Release-artifact, bounded-reader, and
+release-tag contracts passed **9/9**, including archive, checksum-manifest,
+and sidecar symlink regressions; syntax and diff checks passed.
+
+This is verifier implementation evidence only. `DIST-003` remains unchecked
+for trusted publication, immutable attestation, provider action, independent
+review, and final acceptance. No npm publication, provider, Production,
+customer, deployment, tag, or release-sign-off action occurred; nothing was
+deleted or overwritten. Score remains **244 checked / 36 open / 280 total
+(87.1%)**.
+
+Evidence: `evidence/dist-003-release-artifact-read-binding-private-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 release-tag read binding
 
 The private release-tag verifier now reads all six public package manifests

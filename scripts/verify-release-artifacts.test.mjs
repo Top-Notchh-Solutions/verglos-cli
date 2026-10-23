@@ -51,9 +51,24 @@ test("release checksum verifier rejects duplicate entries and symlinks", async (
     await assert.rejects(run(process.execPath, [script, root]), /duplicate checksum entry/);
     await writeFile(join(root, "SHA256SUMS"), stdout);
     await symlink("a.tgz", join(root, "b.tgz"));
-    await assert.rejects(run(process.execPath, [script, root]), /not a regular file/);
+    await assert.rejects(run(process.execPath, [script, root]), /bounded regular file/);
     const { stdout: license } = await run("tar", ["-xOf", join(root, "a.tgz"), "package/LICENSE"]);
     assert.equal(license, "package license");
+  });
+});
+
+test("release verifier refuses symlinked checksum and sidecar files", async () => {
+  await withFixture(async (root) => {
+    const checksums = await readFile(join(root, "SHA256SUMS"), "utf8");
+    await rm(join(root, "SHA256SUMS"));
+    await symlink("THIRD_PARTY_NOTICES", join(root, "SHA256SUMS"));
+    await assert.rejects(run(process.execPath, [script, root]), /bounded regular file/);
+
+    await rm(join(root, "SHA256SUMS"));
+    await writeFile(join(root, "SHA256SUMS"), checksums);
+    await rm(join(root, "SBOM.cdx.json"));
+    await symlink("THIRD_PARTY_NOTICES", join(root, "SBOM.cdx.json"));
+    await assert.rejects(run(process.execPath, [script, root]), /bounded regular file/);
   });
 });
 
