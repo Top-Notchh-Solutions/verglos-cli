@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · QUAL-WEB-005 migration preflight and isolated integration
+
+Web PR #258 merged normally as `7941cbfa23f8849daca402e0c3d5d4d8c1eb30e2`,
+from source commit `dace24f75ee598e494bbf2c83ea80834d08d666a`. Both Web
+`db:migrate` connection paths now allow **15 seconds** for provider connection
+establishment. The supplied Neon test database completed the **43-migration**
+preflight; destructive tests correctly refused that remote endpoint, so the
+focused deletion integration run used only a disposable local PostgreSQL
+container. The focused QUAL-WEB-005 suite passed **43/43**, with local
+typecheck and diff checks passing as well.
+
+This is implementation/test-substrate evidence only. QUAL-WEB-005 remains
+unchecked for Production migration/restore/rollback, legal-retention and
+customer-held-record disposition, independent review, and final acceptance.
+Hosted PR checks failed before repository execution with zero steps; no hosted
+completion, Production action, customer-data operation, release, or checkbox
+change is claimed. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## 2026-10-23 · CLI merged-head full test
 
 After `pnpm install --frozen-lockfile` restored the workspace links, the CLI
